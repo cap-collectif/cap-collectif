@@ -73,7 +73,7 @@ exports[`<EventCreateModal /> it renders correctly 1`] = `
       onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
-      disabled={true}
+      disabled={false}
       id="confirm-event-submit"
       isSubmitting={false}
       label="global.submit"

@@ -173,6 +173,16 @@ class Event implements
      */
     private $review;
 
+    /**
+     * @ORM\Column(name="admin_authorize_data_transfer", type="boolean", nullable=false)
+     */
+    private $adminAuthorizeDataTransfer = false;
+
+    /**
+     * @ORM\Column(name="author_agree_to_use_personal_data_for_event_only", type="boolean", nullable=true)
+     */
+    private $authorAgreeToUsePersonalDataForEventOnly;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -438,7 +448,8 @@ class Event implements
 
     public function canContribute($user = null): bool
     {
-        return $this->enabled;
+        return EventReviewStatusType::APPROVED === $this->getStatus() ||
+            EventReviewStatusType::PUBLISHED === $this->getStatus();
     }
 
     public function lastOneDay()
@@ -585,6 +596,31 @@ class Event implements
     public function setReview(?EventReview $review): self
     {
         $this->review = $review;
+
+        return $this;
+    }
+
+    public function getAdminAuthorizeDataTransfer()
+    {
+        return $this->adminAuthorizeDataTransfer;
+    }
+
+    public function setAdminAuthorizeDataTransfer($adminAuthorizeDataTransfer): self
+    {
+        $this->adminAuthorizeDataTransfer = $adminAuthorizeDataTransfer;
+
+        return $this;
+    }
+
+    public function getAuthorAgreeToUsePersonalDataForEventOnly(): ?bool
+    {
+        return $this->authorAgreeToUsePersonalDataForEventOnly;
+    }
+
+    public function setAuthorAgreeToUsePersonalDataForEventOnly(
+        ?bool $authorAgreeToUsePersonalDataForEventOnly
+    ): self {
+        $this->authorAgreeToUsePersonalDataForEventOnly = $authorAgreeToUsePersonalDataForEventOnly;
 
         return $this;
     }

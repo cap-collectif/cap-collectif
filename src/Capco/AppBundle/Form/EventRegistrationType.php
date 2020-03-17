@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\EventRegistration;
+use Capco\AppBundle\Translator\FormatterDecorator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,10 +13,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class EventRegistrationType extends AbstractType
 {
     private $user;
+    private $translator;
 
-    public function __construct(TokenStorageInterface $token)
+    public function __construct(TokenStorageInterface $token, FormatterDecorator $translator)
     {
         $this->user = $token->getToken() ? $token->getToken()->getUser() : null;
+        $this->translator = $translator;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -23,7 +26,7 @@ class EventRegistrationType extends AbstractType
         if ($options['registered']) {
             $builder->add('submit', SubmitType::class, [
                 'label' => 'event_registration.unsubscribe',
-                'attr' => ['class' => 'btn  btn-danger  btn-block'],
+                'attr' => ['class' => 'btn  btn-danger  btn-block']
             ]);
 
             return;
@@ -33,11 +36,19 @@ class EventRegistrationType extends AbstractType
             $builder
                 ->add('private', null, [
                     'required' => false,
-                    'label' => 'event_registration.create.private',
+                    'label' => 'make-my-registration-anonymous'
+                ])
+                ->add('isPrivacyPolicyAccepted', null, [
+                    'required' => true,
+                    'label' => $this->translator->trans(
+                        $options['adminAuthorizeDataTransferTradKey'],
+                        [],
+                        'CapcoAppBundle'
+                    )
                 ])
                 ->add('submit', SubmitType::class, [
                     'label' => 'global.register',
-                    'attr' => ['class' => 'btn btn-success btn-block'],
+                    'attr' => ['class' => 'btn btn-success btn-block']
                 ]);
 
             return;
@@ -45,18 +56,26 @@ class EventRegistrationType extends AbstractType
 
         $builder
             ->add('username', null, [
-                'label' => 'global.name',
+                'label' => 'global.name'
             ])
             ->add('email', null, [
-                'label' => 'global.email',
+                'label' => 'global.email'
             ])
             ->add('private', null, [
                 'required' => false,
-                'label' => 'event_registration.create.private',
+                'label' => 'make-my-registration-anonymous'
+            ])
+            ->add('isPrivacyPolicyAccepted', null, [
+                'required' => true,
+                'label' => $this->translator->trans(
+                    $options['adminAuthorizeDataTransferTradKey'],
+                    [],
+                    'CapcoAppBundle'
+                )
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'event_registration.create.submit',
-                'attr' => ['class' => 'btn  btn-success  btn-block'],
+                'label' => 'global.register',
+                'attr' => ['class' => 'btn  btn-success  btn-block']
             ]);
     }
 
@@ -66,6 +85,7 @@ class EventRegistrationType extends AbstractType
             'data_class' => EventRegistration::class,
             'translation_domain' => 'CapcoAppBundle',
             'registered' => false,
+            'adminAuthorizeDataTransferTradKey' => 'privacy-policy-accepted-2'
         ]);
     }
 }

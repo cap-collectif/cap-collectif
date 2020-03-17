@@ -75,3 +75,9 @@ InternalEvent:
                 description: 'The slug of event'
             metaDescription:
                 type: 'String'
+            authorAgreeToUsePersonalDataForEventOnly:
+                type: 'Boolean'
+                description: 'Author of event agree to use personal data for event only'
+            adminAuthorizeDataTransfer:
+                type: 'Boolean'
+                description: 'Admin authorize data transfer'

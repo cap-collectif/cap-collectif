@@ -11,7 +11,8 @@ Scenario: Admin wants to enable his account and set his password
     | recreate_password_form_plainPassword_first  | a |
     | recreate_password_form_plainPassword_second | a |
   And I press "reset-content-confirm"
-  And I wait "#at-least-8-characters-one-digit-one-uppercase-one-lowercase" to appear on current page
+  And I wait ".form-error-message" to appear on current page
+  And I should see "at-least-8-characters-one-digit-one-uppercase-one-lowercase"
   When I fill in the following:
     | recreate_password_form_plainPassword_first  | a |
     | recreate_password_form_plainPassword_second | q |

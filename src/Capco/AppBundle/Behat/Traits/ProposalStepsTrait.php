@@ -545,6 +545,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheEditCommentButton(string $id)
     {
+        $this->iWaitElementToAppearOnPage("[id='CommentEdit-${id}']");
         $this->navigationContext->getPage('proposal page')->clickEditCommentButton($id);
     }
 
@@ -553,6 +554,7 @@ trait ProposalStepsTrait
      */
     public function iFillTheEditCommentForm(string $body)
     {
+        $this->iWaitElementToAppearOnPage('.confirm-edit-comment');
         $page = $this->navigationContext->getPage('edit comment page');
         $idConfirmCheckbox = $page->getIdConfirmCheckbox();
 

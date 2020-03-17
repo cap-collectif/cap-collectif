@@ -55,6 +55,11 @@ class EventRegistration
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(name="is_privacy_policy_accepted", type="boolean", nullable=false)
+     */
+    private $isPrivacyPolicyAccepted = false;
+
     public function __construct(Event $event = null)
     {
         $this->event = $event;
@@ -111,6 +116,18 @@ class EventRegistration
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getIsPrivacyPolicyAccepted(): bool
+    {
+        return $this->isPrivacyPolicyAccepted;
+    }
+
+    public function setIsPrivacyPolicyAccepted(bool $isPrivacyPolicyAccepted = false): self
+    {
+        $this->isPrivacyPolicyAccepted = $isPrivacyPolicyAccepted;
 
         return $this;
     }

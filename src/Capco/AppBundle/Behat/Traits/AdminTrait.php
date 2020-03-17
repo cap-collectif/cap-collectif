@@ -201,6 +201,7 @@ trait AdminTrait
      */
     public function iClickOnButton(string $selector)
     {
+        $this->iWaitElementToAppearOnPage($selector);
         $this->getCurrentPage()
             ->find('css', $selector)
             ->click();

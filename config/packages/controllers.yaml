@@ -27,15 +27,17 @@ services:
 
     Capco\AdminBundle\Controller\:
         resource: '%kernel.root_dir%/../src/Capco/AdminBundle/Controller/'
-#        exclude: '%kernel.project_dir%/src/Capco/AdminBundle/Controller/{MyController.php}'
         calls:
             - [setContainer, ['@service_container']]
+
+    Capco\AppBundle\Controller\Site\EventController:
+        arguments:
+            $formFactory: '@form.factory'
 
     ###################### USER BUNDLE #############################
 
     Capco\UserBundle\Controller\:
         resource: '%kernel.root_dir%/../src/Capco/UserBundle/Controller/'
-#        exclude: '%kernel.project_dir%/src/Capco/UserBundle/Controller/{MyController.php}'
         calls:
             - [setContainer, ['@service_container']]
 

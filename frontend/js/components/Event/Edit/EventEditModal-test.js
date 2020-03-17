@@ -11,8 +11,8 @@ describe('<EventEditModal />', () => {
     const props = {
       intl: intlMock,
       show: false,
-      invalid: true,
       submitting: false,
+      pristine: false,
       handleClose: jest.fn(),
       dispatch: jest.fn(),
       event: {

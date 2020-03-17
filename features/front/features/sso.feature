@@ -1,4 +1,4 @@
-@sso @core
+@sso
 Feature: Sso redirection
 
 @database

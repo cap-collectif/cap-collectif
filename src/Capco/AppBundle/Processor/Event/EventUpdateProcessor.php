@@ -35,9 +35,8 @@ class EventUpdateProcessor implements ProcessorInterface
             throw new \RuntimeException('Unable to find event with id : ' . $id);
         }
 
-        $messages = $this->notifier->onUpdate($event);
-        $this->logger->info(__METHOD__ . ' : ' . var_export($messages, true));
-        echo 'There are ' . \count($messages) . ' messages sends to administrators.';
+        $this->notifier->onUpdate($event);
+        $this->logger->info(__METHOD__ . ' : message sends to administrator');
 
         return true;
     }

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
@@ -69,7 +68,8 @@ class EventType extends AbstractType
                 'expanded' => true
             ])
             ->add('review', EventReviewType::class)
-        ;
+            ->add('authorAgreeToUsePersonalDataForEventOnly', CheckboxType::class)
+            ->add('adminAuthorizeDataTransfer', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

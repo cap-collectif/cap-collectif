@@ -19,6 +19,7 @@ import select from '~/components/Form/Select';
 import approve from '~/components/Form/Approve';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 import { getTranslation } from '~/services/Translation';
+import { validate } from '~/components/Event/Form/EventFormPage';
 
 type Props = {|
   ...FormProps,
@@ -50,7 +51,16 @@ export class EventForm extends React.Component<Props> {
   };
 
   render() {
-    const { features, event, query, currentValues, className, isFrontendView, intl } = this.props;
+    const {
+      features,
+      event,
+      query,
+      currentValues,
+      className,
+      isFrontendView,
+      intl,
+      handleSubmit,
+    } = this.props;
     const isDisabled = (): boolean => {
       if (
         query.viewer.isSuperAdmin ||
@@ -87,7 +97,7 @@ export class EventForm extends React.Component<Props> {
     ];
 
     return (
-      <form className={`eventForm ${className || ''}`}>
+      <form className={`eventForm ${className || ''}`} onSubmit={handleSubmit}>
         {!isFrontendView && (
           <PageTitleContainer>
             <h3 className="box-title">
@@ -260,46 +270,81 @@ export class EventForm extends React.Component<Props> {
                 <FormattedMessage id="global.options" />
               </h3>
             </div>
-            <Field
-              name="guestListEnabled"
-              id="event_registrable"
-              type="checkbox"
-              component={component}
-              disabled={
-                !!(currentValues && currentValues.link && currentValues.link !== null) ||
-                isDisabled()
-              }
-              children={<FormattedMessage id="admin.fields.event.registration_enable" />}
-            />
-            <div className="clearfix">
+            <div className={isFrontendView ? `` : `ml-10 pl-10`}>
               <Field
-                name="link"
-                label={<FormattedMessage id="admin.fields.event.link" />}
-                component={component}
-                placeholder="http://"
-                type="text"
-                disabled={
-                  isDisabled() ||
-                  (currentValues &&
-                  currentValues.guestListEnabled &&
-                  currentValues.guestListEnabled !== null
-                    ? currentValues.guestListEnabled
-                    : false)
-                }
-                id="event_link"
-              />
-            </div>
-            {!isFrontendView && (
-              <Field
-                name="commentable"
-                id="event_commentable"
+                name="guestListEnabled"
+                id="event_registrable"
                 type="checkbox"
                 component={component}
-                disabled={isDisabled()}
-                children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
+                disabled={
+                  !!(currentValues && currentValues.link && currentValues.link !== null) ||
+                  isDisabled()
+                }
+                children={<FormattedMessage id="allow-inscriptions" />}
               />
+            </div>
+            {!isFrontendView && query.viewer.isAdmin && (event?.author.isAdmin || !event) && (
+              <div className="clearfix">
+                <Field
+                  name="link"
+                  label={<FormattedMessage id="admin.fields.event.link" />}
+                  component={component}
+                  placeholder="http://"
+                  type="text"
+                  disabled={
+                    isDisabled() ||
+                    (currentValues &&
+                    currentValues.guestListEnabled &&
+                    currentValues.guestListEnabled !== null
+                      ? currentValues.guestListEnabled
+                      : false)
+                  }
+                  id="event_link"
+                />
+              </div>
+            )}
+            {!isFrontendView && (
+              <div className="ml-10 pl-10">
+                <Field
+                  name="commentable"
+                  id="event_commentable"
+                  type="checkbox"
+                  component={component}
+                  disabled={isDisabled()}
+                  children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
+                />
+              </div>
+            )}
+            {query.viewer.isAdmin && !isFrontendView && (
+              <div className="ml-10 pl-10">
+                <Field
+                  name="adminAuthorizeDataTransfer"
+                  id="event_adminAuthorizeDataTransfer"
+                  type="checkbox"
+                  component={component}
+                  children={<FormattedMessage id="authorize-transfer-of-data-to-event-organizer" />}
+                />
+              </div>
             )}
           </div>
+          {!query.viewer.isAdmin && isFrontendView && (
+            <div>
+              <div className="box-header box-title" />
+              <div>
+                <Field
+                  name="authorAgreeToUsePersonalDataForEventOnly"
+                  id="event_authorAgreeToUsePersonalDataForEventOnly"
+                  type="checkbox"
+                  normalize={val => !!val}
+                  component={component}
+                  disabled={isDisabled()}
+                  children={
+                    <FormattedMessage id="checkbox-event-data-transfer-warning-to-organizer" />
+                  }
+                />
+              </div>
+            </div>
+          )}
           {query.viewer.isAdmin && !isFrontendView && (
             <div>
               <div className="box-header">
@@ -389,6 +434,7 @@ const selector = formValueSelector(formName);
 const formContainer = reduxForm({
   form: formName,
   enableReinitialize: true,
+  validate,
 })(EventForm);
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
@@ -408,6 +454,11 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         enabled: props.event ? props.event.enabled : null,
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
+        adminAuthorizeDataTransfer: props.event?.adminAuthorizeDataTransfer || null,
+        authorAgreeToUsePersonalDataForEventOnly: props.event
+          ?.authorAgreeToUsePersonalDataForEventOnly
+          ? props.event.authorAgreeToUsePersonalDataForEventOnly
+          : false,
         link: translation ? translation.link : null,
         custom: {
           metadescription: translation ? translation.metaDescription : null,
@@ -451,6 +502,9 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     currentLanguage: state.language.currentLanguage,
     features: state.default.features,
     currentValues: selector(state, 'guestListEnabled', 'link', 'status'),
+    initialValues: {
+      authorAgreeToUsePersonalDataForEventOnly: false,
+    },
   };
 };
 
@@ -516,6 +570,8 @@ export default createFragmentContainer(container, {
         metaDescription
         link
       }
+      authorAgreeToUsePersonalDataForEventOnly
+      adminAuthorizeDataTransfer
     }
   `,
 });

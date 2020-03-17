@@ -1,20 +1,20 @@
 // @flow
 import * as React from 'react';
 import {
-  SubmissionError,
-  isPristine,
-  isValid,
-  isInvalid,
-  isSubmitting,
-  submit,
-  hasSubmitSucceeded,
   hasSubmitFailed,
+  hasSubmitSucceeded,
+  isInvalid,
+  isPristine,
+  isSubmitting,
+  isValid,
+  SubmissionError,
+  submit,
 } from 'redux-form';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 
 import {
   type EventRefusedReason,
@@ -42,7 +42,7 @@ type Props = {|
   dispatch: Dispatch,
   isFrontendView: boolean,
   className?: string,
-  currentLanguage: string
+  currentLanguage: string,
 |};
 
 type FormValues = {|
@@ -66,6 +66,8 @@ type FormValues = {|
   projects: ?[],
   refusedReason: ?EventRefusedReason,
   status: ?EventReviewStatus,
+  authorAgreeToUsePersonalDataForEventOnly: ?boolean,
+  adminAuthorizeDataTransfer: ?boolean,
 |};
 
 type ReviewEventForm = {|
@@ -80,9 +82,11 @@ type EditFormValue = {|
   id: string,
 |};
 
-type State = { showDeleteModal: boolean };
+type State = {| showDeleteModal: boolean |};
 
-const validate = (values: FormValues) => {
+export const validate = (values: FormValues, props: Props) => {
+  const { isFrontendView } = props;
+
   const errors = {};
   const fields = ['title', 'startAt', 'endAt', 'author', 'body'];
   fields.forEach(value => {
@@ -114,6 +118,12 @@ const validate = (values: FormValues) => {
   if (values.status === 'REFUSED' && !values.refusedReason) {
     errors.refusedReason = 'fill-field';
   }
+  if (isFrontendView && values.authorAgreeToUsePersonalDataForEventOnly === false) {
+    errors.authorAgreeToUsePersonalDataForEventOnly = {
+      id: 'error-message-event-creation-checkbox',
+      values: { before: '<i class="cap cap-attention pr-5" />' },
+    };
+  }
 
   return errors;
 };
@@ -123,6 +133,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const guestListEnabled = values.guestListEnabled ? values.guestListEnabled : false;
+  const adminAuthorizeDataTransfer = values.adminAuthorizeDataTransfer
+    ? values.adminAuthorizeDataTransfer
+    : false;
+  const authorAgreeToUsePersonalDataForEventOnly = values.authorAgreeToUsePersonalDataForEventOnly
+    ? values.authorAgreeToUsePersonalDataForEventOnly
+    : false;
   const commentable = values.commentable ? values.commentable : false;
   const enabled = values.enabled ? values.enabled : false;
   const addressJson = values.address;
@@ -138,13 +154,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
   const input = {
     translations: handleTranslationChange(
-      (props.event && props.event.translations) ? props.event.translations : [],
+      props.event && props.event.translations ? props.event.translations : [],
       translation,
       props.currentLanguage,
     ),
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-    customCode: values.custom ? values.custom.customcode : null,
+    customCode: values.custom?.customcode || null,
     commentable,
     guestListEnabled,
     addressJson,
@@ -153,6 +169,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     author: values.author ? values.author.value : undefined,
+    adminAuthorizeDataTransfer,
+    authorAgreeToUsePersonalDataForEventOnly,
   };
 
   return AddEventMutation.commit({ input })
@@ -209,8 +227,13 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     author: values.author ? values.author.value : undefined,
+    adminAuthorizeDataTransfer: values.adminAuthorizeDataTransfer,
+    authorAgreeToUsePersonalDataForEventOnly:
+      values.authorAgreeToUsePersonalDataForEventOnly !== null
+        ? values.authorAgreeToUsePersonalDataForEventOnly
+        : false,
     translations: handleTranslationChange(
-      (props.event && props.event.translations) ? props.event.translations : [],
+      props.event && props.event.translations ? props.event.translations : [],
       translation,
       props.currentLanguage,
     ),
@@ -299,14 +322,14 @@ export class EventFormPage extends React.Component<Props, State> {
   };
 
   renderSubmitButton = () => {
-    const { pristine, invalid, submitting, dispatch, event, query } = this.props;
+    const { pristine, invalid, submitting, event, query, dispatch } = this.props;
     if (!event) {
       return (
         <SubmitButton
           id="confirm-event-create"
           label="global.save"
           isSubmitting={submitting}
-          disabled={pristine || invalid || submitting}
+          disabled={pristine || submitting}
           onSubmit={() => {
             dispatch(submit(formName));
           }}
@@ -354,7 +377,6 @@ export class EventFormPage extends React.Component<Props, State> {
           <EventForm
             event={event}
             onSubmit={event ? updateEvent : onSubmit}
-            validate={validate}
             query={query}
             className={className}
             isFrontendView={isFrontendView}
@@ -400,9 +422,8 @@ export class EventFormPage extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: GlobalState, { event }: Props) => {
-
   const translation = getTranslation(
-    (event && event.translations) ? event.translations : [],
+    event && event.translations ? event.translations : [],
     state.language.currentLanguage,
   );
 

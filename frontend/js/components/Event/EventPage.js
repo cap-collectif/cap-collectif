@@ -63,6 +63,7 @@ export class EventPage extends React.Component<Props> {
                   orderBy: $orderBy
                   isAuthenticated: $isAuthenticated
                 )
+              ...EventPageHeader_queryViewer @arguments(isAuthenticated: $isAuthenticated)
             }
           `}
           variables={
@@ -95,7 +96,7 @@ export class EventPage extends React.Component<Props> {
               return (
                 <div>
                   <section className="jumbotron--bg-1 ">
-                    <EventPageHeader eventPageTitle={eventPageTitle} />
+                    <EventPageHeader eventPageTitle={eventPageTitle} queryViewer={props} />
                   </section>
                   <section className="section--alt">
                     <EventPageContainer

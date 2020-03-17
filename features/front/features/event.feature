@@ -111,7 +111,6 @@ Scenario: Anonymous wants to comment an event without email
 Scenario: Anonymous wants to create an event
   Given feature "allow_users_to_propose_events" is enabled
   And I visited "events page"
-  And I wait "#btn-create-event" to appear on current page
   When I click on button "#btn-create-event"
   Then I should see a "#login-popover" element
 
@@ -130,6 +129,10 @@ Scenario: Logged in user wants to create an event
   And I fill date field "#event_input_startAt" with value '2050-08-17 12:13:14'
   And I fill the project filter with value 'Croissance'
   When I click on button "#confirm-event-submit"
+  Then I should see "error-message-event-creation-checkbox"
+  And I trigger element "#event_authorAgreeToUsePersonalDataForEventOnly" with action "click"
+  Then I should not see "error-message-event-creation-checkbox"
+  When I click on button "#confirm-event-submit"
   Then I should be redirected to '/events/my-event'
   And I wait "#event-label-status" to appear on current page
   Then I should see "waiting-examination"
@@ -146,6 +149,10 @@ Scenario: Logged in user wants to edit his refused event
   And I click on button "#edit-button"
   And I wait "#event_title" to appear on current page
   Then fill in "event_title" with "My event edited"
+  When I click on button "#confirm-event-submit"
+  Then I should see "error-message-event-creation-checkbox"
+  And I trigger element "#event_authorAgreeToUsePersonalDataForEventOnly" with action "click"
+  Then I should not see "error-message-event-creation-checkbox"
   When I click on button "#confirm-event-submit"
   Then I should be redirected to '/events/event-create-by-user-with-review-refused'
   And I wait "#event-label-status" to appear on current page

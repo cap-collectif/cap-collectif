@@ -10,7 +10,7 @@
         {% else %}
             {{ startTime != '00:00'
                 ? 'dates.between_start'|trans({'%start%': startDay, '%start_time%': startTime}, 'CapcoAppBundle')
-                : 'dates.between_start_no_time'|trans({'%start%': startDay}, 'CapcoAppBundle')
+                : 'dates.between_start_no_time'|trans({'{start}': startDay}, 'CapcoAppBundle')
             }}
             {{ endTime != '00:00'
                 ? 'dates.between_end'|trans({'%end%': endDay, '%end_time%': endTime}, 'CapcoAppBundle')

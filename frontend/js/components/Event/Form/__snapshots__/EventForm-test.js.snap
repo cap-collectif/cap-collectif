@@ -3,6 +3,7 @@
 exports[`<EventForm /> it renders correctly with event complete 1`] = `
 <form
   className="eventForm "
+  onSubmit={[MockFunction]}
 >
   <EventForm__PageTitleContainer>
     <h3
@@ -233,18 +234,22 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_registrable"
-        name="guestListEnabled"
-        type="checkbox"
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="admin.fields.event.registration_enable"
-          values={Object {}}
-        />
-      </Field>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="allow-inscriptions"
+            values={Object {}}
+          />
+        </Field>
+      </div>
       <div
         className="clearfix"
       >
@@ -263,18 +268,37 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
           type="text"
         />
       </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_commentable"
-        name="commentable"
-        type="checkbox"
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="admin.fields.blog_post.is_commentable"
-          values={Object {}}
-        />
-      </Field>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="authorize-transfer-of-data-to-event-organizer"
+            values={Object {}}
+          />
+        </Field>
+      </div>
     </div>
     <div>
       <div
@@ -335,6 +359,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
 exports[`<EventForm /> it renders correctly with initialValue 1`] = `
 <form
   className="eventForm "
+  onSubmit={[MockFunction]}
 >
   <EventForm__PageTitleContainer>
     <h3
@@ -565,18 +590,22 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_registrable"
-        name="guestListEnabled"
-        type="checkbox"
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="admin.fields.event.registration_enable"
-          values={Object {}}
-        />
-      </Field>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="allow-inscriptions"
+            values={Object {}}
+          />
+        </Field>
+      </div>
       <div
         className="clearfix"
       >
@@ -595,18 +624,37 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
           type="text"
         />
       </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_commentable"
-        name="commentable"
-        type="checkbox"
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="admin.fields.blog_post.is_commentable"
-          values={Object {}}
-        />
-      </Field>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="authorize-transfer-of-data-to-event-organizer"
+            values={Object {}}
+          />
+        </Field>
+      </div>
     </div>
     <div>
       <div
@@ -667,6 +715,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
 exports[`<EventForm /> it renders correctly without default props 1`] = `
 <form
   className="eventForm "
+  onSubmit={[MockFunction]}
 >
   <EventForm__PageTitleContainer>
     <h3
@@ -897,18 +946,22 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_registrable"
-        name="guestListEnabled"
-        type="checkbox"
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="admin.fields.event.registration_enable"
-          values={Object {}}
-        />
-      </Field>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="allow-inscriptions"
+            values={Object {}}
+          />
+        </Field>
+      </div>
       <div
         className="clearfix"
       >
@@ -927,18 +980,37 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
           type="text"
         />
       </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_commentable"
-        name="commentable"
-        type="checkbox"
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="admin.fields.blog_post.is_commentable"
-          values={Object {}}
-        />
-      </Field>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="authorize-transfer-of-data-to-event-organizer"
+            values={Object {}}
+          />
+        </Field>
+      </div>
     </div>
     <div>
       <div
@@ -999,6 +1071,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
 exports[`<EventForm /> it renders event form disabled 1`] = `
 <form
   className="eventForm "
+  onSubmit={[MockFunction]}
 >
   <EventForm__PageTitleContainer>
     <h3
@@ -1229,18 +1302,22 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           />
         </h3>
       </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_registrable"
-        name="guestListEnabled"
-        type="checkbox"
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="admin.fields.event.registration_enable"
-          values={Object {}}
-        />
-      </Field>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          name="guestListEnabled"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="allow-inscriptions"
+            values={Object {}}
+          />
+        </Field>
+      </div>
       <div
         className="clearfix"
       >
@@ -1259,18 +1336,37 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           type="text"
         />
       </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_commentable"
-        name="commentable"
-        type="checkbox"
+      <div
+        className="ml-10 pl-10"
       >
-        <FormattedMessage
-          id="admin.fields.blog_post.is_commentable"
-          values={Object {}}
-        />
-      </Field>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="admin.fields.blog_post.is_commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="ml-10 pl-10"
+      >
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="authorize-transfer-of-data-to-event-organizer"
+            values={Object {}}
+          />
+        </Field>
+      </div>
     </div>
     <div>
       <div

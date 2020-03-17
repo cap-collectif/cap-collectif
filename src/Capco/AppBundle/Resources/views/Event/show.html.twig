@@ -192,9 +192,9 @@
                         {% endif %}
 
                         <div class="sidebar__form">
-                            {{ form(form) }}
+                            {{ form_start(form) }}
+                            {{ form_end(form) }}
                         </div>
-
                         <button type="button"
                                 class="sidebar-toggle sidebar-hidden-large  btn  btn-default  btn-block">{{ 'global.cancel'|trans({}, 'CapcoAppBundle') }}</button>
                     </div>
@@ -204,7 +204,7 @@
                                 class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-danger btn-lg  btn  btn-block  btn--no-radius">{{ 'event_registration.toggle.unsubscribe'|trans({}, 'CapcoAppBundle') }}</button>
                     {% else %}
                         <button type="button"
-                                class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-primary btn-lg  btn  btn-block  btn--no-radius">{{ 'event_registration.toggle.subscribe'|trans({}, 'CapcoAppBundle') }}</button>
+                                class="sidebar-toggle sidebar-hideable  sidebar-hidden-large  btn-lg  btn-success btn  btn-block  btn--no-radius">{{ 'global.register'|trans({}, 'CapcoAppBundle') }}</button>
                     {% endif %}
                 </div>
             {% endif %}

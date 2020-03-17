@@ -75,7 +75,7 @@ Scenario: Logged in user can report an opinion
   Given feature "reporting" is enabled
   And I am logged in as admin
   And I go to an opinion
-  When I click the '[id="report-opinion-T3BpbmlvbjpvcGluaW9uMg==-button"]' element
+  When I click the "[id='report-opinion-T3BpbmlvbjpvcGluaW9uMg==-button']" element
   And I fill the reporting form
   And I submit the reporting form
   Then I should see "alert.success.report.proposal" in the "#global-alert-box" element

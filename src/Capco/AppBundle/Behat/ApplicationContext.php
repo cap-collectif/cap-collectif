@@ -620,6 +620,7 @@ class ApplicationContext extends UserContext
      */
     public function iClickElement(string $selector)
     {
+        $this->iWaitElementToAppearOnPage($selector);
         $element = $this->getSession()
             ->getPage()
             ->find('css', $selector);
@@ -630,10 +631,21 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @When I trigger element :element with action :action
+     */
+    public function iTriggerElementWithAction($element, $action)
+    {
+        $this->getSession()
+            ->getDriver()
+            ->executeScript("$('${element}').trigger('${action}');");
+    }
+
+    /**
      * @When I hover over the :selector element
      */
     public function iHoverOverTheElement(string $selector)
     {
+        $this->iWaitElementToAppearOnPage($selector);
         $element = $this->getSession()
             ->getPage()
             ->find('css', $selector);
@@ -650,6 +662,7 @@ class ApplicationContext extends UserContext
      */
     public function iFocusTheElement(string $selector)
     {
+        $this->iWaitElementToAppearOnPage($selector);
         $element = $this->getSession()
             ->getPage()
             ->find('css', $selector);
@@ -666,6 +679,8 @@ class ApplicationContext extends UserContext
      */
     public function ifillElementWithEmptyValue(string $element)
     {
+        $this->iWaitElementToAppearOnPage($element);
+
         $element = $this->getSession()
             ->getPage()
             ->find('css', $element);
@@ -678,6 +693,8 @@ class ApplicationContext extends UserContext
      */
     public function ifillElementWithValue(string $element, string $value)
     {
+        $this->iWaitElementToAppearOnPage($element);
+
         $element = $this->getSession()
             ->getPage()
             ->find('css', $element);
@@ -777,6 +794,8 @@ class ApplicationContext extends UserContext
     public function checkElementWithId(string $inputId)
     {
         $selector = "[for='${inputId}']";
+        $this->iWaitElementToAppearOnPage($selector);
+
         $element = $this->getSession()
             ->getPage()
             ->find('css', $selector);
@@ -807,6 +826,8 @@ class ApplicationContext extends UserContext
     public function iRemoveTheOptionOfTheReactElement(int $number, string $element): void
     {
         $selector = "${element} .react-select__value-container .react-select__multi-value:nth-child(${number}) .react-select__multi-value__remove";
+        $this->iWaitElementToAppearOnPage($selector);
+
         $element = $this->getSession()
             ->getPage()
             ->find('css', $selector);
@@ -936,6 +957,8 @@ class ApplicationContext extends UserContext
     {
         $session = $this->getSession();
         $page = $session->getPage();
+        $this->iWaitElementToAppearOnPage($selector);
+
         $element = $page->find('css', $selector);
         if (!$element) {
             throw new ElementNotFoundException($session, 'Element "' . $selector . '"');
@@ -997,6 +1020,8 @@ class ApplicationContext extends UserContext
      */
     public function theElementHasAttribute($selector, $attribute)
     {
+        $this->iWaitElementToAppearOnPage($selector);
+
         $element = $this->getSession()
             ->getPage()
             ->find('css', $selector);

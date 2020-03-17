@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { isInvalid, submit, isSubmitting } from 'redux-form';
+import { isInvalid, isSubmitting, isPristine, submit } from 'redux-form';
 import type { IntlShape } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { formName } from '../Form/EventForm';
@@ -26,6 +26,7 @@ type Props = {|
   intl: IntlShape,
   show: boolean,
   submitting: boolean,
+  pristine: boolean,
   dispatch: Dispatch,
   invalid: boolean,
   handleClose: () => void,
@@ -49,12 +50,12 @@ export const EventFormInModal: StyledComponent<{}, {}, typeof EventFormCreatePag
 
 export const EventCreateModal = ({
   submitting,
-  dispatch,
+  pristine,
   show,
-  invalid,
   query,
   event,
   handleClose,
+  dispatch,
 }: Props) => (
   <Modal
     animation={false}
@@ -75,7 +76,7 @@ export const EventCreateModal = ({
       <SubmitButton
         label="global.submit"
         id="confirm-event-submit"
-        disabled={invalid}
+        disabled={pristine || submitting}
         isSubmitting={submitting}
         onSubmit={() => {
           dispatch(submit(formName));
@@ -88,6 +89,7 @@ export const EventCreateModal = ({
 const mapStateToProps = (state: State) => ({
   invalid: isInvalid(formName)(state),
   submitting: isSubmitting(formName)(state),
+  pristine: isPristine(formName)(state),
 });
 
 export const container = connect(mapStateToProps)(injectIntl(EventCreateModal));

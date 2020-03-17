@@ -628,3 +628,11 @@ Hack form button - radio check
         }
     }
 }
+
+.form-check {
+    display: flex;
+    align-items: flex-start;
+    .form-check-input {
+        margin: 2px 4px 0 0 ;
+    }
+}

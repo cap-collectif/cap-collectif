@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { EventPageHeader } from './EventPageHeader';
-import { intlMock } from '../../mocks';
+import { intlMock, $refType } from '../../mocks';
 import { features } from '../../redux/modules/default';
 
 describe('<EventPageHeader />', () => {
@@ -13,6 +13,12 @@ describe('<EventPageHeader />', () => {
     isAuthenticated: true,
     features: {
       ...features,
+    },
+    queryViewer: {
+      viewer: {
+        isAdmin: false,
+      },
+      $refType,
     },
   };
 

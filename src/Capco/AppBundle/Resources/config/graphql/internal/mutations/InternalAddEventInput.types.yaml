@@ -40,3 +40,9 @@ InternalAddEventInput:
         description: 'The Node ID of the author for this event.'
       translations:
           type: '[InternalEventTranslationInput!]!'
+      authorAgreeToUsePersonalDataForEventOnly:
+          type: 'Boolean'
+          description: 'Author of event agree to use personal data for event only'
+      adminAuthorizeDataTransfer:
+          type: 'Boolean'
+          description: 'Admin authorize data transfer'

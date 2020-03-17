@@ -227,6 +227,12 @@ input AddEventInput {
 
   """The Node ID of the author for this event."""
   author: ID
+
+  """Author of event agree to use personal data for event only"""
+  authorAgreeToUsePersonalDataForEventOnly: Boolean
+
+  """Admin authorize data transfer"""
+  adminAuthorizeDataTransfer: Boolean
 }
 
 type AddEventPayload {
@@ -817,6 +823,12 @@ input ChangeEventInput {
 
   """The Node ID of the author for this event."""
   author: ID
+
+  """Author of event agree to use personal data for event only"""
+  authorAgreeToUsePersonalDataForEventOnly: Boolean
+
+  """Admin authorize data transfer"""
+  adminAuthorizeDataTransfer: Boolean
 
   """The ID of the Event to modify."""
   id: ID!
@@ -2754,6 +2766,12 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """The slug of event"""
   slug: String!
   metaDescription: String
+
+  """Author of event agree to use personal data for event only"""
+  authorAgreeToUsePersonalDataForEventOnly: Boolean
+
+  """Admin authorize data transfer"""
+  adminAuthorizeDataTransfer: Boolean
 }
 
 """A connection to a list of items."""

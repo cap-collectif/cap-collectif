@@ -26,7 +26,7 @@ type Props = {|
   show: boolean,
   submitting: boolean,
   dispatch: Dispatch,
-  invalid: boolean,
+  pristine: boolean,
   handleClose: () => void,
 |};
 
@@ -40,7 +40,7 @@ export const EventEditModal = ({
   submitting,
   dispatch,
   show,
-  invalid,
+  pristine,
   query,
   event,
   handleClose,
@@ -68,7 +68,7 @@ export const EventEditModal = ({
         <SubmitButton
           label="global.submit"
           id="confirm-event-submit"
-          disabled={invalid}
+          disabled={pristine || submitting}
           isSubmitting={submitting}
           onSubmit={() => {
             dispatch(submit(formName));

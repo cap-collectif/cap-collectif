@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { FormattedHTMLMessage, FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { QueryRenderer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import LoginOverlay from '../Utils/LoginOverlay';
 import type { FeatureToggles, GlobalState } from '../../types';
 import EventCreateModal from './Create/EventCreateModal';
@@ -12,12 +12,14 @@ import type {
   EventPageHeaderQueryResponse,
   EventPageHeaderQueryVariables,
 } from '~relay/EventPageHeaderQuery.graphql';
+import type { EventPageHeader_queryViewer } from '~relay/EventPageHeader_queryViewer.graphql';
 
 type Props = {|
   eventPageTitle: ?string,
   features: FeatureToggles,
   isAuthenticated: boolean,
   intl: IntlShape,
+  queryViewer: EventPageHeader_queryViewer,
 |};
 
 type State = {|
@@ -48,7 +50,7 @@ export class EventPageHeader extends React.Component<Props, State> {
   };
 
   render() {
-    const { eventPageTitle, features, isAuthenticated, intl } = this.props;
+    const { eventPageTitle, features, intl, isAuthenticated, queryViewer } = this.props;
     const { showModal } = this.state;
     const textPos = features.allow_users_to_propose_events ? 'left pull-left' : 'center';
     return (
@@ -94,7 +96,11 @@ export class EventPageHeader extends React.Component<Props, State> {
                           bsStyle="default"
                           className="mt-5"
                           onClick={() => {
-                            this.openModal();
+                            if (queryViewer?.viewer?.isAdmin) {
+                              window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/event/create`;
+                            } else {
+                              this.openModal();
+                            }
                           }}>
                           <i className="cap cap-add-1" />
                           <span className="hidden-xs ml-5">
@@ -122,6 +128,15 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
 
-const container = injectIntl(EventPageHeader);
+export const container = connect(mapStateToProps)(injectIntl(EventPageHeader));
 
-export default connect(mapStateToProps)(container);
+export default createFragmentContainer(container, {
+  queryViewer: graphql`
+    fragment EventPageHeader_queryViewer on Query
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      viewer @include(if: $isAuthenticated) {
+        isAdmin
+      }
+    }
+  `,
+});

@@ -36,7 +36,9 @@ class SubmitButton extends React.Component<Props> {
     if ((loginOverlay && !user) || isSubmitting) {
       return null;
     }
-    onSubmit();
+    if (onSubmit) {
+      onSubmit();
+    }
   };
 
   render() {

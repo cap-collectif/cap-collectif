@@ -47,7 +47,6 @@ exports[`<EventAdminFormPage /> it renders correctly with translations 1`] = `
           },
         }
       }
-      validate={[Function]}
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
@@ -131,7 +130,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
           },
         }
       }
-      validate={[Function]}
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
@@ -215,7 +213,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
           },
         }
       }
-      validate={[Function]}
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
@@ -299,7 +296,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
           },
         }
       }
-      validate={[Function]}
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
@@ -383,7 +379,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
           },
         }
       }
-      validate={[Function]}
     />
     <ButtonToolbar
       bsClass="btn-toolbar"
@@ -454,7 +449,6 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
           },
         }
       }
-      validate={[Function]}
     />
     <ButtonToolbar
       bsClass="btn-toolbar"

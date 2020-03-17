@@ -15,6 +15,7 @@ use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,15 +27,18 @@ class EventController extends Controller
     private $eventHelper;
     private $eventRepository;
     private $entityManager;
+    private $formFactory;
 
     public function __construct(
         EventHelper $eventHelper,
         EventRepository $eventRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        FormFactoryInterface $formFactory
     ) {
         $this->entityManager = $entityManager;
         $this->eventHelper = $eventHelper;
         $this->eventRepository = $eventRepository;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -128,6 +132,7 @@ class EventController extends Controller
         $viewer = $this->getUser();
         if (!$this->eventHelper->isRegistrationPossible($event)) {
             return [
+                'viewerIsAuthor' => $event->getAuthor() === $this->getUser(),
                 'event' => $event,
                 'viewer' => $viewer
             ];
@@ -135,8 +140,11 @@ class EventController extends Controller
 
         $user = $this->getUser();
         $registration = $this->eventHelper->findUserRegistrationOrCreate($event, $user);
-        $form = $this->createForm(EventRegistrationType::class, $registration, [
-            'registered' => $registration->isConfirmed()
+        $form = $this->formFactory->create(EventRegistrationType::class, $registration, [
+            'registered' => $registration->isConfirmed(),
+            'adminAuthorizeDataTransferTradKey' => $event->getAdminAuthorizeDataTransfer()
+                ? 'privacy-policy-accepted-2'
+                : 'privacy-policy-accepted'
         ]);
 
         if ('POST' === $request->getMethod()) {
@@ -179,7 +187,8 @@ class EventController extends Controller
             'viewerIsAuthor' => $event->getAuthor() === $this->getUser(),
             'form' => $form->createView(),
             'event' => $event,
-            'viewer' => $viewer
+            'viewer' => $viewer,
+            'user' => $this->getUser()
         ];
     }
 }
