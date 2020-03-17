@@ -10,6 +10,7 @@ return [
     Translation\PlatformAdapter\Loco\Bridge\Symfony\TranslationAdapterLocoBundle::class => [
         'all' => true
     ],
+    Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Translation\Bundle\TranslationBundle::class => ['all' => true],
     // Redis
     Snc\RedisBundle\SncRedisBundle::class => ['all' => true],
