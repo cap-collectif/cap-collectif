@@ -7371,6 +7371,18 @@ interface RequirementStep {
 enum RequirementType {
   """The requirement is a checkbox"""
   CHECKBOX
+
+  """The requirement is a firstname"""
+  FIRSTNAME
+
+  """The requirement is a lastname"""
+  LASTNAME
+
+  """The requirement is a phone number"""
+  PHONE
+
+  """The requirement is a date of birth"""
+  DATE_OF_BIRTH
 }
 
 """A response to a question."""

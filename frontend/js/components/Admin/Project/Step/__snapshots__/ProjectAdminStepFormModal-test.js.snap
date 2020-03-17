@@ -1,31 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectAdminStepFormModal /> renders correctly 1`] = `
-<Modal
+<ProjectAdminFormstyle__StepModalContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[MockFunction]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -51,35 +32,16 @@ exports[`<ProjectAdminStepFormModal /> renders correctly 1`] = `
       }
     }
   />
-</Modal>
+</ProjectAdminFormstyle__StepModalContainer>
 `;
 
 exports[`<ProjectAdminStepFormModal /> renders correctly hided 1`] = `
-<Modal
+<ProjectAdminFormstyle__StepModalContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[MockFunction]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={false}
 >
   <ModalHeader
@@ -105,35 +67,16 @@ exports[`<ProjectAdminStepFormModal /> renders correctly hided 1`] = `
       }
     }
   />
-</Modal>
+</ProjectAdminFormstyle__StepModalContainer>
 `;
 
 exports[`<ProjectAdminStepFormModal /> renders correctly with step 1`] = `
-<Modal
+<ProjectAdminFormstyle__StepModalContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
+  dialogClassName="custom-modal-dialog"
   onHide={[MockFunction]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -160,5 +103,5 @@ exports[`<ProjectAdminStepFormModal /> renders correctly with step 1`] = `
       }
     }
   />
-</Modal>
+</ProjectAdminFormstyle__StepModalContainer>
 `;

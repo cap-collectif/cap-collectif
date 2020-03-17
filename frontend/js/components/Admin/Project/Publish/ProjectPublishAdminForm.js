@@ -1,21 +1,25 @@
 // @flow
 import React from 'react';
 import { Field } from 'redux-form';
-import {createFragmentContainer, fetchQuery, graphql} from 'react-relay';
+import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { type IntlShape, FormattedMessage } from 'react-intl';
 import renderComponent from '~/components/Form/Field';
 import { type ProjectPublishAdminForm_project } from '~relay/ProjectPublishAdminForm_project.graphql';
-import { ProjectBoxHeader, ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
-import select from "~/components/Form/Select";
-import environment from "~/createRelayEnvironment";
-import type {FeatureToggles} from "~/types";
+import type { FeatureToggles } from '~/types';
+import select from '~/components/Form/Select';
+import environment from '~/createRelayEnvironment';
+import {
+  ProjectBoxHeader,
+  ProjectSmallFieldsContainer,
+  PermalinkWrapper,
+} from '../Form/ProjectAdminForm.style';
 
 export type FormValues = {|
   publishedAt: string,
   locale: {|
     label: string,
-    value: string
-  |}
+    value: string,
+  |},
 |};
 
 type Props = {|
@@ -29,7 +33,7 @@ const getLocaleOptions = graphql`
   query ProjectPublishAdminFormLocaleQuery {
     availableLocales(includeDisabled: false) {
       value: id
-      label: traductionKey      
+      label: traductionKey
     }
   }
 `;
@@ -74,29 +78,31 @@ export const ProjectPublishAdminForm = ({ project, features }: Props) => (
             component={renderComponent}
             addonAfter={<i className="cap-calendar-2" />}
           />
-          {features.unstable__multilangue && <Field
-            selectFieldIsObject
-            autoload
-            labelClassName="control-label"
-            component={select}
-            id="project-locale"
-            name="locale"
-            label={<FormattedMessage id="form.label_locale" />}
-            role="combobox"
-            aria-autocomplete="list"
-            aria-haspopup="true"
-            loadOptions={loadLocaleOptions}
-            placeholder={<FormattedMessage id="locale.all-locales" />}
-          />}
+          {features.unstable__multilangue && (
+            <Field
+              selectFieldIsObject
+              autoload
+              labelClassName="control-label"
+              component={select}
+              id="project-locale"
+              name="locale"
+              label={<FormattedMessage id="form.label_locale" />}
+              role="combobox"
+              aria-autocomplete="list"
+              aria-haspopup="true"
+              loadOptions={loadLocaleOptions}
+              placeholder={<FormattedMessage id="locale.all-locales" />}
+            />
+          )}
         </ProjectSmallFieldsContainer>
-        <p>
+        <PermalinkWrapper>
           <strong>
             <FormattedMessage id="permalink" /> :
           </strong>{' '}
           <a href={project?.url} target="blank">
             {project?.url}
           </a>
-        </p>
+        </PermalinkWrapper>
       </div>
     </div>
   </div>

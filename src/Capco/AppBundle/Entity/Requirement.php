@@ -14,7 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Requirement
 {
-    use UuidTrait, PositionableTrait;
+    use UuidTrait;
+    use PositionableTrait;
 
     public const CHECKBOX = 'CHECKBOX';
     public const FIRSTNAME = 'FIRSTNAME';
@@ -27,7 +28,7 @@ class Requirement
         self::FIRSTNAME => 'form.label_firstname',
         self::LASTNAME => 'group.title',
         self::PHONE => 'mobile-phone',
-        self::DATE_OF_BIRTH => 'form.label_date_of_birth',
+        self::DATE_OF_BIRTH => 'form.label_date_of_birth'
     ];
 
     /**
@@ -76,7 +77,7 @@ class Requirement
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(?string $label = null): self
     {
         $this->label = $label;
 

@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 
 const DeleteButton = ({ onClick }: { onClick: () => void }) => (
   <Button className="btn-outline-danger" bsStyle="danger" onClick={onClick}>
-    <i className="cap-bin-2" />
+    <i className="cap-bin-2-1" />
   </Button>
 );
 

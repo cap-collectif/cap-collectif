@@ -10,13 +10,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RequirementType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('id', RelayGlobalIdType::class)
             ->add('type')
-            ->add('label');
+            ->add('label', null, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

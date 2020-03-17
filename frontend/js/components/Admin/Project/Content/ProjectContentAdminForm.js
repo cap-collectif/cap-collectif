@@ -38,11 +38,11 @@ type Props = {|
   intl: IntlShape,
 |};
 
-export const renderOptionalLabel = (id: string, intl: IntlShape, helpText?: string) => (
+export const renderLabel = (id: string, intl: IntlShape, helpText?: string, optional?: boolean) => (
   <div>
     {intl.formatMessage({ id })}
     <span className="excerpt inline">
-      {intl.formatMessage({ id: 'global.optional' })}{' '}
+      {!optional && intl.formatMessage({ id: 'global.optional' })}{' '}
       {helpText && (
         <OverlayTrigger
           key="top"
@@ -113,18 +113,14 @@ export const ProjectContentAdminForm = ({ intl }: Props) => (
             name="Cover"
             component={renderComponent}
             type="image"
-            label={renderOptionalLabel('proposal.media', intl)}
+            label={renderLabel('proposal.media', intl)}
           />
         </div>
         <Field
           type="text"
           name="video"
           id="video"
-          label={renderOptionalLabel(
-            'admin.fields.project.video',
-            intl,
-            'admin.help.project.video',
-          )}
+          label={renderLabel('admin.fields.project.video', intl, 'admin.help.project.video')}
           placeholder="https://"
           component={renderComponent}
         />
@@ -138,7 +134,7 @@ export const ProjectContentAdminForm = ({ intl }: Props) => (
           id="themes"
           name="themes"
           placeholder=" "
-          label={renderOptionalLabel('global.themes', intl)}
+          label={renderLabel('global.themes', intl)}
           role="combobox"
           aria-autocomplete="list"
           aria-haspopup="true"
@@ -162,12 +158,12 @@ export const ProjectContentAdminForm = ({ intl }: Props) => (
           placeholder=" "
           labelClassName="control-label"
           inputClassName="fake-inputClassName"
-          label={renderOptionalLabel('proposal_form.districts', intl)}
+          label={renderLabel('proposal_form.districts', intl)}
         />
         <Field
           name="metaDescription"
           type="textarea"
-          label={renderOptionalLabel('global.meta.description', intl, 'admin.help.metadescription')}
+          label={renderLabel('global.meta.description', intl, 'admin.help.metadescription')}
           component={renderComponent}
         />
       </div>

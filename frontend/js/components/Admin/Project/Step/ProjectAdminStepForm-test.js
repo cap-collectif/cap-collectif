@@ -27,7 +27,7 @@ describe('<ProjectAdminStepForm />', () => {
     },
   };
 
-  it('renders correctly empty', () => {
+  it('renders correctly', () => {
     const wrapper = shallow(<ProjectAdminStepForm {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
   });

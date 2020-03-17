@@ -79,6 +79,7 @@ export const Header: StyledComponent<{}, {}, HTMLElement> = styled.nav`
     color: ${colors.darkText};
     margin: 0;
     margin-bottom: 15px;
+    word-break: break-all;
   }
 
   @media (max-width: 768px) {

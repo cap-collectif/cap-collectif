@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
+exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
 <Fragment>
   <ModalBody
     bsClass="modal-body"
@@ -173,7 +173,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
         normalize={[Function]}
       />
        
-      <p>
+      <ProjectAdminFormstyle__PermalinkWrapper>
         <strong>
           <FormattedMessage
             id="permalink"
@@ -188,7 +188,7 @@ exports[`<ProjectAdminStepForm /> renders correctly empty 1`] = `
         >
           /sku
         </a>
-      </p>
+      </ProjectAdminFormstyle__PermalinkWrapper>
       <ProjectAdminFormstyle__ProjectBoxHeader>
         <h5>
           <FormattedMessage

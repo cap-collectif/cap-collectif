@@ -6,3 +6,15 @@ RequirementType:
       CHECKBOX:
         value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::CHECKBOX")'
         description: 'The requirement is a checkbox'
+      FIRSTNAME:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::FIRSTNAME")'
+        description: 'The requirement is a firstname'
+      LASTNAME:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::LASTNAME")'
+        description: 'The requirement is a lastname'
+      PHONE:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::PHONE")'
+        description: 'The requirement is a phone number'
+      DATE_OF_BIRTH:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::DATE_OF_BIRTH")'
+        description: 'The requirement is a date of birth'

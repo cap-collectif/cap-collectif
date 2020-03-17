@@ -23,6 +23,14 @@ export const ProjectBoxHeader: StyledComponent<
   }
 `;
 
+export const StepModalContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal).attrs({
+  className: 'step__modal',
+})`
+  && .custom-modal-dialog {
+    transform: none;
+  }
+`;
+
 export const NoStepsPlaceholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   height: 50px;
   border: 1px solid ${colors.lightGray};
@@ -41,7 +49,7 @@ export const ProjectSmallFieldsContainer: StyledComponent<{}, {}, HTMLDivElement
     min-width: 200px;
   }
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
-    flex-direction: column
+    flex-direction: column;
   }
 `;
 
@@ -66,4 +74,8 @@ export const StepMenuItem: StyledComponent<{}, {}, typeof MenuItem> = styled(Men
 export const StepModalTitle: StyledComponent<{}, {}, typeof Modal.Title> = styled(Modal.Title)`
   font-weight: 600;
   font-size: 20px;
+`;
+
+export const PermalinkWrapper: StyledComponent<{}, {}, HTMLParagraphElement> = styled.p`
+  word-break: break-all;
 `;

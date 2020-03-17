@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { STEP_TYPES } from '~/constants/StepTypeConstants';
 import ProjectAdminStepForm from './ProjectAdminStepForm';
-import { StepModalTitle } from '../Form/ProjectAdminForm.style';
+import { StepModalTitle, StepModalContainer } from '../Form/ProjectAdminForm.style';
 
 type Props = {|
   form: string,
@@ -28,10 +28,11 @@ export function ProjectAdminStepFormModal({
   const stepType = STEP_TYPES.find(s => s.value === type);
   const modalTitle = stepType ? (isCreating ? stepType.addLabel : stepType.editLabel) : '';
   return (
-    <Modal
+    <StepModalContainer
       animation={false}
       show={show}
       onHide={onClose}
+      dialogClassName="custom-modal-dialog"
       bsSize="large"
       aria-labelledby="contained-modal-title-lg">
       <Modal.Header closeButton>
@@ -45,7 +46,7 @@ export function ProjectAdminStepFormModal({
         index={index}
         handleClose={onClose}
       />
-    </Modal>
+    </StepModalContainer>
   );
 }
 

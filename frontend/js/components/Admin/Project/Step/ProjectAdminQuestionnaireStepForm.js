@@ -4,7 +4,7 @@ import React from 'react';
 import { fetchQuery, graphql } from 'react-relay';
 import { Field } from 'redux-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { renderOptionalLabel } from '../Content/ProjectContentAdminForm';
+import { renderLabel } from '../Content/ProjectContentAdminForm';
 import select from '~/components/Form/Select';
 import renderComponent from '~/components/Form/Field';
 import environment from '~/createRelayEnvironment';
@@ -43,7 +43,7 @@ const ProjectAdminQuestionnaireStepForm = ({ questionnaire }: Props) => {
         type="editor"
         name="footer"
         id="step-footer"
-        label={renderOptionalLabel('global.footer', intl)}
+        label={renderLabel('global.footer', intl)}
         component={renderComponent}
       />
       {renderSubSection('global.questionnaire')}

@@ -1,0 +1,242 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminStepFormModal /> renders correctly with data 1`] = `
+<Fragment>
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="global.consultation"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <Field
+    aria-autocomplete="list"
+    aria-haspopup="true"
+    autoload={true}
+    clearable={true}
+    component={[Function]}
+    debounce={true}
+    id="step-consultations"
+    inputClassName="fake-inputClassName"
+    label={
+      <FormattedMessage
+        id="one-or-more-consultation-step"
+        values={Object {}}
+      />
+    }
+    labelClassName="control-label"
+    loadOptions={[Function]}
+    multi={true}
+    name="consultations"
+    placeholder=" "
+    role="combobox"
+    selectFieldIsObject={true}
+  />
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="requirements"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <FieldArray
+    component={[Function]}
+    formName="stepForm"
+    name="requirements"
+    requirements={
+      Array [
+        Object {
+          "checked": false,
+          "label": "Sku",
+          "type": "CHECKBOX",
+        },
+      ]
+    }
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn-outline-primary box-content__toolbar mb-20"
+    disabled={false}
+    id="js-btn-create-step"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-plus-circle"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+  <Field
+    component={[Function]}
+    id="step-requirementsReason"
+    label={
+      <div>
+        reason-for-collection
+        <span
+          className="excerpt inline"
+        >
+           
+          <OverlayTrigger
+            defaultOverlayShown={false}
+            overlay={
+              <_default
+                className="text-left"
+                id="tooltip-top"
+                style={
+                  Object {
+                    "wordBreak": "break-word",
+                  }
+                }
+              >
+                reason-for-collection
+              </_default>
+            }
+            placement="top"
+            trigger={
+              Array [
+                "hover",
+                "focus",
+              ]
+            }
+          >
+            <i
+              className="fa fa-info-circle"
+              style={
+                Object {
+                  "opacity": ".5",
+                }
+              }
+            />
+          </OverlayTrigger>
+        </span>
+      </div>
+    }
+    name="requirementsReason"
+    type="editor"
+  />
+</Fragment>
+`;
+
+exports[`<ProjectAdminStepFormModal /> renders correctly with no initial data 1`] = `
+<Fragment>
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="global.consultation"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <Field
+    aria-autocomplete="list"
+    aria-haspopup="true"
+    autoload={true}
+    clearable={true}
+    component={[Function]}
+    debounce={true}
+    id="step-consultations"
+    inputClassName="fake-inputClassName"
+    label={
+      <FormattedMessage
+        id="one-or-more-consultation-step"
+        values={Object {}}
+      />
+    }
+    labelClassName="control-label"
+    loadOptions={[Function]}
+    multi={true}
+    name="consultations"
+    placeholder=" "
+    role="combobox"
+    selectFieldIsObject={true}
+  />
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="requirements"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <FieldArray
+    component={[Function]}
+    formName="stepForm"
+    name="requirements"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn-outline-primary box-content__toolbar mb-20"
+    disabled={false}
+    id="js-btn-create-step"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-plus-circle"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+  <Field
+    component={[Function]}
+    id="step-requirementsReason"
+    label={
+      <div>
+        reason-for-collection
+        <span
+          className="excerpt inline"
+        >
+           
+          <OverlayTrigger
+            defaultOverlayShown={false}
+            overlay={
+              <_default
+                className="text-left"
+                id="tooltip-top"
+                style={
+                  Object {
+                    "wordBreak": "break-word",
+                  }
+                }
+              >
+                reason-for-collection
+              </_default>
+            }
+            placement="top"
+            trigger={
+              Array [
+                "hover",
+                "focus",
+              ]
+            }
+          >
+            <i
+              className="fa fa-info-circle"
+              style={
+                Object {
+                  "opacity": ".5",
+                }
+              }
+            />
+          </OverlayTrigger>
+        </span>
+      </div>
+    }
+    name="requirementsReason"
+    type="editor"
+  />
+</Fragment>
+`;

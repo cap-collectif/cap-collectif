@@ -4,6 +4,9 @@ exports[`Internal|Query.availableConsultations fetches total number of consultat
 Object {
   "availableConsultations": Array [
     Object {
+      "id": "Q29uc3VsdGF0aW9uOmFub3RoZXJDb25zdWx0YXRpb25XaXRob3V0U3RlcA==",
+    },
+    Object {
       "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvbldpdGhvdXRTdGVw",
     },
   ],

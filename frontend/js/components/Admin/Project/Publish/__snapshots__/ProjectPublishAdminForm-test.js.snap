@@ -37,7 +37,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
           type="datetime"
         />
       </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-      <p>
+      <ProjectAdminFormstyle__PermalinkWrapper>
         <strong>
           <FormattedMessage
             id="permalink"
@@ -49,7 +49,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
         <a
           target="blank"
         />
-      </p>
+      </ProjectAdminFormstyle__PermalinkWrapper>
     </div>
   </div>
 </div>
@@ -116,7 +116,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
           selectFieldIsObject={true}
         />
       </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-      <p>
+      <ProjectAdminFormstyle__PermalinkWrapper>
         <strong>
           <FormattedMessage
             id="permalink"
@@ -131,7 +131,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
         >
           /sku
         </a>
-      </p>
+      </ProjectAdminFormstyle__PermalinkWrapper>
     </div>
   </div>
 </div>
@@ -198,7 +198,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
           selectFieldIsObject={true}
         />
       </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-      <p>
+      <ProjectAdminFormstyle__PermalinkWrapper>
         <strong>
           <FormattedMessage
             id="permalink"
@@ -213,7 +213,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
         >
           /sku
         </a>
-      </p>
+      </ProjectAdminFormstyle__PermalinkWrapper>
     </div>
   </div>
 </div>
@@ -256,7 +256,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
           type="datetime"
         />
       </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
-      <p>
+      <ProjectAdminFormstyle__PermalinkWrapper>
         <strong>
           <FormattedMessage
             id="permalink"
@@ -268,7 +268,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
         <a
           target="blank"
         />
-      </p>
+      </ProjectAdminFormstyle__PermalinkWrapper>
     </div>
   </div>
 </div>

@@ -33,7 +33,7 @@ export const ProjectAccessAdminForm = ({ visibility }: Props) => (
           <FormattedMessage id="admin.settings.header.access" />
         </h4>
       </ProjectBoxHeader>
-      <div className="box-content ml-20">
+      <div className="box-content">
         <ProjectAccessContainer>
           <Field
             component={renderComponent}

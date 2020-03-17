@@ -35,6 +35,7 @@ def prepare_php(environment='dev'):
     local('php bin/console cache:warmup --no-optional-warmers --env=' + environment)
     local('php bin/console assets:install public --symlink --env=' + environment)
 
+
 @task(environments=['local', 'ci'])
 def deploy(environment='dev', user='capco', mode='symfony_bin'):
     "Deploy"
@@ -55,6 +56,7 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
         # We need to configure node-sass for local builds without Docker
         local('npm rebuild node-sass')
         print cyan('Successfully deployed https://capco.dev ! Last step is to generate your database with "local.database.generate"')
+
 
 @task(environments=['local', 'ci'])
 def toggle_enable(toggle='public_api', environment='test'):

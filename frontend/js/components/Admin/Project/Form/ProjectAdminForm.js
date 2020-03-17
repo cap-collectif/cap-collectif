@@ -158,6 +158,7 @@ const onSubmit = (
           startAt: s.startAt ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
           endAt: s.endAt ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
           questionnaire: s.questionnaire?.value || undefined,
+          consultations: s.consultations?.length ? s.consultations.map(c => c.value) : undefined,
           footer: s.type === 'QuestionnaireStep' ? s.footer : undefined,
           type: convertTypenameToConcreteStepType(s.type),
           requirements: s.requirements?.length ? s.requirements : [],
@@ -309,6 +310,15 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => ({
           ...step,
           endAt: step?.endAt?.endAt ? step.endAt.endAt : null,
           startAt: step?.startAt?.startAt ? step.startAt.startAt : null,
+          requirements: step.requirements?.edges?.map(edge => ({
+            ...edge?.node,
+            type:
+              edge?.node?.type === 'DateOfBirthRequirement'
+                ? 'DATE_OF_BIRTH'
+                : edge?.node?.type.slice(0, -11).toUpperCase(),
+          })),
+          requirementsReason: step.requirements?.reason || null,
+          consultations: step.consultations?.edges?.map(edge => edge?.node) || [],
         }))
       : [],
     visibility: project ? project.visibility : 'ADMIN',
@@ -331,10 +341,13 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => ({
         .map(d => {
           return { value: d.value, label: d.label };
         }) || [],
-    locale: project && project.locale ? {
-      value: project.locale.value,
-      label: <FormattedMessage id={project.locale.label} />
-    } : null
+    locale:
+      project && project.locale
+        ? {
+            value: project.locale.value,
+            label: <FormattedMessage id={project.locale.label} />,
+          }
+        : null,
   },
   title: formValueSelector(formName)(state, 'title'),
 });
@@ -403,26 +416,79 @@ export default createFragmentContainer(container, {
         ... on CollectStep {
           requirements {
             reason
+            edges {
+              node {
+                id
+                type: __typename
+                ... on CheckboxRequirement {
+                  label
+                }
+              }
+            }
           }
         }
         ... on SelectionStep {
           requirements {
             reason
+            edges {
+              node {
+                id
+                type: __typename
+                ... on CheckboxRequirement {
+                  label
+                }
+              }
+            }
           }
         }
         ... on ConsultationStep {
+          consultations {
+            edges {
+              node {
+                value: id
+                label: title
+              }
+            }
+          }
           requirements {
             reason
+            edges {
+              node {
+                id
+                type: __typename
+                ... on CheckboxRequirement {
+                  label
+                }
+              }
+            }
           }
         }
         ... on RequirementStep {
           requirements {
             reason
+            edges {
+              node {
+                id
+                type: __typename
+                ... on CheckboxRequirement {
+                  label
+                }
+              }
+            }
           }
         }
         ... on ProposalStep {
           requirements {
             reason
+            edges {
+              node {
+                id
+                type: __typename
+                ... on CheckboxRequirement {
+                  label
+                }
+              }
+            }
           }
         }
         ... on QuestionnaireStep {

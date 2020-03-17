@@ -11,7 +11,7 @@ exports[`<DeleteButton /> renders correctly 1`] = `
   onClick={[MockFunction]}
 >
   <i
-    className="cap-bin-2"
+    className="cap-bin-2-1"
   />
 </Button>
 `;

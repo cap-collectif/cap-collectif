@@ -71,3 +71,7 @@ Capco\AppBundle\Entity\Consultation:
         id: consultationWithoutStep
         title: 'Consultation in project without step'
         position: 1
+    anotherConsultationWithoutStep:
+        id: anotherConsultationWithoutStep
+        title: 'Another Consultation in project without step'
+        position: 1

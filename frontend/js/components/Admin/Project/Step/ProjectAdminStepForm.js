@@ -5,13 +5,16 @@ import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { submit, reduxForm, Field, arrayPush, change, formValueSelector } from 'redux-form';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
-import { renderOptionalLabel } from '../Content/ProjectContentAdminForm';
+import { renderLabel } from '../Content/ProjectContentAdminForm';
 import toggle from '~/components/Form/Toggle';
 import renderComponent from '~/components/Form/Field';
 import type { Dispatch, GlobalState } from '~/types';
-import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
+import { ProjectBoxHeader, PermalinkWrapper } from '../Form/ProjectAdminForm.style';
 import ProjectAdminQuestionnaireStepForm from './ProjectAdminQuestionnaireStepForm';
+import ProjectAdminConsultationStepForm from './ProjectAdminConsultationStepForm';
 import { FormContainer, DateContainer, CustomCodeArea } from './ProjectAdminStepForm.style';
+import { createRequirements, type Requirement, formatRequirements } from './StepRequirementsList';
+import ProjectAdminSynthesisStepForm from './ProjectAdminSynthesisStepForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -31,11 +34,15 @@ type Props = {|
     questionnaire?: {| value: string, label: string |},
     footer?: ?string,
     url: string,
+    requirements?: ?Array<Requirement>,
+    requirementsReason?: ?string,
+    consultations?: Array<{| value: string, label: string |}>,
   },
   intl: IntlShape,
   formName: string,
   index?: number,
   timeless: boolean,
+  requirements?: any,
 |};
 
 export type FormValues = {|
@@ -46,14 +53,19 @@ export type FormValues = {|
   endAt: ?string,
   startAt: string,
   questionnaire?: string,
+  consultations?: Array<string>,
+  requirements?: Array<Requirement>,
 |};
 
 const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
+  const requirements = formValues.requirements ? formatRequirements(formValues.requirements) : [];
   if (props.step && props.index !== undefined && props.index >= 0) {
     dispatch(
       change(props.formName, `steps[${+props.index}]`, {
         id: props.step.id,
+        url: props.step.url,
         ...formValues,
+        requirements,
       }),
     );
   } else {
@@ -61,6 +73,7 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
       arrayPush(props.formName, 'steps', {
         id: null,
         ...formValues,
+        requirements,
       }),
     );
   }
@@ -70,7 +83,7 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
   }
 };
 
-const validate = ({ type, label, title, startAt, questionnaire }: FormValues) => {
+const validate = ({ type, label, title, startAt, questionnaire, consultations }: FormValues) => {
   const errors = {};
 
   if (!label || label.length < 2) {
@@ -87,6 +100,10 @@ const validate = ({ type, label, title, startAt, questionnaire }: FormValues) =>
 
   if (type === 'QuestionnaireStep') {
     if (!questionnaire) errors.questionnaire = 'global.required';
+  }
+
+  if (type === 'ConsultationStep') {
+    if (!consultations || !consultations.length) errors.consultations = 'global.required';
   }
 
   return errors;
@@ -117,7 +134,7 @@ const renderDateContainer = (formName: string, intl: IntlShape) => (
       type="datetime"
       name="endAt"
       formName={formName}
-      label={renderOptionalLabel('end', intl)}
+      label={renderLabel('end', intl)}
       addonAfter={<i className="cap-calendar-2" />}
     />
   </DateContainer>
@@ -133,6 +150,7 @@ export function ProjectAdminStepForm({
   timeless,
   submitting,
   dispatch,
+  requirements,
 }: Props) {
   return (
     <>
@@ -175,29 +193,31 @@ export function ProjectAdminStepForm({
             type="editor"
             name="body"
             id="step-body"
-            label={renderOptionalLabel('proposal.body', intl)}
+            label={renderLabel('proposal.body', intl)}
             component={renderComponent}
           />
           <Field
             name="metaDescription"
             type="textarea"
             id="step-metaDescription"
-            label={renderOptionalLabel(
-              'global.meta.description',
-              intl,
-              'admin.help.metadescription',
-            )}
+            label={renderLabel('global.meta.description', intl, 'admin.help.metadescription')}
             component={renderComponent}
           />
           {step.type === 'QuestionnaireStep' && (
             <ProjectAdminQuestionnaireStepForm questionnaire={step.questionnaire} />
           )}
+          {step.type === 'ConsultationStep' && (
+            <ProjectAdminConsultationStepForm
+              requirements={requirements}
+              consultations={step.consultations}
+            />
+          )}
+          {step.type === 'SynthesisStep' && <ProjectAdminSynthesisStepForm />}
           {/** 
-      {step.type === 'SynthesisStep' && <ProjectAdminSynthesisStepForm />}
-      {step.type === 'RankingStep' && <ProjectAdminRankingStepForm />}
       {step.type === 'SelectionStep' && <ProjectAdminSelectionStepForm />}
+      {step.type === 'RankingStep' && <ProjectAdminRankingStepForm />}
+      
       {step.type === 'CollectStep' && <ProjectAdminCollectStepForm />}
-      {step.type === 'ConsultationStep' && <ProjectAdminConsultationStepForm />}
        */}
           {renderSubSection('global.publication')}
           <>
@@ -210,14 +230,14 @@ export function ProjectAdminStepForm({
               label={<FormattedMessage id="global.published" />}
             />{' '}
             {step.url && (
-              <p>
+              <PermalinkWrapper>
                 <strong>
                   <FormattedMessage id="permalink" /> :
                 </strong>{' '}
                 <a href={step?.url} target="blank">
                   {step?.url}
                 </a>
-              </p>
+              </PermalinkWrapper>
             )}
           </>
           {renderSubSection('global-customization')}
@@ -227,7 +247,7 @@ export function ProjectAdminStepForm({
               type="textarea"
               id="step-customCode"
               rows={4}
-              label={renderOptionalLabel('admin.customcode', intl, 'admin.help.customcode')}
+              label={renderLabel('admin.customcode', intl, 'admin.help.customcode')}
               placeholder='<script type="text/javascript"> </script>'
               component={renderComponent}
             />
@@ -272,8 +292,13 @@ const mapStateToProps = (state: GlobalState, { step }: Props) => ({
     // QuestionnaireStep
     questionnaire: step?.questionnaire || null,
     footer: step?.footer ? step.footer : null,
+    // ConsultationStep
+    consultations: step?.consultations || [],
+    requirements: step ? createRequirements(step) : [],
+    requirementsReason: step?.requirementsReason || null,
   },
   timeless: formValueSelector('stepForm')(state, 'timeless') || false,
+  requirements: formValueSelector('stepForm')(state, 'requirements') || [],
 });
 
 const form = injectIntl(
