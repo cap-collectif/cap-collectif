@@ -1,12 +1,16 @@
 // @flow
 /* eslint-env jest */
-import * as React from 'react';
-import { shallow } from 'enzyme';
-import { ProjectAdminProposals } from './ProjectAdminProposals';
-import { $refType, relayPaginationMock } from '~/mocks';
-import { ProposalListNoContributions } from './ProjectAdminProposals.style';
+
+import {
+  getFormattedCategoriesChoicesForProject,
+  getFormattedDistrictsChoicesForProject,
+  getFormattedStatusesChoicesForProject,
+  getFormattedStepsChoicesForProject,
+} from '~/components/Admin/Project/ProjectAdminProposals.utils';
+import { $refType } from '~/mocks';
 
 const DEFAULT_PROJECT = {
+  ...$refType,
   id: 'UHJvamVjdDpwcm9qZWN0Ng==',
   steps: [
     {
@@ -17,7 +21,7 @@ const DEFAULT_PROJECT = {
         {
           id: 'status1',
           name: 'Approuvé',
-          color: 'success',
+          color: 'primary',
         },
         {
           id: 'status2',
@@ -78,11 +82,9 @@ const DEFAULT_PROJECT = {
             name: 'En cours',
             color: 'info',
           },
-          form: {
-            step: {
-              id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-              title: 'Collecte des propositions',
-            },
+          currentVotableStep: {
+            id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==',
+            title: 'Sélection',
           },
         },
         cursor: 'YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==',
@@ -110,12 +112,7 @@ const DEFAULT_PROJECT = {
             name: 'Approuvé',
             color: 'success',
           },
-          form: {
-            step: {
-              id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-              title: 'Collecte des propositions',
-            },
-          },
+          currentVotableStep: null,
         },
         cursor: 'YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwOCI7fQ==',
       },
@@ -142,11 +139,9 @@ const DEFAULT_PROJECT = {
             name: 'Approuvé',
             color: 'success',
           },
-          form: {
-            step: {
-              id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-              title: 'Collecte des propositions',
-            },
+          currentVotableStep: {
+            id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==',
+            title: 'Sélection',
           },
         },
         cursor: 'YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==',
@@ -174,11 +169,9 @@ const DEFAULT_PROJECT = {
             name: 'En cours',
             color: 'info',
           },
-          form: {
-            step: {
-              id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-              title: 'Collecte des propositions',
-            },
+          currentVotableStep: {
+            id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==',
+            title: 'Sélection',
           },
         },
         cursor: 'YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==',
@@ -200,12 +193,7 @@ const DEFAULT_PROJECT = {
           title:
             "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
           status: null,
-          form: {
-            step: {
-              id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-              title: 'Collecte des propositions',
-            },
-          },
+          currentVotableStep: null,
         },
         cursor: 'YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==',
       },
@@ -229,11 +217,9 @@ const DEFAULT_PROJECT = {
             name: 'En cours',
             color: 'info',
           },
-          form: {
-            step: {
-              id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-              title: 'Collecte des propositions',
-            },
+          currentVotableStep: {
+            id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwNg==',
+            title: 'Sélection à venir',
           },
         },
         cursor: 'YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9',
@@ -258,11 +244,9 @@ const DEFAULT_PROJECT = {
             name: 'En cours',
             color: 'info',
           },
-          form: {
-            step: {
-              id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-              title: 'Collecte des propositions',
-            },
+          currentVotableStep: {
+            id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMw==',
+            title: 'Fermée',
           },
         },
         cursor: 'YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9',
@@ -280,12 +264,7 @@ const DEFAULT_PROJECT = {
           id: 'UHJvcG9zYWw6cHJvcG9zYWwxMDQ=',
           title: 'Test de publication avec accusé de réception',
           status: null,
-          form: {
-            step: {
-              id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-              title: 'Collecte des propositions',
-            },
-          },
+          currentVotableStep: null,
         },
         cursor: 'YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==',
       },
@@ -293,36 +272,30 @@ const DEFAULT_PROJECT = {
   },
 };
 
-describe('<ProjectAdminProposals />', () => {
-  const defaultProps = {
-    relay: { ...relayPaginationMock },
-    project: {
-      $refType,
-      ...DEFAULT_PROJECT,
-    },
-  };
-
-  it('renders correctly when the project have proposals', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...defaultProps} />);
-    expect(wrapper).toMatchSnapshot();
+describe('ProjectAdminProposals utils functions', () => {
+  it('should get a correctly formatted categories choices for a given project', () => {
+    const categories = getFormattedCategoriesChoicesForProject(DEFAULT_PROJECT);
+    expect(categories).toHaveLength(2);
+    expect(categories).toMatchSnapshot();
   });
 
-  it('renders the "No proposals" placeholder when the project does not have any proposals', () => {
-    const props = {
-      ...defaultProps,
-      project: {
-        ...defaultProps.project,
-        proposals: {
-          totalCount: 0,
-          pageInfo: {
-            hasNextPage: false,
-          },
-          edges: [],
-        },
-      },
-    };
-    const wrapper = shallow(<ProjectAdminProposals {...props} />);
-    expect(wrapper.find(ProposalListNoContributions)).toHaveLength(1);
-    expect(wrapper).toMatchSnapshot();
+  it('should get a correctly formatted districts choices for a given project', () => {
+    const districts = getFormattedDistrictsChoicesForProject(DEFAULT_PROJECT);
+    expect(districts).toHaveLength(2);
+    expect(districts).toMatchSnapshot();
+  });
+
+  it('should get a correctly formatted steps choices for a given project', () => {
+    const steps = getFormattedStepsChoicesForProject(DEFAULT_PROJECT);
+    expect(steps).toHaveLength(1);
+    expect(steps).toMatchSnapshot();
+  });
+
+  it('should get a correctly formatted step statuses choices for a given project', () => {
+    const stepStatuses = getFormattedStatusesChoicesForProject(DEFAULT_PROJECT);
+    expect(stepStatuses).toHaveLength(1);
+    expect(stepStatuses[0]).toHaveProperty('statuses');
+    expect(stepStatuses[0].statuses.length).toBeGreaterThan(0);
+    expect(stepStatuses).toMatchSnapshot();
   });
 });

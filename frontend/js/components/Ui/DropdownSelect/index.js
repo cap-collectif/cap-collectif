@@ -27,6 +27,7 @@ import { DropdownSelectContext } from '~ui/DropdownSelect/context';
 
 type Props = {|
   +title: string,
+  +shouldOverflow?: boolean,
   +value?: string | null,
   +onChange?: (value: string) => void,
   +children: React.ChildrenArray<
@@ -42,12 +43,12 @@ export const useDropdownSelect = (): Context => {
   return context;
 };
 
-const DropdownSelect = ({ children, title, value, onChange }: Props) => {
+const DropdownSelect = ({ children, title, value, onChange, shouldOverflow = false }: Props) => {
   const contextValue = React.useMemo(() => ({ value, onChange }), [value, onChange]);
 
   return (
     <DropdownSelectContext.Provider value={contextValue}>
-      <S.Container>
+      <S.Container shouldOverflow={shouldOverflow}>
         <S.Header>{title}</S.Header>
         <S.Body>{children}</S.Body>
       </S.Container>

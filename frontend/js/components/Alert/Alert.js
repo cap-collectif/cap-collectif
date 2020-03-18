@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import AlertContainer from './Alert.style';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 type Props = {|
   children: $FlowFixMe,
@@ -22,7 +23,7 @@ const Alert = ({ children, type, onDismiss, timeout = 10000 }: Props) => {
       {children}
       {onDismiss && (
         <button type="button" onClick={onDismiss} className="btn-close">
-          <Icon name={ICON_NAME.close} size={10} />
+          <Icon name={ICON_NAME.close} size={10} color={colors.darkGray} />
         </button>
       )}
     </AlertContainer>

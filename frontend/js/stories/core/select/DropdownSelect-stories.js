@@ -16,6 +16,28 @@ storiesOf('Core|Select/DropdownSelect', module)
       </DropdownSelect>
     );
   })
+  .add('with submenus on root', () => {
+    return (
+      <DropdownSelect title="Trier par">
+        <DropdownSelect.Menu name="Etape 1">
+          <DropdownSelect.Choice value="itemÉtape1.1">Item étape 1.1</DropdownSelect.Choice>
+          <DropdownSelect.Choice value="itemÉtape1.2">Item étape 1.2</DropdownSelect.Choice>
+        </DropdownSelect.Menu>
+        <DropdownSelect.Menu name="Etape 2">
+          <DropdownSelect.Choice value="itemÉtape1.1.1">Item étape 1.1.1</DropdownSelect.Choice>
+          <DropdownSelect.Choice value="itemÉtape1.1.2">Item étape 1.1.2</DropdownSelect.Choice>
+        </DropdownSelect.Menu>
+        <DropdownSelect.Menu name="Etape 3">
+          <DropdownSelect.Choice value="itemÉtape1.1.1">Item étape 1.1.1</DropdownSelect.Choice>
+          <DropdownSelect.Choice value="itemÉtape1.1.2">Item étape 1.1.2</DropdownSelect.Choice>
+        </DropdownSelect.Menu>
+        <DropdownSelect.Menu name="Etape 3">
+          <DropdownSelect.Choice value="itemÉtape1.1.1">Item étape 1.1.1</DropdownSelect.Choice>
+          <DropdownSelect.Choice value="itemÉtape1.1.2">Item étape 1.1.2</DropdownSelect.Choice>
+        </DropdownSelect.Menu>
+      </DropdownSelect>
+    );
+  })
   .add('with submenu', () => {
     return (
       <DropdownSelect title="Trier par">

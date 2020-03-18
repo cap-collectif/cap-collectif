@@ -1,5 +1,5 @@
 // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { css, type StyledComponent } from 'styled-components';
 import {
   LIGHT_BOX_SHADOW,
   MAIN_BORDER_RADIUS,
@@ -9,11 +9,20 @@ import colors from '~/utils/colors';
 
 export const CONTAINER_WIDTH = '300px';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Container: StyledComponent<
+  { shouldOverflow: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div`
   ${MAIN_BORDER_RADIUS};
+  ${props =>
+    props.shouldOverflow &&
+    css`
+      overflow-y: scroll;
+      max-height: 400px;
+    `};
   border: 1px solid ${colors.lightGray};
   background: ${colors.white};
-  max-height: 400px;
   max-width: ${CONTAINER_WIDTH};
   width: ${CONTAINER_WIDTH};
   position: relative;
@@ -42,6 +51,8 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 export const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
+  position: sticky;
+  top: 0;
   background: ${colors.paleGrey};
   padding: 10px;
   border-bottom: 1px solid ${colors.lightGray};

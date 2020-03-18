@@ -22,6 +22,7 @@ exports[`<FontPopover /> renders correctly 1`] = `
         type="button"
       >
         <Icon
+          color="#707070"
           name="close"
           size={10}
         />

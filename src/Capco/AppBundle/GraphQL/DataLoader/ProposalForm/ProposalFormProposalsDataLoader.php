@@ -2,23 +2,22 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
+use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\Enum\ProposalAffiliations;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Search\ProposalSearch;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Enum\ProposalAffiliations;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Search\ProposalSearch;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
@@ -38,7 +37,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         bool $debug,
         GraphQLCollector $collector,
         bool $enableCache
-    ) {
+    )
+    {
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
         parent::__construct(
@@ -64,13 +64,13 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         if ($this->debug && $this->enableCache) {
             $this->logger->info(
                 __METHOD__ .
-                    'called for keys : ' .
-                    var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
-                        true
-                    )
+                'called for keys : ' .
+                var_export(
+                    array_map(function ($key) {
+                        return $this->serializeKey($key);
+                    }, $keys),
+                    true
+                )
             );
         }
 
@@ -120,7 +120,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         Arg $args,
         $viewer,
         ?RequestStack $request
-    ): ConnectionInterface {
+    ): ConnectionInterface
+    {
         $totalCount = 0;
         $filters = [];
         list(
@@ -130,6 +131,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $affiliations,
             $direction,
             $field,
+            $filters['step'],
+            $filters['state'],
             $filters['district'],
             $filters['themes'],
             $filters['types'],
@@ -137,13 +140,15 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $filters['status'],
             $filters['trashedStatus'],
             $filters['includeDraft']
-        ) = [
+            ) = [
             $args->offsetGet('term'),
             $args->offsetGet('includeUnpublished'),
             $args->offsetGet('author'),
             $args->offsetGet('affiliations'),
             $args->offsetGet('orderBy')['direction'],
             $args->offsetGet('orderBy')['field'],
+            $args->offsetGet('step'),
+            $args->offsetGet('state'),
             $args->offsetGet('district'),
             $args->offsetGet('theme'),
             $args->offsetGet('userType'),

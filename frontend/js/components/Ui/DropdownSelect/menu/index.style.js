@@ -14,13 +14,14 @@ const SPACE_BETWEEN_SUBPANELS = '6px';
 export const ContainerInner: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   align-items: center;
-  padding-left: 20px;
   & > svg {
     margin-left: auto;
   }
 `;
 
-export const ListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div``;
+export const ListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: none;
+`;
 
 export const Container: StyledComponent<
   { pointing: DropdownSelectPointing },
@@ -70,6 +71,11 @@ export const Container: StyledComponent<
         ${MAIN_BORDER_RADIUS};
         border: 1px solid ${colors.lightGray};
         padding: 0;
+        ${props =>
+          props.pointing === 'left' &&
+          css`
+            float: right;
+          `};
       }
 
       & > ul > li {

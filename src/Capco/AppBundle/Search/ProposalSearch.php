@@ -3,14 +3,15 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
-use Elastica\Index;
-use Elastica\Query;
-use Elastica\Result;
-use Elastica\Query\Term;
-use Elastica\Query\Exists;
 use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\ProposalsState;
 use Capco\AppBundle\Enum\ProposalTrashedStatus;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Elastica\Index;
+use Elastica\Query;
+use Elastica\Query\Term;
+use Elastica\Result;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ProposalSearch extends Search
 {
@@ -43,7 +44,8 @@ class ProposalSearch extends Search
         int $seed,
         ?string $cursor,
         ?string $order = null
-    ): ElasticsearchPaginatedResult {
+    ): ElasticsearchPaginatedResult
+    {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
             $boolQuery,
@@ -51,12 +53,24 @@ class ProposalSearch extends Search
             $terms,
             'phrase_prefix'
         );
-
+        $stateTerms = [];
         $filters = $this->getFilters($providedFilters);
         foreach ($filters as $key => $value) {
-            $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            $term = new Term([$key => ['value' => $value]]);
+            if (
+                \in_array($key, ['draft', 'published', 'trashed'], true) &&
+                (isset($providedFilters['state']) &&
+                    ProposalsState::ALL === $providedFilters['state'])
+            ) {
+                $stateTerms[] = $term;
+            } else {
+                $boolQuery->addFilter($term);
+            }
         }
-        $boolQuery->addMust(new Exists('id'));
+
+        if (\count($stateTerms) > 0) {
+            $boolQuery->addFilter((new Query\BoolQuery())->addShould($stateTerms));
+        }
 
         if ('random' === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
@@ -234,6 +248,10 @@ class ProposalSearch extends Search
             }
         }
 
+        if (isset($providedFilters['step'])) {
+            $filters['step.id'] = GlobalId::fromGlobalId($providedFilters['step'])['id'];
+        }
+
         if (isset($providedFilters['selectionStep']) && !empty($providedFilters['selectionStep'])) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
             if (isset($providedFilters['status'])) {
@@ -267,6 +285,35 @@ class ProposalSearch extends Search
         }
         if (isset($providedFilters['includeDraft']) && true === $providedFilters['includeDraft']) {
             unset($filters['draft'], $filters['published']);
+        }
+
+        if (isset($providedFilters['state'])) {
+            switch ($providedFilters['state']) {
+                case ProposalsState::ALL:
+                    $filters['draft'] = true;
+                    $filters['published'] = true;
+                    $filters['trashed'] = true;
+
+                    break;
+                case ProposalsState::DRAFT:
+                    $filters['draft'] = true;
+                    $filters['published'] = false;
+                    $filters['trashed'] = false;
+
+                    break;
+                case ProposalsState::TRASHED:
+                    $filters['draft'] = false;
+                    $filters['published'] = true;
+                    $filters['trashed'] = true;
+
+                    break;
+                case ProposalsState::PUBLISHED:
+                    $filters['draft'] = false;
+                    $filters['published'] = true;
+                    $filters['trashed'] = false;
+
+                    break;
+            }
         }
 
         return $filters;

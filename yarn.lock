@@ -2270,10 +2270,10 @@
     "@babel/runtime" "^7.7.2"
     core-js "^3.4.1"
 
-"@liinkiing/react-hooks@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@liinkiing/react-hooks/-/react-hooks-1.3.3.tgz#4396bd35e0894ec29c4bbbd219e8afa2532c3983"
-  integrity sha512-o3FXpU+GGkMMC5c4CQRyctws+AlAEaq3+OUHqEMn6a6WnVWp8d3HCSsgbHTA+SpeRQBhFzZpNCkFpwwYtIoJDw==
+"@liinkiing/react-hooks@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@liinkiing/react-hooks/-/react-hooks-1.4.0.tgz#307549fef7f97095461c5a523282aba9fb06934a"
+  integrity sha512-pwzpBNrG9eAAQq7FF2BQ6/ey76o5a94hCP3Z/yKILnaC4qPeMeloHC3JG9E8q84+50wP71qt3zxgaYL1cJui9w==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

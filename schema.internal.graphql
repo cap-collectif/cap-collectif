@@ -1207,6 +1207,11 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
     """
+    The state of the proposals to filter by. If non-null, filters proposals with the given state.
+    """
+    state: ProposalsState
+
+    """
     ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
     """
     district: ID
@@ -4908,6 +4913,11 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
     """
+    The state of the proposals to filter by. If non-null, filters proposals with the given state.
+    """
+    state: ProposalsState
+
+    """
     ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
     """
     district: ID
@@ -4943,6 +4953,11 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Select also draft proposals"""
     includeDraft: Boolean = false
+
+    """
+    ID of a Step to filter by. If non-null, filters proposals with the given step.
+    """
+    step: ID
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -5689,6 +5704,11 @@ type ProposalForm implements Node & UniformResourceLocatable {
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
     """
+    The state of the proposals to filter by. If non-null, filters proposals with the given state.
+    """
+    state: ProposalsState
+
+    """
     ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
     """
     district: ID
@@ -5965,6 +5985,11 @@ interface ProposalStep {
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
     """
+    The state of the proposals to filter by. If non-null, filters proposals with the given state.
+    """
+    state: ProposalsState
+
+    """
     ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.
     """
     district: ID
@@ -6167,6 +6192,21 @@ type ProposalVoteEdge {
 input ProposalVotesOrder {
   field: VoteOrderField! = PUBLISHED_AT
   direction: OrderDirection! = DESC
+}
+
+"""Possible values to filters a list of proposals based on their state."""
+enum ProposalsState {
+  """Show all proposals"""
+  ALL
+
+  """Show only published proposals"""
+  PUBLISHED
+
+  """Show only trashed proposals"""
+  TRASHED
+
+  """Show only drafted proposals"""
+  DRAFT
 }
 
 """Entities that can be published."""
@@ -7765,6 +7805,11 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    """
+    The state of the proposals to filter by. If non-null, filters proposals with the given state.
+    """
+    state: ProposalsState
 
     """
     ID of a ProposalDistrict to filter by. If non-null, filters proposals with the given district.

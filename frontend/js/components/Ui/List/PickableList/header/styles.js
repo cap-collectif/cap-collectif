@@ -24,14 +24,11 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     max-width: ${CHECKBOX_CELL_WIDTH};
     width: ${CHECKBOX_CELL_WIDTH};
     margin-top: 0;
+    align-self: center;
   }
   & + ${/* sc-selector */ PickableListBodyContainer} {
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-  }
-  & ul {
-    list-style: none;
-    display: inline-flex;
   }
 `;

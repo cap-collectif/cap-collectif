@@ -1,124 +1,128 @@
 InternalProject:
-  type: object
-  inherits:
-    - PreviewProject
-    - UniformResourceAdminLocatable
-    - InternalWithProposals
-    - InternalPrimaryKey
-  config:
-    name: Project
-    interfaces:
-      - UniformResourceAdminLocatable
-    description: 'A participatory project.'
-    fields:
-      # Override PublicProject or PreviewProject fields
-      hasAnalysis:
-      # TODO : implement me
-        type: Boolean!
-        resolve: '@=true'
-      contributors:
-        type: 'InternalUserConnection!'
-      votes:
-        type: 'InternalVoteConnection!'
-      steps:
-        args:
-          orderBy:
-            type: 'StepOrder'
-            defaultValue: { field: POSITION, direction: ASC }
-        type: '[InternalStep!]!'
-      cover:
-        type: 'InternalMedia'
-      authors:
-        type: '[InternalUser!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\InternalProjectAuthorsResolver", [value])'
-      type:
-        type: 'InternalProjectType'
-      # Internal fields
-      metaDescription:
-        type: 'String'
-      proposals:
-        type: 'InternalProposalConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args])'
-      slug:
-        type: 'String!'
-        description: 'Slug of a project'
-      video:
-        type: 'String'
-      hasParticipativeStep:
-        type: Boolean!
-        resolve: '@=value.hasParticipativeStep(args["exceptStepId"])'
-        args:
-          exceptStepId:
-            type: 'ID'
-            description: 'If specified, get if the project is participative while excluding the specified step. It allows to know if a particular step is the only participative step in project.'
-            defaultValue: null
-      themes:
-        type: '[Theme!]'
-      votableSteps:
-        type: '[ProposalStep!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
-      visibility:
-        type: 'ProjectVisibility!'
-        description: 'The visibility of the project.'
-      adminUrl:
-        type: 'URI!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", [value])'
-      opinionCanBeFollowed:
-        type: 'Boolean!'
-        description: 'State of activation of Opinion subscription.'
-      restrictedViewers:
-        type: 'GroupConnection'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
-        description: 'Viewers that can access the project, null otherwise.'
-      districts:
-        type: 'ProjectDistrictConnection'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictResolver", [value, args])'
-        description: 'Linking table with position for district'
-      comments:
-        description: 'The comments related to the project.'
-        type: 'CommentConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCommentsResolver", [value, args])'
-        argsBuilder: 'Relay::Connection'
-        args:
-          onlyTrashed:
-            type: 'Boolean'
-            description: 'The connection will return only the trashed results.'
-            defaultValue: false
-          orderBy:
-            type: 'CommentOrder'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-      isVotesCounterDisplayable:
-        type: 'Boolean!'
-      isContributionsCounterDisplayable:
-        type: 'Boolean!'
-      isParticipantsCounterDisplayable:
-        type: 'Boolean!'
-      isExternal:
-        type: 'Boolean!'
-        description: "Whether it's an external project or not."
-      externalLink:
-        type: 'URI'
-        description: 'URL of the external project.'
-      externalContributionsCount:
-        type: 'Int'
-        description: 'Contributions count of the external project.'
-      externalParticipantsCount:
-        type: 'Int'
-        description: 'Participant count of the external project.'
-      externalVotesCount:
-        type: 'Int'
-        description: 'Vote count of the external project.'
-      opinionTerm:
-        type: 'Int!'
-        description: 'Opinion term of the project.'
-      headerType:
-        type: 'ProjectHeaderType'
-        description: "The header's format of the project."
-      coverFilterOpacityPercent:
-        type: 'Int'
-        description: 'The cover filter opacity percent value.'
-      locale:
-          type: 'Locale'
-          description: 'the locale for the project, if any'
+    type: object
+    inherits:
+        - PreviewProject
+        - UniformResourceAdminLocatable
+        - InternalWithProposals
+        - InternalPrimaryKey
+    config:
+        name: Project
+        interfaces:
+            - UniformResourceAdminLocatable
+        description: 'A participatory project.'
+        fields:
+            # Override PublicProject or PreviewProject fields
+            hasAnalysis:
+                # TODO : implement me
+                type: Boolean!
+                resolve: '@=true'
+            contributors:
+                type: 'InternalUserConnection!'
+            votes:
+                type: 'InternalVoteConnection!'
+            steps:
+                args:
+                    orderBy:
+                        type: 'StepOrder'
+                        defaultValue: { field: POSITION, direction: ASC }
+                type: '[InternalStep!]!'
+            cover:
+                type: 'InternalMedia'
+            authors:
+                type: '[InternalUser!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\InternalProjectAuthorsResolver", [value])'
+            type:
+                type: 'InternalProjectType'
+            # Internal fields
+            metaDescription:
+                type: 'String'
+            proposals:
+                type: 'InternalProposalConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args])'
+                args:
+                    step:
+                        type: 'ID'
+                        description: 'ID of a Step to filter by. If non-null, filters proposals with the given step.'
+            slug:
+                type: 'String!'
+                description: 'Slug of a project'
+            video:
+                type: 'String'
+            hasParticipativeStep:
+                type: Boolean!
+                resolve: '@=value.hasParticipativeStep(args["exceptStepId"])'
+                args:
+                    exceptStepId:
+                        type: 'ID'
+                        description: 'If specified, get if the project is participative while excluding the specified step. It allows to know if a particular step is the only participative step in project.'
+                        defaultValue: null
+            themes:
+                type: '[Theme!]'
+            votableSteps:
+                type: '[ProposalStep!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
+            visibility:
+                type: 'ProjectVisibility!'
+                description: 'The visibility of the project.'
+            adminUrl:
+                type: 'URI!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", [value])'
+            opinionCanBeFollowed:
+                type: 'Boolean!'
+                description: 'State of activation of Opinion subscription.'
+            restrictedViewers:
+                type: 'GroupConnection'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
+                description: 'Viewers that can access the project, null otherwise.'
+            districts:
+                type: 'ProjectDistrictConnection'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictResolver", [value, args])'
+                description: 'Linking table with position for district'
+            comments:
+                description: 'The comments related to the project.'
+                type: 'CommentConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCommentsResolver", [value, args])'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    onlyTrashed:
+                        type: 'Boolean'
+                        description: 'The connection will return only the trashed results.'
+                        defaultValue: false
+                    orderBy:
+                        type: 'CommentOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+            isVotesCounterDisplayable:
+                type: 'Boolean!'
+            isContributionsCounterDisplayable:
+                type: 'Boolean!'
+            isParticipantsCounterDisplayable:
+                type: 'Boolean!'
+            isExternal:
+                type: 'Boolean!'
+                description: "Whether it's an external project or not."
+            externalLink:
+                type: 'URI'
+                description: 'URL of the external project.'
+            externalContributionsCount:
+                type: 'Int'
+                description: 'Contributions count of the external project.'
+            externalParticipantsCount:
+                type: 'Int'
+                description: 'Participant count of the external project.'
+            externalVotesCount:
+                type: 'Int'
+                description: 'Vote count of the external project.'
+            opinionTerm:
+                type: 'Int!'
+                description: 'Opinion term of the project.'
+            headerType:
+                type: 'ProjectHeaderType'
+                description: "The header's format of the project."
+            coverFilterOpacityPercent:
+                type: 'Int'
+                description: 'The cover filter opacity percent value.'
+            locale:
+                type: 'Locale'
+                description: 'the locale for the project, if any'

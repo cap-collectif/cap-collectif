@@ -7,6 +7,7 @@ export const CollapsableBody: StyledComponent<{}, {}, HTMLDivElement> = styled.d
   animation: ${slideInUp} 0.2s forwards;
   position: absolute;
   top: calc(100% + 10px);
+  z-index: 100;
 `;
 
 export const Container: StyledComponent<

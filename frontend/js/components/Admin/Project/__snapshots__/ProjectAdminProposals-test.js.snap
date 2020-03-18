@@ -2,414 +2,859 @@
 
 exports[`<ProjectAdminProposals /> renders correctly when the project have proposals 1`] = `
 <Provider>
-  <ProjectAdminProposalsstyle__ProposalPickableList
-    hasMore={false}
-    loader={<ProposalListLoader />}
-    onScrollToBottom={[Function]}
-    useInfiniteScroll={true}
-  >
-    <ProjectAdminProposals__ProposalListHeaderContainer>
-      <ProposalListHeader />
-    </ProjectAdminProposals__ProposalListHeaderContainer>
-    <PickableList.Body>
-      <ProjectAdminProposalsstyle__ProposalListRow
-        key="UHJvcG9zYWw6cHJvcG9zYWwx"
-        rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
+  <ProjectAdminProposalsstyle__ProposalPickableListContainer>
+    <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+      <InlineSelect
+        onChange={[Function]}
+        value="PUBLISHED"
       >
-        <h2>
-          Ravalement de la façade de la bibliothèque municipale
-        </h2>
-        <ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <p>
-            #
-            1
-             • 
-            welcomattic
-             •
-             
-            <FormattedMessage
-              id="submited_on"
-              values={Object {}}
-            />
-             
-            <FormattedDate
-              day="numeric"
-              month="long"
-              value={"2017-01-31T23:00:00.000Z"}
-              year="numeric"
-            />
-          </p>
-          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-              Sélection
-            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-            <ProjectAdminProposalsstyle__Label
-              bsStyle="info"
+        <InlineSelect.Choice
+          value="ALL"
+        >
+          <FormattedMessage
+            id="global-all"
+            values={Object {}}
+          />
+        </InlineSelect.Choice>
+        <InlineSelect.Choice
+          value="PUBLISHED"
+        >
+          <FormattedMessage
+            id="submited_plural"
+            values={Object {}}
+          />
+        </InlineSelect.Choice>
+        <InlineSelect.Choice
+          value="DRAFT"
+        >
+          <FormattedMessage
+            id="proposal.state.draft"
+            values={Object {}}
+          />
+        </InlineSelect.Choice>
+        <InlineSelect.Choice
+          value="TRASHED"
+        >
+          <FormattedMessage
+            id="project_download.label.trashed"
+            values={Object {}}
+          />
+        </InlineSelect.Choice>
+      </InlineSelect>
+    </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+    <PickableList
+      hasMore={false}
+      loader={<ProposalListLoader />}
+      onScrollToBottom={[Function]}
+      useInfiniteScroll={true}
+    >
+      <ProjectAdminProposals__ProposalListHeaderContainer>
+        <ProposalListHeader
+          project={
+            Object {
+              "$refType": null,
+              "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+              "proposals": Object {
+                "edges": Array [
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
+                    "node": Object {
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNTAy",
+                        "username": "welcomattic",
+                      },
+                      "category": Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                      "district": Object {
+                        "id": "district1",
+                        "name": "Beauregard",
+                      },
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                      "publishedAt": "2017-02-01 00:00:00",
+                      "reference": "1",
+                      "status": Object {
+                        "color": "info",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Ravalement de la façade de la bibliothèque municipale",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwOCI7fQ==",
+                    "node": Object {
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNTIy",
+                        "username": "johnsmith",
+                      },
+                      "category": Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+                      "publishedAt": "2017-02-01 00:03:00",
+                      "reference": "12",
+                      "status": Object {
+                        "color": "success",
+                        "id": "status2",
+                        "name": "Approuvé",
+                      },
+                      "title": "Renovation of the gymnasium",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
+                    "node": Object {
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNQ==",
+                        "username": "user",
+                      },
+                      "category": Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+                      "publishedAt": "2017-02-01 00:03:00",
+                      "reference": "2",
+                      "status": Object {
+                        "color": "success",
+                        "id": "status2",
+                        "name": "Approuvé",
+                      },
+                      "title": "Rénovation du gymnase",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
+                    "node": Object {
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNTAy",
+                        "username": "welcomattic",
+                      },
+                      "category": Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                      "district": Object {
+                        "id": "district4",
+                        "name": "Beaulieu",
+                      },
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+                      "publishedAt": "2017-02-01 00:04:00",
+                      "reference": "3",
+                      "status": Object {
+                        "color": "info",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Installation de bancs sur la place de la mairie",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==",
+                    "node": Object {
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyNw==",
+                        "username": "user7",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district2",
+                        "name": "Nord Saint-Martin",
+                      },
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
+                      "publishedAt": "2017-02-01 00:04:19",
+                      "reference": "4",
+                      "status": null,
+                      "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9",
+                    "node": Object {
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district3",
+                        "name": "Maurepas Patton",
+                      },
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                      "publishedAt": "2017-02-01 00:07:00",
+                      "reference": "7",
+                      "status": Object {
+                        "color": "info",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Proposition pas encore votable",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9",
+                    "node": Object {
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": Object {
+                        "id": "district3",
+                        "name": "Maurepas Patton",
+                      },
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                      "publishedAt": "2017-02-01 00:08:00",
+                      "reference": "8",
+                      "status": Object {
+                        "color": "info",
+                        "id": "status1",
+                        "name": "En cours",
+                      },
+                      "title": "Proposition plus votable",
+                    },
+                  },
+                  Object {
+                    "cursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
+                    "node": Object {
+                      "author": Object {
+                        "id": "VXNlcjp1c2VyQWRtaW4=",
+                        "username": "admin",
+                      },
+                      "category": null,
+                      "district": null,
+                      "form": Object {
+                        "step": Object {
+                          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+                          "title": "Collecte des propositions",
+                        },
+                      },
+                      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
+                      "publishedAt": "2018-04-11 00:00:00",
+                      "reference": "1104",
+                      "status": null,
+                      "title": "Test de publication avec accusé de réception",
+                    },
+                  },
+                ],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 8,
+              },
+              "steps": Array [
+                Object {
+                  "__typename": "CollectStep",
+                  "form": Object {
+                    "categories": Array [
+                      Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                    ],
+                    "districts": Array [
+                      Object {
+                        "id": "district1",
+                        "name": "Mon beau quartier",
+                      },
+                      Object {
+                        "id": "district2",
+                        "name": "Noisyzoo",
+                      },
+                    ],
+                  },
+                  "id": "cstep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "success",
+                      "id": "status1",
+                      "name": "Approuvé",
+                    },
+                    Object {
+                      "color": "danger",
+                      "id": "status2",
+                      "name": "Rejeté",
+                    },
+                  ],
+                  "title": "Étape de dépôt",
+                },
+              ],
+            }
+          }
+        />
+      </ProjectAdminProposals__ProposalListHeaderContainer>
+      <PickableList.Body>
+        <ProjectAdminProposalsstyle__ProposalListRow
+          key="UHJvcG9zYWw6cHJvcG9zYWwx"
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
+        >
+          <h2>
+            Ravalement de la façade de la bibliothèque municipale
+          </h2>
+          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+            <p>
+              #
+              1
+               • 
+              welcomattic
+               
+              •
+               
+              <FormattedMessage
+                id="submited_on"
+                values={Object {}}
+              />
+               
+              <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2017-01-31T23:00:00.000Z"}
+                year="numeric"
+              />
+            </p>
+            <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+              <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+                Collecte des propositions
+              </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              <ProjectAdminProposalsstyle__Label
+                bsStyle="info"
+              >
+                En cours
+              </ProjectAdminProposalsstyle__Label>
+            </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+          </ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+            <Tag
+              icon="cap cap-marker-1 "
+              size="10px"
             >
-              En cours
-            </ProjectAdminProposalsstyle__Label>
-          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-        </ProjectAdminProposalsstyle__ProposalListRowInformations>
-        <ProjectAdminProposalsstyle__ProposalListRowMeta>
-          <Tag
-            icon="cap cap-marker-1 "
-            size="10px"
-          >
-            Beauregard
-          </Tag>
-          <Tag
-            icon="cap cap-tag-1 "
-            size="10px"
-          >
-            Politique
-          </Tag>
-        </ProjectAdminProposalsstyle__ProposalListRowMeta>
-      </ProjectAdminProposalsstyle__ProposalListRow>
-      <ProjectAdminProposalsstyle__ProposalListRow
-        key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
-        rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
-      >
-        <h2>
-          Renovation of the gymnasium
-        </h2>
-        <ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <p>
-            #
-            12
-             • 
-            johnsmith
-             •
-             
-            <FormattedMessage
-              id="submited_on"
-              values={Object {}}
-            />
-             
-            <FormattedDate
-              day="numeric"
-              month="long"
-              value={"2017-01-31T23:03:00.000Z"}
-              year="numeric"
-            />
-          </p>
-          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-            <ProjectAdminProposalsstyle__Label
-              bsStyle="success"
+              Beauregard
+            </Tag>
+            <Tag
+              icon="cap cap-tag-1 "
+              size="10px"
             >
-              Approuvé
-            </ProjectAdminProposalsstyle__Label>
-          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-        </ProjectAdminProposalsstyle__ProposalListRowInformations>
-        <ProjectAdminProposalsstyle__ProposalListRowMeta>
-          <Tag
-            icon="cap cap-marker-1 "
-            size="10px"
-          >
-            Nord Saint-Martin
-          </Tag>
-          <Tag
-            icon="cap cap-tag-1 "
-            size="10px"
-          >
-            Aménagement
-          </Tag>
-        </ProjectAdminProposalsstyle__ProposalListRowMeta>
-      </ProjectAdminProposalsstyle__ProposalListRow>
-      <ProjectAdminProposalsstyle__ProposalListRow
-        key="UHJvcG9zYWw6cHJvcG9zYWwy"
-        rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
-      >
-        <h2>
-          Rénovation du gymnase
-        </h2>
-        <ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <p>
-            #
-            2
-             • 
-            user
-             •
-             
-            <FormattedMessage
-              id="submited_on"
-              values={Object {}}
-            />
-             
-            <FormattedDate
-              day="numeric"
-              month="long"
-              value={"2017-01-31T23:03:00.000Z"}
-              year="numeric"
-            />
-          </p>
-          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-              Sélection
-            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-            <ProjectAdminProposalsstyle__Label
-              bsStyle="success"
+              Politique
+            </Tag>
+          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+        </ProjectAdminProposalsstyle__ProposalListRow>
+        <ProjectAdminProposalsstyle__ProposalListRow
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+        >
+          <h2>
+            Renovation of the gymnasium
+          </h2>
+          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+            <p>
+              #
+              12
+               • 
+              johnsmith
+               
+              •
+               
+              <FormattedMessage
+                id="submited_on"
+                values={Object {}}
+              />
+               
+              <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2017-01-31T23:03:00.000Z"}
+                year="numeric"
+              />
+            </p>
+            <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+              <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+                Collecte des propositions
+              </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              <ProjectAdminProposalsstyle__Label
+                bsStyle="success"
+              >
+                Approuvé
+              </ProjectAdminProposalsstyle__Label>
+            </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+          </ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+            <Tag
+              icon="cap cap-marker-1 "
+              size="10px"
             >
-              Approuvé
-            </ProjectAdminProposalsstyle__Label>
-          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-        </ProjectAdminProposalsstyle__ProposalListRowInformations>
-        <ProjectAdminProposalsstyle__ProposalListRowMeta>
-          <Tag
-            icon="cap cap-marker-1 "
-            size="10px"
-          >
-            Nord Saint-Martin
-          </Tag>
-          <Tag
-            icon="cap cap-tag-1 "
-            size="10px"
-          >
-            Aménagement
-          </Tag>
-        </ProjectAdminProposalsstyle__ProposalListRowMeta>
-      </ProjectAdminProposalsstyle__ProposalListRow>
-      <ProjectAdminProposalsstyle__ProposalListRow
-        key="UHJvcG9zYWw6cHJvcG9zYWwz"
-        rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
-      >
-        <h2>
-          Installation de bancs sur la place de la mairie
-        </h2>
-        <ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <p>
-            #
-            3
-             • 
-            welcomattic
-             •
-             
-            <FormattedMessage
-              id="submited_on"
-              values={Object {}}
-            />
-             
-            <FormattedDate
-              day="numeric"
-              month="long"
-              value={"2017-01-31T23:04:00.000Z"}
-              year="numeric"
-            />
-          </p>
-          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-              Sélection
-            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-            <ProjectAdminProposalsstyle__Label
-              bsStyle="info"
+              Nord Saint-Martin
+            </Tag>
+            <Tag
+              icon="cap cap-tag-1 "
+              size="10px"
             >
-              En cours
-            </ProjectAdminProposalsstyle__Label>
-          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-        </ProjectAdminProposalsstyle__ProposalListRowInformations>
-        <ProjectAdminProposalsstyle__ProposalListRowMeta>
-          <Tag
-            icon="cap cap-marker-1 "
-            size="10px"
-          >
-            Beaulieu
-          </Tag>
-          <Tag
-            icon="cap cap-tag-1 "
-            size="10px"
-          >
-            Politique
-          </Tag>
-        </ProjectAdminProposalsstyle__ProposalListRowMeta>
-      </ProjectAdminProposalsstyle__ProposalListRow>
-      <ProjectAdminProposalsstyle__ProposalListRow
-        key="UHJvcG9zYWw6cHJvcG9zYWw0"
-        rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
-      >
-        <h2>
-          Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
-        </h2>
-        <ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <p>
-            #
-            4
-             • 
-            user7
-             •
-             
-            <FormattedMessage
-              id="submited_on"
-              values={Object {}}
-            />
-             
-            <FormattedDate
-              day="numeric"
-              month="long"
-              value={"2017-01-31T23:04:19.000Z"}
-              year="numeric"
-            />
-          </p>
-          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState />
-        </ProjectAdminProposalsstyle__ProposalListRowInformations>
-        <ProjectAdminProposalsstyle__ProposalListRowMeta>
-          <Tag
-            icon="cap cap-marker-1 "
-            size="10px"
-          >
-            Nord Saint-Martin
-          </Tag>
-        </ProjectAdminProposalsstyle__ProposalListRowMeta>
-      </ProjectAdminProposalsstyle__ProposalListRow>
-      <ProjectAdminProposalsstyle__ProposalListRow
-        key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
-        rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
-      >
-        <h2>
-          Proposition pas encore votable
-        </h2>
-        <ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <p>
-            #
-            7
-             • 
-            admin
-             •
-             
-            <FormattedMessage
-              id="submited_on"
-              values={Object {}}
-            />
-             
-            <FormattedDate
-              day="numeric"
-              month="long"
-              value={"2017-01-31T23:07:00.000Z"}
-              year="numeric"
-            />
-          </p>
-          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-              Sélection à venir
-            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-            <ProjectAdminProposalsstyle__Label
-              bsStyle="info"
+              Aménagement
+            </Tag>
+          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+        </ProjectAdminProposalsstyle__ProposalListRow>
+        <ProjectAdminProposalsstyle__ProposalListRow
+          key="UHJvcG9zYWw6cHJvcG9zYWwy"
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
+        >
+          <h2>
+            Rénovation du gymnase
+          </h2>
+          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+            <p>
+              #
+              2
+               • 
+              user
+               
+              •
+               
+              <FormattedMessage
+                id="submited_on"
+                values={Object {}}
+              />
+               
+              <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2017-01-31T23:03:00.000Z"}
+                year="numeric"
+              />
+            </p>
+            <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+              <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+                Collecte des propositions
+              </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              <ProjectAdminProposalsstyle__Label
+                bsStyle="success"
+              >
+                Approuvé
+              </ProjectAdminProposalsstyle__Label>
+            </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+          </ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+            <Tag
+              icon="cap cap-marker-1 "
+              size="10px"
             >
-              En cours
-            </ProjectAdminProposalsstyle__Label>
-          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-        </ProjectAdminProposalsstyle__ProposalListRowInformations>
-        <ProjectAdminProposalsstyle__ProposalListRowMeta>
-          <Tag
-            icon="cap cap-marker-1 "
-            size="10px"
-          >
-            Maurepas Patton
-          </Tag>
-        </ProjectAdminProposalsstyle__ProposalListRowMeta>
-      </ProjectAdminProposalsstyle__ProposalListRow>
-      <ProjectAdminProposalsstyle__ProposalListRow
-        key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
-        rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
-      >
-        <h2>
-          Proposition plus votable
-        </h2>
-        <ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <p>
-            #
-            8
-             • 
-            admin
-             •
-             
-            <FormattedMessage
-              id="submited_on"
-              values={Object {}}
-            />
-             
-            <FormattedDate
-              day="numeric"
-              month="long"
-              value={"2017-01-31T23:08:00.000Z"}
-              year="numeric"
-            />
-          </p>
-          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-            <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-              Fermée
-            </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
-            <ProjectAdminProposalsstyle__Label
-              bsStyle="info"
+              Nord Saint-Martin
+            </Tag>
+            <Tag
+              icon="cap cap-tag-1 "
+              size="10px"
             >
-              En cours
-            </ProjectAdminProposalsstyle__Label>
-          </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-        </ProjectAdminProposalsstyle__ProposalListRowInformations>
-        <ProjectAdminProposalsstyle__ProposalListRowMeta>
-          <Tag
-            icon="cap cap-marker-1 "
-            size="10px"
-          >
-            Maurepas Patton
-          </Tag>
-        </ProjectAdminProposalsstyle__ProposalListRowMeta>
-      </ProjectAdminProposalsstyle__ProposalListRow>
-      <ProjectAdminProposalsstyle__ProposalListRow
-        key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
-        rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
-      >
-        <h2>
-          Test de publication avec accusé de réception
-        </h2>
-        <ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <p>
-            #
-            1104
-             • 
-            admin
-             •
-             
-            <FormattedMessage
-              id="submited_on"
-              values={Object {}}
-            />
-             
-            <FormattedDate
-              day="numeric"
-              month="long"
-              value={"2018-04-10T22:00:00.000Z"}
-              year="numeric"
-            />
-          </p>
-          <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState />
-        </ProjectAdminProposalsstyle__ProposalListRowInformations>
-        <ProjectAdminProposalsstyle__ProposalListRowMeta />
-      </ProjectAdminProposalsstyle__ProposalListRow>
-    </PickableList.Body>
-  </ProjectAdminProposalsstyle__ProposalPickableList>
+              Aménagement
+            </Tag>
+          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+        </ProjectAdminProposalsstyle__ProposalListRow>
+        <ProjectAdminProposalsstyle__ProposalListRow
+          key="UHJvcG9zYWw6cHJvcG9zYWwz"
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
+        >
+          <h2>
+            Installation de bancs sur la place de la mairie
+          </h2>
+          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+            <p>
+              #
+              3
+               • 
+              welcomattic
+               
+              •
+               
+              <FormattedMessage
+                id="submited_on"
+                values={Object {}}
+              />
+               
+              <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2017-01-31T23:04:00.000Z"}
+                year="numeric"
+              />
+            </p>
+            <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+              <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+                Collecte des propositions
+              </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              <ProjectAdminProposalsstyle__Label
+                bsStyle="info"
+              >
+                En cours
+              </ProjectAdminProposalsstyle__Label>
+            </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+          </ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+            <Tag
+              icon="cap cap-marker-1 "
+              size="10px"
+            >
+              Beaulieu
+            </Tag>
+            <Tag
+              icon="cap cap-tag-1 "
+              size="10px"
+            >
+              Politique
+            </Tag>
+          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+        </ProjectAdminProposalsstyle__ProposalListRow>
+        <ProjectAdminProposalsstyle__ProposalListRow
+          key="UHJvcG9zYWw6cHJvcG9zYWw0"
+          rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
+        >
+          <h2>
+            Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
+          </h2>
+          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+            <p>
+              #
+              4
+               • 
+              user7
+               
+              •
+               
+              <FormattedMessage
+                id="submited_on"
+                values={Object {}}
+              />
+               
+              <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2017-01-31T23:04:19.000Z"}
+                year="numeric"
+              />
+            </p>
+            <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+              <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+                Collecte des propositions
+              </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+            </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+          </ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+            <Tag
+              icon="cap cap-marker-1 "
+              size="10px"
+            >
+              Nord Saint-Martin
+            </Tag>
+          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+        </ProjectAdminProposalsstyle__ProposalListRow>
+        <ProjectAdminProposalsstyle__ProposalListRow
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+        >
+          <h2>
+            Proposition pas encore votable
+          </h2>
+          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+            <p>
+              #
+              7
+               • 
+              admin
+               
+              •
+               
+              <FormattedMessage
+                id="submited_on"
+                values={Object {}}
+              />
+               
+              <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2017-01-31T23:07:00.000Z"}
+                year="numeric"
+              />
+            </p>
+            <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+              <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+                Collecte des propositions
+              </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              <ProjectAdminProposalsstyle__Label
+                bsStyle="info"
+              >
+                En cours
+              </ProjectAdminProposalsstyle__Label>
+            </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+          </ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+            <Tag
+              icon="cap cap-marker-1 "
+              size="10px"
+            >
+              Maurepas Patton
+            </Tag>
+          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+        </ProjectAdminProposalsstyle__ProposalListRow>
+        <ProjectAdminProposalsstyle__ProposalListRow
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+        >
+          <h2>
+            Proposition plus votable
+          </h2>
+          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+            <p>
+              #
+              8
+               • 
+              admin
+               
+              •
+               
+              <FormattedMessage
+                id="submited_on"
+                values={Object {}}
+              />
+               
+              <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2017-01-31T23:08:00.000Z"}
+                year="numeric"
+              />
+            </p>
+            <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+              <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+                Collecte des propositions
+              </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+              <ProjectAdminProposalsstyle__Label
+                bsStyle="info"
+              >
+                En cours
+              </ProjectAdminProposalsstyle__Label>
+            </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+          </ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+            <Tag
+              icon="cap cap-marker-1 "
+              size="10px"
+            >
+              Maurepas Patton
+            </Tag>
+          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+        </ProjectAdminProposalsstyle__ProposalListRow>
+        <ProjectAdminProposalsstyle__ProposalListRow
+          key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+        >
+          <h2>
+            Test de publication avec accusé de réception
+          </h2>
+          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+            <p>
+              #
+              1104
+               • 
+              admin
+               
+              •
+               
+              <FormattedMessage
+                id="submited_on"
+                values={Object {}}
+              />
+               
+              <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2018-04-10T22:00:00.000Z"}
+                year="numeric"
+              />
+            </p>
+            <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+              <ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+                Collecte des propositions
+              </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
+            </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
+          </ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <ProjectAdminProposalsstyle__ProposalListRowMeta />
+        </ProjectAdminProposalsstyle__ProposalListRow>
+      </PickableList.Body>
+    </PickableList>
+  </ProjectAdminProposalsstyle__ProposalPickableListContainer>
 </Provider>
 `;
 
 exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when the project does not have any proposals 1`] = `
 <Provider>
-  <ProjectAdminProposalsstyle__ProposalPickableList
-    hasMore={false}
-    loader={<ProposalListLoader />}
-    onScrollToBottom={[Function]}
-    useInfiniteScroll={false}
-  >
-    <ProjectAdminProposals__ProposalListHeaderContainer>
-      <ProposalListHeader />
-    </ProjectAdminProposals__ProposalListHeaderContainer>
-    <PickableList.Body>
-      <ProjectAdminProposalsstyle__ProposalListNoContributions>
-        <ProjectAdminProposalsstyle__NoContributionIcon />
-        <FormattedMessage
-          id="global.no_proposals"
-          tagName="p"
-          values={Object {}}
+  <ProjectAdminProposalsstyle__ProposalPickableListContainer>
+    <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+      <InlineSelect
+        onChange={[Function]}
+        value="PUBLISHED"
+      >
+        <InlineSelect.Choice
+          value="ALL"
+        >
+          <FormattedMessage
+            id="global-all"
+            values={Object {}}
+          />
+        </InlineSelect.Choice>
+        <InlineSelect.Choice
+          value="PUBLISHED"
+        >
+          <FormattedMessage
+            id="submited_plural"
+            values={Object {}}
+          />
+        </InlineSelect.Choice>
+        <InlineSelect.Choice
+          value="DRAFT"
+        >
+          <FormattedMessage
+            id="proposal.state.draft"
+            values={Object {}}
+          />
+        </InlineSelect.Choice>
+        <InlineSelect.Choice
+          value="TRASHED"
+        >
+          <FormattedMessage
+            id="project_download.label.trashed"
+            values={Object {}}
+          />
+        </InlineSelect.Choice>
+      </InlineSelect>
+    </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
+    <PickableList
+      hasMore={false}
+      loader={<ProposalListLoader />}
+      onScrollToBottom={[Function]}
+      useInfiniteScroll={false}
+    >
+      <ProjectAdminProposals__ProposalListHeaderContainer>
+        <ProposalListHeader
+          project={
+            Object {
+              "$refType": null,
+              "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+              "proposals": Object {
+                "edges": Array [],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 0,
+              },
+              "steps": Array [
+                Object {
+                  "__typename": "CollectStep",
+                  "form": Object {
+                    "categories": Array [
+                      Object {
+                        "id": "pCategory1",
+                        "name": "Aménagement",
+                      },
+                      Object {
+                        "id": "pCategory2",
+                        "name": "Politique",
+                      },
+                    ],
+                    "districts": Array [
+                      Object {
+                        "id": "district1",
+                        "name": "Mon beau quartier",
+                      },
+                      Object {
+                        "id": "district2",
+                        "name": "Noisyzoo",
+                      },
+                    ],
+                  },
+                  "id": "cstep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "success",
+                      "id": "status1",
+                      "name": "Approuvé",
+                    },
+                    Object {
+                      "color": "danger",
+                      "id": "status2",
+                      "name": "Rejeté",
+                    },
+                  ],
+                  "title": "Étape de dépôt",
+                },
+              ],
+            }
+          }
         />
-      </ProjectAdminProposalsstyle__ProposalListNoContributions>
-    </PickableList.Body>
-  </ProjectAdminProposalsstyle__ProposalPickableList>
+      </ProjectAdminProposals__ProposalListHeaderContainer>
+      <PickableList.Body>
+        <ProjectAdminProposalsstyle__ProposalListNoContributions>
+          <ProjectAdminProposalsstyle__NoContributionIcon />
+          <FormattedMessage
+            id="global.no_proposals"
+            tagName="p"
+            values={Object {}}
+          />
+        </ProjectAdminProposalsstyle__ProposalListNoContributions>
+      </PickableList.Body>
+    </PickableList>
+  </ProjectAdminProposalsstyle__ProposalPickableListContainer>
 </Provider>
 `;

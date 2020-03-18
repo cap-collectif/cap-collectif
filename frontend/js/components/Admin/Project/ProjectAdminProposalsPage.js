@@ -27,6 +27,11 @@ const createQueryVariables = (
     field: 'PUBLISHED_AT',
     direction: parameters.sort === 'newest' ? 'DESC' : 'ASC',
   },
+  state: parameters.filters.state,
+  category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
+  district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
+  step: parameters.filters.step === 'ALL' ? null : parameters.filters.step,
+  status: parameters.filters.status,
 });
 
 const ProjectAdminProposalsPage = ({ projectId }: Props) => {
@@ -40,10 +45,25 @@ const ProjectAdminProposalsPage = ({ projectId }: Props) => {
           $count: Int!
           $cursor: String
           $orderBy: ProposalOrder!
+          $state: ProposalsState!
+          $category: ID
+          $district: ID
+          $status: ID
+          $step: ID
         ) {
           project: node(id: $projectId) {
             ...ProjectAdminProposalsView_project
-              @arguments(projectId: $projectId, count: $count, cursor: $cursor, orderBy: $orderBy)
+              @arguments(
+                projectId: $projectId
+                count: $count
+                cursor: $cursor
+                orderBy: $orderBy
+                state: $state
+                category: $category
+                district: $district
+                status: $status
+                step: $step
+              )
           }
         }
       `}

@@ -1,21 +1,121 @@
 // @flow
 
-export type SortValues = 'oldest' | 'newest'
+import type { Uuid } from '~/types';
 
-export type ParametersState = {
-  sort: SortValues
-};
+export type SortValues = 'oldest' | 'newest';
+
+export type ProposalsStateValues = 'ALL' | 'PUBLISHED' | 'TRASHED' | 'DRAFT';
+
+export type ProposalsCategoryValues = 'ALL' | Uuid;
+
+export type ProposalsDistrictValues = 'ALL' | Uuid;
+
+export type ProposalsStepValues = 'ALL' | Uuid;
+
+export type Filters = {|
+  +state: ProposalsStateValues,
+  +category: ProposalsCategoryValues,
+  +district: ProposalsDistrictValues,
+  +step: ProposalsStepValues,
+  +status: ?string,
+|};
+
+export type ParametersState = {|
+  +sort: SortValues,
+  +filters: Filters,
+|};
 
 export type Action =
   | { type: 'CHANGE_SORT', payload: SortValues }
+  | { type: 'CHANGE_STATUS_FILTER', payload: ?string }
+  | { type: 'CLEAR_STATUS_FILTER' }
+  | { type: 'CHANGE_STEP_FILTER', payload: ProposalsStepValues }
+  | { type: 'CLEAR_STEP_FILTER' }
+  | { type: 'CHANGE_CATEGORY_FILTER', payload: ProposalsCategoryValues }
+  | { type: 'CLEAR_CATEGORY_FILTER' }
+  | { type: 'CHANGE_DISTRICT_FILTER', payload: ProposalsDistrictValues }
+  | { type: 'CLEAR_DISTRICT_FILTER' }
+  | { type: 'CHANGE_STATE_FILTER', payload: ProposalsStateValues };
 
 export const createReducer = (state: ParametersState, action: Action) => {
   switch (action.type) {
+    case 'CHANGE_STATE_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          state: action.payload,
+        },
+      };
+    case 'CHANGE_CATEGORY_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          category: action.payload,
+        },
+      };
+    case 'CLEAR_CATEGORY_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          category: 'ALL',
+        },
+      };
+    case 'CHANGE_STEP_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          step: action.payload,
+        },
+      };
+    case 'CLEAR_STEP_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          step: 'ALL',
+        },
+      };
+    case 'CHANGE_DISTRICT_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          district: action.payload,
+        },
+      };
+    case 'CLEAR_DISTRICT_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          district: 'ALL',
+        },
+      };
+    case 'CHANGE_STATUS_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          status: action.payload,
+        },
+      };
+    case 'CLEAR_STATUS_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          status: null,
+        },
+      };
     case 'CHANGE_SORT':
       return {
         ...state,
-        sort: action.payload
-      }
+        sort: action.payload,
+      };
     default:
       throw new Error(`Unknown action : ${action.type}`);
   }

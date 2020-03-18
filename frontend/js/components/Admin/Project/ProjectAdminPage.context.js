@@ -6,8 +6,17 @@ import {
   type ParametersState,
   type SortValues,
 } from './ProjectAdminPage.reducer';
+import type { Filters } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 
 const DEFAULT_SORT: SortValues = 'newest';
+
+const DEFAULT_FILTERS: Filters = {
+  state: 'PUBLISHED',
+  category: 'ALL',
+  district: 'ALL',
+  step: 'ALL',
+  status: null,
+};
 
 type ProviderProps = {|
   +children: React.Node,
@@ -21,6 +30,7 @@ export type Context = {|
 export const ProjectAdminPageContext = React.createContext<Context>({
   parameters: {
     sort: DEFAULT_SORT,
+    filters: DEFAULT_FILTERS,
   },
   dispatch: () => {},
 });
@@ -38,6 +48,7 @@ export const useProjectAdminProposalsContext = (): Context => {
 export const ProjectAdminProposalsProvider = ({ children }: ProviderProps) => {
   const [parameters, dispatch] = React.useReducer<ParametersState, Action>(createReducer, {
     sort: DEFAULT_SORT,
+    filters: DEFAULT_FILTERS,
   });
   const context = React.useMemo(
     () => ({

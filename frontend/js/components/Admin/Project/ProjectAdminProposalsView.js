@@ -10,31 +10,43 @@ type Props = {|
   +project: ProjectAdminProposalsView_project,
 |};
 
-
 const ProjectAdminProposalsView = ({ project }: Props) => {
-  return (
-    <ProjectAdminProposals project={project}/>
-  );
+  return <ProjectAdminProposals project={project} />;
 };
 
 export default createRefetchContainer(
   ProjectAdminProposalsView,
   {
     project: graphql`
-      fragment ProjectAdminProposalsView_project on Project @argumentDefinitions(
-        projectId: { type: "ID!" }
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
-      ) {
-        ...ProjectAdminProposals_project @arguments(
-          projectId: $projectId
-          count: $count
-          cursor: $cursor
-          orderBy: $orderBy
-        )
+      fragment ProjectAdminProposalsView_project on Project
+        @argumentDefinitions(
+          projectId: { type: "ID!" }
+          count: { type: "Int!" }
+          cursor: { type: "String" }
+          orderBy: {
+            type: "ProposalOrder!"
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          }
+          state: { type: "ProposalsState!", defaultValue: ALL }
+          category: { type: "ID", defaultValue: null }
+          district: { type: "ID", defaultValue: null }
+          status: { type: "ID", defaultValue: null }
+          step: { type: "ID", defaultValue: null }
+        ) {
+        ...ProjectAdminProposals_project
+          @arguments(
+            projectId: $projectId
+            count: $count
+            cursor: $cursor
+            orderBy: $orderBy
+            state: $state
+            category: $category
+            district: $district
+            status: $status
+            step: $step
+          )
       }
-    `
+    `,
   },
   graphql`
     query ProjectAdminProposalsViewRefetchQuery(
@@ -42,17 +54,26 @@ export default createRefetchContainer(
       $count: Int!
       $cursor: String
       $orderBy: ProposalOrder!
+      $state: ProposalsState!
+      $category: ID
+      $district: ID
+      $status: ID
+      $step: ID
     ) {
       project: node(id: $projectId) {
-        id
         ...ProjectAdminProposals_project
-        @arguments(
-          projectId: $projectId
-          count: $count
-          cursor: $cursor
-          orderBy: $orderBy
-        )
+          @arguments(
+            projectId: $projectId
+            count: $count
+            cursor: $cursor
+            orderBy: $orderBy
+            state: $state
+            category: $category
+            district: $district
+            status: $status
+            step: $step
+          )
       }
     }
-  `
+  `,
 );

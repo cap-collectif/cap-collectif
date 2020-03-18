@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectAdminProposals utils functions should get a correctly formatted categories choices for a given project 1`] = `
+Array [
+  Object {
+    "id": "pCategory1",
+    "name": "Aménagement",
+  },
+  Object {
+    "id": "pCategory2",
+    "name": "Politique",
+  },
+]
+`;
+
+exports[`ProjectAdminProposals utils functions should get a correctly formatted districts choices for a given project 1`] = `
+Array [
+  Object {
+    "id": "district1",
+    "name": "Mon beau quartier",
+  },
+  Object {
+    "id": "district2",
+    "name": "Noisyzoo",
+  },
+]
+`;
+
+exports[`ProjectAdminProposals utils functions should get a correctly formatted step statuses choices for a given project 1`] = `
+Array [
+  Object {
+    "id": "cstep1",
+    "statuses": Array [
+      Object {
+        "color": "primary",
+        "id": "status1",
+        "name": "Approuvé",
+      },
+      Object {
+        "color": "danger",
+        "id": "status2",
+        "name": "Rejeté",
+      },
+    ],
+    "title": "Étape de dépôt",
+  },
+]
+`;
+
+exports[`ProjectAdminProposals utils functions should get a correctly formatted steps choices for a given project 1`] = `
+Array [
+  Object {
+    "id": "cstep1",
+    "title": "Étape de dépôt",
+  },
+]
+`;

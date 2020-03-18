@@ -72,6 +72,7 @@ type Props = {|
   width?: string,
   className?: string,
   viewBox?: string,
+  onClick?: () => void,
 |};
 
 const getIcon = name => {

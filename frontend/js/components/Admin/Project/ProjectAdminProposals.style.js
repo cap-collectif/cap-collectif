@@ -1,13 +1,18 @@
 // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { css, type StyledComponent } from 'styled-components';
 import { Label as BSLabel } from 'react-bootstrap';
 import PickableList from '~ui/List/PickableList';
-import colors from '~/utils/colors';
+import colors, { BsStyleColors } from '~/utils/colors';
+import { pxToRem } from '~/utils/styles/mixins';
+import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
-export const ProposalPickableList: StyledComponent<{}, {}, typeof PickableList> = styled(
-  PickableList,
-)`
+export const ProposalPickableListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   margin: 0 2rem 2rem 2rem;
+`;
+
+export const ProjectAdminProposalsHeader: StyledComponent<{}, {}, HTMLElement> = styled.header`
+  display: flex;
+  margin: ${pxToRem(6)} 0;
 `;
 
 export const ProposalListRow: StyledComponent<{}, {}, typeof PickableList.Row> = styled(
@@ -99,6 +104,50 @@ export const ProposalListLoader: StyledComponent<{}, {}, HTMLDivElement> = style
     width: auto;
     & > div {
       margin: 0 2rem 0 0;
+    }
+  }
+`;
+
+export const FilterContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+export const FilterTagContainer: StyledComponent<
+  { bgColor?: string },
+  {},
+  HTMLDivElement,
+> = styled.div`
+  ${MAIN_BORDER_RADIUS};
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  height: 22px;
+  display: flex;
+  color: ${colors.white};
+  padding: 0.25rem 0.75rem;
+  align-items: baseline;
+  ${props =>
+    props.bgColor
+      ? css`
+          background: ${BsStyleColors[props.bgColor] || colors.primaryColor};
+        `
+      : css`
+          background: ${colors.darkGray};
+        `}
+  & > span {
+    max-width: 120px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-height: 16px;
+    overflow: hidden;
+  }
+  & > svg.close-icon {
+    color: inherit;
+    margin-left: 6px;
+    &:hover {
+      cursor: pointer;
     }
   }
 `;
