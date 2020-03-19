@@ -428,6 +428,13 @@ InternalMutation:
                     inputType: UpdateRegistrationFormQuestionsInput
                     payloadType: UpdateRegistrationFormQuestionsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRegistrationFormQuestionsMutation", [value])'
+            updateRegistrationFormCommunication:
+                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateRegistrationFormCommunicationInput
+                    payloadType: UpdateRegistrationFormCommunicationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRegistrationFormCommunicationMutation", [value])'
             # Proposal Form
             createProposalForm:
                 access: "@=hasRole('ROLE_ADMIN')"

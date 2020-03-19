@@ -20,9 +20,13 @@ InternalRegistrationForm:
       topText:
         description: 'The bottom text to display'
         type: 'String'
+        argsBuilder: 'Translatable::Field'
+        resolve: '@=value.getTopText(args["locale"])'
       bottomText:
         description: 'The bottom text to display'
         type: 'String'
+        argsBuilder: 'Translatable::Field'
+        resolve: '@=value.getBottomText(args["locale"])'
       domains:
         description: 'A whitelist of authorized domains that can register'
         type: '[InternalEmailDomain!]'
@@ -33,3 +37,5 @@ InternalRegistrationForm:
       isIndexationDone:
         type: 'Boolean!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
+      translations:
+        type: '[InternalRegistrationFormTranslation!]!'

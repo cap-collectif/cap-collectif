@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationFormCommunication /> renders correctly 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-content box-content__content-form"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <RegistrationFormCommunication__Title>
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="communication"
+            values={Object {}}
+          />
+        </h3>
+        <span
+          className="mr-30 mt-15"
+        />
+      </RegistrationFormCommunication__Title>
+      <Field
+        component={[Function]}
+        id="display-message-above-form"
+        name="topTextDisplayed"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="registration.admin.topText"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        name="topText"
+        type="admin-editor"
+      />
+      <Field
+        component={[Function]}
+        id="display-message-below-form"
+        name="bottomTextDisplayed"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="registration.admin.bottomText"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        name="bottomText"
+        type="admin-editor"
+      />
+      <div
+        className="box-content__toolbar btn-toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          className="btn btn-primary"
+          disabled={false}
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+        />
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`<RegistrationFormCommunication /> renders correctly with multilangue 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-content box-content__content-form"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <RegistrationFormCommunication__Title>
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="communication"
+            values={Object {}}
+          />
+        </h3>
+        <span
+          className="mr-30 mt-15"
+        />
+      </RegistrationFormCommunication__Title>
+      <Field
+        component={[Function]}
+        id="display-message-above-form"
+        name="topTextDisplayed"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="registration.admin.topText"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        name="topText"
+        type="admin-editor"
+      />
+      <Field
+        component={[Function]}
+        id="display-message-below-form"
+        name="bottomTextDisplayed"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="registration.admin.bottomText"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        name="bottomText"
+        type="admin-editor"
+      />
+      <div
+        className="box-content__toolbar btn-toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          className="btn btn-primary"
+          disabled={false}
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+        />
+      </div>
+    </form>
+  </div>
+</div>
+`;

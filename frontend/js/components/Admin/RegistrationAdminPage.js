@@ -8,13 +8,13 @@ import Toggle from 'react-toggle';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import { toggleFeature } from '../../redux/modules/default';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
-import RegistrationCommunicationForm from './RegistrationCommunicationForm';
 import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import RegistrationFormQuestions from './RegistrationFormQuestions';
 import AdvancedSection from './Registration/AdvancedSection';
 import type { RegistrationAdminPage_query } from '~relay/RegistrationAdminPage_query.graphql';
 import type { RegistrationAdminPageQueryResponse } from '~relay/RegistrationAdminPageQuery.graphql';
+import RegistrationFormCommunication from "~/components/Admin/RegistrationFormCommunication";
 
 export type Props = {|
   features: FeatureToggles,
@@ -23,7 +23,7 @@ export type Props = {|
   query: RegistrationAdminPage_query,
 |};
 
-const dynamicFieldsComponent = ({
+const renderQuestions = ({
   error,
   props,
   retry,
@@ -52,19 +52,49 @@ const dynamicFieldsComponent = ({
   return <Loader />;
 };
 
+const renderCommunication = ({
+  error,
+  props,
+}: {
+  ...ReactRelayReadyState,
+  props: ?RegistrationAdminPageQueryResponse,
+}) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
+  }
+  if (props) {
+    if (props.registrationForm) {
+      return <RegistrationFormCommunication {...props} />;
+    }
+    return graphqlError;
+  }
+  return <Loader />;
+};
+
+const registrationAdminQuestionsAndCommunicationQuery = graphql`
+  query RegistrationAdminPageQuery {
+    registrationForm {
+      ...RegistrationFormQuestions_registrationForm
+      ...RegistrationFormCommunication_registrationForm
+      ... on RegistrationForm {
+        isIndexationDone
+      }
+    }
+  }
+`;
+
 export class RegistrationAdminPage extends React.Component<Props> {
   render() {
     const { isSuperAdmin, onToggle, features, query } = this.props;
     return (
       <>
-        <div className="box box-primary container-fluid">
-          <div className="box-content box-content__content-form">
-            <h3 className="box-title">
-              <FormattedMessage id="communication" />
-            </h3>
-            <RegistrationCommunicationForm />
-          </div>
-        </div>
+        <QueryRenderer
+          query={registrationAdminQuestionsAndCommunicationQuery}
+          environment={environment}
+          variables={{}}
+          render={renderCommunication}
+        />
 
         <div className="box box-primary container-fluid">
           <div className="box-content box-content__content-form">
@@ -136,19 +166,10 @@ export class RegistrationAdminPage extends React.Component<Props> {
                   </strong>
                 </p>
                 <QueryRenderer
-                  query={graphql`
-                    query RegistrationAdminPageQuery {
-                      registrationForm {
-                        ...RegistrationFormQuestions_registrationForm
-                        ... on RegistrationForm {
-                          isIndexationDone
-                        }
-                      }
-                    }
-                  `}
+                  query={registrationAdminQuestionsAndCommunicationQuery}
                   environment={environment}
                   variables={{}}
-                  render={dynamicFieldsComponent}
+                  render={renderQuestions}
                 />
               </Well>
             )}

@@ -4,3 +4,4 @@ UpdateRegistrationFormQuestionsInput:
     fields:
       questions:
         type: '[QuestionnaireAbstractQuestionInput!]'
+

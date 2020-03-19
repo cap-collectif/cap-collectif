@@ -1,0 +1,12 @@
+UpdateRegistrationFormCommunicationInput:
+  type: relay-mutation-input
+  config:
+    fields:
+      translations:
+        type: '[RegistrationFormCommunicationTranslation!]'
+      topTextDisplayed:
+        type: 'Boolean'
+      bottomTextDisplayed:
+          type: 'Boolean'
+
+

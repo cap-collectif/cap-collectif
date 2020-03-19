@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\RegistrationFormTranslation:
+  registrationFormFR:
+    id: 'registrationFormFR'
+    translatable: '@registrationForm'
+    locale: 'fr-FR'
+    bottomText: ''
+    topText: ''

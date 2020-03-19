@@ -3990,6 +3990,7 @@ type Mutation {
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
   updateRegistrationForm(input: UpdateRegistrationFormQuestionsInput!): UpdateRegistrationFormQuestionsPayload
+  updateRegistrationFormCommunication(input: UpdateRegistrationFormCommunicationInput!): UpdateRegistrationFormCommunicationPayload
   createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
   changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
@@ -7043,10 +7044,16 @@ type RegistrationForm implements Node {
   topTextDisplayed: Boolean!
 
   """The bottom text to display"""
-  topText: String
+  topText(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String
 
   """The bottom text to display"""
-  bottomText: String
+  bottomText(
+    """The locale to translate content (eg: fr-FR)."""
+    locale: TranslationLocale
+  ): String
 
   """A whitelist of authorized domains that can register"""
   domains: [EmailDomain!]
@@ -7054,6 +7061,30 @@ type RegistrationForm implements Node {
   """The available questions"""
   questions: [Question!]!
   isIndexationDone: Boolean!
+  translations: [RegistrationFormTranslation!]!
+}
+
+input RegistrationFormCommunicationInput {
+  """The locale of the translation"""
+  locale: String!
+
+  """The bottom text to display"""
+  topText: String
+
+  """The bottom text to display"""
+  bottomText: String
+}
+
+"""translation of the registration form"""
+type RegistrationFormTranslation {
+  """The locale of the translation"""
+  locale: String!
+
+  """The bottom text to display"""
+  topText: String
+
+  """The bottom text to display"""
+  bottomText: String
 }
 
 input RemoveArgumentVoteInput {
@@ -9208,6 +9239,18 @@ input UpdateQuestionnaireParametersInput {
 
 type UpdateQuestionnaireParametersPayload {
   questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateRegistrationFormCommunicationInput {
+  translations: [RegistrationFormCommunicationInput!]
+  topTextDisplayed: Boolean
+  bottomTextDisplayed: Boolean
+  clientMutationId: String
+}
+
+type UpdateRegistrationFormCommunicationPayload {
+  registrationForm: RegistrationForm
   clientMutationId: String
 }
 

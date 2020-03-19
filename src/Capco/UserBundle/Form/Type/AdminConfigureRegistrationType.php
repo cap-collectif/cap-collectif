@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Form\TranslationCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,6 +14,9 @@ class AdminConfigureRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('translations', TranslationCollectionType::class, [
+                'fields' => ['id', 'locale', 'topText', 'bottomText']
+            ])
             ->add('domains', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => true,
@@ -23,7 +27,8 @@ class AdminConfigureRegistrationType extends AbstractType
             ->add('bottomTextDisplayed', null, ['required' => false])
             ->add('bottomText', null, ['required' => false])
             ->add('topTextDisplayed', null, ['required' => false])
-            ->add('topText', null, ['required' => false]);
+            ->add('topText', null, ['required' => false])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

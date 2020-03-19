@@ -2,23 +2,12 @@
 
 exports[`<RegistrationAdminPage /> renders correctly 1`] = `
 <Fragment>
-  <div
-    className="box box-primary container-fluid"
-  >
-    <div
-      className="box-content box-content__content-form"
-    >
-      <h3
-        className="box-title"
-      >
-        <FormattedMessage
-          id="communication"
-          values={Object {}}
-        />
-      </h3>
-      <Connect(ReduxForm) />
-    </div>
-  </div>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={Object {}}
+  />
   <div
     className="box box-primary container-fluid"
   >
@@ -246,23 +235,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
 
 exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = `
 <Fragment>
-  <div
-    className="box box-primary container-fluid"
-  >
-    <div
-      className="box-content box-content__content-form"
-    >
-      <h3
-        className="box-title"
-      >
-        <FormattedMessage
-          id="communication"
-          values={Object {}}
-        />
-      </h3>
-      <Connect(ReduxForm) />
-    </div>
-  </div>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={[Function]}
+    render={[Function]}
+    variables={Object {}}
+  />
   <div
     className="box box-primary container-fluid"
   >

@@ -4,6 +4,10 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,9 +17,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="registration_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RegistrationFormRepository")
  */
-class RegistrationForm implements QuestionnableForm
+class RegistrationForm implements QuestionnableForm, SonataTranslatableInterface, Translatable
 {
     use UuidTrait;
+    use SonataTranslatableTrait;
+    use TranslatableTrait;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="registrationForm", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -37,16 +43,6 @@ class RegistrationForm implements QuestionnableForm
      * @ORM\Column(name="top_text_displayed", type="boolean", nullable=false)
      */
     private $topTextDisplayed = false;
-
-    /**
-     * @ORM\Column(name="top_text", type="text")
-     */
-    private $topText = '';
-
-    /**
-     * @ORM\Column(name="bottom_text", type="text")
-     */
-    private $bottomText;
 
     public function __construct()
     {
@@ -77,28 +73,28 @@ class RegistrationForm implements QuestionnableForm
         return $this;
     }
 
-    public function setTopText(string $topText = null)
+    public function setTopText(string $topText = null): self
     {
-        $this->topText = $topText;
+        $this->translate(null, false)->setTopText($topText);
 
         return $this;
     }
 
-    public function getTopText(): string
+    public function getTopText(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->topText;
+        return $this->translate($locale, $fallbackToDefault)->getTopText();
     }
 
-    public function setBottomText(string $bottomText = null)
+    public function setBottomText(string $bottomText = null): self
     {
-        $this->bottomText = $bottomText;
+        $this->translate(null, false)->setBottomText($bottomText);
 
         return $this;
     }
 
-    public function getBottomText(): string
+    public function getBottomText(?string $locale = null, ?bool $fallbackToDefault = false): ?string
     {
-        return $this->bottomText;
+        return $this->translate($locale, $fallbackToDefault)->getBottomText();
     }
 
     public function getRealQuestions(): Collection
@@ -181,4 +177,10 @@ class RegistrationForm implements QuestionnableForm
 
         return $this;
     }
+
+    public static function getTranslationEntityClass(): string
+    {
+        return RegistrationFormTranslation::class;
+    }
+
 }

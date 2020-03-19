@@ -20,6 +20,6 @@ class RegistrationScriptQueryResolver implements ResolverInterface
             'keyname' => SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME
         ]);
 
-        return $codeParameter ? $codeParameter->getValue() : '';
+        return $codeParameter ? (string) $codeParameter->getValue() : '';
     }
 }
