@@ -101,11 +101,15 @@ class UpdateProposalFormMutation implements MutationInterface
             foreach ($arguments['districts'] as $districtKey => $dataDistrict) {
                 if (isset($dataDistrict['translations'])) {
                     foreach ($dataDistrict['translations'] as $translation) {
-                        $arguments['districts'][$districtKey]['translations'][
+                        $dataDistrict['translations'][
                             $translation['locale']
                         ] = $translation;
                     }
                 }
+                $dataDistrict = $this->defaultBorderIfEnabled($dataDistrict);
+                $dataDistrict = $this->defaultBackgroundIfEnabled($dataDistrict);
+
+                $arguments['districts'][$districtKey] = $dataDistrict;
             }
         }
         if (isset($arguments['categories'])) {
@@ -180,5 +184,46 @@ class UpdateProposalFormMutation implements MutationInterface
         }
 
         return ['proposalForm' => $proposalForm];
+    }
+
+    private function defaultBorderIfEnabled(array $dataDistrict): array
+    {
+        if (!isset($dataDistrict['border']) ||
+            !isset($dataDistrict['border']['enabled']) ||
+            !$dataDistrict['border']['enabled']
+        ) {
+            return $dataDistrict;
+        }
+
+        if (!isset($dataDistrict['border']['opacity']) || !$dataDistrict['border']['opacity']) {
+            $dataDistrict['border']['opacity'] = 1;
+        }
+        if (!isset($dataDistrict['border']['size']) || !$dataDistrict['border']['size']) {
+            $dataDistrict['border']['size'] = 1;
+        }
+        if (!isset($dataDistrict['border']['color']) || !$dataDistrict['border']['color']) {
+            $dataDistrict['border']['color'] = "#000000";
+        }
+
+        return $dataDistrict;
+    }
+
+    private function defaultBackgroundIfEnabled(array $dataDistrict): array
+    {
+        if (!isset($dataDistrict['background']) ||
+            !isset($dataDistrict['background']['enabled']) ||
+            !$dataDistrict['background']['enabled']
+        ) {
+            return $dataDistrict;
+        }
+
+        if (!isset($dataDistrict['background']['opacity']) || !$dataDistrict['background']['opacity']) {
+            $dataDistrict['background']['opacity'] = 0.2;
+        }
+        if (!isset($dataDistrict['background']['color']) || !$dataDistrict['background']['color']) {
+            $dataDistrict['background']['color'] = "#FFFFFF";
+        }
+
+        return $dataDistrict;
     }
 }
