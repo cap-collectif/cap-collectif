@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ClearableInput /> should render correctly 1`] = `
+<ClearableInput__ClearableInputContainer
+  hasIcon={false}
+>
+  <input
+    id="search"
+    name="search"
+    onChange={[Function]}
+    placeholder="Rechercher"
+    type="text"
+    value=""
+  />
+  <ClearableInput__CloseIconContainer
+    tabIndex={0}
+  />
+</ClearableInput__ClearableInputContainer>
+`;
+
+exports[`<ClearableInput /> should render correctly with a font icon 1`] = `
+<ClearableInput__ClearableInputContainer
+  hasIcon={true}
+>
+  <i
+    className="cap cap-magnifier"
+  />
+  <input
+    id="search"
+    name="search"
+    onChange={[Function]}
+    placeholder="Rechercher"
+    type="text"
+    value=""
+  />
+  <ClearableInput__CloseIconContainer
+    tabIndex={0}
+  />
+</ClearableInput__ClearableInputContainer>
+`;
+
+exports[`<ClearableInput /> should render correctly with a svg icon 1`] = `
+<ClearableInput__ClearableInputContainer
+  hasIcon={true}
+>
+  <Icon
+    name="twitter"
+  />
+  <input
+    id="search"
+    name="search"
+    onChange={[Function]}
+    placeholder="Rechercher"
+    type="text"
+    value=""
+  />
+  <ClearableInput__CloseIconContainer
+    tabIndex={0}
+  />
+</ClearableInput__ClearableInputContainer>
+`;

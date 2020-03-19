@@ -2270,10 +2270,10 @@
     "@babel/runtime" "^7.7.2"
     core-js "^3.4.1"
 
-"@liinkiing/react-hooks@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@liinkiing/react-hooks/-/react-hooks-1.4.0.tgz#307549fef7f97095461c5a523282aba9fb06934a"
-  integrity sha512-pwzpBNrG9eAAQq7FF2BQ6/ey76o5a94hCP3Z/yKILnaC4qPeMeloHC3JG9E8q84+50wP71qt3zxgaYL1cJui9w==
+"@liinkiing/react-hooks@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@liinkiing/react-hooks/-/react-hooks-1.5.0.tgz#b4599e6f2d11e55084f5881dc02efbf121078702"
+  integrity sha512-5keVQJR4OrT4bxVA8UMv7bo4Zt3xSbWLGaf8csYNWqFISXrWOWKG1TCR0Mj5vE18SQ06jAsU0pcvIeAPb2GHzw==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -2365,15 +2365,6 @@
   integrity sha512-YDYgV6nCzdGdOm7wy43Ce8SQ3M5DMKegB8E5sTB/1xrxOdo2yS/KgUgML2N2ZGD621mkbdrAglwTyA4NDOlFFA==
   dependencies:
     "@types/node" ">= 8"
-
-"@prettier/plugin-php@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@prettier/plugin-php/-/plugin-php-0.13.0.tgz#4d4a4b9a141cf5bae141152d332682e02ec9ebc7"
-  integrity sha512-mcEmjmU6paeltl9M94jbazRXpFWo9r1negDBttJFVdorgD/IjaO+hUCzo0AZit++Y38e8T903MfdpD+V7Xfi3A==
-  dependencies:
-    linguist-languages "^7.5.1"
-    mem "^6.0.1"
-    php-parser glayzzle/php-parser#4e9d584c7bd478175777e643e8d9d57d1863023a
 
 "@prettier/plugin-php@https://github.com/prettier/plugin-php#0a250c0506d295d07a88b1a3b5ae7cfaaaf19367":
   version "0.12.0"
@@ -13572,10 +13563,6 @@ phin@^2.9.1:
 php-parser@glayzzle/php-parser#2db61274ac1bae55a02236a498b113aba7f31326:
   version "3.0.0-prerelease.9"
   resolved "https://codeload.github.com/glayzzle/php-parser/tar.gz/2db61274ac1bae55a02236a498b113aba7f31326"
-
-php-parser@glayzzle/php-parser#4e9d584c7bd478175777e643e8d9d57d1863023a:
-  version "3.0.0-prerelease.9"
-  resolved "https://codeload.github.com/glayzzle/php-parser/tar.gz/4e9d584c7bd478175777e643e8d9d57d1863023a"
 
 picomatch@^2.0.5:
   version "2.0.7"

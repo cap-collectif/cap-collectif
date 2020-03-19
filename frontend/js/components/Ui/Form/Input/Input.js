@@ -2,11 +2,11 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import Label from '../Label/Label';
-import colors from '~/utils/colors';
 import { type CommonPropsInput } from './common';
 import { mediaQueryMobile } from '~/utils/sizes';
+import { BASE_INPUT } from '~/utils/styles/variables';
 
-type Props = {|
+export type Props = {|
   ...CommonPropsInput,
   type: 'text' | 'number',
 |};
@@ -15,15 +15,7 @@ const InputContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs
   className: 'input-container',
 })`
   input {
-    padding: 6px 12px;
-    border-radius: 4px;
-    border: 1px solid ${colors.lightGray};
-    background-color: #fafafa;
-    width: 300px;
-
-    &:disabled {
-      background-color: #eee;
-    }
+    ${BASE_INPUT};
   }
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
