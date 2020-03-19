@@ -246,6 +246,11 @@ InternalQuery:
                     longitude:
                         type: 'Float!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictsForLocalisationResolver", [args["proposalFormId"], args["latitude"], args["longitude"]])'
+            availableProposalForms:
+                description: 'Lookup proposalForms available to use in a collect step.'
+                type: '[ProposalForm!]!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryAvailableProposalFormsResolver")'
             contributions:
                 type: '[InternalOpinion!]!'
                 description: 'TO BE REMOVED'

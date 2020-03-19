@@ -6472,6 +6472,9 @@ type Query {
   """Lookup availables districts on a proposalForm for a given address."""
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [ProposalDistrict!]!
 
+  """Lookup proposalForms available to use in a collect step."""
+  availableProposalForms: [ProposalForm!]!
+
   """TO BE REMOVED"""
   contributions(
     """Returns all contributions of the provided consultation."""
