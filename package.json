@@ -366,7 +366,8 @@
         "mem": "^4.0.0",
         "kind-of": "^6.0.3",
         "acorn": "^6.4.1",
-        "node-sass": "^4.13.1"
+        "node-sass": "^4.13.1",
+        "minimist": "^0.2.1"
     },
     "devDependencies": {
         "@prettier/plugin-php": "https://github.com/prettier/plugin-php#0a250c0506d295d07a88b1a3b5ae7cfaaaf19367"
