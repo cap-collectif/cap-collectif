@@ -9,7 +9,7 @@ import { submit, reset } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import StepPageHeader from '~/components/Steps/Page/StepPageHeader/StepPageHeader';
 import StepPageFooter from '~/components/Steps/Page/StepPageFooter';
-import ReplyForm, { formNameUpdate } from '~/components/Reply/Form/ReplyForm';
+import ReplyForm, { getFormNameUpdate } from '~/components/Reply/Form/ReplyForm';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import LeavePageModal from '~/components/Modal/LeavePageModal/LeavePageModal';
 import colors from '~/utils/colors';
@@ -128,8 +128,8 @@ export const QuestionnaireReplyPage = ({
 const container = injectIntl(QuestionnaireReplyPage);
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  submitReplyForm: (replyId: string) => dispatch(submit(formNameUpdate(replyId))),
-  resetReplyForm: (replyId: string) => dispatch(reset(formNameUpdate(replyId))),
+  submitReplyForm: (replyId: string) => dispatch(submit(getFormNameUpdate(replyId))),
+  resetReplyForm: (replyId: string) => dispatch(reset(getFormNameUpdate(replyId))),
 });
 
 const containerConnect = connect(null, mapDispatchToProps)(container);

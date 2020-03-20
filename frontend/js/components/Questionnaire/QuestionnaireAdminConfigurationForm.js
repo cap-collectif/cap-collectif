@@ -12,7 +12,7 @@ import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQues
 import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 import type { Dispatch, FeatureToggles, State } from '~/types';
-import { formatChoices } from '~/utils/responsesHelper';
+import formatChoices from '~/utils/form/formatChoices';
 
 type RelayProps = {| +questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
 type ReduxProps = {| +questionnaireResultsEnabled: boolean |};

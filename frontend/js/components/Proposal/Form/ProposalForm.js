@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import memoize from 'lodash/memoize';
+import debounce from 'lodash/debounce';
 import {
   change,
   SubmissionError,
@@ -11,7 +13,6 @@ import {
   formValueSelector,
 } from 'redux-form';
 import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
-import { debounce } from 'lodash';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import {
@@ -34,24 +35,22 @@ import type {
 } from '~relay/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
 import type { ProposalForm_proposal } from '~relay/ProposalForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
-import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
-import { closeCreateModal, closeEditProposalModal } from '../../../redux/modules/proposal';
-import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
-import {
-  formatInitialResponsesValues,
-  formatSubmitResponses,
-  renderResponses,
-  type ResponsesInReduxForm,
-} from '../../../utils/responsesHelper';
-import environment from '../../../createRelayEnvironment';
-import { validateProposalContent, warnProposalContent } from '../Admin/ProposalAdminContentForm';
-import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import FluxDispatcher from '../../../dispatchers/AppDispatcher';
+import type { GlobalState, Dispatch, FeatureToggles } from '~/types';
+import CreateProposalMutation from '~/mutations/CreateProposalMutation';
+import { closeCreateModal, closeEditProposalModal } from '~/redux/modules/proposal';
+import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
+import environment from '~/createRelayEnvironment';
+import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
+import type { ResponsesInReduxForm } from '~/components/Form/Form.type';
+import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import {
   isInterpellationContextFromProposal,
   isInterpellationContextFromStep,
 } from '~/utils/interpellationLabelHelper';
+import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
+import renderResponses from '~/components/Form/RenderResponses';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -126,28 +125,12 @@ export type FormValues = {|
   draft: boolean,
 |};
 
-// const catchServerSubmitErrors = (reason: Object) => {
-//   if (
-//     reason &&
-//     reason.response &&
-//     reason.response.errors &&
-//     reason.response.errors.errors &&
-//     reason.response.errors.errors.length &&
-//     reason.response.errors.errors.includes('global.address_not_in_zone')
-//   ) {
-//     throw new SubmissionError({
-//       addressText: 'proposal.constraints.address_in_zone',
-//     });
-//   }
-//   throw new SubmissionError({
-//     _error: 'global.error.server.form',
-//   });
-// };
-
 const onUnload = e => {
   // $FlowFixMe voir https://github.com/facebook/flow/issues/3690
   e.returnValue = true;
 };
+
+const memoizeAvailableQuestions: any = memoize(() => {});
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposalForm, proposal } = props;
@@ -233,11 +216,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
-  return validateProposalContent(values, proposalForm, features, intl, values.draft);
-};
+  const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
 
-const warn = (values: FormValues, { proposalForm, features, intl }: Props) => {
-  return warnProposalContent(values, proposalForm, features, intl, values.draft);
+  return validateProposalContent(
+    values,
+    proposalForm,
+    features,
+    intl,
+    values.draft,
+    availableQuestions,
+  );
 };
 
 type State = {
@@ -375,6 +363,7 @@ export class ProposalForm extends React.Component<Props, State> {
       responses,
       change: changeProps,
     } = this.props;
+    const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
     const titleFieldTradKey = proposalForm.isProposalForm ? 'global.title' : 'title';
     const titleSuggestHeader = proposalForm.isProposalForm
       ? proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
@@ -571,7 +560,6 @@ export class ProposalForm extends React.Component<Props, State> {
           />
         )}
 
-
         <FieldArray
           name="responses"
           component={renderResponses}
@@ -581,6 +569,8 @@ export class ProposalForm extends React.Component<Props, State> {
           intl={intl}
           change={changeProps}
           responses={responses}
+          availableQuestions={availableQuestions}
+          memoize={memoizeAvailableQuestions}
         />
         {proposalForm.usingIllustration && (
           <Field
@@ -609,6 +599,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     proposalForm.questions,
     proposal ? proposal.responses : [],
   );
+
   return {
     initialValues: {
       draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
@@ -634,7 +625,6 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
 
 const form = reduxForm({
   form: formName,
-  warn,
   validate,
   onSubmit,
 })(ProposalForm);

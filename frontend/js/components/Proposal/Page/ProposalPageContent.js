@@ -14,18 +14,16 @@ import ProposalReportButton from '../Report/ProposalReportButton';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalResponse from './ProposalResponse';
 import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
-import { openDeleteProposalModal, openEditProposalModal } from '../../../redux/modules/proposal';
-import config from '../../../config';
+import { openDeleteProposalModal, openEditProposalModal } from '~/redux/modules/proposal';
+import config from '~/config';
 import type { ProposalPageContent_proposal } from '~relay/ProposalPageContent_proposal.graphql';
 import type { ProposalPageContent_viewer } from '~relay/ProposalPageContent_viewer.graphql';
 import type { ProposalPageContent_step } from '~relay/ProposalPageContent_step.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import type { GlobalState } from '../../../types';
-import type { MapTokens } from '../../../redux/modules/user';
-import {
-  getAvailableQuestionsIds,
-  formatInitialResponsesValues,
-} from '../../../utils/responsesHelper';
+import type { GlobalState } from '~/types';
+import type { MapTokens } from '~/redux/modules/user';
+import getAvailableQuestionsIds from '~/utils/form/getAvailableQuestionsIds';
+import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 
 let L;
 

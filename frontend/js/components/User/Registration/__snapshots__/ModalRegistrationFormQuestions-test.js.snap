@@ -57,6 +57,7 @@ exports[`<ModalRegistrationFormQuestions/> renders a form with dynamic fields 1`
       "now": [Function],
     }
   }
+  memoize={[Function]}
   name="responses"
   questions={
     Array [

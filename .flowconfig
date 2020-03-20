@@ -41,6 +41,7 @@ unnecessary-optional-chain=off
 .*/docs/*
 .*/coverage/*
 .*/codemod/*
+
 ; ignore synthesis
 .*/SynthesisElementActions.js
 .*/SynthesisDisplayRules.js

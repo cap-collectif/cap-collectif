@@ -1,21 +1,23 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import memoize from 'lodash/memoize';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import AlertForm from '../../Alert/AlertForm';
-import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
+import ChangeProposalEvaluationMutation from '~/mutations/ChangeProposalEvaluationMutation';
 import {
   validate,
   formatInitialResponses,
   type ResponsesValues,
 } from '../Admin/ProposalAdminNotationForm';
-import { renderResponses, formatSubmitResponses } from '../../../utils/responsesHelper';
 import type { ProposalPageEvaluation_proposal } from '~relay/ProposalPageEvaluation_proposal.graphql';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, State } from '~/types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
+import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import renderResponses from '~/components/Form/RenderResponses';
 
 type FormValues = {| responses: ResponsesValues |};
 type RelayProps = {|
@@ -34,6 +36,8 @@ const onUnload = e => {
   // $FlowFixMe voir https://github.com/facebook/flow/issues/3690
   e.returnValue = true;
 };
+
+const memoizeAvailableQuestions: any = memoize(() => {});
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   if (props.proposal.form.evaluationForm) {
@@ -85,9 +89,11 @@ export class ProposalPageEvaluation extends React.Component<Props> {
       intl,
     } = this.props;
     const { evaluationForm } = proposal.form;
-    if (!evaluationForm) {
-      return null;
-    }
+    const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
+      'availableQuestions',
+    );
+
+    if (!evaluationForm) return null;
 
     return (
       <div className="container">
@@ -104,6 +110,8 @@ export class ProposalPageEvaluation extends React.Component<Props> {
               change={change}
               intl={intl}
               disabled={!proposal.viewerIsAnEvaluer}
+              availableQuestions={availableQuestions}
+              memoize={memoizeAvailableQuestions}
             />
             {proposal.viewerIsAnEvaluer && (
               <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">

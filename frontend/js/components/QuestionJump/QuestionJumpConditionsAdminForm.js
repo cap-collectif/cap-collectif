@@ -8,7 +8,7 @@ import type { GlobalState } from '../../types';
 import component from '../Form/Field';
 import QuestionJumpConditionAdminForm from './QuestionJumpConditionAdminForm';
 import type { Jump } from '../Questionnaire/QuestionnaireAdminConfigurationForm';
-import type { Questions } from '../../utils/responsesHelper';
+import type { Questions } from '~/components/Form/Form.type';
 
 type Props = {
   fields: { length: number, map: Function, remove: Function, push: Function },

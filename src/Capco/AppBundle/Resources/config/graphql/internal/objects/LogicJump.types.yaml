@@ -5,7 +5,7 @@ LogicJump:
     fields:
       id:
         #builder: 'Relay::GlobalId'
-        type: 'ID'
+        type: 'ID!'
       origin:
         description: 'Return the question that trigger this logic jump.'
         type: 'InternalQuestion!'
@@ -14,7 +14,9 @@ LogicJump:
         type: 'InternalQuestion!'
       conditions:
         description: 'Return the necessited conditions that needs to be fullfiled to trigger this logic jump.'
-        type: '[LogicJumpCondition]'
+        # TODO Mettre 'LogicJumpCondition' à la place de 'MultipleChoiceQuestionLogicJumpCondition'
+        # : Dans le cas où on voudrait gérer différents types de conditions
+        type: '[MultipleChoiceQuestionLogicJumpCondition!]!'
       position:
         description: 'Return the position of this logic jump.'
         type: 'Int!'

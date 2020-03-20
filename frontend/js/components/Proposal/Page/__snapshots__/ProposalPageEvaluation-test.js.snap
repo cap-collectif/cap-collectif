@@ -27,6 +27,7 @@ exports[`<ProposalPageEvaluation /> render a disabled form if viewer is not an e
             "now": [Function],
           }
         }
+        memoize={[Function]}
         name="responses"
         questions={
           Array [
@@ -89,6 +90,7 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
             "now": [Function],
           }
         }
+        memoize={[Function]}
         name="responses"
         questions={
           Array [

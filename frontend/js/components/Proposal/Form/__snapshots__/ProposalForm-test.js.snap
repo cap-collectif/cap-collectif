@@ -254,6 +254,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
         "now": [Function],
       }
     }
+    memoize={[Function]}
     name="responses"
     questions={
       Array [
@@ -565,6 +566,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
         "now": [Function],
       }
     }
+    memoize={[Function]}
     name="responses"
     questions={
       Array [
@@ -876,6 +878,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         "now": [Function],
       }
     }
+    memoize={[Function]}
     name="responses"
     questions={
       Array [

@@ -1,8 +1,12 @@
 // @flow
 import * as React from 'react';
+import memoize from 'lodash/memoize';
 import { type IntlShape } from 'react-intl';
 import { FieldArray } from 'redux-form';
-import { formatInitialResponsesValues, renderResponses } from '../../../utils/responsesHelper';
+import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
+import renderResponses from '~/components/Form/RenderResponses';
+
+const memoizeAvailableQuestions: any = memoize(() => {});
 
 type Props = {
   change: (field: string, value: any) => void,
@@ -23,6 +27,9 @@ class ModalRegistrationFormQuestions extends React.Component<Props> {
 
   render() {
     const { change, responses, form, questions, intl } = this.props;
+    const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
+      'availableQuestions',
+    );
 
     return (
       <FieldArray
@@ -33,6 +40,8 @@ class ModalRegistrationFormQuestions extends React.Component<Props> {
         component={renderResponses}
         questions={questions}
         intl={intl}
+        availableQuestions={availableQuestions}
+        memoize={memoizeAvailableQuestions}
       />
     );
   }

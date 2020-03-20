@@ -2,23 +2,22 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import memoize from 'lodash/memoize';
 import { SubmissionError, reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import AlertForm from '../../Alert/AlertForm';
-import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
-import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
+import ChangeProposalNotationMutation from '~/mutations/ChangeProposalNotationMutation';
+import ChangeProposalEvaluationMutation from '~/mutations/ChangeProposalEvaluationMutation';
 import component from '../../Form/Field';
 import ProposalAdminEvaluersForm from './ProposalAdminEvaluersForm';
 import type { ProposalAdminNotationForm_proposal } from '~relay/ProposalAdminNotationForm_proposal.graphql';
 import type { ProposalPageEvaluation_proposal } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import UserListField from '../../Admin/Field/UserListField';
-import {
-  formatInitialResponsesValues,
-  formatSubmitResponses,
-  renderResponses,
-} from '../../../utils/responsesHelper';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, State } from '~/types';
+import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
+import renderResponses from '~/components/Form/RenderResponses';
 
 export type ResponsesValues = Array<Object>;
 type FormValues = { responses: ResponsesValues } & Object;
@@ -32,6 +31,8 @@ type Props = {|
 |};
 
 const formName = 'proposal-admin-evaluation';
+
+const memoizeAvailableQuestions: any = memoize(() => {});
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const data = {
@@ -165,105 +166,108 @@ export const validate = (values: FormValues, { proposal }: Props) => {
   return errors;
 };
 
-export class ProposalAdminNotationForm extends React.Component<Props> {
-  render() {
-    const {
-      error,
-      invalid,
-      valid,
-      submitSucceeded,
-      submitFailed,
-      pristine,
-      handleSubmit,
-      submitting,
-      proposal,
-      form,
-      intl,
-      responses,
-      change,
-    } = this.props;
-    const { evaluationForm } = proposal.form;
-    return (
-      <div className="box box-primary container-fluid">
-        <div className="box-content box-content__notation-form">
-          <div>
-            <ProposalAdminEvaluersForm proposal={proposal} />
-            <form onSubmit={handleSubmit}>
-              <div className="mb-40">
-                <div className="box-header">
-                  <h3 className="box-title">
-                    <FormattedMessage id="Questionnaire" />
-                  </h3>
-                  <a
-                    className="pull-right link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={intl.formatMessage({ id: 'admin.help.link.proposal.evaluation' })}>
-                    <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
-                  </a>
-                </div>
-                <Field
-                  name="estimation"
-                  component={component}
-                  normalize={val => parseInt(val, 10)}
-                  type="number"
-                  id="proposal_estimation"
-                  addonAfter={<Glyphicon glyph="euro" />}
-                  label={<FormattedMessage id="proposal.estimation" />}
-                />
-                <UserListField
-                  id="likers"
-                  name="likers"
-                  ariaControls="ProposalAdminNotationForm-filter-user-listbox"
-                  label={<FormattedMessage id="admin.fields.proposal.likers" />}
-                  labelClassName="control-label"
-                  autoload={false}
-                  clearable={false}
-                  inputClassName="fake-inputClassName"
-                  placeholder={intl.formatMessage({ id: 'select-a-favorite' })}
-                  multi
-                />
+export const ProposalAdminNotationForm = ({
+  error,
+  invalid,
+  valid,
+  submitSucceeded,
+  submitFailed,
+  pristine,
+  handleSubmit,
+  submitting,
+  proposal,
+  form,
+  intl,
+  responses,
+  change,
+}: Props) => {
+  const { evaluationForm } = proposal.form;
+  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
+    'availableQuestions',
+  );
+
+  return (
+    <div className="box box-primary container-fluid">
+      <div className="box-content box-content__notation-form">
+        <div>
+          <ProposalAdminEvaluersForm proposal={proposal} />
+          <form onSubmit={handleSubmit}>
+            <div className="mb-40">
+              <div className="box-header">
+                <h3 className="box-title">
+                  <FormattedMessage id="Questionnaire" />
+                </h3>
+                <a
+                  className="pull-right link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={intl.formatMessage({ id: 'admin.help.link.proposal.evaluation' })}>
+                  <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
+                </a>
               </div>
-              {evaluationForm && (
-                <div className="box-header">
-                  <h3 className="box-title">
-                    <FormattedMessage id="global.customized" />
-                  </h3>
-                </div>
-              )}
-              <FieldArray
-                name="responses"
-                component={renderResponses}
-                form={form}
-                questions={evaluationForm ? evaluationForm.questions : []}
-                responses={responses}
-                intl={intl}
-                change={change}
+              <Field
+                name="estimation"
+                component={component}
+                normalize={val => parseInt(val, 10)}
+                type="number"
+                id="proposal_estimation"
+                addonAfter={<Glyphicon glyph="euro" />}
+                label={<FormattedMessage id="proposal.estimation" />}
               />
-              <ButtonToolbar className="box-content__toolbar">
-                <Button
-                  id="proposal-evaluation-custom-save"
-                  disabled={invalid || pristine || submitting}
-                  type="submit"
-                  bsStyle="primary">
-                  <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-                </Button>
-                <AlertForm
-                  valid={valid}
-                  errorMessage={error}
-                  invalid={invalid}
-                  submitSucceeded={submitSucceeded}
-                  submitFailed={submitFailed}
-                  submitting={submitting}
-                />
-              </ButtonToolbar>
-            </form>
-          </div>
+              <UserListField
+                id="likers"
+                name="likers"
+                ariaControls="ProposalAdminNotationForm-filter-user-listbox"
+                label={<FormattedMessage id="admin.fields.proposal.likers" />}
+                labelClassName="control-label"
+                autoload={false}
+                clearable={false}
+                inputClassName="fake-inputClassName"
+                placeholder={intl.formatMessage({ id: 'select-a-favorite' })}
+                multi
+              />
+            </div>
+            {evaluationForm && (
+              <div className="box-header">
+                <h3 className="box-title">
+                  <FormattedMessage id="global.customized" />
+                </h3>
+              </div>
+            )}
+            <FieldArray
+              name="responses"
+              component={renderResponses}
+              form={form}
+              questions={evaluationForm ? evaluationForm.questions : []}
+              responses={responses}
+              intl={intl}
+              change={change}
+              availableQuestions={availableQuestions}
+              memoize={memoizeAvailableQuestions}
+            />
+            <ButtonToolbar className="box-content__toolbar">
+              <Button
+                id="proposal-evaluation-custom-save"
+                disabled={invalid || pristine || submitting}
+                type="submit"
+                bsStyle="primary">
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+              </Button>
+              <AlertForm
+                valid={valid}
+                errorMessage={error}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
+            </ButtonToolbar>
+          </form>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const form = injectIntl(
   reduxForm({

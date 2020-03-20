@@ -5,9 +5,9 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
 import config from '../../config';
-import { formatSubmitResponses } from '../../utils/responsesHelper';
 import CookieMonster from '../../CookieMonster';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
+import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
 
@@ -385,14 +385,14 @@ export const resendConfirmation = (): void => {
 export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*> => {
   dispatch(startSubmittingAccountForm());
   return Fetcher.putToJson('/users/me', values)
-    .then((response: {userId: string, email?: string, code?: string}) => {
+    .then((response: { userId: string, email?: string, code?: string }) => {
       dispatch(stopSubmittingAccountForm());
-      if (response && response.email){
+      if (response && response.email) {
         dispatch(userRequestEmailChange(values.email));
       }
-      if (response && response.code){
+      if (response && response.code) {
         CookieMonster.setLocale(response.code);
-        const prefix = response.code ? (response.code).split('-')[0] : '';
+        const prefix = response.code ? response.code.split('-')[0] : '';
         window.location.href = `/${prefix}/profile/edit-profile#account`;
       }
     })

@@ -14,25 +14,24 @@ import { createFragmentContainer, graphql } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { Button, ButtonToolbar, ListGroup, ListGroupItem, Panel } from 'react-bootstrap';
-import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
-import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
+import memoize from 'lodash/memoize';
+import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
+import UpdateProposalFusionMutation from '~/mutations/UpdateProposalFusionMutation';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import ProposalFusionEditModal from './ProposalFusionEditModal';
 import type { ProposalAdminContentForm_proposal } from '~relay/ProposalAdminContentForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
 import type { FormValues as FrontendFormValues } from '../Form/ProposalForm';
-import type { Dispatch, FeatureToggles, GlobalState, Uuid } from '../../../types';
+import type { Dispatch, FeatureToggles, GlobalState, Uuid } from '~/types';
 import UserListField from '../../Admin/Field/UserListField';
-import {
-  formatInitialResponsesValues,
-  formatSubmitResponses,
-  renderResponses,
-  type ResponsesInReduxForm,
-  validateResponses,
-  warnResponses,
-} from '../../../utils/responsesHelper';
 import SubmitButton from '~/components/Form/SubmitButton';
+import type { ResponsesInReduxForm } from '~/components/Form/Form.type';
+import validateResponses from '~/utils/form/validateResponses';
+import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
+import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import warnResponses from '~/utils/form/warnResponses';
+import renderResponses from '~/components/Form/RenderResponses';
 
 type ProposalForm = ProposalForm_proposalForm;
 type FormValues = {|
@@ -105,9 +104,9 @@ export const checkProposalContent = (
 ) => {
   const messages = {};
   if (!values.title || values.title.length <= 2) {
-    messages.title = !isDraft
-      ? 'proposal.constraints.title'
-      : 'proposal.constraints.title_for_draft';
+    messages.title = isDraft
+      ? 'proposal.constraints.title_for_draft'
+      : 'proposal.constraints.title';
   } else if (values.title.length >= 255) {
     messages.title = 'question.title.max_length';
   }
@@ -151,6 +150,8 @@ export const checkProposalContent = (
   return messages;
 };
 
+const memoizeAvailableQuestions: any = memoize(() => {});
+
 export const validateProposalContent = (
   values: FormValues | FrontendFormValues,
   // $FlowFixMe
@@ -158,22 +159,30 @@ export const validateProposalContent = (
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,
+  availableQuestions: Array<string>,
 ) => {
+  const MIN_LENGTH_TITLE = 2;
+  const MAX_LENGTH_TITLE = 255;
+
   const errors = !isDraft
     ? checkProposalContent(values, proposalForm, features, intl, isDraft)
     : {};
-  if (!values.title || values.title.length <= 2) {
-    errors.title = !isDraft ? 'proposal.constraints.title' : 'proposal.constraints.title_for_draft';
-  } else if (values.title.length >= 255) {
+
+  if (!values.title || values.title.length <= MIN_LENGTH_TITLE) {
+    errors.title = isDraft ? 'proposal.constraints.title_for_draft' : 'proposal.constraints.title';
+  } else if (values.title.length >= MAX_LENGTH_TITLE) {
     errors.title = 'question.title.max_length';
   }
+
   const responsesError = validateResponses(
     proposalForm.questions,
     values.responses,
     'proposal',
     intl,
     isDraft,
+    availableQuestions,
   );
+
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
   }
@@ -194,7 +203,6 @@ export const warnProposalContent = (
     values.responses,
     'proposal',
     intl,
-    isDraft,
   );
   if (responsesWarning.responses && responsesWarning.responses.length) {
     warnings.responses = responsesWarning.responses;
@@ -203,17 +211,26 @@ export const warnProposalContent = (
   return warnings;
 };
 
-const validate = (values: FormValues, { proposal, features, intl }: Props) =>
-  validateProposalContent(values, proposal.form, features, intl, values.draft);
+const validate = (values: FormValues, { proposal, features, intl }: Props) => {
+  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
+    'availableQuestions',
+  );
+
+  validateProposalContent(values, proposal.form, features, intl, values.draft, availableQuestions);
+};
 
 type State = {
   showEditFusionModal: boolean,
 };
 
 export class ProposalAdminContentForm extends React.Component<Props, State> {
-  state = {
-    showEditFusionModal: false,
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      showEditFusionModal: false,
+    };
+  }
 
   render() {
     const {
@@ -472,6 +489,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               questions={form.questions}
               change={change}
               responses={responses}
+              memoize={memoizeAvailableQuestions}
             />
             <Field
               id="proposal_media"

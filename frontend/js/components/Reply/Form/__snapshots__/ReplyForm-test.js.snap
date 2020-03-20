@@ -28,6 +28,7 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
           "now": [Function],
         }
       }
+      memoize={[Function]}
       name="responses"
       questions={
         Array [
@@ -543,6 +544,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
           "now": [Function],
         }
       }
+      memoize={[Function]}
       name="responses"
       questions={
         Array [
@@ -838,6 +840,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
           "now": [Function],
         }
       }
+      memoize={[Function]}
       name="responses"
       questions={
         Array [
@@ -1082,6 +1085,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
           "now": [Function],
         }
       }
+      memoize={[Function]}
       name="responses"
       questions={
         Array [
@@ -1437,6 +1441,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
           "now": [Function],
         }
       }
+      memoize={[Function]}
       name="responses"
       questions={
         Array [
@@ -1709,6 +1714,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
           "now": [Function],
         }
       }
+      memoize={[Function]}
       name="responses"
       questions={
         Array [

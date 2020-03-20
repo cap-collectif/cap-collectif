@@ -5,7 +5,7 @@ LogicJumpCondition:
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\LogicJumpCondition\\LogicJumpConditionTypeResolver", [value])'
     fields:
       id:
-        type: 'ID'
+        type: 'ID!'
       operator:
         description: 'Return the operator for this condition.'
         type: 'LogicJumpConditionOperator!'

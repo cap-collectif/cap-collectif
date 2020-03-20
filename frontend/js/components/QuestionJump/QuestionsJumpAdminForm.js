@@ -25,107 +25,111 @@ type Props = {|
   currentQuestion: Object,
 |};
 
-export class QuestionsJumpAdminForm extends React.Component<Props> {
-  render() {
-    const { fields, questions, oldMember, formName, currentQuestion } = this.props;
-    const firstMultipleChoiceQuestion = questions.find(
-      question => question.__typename === 'MultipleChoiceQuestion',
-    );
-    const isMultipleQuestion = currentQuestion.__typename === 'MultipleChoiceQuestion';
-    return (
-      <div className="form-group" id="questions_choice_panel_personal">
-        <ListGroup>
-          {fields.map((member, index) => (
-            <div className="panel-custom panel panel-default">
-              <div className="panel-heading">
-                <i
-                  className="cap cap-android-menu"
-                  style={{ color: '#0388CC', fontSize: '20px' }}
-                />
-                <h3 className="panel-title">
-                  <FormattedMessage id="answering-this-question" />
-                </h3>
-                <button
-                  type="button"
-                  style={{ border: 'none', fontSize: '20px', backgroundColor: '#f5f5f5' }}
-                  onClick={() => fields.remove(index)}>
-                  X
-                </button>
-              </div>
-              <div className="panel-body">
-                <FieldArray
-                  name={`${member}.conditions`}
-                  component={QuestionJumpConditionsAdminForm}
-                  formName={formName}
-                  member={member}
-                />
-              </div>
+const QuestionsJumpAdminForm = ({
+  fields,
+  questions,
+  oldMember,
+  formName,
+  currentQuestion,
+}: Props) => {
+  const firstMultipleChoiceQuestion = questions.find(
+    question => question.__typename === 'MultipleChoiceQuestion',
+  );
+
+  const isMultipleQuestion = currentQuestion.__typename === 'MultipleChoiceQuestion';
+
+  const addDefaultJump = () => {
+    fields.push({
+      origin: {
+        id: currentQuestion.id,
+      },
+      conditions: [
+        {
+          question: {
+            id: isMultipleQuestion
+              ? currentQuestion.id
+              : firstMultipleChoiceQuestion
+              ? firstMultipleChoiceQuestion.id
+              : null,
+          },
+          value: isMultipleQuestion
+            ? currentQuestion.choices[0]
+            : firstMultipleChoiceQuestion
+            ? firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0]
+            : null,
+          operator: 'IS',
+        },
+      ],
+      destination: {
+        id: questions[0].id !== currentQuestion.id ? questions[0].id : questions[1]?.id || null,
+      },
+    });
+  };
+
+  return (
+    <div className="form-group" id="questions_choice_panel_personal">
+      <ListGroup>
+        {fields.map((member, index) => (
+          <div className="panel-custom panel panel-default">
+            <div className="panel-heading">
+              <i className="cap cap-android-menu" style={{ color: '#0388CC', fontSize: '20px' }} />
+              <h3 className="panel-title">
+                <FormattedMessage id="answering-this-question" />
+              </h3>
+              <button
+                type="button"
+                style={{ border: 'none', fontSize: '20px', backgroundColor: '#f5f5f5' }}
+                onClick={() => fields.remove(index)}>
+                X
+              </button>
             </div>
-          ))}
-        </ListGroup>
-        <Button
-          id="add-conditional-jump-button"
-          bsStyle="primary"
-          className="btn--outline box-content__toolbar"
-          onClick={() => {
-            fields.push({
-              origin: {
-                id: currentQuestion.id,
-              },
-              conditions: [
-                {
-                  question: {
-                    id: isMultipleQuestion
-                      ? currentQuestion.id
-                      : firstMultipleChoiceQuestion
-                      ? firstMultipleChoiceQuestion.id
-                      : null,
-                  },
-                  value: isMultipleQuestion
-                    ? currentQuestion.choices[0]
-                    : firstMultipleChoiceQuestion
-                    ? firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0]
-                    : null,
-                  operator: 'IS',
-                },
-              ],
-              destination: {
-                id: currentQuestion.id,
-              },
-            });
-          }}>
-          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-        </Button>
-        <div className="movable-element">
-          <div className="mb-10">
-            <h4 className="panel-title">
-              <FormattedMessage
-                id={fields && fields.length === 0 ? 'always-go-to' : 'jump-other-goto'}
+            <div className="panel-body">
+              <FieldArray
+                name={`${member}.conditions`}
+                component={QuestionJumpConditionsAdminForm}
+                formName={formName}
+                member={member}
               />
-            </h4>
-            <Field
-              id={`${oldMember}.alwaysJumpDestinationQuestion.id`}
-              name={`${oldMember}.alwaysJumpDestinationQuestion.id`}
-              type="select"
-              normalize={val => (val !== '' ? val : null)}
-              component={component}>
-              <option value="" />
-              {questions
-                .filter(question => {
-                  // We should not display the always jump of a question when it is referecing itself
-                  // because an always jump could not redirect to itself
-                  return question.id && currentQuestion && question.id !== currentQuestion.id;
-                })
-                .map((question, i) => (
-                  <option value={question.id}>{`${i + 1}. ${question.title}`}</option>
-                ))}
-            </Field>
+            </div>
           </div>
+        ))}
+      </ListGroup>
+      <Button
+        id="add-conditional-jump-button"
+        bsStyle="primary"
+        className="btn--outline box-content__toolbar"
+        onClick={() => addDefaultJump()}>
+        <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+      </Button>
+      <div className="movable-element">
+        <div className="mb-10">
+          <h4 className="panel-title">
+            <FormattedMessage
+              id={fields && fields.length === 0 ? 'always-go-to' : 'jump-other-goto'}
+            />
+          </h4>
+          <Field
+            id={`${oldMember}.alwaysJumpDestinationQuestion.id`}
+            name={`${oldMember}.alwaysJumpDestinationQuestion.id`}
+            type="select"
+            normalize={val => (val !== '' ? val : null)}
+            component={component}>
+            <option value="" />
+            {questions
+              .filter(question => {
+                // We should not display the always jump of a question when it is referecing itself
+                // because an always jump could not redirect to itself
+                return question.id && currentQuestion && question.id !== currentQuestion.id;
+              })
+              .map((question, i) => (
+                <option value={question.id}>{`${i + 1}. ${question.title}`}</option>
+              ))}
+          </Field>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);

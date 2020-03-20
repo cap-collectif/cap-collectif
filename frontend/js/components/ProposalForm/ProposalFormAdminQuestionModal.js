@@ -10,7 +10,7 @@ import component from '../Form/Field';
 import type { GlobalState, Dispatch } from '~/types';
 import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm';
 import QuestionsJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
-import type { Question } from '~/utils/responsesHelper';
+import type { Question } from '~/components/Form/Form.type';
 
 type ParentProps = {
   dispatch: Dispatch,

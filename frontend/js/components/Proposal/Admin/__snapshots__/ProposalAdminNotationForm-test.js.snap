@@ -136,6 +136,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
               "now": [Function],
             }
           }
+          memoize={[Function]}
           name="responses"
           questions={Array []}
           responses={Array []}

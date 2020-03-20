@@ -5,17 +5,17 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Button } from 'react-bootstrap';
-import { isEmail } from '../../../services/Validator';
-import type { Dispatch, State } from '../../../types';
-import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
+import { isEmail } from '~/services/Validator';
+import type { Dispatch, State } from '~/types';
+import { register as onSubmit, displayChartModal } from '~/redux/modules/user';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
-import { validateResponses } from '../../../utils/responsesHelper';
 import PrivacyModal from '../../StaticPage/PrivacyModal';
 import UserPasswordField from '../UserPasswordField';
 import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
+import validateResponses from '~/utils/form/validateResponses';
 
 type Props = {|
   ...ReduxFormFormProps,

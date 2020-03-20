@@ -13,17 +13,12 @@ import {
 import { withRouter, type History } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { Dispatch, State } from '~/types';
+import memoize from 'lodash/memoize';
+import type { Dispatch, GlobalState } from '~/types';
 import type { ReplyForm_questionnaire } from '~relay/ReplyForm_questionnaire.graphql';
 import type { ReplyForm_reply } from '~relay/ReplyForm_reply.graphql';
-import {
-  formatInitialResponsesValues,
-  formatSubmitResponses,
-  renderResponses,
-  type ResponsesInReduxForm,
-  validateResponses,
-} from '~/utils/responsesHelper';
 import renderComponent from '~/components/Form/Field';
+import type { ResponsesInReduxForm } from '~/components/Form/Form.type';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import SubmitButton from '~/components/Form/SubmitButton';
 import AlertForm from '~/components/Alert/AlertForm';
@@ -33,6 +28,10 @@ import AppDispatcher from '~/dispatchers/AppDispatcher';
 import { UPDATE_ALERT, TYPE_ALERT } from '~/constants/AlertConstants';
 import Description from '~/components/Ui/Form/Description/Description';
 import ReplyFormContainer from './ReplyForm.style';
+import validateResponses from '~/utils/form/validateResponses';
+import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
+import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import renderResponses from '~/components/Form/RenderResponses';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -55,6 +54,8 @@ const onUnload = e => {
   // $FlowFixMe voir https://github.com/facebook/flow/issues/3690
   e.returnValue = true;
 };
+
+const memoizeAvailableQuestions: any = memoize(() => {});
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { questionnaire, reply, history } = props;
@@ -126,10 +127,21 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const validate = (values: FormValues, props: Props) => {
+  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
+    'availableQuestions',
+  );
   const { questions } = props.questionnaire;
   const { responses } = values;
   const errors = {};
-  const responsesError = validateResponses(questions, responses, 'reply', props.intl, values.draft);
+
+  const responsesError = validateResponses(
+    questions,
+    responses,
+    'reply',
+    props.intl,
+    values.draft,
+    availableQuestions,
+  );
 
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
@@ -140,7 +152,7 @@ const validate = (values: FormValues, props: Props) => {
 
 export const formName = 'ReplyForm';
 
-export const formNameUpdate = (id: string) => `Update${formName}-${id}`;
+export const getFormNameUpdate = (id: string) => `Update${formName}-${id}`;
 
 export class ReplyForm extends React.Component<Props> {
   static defaultProps = {
@@ -203,6 +215,7 @@ export class ReplyForm extends React.Component<Props> {
       dispatch,
       reply,
     } = this.props;
+    const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
     const disabled = this.formIsDisabled();
     const isDraft = reply && reply.draft;
 
@@ -222,6 +235,8 @@ export class ReplyForm extends React.Component<Props> {
             intl={intl}
             disabled={disabled}
             reply={reply}
+            availableQuestions={availableQuestions}
+            memoize={memoizeAvailableQuestions}
           />
 
           {questionnaire.anonymousAllowed && (
@@ -282,7 +297,7 @@ export class ReplyForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Props) => {
+const mapStateToProps = (state: GlobalState, props: Props) => {
   const { reply, questionnaire } = props;
 
   const defaultResponses = formatInitialResponsesValues(
@@ -292,7 +307,7 @@ const mapStateToProps = (state: State, props: Props) => {
 
   return {
     responses:
-      formValueSelector(reply ? formNameUpdate(reply.id) : `Create${formName}`)(
+      formValueSelector(reply ? getFormNameUpdate(reply.id) : `Create${formName}`)(
         state,
         'responses',
       ) || defaultResponses,
@@ -302,13 +317,13 @@ const mapStateToProps = (state: State, props: Props) => {
       private: reply ? reply.private : false,
     },
     user: state.user.user,
-    form: reply ? formNameUpdate(reply.id) : `Create${formName}`,
+    form: reply ? getFormNameUpdate(reply.id) : `Create${formName}`,
   };
 };
 
 const form = reduxForm({
-  validate,
   onSubmit,
+  validate,
   enableReinitialize: true,
   destroyOnUnmount: false,
 })(ReplyForm);

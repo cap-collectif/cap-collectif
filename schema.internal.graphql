@@ -3519,7 +3519,7 @@ input LocaleStatusInput {
 
 """A logic jump in a question."""
 type LogicJump {
-  id: ID
+  id: ID!
 
   """Return the question that trigger this logic jump."""
   origin: Question!
@@ -3530,7 +3530,7 @@ type LogicJump {
   """
   Return the necessited conditions that needs to be fullfiled to trigger this logic jump.
   """
-  conditions: [LogicJumpCondition]
+  conditions: [MultipleChoiceQuestionLogicJumpCondition!]!
 
   """Return the position of this logic jump."""
   position: Int!
@@ -3538,7 +3538,7 @@ type LogicJump {
 
 """A particular condition in a logic jump."""
 interface LogicJumpCondition {
-  id: ID
+  id: ID!
 
   """Return the operator for this condition."""
   operator: LogicJumpConditionOperator!
@@ -3753,7 +3753,7 @@ type MediaQuestion implements Question & Node {
   jumps(
     """Ordering options for question jumps."""
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
-  ): [LogicJump]
+  ): [LogicJump!]!
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
@@ -3838,7 +3838,7 @@ type MultipleChoiceQuestion implements Question & Node {
   jumps(
     """Ordering options for question jumps."""
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
-  ): [LogicJump]
+  ): [LogicJump!]!
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
@@ -3893,7 +3893,7 @@ type MultipleChoiceQuestion implements Question & Node {
 
 """A particular condition in a logic jump in a multiple choice question."""
 type MultipleChoiceQuestionLogicJumpCondition implements LogicJumpCondition {
-  id: ID
+  id: ID!
 
   """Return the operator for this condition."""
   operator: LogicJumpConditionOperator!
@@ -3906,7 +3906,7 @@ type MultipleChoiceQuestionLogicJumpCondition implements LogicJumpCondition {
   """
   The value that the condition should meet to be fullfiled (depending on the operator).
   """
-  value: QuestionChoice
+  value: QuestionChoice!
 }
 
 """Multiple Choice Question Validation Rule"""
@@ -6690,7 +6690,7 @@ interface Question {
   jumps(
     """Ordering options for question jumps."""
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
-  ): [LogicJump]
+  ): [LogicJump!]!
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
@@ -7739,7 +7739,7 @@ type SectionQuestion implements Question & Node {
   jumps(
     """Ordering options for question jumps."""
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
-  ): [LogicJump]
+  ): [LogicJump!]!
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
@@ -8123,7 +8123,7 @@ type SimpleQuestion implements Question & Node {
   jumps(
     """Ordering options for question jumps."""
     orderBy: JumpsOrder = {field: POSITION, direction: ASC}
-  ): [LogicJump]
+  ): [LogicJump!]!
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question

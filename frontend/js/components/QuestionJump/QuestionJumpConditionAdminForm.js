@@ -5,8 +5,8 @@ import { formValueSelector, Field, arrayRemove, change } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type { GlobalState, Dispatch } from '../../types';
 import component from '../Form/Field';
-import type { QuestionsInReduxForm } from '../../utils/submitQuestion';
-import type { QuestionChoice } from '../../utils/responsesHelper';
+import type { QuestionsInReduxForm } from '~/utils/submitQuestion';
+import type { QuestionChoice } from '~/components/Form/Form.type';
 
 type ReduxProps = { selectedQuestion: string };
 type Props = ReduxProps & {
