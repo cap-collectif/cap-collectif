@@ -16,6 +16,7 @@ const DEFAULT_FILTERS: Filters = {
   district: 'ALL',
   step: 'ALL',
   status: null,
+  term: null,
 };
 
 type ProviderProps = {|

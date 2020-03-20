@@ -17,6 +17,8 @@ class ProposalSearch extends Search
 {
     public const SEARCH_FIELDS = [
         'title',
+        'author.username.std',
+        'author.username',
         'title.std',
         'reference',
         'reference.std',

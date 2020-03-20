@@ -7,7 +7,8 @@ import { BASE_INPUT } from '~/utils/styles/variables';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type Props = {|
-  ...$Diff<InputProps, { value: * }>,
+  ...$Diff<InputProps, { value: *, defaultValue: * }>,
+  initialValue?: ?string,
   icon?: React.Node,
   onSubmit?: (value: string) => void,
   onClear?: () => void,
@@ -60,8 +61,8 @@ const CloseIconContainer = styled.span`
   }
 `;
 
-const ClearableInput = ({ icon, onSubmit, onClear, ...rest }: Props) => {
-  const [input, clearInput] = useInput('');
+const ClearableInput = ({ icon, onSubmit, onClear, initialValue, ...rest }: Props) => {
+  const [input, clearInput] = useInput(initialValue || '');
   const canClear = input.value !== '';
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const closeIconContainerRef = React.useRef<HTMLElement | null>(null);

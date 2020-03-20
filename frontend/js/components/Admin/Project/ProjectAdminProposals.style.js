@@ -3,7 +3,6 @@ import styled, { css, type StyledComponent } from 'styled-components';
 import { Label as BSLabel } from 'react-bootstrap';
 import PickableList from '~ui/List/PickableList';
 import colors, { BsStyleColors } from '~/utils/colors';
-import { pxToRem } from '~/utils/styles/mixins';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
 export const ProposalPickableListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -12,7 +11,12 @@ export const ProposalPickableListContainer: StyledComponent<{}, {}, HTMLDivEleme
 
 export const ProjectAdminProposalsHeader: StyledComponent<{}, {}, HTMLElement> = styled.header`
   display: flex;
-  margin: ${pxToRem(6)} 0;
+  align-items: center;
+  margin: 1rem 0;
+  & .clearable-input {
+    margin-left: auto;
+    width: 250px;
+  }
 `;
 
 export const ProposalListRow: StyledComponent<{}, {}, typeof PickableList.Row> = styled(

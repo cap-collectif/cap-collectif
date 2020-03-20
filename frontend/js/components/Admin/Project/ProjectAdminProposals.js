@@ -21,6 +21,7 @@ import type {
 import InlineSelect from '~ui/InlineSelect';
 import { getAllFormattedChoicesForProject } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import ClearableInput from '~ui/Form/Input/ClearableInput';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -295,6 +296,7 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
 
 export const ProjectAdminProposals = ({ project, relay }: Props) => {
   const { parameters, dispatch } = useProjectAdminProposalsContext();
+  const intl = useIntl();
   const hasProposals = project.proposals?.totalCount > 0;
 
   return (
@@ -322,6 +324,26 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
               <FormattedMessage id="project_download.label.trashed" />
             </InlineSelect.Choice>
           </InlineSelect>
+          <ClearableInput
+            id="search"
+            name="search"
+            type="text"
+            icon={<i className="cap cap-magnifier" />}
+            onClear={() => {
+              if (parameters.filters.term !== null) {
+                dispatch({ type: 'CLEAR_TERM' });
+              }
+            }}
+            initialValue={parameters.filters.term}
+            onSubmit={term => {
+              if (term === '' && parameters.filters.term !== null) {
+                dispatch({ type: 'CLEAR_TERM' });
+              } else if (term !== '' && parameters.filters.term !== term) {
+                dispatch({ type: 'SEARCH_TERM', payload: term });
+              }
+            }}
+            placeholder={intl.formatMessage({ id: 'global.menu.search' })}
+          />
         </S.ProjectAdminProposalsHeader>
         <PickableList
           useInfiniteScroll={hasProposals}
@@ -347,8 +369,8 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                         #{proposal.reference} • {proposal.author.username}
                         {proposal.publishedAt && (
                           <React.Fragment>
-                            {' '}•{' '}
-                            <FormattedMessage id="submited_on" />{' '}
+                            {' '}
+                            • <FormattedMessage id="submited_on" />{' '}
                             <FormattedDate
                               value={moment(proposal.publishedAt)}
                               day="numeric"
@@ -414,6 +436,7 @@ export default createPaginationContainer(
           district: { type: "ID", defaultValue: null }
           status: { type: "ID", defaultValue: null }
           step: { type: "ID", defaultValue: null }
+          term: { type: "String", defaultValue: null }
         ) {
         id
         steps {
@@ -447,10 +470,11 @@ export default createPaginationContainer(
           district: $district
           status: $status
           step: $step
+          term: $term
         )
           @connection(
             key: "ProjectAdminProposals_proposals"
-            filters: ["orderBy", "state", "category", "district", "status", "step"]
+            filters: ["orderBy", "state", "category", "district", "status", "step", "term"]
           ) {
           totalCount
           pageInfo {
@@ -526,6 +550,7 @@ export default createPaginationContainer(
         $district: ID
         $status: ID
         $step: ID
+        $term: String
       ) {
         project: node(id: $projectId) {
           id
@@ -540,6 +565,7 @@ export default createPaginationContainer(
               district: $district
               status: $status
               step: $step
+              term: $term
             )
         }
       }

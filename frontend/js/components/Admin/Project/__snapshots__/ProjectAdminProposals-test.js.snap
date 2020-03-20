@@ -41,6 +41,20 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           />
         </InlineSelect.Choice>
       </InlineSelect>
+      <ClearableInput
+        icon={
+          <i
+            className="cap cap-magnifier"
+          />
+        }
+        id="search"
+        initialValue={null}
+        name="search"
+        onClear={[Function]}
+        onSubmit={[Function]}
+        placeholder="global.menu.search"
+        type="text"
+      />
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}
@@ -355,8 +369,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                • 
               welcomattic
                
-              •
-               
+              • 
               <FormattedMessage
                 id="submited_on"
                 values={Object {}}
@@ -409,8 +422,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                • 
               johnsmith
                
-              •
-               
+              • 
               <FormattedMessage
                 id="submited_on"
                 values={Object {}}
@@ -463,8 +475,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                • 
               user
                
-              •
-               
+              • 
               <FormattedMessage
                 id="submited_on"
                 values={Object {}}
@@ -517,8 +528,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                • 
               welcomattic
                
-              •
-               
+              • 
               <FormattedMessage
                 id="submited_on"
                 values={Object {}}
@@ -571,8 +581,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                • 
               user7
                
-              •
-               
+              • 
               <FormattedMessage
                 id="submited_on"
                 values={Object {}}
@@ -614,8 +623,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                • 
               admin
                
-              •
-               
+              • 
               <FormattedMessage
                 id="submited_on"
                 values={Object {}}
@@ -662,8 +670,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                • 
               admin
                
-              •
-               
+              • 
               <FormattedMessage
                 id="submited_on"
                 values={Object {}}
@@ -710,8 +717,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                • 
               admin
                
-              •
-               
+              • 
               <FormattedMessage
                 id="submited_on"
                 values={Object {}}
@@ -779,6 +785,20 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           />
         </InlineSelect.Choice>
       </InlineSelect>
+      <ClearableInput
+        icon={
+          <i
+            className="cap cap-magnifier"
+          />
+        }
+        id="search"
+        initialValue={null}
+        name="search"
+        onClear={[Function]}
+        onSubmit={[Function]}
+        placeholder="global.menu.search"
+        type="text"
+      />
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}

@@ -18,6 +18,7 @@ export type Filters = {|
   +district: ProposalsDistrictValues,
   +step: ProposalsStepValues,
   +status: ?string,
+  +term: ?string,
 |};
 
 export type ParametersState = {|
@@ -35,7 +36,9 @@ export type Action =
   | { type: 'CLEAR_CATEGORY_FILTER' }
   | { type: 'CHANGE_DISTRICT_FILTER', payload: ProposalsDistrictValues }
   | { type: 'CLEAR_DISTRICT_FILTER' }
-  | { type: 'CHANGE_STATE_FILTER', payload: ProposalsStateValues };
+  | { type: 'CHANGE_STATE_FILTER', payload: ProposalsStateValues }
+  | { type: 'SEARCH_TERM', payload: ?string }
+  | { type: 'CLEAR_TERM' };
 
 export const createReducer = (state: ParametersState, action: Action) => {
   switch (action.type) {
@@ -115,6 +118,22 @@ export const createReducer = (state: ParametersState, action: Action) => {
       return {
         ...state,
         sort: action.payload,
+      };
+    case 'SEARCH_TERM':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          term: action.payload,
+        },
+      };
+    case 'CLEAR_TERM':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          term: null,
+        },
       };
     default:
       throw new Error(`Unknown action : ${action.type}`);

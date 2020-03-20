@@ -7,9 +7,10 @@ import type {
   ProjectAdminProposalsPageQueryVariables,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
 import type { ParametersState } from '~/components/Admin/Project/ProjectAdminPage.reducer';
-import { PROJECT_ADMIN_PROPOSAL_PAGINATION } from '~/components/Admin/Project/ProjectAdminProposals';
+import ProjectAdminProposals, {
+  PROJECT_ADMIN_PROPOSAL_PAGINATION,
+} from '~/components/Admin/Project/ProjectAdminProposals';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
-import ProjectAdminProposalsView from '~/components/Admin/Project/ProjectAdminProposalsView';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 
 type Props = {|
@@ -32,6 +33,7 @@ const createQueryVariables = (
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
   step: parameters.filters.step === 'ALL' ? null : parameters.filters.step,
   status: parameters.filters.status,
+  term: parameters.filters.term,
 });
 
 const ProjectAdminProposalsPage = ({ projectId }: Props) => {
@@ -50,9 +52,10 @@ const ProjectAdminProposalsPage = ({ projectId }: Props) => {
           $district: ID
           $status: ID
           $step: ID
+          $term: String
         ) {
           project: node(id: $projectId) {
-            ...ProjectAdminProposalsView_project
+            ...ProjectAdminProposals_project
               @arguments(
                 projectId: $projectId
                 count: $count
@@ -63,6 +66,7 @@ const ProjectAdminProposalsPage = ({ projectId }: Props) => {
                 district: $district
                 status: $status
                 step: $step
+                term: $term
               )
           }
         }
@@ -79,7 +83,7 @@ const ProjectAdminProposalsPage = ({ projectId }: Props) => {
           return graphqlError;
         }
         if (props && props.project) {
-          return <ProjectAdminProposalsView project={props.project} />;
+          return <ProjectAdminProposals project={props.project} />;
         }
         return <Loader show />;
       }}
