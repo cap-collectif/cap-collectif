@@ -4,7 +4,7 @@
 import {
   getFormattedCategoriesChoicesForProject,
   getFormattedDistrictsChoicesForProject,
-  getFormattedStatusesChoicesForProject,
+  getFormattedStatusesChoicesForProjectStep,
   getFormattedStepsChoicesForProject,
 } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import { $refType } from '~/mocks';
@@ -26,6 +26,50 @@ const DEFAULT_PROJECT = {
         {
           id: 'status2',
           name: 'Rejeté',
+          color: 'danger',
+        },
+      ],
+      form: {
+        categories: [
+          {
+            id: 'pCategory1',
+            name: 'Aménagement',
+          },
+          {
+            id: 'pCategory2',
+            name: 'Politique',
+          },
+        ],
+        districts: [
+          {
+            id: 'district1',
+            name: 'Mon beau quartier',
+          },
+          {
+            id: 'district2',
+            name: 'Noisyzoo',
+          },
+        ],
+      },
+    },
+    {
+      id: 'sstep1',
+      title: 'Étape de sélection',
+      __typename: 'SelectionStep',
+      statuses: [
+        {
+          id: 'status1',
+          name: 'En cours',
+          color: 'primary',
+        },
+        {
+          id: 'status2',
+          name: 'Sélectionnée',
+          color: 'success',
+        },
+        {
+          id: 'status3',
+          name: 'Un autre status',
           color: 'danger',
         },
       ],
@@ -287,15 +331,17 @@ describe('ProjectAdminProposals utils functions', () => {
 
   it('should get a correctly formatted steps choices for a given project', () => {
     const steps = getFormattedStepsChoicesForProject(DEFAULT_PROJECT);
-    expect(steps).toHaveLength(1);
+    expect(steps).toHaveLength(2);
     expect(steps).toMatchSnapshot();
   });
 
-  it('should get a correctly formatted step statuses choices for a given project', () => {
-    const stepStatuses = getFormattedStatusesChoicesForProject(DEFAULT_PROJECT);
-    expect(stepStatuses).toHaveLength(1);
-    expect(stepStatuses[0]).toHaveProperty('statuses');
-    expect(stepStatuses[0].statuses.length).toBeGreaterThan(0);
-    expect(stepStatuses).toMatchSnapshot();
+  it('should get a correctly formatted step statuses choices for a given step', () => {
+    const cstep1Statuses = getFormattedStatusesChoicesForProjectStep(DEFAULT_PROJECT, 'cstep1');
+    expect(cstep1Statuses).toHaveLength(2);
+    expect(cstep1Statuses).toMatchSnapshot();
+
+    const sstep1Statuses = getFormattedStatusesChoicesForProjectStep(DEFAULT_PROJECT, 'sstep1');
+    expect(sstep1Statuses).toHaveLength(3);
+    expect(sstep1Statuses).toMatchSnapshot();
   });
 });

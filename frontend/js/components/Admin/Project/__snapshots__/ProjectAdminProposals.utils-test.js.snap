@@ -26,23 +26,37 @@ Array [
 ]
 `;
 
-exports[`ProjectAdminProposals utils functions should get a correctly formatted step statuses choices for a given project 1`] = `
+exports[`ProjectAdminProposals utils functions should get a correctly formatted step statuses choices for a given step 1`] = `
 Array [
   Object {
-    "id": "cstep1",
-    "statuses": Array [
-      Object {
-        "color": "primary",
-        "id": "status1",
-        "name": "Approuvé",
-      },
-      Object {
-        "color": "danger",
-        "id": "status2",
-        "name": "Rejeté",
-      },
-    ],
-    "title": "Étape de dépôt",
+    "color": "primary",
+    "id": "status1",
+    "name": "Approuvé",
+  },
+  Object {
+    "color": "danger",
+    "id": "status2",
+    "name": "Rejeté",
+  },
+]
+`;
+
+exports[`ProjectAdminProposals utils functions should get a correctly formatted step statuses choices for a given step 2`] = `
+Array [
+  Object {
+    "color": "primary",
+    "id": "status1",
+    "name": "En cours",
+  },
+  Object {
+    "color": "success",
+    "id": "status2",
+    "name": "Sélectionnée",
+  },
+  Object {
+    "color": "danger",
+    "id": "status3",
+    "name": "Un autre status",
   },
 ]
 `;
@@ -52,6 +66,10 @@ Array [
   Object {
     "id": "cstep1",
     "title": "Étape de dépôt",
+  },
+  Object {
+    "id": "sstep1",
+    "title": "Étape de sélection",
   },
 ]
 `;

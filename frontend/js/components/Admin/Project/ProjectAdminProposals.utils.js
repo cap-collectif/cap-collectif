@@ -10,13 +10,9 @@ type DistrictFilter = {|
 
 type StepStatusFilter = {|
   +id: Uuid,
-  +title: string,
-  +statuses: $ReadOnlyArray<{|
-    +id: Uuid,
-    +color: ?string,
-    +name: string,
-  |}>,
-|};
+  +color: ?string,
+  +name: string,
+|}
 
 type StepFilter = {|
   +id: Uuid,
@@ -87,26 +83,24 @@ export const getFormattedStepsChoicesForProject = (
     })): any): $ReadOnlyArray<StepFilter>);
 };
 
-export const getFormattedStatusesChoicesForProject = (
+export const getFormattedStatusesChoicesForProjectStep = (
   project: ProjectAdminProposals_project,
+  stepId: ?Uuid
 ): $ReadOnlyArray<StepStatusFilter> => {
   return ((project.steps
     .filter(Boolean)
     .filter(step => SHOWING_STEP_TYPENAME.includes(step.__typename))
+    .filter(step => stepId && step.id === stepId)
     .filter(step => step.statuses && step.statuses.length > 0)
     .reduce(
       (acc, step) => [
         ...acc,
         // $FlowFixMe,
-        {
-          id: step.id,
-          title: step.title,
-          statuses: step.statuses?.map(status => ({
-            id: status.id,
-            name: status.name,
-            color: status.color,
-          })),
-        },
+        step.statuses?.map(status => ({
+          id: status.id,
+          name: status.name,
+          color: status.color,
+        }))
       ],
       [],
     )
@@ -122,9 +116,10 @@ type AllFormattedChoicesReturn = {|
 
 export const getAllFormattedChoicesForProject = (
   project: ProjectAdminProposals_project,
+  stepId: ?Uuid
 ): AllFormattedChoicesReturn => ({
   categories: getFormattedCategoriesChoicesForProject(project),
   districts: getFormattedDistrictsChoicesForProject(project),
   steps: getFormattedStepsChoicesForProject(project),
-  stepStatuses: getFormattedStatusesChoicesForProject(project),
+  stepStatuses: getFormattedStatusesChoicesForProjectStep(project, stepId),
 });

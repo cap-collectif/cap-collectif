@@ -10,13 +10,9 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => {
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query ProjectAdminPageQuery(
-          $projectId: ID!
-          $isEditMode: Boolean!
-        ) {
+        query ProjectAdminPageQuery($projectId: ID!, $isEditMode: Boolean!) {
           project: node(id: $projectId) @include(if: $isEditMode) {
-            ...ProjectAdminContent_project
-              @arguments(projectId: $projectId)
+            ...ProjectAdminContent_project @arguments(projectId: $projectId)
           }
         }
       `}
@@ -25,9 +21,9 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => {
         isEditMode: !!projectId,
       }}
       render={({
-                 props,
-                 error,
-               }: {
+        props,
+        error,
+      }: {
         ...ReactRelayReadyState,
         props: ?ProjectAdminPageQueryResponse,
       }) => {
@@ -35,7 +31,11 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => {
           return graphqlError;
         }
         if (props) {
-          return <ProjectAdminContent project={props.project || null}/>;
+          return (
+            <ProjectAdminContent
+              project={props.project || null}
+            />
+          );
         }
         return null;
       }}

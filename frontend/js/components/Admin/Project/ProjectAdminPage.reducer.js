@@ -10,7 +10,7 @@ export type ProposalsCategoryValues = 'ALL' | Uuid;
 
 export type ProposalsDistrictValues = 'ALL' | Uuid;
 
-export type ProposalsStepValues = 'ALL' | Uuid;
+export type ProposalsStepValues = ?Uuid;
 
 export type Filters = {|
   +state: ProposalsStateValues,
@@ -71,6 +71,7 @@ export const createReducer = (state: ParametersState, action: Action) => {
         ...state,
         filters: {
           ...state.filters,
+          status: null,
           step: action.payload,
         },
       };
@@ -79,7 +80,8 @@ export const createReducer = (state: ParametersState, action: Action) => {
         ...state,
         filters: {
           ...state.filters,
-          step: 'ALL',
+          status: null,
+          step: null,
         },
       };
     case 'CHANGE_DISTRICT_FILTER':

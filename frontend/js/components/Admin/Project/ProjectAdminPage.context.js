@@ -14,17 +14,19 @@ const DEFAULT_FILTERS: Filters = {
   state: 'PUBLISHED',
   category: 'ALL',
   district: 'ALL',
-  step: 'ALL',
+  step: null,
   status: null,
   term: null,
 };
 
 type ProviderProps = {|
   +children: React.Node,
+  +firstCollectStepId: ?string
 |};
 
 export type Context = {|
   +parameters: ParametersState,
+  +firstCollectStepId: ?string,
   +dispatch: Action => void,
 |};
 
@@ -33,6 +35,7 @@ export const ProjectAdminPageContext = React.createContext<Context>({
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,
   },
+  firstCollectStepId: null,
   dispatch: () => {},
 });
 
@@ -46,17 +49,21 @@ export const useProjectAdminProposalsContext = (): Context => {
   return context;
 };
 
-export const ProjectAdminProposalsProvider = ({ children }: ProviderProps) => {
+export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: ProviderProps) => {
   const [parameters, dispatch] = React.useReducer<ParametersState, Action>(createReducer, {
     sort: DEFAULT_SORT,
-    filters: DEFAULT_FILTERS,
+    filters: {
+      ...DEFAULT_FILTERS,
+      step: firstCollectStepId
+    },
   });
   const context = React.useMemo(
     () => ({
       parameters,
+      firstCollectStepId,
       dispatch,
     }),
-    [parameters],
+    [parameters, firstCollectStepId],
   );
   return (
     <ProjectAdminPageContext.Provider value={context}>{children}</ProjectAdminPageContext.Provider>

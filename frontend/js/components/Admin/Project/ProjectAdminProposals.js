@@ -35,6 +35,7 @@ type FilterTagProps = {|
   +show: boolean,
   +icon?: React.Node,
   +bgColor?: string,
+  +canClose?: boolean,
   +onClose?: () => void,
 |};
 
@@ -60,35 +61,29 @@ const ProposalListLoader = () => (
   </S.ProposalListLoader>
 );
 
-const FilterTag = ({ children, show, icon, onClose, bgColor }: FilterTagProps) => {
+const FilterTag = ({ children, show, icon, onClose, bgColor, canClose = true }: FilterTagProps) => {
   if (!show) return null;
   return (
     <S.FilterTagContainer bgColor={bgColor}>
       {icon}
       <span>{children}</span>
-      <Icon onClick={onClose} name={ICON_NAME.close} className="close-icon" size="0.7rem" />
+      {canClose && (
+        <Icon onClick={onClose} name={ICON_NAME.close} className="close-icon" size="0.7rem" />
+      )}
     </S.FilterTagContainer>
   );
 };
 
 const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_project }) => {
   const { selectedRows, rowsCount } = usePickableList();
-  const { parameters, dispatch } = useProjectAdminProposalsContext();
+  const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
   const { categories, districts, steps, stepStatuses } = React.useMemo(
-    () => getAllFormattedChoicesForProject(project),
-    [project],
+    () => getAllFormattedChoicesForProject(project, parameters.filters.step),
+    [project, parameters.filters.step],
   );
   const intl = useIntl();
   const selectedStepStatus = React.useMemo(
-    () =>
-      stepStatuses.reduce((acc, stepStatus) => {
-        const status = stepStatus.statuses.find(s => s.id === parameters.filters.status);
-        if (status) {
-          acc = status;
-        }
-
-        return acc;
-      }, null),
+    () => stepStatuses.find(s => s.id === parameters.filters.status),
     [parameters.filters.status, stepStatuses],
   );
 
@@ -182,23 +177,11 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
                 });
               }}
               title={intl.formatMessage({ id: 'filter-by' })}>
-              {stepStatuses.length <= 1
-                ? stepStatuses.map(s =>
-                    s.statuses.map(status => (
-                      <DropdownSelect.Choice key={status.id} value={status.id}>
-                        {status.name}
-                      </DropdownSelect.Choice>
-                    )),
-                  )
-                : stepStatuses.map(s => (
-                    <DropdownSelect.Menu key={s.id} name={s.title} pointing="left">
-                      {s.statuses.map(status => (
-                        <DropdownSelect.Choice key={status.id} value={status.id}>
-                          {status.name}
-                        </DropdownSelect.Choice>
-                      ))}
-                    </DropdownSelect.Menu>
-                  ))}
+              {stepStatuses.map(stepStatus => (
+                <DropdownSelect.Choice key={stepStatus.id} value={stepStatus.id}>
+                  {stepStatus.name}
+                </DropdownSelect.Choice>
+              ))}
             </DropdownSelect>
           </Collapsable.Element>
         </Collapsable>
@@ -223,9 +206,6 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
                 dispatch({ type: 'CHANGE_STEP_FILTER', payload: ((newValue: any): SortValues) });
               }}
               title={intl.formatMessage({ id: 'filter-by' })}>
-              <DropdownSelect.Choice value="ALL">
-                {intl.formatMessage({ id: 'every-step' })}
-              </DropdownSelect.Choice>
               {steps.map(s => (
                 <DropdownSelect.Choice key={s.id} value={s.id}>
                   {s.title}
@@ -234,11 +214,7 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
             </DropdownSelect>
           </Collapsable.Element>
         </Collapsable>
-        <FilterTag
-          onClose={() => {
-            dispatch({ type: 'CLEAR_STEP_FILTER' });
-          }}
-          show={parameters.filters.step !== 'ALL'}>
+        <FilterTag canClose={false} show={firstCollectStepId !== parameters.filters.step}>
           {steps.find(s => s.id === parameters.filters.step)?.title || null}
         </FilterTag>
       </S.FilterContainer>

@@ -7,10 +7,15 @@ import IntlProvider from './IntlProvider';
 import ProjectAdminPage from '../components/Admin/Project/ProjectAdminPage';
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 
-const ProjectAdminApp = ({ projectId }: { projectId: ?string }) => (
+type ProjectAdminAppProps = {|
+  +projectId: ?string,
+  +firstCollectStepId: ?string,
+|}
+
+const ProjectAdminApp = ({ projectId, firstCollectStepId }: ProjectAdminAppProps ) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <ProjectAdminProposalsProvider>
+      <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
         <ProjectAdminPage projectId={projectId} />
       </ProjectAdminProposalsProvider>
     </IntlProvider>
