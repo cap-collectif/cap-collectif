@@ -1965,6 +1965,27 @@ type ContactFormTranslation {
   confidentiality: String
 }
 
+input ContactProposalAuthorInput {
+  """id of the proposal"""
+  proposalId: ID!
+
+  """the email of the viewer"""
+  replyEmail: String!
+
+  """the name of the viewer"""
+  senderName: String!
+
+  """the message to be sent"""
+  message: String!
+  clientMutationId: String
+}
+
+type ContactProposalAuthorPayload {
+  """the error message, if any"""
+  error: String
+  clientMutationId: String
+}
+
 """A contribution with an author"""
 interface Contribution {
   """The ID of an object"""
@@ -3991,6 +4012,7 @@ type Mutation {
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
   updateRegistrationForm(input: UpdateRegistrationFormQuestionsInput!): UpdateRegistrationFormQuestionsPayload
   updateRegistrationFormCommunication(input: UpdateRegistrationFormCommunicationInput!): UpdateRegistrationFormCommunicationPayload
+  contactProposalAuthor(input: ContactProposalAuthorInput!): ContactProposalAuthorPayload
   createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
   changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
@@ -5829,6 +5851,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
   """
   suggestingSimilarProposals: Boolean!
   isIndexationDone: Boolean!
+
+  """can the viewer send a contact message to the proposals author"""
+  canContact: Boolean!
 }
 
 """Ways in which proposal connections can be ordered."""
@@ -9144,6 +9169,9 @@ input UpdateProposalFormInput {
 
   """Proposal form is description field is mandatory or not"""
   descriptionMandatory: Boolean
+
+  """can the viewer send a contact message to the proposals author"""
+  canContact: Boolean
   clientMutationId: String
 }
 

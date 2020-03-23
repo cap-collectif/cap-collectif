@@ -177,3 +177,11 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         startAt: <identity((new \DateTime('2018-09-05')))>
         endAt: <identity((new \DateTime('2028-01-01')))>
         voteType: 0
+    collectstepCorona:
+        id: collectstepCorona
+        title: Collecte de projets
+        label: Dépôt
+        body: Déposez vos propositions pour se soutenir en cette période de confinement et de maladie
+        startAt: <identity((new \DateTime('2020-03-16')))>
+        endAt: <identity((new \DateTime('2021-03-16')))>
+        voteType: 0

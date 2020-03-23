@@ -31,6 +31,7 @@ export const ICON_NAME: {
   checkboxChecked: 'checkboxChecked',
   file: 'file',
   check: 'check',
+  message: 'message',
 } = {
   calendar: 'calendar',
   networkAdd: 'network-add',
@@ -59,6 +60,7 @@ export const ICON_NAME: {
   checkboxChecked: 'checkboxChecked',
   file: 'file',
   check: 'check',
+  message: 'message',
 };
 
 type Props = {|
@@ -130,7 +132,8 @@ const getIcon = name => {
       return <Icons.Check />;
     case 'file':
       return <Icons.File />;
-
+    case 'message':
+      return <Icons.Message />;
     default:
       return <div />;
   }

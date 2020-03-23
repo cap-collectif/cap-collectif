@@ -439,6 +439,9 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                   "query": Object {
                     "$fragmentRefs": null,
                     "$refType": null,
+                    "viewer": Object {
+                      "isSuperAdmin": false,
+                    },
                   },
                 }
               }

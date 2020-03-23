@@ -76,3 +76,6 @@ UpdateProposalFormInput:
       descriptionMandatory:
         type: 'Boolean'
         description: 'Proposal form is description field is mandatory or not'
+      canContact:
+        type: 'Boolean'
+        description: 'can the viewer send a contact message to the proposals author'

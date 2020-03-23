@@ -241,6 +241,11 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
      */
     private $suggestingSimilarProposals = true;
 
+    /**
+     * @ORM\Column(name="can_contact", type="boolean", nullable=false)
+     */
+    private $canContact = false;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -895,6 +900,18 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function setDescriptionMandatory(bool $descriptionMandatory): self
     {
         $this->descriptionMandatory = $descriptionMandatory;
+
+        return $this;
+    }
+
+    public function canContact(): bool
+    {
+        return $this->canContact;
+    }
+
+    public function setCanContact(bool $canContact): self
+    {
+        $this->canContact = $canContact;
 
         return $this;
     }

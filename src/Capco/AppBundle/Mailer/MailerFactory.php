@@ -69,6 +69,13 @@ class MailerFactory
             $this->setModerationLinks($message, $element);
         }
 
+        if (isset($params['sender'])) {
+            $message->setSenderEmail($params['sender']['email']);
+            $message->setSenderName($params['sender']['name']);
+        }
+
+        $this->copyToAdminIfNeeded($message, $params);
+
         return $message;
     }
 
@@ -180,5 +187,12 @@ class MailerFactory
         $senderName = $this->siteParams->getValue('admin.mail.notifications.send_name');
         $message->setSenderEmail($senderEmail);
         $message->setSenderName($senderName);
+    }
+
+    private function copyToAdminIfNeeded(AbstractMessage $message, array $params): void
+    {
+        if (isset($params['copyToAdmin']) && $params['copyToAdmin']) {
+            $message->addBcc($this->siteParams->getValue('admin.mail.notifications.receive_address'));
+        }
     }
 }

@@ -701,6 +701,15 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                 </Panel.Collapse>
               </Panel>
             )}
+            {query.viewer.isSuperAdmin && (
+              <Field
+                id="proposal_form_canContact_field"
+                name="canContact"
+                component={toggle}
+                normalize={val => !!val}
+                label={<FormattedMessage id="allow-author-contact" />}
+              />
+            )}
             <div className="box-header">
               <h3 className="box-title">
                 <FormattedMessage id="proposal_form.admin.configuration.custom_field" />
@@ -833,6 +842,7 @@ export default createRefetchContainer(
         usingSummary
         usingIllustration
         descriptionMandatory
+        canContact
         latMap
         lngMap
         zoomMap
@@ -891,12 +901,18 @@ export default createRefetchContainer(
     query: graphql`
       fragment ProposalFormAdminConfigurationForm_query on Query {
         ...ProposalFormAdminCategories_query
+        viewer {
+          isSuperAdmin
+        }
       }
     `,
   },
   graphql`
     query ProposalFormAdminConfigurationFormRefetchQuery {
       ...ProposalFormAdminConfigurationForm_query
+      viewer {
+        isSuperAdmin
+      }
     }
   `,
 );

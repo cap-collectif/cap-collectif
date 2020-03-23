@@ -27,6 +27,7 @@ describe('<ProposalPageHeader />', () => {
     project: { opinionCanBeFollowed: true, type: { title: 'global.consultation' } },
     form: {
       isProposalForm: true,
+      canContact: false,
     },
   };
 
@@ -51,6 +52,7 @@ describe('<ProposalPageHeader />', () => {
     project: { opinionCanBeFollowed: true, type: { title: 'global.consultation' } },
     form: {
       isProposalForm: false,
+      canContact: false,
     },
   };
 
@@ -75,6 +77,7 @@ describe('<ProposalPageHeader />', () => {
     project: { opinionCanBeFollowed: true, type: { title: 'global.consultation' } },
     form: {
       isProposalForm: false,
+      canContact: false,
     },
   };
 
@@ -125,6 +128,7 @@ describe('<ProposalPageHeader />', () => {
     project: { opinionCanBeFollowed: true, type: { title: 'project.types.interpellation' } },
     form: {
       isProposalForm: true,
+      canContact: false,
     },
   };
 

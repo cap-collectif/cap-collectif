@@ -37,7 +37,7 @@ Scenario: GraphQL admin wants to get visible proposals of a user.
             {
               "node": {
                 "project": {
-                  "_id": "project25",
+                  "_id": "projectCorona",
                   "visibility": "PUBLIC"
                 }
               }
@@ -53,7 +53,7 @@ Scenario: GraphQL admin wants to get visible proposals of a user.
             {
               "node": {
                 "project": {
-                  "_id": "project6",
+                  "_id": "project25",
                   "visibility": "PUBLIC"
                 }
               }
@@ -135,16 +135,16 @@ Scenario: GraphQL super admin wants to get visible proposals of a user
             {
               "node": {
                 "project": {
-                  "_id": "ProjectAccessibleForAdminOnly",
-                  "visibility": "ADMIN"
+                  "_id": "project6",
+                  "visibility": "PUBLIC"
                 }
               }
             },
             {
               "node": {
                 "project": {
-                  "_id": "ProjectAccessibleForMeOnly",
-                  "visibility": "ME"
+                  "_id": "ProjectAccessibleForAdminOnly",
+                  "visibility": "ADMIN"
                 }
               }
             },
@@ -224,7 +224,7 @@ Scenario: GraphQL anonymous want to get visible proposals of a user
             {
               "node": {
                 "project": {
-                  "_id": "project7",
+                  "_id": "project6",
                   "visibility": "PUBLIC"
                 }
               }
@@ -232,7 +232,7 @@ Scenario: GraphQL anonymous want to get visible proposals of a user
             {
               "node": {
                 "project": {
-                  "_id": "project6",
+                  "_id": "project7",
                   "visibility": "PUBLIC"
                 }
               }

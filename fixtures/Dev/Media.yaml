@@ -278,3 +278,9 @@ Capco\MediaBundle\Entity\Media:
     name: Media Urbanisme
     category: '@MediaCategory1'
     providerReference: providerReference44.svg
+  MediaProjectCorona:
+    id: 'media-project-corona'
+    binaryContent: project-corona.png
+    name: Titre du média 1
+    category: '@MediaCategory1'
+    providerReference: providerReference45.jpg

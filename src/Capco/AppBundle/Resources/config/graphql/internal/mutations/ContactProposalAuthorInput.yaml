@@ -1,0 +1,16 @@
+ContactProposalAuthorInput:
+  type: relay-mutation-input
+  config:
+    fields:
+      proposalId:
+        type: 'ID!'
+        description: 'id of the proposal'
+      replyEmail:
+        type: 'String!'
+        description: 'the email of the viewer'
+      senderName:
+        type: 'String!'
+        description: 'the name of the viewer'
+      message:
+        type: 'String!'
+        description: 'the message to be sent'

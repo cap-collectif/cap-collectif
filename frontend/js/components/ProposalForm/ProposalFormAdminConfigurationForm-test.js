@@ -13,9 +13,11 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     query: {
       $fragmentRefs,
       $refType,
+      viewer: { isSuperAdmin: false },
     },
     proposalForm: {
       $refType,
+      canContact: false,
       allowAknowledge: true,
       descriptionMandatory: true,
       isProposalForm: true,

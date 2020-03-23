@@ -659,7 +659,16 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:03:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:03:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:03:00'))>
-    proposal{109..115}:
+    proposal109:
+        id: proposal109
+        title: Jurer allégeance à Nurgle
+        body: <stripslashes('<p>Je vous propose de me contacter pour rejoindre la secte des adorateurs de Grand Père Nurgle</p>\')>
+        author: '@user4'
+        proposalForm: '@proposalformCorona'
+        publishedAt: <(new \DateTime('2020-03-17 00:03:00'))>
+        createdAt: <(new \DateTime('2020-03-17 00:03:00'))>
+        updatedAt: <(new \DateTime('2020-03-17 00:03:00'))>
+    proposal{110..115}:
         id: 'proposal<current()>'
         title: 'Proposal <current()>'
         body: Qu'ils approchent ! Il y'a encore un nain dans la Moria qui respire !

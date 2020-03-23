@@ -116,3 +116,6 @@ ProposalForm:
       isIndexationDone:
         type: 'Boolean!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
+      canContact:
+        type: 'Boolean!'
+        description: 'can the viewer send a contact message to the proposals author'

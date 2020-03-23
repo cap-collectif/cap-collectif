@@ -76,6 +76,11 @@ Scenario: GraphQL client wants to list projects types only used by projects
               "id":"7",
               "title":"global.questionnaire",
               "slug":"questionnaire"
+           },
+           {
+              "id":"8",
+              "title":"project.types.suggestionBox",
+              "slug":"suggestion-box"
            }
         ]
      }
@@ -128,6 +133,11 @@ Scenario: GraphQL user wants to list projects types only used by projects
               "id":"7",
               "title":"global.questionnaire",
               "slug":"questionnaire"
+           },
+           {
+             "id":"8",
+             "title":"project.types.suggestionBox",
+             "slug":"suggestion-box"
            }
         ]
      }

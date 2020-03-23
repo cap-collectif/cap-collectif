@@ -304,3 +304,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
       step: '@collectstepFrench'
       project: '@p27'
       position: 1
+  pasCorona:
+      id: pasCorona
+      step: '@collectstepCorona'
+      project: '@projectCorona'
+      position: 1

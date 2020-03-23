@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
+import styled, { type StyledComponent } from 'styled-components';
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
 import UserLink from '../../User/UserLink';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
@@ -17,6 +18,7 @@ import type { ProposalPageHeader_viewer } from '~relay/ProposalPageHeader_viewer
 import type { State } from '../../../types';
 import TrashedMessage from '../../Trashed/TrashedMessage';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
+import { ProposalContactButton } from '../Contact/ProposalContactButton';
 
 type Props = {
   proposal: ProposalPageHeader_proposal,
@@ -25,6 +27,17 @@ type Props = {
   className: string,
   referer: string,
 };
+
+const HeaderBandContainer: StyledComponent<
+  { canContact: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
+  className: 'media',
+})`
+  margin-bottom: 15px;
+  align-items: ${props => props.canContact && 'center !important'};
+`;
 
 export class ProposalPageHeader extends React.Component<Props> {
   static defaultProps = {
@@ -66,6 +79,8 @@ export class ProposalPageHeader extends React.Component<Props> {
         : 'proposal.back'
       : 'questions-list';
     const tradKeyToDisplayDate = proposal.draft ? 'last-modification-on' : 'global.edited_on';
+    const { form } = proposal;
+    const { canContact } = form;
 
     return (
       <div id="ProposalPageHeader" className={classNames(classes)}>
@@ -77,7 +92,7 @@ export class ProposalPageHeader extends React.Component<Props> {
         <TrashedMessage className="consultation__header__title h1" contribution={proposal}>
           <h1 className="consultation__header__title h1">{proposal.title}</h1>
         </TrashedMessage>
-        <div className="media mb-15">
+        <HeaderBandContainer canContact={canContact}>
           {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatarDeprecated className="pull-left" user={proposal.author} />
           <div className="media-body">
@@ -102,8 +117,9 @@ export class ProposalPageHeader extends React.Component<Props> {
               )}
               {!proposal.draft && <UnpublishedLabel publishable={proposal} />}
             </p>
+            {canContact && <ProposalContactButton proposalId={proposal.id} />}
           </div>
-        </div>
+        </HeaderBandContainer>
         {proposal.publicationStatus !== 'DRAFT' && (
           <div className="proposal__buttons">
             {step && (
@@ -183,6 +199,7 @@ export default createFragmentContainer(container, {
       }
       form {
         isProposalForm
+        canContact
       }
       ...interpellationLabelHelper_proposal @relay(mask: false)
     }

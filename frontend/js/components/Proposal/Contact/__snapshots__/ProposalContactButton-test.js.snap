@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalContactButton /> renders correctly 1`] = `
+<Fragment>
+  <Connect(ReduxForm)
+    onClose={[Function]}
+    proposalId="proposalId324Z"
+    show={false}
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    id="ProposalContactModal-show-button"
+    onClick={[Function]}
+  >
+    <Icon
+      color="#333333"
+      name="message"
+      size={16}
+    />
+     
+    <FormattedMessage
+      id="send-message"
+      values={Object {}}
+    />
+  </Button>
+</Fragment>
+`;

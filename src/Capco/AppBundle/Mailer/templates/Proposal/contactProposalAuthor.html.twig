@@ -1,0 +1,19 @@
+{% extends "@CapcoMail/standardLayout.html.twig" %}
+
+{% block html_title %}
+    {{ 'proposal-notifier-contact'|trans({}, 'CapcoAppBundle', user_locale) }}
+{% endblock %}
+
+{% block header_mail %}
+    {{ senderName }} vous a envoyé un message :
+{% endblock %}
+
+{% block core_mail %}
+    <div>
+        {{ senderMessage }}
+    </div>
+{% endblock %}
+
+{% block footer_mail %}
+    Lui répondre : {{ senderEmail }}
+{% endblock %}

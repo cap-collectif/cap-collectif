@@ -126,7 +126,9 @@ class ProposalFormUpdateType extends AbstractType
             ])
 
             ->add('allowAknowledge', CheckboxType::class)
-            ->add('isProposalForm', CheckboxType::class);
+            ->add('isProposalForm', CheckboxType::class)
+            ->add('canContact', CheckboxType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

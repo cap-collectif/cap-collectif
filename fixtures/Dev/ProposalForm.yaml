@@ -328,3 +328,13 @@ Capco\AppBundle\Entity\ProposalForm:
     themeMandatory: false
     descriptionMandatory: true
     categoryMandatory: true
+  proposalformCorona:
+    id: proposalformCorona
+    title: Appel à proposition COVID-19
+    description: Déposez vos propositions pour se soutenir en cette période de confinement et de maladie
+    step: '@collectstepCorona'
+    reference: 19
+    usingDescription: true
+    descriptionMandatory: true
+    usingIllustration: true
+    canContact: true
