@@ -8,6 +8,7 @@ import type { GlobalState, Dispatch } from '../../types';
 import component from '../Form/Field';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
+import type { Questions } from '~/components/Form/Form.type';
 
 type DefaultProps = {|
   +show: boolean,
@@ -23,15 +24,18 @@ type ParentProps = {|
 |};
 
 type SelectionFormValues = {|
+  +id: string,
   +title: string,
   +description: ?string,
   +private: boolean,
+  +required: boolean,
 |};
 
 type Props = {|
   +disabled: boolean,
   +dispatch: Dispatch,
   +currentSection: SelectionFormValues,
+  +questions: Questions,
   ...ParentProps,
 |};
 
@@ -52,6 +56,7 @@ const SectionQuestionAdminModal = ({
   currentSection,
   dispatch,
   formName,
+  questions,
 }: Props) => {
   const [initialSectionValues, changeInitialSection] = useState(currentSection);
 
@@ -99,6 +104,35 @@ const SectionQuestionAdminModal = ({
           type="checkbox"
           component={component}
         />
+
+        <h4 style={{ fontWeight: 'bold' }}>
+          <span>
+            <FormattedMessage id="conditional-jumps" />
+          </span>
+        </h4>
+
+        <div className="movable-element">
+          <div className="mb-10">
+            <h4 className="panel-title">
+              <FormattedMessage id="always-go-to" />
+            </h4>
+            <Field
+              id={`${member}.alwaysJumpDestinationQuestion.id`}
+              name={`${member}.alwaysJumpDestinationQuestion.id`}
+              type="select"
+              normalize={val => (val !== '' ? val : null)}
+              component={component}>
+              <option value="" />
+              {questions
+                .filter(
+                  question => question.id && currentSection && question.id !== currentSection.id,
+                )
+                .map((question, i) => (
+                  <option value={question.id}>{`${i + 1}. ${question.title}`}</option>
+                ))}
+            </Field>
+          </div>
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <CloseButton
@@ -133,6 +167,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   return {
     currentSection: selector(state, `${props.member}`),
     disabled: getFormSyncErrors(props.formName)(state).questions !== undefined,
+    questions: selector(state, 'questions'),
   };
 };
 
