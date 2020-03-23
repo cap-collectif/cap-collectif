@@ -11,6 +11,7 @@ use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ContactProposalAuthorMutation implements MutationInterface
 {
@@ -25,7 +26,7 @@ class ContactProposalAuthorMutation implements MutationInterface
 
     public function __invoke(Argument $argument): array
     {
-        $proposalId = $argument->offsetGet('proposalId');
+        $proposalId = GlobalId::fromGlobalId($argument->offsetGet('proposalId'))['id'];
         $proposal = $this->proposalRepository->find($proposalId);
         $errorLog = $this->getErrorLog($proposal);
 
