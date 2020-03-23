@@ -29,10 +29,16 @@ trait FranceConnectTrait
     private function IAuthenticateFranceConnectIP(string $id)
     {
         $this->IJumpToFranceConnectLoginScreen();
-        $this->iClickOnButton($id);
+        $this->getSession()
+        ->getPage()
+        ->find('css', $id)
+        ->click();
         $this->IShouldSeeTheFranceConnectInteractionScreen();
 
-        $this->iClickOnButton('[value="Valider"]');
+        $this->getSession()
+        ->getPage()
+        ->find('css', '[value="Valider"]')
+        ->click();
     }
 
     /**
@@ -49,6 +55,10 @@ trait FranceConnectTrait
     public function IAuthenticateFranceConnectAndValidate()
     {
         $this->IShouldSeeTheFranceConnectLoginScreen();
-        $this->iClickOnButton('[value="Continuer sur CAP COLLECTIF - 835"]');
+
+        $this->getSession()
+        ->getPage()
+        ->find('css', '[value="Continuer sur CAP COLLECTIF - 835"]')
+        ->click();
     }
 }
