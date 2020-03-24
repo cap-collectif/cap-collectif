@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedBy: '@user525'
         proposal: '@proposal113'
         isApproved: true
-        isDone: true
+        state: 'DONE'
         createdAt: <identity((new \DateTime('2019-08-01 00:01:20'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:01:20'))->modify("+ 18 days"))>
     proposalDecision2:
@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedBy: '@user525'
         proposal: '@proposal115'
         isApproved: false
-        isDone: true
+        state: 'DONE'
         createdAt: <identity((new \DateTime('2019-08-01 00:01:21'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:01:22'))->modify("+ 18 days"))>
     proposalDecision3:
@@ -26,6 +26,6 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedBy: '@user525'
         proposal: '@proposal109'
         isApproved: true
-        isDone: false
+        state: 'IN_PROGRESS'
         createdAt: <identity((new \DateTime('2019-08-03 00:01:21')))>
         updatedAt: <identity((new \DateTime('2019-08-03 00:01:22')))>

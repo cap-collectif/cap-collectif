@@ -216,3 +216,16 @@ InternalProposal:
                 type: 'Boolean!'
                 description: 'Does the user can give the final decision on the current proposal.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanDecideProposalDecisionResolver", [getUser(), value])'
+            analysts:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalystsResolver").isGranted(getUser(), value)'
+                type: '[InternalUser!]'
+                description: 'The analysts assigned to the proposal.'
+            viewerCanAnalyse:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'Boolean!'
+                description: 'Does the user can analyse the current proposal.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanAnalyseProposalAnalysisResolver", [getUser(), value])'
+            analyses:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalysisResolver").isGranted(getUser(), value)'
+                type: '[InternalProposalAnalysis!]'
+                description: "The proposal's related analyses."

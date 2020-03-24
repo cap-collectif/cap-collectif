@@ -1,11 +1,13 @@
 EvaluateProposalAssessmentInput:
     type: relay-mutation-input
+    inherits:
+        - ChangeProposalAssessmentInput
     config:
         description: 'Evaluate a proposal assessment.'
         fields:
-            proposalId:
-                type: 'ID!'
-                description: 'The proposal to evaluate.'
             decision:
                 type: 'ProposalAssessmentDecision!'
                 description: 'The decision about the proposal assessment.'
+            officialResponse:
+                type: 'String!'
+                description: "The proposal assessment's official response."

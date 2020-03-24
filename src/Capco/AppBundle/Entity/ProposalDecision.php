@@ -2,12 +2,14 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Timestampable;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalDecisionRepository")
@@ -31,7 +33,7 @@ class ProposalDecision implements Timestampable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false, name="updated_by")
+     * @ORM\JoinColumn(nullable=true, name="updated_by", referencedColumnName="id")
      */
     private $updatedBy;
 
@@ -40,6 +42,12 @@ class ProposalDecision implements Timestampable
      * @ORM\JoinColumn(nullable=false)
      */
     private $proposal;
+
+    /**
+     * @ORM\Column(type="string", nullable=false)
+     * @Assert\Choice(choices = {"IN_PROGRESS", "DONE"})
+     */
+    private $state = ProposalStatementState::IN_PROGRESS;
 
     /**
      * @ORM\Column(type="boolean", nullable=false, name="is_approved")
@@ -51,11 +59,6 @@ class ProposalDecision implements Timestampable
      * @ORM\JoinColumn(nullable=true, name="refused_reason", referencedColumnName="id")
      */
     private $refusedReason;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=false, name="is_done")
-     */
-    private $isDone = false;
 
     /**
      * @Gedmo\Timestampable(on="update")
@@ -152,14 +155,14 @@ class ProposalDecision implements Timestampable
         return $this;
     }
 
-    public function getIsDone(): bool
+    public function getState(): string
     {
-        return $this->isDone;
+        return $this->state;
     }
 
-    public function setIsDone(bool $isDone): self
+    public function setState(string $state): self
     {
-        $this->isDone = $isDone;
+        $this->state = $state;
 
         return $this;
     }

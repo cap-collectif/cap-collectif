@@ -5,6 +5,6 @@ ChangeProposalDecisionPayload:
             decision:
                 type: 'InternalProposalDecision'
                 description: 'The changed proposal decision.'
-            userErrors:
-                type: '[UserError!]!'
-                description: 'An unsuccessful mutation will return one or more `UserError` objects.'
+            errorCode:
+                type: 'InternalProposalStatementErrorCode'
+                description: 'Contains the error code if one occurred.'

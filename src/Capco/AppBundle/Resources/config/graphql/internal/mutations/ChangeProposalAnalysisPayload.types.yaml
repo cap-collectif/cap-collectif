@@ -1,0 +1,10 @@
+ChangeProposalAnalysisPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            analysis:
+                type: 'InternalProposalAnalysis'
+                description: 'The changed proposal analysis.'
+            errorCode:
+                type: 'InternalProposalStatementErrorCode'
+                description: 'Contains the error code if one occurred.'

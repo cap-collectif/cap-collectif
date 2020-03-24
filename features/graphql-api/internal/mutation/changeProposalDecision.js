@@ -4,12 +4,10 @@ import '../../_setup';
 const ChangeProposalDecisionMutation = /* GraphQL */ `
   mutation ChangeProposalDecisionMutation($input: ChangeProposalDecisionInput!) {
     changeProposalDecision(input: $input) {
-      userErrors {
-        message
-      }
+      errorCode
       decision {
         isApproved
-        isDone
+        state
         refusedReason {
           id
         }
@@ -31,12 +29,10 @@ const ChangeProposalDecisionMutation = /* GraphQL */ `
 const ChangeProposalDecisionWithAssessmentMutation = /* GraphQL */ `
   mutation ChangeProposalDecisionMutation($input: ChangeProposalDecisionInput!) {
     changeProposalDecision(input: $input) {
-      userErrors {
-        message
-      }
+      errorCode
       decision {
         isApproved
-        isDone
+        state
         proposal {
           assessment {
             state

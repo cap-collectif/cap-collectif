@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
@@ -72,6 +73,12 @@ abstract class AbstractResponse
      * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $proposalEvaluation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", inversedBy="responses", cascade={"persist"})
+     * @ORM\JoinColumn(name="analysis_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private $analysis;
 
     /**
      * @Assert\NotNull()
@@ -149,6 +156,18 @@ abstract class AbstractResponse
     public function setProposalEvaluation(ProposalEvaluation $proposalEvaluation = null): self
     {
         $this->proposalEvaluation = $proposalEvaluation;
+
+        return $this;
+    }
+
+    public function getAnalysis(): ?ProposalAnalysis
+    {
+        return $this->analysis;
+    }
+
+    public function setAnalysis(?ProposalAnalysis $analysis = null): self
+    {
+        $this->analysis = $analysis;
 
         return $this;
     }

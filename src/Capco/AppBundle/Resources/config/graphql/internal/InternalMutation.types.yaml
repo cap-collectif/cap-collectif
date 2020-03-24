@@ -279,6 +279,20 @@ InternalMutation:
                     inputType: ChangeProposalDecisionInput
                     payloadType: ChangeProposalDecisionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeProposalDecisionMutation", [value, getUser()])'
+            changeProposalAnalysis:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: ChangeProposalAnalysisInput
+                    payloadType: ChangeProposalAnalysisPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeProposalAnalysisMutation", [value, getUser()])'
+            analyseProposalAnalysis:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AnalyseProposalAnalysisInput
+                    payloadType: AnalyseProposalAnalysisPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AnalyseProposalAnalysisMutation", [value, getUser()])'
             # User
             requestUserArchive:
                 access: "@=hasRole('ROLE_USER')"

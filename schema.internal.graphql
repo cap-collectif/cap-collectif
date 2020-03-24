@@ -425,6 +425,30 @@ type AddVersionPayload {
   clientMutationId: String
 }
 
+input AnalyseProposalAnalysisInput {
+  """The id of the proposal to analyse."""
+  proposalId: ID!
+
+  """The responses from the evaluation form."""
+  responses: [ResponseInput!]
+
+  """The comment related to the analysis."""
+  comment: String!
+  clientMutationId: String
+
+  """The analysis decision taken about the proposal"""
+  decision: ProposalAnalysisDecision!
+}
+
+type AnalyseProposalAnalysisPayload {
+  """The changed proposal analysis."""
+  analysis: ProposalAnalysis
+
+  """Contains the error code if one occurred."""
+  errorCode: ProposalStatementErrorCode
+  clientMutationId: String
+}
+
 """A contribution"""
 type Answer {
   """Identifies the date and time when the object was created."""
@@ -879,6 +903,27 @@ type ChangeMapStylePayload {
   clientMutationId: String
 }
 
+input ChangeProposalAnalysisInput {
+  """The id of the proposal to analyse."""
+  proposalId: ID!
+
+  """The responses from the evaluation form."""
+  responses: [ResponseInput!]
+
+  """The comment related to the analysis."""
+  comment: String
+  clientMutationId: String
+}
+
+type ChangeProposalAnalysisPayload {
+  """The changed proposal analysis."""
+  analysis: ProposalAnalysis
+
+  """Contains the error code if one occurred."""
+  errorCode: ProposalStatementErrorCode
+  clientMutationId: String
+}
+
 input ChangeProposalAssessmentInput {
   """The id of the proposal to evaluate."""
   proposalId: ID!
@@ -898,8 +943,8 @@ type ChangeProposalAssessmentPayload {
   """The changed proposal assessment."""
   assessment: ProposalAssessment
 
-  """An unsuccessful mutation will return one or more `UserError` objects."""
-  userErrors: [UserError!]!
+  """Contains the error code if one occurred."""
+  errorCode: ProposalStatementErrorCode
   clientMutationId: String
 }
 
@@ -977,8 +1022,8 @@ type ChangeProposalDecisionPayload {
   """The changed proposal decision."""
   decision: ProposalDecision
 
-  """An unsuccessful mutation will return one or more `UserError` objects."""
-  userErrors: [UserError!]!
+  """Contains the error code if one occurred."""
+  errorCode: ProposalStatementErrorCode
   clientMutationId: String
 }
 
@@ -2640,20 +2685,29 @@ type EmailDomain implements Node {
 }
 
 input EvaluateProposalAssessmentInput {
-  """The proposal to evaluate."""
+  """The id of the proposal to evaluate."""
   proposalId: ID!
+
+  """The proposal assessment's body."""
+  body: String
+
+  """The estimated budget for the proposal."""
+  estimatedCost: Int
+
+  """The proposal assessment's official response."""
+  officialResponse: String!
+  clientMutationId: String
 
   """The decision about the proposal assessment."""
   decision: ProposalAssessmentDecision!
-  clientMutationId: String
 }
 
 type EvaluateProposalAssessmentPayload {
   """The evaluated proposal."""
   assessment: ProposalAssessment
 
-  """An unsuccessful mutation will return one or more `UserError` objects."""
-  userErrors: [UserError!]
+  """Contains the error code if one occurred."""
+  errorCode: ProposalStatementErrorCode
   clientMutationId: String
 }
 
@@ -3990,6 +4044,8 @@ type Mutation {
   changeProposalAssessment(input: ChangeProposalAssessmentInput!): ChangeProposalAssessmentPayload
   evaluateProposalAssessment(input: EvaluateProposalAssessmentInput!): EvaluateProposalAssessmentPayload
   changeProposalDecision(input: ChangeProposalDecisionInput!): ChangeProposalDecisionPayload
+  changeProposalAnalysis(input: ChangeProposalAnalysisInput!): ChangeProposalAnalysisPayload
+  analyseProposalAnalysis(input: AnalyseProposalAnalysisInput!): AnalyseProposalAnalysisPayload
   requestUserArchive(input: RequestUserArchiveInput!): RequestUserArchivePayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
@@ -5524,6 +5580,15 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Does the user can give the final decision on the current proposal."""
   viewerCanDecide: Boolean!
+
+  """The analysts assigned to the proposal."""
+  analysts: [User!]
+
+  """Does the user can analyse the current proposal."""
+  viewerCanAnalyse: Boolean!
+
+  """The proposal's related analyses."""
+  analyses: [ProposalAnalysis!]
 }
 
 """The affiliation of a user to a proposal"""
@@ -5533,6 +5598,66 @@ enum ProposalAffiliation {
 
   """Show only the proposals where the current user is an evaluer"""
   EVALUER
+}
+
+"""A proposal analysis."""
+type ProposalAnalysis {
+  """The proposal's analysis id."""
+  id: ID!
+
+  """The related proposal."""
+  proposal: Proposal!
+
+  """The last updated by a analyst."""
+  updatedBy: User!
+
+  """The estimated cost of the related proposal."""
+  estimatedCost: Int
+
+  """The proposal's analysis comment."""
+  comment: String
+
+  """The current state of the assessment."""
+  state: ProposalAnalysisState!
+
+  """The analysis responses."""
+  responses: [Response!]
+
+  """The creation date of the analysis."""
+  createdAt: DateTime!
+
+  """The last updated date."""
+  updatedAt: DateTime!
+}
+
+"""Available decisions value for a proposal analysis."""
+enum ProposalAnalysisDecision {
+  """The proposal's assessment state is favourable."""
+  FAVOURABLE
+
+  """The proposal's assessment state is unfavourable."""
+  UNFAVOURABLE
+
+  """The proposal's assessment state is unfavourable."""
+  NONE
+}
+
+"""Possible values of a proposal's analysis state."""
+enum ProposalAnalysisState {
+  """The proposal's analysis is currently being edited"""
+  IN_PROGRESS
+
+  """The proposal's related analysis state is favourable."""
+  FAVOURABLE
+
+  """The proposal's related analysis state is unfavourable."""
+  UNFAVOURABLE
+
+  """The proposal's related analysis has been not made in time."""
+  TOO_LATE
+
+  """The proposal's related analysis state is empty."""
+  NONE
 }
 
 """A proposal assessment."""
@@ -5641,8 +5766,8 @@ type ProposalDecision {
   """The related post containing the official response."""
   post: Post!
 
-  """Is the decision done."""
-  isDone: Boolean!
+  """The current status of the decision on the proposal"""
+  state: ProposalDecisionState!
 
   """The step's related status assigned to the proposal."""
   refusedReason: Status
@@ -5652,6 +5777,15 @@ type ProposalDecision {
 
   """The last updated date."""
   updatedAt: DateTime!
+}
+
+"""Possible values of a proposal's decision state."""
+enum ProposalDecisionState {
+  """The proposal's decision is currently being edited"""
+  IN_PROGRESS
+
+  """The proposal's related decision state is favourable."""
+  DONE
 }
 
 """A proposal district"""
@@ -5936,6 +6070,27 @@ enum ProposalSort {
 
   """Sort by the expensive ones first"""
   EXPENSIVE
+}
+
+"""Available errors on analysis related mutations."""
+enum ProposalStatementErrorCode {
+  """The given proposal does not exist."""
+  NON_EXISTING_PROPOSAL
+
+  """You are not assigned to this proposal."""
+  UNASSIGNED_PROPOSAL
+
+  """The decision-maker has already gave his decision about this proposal."""
+  DECISION_ALREADY_GIVEN
+
+  """An internal server error occurred."""
+  INTERNAL_ERROR
+
+  """The refused reason must not be empty if the proposal is not approved."""
+  REFUSED_REASON_EMPTY
+
+  """The proposal analysis does not exist."""
+  NON_EXISTING_ANALYSIS
 }
 
 """A proposal step"""

@@ -4,14 +4,14 @@ ProposalAssessmentState:
         description: "Possible values of a proposal's assessment state."
         values:
             IN_PROGRESS:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssessmentState::IN_PROGRESS")'
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::IN_PROGRESS")'
                 description: "The proposal's assessment is currently being edited"
             FAVOURABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssessmentState::FAVOURABLE")'
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::FAVOURABLE")'
                 description: "The proposal's related statement state is favourable."
             UNFAVOURABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssessmentState::UNFAVOURABLE")'
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::UNFAVOURABLE")'
                 description: "The proposal's related statement state is unfavourable."
             TOO_LATE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssessmentState::TOO_LATE")'
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::TOO_LATE")'
                 description: 'The evaluation of the proposal was not issued in time.'

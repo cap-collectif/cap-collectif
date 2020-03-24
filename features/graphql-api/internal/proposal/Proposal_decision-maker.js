@@ -8,7 +8,7 @@ const ProposalDecisionQuery = /* GraphQL */ `
         }
         decision {
           isApproved
-          isDone
+          state
           refusedReason {
             id
           }

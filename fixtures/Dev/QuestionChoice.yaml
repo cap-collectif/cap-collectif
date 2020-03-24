@@ -757,6 +757,16 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: 'Choix <current()>'
     position: <current()>
     question: '@multiplequestionWithLotOfChoices'
+  questionchoice131:
+    id: questionchoice131
+    title: 'Premier choix.'
+    position: 131
+    question: '@multiplequestion17'
+  questionchoice132:
+    id: questionchoice132
+    title: 'Deuxième choix.'
+    position: 131
+    question: '@multiplequestion17'
   questionchoiceIdf1:
     id: 'questionchoiceIdf1'
     title: 'Un Projet Local'

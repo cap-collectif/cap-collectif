@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeProposalAnalysis should analyse successfully the proposal's analysis 1`] = `
+Object {
+  "analyseProposalAnalysis": Object {
+    "analysis": Object {
+      "comment": "caca",
+      "id": Any<String>,
+      "state": "FAVOURABLE",
+    },
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`mutations.changeProposalAnalysis should create successfully the proposal's analysis 1`] = `
+Object {
+  "changeProposalAnalysis": Object {
+    "analysis": Object {
+      "comment": "caca",
+      "id": Any<String>,
+      "updatedBy": Object {
+        "id": "VXNlcjp1c2VyNTI2",
+      },
+    },
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`mutations.changeProposalAnalysis should not create the proposal's analysis if the decision has already been given 1`] = `
+Object {
+  "changeProposalAnalysis": Object {
+    "analysis": null,
+    "errorCode": "DECISION_ALREADY_GIVEN",
+  },
+}
+`;
+
+exports[`mutations.changeProposalAnalysis should not create the proposal's analysis when authenticated as user 1`] = `
+Object {
+  "changeProposalAnalysis": Object {
+    "analysis": null,
+    "errorCode": "UNASSIGNED_PROPOSAL",
+  },
+}
+`;

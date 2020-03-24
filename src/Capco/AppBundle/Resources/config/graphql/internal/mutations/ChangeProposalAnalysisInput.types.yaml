@@ -1,0 +1,15 @@
+ChangeProposalAnalysisInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input type of ChangeProposalAnalysis mutation'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The id of the proposal to analyse.'
+            responses:
+                type: '[ResponseInput!]'
+                description: 'The responses from the evaluation form.'
+            comment:
+                type: 'String'
+                description: 'The comment related to the analysis.'
+

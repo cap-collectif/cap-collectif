@@ -1,0 +1,24 @@
+InternalProposalStatementErrorCode:
+    type: enum
+    config:
+        name: ProposalStatementErrorCode
+        description: 'Available errors on analysis related mutations.'
+        values:
+            NON_EXISTING_PROPOSAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::NON_EXISTING_PROPOSAL")'
+                description: 'The given proposal does not exist.'
+            UNASSIGNED_PROPOSAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::UNASSIGNED_PROPOSAL")'
+                description: 'You are not assigned to this proposal.'
+            DECISION_ALREADY_GIVEN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::DECISION_ALREADY_GIVEN")'
+                description: 'The decision-maker has already gave his decision about this proposal.'
+            INTERNAL_ERROR:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::INTERNAL_ERROR")'
+                description: 'An internal server error occurred.'
+            REFUSED_REASON_EMPTY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::REFUSED_REASON_EMPTY")'
+                description: 'The refused reason must not be empty if the proposal is not approved.'
+            NON_EXISTING_ANALYSIS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::NON_EXISTING_ANALYSIS")'
+                description: 'The proposal analysis does not exist.'

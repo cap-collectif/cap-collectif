@@ -4,9 +4,11 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Enum\ProposalAssessmentState;
+use Capco\AppBundle\Enum\ProposalStatementErrorCode;
+use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -67,31 +69,34 @@ class ChangeProposalDecisionMutation implements MutationInterface
             $args->offsetGet('authors') ?? [],
             $args->offsetGet('isApproved') ?? true,
             $args->offsetGet('refusedReason'),
-            $args->offsetGet('isDone') ?? false
+            $args->offsetGet('isDone') ?? false,
         ];
 
         $proposalId = GlobalId::fromGlobalId($proposalId)['id'];
         $proposal = $this->proposalRepository->find($proposalId);
 
         if (!$proposal) {
-            return $this->buildPayload(null, 'The proposal does not exist.');
+            return [
+                'decision' => null,
+                'errorCode' => ProposalStatementErrorCode::NON_EXISTING_PROPOSAL,
+            ];
         }
 
         /** @var Proposal $proposal */
         if (
             !$this->authorizationChecker->isGranted(ProposalAnalysisRelatedVoter::DECIDE, $proposal)
         ) {
-            return $this->buildPayload(
-                null,
-                'You can\'t give a decision on a proposal you are not assigned to.'
-            );
+            return [
+                'decision' => null,
+                'errorCode' => ProposalStatementErrorCode::UNASSIGNED_PROPOSAL,
+            ];
         }
 
         if (false === $decision && !$refusedReason) {
-            return $this->buildPayload(
-                null,
-                'The refused reason must not be empty if the proposal is refused.'
-            );
+            return [
+                'decision' => null,
+                'errorCode' => ProposalStatementErrorCode::REFUSED_REASON_EMPTY,
+            ];
         }
 
         // If there is no proposalDecision related to the given proposal, create it.
@@ -103,7 +108,9 @@ class ChangeProposalDecisionMutation implements MutationInterface
             ->setIsApproved($decision)
             ->setUpdatedBy($viewer)
             ->setEstimatedCost($estimatedCost)
-            ->setIsDone($isDone);
+            ->setState(
+                $isDone ? ProposalStatementState::DONE : ProposalStatementState::IN_PROGRESS
+            );
         $post = $proposalDecision->getPost();
         $post->setBody($body);
         // Remove and add authors.
@@ -116,12 +123,19 @@ class ChangeProposalDecisionMutation implements MutationInterface
         }
 
         // If the decision is given, change state of the assessment if its not already given.
-        if (
-            $isDone &&
-            ($proposalAssessment = $proposal->getAssessment()) &&
-            ProposalAssessmentState::IN_PROGRESS === $proposalAssessment->getState()
-        ) {
-            $proposalAssessment->setState(ProposalAssessmentState::TOO_LATE);
+        if ($isDone) {
+            if (($proposalAssessment = $proposal->getAssessment()) && ProposalStatementState::IN_PROGRESS === $proposalAssessment->getState()) {
+                $proposalAssessment->setState(ProposalStatementState::TOO_LATE);
+            }
+            
+            if ($proposal->getAnalyses() !== null) {
+                /** @var ProposalAnalysis $analysis */
+                foreach ($proposal->getAnalyses() as $analysis) {
+                    if ($analysis->getState() === ProposalStatementState::IN_PROGRESS) {
+                        $analysis->setState(ProposalStatementState::TOO_LATE);
+                    }
+                }
+            }
         }
 
         try {
@@ -134,19 +148,15 @@ class ChangeProposalDecisionMutation implements MutationInterface
                     $exception->getMessage()
             );
 
-            return $this->buildPayload(null, 'An error occurred when creating proposal decision.');
+            return [
+                'decision' => null,
+                'errorCode' => ProposalStatementErrorCode::INTERNAL_ERROR,
+            ];
         }
 
-        return $this->buildPayload($proposalDecision);
-    }
-
-    private function buildPayload(
-        ?ProposalDecision $decision = null,
-        ?string $errorMessage = null
-    ): array {
         return [
-            'decision' => $decision,
-            'userErrors' => [['message' => $errorMessage]]
+            'decision' => $proposalDecision,
+            'errorCode' => null,
         ];
     }
 
@@ -159,7 +169,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
             return GlobalId::fromGlobalId($authorGlobalId)['id'];
         }, $requestAuthors);
         $authorsToDelete = $this->userRepository->findBy([
-            'id' => array_diff($existingAuthors, $authorIds)
+            'id' => array_diff($existingAuthors, $authorIds),
         ]);
         foreach ($authorsToDelete as $authorToDelete) {
             // @var User $postAuthor
@@ -168,7 +178,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         }
 
         $authorsToAdd = $this->userRepository->findBy([
-            'id' => array_diff($authorIds, $existingAuthors)
+            'id' => array_diff($authorIds, $existingAuthors),
         ]);
         foreach ($authorsToAdd as $authorToAdd) {
             // @var User $user

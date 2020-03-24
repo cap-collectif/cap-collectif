@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalDecision;
+use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Enum\UserRole;
+use Capco\AppBundle\Repository\ProposalAnalystRepository;
 use Capco\AppBundle\Repository\ProposalDecisionMakerRepository;
-use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\ProposalSupervisorRepository;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -15,22 +15,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProposalAnalysisRelatedVoter extends Voter
 {
+    public const ANALYSE = 'ANALYSE';
     public const EVALUATE = 'EVALUATE';
     public const VIEW = 'VIEW';
     public const DECIDE = 'DECIDE';
 
     private $proposalSupervisorRepository;
     private $proposalDecisionMakerRepository;
-    private $proposalDecisionRepository;
+    private $proposalAnalystRepository;
 
     public function __construct(
         ProposalSupervisorRepository $proposalSupervisorRepository,
         ProposalDecisionMakerRepository $proposalDecisionMakerRepository,
-        ProposalDecisionRepository $proposalDecisionRepository
+        ProposalAnalystRepository $proposalAnalystRepository
     ) {
         $this->proposalSupervisorRepository = $proposalSupervisorRepository;
         $this->proposalDecisionMakerRepository = $proposalDecisionMakerRepository;
-        $this->proposalDecisionRepository = $proposalDecisionRepository;
+        $this->proposalAnalystRepository = $proposalAnalystRepository;
     }
 
     /**
@@ -38,8 +39,11 @@ class ProposalAnalysisRelatedVoter extends Voter
      */
     protected function supports($attribute, $subject): bool
     {
-        return \in_array($attribute, [self::EVALUATE, self::DECIDE, self::VIEW], true) &&
-            $subject instanceof Proposal;
+        return \in_array(
+            $attribute,
+            [self::EVALUATE, self::DECIDE, self::VIEW, self::ANALYSE],
+            true
+        ) && $subject instanceof Proposal;
     }
 
     /**
@@ -57,6 +61,8 @@ class ProposalAnalysisRelatedVoter extends Voter
         switch ($attribute) {
             case self::VIEW:
                 return $this->canSee($subject, $user);
+            case self::ANALYSE:
+                return $this->canAnalyse($subject, $user);
             case self::EVALUATE:
                 return $this->canEvaluate($subject, $user);
             case self::DECIDE:
@@ -68,21 +74,46 @@ class ProposalAnalysisRelatedVoter extends Voter
 
     private function canSee(Proposal $subject, User $user): bool
     {
-        // TODO: Check proposal's analysts assignments here.
-
         if (
-            $this->proposalSupervisorRepository->findBy([
+            $this->proposalDecisionMakerRepository->findBy([
                 'proposal' => $subject,
-                'supervisor' => $user
+                'decisionMaker' => $user,
             ])
         ) {
             return true;
         }
 
         if (
-            $this->proposalDecisionMakerRepository->findBy([
+            $this->proposalSupervisorRepository->findBy([
                 'proposal' => $subject,
-                'decisionMaker' => $user
+                'supervisor' => $user,
+            ])
+        ) {
+            return true;
+        }
+
+        if (
+            $this->proposalAnalystRepository->findBy([
+                'proposal' => $subject,
+                'analyst' => $user,
+            ])
+        ) {
+            return true;
+        }
+
+        if ($user->hasRole(UserRole::ROLE_ADMIN)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function canAnalyse(Proposal $subject, User $user): bool
+    {
+        if (
+            $this->proposalAnalystRepository->findOneBy([
+                'proposal' => $subject,
+                'analyst' => $user,
             ])
         ) {
             return true;
@@ -97,16 +128,17 @@ class ProposalAnalysisRelatedVoter extends Voter
 
     private function canEvaluate(Proposal $subject, User $user): bool
     {
-        /** @var ProposalDecision $decision */
-        $decision = $this->proposalDecisionRepository->findOneBy(['proposal' => $subject]);
-        if ($decision && $decision->getIsDone()) {
+        if (
+            ($decision = $subject->getDecision()) &&
+            ProposalStatementState::DONE === $decision->getState()
+        ) {
             return false;
         }
 
         if (
             $this->proposalSupervisorRepository->findOneBy([
                 'proposal' => $subject,
-                'supervisor' => $user
+                'supervisor' => $user,
             ])
         ) {
             return true;
@@ -124,7 +156,7 @@ class ProposalAnalysisRelatedVoter extends Voter
         if (
             $this->proposalDecisionMakerRepository->findBy([
                 'proposal' => $subject,
-                'decisionMaker' => $user
+                'decisionMaker' => $user,
             ])
         ) {
             return true;

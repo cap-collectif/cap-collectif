@@ -91,6 +91,13 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         helpText: Décrivez dans les grandes lignes le budget de votre proposition
         required: true
         type: 1 # textarea
+    simplequestion17:
+        id: 1318
+        title: Comment allez-vous ?
+        slug: comment-allez-vous
+        helpText: Dites comment vous allez.
+        required: true
+        type: 1 # textarea
     simplequestionIdfGrandProject1:
         id: 1330
         title:  N° du dossier MesDémarches

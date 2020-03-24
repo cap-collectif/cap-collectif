@@ -24,9 +24,9 @@ InternalProposalDecision:
             post:
                 type: 'InternalPost!'
                 description: 'The related post containing the official response.'
-            isDone:
-                type: 'Boolean!'
-                description: 'Is the decision done.'
+            state:
+                type: 'ProposalDecisionState!'
+                description: 'The current status of the decision on the proposal'
             refusedReason:
                 type: 'Status'
                 description: "The step's related status assigned to the proposal."

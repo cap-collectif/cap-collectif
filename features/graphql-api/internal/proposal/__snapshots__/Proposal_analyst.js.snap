@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.analysts does not fetches proposal's related analysts when authenticated as user. 1`] = `
+Object {
+  "proposal": Object {
+    "analysts": null,
+    "viewerCanAnalyse": false,
+  },
+}
+`;
+
+exports[`Internal.analysts fetches proposal's related analysts when authenticated as analyst. 1`] = `
+Object {
+  "proposal": Object {
+    "analysts": Array [
+      Object {
+        "id": "VXNlcjp1c2VyNTI2",
+      },
+      Object {
+        "id": "VXNlcjp1c2VyNTI3",
+      },
+    ],
+    "viewerCanAnalyse": true,
+  },
+}
+`;

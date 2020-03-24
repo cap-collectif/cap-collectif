@@ -310,6 +310,7 @@ Capco\AppBundle\Entity\ProposalForm:
     title: Ils ne servent que des pintes ?
     description: J'en veux une ! Vous en avez déjà une à moitié pleine !
     step: '@collectstep13'
+    evaluationForm: '@questionnaire11'
     reference: 17
   proposalformIdf:
     id: proposalformIdf

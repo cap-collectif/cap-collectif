@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ProposalAssessmentState;
+use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
@@ -36,7 +36,7 @@ class ProposalAssessment implements Timestampable
      * @ORM\Column(type="string", nullable=false)
      * @Assert\Choice(choices = {"IN_PROGRESS", "FAVOURABLE", "UNFAVOURABLE", "TOO_LATE"})
      */
-    private $state = ProposalAssessmentState::IN_PROGRESS;
+    private $state = ProposalStatementState::IN_PROGRESS;
 
     /**
      * @Gedmo\Timestampable(on="update")

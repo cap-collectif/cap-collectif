@@ -15,11 +15,7 @@ Object {
         "lastname": "supervisor",
       },
     },
-    "userErrors": Array [
-      Object {
-        "message": null,
-      },
-    ],
+    "errorCode": null,
   },
 }
 `;
@@ -39,11 +35,7 @@ Object {
         "lastname": "supervisor",
       },
     },
-    "userErrors": Array [
-      Object {
-        "message": null,
-      },
-    ],
+    "errorCode": null,
   },
 }
 `;
@@ -63,11 +55,7 @@ Object {
         "lastname": "supervisor",
       },
     },
-    "userErrors": Array [
-      Object {
-        "message": null,
-      },
-    ],
+    "errorCode": null,
   },
 }
 `;
@@ -76,16 +64,12 @@ exports[`mutations.changeProposalAssessment should not change the proposal asses
 Object {
   "changeProposalAssessment": Object {
     "assessment": null,
-    "userErrors": Array [
-      Object {
-        "message": "You can't make an assessment on a proposal you are not assigned to.",
-      },
-    ],
+    "errorCode": "UNASSIGNED_PROPOSAL",
   },
 }
 `;
 
-exports[`mutations.evaluateProposalAssessment should evaluate the proposal assessment when authenticated a supervisor 1`] = `
+exports[`mutations.evaluateProposalAssessment should evaluate the proposal assessment when authenticated as supervisor 1`] = `
 Object {
   "evaluateProposalAssessment": Object {
     "assessment": Object {
@@ -100,35 +84,7 @@ Object {
         "lastname": "supervisor",
       },
     },
-    "userErrors": Array [
-      Object {
-        "message": null,
-      },
-    ],
-  },
-}
-`;
-
-exports[`mutations.evaluateProposalAssessment should not evaluate the proposal assessment if official response is empty when authenticated as supervisor 1`] = `
-Object {
-  "evaluateProposalAssessment": Object {
-    "assessment": Object {
-      "body": "Un elfe oserait aller sous terre alors qu’un nain ne le voudrait pas ?",
-      "estimatedCost": 1500,
-      "id": Any<String>,
-      "officialResponse": "Françaises, français, je vous ai compris !",
-      "state": "FAVOURABLE",
-      "updatedBy": Object {
-        "firstname": "supervisor",
-        "id": "VXNlcjp1c2VyNTIz",
-        "lastname": "supervisor",
-      },
-    },
-    "userErrors": Array [
-      Object {
-        "message": null,
-      },
-    ],
+    "errorCode": null,
   },
 }
 `;
@@ -137,11 +93,7 @@ exports[`mutations.evaluateProposalAssessment should not modify the proposal ass
 Object {
   "evaluateProposalAssessment": Object {
     "assessment": null,
-    "userErrors": Array [
-      Object {
-        "message": "You don't have the permission to evaluate this proposal.",
-      },
-    ],
+    "errorCode": "UNASSIGNED_PROPOSAL",
   },
 }
 `;

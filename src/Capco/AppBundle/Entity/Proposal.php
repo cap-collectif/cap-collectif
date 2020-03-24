@@ -9,6 +9,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Publishable;
+use Doctrine\ORM\PersistentCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\DraftableTrait;
@@ -291,6 +292,16 @@ class Proposal implements
      */
     private $decisionMaker;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalyst", mappedBy="proposal", cascade={"persist", "remove"})
+     */
+    private $analysts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal")
+     */
+    private $analyses;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -306,6 +317,8 @@ class Proposal implements
         $this->progressSteps = new ArrayCollection();
         $this->childConnections = new ArrayCollection();
         $this->parentConnections = new ArrayCollection();
+        $this->analysts = new ArrayCollection();
+        $this->analyses = new ArrayCollection();
     }
 
     public function __toString()
@@ -355,6 +368,73 @@ class Proposal implements
     public function getDecisionMaker(): ?User
     {
         return $this->decisionMaker ? $this->decisionMaker->getDecisionMaker() : null;
+    }
+    
+    /**
+     * @return Collection|ProposalAnalyst[]
+     */
+    public function getAnalysts(): Collection
+    {
+        $analysts = new ArrayCollection();
+        if (!empty($this->analysts)) {
+            /** @var ProposalAnalyst $analyst */
+            foreach ($this->analysts as $analyst) {
+                $analysts->add($analyst->getAnalyst());
+            }
+        }
+        
+        return $analysts;
+    }
+    
+    public function addAnalyst(ProposalAnalyst $proposalAnalyst): self
+    {
+        if (!$this->analysts->contains($proposalAnalyst)) {
+            $this->analysts[] = $proposalAnalyst;
+            $proposalAnalyst->setProposal($this);
+        }
+        
+        return $this;
+    }
+    
+    public function removeAnalyst(ProposalAnalyst $proposalAnalyst): self
+    {
+        if ($this->analysts->contains($proposalAnalyst)) {
+            $this->analysts->removeElement($proposalAnalyst);
+            // set the owning side to null (unless already changed)
+            if ($proposalAnalyst->getProposal() === $this) {
+                $proposalAnalyst->setProposal(null);
+            }
+        }
+        
+        return $this;
+    }
+    
+    public function getAnalyses(): Collection
+    {
+        return $this->analyses;
+    }
+    
+    public function addAnalysis(ProposalAnalysis $proposalAnalysis): self
+    {
+        if (!$this->analyses->contains($proposalAnalysis)) {
+            $this->analyses[] = $proposalAnalysis;
+            $proposalAnalysis->setProposal($this);
+        }
+        
+        return $this;
+    }
+    
+    public function removeAnalysis(ProposalAnalysis $proposalAnalysis): self
+    {
+        if ($this->analyses->contains($proposalAnalysis)) {
+            $this->analyses->removeElement($proposalAnalysis);
+            // set the owning side to null (unless already changed)
+            if ($proposalAnalysis->getProposal() === $this) {
+                $proposalAnalysis->setProposal(null);
+            }
+        }
+        
+        return $this;
     }
 
     public function getRating()
@@ -1015,7 +1095,7 @@ class Proposal implements
         return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
-            'summary' => $this->getSummary()
+            'summary' => $this->getSummary(),
         ];
     }
 
@@ -1133,7 +1213,7 @@ class Proposal implements
             'ElasticsearchProposalNestedProject',
             'ElasticsearchProposalNestedTheme',
             'ElasticsearchProposalNestedDistrict',
-            'ElasticsearchProposal'
+            'ElasticsearchProposal',
         ];
     }
 }

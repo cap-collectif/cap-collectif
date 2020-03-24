@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalDecision;
-use Capco\AppBundle\Enum\ProposalAssessmentState;
+use Capco\AppBundle\Enum\ProposalStatementErrorCode;
+use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +29,6 @@ class ChangeProposalAssessmentMutation implements MutationInterface
 
     public function __construct(
         ProposalRepository $proposalRepository,
-        ProposalDecisionRepository $proposalDecisionRepository,
         EntityManagerInterface $entityManager,
         AuthorizationChecker $authorizationChecker,
         LoggerInterface $logger
@@ -38,7 +37,6 @@ class ChangeProposalAssessmentMutation implements MutationInterface
         $this->entityManager = $entityManager;
         $this->authorizationChecker = $authorizationChecker;
         $this->logger = $logger;
-        $this->proposalDecisionRepository = $proposalDecisionRepository;
     }
 
     public function __invoke(Argument $args, $viewer): array
@@ -49,14 +47,17 @@ class ChangeProposalAssessmentMutation implements MutationInterface
             $args->offsetGet('proposalId'),
             $args->offsetGet('body'),
             $args->offsetGet('estimatedCost'),
-            $args->offsetGet('officialResponse')
+            $args->offsetGet('officialResponse'),
         ];
 
         $proposalId = GlobalId::fromGlobalId($proposalId)['id'];
         $proposal = $this->proposalRepository->find($proposalId);
 
         if (!$proposal) {
-            return $this->buildPayload(null, 'The proposal does not exist.');
+            return [
+                'assessment' => null,
+                'errorCode' => ProposalStatementErrorCode::NON_EXISTING_PROPOSAL,
+            ];
         }
 
         /** @var Proposal $proposal */
@@ -66,23 +67,25 @@ class ChangeProposalAssessmentMutation implements MutationInterface
                 $proposal
             )
         ) {
-            return $this->buildPayload(
-                null,
-                'You can\'t make an assessment on a proposal you are not assigned to.'
-            );
+            return [
+                'assessment' => null,
+                'errorCode' => ProposalStatementErrorCode::UNASSIGNED_PROPOSAL,
+            ];
         }
 
         /** @var $proposalDecision ProposalDecision */
-        $proposalDecision = $this->proposalDecisionRepository->findOneBy(['proposal' => $proposal]);
-        if ($proposalDecision && $proposalDecision->getIsDone()) {
-            return $this->buildPayload(
-                null,
-                'The decision-maker has already gave his decision about this proposal.'
-            );
+        if (
+            ($proposalDecision = $proposal->getDecision()) &&
+            ProposalStatementState::DONE === $proposalDecision->getState()
+        ) {
+            return [
+                'assessment' => null,
+                'errorCode' => ProposalStatementErrorCode::DECISION_ALREADY_GIVEN,
+            ];
         }
 
         $proposalAssessment = ($proposal->getAssessment() ?? new ProposalAssessment($proposal))
-            ->setState(ProposalAssessmentState::IN_PROGRESS)
+            ->setState(ProposalStatementState::IN_PROGRESS)
             ->setUpdatedBy($viewer)
             ->setBody($body)
             ->setProposal($proposal)
@@ -102,19 +105,15 @@ class ChangeProposalAssessmentMutation implements MutationInterface
                     $exception->getMessage()
             );
 
-            return $this->buildPayload(null, 'An error occurred when editing proposal assessment.');
+            return [
+                'assessment' => null,
+                'errorCode' => ProposalStatementErrorCode::INTERNAL_ERROR,
+            ];
         }
 
-        return $this->buildPayload($proposalAssessment);
-    }
-
-    private function buildPayload(
-        ?ProposalAssessment $assessment = null,
-        ?string $errorMessage = null
-    ): array {
         return [
-            'assessment' => $assessment,
-            'userErrors' => [['message' => $errorMessage]]
+            'assessment' => $proposalAssessment,
+            'errorCode' => null,
         ];
     }
 }

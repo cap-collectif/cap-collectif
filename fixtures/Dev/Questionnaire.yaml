@@ -81,6 +81,13 @@ Capco\AppBundle\Entity\Questionnaire:
     anonymousAllowed: true
     acknowledgeReplies: true
     privateResult: true
+  questionnaire11:
+    id: questionnaire11
+    title: Questionnaire Analyste
+    description: Je suis le questionnaire pour les analystes.
+    multipleRepliesAllowed: true
+    acknowledgeReplies: true
+    privateResult: true
   questionnaireAdmin:
     id: questionnaireAdmin
     title: Questionnaire pour admin

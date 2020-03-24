@@ -1,0 +1,11 @@
+ProposalDecisionState:
+    type: enum
+    config:
+        description: "Possible values of a proposal's decision state."
+        values:
+            IN_PROGRESS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::IN_PROGRESS")'
+                description: "The proposal's decision is currently being edited"
+            DONE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::DONE")'
+                description: "The proposal's related decision state is favourable."

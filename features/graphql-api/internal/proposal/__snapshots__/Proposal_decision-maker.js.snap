@@ -21,7 +21,6 @@ Object {
     "decision": Object {
       "estimatedCost": 500,
       "isApproved": true,
-      "isDone": true,
       "post": Object {
         "authors": Array [
           Object {
@@ -33,6 +32,7 @@ Object {
         "title": "Réponse officielle de la proposition 17",
       },
       "refusedReason": null,
+      "state": "DONE",
     },
     "viewerCanDecide": true,
     "viewerCanEvaluate": false,
@@ -50,7 +50,6 @@ Object {
     "decision": Object {
       "estimatedCost": 500,
       "isApproved": true,
-      "isDone": true,
       "post": Object {
         "authors": Array [
           Object {
@@ -62,6 +61,7 @@ Object {
         "title": "Réponse officielle de la proposition 17",
       },
       "refusedReason": null,
+      "state": "DONE",
     },
     "viewerCanDecide": true,
     "viewerCanEvaluate": false,
@@ -79,7 +79,6 @@ Object {
     "decision": Object {
       "estimatedCost": 500,
       "isApproved": true,
-      "isDone": true,
       "post": Object {
         "authors": Array [
           Object {
@@ -91,6 +90,7 @@ Object {
         "title": "Réponse officielle de la proposition 17",
       },
       "refusedReason": null,
+      "state": "DONE",
     },
     "viewerCanDecide": false,
     "viewerCanEvaluate": false,

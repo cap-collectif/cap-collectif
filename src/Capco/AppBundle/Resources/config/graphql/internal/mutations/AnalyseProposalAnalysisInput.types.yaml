@@ -1,0 +1,13 @@
+AnalyseProposalAnalysisInput:
+    type: relay-mutation-input
+    inherits:
+        - ChangeProposalAnalysisInput
+    config:
+        description: 'Input type of ChangeProposalAnalysis mutation'
+        fields:
+            comment:
+                type: 'String!'
+                description: 'The comment related to the analysis.'
+            decision:
+                type: 'ProposalAnalysisDecision!'
+                description: 'The analysis decision taken about the proposal'

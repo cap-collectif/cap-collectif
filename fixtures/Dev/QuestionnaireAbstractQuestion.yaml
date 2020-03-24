@@ -303,6 +303,14 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaireLotChoices'
     question: '@multiplequestionWithLotOfChoices'
     position: 2
+  qaq61:
+    questionnaire: '@questionnaire11'
+    question: '@simplequestion17'
+    position: 1
+  qaq62:
+    questionnaire: '@questionnaire11'
+    question: '@multiplequestion17'
+    position: 2
   qaqIdf1:
     proposalForm: '@proposalformIdf'
     question: '@multiplequestionIdfGrandOrLocal'

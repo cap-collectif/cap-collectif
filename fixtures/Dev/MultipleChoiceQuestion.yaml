@@ -320,3 +320,8 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     private: true
     required: true
     type: 3 # radio
+  multiplequestion17:
+    id: 3923
+    title: J'ai plusieurs choix leu?
+    required: false
+    type: 3 # radio

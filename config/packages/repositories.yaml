@@ -371,3 +371,11 @@ services:
     Capco\AppBundle\Repository\ProposalDecisionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CapcoAppBundle:ProposalDecision']
+
+    Capco\AppBundle\Repository\ProposalAnalystRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CapcoAppBundle:ProposalAnalyst']
+
+    Capco\AppBundle\Repository\ProposalAnalysisRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CapcoAppBundle:ProposalAnalysis']

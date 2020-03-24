@@ -467,3 +467,35 @@ Capco\UserBundle\Entity\User:
         emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 18 days"))>
+
+    user526:
+        id: 'user526'
+        username: analyst
+        firstname: analyst
+        lastname: analyst
+        email: analyst@cap-collectif.com
+        userType: '@UserType1'
+        plainpassword: analyst
+        roles:
+            - 'ROLE_USER'
+        biography: Je suis l'analyste.
+        vip: false
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
+
+    user527:
+        id: 'user527'
+        username: analyst2
+        firstname: analyst2
+        lastname: analyst2
+        email: analyst2@cap-collectif.com
+        userType: '@UserType1'
+        plainpassword: analyst2
+        roles:
+            - 'ROLE_USER'
+        biography: Je suis l'analyste 2.
+        vip: false
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>

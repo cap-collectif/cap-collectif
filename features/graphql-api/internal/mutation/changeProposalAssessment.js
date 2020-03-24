@@ -4,9 +4,7 @@ import '../../_setup';
 const ChangeProposalAssessmentMutation = /* GraphQL*/ `
   mutation ChangeProposalAssessmentMutation($input: ChangeProposalAssessmentInput!) {
     changeProposalAssessment(input: $input) {
-      userErrors {
-        message
-      }
+      errorCode
       assessment {
         id
         body
@@ -26,9 +24,7 @@ const ChangeProposalAssessmentMutation = /* GraphQL*/ `
 const EvaluateProposalAssessmentMutation = /* GraphQL */ `
   mutation EvaluateProposalAssessmentMutation($input: EvaluateProposalAssessmentInput!) {
     evaluateProposalAssessment(input: $input) {
-      userErrors {
-        message
-      }
+      errorCode
       assessment {
         id
         state
@@ -90,7 +86,11 @@ describe('mutations.changeProposalAssessment', () => {
     const evaluateAssessment = await graphql(
       EvaluateProposalAssessmentMutation,
       {
-        input: { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=', decision: 'FAVOURABLE' },
+        input: {
+          ...BASE_ASSESSMENT,
+          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=',
+          decision: 'FAVOURABLE',
+        },
       },
       'internal_supervisor',
     );
@@ -116,11 +116,15 @@ describe('mutations.changeProposalAssessment', () => {
 });
 
 describe('mutations.evaluateProposalAssessment', () => {
-  it('should evaluate the proposal assessment when authenticated a supervisor', async () => {
+  it('should evaluate the proposal assessment when authenticated as supervisor', async () => {
     const evaluateAssessment = await graphql(
       EvaluateProposalAssessmentMutation,
       {
-        input: { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=', decision: 'FAVOURABLE' },
+        input: {
+          ...BASE_ASSESSMENT,
+          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=',
+          decision: 'FAVOURABLE',
+        },
       },
       'internal_supervisor',
     );
@@ -137,27 +141,14 @@ describe('mutations.evaluateProposalAssessment', () => {
     const evaluateAssessmentNotAssigned = await graphql(
       EvaluateProposalAssessmentMutation,
       {
-        input: { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=', decision: 'UNFAVOURABLE' },
+        input: {
+          ...BASE_ASSESSMENT,
+          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=',
+          decision: 'UNFAVOURABLE',
+        },
       },
       'internal_user',
     );
     expect(evaluateAssessmentNotAssigned).toMatchSnapshot();
-  });
-
-  it('should not evaluate the proposal assessment if official response is empty when authenticated as supervisor', async () => {
-    const evaluateAssessment = await graphql(
-      EvaluateProposalAssessmentMutation,
-      {
-        input: { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMDk=', decision: 'FAVOURABLE' },
-      },
-      'internal_supervisor',
-    );
-    expect(evaluateAssessment).toMatchSnapshot({
-      evaluateProposalAssessment: {
-        assessment: {
-          id: expect.any(String),
-        },
-      },
-    });
   });
 });

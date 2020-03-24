@@ -1,0 +1,20 @@
+ProposalAnalysisState:
+    type: enum
+    config:
+        description: "Possible values of a proposal's analysis state."
+        values:
+            IN_PROGRESS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::IN_PROGRESS")'
+                description: "The proposal's analysis is currently being edited"
+            FAVOURABLE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::FAVOURABLE")'
+                description: "The proposal's related analysis state is favourable."
+            UNFAVOURABLE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::UNFAVOURABLE")'
+                description: "The proposal's related analysis state is unfavourable."
+            TOO_LATE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::TOO_LATE")'
+                description: "The proposal's related analysis has been not made in time."
+            NONE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::NONE")'
+                description: "The proposal's related analysis state is empty."

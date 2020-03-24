@@ -32,7 +32,7 @@ class ProposalSupervisor implements Timestampable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="assigned_by", nullable=false)
+     * @ORM\JoinColumn(name="assigned_by",  referencedColumnName="id", nullable=true)
      */
     private $assignedBy;
 
@@ -41,6 +41,12 @@ class ProposalSupervisor implements Timestampable
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private $updatedAt;
+
+    public function __construct(Proposal $proposal, User $supervisor)
+    {
+        $this->supervisor = $supervisor;
+        $this->proposal = $proposal;
+    }
 
     public function getSupervisor(): ?User
     {
