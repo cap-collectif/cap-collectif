@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminRankingStepForm /> renders correctly 1`] = `
+<Fragment>
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="ranking-preview"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+    <Field
+      component={[Function]}
+      id="step-nbOpinionsToDisplay"
+      label={
+        <FormattedMessage
+          id="admin.fields.step.nb_opinions"
+          values={Object {}}
+        />
+      }
+      min={0}
+      name="nbOpinionsToDisplay"
+      type="number"
+    />
+    <Field
+      component={[Function]}
+      id="step-nbVersionsToDisplay"
+      label={
+        <FormattedMessage
+          id="admin.fields.step.nb_versions"
+          values={Object {}}
+        />
+      }
+      min={0}
+      name="nbVersionsToDisplay"
+      type="number"
+    />
+  </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+</Fragment>
+`;

@@ -20,6 +20,9 @@ export const ProjectBoxHeader: StyledComponent<
   h5 {
     font-size: 16px;
     font-weight: bold;
+    .form-group {
+      margin-bottom: 0;
+    }
   }
 `;
 

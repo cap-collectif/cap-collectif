@@ -2,10 +2,13 @@
 import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { NavDropdown, MenuItem } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
+import type { StatusColor } from '~relay/UpdateProjectAlphaMutation.graphql';
 
 export type Color = {|
-  name: string,
+  name: StatusColor,
   hexValue: string,
+  label: string,
 |};
 
 type Props = {|
@@ -81,7 +84,7 @@ const CircleColor = ({ editable, onChange, colors, defaultColor }: Props) => {
             onChange(color);
           }}>
           <Circle color={color.hexValue} selected={color === currentColor} />
-          <span>{color.name}</span>
+          <FormattedMessage id={color.label} />
         </CircleListItem>
       ))}
     </Container>

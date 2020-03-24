@@ -1366,6 +1366,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   ): ProposalVoteConnection!
   form: ProposalForm!
   private: Boolean!
+  defaultStatus: Status
 
   """A list of contributor associated with the step."""
   contributors(
@@ -5282,6 +5283,7 @@ input ProjectStepInput {
   voteThreshold: Int
   defaultSort: ProposalSort
   proposalsHidden: Boolean
+  allowingProgressSteps: Boolean
   statuses: [StepStatusInput]
   private: Boolean
   proposalForm: ID
@@ -7171,7 +7173,7 @@ enum QuestionnaireType {
 }
 
 """A step inside a project."""
-type RankingStep implements Step {
+type RankingStep implements Node & Step {
   """The ID of an object"""
   id: ID!
 
@@ -7210,6 +7212,8 @@ type RankingStep implements Step {
 
   """The step's custom code"""
   customCode: String
+  nbOpinionsToDisplay: Int
+  nbVersionsToDisplay: Int
 }
 
 """Fetches an object given its ID"""
@@ -8140,6 +8144,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   Only one selection step inside a project can have realisation steps, true if this one
   """
   allowingProgressSteps: Boolean!
+  proposalsHidden: Boolean!
 
   """A list of contributor associated with the consultation."""
   contributors(

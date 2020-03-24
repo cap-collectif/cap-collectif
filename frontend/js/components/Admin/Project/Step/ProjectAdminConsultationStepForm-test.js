@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminConsultationStepForm } from './ProjectAdminConsultationStepForm';
 
-describe('<ProjectAdminStepFormModal />', () => {
+describe('<ProjectAdminConsultationStepForm />', () => {
   const defaultProps = {
     consultations: [],
     dispatch: jest.fn(),

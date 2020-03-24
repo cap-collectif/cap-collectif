@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { renderSubSection } from './ProjectAdminStepForm';
 
-const ProjectAdminSynthesisStepForm = () => (
+export const ProjectAdminSynthesisStepForm = () => (
   <>
     {renderSubSection('global.synthesis')}
     <FormattedMessage id="step.status.future" />

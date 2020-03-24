@@ -1,49 +1,51 @@
 InternalCollectStep:
-  type: object
-  inherits:
-    - Node
-    - InternalStep
-    - ProposalStep
-    - RequirementStep
-  config:
-    name: CollectStep
-    interfaces:
-      - Node
-      - InternalStep
-      - ProposalStep
-      - RequirementStep
-    fields:
-      id:
-        type: 'ID!'
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: CollectStep
-      title:
-        description: 'The title of the step.'
-        type: 'String!'
-      kind:
-        resolve: 'collect'
-      requirements:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
-      statuses:
-        type: '[Status!]!'
-      private:
-        type: 'Boolean!'
-      form:
-        type: 'ProposalForm!'
-        resolve: '@=value.getProposalForm()'
-      contributors:
-        type: 'InternalUserConnection!'
-        description: 'A list of contributor associated with the step.'
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
-      viewerProposalDrafts:
-        type: 'InternalProposalConnection!'
-        access: "@=hasRole('ROLE_USER')"
-        argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepViewerProposalDraftResolver", [value, getUser(), args])'
-      proposals:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
-      viewerProposalsUnpublished:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepViewerProposalsUnpublishedResolver", [value, args, getUser()])'
+    type: object
+    inherits:
+        - Node
+        - InternalStep
+        - ProposalStep
+        - RequirementStep
+    config:
+        name: CollectStep
+        interfaces:
+            - Node
+            - InternalStep
+            - ProposalStep
+            - RequirementStep
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: CollectStep
+            title:
+                description: 'The title of the step.'
+                type: 'String!'
+            kind:
+                resolve: 'collect'
+            requirements:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
+            statuses:
+                type: '[Status!]!'
+            private:
+                type: 'Boolean!'
+            defaultStatus:
+                type: Status
+            form:
+                type: 'ProposalForm!'
+                resolve: '@=value.getProposalForm()'
+            contributors:
+                type: 'InternalUserConnection!'
+                description: 'A list of contributor associated with the step.'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+            viewerProposalDrafts:
+                type: 'InternalProposalConnection!'
+                access: "@=hasRole('ROLE_USER')"
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepViewerProposalDraftResolver", [value, getUser(), args])'
+            proposals:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
+            viewerProposalsUnpublished:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepViewerProposalsUnpublishedResolver", [value, args, getUser()])'

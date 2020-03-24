@@ -53,6 +53,10 @@ export const RequirementDragItem: StyledComponent<{}, {}, typeof ListGroupItem> 
   .form-group {
     margin-bottom: 0;
   }
+
+  li {
+    margin-right: 15px;
+  }
 `;
 
 export const CheckboxPlaceholder: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -65,4 +69,39 @@ export const CheckboxPlaceholder: StyledComponent<{}, {}, HTMLDivElement> = styl
   margin-right: 15px;
   padding: 2px 5px;
   color: ${colors.formBgc};
+`;
+
+export const VoteFieldContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  div + span {
+    font-weight: bold;
+  }
+  input[type='number'] {
+    max-width: 200px;
+  }
+`;
+
+export const PrivacyContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: column;
+  > span {
+    font-weight: bold;
+  }
+
+  button {
+    margin-top: 15px;
+  }
+`;
+
+export const PrivacyInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  span {
+    margin-left: 5px;
+  }
+
+  span:first-child {
+    margin-left: 0;
+    font-weight: bold;
+  }
 `;

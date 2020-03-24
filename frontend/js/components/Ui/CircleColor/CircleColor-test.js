@@ -10,13 +10,11 @@ describe('<CircleColor />', () => {
       editable: true,
       onChange: jest.fn(),
       colors: [
-        { name: 'Blue', hexValue: '#3b88fd' },
-        { name: 'Green', hexValue: '#3ad116' },
-        { name: 'Orange', hexValue: '#f4b721' },
-        { name: 'Red', hexValue: '#f75d56' },
-        { name: 'Black', hexValue: '#000' },
+        { label: 'global.primary', name: 'primary', hexValue: '#3b88fd' },
+        { label: 'global.green', name: 'success', hexValue: '#399a39' },
+        { label: 'global.orange', name: 'warning', hexValue: '#f4b721' },
       ],
-      defaultColor: { name: 'Blue', hexValue: '#3b88fd' },
+      defaultColor: { label: 'global.orange', name: 'warning', hexValue: '#f4b721' },
     };
     const wrapper = shallow(<CircleColor {...props} />);
     expect(wrapper).toMatchSnapshot();

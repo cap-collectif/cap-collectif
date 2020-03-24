@@ -13,7 +13,7 @@ export const STEP_TYPES: StepType[] = [
     value: 'CollectStep',
     label: 'collect_step',
     addLabel: 'add_step_submission',
-    editLabel: 'edit-submission-step',
+    editLabel: 'edit-collect-step',
   },
   {
     value: 'SelectionStep',

@@ -9,7 +9,7 @@ import moment from 'moment';
 import debounce from 'lodash/debounce';
 
 import AlertForm from '../../../Alert/AlertForm';
-import type {Dispatch, FeatureToggles, GlobalState} from '~/types';
+import type { Dispatch, FeatureToggles, GlobalState } from '~/types';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
 
 import { UPDATE_ALERT } from '~/constants/AlertConstants';
@@ -155,14 +155,67 @@ const onSubmit = (
             s.type === 'ConsultationStep'
               ? s.timeless
               : undefined,
-          startAt: s.startAt ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
-          endAt: s.endAt ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
+          startAt:
+            s.startAt && !s.timeless ? moment(s.startAt).format('YYYY-MM-DD HH:mm:ss') : null,
+          endAt: s.endAt && !s.timeless ? moment(s.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
           questionnaire: s.questionnaire?.value || undefined,
+          proposalForm: s.proposalForm?.value || undefined,
           consultations: s.consultations?.length ? s.consultations.map(c => c.value) : undefined,
           footer: s.type === 'QuestionnaireStep' ? s.footer : undefined,
           type: convertTypenameToConcreteStepType(s.type),
           requirements: s.requirements?.length ? s.requirements : [],
-          requirementsReason: s.requirements?.length ? s.requirements[0].reason : null,
+          requirementsReason:
+            s.type === 'ConsultationStep' || s.type === 'CollectStep'
+              ? s.requirementsReason
+              : undefined,
+          proposalsHidden: s.type === 'SelectionStep' ? s.proposalsHidden : undefined,
+          statuses: s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.statuses : undefined,
+          defaultStatus:
+            s.type === 'CollectStep' ? s.defaultStatus?.value || s.defaultStatus : undefined,
+          private: s.type === 'CollectStep' ? s.private : undefined,
+          defaultSort:
+            s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.defaultSort : undefined,
+          votesHelpText:
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? s.votable
+                ? s.votesHelpText
+                : null
+              : undefined,
+          voteType:
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? !s.votable
+                ? 'DISABLED'
+                : s.budget && s.isBudgetEnabled
+                ? 'BUDGET'
+                : 'SIMPLE'
+              : undefined,
+          budget:
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? s.isBudgetEnabled && s.votable
+                ? s.budget
+                : null
+              : undefined,
+          votesLimit:
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? s.isLimitEnabled && s.votable
+                ? s.votesLimit
+                : null
+              : undefined,
+          voteThreshold:
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? s.isTresholdEnabled && s.votable
+                ? s.voteThreshold
+                : null
+              : undefined,
+          votesRanking:
+            s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.votesRanking : undefined,
+          allowingProgressSteps: s.type === 'SelectionStep' ? s.allowingProgressSteps : undefined,
+          nbOpinionsToDisplay: s.type === 'RankingStep' ? s.nbOpinionsToDisplay : undefined,
+          nbVersionsToDisplay: s.type === 'RankingStep' ? s.nbVersionsToDisplay : undefined,
+          votable: undefined,
+          isBudgetEnabled: undefined,
+          isTresholdEnabled: undefined,
+          isLimitEnabled: undefined,
         }))
       : [],
     locale: locale ? locale.value : null,
@@ -292,7 +345,12 @@ export function ProjectAdminForm(props: Props) {
       <ProjectStepAdmin handleSubmit={handleSubmit} form={formName} {...rest} />
       <ProjectAccessAdminForm {...props} formName={formName} />
       <ProjectProposalsAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
-      <ProjectPublishAdminForm project={project} handleSubmit={handleSubmit} features={features} {...rest} />
+      <ProjectPublishAdminForm
+        project={project}
+        handleSubmit={handleSubmit}
+        features={features}
+        {...rest}
+      />
       {renderProjectSave(props)}
     </form>
   );
@@ -319,6 +377,10 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => ({
           })),
           requirementsReason: step.requirements?.reason || null,
           consultations: step.consultations?.edges?.map(edge => edge?.node) || [],
+          isBudgetEnabled: !!step.budget,
+          isLimitEnabled: !!step.votesLimit,
+          isTresholdEnabled: !!step.voteThreshold,
+          defaultSort: step.defaultSort?.toUpperCase() || 'RANDOM',
         }))
       : [],
     visibility: project ? project.visibility : 'ADMIN',
@@ -362,7 +424,6 @@ const form = injectIntl(
 
 const container = connect(mapStateToProps)(form);
 
-// Will be reduced when steps are reworked
 export default createFragmentContainer(container, {
   project: graphql`
     fragment ProjectAdminForm_project on Project {
@@ -413,7 +474,33 @@ export default createFragmentContainer(container, {
         metaDescription
         isEnabled: enabled
         url
+        ... on RankingStep {
+          nbOpinionsToDisplay
+          nbVersionsToDisplay
+        }
         ... on CollectStep {
+          defaultSort
+          proposalForm: form {
+            value: id
+            label: title
+          }
+          private
+          defaultStatus {
+            value: id
+            label: name
+          }
+          statuses {
+            id
+            color
+            name
+          }
+          votable
+          votesHelpText
+          votesLimit
+          votesRanking
+          voteThreshold
+          voteType
+          budget
           requirements {
             reason
             edges {
@@ -428,6 +515,21 @@ export default createFragmentContainer(container, {
           }
         }
         ... on SelectionStep {
+          statuses {
+            id
+            color
+            name
+          }
+          votable
+          votesHelpText
+          votesLimit
+          votesRanking
+          voteThreshold
+          voteType
+          defaultSort
+          proposalsHidden
+          allowingProgressSteps
+          budget
           requirements {
             reason
             edges {

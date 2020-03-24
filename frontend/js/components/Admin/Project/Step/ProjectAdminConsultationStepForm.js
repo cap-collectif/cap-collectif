@@ -4,9 +4,8 @@ import React from 'react';
 import { fetchQuery, graphql } from 'react-relay';
 import { Field, FieldArray, arrayPush } from 'redux-form';
 import { connect } from 'react-redux';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import { renderLabel } from '../Content/ProjectContentAdminForm';
 import select from '~/components/Form/Select';
 import renderComponent from '~/components/Form/Field';
 import environment from '~/createRelayEnvironment';
@@ -51,7 +50,6 @@ export const ProjectAdminConsultationStepForm = ({
   dispatch,
   consultations,
 }: Props) => {
-  const intl = useIntl();
   return (
     <>
       {renderSubSection('global.consultation')}
@@ -99,7 +97,7 @@ export const ProjectAdminConsultationStepForm = ({
         type="editor"
         name="requirementsReason"
         id="step-requirementsReason"
-        label={renderLabel('reason-for-collection', intl, 'reason-for-collection', true)}
+        label={<FormattedMessage id="reason-for-collection" />}
         component={renderComponent}
       />
     </>

@@ -15,6 +15,10 @@ import ProjectAdminConsultationStepForm from './ProjectAdminConsultationStepForm
 import { FormContainer, DateContainer, CustomCodeArea } from './ProjectAdminStepForm.style';
 import { createRequirements, type Requirement, formatRequirements } from './StepRequirementsList';
 import ProjectAdminSynthesisStepForm from './ProjectAdminSynthesisStepForm';
+import ProjectAdminSelectionStepForm from './ProjectAdminSelectionStepForm';
+import { type Status } from './StepStatusesList';
+import ProjectAdminRankingStepForm from './ProjectAdminRankingStepForm';
+import ProjectAdminCollectStepForm from './ProjectAdminCollectStepForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -37,12 +41,36 @@ type Props = {|
     requirements?: ?Array<Requirement>,
     requirementsReason?: ?string,
     consultations?: Array<{| value: string, label: string |}>,
+    statuses?: ?Array<Status>,
+    defaultSort?: ?string,
+    proposalsHidden?: ?boolean,
+    votable?: ?boolean,
+    votesHelpText?: ?string,
+    voteThreshold?: number,
+    votesLimit?: number,
+    votesRanking?: number,
+    budget?: number,
+    isBudgetEnabled?: ?boolean,
+    isTresholdEnabled?: ?boolean,
+    isLimitEnabled?: ?boolean,
+    allowingProgressSteps?: ?boolean,
+    nbVersionsToDisplay?: ?number,
+    nbOpinionsToDisplay?: ?number,
+    defaultStatus?: ?string,
+    proposalForm?: {| value: string, label: string |},
+    private?: ?boolean,
   },
   intl: IntlShape,
   formName: string,
   index?: number,
   timeless: boolean,
-  requirements?: any,
+  requirements?: ?Array<Requirement>,
+  statuses?: ?Array<Status>,
+  votable?: boolean,
+  isBudgetEnabled?: boolean,
+  isTresholdEnabled?: boolean,
+  isLimitEnabled?: boolean,
+  isPrivate?: ?boolean,
 |};
 
 export type FormValues = {|
@@ -55,6 +83,24 @@ export type FormValues = {|
   questionnaire?: string,
   consultations?: Array<string>,
   requirements?: Array<Requirement>,
+  statuses?: Array<Status>,
+  defaultSort?: ?string,
+  proposalsHidden?: boolean,
+  votable?: ?boolean,
+  votesHelpText?: ?string,
+  voteThreshold?: number,
+  votesLimit?: number,
+  votesRanking?: number,
+  budget?: number,
+  isBudgetEnabled?: ?boolean,
+  isTresholdEnabled?: ?boolean,
+  isLimitEnabled?: ?boolean,
+  allowingProgressSteps?: ?boolean,
+  nbVersionsToDisplay?: ?number,
+  nbOpinionsToDisplay?: ?number,
+  defaultStatus?: ?string,
+  proposalForm?: string,
+  private?: ?boolean,
 |};
 
 const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
@@ -66,6 +112,7 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
         url: props.step.url,
         ...formValues,
         requirements,
+        proposalsHidden: formValues.proposalsHidden === 1,
       }),
     );
   } else {
@@ -74,6 +121,7 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
         id: null,
         ...formValues,
         requirements,
+        proposalsHidden: formValues.proposalsHidden === 1,
       }),
     );
   }
@@ -83,7 +131,15 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
   }
 };
 
-const validate = ({ type, label, title, startAt, questionnaire, consultations }: FormValues) => {
+const validate = ({
+  type,
+  label,
+  title,
+  startAt,
+  questionnaire,
+  consultations,
+  proposalForm,
+}: FormValues) => {
   const errors = {};
 
   if (!label || label.length < 2) {
@@ -100,6 +156,10 @@ const validate = ({ type, label, title, startAt, questionnaire, consultations }:
 
   if (type === 'QuestionnaireStep') {
     if (!questionnaire) errors.questionnaire = 'global.required';
+  }
+
+  if (type === 'CollectStep') {
+    if (!proposalForm) errors.proposalForm = 'global.required';
   }
 
   if (type === 'ConsultationStep') {
@@ -151,6 +211,12 @@ export function ProjectAdminStepForm({
   submitting,
   dispatch,
   requirements,
+  statuses,
+  votable,
+  isBudgetEnabled,
+  isTresholdEnabled,
+  isLimitEnabled,
+  isPrivate,
 }: Props) {
   return (
     <>
@@ -213,12 +279,30 @@ export function ProjectAdminStepForm({
             />
           )}
           {step.type === 'SynthesisStep' && <ProjectAdminSynthesisStepForm />}
-          {/** 
-      {step.type === 'SelectionStep' && <ProjectAdminSelectionStepForm />}
-      {step.type === 'RankingStep' && <ProjectAdminRankingStepForm />}
-      
-      {step.type === 'CollectStep' && <ProjectAdminCollectStepForm />}
-       */}
+          {step.type === 'SelectionStep' && (
+            <ProjectAdminSelectionStepForm
+              isBudgetEnabled={isBudgetEnabled}
+              isTresholdEnabled={isTresholdEnabled}
+              isLimitEnabled={isLimitEnabled}
+              statuses={statuses}
+              votable={votable}
+            />
+          )}
+          {step.type === 'RankingStep' && <ProjectAdminRankingStepForm />}
+
+          {step.type === 'CollectStep' && (
+            <ProjectAdminCollectStepForm
+              isPrivate={isPrivate}
+              proposal={step.proposalForm}
+              isBudgetEnabled={isBudgetEnabled}
+              isTresholdEnabled={isTresholdEnabled}
+              isLimitEnabled={isLimitEnabled}
+              statuses={statuses}
+              votable={votable}
+              requirements={requirements}
+            />
+          )}
+
           {renderSubSection('global.publication')}
           <>
             <Field
@@ -279,6 +363,7 @@ export function ProjectAdminStepForm({
 const mapStateToProps = (state: GlobalState, { step }: Props) => ({
   initialValues: {
     // AbstractStep
+    url: step?.url ? step.url : null,
     type: step?.type ? step.type : null,
     label: step?.label ? step.label : null,
     body: step?.body ? step.body : null,
@@ -289,16 +374,45 @@ const mapStateToProps = (state: GlobalState, { step }: Props) => ({
     timeless: step?.timeless ? step.timeless : false,
     metaDescription: step?.metaDescription ? step.metaDescription : null,
     customCode: step?.customCode ? step.customCode : null,
+    requirementsReason: step?.requirementsReason || null,
     // QuestionnaireStep
     questionnaire: step?.questionnaire || null,
     footer: step?.footer ? step.footer : null,
     // ConsultationStep
     consultations: step?.consultations || [],
     requirements: step ? createRequirements(step) : [],
-    requirementsReason: step?.requirementsReason || null,
+    // SelectionStep
+    statuses: step?.statuses?.length ? step.statuses : [],
+    defaultSort: step?.defaultSort?.toUpperCase() || 'RANDOM',
+    proposalsHidden: step?.proposalsHidden ? 1 : 0,
+    allowingProgressSteps: step?.allowingProgressSteps || false,
+    // CollectStep
+    defaultStatus: step?.defaultStatus || null,
+    proposalForm: step?.proposalForm || null,
+    // RankingStep
+    nbVersionsToDisplay: step?.nbVersionsToDisplay || null,
+    nbOpinionsToDisplay: step?.nbOpinionsToDisplay || null,
+    // Votable Trait
+    votable: step?.votable || false,
+    votesHelpText: step?.votesHelpText || null,
+    votesLimit: step?.votesLimit || null,
+    votesRanking: step?.votesRanking || false,
+    voteThreshold: step?.voteThreshold || null,
+    budget: step?.budget || null,
+    isBudgetEnabled: step?.isBudgetEnabled || false,
+    isLimitEnabled: step?.isLimitEnabled || false,
+    isTresholdEnabled: step?.isTresholdEnabled || false,
+    private: step?.private || false,
   },
+  isBudgetEnabled: formValueSelector('stepForm')(state, 'isBudgetEnabled') || false,
+  isLimitEnabled: formValueSelector('stepForm')(state, 'isLimitEnabled') || false,
+  isTresholdEnabled: formValueSelector('stepForm')(state, 'isTresholdEnabled') || false,
+  votable: formValueSelector('stepForm')(state, 'votable') || false,
   timeless: formValueSelector('stepForm')(state, 'timeless') || false,
   requirements: formValueSelector('stepForm')(state, 'requirements') || [],
+  statuses: formValueSelector('stepForm')(state, 'statuses') || [],
+  // "private" is a reserved word in js (will be)
+  isPrivate: formValueSelector('stepForm')(state, 'private') || false,
 });
 
 const form = injectIntl(

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectAdminStepFormModal /> renders correctly with data 1`] = `
+exports[`<ProjectAdminConsultationStepForm /> renders correctly with data 1`] = `
 <Fragment>
   <ProjectAdminFormstyle__ProjectBoxHeader>
     <h5>
@@ -78,46 +78,10 @@ exports[`<ProjectAdminStepFormModal /> renders correctly with data 1`] = `
     component={[Function]}
     id="step-requirementsReason"
     label={
-      <div>
-        reason-for-collection
-        <span
-          className="excerpt inline"
-        >
-           
-          <OverlayTrigger
-            defaultOverlayShown={false}
-            overlay={
-              <_default
-                className="text-left"
-                id="tooltip-top"
-                style={
-                  Object {
-                    "wordBreak": "break-word",
-                  }
-                }
-              >
-                reason-for-collection
-              </_default>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <i
-              className="fa fa-info-circle"
-              style={
-                Object {
-                  "opacity": ".5",
-                }
-              }
-            />
-          </OverlayTrigger>
-        </span>
-      </div>
+      <FormattedMessage
+        id="reason-for-collection"
+        values={Object {}}
+      />
     }
     name="requirementsReason"
     type="editor"
@@ -125,7 +89,7 @@ exports[`<ProjectAdminStepFormModal /> renders correctly with data 1`] = `
 </Fragment>
 `;
 
-exports[`<ProjectAdminStepFormModal /> renders correctly with no initial data 1`] = `
+exports[`<ProjectAdminConsultationStepForm /> renders correctly with no initial data 1`] = `
 <Fragment>
   <ProjectAdminFormstyle__ProjectBoxHeader>
     <h5>
@@ -194,46 +158,10 @@ exports[`<ProjectAdminStepFormModal /> renders correctly with no initial data 1`
     component={[Function]}
     id="step-requirementsReason"
     label={
-      <div>
-        reason-for-collection
-        <span
-          className="excerpt inline"
-        >
-           
-          <OverlayTrigger
-            defaultOverlayShown={false}
-            overlay={
-              <_default
-                className="text-left"
-                id="tooltip-top"
-                style={
-                  Object {
-                    "wordBreak": "break-word",
-                  }
-                }
-              >
-                reason-for-collection
-              </_default>
-            }
-            placement="top"
-            trigger={
-              Array [
-                "hover",
-                "focus",
-              ]
-            }
-          >
-            <i
-              className="fa fa-info-circle"
-              style={
-                Object {
-                  "opacity": ".5",
-                }
-              }
-            />
-          </OverlayTrigger>
-        </span>
-      </div>
+      <FormattedMessage
+        id="reason-for-collection"
+        values={Object {}}
+      />
     }
     name="requirementsReason"
     type="editor"

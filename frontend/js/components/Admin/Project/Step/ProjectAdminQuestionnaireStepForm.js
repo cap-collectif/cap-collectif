@@ -35,7 +35,7 @@ export const loadQuestionnaireOptions = (questionnaire: ?{| label: string, value
   });
 };
 
-const ProjectAdminQuestionnaireStepForm = ({ questionnaire }: Props) => {
+export const ProjectAdminQuestionnaireStepForm = ({ questionnaire }: Props) => {
   const intl = useIntl();
   return (
     <>

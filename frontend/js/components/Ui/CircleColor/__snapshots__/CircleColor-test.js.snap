@@ -7,7 +7,7 @@ exports[`<CircleColor /> renders correctly 1`] = `
   noCaret={false}
   title={
     <ForwardRef(CircleColor__Circle)
-      color="#3b88fd"
+      color="#f4b721"
     />
   }
 >
@@ -21,23 +21,25 @@ exports[`<CircleColor /> renders correctly 1`] = `
       color="#3b88fd"
       selected={false}
     />
-    <span>
-      Blue
-    </span>
+    <FormattedMessage
+      id="global.primary"
+      values={Object {}}
+    />
   </CircleColor__CircleListItem>
   <CircleColor__CircleListItem
-    color="#3ad116"
-    key="#3ad116"
+    color="#399a39"
+    key="#399a39"
     onClick={[Function]}
     selected={false}
   >
     <CircleColor__Circle
-      color="#3ad116"
+      color="#399a39"
       selected={false}
     />
-    <span>
-      Green
-    </span>
+    <FormattedMessage
+      id="global.green"
+      values={Object {}}
+    />
   </CircleColor__CircleListItem>
   <CircleColor__CircleListItem
     color="#f4b721"
@@ -49,37 +51,10 @@ exports[`<CircleColor /> renders correctly 1`] = `
       color="#f4b721"
       selected={false}
     />
-    <span>
-      Orange
-    </span>
-  </CircleColor__CircleListItem>
-  <CircleColor__CircleListItem
-    color="#f75d56"
-    key="#f75d56"
-    onClick={[Function]}
-    selected={false}
-  >
-    <CircleColor__Circle
-      color="#f75d56"
-      selected={false}
+    <FormattedMessage
+      id="global.orange"
+      values={Object {}}
     />
-    <span>
-      Red
-    </span>
-  </CircleColor__CircleListItem>
-  <CircleColor__CircleListItem
-    color="#000"
-    key="#000"
-    onClick={[Function]}
-    selected={false}
-  >
-    <CircleColor__Circle
-      color="#000"
-      selected={false}
-    />
-    <span>
-      Black
-    </span>
   </CircleColor__CircleListItem>
 </CircleColor__Container>
 `;

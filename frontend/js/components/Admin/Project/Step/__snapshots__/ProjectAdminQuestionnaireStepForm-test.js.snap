@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly with a questionnaire 1`] = `
+<Fragment>
+  <Field
+    component={[Function]}
+    id="step-footer"
+    label={
+      <div>
+        global.footer
+        <span
+          className="excerpt inline"
+        >
+          global.optional
+           
+        </span>
+      </div>
+    }
+    name="footer"
+    type="editor"
+  />
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="global.questionnaire"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <Field
+    aria-autocomplete="list"
+    aria-haspopup="true"
+    autoload={true}
+    clearable={true}
+    component={[Function]}
+    debounce={true}
+    id="step-questionnaire"
+    inputClassName="fake-inputClassName"
+    label={
+      <FormattedMessage
+        id="global.questionnaire"
+        values={Object {}}
+      />
+    }
+    labelClassName="control-label"
+    loadOptions={[Function]}
+    name="questionnaire"
+    placeholder=" "
+    role="combobox"
+    selectFieldIsObject={true}
+  />
+</Fragment>
+`;
+
+exports[`<ProjectAdminQuestionnaireStepForm /> renders correctly with no data 1`] = `
+<Fragment>
+  <Field
+    component={[Function]}
+    id="step-footer"
+    label={
+      <div>
+        global.footer
+        <span
+          className="excerpt inline"
+        >
+          global.optional
+           
+        </span>
+      </div>
+    }
+    name="footer"
+    type="editor"
+  />
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="global.questionnaire"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <Field
+    aria-autocomplete="list"
+    aria-haspopup="true"
+    autoload={true}
+    clearable={true}
+    component={[Function]}
+    debounce={true}
+    id="step-questionnaire"
+    inputClassName="fake-inputClassName"
+    label={
+      <FormattedMessage
+        id="global.questionnaire"
+        values={Object {}}
+      />
+    }
+    labelClassName="control-label"
+    loadOptions={[Function]}
+    name="questionnaire"
+    placeholder=" "
+    role="combobox"
+    selectFieldIsObject={true}
+  />
+</Fragment>
+`;
