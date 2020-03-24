@@ -68,7 +68,7 @@ class ContactProposalAuthorMutation implements MutationInterface
                     'email' => $senderEmail
                 ],
                 'senderMessage' => $message,
-                'copyToAdmin' => true,
+                //'copyToAdmin' => true, @todo uncomment when viewer can consent to this copy.
             ],
             $proposal->getAuthor()
         );
