@@ -16,7 +16,7 @@ const getAvailableQuestionsIds = (
   const formattedResponses = formatResponses(questions, responses);
   const formattedQuestions = formatQuestions(questions, formattedResponses);
 
-  return getAvailableQuestions(formattedQuestions[0].id, formattedQuestions);
+  return getAvailableQuestions(formattedQuestions);
 };
 
 export default getAvailableQuestionsIds;

@@ -10,7 +10,17 @@ module.exports = {
     'plugin:relay/recommended',
   ],
   parser: 'babel-eslint',
-  plugins: ['flowtype', 'import', 'react', 'react-hooks', 'jsx-a11y', 'jest', 'relay', 'graphql', 'formatjs'],
+  plugins: [
+    'flowtype',
+    'import',
+    'react',
+    'react-hooks',
+    'jsx-a11y',
+    'jest',
+    'relay',
+    'graphql',
+    'formatjs',
+  ],
   globals: {
     $: true,
     FontFace: true,

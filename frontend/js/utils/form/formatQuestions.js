@@ -37,6 +37,13 @@ const formatQuestions = (
     if (jumps && jumps.length > 0) {
       const jumpsFormatted = mappingJumps(jumps);
       const conditionsFormatted = formatConditionToIdJump(jumpsFormatted, formattedResponses);
+      const response = formattedResponses.find(r => id === r.idQuestion);
+      const hasResponse = response
+        ? Array.isArray(response?.value)
+          ? response.value.length > 0
+          : !!response.value
+        : false;
+
       let hasOneJumpValidated = false;
 
       question.questionsToDisplay = [];
@@ -67,10 +74,14 @@ const formatQuestions = (
         }
       });
 
-      // no right answer FOR jumps THEN display alwaysJump
-      if (alwaysJumpDestinationQuestion && !hasOneJumpValidated) {
+      // no right answer FOR jumps BUT has an answer THEN display "in other cases jump to"
+      // "in other cases jump to" is when a question has jumps and an alwaysJump
+      if (alwaysJumpDestinationQuestion && !hasOneJumpValidated && hasResponse) {
         question.questionsToDisplay = [alwaysJumpDestinationQuestion.id];
-      } else if (alwaysJumpDestinationQuestion && hasOneJumpValidated) {
+      } else if (
+        alwaysJumpDestinationQuestion &&
+        (hasOneJumpValidated || (!hasResponse && !hasOneJumpValidated))
+      ) {
         question.questionsNotDisplay = [
           ...question.questionsNotDisplay,
           alwaysJumpDestinationQuestion.id,

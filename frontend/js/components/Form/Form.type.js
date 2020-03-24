@@ -20,6 +20,13 @@ export type QuestionType =
   | 'textarea'
   | 'siren';
 
+export type Media = {|
+  +id: string,
+  +name: string,
+  +url: string,
+  +size: string,
+|};
+
 export type Value = {|
   labels: Array<string>,
   other?: string | null,
@@ -47,9 +54,11 @@ export type Fields = {|
 |};
 
 export type ConditionalJumpCondition = {|
+  +__typename?: string,
   +id: string,
   +operator: LogicJumpConditionOperator,
   +question: {|
+    +__typename?: string,
     +id: string,
     +title: string,
     +type: QuestionType,
@@ -63,9 +72,11 @@ export type ConditionalJumpCondition = {|
 export type Jump = {|
   +id: string,
   +origin: {|
+    +__typename?: string,
     +id: string,
   |},
   +destination: {|
+    +__typename?: string,
     +id: string,
     +title: string,
     +number: number,
@@ -96,6 +107,7 @@ export type Question = {|
   +required: boolean,
   +helpText: ?string,
   +alwaysJumpDestinationQuestion: ?{|
+    +__typename?: string,
     +id: string,
     +title: string,
     +number: number,
@@ -147,12 +159,7 @@ export type ResponseInReduxForm = {|
     | ReactSelectValue
     | ?string
     | ?number
-    | $ReadOnlyArray<{|
-        +id: string,
-        +name: string,
-        +url: string,
-        +size: string,
-      |}>,
+    | $ReadOnlyArray<Media | string>,
 |};
 
 export type ResponsesInReduxForm = $ReadOnlyArray<ResponseInReduxForm>;

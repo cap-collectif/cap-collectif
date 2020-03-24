@@ -1,5 +1,10 @@
 // @flow
-import type { Questions, ResponsesInReduxForm, SubmitResponses } from '~/components/Form/Form.type';
+import type {
+  Questions,
+  ResponsesInReduxForm,
+  SubmitResponses,
+  Media,
+} from '~/components/Form/Form.type';
 import getAvailableQuestionsIds from '~/utils/form/getAvailableQuestionsIds';
 import type { ReactSelectValue } from '~/components/Form/Select';
 
@@ -16,17 +21,20 @@ export const formatSubmitResponses = (
     const { type: questionType } = question;
 
     if (questionType === 'medias') {
+      const mediaResponses = ((res.value: any): $ReadOnlyArray<Media>);
       const medias = answeredQuestionsIds.includes(question.id)
-        ? Array.isArray(res.value)
-          ? res.value.map(value => value.id)
+        ? Array.isArray(mediaResponses)
+          ? mediaResponses.map((value: Media) => value.id)
           : []
         : null;
+
       return {
         question: res.question,
         medias,
       };
     }
     let { value } = res;
+
     if (questionType === 'select') {
       // Here, we are dealing with a select question that uses `react-select`.
       // React select option choice must have the shape { value: xxx, label: xxx } in Redux to work
@@ -36,6 +44,7 @@ export const formatSubmitResponses = (
         value: value ? ((value: any): ReactSelectValue).value : null,
       };
     }
+
     if (questionType === 'ranking' || questionType === 'button') {
       value = answeredQuestionsIds.includes(question.id)
         ? JSON.stringify({

@@ -46,7 +46,7 @@ const formatResponses = (
           formattedValue = value.labels;
           // $FlowFixMe
           otherValue = isOtherAllowed && value.other ? value.other : null;
-        } else if (type === 'ranking' || type === 'siren') {
+        } else if (type === 'ranking' || type === 'siren' || type === 'medias') {
           // $FlowFixMe
           formattedValue = value;
         } else {
