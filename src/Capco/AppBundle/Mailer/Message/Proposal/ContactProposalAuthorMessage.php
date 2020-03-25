@@ -13,7 +13,6 @@ final class ContactProposalAuthorMessage extends AbstractExternalMessage
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
         return [
-            '{proposalTitle}' => self::escape($proposal->getTitle()),
             '{senderName}' => $params['sender']['name']
         ];
     }
@@ -24,6 +23,8 @@ final class ContactProposalAuthorMessage extends AbstractExternalMessage
             'senderName' => $params['sender']['name'],
             'senderMessage' => $params['senderMessage'],
             'senderEmail' => $params['sender']['email'],
+            'projectTitle' => $proposal->getProject()->getTitle(),
+            'proposalTitle' => $proposal->getTitle(),
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
             'siteUrl' => $params['siteURL'],

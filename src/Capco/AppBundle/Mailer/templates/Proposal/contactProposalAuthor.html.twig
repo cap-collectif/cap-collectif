@@ -5,15 +5,60 @@
 {% endblock %}
 
 {% block header_mail %}
-    {{ senderName }} vous a envoyé un message :
+    <h3 style="margin-bottom: 0">
+        {{ projectTitle }} : {{ proposalTitle }}
+    </h3>
 {% endblock %}
 
 {% block core_mail %}
-    <div>
-        {{ senderMessage }}
+    <div class="resp-punchline"
+         style="padding: 10px 27px 30px 27px;text-decoration:none; text-align:left;color: rgb(51, 51, 51);font-size: 18px;font-family: 'OpenSans-SemiBold',helvetica,arial,sans-serif;font-weight: 600; background-color:#EEE">
+        <table width="100%" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="font-weight: bold; padding-top: 30px;">
+                                {{ 'global.name' |trans({}, 'CapcoAppBundle', user_locale)|upper }}
+                            </td>
+                        </tr><tr>
+                            <td>
+                                {{ senderName }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="font-weight: bold">
+                                {{ 'global.email.short' |trans({}, 'CapcoAppBundle', user_locale)|upper }}
+                            </td>
+                        </tr><tr>
+                            <td>
+                                <a href="mailto:{{ senderEmail }}">{{ senderEmail }}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; padding-top: 30px;">
+                    {{ 'global.message' |trans({}, 'CapcoAppBundle', user_locale)|upper }}
+                </td>
+            </tr><tr>
+                <td>
+                    {{ senderMessage }}
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top: 30px;">
+                    <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;"
+                       href="mailto:{{ senderEmail }}">
+                        {{ 'global.answer' |trans({}, 'CapcoAppBundle', user_locale) }}
+                    </a>
+                </td>
+            </tr>
+        </table>
     </div>
-{% endblock %}
-
-{% block footer_mail %}
-    Lui répondre : {{ senderEmail }}
 {% endblock %}
