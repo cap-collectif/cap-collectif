@@ -339,7 +339,9 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                 .filter(Boolean)
                 .map(proposal => (
                   <S.ProposalListRow key={proposal.id} rowId={proposal.id}>
-                    <h2>{proposal.title}</h2>
+                    <h2>
+                      <a href={proposal.adminUrl}>{proposal.title}</a>
+                    </h2>
                     <S.ProposalListRowInformations>
                       <p>
                         #{proposal.reference} • {proposal.author.username}
@@ -462,6 +464,7 @@ export default createPaginationContainer(
                 id
                 username
               }
+              adminUrl
               publishedAt
               district {
                 id

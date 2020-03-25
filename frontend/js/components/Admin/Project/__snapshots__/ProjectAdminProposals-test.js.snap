@@ -73,6 +73,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   Object {
                     "cursor": "YToyOntpOjA7aToxNDg1OTAzNjAwMDAwO2k6MTtzOjk6InByb3Bvc2FsMSI7fQ==",
                     "node": Object {
+                      "adminUrl": "https://capco.dev/admin/lapropo1",
                       "author": Object {
                         "id": "VXNlcjp1c2VyNTAy",
                         "username": "welcomattic",
@@ -105,6 +106,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   Object {
                     "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwOCI7fQ==",
                     "node": Object {
+                      "adminUrl": "https://capco.dev/admin/lapropo12",
                       "author": Object {
                         "id": "VXNlcjp1c2VyNTIy",
                         "username": "johnsmith",
@@ -137,6 +139,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   Object {
                     "cursor": "YToyOntpOjA7aToxNDg1OTAzNzgwMDAwO2k6MTtzOjk6InByb3Bvc2FsMiI7fQ==",
                     "node": Object {
+                      "adminUrl": "https://capco.dev/admin/lapropo2",
                       "author": Object {
                         "id": "VXNlcjp1c2VyNQ==",
                         "username": "user",
@@ -169,6 +172,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   Object {
                     "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjk6InByb3Bvc2FsMyI7fQ==",
                     "node": Object {
+                      "adminUrl": "https://capco.dev/admin/lapropo3",
                       "author": Object {
                         "id": "VXNlcjp1c2VyNTAy",
                         "username": "welcomattic",
@@ -201,6 +205,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   Object {
                     "cursor": "YToyOntpOjA7aToxNDg1OTAzODU5MDAwO2k6MTtzOjk6InByb3Bvc2FsNCI7fQ==",
                     "node": Object {
+                      "adminUrl": "https://capco.dev/admin/lapropo4",
                       "author": Object {
                         "id": "VXNlcjp1c2VyNw==",
                         "username": "user7",
@@ -226,6 +231,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   Object {
                     "cursor": "YToyOntpOjA7aToxNDg1OTA0MDIwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDEwIjt9",
                     "node": Object {
+                      "adminUrl": "https://capco.dev/admin/lapropo7",
                       "author": Object {
                         "id": "VXNlcjp1c2VyQWRtaW4=",
                         "username": "admin",
@@ -255,6 +261,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   Object {
                     "cursor": "YToyOntpOjA7aToxNDg1OTA0MDgwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDExIjt9",
                     "node": Object {
+                      "adminUrl": "https://capco.dev/admin/lapropo8",
                       "author": Object {
                         "id": "VXNlcjp1c2VyQWRtaW4=",
                         "username": "admin",
@@ -284,6 +291,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   Object {
                     "cursor": "YToyOntpOjA7aToxNTIzMzk3NjAwMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEwNCI7fQ==",
                     "node": Object {
+                      "adminUrl": "https://capco.dev/admin/lapropo1104",
                       "author": Object {
                         "id": "VXNlcjp1c2VyQWRtaW4=",
                         "username": "admin",
@@ -360,7 +368,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
         >
           <h2>
-            Ravalement de la façade de la bibliothèque municipale
+            <a
+              href="https://capco.dev/admin/lapropo1"
+            >
+              Ravalement de la façade de la bibliothèque municipale
+            </a>
           </h2>
           <ProjectAdminProposalsstyle__ProposalListRowInformations>
             <p>
@@ -413,7 +425,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
         >
           <h2>
-            Renovation of the gymnasium
+            <a
+              href="https://capco.dev/admin/lapropo12"
+            >
+              Renovation of the gymnasium
+            </a>
           </h2>
           <ProjectAdminProposalsstyle__ProposalListRowInformations>
             <p>
@@ -466,7 +482,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
         >
           <h2>
-            Rénovation du gymnase
+            <a
+              href="https://capco.dev/admin/lapropo2"
+            >
+              Rénovation du gymnase
+            </a>
           </h2>
           <ProjectAdminProposalsstyle__ProposalListRowInformations>
             <p>
@@ -519,7 +539,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
         >
           <h2>
-            Installation de bancs sur la place de la mairie
+            <a
+              href="https://capco.dev/admin/lapropo3"
+            >
+              Installation de bancs sur la place de la mairie
+            </a>
           </h2>
           <ProjectAdminProposalsstyle__ProposalListRowInformations>
             <p>
@@ -572,7 +596,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
         >
           <h2>
-            Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
+            <a
+              href="https://capco.dev/admin/lapropo4"
+            >
+              Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
+            </a>
           </h2>
           <ProjectAdminProposalsstyle__ProposalListRowInformations>
             <p>
@@ -614,7 +642,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
         >
           <h2>
-            Proposition pas encore votable
+            <a
+              href="https://capco.dev/admin/lapropo7"
+            >
+              Proposition pas encore votable
+            </a>
           </h2>
           <ProjectAdminProposalsstyle__ProposalListRowInformations>
             <p>
@@ -661,7 +693,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
         >
           <h2>
-            Proposition plus votable
+            <a
+              href="https://capco.dev/admin/lapropo8"
+            >
+              Proposition plus votable
+            </a>
           </h2>
           <ProjectAdminProposalsstyle__ProposalListRowInformations>
             <p>
@@ -708,7 +744,11 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
         >
           <h2>
-            Test de publication avec accusé de réception
+            <a
+              href="https://capco.dev/admin/lapropo1104"
+            >
+              Test de publication avec accusé de réception
+            </a>
           </h2>
           <ProjectAdminProposalsstyle__ProposalListRowInformations>
             <p>

@@ -32,14 +32,12 @@ const formatNavbarLinks = (project, features, path, setTitle) => {
       title: 'global.contribution',
       count: project.proposals.totalCount,
       url: `${path}/proposals`,
-      component: () => (
-        <ProjectAdminProposalsPage projectId={project.id} />
-      ),
+      component: () => <ProjectAdminProposalsPage projectId={project.id} />,
     });
   links.push({
     title: 'capco.section.metrics.participants',
     count: project.contributors.totalCount,
-    url: `${path}/contributors`,
+    url: `#`,
     component: () => <p style={{ marginLeft: '45%' }}>WIP</p>,
   });
 
@@ -64,10 +62,12 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
   const location = useLocation();
   const [title, setTitle] = useState(project.title);
   const path = `${basePath}${project._id}`;
-  const links: Links = useMemo(
-    () => formatNavbarLinks(project, features, path, setTitle),
-    [project, features, path, setTitle],
-  );
+  const links: Links = useMemo(() => formatNavbarLinks(project, features, path, setTitle), [
+    project,
+    features,
+    path,
+    setTitle,
+  ]);
   return (
     <div className="d-flex">
       <Header>
@@ -106,10 +106,7 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
 
 const ProjectAdminRouterWrapper = ({ project, features }: Props) => (
   <Router>
-    <ProjectAdminContent
-      project={project}
-      features={features}
-    />
+    <ProjectAdminContent project={project} features={features} />
   </Router>
 );
 
