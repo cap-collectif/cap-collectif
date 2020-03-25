@@ -21,8 +21,8 @@ export type FormattedResponse = {|
 |};
 
 const formatResponses = (
-  questions: Questions,
-  responses: ResponsesInReduxForm,
+  questions: Questions = [],
+  responses: ResponsesInReduxForm = [],
 ): Array<FormattedResponse> =>
   responses.reduce(
     (formattedResponses: Array<FormattedResponse>, response: ResponseInReduxForm) => {

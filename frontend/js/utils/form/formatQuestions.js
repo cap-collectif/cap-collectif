@@ -12,8 +12,8 @@ export type FormattedQuestion = {|
 |};
 
 const formatQuestions = (
-  questions: Questions,
-  formattedResponses: Array<FormattedResponse>,
+  questions: Questions = [],
+  formattedResponses: Array<FormattedResponse> = [],
 ): Array<FormattedQuestion> =>
   questions.map(({ id, title, alwaysJumpDestinationQuestion, jumps }) => {
     const question = {
