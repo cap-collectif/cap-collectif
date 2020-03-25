@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalContactModal /> renders correctly 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="ProposalFormContactModal-modal"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={false}
+>
+  <form
+    id="ProposalContactModalForm"
+    onSubmit={[MockFunction]}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="ProposalFormContactModal-title"
+      >
+        <FormattedMessage
+          id="send-message-to"
+          values={
+            Object {
+              "messageTo": "Gertrude",
+            }
+          }
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Field
+        component={[Function]}
+        id="ProposalFormContactModal-senderName"
+        label={
+          <FormattedMessage
+            id="your-name"
+            values={Object {}}
+          />
+        }
+        name="senderName"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="ProposalFormContactModal-message"
+        label={
+          <FormattedMessage
+            id="contact.your-message"
+            values={Object {}}
+          />
+        }
+        name="message"
+        rows={4}
+        type="textarea"
+      />
+      <Field
+        component={[Function]}
+        id="ProposalFormContactModal-replyEmail"
+        label={
+          <FormattedMessage
+            id="your-email-address"
+            values={Object {}}
+          />
+        }
+        name="replyEmail"
+        type="email"
+      />
+      <Field
+        component={[Function]}
+        id="captcha"
+        name="captcha"
+        type="captcha"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        disabled={false}
+        id="ProposalFormContactModal-submit"
+        isSubmitting={false}
+        label="global.validate"
+        onSubmit={[Function]}
+      />
+    </ModalFooter>
+  </form>
+</Modal>
+`;

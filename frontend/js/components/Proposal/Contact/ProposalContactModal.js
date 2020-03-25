@@ -9,17 +9,26 @@ import SubmitButton from '~/components/Form/SubmitButton';
 import component from '~/components/Form/Field';
 import { isEmail } from '~/services/Validator';
 import type { State } from '~/types';
+import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import ContactProposalAuthorMutation from '~/mutations/ContactProposalAuthorMutation';
 
 type Props = {|
   ...ReduxFormFormProps,
   show: boolean,
   proposalId: string,
+  authorName: string,
   onClose: () => {},
   onSubmit: () => {},
+  addCaptchaField: boolean,
 |};
 
-type FormValues = {| proposalId: string, senderName: string, message: string, replyEmail: string |};
+type FormValues = {|
+  proposalId: string,
+  senderName: string,
+  message: string,
+  replyEmail: string,
+  captcha: string,
+|};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   if (!values) return;
@@ -27,6 +36,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     .then(() => {
       props.reset();
       props.onClose();
+      FluxDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: {
+          bsStyle: 'success',
+          content: 'message-sent-with-success',
+        },
+      });
     })
     .catch(() => {
       throw new SubmissionError({
@@ -35,7 +51,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     });
 };
 
-const validate = ({ senderName, message, replyEmail }: FormValues) => {
+const validate = ({ senderName, message, replyEmail, captcha }: FormValues, props: Props) => {
   const errors = {};
 
   if (!senderName || senderName?.length < 2) errors.senderName = 'global.required';
@@ -46,6 +62,10 @@ const validate = ({ senderName, message, replyEmail }: FormValues) => {
     errors.replyEmail = 'global.required';
   } else if (!isEmail(replyEmail)) {
     errors.replyEmail = 'global.constraints.email.invalid';
+  }
+
+  if (!captcha && props.addCaptchaField && window && window.location.host !== 'capco.test') {
+    errors.captcha = 'registration.constraints.captcha.invalid';
   }
 
   return errors;
@@ -59,18 +79,19 @@ export const ProposalContactModal = ({
   onClose,
   invalid,
   submitting,
+  authorName,
 }: Props) => (
   <Modal show={show} onHide={onClose} aria-labelledby="ProposalFormContactModal-modal">
     <form onSubmit={handleSubmit} id={formName}>
       <Modal.Header closeButton>
         <Modal.Title
           id="ProposalFormContactModal-title"
-          children={<FormattedMessage id="send-message" />}
+          children={<FormattedMessage id="send-message-to" values={{ messageTo: authorName }} />}
         />
       </Modal.Header>
       <Modal.Body>
         <Field
-          label={<FormattedMessage id="admin.fields.status.name" />}
+          label={<FormattedMessage id="your-name" />}
           id="ProposalFormContactModal-senderName"
           name="senderName"
           type="text"
@@ -81,15 +102,17 @@ export const ProposalContactModal = ({
           id="ProposalFormContactModal-message"
           name="message"
           type="textarea"
+          rows={4}
           component={component}
         />
         <Field
-          label={<FormattedMessage id="admin.mail.contact" />}
+          label={<FormattedMessage id="your-email-address" />}
           id="ProposalFormContactModal-replyEmail"
           name="replyEmail"
           type="email"
           component={component}
         />
+        <Field id="captcha" component={component} name="captcha" type="captcha" />
       </Modal.Body>
       <Modal.Footer>
         <CloseButton onClose={onClose} />
@@ -108,6 +131,7 @@ export const ProposalContactModal = ({
 const mapStateToProps = (state: State, { proposalId }: Props) => ({
   form: formName,
   initialValues: { proposalId },
+  addCaptchaField: state.default.features.captcha,
 });
 
 const form = connect(mapStateToProps)(

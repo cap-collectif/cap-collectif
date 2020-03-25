@@ -454,7 +454,7 @@ InternalMutation:
                 builderConfig:
                     inputType: ContactProposalAuthorInput
                     payloadType: ContactProposalAuthorPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ContactProposalAuthorMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ContactProposalAuthorMutation", [value, serv("request_stack")])'
             # Proposal Form
             createProposalForm:
                 access: "@=hasRole('ROLE_ADMIN')"

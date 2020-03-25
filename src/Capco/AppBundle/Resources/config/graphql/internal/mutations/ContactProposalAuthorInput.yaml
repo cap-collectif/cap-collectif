@@ -14,3 +14,6 @@ ContactProposalAuthorInput:
       message:
         type: 'String!'
         description: 'the message to be sent'
+      captcha:
+        type: 'String!'
+        description: 'The captcha verification.'

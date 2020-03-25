@@ -117,7 +117,12 @@ export class ProposalPageHeader extends React.Component<Props> {
               )}
               {!proposal.draft && <UnpublishedLabel publishable={proposal} />}
             </p>
-            {canContact && <ProposalContactButton proposalId={proposal.id} />}
+            {canContact && (
+              <ProposalContactButton
+                proposalId={proposal.id}
+                authorName={proposal.author.displayName}
+              />
+            )}
           </div>
         </HeaderBandContainer>
         {proposal.publicationStatus !== 'DRAFT' && (

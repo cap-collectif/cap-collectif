@@ -6,7 +6,13 @@ import ProposalContactModal from './ProposalContactModal';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
 
-export const ProposalContactButton = ({ proposalId }: { proposalId: string }) => {
+export const ProposalContactButton = ({
+  proposalId,
+  authorName,
+}: {
+  proposalId: string,
+  authorName: string,
+}) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -14,6 +20,7 @@ export const ProposalContactButton = ({ proposalId }: { proposalId: string }) =>
         show={showModal}
         onClose={() => setShowModal(false)}
         proposalId={proposalId}
+        authorName={authorName}
       />
       <Button
         id="ProposalContactModal-show-button"

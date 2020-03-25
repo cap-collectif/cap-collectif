@@ -2023,6 +2023,9 @@ input ContactProposalAuthorInput {
 
   """the message to be sent"""
   message: String!
+
+  """The captcha verification."""
+  captcha: String!
   clientMutationId: String
 }
 
