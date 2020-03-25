@@ -74,7 +74,6 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     title: RIB au nom de la raison sociale et à l'adresse du siège social
     private: true
     required: true
-    helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
     type: 7 # media
     alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret7'
   mediaquestionIdfProjetLocalAssociationSiret7:
@@ -82,6 +81,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     title: Charte régionale des valeurs de la République et de la laïcité signée par le représentant légal
     private: true
     required: true
+    description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
     type: 7 # media 
     # END of path for Association with SIRET.
   mediaquestionIdfProjetLocalAssociationRna1:
@@ -113,7 +113,6 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     title: RIB au nom de la raison sociale et à l'adresse du siège social
     private: true
     required: true
-    helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
     type: 7 # media 
     alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationRna5'
   mediaquestionIdfProjetLocalAssociationRna5:
@@ -122,6 +121,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     private: true
     required: true
     type: 7 # media 
+    description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
     alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
     # END of path for Association with RNA.
   mediaquestionIdfProjetLocalAssociationNoRna1:
@@ -144,6 +144,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     private: true
     required: true
     type: 7 # media 
+    description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
     alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
     # END of path for Association without RNA.
   mediaquestionIdfProjetLocalEntreprise1:
@@ -183,7 +184,6 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     title: RIB au nom de la raison sociale et à l'adresse du siège social
     private: true
     required: true
-    helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
     type: 7 # media 
     alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalEntreprise6'
   mediaquestionIdfProjetLocalEntreprise6:
@@ -191,7 +191,8 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     title: Charte régionale des valeurs de la République et de la laïcité signée par le représentant légal
     private: true
     required: true
-    type: 7 # media 
+    type: 7 # media
+    description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
     alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
     # END
   mediaquestionIdfProjetLocalOrgPub1:
@@ -215,7 +216,6 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     title: RIB au nom de la raison sociale et à l'adresse du siège social
     private: true
     required: true
-    helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
     type: 7 # media
     alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
   # End

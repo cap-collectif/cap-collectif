@@ -271,6 +271,7 @@ const RenderResponses = ({
                       name={`${member}.value`}
                       id={`${cleanDomId(`${form}-${member}`)}`}
                       type={field.type}
+                      style={{ maxWidth: '150px'}}
                       // $FlowFixMe
                       component={component}
                       description={field.description}

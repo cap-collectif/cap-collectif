@@ -769,12 +769,12 @@ Capco\AppBundle\Entity\QuestionChoice:
     question: '@multiplequestion17'
   questionchoiceIdf1:
     id: 'questionchoiceIdf1'
-    title: 'Un Projet Local'
+    title: 'Déposer un Projet Local'
     position: 2
     question: '@multiplequestionIdfGrandOrLocal'
   questionchoiceIdf2:
     id: 'questionchoiceIdf2'
-    title: 'Un Grand Projet'
+    title: 'Renseigner la présentation de mon Grand Projet'
     position: 1
     question: '@multiplequestionIdfGrandOrLocal'
   idfGrandProjet1Choice1:

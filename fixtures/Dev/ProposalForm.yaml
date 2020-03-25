@@ -325,6 +325,9 @@ Capco\AppBundle\Entity\ProposalForm:
     usingIllustration: true
     usingCategories: true
     usingSummary: true
+    districtHelpText: "Indiquez le nom de la commune concernée. Sinon indiquez Région Île-de-France"
+    addressHelpText: "Précisez l'adresse principale où sera mis en oeuvre votre projet"
+    summaryHelpText: "En un clin d'oeil, donnez envie aux Franciliens d'en savoir plus sur votre projet"
     districtMandatory: true
     themeMandatory: false
     descriptionMandatory: true

@@ -139,9 +139,10 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     simplequestionIdfProjetLocalAssociationSiret1:
         id: 1335
         title: Numéro SIRET
-        required: false
+        required: true
         private: true
-        type: 11 # siren
+        type: 11 # siret
+        description: Grâce à l'API Entreprise, la Région simplifie vos démarches et vous permet...
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret2'
     simplequestionIdfProjetLocalAssociationSiret2:
         id: 1336
@@ -157,7 +158,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
-        type: 0 # text
+        type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret4'
     simplequestionIdfProjetLocalAssociationSiret4:
         id: 1338
@@ -196,7 +197,8 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Numéro RNA  (ou WALDEC pour les associations créées avant 2010)
         required: true
         private: true
-        type: 0 # text
+        description: Grâce à l'API Entreprise, la Région simplifie vos démarches et vous permet...
+        type: 0 # text TODO create a specific RNA question type for validation
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationRna2'
     simplequestionIdfProjetLocalAssociationRna2:
         id: 1343
@@ -212,7 +214,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
-        type: 0 # text
+        type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationRna4'
     simplequestionIdfProjetLocalAssociationRna4:
         id: 1345
@@ -242,7 +244,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Adresse du siège social
         required: true
         private: true
-        type: 0 # text
+        type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationNoRna3'
     simplequestionIdfProjetLocalAssociationNoRna3:
         id: 1349
@@ -261,6 +263,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     simplequestionIdfProjetLocalEntreprise1:
         id: 1351
         title: Numéro SIRET
+        description: Grâce à l'API Entreprise, la Région simplifie vos démarches et vous permet...
         required: true
         private: true
         type: 11 # siret
@@ -279,7 +282,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
-        type: 0 # text
+        type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalEntreprise4'
     simplequestionIdfProjetLocalEntreprise4:
         id: 1354
@@ -309,6 +312,8 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1357
         title: Numéro SIRET
         required: true
+        private: true
+        helpText: Grâce à l'API Entreprise, la Région simplifie vos démarches et vous permet...
         type: 11 # siret
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalOrgPublic2'
     simplequestionIdfProjetLocalOrgPublic2:
@@ -325,7 +330,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
-        type: 0 # text
+        type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalOrgPublic4'
     simplequestionIdfProjetLocalOrgPublic4:
         id: 1360

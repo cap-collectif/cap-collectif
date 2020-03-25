@@ -290,8 +290,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     type: 4
   multiplequestionIdfGrandOrLocal:
     id: 3918
-    title: 'Quel type de projet souhaitez-vous déposer ?'
-    helpText: "Vous ne savez pas quel type de projet vous déposez ? Testez-le et notre moteur d'évaluation vous orientera vers la bonne direction. Pour plus d'informations, consultez la boîte à outils."
+    title: 'Je souhaite...'
     required: true
     private: true
     type: 3 # radio
