@@ -13,6 +13,8 @@ exports[`<ClearableInput /> should render correctly 1`] = `
     value=""
   />
   <ClearableInput__CloseIconContainer
+    isVisible={false}
+    onClick={[Function]}
     tabIndex={0}
   />
 </ClearableInput__ClearableInputContainer>
@@ -34,6 +36,8 @@ exports[`<ClearableInput /> should render correctly with a font icon 1`] = `
     value=""
   />
   <ClearableInput__CloseIconContainer
+    isVisible={false}
+    onClick={[Function]}
     tabIndex={0}
   />
 </ClearableInput__ClearableInputContainer>
@@ -55,6 +59,8 @@ exports[`<ClearableInput /> should render correctly with a svg icon 1`] = `
     value=""
   />
   <ClearableInput__CloseIconContainer
+    isVisible={false}
+    onClick={[Function]}
     tabIndex={0}
   />
 </ClearableInput__ClearableInputContainer>

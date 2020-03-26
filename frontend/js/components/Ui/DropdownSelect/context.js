@@ -2,10 +2,12 @@
 import * as React from 'react';
 
 export type Context = {|
-  +value?: string | null,
-  +onChange?: (value: string) => void,
+  +isMultiSelect: boolean,
+  +value?: string | string[] | null,
+  +onChange?: (value: string | string[]) => void,
 |};
 
 export const DropdownSelectContext = React.createContext<Context>({
   value: null,
+  isMultiSelect: false,
 });

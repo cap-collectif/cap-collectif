@@ -34,7 +34,6 @@ export const Container: StyledComponent<
   }
   & li {
     padding: 10px;
-    background: ${colors.white};
     & + li {
       border-top: 1px solid ${colors.lightGray};
     }
@@ -42,16 +41,12 @@ export const Container: StyledComponent<
       border-bottom-left-radius: ${MAIN_BORDER_RADIUS_SIZE};
       border-bottom-right-radius: ${MAIN_BORDER_RADIUS_SIZE};
     }
-    &:hover,
-    :active {
-      cursor: pointer;
-      background: ${colors.paleGrey};
-    }
   }
 `;
 
 export const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
   position: sticky;
+  z-index: 10;
   top: 0;
   background: ${colors.paleGrey};
   padding: 10px;

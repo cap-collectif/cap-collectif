@@ -60,12 +60,13 @@ export type CollapsableAlignment = 'left' | 'right';
 
 type Props = {|
   +align?: CollapsableAlignment,
+  +onClose?: () => void,
   +children: React.ChildrenArray<
     React.Element<typeof CollapsableButton> | React.Element<typeof CollapsableElement>,
   >,
 |};
 
-const Collapsable = ({ children, align = 'left' }: Props) => {
+const Collapsable = ({ children, onClose, align = 'left' }: Props) => {
   const [visible, setVisible] = React.useState(false);
   const contextValue = React.useMemo(
     () => ({
@@ -76,6 +77,9 @@ const Collapsable = ({ children, align = 'left' }: Props) => {
   );
   const collapsable = React.useRef<HTMLDivElement | null>(null);
   useClickAway(collapsable, () => {
+    if (onClose && visible) {
+      onClose();
+    }
     setVisible(false);
   });
   return (

@@ -5,6 +5,8 @@ import DropdownSelectChoice from '~ui/DropdownSelect/choice';
 import DropdownSelectMenu from '~ui/DropdownSelect/menu';
 import type { Context } from '~ui/DropdownSelect/context';
 import { DropdownSelectContext } from '~ui/DropdownSelect/context';
+import DropdownSelectHeader from '~ui/DropdownSelect/header';
+import DropdownSelectMessage from '~ui/DropdownSelect/message';
 
 /**
  *
@@ -25,14 +27,14 @@ import { DropdownSelectContext } from '~ui/DropdownSelect/context';
  * </DropdownSelect>
  * */
 
-type Props = {|
+export type Props = {|
+  +className?: string,
+  +isMultiSelect?: boolean,
   +title: string,
   +shouldOverflow?: boolean,
-  +value?: string | null,
-  +onChange?: (value: string) => void,
-  +children: React.ChildrenArray<
-    React.Element<typeof DropdownSelectChoice> | React.Element<typeof DropdownSelectMenu>,
-  >,
+  +value?: string | string[] | null,
+  +onChange?: (value: string | string[]) => void,
+  +children: React.Node,
 |};
 
 export const useDropdownSelect = (): Context => {
@@ -43,12 +45,24 @@ export const useDropdownSelect = (): Context => {
   return context;
 };
 
-const DropdownSelect = ({ children, title, value, onChange, shouldOverflow = false }: Props) => {
-  const contextValue = React.useMemo(() => ({ value, onChange }), [value, onChange]);
+const DropdownSelect = ({
+  children,
+  title,
+  value,
+  onChange,
+  shouldOverflow = false,
+  isMultiSelect = false,
+  className,
+}: Props) => {
+  const contextValue = React.useMemo(() => ({ value, onChange, isMultiSelect }), [
+    value,
+    onChange,
+    isMultiSelect,
+  ]);
 
   return (
     <DropdownSelectContext.Provider value={contextValue}>
-      <S.Container shouldOverflow={shouldOverflow}>
+      <S.Container shouldOverflow={shouldOverflow} className={className}>
         <S.Header>{title}</S.Header>
         <S.Body>{children}</S.Body>
       </S.Container>
@@ -57,6 +71,8 @@ const DropdownSelect = ({ children, title, value, onChange, shouldOverflow = fal
 };
 
 DropdownSelect.Choice = DropdownSelectChoice;
+DropdownSelect.Header = DropdownSelectHeader;
 DropdownSelect.Menu = DropdownSelectMenu;
+DropdownSelect.Message = DropdownSelectMessage;
 
 export default DropdownSelect;

@@ -29,11 +29,15 @@ export const Container: StyledComponent<
   HTMLElement,
 > = styled.li`
   position: relative;
-
+  background: ${colors.white};
   & li {
     display: none;
   }
-
+  &:hover,
+  :active {
+    cursor: pointer;
+    background: ${colors.paleGrey};
+  }
   &:hover,
   :active,
   :focus {

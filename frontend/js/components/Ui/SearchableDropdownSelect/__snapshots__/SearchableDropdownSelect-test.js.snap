@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchableDropdownSelect /> should correctly render when defaultOptions are provided 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "dispatch": [Function],
+      "state": Object {
+        "error": null,
+        "results": Array [],
+        "status": "default",
+      },
+    }
+  }
+>
+  <style__SearchableDropdownContainer
+    title="Votre animé préféré"
+  >
+    <DropdownSelect.Header>
+      <style__Input
+        onChange={[Function]}
+        onClear={[Function]}
+        placeholder="Rechercher un animé"
+        type="text"
+      />
+    </DropdownSelect.Header>
+    <DropdownSelect.Choice
+      value="default1"
+    >
+      Default anime one
+    </DropdownSelect.Choice>
+    <DropdownSelect.Choice
+      value="default2"
+    >
+      Default anime two
+    </DropdownSelect.Choice>
+  </style__SearchableDropdownContainer>
+</ContextProvider>
+`;
+
+exports[`<SearchableDropdownSelect /> should render correctly 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "dispatch": [Function],
+      "state": Object {
+        "error": null,
+        "results": Array [],
+        "status": "default",
+      },
+    }
+  }
+>
+  <style__SearchableDropdownContainer
+    title="Votre animé préféré"
+  >
+    <DropdownSelect.Header>
+      <style__Input
+        onChange={[Function]}
+        onClear={[Function]}
+        placeholder="Rechercher un animé"
+        type="text"
+      />
+    </DropdownSelect.Header>
+  </style__SearchableDropdownContainer>
+</ContextProvider>
+`;

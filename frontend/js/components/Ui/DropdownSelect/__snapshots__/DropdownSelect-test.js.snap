@@ -4,6 +4,7 @@ exports[`<DropdownSelect /> should render correctly 1`] = `
 <ContextProvider
   value={
     Object {
+      "isMultiSelect": false,
       "onChange": undefined,
       "value": undefined,
     }
@@ -36,10 +37,101 @@ exports[`<DropdownSelect /> should render correctly 1`] = `
 </ContextProvider>
 `;
 
+exports[`<DropdownSelect /> should render correctly with a message 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "isMultiSelect": false,
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container
+    shouldOverflow={false}
+  >
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Message>
+        <p>
+          Je suis un beau message
+        </p>
+      </DropdownSelect.Message>
+      <DropdownSelect.Choice
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
+exports[`<DropdownSelect /> should render correctly with a message that has an icon 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "isMultiSelect": false,
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container
+    shouldOverflow={false}
+  >
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Message
+        icon={
+          <Icon
+            name="information"
+          />
+        }
+      >
+        <p>
+          Je suis un beau message avec une icône qui vous informe que The Promised Neverland est très cool
+        </p>
+      </DropdownSelect.Message>
+      <DropdownSelect.Choice
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
 exports[`<DropdownSelect /> should render correctly with a submenu 1`] = `
 <ContextProvider
   value={
     Object {
+      "isMultiSelect": false,
       "onChange": undefined,
       "value": undefined,
     }
@@ -91,10 +183,165 @@ exports[`<DropdownSelect /> should render correctly with a submenu 1`] = `
 </ContextProvider>
 `;
 
+exports[`<DropdownSelect /> should render correctly with disabled choices 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "isMultiSelect": false,
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container
+    shouldOverflow={false}
+  >
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Choice
+        disabled={true}
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        disabled={true}
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
+exports[`<DropdownSelect /> should render correctly with indeterminate choices 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "isMultiSelect": false,
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container
+    shouldOverflow={false}
+  >
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Choice
+        isIndeterminate={true}
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        isIndeterminate={true}
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
+exports[`<DropdownSelect /> should render correctly with indeterminate choices 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "isMultiSelect": false,
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container
+    shouldOverflow={false}
+  >
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Choice
+        isIndeterminate={true}
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        isIndeterminate={true}
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
+exports[`<DropdownSelect /> should render correctly with multi-select enabled 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "isMultiSelect": true,
+      "onChange": undefined,
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container
+    shouldOverflow={false}
+  >
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Choice
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
 exports[`<DropdownSelect /> should render correctly with submenu in a submenu 1`] = `
 <ContextProvider
   value={
     Object {
+      "isMultiSelect": false,
       "onChange": undefined,
       "value": undefined,
     }

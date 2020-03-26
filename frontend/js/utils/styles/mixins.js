@@ -1,3 +1,3 @@
 // @flow
 
-export const pxToRem = (px: number) => `${(px / 16).toFixed(3)}rem`;
+export const pxToRem = (px: number) => `${(px / 10).toFixed(3)}rem`;

@@ -8,6 +8,7 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type Props = {|
   ...$Diff<InputProps, { value: *, defaultValue: * }>,
+  className?: string,
   initialValue?: ?string,
   icon?: React.Node,
   onSubmit?: (value: string) => void,
@@ -38,7 +39,7 @@ const ClearableInputContainer: StyledComponent<
   }
   input {
     ${BASE_INPUT};
-    padding-right: 30px;
+    padding-right: 35px;
     ${props =>
       props.hasIcon &&
       css`
@@ -48,10 +49,23 @@ const ClearableInputContainer: StyledComponent<
   }
 `;
 
-const CloseIconContainer = styled.span`
+const CloseIconContainer: StyledComponent<
+  { isVisible: boolean },
+  {},
+  HTMLSpanElement,
+> = styled.span`
+  ${props =>
+    props.isVisible
+      ? css`
+          display: inline-block;
+        `
+      : css`
+          display: none;
+        `};
   height: 100%;
   position: absolute;
-  right: 14px;
+  right: 0;
+  padding: 0 14px 0 10px;
   &:hover {
     cursor: pointer;
     opacity: 0.5;
@@ -61,8 +75,14 @@ const CloseIconContainer = styled.span`
   }
 `;
 
-const ClearableInput = ({ icon, onSubmit, onClear, initialValue, ...rest }: Props) => {
+const ClearableInput = ({ icon, onSubmit, onClear, onChange, className, initialValue, ...rest }: Props) => {
   const [input, clearInput] = useInput(initialValue || '');
+  const onChangeHandler = e => {
+    if (onChange) {
+      onChange(e);
+    }
+    input.onChange(e);
+  };
   const canClear = input.value !== '';
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const closeIconContainerRef = React.useRef<HTMLElement | null>(null);
@@ -106,11 +126,15 @@ const ClearableInput = ({ icon, onSubmit, onClear, initialValue, ...rest }: Prop
     [canClear],
   );
   return (
-    <ClearableInputContainer hasIcon={!!icon}>
+    <ClearableInputContainer hasIcon={!!icon} className={className}>
       {icon}
-      <input {...rest} {...input} ref={inputRef} />
-      <CloseIconContainer ref={closeIconContainerRef} tabIndex={0}>
-        {canClear && <CloseIcon name={ICON_NAME.close} size="0.8rem" onClick={clear} />}
+      <input {...rest} {...input} onChange={onChangeHandler} ref={inputRef} />
+      <CloseIconContainer
+        ref={closeIconContainerRef}
+        tabIndex={0}
+        isVisible={canClear}
+        onClick={clear}>
+        {canClear && <CloseIcon name={ICON_NAME.close} size="0.8rem" />}
       </CloseIconContainer>
     </ClearableInputContainer>
   );
