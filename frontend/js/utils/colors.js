@@ -10,6 +10,7 @@ const colors = {
   infoColor: '#1D8293',
   darkGray: '#707070',
   gray: '#737373',
+  secondGray: '#8E8E8E',
   lightGray: '#ddd',
   iconGrayColor: '#acacac',
   borderColor: '#e3e3e3',
@@ -41,7 +42,7 @@ const colors = {
   ],
   votes: ['#5cb85c', '#f0ad4e', '#d9534f'],
   formBgc: '#fafafa',
-  paleGrey: '#ecf0f5'
+  paleGrey: '#ecf0f5',
 };
 
 export const socialColors = {

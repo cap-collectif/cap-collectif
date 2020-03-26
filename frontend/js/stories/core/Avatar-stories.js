@@ -7,6 +7,8 @@ import AvatarGroup from '../../components/Ui/Medias/AvatarGroup';
 import DefaultAvatarGroup from '../../components/Ui/Medias/DefaultAvatarGroup';
 import DefaultAvatar from '../../components/Ui/Medias/DefaultAvatar';
 import AvatarCount from '../../components/Ui/Medias/AvatarCount';
+import AvatarBadge from '~ui/Medias/AvatarBadge/AvatarBadge';
+import { ICON_NAME } from '~ui/Icons/Icon';
 
 const sizeOption = {
   Small: 'small',
@@ -107,4 +109,16 @@ storiesOf('Core|Avatar', module)
         `,
       },
     },
-  );
+  )
+  .add('Avatar with badge', () => {
+    return (
+      <AvatarBadge
+        size={30}
+        src="https://source.unsplash.com/collection/181462"
+        alt="My alternative"
+        color="pink"
+        icon={ICON_NAME.facebook}
+        badgeSize={18}
+      />
+    );
+  });

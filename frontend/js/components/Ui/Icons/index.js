@@ -26,3 +26,6 @@ export { default as CheckboxChecked } from './svg/checkboxChecked.svg';
 export { default as Check } from './svg/check.svg';
 export { default as File } from './svg/file.svg';
 export { default as Message } from './svg/message.svg';
+export { default as BubbleMessage } from './svg/bubble-message.svg';
+export { default as TaskList } from './svg/taskList.svg';
+export { default as Done } from './svg/done.svg';

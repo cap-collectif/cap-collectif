@@ -1,12 +1,14 @@
 // @flow
 import * as React from 'react';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
-
-import colors from '../../../utils/colors';
+import colors from '~/utils/colors';
 
 type Props = {|
   +avatarSize?: number,
-  +max: number,
+  +spaceBetweenAvatar?: number,
+  +max?: number,
+  +hiddenAvatarTooltip?: React.Node,
   +children: any,
 |};
 
@@ -17,7 +19,12 @@ const UserAvatarListWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.di
   position: relative;
 `;
 
-const AvatarWrapper = styled.div`
+const AvatarWrapper: StyledComponent<
+  { max: number, index: number, avatarSize?: number, spaceBetweenAvatar: number },
+  {},
+  HTMLDivElement,
+> = styled.div`
+  position: relative;
   z-index: ${props => props.max - props.index};
 
   img,
@@ -27,7 +34,7 @@ const AvatarWrapper = styled.div`
   }
 
   &:not(:first-child) {
-    margin-left: -10px;
+    margin-left: ${props => `${props.spaceBetweenAvatar}px`};
   }
 `;
 
@@ -43,33 +50,45 @@ const AvatarDefaultButton = styled.button`
   border-radius: 50%;
 `;
 
-const UserAvatarList = (props: Props) => {
-  const { max, children, avatarSize } = props;
+const UserAvatarList = ({
+  max = 5,
+  spaceBetweenAvatar = -10,
+  children,
+  avatarSize,
+  hiddenAvatarTooltip,
+}: Props) => {
+  const renderRestOfAvatar = () => (
+    <AvatarWrapper index={max} max={max} spaceBetweenAvatar={spaceBetweenAvatar}>
+      <AvatarDefaultButton
+        avatarSize={avatarSize}
+        bsStyle="link"
+        id="show-all"
+        className="more__link text-center">
+        {`+${children.length - max >= 100 ? '99' : children.length - max}`}
+      </AvatarDefaultButton>
+    </AvatarWrapper>
+  );
 
   return (
     <UserAvatarListWrapper>
       {children.slice(0, max).map((child, index) => (
-        <AvatarWrapper max={max} index={index} key={index}>
+        <AvatarWrapper max={max} index={index} key={index} spaceBetweenAvatar={spaceBetweenAvatar}>
           {child}
         </AvatarWrapper>
       ))}
-      {children.length > max && (
-        <AvatarWrapper index={max} max={max}>
-          <AvatarDefaultButton
-            avatarSize={avatarSize}
-            bsStyle="link"
-            id="show-all"
-            className="more__link text-center">
-            {`+${children.length - max >= 100 ? '99' : children.length - max}`}
-          </AvatarDefaultButton>
-        </AvatarWrapper>
-      )}
+
+      {children.length > max &&
+        (hiddenAvatarTooltip ? (
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="more-avatar">{hiddenAvatarTooltip}</Tooltip>}>
+            {renderRestOfAvatar()}
+          </OverlayTrigger>
+        ) : (
+          renderRestOfAvatar()
+        ))}
     </UserAvatarListWrapper>
   );
-};
-
-UserAvatarList.defaultProps = {
-  max: 5,
 };
 
 export default UserAvatarList;

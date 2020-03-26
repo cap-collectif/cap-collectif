@@ -16,9 +16,14 @@ type Props = {
   className?: string,
   style?: Object,
   id?: string,
+  isHorizontal?: boolean,
 };
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+export const Container: StyledComponent<
+  { isHorizontal: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
   className: 'card',
 })`
   border: 1px solid ${colors.borderColor};
@@ -26,7 +31,7 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
   margin-bottom: 30px;
   display: flex;
   flex: 1 0 auto;
-  flex-direction: column;
+  flex-direction: ${props => (props.isHorizontal ? 'row' : 'column')};
   width: 100%;
   border-radius: 4px;
 
@@ -68,10 +73,10 @@ export class Card extends React.PureComponent<Props> {
   static Date = Date;
 
   render() {
-    const { children, className, style, id } = this.props;
+    const { children, className, style, id, isHorizontal = false } = this.props;
 
     return (
-      <Container className={className} style={style} id={id}>
+      <Container className={className} style={style} id={id} isHorizontal={isHorizontal}>
         {children}
       </Container>
     );

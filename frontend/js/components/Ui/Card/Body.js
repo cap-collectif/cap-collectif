@@ -1,14 +1,20 @@
 // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { css, type StyledComponent } from 'styled-components';
 
-const Body: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+const Body: StyledComponent<{ isHorizontal?: boolean }, {}, HTMLDivElement> = styled.div.attrs({
   className: 'card__body',
 })`
   display: flex;
   padding: 15px;
   flex: 1 0 auto;
-  flex-direction: column;
+  flex-direction: ${props => (props.isHorizontal ? 'row' : 'column')};
   word-wrap: break-word;
+  ${({ isHorizontal }) =>
+    isHorizontal &&
+    css`
+      align-items: center;
+      justify-content: space-between;
+    `}
 
   hr {
     margin: 15px 0 10px;

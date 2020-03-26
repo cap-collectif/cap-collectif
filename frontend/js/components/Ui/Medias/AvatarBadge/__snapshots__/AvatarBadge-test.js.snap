@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AvatarBadge /> should render correctly 1`] = `
+<AvatarBadgestyle__AvatarBadgeContainer>
+  <Avatar
+    alt="my alternative"
+    size={20}
+    src="https://source.unsplash.com/collection/181462"
+  />
+  <AvatarBadgestyle__Circle
+    color="red"
+    size={10}
+  >
+    <Icon
+      name="facebook"
+      size={10}
+    />
+  </AvatarBadgestyle__Circle>
+</AvatarBadgestyle__AvatarBadgeContainer>
+`;

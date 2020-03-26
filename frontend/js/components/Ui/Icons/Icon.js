@@ -32,6 +32,9 @@ export const ICON_NAME: {
   file: 'file',
   check: 'check',
   message: 'message',
+  bubbleMessage: 'bubble-message',
+  taskList: 'taskList',
+  done: 'done',
 } = {
   calendar: 'calendar',
   networkAdd: 'network-add',
@@ -61,6 +64,9 @@ export const ICON_NAME: {
   file: 'file',
   check: 'check',
   message: 'message',
+  bubbleMessage: 'bubble-message',
+  taskList: 'taskList',
+  done: 'done',
 };
 
 type Props = {|
@@ -134,6 +140,12 @@ const getIcon = name => {
       return <Icons.File />;
     case 'message':
       return <Icons.Message />;
+    case 'bubble-message':
+      return <Icons.BubbleMessage />;
+    case 'taskList':
+      return <Icons.TaskList />;
+    case 'done':
+      return <Icons.Done />;
     default:
       return <div />;
   }

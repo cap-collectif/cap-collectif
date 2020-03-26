@@ -14,7 +14,7 @@ export const SIZE: {
   TINY: 'tiny',
 };
 
-type Props = {
+export type Props = {
   size: $Values<typeof SIZE> | number,
   className?: string,
   src: string,
