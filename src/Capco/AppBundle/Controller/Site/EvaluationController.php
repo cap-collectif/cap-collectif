@@ -9,12 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @deprecated This is our legacy evaluation tool.
+ * @deprecated this is our legacy evaluation tool
  */
 class EvaluationController extends Controller
 {
     /**
      * @Security("has_role('ROLE_USER')")
+     * @Route("/evaluations/project/{projectSlug}", name="user_analysis_project")
      * @Route("/evaluations", name="user_evaluations")
      * @Template("CapcoAppBundle:Evaluation:index.html.twig")
      */

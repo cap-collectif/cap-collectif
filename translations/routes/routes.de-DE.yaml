@@ -76,4 +76,5 @@ capco_user_profile_show_proposals: '/profile/{slug}/proposals'
 capco_user_profile_show_replies: '/profile/{slug}/replies'
 capco_user_profile_show_sources: '/profile/{slug}/sources'
 capco_user_profile_show_votes: '/profile/{slug}/votes'
+user_analysis_project: '/evaluations/project/{projectSlug}'
 user_evaluations: /evaluations

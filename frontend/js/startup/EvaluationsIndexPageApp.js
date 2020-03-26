@@ -1,17 +1,29 @@
 // @flow
 import * as React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
-import EvaluationsIndexPage from '../components/Evaluation/EvaluationsIndexPage';
+import type { GlobalState } from '~/types';
+import EvaluationsIndexPage from '~/components/Evaluation/EvaluationsIndexPage';
+import AnalysisIndexPage from '~/components/Analysis/AnalysisIndexPage/AnalysisIndexPage';
 
-/**
- * @deprecated This is our legacy evaluation tool.
- */
-export default (props: Object) => (
+const SwitchAnalysisAndLegacyEvaluation = ({ isLegacyAnalysis, ...props }: Object) =>
+  isLegacyAnalysis ? <EvaluationsIndexPage {...props} /> : <AnalysisIndexPage />;
+
+const mapStateToProps = (state: GlobalState) => ({
+  isLegacyAnalysis: !state.default.features.unstable__analysis,
+});
+
+const SwitchAnalysisAndLegacyEvaluationContainer = connect(mapStateToProps)(
+  SwitchAnalysisAndLegacyEvaluation,
+);
+
+const EvaluationsIndexPageApp = (props: Object) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <EvaluationsIndexPage {...props} />
+      <SwitchAnalysisAndLegacyEvaluationContainer {...props} />
     </IntlProvider>
   </Provider>
 );
+
+export default EvaluationsIndexPageApp;
