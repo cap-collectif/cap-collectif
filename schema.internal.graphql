@@ -5597,7 +5597,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   viewerCanEvaluate: Boolean!
 
   """The decision maker of the proposal."""
-  decisionMaker: User!
+  decisionMaker: User
 
   """The proposal's related decision."""
   decision: ProposalDecision

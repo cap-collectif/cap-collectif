@@ -205,7 +205,7 @@ InternalProposal:
                 description: 'Does the user can evaluate the current proposal.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanEvaluateProposalAssessmentResolver", [getUser(), value])'
             decisionMaker:
-                type: 'InternalUser!'
+                type: 'InternalUser'
                 description: 'The decision maker of the proposal.'
             decision:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalDecisionResolver").isGranted(getUser(), value)'

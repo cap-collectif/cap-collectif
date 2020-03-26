@@ -3,15 +3,14 @@
 namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Repository\ProposalAnalystRepository;
 use Capco\AppBundle\Repository\ProposalDecisionMakerRepository;
-use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\ProposalSupervisorRepository;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -25,19 +24,19 @@ class ProposalAnalysisRelatedVoter extends Voter
 
     private $proposalSupervisorRepository;
     private $proposalDecisionMakerRepository;
-    private $proposalDecisionRepository;
     private $proposalAnalystRepository;
+    private $authorizationChecker;
 
     public function __construct(
         ProposalSupervisorRepository $proposalSupervisorRepository,
         ProposalDecisionMakerRepository $proposalDecisionMakerRepository,
-        ProposalDecisionRepository $proposalDecisionRepository,
-        ProposalAnalystRepository $proposalAnalystRepository
+        ProposalAnalystRepository $proposalAnalystRepository,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->proposalSupervisorRepository = $proposalSupervisorRepository;
         $this->proposalDecisionMakerRepository = $proposalDecisionMakerRepository;
-        $this->proposalDecisionRepository = $proposalDecisionRepository;
         $this->proposalAnalystRepository = $proposalAnalystRepository;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -47,7 +46,7 @@ class ProposalAnalysisRelatedVoter extends Voter
     {
         return \in_array(
             $attribute,
-            [self::EVALUATE, self::DECIDE, self::VIEW, self::ANALYSE,  self::ASSIGN_SUPERVISOR],
+            [self::EVALUATE, self::DECIDE, self::VIEW, self::ANALYSE, self::ASSIGN_SUPERVISOR],
             true
         ) && $subject instanceof Proposal;
     }
@@ -92,38 +91,33 @@ class ProposalAnalysisRelatedVoter extends Voter
         }
 
         if (
-        $this->proposalSupervisorRepository->findBy(
-            [
+            $this->proposalSupervisorRepository->findBy([
                 'proposal' => $subject,
-                'supervisor' => $user
+                'supervisor' => $user,
             ])
         ) {
             return true;
         }
 
         if (
-        $this->proposalAnalystRepository->findBy([
-            'proposal' => $subject,
-            'analyst' => $user,
-        ])
+            $this->proposalAnalystRepository->findBy([
+                'proposal' => $subject,
+                'analyst' => $user,
+            ])
         ) {
             return true;
         }
 
-        if ($user->hasRole(UserRole::ROLE_ADMIN)) {
-            return true;
-        }
-
-        return false;
+        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
     }
 
     private function canAnalyse(Proposal $subject, User $user): bool
     {
         if (
-        $this->proposalAnalystRepository->findOneBy([
-            'proposal' => $subject,
-            'analyst' => $user,
-        ])
+            $this->proposalAnalystRepository->findOneBy([
+                'proposal' => $subject,
+                'analyst' => $user,
+            ])
         ) {
             return true;
         }
@@ -131,17 +125,13 @@ class ProposalAnalysisRelatedVoter extends Voter
         if (
             $this->proposalSupervisorRepository->findOneBy([
                 'proposal' => $subject,
-                'supervisor' => $user
+                'supervisor' => $user,
             ])
         ) {
             return true;
         }
 
-        if ($user->hasRole(UserRole::ROLE_ADMIN)) {
-            return true;
-        }
-
-        return false;
+        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
     }
 
     private function canEvaluate(Proposal $subject, User $user): bool
@@ -154,37 +144,29 @@ class ProposalAnalysisRelatedVoter extends Voter
         }
 
         if (
-        $this->proposalSupervisorRepository->findOneBy([
-            'proposal' => $subject,
-            'supervisor' => $user,
-        ])
-        ) {
-            return true;
-        }
-
-        if ($user->hasRole(UserRole::ROLE_ADMIN)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private function canDecide(Proposal $subject, User $user): bool
-    {
-        if ($user->hasRole(UserRole::ROLE_ADMIN)) {
-            return true;
-        }
-
-        if (
-            $this->proposalDecisionMakerRepository->findBy([
+            $this->proposalSupervisorRepository->findOneBy([
                 'proposal' => $subject,
-                'decisionMaker' => $user
+                'supervisor' => $user,
             ])
         ) {
             return true;
         }
 
-        return false;
+        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
+    }
+
+    private function canDecide(Proposal $subject, User $user): bool
+    {
+        if (
+            $this->proposalDecisionMakerRepository->findBy([
+                'proposal' => $subject,
+                'decisionMaker' => $user,
+            ])
+        ) {
+            return true;
+        }
+
+        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
     }
 
     private function canAssign(Proposal $subject, User $user): bool
