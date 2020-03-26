@@ -814,3 +814,10 @@ InternalMutation:
                     inputType: InternalDeleteFontInput
                     payloadType: InternalDeleteFontPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteFontMutation", [value])'
+            assignSupervisorToProposals:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AssignSupervisorToProposalsInput
+                    payloadType: AssignSupervisorToProposalsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AssignSupervisorToProposalsMutation", [value, getUser()])'

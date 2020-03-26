@@ -736,6 +736,24 @@ interface Argumentable {
   ): ArgumentConnection
 }
 
+input AssignSupervisorToProposalsInput {
+  """Assign a supervisor to a list of proposals."""
+  proposalIds: [ID!]!
+
+  """The concerned supervisor id."""
+  supervisorId: ID
+  clientMutationId: String
+}
+
+type AssignSupervisorToProposalsPayload {
+  """Connection of assigned proposals"""
+  proposals: ProposalConnection
+
+  """Contains the error code if one occurred."""
+  errorCode: ProposalAssignmentErrorCode
+  clientMutationId: String
+}
+
 input BackgroundStyleInput {
   enabled: Boolean
   color: Color
@@ -4121,6 +4139,7 @@ type Mutation {
   cropMedia(input: CropMediaInput!): CropMediaPayload
   changeFont(input: InternalChangeFontInput!): InternalChangeFontPayload
   deleteFont(input: InternalDeleteFontInput!): InternalDeleteFontPayload
+  assignSupervisorToProposals(input: AssignSupervisorToProposalsInput!): AssignSupervisorToProposalsPayload
 }
 
 """A connection to a list of items."""
@@ -5717,6 +5736,15 @@ enum ProposalAssessmentState {
 
   """The evaluation of the proposal was not issued in time."""
   TOO_LATE
+}
+
+"""Available errors on proposal assignment related mutations."""
+enum ProposalAssignmentErrorCode {
+  """You dont have access to revoke supervisor."""
+  ACCESS_DENIED_TO_REVOKE_SUPERVISOR
+
+  """You dont have access to assign supervisor."""
+  ACCESS_DENIED_TO_ASSIGN_SUPERVISOR
 }
 
 """A proposal category"""

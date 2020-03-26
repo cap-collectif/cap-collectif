@@ -1,0 +1,11 @@
+AssignSupervisorToProposalsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Assign Supervisor to proposals'
+        fields:
+            proposalIds:
+                type: '[ID!]!'
+                description: 'Assign a supervisor to a list of proposals.'
+            supervisorId:
+                type: 'ID'
+                description: 'The concerned supervisor id.'

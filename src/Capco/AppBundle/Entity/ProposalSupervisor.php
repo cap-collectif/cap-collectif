@@ -48,6 +48,14 @@ class ProposalSupervisor implements Timestampable
         $this->proposal = $proposal;
     }
 
+    public function hydrate(User $supervisor, User $assignedBy, Proposal $proposal): self
+    {
+        $this->supervisor = $supervisor;
+        $this->proposal = $proposal;
+        $this->assignedBy = $assignedBy;
+
+        return $this;
+    }
     public function getSupervisor(): ?User
     {
         return $this->supervisor;
@@ -56,6 +64,28 @@ class ProposalSupervisor implements Timestampable
     public function setSupervisor(?User $supervisor): self
     {
         $this->supervisor = $supervisor;
+
+        return $this;
+    }
+
+    public function changeSupervisor(User $newSupervisor, User $viewer): self
+    {
+        if ($this->getSupervisor()) {
+            $this->getSupervisor()->removeProposalSupervisor($this);
+            $this->supervisor = $newSupervisor;
+            $this->supervisor->addSupervisedProposal($this);
+            $this->setAssignedBy($viewer);
+        }
+
+        return $this;
+    }
+
+    public function removeSupervisor(): self
+    {
+        if ($this->getSupervisor()) {
+            $this->getSupervisor()->removeProposalSupervisor($this);
+            $this->supervisor = null;
+        }
 
         return $this;
     }

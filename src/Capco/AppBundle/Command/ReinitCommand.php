@@ -230,7 +230,7 @@ class ReinitCommand extends Command
     {
         $this->runCommands(
             [
-                'doctrine:database:create' => []
+                'doctrine:database:create' => [],
             ],
             $output
         );
@@ -240,7 +240,7 @@ class ReinitCommand extends Command
     {
         $this->runCommands(
             [
-                'doctrine:schema:create' => []
+                'doctrine:schema:create' => [],
             ],
             $output
         );
@@ -250,7 +250,7 @@ class ReinitCommand extends Command
     {
         $this->runCommands(
             [
-                'doctrine:database:drop' => ['--force' => true]
+                'doctrine:database:drop' => ['--force' => true],
             ],
             $output
         );
@@ -326,7 +326,7 @@ class ReinitCommand extends Command
             BackgroundStyle::class,
             ArgumentVote::class,
             AppendixType::class,
-            Post::class
+            Post::class,
         ];
 
         $classesProd = [Context::class];
@@ -339,7 +339,7 @@ class ReinitCommand extends Command
         }
         $this->runCommands(
             [
-                'hautelook:fixtures:load' => ['-e' => $env]
+                'hautelook:fixtures:load' => ['-e' => $env],
             ],
             $output
         );
@@ -351,8 +351,8 @@ class ReinitCommand extends Command
             [
                 'capco:reset-feature-flags' => [
                     '--force' => true,
-                    '--env' => $this->env
-                ]
+                    '--env' => $this->env,
+                ],
             ],
             $output
         );
@@ -363,7 +363,7 @@ class ReinitCommand extends Command
         $this->runCommands(
             [
                 'capco:compute:users-counters' => ['--env' => $this->env, '--force' => true],
-                'capco:compute:counters' => ['--env' => $this->env, '--force' => true]
+                'capco:compute:counters' => ['--env' => $this->env, '--force' => true],
             ],
             $output
         );
@@ -375,7 +375,7 @@ class ReinitCommand extends Command
             [
                 'capco:syntheses:update' => [],
                 'capco:syntheses:fix-urls' => [],
-                'capco:syntheses:counters' => []
+                'capco:syntheses:counters' => [],
             ],
             $output
         );
@@ -385,7 +385,7 @@ class ReinitCommand extends Command
     {
         $this->runCommands(
             [
-                'capco:es:clean' => ['--all' => true, '--no-debug' => true]
+                'capco:es:clean' => ['--all' => true, '--no-debug' => true],
             ],
             $output
         );
@@ -393,13 +393,13 @@ class ReinitCommand extends Command
         // Because for correct counters value we need to query ES
         $this->runCommands(
             [
-                'capco:es:create' => ['--quiet' => true, '--no-debug' => true]
+                'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
             ],
             $output
         );
         $this->runCommands(
             [
-                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true]
+                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
             ],
             $output
         );
@@ -409,11 +409,11 @@ class ReinitCommand extends Command
     {
         $this->runCommands(
             [
-                'doctrine:migration:migrate' => ['--no-interaction' => true]
+                'doctrine:migration:migrate' => ['--no-interaction' => true],
             ],
             $output
         );
-        echo "test";
+        echo 'test';
     }
 
     protected function mockMigrations(OutputInterface $output)
@@ -424,8 +424,8 @@ class ReinitCommand extends Command
                     '--add' => true,
                     '--all' => true,
                     '--quiet' => true,
-                    '--no-debug' => true
-                ]
+                    '--no-debug' => true,
+                ],
             ],
             $output
         );

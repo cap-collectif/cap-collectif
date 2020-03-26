@@ -759,4 +759,13 @@ class ProposalRepository extends EntityRepository
             ->setParameter('form', $form)
             ->setParameter('user', $user);
     }
+
+    public function findByProposalIds(array $proposalIds = []): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id IN (:proposals)')
+            ->setParameter('proposals', $proposalIds)
+            ->getQuery()
+            ->getResult();
+    }
 }

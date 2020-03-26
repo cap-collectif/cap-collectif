@@ -34,11 +34,11 @@ class User extends BaseUser implements
 
     public static $sortOrder = [
         'activity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
-        'date' => self::SORT_ORDER_CREATED_AT
+        'date' => self::SORT_ORDER_CREATED_AT,
     ];
     public static $sortOrderLabels = [
         'activity' => 'user.index.sort.activity',
-        'date' => 'opinion.sort.last'
+        'date' => 'opinion.sort.last',
     ];
 
     // Hack for ParticipantEdge
@@ -944,6 +944,15 @@ class User extends BaseUser implements
         return $this;
     }
 
+    public function clearProposalSupervised(): self
+    {
+        foreach ($this->getSupervisedProposals() as $supervisedProposal) {
+            $this->removeProposalSupervisor($supervisedProposal);
+        }
+
+        return $this;
+    }
+
     // ************************* Custom methods *********************************
 
     public function isEmailConfirmed(): bool
@@ -961,7 +970,7 @@ class User extends BaseUser implements
         return [
             UserInterface::GENDER_FEMALE => 'gender.female',
             UserInterface::GENDER_MALE => 'gender.male',
-            self::GENDER_OTHER => 'gender.other'
+            self::GENDER_OTHER => 'gender.other',
         ];
     }
 
@@ -975,7 +984,7 @@ class User extends BaseUser implements
             $this->getArguments(),
             $this->getSources(),
             $this->getProposals(),
-            $this->getReplies()
+            $this->getReplies(),
         ];
 
         $contributions = [];

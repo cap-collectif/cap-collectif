@@ -1,0 +1,12 @@
+InternalProposalAssignmentErrorCode:
+    type: enum
+    config:
+        name: ProposalAssignmentErrorCode
+        description: 'Available errors on proposal assignment related mutations.'
+        values:
+            ACCESS_DENIED_TO_REVOKE_SUPERVISOR:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_SUPERVISOR")'
+                description: 'You dont have access to revoke supervisor.'
+            ACCESS_DENIED_TO_ASSIGN_SUPERVISOR:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_SUPERVISOR")'
+                description: 'You dont have access to assign supervisor.'

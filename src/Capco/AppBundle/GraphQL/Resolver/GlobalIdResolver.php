@@ -267,6 +267,85 @@ class GlobalIdResolver
         return $this->viewerCanSee($node, $user, $skipVerification) ? $node : null;
     }
 
+    public function resolveTypeByIds(
+        array $uuidOrGlobalIds,
+        $userOrAnon,
+        string $type,
+        ?\ArrayObject $context = null
+    ) {
+        $skipVerification =
+            $context &&
+            $context->offsetExists('disable_acl') &&
+            true === $context->offsetGet('disable_acl');
+
+        $user = null;
+        if (empty($uuidOrGlobalIds)) {
+            return null;
+        }
+
+        if ($userOrAnon instanceof User) {
+            $user = $userOrAnon;
+        }
+
+        if ($user && $user->isAdmin()) {
+            // If user is an admin, we allow to retrieve softdeleted nodes
+            if ($this->entityManager->getFilters()->isEnabled('softdeleted')) {
+                $this->entityManager->getFilters()->disable('softdeleted');
+            }
+        }
+        $decodeGlobalIds = [];
+        foreach ($uuidOrGlobalIds as $uuidOrGlobalId) {
+            // We try to decode the global id
+            $decodeGlobalIds[] = self::getDecodedId($uuidOrGlobalId);
+        }
+        $uuids = [];
+        foreach ($decodeGlobalIds as $decodeGlobalId) {
+            if (\is_array($decodeGlobalId)) {
+                // Good news, it's a GraphQL Global id !
+                $uuids[] = $decodeGlobalId['id'];
+            }
+        }
+        if (!empty($uuids)) {
+            $node = null;
+
+            switch ($type) {
+                case 'Proposal':
+                    $node = $this->container->get(ProposalRepository::class)->findById($uuids);
+
+                    break;
+                default:
+                    break;
+            }
+            if (!$node) {
+                $error = 'Could not resolve node with globalIds ' . var_export($uuids, true);
+                $this->logger->warning($error);
+
+                return null;
+            }
+
+            $viewerCanSee = true;
+            foreach ($node as $item) {
+                $viewerCanSee = $this->viewerCanSee($item, $user, $skipVerification);
+            }
+
+            return $viewerCanSee ? $node : null;
+        }
+        $uuids = $decodeGlobalIds;
+        $node = $this->container->get(ProposalRepository::class)->findById($uuids);
+        if (!$node) {
+            $error = 'Could not resolve node with uuids ' . var_export($uuids, true);
+            $this->logger->warning($error);
+
+            return null;
+        }
+        $viewerCanSee = true;
+        foreach ($node as $item) {
+            $viewerCanSee = $this->viewerCanSee($item, $user, $skipVerification);
+        }
+
+        return $viewerCanSee ? $node : null;
+    }
+
     public static function getDecodedId(string $uuidOrGlobalId)
     {
         // We try to decode the global id
@@ -334,13 +413,14 @@ class GlobalIdResolver
             Post::class,
             ProposalForm::class,
             Event::class,
-            AbstractStep::class
+            AbstractStep::class,
         ];
 
         foreach ($projectContributionClass as $object) {
             if ($skipVerification) {
                 return true;
             }
+
             if ($node instanceof Proposal) {
                 return $node->viewerCanSee($user);
             }
