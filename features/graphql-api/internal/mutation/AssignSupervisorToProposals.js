@@ -35,6 +35,20 @@ describe('mutations.assignSupervisorToProposals', () => {
     expect(assignSupervisorToProposals).toMatchSnapshot();
   });
 
+  it('admin should assign a user as supervisor to a list of proposals.', async () => {
+    const assignSupervisorToProposals = await graphql(
+      AssignSupervisorToProposalsMutation,
+      {
+        input: {
+          proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA=', 'UHJvcG9zYWw6cHJvcG9zYWwxOA=='],
+          supervisorId: 'VXNlcjpVc2VyNjk=',
+        },
+      },
+      'internal_admin',
+    );
+    expect(assignSupervisorToProposals).toMatchSnapshot();
+  });
+
   it('admin should change supervisor to proposal.', async () => {
     const assignNewSupervisorToProposals = await graphql(
       AssignSupervisorToProposalsMutation,
@@ -50,7 +64,7 @@ describe('mutations.assignSupervisorToProposals', () => {
     const revokeSupervisorToProposals = await graphql(
       AssignSupervisorToProposalsMutation,
       {
-        input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='], supervisorId: null },
+        input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTQ='], supervisorId: null },
       },
       'internal_admin',
     );

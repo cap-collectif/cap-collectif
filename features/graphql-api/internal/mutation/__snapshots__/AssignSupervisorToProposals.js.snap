@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mutations.assignSupervisorToProposals admin should assign a user as supervisor to a list of proposals. 1`] = `
+Object {
+  "assignSupervisorToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "supervisor": Object {
+              "id": "VXNlcjp1c2VyNjk=",
+              "username": "user69",
+            },
+            "title": "Proposal 110",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxOA==",
+            "supervisor": Object {
+              "id": "VXNlcjp1c2VyNjk=",
+              "username": "user69",
+            },
+            "title": "Proposition 18",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
 exports[`mutations.assignSupervisorToProposals admin should assign a user as supervisor to a proposal. 1`] = `
 Object {
   "assignSupervisorToProposals": Object {
@@ -54,12 +87,9 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
-            "supervisor": Object {
-              "id": "VXNlcjp1c2VyNTE2",
-              "username": "mauriau",
-            },
-            "title": "Proposal 110",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTQ=",
+            "supervisor": null,
+            "title": "Proposal 114",
           },
         },
       ],
@@ -111,20 +141,14 @@ Object {
         Object {
           "node": Object {
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
-            "supervisor": Object {
-              "id": "VXNlcjp1c2VyNg==",
-              "username": "user6",
-            },
+            "supervisor": null,
             "title": "Jurer allégeance à Nurgle",
           },
         },
         Object {
           "node": Object {
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
-            "supervisor": Object {
-              "id": "VXNlcjp1c2VyNg==",
-              "username": "user6",
-            },
+            "supervisor": null,
             "title": "Proposal 110",
           },
         },
@@ -144,10 +168,7 @@ Object {
         Object {
           "node": Object {
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
-            "supervisor": Object {
-              "id": "VXNlcjp1c2VyNg==",
-              "username": "user6",
-            },
+            "supervisor": null,
             "title": "Proposal 110",
           },
         },
@@ -167,10 +188,7 @@ Object {
         Object {
           "node": Object {
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
-            "supervisor": Object {
-              "id": "VXNlcjp1c2VyNg==",
-              "username": "user6",
-            },
+            "supervisor": null,
             "title": "Jurer allégeance à Nurgle",
           },
         },
@@ -190,10 +208,7 @@ Object {
         Object {
           "node": Object {
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
-            "supervisor": Object {
-              "id": "VXNlcjp1c2VyNg==",
-              "username": "user6",
-            },
+            "supervisor": null,
             "title": "Jurer allégeance à Nurgle",
           },
         },

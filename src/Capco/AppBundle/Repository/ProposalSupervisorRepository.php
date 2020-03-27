@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\ProposalSupervisor;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -15,6 +16,16 @@ class ProposalSupervisorRepository extends EntityRepository
     {
         return $this->createQueryBuilder('ps')
             ->andWhere('ps.proposal IN (:proposals)')
+            ->setParameter('proposals', $proposalIds)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function deleteByProposalIds(array $proposalIds)
+    {
+        return $this->createQueryBuilder('ps')
+            ->delete(ProposalSupervisor::class, 'proposalSupervisor')
+            ->andWhere('proposalSupervisor.proposal IN (:proposals)')
             ->setParameter('proposals', $proposalIds)
             ->getQuery()
             ->getResult();

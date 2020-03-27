@@ -48,9 +48,9 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
         $supervisor = $supervisorId
             ? $this->globalIdResolver->resolve($supervisorId, $viewer)
             : null;
+
         $proposals = $this->globalIdResolver->resolveTypeByIds($proposalIds, $viewer, 'Proposal');
-        $connection = $this->builder->connectionFromArray($proposals, $input);
-        $connection->setTotalCount(\count($proposals));
+
         // unassigned supervisor to proposals
         if (!$supervisor && !empty($proposalIds)) {
             /** @var Proposal $proposal */
@@ -62,6 +62,9 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
                         $proposal
                     )
                 ) {
+                    $connection = $this->builder->connectionFromArray($proposals, $input);
+                    $connection->setTotalCount(\count($proposals));
+
                     return $this->buildPayload(
                         $connection,
                         ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_SUPERVISOR
@@ -69,7 +72,7 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
                 }
             }
 
-            return $this->revokeSupervisorToProposals($proposalIds, $connection);
+            return $this->revokeSupervisorToProposals($proposals, $input);
         }
 
         foreach ($proposals as $proposal) {
@@ -80,6 +83,9 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
                     $proposal
                 )
             ) {
+                $connection = $this->builder->connectionFromArray($proposals, $input);
+                $connection->setTotalCount(\count($proposals));
+
                 return $this->buildPayload(
                     $connection,
                     ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_SUPERVISOR
@@ -90,15 +96,17 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
         return $this->assignSupervisorToProposals($proposals, $supervisor, $viewer, $input);
     }
 
-    private function revokeSupervisorToProposals(
-        array $proposalIds,
-        ConnectionInterface $connection
-    ): array {
-        $supervisedProposals = $this->proposalSupervisorRepository->findByProposalIds($proposalIds);
-        foreach ($supervisedProposals as $supervisedProposal) {
-            $this->em->remove($supervisedProposal);
+    private function revokeSupervisorToProposals(array $proposals, Arg $input): array
+    {
+        $this->proposalSupervisorRepository->deleteByProposalIds($proposals);
+        /** @var Proposal $proposal */
+        foreach ($proposals as $proposal) {
+            $proposal->removeSupervisor();
         }
         $this->em->flush();
+
+        $connection = $this->builder->connectionFromArray($proposals, $input);
+        $connection->setTotalCount(\count($proposals));
 
         return $this->buildPayload($connection);
     }
@@ -111,34 +119,25 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
     ): array {
         foreach ($proposals as $proposal) {
             /** @var Proposal $proposal */
-            // assign a new supervisor
+            // change supervisor
             if ($proposal->getSupervisor()) {
                 if ($proposal->getSupervisor() !== $supervisor) {
-                    $proposalsSupervised = $this->proposalSupervisorRepository->findByProposal(
-                        $proposal
-                    );
-                    /** @var ProposalSupervisor $proposalSupervised */
-                    foreach ($proposalsSupervised as $proposalSupervised) {
-                        $proposalSupervised->changeSupervisor($supervisor, $viewer);
-                        $this->em->persist($proposalSupervised);
-                    }
+                    $proposal->changeSupervisor($supervisor, $viewer);
                 }
                 // assign supervisor
             } else {
-                $supervisor->addSupervisedProposal(
-                    (new ProposalSupervisor($proposal, $supervisor))->setAssignedBy($viewer)
-                );
+                $proposalSupervisor = (new ProposalSupervisor(
+                    $proposal,
+                    $supervisor
+                ))->setAssignedBy($viewer);
+                $proposal->setSupervisor($proposalSupervisor);
+                $supervisor->addSupervisedProposal($proposalSupervisor);
             }
         }
 
-        $this->em->persist($supervisor);
         $this->em->flush();
-
-        $connection = $this->builder->connectionFromArray(
-            $supervisor->getSupervisedProposals()->toArray(),
-            $input
-        );
-        $connection->setTotalCount($supervisor->getSupervisedProposals()->count());
+        $connection = $this->builder->connectionFromArray($proposals, $input);
+        $connection->setTotalCount(\count($proposals));
 
         return $this->buildPayload($connection);
     }

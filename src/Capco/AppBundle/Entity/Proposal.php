@@ -9,7 +9,6 @@ use Capco\UserBundle\Entity\User;
 use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Publishable;
-use Doctrine\ORM\PersistentCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\DraftableTrait;
@@ -341,6 +340,27 @@ class Proposal implements
         return $this->supervisor ? $this->supervisor->getSupervisor() : null;
     }
 
+    public function setSupervisor(ProposalSupervisor $proposalSupervisor): self
+    {
+        $this->supervisor = $proposalSupervisor;
+
+        return $this;
+    }
+
+    public function changeSupervisor(User $supervisor, User $viewer): self
+    {
+        $this->supervisor->setSupervisor($supervisor)->setAssignedBy($viewer);
+
+        return $this;
+    }
+
+    public function removeSupervisor(): self
+    {
+        $this->supervisor = null;
+
+        return $this;
+    }
+
     public function getAssessment(): ?ProposalAssessment
     {
         return $this->assessment;
@@ -369,7 +389,7 @@ class Proposal implements
     {
         return $this->decisionMaker ? $this->decisionMaker->getDecisionMaker() : null;
     }
-    
+
     /**
      * @return Collection|ProposalAnalyst[]
      */
@@ -382,20 +402,20 @@ class Proposal implements
                 $analysts->add($analyst->getAnalyst());
             }
         }
-        
+
         return $analysts;
     }
-    
+
     public function addAnalyst(ProposalAnalyst $proposalAnalyst): self
     {
         if (!$this->analysts->contains($proposalAnalyst)) {
             $this->analysts[] = $proposalAnalyst;
             $proposalAnalyst->setProposal($this);
         }
-        
+
         return $this;
     }
-    
+
     public function removeAnalyst(ProposalAnalyst $proposalAnalyst): self
     {
         if ($this->analysts->contains($proposalAnalyst)) {
@@ -405,25 +425,25 @@ class Proposal implements
                 $proposalAnalyst->setProposal(null);
             }
         }
-        
+
         return $this;
     }
-    
+
     public function getAnalyses(): Collection
     {
         return $this->analyses;
     }
-    
+
     public function addAnalysis(ProposalAnalysis $proposalAnalysis): self
     {
         if (!$this->analyses->contains($proposalAnalysis)) {
             $this->analyses[] = $proposalAnalysis;
             $proposalAnalysis->setProposal($this);
         }
-        
+
         return $this;
     }
-    
+
     public function removeAnalysis(ProposalAnalysis $proposalAnalysis): self
     {
         if ($this->analyses->contains($proposalAnalysis)) {
@@ -433,7 +453,7 @@ class Proposal implements
                 $proposalAnalysis->setProposal(null);
             }
         }
-        
+
         return $this;
     }
 

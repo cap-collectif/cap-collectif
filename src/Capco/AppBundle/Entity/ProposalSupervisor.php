@@ -56,6 +56,7 @@ class ProposalSupervisor implements Timestampable
 
         return $this;
     }
+
     public function getSupervisor(): ?User
     {
         return $this->supervisor;
