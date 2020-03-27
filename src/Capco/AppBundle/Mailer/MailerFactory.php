@@ -69,11 +69,6 @@ class MailerFactory
             $this->setModerationLinks($message, $element);
         }
 
-        if (isset($params['sender'])) {
-            $message->setSenderEmail($params['sender']['email']);
-            $message->setSenderName($params['sender']['name']);
-        }
-
         $this->copyToAdminIfNeeded($message, $params);
 
         return $message;
