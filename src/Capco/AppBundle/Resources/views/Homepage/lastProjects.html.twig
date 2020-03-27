@@ -1,4 +1,5 @@
 {% if count > 0 %}
+    {% set locale = app.request.locale %}
     <section id="projects" class="section--custom">
         <div class="container">
             {% if null != section.title %}
@@ -16,7 +17,8 @@
             </div>
 
             {% if count > max %}
-                <a href="{{ path('app_project') }}" class="btn btn-primary btn--outline see-more-projects-button">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_project', {'_locale': locale}) }}" class="btn btn-primary btn--outline
+                see-more-projects-button">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
     </section>

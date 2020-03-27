@@ -122,7 +122,7 @@
             "git add"
         ],
         "*.twig": [
-            "php bin/console lint:twig"
+            "php -d memory_limit=-1 bin/console lint:twig"
         ]
     },
     "bundlesize": [

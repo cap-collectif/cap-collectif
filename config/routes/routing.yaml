@@ -220,25 +220,23 @@ fos_user:
     resource: '@FOSUserBundle/Resources/config/routing/all.xml'
     options: { i18n: false }
 
+#These routes must be translated for they render html
 fos_user_resetting_request:
     path: /resetting/request
     defaults: { _controller: CapcoUserBundle:Resetting:request }
-    options: { i18n: false }
 
 fos_user_resetting_reset:
     path: /resetting/reset/{token}
     defaults: { _controller: CapcoUserBundle:Resetting:reset }
-    options: { i18n: false }
 
 fos_user_resetting_send_email:
     path: /resetting/send-email
     defaults: { _controller: CapcoUserBundle:Resetting:sendEmail }
-    options: { i18n: false }
 
 fos_user_resetting_check_email:
     path: /resetting/check-email
     defaults: { _controller: CapcoUserBundle:Resetting:checkEmail }
-    options: { i18n: false }
+#end
 
 capco_user:
     resource: '@CapcoUserBundle/Controller/'

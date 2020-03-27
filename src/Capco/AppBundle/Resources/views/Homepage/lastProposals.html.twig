@@ -16,7 +16,9 @@
                 {{ react_render_component('LastProposalsApp', { 'props': {'ids': proposals } }) }}
             </div>
             {% if section.step is not null %}
-                <a href="{{ path('app_project_show_collect', {'projectSlug': section.step.project.slug, 'stepSlug': section.step.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'global.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_project_show_collect', {'projectSlug': section.step.project.slug,
+                    'stepSlug': section.step.slug, "_locale": app.request.locale}) }}"
+                   class="btn  btn-primary  btn--outline">{{ 'global.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
     </section>

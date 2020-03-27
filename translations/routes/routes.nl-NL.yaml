@@ -76,5 +76,9 @@ capco_user_profile_show_proposals: '/profile/{slug}/proposals'
 capco_user_profile_show_replies: '/profile/{slug}/replies'
 capco_user_profile_show_sources: '/profile/{slug}/sources'
 capco_user_profile_show_votes: '/profile/{slug}/votes'
+fos_user_resetting_check_email: /resetting/check-email
+fos_user_resetting_request: /resetting/request
+fos_user_resetting_reset: '/resetting/reset/{token}'
+fos_user_resetting_send_email: /resetting/send-email
 user_analysis_project: '/evaluations/project/{projectSlug}'
 user_evaluations: /evaluations

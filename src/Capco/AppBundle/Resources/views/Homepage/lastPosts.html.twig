@@ -1,4 +1,5 @@
 {% if posts|length > 0 %}
+    {% set locale = app.request.locale %}
     <section id="news" class="section--custom">
         <div class="container">
             {% if null != section.title %}
@@ -17,7 +18,9 @@
                     {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
                 {% endfor %}
             </ul>
-            <a href="{{ path('app_blog') }}" class="btn  btn-primary  btn--outline">{{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+            <a href="{{ path('app_blog', {'_locale': locale}) }}"
+               class="btn  btn-primary  btn--outline">
+                {{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
     </section>
 {% endif %}

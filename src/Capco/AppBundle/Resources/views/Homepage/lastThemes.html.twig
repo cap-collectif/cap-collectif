@@ -1,4 +1,5 @@
 {% if topics|length > 0 %}
+    {% set locale = app.request.locale %}
     <section id="topics" class="section--custom">
         <div class="container">
             {% if null != section.title %}
@@ -17,7 +18,9 @@
                     {% include '@CapcoApp/Theme/blockTheme.html.twig' with {'theme': theme} only %}
                 {% endfor %}
             </div>
-            <a href="{{ path('app_theme') }}" class="btn  btn-primary  btn--outline">{{ 'theme.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+            <a href="{{ path('app_theme', {'_locale': locale}) }}" class="btn  btn-primary  btn--outline">
+                {{ 'theme.see_all'|trans({}, 'CapcoAppBundle') }}
+            </a>
         </div>
     </section>
 {% endif %}
