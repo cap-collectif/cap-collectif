@@ -22,13 +22,13 @@ const Dot: StyledComponent<{ green: boolean }, {}, HTMLDivElement> = styled.div`
 `;
 */
 
-const LanguageTitle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const LanguageTitle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   font-family: 'OpenSans', helvetica, arial, sans-serif;
   font-size: 16px;
   color: #000;
 `;
 
-const LanguageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const LanguageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
 `;
 

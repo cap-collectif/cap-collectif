@@ -47,10 +47,19 @@ class TranslatableAdminExtension extends Base
     }
 
     public function getEnabledTranslationLocales(): array {
-        if ($this->toggleManager->isActive('unstable__multilangue')) {
-            return $this->localeRepository->findEnabledLocalesCodes();
+        $locales = ($this->toggleManager->isActive('unstable__multilangue')) ?
+            $this->localeRepository->findEnabledLocales() :
+            [$this->localeRepository->findDefaultLocale()];
+
+        $localesAsArray = [];
+        foreach ($locales as $locale) {
+            $localesAsArray[] = [
+                'id' => $locale->getId(),
+                'code' => $locale->getCode(),
+                'traductionKey' => $locale->getTraductionKey()
+            ];
         }
 
-        return [$this->getDefaultTranslationLocale($admin)];
+        return $localesAsArray;
     }
 }

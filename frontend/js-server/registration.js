@@ -65,6 +65,7 @@ import FooterApp from '../js/startup/FooterApp';
 import EventPageHeaderButtonsApp from '../js/startup/EventPageHeaderButtonsApp';
 import CalendarApp from '../js/startup/CalendarApp';
 import EngagementListApp from '../js/startup/EngagementListApp';
+import LanguageButtonApp from "~/startup/LanguageButtonApp";
 
 const emptyFunction = () => {};
 
@@ -137,4 +138,5 @@ ReactOnRails.register({
   EventPageHeaderButtonsApp,
   CalendarApp,
   EngagementListApp,
+  LanguageButtonApp,
 });

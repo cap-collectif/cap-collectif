@@ -20,7 +20,7 @@ type Props = {|
   pullRight?: boolean,
 |};
 
-const DropdownLanguageButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(
+export const DropdownLanguageButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(
   DropdownButton,
 )`
   display: flex;
@@ -33,13 +33,13 @@ const DropdownLanguageButton: StyledComponent<{}, {}, typeof DropdownButton> = s
   }
 `;
 
-const MenuLanguageItem: StyledComponent<{}, {}, typeof MenuItem> = styled(MenuItem)`
+export const MenuLanguageItem: StyledComponent<{}, {}, typeof MenuItem> = styled(MenuItem)`
   margin-bottom: 5px;
 `;
 
 // The API locale code format is upper case with _, like 'FR_CA'
-// The frontend locale code forma is with -, like 'fr-CA'
-const formatLanguageCode = (languageCode: string) => {
+// The frontend locale code format is with -, like 'fr-CA'
+export const formatLanguageCode = (languageCode: string) => {
   const splittedLanguageCode = languageCode.split('_');
   return `${splittedLanguageCode[0].toLowerCase()}-${splittedLanguageCode[1]}`;
 };
