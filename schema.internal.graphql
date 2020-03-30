@@ -4140,6 +4140,7 @@ type Mutation {
   changeFont(input: InternalChangeFontInput!): InternalChangeFontPayload
   deleteFont(input: InternalDeleteFontInput!): InternalDeleteFontPayload
   assignSupervisorToProposals(input: AssignSupervisorToProposalsInput!): AssignSupervisorToProposalsPayload
+  updateRedirectIOKey(input: UpdateRedirectIOProjectIdInput!): UpdateRedirectIOProjectIdPayload
 }
 
 """A connection to a list of items."""
@@ -9458,6 +9459,18 @@ input UpdateQuestionnaireParametersInput {
 
 type UpdateQuestionnaireParametersPayload {
   questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateRedirectIOProjectIdInput {
+  """The project ID used for the project."""
+  projectId: ID!
+  clientMutationId: String
+}
+
+type UpdateRedirectIOProjectIdPayload {
+  """The saved project key."""
+  projectId: String
   clientMutationId: String
 }
 

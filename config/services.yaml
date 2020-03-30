@@ -46,6 +46,8 @@ parameters:
   knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
   knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
   knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
+  agent_tcp: 'tcp://127.0.0.1:10301'
+  agent_unix: 'unix:///var/run/redirectionio_agent.sock'
   traits:
     selflinkable:
       interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]

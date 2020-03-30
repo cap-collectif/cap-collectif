@@ -1,0 +1,5 @@
+redirection_io:
+    project_key: 'will be loaded from database'
+    connections:
+        agent_tcp: 'to configure in config/services.yaml'
+        agent_unix: 'to configure in config/services.yaml'

@@ -191,6 +191,7 @@ COPY infrastructure/services/remote/rabbitmq/run               /etc/service/rabb
 #COPY infrastructure/services/remote/nodejs/run                 /etc/service/nodejs/run
 COPY infrastructure/services/remote/supervisord/run            /etc/service/supervisord/run
 COPY infrastructure/services/remote/php-fpm/run                /etc/service/php-fpm/run
+COPY infrastructure/services/remote/redirectionio/run          /etc/service/redirectionio/run
 
 # Configuration
 COPY infrastructure/services/remote/mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
@@ -204,6 +205,10 @@ COPY infrastructure/services/remote/varnish/capco.vcl              /etc/varnish/
 COPY infrastructure/services/remote/rabbitmq/rabbitmq.config         /etc/rabbitmq/rabbitmq.config
 COPY infrastructure/services/remote/logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY infrastructure/services/remote/supervisord/                   /etc/supervisord
+COPY infrastructure/services/remote/redirectionio/agent.yml        /etc/redirectionio/agent.yml
+
+# Cache storage for rules
+VOLUME /var/lib/redirectionio
 
 # Binaries
 COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
@@ -226,7 +231,10 @@ RUN mkdir -p /var/www \
     && chown capco:capco /var/www \
     && chmod 0644 /etc/cron.d/crontab \
     && find /etc/service/ -name "run" -exec chmod +x {} \;
-
+#RedirectionIO
+WORKDIR /usr/local/bin/
+RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
+RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 WORKDIR /var/www
 
 # NodeJS and Yarn

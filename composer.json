@@ -204,7 +204,8 @@
         "phenx/php-font-lib": "^0.5.1",
         "mandrill/mandrill": "^1.0",
         "accord/mandrill-swiftmailer-bundle": "*",
-        "tecnickcom/tcpdf": "^6.3"
+        "tecnickcom/tcpdf": "^6.3",
+        "redirectionio/proxy-symfony": "^0.2.1"
     },
     "require-dev": {
         "behat/behat": "^3.3",

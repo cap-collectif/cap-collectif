@@ -85,6 +85,7 @@ import ContactPage from './startup/ContactPage';
 import SectionPageApp from './startup/SectionPageApp';
 import OpinionVersionListPageApp from './startup/OpinionVersionListPageApp';
 import MapAdminPageApp from './startup/MapAdminPageApp';
+import RedirectIoAdminPageApp from './startup/RedirectIoAdminPageApp';
 import LocaleAdminPageApp from '~/startup/LocaleAdminPageApp';
 import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
 import LastProposalsApp from './startup/LastProposalsApp';
@@ -215,4 +216,5 @@ ReactOnRails.register({
   EventPageHeaderButtonsApp,
   CalendarApp,
   EngagementListApp,
+  RedirectIoAdminPageApp,
 });

@@ -76,7 +76,8 @@ class FeaturesCategoryResolver
                     'login_saml',
                     'login_paris',
                     'unstable__admin_editor',
-                    'unstable__analysis'
+                    'unstable__analysis',
+                    'http_redirects',
                 ]
             ]
         ],

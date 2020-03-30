@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6f1c620fca753c3187f28b9f2c2e5c9",
+    "content-hash": "2f1c5b2d38dcf2d6a071f6dee72c9654",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -8961,6 +8961,118 @@
             "time": "2019-01-07T21:25:54+00:00"
         },
         {
+            "name": "redirectionio/proxy-sdk",
+            "version": "v0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/redirectionio/proxy-sdk-php.git",
+                "reference": "b4a0efa85ca0b16d9c5b43ff2068beeaf36eb836"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/redirectionio/proxy-sdk-php/zipball/b4a0efa85ca0b16d9c5b43ff2068beeaf36eb836",
+                "reference": "b4a0efa85ca0b16d9c5b43ff2068beeaf36eb836",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "psr/log": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10",
+                "monolog/monolog": "^1.24",
+                "symfony/phpunit-bridge": "^4.1",
+                "symfony/process": "^3.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RedirectionIO\\Client\\Sdk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Pineau",
+                    "email": "lyrixx@lyrixx.info"
+                },
+                {
+                    "name": "Quentin Brunet",
+                    "email": "hello@quentinbrunet.com"
+                },
+                {
+                    "name": "redirection.io",
+                    "email": "support@redirection.io"
+                }
+            ],
+            "description": "PHP common code for redirection.io proxy",
+            "time": "2019-03-25T15:23:17+00:00"
+        },
+        {
+            "name": "redirectionio/proxy-symfony",
+            "version": "v0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/redirectionio/proxy-symfony.git",
+                "reference": "60e605f9241e08c69a86a876ae34da8d278aa8d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/redirectionio/proxy-symfony/zipball/60e605f9241e08c69a86a876ae34da8d278aa8d5",
+                "reference": "60e605f9241e08c69a86a876ae34da8d278aa8d5",
+                "shasum": ""
+            },
+            "require": {
+                "redirectionio/proxy-sdk": "0.3.*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10",
+                "symfony/http-foundation": "^3.4",
+                "symfony/http-kernel": "^3.4",
+                "symfony/phpunit-bridge": "^4.1",
+                "symfony/process": "^3.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RedirectionIO\\Client\\ProxySymfony\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Pineau",
+                    "email": "lyrixx@lyrixx.info"
+                },
+                {
+                    "name": "Quentin Brunet",
+                    "email": "hello@quentinbrunet.com"
+                },
+                {
+                    "name": "redirection.io",
+                    "email": "support@redirection.io"
+                }
+            ],
+            "description": "RedirectionIO Proxy for Symfony",
+            "time": "2019-04-17T14:24:51+00:00"
+        },
+        {
             "name": "robrichards/xmlseclibs",
             "version": "3.0.4",
             "source": {
@@ -12678,64 +12790,6 @@
                 "mailer"
             ],
             "time": "2019-11-12T09:31:26+00:00"
-        },
-        {
-            "name": "symfony-bundles/fork",
-            "version": "v3.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony-bundles/fork.git",
-                "reference": "b5b6deb3dc3c9bcc0b98443219786f70f3b3b78e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony-bundles/fork/zipball/b5b6deb3dc3c9bcc0b98443219786f70f3b3b78e",
-                "reference": "b5b6deb3dc3c9bcc0b98443219786f70f3b3b78e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3"
-            },
-            "require-dev": {
-                "phpunit/php-code-coverage": "^5.0",
-                "phpunit/phpunit": "^6.4"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SymfonyBundles\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dmitry Khaperets",
-                    "email": "khaperets@gmail.com"
-                }
-            ],
-            "description": "SymfonyBundles Fork Library",
-            "homepage": "https://github.com/symfony-bundles/fork",
-            "keywords": [
-                " flow",
-                "Thread",
-                "fork",
-                "library",
-                "multiprocesses",
-                "process",
-                "symfony"
-            ],
-            "time": "2018-02-26T20:27:16+00:00"
         },
         {
             "name": "symfony/contracts",
@@ -18365,6 +18419,64 @@
             "time": "2015-08-27T15:20:08+00:00"
         },
         {
+            "name": "symfony-bundles/fork",
+            "version": "v3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony-bundles/fork.git",
+                "reference": "b5b6deb3dc3c9bcc0b98443219786f70f3b3b78e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony-bundles/fork/zipball/b5b6deb3dc3c9bcc0b98443219786f70f3b3b78e",
+                "reference": "b5b6deb3dc3c9bcc0b98443219786f70f3b3b78e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "phpunit/php-code-coverage": "^5.0",
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SymfonyBundles\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Khaperets",
+                    "email": "khaperets@gmail.com"
+                }
+            ],
+            "description": "SymfonyBundles Fork Library",
+            "homepage": "https://github.com/symfony-bundles/fork",
+            "keywords": [
+                " flow",
+                "Thread",
+                "fork",
+                "library",
+                "multiprocesses",
+                "process",
+                "symfony"
+            ],
+            "time": "2018-02-26T20:27:16+00:00"
+        },
+        {
             "name": "symfony/maker-bundle",
             "version": "v1.14.3",
             "source": {
@@ -18669,7 +18781,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1"
+        "php": ">=7.4"
     },
     "platform-dev": []
 }

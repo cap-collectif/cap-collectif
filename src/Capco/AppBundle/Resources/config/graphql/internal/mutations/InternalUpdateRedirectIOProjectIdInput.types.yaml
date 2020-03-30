@@ -1,0 +1,9 @@
+InternalUpdateRedirectIOProjectIdInput:
+    type: relay-mutation-input
+    config:
+        name: UpdateRedirectIOProjectIdInput
+        description: 'Input type of UpdateRedirectIO.'
+        fields:
+            projectId:
+                type: 'ID!'
+                description: The project ID used for the project.

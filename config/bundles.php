@@ -92,5 +92,7 @@ return [
     // NewRelic
     Ekino\NewRelicBundle\EkinoNewRelicBundle::class => ['all' => true],
     JMS\I18nRoutingBundle\JMSI18nRoutingBundle::class => ['all' => true],
-    JMS\TranslationBundle\JMSTranslationBundle::class => ['all' => true]
+    JMS\TranslationBundle\JMSTranslationBundle::class => ['all' => true],
+    //RedirectionIO
+    RedirectionIO\Client\ProxySymfony\RedirectionIOBundle::class => ['all' => true]
 ];

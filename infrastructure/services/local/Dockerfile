@@ -123,6 +123,12 @@ COPY blackfire/blackfire-agent.ini /etc/php/7.4/cli/conf.d/90-blackfire-agent.in
 COPY blackfire/blackfire-php.ini /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
 COPY blackfire/blackfire-php.ini /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
 
+
+#RedirectionIO
+WORKDIR /usr/local/bin/
+RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
+RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
+
 # Service
 COPY nginx/run                  /etc/service/nginx/run
 COPY php-fpm/run                /etc/service/php-fpm/run
@@ -130,6 +136,7 @@ COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
+COPY redirectionio/run          /etc/service/redirectionio/run
 # COPY nodejs/run                 /etc/service/nodejs/run
 
 # Configuration
@@ -145,7 +152,10 @@ COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY supervisord/                   /etc/supervisord
+COPY redirectionio/agent.yml        /etc/redirectionio/agent.yml
 
+# Cache storage for rules
+VOLUME /var/lib/redirectionio
 # Volume for log / cache ...
 VOLUME /var/www/var/cache
 VOLUME /var/www/var/logs

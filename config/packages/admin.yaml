@@ -241,6 +241,18 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
+    Capco\AdminBundle\Admin\RedirectAdmin:
+        arguments: [~, Capco\AppBundle\Entity\Locale, SonataAdminBundle:CRUD]
+        tags:
+            - {
+                  name: sonata.admin,
+                  manager_type: orm,
+                  group: admin.group.parameters,
+                  label: http-redirects,
+              }
+        calls:
+            - [setTranslationDomain, [CapcoAppBundle]]
+
     Capco\AdminBundle\Admin\LocaleAdmin:
         arguments: [~, Capco\AppBundle\Entity\Locale, SonataAdminBundle:CRUD]
         tags:

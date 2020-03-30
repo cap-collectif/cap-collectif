@@ -424,3 +424,10 @@ Capco\AppBundle\Entity\SiteParameter:
     value: FR
     position: 0
     type: 0
+
+  SiteParameterRedirectionIOProjectId:
+    keyname: redirectionio.project.id
+    category: pages.redirection
+    value: ''
+    position: 0
+    type: 0

@@ -1,0 +1,4 @@
+#!/bin/bash
+#TODO check redis key to prevent this from running if no key is set
+echo "Starting redirectionio-agent"
+exec /usr/local/bin/redirection-agent/redirectionio-agent

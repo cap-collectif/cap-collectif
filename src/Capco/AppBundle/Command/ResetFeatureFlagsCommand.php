@@ -87,6 +87,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('consent_internal_communication');
         $this->manager->activate('new_feature_questionnaire_result');
         $this->manager->activate('unstable__multilangue');
+        $this->manager->activate('http_redirects');
         $this->manager->activate('login_franceconnect');
         $this->manager->deactivate('read_more');
         $this->manager->deactivate('display_pictures_in_depository_proposals_list');
@@ -113,6 +114,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('public_api');
             $this->manager->deactivate('search');
             $this->manager->deactivate('login_franceconnect');
+            $this->manager->deactivate('http_redirects');
 
             $this->manager->activate('captcha');
             $this->manager->activate('consent_internal_communication');

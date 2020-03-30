@@ -225,3 +225,22 @@ services:
     Capco\AppBundle\Security\CaptchaChecker:
         arguments:
             $apiKey: '%recaptcha_private_key%'
+
+    Capco\AppBundle\RedirectionIO\ProjectKeyDataloader:
+        autowire: true
+        class: 'Capco\AppBundle\RedirectionIO\ProjectKeyDataloader'
+
+    Capco\AppBundle\RedirectionIO\RequestResponseListener:
+        decorates: 'RedirectionIO\Client\ProxySymfony\EventListener\RequestResponseListener'
+        arguments:
+            - '@Capco\AppBundle\Toggle\Manager'
+            - '@Capco\AppBundle\RedirectionIO\Client'
+
+    Capco\AppBundle\RedirectionIO\Client:
+        decorates: 'RedirectionIO\Client\Sdk\Client'
+        arguments:
+            - '@Capco\AppBundle\RedirectionIO\ProjectKeyDataloader'
+            - '@logger'
+            - 20000
+            - '%agent_tcp%'
+            - '%agent_unix%'

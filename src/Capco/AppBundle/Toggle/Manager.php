@@ -60,7 +60,8 @@ class Manager
         'app_news',
         'unstable__multilangue',
         'unstable__admin_editor',
-        'unstable__analysis'
+        'unstable__analysis',
+        'http_redirects',
     ];
 
     protected $context;
