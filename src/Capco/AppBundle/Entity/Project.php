@@ -57,24 +57,24 @@ class Project implements IndexableInterface
 
     public static $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
-        'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT
+        'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
     ];
 
     public static $sortOrderLabels = [
         'date' => 'global.updated.date',
-        'popularity' => 'project.sort.contributions_nb'
+        'popularity' => 'project.sort.contributions_nb',
     ];
 
     public static $openingStatuses = [
         'future_witout_finished_steps' => self::STATE_FUTURE_WITHOUT_FINISHED_STEPS,
         'future_with_finished_steps' => self::STATE_FUTURE_WITH_FINISHED_STEPS,
         'opened' => self::STATE_OPENED,
-        'closed' => self::STATE_CLOSED
+        'closed' => self::STATE_CLOSED,
     ];
 
     public static $opinionTermsLabels = [
         'project.opinion_term.opinion' => self::OPINION_TERM_OPINION,
-        'project.opinion_term.article' => self::OPINION_TERM_ARTICLE
+        'project.opinion_term.article' => self::OPINION_TERM_ARTICLE,
     ];
 
     /**
@@ -427,14 +427,12 @@ class Project implements IndexableInterface
 
     public function getThemes(): iterable
     {
-        $themes = $this->themes->toArray();
-
-        usort($themes, function ($a, $b) {
-            return $a->getPosition() <=>
-                $b->getPosition();
+        $iterator = $this->themes->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return $a->getPosition() <=> $b->getPosition();
         });
 
-        return $themes;
+        return new ArrayCollection(iterator_to_array($iterator));
     }
 
     /**
@@ -1001,7 +999,7 @@ class Project implements IndexableInterface
             'ElasticsearchProjectNestedProjectType',
             'ElasticsearchProjectNestedTheme',
             'ElasticsearchProjectNestedAuthor',
-            'ElasticsearchProjectNestedProjectDistrictPositioner'
+            'ElasticsearchProjectNestedProjectDistrictPositioner',
         ];
     }
 
