@@ -401,7 +401,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     position: 25
   qaqIdfProjectLocal14:
     proposalForm: '@proposalformIdf'
-    question: '@simplequestionIdfProjetLocalAssociationSiret7'
+    question: '@mediaquestionIdfProjetLocalAssociationSiret8'
     position: 26
   qaqIdfProjectLocal15:
     proposalForm: '@proposalformIdf'

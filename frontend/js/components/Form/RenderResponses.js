@@ -153,6 +153,10 @@ const RenderResponses = ({
             </>
           );
 
+          if (field?.hidden){
+            return null;
+          }
+
           switch (field.type) {
             case 'section': {
               return (
@@ -257,7 +261,8 @@ const RenderResponses = ({
               );
             }
 
-            case 'siren': {
+            case 'rna':
+            case 'siret': {
               const response =
                 responses && responses[index] && responses[index].value
                   ? responses[index].value
@@ -282,8 +287,8 @@ const RenderResponses = ({
                       value={response}
                       typeForm={typeForm}
                       onChange={event => {
+                        triggerAutocompleteAPIEnterprise(dispatch, event, questions);
                         setLastQuestionType(field.type);
-                        triggerAutocompleteAPIEnterprise(dispatch, event);
                       }}
                     />
                   </PrivateBox>

@@ -6,15 +6,12 @@ APIEnterpriseAssociation:
         description: "An association."
         name: APIEnterpriseAssociation
         fields:
-            siret:
-                type: 'String'
-                description: 'Siret'
-            sirenSituation:
-                type: 'InternalMedia'
+            availableSirenSituation:
+                type: 'Boolean'
                 description: "The RIB of the enterprise."
-            turnover:
-                type: 'String'
+            availableTurnover:
+                type: 'Boolean'
                 description: "The RIB of the association"
-            kbis:
-                type: 'InternalMedia'
+            availableKbis:
+                type: 'Boolean'
                 description: "The KBIS file of the association"

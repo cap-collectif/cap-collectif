@@ -26,3 +26,11 @@ export const checkSiret = (input: string): boolean => {
   const results = regex.exec(input);
   return !!results && results[0] === input;
 };
+
+export const checkRNA = (input: string): boolean => {
+  const regexS = /W\d{9}$/gm;
+  const regex = new RegExp(regexS);
+  input = input.replace(/\s/g,'');
+  const results = regex.exec(input);
+  return !!results && results[0] === input;
+};

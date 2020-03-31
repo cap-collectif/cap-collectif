@@ -6,9 +6,9 @@ APIEnterpriseEnterprise:
         description: "An enterprise."
         name: APIEnterpriseEnterprise
         fields:
-            sirenSituation:
-                type: 'InternalMedia'
+            availableSirenSituation:
+                type: 'Boolean'
                 description: "The RIB of the enterprise."
-            turnover:
-                type: 'String'
+            availableTurnover:
+                type: 'Boolean'
                 description: "The RIB of the association"

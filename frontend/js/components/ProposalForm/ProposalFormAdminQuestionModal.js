@@ -249,6 +249,14 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
             type="checkbox"
             component={component}
           />
+          <Field
+            children={<FormattedMessage id="hidden-question" />}
+            id={`${member}.hidden`}
+            normalize={val => !!val}
+            name={`${member}.hidden`}
+            type="checkbox"
+            component={component}
+          />
           {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>

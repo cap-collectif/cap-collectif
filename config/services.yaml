@@ -53,7 +53,7 @@ parameters:
       interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]
     votable:
       interfaces: [Capco\AppBundle\Entity\Interfaces\VotableInterface]
-  env(API_ENTERPRISE_TOKEN): null
+  env(API_ENTERPRISE_TOKEN): ***REMOVED***.***REMOVED***
   env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
   env(SYMFONY_DATABASE_HOST): 127.0.0.1

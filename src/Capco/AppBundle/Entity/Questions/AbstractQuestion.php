@@ -42,7 +42,8 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public const QUESTION_TYPE_BUTTON = 8;
     public const QUESTION_TYPE_NUMBER = 9;
     public const QUESTION_TYPE_SECTION = 10;
-    public const QUESTION_TYPE_SIREN = 11;
+    public const QUESTION_TYPE_SIRET = 11;
+    public const QUESTION_TYPE_RNA = 12;
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
@@ -56,7 +57,8 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         self::QUESTION_TYPE_BUTTON => 'button',
         self::QUESTION_TYPE_SECTION => 'section',
         self::QUESTION_TYPE_NUMBER => 'number',
-        self::QUESTION_TYPE_SIREN => 'siren'
+        self::QUESTION_TYPE_SIRET => 'siret',
+        self::QUESTION_TYPE_RNA => 'rna'
     ];
 
     public static $questionTypesLabels = [];
@@ -124,6 +126,11 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question", cascade={"persist", "remove"})
      */
     protected $responses;
+
+    /**
+     * @ORM\Column(name="hidden", type="boolean", nullable=false)
+     */
+    protected $hidden = false;
 
     public function __construct()
     {
@@ -364,4 +371,16 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
 
         return $this;
     }
+
+    public function getHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): self
+    {
+        $this->hidden = $hidden;
+        return $this;
+    }
+
 }

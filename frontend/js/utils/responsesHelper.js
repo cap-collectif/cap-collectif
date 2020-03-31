@@ -64,6 +64,7 @@ const QuestionAdminFragment = {
       private
       position
       required
+      hidden
       helpText
       jumps(orderBy: { field: POSITION, direction: ASC }) {
         id
@@ -140,6 +141,7 @@ const QuestionFragment = {
       position
       required
       helpText
+      hidden
       jumps(orderBy: { field: POSITION, direction: ASC }) {
         id
         origin {

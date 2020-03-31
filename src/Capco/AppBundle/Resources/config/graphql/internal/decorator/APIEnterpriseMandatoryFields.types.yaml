@@ -11,9 +11,3 @@ APIEnterpriseMandatoryFields:
             corporateAddress:
                 type: 'String!'
                 description: 'Corporate address.'
-            legalRepresentative:
-                type: 'String!'
-                description: 'Authorization URL.'
-            qualityRepresentative:
-                type: 'String!'
-                description: 'The quality of the legal representative.'

@@ -7,6 +7,81 @@ import { $refType, intlMock, formMock } from '../../../mocks';
 import { features } from '../../../redux/modules/default';
 
 describe('<ProposalForm />', () => {
+  const hiddenQuestionsProposalForm = {
+    id: 'proposalForm1',
+    description: 'Description 1',
+    step: {
+      id: 'step1',
+    },
+    districts: [
+      {
+        id: 'district1',
+        name: 'District 1',
+      },
+      {
+        id: 'district2',
+        name: 'District 2',
+      },
+    ],
+    categories: [
+      {
+        id: 'category1',
+        name: 'Category 1',
+      },
+      {
+        id: 'category2',
+        name: 'Category 2',
+      },
+    ],
+    questions: [
+      {
+        id: 'question1',
+        title: 'Lol',
+        helpText: 'Question 1',
+        description: null,
+        type: 'text',
+        position: 1,
+        number: 1,
+        jumps: [],
+        hidden: true,
+        alwaysJumpDestinationQuestion: null,
+        private: true,
+        required: true,
+        validationRule: null,
+        __typename: 'SimpleQuestion',
+        choices: {
+          pageInfo: {
+            hasNextPage: false,
+          },
+          totalCount: 0,
+          edges: [],
+        },
+        isOtherAllowed: false,
+      },
+    ],
+    suggestingSimilarProposals: true,
+    isProposalForm: true,
+    usingDistrict: true,
+    usingDescription: true,
+    usingSummary: true,
+    usingIllustration: true,
+    districtMandatory: true,
+    districtHelpText: 'District help',
+    usingThemes: true,
+    themeMandatory: true,
+    descriptionMandatory: true,
+    usingCategories: true,
+    categoryMandatory: true,
+    categoryHelpText: 'Category help',
+    usingAddress: true,
+    titleHelpText: 'Title help',
+    summaryHelpText: 'Summary help',
+    themeHelpText: 'Theme help',
+    illustrationHelpText: 'Illustration help',
+    descriptionHelpText: 'Description help',
+    addressHelpText: 'Address help',
+    proposalInAZoneRequired: true,
+  };
   const proposalForm = {
     id: 'proposalForm1',
     description: 'Description 1',
@@ -43,6 +118,7 @@ describe('<ProposalForm />', () => {
         position: 1,
         number: 1,
         jumps: [],
+        hidden: false,
         alwaysJumpDestinationQuestion: null,
         private: true,
         required: true,
@@ -143,6 +219,19 @@ describe('<ProposalForm />', () => {
       ...props,
       proposalForm: {
         ...proposalForm,
+        $refType,
+        isProposalForm: false,
+      },
+    };
+    const wrapper = shallow(<ProposalForm {...questionProps} proposal={null} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a create Question form with hidden questions', () => {
+    const questionProps = {
+      ...props,
+      proposalForm: {
+        ...hiddenQuestionsProposalForm,
         $refType,
         isProposalForm: false,
       },
