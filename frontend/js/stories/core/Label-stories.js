@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Label } from 'react-bootstrap';
-import { text, select, boolean } from 'storybook-addon-knobs';
+import { Label as BsLabel } from 'react-bootstrap';
+import { text, select, boolean, color, number } from 'storybook-addon-knobs';
+import { Label } from '~/components/Ui/Labels/Label';
 
 const bsStyleOptions = {
   Warning: 'warning',
@@ -13,14 +14,25 @@ const bsStyleOptions = {
   Default: 'default',
 };
 
-storiesOf('Core|Label', module).add('default', () => {
-  const bsStyle = select('BsStyle', bsStyleOptions, 'default');
-  const content = text('Content', 'Content of label');
-  const badgePill = boolean('Badge pill', false);
+storiesOf('Core|Label', module)
+  .add('Bootstrap Label', () => {
+    const bsStyle = select('BsStyle', bsStyleOptions, 'default');
+    const content = text('Content', 'Content of label');
+    const badgePill = boolean('Badge pill', false);
 
-  return (
-    <Label className={badgePill ? 'badge-pill' : null} bsStyle={bsStyle}>
-      {content}
-    </Label>
-  );
-});
+    return (
+      <BsLabel className={badgePill ? 'badge-pill' : null} bsStyle={bsStyle}>
+        {content}
+      </BsLabel>
+    );
+  })
+  .add('Our Label', () => {
+    const labelColor = color('color', '#28a745');
+    const fontSize = number('fontSize', 12);
+
+    return (
+      <Label color={labelColor} fontSize={fontSize}>
+        <i className="cap cap-add-1" /> Favorable
+      </Label>
+    );
+  });

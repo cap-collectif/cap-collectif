@@ -18,6 +18,11 @@ const colors = {
   white: '#ffffff',
   darkText: '#333333',
   error: '#f00041',
+  lightBlue: '#007bff',
+  lightGreen: '#28a745',
+  orange: '#f09200',
+  duckBlue: '#17a2b8',
+  yellow: '#ffc107',
   accessibleColors: [
     '#36c',
     '#dc3912',
@@ -43,6 +48,7 @@ const colors = {
   votes: ['#5cb85c', '#f0ad4e', '#d9534f'],
   formBgc: '#fafafa',
   paleGrey: '#ecf0f5',
+  secondaryGray: '#6c757d',
 };
 
 export const socialColors = {

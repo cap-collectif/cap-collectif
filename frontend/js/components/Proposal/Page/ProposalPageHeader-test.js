@@ -93,6 +93,19 @@ describe('<ProposalPageHeader />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render a proposal header as ProposalFrom with an analysing button', () => {
+    const wrapper = shallow(
+      <ProposalPageHeader
+        hasAnalysingButton
+        step={null}
+        proposal={proposal}
+        viewer={null}
+        {...props}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should not render theme if proposal has none and form type is question', () => {
     const wrapper = shallow(
       <ProposalPageHeader proposal={proposalWithoutTheme} step={null} viewer={null} {...props} />,

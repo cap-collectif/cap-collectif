@@ -4,6 +4,15 @@ import cn from 'classnames';
 import * as Icons from './index';
 
 export const ICON_NAME: {
+  chart: 'chart',
+  pen: 'pen',
+  eye: 'eye',
+  muteFace: 'muteFace',
+  todo: 'todo',
+  clock: 'clock',
+  unfavorable: 'unfavorable',
+  favorable: 'favorable',
+  ongoing: 'ongoing',
   calendar: 'calendar',
   networkAdd: 'network-add',
   share: 'share',
@@ -36,6 +45,15 @@ export const ICON_NAME: {
   taskList: 'taskList',
   done: 'done',
 } = {
+  chart: 'chart',
+  pen: 'pen',
+  eye: 'eye',
+  muteFace: 'muteFace',
+  todo: 'todo',
+  clock: 'clock',
+  unfavorable: 'unfavorable',
+  favorable: 'favorable',
+  ongoing: 'ongoing',
   calendar: 'calendar',
   networkAdd: 'network-add',
   share: 'share',
@@ -85,6 +103,24 @@ type Props = {|
 
 const getIcon = name => {
   switch (name) {
+    case 'chart':
+      return <Icons.Chart />;
+    case 'pen':
+      return <Icons.Pen />;
+    case 'eye':
+      return <Icons.Eye />;
+    case 'muteFace':
+      return <Icons.MuteFace />;
+    case 'todo':
+      return <Icons.Todo />;
+    case 'clock':
+      return <Icons.Clock />;
+    case 'unfavorable':
+      return <Icons.Unfavorable />;
+    case 'favorable':
+      return <Icons.Favorable />;
+    case 'ongoing':
+      return <Icons.Ongoing />;
     case 'calendar':
       return <Icons.Calendar />;
     case 'network-add':

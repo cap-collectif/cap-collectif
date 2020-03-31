@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAnalysisOnMobileModal /> renders correctly 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="proposal-analysis-modal-mobile"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="proposal-analysis-modal-mobile"
+    >
+      <FormattedMessage
+        id="analyzing.proposal"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <ProposalAnalysisOnMobileModal__Body>
+      <FormattedMessage
+        id="mobile.analysis.unavailable"
+        values={Object {}}
+      />
+    </ProposalAnalysisOnMobileModal__Body>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.close"
+      onClose={[MockFunction]}
+    />
+  </ModalFooter>
+</Modal>
+`;

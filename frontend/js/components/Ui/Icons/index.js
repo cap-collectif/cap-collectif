@@ -1,4 +1,13 @@
 // @flow
+export { default as Chart } from './svg/chart.svg';
+export { default as Pen } from './svg/pen.svg';
+export { default as Eye } from './svg/eye.svg';
+export { default as MuteFace } from './svg/mute-face.svg';
+export { default as Todo } from './svg/todo.svg';
+export { default as Clock } from './svg/clock.svg';
+export { default as Unfavorable } from './svg/unfavorable.svg';
+export { default as Favorable } from './svg/favorable.svg';
+export { default as Ongoing } from './svg/ongoing.svg';
 export { default as Calendar } from './svg/calendar.svg';
 export { default as NetworkAdd } from './svg/network-add.svg';
 export { default as Share } from './svg/share.svg';

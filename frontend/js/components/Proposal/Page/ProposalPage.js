@@ -2,26 +2,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
-import ProposalPageHeader from './ProposalPageHeader';
-import ProposalPageAlert from './ProposalPageAlert';
-import ProposalDraftAlert from './ProposalDraftAlert';
-import ProposalPageTabs from './ProposalPageTabs';
+import environment, { graphqlError } from '~/createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
-import type { FeatureToggles, State } from '../../../types';
-import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
+import type { State } from '~/types';
+import { PROPOSAL_FOLLOWERS_TO_SHOW } from '~/constants/ProposalConstants';
 import type { ProposalPageQueryResponse } from '~relay/ProposalPageQuery.graphql';
+import ProposalPageLogic from './ProposalPageLogic';
 
 export type Props = {|
   proposalId: string,
   currentVotableStepId: ?string,
-  features: FeatureToggles,
   isAuthenticated: boolean,
 |};
 
 export class ProposalPage extends React.Component<Props> {
   render() {
-    const { proposalId, currentVotableStepId, features, isAuthenticated } = this.props;
+    const { proposalId, currentVotableStepId, isAuthenticated } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -35,20 +31,15 @@ export class ProposalPage extends React.Component<Props> {
               $cursor: String
               $isAuthenticated: Boolean!
             ) {
-              viewer @include(if: $isAuthenticated) {
-                ...ProposalPageTabs_viewer
-                ...ProposalPageHeader_viewer @arguments(hasVotableStep: $hasVotableStep)
-              }
-              step: node(id: $stepId) @include(if: $hasVotableStep) {
-                ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated)
-                ...ProposalPageTabs_step
-              }
-              proposal: node(id: $proposalId) {
-                ...ProposalDraftAlert_proposal
-                ...ProposalPageAlert_proposal
-                ...ProposalPageTabs_proposal
-                ...ProposalPageHeader_proposal @arguments(isAuthenticated: $isAuthenticated)
-              }
+              ...ProposalPageLogic_query
+                @arguments(
+                  proposalId: $proposalId
+                  hasVotableStep: $hasVotableStep
+                  stepId: $stepId
+                  count: $count
+                  cursor: $cursor
+                  isAuthenticated: $isAuthenticated
+                )
             }
           `}
           variables={{
@@ -71,33 +62,7 @@ export class ProposalPage extends React.Component<Props> {
               return graphqlError;
             }
             if (props) {
-              if (props.proposal) {
-                return (
-                  <div>
-                    <ProposalDraftAlert proposal={props.proposal} />
-                    <ProposalPageAlert proposal={props.proposal} />
-                    <section className="section--custom">
-                      <ProposalPageHeader
-                        proposal={props.proposal}
-                        step={props.step || null}
-                        viewer={props.viewer || null}
-                        isAuthenticated={!!props.viewer}
-                        className="container"
-                      />
-                    </section>
-                    <section className="section--custom">
-                      <ProposalPageTabs
-                        proposal={props.proposal}
-                        step={props.step || null}
-                        viewer={props.viewer || null}
-                        features={features}
-                      />
-                    </section>
-                  </div>
-                );
-              }
-
-              return graphqlError;
+              return <ProposalPageLogic query={props} />;
             }
             return <Loader />;
           }}
@@ -109,7 +74,6 @@ export class ProposalPage extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   isAuthenticated: state.user.user !== null,
-  features: state.default.features,
 });
 
 export default connect(mapStateToProps)(ProposalPage);

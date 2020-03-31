@@ -15,10 +15,12 @@ import ProposalFollowButton from '../Follow/ProposalFollowButton';
 import type { ProposalPageHeader_proposal } from '~relay/ProposalPageHeader_proposal.graphql';
 import type { ProposalPageHeader_step } from '~relay/ProposalPageHeader_step.graphql';
 import type { ProposalPageHeader_viewer } from '~relay/ProposalPageHeader_viewer.graphql';
-import type { State } from '../../../types';
+import type { State } from '~/types';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import TrashedMessage from '../../Trashed/TrashedMessage';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import { ProposalContactButton } from '../Contact/ProposalContactButton';
+import colors from '~/utils/colors';
 
 type Props = {
   proposal: ProposalPageHeader_proposal,
@@ -26,7 +28,24 @@ type Props = {
   step: ?ProposalPageHeader_step,
   className: string,
   referer: string,
+  hasAnalysingButton?: boolean,
+  onAnalysisClick?: () => void,
 };
+
+const HeaderButtonContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 27px;
+`;
+
+const OpenAnalysisButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+  border-radius: 15px;
+  color: ${colors.lightBlue};
+  font-size: 14px;
+  height: 27px;
+  background: none;
+  border: 1px solid;
+`;
 
 const HeaderBandContainer: StyledComponent<
   { canContact: boolean },
@@ -45,7 +64,15 @@ export class ProposalPageHeader extends React.Component<Props> {
   };
 
   render() {
-    const { step, viewer, proposal, className, referer } = this.props;
+    const {
+      step,
+      viewer,
+      proposal,
+      className,
+      referer,
+      hasAnalysingButton,
+      onAnalysisClick,
+    } = this.props;
     const date = proposal.publishedAt ? proposal.publishedAt : proposal.createdAt;
     const createdDate = (
       <FormattedDate
@@ -84,11 +111,17 @@ export class ProposalPageHeader extends React.Component<Props> {
 
     return (
       <div id="ProposalPageHeader" className={classNames(classes)}>
-        <div>
+        <HeaderButtonContainer>
           <a style={{ textDecoration: 'none' }} href={referer || proposal.url}>
             <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id={tradKeyToBack} />
           </a>
-        </div>
+          {hasAnalysingButton && (
+            <OpenAnalysisButton type="button" onClick={onAnalysisClick}>
+              <Icon name={ICON_NAME.chart} size={16} color={colors.lightBlue} />
+              <FormattedMessage id="panel.analysis.subtitle" />
+            </OpenAnalysisButton>
+          )}
+        </HeaderButtonContainer>
         <TrashedMessage className="consultation__header__title h1" contribution={proposal}>
           <h1 className="consultation__header__title h1">{proposal.title}</h1>
         </TrashedMessage>

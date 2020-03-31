@@ -5,7 +5,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
   className="proposal__header "
   id="ProposalPageHeader"
 >
-  <div>
+  <ProposalPageHeader__HeaderButtonContainer>
     <a
       href="http://capco.test"
       style={
@@ -23,7 +23,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
         values={Object {}}
       />
     </a>
-  </div>
+  </ProposalPageHeader__HeaderButtonContainer>
   <ForwardRef(Relay(TrashedMessage))
     className="consultation__header__title h1"
     contribution={
@@ -219,7 +219,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
   className="proposal__header "
   id="ProposalPageHeader"
 >
-  <div>
+  <ProposalPageHeader__HeaderButtonContainer>
     <a
       href="http://capco.test"
       style={
@@ -237,7 +237,240 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
         values={Object {}}
       />
     </a>
+  </ProposalPageHeader__HeaderButtonContainer>
+  <ForwardRef(Relay(TrashedMessage))
+    className="consultation__header__title h1"
+    contribution={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "$fragmentRefs": null,
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
+          },
+          "username": "userAdmin",
+        },
+        "createdAt": "2015-01-01 00:00:00",
+        "draft": false,
+        "form": Object {
+          "canContact": false,
+          "isProposalForm": true,
+        },
+        "id": "1",
+        "project": Object {
+          "opinionCanBeFollowed": true,
+          "type": Object {
+            "title": "global.consultation",
+          },
+        },
+        "publicationStatus": "PUBLISHED",
+        "publishedAt": "2015-01-01 00:00:00",
+        "theme": Object {
+          "title": "titre du theme",
+        },
+        "title": "titre",
+        "updatedAt": "2015-01-05 00:00:00",
+        "url": "true",
+      }
+    }
+  >
+    <h1
+      className="consultation__header__title h1"
+    >
+      titre
+    </h1>
+  </ForwardRef(Relay(TrashedMessage))>
+  <ProposalPageHeader__HeaderBandContainer
+    canContact={false}
+  >
+    <Connect(UserAvatarDeprecated)
+      className="pull-left"
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
+          },
+          "username": "userAdmin",
+        }
+      }
+    />
+    <div
+      className="media-body"
+    >
+      <p
+        className="media--aligned excerpt"
+      >
+        <FormattedMessage
+          id="proposal.infos.header"
+          values={
+            Object {
+              "createdDate": <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />,
+              "user": <ForwardRef(Relay(Connect(UserLink)))
+                user={
+                  Object {
+                    "$fragmentRefs": null,
+                    "displayName": "userAdmin",
+                    "media": Object {
+                      "url": "http://media.url",
+                    },
+                    "username": "userAdmin",
+                  }
+                }
+              />,
+            }
+          }
+        />
+        <span>
+           • 
+          <FormattedMessage
+            id="global.edited_on"
+            values={
+              Object {
+                "updated": <FormattedDate
+                  day="numeric"
+                  hour="numeric"
+                  minute="numeric"
+                  month="long"
+                  value={"2015-01-04T23:00:00.000Z"}
+                  year="numeric"
+                />,
+              }
+            }
+          />
+        </span>
+        <ForwardRef(Relay(Connect(UnpublishedLabel)))
+          publishable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "$fragmentRefs": null,
+                "displayName": "userAdmin",
+                "media": Object {
+                  "url": "http://media.url",
+                },
+                "username": "userAdmin",
+              },
+              "createdAt": "2015-01-01 00:00:00",
+              "draft": false,
+              "form": Object {
+                "canContact": false,
+                "isProposalForm": true,
+              },
+              "id": "1",
+              "project": Object {
+                "opinionCanBeFollowed": true,
+                "type": Object {
+                  "title": "global.consultation",
+                },
+              },
+              "publicationStatus": "PUBLISHED",
+              "publishedAt": "2015-01-01 00:00:00",
+              "theme": Object {
+                "title": "titre du theme",
+              },
+              "title": "titre",
+              "updatedAt": "2015-01-05 00:00:00",
+              "url": "true",
+            }
+          }
+        />
+      </p>
+    </div>
+  </ProposalPageHeader__HeaderBandContainer>
+  <div
+    className="proposal__buttons"
+  >
+    <ForwardRef(Relay(ProposalFollowButton))
+      isAuthenticated={false}
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "$fragmentRefs": null,
+            "displayName": "userAdmin",
+            "media": Object {
+              "url": "http://media.url",
+            },
+            "username": "userAdmin",
+          },
+          "createdAt": "2015-01-01 00:00:00",
+          "draft": false,
+          "form": Object {
+            "canContact": false,
+            "isProposalForm": true,
+          },
+          "id": "1",
+          "project": Object {
+            "opinionCanBeFollowed": true,
+            "type": Object {
+              "title": "global.consultation",
+            },
+          },
+          "publicationStatus": "PUBLISHED",
+          "publishedAt": "2015-01-01 00:00:00",
+          "theme": Object {
+            "title": "titre du theme",
+          },
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+          "url": "true",
+        }
+      }
+    />
   </div>
+</div>
+`;
+
+exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom with an analysing button 1`] = `
+<div
+  className="proposal__header "
+  id="ProposalPageHeader"
+>
+  <ProposalPageHeader__HeaderButtonContainer>
+    <a
+      href="http://capco.test"
+      style={
+        Object {
+          "textDecoration": "none",
+        }
+      }
+    >
+      <i
+        className="cap cap-arrow-65-1 icon--black"
+      />
+       
+      <FormattedMessage
+        id="proposal.back"
+        values={Object {}}
+      />
+    </a>
+    <ProposalPageHeader__OpenAnalysisButton
+      type="button"
+    >
+      <Icon
+        color="#007bff"
+        name="chart"
+        size={16}
+      />
+      <FormattedMessage
+        id="panel.analysis.subtitle"
+        values={Object {}}
+      />
+    </ProposalPageHeader__OpenAnalysisButton>
+  </ProposalPageHeader__HeaderButtonContainer>
   <ForwardRef(Relay(TrashedMessage))
     className="consultation__header__title h1"
     contribution={
@@ -439,7 +672,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
   className="proposal__header "
   id="ProposalPageHeader"
 >
-  <div>
+  <ProposalPageHeader__HeaderButtonContainer>
     <a
       href="http://capco.test"
       style={
@@ -457,7 +690,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
         values={Object {}}
       />
     </a>
-  </div>
+  </ProposalPageHeader__HeaderButtonContainer>
   <ForwardRef(Relay(TrashedMessage))
     className="consultation__header__title h1"
     contribution={
@@ -578,7 +811,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
   className="proposal__header "
   id="ProposalPageHeader"
 >
-  <div>
+  <ProposalPageHeader__HeaderButtonContainer>
     <a
       href="http://capco.test"
       style={
@@ -596,7 +829,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
         values={Object {}}
       />
     </a>
-  </div>
+  </ProposalPageHeader__HeaderButtonContainer>
   <ForwardRef(Relay(TrashedMessage))
     className="consultation__header__title h1"
     contribution={

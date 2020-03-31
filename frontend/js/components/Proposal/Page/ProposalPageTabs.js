@@ -128,6 +128,7 @@ export class ProposalPageTabs extends React.Component<Props, State> {
                       )}
                       <ProposalPageContent proposal={proposal} step={step} viewer={viewer} />
                     </Col>
+
                     <Col xs={12} sm={4}>
                       <ProposalPageMetadata
                         proposal={proposal}
