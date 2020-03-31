@@ -8,6 +8,9 @@ import type {Questions} from "~/components/Form/Form.type";
 const dispatchFromApi = (dispatch: Dispatch, formName: string, arr: Array<{ key?: string, questionNumber?: number,
   value: any }>, questions: Questions) => {
   arr.forEach((element: { key?: string, questionNumber?: number, value: ?string }) => {
+
+    console.log("key", element.key, "number", element.questionNumber, "value", element.value);
+
     if (element?.questionNumber !== null && typeof element?.questionNumber !== 'undefined') {
       // Check if is not available thanks to API
       if (!element.value && element.questionNumber){
@@ -71,6 +74,17 @@ const getMatchingObject = (object: Object, type: string) => {
   }
 };
 
+const showAPIVisibleQuestions = (indexes: Array<number>, questions: Questions) => {
+  indexes.forEach((index) =>{
+    commitLocalUpdate(environment, store => {
+      const question = store.get(questions[index].id);
+      if (question){
+        question.setValue(false, 'hidden');
+      }
+    });
+  });
+};
+
 export const dispatchValuesToForm = (dispatch: Dispatch, object: Object, type: string, questions: Questions,
                                      formName: string = "proposal-form") => {
 
@@ -131,15 +145,19 @@ export const dispatchValuesToForm = (dispatch: Dispatch, object: Object, type: s
 
   switch (type) {
     case API_ENTERPRISE_ASSOC:
+      showAPIVisibleQuestions([13, 14], questions);
       dispatchFromApi(dispatch, formName, orderedSiretAssocMapping, questions);
       break;
     case API_ENTERPRISE_ASSOC_RNA:
+      showAPIVisibleQuestions([28, 29], questions);
       dispatchFromApi(dispatch, formName, orderedRNAAssocMapping, questions);
       break;
     case API_ENTERPRISE_ENTER:
+      showAPIVisibleQuestions([45, 46], questions);
       dispatchFromApi(dispatch, formName, orderedEnterpriseMapping, questions);
       break;
     case API_ENTERPRISE_PUB_ORGA:
+      showAPIVisibleQuestions([57, 58], questions);
       dispatchFromApi(dispatch, formName, orderedPublicOrgaMapping, questions);
       break;
     case API_ENTERPRISE_ASSOC_DOC:
