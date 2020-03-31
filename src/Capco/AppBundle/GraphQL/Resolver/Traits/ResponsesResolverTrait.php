@@ -40,11 +40,16 @@ trait ResponsesResolverTrait
             $context->offsetExists('disable_acl') &&
             true === $context->offsetGet('disable_acl');
         $isAuthor = $author === $viewer;
+        $isAnalystOrAdmin = ($viewer instanceof User && $viewer->isAdmin()) || $isEvaluer;
         $viewerCanSeePrivateResponses =
-            $skipVerification || $isAuthor || ($viewer instanceof User && $viewer->isAdmin()) || $isEvaluer;
+            $skipVerification || $isAuthor || $isAnalystOrAdmin;
 
-        return $responses->filter(function ($response) use ($viewerCanSeePrivateResponses) {
-            return !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
+        return $responses->filter(function ($response) use ($viewerCanSeePrivateResponses, $isAnalystOrAdmin) {
+            $privateFilter = !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
+            $question = $response->getQuestion();
+            $isHiddenQuestion = (!$question) ? $question->getHidden() : false;
+            $hiddenFilter = !$isHiddenQuestion || $isAnalystOrAdmin;
+            return $privateFilter && $hiddenFilter;
         });
     }
 

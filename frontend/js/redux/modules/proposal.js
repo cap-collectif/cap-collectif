@@ -338,7 +338,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'proposal/CLOSE_DELETE_MODAL':
       return { ...state, showDeleteModal: false, isDeleting: false };
     case 'proposal/OPEN_CREATE_MODAL':
-      // TODO
       return { ...state, showCreateModal: true };
     case 'proposal/CLOSE_CREATE_MODAL':
       return { ...state, showCreateModal: false };

@@ -19,7 +19,7 @@ import {
 import type { Dispatch } from '~/types';
 import type {Questions} from "~/components/Form/Form.type";
 
-const getApiEnterpriseType = (type: string): string => {
+export const getApiEnterpriseType = (type: string): string => {
   switch (type.trim().toLowerCase()) {
     case 'une entreprise':
     case 'un autre organisme privé':
@@ -30,6 +30,32 @@ const getApiEnterpriseType = (type: string): string => {
       return API_ENTERPRISE_PUB_ORGA;
     default:
       throw new Error('This type of enterprise is not handled currently.');
+  }
+};
+
+export const getBaseQuestionsToHideAccordingToType = (rna: ?string, siret: ?string): Array<number> => {
+  const defaultToHideQuestions = [13, 14, 15, 16, 28, 29, 30, 31, 45, 46, 47, 48, 57, 58, 59, 60];
+  if ((siret == null || siret && !checkSiret(siret)) && (rna == null || rna && !checkRNA(rna))) {
+    return defaultToHideQuestions;
+  }
+  // only show fields according to enterprise's type in case user change is mind
+  const type = $('input[name="choices-for-field-proposal-form-responses10"]:checked').val();
+  const apiEnterpriseType = getApiEnterpriseType(type);
+  const assosQuestions = [13, 14, 15, 16];
+  const assosRnaQuestions = [28, 29, 30, 31];
+  const enterprisesQuestions = [45, 46, 47, 48];
+  const pubOrgaQuestions = [57, 58, 59, 60];
+  switch (apiEnterpriseType) {
+    case API_ENTERPRISE_ASSOC:
+      return [...assosRnaQuestions, ...enterprisesQuestions, ...pubOrgaQuestions];
+    case API_ENTERPRISE_ASSOC_RNA:
+      return [...assosQuestions, ...enterprisesQuestions, ...pubOrgaQuestions];
+    case API_ENTERPRISE_ENTER:
+      return [...assosQuestions, ...assosRnaQuestions, ...pubOrgaQuestions];
+    case API_ENTERPRISE_PUB_ORGA:
+      return [...assosQuestions, ...assosRnaQuestions, ...enterprisesQuestions];
+    default:
+      return defaultToHideQuestions;
   }
 };
 

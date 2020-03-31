@@ -149,7 +149,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Raison sociale
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret3'
@@ -158,7 +157,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Adresse du siège social
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret4'
@@ -167,7 +165,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Prénom et Nom du représentant légal
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret5'
@@ -176,7 +173,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Qualité du représentant légal
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret1'
@@ -202,7 +198,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Raison sociale
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationRna3'
@@ -211,7 +206,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Adresse du siège social
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationRna4'
@@ -220,7 +214,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Prénom et Nom du représentant légal
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationRna5'
@@ -229,7 +222,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Qualité du représentant légal
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationRna1'
@@ -237,7 +229,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1347
         title: Raison sociale
         required: true
-        hidden: true
         private: true
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationNoRna2'
@@ -245,7 +236,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1348
         title: Adresse du siège social
         required: true
-        hidden: true
         private: true
         type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationNoRna3'
@@ -253,7 +243,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1349
         title: Prénom et Nom du représentant légal
         required: true
-        hidden: true
         private: true
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationNoRna4'
@@ -261,7 +250,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1350
         title: Qualité du représentant légal
         required: true
-        hidden: true
         private: true
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationNoRna1'
@@ -277,7 +265,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1352
         title: Raison sociale
         required: true
-        hidden: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
@@ -286,7 +273,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1353
         title: Adresse du siège social
         required: true
-        hidden: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 1 # textarea
@@ -295,7 +281,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1354
         title: Prénom & nom du représentant légal
         required: true
-        hidden: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
@@ -304,7 +289,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1355
         title: Qualité du représentant légal
         required: true
-        hidden: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
@@ -330,7 +314,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         id: 1358
         title: Raison sociale
         required: true
-        hidden: true
         private: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
@@ -340,7 +323,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Adresse du siège social
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalOrgPublic4'
@@ -349,7 +331,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Prénom & nom du représentant légal
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalOrgPublic5'
@@ -358,7 +339,6 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Qualité du représentant légal
         required: true
         private: true
-        hidden: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalOrgPub1'

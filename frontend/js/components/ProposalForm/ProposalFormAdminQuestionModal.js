@@ -157,8 +157,11 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
               <option value="medias">
                 {intl.formatMessage({ id: 'global.question.types.medias' })}
               </option>
-              <option value="siren">
-                {intl.formatMessage({ id: 'global.question.types.siren' })}
+              <option value="siret">
+                {intl.formatMessage({ id: 'global.question.types.siret' })}
+              </option>
+              <option value="rna">
+                {intl.formatMessage({ id: 'global.question.types.rna' })}
               </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>

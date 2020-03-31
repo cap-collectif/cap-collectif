@@ -267,7 +267,6 @@ const RenderResponses = ({
                 responses && responses[index] && responses[index].value
                   ? responses[index].value
                   : null;
-
               return (
                 <div key={field.id}>
                   <PrivateBox show={field.private}>

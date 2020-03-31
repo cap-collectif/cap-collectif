@@ -8,9 +8,6 @@ import type {Questions} from "~/components/Form/Form.type";
 const dispatchFromApi = (dispatch: Dispatch, formName: string, arr: Array<{ key?: string, questionNumber?: number,
   value: any }>, questions: Questions) => {
   arr.forEach((element: { key?: string, questionNumber?: number, value: ?string }) => {
-
-    console.log("key", element.key, "number", element.questionNumber, "value", element.value);
-
     if (element?.questionNumber !== null && typeof element?.questionNumber !== 'undefined') {
       // Check if is not available thanks to API
       if (!element.value && element.questionNumber){
