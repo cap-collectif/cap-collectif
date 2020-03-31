@@ -94,7 +94,7 @@ describe('mutations.changeProposalDecision', () => {
     const createDecisionWithAssessment = await graphql(
       ChangeProposalDecisionMutation,
       {
-        input: { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTI=' },
+        input: { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTA=' },
       },
       'internal_decision_maker',
     );

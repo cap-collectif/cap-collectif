@@ -48,7 +48,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "assessment": null,
+            "assessment": Object {
+              "body": "Je trouve cette proposition pas très intéressante.",
+              "estimatedCost": 10000,
+              "officialResponse": "En vertu de l'article 49 alinéa 3, ce projet aboutira pas.",
+              "state": "UNFAVOURABLE",
+            },
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
           },
         },

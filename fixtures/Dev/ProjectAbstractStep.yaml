@@ -1,311 +1,316 @@
 Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
-  pas1:
-    id: pas1
-    step: '@cstep1'
-    project: '@p1'
-    position: 2
-  pas2:
-    id: pas2
-    step: '@cstep2'
-    project: '@p2'
-    position: 1
-  pas3:
-    id: pas3
-    step: '@cstep3'
-    project: '@p3'
-    position: 1
-  pas4:
-    id: pas4
-    step: '@cstep4'
-    project: '@p4'
-    position: 1
-  pas5:
-    id: pas5
-    step: '@ostep1'
-    project: '@p1'
-    position: 3
-  pas6:
-    id: pas6
-    step: '@ostep2'
-    project: '@p2'
-    position: 2
-  pas7:
-    id: pas7
-    step: '@ostep3'
-    project: '@p3'
-    position: 2
-  pas8:
-    id: pas8
-    step: '@pstep1'
-    project: '@p1'
-    position: 1
-  pas9:
-    id: pas9
-    step: '@sstep1'
-    project: '@p2'
-    position: 3
-  pas10:
-    id: pas10
-    step: '@cstep5'
-    project: '@p5'
-    position: 1
-  pas11:
-    id: pas11
-    step: '@sstep2'
-    project: '@p5'
-    position: 2
-  pas13:
-    id: pas13
-    step: '@rstep1'
-    project: '@p1'
-    position: 4
-  pas14:
-    id: pas14
-    step: '@rstep2'
-    project: '@p5'
-    position: 4
-  pas15:
-    id: pas15
-    step: '@collectstep1'
-    project: '@p6'
-    position: 1
-  pas16:
-    id: pas16
-    step: '@collectstep2'
-    project: '@p6'
-    position: 3
-  pas46:
-    id: pas46
-    step: '@collectstepWithQuestions'
-    project: '@p6'
-    position: 3
-  pas17:
-    id: pas17
-    step: '@selectionstep1'
-    project: '@p6'
-    position: 4
-  pas18:
-    id: pas18
-    step: '@selectionstep2'
-    project: '@p6'
-    position: 5
-  pas19:
-    id: pas19
-    step: '@selectionstep3'
-    project: '@p6'
-    position: 6
-  pasCollectVote:
-    id: pasCollectVote
-    step: '@collectStepWithVote'
-    project: '@p6'
-    position: 7
-  pas20:
-    id: pas20
-    step: '@collectstep3'
-    project: '@p7'
-    position: 1
-  pas21:
-    id: pas21
-    step: '@selectionstep4'
-    project: '@p7'
-    position: 2
-  pas22:
-    id: pas22
-    step: '@selectionstep5'
-    project: '@p10'
-    position: 2
-  pas23:
-    id: pas23
-    step: '@selectionstep6'
-    project: '@p6'
-    position: 6
-  pas24:
-    id: pas24
-    step: '@questionnairestep1'
-    project: '@p8'
-    position: 2
-  pas25:
-    id: pas25
-    step: '@questionnairestep2'
-    project: '@p8'
-    position: 3
-  pasJump:
-    id: pasJump
-    step: '@questionnairestepJump'
-    project: '@p8'
-    position: 4
-  pasJump2:
-    id: pasJump2
-    step: '@questionnairestepJump2'
-    project: '@p8'
-    position: 5
-  pas26:
-    id: pas26
-    step: '@questionnairestep3'
-    project: '@p8'
-    position: 6
-  pas27:
-    id: pas27
-    step: '@pstep2'
-    project: '@p8'
-    position: 1
-  pas28:
-    id: pas28
-    step: '@collectstep4'
-    project: '@p6'
-    position: 2
-  pas29:
-    id: pas29
-    step: '@selectionstep7'
-    project: '@p6'
-    position: 10
-  pas30:
-    id: pas30
-    step: '@collectstep5'
-    project: '@p9'
-    position: 1
-  pas31:
-    id: pas31
-    step: '@collectstep6'
-    project: '@p10'
-    position: 1
-  pas32:
-    id: pas32
-    step: '@collectstep7'
-    project: '@p11'
-    position: 1
-  pas33:
-    id: pas33
-    step: '@selectionstep8'
-    project: '@p11'
-    position: 2
-  pas34:
-    id: pas34
-    step: '@pstep3'
-    project: '@p12'
-    position: 1
-  pas35:
-    id: pas35
-    step: '@collectstep8'
-    project: '@p13'
-    position: 1
-  pas36:
-    id: pas36
-    step: '@pstep4'
-    project: '@p14'
-    position: 1
-  pas37:
-    id: pas37
-    step: '@collectstepVoteClassement'
-    project: '@p15'
-    position: 1
-  pas38:
-    id: pas38
-    step: '@selectionstepVoteClassement'
-    project: '@p15'
-    position: 2
-  pas39:
-    id: pas39
-    step: '@collectstep9'
-    project: '@p17'
-    position: 1
-  pas40:
-    id: pas40
-    step: '@collectstep10'
-    project: '@p18'
-    position: 1
-  pas41:
-    id: pas41
-    step: '@collectstep11'
-    project: '@p19'
-    position: 1
-  pas42:
-    id: pas42
-    step: '@pstep5'
-    project: '@p20'
-    position: 1
-  pas43:
-    id: pas43
-    step: '@collectstep12'
-    project: '@p20'
-    position: 2
-  pas44:
-    id: pas44
-    step: '@collectQuestionVoteAvecClassement'
-    project: '@p21'
-    position: 1
-  pas45:
-    id: pas45
-    step: '@selectionQuestionStepVoteClassement'
-    project: '@p21'
-    position: 2
-  pas47:
-    id: pas47
-    step: '@cstep6'
-    project: '@p19'
-    position: 2
-  pasMultiConsultation1:
-    id: pasMultiConsultation1
-    step: '@multiCstep1'
-    project: '@p2'
-    position: 4
-  pas48:
-    id: pas48
-    step: '@questionnairestep4'
-    project: '@p18'
-    position: 2
-  pas49:
-    id: pas49
-    step: '@questionnairestep5'
-    project: '@p24'
-    position: 1
-  pas50:
-    id: pas50
-    step: '@cstep7'
-    project: '@p18'
-    position: 3
-  pas51:
-    id: pas51
-    step: '@cstep8'
-    project: '@p20'
-    position: 3
-  pas52:
-    id: pas52
-    step: '@cstepOpinions'
-    project: '@project25'
-    position: 1
-  pas53:
-    id: pas53
-    step: '@collectstepWithQuestionsToTrash'
-    project: '@project25'
-    position: 1
-  pas54:
-    id: pas54
-    step: '@cstepProjectWithLongName'
-    project: '@project26'
-    position: 1
-  pas55:
-    id: pas55
-    step: '@questionnaireStepLotChoices'
-    project: '@p8'
-    position: 7
-  pas56:
-    id: pas56
-    step: '@collectstep13'
-    project: '@project27'
-    position: 1
-  pasIdf1:
-    id: pasIdf1
-    step: '@collectstepIdf'
-    project: '@projectIdf'
-    position: 1
-  pasFr:
-      id: pasFr
-      step: '@collectstepFrench'
-      project: '@p27'
-      position: 1
-  pasCorona:
-      id: pasCorona
-      step: '@collectstepCorona'
-      project: '@projectCorona'
-      position: 1
+    pas1:
+        id: pas1
+        step: '@cstep1'
+        project: '@p1'
+        position: 2
+    pas2:
+        id: pas2
+        step: '@cstep2'
+        project: '@p2'
+        position: 1
+    pas3:
+        id: pas3
+        step: '@cstep3'
+        project: '@p3'
+        position: 1
+    pas4:
+        id: pas4
+        step: '@cstep4'
+        project: '@p4'
+        position: 1
+    pas5:
+        id: pas5
+        step: '@ostep1'
+        project: '@p1'
+        position: 3
+    pas6:
+        id: pas6
+        step: '@ostep2'
+        project: '@p2'
+        position: 2
+    pas7:
+        id: pas7
+        step: '@ostep3'
+        project: '@p3'
+        position: 2
+    pas8:
+        id: pas8
+        step: '@pstep1'
+        project: '@p1'
+        position: 1
+    pas9:
+        id: pas9
+        step: '@sstep1'
+        project: '@p2'
+        position: 3
+    pas10:
+        id: pas10
+        step: '@cstep5'
+        project: '@p5'
+        position: 1
+    pas11:
+        id: pas11
+        step: '@sstep2'
+        project: '@p5'
+        position: 2
+    pas13:
+        id: pas13
+        step: '@rstep1'
+        project: '@p1'
+        position: 4
+    pas14:
+        id: pas14
+        step: '@rstep2'
+        project: '@p5'
+        position: 4
+    pas15:
+        id: pas15
+        step: '@collectstep1'
+        project: '@p6'
+        position: 1
+    pas16:
+        id: pas16
+        step: '@collectstep2'
+        project: '@p6'
+        position: 3
+    pas46:
+        id: pas46
+        step: '@collectstepWithQuestions'
+        project: '@p6'
+        position: 3
+    pas17:
+        id: pas17
+        step: '@selectionstep1'
+        project: '@p6'
+        position: 4
+    pas18:
+        id: pas18
+        step: '@selectionstep2'
+        project: '@p6'
+        position: 5
+    pas19:
+        id: pas19
+        step: '@selectionstep3'
+        project: '@p6'
+        position: 6
+    pasCollectVote:
+        id: pasCollectVote
+        step: '@collectStepWithVote'
+        project: '@p6'
+        position: 7
+    pas20:
+        id: pas20
+        step: '@collectstep3'
+        project: '@p7'
+        position: 1
+    pas21:
+        id: pas21
+        step: '@selectionstep4'
+        project: '@p7'
+        position: 2
+    pas22:
+        id: pas22
+        step: '@selectionstep5'
+        project: '@p10'
+        position: 2
+    pas23:
+        id: pas23
+        step: '@selectionstep6'
+        project: '@p6'
+        position: 6
+    pas24:
+        id: pas24
+        step: '@questionnairestep1'
+        project: '@p8'
+        position: 2
+    pas25:
+        id: pas25
+        step: '@questionnairestep2'
+        project: '@p8'
+        position: 3
+    pasJump:
+        id: pasJump
+        step: '@questionnairestepJump'
+        project: '@p8'
+        position: 4
+    pasJump2:
+        id: pasJump2
+        step: '@questionnairestepJump2'
+        project: '@p8'
+        position: 5
+    pas26:
+        id: pas26
+        step: '@questionnairestep3'
+        project: '@p8'
+        position: 6
+    pas27:
+        id: pas27
+        step: '@pstep2'
+        project: '@p8'
+        position: 1
+    pas28:
+        id: pas28
+        step: '@collectstep4'
+        project: '@p6'
+        position: 2
+    pas29:
+        id: pas29
+        step: '@selectionstep7'
+        project: '@p6'
+        position: 10
+    pas30:
+        id: pas30
+        step: '@collectstep5'
+        project: '@p9'
+        position: 1
+    pas31:
+        id: pas31
+        step: '@collectstep6'
+        project: '@p10'
+        position: 1
+    pas32:
+        id: pas32
+        step: '@collectstep7'
+        project: '@p11'
+        position: 1
+    pas33:
+        id: pas33
+        step: '@selectionstep8'
+        project: '@p11'
+        position: 2
+    pas34:
+        id: pas34
+        step: '@pstep3'
+        project: '@p12'
+        position: 1
+    pas35:
+        id: pas35
+        step: '@collectstep8'
+        project: '@p13'
+        position: 1
+    pas36:
+        id: pas36
+        step: '@pstep4'
+        project: '@p14'
+        position: 1
+    pas37:
+        id: pas37
+        step: '@collectstepVoteClassement'
+        project: '@p15'
+        position: 1
+    pas38:
+        id: pas38
+        step: '@selectionstepVoteClassement'
+        project: '@p15'
+        position: 2
+    pas39:
+        id: pas39
+        step: '@collectstep9'
+        project: '@p17'
+        position: 1
+    pas40:
+        id: pas40
+        step: '@collectstep10'
+        project: '@p18'
+        position: 1
+    pas41:
+        id: pas41
+        step: '@collectstep11'
+        project: '@p19'
+        position: 1
+    pas42:
+        id: pas42
+        step: '@pstep5'
+        project: '@p20'
+        position: 1
+    pas43:
+        id: pas43
+        step: '@collectstep12'
+        project: '@p20'
+        position: 2
+    pas44:
+        id: pas44
+        step: '@collectQuestionVoteAvecClassement'
+        project: '@p21'
+        position: 1
+    pas45:
+        id: pas45
+        step: '@selectionQuestionStepVoteClassement'
+        project: '@p21'
+        position: 2
+    pas47:
+        id: pas47
+        step: '@cstep6'
+        project: '@p19'
+        position: 2
+    pasMultiConsultation1:
+        id: pasMultiConsultation1
+        step: '@multiCstep1'
+        project: '@p2'
+        position: 4
+    pas48:
+        id: pas48
+        step: '@questionnairestep4'
+        project: '@p18'
+        position: 2
+    pas49:
+        id: pas49
+        step: '@questionnairestep5'
+        project: '@p24'
+        position: 1
+    pas50:
+        id: pas50
+        step: '@cstep7'
+        project: '@p18'
+        position: 3
+    pas51:
+        id: pas51
+        step: '@cstep8'
+        project: '@p20'
+        position: 3
+    pas52:
+        id: pas52
+        step: '@cstepOpinions'
+        project: '@project25'
+        position: 1
+    pas53:
+        id: pas53
+        step: '@collectstepWithQuestionsToTrash'
+        project: '@project25'
+        position: 1
+    pas54:
+        id: pas54
+        step: '@cstepProjectWithLongName'
+        project: '@project26'
+        position: 1
+    pas55:
+        id: pas55
+        step: '@questionnaireStepLotChoices'
+        project: '@p8'
+        position: 7
+    pas56:
+        id: pas56
+        step: '@collectstep13'
+        project: '@project27'
+        position: 1
+    pas57:
+        id: pas57
+        step: '@selectionstep9'
+        project: '@project27'
+        position: 2
+    pasIdf1:
+        id: pasIdf1
+        step: '@collectstepIdf'
+        project: '@projectIdf'
+        position: 1
+    pasFr:
+        id: pasFr
+        step: '@collectstepFrench'
+        project: '@p27'
+        position: 1
+    pasCorona:
+        id: pasCorona
+        step: '@collectstepCorona'
+        project: '@projectCorona'
+        position: 1

@@ -1,43 +1,61 @@
 Capco\AppBundle\Entity\Status:
-  status1:
-    id: status1
-    name: En cours
-    position: 0
-    step: '@collectstep1'
-    color: info
-  status2:
-    id: status2
-    name: Approuvé
-    position: 1
-    step: '@collectstep1'
-    color: success
-  status3:
-    id: status3
-    name: Rejeté
-    position: 2
-    step: '@collectstep1'
-    color: danger
-  status4:
-    id: status4
-    name: Soumis au vote
-    position: 1
-    step: '@selectionstep1'
-    color: info
-  status5:
-    id: status5
-    name: Vote gagné
-    position: 2
-    step: '@selectionstep1'
-    color: success
-  status6:
-    id: status6
-    name: Vainqueur
-    position: 1
-    step: '@selectionstep2'
-    color: success
-  status7:
-    id: status7
-    name: En cours
-    position: 0
-    step: '@collectstep4'
-    color: info
+    status1:
+        id: status1
+        name: En cours
+        position: 0
+        step: '@collectstep1'
+        color: info
+    status2:
+        id: status2
+        name: Approuvé
+        position: 1
+        step: '@collectstep1'
+        color: success
+    status3:
+        id: status3
+        name: Rejeté
+        position: 2
+        step: '@collectstep1'
+        color: danger
+    status4:
+        id: status4
+        name: Soumis au vote
+        position: 1
+        step: '@selectionstep1'
+        color: info
+    status5:
+        id: status5
+        name: Vote gagné
+        position: 2
+        step: '@selectionstep1'
+        color: success
+    status6:
+        id: status6
+        name: Vainqueur
+        position: 1
+        step: '@selectionstep2'
+        color: success
+    status7:
+        id: status7
+        name: En cours
+        position: 0
+        step: '@collectstep4'
+        color: info
+    status8:
+        id: status8
+        name: Coroned
+        position: 0
+        step: '@collectstep13'
+        color: danger
+    status9:
+        id: status9
+        name: confined
+        position: 1
+        step: '@collectstep13'
+        color: info
+    status10:
+        id: status10
+        name: gestes barrièred
+        position: 1
+        step: '@collectstep13'
+        color: success

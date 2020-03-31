@@ -449,6 +449,39 @@ type AnalyseProposalAnalysisPayload {
   clientMutationId: String
 }
 
+"""An analysis configuration."""
+type AnalysisConfiguration {
+  """The ID of an object."""
+  id: ID!
+
+  """The related ProposalForm."""
+  proposalForm: ProposalForm!
+
+  """The evaluation form of the analysis"""
+  evaluationForm: Questionnaire
+
+  """The step on which the analysis is based on."""
+  analysisStep: Step
+
+  """The date on which the related decision will become effective"""
+  effectiveDate: DateTime
+
+  """The available favourable statuses to apply on contributions."""
+  favourableStatus: Status
+
+  """The unfavourable status to apply on contributions."""
+  unfavourableStatuses: [Status!]
+
+  """The step to which proposals will be moved."""
+  moveToSelectionStep: SelectionStep
+
+  """The creation date."""
+  createdAt: DateTime!
+
+  """The last update date."""
+  updatedAt: DateTime
+}
+
 """A contribution"""
 type Answer {
   """Identifies the date and time when the object was created."""
@@ -1706,6 +1739,36 @@ enum ConcreteStepType {
 
   """Represent a synthesis step"""
   SYNTHESIS
+}
+
+input ConfigureAnalysisInput {
+  """The related proposal form id."""
+  proposalFormId: ID!
+
+  """The related evaluation form id."""
+  evaluationFormId: ID
+
+  """The step on which the analysis is based on."""
+  analysisStepId: ID!
+
+  """The effective date of the taken decision."""
+  effectiveDate: DateTime
+
+  """The favourable status to apply on contributions."""
+  favourableStatus: ID
+
+  """The available unfavourable statuses to, apply on contributions."""
+  unfavourableStatuses: [ID!]
+
+  """The selection step on which the contributions are moved on."""
+  moveToSelectionStepId: ID!
+  clientMutationId: String
+}
+
+type ConfigureAnalysisPayload {
+  """The analysis configuration."""
+  analysisConfiguration: AnalysisConfiguration
+  clientMutationId: String
 }
 
 """A consultation"""
@@ -4140,6 +4203,7 @@ type Mutation {
   changeFont(input: InternalChangeFontInput!): InternalChangeFontPayload
   deleteFont(input: InternalDeleteFontInput!): InternalDeleteFontPayload
   assignSupervisorToProposals(input: AssignSupervisorToProposalsInput!): AssignSupervisorToProposalsPayload
+  configureAnalysis(input: ConfigureAnalysisInput!): ConfigureAnalysisPayload
   updateRedirectIOKey(input: UpdateRedirectIOProjectIdInput!): UpdateRedirectIOProjectIdPayload
 }
 
@@ -6022,6 +6086,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   """can the viewer send a contact message to the proposals author"""
   canContact: Boolean!
+
+  """The configuration for the related analysis."""
+  analysisConfiguration: AnalysisConfiguration
 }
 
 """Ways in which proposal connections can be ordered."""

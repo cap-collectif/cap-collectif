@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\AnalysisConfiguration:
+    analysisConfiguration1:
+        id: analysisConfiguration1
+        proposalForm: '@proposalform17'
+        analysisStep: '@collectstep13'
+        effectiveDate: null
+        unfavourableStatuses: ['@status8', '@status9']
+        favourableStatus: '@status10'
+        moveToSelectionStep: '@selectionstep9'
+        createdAt: <(new \DateTime('2015-01-01 02:00:00'))>
+        updatedAt: <(new \DateTime('2017-01-01 02:00:00'))>

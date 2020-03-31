@@ -1,0 +1,26 @@
+ConfigureAnalysisInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input type of ConfigureAnalysis mutation'
+        fields:
+            proposalFormId:
+                type: 'ID!'
+                description: 'The related proposal form id.'
+            evaluationFormId:
+                type: 'ID'
+                description: 'The related evaluation form id.'
+            analysisStepId:
+                type: 'ID!'
+                description: 'The step on which the analysis is based on.'
+            effectiveDate:
+                type: 'DateTime'
+                description: 'The effective date of the taken decision.'
+            favourableStatus:
+                type: 'ID'
+                description: 'The favourable status to apply on contributions.'
+            unfavourableStatuses:
+                type: '[ID!]'
+                description: 'The available unfavourable statuses to, apply on contributions.'
+            moveToSelectionStepId:
+                type: 'ID!'
+                description: 'The selection step on which the contributions are moved on.'

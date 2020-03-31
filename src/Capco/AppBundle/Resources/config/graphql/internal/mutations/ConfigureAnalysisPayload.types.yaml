@@ -1,0 +1,8 @@
+ConfigureAnalysisPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload type of ConfigureAnalysis mutation'
+        fields:
+            analysisConfiguration:
+                type: 'InternalAnalysisConfiguration'
+                description: 'The analysis configuration.'

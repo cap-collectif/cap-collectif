@@ -822,6 +822,15 @@ InternalMutation:
                     payloadType: AssignSupervisorToProposalsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AssignSupervisorToProposalsMutation", [value, getUser()])'
 
+            # AnalysisConfiguration
+            configureAnalysis:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: ConfigureAnalysisInput
+                    payloadType: ConfigureAnalysisPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ConfigureAnalysisMutation", [value, getUser()])'
+
             updateRedirectIOKey:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

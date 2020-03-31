@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProposalForm.analysisConfiguration does not fetch proposal form's analysis configuration when authenticated as user 1`] = `
+Object {
+  "collectstep": Object {
+    "form": Object {
+      "analysisConfiguration": null,
+      "id": "proposalform17",
+    },
+  },
+}
+`;
+
+exports[`ProposalForm.analysisConfiguration fetches proposal form's analysis configuration when authenticated as super admin 1`] = `
+Object {
+  "collectstep": Object {
+    "form": Object {
+      "analysisConfiguration": Object {
+        "analysisStep": Object {
+          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAxMw==",
+        },
+        "effectiveDate": null,
+        "evaluationForm": null,
+        "favourableStatus": Object {
+          "id": "status10",
+          "name": "gestes barrièred",
+        },
+        "unfavourableStatuses": Array [
+          Object {
+            "id": "status8",
+            "name": "Coroned",
+          },
+          Object {
+            "id": "status9",
+            "name": "confined",
+          },
+        ],
+      },
+      "id": "proposalform17",
+    },
+  },
+}
+`;

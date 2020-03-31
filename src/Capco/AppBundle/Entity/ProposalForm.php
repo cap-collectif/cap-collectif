@@ -246,6 +246,12 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
      */
     private $canContact = false;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\AnalysisConfiguration", mappedBy="proposalForm", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true, name="analysis_configuration")
+     */
+    private $analysisConfiguration;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -914,5 +920,18 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         $this->canContact = $canContact;
 
         return $this;
+    }
+
+    public function setAnalysisConfiguration(
+        ?AnalysisConfiguration $analysisConfiguration = null
+    ): self {
+        $this->analysisConfiguration = $analysisConfiguration;
+
+        return $this;
+    }
+
+    public function getAnalysisConfiguration(): ?AnalysisConfiguration
+    {
+        return $this->analysisConfiguration;
     }
 }

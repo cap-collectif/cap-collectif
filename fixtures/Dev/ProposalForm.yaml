@@ -1,344 +1,342 @@
 Capco\AppBundle\Entity\ProposalForm:
-  proposalform1:
-    id: proposalForm1
-    title: Collecte des propositions pour le budget 2016 de la Ville de Rennes
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    step: '@collectstep1'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration1'
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    usingDescription: true
-    usingIllustration: false
-    usingSummary: false
-    districtMandatory: true
-    usingCategories: true
-    themeMandatory: false
-    descriptionMandatory: false
-    categoryMandatory: true
-    usingAddress: true
-    proposalInAZoneRequired: true
-    zoomMap: 12
-    latMap: 48.1159675
-    lngMap: -1.7234738
-    reference: 1
-    evaluationForm: '@questionnaire4'
-    allowAknowledge: true
-  proposalform2:
-    id: proposalForm2
-    title: Formulaire de la collecte 2
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
-    step: '@collectstep2'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration2'
-    reference: 2
-  proposalform3:
-    id: proposalForm3
-    title: Formulaire de la collecte 3
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
-    step: '@collectstep3'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration3'
-    usingCategories: true
-    usingThemes: true
-    usingDistrict: true
-    reference: 3
-  proposalform4:
-    id: proposalForm4
-    title: Formulaire de la collecte 4
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
-    step: '@collectstep4'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration4'
-    reference: 4
-  proposalform5:
-    id: proposalForm5
-    title: Formulaire de la collecte 5
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
-    step: '@collectstep5'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration5'
-    reference: 5
-  proposalform6:
-    id: proposalForm6
-    title: Formulaire du dépôt fermé
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
-    step: '@collectstep6'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration6'
-    reference: 6
-  proposalform7:
-    id: proposalForm7
-    title: Formulaire de la collecte 7
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
-    step: '@collectstep7'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration7'
-    reference: 7
-  proposalform8:
-    id: proposalForm8
-    title: Formulaire de la collecte 8
-    description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
-    step: '@collectstep8'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration8'
-    reference: 8
-  proposalFormVote:
-    id: proposalFormVote
-    title: Collecte des propositions de vote pour le budget 2016 de la Ville de Rennes
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    step: '@collectStepWithVote'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration9'
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    usingDescription: true
-    usingIllustration: false
-    usingSummary: false
-    districtMandatory: true
-    descriptionMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    reference: 666
-  proposalFormVoteClassement:
-    id: proposalFormVoteClassement
-    title: Collecte des propositions à classer
-    description: En haut, en bas, à droite, à gauche…
-    step: '@collectstepVoteClassement'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration10'
-    usingThemes: false
-    usingDistrict: false
-    districtMandatory: false
-    usingCategories: false
-    themeMandatory: false
-    reference: 1337
-  proposalform9:
-    id: proposalForm9
-    title: Collecte des propositions pour le budget 2018 de la Ville de La Force
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    step: '@collectstep9'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration11'
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    usingDescription: true
-    descriptionMandatory: false
-    usingIllustration: false
-    usingSummary: false
-    districtMandatory: true
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    usingAddress: true
-    proposalInAZoneRequired: true
-    zoomMap: 12
-    latMap: 44.8799786
-    lngMap: 0.3404569
-    reference: 1980
-    evaluationForm: '@questionnaire6'
-    allowAknowledge: true
-  proposalform10:
-    id: proposalform10
-    title: Qui ? Quoi ? Comment conquerir le monde ?
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    step: '@collectstep10'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration12'
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: false
-    usingDescription: true
-    usingIllustration: false
-    descriptionMandatory: false
-    usingSummary: false
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    reference: 1664
-    evaluationForm: '@questionnaire7'
-    allowAknowledge: true
-  proposalform11:
-    id: proposalform11
-    title: CapcoBeer ?
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    step: '@collectstep11'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration13'
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: false
-    usingDescription: true
-    usingIllustration: false
-    usingSummary: false
-    descriptionMandatory: false
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    reference: 86
-    evaluationForm: '@questionnaire8'
-    allowAknowledge: true
-  proposalform12:
-    id: proposalform12
-    title: Collect des propositions
-    slug: collect-des-propositions
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    step: '@collectstep12'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration14'
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: false
-    usingDescription: true
-    usingIllustration: false
-    usingSummary: false
-    descriptionMandatory: false
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    reference: 111
-    evaluationForm: '@questionnaire9'
-    allowAknowledge: true
-  proposalform13:
-    id: proposalform13
-    title: Formulaire attaché à aucun projet
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    usingDescription: true
-    descriptionMandatory: false
-    usingIllustration: false
-    usingSummary: false
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    reference: 112
-    allowAknowledge: true
-  proposalform14:
-    id: proposalForm14
-    title: Poser une question
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    step: '@collectQuestionVoteAvecClassement'
-    notificationsConfiguration: '@proposalFormNotificationConfiguration15'
-    titleHelpText: Choisissez un titre pour votre question
-    themeHelpText: Sélectionnez un thème
-    descriptionHelpText: Pourquoi cette question ?
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: false
-    usingDescription: true
-    usingIllustration: false
-    usingSummary: true
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    descriptionMandatory: true
-    categoryMandatory: true
-    usingAddress: true
-    proposalInAZoneRequired: false
-    reference: 113
-    allowAknowledge: true
-    isProposalForm: false
-  proposalform15:
-    id: proposalform15
-    step: '@collectstepWithQuestions'
-    title: Formulaire attaché à une étape de collecte avec questions
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    usingDescription: true
-    descriptionMandatory: false
-    usingIllustration: false
-    usingSummary: false
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    reference: 114
-    allowAknowledge: true
-  proposalform16:
-    id: proposalform16
-    step: '@collectstepWithQuestionsToTrash'
-    title: Formulaire attaché à une étape de collecte avec questions qui va etre jetee
-    description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
-    titleHelpText: Choisissez un titre pour votre proposition
-    themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une zone géographique
-    descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingDistrict: true
-    usingDescription: true
-    descriptionMandatory: false
-    usingIllustration: false
-    usingSummary: false
-    districtMandatory: false
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
-    reference: 115
-    allowAknowledge: true
-  proposalform17:
-    id: proposalform17
-    title: Ils ne servent que des pintes ?
-    description: J'en veux une ! Vous en avez déjà une à moitié pleine !
-    step: '@collectstep13'
-    evaluationForm: '@questionnaire11'
-    reference: 17
-  proposalformIdf:
-    id: proposalformIdf
-    title: Formulaire du budget participatif de l'Idf
-    description: Avec un saut conditionel et oui rien que ça.
-    step: '@collectstepIdf'
-    reference: 18
-    usingThemes: false
-    usingAddress: true
-    usingDistrict: true
-    usingDescription: true
-    usingIllustration: true
-    usingCategories: true
-    usingSummary: true
-    districtHelpText: "Indiquez le nom de la commune concernée. Sinon indiquez Région Île-de-France"
-    addressHelpText: "Précisez l'adresse principale où sera mis en oeuvre votre projet"
-    summaryHelpText: "En un clin d'oeil, donnez envie aux Franciliens d'en savoir plus sur votre projet"
-    districtMandatory: true
-    themeMandatory: false
-    descriptionMandatory: true
-    categoryMandatory: true
-  proposalformCorona:
-    id: proposalformCorona
-    title: Appel à proposition COVID-19
-    description: Déposez vos propositions pour se soutenir en cette période de confinement et de maladie
-    step: '@collectstepCorona'
-    reference: 19
-    usingDescription: true
-    descriptionMandatory: true
-    usingIllustration: true
-    canContact: true
+    proposalform1:
+        id: proposalForm1
+        title: Collecte des propositions pour le budget 2016 de la Ville de Rennes
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        step: '@collectstep1'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration1'
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: true
+        usingDescription: true
+        usingIllustration: false
+        usingSummary: false
+        districtMandatory: true
+        usingCategories: true
+        themeMandatory: false
+        descriptionMandatory: false
+        categoryMandatory: true
+        usingAddress: true
+        proposalInAZoneRequired: true
+        zoomMap: 12
+        latMap: 48.1159675
+        lngMap: -1.7234738
+        reference: 1
+        evaluationForm: '@questionnaire4'
+        allowAknowledge: true
+    proposalform2:
+        id: proposalForm2
+        title: Formulaire de la collecte 2
+        description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+        step: '@collectstep2'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration2'
+        reference: 2
+    proposalform3:
+        id: proposalForm3
+        title: Formulaire de la collecte 3
+        description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+        step: '@collectstep3'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration3'
+        usingCategories: true
+        usingThemes: true
+        usingDistrict: true
+        reference: 3
+    proposalform4:
+        id: proposalForm4
+        title: Formulaire de la collecte 4
+        description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+        step: '@collectstep4'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration4'
+        reference: 4
+    proposalform5:
+        id: proposalForm5
+        title: Formulaire de la collecte 5
+        description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+        step: '@collectstep5'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration5'
+        reference: 5
+    proposalform6:
+        id: proposalForm6
+        title: Formulaire du dépôt fermé
+        description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+        step: '@collectstep6'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration6'
+        reference: 6
+    proposalform7:
+        id: proposalForm7
+        title: Formulaire de la collecte 7
+        description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+        step: '@collectstep7'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration7'
+        reference: 7
+    proposalform8:
+        id: proposalForm8
+        title: Formulaire de la collecte 8
+        description: Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.
+        step: '@collectstep8'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration8'
+        reference: 8
+    proposalFormVote:
+        id: proposalFormVote
+        title: Collecte des propositions de vote pour le budget 2016 de la Ville de Rennes
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        step: '@collectStepWithVote'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration9'
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: true
+        usingDescription: true
+        usingIllustration: false
+        usingSummary: false
+        districtMandatory: true
+        descriptionMandatory: false
+        usingCategories: true
+        themeMandatory: false
+        reference: 666
+    proposalFormVoteClassement:
+        id: proposalFormVoteClassement
+        title: Collecte des propositions à classer
+        description: En haut, en bas, à droite, à gauche…
+        step: '@collectstepVoteClassement'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration10'
+        usingThemes: false
+        usingDistrict: false
+        districtMandatory: false
+        usingCategories: false
+        themeMandatory: false
+        reference: 1337
+    proposalform9:
+        id: proposalForm9
+        title: Collecte des propositions pour le budget 2018 de la Ville de La Force
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        step: '@collectstep9'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration11'
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: true
+        usingDescription: true
+        descriptionMandatory: false
+        usingIllustration: false
+        usingSummary: false
+        districtMandatory: true
+        usingCategories: true
+        themeMandatory: false
+        categoryMandatory: true
+        usingAddress: true
+        proposalInAZoneRequired: true
+        zoomMap: 12
+        latMap: 44.8799786
+        lngMap: 0.3404569
+        reference: 1980
+        evaluationForm: '@questionnaire6'
+        allowAknowledge: true
+    proposalform10:
+        id: proposalform10
+        title: Qui ? Quoi ? Comment conquerir le monde ?
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        step: '@collectstep10'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration12'
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: false
+        usingDescription: true
+        usingIllustration: false
+        descriptionMandatory: false
+        usingSummary: false
+        districtMandatory: false
+        usingCategories: true
+        themeMandatory: false
+        categoryMandatory: true
+        reference: 1664
+        evaluationForm: '@questionnaire7'
+        allowAknowledge: true
+    proposalform11:
+        id: proposalform11
+        title: CapcoBeer ?
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        step: '@collectstep11'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration13'
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: false
+        usingDescription: true
+        usingIllustration: false
+        usingSummary: false
+        descriptionMandatory: false
+        districtMandatory: false
+        usingCategories: true
+        themeMandatory: false
+        categoryMandatory: true
+        reference: 86
+        evaluationForm: '@questionnaire8'
+        allowAknowledge: true
+    proposalform12:
+        id: proposalform12
+        title: Collect des propositions
+        slug: collect-des-propositions
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        step: '@collectstep12'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration14'
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: false
+        usingDescription: true
+        usingIllustration: false
+        usingSummary: false
+        descriptionMandatory: false
+        districtMandatory: false
+        usingCategories: true
+        themeMandatory: false
+        categoryMandatory: true
+        reference: 111
+        evaluationForm: '@questionnaire9'
+        allowAknowledge: true
+    proposalform13:
+        id: proposalform13
+        title: Formulaire attaché à aucun projet
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: true
+        usingDescription: true
+        descriptionMandatory: false
+        usingIllustration: false
+        usingSummary: false
+        districtMandatory: false
+        usingCategories: true
+        themeMandatory: false
+        categoryMandatory: true
+        reference: 112
+        allowAknowledge: true
+    proposalform14:
+        id: proposalForm14
+        title: Poser une question
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        step: '@collectQuestionVoteAvecClassement'
+        notificationsConfiguration: '@proposalFormNotificationConfiguration15'
+        titleHelpText: Choisissez un titre pour votre question
+        themeHelpText: Sélectionnez un thème
+        descriptionHelpText: Pourquoi cette question ?
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: false
+        usingDescription: true
+        usingIllustration: false
+        usingSummary: true
+        districtMandatory: false
+        usingCategories: true
+        themeMandatory: false
+        descriptionMandatory: true
+        categoryMandatory: true
+        usingAddress: true
+        proposalInAZoneRequired: false
+        reference: 113
+        allowAknowledge: true
+        isProposalForm: false
+    proposalform15:
+        id: proposalform15
+        step: '@collectstepWithQuestions'
+        title: Formulaire attaché à une étape de collecte avec questions
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: true
+        usingDescription: true
+        descriptionMandatory: false
+        usingIllustration: false
+        usingSummary: false
+        districtMandatory: false
+        usingCategories: true
+        themeMandatory: false
+        categoryMandatory: true
+        reference: 114
+        allowAknowledge: true
+    proposalform16:
+        id: proposalform16
+        step: '@collectstepWithQuestionsToTrash'
+        title: Formulaire attaché à une étape de collecte avec questions qui va etre jetee
+        description: <stripslashes('\<p>\')>Nesciunt atque delectus occaecati nobis. Ipsa harum et eos.<stripslashes('\</p>\')>
+        titleHelpText: Choisissez un titre pour votre proposition
+        themeHelpText: Sélectionnez un thème
+        districtHelpText: Sélectionnez une zone géographique
+        descriptionHelpText: Décrivez votre proposition
+        categoryHelpText: Sélectionnez une catégorie.
+        usingThemes: true
+        usingDistrict: true
+        usingDescription: true
+        descriptionMandatory: false
+        usingIllustration: false
+        usingSummary: false
+        districtMandatory: false
+        usingCategories: true
+        themeMandatory: false
+        categoryMandatory: true
+        reference: 115
+        allowAknowledge: true
+    proposalform17:
+        id: proposalform17
+        title: Ils ne servent que des pintes ?
+        description: J'en veux une ! Vous en avez déjà une à moitié pleine !
+        step: '@collectstep13'
+        evaluationForm: '@questionnaire11'
+        analysisConfiguration: '@analysisConfiguration1'
+        reference: 17
+    proposalformIdf:
+        id: proposalformIdf
+        title: Formulaire du budget participatif de l'Idf
+        description: Avec un saut conditionel et oui rien que ça.
+        step: '@collectstepIdf'
+        reference: 18
+        usingThemes: false
+        usingAddress: true
+        usingDistrict: true
+        usingDescription: true
+        usingIllustration: true
+        usingCategories: true
+        usingSummary: true
+        districtMandatory: true
+        themeMandatory: false
+        descriptionMandatory: true
+        categoryMandatory: true
+    proposalformCorona:
+        id: proposalformCorona
+        title: Appel à proposition COVID-19
+        description: Déposez vos propositions pour se soutenir en cette période de confinement et de maladie
+        step: '@collectstepCorona'
+        reference: 19
+        usingDescription: true
+        descriptionMandatory: true
+        usingIllustration: true
+        canContact: true

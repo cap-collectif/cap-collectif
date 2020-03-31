@@ -14,7 +14,6 @@ use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
-use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -112,9 +111,22 @@ class ChangeProposalDecisionMutation implements MutationInterface
                 $isDone ? ProposalStatementState::DONE : ProposalStatementState::IN_PROGRESS
             );
         $post = $proposalDecision->getPost();
-        $post->setBody($body);
-        // Remove and add authors.
-        $this->handlePostAuthors($post, $authors);
+        if (
+            ($proposalAssessment = $proposal->getAssessment()) &&
+            $proposalAssessment->getOfficialResponse()
+        ) {
+            $post->setBody($proposalAssessment->getOfficialResponse());
+        } else {
+            $post->setBody($body);
+        }
+
+        if (!empty($authors)) {
+            $authorsIds = [];
+            foreach ($authors as $author) {
+                $authorsIds[] = GlobalId::fromGlobalId($author)['id'];
+            }
+            $post->setAuthors($this->userRepository->findBy(['id' => $authorsIds]));
+        }
 
         if ($refusedReason) {
             /** @var Status $status */
@@ -124,14 +136,17 @@ class ChangeProposalDecisionMutation implements MutationInterface
 
         // If the decision is given, change state of the assessment if its not already given.
         if ($isDone) {
-            if (($proposalAssessment = $proposal->getAssessment()) && ProposalStatementState::IN_PROGRESS === $proposalAssessment->getState()) {
+            if (
+                $proposalAssessment &&
+                ProposalStatementState::IN_PROGRESS === $proposalAssessment->getState()
+            ) {
                 $proposalAssessment->setState(ProposalStatementState::TOO_LATE);
             }
-            
-            if ($proposal->getAnalyses() !== null) {
+
+            if (null !== $proposal->getAnalyses()) {
                 /** @var ProposalAnalysis $analysis */
                 foreach ($proposal->getAnalyses() as $analysis) {
-                    if ($analysis->getState() === ProposalStatementState::IN_PROGRESS) {
+                    if (ProposalStatementState::IN_PROGRESS === $analysis->getState()) {
                         $analysis->setState(ProposalStatementState::TOO_LATE);
                     }
                 }
@@ -158,32 +173,6 @@ class ChangeProposalDecisionMutation implements MutationInterface
             'decision' => $proposalDecision,
             'errorCode' => null,
         ];
-    }
-
-    private function handlePostAuthors(Post $post, array $requestAuthors): void
-    {
-        $existingAuthors = array_map(static function (User $author) {
-            return $author->getId();
-        }, $post->getAuthors()->toArray());
-        $authorIds = array_map(static function (string $authorGlobalId) {
-            return GlobalId::fromGlobalId($authorGlobalId)['id'];
-        }, $requestAuthors);
-        $authorsToDelete = $this->userRepository->findBy([
-            'id' => array_diff($existingAuthors, $authorIds),
-        ]);
-        foreach ($authorsToDelete as $authorToDelete) {
-            // @var User $postAuthor
-            $post->removeAuthor($authorToDelete);
-            unset($existingAuthors[$authorToDelete->getId()]);
-        }
-
-        $authorsToAdd = $this->userRepository->findBy([
-            'id' => array_diff($authorIds, $existingAuthors),
-        ]);
-        foreach ($authorsToAdd as $authorToAdd) {
-            // @var User $user
-            $post->addAuthor($authorToAdd);
-        }
     }
 
     private function createProposalDecision(Proposal $proposal): ProposalDecision

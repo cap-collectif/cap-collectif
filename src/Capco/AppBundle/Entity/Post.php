@@ -13,6 +13,8 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Utils\Text;
+use Capco\MediaBundle\Entity\Media;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,7 +25,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements CommentableInterface, IndexableInterface, SonataTranslatableInterface, Translatable
+class Post implements
+    CommentableInterface,
+    IndexableInterface,
+    SonataTranslatableInterface,
+    Translatable
 {
     use CommentableTrait;
     use UuidTrait;
@@ -152,8 +158,10 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return $this;
     }
 
-    public function getMetaDescription(?string $locale = null, ?bool $fallbackToDefault = false): ?string
-    {
+    public function getMetaDescription(
+        ?string $locale = null,
+        ?bool $fallbackToDefault = false
+    ): ?string {
         return $this->translate($locale, $fallbackToDefault)->getMetaDescription();
     }
 
@@ -181,8 +189,10 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return $this->translate($locale, $fallbackToDefault)->getBodyText();
     }
 
-    public function getAbstractOrBeginningOfTheText(?string $locale = null, ?bool $fallbackToDefault = false)
-    {
+    public function getAbstractOrBeginningOfTheText(
+        ?string $locale = null,
+        ?bool $fallbackToDefault = false
+    ) {
         if ($this->getAbstract($locale, $fallbackToDefault)) {
             return Text::htmlToString($this->getAbstract($locale, $fallbackToDefault));
         }
@@ -195,26 +205,14 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return Text::htmlToString($abstract);
     }
 
-    /**
-     * Set isPublished.
-     *
-     * @param bool $isPublished
-     *
-     * @return Post
-     */
-    public function setIsPublished($isPublished)
+    public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
 
         return $this;
     }
 
-    /**
-     * Get isPublished.
-     *
-     * @return bool
-     */
-    public function getIsPublished()
+    public function getIsPublished(): bool
     {
         return $this->isPublished;
     }
@@ -231,61 +229,31 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return $this->displayedOnBlog;
     }
 
-    /**
-     * Set publishedAt.
-     *
-     * @param \DateTime $publishedAt
-     *
-     * @return Post
-     */
-    public function setPublishedAt($publishedAt)
+    public function setPublishedAt(?\DateTime $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
 
         return $this;
     }
 
-    /**
-     * Get publishedAt.
-     *
-     * @return \DateTime
-     */
-    public function getPublishedAt()
+    public function getPublishedAt(): ?\DateTime
     {
         return $this->publishedAt;
     }
 
-    /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Post
-     */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    /**
-     * Add author.
-     *
-     *
-     * @return Post
-     */
-    public function addAuthor(\Capco\UserBundle\Entity\User $author)
+    public function addAuthor(User $author): self
     {
         if (!$this->Authors->contains($author)) {
             $this->Authors[] = $author;
@@ -294,17 +262,18 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return $this;
     }
 
-    /**
-     * Remove author.
-     */
-    public function removeAuthor(\Capco\UserBundle\Entity\User $author)
+    public function removeAuthor(User $author): self
     {
         $this->Authors->removeElement($author);
     }
 
-    /**
-     * Get authors.
-     */
+    public function setAuthors(array $authors = []): self
+    {
+        $this->Authors = new ArrayCollection($authors);
+
+        return $this;
+    }
+
     public function getAuthors(): Collection
     {
         return $this->Authors;
@@ -312,12 +281,8 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
 
     /**
      * Returns true if the post is publicly visible at a given date.
-     *
-     * @param \DateTime $now
-     *
-     * @return bool
      */
-    public function isPublic($now = null)
+    public function isPublic(?\DateTime $now = null): bool
     {
         if (null === $now) {
             $now = new \DateTime();
@@ -326,48 +291,24 @@ class Post implements CommentableInterface, IndexableInterface, SonataTranslatab
         return $this->isPublished && $now > $this->publishedAt;
     }
 
-    /**
-     * Set media.
-     *
-     * @param \Capco\MediaBundle\Entity\Media $media
-     *
-     * @return Post
-     */
-    public function setMedia(\Capco\MediaBundle\Entity\Media $media = null)
+    public function setMedia(Media $media = null): self
     {
         $this->media = $media;
 
         return $this;
     }
 
-    /**
-     * Get media.
-     *
-     * @return \Capco\MediaBundle\Entity\Media
-     */
-    public function getMedia()
+    public function getMedia(): ?Media
     {
         return $this->media;
     }
 
-    /**
-     * Get themes.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getThemes()
+    public function getThemes(): Collection
     {
         return $this->themes;
     }
 
-    /**
-     * Add theme.
-     *
-     * @param \Capco\AppBundle\Entity\Theme $theme
-     *
-     * @return $this
-     */
-    public function addTheme(Theme $theme)
+    public function addTheme(Theme $theme): self
     {
         if (!$this->themes->contains($theme)) {
             $this->themes->add($theme);
