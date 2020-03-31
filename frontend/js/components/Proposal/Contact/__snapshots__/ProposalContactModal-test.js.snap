@@ -22,7 +22,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[MockFunction]}
+  onHide={[Function]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={false}
@@ -69,6 +69,18 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
       />
       <Field
         component={[Function]}
+        id="ProposalFormContactModal-replyEmail"
+        label={
+          <FormattedMessage
+            id="your-email-address"
+            values={Object {}}
+          />
+        }
+        name="replyEmail"
+        type="email"
+      />
+      <Field
+        component={[Function]}
         id="ProposalFormContactModal-message"
         label={
           <FormattedMessage
@@ -79,18 +91,6 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
         name="message"
         rows={4}
         type="textarea"
-      />
-      <Field
-        component={[Function]}
-        id="ProposalFormContactModal-replyEmail"
-        label={
-          <FormattedMessage
-            id="your-email-address"
-            values={Object {}}
-          />
-        }
-        name="replyEmail"
-        type="email"
       />
       <Field
         component={[Function]}
@@ -105,10 +105,10 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
     >
       <CloseButton
         label="global.cancel"
-        onClose={[MockFunction]}
+        onClose={[Function]}
       />
       <Connect(SubmitButton)
-        disabled={false}
+        disabled={true}
         id="ProposalFormContactModal-submit"
         isSubmitting={false}
         label="global.validate"

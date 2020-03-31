@@ -79,9 +79,17 @@ export const ProposalContactModal = ({
   onClose,
   invalid,
   submitting,
+  pristine,
+  reset,
   authorName,
 }: Props) => (
-  <Modal show={show} onHide={onClose} aria-labelledby="ProposalFormContactModal-modal">
+  <Modal
+    show={show}
+    onHide={() => {
+      onClose();
+      reset();
+    }}
+    aria-labelledby="ProposalFormContactModal-modal">
     <form onSubmit={handleSubmit} id={formName}>
       <Modal.Header closeButton>
         <Modal.Title
@@ -98,6 +106,13 @@ export const ProposalContactModal = ({
           component={component}
         />
         <Field
+          label={<FormattedMessage id="your-email-address" />}
+          id="ProposalFormContactModal-replyEmail"
+          name="replyEmail"
+          type="email"
+          component={component}
+        />
+        <Field
           label={<FormattedMessage id="contact.your-message" />}
           id="ProposalFormContactModal-message"
           name="message"
@@ -105,22 +120,20 @@ export const ProposalContactModal = ({
           rows={4}
           component={component}
         />
-        <Field
-          label={<FormattedMessage id="your-email-address" />}
-          id="ProposalFormContactModal-replyEmail"
-          name="replyEmail"
-          type="email"
-          component={component}
-        />
         <Field id="captcha" component={component} name="captcha" type="captcha" />
       </Modal.Body>
       <Modal.Footer>
-        <CloseButton onClose={onClose} />
+        <CloseButton
+          onClose={() => {
+            onClose();
+            reset();
+          }}
+        />
         <SubmitButton
           id="ProposalFormContactModal-submit"
           label="global.validate"
           isSubmitting={submitting}
-          disabled={invalid || submitting}
+          disabled={invalid || submitting || pristine}
           onSubmit={onSubmit}
         />
       </Modal.Footer>
