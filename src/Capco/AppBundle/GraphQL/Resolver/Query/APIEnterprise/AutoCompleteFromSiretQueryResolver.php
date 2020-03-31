@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\HttpClient\HttpClient;
@@ -13,14 +14,17 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
     private $rootDir;
     private $pdfGenerator;
     private $autoCompleteUtils;
+    private $cache;
     public const AUTOCOMPLETE_SIRET_CACHE_KEY = 'AUTOCOMPLETE_SIRET_CACHE_KEY';
+    public const AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY = 'AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY';
 
-    public function __construct(APIEnterprisePdfGenerator $pdfGenerator, APIEnterpriseAutoCompleteUtils $autoCompleteUtils, $apiToken, $rootDir)
+    public function __construct(RedisCache $cache, APIEnterprisePdfGenerator $pdfGenerator, APIEnterpriseAutoCompleteUtils $autoCompleteUtils, $apiToken, $rootDir)
     {
         $this->apiToken = $apiToken;
         $this->pdfGenerator = $pdfGenerator;
         $this->autoCompleteUtils = $autoCompleteUtils;
         $this->rootDir = $rootDir;
+        $this->cache = $cache;
     }
 
     public function __invoke(Arg $args): array
@@ -32,6 +36,11 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         $type = $args->offsetGet('type');
         $siret = $args->offsetGet('siret');
         $siren = substr($siret, 0,9);
+        $cacheVisibilityKey = $siret . '_' . self::AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY;
+
+        if ($this->cache->hasItem($cacheVisibilityKey)){
+            return $this->cache->getItem($cacheVisibilityKey)->get();
+        }
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,
@@ -79,10 +88,14 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
                     'sirenSituation' => $sirenSituPDF
                 ])
             );
-            return array_merge($basicInfo, [
+
+            $apiResponse = array_merge($basicInfo, [
                 'availableKbis' => isset($kbis),
                 'availableTurnover' => isset($exercices),
             ]);
+            $this->autoCompleteUtils->saveInCache($cacheVisibilityKey,
+                $apiResponse);
+            return $apiResponse;
         }
 
         if ($type === APIEnterpriseTypeResolver::ENTERPRISE) {
@@ -103,6 +116,8 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             array_merge($basicInfo, [
                 'sirenSituation' => $sirenSituPDF
             ]));
+
+        $this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $basicInfo);
         return $basicInfo;
     }
 }

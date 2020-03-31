@@ -112,6 +112,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                 $values['responses'][62]['medias'] = $this->setMediaFromAPIOrRequest($values['responses'][62]['medias'], $docInfo['kbis']);
                 break;
         }
+        $event->setData($values);
     }
 
     public function prefillForm(FormEvent $event): void

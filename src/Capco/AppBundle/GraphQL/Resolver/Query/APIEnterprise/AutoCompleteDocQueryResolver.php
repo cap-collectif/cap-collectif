@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\HttpClient\HttpClient;
@@ -13,15 +14,18 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
     private $apiToken;
     private $autoCompleteUtils;
     private $rootDir;
+    private $cache;
     public const AUTOCOMPLETE_DOC_CACHE_KEY = 'AUTOCOMPLETE_DOC_CACHE_KEY';
+    public const AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY = 'AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY';
 
 
-    public function __construct(APIEnterprisePdfGenerator $pdfGenerator, APIEnterpriseAutoCompleteUtils $autoCompleteUtils, $apiToken, $rootDir)
+    public function __construct(RedisCache $cache, APIEnterprisePdfGenerator $pdfGenerator, APIEnterpriseAutoCompleteUtils $autoCompleteUtils, $apiToken, $rootDir)
     {
         $this->pdfGenerator = $pdfGenerator;
         $this->apiToken = $apiToken;
         $this->autoCompleteUtils = $autoCompleteUtils;
         $this->rootDir = $rootDir;
+        $this->cache = $cache;
     }
 
     public function __invoke(Arg $args): array
@@ -34,6 +38,11 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $id = $args->offsetGet('id');
         $type = $args->offsetGet('type');
         $docs = [];
+        $visibilityCacheKey = $id . '_' . self::AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY;
+
+        if ($this->cache->hasItem($visibilityCacheKey)){
+            return $this->cache->getItem($visibilityCacheKey)->get();
+        }
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,
@@ -58,9 +67,11 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 [
                     'kbis' => $kbis
                 ]);
-            return [
+            $docs = [
                 'availableKbis' => isset($kbis),
             ];
+            $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
+            return $docs;
         }
 
         //If the request returns an exception, it will be thrown when accessing the data
@@ -132,7 +143,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                     'kbis' => $kbis,
                 ]);
         }
-
+        $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
         return $docs;
     }
 }

@@ -73,7 +73,11 @@ const getMatchingObject = (object: Object, type: string) => {
       throw new Error('Unknown type.');
   }
 };
-
+// Once data fetched, we must always show:
+// Raison sociale
+// Adresse du siège social
+// Prénom et Nom du représentant légal
+// Qualité du représentant légal
 const showAPIVisibleQuestions = (indexes: Array<number>, questions: Questions) => {
   indexes.forEach((index) =>{
     commitLocalUpdate(environment, store => {
@@ -145,19 +149,19 @@ export const dispatchValuesToForm = (dispatch: Dispatch, object: Object, type: s
 
   switch (type) {
     case API_ENTERPRISE_ASSOC:
-      showAPIVisibleQuestions([13, 14], questions);
+      showAPIVisibleQuestions([13, 14, 15, 16], questions);
       dispatchFromApi(dispatch, formName, orderedSiretAssocMapping, questions);
       break;
     case API_ENTERPRISE_ASSOC_RNA:
-      showAPIVisibleQuestions([28, 29], questions);
+      showAPIVisibleQuestions([28, 29, 30, 31], questions);
       dispatchFromApi(dispatch, formName, orderedRNAAssocMapping, questions);
       break;
     case API_ENTERPRISE_ENTER:
-      showAPIVisibleQuestions([45, 46], questions);
+      showAPIVisibleQuestions([45, 46, 47, 48], questions);
       dispatchFromApi(dispatch, formName, orderedEnterpriseMapping, questions);
       break;
     case API_ENTERPRISE_PUB_ORGA:
-      showAPIVisibleQuestions([57, 58], questions);
+      showAPIVisibleQuestions([57, 58, 59, 60], questions);
       dispatchFromApi(dispatch, formName, orderedPublicOrgaMapping, questions);
       break;
     case API_ENTERPRISE_ASSOC_DOC:
