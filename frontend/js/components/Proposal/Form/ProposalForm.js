@@ -105,6 +105,7 @@ type Props = {|
   ...RelayProps,
   +intl: IntlShape,
   +themes: Array<Object>,
+  +instanceName: string,
   +dispatch: Dispatch,
   +features: FeatureToggles,
   +titleValue: ?string,
@@ -276,8 +277,12 @@ export class ProposalForm extends React.Component<Props, State> {
 
   componentDidMount() {
     window.addEventListener('beforeunload', onUnload);
-    const { responses, proposalForm, dispatch } = this.props;
-    if (responses.length > 70) {
+    const { responses, proposalForm, dispatch, instanceName } = this.props;
+    if (
+      instanceName === 'idf-bp-dedicated' ||
+      instanceName === 'dev' ||
+      instanceName === '10091-api-enterprise-part-2'
+    ) {
       // The two following lines are using flowfix me because ResponseInReduxForm seems broken (see other uses)
       // $FlowFixMe
       const siret: ?string = responses[12] && responses[12].value;
@@ -629,6 +634,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     addressValue: selector(state, 'address'),
     features: state.default.features,
     themes: state.default.themes,
+    instanceName: state.default.instanceName,
     currentStepId: state.project.currentProjectStepById,
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
   };

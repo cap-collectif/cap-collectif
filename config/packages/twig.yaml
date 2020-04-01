@@ -1,41 +1,42 @@
 twig:
-  debug: '%kernel.debug%'
-  strict_variables: '%kernel.debug%'
-  form_themes:
-    - 'CapcoAppBundle:Form:bootstrap.html.twig'
-    - 'CapcoAppBundle:Form:media_widgets.html.twig'
-    - 'SonataCoreBundle:Form:datepicker.html.twig'
-    - 'CapcoAppBundle:Form:ckeditor_widget.html.twig'
-  globals:
-    defaultLocale: '%locale%'
-    locales: '%locales%'
-    facebook_app_id: '%facebook_app_id%'
-    app_version: '%app_version%'
-    google_maps_key: '%google_maps_key%'
-    # Register here any services accessibles in templates
-    opinionVersionsResolver: '@Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionVersionsResolver'
-    userRepliesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserRepliesResolver'
-    userVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserVotesResolver'
-    userProjectsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserProjectsResolver'
-    userProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver'
-    userOpinionsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserOpinionsResolver'
-    userArgumentsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserArgumentsResolver'
-    projectProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectProposalsResolver'
-    projectVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver'
-    projectContributorsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver'
-    proposalPublicationResolver: '@Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalPublicationStatusResolver'
-    replyPublicationStatusResolver: '@Capco\AppBundle\GraphQL\Resolver\Reply\ReplyPublicationStatusResolver'
-    projectContributionResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributionResolver'
-    publicApiKeyRepo: '@Capco\AppBundle\Repository\PublicApiTokenRepository'
-    projectUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver'
-    eventUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver'
-    userSourcesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserSourcesResolver'
-    userContributionsCountResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserContributionsCountResolver'
-    userCommentsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserCommentsResolver'
-    userOpinionVersionResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserOpinionVersionResolver'
-    mediaUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver'
-  paths:
-    '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes:
+        - 'CapcoAppBundle:Form:bootstrap.html.twig'
+        - 'CapcoAppBundle:Form:media_widgets.html.twig'
+        - 'SonataCoreBundle:Form:datepicker.html.twig'
+        - 'CapcoAppBundle:Form:ckeditor_widget.html.twig'
+    globals:
+        instanceName: '%instance_name%'
+        defaultLocale: '%locale%'
+        locales: '%locales%'
+        facebook_app_id: '%facebook_app_id%'
+        app_version: '%app_version%'
+        google_maps_key: '%google_maps_key%'
+        # Register here any services accessibles in templates
+        opinionVersionsResolver: '@Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionVersionsResolver'
+        userRepliesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserRepliesResolver'
+        userVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserVotesResolver'
+        userProjectsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserProjectsResolver'
+        userProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserProposalsResolver'
+        userOpinionsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserOpinionsResolver'
+        userArgumentsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserArgumentsResolver'
+        projectProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectProposalsResolver'
+        projectVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver'
+        projectContributorsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver'
+        proposalPublicationResolver: '@Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalPublicationStatusResolver'
+        replyPublicationStatusResolver: '@Capco\AppBundle\GraphQL\Resolver\Reply\ReplyPublicationStatusResolver'
+        projectContributionResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributionResolver'
+        publicApiKeyRepo: '@Capco\AppBundle\Repository\PublicApiTokenRepository'
+        projectUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver'
+        eventUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver'
+        userSourcesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserSourcesResolver'
+        userContributionsCountResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserContributionsCountResolver'
+        userCommentsResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserCommentsResolver'
+        userOpinionVersionResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserOpinionVersionResolver'
+        mediaUrlResolver: '@Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver'
+    paths:
+        '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail
 
 services:
     _defaults:
@@ -53,7 +54,14 @@ services:
 
     Capco\AppBundle\Twig\MediaExtension:
         public: true
-        arguments: ['@sonata.media.pool', '@sonata.media.manager.media', '@service_container', '%router.request_context.host%', '%assets_host%']
+        arguments:
+            [
+                '@sonata.media.pool',
+                '@sonata.media.manager.media',
+                '@service_container',
+                '%router.request_context.host%',
+                '%assets_host%',
+            ]
 
     Capco\AppBundle\Twig\ThemeExtension:
         arguments:

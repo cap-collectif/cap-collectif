@@ -175,6 +175,7 @@ describe('<ProposalForm />', () => {
       districts: true,
     },
     titleValue: 'Proposal title',
+    instanceName: 'dev',
     addressValue: null,
     proposal: {
       id: 'proposal1',
