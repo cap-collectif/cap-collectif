@@ -48,7 +48,8 @@ export const ProposalPageLogic = ({ query, features }: Props) => {
   const isLarge = width < sizes.bootstrapGrid.mdMax;
   const { proposal } = query;
   const hasAnalysis =
-    proposal?.viewerCanDecide || proposal?.viewerCanAnalyse || proposal?.viewerCanEvaluate;
+    (proposal?.viewerCanDecide || proposal?.viewerCanAnalyse || proposal?.viewerCanEvaluate) &&
+    features.unstable__analysis;
   const [show, setShow] = useState(isMobile && hasAnalysis);
   const [isAnalysing, setIsAnalysing] = useState(hasAnalysis);
   if (!proposal) return null;
