@@ -99,3 +99,21 @@ Capco\AppBundle\Entity\Post:
         themes: ['@theme1']
         projects: ['@project27']
         proposals: ['@proposal109']
+
+    post20:
+        id: post20
+        isPublished: true
+        createdAt: <(new \DateTime('2020-01-01 00:01:22'))>
+        publishedAt: <(new \DateTime('2020-01-01 00:01:22'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:01:22'))>
+        Authors:
+            - '@userSpyl'
+        proposals: ['@proposalIdf1']
+    post21:
+        id: post21
+        isPublished: false
+        createdAt: <(new \DateTime('2020-01-01 00:01:24'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:01:24'))>
+        Authors:
+            - '@userSpyl'
+        proposals: ['@proposalIdf2']

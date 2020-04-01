@@ -1,43 +1,41 @@
 Capco\AppBundle\Entity\ProposalDecisionMaker:
     proposalDecisionMaker1:
         __construct: ['@proposal109', '@user525']
-        proposal: '@proposal109'
-        decisionMaker: '@user525'
         createdAt: <identity((new \DateTime('2019-08-01 00:00:03'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:00:03'))->modify("+ 18 days"))>
     proposalDecisionMaker2:
         __construct: ['@proposal110', '@user525']
-        proposal: '@proposal110'
-        decisionMaker: '@user525'
         createdAt: <identity((new \DateTime('2019-08-01 00:00:04'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:00:04'))->modify("+ 18 days"))>
     proposalDecisionMaker3:
         __construct: ['@proposal111', '@user525']
-        proposal: '@proposal111'
-        decisionMaker: '@user525'
         createdAt: <identity((new \DateTime('2019-08-01 00:00:05'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:00:05'))->modify("+ 18 days"))>
     proposalDecisionMaker4:
         __construct: ['@proposal112', '@user525']
-        proposal: '@proposal112'
-        decisionMaker: '@user525'
         createdAt: <identity((new \DateTime('2019-08-01 00:00:07'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:00:07'))->modify("+ 18 days"))>
     proposalDecisionMaker5:
         __construct: ['@proposal113', '@user525']
-        proposal: '@proposal113'
-        decisionMaker: '@user525'
         createdAt: <identity((new \DateTime('2019-08-01 00:00:08'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:00:08'))->modify("+ 18 days"))>
     proposalDecisionMaker6:
         __construct: ['@proposal114', '@user525']
-        proposal: '@proposal114'
-        decisionMaker: '@user525'
         createdAt: <identity((new \DateTime('2019-08-01 00:00:09'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:00:09'))->modify("+ 18 days"))>
     proposalDecisionMaker7:
         __construct: ['@proposal115', '@user525']
-        proposal: '@proposal115'
-        decisionMaker: '@user525'
         createdAt: <identity((new \DateTime('2019-08-01 00:00:20'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-08-01 00:00:20'))->modify("+ 18 days"))>
+    proposalDecisionMakerIdf1:
+        __construct: ['@proposalIdf1', '@userSpyl']
+        createdAt: <identity((new \DateTime('2019-08-01 00:00:21'))->modify("+ 18 days"))>
+        updatedAt: <identity((new \DateTime('2019-08-01 00:00:21'))->modify("+ 18 days"))>
+    proposalDecisionMakerIdf2:
+        __construct: ['@proposalIdf2', '@userSpyl']
+        createdAt: <identity((new \DateTime('2019-08-01 00:00:22'))->modify("+ 18 days"))>
+        updatedAt: <identity((new \DateTime('2019-08-01 00:00:22'))->modify("+ 18 days"))>
+    proposalDecisionMakerIdf3:
+        __construct: ['@proposalIdf3', '@userSpyl']
+        createdAt: <identity((new \DateTime('2019-08-01 00:00:23'))->modify("+ 18 days"))>
+        updatedAt: <identity((new \DateTime('2019-08-01 00:00:23'))->modify("+ 18 days"))>

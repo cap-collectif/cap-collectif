@@ -14,8 +14,6 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
     private $decoratedFixtureLocator;
     private $fixturesDir;
 
-    private $step = 0;
-
     public function __construct(FixtureLocatorInterface $decoratedFixtureLocator, $fixturesDir)
     {
         $this->decoratedFixtureLocator = $decoratedFixtureLocator;

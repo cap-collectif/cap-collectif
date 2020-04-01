@@ -63,5 +63,23 @@ Capco\AppBundle\Entity\ProposalAssessment:
         body: 'Je trouve cette proposition pas très intéressante.'
         estimatedCost: 10000
         officialResponse: "En vertu de l'article 49 alinéa 3, ce projet aboutira pas."
-        createdAt: <(new \DateTime('2020-01-01 00:00:08'))>
-        updatedAt: <(new \DateTime('2020-01-01 00:00:08'))>
+    proposalAssessmentIdf1:
+        id: 'proposalAssessmentIdf1'
+        __construct: ['@proposalIdf1']
+        updatedBy: '@userMaximeQA'
+        state: 'FAVOURABLE'
+        body: 'Je trouve cette proposition très intéressante.'
+        estimatedCost: 10000
+        officialResponse: "En vertu de l'article 49 alinéa 3, ce projet aboutira."
+        createdAt: <(new \DateTime('2020-01-01 00:00:10'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:00:10'))>
+    proposalAssessmentIdf2:
+        id: 'proposalAssessmentIdf2'
+        __construct: ['@proposalIdf2']
+        updatedBy: '@userMaximeQA'
+        state: 'UNFAVOURABLE'
+        body: 'Je trouve cette proposition nulle.'
+        estimatedCost: 10000
+        officialResponse: "En vertu de l'article 49 alinéa 3, ce projet aboutira."
+        createdAt: <(new \DateTime('2020-01-01 00:00:11'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:00:11'))>

@@ -194,3 +194,32 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     proposal: '@proposal12'
     reply: '@reply2'
     value: { 'labels': ['Il bluffe'], 'other': null }
+
+  response1IdfProposal1:
+    question: '@multiplequestionIdfGrandOrLocal'
+    proposal: '@proposalIdf1'
+    value: 'Renseigner la présentation de mon Grand Projet'
+  response2IdfProposal1:
+    question: '@multiplequestionIdfGrandProjet1'
+    proposal: '@proposalIdf1'
+    value: 'Un autre organisme privé'
+  response1IdfProposal2:
+    question: '@multiplequestionIdfGrandOrLocal'
+    proposal: '@proposalIdf2'
+    value: 'Déposer un Projet Local'
+  response2IdfProposal2:
+    question: '@multiplequestionIdfProjetLocal1'
+    proposal: '@proposalIdf2'
+    value: 'Une association'
+  response3IdfProposal3:
+    question: '@multiplequestionIdfProjetLocalAssociation1'
+    proposal: '@proposalIdf2'
+    value: 'J’ai un numéro SIRET'
+  response1IdfProposal3:
+    question: '@multiplequestionIdfGrandOrLocal'
+    proposal: '@proposalIdf3'
+    value: 'Déposer un Projet Local'
+  response2IdfProposal3:
+    question: '@multiplequestionIdfProjetLocal1'
+    proposal: '@proposalIdf3'
+    value: 'Une entreprise'

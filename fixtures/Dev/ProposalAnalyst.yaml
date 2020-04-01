@@ -1,36 +1,61 @@
 Capco\AppBundle\Entity\ProposalAnalyst:
     proposalAnalyst1:
         __construct: ['@proposal109', '@user526']
-        proposal: '@proposal109'
-        analyst: '@user526'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
     proposalAnalyst2:
         __construct: ['@proposal109', '@user527']
-        proposal: '@proposal109'
-        analyst: '@user527'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:05:02'))->modify("+ 16 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:06:03'))->modify("+ 17 days"))>
     proposalAnalyst3:
         __construct: ['@proposal111', '@user526']
-        proposal: '@proposal111'
-        analyst: '@user526'
-        assignedBy: '@user519'
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:02'))->modify("+ 15 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:03'))->modify("+ 14 days"))>
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:03'))->modify("+ 15 days"))>
+        updatedAt: <identity((new \DateTime('2019-01-01 00:06:04'))->modify("+ 14 days"))>
     proposalAnalyst4:
         __construct: ['@proposal110', '@user527']
-        proposal: '@proposal110'
-        analyst: '@user527'
-        assignedBy: '@user519'
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:02'))->modify("+ 13 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:03'))->modify("+ 12 days"))>
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:05'))->modify("+ 13 days"))>
+        updatedAt: <identity((new \DateTime('2019-01-01 00:06:06'))->modify("+ 12 days"))>
     proposalAnalyst5:
         __construct: ['@proposal115', '@user526']
-        analyst: '@user526'
-        proposal: '@proposal115'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:05:07')))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:09')))>
+        updatedAt: <identity((new \DateTime('2019-01-01 00:06:08')))>
+    proposalAnalystIdf1:
+        __construct: ['@proposalIdf1', '@userAgui']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2020-01-01 00:05:09')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:06:10')))>
+    proposalAnalystIdf2:
+        __construct: ['@proposalIdf1', '@userVincent']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2020-01-01 00:05:11')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:06:12')))>
+    proposalAnalystIdf3:
+        __construct: ['@proposalIdf1', '@userOmar']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2020-01-01 00:05:13')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:06:14')))>
+    proposalAnalystIdf4:
+        __construct: ['@proposalIdf2', '@userTheo']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2020-01-01 00:05:09')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:06:10')))>
+    proposalAnalystIdf5:
+        __construct: ['@proposalIdf2', '@userJpec']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2020-01-01 00:05:11')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:06:12')))>
+    proposalAnalystIdf6:
+        __construct: ['@proposalIdf3', '@userMickael']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2020-01-01 00:05:13')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:06:14')))>
+    proposalAnalystIdf7:
+        __construct: ['@proposalIdf3', '@userTheo']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2020-01-01 00:05:15')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:06:16')))>

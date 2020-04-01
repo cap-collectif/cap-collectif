@@ -7,7 +7,7 @@ Background:
 @database
 Scenario: Logged in super admin wants to edit a user profile
   Given I am logged in as admin
-  Then I go to the admin user page with userId "user516"
+  Then I go to the admin user page with userId "userMaxime"
   And the "form.label_vip" checkbox should be checked
   And the "form.label_enabled" checkbox should be checked
   And the "form.label_locked" checkbox should not be checked
@@ -25,7 +25,7 @@ Scenario: Logged in super admin wants to edit a user profile
 @database
 Scenario: Logged in super admin wants to edit a user profile
   Given I am logged in as super admin
-  Then I go to the admin user page with userId "user516"
+  Then I go to the admin user page with userId "userMaxime"
   And I go to the admin user "profile" tab
   And I wait 2 seconds
   Then I should see "mauriau"
@@ -38,7 +38,7 @@ Scenario: Logged in super admin wants to edit a user profile
 @database
 Scenario: Logged in super admin wants to edit a user data
   Given I am logged in as super admin
-  Then I go to the admin user page with userId "user516"
+  Then I go to the admin user page with userId "userMaxime"
   And I go to the admin user "data" tab
   And I wait 3 seconds
   When I fill the element "#city" with value "Issou"
@@ -49,7 +49,7 @@ Scenario: Logged in super admin wants to edit a user data
 @database
 Scenario: Logged in super admin wants to edit a user password
   Given I am logged in as super admin
-  Then I go to the admin user page with userId "user516"
+  Then I go to the admin user page with userId "userMaxime"
   And I go to the admin user "password" tab
   And I wait 2 seconds
   Then I should see "global.password"
@@ -75,7 +75,7 @@ Scenario: Logged in admin wants to edit my password in back office
 @database
 Scenario: Logged in super admin wants delete a user
   Given I am logged in as super admin
-  Then I go to the admin user page with userId "user516"
+  Then I go to the admin user page with userId "userMaxime"
   Then I click on button "#delete-account-profile-button"
   And I click the "#delete-account-hard" element
   And I wait "#confirm-delete-form-submit" to appear on current page

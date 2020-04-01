@@ -2,24 +2,24 @@ Capco\AppBundle\Entity\Responses\MediaResponse:
   mediaResponse1:
     question: '@mediaquestion1'
     proposal: '@proposal1'
-    medias: ['@MediaCapcoSite', '@MediaUser4']
+    medias: ['@MediaCapcoSite', '@ProfilePicSpyl']
   mediaResponse2:
     question: '@mediaquestion2'
     proposal: '@proposal1'
-    medias: ['@MediaUser1', '@MediaUser3', '@MediaFilePdf']
+    medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
   mediaResponse3:
     question: '@mediaquestion2'
     proposal: '@proposal2'
-    medias: ['@MediaUser1', '@MediaUser3', '@MediaFilePdf']
+    medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
   mediaResponse4:
     question: '@mediaquestion2'
     proposal: '@proposal12'
-    medias: ['@MediaUser1', '@MediaUser3', '@MediaFilePdf']
+    medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']
   mediaResponse5:
     question: '@mediaquestion3'
     proposal: '@proposal106'
-    medias: ['@MediaCapcoSite', '@MediaUser4']
+    medias: ['@MediaCapcoSite', '@ProfilePicSpyl']
   mediaResponse6:
     question: '@mediaquestion4'
     proposal: '@proposal106'
-    medias: ['@MediaUser1', '@MediaUser3', '@MediaFilePdf']
+    medias: ['@ProfilePicSfavot', '@ProfilePicXavier', '@MediaFilePdf']

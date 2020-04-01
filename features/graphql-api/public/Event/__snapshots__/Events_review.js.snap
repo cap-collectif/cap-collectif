@@ -46,7 +46,7 @@ Object {
       "comment": "This is a spam",
       "refusedReason": "SPAM",
       "reviewer": Object {
-        "_id": "user516",
+        "_id": "userMaxime",
       },
       "status": "REFUSED",
     },

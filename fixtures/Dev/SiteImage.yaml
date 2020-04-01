@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\SiteImage:
   SiteImage2:
     keyname: image.header
     category: pages.homepage
-    media: '@header'
+    media: '@Header'
     isEnabled: true
     position: 2
   SiteImage3:
@@ -38,56 +38,56 @@ Capco\AppBundle\Entity\SiteImage:
   SiteImageBlogPicto:
     keyname: blog.picto
     category: pages.blog
-    media: '@picto'
+    media: '@Picto'
     isSocialNetworkThumbnail: true
     isEnabled: true
     position: 6
   SiteImageEventPicto:
     keyname: events.picto
     category: pages.events
-    media: '@picto'
+    media: '@Picto'
     isSocialNetworkThumbnail: true
     isEnabled: true
     position: 7
   SiteImageIdeasPicto:
     keyname: ideas.picto
     category: pages.ideas
-    media: '@picto'
+    media: '@Picto'
     isSocialNetworkThumbnail: true
     isEnabled: true
     position: 8
   SiteImageThemesPicto:
     keyname: themes.picto
     category: pages.themes
-    media: '@picto'
+    media: '@Picto'
     isSocialNetworkThumbnail: true
     isEnabled: true
     position: 9
   SiteImageProjectsPicto:
     keyname: projects.picto
     category: pages.projects
-    media: '@picto'
+    media: '@Picto'
     isSocialNetworkThumbnail: true
     isEnabled: true
     position: 10
   SiteImageMembersPicto:
     keyname: members.picto
     category: pages.members
-    media: '@picto'
+    media: '@Picto'
     isSocialNetworkThumbnail: true
     isEnabled: true
     position: 11
   SiteImageContactPicto:
     keyname: contact.picto
     category: pages.contact
-    media: '@picto'
+    media: '@Picto'
     isSocialNetworkThumbnail: true
     isEnabled: true
     position: 12
   SiteImageTrashIdeasPicto:
     keyname: ideas_trash.picto
     category: pages.ideas_trash
-    media: '@picto'
+    media: '@Picto'
     isSocialNetworkThumbnail: true
     isEnabled: true
     position: 13

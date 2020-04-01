@@ -41,31 +41,31 @@ Capco\MediaBundle\Entity\Media:
     name: Titre du média idée 2
     category: '@MediaCategory1'
     providerReference: providerReference7.jpg
-  MediaUser1:
+  ProfilePicSfavot:
     id: media7
     binaryContent: user/sfavot.jpg
     name: Suzanne Favot
     category: '@MediaCategory1'
     providerReference: providerReference8.jpg
-  MediaUser2:
+  ProfilePicLaurent:
     id: media8
     binaryContent: user/lbrunet.jpg
     name: Laurent Brunet
     category: '@MediaCategory1'
     providerReference: providerReference9.jpg
-  MediaUser3:
+  ProfilePicXavier:
     id: media9
     binaryContent: user/xlacot.jpg
     name: Xavier Lacot
     category: '@MediaCategory1'
     providerReference: providerReference10.jpg
-  MediaUser4:
+  ProfilePicSpyl:
     id: media10
-    binaryContent: user/spyl.jpg
+    binaryContent: user/spyl.png
     name: Spyl
     category: '@MediaCategory1'
     providerReference: providerReference11.jpg
-  MediaUser5:
+  ProfilePicWelcomattic:
     id: media11
     binaryContent: user/welcomattic.jpg
     name: Welcomattic
@@ -77,13 +77,13 @@ Capco\MediaBundle\Entity\Media:
     name: Logo
     category: '@MediaCategory1'
     providerReference: providerReferenceForLogo.png
-  header:
+  Header:
     id: media13
     binaryContent: header.jpg
     name: Header
     category: '@MediaCategory1'
     providerReference: providerReference14.jpg
-  picto:
+  Picto:
     id: media14
     binaryContent: picto.png
     name: Picto
@@ -284,3 +284,75 @@ Capco\MediaBundle\Entity\Media:
     name: Titre du média 1
     category: '@MediaCategory1'
     providerReference: providerReference45.jpg
+  ProfilePicVincent:
+    id: 'ProfilePicVincent'
+    binaryContent: default_avatar.jpg
+    name: ProfilePicVincent
+    category: '@MediaCategory1'
+    providerReference: providerReference46.jpg
+  ProfilePicAgui:
+    id: 'ProfilePicAgui'
+    binaryContent: user/agui.png
+    name: ProfilePicAgui
+    category: '@MediaCategory1'
+    providerReference: providerReference47.jpg
+  ProfilePicOmar:
+    id: 'ProfilePicOmar'
+    binaryContent: default_avatar.jpg
+    name: ProfilePicOmar
+    category: '@MediaCategory1'
+    providerReference: providerReference48.jpg
+  ProfilePicTheo:
+    id: 'ProfilePicTheo'
+    binaryContent: default_avatar.jpg
+    name: ProfilePicTheo
+    category: '@MediaCategory1'
+    providerReference: providerReference49.jpg
+  ProfilePicJpec:
+    id: 'ProfilePicJpec'
+    binaryContent: user/jpec.jpeg
+    name: ProfilePicJpec
+    category: '@MediaCategory1'
+    providerReference: providerReference50.jpg
+  ProfilePicMickael:
+    id: 'ProfilePicMickael'
+    binaryContent: default_avatar.jpg
+    name: ProfilePicMickael
+    category: '@MediaCategory1'
+    providerReference: providerReference51.jpg
+  ProfilePicIan:
+    id: 'ProfilePicIan'
+    binaryContent: default_avatar.jpg
+    name: ProfilePicIan
+    category: '@MediaCategory1'
+    providerReference: providerReference52.jpg
+  ProfilePicMaxQA:
+    id: 'ProfilePicMaxQA'
+    binaryContent: default_avatar.jpg
+    name: ProfilePicMaxQA
+    category: '@MediaCategory1'
+    providerReference: providerReference53.jpg
+  ProfilePicJean:
+    id: 'ProfilePicJean'
+    binaryContent: user/jean.png
+    name: ProfilePicJean
+    category: '@MediaCategory1'
+    providerReference: providerReference54.jpg
+  ProfilePicMaxiDev:
+    id: 'ProfilePicMaxiDev'
+    binaryContent: user/maxidev.jpg
+    name: ProfilePicMaxiDev
+    category: '@MediaCategory1'
+    providerReference: providerReference55.jpg
+  ProfilePicBellenger:
+    id: 'ProfilePicBellenger'
+    binaryContent: default_avatar.jpg
+    name: ProfilePicBellenger
+    category: '@MediaCategory1'
+    providerReference: providerReference56.jpg
+  ProfilePicKiroule:
+    id: 'ProfilePicKiroule'
+    binaryContent: default_avatar.jpg
+    name: ProfilePicKiroule
+    category: '@MediaCategory1'
+    providerReference: providerReference57.jpg

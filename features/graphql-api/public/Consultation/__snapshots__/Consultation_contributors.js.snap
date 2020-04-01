@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview|Consultation.contributors connection fetches the contributors of a consultation 1`] = `
+Object {
+  "node": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VySmVhbg==",
+            "username": "Juan",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNDA=",
+            "username": "user40",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMzk=",
+            "username": "user39",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMzg=",
+            "username": "user38",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMzc=",
+            "username": "user37",
+          },
+        },
+      ],
+      "totalCount": 41,
+    },
+    "id": "Q29uc3VsdGF0aW9uOmRlZmF1bHQ=",
+    "title": "Défaut",
+  },
+}
+`;

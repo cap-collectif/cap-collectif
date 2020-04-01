@@ -304,6 +304,21 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectstepIdf'
         project: '@projectIdf'
         position: 1
+    pasIdf2:
+        id: pasIdf2
+        step: '@selectionStepIdfAnalyse'
+        project: '@projectIdf'
+        position: 2
+    pasIdf3:
+        id: pasIdf3
+        step: '@selectionStepIdfVote'
+        project: '@projectIdf'
+        position: 3
+    pasIdf4:
+        id: pasIdf4
+        step: '@selectionStepIdfWiners'
+        project: '@projectIdf'
+        position: 4
     pasFr:
         id: pasFr
         step: '@collectstepFrench'

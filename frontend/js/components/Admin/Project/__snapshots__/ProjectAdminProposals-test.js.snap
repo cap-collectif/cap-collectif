@@ -75,7 +75,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                     "node": Object {
                       "adminUrl": "https://capco.dev/admin/lapropo1",
                       "author": Object {
-                        "id": "VXNlcjp1c2VyNTAy",
+                        "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
                         "username": "welcomattic",
                       },
                       "category": Object {
@@ -174,7 +174,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                     "node": Object {
                       "adminUrl": "https://capco.dev/admin/lapropo3",
                       "author": Object {
-                        "id": "VXNlcjp1c2VyNTAy",
+                        "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
                         "username": "welcomattic",
                       },
                       "category": Object {

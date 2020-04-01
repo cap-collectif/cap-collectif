@@ -131,7 +131,7 @@ Capco\AppBundle\Entity\Source:
     id: 'source41'
     title: Ma source
     body: blabla
-    author: '@user519'
+    author: '@userJean'
     opinion: '@opinion1'
     category: '@sourcecategory2'
     publishedAt: <(new \DateTime('2016-03-01'))>

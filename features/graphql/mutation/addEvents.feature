@@ -84,7 +84,7 @@ Scenario: An admin wants to add a list of events with dry run
               "endAt": "2018-03-16 00:00:00"
             },
             "author": {
-              "id": "VXNlcjp1c2VyNTAx"
+              "id": "VXNlcjp1c2VyU3B5bA=="
             },
             "themes": [
               {

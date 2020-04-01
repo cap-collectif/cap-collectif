@@ -67,7 +67,7 @@ Capco\AppBundle\Entity\OpinionVote:
     id: 81
     Opinion: '@opinion1'
     value: 1
-    user: '@user519'
+    user: '@userJean'
     publishedAt: <(new \DateTime('2015-03-01 00:00:08'))>
     createdAt: <(new \DateTime('2015-03-01 00:00:08'))>
     updatedAt: <(new \DateTime('2016-03-01 00:00:08'))>

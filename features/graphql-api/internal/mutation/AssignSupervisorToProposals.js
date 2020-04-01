@@ -28,7 +28,7 @@ describe('mutations.assignSupervisorToProposals', () => {
     const assignSupervisorToProposals = await graphql(
       AssignSupervisorToProposalsMutation,
       {
-        input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='], supervisorId: 'VXNlcjp1c2VyNTE2' },
+        input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='], supervisorId: global.toGlobalId("User", "userMaxime") },
       },
       'internal_admin',
     );
@@ -106,7 +106,7 @@ describe('mutations.assignSupervisorToProposals', () => {
     const userCantAssignSupervisorToProposals = await graphql(
       AssignSupervisorToProposalsMutation,
       {
-        input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='], supervisorId: 'VXNlcjp1c2VyNTE2' },
+        input: { proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='], supervisorId: global.toGlobalId("User", "userMaxime") },
       },
       'internal_user',
     );

@@ -21,7 +21,7 @@ Capco\AppBundle\Entity\ProjectAuthor:
     project: '@p5'
   pa6:
     createdAt: <(new \DateTime('2018-05-02'))>
-    user: '@user502'
+    user: '@userWelcomattic'
     project: '@p6'
   pa7:
     createdAt: <(new \DateTime('2018-04-04'))>
@@ -29,7 +29,7 @@ Capco\AppBundle\Entity\ProjectAuthor:
     project: '@p7'
   pa8:
     createdAt: <(new \DateTime('2018-05-02'))>
-    user: '@user502'
+    user: '@userWelcomattic'
     project: '@p8'
   pa9:
     createdAt: <(new \DateTime('2018-01-01'))>
@@ -65,11 +65,11 @@ Capco\AppBundle\Entity\ProjectAuthor:
     project: '@p16'
   pa17:
     createdAt: <(new \DateTime('2018-05-16'))>
-    user: '@user516'
+    user: '@userMaxime'
     project: '@p17'
   pa18:
     createdAt: <(new \DateTime('2018-05-16'))>
-    user: '@user516'
+    user: '@userMaxime'
     project: '@p18'
   pa19:
     createdAt: <(new \DateTime('2018-04-04'))>
@@ -85,7 +85,7 @@ Capco\AppBundle\Entity\ProjectAuthor:
     project: '@p21'
   pa22:
     createdAt: <(new \DateTime('2018-05-02'))>
-    user: '@user502'
+    user: '@userWelcomattic'
     project: '@p21'
   pa23:
     createdAt: <(new \DateTime('2018-04-04'))>

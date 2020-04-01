@@ -10,7 +10,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
             - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser2'
+        media: '@ProfilePicLaurent'
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
         confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
@@ -25,7 +25,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
             - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser1'
+        media: '@ProfilePicSfavot'
         city: Antony
         websiteUrl: http://www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
@@ -45,7 +45,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
             - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser3'
+        media: '@ProfilePicXavier'
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 2 days"))>
 
@@ -121,8 +121,8 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2017-01-01'))->modify("+ $current minutes"))>
 
-    user501:
-        id: 'user501'
+    userSpyl:
+        id: 'userSpyl'
         username: spyl
         firstname: Aurélien
         lastname: David
@@ -131,13 +131,14 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
             - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser4'
+        media: '@ProfilePicSpyl'
         vip: true
         enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 7 days"))>
+        emailConfirmationSentAt: <(new \DateTime('2015-03-01 11:00:00'))>
+        createdAt: <(new \DateTime('2015-03-01 11:00:00'))>
 
-    user502:
-        id: 'user502'
+    userWelcomattic:
+        id: 'userWelcomattic'
         username: welcomattic
         firstname: Mathieu
         lastname: Santostefano
@@ -146,7 +147,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: capco
         roles:
             - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser5'
+        media: '@ProfilePicWelcomattic'
         vip: true
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 8 days"))>
@@ -162,7 +163,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: disabled
         roles:
             - 'ROLE_USER'
-        media: '@MediaUser1'
+        media: '@ProfilePicSfavot'
         vip: false
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 9 days"))>
 
@@ -181,8 +182,8 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 10 days"))>
 
-    user505:
-        id: 'user505'
+    userKiroule:
+        id: 'userKiroule'
         username: ptondereau
         firstname: Pierre
         lastname: Tondereau
@@ -191,7 +192,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
             - 'ROLE_USER'
-        media: '@MediaUser5'
+        media: '@ProfilePicKiroule'
         vip: true
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 11 days"))>
@@ -304,8 +305,8 @@ Capco\UserBundle\Entity\User:
         createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
         updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
 
-    user516:
-        id: 'user516'
+    userMaxime:
+        id: 'userMaxime'
         username: mauriau
         firstname: Maxime
         lastname: AURIAU
@@ -314,15 +315,15 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
             - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser5'
+        media: '@ProfilePicMaxiDev'
         vip: true
-        emailConfirmationSentAt: <(new \DateTime('2018-06-06 13:37:00'))>
+        emailConfirmationSentAt: <(new \DateTime('2018-01-03 13:37:00'))>
         enabled: true
         phoneConfirmed: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 15 days"))>
+        createdAt: <(new \DateTime('2018-01-03 13:37:00'))>
 
-    user517:
-        id: 'user517'
+    userBellenger:
+        id: 'userBellenger'
         username: sanzo
         firstname: Pierre
         lastname: Bellenger
@@ -331,7 +332,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: azerty
         roles:
             - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser1'
+        media: '@ProfilePicBellenger'
         city: Antony
         websiteUrl: http://www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
@@ -353,8 +354,8 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 17 days"))>
 
-    user519:
-        id: 'user519'
+    userJean:
+        id: 'userJean'
         username: Juan
         firstname: Jean
         lastname: Treibert
@@ -363,12 +364,12 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
             - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser1'
+        media: '@ProfilePicJean'
         biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
         vip: true
-        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
+        emailConfirmationSentAt: <(new \DateTime('2018-09-03 09:30:00'))>
         enabled: true
-        createdAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 18 days"))>
+        createdAt: <(new \DateTime('2018-09-03 09:30:00'))>
 
     user520:
         id: 'user520'
@@ -380,7 +381,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: mob?
         roles:
             - 'ROLE_USER'
-        media: '@MediaUser1'
+        media: '@ProfilePicSfavot'
         biography: Miskin il a que le role user.
         vip: true
         emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:14:00'))>
@@ -499,3 +500,110 @@ Capco\UserBundle\Entity\User:
         emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
+    userAgui:
+        id: 'userAgui'
+        username: Agui
+        firstname: Julien
+        lastname: AGUILAR
+        email: julien.aguilar@cap-collectif.com
+        plainpassword: toto
+        media: '@ProfilePicAgui'
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2019-09-09 09:30:00'))>
+        enabled: true
+        createdAt: <(new \DateTime('2019-09-09 09:30:00'))>
+    userVincent:
+        id: 'userVincent'
+        username: Vinc
+        firstname: Vincent
+        lastname: DEPLAIS
+        media: '@ProfilePicVincent'
+        email: vincent@cap-collectif.com
+        plainpassword: toto
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2019-12-02 09:30:00'))>
+        enabled: true
+        createdAt: <(new \DateTime('2019-12-02 09:30:00'))>
+    userOmar:
+        id: 'userOmar'
+        username: Omar <3 Rem
+        firstname: Omar
+        lastname: Jbara
+        email: omar@cap-collectif.com
+        plainpassword: toto
+        media: '@ProfilePicOmar'
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2018-10-17 09:30:00'))>
+        enabled: true
+        createdAt: <(new \DateTime('2018-10-17 09:30:00'))>
+    userTheo:
+        id: 'userTheo'
+        username: Théo QP
+        firstname: Théo
+        lastname: Bourgoin
+        email: theo@cap-collectif.com
+        plainpassword: toto
+        media: '@ProfilePicTheo'
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2019-06-03 09:30:00'))>
+        enabled: true
+        createdAt: <(new \DateTime('2019-06-03 09:30:00'))>
+    userJpec:
+        id: 'userJpec'
+        username: Jpec
+        firstname: Jean Paul
+        lastname: Bella
+        email: jpec@cap-collectif.com
+        plainpassword: toto
+        media: '@ProfilePicJpec'
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2019-07-15 09:30:00'))>
+        enabled: true
+        createdAt: <(new \DateTime('2019-07-15 09:30:00'))>
+    userMickael:
+        id: 'userMickael'
+        username: Dev null
+        firstname: Mickael
+        lastname: Buliard
+        biography: "La raclette c'est bon."
+        media: '@ProfilePicMickael'
+        email: mickaelS@cap-collectif.com
+        plainpassword: toto
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2019-11-04 09:30:00'))>
+        enabled: true
+        createdAt: <(new \DateTime('2019-11-04 09:30:00'))>
+    userIan:
+        id: 'userIan'
+        username: Ian apprenti DevOps
+        firstname: Ian
+        lastname: DUCROT--THOLLON-POMMEROL
+        email: ian@cap-collectif.com
+        plainpassword: toto
+        media: '@ProfilePicIan'
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2020-03-09 09:30:00'))>
+        enabled: true
+        createdAt: <(new \DateTime('2020-03-09 09:30:00'))>
+    userMaximeQA:
+        id: 'userMaximeQA'
+        username: Max de la QA
+        biography: Le mec qui met des retours partout
+        firstname: Maxime
+        lastname: QA
+        media: '@ProfilePicMaxQA'
+        email: maxime.pouessel@cap-collectif.com
+        plainpassword: toto
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
+        enabled: true
+        createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
+

@@ -32,7 +32,7 @@ Object {
           },
           "contributionsCount": 0,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0SWRm",
@@ -904,7 +904,7 @@ Object {
           },
           "contributionsCount": 0,
           "contributors": Object {
-            "totalCount": 0,
+            "totalCount": 3,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0SWRm",
@@ -1481,7 +1481,7 @@ Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
             },
             Object {
-              "id": "VXNlcjp1c2VyNTAy",
+              "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
             },
           ],
           "id": "UHJvamVjdDpwcm9qZWN0MjE=",

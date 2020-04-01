@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview|CollectStep.contributors connection fetches the contributors of a collect step 1`] = `
+Object {
+  "node": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNw==",
+            "username": "user7",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNTIy",
+            "username": "johnsmith",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "username": "welcomattic",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNQ==",
+            "username": "user",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "username": "admin",
+          },
+        },
+      ],
+      "totalCount": 7,
+    },
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+    "title": "Collecte des propositions",
+  },
+}
+`;

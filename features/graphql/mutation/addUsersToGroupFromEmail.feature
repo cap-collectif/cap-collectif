@@ -48,7 +48,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
             "email": "sfavot@jolicode.com"
           },
           {
-            "_id": "user505",
+            "_id": "userKiroule",
             "email": "pierre@cap-collectif.com"
           }
         ],
@@ -143,7 +143,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
             "email": "sfavot@jolicode.com"
           },
           {
-            "_id": "user505",
+            "_id": "userKiroule",
             "email": "pierre@cap-collectif.com"
           }
         ],
@@ -187,7 +187,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
           "edges": [
             { "node": {"_id":"user1"} },
             { "node": {"_id":"user2"} },
-            { "node": {"_id":"user505"} }
+            { "node": {"_id":"userKiroule"} }
           ]
         }
       }

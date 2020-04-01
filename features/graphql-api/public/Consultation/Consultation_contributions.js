@@ -40,7 +40,7 @@ const ConsultationListContribtionsQuery = /* GraphQL */ `
   }
 `;
 
-describe('Preview|Query consultation contributions', () => {
+describe('Preview|Consultation.contributions connection', () => {
   it('fetches the contributions of a consultation ordered by publication date DESC', async () => {
     await expect(
       graphql(

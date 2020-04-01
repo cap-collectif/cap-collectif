@@ -97,3 +97,13 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@post19'
         title: I'm a post 19
         body: I'm the post's body 19
+    postFr20:
+        locale: fr-FR
+        translatable: '@post20'
+        title: 'Réponse officielle'
+        body: 'Félicitations, cette proposition respecte tous nos critères et peut donc passer au vote.'
+    postFr21:
+        locale: fr-FR
+        translatable: '@post21'
+        title: 'Réponse officielle'
+        body: 'On réfléchit encore !'

@@ -81,4 +81,25 @@ describe('Preview|Query.users connection', () => {
       ),
     ).resolves.toMatchSnapshot();
   });
+
+  it('fetches the five first users, including super admins.', async () => {
+    await expect(
+      graphql(
+        `
+          {
+            users(first: 5, superAdmin: true) {
+              edges {
+                node {
+                  _id
+                  isSuperAdmin
+                }
+              }
+            }
+          }
+        `,
+        {},
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });

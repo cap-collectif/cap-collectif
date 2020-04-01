@@ -10,7 +10,7 @@ exports[`<UserAdminPage/> should render 1`] = `
     render={[Function]}
     variables={
       Object {
-        "id": "user516",
+        "id": "userMaxime",
       }
     }
   />

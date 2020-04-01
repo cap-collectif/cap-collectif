@@ -1,6 +1,7 @@
 {
     "name": "platform",
     "private": true,
+    "license": "UNLICENSED",
     "scripts": {
         "test": "NODE_ENV=test jest -c jest.config.js --notify",
         "test:ci": "NODE_ENV=test jest -c jest.config.js --coverage --ci --runInBand",

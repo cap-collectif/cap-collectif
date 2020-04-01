@@ -162,7 +162,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     collectstepIdf:
         id: collectstepIdf
         title: Collecte des projets Idf (privée)
-        label: Dépôt Idf
+        label: Dépôt des projets
         private: true
         body: Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.
         timeless: false

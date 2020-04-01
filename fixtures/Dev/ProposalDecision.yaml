@@ -29,3 +29,20 @@ Capco\AppBundle\Entity\ProposalDecision:
         state: 'IN_PROGRESS'
         createdAt: <identity((new \DateTime('2019-08-03 00:01:21')))>
         updatedAt: <identity((new \DateTime('2019-08-03 00:01:22')))>
+    proposalDecisionIdf1:
+        __construct: ['@proposalIdf1', '@post20']
+        estimatedCost: 3200
+        updatedBy: '@userSpyl'
+        isApproved: true
+        state: 'DONE'
+        createdAt: <identity((new \DateTime('2020-01-01 00:01:22')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:01:22')))>
+    proposalDecisionIdf2:
+        __construct: ['@proposalIdf2', '@post21']
+        estimatedCost: 10000
+        updatedBy: '@userSpyl'
+        isApproved: true
+        state: 'IN_PROGRESS'
+        createdAt: <identity((new \DateTime('2020-01-01 00:01:24')))>
+        updatedAt: <identity((new \DateTime('2020-01-01 00:01:24')))>
+

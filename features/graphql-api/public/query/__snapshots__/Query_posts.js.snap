@@ -104,6 +104,34 @@ Object {
       ],
     },
     Object {
+      "enTitle": "Réponse officielle",
+      "frTitle": "Réponse officielle",
+      "id": "UG9zdDpwb3N0MjA=",
+      "title": "Réponse officielle",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "Félicitations, cette proposition respecte tous nos critères et peut donc passer au vote.",
+          "locale": "fr-FR",
+          "title": "Réponse officielle",
+        },
+      ],
+    },
+    Object {
+      "enTitle": "Réponse officielle",
+      "frTitle": "Réponse officielle",
+      "id": "UG9zdDpwb3N0MjE=",
+      "title": "Réponse officielle",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "On réfléchit encore !",
+          "locale": "fr-FR",
+          "title": "Réponse officielle",
+        },
+      ],
+    },
+    Object {
       "enTitle": "Post EN 1",
       "frTitle": "Post FR 1",
       "id": "UG9zdDpwb3N0MQ==",

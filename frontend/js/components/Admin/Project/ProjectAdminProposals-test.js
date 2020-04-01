@@ -59,7 +59,7 @@ const DEFAULT_PROJECT = {
         node: {
           author: {
             username: 'welcomattic',
-            id: 'VXNlcjp1c2VyNTAy',
+            id: 'VXNlcjp1c2VyV2VsY29tYXR0aWM=',
           },
           publishedAt: '2017-02-01 00:00:00',
           district: {
@@ -158,7 +158,7 @@ const DEFAULT_PROJECT = {
         node: {
           author: {
             username: 'welcomattic',
-            id: 'VXNlcjp1c2VyNTAy',
+            id: 'VXNlcjp1c2VyV2VsY29tYXR0aWM=',
           },
           publishedAt: '2017-02-01 00:04:00',
           district: {

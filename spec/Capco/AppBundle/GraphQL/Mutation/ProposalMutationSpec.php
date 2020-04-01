@@ -73,7 +73,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $user = $author;
         $container->get(Manager::class)->willReturn($manager);
 
-        $author->getId()->willReturn('user501');
+        $author->getId()->willReturn('userSpyl');
         $author->getUsername()->willReturn('aUser');
         $author->isEmailConfirmed()->willReturn(true);
         $author->isAdmin()->willReturn(false);

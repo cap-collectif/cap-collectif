@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview|Project.contributors connection fetches the contributiors of a project 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "anonymousCount": 0,
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VySmVhbg==",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNDA=",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMzk=",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMzg=",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMzc=",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aTotOTIyMzM3MjAzNjg1NDc3NTgwODtpOjE7aToxNDgzMjI3NDIwMDAwO30=",
+        "hasNextPage": true,
+      },
+      "totalCount": 41,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+  },
+}
+`;

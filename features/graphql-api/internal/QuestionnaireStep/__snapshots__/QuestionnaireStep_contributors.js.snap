@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview|QuestionnaireStep.contributors connection fetches the contributors of a collect step 1`] = `
+Object {
+  "node": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNTE1",
+            "username": "user_updating_email",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyX25vdF9jb25maXJtZWQ=",
+            "username": "user_not_confirmed",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "username": "welcomattic",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNQ==",
+            "username": "user",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "username": "admin",
+          },
+        },
+      ],
+      "totalCount": 5,
+    },
+    "id": "questionnairestep1",
+    "title": "Questionnaire des JO 2024",
+  },
+}
+`;

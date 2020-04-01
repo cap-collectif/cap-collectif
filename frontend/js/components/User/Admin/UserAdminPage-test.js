@@ -6,7 +6,7 @@ import { UserAdminPage } from './UserAdminPage';
 
 describe('<UserAdminPage/>', () => {
   it('should render', () => {
-    const wrapper = shallow(<UserAdminPage userId="user516" dirty={false} />);
+    const wrapper = shallow(<UserAdminPage userId="userMaxime" dirty={false} />);
     wrapper.setState({
       showModal: true,
     });

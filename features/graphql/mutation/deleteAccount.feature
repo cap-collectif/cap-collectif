@@ -232,7 +232,7 @@ Scenario: User who decides to hard delete his account should have his content de
                 "createdAt": "2017-02-01 00:04:00",
                 "published": true,
                 "author": {
-                  "id": "VXNlcjp1c2VyNTAy"
+                  "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM="
                 }
               }
             },
@@ -272,7 +272,7 @@ Scenario: User who decides to hard delete his account should have his content de
                 "createdAt": "2017-02-01 09:08:00",
                 "published": true,
                 "author": {
-                  "id": "VXNlcjp1c2VyNTAy"
+                  "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM="
                 }
               }
             },
@@ -381,7 +381,7 @@ Scenario: User who decides to hard delete his account should have his content de
                        "createdAt":"2017-02-01 00:04:00",
                        "published":true,
                        "author":{
-                          "id":"VXNlcjp1c2VyNTAy"
+                          "id":"VXNlcjp1c2VyV2VsY29tYXR0aWM="
                        }
                     }
                  },
@@ -421,7 +421,7 @@ Scenario: User who decides to hard delete his account should have his content de
                        "createdAt":"2017-02-01 09:08:00",
                        "published":true,
                        "author":{
-                          "id":"VXNlcjp1c2VyNTAy"
+                          "id":"VXNlcjp1c2VyV2VsY29tYXR0aWM="
                        }
                     }
                  },
@@ -638,7 +638,7 @@ Scenario: User who decides to hard delete his account should have his content de
                 "createdAt": "2017-02-01 00:04:00",
                 "published": true,
                 "author": {
-                  "id": "VXNlcjp1c2VyNTAy"
+                  "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM="
                 }
               }
             },
@@ -686,7 +686,7 @@ Scenario: User who decides to hard delete his account should have his content de
                 "createdAt": "2017-02-01 09:08:00",
                 "published": true,
                 "author": {
-                  "id": "VXNlcjp1c2VyNTAy"
+                  "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM="
                 }
               }
             },

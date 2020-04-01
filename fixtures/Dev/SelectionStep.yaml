@@ -404,3 +404,27 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
             | Serrant la queue, et portant bas l'oreille.
             | Trompeurs, c'est pour vous que j'écris
             | Attendez-vous à la pareille.
+    selectionStepIdfAnalyse:
+        id: selectionStepIdfAnalyse
+        title: Etudes des projets
+        label: Etudes des projets
+        startAt: <identity((new \DateTime('2018-11-11')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 0
+        body: 'La pré-sélection est en cours ! Les votes seront ouverts le 27 mai, un peu de patience...'
+    selectionStepIdfVote:
+        id: selectionStepIdfVote
+        title: Vote des Franciliens
+        label: Vote des Franciliens
+        startAt: <identity((new \DateTime('2018-11-11')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 1
+        body: Franciliens, prêts à voter
+    selectionStepIdfWiners:
+        id: selectionStepIdfWiners
+        title: Le suivi des projets lauréats
+        label: Le suivi des projets lauréats
+        startAt: <identity((new \DateTime('2018-11-11')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 0
+        body: Gardez un oeil sur les projets !

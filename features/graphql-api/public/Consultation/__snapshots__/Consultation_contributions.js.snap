@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Preview|Query consultation contributions fetches the contributions of a consultation ordered by creation date ASC 1`] = `
+exports[`Preview|Consultation.contributions connection fetches the contributions of a consultation ordered by creation date ASC 1`] = `
 Object {
   "node": Object {
     "contributions": Object {
@@ -813,7 +813,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query consultation contributions fetches the contributions of a consultation ordered by creation date DESC 1`] = `
+exports[`Preview|Consultation.contributions connection fetches the contributions of a consultation ordered by creation date DESC 1`] = `
 Object {
   "node": Object {
     "contributions": Object {
@@ -1626,7 +1626,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query consultation contributions fetches the contributions of a consultation ordered by publication date ASC 1`] = `
+exports[`Preview|Consultation.contributions connection fetches the contributions of a consultation ordered by publication date ASC 1`] = `
 Object {
   "node": Object {
     "contributions": Object {
@@ -2439,7 +2439,7 @@ Object {
 }
 `;
 
-exports[`Preview|Query consultation contributions fetches the contributions of a consultation ordered by publication date DESC 1`] = `
+exports[`Preview|Consultation.contributions connection fetches the contributions of a consultation ordered by publication date DESC 1`] = `
 Object {
   "node": Object {
     "contributions": Object {

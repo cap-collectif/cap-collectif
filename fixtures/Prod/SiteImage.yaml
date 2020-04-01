@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\SiteImage:
   SiteImage2:
     keyname: image.header
     category: pages.homepage
-    media: '@header'
+    media: '@Header'
     isEnabled: true
     position: 2
   SiteImage3:

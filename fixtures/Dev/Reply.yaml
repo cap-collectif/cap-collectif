@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Reply:
   reply1:
     id: 'reply1'
-    author: '@user502'
+    author: '@userWelcomattic'
     draft: 0
     questionnaire: '@questionnaire1'
     publishedAt: <(new \DateTime('2016-03-01'))>

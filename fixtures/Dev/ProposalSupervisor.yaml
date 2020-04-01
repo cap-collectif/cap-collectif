@@ -1,43 +1,46 @@
 Capco\AppBundle\Entity\ProposalSupervisor:
     proposalSupervisor1:
         __construct: ['@proposal109', '@user523']
-        proposal: '@proposal109'
-        supervisor: '@user523'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:01'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:01'))->modify("+ 18 days"))>
     proposalSupervisor2:
         __construct: ['@proposal110', '@user523']
-        proposal: '@proposal110'
-        supervisor: '@user523'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:02'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:02'))->modify("+ 18 days"))>
     proposalSupervisor3:
         __construct: ['@proposal111', '@user524']
-        proposal: '@proposal111'
-        supervisor: '@user524'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:03'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:03'))->modify("+ 18 days"))>
     proposalSupervisor4:
         __construct: ['@proposal112', '@user524']
-        proposal: '@proposal112'
-        supervisor: '@user524'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:00'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:00'))->modify("+ 18 days"))>
     proposalSupervisor5:
         __construct: ['@proposal113', '@user524']
-        proposal: '@proposal113'
-        supervisor: '@user524'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:07'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:07'))->modify("+ 18 days"))>
     proposalSupervisor6:
         __construct: ['@proposal114', '@user524']
-        proposal: '@proposal114'
-        supervisor: '@user524'
-        assignedBy: '@user519'
+        assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:08'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:08'))->modify("+ 18 days"))>
+    proposalSupervisorIdf1:
+        __construct: ['@proposalIdf1', '@userMaximeQA']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:00:10'))->modify("+ 18 days"))>
+        updatedAt: <identity((new \DateTime('2019-01-01 00:00:10'))->modify("+ 18 days"))>
+    proposalSupervisorIdf2:
+        __construct: ['@proposalIdf2', '@userMaximeQA']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:00:11'))->modify("+ 18 days"))>
+        updatedAt: <identity((new \DateTime('2019-01-01 00:00:11'))->modify("+ 18 days"))>
+    proposalSupervisorIdf3:
+        __construct: ['@proposalIdf3', '@userMaximeQA']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:00:12'))->modify("+ 18 days"))>
+        updatedAt: <identity((new \DateTime('2019-01-01 00:00:12'))->modify("+ 18 days"))>
