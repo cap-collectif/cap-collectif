@@ -54,7 +54,6 @@ const formattedChoicesInField = field =>
       color: choice.color,
       image: choice.image,
     }));
-
 const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
 
 const availableQuestionsNotInitialize = availableQuestions => availableQuestions.length === 0;
@@ -153,7 +152,7 @@ const RenderResponses = ({
             </>
           );
 
-          if (field?.hidden){
+          if (field?.hidden) {
             return null;
           }
 
@@ -275,7 +274,12 @@ const RenderResponses = ({
                       name={`${member}.value`}
                       id={`${cleanDomId(`${form}-${member}`)}`}
                       type={field.type}
-                      style={{ maxWidth: '150px'}}
+                      style={{
+                        maxWidth: '150px',
+                        background: '#c7edf3',
+                        padding: '20px 25px 25px 25px',
+                        border: '2px solid #1d8293',
+                      }}
                       // $FlowFixMe
                       component={component}
                       description={field.description}

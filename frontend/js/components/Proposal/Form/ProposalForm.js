@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import {type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage} from 'react-intl';
-import {connect} from 'react-redux';
+import { type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import memoize from 'lodash/memoize';
 import debounce from 'lodash/debounce';
 import {
@@ -12,7 +12,7 @@ import {
   FieldArray,
   formValueSelector,
 } from 'redux-form';
-import {commitLocalUpdate, createFragmentContainer, fetchQuery, graphql} from 'react-relay';
+import { commitLocalUpdate, createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import {
@@ -33,16 +33,16 @@ import type {
   ProposalFormAvailableDistrictsForLocalisationQueryResponse,
   ProposalFormAvailableDistrictsForLocalisationQueryVariables,
 } from '~relay/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
-import type {ProposalForm_proposal} from '~relay/ProposalForm_proposal.graphql';
-import type {ProposalForm_proposalForm} from '~relay/ProposalForm_proposalForm.graphql';
-import type {GlobalState, Dispatch, FeatureToggles} from '~/types';
+import type { ProposalForm_proposal } from '~relay/ProposalForm_proposal.graphql';
+import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql';
+import type { GlobalState, Dispatch, FeatureToggles } from '~/types';
 import CreateProposalMutation from '~/mutations/CreateProposalMutation';
-import {closeCreateModal, closeEditProposalModal} from '~/redux/modules/proposal';
+import { closeCreateModal, closeEditProposalModal } from '~/redux/modules/proposal';
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
 import environment from '~/createRelayEnvironment';
-import {validateProposalContent} from '../Admin/ProposalAdminContentForm';
+import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
-import type {ResponsesInReduxForm} from '~/components/Form/Form.type';
+import type { ResponsesInReduxForm } from '~/components/Form/Form.type';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import {
   isInterpellationContextFromProposal,
@@ -51,16 +51,7 @@ import {
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import renderResponses from '~/components/Form/RenderResponses';
-import {checkSiret, checkRNA} from "~/services/Validator";
-import {
-  getApiEnterpriseType,
-  getBaseQuestionsToHideAccordingToType
-} from "~/plugin/APIEnterprise/APIEnterpriseFunctions";
-import {
-  API_ENTERPRISE_ASSOC,
-  API_ENTERPRISE_ENTER,
-  API_ENTERPRISE_PUB_ORGA
-} from "~/plugin/APIEnterprise/APIEnterpriseConstants";
+import { getBaseQuestionsToHideAccordingToType } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -140,11 +131,10 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
-const memoizeAvailableQuestions: any = memoize(() => {
-});
+const memoizeAvailableQuestions: any = memoize(() => {});
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const {proposalForm, proposal} = props;
+  const { proposalForm, proposal } = props;
   const data = {
     title: values.title,
     summary: values.summary,
@@ -163,7 +153,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
   if (proposal) {
     return ChangeProposalContentMutation.commit({
-      input: {...data, id: proposal.id},
+      input: { ...data, id: proposal.id },
     })
       .then(response => {
         if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
@@ -181,13 +171,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
 
   return CreateProposalMutation.commit({
-    input: {...data, proposalFormId: proposalForm.id},
+    input: { ...data, proposalFormId: proposalForm.id },
   })
     .then(response => {
       if (response.createProposal && response.createProposal.userErrors) {
         for (const error of response.createProposal.userErrors) {
           if (error.message === 'You contributed too many times.') {
-            throw new SubmissionError({_error: 'publication-limit-reached'});
+            throw new SubmissionError({ _error: 'publication-limit-reached' });
           }
         }
       }
@@ -226,7 +216,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     });
 };
 
-const validate = (values: FormValues, {proposalForm, features, intl}: Props) => {
+const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
   const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
 
   return validateProposalContent(
@@ -251,8 +241,8 @@ type State = {
 
 export class ProposalForm extends React.Component<Props, State> {
   loadTitleSuggestions = debounce((title: string) => {
-    const {proposal: currentProposal, proposalForm} = this.props;
-    this.setState({isLoadingTitleSuggestions: true});
+    const { proposal: currentProposal, proposalForm } = this.props;
+    this.setState({ isLoadingTitleSuggestions: true });
     fetchQuery(
       environment,
       searchProposalsQuery,
@@ -286,25 +276,30 @@ export class ProposalForm extends React.Component<Props, State> {
 
   componentDidMount() {
     window.addEventListener('beforeunload', onUnload);
-    const {responses} = this.props;
-    const siret = responses[12].value;
-    const rna = responses[27].value;
+    const { responses } = this.props;
+    if (responses.length > 70) {
+      // The two following lines are using flowfix me because ResponseInReduxForm seems broken (see other uses)
+      // $FlowFixMe
+      const siret: ?string = responses[12] && responses[12].value;
+      // $FlowFixMe
+      const rna: ?string = responses[27] && responses[27].value;
 
-    const invisibleQuestionIndexes = getBaseQuestionsToHideAccordingToType(rna, siret);
-    invisibleQuestionIndexes.forEach((questionIndex) => {
-      commitLocalUpdate(environment, store => {
-        const question = store.get(responses[questionIndex].question);
-        if (question) {
-          question.setValue(true, 'hidden');
-        }
+      const invisibleQuestionIndexes = getBaseQuestionsToHideAccordingToType(rna, siret);
+      invisibleQuestionIndexes.forEach(questionIndex => {
+        commitLocalUpdate(environment, store => {
+          const question = store.get(responses[questionIndex].question);
+          if (question) {
+            question.setValue(true, 'hidden');
+          }
+        });
       });
-    });
+    }
   }
 
-  componentWillReceiveProps({titleValue, addressValue, proposalForm}: Props) {
-    const {titleValue: titleValueProps, addressValue: addressValueProps} = this.props;
+  componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
+    const { titleValue: titleValueProps, addressValue: addressValueProps } = this.props;
     if (titleValueProps !== titleValue) {
-      this.setState({titleSuggestions: []});
+      this.setState({ titleSuggestions: [] });
       if (titleValue && titleValue.length > 3) {
         this.loadTitleSuggestions(titleValue);
       }
@@ -321,7 +316,7 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   retrieveDistrictForLocation = (location: LatLng) => {
-    const {proposalForm, dispatch} = this.props;
+    const { proposalForm, dispatch } = this.props;
     fetchQuery(
       environment,
       getAvailableDistrictsQuery,
@@ -348,14 +343,14 @@ export class ProposalForm extends React.Component<Props, State> {
   };
 
   renderError() {
-    const {error, proposalForm} = this.props;
+    const { error, proposalForm } = this.props;
 
     return error === 'publication-limit-reached' ? (
       <Alert bsStyle="warning">
         <div>
           <h4>
             <strong>
-              <FormattedMessage id="publication-limit-reached"/>
+              <FormattedMessage id="publication-limit-reached" />
             </strong>
           </h4>
           <FormattedMessage
@@ -369,7 +364,7 @@ export class ProposalForm extends React.Component<Props, State> {
       </Alert>
     ) : (
       <Alert bsStyle="danger">
-        <i className="icon ion-ios-close-outline"/> <FormattedHTMLMessage id={error}/>
+        <i className="icon ion-ios-close-outline" /> <FormattedHTMLMessage id={error} />
       </Alert>
     );
   }
@@ -404,12 +399,12 @@ export class ProposalForm extends React.Component<Props, State> {
     const optional = (
       <span className="excerpt">
         {' '}
-        <FormattedMessage id="global.optional"/>
+        <FormattedMessage id="global.optional" />
       </span>
     );
     return (
       <form id="proposal-form">
-        <WYSIWYGRender className="mb-15" value={proposalForm.description}/>
+        <WYSIWYGRender className="mb-15" value={proposalForm.description} />
         {error && this.renderError()}
         <Field
           name="title"
@@ -418,7 +413,7 @@ export class ProposalForm extends React.Component<Props, State> {
           id="proposal_title"
           autoComplete="off"
           help={proposalForm.titleHelpText}
-          label={<FormattedMessage id={titleFieldTradKey}/>}
+          label={<FormattedMessage id={titleFieldTradKey} />}
           addonAfter={
             proposalForm.suggestingSimilarProposals ? (
               <Glyphicon
@@ -441,12 +436,12 @@ export class ProposalForm extends React.Component<Props, State> {
                     }}
                   />
                   <Button
-                    style={{marginTop: -5}}
+                    style={{ marginTop: -5 }}
                     className="pull-right"
                     onClick={() => {
-                      this.setState({titleSuggestions: []});
+                      this.setState({ titleSuggestions: [] });
                     }}>
-                    <FormattedMessage id="global.close"/>
+                    <FormattedMessage id="global.close" />
                   </Button>
                 </Panel.Title>
               </Panel.Heading>
@@ -473,7 +468,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.summaryHelpText}
             label={
               <span>
-                <FormattedMessage id="global.summary"/>
+                <FormattedMessage id="global.summary" />
                 {optional}
               </span>
             }
@@ -488,7 +483,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.themeHelpText}
             label={
               <span>
-                <FormattedMessage id="global.theme"/>
+                <FormattedMessage id="global.theme" />
                 {!proposalForm.themeMandatory && optional}
               </span>
             }>
@@ -515,7 +510,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.categoryHelpText}
             label={
               <span>
-                <FormattedMessage id="global.category"/>
+                <FormattedMessage id="global.category" />
                 {!proposalForm.categoryMandatory && optional}
               </span>
             }>
@@ -541,7 +536,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.addressHelpText}
             name="addressText"
             formName={formName}
-            label={<FormattedMessage id="proposal_form.address"/>}
+            label={<FormattedMessage id="proposal_form.address" />}
             placeholder="proposal.map.form.placeholder"
           />
         )}
@@ -554,7 +549,7 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.districtHelpText}
             label={
               <span>
-                <FormattedMessage id="proposal.district"/>
+                <FormattedMessage id="proposal.district" />
                 {!proposalForm.districtMandatory && optional}
               </span>
             }>
@@ -576,7 +571,7 @@ export class ProposalForm extends React.Component<Props, State> {
             component={component}
             label={
               <span>
-                <FormattedMessage id="proposal.body"/>
+                <FormattedMessage id="proposal.body" />
                 {!proposalForm.descriptionMandatory && optional}
               </span>
             }
@@ -604,7 +599,7 @@ export class ProposalForm extends React.Component<Props, State> {
             type="image"
             label={
               <span>
-                <FormattedMessage id="proposal.media"/>
+                <FormattedMessage id="proposal.media" />
                 {optional}
               </span>
             }
@@ -618,7 +613,7 @@ export class ProposalForm extends React.Component<Props, State> {
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState, {proposal, proposalForm}: Props) => {
+const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => {
   const defaultResponses = formatInitialResponsesValues(
     proposalForm.questions,
     proposal ? proposal.responses : [],
