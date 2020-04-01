@@ -275,7 +275,7 @@ const RenderResponses = ({
                       id={`${cleanDomId(`${form}-${member}`)}`}
                       type={field.type}
                       style={{
-                        maxWidth: '150px',
+                        maxWidth: '180px',
                         background: '#c7edf3',
                         padding: '20px 25px 25px 25px',
                         border: '2px solid #1d8293',

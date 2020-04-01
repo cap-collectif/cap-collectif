@@ -12,7 +12,7 @@ import {
   FieldArray,
   formValueSelector,
 } from 'redux-form';
-import { commitLocalUpdate, createFragmentContainer, fetchQuery, graphql } from 'react-relay';
+import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import {
@@ -51,7 +51,7 @@ import {
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import renderResponses from '~/components/Form/RenderResponses';
-import { getBaseQuestionsToHideAccordingToType } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
+import { handleVisibilityAccordingToType } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -276,7 +276,7 @@ export class ProposalForm extends React.Component<Props, State> {
 
   componentDidMount() {
     window.addEventListener('beforeunload', onUnload);
-    const { responses } = this.props;
+    const { responses, proposalForm, dispatch } = this.props;
     if (responses.length > 70) {
       // The two following lines are using flowfix me because ResponseInReduxForm seems broken (see other uses)
       // $FlowFixMe
@@ -284,15 +284,7 @@ export class ProposalForm extends React.Component<Props, State> {
       // $FlowFixMe
       const rna: ?string = responses[27] && responses[27].value;
 
-      const invisibleQuestionIndexes = getBaseQuestionsToHideAccordingToType(rna, siret);
-      invisibleQuestionIndexes.forEach(questionIndex => {
-        commitLocalUpdate(environment, store => {
-          const question = store.get(responses[questionIndex].question);
-          if (question) {
-            question.setValue(true, 'hidden');
-          }
-        });
-      });
+      handleVisibilityAccordingToType(rna, siret, dispatch, proposalForm.questions, responses);
     }
   }
 
