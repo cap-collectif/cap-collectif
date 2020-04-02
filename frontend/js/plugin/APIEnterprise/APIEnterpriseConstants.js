@@ -124,6 +124,7 @@ export const dispatchValuesToForm = (
     { questionNumber: 23, value: obj.availableStatus },
     { questionNumber: 18, value: obj.availableFiscalRegulationAttestation },
     { questionNumber: 19, value: obj.availableSocialRegulationAttestation },
+    { questionNumber: 71, value: obj.availablePrefectureReceiptConfirm },
   ];
 
   const docAssocRNAMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [

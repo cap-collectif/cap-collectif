@@ -7,7 +7,6 @@ use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\APIEnterpriseTypeResolv
 use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver;
 use Capco\AppBundle\Helper\EnvHelper;
-use Capco\MediaBundle\Entity\Media;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -36,25 +35,26 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function setMediaFromAPIOrRequest(array $default, ?Media $fallback): ?array
+    public function setMediaFromAPIOrRequest(array $default, ?string $apiMediaId): ?array
     {
         if (empty($default)) {
-            if (!$fallback) {
+            if (!$apiMediaId) {
                 return null;
             }
 
-            return [$fallback->getId()];
+            return [$apiMediaId];
         }
 
         return $default;
     }
 
-    public function getSiret(array $values): ?string{
-        if (isset($values['responses'][12]['value'])){
+    public function getSiret(array $values): ?string
+    {
+        if (isset($values['responses'][12]['value'])) {
             return $values['responses'][12]['value'];
         }
 
-        if (isset($values['responses'][44]['value'])){
+        if (isset($values['responses'][44]['value'])) {
             return $values['responses'][44]['value'];
         }
 
@@ -68,7 +68,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             json_decode($values['responses'][10]['value'], true)['labels'][0]
         );
         $id = $values['responses'][27]['value'] ?? null;
-        $siret = (!$id) ? $this->getSiret($values) : null;
+        $siret = !$id ? $this->getSiret($values) : null;
 
         if ($siret) {
             $mainInfoKey =
@@ -102,7 +102,8 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                         $values['responses'][49]['medias'],
                         $mainInfo['sirenSituation']
                     );
-                    $values['responses'][52]['value'] = $mainInfo['turnover'] ?? $values['responses'][52]['value'];
+                    $values['responses'][52]['value'] =
+                        $mainInfo['turnover'] ?? $values['responses'][52]['value'];
 
                     break;
                 case APIEnterpriseTypeResolver::PUBLIC_ORGA:
@@ -143,6 +144,10 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                     $values['responses'][19]['medias'] = $this->setMediaFromAPIOrRequest(
                         $values['responses'][19]['medias'],
                         $docInfo['socialRegulationAttestation']
+                    );
+                    $values['responses'][71]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][71]['medias'],
+                        $docInfo['prefectureReceiptConfirm']
                     );
                 }
                 if ($id) {
