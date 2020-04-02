@@ -38,7 +38,7 @@ InternalProject:
                 type: 'String'
             proposals:
                 type: 'InternalProposalConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args, getUser()])'
                 args:
                     step:
                         type: 'ID'

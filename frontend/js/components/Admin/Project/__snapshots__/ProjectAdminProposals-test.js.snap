@@ -41,20 +41,6 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           />
         </InlineSelect.Choice>
       </InlineSelect>
-      <ClearableInput
-        icon={
-          <i
-            className="cap cap-magnifier"
-          />
-        }
-        id="search"
-        initialValue={null}
-        name="search"
-        onClear={[Function]}
-        onSubmit={[Function]}
-        placeholder="global.menu.search"
-        type="text"
-      />
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}
@@ -825,20 +811,6 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           />
         </InlineSelect.Choice>
       </InlineSelect>
-      <ClearableInput
-        icon={
-          <i
-            className="cap cap-magnifier"
-          />
-        }
-        id="search"
-        initialValue={null}
-        name="search"
-        onClear={[Function]}
-        onSubmit={[Function]}
-        placeholder="global.menu.search"
-        type="text"
-      />
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}

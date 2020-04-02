@@ -21,7 +21,7 @@ import type {
 import InlineSelect from '~ui/InlineSelect';
 import { getAllFormattedChoicesForProject } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-import ClearableInput from '~ui/Form/Input/ClearableInput';
+// import ClearableInput from '~ui/Form/Input/ClearableInput';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -272,7 +272,7 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
 
 export const ProjectAdminProposals = ({ project, relay }: Props) => {
   const { parameters, dispatch } = useProjectAdminProposalsContext();
-  const intl = useIntl();
+  // const intl = useIntl();
   const hasProposals = project.proposals?.totalCount > 0;
 
   return (
@@ -300,6 +300,8 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
               <FormattedMessage id="project_download.label.trashed" />
             </InlineSelect.Choice>
           </InlineSelect>
+          {/* 
+          todo @Liinkiing fix me I'm causing _nonIterableRest error.
           <ClearableInput
             id="search"
             name="search"
@@ -319,7 +321,7 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
               }
             }}
             placeholder={intl.formatMessage({ id: 'global.menu.search' })}
-          />
+          /> */}
         </S.ProjectAdminProposalsHeader>
         <PickableList
           useInfiniteScroll={hasProposals}

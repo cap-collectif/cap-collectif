@@ -3,16 +3,17 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\Project;
 
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
 use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class ProjectProposalsDataLoader extends BatchDataLoader
 {
@@ -55,7 +56,7 @@ class ProjectProposalsDataLoader extends BatchDataLoader
         $results = [];
 
         foreach ($keys as $key) {
-            $results[] = $this->resolveWithoutBatch($key['project'], $key['args']);
+            $results[] = $this->resolveWithoutBatch($key['project'], $key['args'], $key['viewer']);
         }
 
         return $this->getPromiseAdapter()->createAll($results);
@@ -66,10 +67,11 @@ class ProjectProposalsDataLoader extends BatchDataLoader
         return [
             'projectId' => $key['project']->getId(),
             'args' => $key['args'],
+            'viewer' => $key['viewer'] ? $key['viewer']->getId() : null,
         ];
     }
 
-    private function resolveWithoutBatch(Project $project, Argument $args): Connection
+    private function resolveWithoutBatch(Project $project, Argument $args, ?User $viewer = null): Connection
     {
         $data = ConnectionBuilder::empty();
 
@@ -77,12 +79,11 @@ class ProjectProposalsDataLoader extends BatchDataLoader
         $step = $project->getFirstCollectStep();
         if ($step && $step->getProposalForm()) {
             $promise =
-                // Null visibility will avoid private proposals
                 $this->proposalFormProposalsDataLoader
                     ->load([
                         'form' => $step->getProposalForm(),
                         'args' => $args,
-                        'viewer' => null,
+                        'viewer' => $viewer,
                         'request' => null,
                     ])
                     ->then(function (Connection $connection) use (&$data) {

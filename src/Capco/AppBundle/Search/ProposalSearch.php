@@ -251,7 +251,13 @@ class ProposalSearch extends Search
         }
 
         if (isset($providedFilters['step'])) {
-            $filters['step.id'] = GlobalId::fromGlobalId($providedFilters['step'])['id'];
+            $globalId = GlobalId::fromGlobalId($providedFilters['step']);
+            // A step wan either be a CollectStep or a SelectionStep.
+            if ($globalId['type'] === 'CollectStep') {
+                $filters['step.id'] = $globalId['id'];
+            } else if ($globalId['type'] === 'SelectionStep') {
+                $filters['selections.step.id'] = $globalId['id'];
+            }
         }
 
         if (isset($providedFilters['selectionStep']) && !empty($providedFilters['selectionStep'])) {
