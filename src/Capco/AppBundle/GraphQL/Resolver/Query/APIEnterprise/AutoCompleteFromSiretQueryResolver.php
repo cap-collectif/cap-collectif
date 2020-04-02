@@ -36,7 +36,8 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         $type = $args->offsetGet('type');
         $siret = $args->offsetGet('siret');
         $siren = substr($siret, 0,9);
-        $cacheVisibilityKey = $siret . '_' . self::AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY;
+        $cacheKey = $siret . '_' . $type. '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY;
+        $cacheVisibilityKey = $siret . '_' . $type. '_' . self::AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY;
 
         if ($this->cache->hasItem($cacheVisibilityKey)){
             return $this->cache->getItem($cacheVisibilityKey)->get();
@@ -81,7 +82,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
             $exercices = isset($exercices) ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices']) : null;
 
-            $this->autoCompleteUtils->saveInCache($siret . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY,
+            $this->autoCompleteUtils->saveInCache($cacheKey,
                 array_merge($basicInfo, [
                     'kbis' => $kbis,
                     'turnover' => $exercices ?? '',
@@ -102,7 +103,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
             $exercices = isset($exercices) ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices']) : null;
 
-            $this->autoCompleteUtils->saveInCache($siret . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY,
+            $this->autoCompleteUtils->saveInCache($cacheKey,
                 array_merge($basicInfo, [
                     'turnover' => $exercices ?? '',
                     'sirenSituation' => $sirenSituPDF
@@ -112,7 +113,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
                 'availableTurnover' => isset($exercices),
             ]);
         }
-        $this->autoCompleteUtils->saveInCache($siret . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY,
+        $this->autoCompleteUtils->saveInCache($cacheKey,
             array_merge($basicInfo, [
                 'sirenSituation' => $sirenSituPDF
             ]));

@@ -38,7 +38,8 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $id = $args->offsetGet('id');
         $type = $args->offsetGet('type');
         $docs = [];
-        $visibilityCacheKey = $id . '_' . self::AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY;
+        $cacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY;
+        $visibilityCacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY;
 
         if ($this->cache->hasItem($visibilityCacheKey)){
             return $this->cache->getItem($visibilityCacheKey)->get();
@@ -63,7 +64,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe) ? $greffe = json_encode($greffe) : null;
             $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis");
 
-            $this->autoCompleteUtils->saveInCache($id . ':' . self::AUTOCOMPLETE_DOC_CACHE_KEY,
+            $this->autoCompleteUtils->saveInCache($cacheKey,
                 [
                     'kbis' => $kbis
                 ]);
@@ -125,7 +126,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 'availableStatus' => isset($status),
                 'availablePrefectureReceiptConfirm' => isset($receipt)
             ]);
-            $this->autoCompleteUtils->saveInCache($id . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY,
+            $this->autoCompleteUtils->saveInCache($cacheKey,
                 [
                     'compositionCA' => $compo,
                     'status' => $status,
@@ -136,7 +137,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 ]);
         } else {
             //In this case, it is an enterprise
-            $this->autoCompleteUtils->saveInCache($id . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY,
+            $this->autoCompleteUtils->saveInCache($cacheKey,
                 [
                     'fiscalRegulationAttestation' => $dgfip,
                     'socialRegulationAttestation' => $acoss,

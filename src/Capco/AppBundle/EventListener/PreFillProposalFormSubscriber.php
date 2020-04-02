@@ -72,7 +72,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
 
         if ($siret) {
             $mainInfoKey =
-                $siret . '_' . AutoCompleteFromSiretQueryResolver::AUTOCOMPLETE_SIRET_CACHE_KEY;
+                $siret . '_' . $type. '_'. AutoCompleteFromSiretQueryResolver::AUTOCOMPLETE_SIRET_CACHE_KEY;
             if (!$this->cache->hasItem($mainInfoKey)) {
                 $args = new Argument([
                     'siret' => $siret,
@@ -116,7 +116,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             }
         }
         $docInfoKey =
-            ($siret ?? $id) . '_' . AutoCompleteDocQueryResolver::AUTOCOMPLETE_DOC_CACHE_KEY;
+            ($siret ?? $id) . '_' . $type . '_' . AutoCompleteDocQueryResolver::AUTOCOMPLETE_DOC_CACHE_KEY;
         if (!$this->cache->hasItem($docInfoKey)) {
             $args = new Argument([
                 'id' => $siret ?? $id,
