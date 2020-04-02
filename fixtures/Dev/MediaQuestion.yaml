@@ -81,17 +81,8 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         required: true
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
-        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret9'
-        hidden: true
-    mediaquestionIdfProjetLocalAssociationSiret9:
-        id: 145
-        title: Récépissé de la déclaration en préfecture (greffe des associations)
-        private: true
-        required: true
-        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
-        type: 7 # media
-        hidden: true
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret6'
+        hidden: true
     mediaquestionIdfProjetLocalAssociationSiret6:
         id: 126
         title: RIB au nom de la raison sociale et à l'adresse du siège social
@@ -106,6 +97,15 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         required: true
         description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
         type: 7 # media
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret9'
+    mediaquestionIdfProjetLocalAssociationSiret9:
+        id: 145
+        title: Récépissé de la déclaration en préfecture (greffe des associations)
+        private: true
+        required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
+        type: 7 # media
+        hidden: true
     # END of path for Association with SIRET.
     mediaquestionIdfProjetLocalAssociationRna1:
         id: 128
