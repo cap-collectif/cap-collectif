@@ -306,6 +306,24 @@ type AddProposalVotePayload {
   clientMutationId: String
 }
 
+input AddProposalsToStepsInput {
+  """The ids of the proposals to add to steps"""
+  proposalIds: [ID!]!
+
+  """The ids of the steps to which proposals should be moved"""
+  stepsIds: [ID!]!
+  clientMutationId: String
+}
+
+type AddProposalsToStepsPayload {
+  """Connection of assigned proposals"""
+  proposals: ProposalConnection
+
+  """An unsuccessful mutation will return an error message"""
+  error: String
+  clientMutationId: String
+}
+
 input AddReplyInput {
   """The id of the questionnaire"""
   questionnaireId: ID!
@@ -4150,6 +4168,7 @@ type Mutation {
   changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
   changeCollectStatus(input: ChangeCollectStatusInput!): ChangeCollectStatusPayload
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
+  addProposalsToSteps(input: AddProposalsToStepsInput!): AddProposalsToStepsPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
   updateRegistrationForm(input: UpdateRegistrationFormQuestionsInput!): UpdateRegistrationFormQuestionsPayload
   updateRegistrationFormCommunication(input: UpdateRegistrationFormCommunicationInput!): UpdateRegistrationFormCommunicationPayload

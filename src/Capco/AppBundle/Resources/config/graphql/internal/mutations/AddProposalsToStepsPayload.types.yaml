@@ -1,0 +1,10 @@
+AddProposalsToStepsPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      proposals:
+        type: 'InternalProposalConnection'
+        description: 'Connection of assigned proposals'
+      error:
+        type: 'String'
+        description: 'An unsuccessful mutation will return an error message'
