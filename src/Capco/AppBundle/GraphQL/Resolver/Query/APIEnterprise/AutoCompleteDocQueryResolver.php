@@ -138,7 +138,6 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             //In this case, it is an enterprise
             $this->autoCompleteUtils->saveInCache($id . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY,
                 [
-                    'availableCompositionCA' => isset($compo),
                     'fiscalRegulationAttestation' => $dgfip,
                     'socialRegulationAttestation' => $acoss,
                     'kbis' => $kbis,

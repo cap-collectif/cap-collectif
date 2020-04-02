@@ -155,7 +155,6 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     required: true
     type: 7 # media 
     alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationNoRna3'
-    hidden: true
   mediaquestionIdfProjetLocalAssociationNoRna3:
     id: 135
     title: Charte régionale des valeurs de la République et de la laïcité signée par le représentant légal
