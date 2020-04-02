@@ -62,6 +62,17 @@ class APIEnterpriseAutoCompleteUtils
         return $name . $street . $postalCode . $country;
     }
 
+    public function formatTurnoverFromJSON(array $jsonTurnover): string{
+        $strTurnover = '';
+        foreach ($jsonTurnover as $entry){
+            $ca = isset($entry['ca']) ? 'Chiffre d\'affaire : ' . $entry['ca'] . ' ' : '';
+            $end = isset($entry['date_fin_exercice']) ? 'Fin d\'exercice : ' . $entry['date_fin_exercice'] . ' ' : '';
+            $endTimeStamp = isset($entry['date_fin_exercice']) ? 'Fin d\'exercice : ' . $entry['date_fin_exercice'] . ' ' : '';
+            $strTurnover = $strTurnover . $ca . $end . $endTimeStamp . "\n";
+        }
+        return $strTurnover;
+    }
+
     public function saveInCache(string $key, array $data, int $duration = RedisCache::ONE_DAY): void
     {
         $cachedItem = $this->cache->getItem($key);

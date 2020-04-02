@@ -49,14 +49,27 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         return $default;
     }
 
+    public function getSiret(array $values): ?string{
+        if (isset($values['responses'][12]['value'])){
+            return $values['responses'][12]['value'];
+        }
+
+        if (isset($values['responses'][44]['value'])){
+            return $values['responses'][44]['value'];
+        }
+
+        return $values['responses'][56]['value'] ?? null;
+    }
+
     public function getAPIEnterpriseData(FormEvent $event): void
     {
         $values = $event->getData();
         $type = APIEnterpriseTypeResolver::getAPIEnterpriseTypeFromString(
             json_decode($values['responses'][10]['value'], true)['labels'][0]
         );
-        $siret = $values['responses'][12]['value'] ?? null;
         $id = $values['responses'][27]['value'] ?? null;
+        $siret = (!$id) ? $this->getSiret($values) : null;
+
         if ($siret) {
             $mainInfoKey =
                 $siret . '_' . AutoCompleteFromSiretQueryResolver::AUTOCOMPLETE_SIRET_CACHE_KEY;
@@ -89,10 +102,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                         $values['responses'][49]['medias'],
                         $mainInfo['sirenSituation']
                     );
-                    $values['responses'][52]['value'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][52]['value'],
-                        $mainInfo['turnover']
-                    );
+                    $values['responses'][52]['value'] = $mainInfo['turnover'] ?? $values['responses'][52]['value'];
 
                     break;
                 case APIEnterpriseTypeResolver::PUBLIC_ORGA:

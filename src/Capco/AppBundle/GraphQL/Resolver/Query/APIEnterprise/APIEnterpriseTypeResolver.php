@@ -22,12 +22,13 @@ class APIEnterpriseTypeResolver implements ResolverInterface
     }
 
     public static function getAPIEnterpriseTypeFromString(string $str): string {
-        switch ($str){
-            case 'Une association':
+        switch (strtolower($str)){
+            case 'une association':
                 return self::ASSOCIATION;
-            case 'Une entreprise':
+            case 'un autre organisme privé':
+            case 'une entreprise':
                 return self::ENTERPRISE;
-            case 'Une organisation publique':
+            case 'un organisme public':
                 return self::PUBLIC_ORGA;
         }
         throw new RuntimeException('Unknown type of API Enterprise');

@@ -79,7 +79,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             $greffe = isset($greffe) ? json_encode($greffe) : null;
             $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${siren}_kbis");
             $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
-            $exercices = isset($exercices) ? json_encode($exercices['exercices']) : null;
+            $exercices = isset($exercices) ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices']) : null;
 
             $this->autoCompleteUtils->saveInCache($siret . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY,
                 array_merge($basicInfo, [
@@ -100,7 +100,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
 
         if ($type === APIEnterpriseTypeResolver::ENTERPRISE) {
             $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
-            $exercices = isset($exercices) ? json_encode($exercices['exercices']) : null;
+            $exercices = isset($exercices) ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices']) : null;
 
             $this->autoCompleteUtils->saveInCache($siret . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY,
                 array_merge($basicInfo, [
