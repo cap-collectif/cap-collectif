@@ -119,6 +119,8 @@ storiesOf('Core|Avatar', module)
         color="pink"
         icon={ICON_NAME.facebook}
         badgeSize={18}
+        iconSize={9}
+        iconColor="#fff"
       />
     );
   });

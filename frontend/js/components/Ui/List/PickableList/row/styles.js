@@ -3,7 +3,9 @@ import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import { CHECKBOX_CELL_WIDTH } from '~ui/List/PickableList/header/styles';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'pickableList-row',
+})`
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -19,4 +21,6 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-export const ChildWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div``;
+export const ChildWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'pickableList-row-content',
+})``;

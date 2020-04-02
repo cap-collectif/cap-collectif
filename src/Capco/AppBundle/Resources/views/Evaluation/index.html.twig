@@ -4,14 +4,6 @@
     {{ 'evaluations.index.page_title'|trans }}
 {% endblock %}
 
-{% block jumbotron %}
-    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
-        <div class="container">
-            <h1>{{ 'evaluations.index.page_title'|trans }}</h1>
-        </div>
-    </div>
-{% endblock %}
-
 {% block body %}
     {{ react_render_component('EvaluationsIndexPageApp') }}
 {% endblock %}

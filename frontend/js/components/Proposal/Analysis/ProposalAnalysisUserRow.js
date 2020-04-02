@@ -91,7 +91,7 @@ const getLabelData = (status: ?Status) => {
     case 'NONE':
       return {
         color: colors.duckBlue,
-        icon: ICON_NAME.muteFace,
+        icon: ICON_NAME.silent,
         text: 'global.filter_not-pronounced',
       };
     case 'IN_PROGRESS':

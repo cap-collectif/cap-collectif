@@ -1,12 +1,21 @@
 // @flow
 import React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { css, type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-
 import DefaultAvatar from './DefaultAvatar';
 import type { State, FeatureToggles } from '~/types';
 import type { UserAvatar_user } from '~relay/UserAvatar_user.graphql';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import { Circle } from '~ui/Medias/AvatarBadge/AvatarBadge.style';
+
+export type Badge = {|
+  color: string,
+  icon: $Values<typeof ICON_NAME>,
+  size: number,
+  iconSize: number,
+  iconColor: string,
+|};
 
 type Props = {|
   user: ?UserAvatar_user,
@@ -20,10 +29,30 @@ type Props = {|
   onFocus?: () => void,
   onMouseOver?: () => void,
   onMouseOut?: () => void,
+  badge?: Badge,
 |};
+
+const commonStyleAvatar = css`
+  position: relative;
+
+  .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -0;
+    right: -5px;
+  }
+`;
 
 const UserAvatarLink: StyledComponent<{}, {}, HTMLAnchorElement> = styled.a`
   vertical-align: text-bottom;
+  display: inline-block;
+  ${commonStyleAvatar}
+`;
+
+const UserAvatarContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+  ${commonStyleAvatar}
 `;
 
 export class UserAvatar extends React.Component<Props> {
@@ -73,6 +102,14 @@ export class UserAvatar extends React.Component<Props> {
     );
   }
 
+  renderBadge(badge: Badge) {
+    return (
+      <Circle color={badge.color} size={badge.size}>
+        <Icon name={badge.icon} size={badge.iconSize} color={badge.iconColor} />
+      </Circle>
+    );
+  }
+
   render() {
     const {
       className,
@@ -84,6 +121,7 @@ export class UserAvatar extends React.Component<Props> {
       user,
       features,
       displayUrl,
+      badge,
     } = this.props;
 
     const funcProps = {
@@ -101,14 +139,16 @@ export class UserAvatar extends React.Component<Props> {
           style={style}
           href={displayUrl ? user.url : null}>
           {this.renderAvatar()}
+          {badge && this.renderBadge(badge)}
         </UserAvatarLink>
       );
     }
 
     return (
-      <span {...funcProps} className={className} style={style}>
+      <UserAvatarContainer {...funcProps} className={className} style={style}>
         {this.renderAvatar()}
-      </span>
+        {badge && this.renderBadge(badge)}
+      </UserAvatarContainer>
     );
   }
 }

@@ -12,8 +12,9 @@ exports[`<AvatarBadge /> should render correctly 1`] = `
     size={10}
   >
     <Icon
+      color="#fff"
       name="facebook"
-      size={10}
+      size={5}
     />
   </AvatarBadgestyle__Circle>
 </AvatarBadgestyle__AvatarBadgeContainer>

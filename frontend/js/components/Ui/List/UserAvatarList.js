@@ -1,15 +1,28 @@
 // @flow
 import * as React from 'react';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 
-type Props = {|
-  +avatarSize?: number,
-  +spaceBetweenAvatar?: number,
+type CommonProps = {|
   +max?: number,
-  +hiddenAvatarTooltip?: React.Node,
+  +spaceBetweenAvatar?: number,
+  +avatarSize?: number,
+|};
+
+type Props = {|
+  ...CommonProps,
+  +hasHiddenAvatarTooltip?: boolean,
   +children: any,
+|};
+
+type PropsAvatarHidden = {|
+  ...CommonProps,
+  totalAvatar: number,
+  onMouseOver?: () => void,
+  onMouseOut?: () => void,
+  onFocus?: () => void,
+  onBlur?: () => void,
+  reference?: any,
 |};
 
 const DEFAULT_AVATAR_SIZE = 45;
@@ -50,25 +63,41 @@ const AvatarDefaultButton = styled.button`
   border-radius: 50%;
 `;
 
-const UserAvatarList = ({
+export const AvatarHidden = ({
   max = 5,
   spaceBetweenAvatar = -10,
+  avatarSize,
+  totalAvatar,
+  onMouseOver,
+  onMouseOut,
+  reference,
+}: PropsAvatarHidden) => (
+  <AvatarWrapper
+    index={max}
+    max={max}
+    spaceBetweenAvatar={spaceBetweenAvatar}
+    onMouseOver={onMouseOver}
+    onFocus={onMouseOver}
+    onMouseOut={onMouseOut}
+    onBlur={onMouseOut}
+    ref={reference}>
+    <AvatarDefaultButton
+      avatarSize={avatarSize}
+      bsStyle="link"
+      id="show-all"
+      className="more__link text-center">
+      {`+${totalAvatar - max >= 100 ? '99' : totalAvatar - max}`}
+    </AvatarDefaultButton>
+  </AvatarWrapper>
+);
+
+const UserAvatarList = ({
   children,
   avatarSize,
-  hiddenAvatarTooltip,
+  max = 5,
+  spaceBetweenAvatar = -10,
+  hasHiddenAvatarTooltip = false,
 }: Props) => {
-  const renderRestOfAvatar = () => (
-    <AvatarWrapper index={max} max={max} spaceBetweenAvatar={spaceBetweenAvatar}>
-      <AvatarDefaultButton
-        avatarSize={avatarSize}
-        bsStyle="link"
-        id="show-all"
-        className="more__link text-center">
-        {`+${children.length - max >= 100 ? '99' : children.length - max}`}
-      </AvatarDefaultButton>
-    </AvatarWrapper>
-  );
-
   return (
     <UserAvatarListWrapper>
       {children.slice(0, max).map((child, index) => (
@@ -77,16 +106,14 @@ const UserAvatarList = ({
         </AvatarWrapper>
       ))}
 
-      {children.length > max &&
-        (hiddenAvatarTooltip ? (
-          <OverlayTrigger
-            placement="top"
-            overlay={<Tooltip id="more-avatar">{hiddenAvatarTooltip}</Tooltip>}>
-            {renderRestOfAvatar()}
-          </OverlayTrigger>
-        ) : (
-          renderRestOfAvatar()
-        ))}
+      {!hasHiddenAvatarTooltip && children.length > max && (
+        <AvatarHidden
+          max={max}
+          spaceBetweenAvatar={spaceBetweenAvatar}
+          avatarSize={avatarSize}
+          totalAvatar={children.length}
+        />
+      )}
     </UserAvatarListWrapper>
   );
 };

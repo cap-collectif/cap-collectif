@@ -9,13 +9,15 @@ type Props = {
   color: string,
   icon: $Values<typeof ICON_NAME>,
   badgeSize: number,
+  iconSize: number,
+  iconColor: string,
 };
 
-const AvatarBadge = ({ src, alt, size, color, icon, badgeSize }: Props) => (
+const AvatarBadge = ({ src, alt, size, color, icon, badgeSize, iconSize, iconColor }: Props) => (
   <AvatarBadgeContainer>
     <Avatar src={src} alt={alt} size={size} />
     <Circle color={color} size={badgeSize}>
-      <Icon name={icon} size={10} />
+      <Icon name={icon} size={iconSize} color={iconColor} />
     </Circle>
   </AvatarBadgeContainer>
 );

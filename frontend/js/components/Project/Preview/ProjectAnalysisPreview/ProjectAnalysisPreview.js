@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import Card from '~ui/Card/Card';
@@ -12,9 +13,10 @@ import ProjectAnalysisPreviewContainer, {
 
 type Props = {
   project: ProjectAnalysisPreview_project,
+  url: string,
 };
 
-const ProjectAnalysisPreview = ({ project }: Props) => {
+const ProjectAnalysisPreview = ({ project, url }: Props) => {
   const { title, cover, steps } = project;
 
   return (
@@ -25,14 +27,19 @@ const ProjectAnalysisPreview = ({ project }: Props) => {
             <img src={cover.url} alt="" aria-hidden />
           ) : (
             <DefaultCoverPreview>
-              <Icon name={ICON_NAME.bubbleMessage} size={55} />
+              <Icon name={ICON_NAME.doubleMessageBubble} size={55} />
             </DefaultCoverPreview>
           )}
         </Card.Cover>
         <Card.Body isHorizontal>
           <div>
             <Card.Title tagName="h3">
-              <a href="#go">{title}</a>
+              <Link
+                to={{
+                  pathname: url,
+                }}>
+                {title}
+              </Link>
             </Card.Title>
             <p>
               <FormattedMessage id="count-proposal" values={{ num: steps?.length }} />
@@ -62,7 +69,6 @@ export default createFragmentContainer(ProjectAnalysisPreview, {
   project: graphql`
     fragment ProjectAnalysisPreview_project on Project {
       title
-      url
       cover {
         url
       }

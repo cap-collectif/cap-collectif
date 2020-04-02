@@ -2,6 +2,7 @@
 
 exports[`<EvaluationsIndexPage /> render function renders correctly 1`] = `
 <div>
+  <EvaluationHeader />
   <ForwardRef(Relay(ProposalFormEvaluationList))
     key="1"
     proposalForm={

@@ -47,7 +47,7 @@ const ProjectAnalysisPreview = ({ project }: Props) => {
             <img src={cover.url} alt="" aria-hidden />
           ) : (
             <DefaultCoverPreview>
-              <Icon name={ICON_NAME.bubbleMessage} size={55} />
+              <Icon name={ICON_NAME.doubleMessageBubble} size={55} />
             </DefaultCoverPreview>
           )}
         </Card.Cover>

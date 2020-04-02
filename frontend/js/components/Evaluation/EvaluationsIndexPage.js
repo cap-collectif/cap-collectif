@@ -5,6 +5,7 @@ import ProposalFormEvaluationList, { pageSize } from './ProposalFormEvaluationLi
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { EvaluationsIndexPageQueryResponse } from '~relay/EvaluationsIndexPageQuery.graphql';
+import EvaluationHeader from './EvaluationHeader/EvaluationHeader';
 
 export const renderComponent = ({
   error,
@@ -20,6 +21,7 @@ export const renderComponent = ({
     if (props.proposalForms && props.proposalForms.length) {
       return (
         <div>
+          <EvaluationHeader />
           {props.proposalForms.filter(Boolean).map(proposalForm => (
             <ProposalFormEvaluationList key={proposalForm.id} proposalForm={proposalForm} />
           ))}

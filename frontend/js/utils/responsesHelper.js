@@ -1,6 +1,10 @@
 // @flow
 import { graphql } from 'react-relay';
 
+/* Need these fragments in other components but eslint doesn't appreciate
+ * that they're not used here */
+
+/* eslint-disable */
 export const MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY = graphql`
   query responsesHelper_MultipleQuestionChoicesSearchQuery($questionId: ID!, $term: String!) {
     node(id: $questionId) {
@@ -18,7 +22,6 @@ export const MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY = graphql`
   }
 `;
 
-// eslint-disable-next-line no-unused-vars
 const ResponseFragment = {
   response: graphql`
     fragment responsesHelper_response on Response {
@@ -51,7 +54,6 @@ const ResponseFragment = {
  * https://github.com/facebook/relay/issues/2118
  */
 
-// eslint-disable-next-line no-unused-vars
 const QuestionAdminFragment = {
   adminQuestion: graphql`
     fragment responsesHelper_adminQuestion on Question {
@@ -127,7 +129,6 @@ const QuestionAdminFragment = {
   `,
 };
 
-// eslint-disable-next-line no-unused-vars
 const QuestionFragment = {
   question: graphql`
     fragment responsesHelper_question on Question {
@@ -201,3 +202,4 @@ const QuestionFragment = {
     }
   `,
 };
+/* eslint-enable */

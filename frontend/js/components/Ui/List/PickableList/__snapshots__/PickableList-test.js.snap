@@ -6,11 +6,16 @@ Array [
     class="styles__Container-sc-19fy1kf-0 ctJyPw"
   >
     <div
-      class="styles__Container-sc-1ig07ym-0 bXPQuC"
+      class="styles__Container-sc-1ig07ym-0 endRTa pickableList-header"
     >
-      <input
-        type="checkbox"
-      />
+      <div
+        class="wrapper-checkbox-all-rows"
+      >
+        <input
+          id="allRows"
+          type="checkbox"
+        />
+      </div>
       <p>
         Items
       </p>
@@ -19,13 +24,13 @@ Array [
       class="styles__Container-sc-1u6boa9-0 dXlWzY"
     >
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO"
+        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
       >
         <input
           type="checkbox"
         />
         <div
-          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
         >
           <p>
             Je suis un bel item #1
@@ -33,13 +38,13 @@ Array [
         </div>
       </div>
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO"
+        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
       >
         <input
           type="checkbox"
         />
         <div
-          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
         >
           <p>
             Je suis un bel item #2
@@ -47,13 +52,13 @@ Array [
         </div>
       </div>
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO"
+        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
       >
         <input
           type="checkbox"
         />
         <div
-          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
         >
           <p>
             Je suis un bel item #3
@@ -61,13 +66,13 @@ Array [
         </div>
       </div>
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO"
+        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
       >
         <input
           type="checkbox"
         />
         <div
-          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
         >
           <p>
             Je suis un bel item #4
@@ -75,13 +80,13 @@ Array [
         </div>
       </div>
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO"
+        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
       >
         <input
           type="checkbox"
         />
         <div
-          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
         >
           <p>
             Je suis un bel item #5
@@ -102,13 +107,13 @@ exports[`<PickableList /> should render correctly without header 1`] = `
     class="styles__Container-sc-1u6boa9-0 dXlWzY"
   >
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO"
+      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
     >
       <input
         type="checkbox"
       />
       <div
-        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
       >
         <p>
           Je suis un bel item #1
@@ -116,13 +121,13 @@ exports[`<PickableList /> should render correctly without header 1`] = `
       </div>
     </div>
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO"
+      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
     >
       <input
         type="checkbox"
       />
       <div
-        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
       >
         <p>
           Je suis un bel item #2
@@ -130,13 +135,13 @@ exports[`<PickableList /> should render correctly without header 1`] = `
       </div>
     </div>
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO"
+      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
     >
       <input
         type="checkbox"
       />
       <div
-        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
       >
         <p>
           Je suis un bel item #3
@@ -144,13 +149,13 @@ exports[`<PickableList /> should render correctly without header 1`] = `
       </div>
     </div>
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO"
+      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
     >
       <input
         type="checkbox"
       />
       <div
-        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
       >
         <p>
           Je suis un bel item #4
@@ -158,13 +163,13 @@ exports[`<PickableList /> should render correctly without header 1`] = `
       </div>
     </div>
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO"
+      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
     >
       <input
         type="checkbox"
       />
       <div
-        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR"
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
       >
         <p>
           Je suis un bel item #5

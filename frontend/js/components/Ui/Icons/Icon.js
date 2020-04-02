@@ -8,10 +8,8 @@ export const ICON_NAME: {
   pen: 'pen',
   eye: 'eye',
   muteFace: 'muteFace',
-  todo: 'todo',
   clock: 'clock',
   unfavorable: 'unfavorable',
-  favorable: 'favorable',
   ongoing: 'ongoing',
   calendar: 'calendar',
   networkAdd: 'network-add',
@@ -41,18 +39,22 @@ export const ICON_NAME: {
   file: 'file',
   check: 'check',
   message: 'message',
-  bubbleMessage: 'bubble-message',
+  messageBubble: 'messageBubble',
+  doubleMessageBubble: 'doubleMessageBubble',
   taskList: 'taskList',
   done: 'done',
+  todo: 'todo',
+  inProgress: 'inProgress',
+  silent: 'silent',
+  favorable: 'favorable',
+  crossRounded: 'cross--rounded',
 } = {
   chart: 'chart',
   pen: 'pen',
   eye: 'eye',
   muteFace: 'muteFace',
-  todo: 'todo',
   clock: 'clock',
   unfavorable: 'unfavorable',
-  favorable: 'favorable',
   ongoing: 'ongoing',
   calendar: 'calendar',
   networkAdd: 'network-add',
@@ -82,9 +84,15 @@ export const ICON_NAME: {
   file: 'file',
   check: 'check',
   message: 'message',
-  bubbleMessage: 'bubble-message',
+  messageBubble: 'messageBubble',
+  doubleMessageBubble: 'doubleMessageBubble',
   taskList: 'taskList',
   done: 'done',
+  todo: 'todo',
+  inProgress: 'inProgress',
+  silent: 'silent',
+  favorable: 'favorable',
+  crossRounded: 'cross--rounded',
 };
 
 type Props = {|
@@ -109,16 +117,6 @@ const getIcon = name => {
       return <Icons.Pen />;
     case 'eye':
       return <Icons.Eye />;
-    case 'muteFace':
-      return <Icons.MuteFace />;
-    case 'todo':
-      return <Icons.Todo />;
-    case 'clock':
-      return <Icons.Clock />;
-    case 'unfavorable':
-      return <Icons.Unfavorable />;
-    case 'favorable':
-      return <Icons.Favorable />;
     case 'ongoing':
       return <Icons.Ongoing />;
     case 'calendar':
@@ -149,6 +147,9 @@ const getIcon = name => {
       return <Icons.Plus />;
     case 'close':
       return <Icons.Close />;
+    case 'cross--rounded':
+    case 'unfavorable':
+      return <Icons.CrossRounded />;
     case 'error':
       return <Icons.Error />;
     case 'trash':
@@ -171,17 +172,27 @@ const getIcon = name => {
     case 'checkboxChecked':
       return <Icons.CheckboxChecked />;
     case 'check':
+    case 'favorable':
       return <Icons.Check />;
     case 'file':
       return <Icons.File />;
     case 'message':
       return <Icons.Message />;
-    case 'bubble-message':
-      return <Icons.BubbleMessage />;
+    case 'doubleMessageBubble':
+      return <Icons.DoubleMessageBubble />;
+    case 'messageBubble':
+      return <Icons.MessageBubble />;
     case 'taskList':
+    case 'todo':
       return <Icons.TaskList />;
     case 'done':
       return <Icons.Done />;
+    case 'inProgress':
+      return <Icons.InProgress />;
+    case 'clock':
+      return <Icons.Clock />;
+    case 'silent':
+      return <Icons.Silent />;
     default:
       return <div />;
   }

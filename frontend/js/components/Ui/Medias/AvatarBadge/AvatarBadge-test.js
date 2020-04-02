@@ -12,6 +12,8 @@ const props = {
   badgeSize: 10,
   color: 'red',
   icon: ICON_NAME.facebook,
+  iconColor: '#fff',
+  iconSize: 5,
 };
 
 describe('<AvatarBadge />', () => {

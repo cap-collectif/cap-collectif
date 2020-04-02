@@ -10,7 +10,9 @@ export const CHECKBOX_CELL_WIDTH = '24px';
 // For the sc-selector tag, see https://github.com/styled-components/stylelint-processor-styled-components/issues/81#issuecomment-467765645
 // It helps the linter to correctly interprets and parse string litterals
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'pickableList-header',
+})`
   padding: 15px 10px;
   display: flex;
   align-items: center;
@@ -19,12 +21,16 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid ${colors.lightGray};
-  & > input[type='checkbox'] {
+  & > .wrapper-checkbox-all-rows input[type='checkbox'] {
     min-width: ${CHECKBOX_CELL_WIDTH};
     max-width: ${CHECKBOX_CELL_WIDTH};
     width: ${CHECKBOX_CELL_WIDTH};
     margin-top: 0;
     align-self: center;
+  }
+  & > .wrapper-checkbox-all-rows label {
+    font-weight: normal;
+    margin: 0;
   }
   & + ${/* sc-selector */ PickableListBodyContainer} {
     border-top: none;

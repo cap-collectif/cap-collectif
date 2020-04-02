@@ -67,7 +67,7 @@ const DropdownSelectChoice = ({
   return (
     <S.Container onClick={handler} className={className} isDisabled={disabled}>
       {indeterminate && <Icon name={ICON_NAME.plus} size="1rem" />}
-      {isChecked && !indeterminate && <Icon name={ICON_NAME.check} size="1rem" />}
+      {isChecked && !indeterminate && <Icon name={ICON_NAME.check} size="1rem" color="#333" />}
       <span>{children}</span>
     </S.Container>
   );
