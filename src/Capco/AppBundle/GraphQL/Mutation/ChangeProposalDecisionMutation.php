@@ -87,7 +87,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         ) {
             return [
                 'decision' => null,
-                'errorCode' => ProposalStatementErrorCode::UNASSIGNED_PROPOSAL,
+                'errorCode' => ProposalStatementErrorCode::NOT_ASSIGNED_PROPOSAL,
             ];
         }
 

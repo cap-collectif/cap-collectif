@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.assignAnalystsToProposals admin should assign a user as Analysts to a list of proposals. 1`] = `
+Object {
+  "assignAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "analysts": Array [
+              Object {
+                "username": "user34",
+              },
+              Object {
+                "username": "analyst2",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "analysts": Array [
+              Object {
+                "username": "user34",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxOA==",
+            "title": "Proposition 18",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`mutations.assignAnalystsToProposals admin should assign a user as Analysts to a proposal. 1`] = `
+Object {
+  "assignAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "analysts": Array [
+              Object {
+                "username": "analyst2",
+              },
+              Object {
+                "username": "user34",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`mutations.assignAnalystsToProposals should assign a user as Analysts to proposals, logged as decision maker. 1`] = `
+Object {
+  "assignAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "updatedBy": Object {
+                  "username": "analyst2",
+                },
+              },
+              Object {
+                "updatedBy": Object {
+                  "username": "analyst",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "username": "user26",
+              },
+              Object {
+                "username": "analyst",
+              },
+              Object {
+                "username": "analyst2",
+              },
+              Object {
+                "username": "user6",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "analysts": Array [
+              Object {
+                "username": "user34",
+              },
+              Object {
+                "username": "analyst2",
+              },
+              Object {
+                "username": "user6",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`mutations.assignAnalystsToProposals should assign a user as Analysts to proposals, logged as supervisor 1`] = `
+Object {
+  "assignAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "updatedBy": Object {
+                  "username": "analyst2",
+                },
+              },
+              Object {
+                "updatedBy": Object {
+                  "username": "analyst",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "username": "user26",
+              },
+              Object {
+                "username": "user6",
+              },
+              Object {
+                "username": "analyst",
+              },
+              Object {
+                "username": "analyst2",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "analysts": Array [
+              Object {
+                "username": "user34",
+              },
+              Object {
+                "username": "user6",
+              },
+              Object {
+                "username": "analyst2",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`mutations.assignAnalystsToProposals should not assign a user as Analysts to a proposal, logged as user. 1`] = `
+Object {
+  "assignAnalystsToProposals": Object {
+    "errorCode": "ACCESS_DENIED_TO_ASSIGN_ANALYST",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": null,
+            "analysts": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`mutations.assignAnalystsToProposals should not assign more 10 users as Analysts to a proposal, logged as admin 1`] = `
+Object {
+  "assignAnalystsToProposals": Object {
+    "errorCode": "MAX_ANALYSTS_REACHED",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "analysts": Array [
+              Object {
+                "username": "user34",
+              },
+              Object {
+                "username": "analyst2",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

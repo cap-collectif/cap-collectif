@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.revokeAnalystsToProposalsMutation logged as admin should revoke a list of analysts to a proposal. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "updatedBy": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                "username": "analyst2",
+              },
+            ],
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": true,
+      "username": "admin",
+    },
+  },
+}
+`;
+
+exports[`mutations.revokeAnalystsToProposalsMutation logged as admin should revoke all analyst to a proposal. 1`] = `
+Object {
+  "revokeAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "analysts": Array [],
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "viewer": Object {
+      "isAdmin": true,
+      "username": "admin",
+    },
+  },
+}
+`;

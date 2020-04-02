@@ -1,12 +1,12 @@
 Capco\AppBundle\Entity\ProposalAnalysis:
     proposalAnalysis1:
-        updatedBy: '@user526'
+        updatedBy: '@userAnalyst'
         proposal: '@proposal109'
         state: IN_PROGRESS
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
     proposalAnalysis2:
-        updatedBy: '@user527'
+        updatedBy: '@userAnalyst2'
         proposal: '@proposal109'
         state: IN_PROGRESS
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>

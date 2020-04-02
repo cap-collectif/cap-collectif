@@ -26,7 +26,7 @@ describe('User.supervisedProposals', () => {
       graphql(
         SupervisedProposalsQuery,
         {
-          id: 'VXNlcjp1c2VyNTIz',
+          id: 'VXNlcjp1c2VyU3VwZXJ2aXNvcg==',
         },
         'internal_supervisor',
       ),
@@ -38,7 +38,7 @@ describe('User.supervisedProposals', () => {
       graphql(
         SupervisedProposalsQuery,
         {
-          id: 'VXNlcjp1c2VyNTIz',
+          id: 'VXNlcjp1c2VyU3VwZXJ2aXNvcg==',
         },
         'internal_user',
       ),

@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         __construct: ['@proposal113', '@post17']
         post: '@post17'
         estimatedCost: 500
-        updatedBy: '@user525'
+        updatedBy: '@userDecisionMaker'
         proposal: '@proposal113'
         isApproved: true
         state: 'DONE'
@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         __construct: ['@proposal115', '@post18']
         post: '@post18'
         estimatedCost: 500000
-        updatedBy: '@user525'
+        updatedBy: '@userDecisionMaker'
         proposal: '@proposal115'
         isApproved: false
         state: 'DONE'
@@ -23,7 +23,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         __construct: ['@proposal109', '@post19']
         post: '@post19'
         estimatedCost: 3200
-        updatedBy: '@user525'
+        updatedBy: '@userDecisionMaker'
         proposal: '@proposal109'
         isApproved: true
         state: 'IN_PROGRESS'
@@ -45,4 +45,3 @@ Capco\AppBundle\Entity\ProposalDecision:
         state: 'IN_PROGRESS'
         createdAt: <identity((new \DateTime('2020-01-01 00:01:24')))>
         updatedAt: <identity((new \DateTime('2020-01-01 00:01:24')))>
-

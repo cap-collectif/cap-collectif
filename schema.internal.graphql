@@ -787,6 +787,25 @@ interface Argumentable {
   ): ArgumentConnection
 }
 
+input AssignAnalystsToProposalsInput {
+  """Assign analyst list to a list of proposals."""
+  proposalIds: [ID!]!
+
+  """The concerned list of analysts"""
+  analystIds: [ID!]!
+  clientMutationId: String
+}
+
+type AssignAnalystsToProposalsPayload {
+  """Connection of assigned proposals"""
+  proposals: ProposalConnection
+
+  """Contains the error code if one occurred."""
+  errorCode: ProposalAssignmentErrorCode
+  viewer: User!
+  clientMutationId: String
+}
+
 input AssignSupervisorToProposalsInput {
   """Assign a supervisor to a list of proposals."""
   proposalIds: [ID!]!
@@ -4224,6 +4243,8 @@ type Mutation {
   assignSupervisorToProposals(input: AssignSupervisorToProposalsInput!): AssignSupervisorToProposalsPayload
   configureAnalysis(input: ConfigureAnalysisInput!): ConfigureAnalysisPayload
   updateRedirectIOKey(input: UpdateRedirectIOProjectIdInput!): UpdateRedirectIOProjectIdPayload
+  revokeAnalystsToProposals(input: RevokeAnalystsToProposalsInput!): RevokeAnalystsToProposalsPayload
+  assignAnalystsToProposals(input: AssignAnalystsToProposalsInput!): AssignAnalystsToProposalsPayload
 }
 
 """A connection to a list of items."""
@@ -5829,6 +5850,20 @@ enum ProposalAssignmentErrorCode {
 
   """You dont have access to assign supervisor."""
   ACCESS_DENIED_TO_ASSIGN_SUPERVISOR
+
+  """You cant revoke yourself"""
+  CANT_REVOKE_YOURSELF
+
+  """
+  You dont have permission to revoke analyst with analysis in progress .
+  """
+  IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED
+
+  """You dont have access to assign analyst."""
+  ACCESS_DENIED_TO_ASSIGN_ANALYST
+
+  """You cant add more 10 analysts."""
+  MAX_ANALYSTS_REACHED
 }
 
 """A proposal category"""
@@ -6198,7 +6233,7 @@ enum ProposalStatementErrorCode {
   NON_EXISTING_PROPOSAL
 
   """You are not assigned to this proposal."""
-  UNASSIGNED_PROPOSAL
+  NOT_ASSIGNED_PROPOSAL
 
   """The decision-maker has already gave his decision about this proposal."""
   DECISION_ALREADY_GIVEN
@@ -7824,6 +7859,25 @@ type ReviewEventPayload {
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError!]!
+  clientMutationId: String
+}
+
+input RevokeAnalystsToProposalsInput {
+  """Revoke analyst list to a list of proposals."""
+  proposalIds: [ID!]!
+
+  """The concerned list of analysts"""
+  analystIds: [ID!]!
+  clientMutationId: String
+}
+
+type RevokeAnalystsToProposalsPayload {
+  """Connection of revoked proposals"""
+  proposals: ProposalConnection
+
+  """Contains the error code if one occurred."""
+  errorCode: ProposalAssignmentErrorCode
+  viewer: User!
   clientMutationId: String
 }
 

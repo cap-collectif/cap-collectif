@@ -2,7 +2,7 @@
 import '../../_setup';
 
 const AssignSupervisorToProposalsMutation = /* GraphQL*/ `
-  mutation ($input: AssignSupervisorToProposalsInput!) {
+  mutation AssignSupervisorToProposalsMutation($input: AssignSupervisorToProposalsInput!) {
     assignSupervisorToProposals(input: $input) {
       errorCode
       proposals {

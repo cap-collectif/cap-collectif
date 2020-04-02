@@ -67,7 +67,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         ) {
             return [
                 'assessment' => null,
-                'errorCode' => ProposalStatementErrorCode::UNASSIGNED_PROPOSAL,
+                'errorCode' => ProposalStatementErrorCode::NOT_ASSIGNED_PROPOSAL,
             ];
         }
 
@@ -77,21 +77,25 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
                 'errorCode' => ProposalStatementErrorCode::NON_EXISTING_ASSESSMENT,
             ];
         }
-    
+
         $proposalAssessment
             ->setEstimatedCost($cost)
             ->setBody($body)
             ->setOfficialResponse($officialResponse)
             ->setState($decision)
             ->setUpdatedBy($viewer);
-    
+
         if (
-            $proposal->getAnalyses() !== null &&
-            \in_array($proposalAssessment->getState(), ProposalStatementState::getDecisionalTypes(), true)
+            null !== $proposal->getAnalyses() &&
+            \in_array(
+                $proposalAssessment->getState(),
+                ProposalStatementState::getDecisionalTypes(),
+                true
+            )
         ) {
             /** @var ProposalAnalysis $analysis */
             foreach ($proposal->getAnalyses() as $analysis) {
-                if ($analysis->getState() === ProposalStatementState::IN_PROGRESS) {
+                if (ProposalStatementState::IN_PROGRESS === $analysis->getState()) {
                     $analysis->setState(ProposalStatementState::TOO_LATE);
                 }
             }

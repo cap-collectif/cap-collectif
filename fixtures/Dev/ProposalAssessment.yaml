@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\ProposalAssessment:
         id: 'proposalAssessment1'
         __construct: ['@proposal109']
         proposal: '@proposal109'
-        updatedBy: '@user523'
+        updatedBy: '@userSupervisor'
         state: 'IN_PROGRESS'
         body: null
         estimatedCost: null
@@ -14,7 +14,7 @@ Capco\AppBundle\Entity\ProposalAssessment:
         id: 'proposalAssessment2'
         __construct: ['@proposal111']
         proposal: '@proposal111'
-        updatedBy: '@user524'
+        updatedBy: '@userSupervisor2'
         state: 'IN_PROGRESS'
         body: "Après étude de la proposition, mon avis s'avère être favorable la concernant."
         estimatedCost: 1000
@@ -25,7 +25,7 @@ Capco\AppBundle\Entity\ProposalAssessment:
         id: 'proposalAssessment3'
         __construct: ['@proposal113']
         proposal: '@proposal113'
-        updatedBy: '@user524'
+        updatedBy: '@userSupervisor2'
         state: 'FAVOURABLE'
         body: "Je suis favorable à la proposition, l'idée me semble réalisable et tout à fait réaliste."
         estimatedCost: 1000
@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\ProposalAssessment:
         id: 'proposalAssessment4'
         __construct: ['@proposal114']
         proposal: '@proposal114'
-        updatedBy: '@user524'
+        updatedBy: '@userSupervisor2'
         state: 'IN_PROGRESS'
         body: "Je n'ai pas encore fini de rédiger mon avis, c'est donc en cours."
         estimatedCost: 1000
@@ -47,7 +47,7 @@ Capco\AppBundle\Entity\ProposalAssessment:
         id: 'proposalAssessment5'
         __construct: ['@proposal112']
         proposal: '@proposal112'
-        updatedBy: '@user524'
+        updatedBy: '@userSupervisor2'
         state: 'FAVOURABLE'
         body: 'Je trouve cette proposition très intéressante.'
         estimatedCost: 10000
@@ -58,7 +58,7 @@ Capco\AppBundle\Entity\ProposalAssessment:
         id: 'proposalAssessment6'
         __construct: ['@proposal110']
         proposal: '@proposal110'
-        updatedBy: '@user525'
+        updatedBy: '@userDecisionMaker'
         state: 'UNFAVOURABLE'
         body: 'Je trouve cette proposition pas très intéressante.'
         estimatedCost: 10000

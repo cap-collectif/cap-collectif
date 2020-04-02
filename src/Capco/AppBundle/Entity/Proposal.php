@@ -2,41 +2,41 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\ModerableInterface;
-use Capco\AppBundle\Traits\ModerableTrait;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\MediaBundle\Entity\Media;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Model\Publishable;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\DraftableTrait;
-use Capco\AppBundle\Traits\ReferenceTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\FollowableTrait;
-use Capco\AppBundle\Traits\SoftDeleteTrait;
-use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Traits\AddressableTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Traits\HasResponsesTrait;
-use Capco\AppBundle\Traits\SelfLinkableTrait;
-use Capco\AppBundle\Traits\SummarizableTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
+use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
-use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Traits\DraftableTrait;
+use Capco\AppBundle\Traits\FollowableTrait;
+use Capco\AppBundle\Traits\HasResponsesTrait;
+use Capco\AppBundle\Traits\ModerableTrait;
+use Capco\AppBundle\Traits\NullableTextableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Traits\ReferenceTrait;
+use Capco\AppBundle\Traits\SelfLinkableTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\SoftDeleteTrait;
+use Capco\AppBundle\Traits\SummarizableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\MediaBundle\Entity\Media;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="proposal", uniqueConstraints={
@@ -115,7 +115,7 @@ class Proposal implements
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
-    protected $proposalForm;
+    protected ProposalForm $proposalForm;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
@@ -292,12 +292,12 @@ class Proposal implements
     private $decisionMaker;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalyst", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalyst", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $analysts;
+    private $proposalAnalysts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal", orphanRemoval=true)
      */
     private $analyses;
 
@@ -316,11 +316,11 @@ class Proposal implements
         $this->progressSteps = new ArrayCollection();
         $this->childConnections = new ArrayCollection();
         $this->parentConnections = new ArrayCollection();
-        $this->analysts = new ArrayCollection();
+        $this->proposalAnalysts = new ArrayCollection();
         $this->analyses = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New proposal';
     }
@@ -396,9 +396,9 @@ class Proposal implements
     public function getAnalysts(): Collection
     {
         $analysts = new ArrayCollection();
-        if (!empty($this->analysts)) {
+        if (!empty($this->proposalAnalysts)) {
             /** @var ProposalAnalyst $analyst */
-            foreach ($this->analysts as $analyst) {
+            foreach ($this->proposalAnalysts as $analyst) {
                 $analysts->add($analyst->getAnalyst());
             }
         }
@@ -406,25 +406,72 @@ class Proposal implements
         return $analysts;
     }
 
-    public function addAnalyst(ProposalAnalyst $proposalAnalyst): self
+    public function removeAnalyst(User $analyst): self
     {
-        if (!$this->analysts->contains($proposalAnalyst)) {
-            $this->analysts[] = $proposalAnalyst;
-            $proposalAnalyst->setProposal($this);
+        if (!empty($this->proposalAnalysts)) {
+            /** @var ProposalAnalyst $proposalAnalyst */
+            foreach ($this->proposalAnalysts as $proposalAnalyst) {
+                if ($analyst === $proposalAnalyst->getAnalyst()) {
+                    $this->getProposalAnalysts()->removeElement($proposalAnalyst);
+                }
+            }
         }
 
         return $this;
     }
 
-    public function removeAnalyst(ProposalAnalyst $proposalAnalyst): self
+    public function getProposalAnalysts(): Collection
     {
-        if ($this->analysts->contains($proposalAnalyst)) {
-            $this->analysts->removeElement($proposalAnalyst);
-            // set the owning side to null (unless already changed)
-            if ($proposalAnalyst->getProposal() === $this) {
-                $proposalAnalyst->setProposal(null);
-            }
+        return $this->proposalAnalysts;
+    }
+
+    public function addAnalysts(array $analysts): self
+    {
+        foreach ($analysts as $analyst) {
+            $this->addAnalyst($analyst);
         }
+
+        return $this;
+    }
+
+    public function addAnalyst(User $analyst): self
+    {
+        if (!$this->getAnalysts()->contains($analyst)) {
+            $this->addProposalAnalyst(new ProposalAnalyst($this, $analyst));
+        }
+
+        return $this;
+    }
+
+    public function addProposalAnalyst(ProposalAnalyst $proposalAnalyst): self
+    {
+        if (!$this->proposalAnalysts->contains($proposalAnalyst)) {
+            $proposalAnalyst->setProposal($this);
+            $this->proposalAnalysts[] = $proposalAnalyst;
+        }
+
+        return $this;
+    }
+
+    public function removeProposalAnalyst(ProposalAnalyst $proposalAnalyst): self
+    {
+        if ($this->proposalAnalysts->contains($proposalAnalyst)) {
+            $this->proposalAnalysts->removeElement($proposalAnalyst);
+        }
+
+        return $this;
+    }
+
+    public function clearProposalAnalysts(): self
+    {
+        $this->proposalAnalysts->clear();
+
+        return $this;
+    }
+
+    public function clearProposalAnalyses(): self
+    {
+        $this->analyses->clear();
 
         return $this;
     }
@@ -444,32 +491,28 @@ class Proposal implements
         return $this;
     }
 
-    public function removeAnalysis(ProposalAnalysis $proposalAnalysis): self
+    public function removeProposalAnalysis(ProposalAnalysis $proposalAnalysis): self
     {
         if ($this->analyses->contains($proposalAnalysis)) {
             $this->analyses->removeElement($proposalAnalysis);
-            // set the owning side to null (unless already changed)
-            if ($proposalAnalysis->getProposal() === $this) {
-                $proposalAnalysis->setProposal(null);
-            }
         }
 
         return $this;
     }
 
-    public function getRating()
+    public function getRating(): ?int
     {
         return $this->rating;
     }
 
-    public function setRating(int $rating = null)
+    public function setRating(int $rating = null): self
     {
         $this->rating = $rating;
 
         return $this;
     }
 
-    public function getAnnotation()
+    public function getAnnotation(): ?string
     {
         return $this->annotation;
     }
@@ -493,7 +536,7 @@ class Proposal implements
         return $this;
     }
 
-    public function getCategory()
+    public function getCategory(): ?ProposalCategory
     {
         return $this->category;
     }
@@ -547,7 +590,7 @@ class Proposal implements
         return $this;
     }
 
-    public function getUpdateAuthor()
+    public function getUpdateAuthor(): ?User
     {
         return $this->updateAuthor;
     }
@@ -653,6 +696,7 @@ class Proposal implements
         return $this->getAuthor() === $user;
     }
 
+    /** @var User $user */
     public function viewerCanSeeInBo($user = null): bool
     {
         return $user && $user->isAdmin();
@@ -831,7 +875,7 @@ class Proposal implements
         return $this->selectionVotes;
     }
 
-    public function setSelectionVotes(Collection $votes)
+    public function setSelectionVotes(Collection $votes): self
     {
         $this->selectionVotes = $votes;
 
@@ -912,14 +956,19 @@ class Proposal implements
             return false;
         }
 
-        return $this->getProposalForm()
-            ->getStep()
-            ->getProject()
-            ->getSteps()
-            ->exists(function ($key, $step) {
-                return $step->getStep()->isSelectionStep() &&
-                    $step->getStep()->isAllowingProgressSteps();
-            });
+        return $this->getProposalForm() &&
+            $this->getProposalForm()->getStep() &&
+            $this->getProposalForm()
+                ->getStep()
+                ->getProject() &&
+            $this->getProposalForm()
+                ->getStep()
+                ->getProject()
+                ->getSteps()
+                ->exists(function ($key, $step) {
+                    return $step->getStep()->isSelectionStep() &&
+                        $step->getStep()->isAllowingProgressSteps();
+                });
     }
 
     public function getMedia(): ?Media
@@ -937,7 +986,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getServicePilote()
+    public function getServicePilote(): ?string
     {
         return $this->servicePilote;
     }
@@ -955,7 +1004,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getDomaniality()
+    public function getDomaniality(): ?string
     {
         return $this->domaniality;
     }
@@ -973,7 +1022,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getCompatibility()
+    public function getCompatibility(): ?string
     {
         return $this->compatibility;
     }
@@ -991,7 +1040,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getEnvironmentalImpact()
+    public function getEnvironmentalImpact(): ?string
     {
         return $this->environmentalImpact;
     }
@@ -1009,7 +1058,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getDimension()
+    public function getDimension(): ?string
     {
         return $this->dimension;
     }
@@ -1027,7 +1076,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getFunctioningImpact()
+    public function getFunctioningImpact(): ?string
     {
         return $this->functioningImpact;
     }
@@ -1045,7 +1094,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getEvaluation()
+    public function getEvaluation(): ?string
     {
         return $this->evaluation;
     }
@@ -1063,7 +1112,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getDelay()
+    public function getDelay(): ?string
     {
         return $this->delay;
     }
@@ -1071,15 +1120,17 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setDelay(string $delay = null)
+    public function setDelay(string $delay = null): self
     {
         $this->delay = $delay;
+
+        return $this;
     }
 
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function getProposedAnswer()
+    public function getProposedAnswer(): ?string
     {
         return $this->proposedAnswer;
     }

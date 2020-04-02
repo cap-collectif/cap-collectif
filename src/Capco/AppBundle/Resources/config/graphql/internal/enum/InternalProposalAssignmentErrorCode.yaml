@@ -10,3 +10,15 @@ InternalProposalAssignmentErrorCode:
             ACCESS_DENIED_TO_ASSIGN_SUPERVISOR:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_SUPERVISOR")'
                 description: 'You dont have access to assign supervisor.'
+            CANT_REVOKE_YOURSELF:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::CANT_REVOKE_YOURSELF")'
+                description: 'You cant revoke yourself'
+            IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED")'
+                description: 'You dont have permission to revoke analyst with analysis in progress .'
+            ACCESS_DENIED_TO_ASSIGN_ANALYST:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_ANALYST")'
+                description: 'You dont have access to assign analyst.'
+            MAX_ANALYSTS_REACHED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED")'
+                description: 'You cant add more 10 analysts.'

@@ -7,8 +7,8 @@ InternalProposalStatementErrorCode:
             NON_EXISTING_PROPOSAL:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::NON_EXISTING_PROPOSAL")'
                 description: 'The given proposal does not exist.'
-            UNASSIGNED_PROPOSAL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::UNASSIGNED_PROPOSAL")'
+            NOT_ASSIGNED_PROPOSAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::NOT_ASSIGNED_PROPOSAL")'
                 description: 'You are not assigned to this proposal.'
             DECISION_ALREADY_GIVEN:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::DECISION_ALREADY_GIVEN")'

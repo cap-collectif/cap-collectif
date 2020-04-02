@@ -20,7 +20,7 @@ Object {
       "comment": "caca",
       "id": Any<String>,
       "updatedBy": Object {
-        "id": "VXNlcjp1c2VyNTI2",
+        "id": "VXNlcjp1c2VyQW5hbHlzdA==",
       },
     },
     "errorCode": null,
@@ -41,7 +41,7 @@ exports[`mutations.changeProposalAnalysis should not create the proposal's analy
 Object {
   "changeProposalAnalysis": Object {
     "analysis": null,
-    "errorCode": "UNASSIGNED_PROPOSAL",
+    "errorCode": "NOT_ASSIGNED_PROPOSAL",
   },
 }
 `;

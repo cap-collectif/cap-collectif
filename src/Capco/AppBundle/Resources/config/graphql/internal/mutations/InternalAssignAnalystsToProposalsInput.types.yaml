@@ -1,0 +1,12 @@
+InternalAssignAnalystsToProposalsInput:
+    type: relay-mutation-input
+    config:
+        name: AssignAnalystsToProposalsInput
+        description: 'Assign analysts to proposals'
+        fields:
+            proposalIds:
+                type: '[ID!]!'
+                description: 'Assign analyst list to a list of proposals.'
+            analystIds:
+                type: '[ID!]!'
+                description: 'The concerned list of analysts'

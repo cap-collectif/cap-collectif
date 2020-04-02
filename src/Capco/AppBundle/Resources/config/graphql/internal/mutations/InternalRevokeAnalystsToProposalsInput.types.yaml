@@ -1,0 +1,12 @@
+InternalRevokeAnalystsToProposalsInput:
+    type: relay-mutation-input
+    config:
+        name: RevokeAnalystsToProposalsInput
+        description: 'Revoke analysts to proposals'
+        fields:
+            proposalIds:
+                type: '[ID!]!'
+                description: 'Revoke analyst list to a list of proposals.'
+            analystIds:
+                type: '[ID!]!'
+                description: 'The concerned list of analysts'

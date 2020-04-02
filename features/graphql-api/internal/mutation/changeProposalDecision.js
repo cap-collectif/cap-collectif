@@ -64,7 +64,7 @@ describe('mutations.changeProposalDecision', () => {
           estimatedCost: 50000,
           body:
             "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
-          authors: ['VXNlcjp1c2VyNTI0', 'VXNlcjp1c2VyNTI1'],
+          authors: ['VXNlcjp1c2VyU3VwZXJ2aXNvcjI=', 'VXNlcjp1c2VyRGVjaXNpb25NYWtlcg=='],
           isApproved: true,
           isDone: false,
         },
@@ -80,7 +80,7 @@ describe('mutations.changeProposalDecision', () => {
       {
         input: {
           proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTI=',
-          authors: ['VXNlcjp1c2VyNTI0', 'VXNlcjp1c2VyNTI1'],
+          authors: ['VXNlcjp1c2VyU3VwZXJ2aXNvcjI=', 'VXNlcjp1c2VyRGVjaXNpb25NYWtlcg=='],
           isApproved: false,
           isDone: true,
         },

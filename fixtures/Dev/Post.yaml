@@ -71,7 +71,7 @@ Capco\AppBundle\Entity\Post:
         publishedAt: <(new \DateTime('2019-01-02 00:00:00'))>
         updatedAt: <(new \DateTime('2019-01-02 00:00:00'))>
         Authors:
-            - '@user524'
+            - '@userSupervisor2'
         themes: ['@theme1']
         projects: ['@project27']
         proposals: ['@proposal113']
@@ -83,7 +83,7 @@ Capco\AppBundle\Entity\Post:
         publishedAt: <(new \DateTime('2019-01-02 00:06:00'))>
         updatedAt: <(new \DateTime('2019-01-02 00:07:00'))>
         Authors:
-            - '@user524'
+            - '@userSupervisor2'
         themes: ['@theme1']
         projects: ['@project27']
         proposals: ['@proposal115']
@@ -95,7 +95,7 @@ Capco\AppBundle\Entity\Post:
         publishedAt: <(new \DateTime('2019-01-02 00:04:00'))>
         updatedAt: <(new \DateTime('2019-01-02 00:05:00'))>
         Authors:
-            - '@user524'
+            - '@userSupervisor2'
         themes: ['@theme1']
         projects: ['@project27']
         proposals: ['@proposal109']

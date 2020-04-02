@@ -845,3 +845,17 @@ InternalMutation:
                     inputType: InternalUpdateRedirectIOProjectIdInput
                     payloadType: InternalUpdateRedirectIOProjectIdPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRedirectIOProjectIdMutation", [value])'
+            revokeAnalystsToProposals:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: InternalRevokeAnalystsToProposalsInput
+                    payloadType: InternalRevokeAnalystsToProposalsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RevokeAnalystsToProposalsMutation", [value, getUser()])'
+            assignAnalystsToProposals:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: InternalAssignAnalystsToProposalsInput
+                    payloadType: InternalAssignAnalystsToProposalsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AssignAnalystsToProposalsMutation", [value, getUser()])'

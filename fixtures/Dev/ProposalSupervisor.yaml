@@ -1,31 +1,31 @@
 Capco\AppBundle\Entity\ProposalSupervisor:
     proposalSupervisor1:
-        __construct: ['@proposal109', '@user523']
+        __construct: ['@proposal109', '@userSupervisor']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:01'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:01'))->modify("+ 18 days"))>
     proposalSupervisor2:
-        __construct: ['@proposal110', '@user523']
+        __construct: ['@proposal110', '@userSupervisor']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:02'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:02'))->modify("+ 18 days"))>
     proposalSupervisor3:
-        __construct: ['@proposal111', '@user524']
+        __construct: ['@proposal111', '@userSupervisor2']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:03'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:03'))->modify("+ 18 days"))>
     proposalSupervisor4:
-        __construct: ['@proposal112', '@user524']
+        __construct: ['@proposal112', '@userSupervisor2']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:00'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:00'))->modify("+ 18 days"))>
     proposalSupervisor5:
-        __construct: ['@proposal113', '@user524']
+        __construct: ['@proposal113', '@userSupervisor2']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:07'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:07'))->modify("+ 18 days"))>
     proposalSupervisor6:
-        __construct: ['@proposal114', '@user524']
+        __construct: ['@proposal114', '@userSupervisor2']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:00:08'))->modify("+ 18 days"))>
         updatedAt: <identity((new \DateTime('2019-01-01 00:00:08'))->modify("+ 18 days"))>

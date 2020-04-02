@@ -80,7 +80,7 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
         ) {
             return [
                 'analysis' => null,
-                'errorCode' => ProposalStatementErrorCode::UNASSIGNED_PROPOSAL,
+                'errorCode' => ProposalStatementErrorCode::NOT_ASSIGNED_PROPOSAL,
             ];
         }
 

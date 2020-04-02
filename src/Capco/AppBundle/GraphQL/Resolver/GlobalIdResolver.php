@@ -313,6 +313,10 @@ class GlobalIdResolver
                     $node = $this->container->get(ProposalRepository::class)->findById($uuids);
 
                     break;
+                case 'User':
+                    $node = $this->container->get(UserRepository::class)->findById($uuids);
+
+                    break;
                 default:
                     break;
             }
@@ -332,6 +336,9 @@ class GlobalIdResolver
         }
         $uuids = $decodeGlobalIds;
         $node = $this->container->get(ProposalRepository::class)->findById($uuids);
+        if (!$node) {
+            $node = $this->container->get(UserRepository::class)->findById($uuids);
+        }
         if (!$node) {
             $error = 'Could not resolve node with uuids ' . var_export($uuids, true);
             $this->logger->warning($error);

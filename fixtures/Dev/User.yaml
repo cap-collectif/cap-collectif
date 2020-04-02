@@ -421,8 +421,8 @@ Capco\UserBundle\Entity\User:
         createdAt: <identity((new \DateTime('2015-01-01 12:02:03'))->modify("+ 14 days"))>
         updatedAt: <(new \DateTime('2016-01-01 13:37:42'))>
 
-    user523:
-        id: 'user523'
+    userSupervisor:
+        id: 'userSupervisor'
         username: supervisor
         firstname: supervisor
         lastname: supervisor
@@ -437,8 +437,8 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 13:01:02'))->modify("+ 18 days"))>
 
-    user524:
-        id: 'user524'
+    userSupervisor2:
+        id: 'userSupervisor2'
         username: supervisor2
         firstname: supervisor2
         lastname: supervisor2
@@ -453,8 +453,8 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 09:14:07'))->modify("+ 18 days"))>
 
-    user525:
-        id: 'user525'
+    userDecisionMaker:
+        id: 'userDecisionMaker'
         username: decisionmaker
         firstname: decisionmaker
         lastname: decisionmaker
@@ -469,8 +469,8 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 18 days"))>
 
-    user526:
-        id: 'user526'
+    userAnalyst:
+        id: 'userAnalyst'
         username: analyst
         firstname: analyst
         lastname: analyst
@@ -485,8 +485,8 @@ Capco\UserBundle\Entity\User:
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
 
-    user527:
-        id: 'user527'
+    userAnalyst2:
+        id: 'userAnalyst2'
         username: analyst2
         firstname: analyst2
         lastname: analyst2
@@ -606,4 +606,3 @@ Capco\UserBundle\Entity\User:
         emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
-

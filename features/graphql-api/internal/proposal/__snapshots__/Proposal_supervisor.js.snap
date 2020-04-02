@@ -11,7 +11,7 @@ Object {
     },
     "supervisor": Object {
       "firstname": "supervisor",
-      "id": "VXNlcjp1c2VyNTIz",
+      "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
       "lastname": "supervisor",
     },
     "viewerCanEvaluate": true,
@@ -25,7 +25,7 @@ Object {
     "assessment": null,
     "supervisor": Object {
       "firstname": null,
-      "id": "VXNlcjp1c2VyNTIz",
+      "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
       "lastname": null,
     },
     "viewerCanEvaluate": false,
