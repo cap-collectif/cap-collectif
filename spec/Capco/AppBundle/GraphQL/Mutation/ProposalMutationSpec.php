@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -9,6 +10,8 @@ use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\ProposalMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver;
+use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +33,9 @@ class ProposalMutationSpec extends ObjectBehavior
         Publisher $publisher,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        Container $container
+        RedisCache $cache,
+        AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver,
+        AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver
     ) {
         $this->beConstructedWith(
             $logger,
@@ -39,7 +44,9 @@ class ProposalMutationSpec extends ObjectBehavior
             $publisher,
             $em,
             $formFactory,
-            $container
+            $cache,
+            $autoCompleteDocQueryResolver,
+            $autoCompleteFromSiretQueryResolver
         );
     }
 

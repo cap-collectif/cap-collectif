@@ -4,21 +4,21 @@ APIEnterpriseDocuments:
         description: "Doc associated with the association."
         name: APIEnterpriseDocuments
         fields:
-            compositionCA:
-                type: 'InternalMedia'
+            availableCompositionCA:
+                type: 'Boolean'
                 description: "Composition of the administration committee"
-            status:
-                type: 'InternalMedia'
+            availableStatus:
+                type: 'Boolean'
                 description: "The RIB of the association"
-            prefectureReceiptConfirm:
-                type: 'InternalMedia'
+            availablePrefectureReceiptConfirm:
+                type: 'Boolean'
                 description: "The RIB of the association"
-            fiscalRegulationAttestation:
-                type: 'InternalMedia'
+            availableFiscalRegulationAttestation:
+                type: 'Boolean'
                 description: "The RIB of the association"
-            socialRegulationAttestation:
-                type: 'InternalMedia'
+            availableSocialRegulationAttestation:
+                type: 'Boolean'
                 description: "The RIB of the association"
-            kbis:
-                type: 'InternalMedia'
+            availableKbis:
+                type: 'Boolean'
                 description: "The KBIS file of the enterprise"

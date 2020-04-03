@@ -13,6 +13,7 @@ export type FormattedResponse = {|
   type: QuestionType,
   value: ?string | ?Array<string>,
   otherValue: ?string,
+  hidden?: boolean,
   required: boolean,
   validationRule?: ?{|
     +type: MultipleChoiceQuestionValidationRulesTypes,
@@ -32,7 +33,7 @@ const formatResponses = (
       // It's not possible but flow...
       if (!questionOfResponse) throw new Error(`Could not find question with id ${idQuestion}`);
 
-      const { type, required, validationRule, isOtherAllowed } = questionOfResponse;
+      const { type, required, validationRule, isOtherAllowed, hidden } = questionOfResponse;
 
       if (value) {
         let formattedValue: ?string | ?Array<string> = null;
@@ -59,6 +60,7 @@ const formatResponses = (
           type,
           // $FlowFixMe
           value: formattedValue,
+          hidden,
           otherValue,
           required,
           validationRule,
@@ -68,6 +70,7 @@ const formatResponses = (
           idQuestion,
           type,
           value: null,
+          hidden,
           otherValue: null,
           required,
           validationRule,

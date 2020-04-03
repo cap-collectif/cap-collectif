@@ -56,7 +56,8 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
             AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT === $data['question']['type'] ||
             AbstractQuestion::QUESTION_TYPE_EDITOR === $data['question']['type'] ||
             AbstractQuestion::QUESTION_TYPE_NUMBER === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_SIREN === $data['question']['type']
+            AbstractQuestion::QUESTION_TYPE_SIRET === $data['question']['type'] ||
+            AbstractQuestion::QUESTION_TYPE_RNA === $data['question']['type']
         ) {
             $question = new SimpleQuestion();
         } elseif (AbstractQuestion::QUESTION_TYPE_SECTION === $data['question']['type']) {

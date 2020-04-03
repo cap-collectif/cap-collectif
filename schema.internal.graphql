@@ -9,44 +9,35 @@ type APIEnterpriseAssociation {
   """Corporate address."""
   corporateAddress: String!
 
-  """Authorization URL."""
-  legalRepresentative: String!
-
-  """The quality of the legal representative."""
-  qualityRepresentative: String!
-
-  """Siret"""
-  siret: String
-
   """The RIB of the enterprise."""
-  sirenSituation: Media
+  availableSirenSituation: Boolean
 
   """The RIB of the association"""
-  turnover: String
+  availableTurnover: Boolean
 
   """The KBIS file of the association"""
-  kbis: Media
+  availableKbis: Boolean
 }
 
 """Doc associated with the association."""
 type APIEnterpriseDocuments {
   """Composition of the administration committee"""
-  compositionCA: Media
+  availableCompositionCA: Boolean
 
   """The RIB of the association"""
-  status: Media
+  availableStatus: Boolean
 
   """The RIB of the association"""
-  prefectureReceiptConfirm: Media
+  availablePrefectureReceiptConfirm: Boolean
 
   """The RIB of the association"""
-  fiscalRegulationAttestation: Media
+  availableFiscalRegulationAttestation: Boolean
 
   """The RIB of the association"""
-  socialRegulationAttestation: Media
+  availableSocialRegulationAttestation: Boolean
 
   """The KBIS file of the enterprise"""
-  kbis: Media
+  availableKbis: Boolean
 }
 
 """An enterprise."""
@@ -60,17 +51,11 @@ type APIEnterpriseEnterprise {
   """Corporate address."""
   corporateAddress: String!
 
-  """Authorization URL."""
-  legalRepresentative: String!
-
-  """The quality of the legal representative."""
-  qualityRepresentative: String!
-
   """The RIB of the enterprise."""
-  sirenSituation: Media
+  availableSirenSituation: Boolean
 
   """The RIB of the association"""
-  turnover: String
+  availableTurnover: Boolean
 }
 
 """A public organization."""
@@ -84,14 +69,8 @@ type APIEnterprisePublicOrganization {
   """Corporate address."""
   corporateAddress: String!
 
-  """Authorization URL."""
-  legalRepresentative: String!
-
-  """The quality of the legal representative."""
-  qualityRepresentative: String!
-
   """The RIB of the enterprise."""
-  sirenSituation: Media
+  availableSirenSituation: Boolean
 }
 
 union APIEnterpriseResult = APIEnterpriseAssociation | APIEnterprisePublicOrganization | APIEnterpriseEnterprise
@@ -3954,6 +3933,9 @@ type MediaQuestion implements Question & Node {
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
+
+  """Boolean to decide whether the question will be rendered or not"""
+  hidden: Boolean!
 }
 
 """A response"""
@@ -4039,6 +4021,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
+
+  """Boolean to decide whether the question will be rendered or not"""
+  hidden: Boolean!
   isOtherAllowed: Boolean!
 
   """Responses of the `other` question choice."""
@@ -7029,6 +7014,9 @@ interface Question {
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
+
+  """Boolean to decide whether the question will be rendered or not"""
+  hidden: Boolean!
 }
 
 """A possible choice of a question."""
@@ -7143,6 +7131,7 @@ input QuestionInput {
   choices: [QuestionChoiceInput]
   description: String
   jumps: [LogicJumpInput]
+  hidden: Boolean = false
 }
 
 """Value of type of question"""
@@ -7158,7 +7147,8 @@ enum QuestionTypeValue {
   button
   number
   section
-  siren
+  siret
+  rna
 }
 
 """A questionnaire is a series of questions that users can answer."""
@@ -8099,6 +8089,9 @@ type SectionQuestion implements Question & Node {
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
+
+  """Boolean to decide whether the question will be rendered or not"""
+  hidden: Boolean!
 }
 
 input SelectProposalInput {
@@ -8484,6 +8477,9 @@ type SimpleQuestion implements Question & Node {
 
   """The destination of the always jump (the else case) of this question."""
   alwaysJumpDestinationQuestion: Question
+
+  """Boolean to decide whether the question will be rendered or not"""
+  hidden: Boolean!
 }
 
 """A site image"""

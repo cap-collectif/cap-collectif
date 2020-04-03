@@ -31,3 +31,6 @@ QuestionInput:
         type: 'String'
       jumps:
         type: '[LogicJumpInput]'
+      hidden:
+        type: 'Boolean'
+        defaultValue: false

@@ -16,10 +16,11 @@ use Psr\Log\LoggerInterface;
 
 class ReplyResponsesResolverSpec extends ObjectBehavior
 {
-    public function let(LoggerInterface $logger,
-                        AbstractQuestionRepository $abstractQuestionRepository,
-                        AbstractResponseRepository $abstractResponseRepository)
-    {
+    public function let(
+        LoggerInterface $logger,
+        AbstractQuestionRepository $abstractQuestionRepository,
+        AbstractResponseRepository $abstractResponseRepository
+    ) {
         $this->beConstructedWith($logger, $abstractQuestionRepository, $abstractResponseRepository);
     }
 
@@ -36,11 +37,11 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         User $author,
         AbstractResponse $response,
         AbstractQuestion $question
-    ): void
-    {
+    ): void {
         $viewer = null;
         $context = new \ArrayObject(['disable_acl' => true]);
         $question->isPrivate()->willReturn(true);
+        $question->getHidden()->willReturn(true);
         $question->getId()->willReturn('question1');
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
@@ -48,11 +49,13 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())->willReturn($questions->toArray());
+        $abstractQuestionRepository
+            ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
+            ->willReturn($questions->toArray());
         $this->__invoke($reply, $viewer, $context)->shouldBeLike($responses->getIterator());
     }
 
-    public function it_should_return_all_responses_when_viewer_is_author(
+    public function it_should_return_private_responses_when_viewer_is_author(
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         Reply $reply,
@@ -60,11 +63,12 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         Questionnaire $questionnaire,
         AbstractResponse $response,
         AbstractQuestion $question
-    ): void
-    {
+    ): void {
         $viewer = $author;
+        $viewer->isAdmin()->willReturn(false);
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
+        $question->getHidden()->willReturn(false);
         $question->getId()->willReturn('question1');
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
@@ -73,8 +77,40 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())->willReturn($questions->toArray());
+        $abstractQuestionRepository
+            ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
+            ->willReturn($questions->toArray());
         $this->__invoke($reply, $viewer, $context)->shouldBeLike($responses->getIterator());
+    }
+
+    public function it_should_not_return_hidden_responses_when_viewer_is_author(
+        AbstractQuestionRepository $abstractQuestionRepository,
+        AbstractResponseRepository $abstractResponseRepository,
+        Reply $reply,
+        User $author,
+        Questionnaire $questionnaire,
+        AbstractResponse $response,
+        AbstractQuestion $question
+    ): void {
+        $viewer = $author;
+        $viewer->isAdmin()->willReturn(false);
+        $context = new \ArrayObject(['disable_acl' => false]);
+        $question->isPrivate()->willReturn(false);
+        $question->getHidden()->willReturn(true);
+        $question->getId()->willReturn('question1');
+        $response->getQuestion()->willReturn($question);
+        $questions = new ArrayCollection([$question->getWrappedObject()]);
+        $responses = new ArrayCollection([$response->getWrappedObject()]);
+        $questionnaire->isPrivateResult()->willReturn(false);
+        $reply->getQuestionnaire()->willReturn($questionnaire);
+        $reply->getAuthor()->willReturn($author);
+        $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
+        $abstractQuestionRepository
+            ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
+            ->willReturn($questions->toArray());
+        $this->__invoke($reply, $viewer, $context)->shouldBeLike(
+            (new ArrayCollection([]))->getIterator()
+        );
     }
 
     public function it_should_not_return_private_responses_when_viewer_is_anonymous(
@@ -85,11 +121,11 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         Questionnaire $questionnaire,
         AbstractResponse $response,
         AbstractQuestion $question
-    ): void
-    {
+    ): void {
         $viewer = null;
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
+        $question->getHidden()->willReturn(false);
         $question->getId()->willReturn('question1');
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
@@ -98,7 +134,38 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())->willReturn($questions->toArray());
+        $abstractQuestionRepository
+            ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
+            ->willReturn($questions->toArray());
+        $this->__invoke($reply, $viewer, $context)->shouldBeLike(
+            (new ArrayCollection([]))->getIterator()
+        );
+    }
+
+    public function it_should_not_return_hidden_responses_when_viewer_is_anonymous(
+        AbstractQuestionRepository $abstractQuestionRepository,
+        AbstractResponseRepository $abstractResponseRepository,
+        Reply $reply,
+        User $author,
+        Questionnaire $questionnaire,
+        AbstractResponse $response,
+        AbstractQuestion $question
+    ): void {
+        $viewer = null;
+        $context = new \ArrayObject(['disable_acl' => false]);
+        $question->isPrivate()->willReturn(false);
+        $question->getHidden()->willReturn(true);
+        $question->getId()->willReturn('question1');
+        $response->getQuestion()->willReturn($question);
+        $questions = new ArrayCollection([$question->getWrappedObject()]);
+        $responses = new ArrayCollection([$response->getWrappedObject()]);
+        $questionnaire->isPrivateResult()->willReturn(false);
+        $reply->getQuestionnaire()->willReturn($questionnaire);
+        $reply->getAuthor()->willReturn($author);
+        $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
+        $abstractQuestionRepository
+            ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
+            ->willReturn($questions->toArray());
         $this->__invoke($reply, $viewer, $context)->shouldBeLike(
             (new ArrayCollection([]))->getIterator()
         );
@@ -113,10 +180,10 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         Questionnaire $questionnaire,
         AbstractResponse $response,
         AbstractQuestion $question
-    ): void
-    {
+    ): void {
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
+        $question->getHidden()->willReturn(false);
         $question->getId()->willReturn('question1');
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
@@ -126,7 +193,39 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getAuthor()->willReturn($author);
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())->willReturn($questions->toArray());
+        $abstractQuestionRepository
+            ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
+            ->willReturn($questions->toArray());
+        $this->__invoke($reply, $viewer, $context)->shouldBeLike(
+            (new ArrayCollection([]))->getIterator()
+        );
+    }
+
+    public function it_should_not_return_hidden_responses_when_viewer_is_not_author(
+        AbstractQuestionRepository $abstractQuestionRepository,
+        AbstractResponseRepository $abstractResponseRepository,
+        Reply $reply,
+        User $author,
+        User $viewer,
+        Questionnaire $questionnaire,
+        AbstractResponse $response,
+        AbstractQuestion $question
+    ): void {
+        $context = new \ArrayObject(['disable_acl' => false]);
+        $question->isPrivate()->willReturn(false);
+        $question->getHidden()->willReturn(true);
+        $question->getId()->willReturn('question1');
+        $response->getQuestion()->willReturn($question);
+        $questions = new ArrayCollection([$question->getWrappedObject()]);
+        $responses = new ArrayCollection([$response->getWrappedObject()]);
+        $viewer->isAdmin()->willReturn(false);
+        $questionnaire->isPrivateResult()->willReturn(false);
+        $reply->getQuestionnaire()->willReturn($questionnaire);
+        $reply->getAuthor()->willReturn($author);
+        $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
+        $abstractQuestionRepository
+            ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
+            ->willReturn($questions->toArray());
         $this->__invoke($reply, $viewer, $context)->shouldBeLike(
             (new ArrayCollection([]))->getIterator()
         );

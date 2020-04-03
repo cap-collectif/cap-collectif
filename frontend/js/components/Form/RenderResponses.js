@@ -54,7 +54,6 @@ const formattedChoicesInField = field =>
       color: choice.color,
       image: choice.image,
     }));
-
 const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
 
 const availableQuestionsNotInitialize = availableQuestions => availableQuestions.length === 0;
@@ -152,6 +151,10 @@ const RenderResponses = ({
               <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
             </>
           );
+
+          if (field?.hidden) {
+            return null;
+          }
 
           switch (field.type) {
             case 'section': {
@@ -257,12 +260,12 @@ const RenderResponses = ({
               );
             }
 
-            case 'siren': {
+            case 'rna':
+            case 'siret': {
               const response =
                 responses && responses[index] && responses[index].value
                   ? responses[index].value
                   : null;
-
               return (
                 <div key={field.id}>
                   <PrivateBox show={field.private}>
@@ -271,7 +274,12 @@ const RenderResponses = ({
                       name={`${member}.value`}
                       id={`${cleanDomId(`${form}-${member}`)}`}
                       type={field.type}
-                      style={{ maxWidth: '150px'}}
+                      style={{
+                        maxWidth: '180px',
+                        background: '#c7edf3',
+                        padding: '20px 25px 25px 25px',
+                        border: '2px solid #1d8293',
+                      }}
                       // $FlowFixMe
                       component={component}
                       description={field.description}
@@ -282,8 +290,8 @@ const RenderResponses = ({
                       value={response}
                       typeForm={typeForm}
                       onChange={event => {
+                        triggerAutocompleteAPIEnterprise(dispatch, event, questions);
                         setLastQuestionType(field.type);
-                        triggerAutocompleteAPIEnterprise(dispatch, event);
                       }}
                     />
                   </PrivateBox>

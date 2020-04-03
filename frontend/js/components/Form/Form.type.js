@@ -18,7 +18,8 @@ export type QuestionType =
   | 'select'
   | 'text'
   | 'textarea'
-  | 'siren';
+  | 'siret'
+  | 'rna';
 
 export type Media = {|
   +id: string,
@@ -99,6 +100,7 @@ export type QuestionChoice = {|
 // responsesHelper_question without $refType
 export type Question = {|
   +__typename: string,
+  +hidden?: boolean,
   +id: string,
   +title: string,
   +number: number,

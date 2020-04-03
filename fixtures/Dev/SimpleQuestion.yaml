@@ -184,21 +184,14 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret4'
-    simplequestionIdfProjetLocalAssociationSiret7:
-        id: 1341
-        title: Composition du conseil d'administration et du bureau
-        required: true
-        private: true
-        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
-        type: 7 # media
-        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret5'
+        hidden: true
     simplequestionIdfProjetLocalAssociationRna1:
         id: 1342
         title: Numéro RNA  (ou WALDEC pour les associations créées avant 2010)
         required: true
         private: true
         description: Grâce à l'API Entreprise, la Région simplifie vos démarches et vous permet...
-        type: 0 # text TODO create a specific RNA question type for validation
+        type: 12 # rna
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationRna2'
     simplequestionIdfProjetLocalAssociationRna2:
         id: 1343
@@ -308,6 +301,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalEntreprise4'
+        hidden: true
     simplequestionIdfProjetLocalOrgPublic1:
         id: 1357
         title: Numéro SIRET

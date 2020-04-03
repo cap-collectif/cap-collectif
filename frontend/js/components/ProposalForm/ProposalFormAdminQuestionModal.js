@@ -157,8 +157,11 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
               <option value="medias">
                 {intl.formatMessage({ id: 'global.question.types.medias' })}
               </option>
-              <option value="siren">
-                {intl.formatMessage({ id: 'global.question.types.siren' })}
+              <option value="siret">
+                {intl.formatMessage({ id: 'global.question.types.siret' })}
+              </option>
+              <option value="rna">
+                {intl.formatMessage({ id: 'global.question.types.rna' })}
               </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
@@ -246,6 +249,14 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
             id={`${member}.private`}
             normalize={val => !!val}
             name={`${member}.private`}
+            type="checkbox"
+            component={component}
+          />
+          <Field
+            children={<FormattedMessage id="hidden-question" />}
+            id={`${member}.hidden`}
+            normalize={val => !!val}
+            name={`${member}.hidden`}
             type="checkbox"
             component={component}
           />

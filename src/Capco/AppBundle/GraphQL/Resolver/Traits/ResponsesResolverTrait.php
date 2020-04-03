@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Resolver\Traits;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -40,11 +39,21 @@ trait ResponsesResolverTrait
             $context->offsetExists('disable_acl') &&
             true === $context->offsetGet('disable_acl');
         $isAuthor = $author === $viewer;
-        $viewerCanSeePrivateResponses =
-            $skipVerification || $isAuthor || ($viewer instanceof User && $viewer->isAdmin()) || $isEvaluer;
+        $isAnalystOrAdmin = $skipVerification;
+        if (!$skipVerification) {
+            $isAnalystOrAdmin = ($viewer instanceof User && $viewer->isAdmin()) || $isEvaluer;
+        }
+        $viewerCanSeePrivateResponses = $skipVerification || $isAuthor || $isAnalystOrAdmin;
 
-        return $responses->filter(function ($response) use ($viewerCanSeePrivateResponses) {
-            return !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
+        return $responses->filter(function ($response) use (
+            $viewerCanSeePrivateResponses,
+            $isAnalystOrAdmin
+        ) {
+            $privateFilter =
+                !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
+            $hiddenFilter = !$response->getQuestion()->getHidden() || $isAnalystOrAdmin;
+
+            return $privateFilter && $hiddenFilter;
         });
     }
 
