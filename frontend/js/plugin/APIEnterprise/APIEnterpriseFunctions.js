@@ -106,7 +106,18 @@ export const handleVisibilityAccordingToType = (
   const isSiretNotValid = siret == null || (siret && !checkSiret(siret));
   const isRnaNotValid = rna == null || (rna && !checkRNA(rna));
   if (isSiretNotValid && isRnaNotValid) {
-    return defaultToHideQuestions;
+    // Need to hide all
+    defaultToHideQuestions.forEach(questionIndex => {
+      commitLocalUpdate(environment, store => {
+        if (typeof responses[questionIndex] !== 'undefined') {
+          const question = store.get(responses[questionIndex].question);
+          if (question) {
+            question.setValue(true, 'hidden');
+          }
+        }
+      });
+    });
+    return;
   }
   // In this case, it's a draft that has been reopened
   // only show fields according to enterprise's type in case user change is mind
