@@ -434,7 +434,14 @@ InternalMutation:
                 builderConfig:
                     inputType: AddProposalsToStepsInput
                     payloadType: AddProposalsToStepsPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsToStepsMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\AddProposalsToStepsMutation", [value, getUser()])'
+            removeProposalsFromSteps:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: RemoveProposalsFromStepsInput
+                    payloadType: RemoveProposalsFromStepsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\RemoveProposalsFromStepsMutation", [value, getUser()])'
             deleteProposal:
                 access: '@=hasRole("ROLE_SUPER_ADMIN") or (hasRole("ROLE_USER") and service("Capco\\AppBundle\\Helper\\ProposalHelper").isAuthor(args["input"]["proposalId"], getUser()))'
                 builder: 'Relay::Mutation'

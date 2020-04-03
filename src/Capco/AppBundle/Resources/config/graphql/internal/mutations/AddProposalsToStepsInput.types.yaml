@@ -5,6 +5,6 @@ AddProposalsToStepsInput:
       proposalIds:
         type: '[ID!]!'
         description: 'The ids of the proposals to add to steps'
-      stepsIds:
+      stepIds:
         type: '[ID!]!'
         description: 'The ids of the steps to which proposals should be moved'

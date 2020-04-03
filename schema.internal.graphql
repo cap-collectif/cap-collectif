@@ -290,7 +290,7 @@ input AddProposalsToStepsInput {
   proposalIds: [ID!]!
 
   """The ids of the steps to which proposals should be moved"""
-  stepsIds: [ID!]!
+  stepIds: [ID!]!
   clientMutationId: String
 }
 
@@ -4191,6 +4191,7 @@ type Mutation {
   changeCollectStatus(input: ChangeCollectStatusInput!): ChangeCollectStatusPayload
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
   addProposalsToSteps(input: AddProposalsToStepsInput!): AddProposalsToStepsPayload
+  removeProposalsFromSteps(input: RemoveProposalsFromStepsInput!): RemoveProposalsFromStepsPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
   updateRegistrationForm(input: UpdateRegistrationFormQuestionsInput!): UpdateRegistrationFormQuestionsPayload
   updateRegistrationFormCommunication(input: UpdateRegistrationFormCommunicationInput!): UpdateRegistrationFormCommunicationPayload
@@ -7507,6 +7508,24 @@ type RemoveProposalVotePayload {
   proposal: Proposal!
   viewer: User!
   previousVoteId: ID
+  clientMutationId: String
+}
+
+input RemoveProposalsFromStepsInput {
+  """The ids of the proposals to remove from steps"""
+  proposalIds: [ID!]!
+
+  """The ids of the steps to which proposals should be removed"""
+  stepIds: [ID!]!
+  clientMutationId: String
+}
+
+type RemoveProposalsFromStepsPayload {
+  """Connection of assigned proposals"""
+  proposals: ProposalConnection
+
+  """An unsuccessful mutation will return an error message"""
+  error: String
   clientMutationId: String
 }
 

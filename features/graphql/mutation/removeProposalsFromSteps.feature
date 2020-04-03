@@ -1,5 +1,5 @@
-@addProposalsToSteps @proposals @steps
-Feature: Add a CollectStep to a Proposal
+@removeProposalsToSteps @proposals @steps
+Feature: Remove a CollectStep from a proposal
 
 @database
 Scenario: Admin sends no valid proposal and receives an error
@@ -7,8 +7,8 @@ Scenario: Admin sends no valid proposal and receives an error
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: AddProposalsToStepsInput!) {
-      addProposalsToSteps(input: $input) {
+    "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
+      removeProposalsFromSteps(input: $input) {
         error
         proposals {
           edges {
@@ -31,7 +31,7 @@ Scenario: Admin sends no valid proposal and receives an error
   """
   {
     "data": {
-      "addProposalsToSteps": {
+      "removeProposalsFromSteps": {
         "error": "no valid proposal",
         "proposals": {
           "edges": []
@@ -47,8 +47,8 @@ Scenario: Admin sends step not matching the project or not a collect step and re
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: AddProposalsToStepsInput!) {
-      addProposalsToSteps(input: $input) {
+    "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
+      removeProposalsFromSteps(input: $input) {
         error
       }
     }",
@@ -64,7 +64,7 @@ Scenario: Admin sends step not matching the project or not a collect step and re
   """
   {
     "data": {
-      "addProposalsToSteps": {
+      "removeProposalsFromSteps": {
         "error": "no valid step"
       }
     }
@@ -72,13 +72,13 @@ Scenario: Admin sends step not matching the project or not a collect step and re
   """
 
 @database
-Scenario: Admin add an already present step to a proposal
+Scenario: Admin wants to remove a proposal not present in a step
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: AddProposalsToStepsInput!) {
-      addProposalsToSteps(input: $input) {
+    "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
+      removeProposalsFromSteps(input: $input) {
         error
         proposals {
           edges {
@@ -97,7 +97,7 @@ Scenario: Admin add an already present step to a proposal
     "variables": {
       "input": {
         "proposalIds": ["UHJvcG9zYWw6cHJvcG9zYWwx"],
-        "stepIds": ["U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="]
+        "stepIds": ["U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="]
       }
     }
   }
@@ -106,7 +106,7 @@ Scenario: Admin add an already present step to a proposal
   """
   {
     "data": {
-      "addProposalsToSteps": {
+      "removeProposalsFromSteps": {
         "error": null,
         "proposals": {
           "edges": [
@@ -130,13 +130,13 @@ Scenario: Admin add an already present step to a proposal
   """
 
 @database @rabbitmq
-Scenario: Admin add a step to two proposals, one already having it
+Scenario: Admin remove a step from two proposals, only one having it
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: AddProposalsToStepsInput!) {
-      addProposalsToSteps(input: $input) {
+    "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
+      removeProposalsFromSteps(input: $input) {
         error
         proposals {
           edges {
@@ -164,7 +164,7 @@ Scenario: Admin add a step to two proposals, one already having it
   """
   {
     "data": {
-      "addProposalsToSteps": {
+      "removeProposalsFromSteps": {
         "error": null,
         "proposals": {
           "edges": [
@@ -175,11 +175,6 @@ Scenario: Admin add a step to two proposals, one already having it
                   {
                     "step": {
                       "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
-                    }
-                  },
-                  {
-                    "step": {
-                      "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="
                     }
                   }
                 ]
@@ -193,11 +188,6 @@ Scenario: Admin add a step to two proposals, one already having it
                     "step": {
                       "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
                     }
-                  },
-                  {
-                    "step": {
-                      "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="
-                    }
                   }
                 ]
               }
@@ -208,3 +198,4 @@ Scenario: Admin add a step to two proposals, one already having it
     }
   }
   """
+
