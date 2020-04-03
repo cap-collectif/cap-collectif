@@ -1,0 +1,10 @@
+AssignDecisionMakerToProposalsPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            proposals:
+                type: 'InternalProposalConnection'
+                description: 'Connection of assigned proposals'
+            errorCode:
+                type: 'InternalProposalAssignmentErrorCode'
+                description: 'Contains the error code if one occurred.'

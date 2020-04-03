@@ -1,0 +1,11 @@
+AssignDecisionMakerToProposalsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Assign decision maker to proposals'
+        fields:
+            proposalIds:
+                type: '[ID!]!'
+                description: 'Assign a decision maker to a list of proposals.'
+            decisionMakerId:
+                type: 'ID'
+                description: 'The concerned decision maker id.'

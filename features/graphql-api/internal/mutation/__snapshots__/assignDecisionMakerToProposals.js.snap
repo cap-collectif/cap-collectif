@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.assignDecisionMakerToProposals admin should assign a user as decision maker to a list of proposals. 1`] = `
+Object {
+  "assignDecisionMakerToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "decisionMaker": Object {
+              "id": "VXNlcjp1c2VyNjk=",
+              "username": "user69",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+        Object {
+          "node": Object {
+            "decisionMaker": Object {
+              "id": "VXNlcjp1c2VyNjk=",
+              "username": "user69",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxOA==",
+            "title": "Proposition 18",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`mutations.assignDecisionMakerToProposals admin should assign a user as decision maker to a proposal. 1`] = `
+Object {
+  "assignDecisionMakerToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "decisionMaker": Object {
+              "id": "VXNlcjp1c2VyTWF4aW1l",
+              "username": "mauriau",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`mutations.assignDecisionMakerToProposals admin should change decision maker to proposal. 1`] = `
+Object {
+  "assignDecisionMakerToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "decisionMaker": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`mutations.assignDecisionMakerToProposals admin should revoke decision maker to proposal. 1`] = `
+Object {
+  "assignDecisionMakerToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "decisionMaker": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

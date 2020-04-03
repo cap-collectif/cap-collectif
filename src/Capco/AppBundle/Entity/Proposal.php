@@ -390,6 +390,13 @@ class Proposal implements
         return $this->decisionMaker ? $this->decisionMaker->getDecisionMaker() : null;
     }
 
+    public function removeDecisionMaker(): self
+    {
+        $this->decisionMaker = null;
+
+        return $this;
+    }
+
     /**
      * @return Collection|ProposalAnalyst[]
      */
@@ -495,6 +502,28 @@ class Proposal implements
     {
         if ($this->analyses->contains($proposalAnalysis)) {
             $this->analyses->removeElement($proposalAnalysis);
+        }
+
+        return $this;
+    }
+
+    public function setProposalDecisionMaker(
+        ?ProposalDecisionMaker $proposalDecisionMaker = null
+    ): self {
+        $this->decisionMaker = $proposalDecisionMaker;
+
+        return $this;
+    }
+
+    public function getProposalDecisionMaker(): ?ProposalDecisionMaker
+    {
+        return $this->decisionMaker;
+    }
+
+    public function changeDecisionMaker(User $decisionMaker): self
+    {
+        if ($this->decisionMaker) {
+            $this->decisionMaker->setDecisionMaker($decisionMaker);
         }
 
         return $this;

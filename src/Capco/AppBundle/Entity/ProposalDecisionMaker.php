@@ -65,4 +65,13 @@ class ProposalDecisionMaker implements Timestampable
 
         return $this;
     }
+
+    public function changeDecisionMaker(User $newDecisionMaker): self
+    {
+        if ($this->getDecisionMaker()) {
+            $this->decisionMaker = $newDecisionMaker;
+        }
+
+        return $this;
+    }
 }

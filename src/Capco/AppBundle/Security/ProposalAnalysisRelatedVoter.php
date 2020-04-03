@@ -24,6 +24,7 @@ class ProposalAnalysisRelatedVoter extends Voter
     public const ASSIGN_SUPERVISOR = 'ASSIGN_SUPERVISOR';
     public const ASSIGN_ANALYSIS = 'ASSIGN_ANALYSIS';
     public const ASSIGN_ANALYST = 'ASSIGN_ANALYST';
+    public const ASSIGN_DECISION_MAKER = 'ASSIGN_DECISION_MAKER';
 
     private $proposalSupervisorRepository;
     private $proposalDecisionMakerRepository;
@@ -60,6 +61,7 @@ class ProposalAnalysisRelatedVoter extends Voter
                 self::ASSIGN_SUPERVISOR,
                 self::ASSIGN_ANALYSIS,
                 self::ASSIGN_ANALYST,
+                self::ASSIGN_DECISION_MAKER
             ],
             true
         ) && $subject instanceof Proposal;
@@ -87,7 +89,9 @@ class ProposalAnalysisRelatedVoter extends Voter
             case self::DECIDE:
                 return $this->canDecide($subject, $user);
             case self::ASSIGN_SUPERVISOR:
-                return $this->canAssign($subject, $user);
+                return $this->canAssignSupervisor($subject, $user);
+            case self::ASSIGN_DECISION_MAKER:
+                return $this->canAssignDecisionMaker($user);
             case self::ASSIGN_ANALYST:
                 return $this->canAssignAnalyst($subject, $user);
             default:
@@ -173,6 +177,10 @@ class ProposalAnalysisRelatedVoter extends Voter
 
     private function canDecide(Proposal $subject, User $user): bool
     {
+        if ($user->hasRole(UserRole::ROLE_ADMIN)) {
+            return true;
+        }
+
         if (
             $this->proposalDecisionMakerRepository->findBy([
                 'proposal' => $subject,
@@ -185,9 +193,14 @@ class ProposalAnalysisRelatedVoter extends Voter
         return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
     }
 
-    private function canAssign(Proposal $subject, User $user): bool
+    private function canAssignSupervisor(Proposal $subject, User $user): bool
     {
         return $this->canDecide($subject, $user);
+    }
+
+    private function canAssignDecisionMaker(User $user): bool
+    {
+        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
     }
 
     private function canAssignAnalyst(Proposal $subject, User $user): bool

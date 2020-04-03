@@ -828,6 +828,13 @@ InternalMutation:
                     inputType: AssignSupervisorToProposalsInput
                     payloadType: AssignSupervisorToProposalsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AssignSupervisorToProposalsMutation", [value, getUser()])'
+            assignDecisionMakerToProposals:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AssignDecisionMakerToProposalsInput
+                    payloadType: AssignDecisionMakerToProposalsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AssignDecisionMakerToProposalsMutation", [value, getUser()])'
 
             # AnalysisConfiguration
             configureAnalysis:

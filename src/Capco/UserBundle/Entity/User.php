@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
@@ -918,6 +919,13 @@ class User extends BaseUser implements
     {
         return $this->supervisedProposals->map(static function (ProposalSupervisor $supervisor) {
             return $supervisor->getProposal();
+        });
+    }
+
+    public function getAllowedProposalAsDecisionMaker(): iterable
+    {
+        return $this->proposals->map(static function (Proposal $proposal) {
+            return $proposal->getProposalDecisionMaker();
         });
     }
 

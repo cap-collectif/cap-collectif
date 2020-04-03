@@ -785,6 +785,24 @@ type AssignAnalystsToProposalsPayload {
   clientMutationId: String
 }
 
+input AssignDecisionMakerToProposalsInput {
+  """Assign a decision maker to a list of proposals."""
+  proposalIds: [ID!]!
+
+  """The concerned decision maker id."""
+  decisionMakerId: ID
+  clientMutationId: String
+}
+
+type AssignDecisionMakerToProposalsPayload {
+  """Connection of assigned proposals"""
+  proposals: ProposalConnection
+
+  """Contains the error code if one occurred."""
+  errorCode: ProposalAssignmentErrorCode
+  clientMutationId: String
+}
+
 input AssignSupervisorToProposalsInput {
   """Assign a supervisor to a list of proposals."""
   proposalIds: [ID!]!
@@ -4226,6 +4244,7 @@ type Mutation {
   changeFont(input: InternalChangeFontInput!): InternalChangeFontPayload
   deleteFont(input: InternalDeleteFontInput!): InternalDeleteFontPayload
   assignSupervisorToProposals(input: AssignSupervisorToProposalsInput!): AssignSupervisorToProposalsPayload
+  assignDecisionMakerToProposals(input: AssignDecisionMakerToProposalsInput!): AssignDecisionMakerToProposalsPayload
   configureAnalysis(input: ConfigureAnalysisInput!): ConfigureAnalysisPayload
   updateRedirectIOKey(input: UpdateRedirectIOProjectIdInput!): UpdateRedirectIOProjectIdPayload
   revokeAnalystsToProposals(input: RevokeAnalystsToProposalsInput!): RevokeAnalystsToProposalsPayload
@@ -5838,6 +5857,12 @@ enum ProposalAssignmentErrorCode {
 
   """You dont have access to assign supervisor."""
   ACCESS_DENIED_TO_ASSIGN_SUPERVISOR
+
+  """You dont have access to revoke decision maker."""
+  ACCESS_DENIED_TO_REVOKE_DECISION_MAKER
+
+  """You dont have access to assign decision maker."""
+  ACCESS_DENIED_TO_ASSIGN_DECISION_MAKER
 
   """You cant revoke yourself"""
   CANT_REVOKE_YOURSELF
@@ -10272,7 +10297,7 @@ type User implements Node & UniformResourceLocatable {
     last: Int
   ): EventConnection
 
-  """Get proposals assigned to the user."""
+  """Get proposals assigned to the supervisor."""
   supervisedProposals(
     """
     Returns the elements in the list that come after the specified cursor.
