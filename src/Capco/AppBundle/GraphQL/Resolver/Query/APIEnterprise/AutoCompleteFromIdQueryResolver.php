@@ -32,6 +32,8 @@ class AutoCompleteFromIdQueryResolver implements ResolverInterface
             'type' => APIEnterpriseTypeResolver::ASSOCIATION,
             'corporateName' => $assoc['titre'] ?? '',
             'corporateAddress' => isset($assoc['adresse_siege']) ? $this->autocompleteUtils->formatAddressFromJSON($assoc['adresse_siege']) : '',
+            'legalRepresentative' => '',
+            'qualityRepresentative' => '',
         ];
     }
 }

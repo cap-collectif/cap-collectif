@@ -35,7 +35,6 @@ export type State = {|
   +images: ?{
     +avatar: string,
   },
-  +instanceName: string,
   +features: Exact<FeatureToggles>,
   +userTypes: Array<Object>,
   +parameters: Object,
@@ -96,7 +95,6 @@ export const initialState: State = {
   themes: [],
   images: null,
   showNewFieldModal: false,
-  instanceName: '',
   features,
   userTypes: [],
   parameters: {},

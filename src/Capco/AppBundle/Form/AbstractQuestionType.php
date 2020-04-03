@@ -54,7 +54,6 @@ abstract class AbstractQuestionType extends AbstractType
         ]);
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
-        $builder->add('hidden', CheckboxType::class);
         $builder->add('type', IntegerType::class);
     }
 }

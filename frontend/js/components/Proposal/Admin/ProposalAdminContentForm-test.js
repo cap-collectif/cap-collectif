@@ -85,7 +85,6 @@ describe('<ProposalAdminContentForm />', () => {
             alwaysJumpDestinationQuestion: null,
             private: false,
             required: true,
-            hidden: false,
             validationRule: null,
             __typename: 'SimpleQuestion',
             choices: {

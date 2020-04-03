@@ -21,7 +21,6 @@ describe('<ProposalPageEvaluation />', () => {
             number: 0,
             private: false,
             required: true,
-            hidden: false,
             helpText: null,
             alwaysJumpDestinationQuestion: null,
             jumps: [],

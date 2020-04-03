@@ -58,7 +58,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           id: 'field-1',
           title: 'Titre 1',
           required: false,
-          hidden: false,
           helpText: null,
           description: 'des cryptes Sion',
           type: 'text',

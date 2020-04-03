@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise;
 
-use Capco\AppBundle\Cache\RedisCache;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\HttpClient\HttpClient;
@@ -14,17 +13,13 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
     private $rootDir;
     private $pdfGenerator;
     private $autoCompleteUtils;
-    private $cache;
-    public const AUTOCOMPLETE_SIRET_CACHE_KEY = 'AUTOCOMPLETE_SIRET_CACHE_KEY';
-    public const AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY = 'AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY';
 
-    public function __construct(RedisCache $cache, APIEnterprisePdfGenerator $pdfGenerator, APIEnterpriseAutoCompleteUtils $autoCompleteUtils, $apiToken, $rootDir)
+    public function __construct(APIEnterprisePdfGenerator $pdfGenerator, APIEnterpriseAutoCompleteUtils $autoCompleteUtils, $apiToken, $rootDir)
     {
         $this->apiToken = $apiToken;
         $this->pdfGenerator = $pdfGenerator;
         $this->autoCompleteUtils = $autoCompleteUtils;
         $this->rootDir = $rootDir;
-        $this->cache = $cache;
     }
 
     public function __invoke(Arg $args): array
@@ -36,12 +31,6 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         $type = $args->offsetGet('type');
         $siret = $args->offsetGet('siret');
         $siren = substr($siret, 0,9);
-        $cacheKey = $siret . '_' . $type. '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY;
-        $cacheVisibilityKey = $siret . '_' . $type. '_' . self::AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY;
-
-        if ($this->cache->hasItem($cacheVisibilityKey)){
-            return $this->cache->getItem($cacheVisibilityKey)->get();
-        }
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,
@@ -63,16 +52,19 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             $exercices = $this->autoCompleteUtils->makeGetRequest($client, "https://entreprise.api.gouv.fr/v2/exercices/$siret");
         }
 
+        $legalRepresentative = $enterprise['entreprise']['mandataires_sociaux'][0] ?? null;
         $sirenSitu = json_encode($enterprise);
 
 
         $sirenSituPDF = $this->pdfGenerator->jsonToPdf($sirenSitu, $basePath, "${siren}_siren_situation");
         $basicInfo = [
             'type' => $type,
-            'sirenSituation' => isset($sirenSituPDF),
+            'sirenSituation' => $sirenSituPDF,
             'siren' => $enterprise['entreprise']['siren'],
             'corporateName' => $enterprise['entreprise']['raison_sociale'] ?? '',
             'corporateAddress' => isset($enterprise['etablissement_siege']['adresse']) ? $this->autoCompleteUtils->formatAddressFromJSON($enterprise['etablissement_siege']['adresse']) : '',
+            'legalRepresentative' => $legalRepresentative ? ($legalRepresentative['nom'] ?? '') . ' ' . ($legalRepresentative['prenom'] ?? '') : '',
+            'qualityRepresentative' => $legalRepresentative['fonction'] ?? '',
         ];
 
         if ($type === APIEnterpriseTypeResolver::ASSOCIATION) {
@@ -80,45 +72,22 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             $greffe = isset($greffe) ? json_encode($greffe) : null;
             $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${siren}_kbis");
             $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
-            $exercices = isset($exercices) ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices']) : null;
-
-            $this->autoCompleteUtils->saveInCache($cacheKey,
-                array_merge($basicInfo, [
-                    'kbis' => $kbis,
-                    'turnover' => $exercices ?? '',
-                    'sirenSituation' => $sirenSituPDF
-                ])
-            );
-
-            $apiResponse = array_merge($basicInfo, [
-                'availableKbis' => isset($kbis),
-                'availableTurnover' => isset($exercices),
+            $exercices = isset($exercices) ? json_encode($exercices['exercices']) : null;
+            return array_merge($basicInfo, [
+                'siret' => $siret,
+                'kbis' => $kbis,
+                'turnover' => $exercices ?? '',
             ]);
-            $this->autoCompleteUtils->saveInCache($cacheVisibilityKey,
-                $apiResponse);
-            return $apiResponse;
         }
 
         if ($type === APIEnterpriseTypeResolver::ENTERPRISE) {
             $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
-            $exercices = isset($exercices) ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices']) : null;
-
-            $this->autoCompleteUtils->saveInCache($cacheKey,
-                array_merge($basicInfo, [
-                    'turnover' => $exercices ?? '',
-                    'sirenSituation' => $sirenSituPDF
-                    ])
-            );
+            $exercices = isset($exercices) ? json_encode($exercices['exercices']) : null;
             return array_merge($basicInfo, [
-                'availableTurnover' => isset($exercices),
+                'turnover' => $exercices ?? '',
             ]);
         }
-        $this->autoCompleteUtils->saveInCache($cacheKey,
-            array_merge($basicInfo, [
-                'sirenSituation' => $sirenSituPDF
-            ]));
 
-        $this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $basicInfo);
         return $basicInfo;
     }
 }

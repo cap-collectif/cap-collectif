@@ -4,7 +4,7 @@ Capco\MediaBundle\Entity\Media:
     binaryContent: logo.png
     name: Logo
     category: '@MediaCategory1'
-  header:
+  Header:
     binaryContent: header_prod.jpg
     name: Header
     category: '@MediaCategory1'

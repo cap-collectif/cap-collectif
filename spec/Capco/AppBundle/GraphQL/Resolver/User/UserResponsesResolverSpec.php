@@ -33,7 +33,6 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $viewer = null;
         $context = new \ArrayObject(['disable_acl' => true]);
         $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(true);
         $response->getQuestion()->willReturn($question);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $subject->getResponses()->willReturn($responses);
@@ -45,7 +44,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $this->__invoke($subject, $viewer, $context)->shouldReturn($connection);
     }
 
-    public function it_should_return_private_responses_when_viewer_is_subject(
+    public function it_should_return_all_responses_when_viewer_is_subject(
         User $subject,
         AbstractResponse $response,
         AbstractQuestion $question,
@@ -53,10 +52,8 @@ class UserResponsesResolverSpec extends ObjectBehavior
         ConnectionInterface $connection
     ): void {
         $viewer = $subject;
-        $viewer->isAdmin()->willReturn(false);
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(false);
         $response->getQuestion()->willReturn($question);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $subject->getResponses()->willReturn($responses);
@@ -66,29 +63,6 @@ class UserResponsesResolverSpec extends ObjectBehavior
             ->willReturn($connection)
             ->shouldBeCalled();
         $this->__invoke($subject, $viewer, $context)->shouldReturn($connection);
-    }
-
-    public function it_should_not_return_hidden_responses_when_viewer_is_subject(
-        User $subject,
-        AbstractResponse $response,
-        AbstractQuestion $question,
-        ConnectionBuilder $builder,
-        ConnectionInterface $emptyConnection
-    ): void {
-        $viewer = $subject;
-        $viewer->isAdmin()->willReturn(false);
-        $context = new \ArrayObject(['disable_acl' => false]);
-        $question->isPrivate()->willReturn(false);
-        $question->getHidden()->willReturn(true);
-        $response->getQuestion()->willReturn($question);
-        $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $subject->getResponses()->willReturn($responses);
-
-        $builder
-            ->connectionFromArray([])
-            ->willReturn($emptyConnection)
-            ->shouldBeCalled();
-        $this->__invoke($subject, $viewer, $context)->shouldReturn($emptyConnection);
     }
 
     public function it_should_not_return_private_responses_when_viewer_is_anonymous(
@@ -101,7 +75,6 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $viewer = null;
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(false);
         $response->getQuestion()->willReturn($question);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $subject->getResponses()->willReturn($responses);
@@ -123,7 +96,6 @@ class UserResponsesResolverSpec extends ObjectBehavior
     ): void {
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(false);
         $response->getQuestion()->willReturn($question);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $viewer->isAdmin()->willReturn(false);

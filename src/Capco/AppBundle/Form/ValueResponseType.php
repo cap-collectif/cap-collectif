@@ -34,9 +34,7 @@ class ValueResponseType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ValueResponse::class,
-            'model_class' => ValueResponse::class,
-            'allow_extra_fields' => true
-
+            'model_class' => ValueResponse::class
         ]);
     }
 

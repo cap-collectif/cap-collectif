@@ -1,50 +1,41 @@
 // @flow
-import { graphql, commitLocalUpdate } from 'react-relay';
-import { change } from 'redux-form';
-import type { Dispatch } from '~/types';
-import environment from '~/createRelayEnvironment';
-import type { Questions } from '~/components/Form/Form.type';
+import {graphql} from "react-relay";
+import {change} from "redux-form";
+import type {Dispatch} from '~/types';
 
+const dispatchFromApi = (dispatch: Dispatch, formName: string, arr: Array<{key: string, value: ?string}>) => {
+  arr.forEach((element: {key: string, value: ?string}) => {
+    if (Array.isArray(element.value)){
+      if (element.value.length > 0 && element.value[0] != null){
+        dispatch(
+          change(
+            formName,
+            element.key,
+            element.value,
+          ),
+        );
+      }
+    } else if (element.value){
+      dispatch(
+        change(
+          formName,
+          element.key,
+          element.value,
+        ),
+      );
+    }
+  });
+};
 export const API_ENTERPRISE_ENTER = 'ENTER';
 export const API_ENTERPRISE_PUB_ORGA = 'PUB_ORGA';
 export const API_ENTERPRISE_ASSOC = 'ASSOC';
 export const API_ENTERPRISE_ASSOC_RNA = 'ASSOC_RNA';
+
+
 export const API_ENTERPRISE_ASSOC_DOC = 'ASSOC_DOC';
 export const API_ENTERPRISE_ASSOC_DOC_RNA = 'ASSOC_DOC_RNA';
 export const API_ENTERPRISE_DOC_ENTER = 'DOC_ENTER';
 export const API_ENTERPRISE_DOC_PUB_ORGA = 'DOC_PUB_ORGA';
-
-const dispatchFromApi = (
-  dispatch: Dispatch,
-  formName: string,
-  arr: Array<{ key?: string, questionNumber?: number, value: any }>,
-  questions: Questions,
-  onlyVisibility: boolean = false,
-) => {
-  arr.forEach((element: { key?: string, questionNumber?: number, value: ?string }) => {
-    if (element?.questionNumber !== null && typeof element?.questionNumber !== 'undefined') {
-      // Check if is not available thanks to API
-      if (!element.value && element.questionNumber) {
-        const index = element.questionNumber;
-        // Ask for user to complete
-        commitLocalUpdate(environment, store => {
-          const question = store.get(questions[index].id);
-          if (question) {
-            question.setValue(false, 'hidden');
-          }
-        });
-      }
-    } else if (!onlyVisibility) {
-      if (Array.isArray(element.value) && element.key) {
-        if (element.value.length > 0 && element.value[0] != null) {
-          dispatch(change(formName, element.key, element.value));
-        }
-      } else if (element.key && element.value) {
-        dispatch(change(formName, element.key, element.value));
-      }
-    }
-  });
-};
 
 const getMatchingObject = (object: Object, type: string) => {
   switch (type) {
@@ -63,114 +54,95 @@ const getMatchingObject = (object: Object, type: string) => {
       throw new Error('Unknown type.');
   }
 };
-// Once data fetched, we must always show:
-// Raison sociale
-// Adresse du siège social
-// Prénom et Nom du représentant légal
-// Qualité du représentant légal
-const showAPIVisibleQuestions = (indexes: Array<number>, questions: Questions) => {
-  indexes.forEach(index => {
-    commitLocalUpdate(environment, store => {
-      const question = store.get(questions[index].id);
-      if (question) {
-        question.setValue(false, 'hidden');
-      }
-    });
-  });
-};
 
-export const dispatchValuesToForm = (
-  dispatch: Dispatch,
-  object: Object,
-  type: string,
-  questions: Questions,
-  onlyVisibility: boolean,
-  formName: string = 'proposal-form',
-) => {
+export const dispatchValuesToForm = (dispatch: Dispatch, object: Object, type: string,
+                                     formName: string = "proposal-form") => {
+
   const obj = getMatchingObject(object, type);
 
-  const orderedSiretAssocMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { key: 'responses.13.value', value: obj.corporateName },
-    { key: 'responses.14.value', value: obj.corporateAddress },
-
-    { questionNumber: 17, value: obj.availableSirenSituation },
-    { questionNumber: 20, value: obj.availableTurnover },
-    { questionNumber: 21, value: obj.availableKbis },
+  const orderedSiretAssocMapping: Array<{key: string, value: any}> = [
+    {key: "responses.13.value", value : obj.corporateName},
+    {key: "responses.14.value", value : obj.corporateAddress},
+    {key: "responses.15.value", value : obj.legalRepresentative},
+    {key: "responses.16.value", value : obj.qualityRepresentative},
+    {key: "responses.17.value", value : [obj.sirenSituation]},
+    {key: "responses.20.value", value : obj.turnover},
+    {key: "responses.21.value", value : [obj.kbis]},
   ];
 
-  const orderedRNAAssocMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { key: 'responses.28.value', value: obj.corporateName },
-    { key: 'responses.29.value', value: obj.corporateAddress },
+  const orderedRNAAssocMapping: Array<{key: string, value: any}> = [
+    {key: "responses.28.value", value : obj.corporateName},
+    {key: "responses.29.value", value : obj.corporateAddress},
+    {key: "responses.30.value", value : [obj.legalRepresentative]},
+    {key: "responses.31.value", value : [obj.qualityRepresentative]},
   ];
 
-  const orderedEnterpriseMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { key: 'responses.45.value', value: obj.corporateName },
-    { key: 'responses.46.value', value: obj.corporateAddress },
-
-    { questionNumber: 49, value: obj.availableSirenSituation },
-    { questionNumber: 52, value: obj.availableTurnover },
+  const orderedEnterpriseMapping: Array<{key: string, value: any}> = [
+    {key: "responses.45.value", value : obj.corporateName},
+    {key: "responses.46.value", value : obj.corporateAddress},
+    {key: "responses.47.value", value : obj.legalRepresentative},
+    {key: "responses.48.value", value : obj.qualityRepresentative},
+    {key: "responses.49.value", value : [obj.sirenSituation]},
+    {key: "responses.52.value", value : obj.turnover},
   ];
 
-  const orderedPublicOrgaMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { key: 'responses.57.value', value: obj.corporateName },
-    { key: 'responses.58.value', value: obj.corporateAddress },
-
-    { questionNumber: 61, value: obj.availableSirenSituation },
+  const orderedPublicOrgaMapping: Array<{key: string, value: any}> = [
+    {key: "responses.57.value", value : obj.corporateName},
+    {key: "responses.58.value", value : obj.corporateAddress},
+    {key: "responses.59.value", value : [obj.legalRepresentative]},
+    {key: "responses.60.value", value : [obj.qualityRepresentative]},
+    {key: "responses.61.value", value : [obj.sirenSituation]},
   ];
 
   // DOCS
-  const docAssocMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { questionNumber: 22, value: obj.availableCompositionCA },
-    { questionNumber: 23, value: obj.availableStatus },
-    { questionNumber: 18, value: obj.availableFiscalRegulationAttestation },
-    { questionNumber: 19, value: obj.availableSocialRegulationAttestation },
-    { questionNumber: 71, value: obj.availablePrefectureReceiptConfirm },
+  const docAssocMapping: Array<{key: string, value: any}> = [
+    {key: "responses.22.value", value : [obj.compositionCA]},
+    {key: "responses.23.value", value : [obj.status]},
+    {key: "responses.18.value", value : [obj.fiscalRegulationAttestation]},
+    {key: "responses.19.value", value : [obj.socialRegulationAttestation]},
   ];
 
-  const docAssocRNAMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { questionNumber: 32, value: obj.availableCompositionCA },
-    { questionNumber: 33, value: obj.availableStatus },
-    { questionNumber: 34, value: obj.availablePrefectureReceiptConfirm },
+  const docAssocRNAMapping: Array<{key: string, value: any}> = [
+    {key: "responses.32.value", value : [obj.compositionCA]},
+    {key: "responses.33.value", value : [obj.status]},
+    {key: "responses.34.value", value : [obj.prefectureReceiptConfirm]},
   ];
 
-  const docEnterMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { questionNumber: 50, value: obj.availableFiscalRegulationAttestation },
-    { questionNumber: 51, value: obj.availableSocialRegulationAttestation },
-    { questionNumber: 53, value: obj.availableKbis },
+  const docEnterMapping: Array<{key: string, value: any}> = [
+    {key: "responses.50.value", value : [obj.fiscalRegulationAttestation]},
+    {key: "responses.51.value", value : [obj.socialRegulationAttestation]},
+    {key: "responses.53.value", value : [obj.kbis]},
   ];
 
-  const docPubOrgaMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { questionNumber: 62, value: obj.availableKbis },
+  const docPubOrgaMapping: Array<{key: string, value: any}> = [
+    {key: "responses.62.value", value : [obj.kbis]},
   ];
 
   switch (type) {
     case API_ENTERPRISE_ASSOC:
-      showAPIVisibleQuestions([13, 14, 15, 16], questions);
-      dispatchFromApi(dispatch, formName, orderedSiretAssocMapping, questions, onlyVisibility);
+      dispatchFromApi(dispatch, formName, orderedSiretAssocMapping);
       break;
     case API_ENTERPRISE_ASSOC_RNA:
-      showAPIVisibleQuestions([28, 29, 30, 31], questions);
-      dispatchFromApi(dispatch, formName, orderedRNAAssocMapping, questions, onlyVisibility);
+
+      dispatchFromApi(dispatch, formName, orderedRNAAssocMapping);
       break;
     case API_ENTERPRISE_ENTER:
-      showAPIVisibleQuestions([45, 46, 47, 48], questions);
-      dispatchFromApi(dispatch, formName, orderedEnterpriseMapping, questions, onlyVisibility);
+      dispatchFromApi(dispatch, formName, orderedEnterpriseMapping);
       break;
     case API_ENTERPRISE_PUB_ORGA:
-      showAPIVisibleQuestions([57, 58, 59, 60], questions);
-      dispatchFromApi(dispatch, formName, orderedPublicOrgaMapping, questions, onlyVisibility);
+      dispatchFromApi(dispatch, formName, orderedPublicOrgaMapping);
       break;
     case API_ENTERPRISE_ASSOC_DOC:
-      dispatchFromApi(dispatch, formName, docAssocMapping, questions, onlyVisibility);
+      dispatchFromApi(dispatch, formName, docAssocMapping);
       break;
     case API_ENTERPRISE_ASSOC_DOC_RNA:
-      dispatchFromApi(dispatch, formName, docAssocRNAMapping, questions, onlyVisibility);
+      dispatchFromApi(dispatch, formName, docAssocRNAMapping);
       break;
     case API_ENTERPRISE_DOC_ENTER:
-      dispatchFromApi(dispatch, formName, docEnterMapping, questions, onlyVisibility);
+      dispatchFromApi(dispatch, formName, docEnterMapping);
       break;
     case API_ENTERPRISE_DOC_PUB_ORGA:
-      dispatchFromApi(dispatch, formName, docPubOrgaMapping, questions, onlyVisibility);
+      dispatchFromApi(dispatch, formName, docPubOrgaMapping);
       break;
     default:
       break;
@@ -178,11 +150,15 @@ export const dispatchValuesToForm = (
 };
 
 export const autocompleteFromId = graphql`
-  query APIEnterpriseConstants_AutocompleteFromIdQuery($id: String!) {
-    apiEnterpriseAutocompleteFromId(id: $id) {
+  query APIEnterpriseConstants_AutocompleteFromIdQuery(
+    $id: String!
+  ) {
+    apiEnterpriseAutocompleteFromId(id: $id){
       corporateName
       corporateAddress
-      availableTurnover
+      qualityRepresentative
+      legalRepresentative
+      turnover
     }
   }
 `;
@@ -192,38 +168,75 @@ export const autocompleteFromSiret = graphql`
     $type: APIEnterpriseType!
     $siret: String!
   ) {
-    apiEnterpriseAutocompleteFromSiret(type: $type, siret: $siret) {
+    apiEnterpriseAutocompleteFromSiret(type: $type, siret: $siret){
       ... on APIEnterpriseAssociation {
+        siret
         corporateName
         corporateAddress
-        availableSirenSituation
-        availableTurnover
+        qualityRepresentative
+        legalRepresentative
+        sirenSituation{
+          id
+          name
+        }
+        turnover
       }
       ... on APIEnterpriseEnterprise {
         corporateName
         corporateAddress
-        availableSirenSituation
-        availableTurnover
+        qualityRepresentative
+        legalRepresentative
+        sirenSituation{
+          id
+          name
+        }
+        turnover
       }
       ... on APIEnterprisePublicOrganization {
         corporateName
         corporateAddress
-        availableSirenSituation
+        qualityRepresentative
+        legalRepresentative
+        sirenSituation {
+          id 
+          name
+        }
       }
     }
   }
 `;
 
 export const fetchAPIDocuments = graphql`
-  query APIEnterpriseConstants_fetchAssociationDocQuery($id: String!, $type: APIEnterpriseType!) {
-    fetchAPIEnterpriseDocuments(id: $id, type: $type) {
+  query APIEnterpriseConstants_fetchAssociationDocQuery(
+    $id: String!
+    $type: APIEnterpriseType!
+  ) {
+    fetchAPIEnterpriseDocuments(id: $id, type: $type){
       ... on APIEnterpriseDocuments {
-        availableCompositionCA
-        availableStatus
-        availablePrefectureReceiptConfirm
-        availableFiscalRegulationAttestation
-        availableSocialRegulationAttestation
-        availableKbis
+        compositionCA{
+          id
+          name
+        }
+        status {
+          id
+          name
+        }
+        prefectureReceiptConfirm {
+          id
+          name
+        }
+        fiscalRegulationAttestation {
+          id
+          name
+        }
+        socialRegulationAttestation {
+          id
+          name
+        }
+        kbis {
+          id
+          name
+        }
       }
     }
   }

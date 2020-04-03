@@ -34,12 +34,10 @@ export const validateResponses = (
   const formattedResponses: Array<FormattedResponse> = formatResponses(questions, responses);
 
   const responsesError = formattedResponses.map((formattedResponse: FormattedResponse) => {
-    const { idQuestion, type, required, validationRule, value, otherValue, hidden } = formattedResponse;
+    const { idQuestion, type, required, validationRule, value, otherValue } = formattedResponse;
 
     // required
-    if (required &&!isDraft
-      && !hidden
-    ) {
+    if (required && !isDraft) {
       // no value
       if (
         !value || // default

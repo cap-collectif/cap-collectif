@@ -16,16 +16,11 @@ use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalViewerIsAnEvaluerResolver;
 
 class ProposalResponsesResolverSpec extends ObjectBehavior
 {
-    public function let(
-        AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository,
-        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer
-    ): void {
-        $this->beConstructedWith(
-            $abstractQuestionRepository,
-            $abstractResponseRepository,
-            $viewerIsAnEvaluer
-        );
+    public function let(AbstractQuestionRepository $abstractQuestionRepository,
+                        AbstractResponseRepository $abstractResponseRepository,
+                        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer): void
+    {
+        $this->beConstructedWith($abstractQuestionRepository, $abstractResponseRepository, $viewerIsAnEvaluer);
     }
 
     public function it_is_initializable(): void
@@ -42,19 +37,17 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         User $author,
         AbstractResponse $response,
         AbstractQuestion $question
-    ): void {
+    ): void
+    {
         $viewer = null;
         $context = new \ArrayObject(['disable_acl' => true]);
         $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(true);
         $question->getId()->willReturn('question1');
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
+        $abstractResponseRepository->getByProposal($proposal, true)->willReturn($responses->toArray());
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
@@ -62,65 +55,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
     }
 
-    public function it_should_return_all_responses_when_viewer_is_admin(
-        AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository,
-        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
-        ProposalForm $form,
-        Proposal $proposal,
-        User $author,
-        User $viewer,
-        AbstractResponse $response,
-        AbstractQuestion $question
-    ): void {
-        $context = new \ArrayObject(['disable_acl' => false]);
-        $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(true);
-        $question->getId()->willReturn('question1');
-        $response->getQuestion()->willReturn($question);
-        $questions = new ArrayCollection([$question->getWrappedObject()]);
-        $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $viewer->isAdmin()->willReturn(true);
-        $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
-        $proposal->getAuthor()->willReturn($author);
-        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
-    }
-
-    public function it_should_return_all_responses_when_viewer_is_analyst(
-        AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository,
-        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
-        ProposalForm $form,
-        Proposal $proposal,
-        User $author,
-        User $viewer,
-        AbstractResponse $response,
-        AbstractQuestion $question
-    ): void {
-        $context = new \ArrayObject(['disable_acl' => false]);
-        $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(true);
-        $question->getId()->willReturn('question1');
-        $response->getQuestion()->willReturn($question);
-        $questions = new ArrayCollection([$question->getWrappedObject()]);
-        $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $viewer->isAdmin()->willReturn(true);
-        $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
-        $proposal->getAuthor()->willReturn($author);
-        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(true);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
-    }
-
-    public function it_should_return_private_responses_when_viewer_is_author(
+    public function it_should_return_all_responses_when_viewer_is_author(
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
@@ -129,55 +64,21 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         User $author,
         AbstractResponse $response,
         AbstractQuestion $question
-    ): void {
+    ): void
+    {
         $viewer = $author;
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(false);
         $question->getId()->willReturn('question1');
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
+        $abstractResponseRepository->getByProposal($proposal, true)->willReturn($responses->toArray());
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $viewer->isAdmin()->willReturn(false);
         $this->__invoke($proposal, $viewer, $context)->shouldBeLike($responses->getIterator());
-    }
-
-    public function it_should_not_return_hidden_responses_when_viewer_is_author(
-        AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository,
-        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
-        Proposal $proposal,
-        ProposalForm $form,
-        User $author,
-        AbstractResponse $response,
-        AbstractQuestion $question
-    ): void {
-        $viewer = $author;
-        $context = new \ArrayObject(['disable_acl' => false]);
-        $question->isPrivate()->willReturn(false);
-        $question->getHidden()->willReturn(true);
-        $question->getId()->willReturn('question1');
-        $response->getQuestion()->willReturn($question);
-        $questions = new ArrayCollection([$question->getWrappedObject()]);
-        $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
-        $proposal->getAuthor()->willReturn($author);
-        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $viewer->isAdmin()->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
-            (new ArrayCollection([]))->getIterator()
-        );
     }
 
     public function it_should_not_return_private_responses_when_viewer_is_anonymous(
@@ -189,49 +90,17 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         User $author,
         AbstractResponse $response,
         AbstractQuestion $question
-    ): void {
+    ): void
+    {
         $viewer = null;
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(false);
         $question->getId()->willReturn('question1');
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
-        $proposal->getAuthor()->willReturn($author);
-        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
-            (new ArrayCollection([]))->getIterator()
-        );
-    }
-
-    public function it_should_not_return_hidden_responses_when_viewer_is_anonymous(
-        AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository,
-        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
-        ProposalForm $form,
-        Proposal $proposal,
-        User $author,
-        AbstractResponse $response,
-        AbstractQuestion $question
-    ): void {
-        $viewer = null;
-        $context = new \ArrayObject(['disable_acl' => false]);
-        $question->isPrivate()->willReturn(false);
-        $question->getHidden()->willReturn(true);
-        $question->getId()->willReturn('question1');
-        $response->getQuestion()->willReturn($question);
-        $questions = new ArrayCollection([$question->getWrappedObject()]);
-        $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
+        $abstractResponseRepository->getByProposal($proposal, true)->willReturn($responses->toArray());
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
@@ -250,50 +119,17 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         User $viewer,
         AbstractResponse $response,
         AbstractQuestion $question
-    ): void {
+    ): void
+    {
         $context = new \ArrayObject(['disable_acl' => false]);
         $question->isPrivate()->willReturn(true);
-        $question->getHidden()->willReturn(false);
         $question->getId()->willReturn('question1');
         $response->getQuestion()->willReturn($question);
         $questions = new ArrayCollection([$question->getWrappedObject()]);
         $responses = new ArrayCollection([$response->getWrappedObject()]);
         $viewer->isAdmin()->willReturn(false);
         $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
-        $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
-        $proposal->getAuthor()->willReturn($author);
-        $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
-        $this->__invoke($proposal, $viewer, $context)->shouldBeLike(
-            (new ArrayCollection([]))->getIterator()
-        );
-    }
-
-    public function it_should_not_return_hidden_responses_when_viewer_is_not_author(
-        AbstractQuestionRepository $abstractQuestionRepository,
-        AbstractResponseRepository $abstractResponseRepository,
-        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
-        ProposalForm $form,
-        Proposal $proposal,
-        User $author,
-        User $viewer,
-        AbstractResponse $response,
-        AbstractQuestion $question
-    ): void {
-        $context = new \ArrayObject(['disable_acl' => false]);
-        $question->isPrivate()->willReturn(false);
-        $question->getHidden()->willReturn(true);
-        $question->getId()->willReturn('question1');
-        $response->getQuestion()->willReturn($question);
-        $questions = new ArrayCollection([$question->getWrappedObject()]);
-        $responses = new ArrayCollection([$response->getWrappedObject()]);
-        $viewer->isAdmin()->willReturn(false);
-        $proposal->getForm()->willReturn($form);
-        $abstractResponseRepository
-            ->getByProposal($proposal, true)
-            ->willReturn($responses->toArray());
+        $abstractResponseRepository->getByProposal($proposal, true)->willReturn($responses->toArray());
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);

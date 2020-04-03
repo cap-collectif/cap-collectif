@@ -1,65 +1,62 @@
 InternalQuestion:
-    type: interface
-    inherits:
-        - PreviewQuestion
-        - Node
-    config:
-        name: Question
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
-        fields:
-            # Overrides from Preview
-            responses:
-                type: 'InternalResponseConnection!'
-                args:
-                    withNotConfirmedUser:
-                        type: 'Boolean'
-                        description: 'Get responses with user not confirmed'
-                        defaultValue: false
-            number:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
-                type: 'Int!'
-            type:
-                type: 'QuestionTypeValue!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeValueResolver", [value])'
-            #need it for conditional jumps
-            position:
-                type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionPositionResolver", [value])'
-                description: 'The position of the question'
-            private:
-                type: 'Boolean!'
-            required:
-                type: 'Boolean!'
-            helpText:
-                type: 'String'
-            description:
-                type: 'String'
-            kind:
-                type: 'String!'
-            slug:
-                type: 'String!'
-            participants:
-                type: 'ParticipantConnection!'
-                argsBuilder: 'Relay::Connection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
-                description: 'Return users who answered the question'
-                args:
-                    withNotConfirmedUser:
-                        type: 'Boolean'
-                        description: 'Get participant with user not confirmed'
-                        defaultValue: false
-            jumps:
-                description: 'The associated logic jumps to this question.'
-                type: '[LogicJump!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionJumpsResolver", [value, args])'
-                args:
-                    orderBy:
-                        type: 'JumpsOrder'
-                        defaultValue: { field: POSITION, direction: ASC }
-                        description: 'Ordering options for question jumps.'
-            alwaysJumpDestinationQuestion:
-                description: 'The destination of the always jump (the else case) of this question.'
-                type: 'InternalQuestion'
-            hidden:
-                type: 'Boolean!'
-                description: 'Boolean to decide whether the question will be rendered or not'
+  type: interface
+  inherits:
+    - PreviewQuestion
+    - Node
+  config:
+    name: Question
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
+    fields:
+      # Overrides from Preview
+      responses:
+        type: 'InternalResponseConnection!'
+        args:
+          withNotConfirmedUser:
+            type: 'Boolean'
+            description: 'Get responses with user not confirmed'
+            defaultValue: false
+      number:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
+        type: 'Int!'
+      type:
+        type: 'QuestionTypeValue!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeValueResolver", [value])'
+      #need it for conditional jumps
+      position:
+        type: 'Int!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionPositionResolver", [value])'
+        description: 'The position of the question'
+      private:
+        type: 'Boolean!'
+      required:
+        type: 'Boolean!'
+      helpText:
+        type: 'String'
+      description:
+        type: 'String'
+      kind:
+        type: 'String!'
+      slug:
+        type: 'String!'
+      participants:
+        type: 'ParticipantConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
+        description: 'Return users who answered the question'
+        args:
+          withNotConfirmedUser:
+            type: 'Boolean'
+            description: 'Get participant with user not confirmed'
+            defaultValue: false
+      jumps:
+        description: 'The associated logic jumps to this question.'
+        type: '[LogicJump!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionJumpsResolver", [value, args])'
+        args:
+          orderBy:
+            type: 'JumpsOrder'
+            defaultValue: { field: POSITION, direction: ASC }
+            description: 'Ordering options for question jumps.'
+      alwaysJumpDestinationQuestion:
+        description: 'The destination of the always jump (the else case) of this question.'
+        type: 'InternalQuestion'

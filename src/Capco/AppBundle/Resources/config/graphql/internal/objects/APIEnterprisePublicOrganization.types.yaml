@@ -6,6 +6,6 @@ APIEnterprisePublicOrganization:
         description: "A public organization."
         name: APIEnterprisePublicOrganization
         fields:
-            availableSirenSituation:
-                type: 'Boolean'
+            sirenSituation:
+                type: 'InternalMedia'
                 description: "The RIB of the enterprise."

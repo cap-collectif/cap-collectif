@@ -33,7 +33,6 @@ describe('<ReplyForm />', () => {
     description: 'description of question',
     private: false,
     required: true,
-    hidden: false,
     isOtherAllowed: false,
     choices: {
       pageInfo: {
@@ -59,7 +58,6 @@ describe('<ReplyForm />', () => {
     private: false,
     required: false,
     isOtherAllowed: true,
-    hidden: false,
     choices: {
       pageInfo: {
         hasNextPage: false,
@@ -121,7 +119,6 @@ describe('<ReplyForm />', () => {
     private: false,
     required: true,
     isOtherAllowed: true,
-    hidden: false,
     choices: {
       pageInfo: {
         hasNextPage: false,
@@ -183,7 +180,6 @@ describe('<ReplyForm />', () => {
     private: false,
     required: false,
     isOtherAllowed: false,
-    hidden: false,
     choices: {
       pageInfo: {
         hasNextPage: false,
@@ -236,7 +232,6 @@ describe('<ReplyForm />', () => {
     private: false,
     required: false,
     isOtherAllowed: false,
-    hidden: false,
     choices: {
       pageInfo: {
         hasNextPage: false,
@@ -289,7 +284,6 @@ describe('<ReplyForm />', () => {
     private: false,
     required: false,
     isOtherAllowed: false,
-    hidden: false,
     choices: {
       pageInfo: {
         hasNextPage: true,
