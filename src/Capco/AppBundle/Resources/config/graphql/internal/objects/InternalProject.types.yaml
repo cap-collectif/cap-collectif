@@ -48,6 +48,10 @@ InternalProject:
                 description: 'Slug of a project'
             video:
                 type: 'String'
+            firstAnalysisStep:
+                type: ProposalStep
+                resolve: '@=value.getFirstAnalysisStep()'
+                description: "Identifies the first analysis step of the project, if any."
             hasParticipativeStep:
                 type: Boolean!
                 resolve: '@=value.hasParticipativeStep(args["exceptStepId"])'

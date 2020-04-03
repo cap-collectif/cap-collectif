@@ -3,62 +3,97 @@ Capco\AppBundle\Entity\ProposalAnalyst:
         __construct: ['@proposal109', '@userAnalyst']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalyst2:
         __construct: ['@proposal109', '@userAnalyst2']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:05:02'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:03'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalyst3:
         __construct: ['@proposal111', '@userAnalyst']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:05:03'))->modify("+ 15 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:04'))->modify("+ 14 days"))>
+        updatedAt: $createdAt
     proposalAnalyst4:
         __construct: ['@proposal110', '@userAnalyst2']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:05:05'))->modify("+ 13 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:06'))->modify("+ 12 days"))>
+        updatedAt: $createdAt
     proposalAnalyst5:
         __construct: ['@proposal115', '@userAnalyst']
         assignedBy: '@userJean'
         createdAt: <identity((new \DateTime('2019-01-01 00:05:07')))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:08')))>
-    proposalAnalystIdf1:
+        updatedAt: $createdAt
+    proposalAnalystIdf1Agui:
         __construct: ['@proposalIdf1', '@userAgui']
-        assignedBy: '@userJean'
-        createdAt: <identity((new \DateTime('2020-01-01 00:05:09')))>
-        updatedAt: <identity((new \DateTime('2020-01-01 00:06:10')))>
-    proposalAnalystIdf2:
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:01')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf1Vincent:
         __construct: ['@proposalIdf1', '@userVincent']
-        assignedBy: '@userJean'
-        createdAt: <identity((new \DateTime('2020-01-01 00:05:11')))>
-        updatedAt: <identity((new \DateTime('2020-01-01 00:06:12')))>
-    proposalAnalystIdf3:
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:02')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf1Omar:
         __construct: ['@proposalIdf1', '@userOmar']
-        assignedBy: '@userJean'
-        createdAt: <identity((new \DateTime('2020-01-01 00:05:13')))>
-        updatedAt: <identity((new \DateTime('2020-01-01 00:06:14')))>
-    proposalAnalystIdf4:
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:03')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf1Theo:
+        __construct: ['@proposalIdf1', '@userTheo']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:04')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf1Jpec:
+        __construct: ['@proposalIdf1', '@userJpec']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf2Maxime:
+        __construct: ['@proposalIdf1', '@userMaxime']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf2Theo:
         __construct: ['@proposalIdf2', '@userTheo']
-        assignedBy: '@userJean'
-        createdAt: <identity((new \DateTime('2020-01-01 00:05:09')))>
-        updatedAt: <identity((new \DateTime('2020-01-01 00:06:10')))>
-    proposalAnalystIdf5:
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:07')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf2Jpec:
         __construct: ['@proposalIdf2', '@userJpec']
-        assignedBy: '@userJean'
-        createdAt: <identity((new \DateTime('2020-01-01 00:05:11')))>
-        updatedAt: <identity((new \DateTime('2020-01-01 00:06:12')))>
-    proposalAnalystIdf6:
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:08')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf3Mickael:
         __construct: ['@proposalIdf3', '@userMickael']
-        assignedBy: '@userJean'
-        createdAt: <identity((new \DateTime('2020-01-01 00:05:13')))>
-        updatedAt: <identity((new \DateTime('2020-01-01 00:06:14')))>
-    proposalAnalystIdf7:
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:09')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf3Theo:
         __construct: ['@proposalIdf3', '@userTheo']
-        assignedBy: '@userJean'
-        createdAt: <identity((new \DateTime('2020-01-01 00:05:15')))>
-        updatedAt: <identity((new \DateTime('2020-01-01 00:06:16')))>
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:10')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf3Maxime:
+        __construct: ['@proposalIdf3', '@userMaxime']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:11')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf4Maxime:
+        __construct: ['@proposalIdf4', '@userMaxime']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:12')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf5Maxime:
+        __construct: ['@proposalIdf5', '@userMaxime']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:13')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf6Maxime:
+        __construct: ['@proposalIdf6', '@userMaxime']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:14')))>
+        updatedAt: $createdAt
     proposalAnalyst8:
         __construct: ['@proposal109', '@user26']
         assignedBy: '@userJean'

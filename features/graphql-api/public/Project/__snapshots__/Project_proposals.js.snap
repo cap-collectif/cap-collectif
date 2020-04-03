@@ -25,8 +25,18 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYz",
       },
     },
+    Object {
+      "node": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY0",
+      },
+    },
+    Object {
+      "node": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
+      },
+    },
   ],
-  "totalCount": 3,
+  "totalCount": 7,
 }
 `;
 

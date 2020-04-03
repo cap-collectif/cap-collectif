@@ -4,46 +4,46 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         proposal: '@proposal109'
         state: IN_PROGRESS
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalysis2:
         updatedBy: '@userAnalyst2'
         proposal: '@proposal109'
         state: IN_PROGRESS
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalysisIdf1:
         updatedBy: '@userAgui'
         proposal: '@proposalIdf1'
         state: FAVOURABLE
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalysisIdf2:
         updatedBy: '@userVincent'
         proposal: '@proposalIdf1'
         state: UNFAVOURABLE
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalysisIdf3:
         updatedBy: '@userOmar'
         proposal: '@proposalIdf1'
         state: NONE
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalysisIdf4:
         updatedBy: '@userTheo'
         proposal: '@proposalIdf2'
         state: TOO_LATE
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalysisIdf5:
         updatedBy: '@userJpec'
         proposal: '@proposalIdf2'
         state: FAVOURABLE
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt
     proposalAnalysisIdf6:
         updatedBy: '@userTheo'
         proposal: '@proposalIdf3'
         state: IN_PROGRESS
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
-        updatedAt: <identity((new \DateTime('2019-01-01 00:06:01'))->modify("+ 17 days"))>
+        updatedAt: $createdAt

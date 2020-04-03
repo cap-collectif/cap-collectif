@@ -59,3 +59,51 @@ Capco\AppBundle\Entity\Status:
         position: 1
         step: '@collectstep13'
         color: success
+    statusIdfCollect1:
+        id: statusIdfCollect1
+        name: Nouvelle proposition
+        position: 1
+        step: '@collectstepIdf'
+        color: info
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:01')))>
+        updatedAt: $createdAt
+    statusIdfAnalyse1:
+        id: statusIdfAnalyse1
+        name: Déjà réalisé
+        position: 1
+        step: '@selectionStepIdfAnalyse'
+        color: danger
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:02')))>
+        updatedAt: $createdAt
+    statusIdfAnalyse2:
+        id: statusIdfAnalyse2
+        name: Soumis au vote
+        position: 2
+        step: '@selectionStepIdfAnalyse'
+        color: info
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:03')))>
+        updatedAt: $createdAt
+    statusIdfAnalyse3:
+        id: statusIdfAnalyse3
+        name: Hors cadre
+        position: 3
+        step: '@selectionStepIdfAnalyse'
+        color: danger
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:04')))>
+        updatedAt: $createdAt
+    statusIdfAnalyse4:
+        id: statusIdfAnalyse4
+        name: En cours d'analyse
+        position: 4
+        step: '@selectionStepIdfAnalyse'
+        color: success
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
+        updatedAt: $createdAt
+    statusIdfVote1:
+        id: statusIdfVote1
+        name: Soumis au vote
+        position: 1
+        step: '@selectionStepIdfVote'
+        color: info
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
+        updatedAt: $createdAt

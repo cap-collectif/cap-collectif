@@ -617,9 +617,9 @@ Capco\AppBundle\Entity\Proposal:
         author: '@user4'
         proposalForm: '@proposalform16'
         reference: 1105
-        createdAt: <(new \DateTime('2019-01-01 00:00:01'))>
-        updatedAt: <(new \DateTime('2019-01-01 00:00:01'))>
         publishedAt: <(new \DateTime('2019-01-01 00:00:01'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     proposal106:
         id: proposal106
         title: Proposition qui est jetée
@@ -629,9 +629,9 @@ Capco\AppBundle\Entity\Proposal:
         reference: 1106
         trashedStatus: 'visible'
         trashedAt: <(new \DateTime('2019-01-01 00:00:02'))>
-        createdAt: <(new \DateTime('2019-01-01 00:00:02'))>
-        updatedAt: <(new \DateTime('2019-01-01 00:00:02'))>
         publishedAt: <(new \DateTime('2019-01-01 00:00:02'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     proposal107:
         id: proposal107
         title: Proposition n'est pas jetée
@@ -639,9 +639,9 @@ Capco\AppBundle\Entity\Proposal:
         author: '@user4'
         proposalForm: '@proposalform16'
         reference: 1107
-        createdAt: <(new \DateTime('2019-01-01 00:00:03'))>
-        updatedAt: <(new \DateTime('2019-01-01 00:00:03'))>
         publishedAt: <(new \DateTime('2019-01-01 00:00:03'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     proposal108:
         evaluers: ['@group1']
         id: proposal108
@@ -657,8 +657,8 @@ Capco\AppBundle\Entity\Proposal:
         category: '@pCategory1'
         reference: 12
         publishedAt: <(new \DateTime('2017-02-01 00:03:00'))>
-        createdAt: <(new \DateTime('2017-02-01 00:03:00'))>
-        updatedAt: <(new \DateTime('2017-02-01 00:03:00'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     proposal109:
         id: proposal109
         title: Jurer allégeance à Nurgle
@@ -666,8 +666,8 @@ Capco\AppBundle\Entity\Proposal:
         author: '@user4'
         proposalForm: '@proposalformCorona'
         publishedAt: <(new \DateTime('2020-03-17 00:03:00'))>
-        createdAt: <(new \DateTime('2020-03-17 00:03:00'))>
-        updatedAt: <(new \DateTime('2020-03-17 00:03:00'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     proposal{110..115}:
         id: 'proposal<current()>'
         title: 'Proposal <current()>'
@@ -686,8 +686,8 @@ Capco\AppBundle\Entity\Proposal:
         proposalForm: '@proposalformIdf'
         reference: 1
         publishedAt: <(new \DateTime('2020-02-01 00:00:01'))>
-        createdAt: <(new \DateTime('2020-02-01 00:00:01'))>
-        updatedAt: <(new \DateTime('2020-02-01 00:00:01'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     proposalIdf2:
         id: proposalIdf2
         title: Mon projet local en tant qu'entreprise
@@ -695,16 +695,95 @@ Capco\AppBundle\Entity\Proposal:
         author: '@userJean'
         proposalForm: '@proposalformIdf'
         reference: 2
+        district: '@districtIdf2'
+        category: '@pCategoryIdf1'
         publishedAt: <(new \DateTime('2020-02-01 00:00:02'))>
-        createdAt: <(new \DateTime('2020-02-01 00:00:02'))>
-        updatedAt: <(new \DateTime('2020-02-01 00:00:02'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     proposalIdf3:
         id: proposalIdf3
-        title: Mon projet local en tant qu'association
+        title: Mon projet local en tant qu'association avec SIRET
         body: Faire une boite à dons.
         author: '@userIan'
         proposalForm: '@proposalformIdf'
         reference: 3
+        district: '@districtIdf1'
+        category: '@pCategoryIdf2'
         publishedAt: <(new \DateTime('2020-02-01 00:00:03'))>
-        createdAt: <(new \DateTime('2020-02-01 00:00:03'))>
-        updatedAt: <(new \DateTime('2020-02-01 00:00:03'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    proposalIdf4:
+        id: proposalIdf4
+        title: Mon projet local en tant qu'association avec RNA
+        body: Des stationnements à vélo pluriels partout dans la ville !
+        author: '@userIan'
+        proposalForm: '@proposalformIdf'
+        reference: 4
+        district: '@districtIdf1'
+        category: '@pCategoryIdf2'
+        publishedAt: <(new \DateTime('2020-02-01 00:00:04'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    proposalIdf5:
+        id: proposalIdf5
+        title: Mon projet local en tant qu'association sans SIRET ni RNA
+        body: Végétalisons les champs libres !
+        author: '@userIan'
+        proposalForm: '@proposalformIdf'
+        reference: 5
+        district: '@districtIdf1'
+        category: '@pCategoryIdf2'
+        publishedAt: <(new \DateTime('2020-02-01 00:00:05'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    proposalIdf6:
+        id: proposalIdf6
+        title: Mon projet local en tant qu'organisme public
+        body: Préserver la biodiversité ordinaire de nos quartiers…
+        author: '@userJean'
+        proposalForm: '@proposalformIdf'
+        reference: 6
+        district: '@districtIdf1'
+        category: '@pCategoryIdf2'
+        publishedAt: <(new \DateTime('2020-02-01 00:00:06'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    proposalIdf7:
+        id: proposalIdf7
+        title: Mon projet en brouillon
+        body: Faire une boite…
+        author: '@userIan'
+        draft: true
+        proposalForm: '@proposalformIdf'
+        reference: 7
+        district: '@districtIdf1'
+        category: '@pCategoryIdf2'
+        publishedAt: <(new \DateTime('2020-02-01 00:00:07'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    proposalIdf8:
+        id: proposalIdf8
+        title: Mon projet qui ne sera pas analysé
+        body: Mettre en place Kubernetes.
+        author: '@userIan'
+        proposalForm: '@proposalformIdf'
+        reference: 8
+        district: '@districtIdf1'
+        category: '@pCategoryIdf2'
+        publishedAt: <(new \DateTime('2020-02-01 00:00:08'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+    proposalIdf9:
+        id: proposalIdf9
+        title: Mon projet mis à la corbeille
+        body: Organiser une rétrospective à distance.
+        author: '@userIan'
+        proposalForm: '@proposalformIdf'
+        reference: 9
+        district: '@districtIdf1'
+        category: '@pCategoryIdf2'
+        publishedAt: <(new \DateTime('2020-02-01 00:00:09'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        trashedStatus: 'visible'
+        trashedReason: 'Refusé car on a pas envie.'

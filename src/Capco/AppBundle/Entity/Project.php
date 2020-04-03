@@ -872,6 +872,29 @@ class Project implements IndexableInterface
         return null;
     }
 
+    public function getFirstAnalysisStep(): ?AbstractStep
+    {
+        $collectStep = $this->getFirstCollectStep();
+
+        if (!$collectStep) {
+            return null;
+        }
+
+        $proposalForm = $collectStep->getProposalForm();
+
+        if (!$proposalForm) {
+            return null;
+        }
+            
+        $analysisConfig = $proposalForm->getAnalysisConfiguration();
+
+        if (!$analysisConfig) {
+            return null;
+        }
+
+        return $analysisConfig->getAnalysisStep();
+    }
+
     public function getExportableSteps()
     {
         $steps = [];

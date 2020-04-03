@@ -10,6 +10,7 @@ import type { FeatureToggles, GlobalState } from '~/types';
 import ProjectAdminForm from './Form/ProjectAdminForm';
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style';
 import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage';
+import ProjectAdminAnalysisTab from '~/components/Admin/Project/ProjectAdminAnalysisTab';
 
 type Props = {|
   +features: FeatureToggles,
@@ -45,7 +46,8 @@ const formatNavbarLinks = (project, features, path, setTitle) => {
     links.push({
       title: 'proposal.tabs.evaluation',
       url: `${path}/analysis`,
-      component: () => <p style={{ marginLeft: '45%' }}>WIP</p>,
+      count: project.firstAnalysisStep ? project.firstAnalysisStep.proposals.totalCount : undefined,
+      component: () => <ProjectAdminAnalysisTab projectId={project.id} />,
     });
   links.push({
     title: 'global.configuration',
@@ -126,6 +128,11 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
       hasAnalysis
       proposals {
         totalCount
+      }
+      firstAnalysisStep {
+        proposals {
+          totalCount
+        }
       }
       contributors {
         totalCount

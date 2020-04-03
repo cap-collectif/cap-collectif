@@ -1,7 +1,23 @@
 // @flow
 import uniqBy from 'lodash/uniqBy';
-import type { AnalysisDashboardHeader_project } from '~relay/AnalysisDashboardHeader_project.graphql';
 import type { Uuid } from '~/types';
+
+type ProjectWithAllSteps = {
+  +steps: $ReadOnlyArray<{|
+    +__typename: string,
+    +form?: {|
+      +districts: $ReadOnlyArray<{|
+        +id: string,
+        +name: ?string,
+      |}>,
+      +categories: $ReadOnlyArray<{|
+        +id: string,
+        +name: string,
+      |}>,
+    |},
+  |}>,
+  ...
+}
 
 type DistrictFilter = {|
   +id: Uuid,
@@ -21,7 +37,7 @@ type AllFormattedChoicesReturn = {|
 const SHOWING_STEP_TYPENAME = ['CollectStep', 'SelectionStep'];
 
 export const getFormattedCategoriesChoicesForProject = (
-  project: AnalysisDashboardHeader_project,
+  project: ProjectWithAllSteps,
 ): $ReadOnlyArray<DistrictFilter> => {
   const flattened = ((project.steps
     .filter(Boolean)
@@ -45,7 +61,7 @@ export const getFormattedCategoriesChoicesForProject = (
 };
 
 export const getFormattedDistrictsChoicesForProject = (
-  project: AnalysisDashboardHeader_project,
+  project: ProjectWithAllSteps,
 ): $ReadOnlyArray<DistrictFilter> => {
   const flattened = ((project.steps
     .filter(Boolean)
@@ -66,7 +82,7 @@ export const getFormattedDistrictsChoicesForProject = (
 };
 
 export const getAllFormattedChoicesForProject = (
-  project: AnalysisDashboardHeader_project,
+  project: ProjectWithAllSteps,
 ): AllFormattedChoicesReturn => ({
   categories: getFormattedCategoriesChoicesForProject(project),
   districts: getFormattedDistrictsChoicesForProject(project),

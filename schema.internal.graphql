@@ -5179,6 +5179,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """Slug of a project"""
   slug: String!
   video: String
+
+  """Identifies the first analysis step of the project, if any."""
+  firstAnalysisStep: ProposalStep
   hasParticipativeStep(
     """
     If specified, get if the project is participative while excluding the

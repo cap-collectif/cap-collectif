@@ -1,41 +1,53 @@
 Capco\AppBundle\Entity\ProposalDecisionMaker:
     proposalDecisionMaker1:
         __construct: ['@proposal109', '@userDecisionMaker']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:03'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:03'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:01')))>
+        updatedAt: $createdAt
     proposalDecisionMaker2:
         __construct: ['@proposal110', '@userDecisionMaker']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:04'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:04'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:02')))>
+        updatedAt: $createdAt
     proposalDecisionMaker3:
         __construct: ['@proposal111', '@userDecisionMaker']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:05'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:05'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:03')))>
+        updatedAt: $createdAt
     proposalDecisionMaker4:
         __construct: ['@proposal112', '@userDecisionMaker']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:07'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:07'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:04')))>
+        updatedAt: $createdAt
     proposalDecisionMaker5:
         __construct: ['@proposal113', '@userDecisionMaker']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:08'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:08'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
+        updatedAt: $createdAt
     proposalDecisionMaker6:
         __construct: ['@proposal114', '@userDecisionMaker']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:09'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:09'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
+        updatedAt: $createdAt
     proposalDecisionMaker7:
         __construct: ['@proposal115', '@userDecisionMaker']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:20'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:20'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:07')))>
+        updatedAt: $createdAt
     proposalDecisionMakerIdf1:
         __construct: ['@proposalIdf1', '@userSpyl']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:21'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:21'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:08')))>
+        updatedAt: $createdAt
     proposalDecisionMakerIdf2:
         __construct: ['@proposalIdf2', '@userSpyl']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:22'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:22'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:09')))>
+        updatedAt: $createdAt
     proposalDecisionMakerIdf3:
         __construct: ['@proposalIdf3', '@userSpyl']
-        createdAt: <identity((new \DateTime('2019-08-01 00:00:23'))->modify("+ 18 days"))>
-        updatedAt: <identity((new \DateTime('2019-08-01 00:00:23'))->modify("+ 18 days"))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:10')))>
+        updatedAt: $createdAt
+    proposalDecisionMakerIdf4:
+        __construct: ['@proposalIdf4', '@userMaximeQA']
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:11')))>
+        updatedAt: $createdAt
+    proposalDecisionMakerIdf5:
+        __construct: ['@proposalIdf5', '@userMaximeQA']
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:12')))>
+        updatedAt: $createdAt
+    proposalDecisionMakerIdf6:
+        __construct: ['@proposalIdf6', '@userMaximeQA']
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:13')))>
+        updatedAt: $createdAt
