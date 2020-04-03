@@ -28,18 +28,6 @@ const AnalysisConfigurationQuery = /** GraphQL */ `
 `;
 
 describe('ProposalForm.analysisConfiguration', () => {
-  it("fetches proposal form's analysis configuration when authenticated as super admin", async () => {
-    await expect(
-      graphql(
-        AnalysisConfigurationQuery,
-        {
-          id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAxMw==',
-        },
-        'internal_admin',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-
   it("does not fetch proposal form's analysis configuration when authenticated as user", async () => {
     await expect(
       graphql(
@@ -49,13 +37,6 @@ describe('ProposalForm.analysisConfiguration', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot({
-      collectstep: {
-        form: {
-          id: 'proposalform17',
-          analysisConfiguration: null,
-        },
-      },
-    });
+    ).resolves.toMatchSnapshot();
   });
 });

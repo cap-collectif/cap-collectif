@@ -4,6 +4,7 @@ Capco\AppBundle\Entity\AnalysisConfiguration:
         proposalForm: '@proposalform17'
         analysisStep: '@collectstep13'
         effectiveDate: null
+        evaluationForm: '@questionnaire11'
         unfavourableStatuses: ['@status8', '@status9']
         favourableStatus: '@status10'
         moveToSelectionStep: '@selectionstep9'

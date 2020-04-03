@@ -120,6 +120,5 @@ ProposalForm:
                 type: 'Boolean!'
                 description: 'can the viewer send a contact message to the proposals author'
             analysisConfiguration:
-                access: "@=hasRole('ROLE_ADMIN')"
                 type: 'InternalAnalysisConfiguration'
                 description: 'The configuration for the related analysis.'
