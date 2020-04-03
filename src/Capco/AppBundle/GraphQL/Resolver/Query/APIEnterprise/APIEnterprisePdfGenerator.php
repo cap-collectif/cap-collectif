@@ -32,6 +32,11 @@ class APIEnterprisePdfGenerator
             $pdf->writeHTML('<p>' . $content . '</p>');
             $pdf->writeHTML('<p> </p>');
             $pdf->writeHTML('<p>' . date('Y-m-d H:i:s') . '</p>');
+            if (!file_exists($path)) {
+                if (!mkdir($path, 0777, true) && !is_dir($path)) {
+                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
+                }
+            }
             $pdf->Output($completePath, 'F');
         } catch (\RuntimeException $exception) {
             $this->logger->error(
@@ -49,6 +54,11 @@ class APIEnterprisePdfGenerator
         $filenameWithExtension = $filename . '.pdf';
         if (!$url) {
             return null;
+        }
+        if (!file_exists($path)) {
+            if (!mkdir($path, 0777, true) && !is_dir($path)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
+            }
         }
         $completePath = "${path}${filenameWithExtension}";
         $copyResult = copy($url, $completePath);
