@@ -23,14 +23,23 @@ class APIEnterprisePdfGenerator
         if (!$content) {
             return null;
         }
-        $filenameWithExtension = $filename . '.pdf';
-        $completePath = "${path}${filenameWithExtension}";
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->AddPage();
-        $pdf->writeHTML('<p>' . $content . '</p>');
-        $pdf->writeHTML('<p> </p>');
-        $pdf->writeHTML('<p>' . date('Y-m-d H:i:s') . '</p>');
-        $pdf->Output($completePath, 'F');
+
+        try {
+            $filenameWithExtension = $filename . '.pdf';
+            $completePath = "${path}${filenameWithExtension}";
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            $pdf->AddPage();
+            $pdf->writeHTML('<p>' . $content . '</p>');
+            $pdf->writeHTML('<p> </p>');
+            $pdf->writeHTML('<p>' . date('Y-m-d H:i:s') . '</p>');
+            $pdf->Output($completePath, 'F');
+        } catch (\RuntimeException $exception) {
+            $this->logger->error(
+                'An error occured while creating a pdf: ' . $exception->getMessage()
+            );
+
+            return null;
+        }
 
         return $this->mediaManager->createFileFromFile(new File($completePath), $filename)->getId();
     }
