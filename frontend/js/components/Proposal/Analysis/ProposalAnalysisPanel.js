@@ -148,7 +148,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
               <FormattedMessage id="global.decision" tagName="p" />
               <div>
                 <ProposalAnalysisUserRow
-                  canConsult={!!proposal.decision?.state && proposal.viewerCanDecide}
+                  canConsult={!!proposal.decision?.state}
                   canEdit={proposal.viewerCanDecide && !closed}
                   user={proposal.decisionMaker}
                   status={decisionState}

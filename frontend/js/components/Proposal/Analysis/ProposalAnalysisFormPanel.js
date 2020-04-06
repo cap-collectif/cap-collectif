@@ -35,9 +35,10 @@ import AnalyseProposalAnalysisMutation from '~/mutations/AnalyseProposalAnalysis
 
 import { TYPE_FORM } from '~/constants/FormConstants';
 
-const FormPanel: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const FormPanel: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
   overflow: scroll;
   height: calc(100vh - 70px);
+  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
 
   textarea {
     resize: none;
@@ -194,7 +195,7 @@ export const ProposalAnalysisFormPanel = ({
     'availableQuestions',
   );
   return (
-    <FormPanel>
+    <FormPanel isLarge={isLarge}>
       <Header isLarge={isLarge}>
         <Top>
           <Icon
