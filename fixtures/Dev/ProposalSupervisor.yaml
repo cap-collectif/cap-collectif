@@ -45,17 +45,17 @@ Capco\AppBundle\Entity\ProposalSupervisor:
         createdAt: <identity((new \DateTime('2020-01-01 00:00:03')))>
         updatedAt: $createdAt
     proposalSupervisorIdf4:
-        __construct: ['@proposalIdf4', '@userMaximeQA']
+        __construct: ['@proposalIdf4', '@userSpyl']
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:04')))>
         updatedAt: $createdAt
     proposalSupervisorIdf5:
-        __construct: ['@proposalIdf5', '@userMaximeQA']
+        __construct: ['@proposalIdf5', '@userSpyl']
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
         updatedAt: $createdAt
     proposalSupervisorIdf6:
-        __construct: ['@proposalIdf6', '@userMaximeQA']
+        __construct: ['@proposalIdf6', '@userSpyl']
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
         updatedAt: $createdAt

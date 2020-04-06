@@ -51,7 +51,10 @@ import {
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import renderResponses from '~/components/Form/RenderResponses';
-import { handleVisibilityAccordingToType } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
+import {
+  handleVisibilityAccordingToType,
+  TRIGGER_FOR,
+} from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -278,18 +281,8 @@ export class ProposalForm extends React.Component<Props, State> {
   componentDidMount() {
     window.addEventListener('beforeunload', onUnload);
     const { responses, proposalForm, dispatch, instanceName } = this.props;
-    if (
-      instanceName === 'idf-bp-dedicated' ||
-      instanceName === 'dev' ||
-      instanceName === '10091-api-enterprise-part-2'
-    ) {
-      // The two following lines are using flowfix me because ResponseInReduxForm seems broken (see other uses)
-      // $FlowFixMe
-      const siret: ?string = responses[12] && responses[12].value;
-      // $FlowFixMe
-      const rna: ?string = responses[27] && responses[27].value;
-
-      handleVisibilityAccordingToType(rna, siret, dispatch, proposalForm.questions, responses);
+    if (TRIGGER_FOR.includes(instanceName)) {
+      handleVisibilityAccordingToType(dispatch, proposalForm.questions, responses);
     }
   }
 

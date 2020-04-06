@@ -9,14 +9,15 @@ Capco\AppBundle\Entity\AnalysisConfiguration:
         favourableStatus: '@status10'
         moveToSelectionStep: '@selectionstep9'
         createdAt: <(new \DateTime('2015-01-01 02:00:00'))>
-        updatedAt: <(new \DateTime('2017-01-01 02:00:00'))>
+        updatedAt: $createdAt
     analysisConfigurationIdf:
         id: analysisConfigurationIdf
         proposalForm: '@proposalformIdf'
         analysisStep: '@collectstepIdf'
-        effectiveDate: null
+        evaluationForm: '@questionnaireEvaluationIdf'
+        effectiveDate: null # TODO @Jpec
         unfavourableStatuses: ['@statusIdfAnalyse1', '@statusIdfAnalyse3']
         favourableStatus: '@statusIdfAnalyse2'
         moveToSelectionStep: '@selectionStepIdfVote'
         createdAt: <(new \DateTime('2020-01-01 02:00:00'))>
-        updatedAt: <(new \DateTime('2020-01-01 02:00:00'))>
+        updatedAt: $createdAt

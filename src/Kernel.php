@@ -12,7 +12,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
-    const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+    const CONFIG_EXTS = '.{xml,yaml}';
 
 
     public function registerBundles()
@@ -31,7 +31,7 @@ class Kernel extends BaseKernel
         $container->setParameter('container.dumper.inline_class_loader', true);
         $confDir = $this->getProjectDir().'/config';
         $loader->load($confDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir.'/{packages}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{packages}/'.$this->environment.'/*'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
     }
@@ -40,7 +40,7 @@ class Kernel extends BaseKernel
     {
         $confDir = $this->getProjectDir().'/config';
         $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($confDir.'/{routes}/'.$this->environment.'/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
     }
 }
