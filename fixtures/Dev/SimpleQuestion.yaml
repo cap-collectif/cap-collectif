@@ -385,12 +385,10 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     simplequestionIdfEval1:
         id: 1380
         title: Observations éventuelles sur les critères de base
-        required: true
-        private: true
+        required: false
         type: 1 # textearea
     simplequestionIdfEval2:
         id: 1381
         title: Une idée du coût ?
-        required: true
-        private: true
+        required: false
         type: 9 # number

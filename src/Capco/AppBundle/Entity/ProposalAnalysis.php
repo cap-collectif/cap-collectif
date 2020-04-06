@@ -68,10 +68,7 @@ class ProposalAnalysis implements Timestampable
 
     public function getResponsesQuestions(): Collection
     {
-        $proposalForm = $this->getProposal()->getProposalForm();
-
-        return $proposalForm->getEvaluationForm()
-            ? $proposalForm->getEvaluationForm()->getRealQuestions()
+        return $this->getEvaluationForm() ? $this->getEvaluationForm()->getRealQuestions()
             : new ArrayCollection();
     }
 
@@ -128,10 +125,20 @@ class ProposalAnalysis implements Timestampable
         return $this;
     }
 
-    public function getEvaluationForm(): Questionnaire
+    public function getEvaluationForm(): ?Questionnaire
     {
-        return $this->getProposal()
-            ->getProposalForm()
-            ->getEvaluationForm();
+        $proposalForm = $this->getProposal()->getProposalForm();
+
+        if (!$proposalForm) {
+            return null;
+        }
+
+        $analysisConfiguration = $proposalForm->getAnalysisConfiguration();
+
+        if (!$analysisConfiguration) {
+            return null;
+        }
+
+        return $analysisConfiguration->getEvaluationForm();
     }
 }

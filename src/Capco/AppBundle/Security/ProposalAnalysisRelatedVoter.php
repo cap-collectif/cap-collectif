@@ -142,16 +142,7 @@ class ProposalAnalysisRelatedVoter extends Voter
             return true;
         }
 
-        if (
-            $this->proposalSupervisorRepository->findOneBy([
-                'proposal' => $subject,
-                'supervisor' => $user,
-            ])
-        ) {
-            return true;
-        }
-
-        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
+        return false;
     }
 
     private function canEvaluate(Proposal $subject, User $user): bool

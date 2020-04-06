@@ -11,39 +11,79 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: IN_PROGRESS
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
         updatedAt: $createdAt
-    proposalAnalysisIdf1:
+    proposalAnalysisIdf1Max:
+        updatedBy: '@userMaxime'
+        proposal: '@proposalIdf1'
+        state: FAVOURABLE
+        createdAt: <(new \DateTime('2020-01-01 00:00:10'))>
+        updatedAt: $createdAt
+    proposalAnalysisIdf1Agui:
         updatedBy: '@userAgui'
         proposal: '@proposalIdf1'
         state: FAVOURABLE
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        createdAt: <(new \DateTime('2020-01-01 00:00:11'))>
         updatedAt: $createdAt
-    proposalAnalysisIdf2:
+        comment: "Tout est parfait, c'est merveilleux."
+    proposalAnalysisIdf1Vinc:
         updatedBy: '@userVincent'
         proposal: '@proposalIdf1'
         state: UNFAVOURABLE
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        createdAt: <(new \DateTime('2020-01-01 00:00:12'))>
         updatedAt: $createdAt
-    proposalAnalysisIdf3:
+        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+    proposalAnalysisIdf1Jpec:
+        updatedBy: '@userJpec'
+        proposal: '@proposalIdf1'
+        state: UNFAVOURABLE
+        createdAt: <(new \DateTime('2020-01-01 00:00:13'))>
+        updatedAt: $createdAt
+        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+    proposalAnalysisIdf1Omar:
         updatedBy: '@userOmar'
         proposal: '@proposalIdf1'
         state: NONE
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        createdAt: <(new \DateTime('2020-01-01 00:00:14'))>
         updatedAt: $createdAt
-    proposalAnalysisIdf4:
+        comment: "Tout est parfait, c'est merveilleux."
+    proposalAnalysisIdf1Theo:
+        updatedBy: '@userTheo'
+        proposal: '@proposalIdf1'
+        state: TOO_LATE
+        createdAt: <(new \DateTime('2020-01-01 00:00:15'))>
+        updatedAt: $createdAt
+        comment: null
+    proposalAnalysisIdf2Theo:
         updatedBy: '@userTheo'
         proposal: '@proposalIdf2'
         state: TOO_LATE
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        createdAt: <(new \DateTime('2020-01-01 00:00:16'))>
         updatedAt: $createdAt
-    proposalAnalysisIdf5:
+        comment: null
+    proposalAnalysisIdf2Jpec:
         updatedBy: '@userJpec'
         proposal: '@proposalIdf2'
         state: FAVOURABLE
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        createdAt: <(new \DateTime('2020-01-01 00:00:15'))>
         updatedAt: $createdAt
-    proposalAnalysisIdf6:
+        comment: "Tout est parfait, c'est merveilleux."
+    proposalAnalysisIdf3Theo:
         updatedBy: '@userTheo'
         proposal: '@proposalIdf3'
-        state: IN_PROGRESS
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        state: UNFAVOURABLE
+        createdAt: <(new \DateTime('2020-01-01 00:00:16'))>
         updatedAt: $createdAt
+        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+    proposalAnalysisIdf3Maxime:
+        updatedBy: '@userMaxime'
+        proposal: '@proposalIdf3'
+        state: UNFAVOURABLE
+        createdAt: <(new \DateTime('2020-01-01 00:00:17'))>
+        updatedAt: $createdAt
+        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+    proposalAnalysisIdf3Mickael:
+        updatedBy: '@userMickael'
+        proposal: '@proposalIdf3'
+        state: UNFAVOURABLE
+        createdAt: <(new \DateTime('2020-01-01 00:00:18'))>
+        updatedAt: $createdAt
+        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
