@@ -17,6 +17,7 @@ services:
       - '1234:1234'
     environment:
       TERM: xterm
+      SYMFONY_INSTANCE_NAME: dev
       SYMFONY_DATABASE_HOST: database
       SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
       SYMFONY_ELASTICSEARCH_HOST: elasticsearch
@@ -54,7 +55,7 @@ services:
       cache_from:
         - 'capco_elasticsearch'
     environment:
-      - cluster.name=capco
+      - cluster.name='%SYMFONY_ELASTICSEARCH_INDEX'
       - bootstrap.memory_lock=true
       - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
     ulimits:

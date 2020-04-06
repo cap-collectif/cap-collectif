@@ -1,6 +1,11 @@
 #!/bin/bash
 
-chown -R capco:capco /etc/elasticsearch
-
-echo "[$(date -u)][ELASTICSEARCH] Started!"
-exec su capco -c "/etc/elasticsearch/bin/elasticsearch -Elogger.level=WARN"
+if [[ -z "${SYMFONY_ELASTICSEARCH_HOST}" || $SYMFONY_ELASTICSEARCH_HOST == "127.0.0.1" || $SYMFONY_ELASTICSEARCH_HOST == "elasticsearch" ]]
+then
+    chown -R capco:capco /etc/elasticsearch
+    echo "[$(date -u)][ELASTICSEARCH] Started!"
+    exec su capco -c "/etc/elasticsearch/bin/elasticsearch -Elogger.level=WARN"
+else
+    echo "[$(date -u)][ELASTICSEARCH] Using external server !"
+    exit 0
+fi

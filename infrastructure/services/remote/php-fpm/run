@@ -23,37 +23,31 @@ chown -R capco:capco var/log
 echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and, log/ logs/!"
 
 echo "[$(date -u)][PHP-FPM] Waiting for MySQL..."
-while ! (mysqladmin ping --host=127.0.0.1)
-  do sleep 0.1
-done
-
-echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ Admin..."
-while ! curl -sSf http://127.0.0.1:15672 > /dev/null;
+while ! (mysqladmin ping --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD})
   do sleep 0.1
 done
 
 echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
-while ! rabbitmqctl status > /dev/null;
+while ! (rabbitmqctl status > /dev/null)
   do sleep 0.1
 done
 
 # When we have fresh instance, capco vhost is not created
-if rabbitmqctl list_vhosts | grep -q capco; then
+if rabbitmqctl list_vhosts | grep -q ${SYMFONY_RABBITMQ_VHOST:-capco}; then
     echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
-    gosu capco php bin/rabbit vhost:mapping:create --user=guest --password=guest config/rabbitmq.yaml --quiet
+    gosu capco php bin/rabbit vhost:mapping:create --host=${SYMFONY_RABBITMQ_HOST:-127.0.0.1} --vhost=${SYMFONY_RABBITMQ_VHOST:-capco}  --user=${SYMFONY_RABBITMQ_LOGIN:-guest} --password=${SYMFONY_RABBITMQ_PASSWORD:-guest} config/rabbitmq.yaml --quiet
     echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
 else
     echo "[$(date -u)][PHP-FPM] Creating RabbitMQ vhost schema..."
-    gosu capco php bin/rabbit vhost:mapping:create --erase-vhost --user=guest --password=guest config/rabbitmq.yaml --quiet
+    gosu capco php bin/rabbit vhost:mapping:create --host=${SYMFONY_RABBITMQ_HOST:-127.0.0.1} --vhost=${SYMFONY_RABBITMQ_VHOST:-capco} --erase-vhost --user=${SYMFONY_RABBITMQ_LOGIN:-guest} --password=${SYMFONY_RABBITMQ_PASSWORD:-guest} config/rabbitmq.yaml --quiet
     echo "[$(date -u)][PHP-FPM] RabbitMQ vhost created!"
 fi
 
 echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."
-chmod -R 777 var/ && chown -R capco:capco var/
+chmod -R 777 var/ && chown -R capco:capco var/ 
 gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
 gosu capco php bin/console assets:install public --symlink --env=prod --no-interaction --quiet
 echo "[$(date -u)][PHP-FPM] Cache warmed!"
-
 
 # Retry variables for migrations (max 3)
 retry=0
@@ -63,10 +57,10 @@ VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod 
 database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
     echo "[$(date -u)][PHP-FPM] Cleaning ElasticSearch index..."
-    while ! curl http://127.0.0.1:9200 > /dev/null 2>&1;
+    while ! curl http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200 > /dev/null 2>&1;
       do sleep 0.1
     done
-    curl -XDELETE http://127.0.0.1:9200/_all > /dev/null 2>&1
+    curl -XDELETE http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200/_all > /dev/null 2>&1
     echo "[$(date -u)][PHP-FPM] Creating a new database with production data..."
     gosu capco php bin/console doctrine:database:create --env=prod --no-interaction --quiet
     chmod -R 777 var/ && chown -R capco:capco var/
@@ -102,7 +96,6 @@ gosu capco php bin/console capco:generate:map-token MAPBOX --no-debug --env=prod
 echo "[$(date -u)][PHP-FPM] Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
 echo "[$(date -u)][PHP-FPM] Daemon started!"
-
 
 echo "[$(date -u)][PHP-FPM] Started!"
 exec /usr/sbin/php-fpm7.4 --fpm-config /etc/service/php-fpm/fpm.conf --force-stderr

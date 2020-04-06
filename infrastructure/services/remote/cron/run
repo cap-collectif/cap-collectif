@@ -6,7 +6,7 @@ function test_phpfpm {
 }
 
 function test_mysqldatabase {
-  mysqlshow --host=127.0.0.1 -uroot symfony > /dev/null
+   mysqlshow --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=$SYMFONY_DATABASE_PASSWORD ${SYMFONY_DATABASE_NAME:-symfony} > /dev/null
 }
 
 function test_mysqldatabase_uptodate {

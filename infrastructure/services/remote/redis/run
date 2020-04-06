@@ -1,4 +1,10 @@
 #!/bin/bash
 
-echo "[$(date -u)][REDIS] Started!"
-exec /usr/bin/redis-server /etc/redis/redis.conf --loglevel warning
+if [[ -z "${SYMFONY_REDIS_HOST}" || $SYMFONY_REDIS_HOST == "127.0.0.1" || $SYMFONY_REDIS_HOST == "redis" ]]
+then
+    echo "[$(date -u)][REDIS] Started!"
+    exec /usr/bin/redis-server /etc/redis/redis.conf --loglevel warning
+else
+    echo "[$(date -u)][REDIS] Using external server !"
+    exit 0
+fi

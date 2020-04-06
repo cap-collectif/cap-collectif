@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# @todo Add authentication support
+# -u ${SYMFONY_ELASTICSEARCH_USERNAME}:${SYMFONY_ELASTICSEARCH_PASSWORD}
 while ! curl http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200 > /dev/null 2>&1;
   do sleep 0.1
 done
@@ -8,8 +10,7 @@ done
 su capco -c "php -d memory_limit=-1 bin/console capco:es:create --populate --env=prod --no-interaction --quiet"
 
 if [ $? -eq 1 ]; then
-  echo "[$(date -u)][PHP-FPM] Failed to populate index…" 
   exit 1
 fi
 
-echo "[$(date -u)][PHP-FPM] Index has been populated !" 
+echo "Index has been populated !"

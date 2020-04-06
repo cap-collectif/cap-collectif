@@ -8,7 +8,7 @@ function test_mysqldatabase_uptodate {
 }
 
 function test_mysqldatabase {
-  mysqlshow --host=${SYMFONY_DATABASE_HOST} -uroot symfony > /dev/null
+  mysqlshow --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=$SYMFONY_DATABASE_PASSWORD ${SYMFONY_DATABASE_NAME:-symfony} > /dev/null
 }
 
 echo "[$(date -u)][SUPERVISORD] Waiting for php-fpm..."

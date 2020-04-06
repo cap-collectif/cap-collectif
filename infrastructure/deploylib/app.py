@@ -17,6 +17,7 @@ def setup_env_vars():
 SYMFONY_REDIS_HOST={host}
 SYMFONY_ELASTICSEARCH_HOST={host}
 SYMFONY_RABBITMQ_HOST={host}
+SYMFONY_RABBITMQ_NODENAME={host}
 SYMFONY_ASSETS_HOST={asset_host}""" \
         .format(host=env.local_ip, asset_host=asset_host)
     local('echo "%s" >> .env.local' % variables)
@@ -74,7 +75,7 @@ def clean():
 @task(environments=['local', 'ci'])
 def rabbitmq_queues():
     "Create RabbitMQ queues"
-    env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost config/rabbitmq.yaml', 'application', env.www_app)
+    env.service_command('php bin/rabbit vhost:mapping:create --vhost=${SYMFONY_RABBITMQ_VHOST:-capco}  --user=${SYMFONY_RABBITMQ_LOGIN:-guest} --password=${SYMFONY_RABBITMQ_PASSWORD:-guest} --erase-vhost config/rabbitmq.yaml', 'application', env.www_app)
 
 
 @task(environments=['local', 'ci'])

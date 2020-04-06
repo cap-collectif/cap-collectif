@@ -1,19 +1,25 @@
 #!/bin/bash
 
-# First boot
-if [ ! -f /var/lib/mysql/ibdata1 ]; then
-  echo "[$(date -u)][MYSQL] No previous mysql detected in '/var/lib/mysql'."
-  echo "[$(date -u)][MYSQL] Installing mysql's files..."
-  mkdir -p /var/lib/mysql
-  cp -R /var/lib/mysql_save/* /var/lib/mysql/
-  echo "[$(date -u)][MYSQL] Mysql'files are installed!"
+if [[ -z "${SYMFONY_DATABASE_HOST}" || $SYMFONY_DATABASE_HOST == "127.0.0.1" || $SYMFONY_DATABASE_HOST == "database" ]]
+then
+    # First boot
+    if [ ! -f /var/lib/mysql/ibdata1 ]; then
+        echo "[$(date -u)][MYSQL] No previous mysql detected in '/var/lib/mysql'."
+        echo "[$(date -u)][MYSQL] Installing mysql's files..."
+        mkdir -p /var/lib/mysql
+        cp -R /var/lib/mysql_save/* /var/lib/mysql/
+        echo "[$(date -u)][MYSQL] Mysql'files are installed!"
+    fi
+
+    chown -R mysql:mysql /var/lib/mysql
+
+    # We perform a rollback in case of pending transactions
+    mysqld_safe --tc-heuristic-recover=ROLLBACK || true
+
+    echo "[$(date -u)][MYSQL] Started!"
+    # We start mysqld normally
+    exec mysqld_safe --slow-query-log
+else
+    echo "[$(date -u)][MYSQL] Using external server !"
+    exit 0
 fi
-
-chown -R mysql:mysql /var/lib/mysql
-
-# We perform a rollback in case of pending transactions
-mysqld_safe --tc-heuristic-recover=ROLLBACK || true
-
-echo "[$(date -u)][MYSQL] Started!"
-# We start mysqld normally
-exec mysqld_safe --slow-query-log

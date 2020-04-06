@@ -1,8 +1,14 @@
 #!/bin/bash
 
-echo "[$(date -u)][RABBITMQ] Fix permissions on files!"
-chown -R rabbitmq:rabbitmq /var/lib/rabbitmq
+if [[ -z "${SYMFONY_RABBITMQ_HOST}" || $SYMFONY_RABBITMQ_HOST == "127.0.0.1" ]]
+then
+    echo "[$(date -u)][RABBITMQ] Fix permissions on files!"
+    chown -R rabbitmq:rabbitmq /var/lib/rabbitmq
 
-echo "[$(date -u)][RABBITMQ] Started!"
+    echo "[$(date -u)][RABBITMQ] Started!"
 
-exec rabbitmq-server
+    exec rabbitmq-server
+else
+    echo "[$(date -u)][RABBITMQ] Using external server !"
+    exit 0
+fi

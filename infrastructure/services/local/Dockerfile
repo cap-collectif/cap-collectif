@@ -84,7 +84,7 @@ RUN apt-get update && \
     apt-get install -y -qq \
         sqlite \
         mysql-client \
-        redis-tools \
+        redis-server \
         nginx \
     && \
     apt-get clean && \
