@@ -324,3 +324,33 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: J'ai plusieurs choix leu?
     required: false
     type: 3 # radio
+  multiplequestionEvalIdf1:
+    id: 3924
+    title: Existence juridique du candidat avérée
+    required: true
+    type: 3 # radio
+  multiplequestionEvalIdf2:
+    id: 3925
+    title: Le projet répond à l’intérêt général et a une visée collective
+    required: true
+    type: 4 # select
+  multiplequestionEvalIdf3:
+    id: 3926
+    title: Le projet ne correspond pas à une action de lobbying à visée commerciale ou à une action à visée politique
+    required: true
+    type: 5 # checkbox
+  multiplequestionEvalIdf4:
+    id: 3927
+    title: Les dépenses estimées par le porteur de projet sont-elles justifiées ?
+    required: true
+    type: 3 # button
+  multiplequestionEvalIdf5:
+    id: 3928
+    title: Le projet est-il concret et rapidement réalisable (démarrage dans l’année et durée de réalisation envisagée compatible avec le projet décrit)
+    required: true
+    type: 5 # button
+  multiplequestionEvalIdf6:
+    id: 3929
+    title: Avis sur la faisabilité technique, juridique et financière du projet
+    required: true
+    type: 8 # button

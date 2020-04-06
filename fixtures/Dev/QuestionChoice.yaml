@@ -837,6 +837,63 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: 'Non'
     position: 2
     question: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
-
-
-
+  idfEvalQuestion1C1:
+    id: 'idfEvalQuestion1C1'
+    title: 'Oui'
+    position: 1
+    question: '@multiplequestionEvalIdf1'
+  idfEvalQuestion1C2:
+    id: 'idfEvalQuestion1C2'
+    title: 'Non'
+    position: 2
+    question: '@multiplequestionEvalIdf1'
+  idfEvalQuestion2C1:
+    id: 'idfEvalQuestion2C1'
+    title: 'Oui'
+    position: 1
+    question: '@multiplequestionEvalIdf2'
+  idfEvalQuestion2C2:
+    id: 'idfEvalQuestion2C2'
+    title: 'Non'
+    position: 2
+    question: '@multiplequestionEvalIdf2'
+  idfEvalQuestion3C1:
+    id: 'idfEvalQuestion3C1'
+    title: 'Oui'
+    position: 1
+    question: '@multiplequestionEvalIdf3'
+  idfEvalQuestion3C2:
+    id: 'idfEvalQuestion3C2'
+    title: 'Non'
+    position: 2
+    question: '@multiplequestionEvalIdf3'
+  idfEvalQuestion4C1:
+    id: 'idfEvalQuestion4C1'
+    title: 'Oui'
+    position: 1
+    question: '@multiplequestionEvalIdf4'
+  idfEvalQuestion4C2:
+    id: 'idfEvalQuestion4C2'
+    title: 'Non'
+    position: 2
+    question: '@multiplequestionEvalIdf4'
+  idfEvalQuestion5C1:
+    id: 'idfEvalQuestion5C1'
+    title: 'Oui'
+    position: 1
+    question: '@multiplequestionEvalIdf5'
+  idfEvalQuestion5C2:
+    id: 'idfEvalQuestion5C2'
+    title: 'Non'
+    position: 2
+    question: '@multiplequestionEvalIdf5'
+  idfEvalQuestion6C1:
+    id: 'idfEvalQuestion6C1'
+    title: 'Positif'
+    position: 1
+    question: '@multiplequestionEvalIdf6'
+  idfEvalQuestion6C2:
+    id: 'idfEvalQuestion6C2'
+    title: 'Négatif'
+    position: 2
+    question: '@multiplequestionEvalIdf6'

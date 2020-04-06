@@ -108,7 +108,7 @@ Capco\AppBundle\Entity\District\DistrictTranslation:
     translatable: '@district14'
     id: proposalDistrict14
     locale: fr-FR
-    name: Quartier 1
+    name: Toute la région
   proposalDistrict15:
     translatable: '@district15'
     id: proposalDistrict15
@@ -124,9 +124,9 @@ Capco\AppBundle\Entity\District\DistrictTranslation:
     translatable: '@districtIdf1'
     id: proposalDistrictIdf1
     locale: fr-FR
-    name: Quartier 1
+    name: Toute la région
   proposalDistrictIdf2:
     translatable: '@districtIdf2'
     id: proposalDistrictIdf2
     locale: fr-FR
-    name: Quartier 2
+    name: Val de marne (94)

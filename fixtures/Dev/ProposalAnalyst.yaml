@@ -79,20 +79,50 @@ Capco\AppBundle\Entity\ProposalAnalyst:
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:11')))>
         updatedAt: $createdAt
+    proposalAnalystIdf4Omar:
+        __construct: ['@proposalIdf4', '@userOmar']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:12')))>
+        updatedAt: $createdAt
     proposalAnalystIdf4Maxime:
         __construct: ['@proposalIdf4', '@userMaxime']
         assignedBy: '@user4'
-        createdAt: <identity((new \DateTime('2020-01-01 00:00:12')))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:21')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf4Juan:
+        __construct: ['@proposalIdf4', '@userJean']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:21')))>
         updatedAt: $createdAt
     proposalAnalystIdf5Maxime:
         __construct: ['@proposalIdf5', '@userMaxime']
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:13')))>
         updatedAt: $createdAt
+    proposalAnalystIdf5Theo:
+        __construct: ['@proposalIdf5', '@userTheo']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:14')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf5Vincent:
+        __construct: ['@proposalIdf5', '@userVincent']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:13')))>
+        updatedAt: $createdAt
     proposalAnalystIdf6Maxime:
         __construct: ['@proposalIdf6', '@userMaxime']
         assignedBy: '@user4'
-        createdAt: <identity((new \DateTime('2020-01-01 00:00:14')))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:15')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf6Agui:
+        __construct: ['@proposalIdf6', '@userAgui']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:16')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf6Jpec:
+        __construct: ['@proposalIdf6', '@userJpec']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:17')))>
         updatedAt: $createdAt
     proposalAnalyst8:
         __construct: ['@proposal109', '@user26']

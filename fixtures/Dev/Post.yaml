@@ -117,3 +117,11 @@ Capco\AppBundle\Entity\Post:
         Authors:
             - '@userSpyl'
         proposals: ['@proposalIdf2']
+    post22:
+        id: post22
+        isPublished: false
+        createdAt: <(new \DateTime('2020-01-01 00:01:25'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:01:25'))>
+        Authors:
+            - '@userSpyl'
+        proposals: ['@proposalIdf3']
