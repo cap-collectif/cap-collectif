@@ -22,6 +22,7 @@ type Props = {|
   canConsult: boolean,
   disabled?: boolean,
   decidor?: boolean,
+  onEditClick?: () => void,
 |};
 
 const Decidor: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -34,6 +35,7 @@ const Decidor: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   color: ${colors.white};
   font-size: 8px;
   padding: 1px 2px;
+  z-index: 1;
 `;
 
 const Row: StyledComponent<
@@ -119,6 +121,7 @@ export const ProposalAnalysisUserRow = ({
   canConsult,
   disabled,
   decidor,
+  onEditClick,
 }: Props) => {
   if (!user) return null;
   const labelData = getLabelData(status);
@@ -138,6 +141,7 @@ export const ProposalAnalysisUserRow = ({
         </div>
         {canConsult && (
           <Icon
+            onClick={() => (onEditClick && canEdit && !disabled && onEditClick()) || undefined}
             name={canEdit ? ICON_NAME.pen : ICON_NAME.eye}
             size={16}
             color={colors.secondaryGray}

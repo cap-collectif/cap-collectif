@@ -34,12 +34,12 @@ const PanelContainer: StyledComponent<
   background: white;
   left: calc((100vw - (45vw - ${props => (props.isLarge ? '95px' : '120px')})));
   transition: 0.5s;
-  padding-top: 30px;
   width: ${props =>
     props.isAnalysing
       ? `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`
       : '0'};
   margin-left: ${props => (props.isAnalysing ? '0' : '50%')};
+  overflow: hidden;
 `;
 
 export const ProposalPageLogic = ({ query, features }: Props) => {

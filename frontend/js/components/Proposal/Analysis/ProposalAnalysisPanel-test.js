@@ -10,6 +10,7 @@ describe('<ProposalAnalysisPanel />', () => {
     const props = {
       proposal: {
         $refType,
+        $fragmentRefs,
         id: 'proposalId',
         analysts: [
           {
@@ -56,7 +57,6 @@ describe('<ProposalAnalysisPanel />', () => {
         viewerCanEvaluate: false,
       },
       onClose: jest.fn(),
-      isAnalysing: true,
       user: { id: 'Rubilax' },
     };
 

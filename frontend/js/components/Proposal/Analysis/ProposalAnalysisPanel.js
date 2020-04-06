@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -9,9 +9,9 @@ import type { ProposalAnalysisPanel_proposal } from '~relay/ProposalAnalysisPane
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { State } from '~/types';
+import ProposalAnalysisFormPanel from './ProposalAnalysisFormPanel';
 
-const CloseIcon: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
-  position: absolute;
+const CloseIconContainer: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   right: 30px;
   z-index: 1;
   border: none;
@@ -23,10 +23,18 @@ const CloseIcon: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   }
 `;
 
+const PanelsSlider: StyledComponent<{ home: boolean }, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  width: 200%;
+  margin-left: ${props => (props.home ? 0 : '-100%')};
+  transition: 0.5s;
+`;
+
 const Panel: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   background: ${colors.white};
   margin-left: 30px;
   margin-right: 30px;
+  padding-top: 30px;
 `;
 
 const PanelSection: StyledComponent<{ border?: boolean }, {}, HTMLDivElement> = styled.div`
@@ -40,14 +48,36 @@ const PanelSection: StyledComponent<{ border?: boolean }, {}, HTMLDivElement> = 
   border-bottom: ${props => props.border && `1px solid ${colors.lightGray}`};
   margin-bottom: 15px;
 `;
+
+const CloseIconWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  > p {
+    font-size: 20px;
+    color: ${colors.secondaryGray};
+    margin-bottom: 15px;
+  }
+`;
+
 type Props = {|
   proposal: ProposalAnalysisPanel_proposal,
   onClose: () => void,
-  isAnalysing: boolean,
   user?: Object,
 |};
 
-export const ProposalAnalysisPanel = ({ proposal, onClose, isAnalysing, user }: Props) => {
+type PanelState = 'HOME' | 'EDIT';
+
+export const CloseIcon = ({ onClose }: { onClose: () => void }) => (
+  <CloseIconContainer onClick={onClose}>
+    <Icon name={ICON_NAME.close} size={16} color={colors.secondaryGray} />
+  </CloseIconContainer>
+);
+
+export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
+  const [panelState, setPanelState] = useState<PanelState>('HOME');
+  const [panelViewUserId, setPanelViewUserId] = useState(user?.id);
+
   if (!proposal.analysts || !user) return null;
   const analysts = proposal.analysts.filter(analyst => analyst.id !== user.id);
   const userAnalyst = proposal.analysts?.find(analyst => analyst.id === user.id);
@@ -62,70 +92,81 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, isAnalysing, user }: 
       ? 'FAVOURABLE'
       : undefined;
   return (
-    <div>
-      {isAnalysing && (
-        <CloseIcon onClick={onClose}>
-          <Icon name={ICON_NAME.close} size={16} color={colors.secondaryGray} />
-        </CloseIcon>
-      )}
-      <Panel>
-        <PanelSection border>
-          <FormattedMessage id="panel.analysis.subtitle" tagName="p" />
-          <div>
-            {analysts?.map((analyst, idx) => {
-              const status = proposal.analyses?.find(a => a.updatedBy.id === analyst.id);
-              return (
-                <div className="mt-10">
-                  <ProposalAnalysisUserRow
-                    canConsult={!!status}
-                    canEdit={proposal.viewerCanAnalyse && !idx}
-                    disabled={
-                      (proposal.assessment?.state &&
-                        proposal.assessment?.state !== 'IN_PROGRESS') ||
-                      closed ||
-                      status === 'TOO_LATE'
-                    }
-                    user={analyst}
-                    status={status?.state}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </PanelSection>
-        {proposal.supervisor && (
+    <PanelsSlider home={panelState === 'HOME'}>
+      <div style={{ width: '50%' }}>
+        <Panel>
           <PanelSection border>
-            <FormattedMessage id="global.review" tagName="p" />
+            <CloseIconWrapper>
+              <FormattedMessage id="panel.analysis.subtitle" tagName="p" />
+              <CloseIcon onClose={onClose} />
+            </CloseIconWrapper>
             <div>
-              <ProposalAnalysisUserRow
-                canConsult={
-                  !!proposal.assessment?.state &&
-                  (proposal.viewerCanEvaluate || proposal.viewerCanDecide)
-                }
-                canEdit={proposal.viewerCanEvaluate}
-                disabled={closed || proposal.assessment?.state === 'TOO_LATE'}
-                user={proposal.supervisor}
-                status={proposal.assessment?.state}
-              />
+              {analysts?.map((analyst, idx) => {
+                const status = proposal.analyses?.find(a => a.updatedBy.id === analyst.id);
+                return (
+                  <div className="mt-10">
+                    <ProposalAnalysisUserRow
+                      canConsult={!!status}
+                      canEdit={proposal.viewerCanAnalyse && !idx}
+                      disabled={
+                        (proposal.assessment?.state &&
+                          proposal.assessment?.state !== 'IN_PROGRESS') ||
+                        closed ||
+                        status === 'TOO_LATE'
+                      }
+                      user={analyst}
+                      status={status?.state}
+                      onEditClick={() => {
+                        setPanelViewUserId(analyst.id);
+                        setPanelState('EDIT');
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </PanelSection>
-        )}
-        {proposal.decisionMaker && (
-          <PanelSection>
-            <FormattedMessage id="global.decision" tagName="p" />
-            <div>
-              <ProposalAnalysisUserRow
-                canConsult={!!proposal.decision?.state && proposal.viewerCanDecide}
-                canEdit={proposal.viewerCanDecide && !closed}
-                user={proposal.decisionMaker}
-                status={decisionState}
-                decidor
-              />
-            </div>
-          </PanelSection>
-        )}
-      </Panel>
-    </div>
+          {proposal.supervisor && (
+            <PanelSection border>
+              <FormattedMessage id="global.review" tagName="p" />
+              <div>
+                <ProposalAnalysisUserRow
+                  canConsult={
+                    !!proposal.assessment?.state &&
+                    (proposal.viewerCanEvaluate || proposal.viewerCanDecide)
+                  }
+                  canEdit={proposal.viewerCanEvaluate}
+                  disabled={closed || proposal.assessment?.state === 'TOO_LATE'}
+                  user={proposal.supervisor}
+                  status={proposal.assessment?.state}
+                />
+              </div>
+            </PanelSection>
+          )}
+          {proposal.decisionMaker && (
+            <PanelSection>
+              <FormattedMessage id="global.decision" tagName="p" />
+              <div>
+                <ProposalAnalysisUserRow
+                  canConsult={!!proposal.decision?.state && proposal.viewerCanDecide}
+                  canEdit={proposal.viewerCanDecide && !closed}
+                  user={proposal.decisionMaker}
+                  status={decisionState}
+                  decidor
+                />
+              </div>
+            </PanelSection>
+          )}
+        </Panel>
+      </div>
+      <ProposalAnalysisFormPanel
+        proposal={proposal}
+        onClose={onClose}
+        onBackClick={() => setPanelState('HOME')}
+        disabled={false}
+        userId={panelViewUserId}
+      />
+    </PanelsSlider>
   );
 };
 
@@ -137,6 +178,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalAnalysis
   proposal: graphql`
     fragment ProposalAnalysisPanel_proposal on Proposal {
       id
+      ...ProposalAnalysisFormPanel_proposal
       analysts {
         id
         ...ProposalAnalysisUserRow_user

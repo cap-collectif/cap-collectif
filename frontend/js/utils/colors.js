@@ -49,6 +49,7 @@ const colors = {
   formBgc: '#fafafa',
   paleGrey: '#ecf0f5',
   secondaryGray: '#6c757d',
+  grayF4: '#f4f4f4',
 };
 
 export const socialColors = {

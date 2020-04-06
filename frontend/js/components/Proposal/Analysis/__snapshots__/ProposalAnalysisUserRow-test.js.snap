@@ -44,6 +44,7 @@ exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
     <Icon
       color="#6c757d"
       name="pen"
+      onClick={[Function]}
       size={16}
     />
   </ProposalAnalysisUserRow__Row>

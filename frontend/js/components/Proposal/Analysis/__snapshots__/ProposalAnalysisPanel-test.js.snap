@@ -1,101 +1,165 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
-<div>
-  <ProposalAnalysisPanel__CloseIcon
-    onClick={[MockFunction]}
+<ProposalAnalysisPanel__PanelsSlider
+  home={true}
+>
+  <div
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
   >
-    <Icon
-      color="#6c757d"
-      name="close"
-      size={16}
-    />
-  </ProposalAnalysisPanel__CloseIcon>
-  <ProposalAnalysisPanel__Panel>
-    <ProposalAnalysisPanel__PanelSection
-      border={true}
-    >
-      <FormattedMessage
-        id="panel.analysis.subtitle"
-        tagName="p"
-        values={Object {}}
-      />
-      <div>
-        <div
-          className="mt-10"
-        >
-          <ForwardRef(Relay(ProposalAnalysisUserRow))
-            canConsult={false}
-            canEdit={false}
-            disabled={true}
-            user={
-              Object {
-                "$fragmentRefs": null,
-                "id": "Eva",
-              }
-            }
+    <ProposalAnalysisPanel__Panel>
+      <ProposalAnalysisPanel__PanelSection
+        border={true}
+      >
+        <ProposalAnalysisPanel__CloseIconWrapper>
+          <FormattedMessage
+            id="panel.analysis.subtitle"
+            tagName="p"
+            values={Object {}}
           />
+          <CloseIcon
+            onClose={[MockFunction]}
+          />
+        </ProposalAnalysisPanel__CloseIconWrapper>
+        <div>
+          <div
+            className="mt-10"
+          >
+            <ForwardRef(Relay(ProposalAnalysisUserRow))
+              canConsult={false}
+              canEdit={false}
+              disabled={true}
+              onEditClick={[Function]}
+              user={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "Eva",
+                }
+              }
+            />
+          </div>
+          <div
+            className="mt-10"
+          >
+            <ForwardRef(Relay(ProposalAnalysisUserRow))
+              canConsult={true}
+              canEdit={false}
+              disabled={true}
+              onEditClick={[Function]}
+              status="FAVOURABLE"
+              user={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "Pipoune",
+                }
+              }
+            />
+          </div>
         </div>
-        <div
-          className="mt-10"
-        >
+      </ProposalAnalysisPanel__PanelSection>
+      <ProposalAnalysisPanel__PanelSection
+        border={true}
+      >
+        <FormattedMessage
+          id="global.review"
+          tagName="p"
+          values={Object {}}
+        />
+        <div>
           <ForwardRef(Relay(ProposalAnalysisUserRow))
             canConsult={true}
             canEdit={false}
-            disabled={true}
-            status="FAVOURABLE"
+            disabled={false}
+            status="UNFAVOURABLE"
             user={
               Object {
                 "$fragmentRefs": null,
-                "id": "Pipoune",
               }
             }
           />
         </div>
-      </div>
-    </ProposalAnalysisPanel__PanelSection>
-    <ProposalAnalysisPanel__PanelSection
-      border={true}
-    >
-      <FormattedMessage
-        id="global.review"
-        tagName="p"
-        values={Object {}}
-      />
-      <div>
-        <ForwardRef(Relay(ProposalAnalysisUserRow))
-          canConsult={true}
-          canEdit={false}
-          disabled={false}
-          status="UNFAVOURABLE"
-          user={
-            Object {
-              "$fragmentRefs": null,
-            }
-          }
+      </ProposalAnalysisPanel__PanelSection>
+      <ProposalAnalysisPanel__PanelSection>
+        <FormattedMessage
+          id="global.decision"
+          tagName="p"
+          values={Object {}}
         />
-      </div>
-    </ProposalAnalysisPanel__PanelSection>
-    <ProposalAnalysisPanel__PanelSection>
-      <FormattedMessage
-        id="global.decision"
-        tagName="p"
-        values={Object {}}
-      />
-      <div>
-        <ForwardRef(Relay(ProposalAnalysisUserRow))
-          canConsult={true}
-          canEdit={true}
-          decidor={true}
-          status="IN_PROGRESS"
-          user={
-            Object {
-              "$fragmentRefs": null,
+        <div>
+          <ForwardRef(Relay(ProposalAnalysisUserRow))
+            canConsult={true}
+            canEdit={true}
+            decidor={true}
+            status="IN_PROGRESS"
+            user={
+              Object {
+                "$fragmentRefs": null,
+              }
             }
-          }
-        />
-      </div>
-    </ProposalAnalysisPanel__PanelSection>
-  </ProposalAnalysisPanel__Panel>
-</div>
+          />
+        </div>
+      </ProposalAnalysisPanel__PanelSection>
+    </ProposalAnalysisPanel__Panel>
+  </div>
+  <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+    disabled={false}
+    onBackClick={[Function]}
+    onClose={[MockFunction]}
+    proposal={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "analyses": Array [
+          Object {
+            "id": "analyse2Id",
+            "state": "FAVOURABLE",
+            "updatedBy": Object {
+              "id": "Pipoune",
+            },
+          },
+        ],
+        "analysts": Array [
+          Object {
+            "$fragmentRefs": null,
+            "id": "Eva",
+          },
+          Object {
+            "$fragmentRefs": null,
+            "id": "Pipoune",
+          },
+        ],
+        "assessment": Object {
+          "id": "assessmentId",
+          "state": "UNFAVOURABLE",
+          "updatedBy": Object {
+            "id": "Ruel",
+          },
+        },
+        "decision": Object {
+          "id": "decisionId",
+          "isApproved": false,
+          "state": "IN_PROGRESS",
+          "updatedBy": Object {
+            "id": "Ush",
+          },
+        },
+        "decisionMaker": Object {
+          "$fragmentRefs": null,
+        },
+        "id": "proposalId",
+        "supervisor": Object {
+          "$fragmentRefs": null,
+        },
+        "viewerCanAnalyse": false,
+        "viewerCanDecide": true,
+        "viewerCanEvaluate": false,
+      }
+    }
+    userId="Rubilax"
+  />
+</ProposalAnalysisPanel__PanelsSlider>
 `;
