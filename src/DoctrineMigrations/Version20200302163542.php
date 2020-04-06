@@ -27,7 +27,7 @@ final class Version20200302163542 extends AbstractMigration implements Container
     {
         // this up() migration is auto-generated, please modify it to your needs
         // Delete all sessions because the format changed with sf4
-        $redis_host = $this->container->getParameter('redis_host');
+        $redis_host = $this->container->getParameter('redis_dsn');
 
         $job = new Process(
             'redis-cli -h ' .

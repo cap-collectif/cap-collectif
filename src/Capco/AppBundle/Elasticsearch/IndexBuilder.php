@@ -14,17 +14,17 @@ use Symfony\Component\Yaml\Yaml;
  */
 class IndexBuilder
 {
-    const ALIAS_LIVE_SEARCH = 'capco';
-    const ALIAS_LIVE_INDEXING = 'capco_indexing';
 
     /**
      * @var Client
      */
     protected $client;
+    protected $indexName;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, string $indexName)
     {
         $this->client = $client;
+        $this->indexName = $indexName;
     }
 
     /**
@@ -100,7 +100,7 @@ class IndexBuilder
 
     public function getLiveSearchIndexName(): string
     {
-        return self::ALIAS_LIVE_SEARCH;
+        return $this->indexName;
     }
 
     public function getLiveSearchIndex(): Index
@@ -110,7 +110,7 @@ class IndexBuilder
 
     public function getLiveIndexingIndexName(): string
     {
-        return self::ALIAS_LIVE_INDEXING;
+        return $this->indexName . '_indexing';
     }
 
     public function markAsLive(Index $index): Response

@@ -108,6 +108,12 @@ class ApplicationContext extends UserContext
             $jobs[] = new Process(
                 'php bin/rabbit vhost:mapping:create --password=' .
                     $this->getParameter('rabbitmq_password') .
+                    ' --user=' .
+                    $this->getParameter('rabbitmq_login') .
+                    ' --vhost=' .
+                    $this->getParameter('rabbitmq_vhost') .
+                    ' --host=' .
+                    $this->getParameter('rabbitmq_host') .
                     ' --erase-vhost config/rabbitmq.yaml'
             );
             $this->purgeRabbitMqQueues();
