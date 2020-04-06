@@ -61,7 +61,7 @@ Capco\AppBundle\Entity\Status:
         color: success
     statusIdfCollect1:
         id: statusIdfCollect1
-        name: Nouveau projet
+        name: Nouvelle proposition
         position: 1
         step: '@collectstepIdf'
         color: info
@@ -77,7 +77,7 @@ Capco\AppBundle\Entity\Status:
         updatedAt: $createdAt
     statusIdfAnalyse2:
         id: statusIdfAnalyse2
-        name: Soumis aux votes
+        name: Soumis au vote
         position: 2
         step: '@selectionStepIdfAnalyse'
         color: info
@@ -101,33 +101,9 @@ Capco\AppBundle\Entity\Status:
         updatedAt: $createdAt
     statusIdfVote1:
         id: statusIdfVote1
-        name: Soumis aux votes
+        name: Soumis au vote
         position: 1
         step: '@selectionStepIdfVote'
         color: info
         createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
-        updatedAt: $createdAt
-    statusIdfWinner1:
-        id: statusIdfWinner1
-        name: Projet à l'étude
-        position: 1
-        step: '@selectionStepIdfWiners'
-        color: info
-        createdAt: <identity((new \DateTime('2020-01-01 00:00:07')))>
-        updatedAt: $createdAt
-    statusIdfWinner2:
-        id: statusIdfWinner2
-        name: Projet en cours de réalisation
-        position: 2
-        step: '@selectionStepIdfWiners'
-        color: info
-        createdAt: <identity((new \DateTime('2020-01-01 00:00:08')))>
-        updatedAt: $createdAt
-    statusIdfWinner3:
-        id: statusIdfWinner3
-        name: Projet réalisé
-        position: 3
-        step: '@selectionStepIdfWiners'
-        color: info
-        createdAt: <identity((new \DateTime('2020-01-01 00:00:09')))>
         updatedAt: $createdAt

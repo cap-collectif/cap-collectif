@@ -40,21 +40,13 @@ Capco\AppBundle\Entity\ProposalCategory:
     categoryImage: '@CategoryImage1'
   pCategoryIdf1:
     id: pCategoryIdf1
-    name: Espaces verts et biodiversité
+    name: Categorie 1
     form: '@proposalformIdf'
   pCategoryIdf2:
     id: pCategoryIdf2
-    name: Propreté, prévention et gestion des déchets, économie circulaire
+    name: Categorie 2
     form: '@proposalformIdf'
   pCategoryIdf3:
     id: pCategoryIdf3
-    name: Santé environnementale
-    form: '@proposalformIdf'
-  pCategoryIdf4:
-    id: pCategoryIdf4
-    name: Vélo et mobilités propres
-    form: '@proposalformIdf'
-  pCategoryIdf5:
-    id: pCategoryIdf5
-    name: Énergies renouvelables et efficacité énergétique
+    name: Categorie 3
     form: '@proposalformIdf'

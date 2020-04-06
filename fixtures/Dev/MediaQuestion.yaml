@@ -29,61 +29,90 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         required: false
         type: 7 # media
         private: false
-    mediaquestionIdfProjetLocal1:
-        id: 121
-        title: Plan de financement
-        private: true
-        required: true
-        description: 'Téléchargez le plan de financement à remplir, remplissez-le et joignez-le à votre dossier.'
-        type: 7 # media
-        alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalInfo6'
-        hidden: true
     mediaquestionIdfProjetLocalAssociationSiret1:
-        id: 122
+        id: 121
         title: Avis de situation SIREN
         private: true
         required: true
-        helpText: ''
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret2'
         hidden: true
     mediaquestionIdfProjetLocalAssociationSiret2:
+        id: 122
+        title: Attestation de régularité fiscale de moins de 3 mois
+        private: true
+        required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
+        type: 7 # media
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret3'
+        hidden: true
+    mediaquestionIdfProjetLocalAssociationSiret3:
         id: 123
+        title: Attestation de régularité sociale de moins de 3 mois
+        private: true
+        required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
+        type: 7 # media
+        alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret6'
+        hidden: true
+    mediaquestionIdfProjetLocalAssociationSiret4:
+        id: 124
+        title: Extrait KBIS
+        private: true
+        required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
+        type: 7 # media
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret8'
+        hidden: true
+    mediaquestionIdfProjetLocalAssociationSiret8:
+        id: 1341
         title: Composition du conseil d'administration et du bureau
         required: true
         private: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         hidden: true
-        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret3'
-    mediaquestionIdfProjetLocalAssociationSiret3:
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret5'
+    mediaquestionIdfProjetLocalAssociationSiret5:
         id: 125
         title: Statuts en vigueur datés et signés
         private: true
         required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
-        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret4'
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret6'
         hidden: true
-    mediaquestionIdfProjetLocalAssociationSiret4:
+    mediaquestionIdfProjetLocalAssociationSiret6:
         id: 126
         title: RIB au nom de la raison sociale et à l'adresse du siège social
         private: true
         required: true
         type: 7 # media
-        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret5'
-    mediaquestionIdfProjetLocalAssociationSiret5:
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret7'
+    mediaquestionIdfProjetLocalAssociationSiret7:
         id: 127
         title: Charte régionale des valeurs de la République et de la laïcité signée par le représentant légal
         private: true
         required: true
         description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
         type: 7 # media
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret9'
+    mediaquestionIdfProjetLocalAssociationSiret9:
+        id: 145
+        title: Récépissé de la déclaration en préfecture (greffe des associations)
+        private: true
+        required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
+        type: 7 # media
+        hidden: true
     # END of path for Association with SIRET.
     mediaquestionIdfProjetLocalAssociationRna1:
         id: 128
         title: Composition du conseil d'administration et du bureau
         private: true
         required: true
-        helpText: ''
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationRna2'
         hidden: true
@@ -92,6 +121,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         title: Statuts en vigueur datés et signés
         private: true
         required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationRna3'
         hidden: true
@@ -100,6 +130,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         title: Récépissé de la déclaration en préfecture (greffe des associations)
         private: true
         required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationRna4'
         hidden: true
@@ -117,6 +148,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         required: true
         type: 7 # media
         description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
+        alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
         # END of path for Association with RNA.
     mediaquestionIdfProjetLocalAssociationNoRna1:
         id: 133
@@ -126,26 +158,36 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationNoRna2'
     mediaquestionIdfProjetLocalAssociationNoRna2:
+        id: 134
+        title: Statuts en vigueur datés et signés
+        private: true
+        required: true
+        type: 7 # media
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationNoRna3'
+    mediaquestionIdfProjetLocalAssociationNoRna3:
         id: 135
         title: Charte régionale des valeurs de la République et de la laïcité signée par le représentant légal
         private: true
         required: true
         type: 7 # media
         description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
+        alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
         # END of path for Association without RNA.
     mediaquestionIdfProjetLocalEntreprise1:
         id: 136
         title: Avis de situation SIREN
         private: true
         required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalEntreprise2'
         hidden: true
     mediaquestionIdfProjetLocalEntreprise2:
         id: 137
-        title: Attestation de régularité fiscale de moins de 3 mois
+        title: Attestation de régularité de moins de 3 mois
         private: true
         required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalEntreprise3'
         hidden: true
@@ -154,6 +196,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         title: Attestation de régularité sociale de moins de 3 mois
         private: true
         required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalEntreprise6'
         hidden: true
@@ -162,6 +205,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         title: Extrait KBIS
         private: true
         required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalEntreprise5'
         hidden: true
@@ -179,12 +223,14 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         required: true
         type: 7 # media
         description: 'Téléchargez la <a href="#">charte</a>, signez-la et joignez-la à votre dossier.'
+        alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
         # END
     mediaquestionIdfProjetLocalOrgPub1:
         id: 142
         title: Avis de situation SIREN
         private: true
         required: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalOrgPub2'
         hidden: true
@@ -194,6 +240,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         private: true
         required: true
         type: 7 # media
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalOrgPub3'
         hidden: true
     mediaquestionIdfProjetLocalOrgPub3:
@@ -202,4 +249,5 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         private: true
         required: true
         type: 7 # media
+        alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
     # End

@@ -98,16 +98,9 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         helpText: Dites comment vous allez.
         required: true
         type: 1 # textarea
-    simpleQuestionIdf1:
-        id: 1329
-        title: Zone d’impact
-        helpText: "Vous avez la possibilité d'indiquer le niveau d'impact de votre projet : Votre département, votre commune, votre EPCI ou toute la Région d'Île-de-France"
-        required: true
-        private: true
-        type: 0 # text
     simplequestionIdfGrandProject1:
         id: 1330
-        title: N° du dossier MesDémarches
+        title:  N° du dossier MesDémarches
         required: true
         private: true
         type: 0 # text
@@ -122,7 +115,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     simplequestionIdfGrandProject3:
         id: 1332
         title: Date prévisionnelle de début de projet
-        helpText: 'Format accepté : JJ/MM/AAAA. Votre projet ne peut pas démarrer avant la date du 2 juillet 2020'
+        helpText: "Format accepté : JJ/MM/AAAA. Votre projet ne peut pas démarrer avant la date du 2 juillet 2020"
         required: true
         private: true
         type: 0 # text
@@ -130,7 +123,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     simplequestionIdfGrandProject4:
         id: 1333
         title: Date prévisionnelle de fin de projet
-        helpText: 'Format accepté : JJ/MM/AAAA'
+        helpText: "Format accepté : JJ/MM/AAAA"
         required: true
         private: true
         type: 0 # text
@@ -183,9 +176,18 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret1'
+    simplequestionIdfProjetLocalAssociationSiret6:
+        id: 1340
+        title: Chiffres d'affaires comptable
+        required: true
+        private: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
+        type: 0 # text
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationSiret4'
+        hidden: true
     simplequestionIdfProjetLocalAssociationRna1:
         id: 1342
-        title: Numéro RNA (ou WALDEC pour les associations créées avant 2010)
+        title: Numéro RNA  (ou WALDEC pour les associations créées avant 2010)
         required: true
         private: true
         description: Grâce à l'API Entreprise, la Région simplifie vos démarches et vous permet...
@@ -288,6 +290,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Qualité du représentant légal
         required: true
         private: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalEntreprise1'
     simplequestionIdfProjetLocalEntreprise6:
@@ -295,6 +298,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Chiffres d'affaires comptable
         required: true
         private: true
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalEntreprise4'
         hidden: true
@@ -327,7 +331,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Prénom & nom du représentant légal
         required: true
         private: true
-        helpText: ''
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalOrgPublic5'
     simplequestionIdfProjetLocalOrgPublic5:
@@ -335,7 +339,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Qualité du représentant légal
         required: true
         private: true
-        helpText: ''
+        helpText: "Ces informations remontent automatiquement via l'API d'entreprise. Merci de vérifier que celles auxquelles vous avez accès correspondent bien à votre organisme. Dans le cas contraire, merci de vérifier et de saisir à nouveau votre numéro de SIRET. Celles que vous ne voyez pas ne sont accessibles qu'aux personnes qui étudieront votre projet."
         type: 0 # text
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalOrgPub1'
     simplequestionIdfProjetLocalInfo1:
@@ -348,7 +352,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     simplequestionIdfProjetLocalInfo2:
         id: 1363
         title: Date prévisionnelle de début de projet
-        helpText: 'Format accepté : JJ/MM/AAAA. Votre projet ne peut pas démarrer avant la date du 2 juillet 2020'
+        helpText: "Format accepté : JJ/MM/AAAA. Votre projet ne peut pas démarrer avant la date du 2 juillet 2020"
         required: true
         private: true
         type: 0 # text
@@ -356,7 +360,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     simplequestionIdfProjetLocalInfo3:
         id: 1364
         title: Date prévisionnelle de fin de projet
-        helpText: 'Format accepté : JJ/MM/AAAA'
+        helpText: "Format accepté : JJ/MM/AAAA"
         required: true
         private: true
         type: 0 # text
@@ -374,23 +378,10 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         private: false
         type: 9 # number
-        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocal1'
+        alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalInfo6'
     simplequestionIdfProjetLocalInfo6:
         id: 1367
         title: Justificatif des dépenses estimées
         required: true
         private: true
         type: 1 # textearea
-        alwaysJumpDestinationQuestion: '@sectionIdfPorteurProjectLocal'
-    simplequestionIdfEval1:
-        id: 1380
-        title: Observations éventuelles sur les critères de base
-        required: true
-        private: true
-        type: 1 # textearea
-    simplequestionIdfEval2:
-        id: 1381
-        title: Une idée du coût ?
-        required: true
-        private: true
-        type: 9 # number

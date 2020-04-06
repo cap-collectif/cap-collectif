@@ -107,8 +107,3 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@post21'
         title: 'Réponse officielle'
         body: 'On réfléchit encore !'
-    postFr22:
-        locale: fr-FR
-        translatable: '@post22'
-        title: 'Réponse officielle'
-        body: 'Déso, on en veut pas'

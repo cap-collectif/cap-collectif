@@ -155,7 +155,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         $collectStepProposalCountResolver->__invoke($cs)->willReturn($promise);
         $districtRepo->getDistrictsWithProposalsCountForStep($cs, null)->willReturn([
             [
-                'name' => 'Toute la région',
+                'name' => 'Quartier 1',
                 'value' => 40,
             ],
             [
@@ -178,7 +178,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         );
         $this->getDistrictsWithProposalsCountForStep($cs, 100)->shouldReturn([
             [
-                'name' => 'Toute la région',
+                'name' => 'Quartier 1',
                 'value' => 40,
                 'percentage' => 40.0,
             ],

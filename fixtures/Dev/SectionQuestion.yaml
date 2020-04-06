@@ -7,29 +7,21 @@ Capco\AppBundle\Entity\Questions\SectionQuestion:
 
   sectionIdfPorteurGrandProjet:
     id: 304
-    title: Grand projet / Informations sur le porteur de projet
+    title: Informations sur le porteur de projet / Grand projet
     type: 10
     alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProject1'
   sectionIdfInfoGrandProjet:
     id: 305
-    title: Grand Projet / Informations complémentaires sur mon projet
+    title: Informations sur le projet / Grand projet
     type: 10
     alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProject3'
   sectionIdfPorteurProjectLocal:
     id: 306
-    title: Projet local / Informations sur le porteur de projet
+    title: Informations sur le porteur de projet / Projet local
     type: 10
     alwaysJumpDestinationQuestion: '@multiplequestionIdfProjetLocal1'
   sectionIdfInfoProjectLocal:
     id: 307
-    title: Projet Local / Informations complémentaires sur mon projet
+    title: Informations sur le projet / Projet local
     type: 10
     alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalInfo1'
-  sectionEvalIdf1:
-    id: 308
-    title: Contrôle d'éligibilité du candidat et cohérence des documents
-    type: 10
-  sectionEvalIdf2:
-    id: 309
-    title: Éligibilité du projet
-    type: 10

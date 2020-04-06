@@ -14,7 +14,7 @@ services:
     autowire: true
     public: true
     arguments:
-      - {host: '%elasticsearch_host%', port: '9200'}
+      - { host: '%elasticsearch_host%', port: '9200', username: '%elasticsearch_username%' ,password: '%elasticsearch_password%' }
       - ~
       - '@Capco\AppBundle\Elasticsearch\ElasticsearchLogger'
       - '%kernel.debug%'
@@ -22,6 +22,8 @@ services:
   Capco\AppBundle\Elasticsearch\IndexBuilder:
     autowire: true
     public: true
+    arguments:
+      $indexName: '%elasticsearch_index%'
 
   Capco\AppBundle\Elasticsearch\Indexer:
     autowire: true

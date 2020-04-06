@@ -108,6 +108,3 @@ Capco\AppBundle\Entity\Questionnaire:
     description: J'ai vraiment beaucoup beaucoup de choix disponible pour mes questions
     step: '@questionnaireStepLotChoices'
     multipleRepliesAllowed: true
-  questionnaireEvaluationIdf:
-    id: questionnaireEvaluationIdf
-    title: Questionnaire d'étude d'Ile de France

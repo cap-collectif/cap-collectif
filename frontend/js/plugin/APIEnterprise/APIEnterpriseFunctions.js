@@ -73,24 +73,14 @@ const makeRnaQueries = (
   });
 };
 
-export const TRIGGER_FOR = ['idf-bp-dedicated', 'dev', '10091-api-enterprise-part-2'];
-
-const INDEX_TYPE_QUESTION = 19;
-const INDEX_SIRET_QUESTION = 21;
-const INDEX_RNA_QUESTION = 30;
-const ASSO_SIRET_QUESTIONS = [22, 23, 24, 25];
-const ASSO_RNA_QUESTIONS = [31, 32, 33, 34];
-const ENTREPRISE_QUESTIONS = [46, 47, 48, 49];
-const ORGA_PUBLIQUE_QUESTIONS = [58, 59, 60, 61];
-
 const getInvisibleQuestionIndexesAccordingToType = (
   defaultToHideQuestions: Array<number>,
   apiEnterpriseType: string,
 ) => {
-  const assosQuestions = [...ASSO_SIRET_QUESTIONS];
-  const assosRnaQuestions = [...ASSO_RNA_QUESTIONS];
-  const enterprisesQuestions = [...ENTREPRISE_QUESTIONS];
-  const pubOrgaQuestions = [...ORGA_PUBLIQUE_QUESTIONS];
+  const assosQuestions = [13, 14, 15, 16];
+  const assosRnaQuestions = [28, 29, 30, 31];
+  const enterprisesQuestions = [45, 46, 47, 48];
+  const pubOrgaQuestions = [57, 58, 59, 60];
   switch (apiEnterpriseType) {
     case API_ENTERPRISE_ASSOC:
       return [...assosRnaQuestions, ...enterprisesQuestions, ...pubOrgaQuestions];
@@ -106,21 +96,13 @@ const getInvisibleQuestionIndexesAccordingToType = (
 };
 
 export const handleVisibilityAccordingToType = (
+  rna: ?string,
+  siret: ?string,
   dispatch: Dispatch,
   questions: Questions,
   responses: ResponsesInReduxForm,
 ) => {
-  // The two following lines are using flowfix me because ResponseInReduxForm seems broken (see other uses)
-  // $FlowFixMe
-  const siret: ?string = responses[INDEX_SIRET_QUESTION] && responses[INDEX_SIRET_QUESTION].value;
-  // $FlowFixMe
-  const rna: ?string = responses[INDEX_RNA_QUESTION] && responses[INDEX_RNA_QUESTION].value;
-  const defaultToHideQuestions = [
-    ...ASSO_SIRET_QUESTIONS,
-    ...ASSO_RNA_QUESTIONS,
-    ...ENTREPRISE_QUESTIONS,
-    ...ORGA_PUBLIQUE_QUESTIONS,
-  ];
+  const defaultToHideQuestions = [13, 14, 15, 16, 28, 29, 30, 31, 45, 46, 47, 48, 57, 58, 59, 60];
   const isSiretNotValid = siret == null || (siret && !checkSiret(siret));
   const isRnaNotValid = rna == null || (rna && !checkRNA(rna));
   if (isSiretNotValid && isRnaNotValid) {
@@ -139,9 +121,7 @@ export const handleVisibilityAccordingToType = (
   }
   // In this case, it's a draft that has been reopened
   // only show fields according to enterprise's type in case user change is mind
-  const type = $(
-    `input[name="choices-for-field-proposal-form-responses${INDEX_TYPE_QUESTION}"]:checked`,
-  ).val();
+  const type = $('input[name="choices-for-field-proposal-form-responses10"]:checked').val();
   const apiEnterpriseType = getApiEnterpriseType(type);
   // Refetch to know which hidden fields should be visible again once modal reopen
   if (siret && !isSiretNotValid) {
@@ -173,18 +153,16 @@ export const triggerAutocompleteAPIEnterprise = (
 ) => {
   if (event && event.currentTarget) {
     if (event.currentTarget.getAttribute('type') === 'siret') {
-      const text: ?string = event.currentTarget.value.replace(/\s/g, '');
-      const type = $(
-        `input[name="choices-for-field-proposal-form-responses${INDEX_TYPE_QUESTION}"]:checked`,
-      ).val();
+      const text: string = event.currentTarget.value.replace(/\s/g, '');
+      const type = $('input[name="choices-for-field-proposal-form-responses10"]:checked').val();
       const apiEnterpriseType = getApiEnterpriseType(type);
 
-      if (text && checkSiret(text)) {
+      if (checkSiret(text)) {
         makeSiretQueries(dispatch, apiEnterpriseType, text, questions);
       }
     } else if (event.currentTarget.getAttribute('type') === 'rna') {
-      const id: ?string = event.currentTarget.value.replace(/\s/g, '');
-      if (id && checkRNA(id)) {
+      const id: string = event.currentTarget.value.replace(/\s/g, '');
+      if (checkRNA(id)) {
         makeRnaQueries(dispatch, id, questions);
       }
     }

@@ -132,20 +132,6 @@ Object {
       ],
     },
     Object {
-      "enTitle": "Réponse officielle",
-      "frTitle": "Réponse officielle",
-      "id": "UG9zdDpwb3N0MjI=",
-      "title": "Réponse officielle",
-      "translations": Array [
-        Object {
-          "abstract": null,
-          "body": "Déso, on en veut pas",
-          "locale": "fr-FR",
-          "title": "Réponse officielle",
-        },
-      ],
-    },
-    Object {
       "enTitle": "Post EN 1",
       "frTitle": "Post FR 1",
       "id": "UG9zdDpwb3N0MQ==",
