@@ -106,7 +106,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
                 return (
                   <div className="mt-10">
                     <ProposalAnalysisUserRow
-                      canConsult={!!status}
+                      canConsult={!!status || (proposal.viewerCanAnalyse && !idx)}
                       canEdit={proposal.viewerCanAnalyse && !idx}
                       disabled={
                         (proposal.assessment?.state &&
@@ -149,7 +149,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
               <div>
                 <ProposalAnalysisUserRow
                   canConsult={!!proposal.decision?.state}
-                  canEdit={proposal.viewerCanDecide && !closed}
+                  canEdit={proposal.viewerCanDecide}
                   user={proposal.decisionMaker}
                   status={decisionState}
                   decidor
