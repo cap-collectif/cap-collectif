@@ -102,6 +102,38 @@ storiesOf('Core|List/PickableList', module)
     },
   )
   .add(
+    'when loading',
+    () => {
+      return (
+        <div>
+          <PickableList loading>
+            <PickableListHeaderContainer>
+              <p>{items.length} élements</p>
+              <p>Action 1</p>
+              <p>Action 2</p>
+              <p>Action 3</p>
+              <p>Action 4</p>
+              <p>Action 5</p>
+            </PickableListHeaderContainer>
+            <PickableList.Body>
+              {items.map(proposal => (
+                <PickableList.Row key={proposal.id} rowId={proposal.id}>
+                  {proposal.title}
+                </PickableList.Row>
+              ))}
+            </PickableList.Body>
+          </PickableList>
+          <hr />
+          <h3>Context output for Pickable List</h3>
+          <PickableListOutputExample />
+        </div>
+      );
+    },
+    {
+      decorators: [storyFn => <PickableList.Provider>{storyFn()}</PickableList.Provider>],
+    },
+  )
+  .add(
     'with selectionnable actions',
     () => {
       return (

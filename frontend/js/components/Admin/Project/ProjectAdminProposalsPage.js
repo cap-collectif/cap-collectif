@@ -6,7 +6,7 @@ import type {
   ProjectAdminProposalsPageQueryResponse,
   ProjectAdminProposalsPageQueryVariables,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
-import type { ParametersState } from '~/components/Admin/Project/ProjectAdminPage.reducer';
+import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import ProjectAdminProposals, {
   PROJECT_ADMIN_PROPOSAL_PAGINATION,
 } from '~/components/Admin/Project/ProjectAdminProposals';
@@ -19,7 +19,7 @@ type Props = {|
 
 const createQueryVariables = (
   projectId: string,
-  parameters: ParametersState,
+  parameters: ProjectAdminPageParameters,
 ): ProjectAdminProposalsPageQueryVariables => ({
   projectId,
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,

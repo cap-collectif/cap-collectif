@@ -10,6 +10,7 @@ import type { Context } from '~ui/List/PickableList/context';
 import { PickableListContext } from '~ui/List/PickableList/context';
 
 type Props = {
+  isLoading?: boolean,
   onScrollToBottom?: () => void,
   useInfiniteScroll?: boolean,
   hasMore?: boolean,
@@ -64,14 +65,20 @@ const noop = () => {};
 
 const PickableList = ({
   children,
+  loader,
   useInfiniteScroll = false,
   onScrollToBottom = noop,
   hasMore = true,
-  loader,
+  isLoading = false,
   ...rest
 }: Props) => {
   return (
-    <S.Container {...rest}>
+    <S.Container {...rest} isLoading={isLoading}>
+      {isLoading && (
+        <S.GlobalLoaderContainer>
+          <S.GlobalLoader />
+        </S.GlobalLoaderContainer>
+      )}
       {useInfiniteScroll ? (
         <InfiniteScroll
           initialLoad={false}

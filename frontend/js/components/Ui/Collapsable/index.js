@@ -61,13 +61,27 @@ export type CollapsableAlignment = 'left' | 'right';
 type Props = {|
   +align?: CollapsableAlignment,
   +onClose?: () => void,
-  +children: React.ChildrenArray<
-    React.Element<typeof CollapsableButton> | React.Element<typeof CollapsableElement>,
-  >,
+  +children:
+    | React.ChildrenArray<
+        | React.Element<typeof React.Fragment | typeof CollapsableButton>
+        | React.Element<typeof CollapsableElement>,
+      >
+    | ((
+        closeDropdown: () => void,
+      ) => React.ChildrenArray<
+        | React.Element<typeof React.Fragment | typeof CollapsableButton>
+        | React.Element<typeof CollapsableElement>,
+      >),
 |};
 
 const Collapsable = ({ children, onClose, align = 'left' }: Props) => {
   const [visible, setVisible] = React.useState(false);
+  const closeDropdown = () => {
+    if (onClose) {
+      onClose();
+    }
+    setVisible(false);
+  };
   const contextValue = React.useMemo(
     () => ({
       visible,
@@ -76,16 +90,20 @@ const Collapsable = ({ children, onClose, align = 'left' }: Props) => {
     [visible, setVisible],
   );
   const collapsable = React.useRef<HTMLDivElement | null>(null);
-  useClickAway(collapsable, () => {
-    if (onClose && visible) {
-      onClose();
-    }
-    setVisible(false);
-  });
+  useClickAway(
+    collapsable,
+    () => {
+      if (onClose && visible) {
+        onClose();
+      }
+      setVisible(false);
+    },
+    [visible],
+  );
   return (
     <CollapsableContext.Provider value={contextValue}>
       <S.Container ref={collapsable} align={align}>
-        {children}
+        {typeof children === 'function' ? children(closeDropdown) : children}
       </S.Container>
     </CollapsableContext.Provider>
   );

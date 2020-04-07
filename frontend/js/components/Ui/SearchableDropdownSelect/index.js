@@ -16,7 +16,7 @@ type Props = {|
   +noResultsMessage: string,
   +searchPlaceholder: string,
   +clearChoice?: {|
-    +onClear?: () => void,
+    +onClear?: () => void | Promise<any>,
     +enabled?: boolean,
     +message?: string,
   |},

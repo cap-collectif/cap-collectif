@@ -33,7 +33,7 @@ export type Props = {|
   +title: string,
   +shouldOverflow?: boolean,
   +value?: string | string[] | null,
-  +onChange?: (value: string | string[]) => void,
+  +onChange?: (value: string | string[]) => void | Promise<any>,
   +children: React.Node,
 |};
 

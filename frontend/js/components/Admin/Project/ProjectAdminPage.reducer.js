@@ -1,6 +1,7 @@
 // @flow
 
 import type { Uuid } from '~/types';
+import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.context';
 
 export type SortValues = 'oldest' | 'newest';
 
@@ -21,12 +22,20 @@ export type Filters = {|
   +term: ?string,
 |};
 
-export type ParametersState = {|
+export type ProjectAdminPageState = {|
+  +status: ProjectAdminPageStatus,
   +sort: SortValues,
   +filters: Filters,
 |};
 
+export type ProjectAdminPageParameters = {|
+  +sort: $PropertyType<ProjectAdminPageState, 'sort'>,
+  +filters: $PropertyType<ProjectAdminPageState, 'filters'>,
+|};
+
 export type Action =
+  | { type: 'START_LOADING' }
+  | { type: 'STOP_LOADING' }
   | { type: 'CHANGE_SORT', payload: SortValues }
   | { type: 'CHANGE_STATUS_FILTER', payload: ?string }
   | { type: 'CLEAR_STATUS_FILTER' }
@@ -40,8 +49,18 @@ export type Action =
   | { type: 'SEARCH_TERM', payload: ?string }
   | { type: 'CLEAR_TERM' };
 
-export const createReducer = (state: ParametersState, action: Action) => {
+export const createReducer = (state: ProjectAdminPageState, action: Action) => {
   switch (action.type) {
+    case 'START_LOADING':
+      return {
+        ...state,
+        status: 'loading',
+      };
+    case 'STOP_LOADING':
+      return {
+        ...state,
+        status: 'ready',
+      };
     case 'CHANGE_STATE_FILTER':
       return {
         ...state,

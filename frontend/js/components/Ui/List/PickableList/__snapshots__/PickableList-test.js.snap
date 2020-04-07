@@ -3,7 +3,7 @@
 exports[`<PickableList /> should render correctly 1`] = `
 Array [
   <div
-    class="styles__Container-sc-19fy1kf-0 ctJyPw"
+    class="styles__Container-sc-19fy1kf-0 kLoACa"
   >
     <div
       class="styles__Container-sc-1ig07ym-0 endRTa pickableList-header"
@@ -24,7 +24,7 @@ Array [
       class="styles__Container-sc-1u6boa9-0 dXlWzY"
     >
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
       >
         <input
           type="checkbox"
@@ -38,7 +38,7 @@ Array [
         </div>
       </div>
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
       >
         <input
           type="checkbox"
@@ -52,7 +52,7 @@ Array [
         </div>
       </div>
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
       >
         <input
           type="checkbox"
@@ -66,7 +66,7 @@ Array [
         </div>
       </div>
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
       >
         <input
           type="checkbox"
@@ -80,7 +80,7 @@ Array [
         </div>
       </div>
       <div
-        class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
       >
         <input
           type="checkbox"
@@ -101,13 +101,13 @@ Array [
 
 exports[`<PickableList /> should render correctly without header 1`] = `
 <div
-  class="styles__Container-sc-19fy1kf-0 ctJyPw"
+  class="styles__Container-sc-19fy1kf-0 kLoACa"
 >
   <div
     class="styles__Container-sc-1u6boa9-0 dXlWzY"
   >
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
     >
       <input
         type="checkbox"
@@ -121,7 +121,7 @@ exports[`<PickableList /> should render correctly without header 1`] = `
       </div>
     </div>
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
     >
       <input
         type="checkbox"
@@ -135,7 +135,7 @@ exports[`<PickableList /> should render correctly without header 1`] = `
       </div>
     </div>
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
     >
       <input
         type="checkbox"
@@ -149,7 +149,7 @@ exports[`<PickableList /> should render correctly without header 1`] = `
       </div>
     </div>
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
     >
       <input
         type="checkbox"
@@ -163,7 +163,7 @@ exports[`<PickableList /> should render correctly without header 1`] = `
       </div>
     </div>
     <div
-      class="styles__Container-sc-15na44m-0 fGFlYO pickableList-row"
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
     >
       <input
         type="checkbox"

@@ -1,5 +1,6 @@
 // @flow
 import type { Uuid } from '~/types';
+import type { AnalysisProjectPageStatus } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 
 export type ProposalsDistrictValues = 'ALL' | Uuid;
 
@@ -28,7 +29,7 @@ export const STATE: {
 export type StateValues = $Values<typeof STATE>;
 
 export type Filters = {|
-  state: StateValues,
+  +state: StateValues,
   +district: ProposalsDistrictValues,
   +category: ProposalsCategoryValues,
   +analysts: ?Array<Uuid>,
@@ -36,12 +37,20 @@ export type Filters = {|
   +decisionMaker: ?Uuid,
 |};
 
-export type ParametersState = {|
+export type AnalysisProjectPageState = {|
+  +status: AnalysisProjectPageStatus,
   +sort: SortValues,
   +filters: Filters,
 |};
 
+export type AnalysisProjectPageParameters = {|
+  +sort: $PropertyType<AnalysisProjectPageState, 'sort'>,
+  +filters: $PropertyType<AnalysisProjectPageState, 'filters'>,
+|};
+
 export type Action =
+  | { type: 'START_LOADING' }
+  | { type: 'STOP_LOADING' }
   | { type: 'CHANGE_SORT', payload: SortValues }
   | { type: 'CHANGE_CATEGORY_FILTER', payload: ProposalsCategoryValues }
   | { type: 'CLEAR_CATEGORY_FILTER' }
@@ -49,8 +58,18 @@ export type Action =
   | { type: 'CLEAR_DISTRICT_FILTER' }
   | { type: 'CHANGE_STATE_FILTER', payload: StateValues };
 
-export const createReducer = (state: ParametersState, action: Action) => {
+export const createReducer = (state: AnalysisProjectPageState, action: Action) => {
   switch (action.type) {
+    case 'START_LOADING':
+      return {
+        ...state,
+        status: 'loading',
+      };
+    case 'STOP_LOADING':
+      return {
+        ...state,
+        status: 'ready',
+      };
     case 'CHANGE_STATE_FILTER':
       return {
         ...state,

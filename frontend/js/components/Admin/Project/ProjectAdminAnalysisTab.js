@@ -6,12 +6,13 @@ import type {
   ProjectAdminAnalysisTabQueryResponse,
   ProjectAdminAnalysisTabQueryVariables,
 } from '~relay/ProjectAdminAnalysisTabQuery.graphql';
-import type { ParametersState } from '~/components/Admin/Project/ProjectAdminPage.reducer';
+import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import ProjectAdminAnalysis, {
   PROJECT_ADMIN_PROPOSAL_PAGINATION,
 } from '~/components/Admin/Project/ProjectAdminAnalysis';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
 import Loader from '~ui/FeedbacksIndicators/Loader';
+import PickableList from '~ui/List/PickableList';
 
 type Props = {|
   +projectId: string,
@@ -19,7 +20,7 @@ type Props = {|
 
 const createQueryVariables = (
   projectId: string,
-  parameters: ParametersState,
+  parameters: ProjectAdminPageParameters,
 ): ProjectAdminAnalysisTabQueryVariables => ({
   projectId,
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
@@ -49,6 +50,14 @@ const ProjectAdminAnalysisTab = ({ projectId }: Props) => {
           $status: ID
           $term: String
         ) {
+          defaultUsers: users(first: 4) {
+            edges {
+              node {
+                id
+                ...UserSearchDropdownChoice_user
+              }
+            }
+          }
           project: node(id: $projectId) {
             ...ProjectAdminAnalysis_project
               @arguments(
@@ -75,8 +84,12 @@ const ProjectAdminAnalysisTab = ({ projectId }: Props) => {
         if (error) {
           return graphqlError;
         }
-        if (props && props.project) {
-          return <ProjectAdminAnalysis project={props.project} />;
+        if (props && props.project && props.defaultUsers) {
+          return (
+            <PickableList.Provider>
+              <ProjectAdminAnalysis project={props.project} defaultUsers={props.defaultUsers} />
+            </PickableList.Provider>
+          );
         }
         return <Loader show />;
       }}

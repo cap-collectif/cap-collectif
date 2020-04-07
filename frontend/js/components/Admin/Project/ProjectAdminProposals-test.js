@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminProposals } from './ProjectAdminProposals';
 import { $refType, relayPaginationMock } from '~/mocks';
-import { ProposalListNoContributions } from './ProjectAdminProposals.style';
+import { AnalysisProposalListNoContributions } from '~ui/Analysis/common.style';
 
 const DEFAULT_PROJECT = {
   id: 'UHJvamVjdDpwcm9qZWN0Ng==',
@@ -330,7 +330,7 @@ describe('<ProjectAdminProposals />', () => {
       },
     };
     const wrapper = shallow(<ProjectAdminProposals {...props} />);
-    expect(wrapper.find(ProposalListNoContributions)).toHaveLength(1);
+    expect(wrapper.find(AnalysisProposalListNoContributions)).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -7,10 +7,10 @@ import Tag from '~ui/Labels/Tag';
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
 import AnalysisProposalContainer, {
   ProposalListRowInformations,
-  ProposalListRowMeta,
   ProposalInformationsContainer,
 } from '~/components/Analysis/AnalysisProposal/AnalysisProposal.style';
 import AnalysisProposalListRole from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
+import { AnalysisProposalListRowMeta } from '~ui/Analysis/common.style';
 
 type Props = {
   proposal: AnalysisProposal_proposal,
@@ -37,7 +37,7 @@ const AnalysisProposal = ({ proposal }: Props) => (
           )}
         </p>
       </ProposalListRowInformations>
-      <ProposalListRowMeta>
+      <AnalysisProposalListRowMeta>
         {proposal.district && (
           <Tag size="10px" icon="cap cap-marker-1">
             {proposal.district.name}
@@ -48,7 +48,7 @@ const AnalysisProposal = ({ proposal }: Props) => (
             {proposal.category.name}
           </Tag>
         )}
-      </ProposalListRowMeta>
+      </AnalysisProposalListRowMeta>
     </ProposalInformationsContainer>
 
     <AnalysisProposalListRole proposal={proposal} />

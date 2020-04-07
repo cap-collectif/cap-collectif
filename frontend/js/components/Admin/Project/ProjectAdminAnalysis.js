@@ -1,12 +1,16 @@
 // @flow
 import * as React from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
+import uniqBy from 'lodash/uniqBy';
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
-import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import {
+  createPaginationContainer,
+  fetchQuery,
+  graphql,
+  type RelayPaginationProp,
+} from 'react-relay';
 import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
-import * as S from './ProjectAdminProposals.style';
 import Tag from '~ui/Labels/Tag';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import DropdownSelect from '~ui/DropdownSelect';
@@ -17,71 +21,84 @@ import type {
   SortValues,
 } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
-import { getAllFormattedChoicesForProject } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import {
+  getAllFormattedChoicesForProject,
+  getCommonSupervisorIdWithinProposalIds,
+  getSelectedSupervisorsByProposals,
+  isRowIndeterminate,
+} from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
+import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
+import AssignSupervisorToProposalsMutation from '~/mutations/AssignSupervisorToProposalsMutation';
+import UserSearchDropdownChoice from '~/components/Admin/Project/UserSearchDropdownChoice';
+import environment from '~/createRelayEnvironment';
+import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql';
+import AnalysisProposalListRole from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
+import AnalysisProposalContainer, {
+  ProposalInformationsContainer,
+} from '~/components/Analysis/AnalysisProposal/AnalysisProposal.style';
+import FilterTag from '~ui/Analysis/FilterTag';
+import {
+  AnalysisFilterContainer,
+  AnalysisNoContributionIcon,
+  AnalysisPickableListContainer,
+  AnalysisProposalListHeaderContainer,
+  AnalysisProposalListLoader,
+  AnalysisProposalListNoContributions,
+  AnalysisProposalListRowInformations,
+  AnalysisProposalListRowMeta,
+} from '~ui/Analysis/common.style';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
-type Props = {|
-  +relay: RelayPaginationProp,
-  +project: ProjectAdminAnalysis_project,
-|};
-
-type FilterTagProps = {|
-  +children: React.Node,
-  +show: boolean,
-  +icon?: React.Node,
-  +bgColor?: string,
-  +canClose?: boolean,
-  +onClose?: () => void,
-|};
-
-const ProposalListHeaderContainer = styled(PickableList.Header)`
-  align-items: stretch;
-  & > * {
-    margin: 0 1.25rem 0 0;
-    justify-content: flex-start;
-    & p {
-      margin-bottom: 0;
+const USER_SEARCH_QUERY = graphql`
+  query ProjectAdminAnalysis_UserSearchQuery($terms: String!) {
+    results: userSearch(displayName: $terms) {
+      id
+      ...UserSearchDropdownChoice_user
     }
-  }
-  & > p:first-of-type {
-    flex: 3;
-    align-self: center;
   }
 `;
 
+const loadOptions = terms =>
+  new Promise(async resolve => {
+    const response = await fetchQuery(environment, USER_SEARCH_QUERY, {
+      terms,
+    });
+    resolve(response.results);
+  });
+
+type Props = {|
+  +relay: RelayPaginationProp,
+  +defaultUsers: $PropertyType<ProjectAdminAnalysisTabQueryResponse, 'defaultUsers'>,
+  +project: ProjectAdminAnalysis_project,
+|};
+
 const ProposalListLoader = () => (
-  <S.ProposalListLoader>
+  <AnalysisProposalListLoader>
     <Loader inline size={16} />
     <FormattedMessage id="synthesis.common.loading" />
-  </S.ProposalListLoader>
+  </AnalysisProposalListLoader>
 );
 
-const FilterTag = ({ children, show, icon, onClose, bgColor, canClose = true }: FilterTagProps) => {
-  if (!show) return null;
-  return (
-    <S.FilterTagContainer bgColor={bgColor}>
-      {icon}
-      <span>{children}</span>
-      {canClose && (
-        <Icon onClick={onClose} name={ICON_NAME.close} className="close-icon" size="0.7rem" />
-      )}
-    </S.FilterTagContainer>
-  );
-};
-
-const ProposalListHeader = ({ project }: { project: ProjectAdminAnalysis_project }) => {
+const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }>) => {
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useProjectAdminProposalsContext();
+  const [supervisor, setSupervisor] = React.useState(null);
   const { categories, districts } = React.useMemo(() => getAllFormattedChoicesForProject(project), [
     project,
   ]);
+  const selectedSupervisorsByProposals = React.useMemo(
+    () => getSelectedSupervisorsByProposals(project, selectedRows),
+    [project, selectedRows],
+  );
+  React.useEffect(() => {
+    setSupervisor(getCommonSupervisorIdWithinProposalIds(project, selectedRows));
+  }, [project, selectedRows]);
   const intl = useIntl();
 
-  const renderFilters = () => (
+  const renderFilters = (
     <React.Fragment>
-      <S.FilterContainer>
+      <AnalysisFilterContainer>
         <Collapsable align="right">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="admin.fields.proposal.map.zone" />
@@ -117,8 +134,8 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminAnalysis_project
           show={parameters.filters.district !== 'ALL'}>
           {districts.find(d => d.id === parameters.filters.district)?.name || null}
         </FilterTag>
-      </S.FilterContainer>
-      <S.FilterContainer>
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
         <Collapsable align="right">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="admin.fields.proposal.category" />
@@ -153,8 +170,50 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminAnalysis_project
           show={parameters.filters.category !== 'ALL'}>
           {categories.find(c => c.id === parameters.filters.category)?.name || null}
         </FilterTag>
-      </S.FilterContainer>
-      <S.FilterContainer>
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right">
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
+          </Collapsable.Button>
+          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
+            {''}
+          </Collapsable.Element>
+        </Collapsable>
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right">
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
+          </Collapsable.Button>
+          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.analyst' })}>
+            {''}
+          </Collapsable.Element>
+        </Collapsable>
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right">
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="global.review" />
+          </Collapsable.Button>
+          <Collapsable.Element
+            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.supervisor' })}>
+            {''}
+          </Collapsable.Element>
+        </Collapsable>
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right">
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="global.decision" />
+          </Collapsable.Button>
+          <Collapsable.Element
+            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}>
+            {''}
+          </Collapsable.Element>
+        </Collapsable>
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
         <Collapsable align="right">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="argument.sort.label" />
@@ -175,7 +234,96 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminAnalysis_project
             </DropdownSelect>
           </Collapsable.Element>
         </Collapsable>
-      </S.FilterContainer>
+      </AnalysisFilterContainer>
+    </React.Fragment>
+  );
+
+  const renderActions = (
+    <React.Fragment>
+      <AnalysisFilterContainer>
+        <Collapsable align="right" key="action-analyst">
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
+          </Collapsable.Button>
+          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.analyst' })}>
+            {''}
+          </Collapsable.Element>
+        </Collapsable>
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right" key="action-supervisor">
+          {closeDropdown => (
+            <React.Fragment>
+              <Collapsable.Button>
+                <FormattedMessage tagName="p" id="global.review" />
+              </Collapsable.Button>
+              <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-supervisor' })}>
+                <SearchableDropdownSelect
+                  searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
+                  shouldOverflow
+                  value={supervisor}
+                  onChange={async assigneeId => {
+                    closeDropdown();
+                    dispatch({ type: 'START_LOADING' });
+                    await AssignSupervisorToProposalsMutation.commit({
+                      input: {
+                        proposalIds: selectedRows,
+                        supervisorId: ((assigneeId: any): string),
+                      },
+                    });
+                    dispatch({ type: 'STOP_LOADING' });
+                  }}
+                  noResultsMessage={intl.formatMessage({ id: 'no_result' })}
+                  clearChoice={{
+                    enabled: true,
+                    message: intl.formatMessage({ id: 'assigned.to.nobody' }),
+                    onClear: async () => {
+                      closeDropdown();
+                      dispatch({ type: 'START_LOADING' });
+                      await AssignSupervisorToProposalsMutation.commit({
+                        input: {
+                          proposalIds: selectedRows,
+                          supervisorId: null,
+                        },
+                      });
+                      dispatch({ type: 'STOP_LOADING' });
+                    },
+                  }}
+                  title={intl.formatMessage({ id: 'assign-supervisor' })}
+                  defaultOptions={uniqBy(
+                    [
+                      ...selectedSupervisorsByProposals,
+                      ...(defaultUsers?.edges?.filter(Boolean).map(e => e.node) || []),
+                    ],
+                    'id',
+                  )}
+                  loadOptions={loadOptions}>
+                  {users =>
+                    users.map(user => (
+                      <UserSearchDropdownChoice
+                        isIndeterminate={isRowIndeterminate(user, project, selectedRows)}
+                        key={user.id}
+                        user={user}
+                      />
+                    ))
+                  }
+                </SearchableDropdownSelect>
+              </Collapsable.Element>
+            </React.Fragment>
+          )}
+        </Collapsable>
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right" key="action-decision-maker">
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="global.decision" />
+          </Collapsable.Button>
+          <Collapsable.Element
+            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}>
+            {''}
+          </Collapsable.Element>
+        </Collapsable>
+      </AnalysisFilterContainer>
     </React.Fragment>
   );
 
@@ -190,50 +338,56 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminAnalysis_project
               itemCount: selectedRows.length,
             }}
           />
-          <p>Action 1 quand select</p>
-          <p>Action 2 quand select</p>
-          <p>Action 3 quand select</p>
+          {renderActions}
         </React.Fragment>
       ) : (
         <React.Fragment>
           <p>
             {rowsCount} <FormattedMessage id="global.proposals" />
           </p>
-          {renderFilters()}
+          {renderFilters}
         </React.Fragment>
       )}
     </React.Fragment>
   );
 };
 
-export const ProjectAdminAnalysis = ({ project, relay }: Props) => {
-  const hasProposals = !!project.firstAnalysisStep?.proposals?.totalCount && project.firstAnalysisStep?.proposals?.totalCount > 0;
+export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) => {
+  const { status } = useProjectAdminProposalsContext();
+  const { hasAnyRowsChecked } = usePickableList();
+  const hasProposals =
+    !!project.firstAnalysisStep?.proposals?.totalCount &&
+    project.firstAnalysisStep?.proposals?.totalCount > 0;
 
   return (
-    <PickableList.Provider>
-      <S.ProposalPickableListContainer>
-        <PickableList
-          useInfiniteScroll={hasProposals}
-          onScrollToBottom={() => {
-            relay.loadMore(PROJECT_ADMIN_PROPOSAL_PAGINATION);
-          }}
-          hasMore={project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage}
-          loader={<ProposalListLoader key="loader" />}>
-          <ProposalListHeaderContainer>
-            <ProposalListHeader project={project} />
-          </ProposalListHeaderContainer>
-          <PickableList.Body>
-            {hasProposals ? (
-              project.firstAnalysisStep?.proposals?.edges
-                ?.filter(Boolean)
-                .map(edge => edge.node)
-                .filter(Boolean)
-                .map(proposal => (
-                  <S.ProposalListRow key={proposal.id} rowId={proposal.id}>
+    <AnalysisPickableListContainer>
+      <PickableList
+        isLoading={status === 'loading'}
+        useInfiniteScroll={hasProposals}
+        onScrollToBottom={() => {
+          relay.loadMore(PROJECT_ADMIN_PROPOSAL_PAGINATION);
+        }}
+        hasMore={project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage}
+        loader={<ProposalListLoader key="loader" />}>
+        <AnalysisProposalListHeaderContainer>
+          <ProposalListHeader project={project} defaultUsers={defaultUsers} />
+        </AnalysisProposalListHeaderContainer>
+        <PickableList.Body>
+          {hasProposals ? (
+            project.firstAnalysisStep?.proposals?.edges
+              ?.filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .map(proposal => (
+                <AnalysisProposalContainer
+                  hasSelection={hasAnyRowsChecked}
+                  key={proposal.id}
+                  rowId={proposal.id}>
+                  <ProposalInformationsContainer>
                     <h2>
                       <a href={proposal.adminUrl}>{proposal.title}</a>
                     </h2>
-                    <S.ProposalListRowInformations>
+                    <AnalysisProposalListRowInformations>
                       <p>
                         #{proposal.reference} • {proposal.author.username}
                         {proposal.publishedAt && (
@@ -249,8 +403,8 @@ export const ProjectAdminAnalysis = ({ project, relay }: Props) => {
                           </React.Fragment>
                         )}
                       </p>
-                    </S.ProposalListRowInformations>
-                    <S.ProposalListRowMeta>
+                    </AnalysisProposalListRowInformations>
+                    <AnalysisProposalListRowMeta>
                       {proposal.district && (
                         <Tag size="10px" icon="cap cap-marker-1 ">
                           {proposal.district.name}
@@ -261,19 +415,20 @@ export const ProjectAdminAnalysis = ({ project, relay }: Props) => {
                           {proposal.category.name}
                         </Tag>
                       )}
-                    </S.ProposalListRowMeta>
-                  </S.ProposalListRow>
-                ))
-            ) : (
-              <S.ProposalListNoContributions>
-                <S.NoContributionIcon />
-                <FormattedMessage id="global.no_proposals" tagName="p" />
-              </S.ProposalListNoContributions>
-            )}
-          </PickableList.Body>
-        </PickableList>
-      </S.ProposalPickableListContainer>
-    </PickableList.Provider>
+                    </AnalysisProposalListRowMeta>
+                  </ProposalInformationsContainer>
+                  <AnalysisProposalListRole proposal={proposal} />
+                </AnalysisProposalContainer>
+              ))
+          ) : (
+            <AnalysisProposalListNoContributions>
+              <AnalysisNoContributionIcon />
+              <FormattedMessage id="global.no_proposals" tagName="p" />
+            </AnalysisProposalListNoContributions>
+          )}
+        </PickableList.Body>
+      </PickableList>
+    </AnalysisPickableListContainer>
   );
 };
 
@@ -297,19 +452,19 @@ export default createPaginationContainer(
         ) {
         id
         steps {
-        __typename
-        ... on ProposalStep {
-          form {
-            districts {
-              id
-              name
-            }
-            categories {
-              id
-              name
+          __typename
+          ... on ProposalStep {
+            form {
+              districts {
+                id
+                name
+              }
+              categories {
+                id
+                name
+              }
             }
           }
-        }
         }
         firstAnalysisStep {
           proposals(
@@ -320,36 +475,41 @@ export default createPaginationContainer(
             district: $district
             term: $term
           )
-          @connection(
-            key: "ProjectAdminAnalysis_proposals"
-            filters: ["orderBy", "category", "district", "term"]
-          ) {
-          totalCount
-          pageInfo {
-            hasNextPage
-          }
-           edges {
-            node {
-              author {
-                id
-                username
-              }
-              adminUrl
-              publishedAt
-              district {
-                id
-                name
-              }
-              category {
-                id
-                name
-              }
-              reference(full: false)
-              id
-              title
+            @connection(
+              key: "ProjectAdminAnalysis_proposals"
+              filters: ["orderBy", "category", "district", "term"]
+            ) {
+            totalCount
+            pageInfo {
+              hasNextPage
             }
-            cursor
-          }
+            edges {
+              node {
+                author {
+                  id
+                  username
+                }
+                ...AnalysisProposalListRole_proposal
+                supervisor {
+                  id
+                  ...UserSearchDropdownChoice_user
+                }
+                adminUrl
+                publishedAt
+                district {
+                  id
+                  name
+                }
+                category {
+                  id
+                  name
+                }
+                reference(full: false)
+                id
+                title
+              }
+              cursor
+            }
           }
         }
       }
@@ -364,7 +524,11 @@ export default createPaginationContainer(
      * $FlowFixMe
      * */
     getConnectionFromProps(props: Props) {
-      return props.project && props.project.firstAnalysisStep && props.project.firstAnalysisStep.proposals;
+      return (
+        props.project &&
+        props.project.firstAnalysisStep &&
+        props.project.firstAnalysisStep.proposals
+      );
     },
     getFragmentVariables(prevVars) {
       return {

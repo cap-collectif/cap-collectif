@@ -9,12 +9,8 @@ import type { AnalysisDashboardHeader_project } from '~relay/AnalysisDashboardHe
 import { usePickableList } from '~ui/List/PickableList';
 import { useAnalysisProposalsContext } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 import { getAllFormattedChoicesForProject } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
-import AnalystDashboardHeaderContainer, {
-  FilterContainer,
-  FilterTagContainer,
-} from './AnalysisDashboardHeader.style';
+import AnalystDashboardHeaderContainer from './AnalysisDashboardHeader.style';
 import Collapsable from '~ui/Collapsable';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
 import DropdownSelect from '~ui/DropdownSelect';
 import type {
@@ -24,19 +20,12 @@ import type {
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import { ORDER_BY } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import { TYPE_FILTER } from '~/constants/AnalyseConstants';
+import FilterTag from '~ui/Analysis/FilterTag';
+import { AnalysisFilterContainer } from '~ui/Analysis/common.style';
 
 type Props = {|
   project: AnalysisDashboardHeader_project,
   user: User,
-|};
-
-type FilterTagProps = {|
-  +children: React.Node,
-  +show: boolean,
-  +icon?: React.Node,
-  +bgColor?: string,
-  +canClose?: boolean,
-  +onClose?: () => void,
 |};
 
 const getFiltersShown = (
@@ -99,20 +88,6 @@ const getFiltersShown = (
   ];
 };
 
-const FilterTag = ({ children, show, icon, onClose, bgColor, canClose = true }: FilterTagProps) => {
-  if (!show) return null;
-
-  return (
-    <FilterTagContainer bgColor={bgColor}>
-      {icon}
-      <span>{children}</span>
-      {canClose && (
-        <Icon onClick={onClose} name={ICON_NAME.close} className="close-icon" size="0.7rem" />
-      )}
-    </FilterTagContainer>
-  );
-};
-
 const AnalysisDashboardHeader = ({ project, user }: Props) => {
   const intl = useIntl();
   const { proposals: dataProposals } = project;
@@ -129,7 +104,7 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
   return (
     <AnalystDashboardHeaderContainer>
       {filtersShown.includes(DISTRICT) && (
-        <FilterContainer>
+        <AnalysisFilterContainer>
           <Collapsable>
             <Collapsable.Button>
               <FormattedMessage id="admin.fields.proposal.map.zone" />
@@ -164,11 +139,11 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
             show={parameters.filters.district !== 'ALL'}>
             {districts.find(d => d.id === parameters.filters.district)?.name || null}
           </FilterTag>
-        </FilterContainer>
+        </AnalysisFilterContainer>
       )}
 
       {filtersShown.includes(CATEGORY) && (
-        <FilterContainer>
+        <AnalysisFilterContainer>
           <Collapsable>
             <Collapsable.Button>
               <FormattedMessage id="admin.fields.proposal.category" />
@@ -203,11 +178,11 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
             show={parameters.filters.category !== 'ALL'}>
             {categories.find(d => d.id === parameters.filters.category)?.name || null}
           </FilterTag>
-        </FilterContainer>
+        </AnalysisFilterContainer>
       )}
 
       {filtersShown.includes(ANALYST) && (
-        <FilterContainer>
+        <AnalysisFilterContainer>
           <Collapsable>
             <Collapsable.Button>
               <FormattedMessage id="panel.analysis.subtitle" />
@@ -229,11 +204,11 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
               </SearchableDropdownSelect>
             </Collapsable.Element>
           </Collapsable>
-        </FilterContainer>
+        </AnalysisFilterContainer>
       )}
 
       {filtersShown.includes(SUPERVISOR) && (
-        <FilterContainer>
+        <AnalysisFilterContainer>
           <Collapsable>
             <Collapsable.Button>
               <FormattedMessage id="global.review" />
@@ -255,11 +230,11 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
               </SearchableDropdownSelect>
             </Collapsable.Element>
           </Collapsable>
-        </FilterContainer>
+        </AnalysisFilterContainer>
       )}
 
       {filtersShown.includes(DECISION_MAKER) && (
-        <FilterContainer>
+        <AnalysisFilterContainer>
           <Collapsable align="right">
             <Collapsable.Button>
               <FormattedMessage id="global.decision" />
@@ -281,11 +256,11 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
               </SearchableDropdownSelect>
             </Collapsable.Element>
           </Collapsable>
-        </FilterContainer>
+        </AnalysisFilterContainer>
       )}
 
       {filtersShown.includes(SORT) && (
-        <FilterContainer>
+        <AnalysisFilterContainer>
           <Collapsable align="right">
             <Collapsable.Button>
               <FormattedMessage id="argument.sort.label" />
@@ -306,7 +281,7 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
               </DropdownSelect>
             </Collapsable.Element>
           </Collapsable>
-        </FilterContainer>
+        </AnalysisFilterContainer>
       )}
     </AnalystDashboardHeaderContainer>
   );

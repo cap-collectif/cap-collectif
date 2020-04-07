@@ -12,7 +12,7 @@ type StepStatusFilter = {|
   +id: Uuid,
   +color: ?string,
   +name: string,
-|}
+|};
 
 type StepFilter = {|
   +id: Uuid,
@@ -85,7 +85,7 @@ export const getFormattedStepsChoicesForProject = (
 
 export const getFormattedStatusesChoicesForProjectStep = (
   project: ProjectAdminProposals_project,
-  stepId: ?Uuid
+  stepId: ?Uuid,
 ): $ReadOnlyArray<StepStatusFilter> => {
   return ((project.steps
     .filter(Boolean)
@@ -100,7 +100,7 @@ export const getFormattedStatusesChoicesForProjectStep = (
           id: status.id,
           name: status.name,
           color: status.color,
-        }))
+        })),
       ],
       [],
     )
@@ -116,7 +116,7 @@ type AllFormattedChoicesReturn = {|
 
 export const getAllFormattedChoicesForProject = (
   project: ProjectAdminProposals_project,
-  stepId: ?Uuid
+  stepId: ?Uuid,
 ): AllFormattedChoicesReturn => ({
   categories: getFormattedCategoriesChoicesForProject(project),
   districts: getFormattedDistrictsChoicesForProject(project),

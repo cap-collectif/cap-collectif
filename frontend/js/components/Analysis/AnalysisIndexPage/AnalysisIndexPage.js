@@ -12,12 +12,12 @@ import AnalysisProjectPage, {
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage';
 import AnalysisHeader from '~/components/Analysis/AnalysisHeader/AnalysisHeader';
 import type { AnalysisProjectPageProposalsPaginatedQueryVariables } from '~relay/AnalysisProjectPageProposalsPaginatedQuery.graphql';
-import type { ParametersState } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
+import type { AnalysisProjectPageParameters } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import { useAnalysisProposalsContext } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 import { ORDER_BY } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 
 const createQueryVariables = (
-  parameters: ParametersState,
+  parameters: AnalysisProjectPageParameters,
 ): $Diff<AnalysisProjectPageProposalsPaginatedQueryVariables, { projectId: any }> => ({
   count: ANALYSIS_PROJECT_PROPOSALS_PAGINATION,
   cursor: null,

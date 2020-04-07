@@ -2,7 +2,7 @@
 
 exports[`<ProjectAdminProposals /> renders correctly when the project have proposals 1`] = `
 <Provider>
-  <ProjectAdminProposalsstyle__ProposalPickableListContainer>
+  <commonstyle__AnalysisPickableListContainer>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <InlineSelect
         onChange={[Function]}
@@ -41,6 +41,20 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           />
         </InlineSelect.Choice>
       </InlineSelect>
+      <ClearableInput
+        icon={
+          <i
+            className="cap cap-magnifier"
+          />
+        }
+        id="search"
+        initialValue={null}
+        name="search"
+        onClear={[Function]}
+        onSubmit={[Function]}
+        placeholder="global.menu.search"
+        type="text"
+      />
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}
@@ -48,7 +62,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
       onScrollToBottom={[Function]}
       useInfiniteScroll={true}
     >
-      <ProjectAdminProposals__ProposalListHeaderContainer>
+      <commonstyle__AnalysisProposalListHeaderContainer>
         <ProposalListHeader
           project={
             Object {
@@ -347,7 +361,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
             }
           }
         />
-      </ProjectAdminProposals__ProposalListHeaderContainer>
+      </commonstyle__AnalysisProposalListHeaderContainer>
       <PickableList.Body>
         <ProjectAdminProposalsstyle__ProposalListRow
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
@@ -360,7 +374,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               Ravalement de la façade de la bibliothèque municipale
             </a>
           </h2>
-          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowInformations>
             <p>
               #
               1
@@ -390,8 +404,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 En cours
               </ProjectAdminProposalsstyle__Label>
             </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-          </ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowMeta>
             <Tag
               icon="cap cap-marker-1 "
               size="10px"
@@ -404,7 +418,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
             >
               Politique
             </Tag>
-          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowMeta>
         </ProjectAdminProposalsstyle__ProposalListRow>
         <ProjectAdminProposalsstyle__ProposalListRow
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
@@ -417,7 +431,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               Renovation of the gymnasium
             </a>
           </h2>
-          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowInformations>
             <p>
               #
               12
@@ -447,8 +461,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 Approuvé
               </ProjectAdminProposalsstyle__Label>
             </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-          </ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowMeta>
             <Tag
               icon="cap cap-marker-1 "
               size="10px"
@@ -461,7 +475,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
             >
               Aménagement
             </Tag>
-          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowMeta>
         </ProjectAdminProposalsstyle__ProposalListRow>
         <ProjectAdminProposalsstyle__ProposalListRow
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
@@ -474,7 +488,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               Rénovation du gymnase
             </a>
           </h2>
-          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowInformations>
             <p>
               #
               2
@@ -504,8 +518,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 Approuvé
               </ProjectAdminProposalsstyle__Label>
             </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-          </ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowMeta>
             <Tag
               icon="cap cap-marker-1 "
               size="10px"
@@ -518,7 +532,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
             >
               Aménagement
             </Tag>
-          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowMeta>
         </ProjectAdminProposalsstyle__ProposalListRow>
         <ProjectAdminProposalsstyle__ProposalListRow
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
@@ -531,7 +545,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               Installation de bancs sur la place de la mairie
             </a>
           </h2>
-          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowInformations>
             <p>
               #
               3
@@ -561,8 +575,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 En cours
               </ProjectAdminProposalsstyle__Label>
             </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-          </ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowMeta>
             <Tag
               icon="cap cap-marker-1 "
               size="10px"
@@ -575,7 +589,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
             >
               Politique
             </Tag>
-          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowMeta>
         </ProjectAdminProposalsstyle__ProposalListRow>
         <ProjectAdminProposalsstyle__ProposalListRow
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
@@ -588,7 +602,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
             </a>
           </h2>
-          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowInformations>
             <p>
               #
               4
@@ -613,15 +627,15 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 Collecte des propositions
               </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
             </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-          </ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowMeta>
             <Tag
               icon="cap cap-marker-1 "
               size="10px"
             >
               Nord Saint-Martin
             </Tag>
-          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowMeta>
         </ProjectAdminProposalsstyle__ProposalListRow>
         <ProjectAdminProposalsstyle__ProposalListRow
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
@@ -634,7 +648,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               Proposition pas encore votable
             </a>
           </h2>
-          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowInformations>
             <p>
               #
               7
@@ -664,15 +678,15 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 En cours
               </ProjectAdminProposalsstyle__Label>
             </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-          </ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowMeta>
             <Tag
               icon="cap cap-marker-1 "
               size="10px"
             >
               Maurepas Patton
             </Tag>
-          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowMeta>
         </ProjectAdminProposalsstyle__ProposalListRow>
         <ProjectAdminProposalsstyle__ProposalListRow
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
@@ -685,7 +699,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               Proposition plus votable
             </a>
           </h2>
-          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowInformations>
             <p>
               #
               8
@@ -715,15 +729,15 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 En cours
               </ProjectAdminProposalsstyle__Label>
             </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-          </ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowMeta>
             <Tag
               icon="cap cap-marker-1 "
               size="10px"
             >
               Maurepas Patton
             </Tag>
-          </ProjectAdminProposalsstyle__ProposalListRowMeta>
+          </commonstyle__AnalysisProposalListRowMeta>
         </ProjectAdminProposalsstyle__ProposalListRow>
         <ProjectAdminProposalsstyle__ProposalListRow
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
@@ -736,7 +750,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               Test de publication avec accusé de réception
             </a>
           </h2>
-          <ProjectAdminProposalsstyle__ProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowInformations>
             <p>
               #
               1104
@@ -761,18 +775,18 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 Collecte des propositions
               </ProjectAdminProposalsstyle__ProposalVotableStepTitle>
             </ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
-          </ProjectAdminProposalsstyle__ProposalListRowInformations>
-          <ProjectAdminProposalsstyle__ProposalListRowMeta />
+          </commonstyle__AnalysisProposalListRowInformations>
+          <commonstyle__AnalysisProposalListRowMeta />
         </ProjectAdminProposalsstyle__ProposalListRow>
       </PickableList.Body>
     </PickableList>
-  </ProjectAdminProposalsstyle__ProposalPickableListContainer>
+  </commonstyle__AnalysisPickableListContainer>
 </Provider>
 `;
 
 exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when the project does not have any proposals 1`] = `
 <Provider>
-  <ProjectAdminProposalsstyle__ProposalPickableListContainer>
+  <commonstyle__AnalysisPickableListContainer>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
       <InlineSelect
         onChange={[Function]}
@@ -811,6 +825,20 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           />
         </InlineSelect.Choice>
       </InlineSelect>
+      <ClearableInput
+        icon={
+          <i
+            className="cap cap-magnifier"
+          />
+        }
+        id="search"
+        initialValue={null}
+        name="search"
+        onClear={[Function]}
+        onSubmit={[Function]}
+        placeholder="global.menu.search"
+        type="text"
+      />
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}
@@ -818,7 +846,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
       onScrollToBottom={[Function]}
       useInfiniteScroll={false}
     >
-      <ProjectAdminProposals__ProposalListHeaderContainer>
+      <commonstyle__AnalysisProposalListHeaderContainer>
         <ProposalListHeader
           project={
             Object {
@@ -875,18 +903,18 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
             }
           }
         />
-      </ProjectAdminProposals__ProposalListHeaderContainer>
+      </commonstyle__AnalysisProposalListHeaderContainer>
       <PickableList.Body>
-        <ProjectAdminProposalsstyle__ProposalListNoContributions>
-          <ProjectAdminProposalsstyle__NoContributionIcon />
+        <commonstyle__AnalysisProposalListNoContributions>
+          <commonstyle__AnalysisNoContributionIcon />
           <FormattedMessage
             id="global.no_proposals"
             tagName="p"
             values={Object {}}
           />
-        </ProjectAdminProposalsstyle__ProposalListNoContributions>
+        </commonstyle__AnalysisProposalListNoContributions>
       </PickableList.Body>
     </PickableList>
-  </ProjectAdminProposalsstyle__ProposalPickableListContainer>
+  </commonstyle__AnalysisPickableListContainer>
 </Provider>
 `;

@@ -18,6 +18,7 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
     min-width: ${CHECKBOX_CELL_WIDTH};
     max-width: ${CHECKBOX_CELL_WIDTH};
     width: ${CHECKBOX_CELL_WIDTH};
+    flex: none;
   }
 `;
 

@@ -1,16 +1,20 @@
 // @flow
 import * as React from 'react';
+import type { AnalysisProjectPageState, Filters } from './AnalysisProjectPage.reducer';
 import {
   type Action,
+  type AnalysisProjectPageParameters,
   createReducer,
-  type ParametersState,
+  ORDER_BY,
   type SortValues,
   STATE,
-  ORDER_BY,
 } from './AnalysisProjectPage.reducer';
-import type { Filters } from './AnalysisProjectPage.reducer';
+
+export type AnalysisProjectPageStatus = 'ready' | 'loading';
 
 const DEFAULT_SORT: SortValues = ORDER_BY.NEWEST;
+
+const DEFAULT_STATUS: AnalysisProjectPageStatus = 'ready';
 
 const DEFAULT_FILTERS: Filters = {
   state: STATE.ALL,
@@ -26,11 +30,13 @@ type ProviderProps = {|
 |};
 
 export type Context = {|
-  +parameters: ParametersState,
+  +status: AnalysisProjectPageStatus,
+  +parameters: AnalysisProjectPageParameters,
   +dispatch: Action => void,
 |};
 
 export const AnalysisProjectPageContext = React.createContext<Context>({
+  status: DEFAULT_STATUS,
   parameters: {
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,
@@ -50,17 +56,22 @@ export const useAnalysisProposalsContext = (): Context => {
 };
 
 export const AnalysisProposalsProvider = ({ children }: ProviderProps) => {
-  const [parameters, dispatch] = React.useReducer<ParametersState, Action>(createReducer, {
+  const [state, dispatch] = React.useReducer<AnalysisProjectPageState, Action>(createReducer, {
+    status: DEFAULT_STATUS,
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,
   });
 
   const context = React.useMemo(
     () => ({
-      parameters,
+      status: state.status,
+      parameters: {
+        sort: state.sort,
+        filters: state.filters,
+      },
       dispatch,
     }),
-    [parameters],
+    [state],
   );
 
   return (

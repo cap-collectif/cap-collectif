@@ -7,7 +7,7 @@ export type State = {
 };
 
 export type Action =
-  | { type: 'INITIALIZE_ROWS', payload: string[] }
+  | { type: 'INITIALIZE_ROWS', payload: { rowIds: string[], selectedRows: string[] } }
   | { type: 'SELECT_ROW', payload: string }
   | { type: 'DESELECT_ROW', payload: string }
   | { type: 'SELECT_ALL_ROWS' }
@@ -18,8 +18,8 @@ export const createReducer = (state: State, action: Action) => {
     case 'INITIALIZE_ROWS':
       return {
         ...state,
-        rows: action.payload.reduce((rowState, rowId) => {
-          rowState[rowId] = false;
+        rows: action.payload.rowIds.reduce((rowState, rowId) => {
+          rowState[rowId] = action.payload.selectedRows.includes(rowId);
           return rowState;
         }, {}),
       };

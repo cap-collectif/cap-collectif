@@ -3,10 +3,29 @@ import * as React from 'react';
 import {
   type Action,
   createReducer,
-  type ParametersState,
+  type ProjectAdminPageState,
   type SortValues,
 } from './ProjectAdminPage.reducer';
-import type { Filters } from '~/components/Admin/Project/ProjectAdminPage.reducer';
+import type {
+  Filters,
+  ProjectAdminPageParameters,
+} from '~/components/Admin/Project/ProjectAdminPage.reducer';
+
+export type ProjectAdminPageStatus = 'ready' | 'loading';
+
+type ProviderProps = {|
+  +children: React.Node,
+  +firstCollectStepId: ?string,
+|};
+
+export type Context = {|
+  +status: ProjectAdminPageStatus,
+  +parameters: ProjectAdminPageParameters,
+  +firstCollectStepId: ?string,
+  +dispatch: Action => void,
+|};
+
+const DEFAULT_STATUS: ProjectAdminPageStatus = 'ready';
 
 const DEFAULT_SORT: SortValues = 'newest';
 
@@ -19,18 +38,8 @@ const DEFAULT_FILTERS: Filters = {
   term: null,
 };
 
-type ProviderProps = {|
-  +children: React.Node,
-  +firstCollectStepId: ?string
-|};
-
-export type Context = {|
-  +parameters: ParametersState,
-  +firstCollectStepId: ?string,
-  +dispatch: Action => void,
-|};
-
 export const ProjectAdminPageContext = React.createContext<Context>({
+  status: DEFAULT_STATUS,
   parameters: {
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,
@@ -50,20 +59,25 @@ export const useProjectAdminProposalsContext = (): Context => {
 };
 
 export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: ProviderProps) => {
-  const [parameters, dispatch] = React.useReducer<ParametersState, Action>(createReducer, {
+  const [state, dispatch] = React.useReducer<ProjectAdminPageState, Action>(createReducer, {
+    status: DEFAULT_STATUS,
     sort: DEFAULT_SORT,
     filters: {
       ...DEFAULT_FILTERS,
-      step: firstCollectStepId
+      step: firstCollectStepId,
     },
   });
   const context = React.useMemo(
     () => ({
-      parameters,
+      status: state.status,
+      parameters: {
+        sort: state.sort,
+        filters: state.filters,
+      },
       firstCollectStepId,
       dispatch,
     }),
-    [parameters, firstCollectStepId],
+    [state, firstCollectStepId],
   );
   return (
     <ProjectAdminPageContext.Provider value={context}>{children}</ProjectAdminPageContext.Provider>

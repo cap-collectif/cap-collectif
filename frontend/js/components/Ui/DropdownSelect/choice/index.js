@@ -8,7 +8,7 @@ type Props = {|
   +isIndeterminate?: boolean,
   +disabled?: boolean,
   +className?: string,
-  +onClick?: (e: Event) => void,
+  +onClick?: (e: Event) => void | Promise<any>,
   +emitChange?: boolean,
   +value: string,
   +children: React.Node,

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
@@ -20,8 +19,18 @@ import type {
 } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import InlineSelect from '~ui/InlineSelect';
 import { getAllFormattedChoicesForProject } from '~/components/Admin/Project/ProjectAdminProposals.utils';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
-// import ClearableInput from '~ui/Form/Input/ClearableInput';
+import ClearableInput from '~ui/Form/Input/ClearableInput';
+import FilterTag from '~ui/Analysis/FilterTag';
+import {
+  AnalysisFilterContainer,
+  AnalysisNoContributionIcon,
+  AnalysisPickableListContainer,
+  AnalysisProposalListHeaderContainer,
+  AnalysisProposalListLoader,
+  AnalysisProposalListNoContributions,
+  AnalysisProposalListRowInformations,
+  AnalysisProposalListRowMeta,
+} from '~ui/Analysis/common.style';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -30,51 +39,14 @@ type Props = {|
   +project: ProjectAdminProposals_project,
 |};
 
-type FilterTagProps = {|
-  +children: React.Node,
-  +show: boolean,
-  +icon?: React.Node,
-  +bgColor?: string,
-  +canClose?: boolean,
-  +onClose?: () => void,
-|};
-
-const ProposalListHeaderContainer = styled(PickableList.Header)`
-  align-items: stretch;
-  & > * {
-    margin: 0 1.25rem 0 0;
-    justify-content: flex-start;
-    & p {
-      margin-bottom: 0;
-    }
-  }
-  & > p:first-of-type {
-    flex: 3;
-    align-self: center;
-  }
-`;
-
 const ProposalListLoader = () => (
-  <S.ProposalListLoader>
+  <AnalysisProposalListLoader>
     <Loader inline size={16} />
     <FormattedMessage id="synthesis.common.loading" />
-  </S.ProposalListLoader>
+  </AnalysisProposalListLoader>
 );
 
-const FilterTag = ({ children, show, icon, onClose, bgColor, canClose = true }: FilterTagProps) => {
-  if (!show) return null;
-  return (
-    <S.FilterTagContainer bgColor={bgColor}>
-      {icon}
-      <span>{children}</span>
-      {canClose && (
-        <Icon onClick={onClose} name={ICON_NAME.close} className="close-icon" size="0.7rem" />
-      )}
-    </S.FilterTagContainer>
-  );
-};
-
-const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_project }) => {
+const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
   const { categories, districts, steps, stepStatuses } = React.useMemo(
@@ -87,10 +59,10 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
     [parameters.filters.status, stepStatuses],
   );
 
-  const renderFilters = () => (
+  const renderFilters = (
     <React.Fragment>
-      <S.FilterContainer>
-        <Collapsable align="right">
+      <AnalysisFilterContainer>
+        <Collapsable align="right" key="zone-filter">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="admin.fields.proposal.map.zone" />
           </Collapsable.Button>
@@ -125,9 +97,9 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
           show={parameters.filters.district !== 'ALL'}>
           {districts.find(d => d.id === parameters.filters.district)?.name || null}
         </FilterTag>
-      </S.FilterContainer>
-      <S.FilterContainer>
-        <Collapsable align="right">
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right" key="category-filter">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="admin.fields.proposal.category" />
           </Collapsable.Button>
@@ -161,9 +133,9 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
           show={parameters.filters.category !== 'ALL'}>
           {categories.find(c => c.id === parameters.filters.category)?.name || null}
         </FilterTag>
-      </S.FilterContainer>
-      <S.FilterContainer>
-        <Collapsable align="right">
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right" key="status-filter">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
           </Collapsable.Button>
@@ -193,9 +165,9 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
           show={parameters.filters.status !== null}>
           {selectedStepStatus?.name || null}
         </FilterTag>
-      </S.FilterContainer>
-      <S.FilterContainer>
-        <Collapsable align="right">
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right" key="step-filter">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="admin.label.step" />
           </Collapsable.Button>
@@ -217,9 +189,9 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
         <FilterTag canClose={false} show={firstCollectStepId !== parameters.filters.step}>
           {steps.find(s => s.id === parameters.filters.step)?.title || null}
         </FilterTag>
-      </S.FilterContainer>
-      <S.FilterContainer>
-        <Collapsable align="right">
+      </AnalysisFilterContainer>
+      <AnalysisFilterContainer>
+        <Collapsable align="right" key="sort-filter">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="argument.sort.label" />
           </Collapsable.Button>
@@ -239,10 +211,9 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
             </DropdownSelect>
           </Collapsable.Element>
         </Collapsable>
-      </S.FilterContainer>
+      </AnalysisFilterContainer>
     </React.Fragment>
   );
-
   return (
     <React.Fragment>
       {selectedRows.length > 0 ? (
@@ -254,16 +225,13 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
               itemCount: selectedRows.length,
             }}
           />
-          <p>Action 1 quand select</p>
-          <p>Action 2 quand select</p>
-          <p>Action 3 quand select</p>
         </React.Fragment>
       ) : (
         <React.Fragment>
           <p>
             {rowsCount} <FormattedMessage id="global.proposals" />
           </p>
-          {renderFilters()}
+          {renderFilters}
         </React.Fragment>
       )}
     </React.Fragment>
@@ -272,12 +240,12 @@ const ProposalListHeader = ({ project }: { project: ProjectAdminProposals_projec
 
 export const ProjectAdminProposals = ({ project, relay }: Props) => {
   const { parameters, dispatch } = useProjectAdminProposalsContext();
-  // const intl = useIntl();
+  const intl = useIntl();
   const hasProposals = project.proposals?.totalCount > 0;
 
   return (
     <PickableList.Provider>
-      <S.ProposalPickableListContainer>
+      <AnalysisPickableListContainer>
         <S.ProjectAdminProposalsHeader>
           <InlineSelect
             value={parameters.filters.state}
@@ -300,8 +268,6 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
               <FormattedMessage id="project_download.label.trashed" />
             </InlineSelect.Choice>
           </InlineSelect>
-          {/* 
-          todo @Liinkiing fix me I'm causing _nonIterableRest error.
           <ClearableInput
             id="search"
             name="search"
@@ -321,7 +287,7 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
               }
             }}
             placeholder={intl.formatMessage({ id: 'global.menu.search' })}
-          /> */}
+          />
         </S.ProjectAdminProposalsHeader>
         <PickableList
           useInfiniteScroll={hasProposals}
@@ -330,9 +296,9 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
           }}
           hasMore={project.proposals?.pageInfo.hasNextPage}
           loader={<ProposalListLoader key="loader" />}>
-          <ProposalListHeaderContainer>
+          <AnalysisProposalListHeaderContainer>
             <ProposalListHeader project={project} />
-          </ProposalListHeaderContainer>
+          </AnalysisProposalListHeaderContainer>
           <PickableList.Body>
             {hasProposals ? (
               project.proposals?.edges
@@ -344,7 +310,7 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                     <h2>
                       <a href={proposal.adminUrl}>{proposal.title}</a>
                     </h2>
-                    <S.ProposalListRowInformations>
+                    <AnalysisProposalListRowInformations>
                       <p>
                         #{proposal.reference} • {proposal.author.username}
                         {proposal.publishedAt && (
@@ -370,8 +336,8 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                           <S.Label bsStyle={proposal.status.color}>{proposal.status.name}</S.Label>
                         )}
                       </S.ProposalListRowInformationsStepState>
-                    </S.ProposalListRowInformations>
-                    <S.ProposalListRowMeta>
+                    </AnalysisProposalListRowInformations>
+                    <AnalysisProposalListRowMeta>
                       {proposal.district && (
                         <Tag size="10px" icon="cap cap-marker-1 ">
                           {proposal.district.name}
@@ -382,18 +348,18 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                           {proposal.category.name}
                         </Tag>
                       )}
-                    </S.ProposalListRowMeta>
+                    </AnalysisProposalListRowMeta>
                   </S.ProposalListRow>
                 ))
             ) : (
-              <S.ProposalListNoContributions>
-                <S.NoContributionIcon />
+              <AnalysisProposalListNoContributions>
+                <AnalysisNoContributionIcon />
                 <FormattedMessage id="global.no_proposals" tagName="p" />
-              </S.ProposalListNoContributions>
+              </AnalysisProposalListNoContributions>
             )}
           </PickableList.Body>
         </PickableList>
-      </S.ProposalPickableListContainer>
+      </AnalysisPickableListContainer>
     </PickableList.Provider>
   );
 };
