@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\ProposalAnalysis:
+    attributes:
+        id:
+            groups: [ElasticsearchProposal]
+        updatedBy:
+            groups: [ElasticsearchProposal]
+        state:
+            groups: [ElasticsearchProposal]

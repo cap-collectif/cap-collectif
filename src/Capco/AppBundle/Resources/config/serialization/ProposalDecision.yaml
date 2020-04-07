@@ -1,0 +1,12 @@
+Capco\AppBundle\Entity\ProposalDecision:
+    attributes:
+        id:
+            groups: [ElasticsearchProposal]
+        getProposal:
+            type: object
+            serialized_name: proposal
+            groups: [ElasticsearchDecisionNestedProposal]
+        updatedBy:
+            groups: [ElasticsearchProposal]
+        state:
+            groups: [ElasticsearchProposal]

@@ -863,8 +863,9 @@ class Project implements IndexableInterface
 
     public function getFirstCollectStep(): ?CollectStep
     {
+        /** @var AbstractStep $step */
         foreach ($this->steps as $step) {
-            if ($step->getStep()->isCollectStep()) {
+            if ($step->getStep() && $step->getStep()->isCollectStep()) {
                 return $step->getStep();
             }
         }

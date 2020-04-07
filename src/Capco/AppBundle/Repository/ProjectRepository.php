@@ -2,15 +2,16 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\Query\Expr;
-use Doctrine\ORM\QueryBuilder;
-use Capco\AppBundle\Entity\Theme;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Project[]|null findAll()
@@ -76,8 +77,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
             ->andWhere('p.slug = :slug')
-            ->setParameter('slug', $slug)
-        ;
+            ->setParameter('slug', $slug);
 
         return $qb
             ->getQuery()
@@ -297,6 +297,54 @@ class ProjectRepository extends EntityRepository
             ->useQueryCache(true)
             ->useResultCache(true, 60)
             ->getArrayResult();
+    }
+
+    public function getAssignedProjects(User $user): array
+    {
+        /*
+         *  THE PURE SQL QUERY
+         *
+         *  SELECT DISTINCT(project.id) as id
+         *  FROM project
+         *  LEFT JOIN  project_abstractstep pa ON pa.project_id = project.id
+         *  LEFT JOIN  step ON step.id = pa.step_id
+         *  LEFT JOIN  proposal_form pf ON pf.step_id = step.id
+         *  LEFT JOIN proposal ON proposal.proposal_form_id = pf.id
+         *  LEFT JOIN proposal_supervisor supervisor ON supervisor.proposal_id = proposal.id
+         *  LEFT JOIN proposal_analyst analyst ON analyst.proposal_id = proposal.id
+         *  LEFT JOIN proposal_decision_maker decision_maker ON decision_maker.proposal_id = proposal.id
+         *  WHERE supervisor.supervisor_id ='user523'
+         *  OR  analyst.analyst_id ='user523'
+         *  OR  decision_maker.decision_maker_id ='user523';
+         */
+
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('id', 'id');
+
+        $query = $this->getEntityManager()
+            ->createNativeQuery(
+                'SELECT DISTINCT(project.id) as id
+                   FROM project
+                   LEFT JOIN  project_abstractstep pa ON pa.project_id = project.id
+                   LEFT JOIN  step ON step.id = pa.step_id
+                   LEFT JOIN  proposal_form pf ON pf.step_id = step.id
+                   LEFT JOIN proposal ON proposal.proposal_form_id = pf.id
+                   LEFT JOIN proposal_supervisor supervisor ON supervisor.proposal_id = proposal.id
+                   LEFT JOIN proposal_analyst analyst ON analyst.proposal_id = proposal.id
+                   LEFT JOIN proposal_decision_maker decision_maker ON decision_maker.proposal_id = proposal.id
+                   WHERE supervisor.supervisor_id = :userId
+                   OR  analyst.analyst_id = :userId
+                   OR  decision_maker.decision_maker_id = :userId',
+                $rsm
+            )
+            ->setParameter('userId', $user->getId());
+        $projectIds = $query->getResult();
+
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id IN (:projectIds)')
+            ->setParameter('projectIds', $projectIds)
+            ->getQuery()
+            ->getResult();
     }
 
     private function getUserProjectPublicQueryBuilder(User $user): QueryBuilder

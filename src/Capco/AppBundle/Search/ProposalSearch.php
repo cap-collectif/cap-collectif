@@ -10,7 +10,8 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Term;
-use Elastica\Result;
+use Elastica\Query\Terms;
+use Elastica\ResultSet;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ProposalSearch extends Search
@@ -27,10 +28,10 @@ class ProposalSearch extends Search
         'object',
         'object.std',
         'teaser',
-        'teaser.std'
+        'teaser.std',
     ];
 
-    private $proposalRepo;
+    private ProposalRepository $proposalRepo;
 
     public function __construct(Index $index, ProposalRepository $proposalRepo)
     {
@@ -46,8 +47,7 @@ class ProposalSearch extends Search
         int $seed,
         ?string $cursor,
         ?string $order = null
-    ): ElasticsearchPaginatedResult
-    {
+    ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
             $boolQuery,
@@ -85,7 +85,7 @@ class ProposalSearch extends Search
                         $order,
                         $providedFilters['collectStep'] ?? $providedFilters['selectionStep']
                     ),
-                    ['id' => new \stdClass()]
+                    ['id' => new \stdClass()],
                 ]);
             }
         }
@@ -152,22 +152,49 @@ class ProposalSearch extends Search
         return $order;
     }
 
-    public function searchProposalsVotesCount(array $ids, array $filterArray = []): array
-    {
+    public function searchProposalAssignedToViewer(
+        $projectId,
+        $viewerId,
+        array $providedFilters,
+        int $limit = 20,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
-        $filters = $this->getFilters($filterArray);
+        $filters = $this->getFilters($providedFilters);
         foreach ($filters as $key => $value) {
-            $boolQuery->addFilter(new Term([$key => ['value' => $value]]));
+            if ('proposalAnalysts.analyst.id' === $key) {
+                $term = new Terms($key, $value);
+            } else {
+                $term = new Term([$key => ['value' => $value]]);
+            }
+            $boolQuery->addFilter($term);
         }
-        $boolQuery->addFilter(new Query\Terms('id', $ids));
-        $query = new Query();
-        $query->setQuery($boolQuery);
-        $query->setSource(['id', 'votesCountByStep', 'votesCount'])->setSize(\count($ids));
+
+        $boolShouldQuery = new Query\BoolQuery();
+        $boolShouldQuery->addShould([
+            new Term(['proposalAnalyst.id' => ['value' => $viewerId]]),
+            new Term(['supervisor.id' => ['value' => $viewerId]]),
+            new Term(['decisionMaker.id' => ['value' => $viewerId]]),
+        ]);
+        $boolQuery->addFilter(new Term(['project.id' => ['value' => $projectId]]));
+        $boolQuery->addMust($boolShouldQuery);
+        $query = new Query($boolQuery);
+        $this->applyCursor($query, $cursor);
+        $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        return array_map(static function (Result $result) {
-            return $result->getData();
-        }, $resultSet->getResults());
+        $cursors = $this->getCursors($resultSet);
+
+        return $this->getData($cursors, $resultSet);
+    }
+
+    private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
+    {
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->proposalRepo, $response),
+            $cursors,
+            $response->getTotalHits()
+        );
     }
 
     private function getSort(string $order, string $stepId): array
@@ -198,9 +225,9 @@ class ProposalSearch extends Search
                     'votesCountByStep.count' => [
                         'order' => 'desc',
                         'nested_path' => 'votesCountByStep',
-                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]]
+                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
                     ],
-                    'createdAt' => ['order' => 'desc']
+                    'createdAt' => ['order' => 'desc'],
                 ];
 
             case 'least-votes':
@@ -208,26 +235,26 @@ class ProposalSearch extends Search
                     'votesCountByStep.count' => [
                         'order' => 'asc',
                         'nested_path' => 'votesCountByStep',
-                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]]
+                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
                     ],
-                    'createdAt' => ['order' => 'desc']
+                    'createdAt' => ['order' => 'desc'],
                 ];
 
             case 'comments':
                 return [
                     'commentsCount' => ['order' => 'desc'],
-                    'createdAt' => ['order' => 'desc']
+                    'createdAt' => ['order' => 'desc'],
                 ];
 
             case 'expensive':
                 return [
                     'estimation' => ['order' => 'desc'],
-                    'createdAt' => ['order' => 'desc']
+                    'createdAt' => ['order' => 'desc'],
                 ];
             case 'cheap':
                 return [
                     'estimation' => ['order' => 'asc'],
-                    'createdAt' => ['order' => 'desc']
+                    'createdAt' => ['order' => 'desc'],
                 ];
             default:
                 throw new \RuntimeException('Unknown order: ' . $order);
@@ -253,10 +280,12 @@ class ProposalSearch extends Search
         if (isset($providedFilters['step'])) {
             $globalId = GlobalId::fromGlobalId($providedFilters['step']);
             // A step wan either be a CollectStep or a SelectionStep.
-            if ($globalId['type'] === 'CollectStep') {
+            if ('CollectStep' === $globalId['type']) {
                 $filters['step.id'] = $globalId['id'];
-            } else if ($globalId['type'] === 'SelectionStep') {
-                $filters['selections.step.id'] = $globalId['id'];
+            } else {
+                if ('SelectionStep' === $globalId['type']) {
+                    $filters['selections.step.id'] = $globalId['id'];
+                }
             }
         }
 
@@ -293,6 +322,15 @@ class ProposalSearch extends Search
         }
         if (isset($providedFilters['includeDraft']) && true === $providedFilters['includeDraft']) {
             unset($filters['draft'], $filters['published']);
+        }
+        if (isset($providedFilters['analysts'])) {
+            $filters['proposalAnalysts.analyst.id'] = $providedFilters['analysts'];
+        }
+        if (isset($providedFilters['supervisor'])) {
+            $filters['supervisor.id'] = $providedFilters['supervisor'];
+        }
+        if (isset($providedFilters['decisionMaker'])) {
+            $filters['decisionMaker.id'] = $providedFilters['decisionMaker'];
         }
 
         if (isset($providedFilters['state'])) {

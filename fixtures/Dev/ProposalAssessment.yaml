@@ -2,7 +2,6 @@ Capco\AppBundle\Entity\ProposalAssessment:
     proposalAssessment1:
         id: 'proposalAssessment1'
         __construct: ['@proposal109']
-        proposal: '@proposal109'
         updatedBy: '@userSupervisor'
         state: 'IN_PROGRESS'
         body: null
@@ -13,7 +12,6 @@ Capco\AppBundle\Entity\ProposalAssessment:
     proposalAssessment2:
         id: 'proposalAssessment2'
         __construct: ['@proposal111']
-        proposal: '@proposal111'
         updatedBy: '@userSupervisor2'
         state: 'IN_PROGRESS'
         body: "Après étude de la proposition, mon avis s'avère être favorable la concernant."
@@ -24,7 +22,6 @@ Capco\AppBundle\Entity\ProposalAssessment:
     proposalAssessment3:
         id: 'proposalAssessment3'
         __construct: ['@proposal113']
-        proposal: '@proposal113'
         updatedBy: '@userSupervisor2'
         state: 'FAVOURABLE'
         body: "Je suis favorable à la proposition, l'idée me semble réalisable et tout à fait réaliste."
@@ -35,7 +32,6 @@ Capco\AppBundle\Entity\ProposalAssessment:
     proposalAssessment4:
         id: 'proposalAssessment4'
         __construct: ['@proposal114']
-        proposal: '@proposal114'
         updatedBy: '@userSupervisor2'
         state: 'IN_PROGRESS'
         body: "Je n'ai pas encore fini de rédiger mon avis, c'est donc en cours."
@@ -46,7 +42,6 @@ Capco\AppBundle\Entity\ProposalAssessment:
     proposalAssessment5:
         id: 'proposalAssessment5'
         __construct: ['@proposal112']
-        proposal: '@proposal112'
         updatedBy: '@userSupervisor2'
         state: 'FAVOURABLE'
         body: 'Je trouve cette proposition très intéressante.'
@@ -57,7 +52,6 @@ Capco\AppBundle\Entity\ProposalAssessment:
     proposalAssessment6:
         id: 'proposalAssessment6'
         __construct: ['@proposal110']
-        proposal: '@proposal110'
         updatedBy: '@userDecisionMaker'
         state: 'UNFAVOURABLE'
         body: 'Je trouve cette proposition pas très intéressante.'
@@ -93,3 +87,43 @@ Capco\AppBundle\Entity\ProposalAssessment:
         officialResponse: "Nous ne pouvons vraiment pas accepter votre proposition d'association."
         createdAt: <(new \DateTime('2020-01-01 00:00:12'))>
         updatedAt: $createdAt
+    proposalAssessment7:
+        id: 'proposalAssessment7'
+        __construct: ['@assignedProposals121']
+        updatedBy: '@userSupervisor'
+        state: 'IN_PROGRESS'
+        body: 'I think, this proposal is a good .../.'
+        estimatedCost: null
+        officialResponse: null
+        createdAt: <(new \DateTime('2020-01-01 00:00:12'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:00:12'))>
+    proposalAssessment8:
+        id: 'proposalAssessment8'
+        __construct: ['@assignedProposals122']
+        updatedBy: '@userSupervisor'
+        state: 'IN_PROGRESS'
+        body: 'I m not able to juge this proposal'
+        estimatedCost: null
+        officialResponse: null
+        createdAt: <(new \DateTime('2020-01-01 00:00:13'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:00:13'))>
+    proposalAssessment9:
+        id: 'proposalAssessment9'
+        __construct: ['@assignedProposals123']
+        updatedBy: '@userSupervisor'
+        state: 'UNFAVOURABLE'
+        body: 'The worst proposal ever'
+        estimatedCost: null
+        officialResponse: null
+        createdAt: <(new \DateTime('2020-01-01 00:00:14'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:00:14'))>
+    proposalAssessment10:
+        id: 'proposalAssessment10'
+        __construct: ['@assignedProposals124']
+        updatedBy: '@userSupervisor'
+        state: 'FAVOURABLE'
+        body: 'It ok'
+        estimatedCost: null
+        officialResponse: null
+        createdAt: <(new \DateTime('2020-01-01 00:00:15'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:00:15'))>

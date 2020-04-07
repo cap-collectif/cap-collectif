@@ -379,3 +379,8 @@ InternalQuery:
                         description: 'type of the legal instance'
                 type: 'APIEnterpriseDocuments'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\APIEnterprise\\AutoCompleteDocQueryResolver", [args])'
+            viewerAssignedProjectsToAnalyse:
+                description: 'Fetch projects with assignment'
+                access: "@=hasRole('ROLE_USER')"
+                type: '[InternalProject!]'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryViewerAssignedProjectsToAnalyseQueryResolver", [args, getUser()])'

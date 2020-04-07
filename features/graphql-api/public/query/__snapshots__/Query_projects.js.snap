@@ -8,11 +8,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 1,
+            "totalCount": 12,
           },
-          "contributionsCount": 1,
+          "contributionsCount": 12,
           "contributors": Object {
-            "totalCount": 1,
+            "totalCount": 2,
           },
           "cover": Object {
             "url": "https://capco.test/media/default/0001/01/providerReference45.jpg",
@@ -46,14 +46,14 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 6,
+            "totalCount": 11,
           },
-          "contributionsCount": 6,
+          "contributionsCount": 11,
           "contributors": Object {
             "totalCount": 1,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0Mjc=",
+          "id": "UHJvamVjdDpwcm9qZWN0QW5hbHlzZQ==",
           "title": "Project Analyse",
           "votes": Object {
             "totalCount": 0,
@@ -830,10 +830,10 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 6,
+            "totalCount": 11,
           },
-          "contributionsCount": 6,
-          "id": "UHJvamVjdDpwcm9qZWN0Mjc=",
+          "contributionsCount": 11,
+          "id": "UHJvamVjdDpwcm9qZWN0QW5hbHlzZQ==",
           "publishedAt": "2019-12-10 00:00:00",
           "title": "Project Analyse",
         },
@@ -854,9 +854,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
         "node": Object {
           "contributions": Object {
-            "totalCount": 1,
+            "totalCount": 12,
           },
-          "contributionsCount": 1,
+          "contributionsCount": 12,
           "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
           "publishedAt": "2020-03-16 12:00:00",
           "title": "Solidarité Covid-19",
@@ -880,11 +880,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 1,
+            "totalCount": 12,
           },
-          "contributionsCount": 1,
+          "contributionsCount": 12,
           "contributors": Object {
-            "totalCount": 1,
+            "totalCount": 2,
           },
           "cover": Object {
             "url": "https://capco.test/media/default/0001/01/providerReference45.jpg",
@@ -918,14 +918,14 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 6,
+            "totalCount": 11,
           },
-          "contributionsCount": 6,
+          "contributionsCount": 11,
           "contributors": Object {
             "totalCount": 1,
           },
           "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0Mjc=",
+          "id": "UHJvamVjdDpwcm9qZWN0QW5hbHlzZQ==",
           "title": "Project Analyse",
           "votes": Object {
             "totalCount": 0,

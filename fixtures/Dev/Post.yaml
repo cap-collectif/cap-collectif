@@ -73,7 +73,7 @@ Capco\AppBundle\Entity\Post:
         Authors:
             - '@userSupervisor2'
         themes: ['@theme1']
-        projects: ['@project27']
+        projects: ['@projectAnalyse']
         proposals: ['@proposal113']
 
     post18:
@@ -85,7 +85,7 @@ Capco\AppBundle\Entity\Post:
         Authors:
             - '@userSupervisor2'
         themes: ['@theme1']
-        projects: ['@project27']
+        projects: ['@projectAnalyse']
         proposals: ['@proposal115']
 
     post19:
@@ -97,7 +97,7 @@ Capco\AppBundle\Entity\Post:
         Authors:
             - '@userSupervisor2'
         themes: ['@theme1']
-        projects: ['@project27']
+        projects: ['@projectAnalyse']
         proposals: ['@proposal109']
 
     post20:

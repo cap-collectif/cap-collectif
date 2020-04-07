@@ -2,18 +2,18 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Doctrine\ORM\QueryBuilder;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Doctrine\ORM\Query\ResultSetMapping;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalRepository extends EntityRepository
 {
@@ -115,7 +115,7 @@ class ProposalRepository extends EntityRepository
             } else {
                 $proposalsWithStep[$collectStep->getId()] = [
                     'step' => $collectStep,
-                    'proposals' => [$result]
+                    'proposals' => [$result],
                 ];
             }
         }
@@ -301,7 +301,6 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'f')
             ->andWhere('f.step = :step')
             ->setParameter('step', $step)
-
             ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
 
@@ -635,6 +634,70 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function findByProposalIds(array $proposalIds = []): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id IN (:proposals)')
+            ->setParameter('proposals', $proposalIds)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAssignedProposalsByProject(
+        Project $project,
+        User $viewer,
+        int $first = 0,
+        int $limit = 10
+    ): Paginator {
+        $qb = $this->getQueryProposalWithProject()
+            ->distinct()
+            ->leftJoin('p.proposalAnalysts', 'analysts')
+            ->leftJoin('p.decisionMaker', 'decisionMaker')
+            ->leftJoin('p.supervisor', 'supervisor')
+            ->andWhere('pas.project = :project');
+        $qb
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        'analysts.analyst = :viewer',
+                        'decisionMaker.decisionMaker = :viewer',
+                        'supervisor.supervisor = :viewer'
+                    )
+            )
+            ->setParameter('project', $project)
+            ->setParameter('viewer', $viewer)
+            ->setFirstResult($first)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb);
+    }
+
+    public function countAssignedProposalsByProject(Project $project, User $viewer): int
+    {
+        /** @var QueryBuilder $qb */
+        $qb = $this->getQueryProposalWithProject()
+            ->select('COUNT(DISTINCT(p.id))')
+            ->leftJoin('p.proposalAnalysts', 'analysts')
+            ->leftJoin('p.decisionMaker', 'decisionMaker')
+            ->leftJoin('p.supervisor', 'supervisor')
+            ->andWhere('pas.project = :project');
+        $qb
+            ->andWhere(
+                $qb
+                    ->expr()
+                    ->orX(
+                        'analysts.analyst = :viewer',
+                        'decisionMaker.decisionMaker = :viewer',
+                        'supervisor.supervisor = :viewer'
+                    )
+            )
+            ->setParameter('project', $project)
+            ->setParameter('viewer', $viewer);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
@@ -642,6 +705,14 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.trashedAt IS NULL')
             ->andWhere($alias . '.deletedAt IS NULL')
             ->andWhere($alias . '.published = true');
+    }
+
+    protected function getQueryProposalWithProject(): QueryBuilder
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('pf.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pas');
     }
 
     // This return the query used to retrieve all the proposals of an author the logged user can see.
@@ -728,7 +799,7 @@ class ProposalRepository extends EntityRepository
             )
             ->setParameters([
                 ':author' => $author,
-                ':collectStep' => $this->_em->getClassMetadata(CollectStep::class)
+                ':collectStep' => $this->_em->getClassMetadata(CollectStep::class),
             ]);
 
         return $qb;
@@ -758,14 +829,5 @@ class ProposalRepository extends EntityRepository
             ->andWhere('userGroup.user = :user')
             ->setParameter('form', $form)
             ->setParameter('user', $user);
-    }
-
-    public function findByProposalIds(array $proposalIds = []): array
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.id IN (:proposals)')
-            ->setParameter('proposals', $proposalIds)
-            ->getQuery()
-            ->getResult();
     }
 }

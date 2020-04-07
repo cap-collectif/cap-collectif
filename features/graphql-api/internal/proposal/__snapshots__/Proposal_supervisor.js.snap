@@ -68,6 +68,56 @@ Object {
             "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
           },
         },
+        Object {
+          "node": Object {
+            "assessment": null,
+            "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjU=",
+          },
+        },
+        Object {
+          "node": Object {
+            "assessment": Object {
+              "body": "It ok",
+              "estimatedCost": null,
+              "officialResponse": null,
+              "state": "FAVOURABLE",
+            },
+            "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjQ=",
+          },
+        },
+        Object {
+          "node": Object {
+            "assessment": Object {
+              "body": "The worst proposal ever",
+              "estimatedCost": null,
+              "officialResponse": null,
+              "state": "UNFAVOURABLE",
+            },
+            "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjM=",
+          },
+        },
+        Object {
+          "node": Object {
+            "assessment": Object {
+              "body": "I m not able to juge this proposal",
+              "estimatedCost": null,
+              "officialResponse": null,
+              "state": "IN_PROGRESS",
+            },
+            "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjI=",
+          },
+        },
+        Object {
+          "node": Object {
+            "assessment": Object {
+              "body": "I think, this proposal is a good .../.",
+              "estimatedCost": null,
+              "officialResponse": null,
+              "state": "IN_PROGRESS",
+            },
+            "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+          },
+        },
       ],
     },
   },

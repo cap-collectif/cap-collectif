@@ -272,8 +272,8 @@ Capco\AppBundle\Entity\Project:
         publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
         locale: '@locale_francais'
         visibility: 2
-    project27:
-        id: 'project27'
+    projectAnalyse:
+        id: 'projectAnalyse'
         title: 'Project Analyse'
         projectType: '@projectType4'
         themes: []

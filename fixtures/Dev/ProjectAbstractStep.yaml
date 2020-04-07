@@ -292,12 +292,12 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     pas56:
         id: pas56
         step: '@collectstep13'
-        project: '@project27'
+        project: '@projectAnalyse'
         position: 1
     pas57:
         id: pas57
         step: '@selectionstep9'
-        project: '@project27'
+        project: '@projectAnalyse'
         position: 2
     pasIdf1:
         id: pasIdf1

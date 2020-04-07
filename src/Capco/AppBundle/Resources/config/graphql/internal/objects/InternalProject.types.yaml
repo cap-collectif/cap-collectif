@@ -134,3 +134,18 @@ InternalProject:
             locale:
                 type: 'Locale'
                 description: 'the locale for the project, if any'
+            viewerAssignedProposals:
+                type: 'InternalProposalConnection!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectViewerAssignedProposalsResolver", [value, args, getUser()])'
+                argsBuilder: 'Relay::Connection'
+                description: 'Get all assigned proposals of the viewer.'
+                access: "@=hasRole('ROLE_USER')"
+                args:
+                    district:
+                        type: 'ID'
+                    analysts:
+                        type: '[ID!]'
+                    supervisor:
+                        type: 'ID'
+                    decisionMaker:
+                        type: 'ID'

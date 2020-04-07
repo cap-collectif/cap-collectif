@@ -87,3 +87,39 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         createdAt: <(new \DateTime('2020-01-01 00:00:18'))>
         updatedAt: $createdAt
         comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
+    proposalAnalysis3:
+        updatedBy: '@userSupervisor'
+        proposal: '@assignedProposals121'
+        state: IN_PROGRESS
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        updatedAt: $createdAt
+    proposalAnalysis4:
+        updatedBy: '@userAnalyst'
+        proposal: '@assignedProposals122'
+        state: FAVOURABLE
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        updatedAt: $createdAt
+    proposalAnalysis5:
+        updatedBy: '@userAnalyst'
+        proposal: '@assignedProposals123'
+        state: UNFAVOURABLE
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        updatedAt: $createdAt
+    proposalAnalysis6:
+        updatedBy: '@userAnalyst'
+        proposal: '@assignedProposals124'
+        state: NONE
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        updatedAt: $createdAt
+    proposalAnalysis7:
+        updatedBy: '@userSupervisor2'
+        proposal: '@assignedProposals121'
+        state: FAVOURABLE
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        updatedAt: $createdAt
+    proposalAnalysis8:
+        updatedBy: '@userAnalyst'
+        proposal: '@assignedProposals121'
+        state: IN_PROGRESS
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        updatedAt: $createdAt

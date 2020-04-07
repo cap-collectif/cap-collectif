@@ -37,12 +37,12 @@ Capco\AppBundle\Entity\ProposalSupervisor:
     proposalSupervisorIdf2:
         __construct: ['@proposalIdf2', '@userMaximeQA']
         assignedBy: '@user4'
-        createdAt: <identity((new \DateTime('2020-01-01 00:00:02')))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:01')))>
         updatedAt: $createdAt
     proposalSupervisorIdf3:
         __construct: ['@proposalIdf3', '@userMaximeQA']
         assignedBy: '@user4'
-        createdAt: <identity((new \DateTime('2020-01-01 00:00:03')))>
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:01')))>
         updatedAt: $createdAt
     proposalSupervisorIdf4:
         __construct: ['@proposalIdf4', '@userSpyl']
@@ -58,4 +58,29 @@ Capco\AppBundle\Entity\ProposalSupervisor:
         __construct: ['@proposalIdf6', '@userSpyl']
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
+        updatedAt: $createdAt
+    proposalSupervisor7:
+        __construct: ['@assignedProposals121', '@userSupervisor']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:00:13')))>
+        updatedAt: $createdAt
+    proposalSupervisor8:
+        __construct: ['@assignedProposals122', '@userSupervisor']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:00:14')))>
+        updatedAt: $createdAt
+    proposalSupervisor9:
+        __construct: ['@assignedProposals123', '@userSupervisor']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:00:15')))>
+        updatedAt: $createdAt
+    proposalSupervisor10:
+        __construct: ['@assignedProposals124', '@userSupervisor']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:00:16')))>
+        updatedAt: $createdAt
+    proposalSupervisor11:
+        __construct: ['@assignedProposals125', '@userSupervisor']
+        assignedBy: '@userJean'
+        createdAt: <identity((new \DateTime('2019-01-01 00:00:17')))>
         updatedAt: $createdAt

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Resolver\Event;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
-use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -13,16 +12,13 @@ use Psr\Log\LoggerInterface;
 
 class EventParticipantsResolver implements ResolverInterface
 {
-    private $userRepository;
     private $eventRegistrationRepository;
     private $logger;
 
     public function __construct(
-        UserRepository $userRepository,
         EventRegistrationRepository $eventRegistrationRepository,
         LoggerInterface $logger
     ) {
-        $this->userRepository = $userRepository;
         $this->eventRegistrationRepository = $eventRegistrationRepository;
         $this->logger = $logger;
     }

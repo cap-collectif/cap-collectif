@@ -62,3 +62,15 @@ Capco\AppBundle\Entity\Proposal:
       groups: [ElasticsearchCommentNestedProposal, ElasticsearchProposalNestedProject]
     published:
       groups: [ElasticsearchProposal]
+    proposalAnalysts:
+      groups: [ElasticsearchProposal]
+    supervisor:
+      groups: [ElasticsearchProposal]
+    decisionMaker:
+      groups: [ElasticsearchProposal]
+    analyses:
+      groups: [ElasticsearchProposal]
+    assessment:
+      groups: [ElasticsearchProposal]
+    decision:
+      groups: [ElasticsearchProposal]
