@@ -10,6 +10,7 @@ Capco\AppBundle\Entity\AnalysisConfiguration:
         moveToSelectionStep: '@selectionstep9'
         createdAt: <(new \DateTime('2015-01-01 02:00:00'))>
         updatedAt: $createdAt
+        body: 'Donner une définition de la sémantique semble pertinent avant de commencer cet article qui va traiter de la sémantique appliquée aux moteurs de recherche et à Google plus particulièrement  ! La sémantique est définie comme”une branche de la linguistique qui étudie les signifiés, ce dont on parle, ce que l’on veut énoncer. Sa branche symétrique, la syntaxe, concerne pour sa part le signifiant, sa forme, sa langue, sa graphie, sa grammaire…“. Pour son étymologie, le mot sémantique “est dérivé du grec σημαντικός (sêmantikos), « signifié » lui-même formé à partir de σημαίνω (sêmainô), « signifier, indiquer » ou σῆμα (sêma), « signe, marque ». Il a été repris à la fin du XIX e siècle par le linguiste français Michel Bréal, auteur du premier traité de sémantique”.'
     analysisConfigurationIdf:
         id: analysisConfigurationIdf
         proposalForm: '@proposalformIdf'
@@ -21,3 +22,18 @@ Capco\AppBundle\Entity\AnalysisConfiguration:
         moveToSelectionStep: '@selectionStepIdfVote'
         createdAt: <(new \DateTime('2020-01-01 02:00:00'))>
         updatedAt: $createdAt
+        body:
+            'Commençons cette nouvelle année par la présentation d’un outil mais très performant. le QQOQC(C)P !
+
+            Le QQOQCCP (Quoi, Qui, Où, Quand, Comment, Combien, Pourquoi), appelé aussi méthode du questionnement est un outil d’aide à la résolution de problèmes comportant une liste quasi exhaustive d’informations sur la situation.
+
+            Très simple d’utilisation, le QQOQCCP s’utilise également dans diverses configurations telles que l’élaboration d’un nouveau processus ou encore la mise en place d’actions correctives.
+
+            La méthode QQOQCCP : Quoi, Qui, Où, Quand, Comment, Combien, Pourquoi,  est un outil adaptable à diverses problématiques permettant la récolte d’informations précises et exhaustives d’une situation et d’en mesurer le niveau de connaissance que l’on possède. Elle s’intègre parfaitement dans diverses démarches permettant entres autres :
+
+            de définir un processus ou de rédiger une procédure
+            de préparer un rapport
+            de donner les lignes directrices pour le lancement d’un plan d’action (PDCA)
+            d’élaborer un diagnostic
+            de déployer un 5S
+            d’animer un brainstorming'

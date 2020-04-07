@@ -50,10 +50,12 @@ const AnalysisProjectPage = ({ project, relay }: Props) => {
     <AnalysisProjectPageContainer>
       <div>
         <h2>{project.title}</h2>
-        <BodyInfos
-          body="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores debitis deserunt distinctio doloribus enim et excepturi id illo illum impedit magni, nulla, odio perferendis quas ratione. Adipisci, minus, repudiandae. Accusamus amet asperiores aut commodi, consectetur dolor explicabo facere harum hic id ipsum iste laboriosam maxime nam natus praesentium quod rem, vero voluptate voluptatem. Blanditiis consectetur distinctio hic laboriosam quisquam reiciendis rem voluptatibus? Autem, nihil, odit! Accusamus consectetur corporis dignissimos dolor dolorum eaque error et fuga hic id impedit iure laudantium maxime nesciunt nisi nostrum numquam obcaecati officiis omnis perferendis placeat porro, possimus provident qui quod rem reprehenderit sapiente sequi sint totam ut vitae voluptas voluptate. A aperiam, cum dolor dolorem exercitationem expedita impedit, ipsa iste laboriosam minus sed tenetur ut voluptatem? Cumque eos nemo quae quia quibusdam quidem repellat suscipit voluptate voluptatibus. Ad adipisci consectetur, corporis deleniti deserunt harum illum itaque laudantium natus officia placeat quidem, quod quos repellendus sint tempora voluptate. A architecto cum dignissimos distinctio, dolor dolore esse laudantium nemo nisi, quia quibusdam quo repellat similique? Debitis ipsam quidem sunt. Commodi consectetur cum eligendi harum itaque nam, quod sed. Adipisci asperiores assumenda commodi, expedita facere maxime nisi nostrum odit officia quidem quo sapiente voluptate voluptates? Ipsa quas, vitae."
-          maxLines={5}
-        />
+        {project.firstCollectStep?.form?.analysisConfiguration?.body && (
+          <BodyInfos
+            body={project.firstCollectStep?.form?.analysisConfiguration?.body}
+            maxLines={5}
+          />
+        )}
       </div>
 
       <InlineSelect
@@ -125,6 +127,13 @@ export default createPaginationContainer(
         ) {
         id
         title
+        firstCollectStep {
+          form {
+            analysisConfiguration {
+              body
+            }
+          }
+        }
         sortedProposals: proposals(
           first: $count
           after: $cursor

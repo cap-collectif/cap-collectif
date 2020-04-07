@@ -36,3 +36,6 @@ InternalAnalysisConfiguration:
             updatedAt:
                 type: 'DateTime'
                 description: 'The last update date.'
+            body:
+                type: 'HTML'
+                description: 'A text to explain the analysis process.'

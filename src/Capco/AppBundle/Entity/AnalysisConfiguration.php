@@ -2,15 +2,16 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Timestampable\Timestampable;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Timestampable;
+use Capco\AppBundle\Traits\TextableTrait;
+use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AnalysisConfigurationRepository")
@@ -20,6 +21,7 @@ class AnalysisConfiguration implements Timestampable
 {
     use TimestampableTrait;
     use UuidTrait;
+    use TextableTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="analysisConfiguration")

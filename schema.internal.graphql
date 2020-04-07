@@ -477,6 +477,9 @@ type AnalysisConfiguration {
 
   """The last update date."""
   updatedAt: DateTime
+
+  """A text to explain the analysis process."""
+  body: HTML
 }
 
 """A contribution"""
@@ -5199,6 +5202,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """Slug of a project"""
   slug: String!
   video: String
+
+  """Identifies the first collect step of the project, if any."""
+  firstCollectStep: CollectStep
 
   """Identifies the first analysis step of the project, if any."""
   firstAnalysisStep: ProposalStep

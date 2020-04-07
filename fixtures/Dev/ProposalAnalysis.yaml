@@ -30,14 +30,14 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:12'))>
         updatedAt: $createdAt
-        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysisIdf1Jpec:
         updatedBy: '@userJpec'
         proposal: '@proposalIdf1'
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:13'))>
         updatedAt: $createdAt
-        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysisIdf1Omar:
         updatedBy: '@userOmar'
         proposal: '@proposalIdf1'
@@ -72,18 +72,18 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:16'))>
         updatedAt: $createdAt
-        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysisIdf3Maxime:
         updatedBy: '@userMaxime'
         proposal: '@proposalIdf3'
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:17'))>
         updatedAt: $createdAt
-        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'
     proposalAnalysisIdf3Mickael:
         updatedBy: '@userMickael'
         proposal: '@proposalIdf3'
         state: UNFAVOURABLE
         createdAt: <(new \DateTime('2020-01-01 00:00:18'))>
         updatedAt: $createdAt
-        comment: "NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL"
+        comment: 'NUL NUL NUL NUL NUL NUL NUL NUL NUL NUL'

@@ -1,488 +1,491 @@
 Capco\AppBundle\Entity\Responses\ValueResponse:
-  #  TODO rename response to valueResponse
-  response1:
-    question: '@simplequestion1'
-    proposal: '@proposal1'
-    value: souhaitable
-  response2:
-    question: '@simplequestion3'
-    proposal: '@proposal1'
-    value: '250 000 €'
-  response3:
-    question: '@simplequestion1'
-    proposal: '@proposal2'
-    value: souhaitable
-  response4:
-    question: '@simplequestion3'
-    proposal: '@proposal2'
-    value: 1 million !
-  response5:
-    question: '@simplequestion3'
-    proposal: '@proposal3'
-    value: réponse obligatoire
-  response6:
-    question: '@simplequestion3'
-    proposal: '@proposal4'
-    value: réponse obligatoire
-  response7:
-    question: '@simplequestion3'
-    proposal: '@proposal5'
-    value: réponse obligatoire
-  response8:
-    question: '@simplequestion3'
-    proposal: '@proposal6'
-    value: réponse obligatoire
-  response9:
-    question: '@simplequestion2'
-    reply: '@reply1'
-    value: Trop bien ! On va voir de supers athlètes à Paris !
-  response10:
-    question: '@multiplequestion1'
-    reply: '@reply1'
-    value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Guild Wars 2' }
-  response11:
-    question: '@simplequestion2'
-    reply: '@reply2'
-    value: Youpi ! J'adore des JO
-  response12:
-    question: '@multiplequestion1'
-    reply: '@reply2'
-    value: { 'labels': ['Natation', 'Sports collectifs'], 'other': 'Civilization 6' }
-  response13:
-    question: '@multiplequestion2'
-    reply: '@reply2'
-    value: { 'labels': ['Maxime Arrouard'], 'other': null }
-  response14:
-    question: '@simplequestion8'
-    proposalEvaluation: '@proposalEvaluation1'
-    value: Cette proposition me parait inadaptée.
-  response15:
-    question: '@simplequestion9'
-    proposalEvaluation: '@proposalEvaluation1'
-    value: Cette évaluation est effectivement utile, mais ce n'est clairement pas prioritaire.
-  response16:
-    question: '@multiplequestion9'
-    proposalEvaluation: '@proposalEvaluation1'
-    value:
-      { 'labels': ['Incohérente', 'Que de la publicité (mensongère en plus !)'], 'other': null }
-  response17:
-    question: '@multiplequestion10'
-    proposalEvaluation: '@proposalEvaluation1'
-    value: { 'labels': ['Je dis oui'], 'other': null }
-  response18:
-    question: '@simplequestion8'
-    proposalEvaluation: '@proposalEvaluation2'
-    value: Cette proposition est top.
-  response19:
-    question: '@simplequestion9'
-    proposalEvaluation: '@proposalEvaluation2'
-    value: Cette évaluation est hyper utile, à accepter.
-  response20:
-    question: '@multiplequestion9'
-    proposalEvaluation: '@proposalEvaluation2'
-    value: { 'labels': ['Incohérente'], 'other': null }
-  response21:
-    question: '@multiplequestion10'
-    proposalEvaluation: '@proposalEvaluation2'
-    value: { 'labels': ['Je dis non'], 'other': null }
-  response22:
-    question: '@multiplequestion11'
-    proposalEvaluation: '@proposalEvaluation2'
-    value: { 'labels': ['Réalisable', 'Importante', 'Compréhensible'], 'other': null }
-  response22-bis:
-    question: '@multiplequestion11'
-    proposalEvaluation: '@proposalEvaluation3'
-    value: { 'labels': ['Réalisable', 'Compréhensible', 'Importante'], 'other': null }
-  response23:
-    question: '@multiplequestion8'
-    proposalEvaluation: '@proposalEvaluation2'
-    value: { 'labels': [], 'other': 'Pas la folie tout ça…' }
-  response24:
-    question: '@simplequestion8'
-    proposalEvaluation: '@proposalEvaluation3'
-    value: Proposition que ma femme approuve ... Pas moi.
-  response25:
-    question: '@simplequestion9'
-    proposalEvaluation: '@proposalEvaluation3'
-    value: Que dire de plus ?
-  response26:
-    question: '@multiplequestion9'
-    proposalEvaluation: '@proposalEvaluation3'
-    value:
-      {
-        'labels': ["C'est de la diffamation !", 'Que de la publicité (mensongère en plus !)'],
-        'other': null,
-      }
-  response27:
-    question: '@multiplequestion10'
-    proposalEvaluation: '@proposalEvaluation3'
-    value: { 'labels': ["J'ai rien compris"], 'other': null }
-  response28:
-    question: '@multiplequestion1'
-    reply: '@reply5'
-    value: { 'labels': ['Natation'], 'other': null }
-  response29:
-    question: '@simplequestion6'
-    value: 'Champ obligatoire inscription'
-    user: '@user666'
-  response30:
-    question: '@simplequestion7'
-    value: 'Champ non obligatoire inscription'
-    user: '@user666'
-  response31:
-    question: '@multiplequestion5'
-    value: 'Sangohan'
-    user: '@user666'
-  response32:
-    question: '@simplequestion2'
-    reply: '@reply7'
-    value: Trop cool ! On va voir Tibo qui cours en slip !
-  response33:
-    question: '@multiplequestion3'
-    reply: '@reply2'
-    value: 'Assez fort (Mon sonotone est mal réglé)'
-  response34:
-    question: '@multiplequestion6'
-    reply: '@reply2'
-    value: { 'labels': ['Logo 1'], 'other': null }
-  response35:
-    question: '@multiplequestion3'
-    reply: '@reply6'
-    value: 'Pas assez fort (Mon sonotone est en panne)'
-  response36:
-    question: '@multiplequestion7'
-    reply: '@reply7'
-    value: { 'labels': ['Oui'], 'other': null }
-  response37:
-    question: '@multiplequestion8'
-    reply: '@reply2'
-    value: { 'labels': ['Au top'], 'other': null }
-  response38:
-    question: '@multiplequestion7'
-    reply: '@reply2'
-    value: { 'labels': ['Il bluffe'], 'other': null }
-  response39:
-    question: '@multiplequestion8'
-    reply: '@reply6'
-    value: { 'labels': ['Incohérente'], 'other': null }
-  response40:
-    question: '@multiplequestion8'
-    reply: '@reply7'
-    value: { 'labels': ['Au top'], 'other': null }
-  response41:
-    question: '@simplequestion14'
-    reply: '@reply8'
-    value: 'secret'
-  response42:
-    question: '@simplequestion1'
-    proposal: '@proposal12'
-    value: pas souhaitable
-  response43:
-    question: '@simplequestion3'
-    proposal: '@proposal12'
-    value: 3 millions !
-  response44:
-    question: '@simplequestion1'
-    proposal: '@proposal106'
-    value: souhaitable
-  response45:
-    question: '@simplequestion3'
-    proposal: '@proposal106'
-    value: '250 000 €'
-  response46:
-    question: '@multiplequestion7'
-    proposal: '@proposal12'
-    reply: '@reply2'
-    value: { 'labels': ['Il bluffe'], 'other': null }
+    #  TODO rename response to valueResponse
+    response1:
+        question: '@simplequestion1'
+        proposal: '@proposal1'
+        value: souhaitable
+    response2:
+        question: '@simplequestion3'
+        proposal: '@proposal1'
+        value: '250 000 €'
+    response3:
+        question: '@simplequestion1'
+        proposal: '@proposal2'
+        value: souhaitable
+    response4:
+        question: '@simplequestion3'
+        proposal: '@proposal2'
+        value: 1 million !
+    response5:
+        question: '@simplequestion3'
+        proposal: '@proposal3'
+        value: réponse obligatoire
+    response6:
+        question: '@simplequestion3'
+        proposal: '@proposal4'
+        value: réponse obligatoire
+    response7:
+        question: '@simplequestion3'
+        proposal: '@proposal5'
+        value: réponse obligatoire
+    response8:
+        question: '@simplequestion3'
+        proposal: '@proposal6'
+        value: réponse obligatoire
+    response9:
+        question: '@simplequestion2'
+        reply: '@reply1'
+        value: Trop bien ! On va voir de supers athlètes à Paris !
+    response10:
+        question: '@multiplequestion1'
+        reply: '@reply1'
+        value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': 'Guild Wars 2' }
+    response11:
+        question: '@simplequestion2'
+        reply: '@reply2'
+        value: Youpi ! J'adore des JO
+    response12:
+        question: '@multiplequestion1'
+        reply: '@reply2'
+        value: { 'labels': ['Natation', 'Sports collectifs'], 'other': 'Civilization 6' }
+    response13:
+        question: '@multiplequestion2'
+        reply: '@reply2'
+        value: { 'labels': ['Maxime Arrouard'], 'other': null }
+    response14:
+        question: '@simplequestion8'
+        proposalEvaluation: '@proposalEvaluation1'
+        value: Cette proposition me parait inadaptée.
+    response15:
+        question: '@simplequestion9'
+        proposalEvaluation: '@proposalEvaluation1'
+        value: Cette évaluation est effectivement utile, mais ce n'est clairement pas prioritaire.
+    response16:
+        question: '@multiplequestion9'
+        proposalEvaluation: '@proposalEvaluation1'
+        value:
+            {
+                'labels': ['Incohérente', 'Que de la publicité (mensongère en plus !)'],
+                'other': null,
+            }
+    response17:
+        question: '@multiplequestion10'
+        proposalEvaluation: '@proposalEvaluation1'
+        value: { 'labels': ['Je dis oui'], 'other': null }
+    response18:
+        question: '@simplequestion8'
+        proposalEvaluation: '@proposalEvaluation2'
+        value: Cette proposition est top.
+    response19:
+        question: '@simplequestion9'
+        proposalEvaluation: '@proposalEvaluation2'
+        value: Cette évaluation est hyper utile, à accepter.
+    response20:
+        question: '@multiplequestion9'
+        proposalEvaluation: '@proposalEvaluation2'
+        value: { 'labels': ['Incohérente'], 'other': null }
+    response21:
+        question: '@multiplequestion10'
+        proposalEvaluation: '@proposalEvaluation2'
+        value: { 'labels': ['Je dis non'], 'other': null }
+    response22:
+        question: '@multiplequestion11'
+        proposalEvaluation: '@proposalEvaluation2'
+        value: { 'labels': ['Réalisable', 'Importante', 'Compréhensible'], 'other': null }
+    response22-bis:
+        question: '@multiplequestion11'
+        proposalEvaluation: '@proposalEvaluation3'
+        value: { 'labels': ['Réalisable', 'Compréhensible', 'Importante'], 'other': null }
+    response23:
+        question: '@multiplequestion8'
+        proposalEvaluation: '@proposalEvaluation2'
+        value: { 'labels': [], 'other': 'Pas la folie tout ça…' }
+    response24:
+        question: '@simplequestion8'
+        proposalEvaluation: '@proposalEvaluation3'
+        value: Proposition que ma femme approuve ... Pas moi.
+    response25:
+        question: '@simplequestion9'
+        proposalEvaluation: '@proposalEvaluation3'
+        value: Que dire de plus ?
+    response26:
+        question: '@multiplequestion9'
+        proposalEvaluation: '@proposalEvaluation3'
+        value:
+            {
+                'labels':
+                    ["C'est de la diffamation !", 'Que de la publicité (mensongère en plus !)'],
+                'other': null,
+            }
+    response27:
+        question: '@multiplequestion10'
+        proposalEvaluation: '@proposalEvaluation3'
+        value: { 'labels': ["J'ai rien compris"], 'other': null }
+    response28:
+        question: '@multiplequestion1'
+        reply: '@reply5'
+        value: { 'labels': ['Natation'], 'other': null }
+    response29:
+        question: '@simplequestion6'
+        value: 'Champ obligatoire inscription'
+        user: '@user666'
+    response30:
+        question: '@simplequestion7'
+        value: 'Champ non obligatoire inscription'
+        user: '@user666'
+    response31:
+        question: '@multiplequestion5'
+        value: 'Sangohan'
+        user: '@user666'
+    response32:
+        question: '@simplequestion2'
+        reply: '@reply7'
+        value: Trop cool ! On va voir Tibo qui cours en slip !
+    response33:
+        question: '@multiplequestion3'
+        reply: '@reply2'
+        value: 'Assez fort (Mon sonotone est mal réglé)'
+    response34:
+        question: '@multiplequestion6'
+        reply: '@reply2'
+        value: { 'labels': ['Logo 1'], 'other': null }
+    response35:
+        question: '@multiplequestion3'
+        reply: '@reply6'
+        value: 'Pas assez fort (Mon sonotone est en panne)'
+    response36:
+        question: '@multiplequestion7'
+        reply: '@reply7'
+        value: { 'labels': ['Oui'], 'other': null }
+    response37:
+        question: '@multiplequestion8'
+        reply: '@reply2'
+        value: { 'labels': ['Au top'], 'other': null }
+    response38:
+        question: '@multiplequestion7'
+        reply: '@reply2'
+        value: { 'labels': ['Il bluffe'], 'other': null }
+    response39:
+        question: '@multiplequestion8'
+        reply: '@reply6'
+        value: { 'labels': ['Incohérente'], 'other': null }
+    response40:
+        question: '@multiplequestion8'
+        reply: '@reply7'
+        value: { 'labels': ['Au top'], 'other': null }
+    response41:
+        question: '@simplequestion14'
+        reply: '@reply8'
+        value: 'secret'
+    response42:
+        question: '@simplequestion1'
+        proposal: '@proposal12'
+        value: pas souhaitable
+    response43:
+        question: '@simplequestion3'
+        proposal: '@proposal12'
+        value: 3 millions !
+    response44:
+        question: '@simplequestion1'
+        proposal: '@proposal106'
+        value: souhaitable
+    response45:
+        question: '@simplequestion3'
+        proposal: '@proposal106'
+        value: '250 000 €'
+    response46:
+        question: '@multiplequestion7'
+        proposal: '@proposal12'
+        reply: '@reply2'
+        value: { 'labels': ['Il bluffe'], 'other': null }
 
-  response1IdfProposal1:
-    question: '@multiplequestionIdfGrandOrLocal'
-    proposal: '@proposalIdf1'
-    value: 'Renseigner la présentation de mon Grand Projet'
-  response2IdfProposal1:
-    question: '@multiplequestionIdfGrandProjet1'
-    proposal: '@proposalIdf1'
-    value: 'Un autre organisme privé'
-  response1IdfProposal2:
-    question: '@multiplequestionIdfGrandOrLocal'
-    proposal: '@proposalIdf2'
-    value: 'Déposer un Projet Local'
-  response2IdfProposal2:
-    question: '@multiplequestionIdfProjetLocal1'
-    proposal: '@proposalIdf2'
-    value: 'Une association'
-  response3IdfProposal3:
-    question: '@multiplequestionIdfProjetLocalAssociation1'
-    proposal: '@proposalIdf2'
-    value: 'J’ai un numéro SIRET'
-  response1IdfProposal3:
-    question: '@multiplequestionIdfGrandOrLocal'
-    proposal: '@proposalIdf3'
-    value: 'Déposer un Projet Local'
-  response2IdfProposal3:
-    question: '@multiplequestionIdfProjetLocal1'
-    proposal: '@proposalIdf3'
-    value: 'Une entreprise'
+    response1IdfProposal1:
+        question: '@multiplequestionIdfGrandOrLocal'
+        proposal: '@proposalIdf1'
+        value: 'Renseigner la présentation de mon Grand Projet'
+    response2IdfProposal1:
+        question: '@multiplequestionIdfGrandProjet1'
+        proposal: '@proposalIdf1'
+        value: 'Un autre organisme privé'
+    response1IdfProposal2:
+        question: '@multiplequestionIdfGrandOrLocal'
+        proposal: '@proposalIdf2'
+        value: 'Déposer un Projet Local'
+    response2IdfProposal2:
+        question: '@multiplequestionIdfProjetLocal1'
+        proposal: '@proposalIdf2'
+        value: 'Une association'
+    response3IdfProposal3:
+        question: '@multiplequestionIdfProjetLocalAssociation1'
+        proposal: '@proposalIdf2'
+        value: 'J’ai un numéro SIRET'
+    response1IdfProposal3:
+        question: '@multiplequestionIdfGrandOrLocal'
+        proposal: '@proposalIdf3'
+        value: 'Déposer un Projet Local'
+    response2IdfProposal3:
+        question: '@multiplequestionIdfProjetLocal1'
+        proposal: '@proposalIdf3'
+        value: 'Une entreprise'
 
+    response1IdfProposal1EvalAgui:
+        question: '@multiplequestionEvalIdf1'
+        analysis: '@proposalAnalysisIdf1Agui'
+        value: 'Oui'
+    response2IdfProposal1EvalAgui:
+        question: '@multiplequestionEvalIdf2'
+        analysis: '@proposalAnalysisIdf1Agui'
+        value: 'Oui'
+    response3IdfProposal1EvalAgui:
+        question: '@multiplequestionEvalIdf3'
+        analysis: '@proposalAnalysisIdf1Agui'
+        value: 'Oui'
+    response4IdfProposal1EvalAgui:
+        question: '@multiplequestionEvalIdf4'
+        analysis: '@proposalAnalysisIdf1Agui'
+        value: 'Oui'
+    response5IdfProposal1EvalAgui:
+        question: '@multiplequestionEvalIdf5'
+        analysis: '@proposalAnalysisIdf1Agui'
+        value: 'Oui'
+    response6IdfProposal1EvalAgui:
+        question: '@multiplequestionEvalIdf6'
+        analysis: '@proposalAnalysisIdf1Agui'
+        value: 'Oui'
+    response7IdfProposal1EvalAgui:
+        question: '@simplequestionIdfEval1'
+        analysis: '@proposalAnalysisIdf1Agui'
+        value: "Pas d'observations, à part que c'est merveilleux."
+    response8IdfProposal1EvalAgui:
+        question: '@simplequestionIdfEval2'
+        analysis: '@proposalAnalysisIdf1Agui'
+        value: 100
 
-  response1IdfProposal1EvalAgui:
-    question: '@multiplequestionEvalIdf1'
-    analysis: '@proposalAnalysisIdf1Agui'
-    value: 'Oui'
-  response2IdfProposal1EvalAgui:
-    question: '@multiplequestionEvalIdf2'
-    analysis: '@proposalAnalysisIdf1Agui'
-    value: 'Oui'
-  response3IdfProposal1EvalAgui:
-    question: '@multiplequestionEvalIdf3'
-    analysis: '@proposalAnalysisIdf1Agui'
-    value: 'Oui'
-  response4IdfProposal1EvalAgui:
-    question: '@multiplequestionEvalIdf4'
-    analysis: '@proposalAnalysisIdf1Agui'
-    value: 'Oui'
-  response5IdfProposal1EvalAgui:
-    question: '@multiplequestionEvalIdf5'
-    analysis: '@proposalAnalysisIdf1Agui'
-    value: 'Oui'
-  response6IdfProposal1EvalAgui:
-    question: '@multiplequestionEvalIdf6'
-    analysis: '@proposalAnalysisIdf1Agui'
-    value: 'Oui'
-  response7IdfProposal1EvalAgui:
-    question: '@simplequestionIdfEval1'
-    analysis: '@proposalAnalysisIdf1Agui'
-    value: "Pas d'observations, à part que c'est merveilleux."
-  response8IdfProposal1EvalAgui:
-    question: '@simplequestionIdfEval2'
-    analysis: '@proposalAnalysisIdf1Agui'
-    value: 100
+    response1IdfProposal1EvalVinc:
+        question: '@multiplequestionEvalIdf1'
+        analysis: '@proposalAnalysisIdf1Vinc'
+        value: 'Oui'
+    response2IdfProposal1EvalVinc:
+        question: '@multiplequestionEvalIdf2'
+        analysis: '@proposalAnalysisIdf1Vinc'
+        value: 'Oui'
+    response3IdfProposal1EvalVinc:
+        question: '@multiplequestionEvalIdf3'
+        analysis: '@proposalAnalysisIdf1Vinc'
+        value: 'Oui'
+    response4IdfProposal1EvalVinc:
+        question: '@multiplequestionEvalIdf4'
+        analysis: '@proposalAnalysisIdf1Vinc'
+        value: 'Oui'
+    response5IdfProposal1EvalVinc:
+        question: '@multiplequestionEvalIdf5'
+        analysis: '@proposalAnalysisIdf1Vinc'
+        value: 'Oui'
+    response6IdfProposal1EvalVinc:
+        question: '@multiplequestionEvalIdf6'
+        analysis: '@proposalAnalysisIdf1Vinc'
+        value: 'Oui'
+    response7IdfProposal1EvalVinc:
+        question: '@simplequestionIdfEval1'
+        analysis: '@proposalAnalysisIdf1Vinc'
+        value: "Pas d'observations, à part que c'est merveilleux."
+    response8IdfProposal1EvalVinc:
+        question: '@simplequestionIdfEval2'
+        analysis: '@proposalAnalysisIdf1Vinc'
+        value: 100
 
-  response1IdfProposal1EvalVinc:
-    question: '@multiplequestionEvalIdf1'
-    analysis: '@proposalAnalysisIdf1Vinc'
-    value: 'Oui'
-  response2IdfProposal1EvalVinc:
-    question: '@multiplequestionEvalIdf2'
-    analysis: '@proposalAnalysisIdf1Vinc'
-    value: 'Oui'
-  response3IdfProposal1EvalVinc:
-    question: '@multiplequestionEvalIdf3'
-    analysis: '@proposalAnalysisIdf1Vinc'
-    value: 'Oui'
-  response4IdfProposal1EvalVinc:
-    question: '@multiplequestionEvalIdf4'
-    analysis: '@proposalAnalysisIdf1Vinc'
-    value: 'Oui'
-  response5IdfProposal1EvalVinc:
-    question: '@multiplequestionEvalIdf5'
-    analysis: '@proposalAnalysisIdf1Vinc'
-    value: 'Oui'
-  response6IdfProposal1EvalVinc:
-    question: '@multiplequestionEvalIdf6'
-    analysis: '@proposalAnalysisIdf1Vinc'
-    value: 'Oui'
-  response7IdfProposal1EvalVinc:
-    question: '@simplequestionIdfEval1'
-    analysis: '@proposalAnalysisIdf1Vinc'
-    value: "Pas d'observations, à part que c'est merveilleux."
-  response8IdfProposal1EvalVinc:
-    question: '@simplequestionIdfEval2'
-    analysis: '@proposalAnalysisIdf1Vinc'
-    value: 100
+    response1IdfProposal1EvalJpec:
+        question: '@multiplequestionEvalIdf1'
+        analysis: '@proposalAnalysisIdf1Jpec'
+        value: 'Oui'
+    response2IdfProposal1EvalJpec:
+        question: '@multiplequestionEvalIdf2'
+        analysis: '@proposalAnalysisIdf1Jpec'
+        value: 'Oui'
+    response3IdfProposal1EvalJpec:
+        question: '@multiplequestionEvalIdf3'
+        analysis: '@proposalAnalysisIdf1Jpec'
+        value: 'Oui'
+    response4IdfProposal1EvalJpec:
+        question: '@multiplequestionEvalIdf4'
+        analysis: '@proposalAnalysisIdf1Jpec'
+        value: 'Oui'
+    response5IdfProposal1EvalJpec:
+        question: '@multiplequestionEvalIdf5'
+        analysis: '@proposalAnalysisIdf1Jpec'
+        value: 'Oui'
+    response6IdfProposal1EvalJpec:
+        question: '@multiplequestionEvalIdf6'
+        analysis: '@proposalAnalysisIdf1Jpec'
+        value: 'Oui'
+    response7IdfProposal1EvalJpec:
+        question: '@simplequestionIdfEval1'
+        analysis: '@proposalAnalysisIdf1Jpec'
+        value: "Pas d'observations, à part que c'est merveilleux."
+    response8IdfProposal1EvalJpec:
+        question: '@simplequestionIdfEval2'
+        analysis: '@proposalAnalysisIdf1Jpec'
+        value: 100
 
-  response1IdfProposal1EvalJpec:
-    question: '@multiplequestionEvalIdf1'
-    analysis: '@proposalAnalysisIdf1Jpec'
-    value: 'Oui'
-  response2IdfProposal1EvalJpec:
-    question: '@multiplequestionEvalIdf2'
-    analysis: '@proposalAnalysisIdf1Jpec'
-    value: 'Oui'
-  response3IdfProposal1EvalJpec:
-    question: '@multiplequestionEvalIdf3'
-    analysis: '@proposalAnalysisIdf1Jpec'
-    value: 'Oui'
-  response4IdfProposal1EvalJpec:
-    question: '@multiplequestionEvalIdf4'
-    analysis: '@proposalAnalysisIdf1Jpec'
-    value: 'Oui'
-  response5IdfProposal1EvalJpec:
-    question: '@multiplequestionEvalIdf5'
-    analysis: '@proposalAnalysisIdf1Jpec'
-    value: 'Oui'
-  response6IdfProposal1EvalJpec:
-    question: '@multiplequestionEvalIdf6'
-    analysis: '@proposalAnalysisIdf1Jpec'
-    value: 'Oui'
-  response7IdfProposal1EvalJpec:
-    question: '@simplequestionIdfEval1'
-    analysis: '@proposalAnalysisIdf1Jpec'
-    value: "Pas d'observations, à part que c'est merveilleux."
-  response8IdfProposal1EvalJpec:
-    question: '@simplequestionIdfEval2'
-    analysis: '@proposalAnalysisIdf1Jpec'
-    value: 100
+    response1IdfProposal1EvalOmar:
+        question: '@multiplequestionEvalIdf1'
+        analysis: '@proposalAnalysisIdf1Omar'
+        value: 'Oui'
+    response2IdfProposal1EvalOmar:
+        question: '@multiplequestionEvalIdf2'
+        analysis: '@proposalAnalysisIdf1Omar'
+        value: 'Oui'
+    response3IdfProposal1EvalOmar:
+        question: '@multiplequestionEvalIdf3'
+        analysis: '@proposalAnalysisIdf1Omar'
+        value: 'Oui'
+    response4IdfProposal1EvalOmar:
+        question: '@multiplequestionEvalIdf4'
+        analysis: '@proposalAnalysisIdf1Omar'
+        value: 'Oui'
+    response5IdfProposal1EvalOmar:
+        question: '@multiplequestionEvalIdf5'
+        analysis: '@proposalAnalysisIdf1Omar'
+        value: 'Oui'
+    response6IdfProposal1EvalOmar:
+        question: '@multiplequestionEvalIdf6'
+        analysis: '@proposalAnalysisIdf1Omar'
+        value: 'Oui'
+    response7IdfProposal1EvalOmar:
+        question: '@simplequestionIdfEval1'
+        analysis: '@proposalAnalysisIdf1Omar'
+        value: "Pas d'observations, à part que c'est merveilleux."
+    response8IdfProposal1EvalOmar:
+        question: '@simplequestionIdfEval2'
+        analysis: '@proposalAnalysisIdf1Omar'
+        value: 100
 
-  response1IdfProposal1EvalOmar:
-    question: '@multiplequestionEvalIdf1'
-    analysis: '@proposalAnalysisIdf1Omar'
-    value: 'Oui'
-  response2IdfProposal1EvalOmar:
-    question: '@multiplequestionEvalIdf2'
-    analysis: '@proposalAnalysisIdf1Omar'
-    value: 'Oui'
-  response3IdfProposal1EvalOmar:
-    question: '@multiplequestionEvalIdf3'
-    analysis: '@proposalAnalysisIdf1Omar'
-    value: 'Oui'
-  response4IdfProposal1EvalOmar:
-    question: '@multiplequestionEvalIdf4'
-    analysis: '@proposalAnalysisIdf1Omar'
-    value: 'Oui'
-  response5IdfProposal1EvalOmar:
-    question: '@multiplequestionEvalIdf5'
-    analysis: '@proposalAnalysisIdf1Omar'
-    value: 'Oui'
-  response6IdfProposal1EvalOmar:
-    question: '@multiplequestionEvalIdf6'
-    analysis: '@proposalAnalysisIdf1Omar'
-    value: 'Oui'
-  response7IdfProposal1EvalOmar:
-    question: '@simplequestionIdfEval1'
-    analysis: '@proposalAnalysisIdf1Omar'
-    value: "Pas d'observations, à part que c'est merveilleux."
-  response8IdfProposal1EvalOmar:
-    question: '@simplequestionIdfEval2'
-    analysis: '@proposalAnalysisIdf1Omar'
-    value: 100
+    response1IdfProposal2EvalJpec:
+        question: '@multiplequestionEvalIdf1'
+        analysis: '@proposalAnalysisIdf2Jpec'
+        value: 'Oui'
+    response2IdfProposal2EvalJpec:
+        question: '@multiplequestionEvalIdf2'
+        analysis: '@proposalAnalysisIdf2Jpec'
+        value: 'Oui'
+    response3IdfProposal2EvalJpec:
+        question: '@multiplequestionEvalIdf3'
+        analysis: '@proposalAnalysisIdf2Jpec'
+        value: 'Oui'
+    response4IdfProposal2EvalJpec:
+        question: '@multiplequestionEvalIdf4'
+        analysis: '@proposalAnalysisIdf2Jpec'
+        value: 'Oui'
+    response5IdfProposal2EvalJpec:
+        question: '@multiplequestionEvalIdf5'
+        analysis: '@proposalAnalysisIdf2Jpec'
+        value: 'Oui'
+    response6IdfProposal2EvalJpec:
+        question: '@multiplequestionEvalIdf6'
+        analysis: '@proposalAnalysisIdf2Jpec'
+        value: 'Oui'
+    response7IdfProposal2EvalJpec:
+        question: '@simplequestionIdfEval1'
+        analysis: '@proposalAnalysisIdf2Jpec'
+        value: "Pas d'observations, à part que c'est merveilleux."
+    response8IdfProposal2EvalJpec:
+        question: '@simplequestionIdfEval2'
+        analysis: '@proposalAnalysisIdf2Jpec'
+        value: 100
 
-  response1IdfProposal2EvalJpec:
-    question: '@multiplequestionEvalIdf1'
-    analysis: '@proposalAnalysisIdf2Jpec'
-    value: 'Oui'
-  response2IdfProposal2EvalJpec:
-    question: '@multiplequestionEvalIdf2'
-    analysis: '@proposalAnalysisIdf2Jpec'
-    value: 'Oui'
-  response3IdfProposal2EvalJpec:
-    question: '@multiplequestionEvalIdf3'
-    analysis: '@proposalAnalysisIdf2Jpec'
-    value: 'Oui'
-  response4IdfProposal2EvalJpec:
-    question: '@multiplequestionEvalIdf4'
-    analysis: '@proposalAnalysisIdf2Jpec'
-    value: 'Oui'
-  response5IdfProposal2EvalJpec:
-    question: '@multiplequestionEvalIdf5'
-    analysis: '@proposalAnalysisIdf2Jpec'
-    value: 'Oui'
-  response6IdfProposal2EvalJpec:
-    question: '@multiplequestionEvalIdf6'
-    analysis: '@proposalAnalysisIdf2Jpec'
-    value: 'Oui'
-  response7IdfProposal2EvalJpec:
-    question: '@simplequestionIdfEval1'
-    analysis: '@proposalAnalysisIdf2Jpec'
-    value: "Pas d'observations, à part que c'est merveilleux."
-  response8IdfProposal2EvalJpec:
-    question: '@simplequestionIdfEval2'
-    analysis: '@proposalAnalysisIdf2Jpec'
-    value: 100
-
-  response1IdfProposal3EvalTheo:
-    question: '@multiplequestionEvalIdf1'
-    analysis: '@proposalAnalysisIdf3Theo'
-    value: 'Oui'
-  response2IdfProposal3EvalTheo:
-    question: '@multiplequestionEvalIdf2'
-    analysis: '@proposalAnalysisIdf3Theo'
-    value: 'Oui'
-  response3IdfProposal3EvalTheo:
-    question: '@multiplequestionEvalIdf3'
-    analysis: '@proposalAnalysisIdf3Theo'
-    value: 'Oui'
-  response4IdfProposal3EvalTheo:
-    question: '@multiplequestionEvalIdf4'
-    analysis: '@proposalAnalysisIdf3Theo'
-    value: 'Oui'
-  response5IdfProposal3EvalTheo:
-    question: '@multiplequestionEvalIdf5'
-    analysis: '@proposalAnalysisIdf3Theo'
-    value: 'Oui'
-  response6IdfProposal3EvalTheo:
-    question: '@multiplequestionEvalIdf6'
-    analysis: '@proposalAnalysisIdf3Theo'
-    value: 'Oui'
-  response7IdfProposal3EvalTheo:
-    question: '@simplequestionIdfEval1'
-    analysis: '@proposalAnalysisIdf3Theo'
-    value: "Pas d'observations, à part que c'est merveilleux."
-  response8IdfProposal3EvalTheo:
-    question: '@simplequestionIdfEval2'
-    analysis: '@proposalAnalysisIdf3Theo'
-    value: 100
-  response1IdfProposal3EvalMaxime:
-    question: '@multiplequestionEvalIdf1'
-    analysis: '@proposalAnalysisIdf3Maxime'
-    value: 'Oui'
-  response2IdfProposal3EvalMaxime:
-    question: '@multiplequestionEvalIdf2'
-    analysis: '@proposalAnalysisIdf3Maxime'
-    value: 'Oui'
-  response3IdfProposal3EvalMaxime:
-    question: '@multiplequestionEvalIdf3'
-    analysis: '@proposalAnalysisIdf3Maxime'
-    value: 'Oui'
-  response4IdfProposal3EvalMaxime:
-    question: '@multiplequestionEvalIdf4'
-    analysis: '@proposalAnalysisIdf3Maxime'
-    value: 'Oui'
-  response5IdfProposal3EvalMaxime:
-    question: '@multiplequestionEvalIdf5'
-    analysis: '@proposalAnalysisIdf3Maxime'
-    value: 'Oui'
-  response6IdfProposal3EvalMaxime:
-    question: '@multiplequestionEvalIdf6'
-    analysis: '@proposalAnalysisIdf3Maxime'
-    value: 'Oui'
-  response7IdfProposal3EvalMaxime:
-    question: '@simplequestionIdfEval1'
-    analysis: '@proposalAnalysisIdf3Maxime'
-    value: "Pas d'observations, à part que c'est merveilleux."
-  response8IdfProposal3EvalMaxime:
-    question: '@simplequestionIdfEval2'
-    analysis: '@proposalAnalysisIdf3Maxime'
-    value: 100
-  response1IdfProposal3EvalMickael:
-    question: '@multiplequestionEvalIdf1'
-    analysis: '@proposalAnalysisIdf3Mickael'
-    value: 'Oui'
-  response2IdfProposal3EvalMickael:
-    question: '@multiplequestionEvalIdf2'
-    analysis: '@proposalAnalysisIdf3Mickael'
-    value: 'Oui'
-  response3IdfProposal3EvalMickael:
-    question: '@multiplequestionEvalIdf3'
-    analysis: '@proposalAnalysisIdf3Mickael'
-    value: 'Oui'
-  response4IdfProposal3EvalMickael:
-    question: '@multiplequestionEvalIdf4'
-    analysis: '@proposalAnalysisIdf3Mickael'
-    value: 'Oui'
-  response5IdfProposal3EvalMickael:
-    question: '@multiplequestionEvalIdf5'
-    analysis: '@proposalAnalysisIdf3Mickael'
-    value: 'Oui'
-  response6IdfProposal3EvalMickael:
-    question: '@multiplequestionEvalIdf6'
-    analysis: '@proposalAnalysisIdf3Mickael'
-    value: 'Oui'
-  response7IdfProposal3EvalMickael:
-    question: '@simplequestionIdfEval1'
-    analysis: '@proposalAnalysisIdf3Mickael'
-    value: "Pas d'observations, à part que c'est merveilleux."
-  response8IdfProposal3EvalMickael:
-    question: '@simplequestionIdfEval2'
-    analysis: '@proposalAnalysisIdf3Mickael'
-    value: 100
+    response1IdfProposal3EvalTheo:
+        question: '@multiplequestionEvalIdf1'
+        analysis: '@proposalAnalysisIdf3Theo'
+        value: 'Oui'
+    response2IdfProposal3EvalTheo:
+        question: '@multiplequestionEvalIdf2'
+        analysis: '@proposalAnalysisIdf3Theo'
+        value: 'Oui'
+    response3IdfProposal3EvalTheo:
+        question: '@multiplequestionEvalIdf3'
+        analysis: '@proposalAnalysisIdf3Theo'
+        value: 'Oui'
+    response4IdfProposal3EvalTheo:
+        question: '@multiplequestionEvalIdf4'
+        analysis: '@proposalAnalysisIdf3Theo'
+        value: 'Oui'
+    response5IdfProposal3EvalTheo:
+        question: '@multiplequestionEvalIdf5'
+        analysis: '@proposalAnalysisIdf3Theo'
+        value: 'Oui'
+    response6IdfProposal3EvalTheo:
+        question: '@multiplequestionEvalIdf6'
+        analysis: '@proposalAnalysisIdf3Theo'
+        value: 'Oui'
+    response7IdfProposal3EvalTheo:
+        question: '@simplequestionIdfEval1'
+        analysis: '@proposalAnalysisIdf3Theo'
+        value: "Pas d'observations, à part que c'est merveilleux."
+    response8IdfProposal3EvalTheo:
+        question: '@simplequestionIdfEval2'
+        analysis: '@proposalAnalysisIdf3Theo'
+        value: 100
+    response1IdfProposal3EvalMaxime:
+        question: '@multiplequestionEvalIdf1'
+        analysis: '@proposalAnalysisIdf3Maxime'
+        value: 'Oui'
+    response2IdfProposal3EvalMaxime:
+        question: '@multiplequestionEvalIdf2'
+        analysis: '@proposalAnalysisIdf3Maxime'
+        value: 'Oui'
+    response3IdfProposal3EvalMaxime:
+        question: '@multiplequestionEvalIdf3'
+        analysis: '@proposalAnalysisIdf3Maxime'
+        value: 'Oui'
+    response4IdfProposal3EvalMaxime:
+        question: '@multiplequestionEvalIdf4'
+        analysis: '@proposalAnalysisIdf3Maxime'
+        value: 'Oui'
+    response5IdfProposal3EvalMaxime:
+        question: '@multiplequestionEvalIdf5'
+        analysis: '@proposalAnalysisIdf3Maxime'
+        value: 'Oui'
+    response6IdfProposal3EvalMaxime:
+        question: '@multiplequestionEvalIdf6'
+        analysis: '@proposalAnalysisIdf3Maxime'
+        value: 'Oui'
+    response7IdfProposal3EvalMaxime:
+        question: '@simplequestionIdfEval1'
+        analysis: '@proposalAnalysisIdf3Maxime'
+        value: "Pas d'observations, à part que c'est merveilleux."
+    response8IdfProposal3EvalMaxime:
+        question: '@simplequestionIdfEval2'
+        analysis: '@proposalAnalysisIdf3Maxime'
+        value: 100
+    response1IdfProposal3EvalMickael:
+        question: '@multiplequestionEvalIdf1'
+        analysis: '@proposalAnalysisIdf3Mickael'
+        value: 'Oui'
+    response2IdfProposal3EvalMickael:
+        question: '@multiplequestionEvalIdf2'
+        analysis: '@proposalAnalysisIdf3Mickael'
+        value: 'Oui'
+    response3IdfProposal3EvalMickael:
+        question: '@multiplequestionEvalIdf3'
+        analysis: '@proposalAnalysisIdf3Mickael'
+        value: 'Oui'
+    response4IdfProposal3EvalMickael:
+        question: '@multiplequestionEvalIdf4'
+        analysis: '@proposalAnalysisIdf3Mickael'
+        value: 'Oui'
+    response5IdfProposal3EvalMickael:
+        question: '@multiplequestionEvalIdf5'
+        analysis: '@proposalAnalysisIdf3Mickael'
+        value: 'Oui'
+    response6IdfProposal3EvalMickael:
+        question: '@multiplequestionEvalIdf6'
+        analysis: '@proposalAnalysisIdf3Mickael'
+        value: 'Oui'
+    response7IdfProposal3EvalMickael:
+        question: '@simplequestionIdfEval1'
+        analysis: '@proposalAnalysisIdf3Mickael'
+        value: "Pas d'observations, à part que c'est merveilleux."
+    response8IdfProposal3EvalMickael:
+        question: '@simplequestionIdfEval2'
+        analysis: '@proposalAnalysisIdf3Mickael'
+        value: 100
