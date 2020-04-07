@@ -231,7 +231,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf1Agui'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response2IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf1Agui'
@@ -239,19 +239,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response3IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf1Agui'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response4IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf1Agui'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response5IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf1Agui'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf1Agui'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response7IdfProposal1EvalAgui:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf1Agui'
@@ -264,7 +264,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf1Vinc'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response2IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf1Vinc'
@@ -272,19 +272,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response3IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf1Vinc'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response4IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf1Vinc'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response5IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf1Vinc'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal1EvalVinc:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf1Vinc'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response7IdfProposal1EvalVinc:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf1Vinc'
@@ -297,7 +297,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf1Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response2IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf1Jpec'
@@ -305,19 +305,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response3IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf1Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response4IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf1Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response5IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf1Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal1EvalJpec:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf1Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response7IdfProposal1EvalJpec:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf1Jpec'
@@ -330,7 +330,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf1Omar'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response2IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf1Omar'
@@ -338,19 +338,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response3IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf1Omar'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response4IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf1Omar'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response5IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf1Omar'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal1EvalOmar:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf1Omar'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response7IdfProposal1EvalOmar:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf1Omar'
@@ -363,7 +363,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf2Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response2IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf2Jpec'
@@ -371,19 +371,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response3IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf2Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response4IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf2Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response5IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf2Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal2EvalJpec:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf2Jpec'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response7IdfProposal2EvalJpec:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf2Jpec'
@@ -396,7 +396,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf3Theo'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response2IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf3Theo'
@@ -404,19 +404,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response3IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf3Theo'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response4IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf3Theo'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response5IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf3Theo'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal3EvalTheo:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf3Theo'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response7IdfProposal3EvalTheo:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf3Theo'
@@ -428,7 +428,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf3Maxime'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response2IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf3Maxime'
@@ -436,19 +436,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response3IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf3Maxime'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response4IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf3Maxime'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response5IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf3Maxime'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal3EvalMaxime:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf3Maxime'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response7IdfProposal3EvalMaxime:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf3Maxime'
@@ -460,7 +460,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf1'
         analysis: '@proposalAnalysisIdf3Mickael'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response2IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf2'
         analysis: '@proposalAnalysisIdf3Mickael'
@@ -468,19 +468,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response3IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf3'
         analysis: '@proposalAnalysisIdf3Mickael'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response4IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf4'
         analysis: '@proposalAnalysisIdf3Mickael'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response5IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf5'
         analysis: '@proposalAnalysisIdf3Mickael'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response6IdfProposal3EvalMickael:
         question: '@multiplequestionEvalIdf6'
         analysis: '@proposalAnalysisIdf3Mickael'
-        value: 'Oui'
+        value: { 'labels': ['Oui'], 'other': null }
     response7IdfProposal3EvalMickael:
         question: '@simplequestionIdfEval1'
         analysis: '@proposalAnalysisIdf3Mickael'
