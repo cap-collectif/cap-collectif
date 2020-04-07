@@ -442,6 +442,13 @@ InternalMutation:
                     inputType: RemoveProposalsFromStepsInput
                     payloadType: RemoveProposalsFromStepsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\RemoveProposalsFromStepsMutation", [value, getUser()])'
+            applyProposalStatus:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: ApplyProposalStatusInput
+                    payloadType: ApplyProposalStatusPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\ApplyProposalStatusMutation", [value, getUser()])'
             deleteProposal:
                 access: '@=hasRole("ROLE_SUPER_ADMIN") or (hasRole("ROLE_USER") and service("Capco\\AppBundle\\Helper\\ProposalHelper").isAuthor(args["input"]["proposalId"], getUser()))'
                 builder: 'Relay::Mutation'

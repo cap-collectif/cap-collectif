@@ -9,8 +9,10 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ProposalStepErrorCode;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\SelectionRepository;
@@ -28,9 +30,12 @@ abstract class AbstractProposalStepMutation
     private GlobalIdResolver            $globalIdResolver;
     private SelectionRepository         $selectionRepository;
     private ConnectionBuilder           $connectionBuilder;
-    protected ?Project                  $project = null;
     private Publisher                   $publisher;
     private Indexer                     $indexer;
+
+    //restrictions
+    protected ?Project                  $project = null;
+    protected ?SelectionStep            $selectionStep = null;
 
     public function __construct(
         EntityManagerInterface  $entityManager,
@@ -59,20 +64,22 @@ abstract class AbstractProposalStepMutation
         return $connection;
     }
 
-    protected function publish(Proposal $proposal): void
+    protected function publish(array $proposals): void
     {
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
-            new Message(
-                json_encode(
-                    [
-                        'proposalId' => $proposal->getId(),
-                        'date' => new \DateTime(),
-                    ]
+        foreach ($proposals as $proposal) {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
+                new Message(
+                    json_encode(
+                        [
+                            'proposalId' => $proposal->getId(),
+                            'date' => new \DateTime(),
+                        ]
+                    )
                 )
-            )
-        );
-        $this->indexer->index(Proposal::class, $proposal->getId());
+            );
+            $this->indexer->index(Proposal::class, $proposal->getId());
+        }
         $this->indexer->finishBulk();
     }
 
@@ -84,6 +91,23 @@ abstract class AbstractProposalStepMutation
         ]);
     }
 
+    protected function getStatus(?string $id, User $user): ?Status
+    {
+        $status = null;
+
+        if ($id) {
+            $status = $this->entityManager->getRepository(Status::class)->find($id);
+            if (is_null($status)) {
+                throw new UserError(ProposalStepErrorCode::NO_VALID_STATUS);
+            }
+
+            $this->project = $status->getStep()->getProject();
+            $this->selectionStep = $status->getStep();
+        }
+
+        return $status;
+    }
+
     protected function getProposals(array $ids, User $user): array
     {
         $proposals = [];
@@ -93,7 +117,7 @@ abstract class AbstractProposalStepMutation
         }
 
         if (empty($proposals)) {
-            throw new UserError('no valid proposal');
+            throw new UserError(ProposalStepErrorCode::NO_VALID_PROPOSAL);
         }
 
         return $proposals;
@@ -107,7 +131,7 @@ abstract class AbstractProposalStepMutation
         }
 
         if (empty($steps)) {
-            throw new UserError('no valid step');
+            throw new UserError(ProposalStepErrorCode::NO_VALID_STEP);
         }
 
         return $steps;
@@ -118,6 +142,7 @@ abstract class AbstractProposalStepMutation
         if (
             $proposal
             && (is_null($this->project) || $proposal->getProject() === $this->project)
+            && (is_null($this->selectionStep) || in_array($this->selectionStep, $proposal->getSelectionSteps()))
         ) {
             $proposals[$proposal->getId()] = $proposal;
             $this->project = $proposal->getProject();

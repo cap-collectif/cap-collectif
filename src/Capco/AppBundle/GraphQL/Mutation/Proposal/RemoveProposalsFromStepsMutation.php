@@ -32,6 +32,7 @@ class RemoveProposalsFromStepsMutation extends AbstractProposalStepMutation impl
 
     private function removeSelections(array $steps, array $proposals): void
     {
+        $changedProposals = [];
         foreach ($proposals as $proposal) {
             $hasChanged = false;
             foreach ($steps as $step) {
@@ -43,9 +44,10 @@ class RemoveProposalsFromStepsMutation extends AbstractProposalStepMutation impl
             }
 
             if ($hasChanged) {
-                $this->entityManager->flush();
-                $this->publish($proposal);
+                $changedProposals[] = $proposal;
             }
         }
+        $this->entityManager->flush();
+        $this->publish($changedProposals);
     }
 }

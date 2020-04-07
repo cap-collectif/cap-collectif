@@ -35,6 +35,7 @@ class AddProposalsToStepsMutation extends AbstractProposalStepMutation implement
 
     private function addStepsToProposals(array $steps, array $proposals): void
     {
+        $changedProposals = [];
         foreach ($proposals as $proposal) {
             $hasChanged = false;
             foreach ($steps as $step) {
@@ -44,10 +45,11 @@ class AddProposalsToStepsMutation extends AbstractProposalStepMutation implement
             }
 
             if ($hasChanged) {
-                $this->entityManager->flush();
-                $this->publish($proposal);
+                $changedProposals[] = $proposal;
             }
         }
+        $this->entityManager->flush();
+        $this->publish($changedProposals);
     }
 
     private function addOneStepToOneProposal(SelectionStep $step, Proposal $proposal): bool

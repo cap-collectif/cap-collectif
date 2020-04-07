@@ -1,28 +1,21 @@
-@removeProposalsToSteps @proposals @steps
-Feature: Remove a CollectStep from a proposal
+@applyProposalStatus @proposals @steps
+Feature: Apply a Status to a Proposal
 
 @database
-Scenario: Admin sends no valid proposal and receives an error
+Scenario: Admin sends no valid status and receives an error
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
-      removeProposalsFromSteps(input: $input) {
+    "query": "mutation ($input: ApplyProposalStatusInput!) {
+      applyProposalStatus(input: $input) {
         error
-        proposals {
-          edges {
-            node {
-              id
-            }
-          }
-        }
       }
     }",
     "variables": {
       "input": {
         "proposalIds": ["idonotexist", "meneither"],
-        "stepIds": ["nostep"]
+        "statusId": "nostatus"
       }
     }
   }
@@ -31,31 +24,28 @@ Scenario: Admin sends no valid proposal and receives an error
   """
   {
     "data": {
-      "removeProposalsFromSteps": {
-        "error": "NO_VALID_PROPOSAL",
-        "proposals": {
-          "edges": []
-        }
+      "applyProposalStatus": {
+        "error": "NO_VALID_STATUS"
       }
     }
   }
   """
 
 @database
-Scenario: Admin sends step not matching the project or not a collect step and receives an error
+Scenario: Admin sends proposal not matching the step of the status and receives an error
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
-      removeProposalsFromSteps(input: $input) {
+    "query": "mutation ($input: ApplyProposalStatusInput!) {
+      applyProposalStatus(input: $input) {
         error
       }
     }",
     "variables": {
       "input": {
         "proposalIds": ["UHJvcG9zYWw6cHJvcG9zYWwx"],
-        "stepIds": ["collectstep1", "selectionQuestionStepVoteClassement"]
+        "statusId": "status6"
       }
     }
   }
@@ -64,28 +54,28 @@ Scenario: Admin sends step not matching the project or not a collect step and re
   """
   {
     "data": {
-      "removeProposalsFromSteps": {
-        "error": "NO_VALID_STEP"
+      "applyProposalStatus": {
+        "error": "NO_VALID_PROPOSAL"
       }
     }
   }
   """
 
 @database
-Scenario: Admin wants to remove a proposal not present in a step
+Scenario: Admin does not change the status of a proposal
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
-      removeProposalsFromSteps(input: $input) {
+    "query": "mutation ($input: ApplyProposalStatusInput!) {
+      applyProposalStatus(input: $input) {
         error
         proposals {
           edges {
             node {
               id
               selections {
-                step {
+                status {
                   id
                 }
               }
@@ -97,7 +87,7 @@ Scenario: Admin wants to remove a proposal not present in a step
     "variables": {
       "input": {
         "proposalIds": ["UHJvcG9zYWw6cHJvcG9zYWwx"],
-        "stepIds": ["U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="]
+        "statusId": "status4"
       }
     }
   }
@@ -106,7 +96,7 @@ Scenario: Admin wants to remove a proposal not present in a step
   """
   {
     "data": {
-      "removeProposalsFromSteps": {
+      "applyProposalStatus": {
         "error": null,
         "proposals": {
           "edges": [
@@ -115,8 +105,8 @@ Scenario: Admin wants to remove a proposal not present in a step
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
                 "selections": [
                   {
-                    "step": {
-                      "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
+                    "status": {
+                      "id": "status4"
                     }
                   }
                 ]
@@ -130,20 +120,20 @@ Scenario: Admin wants to remove a proposal not present in a step
   """
 
 @database @rabbitmq
-Scenario: Admin remove a step from two proposals, only one having it
+Scenario: Admin changes the status of a proposal
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: RemoveProposalsFromStepsInput!) {
-      removeProposalsFromSteps(input: $input) {
+    "query": "mutation ($input: ApplyProposalStatusInput!) {
+      applyProposalStatus(input: $input) {
         error
         proposals {
           edges {
             node {
               id
               selections {
-                step {
+                status {
                   id
                 }
               }
@@ -154,8 +144,8 @@ Scenario: Admin remove a step from two proposals, only one having it
     }",
     "variables": {
       "input": {
-        "proposalIds": ["UHJvcG9zYWw6cHJvcG9zYWwx", "UHJvcG9zYWw6cHJvcG9zYWwy"],
-        "stepIds": ["U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="]
+        "proposalIds": ["UHJvcG9zYWw6cHJvcG9zYWwx"],
+        "statusId": "status5"
       }
     }
   }
@@ -164,7 +154,7 @@ Scenario: Admin remove a step from two proposals, only one having it
   """
   {
     "data": {
-      "removeProposalsFromSteps": {
+      "applyProposalStatus": {
         "error": null,
         "proposals": {
           "edges": [
@@ -173,20 +163,8 @@ Scenario: Admin remove a step from two proposals, only one having it
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
                 "selections": [
                   {
-                    "step": {
-                      "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
-                "selections": [
-                  {
-                    "step": {
-                      "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
+                    "status": {
+                      "id": "status5"
                     }
                   }
                 ]
@@ -199,3 +177,58 @@ Scenario: Admin remove a step from two proposals, only one having it
   }
   """
 
+@database @rabbitmq
+Scenario: Admin removes the status of a proposal
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: ApplyProposalStatusInput!) {
+      applyProposalStatus(input: $input) {
+        error
+        proposals {
+          edges {
+            node {
+              id
+              selections {
+                status {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalIds": ["UHJvcG9zYWw6cHJvcG9zYWwx"],
+        "statusId": null
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "applyProposalStatus": {
+        "error": null,
+        "proposals": {
+          "edges": [
+            {
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                "selections": [
+                  {
+                    "status": null
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+  """

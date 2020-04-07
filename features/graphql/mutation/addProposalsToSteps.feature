@@ -32,7 +32,7 @@ Scenario: Admin sends no valid proposal and receives an error
   {
     "data": {
       "addProposalsToSteps": {
-        "error": "no valid proposal",
+        "error": "NO_VALID_PROPOSAL",
         "proposals": {
           "edges": []
         }
@@ -65,7 +65,7 @@ Scenario: Admin sends step not matching the project or not a collect step and re
   {
     "data": {
       "addProposalsToSteps": {
-        "error": "no valid step"
+        "error": "NO_VALID_STEP"
       }
     }
   }

@@ -285,6 +285,15 @@ type AddProposalVotePayload {
   clientMutationId: String
 }
 
+"""Available errors on step assignment of proposals"""
+enum AddProposalsToStepsErrorCode {
+  """No proposal match your id"""
+  NO_VALID_PROPOSAL
+
+  """No step match your id or it does not fit the selected proposals"""
+  NO_VALID_STEP
+}
+
 input AddProposalsToStepsInput {
   """The ids of the proposals to add to steps"""
   proposalIds: [ID!]!
@@ -299,7 +308,7 @@ type AddProposalsToStepsPayload {
   proposals: ProposalConnection
 
   """An unsuccessful mutation will return an error message"""
-  error: String
+  error: AddProposalsToStepsErrorCode
   clientMutationId: String
 }
 
@@ -510,6 +519,35 @@ type Appendix {
 """An AppendixType"""
 type AppendixType {
   title: String!
+}
+
+"""Available errors on status assignment of proposals"""
+enum ApplyProposalStatusErrorCode {
+  """No status match your id"""
+  NO_VALID_STATUS
+
+  """No proposal match your id or it does not fit the selected status"""
+  NO_VALID_PROPOSAL
+}
+
+input ApplyProposalStatusInput {
+  """The ids of the proposals to add to steps"""
+  proposalIds: [ID!]!
+
+  """
+  The id of the status to apply or nothing if the status is to be removed
+  """
+  statusId: ID
+  clientMutationId: String
+}
+
+type ApplyProposalStatusPayload {
+  """Connection of assigned proposals"""
+  proposals: ProposalConnection
+
+  """An unsuccessful mutation will return an error message"""
+  error: ApplyProposalStatusErrorCode
+  clientMutationId: String
 }
 
 """An argument"""
@@ -4195,6 +4233,7 @@ type Mutation {
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
   addProposalsToSteps(input: AddProposalsToStepsInput!): AddProposalsToStepsPayload
   removeProposalsFromSteps(input: RemoveProposalsFromStepsInput!): RemoveProposalsFromStepsPayload
+  applyProposalStatus(input: ApplyProposalStatusInput!): ApplyProposalStatusPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
   updateRegistrationForm(input: UpdateRegistrationFormQuestionsInput!): UpdateRegistrationFormQuestionsPayload
   updateRegistrationFormCommunication(input: UpdateRegistrationFormCommunicationInput!): UpdateRegistrationFormCommunicationPayload
@@ -7517,6 +7556,15 @@ type RemoveProposalVotePayload {
   clientMutationId: String
 }
 
+"""Available errors on step assignment of proposals"""
+enum RemoveProposalsFromStepsErrorCode {
+  """No proposal match your id or it does not fit the selected status"""
+  NO_VALID_PROPOSAL
+
+  """No step match your id or it does not fit the selected proposals"""
+  NO_VALID_STEP
+}
+
 input RemoveProposalsFromStepsInput {
   """The ids of the proposals to remove from steps"""
   proposalIds: [ID!]!
@@ -7531,7 +7579,7 @@ type RemoveProposalsFromStepsPayload {
   proposals: ProposalConnection
 
   """An unsuccessful mutation will return an error message"""
-  error: String
+  error: RemoveProposalsFromStepsErrorCode
   clientMutationId: String
 }
 
