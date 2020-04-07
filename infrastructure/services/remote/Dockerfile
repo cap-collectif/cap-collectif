@@ -88,7 +88,7 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
     && rm -f /tmp/composer-setup.*
 
 # Parallel composer install
-RUN gosu capco composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --classmap-authoritative
+# RUN gosu capco composer global require hirak/prestissimo --prefer-dist --no-progress --classmap-authoritative
 
 # Install nginx
 RUN wget -O- https://nginx.org/keys/nginx_signing.key | apt-key add - && \
