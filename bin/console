@@ -2,6 +2,7 @@
 <?php
 
 use App\Kernel;
+use Capco\AppBundle\CapcoApplication;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
@@ -31,6 +32,17 @@ if (!class_exists(Application::class)) {
 }
 
 $input = new ArgvInput();
+
+if (null !== $instance = $input->getParameterOption(['--instance', '-i'], null, true)) {
+    # TODO: find a better place to store env files.
+    $ENV_DIRECTORY = 'web/media/default/0001/01/';
+    $ENV_FILE = '.env.' . $instance;
+    $ENV_PATH = __DIR__ . '/../'. $ENV_DIRECTORY . $ENV_FILE;
+    if (file_exists($ENV_PATH)) {
+        (new Dotenv())->load($ENV_PATH);
+    }
+}
+
 if (null !== $env = $input->getParameterOption(['--env', '-e'], null, true)) {
     putenv('APP_ENV='.$_SERVER['SYMFONY_ENV'] = $_ENV['SYMFONY_ENV'] = $env);
 }
@@ -38,6 +50,7 @@ if (null !== $env = $input->getParameterOption(['--env', '-e'], null, true)) {
 if ($input->hasParameterOption('--no-debug', true)) {
     putenv('APP_DEBUG='.$_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = '0');
 }
+printf($input->getParameterOption(['--instance', '-i'], null, true));
 
 require dirname(__DIR__).'/config/bootstrap.php';
 
@@ -50,5 +63,5 @@ if ($_SERVER['APP_DEBUG']) {
 }
 
 $kernel = new Kernel($_SERVER['SYMFONY_ENV'], (bool) $_SERVER['APP_DEBUG']);
-$application = new Application($kernel);
+$application = new CapcoApplication($kernel);
 $application->run($input);
