@@ -26,6 +26,7 @@ type Props = {|
   eventKey?: number | string,
   ariaLabel?: string,
   loginWithOpenId: boolean,
+  instanceName: string,
 |};
 
 export class NavbarRight extends React.Component<Props> {
@@ -40,7 +41,7 @@ export class NavbarRight extends React.Component<Props> {
   };
 
   render() {
-    const { user, features, vertical, intl, loginWithOpenId, currentLanguage } = this.props;
+    const { user, features, vertical, intl, loginWithOpenId, currentLanguage, instanceName } = this.props;
 
     const prefix = (features.unstable__multilangue) ? `/${currentLanguage.split('-')[0]}` : '';
 
@@ -83,7 +84,8 @@ export class NavbarRight extends React.Component<Props> {
                 <FormattedMessage id="global.administration" />
               </TabsLink>
             ) : null}
-            {features.profiles && !loginWithOpenId ? (
+            {/** TODO: Some SSO users want a profile page, some don't we should add an option, for now let's go with a custom fix */}
+            {features.profiles && (!loginWithOpenId || instanceName === 'idf-bp-dedicated') ? (
               <TabsLink eventKey={3.2} href={`${prefix}/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8 mr-10" aria-hidden="true" />
                 <FormattedMessage id="user.my.profile" />
@@ -135,6 +137,7 @@ export class NavbarRight extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
+  instanceName: state.default.instanceName,
   loginWithOpenId: loginWithOpenID(state.default.ssoList),
   user: state.user.user,
 });

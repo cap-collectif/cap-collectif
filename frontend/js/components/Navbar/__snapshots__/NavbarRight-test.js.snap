@@ -15,3 +15,260 @@ exports[`<NavbarRight /> should render correctly 1`] = `
   </NavbarRight__ButtonsContainer>
 </Fragment>
 `;
+
+exports[`<NavbarRight /> should render when authenticated 1`] = `
+<Fragment>
+  <TabsBarDropdown
+    aria-label="user.account.menu"
+    eventKey={3}
+    id="navbar-username"
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    pullRight={true}
+    toggleElement={
+      <span>
+        <Connect(UserAvatarDeprecated)
+          anchor={false}
+          size={34}
+          user={
+            Object {
+              "_links": Object {
+                "profile": "https://capco.dev/profile",
+              },
+              "displayName": "admin",
+              "email": "admin@test.com",
+              "id": "user1",
+              "isAdmin": true,
+              "isEmailConfirmed": true,
+              "isEvaluer": true,
+              "isPhoneConfirmed": true,
+              "isViewer": false,
+              "media": Object {
+                "url": "https://source.unsplash.com/random/150x150",
+              },
+              "newEmailToConfirm": null,
+              "phone": "0101010101",
+              "roles": Array [],
+              "uniqueId": "admin",
+              "username": "admin",
+              "vip": false,
+            }
+          }
+        />
+        <span
+          className="ml-5"
+        >
+          admin
+        </span>
+      </span>
+    }
+    vertical={false}
+  >
+    <styles__TabsLink
+      eventKey={3.1}
+      href="/admin/"
+    >
+      <i
+        aria-hidden="true"
+        className="cap-setting-gears-1 mr-10"
+      />
+      <FormattedMessage
+        id="global.administration"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+    <styles__TabsLink
+      eventKey={3.4}
+      href="/evaluations"
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-edit-write mr-10"
+      />
+      <FormattedMessage
+        id="evaluations.index.page_title"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+    <styles__TabsLink
+      eventKey={3.5}
+      href="/profile/edit-profile"
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-setting-adjustment mr-10"
+      />
+      <FormattedMessage
+        id="global.params"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+    <styles__TabsDivider
+      aria-hidden="true"
+    />
+    <styles__TabsLink
+      eventKey={3.7}
+      id="logout-button"
+      onClick={[Function]}
+      type="button"
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-power-1 mr-10"
+      />
+      <FormattedMessage
+        id="global.logout"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+  </TabsBarDropdown>
+</Fragment>
+`;
+
+exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = `
+<Fragment>
+  <TabsBarDropdown
+    aria-label="user.account.menu"
+    eventKey={3}
+    id="navbar-username"
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    pullRight={true}
+    toggleElement={
+      <span>
+        <Connect(UserAvatarDeprecated)
+          anchor={false}
+          size={34}
+          user={
+            Object {
+              "_links": Object {
+                "profile": "https://capco.dev/profile",
+              },
+              "displayName": "admin",
+              "email": "admin@test.com",
+              "id": "user1",
+              "isAdmin": true,
+              "isEmailConfirmed": true,
+              "isEvaluer": true,
+              "isPhoneConfirmed": true,
+              "isViewer": false,
+              "media": Object {
+                "url": "https://source.unsplash.com/random/150x150",
+              },
+              "newEmailToConfirm": null,
+              "phone": "0101010101",
+              "roles": Array [],
+              "uniqueId": "admin",
+              "username": "admin",
+              "vip": false,
+            }
+          }
+        />
+        <span
+          className="ml-5"
+        >
+          admin
+        </span>
+      </span>
+    }
+    vertical={false}
+  >
+    <styles__TabsLink
+      eventKey={3.1}
+      href="/admin/"
+    >
+      <i
+        aria-hidden="true"
+        className="cap-setting-gears-1 mr-10"
+      />
+      <FormattedMessage
+        id="global.administration"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+    <styles__TabsLink
+      eventKey={3.2}
+      href="/profile/admin"
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-id-8 mr-10"
+      />
+      <FormattedMessage
+        id="user.my.profile"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+    <styles__TabsLink
+      eventKey={3.4}
+      href="/evaluations"
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-edit-write mr-10"
+      />
+      <FormattedMessage
+        id="evaluations.index.page_title"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+    <styles__TabsLink
+      eventKey={3.5}
+      href="/profile/edit-profile"
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-setting-adjustment mr-10"
+      />
+      <FormattedMessage
+        id="global.params"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+    <styles__TabsDivider
+      aria-hidden="true"
+    />
+    <styles__TabsLink
+      eventKey={3.7}
+      id="logout-button"
+      onClick={[Function]}
+      type="button"
+    >
+      <i
+        aria-hidden="true"
+        className="cap cap-power-1 mr-10"
+      />
+      <FormattedMessage
+        id="global.logout"
+        values={Object {}}
+      />
+    </styles__TabsLink>
+  </TabsBarDropdown>
+</Fragment>
+`;
