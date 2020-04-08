@@ -2,29 +2,29 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ProjectHeaderType;
-use Capco\AppBundle\Traits\LocalizableTrait;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Traits\ProjectVisibilityTrait;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ProjectHeaderType;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Traits\LocalizableTrait;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\ProjectVisibilityTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 
 /**
  * Project.
@@ -428,9 +428,11 @@ class Project implements IndexableInterface
     public function getThemes(): iterable
     {
         $iterator = $this->themes->getIterator();
-        $iterator->uasort(function ($a, $b) {
-            return $a->getPosition() <=> $b->getPosition();
-        });
+        $iterator->uasort(
+            function ($a, $b) {
+                return $a->getPosition() <=> $b->getPosition();
+            }
+        );
 
         return new ArrayCollection(iterator_to_array($iterator));
     }
@@ -886,7 +888,7 @@ class Project implements IndexableInterface
         if (!$proposalForm) {
             return null;
         }
-            
+
         $analysisConfig = $proposalForm->getAnalysisConfiguration();
 
         if (!$analysisConfig) {
@@ -1260,5 +1262,75 @@ class Project implements IndexableInterface
 
         return \in_array($this->getVisibility(), $viewerVisibility) &&
             $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM;
+    }
+
+
+    public function getAnalysts(): array
+    {
+        $collectStep = $this->getFirstCollectStep();
+
+        if (!$collectStep) {
+            return [];
+        }
+
+        /** @var ProposalForm $proposalForm */
+        $proposalForm = $collectStep->getProposalForm();
+
+        if (!$proposalForm) {
+            return [];
+        }
+        $analysts = [];
+        /** @var Proposal $proposal */
+        foreach ($proposalForm->getProposals() as $proposal) {
+            $analysts = array_merge($analysts, $proposal->getAnalysts()->toArray());
+        }
+
+        return array_unique($analysts, SORT_REGULAR);
+    }
+
+    public function getSupervisors(): array
+    {
+        $collectStep = $this->getFirstCollectStep();
+
+        if (!$collectStep) {
+            return [];
+        }
+
+        /** @var ProposalForm $proposalForm */
+        $proposalForm = $collectStep->getProposalForm();
+
+        if (!$proposalForm) {
+            return [];
+        }
+        $supervisors = [];
+        /** @var Proposal $proposal */
+        foreach ($proposalForm->getProposals() as $proposal) {
+            $supervisors[] = $proposal->getSupervisor();
+        }
+
+        return array_unique($supervisors, SORT_REGULAR);
+    }
+
+    public function getDecisionMakers(): array
+    {
+        $collectStep = $this->getFirstCollectStep();
+
+        if (!$collectStep) {
+            return [];
+        }
+
+        /** @var ProposalForm $proposalForm */
+        $proposalForm = $collectStep->getProposalForm();
+
+        if (!$proposalForm) {
+            return [];
+        }
+        $decisionMakers = [];
+        /** @var Proposal $proposal */
+        foreach ($proposalForm->getProposals() as $proposal) {
+            $decisionMakers[] = $proposal->getDecisionMaker();
+        }
+
+        return array_unique($decisionMakers, SORT_REGULAR);
     }
 }

@@ -5376,7 +5376,17 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     analysts: [ID!]
     supervisor: ID
     decisionMaker: ID
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}
   ): ProposalConnection!
+
+  """list of analysts assigned on the project"""
+  analysts: [User]!
+
+  """list of supervisors assigned on the project"""
+  supervisors: [User]!
+
+  """list of decision makers assigned on the project"""
+  decisionMakers: [User]!
 }
 
 """A connection to a list of items."""

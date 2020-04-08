@@ -156,11 +156,14 @@ class ProposalSearch extends Search
         $projectId,
         $viewerId,
         array $providedFilters,
+        $order,
         int $limit = 20,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
+
         $filters = $this->getFilters($providedFilters);
+
         foreach ($filters as $key => $value) {
             if ('proposalAnalysts.analyst.id' === $key) {
                 $term = new Terms($key, $value);
@@ -179,8 +182,13 @@ class ProposalSearch extends Search
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $projectId]]));
         $boolQuery->addMust($boolShouldQuery);
         $query = new Query($boolQuery);
+        if ($order) {
+            $query->setSort([$this->getSort($order, null), ['id' => new \stdClass()]]);
+        }
+
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
+
         $resultSet = $this->index->getType($this->type)->search($query);
 
         $cursors = $this->getCursors($resultSet);
@@ -197,7 +205,7 @@ class ProposalSearch extends Search
         );
     }
 
-    private function getSort(string $order, string $stepId): array
+    private function getSort(string $order, ?string $stepId): array
     {
         switch ($order) {
             case 'old':

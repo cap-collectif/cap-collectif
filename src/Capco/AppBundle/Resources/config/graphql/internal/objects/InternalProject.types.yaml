@@ -149,3 +149,18 @@ InternalProject:
                         type: 'ID'
                     decisionMaker:
                         type: 'ID'
+                    orderBy:
+                        type: 'PreviewProposalOrder'
+                        defaultValue: { field: CREATED_AT, direction: DESC }
+            analysts:
+                type: '[InternalUser]!'
+                description: 'list of analysts assigned on the project'
+                resolve: '@=value.getAnalysts()'
+            supervisors:
+                type: '[InternalUser]!'
+                description: 'list of supervisors assigned on the project'
+                resolve: '@=value.getSupervisors()'
+            decisionMakers:
+                type: '[InternalUser]!'
+                description: 'list of decision makers assigned on the project'
+                resolve: '@=value.getDecisionMakers()'
