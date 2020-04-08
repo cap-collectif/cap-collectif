@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as S from './index.style';
 import DropdownSelectChoice from '~ui/DropdownSelect/choice';
 import DropdownSelectMenu from '~ui/DropdownSelect/menu';
-import type { Context } from '~ui/DropdownSelect/context';
+import type { Context, DropdownOnChangeType, DropdownValueType } from '~ui/DropdownSelect/context';
 import { DropdownSelectContext } from '~ui/DropdownSelect/context';
 import DropdownSelectHeader from '~ui/DropdownSelect/header';
 import DropdownSelectMessage from '~ui/DropdownSelect/message';
@@ -28,12 +28,14 @@ import DropdownSelectMessage from '~ui/DropdownSelect/message';
  * */
 
 export type Props = {|
+  +mode?: 'normal' | 'add-remove',
+  +initialValue?: DropdownValueType,
   +className?: string,
   +isMultiSelect?: boolean,
   +title: string,
   +shouldOverflow?: boolean,
-  +value?: string | string[] | null,
-  +onChange?: (value: any) => void | Promise<any>,
+  +value?: DropdownValueType,
+  +onChange?: DropdownOnChangeType,
   +children: React.Node,
 |};
 
@@ -50,15 +52,31 @@ const DropdownSelect = ({
   title,
   value,
   onChange,
+  initialValue: initial,
+  mode = 'normal',
   shouldOverflow = false,
   isMultiSelect = false,
   className,
 }: Props) => {
-  const contextValue = React.useMemo(() => ({ value, onChange, isMultiSelect }), [
-    value,
-    onChange,
-    isMultiSelect,
-  ]);
+  const [initialValue, setInitialValue] = React.useState(initial);
+  const allValues = ((React.useMemo(() => (typeof initial === 'string' ? [initial] : initial), [
+    initial,
+  ]): any): $ReadOnlyArray<string>);
+  React.useEffect(() => {
+    if (mode === 'add-remove' && onChange) {
+      onChange({
+        all: allValues,
+        values: [],
+        added: [],
+        removed: [],
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, onChange]);
+  const contextValue = React.useMemo(
+    () => ({ value, onChange, mode, allValues, isMultiSelect, setInitialValue, initialValue }),
+    [value, mode, initialValue, allValues, setInitialValue, onChange, isMultiSelect],
+  );
 
   return (
     <DropdownSelectContext.Provider value={contextValue}>

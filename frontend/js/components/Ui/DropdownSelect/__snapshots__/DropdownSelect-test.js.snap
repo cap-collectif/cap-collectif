@@ -4,8 +4,12 @@ exports[`<DropdownSelect /> should render correctly 1`] = `
 <ContextProvider
   value={
     Object {
+      "allValues": undefined,
+      "initialValue": undefined,
       "isMultiSelect": false,
+      "mode": "normal",
       "onChange": undefined,
+      "setInitialValue": [Function],
       "value": undefined,
     }
   }
@@ -41,8 +45,12 @@ exports[`<DropdownSelect /> should render correctly with a message 1`] = `
 <ContextProvider
   value={
     Object {
+      "allValues": undefined,
+      "initialValue": undefined,
       "isMultiSelect": false,
+      "mode": "normal",
       "onChange": undefined,
+      "setInitialValue": [Function],
       "value": undefined,
     }
   }
@@ -83,8 +91,12 @@ exports[`<DropdownSelect /> should render correctly with a message that has an i
 <ContextProvider
   value={
     Object {
+      "allValues": undefined,
+      "initialValue": undefined,
       "isMultiSelect": false,
+      "mode": "normal",
       "onChange": undefined,
+      "setInitialValue": [Function],
       "value": undefined,
     }
   }
@@ -131,8 +143,12 @@ exports[`<DropdownSelect /> should render correctly with a submenu 1`] = `
 <ContextProvider
   value={
     Object {
+      "allValues": undefined,
+      "initialValue": undefined,
       "isMultiSelect": false,
+      "mode": "normal",
       "onChange": undefined,
+      "setInitialValue": [Function],
       "value": undefined,
     }
   }
@@ -187,8 +203,12 @@ exports[`<DropdownSelect /> should render correctly with disabled choices 1`] = 
 <ContextProvider
   value={
     Object {
+      "allValues": undefined,
+      "initialValue": undefined,
       "isMultiSelect": false,
+      "mode": "normal",
       "onChange": undefined,
+      "setInitialValue": [Function],
       "value": undefined,
     }
   }
@@ -226,47 +246,12 @@ exports[`<DropdownSelect /> should render correctly with indeterminate choices 1
 <ContextProvider
   value={
     Object {
+      "allValues": undefined,
+      "initialValue": undefined,
       "isMultiSelect": false,
+      "mode": "normal",
       "onChange": undefined,
-      "value": undefined,
-    }
-  }
->
-  <indexstyle__Container
-    shouldOverflow={false}
-  >
-    <indexstyle__Header>
-      Trier par
-    </indexstyle__Header>
-    <indexstyle__Body>
-      <DropdownSelect.Choice
-        isIndeterminate={true}
-        value="item1"
-      >
-        Item 1
-      </DropdownSelect.Choice>
-      <DropdownSelect.Choice
-        value="item2"
-      >
-        Item 2
-      </DropdownSelect.Choice>
-      <DropdownSelect.Choice
-        isIndeterminate={true}
-        value="item3"
-      >
-        Item 3
-      </DropdownSelect.Choice>
-    </indexstyle__Body>
-  </indexstyle__Container>
-</ContextProvider>
-`;
-
-exports[`<DropdownSelect /> should render correctly with indeterminate choices 1`] = `
-<ContextProvider
-  value={
-    Object {
-      "isMultiSelect": false,
-      "onChange": undefined,
+      "setInitialValue": [Function],
       "value": undefined,
     }
   }
@@ -304,8 +289,12 @@ exports[`<DropdownSelect /> should render correctly with multi-select enabled 1`
 <ContextProvider
   value={
     Object {
+      "allValues": undefined,
+      "initialValue": undefined,
       "isMultiSelect": true,
+      "mode": "normal",
       "onChange": undefined,
+      "setInitialValue": [Function],
       "value": undefined,
     }
   }
@@ -341,8 +330,12 @@ exports[`<DropdownSelect /> should render correctly with submenu in a submenu 1`
 <ContextProvider
   value={
     Object {
+      "allValues": undefined,
+      "initialValue": undefined,
       "isMultiSelect": false,
+      "mode": "normal",
       "onChange": undefined,
+      "setInitialValue": [Function],
       "value": undefined,
     }
   }

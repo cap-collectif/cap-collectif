@@ -3,20 +3,20 @@ import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
-  AssignSupervisorToProposalsMutationVariables,
-  AssignSupervisorToProposalsMutationResponse as Response,
-} from '~relay/AssignSupervisorToProposalsMutation.graphql';
+  RevokeAnalystsToProposalsMutationVariables,
+  RevokeAnalystsToProposalsMutationResponse as Response,
+} from '~relay/RevokeAnalystsToProposalsMutation.graphql';
 
 const mutation = graphql`
-  mutation AssignSupervisorToProposalsMutation($input: AssignSupervisorToProposalsInput!) {
-    assignSupervisorToProposals(input: $input) {
+  mutation RevokeAnalystsToProposalsMutation($input: RevokeAnalystsToProposalsInput!) {
+    revokeAnalystsToProposals(input: $input) {
       errorCode
       proposals {
         edges {
           node {
             id
             ...AnalysisProposalListRole_proposal
-            supervisor {
+            analysts {
               id
               ...UserSearchDropdownChoice_user
             }
@@ -27,7 +27,7 @@ const mutation = graphql`
   }
 `;
 
-const commit = (variables: AssignSupervisorToProposalsMutationVariables): Promise<Response> =>
+const commit = (variables: RevokeAnalystsToProposalsMutationVariables): Promise<Response> =>
   commitMutation(environment, {
     mutation,
     variables,

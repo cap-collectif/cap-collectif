@@ -1,5 +1,6 @@
 // @flow
 import uniqBy from 'lodash/uniqBy';
+import lodashFilter from 'lodash/filter';
 import type { Uuid } from '~/types';
 import type {
   UserSearchDropdownChoice_user,
@@ -44,6 +45,11 @@ type Supervisor = {|
   +$fragmentRefs: UserSearchDropdownChoice_user$ref,
 |};
 
+type Analyst = {|
+  +id: string,
+  +$fragmentRefs: UserSearchDropdownChoice_user$ref,
+|};
+
 const SHOWING_STEP_TYPENAME = ['CollectStep', 'SelectionStep'];
 
 export const getSelectedSupervisorsByProposals = (
@@ -64,26 +70,76 @@ export const getSelectedSupervisorsByProposals = (
   ): any): $ReadOnlyArray<Supervisor>);
 };
 
-export const isRowIndeterminate = (
-  user: UserSearchDropdownChoice_user,
+export const getSelectedAnalystsByProposals = (
   project: ProjectAdminAnalysis_project,
   proposalIds: $ReadOnlyArray<Uuid>,
-): boolean => {
+): $ReadOnlyArray<Analyst> => {
   const entries = Object.entries(
     proposalIds.reduce((acc, id) => {
       acc[id] =
         project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
-          .supervisor || null;
+          .analysts || [];
       return acc;
     }, {}),
   );
-  const selectedSupervisorsByProposals = getSelectedSupervisorsByProposals(project, proposalIds);
-  const userIds = selectedSupervisorsByProposals.map(u => u.id);
-  const entriesIds = entries.filter(e => e[1] !== null).map(e => ((e[1]: any): Supervisor).id);
+  return ((uniqBy(
+    entries
+      .filter(e => ((e[1]: any): $ReadOnlyArray<Analyst>).length > 0)
+      .map(e => e[1])
+      .flat(),
+    'id',
+  ): any): $ReadOnlyArray<Analyst>);
+};
+
+export const isRowIndeterminate = (
+  user: UserSearchDropdownChoice_user,
+  project: ProjectAdminAnalysis_project,
+  proposalIds: $ReadOnlyArray<Uuid>,
+  type: 'analyst' | 'supervisor',
+): boolean => {
+  const entries = Object.entries(
+    proposalIds.reduce((acc, id) => {
+      if (type === 'supervisor') {
+        acc[id] =
+          project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
+            .supervisor || null;
+      } else if (type === 'analyst') {
+        acc[id] =
+          project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
+            .analysts || [];
+      }
+      return acc;
+    }, {}),
+  );
+  const selectedEntries =
+    type === 'supervisor'
+      ? getSelectedSupervisorsByProposals(project, proposalIds)
+      : getSelectedAnalystsByProposals(project, proposalIds);
+  const userIds = selectedEntries.map(u => u.id);
+  const entriesIds =
+    type === 'supervisor'
+      ? entries.filter(e => e[1] !== null).map(e => ((e[1]: any): { id: Uuid }).id)
+      : entries
+          .filter(e => ((e[1]: any): $ReadOnlyArray<{ id: Uuid }>).length > 0)
+          .map(e => ((e[1]: any): $ReadOnlyArray<{ id: Uuid }>))
+          .flat()
+          .map(u => ((u: any): { id: Uuid }).id);
+
   if (userIds.includes(user.id)) {
     for (const userId of userIds) {
-      if (entriesIds.includes(userId)) {
+      if (type === 'supervisor' && entriesIds.includes(userId)) {
         return !entriesIds.every(eid => eid === userId);
+      }
+      if (type === 'analyst') {
+        const duplicates = lodashFilter(
+          entriesIds,
+          v => lodashFilter(entriesIds, v1 => v1 === v).length > 1,
+        );
+        return (
+          !!entries.find(e => ((e[1]: any): $ReadOnlyArray<Uuid>).length === 0) ||
+          (duplicates.length > 0 &&
+            proposalIds.length > duplicates.filter(id => id === user.id).length)
+        );
       }
     }
   }
@@ -99,6 +155,15 @@ export const getCommonSupervisorIdWithinProposalIds = (
   return selectedSupervisorsByProposals.length === 1 && selectedSupervisorsByProposals[0].id
     ? selectedSupervisorsByProposals[0].id
     : null;
+};
+
+export const getCommonAnalystIdsWithinProposalIds = (
+  project: ProjectAdminAnalysis_project,
+  proposalIds: $ReadOnlyArray<Uuid>,
+): $ReadOnlyArray<Uuid> => {
+  const selectedAnalystsByProposals = getSelectedAnalystsByProposals(project, proposalIds);
+
+  return selectedAnalystsByProposals.map(analyst => analyst.id);
 };
 
 export const getFormattedCategoriesChoicesForProject = (

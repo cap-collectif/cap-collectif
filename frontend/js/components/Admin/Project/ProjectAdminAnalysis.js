@@ -23,7 +23,9 @@ import type {
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
 import {
   getAllFormattedChoicesForProject,
+  getCommonAnalystIdsWithinProposalIds,
   getCommonSupervisorIdWithinProposalIds,
+  getSelectedAnalystsByProposals,
   getSelectedSupervisorsByProposals,
   isRowIndeterminate,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
@@ -47,6 +49,10 @@ import {
   AnalysisProposalListRowInformations,
   AnalysisProposalListRowMeta,
 } from '~ui/Analysis/common.style';
+import AssignAnalystsToProposalsMutation from '~/mutations/AssignAnalystsToProposalsMutation';
+import RevokeAnalystsToProposalsMutation from '~/mutations/RevokeAnalystsToProposalsMutation';
+import FluxDispatcher from '~/dispatchers/AppDispatcher';
+import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -84,11 +90,21 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useProjectAdminProposalsContext();
   const [supervisor, setSupervisor] = React.useState(null);
+  const [analysts, setAnalysts] = React.useState({
+    all: [],
+    removed: [],
+    added: [],
+    values: [],
+  });
   const { categories, districts } = React.useMemo(() => getAllFormattedChoicesForProject(project), [
     project,
   ]);
   const selectedSupervisorsByProposals = React.useMemo(
     () => getSelectedSupervisorsByProposals(project, selectedRows),
+    [project, selectedRows],
+  );
+  const selectedAnalystsByProposals = React.useMemo(
+    () => getSelectedAnalystsByProposals(project, selectedRows),
     [project, selectedRows],
   );
   React.useEffect(() => {
@@ -241,13 +257,103 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
   const renderActions = (
     <React.Fragment>
       <AnalysisFilterContainer>
-        <Collapsable align="right" key="action-analyst">
-          <Collapsable.Button>
-            <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
-          </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.analyst' })}>
-            {''}
-          </Collapsable.Element>
+        <Collapsable
+          align="right"
+          key="action-analyst"
+          onClose={async () => {
+            try {
+              dispatch({ type: 'START_LOADING' });
+              if (analysts.added.length > 0) {
+                const response = await AssignAnalystsToProposalsMutation.commit({
+                  input: {
+                    analystIds: analysts.added,
+                    proposalIds: selectedRows,
+                  },
+                });
+                if (response.assignAnalystsToProposals?.errorCode === 'MAX_ANALYSTS_REACHED') {
+                  FluxDispatcher.dispatch({
+                    actionType: UPDATE_ALERT,
+                    alert: {
+                      type: TYPE_ALERT.ERROR,
+                      content: 'analyst.maximum.assignment.reached',
+                    },
+                  });
+                }
+              }
+              if (analysts.removed.length > 0) {
+                await RevokeAnalystsToProposalsMutation.commit({
+                  input: {
+                    analystIds: analysts.removed,
+                    proposalIds: selectedRows,
+                  },
+                });
+              }
+
+              dispatch({ type: 'STOP_LOADING' });
+            } catch (e) {
+              dispatch({ type: 'STOP_LOADING' });
+              // eslint-disable-next-line no-console
+              console.error(e);
+            }
+          }}>
+          {closeDropdown => (
+            <React.Fragment>
+              <Collapsable.Button>
+                <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
+              </Collapsable.Button>
+              <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-analyst' })}>
+                <SearchableDropdownSelect
+                  searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
+                  shouldOverflow
+                  mode="add-remove"
+                  isMultiSelect
+                  initialValue={getCommonAnalystIdsWithinProposalIds(project, selectedRows)}
+                  value={analysts}
+                  onChange={setAnalysts}
+                  noResultsMessage={intl.formatMessage({ id: 'no_result' })}
+                  clearChoice={{
+                    enabled: true,
+                    message: intl.formatMessage({ id: 'assigned.to.nobody' }),
+                    onClear: async () => {
+                      try {
+                        closeDropdown();
+                        dispatch({ type: 'START_LOADING' });
+                        await RevokeAnalystsToProposalsMutation.commit({
+                          input: {
+                            proposalIds: selectedRows,
+                            analystIds: analysts.all,
+                          },
+                        });
+                        dispatch({ type: 'STOP_LOADING' });
+                      } catch (e) {
+                        dispatch({ type: 'STOP_LOADING' });
+                        // eslint-disable-next-line no-console
+                        console.error(e);
+                      }
+                    },
+                  }}
+                  title={intl.formatMessage({ id: 'assign-analyst' })}
+                  defaultOptions={uniqBy(
+                    [
+                      ...selectedAnalystsByProposals,
+                      ...(defaultUsers?.edges?.filter(Boolean).map(e => e.node) || []),
+                    ],
+                    'id',
+                  )}
+                  loadOptions={loadOptions}>
+                  {users =>
+                    users.map(user => (
+                      <UserSearchDropdownChoice
+                        isIndeterminate={isRowIndeterminate(user, project, selectedRows, 'analyst')}
+                        key={user.id}
+                        user={user}
+                      />
+                    ))
+                  }
+                </SearchableDropdownSelect>
+              </Collapsable.Element>
+            </React.Fragment>
+          )}
         </Collapsable>
       </AnalysisFilterContainer>
       <AnalysisFilterContainer>
@@ -301,7 +407,12 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
                   {users =>
                     users.map(user => (
                       <UserSearchDropdownChoice
-                        isIndeterminate={isRowIndeterminate(user, project, selectedRows)}
+                        isIndeterminate={isRowIndeterminate(
+                          user,
+                          project,
+                          selectedRows,
+                          'supervisor',
+                        )}
                         key={user.id}
                         user={user}
                       />
@@ -491,6 +602,10 @@ export default createPaginationContainer(
                 }
                 ...AnalysisProposalListRole_proposal
                 supervisor {
+                  id
+                  ...UserSearchDropdownChoice_user
+                }
+                analysts {
                   id
                   ...UserSearchDropdownChoice_user
                 }
