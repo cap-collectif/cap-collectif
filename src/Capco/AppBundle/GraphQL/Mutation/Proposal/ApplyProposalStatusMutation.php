@@ -32,7 +32,7 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
         ];
     }
 
-    private function applyStatusToSeveralProposals(array $proposals, ?Status $status): void
+    private function applyStatusToSeveralProposals(array &$proposals, ?Status $status): void
     {
         $changedProposals = [];
         foreach ($proposals as $proposal) {
@@ -46,13 +46,32 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
 
     private function applyStatusToOneProposal(Proposal $proposal, ?Status $status): bool
     {
-        foreach ($proposal->getSelections() as $selection) {
-            if ($this->applyStatusToSelection($selection, $status)) {
-                return true;
-            }
+        $hasChangedCollectStep = $this->applyStatusToCollectStep($proposal, $status);
+        $hasChangedSelectionStep = $this->applyStatusToSelectionSteps($proposal, $status);
+
+        return $hasChangedCollectStep || $hasChangedSelectionStep;
+    }
+
+    private function applyStatusToCollectStep(Proposal $proposal, ?Status $status): bool
+    {
+        if (is_null($status) || $status->getStep()->isCollectStep()) {
+            $proposal->setStatus($status);
+            return true;
         }
 
         return false;
+    }
+
+    private function applyStatusToSelectionSteps(Proposal $proposal, ?Status $status): bool
+    {
+        $hasChanged = false;
+        if (is_null($status) || $status->getStep()->isSelectionStep()) {
+            foreach ($proposal->getSelections() as $selection) {
+                $hasChanged = $this->applyStatusToSelection($selection, $status);
+            }
+        }
+
+        return $hasChanged;
     }
 
     private function applyStatusToSelection(Selection $selection, ?Status $status): bool

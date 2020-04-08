@@ -10,7 +10,7 @@ type Props = {|
   +className?: string,
   +onClick?: (e: Event) => void | Promise<any>,
   +emitChange?: boolean,
-  +value: string,
+  +value: string | Object,
   +children: React.Node,
 |};
 

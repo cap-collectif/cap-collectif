@@ -66,10 +66,12 @@ Array [
   Object {
     "id": "cstep1",
     "title": "Étape de dépôt",
+    "url": "http://example.com",
   },
   Object {
     "id": "sstep1",
     "title": "Étape de sélection",
+    "url": "http://example.com",
   },
 ]
 `;

@@ -1,4 +1,6 @@
 // @flow
+import { TYPE_ALERT } from '~/constants/AlertConstants';
+
 const colors = {
   black: '#000000',
   dark: '#212529',
@@ -81,9 +83,13 @@ export const BsStyleColors = {
 };
 
 export const AlertColors = {
-  SUCCESS: {
+  [TYPE_ALERT.SUCCESS]: {
     background: '#d4edda',
     color: '#155724',
+  },
+  [TYPE_ALERT.ERROR]: {
+    background: '#f8d7db',
+    color: '#491218',
   },
 };
 

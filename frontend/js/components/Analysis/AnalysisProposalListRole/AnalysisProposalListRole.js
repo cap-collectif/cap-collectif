@@ -23,8 +23,16 @@ type Props = {|
   proposal: AnalysisProposalListRole_proposal,
 |};
 
-export const getStatus = (analyse: ?Object): Status => {
+export const getStatus = (analyse: ?Object, isDecisionMaker: boolean = false): Status => {
   if (isEmpty(analyse) || !analyse) return PROPOSAL_STATUS.TODO;
+
+  if (isDecisionMaker && analyse.state === 'DONE' && analyse.isApproved) {
+    return PROPOSAL_STATUS.DONE;
+  }
+
+  if (isDecisionMaker && analyse.state === 'DONE' && !analyse.isApproved) {
+    return PROPOSAL_STATUS.UNFAVOURABLE;
+  }
 
   return PROPOSAL_STATUS[analyse.state];
 };
@@ -79,7 +87,7 @@ const AnalysisProposalListRole = ({ proposal }: Props) => {
               user={decisionMaker}
               displayUrl={false}
               size={AVATAR_SIZE}
-              badge={getBadge(getStatus(decision))}
+              badge={getBadge(getStatus(decision, true))}
             />
           </OverlayTrigger>
         )}
@@ -100,6 +108,7 @@ export default createFragmentContainer(AnalysisProposalListRole, {
       }
       decision {
         state
+        isApproved
         updatedBy {
           id
         }

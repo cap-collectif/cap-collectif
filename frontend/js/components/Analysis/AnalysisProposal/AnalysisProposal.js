@@ -17,9 +17,11 @@ type Props = {
 };
 
 const AnalysisProposal = ({ proposal }: Props) => (
-  <AnalysisProposalContainer key={proposal.id} rowId={proposal.id}>
+  <AnalysisProposalContainer rowId={proposal.id}>
     <ProposalInformationsContainer>
-      <h2>{proposal.title}</h2>
+      <h2>
+        <a href={proposal.url}>{proposal.title}</a>
+      </h2>
       <ProposalListRowInformations>
         <p>
           #{proposal.reference} • {proposal.author.username}
@@ -61,6 +63,7 @@ export default createFragmentContainer(AnalysisProposal, {
       id
       title
       publishedAt
+      url
       reference(full: false)
       author {
         id

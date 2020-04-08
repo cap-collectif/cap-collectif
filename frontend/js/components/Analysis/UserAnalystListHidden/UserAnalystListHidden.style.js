@@ -18,6 +18,7 @@ export const TooltipAnalystListHiddenContainer: StyledComponent<
   flex-wrap: wrap;
   padding: 4px 0;
 
+  img,
   svg {
     margin: 0;
   }
@@ -38,6 +39,10 @@ export const UserAvatarWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled
   flex-direction: row;
   align-items: center;
   padding-left: 6px;
+`;
+
+export const UsernameWrapper: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+  margin-left: 3px;
 `;
 
 export default UserAnalystListHiddenContainer;

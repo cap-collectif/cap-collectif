@@ -9,7 +9,7 @@ export const AnalysisPickableListContainer: StyledComponent<{}, {}, HTMLDivEleme
 
 export const AnalysisProposalListHeaderContainer: any = styled(PickableList.Header)`
   align-items: stretch;
-  & > *:not(.wrapper-checkbox-all-rows) {
+  & > *:not(.all-rows-checkbox) {
     margin: 0 30px 0 0;
     justify-content: flex-start;
     & p {

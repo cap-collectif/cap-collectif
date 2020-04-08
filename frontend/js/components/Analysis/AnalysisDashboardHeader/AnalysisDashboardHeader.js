@@ -9,7 +9,6 @@ import type { AnalysisDashboardHeader_project } from '~relay/AnalysisDashboardHe
 import { usePickableList } from '~ui/List/PickableList';
 import { useAnalysisProposalsContext } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 import { getAllFormattedChoicesForProject } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
-import AnalystDashboardHeaderContainer from './AnalysisDashboardHeader.style';
 import Collapsable from '~ui/Collapsable';
 import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
 import DropdownSelect from '~ui/DropdownSelect';
@@ -88,11 +87,11 @@ const getFiltersShown = (
   ];
 };
 
-const AnalysisDashboardHeader = ({ project, user }: Props) => {
+const AnalysisDashboardHeader = ({ project, user }: $Diff<Props, { relay: * }>) => {
   const intl = useIntl();
   const { proposals: dataProposals } = project;
   const proposals = dataProposals?.edges?.filter(Boolean).map(edge => edge.node);
-  const { selectedRows } = usePickableList();
+  const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useAnalysisProposalsContext();
   const { categories, districts } = React.useMemo(() => getAllFormattedChoicesForProject(project), [
     project,
@@ -102,7 +101,13 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
   const fakePromise = () => new Promise(resolve => resolve([1, 2, 3]));
 
   return (
-    <AnalystDashboardHeaderContainer>
+    <>
+      <FormattedMessage
+        tagName="p"
+        id="count-proposal"
+        values={{ num: selectedRows.length > 0 ? selectedRows.length : rowsCount }}
+      />
+
       {filtersShown.includes(DISTRICT) && (
         <AnalysisFilterContainer>
           <Collapsable>
@@ -283,7 +288,7 @@ const AnalysisDashboardHeader = ({ project, user }: Props) => {
           </Collapsable>
         </AnalysisFilterContainer>
       )}
-    </AnalystDashboardHeaderContainer>
+    </>
   );
 };
 

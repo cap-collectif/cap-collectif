@@ -16,6 +16,7 @@ const PickableListBody = ({ children }: Props) => {
     const rowIds = React.Children.toArray(children)
       .filter(c => 'rowId' in c.props)
       .map(c => String(c.props.rowId));
+
     if (!isEqual(rowIds, Object.keys(rows))) {
       dispatch({ type: 'INITIALIZE_ROWS', payload: { rowIds, selectedRows } });
     }

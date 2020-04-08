@@ -58,6 +58,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}
+      isLoading={false}
       loader={<ProposalListLoader />}
       onScrollToBottom={[Function]}
       useInfiniteScroll={true}
@@ -95,6 +96,13 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
                       "publishedAt": "2017-02-01 00:00:00",
                       "reference": "1",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                          },
+                        },
+                      ],
                       "status": Object {
                         "color": "info",
                         "id": "status1",
@@ -128,6 +136,13 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
                       "publishedAt": "2017-02-01 00:03:00",
                       "reference": "12",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                          },
+                        },
+                      ],
                       "status": Object {
                         "color": "success",
                         "id": "status2",
@@ -161,6 +176,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
                       "publishedAt": "2017-02-01 00:03:00",
                       "reference": "2",
+                      "selections": Array [],
                       "status": Object {
                         "color": "success",
                         "id": "status2",
@@ -194,6 +210,13 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
                       "publishedAt": "2017-02-01 00:04:00",
                       "reference": "3",
+                      "selections": Array [
+                        Object {
+                          "step": Object {
+                            "id": "selectionStep1",
+                          },
+                        },
+                      ],
                       "status": Object {
                         "color": "info",
                         "id": "status1",
@@ -224,6 +247,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
                       "publishedAt": "2017-02-01 00:04:19",
                       "reference": "4",
+                      "selections": Array [],
                       "status": null,
                       "title": "Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure",
                     },
@@ -250,6 +274,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
                       "publishedAt": "2017-02-01 00:07:00",
                       "reference": "7",
+                      "selections": Array [],
                       "status": Object {
                         "color": "info",
                         "id": "status1",
@@ -280,6 +305,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
                       "publishedAt": "2017-02-01 00:08:00",
                       "reference": "8",
+                      "selections": Array [],
                       "status": Object {
                         "color": "info",
                         "id": "status1",
@@ -307,6 +333,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDQ=",
                       "publishedAt": "2018-04-11 00:00:00",
                       "reference": "1104",
+                      "selections": Array [],
                       "status": null,
                       "title": "Test de publication avec accusé de réception",
                     },
@@ -356,6 +383,25 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                     },
                   ],
                   "title": "Étape de dépôt",
+                  "url": "http://example.com",
+                },
+                Object {
+                  "__typename": "SelectionStep",
+                  "id": "selectionStep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "info",
+                      "id": "status4",
+                      "name": "Soumis au vote",
+                    },
+                    Object {
+                      "color": "success",
+                      "id": "status5",
+                      "name": "Vote gagné",
+                    },
+                  ],
+                  "title": "Sélection",
+                  "url": "http://example.com",
                 },
               ],
             }
@@ -842,6 +888,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}
+      isLoading={false}
       loader={<ProposalListLoader />}
       onScrollToBottom={[Function]}
       useInfiniteScroll={false}
@@ -898,6 +945,25 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                     },
                   ],
                   "title": "Étape de dépôt",
+                  "url": "http://example.com",
+                },
+                Object {
+                  "__typename": "SelectionStep",
+                  "id": "selectionStep1",
+                  "statuses": Array [
+                    Object {
+                      "color": "info",
+                      "id": "status4",
+                      "name": "Soumis au vote",
+                    },
+                    Object {
+                      "color": "success",
+                      "id": "status5",
+                      "name": "Vote gagné",
+                    },
+                  ],
+                  "title": "Sélection",
+                  "url": "http://example.com",
                 },
               ],
             }

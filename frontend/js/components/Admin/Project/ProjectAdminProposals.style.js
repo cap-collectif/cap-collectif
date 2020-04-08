@@ -51,3 +51,18 @@ export const Label: StyledComponent<{}, {}, typeof BSLabel> = styled(BSLabel)`
   border-radius: 12px;
   padding: 6px;
 `;
+
+export const EmptyStatusesFilling: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+
+  span {
+    font-weight: normal;
+  }
+
+  .icon {
+    margin-right: 8px;
+    margin-top: 2px;
+  }
+`;

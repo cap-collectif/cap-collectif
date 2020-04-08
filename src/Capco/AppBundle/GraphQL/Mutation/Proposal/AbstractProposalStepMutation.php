@@ -35,7 +35,7 @@ abstract class AbstractProposalStepMutation
 
     //restrictions
     protected ?Project                  $project = null;
-    protected ?SelectionStep            $selectionStep = null;
+    protected ?AbstractStep             $step = null;
 
     public function __construct(
         EntityManagerInterface  $entityManager,
@@ -102,7 +102,7 @@ abstract class AbstractProposalStepMutation
             }
 
             $this->project = $status->getStep()->getProject();
-            $this->selectionStep = $status->getStep();
+            $this->step = $status->getStep();
         }
 
         return $status;
@@ -142,7 +142,7 @@ abstract class AbstractProposalStepMutation
         if (
             $proposal
             && (is_null($this->project) || $proposal->getProject() === $this->project)
-            && (is_null($this->selectionStep) || in_array($this->selectionStep, $proposal->getSelectionSteps()))
+            && (is_null($this->step) || $proposal->getStep() === $this->step || in_array($this->step, $proposal->getSelectionSteps()))
         ) {
             $proposals[$proposal->getId()] = $proposal;
             $this->project = $proposal->getProject();

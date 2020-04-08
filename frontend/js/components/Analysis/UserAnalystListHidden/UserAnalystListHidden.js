@@ -15,6 +15,7 @@ import type { UserAnalystListHidden_proposal } from '~relay/UserAnalystListHidde
 import UserAnalystListHiddenContainer, {
   TooltipAnalystListHiddenContainer,
   UserAvatarWrapper,
+  UsernameWrapper,
 } from './UserAnalystListHidden.style';
 
 type Props = {
@@ -62,8 +63,7 @@ const UserAnalystListHidden = ({ proposal }: Props) => {
                   size={HIDDEN_AVATAR_SIZE}
                   badge={getBadge(getStatus(analyses, analyst.id), true)}
                 />
-                &nbsp;
-                <span>{analyst.username}</span>
+                <UsernameWrapper>{analyst.username}</UsernameWrapper>
                 {countRestAnalysts !== index + 1 && (
                   <>
                     <span>,</span>{' '}

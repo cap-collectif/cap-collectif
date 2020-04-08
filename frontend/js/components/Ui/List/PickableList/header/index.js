@@ -5,11 +5,10 @@ import { usePickableList } from '~ui/List/PickableList';
 
 type Props = {
   className?: string,
-  label?: string | React.Node,
   children: React.Node | (({ selectedRows: string[], rowsCount: number }) => React.Node),
 };
 
-const PickableListHeader = ({ children, className, label }: Props) => {
+const PickableListHeader = ({ children, className }: Props) => {
   const {
     dispatch,
     hasIndeterminateState,
@@ -26,21 +25,19 @@ const PickableListHeader = ({ children, className, label }: Props) => {
   }, [hasIndeterminateState, hasAllRowsChecked]);
   return (
     <S.Container className={className}>
-      <div className="wrapper-checkbox-all-rows">
-        <input
-          type="checkbox"
-          id="allRows"
-          ref={checkbox}
-          onChange={e => {
-            if (e.target.checked) {
-              dispatch({ type: 'SELECT_ALL_ROWS' });
-            } else {
-              dispatch({ type: 'DESELECT_ALL_ROWS' });
-            }
-          }}
-        />
-        {label && <label htmlFor="allRows">{label}</label>}
-      </div>
+      <input
+        type="checkbox"
+        id="allRows"
+        className="all-rows-checkbox"
+        ref={checkbox}
+        onChange={e => {
+          if (e.target.checked) {
+            dispatch({ type: 'SELECT_ALL_ROWS' });
+          } else {
+            dispatch({ type: 'DESELECT_ALL_ROWS' });
+          }
+        }}
+      />
       {typeof children === 'function' ? children({ selectedRows, rowsCount }) : children}
     </S.Container>
   );

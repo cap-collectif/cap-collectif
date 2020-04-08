@@ -56,7 +56,7 @@ const Provider = ({ children }: ProviderProps) => {
       rows: state.rows,
       dispatch,
     }),
-    [state],
+    [state.rows],
   );
   return <PickableListContext.Provider value={context}>{children}</PickableListContext.Provider>;
 };

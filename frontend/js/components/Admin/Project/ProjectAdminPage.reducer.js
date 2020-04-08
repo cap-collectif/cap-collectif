@@ -13,6 +13,16 @@ export type ProposalsDistrictValues = 'ALL' | Uuid;
 
 export type ProposalsStepValues = ?Uuid;
 
+export type StepChanged = {
+  id: Uuid,
+  count: number,
+};
+
+export type StepsChangedProposal = {
+  stepsAdded: StepChanged[],
+  stepsRemoved: StepChanged[],
+};
+
 export type Filters = {|
   +state: ProposalsStateValues,
   +category: ProposalsCategoryValues,
@@ -25,12 +35,14 @@ export type Filters = {|
 export type ProjectAdminPageState = {|
   +status: ProjectAdminPageStatus,
   +sort: SortValues,
+  +stepsChangedProposal: StepsChangedProposal,
   +filters: Filters,
 |};
 
 export type ProjectAdminPageParameters = {|
   +sort: $PropertyType<ProjectAdminPageState, 'sort'>,
   +filters: $PropertyType<ProjectAdminPageState, 'filters'>,
+  +stepsChangedProposal: $PropertyType<ProjectAdminPageState, 'stepsChangedProposal'>,
 |};
 
 export type Action =
@@ -46,6 +58,15 @@ export type Action =
   | { type: 'CHANGE_DISTRICT_FILTER', payload: ProposalsDistrictValues }
   | { type: 'CLEAR_DISTRICT_FILTER' }
   | { type: 'CHANGE_STATE_FILTER', payload: ProposalsStateValues }
+  | {
+      type: 'CHANGE_STEPS_ADDED_TO_PROPOSAL',
+      payload: { stepId: Uuid, countSelectedProposal: number },
+    }
+  | {
+      type: 'CHANGE_STEPS_REMOVED_FROM_PROPOSAL',
+      payload: { stepId: Uuid, countSelectedProposal: number },
+    }
+  | { type: 'CLEAR_STEPS_CHANGED_PROPOSAL' }
   | { type: 'SEARCH_TERM', payload: ?string }
   | { type: 'CLEAR_TERM' };
 
@@ -139,6 +160,44 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
       return {
         ...state,
         sort: action.payload,
+      };
+    case 'CHANGE_STEPS_ADDED_TO_PROPOSAL':
+      return {
+        ...state,
+        stepsChangedProposal: {
+          stepsAdded: [
+            ...state.stepsChangedProposal.stepsAdded,
+            { id: action.payload.stepId, count: action.payload.countSelectedProposal },
+          ],
+          stepsRemoved: [
+            ...state.stepsChangedProposal.stepsRemoved.filter(
+              ({ id }) => id !== action.payload.stepId,
+            ),
+          ],
+        },
+      };
+    case 'CHANGE_STEPS_REMOVED_FROM_PROPOSAL':
+      return {
+        ...state,
+        stepsChangedProposal: {
+          stepsRemoved: [
+            ...state.stepsChangedProposal.stepsRemoved,
+            { id: action.payload.stepId, count: action.payload.countSelectedProposal },
+          ],
+          stepsAdded: [
+            ...state.stepsChangedProposal.stepsAdded.filter(
+              ({ id }) => id !== action.payload.stepId,
+            ),
+          ],
+        },
+      };
+    case 'CLEAR_STEPS_CHANGED_PROPOSAL':
+      return {
+        ...state,
+        stepsChangedProposal: {
+          stepsAdded: [],
+          stepsRemoved: [],
+        },
       };
     case 'SEARCH_TERM':
       return {

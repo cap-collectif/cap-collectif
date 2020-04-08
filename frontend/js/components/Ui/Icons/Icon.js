@@ -48,6 +48,7 @@ export const ICON_NAME: {
   silent: 'silent',
   favorable: 'favorable',
   crossRounded: 'cross--rounded',
+  warning: 'warning',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -93,6 +94,7 @@ export const ICON_NAME: {
   silent: 'silent',
   favorable: 'favorable',
   crossRounded: 'cross--rounded',
+  warning: 'warning',
 };
 
 type Props = {|
@@ -193,6 +195,8 @@ const getIcon = name => {
       return <Icons.Clock />;
     case 'silent':
       return <Icons.Silent />;
+    case 'warning':
+      return <Icons.Warning />;
     default:
       return <div />;
   }
@@ -208,6 +212,7 @@ const Icon = ({ name, title, color, size, ariaHidden = true, classNames, ...rest
     'aria-hidden': ariaHidden,
     style: {
       verticalAlign: 'middle',
+      flexShrink: '0',
     },
     ...rest,
   });

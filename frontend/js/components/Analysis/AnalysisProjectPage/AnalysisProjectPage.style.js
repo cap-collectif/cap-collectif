@@ -11,10 +11,6 @@ const AnalysisProjectPageContainer: StyledComponent<{}, {}, HTMLDivElement> = st
     color: #000;
     margin: 0 0 30px 0;
   }
-
-  .pickableList-header {
-    justify-content: space-between;
-  }
 `;
 
 export const ProposalListNoContributions: StyledComponent<{}, {}, HTMLDivElement> = styled.div`

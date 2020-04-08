@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { AnalysisProjectPage_project } from '~relay/AnalysisProjectPage_project.graphql';
-import PickableList, { usePickableList } from '~ui/List/PickableList';
+import PickableList from '~ui/List/PickableList';
 import BodyInfos from '~ui/Boxes/BodyInfos';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import InlineSelect from '~ui/InlineSelect';
@@ -17,6 +17,7 @@ import { useAnalysisProposalsContext } from './AnalysisProjectPage.context';
 import { STATE, type StateValues } from './AnalysisProjectPage.reducer';
 import AnalysisDashboardHeader from '~/components/Analysis/AnalysisDashboardHeader/AnalysisDashboardHeader';
 import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
+import { AnalysisProposalListHeaderContainer } from '~ui/Analysis/common.style';
 
 export const ANALYSIS_PROJECT_PROPOSALS_PAGINATION = 20;
 
@@ -44,7 +45,6 @@ const AnalysisProjectPage = ({ project, relay }: Props) => {
   const proposals = dataProposals?.edges?.filter(Boolean).map(edge => edge.node);
   const hasProposals = dataProposals?.totalCount > 0;
   const { parameters, dispatch } = useAnalysisProposalsContext();
-  const { selectedRows, rowsCount } = usePickableList();
 
   return (
     <AnalysisProjectPageContainer>
@@ -87,19 +87,15 @@ const AnalysisProjectPage = ({ project, relay }: Props) => {
           }}
           hasMore={relay.hasMore()}
           loader={<ProposalListLoader key="loader" />}>
-          <PickableList.Header
-            label={
-              <FormattedMessage
-                id="count-proposal"
-                values={{ num: selectedRows.length > 0 ? selectedRows.length : rowsCount }}
-              />
-            }>
+          <AnalysisProposalListHeaderContainer>
             <AnalysisDashboardHeader project={project} />
-          </PickableList.Header>
+          </AnalysisProposalListHeaderContainer>
 
           <PickableList.Body>
             {hasProposals ? (
-              proposals?.map((proposal, idx) => <AnalysisProposal proposal={proposal} key={idx} />)
+              proposals?.map(proposal => (
+                <AnalysisProposal proposal={proposal} key={proposal.id} rowId={proposal.id} />
+              ))
             ) : (
               <NoResult />
             )}
@@ -148,6 +144,7 @@ export default createPaginationContainer(
           edges {
             cursor
             node {
+              id
               ...AnalysisProposal_proposal
             }
           }

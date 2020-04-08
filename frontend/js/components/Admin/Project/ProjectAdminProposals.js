@@ -12,15 +12,26 @@ import DropdownSelect from '~ui/DropdownSelect';
 import Collapsable from '~ui/Collapsable';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
 import type {
+  Action,
   ProposalsCategoryValues,
   ProposalsDistrictValues,
   ProposalsStateValues,
+  ProposalsStepValues,
   SortValues,
+  StepsChangedProposal,
 } from '~/components/Admin/Project/ProjectAdminPage.reducer';
+import type { Uuid } from '~/types';
 import InlineSelect from '~ui/InlineSelect';
-import { getAllFormattedChoicesForProject } from '~/components/Admin/Project/ProjectAdminProposals.utils';
+import {
+  getAllFormattedChoicesForProject,
+  type ProposalsSelected,
+  type StepFilter,
+  FILLING,
+} from '~/components/Admin/Project/ProjectAdminProposals.utils';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
 import FilterTag from '~ui/Analysis/FilterTag';
+import colors from '~/utils/colors';
 import {
   AnalysisFilterContainer,
   AnalysisNoContributionIcon,
@@ -31,6 +42,12 @@ import {
   AnalysisProposalListRowInformations,
   AnalysisProposalListRowMeta,
 } from '~ui/Analysis/common.style';
+import AddProposalsToStepsMutation from '~/mutations/AddProposalsToStepsMutation';
+import ApplyProposalStatusMutation from '~/mutations/ApplyProposalStatusMutation';
+import RemoveProposalsFromStepsMutation from '~/mutations/RemoveProposalsFromStepsMutation';
+import FluxDispatcher from '~/dispatchers/AppDispatcher';
+import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
+import type { StepFilling } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -38,6 +55,103 @@ type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
 |};
+
+const updateStepProposals = (
+  proposalsSelected: $ReadOnlyArray<ProposalsSelected>,
+  stepsChangedProposal: StepsChangedProposal,
+  stepSelected: ProposalsStepValues,
+  dispatch,
+) => {
+  if (
+    stepsChangedProposal.stepsAdded.length === 0 &&
+    stepsChangedProposal.stepsRemoved.length === 0
+  ) {
+    return;
+  }
+
+  dispatch({ type: 'START_LOADING' });
+  const promises = [];
+  const proposalIds = proposalsSelected.map(({ id }) => id);
+
+  if (stepsChangedProposal.stepsAdded.length > 0) {
+    const stepIds = stepsChangedProposal.stepsAdded.map(({ id }) => id);
+
+    promises.push(
+      AddProposalsToStepsMutation.commit({
+        input: {
+          proposalIds,
+          stepIds,
+        },
+        step: stepSelected,
+      }),
+    );
+  }
+
+  if (stepsChangedProposal.stepsRemoved.length > 0) {
+    const stepIds = stepsChangedProposal.stepsRemoved.map(({ id }) => id);
+
+    promises.push(
+      RemoveProposalsFromStepsMutation.commit({
+        input: {
+          proposalIds,
+          stepIds,
+        },
+        step: stepSelected,
+      }),
+    );
+  }
+
+  return Promise.all(promises)
+    .then(() => {
+      dispatch({
+        type: 'CLEAR_STEPS_CHANGED_PROPOSAL',
+      });
+      dispatch({ type: 'STOP_LOADING' });
+    })
+    .catch(() => {
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {
+          type: TYPE_ALERT.ERROR,
+          content: 'moving.contributions.failed',
+        },
+      });
+    });
+};
+
+const updateStatusProposals = (
+  proposalsSelected: $ReadOnlyArray<ProposalsSelected>,
+  statusId: Uuid,
+  stepSelected: ProposalsStepValues,
+  dispatch,
+  closeDropdown,
+) => {
+  dispatch({ type: 'START_LOADING' });
+  closeDropdown();
+
+  const proposalIds = proposalsSelected.map(({ id }) => id);
+  const shouldDeleteStatus = proposalsSelected.every(({ status }) => status === statusId);
+
+  return ApplyProposalStatusMutation.commit({
+    input: {
+      proposalIds,
+      statusId: shouldDeleteStatus ? null : statusId,
+    },
+    step: stepSelected,
+  })
+    .then(() => {
+      dispatch({ type: 'STOP_LOADING' });
+    })
+    .catch(() => {
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {
+          type: TYPE_ALERT.ERROR,
+          content: 'status.update.failed',
+        },
+      });
+    });
+};
 
 const ProposalListLoader = () => (
   <AnalysisProposalListLoader>
@@ -49,11 +163,28 @@ const ProposalListLoader = () => (
 const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
-  const { categories, districts, steps, stepStatuses } = React.useMemo(
-    () => getAllFormattedChoicesForProject(project, parameters.filters.step),
-    [project, parameters.filters.step],
+
+  const {
+    categories,
+    districts,
+    steps,
+    stepStatuses,
+    proposalsSelected,
+    stepsFilling,
+    statusesFilling,
+  } = React.useMemo(
+    () =>
+      getAllFormattedChoicesForProject(
+        project,
+        parameters.filters.step,
+        parameters.stepsChangedProposal,
+        selectedRows,
+      ),
+    [project, parameters.filters.step, parameters.stepsChangedProposal, selectedRows],
   );
   const intl = useIntl();
+  const selectedStepId: ProposalsStepValues = parameters.filters.step;
+  const selectedStep: ?StepFilter = steps.find(({ id }) => id === selectedStepId);
   const selectedStepStatus = React.useMemo(
     () => stepStatuses.find(s => s.id === parameters.filters.status),
     [parameters.filters.status, stepStatuses],
@@ -61,111 +192,120 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
 
   const renderFilters = (
     <React.Fragment>
-      <AnalysisFilterContainer>
-        <Collapsable align="right" key="zone-filter">
-          <Collapsable.Button>
-            <FormattedMessage tagName="p" id="admin.fields.proposal.map.zone" />
-          </Collapsable.Button>
-          <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
-            <DropdownSelect
-              shouldOverflow
-              value={parameters.filters.district}
-              onChange={newValue => {
-                dispatch({
-                  type: 'CHANGE_DISTRICT_FILTER',
-                  payload: ((newValue: any): ProposalsDistrictValues),
-                });
-              }}
-              title={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
-              <DropdownSelect.Choice value="ALL">
-                {intl.formatMessage({ id: 'global.select_districts' })}
-              </DropdownSelect.Choice>
-              {districts.map(district => (
-                <DropdownSelect.Choice key={district.id} value={district.id}>
-                  {district.name}
+      {districts?.length > 0 && (
+        <AnalysisFilterContainer>
+          <Collapsable align="right" key="zone-filter">
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="admin.fields.proposal.map.zone" />
+            </Collapsable.Button>
+            <Collapsable.Element
+              ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
+              <DropdownSelect
+                shouldOverflow
+                value={parameters.filters.district}
+                onChange={newValue => {
+                  dispatch({
+                    type: 'CHANGE_DISTRICT_FILTER',
+                    payload: ((newValue: any): ProposalsDistrictValues),
+                  });
+                }}
+                title={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
+                <DropdownSelect.Choice value="ALL">
+                  {intl.formatMessage({ id: 'global.select_districts' })}
                 </DropdownSelect.Choice>
-              ))}
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-        <FilterTag
-          onClose={() => {
-            dispatch({ type: 'CLEAR_DISTRICT_FILTER' });
-          }}
-          icon={<i className="cap cap-marker-1" />}
-          show={parameters.filters.district !== 'ALL'}>
-          {districts.find(d => d.id === parameters.filters.district)?.name || null}
-        </FilterTag>
-      </AnalysisFilterContainer>
-      <AnalysisFilterContainer>
-        <Collapsable align="right" key="category-filter">
-          <Collapsable.Button>
-            <FormattedMessage tagName="p" id="admin.fields.proposal.category" />
-          </Collapsable.Button>
-          <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
-            <DropdownSelect
-              value={parameters.filters.category}
-              onChange={newValue => {
-                dispatch({
-                  type: 'CHANGE_CATEGORY_FILTER',
-                  payload: ((newValue: any): ProposalsCategoryValues),
-                });
-              }}
-              title={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
-              <DropdownSelect.Choice value="ALL">
-                {intl.formatMessage({ id: 'global.select_categories' })}
-              </DropdownSelect.Choice>
-              {categories.map(cat => (
-                <DropdownSelect.Choice key={cat.id} value={cat.id}>
-                  {cat.name}
+                {districts.map(district => (
+                  <DropdownSelect.Choice key={district.id} value={district.id}>
+                    {district.name}
+                  </DropdownSelect.Choice>
+                ))}
+              </DropdownSelect>
+            </Collapsable.Element>
+          </Collapsable>
+          <FilterTag
+            onClose={() => {
+              dispatch({ type: 'CLEAR_DISTRICT_FILTER' });
+            }}
+            icon={<i className="cap cap-marker-1" />}
+            show={parameters.filters.district !== 'ALL'}>
+            {districts.find(d => d.id === parameters.filters.district)?.name || null}
+          </FilterTag>
+        </AnalysisFilterContainer>
+      )}
+
+      {categories?.length > 0 && (
+        <AnalysisFilterContainer>
+          <Collapsable align="right" key="category-filter">
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="admin.fields.proposal.category" />
+            </Collapsable.Button>
+            <Collapsable.Element
+              ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
+              <DropdownSelect
+                value={parameters.filters.category}
+                onChange={newValue => {
+                  dispatch({
+                    type: 'CHANGE_CATEGORY_FILTER',
+                    payload: ((newValue: any): ProposalsCategoryValues),
+                  });
+                }}
+                title={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
+                <DropdownSelect.Choice value="ALL">
+                  {intl.formatMessage({ id: 'global.select_categories' })}
                 </DropdownSelect.Choice>
-              ))}
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-        <FilterTag
-          onClose={() => {
-            dispatch({ type: 'CLEAR_CATEGORY_FILTER' });
-          }}
-          icon={<i className="cap cap-tag-1" />}
-          show={parameters.filters.category !== 'ALL'}>
-          {categories.find(c => c.id === parameters.filters.category)?.name || null}
-        </FilterTag>
-      </AnalysisFilterContainer>
-      <AnalysisFilterContainer>
-        <Collapsable align="right" key="status-filter">
-          <Collapsable.Button>
-            <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
-          </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
-            <DropdownSelect
-              value={parameters.filters.status}
-              onChange={newValue => {
-                dispatch({
-                  type: 'CHANGE_STATUS_FILTER',
-                  payload: ((newValue: any): SortValues),
-                });
-              }}
-              title={intl.formatMessage({ id: 'filter-by' })}>
-              {stepStatuses.map(stepStatus => (
-                <DropdownSelect.Choice key={stepStatus.id} value={stepStatus.id}>
-                  {stepStatus.name}
-                </DropdownSelect.Choice>
-              ))}
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-        <FilterTag
-          onClose={() => {
-            dispatch({ type: 'CLEAR_STATUS_FILTER' });
-          }}
-          bgColor={selectedStepStatus?.color || undefined}
-          show={parameters.filters.status !== null}>
-          {selectedStepStatus?.name || null}
-        </FilterTag>
-      </AnalysisFilterContainer>
+                {categories.map(cat => (
+                  <DropdownSelect.Choice key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </DropdownSelect.Choice>
+                ))}
+              </DropdownSelect>
+            </Collapsable.Element>
+          </Collapsable>
+          <FilterTag
+            onClose={() => {
+              dispatch({ type: 'CLEAR_CATEGORY_FILTER' });
+            }}
+            icon={<i className="cap cap-tag-1" />}
+            show={parameters.filters.category !== 'ALL'}>
+            {categories.find(c => c.id === parameters.filters.category)?.name || null}
+          </FilterTag>
+        </AnalysisFilterContainer>
+      )}
+
+      {stepStatuses?.length > 0 && (
+        <AnalysisFilterContainer>
+          <Collapsable align="right" key="status-filter">
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
+            </Collapsable.Button>
+            <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
+              <DropdownSelect
+                value={parameters.filters.status}
+                onChange={newValue => {
+                  dispatch({
+                    type: 'CHANGE_STATUS_FILTER',
+                    payload: ((newValue: any): SortValues),
+                  });
+                }}
+                title={intl.formatMessage({ id: 'filter-by' })}>
+                {stepStatuses.map(stepStatus => (
+                  <DropdownSelect.Choice key={stepStatus.id} value={stepStatus.id}>
+                    {stepStatus.name}
+                  </DropdownSelect.Choice>
+                ))}
+              </DropdownSelect>
+            </Collapsable.Element>
+          </Collapsable>
+          <FilterTag
+            onClose={() => {
+              dispatch({ type: 'CLEAR_STATUS_FILTER' });
+            }}
+            bgColor={selectedStepStatus?.color || undefined}
+            show={parameters.filters.status !== null}>
+            {selectedStepStatus?.name || null}
+          </FilterTag>
+        </AnalysisFilterContainer>
+      )}
+
       <AnalysisFilterContainer>
         <Collapsable align="right" key="step-filter">
           <Collapsable.Button>
@@ -214,6 +354,109 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
       </AnalysisFilterContainer>
     </React.Fragment>
   );
+
+  const renderFiltersSelectedProposal = (
+    <React.Fragment>
+      <AnalysisFilterContainer>
+        <Collapsable
+          align="right"
+          onClose={() =>
+            updateStepProposals(
+              proposalsSelected,
+              parameters.stepsChangedProposal,
+              selectedStepId,
+              dispatch,
+            )
+          }>
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="synthesis.edition.action.publish.field.parent" />
+          </Collapsable.Button>
+          <Collapsable.Element
+            ariaLabel={intl.formatMessage({ id: 'synthesis.edition.action.publish.field.parent' })}>
+            <DropdownSelect
+              shouldOverflow
+              title={intl.formatMessage({ id: 'move.in.step' })}
+              onChange={(stepFilling: StepFilling) => {
+                dispatch(
+                  (({
+                    type:
+                      stepFilling.filling === FILLING.FULL
+                        ? 'CHANGE_STEPS_REMOVED_FROM_PROPOSAL'
+                        : 'CHANGE_STEPS_ADDED_TO_PROPOSAL',
+                    payload: {
+                      stepId: stepFilling.id,
+                      countSelectedProposal: selectedRows.length,
+                    },
+                  }: any): Action),
+                );
+              }}>
+              {stepsFilling.map(step => (
+                <DropdownSelect.Choice
+                  key={step.id}
+                  value={{ id: step.id, filling: step.filling }}
+                  disabled={step.id === selectedStepId}>
+                  {step.icon && <Icon name={step.icon} size={12} color={colors.iconGrayColor} />}
+                  {step.title}
+                </DropdownSelect.Choice>
+              ))}
+            </DropdownSelect>
+          </Collapsable.Element>
+        </Collapsable>
+      </AnalysisFilterContainer>
+
+      <AnalysisFilterContainer>
+        <Collapsable align="right">
+          {closeDropdown => (
+            <>
+              <Collapsable.Button>
+                <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
+              </Collapsable.Button>
+              <Collapsable.Element
+                ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.status' })}>
+                <DropdownSelect
+                  onChange={statusFilling =>
+                    updateStatusProposals(
+                      proposalsSelected,
+                      ((statusFilling: any): Uuid),
+                      selectedStepId,
+                      dispatch,
+                      closeDropdown,
+                    )
+                  }
+                  title={intl.formatMessage({ id: 'change.status.to' })}>
+                  {statusesFilling?.length > 0 ? (
+                    statusesFilling.map(status => (
+                      <DropdownSelect.Choice key={status.id} value={status.id}>
+                        {status.icon && (
+                          <Icon name={status.icon} size={12} color={colors.iconGrayColor} />
+                        )}
+                        {status.name}
+                      </DropdownSelect.Choice>
+                    ))
+                  ) : (
+                    <S.EmptyStatusesFilling>
+                      <Icon name={ICON_NAME.warning} size={15} />
+                      <div>
+                        <FormattedMessage tagName="p" id="no.filter.available" />
+                        <FormattedMessage
+                          tagName="span"
+                          id="help.add.filters"
+                          values={{
+                            link_to_step: <a href={selectedStep?.url}>{selectedStep?.title}</a>,
+                          }}
+                        />
+                      </div>
+                    </S.EmptyStatusesFilling>
+                  )}
+                </DropdownSelect>
+              </Collapsable.Element>
+            </>
+          )}
+        </Collapsable>
+      </AnalysisFilterContainer>
+    </React.Fragment>
+  );
+
   return (
     <React.Fragment>
       {selectedRows.length > 0 ? (
@@ -225,6 +468,7 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
               itemCount: selectedRows.length,
             }}
           />
+          {renderFiltersSelectedProposal}
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -239,7 +483,7 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
 };
 
 export const ProjectAdminProposals = ({ project, relay }: Props) => {
-  const { parameters, dispatch } = useProjectAdminProposalsContext();
+  const { parameters, dispatch, status } = useProjectAdminProposalsContext();
   const intl = useIntl();
   const hasProposals = project.proposals?.totalCount > 0;
 
@@ -289,7 +533,9 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
             placeholder={intl.formatMessage({ id: 'global.menu.search' })}
           />
         </S.ProjectAdminProposalsHeader>
+
         <PickableList
+          isLoading={status === 'loading'}
           useInfiniteScroll={hasProposals}
           onScrollToBottom={() => {
             relay.loadMore(PROJECT_ADMIN_PROPOSAL_PAGINATION);
@@ -299,6 +545,7 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
           <AnalysisProposalListHeaderContainer>
             <ProposalListHeader project={project} />
           </AnalysisProposalListHeaderContainer>
+
           <PickableList.Body>
             {hasProposals ? (
               project.proposals?.edges
@@ -389,6 +636,7 @@ export default createPaginationContainer(
           __typename
           id
           title
+          url
           ... on ProposalStep {
             statuses {
               id
@@ -454,6 +702,11 @@ export default createPaginationContainer(
                 step {
                   id
                   title
+                }
+              }
+              selections {
+                step {
+                  id
                 }
               }
             }

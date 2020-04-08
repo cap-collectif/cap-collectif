@@ -6,16 +6,13 @@ Array [
     class="styles__Container-sc-19fy1kf-0 kLoACa"
   >
     <div
-      class="styles__Container-sc-1ig07ym-0 endRTa pickableList-header"
+      class="styles__Container-sc-1ig07ym-0 bXPQuC pickableList-header"
     >
-      <div
-        class="wrapper-checkbox-all-rows"
-      >
-        <input
-          id="allRows"
-          type="checkbox"
-        />
-      </div>
+      <input
+        class="all-rows-checkbox"
+        id="allRows"
+        type="checkbox"
+      />
       <p>
         Items
       </p>

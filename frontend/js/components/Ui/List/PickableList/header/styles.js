@@ -21,16 +21,12 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid ${colors.lightGray};
-  & > .wrapper-checkbox-all-rows input[type='checkbox'] {
+  & > input[type='checkbox'] {
     min-width: ${CHECKBOX_CELL_WIDTH};
     max-width: ${CHECKBOX_CELL_WIDTH};
     width: ${CHECKBOX_CELL_WIDTH};
     margin-top: 0;
     align-self: center;
-  }
-  & > .wrapper-checkbox-all-rows label {
-    font-weight: normal;
-    margin: 0;
   }
   & + ${/* sc-selector */ PickableListBodyContainer} {
     border-top: none;

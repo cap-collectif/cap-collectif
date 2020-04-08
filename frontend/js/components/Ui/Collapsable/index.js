@@ -60,7 +60,7 @@ export type CollapsableAlignment = 'left' | 'right';
 
 type Props = {|
   +align?: CollapsableAlignment,
-  +onClose?: () => void,
+  +onClose?: () => void | Promise<any>,
   +children:
     | React.ChildrenArray<
         | React.Element<typeof React.Fragment | typeof CollapsableButton>

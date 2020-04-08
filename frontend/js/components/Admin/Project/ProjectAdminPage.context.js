@@ -43,6 +43,10 @@ export const ProjectAdminPageContext = React.createContext<Context>({
   parameters: {
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,
+    stepsChangedProposal: {
+      stepsAdded: [],
+      stepsRemoved: [],
+    },
   },
   firstCollectStepId: null,
   dispatch: () => {},
@@ -66,6 +70,10 @@ export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: 
       ...DEFAULT_FILTERS,
       step: firstCollectStepId,
     },
+    stepsChangedProposal: {
+      stepsAdded: [],
+      stepsRemoved: [],
+    },
   });
   const context = React.useMemo(
     () => ({
@@ -73,6 +81,7 @@ export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: 
       parameters: {
         sort: state.sort,
         filters: state.filters,
+        stepsChangedProposal: state.stepsChangedProposal,
       },
       firstCollectStepId,
       dispatch,

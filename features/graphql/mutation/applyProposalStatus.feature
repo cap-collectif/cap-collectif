@@ -74,6 +74,9 @@ Scenario: Admin does not change the status of a proposal
           edges {
             node {
               id
+              status {
+                id
+              }
               selections {
                 status {
                   id
@@ -103,6 +106,9 @@ Scenario: Admin does not change the status of a proposal
             {
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                "status": {
+                  "id": "status1"
+                },
                 "selections": [
                   {
                     "status": {
@@ -120,7 +126,7 @@ Scenario: Admin does not change the status of a proposal
   """
 
 @database @rabbitmq
-Scenario: Admin changes the status of a proposal
+Scenario: Admin changes the status of a selection step in a proposal
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
@@ -132,6 +138,9 @@ Scenario: Admin changes the status of a proposal
           edges {
             node {
               id
+              status {
+                id
+              }
               selections {
                 status {
                   id
@@ -161,10 +170,77 @@ Scenario: Admin changes the status of a proposal
             {
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                "status": {
+                  "id": "status1"
+                },
                 "selections": [
                   {
                     "status": {
                       "id": "status5"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+  """
+
+@database @rabbitmq
+Scenario: Admin changes the status of the collection step in a proposal
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: ApplyProposalStatusInput!) {
+      applyProposalStatus(input: $input) {
+        error
+        proposals {
+          edges {
+            node {
+              id
+              status {
+                id
+              }
+              selections {
+                status {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalIds": ["UHJvcG9zYWw6cHJvcG9zYWwx"],
+        "statusId": "status2"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "applyProposalStatus": {
+        "error": null,
+        "proposals": {
+          "edges": [
+            {
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                "status": {
+                  "id": "status2"
+                },
+                "selections": [
+                  {
+                    "status": {
+                      "id": "status4"
                     }
                   }
                 ]
@@ -190,6 +266,9 @@ Scenario: Admin removes the status of a proposal
           edges {
             node {
               id
+              status {
+                id
+              }
               selections {
                 status {
                   id
@@ -219,6 +298,7 @@ Scenario: Admin removes the status of a proposal
             {
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+                "status": null,
                 "selections": [
                   {
                     "status": null
