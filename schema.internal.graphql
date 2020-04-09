@@ -5387,6 +5387,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """list of decision makers assigned on the project"""
   decisionMakers: [User]!
+
+  """list of proposal categories on the project"""
+  categories: [ProposalCategory!]!
 }
 
 """A connection to a list of items."""

@@ -1,60 +1,72 @@
 Capco\AppBundle\Entity\ProposalCategory:
-  pCategory1:
-    id: pCategory1
-    name: Aménagement
-    form: '@proposalform1'
-  pCategory2:
-    id: pCategory2
-    name: Politique
-    form: '@proposalform1'
-    categoryImage: '@CategoryImage4'
-  pCategory3:
-    id: pCategory3
-    name: Aménagement
-    form: '@proposalform3'
-  pCategory4:
-    id: pCategory4
-    name: Politique
-    form: '@proposalform3'
-  pCategory5:
-    id: pCategory5
-    name: Ethnique
-    form: '@proposalform9'
+    pCategory1:
+        id: pCategory1
+        name: Aménagement
+        form: '@proposalform1'
+    pCategory2:
+        id: pCategory2
+        name: Politique
+        form: '@proposalform1'
+        categoryImage: '@CategoryImage4'
+    pCategory3:
+        id: pCategory3
+        name: Aménagement
+        form: '@proposalform3'
+    pCategory4:
+        id: pCategory4
+        name: Politique
+        form: '@proposalform3'
+    pCategory5:
+        id: pCategory5
+        name: Ethnique
+        form: '@proposalform9'
 
-  pCategory6:
-    id: pCategory6
-    name: Escalade
-    form: '@proposalform13'
-  pCategory7:
-    id: pCategory7
-    name: Water Polo
-    form: '@proposalform13'
-  pCategory8:
-    id: pCategory8
-    name: Escrime
-    form: '@proposalform13'
-  pCategory9:
-    id: pCategory9
-    name: Test
-    form: '@proposalform13'
-    categoryImage: '@CategoryImage1'
-  pCategoryIdf1:
-    id: pCategoryIdf1
-    name: Espaces verts et biodiversité
-    form: '@proposalformIdf'
-  pCategoryIdf2:
-    id: pCategoryIdf2
-    name: Propreté, prévention et gestion des déchets, économie circulaire
-    form: '@proposalformIdf'
-  pCategoryIdf3:
-    id: pCategoryIdf3
-    name: Santé environnementale
-    form: '@proposalformIdf'
-  pCategoryIdf4:
-    id: pCategoryIdf4
-    name: Vélo et mobilités propres
-    form: '@proposalformIdf'
-  pCategoryIdf5:
-    id: pCategoryIdf5
-    name: Énergies renouvelables et efficacité énergétique
-    form: '@proposalformIdf'
+    pCategory6:
+        id: pCategory6
+        name: Escalade
+        form: '@proposalform13'
+    pCategory7:
+        id: pCategory7
+        name: Water Polo
+        form: '@proposalform13'
+    pCategory8:
+        id: pCategory8
+        name: Escrime
+        form: '@proposalform13'
+    pCategory9:
+        id: pCategory9
+        name: Test
+        form: '@proposalform13'
+        categoryImage: '@CategoryImage1'
+    pCategoryIdf1:
+        id: pCategoryIdf1
+        name: Espaces verts et biodiversité
+        form: '@proposalformIdf'
+    pCategoryIdf2:
+        id: pCategoryIdf2
+        name: Propreté, prévention et gestion des déchets, économie circulaire
+        form: '@proposalformIdf'
+    pCategoryIdf3:
+        id: pCategoryIdf3
+        name: Santé environnementale
+        form: '@proposalformIdf'
+    pCategoryIdf4:
+        id: pCategoryIdf4
+        name: Vélo et mobilités propres
+        form: '@proposalformIdf'
+    pCategoryIdf5:
+        id: pCategoryIdf5
+        name: Énergies renouvelables et efficacité énergétique
+        form: '@proposalformIdf'
+    pCategoryAssigned1:
+        id: pCategoryAssigned1
+        name: On veut des masques
+        form: '@proposalformCorona'
+    pCategoryAssigned2:
+        id: pCategoryAssigned2
+        name: Théories du complot au cachot
+        form: '@proposalformCorona'
+    pCategoryAssigned3:
+        id: pCategoryAssigned3
+        name: Auto diagnostique
+        form: '@proposalformCorona'

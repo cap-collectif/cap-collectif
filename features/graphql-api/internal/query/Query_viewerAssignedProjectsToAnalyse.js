@@ -8,22 +8,26 @@ const InternalQuery = /* GraphQL */ `
         username
       }
       supervisors {
-          id
-          username
+        id
+        username
       }
       decisionMakers {
-          id
-          username
+        id
+        username
+      }
+      categories {
+        id
+        name
       }
       viewerAssignedProposals {
-      totalCount
-      edges{
-        node {
-          id
-          title
+        totalCount
+        edges {
+          node {
+            id
+            title
+          }
         }
       }
-    }
     }
   }
 `;

@@ -175,7 +175,7 @@ class ProposalSearch extends Search
 
         $boolShouldQuery = new Query\BoolQuery();
         $boolShouldQuery->addShould([
-            new Term(['proposalAnalyst.id' => ['value' => $viewerId]]),
+            new Term(['proposalAnalysts.analyst.id' => ['value' => $viewerId]]),
             new Term(['supervisor.id' => ['value' => $viewerId]]),
             new Term(['decisionMaker.id' => ['value' => $viewerId]]),
         ]);

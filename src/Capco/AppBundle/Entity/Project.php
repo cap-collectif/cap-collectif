@@ -428,11 +428,9 @@ class Project implements IndexableInterface
     public function getThemes(): iterable
     {
         $iterator = $this->themes->getIterator();
-        $iterator->uasort(
-            function ($a, $b) {
-                return $a->getPosition() <=> $b->getPosition();
-            }
-        );
+        $iterator->uasort(function ($a, $b) {
+            return $a->getPosition() <=> $b->getPosition();
+        });
 
         return new ArrayCollection(iterator_to_array($iterator));
     }
@@ -1235,6 +1233,100 @@ class Project implements IndexableInterface
         return $this;
     }
 
+    public function getAnalysts(): array
+    {
+        $collectStep = $this->getFirstCollectStep();
+
+        if (!$collectStep) {
+            return [];
+        }
+
+        /** @var ProposalForm $proposalForm */
+        $proposalForm = $collectStep->getProposalForm();
+
+        if (!$proposalForm) {
+            return [];
+        }
+        $analysts = [];
+        /** @var Proposal $proposal */
+        foreach ($proposalForm->getProposals() as $proposal) {
+            $analysts += $proposal->getAnalysts()->toArray();
+        }
+
+        return array_filter(array_unique($analysts));
+    }
+
+    public function getSupervisors(): array
+    {
+        $collectStep = $this->getFirstCollectStep();
+
+        if (!$collectStep) {
+            return [];
+        }
+
+        /** @var ProposalForm $proposalForm */
+        $proposalForm = $collectStep->getProposalForm();
+
+        if (!$proposalForm) {
+            return [];
+        }
+        $supervisors = [];
+        /** @var Proposal $proposal */
+        foreach ($proposalForm->getProposals() as $proposal) {
+            $supervisors[] = $proposal->getSupervisor();
+        }
+
+        return array_filter(array_unique($supervisors));
+    }
+
+    public function getDecisionMakers(): array
+    {
+        $collectStep = $this->getFirstCollectStep();
+
+        if (!$collectStep) {
+            return [];
+        }
+
+        /** @var ProposalForm $proposalForm */
+        $proposalForm = $collectStep->getProposalForm();
+
+        if (!$proposalForm) {
+            return [];
+        }
+        $decisionMakers = [];
+        /** @var Proposal $proposal */
+        foreach ($proposalForm->getProposals() as $proposal) {
+            $decisionMakers[] = $proposal->getDecisionMaker();
+        }
+
+        return array_filter(array_unique($decisionMakers));
+    }
+
+    public function getCategories(): array
+    {
+        $collectStep = $this->getFirstCollectStep();
+
+        if (!$collectStep) {
+            return [];
+        }
+
+        /** @var ProposalForm $proposalForm */
+        $proposalForm = $collectStep->getProposalForm();
+
+        if (!$proposalForm) {
+            return [];
+        }
+        $decisionMakers = [];
+        /** @var Proposal $proposal */
+        foreach ($proposalForm->getProposals() as $proposal) {
+            if ($proposal->getCategory()) {
+                $decisionMakers[] = $proposal->getCategory();
+            }
+        }
+
+        return array_filter(array_unique($decisionMakers, SORT_REGULAR));
+    }
+
     /**
      * check if viewer is allowed the project.
      */
@@ -1262,75 +1354,5 @@ class Project implements IndexableInterface
 
         return \in_array($this->getVisibility(), $viewerVisibility) &&
             $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM;
-    }
-
-
-    public function getAnalysts(): array
-    {
-        $collectStep = $this->getFirstCollectStep();
-
-        if (!$collectStep) {
-            return [];
-        }
-
-        /** @var ProposalForm $proposalForm */
-        $proposalForm = $collectStep->getProposalForm();
-
-        if (!$proposalForm) {
-            return [];
-        }
-        $analysts = [];
-        /** @var Proposal $proposal */
-        foreach ($proposalForm->getProposals() as $proposal) {
-            $analysts = array_merge($analysts, $proposal->getAnalysts()->toArray());
-        }
-
-        return array_unique($analysts, SORT_REGULAR);
-    }
-
-    public function getSupervisors(): array
-    {
-        $collectStep = $this->getFirstCollectStep();
-
-        if (!$collectStep) {
-            return [];
-        }
-
-        /** @var ProposalForm $proposalForm */
-        $proposalForm = $collectStep->getProposalForm();
-
-        if (!$proposalForm) {
-            return [];
-        }
-        $supervisors = [];
-        /** @var Proposal $proposal */
-        foreach ($proposalForm->getProposals() as $proposal) {
-            $supervisors[] = $proposal->getSupervisor();
-        }
-
-        return array_unique($supervisors, SORT_REGULAR);
-    }
-
-    public function getDecisionMakers(): array
-    {
-        $collectStep = $this->getFirstCollectStep();
-
-        if (!$collectStep) {
-            return [];
-        }
-
-        /** @var ProposalForm $proposalForm */
-        $proposalForm = $collectStep->getProposalForm();
-
-        if (!$proposalForm) {
-            return [];
-        }
-        $decisionMakers = [];
-        /** @var Proposal $proposal */
-        foreach ($proposalForm->getProposals() as $proposal) {
-            $decisionMakers[] = $proposal->getDecisionMaker();
-        }
-
-        return array_unique($decisionMakers, SORT_REGULAR);
     }
 }

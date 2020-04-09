@@ -164,3 +164,7 @@ InternalProject:
                 type: '[InternalUser]!'
                 description: 'list of decision makers assigned on the project'
                 resolve: '@=value.getDecisionMakers()'
+            categories:
+                type: '[ProposalCategory!]!'
+                description: 'list of proposal categories on the project'
+                resolve: '@=value.getCategories()'

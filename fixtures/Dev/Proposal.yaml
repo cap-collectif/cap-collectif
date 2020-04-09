@@ -668,6 +668,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-03-17 00:03:00'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        category: '@pCategoryAssigned3'
     proposal{110..120}:
         id: 'proposal<current()>'
         title: 'Proposal <current()>'
@@ -807,6 +808,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: $publishedAt
         updatedAt: $publishedAt
         district: '@district1'
+        category: '@pCategoryAssigned1'
     assignedProposals{126..130}:
         id: 'assignedProposals<current()>'
         title: 'Proposal assigned <current()>'
@@ -818,3 +820,4 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: $publishedAt
         updatedAt: $publishedAt
         district: '@district2'
+        category: '@pCategoryAssigned2'
