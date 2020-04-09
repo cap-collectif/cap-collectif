@@ -91,7 +91,7 @@ Capco\AppBundle\Entity\ProposalAssessment:
         id: 'proposalAssessment7'
         __construct: ['@assignedProposals121']
         updatedBy: '@userSupervisor'
-        state: 'IN_PROGRESS'
+        state: 'TOO_LATE'
         body: 'I think, this proposal is a good .../.'
         estimatedCost: null
         officialResponse: null
@@ -99,16 +99,6 @@ Capco\AppBundle\Entity\ProposalAssessment:
         updatedAt: <(new \DateTime('2020-01-01 00:00:12'))>
     proposalAssessment8:
         id: 'proposalAssessment8'
-        __construct: ['@assignedProposals122']
-        updatedBy: '@userSupervisor'
-        state: 'IN_PROGRESS'
-        body: 'I m not able to juge this proposal'
-        estimatedCost: null
-        officialResponse: null
-        createdAt: <(new \DateTime('2020-01-01 00:00:13'))>
-        updatedAt: <(new \DateTime('2020-01-01 00:00:13'))>
-    proposalAssessment9:
-        id: 'proposalAssessment9'
         __construct: ['@assignedProposals123']
         updatedBy: '@userSupervisor'
         state: 'UNFAVOURABLE'
@@ -117,8 +107,8 @@ Capco\AppBundle\Entity\ProposalAssessment:
         officialResponse: null
         createdAt: <(new \DateTime('2020-01-01 00:00:14'))>
         updatedAt: <(new \DateTime('2020-01-01 00:00:14'))>
-    proposalAssessment10:
-        id: 'proposalAssessment10'
+    proposalAssessment9:
+        id: 'proposalAssessment9'
         __construct: ['@assignedProposals124']
         updatedBy: '@userSupervisor'
         state: 'FAVOURABLE'

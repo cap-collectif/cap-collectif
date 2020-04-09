@@ -260,8 +260,20 @@ Object {
               "title": "Jurer allégeance à Nurgle",
             },
           },
+          Object {
+            "node": Object {
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+              "title": "Proposal assigned 121",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjI=",
+              "title": "Proposal assigned 122",
+            },
+          },
         ],
-        "totalCount": 1,
+        "totalCount": 3,
       },
     },
   ],

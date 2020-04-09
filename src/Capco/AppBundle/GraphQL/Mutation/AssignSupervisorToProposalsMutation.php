@@ -123,6 +123,7 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
             if ($proposal->getSupervisor()) {
                 if ($proposal->getSupervisor() !== $supervisor) {
                     $proposal->changeSupervisor($supervisor, $viewer);
+                    $proposal->removeAssessment();
                 }
                 // assign supervisor
             } else {

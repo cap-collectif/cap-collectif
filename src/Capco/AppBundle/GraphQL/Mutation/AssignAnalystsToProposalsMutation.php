@@ -62,8 +62,8 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
                 );
             }
         }
-
-        if (\count($analystIds) > 10) {
+        $nbAnslysts = \count($analystIds);
+        if ($nbAnslysts > 10) {
             return $this->buildPayload(
                 $connection,
                 ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED
@@ -76,6 +76,13 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
 
         /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
+            if ($nbAnslysts + $proposal->getAnalysts()->count() > 10) {
+                return $this->buildPayload(
+                    $connection,
+                    ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED
+                );
+            }
+
             $proposal->addAnalysts($analysts);
         }
 

@@ -24,7 +24,7 @@ abstract class Search
         Query\MultiMatch::TYPE_MOST_FIELDS,
         Query\MultiMatch::TYPE_CROSS_FIELDS,
         Query\MultiMatch::TYPE_PHRASE,
-        Query\MultiMatch::TYPE_PHRASE_PREFIX
+        Query\MultiMatch::TYPE_PHRASE_PREFIX,
     ];
 
     protected $index;
@@ -57,9 +57,12 @@ abstract class Search
         $results = $repository->hydrateFromIds($ids);
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($results, static function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
+        usort(
+            $results,
+            static function ($a, $b) use ($ids) {
+                return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+            }
+        );
 
         return $results;
     }
@@ -69,8 +72,7 @@ abstract class Search
         array $fields,
         $terms = null,
         $type = null
-    ): Query\BoolQuery
-    {
+    ): Query\BoolQuery {
         if (empty(trim($terms))) {
             $multiMatchQuery = new Query\MatchAll();
         } else {
@@ -91,8 +93,7 @@ abstract class Search
         Query\BoolQuery $query,
         $fieldName,
         $terms
-    ): Query\BoolQuery
-    {
+    ): Query\BoolQuery {
         if (\is_array($terms)) {
             $matchQuery = new Query\Terms($fieldName, $terms);
         } else {
@@ -107,11 +108,13 @@ abstract class Search
     protected function getHydratedResultsFromResultSet(
         EntityRepository $repository,
         ResultSet $resultSet
-    ): array
-    {
-        $ids = array_map(static function (Result $result) {
-            return $result->getId();
-        }, $resultSet->getResults());
+    ): array {
+        $ids = array_map(
+            static function (Result $result) {
+                return $result->getId();
+            },
+            $resultSet->getResults()
+        );
 
         return $this->getHydratedResults($repository, $ids);
     }
@@ -128,49 +131,69 @@ abstract class Search
 
     protected function getFiltersForProjectViewerCanSee(string $projectPath, ?User $viewer): array
     {
-        if (!$viewer){
+        if (!$viewer) {
             return [
-                (new BoolQuery())->addShould([
-                    new Term([
-                        "${projectPath}.visibility" => [
-                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                        ]
-                    ])])
+                (new BoolQuery())->addShould(
+                    [
+                        new Term(
+                            [
+                                "${projectPath}.visibility" => [
+                                    'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                                ],
+                            ]
+                        ),
+                    ]
+                ),
             ];
         }
         $visibility = ProjectVisibilityMode::getProjectVisibilityByRoles($viewer);
 
         return [
-            (new BoolQuery())->addShould([
-                new Term([
-                    "${projectPath}.visibility" => [
-                        'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
+            (new BoolQuery())->addShould(
+                [
+                    new Term(
+                        [
+                            "${projectPath}.visibility" => [
+                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                            ],
+                        ]
+                    ),
+                    new Query\Terms("${projectPath}.authors.id", [$viewer->getId()]),
+                ]
+            ),
+            (new BoolQuery())->addMust(
+                [
+                    new Term(
+                        [
+                            "${projectPath}.visibility" => [
+                                'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM,
+                            ],
+                        ]
+                    ),
+                    new Query\Terms("${projectPath}.restrictedViewerIds", [$viewer->getId()]),
+                ]
+            ),
+            (new BoolQuery())->addMust(
+                [
+                    new Query\Terms("${projectPath}.visibility", $visibility),
+                    new Query\Range(
+                        "${projectPath}.visibility", [
+                        'lt' => ProjectVisibilityMode::VISIBILITY_CUSTOM,
                     ]
-                ]),
-                new Query\Terms("${projectPath}.authors.id", [$viewer->getId()])
-            ]),
-            (new BoolQuery())->addMust([
-                new Term([
-                    "${projectPath}.visibility" => [
-                        'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM
-                    ]
-                ]),
-                new Query\Terms("${projectPath}.restrictedViewerIds", [$viewer->getId()])
-            ]),
-            (new BoolQuery())->addMust([
-                new Query\Terms("${projectPath}.visibility", $visibility),
-                new Query\Range("${projectPath}.visibility", [
-                    'lt' => ProjectVisibilityMode::VISIBILITY_CUSTOM
-                ])
-            ])
+                    ),
+                ]
+            ),
         ];
     }
 
     protected function getCursors(ResultSet $resultSet): array
     {
-        return array_map(static function (Result $result) {
-            return $result->getParam('sort');
-        }, $resultSet->getResults());
+        return array_map(
+            static function (Result $result) {
+                return $result->getParam('sort');
+            },
+            $resultSet->getResults()
+        );
     }
 
     protected function applyCursor(Query $query, ?string $cursor): void
@@ -194,27 +217,34 @@ abstract class Search
         BoolQuery $boolQuery,
         string $targetField,
         string $term
-    ): BoolQuery
-    {
-        $boolQuery->addShould([
-            (new Query\ConstantScore(
-                new Query\Match($targetField, [
-                    'query' => strtolower(trim($term)),
-                    'fuzziness' => 2
-                ])
-            ))->setBoost(80),
-            (new Query\ConstantScore(
-                new Query\Match($targetField, [
-                    'query' => strtolower(trim($term)),
-                    'fuzziness' => 1
-                ])
-            ))->setBoost(10),
-            (new Query\ConstantScore(
-                new Query\Match($targetField, [
-                    'query' => strtolower(trim($term))
-                ])
-            ))->setBoost(10)
-        ]);
+    ): BoolQuery {
+        $boolQuery->addShould(
+            [
+                (new Query\ConstantScore(
+                    new Query\Match(
+                        $targetField, [
+                        'query' => strtolower(trim($term)),
+                        'fuzziness' => 2,
+                    ]
+                    )
+                ))->setBoost(80),
+                (new Query\ConstantScore(
+                    new Query\Match(
+                        $targetField, [
+                        'query' => strtolower(trim($term)),
+                        'fuzziness' => 1,
+                    ]
+                    )
+                ))->setBoost(10),
+                (new Query\ConstantScore(
+                    new Query\Match(
+                        $targetField, [
+                        'query' => strtolower(trim($term)),
+                    ]
+                    )
+                ))->setBoost(10),
+            ]
+        );
 
         return $boolQuery;
     }

@@ -8,9 +8,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 12,
+            "totalCount": 11,
           },
-          "contributionsCount": 12,
+          "contributionsCount": 11,
           "contributors": Object {
             "totalCount": 2,
           },
@@ -854,9 +854,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
         "node": Object {
           "contributions": Object {
-            "totalCount": 12,
+            "totalCount": 11,
           },
-          "contributionsCount": 12,
+          "contributionsCount": 11,
           "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
           "publishedAt": "2020-03-16 12:00:00",
           "title": "Solidarité Covid-19",
@@ -880,9 +880,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 12,
+            "totalCount": 11,
           },
-          "contributionsCount": 12,
+          "contributionsCount": 11,
           "contributors": Object {
             "totalCount": 2,
           },

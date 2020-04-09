@@ -31,7 +31,7 @@ class ProjectViewerAssignedProposalsResolver implements ResolverInterface
             $project
         ) {
             $filters = [];
-            $search = null;
+            $state = null;
 
             if ($args->offsetExists('district')) {
                 $filters['district'] = $args->offsetGet('district');
@@ -45,6 +45,12 @@ class ProjectViewerAssignedProposalsResolver implements ResolverInterface
             if ($args->offsetExists('decisionMaker')) {
                 $filters['decisionMaker'] = $args->offsetGet('decisionMaker');
             }
+            if ($args->offsetExists('category')) {
+                $filters['category'] = $args->offsetGet('category');
+            }
+            if ($args->offsetExists('state')) {
+                $state = $args->offsetGet('state');
+            }
             list($direction, $field) = [
                 $args->offsetGet('orderBy')['direction'],
                 $args->offsetGet('orderBy')['field'],
@@ -56,6 +62,7 @@ class ProjectViewerAssignedProposalsResolver implements ResolverInterface
                 $viewer->getId(),
                 $filters,
                 $order,
+                $state,
                 $limit,
                 $cursor
             );

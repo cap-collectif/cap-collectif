@@ -115,11 +115,17 @@ Capco\AppBundle\Entity\ProposalAnalysis:
         updatedBy: '@userSupervisor2'
         proposal: '@assignedProposals121'
         state: FAVOURABLE
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        createdAt: <(new \DateTime('2020-01-01 00:00:19'))>
         updatedAt: $createdAt
     proposalAnalysis8:
         updatedBy: '@userAnalyst'
         proposal: '@assignedProposals121'
         state: IN_PROGRESS
-        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        createdAt: <(new \DateTime('2020-01-01 00:00:20'))>
+        updatedAt: $createdAt
+    proposalAnalysis9:
+        updatedBy: '@userAnalyst'
+        proposal: '@assignedProposals125'
+        state: TOO_LATE
+        createdAt: <(new \DateTime('2020-01-01 00:00:21'))>
         updatedAt: $createdAt

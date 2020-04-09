@@ -10,6 +10,7 @@ final class ProposalStatementState implements EnumType
     public const TOO_LATE = 'TOO_LATE';
     public const NONE = 'NONE';
     public const DONE = 'DONE';
+    public const TODO = 'TODO';
 
     public static function isValid($value): bool
     {

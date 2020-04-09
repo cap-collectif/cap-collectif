@@ -153,10 +153,11 @@ class ProposalSearch extends Search
     }
 
     public function searchProposalAssignedToViewer(
-        $projectId,
-        $viewerId,
+        string $projectId,
+        string $viewerId,
         array $providedFilters,
-        $order,
+        string $order,
+        ?string $state = null,
         int $limit = 20,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
@@ -172,15 +173,35 @@ class ProposalSearch extends Search
             }
             $boolQuery->addFilter($term);
         }
+        $roleTask = [
+            'supervisor.id' => 'assessment',
+            'proposalAnalysts.analyst.id' => 'analyses',
+            'decisionMaker.id' => 'decision',
+        ];
 
-        $boolShouldQuery = new Query\BoolQuery();
-        $boolShouldQuery->addShould([
-            new Term(['proposalAnalysts.analyst.id' => ['value' => $viewerId]]),
-            new Term(['supervisor.id' => ['value' => $viewerId]]),
-            new Term(['decisionMaker.id' => ['value' => $viewerId]]),
-        ]);
+        $rootBoolShouldQuery = new Query\BoolQuery();
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $projectId]]));
-        $boolQuery->addMust($boolShouldQuery);
+        if ('TODO' === $state) {
+            foreach ($roleTask as $role => $task) {
+                $rootBoolShouldQuery->addShould(
+                    $this->queryProposalsAssignedTodo($role, $task, $viewerId)
+                );
+            }
+        } elseif ('DONE' === $state) {
+            foreach ($roleTask as $role => $task) {
+                $rootBoolShouldQuery->addShould(
+                    $this->queryProposalsAssignedDone($role, $task, $viewerId)
+                );
+            }
+        } else {
+            $rootBoolShouldQuery->addShould([
+                new Term(['proposalAnalysts.analyst.id' => ['value' => $viewerId]]),
+                new Term(['supervisor.id' => ['value' => $viewerId]]),
+                new Term(['decisionMaker.id' => ['value' => $viewerId]]),
+            ]);
+        }
+
+        $boolQuery->addFilter($rootBoolShouldQuery);
         $query = new Query($boolQuery);
         if ($order) {
             $query->setSort([$this->getSort($order, null), ['id' => new \stdClass()]]);
@@ -188,12 +209,61 @@ class ProposalSearch extends Search
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
-
         $resultSet = $this->index->getType($this->type)->search($query);
 
         $cursors = $this->getCursors($resultSet);
 
         return $this->getData($cursors, $resultSet);
+    }
+
+    private function queryProposalsAssignedTodo($role, $task, $viewerId): Query\BoolQuery
+    {
+        $secondBoolFilterQueryIntoRoot = new Query\BoolQuery();
+        $secondBoolFilterQueryIntoRoot->addFilter(new Term([$role => ['value' => $viewerId]]));
+
+        $thirdBoolShouldQueryIntoSecond = new Query\BoolQuery();
+        $fourthBoolFilterQueryIntoThird = new Query\BoolQuery();
+        $fourthBoolFilterQueryIntoThird->addFilter(
+            new Term(["${task}.updatedBy.id" => ['value' => $viewerId]])
+        );
+        $fourthBoolFilterQueryIntoThird->addFilter(
+            new Term(["${task}.state" => ['value' => 'IN_PROGRESS']])
+        );
+        $thirdBoolShouldQueryIntoSecond->addShould($fourthBoolFilterQueryIntoThird);
+
+        $fifthBoolFilterQueryIntoThird = new Query\BoolQuery();
+        $sixthBoolFilterQueryIntoThird = new Query\BoolQuery();
+        $sixthBoolFilterQueryIntoThird->addMustNot(new Query\Exists($task));
+        $fifthBoolFilterQueryIntoThird->addShould($sixthBoolFilterQueryIntoThird);
+        $thirdBoolShouldQueryIntoSecond->addShould($fifthBoolFilterQueryIntoThird);
+
+        $secondBoolFilterQueryIntoRoot->addFilter($thirdBoolShouldQueryIntoSecond);
+
+        return $secondBoolFilterQueryIntoRoot;
+    }
+
+    private function queryProposalsAssignedDone($role, $task, $viewerId): Query\BoolQuery
+    {
+        $secondBoolFilterQueryIntoRoot = new Query\BoolQuery();
+        $secondBoolFilterQueryIntoRoot->addFilter(new Term([$role => ['value' => $viewerId]]));
+
+        $thirdBoolShouldQueryIntoSecond = new Query\BoolQuery();
+        $fourthBoolFilterQueryIntoThird = new Query\BoolQuery();
+        $fifthBoolMustNotQueryIntoFourth = new Query\BoolQuery();
+
+        $fourthBoolFilterQueryIntoThird->addFilter(
+            new Term(["${task}.updatedBy.id" => ['value' => $viewerId]])
+        );
+        $fifthBoolMustNotQueryIntoFourth->addMustNot(
+            new Term(["${task}.state" => ['value' => 'IN_PROGRESS']])
+        );
+
+        $fourthBoolFilterQueryIntoThird->addFilter($fifthBoolMustNotQueryIntoFourth);
+        $thirdBoolShouldQueryIntoSecond->addShould($fourthBoolFilterQueryIntoThird);
+
+        $secondBoolFilterQueryIntoRoot->addFilter($thirdBoolShouldQueryIntoSecond);
+
+        return $secondBoolFilterQueryIntoRoot;
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult

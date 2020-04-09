@@ -5385,7 +5385,11 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     analysts: [ID!]
     supervisor: ID
     decisionMaker: ID
+    category: ID
     orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}
+
+    """The current status of the proposal"""
+    state: ProposalTaskState
   ): ProposalConnection!
 
   """list of analysts assigned on the project"""
@@ -6546,6 +6550,15 @@ enum ProposalStepVoteType {
   DISABLED
   SIMPLE
   BUDGET
+}
+
+"""Possible values of a proposal's state."""
+enum ProposalTaskState {
+  """The proposal's got some task in todo"""
+  TODO
+
+  """The proposal's all task done"""
+  DONE
 }
 
 """Possible trashed status for a `Proposal`."""

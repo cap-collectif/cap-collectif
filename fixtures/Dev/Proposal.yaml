@@ -809,7 +809,7 @@ Capco\AppBundle\Entity\Proposal:
         updatedAt: $publishedAt
         district: '@district1'
         category: '@pCategoryAssigned1'
-    assignedProposals{126..130}:
+    assignedProposals{126..129}:
         id: 'assignedProposals<current()>'
         title: 'Proposal assigned <current()>'
         body: Proposition avec décision/analyse/avis

@@ -121,6 +121,7 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
             if ($proposal->getDecisionMaker()) {
                 if ($proposal->getDecisionMaker() !== $decisionMaker) {
                     $proposal->changeDecisionMaker($decisionMaker);
+                    $proposal->removeDecision();
                 }
                 // assign decision maker
             } else {

@@ -1,0 +1,11 @@
+ProposalTaskState:
+    type: enum
+    config:
+        description: "Possible values of a proposal's state."
+        values:
+            TODO:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::TODO")'
+                description: "The proposal's got some task in todo"
+            DONE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::DONE")'
+                description: "The proposal's all task done"

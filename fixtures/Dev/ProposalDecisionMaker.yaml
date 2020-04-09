@@ -51,3 +51,11 @@ Capco\AppBundle\Entity\ProposalDecisionMaker:
         __construct: ['@proposalIdf6', '@userMaximeQA']
         createdAt: <identity((new \DateTime('2020-01-01 00:00:13')))>
         updatedAt: $createdAt
+    proposalDecisionMaker8:
+        __construct: ['@assignedProposals121', '@userDecisionMaker']
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
+        updatedAt: $createdAt
+    proposalDecisionMaker9:
+        __construct: ['@assignedProposals122', '@userDecisionMaker']
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
+        updatedAt: $createdAt

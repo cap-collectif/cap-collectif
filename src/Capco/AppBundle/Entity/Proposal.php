@@ -272,34 +272,34 @@ class Proposal implements
     private $followers;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalAssessment", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalAssessment", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $assessment;
+    private ?ProposalAssessment $assessment;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $supervisor;
+    private ?ProposalSupervisor $supervisor;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalDecision", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalDecision", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $decision;
+    private ?ProposalDecision $decision;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalDecisionMaker", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalDecisionMaker", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $decisionMaker;
+    private ?ProposalDecisionMaker $decisionMaker;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalyst", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $proposalAnalysts;
+    private Collection $proposalAnalysts;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal", orphanRemoval=true)
      */
-    private $analyses;
+    private Collection $analyses;
 
     public function __construct()
     {
@@ -364,6 +364,32 @@ class Proposal implements
     public function getAssessment(): ?ProposalAssessment
     {
         return $this->assessment;
+    }
+
+    public function removeAssessment(): self
+    {
+        $this->assessment = null;
+
+        return $this;
+    }
+
+    public function removeDecision(): self
+    {
+        $this->decision = null;
+
+        return $this;
+    }
+
+    public function removeAnalysis(User $analyst): self
+    {
+        /** @var ProposalAnalysis $analysis */
+        foreach ($this->analyses as $analysis) {
+            if ($analysis->getUpdatedBy() === $analyst) {
+                $this->analyses->removeElement($analysis);
+            }
+        }
+
+        return $this;
     }
 
     public function getDecision(): ?ProposalDecision

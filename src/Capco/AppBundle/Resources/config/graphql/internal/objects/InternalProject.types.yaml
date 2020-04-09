@@ -149,9 +149,14 @@ InternalProject:
                         type: 'ID'
                     decisionMaker:
                         type: 'ID'
+                    category:
+                        type: 'ID'
                     orderBy:
                         type: 'PreviewProposalOrder'
                         defaultValue: { field: CREATED_AT, direction: DESC }
+                    state:
+                        type: 'ProposalTaskState'
+                        description: 'The current status of the proposal'
             analysts:
                 type: '[InternalUser]!'
                 description: 'list of analysts assigned on the project'

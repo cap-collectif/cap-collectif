@@ -1,30 +1,24 @@
 Capco\AppBundle\Entity\ProposalDecision:
     proposalDecision1:
         __construct: ['@proposal113', '@post17']
-        post: '@post17'
         estimatedCost: 500
         updatedBy: '@userDecisionMaker'
-        proposal: '@proposal113'
         isApproved: true
         state: 'DONE'
         createdAt: <identity((new \DateTime('2019-08-01 00:01:20'))->modify("+ 18 days"))>
         updatedAt: $createdAt
     proposalDecision2:
         __construct: ['@proposal115', '@post18']
-        post: '@post18'
         estimatedCost: 500000
         updatedBy: '@userDecisionMaker'
-        proposal: '@proposal115'
         isApproved: false
         state: 'DONE'
         createdAt: <identity((new \DateTime('2019-08-01 00:01:21'))->modify("+ 18 days"))>
         updatedAt: $createdAt
     proposalDecision3:
         __construct: ['@proposal109', '@post19']
-        post: '@post19'
         estimatedCost: 3200
         updatedBy: '@userDecisionMaker'
-        proposal: '@proposal109'
         isApproved: true
         state: 'IN_PROGRESS'
         createdAt: <identity((new \DateTime('2019-08-03 00:01:21')))>
@@ -53,4 +47,12 @@ Capco\AppBundle\Entity\ProposalDecision:
         isApproved: false
         state: 'DONE'
         createdAt: <identity((new \DateTime('2020-01-01 00:01:25')))>
+        updatedAt: $createdAt
+    proposalDecision4:
+        __construct: ['@assignedProposals121', '@post23']
+        estimatedCost: 3200
+        updatedBy: '@userDecisionMaker'
+        isApproved: true
+        state: 'DONE'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:07')))>
         updatedAt: $createdAt
