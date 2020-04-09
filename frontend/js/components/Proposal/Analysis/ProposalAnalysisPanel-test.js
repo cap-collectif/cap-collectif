@@ -15,17 +15,23 @@ describe('<ProposalAnalysisPanel />', () => {
         analysts: [
           {
             id: 'Eva',
+            displayName: 'Eva la Bg',
             $fragmentRefs,
           },
           {
             id: 'Pipoune',
+            displayName: 'Pipoune le Bg',
             $fragmentRefs,
           },
         ],
         decisionMaker: {
+          id: 'Ush',
+          displayName: 'Ush le Bg',
           $fragmentRefs,
         },
         supervisor: {
+          id: 'Ruel',
+          displayName: 'Ruel le Bg',
           $fragmentRefs,
         },
         analyses: [
@@ -57,7 +63,7 @@ describe('<ProposalAnalysisPanel />', () => {
         viewerCanEvaluate: false,
       },
       onClose: jest.fn(),
-      user: { id: 'Rubilax' },
+      user: { id: 'Rubilax', displayName: 'Skusku' },
     };
 
     const wrapper = shallow(<ProposalAnalysisPanel {...props} />);

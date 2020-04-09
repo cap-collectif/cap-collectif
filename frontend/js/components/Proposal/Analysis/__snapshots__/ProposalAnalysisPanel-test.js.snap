@@ -22,7 +22,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
             values={Object {}}
           />
           <CloseIcon
-            onClose={[MockFunction]}
+            onClose={[Function]}
           />
         </ProposalAnalysisPanel__CloseIconWrapper>
         <div>
@@ -37,6 +37,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
               user={
                 Object {
                   "$fragmentRefs": null,
+                  "displayName": "Eva la Bg",
                   "id": "Eva",
                 }
               }
@@ -48,12 +49,13 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
             <ForwardRef(Relay(ProposalAnalysisUserRow))
               canConsult={true}
               canEdit={false}
-              disabled={true}
+              disabled={false}
               onEditClick={[Function]}
               status="FAVOURABLE"
               user={
                 Object {
                   "$fragmentRefs": null,
+                  "displayName": "Pipoune le Bg",
                   "id": "Pipoune",
                 }
               }
@@ -78,6 +80,8 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
             user={
               Object {
                 "$fragmentRefs": null,
+                "displayName": "Ruel le Bg",
+                "id": "Ruel",
               }
             }
           />
@@ -94,10 +98,13 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
             canConsult={true}
             canEdit={true}
             decidor={true}
+            onEditClick={[Function]}
             status="IN_PROGRESS"
             user={
               Object {
                 "$fragmentRefs": null,
+                "displayName": "Ush le Bg",
+                "id": "Ush",
               }
             }
           />
@@ -105,10 +112,11 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
       </ProposalAnalysisPanel__PanelSection>
     </ProposalAnalysisPanel__Panel>
   </div>
-  <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+  <ForwardRef(Relay(ProposalFormSwitcher))
     disabled={false}
     onBackClick={[Function]}
     onClose={[MockFunction]}
+    panelState="HOME"
     proposal={
       Object {
         "$fragmentRefs": null,
@@ -125,10 +133,12 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
         "analysts": Array [
           Object {
             "$fragmentRefs": null,
+            "displayName": "Eva la Bg",
             "id": "Eva",
           },
           Object {
             "$fragmentRefs": null,
+            "displayName": "Pipoune le Bg",
             "id": "Pipoune",
           },
         ],
@@ -149,17 +159,26 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
         },
         "decisionMaker": Object {
           "$fragmentRefs": null,
+          "displayName": "Ush le Bg",
+          "id": "Ush",
         },
         "id": "proposalId",
         "supervisor": Object {
           "$fragmentRefs": null,
+          "displayName": "Ruel le Bg",
+          "id": "Ruel",
         },
         "viewerCanAnalyse": false,
         "viewerCanDecide": true,
         "viewerCanEvaluate": false,
       }
     }
-    userId="Rubilax"
+    user={
+      Object {
+        "displayName": "Skusku",
+        "id": "Rubilax",
+      }
+    }
   />
 </ProposalAnalysisPanel__PanelsSlider>
 `;

@@ -13,6 +13,7 @@ const mutation = graphql`
       errorCode
       analysis {
         id
+        state
         comment
         updatedBy {
           id

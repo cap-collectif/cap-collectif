@@ -1,0 +1,148 @@
+// @flow
+import React, { useState } from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
+import { useResize } from '@liinkiing/react-hooks';
+import styled, { type StyledComponent } from 'styled-components';
+import type { ProposalFormSwitcher_proposal } from '~relay/ProposalFormSwitcher_proposal.graphql';
+import colors from '~/utils/colors';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import sizes from '~/utils/sizes';
+import { CloseIcon } from './ProposalAnalysisPanel';
+import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
+import ProposalAnalysisFormPanel from './ProposalAnalysisFormPanel';
+import ProposalDecisionFormPanel from './ProposalDecisionFormPanel';
+import type { PanelState, User } from './ProposalAnalysisPanel';
+
+const FormPanel: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
+  overflow: scroll;
+  height: calc(100vh - 70px);
+  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
+
+  textarea {
+    resize: none;
+  }
+`;
+
+const Header: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
+  position: fixed;
+  z-index: 2;
+  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
+`;
+
+const Top: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  font-size: 16px;
+  font-weight: 600;
+  color: ${colors.darkText};
+  padding: 20px;
+  text-align: center;
+  z-index: 2;
+  background: ${colors.white};
+
+  > svg:hover {
+    cursor: pointer;
+  }
+
+  span {
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;
+
+const DataStatus: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  height: 30px;
+  background: ${colors.grayF4};
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+  color: ${colors.darkGray};
+`;
+
+type Props = {|
+  proposal: ProposalFormSwitcher_proposal,
+  onClose: () => void,
+  onBackClick: () => void,
+  disabled?: boolean,
+  user: User,
+  panelState: PanelState,
+|};
+
+export const ProposalFormSwitcher = ({
+  onClose,
+  proposal,
+  onBackClick,
+  user,
+  disabled,
+  panelState,
+}: Props) => {
+  const [submitting, setSubmitting] = useState(false);
+  const { width } = useResize();
+  const isLarge = width < sizes.bootstrapGrid.mdMax;
+  const finishedSubmitting = (newSubmitting, goBack) => {
+    setSubmitting(newSubmitting);
+    if (goBack) onBackClick();
+  };
+  return (
+    <FormPanel isLarge={isLarge}>
+      <Header isLarge={isLarge}>
+        <Top>
+          <Icon
+            onClick={onBackClick}
+            name={ICON_NAME.chevronLeft}
+            size={14}
+            color={colors.primaryColor}
+          />
+          <span>{user.displayName}</span>
+          <CloseIcon onClose={onClose} />
+        </Top>
+        <DataStatus>
+          {disabled ? (
+            <ProposalAnalysisStatusLabel
+              fontSize={8}
+              iconSize={7}
+              color={colors.secondaryGray}
+              iconName={ICON_NAME.clock}
+              text="global.filter_belated"
+            />
+          ) : (
+            <FormattedMessage id={submitting ? 'global.saving' : 'all.data.saved'} />
+          )}
+        </DataStatus>
+      </Header>
+      {panelState === 'EDIT_ANALYSIS' && (
+        <ProposalAnalysisFormPanel
+          proposal={proposal}
+          onClose={onClose}
+          disabled={disabled}
+          userId={user.id}
+          onValidate={finishedSubmitting}
+        />
+      )}
+      {panelState === 'EDIT_DECISION' && (
+        <ProposalDecisionFormPanel
+          proposal={proposal}
+          onClose={onClose}
+          disabled={disabled}
+          displayName
+          onValidate={finishedSubmitting}
+        />
+      )}
+    </FormPanel>
+  );
+};
+
+export default createFragmentContainer(ProposalFormSwitcher, {
+  proposal: graphql`
+    fragment ProposalFormSwitcher_proposal on Proposal {
+      id
+      ...ProposalAnalysisFormPanel_proposal
+      ...ProposalDecisionFormPanel_proposal
+    }
+  `,
+});

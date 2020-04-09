@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import debounce from 'lodash/debounce';
 import { useResize } from '@liinkiing/react-hooks';
 import styled, { type StyledComponent } from 'styled-components';
 import memoize from 'lodash/memoize';
@@ -15,15 +14,15 @@ import {
   Field,
   SubmissionError,
 } from 'redux-form';
+import debounce from 'debounce-promise';
 import type {
   ProposalAnalysisFormPanel_proposal,
   ProposalAnalysisState,
 } from '~relay/ProposalAnalysisFormPanel_proposal.graphql';
 import colors from '~/utils/colors';
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { GlobalState } from '~/types';
 import sizes from '~/utils/sizes';
-import { CloseIcon } from './ProposalAnalysisPanel';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import renderResponses from '~/components/Form/RenderResponses';
@@ -35,59 +34,9 @@ import AnalyseProposalAnalysisMutation from '~/mutations/AnalyseProposalAnalysis
 
 import { TYPE_FORM } from '~/constants/FormConstants';
 
-const FormPanel: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
-  overflow: scroll;
-  height: calc(100vh - 70px);
-  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
-
-  textarea {
-    resize: none;
-  }
-`;
-
-const Header: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
-  position: fixed;
-  z-index: 1;
-  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
-`;
-
-const Top: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 60px;
-  font-size: 16px;
-  font-weight: 600;
-  color: ${colors.darkText};
-  padding: 20px;
-  text-align: center;
-  z-index: 1;
-  background: ${colors.white};
-
-  > svg:hover {
-    cursor: pointer;
-  }
-
-  span {
-    max-width: 80%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`;
-
 const memoizeAvailableQuestions: any = memoize(() => {});
 
-const DataStatus: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  height: 30px;
-  background: ${colors.grayF4};
-  text-align: center;
-  font-size: 14px;
-  padding: 5px;
-  color: ${colors.darkGray};
-`;
-
-const Validation: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
+export const Validation: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
   width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
   background: ${colors.grayF4};
   height: 365px;
@@ -96,16 +45,25 @@ const Validation: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = st
   .form-group .radio-container label {
     align-items: center;
   }
+
+  > p {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
 `;
 
-const AnalysisForm: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const AnalysisForm: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   margin-top: 100px;
   overflow: scroll;
   padding: 20px;
   background: ${colors.white};
 `;
 
-const ValidateButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+export const ValidateButton: StyledComponent<
+  { disabled?: boolean },
+  {},
+  HTMLButtonElement,
+> = styled.button`
   width: 100%;
   height: 40px;
   text-align: center;
@@ -115,19 +73,17 @@ const ValidateButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button
   color: ${colors.white};
   border-radius: 3px;
   border: none;
+  opacity: ${({ disabled }) => disabled && '0.5'};
 `;
 
 type Props = {|
   ...ReduxFormFormProps,
   proposal: ProposalAnalysisFormPanel_proposal,
-  onClose: () => void,
-  userId: string,
-  onBackClick: () => void,
   disabled?: boolean,
-  userId: string,
-  displayName: string,
   responses: ResponsesInReduxForm,
   initialStatus: ProposalAnalysisState,
+  userId: string,
+  onValidate: (boolean, ?boolean) => void,
 |};
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE' | 'NONE';
@@ -137,10 +93,12 @@ export type FormValues = {|
   comment: string,
   status: ?Decision,
   validate: boolean,
+  goBack?: boolean,
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { proposal } = props;
+  const { proposal, onValidate } = props;
+  onValidate(true);
   const input = {
     responses: formatSubmitResponses(
       values.responses,
@@ -152,7 +110,26 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   if (values.validate && values.status) {
     return AnalyseProposalAnalysisMutation.commit({
       input: { ...input, decision: values.status },
-    }).catch(e => {
+    })
+      .then(() => {
+        onValidate(false, values.goBack);
+      })
+      .catch(e => {
+        if (e instanceof SubmissionError) {
+          throw e;
+        }
+        throw new SubmissionError({
+          _error: 'global.error.server.form',
+        });
+      });
+  }
+  return ChangeProposalAnalysisMutation.commit({
+    input,
+  })
+    .then(() => {
+      onValidate(false);
+    })
+    .catch(e => {
       if (e instanceof SubmissionError) {
         throw e;
       }
@@ -160,31 +137,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         _error: 'global.error.server.form',
       });
     });
-  }
-  return ChangeProposalAnalysisMutation.commit({
-    input,
-  }).catch(e => {
-    if (e instanceof SubmissionError) {
-      throw e;
-    }
-    throw new SubmissionError({
-      _error: 'global.error.server.form',
-    });
-  });
 };
 
 const formName = 'proposal-analysis-form';
 
 export const ProposalAnalysisFormPanel = ({
-  onClose,
   proposal,
-  onBackClick,
-  displayName,
   dispatch,
   initialStatus,
   responses,
   change: changeProps,
-  submitting,
   disabled,
 }: Props) => {
   const intl = useIntl();
@@ -195,32 +157,7 @@ export const ProposalAnalysisFormPanel = ({
     'availableQuestions',
   );
   return (
-    <FormPanel isLarge={isLarge}>
-      <Header isLarge={isLarge}>
-        <Top>
-          <Icon
-            onClick={onBackClick}
-            name={ICON_NAME.chevronLeft}
-            size={14}
-            color={colors.primaryColor}
-          />
-          <span>{displayName}</span>
-          <CloseIcon onClose={onClose} />
-        </Top>
-        <DataStatus>
-          {disabled ? (
-            <ProposalAnalysisStatusLabel
-              fontSize={8}
-              iconSize={7}
-              color={colors.secondaryGray}
-              iconName={ICON_NAME.clock}
-              text="global.filter_belated"
-            />
-          ) : (
-            <FormattedMessage id={submitting ? 'global.saving' : 'all.data.saved'} />
-          )}
-        </DataStatus>
-      </Header>
+    <>
       <form id="proposal-analysis-form" style={{ opacity: disabled ? '0.5' : '1' }}>
         <AnalysisForm>
           <FieldArray
@@ -304,16 +241,17 @@ export const ProposalAnalysisFormPanel = ({
             />
           </Field>
           <ValidateButton
-            disabled={disabled || !status}
+            disabled={disabled || (!status && !initialStatus)}
             type="button"
             onClick={() => {
               dispatch(change(formName, 'validate', true));
+              dispatch(change(formName, 'goBack', true));
             }}>
             <FormattedMessage id="validate" />
           </ValidateButton>
         </Validation>
       </form>
-    </FormPanel>
+    </>
   );
 };
 
@@ -324,6 +262,7 @@ const mapStateToProps = (state: GlobalState, { proposal, userId }: Props) => {
     proposal?.form?.analysisConfiguration?.evaluationForm?.questions || [],
     initialResponses || [],
   );
+  const initialStatusValue = formValueSelector(formName)(state, 'status');
   return {
     initialValues: {
       responses: defaultResponses,
@@ -331,16 +270,15 @@ const mapStateToProps = (state: GlobalState, { proposal, userId }: Props) => {
       status: analysis?.state,
       validate: analysis?.state !== 'IN_PROGRESS',
     },
-    displayName: analysis?.updatedBy?.displayName,
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
-    initialStatus: formValueSelector(formName)(state, 'status') || null,
+    initialStatus: initialStatusValue !== 'IN_PROGRESS' ? initialStatusValue : null,
   };
 };
 
 const form = reduxForm({
   form: formName,
   validate: null,
-  onChange: debounce(onSubmit, 500),
+  onChange: debounce(onSubmit, 1000),
   onSubmit,
 })(ProposalAnalysisFormPanel);
 
@@ -354,7 +292,6 @@ export default createFragmentContainer(container, {
         id
         updatedBy {
           id
-          displayName
         }
         comment
         state
