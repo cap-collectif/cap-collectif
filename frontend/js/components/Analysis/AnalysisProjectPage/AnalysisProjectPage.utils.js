@@ -50,6 +50,11 @@ type Analyst = {|
   +$fragmentRefs: UserSearchDropdownChoice_user$ref,
 |};
 
+type DecisionMaker = {|
+  +id: string,
+  +$fragmentRefs: UserSearchDropdownChoice_user$ref,
+|};
+
 const SHOWING_STEP_TYPENAME = ['CollectStep', 'SelectionStep'];
 
 export const getSelectedSupervisorsByProposals = (
@@ -68,6 +73,24 @@ export const getSelectedSupervisorsByProposals = (
     entries.filter(e => !!e[1]).map(e => e[1]),
     'id',
   ): any): $ReadOnlyArray<Supervisor>);
+};
+
+export const getSelectedDecisionMakersByProposals = (
+  project: ProjectAdminAnalysis_project,
+  proposalIds: $ReadOnlyArray<Uuid>,
+): $ReadOnlyArray<DecisionMaker> => {
+  const entries = Object.entries(
+    proposalIds.reduce((acc, id) => {
+      acc[id] =
+        project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
+          .decisionMaker || null;
+      return acc;
+    }, {}),
+  );
+  return ((uniqBy(
+    entries.filter(e => !!e[1]).map(e => e[1]),
+    'id',
+  ): any): $ReadOnlyArray<DecisionMaker>);
 };
 
 export const getSelectedAnalystsByProposals = (
@@ -91,11 +114,46 @@ export const getSelectedAnalystsByProposals = (
   ): any): $ReadOnlyArray<Analyst>);
 };
 
+type RowType = 'analyst' | 'supervisor' | 'decision-maker';
+
+const getSelectedEntries = (
+  project: ProjectAdminAnalysis_project,
+  proposalIds: $ReadOnlyArray<string>,
+  type: RowType,
+) => {
+  switch (type) {
+    case 'analyst':
+      return getSelectedAnalystsByProposals(project, proposalIds);
+    case 'supervisor':
+      return getSelectedSupervisorsByProposals(project, proposalIds);
+    case 'decision-maker':
+      return getSelectedDecisionMakersByProposals(project, proposalIds);
+    default:
+      throw new Error(`Unknow row type: ${type}`);
+  }
+};
+
+const getEntriesIds = (entries: any, type: RowType) => {
+  switch (type) {
+    case 'analyst':
+      return entries
+        .filter(e => ((e[1]: any): $ReadOnlyArray<{ id: Uuid }>).length > 0)
+        .map(e => ((e[1]: any): $ReadOnlyArray<{ id: Uuid }>))
+        .flat()
+        .map(u => ((u: any): { id: Uuid }).id);
+    case 'supervisor':
+    case 'decision-maker':
+      return entries.filter(e => e[1] !== null).map(e => ((e[1]: any): { id: Uuid }).id);
+    default:
+      throw new Error(`Unknow row type: ${type}`);
+  }
+};
+
 export const isRowIndeterminate = (
   user: UserSearchDropdownChoice_user,
   project: ProjectAdminAnalysis_project,
   proposalIds: $ReadOnlyArray<Uuid>,
-  type: 'analyst' | 'supervisor',
+  type: RowType,
 ): boolean => {
   const entries = Object.entries(
     proposalIds.reduce((acc, id) => {
@@ -107,27 +165,21 @@ export const isRowIndeterminate = (
         acc[id] =
           project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
             .analysts || [];
+      } else if (type === 'decision-maker') {
+        acc[id] =
+          project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
+            .decisionMaker || null;
       }
       return acc;
     }, {}),
   );
-  const selectedEntries =
-    type === 'supervisor'
-      ? getSelectedSupervisorsByProposals(project, proposalIds)
-      : getSelectedAnalystsByProposals(project, proposalIds);
+  const selectedEntries = getSelectedEntries(project, proposalIds, type);
   const userIds = selectedEntries.map(u => u.id);
-  const entriesIds =
-    type === 'supervisor'
-      ? entries.filter(e => e[1] !== null).map(e => ((e[1]: any): { id: Uuid }).id)
-      : entries
-          .filter(e => ((e[1]: any): $ReadOnlyArray<{ id: Uuid }>).length > 0)
-          .map(e => ((e[1]: any): $ReadOnlyArray<{ id: Uuid }>))
-          .flat()
-          .map(u => ((u: any): { id: Uuid }).id);
+  const entriesIds = getEntriesIds(entries, type);
 
   if (userIds.includes(user.id)) {
     for (const userId of userIds) {
-      if (type === 'supervisor' && entriesIds.includes(userId)) {
+      if ((type === 'supervisor' || type === 'decision-maker') && entriesIds.includes(userId)) {
         return !entriesIds.every(eid => eid === userId);
       }
       if (type === 'analyst') {
@@ -154,6 +206,20 @@ export const getCommonSupervisorIdWithinProposalIds = (
 
   return selectedSupervisorsByProposals.length === 1 && selectedSupervisorsByProposals[0].id
     ? selectedSupervisorsByProposals[0].id
+    : null;
+};
+
+export const getCommonDecisionMakerIdWithinProposalIds = (
+  project: ProjectAdminAnalysis_project,
+  proposalIds: $ReadOnlyArray<Uuid>,
+) => {
+  const selectedDecisionMakerByProposals = getSelectedDecisionMakersByProposals(
+    project,
+    proposalIds,
+  );
+
+  return selectedDecisionMakerByProposals.length === 1 && selectedDecisionMakerByProposals[0].id
+    ? selectedDecisionMakerByProposals[0].id
     : null;
 };
 

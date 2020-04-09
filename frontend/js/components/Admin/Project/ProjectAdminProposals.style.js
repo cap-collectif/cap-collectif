@@ -2,6 +2,7 @@
 import styled, { type StyledComponent } from 'styled-components';
 import { Label as BSLabel } from 'react-bootstrap';
 import PickableList from '~ui/List/PickableList';
+import DropdownSelect from '~ui/DropdownSelect';
 
 export const ProjectAdminProposalsHeader: StyledComponent<{}, {}, HTMLElement> = styled.header`
   display: flex;
@@ -10,6 +11,22 @@ export const ProjectAdminProposalsHeader: StyledComponent<{}, {}, HTMLElement> =
   & .clearable-input {
     margin-left: auto;
     width: 250px;
+  }
+`;
+
+export const ProposalListDropdownChoice: StyledComponent<
+  {},
+  {},
+  typeof DropdownSelect.Choice,
+> = styled(DropdownSelect.Choice)`
+  & span:first-of-type {
+    padding-left: 0;
+    & > span {
+      padding-left: 24px;
+    }
+    & svg + span {
+      padding-left: 0;
+    }
   }
 `;
 

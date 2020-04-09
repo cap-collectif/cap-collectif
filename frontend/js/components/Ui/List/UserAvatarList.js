@@ -32,7 +32,7 @@ const UserAvatarListWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.di
   position: relative;
 `;
 
-const AvatarWrapper: StyledComponent<
+export const AvatarWrapper: StyledComponent<
   { max: number, index: number, avatarSize?: number, spaceBetweenAvatar: number },
   {},
   HTMLDivElement,

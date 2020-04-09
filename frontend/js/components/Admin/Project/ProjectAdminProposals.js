@@ -391,13 +391,13 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
                 );
               }}>
               {stepsFilling.map(step => (
-                <DropdownSelect.Choice
+                <S.ProposalListDropdownChoice
                   key={step.id}
                   value={{ id: step.id, filling: step.filling }}
                   disabled={step.id === selectedStepId}>
-                  {step.icon && <Icon name={step.icon} size={12} color={colors.iconGrayColor} />}
-                  {step.title}
-                </DropdownSelect.Choice>
+                  {step.icon && <Icon name={step.icon} size={12} color={colors.black} />}
+                  <span>{step.title}</span>
+                </S.ProposalListDropdownChoice>
               ))}
             </DropdownSelect>
           </Collapsable.Element>
@@ -426,12 +426,10 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
                   title={intl.formatMessage({ id: 'change.status.to' })}>
                   {statusesFilling?.length > 0 ? (
                     statusesFilling.map(status => (
-                      <DropdownSelect.Choice key={status.id} value={status.id}>
-                        {status.icon && (
-                          <Icon name={status.icon} size={12} color={colors.iconGrayColor} />
-                        )}
-                        {status.name}
-                      </DropdownSelect.Choice>
+                      <S.ProposalListDropdownChoice key={status.id} value={status.id}>
+                        {status.icon && <Icon name={status.icon} size={12} color={colors.black} />}
+                        <span>{status.name}</span>
+                      </S.ProposalListDropdownChoice>
                     ))
                   ) : (
                     <S.EmptyStatusesFilling>

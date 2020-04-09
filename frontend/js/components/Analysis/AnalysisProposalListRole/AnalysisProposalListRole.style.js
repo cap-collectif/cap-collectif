@@ -1,5 +1,6 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
+import { AvatarWrapper } from '~ui/List/UserAvatarList';
 
 export const AVATAR_SIZE = 35;
 
@@ -21,6 +22,13 @@ const AnalysisProposalListRoleContainer: StyledComponent<{}, {}, HTMLDivElement>
 
     &.role-supervisor {
       margin: 0 45px;
+    }
+  }
+
+  ${/* sc-selector */ AvatarWrapper} {
+    & img,
+    svg {
+      border: none;
     }
   }
 `;

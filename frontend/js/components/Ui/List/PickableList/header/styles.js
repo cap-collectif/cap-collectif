@@ -25,8 +25,9 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
     min-width: ${CHECKBOX_CELL_WIDTH};
     max-width: ${CHECKBOX_CELL_WIDTH};
     width: ${CHECKBOX_CELL_WIDTH};
-    margin-top: 0;
-    align-self: center;
+    margin-top: 4px;
+    flex: none;
+    align-self: start;
   }
   & + ${/* sc-selector */ PickableListBodyContainer} {
     border-top: none;
