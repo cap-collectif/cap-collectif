@@ -14,6 +14,7 @@ import ProposalAnalysisFormPanel from './ProposalAnalysisFormPanel';
 import ProposalDecisionFormPanel from './ProposalDecisionFormPanel';
 import type { PanelState, User } from './ProposalAnalysisPanel';
 import ProposalViewAnalysisPanel from './ProposalViewAnalysisPanel';
+import ProposalViewDecisionPanel from './ProposalViewDecisionPanel';
 
 const FormPanel: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
   overflow: scroll;
@@ -137,6 +138,7 @@ export const ProposalFormSwitcher = ({
           onValidate={finishedSubmitting}
         />
       )}
+      {panelState === 'VIEW_DECISION' && <ProposalViewDecisionPanel proposal={proposal} />}
     </FormPanel>
   );
 };
@@ -148,6 +150,7 @@ export default createFragmentContainer(ProposalFormSwitcher, {
       ...ProposalAnalysisFormPanel_proposal
       ...ProposalDecisionFormPanel_proposal
       ...ProposalViewAnalysisPanel_proposal
+      ...ProposalViewDecisionPanel_proposal
     }
   `,
 });

@@ -16,12 +16,12 @@ type Props = {|
   userId: string,
 |};
 
-const ResponsesView: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const ResponsesView: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 30px;
   margin-top: 70px;
 `;
 
-const CommentView: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
+export const CommentView: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
   width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
   background: ${colors.grayF4};
   padding: 20px;

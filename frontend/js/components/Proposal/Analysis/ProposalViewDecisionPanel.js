@@ -1,0 +1,102 @@
+// @flow
+import React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
+import type { ProposalViewDecisionPanel_proposal } from '~relay/ProposalViewDecisionPanel_proposal.graphql';
+import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
+import { getLabelData } from './ProposalAnalysisUserRow';
+import { ResponsesView } from './ProposalViewAnalysisPanel';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
+
+const DecidorView: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  p {
+    font-size: 16px;
+    margin-top: 20px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  p + span {
+    display: block;
+    margin-bottom: 20px;
+    :first-letter {
+      text-transform: uppercase;
+    }
+  }
+`;
+
+type Props = {|
+  proposal: ProposalViewDecisionPanel_proposal,
+|};
+
+export const ProposalViewDecisionPanel = ({ proposal }: Props) => {
+  if (!proposal?.decision) return null;
+  const { decision } = proposal;
+  const status =
+    decision.state === 'IN_PROGRESS'
+      ? 'IN_PROGRESS'
+      : decision.isApproved === false
+      ? 'UNFAVOURABLE'
+      : decision.isApproved
+      ? 'FAVOURABLE'
+      : undefined;
+  const labelData = getLabelData(status);
+  const authors = decision?.post.authors;
+  return (
+    <>
+      <ResponsesView>
+        <DecidorView>
+          <ProposalAnalysisStatusLabel
+            fontSize={14}
+            iconSize={10}
+            color={labelData.color}
+            iconName={labelData.icon}
+            text={labelData.text}
+          />
+          {decision.estimatedCost !== null ? (
+            <>
+              <FormattedMessage tagName="p" id="global.estimation" />
+              {decision.estimatedCost} €
+            </>
+          ) : null}
+          {decision.post.body ? (
+            <>
+              <FormattedMessage tagName="p" id="official.answer" />
+              <FormattedMessage
+                id={authors.length < 2 ? 'global.byAuthor' : 'project-authors'}
+                values={{
+                  author: authors[0].username,
+                  authorName: authors[0].username,
+                  number: authors.length - 1,
+                }}
+              />
+            </>
+          ) : null}
+        </DecidorView>
+        <WYSIWYGRender value={decision?.post.body} />
+      </ResponsesView>
+    </>
+  );
+};
+
+export default createFragmentContainer(ProposalViewDecisionPanel, {
+  proposal: graphql`
+    fragment ProposalViewDecisionPanel_proposal on Proposal {
+      id
+      decision {
+        state
+        estimatedCost
+        post {
+          id
+          body
+          authors {
+            id
+            username
+          }
+        }
+        isApproved
+      }
+    }
+  `,
+});
