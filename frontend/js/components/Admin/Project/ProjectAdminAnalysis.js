@@ -43,11 +43,9 @@ import AnalysisProposalContainer, {
 import FilterTag from '~ui/Analysis/FilterTag';
 import {
   AnalysisFilterContainer,
-  AnalysisNoContributionIcon,
   AnalysisPickableListContainer,
   AnalysisProposalListHeaderContainer,
   AnalysisProposalListLoader,
-  AnalysisProposalListNoContributions,
   AnalysisProposalListRowInformations,
   AnalysisProposalListRowMeta,
 } from '~ui/Analysis/common.style';
@@ -56,6 +54,9 @@ import RevokeAnalystsToProposalsMutation from '~/mutations/RevokeAnalystsToPropo
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import AssignDecisionMakerToProposalsMutation from '~/mutations/AssignDecisionMakerToProposalsMutation';
+
+import ProjectAdminAnalysisNoProposals from './ProjectAdminAnalysisNoProposals';
+import ProjectAdminAnalysisShortcut from './ProjectAdminAnalysisShortcut';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -579,6 +580,7 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
 
   return (
     <AnalysisPickableListContainer>
+      <ProjectAdminAnalysisShortcut project={project} />
       <PickableList
         isLoading={status === 'loading'}
         useInfiniteScroll={hasProposals}
@@ -639,10 +641,7 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
                 </AnalysisProposalContainer>
               ))
           ) : (
-            <AnalysisProposalListNoContributions>
-              <AnalysisNoContributionIcon />
-              <FormattedMessage id="global.no_proposals" tagName="p" />
-            </AnalysisProposalListNoContributions>
+            <ProjectAdminAnalysisNoProposals project={project} />
           )}
         </PickableList.Body>
       </PickableList>
@@ -669,6 +668,8 @@ export default createPaginationContainer(
           term: { type: "String", defaultValue: null }
         ) {
         id
+        ...ProjectAdminAnalysisNoProposals_project
+        ...ProjectAdminAnalysisShortcut_project
         steps {
           __typename
           ... on ProposalStep {

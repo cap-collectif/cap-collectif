@@ -65,12 +65,30 @@ Capco\AppBundle\Entity\Selection:
     proposal: '@proposalIdf1'
     selectionStep: '@selectionStepIdfAnalyse'
     createdAt: <(new \DateTime('2020-01-01 00:00:01'))>
+    status: '@statusIdfAnalyse4'
   selectionIdf2:
     proposal: '@proposalIdf2'
     selectionStep: '@selectionStepIdfAnalyse'
     createdAt: <(new \DateTime('2020-01-01 00:00:02'))>
+    status: '@statusIdfAnalyse4'
   selectionIdf3:
     proposal: '@proposalIdf3'
     selectionStep: '@selectionStepIdfAnalyse'
     createdAt: <(new \DateTime('2020-01-01 00:00:03'))>
+    status: '@statusIdfAnalyse4'
+  selectionIdf4:
+    proposal: '@proposalIdf4'
+    selectionStep: '@selectionStepIdfAnalyse'
+    createdAt: <(new \DateTime('2020-01-01 00:00:04'))>
+    status: '@statusIdfAnalyse4'
+  selectionIdf5:
+    proposal: '@proposalIdf5'
+    selectionStep: '@selectionStepIdfAnalyse'
+    createdAt: <(new \DateTime('2020-01-01 00:00:05'))>
+    status: '@statusIdfAnalyse4'
+  selectionIdf6:
+    proposal: '@proposalIdf6'
+    selectionStep: '@selectionStepIdfAnalyse'
+    createdAt: <(new \DateTime('2020-01-01 00:00:06'))>
+    status: '@statusIdfAnalyse4'
 

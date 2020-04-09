@@ -688,6 +688,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:01'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        status: '@statusIdfCollect1'
     proposalIdf2:
         id: proposalIdf2
         title: Mon projet local en tant qu'entreprise
@@ -700,6 +701,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:02'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        status: '@statusIdfCollect1'
     proposalIdf3:
         id: proposalIdf3
         title: Mon projet local en tant qu'association avec SIRET
@@ -708,10 +710,11 @@ Capco\AppBundle\Entity\Proposal:
         proposalForm: '@proposalformIdf'
         reference: 3
         district: '@districtIdf1'
-        category: '@pCategoryIdf2'
+        category: '@pCategoryIdf1'
         publishedAt: <(new \DateTime('2020-02-01 00:00:03'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        status: '@statusIdfCollect1'
     proposalIdf4:
         id: proposalIdf4
         title: Mon projet local en tant qu'association avec RNA
@@ -724,6 +727,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:04'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        status: '@statusIdfCollect1'
     proposalIdf5:
         id: proposalIdf5
         title: Mon projet local en tant qu'association sans SIRET ni RNA
@@ -736,6 +740,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:05'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        status: '@statusIdfCollect1'
     proposalIdf6:
         id: proposalIdf6
         title: Mon projet local en tant qu'organisme public
@@ -743,11 +748,12 @@ Capco\AppBundle\Entity\Proposal:
         author: '@userJean'
         proposalForm: '@proposalformIdf'
         reference: 6
-        district: '@districtIdf1'
+        district: '@districtIdf2'
         category: '@pCategoryIdf2'
         publishedAt: <(new \DateTime('2020-02-01 00:00:06'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        status: '@statusIdfCollect1'
     proposalIdf7:
         id: proposalIdf7
         title: Mon projet en brouillon
@@ -761,6 +767,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:07'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        status: '@statusIdfCollect1'
     proposalIdf8:
         id: proposalIdf8
         title: Mon projet qui ne sera pas analysé
@@ -773,6 +780,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:08'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        status: '@statusIdfCollect1'
     proposalIdf9:
         id: proposalIdf9
         title: Mon projet mis à la corbeille
@@ -787,6 +795,7 @@ Capco\AppBundle\Entity\Proposal:
         updatedAt: $publishedAt
         trashedStatus: 'visible'
         trashedReason: 'Refusé car on a pas envie.'
+        status: '@statusIdfCollect1'
     assignedProposals{120..125}:
         id: 'assignedProposals<current()>'
         title: 'Proposal assigned <current()>'

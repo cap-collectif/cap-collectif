@@ -83,6 +83,9 @@ ProposalForm:
                 type: 'Float'
             zoomMap:
                 type: 'Int'
+            adminUrl:
+                type: URI!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormAdminUrlResolver", [value])'
             url:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", [value])'
             notificationsConfiguration:

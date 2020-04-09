@@ -6200,6 +6200,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
   latMap: Float
   lngMap: Float
   zoomMap: Int
+  adminUrl: URI!
   notificationsConfiguration: NotificationsConfiguration!
 
   """Get the evaluation form of the proposal form"""

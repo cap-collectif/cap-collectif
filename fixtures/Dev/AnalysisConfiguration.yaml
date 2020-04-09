@@ -14,7 +14,7 @@ Capco\AppBundle\Entity\AnalysisConfiguration:
     analysisConfigurationIdf:
         id: analysisConfigurationIdf
         proposalForm: '@proposalformIdf'
-        analysisStep: '@collectstepIdf'
+        analysisStep: '@selectionStepIdfAnalyse'
         evaluationForm: '@questionnaireEvaluationIdf'
         effectiveDate: null # TODO @Jpec
         unfavourableStatuses: ['@statusIdfAnalyse1', '@statusIdfAnalyse3']
