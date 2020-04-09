@@ -13,6 +13,7 @@ import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import ProposalAnalysisFormPanel from './ProposalAnalysisFormPanel';
 import ProposalDecisionFormPanel from './ProposalDecisionFormPanel';
 import type { PanelState, User } from './ProposalAnalysisPanel';
+import ProposalViewAnalysisPanel from './ProposalViewAnalysisPanel';
 
 const FormPanel: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
   overflow: scroll;
@@ -30,7 +31,7 @@ const Header: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled
   width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
 `;
 
-const Top: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const Top: StyledComponent<{ border: boolean }, {}, HTMLDivElement> = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,7 +43,7 @@ const Top: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   text-align: center;
   z-index: 2;
   background: ${colors.white};
-
+  border-bottom: ${({ border }) => border && `1px solid ${colors.lightGray}`};
   > svg:hover {
     cursor: pointer;
   }
@@ -55,7 +56,8 @@ const Top: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   }
 `;
 
-const DataStatus: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const DataStatus: StyledComponent<{ hide: boolean }, {}, HTMLDivElement> = styled.div`
+  display: ${({ hide }) => hide && 'none'};
   height: 30px;
   background: ${colors.grayF4};
   text-align: center;
@@ -88,10 +90,11 @@ export const ProposalFormSwitcher = ({
     setSubmitting(newSubmitting);
     if (goBack) onBackClick();
   };
+  const isView = panelState === 'VIEW_ANALYSIS' || panelState === 'VIEW_DECISION';
   return (
     <FormPanel isLarge={isLarge}>
       <Header isLarge={isLarge}>
-        <Top>
+        <Top border={isView}>
           <Icon
             onClick={onBackClick}
             name={ICON_NAME.chevronLeft}
@@ -101,7 +104,7 @@ export const ProposalFormSwitcher = ({
           <span>{user.displayName}</span>
           <CloseIcon onClose={onClose} />
         </Top>
-        <DataStatus>
+        <DataStatus hide={isView}>
           {disabled ? (
             <ProposalAnalysisStatusLabel
               fontSize={8}
@@ -118,16 +121,17 @@ export const ProposalFormSwitcher = ({
       {panelState === 'EDIT_ANALYSIS' && (
         <ProposalAnalysisFormPanel
           proposal={proposal}
-          onClose={onClose}
           disabled={disabled}
           userId={user.id}
           onValidate={finishedSubmitting}
         />
       )}
+      {panelState === 'VIEW_ANALYSIS' && (
+        <ProposalViewAnalysisPanel proposal={proposal} userId={user.id} />
+      )}
       {panelState === 'EDIT_DECISION' && (
         <ProposalDecisionFormPanel
           proposal={proposal}
-          onClose={onClose}
           disabled={disabled}
           displayName
           onValidate={finishedSubmitting}
@@ -143,6 +147,7 @@ export default createFragmentContainer(ProposalFormSwitcher, {
       id
       ...ProposalAnalysisFormPanel_proposal
       ...ProposalDecisionFormPanel_proposal
+      ...ProposalViewAnalysisPanel_proposal
     }
   `,
 });

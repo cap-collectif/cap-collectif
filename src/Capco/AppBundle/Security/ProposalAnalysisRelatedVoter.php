@@ -61,7 +61,7 @@ class ProposalAnalysisRelatedVoter extends Voter
                 self::ASSIGN_SUPERVISOR,
                 self::ASSIGN_ANALYSIS,
                 self::ASSIGN_ANALYST,
-                self::ASSIGN_DECISION_MAKER
+                self::ASSIGN_DECISION_MAKER,
             ],
             true
         ) && $subject instanceof Proposal;

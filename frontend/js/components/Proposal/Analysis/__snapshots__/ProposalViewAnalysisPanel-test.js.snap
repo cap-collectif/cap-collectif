@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalViewAnalysisPanel  />  renders correctly 1`] = `
+<Fragment>
+  <ProposalViewAnalysisPanel__ResponsesView>
+    <ProposalAnalysisStatusLabel
+      color="#28a745"
+      fontSize={14}
+      iconName="favorable"
+      iconSize={10}
+      text="global.favorable"
+    />
+  </ProposalViewAnalysisPanel__ResponsesView>
+  <ProposalViewAnalysisPanel__CommentView
+    isLarge={true}
+  >
+    <FormattedMessage
+      id="global.comment"
+      tagName="p"
+      values={Object {}}
+    />
+    <span>
+      mwe
+    </span>
+  </ProposalViewAnalysisPanel__CommentView>
+</Fragment>
+`;

@@ -33,7 +33,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
               canConsult={false}
               canEdit={false}
               disabled={true}
-              onEditClick={[Function]}
+              onClick={[Function]}
               user={
                 Object {
                   "$fragmentRefs": null,
@@ -50,7 +50,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
               canConsult={true}
               canEdit={false}
               disabled={false}
-              onEditClick={[Function]}
+              onClick={[Function]}
               status="FAVOURABLE"
               user={
                 Object {
@@ -98,7 +98,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
             canConsult={true}
             canEdit={true}
             decidor={true}
-            onEditClick={[Function]}
+            onClick={[Function]}
             status="IN_PROGRESS"
             user={
               Object {

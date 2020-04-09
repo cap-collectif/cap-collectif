@@ -68,7 +68,12 @@ type Props = {|
   user: User,
 |};
 
-export type PanelState = 'HOME' | 'EDIT_ANALYSIS' | 'EDIT_DECISION';
+export type PanelState =
+  | 'HOME'
+  | 'EDIT_ANALYSIS'
+  | 'EDIT_DECISION'
+  | 'VIEW_ANALYSIS'
+  | 'VIEW_DECISION';
 
 export const CloseIcon = ({ onClose }: { onClose: () => void }) => (
   <CloseIconContainer onClick={onClose}>
@@ -125,12 +130,12 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
                       }
                       user={analyst}
                       status={status?.state}
-                      onEditClick={() => {
+                      onClick={(view: ?boolean) => {
                         setPanelViewUser({
                           id: analyst.id || '',
                           displayName: analyst.displayName || '',
                         });
-                        setPanelState('EDIT_ANALYSIS');
+                        setPanelState(view ? 'VIEW_ANALYSIS' : 'EDIT_ANALYSIS');
                       }}
                     />
                   </div>
@@ -165,12 +170,12 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
                   user={proposal.decisionMaker}
                   status={decisionState}
                   decidor
-                  onEditClick={() => {
+                  onClick={(view: ?boolean) => {
                     setPanelViewUser({
                       id: proposal.decisionMaker?.id || '',
                       displayName: proposal.decisionMaker?.displayName || '',
                     });
-                    setPanelState('EDIT_DECISION');
+                    setPanelState(view ? 'VIEW_DECISION' : 'EDIT_DECISION');
                   }}
                 />
               </div>
