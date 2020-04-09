@@ -25,7 +25,7 @@ exports[`<News /> should render correctly 1`] = `
             "_links": Object {},
             "id": "user1",
             "isAdmin": true,
-            "isEvaluer": true,
+            "isEvaluerOnLegacyTool": true,
             "isViewer": false,
             "media": Object {
               "url": "https://source.unsplash.com/random/150x150",
@@ -65,7 +65,7 @@ exports[`<News /> should render correctly but without paraph in body 1`] = `
             "_links": Object {},
             "id": "user1",
             "isAdmin": true,
-            "isEvaluer": true,
+            "isEvaluerOnLegacyTool": true,
             "isViewer": false,
             "media": Object {
               "url": "https://source.unsplash.com/random/150x150",

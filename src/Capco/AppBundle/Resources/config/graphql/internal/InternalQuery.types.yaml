@@ -384,3 +384,8 @@ InternalQuery:
                 access: "@=hasRole('ROLE_USER')"
                 type: '[InternalProject!]'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryViewerAssignedProjectsToAnalyseQueryResolver", [args, getUser()])'
+            viewerCanSeeEvaluationsPage:
+                type: Boolean!
+                access: "@=hasRole('ROLE_USER')"
+                description: 'Whether or not this user can access our evaluations page.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSupervisedProposalsResolver", [getUser(), args])'

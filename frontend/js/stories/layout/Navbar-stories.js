@@ -65,7 +65,7 @@ const ContentRight = ({
             Mon profil
           </TabsLink>
         ) : null}
-        {user.isEvaluer ? (
+        {user.isEvaluerOnLegacyTool ? (
           <TabsLink eventKey={3.3} href="/evaluations">
             <i className="cap cap-edit-write mr-10" aria-hidden="true" />
             Mes analyses

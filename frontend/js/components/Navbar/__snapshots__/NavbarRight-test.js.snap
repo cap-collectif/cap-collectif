@@ -53,7 +53,8 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
               "id": "user1",
               "isAdmin": true,
               "isEmailConfirmed": true,
-              "isEvaluer": true,
+              "isEvaluerOnLegacyTool": true,
+              "isEvaluerOnNewTool": false,
               "isPhoneConfirmed": true,
               "isViewer": false,
               "media": Object {
@@ -175,7 +176,8 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
               "id": "user1",
               "isAdmin": true,
               "isEmailConfirmed": true,
-              "isEvaluer": true,
+              "isEvaluerOnLegacyTool": true,
+              "isEvaluerOnNewTool": false,
               "isPhoneConfirmed": true,
               "isViewer": false,
               "media": Object {

@@ -1059,7 +1059,7 @@ class User extends BaseUser implements
         return $this->hasRole('ROLE_ADMIN') || $this->hasRole('ROLE_SUPER_ADMIN');
     }
 
-    public function isEvaluer(): bool
+    public function isEvaluerOnLegacyTool(): bool
     {
         foreach ($this->userGroups as $userGroup) {
             if ($userGroup->getGroup()->isEvaluating()) {

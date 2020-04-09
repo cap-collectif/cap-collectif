@@ -102,7 +102,7 @@ export class NavbarRight extends React.Component<Props> {
                 <i className="cap cap-external-link ml-10" aria-hidden="true" />
               </TabsLink>
             ) : null}
-            {user.isEvaluer ? (
+            {user.isEvaluerOnLegacyTool || user.isEvaluerOnNewTool ? (
               <TabsLink eventKey={3.4} href="/evaluations">
                 <i className="cap cap-edit-write mr-10" aria-hidden="true" />
                 <FormattedMessage id="evaluations.index.page_title" />

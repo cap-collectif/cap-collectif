@@ -2,16 +2,14 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\GraphQL\Resolver\Query\QueryViewerCanSeeEvaluationsPageResolver;
 
-/**
- * @deprecated this is our legacy evaluation tool
- */
 class EvaluationController extends Controller
 {
     /**
@@ -27,11 +25,16 @@ class EvaluationController extends Controller
 
         if ($toggleManager->isActive('unstable__analysis')) {
 
-            // TODO, right now everyone can access this page.
+            $viewerCanSeeEvaluationsPageResolver = $this->get(QueryViewerCanSeeEvaluationsPageResolver::class);
+            
+            if (!$viewerCanSeeEvaluationsPageResolver->__invoke($viewer)) {
+                throw $this->createAccessDeniedException();
+            }
+            
             return [];
         }
 
-        if (!$viewer->isEvaluer()) {
+        if (!$viewer->isEvaluerOnLegacyTool()) {
             throw $this->createAccessDeniedException();
         }
 

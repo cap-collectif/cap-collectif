@@ -10,7 +10,7 @@ export const author = {
   vip: false,
   isViewer: false,
   isAdmin: true,
-  isEvaluer: true,
+  isEvaluerOnLegacyTool: true,
 };
 
 export const followers = [

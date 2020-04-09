@@ -27,7 +27,8 @@ export const user = {
   vip: false,
   isViewer: false,
   isAdmin: true,
-  isEvaluer: true,
+    isEvaluerOnLegacyTool: true,
+    isEvaluerOnNewTool: false,
 };
 
 const props = {

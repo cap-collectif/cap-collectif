@@ -7064,6 +7064,9 @@ type Query {
 
   """Fetch projects with assignment"""
   viewerAssignedProjectsToAnalyse: [Project!]
+
+  """Whether or not this user can access our evaluations page."""
+  viewerCanSeeEvaluationsPage: Boolean!
 }
 
 """Fetches an object given its ID"""
