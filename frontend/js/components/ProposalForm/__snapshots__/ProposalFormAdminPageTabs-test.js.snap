@@ -67,7 +67,29 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={3}
-      title="proposal.tabs.evaluation"
+      title={
+        <React.Fragment>
+          <FormattedMessage
+            id="proposal.tabs.evaluation"
+            values={Object {}}
+          />
+          <span
+            className="ml-5"
+          >
+            <Badge
+              bsClass="badge"
+              pill={true}
+              pullRight={false}
+              variant="primary"
+            >
+              <FormattedMessage
+                id="badge.new"
+                values={Object {}}
+              />
+            </Badge>
+          </span>
+        </React.Fragment>
+      }
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
         proposalForm={

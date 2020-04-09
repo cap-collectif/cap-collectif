@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import { ButtonToolbar, Button, Alert } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { Dispatch, State } from '../../types';
 import component from '../Form/Field';
@@ -52,7 +52,14 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
     } = this.props;
 
     return (
+      <>
+        <Alert className="mt-10" variant="warning">
+          <FormattedMessage id="announcement.analysis.new.version"/>
+          &nbsp;
+          <b><FormattedMessage id="deleted.on.date"/></b>
+        </Alert>
       <div className="box box-primary container-fluid">
+
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal.tabs.evaluation" />
@@ -144,6 +151,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
           </form>
         </div>
       </div>
+      </>
     );
   }
 }

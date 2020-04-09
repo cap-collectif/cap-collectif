@@ -97,16 +97,7 @@ class ConfigureAnalysisMutation implements MutationInterface
                 'The analysis step is not an instance of a CollectStep or a SelectionStep.'
             );
         }
-
-        /** @var SelectionStep $moveToSelectionStep */
-        if (
-            !($moveToSelectionStep = $this->selectionStepRepository->find(
-                GlobalId::fromGlobalId($moveToSelectionStepId)['id']
-            ))
-        ) {
-            throw new UserError('This selection step does not exist.');
-        }
-
+        
         if (!($analysisConfiguration = $proposalForm->getAnalysisConfiguration())) {
             $analysisConfiguration = new AnalysisConfiguration();
         }
@@ -132,6 +123,9 @@ class ConfigureAnalysisMutation implements MutationInterface
             throw new UserError('This evaluation form does not exist.');
         }
 
+        $moveToSelectionStep = $this->selectionStepRepository->find(
+            GlobalId::fromGlobalId($moveToSelectionStepId)['id']
+        );
         $analysisConfiguration
             ->setProposalForm($proposalForm)
             ->setEvaluationForm($evaluationForm)

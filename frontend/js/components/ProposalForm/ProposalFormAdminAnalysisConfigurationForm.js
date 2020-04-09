@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { change, reset, Field, formValueSelector, reduxForm } from 'redux-form';
-import { Button, ButtonToolbar, ToggleButton } from 'react-bootstrap';
+import {Button, ButtonToolbar, ToggleButton} from 'react-bootstrap';
 import type { Dispatch, State, Uuid } from '~/types';
 import component from '../Form/Field';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -27,7 +27,7 @@ type Props = {|
   selectedAnalysisStep?: Uuid,
   intl: IntlShape,
   dispatch: Dispatch,
-  effectiveDateEnabled: boolean,
+  effectiveDateEnabled: number,
 |};
 
 type FormValues = Object;
@@ -44,6 +44,20 @@ const getStatusesGroupedByStep = (
       acc[step.id] = step?.statuses?.map(status => ({ label: status.name, value: status.id }));
       return acc;
     }, {});
+
+const validate = (values: Object) => {
+  const errors = {};
+
+  if (!values.unfavourableStatuses || values.unfavourableStatuses.length < 1) {
+    errors.unfavourableStatuses = 'message.status.field.mandatory'
+  }
+
+  if (!values.analysisStep) {
+    errors.analysisStep = 'message.analysis_step.field.mandatory'
+  }
+
+  return errors;
+};
 
 const onSubmit = (
   values: FormValues,
@@ -109,14 +123,21 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
             clearable
             labelClassName="control-label"
             inputClassName="fake-inputClassName"
-            placeholder={<FormattedMessage id="step-selection" />}
+            placeholder={<FormattedMessage id="step.select" />}
           />
           <Field
             name="body"
             type="editor"
             id="body"
             component={component}
-            label={<FormattedMessage id="admin.field.description.optional" />}
+            label={
+              <>
+                <FormattedMessage id="global.description" />
+                <span className="excerpt">
+                  <FormattedMessage className="exceprt" id="global.optional" />
+                </span>
+              </>
+            }
           />
         </div>
       </div>
@@ -226,6 +247,9 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
                 label={
                   <>
                     <FormattedMessage id="global.status" />
+                    <span className="excerpt">
+                      <FormattedMessage className="exceprt" id="global.mandatory" />
+                    </span>
                   </>
                 }
               />
@@ -295,8 +319,13 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
               <FormattedMessage id="global.custom.feminine" />
             </ToggleButton>
           </Field>
-          {effectiveDateEnabled && (
-            <Field id="effectiveDate" name="effectiveDate" type="datetime" component={component} />
+          {effectiveDateEnabled === 1 && (
+            <Field
+              id="effectiveDate"
+              name="effectiveDate"
+              type="datetime"
+              component={component}
+            />
           )}
         </div>
       </div>
@@ -327,6 +356,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
 const form = reduxForm({
   enableReinitialize: true,
   form: formName,
+  validate,
   onSubmit,
 })(ProposalFormAdminAnalysisConfigurationForm);
 
@@ -339,7 +369,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
       analysisStep: props.proposalForm.analysisConfiguration?.analysisStep?.id || null,
       evaluationForm: props.proposalForm.analysisConfiguration?.evaluationForm?.id || null,
       effectiveDate: props.proposalForm.analysisConfiguration?.effectiveDate || null,
-      costEstimationEnabled: props.proposalForm.analysisConfiguration?.costEstimationEnabled,
+      costEstimationEnabled: props.proposalForm.analysisConfiguration?.costEstimationEnabled || false,
       moveToSelectionStep:
         props.proposalForm.analysisConfiguration?.moveToSelectionStep?.id || null,
       favourableStatus: props.proposalForm.analysisConfiguration?.favourableStatus?.id || null,

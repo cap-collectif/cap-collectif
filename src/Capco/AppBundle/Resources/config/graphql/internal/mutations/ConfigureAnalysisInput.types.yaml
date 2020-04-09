@@ -28,5 +28,5 @@ ConfigureAnalysisInput:
                 type: '[ID!]'
                 description: 'The available unfavourable statuses to, apply on contributions.'
             moveToSelectionStepId:
-                type: 'ID!'
+                type: 'ID'
                 description: 'The selection step on which the contributions are moved on.'

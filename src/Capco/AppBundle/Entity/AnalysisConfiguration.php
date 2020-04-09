@@ -68,7 +68,7 @@ class AnalysisConfiguration implements Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep")
-     * @ORM\JoinColumn(name="selection_step", nullable=false, referencedColumnName="id")
+     * @ORM\JoinColumn(name="selection_step", nullable=true, referencedColumnName="id")
      */
     private $moveToSelectionStep;
 
@@ -132,12 +132,12 @@ class AnalysisConfiguration implements Timestampable
         return $this;
     }
 
-    public function getMoveToSelectionStep(): SelectionStep
+    public function getMoveToSelectionStep(): ?SelectionStep
     {
         return $this->moveToSelectionStep;
     }
 
-    public function setMoveToSelectionStep(SelectionStep $moveToSelectionStep): self
+    public function setMoveToSelectionStep(?SelectionStep $moveToSelectionStep = null): self
     {
         $this->moveToSelectionStep = $moveToSelectionStep;
 

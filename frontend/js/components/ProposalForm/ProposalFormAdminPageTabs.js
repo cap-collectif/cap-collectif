@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
+import { Tabs, Tab, Badge } from 'react-bootstrap';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
@@ -54,7 +54,16 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
             <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
           </Tab>
           {analysisEnabled && (
-            <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
+            <Tab eventKey={3} title={
+              <>
+                <FormattedMessage id="proposal.tabs.evaluation"/>
+                <span className="ml-5">
+                  <Badge pill variant="primary">
+                    <FormattedMessage id="badge.new"/>
+                  </Badge>
+                </span>
+              </>
+            }>
               <ProposalFormAdminAnalysisConfigurationForm proposalForm={proposalForm} />
             </Tab>
           )}

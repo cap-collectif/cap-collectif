@@ -1,82 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
-<div
-  className="box box-primary container-fluid"
->
-  <div
-    className="box-header"
+<Fragment>
+  <Alert
+    bsClass="alert"
+    bsStyle="info"
+    className="mt-10"
+    closeLabel="Close alert"
+    variant="warning"
   >
-    <h3
-      className="box-title"
-    >
+    <FormattedMessage
+      id="announcement.analysis.new.version"
+      values={Object {}}
+    />
+     
+    <b>
       <FormattedMessage
-        id="proposal.tabs.evaluation"
+        id="deleted.on.date"
         values={Object {}}
       />
-    </h3>
-    <a
-      className="pull-right link"
-      href="admin.help.link.form.evaluation"
-      rel="noopener noreferrer"
-    >
-      <i
-        className="fa fa-info-circle"
-      />
-       Aide
-    </a>
-  </div>
+    </b>
+  </Alert>
   <div
-    className="box-content"
+    className="box box-primary container-fluid"
   >
-    <form
-      onSubmit={[MockFunction]}
+    <div
+      className="box-header"
     >
-      <ReactRelayQueryRenderer
-        environment={"RelayModernEnvironment()"}
-        query={[Function]}
-        render={[Function]}
-        variables={Object {}}
-      />
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
+      <h3
+        className="box-title"
       >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={true}
-          id="evaluation-submit"
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={true}
-        >
-          <FormattedMessage
-            id="global.delete"
-            values={Object {}}
-          />
-        </Button>
-        <AlertForm
-          invalid={false}
-          submitFailed={false}
-          submitSucceeded={false}
-          submitting={false}
-          valid={true}
+        <FormattedMessage
+          id="proposal.tabs.evaluation"
+          values={Object {}}
         />
-      </ButtonToolbar>
-    </form>
+      </h3>
+      <a
+        className="pull-right link"
+        href="admin.help.link.form.evaluation"
+        rel="noopener noreferrer"
+      >
+        <i
+          className="fa fa-info-circle"
+        />
+         Aide
+      </a>
+    </div>
+    <div
+      className="box-content"
+    >
+      <form
+        onSubmit={[MockFunction]}
+      >
+        <ReactRelayQueryRenderer
+          environment={"RelayModernEnvironment()"}
+          query={[Function]}
+          render={[Function]}
+          variables={Object {}}
+        />
+        <ButtonToolbar
+          bsClass="btn-toolbar"
+          className="box-content__toolbar"
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="primary"
+            disabled={true}
+            id="evaluation-submit"
+            type="submit"
+          >
+            <FormattedMessage
+              id="global.save"
+              values={Object {}}
+            />
+          </Button>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="danger"
+            disabled={true}
+          >
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          </Button>
+          <AlertForm
+            invalid={false}
+            submitFailed={false}
+            submitSucceeded={false}
+            submitting={false}
+            valid={true}
+          />
+        </ButtonToolbar>
+      </form>
+    </div>
   </div>
-</div>
+</Fragment>
 `;

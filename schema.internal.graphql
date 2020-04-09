@@ -1845,7 +1845,7 @@ input ConfigureAnalysisInput {
   unfavourableStatuses: [ID!]
 
   """The selection step on which the contributions are moved on."""
-  moveToSelectionStepId: ID!
+  moveToSelectionStepId: ID
   clientMutationId: String
 }
 
