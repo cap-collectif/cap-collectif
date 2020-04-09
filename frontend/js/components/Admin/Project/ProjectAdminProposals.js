@@ -162,7 +162,7 @@ const ProposalListLoader = () => (
 
 const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
   const { selectedRows, rowsCount } = usePickableList();
-  const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
+  const { parameters, dispatch } = useProjectAdminProposalsContext();
 
   const {
     categories,
@@ -326,7 +326,7 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
             </DropdownSelect>
           </Collapsable.Element>
         </Collapsable>
-        <FilterTag canClose={false} show={firstCollectStepId !== parameters.filters.step}>
+        <FilterTag canClose={false} show>
           {steps.find(s => s.id === parameters.filters.step)?.title || null}
         </FilterTag>
       </AnalysisFilterContainer>
