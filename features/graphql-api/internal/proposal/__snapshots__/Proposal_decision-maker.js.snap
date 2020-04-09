@@ -34,7 +34,7 @@ Object {
       "refusedReason": null,
       "state": "DONE",
     },
-    "viewerCanDecide": true,
+    "viewerCanDecide": false,
     "viewerCanEvaluate": false,
   },
 }

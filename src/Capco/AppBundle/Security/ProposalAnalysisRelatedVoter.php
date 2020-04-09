@@ -22,7 +22,6 @@ class ProposalAnalysisRelatedVoter extends Voter
     public const VIEW = 'VIEW';
     public const DECIDE = 'DECIDE';
     public const ASSIGN_SUPERVISOR = 'ASSIGN_SUPERVISOR';
-    public const ASSIGN_ANALYSIS = 'ASSIGN_ANALYSIS';
     public const ASSIGN_ANALYST = 'ASSIGN_ANALYST';
     public const ASSIGN_DECISION_MAKER = 'ASSIGN_DECISION_MAKER';
 
@@ -59,7 +58,6 @@ class ProposalAnalysisRelatedVoter extends Voter
                 self::VIEW,
                 self::ANALYSE,
                 self::ASSIGN_SUPERVISOR,
-                self::ASSIGN_ANALYSIS,
                 self::ASSIGN_ANALYST,
                 self::ASSIGN_DECISION_MAKER,
             ],
@@ -72,39 +70,39 @@ class ProposalAnalysisRelatedVoter extends Voter
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
-        /** @var User $user */
-        $user = $token->getUser();
+        /** @var User $viewer */
+        $viewer = $token->getUser();
 
-        if (!$user instanceof UserInterface) {
+        if (!$viewer instanceof UserInterface) {
             return false;
         }
 
         switch ($attribute) {
             case self::VIEW:
-                return $this->canSee($subject, $user);
+                return $this->canSee($subject, $viewer);
             case self::ANALYSE:
-                return $this->canAnalyse($subject, $user);
+                return $this->canAnalyse($subject, $viewer);
             case self::EVALUATE:
-                return $this->canEvaluate($subject, $user);
+                return $this->canEvaluate($subject, $viewer);
             case self::DECIDE:
-                return $this->canDecide($subject, $user);
+                return $this->canDecide($subject, $viewer);
             case self::ASSIGN_SUPERVISOR:
-                return $this->canAssignSupervisor($subject, $user);
+                return $this->canAssignSupervisor($subject, $viewer);
             case self::ASSIGN_DECISION_MAKER:
-                return $this->canAssignDecisionMaker($user);
+                return $this->canAssignDecisionMaker($viewer);
             case self::ASSIGN_ANALYST:
-                return $this->canAssignAnalyst($subject, $user);
+                return $this->canAssignAnalyst($subject, $viewer);
             default:
                 return false;
         }
     }
 
-    private function canSee(Proposal $subject, User $user): bool
+    private function canSee(Proposal $subject, User $viewer): bool
     {
         if (
             $this->proposalDecisionMakerRepository->findBy([
                 'proposal' => $subject,
-                'decisionMaker' => $user,
+                'decisionMaker' => $viewer,
             ])
         ) {
             return true;
@@ -113,7 +111,7 @@ class ProposalAnalysisRelatedVoter extends Voter
         if (
             $this->proposalSupervisorRepository->findBy([
                 'proposal' => $subject,
-                'supervisor' => $user,
+                'supervisor' => $viewer,
             ])
         ) {
             return true;
@@ -122,21 +120,21 @@ class ProposalAnalysisRelatedVoter extends Voter
         if (
             $this->proposalAnalystRepository->findBy([
                 'proposal' => $subject,
-                'analyst' => $user,
+                'analyst' => $viewer,
             ])
         ) {
             return true;
         }
 
-        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
+        return $this->viewerIsAdmin();
     }
 
-    private function canAnalyse(Proposal $subject, User $user): bool
+    private function canAnalyse(Proposal $subject, User $viewer): bool
     {
         if (
             $this->proposalAnalystRepository->findOneBy([
                 'proposal' => $subject,
-                'analyst' => $user,
+                'analyst' => $viewer,
             ])
         ) {
             return true;
@@ -145,7 +143,7 @@ class ProposalAnalysisRelatedVoter extends Voter
         return false;
     }
 
-    private function canEvaluate(Proposal $subject, User $user): bool
+    private function canEvaluate(Proposal $subject, User $viewer): bool
     {
         if (
             ($decision = $subject->getDecision()) &&
@@ -157,73 +155,63 @@ class ProposalAnalysisRelatedVoter extends Voter
         if (
             $this->proposalSupervisorRepository->findOneBy([
                 'proposal' => $subject,
-                'supervisor' => $user,
+                'supervisor' => $viewer,
             ])
         ) {
             return true;
         }
 
-        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
+        return false;
     }
 
-    private function canDecide(Proposal $subject, User $user): bool
+    private function canDecide(Proposal $subject, User $viewer): bool
     {
-        if ($user->hasRole(UserRole::ROLE_ADMIN)) {
-            return true;
-        }
-
         if (
             $this->proposalDecisionMakerRepository->findBy([
                 'proposal' => $subject,
-                'decisionMaker' => $user,
+                'decisionMaker' => $viewer,
             ])
         ) {
             return true;
         }
 
-        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
+        return false;
     }
 
-    private function canAssignSupervisor(Proposal $subject, User $user): bool
+    private function canAssignSupervisor(Proposal $subject, User $viewer): bool
     {
-        return $this->canDecide($subject, $user);
+        return $this->canDecide($subject, $viewer) || $this->viewerIsAdmin();
     }
 
-    private function canAssignDecisionMaker(User $user): bool
+    private function canAssignDecisionMaker(User $viewer): bool
     {
-        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
+        return $this->viewerIsAdmin();
     }
 
-    private function canAssignAnalyst(Proposal $subject, User $user): bool
+    private function viewerIsAdmin(): bool
     {
-        if ($this->authorizationChecker->isGranted(UserRole::ROLE_SUPER_ADMIN)) {
+        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN) || $this->authorizationChecker->isGranted(UserRole::ROLE_SUPER_ADMIN);
+    }
+
+    private function canAssignAnalyst(Proposal $subject, User $viewer): bool
+    {
+        if ($this->viewerIsAdmin()) {
             return true;
         }
 
-        if (
-            $this->proposalDecisionMakerRepository->findBy([
-                'proposal' => $subject,
-                'decisionMaker' => $user,
-            ])
-        ) {
+        if ($this->canDecide($subject, $viewer)) {
             return true;
         }
 
         if (
             $this->proposalSupervisorRepository->findOneBy([
                 'proposal' => $subject,
-                'supervisor' => $user,
+                'supervisor' => $viewer,
             ])
         ) {
             return true;
         }
-        if (
-            ($decision = $subject->getDecision()) &&
-            ProposalStatementState::DONE === $decision->getState()
-        ) {
-            return false;
-        }
 
-        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN);
+        return false;
     }
 }
