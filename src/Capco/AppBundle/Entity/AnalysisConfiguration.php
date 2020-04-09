@@ -45,6 +45,11 @@ class AnalysisConfiguration implements Timestampable
      * @ORM\Column(type="datetime", name="effective_date", nullable=true)
      */
     private $effectiveDate;
+    
+    /**
+     * @ORM\Column(type="boolean", name="cost_estimation_enabled")
+     */
+    private $costEstimationEnabled = false;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
@@ -178,6 +183,17 @@ class AnalysisConfiguration implements Timestampable
     {
         $this->favourableStatus = $favourableStatus;
 
+        return $this;
+    }
+    
+    public function isCostEstimationEnabled(): bool
+    {
+        return $this->costEstimationEnabled;
+    }
+    
+    public function setCostEstimationEnabled(bool $costEstimationEnabled): AnalysisConfiguration
+    {
+        $this->costEstimationEnabled = $costEstimationEnabled;
         return $this;
     }
 }

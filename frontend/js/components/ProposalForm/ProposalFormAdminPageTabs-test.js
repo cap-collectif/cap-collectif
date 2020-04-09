@@ -7,6 +7,7 @@ import { $fragmentRefs, intlMock, $refType } from '../../mocks';
 
 describe('<ProposalFormAdminPageTabs />', () => {
   const props = {
+    analysisEnabled: true,
     intl: intlMock,
     proposalForm: {
       $refType,

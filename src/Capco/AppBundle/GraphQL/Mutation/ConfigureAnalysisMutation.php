@@ -64,6 +64,8 @@ class ConfigureAnalysisMutation implements MutationInterface
             $favourableStatusId,
             $unfavourableStatusesIds,
             $moveToSelectionStepId,
+            $costEstimationEnabled,
+            $body
         ) = [
             $args->offsetGet('proposalFormId'),
             $args->offsetGet('evaluationFormId'),
@@ -72,13 +74,14 @@ class ConfigureAnalysisMutation implements MutationInterface
             $args->offsetGet('favourableStatus'),
             $args->offsetGet('unfavourableStatuses'),
             $args->offsetGet('moveToSelectionStepId'),
+            $args->offsetGet('costEstimationEnabled'),
+            $args->offsetGet('body'),
         ];
 
         $evaluationForm = null;
         $favourableStatus = null;
         $unfavourablesStatuses = [];
 
-        $proposalFormId = GlobalId::fromGlobalId($proposalFormId)['id'];
         /** @var ProposalForm $proposalForm */
         if (!($proposalForm = $this->proposalFormRepository->find($proposalFormId))) {
             throw new UserError('This proposalForm does not exist.');
@@ -136,7 +139,9 @@ class ConfigureAnalysisMutation implements MutationInterface
             ->setEffectiveDate($effectiveDate ? new \DateTime($effectiveDate) : null)
             ->setFavourableStatus($favourableStatus)
             ->setUnfavourablesStatuses($unfavourablesStatuses)
-            ->setMoveToSelectionStep($moveToSelectionStep);
+            ->setMoveToSelectionStep($moveToSelectionStep)
+            ->setCostEstimationEnabled($costEstimationEnabled)
+            ->setBody($body);
 
         try {
             $this->entityManager->persist($analysisConfiguration);

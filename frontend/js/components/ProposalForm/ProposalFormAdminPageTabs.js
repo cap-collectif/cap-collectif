@@ -3,18 +3,22 @@ import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { connect } from 'react-redux';
 import ProposalFormAdminConfigurationForm from './ProposalFormAdminConfigurationForm';
 import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationForm';
 import ProposalFormAdminEvaluationForm from './ProposalFormAdminEvaluationForm';
 import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
+import ProposalFormAdminAnalysisConfigurationForm from './ProposalFormAdminAnalysisConfigurationForm';
 import type { ProposalFormAdminPageTabs_proposalForm } from '~relay/ProposalFormAdminPageTabs_proposalForm.graphql';
 import type { ProposalFormAdminPageTabs_query } from '~relay/ProposalFormAdminPageTabs_query.graphql';
+import type { GlobalState } from '~/types';
 
 type DefaultProps = void;
 type Props = {|
   proposalForm: ProposalFormAdminPageTabs_proposalForm,
   query: ProposalFormAdminPageTabs_query,
   intl: IntlShape,
+  analysisEnabled: boolean,
 |};
 type State = void;
 
@@ -22,7 +26,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
   static defaultProps: DefaultProps;
 
   render() {
-    const { intl, proposalForm, query } = this.props;
+    const { intl, proposalForm, query, analysisEnabled } = this.props;
     return (
       <div>
         {proposalForm.url !== '' ? (
@@ -49,10 +53,15 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
           <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
             <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
+          {analysisEnabled && (
+            <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
+              <ProposalFormAdminAnalysisConfigurationForm proposalForm={proposalForm} />
+            </Tab>
+          )}
+          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
             <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={4} title={intl.formatMessage({ id: 'global.params' })}>
+          <Tab eventKey={5} title={intl.formatMessage({ id: 'global.params' })}>
             <ProposalFormAdminSettingsForm proposalForm={proposalForm} />
           </Tab>
         </Tabs>
@@ -61,7 +70,12 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
   }
 }
 
-const container = injectIntl(ProposalFormAdminPageTabs);
+const mapStateToProps = (state: GlobalState) => ({
+  analysisEnabled: state.default.features.unstable__analysis,
+});
+
+const withIntl = injectIntl(ProposalFormAdminPageTabs);
+const container = connect(mapStateToProps)(withIntl);
 
 export default createFragmentContainer(container, {
   proposalForm: graphql`
@@ -71,6 +85,7 @@ export default createFragmentContainer(container, {
       ...ProposalFormAdminConfigurationForm_proposalForm
       ...ProposalFormAdminNotificationForm_proposalForm
       ...ProposalFormAdminSettingsForm_proposalForm
+      ...ProposalFormAdminAnalysisConfigurationForm_proposalForm
       ...ProposalFormAdminEvaluationForm_proposalForm
     }
   `,

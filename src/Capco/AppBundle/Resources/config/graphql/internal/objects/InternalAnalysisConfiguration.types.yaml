@@ -12,6 +12,9 @@ InternalAnalysisConfiguration:
             proposalForm:
                 type: 'ProposalForm!'
                 description: 'The related ProposalForm.'
+            costEstimationEnabled:
+                type: 'Boolean!'
+                description: 'Activate cost estimation on evaluation form.'
             evaluationForm:
                 type: 'InternalQuestionnaire'
                 description: 'The evaluation form of the analysis'

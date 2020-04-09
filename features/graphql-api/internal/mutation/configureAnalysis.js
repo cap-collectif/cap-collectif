@@ -33,12 +33,13 @@ describe('mutations.configureAnalysis', () => {
       ConfigureAnalysisMutation,
       {
         input: {
-          proposalFormId: 'UHJvcG9zYWxGb3JtOnByb3Bvc2FsZm9ybTE3',
+          proposalFormId: 'proposalform17',
           analysisStepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAxMw==',
           moveToSelectionStepId: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOQ==',
           effectiveDate: '2020-03-01 12:00:00',
           unfavourableStatuses: ['status8', 'status9'],
           favourableStatus: 'satus10',
+          costEstimationEnabled: true,
         },
       },
       'internal_admin',
@@ -57,12 +58,13 @@ describe('mutations.configureAnalysis', () => {
       ConfigureAnalysisMutation,
       {
         input: {
-          proposalFormId: 'UHJvcG9zYWxGb3JtOnByb3Bvc2FsZm9ybTE3',
+          proposalFormId: 'proposalform17',
           analysisStepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAxMw==',
           moveToSelectionStepId: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOQ==',
           effectiveDate: '2020-03-01 12:00:00',
           unfavourableStatuses: ['status8'],
           favourableStatus: 'status10',
+          costEstimationEnabled: true,
         },
       },
       'internal_admin',

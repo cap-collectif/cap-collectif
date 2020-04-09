@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 class QueryViewerAssignedProjectsToAnalyseQueryResolver implements ResolverInterface
 {
     use ResolverTrait;
-
+    
     private ProjectRepository $projectRepository;
     private LoggerInterface $logger;
 

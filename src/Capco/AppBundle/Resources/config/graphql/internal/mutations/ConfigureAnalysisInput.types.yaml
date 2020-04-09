@@ -15,6 +15,12 @@ ConfigureAnalysisInput:
             effectiveDate:
                 type: 'DateTime'
                 description: 'The effective date of the taken decision.'
+            body:
+                type: 'HTML'
+                description: 'A text to explain the analysis process.'
+            costEstimationEnabled:
+                type: 'Boolean!'
+                description: 'Activate the cost estimation on the evaluation form.'
             favourableStatus:
                 type: 'ID'
                 description: 'The favourable status to apply on contributions.'

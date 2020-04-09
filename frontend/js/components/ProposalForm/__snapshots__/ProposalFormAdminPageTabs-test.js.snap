@@ -67,7 +67,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={3}
-      title="proposal_form.admin.notification"
+      title="proposal.tabs.evaluation"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
         proposalForm={
@@ -82,6 +82,21 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={4}
+      title="proposal_form.admin.notification"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey={5}
       title="global.params"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))

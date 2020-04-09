@@ -463,6 +463,9 @@ type AnalysisConfiguration {
   """The related ProposalForm."""
   proposalForm: ProposalForm!
 
+  """Activate cost estimation on evaluation form."""
+  costEstimationEnabled: Boolean!
+
   """The evaluation form of the analysis"""
   evaluationForm: Questionnaire
 
@@ -1828,6 +1831,12 @@ input ConfigureAnalysisInput {
 
   """The effective date of the taken decision."""
   effectiveDate: DateTime
+
+  """A text to explain the analysis process."""
+  body: HTML
+
+  """Activate the cost estimation on the evaluation form."""
+  costEstimationEnabled: Boolean!
 
   """The favourable status to apply on contributions."""
   favourableStatus: ID
