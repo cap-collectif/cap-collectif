@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalViewAssessmentPanel  />  renders correctly 1`] = `
+<Fragment>
+  <ProposalViewAnalysisPanel__ResponsesView>
+    <ProposalViewAssessmentPanel__AssessmentView>
+      <ProposalAnalysisStatusLabel
+        color="#28a745"
+        fontSize={14}
+        iconName="favorable"
+        iconSize={10}
+        text="global.favorable"
+      />
+      <WYSIWYGRender
+        value="<html>much body such html<html>"
+      />
+      <FormattedMessage
+        id="global.estimation"
+        tagName="p"
+        values={Object {}}
+      />
+      8000
+       €
+    </ProposalViewAssessmentPanel__AssessmentView>
+    <ProposalViewAssessmentPanel__ResponseContainer>
+      <FormattedMessage
+        id="official.reply.draft"
+        tagName="p"
+        values={Object {}}
+      />
+      <WYSIWYGRender
+        value="<html>very official</html"
+      />
+    </ProposalViewAssessmentPanel__ResponseContainer>
+  </ProposalViewAnalysisPanel__ResponsesView>
+</Fragment>
+`;

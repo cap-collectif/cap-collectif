@@ -10,11 +10,13 @@ import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import sizes from '~/utils/sizes';
 import { CloseIcon } from './ProposalAnalysisPanel';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
+import type { PanelState, User } from './ProposalAnalysisPanel';
 import ProposalAnalysisFormPanel from './ProposalAnalysisFormPanel';
 import ProposalDecisionFormPanel from './ProposalDecisionFormPanel';
-import type { PanelState, User } from './ProposalAnalysisPanel';
+import ProposalAssessmentFormPanel from './ProposalAssessmentFormPanel';
 import ProposalViewAnalysisPanel from './ProposalViewAnalysisPanel';
 import ProposalViewDecisionPanel from './ProposalViewDecisionPanel';
+import ProposalViewAssessmentPanel from './ProposalViewAssessmentPanel';
 
 const FormPanel: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
   overflow: scroll;
@@ -91,7 +93,10 @@ export const ProposalFormSwitcher = ({
     setSubmitting(newSubmitting);
     if (goBack) onBackClick();
   };
-  const isView = panelState === 'VIEW_ANALYSIS' || panelState === 'VIEW_DECISION';
+  const isView =
+    panelState === 'VIEW_ANALYSIS' ||
+    panelState === 'VIEW_DECISION' ||
+    panelState === 'VIEW_ASSESSMENT';
   return (
     <FormPanel isLarge={isLarge}>
       <Header isLarge={isLarge}>
@@ -130,6 +135,15 @@ export const ProposalFormSwitcher = ({
       {panelState === 'VIEW_ANALYSIS' && (
         <ProposalViewAnalysisPanel proposal={proposal} userId={user.id} />
       )}
+      {panelState === 'EDIT_ASSESSMENT' && (
+        <ProposalAssessmentFormPanel
+          proposal={proposal}
+          disabled={disabled}
+          displayName
+          onValidate={finishedSubmitting}
+        />
+      )}
+      {panelState === 'VIEW_ASSESSMENT' && <ProposalViewAssessmentPanel proposal={proposal} />}
       {panelState === 'EDIT_DECISION' && (
         <ProposalDecisionFormPanel
           proposal={proposal}
@@ -149,8 +163,10 @@ export default createFragmentContainer(ProposalFormSwitcher, {
       id
       ...ProposalAnalysisFormPanel_proposal
       ...ProposalDecisionFormPanel_proposal
+      ...ProposalAssessmentFormPanel_proposal
       ...ProposalViewAnalysisPanel_proposal
       ...ProposalViewDecisionPanel_proposal
+      ...ProposalViewAssessmentPanel_proposal
     }
   `,
 });

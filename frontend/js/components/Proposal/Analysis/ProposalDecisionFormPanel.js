@@ -81,7 +81,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     });
 };
 
-const formName = 'proposal-analysis-form';
+const formName = 'proposal-decision-form';
 
 export const ProposalDecisionFormPanel = ({
   dispatch,
@@ -97,7 +97,7 @@ export const ProposalDecisionFormPanel = ({
   const effectiveDate = proposal?.form.analysisConfiguration?.effectiveDate;
   return (
     <>
-      <form id="proposal-decision-form">
+      <form id={formName}>
         <AnalysisForm>
           <label className="mb-15">
             <FormattedMessage id="proposal.estimation" />
@@ -137,7 +137,7 @@ export const ProposalDecisionFormPanel = ({
               type="editor"
               name="body"
               id="proposalDecision-body"
-              label={<FormattedMessage id="reason-for-collection" />}
+              label={<FormattedMessage id="global.contenu" />}
               component={component}
             />
           </PostWrapper>

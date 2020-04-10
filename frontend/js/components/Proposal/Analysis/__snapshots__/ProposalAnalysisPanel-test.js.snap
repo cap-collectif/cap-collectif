@@ -76,6 +76,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
             canConsult={true}
             canEdit={false}
             disabled={false}
+            onClick={[Function]}
             status="UNFAVOURABLE"
             user={
               Object {

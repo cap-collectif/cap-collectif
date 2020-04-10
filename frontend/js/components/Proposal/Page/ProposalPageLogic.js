@@ -48,7 +48,10 @@ export const ProposalPageLogic = ({ query, features }: Props) => {
   const isLarge = width < sizes.bootstrapGrid.mdMax;
   const { proposal } = query;
   const hasAnalysis =
-    (proposal?.viewerCanDecide || proposal?.viewerCanAnalyse || proposal?.viewerCanEvaluate) &&
+    (proposal?.viewerCanDecide ||
+      proposal?.viewerCanAnalyse ||
+      proposal?.viewerCanEvaluate ||
+      proposal?.supervisor?.id === query?.viewer?.id) &&
     features.unstable__analysis;
   const [show, setShow] = useState(isMobile && hasAnalysis);
   const [isAnalysing, setIsAnalysing] = useState(hasAnalysis);
@@ -110,6 +113,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
         isAuthenticated: { type: "Boolean!" }
       ) {
       viewer @include(if: $isAuthenticated) {
+        id
         ...ProposalPageTabs_viewer
         ...ProposalPageHeader_viewer @arguments(hasVotableStep: $hasVotableStep)
       }
@@ -124,6 +128,9 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
         ...ProposalPageHeader_proposal @arguments(isAuthenticated: $isAuthenticated)
         ...ProposalAnalysisPanel_proposal @include(if: $isAuthenticated)
         ... on Proposal {
+          supervisor {
+            id
+          }
           viewerCanDecide @include(if: $isAuthenticated)
           viewerCanAnalyse @include(if: $isAuthenticated)
           viewerCanEvaluate @include(if: $isAuthenticated)

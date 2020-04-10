@@ -71,8 +71,10 @@ type Props = {|
 export type PanelState =
   | 'HOME'
   | 'EDIT_ANALYSIS'
-  | 'EDIT_DECISION'
   | 'VIEW_ANALYSIS'
+  | 'EDIT_ASSESSMENT'
+  | 'VIEW_ASSESSMENT'
+  | 'EDIT_DECISION'
   | 'VIEW_DECISION';
 
 export const CloseIcon = ({ onClose }: { onClose: () => void }) => (
@@ -123,7 +125,12 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
                 return (
                   <div className="mt-10">
                     <ProposalAnalysisUserRow
-                      canConsult={!!status || (proposal.viewerCanAnalyse && !idx)}
+                      canConsult={
+                        !!status ||
+                        (proposal.viewerCanAnalyse &&
+                          !idx &&
+                          !(closed || (proposalState && proposalState !== 'IN_PROGRESS')))
+                      }
                       canEdit={proposal.viewerCanAnalyse && !idx && !disabled}
                       disabled={
                         !status && (closed || (proposalState && proposalState !== 'IN_PROGRESS'))
@@ -148,11 +155,15 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
               <FormattedMessage id="global.review" tagName="p" />
               <div>
                 <ProposalAnalysisUserRow
-                  canConsult={
-                    !!proposal.assessment?.state &&
-                    (proposal.viewerCanEvaluate || proposal.viewerCanDecide)
-                  }
+                  canConsult={!!proposal.assessment?.state || proposal.viewerCanEvaluate}
                   canEdit={proposal.viewerCanEvaluate}
+                  onClick={(view: ?boolean) => {
+                    setPanelViewUser({
+                      id: proposal.supervisor?.id || '',
+                      displayName: proposal.supervisor?.displayName || '',
+                    });
+                    setPanelState(view ? 'VIEW_ASSESSMENT' : 'EDIT_ASSESSMENT');
+                  }}
                   disabled={closed || proposal.assessment?.state === 'TOO_LATE'}
                   user={proposal.supervisor}
                   status={proposal.assessment?.state}
@@ -165,7 +176,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
               <FormattedMessage id="global.decision" tagName="p" />
               <div>
                 <ProposalAnalysisUserRow
-                  canConsult={!!proposal.decision?.state}
+                  canConsult={!!proposal.decision?.state || proposal.viewerCanDecide}
                   canEdit={proposal.viewerCanDecide}
                   user={proposal.decisionMaker}
                   status={decisionState}

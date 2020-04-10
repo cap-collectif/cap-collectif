@@ -105,7 +105,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       proposal?.form?.analysisConfiguration?.evaluationForm?.questions || [],
     ),
     proposalId: proposal.id,
-    comment: values.comment,
+    comment: values.comment || '',
   };
   if (values.validate && values.status) {
     return AnalyseProposalAnalysisMutation.commit({
@@ -158,7 +158,7 @@ export const ProposalAnalysisFormPanel = ({
   );
   return (
     <>
-      <form id="proposal-analysis-form" style={{ opacity: disabled ? '0.5' : '1' }}>
+      <form id={formName} style={{ opacity: disabled ? '0.5' : '1' }}>
         <AnalysisForm>
           <FieldArray
             typeForm={TYPE_FORM.QUESTIONNAIRE}
