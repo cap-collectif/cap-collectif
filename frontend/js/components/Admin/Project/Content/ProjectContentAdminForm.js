@@ -1,18 +1,20 @@
 // @flow
 import React from 'react';
 import { Field } from 'redux-form';
+import styled, { type StyledComponent } from 'styled-components';
 import { OverlayTrigger } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { type IntlShape, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, type IntlShape } from 'react-intl';
 import select from '~/components/Form/Select';
 import renderComponent from '~/components/Form/Field';
 import UserListField from '../../Field/UserListField';
 import { type Author } from '../Form/ProjectAdminForm';
 import ProjectTypeListField from '../../Field/ProjectTypeListField';
 import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
-import { loadThemeOptions, loadDistrictOptions } from '../Metadata/ProjectMetadataAdminForm';
+import { loadDistrictOptions, loadThemeOptions } from '../Metadata/ProjectMetadataAdminForm';
 import Tooltip from '~/components/Utils/Tooltip';
 import { ProjectBoxHeader, ProjectSmallInput } from '../Form/ProjectAdminForm.style';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 export type FormValues = {|
   title: string,
@@ -38,6 +40,16 @@ type Props = {|
   intl: IntlShape,
 |};
 
+export const InformationIcon: StyledComponent<{}, {}, typeof Icon> = styled(Icon).attrs({
+  name: ICON_NAME.information,
+  size: '12px',
+  style: undefined, // Override default styles that `Icon` component apply
+})`
+  opacity: 0.3;
+  position: relative;
+  top: 1px;
+`;
+
 export const renderLabel = (id: string, intl: IntlShape, helpText?: string, optional?: boolean) => (
   <div>
     {intl.formatMessage({ id })}
@@ -49,10 +61,10 @@ export const renderLabel = (id: string, intl: IntlShape, helpText?: string, opti
           placement="top"
           overlay={
             <Tooltip id="tooltip-top" className="text-left" style={{ wordBreak: 'break-word' }}>
-              {intl.formatMessage({ id: helpText })}
+              <FormattedHTMLMessage id={helpText} />
             </Tooltip>
           }>
-          <i className="fa fa-info-circle" style={{ opacity: '.5' }} />
+          <InformationIcon />
         </OverlayTrigger>
       )}
     </span>
@@ -74,102 +86,104 @@ export const validate = (props: FormValues) => {
   return errors;
 };
 
-export const ProjectContentAdminForm = ({ intl }: Props) => (
-  <div className="col-md-12">
-    <div className="box box-primary container-fluid">
-      <ProjectBoxHeader>
-        <h4>
-          <FormattedMessage id="global.general" />
-        </h4>
-      </ProjectBoxHeader>
-      <div className="box-content">
-        <Field
-          type="text"
-          name="title"
-          label={<FormattedMessage id="global.title" />}
-          component={renderComponent}
-        />
-        <UserListField
-          id="project-author"
-          name="authors"
-          clearable
-          selectFieldIsObject
-          debounce
-          autoload={false}
-          multi
-          placeholder=" "
-          labelClassName="control-label"
-          inputClassName="fake-inputClassName"
-          label={<FormattedMessage id="admin.fields.project.authors" />}
-          ariaControls="EventListFilters-filter-author-listbox"
-        />
-
-        <ProjectSmallInput>
-          <ProjectTypeListField optional placeholder=" " />
-        </ProjectSmallInput>
-        <div className="row mr-0 ml-0">
+export const ProjectContentAdminForm = ({ intl }: Props) => {
+  return (
+    <div className="col-md-12">
+      <div className="box box-primary container-fluid">
+        <ProjectBoxHeader>
+          <h4>
+            <FormattedMessage id="global.general" />
+          </h4>
+        </ProjectBoxHeader>
+        <div className="box-content">
           <Field
-            id="cover"
-            name="Cover"
+            type="text"
+            name="title"
+            label={<FormattedMessage id="global.title" />}
             component={renderComponent}
-            type="image"
-            label={renderLabel('proposal.media', intl)}
+          />
+          <UserListField
+            id="project-author"
+            name="authors"
+            clearable
+            selectFieldIsObject
+            debounce
+            autoload={false}
+            multi
+            placeholder=" "
+            labelClassName="control-label"
+            inputClassName="fake-inputClassName"
+            label={<FormattedMessage id="admin.fields.project.authors" />}
+            ariaControls="EventListFilters-filter-author-listbox"
+          />
+
+          <ProjectSmallInput>
+            <ProjectTypeListField optional placeholder=" " />
+          </ProjectSmallInput>
+          <div className="row mr-0 ml-0">
+            <Field
+              id="cover"
+              name="Cover"
+              component={renderComponent}
+              type="image"
+              label={renderLabel('proposal.media', intl)}
+            />
+          </div>
+          <Field
+            type="text"
+            name="video"
+            id="video"
+            label={renderLabel('admin.fields.project.video', intl, 'admin.help.project.video')}
+            placeholder={intl.formatMessage({ id: 'admin-project-video-placeholder' })}
+            component={renderComponent}
+          />
+          <Field
+            selectFieldIsObject
+            debounce
+            autoload
+            labelClassName="control-label"
+            inputClassName="fake-inputClassName"
+            component={select}
+            id="themes"
+            name="themes"
+            placeholder=" "
+            label={renderLabel('global.themes', intl)}
+            role="combobox"
+            aria-autocomplete="list"
+            aria-haspopup="true"
+            loadOptions={loadThemeOptions}
+            multi
+            clearable
+          />
+          <Field
+            role="combobox"
+            aria-autocomplete="list"
+            aria-haspopup="true"
+            loadOptions={loadDistrictOptions}
+            component={select}
+            id="districts"
+            name="districts"
+            clearable
+            selectFieldIsObject
+            debounce
+            autoload
+            multi
+            placeholder=" "
+            labelClassName="control-label"
+            inputClassName="fake-inputClassName"
+            label={renderLabel('proposal_form.districts', intl)}
+          />
+          <Field
+            name="metaDescription"
+            type="textarea"
+            label={renderLabel('global.meta.description', intl, 'admin.help.metadescription')}
+            component={renderComponent}
           />
         </div>
-        <Field
-          type="text"
-          name="video"
-          id="video"
-          label={renderLabel('admin.fields.project.video', intl, 'admin.help.project.video')}
-          placeholder="https://"
-          component={renderComponent}
-        />
-        <Field
-          selectFieldIsObject
-          debounce
-          autoload
-          labelClassName="control-label"
-          inputClassName="fake-inputClassName"
-          component={select}
-          id="themes"
-          name="themes"
-          placeholder=" "
-          label={renderLabel('global.themes', intl)}
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          loadOptions={loadThemeOptions}
-          multi
-          clearable
-        />
-        <Field
-          role="combobox"
-          aria-autocomplete="list"
-          aria-haspopup="true"
-          loadOptions={loadDistrictOptions}
-          component={select}
-          id="districts"
-          name="districts"
-          clearable
-          selectFieldIsObject
-          debounce
-          autoload
-          multi
-          placeholder=" "
-          labelClassName="control-label"
-          inputClassName="fake-inputClassName"
-          label={renderLabel('proposal_form.districts', intl)}
-        />
-        <Field
-          name="metaDescription"
-          type="textarea"
-          label={renderLabel('global.meta.description', intl, 'admin.help.metadescription')}
-          component={renderComponent}
-        />
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default createFragmentContainer(ProjectContentAdminForm, {
   project: graphql`

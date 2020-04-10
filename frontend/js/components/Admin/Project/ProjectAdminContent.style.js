@@ -33,7 +33,9 @@ export const NavItem: StyledComponent<{ active?: boolean }, {}, HTMLLIElement> =
     color: ${({ active }) => (active ? colors.primaryColor : colors.darkGray)};
   }
 
-  a:hover {
+  a:hover,
+  a:active,
+  a:focus {
     text-decoration: none;
   }
 `;
@@ -45,9 +47,8 @@ export const Count: StyledComponent<{ active?: boolean }, {}, HTMLSpanElement> =
   background: ${({ active }) => (active ? 'rgba(3, 136, 204, 0.2)' : colors.lightGray)};
   color: ${({ active }) => active && colors.primaryColor};
   border-radius: 8px;
-  margin-left: 3px;
+  margin-left: 5px;
   font-size: 12px;
-  margin-top: 1px;
 `;
 
 export const Header: StyledComponent<{}, {}, HTMLElement> = styled.nav`
@@ -61,7 +62,13 @@ export const Header: StyledComponent<{}, {}, HTMLElement> = styled.nav`
     display: flex;
     justify-content: space-between;
     a {
-      font-size: 16px;
+      font-size: 14px;
+      line-height: 14px;
+      & svg {
+        color: inherit;
+        margin-right: 5px;
+      }
+      
       font-weight: 600;
       color: ${colors.primaryColor};
       display: flex;

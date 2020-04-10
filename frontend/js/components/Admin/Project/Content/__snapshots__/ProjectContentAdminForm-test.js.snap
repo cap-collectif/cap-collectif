@@ -100,7 +100,11 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                       }
                     }
                   >
-                    admin.help.project.video
+                    <FormattedHTMLMessage
+                      id="admin.help.project.video"
+                      tagName="span"
+                      values={Object {}}
+                    />
                   </_default>
                 }
                 placement="top"
@@ -111,20 +115,13 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                   ]
                 }
               >
-                <i
-                  className="fa fa-info-circle"
-                  style={
-                    Object {
-                      "opacity": ".5",
-                    }
-                  }
-                />
+                <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
           </div>
         }
         name="video"
-        placeholder="https://"
+        placeholder="admin-project-video-placeholder"
         type="text"
       />
       <Field
@@ -205,7 +202,11 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                       }
                     }
                   >
-                    admin.help.metadescription
+                    <FormattedHTMLMessage
+                      id="admin.help.metadescription"
+                      tagName="span"
+                      values={Object {}}
+                    />
                   </_default>
                 }
                 placement="top"
@@ -216,14 +217,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
                   ]
                 }
               >
-                <i
-                  className="fa fa-info-circle"
-                  style={
-                    Object {
-                      "opacity": ".5",
-                    }
-                  }
-                />
+                <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
           </div>
@@ -336,7 +330,11 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                       }
                     }
                   >
-                    admin.help.project.video
+                    <FormattedHTMLMessage
+                      id="admin.help.project.video"
+                      tagName="span"
+                      values={Object {}}
+                    />
                   </_default>
                 }
                 placement="top"
@@ -347,20 +345,13 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                   ]
                 }
               >
-                <i
-                  className="fa fa-info-circle"
-                  style={
-                    Object {
-                      "opacity": ".5",
-                    }
-                  }
-                />
+                <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
           </div>
         }
         name="video"
-        placeholder="https://"
+        placeholder="admin-project-video-placeholder"
         type="text"
       />
       <Field
@@ -441,7 +432,11 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                       }
                     }
                   >
-                    admin.help.metadescription
+                    <FormattedHTMLMessage
+                      id="admin.help.metadescription"
+                      tagName="span"
+                      values={Object {}}
+                    />
                   </_default>
                 }
                 placement="top"
@@ -452,14 +447,7 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
                   ]
                 }
               >
-                <i
-                  className="fa fa-info-circle"
-                  style={
-                    Object {
-                      "opacity": ".5",
-                    }
-                  }
-                />
+                <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
           </div>

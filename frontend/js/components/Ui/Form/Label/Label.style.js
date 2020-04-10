@@ -14,10 +14,15 @@ const LabelContainer: StyledComponent<
   margin: 0;
   font-size: ${({ typeForm }) => (isQuestionnaire(typeForm) ? '16px' : '14px')};
   cursor: pointer;
+  margin-bottom: 10px !important; /* override conflicting sonata global css rules which have a greater css selector weight, so !important is relevant here */
 
   & > .icon {
     flex-shrink: 0; /* allow space for width & height */
     margin-right: ${({ type, hasImage }) => (type && !hasImage ? '10px' : '0')};
+  }
+
+  & .excerpt.inline {
+    margin-left: 5px;
   }
 `;
 

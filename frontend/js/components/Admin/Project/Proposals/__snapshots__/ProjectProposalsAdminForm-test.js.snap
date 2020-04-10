@@ -56,14 +56,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly empty 1`] = `
                   ]
                 }
               >
-                <i
-                  className="fa fa-info-circle ml-5"
-                  style={
-                    Object {
-                      "opacity": ".5",
-                    }
-                  }
-                />
+                <ForwardRef(ProjectProposalsAdminForm__ActivityInformationIcon) />
               </OverlayTrigger>
             </span>
           </div>
@@ -132,14 +125,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly with a project 1`] = `
                   ]
                 }
               >
-                <i
-                  className="fa fa-info-circle ml-5"
-                  style={
-                    Object {
-                      "opacity": ".5",
-                    }
-                  }
-                />
+                <ForwardRef(ProjectProposalsAdminForm__ActivityInformationIcon) />
               </OverlayTrigger>
             </span>
           </div>

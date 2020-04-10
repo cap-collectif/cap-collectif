@@ -49,6 +49,7 @@ export const ICON_NAME: {
   favorable: 'favorable',
   crossRounded: 'cross--rounded',
   warning: 'warning',
+  externalLink: 'external-link',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -95,6 +96,7 @@ export const ICON_NAME: {
   favorable: 'favorable',
   crossRounded: 'cross--rounded',
   warning: 'warning',
+  externalLink: 'external-link',
 };
 
 type Props = {|
@@ -197,6 +199,8 @@ const getIcon = name => {
       return <Icons.Silent />;
     case 'warning':
       return <Icons.Warning />;
+    case 'external-link':
+      return <Icons.ExternalLink />;
     default:
       return <div />;
   }

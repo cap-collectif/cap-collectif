@@ -11,6 +11,7 @@ import ProjectAdminForm from './Form/ProjectAdminForm';
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style';
 import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage';
 import ProjectAdminAnalysisTab from '~/components/Admin/Project/ProjectAdminAnalysisTab';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type Props = {|
   +features: FeatureToggles,
@@ -76,8 +77,8 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
         <div>
           <h1>{title}</h1>
           <a href={project.url} target="_blank" rel="noopener noreferrer">
-            <i className="cap cap-external-link ml-5" />
-            <FormattedMessage id="action_show" />
+            <Icon name={ICON_NAME.externalLink} size="14px" />
+            <FormattedMessage id="global.preview" />
           </a>
         </div>
         <NavContainer>

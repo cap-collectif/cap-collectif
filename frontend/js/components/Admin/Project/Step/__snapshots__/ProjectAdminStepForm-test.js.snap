@@ -125,7 +125,11 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                       }
                     }
                   >
-                    admin.help.metadescription
+                    <FormattedHTMLMessage
+                      id="admin.help.metadescription"
+                      tagName="span"
+                      values={Object {}}
+                    />
                   </_default>
                 }
                 placement="top"
@@ -136,14 +140,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                   ]
                 }
               >
-                <i
-                  className="fa fa-info-circle"
-                  style={
-                    Object {
-                      "opacity": ".5",
-                    }
-                  }
-                />
+                <ForwardRef(ProjectContentAdminForm__InformationIcon) />
               </OverlayTrigger>
             </span>
           </div>
@@ -221,7 +218,11 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                         }
                       }
                     >
-                      admin.help.customcode
+                      <FormattedHTMLMessage
+                        id="admin.help.customcode"
+                        tagName="span"
+                        values={Object {}}
+                      />
                     </_default>
                   }
                   placement="top"
@@ -232,14 +233,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                     ]
                   }
                 >
-                  <i
-                    className="fa fa-info-circle"
-                    style={
-                      Object {
-                        "opacity": ".5",
-                      }
-                    }
-                  />
+                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
                 </OverlayTrigger>
               </span>
             </div>

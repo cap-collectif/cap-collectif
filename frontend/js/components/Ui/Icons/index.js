@@ -42,3 +42,4 @@ export { default as Clock } from './svg/clock.svg';
 export { default as Silent } from './svg/silent.svg';
 export { default as CrossRounded } from './svg/cross--rounded.svg';
 export { default as Warning } from './svg/warning.svg';
+export { default as ExternalLink } from './svg/external-link.svg';

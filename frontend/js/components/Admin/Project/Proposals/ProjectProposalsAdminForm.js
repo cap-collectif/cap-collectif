@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
@@ -8,6 +9,7 @@ import toggle from '../../../Form/Toggle';
 import Tooltip from '~/components/Utils/Tooltip';
 import type { ProjectProposalsAdminForm_project } from '~relay/ProjectProposalsAdminForm_project.graphql';
 import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
+import { InformationIcon } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -18,6 +20,12 @@ type Props = {|
 export type FormValues = {|
   opinionCanBeFollowed: boolean,
 |};
+
+const ActivityInformationIcon: StyledComponent<{}, {}, typeof InformationIcon> = styled(
+  InformationIcon,
+)`
+  margin-left: 5px;
+`;
 
 export const ProjectProposalsAdminForm = ({ intl }: Props) => (
   <div className="col-md-12">
@@ -50,7 +58,7 @@ export const ProjectProposalsAdminForm = ({ intl }: Props) => (
                       {intl.formatMessage({ id: 'activity-tracking-help-text' })}
                     </Tooltip>
                   }>
-                  <i className="fa fa-info-circle ml-5" style={{ opacity: '.5' }} />
+                  <ActivityInformationIcon />
                 </OverlayTrigger>
               </span>
             </div>
