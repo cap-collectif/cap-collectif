@@ -24,6 +24,7 @@ import type { Uuid } from '~/types';
 import InlineSelect from '~ui/InlineSelect';
 import {
   getAllFormattedChoicesForProject,
+  getFormattedCollectStepsForProject,
   type ProposalsSelected,
   type StepFilter,
   FILLING,
@@ -183,6 +184,7 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
     [project, parameters.filters.step, parameters.stepsChangedProposal, selectedRows],
   );
   const intl = useIntl();
+  const collectSteps = getFormattedCollectStepsForProject(project);
   const selectedStepId: ProposalsStepValues = parameters.filters.step;
   const selectedStep: ?StepFilter = steps.find(({ id }) => id === selectedStepId);
   const selectedStepStatus = React.useMemo(
@@ -394,7 +396,7 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
                 <S.ProposalListDropdownChoice
                   key={step.id}
                   value={{ id: step.id, filling: step.filling }}
-                  disabled={step.id === selectedStepId}>
+                  disabled={collectSteps.includes(step.id)}>
                   {step.icon && <Icon name={step.icon} size={12} color={colors.black} />}
                   <span>{step.title}</span>
                 </S.ProposalListDropdownChoice>

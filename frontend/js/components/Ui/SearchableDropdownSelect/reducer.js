@@ -3,7 +3,8 @@ export type Action =
   | { type: 'RESET' }
   | { type: 'FETCH_INIT' }
   | { type: 'FETCH_ERROR', payload: Error }
-  | { type: 'FETCH_SUCCESS', payload: $ReadOnlyArray<any> };
+  | { type: 'FETCH_SUCCESS', payload: $ReadOnlyArray<any> }
+  | { type: 'SET_RESULT', payload: $ReadOnlyArray<any> };
 
 export type State = {|
   +error: ?Error,
@@ -31,6 +32,7 @@ export const createReducer = (state: State, action: Action) => {
         status: 'error',
       };
     case 'FETCH_SUCCESS':
+    case 'SET_RESULT':
       return {
         ...state,
         status: action.payload.length === 0 ? 'no_result' : 'default',

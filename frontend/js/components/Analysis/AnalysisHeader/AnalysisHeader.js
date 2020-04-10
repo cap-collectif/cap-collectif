@@ -6,16 +6,18 @@ import AnalysisHeaderContainer from './AnalysisHeader.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type Props = {
+  countProject: number,
   match: Match,
 };
 
-const AnalysisHeader = ({ match }: Props) => {
+const AnalysisHeader = ({ countProject, match }: Props) => {
   const { params } = match;
   const isProjectPage = !!params.projectSlug;
+  const hasManyProjects = countProject > 1;
 
   return (
     <AnalysisHeaderContainer>
-      {isProjectPage && (
+      {isProjectPage && hasManyProjects && (
         <Link to="/">
           <Icon name={ICON_NAME.chevronLeft} size={14} />
           <FormattedMessage id="my-projects" />

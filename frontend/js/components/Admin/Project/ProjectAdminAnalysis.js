@@ -21,16 +21,16 @@ import type {
   SortValues,
 } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
+import { getAllFormattedChoicesForProject } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
 import {
-  getAllFormattedChoicesForProject,
-  getCommonAnalystIdsWithinProposalIds,
-  getCommonDecisionMakerIdWithinProposalIds,
-  getCommonSupervisorIdWithinProposalIds,
+  isRowIndeterminate,
   getSelectedAnalystsByProposals,
   getSelectedDecisionMakersByProposals,
   getSelectedSupervisorsByProposals,
-  isRowIndeterminate,
-} from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
+  getCommonAnalystIdsWithinProposalIds,
+  getCommonDecisionMakerIdWithinProposalIds,
+  getCommonSupervisorIdWithinProposalIds,
+} from './ProjectAdminProposals.utils';
 import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
 import AssignSupervisorToProposalsMutation from '~/mutations/AssignSupervisorToProposalsMutation';
 import UserSearchDropdownChoice from '~/components/Admin/Project/UserSearchDropdownChoice';

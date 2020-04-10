@@ -16,11 +16,12 @@ type CollapsableElementProps = {|
 |};
 
 const CollapsableButton = ({ children }: ChildrenProps) => {
-  const { setVisible, visible } = React.useContext(CollapsableContext);
+  const { setVisible, visible, onClose } = React.useContext(CollapsableContext);
   const button = React.useRef<HTMLDivElement | null>(null);
   const toggleVisibility = React.useCallback(() => {
     setVisible(v => !v);
-  }, [setVisible]);
+    if (onClose && visible) onClose();
+  }, [setVisible, onClose, visible]);
   useKeyboardShortcuts(
     [
       {
@@ -86,8 +87,9 @@ const Collapsable = ({ children, onClose, align = 'left' }: Props) => {
     () => ({
       visible,
       setVisible,
+      onClose,
     }),
-    [visible, setVisible],
+    [visible, setVisible, onClose],
   );
   const collapsable = React.useRef<HTMLDivElement | null>(null);
   useClickAway(

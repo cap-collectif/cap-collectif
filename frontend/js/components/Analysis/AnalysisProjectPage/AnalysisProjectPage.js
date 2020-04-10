@@ -18,11 +18,13 @@ import { STATE, type StateValues } from './AnalysisProjectPage.reducer';
 import AnalysisDashboardHeader from '~/components/Analysis/AnalysisDashboardHeader/AnalysisDashboardHeader';
 import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
 import { AnalysisProposalListHeaderContainer } from '~ui/Analysis/common.style';
+import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
 
 export const ANALYSIS_PROJECT_PROPOSALS_PAGINATION = 20;
 
 export type Props = {|
   project: AnalysisProjectPage_project,
+  defaultUsers: $PropertyType<AnalysisIndexPageQueryResponse, 'defaultUsers'>,
   relay: RelayPaginationProp,
 |};
 
@@ -40,22 +42,23 @@ const ProposalListLoader = () => (
   </ProposalListLoaderContainer>
 );
 
-const AnalysisProjectPage = ({ project, relay }: Props) => {
-  const { sortedProposals: dataProposals } = project;
+const AnalysisProjectPage = ({ project, defaultUsers, relay }: Props) => {
+  const {
+    sortedProposals: dataProposals,
+    viewerProposalsTodo,
+    viewerProposalsDone,
+    viewerProposalsAll,
+  } = project;
   const proposals = dataProposals?.edges?.filter(Boolean).map(edge => edge.node);
   const hasProposals = dataProposals?.totalCount > 0;
   const { parameters, dispatch } = useAnalysisProposalsContext();
+  const descriptionProject = project.firstCollectStep?.form?.analysisConfiguration?.body;
 
   return (
     <AnalysisProjectPageContainer>
       <div>
         <h2>{project.title}</h2>
-        {project.firstCollectStep?.form?.analysisConfiguration?.body && (
-          <BodyInfos
-            body={project.firstCollectStep?.form?.analysisConfiguration?.body}
-            maxLines={5}
-          />
-        )}
+        {descriptionProject && <BodyInfos body={descriptionProject} maxLines={5} />}
       </div>
 
       <InlineSelect
@@ -67,15 +70,21 @@ const AnalysisProjectPage = ({ project, relay }: Props) => {
           })
         }>
         <InlineSelect.Choice value={STATE.TODO}>
-          <FormattedMessage id="count.status.to.do" values={{ num: 5 }} />
+          <FormattedMessage
+            id="count.status.to.do"
+            values={{ num: viewerProposalsTodo.totalCount }}
+          />
         </InlineSelect.Choice>
 
         <InlineSelect.Choice value={STATE.DONE}>
-          <FormattedMessage id="count.status.done" values={{ num: 5 }} />
+          <FormattedMessage
+            id="count.status.done"
+            values={{ num: viewerProposalsDone.totalCount }}
+          />
         </InlineSelect.Choice>
 
         <InlineSelect.Choice value={STATE.ALL}>
-          <FormattedMessage id="count.status.all" values={{ num: proposals?.length }} />
+          <FormattedMessage id="count.status.all" values={{ num: viewerProposalsAll.totalCount }} />
         </InlineSelect.Choice>
       </InlineSelect>
 
@@ -88,7 +97,7 @@ const AnalysisProjectPage = ({ project, relay }: Props) => {
           hasMore={relay.hasMore()}
           loader={<ProposalListLoader key="loader" />}>
           <AnalysisProposalListHeaderContainer>
-            <AnalysisDashboardHeader project={project} />
+            <AnalysisDashboardHeader project={project} defaultUsers={defaultUsers} />
           </AnalysisProposalListHeaderContainer>
 
           <PickableList.Body>
@@ -120,6 +129,10 @@ export default createPaginationContainer(
           }
           category: { type: "ID", defaultValue: null }
           district: { type: "ID", defaultValue: null }
+          analysts: { type: "[ID!]", defaultValue: null }
+          supervisor: { type: "ID", defaultValue: null }
+          decisionMaker: { type: "ID", defaultValue: null }
+          state: { type: "ProposalTaskState", defaultValue: null }
         ) {
         id
         title
@@ -130,16 +143,28 @@ export default createPaginationContainer(
             }
           }
         }
-        sortedProposals: proposals(
+        sortedProposals: viewerAssignedProposals(
           first: $count
           after: $cursor
           orderBy: $orderBy
           category: $category
           district: $district
+          analysts: $analysts
+          supervisor: $supervisor
+          decisionMaker: $decisionMaker
+          state: $state
         )
           @connection(
             key: "AnalysisProjectPage_sortedProposals"
-            filters: ["orderBy", "category", "district"]
+            filters: [
+              "orderBy"
+              "category"
+              "district"
+              "analysts"
+              "supervisor"
+              "decisionMaker"
+              "state"
+            ]
           ) {
           edges {
             cursor
@@ -152,6 +177,15 @@ export default createPaginationContainer(
           pageInfo {
             hasNextPage
           }
+        }
+        viewerProposalsTodo: viewerAssignedProposals(state: TODO) {
+          totalCount
+        }
+        viewerProposalsDone: viewerAssignedProposals(state: DONE) {
+          totalCount
+        }
+        viewerProposalsAll: viewerAssignedProposals(state: null) {
+          totalCount
         }
         ...AnalysisDashboardHeader_project
       }
@@ -189,6 +223,10 @@ export default createPaginationContainer(
         $orderBy: ProposalOrder!
         $category: ID
         $district: ID
+        $analysts: [ID!]
+        $supervisor: ID
+        $decisionMaker: ID
+        $state: ProposalTaskState
       ) {
         project: node(id: $projectId) {
           id
@@ -199,6 +237,10 @@ export default createPaginationContainer(
               orderBy: $orderBy
               category: $category
               district: $district
+              analysts: $analysts
+              supervisor: $supervisor
+              decisionMaker: $decisionMaker
+              state: $state
             )
         }
       }

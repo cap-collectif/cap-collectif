@@ -17,7 +17,7 @@ type Props = {
 };
 
 const ProjectAnalysisPreview = ({ project, url }: Props) => {
-  const { title, cover, steps } = project;
+  const { title, cover, viewerProposalsTodo, viewerProposalsDone, viewerProposalsAll } = project;
 
   return (
     <ProjectAnalysisPreviewContainer>
@@ -42,20 +42,29 @@ const ProjectAnalysisPreview = ({ project, url }: Props) => {
               </Link>
             </Card.Title>
             <p>
-              <FormattedMessage id="count-proposal" values={{ num: steps?.length }} />
+              <FormattedMessage
+                id="count-proposal"
+                values={{ num: viewerProposalsAll.totalCount }}
+              />
             </p>
           </div>
           <InlineList>
             <li>
               <Icon name={ICON_NAME.taskList} size={16} color="#6c757d" />
               <span>
-                <FormattedMessage id="count.status.to.do" values={{ num: 5 }} />
+                <FormattedMessage
+                  id="count.status.to.do"
+                  values={{ num: viewerProposalsTodo.totalCount }}
+                />
               </span>
             </li>
             <li>
               <Icon name={ICON_NAME.done} size={16} color="#6c757d" />
               <span>
-                <FormattedMessage id="count.status.done" values={{ num: 0 }} />
+                <FormattedMessage
+                  id="count.status.done"
+                  values={{ num: viewerProposalsDone.totalCount }}
+                />
               </span>
             </li>
           </InlineList>
@@ -72,10 +81,14 @@ export default createFragmentContainer(ProjectAnalysisPreview, {
       cover {
         url
       }
-      steps {
-        ... on ProposalStep {
-          id
-        }
+      viewerProposalsTodo: viewerAssignedProposals(state: TODO) {
+        totalCount
+      }
+      viewerProposalsDone: viewerAssignedProposals(state: DONE) {
+        totalCount
+      }
+      viewerProposalsAll: viewerAssignedProposals(state: null) {
+        totalCount
       }
     }
   `,

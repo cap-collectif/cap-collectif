@@ -40,11 +40,8 @@ export const PROPOSAL_STATUS = {
   },
 };
 
-export const TYPE_FILTER = {
-  DISTRICT: 'DISTRICT',
-  CATEGORY: 'CATEGORY',
+export const TYPE_ACTION = {
   ANALYST: 'ANALYST',
   SUPERVISOR: 'SUPERVISOR',
   DECISION_MAKER: 'DECISION',
-  SORT: 'SORT',
 };

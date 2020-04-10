@@ -3,6 +3,7 @@
 exports[`<UserAvatar /> renders correctly 1`] = `
 <UserAvatar__UserAvatarContainer
   className="mr-10"
+  hasBadge={false}
   onBlur={[Function]}
   onFocus={[Function]}
   onMouseOut={[Function]}
@@ -26,6 +27,7 @@ exports[`<UserAvatar /> renders correctly 1`] = `
 exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
 <UserAvatar__UserAvatarContainer
   className=""
+  hasBadge={false}
   onBlur={[Function]}
   onFocus={[Function]}
   onMouseOut={[Function]}
@@ -42,6 +44,7 @@ exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
 exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
 <UserAvatar__UserAvatarContainer
   className=""
+  hasBadge={false}
   onBlur={[Function]}
   onFocus={[Function]}
   onMouseOut={[Function]}

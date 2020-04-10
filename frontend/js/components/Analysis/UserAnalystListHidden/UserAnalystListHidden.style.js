@@ -38,7 +38,11 @@ export const UserAvatarWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 6px;
+  padding-left: 8px;
+
+  & > a {
+    margin-right: 0;
+  }
 `;
 
 export const UsernameWrapper: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`

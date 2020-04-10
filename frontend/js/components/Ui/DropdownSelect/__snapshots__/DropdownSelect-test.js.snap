@@ -4,8 +4,8 @@ exports[`<DropdownSelect /> should render correctly 1`] = `
 <ContextProvider
   value={
     Object {
-      "allValues": undefined,
-      "initialValue": undefined,
+      "allValues": Array [],
+      "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
       "onChange": undefined,
@@ -45,8 +45,8 @@ exports[`<DropdownSelect /> should render correctly with a message 1`] = `
 <ContextProvider
   value={
     Object {
-      "allValues": undefined,
-      "initialValue": undefined,
+      "allValues": Array [],
+      "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
       "onChange": undefined,
@@ -91,8 +91,8 @@ exports[`<DropdownSelect /> should render correctly with a message that has an i
 <ContextProvider
   value={
     Object {
-      "allValues": undefined,
-      "initialValue": undefined,
+      "allValues": Array [],
+      "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
       "onChange": undefined,
@@ -143,8 +143,8 @@ exports[`<DropdownSelect /> should render correctly with a submenu 1`] = `
 <ContextProvider
   value={
     Object {
-      "allValues": undefined,
-      "initialValue": undefined,
+      "allValues": Array [],
+      "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
       "onChange": undefined,
@@ -203,8 +203,8 @@ exports[`<DropdownSelect /> should render correctly with disabled choices 1`] = 
 <ContextProvider
   value={
     Object {
-      "allValues": undefined,
-      "initialValue": undefined,
+      "allValues": Array [],
+      "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
       "onChange": undefined,
@@ -246,8 +246,8 @@ exports[`<DropdownSelect /> should render correctly with indeterminate choices 1
 <ContextProvider
   value={
     Object {
-      "allValues": undefined,
-      "initialValue": undefined,
+      "allValues": Array [],
+      "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
       "onChange": undefined,
@@ -289,8 +289,8 @@ exports[`<DropdownSelect /> should render correctly with multi-select enabled 1`
 <ContextProvider
   value={
     Object {
-      "allValues": undefined,
-      "initialValue": undefined,
+      "allValues": Array [],
+      "initialValue": Array [],
       "isMultiSelect": true,
       "mode": "normal",
       "onChange": undefined,
@@ -330,8 +330,8 @@ exports[`<DropdownSelect /> should render correctly with submenu in a submenu 1`
 <ContextProvider
   value={
     Object {
-      "allValues": undefined,
-      "initialValue": undefined,
+      "allValues": Array [],
+      "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
       "onChange": undefined,

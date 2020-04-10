@@ -32,7 +32,7 @@ export type Filters = {|
   +state: StateValues,
   +district: ProposalsDistrictValues,
   +category: ProposalsCategoryValues,
-  +analysts: ?Array<Uuid>,
+  +analysts: Uuid[],
   +supervisor: ?Uuid,
   +decisionMaker: ?Uuid,
 |};
@@ -56,7 +56,10 @@ export type Action =
   | { type: 'CLEAR_CATEGORY_FILTER' }
   | { type: 'CHANGE_DISTRICT_FILTER', payload: ProposalsDistrictValues }
   | { type: 'CLEAR_DISTRICT_FILTER' }
-  | { type: 'CHANGE_STATE_FILTER', payload: StateValues };
+  | { type: 'CHANGE_STATE_FILTER', payload: StateValues }
+  | { type: 'CHANGE_ANALYSTS_FILTER', payload: Uuid[] }
+  | { type: 'CHANGE_SUPERVISOR_FILTER', payload: Uuid }
+  | { type: 'CHANGE_DECISION_MAKER_FILTER', payload: Uuid };
 
 export const createReducer = (state: AnalysisProjectPageState, action: Action) => {
   switch (action.type) {
@@ -108,6 +111,30 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         filters: {
           ...state.filters,
           district: 'ALL',
+        },
+      };
+    case 'CHANGE_ANALYSTS_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          analysts: action.payload,
+        },
+      };
+    case 'CHANGE_SUPERVISOR_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          supervisor: action.payload,
+        },
+      };
+    case 'CHANGE_DECISION_MAKER_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          decisionMaker: action.payload,
         },
       };
     case 'CHANGE_SORT':

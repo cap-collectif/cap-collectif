@@ -4,6 +4,7 @@ exports[`<Collapsable /> should render correctly 1`] = `
 <ContextProvider
   value={
     Object {
+      "onClose": undefined,
       "setVisible": [Function],
       "visible": false,
     }
@@ -32,6 +33,7 @@ exports[`<Collapsable /> should render correctly when aligned to right 1`] = `
 <ContextProvider
   value={
     Object {
+      "onClose": undefined,
       "setVisible": [Function],
       "visible": false,
     }
@@ -60,6 +62,7 @@ exports[`<Collapsable /> should render correctly when no aria-label provided 1`]
 <ContextProvider
   value={
     Object {
+      "onClose": undefined,
       "setVisible": [Function],
       "visible": false,
     }

@@ -6,7 +6,8 @@ import type {
   UserSearchDropdownChoice_user,
   UserSearchDropdownChoice_user$ref,
 } from '~relay/UserSearchDropdownChoice_user.graphql';
-import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
+import type { AnalysisDashboardHeader_project } from '~relay/AnalysisDashboardHeader_project.graphql';
+import { TYPE_ACTION } from '~/constants/AnalyseConstants';
 
 type ProjectWithAllSteps = {
   +steps: $ReadOnlyArray<{|
@@ -40,32 +41,38 @@ type AllFormattedChoicesReturn = {|
   +districts: $ReadOnlyArray<DistrictFilter>,
 |};
 
-type Supervisor = {|
+export type Supervisor = {|
   +id: string,
   +$fragmentRefs: UserSearchDropdownChoice_user$ref,
 |};
 
-type Analyst = {|
+export type Analyst = {|
   +id: string,
   +$fragmentRefs: UserSearchDropdownChoice_user$ref,
 |};
 
-type DecisionMaker = {|
+export type DecisionMaker = {|
   +id: string,
   +$fragmentRefs: UserSearchDropdownChoice_user$ref,
 |};
+
+type User = {|
+  +id: string,
+  +username: string,
+|};
+
+export type RowType = 'analyst' | 'supervisor' | 'decision-maker';
 
 const SHOWING_STEP_TYPENAME = ['CollectStep', 'SelectionStep'];
 
 export const getSelectedSupervisorsByProposals = (
-  project: ProjectAdminAnalysis_project,
+  project: AnalysisDashboardHeader_project,
   proposalIds: $ReadOnlyArray<Uuid>,
 ): $ReadOnlyArray<Supervisor> => {
   const entries = Object.entries(
     proposalIds.reduce((acc, id) => {
       acc[id] =
-        project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
-          .supervisor || null;
+        project?.proposals.edges?.find(edge => edge?.node.id === id)?.node.supervisor || null;
       return acc;
     }, {}),
   );
@@ -76,14 +83,13 @@ export const getSelectedSupervisorsByProposals = (
 };
 
 export const getSelectedDecisionMakersByProposals = (
-  project: ProjectAdminAnalysis_project,
+  project: AnalysisDashboardHeader_project,
   proposalIds: $ReadOnlyArray<Uuid>,
 ): $ReadOnlyArray<DecisionMaker> => {
   const entries = Object.entries(
     proposalIds.reduce((acc, id) => {
       acc[id] =
-        project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
-          .decisionMaker || null;
+        project?.proposals.edges?.find(edge => edge?.node.id === id)?.node.decisionMaker || null;
       return acc;
     }, {}),
   );
@@ -94,14 +100,12 @@ export const getSelectedDecisionMakersByProposals = (
 };
 
 export const getSelectedAnalystsByProposals = (
-  project: ProjectAdminAnalysis_project,
+  project: AnalysisDashboardHeader_project,
   proposalIds: $ReadOnlyArray<Uuid>,
 ): $ReadOnlyArray<Analyst> => {
   const entries = Object.entries(
     proposalIds.reduce((acc, id) => {
-      acc[id] =
-        project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
-          .analysts || [];
+      acc[id] = project?.proposals.edges?.find(edge => edge?.node.id === id)?.node.analysts || [];
       return acc;
     }, {}),
   );
@@ -114,10 +118,8 @@ export const getSelectedAnalystsByProposals = (
   ): any): $ReadOnlyArray<Analyst>);
 };
 
-type RowType = 'analyst' | 'supervisor' | 'decision-maker';
-
 const getSelectedEntries = (
-  project: ProjectAdminAnalysis_project,
+  project: AnalysisDashboardHeader_project,
   proposalIds: $ReadOnlyArray<string>,
   type: RowType,
 ) => {
@@ -133,7 +135,7 @@ const getSelectedEntries = (
   }
 };
 
-const getEntriesIds = (entries: any, type: RowType) => {
+export const getEntriesIds = (entries: any, type: RowType) => {
   switch (type) {
     case 'analyst':
       return entries
@@ -151,7 +153,7 @@ const getEntriesIds = (entries: any, type: RowType) => {
 
 export const isRowIndeterminate = (
   user: UserSearchDropdownChoice_user,
-  project: ProjectAdminAnalysis_project,
+  project: AnalysisDashboardHeader_project,
   proposalIds: $ReadOnlyArray<Uuid>,
   type: RowType,
 ): boolean => {
@@ -159,16 +161,12 @@ export const isRowIndeterminate = (
     proposalIds.reduce((acc, id) => {
       if (type === 'supervisor') {
         acc[id] =
-          project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
-            .supervisor || null;
+          project?.proposals.edges?.find(edge => edge?.node.id === id)?.node.supervisor || null;
       } else if (type === 'analyst') {
-        acc[id] =
-          project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
-            .analysts || [];
+        acc[id] = project?.proposals.edges?.find(edge => edge?.node.id === id)?.node.analysts || [];
       } else if (type === 'decision-maker') {
         acc[id] =
-          project.firstAnalysisStep?.proposals.edges?.find(edge => edge?.node.id === id)?.node
-            .decisionMaker || null;
+          project?.proposals.edges?.find(edge => edge?.node.id === id)?.node.decisionMaker || null;
       }
       return acc;
     }, {}),
@@ -198,8 +196,9 @@ export const isRowIndeterminate = (
 
   return false;
 };
+
 export const getCommonSupervisorIdWithinProposalIds = (
-  project: ProjectAdminAnalysis_project,
+  project: AnalysisDashboardHeader_project,
   proposalIds: $ReadOnlyArray<Uuid>,
 ) => {
   const selectedSupervisorsByProposals = getSelectedSupervisorsByProposals(project, proposalIds);
@@ -210,7 +209,7 @@ export const getCommonSupervisorIdWithinProposalIds = (
 };
 
 export const getCommonDecisionMakerIdWithinProposalIds = (
-  project: ProjectAdminAnalysis_project,
+  project: AnalysisDashboardHeader_project,
   proposalIds: $ReadOnlyArray<Uuid>,
 ) => {
   const selectedDecisionMakerByProposals = getSelectedDecisionMakersByProposals(
@@ -224,7 +223,7 @@ export const getCommonDecisionMakerIdWithinProposalIds = (
 };
 
 export const getCommonAnalystIdsWithinProposalIds = (
-  project: ProjectAdminAnalysis_project,
+  project: AnalysisDashboardHeader_project,
   proposalIds: $ReadOnlyArray<Uuid>,
 ): $ReadOnlyArray<Uuid> => {
   const selectedAnalystsByProposals = getSelectedAnalystsByProposals(project, proposalIds);
@@ -283,3 +282,96 @@ export const getAllFormattedChoicesForProject = (
   categories: getFormattedCategoriesChoicesForProject(project),
   districts: getFormattedDistrictsChoicesForProject(project),
 });
+
+export const getActionShown = (
+  proposalIdsSelected: string[] = [],
+  userId: string,
+  proposals: ?$ReadOnlyArray<Object>,
+): string[] => {
+  const { ANALYST, SUPERVISOR } = TYPE_ACTION;
+
+  if (proposalIdsSelected.length === 0) {
+    // all filters
+    return ((Object.values(TYPE_ACTION): any): string[]);
+  }
+
+  const proposalsSelected = proposals
+    ? proposals.filter(({ id }) => proposalIdsSelected.includes(id))
+    : [];
+
+  const userRoles = proposalsSelected.reduce(
+    (acc, proposal) => {
+      const isUserAnalyst =
+        proposal.analysts?.length > 0
+          ? proposal.analysts.some(analyst => analyst.id === userId)
+          : false;
+
+      const isUserSupervisor = proposal.supervisor ? proposal.supervisor.id === userId : false;
+
+      const isUserDecisionMaker = proposal.decisionMaker
+        ? proposal.decisionMaker.id === userId
+        : false;
+
+      if (isUserAnalyst && acc.isAnalyst !== true) {
+        return {
+          ...acc,
+          isAnalyst: true,
+        };
+      }
+
+      if (isUserSupervisor && acc.isSupervisor !== true) {
+        return {
+          ...acc,
+          isSupervisor: true,
+        };
+      }
+
+      if (isUserDecisionMaker && acc.isDecisionMaker !== true) {
+        return {
+          ...acc,
+          isDecisionMaker: true,
+        };
+      }
+
+      return acc;
+    },
+    { isAnalyst: false, isSupervisor: false, isDecisionMaker: false },
+  );
+
+  const isOnlyDecisionMaker =
+    userRoles.isDecisionMaker && !userRoles.isAnalyst && !userRoles.isSupervisor;
+  const canAssignAnalyst = userRoles.isAnalyst || userRoles.isSupervisor;
+
+  // add only filter allowed
+  return [
+    ...(canAssignAnalyst ? [ANALYST] : []),
+    ...(isOnlyDecisionMaker ? [ANALYST, SUPERVISOR] : []),
+  ];
+};
+
+export const getAllUserAssigned = (project: AnalysisDashboardHeader_project): User[] => {
+  const allUserAssigned = project?.proposals.edges
+    ?.filter(Boolean)
+    .map(edge => edge.node)
+    .map(proposal => [...(proposal.analysts || []), proposal.supervisor, proposal.decisionMaker])
+    .flat()
+    .filter(Boolean);
+
+  return ((uniqBy(allUserAssigned, 'id'): any): User[]);
+};
+
+export const getUsersFilteredWithSearch = (
+  users: User[] = [],
+  searchUsername: ?string = '',
+): User[] => {
+  if (searchUsername) {
+    return ((users
+      .filter(({ username }) => username.toLowerCase().includes(searchUsername.toLowerCase()))
+      .sort((userA, userB) => userA.username.localeCompare(userB.username))
+      .slice(0, 4): any): User[]);
+  }
+
+  return ((users
+    .sort((userA, userB) => userA.username.localeCompare(userB.username))
+    .slice(0, 4): any): User[]);
+};

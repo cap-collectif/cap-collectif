@@ -20,7 +20,7 @@ const DEFAULT_FILTERS: Filters = {
   state: STATE.ALL,
   district: 'ALL',
   category: 'ALL',
-  analysts: null,
+  analysts: [],
   supervisor: null,
   decisionMaker: null,
 };

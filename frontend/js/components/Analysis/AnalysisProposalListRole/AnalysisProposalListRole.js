@@ -10,6 +10,7 @@ import { ICON_NAME } from '~ui/Icons/Icon';
 import type { AnalysisProposalListRole_proposal } from '~relay/AnalysisProposalListRole_proposal.graphql';
 import AnalysisProposalListRoleContainer, {
   AVATAR_SIZE,
+  RoleWrapper,
 } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style';
 import UserAnalystList from '~/components/Analysis/UserAnalystList/UserAnalystList';
 
@@ -51,11 +52,11 @@ const AnalysisProposalListRole = ({ proposal }: Props) => {
 
   return (
     <AnalysisProposalListRoleContainer>
-      <div className="wrapper-role">
+      <RoleWrapper>
         <UserAnalystList proposal={proposal} />
-      </div>
+      </RoleWrapper>
 
-      <div className="wrapper-role role-supervisor">
+      <RoleWrapper className="role-supervisor">
         {supervisor && (
           <OverlayTrigger
             placement="top"
@@ -72,9 +73,9 @@ const AnalysisProposalListRole = ({ proposal }: Props) => {
             />
           </OverlayTrigger>
         )}
-      </div>
+      </RoleWrapper>
 
-      <div className="wrapper-role">
+      <RoleWrapper>
         {decisionMaker && (
           <OverlayTrigger
             placement="top"
@@ -91,7 +92,7 @@ const AnalysisProposalListRole = ({ proposal }: Props) => {
             />
           </OverlayTrigger>
         )}
-      </div>
+      </RoleWrapper>
     </AnalysisProposalListRoleContainer>
   );
 };

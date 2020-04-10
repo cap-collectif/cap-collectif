@@ -32,8 +32,9 @@ type Props = {|
   badge?: Badge,
 |};
 
-const commonStyleAvatar = css`
+const commonStyleAvatar = hasBadge => css`
   position: relative;
+  margin-right: ${hasBadge ? '5px' : 'initial'};
 
   .circle {
     display: flex;
@@ -45,14 +46,18 @@ const commonStyleAvatar = css`
   }
 `;
 
-const UserAvatarLink: StyledComponent<{}, {}, HTMLAnchorElement> = styled.a`
+const UserAvatarLink: StyledComponent<{ hasBadge: boolean }, {}, HTMLAnchorElement> = styled.a`
   vertical-align: text-bottom;
   display: inline-block;
-  ${commonStyleAvatar}
+  ${props => commonStyleAvatar(props.hasBadge)}
 `;
 
-const UserAvatarContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
-  ${commonStyleAvatar}
+const UserAvatarContainer: StyledComponent<
+  { hasBadge: boolean },
+  {},
+  HTMLSpanElement,
+> = styled.span`
+  ${props => commonStyleAvatar(props.hasBadge)}
 `;
 
 export class UserAvatar extends React.Component<Props> {
@@ -137,6 +142,7 @@ export class UserAvatar extends React.Component<Props> {
           {...funcProps}
           className={className}
           style={style}
+          hasBadge={!!badge}
           href={displayUrl ? user.url : null}>
           {this.renderAvatar()}
           {badge && this.renderBadge(badge)}
@@ -145,7 +151,7 @@ export class UserAvatar extends React.Component<Props> {
     }
 
     return (
-      <UserAvatarContainer {...funcProps} className={className} style={style}>
+      <UserAvatarContainer {...funcProps} className={className} style={style} hasBadge={!!badge}>
         {this.renderAvatar()}
         {badge && this.renderBadge(badge)}
       </UserAvatarContainer>

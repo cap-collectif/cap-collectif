@@ -17,19 +17,19 @@ const AnalysisProposalListRoleContainer: StyledComponent<{}, {}, HTMLDivElement>
     border: none;
   }
 
-  .wrapper-role {
-    min-width: ${AVATAR_SIZE}px;
-
-    &.role-supervisor {
-      margin: 0 45px;
-    }
-  }
-
   ${/* sc-selector */ AvatarWrapper} {
     & img,
     svg {
       border: none;
     }
+  }
+`;
+
+export const RoleWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  min-width: ${AVATAR_SIZE}px;
+
+  &.role-supervisor {
+    margin: 0 45px;
   }
 `;
 

@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import type { GlobalState } from '~/types';
+import AlertBoxApp from '~/startup/AlertBoxApp';
 import EvaluationsIndexPage from '~/components/Evaluation/EvaluationsIndexPage';
 import AnalysisIndexPage from '~/components/Analysis/AnalysisIndexPage/AnalysisIndexPage';
 import { AnalysisProposalsProvider } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
@@ -13,6 +14,7 @@ const SwitchAnalysisAndLegacyEvaluation = ({ isLegacyAnalysis, ...props }: Objec
     <EvaluationsIndexPage {...props} />
   ) : (
     <AnalysisProposalsProvider>
+      <AlertBoxApp />
       <AnalysisIndexPage />
     </AnalysisProposalsProvider>
   );

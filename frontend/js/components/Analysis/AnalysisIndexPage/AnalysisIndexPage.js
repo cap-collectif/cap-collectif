@@ -27,6 +27,10 @@ const createQueryVariables = (
   },
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
+  analysts: parameters.filters.analysts.length > 0 ? parameters.filters.analysts : null,
+  supervisor: parameters.filters.supervisor,
+  decisionMaker: parameters.filters.decisionMaker,
+  state: parameters.filters.state === 'ALL' ? null : parameters.filters.state,
 });
 
 const BASE_URL_ANALYSIS = '/evaluations';
@@ -46,22 +50,28 @@ export const renderComponent = ({
   if (error) return graphqlError;
 
   if (props) {
-    const { projects } = props;
-    const dataProjects = projects?.edges?.filter(Boolean).map(edge => edge.node);
+    const { viewerAssignedProjectsToAnalyse: projects, defaultUsers } = props;
     const allPaths = Object.values(PATHS);
 
-    if (dataProjects && dataProjects.length > 0) {
+    if (projects && projects.length > 0) {
       return (
         <Router basename={BASE_URL_ANALYSIS}>
           <ScrollToTop />
-          <Route exact path={allPaths} component={AnalysisHeader} />
+
+          <Route
+            exact
+            path={allPaths}
+            component={routeProps => (
+              <AnalysisHeader countProject={projects.length} {...routeProps} />
+            )}
+          />
 
           <Switch>
             <Route exact path={PATHS.INDEX}>
-              {dataProjects.length === 1 ? (
-                <Redirect to={`/project/${dataProjects[0].slug}`} />
+              {projects.length === 1 ? (
+                <Redirect to={`/project/${projects[0].slug}`} />
               ) : (
-                <AnalysisListProjectPage projects={dataProjects} />
+                <AnalysisListProjectPage projects={projects} />
               )}
             </Route>
 
@@ -70,7 +80,8 @@ export const renderComponent = ({
               path={PATHS.PROJECT}
               component={routeProps => (
                 <AnalysisProjectPage
-                  project={dataProjects.find(
+                  defaultUsers={defaultUsers}
+                  project={projects.find(
                     ({ slug }) => slug === routeProps.match.params.projectSlug,
                   )}
                   {...routeProps}
@@ -101,22 +112,34 @@ const AnalysisIndexPage = () => {
           $orderBy: ProposalOrder!
           $category: ID
           $district: ID
+          $analysts: [ID!]
+          $supervisor: ID
+          $decisionMaker: ID
+          $state: ProposalTaskState
         ) {
-          projects {
+          defaultUsers: users(first: 4) {
             edges {
               node {
-                slug
-                ...AnalysisListProjectPage_projects
-                ...AnalysisProjectPage_project
-                  @arguments(
-                    count: $count
-                    cursor: $cursor
-                    orderBy: $orderBy
-                    category: $category
-                    district: $district
-                  )
+                id
+                ...UserSearchDropdownChoice_user
               }
             }
+          }
+          viewerAssignedProjectsToAnalyse {
+            slug
+            ...AnalysisListProjectPage_projects
+            ...AnalysisProjectPage_project
+              @arguments(
+                count: $count
+                cursor: $cursor
+                orderBy: $orderBy
+                category: $category
+                district: $district
+                analysts: $analysts
+                supervisor: $supervisor
+                decisionMaker: $decisionMaker
+                state: $state
+              )
           }
         }
       `}

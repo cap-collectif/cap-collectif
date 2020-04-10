@@ -52,7 +52,7 @@ const DropdownSelect = ({
   title,
   value,
   onChange,
-  initialValue: initial,
+  initialValue: initial = [],
   mode = 'normal',
   shouldOverflow = false,
   isMultiSelect = false,

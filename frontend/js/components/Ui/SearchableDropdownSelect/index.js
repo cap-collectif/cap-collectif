@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import isEqual from 'lodash/isEqual';
 import debounce from 'debounce-promise';
 import type { Props as DropdownSelectProps } from '~ui/DropdownSelect';
 import DropdownSelect from '~ui/DropdownSelect';
@@ -23,7 +24,9 @@ type Props = {|
   +message?: React.Element<typeof DropdownSelectMessage>,
   +searchInputIcon?: React.Node,
   +defaultOptions?: $ReadOnlyArray<any>,
-  +loadOptions: (terms: string) => Promise<$ReadOnlyArray<any>>,
+  +options?: $ReadOnlyArray<any>,
+  +onChangeSearch?: (terms: string) => void,
+  +loadOptions?: (terms: string) => Promise<$ReadOnlyArray<any>>,
   +children: (results: $ReadOnlyArray<any>) => React.Node,
 |};
 
@@ -31,18 +34,20 @@ const SearchableDropdownSelect = ({
   children,
   loadOptions,
   defaultOptions,
+  options,
   clearChoice,
   searchInputIcon,
   noResultsMessage,
   searchPlaceholder,
   debounceMs = 400,
   message,
+  onChangeSearch,
   ...rest
 }: Props) => {
   const [state, dispatch] = React.useReducer<State, Action>(createReducer, {
     status: 'default',
     error: null,
-    results: [],
+    results: options || [],
   });
 
   const context = React.useMemo(
@@ -53,12 +58,18 @@ const SearchableDropdownSelect = ({
     [state],
   );
 
-  const onChange = debounce(
+  React.useEffect(() => {
+    if (options && !isEqual(options, state.results)) {
+      dispatch({ type: 'SET_RESULT', payload: options });
+    }
+  }, [state.results, options]);
+
+  const onChangeConnected = debounce(
     async e => {
       try {
         if (e.target.value === '') {
           dispatch({ type: 'RESET' });
-        } else {
+        } else if (loadOptions) {
           dispatch({ type: 'FETCH_INIT' });
           const results = await loadOptions(e.target.value);
           dispatch({ type: 'FETCH_SUCCESS', payload: results });
@@ -72,6 +83,7 @@ const SearchableDropdownSelect = ({
     debounceMs,
     { leading: debounceMs === 0 },
   );
+
   return (
     <SearchableDropdownSelectContext.Provider value={context}>
       <S.SearchableDropdownContainer {...rest}>
@@ -86,7 +98,9 @@ const SearchableDropdownSelect = ({
             }}
             onChange={e => {
               e.persist();
-              onChange(e);
+              return options && onChangeSearch
+                ? onChangeSearch(e.target.value)
+                : onChangeConnected(e);
             }}
           />
         </DropdownSelect.Header>
