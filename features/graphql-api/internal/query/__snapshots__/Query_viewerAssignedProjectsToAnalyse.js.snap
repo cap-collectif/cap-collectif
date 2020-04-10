@@ -407,3 +407,480 @@ Object {
   ],
 }
 `;
+
+exports[`Internal|Query.viewerAssignedProjectsToAnalyse fetches all proposals in state DONE; Logged as supervisor 1`] = `
+Object {
+  "viewerAssignedProjectsToAnalyse": Array [
+    Object {
+      "title": "Project Analyse",
+      "viewerAssignedProposals": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+    },
+    Object {
+      "title": "Solidarité Covid-19",
+      "viewerAssignedProposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+              "title": "Proposal assigned 121",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjM=",
+              "title": "Proposal assigned 123",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjQ=",
+              "title": "Proposal assigned 124",
+            },
+          },
+        ],
+        "totalCount": 3,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query.viewerAssignedProjectsToAnalyse fetches all proposals in state TODO; Logged as supervisor 1`] = `
+Object {
+  "viewerAssignedProjectsToAnalyse": Array [
+    Object {
+      "title": "Project Analyse",
+      "viewerAssignedProposals": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+    },
+    Object {
+      "title": "Solidarité Covid-19",
+      "viewerAssignedProposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned3",
+              },
+              "district": null,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
+              "title": "Jurer allégeance à Nurgle",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+              "title": "Proposal assigned 121",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjI=",
+              "title": "Proposal assigned 122",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjU=",
+              "title": "Proposal assigned 125",
+            },
+          },
+        ],
+        "totalCount": 4,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query.viewerAssignedProjectsToAnalyse fetches all proposals sort by analysts; Logged as supervisor 1`] = `
+Object {
+  "viewerAssignedProjectsToAnalyse": Array [
+    Object {
+      "title": "Project Analyse",
+      "viewerAssignedProposals": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+    },
+    Object {
+      "title": "Solidarité Covid-19",
+      "viewerAssignedProposals": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query.viewerAssignedProjectsToAnalyse fetches all proposals sort by category; Logged as supervisor 1`] = `
+Object {
+  "viewerAssignedProjectsToAnalyse": Array [
+    Object {
+      "title": "Project Analyse",
+      "viewerAssignedProposals": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+    },
+    Object {
+      "title": "Solidarité Covid-19",
+      "viewerAssignedProposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+              "title": "Proposal assigned 121",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjI=",
+              "title": "Proposal assigned 122",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjM=",
+              "title": "Proposal assigned 123",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjQ=",
+              "title": "Proposal assigned 124",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjU=",
+              "title": "Proposal assigned 125",
+            },
+          },
+        ],
+        "totalCount": 5,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query.viewerAssignedProjectsToAnalyse fetches all proposals sort by decisionMaker; Logged as supervisor 1`] = `
+Object {
+  "viewerAssignedProjectsToAnalyse": Array [
+    Object {
+      "title": "Project Analyse",
+      "viewerAssignedProposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": null,
+              "district": null,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+              "title": "Proposal 110",
+            },
+          },
+        ],
+        "totalCount": 1,
+      },
+    },
+    Object {
+      "title": "Solidarité Covid-19",
+      "viewerAssignedProposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned3",
+              },
+              "district": null,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
+              "title": "Jurer allégeance à Nurgle",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+              "title": "Proposal assigned 121",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjI=",
+              "title": "Proposal assigned 122",
+            },
+          },
+        ],
+        "totalCount": 3,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query.viewerAssignedProjectsToAnalyse fetches all proposals sort by district; Logged as supervisor 1`] = `
+Object {
+  "viewerAssignedProjectsToAnalyse": Array [
+    Object {
+      "title": "Project Analyse",
+      "viewerAssignedProposals": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+    },
+    Object {
+      "title": "Solidarité Covid-19",
+      "viewerAssignedProposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+              "title": "Proposal assigned 121",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjI=",
+              "title": "Proposal assigned 122",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjM=",
+              "title": "Proposal assigned 123",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjQ=",
+              "title": "Proposal assigned 124",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjU=",
+              "title": "Proposal assigned 125",
+            },
+          },
+        ],
+        "totalCount": 5,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Internal|Query.viewerAssignedProjectsToAnalyse fetches all proposals; Logged as supervisor 1`] = `
+Object {
+  "viewerAssignedProjectsToAnalyse": Array [
+    Object {
+      "title": "Project Analyse",
+      "viewerAssignedProposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": null,
+              "district": null,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+              "title": "Proposal 110",
+            },
+          },
+        ],
+        "totalCount": 1,
+      },
+    },
+    Object {
+      "title": "Solidarité Covid-19",
+      "viewerAssignedProposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned3",
+              },
+              "district": null,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
+              "title": "Jurer allégeance à Nurgle",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+              "title": "Proposal assigned 121",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjI=",
+              "title": "Proposal assigned 122",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjM=",
+              "title": "Proposal assigned 123",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjQ=",
+              "title": "Proposal assigned 124",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjU=",
+              "title": "Proposal assigned 125",
+            },
+          },
+        ],
+        "totalCount": 6,
+      },
+    },
+  ],
+}
+`;

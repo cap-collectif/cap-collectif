@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Search\ProposalSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -36,14 +37,25 @@ class ProjectViewerAssignedProposalsResolver implements ResolverInterface
             if ($args->offsetExists('district')) {
                 $filters['district'] = $args->offsetGet('district');
             }
-            if ($args->offsetExists('analysts')) {
-                $filters['analysts'] = $args->offsetGet('analysts');
+            if ($args->offsetExists('analysts') && null !== $args->offsetGet('analysts')) {
+                $analysts = [];
+                foreach ($args->offsetGet('analysts') as $analyst) {
+                    $analysts[] = GlobalIdResolver::getDecodedId($analyst)['id'];
+                }
+                $filters['analysts'] = $analysts;
             }
-            if ($args->offsetExists('supervisor')) {
-                $filters['supervisor'] = $args->offsetGet('supervisor');
+            if ($args->offsetExists('supervisor') && null !== $args->offsetGet('supervisor')) {
+                $filters['supervisor'] = GlobalIdResolver::getDecodedId(
+                    $args->offsetGet('supervisor')
+                )['id'];
             }
-            if ($args->offsetExists('decisionMaker')) {
-                $filters['decisionMaker'] = $args->offsetGet('decisionMaker');
+            if (
+                $args->offsetExists('decisionMaker') &&
+                null !== $args->offsetGet('decisionMaker')
+            ) {
+                $filters['decisionMaker'] = GlobalIdResolver::getDecodedId(
+                    $args->offsetGet('decisionMaker')
+                )['id'];
             }
             if ($args->offsetExists('category')) {
                 $filters['category'] = $args->offsetGet('category');
