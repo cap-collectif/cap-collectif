@@ -65,7 +65,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             $unfavourableStatusesIds,
             $moveToSelectionStepId,
             $costEstimationEnabled,
-            $body
+            $body,
         ) = [
             $args->offsetGet('proposalFormId'),
             $args->offsetGet('evaluationFormId'),
@@ -97,7 +97,7 @@ class ConfigureAnalysisMutation implements MutationInterface
                 'The analysis step is not an instance of a CollectStep or a SelectionStep.'
             );
         }
-        
+
         if (!($analysisConfiguration = $proposalForm->getAnalysisConfiguration())) {
             $analysisConfiguration = new AnalysisConfiguration();
         }
@@ -130,7 +130,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             ->setProposalForm($proposalForm)
             ->setEvaluationForm($evaluationForm)
             ->setAnalysisStep($analysisStep)
-            ->setEffectiveDate($effectiveDate ? new \DateTime($effectiveDate) : null)
+            ->setEffectiveDateAndProcessed($effectiveDate ? new \DateTime($effectiveDate) : null)
             ->setFavourableStatus($favourableStatus)
             ->setUnfavourablesStatuses($unfavourablesStatuses)
             ->setMoveToSelectionStep($moveToSelectionStep)

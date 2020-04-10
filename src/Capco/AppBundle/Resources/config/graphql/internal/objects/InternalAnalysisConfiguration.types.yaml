@@ -42,3 +42,6 @@ InternalAnalysisConfiguration:
             body:
                 type: 'HTML'
                 description: 'A text to explain the analysis process.'
+            effectiveDateProcessed:
+                type: 'Boolean'
+                description: 'Indicates whether or not a proposal has been processed on effectiveDate'

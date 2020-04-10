@@ -45,7 +45,7 @@ class AnalysisConfiguration implements Timestampable
      * @ORM\Column(type="datetime", name="effective_date", nullable=true)
      */
     private $effectiveDate;
-    
+
     /**
      * @ORM\Column(type="boolean", name="cost_estimation_enabled")
      */
@@ -77,6 +77,11 @@ class AnalysisConfiguration implements Timestampable
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="boolean", name="effective_date_processed")
+     */
+    private $effectiveDateProcessed = false;
 
     public function __construct()
     {
@@ -123,6 +128,16 @@ class AnalysisConfiguration implements Timestampable
     public function getEffectiveDate(): ?\DateTime
     {
         return $this->effectiveDate;
+    }
+
+    public function setEffectiveDateAndProcessed(\DateTime $effectiveDate = null): self
+    {
+        if ($effectiveDate !== $this->effectiveDate) {
+            $this->setEffectiveDateProcessed(false);
+        }
+        $this->effectiveDate = $effectiveDate;
+
+        return $this;
     }
 
     public function setEffectiveDate(\DateTime $effectiveDate = null): self
@@ -185,15 +200,28 @@ class AnalysisConfiguration implements Timestampable
 
         return $this;
     }
-    
+
     public function isCostEstimationEnabled(): bool
     {
         return $this->costEstimationEnabled;
     }
-    
-    public function setCostEstimationEnabled(bool $costEstimationEnabled): AnalysisConfiguration
+
+    public function setCostEstimationEnabled(bool $costEstimationEnabled): self
     {
         $this->costEstimationEnabled = $costEstimationEnabled;
+
+        return $this;
+    }
+
+    public function getEffectiveDateProcessed(): bool
+    {
+        return $this->effectiveDateProcessed;
+    }
+
+    public function setEffectiveDateProcessed(bool $effectiveDateProcessed): self
+    {
+        $this->effectiveDateProcessed = $effectiveDateProcessed;
+
         return $this;
     }
 }

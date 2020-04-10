@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\AnalysisConfiguration:
         proposalForm: '@proposalformIdf'
         analysisStep: '@selectionStepIdfAnalyse'
         evaluationForm: '@questionnaireEvaluationIdf'
-        effectiveDate: null # TODO @Jpec
+        effectiveDate: <(new \DateTime('2021-01-01 02:00:00'))>
         unfavourableStatuses: ['@statusIdfAnalyse1', '@statusIdfAnalyse3']
         favourableStatus: '@statusIdfAnalyse2'
         moveToSelectionStep: '@selectionStepIdfVote'

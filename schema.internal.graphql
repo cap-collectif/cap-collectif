@@ -510,6 +510,11 @@ type AnalysisConfiguration {
 
   """A text to explain the analysis process."""
   body: HTML
+
+  """
+  Indicates whether or not a proposal has been processed on effectiveDate
+  """
+  effectiveDateProcessed: Boolean
 }
 
 """A contribution"""

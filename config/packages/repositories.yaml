@@ -379,3 +379,8 @@ services:
     Capco\AppBundle\Repository\ProposalAnalysisRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments: ['CapcoAppBundle:ProposalAnalysis']
+
+    Capco\AppBundle\Repository\AnalysisConfigurationRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['CapcoAppBundle:AnalysisConfiguration']

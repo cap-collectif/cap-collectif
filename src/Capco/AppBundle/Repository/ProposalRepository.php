@@ -698,6 +698,16 @@ class ProposalRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function findByProposalForm(ProposalForm $form): array
+    {
+        return $this->createQueryBuilder('proposal')
+            ->select('proposal.id')
+            ->andWhere('proposal.proposalForm = :form')
+            ->setParameter('form', $form)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)

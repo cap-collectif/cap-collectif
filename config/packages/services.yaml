@@ -19,8 +19,16 @@ services:
             - '@request_stack'
         autoconfigure: false
         tags:
-            - {name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure}
-            - {name: kernel.event_listener, event: security.interactive_login, method: onAuthenticationSuccess}
+            - {
+                  name: kernel.event_listener,
+                  event: security.authentication.failure,
+                  method: onAuthenticationFailure,
+              }
+            - {
+                  name: kernel.event_listener,
+                  event: security.interactive_login,
+                  method: onAuthenticationSuccess,
+              }
     Capco\AppBundle\Helper\ConvertCsvToArray:
         public: true
 
@@ -63,7 +71,12 @@ services:
             - '@nelmio_alice.files_loader'
     Capco\AppBundle\EventListener\PriorAuthenticationHandler:
         tags:
-            - {name: kernel.event_listener, event: kernel.request, class: Capco\AppBundle\EventListener\PriorAuthenticationHandler, priority: 14}
+            - {
+                  name: kernel.event_listener,
+                  event: kernel.request,
+                  class: Capco\AppBundle\EventListener\PriorAuthenticationHandler,
+                  priority: 14,
+              }
         arguments:
             $apiKey: '%recaptcha_private_key%'
     fidry_alice_data_fixtures.loader.simple: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader'
@@ -166,7 +179,7 @@ services:
     simplesamlphp.auth: '@SimpleSAML\Auth\Simple'
 
     SimpleSAML\Auth\Simple:
-        arguments: [ '%simplesamlphp.sp%' ]
+        arguments: ['%simplesamlphp.sp%']
 
     Capco\UserBundle\Authenticator\SamlAuthenticator:
         autowire: true
@@ -177,7 +190,7 @@ services:
     swiftmailer.mailer.transport.mandrill:
         class: Capco\AppBundle\Mailer\MandrillTransport
         arguments:
-            - "@swiftmailer.mailer.mandrill.transport.eventdispatcher"
+            - '@swiftmailer.mailer.mandrill.transport.eventdispatcher'
 
     Capco\AppBundle\Font\FontProcessor:
         public: true
@@ -244,3 +257,7 @@ services:
             - 20000
             - '%agent_tcp%'
             - '%agent_unix%'
+
+    Capco\AppBundle\Command\ProcessingProposalCommand:
+        bind:
+            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'

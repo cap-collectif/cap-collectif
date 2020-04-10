@@ -319,6 +319,7 @@ Capco\AppBundle\Entity\ProposalForm:
         title: Formulaire du budget participatif de l'Idf
         description: Avec un saut conditionel et oui rien que ça.
         step: '@collectstepIdf'
+        analysisConfiguration: '@analysisConfigurationIdf'
         reference: 18
         usingThemes: false
         usingAddress: true
