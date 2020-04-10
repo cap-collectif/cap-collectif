@@ -1,39 +1,40 @@
-/* eslint-env jest */
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-import '../../_setup';
-
-//* eslint-env jest */
-const ProcessProposalsQuery = /* GraphQL */ `
-  query proposalForms($proposalFormId: ID!) {
-    proposalForm: node(id: $proposalFormId) {
-      ... on ProposalForm {
-        id
-        analysisConfiguration {
-          analysisStep {
-            id
-          }
-          evaluationForm {
-            id
-          }
-          effectiveDate
-          favourableStatus {
-            id
-            name
-          }
-          unfavourableStatuses {
-            id
-            name
-          }
-          effectiveDateProcessed
-        }
-      }
-    }
-  }
-`;
-
 //TODO uncomment later
 
+// /* eslint-env jest */
+// const util = require('util');
+// const exec = util.promisify(require('child_process').exec);
+// import '../../_setup';
+//
+// //* eslint-env jest */
+// const ProcessProposalsQuery = /* GraphQL */ `
+//   query proposalForms($proposalFormId: ID!) {
+//     proposalForm: node(id: $proposalFormId) {
+//       ... on ProposalForm {
+//         id
+//         analysisConfiguration {
+//           analysisStep {
+//             id
+//           }
+//           evaluationForm {
+//             id
+//           }
+//           effectiveDate
+//           favourableStatus {
+//             id
+//             name
+//           }
+//           unfavourableStatuses {
+//             id
+//             name
+//           }
+//           effectiveDateProcessed
+//         }
+//       }
+//     }
+//   }
+// `;
+//
+//
 // describe('Internal| ProcessProposals', () => {
 //   it('fetches the proposalFrom that will be changed', async () => {
 //     await expect(
