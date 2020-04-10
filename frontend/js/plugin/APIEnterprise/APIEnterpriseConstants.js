@@ -1,9 +1,11 @@
 // @flow
 import { graphql, commitLocalUpdate } from 'react-relay';
 import { change } from 'redux-form';
+import { type IntlShape } from 'react-intl';
 import type { Dispatch } from '~/types';
 import environment from '~/createRelayEnvironment';
 import type { Questions } from '~/components/Form/Form.type';
+import colors from '~/utils/colors';
 
 export const API_ENTERPRISE_ENTER = 'ENTER';
 export const API_ENTERPRISE_PUB_ORGA = 'PUB_ORGA';
@@ -14,39 +16,88 @@ export const API_ENTERPRISE_ASSOC_DOC_RNA = 'ASSOC_DOC_RNA';
 export const API_ENTERPRISE_DOC_ENTER = 'DOC_ENTER';
 export const API_ENTERPRISE_DOC_PUB_ORGA = 'DOC_PUB_ORGA';
 
+export const ASSOC_SIRET_BASE_QUESTIONS = [22, 23, 24, 25];
+export const ASSOC_RNA_BASE_QUESTIONS = [33, 34, 35, 36];
+export const ENTER_BASE_QUESTIONS = [49, 50, 51, 52];
+export const PUB_ORGA_BASE_QUESTIONS = [61, 62, 63, 64];
+export const BASE_QUESTIONS: Array<number> = [
+  ...ASSOC_SIRET_BASE_QUESTIONS,
+  ...ASSOC_RNA_BASE_QUESTIONS,
+  ...ENTER_BASE_QUESTIONS,
+  ...PUB_ORGA_BASE_QUESTIONS,
+];
+
+const isFieldModificableIfNoResult = (questionNumber: number): boolean => {
+  return BASE_QUESTIONS.includes(questionNumber);
+};
+
 const dispatchFromApi = (
   dispatch: Dispatch,
   formName: string,
-  arr: Array<{ key?: string, questionNumber?: number, value: any }>,
+  arr: Array<{ responseNumber?: number, questionNumber?: number, value: any }>,
   questions: Questions,
+  intl: IntlShape,
   onlyVisibility: boolean = false,
 ) => {
-  arr.forEach((element: { key?: string, questionNumber?: number, value: ?string }) => {
-    if (element?.questionNumber !== null && typeof element?.questionNumber !== 'undefined') {
+  const positiveResultMessage = `<span style='color: ${colors.successColor}'>${intl.formatMessage({
+    id: 'api.entreprise.result',
+  })}</span>`;
+
+  arr.forEach((element: { responseNumber?: number, questionNumber?: number, value: ?string }) => {
+    const { responseNumber, value, questionNumber } = element;
+    if (questionNumber != null && typeof questionNumber !== 'undefined') {
       // Check if is not available thanks to API
-      if (!element.value && element.questionNumber) {
-        const index = element.questionNumber;
+      if (!value && questionNumber) {
         // Ask for user to complete
         commitLocalUpdate(environment, store => {
-          const question = store.get(questions[index].id);
+          const question = store.get(questions[questionNumber].id);
           if (question) {
             question.setValue(false, 'hidden');
+            question.setValue(intl.formatMessage({ id: 'api.entreprise.no.result' }), 'helpText');
+          }
+        });
+      } else {
+        // Let the user know we've fetched the field for him
+        commitLocalUpdate(environment, store => {
+          const question = store.get(questions[questionNumber].id);
+          if (question) {
+            question.setValue(positiveResultMessage, 'description');
+            question.setValue('', 'helpText');
           }
         });
       }
     } else if (!onlyVisibility) {
-      if (Array.isArray(element.value) && element.key) {
-        if (element.value.length > 0 && element.value[0] != null) {
-          dispatch(change(formName, element.key, element.value));
+      if (responseNumber) {
+        const isModificable = isFieldModificableIfNoResult(responseNumber);
+        if ((Array.isArray(value) && value.length > 0 && value[0] != null) || value) {
+          dispatch(change(formName, `responses.${responseNumber}.value`, value));
+          if (!isModificable) {
+            commitLocalUpdate(environment, store => {
+              const question = store.get(questions[responseNumber].id);
+              if (question) {
+                question.setValue(positiveResultMessage, 'description');
+                question.setValue('', 'helpText');
+              }
+            });
+          }
+        } else if (!isModificable) {
+          commitLocalUpdate(environment, store => {
+            const question = store.get(questions[responseNumber].id);
+            if (question) {
+              question.setValue(
+                intl.formatMessage({ id: 'api.entreprise.no.result' }),
+                'description',
+              );
+              question.setValue('', 'helpText');
+            }
+          });
         }
-      } else if (element.key && element.value) {
-        dispatch(change(formName, element.key, element.value));
       }
     }
   });
 };
 
-const getMatchingObject = (object: Object, type: string) => {
+export const getMatchingObject = (object: Object, type: string) => {
   switch (type) {
     case API_ENTERPRISE_ENTER:
     case API_ENTERPRISE_ASSOC:
@@ -68,11 +119,17 @@ const getMatchingObject = (object: Object, type: string) => {
 // Adresse du siège social
 // Prénom et Nom du représentant légal
 // Qualité du représentant légal
-const showAPIVisibleQuestions = (indexes: Array<number>, questions: Questions) => {
-  indexes.forEach(index => {
+const showAPIVisibleQuestions = (intl: IntlShape, indexes: Array<number>, questions: Questions) => {
+  const positiveResultMessage = `<span style='color: ${colors.successColor}'>${intl.formatMessage({
+    id: 'api.entreprise.modificable.result',
+  })}</span>`;
+
+  indexes.forEach((value) => {
     commitLocalUpdate(environment, store => {
-      const question = store.get(questions[index].id);
+      const question = store.get(questions[value].id);
       if (question) {
+        question.setValue(positiveResultMessage, 'description');
+        question.setValue('', 'helpText');
         question.setValue(false, 'hidden');
       }
     });
@@ -80,6 +137,7 @@ const showAPIVisibleQuestions = (indexes: Array<number>, questions: Questions) =
 };
 
 export const dispatchValuesToForm = (
+  intl: IntlShape,
   dispatch: Dispatch,
   object: Object,
   type: string,
@@ -88,93 +146,122 @@ export const dispatchValuesToForm = (
   formName: string = 'proposal-form',
 ) => {
   const obj = getMatchingObject(object, type);
+  const orderedSiretAssocMapping: Array<{
+    responseNumber?: number,
+    questionNumber?: number,
+    value: any,
+  }> = [
+    { responseNumber: ASSOC_SIRET_BASE_QUESTIONS[0], value: obj.corporateName },
+    { responseNumber: ASSOC_SIRET_BASE_QUESTIONS[1], value: obj.corporateAddress },
+    { responseNumber: ASSOC_SIRET_BASE_QUESTIONS[2], value: obj.legalRepresentative },
+    { responseNumber: ASSOC_SIRET_BASE_QUESTIONS[3], value: obj.qualityRepresentative },
 
-  const orderedSiretAssocMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { key: 'responses.13.value', value: obj.corporateName },
-    { key: 'responses.14.value', value: obj.corporateAddress },
-
-    { questionNumber: 17, value: obj.availableSirenSituation },
-    { questionNumber: 20, value: obj.availableTurnover },
-    { questionNumber: 21, value: obj.availableKbis },
+    { questionNumber: 26, value: obj.availableSirenSituation },
   ];
 
-  const orderedRNAAssocMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { key: 'responses.28.value', value: obj.corporateName },
-    { key: 'responses.29.value', value: obj.corporateAddress },
+  const orderedRNAAssocMapping: Array<{
+    responseNumber?: number,
+    questionNumber?: number,
+    value: any,
+  }> = [
+    { responseNumber: ASSOC_RNA_BASE_QUESTIONS[0], value: obj.corporateName },
+    { responseNumber: ASSOC_RNA_BASE_QUESTIONS[1], value: obj.corporateAddress },
+    { responseNumber: ASSOC_RNA_BASE_QUESTIONS[2], value: obj.legalRepresentative },
+    { responseNumber: ASSOC_RNA_BASE_QUESTIONS[3], value: obj.qualityRepresentative },
   ];
 
-  const orderedEnterpriseMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { key: 'responses.45.value', value: obj.corporateName },
-    { key: 'responses.46.value', value: obj.corporateAddress },
-
-    { questionNumber: 49, value: obj.availableSirenSituation },
-    { questionNumber: 52, value: obj.availableTurnover },
+  const orderedEnterpriseMapping: Array<{
+    responseNumber?: number,
+    questionNumber?: number,
+    value: any,
+  }> = [
+    { responseNumber: ENTER_BASE_QUESTIONS[0], value: obj.corporateName },
+    { responseNumber: ENTER_BASE_QUESTIONS[1], value: obj.corporateAddress },
+    { responseNumber: ENTER_BASE_QUESTIONS[2], value: obj.legalRepresentative },
+    { responseNumber: ENTER_BASE_QUESTIONS[3], value: obj.qualityRepresentative },
+    { questionNumber: 53, value: obj.availableSirenSituation },
+    { questionNumber: 56, value: obj.availableTurnover },
   ];
 
-  const orderedPublicOrgaMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { key: 'responses.57.value', value: obj.corporateName },
-    { key: 'responses.58.value', value: obj.corporateAddress },
-
-    { questionNumber: 61, value: obj.availableSirenSituation },
+  const orderedPublicOrgaMapping: Array<{
+    responseNumber?: number,
+    questionNumber?: number,
+    value: any,
+  }> = [
+    { responseNumber: PUB_ORGA_BASE_QUESTIONS[0], value: obj.corporateName },
+    { responseNumber: PUB_ORGA_BASE_QUESTIONS[1], value: obj.corporateAddress },
+    { responseNumber: PUB_ORGA_BASE_QUESTIONS[2], value: obj.legalRepresentative },
+    { responseNumber: PUB_ORGA_BASE_QUESTIONS[3], value: obj.qualityRepresentative },
+    { questionNumber: 65, value: obj.availableSirenSituation },
   ];
 
-  // DOCS
-  const docAssocMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { questionNumber: 22, value: obj.availableCompositionCA },
-    { questionNumber: 23, value: obj.availableStatus },
-    { questionNumber: 18, value: obj.availableFiscalRegulationAttestation },
-    { questionNumber: 19, value: obj.availableSocialRegulationAttestation },
-    { questionNumber: 71, value: obj.availablePrefectureReceiptConfirm },
+  /**
+   *
+   * DOCS
+   *
+   */
+
+  const docAssocMapping: Array<{ responseNumber?: number, questionNumber?: number, value: any }> = [
+    { questionNumber: 27, value: obj.availableCompositionCA },
+    { questionNumber: 28, value: obj.availableStatus },
   ];
 
-  const docAssocRNAMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { questionNumber: 32, value: obj.availableCompositionCA },
-    { questionNumber: 33, value: obj.availableStatus },
-    { questionNumber: 34, value: obj.availablePrefectureReceiptConfirm },
+  const docAssocRNAMapping: Array<{
+    responseNumber?: number,
+    questionNumber?: number,
+    value: any,
+  }> = [
+    { questionNumber: 37, value: obj.availableCompositionCA },
+    { questionNumber: 38, value: obj.availableStatus },
+    { questionNumber: 39, value: obj.availablePrefectureReceiptConfirm },
   ];
 
-  const docEnterMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { questionNumber: 50, value: obj.availableFiscalRegulationAttestation },
-    { questionNumber: 51, value: obj.availableSocialRegulationAttestation },
-    { questionNumber: 53, value: obj.availableKbis },
+  const docEnterMapping: Array<{ responseNumber?: number, questionNumber?: number, value: any }> = [
+    { questionNumber: 54, value: obj.availableFiscalRegulationAttestation },
+    { questionNumber: 55, value: obj.availableSocialRegulationAttestation },
+    { questionNumber: 57, value: obj.availableKbis },
   ];
 
-  const docPubOrgaMapping: Array<{ key?: string, questionNumber?: number, value: any }> = [
-    { questionNumber: 62, value: obj.availableKbis },
-  ];
+  const docPubOrgaMapping: Array<{
+    responseNumber?: number,
+    questionNumber?: number,
+    value: any,
+  }> = [{ questionNumber: 66, value: obj.availableKbis }];
 
+  let mapping;
   switch (type) {
     case API_ENTERPRISE_ASSOC:
-      showAPIVisibleQuestions([13, 14, 15, 16], questions);
-      dispatchFromApi(dispatch, formName, orderedSiretAssocMapping, questions, onlyVisibility);
+      showAPIVisibleQuestions(intl, ASSOC_SIRET_BASE_QUESTIONS, questions);
+      mapping = orderedSiretAssocMapping;
       break;
     case API_ENTERPRISE_ASSOC_RNA:
-      showAPIVisibleQuestions([28, 29, 30, 31], questions);
-      dispatchFromApi(dispatch, formName, orderedRNAAssocMapping, questions, onlyVisibility);
+      showAPIVisibleQuestions(intl, ASSOC_RNA_BASE_QUESTIONS, questions);
+      mapping = orderedRNAAssocMapping;
       break;
     case API_ENTERPRISE_ENTER:
-      showAPIVisibleQuestions([45, 46, 47, 48], questions);
-      dispatchFromApi(dispatch, formName, orderedEnterpriseMapping, questions, onlyVisibility);
+      showAPIVisibleQuestions(intl, ENTER_BASE_QUESTIONS, questions);
+      mapping = orderedEnterpriseMapping;
       break;
     case API_ENTERPRISE_PUB_ORGA:
-      showAPIVisibleQuestions([57, 58, 59, 60], questions);
-      dispatchFromApi(dispatch, formName, orderedPublicOrgaMapping, questions, onlyVisibility);
+      showAPIVisibleQuestions(intl, PUB_ORGA_BASE_QUESTIONS, questions);
+      mapping = orderedPublicOrgaMapping;
       break;
     case API_ENTERPRISE_ASSOC_DOC:
-      dispatchFromApi(dispatch, formName, docAssocMapping, questions, onlyVisibility);
+      mapping = docAssocMapping;
       break;
     case API_ENTERPRISE_ASSOC_DOC_RNA:
-      dispatchFromApi(dispatch, formName, docAssocRNAMapping, questions, onlyVisibility);
+      mapping = docAssocRNAMapping;
       break;
     case API_ENTERPRISE_DOC_ENTER:
-      dispatchFromApi(dispatch, formName, docEnterMapping, questions, onlyVisibility);
+      mapping = docEnterMapping;
       break;
     case API_ENTERPRISE_DOC_PUB_ORGA:
-      dispatchFromApi(dispatch, formName, docPubOrgaMapping, questions, onlyVisibility);
+      mapping = docPubOrgaMapping;
       break;
     default:
-      break;
+      return;
   }
+  dispatchFromApi(dispatch, formName, mapping, questions, intl, onlyVisibility);
 };
 
 export const autocompleteFromId = graphql`
@@ -198,17 +285,23 @@ export const autocompleteFromSiret = graphql`
         corporateAddress
         availableSirenSituation
         availableTurnover
+        legalRepresentative
+        qualityRepresentative
       }
       ... on APIEnterpriseEnterprise {
         corporateName
         corporateAddress
         availableSirenSituation
         availableTurnover
+        legalRepresentative
+        qualityRepresentative
       }
       ... on APIEnterprisePublicOrganization {
         corporateName
         corporateAddress
         availableSirenSituation
+        legalRepresentative
+        qualityRepresentative
       }
     }
   }

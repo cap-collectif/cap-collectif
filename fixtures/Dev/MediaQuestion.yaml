@@ -37,7 +37,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         description: 'Téléchargez le plan de financement à remplir, remplissez-le et joignez-le à votre dossier.'
         type: 7 # media
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalInfo6'
-        hidden: true
+        hidden: false
     mediaquestionIdfProjetLocalAssociationSiret1:
         id: 122
         title: Avis de situation SIREN

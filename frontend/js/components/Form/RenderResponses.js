@@ -290,7 +290,7 @@ const RenderResponses = ({
                       value={response}
                       typeForm={typeForm}
                       onChange={event => {
-                        triggerAutocompleteAPIEnterprise(dispatch, event, questions);
+                        triggerAutocompleteAPIEnterprise(dispatch, event, questions, intl);
                         setLastQuestionType(field.type);
                       }}
                     />

@@ -431,154 +431,163 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationSiret3'
         position: 39
+    qaqIdfProjectLocalPorteur12:
+        proposalForm: '@proposalformIdf'
+        question: '@mediaquestionIdfProjetLocalAssociationSiret4'
+        position: 40
+    qaqIdfProjectLocalPorteur13:
+        proposalForm: '@proposalformIdf'
+        question: '@mediaquestionIdfProjetLocalAssociationSiret5'
+        position: 41
+
     qaqIdfProjectLocalPorteur18:
         proposalForm: '@proposalformIdf'
         question: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
-        position: 40
+        position: 42
     qaqIdfProjectLocalPorteur19:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationRna1'
-        position: 41
+        position: 43
     qaqIdfProjectLocalPorteur20:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationRna2'
-        position: 42
+        position: 44
     qaqIdfProjectLocalPorteur21:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationRna3'
-        position: 43
+        position: 45
     qaqIdfProjectLocalPorteur22:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationRna4'
-        position: 44
+        position: 46
     qaqIdfProjectLocalPorteur23:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationRna5'
-        position: 45
+        position: 47
     qaqIdfProjectLocalPorteur24:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationRna1'
-        position: 46
+        position: 48
     qaqIdfProjectLocalPorteur25:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationRna2'
-        position: 47
+        position: 49
     qaqIdfProjectLocalPorteur26:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationRna3'
-        position: 48
+        position: 50
     qaqIdfProjectLocalPorteur27:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationRna4'
-        position: 49
+        position: 51
     qaqIdfProjectLocalPorteur28:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationRna5'
-        position: 50
+        position: 52
     qaqIdfProjectLocalPorteur29:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationNoRna1'
-        position: 51
+        position: 53
     qaqIdfProjectLocalPorteur30:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationNoRna2'
-        position: 52
+        position: 54
     qaqIdfProjectLocalPorteur31:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationNoRna3'
-        position: 53
+        position: 55
     qaqIdfProjectLocalPorteur32:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalAssociationNoRna4'
-        position: 54
+        position: 56
     qaqIdfProjectLocalPorteur33:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationNoRna1'
-        position: 55
+        position: 57
     qaqIdfProjectLocalPorteur34:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationNoRna2'
-        position: 56
+        position: 58
     qaqIdfProjectLocalPorteur36:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalEntreprise1'
-        position: 58
+        position: 59
     qaqIdfProjectLocalPorteur37:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalEntreprise2'
-        position: 59
+        position: 60
     qaqIdfProjectLocalPorteur38:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalEntreprise3'
-        position: 60
+        position: 61
     qaqIdfProjectLocalPorteur39:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalEntreprise4'
-        position: 61
+        position: 62
     qaqIdfProjectLocalPorteur40:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalEntreprise5'
-        position: 62
+        position: 63
     qaqIdfProjectLocalPorteur41:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalEntreprise1'
-        position: 63
+        position: 64
     qaqIdfProjectLocalPorteur42:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalEntreprise2'
-        position: 64
+        position: 65
     qaqIdfProjectLocalPorteur43:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalEntreprise3'
-        position: 65
+        position: 66
     qaqIdfProjectLocalPorteur44:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalEntreprise6'
-        position: 66
+        position: 67
     qaqIdfProjectLocalPorteur45:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalEntreprise4'
-        position: 67
+        position: 68
     qaqIdfProjectLocalPorteur46:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalEntreprise5'
-        position: 68
+        position: 69
     qaqIdfProjectLocalPorteur47:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalEntreprise6'
-        position: 69
+        position: 70
     qaqIdfProjectLocalPorteur48:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalOrgPublic1'
-        position: 70
+        position: 71
     qaqIdfProjectLocalPorteur49:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalOrgPublic2'
-        position: 71
+        position: 72
     qaqIdfProjectLocalPorteur50:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalOrgPublic3'
-        position: 72
+        position: 73
     qaqIdfProjectLocalPorteur51:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalOrgPublic4'
-        position: 73
+        position: 74
     qaqIdfProjectLocalPorteur55:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalOrgPublic5'
-        position: 74
+        position: 75
     qaqIdfProjectLocalPorteur56:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalOrgPub1'
-        position: 75
+        position: 76
     qaqIdfProjectLocalPorteur57:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalOrgPub2'
-        position: 76
+        position: 77
     qaqIdfProjectLocalPorteur58:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalOrgPub3'
-        position: 77
+        position: 78
     qaqEvalIdf1:
         questionnaire: '@questionnaireEvaluationIdf'
         question: '@sectionEvalIdf1'

@@ -9,6 +9,12 @@ type APIEnterpriseAssociation {
   """Corporate address."""
   corporateAddress: String!
 
+  """Authorization URL."""
+  legalRepresentative: String
+
+  """The quality of the legal representative."""
+  qualityRepresentative: String
+
   """The RIB of the enterprise."""
   availableSirenSituation: Boolean
 
@@ -51,6 +57,12 @@ type APIEnterpriseEnterprise {
   """Corporate address."""
   corporateAddress: String!
 
+  """Authorization URL."""
+  legalRepresentative: String
+
+  """The quality of the legal representative."""
+  qualityRepresentative: String
+
   """The RIB of the enterprise."""
   availableSirenSituation: Boolean
 
@@ -68,6 +80,12 @@ type APIEnterprisePublicOrganization {
 
   """Corporate address."""
   corporateAddress: String!
+
+  """Authorization URL."""
+  legalRepresentative: String
+
+  """The quality of the legal representative."""
+  qualityRepresentative: String
 
   """The RIB of the enterprise."""
   availableSirenSituation: Boolean
