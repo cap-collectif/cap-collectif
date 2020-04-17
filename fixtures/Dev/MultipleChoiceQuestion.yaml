@@ -300,7 +300,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     private: true
     required: true
     type: 3 # radio
-    alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProject2'
+    alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectPorteur2'
   multiplequestionIdfProjetLocal1:
     id: 3920
     title: 'Je suis...'

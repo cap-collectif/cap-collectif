@@ -332,6 +332,10 @@ Capco\AppBundle\Entity\ProposalForm:
         themeMandatory: false
         descriptionMandatory: true
         categoryMandatory: true
+        zoomMap: 9
+        latMap: 48.8499198
+        lngMap: 2.6370411
+        addressHelpText: Précisez l'adresse principale où sera mis en oeuvre votre projet
     proposalformCorona:
         id: proposalformCorona
         title: Appel à proposition COVID-19

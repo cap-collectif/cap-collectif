@@ -27,12 +27,11 @@ import {
 import type { Dispatch } from '~/types';
 import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type';
 
-const INDEX_TYPE_QUESTION = 19;
-const INDEX_RNA_QUESTION = 32;
-
-const INDEX_ASSOC_SIRET_QUESTION = 21;
-const INDEX_ENTER_QUESTION = 48;
-const INDEX_PUB_ORGA_QUESTION = 60;
+const INDEX_TYPE_QUESTION = 20;
+const INDEX_RNA_QUESTION = 33;
+const INDEX_ASSOC_SIRET_QUESTION = 22;
+const INDEX_ENTER_QUESTION = 49;
+const INDEX_PUB_ORGA_QUESTION = 61;
 
 export const getApiEnterpriseType = (type: string): string => {
   switch (type.trim().toLowerCase()) {
@@ -79,18 +78,6 @@ export const recapFetchedInfoFromAPI = (
       if (apiResult[field]) {
         let tmpStr;
         switch (field) {
-          case 'corporateName':
-            tmpStr = 'Raison sociale';
-            break;
-          case 'corporateAddress':
-            tmpStr = 'Adresse du siège social';
-            break;
-          case 'legalRepresentative':
-            tmpStr = 'Prénom & nom du représentant légal';
-            break;
-          case 'qualityRepresentative':
-            tmpStr = 'Qualité du représentant légal';
-            break;
           case 'availableSirenSituation':
             tmpStr = 'Avis de situation SIREN';
             break;
@@ -239,8 +226,6 @@ const makeRnaQueries = (
 
 export const TRIGGER_FOR: Array<string> = [
   'idf-bp-dedicated',
-  'dev',
-  'api-enterprise-3',
 ];
 
 const getInvisibleQuestionIndexesAccordingToType = (

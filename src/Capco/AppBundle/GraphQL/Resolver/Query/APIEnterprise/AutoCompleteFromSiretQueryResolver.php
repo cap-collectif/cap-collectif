@@ -18,6 +18,8 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
     private $autoCompleteUtils;
     private $cache;
 
+    public const USE_CACHE = false;
+
     public function __construct(
         RedisCache $cache,
         APIEnterprisePdfGenerator $pdfGenerator,
@@ -45,7 +47,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         $cacheVisibilityKey =
             $siret . '_' . $type . '_' . self::AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY;
 
-        if ($this->cache->hasItem($cacheVisibilityKey)) {
+        if (self::USE_CACHE && $this->cache->hasItem($cacheVisibilityKey)) {
             return $this->cache->getItem($cacheVisibilityKey)->get();
         }
 

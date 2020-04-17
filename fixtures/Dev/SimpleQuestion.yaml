@@ -105,46 +105,54 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         private: true
         type: 0 # text
-    simplequestionIdfGrandProject1:
+    simplequestionIdfGrandProjectPorteur1:
         id: 1330
         title: N° du dossier MesDémarches
         required: true
         private: true
         type: 0 # text
         alwaysJumpDestinationQuestion: '@multiplequestionIdfGrandProjet1'
-    simplequestionIdfGrandProject2:
+    simplequestionIdfGrandProjectPorteur2:
         id: 1331
         title: Raison sociale du porteur de projet
         required: true
         private: false
         type: 0 # text
-        alwaysJumpDestinationQuestion: '@sectionIdfInfoGrandProjet'
-    simplequestionIdfGrandProject3:
+    # End of path
+    simplequestionIdfGrandProjectInfo1:
         id: 1332
         title: Date prévisionnelle de début de projet
         helpText: 'Format accepté : JJ/MM/AAAA. Votre projet ne peut pas démarrer avant la date du 2 juillet 2020'
         required: true
         private: true
         type: 0 # text
-        alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProject4'
-    simplequestionIdfGrandProject4:
+        alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectInfo2'
+    simplequestionIdfGrandProjectInfo2:
         id: 1333
         title: Date prévisionnelle de fin de projet
         helpText: 'Format accepté : JJ/MM/AAAA'
         required: true
         private: true
         type: 0 # text
-        alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProject5'
-    simplequestionIdfGrandProject5:
+        alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectInfo3'
+    simplequestionIdfGrandProjectInfo3:
         id: 1334
+        title: Montant total du projet
+        required: true
+        private: false
+        type: 9 # number
+        alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectInfo4'
+    simplequestionIdfGrandProjectInfo4:
+        id: 1335
         title: Montant de la subvention sollicitée
         helpText: Indiquez le montant global de subvention sollicité (prime écologique incluse)
         required: true
         private: true
         type: 9 # number
+        alwaysJumpDestinationQuestion: '@sectionIdfPorteurGrandProjet'
         # This question end the Grand Project path
     simplequestionIdfProjetLocalAssociationSiret1:
-        id: 1335
+        id: 1336
         title: Numéro SIRET
         required: true
         private: true
@@ -152,7 +160,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         description: ''
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret2'
     simplequestionIdfProjetLocalAssociationSiret2:
-        id: 1336
+        id: 1337
         title: Raison sociale
         required: true
         private: true
@@ -160,7 +168,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret3'
     simplequestionIdfProjetLocalAssociationSiret3:
-        id: 1337
+        id: 1338
         title: Adresse du siège social
         required: true
         private: true
@@ -168,7 +176,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         type: 1 # textarea
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret4'
     simplequestionIdfProjetLocalAssociationSiret4:
-        id: 1338
+        id: 1339
         title: Prénom et Nom du représentant légal
         required: true
         private: true
@@ -176,7 +184,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         type: 0 # text
         alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalAssociationSiret5'
     simplequestionIdfProjetLocalAssociationSiret5:
-        id: 1339
+        id: 1340
         title: Qualité du représentant légal
         required: true
         private: true

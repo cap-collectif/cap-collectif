@@ -18,6 +18,8 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
     private $rootDir;
     private $cache;
 
+    public const USE_CACHE = false;
+
     public function __construct(
         RedisCache $cache,
         APIEnterprisePdfGenerator $pdfGenerator,
@@ -44,8 +46,9 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $docs = [];
         $cacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY;
         $visibilityCacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY;
+        $kbis = null;
 
-        if ($this->cache->hasItem($visibilityCacheKey)) {
+        if (self::USE_CACHE && $this->cache->hasItem($visibilityCacheKey)) {
             return $this->cache->getItem($visibilityCacheKey)->get();
         }
 
@@ -118,6 +121,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             $basePath,
             "${id}_attestations_sociales"
         );
+
         $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe)
             ? json_encode($greffe)
             : null;

@@ -29,13 +29,13 @@ class APIEnterpriseAutoCompleteUtils
         $this->cache = $cache;
     }
 
-    public function accessRequestObjectSafely(?ResponseInterface $request): ?array
+    public function accessRequestObjectSafely(?ResponseInterface $response): ?array
     {
-        if (!isset($request)) {
+        if (!isset($response)) {
             return null;
         }
         try {
-            return $request->toArray();
+            return $response->toArray();
         } catch (\Exception $e) {
             return null;
         }

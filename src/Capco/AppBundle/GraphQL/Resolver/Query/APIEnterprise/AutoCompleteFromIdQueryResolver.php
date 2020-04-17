@@ -11,8 +11,10 @@ class AutoCompleteFromIdQueryResolver implements ResolverInterface
     private $apiToken;
     private $autocompleteUtils;
 
-    public function __construct(APIEnterpriseAutoCompleteUtils $autoCompleteUtils, $apiToken)
-    {
+    public function __construct(
+        APIEnterpriseAutoCompleteUtils $autoCompleteUtils,
+        $apiToken
+    ) {
         $this->autocompleteUtils = $autoCompleteUtils;
         $this->apiToken = $apiToken;
     }
@@ -25,13 +27,18 @@ class AutoCompleteFromIdQueryResolver implements ResolverInterface
             'auth_bearer' => $this->apiToken,
         ]);
 
-        $assoc = $this->autocompleteUtils->makeGetRequest($client, "https://entreprise.api.gouv.fr/v2/associations/$assoId");
+        $assoc = $this->autocompleteUtils->makeGetRequest(
+            $client,
+            "https://entreprise.api.gouv.fr/v2/associations/${assoId}"
+        );
         $assoc = $this->autocompleteUtils->accessRequestObjectSafely($assoc)['association'];
 
         return [
             'type' => APIEnterpriseTypeResolver::ASSOCIATION,
             'corporateName' => $assoc['titre'] ?? '',
-            'corporateAddress' => isset($assoc['adresse_siege']) ? $this->autocompleteUtils->formatAddressFromJSON($assoc['adresse_siege']) : '',
+            'corporateAddress' => isset($assoc['adresse_siege'])
+                ? $this->autocompleteUtils->formatAddressFromJSON($assoc['adresse_siege'])
+                : '',
         ];
     }
 }

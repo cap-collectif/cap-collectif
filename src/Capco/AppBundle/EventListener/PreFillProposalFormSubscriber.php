@@ -50,24 +50,28 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
 
     public function getSiret(array $values): ?string
     {
-        if (isset($values['responses'][21]['value'])) {
-            return $values['responses'][21]['value'];
+        if (isset($values['responses'][22]['value'])) {
+            return $values['responses'][22]['value'];
         }
 
-        if (isset($values['responses'][48]['value'])) {
-            return $values['responses'][48]['value'];
+        if (isset($values['responses'][49]['value'])) {
+            return $values['responses'][49]['value'];
         }
 
-        return $values['responses'][60]['value'] ?? null;
+        return $values['responses'][61]['value'] ?? null;
     }
 
     public function getAPIEnterpriseData(FormEvent $event): void
     {
         $values = $event->getData();
         $type = APIEnterpriseTypeResolver::getAPIEnterpriseTypeFromString(
-            json_decode($values['responses'][19]['value'], true)['labels'][0]
+            json_decode($values['responses'][20]['value'], true)['labels'][0]
         );
-        $id = $values['responses'][32]['value'] ?? null;
+
+        // rna
+        $id = $values['responses'][33]['value'] ?? null;
+
+        // siret
         $siret = !$id ? $this->getSiret($values) : null;
 
         if ($siret) {
@@ -88,25 +92,25 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             switch ($type) {
                 case APIEnterpriseTypeResolver::ASSOCIATION:
                     if ($siret) {
-                        $values['responses'][26]['medias'] = $this->setMediaFromAPIOrRequest(
-                            $values['responses'][26]['medias'],
+                        $values['responses'][27]['medias'] = $this->setMediaFromAPIOrRequest(
+                            $values['responses'][27]['medias'],
                             $mainInfo['sirenSituation']
                         );
                     }
 
                     break;
                 case APIEnterpriseTypeResolver::ENTERPRISE:
-                    $values['responses'][53]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][53]['medias'],
+                    $values['responses'][54]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][54]['medias'],
                         $mainInfo['sirenSituation']
                     );
-                    $values['responses'][56]['value'] =
-                        $values['responses'][56]['value'] ?? $mainInfo['turnover'];
+                    $values['responses'][57]['value'] =
+                        $values['responses'][57]['value'] ?? $mainInfo['turnover'];
 
                     break;
                 case APIEnterpriseTypeResolver::PUBLIC_ORGA:
-                    $values['responses'][65]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][65]['medias'],
+                    $values['responses'][66]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][66]['medias'],
                         $mainInfo['sirenSituation']
                     );
 
@@ -131,49 +135,49 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         switch ($type) {
             case APIEnterpriseTypeResolver::ASSOCIATION:
                 if ($siret) {
-                    $values['responses'][27]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][27]['medias'],
-                        $docInfo['compositionCA']
-                    );
                     $values['responses'][28]['medias'] = $this->setMediaFromAPIOrRequest(
                         $values['responses'][28]['medias'],
+                        $docInfo['compositionCA']
+                    );
+                    $values['responses'][29]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][29]['medias'],
                         $docInfo['status']
                     );
                 }
                 if ($id) {
-                    $values['responses'][37]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][37]['medias'],
-                        $docInfo['compositionCA']
-                    );
                     $values['responses'][38]['medias'] = $this->setMediaFromAPIOrRequest(
                         $values['responses'][38]['medias'],
-                        $docInfo['status']
+                        $docInfo['compositionCA']
                     );
                     $values['responses'][39]['medias'] = $this->setMediaFromAPIOrRequest(
                         $values['responses'][39]['medias'],
+                        $docInfo['status']
+                    );
+                    $values['responses'][40]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][40]['medias'],
                         $docInfo['prefectureReceiptConfirm']
                     );
                 }
 
                 break;
             case APIEnterpriseTypeResolver::ENTERPRISE:
-                $values['responses'][54]['medias'] = $this->setMediaFromAPIOrRequest(
-                    $values['responses'][54]['medias'],
-                    $docInfo['fiscalRegulationAttestation']
-                );
                 $values['responses'][55]['medias'] = $this->setMediaFromAPIOrRequest(
                     $values['responses'][55]['medias'],
+                    $docInfo['fiscalRegulationAttestation']
+                );
+                $values['responses'][56]['medias'] = $this->setMediaFromAPIOrRequest(
+                    $values['responses'][56]['medias'],
                     $docInfo['socialRegulationAttestation']
                 );
-                $values['responses'][57]['medias'] = $this->setMediaFromAPIOrRequest(
-                    $values['responses'][57]['medias'],
+                $values['responses'][58]['medias'] = $this->setMediaFromAPIOrRequest(
+                    $values['responses'][58]['medias'],
                     $docInfo['kbis']
                 );
 
                 break;
             case APIEnterpriseTypeResolver::PUBLIC_ORGA:
-                $values['responses'][66]['medias'] = $this->setMediaFromAPIOrRequest(
-                    $values['responses'][66]['medias'],
+                $values['responses'][67]['medias'] = $this->setMediaFromAPIOrRequest(
+                    $values['responses'][67]['medias'],
                     $docInfo['kbis']
                 );
 
@@ -186,11 +190,9 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     {
         $env = EnvHelper::get('SYMFONY_INSTANCE_NAME');
         if (
-            'idf-bp-dedicated' === $env ||
-            //                        'dev' === $env ||
-            // TODO Fixme @Jpec
-            'api-enterprise-3' === $env
+            'idf-bp-dedicated' === $env
         ) {
+            // Warning: This will be called on every proposalForms
             $this->getAPIEnterpriseData($event);
         }
     }

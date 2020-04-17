@@ -16,10 +16,10 @@ export const API_ENTERPRISE_ASSOC_DOC_RNA = 'ASSOC_DOC_RNA';
 export const API_ENTERPRISE_DOC_ENTER = 'DOC_ENTER';
 export const API_ENTERPRISE_DOC_PUB_ORGA = 'DOC_PUB_ORGA';
 
-export const ASSOC_SIRET_BASE_QUESTIONS = [22, 23, 24, 25];
-export const ASSOC_RNA_BASE_QUESTIONS = [33, 34, 35, 36];
-export const ENTER_BASE_QUESTIONS = [49, 50, 51, 52];
-export const PUB_ORGA_BASE_QUESTIONS = [61, 62, 63, 64];
+export const ASSOC_SIRET_BASE_QUESTIONS = [23, 24, 25, 26];
+export const ASSOC_RNA_BASE_QUESTIONS = [34, 35, 36, 37];
+export const ENTER_BASE_QUESTIONS = [50, 51, 52, 53];
+export const PUB_ORGA_BASE_QUESTIONS = [62, 63, 64, 65];
 export const BASE_QUESTIONS: Array<number> = [
   ...ASSOC_SIRET_BASE_QUESTIONS,
   ...ASSOC_RNA_BASE_QUESTIONS,
@@ -42,6 +42,9 @@ const dispatchFromApi = (
   const positiveResultMessage = `<span style='color: ${colors.successColor}'>${intl.formatMessage({
     id: 'api.entreprise.result',
   })}</span>`;
+  const negativeResultMessage = `<span style='color: ${colors.dangerColor}'>${intl.formatMessage({
+    id: 'api.entreprise.no.result',
+  })}</span>`;
 
   arr.forEach((element: { responseNumber?: number, questionNumber?: number, value: ?string }) => {
     const { responseNumber, value, questionNumber } = element;
@@ -53,7 +56,8 @@ const dispatchFromApi = (
           const question = store.get(questions[questionNumber].id);
           if (question) {
             question.setValue(false, 'hidden');
-            question.setValue(intl.formatMessage({ id: 'api.entreprise.no.result' }), 'helpText');
+            question.setValue('', 'helpText');
+            question.setValue(negativeResultMessage, 'description');
           }
         });
       } else {
@@ -84,10 +88,7 @@ const dispatchFromApi = (
           commitLocalUpdate(environment, store => {
             const question = store.get(questions[responseNumber].id);
             if (question) {
-              question.setValue(
-                intl.formatMessage({ id: 'api.entreprise.no.result' }),
-                'description',
-              );
+              question.setValue(negativeResultMessage, 'description');
               question.setValue('', 'helpText');
             }
           });
@@ -124,7 +125,7 @@ const showAPIVisibleQuestions = (intl: IntlShape, indexes: Array<number>, questi
     id: 'api.entreprise.modificable.result',
   })}</span>`;
 
-  indexes.forEach((value) => {
+  indexes.forEach(value => {
     commitLocalUpdate(environment, store => {
       const question = store.get(questions[value].id);
       if (question) {
@@ -155,8 +156,7 @@ export const dispatchValuesToForm = (
     { responseNumber: ASSOC_SIRET_BASE_QUESTIONS[1], value: obj.corporateAddress },
     { responseNumber: ASSOC_SIRET_BASE_QUESTIONS[2], value: obj.legalRepresentative },
     { responseNumber: ASSOC_SIRET_BASE_QUESTIONS[3], value: obj.qualityRepresentative },
-
-    { questionNumber: 26, value: obj.availableSirenSituation },
+    { questionNumber: 27, value: obj.availableSirenSituation },
   ];
 
   const orderedRNAAssocMapping: Array<{
@@ -179,8 +179,8 @@ export const dispatchValuesToForm = (
     { responseNumber: ENTER_BASE_QUESTIONS[1], value: obj.corporateAddress },
     { responseNumber: ENTER_BASE_QUESTIONS[2], value: obj.legalRepresentative },
     { responseNumber: ENTER_BASE_QUESTIONS[3], value: obj.qualityRepresentative },
-    { questionNumber: 53, value: obj.availableSirenSituation },
-    { questionNumber: 56, value: obj.availableTurnover },
+    { questionNumber: 54, value: obj.availableSirenSituation },
+    { questionNumber: 57, value: obj.availableTurnover },
   ];
 
   const orderedPublicOrgaMapping: Array<{
@@ -192,7 +192,7 @@ export const dispatchValuesToForm = (
     { responseNumber: PUB_ORGA_BASE_QUESTIONS[1], value: obj.corporateAddress },
     { responseNumber: PUB_ORGA_BASE_QUESTIONS[2], value: obj.legalRepresentative },
     { responseNumber: PUB_ORGA_BASE_QUESTIONS[3], value: obj.qualityRepresentative },
-    { questionNumber: 65, value: obj.availableSirenSituation },
+    { questionNumber: 66, value: obj.availableSirenSituation },
   ];
 
   /**
@@ -202,8 +202,8 @@ export const dispatchValuesToForm = (
    */
 
   const docAssocMapping: Array<{ responseNumber?: number, questionNumber?: number, value: any }> = [
-    { questionNumber: 27, value: obj.availableCompositionCA },
-    { questionNumber: 28, value: obj.availableStatus },
+    { questionNumber: 28, value: obj.availableCompositionCA },
+    { questionNumber: 29, value: obj.availableStatus },
   ];
 
   const docAssocRNAMapping: Array<{
@@ -211,22 +211,22 @@ export const dispatchValuesToForm = (
     questionNumber?: number,
     value: any,
   }> = [
-    { questionNumber: 37, value: obj.availableCompositionCA },
-    { questionNumber: 38, value: obj.availableStatus },
-    { questionNumber: 39, value: obj.availablePrefectureReceiptConfirm },
+    { questionNumber: 38, value: obj.availableCompositionCA },
+    { questionNumber: 39, value: obj.availableStatus },
+    { questionNumber: 40, value: obj.availablePrefectureReceiptConfirm },
   ];
 
   const docEnterMapping: Array<{ responseNumber?: number, questionNumber?: number, value: any }> = [
-    { questionNumber: 54, value: obj.availableFiscalRegulationAttestation },
-    { questionNumber: 55, value: obj.availableSocialRegulationAttestation },
-    { questionNumber: 57, value: obj.availableKbis },
+    { questionNumber: 55, value: obj.availableFiscalRegulationAttestation },
+    { questionNumber: 56, value: obj.availableSocialRegulationAttestation },
+    { questionNumber: 58, value: obj.availableKbis },
   ];
 
   const docPubOrgaMapping: Array<{
     responseNumber?: number,
     questionNumber?: number,
     value: any,
-  }> = [{ questionNumber: 66, value: obj.availableKbis }];
+  }> = [{ questionNumber: 67, value: obj.availableKbis }];
 
   let mapping;
   switch (type) {

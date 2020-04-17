@@ -99,7 +99,7 @@ Capco\AppBundle\Entity\LogicJump:
         id: logicjumpIdfGrandProjet
         position: 1
         origin: '@multiplequestionIdfGrandOrLocal'
-        destination: '@sectionIdfPorteurGrandProjet'
+        destination: '@sectionIdfInfoGrandProjet'
         conditions: ['@ljcIdfProjectGrand']
     logicjumpIdfProjetLocal:
         id: logicjumpIdfProjetLocal

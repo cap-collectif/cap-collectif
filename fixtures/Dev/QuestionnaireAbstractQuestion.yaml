@@ -318,38 +318,42 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     qaqIdf1:
         proposalForm: '@proposalformIdf'
         question: '@multiplequestionIdfGrandOrLocal'
-        position: 3
+        position: 2
     qaqIdfGrandProjectInfo1:
         proposalForm: '@proposalformIdf'
-        question: '@sectionIdfPorteurGrandProjet'
-        position: 4
+        question: '@sectionIdfInfoGrandProjet'
+        position: 3
     qaqIdfGrandProjectInfo2:
         proposalForm: '@proposalformIdf'
-        question: '@simplequestionIdfGrandProject1'
-        position: 5
+        question: '@simplequestionIdfGrandProjectInfo1'
+        position: 4
     qaqIdfGrandProjectInfo3:
         proposalForm: '@proposalformIdf'
-        question: '@multiplequestionIdfGrandProjet1'
-        position: 6
+        question: '@simplequestionIdfGrandProjectInfo2'
+        position: 5
     qaqIdfGrandProjectInfo4:
         proposalForm: '@proposalformIdf'
-        question: '@simplequestionIdfGrandProject2'
+        question: '@simplequestionIdfGrandProjectInfo3'
+        position: 6
+    qaqIdfGrandProjectInfo5:
+        proposalForm: '@proposalformIdf'
+        question: '@simplequestionIdfGrandProjectInfo4'
         position: 7
     qaqIdfGrandProjectPorteur1:
         proposalForm: '@proposalformIdf'
-        question: '@sectionIdfInfoGrandProjet'
+        question: '@sectionIdfPorteurGrandProjet'
         position: 8
     qaqIdfGrandProjectPorteur2:
         proposalForm: '@proposalformIdf'
-        question: '@simplequestionIdfGrandProject3'
+        question: '@simplequestionIdfGrandProjectPorteur1'
         position: 9
     qaqIdfGrandProjectPorteur3:
         proposalForm: '@proposalformIdf'
-        question: '@simplequestionIdfGrandProject4'
+        question: '@multiplequestionIdfGrandProjet1'
         position: 10
     qaqIdfGrandProjectPorteur4:
         proposalForm: '@proposalformIdf'
-        question: '@simplequestionIdfGrandProject5'
+        question: '@simplequestionIdfGrandProjectPorteur2'
         position: 11
     qaqIdfProjectLocalInfo1:
         proposalForm: '@proposalformIdf'
@@ -383,10 +387,6 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfProjetLocalInfo6'
         position: 27
-    # qaqIdfProjectLocalInfo9:
-    #     proposalForm: '@proposalformIdf'
-    #     question: '@mediaquestionIdfProjetLocalAssociationSiret9'
-    #     position: 28
     qaqIdfProjectLocalPorteur1:
         proposalForm: '@proposalformIdf'
         question: '@sectionIdfPorteurProjectLocal'
@@ -439,7 +439,6 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalAssociationSiret5'
         position: 41
-
     qaqIdfProjectLocalPorteur18:
         proposalForm: '@proposalformIdf'
         question: '@multiplequestionIdfProjetLocalAssociationWithoutSiret1'
