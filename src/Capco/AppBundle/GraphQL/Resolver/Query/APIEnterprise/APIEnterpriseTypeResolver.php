@@ -10,33 +10,22 @@ use RuntimeException;
 
 class APIEnterpriseTypeResolver implements ResolverInterface
 {
-    private $typeResolver;
+    public const GRAND_PROJET = 'APIEnterpriseGrandProjet';
+    public const LOCAL_PROJET = 'APIEnterpriseLocalProjet';
 
     public const ENTERPRISE = 'APIEnterpriseEnterprise';
     public const ASSOCIATION = 'APIEnterpriseAssociation';
     public const PUBLIC_ORGA = 'APIEnterprisePublicOrganization';
+    private $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
     {
         $this->typeResolver = $typeResolver;
     }
 
-    public static function getAPIEnterpriseTypeFromString(string $str): string {
-        switch (strtolower($str)){
-            case 'une association':
-                return self::ASSOCIATION;
-            case 'un autre organisme privé':
-            case 'une entreprise':
-                return self::ENTERPRISE;
-            case 'un organisme public':
-                return self::PUBLIC_ORGA;
-        }
-        throw new RuntimeException('Unknown type of API Enterprise');
-    }
-
     public function __invoke(array $data = []): ?Type
     {
-        if (!isset($data['type'])){
+        if (!isset($data['type'])) {
             throw new UserError('Could not resolve type of APIEnterprise.');
         }
         switch ($data['type']) {
@@ -47,5 +36,32 @@ class APIEnterpriseTypeResolver implements ResolverInterface
             default:
                 throw new UserError('Could not resolve type of APIEnterprise.');
         }
+    }
+
+    public static function getAPIEnterpriseProjectTypeFromString(?string $str): ?string
+    {
+        switch ($str) {
+            case 'Renseigner la présentation de mon Grand Projet':
+                return self::GRAND_PROJET;
+            case 'Déposer un Projet Local':
+                return self::LOCAL_PROJET;
+        }
+
+        return null;
+    }
+
+    public static function getAPIEnterpriseTypeFromString(string $str): string
+    {
+        switch (strtolower($str)) {
+            case 'une association':
+                return self::ASSOCIATION;
+            case 'un autre organisme privé':
+            case 'une entreprise':
+                return self::ENTERPRISE;
+            case 'un organisme public':
+                return self::PUBLIC_ORGA;
+        }
+
+        throw new RuntimeException('Unknown type of API Enterprise');
     }
 }

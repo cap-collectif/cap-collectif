@@ -64,6 +64,21 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     public function getAPIEnterpriseData(FormEvent $event): void
     {
         $values = $event->getData();
+
+        // If it's not answered, we have nothing to do.
+        if (!$values['responses'][1]['value']) {
+            return;
+        }
+
+        $projectType = APIEnterpriseTypeResolver::getAPIEnterpriseProjectTypeFromString(
+            json_decode($values['responses'][1]['value'], true)['labels'][0]
+        );
+
+        // If it's not a local project, we have nothing to do.
+        if ($projectType !== APIEnterpriseTypeResolver::LOCAL_PROJET) {
+            return;
+        }
+
         $type = APIEnterpriseTypeResolver::getAPIEnterpriseTypeFromString(
             json_decode($values['responses'][20]['value'], true)['labels'][0]
         );
