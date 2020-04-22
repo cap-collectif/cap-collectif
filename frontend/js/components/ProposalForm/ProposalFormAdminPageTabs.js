@@ -14,11 +14,15 @@ import type { ProposalFormAdminPageTabs_query } from '~relay/ProposalFormAdminPa
 import type { GlobalState } from '~/types';
 
 type DefaultProps = void;
-type Props = {|
+
+type RelayProps = {|
   proposalForm: ProposalFormAdminPageTabs_proposalForm,
   query: ProposalFormAdminPageTabs_query,
+|};
+type Props = {|
+  ...RelayProps,
   intl: IntlShape,
-  analysisEnabled: boolean,
+  analysisFeatureEnabled: boolean,
 |};
 type State = void;
 
@@ -26,7 +30,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
   static defaultProps: DefaultProps;
 
   render() {
-    const { intl, proposalForm, query, analysisEnabled } = this.props;
+    const { intl, proposalForm, query, analysisFeatureEnabled } = this.props;
     return (
       <div>
         {proposalForm.url !== '' ? (
@@ -46,31 +50,33 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
             <b>{intl.formatMessage({ id: 'global.ref' })} : </b> {proposalForm.reference}
           </p>
         )}
-        <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">
-          <Tab eventKey={1} title={intl.formatMessage({ id: 'global.configuration' })}>
+        <Tabs defaultActiveKey="CONFIGURATION" id="proposal-form-admin-page-tabs">
+          <Tab eventKey="CONFIGURATION" title={intl.formatMessage({ id: 'global.configuration' })}>
             <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
           </Tab>
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
+          <Tab eventKey="LEGACY_ANALYSIS" title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
             <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
           </Tab>
-          {analysisEnabled && (
-            <Tab eventKey={3} title={
-              <>
-                <FormattedMessage id="proposal.tabs.evaluation"/>
-                <span className="ml-5">
-                  <Badge pill variant="primary">
-                    <FormattedMessage id="badge.new"/>
-                  </Badge>
-                </span>
-              </>
-            }>
+          {analysisFeatureEnabled && !!proposalForm.step && (
+            <Tab
+              eventKey="NEW_ANALYSIS"
+              title={
+                <>
+                  <FormattedMessage id="proposal.tabs.evaluation" />
+                  <span className="ml-5">
+                    <Badge pill variant="primary">
+                      <FormattedMessage id="badge.new" />
+                    </Badge>
+                  </span>
+                </>
+              }>
               <ProposalFormAdminAnalysisConfigurationForm proposalForm={proposalForm} />
             </Tab>
           )}
-          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
+          <Tab eventKey="NOTIFICATIONS" title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
             <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={5} title={intl.formatMessage({ id: 'global.params' })}>
+          <Tab eventKey="SETTINGS" title={intl.formatMessage({ id: 'global.params' })}>
             <ProposalFormAdminSettingsForm proposalForm={proposalForm} />
           </Tab>
         </Tabs>
@@ -80,7 +86,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  analysisEnabled: state.default.features.unstable__analysis,
+  analysisFeatureEnabled: state.default.features.unstable__analysis,
 });
 
 const withIntl = injectIntl(ProposalFormAdminPageTabs);
@@ -91,6 +97,9 @@ export default createFragmentContainer(container, {
     fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
       url
       reference
+      step {
+        id
+      }
       ...ProposalFormAdminConfigurationForm_proposalForm
       ...ProposalFormAdminNotificationForm_proposalForm
       ...ProposalFormAdminSettingsForm_proposalForm

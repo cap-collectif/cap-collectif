@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
+exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if form is not linked to a step yet 1`] = `
 <div>
   <p>
     <strong>
@@ -26,11 +26,11 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
     2
   </p>
   <Uncontrolled(Tabs)
-    defaultActiveKey={1}
+    defaultActiveKey="CONFIGURATION"
     id="proposal-form-admin-page-tabs"
   >
     <Tab
-      eventKey={1}
+      eventKey="CONFIGURATION"
       title="global.configuration"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
@@ -39,6 +39,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "reference": "2",
+            "step": null,
             "url": "http://capco.dev/top-budget",
           }
         }
@@ -51,7 +52,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
-      eventKey={2}
+      eventKey="LEGACY_ANALYSIS"
       title="proposal.tabs.evaluation"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
@@ -60,13 +61,232 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "reference": "2",
+            "step": null,
             "url": "http://capco.dev/top-budget",
           }
         }
       />
     </Tab>
     <Tab
-      eventKey={3}
+      eventKey="NOTIFICATIONS"
+      title="proposal_form.admin.notification"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "step": null,
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey="SETTINGS"
+      title="global.params"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "step": null,
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+      />
+    </Tab>
+  </Uncontrolled(Tabs)>
+</div>
+`;
+
+exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if feature is not enabled 1`] = `
+<div>
+  <p>
+    <strong>
+      <FormattedMessage
+        id="permalink"
+        values={Object {}}
+      />
+       :
+    </strong>
+     
+    <a
+      href="http://capco.dev/top-budget"
+    >
+      http://capco.dev/top-budget
+    </a>
+     |
+     
+    <b>
+      global.ref
+       : 
+    </b>
+     
+    2
+  </p>
+  <Uncontrolled(Tabs)
+    defaultActiveKey="CONFIGURATION"
+    id="proposal-form-admin-page-tabs"
+  >
+    <Tab
+      eventKey="CONFIGURATION"
+      title="global.configuration"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+        query={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey="LEGACY_ANALYSIS"
+      title="proposal.tabs.evaluation"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey="NOTIFICATIONS"
+      title="proposal_form.admin.notification"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey="SETTINGS"
+      title="global.params"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+      />
+    </Tab>
+  </Uncontrolled(Tabs)>
+</div>
+`;
+
+exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
+<div>
+  <p>
+    <strong>
+      <FormattedMessage
+        id="permalink"
+        values={Object {}}
+      />
+       :
+    </strong>
+     
+    <a
+      href="http://capco.dev/top-budget"
+    >
+      http://capco.dev/top-budget
+    </a>
+     |
+     
+    <b>
+      global.ref
+       : 
+    </b>
+     
+    2
+  </p>
+  <Uncontrolled(Tabs)
+    defaultActiveKey="CONFIGURATION"
+    id="proposal-form-admin-page-tabs"
+  >
+    <Tab
+      eventKey="CONFIGURATION"
+      title="global.configuration"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+        query={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey="LEGACY_ANALYSIS"
+      title="proposal.tabs.evaluation"
+    >
+      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey="NEW_ANALYSIS"
       title={
         <React.Fragment>
           <FormattedMessage
@@ -97,13 +317,16 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
             "url": "http://capco.dev/top-budget",
           }
         }
       />
     </Tab>
     <Tab
-      eventKey={4}
+      eventKey="NOTIFICATIONS"
       title="proposal_form.admin.notification"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
@@ -112,13 +335,16 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
             "url": "http://capco.dev/top-budget",
           }
         }
       />
     </Tab>
     <Tab
-      eventKey={5}
+      eventKey="SETTINGS"
       title="global.params"
     >
       <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
@@ -127,6 +353,9 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "reference": "2",
+            "step": Object {
+              "id": "<random id>",
+            },
             "url": "http://capco.dev/top-budget",
           }
         }

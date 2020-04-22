@@ -14,10 +14,10 @@ class AdminProposalFormPage extends Page
     protected $path = 'admin/capco/app/proposalform/{id}/edit';
 
     protected $elements = [
-        'proposal form content tab' => '#proposal-form-admin-page-tabs-tab-1',
-        'proposal form evaluation tab' => '#proposal-form-admin-page-tabs-tab-2',
-        'proposal form notification tab' => '#proposal-form-admin-page-tabs-tab-3',
-        'proposal form parameters tab' => '#proposal-form-admin-page-tabs-tab-4',
+        'proposal form content tab' => '#proposal-form-admin-page-tabs-tab-CONFIGURATION',
+        'proposal form evaluation tab' => '#proposal-form-admin-page-tabs-tab-LEGACY_ANALYSIS',
+        'proposal form notification tab' => '#proposal-form-admin-page-tabs-tab-NOTIFICATIONS',
+        'proposal form parameters tab' => '#proposal-form-admin-page-tabs-tab-SETTINGS',
         'proposal form introduction' => '#ql-editor-1 div',
         'proposal form title help' => '#proposal_form_title_help_text',
         'proposal form summary help' => '#proposal_form_summary_help_text',
