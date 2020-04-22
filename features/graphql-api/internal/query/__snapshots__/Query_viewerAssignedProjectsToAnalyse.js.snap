@@ -547,8 +547,67 @@ Object {
     Object {
       "title": "Solidarité Covid-19",
       "viewerAssignedProposals": Object {
-        "edges": Array [],
-        "totalCount": 0,
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned3",
+              },
+              "district": null,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDk=",
+              "title": "Jurer allégeance à Nurgle",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjE=",
+              "title": "Proposal assigned 121",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjI=",
+              "title": "Proposal assigned 122",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjQ=",
+              "title": "Proposal assigned 124",
+            },
+          },
+          Object {
+            "node": Object {
+              "category": Object {
+                "id": "pCategoryAssigned1",
+              },
+              "district": Object {
+                "id": "district1",
+              },
+              "id": "UHJvcG9zYWw6YXNzaWduZWRQcm9wb3NhbHMxMjU=",
+              "title": "Proposal assigned 125",
+            },
+          },
+        ],
+        "totalCount": 5,
       },
     },
   ],
