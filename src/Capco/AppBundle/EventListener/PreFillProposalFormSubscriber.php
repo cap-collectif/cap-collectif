@@ -75,7 +75,12 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         );
 
         // If it's not a local project, we have nothing to do.
-        if ($projectType !== APIEnterpriseTypeResolver::LOCAL_PROJET) {
+        if (APIEnterpriseTypeResolver::LOCAL_PROJET !== $projectType) {
+            return;
+        }
+
+        // If no type value, we can't do anything.
+        if (!$values['responses'][20]['value']) {
             return;
         }
 
@@ -84,10 +89,10 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         );
 
         // rna
-        $id = $values['responses'][33]['value'] ?? null;
+        $rna = $values['responses'][33]['value'] ?? null;
 
         // siret
-        $siret = !$id ? $this->getSiret($values) : null;
+        $siret = !$rna ? $this->getSiret($values) : null;
 
         if ($siret) {
             $mainInfoKey =
@@ -133,14 +138,14 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             }
         }
         $docInfoKey =
-            ($siret ?? $id) .
+            ($siret ?? $rna) .
             '_' .
             $type .
             '_' .
             AutoCompleteDocQueryResolver::AUTOCOMPLETE_DOC_CACHE_KEY;
         if (!$this->cache->hasItem($docInfoKey)) {
             $args = new Argument([
-                'id' => $siret ?? $id,
+                'id' => $siret ?? $rna,
                 'type' => $type,
             ]);
             $this->autoCompleteDocQueryResolver->__invoke($args);
@@ -159,18 +164,21 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                         $docInfo['status']
                     );
                 }
-                if ($id) {
-                    $values['responses'][38]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][38]['medias'],
-                        $docInfo['compositionCA']
-                    );
+                if ($rna) {
+                    // Composition du conseil d'administration et du bureau
                     $values['responses'][39]['medias'] = $this->setMediaFromAPIOrRequest(
                         $values['responses'][39]['medias'],
-                        $docInfo['status']
+                        $docInfo['compositionCA']
                     );
+                    // Récépissé de la déclaration en préfecture (greffe des associations)
                     $values['responses'][40]['medias'] = $this->setMediaFromAPIOrRequest(
                         $values['responses'][40]['medias'],
                         $docInfo['prefectureReceiptConfirm']
+                    );
+                    // Statuts en vigueur datés et signés
+                    $values['responses'][42]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][42]['medias'],
+                        $docInfo['status']
                     );
                 }
 
@@ -204,9 +212,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     public function prefillForm(FormEvent $event): void
     {
         $env = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if (
-            'idf-bp-dedicated' === $env
-        ) {
+        if ('idf-bp-dedicated' === $env) {
             // Warning: This will be called on every proposalForms
             $this->getAPIEnterpriseData($event);
         }

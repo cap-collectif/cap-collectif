@@ -2,28 +2,30 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise;
 
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisCache;
+use Symfony\Component\HttpClient\HttpClient;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class AutoCompleteFromSiretQueryResolver implements ResolverInterface
 {
     public const AUTOCOMPLETE_SIRET_CACHE_KEY = 'AUTOCOMPLETE_SIRET_CACHE_KEY';
     public const AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY = 'AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY';
+
+    public const USE_CACHE = false;
     private $apiToken;
     private $rootDir;
     private $pdfGenerator;
     private $autoCompleteUtils;
     private $cache;
-
-    public const USE_CACHE = false;
+    private $logger;
 
     public function __construct(
         RedisCache $cache,
         APIEnterprisePdfGenerator $pdfGenerator,
         APIEnterpriseAutoCompleteUtils $autoCompleteUtils,
+        LoggerInterface $logger,
         $apiToken,
         $rootDir
     ) {
@@ -32,6 +34,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         $this->autoCompleteUtils = $autoCompleteUtils;
         $this->rootDir = $rootDir;
         $this->cache = $cache;
+        $this->logger = $logger;
     }
 
     public function __invoke(Arg $args): array
@@ -70,8 +73,19 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         } catch (\Exception $e) {
             //We should have at least a match here.
             $message = $e->getMessage();
+            $this->logger->warning("This siren does not match any entity: ${message}");
 
-            throw new BadRequestHttpException("This siren does not match any entity: ${message}");
+            return [
+                'type' => $type,
+                'availableSirenSituation' => false,
+                'legalRepresentative' => null,
+                'qualityRepresentative' => null,
+                'siren' => null,
+                'corporateName' => null,
+                'corporateAddress' => null,
+                'availableKbis' => false,
+                'availableTurnover' => false,
+            ];
         }
 
         if (APIEnterpriseTypeResolver::PUBLIC_ORGA !== $type) {
