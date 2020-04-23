@@ -161,6 +161,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                     case AbstractQuestion::QUESTION_TYPE_RADIO:
                     case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
                     case AbstractQuestion::QUESTION_TYPE_BUTTON:
+                    case AbstractQuestion::QUESTION_TYPE_RANKING:
                         return \in_array($value->getTitle(), $response->getValue()['labels'], true);
                     default:
                         throw new \RuntimeException(
@@ -182,6 +183,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                     case AbstractQuestion::QUESTION_TYPE_RADIO:
                     case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
                     case AbstractQuestion::QUESTION_TYPE_BUTTON:
+                    case AbstractQuestion::QUESTION_TYPE_RANKING:
                         return !\in_array(
                             $value->getTitle(),
                             $response->getValue()['labels'],
