@@ -2,15 +2,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "<2.0.0"
-autopep8 = "*"
 
 [packages]
 docker-compose = ">=1.23.0"
 docker = "*"
-pyaml = "==16.12.2"
+pyaml = ">=4.2b1"
 Fabric = ">=1.13.1,<2.0"
 paramiko = "*"
+pycodestyle = "*"
 
 [requires]
 python_version = "2.7"

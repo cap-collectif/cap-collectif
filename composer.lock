@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f1c5b2d38dcf2d6a071f6dee72c9654",
+    "content-hash": "5e60e35b20eec609b0a7c4362117a282",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -18577,12 +18577,12 @@
             "version": "v6.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Symplify/PackageBuilder.git",
+                "url": "https://github.com/symplify/package-builder.git",
                 "reference": "fbdfe363a27070cfdfbc47d5f59e711ed08bb060"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/PackageBuilder/zipball/fbdfe363a27070cfdfbc47d5f59e711ed08bb060",
+                "url": "https://api.github.com/repos/symplify/package-builder/zipball/fbdfe363a27070cfdfbc47d5f59e711ed08bb060",
                 "reference": "fbdfe363a27070cfdfbc47d5f59e711ed08bb060",
                 "shasum": ""
             },

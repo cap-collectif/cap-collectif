@@ -108,7 +108,6 @@
         "symfony/symfony": "4.3.*",
         "doctrine/doctrine-bundle": "^1.6",
         "twig/extensions": "~1.0",
-        "twig/twig": "^3.0",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/monolog-bundle": "^3.5",
         "sensio/framework-extra-bundle": "^5.2",
