@@ -88,6 +88,15 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             json_decode($values['responses'][20]['value'], true)['labels'][0]
         );
 
+        if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
+            // We check if it's no RNA and no SIRET, we can't do anything.
+            if ($values['responses'][32]['value']) {
+                if ('Non' === json_decode($values['responses'][32]['value'], true)['labels'][0]) {
+                    return;
+                }
+            }
+        }
+
         // rna
         $rna = $values['responses'][33]['value'] ?? null;
 
@@ -166,18 +175,18 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                 }
                 if ($rna) {
                     // Composition du conseil d'administration et du bureau
-                    $values['responses'][39]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][39]['medias'],
+                    $values['responses'][38]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][38]['medias'],
                         $docInfo['compositionCA']
                     );
                     // Récépissé de la déclaration en préfecture (greffe des associations)
-                    $values['responses'][40]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][40]['medias'],
+                    $values['responses'][39]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][39]['medias'],
                         $docInfo['prefectureReceiptConfirm']
                     );
                     // Statuts en vigueur datés et signés
-                    $values['responses'][42]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][42]['medias'],
+                    $values['responses'][41]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][41]['medias'],
                         $docInfo['status']
                     );
                 }
