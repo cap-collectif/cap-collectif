@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\RedirectionIO;
 
+use Capco\AppBundle\Toggle\Manager;
 use Psr\Log\LoggerInterface;
 use RedirectionIO\Client\Sdk\Command\CommandInterface;
 use RedirectionIO\Client\Sdk\Exception\AgentNotFoundException;
@@ -19,17 +20,19 @@ class Client
     private $logger;
     private $currentConnection;
     private $currentConnectionName;
+    private $manager;
 
     /**
      * @param ProjectKeyDataloader $projectKeyDataloader
      * @param LoggerInterface $logger
+     * @param Manager $manager
      * @param int $timeout
      * @param string $agentTcp
      * @param string $agentUnix
      * @param bool $debug
      */
     public function __construct(ProjectKeyDataloader $projectKeyDataloader, LoggerInterface $logger,
-                                $timeout, string $agentTcp, string $agentUnix, $debug = false)
+                                Manager $manager, $timeout, string $agentTcp, string $agentUnix, $debug = false)
     {
         $connections = [
             'agent_tcp' => $agentTcp,
@@ -47,10 +50,14 @@ class Client
         $this->timeout = $timeout;
         $this->debug = $debug;
         $this->logger = $logger;
+        $this->manager = $manager;
     }
 
     public function request(CommandInterface $command)
     {
+        if (!$this->manager->isActive('http_redirects')){
+            return null;
+        }
         $projectKey = $this->projectKeyDataloader->loadKey();
         $command->setProjectKey($projectKey);
 
