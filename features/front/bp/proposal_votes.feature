@@ -145,13 +145,12 @@ Scenario: Logged in user wants to set a vote as anonymous
   And I wait 1 seconds
   And I should not see "global.anonymous"
   Then I toggle vote access of proposal "[id='UHJvcG9zYWw6cHJvcG9zYWwyNg==-proposal-vote__private']"
-  And I wait 1 seconds
-  And I should see "global.anonymous"
+  And I should see "global.anonymous" appear on current page in "body"
   Then I click on button "#confirm-update-votes"
   And I wait 1 seconds
   Then I reload the page
-  And I wait ".proposals-user-votes__table" to appear on current page
-  Then I should see "global.anonymous"
+  And I should see "global.anonymous" appear on current page in "body"
+
 
 @database
 Scenario: Logged in user wants to delete a vote

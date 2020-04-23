@@ -9,24 +9,32 @@ use Capco\AppBundle\Form\CommentType as CommentForm;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends Controller
 {
+    private $eventDispatcher;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Route("/comments/{commentId}/edit", name="app_comment_edit")
      * @Template("CapcoAppBundle:Comment:update.html.twig")
      * @Entity("comment", class="CapcoAppBundle:Comment", options={"mapping" = {"commentId": "id"}, "repository_method"= "find", "map_method_signature" = true})
      * @Security("has_role('ROLE_USER')")
      *
-     * @throws ProjectAccessDeniedException
-     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws ProjectAccessDeniedException
      */
     public function updateCommentAction(Request $request, Comment $comment)
     {
@@ -57,7 +65,7 @@ class CommentController extends Controller
                 $comment->resetVotes();
                 $em->persist($comment);
                 $em->flush();
-                $this->get('event_dispatcher')->dispatch(
+                $this->eventDispatcher->dispatch(
                     CapcoAppBundleEvents::COMMENT_CHANGED,
                     new CommentChangedEvent($comment, 'update')
                 );
@@ -83,9 +91,9 @@ class CommentController extends Controller
      * @Template("CapcoAppBundle:Comment:delete.html.twig")
      * @Security("has_role('ROLE_USER')")
      *
-     * @throws ProjectAccessDeniedException
-     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws ProjectAccessDeniedException
      */
     public function deleteCommentAction(Request $request, Comment $comment)
     {
@@ -116,8 +124,7 @@ class CommentController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($comment);
-                // TODO change it for sf 4.0
-                $this->get('event_dispatcher')->dispatch(
+                $this->eventDispatcher->dispatch(
                     CapcoAppBundleEvents::COMMENT_CHANGED,
                     new CommentChangedEvent($comment, 'remove')
                 );

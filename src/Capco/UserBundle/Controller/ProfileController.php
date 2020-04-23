@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Repository\UserRepository;
@@ -33,10 +34,14 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class ProfileController extends Controller
 {
     private $userProposalsResolver;
+    private $eventDispatcher;
 
-    public function __construct(UserProposalsResolver $userProposalsResolver)
-    {
+    public function __construct(
+        UserProposalsResolver $userProposalsResolver,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->userProposalsResolver = $userProposalsResolver;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -366,7 +371,7 @@ class ProfileController extends Controller
         );
         $this->get('security.token_storage')->setToken($userToken);
         $logInEvent = new InteractiveLoginEvent($request, $userToken);
-        $this->get('event_dispatcher')->dispatch('security.interactive_login', $logInEvent);
+        $this->eventDispatcher->dispatch('security.interactive_login', $logInEvent);
     }
 
     private function getProjectsCount(User $user, ?User $loggedUser): int
