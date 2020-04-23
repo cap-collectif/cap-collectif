@@ -929,10 +929,12 @@ class ApplicationContext extends UserContext
     /**
      * @Then I select :locale in the language footer
      */
-    public function iSelectLocaleInTheLanguageFooter(string $locale)
+    public function iSelectLocaleInTheLanguageFooter(string $locale): void
     {
-        $this->iWaitElementToAppearOnPage('#footer-links');
+        $this->iWaitElementToAppearOnPage('#language-change-button-dropdown');
+        $this->iWaitElementToAppearOnPage('#footer-links #language-change-caret');
         $this->iClickElement('#footer-links #language-change-caret');
+        $this->iWaitElementToAppearOnPage("#footer-links #language-choice-${locale}");
         $this->iClickElement("#footer-links #language-choice-${locale}");
     }
 

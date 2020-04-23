@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
-use PHPUnit\Framework\Assert;
-
 trait FranceConnectTrait
 {
     /**
@@ -12,33 +10,13 @@ trait FranceConnectTrait
     public function IShouldSeeTheFranceConnectLoginScreen()
     {
         $this->assertSession()->addressMatches('/^\/api\/v1\/authorize/i');
-        $this->assertSession()->elementExists('css', '#authentication-page');
     }
 
     public function IShouldSeeTheFranceConnectInteractionScreen()
     {
-        $this->assertSession()->addressMatches('/^\/interaction\/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/i');
-    }
-
-    private function IJumpToFranceConnectLoginScreen()
-    {
-        $this->getSession()->visit('https://capco.test/login/franceconnect?_destination=https://capco.test/');
-        $this->IShouldSeeTheFranceConnectLoginScreen();
-    }
-
-    private function IAuthenticateFranceConnectIP(string $id)
-    {
-        $this->IJumpToFranceConnectLoginScreen();
-        $this->getSession()
-        ->getPage()
-        ->find('css', $id)
-        ->click();
-        $this->IShouldSeeTheFranceConnectInteractionScreen();
-
-        $this->getSession()
-        ->getPage()
-        ->find('css', '[value="Valider"]')
-        ->click();
+        $this->assertSession()->addressMatches(
+            '/^\/interaction\/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/i'
+        );
     }
 
     /**
@@ -46,7 +24,7 @@ trait FranceConnectTrait
      */
     public function IAmOnTheFranceConnectAuthPageOfAnIP()
     {
-        $this->IAuthenticateFranceConnectIP("#fi-identity-provider-example");
+        $this->IAuthenticateFranceConnectIP('#fi-identity-provider-example');
     }
 
     /**
@@ -57,8 +35,31 @@ trait FranceConnectTrait
         $this->IShouldSeeTheFranceConnectLoginScreen();
 
         $this->getSession()
-        ->getPage()
-        ->find('css', '[value="Continuer sur CAP COLLECTIF - 835"]')
-        ->click();
+            ->getPage()
+            ->find('css', '[value="Continuer sur CAP COLLECTIF - 835"]')
+            ->click();
+    }
+
+    private function IJumpToFranceConnectLoginScreen()
+    {
+        $this->getSession()->visit(
+            'https://capco.test/login/franceconnect?_destination=https://capco.test/'
+        );
+        $this->IShouldSeeTheFranceConnectLoginScreen();
+    }
+
+    private function IAuthenticateFranceConnectIP(string $id)
+    {
+        $this->IJumpToFranceConnectLoginScreen();
+        $this->getSession()
+            ->getPage()
+            ->find('css', $id)
+            ->click();
+        $this->IShouldSeeTheFranceConnectInteractionScreen();
+
+        $this->getSession()
+            ->getPage()
+            ->find('css', '[value="Valider"]')
+            ->click();
     }
 }

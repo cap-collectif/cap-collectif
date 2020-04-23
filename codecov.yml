@@ -6,13 +6,9 @@ codecov:
     wait_for_ci: yes
 
 fixes:
-  - "/home/circleci/project/::"
+  - '/home/circleci/project/::'
 
 comment: false
-  # layout: 'reach, diff, flags, files'
-  # require_changes: yes # only post the comment if coverage changes
-  # behavior: default # update if exists else create new
-  # after_n_builds: 3 # do not notify until at least 3 builds have been uploaded from the CI pipeline
 
 coverage:
   parsers:
@@ -74,27 +70,23 @@ flags:
       - frontend/js
 
 ignore:
-  - "src/Capco/AppBundle/GraphQL/__generated__/*.php"
-  - "src/Capco/AppBundle/Behat"
-  - "src/DoctrineMigrations"
-  - "spec/**/*"
-  - "node_modules/**/*"
-  - "vendor/**/*"
-  - "public/**/*"
-  - "flow-typed/**/*"
-  - "**/*.js.snap"
-  - "**/*-test.js"
-  - "npm-packages-offline-cache/*.tgz"
-  - "**/*Spec.php"
-  - "**/*.c"
-  - "**/*.cpp"
-  - "**/*.h"
-  - "**/*.hpp"
-  - "**/*.twig"
-  - "**/*.scss"
-  - "assets/**/*"
-  - "**/*.feature"
-
-
-
-
+  - 'src/Capco/AppBundle/GraphQL/__generated__/*.php'
+  - 'src/Capco/AppBundle/Behat'
+  - 'src/DoctrineMigrations'
+  - 'spec/**/*'
+  - 'node_modules/**/*'
+  - 'vendor/**/*'
+  - 'public/**/*'
+  - 'flow-typed/**/*'
+  - '**/*.js.snap'
+  - '**/*-test.js'
+  - 'npm-packages-offline-cache/*.tgz'
+  - '**/*Spec.php'
+  - '**/*.c'
+  - '**/*.cpp'
+  - '**/*.h'
+  - '**/*.hpp'
+  - '**/*.twig'
+  - '**/*.scss'
+  - 'assets/**/*'
+  - '**/*.feature'
