@@ -21,7 +21,7 @@ class OpinionVersionEditButton extends React.Component<Props> {
           onClick={() => {
             dispatch(showOpinionVersionEditModal());
           }}>
-          <i className="cap cap-pencil-1" /> {<FormattedMessage id="global.edit" />}
+          <i className="cap cap-pencil-1" /> <FormattedMessage id="global.edit" />
         </Button>
       </div>
     );

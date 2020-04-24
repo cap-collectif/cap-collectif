@@ -47,6 +47,12 @@ module.exports = {
     toGlobalId: true,
   },
   rules: {
+    // TODO
+    'react/no-unescaped-entities': 'warn',
+    'relay/generated-flow-types': 'warn',
+    'react/no-this-in-sfc': 'warn',
+    'react/sort-comp': 'warn',
+
     'formatjs/no-camel-case': 'error',
     'formatjs/enforce-plural-rules': 'error',
     'formatjs/no-offset': 'error',
@@ -90,7 +96,6 @@ module.exports = {
     // Such as import * as generated from …
     camelcase: 'off',
     'import/no-cycle': 'off',
-    'relay/generated-flow-types': ['error', { fix: false }],
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5967

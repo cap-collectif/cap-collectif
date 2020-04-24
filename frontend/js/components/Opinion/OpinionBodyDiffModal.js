@@ -49,7 +49,9 @@ class OpinionBodyDiffModal extends React.Component<Props, State> {
             <Modal.Title>{modal.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <b>{<FormattedMessage id="opinion.diff.title" />}</b>
+            <b>
+              <FormattedMessage id="opinion.diff.title" />
+            </b>
             <p className="small excerpt">
               <FormattedMessage id="opinion.diff.infos" />
             </p>

@@ -101,7 +101,9 @@ class ShareButtonDropdown extends React.Component<Props, State> {
         animation={false}
         dialogClassName="modal--custom modal--share-link">
         <Modal.Header closeButton>
-          <Modal.Title>{<FormattedMessage id="share.link" />}</Modal.Title>
+          <Modal.Title>
+            <FormattedMessage id="share.link" />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p className="excerpt">{title}</p>

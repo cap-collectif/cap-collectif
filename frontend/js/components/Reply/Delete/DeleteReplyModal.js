@@ -59,11 +59,13 @@ export class DeleteReplyModal extends React.Component<Props, State> {
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="global.delete" />}
+            <FormattedMessage id="global.delete" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>{<FormattedMessage id="reply.delete.confirm" />}</p>
+          <p>
+            <FormattedMessage id="reply.delete.confirm" />
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />

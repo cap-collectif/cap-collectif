@@ -60,17 +60,15 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {
-                    <FormattedMessage
-                      id={isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'}
-                    />
-                  }
+                  <FormattedMessage
+                    id={isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'}
+                  />
                 </p>
                 <span className="widget__counter__value">{step.votesLimit}</span>
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.votes_left" />}
+                  <FormattedMessage id="project.votes.widget.votes_left" />
                 </p>
                 <span className="widget__counter__value">
                   {step.votesLimit ? step.votesLimit - votesCount : votesCount}
@@ -78,7 +76,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.votes_spent" />}
+                  <FormattedMessage id="project.votes.widget.votes_spent" />
                 </p>
                 <span className="widget__counter__value">{votesCount}</span>
               </li>
@@ -88,7 +86,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.budget" />}
+                  <FormattedMessage id="project.votes.widget.budget" />
                 </p>
                 <span className="widget__counter__value">
                   {step.budget ? (
@@ -105,7 +103,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.spent" />}
+                  <FormattedMessage id="project.votes.widget.spent" />
                 </p>
                 <span className="widget__counter__value">
                   <FormattedNumber
@@ -118,7 +116,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.left" />}
+                  <FormattedMessage id="project.votes.widget.left" />
                 </p>
                 <span className="widget__counter__value">
                   <FormattedNumber
@@ -132,7 +130,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
               {step.votesLimit && (
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes_left_budget" />}
+                    <FormattedMessage id="project.votes.widget.votes_left_budget" />
                   </p>
                   <span className="widget__counter__value">{step.votesLimit - votesCount}</span>
                 </li>
@@ -143,11 +141,9 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {
-                    <FormattedMessage
-                      id={isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'}
-                    />
-                  }
+                  <FormattedMessage
+                    id={isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'}
+                  />
                 </p>
                 <span className="widget__counter__value">{votesCount}</span>
               </li>

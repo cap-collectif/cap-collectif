@@ -7,7 +7,7 @@ import useClickAway from '~/utils/hooks/useClickAway';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type ChildrenProps = {|
-  +children: React.Node,
+  +children?: React.Node,
 |};
 
 type CollapsableElementProps = {|

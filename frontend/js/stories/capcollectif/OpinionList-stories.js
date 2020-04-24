@@ -76,9 +76,8 @@ const OpinionItem = ({ item, typeLabel }) => (
                       <strong className="excerpt_dark">Compte en attente de confirmation</strong>
                     }>
                     <p>
-                      {
-                        'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
-                      }
+                      Votre opinion n’a pas été publié, car votre compte a été confirmé après la
+                      date de fin de l’étape.
                     </p>
                   </Popover>
                 }>

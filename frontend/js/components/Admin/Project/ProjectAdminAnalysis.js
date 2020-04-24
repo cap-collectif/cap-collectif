@@ -202,9 +202,7 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
           </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
-            {''}
-          </Collapsable.Element>
+          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })} />
         </Collapsable>
       </AnalysisFilterContainer>
       <AnalysisFilterContainer>
@@ -212,9 +210,9 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
           </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.analyst' })}>
-            {''}
-          </Collapsable.Element>
+          <Collapsable.Element
+            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.analyst' })}
+          />
         </Collapsable>
       </AnalysisFilterContainer>
       <AnalysisFilterContainer>
@@ -223,9 +221,8 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
             <FormattedMessage tagName="p" id="global.review" />
           </Collapsable.Button>
           <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.supervisor' })}>
-            {''}
-          </Collapsable.Element>
+            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.supervisor' })}
+          />
         </Collapsable>
       </AnalysisFilterContainer>
       <AnalysisFilterContainer>
@@ -234,9 +231,8 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
             <FormattedMessage tagName="p" id="global.decision" />
           </Collapsable.Button>
           <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}>
-            {''}
-          </Collapsable.Element>
+            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}
+          />
         </Collapsable>
       </AnalysisFilterContainer>
       <AnalysisFilterContainer>

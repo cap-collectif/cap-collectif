@@ -50,9 +50,8 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
                         <strong className="excerpt_dark">Compte en attente de confirmation</strong>
                       }>
                       <p>
-                        {
-                          'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
-                        }
+                        Votre opinion n’a pas été publié, car votre compte a été confirmé après la
+                        date de fin de l’étape.
                       </p>
                     </Popover>
                   }>
@@ -96,7 +95,7 @@ const OpinionArgumentItem = ({ item, argumentType, isProfile, typeLabel }) => (
                   <span>Annuler</span>
                 ) : (
                   <span>
-                    <i className="cap cap-hand-like-2" /> {"D'accord"}
+                    <i className="cap cap-hand-like-2" /> D'accord
                   </span>
                 )}
               </Button>
@@ -206,7 +205,7 @@ const OpinionArgumentList = ({ section, isProfile, opinionArguments }) => (
                   {section.isLoadingMore && <Loader size={28} inline />}
                   {!section.isLoadingMore && (
                     <Button bsStyle="link" block onClick={() => {}}>
-                      {"Voir plus d'arguments"}
+                      Voir plus d'arguments
                     </Button>
                   )}
                 </ListGroupItem>

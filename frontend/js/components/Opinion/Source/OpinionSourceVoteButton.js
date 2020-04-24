@@ -71,7 +71,7 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
               <FormattedMessage id="global.cancel" />
             ) : (
               <span>
-                <i className="cap cap-hand-like-2" /> {<FormattedMessage id="global.ok" />}
+                <i className="cap cap-hand-like-2" /> <FormattedMessage id="global.ok" />
               </span>
             )}
             <UnpublishedTooltip

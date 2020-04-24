@@ -86,7 +86,7 @@ export class RegistrationModal extends React.Component<Props> {
           enforceFocus={false}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg" componentClass="h1">
-              {<FormattedMessage id="charter" />}
+              <FormattedMessage id="charter" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -106,7 +106,7 @@ export class RegistrationModal extends React.Component<Props> {
           enforceFocus={false}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg" componentClass="h1">
-              {<FormattedMessage id="global.register" />}
+              <FormattedMessage id="global.register" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

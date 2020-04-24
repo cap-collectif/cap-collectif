@@ -107,13 +107,12 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
       }
       if (props) {
         if (props.consultationStep) {
-          const { consultationStep } = props;
           return (
             <ConsultationPropositionStep
               isMultiConsultation={isMultiConsultation}
               consultationPlanEnabled={consultationPlanEnabled}
               showConsultationPlan={showConsultationPlan}
-              consultationStep={consultationStep}
+              consultationStep={props.consultationStep}
             />
           );
         }

@@ -54,7 +54,7 @@ export class CommentBody extends React.Component<Props, State> {
     if (this.textShouldBeTruncated() && !expanded) {
       return (
         <button type="button" className="btn-link" onClick={this.expand.bind(this, true)}>
-          {<FormattedMessage id="global.read_more" />}
+          <FormattedMessage id="global.read_more" />
         </button>
       );
     }
@@ -65,7 +65,7 @@ export class CommentBody extends React.Component<Props, State> {
     if (comment.trashed) {
       return (
         <span className="label label-default mr-5">
-          {<FormattedMessage id="global.is_trashed" />}
+          <FormattedMessage id="global.is_trashed" />
         </span>
       );
     }

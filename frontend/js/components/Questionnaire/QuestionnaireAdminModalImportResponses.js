@@ -64,7 +64,7 @@ export class QuestionnaireAdminModalImportResponses extends React.Component<Prop
       <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
         <Modal.Header>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="import-responses" />}
+            <FormattedMessage id="import-responses" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

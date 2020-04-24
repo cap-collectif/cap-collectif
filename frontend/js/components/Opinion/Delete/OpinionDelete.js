@@ -76,7 +76,7 @@ class OpinionDelete extends React.Component<Props, State> {
           className="pull-right btn--outline btn-danger"
           onClick={this.showModal}
           style={{ marginLeft: '5px' }}>
-          <i className="cap cap-bin-2" /> {<FormattedMessage id="global.delete" />}
+          <i className="cap cap-bin-2" /> <FormattedMessage id="global.delete" />
         </Button>
         <Modal
           animation={false}

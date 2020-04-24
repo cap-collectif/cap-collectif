@@ -26,11 +26,11 @@ export class ConfirmPasswordModal extends Component<Props> {
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="confirm_password.title" />}
+            <FormattedMessage id="confirm_password.title" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {<FormattedMessage id="confirm_password.help" />}
+          <FormattedMessage id="confirm_password.help" />
           <ConfirmPasswordForm />
         </Modal.Body>
         <Modal.Footer>
@@ -42,7 +42,7 @@ export class ConfirmPasswordModal extends Component<Props> {
               dispatch(submit('password'));
             }}
             bsStyle="primary">
-            {<FormattedMessage id="global.confirm" />}
+            <FormattedMessage id="global.confirm" />
           </Button>
         </Modal.Footer>
       </Modal>

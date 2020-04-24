@@ -21,7 +21,11 @@ export class ResponseValue extends React.Component<Props> {
       (!responseValue || (Array.isArray(responseValue) && !responseValue.length)) &&
       !response.medias
     ) {
-      return <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>;
+      return (
+        <p>
+          <FormattedMessage id="reply.show.response.no_value" />
+        </p>
+      );
     }
     if (response.question.type === 'editor') {
       // Here, we know that responseValue is a string and not maybe { label: string, value: string }
@@ -69,7 +73,9 @@ export class ResponseValue extends React.Component<Props> {
       return labels && labels.length > 0 ? (
         <p>{labels.join(', ')}</p>
       ) : (
-        <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>
+        <p>
+          <FormattedMessage id="reply.show.response.no_value" />
+        </p>
       );
     }
     // Here, responseValue must either be a string or a number

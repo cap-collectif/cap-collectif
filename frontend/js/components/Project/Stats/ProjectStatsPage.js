@@ -82,7 +82,9 @@ export class ProjectStatsPage extends React.Component<Props, State> {
             ))}
           </div>
         ) : (
-          <p className="project-stats__empty">{<FormattedMessage id="project.stats.no_data" />}</p>
+          <p className="project-stats__empty">
+            <FormattedMessage id="project.stats.no_data" />
+          </p>
         )}
       </div>
     );

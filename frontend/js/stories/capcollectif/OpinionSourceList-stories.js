@@ -64,7 +64,7 @@ const OpinionSourceItem = ({ item, isProfile, typeLabel }) => (
                 <span>Annuler</span>
               ) : (
                 <span>
-                  <i className="cap cap-hand-like-2" /> {"D'accord"}
+                  <i className="cap cap-hand-like-2" /> D'accord
                 </span>
               )}
             </Button>
@@ -167,7 +167,7 @@ const OpinionSourceList = ({ section, opinionSources, isProfile }) => (
                 {section.isLoadingMore && <Loader size={28} inline />}
                 {!section.isLoadingMore && (
                   <Button bsStyle="link" block onClick={() => {}}>
-                    {'Voir plus de sources'}
+                    Voir plus de sources
                   </Button>
                 )}
               </ListGroupItem>

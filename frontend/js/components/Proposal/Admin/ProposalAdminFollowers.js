@@ -37,7 +37,7 @@ export class ProposalAdminFollowers extends React.Component<Props> {
                 className="btn btn-default dropdown-toggle"
                 title={
                   <span>
-                    <i className="cap " /> {<FormattedMessage id="project.download.button" />}
+                    <i className="cap " /> <FormattedMessage id="project.download.button" />
                   </span>
                 }>
                 <MenuItem
@@ -66,7 +66,7 @@ export class ProposalAdminFollowers extends React.Component<Props> {
                 disabled="true"
                 title={
                   <span>
-                    <i className="cap " /> {<FormattedMessage id="project.download.button" />}
+                    <i className="cap " /> <FormattedMessage id="project.download.button" />
                   </span>
                 }
               />

@@ -89,7 +89,9 @@ export class LoginForm extends React.Component<Props, State> {
           autoComplete={error ? undefined : 'current-password'}
           component={renderInput}
         />
-        <a href="/resetting/request">{<FormattedMessage id="global.forgot_password" />}</a>
+        <a href="/resetting/request">
+          <FormattedMessage id="global.forgot_password" />
+        </a>
 
         <StyledContainer>
           <div className={restrictConnection && displayCaptcha ? '' : 'hide-captcha'}>

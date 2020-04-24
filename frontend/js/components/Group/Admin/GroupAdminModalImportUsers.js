@@ -27,7 +27,7 @@ export class GroupAdminModalImportUsers extends React.Component<Props> {
       <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
         <Modal.Header>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="modal-add-members-via-file" />}
+            <FormattedMessage id="modal-add-members-via-file" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

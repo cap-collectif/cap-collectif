@@ -37,7 +37,7 @@ export class DeleteModal extends React.Component<Props> {
         aria-labelledby="delete-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg" className="font-weight-bold">
-            {<FormattedMessage id={deleteModalTitle} />}
+            <FormattedMessage id={deleteModalTitle} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

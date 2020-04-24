@@ -93,9 +93,8 @@ const Comment = ({ item, answers, useBodyColor, isAnswer, disabledButtons }: Pro
                         <strong className="excerpt_dark">Compte en attente de confirmation</strong>
                       }>
                       <p>
-                        {
-                          'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
-                        }
+                        Votre opinion n’a pas été publié, car votre compte a été confirmé après la
+                        date de fin de l’étape.
                       </p>
                     </Popover>
                   }>
@@ -114,7 +113,7 @@ const Comment = ({ item, answers, useBodyColor, isAnswer, disabledButtons }: Pro
         )}
         {item.body && item.body.length > 400 && (
           <button type="button" className="btn-link" onClick={() => {}}>
-            {<FormattedMessage id="global.read_more" />}
+            <FormattedMessage id="global.read_more" />
           </button>
         )}
         {item.trashed && (

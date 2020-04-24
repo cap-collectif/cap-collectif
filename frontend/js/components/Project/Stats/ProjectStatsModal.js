@@ -83,7 +83,7 @@ class ProjectStatsModal extends React.Component<Props, State> {
           disabled={showModal}
           bsStyle="primary"
           className="btn--outline stats__all-button">
-          {<FormattedMessage id="project.stats.display.all" />}
+          <FormattedMessage id="project.stats.display.all" />
         </Button>
         <Modal
           id={`stats-modal-${stepId}-${type}`}
@@ -93,7 +93,7 @@ class ProjectStatsModal extends React.Component<Props, State> {
           aria-labelledby={`${id}-title`}>
           <Modal.Header closeButton>
             <Modal.Title id={`${id}-title`}>
-              <i className={icon} /> {<FormattedMessage id={label} />}
+              <i className={icon} /> <FormattedMessage id={label} />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

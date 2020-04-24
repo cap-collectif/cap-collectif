@@ -35,15 +35,15 @@ export class SSOSwitchUserPage extends React.Component<Props> {
             onClick={() => {
               window.location.href = destination || baseUrl;
             }}>
-            {
-              <FormattedHTMLMessage
-                id="continue-as-sso-connected-user"
-                values={{ SsoConnectedUsername: user ? `${user.username}` : '' }}
-              />
-            }
+            <FormattedHTMLMessage
+              id="continue-as-sso-connected-user"
+              values={{ SsoConnectedUsername: user ? `${user.username}` : '' }}
+            />
           </Button>
           <p className="mt-15 mb-0 text-center">
-            <a href="/logout?ssoSwitchUser=true">{<FormattedMessage id="change-user" />}</a>
+            <a href="/logout?ssoSwitchUser=true">
+              <FormattedMessage id="change-user" />
+            </a>
           </p>
         </div>
       </div>

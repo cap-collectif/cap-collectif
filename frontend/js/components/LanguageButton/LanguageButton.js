@@ -67,7 +67,7 @@ export const LanguageButton = ({ onChange, languages, defaultLanguage, pullRight
             updateLanguage(language);
             onChange(language.code);
           }}>
-          {<Language language={language} />}
+          <Language language={language} />
         </MenuLanguageItem>
       ))}
     </DropdownLanguageButton>

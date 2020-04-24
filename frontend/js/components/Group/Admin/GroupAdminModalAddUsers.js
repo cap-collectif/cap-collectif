@@ -26,7 +26,7 @@ export class GroupAdminModalAddUsers extends React.Component<Props> {
       <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
         <Modal.Header>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="group-admin-add-members" />}
+            <FormattedMessage id="group-admin-add-members" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -35,7 +35,7 @@ export class GroupAdminModalAddUsers extends React.Component<Props> {
         <Modal.Footer>
           <CloseButton label={intl.formatMessage({ id: 'global.close' })} onClose={onClose} />
           <Button bsStyle="primary" type="button" onClick={() => dispatch(submit(formName))}>
-            {<FormattedMessage id="global.add" />}
+            <FormattedMessage id="global.add" />
           </Button>
         </Modal.Footer>
       </Modal>

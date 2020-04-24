@@ -56,7 +56,7 @@ class ButtonBody extends React.Component<Props, State> {
     if (this.textShouldBeTruncated() && !expanded) {
       return (
         <button className="btn-link" onClick={this.expand.bind(this, true)} type="button">
-          {<FormattedMessage id="global.read_more" />}
+          <FormattedMessage id="global.read_more" />
         </button>
       );
     }

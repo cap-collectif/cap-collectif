@@ -97,9 +97,8 @@ const OpinionItem = ({ item, typeLabel }) => (
                       <strong className="excerpt_dark">Compte en attente de confirmation</strong>
                     }>
                     <p>
-                      {
-                        'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
-                      }
+                      Votre opinion n’a pas été publié, car votre compte a été confirmé après la
+                      date de fin de l’étape.
                     </p>
                   </Popover>
                 }>
@@ -211,7 +210,7 @@ const OpinionBox = ({ section, opinion }) => (
                   active={false}
                   aria-label="Souhaitez-vous déclarer être d'accord avec cette proposition ?"
                   disabled={section.voteDisabled}>
-                  <i className="cap cap-hand-like-2-1" /> {"D'accord"}
+                  <i className="cap cap-hand-like-2-1" /> D'accord
                 </Button>
                 <Button
                   style={{ marginLeft: 5 }}
@@ -221,7 +220,7 @@ const OpinionBox = ({ section, opinion }) => (
                   active={false}
                   aria-label="Souhaitez-vous déclarer être mitigé avec cette proposition ?"
                   disabled={section.voteDisabled}>
-                  <i className="cap cap-hand-like-2-1 icon-rotate" /> {'Mitigé'}
+                  <i className="cap cap-hand-like-2-1 icon-rotate" /> Mitigé
                 </Button>
                 <Button
                   style={{ marginLeft: 5 }}
@@ -231,7 +230,7 @@ const OpinionBox = ({ section, opinion }) => (
                   active={false}
                   aria-label="Souhaitez-vous déclarer ne pas être d'accord avec cette proposition ?"
                   disabled={section.voteDisabled}>
-                  <i className="cap cap-hand-unlike-2-1" /> {"Pas d'accord"}
+                  <i className="cap cap-hand-unlike-2-1" /> Pas d'accord
                 </Button>
               </ButtonToolbar>
               {/** Votes/OpinionVotesBar.js */}
@@ -283,7 +282,7 @@ const OpinionBox = ({ section, opinion }) => (
               className="pull-right btn--outline btn-danger"
               onClick={() => {}}
               style={{ marginLeft: '5px' }}>
-              <i className="cap cap-bin-2" /> {'Supprimer'}
+              <i className="cap cap-bin-2" /> Supprimer
             </Button>
           </div>
           {/** OpinionEditButton.js */}
@@ -292,7 +291,7 @@ const OpinionBox = ({ section, opinion }) => (
               id="opinion-edit-btn"
               className="opinion__action--edit pull-right btn--outline"
               onClick={() => {}}>
-              <i className="cap cap-pencil-1" /> {'Modifier'}
+              <i className="cap cap-pencil-1" /> Modifier
             </Button>
           </span>
           {/** Follow/OpinionFollowButton.js */}
@@ -301,7 +300,7 @@ const OpinionBox = ({ section, opinion }) => (
               className="btn btn--default opinion__button__follow"
               onClick={() => {}}
               id={`opinion-follow-btn-${opinion.id}`}>
-              <i className="cap cap-rss" /> {"S'abonner"}
+              <i className="cap cap-rss" /> S'abonner
             </Button>
           )}
           {/** OpinionReportButton.js */}
@@ -313,7 +312,7 @@ const OpinionBox = ({ section, opinion }) => (
               onClick={() => {}}
               style={{ marginLeft: 5 }}
               className="opinion__action--report btn btn--default">
-              <i className="cap cap-flag-1" /> {'Signaler'}
+              <i className="cap cap-flag-1" /> Signaler
             </Button>
           </span>
           {/** Utils/ShareButtonDropdown.js */}

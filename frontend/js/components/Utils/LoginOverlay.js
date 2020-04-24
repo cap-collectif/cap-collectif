@@ -78,7 +78,7 @@ export class LoginOverlay extends React.Component<Props> {
         {showRegistrationButton && !loginWithMonCompteParis && !loginWithOpenId && (
           <p>
             <Button onClick={openRegistrationModal} className="center-block btn-block">
-              {<FormattedMessage id="global.registration" />}
+              <FormattedMessage id="global.registration" />
             </Button>
           </p>
         )}

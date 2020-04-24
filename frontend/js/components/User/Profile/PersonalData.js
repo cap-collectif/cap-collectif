@@ -200,7 +200,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         id="btn-confirm-delete-field"
         bsStyle="danger"
         className="right-bloc btn-block">
-        {<FormattedMessage id="btn_delete" />}
+        <FormattedMessage id="btn_delete" />
       </Button>
       <Button
         onClick={() => {
@@ -209,7 +209,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         id="btn-cancel-delete-field"
         bsStyle="default"
         className="right-block btn-block">
-        {<FormattedMessage id="global.no" />}
+        <FormattedMessage id="global.no" />
       </Button>
     </Popover>
   );

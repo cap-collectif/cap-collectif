@@ -15,7 +15,7 @@ class ShareButtonAction extends React.Component<Props> {
 
     return (
       <MenuItem onSelect={onSelect}>
-        <SocialIcon name={action} size={16} /> {<FormattedMessage id={`share.${action}`} />}
+        <SocialIcon name={action} size={16} /> <FormattedMessage id={`share.${action}`} />
       </MenuItem>
     );
   }

@@ -45,7 +45,8 @@ class ColorPickerInput extends React.Component<Props, State> {
             onClick={() => {
               this.setState({ showPicker: true });
             }}
-            style={{ backgroundColor: input.value }}></InputGroup.Addon>
+            style={{ backgroundColor: input.value }}
+          />
           <FormControl
             {...input}
             onBlur={() => {

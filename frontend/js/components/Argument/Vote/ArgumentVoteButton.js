@@ -111,7 +111,7 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
               </span>
             ) : (
               <span>
-                <i className="cap cap-hand-like-2" /> {<FormattedMessage id="global.ok" />}
+                <i className="cap cap-hand-like-2" /> <FormattedMessage id="global.ok" />
               </span>
             )}
             <UnpublishedTooltip

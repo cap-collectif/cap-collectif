@@ -78,9 +78,8 @@ const OpinionVersion = ({ item, typeLabel, isProfile }) => (
                     id="popover-id"
                     title={<strong>Compte en attente de confirmation</strong>}>
                     <p>
-                      {
-                        'Votre opinion n’a pas été publié, car votre compte a été confirmé après la date de fin de l’étape.'
-                      }
+                      Votre opinion n’a pas été publié, car votre compte a été confirmé après la
+                      date de fin de l’étape.
                     </p>
                   </Popover>
                 }>
@@ -188,7 +187,7 @@ const OpinionVersionList = ({ section, opinionVersions, isProfile }) => (
               {section.isLoadingMore && <Loader size={28} inline />}
               {!section.isLoadingMore && (
                 <Button block bsStyle="link" onClick={() => {}}>
-                  {"Voir plus d'amendements"}
+                  Voir plus d'amendements
                 </Button>
               )}
             </ListGroupItem>
