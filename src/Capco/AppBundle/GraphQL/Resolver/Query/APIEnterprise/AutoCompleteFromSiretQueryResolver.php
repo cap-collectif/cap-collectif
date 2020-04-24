@@ -81,8 +81,8 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
                 'legalRepresentative' => null,
                 'qualityRepresentative' => null,
                 'siren' => null,
-                'corporateName' => null,
-                'corporateAddress' => null,
+                'corporateName' => '',
+                'corporateAddress' => '',
                 'availableKbis' => false,
                 'availableTurnover' => false,
             ];
