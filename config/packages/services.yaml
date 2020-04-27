@@ -254,7 +254,6 @@ services:
         arguments:
             - '@Capco\AppBundle\RedirectionIO\ProjectKeyDataloader'
             - '@logger'
-            - '@Capco\AppBundle\Toggle\Manager'
             - 20000
             - '%agent_tcp%'
             - '%agent_unix%'

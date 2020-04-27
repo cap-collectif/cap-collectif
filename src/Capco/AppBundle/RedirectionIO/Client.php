@@ -20,20 +20,20 @@ class Client
     private $logger;
     private $currentConnection;
     private $currentConnectionName;
-    private $manager;
 
     /**
-     * @param ProjectKeyDataloader $projectKeyDataloader
-     * @param LoggerInterface $logger
      * @param Manager $manager
-     * @param int $timeout
-     * @param string $agentTcp
-     * @param string $agentUnix
-     * @param bool $debug
+     * @param int     $timeout
+     * @param bool    $debug
      */
-    public function __construct(ProjectKeyDataloader $projectKeyDataloader, LoggerInterface $logger,
-                                Manager $manager, $timeout, string $agentTcp, string $agentUnix, $debug = false)
-    {
+    public function __construct(
+        ProjectKeyDataloader $projectKeyDataloader,
+        LoggerInterface $logger,
+        $timeout,
+        string $agentTcp,
+        string $agentUnix,
+        $debug = false
+    ) {
         $connections = [
             'agent_tcp' => $agentTcp,
             'agent_unix' => $agentUnix,
@@ -50,15 +50,20 @@ class Client
         $this->timeout = $timeout;
         $this->debug = $debug;
         $this->logger = $logger;
-        $this->manager = $manager;
     }
 
     public function request(CommandInterface $command)
     {
-        if (!$this->manager->isActive('http_redirects')){
-            return null;
-        }
         $projectKey = $this->projectKeyDataloader->loadKey();
+
+        if (!$projectKey) {
+            $this->logger->debug(
+                'Skipping RedirectionIO client, because feature is not enabled or no project key.'
+            );
+
+            return;
+        }
+
         $command->setProjectKey($projectKey);
 
         try {
@@ -218,7 +223,9 @@ class Client
 
             // Timeout
             if (0 === $modified) {
-                throw new TimeoutException('Timeout reached when trying to read stream (' . $this->timeout . 'ms)');
+                throw new TimeoutException(
+                    'Timeout reached when trying to read stream (' . $this->timeout . 'ms)'
+                );
             }
 
             // Error
@@ -269,7 +276,7 @@ class Client
      * @see https://secure.phabricator.com/rPHU69490c53c9c2ef2002bc2dd4cecfe9a4b080b497
      *
      * @param resource $stream The stream resource
-     * @param string $bytes Bytes written in the stream
+     * @param string   $bytes  Bytes written in the stream
      *
      * @return bool|int false if pipe is broken, number of bytes written otherwise
      */
