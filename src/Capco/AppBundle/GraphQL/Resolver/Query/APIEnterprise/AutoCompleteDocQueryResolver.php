@@ -12,13 +12,13 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
     public const AUTOCOMPLETE_DOC_CACHE_KEY = 'AUTOCOMPLETE_DOC_CACHE_KEY';
     public const AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY = 'AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY';
 
+    public const USE_CACHE = false;
+
     private $pdfGenerator;
     private $apiToken;
     private $autoCompleteUtils;
     private $rootDir;
     private $cache;
-
-    public const USE_CACHE = false;
 
     public function __construct(
         RedisCache $cache,
@@ -63,7 +63,8 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             );
             $acoss = $this->autoCompleteUtils->makeGetRequest(
                 $client,
-                "https://entreprise.api.gouv.fr/v2/attestations_sociales_acoss/${id}"
+                "https://entreprise.api.gouv.fr/v2/attestations_sociales_acoss/${id}",
+                12
             );
             $documentAsso = $this->autoCompleteUtils->makeGetRequest(
                 $client,
@@ -78,7 +79,8 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             );
             $acoss = $this->autoCompleteUtils->makeGetRequest(
                 $client,
-                "https://entreprise.api.gouv.fr/v2/attestations_sociales_acoss/${siren}"
+                "https://entreprise.api.gouv.fr/v2/attestations_sociales_acoss/${siren}",
+                12
             );
             $greffe = $this->autoCompleteUtils->makeGetRequest(
                 $client,

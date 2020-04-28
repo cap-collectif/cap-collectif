@@ -11,10 +11,8 @@ class AutoCompleteFromIdQueryResolver implements ResolverInterface
     private $apiToken;
     private $autocompleteUtils;
 
-    public function __construct(
-        APIEnterpriseAutoCompleteUtils $autoCompleteUtils,
-        $apiToken
-    ) {
+    public function __construct(APIEnterpriseAutoCompleteUtils $autoCompleteUtils, $apiToken)
+    {
         $this->autocompleteUtils = $autoCompleteUtils;
         $this->apiToken = $apiToken;
     }
@@ -29,7 +27,8 @@ class AutoCompleteFromIdQueryResolver implements ResolverInterface
 
         $assoc = $this->autocompleteUtils->makeGetRequest(
             $client,
-            "https://entreprise.api.gouv.fr/v2/associations/${assoId}"
+            "https://entreprise.api.gouv.fr/v2/associations/${assoId}",
+            12
         );
         $assoc = $this->autocompleteUtils->accessRequestObjectSafely($assoc)['association'];
 
