@@ -1,14 +1,10 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
-import IntlProvider from './IntlProvider';
+import Providers from './Providers';
 import EventPage from '../components/Event/EventPage';
 
 export default (props: Object) => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
+  <Providers>
       <EventPage {...props} />
-    </IntlProvider>
-  </Provider>
+    </Providers>
 );

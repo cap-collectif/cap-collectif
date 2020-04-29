@@ -1,8 +1,6 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
-import IntlProvider from './IntlProvider';
+import Providers from './Providers';
 import ProposalStepPage from '../components/Page/ProposalStepPage';
 
 type Props = {|
@@ -11,15 +9,11 @@ type Props = {|
 |};
 
 const mainNode = (props: Props) => {
-  const store = ReactOnRails.getStore('appStore');
-
   return (
-    <Provider store={store}>
-      <IntlProvider timeZone={window.timeZone}>
-        {/* $FlowFixMe  */}
-        <ProposalStepPage {...props} />
-      </IntlProvider>
-    </Provider>
+    <Providers>
+      {/* $FlowFixMe  */}
+      <ProposalStepPage {...props} />
+    </Providers>
   );
 };
 

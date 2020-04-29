@@ -77,6 +77,7 @@ class FeaturesCategoryResolver
                     'login_paris',
                     'unstable__admin_editor',
                     'unstable__analysis',
+                    'report_browers_errors_to_sentry',
                     'http_redirects',
                 ]
             ]

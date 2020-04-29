@@ -59,6 +59,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
             "projects_form": false,
             "read_more": false,
             "registration": false,
+            "report_browers_errors_to_sentry": false,
             "reporting": false,
             "restrict_connection": false,
             "restrict_registration_via_email_domain": false,

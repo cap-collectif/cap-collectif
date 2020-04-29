@@ -1,10 +1,7 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
 import { QueryRenderer, graphql } from 'react-relay';
-
-import IntlProvider from './IntlProvider';
+import Providers from './Providers';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import ContactAdminPage from '../components/Admin/Contact/ContactAdminPage';
@@ -28,18 +25,16 @@ const renderContactAdminPage = ({
 };
 
 export default () => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query ContactAdminPageAppQuery {
-            ...ContactAdminPage_query
-          }
-        `}
-        variables={{}}
-        render={renderContactAdminPage}
-      />
-    </IntlProvider>
-  </Provider>
+  <Providers>
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query ContactAdminPageAppQuery {
+          ...ContactAdminPage_query
+        }
+      `}
+      variables={{}}
+      render={renderContactAdminPage}
+    />
+  </Providers>
 );

@@ -1,9 +1,7 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
 import { graphql, QueryRenderer } from 'react-relay';
-import IntlProvider from './IntlProvider';
+import Providers from './Providers';
 import RegistrationAdminPage from '../components/Admin/RegistrationAdminPage';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
@@ -27,18 +25,16 @@ const renderRegistrationAdminPage = ({
 };
 
 export default () => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query RegistrationAdminAppQuery {
-            ...RegistrationAdminPage_query
-          }
-        `}
-        variables={{}}
-        render={renderRegistrationAdminPage}
-      />
-    </IntlProvider>
-  </Provider>
+  <Providers>
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query RegistrationAdminAppQuery {
+          ...RegistrationAdminPage_query
+        }
+      `}
+      variables={{}}
+      render={renderRegistrationAdminPage}
+    />
+  </Providers>
 );

@@ -8,6 +8,7 @@ twig:
         - 'CapcoAppBundle:Form:ckeditor_widget.html.twig'
     globals:
         instanceName: '%instance_name%'
+        sentryDsn: '%sentry_dsn%'
         defaultLocale: '%locale%'
         locales: '%locales%'
         facebook_app_id: '%facebook_app_id%'

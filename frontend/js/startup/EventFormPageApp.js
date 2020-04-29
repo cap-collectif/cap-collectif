@@ -1,11 +1,9 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql } from 'react-relay';
-import IntlProvider from './IntlProvider';
 import EventFormPage from '../components/Event/Form/EventFormPage';
+import Providers from './Providers';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type {
   EventFormPageAppQueryResponse,
@@ -19,8 +17,7 @@ type Props = {|
 |};
 
 export default ({ eventId, isAuthenticated }: Props) => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
+  <Providers>
       <QueryRenderer
         environment={environment}
         query={graphql`
@@ -58,6 +55,5 @@ export default ({ eventId, isAuthenticated }: Props) => (
           );
         }}
       />
-    </IntlProvider>
-  </Provider>
+    </Providers>
 );

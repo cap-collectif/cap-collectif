@@ -1,14 +1,10 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
-import IntlProvider from './IntlProvider';
+import Providers from './Providers';
 import ProjectTrashComment, { type Props } from '../components/Project/ProjectTrashComment';
 
 export default (props: Props) => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
-      <ProjectTrashComment {...props} />
-    </IntlProvider>
-  </Provider>
+  <Providers>
+    <ProjectTrashComment {...props} />
+  </Providers>
 );

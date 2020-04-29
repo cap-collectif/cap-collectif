@@ -1,14 +1,10 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
-import IntlProvider from './IntlProvider';
+import Providers from './Providers';
 import MapAdminPage from '../components/User/Admin/MapAdminPage';
 
 export default (props: {}) => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
+  <Providers>
       <MapAdminPage {...props} />
-    </IntlProvider>
-  </Provider>
+    </Providers>
 );

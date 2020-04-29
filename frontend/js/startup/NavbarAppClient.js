@@ -1,9 +1,8 @@
 /* @flow */
 import React from 'react';
-import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import { ThemeProvider } from 'styled-components';
-import IntlProvider from './IntlProvider';
+import Providers from './Providers';
 import Navbar from '../components/Navbar/Navbar';
 import NavbarRight from '../components/Navbar/NavbarRight';
 
@@ -21,13 +20,11 @@ const NavbarAppClient = (props: Object) => {
     mainNavbarTextActive: state.default.parameters['color.main_menu.text_active'] || '#555',
   };
   return (
-    <Provider store={store}>
-      <IntlProvider>
-        <ThemeProvider theme={theme}>
-          <Navbar {...props} contentRight={<NavbarRight currentLanguage={currentLanguage} />} />
-        </ThemeProvider>
-      </IntlProvider>
-    </Provider>
+    <Providers>
+      <ThemeProvider theme={theme}>
+        <Navbar {...props} contentRight={<NavbarRight currentLanguage={currentLanguage} />} />
+      </ThemeProvider>
+    </Providers>
   );
 };
 export default NavbarAppClient;

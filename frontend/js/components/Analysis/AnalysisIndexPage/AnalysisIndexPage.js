@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { QueryRenderer, graphql } from 'react-relay';
-import environment, { graphqlError } from '~/createRelayEnvironment';
+import ApiError from '~ui/ApiError';
+import environment from '~/createRelayEnvironment';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
 import ScrollToTop from '~/components/Utils/ScrollToTop';
@@ -47,7 +48,7 @@ export const renderComponent = ({
   ...ReactRelayReadyState,
   props: ?AnalysisIndexPageQueryResponse,
 }) => {
-  if (error) return graphqlError;
+  if (error) return <ApiError />;
 
   if (props) {
     const { viewerAssignedProjectsToAnalyse: projects, defaultUsers } = props;
@@ -93,7 +94,7 @@ export const renderComponent = ({
       );
     }
 
-    return graphqlError;
+    return <ApiError />;
   }
   return <Loader />;
 };

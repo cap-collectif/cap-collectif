@@ -1,8 +1,6 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
-import IntlProvider from './IntlProvider';
+import Providers from './Providers';
 import ProjectsList from '../components/Project/List/ProjectsList';
 
 type Props = {|
@@ -14,9 +12,7 @@ type Props = {|
 |};
 
 export default (props: Props) => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
-      <ProjectsList {...props} />
-    </IntlProvider>
-  </Provider>
+  <Providers>
+    <ProjectsList {...props} />
+  </Providers>
 );

@@ -106,7 +106,7 @@ import FontAdminPageApp from './startup/FontAdminPageApp';
 import EventPageHeaderButtonsApp from './startup/EventPageHeaderButtonsApp';
 import CalendarApp from './startup/CalendarApp';
 import EngagementListApp from './startup/EngagementListApp';
-import LanguageButtonApp from "~/startup/LanguageButtonApp";
+import LanguageButtonApp from '~/startup/LanguageButtonApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {

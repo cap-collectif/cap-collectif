@@ -62,6 +62,7 @@ class Manager
         'unstable__admin_editor',
         'unstable__analysis',
         'http_redirects',
+        'report_browers_errors_to_sentry',
     ];
 
     protected $context;

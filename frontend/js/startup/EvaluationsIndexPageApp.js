@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
-import { Provider, connect } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
-import IntlProvider from './IntlProvider';
+import { connect } from 'react-redux';
+import Providers from './Providers';
 import type { GlobalState } from '~/types';
 import AlertBoxApp from '~/startup/AlertBoxApp';
 import EvaluationsIndexPage from '~/components/Evaluation/EvaluationsIndexPage';
@@ -28,11 +27,9 @@ const SwitchAnalysisAndLegacyEvaluationContainer = connect(mapStateToProps)(
 );
 
 const EvaluationsIndexPageApp = (props: Object) => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
-      <SwitchAnalysisAndLegacyEvaluationContainer {...props} />
-    </IntlProvider>
-  </Provider>
+  <Providers>
+    <SwitchAnalysisAndLegacyEvaluationContainer {...props} />
+  </Providers>
 );
 
 export default EvaluationsIndexPageApp;

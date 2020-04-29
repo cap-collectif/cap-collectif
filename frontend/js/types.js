@@ -81,53 +81,10 @@ export type FeatureToggles = {
   unstable__multilangue: ?boolean,
   display_pictures_in_event_list: ?boolean,
   unstable__analysis: ?boolean,
+  report_browers_errors_to_sentry: ?boolean,
 };
 
-export type FeatureToggle =
-  | 'blog'
-  | 'calendar'
-  | 'captcha'
-  | 'consent_external_communication'
-  | 'consent_internal_communication'
-  | 'restrict_registration_via_email_domain'
-  | 'login_facebook'
-  | 'login_gplus'
-  | 'login_saml'
-  | 'login_paris'
-  | 'members_list'
-  | 'newsletter'
-  | 'privacy_policy'
-  | 'profiles'
-  | 'projects_form'
-  | 'project_trash'
-  | 'search'
-  | 'share_buttons'
-  | 'shield_mode'
-  | 'registration'
-  | 'phone_confirmation'
-  | 'reporting'
-  | 'themes'
-  | 'districts'
-  | 'user_type'
-  | 'votes_evolution'
-  | 'export'
-  | 'server_side_rendering'
-  | 'new_feature_questionnaire_result'
-  | 'zipcode_at_register'
-  | 'consultation_plan'
-  | 'display_map'
-  | 'sso_by_pass_auth'
-  | 'login_franceconnect'
-  | 'allow_users_to_propose_events'
-  | 'secure_password'
-  | 'restrict_connection'
-  | 'list_sso'
-  | 'external_project'
-  | 'app_news'
-  | 'unstable__admin_editor'
-  | 'unstable__multilangue'
-  | 'display_pictures_in_event_list'
-  | 'unstable__analysis';
+export type FeatureToggle = $Keys<FeatureToggles>;
 
 export type Action =
   | ProposalAction

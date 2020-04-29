@@ -43,7 +43,8 @@ export type State = {|
   +ssoList: Array<ReduxStoreSSOConfiguration>,
 |};
 
-export const features = {
+export const features: FeatureToggles = {
+  report_browers_errors_to_sentry: false,
   login_saml: false,
   login_paris: false,
   disconnect_openid: false,

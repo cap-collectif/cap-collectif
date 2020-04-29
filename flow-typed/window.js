@@ -202,6 +202,7 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   __RELAY_DEVTOOLS_HOOK__: any;
   __REDUX_DEVTOOLS_EXTENSION__: any;
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: typeof compose;
+  sentryDsn?: ?string;
 
   // hack to avoid error flow because of react-beautiful-dnd
   Element: any;

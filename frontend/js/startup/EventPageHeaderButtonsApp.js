@@ -1,10 +1,8 @@
 // @flow
 import React from 'react';
-import { Provider } from 'react-redux';
-import ReactOnRails from 'react-on-rails';
 import { QueryRenderer, graphql } from 'react-relay';
+import Providers from './Providers';
 import environment, { graphqlError } from '../createRelayEnvironment';
-import IntlProvider from './IntlProvider';
 import EventPageHeaderButtons from '../components/Event/EventPageHeaderButtons';
 import type {
   EventPageHeaderButtonsAppQueryResponse,
@@ -17,8 +15,7 @@ type Props = {|
 |};
 
 export default ({ eventId, isAuthenticated }: Props) => (
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider>
+  <Providers>
       <QueryRenderer
         environment={environment}
         query={graphql`
@@ -46,6 +43,5 @@ export default ({ eventId, isAuthenticated }: Props) => (
           return null;
         }}
       />
-    </IntlProvider>
-  </Provider>
+    </Providers>
 );
