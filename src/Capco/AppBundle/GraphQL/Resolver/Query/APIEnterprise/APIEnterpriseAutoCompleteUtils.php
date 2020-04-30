@@ -30,6 +30,10 @@ class APIEnterpriseAutoCompleteUtils
             return null;
         }
 
+        if (200 !== $response->getStatusCode()) {
+            return null;
+        }
+
         try {
             // casts the response JSON contents to a PHP array
             return $response->toArray();

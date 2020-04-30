@@ -87,6 +87,10 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             //We should have at least a match here.
             $this->logger->warning('This siren does not match any entity.');
 
+            // Wait requests to be done, idk why this is necessary…
+            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe);
+            $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
+
             return [
                 'type' => $type,
                 'availableSirenSituation' => false,
