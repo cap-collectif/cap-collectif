@@ -39,6 +39,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $dgfip = null;
         $acoss = null;
         $greffe = null;
+        $kbis = null;
         $documentAsso = null;
         $basePath = sprintf('%s/public/export/', $this->rootDir);
         $id = $args->offsetGet('id');
@@ -46,7 +47,6 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $docs = [];
         $cacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY;
         $visibilityCacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY;
-        $kbis = null;
 
         if (self::USE_CACHE && $this->cache->hasItem($visibilityCacheKey)) {
             return $this->cache->getItem($visibilityCacheKey)->get();
@@ -55,6 +55,29 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,
         ]);
+
+        // Orga public can return early
+        if (APIEnterpriseTypeResolver::PUBLIC_ORGA === $type) {
+            $siren = substr($id, 0, 9);
+            $greffe = $this->autoCompleteUtils->makeGetRequest(
+                $client,
+                "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}"
+            );
+            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe)
+                ? ($greffe = json_encode($greffe))
+                : null;
+            $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis");
+
+            $this->autoCompleteUtils->saveInCache($cacheKey, [
+                'kbis' => $kbis,
+            ]);
+            $docs = [
+                'availableKbis' => isset($kbis),
+            ];
+            $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
+
+            return $docs;
+        }
 
         if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
             $dgfip = $this->autoCompleteUtils->makeGetRequest(
@@ -86,27 +109,6 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 $client,
                 "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}"
             );
-        }
-        if (APIEnterpriseTypeResolver::PUBLIC_ORGA === $type) {
-            $siren = substr($id, 0, 9);
-            $greffe = $this->autoCompleteUtils->makeGetRequest(
-                $client,
-                "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}"
-            );
-            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe)
-                ? ($greffe = json_encode($greffe))
-                : null;
-            $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis");
-
-            $this->autoCompleteUtils->saveInCache($cacheKey, [
-                'kbis' => $kbis,
-            ]);
-            $docs = [
-                'availableKbis' => isset($kbis),
-            ];
-            $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
-
-            return $docs;
         }
 
         //If the request returns an exception, it will be thrown when accessing the data

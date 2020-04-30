@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise;
 
 use Capco\AppBundle\Cache\RedisCache;
-use RuntimeException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -32,8 +31,9 @@ class APIEnterpriseAutoCompleteUtils
         }
 
         try {
+            // casts the response JSON contents to a PHP array
             return $response->toArray();
-        } catch (\Exception $e) {
+        } catch (\RuntimeException $e) {
             return null;
         }
     }
@@ -49,7 +49,7 @@ class APIEnterpriseAutoCompleteUtils
                 'query' => self::BODY,
                 'timeout' => $timeout,
             ]);
-        } catch (RuntimeException $e) {
+        } catch (\RuntimeException $e) {
             return null;
         }
     }

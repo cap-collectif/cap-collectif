@@ -6,7 +6,6 @@ use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use RuntimeException;
 
 class APIEnterpriseTypeResolver implements ResolverInterface
 {
@@ -62,6 +61,6 @@ class APIEnterpriseTypeResolver implements ResolverInterface
                 return self::PUBLIC_ORGA;
         }
 
-        throw new RuntimeException('Unknown type of API Enterprise');
+        throw new \RuntimeException('Unknown type of API Enterprise');
     }
 }

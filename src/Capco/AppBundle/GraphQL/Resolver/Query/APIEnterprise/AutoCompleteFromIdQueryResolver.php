@@ -30,13 +30,23 @@ class AutoCompleteFromIdQueryResolver implements ResolverInterface
             "https://entreprise.api.gouv.fr/v2/associations/${assoId}",
             12
         );
-        $assoc = $this->autocompleteUtils->accessRequestObjectSafely($assoc)['association'];
+        $assoc = $this->autocompleteUtils->accessRequestObjectSafely($assoc);
+
+        if (!$assoc) {
+            return [
+                'type' => APIEnterpriseTypeResolver::ASSOCIATION,
+                'corporateName' => '',
+                'corporateAddress' => '',
+            ];
+        }
+
+        $assocData = $assoc['association'];
 
         return [
             'type' => APIEnterpriseTypeResolver::ASSOCIATION,
-            'corporateName' => $assoc['titre'] ?? '',
-            'corporateAddress' => isset($assoc['adresse_siege'])
-                ? $this->autocompleteUtils->formatAddressFromJSON($assoc['adresse_siege'])
+            'corporateName' => $assocData['titre'] ?? '',
+            'corporateAddress' => isset($assocData['adresse_siege'])
+                ? $this->autocompleteUtils->formatAddressFromJSON($assocData['adresse_siege'])
                 : '',
         ];
     }
