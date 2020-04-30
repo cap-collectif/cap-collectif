@@ -185,8 +185,8 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                         $docInfo['prefectureReceiptConfirm']
                     );
                     // Statuts en vigueur datés et signés
-                    $values['responses'][40]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][40]['medias'],
+                    $values['responses'][41]['medias'] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][41]['medias'],
                         $docInfo['status']
                     );
                 }

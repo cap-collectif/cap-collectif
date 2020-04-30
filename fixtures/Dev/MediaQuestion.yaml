@@ -97,19 +97,20 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         hidden: true
     mediaquestionIdfProjetLocalAssociationRna3:
         id: 130
-        title: Statuts en vigueur datés et signés
-        private: true
-        required: true
-        type: 7 # media
-        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationRna4'
-        hidden: true
-    mediaquestionIdfProjetLocalAssociationRna4:
-        id: 131
         title: RIB au nom de la raison sociale et à l'adresse du siège social
         private: true
         required: true
         type: 7 # media
+        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationRna4'
+        hidden: false
+    mediaquestionIdfProjetLocalAssociationRna4:
+        id: 131
+        title: Statuts en vigueur datés et signés
+        private: true
+        required: true
+        type: 7 # media
         alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalAssociationRna5'
+        hidden: true
     mediaquestionIdfProjetLocalAssociationRna5:
         id: 132
         title: Charte régionale des valeurs de la République et de la laïcité signée par le représentant légal

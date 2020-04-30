@@ -213,7 +213,7 @@ export const dispatchValuesToForm = (
   }> = [
     { questionNumber: 38, value: obj.availableCompositionCA },
     { questionNumber: 39, value: obj.availablePrefectureReceiptConfirm },
-    { questionNumber: 40, value: obj.availableStatus },
+    { questionNumber: 41, value: obj.availableStatus },
   ];
 
   const docEnterMapping: Array<{ responseNumber?: number, questionNumber?: number, value: any }> = [
