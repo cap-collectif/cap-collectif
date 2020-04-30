@@ -25,12 +25,12 @@ class AutoCompleteFromIdQueryResolver implements ResolverInterface
             'auth_bearer' => $this->apiToken,
         ]);
 
-        $assoc = $this->autocompleteUtils->makeGetRequest(
+        $assocResponse = $this->autocompleteUtils->makeGetRequest(
             $client,
             "https://entreprise.api.gouv.fr/v2/associations/${assoId}",
             12
         );
-        $assoc = $this->autocompleteUtils->accessRequestObjectSafely($assoc);
+        $assoc = $this->autocompleteUtils->accessRequestObjectSafely($assocResponse);
 
         if (!$assoc) {
             return [

@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise;
 
 use Capco\AppBundle\Cache\RedisCache;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 
 class APIEnterpriseAutoCompleteUtils
 {
@@ -30,14 +32,14 @@ class APIEnterpriseAutoCompleteUtils
             return null;
         }
 
-        if (200 !== $response->getStatusCode()) {
-            return null;
-        }
-
         try {
+            if (200 !== $response->getStatusCode()) {
+                return null;
+            }
+
             // casts the response JSON contents to a PHP array
             return $response->toArray();
-        } catch (\RuntimeException $e) {
+        } catch (TransportExceptionInterface | ClientExceptionInterface $e) {
             return null;
         }
     }
@@ -53,7 +55,7 @@ class APIEnterpriseAutoCompleteUtils
                 'query' => self::BODY,
                 'timeout' => $timeout,
             ]);
-        } catch (\RuntimeException $e) {
+        } catch (TransportExceptionInterface | ClientExceptionInterface $e) {
             return null;
         }
     }

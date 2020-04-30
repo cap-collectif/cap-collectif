@@ -10,7 +10,7 @@ import type {
 import stripHtml from '~/utils/stripHtml';
 import formatResponses from '~/utils/form/formatResponses';
 import type { FormattedResponse } from '~/utils/form/formatResponses';
-import { checkOnlyNumbers, checkSiret } from '~/services/Validator';
+import { checkOnlyNumbers, checkSiret, checkRNA } from '~/services/Validator';
 
 const getResponseNumber = (value: ?string | ?Array<string>, otherValue: ?string) => {
   if (Array.isArray(value) && value.length > 0) {
@@ -34,12 +34,18 @@ export const validateResponses = (
   const formattedResponses: Array<FormattedResponse> = formatResponses(questions, responses);
 
   const responsesError = formattedResponses.map((formattedResponse: FormattedResponse) => {
-    const { idQuestion, type, required, validationRule, value, otherValue, hidden } = formattedResponse;
+    const {
+      idQuestion,
+      type,
+      required,
+      validationRule,
+      value,
+      otherValue,
+      hidden,
+    } = formattedResponse;
 
     // required
-    if (required &&!isDraft
-      && !hidden
-    ) {
+    if (required && !isDraft && !hidden) {
       // no value
       if (
         !value || // default
@@ -50,8 +56,12 @@ export const validateResponses = (
         return { idQuestion, value: `${className}.constraints.field_mandatory` };
       }
 
-      if (type === 'siren' && (!value || (typeof value === 'string' && !checkSiret(value)))) {
-        return { idQuestion, value: `please-enter-a-siren` };
+      if (type === 'siret' && (!value || (typeof value === 'string' && !checkSiret(value)))) {
+        return { idQuestion, value: `please-enter-a-siret` };
+      }
+
+      if (type === 'rna' && (!value || (typeof value === 'string' && !checkRNA(value)))) {
+        return { idQuestion, value: `please-enter-a-rna` };
       }
     }
 
