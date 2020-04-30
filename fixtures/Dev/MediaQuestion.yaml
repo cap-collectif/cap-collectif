@@ -89,7 +89,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         hidden: true
     mediaquestionIdfProjetLocalAssociationRna2:
         id: 129
-        title: Statuts en vigueur datés et signés
+        title: Récépissé de la déclaration en préfecture (greffe des associations)
         private: true
         required: true
         type: 7 # media
@@ -97,7 +97,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         hidden: true
     mediaquestionIdfProjetLocalAssociationRna3:
         id: 130
-        title: Récépissé de la déclaration en préfecture (greffe des associations)
+        title: Statuts en vigueur datés et signés
         private: true
         required: true
         type: 7 # media
