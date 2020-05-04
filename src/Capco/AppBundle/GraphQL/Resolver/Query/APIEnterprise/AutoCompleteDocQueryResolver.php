@@ -91,7 +91,8 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             );
             $documentAsso = $this->autoCompleteUtils->makeGetRequest(
                 $client,
-                "https://entreprise.api.gouv.fr/v2/documents_associations/${id}"
+                "https://entreprise.api.gouv.fr/v2/documents_associations/${id}",
+                12
             );
         }
         if (APIEnterpriseTypeResolver::ENTERPRISE === $type) {
