@@ -18,9 +18,11 @@ function test_mysqldatabase_uptodate {
 
 echo "[$(date -u)][CRONTAB] Waiting for php-fpm and MySQL..."
 # Wait till mysql, php-fpm are ready
+timeout=1
 until ( test_phpfpm && test_mysqldatabase && test_mysqldatabase_uptodate )
 do
-  sleep 1
+    sleep $timeout
+    timeout=$(( $timeout + 1 ))
 done
 
 # remove write permission for (g)roup and (o)ther (required by cron)

@@ -22,14 +22,19 @@ chown -R capco:capco var/logs
 chown -R capco:capco var/log
 echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and, log/ logs/!"
 
+timeout=1;
 echo "[$(date -u)][PHP-FPM] Waiting for MySQL..."
 while ! (mysqladmin ping --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD})
-  do sleep 0.1
+do
+    sleep $timeout
+    timeout=$(( $timeout + 1 ))
 done
 
 echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
 while ! (rabbitmqctl status > /dev/null)
-  do sleep 0.1
+do
+    sleep $timeout
+    timeout=$(( $timeout + 1 ))
 done
 
 # When we have fresh instance, capco vhost is not created
@@ -58,7 +63,7 @@ database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
     echo "[$(date -u)][PHP-FPM] Cleaning ElasticSearch index..."
     while ! curl http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200 > /dev/null 2>&1;
-      do sleep 0.1
+      do sleep $timeout
     done
     curl -XDELETE http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200/_all > /dev/null 2>&1
     echo "[$(date -u)][PHP-FPM] Creating a new database with production data..."

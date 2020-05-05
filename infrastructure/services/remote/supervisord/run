@@ -11,15 +11,20 @@ function test_mysqldatabase {
   mysqlshow --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=$SYMFONY_DATABASE_PASSWORD ${SYMFONY_DATABASE_NAME:-symfony} > /dev/null
 }
 
+timeout=1;
 echo "[$(date -u)][SUPERVISORD] Waiting for php-fpm..."
 while [ ! -f /var/run/php7.4-fpm.pid ] > /dev/null 2>&1;
-  do sleep 1
+do
+    sleep $timeout
+    timeout=$(( $timeout + 1 ))
 done
+
 
 # Wait till database is up to date
 until ( test_mysqldatabase && test_mysqldatabase_uptodate )
 do
-  sleep 1
+    sleep $timeout
+    timeout=$(( $timeout + 1 ))
 done
 
 echo "[$(date -u)][SUPERVISORD] Started!"
