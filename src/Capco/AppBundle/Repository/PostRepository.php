@@ -166,10 +166,9 @@ class PostRepository extends EntityRepository
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
             $qb
-                ->innerJoin('p.projects', 'c', 'WITH', 'c.visibility = :visibility')
+                ->innerJoin('p.projects', 'c')
                 ->andWhere('c.slug = :project')
-                ->setParameter('project', $projectSlug)
-                ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+                ->setParameter('project', $projectSlug);
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
