@@ -58,10 +58,11 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             'auth_bearer' => $this->apiToken,
         ]);
 
-        //We place it here to trigger the request immediately
+        // We place it here to trigger the request immediately
         $enterprise = $this->autoCompleteUtils->makeGetRequest(
             $client,
-            "https://entreprise.api.gouv.fr/v2/entreprises/${siren}"
+            "https://entreprise.api.gouv.fr/v2/entreprises/${siren}",
+            12
         );
 
         if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
@@ -72,8 +73,9 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         }
 
         if (
-            APIEnterpriseTypeResolver::ENTERPRISE === $type ||
-            APIEnterpriseTypeResolver::ASSOCIATION === $type
+            APIEnterpriseTypeResolver::ENTERPRISE === $type
+            // ||
+            // APIEnterpriseTypeResolver::ASSOCIATION === $type
         ) {
             $exercices = $this->autoCompleteUtils->makeGetRequest(
                 $client,
@@ -88,8 +90,14 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             $this->logger->warning('This siren does not match any entity.');
 
             // Wait requests to be done, idk why this is necessary…
-            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe);
-            $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
+            $this->autoCompleteUtils->cancelRequest($greffe);
+            $this->autoCompleteUtils->cancelRequest($exercices);
+            // $greffe = null;
+            // $exercices = null;
+            // $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe);
+            // if (APIEnterpriseTypeResolver::ENTERPRISE === $type) {
+            //     $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
+            // }
 
             return [
                 'type' => $type,
@@ -148,27 +156,26 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             $greffe = isset($greffe) ? json_encode($greffe) : null;
             $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${siren}_kbis");
 
-            $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
-            $exercices = isset($exercices)
-                ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices'])
-                : null;
+            // $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
+            // $exercices = isset($exercices)
+            //     ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices'])
+            //     : null;
 
             $this->autoCompleteUtils->saveInCache(
                 $cacheKey,
                 array_merge($basicInfo, [
                     'kbis' => $kbis,
-                    'turnover' => $exercices ?? '',
                     'sirenSituation' => $sirenSituPDF,
                 ])
             );
 
-            $apiResponse = array_merge($basicInfo, [
-                'availableKbis' => isset($kbis),
-                'availableTurnover' => isset($exercices),
-            ]);
-            $this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $apiResponse);
+            // $apiResponse = array_merge($basicInfo, [
+            //     'availableKbis' => isset($kbis),
+            //     'availableTurnover' => !!isset($exercices),
+            // ]);
+            //$this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $apiResponse);
 
-            return $apiResponse;
+            return $basicInfo;
         }
 
         if (APIEnterpriseTypeResolver::ENTERPRISE === $type) {
@@ -185,7 +192,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
                 ])
             );
             $apiResponse = array_merge($basicInfo, [
-                'availableTurnover' => isset($exercices),
+                'availableTurnover' => (bool) isset($exercices),
             ]);
             $this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $apiResponse);
 

@@ -17,12 +17,6 @@ type APIEnterpriseAssociation {
 
   """The RIB of the enterprise."""
   availableSirenSituation: Boolean
-
-  """The RIB of the association"""
-  availableTurnover: Boolean
-
-  """The KBIS file of the association"""
-  availableKbis: Boolean
 }
 
 """Doc associated with the association."""

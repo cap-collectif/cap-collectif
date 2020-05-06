@@ -2,11 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise;
 
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisCache;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Component\HttpClient\Exception\ServerException;
 
 class APIEnterpriseAutoCompleteUtils
 {
@@ -20,15 +22,30 @@ class APIEnterpriseAutoCompleteUtils
         'object' => 'budgetparticipatif',
     ];
     private $cache;
+    private $logger;
 
-    public function __construct(RedisCache $cache)
+    public function __construct(RedisCache $cache, LoggerInterface $logger)
     {
         $this->cache = $cache;
+        $this->logger = $logger;
+    }
+
+    public function cancelRequest(?ResponseInterface $response): void
+    {
+        try {
+            if ($response) {
+                $response->cancel();
+            }
+            unset($response);
+        } catch (TransportExceptionInterface | ClientExceptionInterface | ServerException $e) {
+        }
     }
 
     public function accessRequestObjectSafely(?ResponseInterface $response): ?array
     {
         if (!isset($response)) {
+            $this->logger->warning('API entreprise accessing null response.');
+
             return null;
         }
 
@@ -39,7 +56,9 @@ class APIEnterpriseAutoCompleteUtils
 
             // casts the response JSON contents to a PHP array
             return $response->toArray();
-        } catch (TransportExceptionInterface | ClientExceptionInterface $e) {
+        } catch (TransportExceptionInterface | ClientExceptionInterface | ServerException $e) {
+            $this->logger->error('API entreprise error. ' . $e->getMessage());
+
             return null;
         }
     }
@@ -55,7 +74,9 @@ class APIEnterpriseAutoCompleteUtils
                 'query' => self::BODY,
                 'timeout' => $timeout,
             ]);
-        } catch (TransportExceptionInterface | ClientExceptionInterface $e) {
+        } catch (TransportExceptionInterface | ClientExceptionInterface | ServerException $e) {
+            $this->logger->error('API entreprise error. ' . $e->getMessage());
+
             return null;
         }
     }

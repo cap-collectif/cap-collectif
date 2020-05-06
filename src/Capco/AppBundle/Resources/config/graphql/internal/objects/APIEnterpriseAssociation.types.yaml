@@ -3,15 +3,9 @@ APIEnterpriseAssociation:
     inherits:
         - APIEnterpriseMandatoryFields
     config:
-        description: "An association."
+        description: 'An association.'
         name: APIEnterpriseAssociation
         fields:
             availableSirenSituation:
                 type: 'Boolean'
-                description: "The RIB of the enterprise."
-            availableTurnover:
-                type: 'Boolean'
-                description: "The RIB of the association"
-            availableKbis:
-                type: 'Boolean'
-                description: "The KBIS file of the association"
+                description: 'The RIB of the enterprise.'

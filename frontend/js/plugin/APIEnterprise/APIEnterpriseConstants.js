@@ -269,7 +269,6 @@ export const autocompleteFromId = graphql`
     apiEnterpriseAutocompleteFromId(id: $id) {
       corporateName
       corporateAddress
-      availableTurnover
     }
   }
 `;
@@ -284,7 +283,6 @@ export const autocompleteFromSiret = graphql`
         corporateName
         corporateAddress
         availableSirenSituation
-        availableTurnover
         legalRepresentative
         qualityRepresentative
       }
@@ -310,14 +308,12 @@ export const autocompleteFromSiret = graphql`
 export const fetchAPIDocuments = graphql`
   query APIEnterpriseConstants_fetchAssociationDocQuery($id: String!, $type: APIEnterpriseType!) {
     fetchAPIEnterpriseDocuments(id: $id, type: $type) {
-      ... on APIEnterpriseDocuments {
-        availableCompositionCA
-        availableStatus
-        availablePrefectureReceiptConfirm
-        availableFiscalRegulationAttestation
-        availableSocialRegulationAttestation
-        availableKbis
-      }
+      availableCompositionCA
+      availableStatus
+      availablePrefectureReceiptConfirm
+      availableFiscalRegulationAttestation
+      availableSocialRegulationAttestation
+      availableKbis
     }
   }
 `;
