@@ -56,7 +56,6 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             'auth_bearer' => $this->apiToken,
         ]);
 
-        // Orga public can return early
         if (APIEnterpriseTypeResolver::PUBLIC_ORGA === $type) {
             $siren = substr($id, 0, 9);
             $greffe = $this->autoCompleteUtils->makeGetRequest(
@@ -80,66 +79,13 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         }
 
         if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
-            $dgfip = $this->autoCompleteUtils->makeGetRequest(
-                $client,
-                "https://entreprise.api.gouv.fr/v2/attestations_fiscales_dgfip/${id}"
-            );
-            $acoss = $this->autoCompleteUtils->makeGetRequest(
-                $client,
-                "https://entreprise.api.gouv.fr/v2/attestations_sociales_acoss/${id}",
-                12
-            );
+            $rnaOrSiret = $id;
             $documentAsso = $this->autoCompleteUtils->makeGetRequest(
                 $client,
-                "https://entreprise.api.gouv.fr/v2/documents_associations/${id}",
-                12
+                "https://entreprise.api.gouv.fr/v2/documents_associations/${rnaOrSiret}",
+                17
             );
-        }
-        if (APIEnterpriseTypeResolver::ENTERPRISE === $type) {
-            $siren = substr($id, 0, 9);
-            $dgfip = $this->autoCompleteUtils->makeGetRequest(
-                $client,
-                "https://entreprise.api.gouv.fr/v2/attestations_fiscales_dgfip/${siren}"
-            );
-            $acoss = $this->autoCompleteUtils->makeGetRequest(
-                $client,
-                "https://entreprise.api.gouv.fr/v2/attestations_sociales_acoss/${siren}",
-                12
-            );
-            $greffe = $this->autoCompleteUtils->makeGetRequest(
-                $client,
-                "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}"
-            );
-        }
 
-        //If the request returns an exception, it will be thrown when accessing the data
-        $dgfip = $this->autoCompleteUtils->accessRequestObjectSafely($dgfip);
-        $acoss = $this->autoCompleteUtils->accessRequestObjectSafely($acoss);
-
-        $dgfip = $this->pdfGenerator->urlToPdf(
-            $dgfip['url'] ?? null,
-            $basePath,
-            "${id}_attestations_fiscales"
-        );
-        $acoss = $this->pdfGenerator->urlToPdf(
-            $acoss['url'] ?? null,
-            $basePath,
-            "${id}_attestations_sociales"
-        );
-
-        $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe)
-            ? json_encode($greffe)
-            : null;
-        $greffe = isset($greffe) ? json_encode($greffe) : null;
-        $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis");
-
-        $docs = array_merge($docs, [
-            'availableFiscalRegulationAttestation' => isset($dgfip),
-            'availableSocialRegulationAttestation' => isset($acoss),
-            'availableKbis' => isset($kbis),
-        ]);
-
-        if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
             $documentAsso = $this->autoCompleteUtils->accessRequestObjectSafely($documentAsso);
 
             $compo = null;
@@ -186,20 +132,64 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 'compositionCA' => $compo,
                 'status' => $status,
                 'prefectureReceiptConfirm' => $receipt,
-                'fiscalRegulationAttestation' => $dgfip,
-                'socialRegulationAttestation' => $acoss,
-                'kbis' => $kbis,
             ]);
-        } else {
+
+            $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
+
+            return $docs;
+        }
+
+        if (APIEnterpriseTypeResolver::ENTERPRISE === $type) {
+            $siren = substr($id, 0, 9);
+            $dgfip = $this->autoCompleteUtils->makeGetRequest(
+                $client,
+                "https://entreprise.api.gouv.fr/v2/attestations_fiscales_dgfip/${siren}"
+            );
+            $acoss = $this->autoCompleteUtils->makeGetRequest(
+                $client,
+                "https://entreprise.api.gouv.fr/v2/attestations_sociales_acoss/${siren}",
+                12
+            );
+            $greffe = $this->autoCompleteUtils->makeGetRequest(
+                $client,
+                "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}"
+            );
+            // If the request returns an exception, it will be thrown when accessing the data
+            $dgfip = $this->autoCompleteUtils->accessRequestObjectSafely($dgfip);
+            $acoss = $this->autoCompleteUtils->accessRequestObjectSafely($acoss);
+
+            $dgfip = $this->pdfGenerator->urlToPdf(
+                $dgfip['url'] ?? null,
+                $basePath,
+                "${id}_attestations_fiscales"
+            );
+            $acoss = $this->pdfGenerator->urlToPdf(
+                $acoss['url'] ?? null,
+                $basePath,
+                "${id}_attestations_sociales"
+            );
+
+            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe)
+                ? json_encode($greffe)
+                : null;
+            $greffe = isset($greffe) ? json_encode($greffe) : null;
+            $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis");
+
+            $docs = array_merge($docs, [
+                'availableFiscalRegulationAttestation' => isset($dgfip),
+                'availableSocialRegulationAttestation' => isset($acoss),
+                'availableKbis' => isset($kbis),
+            ]);
             //In this case, it is an enterprise
             $this->autoCompleteUtils->saveInCache($cacheKey, [
                 'fiscalRegulationAttestation' => $dgfip,
                 'socialRegulationAttestation' => $acoss,
                 'kbis' => $kbis,
             ]);
-        }
-        $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
 
-        return $docs;
+            $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
+
+            return $docs;
+        }
     }
 }

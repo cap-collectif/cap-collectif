@@ -41,7 +41,6 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
     {
         $siret = null;
         $exercices = null;
-        $greffe = null;
         $basePath = sprintf('%s/public/export/', $this->rootDir);
         $type = $args->offsetGet('type');
         $siret = $args->offsetGet('siret');
@@ -65,18 +64,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             12
         );
 
-        if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
-            $greffe = $this->autoCompleteUtils->makeGetRequest(
-                $client,
-                "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}"
-            );
-        }
-
-        if (
-            APIEnterpriseTypeResolver::ENTERPRISE === $type
-            // ||
-            // APIEnterpriseTypeResolver::ASSOCIATION === $type
-        ) {
+        if (APIEnterpriseTypeResolver::ENTERPRISE === $type) {
             $exercices = $this->autoCompleteUtils->makeGetRequest(
                 $client,
                 "https://entreprise.api.gouv.fr/v2/exercices/${siret}"
@@ -90,14 +78,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             $this->logger->warning('This siren does not match any entity.');
 
             // Wait requests to be done, idk why this is necessary…
-            $this->autoCompleteUtils->cancelRequest($greffe);
             $this->autoCompleteUtils->cancelRequest($exercices);
-            // $greffe = null;
-            // $exercices = null;
-            // $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe);
-            // if (APIEnterpriseTypeResolver::ENTERPRISE === $type) {
-            //     $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
-            // }
 
             return [
                 'type' => $type,
@@ -136,7 +117,10 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
                 : '',
         ];
 
-        if (APIEnterpriseTypeResolver::PUBLIC_ORGA === $type) {
+        if (
+            APIEnterpriseTypeResolver::ASSOCIATION === $type ||
+            APIEnterpriseTypeResolver::PUBLIC_ORGA === $type
+        ) {
             $this->autoCompleteUtils->saveInCache(
                 $cacheKey,
                 array_merge($basicInfo, [
@@ -145,35 +129,6 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             );
 
             $this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $basicInfo);
-
-            return $basicInfo;
-        }
-
-        if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
-            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe)
-                ? json_encode($greffe)
-                : null;
-            $greffe = isset($greffe) ? json_encode($greffe) : null;
-            $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${siren}_kbis");
-
-            // $exercices = $this->autoCompleteUtils->accessRequestObjectSafely($exercices);
-            // $exercices = isset($exercices)
-            //     ? $this->autoCompleteUtils->formatTurnoverFromJSON($exercices['exercices'])
-            //     : null;
-
-            $this->autoCompleteUtils->saveInCache(
-                $cacheKey,
-                array_merge($basicInfo, [
-                    'kbis' => $kbis,
-                    'sirenSituation' => $sirenSituPDF,
-                ])
-            );
-
-            // $apiResponse = array_merge($basicInfo, [
-            //     'availableKbis' => isset($kbis),
-            //     'availableTurnover' => !!isset($exercices),
-            // ]);
-            //$this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $apiResponse);
 
             return $basicInfo;
         }

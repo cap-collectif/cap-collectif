@@ -6,8 +6,8 @@ import cookie;
 backend default {
   .host = "localhost";
   .port = "8080";
-  .connect_timeout = 15s;
-  .between_bytes_timeout = 15s;
+  .connect_timeout = 20s;
+  .between_bytes_timeout = 20s;
 }
 
 acl invalidators {
