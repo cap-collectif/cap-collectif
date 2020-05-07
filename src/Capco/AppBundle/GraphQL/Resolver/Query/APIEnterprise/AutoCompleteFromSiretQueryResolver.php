@@ -43,7 +43,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         $type = $args->offsetGet('type');
         $siret = $args->offsetGet('siret');
         $siren = substr($siret, 0, 9);
-        $cacheKey = $siret . '_' . $type . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY;
+        $cacheKey = trim($siret) . '_' . $type . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY;
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,

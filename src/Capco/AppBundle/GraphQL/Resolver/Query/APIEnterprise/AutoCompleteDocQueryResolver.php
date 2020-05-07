@@ -42,7 +42,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $id = $args->offsetGet('id');
         $type = $args->offsetGet('type');
         $docs = [];
-        $cacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY;
+        $cacheKey = trim($id) . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY;
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,

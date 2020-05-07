@@ -106,7 +106,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
 
         if ($siret) {
             $mainInfoKey =
-                $siret .
+                trim($siret) .
                 '_' .
                 $type .
                 '_' .
@@ -149,7 +149,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             }
         }
         $docInfoKey =
-            ($siret ?? $rna) .
+            trim($siret ?? $rna) .
             '_' .
             $type .
             '_' .
