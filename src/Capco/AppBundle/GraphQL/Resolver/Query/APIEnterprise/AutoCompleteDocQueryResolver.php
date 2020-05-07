@@ -131,7 +131,8 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             $siren = substr($id, 0, 9);
             $dgfip = $this->autoCompleteUtils->makeGetRequest(
                 $client,
-                "https://entreprise.api.gouv.fr/v2/attestations_fiscales_dgfip/${siren}"
+                "https://entreprise.api.gouv.fr/v2/attestations_fiscales_dgfip/${siren}",
+                12
             );
             $acoss = $this->autoCompleteUtils->makeGetRequest(
                 $client,
