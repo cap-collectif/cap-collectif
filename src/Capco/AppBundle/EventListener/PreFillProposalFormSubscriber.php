@@ -115,9 +115,6 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                 $this->autoCompleteFromSiretQueryResolver->__invoke($args);
             }
             $mainInfo = $this->cache->getItem($mainInfoKey)->get();
-            if (!$mainInfo) {
-                throw new \RuntimeException('No main info !', 1);
-            }
 
             switch ($type) {
                 case APIEnterpriseTypeResolver::ASSOCIATION:
