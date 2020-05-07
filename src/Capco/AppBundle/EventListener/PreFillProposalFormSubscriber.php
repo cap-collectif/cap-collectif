@@ -39,6 +39,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     {
         if (empty($default)) {
             if (!$apiMediaId) {
+                // This will throw exception…
                 return null;
             }
 
@@ -118,6 +119,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                 $this->autoCompleteFromSiretQueryResolver->__invoke($args);
             }
             $mainInfo = $this->cache->getItem($mainInfoKey)->get();
+
             switch ($type) {
                 case APIEnterpriseTypeResolver::ASSOCIATION:
                     if ($siret) {
@@ -221,7 +223,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     public function prefillForm(FormEvent $event): void
     {
         $env = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if ('idf-bp-dedicated' === $env) {
+        if ('idf-bp-dedicated' === $env || 'dev' === $env) {
             // Warning: This will be called on every proposalForms
             $this->getAPIEnterpriseData($event);
         }

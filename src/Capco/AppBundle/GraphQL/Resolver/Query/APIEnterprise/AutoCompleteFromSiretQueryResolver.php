@@ -10,10 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class AutoCompleteFromSiretQueryResolver implements ResolverInterface
 {
-    public const AUTOCOMPLETE_SIRET_CACHE_KEY = 'AUTOCOMPLETE_SIRET_CACHE_KEY';
-    public const AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY = 'AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY';
+    public const AUTOCOMPLETE_SIRET_CACHE_KEY = 'AUTOCOMPLETE_SIRET_CACHE_KEY_V2';
 
-    public const USE_CACHE = false;
     private $apiToken;
     private $rootDir;
     private $pdfGenerator;
@@ -46,12 +44,6 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         $siret = $args->offsetGet('siret');
         $siren = substr($siret, 0, 9);
         $cacheKey = $siret . '_' . $type . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY;
-        $cacheVisibilityKey =
-            $siret . '_' . $type . '_' . self::AUTOCOMPLETE_SIRET_VISIBILITY_CACHE_KEY;
-
-        if (self::USE_CACHE && $this->cache->hasItem($cacheVisibilityKey)) {
-            return $this->cache->getItem($cacheVisibilityKey)->get();
-        }
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,
@@ -60,8 +52,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         // We place it here to trigger the request immediately
         $enterprise = $this->autoCompleteUtils->makeGetRequest(
             $client,
-            "https://entreprise.api.gouv.fr/v2/entreprises/${siren}",
-            12
+            "https://entreprise.api.gouv.fr/v2/entreprises/${siren}"
         );
 
         if (APIEnterpriseTypeResolver::ENTERPRISE === $type) {
@@ -128,8 +119,6 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
                 ])
             );
 
-            $this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $basicInfo);
-
             return $basicInfo;
         }
 
@@ -146,14 +135,12 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
                     'sirenSituation' => $sirenSituPDF,
                 ])
             );
-            $apiResponse = array_merge($basicInfo, [
+
+            return array_merge($basicInfo, [
                 'availableTurnover' => (bool) isset($exercices),
             ]);
-            $this->autoCompleteUtils->saveInCache($cacheVisibilityKey, $apiResponse);
-
-            return $apiResponse;
         }
 
-        return $basicInfo;
+        // return $basicInfo;
     }
 }

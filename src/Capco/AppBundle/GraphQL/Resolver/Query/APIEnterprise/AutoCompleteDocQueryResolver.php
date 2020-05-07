@@ -10,9 +10,6 @@ use Symfony\Component\HttpClient\HttpClient;
 class AutoCompleteDocQueryResolver implements ResolverInterface
 {
     public const AUTOCOMPLETE_DOC_CACHE_KEY = 'AUTOCOMPLETE_DOC_CACHE_KEY';
-    public const AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY = 'AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY';
-
-    public const USE_CACHE = false;
 
     private $pdfGenerator;
     private $apiToken;
@@ -46,11 +43,6 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $type = $args->offsetGet('type');
         $docs = [];
         $cacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY;
-        $visibilityCacheKey = $id . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_VISIBILITY_KEY;
-
-        if (self::USE_CACHE && $this->cache->hasItem($visibilityCacheKey)) {
-            return $this->cache->getItem($visibilityCacheKey)->get();
-        }
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,
@@ -70,12 +62,10 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             $this->autoCompleteUtils->saveInCache($cacheKey, [
                 'kbis' => $kbis,
             ]);
-            $docs = [
+
+            return [
                 'availableKbis' => isset($kbis),
             ];
-            $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
-
-            return $docs;
         }
 
         if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
@@ -83,7 +73,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
             $documentAsso = $this->autoCompleteUtils->makeGetRequest(
                 $client,
                 "https://entreprise.api.gouv.fr/v2/documents_associations/${rnaOrSiret}",
-                17
+                12
             );
 
             $documentAsso = $this->autoCompleteUtils->accessRequestObjectSafely($documentAsso);
@@ -133,8 +123,6 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 'status' => $status,
                 'prefectureReceiptConfirm' => $receipt,
             ]);
-
-            $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
 
             return $docs;
         }
@@ -186,8 +174,6 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 'socialRegulationAttestation' => $acoss,
                 'kbis' => $kbis,
             ]);
-
-            $this->autoCompleteUtils->saveInCache($visibilityCacheKey, $docs);
 
             return $docs;
         }

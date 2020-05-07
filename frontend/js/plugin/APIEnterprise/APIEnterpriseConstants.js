@@ -50,7 +50,7 @@ const dispatchFromApi = (
     const { responseNumber, value, questionNumber } = element;
     if (questionNumber != null && typeof questionNumber !== 'undefined') {
       // Check if is not available thanks to API
-      if (!value && questionNumber) {
+      if (!value) {
         // Ask for user to complete
         commitLocalUpdate(environment, store => {
           const question = store.get(questions[questionNumber].id);
@@ -73,23 +73,27 @@ const dispatchFromApi = (
     } else if (!onlyVisibility) {
       if (responseNumber) {
         const isModificable = isFieldModificableIfNoResult(responseNumber);
-        if ((Array.isArray(value) && value.length > 0 && value[0] != null) || value) {
+        if (!isModificable) return;
+        if (
+          (Array.isArray(value) && value.length > 0 && value[0] != null) ||
+          (value && value !== '')
+        ) {
           dispatch(change(formName, `responses.${responseNumber}.value`, value));
-          if (!isModificable) {
-            commitLocalUpdate(environment, store => {
-              const question = store.get(questions[responseNumber].id);
-              if (question) {
-                question.setValue(positiveResultMessage, 'description');
-                question.setValue('', 'helpText');
-              }
-            });
-          }
-        } else if (!isModificable) {
+          commitLocalUpdate(environment, store => {
+            const question = store.get(questions[responseNumber].id);
+            if (question) {
+              question.setValue(positiveResultMessage, 'description');
+              question.setValue('', 'helpText');
+              question.setValue(false, 'hidden');
+            }
+          });
+        } else {
           commitLocalUpdate(environment, store => {
             const question = store.get(questions[responseNumber].id);
             if (question) {
               question.setValue(negativeResultMessage, 'description');
               question.setValue('', 'helpText');
+              question.setValue(false, 'hidden');
             }
           });
         }
