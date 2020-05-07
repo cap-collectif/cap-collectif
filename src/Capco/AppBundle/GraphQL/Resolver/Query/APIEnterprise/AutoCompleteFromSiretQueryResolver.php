@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class AutoCompleteFromSiretQueryResolver implements ResolverInterface
 {
-    public const AUTOCOMPLETE_SIRET_CACHE_KEY = 'AUTOCOMPLETE_SIRET_CACHE_KEY_V2';
+    public const AUTOCOMPLETE_SIRET_CACHE_KEY = 'AUTOCOMPLETE_SIRET_CACHE_KEY_V3';
 
     private $apiToken;
     private $rootDir;
@@ -42,8 +42,8 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         $basePath = sprintf('%s/public/export/', $this->rootDir);
         $type = $args->offsetGet('type');
         $siret = $args->offsetGet('siret');
-        $siren = substr($siret, 0, 9);
-        $cacheKey = trim($siret) . '_' . $type . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY;
+        $siren = self::getSiren($siret);
+        $cacheKey = self::getCacheKey($siret, $type);
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,
@@ -142,5 +142,15 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
         }
 
         // return $basicInfo;
+    }
+
+    public static function getSiren(string $siret)
+    {
+        return substr(str_replace(' ', '', $siret), 0, 9);
+    }
+
+    public static function getCacheKey(string $siret, string $type)
+    {
+        return self::getSiren($siret) . '_' . $type . '_' . self::AUTOCOMPLETE_SIRET_CACHE_KEY;
     }
 }

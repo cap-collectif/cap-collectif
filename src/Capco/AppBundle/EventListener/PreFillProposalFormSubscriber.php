@@ -105,12 +105,8 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         $siret = !$rna ? $this->getSiret($values) : null;
 
         if ($siret) {
-            $mainInfoKey =
-                trim($siret) .
-                '_' .
-                $type .
-                '_' .
-                AutoCompleteFromSiretQueryResolver::AUTOCOMPLETE_SIRET_CACHE_KEY;
+            $mainInfoKey = AutoCompleteFromSiretQueryResolver::getCacheKey($siret, $type);
+            // Fallback in case not in redis
             if (!$this->cache->hasItem($mainInfoKey)) {
                 $args = new Argument([
                     'siret' => $siret,
@@ -119,6 +115,9 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                 $this->autoCompleteFromSiretQueryResolver->__invoke($args);
             }
             $mainInfo = $this->cache->getItem($mainInfoKey)->get();
+            if (!$mainInfo) {
+                throw new \RuntimeException('No main info !', 1);
+            }
 
             switch ($type) {
                 case APIEnterpriseTypeResolver::ASSOCIATION:
@@ -148,12 +147,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
                     break;
             }
         }
-        $docInfoKey =
-            trim($siret ?? $rna) .
-            '_' .
-            $type .
-            '_' .
-            AutoCompleteDocQueryResolver::AUTOCOMPLETE_DOC_CACHE_KEY;
+        $docInfoKey = AutoCompleteDocQueryResolver::getCacheKey($siret ?? $rna, $type);
         if (!$this->cache->hasItem($docInfoKey)) {
             $args = new Argument([
                 'id' => $siret ?? $rna,

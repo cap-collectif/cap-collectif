@@ -9,7 +9,7 @@ use Symfony\Component\HttpClient\HttpClient;
 
 class AutoCompleteDocQueryResolver implements ResolverInterface
 {
-    public const AUTOCOMPLETE_DOC_CACHE_KEY = 'AUTOCOMPLETE_DOC_CACHE_KEY';
+    public const AUTOCOMPLETE_DOC_CACHE_KEY = 'AUTOCOMPLETE_DOC_CACHE_KEY_V3';
 
     private $pdfGenerator;
     private $apiToken;
@@ -42,7 +42,7 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         $id = $args->offsetGet('id');
         $type = $args->offsetGet('type');
         $docs = [];
-        $cacheKey = trim($id) . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY;
+        $cacheKey = self::getCacheKey($id, $type);
 
         $client = HttpClient::create([
             'auth_bearer' => $this->apiToken,
@@ -177,5 +177,10 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
 
             return $docs;
         }
+    }
+
+    public static function getCacheKey(string $id, string $type): string
+    {
+        return str_replace(' ', '', $id) . '_' . $type . '_' . self::AUTOCOMPLETE_DOC_CACHE_KEY;
     }
 }
