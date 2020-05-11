@@ -1,8 +1,26 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
-import { MenuItem, Modal } from 'react-bootstrap';
+import { MenuItem, Modal, DropdownButton } from 'react-bootstrap';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
+
+export const ProjectBoxContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  border-top-color: #858e95;
+`;
+
+export const StepCreateButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(
+  DropdownButton,
+).attrs({
+  className: 'btn-outline-primary box-content__toolbar',
+})`
+  border: 1px solid #3b88fd !important;
+  color: #3b88fd !important;
+  :focus,
+  :hover {
+    background-color: #3b88fd !important;
+    color: #fff !important;
+  }
+`;
 
 export const ProjectBoxHeader: StyledComponent<
   { noBorder?: boolean },
@@ -53,6 +71,13 @@ export const ProjectSmallFieldsContainer: StyledComponent<{}, {}, HTMLDivElement
   }
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     flex-direction: column;
+  }
+
+  .rdt + .input-group-addon {
+    /** We want to override the green on successful date field */
+    color: unset;
+    background: unset;
+    border-color: #d2d6de;
   }
 `;
 

@@ -4,8 +4,8 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -226,7 +226,7 @@ exports[`<ProjectContentAdminForm /> renders correctly empty 1`] = `
         type="textarea"
       />
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;
 
@@ -234,8 +234,8 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -456,6 +456,6 @@ exports[`<ProjectContentAdminForm /> renders correctly with a project 1`] = `
         type="textarea"
       />
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;

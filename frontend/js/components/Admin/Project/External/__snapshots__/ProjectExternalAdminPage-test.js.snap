@@ -4,8 +4,8 @@ exports[`<ProjectExternalAdminPage /> renders correctly empty 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <div
       className="box-content"
@@ -71,7 +71,7 @@ exports[`<ProjectExternalAdminPage /> renders correctly empty 1`] = `
         warning={null}
       />
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;
 
@@ -79,8 +79,8 @@ exports[`<ProjectExternalAdminPage /> renders correctly with a project 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <div
       className="box-content"
@@ -151,6 +151,6 @@ exports[`<ProjectExternalAdminPage /> renders correctly with a project 1`] = `
         warning={null}
       />
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;

@@ -13,7 +13,7 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
         className="cap cap-android-menu"
         style={
           Object {
-            "color": "#0388cc",
+            "color": "#aaa",
             "fontSize": "20px",
           }
         }
@@ -43,20 +43,15 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
       bsClass="btn-toolbar"
       className="pull-right"
     >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
+      <ProjectStepAdminItemStep__EditButton
         bsStyle="warning"
-        className="btn-edit btn-outline-warning"
-        disabled={false}
         id="js-btn-edit-0"
         onClick={[Function]}
       >
         <i
           className="fa fa-pencil"
         />
-      </Button>
+      </ProjectStepAdminItemStep__EditButton>
       <Button
         active={false}
         block={false}

@@ -36,6 +36,24 @@ const ErrorMessage: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   color: ${colors.dangerColor};
 `;
 
+const List: StyledComponent<{}, {}, typeof ListGroup> = styled(ListGroup).attrs({})`
+  div div .item-step {
+    border-radius: 0 !important;
+    border-bottom: 0 !important;
+  }
+
+  div div:first-child .item-step {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+  }
+
+  div div:last-child .item-step {
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    border-bottom: 1px solid #ddd !important;
+  }
+`;
+
 type Props = {|
   fields: { length: number, map: Function, remove: Function },
   steps: Steps,
@@ -59,7 +77,7 @@ export function ProjectStepAdminList(props: Props) {
   const { fields, steps, formName, meta } = props;
   return (
     <>
-      <ListGroup>
+      <List>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable">
             {(provided: DroppableProvided) => (
@@ -82,7 +100,7 @@ export function ProjectStepAdminList(props: Props) {
             )}
           </Droppable>
         </DragDropContext>
-      </ListGroup>
+      </List>
       {meta?.error && (
         <ErrorMessage id="steps-error">
           <FormattedMessage id={meta?.error} />

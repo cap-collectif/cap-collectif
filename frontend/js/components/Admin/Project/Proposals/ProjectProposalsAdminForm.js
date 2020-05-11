@@ -8,7 +8,7 @@ import { OverlayTrigger } from 'react-bootstrap';
 import toggle from '../../../Form/Toggle';
 import Tooltip from '~/components/Utils/Tooltip';
 import type { ProjectProposalsAdminForm_project } from '~relay/ProjectProposalsAdminForm_project.graphql';
-import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
+import { ProjectBoxHeader, ProjectBoxContainer } from '../Form/ProjectAdminForm.style';
 import { InformationIcon } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
 
 type Props = {|
@@ -29,7 +29,7 @@ const ActivityInformationIcon: StyledComponent<{}, {}, typeof InformationIcon> =
 
 export const ProjectProposalsAdminForm = ({ intl }: Props) => (
   <div className="col-md-12">
-    <div className="box box-primary container-fluid">
+    <ProjectBoxContainer className="box container-fluid">
       <div className="mt-15">
         <ProjectBoxHeader>
           <h4 className="d-flex align-items-center m-0">
@@ -65,7 +65,7 @@ export const ProjectProposalsAdminForm = ({ intl }: Props) => (
           }
         />
       </div>
-    </div>
+    </ProjectBoxContainer>
   </div>
 );
 

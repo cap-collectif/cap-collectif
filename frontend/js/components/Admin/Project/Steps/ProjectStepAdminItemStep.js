@@ -22,11 +22,20 @@ const ItemQuestionWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 const StepRow: StyledComponent<{}, {}, typeof Row> = styled(Row)`
-  .btn-outline-warning.btn-warning,
   .btn-outline-danger.btn-danger {
     width: 33px;
     padding: 6px;
   }
+`;
+
+const EditButton: StyledComponent<{}, {}, typeof Button> = styled(Button).attrs({
+  className: 'btn-edit btn-outline-warning',
+})`
+  width: 33px;
+  padding: 6px;
+  color: #333 !important;
+  border: 1px solid #333 !important;
+  background: #fff !important;
 `;
 
 const onDeleteStep = (fields, index) => {
@@ -43,7 +52,7 @@ export default function ProjectStepAdminItemStep(props: Props) {
     <StepRow>
       <Col xs={8} className="d-flex align-items-center">
         <ItemQuestionWrapper>
-          <i className="cap cap-android-menu" style={{ color: '#0388cc', fontSize: '20px' }} />
+          <i className="cap cap-android-menu" style={{ color: '#aaa', fontSize: '20px' }} />
         </ItemQuestionWrapper>
         <ItemQuestionWrapper>
           <strong>{step.title}</strong>
@@ -55,13 +64,12 @@ export default function ProjectStepAdminItemStep(props: Props) {
       </Col>
       <Col xs={4}>
         <ButtonToolbar className="pull-right">
-          <Button
+          <EditButton
             bsStyle="warning"
             onClick={() => setShowEditModal(true)}
-            id={`js-btn-edit-${index}`}
-            className="btn-edit btn-outline-warning">
+            id={`js-btn-edit-${index}`}>
             <i className="fa fa-pencil" />
-          </Button>
+          </EditButton>
           <Button
             bsStyle="danger"
             id={`js-btn-delete-${index}`}

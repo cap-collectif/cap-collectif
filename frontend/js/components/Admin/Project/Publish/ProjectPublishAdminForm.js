@@ -12,6 +12,7 @@ import {
   ProjectBoxHeader,
   ProjectSmallFieldsContainer,
   PermalinkWrapper,
+  ProjectBoxContainer,
 } from '../Form/ProjectAdminForm.style';
 
 export type FormValues = {|
@@ -62,7 +63,7 @@ export const validate = (props: FormValues) => {
 
 export const ProjectPublishAdminForm = ({ project, features }: Props) => (
   <div className="col-md-12">
-    <div className="box box-primary container-fluid">
+    <ProjectBoxContainer className="box container-fluid">
       <ProjectBoxHeader>
         <h4>
           <FormattedMessage id="global.publication" />
@@ -104,7 +105,7 @@ export const ProjectPublishAdminForm = ({ project, features }: Props) => (
           </a>
         </PermalinkWrapper>
       </div>
-    </div>
+    </ProjectBoxContainer>
   </div>
 );
 

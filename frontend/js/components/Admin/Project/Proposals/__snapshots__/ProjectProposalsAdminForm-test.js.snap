@@ -4,8 +4,8 @@ exports[`<ProjectProposalsAdminForm /> renders correctly empty 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <div
       className="mt-15"
@@ -65,7 +65,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly empty 1`] = `
         normalize={[Function]}
       />
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;
 
@@ -73,8 +73,8 @@ exports[`<ProjectProposalsAdminForm /> renders correctly with a project 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <div
       className="mt-15"
@@ -134,6 +134,6 @@ exports[`<ProjectProposalsAdminForm /> renders correctly with a project 1`] = `
         normalize={[Function]}
       />
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;

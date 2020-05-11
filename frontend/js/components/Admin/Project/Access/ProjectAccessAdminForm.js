@@ -11,7 +11,11 @@ import {
   type ProjectAccessAdminForm_project,
   type ProjectVisibility,
 } from '~relay/ProjectAccessAdminForm_project.graphql';
-import { ProjectBoxHeader, ProjectAccessContainer } from '../Form/ProjectAdminForm.style';
+import {
+  ProjectBoxHeader,
+  ProjectAccessContainer,
+  ProjectBoxContainer,
+} from '../Form/ProjectAdminForm.style';
 
 export type FormValues = {|
   visibility: ProjectVisibility,
@@ -27,7 +31,7 @@ type Props = {|
 
 export const ProjectAccessAdminForm = ({ visibility }: Props) => (
   <div className="col-md-12">
-    <div className="box box-primary container-fluid">
+    <ProjectBoxContainer className="box container-fluid">
       <ProjectBoxHeader>
         <h4>
           <FormattedMessage id="admin.settings.header.access" />
@@ -73,7 +77,7 @@ export const ProjectAccessAdminForm = ({ visibility }: Props) => (
           </Field>
         </ProjectAccessContainer>
       </div>
-    </div>
+    </ProjectBoxContainer>
   </div>
 );
 

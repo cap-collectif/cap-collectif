@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import { Draggable, type DraggableProvided } from 'react-beautiful-dnd';
-
+import styled, { type StyledComponent } from 'styled-components';
 import { type Step } from './ProjectStepAdminList';
 import ProjectStepAdminItemStep from './ProjectStepAdminItemStep';
 
@@ -13,6 +13,12 @@ type Props = {|
   formName: string,
 |};
 
+const Item: StyledComponent<{}, {}, typeof ListGroupItem> = styled(ListGroupItem).attrs({
+  className: 'item-step',
+})`
+  background: #fafafa;
+`;
+
 export default function ProjectStepAdminItem(props: Props) {
   const { step, index, fields, formName } = props;
   return (
@@ -22,14 +28,14 @@ export default function ProjectStepAdminItem(props: Props) {
           ref={providedDraggable.innerRef}
           {...providedDraggable.draggableProps}
           {...providedDraggable.dragHandleProps}>
-          <ListGroupItem key={index}>
+          <Item key={index}>
             <ProjectStepAdminItemStep
               step={step}
               index={index}
               fields={fields}
               formName={formName}
             />
-          </ListGroupItem>
+          </Item>
         </div>
       )}
     </Draggable>

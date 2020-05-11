@@ -4,8 +4,8 @@ exports[`<ProjectAccessAdminForm /> renders correctly empty 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -73,7 +73,7 @@ exports[`<ProjectAccessAdminForm /> renders correctly empty 1`] = `
         </Field>
       </ProjectAdminFormstyle__ProjectAccessContainer>
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;
 
@@ -81,8 +81,8 @@ exports[`<ProjectAccessAdminForm /> renders correctly with a project 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -150,6 +150,6 @@ exports[`<ProjectAccessAdminForm /> renders correctly with a project 1`] = `
         </Field>
       </ProjectAdminFormstyle__ProjectAccessContainer>
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;

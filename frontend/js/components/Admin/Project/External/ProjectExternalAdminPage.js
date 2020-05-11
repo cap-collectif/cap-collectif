@@ -5,6 +5,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 
 import ProjectExternalAdminForm from '~/components/Admin/Project/External/ProjectExternalAdminForm';
 import type { ProjectExternalAdminPage_project } from '~relay/ProjectExternalAdminPage_project.graphql';
+import { ProjectBoxContainer } from '../Form/ProjectAdminForm.style';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -15,11 +16,11 @@ type Props = {|
 
 export const ProjectExternalAdminPage = (props: Props) => (
   <div className="col-md-12">
-    <div className="box box-primary container-fluid">
+    <ProjectBoxContainer className="box container-fluid">
       <div className="box-content">
         <ProjectExternalAdminForm {...props} />
       </div>
-    </div>
+    </ProjectBoxContainer>
   </div>
 );
 

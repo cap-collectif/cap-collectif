@@ -4,8 +4,8 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -51,7 +51,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
         />
       </ProjectAdminFormstyle__PermalinkWrapper>
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;
 
@@ -59,8 +59,8 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -133,7 +133,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project with local
         </a>
       </ProjectAdminFormstyle__PermalinkWrapper>
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;
 
@@ -141,8 +141,8 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -215,7 +215,7 @@ exports[`<ProjectPublishAdminForm /> renders correctly with a project without lo
         </a>
       </ProjectAdminFormstyle__PermalinkWrapper>
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;
 
@@ -223,8 +223,8 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -270,6 +270,6 @@ exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] =
         />
       </ProjectAdminFormstyle__PermalinkWrapper>
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;

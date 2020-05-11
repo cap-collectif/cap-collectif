@@ -2,9 +2,7 @@
 
 exports[`<ProjectStepAdminList /> renders correctly 1`] = `
 <Fragment>
-  <ListGroup
-    bsClass="list-group"
-  >
+  <ProjectStepAdminList__List>
     <DragDropContext
       onDragEnd={[Function]}
     >
@@ -23,6 +21,6 @@ exports[`<ProjectStepAdminList /> renders correctly 1`] = `
         <Component />
       </Connect(Droppable)>
     </DragDropContext>
-  </ListGroup>
+  </ProjectStepAdminList__List>
 </Fragment>
 `;

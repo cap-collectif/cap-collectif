@@ -607,8 +607,8 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
   <div
     className="col-md-12"
   >
-    <div
-      className="box box-primary"
+    <ProjectAdminFormstyle__ProjectBoxContainer
+      className="box container-fluid"
     >
       <div
         className="box-content p-15"
@@ -635,7 +635,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
           valid={true}
         />
       </div>
-    </div>
+    </ProjectAdminFormstyle__ProjectBoxContainer>
   </div>
 </form>
 `;

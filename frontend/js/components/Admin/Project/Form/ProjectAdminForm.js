@@ -39,6 +39,7 @@ import ProjectProposalsAdminForm, {
   type FormValues as ProposalsFormValues,
 } from '../Proposals/ProjectProposalsAdminForm';
 import { type ConcreteStepType } from '~relay/CreateProjectAlphaMutation.graphql';
+import { ProjectBoxContainer } from './ProjectAdminForm.style';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -299,7 +300,7 @@ const renderProjectSave = ({
   submitFailed,
 }: Props) => (
   <div className="col-md-12">
-    <div className="box box-primary">
+    <ProjectBoxContainer className="box container-fluid">
       <div className="box-content p-15">
         <Button
           id="submit-project-content"
@@ -320,7 +321,7 @@ const renderProjectSave = ({
           submitting={submitting}
         />
       </div>
-    </div>
+    </ProjectBoxContainer>
   </div>
 );
 

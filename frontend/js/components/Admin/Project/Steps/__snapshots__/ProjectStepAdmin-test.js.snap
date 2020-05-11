@@ -4,8 +4,8 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
 <div
   className="col-md-12"
 >
-  <div
-    className="box box-primary container-fluid"
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
   >
     <ProjectAdminFormstyle__ProjectBoxHeader>
       <h4>
@@ -38,9 +38,8 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             step={null}
             type="OtherStep"
           />
-          <DropdownButton
+          <ProjectAdminFormstyle__StepCreateButton
             bsStyle="primary"
-            className="btn-outline-primary box-content__toolbar"
             id="js-btn-create-step"
             title={
               <React.Fragment>
@@ -127,10 +126,10 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
                 values={Object {}}
               />
             </ProjectAdminFormstyle__StepMenuItem>
-          </DropdownButton>
+          </ProjectAdminFormstyle__StepCreateButton>
         </ButtonToolbar>
       </div>
     </div>
-  </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
 </div>
 `;

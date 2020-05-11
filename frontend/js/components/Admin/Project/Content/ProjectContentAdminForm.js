@@ -13,7 +13,11 @@ import ProjectTypeListField from '../../Field/ProjectTypeListField';
 import { type ProjectContentAdminForm_project } from '~relay/ProjectContentAdminForm_project.graphql';
 import { loadDistrictOptions, loadThemeOptions } from '../Metadata/ProjectMetadataAdminForm';
 import Tooltip from '~/components/Utils/Tooltip';
-import { ProjectBoxHeader, ProjectSmallInput } from '../Form/ProjectAdminForm.style';
+import {
+  ProjectBoxHeader,
+  ProjectSmallInput,
+  ProjectBoxContainer,
+} from '../Form/ProjectAdminForm.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 export type FormValues = {|
@@ -89,7 +93,7 @@ export const validate = (props: FormValues) => {
 export const ProjectContentAdminForm = ({ intl }: Props) => {
   return (
     <div className="col-md-12">
-      <div className="box box-primary container-fluid">
+      <ProjectBoxContainer className="box container-fluid">
         <ProjectBoxHeader>
           <h4>
             <FormattedMessage id="global.general" />
@@ -180,7 +184,7 @@ export const ProjectContentAdminForm = ({ intl }: Props) => {
             component={renderComponent}
           />
         </div>
-      </div>
+      </ProjectBoxContainer>
     </div>
   );
 };
