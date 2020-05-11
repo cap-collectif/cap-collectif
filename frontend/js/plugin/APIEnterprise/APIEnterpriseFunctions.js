@@ -224,7 +224,7 @@ const makeRnaQueries = (
   });
 };
 
-export const TRIGGER_FOR: Array<string> = ['idf-bp-dedicated', 'dev'];
+export const TRIGGER_FOR: Array<string> = ['idf-bp-dedicated'];
 
 const getInvisibleQuestionIndexesAccordingToType = (
   defaultToHideQuestions: Array<number>,

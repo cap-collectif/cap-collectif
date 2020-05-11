@@ -21,10 +21,10 @@ coverage:
     changes: off
     patch: # Only measures lines adjusted in the pull request
       default: off
-      jest:
-        flags: jest
-        target: 70%
-        threshold: 0
+      # jest:
+      #   flags: jest
+      #   target: 70%
+      #   threshold: 0
       php:
         flags: php
         target: 0
@@ -34,16 +34,16 @@ coverage:
         target: 0
         paths:
           - src/Capco/AppBundle/GraphQL
-      flow:
-        flags: flow
-        target: 90
-        threshold: 0
+      # flow:
+      #   flags: flow
+      #   target: 90
+      #   threshold: 0
     project: # Overall project coverage
       default: off
-      jest:
-        flags: jest
-        target: auto
-        informational: true
+      # jest:
+      #   flags: jest
+      #   target: auto
+      #   informational: true
       php:
         flags: php
         target: auto
@@ -53,21 +53,21 @@ coverage:
         target: 3
         paths:
           - src/Capco/AppBundle/GraphQL
-      flow:
-        target: 89
-        flags: flow
+      # flow:
+      #   target: 89
+      #   flags: flow
 
 flags:
   # Filter the folder(s) you wish to measure by that flag
   php:
     paths:
       - src
-  jest:
-    paths:
-      - frontend/js
-  flow:
-    paths:
-      - frontend/js
+  # jest:
+  #   paths:
+  #     - frontend/js
+  # flow:
+  #   paths:
+  #     - frontend/js
 
 ignore:
   - 'src/Capco/AppBundle/GraphQL/__generated__/*.php'

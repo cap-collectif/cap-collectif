@@ -214,7 +214,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     public function prefillForm(FormEvent $event): void
     {
         $env = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if ('idf-bp-dedicated' === $env || 'dev' === $env) {
+        if ('idf-bp-dedicated' === $env) {
             // Warning: This will be called on every proposalForms
             $this->getAPIEnterpriseData($event);
         }
