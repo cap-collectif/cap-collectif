@@ -5,19 +5,33 @@ import { shallow } from 'enzyme';
 import { ProposalFormAdminEvaluationForm } from './ProposalFormAdminEvaluationForm';
 import { $refType, intlMock, formMock } from '../../mocks';
 
-describe('<ProposalFormAdminEvaluationForm />', () => {
-  const props = {
-    intl: intlMock,
-    ...formMock,
-    proposalForm: {
-      $refType,
-      id: 'proposalFormId',
-      evaluationForm: null,
-    },
-  };
+const baseProps = {
+  intl: intlMock,
+  hasAccessToNewAnalysis: false,
+  ...formMock,
+  proposalForm: {
+    $refType,
+    id: 'proposalFormId',
+    evaluationForm: null,
+  },
+};
 
+const props = {
+  base: baseProps,
+  withAccessToNewAnalysis: {
+    ...baseProps,
+    hasAccessToNewAnalysis: true,
+  },
+};
+
+describe('<ProposalFormAdminEvaluationForm />', () => {
   it('render correctly', () => {
-    const wrapper = shallow(<ProposalFormAdminEvaluationForm {...props} />);
+    const wrapper = shallow(<ProposalFormAdminEvaluationForm {...props.base} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('render correctly when access to new analysis', () => {
+    const wrapper = shallow(<ProposalFormAdminEvaluationForm {...props.withAccessToNewAnalysis} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
