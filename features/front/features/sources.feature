@@ -1,7 +1,7 @@
 @consultation @sources
 Feature: Source
 
-@database
+@database @randomly-failing
 Scenario: User wants to add a source in a contribuable opinion
   Given I am logged in as user
   And I go to an opinion with no sources

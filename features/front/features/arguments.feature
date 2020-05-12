@@ -134,7 +134,7 @@ Scenario: Anonymous wants to delete an argument on an opinion
 
 ## Delete from version
 
-@database
+@database @randomly-failing
 Scenario: Author of an argument on a version wants to delete it
   Given I am logged in as user
   And I go to a version

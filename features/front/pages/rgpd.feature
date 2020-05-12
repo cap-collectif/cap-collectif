@@ -132,7 +132,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
   And I wait "#changeLanguageProposalContainer" to appear on current page
   Then I should see a cookie named "locale"
 
-@international
+@international @randomly-failing
 Scenario: An anonymous wants to change locale through footer
   Given feature "unstable__multilangue" is enabled
   Given I visited "home page"
