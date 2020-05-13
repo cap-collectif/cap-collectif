@@ -583,10 +583,6 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         proposalForm: '@proposalformIdf'
         question: '@mediaquestionIdfProjetLocalOrgPub2'
         position: 77
-    qaqIdfProjectLocalPorteur58:
-        proposalForm: '@proposalformIdf'
-        question: '@mediaquestionIdfProjetLocalOrgPub3'
-        position: 78
     qaqEvalIdf1:
         questionnaire: '@questionnaireEvaluationIdf'
         question: '@sectionEvalIdf1'

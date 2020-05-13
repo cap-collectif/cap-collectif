@@ -191,14 +191,6 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
         hidden: true
     mediaquestionIdfProjetLocalOrgPub2:
         id: 143
-        title: Extrait KBIS
-        private: true
-        required: true
-        type: 7 # media
-        alwaysJumpDestinationQuestion: '@mediaquestionIdfProjetLocalOrgPub3'
-        hidden: true
-    mediaquestionIdfProjetLocalOrgPub3:
-        id: 144
         title: RIB au nom de la raison sociale et à l'adresse du siège social
         private: true
         required: true

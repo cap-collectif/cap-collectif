@@ -49,22 +49,8 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
         ]);
 
         if (APIEnterpriseTypeResolver::PUBLIC_ORGA === $type) {
-            $siren = substr($id, 0, 9);
-            $greffe = $this->autoCompleteUtils->makeGetRequest(
-                $client,
-                "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}"
-            );
-            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe)
-                ? ($greffe = json_encode($greffe))
-                : null;
-            $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis");
-
-            $this->autoCompleteUtils->saveInCache($cacheKey, [
-                'kbis' => $kbis,
-            ]);
-
             return [
-                'availableKbis' => isset($kbis),
+                'availableKbis' => false,
             ];
         }
 

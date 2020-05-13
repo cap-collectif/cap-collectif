@@ -18,6 +18,8 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     private $autoCompleteDocQueryResolver;
     private $autoCompleteFromSiretQueryResolver;
 
+    private $shouldPreFillAPIEntreprise = false;
+
     public function __construct(
         RedisCache $cache,
         AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver,
@@ -31,6 +33,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
+            FormEvents::PRE_SET_DATA => 'onPreSetData',
             FormEvents::PRE_SUBMIT => 'prefillForm',
         ];
     }
@@ -201,21 +204,31 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
 
                 break;
             case APIEnterpriseTypeResolver::PUBLIC_ORGA:
-                $values['responses'][67]['medias'] = $this->setMediaFromAPIOrRequest(
-                    $values['responses'][67]['medias'],
-                    $docInfo['kbis']
-                );
-
                 break;
         }
         $event->setData($values);
     }
 
+    public function onPreSetData(FormEvent $event): void
+    {
+        $proposal = $event->getData();
+        $proposalForm = $proposal->getProposalForm();
+
+        $env = EnvHelper::get('SYMFONY_INSTANCE_NAME');
+        if ('dev' === $env && 'proposalformIdf' === $proposalForm->getId()) {
+            $this->shouldPreFillAPIEntreprise = true;
+        }
+        if (
+            'idf-bp-dedicated' === $env &&
+            'd6b98b9b-5e3c-11ea-8fab-0242ac110004' === $proposalForm->getId()
+        ) {
+            $this->shouldPreFillAPIEntreprise = true;
+        }
+    }
+
     public function prefillForm(FormEvent $event): void
     {
-        $env = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if ('idf-bp-dedicated' === $env) {
-            // Warning: This will be called on every proposalForms
+        if ($this->shouldPreFillAPIEntreprise) {
             $this->getAPIEnterpriseData($event);
         }
     }

@@ -230,7 +230,7 @@ export const dispatchValuesToForm = (
     responseNumber?: number,
     questionNumber?: number,
     value: any,
-  }> = [{ questionNumber: 67, value: obj.availableKbis }];
+  }> = [];
 
   let mapping;
   switch (type) {
