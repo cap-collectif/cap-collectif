@@ -62,7 +62,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                     $question->getId(),
                     array_map(function ($q) {
                         return $q->getId();
-                    }, array_merge($questionsAvailableBeforeAnyLogicJump, $fulfilledQuestions))
+                    }, array_merge($questionsAvailableBeforeAnyLogicJump, $fulfilledQuestions)) ??
+                        []
                 )
             ) {
                 if ($this->isAnyJumpFulfilledForQuestion($question, $responses)) {
@@ -162,7 +163,11 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                     case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
                     case AbstractQuestion::QUESTION_TYPE_BUTTON:
                     case AbstractQuestion::QUESTION_TYPE_RANKING:
-                        return \in_array($value->getTitle(), $response->getValue()['labels'], true);
+                        return \in_array(
+                            $value->getTitle(),
+                            $response->getValue()['labels'] ?? [],
+                            true
+                        );
                     default:
                         throw new \RuntimeException(
                             self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED .
