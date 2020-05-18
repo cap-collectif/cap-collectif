@@ -383,8 +383,6 @@ class Project implements IndexableInterface
     {
         if (empty($authors)) {
             throw new \InvalidArgumentException('Authors array can not be empty.');
-
-            return null;
         }
 
         $this->authors = new ArrayCollection($authors);

@@ -265,6 +265,8 @@ class Post implements
     public function removeAuthor(User $author): self
     {
         $this->Authors->removeElement($author);
+
+        return $this;
     }
 
     public function setAuthors(array $authors = []): self
