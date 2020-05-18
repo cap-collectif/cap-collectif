@@ -68,6 +68,40 @@ Object {
 }
 `;
 
+exports[`mutations.assignAnalystsToProposals should assign a user as Analysts to a proposal, logged as analyst. 1`] = `
+Object {
+  "assignAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "analysts": Array [
+              Object {
+                "username": "user34",
+              },
+              Object {
+                "username": "user6",
+              },
+              Object {
+                "username": "analyst2",
+              },
+              Object {
+                "username": "user26",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+            "title": "Proposal 110",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
 exports[`mutations.assignAnalystsToProposals should assign a user as Analysts to proposals, logged as decision maker. 1`] = `
 Object {
   "assignAnalystsToProposals": Object {

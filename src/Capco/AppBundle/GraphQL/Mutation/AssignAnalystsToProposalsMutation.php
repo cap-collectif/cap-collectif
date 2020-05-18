@@ -25,6 +25,8 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
     private $proposalAnalysisRepository;
     private $authorizationChecker;
 
+    private const NB_MAX_ANALYSTS_ASSIGNED = 10;
+
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
@@ -62,8 +64,8 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
                 );
             }
         }
-        $nbAnslysts = \count($analystIds);
-        if ($nbAnslysts > 10) {
+        $nbAnalysts = \count($analystIds);
+        if ($nbAnalysts > self::NB_MAX_ANALYSTS_ASSIGNED) {
             return $this->buildPayload(
                 $connection,
                 ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED
@@ -76,7 +78,7 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
 
         /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
-            if ($nbAnslysts + $proposal->getAnalysts()->count() > 10) {
+            if ($nbAnalysts + $proposal->getAnalysts()->count() > self::NB_MAX_ANALYSTS_ASSIGNED) {
                 return $this->buildPayload(
                     $connection,
                     ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED

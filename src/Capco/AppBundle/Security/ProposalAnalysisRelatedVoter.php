@@ -190,7 +190,8 @@ class ProposalAnalysisRelatedVoter extends Voter
 
     private function viewerIsAdmin(): bool
     {
-        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN) || $this->authorizationChecker->isGranted(UserRole::ROLE_SUPER_ADMIN);
+        return $this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN) ||
+            $this->authorizationChecker->isGranted(UserRole::ROLE_SUPER_ADMIN);
     }
 
     private function canAssignAnalyst(Proposal $subject, User $viewer): bool
@@ -212,6 +213,6 @@ class ProposalAnalysisRelatedVoter extends Voter
             return true;
         }
 
-        return false;
+        return $this->canAnalyse($subject, $viewer);
     }
 }

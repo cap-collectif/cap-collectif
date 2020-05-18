@@ -121,4 +121,18 @@ describe('mutations.assignAnalystsToProposals', () => {
     );
     expect(assignAnalystsToProposalsLoggedAsUser).toMatchSnapshot();
   });
+
+  it('should assign a user as Analysts to a proposal, logged as analyst.', async () => {
+    const assignAnalystsToProposalsLoggedAsUser = await graphql(
+      AssignAnalystsToProposalsMutation,
+      {
+        input: {
+          proposalIds: ['UHJvcG9zYWw6cHJvcG9zYWwxMTA='],
+          analystIds: ['VXNlcjp1c2VyMjY='],
+        },
+      },
+      'internal_analyst2',
+    );
+    expect(assignAnalystsToProposalsLoggedAsUser).toMatchSnapshot();
+  });
 });
