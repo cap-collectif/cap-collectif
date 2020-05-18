@@ -176,49 +176,42 @@ class UsersController extends AbstractFOSRestController
     public function putMeAction(Request $request)
     {
         $user = $this->getUser();
-        $email = null;
-        $code = null;
+        $email = $request->request->get('email');
+        $localeCode = $request->request->get('language');
         if (!$user || 'anon.' === $user) {
             throw new AccessDeniedHttpException('Not authorized.');
         }
+        $response = [
+            'userId' => $user->getId()
+        ];
 
-        if ($request->request->has('language')) {
-            $code = $request->request->get('language');
-
+        if ($localeCode) {
             try {
-                $this->userDefaultLocaleMutation->setUserDefaultLocale($user, $code);
+                $this->userDefaultLocaleMutation->setUserDefaultLocale($user, $localeCode);
             } catch (BadRequestHttpException $exception) {
                 return new JsonResponse(['message' => $exception->getMessage()], 400);
             }
-            $request->setLocale($code);
+            $request->setLocale($localeCode);
+            $response['code'] = $localeCode;
         }
         if (
-            $request->request->has('email') &&
-            (($request->request->has('language') &&
-                $user->getEmail() !== $request->request->get('email')) ||
-                !$request->request->has('language'))
+            $email &&
+            (
+                ($localeCode && $user->getEmail() !== $email) ||
+                is_null($localeCode)
+            )
         ) {
             $retEmail = $this->updateEmail($request);
 
             if ($retEmail instanceof FormInterface) {
                 return $retEmail;
             }
-            if ($user->getEmail() === $request->request->get('email')) {
+            if ($user->getEmail() === $email) {
                 return new JsonResponse(['message' => 'Already used email.'], 400);
             }
             if (isset($retEmail['error']) || isset($retEmail['errors'])) {
                 return new JsonResponse(['message' => $retEmail['error']], 400);
             }
-            $email = $request->request->get('email');
-        }
-        $response = [
-            'userId' => $user->getId()
-        ];
-        if ($code) {
-            $response['code'] = $code;
-        }
-
-        if ($email) {
             $response['email'] = $email;
         }
 

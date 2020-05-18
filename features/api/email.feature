@@ -198,3 +198,20 @@ Scenario: Logged in API client wants to update his default locale in BO, but the
     "message": "The locale with code jp-EC does not exist or is not enabled."
   }
   """
+
+@database @security
+Scenario: Logged in API client send no language and nothing happen
+  And I am logged in to api as user
+  And I send a PUT request to "/api/users/me" with json:
+  """
+  {
+    "language": null
+  }
+  """
+  Then the JSON response status code should be 200
+  And the JSON response should match:
+  """
+  {
+    "userId": "user5"
+  }
+  """
