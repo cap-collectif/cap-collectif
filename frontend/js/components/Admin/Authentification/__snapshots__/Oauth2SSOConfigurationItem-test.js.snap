@@ -5,8 +5,7 @@ exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
   <div
     className="d-flex align-items-center"
   >
-    <Toggle
-      icons={true}
+    <_default
       onChange={[Function]}
     />
     <div

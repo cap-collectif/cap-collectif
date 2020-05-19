@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Col, Alert } from 'react-bootstrap';
-import Toggle from 'react-toggle';
+import Toggle from '~/components/Ui/Toggle/Toggle';
 import config from '../../config';
 import CookieMonster from '../../CookieMonster';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';

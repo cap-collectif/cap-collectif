@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import Toggle from 'react-toggle';
+import Toggle from '~/components/Ui/Toggle/Toggle';
 import DeleteModal from '../../Modal/DeleteModal';
 import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
 import DeleteOauth2SSOConfigurationMutation from '../../../mutations/DeleteOauth2SSOConfigurationMutation';
@@ -48,7 +48,6 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
       <>
         <div className="d-flex align-items-center">
           <Toggle
-            icons
             checked={configuration.enabled}
             onChange={() => {
               toggleStatus(configuration);

@@ -50,7 +50,6 @@ const devConf = {
     app: [
       path.join(webpackConfig.frontendDir, 'js/app.js'),
       path.join(webpackConfig.frontendDir, 'js/registration.js'),
-      path.join(webpackConfig.nodeModulesDir, 'react-toggle/style.css'),
       path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
@@ -66,7 +65,6 @@ const devConf = {
 
     // Same as print but for backoffice
     'style-admin': [
-      path.join(webpackConfig.nodeModulesDir, 'react-toggle/style.css'),
       path.join(webpackConfig.srcDir, 'Resources/scss/style-admin.scss'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),

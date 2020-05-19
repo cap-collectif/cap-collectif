@@ -20,11 +20,10 @@ exports[`<SSOByPassAuthForm /> renders correctly 1`] = `
     className="box-content box-content__content-form"
   >
     <div
-      className="d-flex flex-row align-items-center mb-15"
+      className="d-flex flex-row align-items-baseline mb-15"
     >
-      <Toggle
+      <_default
         checked={false}
-        icons={true}
         onChange={[Function]}
       />
       <div

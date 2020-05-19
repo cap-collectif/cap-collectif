@@ -6,9 +6,8 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
     className=""
   >
     <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
+      <_default
         checked={false}
-        icons={true}
         onChange={[Function]}
       />
       <h5
@@ -18,9 +17,8 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
       </h5>
     </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
     <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
+      <_default
         checked={false}
-        icons={true}
         onChange={[Function]}
       />
       <h5
@@ -30,10 +28,9 @@ exports[`<ListPublicSSO /> renders all element with France Connect 1`] = `
       </h5>
     </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
     <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
+      <_default
         checked={true}
         disabled={true}
-        icons={true}
       />
       <h5
         className="mb-0 mt-0"
@@ -54,9 +51,8 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
     className=""
   >
     <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
+      <_default
         checked={false}
-        icons={true}
         onChange={[Function]}
       />
       <h5
@@ -66,9 +62,8 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
       </h5>
     </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
     <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
+      <_default
         checked={false}
-        icons={true}
         onChange={[Function]}
       />
       <h5
@@ -78,10 +73,9 @@ exports[`<ListPublicSSO /> renders correctly without France Connect 1`] = `
       </h5>
     </ListPublicSSO__ListGroupItemWithJustifyContentEnd>
     <ListPublicSSO__ListGroupItemWithJustifyContentEnd>
-      <Toggle
+      <_default
         checked={true}
         disabled={true}
-        icons={true}
       />
       <h5
         className="mb-0 mt-0"

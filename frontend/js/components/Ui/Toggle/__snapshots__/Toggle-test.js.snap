@@ -2,10 +2,10 @@
 
 exports[`<Toggle /> renders correctly 1`] = `
 <Toggle
-  icons={
+  input={
     Object {
-      "checked": <Unknown />,
-      "unchecked": <Unknown />,
+      "onChange": [Function],
+      "value": true,
     }
   }
 />

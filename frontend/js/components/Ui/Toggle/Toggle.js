@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import Toggle from 'react-toggle';
+import Toggle from '~/components/Form/Toggle';
 
 type Props = {|
-  checked?: boolean,
+  checked?: ?boolean,
   defaultChecked?: boolean,
   name?: string,
   value?: string,
@@ -15,6 +15,10 @@ type Props = {|
   onChange?: () => void,
   onFocus?: () => void,
   onBlur?: () => void,
+  className?: string,
 |};
 
-export default (props: Props) => <Toggle {...props} />;
+export default ({ onChange, checked, id, disabled, ...rest }: Props) => {
+  const input = { onChange, value: checked || false };
+  return <Toggle input={input} id={id} label={rest['aria-label']} disabled={disabled} />;
+};

@@ -23,10 +23,10 @@ class AdminProposalFormPage extends Page
         'proposal form summary help' => '#proposal_form_summary_help_text',
         'proposal form description help' => '#proposal_form_description_help_text',
         'proposal form illustration help' => '#proposal_form_illustration_help_text',
-        'proposal form address toggle' => '#address .form-group .react-toggle',
-        'proposal form description toggle' => '#description .form-group .react-toggle',
-        'proposal form summary toggle' => '#summary .form-group .react-toggle',
-        'proposal form illustration toggle' => '#illustration .form-group .react-toggle',
+        'proposal form address toggle' => '#address .form-group .elegant-toggle',
+        'proposal form description toggle' => '#description .form-group .elegant-toggle',
+        'proposal form summary toggle' => '#summary .form-group .elegant-toggle',
+        'proposal form illustration toggle' => '#illustration .form-group .elegant-toggle',
         'proposal form address limit' => '#proposal_form_district_proposalInAZoneRequired',
         'proposal form address zoom' => '#proposal_form_zoom_map',
         'proposal form category mandatory' => '#proposal_form_category_mandatory',
@@ -53,7 +53,7 @@ class AdminProposalFormPage extends Page
         'proposal form address selection' => '#proposal_form_using_address_field',
         'proposal form personal-section add' => '#js-btn-create-section',
         'proposal form first question delete' => '#js-btn-delete-0',
-        'proposal form delete modale button' => '#js-delete-question'
+        'proposal form delete modale button' => '#js-delete-question',
     ];
 
     public function clickSaveProposalFormButton(string $tab)

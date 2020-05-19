@@ -21,11 +21,11 @@ class AdminProposalPage extends Page
         'proposal title' => '#proposal_title',
         'proposal summary' => '#proposal_summary',
         'proposal save' => '#proposal_admin_content_save',
-        'proposal advancement selection' => '#item_0 .form-group .react-toggle',
-        'proposal advancement winner' => '#item_1 .form-group .react-toggle',
-        'proposal advancement closed' => '#item_2 .form-group .react-toggle',
-        'proposal advancement selection to come' => '#item_3 .form-group .react-toggle',
-        'proposal advancement realisation to come' => '#item_4 .form-group .react-toggle',
+        'proposal advancement selection' => '#item_0 .form-group .elegant-toggle',
+        'proposal advancement winner' => '#item_1 .form-group .elegant-toggle',
+        'proposal advancement closed' => '#item_2 .form-group .elegant-toggle',
+        'proposal advancement selection to come' => '#item_3 .form-group .elegant-toggle',
+        'proposal advancement realisation to come' => '#item_4 .form-group .elegant-toggle',
         'proposal advancement selection status' => '#item_0 select',
         'proposal advancement save' => '#proposal_advancement_save',
         'proposal evaluation analysts groupes save' => '#proposal-evaluation-analysts-groupes-save',
@@ -36,7 +36,7 @@ class AdminProposalPage extends Page
         'proposal evaluation custom save' => '#proposal-evaluation-custom-save',
         'proposal evaluation presentation' =>
             '#proposal-admin-page-tabs-pane-5 div[id="proposal-admin-evaluation-responses2"]',
-        'proposal export' => '#proposal-follower-dropdown-export'
+        'proposal export' => '#proposal-follower-dropdown-export',
     ];
 
     public function clickSaveProposalContentButton()

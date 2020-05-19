@@ -23,11 +23,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         />
       </h3>
       <div
-        className="d-flex align-items-center mb-15"
+        className="d-flex align-items-baseline mb-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -42,11 +41,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         />
       </h4>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -69,12 +67,11 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         />
       </h3>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={true}
           disabled={true}
-          icons={true}
         />
         <FormattedMessage
           id="global.fullname"
@@ -82,12 +79,11 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         />
       </div>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={true}
           disabled={true}
-          icons={true}
         />
         <FormattedMessage
           id="registration.password"
@@ -95,11 +91,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         />
       </div>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -108,11 +103,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         />
       </div>
       <div
-        className="d-flex align-items-center mb-15"
+        className="d-flex align-items-baseline mb-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -155,12 +149,11 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         />
       </h3>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
           disabled={false}
-          icons={true}
           onChange={[Function]}
         />
         <span>
@@ -173,11 +166,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         </span>
       </div>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <span>
@@ -207,12 +199,11 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         </span>
       </div>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
           disabled={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -256,11 +247,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         />
       </h3>
       <div
-        className="d-flex align-items-center mb-15"
+        className="d-flex align-items-baseline mb-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -275,11 +265,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         />
       </h4>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -302,12 +291,11 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         />
       </h3>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={true}
           disabled={true}
-          icons={true}
         />
         <FormattedMessage
           id="global.fullname"
@@ -315,12 +303,11 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         />
       </div>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={true}
           disabled={true}
-          icons={true}
         />
         <FormattedMessage
           id="registration.password"
@@ -328,11 +315,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         />
       </div>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -341,11 +327,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         />
       </div>
       <div
-        className="d-flex align-items-center mb-15"
+        className="d-flex align-items-baseline mb-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage
@@ -368,12 +353,11 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         />
       </h3>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
           disabled={true}
-          icons={true}
           onChange={[Function]}
         />
         <span>
@@ -386,11 +370,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         </span>
       </div>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
-          icons={true}
           onChange={[Function]}
         />
         <span>
@@ -420,12 +403,11 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         </span>
       </div>
       <div
-        className="d-flex align-items-center mb-15 mt-15"
+        className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <Toggle
+        <_default
           checked={false}
           disabled={true}
-          icons={true}
           onChange={[Function]}
         />
         <FormattedMessage

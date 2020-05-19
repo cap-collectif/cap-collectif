@@ -6,6 +6,7 @@ import Radio, { COLORS } from '~/components/Ui/Form/Input/Radio/Radio';
 import TextArea from '~/components/Ui/Form/Input/TextArea/TextArea';
 import Input from '~/components/Ui/Form/Input/Input';
 import Dropzone from '~/components/Ui/Form/Dropzone/Dropzone';
+import Toggle from '~/components/Ui/Toggle/Toggle';
 
 /* ------ INPUT ------ */
 
@@ -190,3 +191,16 @@ storiesOf('Core|Form/Dropzone', module).add('Default', () => {
 });
 
 /* ------ END DROPZONE ------ */
+
+/* ------ TOGGLE ------ */
+
+storiesOf('Core|Form/Toggle', module).add('Default', () => {
+  return (
+    <>
+      <Toggle checked />
+      <Toggle />
+    </>
+  );
+});
+
+/* ------ END TOGGLE ------ */

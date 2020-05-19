@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Well } from 'react-bootstrap';
-import Toggle from 'react-toggle';
+import Toggle from '~/components/Ui/Toggle/Toggle';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import { toggleFeature } from '../../redux/modules/default';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
@@ -14,7 +14,7 @@ import RegistrationFormQuestions from './RegistrationFormQuestions';
 import AdvancedSection from './Registration/AdvancedSection';
 import type { RegistrationAdminPage_query } from '~relay/RegistrationAdminPage_query.graphql';
 import type { RegistrationAdminPageQueryResponse } from '~relay/RegistrationAdminPageQuery.graphql';
-import RegistrationFormCommunication from "~/components/Admin/RegistrationFormCommunication";
+import RegistrationFormCommunication from '~/components/Admin/RegistrationFormCommunication';
 
 export type Props = {|
   features: FeatureToggles,
@@ -101,9 +101,8 @@ export class RegistrationAdminPage extends React.Component<Props> {
             <h3 className="box-title">
               <FormattedMessage id="allow" />
             </h3>
-            <div className="d-flex align-items-center mb-15">
+            <div className="d-flex align-items-baseline mb-15">
               <Toggle
-                icons
                 checked={features.registration}
                 onChange={() => onToggle('registration', !features.registration)}
               />
@@ -112,9 +111,8 @@ export class RegistrationAdminPage extends React.Component<Props> {
             <h4>
               <FormattedMessage id="allow" />
             </h4>
-            <div className="d-flex align-items-center mb-15 mt-15">
+            <div className="d-flex align-items-baseline mb-15 mt-15">
               <Toggle
-                icons
                 checked={features.restrict_registration_via_email_domain}
                 onChange={() =>
                   onToggle(
@@ -134,25 +132,23 @@ export class RegistrationAdminPage extends React.Component<Props> {
             <h3>
               <FormattedMessage id="received-data" />
             </h3>
-            <div className="d-flex align-items-center mb-15 mt-15">
-              <Toggle checked icons disabled />
+            <div className="d-flex align-items-baseline mb-15 mt-15">
+              <Toggle checked disabled />
               <FormattedMessage id="global.fullname" />
             </div>
-            <div className="d-flex align-items-center mb-15 mt-15">
-              <Toggle checked icons disabled />
+            <div className="d-flex align-items-baseline mb-15 mt-15">
+              <Toggle checked disabled />
               <FormattedMessage id="registration.password" />
             </div>
-            <div className="d-flex align-items-center mb-15 mt-15">
+            <div className="d-flex align-items-baseline mb-15 mt-15">
               <Toggle
-                icons
                 checked={features.zipcode_at_register}
                 onChange={() => onToggle('zipcode_at_register', !features.zipcode_at_register)}
               />
               <FormattedMessage id="user.register.zipcode" />
             </div>
-            <div className="d-flex align-items-center mb-15">
+            <div className="d-flex align-items-baseline mb-15">
               <Toggle
-                icons
                 checked={features.user_type}
                 onChange={() => onToggle('user_type', !features.user_type)}
               />
@@ -181,9 +177,8 @@ export class RegistrationAdminPage extends React.Component<Props> {
             <h3>
               <FormattedMessage id="capco.module.newsletter" />
             </h3>
-            <div className="d-flex align-items-center mb-15 mt-15">
+            <div className="d-flex align-items-baseline mb-15 mt-15">
               <Toggle
-                icons
                 disabled={!isSuperAdmin}
                 checked={features.consent_internal_communication}
                 onChange={() =>
@@ -199,9 +194,8 @@ export class RegistrationAdminPage extends React.Component<Props> {
                 </strong>
               </span>
             </div>
-            <div className="d-flex align-items-center mb-15 mt-15">
+            <div className="d-flex align-items-baseline mb-15 mt-15">
               <Toggle
-                icons
                 checked={features.consent_external_communication}
                 onChange={() =>
                   onToggle(
@@ -229,9 +223,8 @@ export class RegistrationAdminPage extends React.Component<Props> {
                 />
               </span>
             </div>
-            <div className="d-flex align-items-center mb-15 mt-15">
+            <div className="d-flex align-items-baseline mb-15 mt-15">
               <Toggle
-                icons
                 disabled={!isSuperAdmin}
                 checked={features.captcha}
                 onChange={() => onToggle('captcha', !features.captcha)}

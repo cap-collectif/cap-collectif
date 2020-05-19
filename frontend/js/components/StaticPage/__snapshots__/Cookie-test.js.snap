@@ -48,15 +48,9 @@ exports[`<Cookie /> should render advertising only accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <Toggle
+        <_default
           checked={false}
           className="cookie-manager"
-          icons={
-            Object {
-              "checked": <Unknown />,
-              "unchecked": <Unknown />,
-            }
-          }
           id="cookies-enable-analytic"
           onChange={[Function]}
         />
@@ -109,15 +103,9 @@ exports[`<Cookie /> should render advertising only accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <Toggle
+        <_default
           checked={true}
           className="cookie-manager"
-          icons={
-            Object {
-              "checked": <Unknown />,
-              "unchecked": <Unknown />,
-            }
-          }
           id="cookies-enable-ads"
           onChange={[Function]}
         />
@@ -186,15 +174,9 @@ exports[`<Cookie /> should render all accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <Toggle
+        <_default
           checked={true}
           className="cookie-manager"
-          icons={
-            Object {
-              "checked": <Unknown />,
-              "unchecked": <Unknown />,
-            }
-          }
           id="cookies-enable-analytic"
           onChange={[Function]}
         />
@@ -247,15 +229,9 @@ exports[`<Cookie /> should render all accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <Toggle
+        <_default
           checked={true}
           className="cookie-manager"
-          icons={
-            Object {
-              "checked": <Unknown />,
-              "unchecked": <Unknown />,
-            }
-          }
           id="cookies-enable-ads"
           onChange={[Function]}
         />
@@ -324,15 +300,9 @@ exports[`<Cookie /> should render all refused 1`] = `
             values={Object {}}
           />
         </div>
-        <Toggle
+        <_default
           checked={false}
           className="cookie-manager"
-          icons={
-            Object {
-              "checked": <Unknown />,
-              "unchecked": <Unknown />,
-            }
-          }
           id="cookies-enable-analytic"
           onChange={[Function]}
         />
@@ -385,15 +355,9 @@ exports[`<Cookie /> should render all refused 1`] = `
             values={Object {}}
           />
         </div>
-        <Toggle
+        <_default
           checked={false}
           className="cookie-manager"
-          icons={
-            Object {
-              "checked": <Unknown />,
-              "unchecked": <Unknown />,
-            }
-          }
           id="cookies-enable-ads"
           onChange={[Function]}
         />
@@ -462,15 +426,9 @@ exports[`<Cookie /> should render analytics only accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <Toggle
+        <_default
           checked={true}
           className="cookie-manager"
-          icons={
-            Object {
-              "checked": <Unknown />,
-              "unchecked": <Unknown />,
-            }
-          }
           id="cookies-enable-analytic"
           onChange={[Function]}
         />
@@ -523,15 +481,9 @@ exports[`<Cookie /> should render analytics only accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <Toggle
+        <_default
           checked={false}
           className="cookie-manager"
-          icons={
-            Object {
-              "checked": <Unknown />,
-              "unchecked": <Unknown />,
-            }
-          }
           id="cookies-enable-ads"
           onChange={[Function]}
         />

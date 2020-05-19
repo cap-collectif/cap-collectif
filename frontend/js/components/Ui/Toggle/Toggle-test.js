@@ -6,7 +6,7 @@ import Toggle from './Toggle';
 
 describe('<Toggle />', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(<Toggle />);
+    const wrapper = shallow(<Toggle checked onChange={() => {}} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

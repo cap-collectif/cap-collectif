@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import { Button, ListGroupItem } from 'react-bootstrap';
-import Toggle from 'react-toggle';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { createFragmentContainer, graphql } from 'react-relay';
+import Toggle from '~/components/Ui/Toggle/Toggle';
 import ListGroup from '../../Ui/List/ListGroup';
 import type {
   Dispatch,
@@ -41,6 +41,11 @@ const ListGroupItemWithJustifyContentEnd: StyledComponent<{}, {}, typeof ListGro
   && {
     justify-content: end;
   }
+
+  .form-group {
+    margin-bottom: 0;
+    margin-top: 5px;
+  }
 `;
 
 const ButtonWithMarginLeftAuto: StyledComponent<{}, {}, typeof Button> = styled(Button)`
@@ -75,7 +80,6 @@ export class ListPublicSSO extends React.Component<Props, State> {
           {features.login_franceconnect && franceConnect && (
             <ListGroupItemWithJustifyContentEnd>
               <Toggle
-                icons
                 checked={franceConnect.enabled}
                 onChange={() => {
                   toggleStatus(franceConnect);
@@ -104,7 +108,6 @@ export class ListPublicSSO extends React.Component<Props, State> {
           )}
           <ListGroupItemWithJustifyContentEnd>
             <Toggle
-              icons
               checked={features.login_facebook}
               onChange={() => onToggle('login_facebook', !features.login_facebook)}
             />
@@ -112,14 +115,13 @@ export class ListPublicSSO extends React.Component<Props, State> {
           </ListGroupItemWithJustifyContentEnd>
           <ListGroupItemWithJustifyContentEnd>
             <Toggle
-              icons
               checked={features.login_gplus}
               onChange={() => onToggle('login_gplus', !features.login_gplus)}
             />
             <h5 className="mb-0 mt-0">Google</h5>
           </ListGroupItemWithJustifyContentEnd>
           <ListGroupItemWithJustifyContentEnd>
-            <Toggle icons checked disabled />
+            <Toggle checked disabled />
             <h5 className="mb-0 mt-0">
               <FormattedMessage id="global.email" />
             </h5>

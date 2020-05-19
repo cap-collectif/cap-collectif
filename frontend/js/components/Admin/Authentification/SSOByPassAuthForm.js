@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import Toggle from 'react-toggle';
+import Toggle from '~/components/Ui/Toggle/Toggle';
 import { toggleFeature } from '../../../redux/modules/default';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../../types';
 
@@ -24,9 +24,8 @@ export class SSOByPassAuthForm extends React.Component<Props> {
             </h3>
           </div>
           <div className="box-content box-content__content-form">
-            <div className="d-flex flex-row align-items-center mb-15">
+            <div className="d-flex flex-row align-items-baseline mb-15">
               <Toggle
-                icons
                 checked={features.sso_by_pass_auth}
                 onChange={() => onToggle('sso_by_pass_auth', !features.sso_by_pass_auth)}
               />

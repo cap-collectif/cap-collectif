@@ -51,7 +51,6 @@ const DraggableMember = ({ id, placeholder, draggableId }: DragglableMemberProps
     <Draggable key={id} index={id} draggableId={draggableId}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => {
         const usePortal: boolean = snapshot.isDragging;
-
         const child = (
           <div>
             <DraggableItem

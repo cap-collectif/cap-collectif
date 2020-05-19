@@ -13,7 +13,7 @@ class AdminShieldConfigurationPage extends Page
 
     protected $elements = [
         'save button' => '#shield-admin-form_submit',
-        'shield admin form toggle' => '#shield-admin-form .form-group .react-toggle',
+        'shield admin form toggle' => '#shield-admin-form .form-group .elegant-toggle',
     ];
 
     public function clickSaveButton()

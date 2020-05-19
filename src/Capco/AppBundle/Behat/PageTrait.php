@@ -37,14 +37,14 @@ trait PageTrait
 
     public function togglePerformance(): ?NodeElement
     {
-        $element = '#cookies-performance > div > div.react-toggle > div.react-toggle-track';
+        $element = '#cookies-performance > div span.elegant-toggle';
 
         return $this->find('css', $element)->click();
     }
 
     public function toggleAdvertising(): ?NodeElement
     {
-        $element = '#cookies-advertising > div > div.react-toggle > div.react-toggle-track';
+        $element = '#cookies-advertising > div span.elegant-toggle';
 
         return $this->find('css', $element)->click();
     }
