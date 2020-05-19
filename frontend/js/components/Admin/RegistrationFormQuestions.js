@@ -90,7 +90,22 @@ const form = reduxForm({
 })(RegistrationFormQuestions);
 
 const mapStateToProps = (state: State, props: Props) => ({
-  initialValues: props.registrationForm,
+  initialValues: {
+    ...props.registrationForm,
+    questions:
+      props.registrationForm &&
+      props.registrationForm.questions.map(question => {
+        if (question.__typename !== 'MultipleChoiceQuestion') return question;
+        const choices =
+          question.choices && question.choices.edges
+            ? question.choices.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+            : [];
+        return { ...question, choices };
+      }),
+  },
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
