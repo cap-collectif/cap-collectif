@@ -17,6 +17,6 @@ class UserContributionsToDeleteCount implements ResolverInterface
 
     public function __invoke(User $user): int
     {
-        return $this->deleteAccountMutation->hardDeleteUserContributionsInActiveSteps($user, true);
+        return $this->deleteAccountMutation->countContributionsToDelete($user);
     }
 }

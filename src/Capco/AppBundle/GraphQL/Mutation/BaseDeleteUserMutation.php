@@ -136,7 +136,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->redisStorageHelper->recomputeUserCounters($user);
     }
 
-    public function hardDeleteUserContributionsInActiveSteps(User $user, bool $dryRun = false): int
+    public function hardDeleteUserContributionsInActiveSteps(User $user): void
     {
         // Disable the built-in softdelete
         $filters = $this->em->getFilters();
@@ -152,77 +152,100 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         );
         $contributions = $user->getContributions();
         $toDeleteList = [];
-
         foreach ($contributions as $contribution) {
-            if ($contribution instanceof AbstractVote) {
-                if ($contribution instanceof CommentVote) {
-                    $toDeleteList[] = $contribution;
-                } elseif (
-                    method_exists($contribution->getRelated(), 'getStep') &&
-                    $contribution->getRelated() &&
-                    $contribution->getRelated()->getStep() &&
-                    $contribution
-                        ->getRelated()
-                        ->getStep()
-                        ->canContribute($user)
-                ) {
-                    $toDeleteList[] = $contribution;
-                }
-            }
-
-            if ($contribution instanceof Comment) {
-                $hasChild = $this->commentRepository->findOneBy([
-                    'parent' => $contribution->getId()
-                ]);
-                if ($hasChild) {
-                    $contribution->setBody($deletedBodyText);
-                } else {
-                    $toDeleteList[] = $contribution;
-                }
-            }
-            if (
-                ($contribution instanceof Proposal ||
-                    $contribution instanceof Opinion ||
-                    $contribution instanceof Source ||
-                    $contribution instanceof Argument) &&
-                $contribution->getStep() &&
-                $contribution->getStep()->canContribute($user)
-            ) {
+            if ($this->shallContributionBeDeleted($user, $contribution)) {
                 $toDeleteList[] = $contribution;
-                if (!$dryRun) {
-                    $proposalEvaluations = $this->proposalEvaluationRepository->findBy([
-                        'proposal' => $contribution->getId()
-                    ]);
-                    foreach ($proposalEvaluations as $a) {
-                        $this->em->remove($a);
-                    }
-
-                    $responses = $this->abstractResponseRepository->findBy([
-                        'proposal' => $contribution->getId()
-                    ]);
-                    foreach ($responses as $a) {
-                        $this->em->remove($a);
-                    }
-                }
+                $this->deleteResponsesAndEvaluationsFromProposal($user, $contribution);
+            } elseif ($this->shallContributionBeHidden($contribution)) {
+                $contribution->setBody($deletedBodyText);
             }
 
-            if (!$dryRun && method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
+            if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
                 $this->removeObjectMedia($contribution);
             }
         }
 
-        $count = \count($toDeleteList);
-        if (!$dryRun) {
-            foreach ($toDeleteList as $toDelete) {
-                $this->em->remove($toDelete);
-            }
+        foreach ($toDeleteList as $toDelete) {
+            $this->em->remove($toDelete);
         }
+
         $this->em->flush();
         $this->enableListeners();
-
         $this->redisStorageHelper->recomputeUserCounters($user);
+    }
+
+    public function countContributionsToDelete(User $user): int
+    {
+        $count = 0;
+        foreach ($user->getContributions() as $contribution) {
+            if ($this->shallContributionBeDeleted($user, $contribution)) {
+                $count++;
+            }
+        }
 
         return $count;
+    }
+
+    private function deleteResponsesAndEvaluationsFromProposal(User $user, $proposal): void
+    {
+        if (
+            ($proposal instanceof Proposal ||
+                $proposal instanceof Opinion ||
+                $proposal instanceof Source ||
+                $proposal instanceof Argument) &&
+            $proposal->getStep() &&
+            $proposal->getStep()->canContribute($user)
+        ) {
+            foreach ($this->proposalEvaluationRepository->findBy(['proposal' => $proposal->getId()]) as $evaluation) {
+                $this->em->remove($evaluation);
+            }
+
+            foreach ($this->abstractResponseRepository->findBy(['proposal' => $proposal->getId()]) as $response) {
+                $this->em->remove($response);
+            }
+        }
+    }
+
+    private function shallContributionBeDeleted(User $user, $contribution): bool
+    {
+        if ($contribution instanceof AbstractVote) {
+            if ($contribution instanceof CommentVote) {
+                $toDeleteList[] = $contribution;
+            } elseif (
+                method_exists($contribution->getRelated(), 'getStep') &&
+                $contribution->getRelated() &&
+                $contribution->getRelated()->getStep() &&
+                $contribution
+                    ->getRelated()
+                    ->getStep()
+                    ->canContribute($user)
+            ) {
+                return true;
+            }
+        } elseif ($contribution instanceof Comment) {
+            if (!$this->commentRepository->findOneBy(['parent' => $contribution->getId()])) {
+                return true;
+            }
+        } elseif (
+            ($contribution instanceof Proposal ||
+                $contribution instanceof Opinion ||
+                $contribution instanceof Source ||
+                $contribution instanceof Argument) &&
+            $contribution->getStep() &&
+            $contribution->getStep()->canContribute($user)
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function shallContributionBeHidden($contribution): bool
+    {
+        return (
+            $contribution instanceof Comment &&
+            $this->commentRepository->findOneBy(['parent' => $contribution->getId()])
+        );
     }
 
     public function anonymizeUser(User $user): void
