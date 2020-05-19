@@ -1,6 +1,23 @@
 /* eslint-env jest */
 import '../../_setup';
 
+const CreateAlphaProjectGroupMutation = /* GraphQL */ `
+  mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
+    createAlphaProject(input: $input) {
+      project {
+        id
+        restrictedViewers {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const CreateAlphaProjectMutation = /* GraphQL */ `
   mutation CreateAlphaProject($input: CreateAlphaProjectInput!) {
     createAlphaProject(input: $input) {
@@ -15,6 +32,13 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
         authors {
           id
           username
+        }
+        restrictedViewers {
+          edges {
+            node {
+              id
+            }
+          }
         }
         districts {
           edges {
@@ -625,5 +649,33 @@ describe('Internal|createAlphaProject complex mutations', () => {
         },
       },
     });
+  });
+});
+
+it('create a project with group of users as visibility', async () => {
+  const query = graphql(
+    CreateAlphaProjectGroupMutation,
+    {
+      input: {
+        ...BASE_PROJECT,
+        title: 'Je suis un projet simple avec des groupes de users',
+        restrictedViewerGroups: ['group1', 'group5', 'group6'],
+      },
+    },
+    'internal_admin',
+  );
+  await expect(query).resolves.toMatchSnapshot({
+    createAlphaProject: {
+      project: {
+        id: expect.any(String),
+        restrictedViewers: {
+          edges: [...Array(3)].map(_ => ({
+            node: {
+              id: expect.any(String),
+            },
+          })),
+        },
+      },
+    },
   });
 });

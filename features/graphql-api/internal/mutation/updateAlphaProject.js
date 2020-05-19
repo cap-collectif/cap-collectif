@@ -13,6 +13,13 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
       id
       username
     }
+    restrictedViewers {
+      edges {
+        node {
+          id
+        }
+      }
+    }
     districts {
       edges {
         node {
@@ -101,6 +108,30 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
 
 const UpdateAlphaProjectMutation = /* GraphQL */ `
   ${PROJECT_FRAGMENT}
+  mutation UpdateAlphaProject($input: UpdateAlphaProjectInput!) {
+    updateAlphaProject(input: $input) {
+      project {
+        id
+        ...Project_informations
+      }
+    }
+  }
+`;
+
+const PROJECT_GROUP_FRAGMENT = /* GraphQL */ `
+  fragment Project_informations on Project {
+    restrictedViewers {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+  }
+`;
+
+const UpdateAlphaProjectGroupMutation = /* GraphQL */ `
+  ${PROJECT_GROUP_FRAGMENT}
   mutation UpdateAlphaProject($input: UpdateAlphaProjectInput!) {
     updateAlphaProject(input: $input) {
       project {
@@ -844,5 +875,43 @@ describe('Internal|updateAlphaProject complex mutations', () => {
         },
       },
     });
+  });
+});
+
+it('update a newly created project and add a group', async () => {
+  const createResponse = await graphql(
+    CreateAlphaProjectMutation,
+    {
+      input: BASE_PROJECT,
+    },
+    'internal_admin',
+  );
+  const projectId = createResponse.createAlphaProject.project.id;
+
+  const updateResponse = await graphql(
+    UpdateAlphaProjectGroupMutation,
+    {
+      input: {
+        projectId,
+        ...BASE_PROJECT,
+        restrictedViewerGroups: ['group1', 'group5', 'group6'],
+      },
+    },
+    'internal_admin',
+  );
+  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+  expect(updateResponse).toMatchSnapshot({
+    updateAlphaProject: {
+      project: {
+        id: expect.any(String),
+        restrictedViewers: {
+          edges: [...Array(3)].map(_ => ({
+            node: {
+              id: expect.any(String),
+            },
+          })),
+        },
+      },
+    },
   });
 });

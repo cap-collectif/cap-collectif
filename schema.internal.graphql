@@ -2366,6 +2366,9 @@ input CreateAlphaProjectInput {
 
   """The locale id of the project. Null if visible by all languages"""
   locale: ID
+
+  """Groups id."""
+  restrictedViewerGroups: [ID!]
   clientMutationId: String
 }
 
@@ -9321,6 +9324,9 @@ input UpdateAlphaProjectInput {
 
   """The locale id of the project. Null if visible by all languages"""
   locale: ID
+
+  """Groups id."""
+  restrictedViewerGroups: [ID!]
   clientMutationId: String
   projectId: ID!
 }

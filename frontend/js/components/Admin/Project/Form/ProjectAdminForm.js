@@ -135,6 +135,7 @@ const onSubmit = (
     projectType,
     Cover: Cover ? Cover.id : null,
     video,
+
     themes: themes ? themes.map(theme => theme.value) : [],
     districts: districts ? districts.map(district => district.value) : [],
     metaDescription,

@@ -80,6 +80,8 @@ const mutation = graphql`
             }
           }
         }
+        ...ProjectAccessAdminForm_project
+
         opinionTerm
         visibility
         publishedAt

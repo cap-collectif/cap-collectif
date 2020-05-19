@@ -26,6 +26,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [
         Object {
           "__typename": "PresentationStep",
@@ -151,6 +154,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [
         Object {
           "__typename": "CollectStep",
@@ -252,6 +258,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [
         Object {
           "__typename": "CollectStep",
@@ -313,6 +322,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [
         Object {
           "__typename": "ConsultationStep",
@@ -368,6 +380,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [
         Object {
           "__typename": "OtherStep",
@@ -419,6 +434,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [
         Object {
           "__typename": "PresentationStep",
@@ -470,6 +488,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [
         Object {
           "__typename": "QuestionnaireStep",
@@ -522,6 +543,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [
         Object {
           "__typename": "RankingStep",
@@ -599,6 +623,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [],
       "themes": Array [
         Object {
@@ -657,6 +684,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [],
       "themes": Array [
         Object {
@@ -710,6 +740,9 @@ Object {
       "opinionCanBeFollowed": true,
       "opinionTerm": 2,
       "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
       "steps": Array [],
       "themes": Array [
         Object {
@@ -721,6 +754,35 @@ Object {
       "type": null,
       "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
       "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`update a newly created project and add a group 1`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "id": Any<String>,
+      "restrictedViewers": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": Any<String>,
+            },
+          },
+          Object {
+            "node": Object {
+              "id": Any<String>,
+            },
+          },
+          Object {
+            "node": Object {
+              "id": Any<String>,
+            },
+          },
+        ],
+      },
     },
   },
 }

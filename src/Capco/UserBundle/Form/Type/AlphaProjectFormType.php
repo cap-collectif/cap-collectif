@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
@@ -39,10 +40,14 @@ class AlphaProjectFormType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'strip_tags' => true,
-                'purify_html_profile' => 'default'
+                'purify_html_profile' => 'default',
             ])
             ->add('opinionTerm', NumberType::class, [
-                'required' => true
+                'required' => true,
+            ])
+            ->add('restrictedViewerGroups', EntityType::class, [
+                'class' => Group::class,
+                'multiple' => true,
             ])
             ->add('projectType')
             ->add('Cover')
@@ -51,37 +56,37 @@ class AlphaProjectFormType extends AbstractType
                 'choices' => ProjectHeaderType::getAvailableTypes(),
                 'preferred_choices' => ProjectHeaderType::FULL_WIDTH,
                 'empty_data' => ProjectHeaderType::FULL_WIDTH,
-                'required' => false
+                'required' => false,
             ])
             ->add('coverFilterOpacityPercent', NumberType::class, [
                 'required' => false,
                 'empty_data' => (string) Project::DEFAULT_COVER_FILTER_OPACITY,
                 'attr' => [
                     'min' => 0,
-                    'max' => 100
-                ]
+                    'max' => 100,
+                ],
             ])
             ->add('districts', EntityType::class, [
                 'class' => ProjectDistrict::class,
                 'multiple' => true,
                 'required' => true,
-                'mapped' => false
+                'mapped' => false,
             ])
             ->add('themes', EntityType::class, [
                 'class' => Theme::class,
                 'multiple' => true,
-                'choice_label' => 'id'
+                'choice_label' => 'id',
             ])
             ->add('locale', EntityType::class, [
                 'required' => false,
-                'class' => Locale::class
+                'class' => Locale::class,
             ])
             ->add('metaDescription')
             ->add('isExternal')
             ->add('publishedAt', DateTimeType::class, [
                 'required' => true,
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss'
+                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('visibility')
             ->add('opinionCanBeFollowed');
@@ -95,14 +100,14 @@ class AlphaProjectFormType extends AbstractType
                 $form
                     ->add('externalLink', UrlType::class, [
                         'required' => true,
-                        'constraints' => [new CheckExternalLink(), new NotBlank()]
+                        'constraints' => [new CheckExternalLink(), new NotBlank()],
                     ])
                     ->add('externalParticipantsCount')
                     ->add('externalContributionsCount')
                     ->add('externalVotesCount');
             } else {
                 $form->add('externalLink', UrlType::class, [
-                    'required' => false
+                    'required' => false,
                 ]);
             }
         });
@@ -115,7 +120,7 @@ class AlphaProjectFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Project::class,
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 }
