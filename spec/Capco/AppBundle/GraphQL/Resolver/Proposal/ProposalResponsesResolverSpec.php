@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Proposal;
 
+use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
@@ -13,18 +14,21 @@ use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalViewerIsAnEvaluerResolver;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProposalResponsesResolverSpec extends ObjectBehavior
 {
     public function let(
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
-        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer
+        ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
+        AuthorizationCheckerInterface $authorizationChecker
     ): void {
         $this->beConstructedWith(
             $abstractQuestionRepository,
             $abstractResponseRepository,
-            $viewerIsAnEvaluer
+            $viewerIsAnEvaluer,
+            $authorizationChecker
         );
     }
 
@@ -66,6 +70,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
+        AuthorizationCheckerInterface $authorizationChecker,
         ProposalForm $form,
         Proposal $proposal,
         User $author,
@@ -85,6 +90,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository
             ->getByProposal($proposal, true)
             ->willReturn($responses->toArray());
+        $authorizationChecker
+            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->willReturn(true);
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
@@ -95,6 +103,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
+        AuthorizationCheckerInterface $authorizationChecker,
         ProposalForm $form,
         Proposal $proposal,
         User $author,
@@ -114,6 +123,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository
             ->getByProposal($proposal, true)
             ->willReturn($responses->toArray());
+        $authorizationChecker
+            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->willReturn(true);
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(true);
@@ -124,6 +136,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
+        AuthorizationCheckerInterface $authorizationChecker,
         Proposal $proposal,
         ProposalForm $form,
         User $author,
@@ -142,6 +155,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository
             ->getByProposal($proposal, true)
             ->willReturn($responses->toArray());
+        $authorizationChecker
+            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->willReturn(false);
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
@@ -153,6 +169,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
+        AuthorizationCheckerInterface $authorizationChecker,
         Proposal $proposal,
         ProposalForm $form,
         User $author,
@@ -171,6 +188,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository
             ->getByProposal($proposal, true)
             ->willReturn($responses->toArray());
+        $authorizationChecker
+            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->willReturn(false);
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
@@ -244,6 +264,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
+        AuthorizationCheckerInterface $authorizationChecker,
         ProposalForm $form,
         Proposal $proposal,
         User $author,
@@ -263,6 +284,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository
             ->getByProposal($proposal, true)
             ->willReturn($responses->toArray());
+        $authorizationChecker
+            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->willReturn(false);
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);
@@ -275,6 +299,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository,
         ProposalViewerIsAnEvaluerResolver $viewerIsAnEvaluer,
+        AuthorizationCheckerInterface $authorizationChecker,
         ProposalForm $form,
         Proposal $proposal,
         User $author,
@@ -294,6 +319,9 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository
             ->getByProposal($proposal, true)
             ->willReturn($responses->toArray());
+        $authorizationChecker
+            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->willReturn(false);
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
         $proposal->getAuthor()->willReturn($author);
         $viewerIsAnEvaluer->__invoke($proposal, $viewer)->willReturn(false);

@@ -446,3 +446,494 @@ Object {
   },
 }
 `;
+
+exports[`Proposal.responses array fetches proposal's private responses when user is analyst on this proposal.: UHJvcG9zYWw6cHJvcG9zYWxJZGYx 1`] = `
+Object {
+  "proposal": Object {
+    "analysts": Array [
+      Object {
+        "id": "VXNlcjp1c2VyQWd1aQ==",
+      },
+      Object {
+        "id": "VXNlcjp1c2VySnBlYw==",
+      },
+      Object {
+        "id": "VXNlcjp1c2VyTWF4aW1l",
+      },
+      Object {
+        "id": "VXNlcjp1c2VyT21hcg==",
+      },
+      Object {
+        "id": "VXNlcjp1c2VyVGhlbw==",
+      },
+      Object {
+        "id": "VXNlcjp1c2VyVmluY2VudA==",
+      },
+    ],
+    "author": Object {
+      "id": "VXNlcjp1c2VyS2lyb3VsZQ==",
+    },
+    "responses": Array [
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMyOQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzkxOA==",
+          "private": true,
+        },
+        "value": "\\"Renseigner la présentation de mon Grand Projet\\"",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzA0",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzMg==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzMw==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzNA==",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzNQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzA1",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzMA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzkxOQ==",
+          "private": true,
+        },
+        "value": "\\"Un autre organisme privé\\"",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzMQ==",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzA3",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2Mg==",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2Mw==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2NA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2NQ==",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2Ng==",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTIx",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2Nw==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzA2",
+          "private": false,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzkyMA==",
+          "private": true,
+        },
+        "value": "{\\"labels\\":[],\\"other\\":null}",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzkyMQ==",
+          "private": true,
+        },
+        "value": "{\\"labels\\":[],\\"other\\":null}",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzNg==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzNw==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzOA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMzOQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0MA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTIy",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTIz",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI1",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI2",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI3",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MzkyMg==",
+          "private": true,
+        },
+        "value": "{\\"labels\\":[],\\"other\\":null}",
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0Mg==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0Mw==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0NA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0NQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0Ng==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI4",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTI5",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMw",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMx",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMy",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0Nw==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0OA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM0OQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1MA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTMz",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1MQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1Mg==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1Mw==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1NA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1NQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM3",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM4",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1Ng==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM5",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTQw",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTQx",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1Nw==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1OA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM1OQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2MA==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTM2MQ==",
+          "private": true,
+        },
+        "value": null,
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTQy",
+          "private": true,
+        },
+      },
+      Object {
+        "question": Object {
+          "id": "UXVlc3Rpb246MTQz",
+          "private": true,
+        },
+      },
+    ],
+  },
+  "viewer": Object {
+    "id": "VXNlcjp1c2VyVGhlbw==",
+    "isAdmin": false,
+  },
+}
+`;

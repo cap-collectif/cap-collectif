@@ -32,7 +32,8 @@ trait ResponsesResolverTrait
         User $author,
         $viewer,
         \ArrayObject $context,
-        bool $isEvaluer = false
+        bool $isLegacyAnalyst = false,
+        bool $isAnalyst = false
     ): iterable {
         $skipVerification =
             $context &&
@@ -41,7 +42,8 @@ trait ResponsesResolverTrait
         $isAuthor = $author === $viewer;
         $isAnalystOrAdmin = $skipVerification;
         if (!$skipVerification) {
-            $isAnalystOrAdmin = ($viewer instanceof User && $viewer->isAdmin()) || $isEvaluer;
+            $isAnalystOrAdmin =
+                ($viewer instanceof User && $viewer->isAdmin()) || $isLegacyAnalyst || $isAnalyst;
         }
         $viewerCanSeePrivateResponses = $skipVerification || $isAuthor || $isAnalystOrAdmin;
 
