@@ -28,6 +28,7 @@ type Props = {
   formErrors: Object,
   currentQuestion: Question,
   intl: IntlShape,
+  isSuperAdmin: boolean,
 } & ParentProps;
 
 type State = {|
@@ -71,6 +72,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
       validationRuleType,
       currentQuestion,
       formErrors,
+      isSuperAdmin,
     } = this.props;
     if (formErrors.questions !== undefined) {
       disabled = true;
@@ -160,9 +162,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
               <option value="siret">
                 {intl.formatMessage({ id: 'global.question.types.siret' })}
               </option>
-              <option value="rna">
-                {intl.formatMessage({ id: 'global.question.types.rna' })}
-              </option>
+              <option value="rna">{intl.formatMessage({ id: 'global.question.types.rna' })}</option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
               <option value="button">{intl.formatMessage({ id: 'question.types.button' })}</option>
@@ -252,14 +252,17 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
             type="checkbox"
             component={component}
           />
-          <Field
-            children={<FormattedMessage id="hidden-question" />}
-            id={`${member}.hidden`}
-            normalize={val => !!val}
-            name={`${member}.hidden`}
-            type="checkbox"
-            component={component}
-          />
+          {isSuperAdmin && (
+            <Field
+              children={<FormattedMessage id="hidden-question" />}
+              id={`${member}.hidden`}
+              normalize={val => !!val}
+              name={`${member}.hidden`}
+              type="checkbox"
+              component={component}
+            />
+          )}
+
           {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
@@ -341,6 +344,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
     type: selector(state, `${props.member}.type`),
     validationRuleType: selector(state, `${props.member}.validationRule.type`),
     formErrors: getFormSyncErrors(props.formName)(state),
+    isSuperAdmin: state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'),
   };
 };
 
