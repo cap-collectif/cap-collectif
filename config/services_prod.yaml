@@ -46,10 +46,10 @@ monolog:
       handler: sentry_handler
     sentry_handler:
       type: service
-      id: 'BGalati\MonologSentryHandler\SentryHandler'
+      id: 'Capco\AppBundle\Sentry\SentryHandler'
 
 services:
-  BGalati\MonologSentryHandler\SentryHandler:
+  Capco\AppBundle\Sentry\SentryHandler:
     autowire: true
     autoconfigure: true
 

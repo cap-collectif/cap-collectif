@@ -58,6 +58,7 @@ class Manager
         'display_pictures_in_event_list',
         'external_project',
         'app_news',
+        'sentry_log',
         'unstable__multilangue',
         'unstable__admin_editor',
         'unstable__analysis',

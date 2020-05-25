@@ -3,9 +3,10 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -93,11 +94,13 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate('display_pictures_in_depository_proposals_list');
         $this->manager->activate('display_pictures_in_event_list');
         $this->manager->activate('unstable__analysis');
+        $this->manager->activate('sentry_log');
 
         if ('test' === $env) {
             $this->manager->deactivate('shield_mode');
             $this->manager->activate('public_api');
             $this->manager->activate('indexation');
+            $this->manager->deactivate('sentry_log');
             $this->manager->deactivate('login_franceconnect');
         }
 
