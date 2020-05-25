@@ -25,7 +25,7 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
         values={Object {}}
       />
     </h4>
-    <ForwardRef(Relay(ListCustomSSO))
+    <Relay(ListCustomSSO)
       ssoConfigurations={
         Object {
           "edges": Array [],
@@ -41,7 +41,7 @@ exports[`<ListSSOConfiguration /> renders correctly with empty list 1`] = `
           values={Object {}}
         />
       </h4>
-      <Connect(Component)
+      <Connect(Relay(ListPublicSSO))
         ssoConfigurations={
           Object {
             "edges": Array [],
@@ -78,7 +78,7 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
         values={Object {}}
       />
     </h4>
-    <ForwardRef(Relay(ListCustomSSO))
+    <Relay(ListCustomSSO)
       ssoConfigurations={
         Object {
           "edges": Array [
@@ -108,7 +108,7 @@ exports[`<ListSSOConfiguration /> renders correctly with items 1`] = `
           values={Object {}}
         />
       </h4>
-      <Connect(Component)
+      <Connect(Relay(ListPublicSSO))
         ssoConfigurations={
           Object {
             "edges": Array [
@@ -162,7 +162,7 @@ exports[`<ListSSOConfiguration /> renders correctly with only Public SSO list wh
           values={Object {}}
         />
       </h4>
-      <Connect(Component)
+      <Connect(Relay(ListPublicSSO))
         ssoConfigurations={
           Object {
             "edges": Array [],

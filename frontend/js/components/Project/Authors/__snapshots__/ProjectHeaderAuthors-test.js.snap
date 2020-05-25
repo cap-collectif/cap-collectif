@@ -4,7 +4,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with 3 authors 1`] = `
 <ProjectHeaderAuthors__Container
   id="project-header"
 >
-  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+  <Relay(Connect(ProjectHeaderAuthorsModal))
     onClose={[Function]}
     show={false}
     users={
@@ -28,7 +28,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with 3 authors 1`] = `
     }
   />
   <div>
-    <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+    <Relay(Connect(UserAvatarListContainer))
       max={3}
       onClick={[Function]}
       users={
@@ -79,7 +79,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with one author 1`] = `
 <ProjectHeaderAuthors__Container
   id="project-header"
 >
-  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+  <Relay(Connect(ProjectHeaderAuthorsModal))
     onClose={[Function]}
     show={false}
     users={
@@ -93,7 +93,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with one author 1`] = `
     }
   />
   <div>
-    <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+    <Relay(Connect(UserAvatarListContainer))
       max={3}
       onClick={[Function]}
       users={
@@ -126,7 +126,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with one author but profiles
 <ProjectHeaderAuthors__Container
   id="project-header"
 >
-  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+  <Relay(Connect(ProjectHeaderAuthorsModal))
     onClose={[Function]}
     show={false}
     users={
@@ -140,7 +140,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with one author but profiles
     }
   />
   <div>
-    <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+    <Relay(Connect(UserAvatarListContainer))
       max={3}
       onClick={[Function]}
       users={
@@ -171,7 +171,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with two authors 1`] = `
 <ProjectHeaderAuthors__Container
   id="project-header"
 >
-  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+  <Relay(Connect(ProjectHeaderAuthorsModal))
     onClose={[Function]}
     show={false}
     users={
@@ -190,7 +190,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with two authors 1`] = `
     }
   />
   <div>
-    <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+    <Relay(Connect(UserAvatarListContainer))
       max={3}
       onClick={[Function]}
       users={
@@ -235,7 +235,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with two authors but profile
 <ProjectHeaderAuthors__Container
   id="project-header"
 >
-  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+  <Relay(Connect(ProjectHeaderAuthorsModal))
     onClose={[Function]}
     show={false}
     users={
@@ -254,7 +254,7 @@ exports[`<ProjectHeaderAuthors /> renders correctly with two authors but profile
     }
   />
   <div>
-    <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+    <Relay(Connect(UserAvatarListContainer))
       max={3}
       onClick={[Function]}
       users={
@@ -297,13 +297,13 @@ exports[`<ProjectHeaderAuthors /> renders correctly without authors 1`] = `
 <ProjectHeaderAuthors__Container
   id="project-header"
 >
-  <ForwardRef(Relay(Connect(ProjectHeaderAuthorsModal)))
+  <Relay(Connect(ProjectHeaderAuthorsModal))
     onClose={[Function]}
     show={false}
     users={Array []}
   />
   <div>
-    <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+    <Relay(Connect(UserAvatarListContainer))
       max={3}
       onClick={[Function]}
       users={Array []}

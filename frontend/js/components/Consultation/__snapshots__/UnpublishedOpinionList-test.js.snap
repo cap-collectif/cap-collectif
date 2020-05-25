@@ -37,7 +37,7 @@ exports[`<UnpublishedOpinionList /> renders correcty 1`] = `
   <ListGroup
     className=""
   >
-    <ForwardRef(Relay(Opinion))
+    <Relay(Opinion)
       key="0"
       opinion={
         Object {

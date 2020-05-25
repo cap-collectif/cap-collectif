@@ -2,7 +2,7 @@
 
 exports[`<LocaleAdminModalList /> renders correctly 1`] = `
 <Fragment>
-  <ForwardRef(Relay(LocaleAdminModalListItem))
+  <Relay(LocaleAdminModalListItem)
     key="fr-FR"
     locale={
       Object {
@@ -12,7 +12,7 @@ exports[`<LocaleAdminModalList /> renders correctly 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(LocaleAdminModalListItem))
+  <Relay(LocaleAdminModalListItem)
     key="en-EN"
     locale={
       Object {

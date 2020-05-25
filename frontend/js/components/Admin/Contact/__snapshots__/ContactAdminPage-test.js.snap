@@ -124,7 +124,148 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
       />
       <ReactRelayQueryRenderer
         environment={"RelayModernEnvironment()"}
-        query={[Function]}
+        query={
+          Object {
+            "fragment": Object {
+              "argumentDefinitions": Array [],
+              "kind": "Fragment",
+              "metadata": null,
+              "name": "ContactAdminPageQuery",
+              "selections": Array [
+                Object {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "ContactAdminList_query",
+                },
+              ],
+              "type": "Query",
+            },
+            "hash": "97ff3b45ddb66fae4945b205d3f36b56",
+            "kind": "Request",
+            "operation": Object {
+              "argumentDefinitions": Array [],
+              "kind": "Operation",
+              "name": "ContactAdminPageQuery",
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "ContactForm",
+                  "kind": "LinkedField",
+                  "name": "contactForms",
+                  "plural": true,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "id",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ContactFormTranslation",
+                      "kind": "LinkedField",
+                      "name": "translations",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "locale",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "body",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "confidentiality",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "email",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+              ],
+            },
+            "params": Object {
+              "id": null,
+              "metadata": Object {},
+              "name": "ContactAdminPageQuery",
+              "operationKind": "query",
+              "text": "query ContactAdminPageQuery {
+  ...ContactAdminList_query
+}
+
+fragment ContactAdminListItem_contactForm on ContactForm {
+  id
+  title
+  translations {
+    locale
+    title
+  }
+  ...ContactFormAdminModal_contactForm
+}
+
+fragment ContactAdminList_query on Query {
+  contactForms {
+    id
+    ...ContactAdminListItem_contactForm
+  }
+}
+
+fragment ContactFormAdminForm_contactForm on ContactForm {
+  id
+  email
+  translations {
+    locale
+    body
+    title
+    confidentiality
+  }
+}
+
+fragment ContactFormAdminModal_contactForm on ContactForm {
+  id
+  title
+  ...ContactFormAdminForm_contactForm
+}
+",
+            },
+          }
+        }
         render={[Function]}
         variables={Object {}}
       />

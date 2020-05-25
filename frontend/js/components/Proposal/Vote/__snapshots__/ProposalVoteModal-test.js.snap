@@ -70,7 +70,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
         <p>
           We need to collect
         </p>
-        <ForwardRef(Relay(Connect(ReduxForm)))
+        <Relay(Connect(ReduxForm))
           step={
             Object {
               "$fragmentRefs": null,
@@ -121,7 +121,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
         }
       />
     </h4>
-    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+    <Relay(Connect(injectIntl(ReduxForm)))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
       onSubmit={[Function]}
@@ -272,7 +272,7 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
         <p>
           We need to collect
         </p>
-        <ForwardRef(Relay(Connect(ReduxForm)))
+        <Relay(Connect(ReduxForm))
           step={
             Object {
               "$fragmentRefs": null,
@@ -323,7 +323,7 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
         }
       />
     </h4>
-    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+    <Relay(Connect(injectIntl(ReduxForm)))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
       onSubmit={[Function]}
@@ -474,7 +474,7 @@ exports[`<ProposalVoteModal /> should render correctly with interpellation 1`] =
         <p>
           We need to collect
         </p>
-        <ForwardRef(Relay(Connect(ReduxForm)))
+        <Relay(Connect(ReduxForm))
           step={
             Object {
               "$fragmentRefs": null,
@@ -525,7 +525,7 @@ exports[`<ProposalVoteModal /> should render correctly with interpellation 1`] =
         }
       />
     </h4>
-    <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+    <Relay(Connect(injectIntl(ReduxForm)))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
       onSubmit={[Function]}

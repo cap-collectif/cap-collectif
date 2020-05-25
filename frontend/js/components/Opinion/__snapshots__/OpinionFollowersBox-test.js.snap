@@ -6,7 +6,7 @@ exports[`<OpinionFollowersBox /> should render correctly 1`] = `
     bsClass="row"
     componentClass="div"
   >
-    <ForwardRef(Relay(UserBox))
+    <Relay(UserBox)
       className="proposal__follower"
       key="0"
       user={

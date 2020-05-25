@@ -8,7 +8,7 @@ exports[`<EventPageHeaderButtons /> renders correctly with the create event feat
   <div
     className="media d-flex align-items-center"
   >
-    <ForwardRef(Relay(Connect(UserAvatar)))
+    <Relay(Connect(UserAvatar))
       className="pull-left"
       user={
         Object {
@@ -35,7 +35,7 @@ exports[`<EventPageHeaderButtons /> renders correctly with the create event feat
           }
         />
       </div>
-      <ForwardRef(Relay(EventLabelStatus))
+      <Relay(EventLabelStatus)
         event={
           Object {
             "$fragmentRefs": null,
@@ -65,7 +65,7 @@ exports[`<EventPageHeaderButtons /> renders correctly with the create event feat
     <EventDeleteButton
       eventId="Event1"
     />
-    <ForwardRef(Relay(EventModerationMotiveView))
+    <Relay(EventModerationMotiveView)
       event={
         Object {
           "$fragmentRefs": null,
@@ -101,7 +101,7 @@ exports[`<EventPageHeaderButtons /> renders correcty 1`] = `
   <div
     className="media d-flex align-items-center"
   >
-    <ForwardRef(Relay(Connect(UserAvatar)))
+    <Relay(Connect(UserAvatar))
       className="pull-left"
       user={
         Object {

@@ -18,6 +18,8 @@ unnecessary-optional-chain=off
 .*/node_modules/react-simple-code-editor/lib/index.js.flow
 .*/node_modules/relay-compiler/transforms/RelayRelayDirectiveTransform.js.flow
 .*/node_modules/relay-runtime/store/StoreInspector.js.flow
+.*/node_modules/relay-runtime/store/RelayModernQueryExecutor.js.flow
+.*/node_modules/relay-runtime/util/createPayloadFor3DField.js.flow
 .*/node_modules/polished/lib/shorthands/position.js.flow
 .*/node_modules/immutable/dist/immutable.js
 

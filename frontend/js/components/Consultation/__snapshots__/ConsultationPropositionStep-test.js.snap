@@ -6,7 +6,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     id="consultation-plan"
     offset={60}
   >
-    <ForwardRef(Relay(Connect(injectIntl(ConsultationPlan))))
+    <Relay(Connect(injectIntl(ConsultationPlan)))
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -49,7 +49,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
       <div
         className="mr-15 d-ib"
       >
-        <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+        <Relay(Connect(UserAvatarListContainer))
           avatarSize={16}
           max={3}
           users={
@@ -176,7 +176,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
       illustration={null}
       maxLines={7}
     />
-    <ForwardRef(Relay(SectionRecursiveList))
+    <Relay(SectionRecursiveList)
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -213,7 +213,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
     id="consultation-plan"
     offset={60}
   >
-    <ForwardRef(Relay(Connect(injectIntl(ConsultationPlan))))
+    <Relay(Connect(injectIntl(ConsultationPlan)))
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -350,7 +350,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
       body="Je suis le beau body"
       maxLines={5}
     />
-    <ForwardRef(Relay(SectionRecursiveList))
+    <Relay(SectionRecursiveList)
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -398,7 +398,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
       <div
         className="mr-15 d-ib"
       >
-        <ForwardRef(Relay(Connect(UserAvatarListContainer)))
+        <Relay(Connect(UserAvatarListContainer))
           avatarSize={16}
           max={3}
           users={
@@ -525,7 +525,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
       illustration={null}
       maxLines={7}
     />
-    <ForwardRef(Relay(SectionRecursiveList))
+    <Relay(SectionRecursiveList)
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -667,7 +667,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
       body="Je suis le beau body"
       maxLines={5}
     />
-    <ForwardRef(Relay(SectionRecursiveList))
+    <Relay(SectionRecursiveList)
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -704,7 +704,7 @@ exports[`<ConsultationPropositionStep /> should not render the plan when the ste
     id="consultation-plan"
     offset={60}
   >
-    <ForwardRef(Relay(Connect(injectIntl(ConsultationPlan))))
+    <Relay(Connect(injectIntl(ConsultationPlan)))
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -837,7 +837,7 @@ exports[`<ConsultationPropositionStep /> should not render the plan when the ste
       body="Je suis le beau body"
       maxLines={5}
     />
-    <ForwardRef(Relay(SectionRecursiveList))
+    <Relay(SectionRecursiveList)
       consultation={
         Object {
           "$fragmentRefs": null,

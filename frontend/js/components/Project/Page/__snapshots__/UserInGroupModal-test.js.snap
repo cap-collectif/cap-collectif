@@ -54,7 +54,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         key="user1"
         listItem={false}
       >
-        <ForwardRef(Relay(Connect(UserAvatar)))
+        <Relay(Connect(UserAvatar))
           user={
             Object {
               "$fragmentRefs": null,
@@ -79,7 +79,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         key="user2"
         listItem={false}
       >
-        <ForwardRef(Relay(Connect(UserAvatar)))
+        <Relay(Connect(UserAvatar))
           user={
             Object {
               "$fragmentRefs": null,
@@ -165,7 +165,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         key="user1"
         listItem={false}
       >
-        <ForwardRef(Relay(Connect(UserAvatar)))
+        <Relay(Connect(UserAvatar))
           user={
             Object {
               "$fragmentRefs": null,
@@ -190,7 +190,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         key="user2"
         listItem={false}
       >
-        <ForwardRef(Relay(Connect(UserAvatar)))
+        <Relay(Connect(UserAvatar))
           user={
             Object {
               "$fragmentRefs": null,

@@ -14,7 +14,7 @@ exports[`<ProjectPreview /> should render correctly project with participative s
     className="project-preview"
     id="project-preview-UHJvamVjdDpwcm9qZWN0MQ=="
   >
-    <ForwardRef(Relay(ProjectType))
+    <Relay(ProjectType)
       project={
         Object {
           "$fragmentRefs": null,
@@ -23,7 +23,7 @@ exports[`<ProjectPreview /> should render correctly project with participative s
         }
       }
     />
-    <ForwardRef(Relay(ProjectCover))
+    <Relay(ProjectCover)
       project={
         Object {
           "$fragmentRefs": null,
@@ -32,7 +32,7 @@ exports[`<ProjectPreview /> should render correctly project with participative s
         }
       }
     />
-    <ForwardRef(Relay(ProjectPreviewBody))
+    <Relay(ProjectPreviewBody)
       project={
         Object {
           "$fragmentRefs": null,

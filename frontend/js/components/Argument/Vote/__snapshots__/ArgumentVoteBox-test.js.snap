@@ -5,7 +5,7 @@ exports[`<ArgumentVoteBox /> renders correctly 1`] = `
   <form
     className="opinion__votes-button"
   >
-    <ForwardRef(Relay(ArgumentVoteButton))
+    <Relay(ArgumentVoteButton)
       argument={
         Object {
           "$fragmentRefs": null,

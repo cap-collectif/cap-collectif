@@ -5,7 +5,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
   id="projectAdminForm"
   onSubmit={[MockFunction]}
 >
-  <ForwardRef(Relay(ProjectContentAdminForm))
+  <Relay(ProjectContentAdminForm)
     anyTouched={false}
     array={
       Object {
@@ -92,7 +92,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     valid={true}
     warning={null}
   />
-  <ForwardRef(Relay(ProjectExternalAdminPage))
+  <Relay(ProjectExternalAdminPage)
     anyTouched={false}
     array={
       Object {
@@ -238,7 +238,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     valid={true}
     warning={null}
   />
-  <ForwardRef(Relay(Connect(ProjectAccessAdminForm)))
+  <Relay(Connect(ProjectAccessAdminForm))
     anyTouched={false}
     array={
       Object {
@@ -379,7 +379,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     valid={true}
     warning={null}
   />
-  <ForwardRef(Relay(ProjectProposalsAdminForm))
+  <Relay(ProjectProposalsAdminForm)
     anyTouched={false}
     array={
       Object {
@@ -466,7 +466,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     valid={true}
     warning={null}
   />
-  <ForwardRef(Relay(ProjectPublishAdminForm))
+  <Relay(ProjectPublishAdminForm)
     anyTouched={false}
     array={
       Object {

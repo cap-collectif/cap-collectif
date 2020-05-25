@@ -11,7 +11,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       eventKey={1}
       title="admin.fields.group.number_users"
     >
-      <ForwardRef(Relay(Connect(injectIntl(GroupAdminUsers))))
+      <Relay(Connect(injectIntl(GroupAdminUsers)))
         group={
           Object {
             "$fragmentRefs": null,
@@ -24,7 +24,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       eventKey={2}
       title="global.params"
     >
-      <ForwardRef(Relay(Connect(ReduxForm)))
+      <Relay(Connect(ReduxForm))
         group={
           Object {
             "$fragmentRefs": null,

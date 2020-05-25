@@ -10,7 +10,7 @@ exports[`<ProjectExternalAdminPage /> renders correctly empty 1`] = `
     <div
       className="box-content"
     >
-      <ForwardRef(Relay(Connect(ProjectExternalAdminForm)))
+      <Relay(Connect(ProjectExternalAdminForm))
         anyTouched={false}
         array={
           Object {
@@ -85,7 +85,7 @@ exports[`<ProjectExternalAdminPage /> renders correctly with a project 1`] = `
     <div
       className="box-content"
     >
-      <ForwardRef(Relay(Connect(ProjectExternalAdminForm)))
+      <Relay(Connect(ProjectExternalAdminForm))
         anyTouched={false}
         array={
           Object {

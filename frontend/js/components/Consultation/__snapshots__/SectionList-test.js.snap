@@ -5,7 +5,7 @@ exports[`<SectionList /> renders correcty 1`] = `
   className="section-list_container"
   id="section1"
 >
-  <ForwardRef(Relay(Section))
+  <Relay(Section)
     consultation={Object {}}
     hideEmptySection={false}
     level={0}

@@ -49,7 +49,8 @@ module.exports = {
   rules: {
     // TODO
     'react/no-unescaped-entities': 'warn',
-    'relay/generated-flow-types': 'warn',
+    // TODO restore this
+    'relay/generated-flow-types': 'off',
     'react/no-this-in-sfc': 'warn',
     'react/sort-comp': 'warn',
 

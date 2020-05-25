@@ -12,7 +12,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     xs={4}
     xsHidden={true}
   >
-    <ForwardRef(Relay(EventListCounter))
+    <Relay(EventListCounter)
       query={
         Object {
           "$fragmentRefs": null,
@@ -275,7 +275,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     xs={4}
     xsHidden={true}
   >
-    <ForwardRef(Relay(EventListCounter))
+    <Relay(EventListCounter)
       query={
         Object {
           "$fragmentRefs": null,

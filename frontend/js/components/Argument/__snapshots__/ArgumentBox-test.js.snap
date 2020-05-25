@@ -57,7 +57,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
         <div
           className="opinion opinion--add-argument block block--bordered"
         >
-          <ForwardRef(Relay(Connect(ReduxForm)))
+          <Relay(Connect(ReduxForm))
             argumentable={
               Object {
                 "$fragmentRefs": null,
@@ -71,7 +71,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
             type="FOR"
           />
         </div>
-        <ForwardRef(Relay(Connect(UnpublishedArgumentListRenderer)))
+        <Relay(Connect(UnpublishedArgumentListRenderer))
           argumentable={
             Object {
               "$fragmentRefs": null,
@@ -83,7 +83,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
           }
           type="FOR"
         />
-        <ForwardRef(Relay(Connect(ArgumentList)))
+        <Relay(Connect(ArgumentList))
           argumentable={
             Object {
               "$fragmentRefs": null,
@@ -108,7 +108,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
         <div
           className="opinion opinion--add-argument block block--bordered"
         >
-          <ForwardRef(Relay(Connect(ReduxForm)))
+          <Relay(Connect(ReduxForm))
             argumentable={
               Object {
                 "$fragmentRefs": null,
@@ -122,7 +122,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
             type="AGAINST"
           />
         </div>
-        <ForwardRef(Relay(Connect(UnpublishedArgumentListRenderer)))
+        <Relay(Connect(UnpublishedArgumentListRenderer))
           argumentable={
             Object {
               "$fragmentRefs": null,
@@ -134,7 +134,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
           }
           type="AGAINST"
         />
-        <ForwardRef(Relay(Connect(ArgumentList)))
+        <Relay(Connect(ArgumentList))
           argumentable={
             Object {
               "$fragmentRefs": null,
@@ -159,7 +159,7 @@ exports[`<ArgumentsBox /> should render correctly with a simple commentSystem 1`
   <div
     className="opinion opinion--add-argument block block--bordered"
   >
-    <ForwardRef(Relay(Connect(ReduxForm)))
+    <Relay(Connect(ReduxForm))
       argumentable={
         Object {
           "$fragmentRefs": null,
@@ -173,7 +173,7 @@ exports[`<ArgumentsBox /> should render correctly with a simple commentSystem 1`
       type="SIMPLE"
     />
   </div>
-  <ForwardRef(Relay(Connect(UnpublishedArgumentListRenderer)))
+  <Relay(Connect(UnpublishedArgumentListRenderer))
     argumentable={
       Object {
         "$fragmentRefs": null,
@@ -185,7 +185,7 @@ exports[`<ArgumentsBox /> should render correctly with a simple commentSystem 1`
     }
     type="SIMPLE"
   />
-  <ForwardRef(Relay(Connect(ArgumentList)))
+  <Relay(Connect(ArgumentList))
     argumentable={
       Object {
         "$fragmentRefs": null,

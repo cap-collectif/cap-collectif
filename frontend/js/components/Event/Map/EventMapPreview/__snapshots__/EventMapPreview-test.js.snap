@@ -3,7 +3,7 @@
 exports[`<EventMapPreview /> should render  when illustration not displayed 1`] = `
 <EventMapPreviewstyle__EventMapPreviewContainer>
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={false}
       event={
         Object {
@@ -43,7 +43,7 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
         </a>
       </Title>
       <TagsList>
-        <ForwardRef(Relay(TagUser))
+        <Relay(TagUser)
           size={16}
           user={
             Object {
@@ -72,7 +72,7 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
 exports[`<EventMapPreview /> should render correctly 1`] = `
 <EventMapPreviewstyle__EventMapPreviewContainer>
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={true}
       event={
         Object {
@@ -112,7 +112,7 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
         </a>
       </Title>
       <TagsList>
-        <ForwardRef(Relay(TagUser))
+        <Relay(TagUser)
           size={16}
           user={
             Object {
@@ -141,7 +141,7 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
 exports[`<EventMapPreview /> should render correctly when no date 1`] = `
 <EventMapPreviewstyle__EventMapPreviewContainer>
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={true}
       event={
         Object {
@@ -181,7 +181,7 @@ exports[`<EventMapPreview /> should render correctly when no date 1`] = `
         </a>
       </Title>
       <TagsList>
-        <ForwardRef(Relay(TagUser))
+        <Relay(TagUser)
           size={16}
           user={
             Object {
@@ -206,7 +206,7 @@ exports[`<EventMapPreview /> should render correctly when no date 1`] = `
 exports[`<EventMapPreview /> should render correctly when no googleMapsAddress 1`] = `
 <EventMapPreviewstyle__EventMapPreviewContainer>
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={true}
       event={
         Object {
@@ -244,7 +244,7 @@ exports[`<EventMapPreview /> should render correctly when no googleMapsAddress 1
         </a>
       </Title>
       <TagsList>
-        <ForwardRef(Relay(TagUser))
+        <Relay(TagUser)
           size={16}
           user={
             Object {

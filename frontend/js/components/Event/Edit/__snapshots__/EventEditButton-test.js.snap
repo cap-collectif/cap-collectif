@@ -2,7 +2,7 @@
 
 exports[`<EventEditButton /> it renders correctly 1`] = `
 <Fragment>
-  <ForwardRef(Relay(Connect(injectIntl(EventEditModal))))
+  <Relay(Connect(injectIntl(EventEditModal)))
     event={
       Object {
         "$fragmentRefs": null,

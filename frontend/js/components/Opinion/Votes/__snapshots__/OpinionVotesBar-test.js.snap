@@ -14,7 +14,7 @@ exports[`<OpinionVotesBar /> should render correctly a version 1`] = `
       }
     }
   >
-    <ForwardRef(Relay(VersionVotesModal))
+    <Relay(VersionVotesModal)
       version={
         Object {
           "$fragmentRefs": null,
@@ -60,7 +60,7 @@ exports[`<OpinionVotesBar /> should render correctly an opinion 1`] = `
       }
     }
   >
-    <ForwardRef(Relay(OpinionVotesModal))
+    <Relay(OpinionVotesModal)
       opinion={
         Object {
           "$fragmentRefs": null,

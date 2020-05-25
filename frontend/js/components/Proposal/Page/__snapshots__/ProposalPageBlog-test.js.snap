@@ -4,7 +4,7 @@ exports[`<ProposalPageBlog /> should render a list of posts 1`] = `
 <ul
   className="media-list"
 >
-  <ForwardRef(Relay(Connect(Post)))
+  <Relay(Connect(Post))
     key="0"
     post={
       Object {
@@ -12,7 +12,7 @@ exports[`<ProposalPageBlog /> should render a list of posts 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(Connect(Post)))
+  <Relay(Connect(Post))
     key="1"
     post={
       Object {

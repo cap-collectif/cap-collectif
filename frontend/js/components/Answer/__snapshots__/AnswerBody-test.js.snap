@@ -10,7 +10,7 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
       }
     }
   >
-    <ForwardRef(Relay(Connect(UserAvatar)))
+    <Relay(Connect(UserAvatar))
       className="pull-left"
       user={
         Object {
@@ -29,7 +29,7 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
           }
         }
       >
-        <ForwardRef(Relay(Connect(UserLink)))
+        <Relay(Connect(UserLink))
           user={
             Object {
               "$fragmentRefs": null,

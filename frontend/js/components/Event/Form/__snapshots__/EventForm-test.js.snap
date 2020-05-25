@@ -202,7 +202,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       values={Object {}}
     />
   </span>
-  <ForwardRef(Relay(injectIntl(SelectProject)))
+  <Relay(injectIntl(SelectProject))
     clearable={true}
     disabled={false}
     label="global.participative.project"
@@ -558,7 +558,7 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       values={Object {}}
     />
   </span>
-  <ForwardRef(Relay(injectIntl(SelectProject)))
+  <Relay(injectIntl(SelectProject))
     clearable={true}
     disabled={false}
     label="global.participative.project"
@@ -914,7 +914,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       values={Object {}}
     />
   </span>
-  <ForwardRef(Relay(injectIntl(SelectProject)))
+  <Relay(injectIntl(SelectProject))
     clearable={true}
     disabled={false}
     label="global.participative.project"
@@ -1270,7 +1270,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       values={Object {}}
     />
   </span>
-  <ForwardRef(Relay(injectIntl(SelectProject)))
+  <Relay(injectIntl(SelectProject))
     clearable={true}
     disabled={false}
     label="global.participative.project"

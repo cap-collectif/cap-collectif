@@ -4,7 +4,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
 <div
   id="ProposalStepPage-rendered"
 >
-  <ForwardRef(Relay(StepPageHeader))
+  <Relay(StepPageHeader)
     step={
       Object {
         "$fragmentRefs": null,
@@ -31,7 +31,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(UnpublishedProposalListView))
+  <Relay(UnpublishedProposalListView)
     step={
       Object {
         "$fragmentRefs": null,
@@ -58,7 +58,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(ProposalStepPageHeader))
+  <Relay(ProposalStepPageHeader)
     step={
       Object {
         "$fragmentRefs": null,
@@ -85,7 +85,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(Connect(injectIntl(ProposalListFilters))))
+  <Relay(Connect(injectIntl(ProposalListFilters)))
     step={
       Object {
         "$fragmentRefs": null,
@@ -112,7 +112,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(Connect(ProposalListView)))
+  <Relay(Connect(ProposalListView))
     count={10}
     defaultMapOptions={
       Object {

@@ -2,7 +2,7 @@
 
 exports[`<ProposalCreate /> should render correctly 1`] = `
 <div>
-  <ForwardRef(Relay(ProposalCreateButton))
+  <Relay(ProposalCreateButton)
     disabled={false}
     handleClick={[Function]}
     projectType="global.consultation"
@@ -44,7 +44,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+      <Relay(Connect(injectIntl(ReduxForm)))
         proposal={null}
         proposalForm={
           Object {
@@ -86,7 +86,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
 
 exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
 <div>
-  <ForwardRef(Relay(ProposalCreateButton))
+  <Relay(ProposalCreateButton)
     disabled={false}
     handleClick={[Function]}
     projectType="global.consultations"
@@ -128,7 +128,7 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+      <Relay(Connect(injectIntl(ReduxForm)))
         proposal={null}
         proposalForm={
           Object {

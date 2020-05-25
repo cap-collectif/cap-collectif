@@ -4,7 +4,259 @@ exports[`<ProjectHeaderAuthorsView /> renders correctly 1`] = `
 <Fragment>
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
-    query={[Function]}
+    query={
+      Object {
+        "fragment": Object {
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "projectId",
+              "type": "ID!",
+            },
+          ],
+          "kind": "Fragment",
+          "metadata": null,
+          "name": "ProjectHeaderAuthorsViewQuery",
+          "selections": Array [
+            Object {
+              "alias": "project",
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "id",
+                  "variableName": "projectId",
+                },
+              ],
+              "concreteType": null,
+              "kind": "LinkedField",
+              "name": "node",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "ProjectHeaderAuthors_project",
+                },
+                Object {
+                  "kind": "InlineFragment",
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "publishedAt",
+                      "storageKey": null,
+                    },
+                  ],
+                  "type": "Project",
+                },
+              ],
+              "storageKey": null,
+            },
+          ],
+          "type": "Query",
+        },
+        "hash": "3d96d33bfd295685042ac9b87601b9db",
+        "kind": "Request",
+        "operation": Object {
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "projectId",
+              "type": "ID!",
+            },
+          ],
+          "kind": "Operation",
+          "name": "ProjectHeaderAuthorsViewQuery",
+          "selections": Array [
+            Object {
+              "alias": "project",
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "id",
+                  "variableName": "projectId",
+                },
+              ],
+              "concreteType": null,
+              "kind": "LinkedField",
+              "name": "node",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "__typename",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null,
+                },
+                Object {
+                  "kind": "InlineFragment",
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "User",
+                      "kind": "LinkedField",
+                      "name": "authors",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "username",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Media",
+                          "kind": "LinkedField",
+                          "name": "media",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "UserType",
+                          "kind": "LinkedField",
+                          "name": "userType",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "publishedAt",
+                      "storageKey": null,
+                    },
+                  ],
+                  "type": "Project",
+                },
+              ],
+              "storageKey": null,
+            },
+          ],
+        },
+        "params": Object {
+          "id": null,
+          "metadata": Object {},
+          "name": "ProjectHeaderAuthorsViewQuery",
+          "operationKind": "query",
+          "text": "query ProjectHeaderAuthorsViewQuery(
+  $projectId: ID!
+) {
+  project: node(id: $projectId) {
+    __typename
+    ...ProjectHeaderAuthors_project
+    ... on Project {
+      publishedAt
+    }
+    id
+  }
+}
+
+fragment ProjectHeaderAuthorsModal_users on User {
+  id
+  url
+  username
+  userType {
+    name
+    id
+  }
+  ...UserAvatar_user
+}
+
+fragment ProjectHeaderAuthors_project on Project {
+  id
+  authors {
+    username
+    url
+    ...UserAvatarList_users
+    ...ProjectHeaderAuthorsModal_users
+    id
+  }
+}
+
+fragment UserAvatarList_users on User {
+  id
+  username
+  ...UserAvatar_user
+}
+
+fragment UserAvatar_user on User {
+  url
+  username
+  media {
+    url
+    id
+  }
+}
+",
+        },
+      }
+    }
     render={[Function]}
     variables={
       Object {

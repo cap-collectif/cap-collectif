@@ -56,7 +56,7 @@ exports[`<LocaleAdminModal /> renders correctly 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(LocaleAdminModalList))
+      <Relay(LocaleAdminModalList)
         locales={
           Array [
             Object {
@@ -177,7 +177,7 @@ exports[`<LocaleAdminModal /> renders correctly empty 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(LocaleAdminModalList))
+      <Relay(LocaleAdminModalList)
         locales={Array []}
       />
     </ModalBody>

@@ -9,7 +9,7 @@ exports[`<ConsultationPlanItems /> renders correcty 1`] = `
   stacked={false}
 >
   <li>
-    <ForwardRef(Relay(Connect(ConsultationPlanItem)))
+    <Relay(Connect(ConsultationPlanItem))
       level={0}
       onCollapse={[Function]}
       section={

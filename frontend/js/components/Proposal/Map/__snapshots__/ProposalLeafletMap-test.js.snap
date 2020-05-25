@@ -61,7 +61,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       <ProposalLeafletMap__BlankPopup
         closeButton={false}
       >
-        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+        <Relay(Connect(ProposalMapPopover))
           proposal={
             Object {
               "$fragmentRefs": null,
@@ -107,7 +107,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       <ProposalLeafletMap__BlankPopup
         closeButton={false}
       >
-        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+        <Relay(Connect(ProposalMapPopover))
           proposal={
             Object {
               "$fragmentRefs": null,
@@ -153,7 +153,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
       <ProposalLeafletMap__BlankPopup
         closeButton={false}
       >
-        <ForwardRef(Relay(Connect(ProposalMapPopover)))
+        <Relay(Connect(ProposalMapPopover))
           proposal={
             Object {
               "$fragmentRefs": null,

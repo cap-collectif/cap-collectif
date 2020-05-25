@@ -11,7 +11,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
       eventKey={1}
       title="global.questionnaire"
     >
-      <ForwardRef(Relay(injectIntl(QuestionnairePage)))
+      <Relay(injectIntl(QuestionnairePage))
         questionnaire={
           Object {
             "$fragmentRefs": null,
@@ -25,7 +25,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is private 1`
       eventKey={2}
       title="results"
     >
-      <ForwardRef(Relay(injectIntl(QuestionnaireResults)))
+      <Relay(injectIntl(QuestionnaireResults))
         questionnaire={
           Object {
             "$fragmentRefs": null,
@@ -43,7 +43,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly questionnaire is public 1`]
 <div
   id="QuestionnaireStepTabs"
 >
-  <ForwardRef(Relay(injectIntl(QuestionnairePage)))
+  <Relay(injectIntl(QuestionnairePage))
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -59,7 +59,7 @@ exports[`<QuestionnaireStepTabs /> renders correctly when results are disabled 1
 <div
   id="QuestionnaireStepTabs"
 >
-  <ForwardRef(Relay(injectIntl(QuestionnairePage)))
+  <Relay(injectIntl(QuestionnairePage))
     questionnaire={
       Object {
         "$fragmentRefs": null,

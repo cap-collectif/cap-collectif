@@ -2,7 +2,7 @@
 
 exports[`<QuestionnaireReplyPage /> renders correctly 1`] = `
 <QuestionnaireReplyPage__QuestionnaireReplyPageContainer>
-  <ForwardRef(Relay(StepPageHeader))
+  <Relay(StepPageHeader)
     step={
       Object {
         "$fragmentRefs": null,
@@ -49,7 +49,7 @@ exports[`<QuestionnaireReplyPage /> renders correctly 1`] = `
       }
     />
   </p>
-  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -69,7 +69,7 @@ exports[`<QuestionnaireReplyPage /> renders correctly 1`] = `
     }
     setIsEditingReplyForm={[Function]}
   />
-  <ForwardRef(Relay(StepPageFooter))
+  <Relay(StepPageFooter)
     step={
       Object {
         "$fragmentRefs": null,

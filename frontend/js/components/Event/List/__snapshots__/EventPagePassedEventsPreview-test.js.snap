@@ -23,7 +23,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
       md={12}
       xs={12}
     >
-      <ForwardRef(Relay(Connect(EventPreview)))
+      <Relay(Connect(EventPreview))
         className="eventPreview_list"
         event={
           Object {
@@ -34,7 +34,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
         isHorizontal={true}
         key="0"
       />
-      <ForwardRef(Relay(Connect(EventPreview)))
+      <Relay(Connect(EventPreview))
         className="eventPreview_list"
         event={
           Object {
@@ -45,7 +45,7 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
         isHorizontal={true}
         key="1"
       />
-      <ForwardRef(Relay(Connect(EventPreview)))
+      <Relay(Connect(EventPreview))
         className="eventPreview_list"
         event={
           Object {

@@ -2,14 +2,14 @@
 
 exports[`<QuestionnairePage /> renders correctly 1`] = `
 <QuestionnairePage__QuestionnaireContainer>
-  <ForwardRef(Relay(StepPageHeader))
+  <Relay(StepPageHeader)
     step={
       Object {
         "$fragmentRefs": null,
       }
     }
   />
-  <ForwardRef(Relay(UserReplies))
+  <Relay(UserReplies)
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -42,7 +42,7 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
       values={Object {}}
     />
   </div>
-  <ForwardRef(Relay(StepPageFooter))
+  <Relay(StepPageFooter)
     step={
       Object {
         "$fragmentRefs": null,
@@ -54,14 +54,14 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
 
 exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`] = `
 <QuestionnairePage__QuestionnaireContainer>
-  <ForwardRef(Relay(StepPageHeader))
+  <Relay(StepPageHeader)
     step={
       Object {
         "$fragmentRefs": null,
       }
     }
   />
-  <ForwardRef(Relay(UserReplies))
+  <Relay(UserReplies)
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -91,7 +91,7 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
       values={Object {}}
     />
   </button>
-  <ForwardRef(Relay(StepPageFooter))
+  <Relay(StepPageFooter)
     step={
       Object {
         "$fragmentRefs": null,
@@ -103,14 +103,14 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
 
 exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
 <QuestionnairePage__QuestionnaireContainer>
-  <ForwardRef(Relay(StepPageHeader))
+  <Relay(StepPageHeader)
     step={
       Object {
         "$fragmentRefs": null,
       }
     }
   />
-  <ForwardRef(Relay(UserReplies))
+  <Relay(UserReplies)
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -123,7 +123,7 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(Connect(ReplyCreateFormWrapper)))
+  <Relay(Connect(ReplyCreateFormWrapper))
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -136,7 +136,7 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(StepPageFooter))
+  <Relay(StepPageFooter)
     step={
       Object {
         "$fragmentRefs": null,

@@ -5,7 +5,7 @@ exports[`<LocaleAdminList /> renders correctly 1`] = `
   <ListGroup
     className=""
   >
-    <ForwardRef(Relay(LocaleAdminListItem))
+    <Relay(LocaleAdminListItem)
       locale={
         Object {
           "$fragmentRefs": null,
@@ -34,7 +34,7 @@ exports[`<LocaleAdminList /> renders correctly 1`] = `
       values={Object {}}
     />
   </Button>
-  <ForwardRef(Relay(Connect(ReduxForm)))
+  <Relay(Connect(ReduxForm))
     displayModal={[Function]}
     locales={
       Array [

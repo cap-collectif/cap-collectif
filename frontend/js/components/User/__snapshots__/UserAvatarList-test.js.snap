@@ -25,7 +25,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
         ]
       }
     >
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         displayUrl={false}
         features={
           Object {

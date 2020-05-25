@@ -5,7 +5,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <div
     className="flex-1"
   >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
+    <Relay(Connect(ProjectPreviewThemes))
       project={
         Object {
           "$fragmentRefs": null,
@@ -99,7 +99,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
+    <Relay(ProjectPreviewCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -150,7 +150,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <ForwardRef(Relay(ProjectPreviewExternalCounters))
+    <Relay(ProjectPreviewExternalCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -202,7 +202,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <Relay(ProjectPreviewProgressBar)
     actualStep={
       Object {
         "$fragmentRefs": null,
@@ -291,7 +291,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <div
     className="flex-1"
   >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
+    <Relay(Connect(ProjectPreviewThemes))
       project={
         Object {
           "$fragmentRefs": null,
@@ -373,7 +373,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
+    <Relay(ProjectPreviewCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -413,7 +413,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <Relay(ProjectPreviewProgressBar)
     actualStep={
       Object {
         "$fragmentRefs": null,
@@ -496,7 +496,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <div
     className="flex-1"
   >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
+    <Relay(Connect(ProjectPreviewThemes))
       project={
         Object {
           "$fragmentRefs": null,
@@ -602,7 +602,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
+    <Relay(ProjectPreviewCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -666,7 +666,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <Relay(ProjectPreviewProgressBar)
     actualStep={
       Object {
         "$fragmentRefs": null,
@@ -770,7 +770,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <div
     className="flex-1"
   >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
+    <Relay(Connect(ProjectPreviewThemes))
       project={
         Object {
           "$fragmentRefs": null,
@@ -876,7 +876,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
+    <Relay(ProjectPreviewCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -939,7 +939,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <ForwardRef(Relay(ProjectPreviewExternalCounters))
+    <Relay(ProjectPreviewExternalCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -1003,7 +1003,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <Relay(ProjectPreviewProgressBar)
     actualStep={
       Object {
         "$fragmentRefs": null,
@@ -1107,7 +1107,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
   <div
     className="flex-1"
   >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
+    <Relay(Connect(ProjectPreviewThemes))
       project={
         Object {
           "$fragmentRefs": null,
@@ -1213,7 +1213,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
+    <Relay(ProjectPreviewCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -1277,7 +1277,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <Relay(ProjectPreviewProgressBar)
     actualStep={
       Object {
         "$fragmentRefs": null,
@@ -1378,7 +1378,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
   <div
     className="flex-1"
   >
-    <ForwardRef(Relay(Connect(ProjectPreviewThemes)))
+    <Relay(Connect(ProjectPreviewThemes))
       project={
         Object {
           "$fragmentRefs": null,
@@ -1460,7 +1460,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
         </a>
       </OverlayTrigger>
     </Title>
-    <ForwardRef(Relay(ProjectPreviewCounters))
+    <Relay(ProjectPreviewCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -1499,7 +1499,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
         }
       }
     />
-    <ForwardRef(Relay(ProjectPreviewExternalCounters))
+    <Relay(ProjectPreviewExternalCounters)
       project={
         Object {
           "$fragmentRefs": null,
@@ -1539,7 +1539,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
       }
     />
   </div>
-  <ForwardRef(Relay(ProjectPreviewProgressBar))
+  <Relay(ProjectPreviewProgressBar)
     actualStep={
       Object {
         "$fragmentRefs": null,

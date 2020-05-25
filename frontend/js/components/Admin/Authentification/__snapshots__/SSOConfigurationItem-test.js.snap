@@ -5,7 +5,7 @@ exports[`<SSOConfigurationItem /> renders correctly with Oauth2 configuration 1`
   bsClass="list-group-item"
   listItem={false}
 >
-  <ForwardRef(Relay(Oauth2SSOConfigurationItem))
+  <Relay(Oauth2SSOConfigurationItem)
     configuration={
       Object {
         "__typename": "Oauth2SSOConfiguration",

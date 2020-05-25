@@ -14,7 +14,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
     <MediaLeft
       bsClass="media-left"
     >
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         user={
           Object {
             "displayName": "author1",
@@ -31,7 +31,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
       className="opinion__body"
       componentClass="div"
     >
-      <ForwardRef(Relay(OpinionInfos))
+      <Relay(OpinionInfos)
         opinion={
           Object {
             "$fragmentRefs": null,
@@ -48,7 +48,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
         }
         rankingThreshold={null}
       />
-      <ForwardRef(Relay(TrashedMessage))
+      <Relay(TrashedMessage)
         contribution={
           Object {
             "$fragmentRefs": null,
@@ -64,7 +64,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
           }
         }
       >
-        <ForwardRef(Relay(OpinionSourceTitle))
+        <Relay(OpinionSourceTitle)
           source={
             Object {
               "$fragmentRefs": null,
@@ -80,7 +80,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
             }
           }
         />
-        <ForwardRef(Relay(OpinionSourceContent))
+        <Relay(OpinionSourceContent)
           source={
             Object {
               "$fragmentRefs": null,
@@ -96,11 +96,11 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
             }
           }
         />
-      </ForwardRef(Relay(TrashedMessage))>
+      </Relay(TrashedMessage)>
       <div
         className="small"
       >
-        <ForwardRef(Relay(Connect(OpinionSourceButtons)))
+        <Relay(Connect(OpinionSourceButtons))
           source={
             Object {
               "$fragmentRefs": null,
@@ -143,7 +143,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
     <MediaLeft
       bsClass="media-left"
     >
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         user={
           Object {
             "displayName": "author1",
@@ -160,7 +160,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
       className="opinion__body"
       componentClass="div"
     >
-      <ForwardRef(Relay(OpinionInfos))
+      <Relay(OpinionInfos)
         opinion={
           Object {
             "$fragmentRefs": null,
@@ -177,7 +177,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
         }
         rankingThreshold={null}
       />
-      <ForwardRef(Relay(TrashedMessage))
+      <Relay(TrashedMessage)
         contribution={
           Object {
             "$fragmentRefs": null,
@@ -193,7 +193,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
           }
         }
       >
-        <ForwardRef(Relay(OpinionSourceTitle))
+        <Relay(OpinionSourceTitle)
           source={
             Object {
               "$fragmentRefs": null,
@@ -209,7 +209,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
             }
           }
         />
-        <ForwardRef(Relay(OpinionSourceContent))
+        <Relay(OpinionSourceContent)
           source={
             Object {
               "$fragmentRefs": null,
@@ -225,11 +225,11 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
             }
           }
         />
-      </ForwardRef(Relay(TrashedMessage))>
+      </Relay(TrashedMessage)>
       <div
         className="small"
       >
-        <ForwardRef(Relay(Connect(OpinionSourceButtons)))
+        <Relay(Connect(OpinionSourceButtons))
           source={
             Object {
               "$fragmentRefs": null,

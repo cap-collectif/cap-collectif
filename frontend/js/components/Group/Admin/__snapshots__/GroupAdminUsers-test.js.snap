@@ -133,7 +133,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       bsClass="list-group"
       className="mt-15"
     >
-      <ForwardRef(Relay(Connect(GroupAdminUsersListGroupItem)))
+      <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
         key="id1"
         user={
@@ -279,7 +279,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       bsClass="list-group"
       className="mt-15"
     >
-      <ForwardRef(Relay(Connect(GroupAdminUsersListGroupItem)))
+      <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
         key="id1"
         user={
@@ -427,7 +427,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       bsClass="list-group"
       className="mt-15"
     >
-      <ForwardRef(Relay(Connect(GroupAdminUsersListGroupItem)))
+      <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
         key="id1"
         user={
@@ -575,7 +575,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       bsClass="list-group"
       className="mt-15"
     >
-      <ForwardRef(Relay(Connect(GroupAdminUsersListGroupItem)))
+      <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
         key="id1"
         user={

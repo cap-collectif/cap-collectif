@@ -42,7 +42,111 @@ exports[`<FontAdminPage /> renders correctly 1`] = `
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
-      query={[Function]}
+      query={
+        Object {
+          "fragment": Object {
+            "argumentDefinitions": Array [],
+            "kind": "Fragment",
+            "metadata": null,
+            "name": "FontAdminPageQuery",
+            "selections": Array [
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "Font",
+                "kind": "LinkedField",
+                "name": "fonts",
+                "plural": true,
+                "selections": Array [
+                  Object {
+                    "args": null,
+                    "kind": "FragmentSpread",
+                    "name": "FontAdminContent_fonts",
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+            "type": "Query",
+          },
+          "hash": "8d6364b2f119c2b2bfd2a0ac4306d193",
+          "kind": "Request",
+          "operation": Object {
+            "argumentDefinitions": Array [],
+            "kind": "Operation",
+            "name": "FontAdminPageQuery",
+            "selections": Array [
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "Font",
+                "kind": "LinkedField",
+                "name": "fonts",
+                "plural": true,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "name",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "useAsHeading",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "useAsBody",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isCustom",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+          },
+          "params": Object {
+            "id": null,
+            "metadata": Object {},
+            "name": "FontAdminPageQuery",
+            "operationKind": "query",
+            "text": "query FontAdminPageQuery {
+  fonts {
+    ...FontAdminContent_fonts
+    id
+  }
+}
+
+fragment FontAdminContent_fonts on Font {
+  id
+  name
+  useAsHeading
+  useAsBody
+  isCustom
+}
+",
+          },
+        }
+      }
       render={[Function]}
       variables={Object {}}
     />

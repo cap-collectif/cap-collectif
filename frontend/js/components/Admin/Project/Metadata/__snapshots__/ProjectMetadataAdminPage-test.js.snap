@@ -22,7 +22,7 @@ exports[`<ProjectMetadataAdminPage /> renders correctly 1`] = `
     <div
       className="box-content"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ProjectMetadataAdminForm))))
+      <Relay(injectIntl(Connect(ProjectMetadataAdminForm)))
         anyTouched={false}
         array={
           Object {

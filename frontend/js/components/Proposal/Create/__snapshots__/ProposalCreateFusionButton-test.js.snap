@@ -68,7 +68,7 @@ exports[`<ProposalCreateFusionButton /> should render correctly 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+      <Relay(Connect(injectIntl(ReduxForm)))
         query={
           Object {
             "$refType": null,
@@ -191,7 +191,7 @@ exports[`<ProposalCreateFusionButton /> should render correctly when submitting 
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+      <Relay(Connect(injectIntl(ReduxForm)))
         query={
           Object {
             "$refType": null,

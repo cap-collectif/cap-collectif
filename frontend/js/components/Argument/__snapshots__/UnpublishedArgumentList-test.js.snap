@@ -32,7 +32,7 @@ exports[`<UnpublishedArgumentList /> renders correcty 1`] = `
   <ListGroup
     bsClass="list-group"
   >
-    <ForwardRef(Relay(ArgumentItem))
+    <Relay(ArgumentItem)
       argument={
         Object {
           "$fragmentRefs": null,

@@ -10,7 +10,7 @@ exports[`<EventListPaginated /> renders a preview of passed events when status f
       values={Object {}}
     />
   </p>
-  <ForwardRef(Relay(Connect(EventPagePassedEventsPreview)))
+  <Relay(Connect(EventPagePassedEventsPreview))
     query={
       Object {
         "$fragmentRefs": null,
@@ -48,7 +48,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       key="0"
       onMouseOver={[Function]}
     >
-      <ForwardRef(Relay(Connect(EventPreview)))
+      <Relay(Connect(EventPreview))
         className="eventPreview_list"
         event={
           Object {
@@ -65,7 +65,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       key="1"
       onMouseOver={[Function]}
     >
-      <ForwardRef(Relay(Connect(EventPreview)))
+      <Relay(Connect(EventPreview))
         className="eventPreview_list"
         event={
           Object {
@@ -82,7 +82,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       key="2"
       onMouseOver={[Function]}
     >
-      <ForwardRef(Relay(Connect(EventPreview)))
+      <Relay(Connect(EventPreview))
         className="eventPreview_list"
         event={
           Object {
@@ -101,7 +101,7 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
     md={4}
     xs={12}
   >
-    <ForwardRef(Relay(EventMap))
+    <Relay(EventMap)
       query={
         Object {
           "$fragmentRefs": null,

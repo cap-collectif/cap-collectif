@@ -45,7 +45,7 @@ exports[`<ProposalProjectRow /> should render close collapse 1`] = `
     <ListGroup
       className=""
     >
-      <ForwardRef(Relay(ProposalRow))
+      <Relay(ProposalRow)
         key="0"
         proposal={
           Object {
@@ -58,7 +58,7 @@ exports[`<ProposalProjectRow /> should render close collapse 1`] = `
           }
         }
       />
-      <ForwardRef(Relay(ProposalRow))
+      <Relay(ProposalRow)
         key="1"
         proposal={
           Object {
@@ -121,7 +121,7 @@ exports[`<ProposalProjectRow /> should render the project 1 with his proposal di
     <ListGroup
       className=""
     >
-      <ForwardRef(Relay(ProposalRow))
+      <Relay(ProposalRow)
         key="0"
         proposal={
           Object {
@@ -134,7 +134,7 @@ exports[`<ProposalProjectRow /> should render the project 1 with his proposal di
           }
         }
       />
-      <ForwardRef(Relay(ProposalRow))
+      <Relay(ProposalRow)
         key="1"
         proposal={
           Object {
@@ -197,7 +197,7 @@ exports[`<ProposalProjectRow /> should render the project 2 with his proposal di
     <ListGroup
       className=""
     >
-      <ForwardRef(Relay(ProposalRow))
+      <Relay(ProposalRow)
         key="0"
         proposal={
           Object {

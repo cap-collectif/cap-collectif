@@ -24,7 +24,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
       />
     </a>
   </ProposalPageHeader__HeaderButtonContainer>
-  <ForwardRef(Relay(TrashedMessage))
+  <Relay(TrashedMessage)
     className="consultation__header__title h1"
     contribution={
       Object {
@@ -65,7 +65,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
     >
       titre
     </h1>
-  </ForwardRef(Relay(TrashedMessage))>
+  </Relay(TrashedMessage)>
   <ProposalPageHeader__HeaderBandContainer
     canContact={false}
   >
@@ -133,7 +133,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
             }
           />
         </span>
-        <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        <Relay(Connect(UnpublishedLabel))
           publishable={
             Object {
               "$fragmentRefs": null,
@@ -174,7 +174,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
   <div
     className="proposal__buttons"
   >
-    <ForwardRef(Relay(ProposalFollowButton))
+    <Relay(ProposalFollowButton)
       isAuthenticated={false}
       proposal={
         Object {
@@ -238,7 +238,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       />
     </a>
   </ProposalPageHeader__HeaderButtonContainer>
-  <ForwardRef(Relay(TrashedMessage))
+  <Relay(TrashedMessage)
     className="consultation__header__title h1"
     contribution={
       Object {
@@ -281,7 +281,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
     >
       titre
     </h1>
-  </ForwardRef(Relay(TrashedMessage))>
+  </Relay(TrashedMessage)>
   <ProposalPageHeader__HeaderBandContainer
     canContact={false}
   >
@@ -349,7 +349,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             }
           />
         </span>
-        <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        <Relay(Connect(UnpublishedLabel))
           publishable={
             Object {
               "$fragmentRefs": null,
@@ -392,7 +392,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
   <div
     className="proposal__buttons"
   >
-    <ForwardRef(Relay(ProposalFollowButton))
+    <Relay(ProposalFollowButton)
       isAuthenticated={false}
       proposal={
         Object {
@@ -471,7 +471,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       />
     </ProposalPageHeader__OpenAnalysisButton>
   </ProposalPageHeader__HeaderButtonContainer>
-  <ForwardRef(Relay(TrashedMessage))
+  <Relay(TrashedMessage)
     className="consultation__header__title h1"
     contribution={
       Object {
@@ -514,7 +514,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
     >
       titre
     </h1>
-  </ForwardRef(Relay(TrashedMessage))>
+  </Relay(TrashedMessage)>
   <ProposalPageHeader__HeaderBandContainer
     canContact={false}
   >
@@ -582,7 +582,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             }
           />
         </span>
-        <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        <Relay(Connect(UnpublishedLabel))
           publishable={
             Object {
               "$fragmentRefs": null,
@@ -625,7 +625,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
   <div
     className="proposal__buttons"
   >
-    <ForwardRef(Relay(ProposalFollowButton))
+    <Relay(ProposalFollowButton)
       isAuthenticated={false}
       proposal={
         Object {
@@ -691,7 +691,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
       />
     </a>
   </ProposalPageHeader__HeaderButtonContainer>
-  <ForwardRef(Relay(TrashedMessage))
+  <Relay(TrashedMessage)
     className="consultation__header__title h1"
     contribution={
       Object {
@@ -732,7 +732,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
     >
       titre
     </h1>
-  </ForwardRef(Relay(TrashedMessage))>
+  </Relay(TrashedMessage)>
   <ProposalPageHeader__HeaderBandContainer
     canContact={false}
   >
@@ -830,7 +830,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
       />
     </a>
   </ProposalPageHeader__HeaderButtonContainer>
-  <ForwardRef(Relay(TrashedMessage))
+  <Relay(TrashedMessage)
     className="consultation__header__title h1"
     contribution={
       Object {
@@ -873,7 +873,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
     >
       titre
     </h1>
-  </ForwardRef(Relay(TrashedMessage))>
+  </Relay(TrashedMessage)>
   <ProposalPageHeader__HeaderBandContainer
     canContact={false}
   >
@@ -941,7 +941,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
             }
           />
         </span>
-        <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        <Relay(Connect(UnpublishedLabel))
           publishable={
             Object {
               "$fragmentRefs": null,
@@ -984,7 +984,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
   <div
     className="proposal__buttons"
   >
-    <ForwardRef(Relay(ProposalFollowButton))
+    <Relay(ProposalFollowButton)
       isAuthenticated={false}
       proposal={
         Object {

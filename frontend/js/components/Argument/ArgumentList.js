@@ -6,9 +6,12 @@ import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, createFragmentContainer, graphql } from 'react-relay';
 import Input from '../Form/Input';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import ArgumentListView, { type ArgumentOrder } from './ArgumentListView';
+import ArgumentListView, { type ArgumentSelectOrder } from './ArgumentListView';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
-import type { ArgumentListQueryResponse } from '~relay/ArgumentListQuery.graphql';
+import type {
+  ArgumentListQueryResponse,
+  ArgumentListQueryVariables,
+} from '~relay/ArgumentListQuery.graphql';
 import type { ArgumentList_argumentable } from '~relay/ArgumentList_argumentable.graphql';
 import type { ArgumentType, GlobalState } from '../../types';
 
@@ -19,7 +22,7 @@ type Props = {|
 |};
 
 type State = {|
-  +order: ArgumentOrder,
+  +order: ArgumentSelectOrder,
 |};
 
 export class ArgumentList extends React.Component<Props, State> {
@@ -47,7 +50,7 @@ export class ArgumentList extends React.Component<Props, State> {
               $isAuthenticated: Boolean!
               $type: ArgumentValue!
               $cursor: String
-              $orderBy: ArgumentOrder
+              $orderBy: ArgumentOrder!
             ) {
               argumentable: node(id: $argumentableId) {
                 ... on Argumentable {
@@ -62,15 +65,23 @@ export class ArgumentList extends React.Component<Props, State> {
                   }
                 }
                 ...ArgumentListView_argumentable
-                  @arguments(isAuthenticated: $isAuthenticated, type: $type)
+                  @arguments(
+                    isAuthenticated: $isAuthenticated
+                    type: $type
+                    orderBy: $orderBy
+                    cursor: $cursor
+                  )
               }
             }
           `}
-          variables={{
-            isAuthenticated,
-            argumentableId: argumentable.id,
-            type: type === 'SIMPLE' ? 'FOR' : type,
-          }}
+          variables={
+            ({
+              isAuthenticated,
+              argumentableId: argumentable.id,
+              type: type === 'SIMPLE' ? 'FOR' : type,
+              orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+            }: ArgumentListQueryVariables)
+          }
           render={({
             error,
             props,

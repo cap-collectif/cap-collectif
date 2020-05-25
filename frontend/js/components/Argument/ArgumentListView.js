@@ -2,16 +2,20 @@
 import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import type { ArgumentListView_argumentable } from '~relay/ArgumentListView_argumentable.graphql';
-import type { ArgumentListViewRefetchQueryVariables } from '~relay/ArgumentListViewRefetchQuery.graphql';
+import type {
+  ArgumentOrder,
+  ArgumentValue,
+  ArgumentListViewRefetchQueryVariables,
+} from '~relay/ArgumentListViewRefetchQuery.graphql';
 
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import ArgumentListViewPaginated from './ArgumentListViewPaginated';
 import type { ArgumentType } from '../../types';
 
-export type ArgumentOrder = 'old' | 'last' | 'popular';
+export type ArgumentSelectOrder = 'old' | 'last' | 'popular';
 
 type Props = {|
-  +order: ArgumentOrder,
+  +order: ArgumentSelectOrder,
   +relay: RelayRefetchProp,
   +argumentable: ArgumentListView_argumentable,
   +type: ArgumentType,
@@ -19,6 +23,14 @@ type Props = {|
 
 type State = {|
   +isRefetching: boolean,
+|};
+
+export type FragmentVariables = {|
+  type: ArgumentValue,
+  isAuthenticated: boolean,
+  cursor?: ?string,
+  orderBy: ArgumentOrder,
+  count: number,
 |};
 
 export class ArgumentListView extends React.Component<Props, State> {
@@ -34,7 +46,7 @@ export class ArgumentListView extends React.Component<Props, State> {
     }
   }
 
-  _refetch = (newOrder: ArgumentOrder) => {
+  _refetch = (newOrder: ArgumentSelectOrder) => {
     const { argumentable, relay } = this.props;
 
     this.setState({ isRefetching: true });
@@ -42,12 +54,12 @@ export class ArgumentListView extends React.Component<Props, State> {
     const direction = newOrder === 'old' ? 'ASC' : 'DESC';
     const field = newOrder === 'popular' ? 'VOTES' : 'PUBLISHED_AT';
 
-    const orderBy = {
+    const orderBy: ArgumentOrder = {
       direction,
       field,
     };
 
-    const refetchVariables = fragmentVariables =>
+    const refetchVariables = (fragmentVariables: FragmentVariables) =>
       ({
         argumentableId: argumentable.id,
         count: fragmentVariables.count,
@@ -89,7 +101,7 @@ export default createRefetchContainer(
           count: { type: "Int!", defaultValue: 25 }
           cursor: { type: "String" }
           type: { type: "ArgumentValue!" }
-          orderBy: { type: "ArgumentOrder", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+          orderBy: { type: "ArgumentOrder!" }
         ) {
         id
         ...ArgumentListViewPaginated_argumentable
@@ -109,7 +121,7 @@ export default createRefetchContainer(
       $isAuthenticated: Boolean!
       $argumentableId: ID!
       $cursor: String
-      $orderBy: ArgumentOrder
+      $orderBy: ArgumentOrder!
       $count: Int!
     ) {
       argumentable: node(id: $argumentableId) {

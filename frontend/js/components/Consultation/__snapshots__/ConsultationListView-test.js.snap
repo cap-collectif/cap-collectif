@@ -7,7 +7,7 @@ exports[`<ConsultationListView /> should render correctly with a list of consult
   <div
     className="d-flex flex-wrap"
   >
-    <ForwardRef(Relay(ConsultationPreview))
+    <Relay(ConsultationPreview)
       consultation={
         Object {
           "$fragmentRefs": null,
@@ -16,7 +16,7 @@ exports[`<ConsultationListView /> should render correctly with a list of consult
       }
       key="firstConsultation"
     />
-    <ForwardRef(Relay(ConsultationPreview))
+    <Relay(ConsultationPreview)
       consultation={
         Object {
           "$fragmentRefs": null,

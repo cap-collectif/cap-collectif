@@ -58,7 +58,7 @@ exports[`<ProjectDistrictForm /> should render correctly 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <ForwardRef(Relay(DistrictAdminFields))
+      <Relay(DistrictAdminFields)
         district={
           Object {
             "$fragmentRefs": null,

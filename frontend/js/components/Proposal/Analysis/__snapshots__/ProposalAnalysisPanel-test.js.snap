@@ -29,7 +29,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
           <div
             className="mt-10"
           >
-            <ForwardRef(Relay(ProposalAnalysisUserRow))
+            <Relay(ProposalAnalysisUserRow)
               canConsult={false}
               canEdit={false}
               disabled={true}
@@ -46,7 +46,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
           <div
             className="mt-10"
           >
-            <ForwardRef(Relay(ProposalAnalysisUserRow))
+            <Relay(ProposalAnalysisUserRow)
               canConsult={true}
               canEdit={false}
               disabled={false}
@@ -72,7 +72,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
           values={Object {}}
         />
         <div>
-          <ForwardRef(Relay(ProposalAnalysisUserRow))
+          <Relay(ProposalAnalysisUserRow)
             canConsult={true}
             canEdit={false}
             disabled={false}
@@ -95,7 +95,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
           values={Object {}}
         />
         <div>
-          <ForwardRef(Relay(ProposalAnalysisUserRow))
+          <Relay(ProposalAnalysisUserRow)
             canConsult={true}
             canEdit={true}
             decidor={true}
@@ -113,7 +113,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
       </ProposalAnalysisPanel__PanelSection>
     </ProposalAnalysisPanel__Panel>
   </div>
-  <ForwardRef(Relay(ProposalFormSwitcher))
+  <Relay(ProposalFormSwitcher)
     disabled={false}
     onBackClick={[Function]}
     onClose={[MockFunction]}

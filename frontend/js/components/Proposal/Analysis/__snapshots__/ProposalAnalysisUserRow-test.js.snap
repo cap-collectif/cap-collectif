@@ -7,7 +7,7 @@ exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
     disabled={false}
   >
     <div>
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         className="pull-left"
         size={32}
         user={

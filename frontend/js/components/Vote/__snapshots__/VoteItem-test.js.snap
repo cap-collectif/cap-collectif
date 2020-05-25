@@ -26,7 +26,7 @@ exports[`<VoteItem /> renders correcty for mitigated vote 1`] = `
     <p
       className="h5 opinion__user"
     >
-      <ForwardRef(Relay(Connect(UserLink)))
+      <Relay(Connect(UserLink))
         user={
           Object {
             "$fragmentRefs": null,
@@ -111,7 +111,7 @@ exports[`<VoteItem /> renders correcty for vote against 1`] = `
     <p
       className="h5 opinion__user"
     >
-      <ForwardRef(Relay(Connect(UserLink)))
+      <Relay(Connect(UserLink))
         user={
           Object {
             "$fragmentRefs": null,
@@ -196,7 +196,7 @@ exports[`<VoteItem /> renders correcty for vote for 1`] = `
     <p
       className="h5 opinion__user"
     >
-      <ForwardRef(Relay(Connect(UserLink)))
+      <Relay(Connect(UserLink))
         user={
           Object {
             "$fragmentRefs": null,
@@ -281,7 +281,7 @@ exports[`<VoteItem /> renders correcty for vote without value 1`] = `
     <p
       className="h5 opinion__user"
     >
-      <ForwardRef(Relay(Connect(UserLink)))
+      <Relay(Connect(UserLink))
         user={
           Object {
             "$fragmentRefs": null,

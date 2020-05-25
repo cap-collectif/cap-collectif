@@ -29,8 +29,12 @@ class ArgumentableArgumentsResolver implements ResolverInterface
             $args,
             $includeTrashed
         ) {
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
+            $field = $args->offsetGet('orderBy')
+                ? $args->offsetGet('orderBy')['field']
+                : 'PUBLISHED_AT';
+            $direction = $args->offsetGet('orderBy')
+                ? $args->offsetGet('orderBy')['direction']
+                : 'DESC';
 
             return $this->argumentRepository
                 ->getByContributionAndType(

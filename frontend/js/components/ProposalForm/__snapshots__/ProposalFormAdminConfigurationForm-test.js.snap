@@ -430,6 +430,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 Object {
                   "$$typeof": Symbol(react.forward_ref),
                   "__ComponentClass": [Function],
+                  "displayName": "Relay(injectIntl(Connect(ProposalFormAdminCategories)))",
                   "render": [Function],
                 }
               }

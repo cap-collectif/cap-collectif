@@ -73,7 +73,7 @@ export class OpinionListPaginated extends React.Component<Props, State> {
   }
 }
 
-type FragmentVariables = { count: number, cursor: ?string, orderBy: Object };
+type FragmentVariables = { +count: number, +cursor: ?string, +orderBy: Object };
 
 export default createPaginationContainer(
   OpinionListPaginated,

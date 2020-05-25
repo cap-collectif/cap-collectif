@@ -6,7 +6,7 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
   isHighlighted={false}
 >
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={false}
       event={
         Object {
@@ -59,7 +59,7 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
           </a>
         </Title>
         <TagsList>
-          <ForwardRef(Relay(TagUser))
+          <Relay(TagUser)
             size={16}
             user={
               Object {
@@ -98,7 +98,7 @@ exports[`<EventPreview /> should render correctly 1`] = `
   isHighlighted={false}
 >
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={true}
       event={
         Object {
@@ -151,7 +151,7 @@ exports[`<EventPreview /> should render correctly 1`] = `
           </a>
         </Title>
         <TagsList>
-          <ForwardRef(Relay(TagUser))
+          <Relay(TagUser)
             size={16}
             user={
               Object {
@@ -190,7 +190,7 @@ exports[`<EventPreview /> should render correctly when no date 1`] = `
   isHighlighted={false}
 >
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={true}
       event={
         Object {
@@ -239,7 +239,7 @@ exports[`<EventPreview /> should render correctly when no date 1`] = `
           </a>
         </Title>
         <TagsList>
-          <ForwardRef(Relay(TagUser))
+          <Relay(TagUser)
             size={16}
             user={
               Object {
@@ -278,7 +278,7 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
   isHighlighted={false}
 >
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={true}
       event={
         Object {
@@ -329,7 +329,7 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
           </a>
         </Title>
         <TagsList>
-          <ForwardRef(Relay(TagUser))
+          <Relay(TagUser)
             size={16}
             user={
               Object {
@@ -360,7 +360,7 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
   isHighlighted={false}
 >
   <Card>
-    <ForwardRef(Relay(EventImage))
+    <Relay(EventImage)
       enabled={true}
       event={
         Object {
@@ -409,7 +409,7 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
           </a>
         </Title>
         <TagsList>
-          <ForwardRef(Relay(TagUser))
+          <Relay(TagUser)
             size={16}
             user={
               Object {

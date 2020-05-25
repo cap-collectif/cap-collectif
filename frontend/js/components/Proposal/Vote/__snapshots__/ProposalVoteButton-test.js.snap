@@ -29,7 +29,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
   id="buttonID"
   onClick={[Function]}
 >
-  <ForwardRef(Relay(UnpublishedTooltip))
+  <Relay(UnpublishedTooltip)
     publishable={
       Object {
         "$fragmentRefs": null,
@@ -56,7 +56,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
   id="buttonID"
   onClick={[Function]}
 >
-  <ForwardRef(Relay(UnpublishedTooltip))
+  <Relay(UnpublishedTooltip)
     publishable={
       Object {
         "$fragmentRefs": null,

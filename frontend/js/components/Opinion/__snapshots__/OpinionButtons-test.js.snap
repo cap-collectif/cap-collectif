@@ -4,7 +4,7 @@ exports[`<OpinionButtons /> should render correctly 1`] = `
 <ButtonToolbar
   bsClass="btn-toolbar"
 >
-  <ForwardRef(Relay(Connect(OpinionDelete)))
+  <Relay(Connect(OpinionDelete))
     opinion={
       Object {
         "$fragmentRefs": null,
@@ -25,7 +25,7 @@ exports[`<OpinionButtons /> should render correctly 1`] = `
     }
   />
   <div>
-    <ForwardRef(Relay(OpinionFollowButton))
+    <Relay(OpinionFollowButton)
       opinion={
         Object {
           "$fragmentRefs": null,
@@ -47,7 +47,7 @@ exports[`<OpinionButtons /> should render correctly 1`] = `
     />
   </div>
   <div>
-    <ForwardRef(Relay(Connect(OpinionReportButton)))
+    <Relay(Connect(OpinionReportButton))
       opinion={
         Object {
           "$fragmentRefs": null,

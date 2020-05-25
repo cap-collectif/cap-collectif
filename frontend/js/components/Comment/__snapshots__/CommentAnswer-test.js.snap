@@ -9,7 +9,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
   <div
     className="Commentavatar"
   >
-    <ForwardRef(Relay(Connect(UserAvatar)))
+    <Relay(Connect(UserAvatar))
       user={
         Object {
           "$fragmentRefs": null,
@@ -28,7 +28,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
       <div
         className="opinion__data"
       >
-        <ForwardRef(Relay(CommentInfos))
+        <Relay(CommentInfos)
           comment={
             Object {
               "$fragmentRefs": null,
@@ -43,7 +43,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
           }
         />
       </div>
-      <ForwardRef(Relay(CommentBody))
+      <Relay(CommentBody)
         comment={
           Object {
             "$fragmentRefs": null,
@@ -60,7 +60,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
       <div
         className="small"
       >
-        <ForwardRef(Relay(CommentVoteButton))
+        <Relay(CommentVoteButton)
           comment={
             Object {
               "$fragmentRefs": null,
@@ -74,7 +74,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
             }
           }
         />
-        <ForwardRef(Relay(Connect(CommentReportButton)))
+        <Relay(Connect(CommentReportButton))
           comment={
             Object {
               "$fragmentRefs": null,
@@ -88,7 +88,7 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
             }
           }
         />
-        <ForwardRef(Relay(CommentEdit))
+        <Relay(CommentEdit)
           comment={
             Object {
               "$fragmentRefs": null,

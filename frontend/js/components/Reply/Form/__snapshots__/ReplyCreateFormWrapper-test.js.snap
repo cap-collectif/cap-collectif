@@ -2,7 +2,7 @@
 
 exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form is not contribuable 1`] = `
 <ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
-  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -47,7 +47,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       />
     </p>
   </Alert>
-  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -101,7 +101,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       }
     />
   </Alert>
-  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
     questionnaire={
       Object {
         "$fragmentRefs": null,
@@ -124,7 +124,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
 
 exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`] = `
 <ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
-  <ForwardRef(Relay(withRouter(Connect(injectIntl(ReduxForm)))))
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
     questionnaire={
       Object {
         "$fragmentRefs": null,

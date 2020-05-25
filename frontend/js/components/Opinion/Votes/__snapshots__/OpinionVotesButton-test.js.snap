@@ -12,7 +12,7 @@ exports[`<OpinionVotesButton /> should not render a button when value is 1 and v
 
 exports[`<OpinionVotesButton /> should render a green button when value is 1 and vote type is both 1`] = `
 <div>
-  <ForwardRef(Relay(Connect(RequirementsModal)))
+  <Relay(Connect(RequirementsModal))
     handleClose={[Function]}
     show={false}
     step={
@@ -53,7 +53,7 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
 
 exports[`<OpinionVotesButton /> should render a red button when value is -1 and vote type is both 1`] = `
 <div>
-  <ForwardRef(Relay(Connect(RequirementsModal)))
+  <Relay(Connect(RequirementsModal))
     handleClose={[Function]}
     show={false}
     step={
@@ -92,7 +92,7 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
 
 exports[`<OpinionVotesButton /> should render an orange button when value is 0 and vote type is both 1`] = `
 <div>
-  <ForwardRef(Relay(Connect(RequirementsModal)))
+  <Relay(Connect(RequirementsModal))
     handleClose={[Function]}
     show={false}
     step={

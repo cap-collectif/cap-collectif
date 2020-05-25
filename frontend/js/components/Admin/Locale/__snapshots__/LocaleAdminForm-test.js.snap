@@ -5,7 +5,7 @@ exports[`<ProjectCreateButton /> renders correctly 1`] = `
   id="local-admin"
   onSubmit={[MockFunction]}
 >
-  <ForwardRef(Relay(LocaleAdminList))
+  <Relay(LocaleAdminList)
     locales={
       Array [
         Object {
@@ -21,7 +21,7 @@ exports[`<ProjectCreateButton /> renders correctly 1`] = `
       ]
     }
   />
-  <ForwardRef(Relay(Connect(LocaleAdminSelect)))
+  <Relay(Connect(LocaleAdminSelect))
     locales={
       Array [
         Object {
@@ -67,10 +67,10 @@ exports[`<ProjectCreateButton /> renders correctly empty 1`] = `
   id="local-admin"
   onSubmit={[MockFunction]}
 >
-  <ForwardRef(Relay(LocaleAdminList))
+  <Relay(LocaleAdminList)
     locales={Array []}
   />
-  <ForwardRef(Relay(Connect(LocaleAdminSelect)))
+  <Relay(Connect(LocaleAdminSelect))
     locales={Array []}
   />
   <Button

@@ -10,7 +10,7 @@ exports[`<ArgumentListProfile /> renders correcty with two nodes 1`] = `
 <ListGroup
   bsClass="media-list"
 >
-  <ForwardRef(Relay(ArgumentItem))
+  <Relay(ArgumentItem)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -20,7 +20,7 @@ exports[`<ArgumentListProfile /> renders correcty with two nodes 1`] = `
     isProfile={true}
     key="1"
   />
-  <ForwardRef(Relay(ArgumentItem))
+  <Relay(ArgumentItem)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -37,7 +37,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
 <ListGroup
   bsClass="media-list"
 >
-  <ForwardRef(Relay(ArgumentItem))
+  <Relay(ArgumentItem)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -47,7 +47,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
     isProfile={true}
     key="1"
   />
-  <ForwardRef(Relay(ArgumentItem))
+  <Relay(ArgumentItem)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -82,7 +82,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 2`] = `
 <ListGroup
   bsClass="media-list"
 >
-  <ForwardRef(Relay(ArgumentItem))
+  <Relay(ArgumentItem)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -92,7 +92,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 2`] = `
     isProfile={true}
     key="1"
   />
-  <ForwardRef(Relay(ArgumentItem))
+  <Relay(ArgumentItem)
     argument={
       Object {
         "$fragmentRefs": null,
@@ -102,7 +102,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 2`] = `
     isProfile={true}
     key="2"
   />
-  <ForwardRef(Relay(ArgumentItem))
+  <Relay(ArgumentItem)
     argument={
       Object {
         "$fragmentRefs": null,

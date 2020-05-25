@@ -2,7 +2,7 @@
 
 exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
 <div>
-  <ForwardRef(Relay(Connect(RequirementsModal)))
+  <Relay(Connect(RequirementsModal))
     handleClose={[Function]}
     show={false}
     step={
@@ -35,7 +35,7 @@ exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
           values={Object {}}
         />
       </span>
-      <ForwardRef(Relay(UnpublishedTooltip))
+      <Relay(UnpublishedTooltip)
         publishable={null}
         target={[Function]}
       />
@@ -46,7 +46,7 @@ exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
 
 exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
 <div>
-  <ForwardRef(Relay(Connect(RequirementsModal)))
+  <Relay(Connect(RequirementsModal))
     handleClose={[Function]}
     show={false}
     step={
@@ -75,7 +75,7 @@ exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
           values={Object {}}
         />
       </span>
-      <ForwardRef(Relay(UnpublishedTooltip))
+      <Relay(UnpublishedTooltip)
         publishable={
           Object {
             "$fragmentRefs": null,
@@ -91,7 +91,7 @@ exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
 
 exports[`<ArgumentVoteButton /> renders when viewer is author 1`] = `
 <div>
-  <ForwardRef(Relay(Connect(RequirementsModal)))
+  <Relay(Connect(RequirementsModal))
     handleClose={[Function]}
     show={false}
     step={
@@ -124,7 +124,7 @@ exports[`<ArgumentVoteButton /> renders when viewer is author 1`] = `
           values={Object {}}
         />
       </span>
-      <ForwardRef(Relay(UnpublishedTooltip))
+      <Relay(UnpublishedTooltip)
         publishable={null}
         target={[Function]}
       />

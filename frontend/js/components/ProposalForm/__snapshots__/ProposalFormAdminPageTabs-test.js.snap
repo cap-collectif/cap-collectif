@@ -33,7 +33,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
       eventKey="CONFIGURATION"
       title="global.configuration"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -55,7 +55,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
       eventKey="LEGACY_ANALYSIS"
       title="proposal.tabs.evaluation"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -71,7 +71,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
       eventKey="NOTIFICATIONS"
       title="proposal_form.admin.notification"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -87,7 +87,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
       eventKey="SETTINGS"
       title="global.params"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -136,7 +136,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
       eventKey="CONFIGURATION"
       title="global.configuration"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -160,7 +160,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
       eventKey="LEGACY_ANALYSIS"
       title="proposal.tabs.evaluation"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -178,7 +178,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
       eventKey="NOTIFICATIONS"
       title="proposal_form.admin.notification"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -196,7 +196,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
       eventKey="SETTINGS"
       title="global.params"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -247,7 +247,7 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
       eventKey="CONFIGURATION"
       title="global.configuration"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -271,7 +271,7 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
       eventKey="LEGACY_ANALYSIS"
       title="proposal.tabs.evaluation"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -311,7 +311,7 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
         </React.Fragment>
       }
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -329,7 +329,7 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
       eventKey="NOTIFICATIONS"
       title="proposal_form.admin.notification"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,
@@ -347,7 +347,7 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
       eventKey="SETTINGS"
       title="global.params"
     >
-      <ForwardRef(Relay(injectIntl(Connect(ReduxForm))))
+      <Relay(injectIntl(Connect(ReduxForm)))
         proposalForm={
           Object {
             "$fragmentRefs": null,

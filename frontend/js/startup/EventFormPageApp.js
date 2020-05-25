@@ -26,7 +26,6 @@ export default ({ eventId, isAuthenticated }: Props) => (
               ...EventFormPage_event @arguments(isAuthenticated: $isAuthenticated)
             }
             ...EventFormPage_query
-            __typename
           }
         `}
         variables={

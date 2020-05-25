@@ -37,7 +37,7 @@ exports[`<UnpublishedProposalListView /> renders correcty 1`] = `
     bsClass="panel"
     collapsible={false}
   >
-    <ForwardRef(Relay(ProposalList))
+    <Relay(ProposalList)
       id="proposals-unpublished-list"
       proposals={
         Object {

@@ -2,7 +2,7 @@
 
 exports[`<ProfileReplyList /> should render correctly 1`] = `
 <div>
-  <ForwardRef(Relay(Reply))
+  <Relay(Reply)
     key="0"
     reply={
       Object {

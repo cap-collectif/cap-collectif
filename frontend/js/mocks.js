@@ -63,6 +63,12 @@ export const formMock: ReduxFormFormProps = {
 };
 
 const environment = {
+  UNSTABLE_getDefaultRenderPolicy: jest.fn(),
+  __log: jest.fn(),
+  getOperationTracker: jest.fn(),
+  isRequestActive: jest.fn(),
+  isServer: jest.fn(),
+  options: jest.fn(),
   applyMutation: jest.fn(),
   sendMutation: jest.fn(),
   lookup: jest.fn(),

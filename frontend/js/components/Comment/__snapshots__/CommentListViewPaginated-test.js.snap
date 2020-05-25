@@ -5,7 +5,7 @@ exports[`<CommentListViewPaginated /> should render correctly 1`] = `
   className="media-list"
   id="CommentListViewPaginated"
 >
-  <ForwardRef(Relay(Comment))
+  <Relay(Comment)
     comment={
       Object {
         "$fragmentRefs": null,
@@ -16,7 +16,7 @@ exports[`<CommentListViewPaginated /> should render correctly 1`] = `
     key="1"
     useBodyColor={false}
   />
-  <ForwardRef(Relay(Comment))
+  <Relay(Comment)
     comment={
       Object {
         "$fragmentRefs": null,

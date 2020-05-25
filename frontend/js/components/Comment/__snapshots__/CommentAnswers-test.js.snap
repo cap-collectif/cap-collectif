@@ -4,7 +4,7 @@ exports[`<CommentAnswers /> should render correctly 1`] = `
 <styles__CommentAnswersContainer
   id="comments-answers"
 >
-  <ForwardRef(Relay(CommentAnswer))
+  <Relay(CommentAnswer)
     comment={
       Object {
         "$fragmentRefs": null,
@@ -15,7 +15,7 @@ exports[`<CommentAnswers /> should render correctly 1`] = `
     key="1"
     useBodyColor={true}
   />
-  <ForwardRef(Relay(CommentAnswer))
+  <Relay(CommentAnswer)
     comment={
       Object {
         "$fragmentRefs": null,

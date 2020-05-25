@@ -28,7 +28,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
             className="m-auto align-items-center"
           >
             <Left>
-              <ForwardRef(Relay(Connect(UserAvatar)))
+              <Relay(Connect(UserAvatar))
                 user={
                   Object {
                     "$fragmentRefs": null,
@@ -38,7 +38,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               />
             </Left>
             <Body>
-              <ForwardRef(Relay(Connect(UserLink)))
+              <Relay(Connect(UserLink))
                 className="excerpt"
                 user={
                   Object {
@@ -199,7 +199,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="profile"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -212,7 +212,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="account"
         >
-          <ForwardRef(Relay(Connect(AccountBox)))
+          <Relay(Connect(AccountBox))
             languageList={
               Array [
                 Object {
@@ -241,7 +241,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="personal-data"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -260,7 +260,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="notifications"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -273,7 +273,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="followings"
         >
-          <ForwardRef(Relay(FollowingsTab))
+          <Relay(FollowingsTab)
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -316,7 +316,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             className="m-auto align-items-center"
           >
             <Left>
-              <ForwardRef(Relay(Connect(UserAvatar)))
+              <Relay(Connect(UserAvatar))
                 user={
                   Object {
                     "$fragmentRefs": null,
@@ -326,7 +326,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               />
             </Left>
             <Body>
-              <ForwardRef(Relay(Connect(UserLink)))
+              <Relay(Connect(UserLink))
                 className="excerpt"
                 user={
                   Object {
@@ -449,7 +449,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="profile"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -466,7 +466,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="personal-data"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -483,7 +483,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="notifications"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -496,7 +496,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="followings"
         >
-          <ForwardRef(Relay(FollowingsTab))
+          <Relay(FollowingsTab)
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -539,7 +539,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             className="m-auto align-items-center"
           >
             <Left>
-              <ForwardRef(Relay(Connect(UserAvatar)))
+              <Relay(Connect(UserAvatar))
                 user={
                   Object {
                     "$fragmentRefs": null,
@@ -549,7 +549,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               />
             </Left>
             <Body>
-              <ForwardRef(Relay(Connect(UserLink)))
+              <Relay(Connect(UserLink))
                 className="excerpt"
                 user={
                   Object {
@@ -672,7 +672,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="profile"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -689,7 +689,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="personal-data"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -706,7 +706,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="notifications"
         >
-          <ForwardRef(Relay(Connect(injectIntl(ReduxForm))))
+          <Relay(Connect(injectIntl(ReduxForm)))
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -719,7 +719,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="followings"
         >
-          <ForwardRef(Relay(FollowingsTab))
+          <Relay(FollowingsTab)
             viewer={
               Object {
                 "$fragmentRefs": null,

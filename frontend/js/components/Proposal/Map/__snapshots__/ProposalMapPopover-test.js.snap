@@ -8,7 +8,7 @@ exports[`<ProposalMapPopover /> should render popover with a default picture giv
   />
   <ProposalMapPopover__PopoverContainer>
     <ProposalMapPopover__AuthorContainer>
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         className="pull-left"
         user={
           Object {
@@ -16,7 +16,7 @@ exports[`<ProposalMapPopover /> should render popover with a default picture giv
           }
         }
       />
-      <ForwardRef(Relay(Connect(UserLink)))
+      <Relay(Connect(UserLink))
         user={
           Object {
             "$fragmentRefs": null,
@@ -51,7 +51,7 @@ exports[`<ProposalMapPopover /> should render popover with a picture given the f
   />
   <ProposalMapPopover__PopoverContainer>
     <ProposalMapPopover__AuthorContainer>
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         className="pull-left"
         user={
           Object {
@@ -59,7 +59,7 @@ exports[`<ProposalMapPopover /> should render popover with a picture given the f
           }
         }
       />
-      <ForwardRef(Relay(Connect(UserLink)))
+      <Relay(Connect(UserLink))
         user={
           Object {
             "$fragmentRefs": null,
@@ -90,7 +90,7 @@ exports[`<ProposalMapPopover /> should render popover without a picture given th
 <Fragment>
   <ProposalMapPopover__PopoverContainer>
     <ProposalMapPopover__AuthorContainer>
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         className="pull-left"
         user={
           Object {
@@ -98,7 +98,7 @@ exports[`<ProposalMapPopover /> should render popover without a picture given th
           }
         }
       />
-      <ForwardRef(Relay(Connect(UserLink)))
+      <Relay(Connect(UserLink))
         user={
           Object {
             "$fragmentRefs": null,

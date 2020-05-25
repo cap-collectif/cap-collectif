@@ -35,7 +35,91 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
       >
         <ReactRelayQueryRenderer
           environment={"RelayModernEnvironment()"}
-          query={[Function]}
+          query={
+            Object {
+              "fragment": Object {
+                "argumentDefinitions": Array [],
+                "kind": "Fragment",
+                "metadata": null,
+                "name": "ProposalFormAdminEvaluationFormQuery",
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Questionnaire",
+                    "kind": "LinkedField",
+                    "name": "availableQuestionnaires",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "type": "Query",
+              },
+              "hash": "40664c5f8fbc81f8201cfda0394794a8",
+              "kind": "Request",
+              "operation": Object {
+                "argumentDefinitions": Array [],
+                "kind": "Operation",
+                "name": "ProposalFormAdminEvaluationFormQuery",
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Questionnaire",
+                    "kind": "LinkedField",
+                    "name": "availableQuestionnaires",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+              },
+              "params": Object {
+                "id": null,
+                "metadata": Object {},
+                "name": "ProposalFormAdminEvaluationFormQuery",
+                "operationKind": "query",
+                "text": "query ProposalFormAdminEvaluationFormQuery {
+  availableQuestionnaires {
+    id
+    title
+  }
+}
+",
+              },
+            }
+          }
           render={[Function]}
           variables={Object {}}
         />
@@ -137,7 +221,91 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly when access to new
       >
         <ReactRelayQueryRenderer
           environment={"RelayModernEnvironment()"}
-          query={[Function]}
+          query={
+            Object {
+              "fragment": Object {
+                "argumentDefinitions": Array [],
+                "kind": "Fragment",
+                "metadata": null,
+                "name": "ProposalFormAdminEvaluationFormQuery",
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Questionnaire",
+                    "kind": "LinkedField",
+                    "name": "availableQuestionnaires",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "type": "Query",
+              },
+              "hash": "40664c5f8fbc81f8201cfda0394794a8",
+              "kind": "Request",
+              "operation": Object {
+                "argumentDefinitions": Array [],
+                "kind": "Operation",
+                "name": "ProposalFormAdminEvaluationFormQuery",
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Questionnaire",
+                    "kind": "LinkedField",
+                    "name": "availableQuestionnaires",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+              },
+              "params": Object {
+                "id": null,
+                "metadata": Object {},
+                "name": "ProposalFormAdminEvaluationFormQuery",
+                "operationKind": "query",
+                "text": "query ProposalFormAdminEvaluationFormQuery {
+  availableQuestionnaires {
+    id
+    title
+  }
+}
+",
+              },
+            }
+          }
           render={[Function]}
           variables={Object {}}
         />

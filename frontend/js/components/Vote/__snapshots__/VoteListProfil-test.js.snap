@@ -5,7 +5,7 @@ exports[`<VoteListProfile /> renders correcty with empty node 1`] = `
   bsClass="media-list"
   componentClass="ul"
 >
-  <ForwardRef(Relay(VoteItem))
+  <Relay(VoteItem)
     key="node1"
     vote={
       Object {
@@ -22,7 +22,7 @@ exports[`<VoteListProfile /> renders correcty with two node 1`] = `
   bsClass="media-list"
   componentClass="ul"
 >
-  <ForwardRef(Relay(VoteItem))
+  <Relay(VoteItem)
     key="1"
     vote={
       Object {
@@ -31,7 +31,7 @@ exports[`<VoteListProfile /> renders correcty with two node 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(VoteItem))
+  <Relay(VoteItem)
     key="2"
     vote={
       Object {
@@ -48,7 +48,7 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
   bsClass="media-list"
   componentClass="ul"
 >
-  <ForwardRef(Relay(VoteItem))
+  <Relay(VoteItem)
     key="1"
     vote={
       Object {
@@ -57,7 +57,7 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(VoteItem))
+  <Relay(VoteItem)
     key="2"
     vote={
       Object {
@@ -97,7 +97,7 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 2`] = `
   bsClass="media-list"
   componentClass="ul"
 >
-  <ForwardRef(Relay(VoteItem))
+  <Relay(VoteItem)
     key="1"
     vote={
       Object {
@@ -106,7 +106,7 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 2`] = `
       }
     }
   />
-  <ForwardRef(Relay(VoteItem))
+  <Relay(VoteItem)
     key="2"
     vote={
       Object {
@@ -115,7 +115,7 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 2`] = `
       }
     }
   />
-  <ForwardRef(Relay(VoteItem))
+  <Relay(VoteItem)
     key="3"
     vote={
       Object {

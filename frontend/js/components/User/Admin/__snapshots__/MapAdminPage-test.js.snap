@@ -21,7 +21,216 @@ exports[`<MapAdminPage/> should render 1`] = `
   >
     <ReactRelayQueryRenderer
       environment={"RelayModernEnvironment()"}
-      query={[Function]}
+      query={
+        Object {
+          "fragment": Object {
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "provider",
+                "type": "MapTokenProvider!",
+              },
+            ],
+            "kind": "Fragment",
+            "metadata": null,
+            "name": "MapAdminPageQuery",
+            "selections": Array [
+              Object {
+                "alias": null,
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "provider",
+                    "variableName": "provider",
+                  },
+                ],
+                "concreteType": "MapToken",
+                "kind": "LinkedField",
+                "name": "mapToken",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "args": null,
+                    "kind": "FragmentSpread",
+                    "name": "MapboxAdminConfig_mapToken",
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+            "type": "Query",
+          },
+          "hash": "1096b18efba25084af9150501c75511c",
+          "kind": "Request",
+          "operation": Object {
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "provider",
+                "type": "MapTokenProvider!",
+              },
+            ],
+            "kind": "Operation",
+            "name": "MapAdminPageQuery",
+            "selections": Array [
+              Object {
+                "alias": null,
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "provider",
+                    "variableName": "provider",
+                  },
+                ],
+                "concreteType": "MapToken",
+                "kind": "LinkedField",
+                "name": "mapToken",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "publicToken",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "secretToken",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "provider",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "styleOwner",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "styleId",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "MapTokenStyle",
+                    "kind": "LinkedField",
+                    "name": "styles",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "owner",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "name",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "previewUrl",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "createdAt",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "updatedAt",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isCurrent",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+          },
+          "params": Object {
+            "id": null,
+            "metadata": Object {},
+            "name": "MapAdminPageQuery",
+            "operationKind": "query",
+            "text": "query MapAdminPageQuery(
+  $provider: MapTokenProvider!
+) {
+  mapToken(provider: $provider) {
+    ...MapboxAdminConfig_mapToken
+    id
+  }
+}
+
+fragment MapboxAdminConfig_mapToken on MapToken {
+  id
+  publicToken
+  secretToken
+  provider
+  styleOwner
+  styleId
+  styles {
+    id
+    owner
+    name
+    previewUrl
+    createdAt
+    updatedAt
+    isCurrent
+  }
+}
+",
+          },
+        }
+      }
       render={[Function]}
       variables={
         Object {

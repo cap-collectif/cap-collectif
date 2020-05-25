@@ -61,7 +61,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
         <div
           className="d-flex"
         >
-          <ForwardRef(Relay(Connect(UserAvatar)))
+          <Relay(Connect(UserAvatar))
             features={
               Object {
                 "allow_users_to_propose_events": false,

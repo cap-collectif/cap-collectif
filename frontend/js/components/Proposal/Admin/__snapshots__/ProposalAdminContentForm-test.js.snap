@@ -4,7 +4,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
 <div
   className="box box-primary container-fluid"
 >
-  <ForwardRef(Relay(Connect(ProposalFusionEditModal)))
+  <Relay(Connect(ProposalFusionEditModal))
     onClose={[Function]}
     proposal={
       Object {

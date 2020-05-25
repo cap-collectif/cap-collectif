@@ -23,7 +23,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
     bsClass="row"
     componentClass="div"
   >
-    <ForwardRef(Relay(UserBox))
+    <Relay(UserBox)
       className="proposal__follower"
       key="0"
       user={
@@ -33,7 +33,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
         }
       }
     />
-    <ForwardRef(Relay(UserBox))
+    <Relay(UserBox)
       className="proposal__follower"
       key="1"
       user={
@@ -43,7 +43,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
         }
       }
     />
-    <ForwardRef(Relay(UserBox))
+    <Relay(UserBox)
       className="proposal__follower"
       key="2"
       user={
@@ -95,7 +95,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
     bsClass="row"
     componentClass="div"
   >
-    <ForwardRef(Relay(UserBox))
+    <Relay(UserBox)
       className="proposal__follower"
       key="0"
       user={
@@ -105,7 +105,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
         }
       }
     />
-    <ForwardRef(Relay(UserBox))
+    <Relay(UserBox)
       className="proposal__follower"
       key="1"
       user={
@@ -115,7 +115,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
         }
       }
     />
-    <ForwardRef(Relay(UserBox))
+    <Relay(UserBox)
       className="proposal__follower"
       key="2"
       user={

@@ -37,7 +37,7 @@ exports[`<ProposalListTableMobile /> renders correctly 1`] = `
           className="mb-5 mt-10"
         >
           <span>
-            <ForwardRef(Relay(ImplementationStepTitle))
+            <Relay(ImplementationStepTitle)
               progressSteps={
                 Array [
                   Object {

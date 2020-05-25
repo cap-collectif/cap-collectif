@@ -2,7 +2,7 @@
 
 exports[`<AuthentificationAdminPageContent /> renders correctly 1`] = `
 <Fragment>
-  <ForwardRef(Relay(Connect(ReduxForm)))
+  <Relay(Connect(ReduxForm))
     shieldAdminForm={
       Object {
         "introduction": "<p>Introduction text in shield mode</p>",
@@ -15,7 +15,7 @@ exports[`<AuthentificationAdminPageContent /> renders correctly 1`] = `
       }
     }
   />
-  <Connect(Component)
+  <Connect(Relay(ListSSOConfiguration))
     ssoConfigurations={
       Object {
         "edges": Array [

@@ -4,7 +4,7 @@ exports[`<CommentInfos /> should render correctly 1`] = `
 <div
   className="opinion__user"
 >
-  <ForwardRef(Relay(Connect(UserLink)))
+  <Relay(Connect(UserLink))
     user={
       Object {
         "$fragmentRefs": null,
@@ -13,7 +13,7 @@ exports[`<CommentInfos /> should render correctly 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(CommentDate))
+  <Relay(CommentDate)
     comment={
       Object {
         "$fragmentRefs": null,
@@ -32,7 +32,7 @@ exports[`<CommentInfos /> should render correctly 1`] = `
     show={false}
     type="comment"
   />
-  <ForwardRef(Relay(Connect(UnpublishedLabel)))
+  <Relay(Connect(UnpublishedLabel))
     publishable={
       Object {
         "$fragmentRefs": null,
@@ -57,7 +57,7 @@ exports[`<CommentInfos /> should render correctly with no author 1`] = `
   <span>
     Poupidou
   </span>
-  <ForwardRef(Relay(CommentDate))
+  <Relay(CommentDate)
     comment={
       Object {
         "$fragmentRefs": null,
@@ -72,7 +72,7 @@ exports[`<CommentInfos /> should render correctly with no author 1`] = `
     show={false}
     type="comment"
   />
-  <ForwardRef(Relay(Connect(UnpublishedLabel)))
+  <Relay(Connect(UnpublishedLabel))
     publishable={
       Object {
         "$fragmentRefs": null,

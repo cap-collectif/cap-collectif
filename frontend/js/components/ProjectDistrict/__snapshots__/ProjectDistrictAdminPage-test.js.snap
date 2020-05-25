@@ -20,13 +20,13 @@ exports[`<ProjectDistrictAdminPage /> should render correctly with PUBLISHED sta
     </span>
   </ProjectDistrictAdminPage__PageTitleContainer>
   <hr />
-  <ForwardRef(Relay(Connect(ReduxForm)))
+  <Relay(Connect(ReduxForm))
     handleClose={[Function]}
     isCreating={true}
     member="projectDistrict"
     show={false}
   />
-  <ForwardRef(Relay(ProjectDistrictAdminList))
+  <Relay(ProjectDistrictAdminList)
     districts={
       Object {
         "$fragmentRefs": null,

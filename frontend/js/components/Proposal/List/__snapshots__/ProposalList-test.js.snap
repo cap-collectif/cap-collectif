@@ -18,7 +18,7 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
 
 exports[`<ProposalList /> should render a collectStep interpellation list 1`] = `
 <Fragment>
-  <ForwardRef(Relay(ProposalListTable))
+  <Relay(ProposalListTable)
     proposals={
       Object {
         "$fragmentRefs": null,
@@ -61,7 +61,7 @@ exports[`<ProposalList /> should render a collectStep interpellation list 1`] = 
 
 exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
 <Fragment>
-  <ForwardRef(Relay(ProposalListTable))
+  <Relay(ProposalListTable)
     proposals={
       Object {
         "$fragmentRefs": null,
@@ -120,7 +120,7 @@ exports[`<ProposalList /> should render a collectStep with empty interpellation 
 
 exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
 <Fragment>
-  <ForwardRef(Relay(ProposalListTable))
+  <Relay(ProposalListTable)
     proposals={
       Object {
         "$fragmentRefs": null,

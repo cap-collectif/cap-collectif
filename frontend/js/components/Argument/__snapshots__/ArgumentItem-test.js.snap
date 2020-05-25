@@ -11,7 +11,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
     overflow={true}
   >
     <Left>
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         className="excerpt_dark"
         user={
           Object {
@@ -30,7 +30,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
         <div
           className="opinion__user"
         >
-          <ForwardRef(Relay(Connect(UserLink)))
+          <Relay(Connect(UserLink))
             user={
               Object {
                 "$fragmentRefs": null,
@@ -51,7 +51,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
               year="numeric"
             />
           </span>
-          <ForwardRef(Relay(Connect(UnpublishedLabel)))
+          <Relay(Connect(UnpublishedLabel))
             publishable={
               Object {
                 "$fragmentRefs": null,
@@ -76,7 +76,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
           />
         </div>
       </div>
-      <ForwardRef(Relay(TrashedMessage))
+      <Relay(TrashedMessage)
         contribution={
           Object {
             "$fragmentRefs": null,
@@ -114,8 +114,8 @@ exports[`<ArgumentItem /> render correcty 1`] = `
             &lt;div&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.&lt;/div&gt;
           </Linkify>
         </p>
-      </ForwardRef(Relay(TrashedMessage))>
-      <ForwardRef(Relay(Connect(ArgumentButtons)))
+      </Relay(TrashedMessage)>
+      <Relay(Connect(ArgumentButtons))
         argument={
           Object {
             "$fragmentRefs": null,
@@ -166,7 +166,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
     overflow={true}
   >
     <Left>
-      <ForwardRef(Relay(Connect(UserAvatar)))
+      <Relay(Connect(UserAvatar))
         className="excerpt_dark"
         user={
           Object {
@@ -185,7 +185,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
         <div
           className="opinion__user"
         >
-          <ForwardRef(Relay(Connect(UserLink)))
+          <Relay(Connect(UserLink))
             user={
               Object {
                 "$fragmentRefs": null,
@@ -206,7 +206,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
               year="numeric"
             />
           </span>
-          <ForwardRef(Relay(Connect(UnpublishedLabel)))
+          <Relay(Connect(UnpublishedLabel))
             publishable={
               Object {
                 "$fragmentRefs": null,
@@ -242,7 +242,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
           </Label>
         </div>
       </div>
-      <ForwardRef(Relay(TrashedMessage))
+      <Relay(TrashedMessage)
         contribution={
           Object {
             "$fragmentRefs": null,
@@ -280,8 +280,8 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
             &lt;div&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.&lt;/div&gt;
           </Linkify>
         </p>
-      </ForwardRef(Relay(TrashedMessage))>
-      <ForwardRef(Relay(Connect(ArgumentButtons)))
+      </Relay(TrashedMessage)>
+      <Relay(Connect(ArgumentButtons))
         argument={
           Object {
             "$fragmentRefs": null,

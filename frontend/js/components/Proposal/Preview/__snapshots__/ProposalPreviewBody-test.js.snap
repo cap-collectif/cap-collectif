@@ -5,7 +5,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
   <div
     className="flex-1"
   >
-    <ForwardRef(Relay(ProposalPreviewUser))
+    <Relay(ProposalPreviewUser)
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -63,7 +63,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
       >
         string
       </Tag>
-      <ForwardRef(Relay(ProposalDetailEstimation))
+      <Relay(ProposalDetailEstimation)
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -94,7 +94,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
         }
         showNullEstimation={false}
       />
-      <ForwardRef(Relay(Connect(injectIntl(ProposalDetailLikers))))
+      <Relay(Connect(injectIntl(ProposalDetailLikers)))
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -129,7 +129,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
   <div
     className="proposal__buttons mt-15"
   >
-    <ForwardRef(Relay(ProposalPreviewVote))
+    <Relay(ProposalPreviewVote)
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -177,7 +177,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
         }
       }
     />
-    <ForwardRef(Relay(ProposalFollowButton))
+    <Relay(ProposalFollowButton)
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -215,7 +215,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
       }
     }
   >
-    <ForwardRef(Relay(ProposalVoteThresholdProgressBar))
+    <Relay(ProposalVoteThresholdProgressBar)
       proposal={
         Object {
           "$fragmentRefs": null,
