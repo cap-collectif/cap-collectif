@@ -18,14 +18,14 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class AssignAnalystsToProposalsMutation implements MutationInterface
 {
     use ResolverTrait;
+
+    private const NB_MAX_ANALYSTS_ASSIGNED = 10;
     private $globalIdResolver;
     private $em;
     private $builder;
     /** @var ProposalAnalysisRepository $proposalAnalysisRepository */
     private $proposalAnalysisRepository;
     private $authorizationChecker;
-
-    private const NB_MAX_ANALYSTS_ASSIGNED = 10;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
@@ -87,7 +87,6 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
 
             $proposal->addAnalysts($analysts);
         }
-
         $this->em->flush();
         $connection = $this->builder->connectionFromArray($proposals, $input);
         $connection->setTotalCount(\count($proposals));

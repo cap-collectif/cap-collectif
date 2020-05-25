@@ -6,6 +6,12 @@ use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalAnalysis;
+use Capco\AppBundle\Entity\ProposalAnalyst;
+use Capco\AppBundle\Entity\ProposalAssessment;
+use Capco\AppBundle\Entity\ProposalDecision;
+use Capco\AppBundle\Entity\ProposalDecisionMaker;
+use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Doctrine\Common\EventSubscriber;
@@ -65,7 +71,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
     {
         $body = json_encode([
             'class' => \get_class($entity),
-            'id' => $entity->getId()
+            'id' => $entity->getId(),
         ]);
         $this->logger->info(
             '[elastic_search_doctrine_listener] Adding new message to stack ' . $body
@@ -92,6 +98,16 @@ class ElasticsearchDoctrineListener implements EventSubscriber
             $entity->getAuthor()
         ) {
             $this->addToMessageStack($entity->getAuthor());
+        }
+        if (
+            $entity instanceof ProposalAnalyst ||
+            $entity instanceof ProposalDecisionMaker ||
+            $entity instanceof ProposalSupervisor ||
+            $entity instanceof ProposalAssessment ||
+            $entity instanceof ProposalDecision ||
+            $entity instanceof ProposalAnalysis
+        ) {
+            $this->process($entity->getProposal(), false);
         }
         if ($entity instanceof Comment && $entity->getRelatedObject()) {
             $this->process($entity->getRelatedObject(), false, true);
