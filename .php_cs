@@ -2,6 +2,7 @@
 
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
+    ->setUsingCache(false)
     ->setRules([
         '@PHP71Migration' => true,
         '@Symfony' => true,
@@ -51,6 +52,7 @@ return PhpCsFixer\Config::create()
         'strict_param' => false,
         'string_line_ending' => true,
         'yoda_style' => true,
+        'nullable_type_declaration_for_default_null_value' => true
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()

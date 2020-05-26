@@ -41,7 +41,8 @@ class SelectionStepProposalResolver implements ResolverInterface
             $filters['category'],
             $filters['status'],
             $filters['trashedStatus'],
-            $filters['selectionStep']
+            $filters['progressStatus'],
+            $filters['selectionStep'],
         ) = [
             $args->offsetGet('orderBy')['field'],
             $args->offsetGet('orderBy')['direction'],
@@ -52,7 +53,8 @@ class SelectionStepProposalResolver implements ResolverInterface
             $args->offsetGet('category'),
             $args->offsetGet('status'),
             $args->offsetGet('trashedStatus'),
-            $selectionStep->getId()
+            $args->offsetGet('progressStatus'),
+            $selectionStep->getId(),
         ];
 
         // Viewer is asking for unpublished proposals

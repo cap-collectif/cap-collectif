@@ -440,6 +440,10 @@ class ProposalSearch extends Search
             }
         }
 
+        if (isset($providedFilters['progressStatus'])) {
+            $filters['progressStatus'] = $providedFilters['progressStatus'];
+        }
+
         return $filters;
     }
 }

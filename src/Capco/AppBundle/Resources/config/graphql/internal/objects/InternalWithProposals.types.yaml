@@ -40,6 +40,9 @@ InternalWithProposals:
                         type: 'Boolean'
                         description: 'Select also draft proposals'
                         defaultValue: false
+                    progressStatus:
+                        type: 'ProposalProgressState'
+                        description: 'The global progress status of the proposal.'
             viewerProposalsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalConnection'

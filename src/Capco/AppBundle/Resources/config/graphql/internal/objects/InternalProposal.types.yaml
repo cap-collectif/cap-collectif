@@ -229,3 +229,7 @@ InternalProposal:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalysisResolver").isGranted(getUser(), value)'
                 type: '[InternalProposalAnalysis!]'
                 description: "The proposal's related analyses."
+            progressStatus:
+                type: 'ProposalProgressState!'
+                description: 'The proposal global progress status.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalProgressStatusResolver", [value])'

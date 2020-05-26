@@ -1438,6 +1438,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Select also draft proposals"""
     includeDraft: Boolean = false
+
+    """The global progress status of the proposal."""
+    progressStatus: ProposalProgressState
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -5237,6 +5240,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """Select also draft proposals"""
     includeDraft: Boolean = false
 
+    """The global progress status of the proposal."""
+    progressStatus: ProposalProgressState
+
     """
     ID of a Step to filter by. If non-null, filters proposals with the given step.
     """
@@ -5840,6 +5846,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The proposal's related analyses."""
   analyses: [ProposalAnalysis!]
+
+  """The proposal global progress status."""
+  progressStatus: ProposalProgressState!
 }
 
 """The affiliation of a user to a proposal"""
@@ -6181,6 +6190,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     """Select also draft proposals"""
     includeDraft: Boolean = false
+
+    """The global progress status of the proposal."""
+    progressStatus: ProposalProgressState
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -6306,6 +6318,24 @@ enum ProposalOrderField {
 
   """Allows ordering a list of proposals by the number of votes it have."""
   VOTES
+}
+
+"""Possible values of a proposal's global progress state."""
+enum ProposalProgressState {
+  """The proposal is currently being edited"""
+  IN_PROGRESS
+
+  """The proposal's progress state is favourable."""
+  FAVOURABLE
+
+  """The proposal's progress state is unfavourable."""
+  UNFAVOURABLE
+
+  """The evaluation of the proposal was not issued in time."""
+  TOO_LATE
+
+  """The evaluation of the proposal has not started yet."""
+  TODO
 }
 
 """Available statuses"""
@@ -6490,6 +6520,9 @@ interface ProposalStep {
 
     """Select also draft proposals"""
     includeDraft: Boolean = false
+
+    """The global progress status of the proposal."""
+    progressStatus: ProposalProgressState
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -8416,6 +8449,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Select also draft proposals"""
     includeDraft: Boolean = false
+
+    """The global progress status of the proposal."""
+    progressStatus: ProposalProgressState
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""

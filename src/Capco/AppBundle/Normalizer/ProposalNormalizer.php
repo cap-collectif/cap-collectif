@@ -49,19 +49,20 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
             $object
         );
 
+        $data['progressStatus'] = $object->getGlobalProgressStatus();
         $stepCounter = [];
         $totalCount = 0;
         foreach ($collectVotesCount as $stepId => $value) {
             $stepCounter[] = [
                 'step' => ['id' => $stepId],
-                'count' => $value
+                'count' => $value,
             ];
             $totalCount += $value;
         }
         foreach ($selectionVotesCount as $stepId => $value) {
             $stepCounter[] = [
                 'step' => ['id' => $stepId],
-                'count' => $value
+                'count' => $value,
             ];
             $totalCount += $value;
         }
@@ -71,7 +72,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
 
         $args = new Argument([
             'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
-            'first' => 0
+            'first' => 0,
         ]);
 
         if ($object->isCommentable()) {

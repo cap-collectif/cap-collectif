@@ -304,6 +304,8 @@ mappings:
                 properties:
                     updatedBy: *Author
                     state: { type: keyword }
+            progressStatus: { type: keyword }
+
     opinion:
         properties:
             id: { type: keyword }

@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\ModerableInterface;
@@ -299,7 +300,7 @@ class Proposal implements
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal", orphanRemoval=true)
      */
-    private Collection $analyses;
+    private iterable $analyses;
 
     public function __construct()
     {
@@ -318,6 +319,8 @@ class Proposal implements
         $this->parentConnections = new ArrayCollection();
         $this->proposalAnalysts = new ArrayCollection();
         $this->analyses = new ArrayCollection();
+        $this->assessment = null;
+        $this->decision = null;
     }
 
     public function __toString(): string
@@ -509,7 +512,7 @@ class Proposal implements
         return $this;
     }
 
-    public function getAnalyses(): Collection
+    public function getAnalyses(): iterable
     {
         return $this->analyses;
     }
@@ -520,6 +523,13 @@ class Proposal implements
             $this->analyses[] = $proposalAnalysis;
             $proposalAnalysis->setProposal($this);
         }
+
+        return $this;
+    }
+
+    public function setAnalyses(iterable $analyses): self
+    {
+        $this->analyses = $analyses;
 
         return $this;
     }
@@ -560,7 +570,7 @@ class Proposal implements
         return $this->rating;
     }
 
-    public function setRating(int $rating = null): self
+    public function setRating(?int $rating = null): self
     {
         $this->rating = $rating;
 
@@ -572,7 +582,7 @@ class Proposal implements
         return $this->annotation;
     }
 
-    public function setAnnotation(string $annotation = null): self
+    public function setAnnotation(?string $annotation = null): self
     {
         $this->annotation = $annotation;
 
@@ -596,7 +606,7 @@ class Proposal implements
         return $this->category;
     }
 
-    public function setCategory(ProposalCategory $category = null): self
+    public function setCategory(?ProposalCategory $category = null): self
     {
         $this->category = $category;
 
@@ -608,7 +618,7 @@ class Proposal implements
         return $this->theme;
     }
 
-    public function setTheme(Theme $theme = null): self
+    public function setTheme(?Theme $theme = null): self
     {
         $this->theme = $theme;
         if ($theme) {
@@ -623,7 +633,7 @@ class Proposal implements
         return $this->district;
     }
 
-    public function setDistrict(ProposalDistrict $district = null, bool $add = true): self
+    public function setDistrict(?ProposalDistrict $district = null, bool $add = true): self
     {
         $this->district = $district;
         if ($district && $add) {
@@ -650,7 +660,7 @@ class Proposal implements
         return $this->updateAuthor;
     }
 
-    public function setUpdateAuthor(User $updateAuthor = null): self
+    public function setUpdateAuthor(?User $updateAuthor = null): self
     {
         $this->updateAuthor = $updateAuthor;
 
@@ -757,7 +767,7 @@ class Proposal implements
         return $user && $user->isAdmin();
     }
 
-    public function viewerCanSee(User $user = null): bool
+    public function viewerCanSee(?User $user = null): bool
     {
         // Admin and SuperAdmin can access everything
         if ($user && $user->isAdmin()) {
@@ -827,7 +837,7 @@ class Proposal implements
         return $this->estimation;
     }
 
-    public function setEstimation(float $estimation = null): self
+    public function setEstimation(?float $estimation = null): self
     {
         $this->estimation = $estimation;
 
@@ -1031,7 +1041,7 @@ class Proposal implements
         return $this->media;
     }
 
-    public function setMedia(Media $media = null): self
+    public function setMedia(?Media $media = null): self
     {
         $this->media = $media;
 
@@ -1049,7 +1059,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setServicePilote(string $servicePilote = null): self
+    public function setServicePilote(?string $servicePilote = null): self
     {
         $this->servicePilote = $servicePilote;
 
@@ -1085,7 +1095,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setCompatibility(string $compatibility = null): self
+    public function setCompatibility(?string $compatibility = null): self
     {
         $this->compatibility = $compatibility;
 
@@ -1103,7 +1113,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setEnvironmentalImpact(string $environmentalImpact = null): self
+    public function setEnvironmentalImpact(?string $environmentalImpact = null): self
     {
         $this->environmentalImpact = $environmentalImpact;
 
@@ -1121,7 +1131,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setDimension(string $dimension = null): self
+    public function setDimension(?string $dimension = null): self
     {
         $this->dimension = $dimension;
 
@@ -1139,7 +1149,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setFunctioningImpact(string $functioningImpact = null): self
+    public function setFunctioningImpact(?string $functioningImpact = null): self
     {
         $this->functioningImpact = $functioningImpact;
 
@@ -1157,7 +1167,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setEvaluation(string $evaluation = null): self
+    public function setEvaluation(?string $evaluation = null): self
     {
         $this->evaluation = $evaluation;
 
@@ -1175,7 +1185,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setDelay(string $delay = null): self
+    public function setDelay(?string $delay = null): self
     {
         $this->delay = $delay;
 
@@ -1193,7 +1203,7 @@ class Proposal implements
     /**
      * @deprecated This was added for fabriquecitoyenne.rennes.fr when we didn't had an evaluation tool.
      */
-    public function setProposedAnswer(string $proposedAnswer = null): self
+    public function setProposedAnswer(?string $proposedAnswer = null): self
     {
         $this->proposedAnswer = $proposedAnswer;
 
@@ -1314,6 +1324,63 @@ class Proposal implements
         $this->evaluers->removeElement($group);
 
         return $this;
+    }
+
+    public function getGlobalProgressStatus(): string
+    {
+        if ($decision = $this->getDecision()) {
+            if (ProposalStatementState::DONE === $decision->getState()) {
+                return $decision->isApproved()
+                    ? ProposalStatementState::FAVOURABLE
+                    : ProposalStatementState::UNFAVOURABLE;
+            }
+
+            return $decision->getState();
+        }
+
+        if ($assessment = $this->getAssessment()) {
+            return $assessment->getState();
+        }
+
+        if (($analyses = $this->getAnalyses()) && !empty($analyses)) {
+            if (\count($analyses) > 1) {
+                $analysisStatuses = [];
+                /** @var ProposalAnalysis $analysis */
+                foreach ($analyses as $analysis) {
+                    $analysisStatuses[] = $analysis->getState();
+                }
+                // generate an associative array with status as key and number of occurences as value.
+                $analysisStatuses = array_count_values($analysisStatuses);
+                if (
+                    isset($analysisStatuses[ProposalStatementState::FAVOURABLE]) ||
+                    isset($analysisStatuses[ProposalStatementState::UNFAVOURABLE])
+                ) {
+                    if (
+                        ($analysisStatuses[ProposalStatementState::FAVOURABLE] ?? 0) >
+                        ($analysisStatuses[ProposalStatementState::UNFAVOURABLE] ?? 0)
+                    ) {
+                        return ProposalStatementState::FAVOURABLE;
+                    }
+
+                    return ProposalStatementState::UNFAVOURABLE;
+                }
+                // sort array by number of occurences casted as int.
+                arsort($analysisStatuses, 1);
+                $flippedArray = array_flip($analysisStatuses);
+                // we use reset to get the first index.
+                if (ProposalStatementState::TODO === reset($flippedArray)) {
+                    return next($flippedArray);
+                }
+
+                return reset($flippedArray);
+            }
+
+            foreach ($analyses as $analysis) {
+                return $analysis->getState();
+            }
+        }
+
+        return ProposalStatementState::TODO;
     }
 
     public function isIndexable(): bool
