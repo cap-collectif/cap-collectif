@@ -13,6 +13,14 @@ import {
 
 export type ProposalViewMode = 'mosaic' | 'table' | 'map';
 
+export type Filters = {|
+  types: ?string,
+  categories: ?string,
+  statuses: ?string,
+  themes: ?string,
+  districts: ?string,
+|};
+
 type Status = { name: string, id: number, color: string };
 type ChangeFilterAction = {
   type: 'proposal/CHANGE_FILTER',
@@ -71,7 +79,7 @@ export type State = {
   +isEditing: boolean,
   +showEditModal: boolean,
   +order: string,
-  +filters: Object,
+  +filters: Filters,
   +terms: ?string,
   +lastEditedStepId: ?Uuid,
   +lastEditedProposalId: ?Uuid,
@@ -94,7 +102,13 @@ export const initialState: State = {
   isEditing: false,
   showEditModal: false,
   order: 'random',
-  filters: {},
+  filters: {
+    themes: null,
+    categories: null,
+    types: null,
+    statuses: null,
+    districts: null,
+  },
   terms: null,
   lastEditedProposalId: null,
   lastNotifiedStepId: null,

@@ -93,7 +93,7 @@ class ApplicationContext extends UserContext
         // We reset everything
         $jobs = [
             new Process('curl -sS -XBAN http://capco.test:8181'),
-            new Process('redis-cli -h redis FLUSHALL')
+            new Process('redis-cli -h redis FLUSHALL'),
         ];
 
         $scenario = $scope->getScenario();
@@ -860,8 +860,8 @@ class ApplicationContext extends UserContext
         stream_context_set_default([
             'ssl' => [
                 'verify_peer' => false,
-                'verify_peer_name' => false
-            ]
+                'verify_peer_name' => false,
+            ],
         ]);
 
         $url = $this->getSession()->getCurrentUrl() . ltrim($path, '/');
@@ -884,7 +884,7 @@ class ApplicationContext extends UserContext
 
         $url = $this->getService('router')->generate('app_project_download', [
             'projectSlug' => $projectSlug,
-            'stepSlug' => $stepSlug
+            'stepSlug' => $stepSlug,
         ]);
         $this->iTryToDownload($url);
     }
@@ -1042,53 +1042,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Checks that option from select with specified id|name|label|value is selected.
-     *
-     * @Then /^the "(?P<option>(?:[^"]|\\")*)" option from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected/
-     * @Then /^the option "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected$/
-     * @Then /^"(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected$/
-     *
-     * @param mixed $option
-     * @param mixed $select
-     */
-    public function optionIsSelectedInSelect($option, $select)
-    {
-        $selectField = $this->getSession()
-            ->getPage()
-            ->findField($select);
-        if (null === $selectField) {
-            throw new ElementNotFoundException(
-                $this->getSession(),
-                'select field',
-                'id|name|label|value',
-                $select
-            );
-        }
-
-        $optionField = $selectField->find('named', ['option', $option]);
-
-        if (null === $optionField) {
-            throw new ElementNotFoundException(
-                $this->getSession(),
-                'select option field',
-                'id|name|label|value',
-                $option
-            );
-        }
-
-        if (!$optionField->isSelected()) {
-            throw new ExpectationException(
-                'Select option field with value|text "' .
-                    $option .
-                    '" is not selected in the select "' .
-                    $select .
-                    '"',
-                $this->getSession()
-            );
-        }
-    }
-
-    /**
      * @override Given /^(?:|I )am on (?:|the )homepage$/
      * @override When /^(?:|I )go to (?:|the )homepage$/
      */
@@ -1170,6 +1123,23 @@ class ApplicationContext extends UserContext
 
         $element->setValue($option);
         $this->iWait(3);
+    }
+
+    /**
+     * Checks that option from select is selected.
+     *
+     * @Then the option :option from :select should be selected
+     */
+    public function checkSelectAccessibleOption(string $select, string $option): void
+    {
+        $selector = "${select}-button";
+
+        $this->iWaitElementToAppearOnPage($selector);
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $selector);
+
+        Assert::assertEquals($element->getText(), $option);
     }
 
     /**
@@ -1312,7 +1282,7 @@ class ApplicationContext extends UserContext
             'bp-search',
             'bo-pages',
             'bp-crud',
-            'bp'
+            'bp',
         ]);
     }
 

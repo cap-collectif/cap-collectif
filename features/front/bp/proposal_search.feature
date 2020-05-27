@@ -1,6 +1,16 @@
 @bp @proposal_search
 Feature: Proposals search
 
+Scenario: Initialize filters from URL parameters
+  Given features user_type, districts are enabled
+  And I am logged in as admin
+  And I go to "/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee?category=pCategoryIdf1&district=districtIdf2&status=statusIdfCollect1&type=4"
+  Then The proposals category filter option "Espaces verts et biodiversité" should be selected
+  Then The proposals district filter option "Val de marne (94)" should be selected
+  Then The proposals status filter option "Nouveau projet" should be selected
+  Then The proposals contributor filter option "Institution" should be selected
+  Then there should be 0 proposals
+
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and apply filters
   Given features themes, districts are enabled

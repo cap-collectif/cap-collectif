@@ -18,9 +18,10 @@ import { reducer as eventReducer } from '~/redux/modules/event';
 import { reducer as languageReducer } from '~/redux/modules/language';
 
 import type { SubmitConfirmPasswordAction } from '~/redux/modules/user';
-import type { Store } from '~/types';
+import type { Store, GlobalState } from '~/types';
 
-export default function configureStore(initialState: Object): Store {
+export default function configureStore(initialState: GlobalState): Store {
+  // $FlowExpectedError not writable
   initialState.intl = {};
   initialState.intl.locale = window.locale;
   initialState.intl.messages = window.intl_messages;
@@ -30,9 +31,43 @@ export default function configureStore(initialState: Object): Store {
     initialState.project.currentProjectStepById &&
     LocalStorageService.isValid('proposal.filtersByStep')
   ) {
-    const filtersByStep = LocalStorageService.get('proposal.filtersByStep');
+    const filtersByStep: ?Object = LocalStorageService.get('proposal.filtersByStep');
     if (filtersByStep) {
+      // $FlowExpectedError not writable
       initialState.proposal.filters = filtersByStep[initialState.project.currentProjectStepById];
+    }
+  }
+  if (
+    initialState.project &&
+    initialState.project.currentProjectStepById
+  ) {
+    const urlSearch = new URLSearchParams(window.location.search);
+    if (urlSearch) {
+          const themeId: ?string = urlSearch.get('theme') || null;
+          if (themeId) {
+            // $FlowExpectedError not writable
+            proposalInitialState.filters.themes = themeId;
+          }
+          const categoryId: ?string = urlSearch.get('category') || null;
+          if (categoryId) {
+            // $FlowExpectedError not writable
+            proposalInitialState.filters.categories = categoryId;
+          }
+          const statusId: ?string = urlSearch.get('status') || null;
+          if (statusId) {
+            // $FlowExpectedError not writable
+            proposalInitialState.filters.statuses = statusId;
+          }
+          const typeId: ?string = urlSearch.get('type') || null;
+          if (typeId) {
+            // $FlowExpectedError not writable
+            proposalInitialState.filters.types = typeId;
+          }
+          const districtId: ?string = urlSearch.get('district') || null;
+          if (districtId) {
+            // $FlowExpectedError not writable
+            proposalInitialState.filters.districts = districtId;
+          }
     }
   }
   if (
@@ -41,8 +76,9 @@ export default function configureStore(initialState: Object): Store {
     initialState.project.currentProjectStepById &&
     LocalStorageService.isValid('proposal.termsByStep')
   ) {
-    const termsByStep = LocalStorageService.get('proposal.termsByStep');
+    const termsByStep: ?Object = LocalStorageService.get('proposal.termsByStep');
     if (termsByStep) {
+      // $FlowExpectedError not writable
       initialState.proposal.terms = termsByStep[initialState.project.currentProjectStepById];
     }
   }
@@ -52,8 +88,9 @@ export default function configureStore(initialState: Object): Store {
     initialState.project.currentProjectStepById &&
     LocalStorageService.isValid('proposal.orderByStep')
   ) {
-    const orderByStep = LocalStorageService.get('proposal.orderByStep');
+    const orderByStep: ?Object = LocalStorageService.get('proposal.orderByStep');
     if (orderByStep) {
+      // $FlowExpectedError not writable
       initialState.proposal.order = orderByStep[initialState.project.currentProjectStepById];
     }
   }
@@ -62,8 +99,9 @@ export default function configureStore(initialState: Object): Store {
     initialState.project.showConsultationPlanById &&
     LocalStorageService.isValid('project.showConsultationPlanById')
   ) {
-    const showConsultationPlanById = LocalStorageService.get('project.showConsultationPlanById');
+    const showConsultationPlanById: ?Object = LocalStorageService.get('project.showConsultationPlanById');
     if (showConsultationPlanById) {
+      // $FlowExpectedError not writable
       initialState.project.showConsultationPlanById = showConsultationPlanById;
     }
   }
@@ -107,6 +145,7 @@ export default function configureStore(initialState: Object): Store {
     }),
   };
 
+  // $FlowExpectedError not writable
   initialState.proposal = { ...proposalInitialState, ...initialState.proposal };
 
   const reducer = combineReducers(reducers);

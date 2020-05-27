@@ -270,18 +270,49 @@ trait ProposalStepsTrait
      */
     public function thereShouldBeNbProposals(int $nb)
     {
-        $proposalSelector = $this->getCurrentPage()->getProposalSelector();
-        $this->waitAndThrowOnFailure(10000, "$('" . $proposalSelector . "').length === " . $nb);
+        $this->waitAndThrowOnFailure(10000, "$('.proposal-preview').length === " . $nb);
     }
 
     /**
      * @When I change the proposals theme filter
      */
-    public function iChangeTheProposalsThemeFilter()
+    public function iChangeTheProposalsThemeFilter(string $value = 'theme2')
     {
         $this->pressButton('proposal-filter-themes-button');
-        $this->selectOptionAccessible('#proposal-filter-themes', 'theme2');
+        $this->selectOptionAccessible('#proposal-filter-themes', $value);
         $this->IwaitForSuccessfulRefetchQuery();
+    }
+
+    /**
+     * @Then The proposals status filter option :value should be selected
+     */
+    public function iCheckTheProposalsStatusFilterValue(string $value)
+    {
+        $this->checkSelectAccessibleOption('#proposal-filter-statuses', $value);
+    }
+
+    /**
+     * @Then The proposals contributor filter option :value should be selected
+     */
+    public function iCheckTheProposalsContributorFilterValue(string $value)
+    {
+        $this->checkSelectAccessibleOption('#proposal-filter-types', $value);
+    }
+
+    /**
+     * @Then The proposals category filter option :value should be selected
+     */
+    public function iCheckTheProposalsCategoryFilterValue(string $value)
+    {
+        $this->checkSelectAccessibleOption('#proposal-filter-categories', $value);
+    }
+
+    /**
+     * @Then The proposals district filter option :value should be selected
+     */
+    public function iCheckTheProposalsDistrictFilterValue(string $value)
+    {
+        $this->checkSelectAccessibleOption('#proposal-filter-districts', $value);
     }
 
     /**

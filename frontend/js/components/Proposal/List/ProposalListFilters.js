@@ -7,19 +7,11 @@ import { connect } from 'react-redux';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import ProposalListSearch from './ProposalListSearch';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
-import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
+import { changeFilter, changeProposalListView, type Filters } from '../../../redux/modules/proposal';
 import ProposalListToggleViewBtn from './ProposalListToggleViewBtn';
 import type { ProposalListFilters_step } from '~relay/ProposalListFilters_step.graphql';
 import Select from '../../Ui/Form/Select/Select';
 import SelectOption from '../../Ui/Form/Select/SelectOption';
-
-type Filters = {|
-  types?: string,
-  categories?: string,
-  statuses?: string,
-  themes?: string,
-  districts?: string,
-|};
 
 type defaultOption = {|
   +id: string,

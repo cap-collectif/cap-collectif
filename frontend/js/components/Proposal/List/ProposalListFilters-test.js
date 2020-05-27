@@ -39,7 +39,13 @@ describe('<ProposalListFilters />', () => {
     features: { ...features, user_type: true },
     themes: [],
     types: [],
-    filters: {},
+    filters: {
+      themes: null,
+      categories: null,
+      districts: null,
+      statuses: null,
+      types: null,
+    },
   };
 
   it('should render correctly', () => {
