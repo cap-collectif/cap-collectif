@@ -1,12 +1,6 @@
 {% block form %}
     {{ sonata_block_render_event('sonata.admin.edit.form.top', { 'admin': admin, 'object': object }) }}
 
-    {% if is_feature_enabled('unstable__analysis') %}
-    <div class="alert alert-info" role="alert">
-    Essayez en avant première la nouvelle <a href="{{ path('capco_admin_alpha_project_edit', {'id': object.id })}}" class="alert-link">page</a> de vos projets participatifs !
-    </div>
-    {% endif %}
-
     {# NEXT_MAJOR: remove default filter #}
     {% set url = objectId|default(admin.id(object)) is not null ? 'edit' : 'create' %}
 

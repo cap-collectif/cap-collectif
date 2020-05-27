@@ -13,9 +13,8 @@ InternalProject:
         fields:
             # Override PublicProject or PreviewProject fields
             hasAnalysis:
-                # TODO : implement me
                 type: Boolean!
-                resolve: '@=true'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectHasAnalysisResolver", [value])'
             contributors:
                 type: 'InternalUserConnection!'
             votes:

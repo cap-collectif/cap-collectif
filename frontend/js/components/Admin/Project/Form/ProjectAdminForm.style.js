@@ -4,8 +4,58 @@ import { MenuItem, Modal, DropdownButton } from 'react-bootstrap';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
-export const ProjectBoxContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  border-top-color: #858e95;
+export const ProjectBoxContainer: StyledComponent<
+  { color?: ?string },
+  {},
+  HTMLDivElement,
+> = styled.div`
+  border-top-color: ${({ color }) => color || '#858e95'};
+`;
+
+export const BoxDeprecated: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'box-content',
+})`
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+
+  > span {
+    font-weight: bold;
+  }
+
+  a {
+    font-weight: 600;
+    display: flex;
+    color: #0388cc;
+
+    :hover,
+    :focus {
+      text-decoration: none;
+    }
+
+    > span {
+      margin-right: 5px;
+
+      :hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  span[class*='Label'] {
+    padding: 1px 8px !important;
+  }
+
+  > div span + span {
+    font-weight: bold;
+    margin-left: 5px;
+  }
+
+  i {
+    font-size: 10px;
+    top: 5px;
+    left: 2px;
+  }
 `;
 
 export const StepCreateButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(

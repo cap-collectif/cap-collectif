@@ -12,6 +12,7 @@ import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminCon
 import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage';
 import ProjectAdminAnalysisTab from '~/components/Admin/Project/ProjectAdminAnalysisTab';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import { ProjectBoxContainer, BoxDeprecated } from './Form/ProjectAdminForm.style';
 
 type Props = {|
   +features: FeatureToggles,
@@ -95,6 +96,16 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
         </NavContainer>
       </Header>
       <Content>
+        <div className="col-md-12">
+          <ProjectBoxContainer className="box container-fluid" color="#ffc206">
+            <BoxDeprecated>
+              <FormattedMessage id="message.page.previous.version" />
+              <a href={`/admin/capco/app/project/${project._id}/edit?back=alpha`}>
+                <FormattedMessage id="global.consult" /> <i className="cap cap-arrow-66" />
+              </a>
+            </BoxDeprecated>
+          </ProjectBoxContainer>
+        </div>
         <Switch>
           {links.map(link => (
             <Route key={link.url} path={link.url}>

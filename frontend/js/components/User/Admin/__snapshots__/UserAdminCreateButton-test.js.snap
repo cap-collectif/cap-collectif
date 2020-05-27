@@ -15,6 +15,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
         "marginTop": 10,
       }
     }
+    type="button"
   >
     <div
       id="add-a-user"

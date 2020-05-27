@@ -139,6 +139,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
     return (
       <div>
         <Button
+          type="button"
           id="add-a-user-button"
           bsStyle="default"
           style={{ marginTop: 10 }}
@@ -252,6 +253,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
 }
 
 const asyncValidate = (values: FormValues, dispatch: Dispatch) => {
+  if (!values.plainPassword) return new Promise(resolve => resolve());
   return asyncPasswordValidate(form, 'plainPassword', values, dispatch);
 };
 const userForm = reduxForm({
