@@ -796,6 +796,16 @@ Capco\AppBundle\Entity\Proposal:
         trashedStatus: 'visible'
         trashedReason: 'Refusé car on a pas envie.'
         status: '@statusIdfCollect1'
+    proposalIdf10:
+        id: proposalIdf10
+        title: Mon autre grand projet
+        body: Je ne crois pas qu'il y ai d'autres bon ou mauvais projets.
+        author: '@userKiroule'
+        proposalForm: '@proposalformIdf'
+        reference: 10
+        publishedAt: <(new \DateTime('2020-02-01 00:00:02'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
     assignedProposals{120..125}:
         id: 'assignedProposals<current()>'
         title: 'Proposal assigned <current()>'

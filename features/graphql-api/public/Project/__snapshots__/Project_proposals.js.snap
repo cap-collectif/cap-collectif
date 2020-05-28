@@ -17,6 +17,11 @@ Object {
     },
     Object {
       "node": Object {
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYxMA==",
+      },
+    },
+    Object {
+      "node": Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYy",
       },
     },
@@ -30,13 +35,8 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY0",
       },
     },
-    Object {
-      "node": Object {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
-      },
-    },
   ],
-  "totalCount": 7,
+  "totalCount": 8,
 }
 `;
 

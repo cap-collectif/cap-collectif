@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ProposalsState;
+use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Enum\ProposalTrashedStatus;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Elastica\Index;
@@ -68,6 +69,21 @@ class ProposalSearch extends Search
             } else {
                 $boolQuery->addFilter($term);
             }
+        }
+
+        $inapplicableFilters = [
+            'district' => $providedFilters['district'],
+            'category' => $providedFilters['category'],
+            'status' => $providedFilters['status'],
+        ];
+        $existsFilters = [];
+        foreach ($inapplicableFilters as $key => $inapplicableFilter) {
+            if (Search::NONE_VALUE === $inapplicableFilter) {
+                $existsFilters[] = new Query\Exists($key);
+            }
+        }
+        if (!empty($existsFilters)) {
+            $boolQuery->addMustNot($existsFilters);
         }
 
         if (\count($stateTerms) > 0) {
@@ -181,13 +197,13 @@ class ProposalSearch extends Search
 
         $rootBoolShouldQuery = new Query\BoolQuery();
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $projectId]]));
-        if ('TODO' === $state) {
+        if (ProposalStatementState::TODO === $state) {
             foreach ($roleTask as $role => $task) {
                 $rootBoolShouldQuery->addShould(
                     $this->queryProposalsAssignedTodo($role, $task, $viewerId)
                 );
             }
-        } elseif ('DONE' === $state) {
+        } elseif (ProposalStatementState::DONE === $state) {
             foreach ($roleTask as $role => $task) {
                 $rootBoolShouldQuery->addShould(
                     $this->queryProposalsAssignedDone($role, $task, $viewerId)
@@ -372,7 +388,10 @@ class ProposalSearch extends Search
             if (isset($providedFilters['status'])) {
                 $filters['selections.status.id'] = $providedFilters['status'];
             }
-        } elseif (isset($providedFilters['status'])) {
+        } elseif (
+            isset($providedFilters['status']) &&
+            Search::NONE_VALUE !== $providedFilters['status']
+        ) {
             $filters['status.id'] = $providedFilters['status'];
         }
 
@@ -380,7 +399,10 @@ class ProposalSearch extends Search
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
 
-        if (isset($providedFilters['district'])) {
+        if (
+            isset($providedFilters['district']) &&
+            Search::NONE_VALUE !== $providedFilters['district']
+        ) {
             $filters['district.id'] = $providedFilters['district'];
         }
         if (isset($providedFilters['themes'])) {
@@ -389,7 +411,10 @@ class ProposalSearch extends Search
         if (isset($providedFilters['types']) && $providedFilters['types'] > 0) {
             $filters['author.userType.id'] = $providedFilters['types'];
         }
-        if (isset($providedFilters['category'])) {
+        if (
+            isset($providedFilters['category']) &&
+            Search::NONE_VALUE !== $providedFilters['category']
+        ) {
             $filters['category.id'] = $providedFilters['category'];
         }
         if (isset($providedFilters['author'])) {

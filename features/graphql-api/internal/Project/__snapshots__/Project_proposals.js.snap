@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.projects.proposals fetches proposals filtered by none category, district, status 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "node": Object {
+        "category": null,
+        "district": null,
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYxMA==",
+        "reference": "10",
+        "status": null,
+        "title": "Mon autre grand projet",
+      },
+    },
+  ],
+  "totalCount": 1,
+}
+`;
