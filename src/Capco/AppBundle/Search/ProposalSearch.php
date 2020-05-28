@@ -59,7 +59,12 @@ class ProposalSearch extends Search
         $stateTerms = [];
         $filters = $this->getFilters($providedFilters);
         foreach ($filters as $key => $value) {
-            $term = new Term([$key => ['value' => $value]]);
+            if ('proposalAnalysts.analyst.id' === $key) {
+                $term = new Terms($key, $value);
+            } else {
+                $term = new Term([$key => ['value' => $value]]);
+            }
+
             if (
                 \in_array($key, ['draft', 'published', 'trashed'], true) &&
                 (isset($providedFilters['state']) &&

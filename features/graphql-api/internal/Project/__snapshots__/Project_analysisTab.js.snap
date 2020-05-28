@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.ProjectAdminAnalysisTab fetches proposals assigned to specific analysts, supervisor, decisionMaker 1`] = `
+Object {
+  "project": Object {
+    "firstAnalysisStep": Object {
+      "proposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "analysts": Array [
+                Object {
+                  "id": "VXNlcjp1c2VySmVhbg==",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyTWF4aW1l",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyT21hcg==",
+                },
+              ],
+              "decisionMaker": Object {
+                "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+              },
+              "supervisor": Object {
+                "id": "VXNlcjp1c2VyU3B5bA==",
+              },
+            },
+          },
+          Object {
+            "node": Object {
+              "analysts": Array [
+                Object {
+                  "id": "VXNlcjp1c2VyTWF4aW1l",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyVGhlbw==",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyVmluY2VudA==",
+                },
+              ],
+              "decisionMaker": Object {
+                "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+              },
+              "supervisor": Object {
+                "id": "VXNlcjp1c2VyU3B5bA==",
+              },
+            },
+          },
+          Object {
+            "node": Object {
+              "analysts": Array [
+                Object {
+                  "id": "VXNlcjp1c2VyQWd1aQ==",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VySnBlYw==",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyTWF4aW1l",
+                },
+              ],
+              "decisionMaker": Object {
+                "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+              },
+              "supervisor": Object {
+                "id": "VXNlcjp1c2VyU3B5bA==",
+              },
+            },
+          },
+        ],
+      },
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+  },
+}
+`;

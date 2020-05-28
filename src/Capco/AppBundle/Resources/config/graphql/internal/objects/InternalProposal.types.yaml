@@ -232,4 +232,4 @@ InternalProposal:
             progressStatus:
                 type: 'ProposalProgressState!'
                 description: 'The proposal global progress status.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalProgressStatusResolver", [value])'
+                resolve: '@=value.getGlobalProgressStatus()'

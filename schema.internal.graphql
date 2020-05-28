@@ -1441,6 +1441,15 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
+
+    """The analysts's ids assigned to the proposal"""
+    analysts: [ID!]
+
+    """The supervisor's id assigned to the proposal"""
+    supervisor: ID
+
+    """The decision-maker's id assigned to the proposal"""
+    decisionMaker: ID
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -5243,6 +5252,15 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
 
+    """The analysts's ids assigned to the proposal"""
+    analysts: [ID!]
+
+    """The supervisor's id assigned to the proposal"""
+    supervisor: ID
+
+    """The decision-maker's id assigned to the proposal"""
+    decisionMaker: ID
+
     """
     ID of a Step to filter by. If non-null, filters proposals with the given step.
     """
@@ -6193,6 +6211,15 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
+
+    """The analysts's ids assigned to the proposal"""
+    analysts: [ID!]
+
+    """The supervisor's id assigned to the proposal"""
+    supervisor: ID
+
+    """The decision-maker's id assigned to the proposal"""
+    decisionMaker: ID
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -6523,6 +6550,15 @@ interface ProposalStep {
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
+
+    """The analysts's ids assigned to the proposal"""
+    analysts: [ID!]
+
+    """The supervisor's id assigned to the proposal"""
+    supervisor: ID
+
+    """The decision-maker's id assigned to the proposal"""
+    decisionMaker: ID
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -8452,6 +8488,15 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
+
+    """The analysts's ids assigned to the proposal"""
+    analysts: [ID!]
+
+    """The supervisor's id assigned to the proposal"""
+    supervisor: ID
+
+    """The decision-maker's id assigned to the proposal"""
+    decisionMaker: ID
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""

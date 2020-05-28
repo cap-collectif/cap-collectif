@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Search\ProposalSearch;
 use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -58,11 +59,26 @@ class SelectionStepProposalResolver implements ResolverInterface
         ];
 
         // Viewer is asking for unpublished proposals
-        if (
-            $args->offsetExists('includeUnpublishedOnly') &&
-            true === $args->offsetGet('includeUnpublishedOnly')
-        ) {
+        if (true === $args->offsetGet('includeUnpublishedOnly')) {
             return ConnectionBuilder::empty(['fusionCount' => 0]);
+        }
+
+        if (null !== $args->offsetGet('analysts')) {
+            $analysts = [];
+            foreach ($args->offsetGet('analysts') as $analyst) {
+                $analysts[] = GlobalIdResolver::getDecodedId($analyst)['id'];
+            }
+            $filters['analysts'] = $analysts;
+        }
+        if (null !== $args->offsetGet('supervisor')) {
+            $filters['supervisor'] = GlobalIdResolver::getDecodedId($args->offsetGet('supervisor'))[
+                'id'
+            ];
+        }
+        if (null !== $args->offsetGet('decisionMaker')) {
+            $filters['decisionMaker'] = GlobalIdResolver::getDecodedId(
+                $args->offsetGet('decisionMaker')
+            )['id'];
         }
 
         try {

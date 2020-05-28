@@ -43,6 +43,15 @@ InternalWithProposals:
                     progressStatus:
                         type: 'ProposalProgressState'
                         description: 'The global progress status of the proposal.'
+                    analysts:
+                        description: "The analysts's ids assigned to the proposal"
+                        type: '[ID!]'
+                    supervisor:
+                        description: "The supervisor's id assigned to the proposal"
+                        type: 'ID'
+                    decisionMaker:
+                        description: "The decision-maker's id assigned to the proposal"
+                        type: 'ID'
             viewerProposalsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalConnection'
