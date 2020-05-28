@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Mailer\Message\MessagesList;
 use Capco\AppBundle\Toggle\Manager;
+use Doctrine\ORM\NoResultException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,17 +81,14 @@ class DefaultController extends Controller
      */
     public function cookiesAction(Request $request)
     {
-        $cookiesList = $this->get(SiteParameterRepository::class)->findOneBy([
-            'keyname' => 'cookies-list',
-            'isEnabled' => 1
-        ]);
-
-        if (!$cookiesList) {
+        try {
+            $cookiesList = $this->get(SiteParameterRepository::class)->getValue('cookies-list', $request->getLocale());
+        } catch (NoResultException $exception) {
             return $this->createNotFoundException();
         }
 
         return [
-            'cookiesList' => html_entity_decode($cookiesList->getValue())
+            'cookiesList' => html_entity_decode($cookiesList)
         ];
     }
 
@@ -100,17 +98,14 @@ class DefaultController extends Controller
      */
     public function privacyPolicyAction(Request $request)
     {
-        $policy = $this->get(SiteParameterRepository::class)->findOneBy([
-            'keyname' => 'privacy-policy',
-            'isEnabled' => 1
-        ]);
-
-        if (!$policy) {
+        try {
+            $policy = $this->get(SiteParameterRepository::class)->getValue('privacy-policy', $request->getLocale());
+        } catch (NoResultException $exception) {
             return $this->createNotFoundException();
         }
 
         return [
-            'privacy' => html_entity_decode($policy->getValue())
+            'privacy' => html_entity_decode($policy)
         ];
     }
 
@@ -120,17 +115,14 @@ class DefaultController extends Controller
      */
     public function legalMentionsAction(Request $request)
     {
-        $legal = $this->get(SiteParameterRepository::class)->findOneBy([
-            'keyname' => 'legal-mentions',
-            'isEnabled' => 1
-        ]);
-
-        if (!$legal) {
+        try {
+            $legal = $this->get(SiteParameterRepository::class)->getValue('legal-mentions', $request->getLocale());
+        } catch (NoResultException $exception) {
             return $this->createNotFoundException();
         }
 
         return [
-            'legal' => html_entity_decode($legal->getValue())
+            'legal' => html_entity_decode($legal)
         ];
     }
 

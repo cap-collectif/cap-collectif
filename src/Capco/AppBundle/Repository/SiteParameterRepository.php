@@ -28,4 +28,31 @@ class SiteParameterRepository extends EntityRepository
             ->useResultCache(true, 60)
             ->getResult();
     }
+
+    public function getValue(string $keyname, string $locale): string
+    {
+        $qb = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->from($this->getClassName(), 'p')
+            ->andWhere('p.isEnabled = 1')
+            ->andWhere('p.keyname = :keyname')
+            ->setParameter('keyname', $keyname);
+
+        if (in_array($keyname, SiteParameter::NOT_TRANSLATABLE)) {
+            $qb->select('p.value');
+        } else {
+            $qb
+                ->select('t.value')
+                ->leftJoin('p.translations', 't', Join::WITH, 't.locale = :locale')
+                ->setParameter('locale', $locale);
+        }
+
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->useResultCache(true, 60)
+            ->getSingleResult()["value"];
+
+
+    }
 }
