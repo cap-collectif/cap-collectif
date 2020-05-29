@@ -29,7 +29,7 @@ class SiteParameterRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getValue(string $keyname, string $locale): string
+    public function getValue(string $keyname, string $locale): ?string
     {
         $qb = $this->getEntityManager()
             ->createQueryBuilder()

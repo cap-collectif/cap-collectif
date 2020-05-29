@@ -2,9 +2,8 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Page;
 use Capco\AppBundle\Entity\PageTranslation;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\Repository\SiteParameterRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,6 +15,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
  */
 class PageController extends Controller
 {
+    private $siteParameterRepository;
+
+    public function __construct(SiteParameterRepository $siteParameterRepository)
+    {
+        $this->siteParameterRepository = $siteParameterRepository;
+    }
+
     /**
      * @Route("/{slug}", name="app_page_show", options={"i18n" = true})
      * @Entity("pageTranslation", class="CapcoAppBundle:PageTranslation", options={"mapping": {"slug": "slug"}})
@@ -26,8 +32,7 @@ class PageController extends Controller
         $slugCharter = strtolower($this->get('translator')->trans('charter', [], 'CapcoAppBundle'));
 
         if (null === $pageTranslation && $request->get('slug') === $slugCharter) {
-            $body = $this->container->get(SiteParameterResolver::class)->getValue('charter.body');
-
+            $body = $this->siteParameterRepository->getValue('charter.body', $request->getLocale());
             if (null === $body) {
                 throw $this->createNotFoundException(
                     $this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle')
