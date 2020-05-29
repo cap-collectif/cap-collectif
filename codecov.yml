@@ -22,40 +22,48 @@ coverage:
     patch: # Only measures lines adjusted in the pull request
       default: off
       jest:
-        flags: jest
+        flags: 
+          - jest
         target: 0
         threshold: 0
       php:
-        flags: php
+        flags: 
+          - php
         target: 0
         informational: true
       graphql:
-        flags: php
+        flags: 
+          - php
         target: 0
         paths:
           - src/Capco/AppBundle/GraphQL
       flow:
-        flags: flow
+        flags: 
+          - flow
         target: 0
         threshold: 0
     project: # Overall project coverage
       default: off
       jest:
-        flags: jest
+        flags: 
+          - jest
         target: auto
         informational: true
       php:
-        flags: php
+        flags: 
+          - php
         target: auto
         informational: true
       graphql:
-        flags: php
+        flags: 
+          - php
         target: 3
         paths:
           - src/Capco/AppBundle/GraphQL
       flow:
         target: 89
-        flags: flow
+        flags: 
+          - flow
 
 flags:
   # Filter the folder(s) you wish to measure by that flag
