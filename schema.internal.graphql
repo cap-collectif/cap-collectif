@@ -496,6 +496,9 @@ type AnalysisConfiguration {
   """The step to which proposals will be moved."""
   moveToSelectionStep: SelectionStep
 
+  """The status to apply on next step."""
+  selectionStepStatus: Status
+
   """The creation date."""
   createdAt: DateTime!
 
@@ -1875,6 +1878,9 @@ input ConfigureAnalysisInput {
 
   """The selection step on which the contributions are moved on."""
   moveToSelectionStepId: ID
+
+  """The status to apply on the contributions for the next step."""
+  selectionStepStatusId: ID
   clientMutationId: String
 }
 

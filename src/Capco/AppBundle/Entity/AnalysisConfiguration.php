@@ -53,7 +53,7 @@ class AnalysisConfiguration implements Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
-     * @ORM\JoinColumn(nullable=true, name="favourable_status", nullable=true)
+     * @ORM\JoinColumn(nullable=true, name="favourable_status")
      */
     private $favourableStatus;
 
@@ -71,6 +71,12 @@ class AnalysisConfiguration implements Timestampable
      * @ORM\JoinColumn(name="selection_step", nullable=true, referencedColumnName="id")
      */
     private $moveToSelectionStep;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
+     * @ORM\JoinColumn(nullable=true, name="selection_step_status")
+     */
+    private $selectionStepStatus;
 
     /**
      * @Gedmo\Timestampable(on="update")
@@ -106,7 +112,7 @@ class AnalysisConfiguration implements Timestampable
         return $this->evaluationForm;
     }
 
-    public function setEvaluationForm(Questionnaire $evaluationForm = null): self
+    public function setEvaluationForm(?Questionnaire $evaluationForm = null): self
     {
         $this->evaluationForm = $evaluationForm;
 
@@ -130,7 +136,7 @@ class AnalysisConfiguration implements Timestampable
         return $this->effectiveDate;
     }
 
-    public function setEffectiveDateAndProcessed(\DateTime $effectiveDate = null): self
+    public function setEffectiveDateAndProcessed(?\DateTime $effectiveDate = null): self
     {
         if ($effectiveDate !== $this->effectiveDate) {
             $this->setEffectiveDateProcessed(false);
@@ -140,7 +146,7 @@ class AnalysisConfiguration implements Timestampable
         return $this;
     }
 
-    public function setEffectiveDate(\DateTime $effectiveDate = null): self
+    public function setEffectiveDate(?\DateTime $effectiveDate = null): self
     {
         $this->effectiveDate = $effectiveDate;
 
@@ -155,6 +161,18 @@ class AnalysisConfiguration implements Timestampable
     public function setMoveToSelectionStep(?SelectionStep $moveToSelectionStep = null): self
     {
         $this->moveToSelectionStep = $moveToSelectionStep;
+
+        return $this;
+    }
+
+    public function getSelectionStepStatus(): ?Status
+    {
+        return $this->selectionStepStatus;
+    }
+
+    public function setSelectionStepStatus(?Status $selectionStepStatus = null): self
+    {
+        $this->selectionStepStatus = $selectionStepStatus;
 
         return $this;
     }

@@ -13,6 +13,9 @@ const ConfigureAnalysisMutation = /* GraphQL */ `
         moveToSelectionStep {
           id
         }
+        selectionStepStatus {
+          id
+        }
         proposalForm {
           id
         }
@@ -36,9 +39,10 @@ describe('mutations.configureAnalysis', () => {
           proposalFormId: 'proposalform17',
           analysisStepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAxMw==',
           moveToSelectionStepId: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOQ==',
+          selectionStepStatusId: 'status11',
           effectiveDate: '2020-03-01 12:00:00',
           unfavourableStatuses: ['status8', 'status9'],
-          favourableStatus: 'satus10',
+          favourableStatus: 'status10',
           costEstimationEnabled: true,
         },
       },

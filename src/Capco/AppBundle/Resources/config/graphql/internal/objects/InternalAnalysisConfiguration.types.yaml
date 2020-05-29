@@ -33,6 +33,9 @@ InternalAnalysisConfiguration:
             moveToSelectionStep:
                 type: 'SelectionStep'
                 description: 'The step to which proposals will be moved.'
+            selectionStepStatus:
+                type: 'Status'
+                description: 'The status to apply on next step.'
             createdAt:
                 type: 'DateTime!'
                 description: 'The creation date.'

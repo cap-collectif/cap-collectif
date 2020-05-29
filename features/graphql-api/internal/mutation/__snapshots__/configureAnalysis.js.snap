@@ -8,13 +8,18 @@ Object {
         "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAxMw==",
       },
       "effectiveDate": "2020-03-01 12:00:00",
-      "favourableStatus": null,
+      "favourableStatus": Object {
+        "id": "status10",
+      },
       "id": Any<String>,
       "moveToSelectionStep": Object {
         "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOQ==",
       },
       "proposalForm": Object {
         "id": "proposalform17",
+      },
+      "selectionStepStatus": Object {
+        "id": "status11",
       },
       "unfavourableStatuses": Array [
         Object {
@@ -47,6 +52,7 @@ Object {
       "proposalForm": Object {
         "id": "proposalform17",
       },
+      "selectionStepStatus": null,
       "unfavourableStatuses": Array [
         Object {
           "id": "status8",

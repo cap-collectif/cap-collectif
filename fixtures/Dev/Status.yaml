@@ -59,6 +59,12 @@ Capco\AppBundle\Entity\Status:
         position: 1
         step: '@collectstep13'
         color: success
+    status11:
+        id: status11
+        name: Favoris
+        position: 1
+        step: '@selectionstep9'
+        color: success
     statusIdfCollect1:
         id: statusIdfCollect1
         name: Nouveau projet

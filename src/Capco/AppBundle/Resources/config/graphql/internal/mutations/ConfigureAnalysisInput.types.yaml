@@ -30,3 +30,6 @@ ConfigureAnalysisInput:
             moveToSelectionStepId:
                 type: 'ID'
                 description: 'The selection step on which the contributions are moved on.'
+            selectionStepStatusId:
+                type: 'ID'
+                description: 'The status to apply on the contributions for the next step.'

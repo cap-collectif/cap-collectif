@@ -64,6 +64,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             $favourableStatusId,
             $unfavourableStatusesIds,
             $moveToSelectionStepId,
+            $selectionStepStatusId,
             $costEstimationEnabled,
             $body,
         ) = [
@@ -74,12 +75,14 @@ class ConfigureAnalysisMutation implements MutationInterface
             $args->offsetGet('favourableStatus'),
             $args->offsetGet('unfavourableStatuses'),
             $args->offsetGet('moveToSelectionStepId'),
+            $args->offsetGet('selectionStepStatusId'),
             $args->offsetGet('costEstimationEnabled'),
             $args->offsetGet('body'),
         ];
 
         $evaluationForm = null;
         $favourableStatus = null;
+        $selectionStepStatus = null;
         $unfavourablesStatuses = [];
 
         /** @var ProposalForm $proposalForm */
@@ -123,9 +126,16 @@ class ConfigureAnalysisMutation implements MutationInterface
             throw new UserError('This evaluation form does not exist.');
         }
 
+        /** @var SelectionStep $moveToSelectionStep */
         $moveToSelectionStep = $this->selectionStepRepository->find(
             GlobalId::fromGlobalId($moveToSelectionStepId)['id']
         );
+
+        if ($selectionStepStatusId) {
+            /** @var Status $selectionStepStatus */
+            $selectionStepStatus = $this->statusRepository->find($selectionStepStatusId);
+        }
+
         $analysisConfiguration
             ->setProposalForm($proposalForm)
             ->setEvaluationForm($evaluationForm)
@@ -134,6 +144,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             ->setFavourableStatus($favourableStatus)
             ->setUnfavourablesStatuses($unfavourablesStatuses)
             ->setMoveToSelectionStep($moveToSelectionStep)
+            ->setSelectionStepStatus($selectionStepStatus)
             ->setCostEstimationEnabled($costEstimationEnabled)
             ->setBody($body);
 
