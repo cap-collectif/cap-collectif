@@ -57,11 +57,11 @@ coverage:
       graphql:
         flags: 
           - php
-        target: 3
+        target: 4
         paths:
           - src/Capco/AppBundle/GraphQL
       flow:
-        target: 89
+        target: 88
         flags: 
           - flow
 
