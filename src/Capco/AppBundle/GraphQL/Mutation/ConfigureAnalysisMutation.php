@@ -82,8 +82,9 @@ class ConfigureAnalysisMutation implements MutationInterface
 
         $evaluationForm = null;
         $favourableStatus = null;
-        $selectionStepStatus = null;
+        $chosenSelectionStepStatus = null;
         $unfavourablesStatuses = [];
+        $moveToSelectionStep = null;
 
         /** @var ProposalForm $proposalForm */
         if (!($proposalForm = $this->proposalFormRepository->find($proposalFormId))) {
@@ -126,14 +127,21 @@ class ConfigureAnalysisMutation implements MutationInterface
             throw new UserError('This evaluation form does not exist.');
         }
 
-        /** @var SelectionStep $moveToSelectionStep */
-        $moveToSelectionStep = $this->selectionStepRepository->find(
-            GlobalId::fromGlobalId($moveToSelectionStepId)['id']
-        );
+        if ($moveToSelectionStepId) {
+            /** @var SelectionStep $moveToSelectionStep */
+            $moveToSelectionStep = $this->selectionStepRepository->find(
+                GlobalId::fromGlobalId($moveToSelectionStepId)['id']
+            );
 
-        if ($selectionStepStatusId) {
-            /** @var Status $selectionStepStatus */
-            $selectionStepStatus = $this->statusRepository->find($selectionStepStatusId);
+            if ($selectionStepStatusId && $moveToSelectionStep) {
+                $selectionStepStatuses = $moveToSelectionStep->getStatuses();
+                /** @var Status $selectionStepStatus */
+                foreach ($selectionStepStatuses as $selectionStepStatus) {
+                    if ($selectionStepStatus->getId() === $selectionStepStatusId) {
+                        $chosenSelectionStepStatus = $selectionStepStatus;
+                    }
+                }
+            }
         }
 
         $analysisConfiguration
@@ -144,7 +152,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             ->setFavourableStatus($favourableStatus)
             ->setUnfavourablesStatuses($unfavourablesStatuses)
             ->setMoveToSelectionStep($moveToSelectionStep)
-            ->setSelectionStepStatus($selectionStepStatus)
+            ->setSelectionStepStatus($chosenSelectionStepStatus)
             ->setCostEstimationEnabled($costEstimationEnabled)
             ->setBody($body);
 

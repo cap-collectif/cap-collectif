@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mutations.configureAnalysis should modify analysis configuration without moveToSelectionStepId 1`] = `
+Object {
+  "configureAnalysis": Object {
+    "analysisConfiguration": Object {
+      "analysisStep": Object {
+        "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAxMw==",
+      },
+      "effectiveDate": "2020-03-01 12:00:00",
+      "favourableStatus": Object {
+        "id": "status10",
+      },
+      "id": Any<String>,
+      "moveToSelectionStep": null,
+      "proposalForm": Object {
+        "id": "proposalform17",
+      },
+      "selectionStepStatus": null,
+      "unfavourableStatuses": Array [
+        Object {
+          "id": "status8",
+        },
+        Object {
+          "id": "status9",
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`mutations.configureAnalysis should modify specified analysis configuration 1`] = `
 Object {
   "configureAnalysis": Object {
