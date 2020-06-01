@@ -12,6 +12,7 @@ describe('<ProjectAccessAdminForm />', () => {
     project: null,
     visibility: 'ADMIN',
     formName: 'ProjectAdminForm',
+    initialGroups: [],
   };
 
   it('renders correctly empty', () => {

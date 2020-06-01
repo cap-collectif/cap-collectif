@@ -37,9 +37,11 @@ describe('<ProjectAdminForm />', () => {
       externalVotesCount: null,
       externalParticipantsCount: null,
       externalContributionsCount: null,
-      locale: null
+      locale: null,
+      restrictedViewers: null,
     },
-    features
+    features,
+    initialGroups: [],
   };
 
   it('renders correctly empty', () => {

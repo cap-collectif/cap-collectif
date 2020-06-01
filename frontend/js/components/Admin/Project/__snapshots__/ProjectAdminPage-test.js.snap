@@ -966,6 +966,60 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "GroupConnection",
+                        "kind": "LinkedField",
+                        "name": "restrictedViewers",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "GroupEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Group",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": "value",
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": "label",
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "ProjectDistrictConnection",
                         "kind": "LinkedField",
                         "name": "districts",
@@ -1186,6 +1240,15 @@ fragment ProjectAdminForm_project on Project {
     value: id
     label: title
     id
+  }
+  restrictedViewers {
+    edges {
+      node {
+        value: id
+        label: title
+        id
+      }
+    }
   }
   districts {
     edges {
@@ -2413,6 +2476,60 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "GroupConnection",
+                        "kind": "LinkedField",
+                        "name": "restrictedViewers",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "GroupEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Group",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": "value",
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": "label",
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "ProjectDistrictConnection",
                         "kind": "LinkedField",
                         "name": "districts",
@@ -2633,6 +2750,15 @@ fragment ProjectAdminForm_project on Project {
     value: id
     label: title
     id
+  }
+  restrictedViewers {
+    edges {
+      node {
+        value: id
+        label: title
+        id
+      }
+    }
   }
   districts {
     edges {

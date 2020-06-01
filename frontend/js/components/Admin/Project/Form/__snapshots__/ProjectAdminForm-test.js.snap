@@ -72,6 +72,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "opinionCanBeFollowed": true,
         "opinionTerm": 1,
         "publishedAt": "22/22/22",
+        "restrictedViewers": null,
         "steps": Array [],
         "themes": Array [],
         "title": "testTitle",
@@ -92,7 +93,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     valid={true}
     warning={null}
   />
-  <Relay(ProjectExternalAdminPage)
+  <Relay(Connect(ProjectExternalAdminPage))
     anyTouched={false}
     array={
       Object {
@@ -160,6 +161,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "opinionCanBeFollowed": true,
         "opinionTerm": 1,
         "publishedAt": "22/22/22",
+        "restrictedViewers": null,
         "steps": Array [],
         "themes": Array [],
         "title": "testTitle",
@@ -319,6 +321,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     form="formName"
     formName="projectAdminForm"
     handleSubmit={[MockFunction]}
+    initialGroups={Array []}
     initialValues={Object {}}
     initialize={[MockFunction]}
     initialized={true}
@@ -358,6 +361,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "opinionCanBeFollowed": true,
         "opinionTerm": 1,
         "publishedAt": "22/22/22",
+        "restrictedViewers": null,
         "steps": Array [],
         "themes": Array [],
         "title": "testTitle",
@@ -446,6 +450,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "opinionCanBeFollowed": true,
         "opinionTerm": 1,
         "publishedAt": "22/22/22",
+        "restrictedViewers": null,
         "steps": Array [],
         "themes": Array [],
         "title": "testTitle",
@@ -584,6 +589,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "opinionCanBeFollowed": true,
         "opinionTerm": 1,
         "publishedAt": "22/22/22",
+        "restrictedViewers": null,
         "steps": Array [],
         "themes": Array [],
         "title": "testTitle",

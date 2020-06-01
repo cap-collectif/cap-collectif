@@ -129,6 +129,10 @@ export const ProjectSmallFieldsContainer: StyledComponent<{}, {}, HTMLDivElement
     background: unset;
     border-color: #d2d6de;
   }
+
+  .rdt > input {
+    z-index: 0;
+  }
 `;
 
 export const ProjectAccessContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`

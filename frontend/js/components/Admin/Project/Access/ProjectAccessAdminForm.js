@@ -2,10 +2,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql, fetchQuery } from 'react-relay';
 import { type IntlShape, FormattedMessage } from 'react-intl';
 import renderComponent from '~/components/Form/Field';
 import type { GlobalState } from '~/types';
+import environment from '~/createRelayEnvironment';
+import select from '~/components/Form/Select';
 
 import {
   type ProjectAccessAdminForm_project,
@@ -19,6 +21,7 @@ import {
 
 export type FormValues = {|
   visibility: ProjectVisibility,
+  restrictedViewerGroups: Array<{| label: string, value: string |}>,
 |};
 
 type Props = {|
@@ -27,9 +30,33 @@ type Props = {|
   intl: IntlShape,
   formName: string,
   visibility: ProjectVisibility,
+  initialGroups: Array<{| label: string, value: string |}>,
 |};
 
-export const ProjectAccessAdminForm = ({ visibility }: Props) => (
+export const getGroups = graphql`
+  query ProjectAccessAdminFormGroupsQuery {
+    groups {
+      id
+      title
+    }
+  }
+`;
+
+export const loadGroupOptions = (initialGroups: ?Array<{| label: string, value: string |}>) => {
+  return fetchQuery(environment, getGroups, {}).then(data => {
+    const groups = data.groups.map(c => ({
+      value: c.id,
+      label: c.title,
+    }));
+    if (initialGroups?.length)
+      initialGroups.forEach(consultation => {
+        if (!groups.some(c => c.value === consultation.value)) groups.push(consultation);
+      });
+    return groups;
+  });
+};
+
+export const ProjectAccessAdminForm = ({ visibility, initialGroups }: Props) => (
   <div className="col-md-12">
     <ProjectBoxContainer className="box container-fluid">
       <ProjectBoxHeader>
@@ -76,6 +103,25 @@ export const ProjectAccessAdminForm = ({ visibility }: Props) => (
             <FormattedMessage id="global.custom.feminine" />
           </Field>
         </ProjectAccessContainer>
+        {visibility === 'CUSTOM' && (
+          <Field
+            selectFieldIsObject
+            debounce
+            autoload
+            labelClassName="control-label"
+            inputClassName="fake-inputClassName"
+            component={select}
+            multi
+            name="restrictedViewerGroups"
+            id="project-restrictedViewerGroups"
+            placeholder=" "
+            role="combobox"
+            aria-autocomplete="list"
+            aria-haspopup="true"
+            loadOptions={() => loadGroupOptions(initialGroups)}
+            clearable
+          />
+        )}
       </div>
     </ProjectBoxContainer>
   </div>

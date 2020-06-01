@@ -48,6 +48,7 @@ type Props = {|
   intl: IntlShape,
   title: string,
   onTitleChange: string => void,
+  initialGroups: Array<{| label: string, value: string |}>,
 |};
 
 export type Author = {|
@@ -124,6 +125,7 @@ const onSubmit = (
     opinionCanBeFollowed,
     steps,
     locale,
+    restrictedViewerGroups,
   }: FormValues,
   dispatch: Dispatch,
   props: Props,
@@ -146,6 +148,8 @@ const onSubmit = (
     isExternal,
     publishedAt: moment(publishedAt).format('YYYY-MM-DD HH:mm:ss'),
     visibility,
+    restrictedViewerGroups:
+      visibility === 'CUSTOM' ? restrictedViewerGroups.map(g => g.value) : undefined,
     opinionCanBeFollowed,
     steps: steps // I cannot type step properly given the unability to create union Input type
       ? steps.map(({ url, ...s }: any) => ({
@@ -333,7 +337,7 @@ const changeTitle = debounce((onTitleChange, title) => {
 }, 1000);
 
 export function ProjectAdminForm(props: Props) {
-  const { handleSubmit, title, onTitleChange, project, features, ...rest } = props;
+  const { handleSubmit, title, onTitleChange, project, features, initialGroups, ...rest } = props;
   changeTitle(onTitleChange, title);
   return (
     <form onSubmit={handleSubmit} id={formName}>
@@ -345,7 +349,7 @@ export function ProjectAdminForm(props: Props) {
         {...rest}
       />
       <ProjectStepAdmin handleSubmit={handleSubmit} form={formName} {...rest} />
-      <ProjectAccessAdminForm {...props} formName={formName} />
+      <ProjectAccessAdminForm {...props} formName={formName} initialGroups={initialGroups} />
       <ProjectProposalsAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
       <ProjectPublishAdminForm
         project={project}
@@ -405,6 +409,14 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => ({
         .map(d => {
           return { value: d.value, label: d.label };
         }) || [],
+    restrictedViewerGroups:
+      project?.restrictedViewers?.edges
+        ?.filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean)
+        .map(d => {
+          return { value: d.value, label: d.label };
+        }) || [],
     locale:
       project && project.locale
         ? {
@@ -414,6 +426,7 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => ({
         : null,
   },
   title: formValueSelector(formName)(state, 'title'),
+  initialGroups: formValueSelector(formName)(state, 'restrictedViewersGroups') || [],
 });
 
 const form = injectIntl(
@@ -450,6 +463,14 @@ export default createFragmentContainer(container, {
       themes {
         value: id
         label: title
+      }
+      restrictedViewers {
+        edges {
+          node {
+            value: id
+            label: title
+          }
+        }
       }
       districts {
         edges {

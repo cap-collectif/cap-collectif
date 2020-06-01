@@ -64,7 +64,6 @@ export const validate = ({
 
 export function ProjectExternalAdminForm(props: Props) {
   const { isExternal } = props;
-
   return (
     <div className="mt-15">
       <ProjectBoxHeader noBorder>
