@@ -13,6 +13,18 @@ const mutation = graphql`
       errorCode
       assessment {
         id
+        proposal {
+          id
+          assessment {
+            body
+            estimatedCost
+            officialResponse
+            state
+            updatedBy {
+              id
+            }
+          }
+        }
         body
         estimatedCost
         officialResponse

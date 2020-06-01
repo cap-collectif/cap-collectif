@@ -247,7 +247,7 @@ export const ProposalAnalysisFormPanel = ({
               dispatch(change(formName, 'validate', true));
               dispatch(change(formName, 'goBack', true));
             }}>
-            <FormattedMessage id="validate" />
+            <FormattedMessage id="global.finish" />
           </ValidateButton>
         </Validation>
       </form>

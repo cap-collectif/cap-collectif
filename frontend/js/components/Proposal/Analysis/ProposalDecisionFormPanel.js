@@ -232,7 +232,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
   const isApproved = proposal?.decision?.isApproved;
   return {
     initialValues: {
-      body: proposal?.decision?.post.body || null,
+      body: proposal?.decision?.post.body || proposal?.assessment?.officialResponse || null,
       estimatedCost: proposal?.decision?.estimatedCost || 0,
       authors: proposal?.decision?.post.authors || [],
       isApproved: isApproved ? 'FAVOURABLE' : isApproved === false ? 'UNFAVOURABLE' : null,
@@ -272,6 +272,10 @@ export default createFragmentContainer(container, {
           }
         }
         isApproved
+      }
+      assessment {
+        id
+        officialResponse
       }
       form {
         analysisConfiguration {

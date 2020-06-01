@@ -126,6 +126,8 @@ class ChangeProposalAnalysisMutation implements MutationInterface
                 $this->entityManager->persist($proposalAnalysis);
             }
             $this->entityManager->flush();
+
+            $proposal->addAnalysis($proposalAnalysis);
         } catch (\Exception $exception) {
             $this->logger->alert(
                 'An error occurred when editing ProposalAnalysis with proposal id :' .

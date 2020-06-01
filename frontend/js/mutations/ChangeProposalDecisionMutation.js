@@ -17,8 +17,31 @@ const mutation = graphql`
         refusedReason {
           id
         }
+        proposal {
+          id
+          decision {
+            estimatedCost
+            post {
+              id
+              translations {
+                title
+                body
+              }
+              authors {
+                id
+              }
+            }
+            id
+            state
+            updatedBy {
+              id
+            }
+            isApproved
+          }
+        }
         estimatedCost
         post {
+          id
           translations {
             title
             body

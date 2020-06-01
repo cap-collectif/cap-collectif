@@ -2,7 +2,9 @@
 
 exports[`<ProposalViewAnalysisPanel  />  renders correctly 1`] = `
 <Fragment>
-  <ProposalViewAnalysisPanel__ResponsesView>
+  <ProposalViewAnalysisPanel__ResponsesView
+    tooLate={false}
+  >
     <ProposalAnalysisStatusLabel
       color="#28a745"
       fontSize={14}
@@ -13,6 +15,7 @@ exports[`<ProposalViewAnalysisPanel  />  renders correctly 1`] = `
   </ProposalViewAnalysisPanel__ResponsesView>
   <ProposalViewAnalysisPanel__CommentView
     isLarge={true}
+    tooLate={false}
   >
     <FormattedMessage
       id="global.comment"

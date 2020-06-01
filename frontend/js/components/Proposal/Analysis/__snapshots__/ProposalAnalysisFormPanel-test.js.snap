@@ -120,7 +120,7 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly 1`] = `
         type="button"
       >
         <FormattedMessage
-          id="validate"
+          id="global.finish"
           values={Object {}}
         />
       </ProposalAnalysisFormPanel__ValidateButton>

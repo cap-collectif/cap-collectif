@@ -5776,6 +5776,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
+                              "name": "officialResponse",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
                               "name": "state",
                               "storageKey": null,
                             },
@@ -5791,13 +5798,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "body",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "officialResponse",
                               "storageKey": null,
                             },
                             Object {
@@ -6983,6 +6983,10 @@ fragment ProposalDecisionFormPanel_proposal on Proposal {
     }
     isApproved
     id
+  }
+  assessment {
+    id
+    officialResponse
   }
   form {
     analysisConfiguration {

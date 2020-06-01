@@ -12,9 +12,22 @@ const mutation = graphql`
     analyseProposalAnalysis(input: $input) {
       errorCode
       analysis {
+        proposal {
+          id
+          analyses {
+            id
+            state
+            updatedBy {
+              id
+            }
+          }
+        }
         id
         comment
         state
+        responses {
+          ...responsesHelper_response @relay(mask: false)
+        }
         updatedBy {
           id
         }

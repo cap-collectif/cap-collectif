@@ -16,15 +16,21 @@ type Props = {|
   userId: string,
 |};
 
-export const ResponsesView: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const ResponsesView: StyledComponent<{ tooLate?: boolean }, {}, HTMLDivElement> = styled.div`
   padding: 30px;
   margin-top: 70px;
+  opacity: ${props => props.tooLate && '.5'};
 `;
 
-export const CommentView: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
+export const CommentView: StyledComponent<
+  { isLarge: boolean, tooLate?: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div`
   width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
   background: ${colors.grayF4};
   padding: 20px;
+  opacity: ${props => props.tooLate && '.5'};
 
   p {
     font-size: 16px;
@@ -37,12 +43,13 @@ export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
   const isLarge = width < sizes.bootstrapGrid.mdMax;
   const analysis = proposal.analyses?.find(a => a.updatedBy.id === userId);
   if (!analysis) return null;
+  const { state } = analysis;
   const questions =
     proposal?.form?.analysisConfiguration?.evaluationForm?.questions.map(q => q.id) || [];
   const labelData = getLabelData(analysis.state);
   return (
     <>
-      <ResponsesView>
+      <ResponsesView tooLate={state === 'TOO_LATE'}>
         <ProposalAnalysisStatusLabel
           fontSize={14}
           iconSize={10}
@@ -59,7 +66,7 @@ export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
             <ProposalResponse key={index} response={response} />
           ))}
       </ResponsesView>
-      <CommentView isLarge={isLarge}>
+      <CommentView isLarge={isLarge} tooLate={state === 'TOO_LATE'}>
         <FormattedMessage tagName="p" id="global.comment" />
         <span>{analysis.comment}</span>
       </CommentView>
