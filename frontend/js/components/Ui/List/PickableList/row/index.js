@@ -6,23 +6,26 @@ import { usePickableList } from '~ui/List/PickableList';
 type Props = {
   children: React.Node,
   rowId: string | number,
+  isSelectable?: boolean,
 };
 
-const PickableListRow = ({ children, rowId, ...rest }: Props) => {
+const PickableListRow = ({ children, rowId, isSelectable = true, ...rest }: Props) => {
   const { dispatch, isRowChecked } = usePickableList();
   return (
     <S.Container>
-      <input
-        type="checkbox"
-        checked={isRowChecked(String(rowId))}
-        onChange={e => {
-          if (e.target.checked) {
-            dispatch({ type: 'SELECT_ROW', payload: String(rowId) });
-          } else {
-            dispatch({ type: 'DESELECT_ROW', payload: String(rowId) });
-          }
-        }}
-      />
+      {isSelectable && (
+        <input
+          type="checkbox"
+          checked={isRowChecked(String(rowId))}
+          onChange={e => {
+            if (e.target.checked) {
+              dispatch({ type: 'SELECT_ROW', payload: String(rowId) });
+            } else {
+              dispatch({ type: 'DESELECT_ROW', payload: String(rowId) });
+            }
+          }}
+        />
+      )}
       <S.ChildWrapper {...rest}>{children}</S.ChildWrapper>
     </S.Container>
   );

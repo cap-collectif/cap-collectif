@@ -65,4 +65,25 @@ describe('<PickableList />', () => {
     );
     expect(wrapper.render()).toMatchSnapshot();
   });
+
+  it('should render correctly with header and row not selectable', () => {
+    const wrapper = shallow(
+      <PickableList.Provider>
+        <PickableList>
+          <PickableList.Header isSelectable={false}>
+            <p>Items</p>
+          </PickableList.Header>
+          <PickableList.Body>
+            {items.map(i => (
+              <PickableList.Row key={i.id} rowId={i.id} isSelectable={false}>
+                <p>{i.title}</p>
+              </PickableList.Row>
+            ))}
+          </PickableList.Body>
+        </PickableList>
+        );
+      </PickableList.Provider>,
+    );
+    expect(wrapper.render()).toMatchSnapshot();
+  });
 });

@@ -37,6 +37,7 @@ export type Props = {|
   +value?: DropdownValueType,
   +onChange?: DropdownOnChangeType,
   +children: React.Node,
+  +disabled?: boolean,
 |};
 
 export const useDropdownSelect = (): Context => {
@@ -56,6 +57,7 @@ const DropdownSelect = ({
   mode = 'normal',
   shouldOverflow = false,
   isMultiSelect = false,
+  disabled = false,
   className,
 }: Props) => {
   const [initialValue, setInitialValue] = React.useState(initial);
@@ -74,8 +76,17 @@ const DropdownSelect = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, onChange]);
   const contextValue = React.useMemo(
-    () => ({ value, onChange, mode, allValues, isMultiSelect, setInitialValue, initialValue }),
-    [value, mode, initialValue, allValues, setInitialValue, onChange, isMultiSelect],
+    () => ({
+      value,
+      onChange,
+      mode,
+      allValues,
+      isMultiSelect,
+      setInitialValue,
+      initialValue,
+      disabled,
+    }),
+    [value, mode, initialValue, allValues, setInitialValue, onChange, isMultiSelect, disabled],
   );
 
   return (

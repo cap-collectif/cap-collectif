@@ -6,7 +6,7 @@ Array [
     class="styles__Container-sc-19fy1kf-0 kLoACa"
   >
     <div
-      class="styles__Container-sc-1ig07ym-0 eWzWAY pickableList-header"
+      class="styles__Container-sc-1ig07ym-0 hpsUPr pickableList-header"
     >
       <input
         class="all-rows-checkbox"
@@ -82,6 +82,82 @@ Array [
         <input
           type="checkbox"
         />
+        <div
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+        >
+          <p>
+            Je suis un bel item #5
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>,
+  ");",
+]
+`;
+
+exports[`<PickableList /> should render correctly with header and row not selectable 1`] = `
+Array [
+  <div
+    class="styles__Container-sc-19fy1kf-0 kLoACa"
+  >
+    <div
+      class="styles__Container-sc-1ig07ym-0 hpsUPr pickableList-header"
+    >
+      <p>
+        Items
+      </p>
+    </div>
+    <div
+      class="styles__Container-sc-1u6boa9-0 dXlWzY"
+    >
+      <div
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+      >
+        <div
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+        >
+          <p>
+            Je suis un bel item #1
+          </p>
+        </div>
+      </div>
+      <div
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+      >
+        <div
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+        >
+          <p>
+            Je suis un bel item #2
+          </p>
+        </div>
+      </div>
+      <div
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+      >
+        <div
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+        >
+          <p>
+            Je suis un bel item #3
+          </p>
+        </div>
+      </div>
+      <div
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+      >
+        <div
+          class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+        >
+          <p>
+            Je suis un bel item #4
+          </p>
+        </div>
+      </div>
+      <div
+        class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+      >
         <div
           class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
         >

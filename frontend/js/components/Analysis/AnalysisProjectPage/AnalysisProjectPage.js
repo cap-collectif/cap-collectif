@@ -5,20 +5,18 @@ import { createPaginationContainer, graphql, type RelayPaginationProp } from 're
 import type { AnalysisProjectPage_project } from '~relay/AnalysisProjectPage_project.graphql';
 import PickableList from '~ui/List/PickableList';
 import BodyInfos from '~ui/Boxes/BodyInfos';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import InlineSelect from '~ui/InlineSelect';
-import Loader from '~ui/FeedbacksIndicators/Loader';
-import colors from '~/utils/colors';
-import AnalysisProjectPageContainer, {
-  ProposalListNoContributions,
-  ProposalListLoaderContainer,
-} from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.style';
+import AnalysisProjectPageContainer from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.style';
+import AnalysisProposalListLoader from '../AnalysisProposalListLoader/AnalysisProposalListLoader';
+import AnalysisNoProposal from '../AnalysisNoProposal/AnalysisNoProposal';
+import AnalysisDashboardHeader from '../AnalysisDashboardHeader/AnalysisDashboardHeader';
+import AnalysisProposal from '../AnalysisProposal/AnalysisProposal';
 import { useAnalysisProposalsContext } from './AnalysisProjectPage.context';
 import { STATE, type StateValues } from './AnalysisProjectPage.reducer';
-import AnalysisDashboardHeader from '~/components/Analysis/AnalysisDashboardHeader/AnalysisDashboardHeader';
-import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
+import { getDifferenceFilters, getWordingEmpty } from './AnalysisProjectPage.utils';
 import { AnalysisProposalListHeaderContainer } from '~ui/Analysis/common.style';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
+import AnalysisProposalListRole from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
 
 export const ANALYSIS_PROJECT_PROPOSALS_PAGINATION = 20;
 
@@ -27,20 +25,6 @@ export type Props = {|
   defaultUsers: $PropertyType<AnalysisIndexPageQueryResponse, 'defaultUsers'>,
   relay: RelayPaginationProp,
 |};
-
-const NoResult = () => (
-  <ProposalListNoContributions>
-    <Icon name={ICON_NAME.messageBubble} size={50} color={colors.darkGray} />
-    <FormattedMessage id="global.no_proposals" tagName="p" />
-  </ProposalListNoContributions>
-);
-
-const ProposalListLoader = () => (
-  <ProposalListLoaderContainer>
-    <Loader inline size={16} />
-    <FormattedMessage id="synthesis.common.loading" />
-  </ProposalListLoaderContainer>
-);
 
 const AnalysisProjectPage = ({ project, defaultUsers, relay }: Props) => {
   const {
@@ -51,8 +35,9 @@ const AnalysisProjectPage = ({ project, defaultUsers, relay }: Props) => {
   } = project;
   const proposals = dataProposals?.edges?.filter(Boolean).map(edge => edge.node);
   const hasProposals = dataProposals?.totalCount > 0;
-  const { parameters, dispatch } = useAnalysisProposalsContext();
+  const { parameters, dispatch, status } = useAnalysisProposalsContext();
   const descriptionProject = project.firstCollectStep?.form?.analysisConfiguration?.body;
+  const hasSelectedFilters = getDifferenceFilters(parameters.filters);
 
   return (
     <AnalysisProjectPageContainer>
@@ -84,18 +69,22 @@ const AnalysisProjectPage = ({ project, defaultUsers, relay }: Props) => {
         </InlineSelect.Choice>
 
         <InlineSelect.Choice value={STATE.ALL}>
-          <FormattedMessage id="count.status.all" values={{ num: viewerProposalsAll.totalCount }} />
+          <FormattedMessage
+            id="filter.count.status.all"
+            values={{ num: viewerProposalsAll.totalCount }}
+          />
         </InlineSelect.Choice>
       </InlineSelect>
 
       <PickableList.Provider>
         <PickableList
+          isLoading={status === 'loading'}
           useInfiniteScroll={hasProposals}
           onScrollToBottom={() => {
             relay.loadMore(ANALYSIS_PROJECT_PROPOSALS_PAGINATION);
           }}
           hasMore={relay.hasMore()}
-          loader={<ProposalListLoader key="loader" />}>
+          loader={<AnalysisProposalListLoader key="loader" />}>
           <AnalysisProposalListHeaderContainer>
             <AnalysisDashboardHeader project={project} defaultUsers={defaultUsers} />
           </AnalysisProposalListHeaderContainer>
@@ -103,10 +92,22 @@ const AnalysisProjectPage = ({ project, defaultUsers, relay }: Props) => {
           <PickableList.Body>
             {hasProposals ? (
               proposals?.map(proposal => (
-                <AnalysisProposal proposal={proposal} key={proposal.id} rowId={proposal.id} />
+                <AnalysisProposal
+                  proposal={proposal}
+                  key={proposal.id}
+                  rowId={proposal.id}
+                  dispatch={dispatch}>
+                  <AnalysisProposalListRole proposal={proposal} dispatch={dispatch} />
+                </AnalysisProposal>
               ))
             ) : (
-              <NoResult />
+              <AnalysisNoProposal
+                state={hasSelectedFilters ? 'CONTRIBUTION' : parameters.filters.state}>
+                <FormattedMessage
+                  id={getWordingEmpty(hasSelectedFilters, parameters.filters)}
+                  tagName="p"
+                />
+              </AnalysisNoProposal>
             )}
           </PickableList.Body>
         </PickableList>
@@ -171,6 +172,7 @@ export default createPaginationContainer(
             node {
               id
               ...AnalysisProposal_proposal
+              ...AnalysisProposalListRole_proposal
             }
           }
           totalCount

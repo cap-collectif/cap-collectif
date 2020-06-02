@@ -15,6 +15,7 @@ import AnalysisProposalListRoleContainer, {
 import UserAnalystList from '~/components/Analysis/UserAnalystList/UserAnalystList';
 
 export type Status = {|
+  name: string,
   icon: $Values<typeof ICON_NAME>,
   label: string,
   color: string,
@@ -22,6 +23,7 @@ export type Status = {|
 
 type Props = {|
   proposal: AnalysisProposalListRole_proposal,
+  dispatch: any => void,
 |};
 
 export const getStatus = (analyse: ?Object, isDecisionMaker: boolean = false): Status => {
@@ -41,19 +43,19 @@ export const getStatus = (analyse: ?Object, isDecisionMaker: boolean = false): S
 export const getBadge = ({ icon, color }: Status, isSmall: boolean = false): Badge => ({
   icon,
   color,
-  size: isSmall ? 12 : 16,
-  iconSize: isSmall ? 6 : 8,
+  size: isSmall ? 10 : 16,
+  iconSize: isSmall ? 6 : 10,
   iconColor: '#fff',
 });
 
-const AnalysisProposalListRole = ({ proposal }: Props) => {
+const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
   const { assessment, decision, supervisor, decisionMaker } = proposal;
   const intl = useIntl();
 
   return (
     <AnalysisProposalListRoleContainer>
-      <RoleWrapper>
-        <UserAnalystList proposal={proposal} />
+      <RoleWrapper className="role-analysts">
+        <UserAnalystList proposal={proposal} dispatch={dispatch} />
       </RoleWrapper>
 
       <RoleWrapper className="role-supervisor">
@@ -70,6 +72,7 @@ const AnalysisProposalListRole = ({ proposal }: Props) => {
               displayUrl={false}
               size={AVATAR_SIZE}
               badge={getBadge(getStatus(assessment))}
+              onClick={() => dispatch({ type: 'CHANGE_SUPERVISOR_FILTER', payload: supervisor.id })}
             />
           </OverlayTrigger>
         )}
@@ -89,6 +92,9 @@ const AnalysisProposalListRole = ({ proposal }: Props) => {
               displayUrl={false}
               size={AVATAR_SIZE}
               badge={getBadge(getStatus(decision, true))}
+              onClick={() =>
+                dispatch({ type: 'CHANGE_DECISION_MAKER_FILTER', payload: decisionMaker.id })
+              }
             />
           </OverlayTrigger>
         )}

@@ -54,6 +54,7 @@ const mutation = graphql`
             selections {
               step {
                 id
+                title
               }
             }
           }

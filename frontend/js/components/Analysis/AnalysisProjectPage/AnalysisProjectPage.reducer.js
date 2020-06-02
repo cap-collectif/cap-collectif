@@ -2,9 +2,9 @@
 import type { Uuid } from '~/types';
 import type { AnalysisProjectPageStatus } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 
-export type ProposalsDistrictValues = 'ALL' | Uuid;
+export type ProposalsDistrictValues = 'ALL' | 'NONE' | Uuid;
 
-export type ProposalsCategoryValues = 'ALL' | Uuid;
+export type ProposalsCategoryValues = 'ALL' | 'NONE' | Uuid;
 
 export const ORDER_BY: {
   OLDEST: 'oldest',
@@ -37,15 +37,23 @@ export type Filters = {|
   +decisionMaker: ?Uuid,
 |};
 
+// Filter 'status', 'step' and 'progressState' are for ProjectAdminAnalysis
+export type Filter = {|
+  +id: Uuid,
+  +type: 'district' | 'category' | 'status' | 'step' | 'progressState',
+|};
+
 export type AnalysisProjectPageState = {|
   +status: AnalysisProjectPageStatus,
   +sort: SortValues,
   +filters: Filters,
+  +filtersOrdered: Filter[],
 |};
 
 export type AnalysisProjectPageParameters = {|
   +sort: $PropertyType<AnalysisProjectPageState, 'sort'>,
   +filters: $PropertyType<AnalysisProjectPageState, 'filters'>,
+  +filtersOrdered: $PropertyType<AnalysisProjectPageState, 'filtersOrdered'>,
 |};
 
 export type Action =
@@ -88,6 +96,13 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
           ...state.filters,
           category: action.payload,
         },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'category',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'category'),
+        ],
       };
     case 'CLEAR_CATEGORY_FILTER':
       return {
@@ -96,6 +111,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
           ...state.filters,
           category: 'ALL',
         },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'category')],
       };
     case 'CHANGE_DISTRICT_FILTER':
       return {
@@ -104,6 +120,13 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
           ...state.filters,
           district: action.payload,
         },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'district',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'district'),
+        ],
       };
     case 'CLEAR_DISTRICT_FILTER':
       return {
@@ -112,6 +135,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
           ...state.filters,
           district: 'ALL',
         },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'district')],
       };
     case 'CHANGE_ANALYSTS_FILTER':
       return {

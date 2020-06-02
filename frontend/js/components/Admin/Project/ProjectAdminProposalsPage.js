@@ -32,7 +32,7 @@ const createQueryVariables = (
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
   step: parameters.filters.step || null,
-  status: parameters.filters.status,
+  status: parameters.filters.status === 'ALL' ? null : parameters.filters.status,
   term: parameters.filters.term,
 });
 

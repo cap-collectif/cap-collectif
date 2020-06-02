@@ -26,7 +26,7 @@ type Props = {|
   +defaultOptions?: $ReadOnlyArray<any>,
   +options?: $ReadOnlyArray<any>,
   +onChangeSearch?: (terms: string) => void,
-  +loadOptions?: (terms: string) => Promise<$ReadOnlyArray<any>>,
+  +loadOptions?: (terms: string) => Promise<$ReadOnlyArray<any> | void>,
   +children: (results: $ReadOnlyArray<any>) => React.Node,
 |};
 
@@ -42,6 +42,7 @@ const SearchableDropdownSelect = ({
   debounceMs = 400,
   message,
   onChangeSearch,
+  disabled,
   ...rest
 }: Props) => {
   const [state, dispatch] = React.useReducer<State, Action>(createReducer, {
@@ -86,13 +87,15 @@ const SearchableDropdownSelect = ({
 
   return (
     <SearchableDropdownSelectContext.Provider value={context}>
-      <S.SearchableDropdownContainer {...rest}>
+      <S.SearchableDropdownContainer {...rest} disabled={disabled}>
         {message}
+
         <DropdownSelect.Header>
           <S.Input
             icon={searchInputIcon}
             placeholder={searchPlaceholder}
             type="text"
+            disabled={disabled}
             onClear={() => {
               dispatch({ type: 'RESET' });
             }}
@@ -104,14 +107,17 @@ const SearchableDropdownSelect = ({
             }}
           />
         </DropdownSelect.Header>
+
         {state.status === 'loading' && (
           <S.MessageContainer>
             <Loader show inline />
           </S.MessageContainer>
         )}
+
         {state.status === 'no_result' && (
           <S.MessageContainer>{noResultsMessage}</S.MessageContainer>
         )}
+
         {state.status === 'default' && (
           <React.Fragment>
             {clearChoice?.enabled && (

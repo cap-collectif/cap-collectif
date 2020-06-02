@@ -32,6 +32,22 @@ describe('<DropdownSelect />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render correctly with disabled dropdown', () => {
+    const wrapper = shallow(
+      <DropdownSelect title="Trier par" disabled>
+        <DropdownSelect.Choice disabled value="item1">
+          Item 1
+        </DropdownSelect.Choice>
+        <DropdownSelect.Choice value="item2">Item 2</DropdownSelect.Choice>
+        <DropdownSelect.Choice disabled value="item3">
+          Item 3
+        </DropdownSelect.Choice>
+      </DropdownSelect>,
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render correctly with disabled choices', () => {
     const wrapper = shallow(
       <DropdownSelect title="Trier par">

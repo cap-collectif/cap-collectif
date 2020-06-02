@@ -6,9 +6,11 @@ import { usePickableList } from '~ui/List/PickableList';
 type Props = {
   className?: string,
   children: React.Node | (({ selectedRows: string[], rowsCount: number }) => React.Node),
+  isSelectable?: boolean,
+  disabled?: boolean,
 };
 
-const PickableListHeader = ({ children, className }: Props) => {
+const PickableListHeader = ({ children, className, isSelectable = true, disabled }: Props) => {
   const {
     dispatch,
     hasIndeterminateState,
@@ -24,20 +26,24 @@ const PickableListHeader = ({ children, className }: Props) => {
     }
   }, [hasIndeterminateState, hasAllRowsChecked]);
   return (
-    <S.Container className={className}>
-      <input
-        type="checkbox"
-        id="allRows"
-        className="all-rows-checkbox"
-        ref={checkbox}
-        onChange={e => {
-          if (e.target.checked) {
-            dispatch({ type: 'SELECT_ALL_ROWS' });
-          } else {
-            dispatch({ type: 'DESELECT_ALL_ROWS' });
-          }
-        }}
-      />
+    <S.Container className={className} disabled={disabled}>
+      {disabled && <S.Overlay />}
+
+      {isSelectable && (
+        <input
+          type="checkbox"
+          id="allRows"
+          className="all-rows-checkbox"
+          ref={checkbox}
+          onChange={e => {
+            if (e.target.checked) {
+              dispatch({ type: 'SELECT_ALL_ROWS' });
+            } else {
+              dispatch({ type: 'DESELECT_ALL_ROWS' });
+            }
+          }}
+        />
+      )}
       {typeof children === 'function' ? children({ selectedRows, rowsCount }) : children}
     </S.Container>
   );

@@ -1,7 +1,5 @@
 // @flow
 import * as React from 'react';
-import isEqual from 'lodash/isEqual';
-import uniqBy from 'lodash/uniqBy';
 import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -15,27 +13,32 @@ import {
   isRowIndeterminate,
   getAllUserAssigned,
   getActionShown,
-  getUsersFilteredWithSearch,
   getCommonAnalystIdsWithinProposalIds,
   getCommonSupervisorIdWithinProposalIds,
   getSelectedSupervisorsByProposals,
   getSelectedAnalystsByProposals,
-  getSelectedDecisionMakersByProposals,
-  getCommonDecisionMakerIdWithinProposalIds,
+  isOnlyAnalyst,
+  getRoleUser,
+  getUsersWithAnalyseBegin,
+  formatDefaultUsers,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
 import Collapsable from '~ui/Collapsable';
 import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
-import DropdownSelect from '~ui/DropdownSelect';
 import type {
   ProposalsCategoryValues,
   ProposalsDistrictValues,
   SortValues,
+  Action,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
-import { ORDER_BY } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
-import { TYPE_ACTION } from '~/constants/AnalyseConstants';
+import { TYPE_ACTION, TYPE_ROLE } from '~/constants/AnalyseConstants';
 import FilterTag from '~ui/Analysis/FilterTag';
-import { AnalysisFilterContainer } from '~ui/Analysis/common.style';
+import {
+  AnalysisFilterContainer,
+  AnalysisProposalListFiltersContainer,
+  AnalysisProposalListFiltersAction,
+  AnalysisProposalListFiltersList,
+} from '~ui/Analysis/common.style';
 import UserSearchDropdownChoice from '~/components/Admin/Project/UserSearchDropdownChoice';
 import AssignAnalystsToProposalsMutation from '~/mutations/AssignAnalystsToProposalsMutation';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
@@ -43,7 +46,15 @@ import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import RevokeAnalystsToProposalsMutation from '~/mutations/RevokeAnalystsToProposalsMutation';
 import AssignSupervisorToProposalsMutation from '~/mutations/AssignSupervisorToProposalsMutation';
 import environment from '~/createRelayEnvironment';
-import AssignDecisionMakerToProposalsMutation from '~/mutations/AssignDecisionMakerToProposalsMutation';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import AnalysisFilterDistrict from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
+import AnalysisFilterCategory from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
+import AnalysisFilterRole from '~/components/Analysis/AnalysisFilter/AnalysisFilterRole';
+import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
+import type {
+  Analyst,
+  Supervisor,
+} from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
 
 type Props = {|
   project: AnalysisDashboardHeader_project,
@@ -55,12 +66,13 @@ const USER_SEARCH_QUERY = graphql`
   query AnalysisDashboardHeader_UserSearchQuery($terms: String!) {
     results: userSearch(displayName: $terms) {
       id
+      username
       ...UserSearchDropdownChoice_user
     }
   }
 `;
 
-const loadOptions = terms =>
+export const loadOptions = (terms: string): Promise<void> =>
   new Promise(async resolve => {
     const response = await fetchQuery(environment, USER_SEARCH_QUERY, {
       terms,
@@ -68,23 +80,110 @@ const loadOptions = terms =>
     resolve(response.results);
   });
 
+const assignAnalysts = async (
+  analystsAdded: Uuid[],
+  analystsRemoved: Uuid[],
+  selectedProposalIds: $ReadOnlyArray<Uuid>,
+  analystWithAnalyseBegin: $ReadOnlyArray<Analyst>,
+  dispatch: any => void,
+) => {
+  try {
+    dispatch({ type: 'START_LOADING' });
+
+    if (analystsAdded.length > 0) {
+      const response = await AssignAnalystsToProposalsMutation.commit({
+        input: {
+          analystIds: analystsAdded,
+          proposalIds: selectedProposalIds,
+        },
+      });
+
+      if (response.assignAnalystsToProposals?.errorCode === 'MAX_ANALYSTS_REACHED') {
+        FluxDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {
+            type: TYPE_ALERT.ERROR,
+            content: 'analyst.maximum.assignment.reached',
+          },
+        });
+      }
+    }
+
+    if (analystsRemoved.length > 0) {
+      await RevokeAnalystsToProposalsMutation.commit({
+        input: {
+          analystIds: analystsRemoved,
+          proposalIds: selectedProposalIds,
+        },
+      });
+    }
+
+    dispatch({ type: 'STOP_LOADING' });
+  } catch (e) {
+    FluxDispatcher.dispatch({
+      actionType: UPDATE_ALERT,
+      alert: {
+        type: TYPE_ALERT.ERROR,
+        content: 'global.error.server.form',
+      },
+    });
+
+    dispatch({ type: 'STOP_LOADING' });
+    // eslint-disable-next-line no-console
+    console.error(e);
+  }
+};
+
+const assignSupervisor = async (
+  assigneeId: ?Uuid,
+  supervisor: ?Uuid,
+  supervisorsWithAnalyseBegin: $ReadOnlyArray<Supervisor>,
+  selectedProposalIds: $ReadOnlyArray<Uuid>,
+  closeDropdown: () => void,
+  dispatch: any => void,
+) => {
+  try {
+    closeDropdown();
+
+    dispatch({ type: 'START_LOADING' });
+    await AssignSupervisorToProposalsMutation.commit({
+      input: {
+        proposalIds: selectedProposalIds,
+        supervisorId: ((assigneeId: any): ?string),
+      },
+    });
+    dispatch({ type: 'STOP_LOADING' });
+  } catch (e) {
+    FluxDispatcher.dispatch({
+      actionType: UPDATE_ALERT,
+      alert: {
+        type: TYPE_ALERT.ERROR,
+        content: 'global.error.server.form',
+      },
+    });
+    dispatch({ type: 'STOP_LOADING' });
+
+    // eslint-disable-next-line no-console
+    console.error(e);
+  }
+};
+
 const AnalysisDashboardHeader = ({
   project,
   userConnected,
   defaultUsers,
 }: $Diff<Props, { relay: * }>) => {
   const intl = useIntl();
-  const { proposals: dataProposals } = project;
+  const allUserAssigned = getAllUserAssigned(project);
   const { ANALYST, SUPERVISOR, DECISION_MAKER } = TYPE_ACTION;
-  const proposals = dataProposals?.edges?.filter(Boolean).map(edge => edge.node);
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useAnalysisProposalsContext();
-  const { categories, districts } = React.useMemo(() => getAllFormattedChoicesForProject(project), [
-    project,
-  ]);
+  const { categories, districts, filtersOrdered } = React.useMemo(
+    () => getAllFormattedChoicesForProject(project, parameters.filtersOrdered, intl),
+    [project, parameters.filtersOrdered, intl],
+  );
 
   const [supervisor, setSupervisor] = React.useState(null);
-  const [decisionMaker, setDecisionMaker] = React.useState(null);
   const [analysts, setAnalysts] = React.useState({
     all: [],
     removed: [],
@@ -92,17 +191,15 @@ const AnalysisDashboardHeader = ({
     values: [],
   });
 
-  const actionsShown: string[] = getActionShown(selectedRows, userConnected.id, proposals);
-
-  const [usersFiltered, setUsersFiltered] = React.useState([]);
-  const [searchTerm, setSearchTerm] = React.useState<?string>(null);
+  const roleUserConnected = getRoleUser(project, selectedRows, userConnected.id);
+  const actionsShown: string[] = getActionShown(roleUserConnected, userConnected.id, selectedRows);
+  const {
+    analysts: analystsWithAnalyseBegin,
+    supervisors: supervisorsWithAnalyseBegin,
+  } = getUsersWithAnalyseBegin(project, selectedRows);
 
   const selectedSupervisorsByProposals = React.useMemo(
     () => getSelectedSupervisorsByProposals(project, selectedRows),
-    [project, selectedRows],
-  );
-  const selectedDecisionMakersByProposals = React.useMemo(
-    () => getSelectedDecisionMakersByProposals(project, selectedRows),
     [project, selectedRows],
   );
   const selectedAnalystsByProposals = React.useMemo(
@@ -111,227 +208,86 @@ const AnalysisDashboardHeader = ({
   );
 
   React.useEffect(() => {
-    setDecisionMaker(getCommonDecisionMakerIdWithinProposalIds(project, selectedRows));
     setSupervisor(getCommonSupervisorIdWithinProposalIds(project, selectedRows));
-
-    const allUserAssigned = getAllUserAssigned(project);
-    const usersFilteredWithSearch =
-      allUserAssigned?.length > 0 ? getUsersFilteredWithSearch(allUserAssigned, searchTerm) : [];
-
-    if (!isEqual(usersFilteredWithSearch, usersFiltered)) {
-      setUsersFiltered(usersFilteredWithSearch);
-    }
-  }, [project, selectedRows, searchTerm, usersFiltered]);
+  }, [project, selectedRows]);
 
   const renderFilters = (
     <>
-      <AnalysisFilterContainer>
-        <Collapsable align="right">
-          <Collapsable.Button>
-            <FormattedMessage id="admin.fields.proposal.map.zone" />
-          </Collapsable.Button>
-          <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
-            <DropdownSelect
-              value={parameters.filters.district}
-              onChange={newValue => {
-                dispatch({
-                  type: 'CHANGE_DISTRICT_FILTER',
-                  payload: ((newValue: any): ProposalsDistrictValues),
-                });
-              }}
-              title={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
-              <DropdownSelect.Choice value="ALL">
-                {intl.formatMessage({ id: 'global.select_districts' })}
-              </DropdownSelect.Choice>
-              {districts.map(district => (
-                <DropdownSelect.Choice key={district.id} value={district.id}>
-                  {district.name}
-                </DropdownSelect.Choice>
-              ))}
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-        <FilterTag
-          onClose={() => {
-            dispatch({ type: 'CLEAR_DISTRICT_FILTER' });
+      {districts?.length > 0 && (
+        <AnalysisFilterDistrict
+          districts={districts}
+          value={parameters.filters.district}
+          onChange={newValue =>
+            dispatch({
+              type: 'CHANGE_DISTRICT_FILTER',
+              payload: ((newValue: any): ProposalsDistrictValues),
+            })
+          }
+        />
+      )}
+
+      {categories?.length > 0 && (
+        <AnalysisFilterCategory
+          categories={categories}
+          value={parameters.filters.category}
+          onChange={newValue => {
+            dispatch({
+              type: 'CHANGE_CATEGORY_FILTER',
+              payload: ((newValue: any): ProposalsCategoryValues),
+            });
           }}
-          icon={<i className="cap cap-marker-1" />}
-          show={parameters.filters.district !== 'ALL'}>
-          {districts.find(d => d.id === parameters.filters.district)?.name || null}
-        </FilterTag>
-      </AnalysisFilterContainer>
+        />
+      )}
 
-      <AnalysisFilterContainer>
-        <Collapsable align="right">
-          <Collapsable.Button>
-            <FormattedMessage id="admin.fields.proposal.category" />
-          </Collapsable.Button>
-          <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
-            <DropdownSelect
-              value={parameters.filters.category}
-              onChange={newValue => {
-                dispatch({
-                  type: 'CHANGE_CATEGORY_FILTER',
-                  payload: ((newValue: any): ProposalsCategoryValues),
-                });
-              }}
-              title={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
-              <DropdownSelect.Choice value="ALL">
-                {intl.formatMessage({ id: 'global.select_categories' })}
-              </DropdownSelect.Choice>
-              {categories.map(cat => (
-                <DropdownSelect.Choice key={cat.id} value={cat.id}>
-                  {cat.name}
-                </DropdownSelect.Choice>
-              ))}
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-        <FilterTag
-          onClose={() => {
-            dispatch({ type: 'CLEAR_CATEGORY_FILTER' });
-          }}
-          icon={<i className="cap cap-tag-1" />}
-          show={parameters.filters.category !== 'ALL'}>
-          {categories.find(d => d.id === parameters.filters.category)?.name || null}
-        </FilterTag>
-      </AnalysisFilterContainer>
+      <AnalysisFilterRole
+        isMultiSelect
+        type={ANALYST}
+        title="panel.analysis.subtitle"
+        titleFilter="filter.by.assigned.analyst"
+        value={parameters.filters.analysts}
+        allUserAssigned={allUserAssigned}
+        onChange={newValue =>
+          dispatch({
+            type: 'CHANGE_ANALYSTS_FILTER',
+            payload: ((newValue: any): Uuid[]),
+          })
+        }
+      />
 
-      <AnalysisFilterContainer>
-        <Collapsable align="right" onClose={() => setSearchTerm(null)}>
-          <Collapsable.Button>
-            <FormattedMessage id="panel.analysis.subtitle" />
-          </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.analyst' })}>
-            <SearchableDropdownSelect
-              isMultiSelect
-              shouldOverflow
-              searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-              title={intl.formatMessage({ id: 'filter.by.assigned.analyst' })}
-              initialValue={parameters.filters.analysts}
-              value={parameters.filters.analysts}
-              options={usersFiltered}
-              noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-              onChangeSearch={searchText => setSearchTerm(searchText)}
-              onChange={newValue => {
-                dispatch({
-                  type: 'CHANGE_ANALYSTS_FILTER',
-                  payload: ((newValue: any): Uuid[]),
-                });
-              }}>
-              {users =>
-                users.map(user => (
-                  <UserSearchDropdownChoice
-                    isIndeterminate={isRowIndeterminate(user, project, selectedRows, 'analyst')}
-                    key={user.id}
-                    user={user}
-                  />
-                ))
-              }
-            </SearchableDropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-      </AnalysisFilterContainer>
+      <AnalysisFilterRole
+        type={SUPERVISOR}
+        title="global.review"
+        titleFilter="filter.by.assigned.supervisor"
+        value={parameters.filters.supervisor}
+        allUserAssigned={allUserAssigned}
+        onChange={newValue =>
+          dispatch({
+            type: 'CHANGE_SUPERVISOR_FILTER',
+            payload: ((newValue: any): Uuid),
+          })
+        }
+      />
 
-      <AnalysisFilterContainer>
-        <Collapsable align="right" onClose={() => setSearchTerm(null)}>
-          <Collapsable.Button>
-            <FormattedMessage id="global.review" />
-          </Collapsable.Button>
-          <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.supervisor' })}>
-            <SearchableDropdownSelect
-              shouldOverflow
-              searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-              title={intl.formatMessage({ id: 'filter.by.assigned.supervisor' })}
-              value={parameters.filters.supervisor}
-              options={usersFiltered}
-              noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-              onChangeSearch={searchText => setSearchTerm(searchText)}
-              onChange={newValue => {
-                dispatch({
-                  type: 'CHANGE_SUPERVISOR_FILTER',
-                  payload: ((newValue: any): Uuid),
-                });
-              }}>
-              {users =>
-                users.map(user => (
-                  <UserSearchDropdownChoice
-                    isIndeterminate={isRowIndeterminate(user, project, selectedRows, 'supervisor')}
-                    key={user.id}
-                    user={user}
-                  />
-                ))
-              }
-            </SearchableDropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-      </AnalysisFilterContainer>
+      <AnalysisFilterRole
+        type={DECISION_MAKER}
+        title="global.decision"
+        titleFilter="filter.by.assigned.decision-maker"
+        value={parameters.filters.decisionMaker}
+        allUserAssigned={allUserAssigned}
+        onChange={newValue =>
+          dispatch({
+            type: 'CHANGE_DECISION_MAKER_FILTER',
+            payload: ((newValue: any): Uuid),
+          })
+        }
+      />
 
-      <AnalysisFilterContainer>
-        <Collapsable align="right" onClose={() => setSearchTerm(null)}>
-          <Collapsable.Button>
-            <FormattedMessage id="global.decision" />
-          </Collapsable.Button>
-          <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}>
-            <SearchableDropdownSelect
-              shouldOverflow
-              searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-              title={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}
-              value={parameters.filters.decisionMaker}
-              options={usersFiltered}
-              noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-              onChangeSearch={searchText => setSearchTerm(searchText)}
-              onChange={newValue => {
-                dispatch({
-                  type: 'CHANGE_DECISION_MAKER_FILTER',
-                  payload: ((newValue: any): Uuid),
-                });
-              }}>
-              {users =>
-                users.map(user => (
-                  <UserSearchDropdownChoice
-                    isIndeterminate={isRowIndeterminate(
-                      user,
-                      project,
-                      selectedRows,
-                      'decision-maker',
-                    )}
-                    key={user.id}
-                    user={user}
-                  />
-                ))
-              }
-            </SearchableDropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-      </AnalysisFilterContainer>
-
-      <AnalysisFilterContainer>
-        <Collapsable align="right">
-          <Collapsable.Button>
-            <FormattedMessage id="argument.sort.label" />
-          </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'sort-by' })}>
-            <DropdownSelect
-              value={parameters.sort}
-              onChange={newValue => {
-                dispatch({ type: 'CHANGE_SORT', payload: ((newValue: any): SortValues) });
-              }}
-              title={intl.formatMessage({ id: 'sort-by' })}>
-              <DropdownSelect.Choice value={ORDER_BY.NEWEST}>
-                {intl.formatMessage({ id: 'global.filter_f_last' })}
-              </DropdownSelect.Choice>
-              <DropdownSelect.Choice value={ORDER_BY.OLDEST}>
-                {intl.formatMessage({ id: 'global.filter_f_old' })}
-              </DropdownSelect.Choice>
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-      </AnalysisFilterContainer>
+      <AnalysisFilterSort
+        value={parameters.sort}
+        onChange={newValue => {
+          dispatch({ type: 'CHANGE_SORT', payload: ((newValue: any): SortValues) });
+        }}
+      />
     </>
   );
 
@@ -342,56 +298,24 @@ const AnalysisDashboardHeader = ({
           <Collapsable
             align="right"
             key="action-analyst"
-            onClose={async () => {
-              try {
-                dispatch({ type: 'START_LOADING' });
-                if (analysts.added.length > 0) {
-                  const response = await AssignAnalystsToProposalsMutation.commit({
-                    input: {
-                      analystIds: analysts.added,
-                      proposalIds: selectedRows,
-                    },
-                  });
-                  if (response.assignAnalystsToProposals?.errorCode === 'MAX_ANALYSTS_REACHED') {
-                    FluxDispatcher.dispatch({
-                      actionType: UPDATE_ALERT,
-                      alert: {
-                        type: TYPE_ALERT.ERROR,
-                        content: 'analyst.maximum.assignment.reached',
-                      },
-                    });
-                  }
-                }
-                if (analysts.removed.length > 0) {
-                  await RevokeAnalystsToProposalsMutation.commit({
-                    input: {
-                      analystIds: analysts.removed,
-                      proposalIds: selectedRows,
-                    },
-                  });
-                }
-
-                dispatch({ type: 'STOP_LOADING' });
-              } catch (e) {
-                FluxDispatcher.dispatch({
-                  actionType: UPDATE_ALERT,
-                  alert: {
-                    type: TYPE_ALERT.ERROR,
-                    content: 'global.error.server.form',
-                  },
-                });
-                dispatch({ type: 'STOP_LOADING' });
-                // eslint-disable-next-line no-console
-                console.error(e);
-              }
-            }}>
+            onClose={() =>
+              assignAnalysts(
+                analysts.added,
+                analysts.removed,
+                selectedRows,
+                analystsWithAnalyseBegin,
+                dispatch,
+              )
+            }>
             {closeDropdown => (
               <React.Fragment>
                 <Collapsable.Button>
                   <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
                 </Collapsable.Button>
-                <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-analyst' })}>
+                <Collapsable.Element
+                  ariaLabel={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}>
                   <SearchableDropdownSelect
+                    disabled={analystsWithAnalyseBegin.length === 10}
                     searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
                     shouldOverflow
                     mode="add-remove"
@@ -401,7 +325,8 @@ const AnalysisDashboardHeader = ({
                     onChange={setAnalysts}
                     noResultsMessage={intl.formatMessage({ id: 'no_result' })}
                     clearChoice={{
-                      enabled: true,
+                      enabled:
+                        !isOnlyAnalyst(roleUserConnected) && analystsWithAnalyseBegin.length === 0,
                       message: intl.formatMessage({ id: 'assigned.to.nobody' }),
                       onClear: async () => {
                         try {
@@ -422,36 +347,33 @@ const AnalysisDashboardHeader = ({
                               content: 'global.error.server.form',
                             },
                           });
-                          dispatch({ type: 'STOP_LOADING' });
                           // eslint-disable-next-line no-console
                           console.error(e);
                         }
                       },
                     }}
-                    title={intl.formatMessage({ id: 'assign-analyst' })}
-                    defaultOptions={uniqBy(
-                      [
-                        ...selectedAnalystsByProposals,
-                        ...(defaultUsers?.edges?.filter(Boolean).map(e => e.node) || []),
-                      ],
-                      'id',
-                    )}
+                    title={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}
+                    defaultOptions={formatDefaultUsers(defaultUsers, selectedAnalystsByProposals)}
                     loadOptions={loadOptions}>
                     {users =>
-                      users
-                        .filter(user => user.id !== userConnected.id)
-                        .map(user => (
-                          <UserSearchDropdownChoice
-                            isIndeterminate={isRowIndeterminate(
-                              user,
-                              project,
-                              selectedRows,
-                              'analyst',
-                            )}
-                            key={user.id}
-                            user={user}
-                          />
-                        ))
+                      users.map(user => (
+                        <UserSearchDropdownChoice
+                          key={user.id}
+                          type={TYPE_ROLE.ANALYST}
+                          isIndeterminate={isRowIndeterminate(
+                            user,
+                            project,
+                            selectedRows,
+                            'analyst',
+                          )}
+                          user={user}
+                          disabled={
+                            (analystsWithAnalyseBegin.some(a => a.id === user.id) &&
+                              !isRowIndeterminate(user, project, selectedRows, 'analyst')) ||
+                            userConnected.id === user.id
+                          }
+                        />
+                      ))
                     }
                   </SearchableDropdownSelect>
                 </Collapsable.Element>
@@ -471,24 +393,23 @@ const AnalysisDashboardHeader = ({
                 </Collapsable.Button>
                 <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-supervisor' })}>
                   <SearchableDropdownSelect
-                    searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
+                    disabled={supervisorsWithAnalyseBegin.length > 0}
                     shouldOverflow
+                    searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
                     value={supervisor}
-                    onChange={async assigneeId => {
-                      if (assigneeId === supervisor) return;
-                      closeDropdown();
-                      dispatch({ type: 'START_LOADING' });
-                      await AssignSupervisorToProposalsMutation.commit({
-                        input: {
-                          proposalIds: selectedRows,
-                          supervisorId: ((assigneeId: any): string),
-                        },
-                      });
-                      dispatch({ type: 'STOP_LOADING' });
-                    }}
+                    onChange={assigneeId =>
+                      assignSupervisor(
+                        assigneeId,
+                        supervisor,
+                        supervisorsWithAnalyseBegin,
+                        selectedRows,
+                        closeDropdown,
+                        dispatch,
+                      )
+                    }
                     noResultsMessage={intl.formatMessage({ id: 'no_result' })}
                     clearChoice={{
-                      enabled: true,
+                      enabled: supervisorsWithAnalyseBegin.length === 0,
                       message: intl.formatMessage({ id: 'assigned.to.nobody' }),
                       onClear: async () => {
                         closeDropdown();
@@ -503,128 +424,30 @@ const AnalysisDashboardHeader = ({
                       },
                     }}
                     title={intl.formatMessage({ id: 'assign-supervisor' })}
-                    defaultOptions={uniqBy(
-                      [
-                        ...selectedSupervisorsByProposals,
-                        ...(defaultUsers?.edges?.filter(Boolean).map(e => e.node) || []),
-                      ],
-                      'id',
+                    defaultOptions={formatDefaultUsers(
+                      defaultUsers,
+                      selectedSupervisorsByProposals,
                     )}
                     loadOptions={loadOptions}>
                     {users =>
-                      users
-                        .filter(user => user.id !== userConnected.id)
-                        .map(user => (
-                          <UserSearchDropdownChoice
-                            isIndeterminate={isRowIndeterminate(
-                              user,
-                              project,
-                              selectedRows,
-                              'supervisor',
-                            )}
-                            key={user.id}
-                            user={user}
-                          />
-                        ))
-                    }
-                  </SearchableDropdownSelect>
-                </Collapsable.Element>
-              </React.Fragment>
-            )}
-          </Collapsable>
-        </AnalysisFilterContainer>
-      )}
-
-      {actionsShown.includes(DECISION_MAKER) && (
-        <AnalysisFilterContainer>
-          <Collapsable align="right" key="action-decision-maker">
-            {closeDropdown => (
-              <React.Fragment>
-                <Collapsable.Button>
-                  <FormattedMessage tagName="p" id="global.decision" />
-                </Collapsable.Button>
-                <Collapsable.Element
-                  ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}>
-                  <SearchableDropdownSelect
-                    searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-                    shouldOverflow
-                    value={decisionMaker}
-                    onChange={async assigneeId => {
-                      try {
-                        if (assigneeId === decisionMaker) return;
-                        closeDropdown();
-                        dispatch({ type: 'START_LOADING' });
-                        await AssignDecisionMakerToProposalsMutation.commit({
-                          input: {
-                            proposalIds: selectedRows,
-                            decisionMakerId: ((assigneeId: any): string),
-                          },
-                        });
-                        dispatch({ type: 'STOP_LOADING' });
-                      } catch (e) {
-                        FluxDispatcher.dispatch({
-                          actionType: UPDATE_ALERT,
-                          alert: {
-                            type: TYPE_ALERT.ERROR,
-                            content: 'global.error.server.form',
-                          },
-                        });
-                        // eslint-disable-next-line no-console
-                        console.error(e);
-                      }
-                    }}
-                    noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-                    clearChoice={{
-                      enabled: true,
-                      message: intl.formatMessage({ id: 'assigned.to.nobody' }),
-                      onClear: async () => {
-                        try {
-                          closeDropdown();
-                          dispatch({ type: 'START_LOADING' });
-                          await AssignDecisionMakerToProposalsMutation.commit({
-                            input: {
-                              proposalIds: selectedRows,
-                              decisionMakerId: null,
-                            },
-                          });
-                          dispatch({ type: 'STOP_LOADING' });
-                        } catch (e) {
-                          FluxDispatcher.dispatch({
-                            actionType: UPDATE_ALERT,
-                            alert: {
-                              type: TYPE_ALERT.ERROR,
-                              content: 'global.error.server.form',
-                            },
-                          });
-                          // eslint-disable-next-line no-console
-                          console.error(e);
-                        }
-                      },
-                    }}
-                    title={intl.formatMessage({ id: 'assign-decision-maker' })}
-                    defaultOptions={uniqBy(
-                      [
-                        ...selectedDecisionMakersByProposals,
-                        ...(defaultUsers?.edges?.filter(Boolean).map(e => e.node) || []),
-                      ],
-                      'id',
-                    )}
-                    loadOptions={loadOptions}>
-                    {users =>
-                      users
-                        .filter(user => user.id !== userConnected.id)
-                        .map(user => (
-                          <UserSearchDropdownChoice
-                            isIndeterminate={isRowIndeterminate(
-                              user,
-                              project,
-                              selectedRows,
-                              'decision-maker',
-                            )}
-                            key={user.id}
-                            user={user}
-                          />
-                        ))
+                      users.map(user => (
+                        <UserSearchDropdownChoice
+                          key={user.id}
+                          type={TYPE_ROLE.SUPERVISOR}
+                          isIndeterminate={isRowIndeterminate(
+                            user,
+                            project,
+                            selectedRows,
+                            'supervisor',
+                          )}
+                          user={user}
+                          disabled={
+                            (supervisorsWithAnalyseBegin.some(s => s.id === user.id) &&
+                              !isRowIndeterminate(user, project, selectedRows, 'supervisor')) ||
+                            userConnected.id === user.id
+                          }
+                        />
+                      ))
                     }
                   </SearchableDropdownSelect>
                 </Collapsable.Element>
@@ -644,7 +467,24 @@ const AnalysisDashboardHeader = ({
         values={{ num: selectedRows.length > 0 ? selectedRows.length : rowsCount }}
       />
 
-      {selectedRows.length > 0 ? renderActions : renderFilters}
+      <AnalysisProposalListFiltersContainer>
+        <AnalysisProposalListFiltersAction>
+          {selectedRows.length > 0 ? renderActions : renderFilters}
+        </AnalysisProposalListFiltersAction>
+
+        {filtersOrdered.length > 0 && selectedRows.length === 0 && (
+          <AnalysisProposalListFiltersList>
+            {filtersOrdered.map(({ id, name, action, icon }) => (
+              <FilterTag
+                key={id}
+                onClose={() => dispatch((({ type: action }: any): Action))}
+                icon={icon ? <Icon name={ICON_NAME[icon]} size="1rem" color="#fff" /> : null}>
+                {name}
+              </FilterTag>
+            ))}
+          </AnalysisProposalListFiltersList>
+        )}
+      </AnalysisProposalListFiltersContainer>
     </>
   );
 };
@@ -677,6 +517,25 @@ export default createFragmentContainer(AnalysisDashboardHeaderConnected, {
         edges {
           node {
             id
+            analyses {
+              state
+              updatedBy {
+                id
+              }
+            }
+            assessment {
+              state
+              updatedBy {
+                id
+              }
+            }
+            decision {
+              state
+              isApproved
+              updatedBy {
+                id
+              }
+            }
             analysts {
               id
               username

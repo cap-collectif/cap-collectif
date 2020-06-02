@@ -65,3 +65,33 @@ exports[`<SearchableDropdownSelect /> should render correctly 1`] = `
   </style__SearchableDropdownContainer>
 </ContextProvider>
 `;
+
+exports[`<SearchableDropdownSelect /> should render correctly with disabled searchable dropdown 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "dispatch": [Function],
+      "state": Object {
+        "error": null,
+        "results": Array [],
+        "status": "default",
+      },
+    }
+  }
+>
+  <style__SearchableDropdownContainer
+    disabled={true}
+    title="Votre animé préféré"
+  >
+    <DropdownSelect.Header>
+      <style__Input
+        disabled={true}
+        onChange={[Function]}
+        onClear={[Function]}
+        placeholder="Rechercher un animé"
+        type="text"
+      />
+    </DropdownSelect.Header>
+  </style__SearchableDropdownContainer>
+</ContextProvider>
+`;

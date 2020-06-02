@@ -92,7 +92,8 @@ class ParametersExtension extends AbstractExtension
                 'cookies-list',
                 'privacy-policy',
                 'charter.body',
-                'events.map.country'
+                'events.map.country',
+                'admin.mail.notifications.receive_address'
             ];
 
             $exposedParameters = [];

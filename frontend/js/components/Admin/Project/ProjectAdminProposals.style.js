@@ -1,8 +1,8 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
 import { Label as BSLabel } from 'react-bootstrap';
-import PickableList from '~ui/List/PickableList';
 import DropdownSelect from '~ui/DropdownSelect';
+import colors from '~/utils/colors';
 
 export const ProjectAdminProposalsHeader: StyledComponent<{}, {}, HTMLElement> = styled.header`
   display: flex;
@@ -30,22 +30,12 @@ export const ProposalListDropdownChoice: StyledComponent<
   }
 `;
 
-export const ProposalListRow: StyledComponent<{}, {}, typeof PickableList.Row> = styled(
-  PickableList.Row,
-)`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  & h2 {
-    font-size: 15px;
-    font-weight: 600;
-    margin: 0 0 5px 0;
-    line-height: 20px;
-  }
-`;
-
-export const ProposalVotableStepTitle: StyledComponent<{}, {}, HTMLHeadingElement> = styled.h2`
+export const ProposalVotableStep: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+  font-size: 15px;
   font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
 `;
 
 export const ProposalListRowInformationsStepState: StyledComponent<
@@ -69,17 +59,31 @@ export const Label: StyledComponent<{}, {}, typeof BSLabel> = styled(BSLabel)`
   padding: 6px;
 `;
 
-export const EmptyStatusesFilling: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const EmptyStatuses: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 15px;
 
   span {
     font-weight: normal;
   }
 
   .icon {
+    width: auto;
+    padding: 0;
     margin-right: 8px;
     margin-top: 2px;
   }
+`;
+
+export const MergeButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+`;
+
+export const Divider: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+  width: 1px;
+  height: 20px;
+  background-color: ${colors.darkGray};
 `;

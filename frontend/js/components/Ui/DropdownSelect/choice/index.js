@@ -61,11 +61,12 @@ const DropdownSelectChoice = ({
     initialValue,
     mode,
     setInitialValue,
+    disabled: dropdownDisabled,
   } = useDropdownSelect();
   const isChecked = getChecked(isMultiSelect, mode, initialValue, value, dropdownValue);
   const handler = React.useCallback(
     e => {
-      if (disabled) {
+      if (disabled || dropdownDisabled) {
         return;
       }
       if (onClick) {
@@ -122,7 +123,7 @@ const DropdownSelectChoice = ({
           }
         } else {
           setInitialValue(null);
-          onChange(value);
+          onChange(isChecked ? null : value);
           if (indeterminate) {
             setIndeterminate(false);
           }
@@ -142,11 +143,12 @@ const DropdownSelectChoice = ({
       mode,
       value,
       dropdownValue,
+      dropdownDisabled,
       allValues,
     ],
   );
   return (
-    <S.Container onClick={handler} className={className} isDisabled={disabled}>
+    <S.Container onClick={handler} className={className} isDisabled={disabled || dropdownDisabled}>
       {indeterminate && <Icon name={ICON_NAME.plus} size="1rem" />}
       {isChecked && !indeterminate && <Icon name={ICON_NAME.check} size="1rem" color="#333" />}
       <span>{children}</span>

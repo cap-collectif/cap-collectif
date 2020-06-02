@@ -18,11 +18,11 @@ import UserAnalystListHiddenContainer, {
   UsernameWrapper,
 } from './UserAnalystListHidden.style';
 
+const HIDDEN_AVATAR_SIZE = 15;
+
 type Props = {
   proposal: UserAnalystListHidden_proposal,
 };
-
-const HIDDEN_AVATAR_SIZE = AVATAR_SIZE / 2;
 
 const UserAnalystListHidden = ({ proposal }: Props) => {
   const [isTooltipRestAnalystsDisplay, setTooltipRestAnalystsDisplay] = useState<boolean>(false);
@@ -34,7 +34,6 @@ const UserAnalystListHidden = ({ proposal }: Props) => {
   const restAnalysts = analysts
     ? Array.from(analysts).slice(MAX_AVATAR_DISPLAY, analysts.length)
     : [];
-  const countRestAnalysts = restAnalysts?.length;
 
   return (
     <UserAnalystListHiddenContainer>
@@ -54,8 +53,12 @@ const UserAnalystListHidden = ({ proposal }: Props) => {
         placement="top">
         <Tooltip id="tooltip-analysts-hidden" className="tooltip-analysts-hidden">
           <TooltipAnalystListHiddenContainer>
-            <FormattedMessage tagName="span" id="global.assigned.to" /> &nbsp;
-            {restAnalysts.map((analyst, index) => (
+            <div>
+              <FormattedMessage tagName="span" id="global.assigned.to" />
+              <span>:</span>
+            </div>
+
+            {restAnalysts.map(analyst => (
               <UserAvatarWrapper key={`analyst-${analyst.id}`}>
                 <UserAvatar
                   user={analyst}
@@ -64,11 +67,6 @@ const UserAnalystListHidden = ({ proposal }: Props) => {
                   badge={getBadge(getStatus(analyses, analyst.id), true)}
                 />
                 <UsernameWrapper>{analyst.username}</UsernameWrapper>
-                {countRestAnalysts !== index + 1 && (
-                  <>
-                    <span>,</span>{' '}
-                  </>
-                )}
               </UserAvatarWrapper>
             ))}
           </TooltipAnalystListHiddenContainer>

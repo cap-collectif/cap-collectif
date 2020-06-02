@@ -54,7 +54,9 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
           <Tab eventKey="CONFIGURATION" title={intl.formatMessage({ id: 'global.configuration' })}>
             <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
           </Tab>
-          <Tab eventKey="LEGACY_ANALYSIS" title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
+          <Tab
+            eventKey="LEGACY_ANALYSIS"
+            title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
             <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
           </Tab>
           {analysisFeatureEnabled && !!proposalForm.step && (
@@ -73,7 +75,9 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
               <ProposalFormAdminAnalysisConfigurationForm proposalForm={proposalForm} />
             </Tab>
           )}
-          <Tab eventKey="NOTIFICATIONS" title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
+          <Tab
+            eventKey="NOTIFICATIONS"
+            title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
             <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
           </Tab>
           <Tab eventKey="SETTINGS" title={intl.formatMessage({ id: 'global.params' })}>

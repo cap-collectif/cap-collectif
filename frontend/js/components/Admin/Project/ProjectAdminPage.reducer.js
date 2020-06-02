@@ -2,54 +2,65 @@
 
 import type { Uuid } from '~/types';
 import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.context';
+import { getInitialState } from '~/components/Admin/Project/ProjectAdminPage.context';
 
 export type SortValues = 'oldest' | 'newest';
 
 export type ProposalsStateValues = 'ALL' | 'PUBLISHED' | 'TRASHED' | 'DRAFT';
 
-export type ProposalsCategoryValues = 'ALL' | Uuid;
+export type ProposalsCategoryValues = 'ALL' | 'NONE' | Uuid;
 
-export type ProposalsDistrictValues = 'ALL' | Uuid;
+export type ProposalsDistrictValues = 'ALL' | 'NONE' | Uuid;
 
 export type ProposalsStepValues = ?Uuid;
 
-export type StepChanged = {
-  id: Uuid,
-  count: number,
-};
+export type ProposalsStatusValues = 'ALL' | 'NONE' | string;
 
-export type StepsChangedProposal = {
-  stepsAdded: StepChanged[],
-  stepsRemoved: StepChanged[],
-};
+export type ProposalsProgressStateValues =
+  | 'ALL'
+  | 'TODO'
+  | 'IN_PROGRESS'
+  | 'FAVOURABLE'
+  | 'UNFAVOURABLE'
+  | 'TOO_LATE';
 
 export type Filters = {|
   +state: ProposalsStateValues,
+  +progressState: ProposalsProgressStateValues,
   +category: ProposalsCategoryValues,
   +district: ProposalsDistrictValues,
   +step: ProposalsStepValues,
-  +status: ?string,
+  +status: ProposalsStatusValues,
   +term: ?string,
+  +analysts: Uuid[],
+  +supervisor: ?Uuid,
+  +decisionMaker: ?Uuid,
+|};
+
+export type Filter = {|
+  +id: Uuid,
+  +type: 'district' | 'category' | 'status' | 'step' | 'progressState',
 |};
 
 export type ProjectAdminPageState = {|
   +status: ProjectAdminPageStatus,
   +sort: SortValues,
-  +stepsChangedProposal: StepsChangedProposal,
   +filters: Filters,
+  +filtersOrdered: Filter[],
+  +initialSelectedStep: ?string,
 |};
 
 export type ProjectAdminPageParameters = {|
   +sort: $PropertyType<ProjectAdminPageState, 'sort'>,
   +filters: $PropertyType<ProjectAdminPageState, 'filters'>,
-  +stepsChangedProposal: $PropertyType<ProjectAdminPageState, 'stepsChangedProposal'>,
+  +filtersOrdered: $PropertyType<ProjectAdminPageState, 'filtersOrdered'>,
 |};
 
 export type Action =
   | { type: 'START_LOADING' }
   | { type: 'STOP_LOADING' }
   | { type: 'CHANGE_SORT', payload: SortValues }
-  | { type: 'CHANGE_STATUS_FILTER', payload: ?string }
+  | { type: 'CHANGE_STATUS_FILTER', payload: ProposalsStatusValues }
   | { type: 'CLEAR_STATUS_FILTER' }
   | { type: 'CHANGE_STEP_FILTER', payload: ProposalsStepValues }
   | { type: 'CLEAR_STEP_FILTER' }
@@ -57,16 +68,12 @@ export type Action =
   | { type: 'CLEAR_CATEGORY_FILTER' }
   | { type: 'CHANGE_DISTRICT_FILTER', payload: ProposalsDistrictValues }
   | { type: 'CLEAR_DISTRICT_FILTER' }
+  | { type: 'CHANGE_PROGRESS_STATE_FILTER', payload: ProposalsProgressStateValues }
+  | { type: 'CLEAR_PROGRESS_STATE_FILTER' }
   | { type: 'CHANGE_STATE_FILTER', payload: ProposalsStateValues }
-  | {
-      type: 'CHANGE_STEPS_ADDED_TO_PROPOSAL',
-      payload: { stepId: Uuid, countSelectedProposal: number },
-    }
-  | {
-      type: 'CHANGE_STEPS_REMOVED_FROM_PROPOSAL',
-      payload: { stepId: Uuid, countSelectedProposal: number },
-    }
-  | { type: 'CLEAR_STEPS_CHANGED_PROPOSAL' }
+  | { type: 'CHANGE_ANALYSTS_FILTER', payload: Uuid[] }
+  | { type: 'CHANGE_SUPERVISOR_FILTER', payload: Uuid }
+  | { type: 'CHANGE_DECISION_MAKER_FILTER', payload: Uuid }
   | { type: 'SEARCH_TERM', payload: ?string }
   | { type: 'CLEAR_TERM' };
 
@@ -82,14 +89,17 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ...state,
         status: 'ready',
       };
-    case 'CHANGE_STATE_FILTER':
+    case 'CHANGE_STATE_FILTER': {
+      const initialState = getInitialState(state.initialSelectedStep);
+
       return {
-        ...state,
+        ...initialState,
         filters: {
-          ...state.filters,
+          ...initialState.filters,
           state: action.payload,
         },
       };
+    }
     case 'CHANGE_CATEGORY_FILTER':
       return {
         ...state,
@@ -97,6 +107,13 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           ...state.filters,
           category: action.payload,
         },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'category',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'category'),
+        ],
       };
     case 'CLEAR_CATEGORY_FILTER':
       return {
@@ -105,24 +122,43 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           ...state.filters,
           category: 'ALL',
         },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'category')],
       };
     case 'CHANGE_STEP_FILTER':
       return {
         ...state,
         filters: {
           ...state.filters,
-          status: null,
+          status: 'ALL',
           step: action.payload,
         },
+        filtersOrdered: [
+          ...(action.payload
+            ? [
+                {
+                  id: action.payload,
+                  type: 'step',
+                },
+              ]
+            : []),
+          ...state.filtersOrdered.filter(
+            filter => filter.type !== 'step' && filter.type !== 'status',
+          ),
+        ],
       };
     case 'CLEAR_STEP_FILTER':
       return {
         ...state,
         filters: {
           ...state.filters,
-          status: null,
+          status: 'ALL',
           step: null,
         },
+        filtersOrdered: [
+          ...state.filtersOrdered.filter(
+            filter => filter.type !== 'step' && filter.type !== 'status',
+          ),
+        ],
       };
     case 'CHANGE_DISTRICT_FILTER':
       return {
@@ -131,6 +167,13 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           ...state.filters,
           district: action.payload,
         },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'district',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'district'),
+        ],
       };
     case 'CLEAR_DISTRICT_FILTER':
       return {
@@ -139,6 +182,31 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           ...state.filters,
           district: 'ALL',
         },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'district')],
+      };
+    case 'CHANGE_PROGRESS_STATE_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          progressState: action.payload,
+        },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'progressState',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'progressState'),
+        ],
+      };
+    case 'CLEAR_PROGRESS_STATE_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          progressState: 'ALL',
+        },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'progressState')],
       };
     case 'CHANGE_STATUS_FILTER':
       return {
@@ -147,57 +215,51 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           ...state.filters,
           status: action.payload,
         },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'status',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'status'),
+        ],
       };
     case 'CLEAR_STATUS_FILTER':
       return {
         ...state,
         filters: {
           ...state.filters,
-          status: null,
+          status: 'ALL',
+        },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'status')],
+      };
+    case 'CHANGE_ANALYSTS_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          analysts: action.payload,
+        },
+      };
+    case 'CHANGE_SUPERVISOR_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          supervisor: action.payload,
+        },
+      };
+    case 'CHANGE_DECISION_MAKER_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          decisionMaker: action.payload,
         },
       };
     case 'CHANGE_SORT':
       return {
         ...state,
         sort: action.payload,
-      };
-    case 'CHANGE_STEPS_ADDED_TO_PROPOSAL':
-      return {
-        ...state,
-        stepsChangedProposal: {
-          stepsAdded: [
-            ...state.stepsChangedProposal.stepsAdded,
-            { id: action.payload.stepId, count: action.payload.countSelectedProposal },
-          ],
-          stepsRemoved: [
-            ...state.stepsChangedProposal.stepsRemoved.filter(
-              ({ id }) => id !== action.payload.stepId,
-            ),
-          ],
-        },
-      };
-    case 'CHANGE_STEPS_REMOVED_FROM_PROPOSAL':
-      return {
-        ...state,
-        stepsChangedProposal: {
-          stepsRemoved: [
-            ...state.stepsChangedProposal.stepsRemoved,
-            { id: action.payload.stepId, count: action.payload.countSelectedProposal },
-          ],
-          stepsAdded: [
-            ...state.stepsChangedProposal.stepsAdded.filter(
-              ({ id }) => id !== action.payload.stepId,
-            ),
-          ],
-        },
-      };
-    case 'CLEAR_STEPS_CHANGED_PROPOSAL':
-      return {
-        ...state,
-        stepsChangedProposal: {
-          stepsAdded: [],
-          stepsRemoved: [],
-        },
       };
     case 'SEARCH_TERM':
       return {

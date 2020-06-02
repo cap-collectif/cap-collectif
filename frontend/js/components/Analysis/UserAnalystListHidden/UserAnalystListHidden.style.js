@@ -1,9 +1,18 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
+import colors from "~/utils/colors";
 
 const UserAnalystListHiddenContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'user-analyst-list-hidden',
-})``;
+})`
+  .avatar-wrapper {
+    button {
+      font-size: 12px;
+      background-color: ${colors.iconGrayColor} !important;
+      color: #fff !important;
+    }
+  }
+`;
 
 export const TooltipAnalystListHiddenContainer: StyledComponent<
   {},
@@ -13,22 +22,13 @@ export const TooltipAnalystListHiddenContainer: StyledComponent<
   className: 'tooltip-analyst-list-hidden',
 })`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   padding: 4px 0;
+  text-align: left;
 
   img,
   svg {
     margin: 0;
-  }
-
-  .circle {
-    top: 50%;
-    transform: translateY(-50%);
-    left: -6px;
-    right: initial;
-    bottom: initial;
   }
 `;
 
@@ -38,10 +38,14 @@ export const UserAvatarWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 8px;
+  margin-bottom: 4px;
 
-  & > a {
-    margin-right: 0;
+  &:first-child {
+    margin-top: 4px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 `;
 

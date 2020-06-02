@@ -7,7 +7,6 @@ export const ICON_NAME: {
   chart: 'chart',
   pen: 'pen',
   eye: 'eye',
-  muteFace: 'muteFace',
   clock: 'clock',
   unfavorable: 'unfavorable',
   ongoing: 'ongoing',
@@ -27,6 +26,7 @@ export const ICON_NAME: {
   close: 'close',
   error: 'error',
   trash: 'trash',
+  trash2: 'trash2',
   arrowDown: 'arrowDown',
   menu: 'menu',
   information: 'information',
@@ -40,6 +40,7 @@ export const ICON_NAME: {
   check: 'check',
   message: 'message',
   messageBubble: 'messageBubble',
+  messageBubbleCheck: 'messageBubbleCheck',
   doubleMessageBubble: 'doubleMessageBubble',
   taskList: 'taskList',
   done: 'done',
@@ -50,11 +51,14 @@ export const ICON_NAME: {
   crossRounded: 'cross--rounded',
   warning: 'warning',
   externalLink: 'external-link',
+  draft: 'draft',
+  stack: 'stack',
+  tag: 'tag',
+  pin: 'pin',
 } = {
   chart: 'chart',
   pen: 'pen',
   eye: 'eye',
-  muteFace: 'muteFace',
   clock: 'clock',
   unfavorable: 'unfavorable',
   ongoing: 'ongoing',
@@ -74,6 +78,7 @@ export const ICON_NAME: {
   close: 'close',
   error: 'error',
   trash: 'trash',
+  trash2: 'trash2',
   arrowDown: 'arrowDown',
   menu: 'menu',
   information: 'information',
@@ -87,6 +92,7 @@ export const ICON_NAME: {
   check: 'check',
   message: 'message',
   messageBubble: 'messageBubble',
+  messageBubbleCheck: 'messageBubbleCheck',
   doubleMessageBubble: 'doubleMessageBubble',
   taskList: 'taskList',
   done: 'done',
@@ -97,6 +103,10 @@ export const ICON_NAME: {
   crossRounded: 'cross--rounded',
   warning: 'warning',
   externalLink: 'external-link',
+  draft: 'draft',
+  stack: 'stack',
+  tag: 'tag',
+  pin: 'pin',
 };
 
 type Props = {|
@@ -158,6 +168,8 @@ const getIcon = name => {
       return <Icons.Error />;
     case 'trash':
       return <Icons.Trash />;
+    case 'trash2':
+      return <Icons.Trash2 />;
     case 'arrowDown':
       return <Icons.ArrowDown />;
     case 'menu':
@@ -201,6 +213,16 @@ const getIcon = name => {
       return <Icons.Warning />;
     case 'external-link':
       return <Icons.ExternalLink />;
+    case 'draft':
+      return <Icons.PenWritePaper />;
+    case 'stack':
+      return <Icons.Stack />;
+    case 'messageBubbleCheck':
+      return <Icons.MessageBubbleCheck />;
+    case 'tag':
+      return <Icons.Tag />;
+    case 'pin':
+      return <Icons.Pin />;
     default:
       return <div />;
   }

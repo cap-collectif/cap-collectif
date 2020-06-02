@@ -37,9 +37,10 @@ export const getStatus = (analyses: ?$ReadOnlyArray<Object>, idUser: string): St
 
 type Props = {
   proposal: UserAnalystList_proposal,
+  dispatch: any => void,
 };
 
-const UserAnalystList = ({ proposal }: Props) => {
+const UserAnalystList = ({ proposal, dispatch }: Props) => {
   const intl = useIntl();
   const { analysts, analyses } = proposal;
 
@@ -68,6 +69,7 @@ const UserAnalystList = ({ proposal }: Props) => {
               displayUrl={false}
               size={AVATAR_SIZE}
               badge={getBadge(getStatus(analyses, analyst.id))}
+              onClick={() => dispatch({ type: 'CHANGE_ANALYSTS_FILTER', payload: [analyst.id] })}
             />
           </OverlayTrigger>
         ))}

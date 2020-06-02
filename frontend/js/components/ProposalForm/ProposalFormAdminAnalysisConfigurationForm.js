@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { change, reset, Field, formValueSelector, reduxForm } from 'redux-form';
-import {Button, ButtonToolbar, ToggleButton} from 'react-bootstrap';
+import { Button, ButtonToolbar, ToggleButton } from 'react-bootstrap';
 import type { Dispatch, State, Uuid } from '~/types';
 import component from '../Form/Field';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -49,11 +49,11 @@ const validate = (values: Object) => {
   const errors = {};
 
   if (!values.unfavourableStatuses || values.unfavourableStatuses.length < 1) {
-    errors.unfavourableStatuses = 'message.status.field.mandatory'
+    errors.unfavourableStatuses = 'message.status.field.mandatory';
   }
 
   if (!values.analysisStep) {
-    errors.analysisStep = 'message.analysis_step.field.mandatory'
+    errors.analysisStep = 'message.analysis_step.field.mandatory';
   }
 
   return errors;
@@ -320,12 +320,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
             </ToggleButton>
           </Field>
           {effectiveDateEnabled === 1 && (
-            <Field
-              id="effectiveDate"
-              name="effectiveDate"
-              type="datetime"
-              component={component}
-            />
+            <Field id="effectiveDate" name="effectiveDate" type="datetime" component={component} />
           )}
         </div>
       </div>
@@ -369,7 +364,8 @@ const mapStateToProps = (state: State, props: RelayProps) => {
       analysisStep: props.proposalForm.analysisConfiguration?.analysisStep?.id || null,
       evaluationForm: props.proposalForm.analysisConfiguration?.evaluationForm?.id || null,
       effectiveDate: props.proposalForm.analysisConfiguration?.effectiveDate || null,
-      costEstimationEnabled: props.proposalForm.analysisConfiguration?.costEstimationEnabled || false,
+      costEstimationEnabled:
+        props.proposalForm.analysisConfiguration?.costEstimationEnabled || false,
       moveToSelectionStep:
         props.proposalForm.analysisConfiguration?.moveToSelectionStep?.id || null,
       favourableStatus: props.proposalForm.analysisConfiguration?.favourableStatus?.id || null,

@@ -16,8 +16,8 @@ const DEFAULT_SORT: SortValues = ORDER_BY.NEWEST;
 
 const DEFAULT_STATUS: AnalysisProjectPageStatus = 'ready';
 
-const DEFAULT_FILTERS: Filters = {
-  state: STATE.ALL,
+export const DEFAULT_FILTERS: Filters = {
+  state: STATE.TODO,
   district: 'ALL',
   category: 'ALL',
   analysts: [],
@@ -40,6 +40,7 @@ export const AnalysisProjectPageContext = React.createContext<Context>({
   parameters: {
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,
+    filtersOrdered: [],
   },
   dispatch: () => {},
 });
@@ -60,6 +61,7 @@ export const AnalysisProposalsProvider = ({ children }: ProviderProps) => {
     status: DEFAULT_STATUS,
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,
+    filtersOrdered: [],
   });
 
   const context = React.useMemo(
@@ -68,6 +70,7 @@ export const AnalysisProposalsProvider = ({ children }: ProviderProps) => {
       parameters: {
         sort: state.sort,
         filters: state.filters,
+        filtersOrdered: state.filtersOrdered,
       },
       dispatch,
     }),

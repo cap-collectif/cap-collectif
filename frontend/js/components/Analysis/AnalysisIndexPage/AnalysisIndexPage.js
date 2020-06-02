@@ -118,7 +118,7 @@ const AnalysisIndexPage = () => {
           $decisionMaker: ID
           $state: ProposalTaskState
         ) {
-          defaultUsers: users(first: 4) {
+          defaultUsers: users(first: 20) {
             edges {
               node {
                 id

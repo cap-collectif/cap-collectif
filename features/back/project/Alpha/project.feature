@@ -179,4 +179,4 @@ Scenario: Admin merges two proposals
   And I go to "/admin/alpha/project/projectCorona/proposals"
   And I wait ".pickableList-row" to appear on current page
   And the number 1 element in ".pickableList-row  h2 a" should contain "Merged proposal"
-  And I should see 2 ".badge-container" elements
+  And I should see 2 ".merge-tag" elements

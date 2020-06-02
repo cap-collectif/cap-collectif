@@ -6,6 +6,7 @@ export const Container: StyledComponent<{ isDisabled: boolean }, {}, HTMLElement
   background: ${colors.white};
   display: flex;
   align-items: center;
+  font-size: 12px;
   &:hover,
   :active {
     cursor: pointer;
@@ -16,20 +17,27 @@ export const Container: StyledComponent<{ isDisabled: boolean }, {}, HTMLElement
     props.isDisabled &&
     css`
       background: ${colors.paleGrey};
-      filter: grayscale(100%);
+      user-select: none;
       &:hover {
         cursor: not-allowed;
       }
-      user-select: none;
+
+      & > span *:not(svg) {
+        filter: grayscale(100%);
+      }
     `}
-  & span {
+  & > span {
     padding-left: 20px;
+    color: ${colors.darkGray};
+    font-weight: normal;
   }
-  & svg {
+  & > svg {
     margin-right: 1rem;
     min-width: 10px;
     & + span {
       padding-left: 0;
+      color: #000;
+      font-weight: bold;
     }
   }
 `;

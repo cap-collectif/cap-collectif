@@ -7,8 +7,14 @@ import { mediaQueryMobile } from '~/utils/sizes';
 export const ProjectBoxContainer: StyledComponent<
   { color?: ?string },
   {},
-  HTMLDivElement,
+  HTMLDivElement
 > = styled.div`
+  border-top-color: ${({ color }) => color || '#858e95'};
+`;
+
+export const BoxContainer: StyledComponent<{ color?: ?string }, {}, HTMLDivElement> = styled.div`
+  width: auto;
+  margin: 0 2rem 2rem 2rem;
   border-top-color: ${({ color }) => color || '#858e95'};
 `;
 

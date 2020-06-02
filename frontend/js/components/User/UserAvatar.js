@@ -29,12 +29,13 @@ type Props = {|
   onFocus?: () => void,
   onMouseOver?: () => void,
   onMouseOut?: () => void,
+  onClick?: () => void,
   badge?: Badge,
 |};
 
 const commonStyleAvatar = hasBadge => css`
   position: relative;
-  margin-right: ${hasBadge ? '5px' : 'initial'};
+  padding-right: ${hasBadge ? '5px' : 'initial'};
 
   .circle {
     display: flex;
@@ -42,7 +43,7 @@ const commonStyleAvatar = hasBadge => css`
     justify-content: center;
     position: absolute;
     bottom: -0;
-    right: -5px;
+    right: -0;
   }
 `;
 
@@ -57,6 +58,8 @@ const UserAvatarContainer: StyledComponent<
   {},
   HTMLSpanElement,
 > = styled.span`
+  display: inline-block;
+  vertical-align: text-bottom;
   ${props => commonStyleAvatar(props.hasBadge)}
 `;
 
@@ -122,6 +125,7 @@ export class UserAvatar extends React.Component<Props> {
       onFocus,
       onMouseOut,
       onMouseOver,
+      onClick,
       style,
       user,
       features,
@@ -134,6 +138,7 @@ export class UserAvatar extends React.Component<Props> {
       onFocus,
       onMouseOver,
       onMouseOut,
+      onClick,
     };
 
     if (user && user.url && features && features.profiles) {

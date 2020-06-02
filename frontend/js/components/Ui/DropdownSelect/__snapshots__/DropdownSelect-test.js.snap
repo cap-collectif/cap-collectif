@@ -5,6 +5,7 @@ exports[`<DropdownSelect /> should render correctly 1`] = `
   value={
     Object {
       "allValues": Array [],
+      "disabled": false,
       "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
@@ -46,6 +47,7 @@ exports[`<DropdownSelect /> should render correctly with a message 1`] = `
   value={
     Object {
       "allValues": Array [],
+      "disabled": false,
       "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
@@ -92,6 +94,7 @@ exports[`<DropdownSelect /> should render correctly with a message that has an i
   value={
     Object {
       "allValues": Array [],
+      "disabled": false,
       "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
@@ -144,6 +147,7 @@ exports[`<DropdownSelect /> should render correctly with a submenu 1`] = `
   value={
     Object {
       "allValues": Array [],
+      "disabled": false,
       "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
@@ -204,6 +208,51 @@ exports[`<DropdownSelect /> should render correctly with disabled choices 1`] = 
   value={
     Object {
       "allValues": Array [],
+      "disabled": false,
+      "initialValue": Array [],
+      "isMultiSelect": false,
+      "mode": "normal",
+      "onChange": undefined,
+      "setInitialValue": [Function],
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container
+    shouldOverflow={false}
+  >
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Choice
+        disabled={true}
+        value="item1"
+      >
+        Item 1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        disabled={true}
+        value="item3"
+      >
+        Item 3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
+exports[`<DropdownSelect /> should render correctly with disabled dropdown 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "allValues": Array [],
+      "disabled": true,
       "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
@@ -247,6 +296,7 @@ exports[`<DropdownSelect /> should render correctly with indeterminate choices 1
   value={
     Object {
       "allValues": Array [],
+      "disabled": false,
       "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",
@@ -290,6 +340,7 @@ exports[`<DropdownSelect /> should render correctly with multi-select enabled 1`
   value={
     Object {
       "allValues": Array [],
+      "disabled": false,
       "initialValue": Array [],
       "isMultiSelect": true,
       "mode": "normal",
@@ -331,6 +382,7 @@ exports[`<DropdownSelect /> should render correctly with submenu in a submenu 1`
   value={
     Object {
       "allValues": Array [],
+      "disabled": false,
       "initialValue": Array [],
       "isMultiSelect": false,
       "mode": "normal",

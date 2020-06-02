@@ -12,11 +12,11 @@ import { $refType } from '~/mocks';
 const DEFAULT_PROJECT = {
   ...$refType,
   id: 'UHJvamVjdDpwcm9qZWN0Ng==',
+  adminAlphaUrl: 'http://example.com',
   steps: [
     {
       id: 'cstep1',
       title: 'Étape de dépôt',
-      url: 'http://example.com',
       __typename: 'CollectStep',
       statuses: [
         {
@@ -56,7 +56,6 @@ const DEFAULT_PROJECT = {
     {
       id: 'sstep1',
       title: 'Étape de sélection',
-      url: 'http://example.com',
       __typename: 'SelectionStep',
       statuses: [
         {

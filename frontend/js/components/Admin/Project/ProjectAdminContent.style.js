@@ -97,7 +97,7 @@ export const Header: StyledComponent<{}, {}, HTMLElement> = styled.nav`
 
 export const Content: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 100%;
-  margin-top: 90px;
+  margin-top: 95px;
   @media (max-width: 768px) {
     margin-top: 120px;
   }

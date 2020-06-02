@@ -29,13 +29,17 @@ const DEFAULT_STATUS: ProjectAdminPageStatus = 'ready';
 
 const DEFAULT_SORT: SortValues = 'newest';
 
-const DEFAULT_FILTERS: Filters = {
+export const DEFAULT_FILTERS: Filters = {
   state: 'PUBLISHED',
+  progressState: 'ALL',
   category: 'ALL',
   district: 'ALL',
   step: null,
-  status: null,
+  status: 'ALL',
   term: null,
+  analysts: [],
+  supervisor: null,
+  decisionMaker: null,
 };
 
 export const ProjectAdminPageContext = React.createContext<Context>({
@@ -43,10 +47,7 @@ export const ProjectAdminPageContext = React.createContext<Context>({
   parameters: {
     sort: DEFAULT_SORT,
     filters: DEFAULT_FILTERS,
-    stepsChangedProposal: {
-      stepsAdded: [],
-      stepsRemoved: [],
-    },
+    filtersOrdered: [],
   },
   firstCollectStepId: null,
   dispatch: () => {},
@@ -62,26 +63,30 @@ export const useProjectAdminProposalsContext = (): Context => {
   return context;
 };
 
+export const getInitialState = (initialSelectedStep: ?string): ProjectAdminPageState => ({
+  status: DEFAULT_STATUS,
+  sort: DEFAULT_SORT,
+  filters: {
+    ...DEFAULT_FILTERS,
+    step: initialSelectedStep,
+  },
+  filtersOrdered: [...(initialSelectedStep ? [{ id: initialSelectedStep, type: 'step' }] : [])],
+  initialSelectedStep,
+});
+
 export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: ProviderProps) => {
-  const [state, dispatch] = React.useReducer<ProjectAdminPageState, Action>(createReducer, {
-    status: DEFAULT_STATUS,
-    sort: DEFAULT_SORT,
-    filters: {
-      ...DEFAULT_FILTERS,
-      step: firstCollectStepId,
-    },
-    stepsChangedProposal: {
-      stepsAdded: [],
-      stepsRemoved: [],
-    },
-  });
+  const [state, dispatch] = React.useReducer<ProjectAdminPageState, Action>(
+    createReducer,
+    getInitialState(firstCollectStepId),
+  );
+
   const context = React.useMemo(
     () => ({
       status: state.status,
       parameters: {
         sort: state.sort,
         filters: state.filters,
-        stepsChangedProposal: state.stepsChangedProposal,
+        filtersOrdered: state.filtersOrdered,
       },
       firstCollectStepId,
       dispatch,

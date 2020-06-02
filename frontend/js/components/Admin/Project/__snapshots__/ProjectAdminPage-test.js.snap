@@ -149,6 +149,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "adminAlphaUrl",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "ProposalConnection",
                         "kind": "LinkedField",
                         "name": "proposals",
@@ -1195,6 +1202,7 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
   title
   url
   hasAnalysis
+  adminAlphaUrl
   proposals {
     totalCount
   }
@@ -1659,6 +1667,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "adminAlphaUrl",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "ProposalConnection",
                         "kind": "LinkedField",
                         "name": "proposals",
@@ -2705,6 +2720,7 @@ fragment ProjectAdminContent_project_2CgS8h on Project {
   title
   url
   hasAnalysis
+  adminAlphaUrl
   proposals {
     totalCount
   }

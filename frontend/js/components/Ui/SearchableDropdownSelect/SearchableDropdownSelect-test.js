@@ -31,6 +31,25 @@ describe('<SearchableDropdownSelect />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render correctly with disabled searchable dropdown', () => {
+    const wrapper = shallow(
+      <SearchableDropdownSelect
+        disabled
+        searchPlaceholder="Rechercher un animé"
+        loadOptions={loadOptionsEmptyResultsMock}
+        title="Votre animé préféré"
+        noResultsMessage="Aucun animé trouvé">
+        {results =>
+          results.map(anime => (
+            <DropdownSelect.Choice value={anime.id}>{anime.title}</DropdownSelect.Choice>
+          ))
+        }
+      </SearchableDropdownSelect>,
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should correctly render when defaultOptions are provided', () => {
     const DEFAULT_OPTIONS = [
       {

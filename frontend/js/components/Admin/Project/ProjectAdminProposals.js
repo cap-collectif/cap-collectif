@@ -1,15 +1,10 @@
 // @flow
 import * as React from 'react';
-import moment from 'moment';
-import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import styled, { type StyledComponent } from 'styled-components';
-import { Button } from 'react-bootstrap';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import * as S from './ProjectAdminProposals.style';
-import Tag from '~ui/Labels/Tag';
-import Loader from '~ui/FeedbacksIndicators/Loader';
 import DropdownSelect from '~ui/DropdownSelect';
 import Collapsable from '~ui/Collapsable';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
@@ -18,218 +13,150 @@ import type {
   ProposalsCategoryValues,
   ProposalsDistrictValues,
   ProposalsStateValues,
+  ProposalsStatusValues,
   ProposalsStepValues,
   SortValues,
-  StepsChangedProposal,
 } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import type { Uuid } from '~/types';
 import InlineSelect from '~ui/InlineSelect';
 import {
   getAllFormattedChoicesForProject,
   getFormattedCollectStepsForProject,
-  type ProposalsSelected,
   type StepFilter,
-  FILLING,
+  getDifferenceFilters,
+  getWordingEmpty,
+  isStatusIndeterminate,
+  getCommonStatusIdWithinProposalIds,
+  isStepIndeterminate,
+  getCommonStepIdWithinProposalIds,
+  getStepDisplay,
 } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
 import FilterTag from '~ui/Analysis/FilterTag';
-import colors from '~/utils/colors';
 import {
   AnalysisFilterContainer,
-  AnalysisNoContributionIcon,
   AnalysisPickableListContainer,
   AnalysisProposalListHeaderContainer,
-  AnalysisProposalListLoader,
-  AnalysisProposalListNoContributions,
-  AnalysisProposalListRowInformations,
-  AnalysisProposalListRowMeta,
+  AnalysisProposalListFiltersContainer,
+  AnalysisProposalListFiltersAction,
+  AnalysisProposalListFiltersList,
 } from '~ui/Analysis/common.style';
 import AddProposalsToStepsMutation from '~/mutations/AddProposalsToStepsMutation';
 import ApplyProposalStatusMutation from '~/mutations/ApplyProposalStatusMutation';
 import RemoveProposalsFromStepsMutation from '~/mutations/RemoveProposalsFromStepsMutation';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
-import type { StepFilling } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import ProjectAdminMergeModale from '~/components/Admin/Project/Modale/ProjectAdminMergeModale';
+import AnalysisNoProposal from '~/components/Analysis/AnalysisNoProposal/AnalysisNoProposal';
+import AnalysisProposalListLoader from '~/components/Analysis/AnalysisProposalListLoader/AnalysisProposalListLoader';
+import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
+import AnalysisFilterCategory from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
+import AnalysisFilterDistrict from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
+import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
-const MergeButtonStyle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  .flex-div {
-    display: flex;
-  }
-  .divider {
-    height: 20px;
-    margin-left: 20px;
-    border-right: 1px solid #ccc;
-  }
-  button,
-  button:hover {
-    border: none;
-    background-color: #fafafa;
-    padding: 0;
-  }
-`;
-
-const MergeBadgeStyle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  .badge-container {
-    color: rgb(112, 112, 112);
-    border: 1px solid rgb(112, 112, 112);
-    border-radius: 11.5px;
-    display: flex;
-    align-items: center;
-    padding: 0 5px 0 5px;
-    margin-right: 10px;
-    font-weight: 600;
-    font-size: 12px;
-  }
-
-  display: flex;
-`;
+const STATE_RESTRICTED = ['DRAFT', 'TRASHED'];
 
 type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
 |};
 
-const updateStepProposals = (
-  proposalsSelected: $ReadOnlyArray<ProposalsSelected>,
-  stepsChangedProposal: StepsChangedProposal,
+const assignStepProposals = async (
+  stepsAdded: Uuid[],
+  stepsRemoved: Uuid[],
+  selectedProposalIds: $ReadOnlyArray<Uuid>,
   stepSelected: ProposalsStepValues,
-  dispatch,
+  dispatch: any => void,
 ) => {
-  if (
-    stepsChangedProposal.stepsAdded.length === 0 &&
-    stepsChangedProposal.stepsRemoved.length === 0
-  ) {
-    return;
-  }
+  try {
+    dispatch({ type: 'START_LOADING' });
 
-  dispatch({ type: 'START_LOADING' });
-  const promises = [];
-  const proposalIds = proposalsSelected.map(({ id }) => id);
-
-  if (stepsChangedProposal.stepsAdded.length > 0) {
-    const stepIds = stepsChangedProposal.stepsAdded.map(({ id }) => id);
-
-    promises.push(
-      AddProposalsToStepsMutation.commit({
+    if (stepsAdded.length > 0) {
+      await AddProposalsToStepsMutation.commit({
         input: {
-          proposalIds,
-          stepIds,
+          proposalIds: selectedProposalIds,
+          stepIds: stepsAdded,
         },
         step: stepSelected,
-      }),
-    );
-  }
+      });
+    }
 
-  if (stepsChangedProposal.stepsRemoved.length > 0) {
-    const stepIds = stepsChangedProposal.stepsRemoved.map(({ id }) => id);
-
-    promises.push(
-      RemoveProposalsFromStepsMutation.commit({
+    if (stepsRemoved.length > 0) {
+      await RemoveProposalsFromStepsMutation.commit({
         input: {
-          proposalIds,
-          stepIds,
+          proposalIds: selectedProposalIds,
+          stepIds: stepsRemoved,
         },
         step: stepSelected,
-      }),
-    );
+      });
+    }
+
+    dispatch({ type: 'STOP_LOADING' });
+  } catch (e) {
+    FluxDispatcher.dispatch({
+      actionType: UPDATE_ALERT,
+      alert: {
+        type: TYPE_ALERT.ERROR,
+        content: 'moving.contributions.failed',
+      },
+    });
   }
-
-  return Promise.all(promises)
-    .then(() => {
-      dispatch({
-        type: 'CLEAR_STEPS_CHANGED_PROPOSAL',
-      });
-      dispatch({ type: 'STOP_LOADING' });
-    })
-    .catch(() => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'moving.contributions.failed',
-        },
-      });
-    });
 };
 
-const updateStatusProposals = (
-  proposalsSelected: $ReadOnlyArray<ProposalsSelected>,
-  statusId: Uuid,
+const assignStatus = async (
+  assigneeId: ?Uuid,
   stepSelected: ProposalsStepValues,
-  dispatch,
-  closeDropdown,
+  selectedProposalIds: $ReadOnlyArray<Uuid>,
+  closeDropdown: () => void,
+  dispatch: any => void,
 ) => {
-  dispatch({ type: 'START_LOADING' });
-  closeDropdown();
+  try {
+    closeDropdown();
+    dispatch({ type: 'START_LOADING' });
 
-  const proposalIds = proposalsSelected.map(({ id }) => id);
-  const shouldDeleteStatus = proposalsSelected.every(({ status }) => status === statusId);
-
-  return ApplyProposalStatusMutation.commit({
-    input: {
-      proposalIds,
-      statusId: shouldDeleteStatus ? null : statusId,
-    },
-    step: stepSelected,
-  })
-    .then(() => {
-      dispatch({ type: 'STOP_LOADING' });
-    })
-    .catch(() => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'status.update.failed',
-        },
-      });
+    await ApplyProposalStatusMutation.commit({
+      input: {
+        proposalIds: selectedProposalIds,
+        statusId: assigneeId,
+      },
+      step: stepSelected,
     });
-};
 
-const ProposalListLoader = () => (
-  <AnalysisProposalListLoader>
-    <Loader inline size={16} />
-    <FormattedMessage id="synthesis.common.loading" />
-  </AnalysisProposalListLoader>
-);
+    dispatch({ type: 'STOP_LOADING' });
+  } catch (e) {
+    FluxDispatcher.dispatch({
+      actionType: UPDATE_ALERT,
+      alert: {
+        type: TYPE_ALERT.ERROR,
+        content: 'status.update.failed',
+      },
+    });
+  }
+};
 
 const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
   const [isMergeModaleVisible, setIsMergeModaleVisible] = React.useState(false);
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useProjectAdminProposalsContext();
 
-  const {
-    categories,
-    districts,
-    steps,
-    stepStatuses,
-    proposalsSelected,
-    stepsFilling,
-    statusesFilling,
-  } = React.useMemo(
+  const { categories, districts, steps, stepStatuses, filtersOrdered } = React.useMemo(
     () =>
       getAllFormattedChoicesForProject(
         project,
         parameters.filters.step,
-        parameters.stepsChangedProposal,
         selectedRows,
+        parameters.filtersOrdered,
       ),
-    [project, parameters.filters.step, parameters.stepsChangedProposal, selectedRows],
+    [project, parameters.filters.step, selectedRows, parameters.filtersOrdered],
   );
   const intl = useIntl();
   const collectSteps = getFormattedCollectStepsForProject(project);
   const selectedStepId: ProposalsStepValues = parameters.filters.step;
   const selectedStep: ?StepFilter = steps.find(({ id }) => id === selectedStepId);
-  const selectedStepStatus = React.useMemo(
-    () => stepStatuses.find(s => s.id === parameters.filters.status),
-    [parameters.filters.status, stepStatuses],
-  );
-
-  const proposalIds = proposalsSelected.map(({ id }) => id);
+  const isRestricted = STATE_RESTRICTED.includes(parameters.filters.state);
 
   const selectedProposals = project.proposals?.edges
     ?.filter(Boolean)
@@ -237,91 +164,51 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
     .filter(Boolean)
     .filter(proposal => {
       const proposalId = proposal.id;
-      return proposalIds.includes(proposalId);
+      return selectedRows.includes(proposalId);
     });
 
+  /* # ACTION # */
+  const [selectionSteps, setSelectionSteps] = React.useState({
+    all: [],
+    removed: [],
+    added: [],
+    values: [],
+  });
+  const [selectionStatus, setSelectionStatus] = React.useState(null);
+
+  React.useEffect(() => {
+    setSelectionStatus(getCommonStatusIdWithinProposalIds(project, selectedRows));
+  }, [project, selectedRows]);
+
   const renderFilters = (
-    <React.Fragment>
+    <>
       {districts?.length > 0 && (
-        <AnalysisFilterContainer>
-          <Collapsable align="right" key="zone-filter">
-            <Collapsable.Button>
-              <FormattedMessage tagName="p" id="admin.fields.proposal.map.zone" />
-            </Collapsable.Button>
-            <Collapsable.Element
-              ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
-              <DropdownSelect
-                shouldOverflow
-                value={parameters.filters.district}
-                onChange={newValue => {
-                  dispatch({
-                    type: 'CHANGE_DISTRICT_FILTER',
-                    payload: ((newValue: any): ProposalsDistrictValues),
-                  });
-                }}
-                title={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
-                <DropdownSelect.Choice value="ALL">
-                  {intl.formatMessage({ id: 'global.select_districts' })}
-                </DropdownSelect.Choice>
-                {districts.map(district => (
-                  <DropdownSelect.Choice key={district.id} value={district.id}>
-                    {district.name}
-                  </DropdownSelect.Choice>
-                ))}
-              </DropdownSelect>
-            </Collapsable.Element>
-          </Collapsable>
-          <FilterTag
-            onClose={() => {
-              dispatch({ type: 'CLEAR_DISTRICT_FILTER' });
-            }}
-            icon={<i className="cap cap-marker-1" />}
-            show={parameters.filters.district !== 'ALL'}>
-            {districts.find(d => d.id === parameters.filters.district)?.name || null}
-          </FilterTag>
-        </AnalysisFilterContainer>
+        <AnalysisFilterDistrict
+          districts={districts}
+          value={parameters.filters.district}
+          onChange={newValue => {
+            dispatch({
+              type: 'CHANGE_DISTRICT_FILTER',
+              payload: ((newValue: any): ProposalsDistrictValues),
+            });
+          }}
+        />
       )}
 
       {categories?.length > 0 && (
-        <AnalysisFilterContainer>
-          <Collapsable align="right" key="category-filter">
-            <Collapsable.Button>
-              <FormattedMessage tagName="p" id="admin.fields.proposal.category" />
-            </Collapsable.Button>
-            <Collapsable.Element
-              ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
-              <DropdownSelect
-                value={parameters.filters.category}
-                onChange={newValue => {
-                  dispatch({
-                    type: 'CHANGE_CATEGORY_FILTER',
-                    payload: ((newValue: any): ProposalsCategoryValues),
-                  });
-                }}
-                title={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
-                <DropdownSelect.Choice value="ALL">
-                  {intl.formatMessage({ id: 'global.select_categories' })}
-                </DropdownSelect.Choice>
-                {categories.map(cat => (
-                  <DropdownSelect.Choice key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </DropdownSelect.Choice>
-                ))}
-              </DropdownSelect>
-            </Collapsable.Element>
-          </Collapsable>
-          <FilterTag
-            onClose={() => {
-              dispatch({ type: 'CLEAR_CATEGORY_FILTER' });
-            }}
-            icon={<i className="cap cap-tag-1" />}
-            show={parameters.filters.category !== 'ALL'}>
-            {categories.find(c => c.id === parameters.filters.category)?.name || null}
-          </FilterTag>
-        </AnalysisFilterContainer>
+        <AnalysisFilterCategory
+          categories={categories}
+          value={parameters.filters.category}
+          onChange={newValue => {
+            dispatch({
+              type: 'CHANGE_CATEGORY_FILTER',
+              payload: ((newValue: any): ProposalsCategoryValues),
+            });
+          }}
+        />
       )}
 
-      {stepStatuses?.length > 0 && (
+      {stepStatuses?.length > 0 && !isRestricted && (
         <AnalysisFilterContainer>
           <Collapsable align="right" key="status-filter">
             <Collapsable.Button>
@@ -337,6 +224,12 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
                   });
                 }}
                 title={intl.formatMessage({ id: 'filter-by' })}>
+                <DropdownSelect.Choice value="ALL">
+                  {intl.formatMessage({ id: 'global.select_statuses' })}
+                </DropdownSelect.Choice>
+                <DropdownSelect.Choice value="NONE">
+                  {intl.formatMessage({ id: 'global.select_propositions-without-status' })}
+                </DropdownSelect.Choice>
                 {stepStatuses.map(stepStatus => (
                   <DropdownSelect.Choice key={stepStatus.id} value={stepStatus.id}>
                     {stepStatus.name}
@@ -345,84 +238,50 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
               </DropdownSelect>
             </Collapsable.Element>
           </Collapsable>
-          <FilterTag
-            onClose={() => {
-              dispatch({ type: 'CLEAR_STATUS_FILTER' });
-            }}
-            bgColor={selectedStepStatus?.color || undefined}
-            show={parameters.filters.status !== null}>
-            {selectedStepStatus?.name || null}
-          </FilterTag>
         </AnalysisFilterContainer>
       )}
 
-      <AnalysisFilterContainer>
-        <Collapsable align="right" key="step-filter">
-          <Collapsable.Button>
-            <FormattedMessage tagName="p" id="admin.label.step" />
-          </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
-            <DropdownSelect
-              value={parameters.filters.step}
-              onChange={newValue => {
-                dispatch({ type: 'CHANGE_STEP_FILTER', payload: ((newValue: any): SortValues) });
-              }}
-              title={intl.formatMessage({ id: 'filter-by' })}>
-              {steps.map(s => (
-                <DropdownSelect.Choice key={s.id} value={s.id}>
-                  {s.title}
-                </DropdownSelect.Choice>
-              ))}
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-        <FilterTag canClose={false} show>
-          {steps.find(s => s.id === parameters.filters.step)?.title || null}
-        </FilterTag>
-      </AnalysisFilterContainer>
-      <AnalysisFilterContainer>
-        <Collapsable align="right" key="sort-filter">
-          <Collapsable.Button>
-            <FormattedMessage tagName="p" id="argument.sort.label" />
-          </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'sort-by' })}>
-            <DropdownSelect
-              value={parameters.sort}
-              onChange={newValue => {
-                dispatch({ type: 'CHANGE_SORT', payload: ((newValue: any): SortValues) });
-              }}
-              title={intl.formatMessage({ id: 'sort-by' })}>
-              <DropdownSelect.Choice value="newest">
-                {intl.formatMessage({ id: 'global.filter_f_last' })}
-              </DropdownSelect.Choice>
-              <DropdownSelect.Choice value="oldest">
-                {intl.formatMessage({ id: 'global.filter_f_old' })}
-              </DropdownSelect.Choice>
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-      </AnalysisFilterContainer>
-    </React.Fragment>
+      {!isRestricted && (
+        <AnalysisFilterContainer>
+          <Collapsable align="right" key="step-filter">
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="admin.label.step" />
+            </Collapsable.Button>
+            <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
+              <DropdownSelect
+                value={parameters.filters.step}
+                onChange={newValue => {
+                  dispatch({ type: 'CHANGE_STEP_FILTER', payload: ((newValue: any): SortValues) });
+                }}
+                title={intl.formatMessage({ id: 'filter-by' })}>
+                {steps.map(s => (
+                  <DropdownSelect.Choice key={s.id} value={s.id}>
+                    {s.title}
+                  </DropdownSelect.Choice>
+                ))}
+              </DropdownSelect>
+            </Collapsable.Element>
+          </Collapsable>
+        </AnalysisFilterContainer>
+      )}
+
+      <AnalysisFilterSort
+        value={parameters.sort}
+        onChange={newValue => {
+          dispatch({ type: 'CHANGE_SORT', payload: ((newValue: any): SortValues) });
+        }}
+      />
+    </>
   );
 
-  const renderFiltersSelectedProposal = (
+  const renderActions = (
     <React.Fragment>
-      {selectedRows.length > 1 && (
+      {selectedRows.length > 1 && parameters.filters.state === 'PUBLISHED' && (
         <>
-          <MergeButtonStyle>
-            <div className="flex-div">
-              <AnalysisFilterContainer>
-                <Button
-                  id="merge-button"
-                  onClick={() => {
-                    setIsMergeModaleVisible(true);
-                  }}>
-                  <FormattedMessage tagName="p" id="proposal.add_fusion" />
-                </Button>
-              </AnalysisFilterContainer>
-              <div className="divider" />
-            </div>
-          </MergeButtonStyle>
+          <S.MergeButton onClick={() => setIsMergeModaleVisible(true)} id="merge-button">
+            <FormattedMessage id="proposal.add_fusion" />
+          </S.MergeButton>
+          <S.Divider />
         </>
       )}
 
@@ -430,9 +289,10 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
         <Collapsable
           align="right"
           onClose={() =>
-            updateStepProposals(
-              proposalsSelected,
-              parameters.stepsChangedProposal,
+            assignStepProposals(
+              selectionSteps.added,
+              selectionSteps.removed,
+              selectedRows,
               selectedStepId,
               dispatch,
             )
@@ -444,28 +304,19 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
             ariaLabel={intl.formatMessage({ id: 'synthesis.edition.action.publish.field.parent' })}>
             <DropdownSelect
               shouldOverflow
+              isMultiSelect
+              mode="add-remove"
               title={intl.formatMessage({ id: 'move.in.step' })}
-              onChange={(stepFilling: StepFilling) => {
-                dispatch(
-                  (({
-                    type:
-                      stepFilling.filling === FILLING.FULL
-                        ? 'CHANGE_STEPS_REMOVED_FROM_PROPOSAL'
-                        : 'CHANGE_STEPS_ADDED_TO_PROPOSAL',
-                    payload: {
-                      stepId: stepFilling.id,
-                      countSelectedProposal: selectedRows.length,
-                    },
-                  }: any): Action),
-                );
-              }}>
-              {stepsFilling.map(step => (
+              initialValue={getCommonStepIdWithinProposalIds(project, selectedRows)}
+              value={selectionSteps}
+              onChange={setSelectionSteps}>
+              {steps.map(step => (
                 <S.ProposalListDropdownChoice
                   key={step.id}
-                  value={{ id: step.id, filling: step.filling }}
+                  value={step.id}
+                  isIndeterminate={isStepIndeterminate(project, selectedRows, step.id)}
                   disabled={collectSteps.includes(step.id)}>
-                  {step.icon && <Icon name={step.icon} size={12} color={colors.black} />}
-                  <span>{step.title}</span>
+                  {step.title}
                 </S.ProposalListDropdownChoice>
               ))}
             </DropdownSelect>
@@ -483,52 +334,44 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
               <Collapsable.Element
                 ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.status' })}>
                 <DropdownSelect
-                  onChange={statusFilling =>
-                    updateStatusProposals(
-                      proposalsSelected,
-                      ((statusFilling: any): Uuid),
-                      selectedStepId,
-                      dispatch,
-                      closeDropdown,
-                    )
+                  value={selectionStatus}
+                  onChange={newValue =>
+                    assignStatus(newValue, selectedStepId, selectedRows, closeDropdown, dispatch)
                   }
                   title={intl.formatMessage({ id: 'change.status.to' })}>
-                  {statusesFilling?.length > 0 ? (
-                    statusesFilling.map(status => (
-                      <S.ProposalListDropdownChoice key={status.id} value={status.id}>
-                        {status.icon && <Icon name={status.icon} size={12} color={colors.black} />}
-                        <span>{status.name}</span>
-                      </S.ProposalListDropdownChoice>
-                    ))
-                  ) : (
-                    <S.EmptyStatusesFilling>
-                      <Icon name={ICON_NAME.warning} size={15} />
-                      <div>
-                        <FormattedMessage tagName="p" id="no.filter.available" />
-                        <FormattedMessage
-                          tagName="span"
-                          id="help.add.filters"
-                          values={{
-                            link_to_step: <a href={selectedStep?.url}>{selectedStep?.title}</a>,
-                          }}
-                        />
-                      </div>
-                    </S.EmptyStatusesFilling>
+                  {stepStatuses.length === 0 && (
+                    <DropdownSelect.Message>
+                      <S.EmptyStatuses>
+                        <Icon name={ICON_NAME.warning} size={15} />
+                        <div>
+                          <FormattedMessage tagName="p" id="no.filter.available" />
+                          <FormattedMessage
+                            tagName="span"
+                            id="help.add.filters"
+                            values={{
+                              link_to_step: (
+                                <a href={project.adminAlphaUrl}>{selectedStep?.title}</a>
+                              ),
+                            }}
+                          />
+                        </div>
+                      </S.EmptyStatuses>
+                    </DropdownSelect.Message>
                   )}
+                  {stepStatuses.map(status => (
+                    <DropdownSelect.Choice
+                      key={status.id}
+                      value={status.id}
+                      isIndeterminate={isStatusIndeterminate(project, selectedRows, status.id)}>
+                      {status.name}
+                    </DropdownSelect.Choice>
+                  ))}
                 </DropdownSelect>
               </Collapsable.Element>
             </>
           )}
         </Collapsable>
       </AnalysisFilterContainer>
-      <ProjectAdminMergeModale
-        proposalsSelected={selectedProposals}
-        onClose={() => {
-          setIsMergeModaleVisible(false);
-        }}
-        show={isMergeModaleVisible}
-        dispatch={dispatch}
-      />
     </React.Fragment>
   );
 
@@ -543,14 +386,36 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
               itemCount: selectedRows.length,
             }}
           />
-          {renderFiltersSelectedProposal}
+          {renderActions}
+
+          <ProjectAdminMergeModale
+            proposalsSelected={selectedProposals}
+            onClose={() => setIsMergeModaleVisible(false)}
+            show={isMergeModaleVisible}
+            dispatch={dispatch}
+          />
         </React.Fragment>
       ) : (
         <React.Fragment>
           <p>
             {rowsCount} <FormattedMessage id="global.proposals" />
           </p>
-          {renderFilters}
+          <AnalysisProposalListFiltersContainer>
+            <AnalysisProposalListFiltersAction>{renderFilters}</AnalysisProposalListFiltersAction>
+            {filtersOrdered.length > 0 && selectedRows.length === 0 && (
+              <AnalysisProposalListFiltersList>
+                {filtersOrdered.map(({ id, name, action, icon, color }) => (
+                  <FilterTag
+                    key={id}
+                    onClose={action ? () => dispatch((({ type: action }: any): Action)) : null}
+                    icon={icon ? <Icon name={ICON_NAME[icon]} size="1rem" color="#fff" /> : null}
+                    bgColor={color}>
+                    {name}
+                  </FilterTag>
+                ))}
+              </AnalysisProposalListFiltersList>
+            )}
+          </AnalysisProposalListFiltersContainer>
         </React.Fragment>
       )}
     </React.Fragment>
@@ -561,6 +426,17 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
   const { parameters, dispatch, status } = useProjectAdminProposalsContext();
   const intl = useIntl();
   const hasProposals = project.proposals?.totalCount > 0;
+  const hasSelectedFilters = getDifferenceFilters(parameters.filters);
+  const hasNoResultWithFilter = !hasProposals && hasSelectedFilters;
+  const stepDisplay = React.useMemo(() => getStepDisplay(project, parameters.filters.step), [
+    project,
+    parameters.filters.step,
+  ]);
+
+  const isInteractive =
+    parameters.filters.state !== 'ALL' &&
+    !STATE_RESTRICTED.includes(parameters.filters.state) &&
+    !hasNoResultWithFilter;
 
   return (
     <PickableList.Provider>
@@ -575,16 +451,28 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
               });
             }}>
             <InlineSelect.Choice value="ALL">
-              <FormattedMessage id="global-all" />
+              <FormattedMessage
+                id="filter.count.status.all"
+                values={{ num: project.proposalsAll?.totalCount }}
+              />
             </InlineSelect.Choice>
             <InlineSelect.Choice value="PUBLISHED">
-              <FormattedMessage id="submited_plural" />
+              <FormattedMessage
+                id="filter.count.status.published"
+                values={{ num: project.proposalsPublished?.totalCount }}
+              />
             </InlineSelect.Choice>
             <InlineSelect.Choice value="DRAFT">
-              <FormattedMessage id="proposal.state.draft" />
+              <FormattedMessage
+                id="filter.count.status.draft"
+                values={{ num: project.proposalsDraft?.totalCount }}
+              />
             </InlineSelect.Choice>
             <InlineSelect.Choice value="TRASHED">
-              <FormattedMessage id="project_download.label.trashed" />
+              <FormattedMessage
+                id="filter.count.status.trash"
+                values={{ num: project.proposalsTrashed?.totalCount }}
+              />
             </InlineSelect.Choice>
           </InlineSelect>
           <ClearableInput
@@ -616,8 +504,10 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
             relay.loadMore(PROJECT_ADMIN_PROPOSAL_PAGINATION);
           }}
           hasMore={project.proposals?.pageInfo.hasNextPage}
-          loader={<ProposalListLoader key="loader" />}>
-          <AnalysisProposalListHeaderContainer>
+          loader={<AnalysisProposalListLoader key="loader" />}>
+          <AnalysisProposalListHeaderContainer
+            isSelectable={isInteractive}
+            disabled={!hasProposals && !hasSelectedFilters}>
             <ProposalListHeader project={project} />
           </AnalysisProposalListHeaderContainer>
 
@@ -628,64 +518,41 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                 .map(edge => edge.node)
                 .filter(Boolean)
                 .map(proposal => (
-                  <S.ProposalListRow key={proposal.id} rowId={proposal.id}>
-                    <MergeBadgeStyle>
-                      {proposal.hasBeenMerged ? (
-                        <div className="badge-container">
-                          <FormattedMessage id="badge.merged" />
-                        </div>
-                      ) : null}
+                  <AnalysisProposal
+                    isAdminUrl
+                    hasRegroupTag
+                    proposal={proposal}
+                    key={proposal.id}
+                    rowId={proposal.id}
+                    dispatch={dispatch}
+                    hasStateTag={parameters.filters.state === 'ALL'}>
+                    <S.ProposalListRowInformationsStepState>
+                      {stepDisplay && (
+                        <S.ProposalVotableStep>{stepDisplay.title}</S.ProposalVotableStep>
+                      )}
 
-                      <h2>
-                        <a href={proposal.adminUrl}>{proposal.title}</a>
-                      </h2>
-                    </MergeBadgeStyle>
-                    <AnalysisProposalListRowInformations>
-                      <p>
-                        #{proposal.reference} • {proposal.author.username}
-                        {proposal.publishedAt && (
-                          <React.Fragment>
-                            {' '}
-                            • <FormattedMessage id="submited_on" />{' '}
-                            <FormattedDate
-                              value={moment(proposal.publishedAt)}
-                              day="numeric"
-                              month="long"
-                              year="numeric"
-                            />
-                          </React.Fragment>
-                        )}
-                      </p>
-                      <S.ProposalListRowInformationsStepState>
-                        {proposal.form?.step && (
-                          <S.ProposalVotableStepTitle>
-                            {proposal.form.step.title}
-                          </S.ProposalVotableStepTitle>
-                        )}
-                        {proposal.status && (
-                          <S.Label bsStyle={proposal.status.color}>{proposal.status.name}</S.Label>
-                        )}
-                      </S.ProposalListRowInformationsStepState>
-                    </AnalysisProposalListRowInformations>
-                    <AnalysisProposalListRowMeta>
-                      {proposal.district && (
-                        <Tag size="10px" icon="cap cap-marker-1 ">
-                          {proposal.district.name}
-                        </Tag>
-                      )}
-                      {proposal.category && (
-                        <Tag size="10px" icon="cap cap-tag-1 ">
-                          {proposal.category.name}
-                        </Tag>
-                      )}
-                    </AnalysisProposalListRowMeta>
-                  </S.ProposalListRow>
+                      <S.Label
+                        bsStyle={proposal.status?.color || 'default'}
+                        onClick={() =>
+                          dispatch({
+                            type: 'CHANGE_STATUS_FILTER',
+                            payload: ((proposal.status?.id: any): ProposalsStatusValues),
+                          })
+                        }>
+                        {proposal.status?.name ||
+                          intl.formatMessage({ id: 'admin.fields.proposal.no_status' })}
+                      </S.Label>
+                    </S.ProposalListRowInformationsStepState>
+                  </AnalysisProposal>
                 ))
             ) : (
-              <AnalysisProposalListNoContributions>
-                <AnalysisNoContributionIcon />
-                <FormattedMessage id="global.no_proposals" tagName="p" />
-              </AnalysisProposalListNoContributions>
+              <AnalysisNoProposal
+                state={hasSelectedFilters ? 'CONTRIBUTION' : parameters.filters.state}>
+                <FormattedMessage
+                  id={getWordingEmpty(hasSelectedFilters, parameters.filters)}
+                  tagName="p"
+                />
+              </AnalysisNoProposal>
             )}
           </PickableList.Body>
         </PickableList>
@@ -715,11 +582,11 @@ export default createPaginationContainer(
           term: { type: "String", defaultValue: null }
         ) {
         id
+        adminAlphaUrl
         steps {
           __typename
           id
           title
-          url
           ... on ProposalStep {
             statuses {
               id
@@ -766,6 +633,8 @@ export default createPaginationContainer(
               }
               adminUrl
               publishedAt
+              draft
+              trashed
               district {
                 id
                 name
@@ -791,11 +660,25 @@ export default createPaginationContainer(
               selections {
                 step {
                   id
+                  title
                 }
               }
+              ...AnalysisProposal_proposal
             }
             cursor
           }
+        }
+        proposalsAll: proposals(state: ALL) {
+          totalCount
+        }
+        proposalsPublished: proposals(state: PUBLISHED) {
+          totalCount
+        }
+        proposalsDraft: proposals(state: DRAFT) {
+          totalCount
+        }
+        proposalsTrashed: proposals(state: TRASHED) {
+          totalCount
         }
       }
     `,

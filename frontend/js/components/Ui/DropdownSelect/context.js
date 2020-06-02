@@ -26,6 +26,7 @@ export type Context = {|
   +initialValue?: DropdownValueType,
   +setInitialValue: (value: ?$ReadOnlyArray<string>) => void,
   +onChange?: DropdownOnChangeType,
+  +disabled?: boolean,
 |};
 
 export const DropdownSelectContext = React.createContext<Context>({

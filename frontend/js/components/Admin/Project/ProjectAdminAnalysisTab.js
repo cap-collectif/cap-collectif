@@ -32,6 +32,11 @@ const createQueryVariables = (
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
   term: parameters.filters.term,
+  analysts: parameters.filters.analysts.length > 0 ? parameters.filters.analysts : null,
+  supervisor: parameters.filters.supervisor,
+  decisionMaker: parameters.filters.decisionMaker,
+  progressStatus:
+    parameters.filters.progressState === 'ALL' ? null : parameters.filters.progressState,
 });
 
 const ProjectAdminAnalysisTab = ({ projectId }: Props) => {
@@ -49,8 +54,12 @@ const ProjectAdminAnalysisTab = ({ projectId }: Props) => {
           $district: ID
           $status: ID
           $term: String
+          $analysts: [ID!]
+          $supervisor: ID
+          $decisionMaker: ID
+          $progressStatus: ProposalProgressState
         ) {
-          defaultUsers: users(first: 4) {
+          defaultUsers: users(first: 20) {
             edges {
               node {
                 id
@@ -69,6 +78,10 @@ const ProjectAdminAnalysisTab = ({ projectId }: Props) => {
                 district: $district
                 status: $status
                 term: $term
+                analysts: $analysts
+                supervisor: $supervisor
+                decisionMaker: $decisionMaker
+                progressStatus: $progressStatus
               )
           }
         }

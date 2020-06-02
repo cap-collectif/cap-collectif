@@ -5325,6 +5325,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The visibility of the project."""
   visibility: ProjectVisibility!
+  adminAlphaUrl: URI!
 
   """State of activation of Opinion subscription."""
   opinionCanBeFollowed: Boolean!
