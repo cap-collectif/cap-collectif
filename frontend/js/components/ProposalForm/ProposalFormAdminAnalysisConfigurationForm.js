@@ -68,7 +68,9 @@ const onSubmit = (
     proposalFormId: proposalForm.id,
     analysisStepId: values.analysisStep,
     evaluationFormId: values.evaluationForm,
-    effectiveDate: !effectiveDateEnabled ? null : values.effectiveDate,
+    effectiveDate: !effectiveDateEnabled
+      ? null
+      : values.effectiveDate.format('YYYY-MM-DD HH:mm:ss'),
     moveToSelectionStepId: values.moveToSelectionStep,
     unfavourableStatuses: values.unfavourableStatuses?.map(status => {
       return status.value;
