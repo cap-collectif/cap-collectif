@@ -5,8 +5,10 @@ namespace Capco\AppBundle\Behat;
 use Behat\Mink\Element\DocumentElement;
 use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
 use Capco\AppBundle\Behat\Traits\LocaleTrait;
+use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Elastica\Snapshot;
+use http\Exception\RuntimeException;
 use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
 use Capco\AppBundle\Utils\Text;
@@ -474,10 +476,14 @@ class ApplicationContext extends UserContext
      */
     public function defaultLocaleIsSetTo(string $locale): void
     {
-        $localeParam = $this->getService(SiteParameterRepository::class)->findOneByKeyname(
-            'global.locale'
-        );
-        $localeParam->setValue($locale);
+        $newDefaultLocale = $this->getEntityManager()->getRepository(Locale::class)->findOneByCode($locale);
+        if (is_null($newDefaultLocale) || !$newDefaultLocale->isPublished()) {
+            throw new RuntimeException("cannot set $locale as default locale");
+        }
+        $oldDefaultLocale = $this->getEntityManager()->getRepository(Locale::class)->findDefaultLocale();
+        $oldDefaultLocale->unsetDefault();
+        $newDefaultLocale->setDefault();
+
         $this->getEntityManager()->flush();
     }
 

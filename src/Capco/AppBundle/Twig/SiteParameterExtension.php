@@ -36,7 +36,7 @@ class SiteParameterExtension extends AbstractExtension
     public function getSiteParameterValue(string $key)
     {
         $request = $this->requestStack->getCurrentRequest();
-        $defaultLocale = $this->resolver->getValue('global.locale');
+        $defaultLocale = $this->resolver->getDefaultLocale();
         $locale = $request ? $request->getLocale() : $defaultLocale;
         $cachedItem = $this->cache->getItem(self::CACHE_KEY . $key . $locale);
 

@@ -223,12 +223,6 @@ Capco\AppBundle\Entity\SiteParameter:
     category: pages.shield
     position: 2
     type: 1
-  SiteParameterLocale:
-    keyname: global.locale
-    category: settings.global
-    value: fr-FR
-    position: 1
-    type: 9
   SiteParameterTimezone:
     keyname: global.timezone
     category: settings.global

@@ -56,7 +56,7 @@ class SiteParameterAdmin extends AbstractAdmin
     {
         $formMapper->add('isEnabled', null, [
             'label' => 'global.published',
-            'required' => false
+            'required' => false,
         ]);
 
         /** @var SiteParameter $subject */
@@ -73,27 +73,10 @@ class SiteParameterAdmin extends AbstractAdmin
                         'Petites marges (50px)' => 50,
                         'Marges par défaut (100px)' => 100,
                         'Grandes marges (150px)' => 150,
-                        'Marges importantes (200px)' => 200
+                        'Marges importantes (200px)' => 200,
                     ],
 
-                    'help' => $this->getHelpText($subject->getHelpText())
-                ]);
-
-                return;
-
-                break;
-            case 'global.locale':
-                $formMapper->add('value', ChoiceType::class, [
-                    'label' => 'global.value',
-                    'required' => false,
-                    'choices' => [
-                        '🇫🇷 French (France)' => 'fr-FR',
-                        '🇬🇧 English (UK)' => 'en-GB',
-                        '🇩🇪 German (Germany)' => 'de-DE',
-                        '🇳🇱 Dutch (Netherlands)' => 'nl-NL',
-                        '🇪🇸 Spanish (Spain)' => 'es-ES'
-                    ],
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ]);
 
                 return;
@@ -104,7 +87,7 @@ class SiteParameterAdmin extends AbstractAdmin
                     'label' => 'global.timezone',
                     'required' => false,
                     'choices' => $this->getTimezonesList(),
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ]);
 
                 return;
@@ -120,7 +103,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 $options = [
                     'label' => 'global.value',
                     'required' => false,
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ];
                 if ($subject->isSocialNetworkDescription()) {
                     $options['help'] = 'admin.help.metadescription';
@@ -136,7 +119,7 @@ class SiteParameterAdmin extends AbstractAdmin
                     'label' => 'global.value',
                     'required' => false,
                     'config_name' => 'admin_editor',
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ]);
 
                 break;
@@ -144,7 +127,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 $formMapper->add('value', IntegerType::class, [
                     'label' => 'global.value',
                     'required' => false,
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ]);
 
                 break;
@@ -155,8 +138,8 @@ class SiteParameterAdmin extends AbstractAdmin
                     'help' => $this->getHelpText($subject->getHelpText()),
                     'attr' => [
                         'rows' => 10,
-                        'placeholder' => '<script type="text/javascript"> </script>'
-                    ]
+                        'placeholder' => '<script type="text/javascript"> </script>',
+                    ],
                 ]);
 
                 break;
@@ -165,7 +148,7 @@ class SiteParameterAdmin extends AbstractAdmin
                     'label' => 'global.value',
                     'required' => false,
                     'attr' => ['placeholder' => 'hello@exemple.com'],
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ]);
 
                 break;
@@ -174,7 +157,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 $formMapper->add('value', UrlType::class, [
                     'label' => 'global.value',
                     'required' => false,
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ]);
 
                 break;
@@ -182,7 +165,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 $formMapper->add('value', null, [
                     'label' => 'global.value',
                     'required' => false,
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ]);
 
                 break;
@@ -192,7 +175,7 @@ class SiteParameterAdmin extends AbstractAdmin
                     'required' => false,
                     'translation_domain' => 'CapcoAppBundle',
                     'choices' => ['global.enabled' => '1', 'global.disabled' => '0'],
-                    'help' => $this->getHelpText($subject->getHelpText())
+                    'help' => $this->getHelpText($subject->getHelpText()),
                 ]);
 
                 break;

@@ -167,7 +167,7 @@ class ProposalNotifier extends BaseNotifier
                 'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
                 'date' => $date,
                 'timezone' => $this->siteParams->getValue('global.timezone'),
-                'locale' => $this->siteParams->getValue('global.locale') //todo replace by author locale
+                'locale' => $this->siteParams->getDefaultLocale() //todo replace by author locale
             ],
             $proposal->getAuthor()
         );

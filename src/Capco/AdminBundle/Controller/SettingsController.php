@@ -10,7 +10,6 @@ use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\SiteColorRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
-use Capco\AppBundle\SiteParameter\SiteParameterFilter;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -23,16 +22,13 @@ class SettingsController extends Controller
     protected const EXCLUDED_SETTINGS_KEYNAME = ['events.map.country'];
     private $SSOConfigurationRepository;
     private $menuItemRepository;
-    private $siteParameterFilter;
 
     public function __construct(
         AbstractSSOConfigurationRepository $SSOConfigurationRepository,
-        MenuItemRepository $menuItemRepository,
-        SiteParameterFilter $siteParameterFilter
+        MenuItemRepository $menuItemRepository
     ) {
         $this->SSOConfigurationRepository = $SSOConfigurationRepository;
         $this->menuItemRepository = $menuItemRepository;
-        $this->siteParameterFilter = $siteParameterFilter;
     }
 
     /**
@@ -45,7 +41,7 @@ class SettingsController extends Controller
         $adminPool = $this->get('sonata.admin.pool');
 
         return [
-            'admin_pool' => $adminPool
+            'admin_pool' => $adminPool,
         ];
     }
 
@@ -59,7 +55,7 @@ class SettingsController extends Controller
         $adminPool = $this->get('sonata.admin.pool');
 
         return [
-            'admin_pool' => $adminPool
+            'admin_pool' => $adminPool,
         ];
     }
 
@@ -80,13 +76,13 @@ class SettingsController extends Controller
         $parameters = $this->getFeaturedParameters($category);
         $images = $this->get(SiteImageRepository::class)->findBy(
             [
-                'category' => $category
+                'category' => $category,
             ],
             ['position' => 'ASC']
         );
         $colors = $this->get(SiteColorRepository::class)->findBy(
             [
-                'category' => $category
+                'category' => $category,
             ],
             ['position' => 'ASC']
         );
@@ -101,7 +97,7 @@ class SettingsController extends Controller
             'colors' => $colors,
             'images' => $images,
             'toggles' => $toggles,
-            'current_group_label' => $group
+            'current_group_label' => $group,
         ];
     }
 
@@ -171,7 +167,7 @@ class SettingsController extends Controller
 
         return $this->redirect(
             $this->generateUrl('capco_admin_settings', [
-                'category' => $category ?? 'settings.modules'
+                'category' => $category ?? 'settings.modules',
             ])
         );
     }
@@ -180,7 +176,7 @@ class SettingsController extends Controller
     {
         $parameters = $this->get(SiteParameterRepository::class)->findBy(
             [
-                'category' => $category
+                'category' => $category,
             ],
             ['position' => 'ASC']
         );
@@ -189,13 +185,6 @@ class SettingsController extends Controller
             return !\in_array($parameter->getKeyname(), self::EXCLUDED_SETTINGS_KEYNAME, true);
         });
 
-        $featuredParameters = [];
-        foreach ($parameters as $parameter) {
-            if ($this->siteParameterFilter->isSiteParameterFeatured($parameter)) {
-                $featuredParameters[] = $parameter;
-            }
-        }
-
-        return $featuredParameters;
+        return $parameters;
     }
 }

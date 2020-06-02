@@ -15,12 +15,34 @@ class TranslatableAdminExtension extends Base
     protected $siteParamRepository;
     protected $localeRepository;
 
-    public function __construct(TranslatableChecker $translatableChecker, Manager $toggleManager, SiteParameterRepository $siteParamRepository, LocaleRepository $localeRepository)
-    {
+    public function __construct(
+        TranslatableChecker $translatableChecker,
+        Manager $toggleManager,
+        SiteParameterRepository $siteParamRepository,
+        LocaleRepository $localeRepository
+    ) {
         $this->translatableChecker = $translatableChecker;
         $this->toggleManager = $toggleManager;
         $this->siteParamRepository = $siteParamRepository;
         $this->localeRepository = $localeRepository;
+    }
+
+    public function getEnabledTranslationLocales(): array
+    {
+        $locales = $this->toggleManager->isActive('unstable__multilangue')
+            ? $this->localeRepository->findEnabledLocales()
+            : [$this->localeRepository->findDefaultLocale()];
+
+        $localesAsArray = [];
+        foreach ($locales as $locale) {
+            $localesAsArray[] = [
+                'id' => $locale->getId(),
+                'code' => $locale->getCode(),
+                'traductionKey' => $locale->getTraductionKey(),
+            ];
+        }
+
+        return $localesAsArray;
     }
 
     /**
@@ -36,30 +58,10 @@ class TranslatableAdminExtension extends Base
      */
     protected function getDefaultTranslationLocale(AdminInterface $admin): string
     {
-        if ($this->toggleManager->isActive('unstable__multilangue')) {
-            if ($admin->hasRequest() && $admin->getRequest()->getLocale()) {
-                return $admin->getRequest()->getLocale();
-            }
-            return $this->localeRepository->getDefaultCode();
+        if ($admin->hasRequest() && $admin->getRequest()->getLocale()) {
+            return $admin->getRequest()->getLocale();
         }
 
-        return $this->siteParamRepository->findOneByKeyname('global.locale')->getValue();
-    }
-
-    public function getEnabledTranslationLocales(): array {
-        $locales = ($this->toggleManager->isActive('unstable__multilangue')) ?
-            $this->localeRepository->findEnabledLocales() :
-            [$this->localeRepository->findDefaultLocale()];
-
-        $localesAsArray = [];
-        foreach ($locales as $locale) {
-            $localesAsArray[] = [
-                'id' => $locale->getId(),
-                'code' => $locale->getCode(),
-                'traductionKey' => $locale->getTraductionKey()
-            ];
-        }
-
-        return $localesAsArray;
+        return $this->localeRepository->getDefaultCode();
     }
 }

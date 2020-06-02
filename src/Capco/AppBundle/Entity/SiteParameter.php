@@ -42,12 +42,11 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'event.customcode',
         'registration.customcode',
         'homepage.customcode',
-        'global.locale',
         'global.timezone',
         'global.site.embed_js',
         'admin.mail.notifications.send_address',
         'events.map.country',
-        'redirectionio.project.id'
+        'redirectionio.project.id',
     ];
 
     const TYPE_SIMPLE_TEXT = 0;
@@ -71,7 +70,7 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'url' => self::TYPE_URL,
         'tel' => self::TYPE_TEL_NB,
         'boolean' => self::TYPE_BOOLEAN,
-        'select' => self::TYPE_SELECT
+        'select' => self::TYPE_SELECT,
     ];
 
     /**

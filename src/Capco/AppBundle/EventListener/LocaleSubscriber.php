@@ -54,8 +54,6 @@ class LocaleSubscriber implements EventSubscriberInterface
 
     private function getValidLocale(?string $inputLocale): string
     {
-        return $this->toggleManager->isActive('unstable__multilangue')
-            ? $this->entityManager->getRepository(Locale::class)->getValidCode($inputLocale)
-            : $this->siteParameters->getValue('global.locale');
+        return $this->entityManager->getRepository(Locale::class)->getValidCode($inputLocale);
     }
 }

@@ -74,7 +74,7 @@ class ParametersExtension extends AbstractExtension
     public function getSiteParameters(): array
     {
         $request = $this->requestStack->getCurrentRequest();
-        $defaultLocale = $this->siteParameterResolver->getValue('global.locale');
+        $defaultLocale = $this->siteParameterResolver->getDefaultLocale();
         $locale = $request ? $request->getLocale() : $defaultLocale;
 
         $cachedItem = $this->cache->getItem(self::CACHE_KEY . $locale);

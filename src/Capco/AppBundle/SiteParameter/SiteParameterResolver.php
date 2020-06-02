@@ -15,8 +15,11 @@ class SiteParameterResolver
     protected $entityManager;
     protected $requestStack;
 
-    public function __construct(Manager $toggleManager, EntityManagerInterface $entityManager, RequestStack $requestStack)
-    {
+    public function __construct(
+        Manager $toggleManager,
+        EntityManagerInterface $entityManager,
+        RequestStack $requestStack
+    ) {
         $this->toggleManager = $toggleManager;
         $this->entityManager = $entityManager;
         $this->requestStack = $requestStack;
@@ -24,21 +27,17 @@ class SiteParameterResolver
 
     public function getValue(string $key, ?string $locale = null, ?string $defaultValue = null)
     {
-
-        if ('global.locale' === $key && $this->toggleManager->isActive('unstable__multilangue')) {
-            return $this->getDefaultLocale();
+        if (null === $locale && !$this->toggleManager->isActive('unstable__multilangue')) {
+            $locale = $this->getDefaultLocale();
         }
 
-        if (is_null($locale) && !$this->toggleManager->isActive('unstable__multilangue')) {
-            $locale = $this->getDefaultLocaleLegacy();
+        if (null === $locale && null !== $this->requestStack->getCurrentRequest()) {
+            $locale =
+                $this->requestStack->getCurrentRequest()->query->get('tl') ?:
+                $this->requestStack->getCurrentRequest()->getLocale();
         }
-
-        if (is_null($locale) && $this->requestStack->getCurrentRequest() !== null) {
-            $locale = $this->requestStack->getCurrentRequest()->query->get('tl')
-                ?: $this->requestStack->getCurrentRequest()->getLocale();
-        }
-        if (is_null($locale)) {
-            $locale = $this->getDefaultLocaleLegacy();
+        if (null === $locale) {
+            $locale = $this->getDefaultLocale();
         }
 
         if (!$this->parameters) {
@@ -71,20 +70,11 @@ class SiteParameterResolver
             : $translatedValue;
     }
 
-    private function getDefaultLocaleLegacy(): string
-    {
-        if ($this->toggleManager->isActive('unstable__multilangue')){
-            return $this->getDefaultLocale();
-        }
-        $locale = $this->entityManager->getRepository(SiteParameter::class)->findOneByKeyname('global.locale');
-        if ($locale){
-            return $locale->getValue();
-        }
-        return 'fr-FR';
-    }
-
     public function getDefaultLocale(): string
     {
-        return $this->entityManager->getRepository(Locale::class)->findDefaultLocale()->getCode();
+        return $this->entityManager
+            ->getRepository(Locale::class)
+            ->findDefaultLocale()
+            ->getCode();
     }
 }

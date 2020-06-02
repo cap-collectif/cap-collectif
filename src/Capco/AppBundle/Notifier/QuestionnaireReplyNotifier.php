@@ -88,7 +88,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         $params = [
             'date' => $this->getLongDate(
                 $reply->getPublishedAt(),
-                $this->siteParams->getValue('global.locale'),
+                $this->defaultLocale,
                 $this->siteParams->getValue('global.timezone')
             ),
             'time' => $this->getTime($reply->getPublishedAt()),
@@ -110,14 +110,14 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     ? $this->getLongDate(
                         $reply->getStep()->getEndAt(),
                         $reply->getAuthor()->getLocale() ??
-                            $this->siteParams->getValue('global.locale'),
+                            $this->defaultLocale,
                         $this->siteParams->getValue('global.timezone')
                     )
                     : null;
                 $params['stepURL'] = $replyUrl;
                 $params['date'] = $this->getLongDate(
                     $reply->getPublishedAt(),
-                    $this->siteParams->getValue('global.locale'),
+                    $this->defaultLocale,
                     $this->siteParams->getValue('global.timezone')
                 );
             }
@@ -181,7 +181,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 [
                     'date' => $this->getLongDate(
                         $reply->getUpdatedAt(),
-                        $this->siteParams->getValue('global.locale'),
+                        $this->defaultLocale,
                         $this->siteParams->getValue('global.timezone')
                     ),
                     'time' => $this->getTime($reply->getUpdatedAt()),
@@ -197,7 +197,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     $reply->getUpdatedAt(),
                     $locale =
                         $reply->getAuthor()->getLocale() ??
-                        $this->siteParams->getValue('global.locale'),
+                        $this->defaultLocale,
                     $this->siteParams->getValue('global.timezone')
                 ),
                 'time' => $this->getTime($reply->getUpdatedAt()),
@@ -206,7 +206,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                         $reply->getStep()->getEndAt(),
                         $locale =
                             $reply->getAuthor()->getLocale() ??
-                            $this->siteParams->getValue('global.locale'),
+                            $this->defaultLocale,
                         $this->siteParams->getValue('global.timezone')
                     )
                     : null,
@@ -260,7 +260,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 'configURL' => $configUrl,
                 'date' => $this->getLongDate(
                     $date,
-                    $this->siteParams->getValue('global.locale'),
+                    $this->defaultLocale,
                     $this->siteParams->getValue('global.timezone')
                 ),
                 'time' => $this->getTime($date)
