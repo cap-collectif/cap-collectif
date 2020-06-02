@@ -32,6 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="project")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @CapcoAssert\HasUserGroupIdVisibilityGroup()
  */
 class Project implements IndexableInterface
 {

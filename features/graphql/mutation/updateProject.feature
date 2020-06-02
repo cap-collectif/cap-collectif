@@ -275,3 +275,68 @@ Scenario: GraphQL client wants to remove locale from a project
     }
    }
   """
+
+@database
+Scenario: GraphQL client wants to update project with empty group in custom view
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation UpdateAlphaProject($input: UpdateAlphaProjectInput!) {
+        updateAlphaProject(input: $input) {
+          project {
+            id
+            title
+            restrictedViewers {
+              edges {
+                cursor
+                node {
+                  id
+                  title
+                }
+              }
+            }
+          }
+        }
+      }",
+      "variables": {
+        "input": {
+          "title": "Je suis un projet simple",
+          "Cover": "media1",
+          "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+          "authors": [
+            "VXNlcjp1c2VyQWRtaW4=",
+            "VXNlcjp1c2VyMQ=="
+          ],
+          "opinionTerm": 2,
+          "metaDescription": "Je suis la super meta",
+          "visibility": "CUSTOM",
+          "themes": [
+            "theme3"
+          ],
+          "isExternal": false,
+          "publishedAt": "2019-03-01 12:00:00",
+          "opinionCanBeFollowed": true,
+          "steps": [],
+          "districts": [],
+          "projectId": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
+          "restrictedViewerGroups": []
+        }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors": [
+      {
+        "message": "global.no_group_when_mandatory",
+        "extensions": {
+          "category": "user"
+        },
+        "@*@": "@*@"
+      }
+    ],
+    "@*@": "@*@"
+  }
+  """

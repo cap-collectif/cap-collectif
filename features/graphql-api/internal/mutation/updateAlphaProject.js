@@ -894,6 +894,7 @@ it('update a newly created project and add a group', async () => {
       input: {
         projectId,
         ...BASE_PROJECT,
+        visibility: 'CUSTOM',
         restrictedViewerGroups: ['group1', 'group5', 'group6'],
       },
     },
