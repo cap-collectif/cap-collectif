@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class SiteParameterResolver
 {
-    protected $parameters;
+    protected $parameters = [];
     protected $toggleManager;
     protected $entityManager;
     protected $requestStack;
@@ -37,16 +37,16 @@ class SiteParameterResolver
             $locale = $this->getDefaultLocaleLegacy();
         }
 
-        if (!$this->parameters) {
-            $this->parameters = $this->entityManager
+        if (!isset($this->parameters[$locale]) || empty($this->parameters[$locale])) {
+            $this->parameters[$locale] = $this->entityManager
                 ->getRepository(SiteParameter::class)
                 ->getValuesIfEnabled($locale);
         }
 
-        if (!isset($this->parameters[$key])) {
+        if (!isset($this->parameters[$locale][$key])) {
             return html_entity_decode($defaultValue);
         }
-        $parameter = $this->parameters[$key];
+        $parameter = $this->parameters[$locale][$key];
 
         if (!$parameter->isTranslatable()) {
             $value = \is_string($parameter->getValue())
