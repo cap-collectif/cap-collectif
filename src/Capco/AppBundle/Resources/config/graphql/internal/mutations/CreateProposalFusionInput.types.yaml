@@ -1,8 +1,14 @@
 CreateProposalFusionInput:
-  type: relay-mutation-input
-  config:
-    description: ''
-    fields:
-      fromProposals:
-        type: '[ID!]!'
-        description: 'Proposal ids from which the fusion is created'
+    type: relay-mutation-input
+    config:
+        description: ''
+        fields:
+            fromProposals:
+                type: '[ID!]!'
+                description: 'Proposal ids from which the fusion is created'
+            title:
+                type: 'String'
+                description: 'Proposal title for newly created proposal'
+            description:
+                type: 'String'
+                description: 'Proposal body for newly created proposal'

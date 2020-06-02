@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -23,6 +24,7 @@ class CreateProposalFusionMutation implements MutationInterface
     private $translator;
     private $globalIdResolver;
     private $logger;
+    private $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -30,7 +32,8 @@ class CreateProposalFusionMutation implements MutationInterface
         ProposalRepository $proposalRepo,
         TranslatorInterface $translator,
         GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -38,11 +41,14 @@ class CreateProposalFusionMutation implements MutationInterface
         $this->translator = $translator;
         $this->globalIdResolver = $globalIdResolver;
         $this->logger = $logger;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input, User $author): array
     {
         $proposalIds = array_unique($input->getArrayCopy()['fromProposals']);
+        $title = $input->offsetGet('title');
+        $body = $input->offsetGet('description');
 
         if (\count($proposalIds) < 2) {
             throw new UserError('You must specify at least 2 proposals to merge.');
@@ -67,10 +73,15 @@ class CreateProposalFusionMutation implements MutationInterface
 
         $proposal = (new Proposal())
             ->setAuthor($author)
-            ->setTitle($defaultTitle)
+            ->setTitle($title ?? $defaultTitle)
             ->setProposalForm($proposalForm);
+
+        if ($body) {
+            $proposal->setBody($body);
+        }
+
         $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
-            'proposalForm' => $proposalForm
+            'proposalForm' => $proposalForm,
         ]);
         $form->submit(['childConnections' => $proposalUuids], false);
 
@@ -87,6 +98,8 @@ class CreateProposalFusionMutation implements MutationInterface
 
         $this->em->persist($proposal);
         $this->em->flush();
+        $this->indexer->index(Proposal::class, $proposal);
+        $this->indexer->finishBulk();
 
         return ['proposal' => $proposal];
     }

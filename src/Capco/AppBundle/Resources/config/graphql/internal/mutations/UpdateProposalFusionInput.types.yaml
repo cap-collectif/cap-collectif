@@ -1,11 +1,17 @@
 UpdateProposalFusionInput:
-  type: relay-mutation-input
-  config:
-    description: ''
-    fields:
-      proposalId:
-        type: 'ID!'
-        description: 'The proposal to update.'
-      fromProposals:
-        type: '[ID!]!'
-        description: 'Proposal ids that are merged.'
+    type: relay-mutation-input
+    config:
+        description: ''
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The proposal to update.'
+            fromProposals:
+                type: '[ID!]!'
+                description: 'Proposal ids that are merged.'
+            title:
+                type: 'String'
+                description: 'Proposal title for newly created proposal'
+            description:
+                type: 'String'
+                description: 'Proposal description for newly created proposal'

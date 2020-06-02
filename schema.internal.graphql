@@ -2467,6 +2467,12 @@ type CreateProposalFormPayload {
 input CreateProposalFusionInput {
   """Proposal ids from which the fusion is created"""
   fromProposals: [ID!]!
+
+  """Proposal title for newly created proposal"""
+  title: String
+
+  """Proposal body for newly created proposal"""
+  description: String
   clientMutationId: String
 }
 
@@ -5827,10 +5833,13 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     includeUnpublished: Boolean = false
   ): ProposalVoteConnection!
 
+  """Check if the proposal has been merged with another"""
+  hasBeenMerged: Boolean
+
   """If the proposal is a fusion, contains the list of merged proposals."""
   mergedFrom: [Proposal!]!
 
-  """If the proposal listed in a fusion, contains the list of fusions."""
+  """If the proposal is listed in a fusion, contains the list of fusions."""
   mergedIn: [Proposal!]!
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean! @deprecated(reason: "Field `viewerCanSeeEvaluation` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
@@ -9806,6 +9815,12 @@ input UpdateProposalFusionInput {
 
   """Proposal ids that are merged."""
   fromProposals: [ID!]!
+
+  """Proposal title for newly created proposal"""
+  title: String
+
+  """Proposal description for newly created proposal"""
+  description: String
   clientMutationId: String
 }
 

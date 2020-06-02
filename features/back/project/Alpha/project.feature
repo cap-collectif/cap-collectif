@@ -164,3 +164,19 @@ Scenario: Logged in admin wants to add a ranking step to a project
   Then I should see "RankingStepTitle"
   Then I should see "RankingStepBody"
   Then I should see "opinion.show.none"
+
+@database
+Scenario: Admin merges two proposals
+  Given I am logged in as admin
+  And I go to "/admin/alpha/project/projectCorona/proposals"
+  And I wait ".pickableList-row" to appear on current page
+  Then I select the first 2 checkboxes in list ".pickableList-row"
+  And I click on button "#merge-button"
+  And I fill in the following:
+    | title | Merged proposal |
+  And I click on button "#merge-proposal-submit-button"
+  And I wait "#merge-proposal-submit-button" to disappear on current page
+  And I go to "/admin/alpha/project/projectCorona/proposals"
+  And I wait ".pickableList-row" to appear on current page
+  And the number 1 element in ".pickableList-row  h2 a" should contain "Merged proposal"
+  And I should see 2 ".badge-container" elements

@@ -137,13 +137,17 @@ InternalProposal:
                         type: 'Boolean'
                         description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
                         defaultValue: false
+            hasBeenMerged:
+                type: 'Boolean'
+                description: 'Check if the proposal has been merged with another'
+                resolve: '@=value.hasBeenMerged()'
             mergedFrom:
                 type: '[InternalProposal!]!'
                 description: 'If the proposal is a fusion, contains the list of merged proposals.'
                 resolve: '@=value.getChildConnections()'
             mergedIn:
                 type: '[InternalProposal!]!'
-                description: 'If the proposal listed in a fusion, contains the list of fusions.'
+                description: 'If the proposal is listed in a fusion, contains the list of fusions.'
                 resolve: '@=value.getParentConnections()'
             followers:
                 type: 'InternalUserConnection!'

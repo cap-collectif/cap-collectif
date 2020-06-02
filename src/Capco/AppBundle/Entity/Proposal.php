@@ -338,6 +338,11 @@ class Proposal implements
         return null;
     }
 
+    public function hasBeenMerged(): bool
+    {
+        return \count($this->getParentConnections()) > 0;
+    }
+
     public function getSupervisor(): ?User
     {
         return $this->supervisor ? $this->supervisor->getSupervisor() : null;

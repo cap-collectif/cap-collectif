@@ -637,6 +637,18 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @When I select the first :number checkboxes in list :list
+     */
+    public function iSelectTheFirstNElements(string $number, string $list)
+    {
+        $list .= ' input[type=checkbox]';
+        $driver = $this->getSession()->getDriver();
+        for ($i = 0; $i < $number; ++$i) {
+            $driver->executeScript("$('${list}')[${i}].click();");
+        }
+    }
+
+    /**
      * @When I trigger element :element with action :action
      */
     public function iTriggerElementWithAction($element, $action)
@@ -1084,6 +1096,18 @@ class ApplicationContext extends UserContext
             ->find('css', $element);
 
         Assert::assertTrue($input->hasAttribute('disabled'));
+    }
+
+    /**
+     * @Then the number :number element in :list should contain :value
+     */
+    public function assertListElementContains($number, $list, $value)
+    {
+        $elements = $this->getSession()
+            ->getPage()
+            ->findAll('css', $list);
+        $element = $elements[$number - 1];
+        Assert::assertContains($element->getText(), $value);
     }
 
     /**

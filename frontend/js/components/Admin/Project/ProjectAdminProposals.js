@@ -3,6 +3,8 @@ import * as React from 'react';
 import moment from 'moment';
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import styled, { type StyledComponent } from 'styled-components';
+import { Button } from 'react-bootstrap';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import * as S from './ProjectAdminProposals.style';
@@ -49,8 +51,42 @@ import RemoveProposalsFromStepsMutation from '~/mutations/RemoveProposalsFromSte
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import type { StepFilling } from '~/components/Admin/Project/ProjectAdminProposals.utils';
+import ProjectAdminMergeModale from '~/components/Admin/Project/Modale/ProjectAdminMergeModale';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
+
+const MergeButtonStyle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  .flex-div {
+    display: flex;
+  }
+  .divider {
+    height: 20px;
+    margin-left: 20px;
+    border-right: 1px solid #ccc;
+  }
+  button,
+  button:hover {
+    border: none;
+    background-color: #fafafa;
+    padding: 0;
+  }
+`;
+
+const MergeBadgeStyle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  .badge-container {
+    color: rgb(112, 112, 112);
+    border: 1px solid rgb(112, 112, 112);
+    border-radius: 11.5px;
+    display: flex;
+    align-items: center;
+    padding: 0 5px 0 5px;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  display: flex;
+`;
 
 type Props = {|
   +relay: RelayPaginationProp,
@@ -162,6 +198,7 @@ const ProposalListLoader = () => (
 );
 
 const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
+  const [isMergeModaleVisible, setIsMergeModaleVisible] = React.useState(false);
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useProjectAdminProposalsContext();
 
@@ -191,6 +228,17 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
     () => stepStatuses.find(s => s.id === parameters.filters.status),
     [parameters.filters.status, stepStatuses],
   );
+
+  const proposalIds = proposalsSelected.map(({ id }) => id);
+
+  const selectedProposals = project.proposals?.edges
+    ?.filter(Boolean)
+    .map(edge => edge.node)
+    .filter(Boolean)
+    .filter(proposal => {
+      const proposalId = proposal.id;
+      return proposalIds.includes(proposalId);
+    });
 
   const renderFilters = (
     <React.Fragment>
@@ -359,6 +407,25 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
 
   const renderFiltersSelectedProposal = (
     <React.Fragment>
+      {selectedRows.length > 1 && (
+        <>
+          <MergeButtonStyle>
+            <div className="flex-div">
+              <AnalysisFilterContainer>
+                <Button
+                  id="merge-button"
+                  onClick={() => {
+                    setIsMergeModaleVisible(true);
+                  }}>
+                  <FormattedMessage tagName="p" id="proposal.add_fusion" />
+                </Button>
+              </AnalysisFilterContainer>
+              <div className="divider" />
+            </div>
+          </MergeButtonStyle>
+        </>
+      )}
+
       <AnalysisFilterContainer>
         <Collapsable
           align="right"
@@ -454,6 +521,14 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
           )}
         </Collapsable>
       </AnalysisFilterContainer>
+      <ProjectAdminMergeModale
+        proposalsSelected={selectedProposals}
+        onClose={() => {
+          setIsMergeModaleVisible(false);
+        }}
+        show={isMergeModaleVisible}
+        dispatch={dispatch}
+      />
     </React.Fragment>
   );
 
@@ -554,9 +629,17 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                 .filter(Boolean)
                 .map(proposal => (
                   <S.ProposalListRow key={proposal.id} rowId={proposal.id}>
-                    <h2>
-                      <a href={proposal.adminUrl}>{proposal.title}</a>
-                    </h2>
+                    <MergeBadgeStyle>
+                      {proposal.hasBeenMerged ? (
+                        <div className="badge-container">
+                          <FormattedMessage id="badge.merged" />
+                        </div>
+                      ) : null}
+
+                      <h2>
+                        <a href={proposal.adminUrl}>{proposal.title}</a>
+                      </h2>
+                    </MergeBadgeStyle>
                     <AnalysisProposalListRowInformations>
                       <p>
                         #{proposal.reference} • {proposal.author.username}
@@ -676,6 +759,7 @@ export default createPaginationContainer(
           }
           edges {
             node {
+              hasBeenMerged
               author {
                 id
                 username

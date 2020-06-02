@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminMergeModale /> renders correctly 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="modale-title"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={false}
+>
+  <form
+    name="proposal-merge-form"
+    onSubmit={[MockFunction]}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="modale-title"
+      >
+        <FormattedMessage
+          id="proposal.add_fusion"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Field
+        component={[Function]}
+        id="merge.title"
+        label={
+          <span
+            className="font-weight-bold"
+          >
+            <FormattedMessage
+              id="admin.fields.proposal.title"
+              values={Object {}}
+            />
+          </span>
+        }
+        name="title"
+        type="text"
+      />
+      <div
+        className="font-weight-bold"
+      >
+        <FormattedMessage
+          id="title.selected.propositions"
+          values={Object {}}
+        />
+      </div>
+      <div
+        className="mb-20 mt-5"
+      >
+        <ProjectAdminMergeModale__ProjectAdminMergeModaleStyle>
+          <ul>
+            <li>
+              <a
+                href="https://capco.dev/admin/capco/app/proposal/proposal109/edit?_locale=fr-FR"
+                key="UHJvcG9zYWw6cHJvcG9zYWwxMDk="
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Luffy
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://capco.dev/admin/capco/app/proposal/proposal120/edit?_locale=fr-FR"
+                key="UHJvcGzdzMDk="
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Zoro
+              </a>
+            </li>
+          </ul>
+        </ProjectAdminMergeModale__ProjectAdminMergeModaleStyle>
+      </div>
+      <Field
+        component={[Function]}
+        id="merge.description"
+        label={
+          <span
+            className="font-weight-bold"
+          >
+            <FormattedMessage
+              id="global.description"
+              values={Object {}}
+            />
+          </span>
+        }
+        name="description"
+        type="admin-editor"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        buttonId="merge.cancel"
+        label="editor.undo"
+        onClose={[Function]}
+      />
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        className="ml-15"
+        disabled={true}
+        id="merge-proposal-submit-button"
+        type="submit"
+      >
+        <FormattedMessage
+          id="global.save"
+          values={Object {}}
+        />
+      </Button>
+      <AlertForm
+        invalid={false}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        valid={true}
+      />
+    </ModalFooter>
+  </form>
+</Modal>
+`;
