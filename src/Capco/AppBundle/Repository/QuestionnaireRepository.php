@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\ProposalForm;
 
 /**
  * QuestionnaireRepository.
@@ -26,18 +28,28 @@ class QuestionnaireRepository extends EntityRepository
             ->leftJoin('q.questions', 'qaq')
             ->leftJoin('qaq.question', 'qt')
             ->andWhere('q.id = :id')
-            ->setParameter('id', $id)
-        ;
+            ->setParameter('id', $id);
 
         return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function getAvailableQuestionnaires()
     {
-        $qb = $this->createQueryBuilder('q')
+        $qb = $this->createQueryBuilder('q');
+        $qb
+            ->leftJoin(ProposalForm::class, 'prf', 'WITH', 'prf.evaluationForm = q.id')
+            ->leftJoin(AnalysisConfiguration::class, 'ac', 'WITH', 'ac.evaluationForm = q.id')
             ->leftJoin('q.proposalForm', 'pf')
-            ->where('q.step IS NULL')
-            ->andWhere('pf.id IS NULL');
+            ->where(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb->expr()->isNull('pf.id'),
+                        $qb->expr()->isNull('q.step'),
+                        $qb->expr()->isNull('prf.evaluationForm'),
+                        $qb->expr()->isNull('ac.evaluationForm')
+                    )
+            );
 
         return $qb->getQuery()->execute();
     }
