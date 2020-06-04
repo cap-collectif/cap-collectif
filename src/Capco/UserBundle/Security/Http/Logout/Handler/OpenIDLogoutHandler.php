@@ -31,8 +31,7 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
         if (
-            $this->toggleManager->isActive('disconnect_openid') &&
-            $responseWithRequest->getRequest()->query->get('ssoSwitchUser')
+            $this->toggleManager->isActive('disconnect_openid')
         ) {
             $logoutURL = $this->resourceOwner->getOption('logout_url');
 
@@ -42,10 +41,20 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
                 RouterInterface::ABSOLUTE_URL
             );
 
-            $parameters = [
-                $this->refererResolver->getRefererParameterForLogout() =>
-                    $homepageUrl . '/login/openid?_destination=' . $homepageUrl
-            ];
+            $parameters = [];
+
+            if($responseWithRequest->getRequest()->query->get('ssoSwitchUser')) {
+                $parameters = [
+                    $this->refererResolver->getRefererParameterForLogout() =>
+                        $homepageUrl . '/login/openid?_destination=' . $homepageUrl
+                ];
+            }
+            else {
+                $parameters = [
+                    $this->refererResolver->getRefererParameterForLogout() =>
+                        $homepageUrl
+                ];
+            }
 
             $responseWithRequest->setResponse(
                 new RedirectResponse(
