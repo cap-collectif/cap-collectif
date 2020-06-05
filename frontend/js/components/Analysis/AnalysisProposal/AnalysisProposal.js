@@ -115,12 +115,13 @@ const AnalysisProposal = ({
 
 export default createFragmentContainer(AnalysisProposal, {
   proposal: graphql`
-    fragment AnalysisProposal_proposal on Proposal {
+    fragment AnalysisProposal_proposal on Proposal
+      @argumentDefinitions(isAdminView: { type: "Boolean" }) {
       id
       title
       publishedAt
       url
-      adminUrl
+      adminUrl @include(if: $isAdminView)
       draft
       trashed
       reference(full: false)

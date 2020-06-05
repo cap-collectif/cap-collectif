@@ -899,7 +899,7 @@ export default createPaginationContainer(
               node {
                 id
                 progressStatus
-                ...AnalysisProposal_proposal
+                ...AnalysisProposal_proposal @arguments(isAdminView: true)
                 supervisor {
                   id
                   username

@@ -663,7 +663,7 @@ export default createPaginationContainer(
                   title
                 }
               }
-              ...AnalysisProposal_proposal
+              ...AnalysisProposal_proposal @arguments(isAdminView: true)
             }
             cursor
           }

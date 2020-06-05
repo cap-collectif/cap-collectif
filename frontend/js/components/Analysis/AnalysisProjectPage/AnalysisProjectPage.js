@@ -171,7 +171,7 @@ export default createPaginationContainer(
             cursor
             node {
               id
-              ...AnalysisProposal_proposal
+              ...AnalysisProposal_proposal @arguments(isAdminView: false)
               ...AnalysisProposalListRole_proposal
             }
           }
