@@ -99,7 +99,7 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
         <BoxContainer className="box container-fluid" color="#ffc206">
           <BoxDeprecated>
             <FormattedMessage id="message.page.previous.version" />
-            <a href={project.adminAlphaUrl}>
+            <a href={project.adminUrl}>
               <FormattedMessage id="global.consult" /> <i className="cap cap-arrow-66" />
             </a>
           </BoxDeprecated>
@@ -137,7 +137,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
       title
       url
       hasAnalysis
-      adminAlphaUrl
+      adminUrl
       proposals {
         totalCount
       }

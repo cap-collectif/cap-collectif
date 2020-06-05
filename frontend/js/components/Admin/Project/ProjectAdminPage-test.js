@@ -8,7 +8,7 @@ describe('<ProjectAdminPage />', () => {
   const defaultProps = {
     projectId: 'oui',
     isEditMode: true,
-    adminAlphaUrl: 'https://adminUrl.com',
+    adminUrl: 'https://adminUrl.com',
   };
 
   it('renders correctly when editing project', () => {
