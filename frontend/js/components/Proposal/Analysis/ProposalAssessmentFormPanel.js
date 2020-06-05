@@ -27,6 +27,7 @@ type Props = {|
   disabled?: boolean,
   initialStatus: Decision,
   onValidate: (boolean, ?boolean) => void,
+  costEstimationEnabled: boolean,
 |};
 
 export type FormValues = {|
@@ -81,7 +82,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 const formName = 'proposal-assessment-form';
 
-export const ProposalAssessmentFormPanel = ({ dispatch, initialStatus, disabled }: Props) => {
+export const ProposalAssessmentFormPanel = ({
+  dispatch,
+  initialStatus,
+  costEstimationEnabled,
+  disabled,
+}: Props) => {
   const [status, setStatus] = useState(initialStatus);
   const { width } = useResize();
   const isLarge = width < sizes.bootstrapGrid.mdMax;
@@ -97,22 +103,31 @@ export const ProposalAssessmentFormPanel = ({ dispatch, initialStatus, disabled 
             autoComplete="off"
             label={<FormattedMessage id="admin.fields.comment_vote.comment" />}
           />
-          <label className="mb-15">
-            <FormattedMessage id="proposal.estimation" />
-          </label>
-          <InputGroup className="form-fields mb-10" bsClass="input-group" style={{ zIndex: '1' }}>
-            <InputGroup.Addon>
-              <Glyphicon glyph="euro" />
-            </InputGroup.Addon>
-            <Field
-              component={component}
-              type="number"
-              min={0}
-              id="proposalAssessment-estimatedCost"
-              name="estimatedCost"
-              normalize={val => val && parseFloat(val)}
-            />
-          </InputGroup>
+
+          {costEstimationEnabled && (
+            <>
+              <label className="mb-15">
+                <FormattedMessage id="proposal.estimation" />
+              </label>
+              <InputGroup
+                className="form-fields mb-10"
+                bsClass="input-group"
+                style={{ zIndex: '1' }}>
+                <InputGroup.Addon>
+                  <Glyphicon glyph="euro" />
+                </InputGroup.Addon>
+                <Field
+                  component={component}
+                  type="number"
+                  min={0}
+                  id="proposalAssessment-estimatedCost"
+                  name="estimatedCost"
+                  normalize={val => val && parseFloat(val)}
+                />
+              </InputGroup>
+            </>
+          )}
+
           <Field
             type="editor"
             name="officialResponse"
@@ -184,6 +199,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
       officialResponse: proposal.assessment?.officialResponse || null,
       validate: proposal.assessment?.state !== 'IN_PROGRESS',
     },
+    costEstimationEnabled: proposal.form?.analysisConfiguration?.costEstimationEnabled || false,
     initialStatus: initialStatusValue !== 'IN_PROGRESS' ? initialStatusValue : null,
   };
 };
@@ -207,6 +223,11 @@ export default createFragmentContainer(container, {
         estimatedCost
         body
         officialResponse
+      }
+      form {
+        analysisConfiguration {
+          costEstimationEnabled
+        }
       }
     }
   `,

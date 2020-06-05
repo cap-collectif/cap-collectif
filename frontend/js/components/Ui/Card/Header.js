@@ -2,10 +2,10 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { darken } from 'polished';
-import colors, { CardHeaderColors } from '../../../utils/colors';
+import colors, { CardHeaderColors } from '~/utils/colors';
 
 type Props = {
-  bgColor: 'gray' | 'white' | 'green' | 'bluedark' | 'blue' | 'orange' | 'red' | 'default',
+  bgColor?: 'gray' | 'white' | 'green' | 'bluedark' | 'blue' | 'orange' | 'red' | 'default',
   style?: Object,
   children: React.Node,
 };
@@ -22,18 +22,14 @@ const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   padding: 10px 15px;
 `;
 
-export const Header = (props: Props) => {
-  const { bgColor, style, children } = props;
+export const Header = ({ bgColor = 'default', style, children }: Props) => {
   const getBgColor = CardHeaderColors[bgColor] || CardHeaderColors.default;
+
   return (
     <Container bgColor={getBgColor} style={style}>
       {children}
     </Container>
   );
-};
-
-Header.defaultProps = {
-  bgColor: 'default',
 };
 
 export default Header;

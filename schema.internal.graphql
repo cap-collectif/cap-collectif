@@ -7478,6 +7478,7 @@ type Questionnaire implements Node {
   """Results of survey are private"""
   privateResult: Boolean!
   exportResultsUrl: URI!
+  adminUrl: URI!
   isIndexationDone: Boolean!
 }
 

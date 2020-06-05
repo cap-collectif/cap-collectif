@@ -113,14 +113,14 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "url",
+                      "name": "title",
                       "storageKey": null,
                     },
                     Object {
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "reference",
+                      "name": "url",
                       "storageKey": null,
                     },
                     Object {
@@ -1173,13 +1173,6 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "title",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
                       "name": "commentable",
                       "storageKey": null,
                     },
@@ -1255,11 +1248,22 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                               "name": "id",
                               "storageKey": null,
                             },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Status",
+                          "kind": "LinkedField",
+                          "name": "selectionStepStatus",
+                          "plural": false,
+                          "selections": Array [
                             Object {
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "title",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -1285,13 +1289,6 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
                               "storageKey": null,
                             },
                           ],
@@ -1588,12 +1585,13 @@ fragment ProposalFormAdminAnalysisConfigurationForm_proposalForm on ProposalForm
     costEstimationEnabled
     moveToSelectionStep {
       id
-      title
+    }
+    selectionStepStatus {
+      id
     }
     analysisStep {
       __typename
       id
-      title
     }
     evaluationForm {
       id
@@ -1807,6 +1805,9 @@ fragment ProposalFormAdminEvaluationForm_proposalForm on ProposalForm {
     id
     title
   }
+  step {
+    id
+  }
 }
 
 fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
@@ -1822,8 +1823,8 @@ fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
 }
 
 fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
+  title
   url
-  reference
   step {
     id
   }

@@ -14,10 +14,11 @@ class AdminProposalFormPage extends Page
     protected $path = 'admin/capco/app/proposalform/{id}/edit';
 
     protected $elements = [
-        'proposal form content tab' => '#proposal-form-admin-page-tabs-tab-CONFIGURATION',
-        'proposal form evaluation tab' => '#proposal-form-admin-page-tabs-tab-LEGACY_ANALYSIS',
-        'proposal form notification tab' => '#proposal-form-admin-page-tabs-tab-NOTIFICATIONS',
-        'proposal form parameters tab' => '#proposal-form-admin-page-tabs-tab-SETTINGS',
+        'link tab configuration' => '#link-tab-configuration',
+        'link tab analysis' => '#link-tab-analysis',
+        'link tab new analysis' => '#link-tab-new-analysis',
+        'link tab notification' => '#link-tab-notification',
+        'link tab settings' => '#link-tab-settings',
         'proposal form introduction' => '#ql-editor-1 div',
         'proposal form title help' => '#proposal_form_title_help_text',
         'proposal form summary help' => '#proposal_form_summary_help_text',
@@ -68,7 +69,30 @@ class AdminProposalFormPage extends Page
 
     public function clickOnTab(string $tab)
     {
-        $this->getElement('proposal form ' . $tab . ' tab')->click();
+        switch ($tab) {
+            case 'configuration':
+                $this->getElement('link tab configuration')->click();
+
+                break;
+            case 'analysis':
+                $this->getElement('link tab analysis')->click();
+
+                break;
+            case 'new-analysis':
+                $this->getElement('link tab new analysis')->click();
+
+                break;
+            case 'notification':
+                $this->getElement('link tab notification')->click();
+
+                break;
+            case 'settings':
+                $this->getElement('link tab settings')->click();
+
+                break;
+            default:
+                return;
+        }
     }
 
     public function selectProposalFormDropDown(string $status, string $element)

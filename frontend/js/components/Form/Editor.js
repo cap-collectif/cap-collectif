@@ -110,13 +110,22 @@ export class Editor extends React.Component<Props> {
     }
   }
 
-  componentDidUpdate({ currentLanguage: prevDefaultLanguage }: Props) {
-    const { initialContent: newInitialContent, currentLanguage: newDefaultLanguage } = this.props;
+  componentDidUpdate({ currentLanguage: prevDefaultLanguage, value: prevValue }: Props) {
+    const {
+      initialContent: newInitialContent,
+      currentLanguage: newDefaultLanguage,
+      value,
+    } = this.props;
 
     if (prevDefaultLanguage !== newDefaultLanguage) {
       // On change does not trigger when we change the props value.
       // So we have to manually trigger this.
       this.quill.clipboard.dangerouslyPasteHTML(newInitialContent || '');
+    }
+
+    if (prevValue !== value && !value) {
+      // Need this to reset value on reset with reduxForm
+      this.quill.clipboard.dangerouslyPasteHTML(value);
     }
 
     return true;

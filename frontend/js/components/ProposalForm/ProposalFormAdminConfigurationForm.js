@@ -393,7 +393,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
     );
 
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container-fluid mt-10">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="global.formulaire" />
@@ -407,7 +407,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
         </div>
 
         <div className="box-content">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} id="proposalFormVote">
             <Field
               name="isProposalForm"
               component={select}

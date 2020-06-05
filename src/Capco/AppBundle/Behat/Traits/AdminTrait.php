@@ -81,7 +81,7 @@ trait AdminTrait
         // Select 2 distinct proposals from the project
         $searchValues = [
             '', // Proposition gratuite
-            'pas' // Proposition pas chère
+            'pas', // Proposition pas chère
         ];
         foreach ($searchValues as $search) {
             $this->getSession()
@@ -157,7 +157,6 @@ trait AdminTrait
     public function iGoToTheAdminProposalFormPageWithId(string $id)
     {
         $this->visitPageWithParams('admin proposal form page', ['id' => $id]);
-        $this->waitAndThrowOnFailure(3000, "$('#proposal-form-admin-page-tabs-tab-CONFIGURATION').length > 0");
     }
 
     /**

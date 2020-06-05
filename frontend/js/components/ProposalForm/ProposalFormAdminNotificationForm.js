@@ -51,7 +51,7 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
       submitFailed,
     } = this.props;
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container-fluid mt-10">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal_form.admin.notification" />

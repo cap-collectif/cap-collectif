@@ -1,366 +1,583 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if form is not linked to a step yet 1`] = `
-<div>
-  <p>
-    <strong>
-      <FormattedMessage
-        id="permalink"
-        values={Object {}}
-      />
-       :
-    </strong>
-     
-    <a
-      href="http://capco.dev/top-budget"
-    >
-      http://capco.dev/top-budget
-    </a>
-     |
-     
-    <b>
-      global.ref
-       : 
-    </b>
-     
-    2
-  </p>
-  <Uncontrolled(Tabs)
-    defaultActiveKey="CONFIGURATION"
-    id="proposal-form-admin-page-tabs"
+<ProposalFormAdminPageTabsstyle__ProposalFormAdminPageTabsContainer
+  id="proposal-form-admin-page"
+>
+  <MemoryRouter
+    initialEntries={
+      Array [
+        "/configuration",
+        "/legacy_analysis",
+        "/new_analysis",
+        "/notifications",
+        "/settings",
+      ]
+    }
+    initialIndex={0}
+    keylLength={5}
   >
-    <Tab
-      eventKey="CONFIGURATION"
-      title="global.configuration"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": null,
-            "url": "http://capco.dev/top-budget",
+    <header>
+      <div>
+        <FormattedMessage
+          id="page.title.form.name"
+          tagName="h1"
+          values={
+            Object {
+              "formName": "ceci est le titre du proposal form",
+            }
           }
-        }
-        query={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
+        />
+        <ProposalFormAdminPageTabsstyle__ActionContainer>
+          <a
+            href="/admin/capco/app/proposalform/list"
+          >
+            <Icon
+              color="#0388cc"
+              name="list"
+              size={13}
+            />
+            <span
+              className="ml-5"
+            >
+              link_action_list
+            </span>
+          </a>
+          <a
+            href="http://capco.dev/top-budget"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon
+              color="#0388cc"
+              name="external-link"
+              size={13}
+            />
+            <span
+              className="ml-5"
+            >
+              global.preview
+            </span>
+          </a>
+        </ProposalFormAdminPageTabsstyle__ActionContainer>
+      </div>
+      <ProposalFormAdminPageTabsstyle__NavContainer
+        hasProposalFormUrl={true}
+      >
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-configuration"
+            to="/configuration"
+          >
+            global.configuration
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-analysis"
+            to="/legacy_analysis"
+          >
+            proposal.tabs.evaluation
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-notification"
+            to="/notifications"
+          >
+            proposal_form.admin.notification
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-settings"
+            to="/SETTINGS"
+          >
+            global.params
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+      </ProposalFormAdminPageTabsstyle__NavContainer>
+    </header>
+    <Switch>
+      <Route
+        path="/configuration"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": null,
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
           }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="LEGACY_ANALYSIS"
-      title="proposal.tabs.evaluation"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": null,
-            "url": "http://capco.dev/top-budget",
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
           }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="NOTIFICATIONS"
-      title="proposal_form.admin.notification"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": null,
-            "url": "http://capco.dev/top-budget",
+        />
+      </Route>
+      <Route
+        path="/legacy_analysis"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": null,
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
           }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="SETTINGS"
-      title="global.params"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": null,
-            "url": "http://capco.dev/top-budget",
+        />
+      </Route>
+      <Route
+        path="/notifications"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": null,
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
           }
-        }
-      />
-    </Tab>
-  </Uncontrolled(Tabs)>
-</div>
+        />
+      </Route>
+      <Route
+        path="/settings"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": null,
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
+          }
+        />
+      </Route>
+    </Switch>
+  </MemoryRouter>
+</ProposalFormAdminPageTabsstyle__ProposalFormAdminPageTabsContainer>
 `;
 
 exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if feature is not enabled 1`] = `
-<div>
-  <p>
-    <strong>
-      <FormattedMessage
-        id="permalink"
-        values={Object {}}
-      />
-       :
-    </strong>
-     
-    <a
-      href="http://capco.dev/top-budget"
-    >
-      http://capco.dev/top-budget
-    </a>
-     |
-     
-    <b>
-      global.ref
-       : 
-    </b>
-     
-    2
-  </p>
-  <Uncontrolled(Tabs)
-    defaultActiveKey="CONFIGURATION"
-    id="proposal-form-admin-page-tabs"
+<ProposalFormAdminPageTabsstyle__ProposalFormAdminPageTabsContainer
+  id="proposal-form-admin-page"
+>
+  <MemoryRouter
+    initialEntries={
+      Array [
+        "/configuration",
+        "/legacy_analysis",
+        "/new_analysis",
+        "/notifications",
+        "/settings",
+      ]
+    }
+    initialIndex={0}
+    keylLength={5}
   >
-    <Tab
-      eventKey="CONFIGURATION"
-      title="global.configuration"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
+    <header>
+      <div>
+        <FormattedMessage
+          id="page.title.form.name"
+          tagName="h1"
+          values={
+            Object {
+              "formName": "ceci est le titre du proposal form",
+            }
           }
-        }
-        query={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
+        />
+        <ProposalFormAdminPageTabsstyle__ActionContainer>
+          <a
+            href="/admin/capco/app/proposalform/list"
+          >
+            <Icon
+              color="#0388cc"
+              name="list"
+              size={13}
+            />
+            <span
+              className="ml-5"
+            >
+              link_action_list
+            </span>
+          </a>
+          <a
+            href="http://capco.dev/top-budget"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon
+              color="#0388cc"
+              name="external-link"
+              size={13}
+            />
+            <span
+              className="ml-5"
+            >
+              global.preview
+            </span>
+          </a>
+        </ProposalFormAdminPageTabsstyle__ActionContainer>
+      </div>
+      <ProposalFormAdminPageTabsstyle__NavContainer
+        hasProposalFormUrl={true}
+      >
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-configuration"
+            to="/configuration"
+          >
+            global.configuration
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-analysis"
+            to="/legacy_analysis"
+          >
+            proposal.tabs.evaluation
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-notification"
+            to="/notifications"
+          >
+            proposal_form.admin.notification
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-settings"
+            to="/SETTINGS"
+          >
+            global.params
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+      </ProposalFormAdminPageTabsstyle__NavContainer>
+    </header>
+    <Switch>
+      <Route
+        path="/configuration"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
           }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="LEGACY_ANALYSIS"
-      title="proposal.tabs.evaluation"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
           }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="NOTIFICATIONS"
-      title="proposal_form.admin.notification"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
+        />
+      </Route>
+      <Route
+        path="/legacy_analysis"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
           }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="SETTINGS"
-      title="global.params"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
+        />
+      </Route>
+      <Route
+        path="/notifications"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
           }
-        }
-      />
-    </Tab>
-  </Uncontrolled(Tabs)>
-</div>
+        />
+      </Route>
+      <Route
+        path="/settings"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
+          }
+        />
+      </Route>
+    </Switch>
+  </MemoryRouter>
+</ProposalFormAdminPageTabsstyle__ProposalFormAdminPageTabsContainer>
 `;
 
 exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
-<div>
-  <p>
-    <strong>
-      <FormattedMessage
-        id="permalink"
-        values={Object {}}
-      />
-       :
-    </strong>
-     
-    <a
-      href="http://capco.dev/top-budget"
-    >
-      http://capco.dev/top-budget
-    </a>
-     |
-     
-    <b>
-      global.ref
-       : 
-    </b>
-     
-    2
-  </p>
-  <Uncontrolled(Tabs)
-    defaultActiveKey="CONFIGURATION"
-    id="proposal-form-admin-page-tabs"
+<ProposalFormAdminPageTabsstyle__ProposalFormAdminPageTabsContainer
+  id="proposal-form-admin-page"
+>
+  <MemoryRouter
+    initialEntries={
+      Array [
+        "/configuration",
+        "/legacy_analysis",
+        "/new_analysis",
+        "/notifications",
+        "/settings",
+      ]
+    }
+    initialIndex={0}
+    keylLength={5}
   >
-    <Tab
-      eventKey="CONFIGURATION"
-      title="global.configuration"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
+    <header>
+      <div>
+        <FormattedMessage
+          id="page.title.form.name"
+          tagName="h1"
+          values={
+            Object {
+              "formName": "ceci est le titre du proposal form",
+            }
           }
-        }
-        query={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-          }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="LEGACY_ANALYSIS"
-      title="proposal.tabs.evaluation"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
-          }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="NEW_ANALYSIS"
-      title={
-        <React.Fragment>
-          <FormattedMessage
-            id="proposal.tabs.evaluation"
-            values={Object {}}
-          />
-          <span
-            className="ml-5"
+        />
+        <ProposalFormAdminPageTabsstyle__ActionContainer>
+          <a
+            href="/admin/capco/app/proposalform/list"
           >
-            <Badge
-              bsClass="badge"
-              pill={true}
-              pullRight={false}
-              variant="primary"
+            <Icon
+              color="#0388cc"
+              name="list"
+              size={13}
+            />
+            <span
+              className="ml-5"
             >
-              <FormattedMessage
-                id="badge.new"
-                values={Object {}}
-              />
-            </Badge>
-          </span>
-        </React.Fragment>
-      }
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
+              link_action_list
+            </span>
+          </a>
+          <a
+            href="http://capco.dev/top-budget"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon
+              color="#0388cc"
+              name="external-link"
+              size={13}
+            />
+            <span
+              className="ml-5"
+            >
+              global.preview
+            </span>
+          </a>
+        </ProposalFormAdminPageTabsstyle__ActionContainer>
+      </div>
+      <ProposalFormAdminPageTabsstyle__NavContainer
+        hasProposalFormUrl={true}
+      >
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-configuration"
+            to="/configuration"
+          >
+            global.configuration
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-analysis"
+            to="/legacy_analysis"
+          >
+            proposal.tabs.evaluation
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-new-analysis"
+            to="/new_analysis"
+          >
+            <FormattedMessage
+              id="proposal.tabs.evaluation"
+              values={Object {}}
+            />
+            <span
+              className="ml-5"
+            >
+              <Badge
+                bsClass="badge"
+                pill={true}
+                pullRight={false}
+                variant="primary"
+              >
+                <FormattedMessage
+                  id="badge.new"
+                  values={Object {}}
+                />
+              </Badge>
+            </span>
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-notification"
+            to="/notifications"
+          >
+            proposal_form.admin.notification
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+        <ProposalFormAdminPageTabsstyle__NavItem>
+          <NavLink
+            activeClassName="active"
+            id="link-tab-settings"
+            to="/SETTINGS"
+          >
+            global.params
+          </NavLink>
+        </ProposalFormAdminPageTabsstyle__NavItem>
+      </ProposalFormAdminPageTabsstyle__NavContainer>
+    </header>
+    <Switch>
+      <Route
+        path="/configuration"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
           }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="NOTIFICATIONS"
-      title="proposal_form.admin.notification"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
           }
-        }
-      />
-    </Tab>
-    <Tab
-      eventKey="SETTINGS"
-      title="global.params"
-    >
-      <Relay(injectIntl(Connect(ReduxForm)))
-        proposalForm={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "reference": "2",
-            "step": Object {
-              "id": "<random id>",
-            },
-            "url": "http://capco.dev/top-budget",
+        />
+      </Route>
+      <Route
+        path="/legacy_analysis"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
           }
-        }
-      />
-    </Tab>
-  </Uncontrolled(Tabs)>
-</div>
+        />
+      </Route>
+      <Route
+        path="/new_analysis"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
+          }
+        />
+      </Route>
+      <Route
+        path="/notifications"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
+          }
+        />
+      </Route>
+      <Route
+        path="/settings"
+      >
+        <Relay(injectIntl(Connect(ReduxForm)))
+          proposalForm={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "step": Object {
+                "id": "<random id>",
+              },
+              "title": "ceci est le titre du proposal form",
+              "url": "http://capco.dev/top-budget",
+            }
+          }
+        />
+      </Route>
+    </Switch>
+  </MemoryRouter>
+</ProposalFormAdminPageTabsstyle__ProposalFormAdminPageTabsContainer>
 `;

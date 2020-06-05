@@ -2,7 +2,7 @@
 
 exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container-fluid mt-10"
 >
   <div
     className="box-header"

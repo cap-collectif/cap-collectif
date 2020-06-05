@@ -68,7 +68,7 @@ export const Header: StyledComponent<{}, {}, HTMLElement> = styled.nav`
         color: inherit;
         margin-right: 5px;
       }
-      
+
       font-weight: 600;
       color: ${colors.primaryColor};
       display: flex;
@@ -81,7 +81,7 @@ export const Header: StyledComponent<{}, {}, HTMLElement> = styled.nav`
   }
 
   h1 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: ${colors.darkText};
     margin: 0;

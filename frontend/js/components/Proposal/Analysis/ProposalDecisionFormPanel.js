@@ -34,6 +34,8 @@ type Props = {|
   initialIsApproved: boolean,
   refusedReasons: Array<{| value: string, label: string |}>,
   onValidate: (boolean, ?boolean) => void,
+  costEstimationEnabled: boolean,
+  estimatedCost: number,
 |};
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE';
@@ -88,6 +90,8 @@ export const ProposalDecisionFormPanel = ({
   initialIsApproved,
   disabled,
   proposal,
+  costEstimationEnabled,
+  estimatedCost,
 }: Props) => {
   const intl = useIntl();
   const [isApproved, setIsApproved] = useState(initialIsApproved);
@@ -99,22 +103,30 @@ export const ProposalDecisionFormPanel = ({
     <>
       <form id={formName}>
         <AnalysisForm>
-          <label className="mb-15">
-            <FormattedMessage id="proposal.estimation" />
-          </label>
-          <InputGroup className="form-fields mb-10" bsClass="input-group" style={{ zIndex: '1' }}>
-            <InputGroup.Addon>
-              <Glyphicon glyph="euro" />
-            </InputGroup.Addon>
-            <Field
-              component={component}
-              type="number"
-              min={0}
-              id="proposalDecision-estimatedCost"
-              name="estimatedCost"
-              normalize={val => val && parseFloat(val)}
-            />
-          </InputGroup>
+          {costEstimationEnabled && (
+            <>
+              <label className="mb-15">
+                <FormattedMessage id="proposal.estimation" />
+              </label>
+              <InputGroup
+                className="form-fields mb-10"
+                bsClass="input-group"
+                style={{ zIndex: '1' }}>
+                <InputGroup.Addon>
+                  <Glyphicon glyph="euro" />
+                </InputGroup.Addon>
+                <Field
+                  component={component}
+                  type="number"
+                  min={0}
+                  id="proposalDecision-estimatedCost"
+                  name="estimatedCost"
+                  normalize={val => val && parseFloat(val)}
+                />
+              </InputGroup>
+            </>
+          )}
+
           <label>
             <FormattedMessage id="official.answer" />
           </label>
@@ -199,21 +211,25 @@ export const ProposalDecisionFormPanel = ({
               options={refusedReasons}
             />
           ) : null}
-          <FormattedMessage
-            tagName="p"
-            id={effectiveDate ? 'publication.date.personalized' : 'data.publication.automatic'}
-            values={{
-              date: intl.formatDate(effectiveDate, {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-              }),
-              hour: intl.formatDate(effectiveDate, {
-                hour: 'numeric',
-                minute: 'numeric',
-              }),
-            }}
-          />
+
+          {estimatedCost > 0 && (
+            <FormattedMessage
+              tagName="p"
+              id={effectiveDate ? 'publication.date.personalized' : 'data.publication.automatic'}
+              values={{
+                date: intl.formatDate(effectiveDate, {
+                  year: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                }),
+                hour: intl.formatDate(effectiveDate, {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                }),
+              }}
+            />
+          )}
+
           <ValidateButton
             disabled={disabled || (isApproved === null && initialIsApproved === null)}
             type="button"
@@ -239,6 +255,8 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
       refusedReason: proposal?.decision?.refusedReason || null,
       isDone: proposal?.decision?.state === 'DONE' || false,
     },
+    estimatedCost: formValueSelector(formName)(state, 'estimatedCost'),
+    costEstimationEnabled: proposal.form?.analysisConfiguration?.costEstimationEnabled || false,
     initialIsApproved: formValueSelector(formName)(state, 'isApproved') || null,
   };
 };
@@ -279,6 +297,7 @@ export default createFragmentContainer(container, {
       }
       form {
         analysisConfiguration {
+          costEstimationEnabled
           effectiveDate
           unfavourableStatuses {
             value: id

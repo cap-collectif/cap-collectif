@@ -49,7 +49,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
     } = this.props;
 
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container-fluid mt-10">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="global.params" />

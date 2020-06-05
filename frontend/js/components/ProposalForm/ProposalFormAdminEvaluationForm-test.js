@@ -13,6 +13,9 @@ const baseProps = {
     $refType,
     id: 'proposalFormId',
     evaluationForm: null,
+    step: {
+      id: '12345789',
+    },
   },
 };
 

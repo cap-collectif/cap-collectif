@@ -46,7 +46,7 @@ Scenario: Logged in admin wants edit a proposal form page content
 Scenario: Logged in admin wants edit a proposal form on evaluation tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
-  Then I go to the admin proposal form evaluation tab
+  Then I go to the admin proposal form analysis tab
   And I change the proposal form select "proposal form evaluation question" with option "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNQ=="
   And I wait 1 seconds
   Then I save current admin proposal form "evaluation"
@@ -68,7 +68,7 @@ Scenario: Logged in admin wants edit a proposal form on notification tab
 Scenario: Logged in admin wants edit a proposal form on settings tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
-  Then I go to the admin proposal form parameters tab
+  Then I go to the admin proposal form settings tab
   And I fill in the following:
     | title | test text random |
   And I check element "proposal_form_costable"

@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import styled, { css, type StyledComponent } from 'styled-components';
 import Select from 'react-select';
 import Async from 'react-select/lib/Async';
 import { FormattedMessage } from 'react-intl';
@@ -29,6 +30,8 @@ type Props = {
   placeholder?: string,
   autoload?: boolean,
   clearable?: boolean,
+  searchable?: boolean,
+  controlShouldRenderValue?: boolean,
   disabled?: boolean,
   multi: boolean,
   options?: Options, // or loadOptions for async
@@ -43,6 +46,10 @@ type Props = {
   cacheOptions?: boolean,
   description?: string,
   typeForm?: $Values<typeof TYPE_FORM>,
+  buttonAfter?: {
+    label: string | React.Node,
+    onClick: () => void,
+  },
 };
 
 const ClearIndicator = props => {
@@ -56,6 +63,37 @@ const ClearIndicator = props => {
     </div>
   );
 };
+
+export const SelectContainer: StyledComponent<
+  { hasButtonAfter?: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
+  className: 'select-container',
+})`
+  ${props =>
+    props.hasButtonAfter &&
+    css`
+      display: flex;
+      flex-direction: row;
+
+      .react-select-container {
+        flex: 1;
+
+        .react-select__control {
+          border-radius: 4px 0 0 4px;
+          border-right: none;
+        }
+      }
+
+      .btn-after {
+        border: 1px solid hsl(0, 0%, 80%);
+        background-color: #fff;
+        border-radius: 0 4px 4px 0;
+        padding: 0 8px;
+      }
+    `}
+`;
 
 class renderSelect extends React.Component<Props> {
   myRef: any;
@@ -105,6 +143,8 @@ class renderSelect extends React.Component<Props> {
       disabled,
       autoload,
       clearable,
+      searchable = true,
+      controlShouldRenderValue = true,
       placeholder,
       loadOptions,
       filterOption,
@@ -116,6 +156,7 @@ class renderSelect extends React.Component<Props> {
       meta: { error },
       description,
       typeForm,
+      buttonAfter,
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
 
@@ -159,77 +200,92 @@ class renderSelect extends React.Component<Props> {
         {help && <Help typeForm={typeForm}>{help}</Help>}
 
         <div id={id} className={inputClassName || ''}>
-          {typeof loadOptions === 'function' ? (
-            <Async
-              filterOption={filterOption}
-              ref={this.myRef}
-              components={{ ClearIndicator }}
-              isDisabled={disabled}
-              defaultOptions={autoload}
-              isClearable={clearable}
-              placeholder={
-                placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
-              }
-              loadOptions={
-                debounce ? inputValue => this.debouncedLoadOptions(inputValue) : loadOptions
-              }
-              cacheOptions={cacheOptions}
-              value={selectValue || ''}
-              className="react-select-container"
-              classNamePrefix="react-select"
-              name={name}
-              isMulti={multi}
-              noOptionsMessage={() => <FormattedMessage id="result-not-found" />}
-              loadingMessage={() => <FormattedMessage id="global.loading" />}
-              onBlur={() => onBlur()}
-              onFocus={onFocus}
-              onChange={(newValue: OnChangeInput) => {
-                if (typeof onChange === 'function') {
-                  onChange();
+          <SelectContainer hasButtonAfter={!!buttonAfter}>
+            {typeof loadOptions === 'function' ? (
+              <Async
+                filterOption={filterOption}
+                ref={this.myRef}
+                components={{ ClearIndicator }}
+                isDisabled={disabled}
+                defaultOptions={autoload}
+                isClearable={clearable}
+                placeholder={
+                  placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
                 }
-                if ((multi && Array.isArray(newValue)) || selectFieldIsObject) {
-                  input.onChange(newValue);
-                  return;
+                loadOptions={
+                  debounce ? inputValue => this.debouncedLoadOptions(inputValue) : loadOptions
                 }
-                if (!Array.isArray(newValue)) {
-                  input.onChange(newValue ? newValue.value : '');
+                cacheOptions={cacheOptions}
+                value={selectValue || ''}
+                className="react-select-container"
+                classNamePrefix="react-select"
+                name={name}
+                isMulti={multi}
+                noOptionsMessage={() => <FormattedMessage id="result-not-found" />}
+                loadingMessage={() => <FormattedMessage id="global.loading" />}
+                onBlur={() => onBlur()}
+                onFocus={onFocus}
+                onChange={(newValue: OnChangeInput) => {
+                  if (typeof onChange === 'function') {
+                    onChange();
+                  }
+                  if ((multi && Array.isArray(newValue)) || selectFieldIsObject) {
+                    input.onChange(newValue);
+                    return;
+                  }
+                  if (!Array.isArray(newValue)) {
+                    input.onChange(newValue ? newValue.value : '');
+                  }
+                }}
+              />
+            ) : (
+              <Select
+                name={name}
+                components={{ ClearIndicator }}
+                isDisabled={disabled}
+                className="react-select-container"
+                classNamePrefix="react-select"
+                options={options}
+                filterOption={filterOption}
+                onBlurResetsInput={false}
+                onCloseResetsInput={false}
+                placeholder={
+                  placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
                 }
-              }}
-            />
-          ) : (
-            <Select
-              name={name}
-              components={{ ClearIndicator }}
-              isDisabled={disabled}
-              className="react-select-container"
-              classNamePrefix="react-select"
-              options={options}
-              filterOption={filterOption}
-              onBlurResetsInput={false}
-              onCloseResetsInput={false}
-              placeholder={
-                placeholder || <FormattedMessage id="admin.fields.menu_item.parent_empty" />
-              }
-              isClearable={clearable}
-              isMulti={multi}
-              value={selectValue || ''}
-              noOptionsMessage={() => <FormattedMessage id="result-not-found" />}
-              loadingMessage={() => <FormattedMessage id="global.loading" />}
-              onBlur={() => onBlur()}
-              onFocus={onFocus}
-              onChange={(newValue: OnChangeInput) => {
-                if (typeof onChange === 'function') {
-                  onChange();
-                }
-                if ((multi && Array.isArray(newValue)) || selectFieldIsObject) {
-                  return input.onChange(newValue);
-                }
-                if (!Array.isArray(newValue)) {
-                  input.onChange(newValue ? newValue.value : '');
-                }
-              }}
-            />
-          )}
+                isClearable={clearable}
+                isSearchable={searchable}
+                isMulti={multi}
+                controlShouldRenderValue={controlShouldRenderValue}
+                value={selectValue || ''}
+                noOptionsMessage={() => <FormattedMessage id="result-not-found" />}
+                loadingMessage={() => <FormattedMessage id="global.loading" />}
+                onBlur={() => onBlur()}
+                onFocus={onFocus}
+                onChange={(newValue: OnChangeInput) => {
+                  if (typeof onChange === 'function') {
+                    onChange();
+                  }
+                  if ((multi && Array.isArray(newValue)) || selectFieldIsObject) {
+                    return input.onChange(newValue);
+                  }
+                  if (!Array.isArray(newValue)) {
+                    input.onChange(newValue ? newValue.value : '');
+                  }
+                }}
+              />
+            )}
+
+            {buttonAfter && (
+              <button
+                type="button"
+                className="btn-after"
+                onClick={buttonAfter.onClick}
+                disabled={!selectValue}>
+                {buttonAfter.label}
+              </button>
+            )}
+          </SelectContainer>
+
           {this.canValidate() && error && (
             <span className="error-block">
               <FormattedMessage id={error} />

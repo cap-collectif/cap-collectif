@@ -9,7 +9,7 @@ Scenario: Logged in admin wants to edit alpha admin project
   And I fill in the following:
     | metaDescription    | Such meta      |
     | video    | https://www.youtube.com/watch?v=dQw4w9WgXcQ      |
-  And I click the "#districts .react-select__value-container .react-select__input input" element
+  And I click the "#districts .select-container" element
   And I fill the "#districts" react element with child number 1
   And I click the "#submit-project-content" element
   And I wait ".alert__form_succeeded-message" to appear on current page
@@ -64,7 +64,7 @@ Scenario: Logged in admin wants to add questionnaire step to a project
     | step-body     | QuestionnaireStepBody       |
     | step-footer   | QuestionnaireStepFooter     |
   And I fill the date field in ".modal-content"
-  And I click the "#step-questionnaire .react-select__value-container .react-select__input input" element
+  And I click the "#step-questionnaire .select-container" element
   And I fill the "#step-questionnaire" react element with child number 1
   And I click the "#step-modal-submit" element
   And I click the "#submit-project-content" element
@@ -88,7 +88,7 @@ Scenario: Logged in admin wants to add consultation step to a project
     | step-title    | ConsultationStepTitle      |
     | step-body     | ConsultationStepBody       |
   And I fill the date field in ".modal-content"
-  And I click the "#step-consultations .react-select__value-container .react-select__input input" element
+  And I click the "#step-consultations .select-container" element
   And I fill the "#step-consultations" react element with child number 1
   And I click the "#step-modal-submit" element
   And I click the "#submit-project-content" element
@@ -111,7 +111,7 @@ Scenario: Logged in admin wants to add collect step to a project
     | step-title    | CollectStepTitle      |
     | step-body     | CollectStepBody       |
   And I fill the date field in ".modal-content"
-  And I click the "#step-proposalForm .react-select__value-container .react-select__input input" element
+  And I click the "#step-proposalForm .select-container" element
   And I fill the "#step-proposalForm" react element with child number 1
   And I click the "#step-modal-submit" element
   And I click the "#submit-project-content" element

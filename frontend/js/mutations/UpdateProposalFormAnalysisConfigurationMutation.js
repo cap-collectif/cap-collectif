@@ -11,16 +11,23 @@ const mutation = graphql`
   mutation UpdateProposalFormAnalysisConfigurationMutation($input: ConfigureAnalysisInput!) {
     configureAnalysis(input: $input) {
       analysisConfiguration {
+        __typename
         id
+        body
+        effectiveDate
+        costEstimationEnabled
         evaluationForm {
-          id
-        }
-        analysisStep {
+          __typename
           id
           title
         }
-        effectiveDate
+        analysisStep {
+          id
+        }
         moveToSelectionStep {
+          id
+        }
+        selectionStepStatus {
           id
         }
         favourableStatus {

@@ -44,6 +44,7 @@ export { default as CrossRounded } from './svg/cross--rounded.svg';
 export { default as Warning } from './svg/warning.svg';
 export { default as ExternalLink } from './svg/external-link.svg';
 export { default as PenWritePaper } from './svg/pen-write-paper.svg';
+export { default as List } from './svg/list.svg';
 export { default as Stack } from './svg/stack.svg';
 export { default as MessageBubbleCheck } from './svg/message-bubble-check.svg';
 export { default as Tag } from './svg/tag.svg';

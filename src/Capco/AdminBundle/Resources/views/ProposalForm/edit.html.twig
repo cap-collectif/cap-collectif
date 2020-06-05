@@ -1,5 +1,14 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
+{% block title %}
+{% endblock %}
+
+{% block navbar_title %}
+{% endblock %}
+
+{%- block actions -%}
+{%- endblock -%}
+
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' %}
     {{ react_render_component('ProposalFormAdminPageApp', {

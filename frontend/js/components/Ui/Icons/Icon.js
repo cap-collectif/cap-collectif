@@ -51,6 +51,7 @@ export const ICON_NAME: {
   crossRounded: 'cross--rounded',
   warning: 'warning',
   externalLink: 'external-link',
+  list: 'list',
   draft: 'draft',
   stack: 'stack',
   tag: 'tag',
@@ -103,6 +104,7 @@ export const ICON_NAME: {
   crossRounded: 'cross--rounded',
   warning: 'warning',
   externalLink: 'external-link',
+  list: 'list',
   draft: 'draft',
   stack: 'stack',
   tag: 'tag',
@@ -213,6 +215,8 @@ const getIcon = name => {
       return <Icons.Warning />;
     case 'external-link':
       return <Icons.ExternalLink />;
+    case 'list':
+      return <Icons.List />;
     case 'draft':
       return <Icons.PenWritePaper />;
     case 'stack':

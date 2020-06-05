@@ -1,59 +1,62 @@
 InternalQuestionnaire:
-  type: object
-  inherits:
-    - PreviewQuestionnaire
-    - InternalPrimaryKey
-  config:
-    name: Questionnaire
-    fields:
-      step:
-        type: 'InternalQuestionnaireStep'
-      anonymousAllowed:
-        type: 'Boolean!'
-      description:
-        type: 'String'
-      multipleRepliesAllowed:
-        type: 'Boolean!'
-      contribuable:
-        type: 'Boolean!'
-        resolve: '@=value.canContribute(getUser())'
-        description: 'accept answers or not'
-      phoneConfirmationRequired:
-        type: 'Boolean!'
-        resolve: '@=value.isPhoneConfirmationRequired()'
-      questions:
-        type: '[InternalQuestion!]!'
-      viewerReplies:
-        type: '[InternalReply!]!'
-        access: "@=hasRole('ROLE_USER')"
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
-      acknowledgeReplies:
-        type: 'Boolean!'
-      type:
-        type: 'QuestionnaireType!'
-        description: 'The questionnaire type'
-      participants:
-        type: 'InternalUserConnection!'
-      notifyResponseCreate:
-        description: 'Notify when a response is created for this questionnaire'
-        type: 'Boolean!'
-      notifyResponseUpdate:
-        description: 'Notify when a response is updated for this questionnaire'
-        type: 'Boolean!'
-      notifyResponseDelete:
-        description: 'Notify when a response is deleted for this questionnaire'
-        type: 'Boolean!'
-      replies:
-        type: 'InternalReplyConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'A list of replies to the questionnaire.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", [value, args])'
-      privateResult:
-        type: 'Boolean!'
-        description: 'Results of survey are private'
-      exportResultsUrl:
-        type: 'URI!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireExportResultsUrlResolver", [value])'
-      isIndexationDone:
-        type: 'Boolean!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
+    type: object
+    inherits:
+        - PreviewQuestionnaire
+        - InternalPrimaryKey
+    config:
+        name: Questionnaire
+        fields:
+            step:
+                type: 'InternalQuestionnaireStep'
+            anonymousAllowed:
+                type: 'Boolean!'
+            description:
+                type: 'String'
+            multipleRepliesAllowed:
+                type: 'Boolean!'
+            contribuable:
+                type: 'Boolean!'
+                resolve: '@=value.canContribute(getUser())'
+                description: 'accept answers or not'
+            phoneConfirmationRequired:
+                type: 'Boolean!'
+                resolve: '@=value.isPhoneConfirmationRequired()'
+            questions:
+                type: '[InternalQuestion!]!'
+            viewerReplies:
+                type: '[InternalReply!]!'
+                access: "@=hasRole('ROLE_USER')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
+            acknowledgeReplies:
+                type: 'Boolean!'
+            type:
+                type: 'QuestionnaireType!'
+                description: 'The questionnaire type'
+            participants:
+                type: 'InternalUserConnection!'
+            notifyResponseCreate:
+                description: 'Notify when a response is created for this questionnaire'
+                type: 'Boolean!'
+            notifyResponseUpdate:
+                description: 'Notify when a response is updated for this questionnaire'
+                type: 'Boolean!'
+            notifyResponseDelete:
+                description: 'Notify when a response is deleted for this questionnaire'
+                type: 'Boolean!'
+            replies:
+                type: 'InternalReplyConnection!'
+                argsBuilder: 'Relay::Connection'
+                description: 'A list of replies to the questionnaire.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", [value, args])'
+            privateResult:
+                type: 'Boolean!'
+                description: 'Results of survey are private'
+            exportResultsUrl:
+                type: 'URI!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireExportResultsUrlResolver", [value])'
+            adminUrl:
+                type: 'URI!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminUrlResolver", [value])'
+            isIndexationDone:
+                type: 'Boolean!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'

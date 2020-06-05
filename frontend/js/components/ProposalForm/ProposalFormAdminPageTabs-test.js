@@ -10,7 +10,7 @@ describe('<ProposalFormAdminPageTabs />', () => {
     $refType,
     $fragmentRefs,
     url: 'http://capco.dev/top-budget',
-    reference: '2',
+    title: 'ceci est le titre du proposal form',
     step: {
       id: '<random id>',
     },

@@ -62,11 +62,7 @@ trait AdminProposalFormTrait
     public function iGoToTheAdminProposalFormTab(string $tab)
     {
         $page = $this->getCurrentPage();
-        $this->iWait(3); // Wait alert to disappear
-        $this->waitAndThrowOnFailure(
-            3000,
-            "$('" . $page->getSelector('proposal form ' . $tab . ' tab') . "').length > 0"
-        );
+        $this->waitAndThrowOnFailure(3000, "$('#proposal-form-admin-page').length > 0");
         $page->clickOnTab($tab);
         $this->iWait(1);
     }

@@ -172,7 +172,6 @@ export const ProjectContentAdminForm = ({ intl }: Props) => {
             debounce
             autoload
             multi
-            placeholder=" "
             labelClassName="control-label"
             inputClassName="fake-inputClassName"
             label={renderLabel('proposal_form.districts', intl)}

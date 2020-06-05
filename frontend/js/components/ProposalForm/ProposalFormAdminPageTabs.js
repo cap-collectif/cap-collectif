@@ -1,6 +1,7 @@
 // @flow
-import React, { Component } from 'react';
-import { Tabs, Tab, Badge } from 'react-bootstrap';
+import React from 'react';
+import { Badge } from 'react-bootstrap';
+import { MemoryRouter, Route, Switch, NavLink } from 'react-router-dom';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
@@ -12,82 +13,134 @@ import ProposalFormAdminAnalysisConfigurationForm from './ProposalFormAdminAnaly
 import type { ProposalFormAdminPageTabs_proposalForm } from '~relay/ProposalFormAdminPageTabs_proposalForm.graphql';
 import type { ProposalFormAdminPageTabs_query } from '~relay/ProposalFormAdminPageTabs_query.graphql';
 import type { GlobalState } from '~/types';
+import ProposalFormAdminPageTabsContainer, {
+  NavContainer,
+  NavItem,
+  ActionContainer,
+} from '~/components/ProposalForm/ProposalFormAdminPageTabs.style';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import colors from '~/utils/colors';
 
-type DefaultProps = void;
+const TABS = {
+  CONFIGURATION: '/configuration',
+  LEGACY_ANALYSIS: '/legacy_analysis',
+  NEW_ANALYSIS: '/new_analysis',
+  NOTIFICATIONS: '/notifications',
+  SETTINGS: '/settings',
+};
 
 type RelayProps = {|
   proposalForm: ProposalFormAdminPageTabs_proposalForm,
   query: ProposalFormAdminPageTabs_query,
 |};
+
 type Props = {|
   ...RelayProps,
   intl: IntlShape,
   analysisFeatureEnabled: boolean,
 |};
-type State = void;
 
-export class ProposalFormAdminPageTabs extends Component<Props, State> {
-  static defaultProps: DefaultProps;
+export const ProposalFormAdminPageTabs = ({
+  intl,
+  proposalForm,
+  query,
+  analysisFeatureEnabled,
+}: Props) => (
+  <ProposalFormAdminPageTabsContainer id="proposal-form-admin-page">
+    <MemoryRouter
+      initialEntries={[...Object.values(TABS)]}
+      initialIndex={0}
+      keylLength={Object.values(TABS).length}>
+      <header>
+        <div>
+          <FormattedMessage
+            id="page.title.form.name"
+            tagName="h1"
+            values={{ formName: proposalForm.title }}
+          />
 
-  render() {
-    const { intl, proposalForm, query, analysisFeatureEnabled } = this.props;
-    return (
-      <div>
-        {proposalForm.url !== '' ? (
-          <p>
-            <strong>
-              <FormattedMessage id="permalink" /> :
-            </strong>{' '}
-            <a href={proposalForm.url}>{proposalForm.url}</a> |{' '}
-            <b>{intl.formatMessage({ id: 'global.ref' })} : </b> {proposalForm.reference}
-          </p>
-        ) : (
-          <p>
-            <strong>
-              <FormattedMessage id="permalink-unavailable" />{' '}
-            </strong>
-            <FormattedMessage id="proposal-form-not-linked-to-a-project" /> |{' '}
-            <b>{intl.formatMessage({ id: 'global.ref' })} : </b> {proposalForm.reference}
+          <ActionContainer>
+            <a href="/admin/capco/app/proposalform/list">
+              <Icon name={ICON_NAME.list} size={13} color={colors.primaryColor} />
+              <span className="ml-5">{intl.formatMessage({ id: 'link_action_list' })}</span>
+            </a>
+            {proposalForm.url && (
+              <a href={proposalForm.url} target="_blank" rel="noopener noreferrer">
+                <Icon name={ICON_NAME.externalLink} size={13} color={colors.primaryColor} />
+                <span className="ml-5">{intl.formatMessage({ id: 'global.preview' })}</span>
+              </a>
+            )}
+          </ActionContainer>
+        </div>
+
+        {!proposalForm.url && (
+          <p className="mb-20">
+            <FormattedMessage id="overview-unavailable" />
           </p>
         )}
-        <Tabs defaultActiveKey="CONFIGURATION" id="proposal-form-admin-page-tabs">
-          <Tab eventKey="CONFIGURATION" title={intl.formatMessage({ id: 'global.configuration' })}>
-            <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
-          </Tab>
-          <Tab
-            eventKey="LEGACY_ANALYSIS"
-            title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
-            <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
-          </Tab>
-          {analysisFeatureEnabled && !!proposalForm.step && (
-            <Tab
-              eventKey="NEW_ANALYSIS"
-              title={
-                <>
-                  <FormattedMessage id="proposal.tabs.evaluation" />
-                  <span className="ml-5">
-                    <Badge pill variant="primary">
-                      <FormattedMessage id="badge.new" />
-                    </Badge>
-                  </span>
-                </>
-              }>
-              <ProposalFormAdminAnalysisConfigurationForm proposalForm={proposalForm} />
-            </Tab>
+
+        <NavContainer hasProposalFormUrl={!!proposalForm.url}>
+          <NavItem>
+            <NavLink to={TABS.CONFIGURATION} activeClassName="active" id="link-tab-configuration">
+              {intl.formatMessage({ id: 'global.configuration' })}
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to={TABS.LEGACY_ANALYSIS} activeClassName="active" id="link-tab-analysis">
+              {intl.formatMessage({ id: 'proposal.tabs.evaluation' })}
+            </NavLink>
+          </NavItem>
+          {analysisFeatureEnabled && proposalForm.step && (
+            <NavItem>
+              <NavLink to={TABS.NEW_ANALYSIS} activeClassName="active" id="link-tab-new-analysis">
+                <FormattedMessage id="proposal.tabs.evaluation" />
+                <span className="ml-5">
+                  <Badge pill variant="primary">
+                    <FormattedMessage id="badge.new" />
+                  </Badge>
+                </span>
+              </NavLink>
+            </NavItem>
           )}
-          <Tab
-            eventKey="NOTIFICATIONS"
-            title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
-            <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
-          </Tab>
-          <Tab eventKey="SETTINGS" title={intl.formatMessage({ id: 'global.params' })}>
-            <ProposalFormAdminSettingsForm proposalForm={proposalForm} />
-          </Tab>
-        </Tabs>
-      </div>
-    );
-  }
-}
+          <NavItem>
+            <NavLink to="/notifications" activeClassName="active" id="link-tab-notification">
+              {intl.formatMessage({ id: 'proposal_form.admin.notification' })}
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/SETTINGS" activeClassName="active" id="link-tab-settings">
+              {intl.formatMessage({ id: 'global.params' })}
+            </NavLink>
+          </NavItem>
+        </NavContainer>
+      </header>
+
+      <Switch>
+        <Route path={TABS.CONFIGURATION}>
+          <ProposalFormAdminConfigurationForm proposalForm={proposalForm} query={query} />
+        </Route>
+
+        <Route path={TABS.LEGACY_ANALYSIS}>
+          <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
+        </Route>
+
+        {analysisFeatureEnabled && !!proposalForm.step && (
+          <Route path={TABS.NEW_ANALYSIS}>
+            <ProposalFormAdminAnalysisConfigurationForm proposalForm={proposalForm} />
+          </Route>
+        )}
+
+        <Route path={TABS.NOTIFICATIONS}>
+          <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
+        </Route>
+
+        <Route path={TABS.SETTINGS}>
+          <ProposalFormAdminSettingsForm proposalForm={proposalForm} />
+        </Route>
+      </Switch>
+    </MemoryRouter>
+  </ProposalFormAdminPageTabsContainer>
+);
 
 const mapStateToProps = (state: GlobalState) => ({
   analysisFeatureEnabled: state.default.features.unstable__analysis,
@@ -99,8 +152,8 @@ const container = connect(mapStateToProps)(withIntl);
 export default createFragmentContainer(container, {
   proposalForm: graphql`
     fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
+      title
       url
-      reference
       step {
         id
       }
