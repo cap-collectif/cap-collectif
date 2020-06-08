@@ -80,6 +80,9 @@ EOF;
 fragment authorInfos on ContributionWithAuthor {
   author {
     id
+    userType{
+        name
+    }
   }
 }
 EOF;
@@ -203,6 +206,7 @@ EOF;
         //contrib
         'contributions_id' => 'id',
         'contributions_author_id' => 'author.id',
+        'contributions_author_type_name' => 'author.userType.name',
         'contributions_consultation_title' => 'section.consultation.title',
         'contributions_section_title' => 'section.title',
         'contributions_title' => 'title',
@@ -276,7 +280,7 @@ EOF;
         'contribution_versions_title' => 'version.title',
         'contribution_versions_bodyText' => 'version.bodyText',
         'contribution_versions_createdAt' => 'version.createdAt',
-        'contribution_versions_updatedAt' => 'version.updatedAt'
+        'contribution_versions_updatedAt' => 'version.updatedAt',
     ];
 
     protected static $defaultName = 'capco:export:consultation';
@@ -398,7 +402,7 @@ EOF;
         $contributions = $this->executor
             ->execute('internal', [
                 'query' => $contributionsQuery,
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 
