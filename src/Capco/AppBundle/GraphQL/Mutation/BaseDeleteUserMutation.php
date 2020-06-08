@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\CommentVote;
-use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
@@ -33,9 +32,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 {
-    /**
-     * @var EntityManagerInterface
-     */
     protected $em;
     protected $mediaProvider;
     protected $translator;
@@ -92,22 +88,15 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     public function softDelete(User $user): void
     {
         $contributions = $user->getContributions();
-        $deletedBodyText = $this->translator->trans(
-            'deleted-content-by-author',
-            [],
-            'CapcoAppBundle'
-        );
-        $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
-
         $reports = $this->reportingRepository->findBy(['Reporter' => $user]);
         $events = $this->eventRepository->findBy(['author' => $user]);
 
         foreach ($contributions as $contribution) {
             if (method_exists($contribution, 'setTitle')) {
-                $contribution->setTitle($deletedTitleText);
+                $contribution->setTitle('deleted-title');
             }
             if (method_exists($contribution, 'setBody')) {
-                $contribution->setBody($deletedBodyText);
+                $contribution->setBody('deleted-content-by-author');
             }
             if (method_exists($contribution, 'setSummary')) {
                 $contribution->setSummary(null);
@@ -116,7 +105,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 $this->removeObjectMedia($contribution);
             }
             if ($contribution instanceof Proposal) {
-                $this->deleteResponsesContent($contribution, $deletedBodyText);
+                $this->deleteResponsesContent($contribution, 'deleted-content-by-author');
                 $contribution->setAddress(null);
                 $contribution->setEstimation(null);
                 $contribution->setCategory(null);
@@ -126,7 +115,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         }
 
         foreach ($reports as $report) {
-            $report->setBody($deletedBodyText);
+            $report->setBody('deleted-content-by-author');
         }
 
         foreach ($events as $event) {
@@ -145,11 +134,6 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         }
         $this->disableListeners();
 
-        $deletedBodyText = $this->translator->trans(
-            'deleted-content-by-author',
-            [],
-            'CapcoAppBundle'
-        );
         $contributions = $user->getContributions();
         $toDeleteList = [];
         foreach ($contributions as $contribution) {
@@ -157,7 +141,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 $toDeleteList[] = $contribution;
                 $this->deleteResponsesAndEvaluationsFromProposal($user, $contribution);
             } elseif ($this->shallContributionBeHidden($contribution)) {
-                $contribution->setBody($deletedBodyText);
+                $contribution->setBody('deleted-content-by-author');
             }
 
             if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
@@ -179,80 +163,17 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $count = 0;
         foreach ($user->getContributions() as $contribution) {
             if ($this->shallContributionBeDeleted($user, $contribution)) {
-                $count++;
+                ++$count;
             }
         }
 
         return $count;
     }
 
-    private function deleteResponsesAndEvaluationsFromProposal(User $user, $proposal): void
-    {
-        if (
-            ($proposal instanceof Proposal ||
-                $proposal instanceof Opinion ||
-                $proposal instanceof Source ||
-                $proposal instanceof Argument) &&
-            $proposal->getStep() &&
-            $proposal->getStep()->canContribute($user)
-        ) {
-            foreach ($this->proposalEvaluationRepository->findBy(['proposal' => $proposal->getId()]) as $evaluation) {
-                $this->em->remove($evaluation);
-            }
-
-            foreach ($this->abstractResponseRepository->findBy(['proposal' => $proposal->getId()]) as $response) {
-                $this->em->remove($response);
-            }
-        }
-    }
-
-    private function shallContributionBeDeleted(User $user, $contribution): bool
-    {
-        if ($contribution instanceof AbstractVote) {
-            if ($contribution instanceof CommentVote) {
-                $toDeleteList[] = $contribution;
-            } elseif (
-                method_exists($contribution->getRelated(), 'getStep') &&
-                $contribution->getRelated() &&
-                $contribution->getRelated()->getStep() &&
-                $contribution
-                    ->getRelated()
-                    ->getStep()
-                    ->canContribute($user)
-            ) {
-                return true;
-            }
-        } elseif ($contribution instanceof Comment) {
-            if (!$this->commentRepository->findOneBy(['parent' => $contribution->getId()])) {
-                return true;
-            }
-        } elseif (
-            ($contribution instanceof Proposal ||
-                $contribution instanceof Opinion ||
-                $contribution instanceof Source ||
-                $contribution instanceof Argument) &&
-            $contribution->getStep() &&
-            $contribution->getStep()->canContribute($user)
-        ) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private function shallContributionBeHidden($contribution): bool
-    {
-        return (
-            $contribution instanceof Comment &&
-            $this->commentRepository->findOneBy(['parent' => $contribution->getId()])
-        );
-    }
-
     public function anonymizeUser(User $user): void
     {
-        $usernameDeleted = $this->translator->trans('deleted-user', [], 'CapcoAppBundle');
         $newsletter = $this->newsletterSubscriptionRepository->findOneBy([
-            'email' => $user->getEmail()
+            'email' => $user->getEmail(),
         ]);
         $userGroups = $this->groupRepository->findBy(['user' => $user]);
 
@@ -268,7 +189,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
         $user->setEmail(null);
         $user->setEmailCanonical(null);
-        $user->setUsername($usernameDeleted);
+        $user->setUsername('deleted-user');
         $user->setDeletedAccountAt(new \DateTime());
         $user->setPlainPassword(null);
         $user->clearLastLogin();
@@ -318,6 +239,72 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         }
 
         $this->userManager->updateUser($user);
+    }
+
+    private function deleteResponsesAndEvaluationsFromProposal(User $user, $proposal): void
+    {
+        if (
+            ($proposal instanceof Proposal ||
+                $proposal instanceof Opinion ||
+                $proposal instanceof Source ||
+                $proposal instanceof Argument) &&
+            $proposal->getStep() &&
+            $proposal->getStep()->canContribute($user)
+        ) {
+            foreach (
+                $this->proposalEvaluationRepository->findBy(['proposal' => $proposal->getId()])
+                as $evaluation
+            ) {
+                $this->em->remove($evaluation);
+            }
+
+            foreach (
+                $this->abstractResponseRepository->findBy(['proposal' => $proposal->getId()])
+                as $response
+            ) {
+                $this->em->remove($response);
+            }
+        }
+    }
+
+    private function shallContributionBeDeleted(User $user, $contribution): bool
+    {
+        if ($contribution instanceof AbstractVote) {
+            if ($contribution instanceof CommentVote) {
+                $toDeleteList[] = $contribution;
+            } elseif (
+                method_exists($contribution->getRelated(), 'getStep') &&
+                $contribution->getRelated() &&
+                $contribution->getRelated()->getStep() &&
+                $contribution
+                    ->getRelated()
+                    ->getStep()
+                    ->canContribute($user)
+            ) {
+                return true;
+            }
+        } elseif ($contribution instanceof Comment) {
+            if (!$this->commentRepository->findOneBy(['parent' => $contribution->getId()])) {
+                return true;
+            }
+        } elseif (
+            ($contribution instanceof Proposal ||
+                $contribution instanceof Opinion ||
+                $contribution instanceof Source ||
+                $contribution instanceof Argument) &&
+            $contribution->getStep() &&
+            $contribution->getStep()->canContribute($user)
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function shallContributionBeHidden($contribution): bool
+    {
+        return $contribution instanceof Comment &&
+            $this->commentRepository->findOneBy(['parent' => $contribution->getId()]);
     }
 
     private function enableListeners(): void

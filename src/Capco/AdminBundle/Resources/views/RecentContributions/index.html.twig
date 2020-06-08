@@ -66,14 +66,14 @@
                                     <tr>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-text">
                                             <a href="{{ path('capco_admin_contributions_show', {'type': contribution.type, 'id': contribution.id}) }}" title="{{ contribution['title'] }}">
-                                                {{ contribution['title'] }}
+                                                {{ contribution['title'] |trans({}, 'CapcoAppBundle') }}
                                             </a>
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-text">
                                             {{ contribution['type'] | capitalize }}
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-text">
-                                            {{ contribution['author'] }}
+                                            {{ contribution['author'] |trans({}, 'CapcoAppBundle') }}
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-text">
                                             {% if contribution['global.project'] is defined %}

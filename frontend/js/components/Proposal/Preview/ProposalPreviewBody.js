@@ -10,13 +10,14 @@ import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import Tag from '../../Ui/Labels/Tag';
 import TagsList from '../../Ui/List/TagsList';
-import type { State, FeatureToggles } from '../../../types';
+import type { State, FeatureToggles } from '~/types';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
 import type { ProposalPreviewBody_proposal } from '~relay/ProposalPreviewBody_proposal.graphql';
 import type { ProposalPreviewBody_step } from '~relay/ProposalPreviewBody_step.graphql';
 import type { ProposalPreviewBody_viewer } from '~relay/ProposalPreviewBody_viewer.graphql';
 import Card from '../../Ui/Card/Card';
 import ProposalPreviewUser from './ProposalPreviewUser';
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   proposal: ProposalPreviewBody_proposal,
@@ -28,6 +29,9 @@ type Props = {
 export class ProposalPreviewBody extends React.Component<Props> {
   render() {
     const { proposal, features, step, viewer } = this.props;
+
+    // $FlowFixMe summaryOrBodyExcerpt not typed.
+    const summary = translateContent(proposal.summaryOrBodyExcerpt);
 
     const showThemes = true;
     return (
@@ -43,10 +47,10 @@ export class ProposalPreviewBody extends React.Component<Props> {
             <React.Fragment>
               <a href={proposal.url}>
                 <Card.Title tagName="h4">
-                  <Truncate lines={3}>{proposal.title}</Truncate>
+                  <Truncate lines={3}>{translateContent(proposal.title)}</Truncate>
                 </Card.Title>
               </a>
-              <p className="excerpt small">{proposal.summaryOrBodyExcerpt}</p>
+              <p className="excerpt small">{summary}</p>
             </React.Fragment>
           )}
           <TagsList>

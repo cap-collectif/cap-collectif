@@ -8,6 +8,7 @@ import ImplementationStepTitle from '../ImplementationStepTitle';
 import ProgressListItem from '../../Ui/List/ProgressListItem';
 import type { ImplementationStepTitle_progressSteps } from '~relay/ImplementationStepTitle_progressSteps.graphql';
 import ListGroup from '../../Ui/List/ListGroup';
+import {translateContent} from "~/utils/ContentTranslator";
 
 type Props = {
   data: Array<Object>,
@@ -60,7 +61,7 @@ export class ProposalListTableMobile extends React.Component<Props> {
           const getProposalTitle =
             item.title.value.displayTitle.length > 45
               ? `${item.title.value.displayTitle.substring(0, 45)}...`
-              : item.title.value.displayTitle;
+              : translateContent(item.title.value.displayTitle);
 
           return (
             <ListGroupItem key={key}>

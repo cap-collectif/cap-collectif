@@ -20,4 +20,13 @@ describe('<WYSIWYGRender />', () => {
     wrapper.setProps({ tagName: 'i' });
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render correctly with predefined content', () => {
+    const predefinedProps = {
+      value: '<div>Little test</div>',
+      className: 'myClass',
+    };
+    const wrapper = shallow(<WYSIWYGRender {...predefinedProps} />);
+    expect(wrapper).toMatchSnapshot();
+  })
 });

@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    <div>
+        <p>
+            <a href="{{ path('admin_capco_user_user_edit', {id: object.reporter.id}) }}">
+                <strong>{{ object.reporter.displayName | trans({}, 'CapcoAppBundle') }}</strong>
+            </a>
+        </p>
+    </div>
+{% endblock %}

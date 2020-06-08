@@ -21,6 +21,7 @@ import TrashedMessage from '../../Trashed/TrashedMessage';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import { ProposalContactButton } from '../Contact/ProposalContactButton';
 import colors from '~/utils/colors';
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   proposal: ProposalPageHeader_proposal,
@@ -123,7 +124,7 @@ export class ProposalPageHeader extends React.Component<Props> {
           )}
         </HeaderButtonContainer>
         <TrashedMessage className="consultation__header__title h1" contribution={proposal}>
-          <h1 className="consultation__header__title h1">{proposal.title}</h1>
+          <h1 className="consultation__header__title h1">{translateContent(proposal.title)}</h1>
         </TrashedMessage>
         <HeaderBandContainer canContact={canContact}>
           {/* $FlowFixMe Will be a fragment soon */}

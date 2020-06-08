@@ -29,39 +29,39 @@ class ReportingAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('status', null, [
-                'label' => 'admin.fields.reporting.status'
+                'label' => 'admin.fields.reporting.status',
             ])
             ->add('Opinion', null, [
-                'label' => 'admin.fields.reporting.opinion'
+                'label' => 'admin.fields.reporting.opinion',
             ])
             ->add('Source', null, [
-                'label' => 'admin.fields.reporting.source'
+                'label' => 'admin.fields.reporting.source',
             ])
             ->add('Argument', null, [
-                'label' => 'global.argument.label'
+                'label' => 'global.argument.label',
             ])
             ->add('Comment', null, [
-                'label' => 'global.comment'
+                'label' => 'global.comment',
             ])
             ->add(
                 'Reporter',
                 ModelAutocompletetype::class,
                 [
-                    'label' => 'global.author'
+                    'label' => 'global.author',
                 ],
                 null,
                 [
                     'property' => 'email,username',
                     'to_string_callback' => function ($entity, $property) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    }
+                    },
                 ]
             )
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('isArchived', null, [
-                'label' => 'admin.fields.reporting.is_archived'
+                'label' => 'admin.fields.reporting.is_archived',
             ]);
     }
 
@@ -73,32 +73,32 @@ class ReportingAdmin extends AbstractAdmin
             ->addIdentifier('object', null, [
                 'label' => 'global.contribution',
                 'template' => 'CapcoAdminBundle:Reporting:object_list_field.html.twig',
-                'mapped' => false
+                'mapped' => false,
             ])
             ->add('type', null, [
                 'label' => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_list_field.html.twig',
-                'mapped' => false
+                'mapped' => false,
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.reporting.status',
                 'template' => 'CapcoAdminBundle:Reporting:status_list_field.html.twig',
-                'statusLabels' => Reporting::$statusesLabels
+                'statusLabels' => Reporting::$statusesLabels,
             ])
             ->add('isArchived', null, [
                 'label' => 'admin.fields.reporting.is_archived',
-                'editable' => true
+                'editable' => true,
             ])
             ->add('Reporter', null, [
-                'label' => 'global.author'
+                'label' => 'global.author',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => []
-                ]
+                    'show' => [],
+                ],
             ]);
     }
 
@@ -108,34 +108,36 @@ class ReportingAdmin extends AbstractAdmin
             ->add('object', null, [
                 'label' => 'global.contribution',
                 'template' => 'CapcoAdminBundle:Reporting:object_show_field.html.twig',
-                'mapped' => false
+                'mapped' => false,
             ])
             ->add('link', null, [
                 'label' => 'global.link',
-                'template' => 'CapcoAdminBundle:Reporting:link_show_field.html.twig'
+                'template' => 'CapcoAdminBundle:Reporting:link_show_field.html.twig',
             ])
             ->add('type', null, [
                 'label' => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_show_field.html.twig',
-                'mapped' => false
+                'mapped' => false,
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.reporting.status',
                 'template' => 'CapcoAdminBundle:Reporting:status_show_field.html.twig',
-                'statusLabels' => Reporting::$statusesLabels
+                'statusLabels' => Reporting::$statusesLabels,
             ])
             ->add('body', null, [
-                'label' => 'admin.fields.reporting.body'
+                'label' => 'admin.fields.reporting.body',
+                'template' => 'CapcoAdminBundle:Reporting:body_show_field.html.twig',
             ])
             ->add('isArchived', null, [
                 'label' => 'admin.fields.reporting.is_archived',
-                'editable' => true
+                'editable' => true,
             ])
             ->add('Reporter', null, [
-                'label' => 'global.author'
+                'label' => 'global.author',
+                'template' => 'CapcoAdminBundle:Reporting:reporter_show_field.html.twig',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ]);
     }
 

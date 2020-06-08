@@ -18,12 +18,12 @@
             <p class="{% if user is not null and not private %}media-heading{% else %}media--aligned{% endif %} media--macro__user">
                 {% if user is not null and not private %}
                     {% if is_feature_enabled('profiles') %}
-                        <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ username }}</a>
+                        <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ username|trans({}, 'CapcoAppBundle') }}</a>
                     {% else %}
-                        {{ username }}
+                        {{ username|trans({}, 'CapcoAppBundle') }}
                     {% endif %}
                 {% else %}
-                    {{ username }}
+                    {{ username|trans({}, 'CapcoAppBundle') }}
                 {% endif %}
             </p>
             <span class="excerpt">

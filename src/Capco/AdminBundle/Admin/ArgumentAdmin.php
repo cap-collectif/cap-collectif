@@ -67,6 +67,15 @@ class ArgumentAdmin extends AbstractAdmin
         return $query;
     }
 
+    public function getTemplate($name)
+    {
+        if ('edit' === $name) {
+            return 'CapcoAdminBundle:Argument:edit.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -76,7 +85,7 @@ class ArgumentAdmin extends AbstractAdmin
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
@@ -91,27 +100,33 @@ class ArgumentAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('body', null, [
                 'label' => 'global.contenu',
-                'template' => 'CapcoAdminBundle:Argument:body_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:common:body_list_field.html.twig',
             ])
             ->add('type', null, [
                 'label' => 'admin.fields.argument.type',
                 'template' => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
-                'typesLabels' => Argument::$argumentTypesLabels
+                'typesLabels' => Argument::$argumentTypesLabels,
             ])
-            ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
-            ->add('Author', ModelType::class, ['label' => 'global.author'])
+            ->add('opinion', ModelType::class, [
+                'label' => 'global.proposal',
+                'template' => 'CapcoAdminBundle:common:opinion_list_field.html.twig',
+            ])
+            ->add('Author', ModelType::class, [
+                'label' => 'global.author',
+                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+            ])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('trashedStatus', null, [
                 'label' => 'global.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig'
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', 'datetime', ['label' => 'global.maj'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 
@@ -121,31 +136,31 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('type', ChoiceType::class, [
                 'label' => 'admin.fields.argument.type',
                 'choices' => array_flip(Argument::$argumentTypesLabels),
-                'translation_domain' => 'CapcoAppBundle'
+                'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('published', null, [
                 'label' => 'global.published',
                 'disabled' => true,
-                'attr' => ['readonly' => true]
+                'attr' => ['readonly' => true],
             ])
             ->add('opinion', ModelAutocompleteType::class, [
                 'label' => 'global.proposal',
-                'property' => 'title'
+                'property' => 'title',
             ])
             ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 10]])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'global.is_trashed'
+                'label' => 'global.is_trashed',
             ])
             ->add('trashedReason', null, [
                 'label' => 'global.trashed_reason',
-                'required' => false
+                'required' => false,
             ]);
     }
 

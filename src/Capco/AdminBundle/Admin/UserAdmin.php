@@ -18,7 +18,7 @@ class UserAdmin extends BaseAdmin
         $actions['nothing'] = [
             'label' => '',
             'translation_domain' => 'SonataAdminBundle',
-            'ask_confirmation' => false
+            'ask_confirmation' => false,
         ];
 
         return $actions;
@@ -33,12 +33,15 @@ class UserAdmin extends BaseAdmin
     {
         unset($this->listModes['mosaic']);
         $listMapper
-            ->addIdentifier('username', null, ['label' => 'global.fullname'])
+            ->addIdentifier('username', null, [
+                'label' => 'global.fullname',
+                'template' => 'CapcoAdminBundle:User:username_list_field.html.twig',
+            ])
             ->add('email')
             ->add('enabled', null)
             ->add('isEmailConfirmed', null, [
                 'label' => 'confirmed-by-email',
-                'template' => 'CapcoAdminBundle:User:email_confirmed_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:User:email_confirmed_list_field.html.twig',
             ])
             ->add('locked', null, ['editable' => true])
             ->add('updatedAt', null, ['label' => 'global.creation'])

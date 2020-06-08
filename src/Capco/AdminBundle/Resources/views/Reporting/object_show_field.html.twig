@@ -4,29 +4,29 @@
     <div>
         {% if (object.Opinion is not null) %}
             <p><a href="{{ path('admin_capco_app_opinion_edit', {'id': object.Opinion.id}) }}">
-                <strong>{{ object.Opinion.title }}</strong>
+                <strong>{{ object.Opinion.title|trans({}, 'CapcoAppBundle') }}</strong>
             </a></p>
             {{ object.Opinion.body | raw }}
         {% elseif (object.opinionVersion is not null) %}
             <p><a href="{{ path('admin_capco_app_opinionversion_edit', {'id': object.opinionVersion.id}) }}">
-                <strong>{{ object.opinionVersion.title }}</strong>
+                <strong>{{ object.opinionVersion.title|trans({}, 'CapcoAppBundle') }}</strong>
             </a></p>
             {{ object.opinionVersion.body | raw }}
         {% elseif (object.Source is not null) %}
             <p><a href="{{ path('admin_capco_app_source_edit', {'id': object.Source.id}) }}">
-                <strong>{{ object.Source.title }}</strong>
+                <strong>{{ object.Source.title|trans({}, 'CapcoAppBundle') }}</strong>
             </a></p>
         {% elseif (object.Argument is not null) %}
             <p><a href="{{ path('admin_capco_app_argument_edit', {'id': object.Argument.id}) }}">
-                {{ object.Argument.body }}
+                {{ object.Argument.body|trans({}, 'CapcoAppBundle') }}
             </a></p>
         {% elseif (object.Comment is not null) %}
             <a href="{{ path('admin_capco_app_comment_edit', {'id': object.Comment.id}) }}">
-                {{ object.Comment.body }}
+                {{ object.Comment.body|trans({}, 'CapcoAppBundle') }}
             </a>
         {% elseif (object.Proposal is not null) %}
             <a href="{{ path('admin_capco_app_proposal_edit', {'id': object.Proposal.id}) }}">
-                {{ object.Proposal.title }}
+                {{ object.Proposal.title|trans({}, 'CapcoAppBundle') }}
             </a>
         {% endif %}
     </div>

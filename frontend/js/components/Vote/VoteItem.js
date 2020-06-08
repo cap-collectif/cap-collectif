@@ -9,6 +9,7 @@ import type { VoteItem_vote } from '~relay/VoteItem_vote.graphql';
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated';
 import UserLink from '../User/UserLink';
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   vote: VoteItem_vote,
@@ -65,6 +66,9 @@ export class VoteItem extends React.Component<Props> {
       voteLabel = 'supports.value.supported';
     }
 
+    // $FlowFixMe
+    const relatedBody = vote.related ? translateContent(vote.related.body) : '';
+
     return (
       <ListVoteItem id={`vote-${vote.id}`}>
         {/* $FlowFixMe will be a fragment soon */}
@@ -91,9 +95,9 @@ export class VoteItem extends React.Component<Props> {
         <p>
           <a href={vote.related ? vote.related.url : ''}>
             {vote.related && vote.related.title ? (
-              vote.related.title
+              translateContent(vote.related.title)
             ) : (
-              <Truncate>{vote.related ? vote.related.body : ''}</Truncate>
+              <Truncate>{relatedBody}</Truncate>
             )}
           </a>
         </p>

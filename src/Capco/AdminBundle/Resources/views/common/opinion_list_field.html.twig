@@ -1,0 +1,15 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    {% spaceless %}
+        {% if object.opinion %}
+            <a href="{{ path('admin_capco_app_opinion_edit', {'id': object.Opinion.id}) }}">
+                <strong>{{ object.Opinion.title | trans({}, 'CapcoAppBundle') }}</strong>
+            </a>
+        {% elseif object.opinionVersion %}
+            <a href="{{ path('admin_capco_app_opinionversion_edit', {'id': object.opinionVersion.id}) }}">
+                <strong>{{ object.opinionVersion.title | trans({}, 'CapcoAppBundle') }}</strong>
+            </a>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

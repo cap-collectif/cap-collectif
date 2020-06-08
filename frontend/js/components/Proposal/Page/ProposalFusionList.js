@@ -4,6 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import type { ProposalFusionList_proposal } from '~relay/ProposalFusionList_proposal.graphql';
+import {translateContent} from "~/utils/ContentTranslator";
 
 type Props = {|
   +proposal: ProposalFusionList_proposal,
@@ -25,7 +26,7 @@ export class ProposalFusionList extends React.Component<Props> {
             <Panel.Body>
               {proposal.mergedFrom.map(child => (
                 <div key={child.id}>
-                  <a href={child.url}>{child.title}</a>
+                  <a href={child.url}>{translateContent(child.title)}</a>
                 </div>
               ))}
             </Panel.Body>
@@ -42,7 +43,7 @@ export class ProposalFusionList extends React.Component<Props> {
             <Panel.Body>
               {proposal.mergedIn.map(parent => (
                 <div key={parent.id}>
-                  <a href={parent.url}>{parent.title}</a>
+                  <a href={parent.url}>{translateContent(parent.title)}</a>
                 </div>
               ))}
             </Panel.Body>

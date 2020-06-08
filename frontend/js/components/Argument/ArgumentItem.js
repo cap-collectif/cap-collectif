@@ -13,6 +13,7 @@ import ArgumentButtons from './ArgumentButtons';
 import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import type { ArgumentItem_argument } from '~relay/ArgumentItem_argument.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {|
   +argument: ArgumentItem_argument,
@@ -56,6 +57,8 @@ export class ArgumentItem extends React.Component<Props> {
     const labelStyle = argument.type === 'FOR' ? 'success' : 'danger';
     const labelValueTranslateId =
       argument.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against';
+    // $FlowFixMe
+    const relatedTitle = argument.related ? translateContent(argument.related.title) : '';
 
     return (
       <ListGroupItem className={classes} id={`arg-${argument.id}`}>
@@ -67,9 +70,7 @@ export class ArgumentItem extends React.Component<Props> {
               }.link`}
             />
             {' : '}
-            <a href={argument.related ? argument.related.url : ''}>
-              {argument.related ? argument.related.title : ''}
-            </a>
+            <a href={argument.related ? argument.related.url : ''}>{relatedTitle}</a>
           </p>
         )}
         <Media overflow>
@@ -95,7 +96,9 @@ export class ArgumentItem extends React.Component<Props> {
 
             <TrashedMessage contribution={argument}>
               <p className="opinion__text">
-                <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
+                <Linkify properties={{ className: 'external-link' }}>
+                  {translateContent(argument.body)}
+                </Linkify>
               </p>
             </TrashedMessage>
             <ArgumentButtons argument={argument} />

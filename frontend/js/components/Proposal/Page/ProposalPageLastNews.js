@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import AnswerBody from '../../Answer/AnswerBody';
 import type { ProposalPageLastNews_proposal } from '~relay/ProposalPageLastNews_proposal.graphql';
+import {translateContent} from "~/utils/ContentTranslator";
 
 export class ProposalPageLastNews extends React.Component<{
   proposal: ProposalPageLastNews_proposal,
@@ -34,7 +35,7 @@ export class ProposalPageLastNews extends React.Component<{
 
     return (
       <div className={classNames(classes)}>
-        {post.title && <h3 className="h3 proposal__last__news__title">{post.title}</h3>}
+        {post.title && <h3 className="h3 proposal__last__news__title">{translateContent(post.title)}</h3>}
         <AnswerBody answer={edge.node} />
       </div>
     );

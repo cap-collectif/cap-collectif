@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-
 import { FormattedMessage } from 'react-intl';
 import Card from '../Ui/Card/Card';
 import OpinionTypeLabel from './OpinionTypeLabel';
 import type { OpinionPreviewTitle_opinion } from '~relay/OpinionPreviewTitle_opinion.graphql';
+import {translateContent} from "~/utils/ContentTranslator";
 
 type Props = {
   opinion: OpinionPreviewTitle_opinion,
@@ -26,7 +26,8 @@ export class OpinionPreviewTitle extends React.Component<Props> {
         {/* $FlowFixMe */}
         {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
         {showTypeLabel ? ' ' : null}
-        <a href={opinion.url}>{opinion.title}</a>
+        {/* $FlowFixMe */}
+        <a href={opinion.url}>{translateContent(opinion.title)}</a>
       </Card.Title>
     );
   }

@@ -12,6 +12,7 @@ import OpinionVotesBox from './Votes/OpinionVotesBox';
 import type { OpinionBox_opinion } from '~relay/OpinionBox_opinion.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
 import ListGroup from '../Ui/List/ListGroup';
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   +opinion: OpinionBox_opinion,
@@ -61,7 +62,7 @@ export class OpinionBox extends React.Component<Props> {
               <h2 className="h4 opinion__header__title">
                 <FormattedMessage id={headerTitle} />
                 <p className="small excerpt" style={{ marginTop: '5px' }}>
-                  {parentTitle}
+                  {translateContent(parentTitle)}
                 </p>
               </h2>
             </div>

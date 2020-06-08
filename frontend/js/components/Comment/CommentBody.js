@@ -5,6 +5,7 @@ import Linkify from 'react-linkify';
 import { FormattedMessage } from 'react-intl';
 import nl2br from 'react-nl2br';
 import type { CommentBody_comment } from '~relay/CommentBody_comment.graphql';
+import { isPredefinedTraductionKey, translateContent } from "~/utils/ContentTranslator";
 
 type Props = {|
   +comment: CommentBody_comment,
@@ -29,7 +30,9 @@ export class CommentBody extends React.Component<Props, State> {
     const { expanded } = this.state;
     let text = '';
 
-    if (!this.textShouldBeTruncated() || expanded) {
+    if (isPredefinedTraductionKey(comment.body)) {
+      text = translateContent(comment.body);
+    } else if (!this.textShouldBeTruncated() || expanded) {
       text = comment.body;
     } else if (comment.body) {
       text = comment.body.substr(0, 400);

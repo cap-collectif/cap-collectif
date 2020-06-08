@@ -9,10 +9,3 @@
 {% block navbar_title %}
     {{ "title_edit"|trans({'%name%': title }, 'SonataAdminBundle') }}
 {% endblock %}
-
-{% block actions %}
-    <li>{% include 'SonataAdminBundle:Button:show_button.html.twig' %}</li>
-    <li>{% include 'SonataAdminBundle:Button:history_button.html.twig' %}</li>
-    <li>{% include 'SonataAdminBundle:Button:acl_button.html.twig' %}</li>
-    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
-{% endblock %}

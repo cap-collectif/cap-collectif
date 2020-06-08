@@ -5,11 +5,11 @@ import styled, { type StyledComponent } from 'styled-components';
 import moment from 'moment';
 import { FormattedDate } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import type { State, FeatureToggles } from '../../../types';
+import type { State, FeatureToggles } from '~/types';
 import type { ProposalMapPopover_proposal } from '~relay/ProposalMapPopover_proposal.graphql';
-
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
+import {translateContent} from "~/utils/ContentTranslator";
 
 type Props = {|
   proposal: ProposalMapPopover_proposal,
@@ -75,7 +75,7 @@ export const ProposalMapPopover = ({ proposal, features }: Props) => (
         </div>
       </AuthorContainer>
       <TitleContainer>
-        <a href={proposal.url}>{proposal.title}</a>
+        <a href={proposal.url}>{translateContent(proposal.title)}</a>
       </TitleContainer>
     </PopoverContainer>
   </>

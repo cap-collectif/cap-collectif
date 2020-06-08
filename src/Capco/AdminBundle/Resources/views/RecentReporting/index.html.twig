@@ -61,7 +61,13 @@
                                     <td class="sonata-ba-list-field sonata-ba-list-field-text">
                                         <span>
                                             <a href="{{ path('admin_capco_app_reporting_show', {'id': report.id}) }}">
-                                                {{ report.relatedObject }}
+                                                {% if attribute(report.relatedObject, 'getTitle') is defined %}
+                                                    {{ report.relatedObject.title|trans({}, 'CapcoAppBundle') }}
+                                                {% elseif attribute(report.relatedObject, 'getBody') is defined %}
+                                                    {{ report.relatedObject.body|trans({}, 'CapcoAppBundle') }}
+                                                {% else %}
+                                                    {{ report.relatedObject }}
+                                                {% endif %}
                                             </a>
                                         </span>
 
@@ -93,7 +99,7 @@
                                     </td>
                                     <td class="sonata-ba-list-field sonata-ba-list-field-text">
                                         <a href="{{ path('admin_capco_user_user_edit', {'id': report.reporter.id}) }}">
-                                            {{ report.reporter.username  }}
+                                            {{ report.reporter.username |trans({}, 'CapcoAppBundle')  }}
                                         </a>
                                     </td>
                                     <td class="sonata-ba-list-field sonata-ba-list-field-text">

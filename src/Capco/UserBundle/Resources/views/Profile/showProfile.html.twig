@@ -1,4 +1,10 @@
 {% set locale = app.request.locale %}
+{% set username = user.username %}
+{% if 'deleted-user'
+    == username %}
+    {% set username = username | trans({}, 'CapcoAppBundle') %}
+{% endif %}
+
 <section class="profile section--custom">
     <div class="container">
         <div class="row">
@@ -6,7 +12,7 @@
                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': user, 'format': 'profile'} only %}
             </div>
             <div class="box  col-xs-12  col-sm-8 col-md-9">
-                <h1 class="profile__name">{{ user.userName }}
+                <h1 class="profile__name">{{ username }}
                     {% if app.user == user %}
                         <a href="{{ path('capco_profile_edit', {'_locale': locale}) }}" class="btn btn-primary pull-right">{{ 'user.edition'| trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}

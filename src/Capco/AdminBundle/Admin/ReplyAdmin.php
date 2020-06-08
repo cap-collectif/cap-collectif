@@ -69,12 +69,12 @@ class ReplyAdmin extends AbstractAdmin
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('questionnaire.step', null, ['label' => 'global.questionnaire'])
             ->add('questionnaire.step.projectAbstractStep.project', null, [
-                'label' => 'global.participative.project.label'
+                'label' => 'global.participative.project.label',
             ])
             ->add('draft', null, ['label' => 'proposal.state.draft'])
             ->add('published', null, ['label' => 'global.published']);
@@ -86,11 +86,14 @@ class ReplyAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
-            ->add('author', ModelType::class, ['label' => 'global.author'])
+            ->add('author', ModelType::class, [
+                'label' => 'global.author',
+                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+            ])
             ->add('state', null, [
                 'mapped' => false,
                 'label' => 'global.state',
-                'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig',
             ])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj']);
@@ -100,16 +103,19 @@ class ReplyAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
-            ->add('author', ModelType::class, ['label' => 'global.author'])
+            ->add('author', ModelType::class, [
+                'label' => 'global.author',
+                'template' => 'CapcoAdminBundle:Reply:author_list_field.html.twig',
+            ])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('state', null, [
                 'label' => 'global.state',
-                'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig'
+                'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig',
             ])
             ->add('responses', null, [
                 'label' => 'admin.fields.reply.responses',
-                'template' => 'CapcoAdminBundle:Reply:responses_show_field.html.twig'
+                'template' => 'CapcoAdminBundle:Reply:responses_show_field.html.twig',
             ]);
     }
 

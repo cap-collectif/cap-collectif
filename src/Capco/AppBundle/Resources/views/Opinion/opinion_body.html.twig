@@ -4,9 +4,9 @@
     <div class="opinion__data">
         <p class="opinion__user excerpt small">
             {% if is_feature_enabled('profiles') %}
-                <a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username }}</a>
+                <a href="{{ path('capco_user_profile_show_all', {'slug': opinion.Author.slug}) }}">{{ opinion.Author.username |trans({}, 'CapcoAppBundle') }}</a>
             {% else %}
-                {{ opinion.Author.username }}
+                {{ opinion.Author.username |trans({}, 'CapcoAppBundle') }}
             {% endif %}
             • {{ opinion.publishedAt | localizeddate('medium', 'none', app.request.locale) }}
             {% if opinion.updatedAt is not null and opinion.publishedAt != opinion.updatedAt %}
@@ -38,24 +38,24 @@
                     {{ 'global.is_trashed'|trans({}, 'CapcoAppBundle') }}
                 </span>
                 {% if opinion.getTrashedStatus() == 'visible' %}
-                {% if isVersion %}
-                    <a href="{{ path('app_project_show_opinion_version', {'projectSlug': opinion.parent.step.project.slug, 'stepSlug': opinion.parent.step.slug, 'opinionTypeSlug': opinion.parent.opinionType.slug, 'opinionSlug': opinion.parent.slug, 'versionSlug': opinion.slug}) }}">
-                        {{ opinion.title }}
-                    </a>
-                {% else %}
-                    <a href="{{ path('app_project_show_opinion', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
-                        {{ opinion.title }}
-                    </a>
-                {% endif %}
+                    {% if isVersion %}
+                        <a href="{{ path('app_project_show_opinion_version', {'projectSlug': opinion.parent.step.project.slug, 'stepSlug': opinion.parent.step.slug, 'opinionTypeSlug': opinion.parent.opinionType.slug, 'opinionSlug': opinion.parent.slug, 'versionSlug': opinion.slug}) }}">
+                            {{ opinion.title |trans({}, 'CapcoAppBundle') }}
+                        </a>
+                    {% else %}
+                        <a href="{{ path('app_project_show_opinion', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
+                            {{ opinion.title |trans({}, 'CapcoAppBundle') }}
+                        </a>
+                    {% endif %}
                 {% endif %}
             {% else %}
                 {% if isVersion %}
                     <a href="{{ path('app_project_show_opinion_version', {'projectSlug': opinion.parent.step.project.slug, 'stepSlug': opinion.parent.step.slug, 'opinionTypeSlug': opinion.parent.opinionType.slug, 'opinionSlug': opinion.parent.slug, 'versionSlug': opinion.slug}) }}">
-                        {{ opinion.title }}
+                        {{ opinion.title |trans({}, 'CapcoAppBundle') }}
                     </a>
                 {% else %}
                     <a href="{{ path('app_project_show_opinion', {'projectSlug': opinion.step.project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">
-                        {{ opinion.title }}
+                        {{ opinion.title |trans({}, 'CapcoAppBundle') }}
                     </a>
                 {% endif %}
             {% endif %}

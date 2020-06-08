@@ -18,7 +18,7 @@
                                     {{ 'global.title' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-text">
-                                    {{ contribution['title'] }}
+                                    {{ contribution['title']|trans({}, 'CapcoAppBundle') }}
                                 </td>
                             </tr>
                             <tr>
@@ -26,7 +26,7 @@
                                     {{ 'global.author' | trans({}, 'CapcoAppBundle') }}
                                 </th>
                                 <td class="sonata-ba-show-field sonata-ba-show-field-text">
-                                    {{ contribution['author'] }}
+                                    {{ contribution['author']|trans({}, 'CapcoAppBundle') }}
                                 </td>
                             </tr>
                             {% if contribution['global.project'] is defined %}

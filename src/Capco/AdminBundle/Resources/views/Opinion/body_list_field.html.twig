@@ -2,6 +2,6 @@
 
 {% block field %}
     <div>
-        <span>{{ object.bodyExcerpt(100) }}</span>
+        <span>{{ object.bodyTextExcerpt(100) | trans({}, 'CapcoAppBundle') }}</span>
     </div>
 {% endblock %}

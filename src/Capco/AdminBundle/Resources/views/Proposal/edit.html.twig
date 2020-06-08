@@ -1,5 +1,15 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
+{% set title = admin.subject.title|trans({}, 'CapcoAppBundle') %}
+
+{% block title %}
+    {{ "title_edit"|trans({'%name%': title|truncate(15) }, 'SonataAdminBundle') }}
+{% endblock %}
+
+{% block navbar_title %}
+    {{ "title_edit"|trans({'%name%': title }, 'SonataAdminBundle') }}
+{% endblock %}
+
 {% block sonata_breadcrumb %}
 {% endblock %}
 

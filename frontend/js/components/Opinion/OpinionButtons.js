@@ -9,7 +9,7 @@ import OpinionVersionEditModal from '../OpinionVersion/OpinionVersionEditModal';
 import OpinionReportButton from './OpinionReportButton';
 import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
-import type { State } from '../../types';
+import type { State } from '~/types';
 import type { OpinionButtons_opinion } from '~relay/OpinionButtons_opinion.graphql';
 import OpinionFollowButton from './Follow/OpinionFollowButton';
 

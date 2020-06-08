@@ -24,6 +24,7 @@ import type { GlobalState } from '~/types';
 import type { MapTokens } from '~/redux/modules/user';
 import getAvailableQuestionsIds from '~/utils/form/getAvailableQuestionsIds';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
+import {translateContent} from "~/utils/ContentTranslator";
 
 let L;
 
@@ -66,6 +67,8 @@ export class ProposalPageContent extends React.Component<Props> {
       formattedResponses,
     );
 
+    const title = translateContent(proposal.title);
+
     return (
       <div id="ProposalPageContent" className={classNames(classes)}>
         <div className="block">
@@ -94,11 +97,11 @@ export class ProposalPageContent extends React.Component<Props> {
             <img
               id="proposal-media"
               src={proposal.media.url}
-              alt={proposal.title}
+              alt={title}
               className="img-responsive mb-15"
             />
           )}
-          {proposal.summary && <p className="excerpt">{proposal.summary}</p>}
+          {proposal.summary && <p className="excerpt">{translateContent(proposal.summary)}</p>}
           {proposal.body && (
             <div>
               <h3 className="h3">

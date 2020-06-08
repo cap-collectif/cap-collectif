@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import {isPredefinedTraductionKey, translateContent} from "~/utils/ContentTranslator";
 
 type Props = {
   value?: ?string | ?number,
@@ -13,6 +14,13 @@ export const WYSIWYGRender = (props: Props) => {
   // sorry for that: https://github.com/quilljs/quill/issues/1235
   if (!value || value === '<p><br /></p>') {
     return null;
+  }
+
+  // if the value is static, like deleted content, no need to wysiwig.
+  // $FlowFixMe value may be a number.
+  if (typeof(value) === 'string' && isPredefinedTraductionKey(value)) {
+    // $FlowFixMe value may be a number.
+    return <div className={`${className || ''} ql-editor`}>{translateContent(value)}</div>;
   }
 
   if (tagName) {

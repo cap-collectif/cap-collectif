@@ -83,7 +83,7 @@ class OpinionVersionAdmin extends AbstractAdmin
                 'property' => 'email,username',
                 'to_string_callback' => function (User $entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
             ->add('published', null, ['label' => 'global.published'])
@@ -96,18 +96,30 @@ class OpinionVersionAdmin extends AbstractAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, ['label' => 'global.title'])
-            ->add('body', null, ['label' => 'global.contenu'])
+            ->addIdentifier('title', null, [
+                'label' => 'global.title',
+                'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
+            ])
+            ->add('body', null, [
+                'label' => 'global.contenu',
+                'template' => 'CapcoAdminBundle:common:body_list_field.html.twig',
+            ])
             ->add('comment', null, ['label' => 'global.explanation'])
-            ->add('author', null, ['label' => 'global.author'])
-            ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
+            ->add('author', null, [
+                'label' => 'global.author',
+                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+            ])
+            ->add('parent', null, [
+                'label' => 'admin.fields.opinion_version.parent',
+                'template' => 'CapcoAdminBundle:OpinionVersion:parent_list_field.html.twig',
+            ])
             ->add('published', null, [
                 'label' => 'global.published',
-                'editable' => false
+                'editable' => false,
             ])
             ->add('trashedStatus', null, [
                 'label' => 'global.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig'
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', ['actions' => ['delete' => []]]);
@@ -131,16 +143,16 @@ class OpinionVersionAdmin extends AbstractAdmin
                 'property' => 'username,email',
                 'to_string_callback' => function (User $entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('parent', ModelType::class, ['label' => 'admin.fields.opinion_version.parent'])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('comment', CKEditorType::class, [
                 'label' => 'global.explanation',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->end()
 
@@ -148,10 +160,10 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('published', null, [
                 'label' => 'global.published',
                 'disabled' => true,
-                'attr' => ['readonly' => true]
+                'attr' => ['readonly' => true],
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'global.is_trashed'
+                'label' => 'global.is_trashed',
             ])
             ->add('trashedReason', null, ['label' => 'global.trashed_reason'])
             ->end()
@@ -160,7 +172,7 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('answer', ModelListType::class, [
                 'label' => 'official.answer',
                 'btn_list' => false,
-                'required' => false
+                'required' => false,
             ])
             ->end();
     }

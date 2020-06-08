@@ -130,7 +130,7 @@ class OpinionAdmin extends CapcoAdmin
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('consultation', null, ['label' => 'global.consultation'])
             ->add('OpinionType', null, ['label' => 'global.category'])
@@ -146,30 +146,36 @@ class OpinionAdmin extends CapcoAdmin
 
         $listMapper
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
-            ->addIdentifier('title', null, ['label' => 'global.title'])
-            ->add('Author', ModelType::class, ['label' => 'global.author'])
+            ->addIdentifier('title', null, [
+                'label' => 'global.title',
+                'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
+            ])
+            ->add('Author', ModelType::class, [
+                'label' => 'global.author',
+                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+            ])
             ->add('OpinionType', null, ['label' => 'global.category'])
             ->add('consultation', ModelType::class, [
-                'label' => 'global.consultation'
+                'label' => 'global.consultation',
             ])
             ->add('voteCountTotal', IntegerType::class, [
                 'label' => 'global.vote',
                 'mapped' => false,
-                'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig',
             ])
             ->add('position', null, ['label' => 'global.position'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('pinned', null, ['editable' => true, 'label' => 'global.pinned.label'])
             ->add('trashedStatus', null, [
                 'label' => 'global.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig'
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 
@@ -204,20 +210,20 @@ class OpinionAdmin extends CapcoAdmin
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('position', null, [
                 'label' => 'global.position',
-                'required' => false
+                'required' => false,
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('consultation', ModelAutocompleteType::class, [
                 'label' => 'global.consultation',
                 'property' => 'title',
-                'required' => true
+                'required' => true,
             ])
             ->end()
             ->with('admin.fields.opinion.group_appendices')
@@ -227,21 +233,21 @@ class OpinionAdmin extends CapcoAdmin
                 'required' => false,
                 'btn_add' => false,
                 'type_options' => ['delete' => false, 'btn_add' => false],
-                'attr' => ['class' => $classname]
+                'attr' => ['class' => $classname],
             ])
             ->end()
             ->with('admin.fields.opinion.group_publication')
             ->add('published', null, [
                 'label' => 'global.published',
                 'disabled' => true,
-                'attr' => ['readonly' => true]
+                'attr' => ['readonly' => true],
             ])
             ->add('pinned', null, [
                 'label' => 'admin.fields.comment.pinned',
-                'required' => false
+                'required' => false,
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'global.is_trashed'
+                'label' => 'global.is_trashed',
             ])
             ->add('trashedReason', null, ['label' => 'global.trashed_reason'])
             ->end()
@@ -249,7 +255,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('answer', ModelListType::class, [
                 'btn_list' => false,
                 'label' => 'official.answer',
-                'required' => false
+                'required' => false,
             ])
             ->end();
     }

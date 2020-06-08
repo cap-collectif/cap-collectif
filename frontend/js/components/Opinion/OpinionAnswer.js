@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
 import AnswerBody from '../Answer/AnswerBody';
 import type { OpinionAnswer_opinion } from '~relay/OpinionAnswer_opinion.graphql';
+import {translateContent} from "~/utils/ContentTranslator";
 
 type Props = {
   opinion: OpinionAnswer_opinion,
@@ -25,7 +26,7 @@ class OpinionAnswer extends React.Component<Props> {
       <div className={classes} id="answer">
         {answer.title ? (
           <p className="h4" style={{ marginTop: '0' }}>
-            {answer.title}
+            {translateContent(answer.title)}
           </p>
         ) : null}
         <AnswerBody answer={answer} />

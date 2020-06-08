@@ -66,6 +66,15 @@ class SourceAdmin extends AbstractAdmin
         return $query;
     }
 
+    public function getTemplate($name)
+    {
+        if ('edit' === $name) {
+            return 'CapcoAdminBundle:common:edit.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -75,7 +84,7 @@ class SourceAdmin extends AbstractAdmin
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('opinion', null, ['label' => 'global.proposal'])
             ->add('category', null, ['label' => 'global.type'])
@@ -92,18 +101,27 @@ class SourceAdmin extends AbstractAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, ['label' => 'global.title'])
-            ->add('author', ModelType::class, ['label' => 'global.author'])
-            ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
+            ->addIdentifier('title', null, [
+                'label' => 'global.title',
+                'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
+            ])
+            ->add('author', ModelType::class, [
+                'label' => 'global.author',
+                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+            ])
+            ->add('opinion', ModelType::class, [
+                'label' => 'global.proposal',
+                'template' => 'CapcoAdminBundle:common:opinion_list_field.html.twig',
+            ])
             ->add('category', ModelType::class, ['label' => 'global.type'])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('published', null, [
                 'editable' => false,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('trashedStatus', null, [
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
-                'label' => 'global.is_trashed'
+                'label' => 'global.is_trashed',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', ['actions' => ['delete' => []]]);
@@ -117,7 +135,7 @@ class SourceAdmin extends AbstractAdmin
             ->add('published', null, [
                 'label' => 'global.published',
                 'disabled' => true,
-                'attr' => ['readonly' => true]
+                'attr' => ['readonly' => true],
             ])
             ->add('body', null, ['label' => 'global.contenu'])
             ->add('author', ModelAutocompleteType::class, [
@@ -125,20 +143,20 @@ class SourceAdmin extends AbstractAdmin
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
             ->add('category', ModelType::class, ['label' => 'global.type'])
             ->add('link', null, [
                 'label' => 'global.link',
-                'attr' => ['placeholder' => 'http://www.cap-collectif.com/']
+                'attr' => ['placeholder' => 'http://www.cap-collectif.com/'],
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
-                'label' => 'global.is_trashed'
+                'label' => 'global.is_trashed',
             ])
             ->add('trashedReason', null, [
                 'label' => 'admin.fields.comment.trashed_reason',
-                'required' => false
+                'required' => false,
             ]);
     }
 
