@@ -13,7 +13,6 @@ class MediaQuestionType extends AbstractQuestionType
     {
         parent::buildForm($builder, $options);
         $builder->add('description', PurifiedTextType::class, [
-            'strip_tags' => true,
             'purify_html' => true,
             'purify_html_profile' => 'default',
         ]);
