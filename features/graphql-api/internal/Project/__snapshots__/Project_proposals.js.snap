@@ -17,3 +17,31 @@ Object {
   "totalCount": 1,
 }
 `;
+
+exports[`Internal.projects.proposals fetches proposals filtered by step and status 1`] = `
+Object {
+  "project": Object {
+    "__typename": "Project",
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "category": null,
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+            "reference": "1",
+            "status": Object {
+              "color": "success",
+              "id": "statusIdfAnalyse4",
+              "name": "En cours d'analyse",
+            },
+            "title": "Mon grand projet",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

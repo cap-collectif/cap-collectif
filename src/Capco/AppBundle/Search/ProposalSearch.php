@@ -381,9 +381,10 @@ class ProposalSearch extends Search
             // A step wan either be a CollectStep or a SelectionStep.
             if ('CollectStep' === $globalId['type']) {
                 $filters['step.id'] = $globalId['id'];
-            } else {
-                if ('SelectionStep' === $globalId['type']) {
-                    $filters['selections.step.id'] = $globalId['id'];
+            } elseif ('SelectionStep' === $globalId['type']) {
+                $filters['selections.step.id'] = $globalId['id'];
+                if (isset($providedFilters['status'])) {
+                    $filters['selections.status.id'] = $providedFilters['status'];
                 }
             }
         }
@@ -393,8 +394,11 @@ class ProposalSearch extends Search
             if (isset($providedFilters['status'])) {
                 $filters['selections.status.id'] = $providedFilters['status'];
             }
-        } elseif (
+        }
+
+        if (
             isset($providedFilters['status']) &&
+            !isset($filters['selections.status.id']) &&
             Search::NONE_VALUE !== $providedFilters['status']
         ) {
             $filters['status.id'] = $providedFilters['status'];

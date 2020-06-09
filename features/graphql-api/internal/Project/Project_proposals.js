@@ -65,4 +65,21 @@ describe('Internal.projects.proposals', () => {
     expect(response.project.proposals.edges[0].node.category).toBe(null);
     expect(response.project.proposals.edges[0].node.status).toBe(null);
   });
+
+  it('fetches proposals filtered by step and status', async () => {
+    await expect(
+      graphql(
+        ProjectProposalQuery,
+        {
+          projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+          count: 10,
+          district: 'NONE',
+          category: 'NONE',
+          step: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmQW5hbHlzZQ==',
+          status: 'statusIdfAnalyse4',
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });
