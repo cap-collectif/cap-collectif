@@ -62,6 +62,14 @@ class ProposalSpec extends ObjectBehavior
         $proposal->viewerCanSee($viewer)->willReturn(true);
     }
 
+    public function it_should_return_todo_progress_status()
+    {
+        $this->setDecision(null)
+            ->setAssessment(null)
+            ->setAnalyses([]);
+        $this->getGlobalProgressStatus()->shouldReturn(ProposalStatementState::TODO);
+    }
+
     public function it_should_return_favourable_progress_status(ProposalDecision $decision)
     {
         $decision->getState()->willReturn(ProposalStatementState::FAVOURABLE);
@@ -74,7 +82,7 @@ class ProposalSpec extends ObjectBehavior
     ) {
         $proposalAssessment->getState()->willReturn(ProposalStatementState::UNFAVOURABLE);
         $this->setAssessment($proposalAssessment);
-        $this->getGlobalProgressStatus()->shouldReturn(ProposalStatementState::UNFAVOURABLE);
+        $this->getGlobalProgressStatus()->shouldReturn(ProposalStatementState::IN_PROGRESS);
     }
 
     public function it_should_return_in_progress_progress_status(
@@ -108,11 +116,6 @@ class ProposalSpec extends ObjectBehavior
             $proposalAnalysis4,
         ]);
 
-        $this->getGlobalProgressStatus()->shouldReturn(ProposalStatementState::FAVOURABLE);
-    }
-
-    public function it_should_return_todo_progress_status()
-    {
-        $this->getGlobalProgressStatus()->shouldReturn(ProposalStatementState::TODO);
+        $this->getGlobalProgressStatus()->shouldReturn(ProposalStatementState::IN_PROGRESS);
     }
 }

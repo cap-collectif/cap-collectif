@@ -1344,44 +1344,14 @@ class Proposal implements
         }
 
         if ($assessment = $this->getAssessment()) {
-            return $assessment->getState();
+            return ProposalStatementState::IN_PROGRESS;
         }
 
         if (($analyses = $this->getAnalyses()) && !empty($analyses)) {
-            if (\count($analyses) > 1) {
-                $analysisStatuses = [];
-                /** @var ProposalAnalysis $analysis */
-                foreach ($analyses as $analysis) {
-                    $analysisStatuses[] = $analysis->getState();
-                }
-                // generate an associative array with status as key and number of occurences as value.
-                $analysisStatuses = array_count_values($analysisStatuses);
-                if (
-                    isset($analysisStatuses[ProposalStatementState::FAVOURABLE]) ||
-                    isset($analysisStatuses[ProposalStatementState::UNFAVOURABLE])
-                ) {
-                    if (
-                        ($analysisStatuses[ProposalStatementState::FAVOURABLE] ?? 0) >
-                        ($analysisStatuses[ProposalStatementState::UNFAVOURABLE] ?? 0)
-                    ) {
-                        return ProposalStatementState::FAVOURABLE;
-                    }
-
-                    return ProposalStatementState::UNFAVOURABLE;
-                }
-                // sort array by number of occurences casted as int.
-                arsort($analysisStatuses, 1);
-                $flippedArray = array_flip($analysisStatuses);
-                // we use reset to get the first index.
-                if (ProposalStatementState::TODO === reset($flippedArray)) {
-                    return next($flippedArray);
-                }
-
-                return reset($flippedArray);
-            }
-
             foreach ($analyses as $analysis) {
-                return $analysis->getState();
+                if (ProposalStatementState::TODO !== $analysis->getState()) {
+                    return ProposalStatementState::IN_PROGRESS;
+                }
             }
         }
 
