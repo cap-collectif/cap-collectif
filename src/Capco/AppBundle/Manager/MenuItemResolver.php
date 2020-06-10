@@ -71,7 +71,7 @@ class MenuItemResolver
                             'hasEnabledFeature' => $this->manager->containsEnabledFeature(
                                 $child->getAssociatedFeatures()
                             ),
-                            'active' => $this->urlMatchCurrent($link, $currentUrl)
+                            'active' => $this->urlMatchCurrent($link, $currentUrl),
                         ];
                     }
                 }
@@ -84,7 +84,7 @@ class MenuItemResolver
                         $parent->getAssociatedFeatures()
                     ),
                     'children' => $navs,
-                    'active' => $this->urlMatchCurrent($link, $currentUrl)
+                    'active' => $this->urlMatchCurrent($link, $currentUrl),
                 ];
             }
 
@@ -108,8 +108,11 @@ class MenuItemResolver
         $locale = $request->getLocale();
         if ($item->getPage()) {
             return $this->router->generate('app_page_show', [
-                'slug' => $item->getPage()->translate()->getSlug(),
-                '_locale' => $locale
+                'slug' => $item
+                    ->getPage()
+                    ->translate()
+                    ->getSlug(),
+                '_locale' => $locale,
             ]);
         }
         $url = $item->getLink();
@@ -119,7 +122,7 @@ class MenuItemResolver
 
         $constraint = new Url([
             'message' => 'not_valid_url',
-            'payload' => ['severity' => 'warning']
+            'payload' => ['severity' => 'warning'],
         ]);
         $errorList = $this->validator->validate($url, $constraint);
 
@@ -127,21 +130,33 @@ class MenuItemResolver
             return $url ?? '';
         }
 
-        $routeMatch = $this->router->match("/$url");
+        $routeMatch = $this->router->match("/${url}");
         $routeParams = $this->getUrlParams($routeMatch);
 
-        if ($routeMatch['_route'] === 'capco_app_cms'){
-            $route = $this->router->generate('capco_app_cms', array_merge(['url' => $url], $routeParams));
+        if ('capco_app_cms' === $routeMatch['_route']) {
+            $route = $this->router->generate(
+                'capco_app_cms',
+                array_merge(['url' => $url], $routeParams)
+            );
         } else {
-            $route = $this->router->generate($routeMatch['_route'], array_merge(['_locale' => $locale], $routeParams));
+            $route = $this->router->generate(
+                $routeMatch['_route'],
+                array_merge(['_locale' => $locale], $routeParams)
+            );
         }
+
         return $route;
     }
 
-    private function getUrlParams(array $routeMatch): array{
-        return array_filter($routeMatch, function($value){
-            return ($value[0] !== '_');
-        }, ARRAY_FILTER_USE_KEY);
+    private function getUrlParams(array $routeMatch): array
+    {
+        return array_filter(
+            $routeMatch,
+            function ($value) {
+                return '_' !== $value[0];
+            },
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     private function urlMatchCurrent($link = null, $current = null)

@@ -285,12 +285,12 @@ EOF;
 
     protected static $defaultName = 'capco:export:consultation';
 
-    protected $toggleManager;
-    protected $consultationStepRepository;
-    protected $projectRootDir;
-    protected $executor;
-    protected $connectionTraversor;
-    protected $listener;
+    protected Manager $toggleManager;
+    protected ConsultationStepRepository $consultationStepRepository;
+    protected string $projectRootDir;
+    protected Executor $executor;
+    protected ConnectionTraversor $connectionTraversor;
+    protected GraphQlAclListener $listener;
 
     protected $currentStep;
 
@@ -365,12 +365,12 @@ EOF;
         $this->setDescription('Create csv file from consultation step data');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$this->toggleManager->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
 
-            return;
+            return 1;
         }
 
         $steps = $this->consultationStepRepository->getAllStepsWithAProject();
@@ -384,6 +384,8 @@ EOF;
             $this->executeSnapshot($input, $output, $filename);
         }
         $output->writeln('Done !');
+
+        return 0;
     }
 
     protected function generateSheet(

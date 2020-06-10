@@ -61,5 +61,7 @@ class FixSynthesesUrlsCommand extends Command
         $this->em->flush();
 
         $output->writeln('Urls successfully fixed');
+
+        return 0;
     }
 }

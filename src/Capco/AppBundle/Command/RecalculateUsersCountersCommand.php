@@ -135,5 +135,7 @@ class RecalculateUsersCountersCommand extends Command
         );
 
         $output->writeln('Calculation completed');
+
+        return 0;
     }
 }

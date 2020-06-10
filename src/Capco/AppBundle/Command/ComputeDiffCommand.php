@@ -64,6 +64,8 @@ class ComputeDiffCommand extends Command
         $progress->finish();
 
         $output->writeln('Computation completed');
+
+        return 0;
     }
 
     private function getContainer()

@@ -131,6 +131,8 @@ class ResetFeatureFlagsCommand extends Command
         }
 
         $output->writeln('Feature flags reseted');
+
+        return 0;
     }
 
     private function getContainer()

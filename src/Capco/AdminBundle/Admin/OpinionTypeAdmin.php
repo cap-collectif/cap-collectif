@@ -164,6 +164,7 @@ class OpinionTypeAdmin extends AbstractAdmin
         if ($user->isSuperAdmin()) {
             $formMapper->add('voteWidgetType', ChoiceType::class, [
                 'label' => 'vote.type',
+                'label_attr' => ['id' => 'voteWidgetType'],
                 'choices' => OpinionType::$voteWidgetLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true
@@ -200,6 +201,7 @@ class OpinionTypeAdmin extends AbstractAdmin
         if ($user->isSuperAdmin()) {
             $formMapper->add('commentSystem', ChoiceType::class, [
                 'label' => 'comment.type',
+                'label_attr' => ['id' => 'commentSystem'],
                 'choices' => $commentSystemChoices,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true

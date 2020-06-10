@@ -46,7 +46,6 @@ use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\AdminOpinionTypeTrait;
-use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
@@ -82,7 +81,6 @@ class ApplicationContext extends UserContext
     use AdminSectionTrait;
     use LocaleTrait;
 
-    protected $dbContainer;
     protected $cookieConsented;
     protected $currentPage = 'home page';
     protected $queues = [];
@@ -476,11 +474,15 @@ class ApplicationContext extends UserContext
      */
     public function defaultLocaleIsSetTo(string $locale): void
     {
-        $newDefaultLocale = $this->getEntityManager()->getRepository(Locale::class)->findOneByCode($locale);
-        if (is_null($newDefaultLocale) || !$newDefaultLocale->isPublished()) {
-            throw new RuntimeException("cannot set $locale as default locale");
+        $newDefaultLocale = $this->getEntityManager()
+            ->getRepository(Locale::class)
+            ->findOneByCode($locale);
+        if (null === $newDefaultLocale || !$newDefaultLocale->isPublished()) {
+            throw new RuntimeException("cannot set ${locale} as default locale");
         }
-        $oldDefaultLocale = $this->getEntityManager()->getRepository(Locale::class)->findDefaultLocale();
+        $oldDefaultLocale = $this->getEntityManager()
+            ->getRepository(Locale::class)
+            ->findDefaultLocale();
         $oldDefaultLocale->unsetDefault();
         $newDefaultLocale->setDefault();
 

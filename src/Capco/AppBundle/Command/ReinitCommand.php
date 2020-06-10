@@ -134,7 +134,7 @@ class ReinitCommand extends Command
         if (!$input->getOption('force')) {
             $output->writeln('Please set the --force option to run this command');
 
-            return;
+            return 1;
         }
 
         $this->env = $input->getOption('env');
@@ -225,6 +225,8 @@ class ReinitCommand extends Command
                 (new Notification())->setTitle('Success')->setBody('Database reseted.')
             );
         }
+
+        return 0;
     }
 
     protected function createDatabase(OutputInterface $output)

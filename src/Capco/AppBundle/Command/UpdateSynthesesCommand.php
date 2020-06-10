@@ -46,5 +46,7 @@ class UpdateSynthesesCommand extends Command
         $output->writeln('');
 
         $output->writeln(\count($syntheses) . ' syntheses updated');
+
+        return 0;
     }
 }

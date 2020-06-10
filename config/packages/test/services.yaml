@@ -1,24 +1,9 @@
-translation:
-    symfony_profiler:
-        enabled: false
+imports:
+    - { resource: ../services.yaml }
 
 qandidate_toggle:
     redis_namespace: feature_toggle_test
 
-# We disable translation except for routes
-parameters:
-    webfactory_icu_translation.translator: Capco\AppBundle\Translator\NoTranslator
-
-monolog:
-    handlers:
-        main:
-            type: stream
-            path: php://stderr
-            level: warning
-        file:
-            type: stream
-            path: '%kernel.logs_dir%/test.log'
-            level: debug
 services:
     _defaults:
         autowire: true
@@ -28,8 +13,7 @@ services:
     capco.swarrot.factory.pecl: '@swarrot.factory.pecl'
 
     # We disable captcha validation
-    capco.recaptcha.validator:
-        class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
+    Capco\AppBundle\Validator\Constraints\ReCaptchaValidator:
         autowire: true
         arguments:
             $privateKey: '%recaptcha_private_key%'
@@ -43,3 +27,7 @@ services:
         arguments:
             - '@no_translator.inner'
         public: true
+
+# We disable translation except for routes
+parameters:
+    webfactory_icu_translation.translator: Capco\AppBundle\Translator\NoTranslator

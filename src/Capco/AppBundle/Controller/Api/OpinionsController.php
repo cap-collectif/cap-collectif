@@ -8,6 +8,7 @@ use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Notifier\ReportNotifier;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
@@ -31,21 +32,34 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class OpinionsController extends AbstractFOSRestController
 {
-    private $opinionRepository;
-    private $consultationStepRepository;
-    private $globalIdResolver;
+    private OpinionRepository $opinionRepository;
+    private ConsultationStepRepository $consultationStepRepository;
+    private GlobalIdResolver $globalIdResolver;
+    private Publisher $publisher;
+    private StepRequirementsResolver $requirementsResolver;
+    private ReportNotifier $reportNotifier;
+    private RedisStorageHelper $redisStorageHelper;
 
     public function __construct(
         OpinionRepository $opinionRepository,
         ConsultationStepRepository $consultationStepRepository,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        Publisher $publisher,
+        StepRequirementsResolver $requirementsResolver,
+        ReportNotifier $reportNotifier,
+        RedisStorageHelper $redisStorageHelper
     ) {
         $this->opinionRepository = $opinionRepository;
         $this->consultationStepRepository = $consultationStepRepository;
         $this->globalIdResolver = $globalIdResolver;
+        $this->publisher = $publisher;
+        $this->requirementsResolver = $requirementsResolver;
+        $this->reportNotifier = $reportNotifier;
+        $this->redisStorageHelper = $redisStorageHelper;
     }
 
     /**
@@ -69,6 +83,7 @@ class OpinionsController extends AbstractFOSRestController
         string $stepId,
         OpinionType $type
     ) {
+        /** @var User $viewer */
         $viewer = $this->getUser();
         if (!$viewer || 'anon.' === $viewer) {
             throw new AccessDeniedHttpException('Not authorized.');
@@ -85,15 +100,14 @@ class OpinionsController extends AbstractFOSRestController
             throw new BadRequestHttpException('Unknown step.');
         }
 
+        /** @var User $author */
         $author = $this->getUser();
 
         if (!$step->canContribute($author)) {
             throw new BadRequestHttpException('This step is not contribuable.');
         }
 
-        $stepRequirementsResolver = $this->get(StepRequirementsResolver::class);
-
-        if (!$stepRequirementsResolver->viewerMeetsTheRequirementsResolver($author, $step)) {
+        if (!$this->requirementsResolver->viewerMeetsTheRequirementsResolver($author, $step)) {
             throw new BadRequestHttpException('You dont meets all the requirements.');
         }
 
@@ -126,7 +140,7 @@ class OpinionsController extends AbstractFOSRestController
         $em->persist($opinion);
         $em->flush();
 
-        $this->get('swarrot.publisher')->publish(
+        $this->publisher->publish(
             CapcoAppBundleMessagesTypes::OPINION_CREATE,
             new Message(json_encode(['opinionId' => $opinion->getId()]))
         );
@@ -140,6 +154,7 @@ class OpinionsController extends AbstractFOSRestController
      */
     public function putOpinionAction(Request $request, string $id)
     {
+        /** @var User $viewer */
         $viewer = $this->getUser();
         $opinion = $this->opinionRepository->getOne(GlobalId::fromGlobalId($id)['id']);
         if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
@@ -162,7 +177,7 @@ class OpinionsController extends AbstractFOSRestController
             ->getManager()
             ->flush();
 
-        $this->get('swarrot.publisher')->publish(
+        $this->publisher->publish(
             CapcoAppBundleMessagesTypes::OPINION_UPDATE,
             new Message(json_encode(['opinionId' => $opinion->getId()]))
         );
@@ -188,6 +203,7 @@ class OpinionsController extends AbstractFOSRestController
      */
     public function deleteOpinionAction(Request $request, string $opinionId)
     {
+        /** @var User $viewer */
         $viewer = $this->getUser();
         /** @var Opinion $opinion */
         $opinion = $this->globalIdResolver->resolve($opinionId, $viewer);
@@ -198,7 +214,7 @@ class OpinionsController extends AbstractFOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->remove($opinion);
         $em->flush();
-        $this->get(RedisStorageHelper::class)->recomputeUserCounters($viewer);
+        $this->redisStorageHelper->recomputeUserCounters($viewer);
     }
 
     /**
@@ -207,6 +223,7 @@ class OpinionsController extends AbstractFOSRestController
      */
     public function postOpinionReportAction(Request $request, string $opinionId)
     {
+        /** @var User $viewer */
         $viewer = $this->getUser();
         /** @var Opinion $opinion */
         $opinion = $this->globalIdResolver->resolve($opinionId, $viewer);
@@ -228,7 +245,7 @@ class OpinionsController extends AbstractFOSRestController
         $this->getDoctrine()
             ->getManager()
             ->flush();
-        $this->get(ReportNotifier::class)->onCreate($report);
+        $this->reportNotifier->onCreate($report);
 
         return $report;
     }
@@ -270,7 +287,7 @@ class OpinionsController extends AbstractFOSRestController
         $this->getDoctrine()
             ->getManager()
             ->flush();
-        $this->get(ReportNotifier::class)->onCreate($report);
+        $this->reportNotifier->onCreate($report);
 
         return $report;
     }

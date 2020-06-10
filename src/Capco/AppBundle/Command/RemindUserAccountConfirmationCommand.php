@@ -59,5 +59,7 @@ class RemindUserAccountConfirmationCommand extends Command
         }
 
         $output->writeln(sprintf('%d user(s) reminded.', \count($userIds)));
+
+        return 0;
     }
 }

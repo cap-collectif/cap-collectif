@@ -58,5 +58,7 @@ class FixMalformedResponsesCommand extends Command
         $this->manager->flush();
 
         $output->writeln($count . ' responses successfully fixed.');
+
+        return 0;
     }
 }

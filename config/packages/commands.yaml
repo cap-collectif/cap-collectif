@@ -1,26 +1,38 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
-    bind:
-      $projectRootDir: '%kernel.project_dir%'
-      $kernelRootDir: '%kernel.root_dir%'
-      Predis\ClientInterface: '@snc_redis.default'
-      $logger: '@logger'
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $projectRootDir: '%kernel.project_dir%'
+            $kernelRootDir: '%kernel.root_dir%'
+            Predis\ClientInterface: '@snc_redis.default'
+            $logger: '@logger'
 
-  Capco\AppBundle\Command\:
-    resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/*'
-    exclude: '%kernel.project_dir%/src/Capco/AppBundle/Command/Maker/*'
+    Capco\AppBundle\Command\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/*'
+        exclude: '%kernel.project_dir%/src/Capco/AppBundle/Command/Maker/*'
 
-  Capco\AppBundle\Command\GenerateMapProviderPublicToken:
-    arguments:
-      $mapboxSecretKey: '%mapbox_secret_key%'
+    Capco\AppBundle\Command\GenerateMapProviderPublicToken:
+        arguments:
+            $mapboxSecretKey: '%mapbox_secret_key%'
 
-  Capco\AppBundle\Command\ReinitCommand:
-    arguments:
-      $name: 'capco:reinit'
+    Capco\AppBundle\Command\ReinitCommand:
+        arguments:
+            $name: 'capco:reinit'
 
-  Capco\AppBundle\Command\LoadProdDataCommand:
-    arguments:
-      $name: 'capco:load-prod-data'
+    Capco\AppBundle\Command\LoadProdDataCommand:
+        arguments:
+            $name: 'capco:load-prod-data'
+
+    Capco\AppBundle\Command\CreateAnswersFromCsvCommand:
+        arguments:
+            $name: 'capco:import:answers-from-csv'
+
+    Capco\AppBundle\Command\ComputeDiffCommand:
+        arguments:
+            $name: 'capco:compute:diff'
+
+    Capco\AppBundle\Command\CreateAccountsFromEmailsCommand:
+        arguments:
+            $name: 'capco:import:user-acounts-from-emails'

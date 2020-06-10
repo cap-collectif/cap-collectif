@@ -21,7 +21,7 @@ class CreateAnswersFromCsvCommand extends Command
     private $title = 'Réponse du gouvernement';
     private $container;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(?string $name, ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct($name);
@@ -37,6 +37,8 @@ class CreateAnswersFromCsvCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->import($input, $output);
+
+        return 0;
     }
 
     protected function import(InputInterface $input, OutputInterface $output)

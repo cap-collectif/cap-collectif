@@ -42,6 +42,8 @@ class ImportConsultationModalsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->import($input, $output);
+
+        return 0;
     }
 
     protected function import(InputInterface $input, OutputInterface $output)

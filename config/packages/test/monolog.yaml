@@ -1,0 +1,10 @@
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: php://stderr
+            level: warning
+        file:
+            type: stream
+            path: '%kernel.logs_dir%/test.log'
+            level: debug

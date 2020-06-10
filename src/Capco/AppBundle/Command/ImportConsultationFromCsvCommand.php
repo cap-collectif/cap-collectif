@@ -64,7 +64,7 @@ class ImportConsultationFromCsvCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->import($input, $output);
+        return $this->import($input, $output);
     }
 
     protected function import(InputInterface $input, OutputInterface $output): int

@@ -215,6 +215,8 @@ class CreateUserAccountsFromCSVCommand extends Command
         }
         $progressBar->finish();
         $io->success($createdCount . ' users created.');
+
+        return 0;
     }
 
     private function deduplicateEmail(array $rows, SymfonyStyle $output): array

@@ -380,6 +380,8 @@ DQL;
         }
 
         $output->writeln('Calculation completed');
+
+        return 0;
     }
 
     private function getContainer()

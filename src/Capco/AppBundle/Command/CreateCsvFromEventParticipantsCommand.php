@@ -25,7 +25,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         'user_email',
         'user_firstname',
         'user_lastname',
-        'user_privateRegistration'
+        'user_privateRegistration',
     ];
 
     const USER_FRAGMENT = '
@@ -37,13 +37,13 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
     ';
 
     protected $writer;
-    protected $connectionTraversor;
-    protected $listener;
-    protected $executor;
-    protected $projectRootDir;
-    protected $logger;
-    protected $eventRepository;
-    protected $manager;
+    protected ConnectionTraversor $connectionTraversor;
+    protected GraphQlAclListener $listener;
+    protected Executor $executor;
+    protected string $projectRootDir;
+    protected LoggerInterface $logger;
+    protected EventRepository $eventRepository;
+    protected Manager $manager;
 
     public function __construct(
         GraphQlAclListener $listener,
@@ -85,7 +85,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         if (!$this->manager->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
 
-            return;
+            return 1;
         }
 
         $events = $this->eventRepository->findAllWithRegistration();
@@ -96,6 +96,8 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
 
             $this->printMemoryUsage($output);
         }
+
+        return 0;
     }
 
     private function printMemoryUsage(OutputInterface $output): void
@@ -123,7 +125,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getEventParticipantsGraphQLQuery($event['id']),
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 
@@ -149,14 +151,14 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
                         $contributor['email'],
                         $contributor['firstname'],
                         $contributor['lastname'],
-                        $edge['registeredAnonymously'] ? 'yes' : 'no'
+                        $edge['registeredAnonymously'] ? 'yes' : 'no',
                     ]);
                 } else {
                     $writer->addRow([
                         $contributor['notRegisteredEmail'],
                         $contributor['username'],
                         null,
-                        $edge['registeredAnonymously'] ? 'yes' : 'no'
+                        $edge['registeredAnonymously'] ? 'yes' : 'no',
                     ]);
                 }
                 $progress->advance();

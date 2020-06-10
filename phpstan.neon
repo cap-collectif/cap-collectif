@@ -9,6 +9,7 @@ parameters:
         - vendor/autoload.php
     excludes_analyse:
         - %currentWorkingDirectory%/src/Kernel.php
+        - %currentWorkingDirectory%/config/packages/admin.yaml
         - %currentWorkingDirectory%/app/config/parameters.php
         - %currentWorkingDirectory%/src/DoctrineMigrations/*
         - %currentWorkingDirectory%/src/DoctrineMigrations/*

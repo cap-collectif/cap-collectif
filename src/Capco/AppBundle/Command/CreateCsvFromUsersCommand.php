@@ -115,7 +115,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         if (!$this->toggleManager->isActive('export')) {
             $output->writeln('Feature "export" must be enabled.');
 
-            return;
+            return 1;
         }
         $fileName = 'users.csv';
 
@@ -155,6 +155,8 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         $progress->finish();
 
         $output->writeln('The export file "' . $fileName . '" has been created.');
+
+        return 0;
     }
 
     /**

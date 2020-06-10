@@ -9,7 +9,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\RequirementRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
@@ -35,7 +35,7 @@ class StepRequirementsResolver implements ResolverInterface
 
         $user,
         Argument $args
-    ): Connection {
+    ): ConnectionInterface {
         $requirements = $this->repository->getByStep($step);
 
         $connection = $this->builder->connectionFromArray($requirements, $args);

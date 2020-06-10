@@ -46,5 +46,7 @@ class EncodeGlobalIdCommand extends Command
         $id = $input->getArgument('id');
 
         $output->writeln('<info>' . GlobalId::toGlobalId($type, $id) . '</info>');
+
+        return 0;
     }
 }

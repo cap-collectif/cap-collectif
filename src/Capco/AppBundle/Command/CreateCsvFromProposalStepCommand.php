@@ -130,41 +130,6 @@ fragment commentInfos on Comment {
   }
 }
 EOF;
-    protected const NEWS_INFO_FRAGMENT = <<<'EOF'
-fragment newsInfo on Post {
-  id
-  title
-  authors {
-    ... authorInfos
-  }
-  relatedContent {
-    __typename
-    ... on Proposal {
-      title
-    }
-    ... on Theme {
-      title
-    }
-    ... on Project {
-      title
-    }
-  }
-  comments {
-    edges {
-      node {
-        ... commentInfos
-      }
-    }
-  }
-  createdAt
-  updatedAt
-  commentable
-  displayedOnBlog
-  publishedAt
-  abstract
-  publicationStatus
-}
-EOF;
     protected const PROPOSAL_VOTE_INFOS_FRAGMENT = <<<'EOF'
 fragment proposalVoteInfos on ProposalVote{
   id
@@ -254,7 +219,7 @@ EOF;
         'proposal_district_name' => 'district.name',
         'proposal_illustration' => 'media.url',
         'proposal_summary' => 'summary',
-        'proposal_description' => 'bodyText'
+        'proposal_description' => 'bodyText',
     ];
 
     protected const COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER = [
@@ -356,33 +321,28 @@ EOF;
         'proposal_reportings_author_username' => 'reporting.author.username',
         'proposal_reportings_author_isEmailConfirmed' => 'reporting.author.isEmailConfirmed',
         'proposal_reportings_author_userType_id' => 'reporting.author.userType.id',
-        'proposal_reportings_author_userType_name' => 'reporting.author.userType.name'
+        'proposal_reportings_author_userType_name' => 'reporting.author.userType.name',
     ];
 
-    protected $projectRepository;
-    protected $toggleManager;
-    protected $executor;
+    protected ProjectRepository $projectRepository;
+    protected Manager $toggleManager;
+    protected Executor $executor;
     protected $writer;
     protected $infoResolver;
-    protected $currentQuery;
     protected $currentData;
-    /** @var CollectStep $currentStep */
+    /** @var CollectStep */
     protected $currentStep;
-    protected $voteCursor;
-    protected $proposalCursor;
-    protected $commentCursor;
     protected $headersMap = [];
 
     protected $proposalHeaderMap = [];
 
-    protected $currentProposalIndex;
-    protected $logger;
+    protected LoggerInterface $logger;
 
     protected static $defaultName = 'capco:export:proposalStep';
-    private $selectionStepRepository;
-    private $projectRootDir;
-    private $collectStepRepository;
-    private $connectionTraversor;
+    private SelectionStepRepository $selectionStepRepository;
+    private string $projectRootDir;
+    private CollectStepRepository $collectStepRepository;
+    private ConnectionTraversor $connectionTraversor;
 
     public function __construct(
         Executor $executor,
@@ -457,12 +417,12 @@ EOF;
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$this->toggleManager->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
 
-            return;
+            return 1;
         }
 
         if ($project = $this->getProject($input)) {
@@ -489,6 +449,8 @@ EOF;
                 $this->printMemoryUsage($output);
             }
         }
+
+        return 0;
     }
 
     protected function generateSheet(
@@ -506,7 +468,7 @@ EOF;
         $proposals = $this->executor
             ->execute('internal', [
                 'query' => $proposalsQuery,
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
@@ -1002,7 +964,7 @@ EOF;
         $commentWithVotes = $this->executor
             ->execute('internal', [
                 'query' => $commentVotesQuery,
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 

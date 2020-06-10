@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Form\ProjectType;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Notifier\ProjectNotifier;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -60,7 +62,7 @@ class ProjectsController extends AbstractFOSRestController
      */
     public function getProjectStepsAction(Project $project)
     {
-        return $project->getSteps()->map(function ($step) {
+        return $project->getSteps()->map(function (ProjectAbstractStep $step) {
             return $step->getStep();
         });
     }

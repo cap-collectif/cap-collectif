@@ -46,7 +46,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
         'comments_count',
         'is_commentable',
         'meta_description',
-        'custom_code'
+        'custom_code',
     ];
     /**
      * @var WriterInterface
@@ -94,14 +94,14 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$this->manager->isActive('export')) {
-            return;
+            return 1;
         }
         $fileName = 'events.csv';
 
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getEventsGraphQLQuery(),
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 
@@ -147,7 +147,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
                     $event['comments'] ? $event['comments']['totalCount'] : null,
                     $event['commentable'],
                     $event['metaDescription'],
-                    $event['customCode']
+                    $event['customCode'],
                 ]);
                 $progress->advance();
             },
@@ -161,6 +161,8 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
         $output->writeln('The export file "' . $fileName . '" has been created.');
 
         $this->executeSnapshot($input, $output, $fileName);
+
+        return 0;
     }
 
     private function getEventsGraphQLQuery(?string $userCursor = null): string

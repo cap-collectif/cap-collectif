@@ -78,10 +78,10 @@ trait QuestionPersisterTrait
                                 'QuestionChoice',
                                 $questionChoice->getId()
                             ),
-                            'deleteMe' => true
+                            'deleteMe' => true,
                         ];
                         array_splice($dataQuestion['question']['choices'], $position, 0, [
-                            $deletedChoice
+                            $deletedChoice,
                         ]);
                     }
                 }
@@ -109,8 +109,8 @@ trait QuestionPersisterTrait
                     'question' => [
                         'id' => $realQuestion->getId(),
                         'type' => $realQuestion->getType(),
-                        'title' => null
-                    ]
+                        'title' => null,
+                    ],
                 ];
                 // Inject back the deleted question into the arguments question array
                 array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
@@ -143,7 +143,7 @@ trait QuestionPersisterTrait
                         $deletedJump = [
                             'id' => $jump->getId(),
                             'origin' => null,
-                            'destination' => null
+                            'destination' => null,
                         ];
 
                         // Inject back the deleted question's logic jump into the arguments question jumps array
@@ -165,7 +165,7 @@ trait QuestionPersisterTrait
                             ) {
                                 $deletedJumpCondition = [
                                     'id' => $condition->getId(),
-                                    'operator' => null
+                                    'operator' => null,
                                 ];
                                 // Inject back the deleted question's logic jump into the arguments question jumps array
                                 array_splice(
@@ -319,44 +319,49 @@ trait QuestionPersisterTrait
             $question->setValidationRule(null);
         }
 
-        foreach ($choicesData as $choiceData) {
-            $choice = null;
-            if (isset($choiceData['id'])) {
-                // Do not use `array_filter` because we are dealing with HUGE data
-                // and we want to stop right after the element is found.
-                foreach ($choices as $currentChoice) {
-                    if ($currentChoice->getId() === $choiceData['id']) {
-                        $choice = $currentChoice;
+        if (\is_array($choicesData)) {
+            foreach ($choicesData as $choiceData) {
+                $choice = null;
+                if (isset($choiceData['id'])) {
+                    // Do not use `array_filter` because we are dealing with HUGE data
+                    // and we want to stop right after the element is found.
+                    foreach ($choices as $currentChoice) {
+                        if ($currentChoice->getId() === $choiceData['id']) {
+                            $choice = $currentChoice;
 
-                        break;
+                            break;
+                        }
                     }
-                }
-                if (!$choice) {
-                    throw new \RuntimeException('Choice not found, this should never happen.', 1);
-                }
-                if (isset($choiceData['deleteMe'])) {
-                    $question->removeChoice($choice);
+                    if (!$choice) {
+                        throw new \RuntimeException(
+                            'Choice not found, this should never happen.',
+                            1
+                        );
+                    }
+                    if (isset($choiceData['deleteMe'])) {
+                        $question->removeChoice($choice);
 
-                    continue;
+                        continue;
+                    }
+                } else {
+                    $choice = new QuestionChoice();
+                    $question->addChoice($choice);
                 }
-            } else {
-                $choice = new QuestionChoice();
-                $question->addChoice($choice);
-            }
-            $choice->setTitle($choiceData['title']);
-            if (isset($choiceData['description'])) {
-                $choice->setDescription($choiceData['description']);
-            }
+                $choice->setTitle($choiceData['title']);
+                if (isset($choiceData['description'])) {
+                    $choice->setDescription($choiceData['description']);
+                }
 
-            if (isset($choiceData['color'])) {
-                $choice->setColor($choiceData['color']);
-            }
-            if (isset($choiceData['image'])) {
-                $image = null;
-                if (null !== $choiceData['image']) {
-                    $image = $em->getRepository(Media::class)->find($choiceData['image']);
+                if (isset($choiceData['color'])) {
+                    $choice->setColor($choiceData['color']);
                 }
-                $choice->setImage($image);
+                if (isset($choiceData['image'])) {
+                    $image = null;
+                    if (null !== $choiceData['image']) {
+                        $image = $em->getRepository(Media::class)->find($choiceData['image']);
+                    }
+                    $choice->setImage($image);
+                }
             }
         }
         foreach ($question->getChoices() as $key => $questionChoice) {

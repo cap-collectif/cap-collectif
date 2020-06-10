@@ -53,6 +53,8 @@ class DeleteUserArchiveCommand extends Command
         $em->flush();
 
         $output->writeln('Old users archives are deleted !');
+
+        return 0;
     }
 
     protected function removeArchiveFile(UserArchive $archive)

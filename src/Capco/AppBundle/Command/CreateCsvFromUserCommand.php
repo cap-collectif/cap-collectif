@@ -292,7 +292,7 @@ EOF;
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $userId = $input->getArgument('userId');
 
@@ -321,6 +321,8 @@ EOF;
         }
 
         $output->writeln($zipPath);
+
+        return 0;
     }
 
     protected function requestDatas(string $userId): array

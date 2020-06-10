@@ -71,7 +71,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         'zipCode',
         'city',
         'phone',
-        'profileUrl'
+        'profileUrl',
     ];
     /**
      * @var WriterInterface
@@ -122,7 +122,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$this->toggleManager->isActive('export')) {
-            return;
+            return 1;
         }
 
         $projects = $this->projectRepository->findAllIdsWithSlugs();
@@ -132,7 +132,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
             $project = $this->executor
                 ->execute('internal', [
                     'query' => $this->getContributorsProjectGraphQLQuery($id),
-                    'variables' => []
+                    'variables' => [],
                 ])
                 ->toArray();
 
@@ -182,7 +182,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                             $contributor['zipCode'],
                             $contributor['city'],
                             $contributor['phone'],
-                            $contributor['url']
+                            $contributor['url'],
                         ]
                     );
                     $this->writer->addRow($row);
@@ -200,6 +200,8 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         }
 
         $output->writeln('All projects contributors have been successfully exported!');
+
+        return 0;
     }
 
     private function getContributorsProjectGraphQLQuery(

@@ -40,7 +40,7 @@ class CreateAccountsFromEmailsCommand extends Command
             );
             $output->writeln('Please set the --force option to run this command');
 
-            return;
+            return 1;
         }
 
         $finder = new Finder();
@@ -79,6 +79,8 @@ class CreateAccountsFromEmailsCommand extends Command
         (new Filesystem())->dumpFile('dump.txt', $dump);
 
         $output->writeln(\count($emails) . ' accounts have been created !');
+
+        return 0;
     }
 
     private function getContainer()

@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="appendix_type")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AppendixRepository")
  */
 class AppendixType
 {

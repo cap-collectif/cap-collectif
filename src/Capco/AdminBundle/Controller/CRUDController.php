@@ -17,10 +17,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
-use Symfony\Bridge\Twig\AppVariable;
-use Symfony\Bridge\Twig\Command\DebugCommand;
-use Symfony\Bridge\Twig\Extension\FormExtension;
-use Symfony\Bridge\Twig\Form\TwigRenderer;
 
 class CRUDController extends Controller
 {
@@ -115,7 +111,7 @@ class CRUDController extends Controller
                                 'objectId' => $objectId,
                                 'objectName' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
-                                )
+                                ),
                             ],
                             200,
                             []
@@ -129,7 +125,7 @@ class CRUDController extends Controller
                             [
                                 '%name%' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
-                                )
+                                ),
                             ],
                             'SonataAdminBundle'
                         )
@@ -154,7 +150,7 @@ class CRUDController extends Controller
                                     '<a href="' .
                                     $this->admin->generateObjectUrl('edit', $existingObject) .
                                     '">',
-                                '%link_end%' => '</a>'
+                                '%link_end%' => '</a>',
                             ],
                             'SonataAdminBundle'
                         )
@@ -172,7 +168,7 @@ class CRUDController extends Controller
                             [
                                 '%name%' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
-                                )
+                                ),
                             ],
                             'SonataAdminBundle'
                         )
@@ -200,7 +196,7 @@ class CRUDController extends Controller
                 'action' => 'edit',
                 'form' => $formView,
                 'object' => $existingObject,
-                'objectId' => $objectId
+                'objectId' => $objectId,
             ],
             null
         );
@@ -377,7 +373,7 @@ class CRUDController extends Controller
         return new JsonResponse([
             'status' => 'OK',
             'more' => !$pager->isLastPage(),
-            'items' => $items
+            'items' => $items,
         ]);
     }
 

@@ -118,35 +118,6 @@ Scenario: logged in API client wants to add an opinion with an appendixType from
   }
   """
 
-@security
-Scenario: logged in API client wants to add an opinion with unknown appendixType
-  Given I am logged in to api as user
-  When I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType7/opinions" with json:
-  """
-  {
-    "title": "Nouveau titre",
-    "body": "Mes modifications blablabla",
-    "appendices": [
-      {
-        "appendixType": "666",
-        "body": "Voici mon exposé qui n'existe pas"
-      }
-    ]
-  }
-  """
-  Then the JSON response status code should be 400
-  And the JSON response should match:
-  """
-  {
-      "code": 400,
-      "message": "Validation Failed",
-      "errors": {
-          "errors": ["opinion.wrong_appendices"],
-          "children": @...@
-      }
-  }
-  """
-
 ## Update
 @security
 Scenario: Anonymous API client wants to update an opinion

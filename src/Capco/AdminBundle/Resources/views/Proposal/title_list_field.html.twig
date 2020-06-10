@@ -6,10 +6,6 @@
             <a href="{{ path('admin_capco_app_proposal_edit', {id: value.id}) }}">
                 {{ value.title|trans({}, 'CapcoAppBundle') }}
             </a>
-            {% if value.summary is defined %}
-                <br>
-                <span class="text-grey">{{ value.summary|trans({}, 'CapcoAppBundle') }}</span>
-            {% endif %}
         {% endif %}
     {% endspaceless %}
 {% endblock %}

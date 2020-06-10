@@ -1,6 +1,6 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
-{% set timezone = archive.requestedAt.timezone %}
+{% set timezone = archive.requestedAt.getTimezone() %}
 {% set archiveDate =  archive.requestedAt|localizeddate('long', 'none', user_locale, timezone)  %}
 
 {% block html_title %}

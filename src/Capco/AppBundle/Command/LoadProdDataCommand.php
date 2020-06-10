@@ -108,6 +108,8 @@ class LoadProdDataCommand extends Command
         $this->loadToggles($output, $env);
 
         $output->writeln('Load prod data completed');
+
+        return 0;
     }
 
     protected function loadFixtures(OutputInterface $output, string $env = 'dev')

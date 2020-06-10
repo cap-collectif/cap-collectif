@@ -3,9 +3,10 @@
 namespace Capco\AppBundle\Translator;
 
 use Symfony\Component\Translation\TranslatorBagInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\LocaleAwareInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class NoTranslator implements TranslatorInterface, TranslatorBagInterface
+class NoTranslator implements TranslatorInterface, TranslatorBagInterface, LocaleAwareInterface
 {
     private $translator;
 
@@ -16,7 +17,7 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface
 
     public function trans($id, array $parameters = [], $domain = null, $locale = null)
     {
-        if ($domain === 'routes'){
+        if ('routes' === $domain) {
             return $this->translator->trans($id, $parameters, $domain, $locale);
         }
         if (0 === \count($parameters)) {

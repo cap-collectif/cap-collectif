@@ -26,5 +26,7 @@ class DecodeGlobalIdCommand extends Command
         $id = $input->getArgument('id');
 
         $output->writeln('<info>' . var_export(GlobalId::fromGlobalId($id)) . '</info>');
+
+        return 0;
     }
 }

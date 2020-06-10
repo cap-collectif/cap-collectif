@@ -107,7 +107,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
     {
         if (!$this->toggleManager->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
-            return;
+            return 1;
         }
         $delimiter = $input->getOption('delimiter');
 
@@ -120,6 +120,8 @@ class CreateStepContributorsCommand extends BaseExportCommand
                 $this->executeSnapshot($input, $output, $fileName);
             }
         }
+
+        return 0;
     }
 
     public static function getFilename(AbstractStep $step) : string {

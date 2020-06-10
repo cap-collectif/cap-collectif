@@ -35,6 +35,8 @@ class ListCommand extends Command
         });
 
         $style->table(['Name', 'Is Active?'], $list);
+
+        return 0;
     }
 
     private function getContainer()

@@ -69,7 +69,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         if (!$input->getOption('force') && !$this->toggleManager->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
 
-            return;
+            return 1;
         }
         $delimiter = $input->getOption('delimiter');
         $questionnaires = $this->questionnaireRepository->findAll();
@@ -79,6 +79,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
             $this->executeSnapshot($input, $output, $fileName);
         }
 
+        return 0;
     }
 
 

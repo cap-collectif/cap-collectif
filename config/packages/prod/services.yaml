@@ -13,7 +13,6 @@ doctrine:
 
 monolog:
     handlers:
-        # Used to output error log with stack trace to Docker's stdout.
         stdout_fingers_crossed:
             type: fingers_crossed
             action_level: error
@@ -40,13 +39,10 @@ monolog:
             handler: sentry_handler
         sentry_handler:
             type: service
-            id: 'BGalati\MonologSentryHandler\SentryHandler'
-
-swiftmailer:
-    default_mailer: mandrill
+            id: 'Capco\AppBundle\Sentry\SentryHandler'
 
 services:
-    BGalati\MonologSentryHandler\SentryHandler:
+    Capco\AppBundle\Sentry\SentryHandler:
         autowire: true
         autoconfigure: true
 

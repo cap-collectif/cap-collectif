@@ -74,6 +74,8 @@ class LoadBenchmarkDataCommand extends Command
         $this->recalculateCounters($output);
 
         $output->writeln('Load benchmark data completed');
+
+        return 0;
     }
 
     protected function loadFixtures(OutputInterface $output)

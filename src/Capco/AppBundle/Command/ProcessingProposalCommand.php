@@ -145,5 +145,7 @@ class ProcessingProposalCommand extends Command
             }
         }
         $output->write("${count} proposals have been processed.", true);
+
+        return 0;
     }
 }

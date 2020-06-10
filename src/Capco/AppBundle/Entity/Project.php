@@ -302,7 +302,7 @@ class Project implements IndexableInterface
         return $this->externalLink;
     }
 
-    public function setExternalLink(string $link = null): self
+    public function setExternalLink(?string $link = null): self
     {
         $this->externalLink = $link;
 
@@ -783,7 +783,7 @@ class Project implements IndexableInterface
         if (!empty($this->steps)) {
             $first = $this->steps[0];
             foreach ($this->steps as $step) {
-                if ($step->getPosition() < $first->getPosition()) {
+                if (null !== $step && $step->getPosition() < $first->getPosition()) {
                     $first = $step;
                 }
             }
@@ -800,18 +800,18 @@ class Project implements IndexableInterface
     public function getCurrentStep(): ?AbstractStep
     {
         foreach ($this->steps as $step) {
-            if ($step->getStep() && $step->getStep()->isOpen()) {
+            if (null !== $step && $step->getStep() && $step->getStep()->isOpen()) {
                 return $step->getStep();
             }
         }
         foreach ($this->steps as $step) {
-            if ($step->getStep() && $step->getStep()->isFuture()) {
+            if (null !== $step && $step->getStep() && $step->getStep()->isFuture()) {
                 return $step->getStep();
             }
         }
         $reversedSteps = array_reverse($this->steps->toArray());
         foreach ($reversedSteps as $step) {
-            if ($step->getStep() && $step->getStep()->isClosed()) {
+            if (null !== $step && $step->getStep() && $step->getStep()->isClosed()) {
                 return $step->getStep();
             }
         }
@@ -941,7 +941,7 @@ class Project implements IndexableInterface
         return $this->projectType;
     }
 
-    public function setProjectType(ProjectType $projectType = null): self
+    public function setProjectType(?ProjectType $projectType = null): self
     {
         $this->projectType = $projectType;
 
