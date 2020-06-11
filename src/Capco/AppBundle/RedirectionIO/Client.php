@@ -20,15 +20,12 @@ class Client
     private $logger;
     private $currentConnection;
     private $currentConnectionName;
+    private $toggle;
 
-    /**
-     * @param Manager $manager
-     * @param int     $timeout
-     * @param bool    $debug
-     */
     public function __construct(
         ProjectKeyDataloader $projectKeyDataloader,
         LoggerInterface $logger,
+        Manager $toggle,
         $timeout,
         string $agentTcp,
         string $agentUnix,
@@ -50,18 +47,14 @@ class Client
         $this->timeout = $timeout;
         $this->debug = $debug;
         $this->logger = $logger;
+        $this->toggle = $toggle;
     }
 
     public function request(CommandInterface $command)
     {
         $projectKey = $this->projectKeyDataloader->loadKey();
-
-        if (!$projectKey) {
-            $this->logger->debug(
-                'Skipping RedirectionIO client, because feature is not enabled or no project key.'
-            );
-
-            return;
+        if (!$projectKey || !$this->toggle->isActive('http_redirects')) {
+            return null;
         }
 
         $command->setProjectKey($projectKey);
