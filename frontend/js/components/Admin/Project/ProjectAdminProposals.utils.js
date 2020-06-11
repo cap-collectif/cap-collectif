@@ -1,4 +1,5 @@
 // @flow
+import type { IntlShape } from 'react-intl';
 import uniqBy from 'lodash/uniqBy';
 import isEqual from 'lodash/isEqual';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
@@ -11,11 +12,13 @@ import type {
 import type { ModalConfirmRevokement_analystsWithAnalyseBegin } from '~relay/ModalConfirmRevokement_analystsWithAnalyseBegin.graphql';
 import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
 import { DEFAULT_FILTERS } from '~/components/Admin/Project/ProjectAdminPage.context';
-import { type RowType } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
+import {
+  type RowType,
+  type AllUserAssigned,
+} from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
 import { getStatus as getStatusAnalyst } from '~/components/Analysis/UserAnalystList/UserAnalystList';
 import { PROPOSAL_STATUS, SHOWING_STEP_TYPENAME } from '~/constants/AnalyseConstants';
 import { getStatus } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
-import type { User } from '~/components/Analysis/AnalysisFilter/AnalysisFilterRole';
 import type { CategoryFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
 import type { DistrictFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
 import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql';
@@ -39,12 +42,6 @@ type FilterOrderedFormatted = {|
   +icon?: string,
   +color?: ?string,
   +isShow: boolean,
-|};
-
-export type ProposalsSelected = {|
-  +id: Uuid,
-  +steps: Uuid[],
-  +status: ?Uuid,
 |};
 
 export type Analyst = {|
@@ -172,6 +169,7 @@ const getFormattedFiltersOrdered = (
   districts: $ReadOnlyArray<DistrictFilter>,
   steps: $ReadOnlyArray<StepFilter>,
   stepStatuses: $ReadOnlyArray<StepStatusFilter>,
+  intl: IntlShape,
 ): $ReadOnlyArray<FilterOrderedFormatted> => {
   return ((filtersOrdered
     .map(filter => {
@@ -218,6 +216,39 @@ const getFormattedFiltersOrdered = (
           icon: 'stack',
         };
       }
+
+      if (filter.type === 'analysts') {
+        if (!filter.id) return null;
+
+        return {
+          id: 'analysts',
+          name: intl.formatMessage({ id: 'tag.filter.analysis' }),
+          type: 'analysts',
+          action: 'CLEAR_ANALYSTS_FILTER',
+        };
+      }
+
+      if (filter.type === 'supervisor') {
+        if (!filter.id) return null;
+
+        return {
+          id: 'supervisor',
+          name: intl.formatMessage({ id: 'tag.filter.opinion' }),
+          type: 'supervisor',
+          action: 'CLEAR_SUPERVISOR_FILTER',
+        };
+      }
+
+      if (filter.type === 'decisionMaker') {
+        if (!filter.id) return null;
+
+        return {
+          id: 'decisionMaker',
+          name: intl.formatMessage({ id: 'tag.filter.decision' }),
+          type: 'decisionMaker',
+          action: 'CLEAR_DECISION_MAKER_FILTER',
+        };
+      }
     })
     .filter(Boolean): any): $ReadOnlyArray<FilterOrderedFormatted>);
 };
@@ -227,6 +258,7 @@ export const getAllFormattedChoicesForProject = (
   stepId: ?Uuid,
   selectedRows: string[],
   filtersOrdered: $PropertyType<ProjectAdminPageState, 'filtersOrdered'>,
+  intl: IntlShape,
 ): AllFormattedChoicesReturn => {
   const categories = getFormattedCategoriesChoicesForProject(project);
   const districts = getFormattedDistrictsChoicesForProject(project);
@@ -244,6 +276,7 @@ export const getAllFormattedChoicesForProject = (
       districts,
       steps,
       stepStatuses,
+      intl,
     ),
   };
 };
@@ -523,15 +556,35 @@ export const getWordingEmpty = (
   }
 };
 
-export const getAllUserAssigned = (project: ProjectAdminAnalysis_project): User[] => {
-  const allUserAssigned = project.firstAnalysisStep?.proposals.edges
+export const getAllUserAssigned = (project: ProjectAdminAnalysis_project): AllUserAssigned => {
+  const allUserAssigned = ((project.firstAnalysisStep?.proposals.edges
     ?.filter(Boolean)
     .map(edge => edge.node)
-    .map(proposal => [...(proposal.analysts || []), proposal.supervisor, proposal.decisionMaker])
-    .flat()
-    .filter(Boolean);
+    .reduce(
+      (acc, proposal) => ({
+        analysts:
+          proposal.analysts && proposal.analysts.length > 0
+            ? [...acc.analysts, ...proposal.analysts]
+            : acc.analysts,
+        supervisors: proposal.supervisor
+          ? [...acc.supervisors, proposal.supervisor]
+          : acc.supervisors,
+        decisionMakers: proposal.decisionMaker
+          ? [...acc.decisionMakers, proposal.decisionMaker]
+          : acc.decisionMakers,
+      }),
+      {
+        analysts: [],
+        supervisors: [],
+        decisionMakers: [],
+      },
+    ): any): AllUserAssigned);
 
-  return ((uniqBy(allUserAssigned, 'id'): any): User[]);
+  return {
+    analysts: uniqBy(allUserAssigned.analysts, 'id'),
+    supervisors: uniqBy(allUserAssigned.supervisors, 'id'),
+    decisionMakers: uniqBy(allUserAssigned.decisionMakers, 'id'),
+  };
 };
 
 export const getUsersWithAnalyseBegin = (

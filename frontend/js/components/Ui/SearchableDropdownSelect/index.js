@@ -21,6 +21,12 @@ type Props = {|
     +enabled?: boolean,
     +message?: string,
   |},
+  +resetChoice?: {|
+    +onReset?: () => void,
+    +enabled?: boolean,
+    +disabled?: boolean,
+    +message?: string,
+  |},
   +message?: React.Element<typeof DropdownSelectMessage>,
   +searchInputIcon?: React.Node,
   +defaultOptions?: $ReadOnlyArray<any>,
@@ -36,6 +42,7 @@ const SearchableDropdownSelect = ({
   defaultOptions,
   options,
   clearChoice,
+  resetChoice,
   searchInputIcon,
   noResultsMessage,
   searchPlaceholder,
@@ -106,6 +113,14 @@ const SearchableDropdownSelect = ({
                 : onChangeConnected(e);
             }}
           />
+          {resetChoice?.enabled && (
+            <S.ButtonReset
+              type="button"
+              onClick={resetChoice?.onReset}
+              disabled={resetChoice?.disabled}>
+              {resetChoice?.message || ''}
+            </S.ButtonReset>
+          )}
         </DropdownSelect.Header>
 
         {state.status === 'loading' && (

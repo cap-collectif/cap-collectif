@@ -56,6 +56,7 @@ const DropdownSelectChoice = ({
   const {
     onChange,
     value: dropdownValue,
+    defaultValue,
     isMultiSelect,
     allValues,
     initialValue,
@@ -123,7 +124,12 @@ const DropdownSelectChoice = ({
           }
         } else {
           setInitialValue(null);
-          onChange(isChecked ? null : value);
+
+          if (isChecked) {
+            onChange(defaultValue || null);
+          } else {
+            onChange(value);
+          }
           if (indeterminate) {
             setIndeterminate(false);
           }
@@ -132,6 +138,7 @@ const DropdownSelectChoice = ({
     },
     [
       disabled,
+      dropdownDisabled,
       onClick,
       onChange,
       emitChange,
@@ -143,8 +150,8 @@ const DropdownSelectChoice = ({
       mode,
       value,
       dropdownValue,
-      dropdownDisabled,
       allValues,
+      defaultValue,
     ],
   );
   return (

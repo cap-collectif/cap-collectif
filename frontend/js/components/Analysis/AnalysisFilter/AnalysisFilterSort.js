@@ -29,6 +29,7 @@ const AnalysisFilterSort = ({ value, onChange }: Props) => {
         <DropdownSelect
           shouldOverflow
           value={value}
+          defaultValue={ORDER_BY.NEWEST}
           onChange={newValue => onChange(newValue)}
           title={intl.formatMessage({ id: 'sort-by' })}>
           <DropdownSelect.Choice value={ORDER_BY.NEWEST}>

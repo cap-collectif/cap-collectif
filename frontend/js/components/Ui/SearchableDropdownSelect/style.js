@@ -25,3 +25,15 @@ export const Input: StyledComponent<{}, {}, typeof ClearableInput> = styled(Clea
     padding-bottom: 8px;
   }
 `;
+
+export const ButtonReset: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+  color: ${colors.primaryColor};
+  border: none;
+  background: none;
+  padding: 10px 0 0 4px;
+
+  &:disabled {
+    color: ${colors.darkGray};
+    opacity: 0.5;
+  }
+`;

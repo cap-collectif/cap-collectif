@@ -141,4 +141,15 @@ describe('<DropdownSelect />', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render correctly with default value', () => {
+    const wrapper = shallow(
+      <DropdownSelect title="Trier par" value="item3" defaultValue="item1">
+        <DropdownSelect.Choice value="item1">Item 1</DropdownSelect.Choice>
+        <DropdownSelect.Choice value="item2">Item 2</DropdownSelect.Choice>
+        <DropdownSelect.Choice value="item3">Item 3</DropdownSelect.Choice>
+      </DropdownSelect>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 });

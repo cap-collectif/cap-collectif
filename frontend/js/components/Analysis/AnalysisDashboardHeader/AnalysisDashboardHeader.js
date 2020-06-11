@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
+import { createPaginationContainer, fetchQuery, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import type { GlobalState, Uuid } from '~/types';
@@ -174,7 +174,7 @@ const AnalysisDashboardHeader = ({
   defaultUsers,
 }: $Diff<Props, { relay: * }>) => {
   const intl = useIntl();
-  const allUserAssigned = getAllUserAssigned(project);
+  const allUserAssigned = React.useMemo(() => getAllUserAssigned(project), [project]);
   const { ANALYST, SUPERVISOR, DECISION_MAKER } = TYPE_ACTION;
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useAnalysisProposalsContext();
@@ -245,7 +245,17 @@ const AnalysisDashboardHeader = ({
         title="panel.analysis.subtitle"
         titleFilter="filter.by.assigned.analyst"
         value={parameters.filters.analysts}
-        allUserAssigned={allUserAssigned}
+        allUserAssigned={allUserAssigned.analysts}
+        reset={{
+          enabled: true,
+          disabled: parameters.filters.analysts.length === 0,
+          message: intl.formatMessage({ id: 'reset.analysis.filter' }),
+          onReset: () =>
+            dispatch({
+              type: 'CHANGE_ANALYSTS_FILTER',
+              payload: [],
+            }),
+        }}
         onChange={newValue =>
           dispatch({
             type: 'CHANGE_ANALYSTS_FILTER',
@@ -259,7 +269,7 @@ const AnalysisDashboardHeader = ({
         title="global.review"
         titleFilter="filter.by.assigned.supervisor"
         value={parameters.filters.supervisor}
-        allUserAssigned={allUserAssigned}
+        allUserAssigned={allUserAssigned.supervisors}
         onChange={newValue =>
           dispatch({
             type: 'CHANGE_SUPERVISOR_FILTER',
@@ -273,7 +283,7 @@ const AnalysisDashboardHeader = ({
         title="global.decision"
         titleFilter="filter.by.assigned.decision-maker"
         value={parameters.filters.decisionMaker}
-        allUserAssigned={allUserAssigned}
+        allUserAssigned={allUserAssigned.decisionMakers}
         onChange={newValue =>
           dispatch({
             type: 'CHANGE_DECISION_MAKER_FILTER',
@@ -495,66 +505,161 @@ const mapStateToProps = (state: GlobalState) => ({
 
 const AnalysisDashboardHeaderConnected = connect(mapStateToProps)(AnalysisDashboardHeader);
 
-export default createFragmentContainer(AnalysisDashboardHeaderConnected, {
-  project: graphql`
-    fragment AnalysisDashboardHeader_project on Project {
-      steps {
-        __typename
-        ... on ProposalStep {
-          form {
-            districts {
-              id
-              name
+export default createPaginationContainer(
+  AnalysisDashboardHeaderConnected,
+  {
+    project: graphql`
+      fragment AnalysisDashboardHeader_project on Project
+        @argumentDefinitions(
+          count: { type: "Int!" }
+          cursor: { type: "String" }
+          orderBy: {
+            type: "ProposalOrder!"
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          }
+          category: { type: "ID", defaultValue: null }
+          district: { type: "ID", defaultValue: null }
+          analysts: { type: "[ID!]", defaultValue: null }
+          supervisor: { type: "ID", defaultValue: null }
+          decisionMaker: { type: "ID", defaultValue: null }
+          state: { type: "ProposalTaskState", defaultValue: null }
+        ) {
+        id
+        steps {
+          __typename
+          ... on ProposalStep {
+            form {
+              districts {
+                id
+                name
+              }
+              categories {
+                id
+                name
+              }
             }
-            categories {
+          }
+        }
+        proposals: viewerAssignedProposals(
+          first: $count
+          after: $cursor
+          orderBy: $orderBy
+          category: $category
+          district: $district
+          analysts: $analysts
+          supervisor: $supervisor
+          decisionMaker: $decisionMaker
+          state: $state
+        )
+          @connection(
+            key: "AnalysisDashboardHeader_proposals"
+            filters: [
+              "orderBy"
+              "category"
+              "district"
+              "analysts"
+              "supervisor"
+              "decisionMaker"
+              "state"
+            ]
+          ) {
+          edges {
+            node {
               id
-              name
+              analyses {
+                state
+                updatedBy {
+                  id
+                }
+              }
+              assessment {
+                state
+                updatedBy {
+                  id
+                }
+              }
+              decision {
+                state
+                isApproved
+                updatedBy {
+                  id
+                }
+              }
+              analysts {
+                id
+                username
+                ...UserSearchDropdownChoice_user
+              }
+              supervisor {
+                id
+                username
+                ...UserSearchDropdownChoice_user
+              }
+              decisionMaker {
+                id
+                username
+                ...UserSearchDropdownChoice_user
+              }
+              ...AnalysisProposalListRole_proposal
             }
           }
         }
       }
-      proposals: viewerAssignedProposals {
-        edges {
-          node {
-            id
-            analyses {
-              state
-              updatedBy {
-                id
-              }
-            }
-            assessment {
-              state
-              updatedBy {
-                id
-              }
-            }
-            decision {
-              state
-              isApproved
-              updatedBy {
-                id
-              }
-            }
-            analysts {
-              id
-              username
-              ...UserSearchDropdownChoice_user
-            }
-            supervisor {
-              id
-              username
-              ...UserSearchDropdownChoice_user
-            }
-            decisionMaker {
-              id
-              username
-              ...UserSearchDropdownChoice_user
-            }
-            ...AnalysisProposalListRole_proposal
-          }
+    `,
+  },
+  {
+    direction: 'forward',
+    /*
+     * Based on node_modules/react-relay/ReactRelayPaginationContainer.js.flow, when I ask something
+     * in the pageInfo node, it forces me to include everything (e.g hasPrevPage, startCursor and
+     * endCursor) but I only need `hasNextPage`
+     * $FlowFixMe
+     * */
+    getConnectionFromProps(props: Props) {
+      return props.project && props.project.proposals;
+    },
+    getFragmentVariables(prevVars) {
+      return {
+        ...prevVars,
+      };
+    },
+    getVariables(props: Props, { count, cursor }, fragmentVariables) {
+      return {
+        ...fragmentVariables,
+        count,
+        cursor,
+        projectId: props.project && props.project.id,
+      };
+    },
+    query: graphql`
+      query AnalysisDashboardHeaderProposalsPaginatedQuery(
+        $projectId: ID!
+        $count: Int!
+        $cursor: String
+        $orderBy: ProposalOrder!
+        $category: ID
+        $district: ID
+        $analysts: [ID!]
+        $supervisor: ID
+        $decisionMaker: ID
+        $state: ProposalTaskState
+      ) {
+        project: node(id: $projectId) {
+          id
+          ...AnalysisDashboardHeader_project
+            @arguments(
+              count: $count
+              cursor: $cursor
+              orderBy: $orderBy
+              category: $category
+              district: $district
+              analysts: $analysts
+              supervisor: $supervisor
+              decisionMaker: $decisionMaker
+              state: $state
+            )
         }
       }
-    }
-  `,
-});
+    `,
+  },
+);

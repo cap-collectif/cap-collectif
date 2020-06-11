@@ -38,6 +38,7 @@ export type Props = {|
   +onChange?: DropdownOnChangeType,
   +children: React.Node,
   +disabled?: boolean,
+  +defaultValue?: string,
 |};
 
 export const useDropdownSelect = (): Context => {
@@ -52,6 +53,7 @@ const DropdownSelect = ({
   children,
   title,
   value,
+  defaultValue,
   onChange,
   initialValue: initial = [],
   mode = 'normal',
@@ -85,8 +87,19 @@ const DropdownSelect = ({
       setInitialValue,
       initialValue,
       disabled,
+      defaultValue,
     }),
-    [value, mode, initialValue, allValues, setInitialValue, onChange, isMultiSelect, disabled],
+    [
+      value,
+      mode,
+      initialValue,
+      allValues,
+      setInitialValue,
+      onChange,
+      isMultiSelect,
+      disabled,
+      defaultValue,
+    ],
   );
 
   return (

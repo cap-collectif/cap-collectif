@@ -23,6 +23,7 @@ const AnalysisFilterProgressState = ({ value, onChange }: Props) => {
         <DropdownSelect
           shouldOverflow
           value={value}
+          defaultValue="ALL"
           onChange={newValue => onChange(newValue)}
           title={intl.formatMessage({ id: 'filter-by' })}>
           <DropdownSelect.Choice value="ALL">

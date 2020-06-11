@@ -392,7 +392,9 @@ const assignNobodyDecisionMaker = async (
 const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }>) => {
   const intl = useIntl();
   const { selectedRows, rowsCount } = usePickableList();
-  const allUserAssigned = getAllUserAssigned(project);
+
+  const allUserAssigned = React.useMemo(() => getAllUserAssigned(project), [project]);
+
   const {
     analysts: analystsWithAnalyseBegin,
     supervisors: supervisorsWithAnalyseBegin,
@@ -475,7 +477,17 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
         title="panel.analysis.subtitle"
         titleFilter="filter.by.assigned.analyst"
         value={parameters.filters.analysts}
-        allUserAssigned={allUserAssigned}
+        allUserAssigned={allUserAssigned.analysts}
+        reset={{
+          enabled: true,
+          disabled: parameters.filters.analysts.length === 0,
+          message: intl.formatMessage({ id: 'reset.analysis.filter' }),
+          onReset: () =>
+            dispatch({
+              type: 'CHANGE_ANALYSTS_FILTER',
+              payload: [],
+            }),
+        }}
         onChange={newValue =>
           dispatch({
             type: 'CHANGE_ANALYSTS_FILTER',
@@ -489,7 +501,7 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
         title="global.review"
         titleFilter="filter.by.assigned.supervisor"
         value={parameters.filters.supervisor}
-        allUserAssigned={allUserAssigned}
+        allUserAssigned={allUserAssigned.supervisors}
         onChange={newValue =>
           dispatch({
             type: 'CHANGE_SUPERVISOR_FILTER',
@@ -503,7 +515,7 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
         title="global.decision"
         titleFilter="filter.by.assigned.decision-maker"
         value={parameters.filters.decisionMaker}
-        allUserAssigned={allUserAssigned}
+        allUserAssigned={allUserAssigned.decisionMakers}
         onChange={newValue =>
           dispatch({
             type: 'CHANGE_DECISION_MAKER_FILTER',

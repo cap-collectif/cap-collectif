@@ -212,3 +212,26 @@ describe('<SearchableDropdownSelect />', () => {
     ).toBe('anime3');
   });
 });
+
+it('should render correctly with reset button', () => {
+  const wrapper = shallow(
+    <SearchableDropdownSelect
+      resetChoice={{
+        enabled: true,
+        message: 'Reset choices',
+        onReset: jest.fn(),
+      }}
+      searchPlaceholder="Rechercher un animé"
+      loadOptions={loadOptionsEmptyResultsMock}
+      title="Votre animé préféré"
+      noResultsMessage="Aucun animé trouvé">
+      {results =>
+        results.map(anime => (
+          <DropdownSelect.Choice value={anime.id}>{anime.title}</DropdownSelect.Choice>
+        ))
+      }
+    </SearchableDropdownSelect>,
+  );
+
+  expect(wrapper).toMatchSnapshot();
+});

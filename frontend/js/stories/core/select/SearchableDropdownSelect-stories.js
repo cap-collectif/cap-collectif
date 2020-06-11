@@ -142,4 +142,30 @@ storiesOf('Core|Select/SearchableDropdownSelect', module)
         }
       </SearchableDropdownSelect>
     );
+  })
+  .add('with button reset', () => {
+    return (
+      <SearchableDropdownSelect
+        isMultiSelect
+        debounceMs={debounceKnob()}
+        resetChoice={{
+          enabled: true,
+          message: 'Clear choices',
+          onReset: () => {},
+        }}
+        searchPlaceholder={searchPlaceholderKnob()}
+        noResultsMessage={noResultsMessageKnob()}
+        searchInputIcon={<i className="cap cap-book-1" />}
+        shouldOverflow
+        loadOptions={promiseOptions}
+        title="Vos animés préférés">
+        {results =>
+          results.map(r => (
+            <DropdownSelect.Choice key={r.mal_id} value={r.mal_id}>
+              {r.title}
+            </DropdownSelect.Choice>
+          ))
+        }
+      </SearchableDropdownSelect>
+    );
   });

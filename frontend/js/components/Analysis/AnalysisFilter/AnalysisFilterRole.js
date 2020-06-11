@@ -21,6 +21,12 @@ type Props = {|
   value: Uuid[] | ?Uuid,
   allUserAssigned: User[],
   onChange: (value: Uuid) => void,
+  reset?: {|
+    onReset: () => void,
+    enabled: boolean,
+    disabled: boolean,
+    message: string,
+  |},
   isMultiSelect?: boolean,
 |};
 
@@ -66,6 +72,7 @@ const AnalysisFilterRole = ({
   value,
   allUserAssigned,
   onChange,
+  reset,
   isMultiSelect,
 }: Props) => {
   const intl = useIntl();
@@ -99,7 +106,8 @@ const AnalysisFilterRole = ({
           options={getUsersCleaned(usersDisplay, usersFiltered, searchTerm)}
           noResultsMessage={intl.formatMessage({ id: 'no_result' })}
           onChangeSearch={searchText => setSearchTerm(searchText)}
-          onChange={newValue => onChange(newValue)}>
+          onChange={newValue => onChange(newValue)}
+          resetChoice={reset}>
           {users =>
             users.map(user => <UserSearchDropdownChoice key={user.id} user={user} type={type} />)
           }

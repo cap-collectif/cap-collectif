@@ -39,7 +39,15 @@ export type Filters = {|
 
 export type Filter = {|
   +id: Uuid,
-  +type: 'district' | 'category' | 'status' | 'step' | 'progressState',
+  +type:
+    | 'district'
+    | 'category'
+    | 'status'
+    | 'step'
+    | 'progressState'
+    | 'analysts'
+    | 'supervisor'
+    | 'decisionMaker',
 |};
 
 export type ProjectAdminPageState = {|
@@ -72,8 +80,11 @@ export type Action =
   | { type: 'CLEAR_PROGRESS_STATE_FILTER' }
   | { type: 'CHANGE_STATE_FILTER', payload: ProposalsStateValues }
   | { type: 'CHANGE_ANALYSTS_FILTER', payload: Uuid[] }
+  | { type: 'CLEAR_ANALYSTS_FILTER' }
   | { type: 'CHANGE_SUPERVISOR_FILTER', payload: Uuid }
+  | { type: 'CLEAR_SUPERVISOR_FILTER' }
   | { type: 'CHANGE_DECISION_MAKER_FILTER', payload: Uuid }
+  | { type: 'CLEAR_DECISION_MAKER_FILTER' }
   | { type: 'SEARCH_TERM', payload: ?string }
   | { type: 'CLEAR_TERM' };
 
@@ -239,6 +250,22 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           ...state.filters,
           analysts: action.payload,
         },
+        filtersOrdered: [
+          {
+            id: action.payload[0],
+            type: 'analysts',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'analysts'),
+        ],
+      };
+    case 'CLEAR_ANALYSTS_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          analysts: [],
+        },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'analysts')],
       };
     case 'CHANGE_SUPERVISOR_FILTER':
       return {
@@ -247,6 +274,22 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           ...state.filters,
           supervisor: action.payload,
         },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'supervisor',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'supervisor'),
+        ],
+      };
+    case 'CLEAR_SUPERVISOR_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          supervisor: null,
+        },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'supervisor')],
       };
     case 'CHANGE_DECISION_MAKER_FILTER':
       return {
@@ -255,6 +298,22 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           ...state.filters,
           decisionMaker: action.payload,
         },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'decisionMaker',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'decisionMaker'),
+        ],
+      };
+    case 'CLEAR_DECISION_MAKER_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          decisionMaker: null,
+        },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'decisionMaker')],
       };
     case 'CHANGE_SORT':
       return {

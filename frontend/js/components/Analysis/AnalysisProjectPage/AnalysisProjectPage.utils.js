@@ -38,11 +38,18 @@ type ProjectWithAllSteps = {
 type FilterOrderedFormatted = {|
   +id: Uuid,
   +name: string,
-  +type: 'category' | 'district' | 'step' | 'status' | 'progressState',
+  +type:
+    | 'category'
+    | 'district'
+    | 'step'
+    | 'status'
+    | 'progressState'
+    | 'analysts'
+    | 'supervisor'
+    | 'decisionMaker',
   +action?: string,
   +icon?: string,
   +color?: ?string,
-  +isShow: boolean,
 |};
 
 type AllFormattedChoicesReturn = {|
@@ -70,6 +77,12 @@ type RoleUser = {|
 |};
 
 export type RowType = 'analyst' | 'supervisor' | 'decision-maker';
+
+export type AllUserAssigned = {|
+  analysts: User[],
+  supervisors: User[],
+  decisionMakers: User[],
+|};
 
 export const getSelectedSupervisorsByProposals = (
   project: AnalysisDashboardHeader_project,
@@ -264,6 +277,39 @@ const getFormattedFiltersOrdered = (
           action: 'CLEAR_PROGRESS_STATE_FILTER',
         };
       }
+
+      if (filter.type === 'analysts') {
+        if (!filter.id) return null;
+
+        return {
+          id: 'analysts',
+          name: intl.formatMessage({ id: 'tag.filter.analysis' }),
+          type: 'analysts',
+          action: 'CLEAR_ANALYSTS_FILTER',
+        };
+      }
+
+      if (filter.type === 'supervisor') {
+        if (!filter.id) return null;
+
+        return {
+          id: 'supervisor',
+          name: intl.formatMessage({ id: 'tag.filter.opinion' }),
+          type: 'supervisor',
+          action: 'CLEAR_SUPERVISOR_FILTER',
+        };
+      }
+
+      if (filter.type === 'decisionMaker') {
+        if (!filter.id) return null;
+
+        return {
+          id: 'decisionMaker',
+          name: intl.formatMessage({ id: 'tag.filter.decision' }),
+          type: 'decisionMaker',
+          action: 'CLEAR_DECISION_MAKER_FILTER',
+        };
+      }
     })
     .filter(Boolean): any): $ReadOnlyArray<FilterOrderedFormatted>);
 };
@@ -306,15 +352,35 @@ export const getActionShown = (
   ];
 };
 
-export const getAllUserAssigned = (project: AnalysisDashboardHeader_project): User[] => {
-  const allUserAssigned = project?.proposals.edges
+export const getAllUserAssigned = (project: AnalysisDashboardHeader_project): AllUserAssigned => {
+  const allUserAssigned = ((project?.proposals.edges
     ?.filter(Boolean)
     .map(edge => edge.node)
-    .map(proposal => [...(proposal.analysts || []), proposal.supervisor, proposal.decisionMaker])
-    .flat()
-    .filter(Boolean);
+    .reduce(
+      (acc, proposal) => ({
+        analysts:
+          proposal.analysts && proposal.analysts.length > 0
+            ? [...acc.analysts, ...proposal.analysts]
+            : acc.analysts,
+        supervisors: proposal.supervisor
+          ? [...acc.supervisors, proposal.supervisor]
+          : acc.supervisors,
+        decisionMakers: proposal.decisionMaker
+          ? [...acc.decisionMakers, proposal.decisionMaker]
+          : acc.decisionMakers,
+      }),
+      {
+        analysts: [],
+        supervisors: [],
+        decisionMakers: [],
+      },
+    ): any): AllUserAssigned);
 
-  return ((uniqBy(allUserAssigned, 'id'): any): User[]);
+  return {
+    analysts: uniqBy(allUserAssigned.analysts, 'id'),
+    supervisors: uniqBy(allUserAssigned.supervisors, 'id'),
+    decisionMakers: uniqBy(allUserAssigned.decisionMakers, 'id'),
+  };
 };
 
 export const getDifferenceFilters = (

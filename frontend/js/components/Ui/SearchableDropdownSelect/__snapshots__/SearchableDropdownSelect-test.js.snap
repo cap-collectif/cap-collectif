@@ -95,3 +95,37 @@ exports[`<SearchableDropdownSelect /> should render correctly with disabled sear
   </style__SearchableDropdownContainer>
 </ContextProvider>
 `;
+
+exports[`should render correctly with reset button 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "dispatch": [Function],
+      "state": Object {
+        "error": null,
+        "results": Array [],
+        "status": "default",
+      },
+    }
+  }
+>
+  <style__SearchableDropdownContainer
+    title="Votre animé préféré"
+  >
+    <DropdownSelect.Header>
+      <style__Input
+        onChange={[Function]}
+        onClear={[Function]}
+        placeholder="Rechercher un animé"
+        type="text"
+      />
+      <style__ButtonReset
+        onClick={[MockFunction]}
+        type="button"
+      >
+        Reset choices
+      </style__ButtonReset>
+    </DropdownSelect.Header>
+  </style__SearchableDropdownContainer>
+</ContextProvider>
+`;

@@ -28,6 +28,7 @@ const AnalysisFilterCategory = ({ categories, value, onChange }: Props) => {
         <DropdownSelect
           shouldOverflow
           value={value}
+          defaultValue="ALL"
           onChange={newValue => onChange(newValue)}
           title={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
           <DropdownSelect.Choice value="ALL">

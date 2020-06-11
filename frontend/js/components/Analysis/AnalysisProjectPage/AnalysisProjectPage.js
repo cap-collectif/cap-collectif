@@ -190,6 +190,17 @@ export default createPaginationContainer(
           totalCount
         }
         ...AnalysisDashboardHeader_project
+          @arguments(
+            count: $count
+            cursor: $cursor
+            orderBy: $orderBy
+            category: $category
+            district: $district
+            analysts: $analysts
+            supervisor: $supervisor
+            decisionMaker: $decisionMaker
+            state: $state
+          )
       }
     `,
   },

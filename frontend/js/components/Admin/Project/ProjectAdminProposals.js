@@ -140,7 +140,8 @@ const assignStatus = async (
 const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
   const [isMergeModaleVisible, setIsMergeModaleVisible] = React.useState(false);
   const { selectedRows, rowsCount } = usePickableList();
-  const { parameters, dispatch } = useProjectAdminProposalsContext();
+  const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
+  const intl = useIntl();
 
   const { categories, districts, steps, stepStatuses, filtersOrdered } = React.useMemo(
     () =>
@@ -149,10 +150,10 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
         parameters.filters.step,
         selectedRows,
         parameters.filtersOrdered,
+        intl,
       ),
-    [project, parameters.filters.step, selectedRows, parameters.filtersOrdered],
+    [project, parameters.filters.step, parameters.filtersOrdered, selectedRows, intl],
   );
-  const intl = useIntl();
   const collectSteps = getFormattedCollectStepsForProject(project);
   const selectedStepId: ProposalsStepValues = parameters.filters.step;
   const selectedStep: ?StepFilter = steps.find(({ id }) => id === selectedStepId);
@@ -217,6 +218,7 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
             <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
               <DropdownSelect
                 value={parameters.filters.status}
+                defaultValue="ALL"
                 onChange={newValue => {
                   dispatch({
                     type: 'CHANGE_STATUS_FILTER',
@@ -250,6 +252,7 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
             <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
               <DropdownSelect
                 value={parameters.filters.step}
+                defaultValue={firstCollectStepId || steps[0].id}
                 onChange={newValue => {
                   dispatch({ type: 'CHANGE_STEP_FILTER', payload: ((newValue: any): SortValues) });
                 }}
