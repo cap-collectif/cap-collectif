@@ -1,5 +1,209 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Preview|Query.events connection fetches all english events 1`] = `
+Object {
+  "events": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "translations": Array [
+            Object {
+              "locale": "en-GB",
+              "title": "cosmopolite event",
+            },
+            Object {
+              "locale": "fr-FR",
+              "title": "evenement cosmopolite",
+            },
+          ],
+        },
+      },
+    ],
+    "totalCount": 1,
+  },
+}
+`;
+
+exports[`Preview|Query.events connection fetches all french events 1`] = `
+Object {
+  "events": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQz",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "GrenobleWeb2015",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQx",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "Event with registrations",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ2",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "Event without registrations",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ0",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "SymfonyLive Paris",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQxMA==",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "Event 10",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ5",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "Event 9",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQy",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "PHPTourDuFuture",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ4",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "Event 8",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ3",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "Event 7",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "evenementFutureSansDateDeFin",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "event Create By user with review approved",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
+          "translations": Array [
+            Object {
+              "locale": "en-GB",
+              "title": "cosmopolite event",
+            },
+            Object {
+              "locale": "fr-FR",
+              "title": "evenement cosmopolite",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "EvenementPresentSansDateDeFin",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "evenementPasseSansDateDeFin",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnQ1",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "ParisWeb2014",
+            },
+          ],
+        },
+      },
+    ],
+    "totalCount": 16,
+  },
+}
+`;
+
 exports[`Preview|Query.events connection fetches only events associated to a project with a cursor 1`] = `
 Object {
   "events": Object {

@@ -54,7 +54,8 @@ Scenario: Events can be filtered by title
   And I wait ".eventPreview" to appear on current page
   When I fill in the following:
     | event-search-input | without |
-  And I wait 1 seconds
+  And I wait ".eventPreview" to disappear on current page
+  And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
   And I should see "Event without registrations"
   And I should not see "Event with registrations"
@@ -66,7 +67,8 @@ Scenario: Archived events can be filtered by title
   And I check element "finished-events"
   When I fill in the following:
     | event-search-input | ParisWeb2014 |
-  And I wait 1 seconds
+  And I wait ".eventPreview" to disappear on current page
+  And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
   And I should see "ParisWeb2014"
   And I should not see "evenementPasseSansDateDeFin"

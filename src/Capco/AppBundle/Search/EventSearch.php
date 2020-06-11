@@ -25,7 +25,8 @@ class EventSearch extends Search
         'teaser',
         'teaser.std',
         'fullAddress',
-        'fullAddress.std'
+        'fullAddress.std',
+        'translations.locale',
     ];
 
     private $eventRepository;
@@ -105,11 +106,11 @@ class EventSearch extends Search
 
         return [
             'events' => $this->getHydratedResults($this->eventRepository, $ids),
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
-    public function getAllIdsOfAuthorOfEvent(string $terms = null): array
+    public function getAllIdsOfAuthorOfEvent(?string $terms = null): array
     {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
@@ -136,14 +137,14 @@ class EventSearch extends Search
                 return [
                     'endAt' => ['order' => $orderBy['direction']],
                     'startAt' => ['order' => $orderBy['direction']],
-                    'createdAt' => ['order' => $orderBy['direction']]
+                    'createdAt' => ['order' => $orderBy['direction']],
                 ];
 
             case EventOrderField::START_AT:
                 return [
                     'startAt' => ['order' => $orderBy['direction']],
                     'endAt' => ['order' => $orderBy['direction']],
-                    'createdAt' => ['order' => $orderBy['direction']]
+                    'createdAt' => ['order' => $orderBy['direction']],
                 ];
             default:
                 throw new \RuntimeException("Unknown order: ${$orderBy['field']}");
@@ -156,6 +157,9 @@ class EventSearch extends Search
 
         if (isset($providedFilters['themes'])) {
             $filters['themes.id'] = $providedFilters['themes'];
+        }
+        if (isset($providedFilters['locale'])) {
+            $filters['translations.locale'] = $providedFilters['locale'];
         }
         if (isset($providedFilters['isRegistrable'])) {
             $filters['isRegistrable'] = $providedFilters['isRegistrable'];

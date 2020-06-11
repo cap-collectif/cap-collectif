@@ -12,8 +12,13 @@ describe('<EventPage />', () => {
     isAuthenticated: false,
   };
 
-  it('renders correctly', () => {
-    const wrapper = shallow(<EventPage {...props} />);
+  it('renders correctly in french', () => {
+    const wrapper = shallow(<EventPage {...props} locale="fr-FR" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly in english', () => {
+    const wrapper = shallow(<EventPage {...props} locale="en-GB" />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -24,6 +29,7 @@ describe('<EventPage />', () => {
         eventPageTitle=""
         eventPageBody=""
         isAuthenticated={false}
+        locale="fr-FR"
       />,
     );
     expect(wrapper).toMatchSnapshot();

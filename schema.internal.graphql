@@ -6889,6 +6889,9 @@ type Query {
     """If provided, searches events by title and description."""
     search: String
 
+    """If provided, searches events by locale."""
+    locale: TranslationLocale
+
     """If non-null, filters events by comparing the start date with present."""
     isFuture: Boolean
 

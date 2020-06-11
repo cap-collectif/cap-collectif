@@ -130,6 +130,7 @@ export default createRefetchContainer(
           cursor: { type: "String" }
           theme: { type: "ID" }
           project: { type: "ID" }
+          locale: { type: "TranslationLocale" }
           search: { type: "String" }
           userType: { type: "ID" }
           isFuture: { type: "Boolean" }
@@ -143,6 +144,7 @@ export default createRefetchContainer(
             count: $count
             theme: $theme
             project: $project
+            locale: $locale
             search: $search
             userType: $userType
             isFuture: $isFuture
@@ -160,6 +162,7 @@ export default createRefetchContainer(
       $theme: ID
       $project: ID
       $userType: ID
+      $locale: TranslationLocale
       $search: String
       $isFuture: Boolean
       $author: ID
@@ -173,6 +176,7 @@ export default createRefetchContainer(
           theme: $theme
           project: $project
           userType: $userType
+          locale: $locale
           search: $search
           isFuture: $isFuture
           author: $author
@@ -184,6 +188,7 @@ export default createRefetchContainer(
         after: $cursor
         theme: $theme
         project: $project
+        locale: $locale
         search: $search
         userType: $userType
         isFuture: $isFuture

@@ -34,7 +34,17 @@ class EventNormalizer implements NormalizerInterface, SerializerAwareInterface
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
-
+        $trans = [];
+        $translations = $object->getTranslations();
+        foreach ($translations as $translation) {
+            $locale = $translation->getLocale();
+            $slug = $translation->getSlug();
+            $trans[] = [
+                'locale' => $locale,
+                'slug' => $slug,
+            ];
+        }
+        $data['translations'] = $trans;
         if (\in_array('ElasticsearchEvent', $groups, true)) {
             $data['isRegistrable'] = $object->isRegistrable();
 
@@ -45,10 +55,10 @@ class EventNormalizer implements NormalizerInterface, SerializerAwareInterface
             'show' => $this->router->generate(
                 'app_event_show',
                 [
-                    'slug' => $object->getSlug()
+                    'slug' => $object->getSlug(),
                 ],
                 true
-            )
+            ),
         ];
 
         try {

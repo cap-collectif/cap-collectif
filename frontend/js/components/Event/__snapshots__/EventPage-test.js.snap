@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EventPage /> renders correctly 1`] = `
+exports[`<EventPage /> renders correctly in english 1`] = `
 <div
   className="event-page"
 >
@@ -21,6 +21,12 @@ exports[`<EventPage /> renders correctly 1`] = `
               "kind": "LocalArgument",
               "name": "count",
               "type": "Int!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "locale",
+              "type": "TranslationLocale",
             },
             Object {
               "defaultValue": null,
@@ -115,6 +121,11 @@ exports[`<EventPage /> renders correctly 1`] = `
                 },
                 Object {
                   "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
                   "name": "orderBy",
                   "variableName": "orderBy",
                 },
@@ -156,7 +167,7 @@ exports[`<EventPage /> renders correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "a14f95f5d9912a5696da83137fdb15d3",
+        "hash": "5adfa9da8ee9553fda34938f3c1a85cb",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -171,6 +182,12 @@ exports[`<EventPage /> renders correctly 1`] = `
               "kind": "LocalArgument",
               "name": "count",
               "type": "Int!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "locale",
+              "type": "TranslationLocale",
             },
             Object {
               "defaultValue": null,
@@ -242,6 +259,11 @@ exports[`<EventPage /> renders correctly 1`] = `
                   "kind": "Literal",
                   "name": "isFuture",
                   "value": false,
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
                 },
                 Object {
                   "kind": "Variable",
@@ -522,6 +544,11 @@ exports[`<EventPage /> renders correctly 1`] = `
                   "kind": "Variable",
                   "name": "isRegistrable",
                   "variableName": "isRegistrable",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
                 },
                 Object {
                   "kind": "Variable",
@@ -892,6 +919,11 @@ exports[`<EventPage /> renders correctly 1`] = `
                 },
                 Object {
                   "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
                   "name": "orderBy",
                   "variableName": "orderBy",
                 },
@@ -949,6 +981,11 @@ exports[`<EventPage /> renders correctly 1`] = `
                   "kind": "Variable",
                   "name": "isRegistrable",
                   "variableName": "isRegistrable",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
                 },
                 Object {
                   "kind": "Variable",
@@ -1369,6 +1406,7 @@ exports[`<EventPage /> renders correctly 1`] = `
           "text": "query EventPageQuery(
   $cursor: String
   $count: Int!
+  $locale: TranslationLocale
   $search: String
   $theme: ID
   $project: ID
@@ -1379,7 +1417,7 @@ exports[`<EventPage /> renders correctly 1`] = `
   $orderBy: EventOrder!
   $isAuthenticated: Boolean!
 ) {
-  ...EventPageContainer_query_2ei3ZJ
+  ...EventPageContainer_query_17yZ05
   ...EventPageHeader_queryViewer_39ngnn
 }
 
@@ -1398,8 +1436,8 @@ fragment EventLabelStatus_event on Event {
   }
 }
 
-fragment EventListCounter_query_2rUEKT on Query {
-  events(first: $count, after: $cursor, theme: $theme, project: $project, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+fragment EventListCounter_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     edges {
       node {
         id
@@ -1418,19 +1456,19 @@ fragment EventListCounter_query_2rUEKT on Query {
   }
 }
 
-fragment EventListFilters_query_2rUEKT on Query {
-  ...EventListCounter_query_2rUEKT
+fragment EventListFilters_query_307oU4 on Query {
+  ...EventListCounter_query_307oU4
   ...SelectTheme_query
   ...SelectProject_query_2yiOJi
 }
 
-fragment EventListPaginated_query_2rUEKT on Query {
-  previewPassedEvents: events(first: 5, isFuture: false, orderBy: $orderBy) {
+fragment EventListPaginated_query_307oU4 on Query {
+  previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
   }
-  ...EventPagePassedEventsPreview_query_4g0LxK
-  ...EventMap_query_2rUEKT
-  events(first: $count, after: $cursor, theme: $theme, project: $project, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+  ...EventPagePassedEventsPreview_query_qo3MD
+  ...EventMap_query_307oU4
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     totalCount
     edges {
       node {
@@ -1449,8 +1487,8 @@ fragment EventListPaginated_query_2rUEKT on Query {
   }
 }
 
-fragment EventMap_query_2rUEKT on Query {
-  events(first: $count, after: $cursor, theme: $theme, project: $project, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+fragment EventMap_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     totalCount
     pageInfo {
       hasNextPage
@@ -1472,7 +1510,7 @@ fragment EventMap_query_2rUEKT on Query {
   }
 }
 
-fragment EventPageContainer_query_2ei3ZJ on Query {
+fragment EventPageContainer_query_17yZ05 on Query {
   viewer @include(if: $isAuthenticated) {
     awaitingOrRefusedEvents {
       totalCount
@@ -1485,9 +1523,9 @@ fragment EventPageContainer_query_2ei3ZJ on Query {
     }
     id
   }
-  ...EventRefetch_query_2rUEKT
-  ...EventListFilters_query_2rUEKT
-  ...EventListCounter_query_2rUEKT
+  ...EventRefetch_query_307oU4
+  ...EventListFilters_query_307oU4
+  ...EventListCounter_query_307oU4
 }
 
 fragment EventPageHeader_queryViewer_39ngnn on Query {
@@ -1497,8 +1535,8 @@ fragment EventPageHeader_queryViewer_39ngnn on Query {
   }
 }
 
-fragment EventPagePassedEventsPreview_query_4g0LxK on Query {
-  previewPassedEvents: events(first: 5, isFuture: false, orderBy: $orderBy) {
+fragment EventPagePassedEventsPreview_query_qo3MD on Query {
+  previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
     edges {
       node {
@@ -1531,8 +1569,8 @@ fragment EventPreview_event on Event {
   ...EventLabelStatus_event
 }
 
-fragment EventRefetch_query_2rUEKT on Query {
-  ...EventListPaginated_query_2rUEKT
+fragment EventRefetch_query_307oU4 on Query {
+  ...EventListPaginated_query_307oU4
 }
 
 fragment SelectProject_query_2yiOJi on Query {
@@ -1584,6 +1622,1644 @@ fragment UserLink_user on User {
         "isAuthenticated": false,
         "isFuture": true,
         "isRegistrable": null,
+        "locale": "EN_GB",
+        "orderBy": Object {
+          "direction": "ASC",
+          "field": "START_AT",
+        },
+        "project": null,
+        "search": null,
+        "theme": null,
+        "userType": null,
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<EventPage /> renders correctly in french 1`] = `
+<div
+  className="event-page"
+>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={
+      Object {
+        "fragment": Object {
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "cursor",
+              "type": "String",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "count",
+              "type": "Int!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "locale",
+              "type": "TranslationLocale",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "search",
+              "type": "String",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "theme",
+              "type": "ID",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "project",
+              "type": "ID",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "userType",
+              "type": "ID",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFuture",
+              "type": "Boolean",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "author",
+              "type": "ID",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isRegistrable",
+              "type": "Boolean",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "orderBy",
+              "type": "EventOrder!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isAuthenticated",
+              "type": "Boolean!",
+            },
+          ],
+          "kind": "Fragment",
+          "metadata": null,
+          "name": "EventPageQuery",
+          "selections": Array [
+            Object {
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "author",
+                  "variableName": "author",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "count",
+                  "variableName": "count",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "cursor",
+                  "variableName": "cursor",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isAuthenticated",
+                  "variableName": "isAuthenticated",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isFuture",
+                  "variableName": "isFuture",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isRegistrable",
+                  "variableName": "isRegistrable",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "orderBy",
+                  "variableName": "orderBy",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "project",
+                  "variableName": "project",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "search",
+                  "variableName": "search",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "theme",
+                  "variableName": "theme",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "userType",
+                  "variableName": "userType",
+                },
+              ],
+              "kind": "FragmentSpread",
+              "name": "EventPageContainer_query",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "isAuthenticated",
+                  "variableName": "isAuthenticated",
+                },
+              ],
+              "kind": "FragmentSpread",
+              "name": "EventPageHeader_queryViewer",
+            },
+          ],
+          "type": "Query",
+        },
+        "hash": "5adfa9da8ee9553fda34938f3c1a85cb",
+        "kind": "Request",
+        "operation": Object {
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "cursor",
+              "type": "String",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "count",
+              "type": "Int!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "locale",
+              "type": "TranslationLocale",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "search",
+              "type": "String",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "theme",
+              "type": "ID",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "project",
+              "type": "ID",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "userType",
+              "type": "ID",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFuture",
+              "type": "Boolean",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "author",
+              "type": "ID",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isRegistrable",
+              "type": "Boolean",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "orderBy",
+              "type": "EventOrder!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isAuthenticated",
+              "type": "Boolean!",
+            },
+          ],
+          "kind": "Operation",
+          "name": "EventPageQuery",
+          "selections": Array [
+            Object {
+              "alias": "previewPassedEvents",
+              "args": Array [
+                Object {
+                  "kind": "Literal",
+                  "name": "first",
+                  "value": 5,
+                },
+                Object {
+                  "kind": "Literal",
+                  "name": "isFuture",
+                  "value": false,
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "orderBy",
+                  "variableName": "orderBy",
+                },
+              ],
+              "concreteType": "EventConnection",
+              "kind": "LinkedField",
+              "name": "events",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "totalCount",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "EventEdge",
+                  "kind": "LinkedField",
+                  "name": "edges",
+                  "plural": true,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "Event",
+                      "kind": "LinkedField",
+                      "name": "node",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "TimeRange",
+                          "kind": "LinkedField",
+                          "name": "timeRange",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "startAt",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GoogleMapsAddress",
+                          "kind": "LinkedField",
+                          "name": "googleMapsAddress",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "json",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Theme",
+                          "kind": "LinkedField",
+                          "name": "themes",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "User",
+                          "kind": "LinkedField",
+                          "name": "author",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Media",
+                              "kind": "LinkedField",
+                              "name": "media",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "url",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "displayName",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Media",
+                          "kind": "LinkedField",
+                          "name": "media",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": Array [
+                                Object {
+                                  "kind": "Literal",
+                                  "name": "format",
+                                  "value": "reference",
+                                },
+                              ],
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": "url(format:\\"reference\\")",
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "EventReview",
+                          "kind": "LinkedField",
+                          "name": "review",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "status",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "refusedReason",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
+            Object {
+              "alias": null,
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "after",
+                  "variableName": "cursor",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "author",
+                  "variableName": "author",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "first",
+                  "variableName": "count",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isFuture",
+                  "variableName": "isFuture",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isRegistrable",
+                  "variableName": "isRegistrable",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "orderBy",
+                  "variableName": "orderBy",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "project",
+                  "variableName": "project",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "search",
+                  "variableName": "search",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "theme",
+                  "variableName": "theme",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "userType",
+                  "variableName": "userType",
+                },
+              ],
+              "concreteType": "EventConnection",
+              "kind": "LinkedField",
+              "name": "events",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "totalCount",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "PageInfo",
+                  "kind": "LinkedField",
+                  "name": "pageInfo",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "hasNextPage",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "endCursor",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "hasPreviousPage",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "startCursor",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "EventEdge",
+                  "kind": "LinkedField",
+                  "name": "edges",
+                  "plural": true,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "Event",
+                      "kind": "LinkedField",
+                      "name": "node",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GoogleMapsAddress",
+                          "kind": "LinkedField",
+                          "name": "googleMapsAddress",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "lat",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "lng",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "json",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "TimeRange",
+                          "kind": "LinkedField",
+                          "name": "timeRange",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "startAt",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Theme",
+                          "kind": "LinkedField",
+                          "name": "themes",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "User",
+                          "kind": "LinkedField",
+                          "name": "author",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Media",
+                              "kind": "LinkedField",
+                              "name": "media",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "url",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "displayName",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Media",
+                          "kind": "LinkedField",
+                          "name": "media",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": Array [
+                                Object {
+                                  "kind": "Literal",
+                                  "name": "format",
+                                  "value": "reference",
+                                },
+                              ],
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": "url(format:\\"reference\\")",
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "EventReview",
+                          "kind": "LinkedField",
+                          "name": "review",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "status",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "refusedReason",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "cursor",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
+            Object {
+              "alias": null,
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "after",
+                  "variableName": "cursor",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "author",
+                  "variableName": "author",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "first",
+                  "variableName": "count",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isFuture",
+                  "variableName": "isFuture",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isRegistrable",
+                  "variableName": "isRegistrable",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "orderBy",
+                  "variableName": "orderBy",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "project",
+                  "variableName": "project",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "search",
+                  "variableName": "search",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "theme",
+                  "variableName": "theme",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "userType",
+                  "variableName": "userType",
+                },
+              ],
+              "filters": Array [],
+              "handle": "connection",
+              "key": "EventMap_events",
+              "kind": "LinkedHandle",
+              "name": "events",
+            },
+            Object {
+              "alias": null,
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "after",
+                  "variableName": "cursor",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "author",
+                  "variableName": "author",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "first",
+                  "variableName": "count",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isFuture",
+                  "variableName": "isFuture",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "isRegistrable",
+                  "variableName": "isRegistrable",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "orderBy",
+                  "variableName": "orderBy",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "project",
+                  "variableName": "project",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "search",
+                  "variableName": "search",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "theme",
+                  "variableName": "theme",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "userType",
+                  "variableName": "userType",
+                },
+              ],
+              "filters": Array [],
+              "handle": "connection",
+              "key": "EventListPaginated_events",
+              "kind": "LinkedHandle",
+              "name": "events",
+            },
+            Object {
+              "alias": "eventsWithoutFilters",
+              "args": null,
+              "concreteType": "EventConnection",
+              "kind": "LinkedField",
+              "name": "events",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "totalCount",
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "Theme",
+              "kind": "LinkedField",
+              "name": "themes",
+              "plural": true,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "title",
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
+            Object {
+              "alias": null,
+              "args": Array [
+                Object {
+                  "kind": "Literal",
+                  "name": "withEventOnly",
+                  "value": true,
+                },
+              ],
+              "concreteType": "ProjectConnection",
+              "kind": "LinkedField",
+              "name": "projects",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "ProjectEdge",
+                  "kind": "LinkedField",
+                  "name": "edges",
+                  "plural": true,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "Project",
+                      "kind": "LinkedField",
+                      "name": "node",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": "projects(withEventOnly:true)",
+            },
+            Object {
+              "condition": "isAuthenticated",
+              "kind": "Condition",
+              "passingValue": true,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "User",
+                  "kind": "LinkedField",
+                  "name": "viewer",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "EventConnection",
+                      "kind": "LinkedField",
+                      "name": "awaitingOrRefusedEvents",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "EventEdge",
+                          "kind": "LinkedField",
+                          "name": "edges",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Event",
+                              "kind": "LinkedField",
+                              "name": "node",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "title",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "url",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "TimeRange",
+                                  "kind": "LinkedField",
+                                  "name": "timeRange",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "startAt",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "GoogleMapsAddress",
+                                  "kind": "LinkedField",
+                                  "name": "googleMapsAddress",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "json",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "Theme",
+                                  "kind": "LinkedField",
+                                  "name": "themes",
+                                  "plural": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "title",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "User",
+                                  "kind": "LinkedField",
+                                  "name": "author",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "username",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "Media",
+                                      "kind": "LinkedField",
+                                      "name": "media",
+                                      "plural": false,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "url",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "displayName",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "Media",
+                                  "kind": "LinkedField",
+                                  "name": "media",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": Array [
+                                        Object {
+                                          "kind": "Literal",
+                                          "name": "format",
+                                          "value": "reference",
+                                        },
+                                      ],
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": "url(format:\\"reference\\")",
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "EventReview",
+                                  "kind": "LinkedField",
+                                  "name": "review",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "status",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "refusedReason",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "id",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isAdmin",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+              ],
+            },
+          ],
+        },
+        "params": Object {
+          "id": null,
+          "metadata": Object {},
+          "name": "EventPageQuery",
+          "operationKind": "query",
+          "text": "query EventPageQuery(
+  $cursor: String
+  $count: Int!
+  $locale: TranslationLocale
+  $search: String
+  $theme: ID
+  $project: ID
+  $userType: ID
+  $isFuture: Boolean
+  $author: ID
+  $isRegistrable: Boolean
+  $orderBy: EventOrder!
+  $isAuthenticated: Boolean!
+) {
+  ...EventPageContainer_query_17yZ05
+  ...EventPageHeader_queryViewer_39ngnn
+}
+
+fragment EventImage_event on Event {
+  media {
+    url(format: \\"reference\\")
+    id
+  }
+}
+
+fragment EventLabelStatus_event on Event {
+  review {
+    id
+    status
+    refusedReason
+  }
+}
+
+fragment EventListCounter_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+    edges {
+      node {
+        id
+        __typename
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+  eventsWithoutFilters: events {
+    totalCount
+  }
+}
+
+fragment EventListFilters_query_307oU4 on Query {
+  ...EventListCounter_query_307oU4
+  ...SelectTheme_query
+  ...SelectProject_query_2yiOJi
+}
+
+fragment EventListPaginated_query_307oU4 on Query {
+  previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
+    totalCount
+  }
+  ...EventPagePassedEventsPreview_query_qo3MD
+  ...EventMap_query_307oU4
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+    totalCount
+    edges {
+      node {
+        id
+        ...EventPreview_event
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+  }
+}
+
+fragment EventMap_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+    totalCount
+    pageInfo {
+      hasNextPage
+      endCursor
+      hasPreviousPage
+      startCursor
+    }
+    edges {
+      node {
+        id
+        googleMapsAddress {
+          lat
+          lng
+        }
+        __typename
+      }
+      cursor
+    }
+  }
+}
+
+fragment EventPageContainer_query_17yZ05 on Query {
+  viewer @include(if: $isAuthenticated) {
+    awaitingOrRefusedEvents {
+      totalCount
+      edges {
+        node {
+          id
+          ...EventPreview_event
+        }
+      }
+    }
+    id
+  }
+  ...EventRefetch_query_307oU4
+  ...EventListFilters_query_307oU4
+  ...EventListCounter_query_307oU4
+}
+
+fragment EventPageHeader_queryViewer_39ngnn on Query {
+  viewer @include(if: $isAuthenticated) {
+    isAdmin
+    id
+  }
+}
+
+fragment EventPagePassedEventsPreview_query_qo3MD on Query {
+  previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
+    totalCount
+    edges {
+      node {
+        ...EventPreview_event
+        id
+      }
+    }
+  }
+}
+
+fragment EventPreview_event on Event {
+  id
+  title
+  url
+  timeRange {
+    startAt
+  }
+  googleMapsAddress {
+    json
+  }
+  themes {
+    title
+    id
+  }
+  author {
+    ...TagUser_user
+    id
+  }
+  ...EventImage_event
+  ...EventLabelStatus_event
+}
+
+fragment EventRefetch_query_307oU4 on Query {
+  ...EventListPaginated_query_307oU4
+}
+
+fragment SelectProject_query_2yiOJi on Query {
+  projects(withEventOnly: true) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
+
+fragment SelectTheme_query on Query {
+  themes {
+    id
+    title
+  }
+}
+
+fragment TagUser_user on User {
+  ...UserAvatar_user
+  ...UserLink_user
+}
+
+fragment UserAvatar_user on User {
+  url
+  username
+  media {
+    url
+    id
+  }
+}
+
+fragment UserLink_user on User {
+  displayName
+  url
+}
+",
+        },
+      }
+    }
+    render={[Function]}
+    variables={
+      Object {
+        "author": null,
+        "count": 100,
+        "cursor": null,
+        "isAuthenticated": false,
+        "isFuture": true,
+        "isRegistrable": null,
+        "locale": "FR_FR",
         "orderBy": Object {
           "direction": "ASC",
           "field": "START_AT",
@@ -1623,6 +3299,12 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
+              "name": "locale",
+              "type": "TranslationLocale",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
               "name": "search",
               "type": "String",
             },
@@ -1713,6 +3395,11 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                 },
                 Object {
                   "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
                   "name": "orderBy",
                   "variableName": "orderBy",
                 },
@@ -1754,7 +3441,7 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "a14f95f5d9912a5696da83137fdb15d3",
+        "hash": "5adfa9da8ee9553fda34938f3c1a85cb",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -1769,6 +3456,12 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
               "kind": "LocalArgument",
               "name": "count",
               "type": "Int!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "locale",
+              "type": "TranslationLocale",
             },
             Object {
               "defaultValue": null,
@@ -1840,6 +3533,11 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                   "kind": "Literal",
                   "name": "isFuture",
                   "value": false,
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
                 },
                 Object {
                   "kind": "Variable",
@@ -2120,6 +3818,11 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                   "kind": "Variable",
                   "name": "isRegistrable",
                   "variableName": "isRegistrable",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
                 },
                 Object {
                   "kind": "Variable",
@@ -2490,6 +4193,11 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                 },
                 Object {
                   "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
+                },
+                Object {
+                  "kind": "Variable",
                   "name": "orderBy",
                   "variableName": "orderBy",
                 },
@@ -2547,6 +4255,11 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                   "kind": "Variable",
                   "name": "isRegistrable",
                   "variableName": "isRegistrable",
+                },
+                Object {
+                  "kind": "Variable",
+                  "name": "locale",
+                  "variableName": "locale",
                 },
                 Object {
                   "kind": "Variable",
@@ -2967,6 +4680,7 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
           "text": "query EventPageQuery(
   $cursor: String
   $count: Int!
+  $locale: TranslationLocale
   $search: String
   $theme: ID
   $project: ID
@@ -2977,7 +4691,7 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
   $orderBy: EventOrder!
   $isAuthenticated: Boolean!
 ) {
-  ...EventPageContainer_query_2ei3ZJ
+  ...EventPageContainer_query_17yZ05
   ...EventPageHeader_queryViewer_39ngnn
 }
 
@@ -2996,8 +4710,8 @@ fragment EventLabelStatus_event on Event {
   }
 }
 
-fragment EventListCounter_query_2rUEKT on Query {
-  events(first: $count, after: $cursor, theme: $theme, project: $project, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+fragment EventListCounter_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     edges {
       node {
         id
@@ -3016,19 +4730,19 @@ fragment EventListCounter_query_2rUEKT on Query {
   }
 }
 
-fragment EventListFilters_query_2rUEKT on Query {
-  ...EventListCounter_query_2rUEKT
+fragment EventListFilters_query_307oU4 on Query {
+  ...EventListCounter_query_307oU4
   ...SelectTheme_query
   ...SelectProject_query_2yiOJi
 }
 
-fragment EventListPaginated_query_2rUEKT on Query {
-  previewPassedEvents: events(first: 5, isFuture: false, orderBy: $orderBy) {
+fragment EventListPaginated_query_307oU4 on Query {
+  previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
   }
-  ...EventPagePassedEventsPreview_query_4g0LxK
-  ...EventMap_query_2rUEKT
-  events(first: $count, after: $cursor, theme: $theme, project: $project, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+  ...EventPagePassedEventsPreview_query_qo3MD
+  ...EventMap_query_307oU4
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     totalCount
     edges {
       node {
@@ -3047,8 +4761,8 @@ fragment EventListPaginated_query_2rUEKT on Query {
   }
 }
 
-fragment EventMap_query_2rUEKT on Query {
-  events(first: $count, after: $cursor, theme: $theme, project: $project, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
+fragment EventMap_query_307oU4 on Query {
+  events(first: $count, after: $cursor, theme: $theme, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
     totalCount
     pageInfo {
       hasNextPage
@@ -3070,7 +4784,7 @@ fragment EventMap_query_2rUEKT on Query {
   }
 }
 
-fragment EventPageContainer_query_2ei3ZJ on Query {
+fragment EventPageContainer_query_17yZ05 on Query {
   viewer @include(if: $isAuthenticated) {
     awaitingOrRefusedEvents {
       totalCount
@@ -3083,9 +4797,9 @@ fragment EventPageContainer_query_2ei3ZJ on Query {
     }
     id
   }
-  ...EventRefetch_query_2rUEKT
-  ...EventListFilters_query_2rUEKT
-  ...EventListCounter_query_2rUEKT
+  ...EventRefetch_query_307oU4
+  ...EventListFilters_query_307oU4
+  ...EventListCounter_query_307oU4
 }
 
 fragment EventPageHeader_queryViewer_39ngnn on Query {
@@ -3095,8 +4809,8 @@ fragment EventPageHeader_queryViewer_39ngnn on Query {
   }
 }
 
-fragment EventPagePassedEventsPreview_query_4g0LxK on Query {
-  previewPassedEvents: events(first: 5, isFuture: false, orderBy: $orderBy) {
+fragment EventPagePassedEventsPreview_query_qo3MD on Query {
+  previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
     edges {
       node {
@@ -3129,8 +4843,8 @@ fragment EventPreview_event on Event {
   ...EventLabelStatus_event
 }
 
-fragment EventRefetch_query_2rUEKT on Query {
-  ...EventListPaginated_query_2rUEKT
+fragment EventRefetch_query_307oU4 on Query {
+  ...EventListPaginated_query_307oU4
 }
 
 fragment SelectProject_query_2yiOJi on Query {
@@ -3182,6 +4896,7 @@ fragment UserLink_user on User {
         "isAuthenticated": false,
         "isFuture": true,
         "isRegistrable": null,
+        "locale": "FR_FR",
         "orderBy": Object {
           "direction": "ASC",
           "field": "START_AT",

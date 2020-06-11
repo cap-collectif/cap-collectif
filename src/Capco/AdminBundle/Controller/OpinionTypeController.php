@@ -10,7 +10,9 @@ class OpinionTypeController extends Controller
     protected function redirectTo($object)
     {
         $url = false;
-        $request = $this->getRequest()->request;
+        $requestObject = $this->getRequest();
+        $request = $requestObject->request;
+        $locale = $requestObject->getLocale();
 
         $consultationId = $object->getConsultation()
             ? $object->getConsultation()->getId()
@@ -19,11 +21,13 @@ class OpinionTypeController extends Controller
         if ($request && null !== $request->get('btn_update_and_list')) {
             $url = $this->generateUrl('admin_capco_app_consultation_edit', [
                 'id' => $consultationId,
+                '_locale' => $locale,
             ]);
         }
         if ($request && null !== $request->get('btn_create_and_list')) {
             $url = $this->generateUrl('admin_capco_app_consultation_edit', [
                 'id' => $consultationId,
+                '_locale' => $locale,
             ]);
         }
 
@@ -39,6 +43,7 @@ class OpinionTypeController extends Controller
             $consultationId = $request->get('consultation_id');
             $url = $this->generateUrl('admin_capco_app_consultation_edit', [
                 'id' => $consultationId,
+                '_locale' => $locale,
             ]);
         }
 

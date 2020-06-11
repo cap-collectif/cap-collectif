@@ -1,42 +1,42 @@
 PreviewProposal:
-  type: object
-  inherits:
-    - Node
-    - PublicPublishable
-    - UniformResourceLocatable
-    - Trashable
-    - Timestampable
-  config:
-    name: Proposal
-    description: "Represents a user's contribution to a collect step."
-    interfaces:
-      - Node
-      - PublicPublishable
-      - UniformResourceLocatable
-      - Trashable
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Proposal
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalUrlResolver", [value])'
-      title:
-        type: 'String!'
-        description: 'Identifies the proposal title.'
-      author:
-        type: 'PreviewUser!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAuthorResolver", [value])'
-        description: 'Identifies the author of the contribution.'
-      body:
-        type: 'HTML'
-        description: 'Identifies the body of the proposal.'
-      responses:
-        type: '[PreviewResponse]!'
-        description: 'Identifies the responses of the proposal.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, getUser(), context])'
-      reference:
-        type: 'String!'
-        description: 'Identifies the unique reference of the proposal.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value])'
+    type: object
+    inherits:
+        - Node
+        - PublicPublishable
+        - UniformResourceLocatable
+        - Trashable
+        - Timestampable
+    config:
+        name: Proposal
+        description: "Represents a user's contribution to a collect step."
+        interfaces:
+            - Node
+            - PublicPublishable
+            - UniformResourceLocatable
+            - Trashable
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Proposal
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalUrlResolver", [value, serv("request_stack")])'
+            title:
+                type: 'String!'
+                description: 'Identifies the proposal title.'
+            author:
+                type: 'PreviewUser!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAuthorResolver", [value])'
+                description: 'Identifies the author of the contribution.'
+            body:
+                type: 'HTML'
+                description: 'Identifies the body of the proposal.'
+            responses:
+                type: '[PreviewResponse]!'
+                description: 'Identifies the responses of the proposal.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, getUser(), context])'
+            reference:
+                type: 'String!'
+                description: 'Identifies the unique reference of the proposal.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value])'

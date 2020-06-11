@@ -14,17 +14,19 @@ import EventPageContainer, { getInitialValues } from './EventPageContainer';
 import EventPageHeader from './EventPageHeader';
 import withColors from '../Utils/withColors';
 import type { GlobalState } from '../../types';
+import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale';
 
 type Props = {|
   +eventPageTitle: ?string,
   +eventPageBody: ?string,
   +backgroundColor: ?string,
   +isAuthenticated: boolean,
+  +locale: string,
 |};
 
 export class EventPage extends React.Component<Props> {
   render() {
-    const { backgroundColor, isAuthenticated } = this.props;
+    const { backgroundColor, isAuthenticated, locale } = this.props;
 
     const initialValues = getInitialValues();
     const { project } = initialValues;
@@ -39,6 +41,7 @@ export class EventPage extends React.Component<Props> {
             query EventPageQuery(
               $cursor: String
               $count: Int!
+              $locale: TranslationLocale
               $search: String
               $theme: ID
               $project: ID
@@ -53,6 +56,7 @@ export class EventPage extends React.Component<Props> {
                 @arguments(
                   cursor: $cursor
                   count: $count
+                  locale: $locale
                   search: $search
                   theme: $theme
                   project: $project
@@ -75,6 +79,7 @@ export class EventPage extends React.Component<Props> {
               userType: null,
               project,
               isFuture,
+              locale: TranslationLocaleEnum[locale],
               author: null,
               isRegistrable: null,
               orderBy: { field: 'START_AT', direction: 'ASC' },

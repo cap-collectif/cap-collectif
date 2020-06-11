@@ -132,6 +132,10 @@ InternalQuery:
                     search:
                         type: 'String'
                         description: 'If provided, searches events by title and description.'
+                    locale:
+                        type: 'TranslationLocale'
+                        description: 'If provided, searches events by locale.'
+                        #onlyCurrentLocale
                     # TODO
                     # dont know if right way
                     isFuture:

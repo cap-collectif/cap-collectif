@@ -65,9 +65,12 @@ class ProposalNotifier extends BaseNotifier
                 'proposalSummary' =>
                     $proposal->getSummary() ??
                     $this->translator->trans('project.votes.widget.no_value'),
-                'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                'proposalURL' => $this->proposalUrlResolver->__invoke(
+                    $proposal,
+                    $this->requestStack
+                ),
                 'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
-                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor())
+                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
             ]);
         }
 
@@ -79,7 +82,7 @@ class ProposalNotifier extends BaseNotifier
                 $confirmationUrl = $this->router->generate(
                     'account_confirm_email',
                     [
-                        'token' => $proposal->getAuthor()->getConfirmationToken()
+                        'token' => $proposal->getAuthor()->getConfirmationToken(),
                     ],
                     UrlGeneratorInterface::ABSOLUTE_URL
                 );
@@ -90,8 +93,11 @@ class ProposalNotifier extends BaseNotifier
                 $proposal,
                 [
                     'stepURL' => $stepUrl,
-                    'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
-                    'confirmationURL' => $confirmationUrl
+                    'proposalURL' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack
+                    ),
+                    'confirmationURL' => $confirmationUrl,
                 ],
                 $proposal->getAuthor()
             );
@@ -103,9 +109,12 @@ class ProposalNotifier extends BaseNotifier
         if (!$proposal->isDraft()) {
             $this->mailer->createAndSendMessage(ProposalDeleteAdminMessage::class, $proposal, [
                 'proposal' => $proposal,
-                'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                'proposalURL' => $this->proposalUrlResolver->__invoke(
+                    $proposal,
+                    $this->requestStack
+                ),
                 'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
-                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor())
+                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
             ]);
         }
     }
@@ -126,9 +135,12 @@ class ProposalNotifier extends BaseNotifier
         ) {
             $this->mailer->createAndSendMessage(ProposalUpdateAdminMessage::class, $proposal, [
                 'proposal' => $proposal,
-                'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                'proposalURL' => $this->proposalUrlResolver->__invoke(
+                    $proposal,
+                    $this->requestStack
+                ),
                 'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
-                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor())
+                'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
             ]);
         }
 
@@ -139,7 +151,7 @@ class ProposalNotifier extends BaseNotifier
                 $confirmationUrl = $this->router->generate(
                     'account_confirm_email',
                     [
-                        'token' => $proposal->getAuthor()->getConfirmationToken()
+                        'token' => $proposal->getAuthor()->getConfirmationToken(),
                     ],
                     true
                 );
@@ -150,8 +162,11 @@ class ProposalNotifier extends BaseNotifier
                 $proposal,
                 [
                     'stepURL' => $stepUrl,
-                    'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
-                    'confirmationURL' => $confirmationUrl
+                    'proposalURL' => $this->proposalUrlResolver->__invoke(
+                        $proposal,
+                        $this->requestStack
+                    ),
+                    'confirmationURL' => $confirmationUrl,
                 ],
                 $proposal->getAuthor()
             );
@@ -164,10 +179,13 @@ class ProposalNotifier extends BaseNotifier
             ProposalStatusChangeMessage::class,
             $proposal,
             [
-                'proposalURL' => $this->proposalUrlResolver->__invoke($proposal),
+                'proposalURL' => $this->proposalUrlResolver->__invoke(
+                    $proposal,
+                    $this->requestStack
+                ),
                 'date' => $date,
                 'timezone' => $this->siteParams->getValue('global.timezone'),
-                'locale' => $this->siteParams->getDefaultLocale() //todo replace by author locale
+                'locale' => $this->siteParams->getDefaultLocale(), //todo replace by author locale
             ],
             $proposal->getAuthor()
         );

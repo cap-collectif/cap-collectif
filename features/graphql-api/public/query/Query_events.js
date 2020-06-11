@@ -102,6 +102,29 @@ const InternalEventsQuery = /* GraphQL */ `
   }
 `;
 
+const InternalLocaleEventsQuery = /* GraphQL */ `
+  query InternalEventsQuery(
+    $count: Int!
+    $cursor: String
+    $locale: TranslationLocale
+    $orderBy: EventOrder
+    $isFuture: Boolean
+  ) {
+    events(first: $count, after: $cursor, orderBy: $orderBy, isFuture: $isFuture, locale: $locale) {
+      totalCount
+      edges {
+        node {
+          id
+          translations {
+            locale
+            title
+          }
+        }
+      }
+    }
+  }
+`;
+
 describe('Preview|Query.events connection', () => {
   it('fetches the first hundred events with a cursor', async () => {
     await expect(graphql(OpenDataEventsQuery, { count: 100 })).resolves.toMatchSnapshot();
@@ -174,6 +197,32 @@ describe('Preview|Query.events connection', () => {
   it('fetches only events matching a specific term with a cursor', async () => {
     await expect(
       graphql(InternalEventsQuery, { count: 100, search: 'registrations' }, 'internal'),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches all french events', async () => {
+    await expect(
+      graphql(
+        InternalLocaleEventsQuery,
+        {
+          count: 100,
+          locale: 'FR_FR',
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches all english events', async () => {
+    await expect(
+      graphql(
+        InternalLocaleEventsQuery,
+        {
+          count: 100,
+          locale: 'EN_GB',
+        },
+        'internal',
+      ),
     ).resolves.toMatchSnapshot();
   });
 });

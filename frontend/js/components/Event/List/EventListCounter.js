@@ -21,6 +21,7 @@ export default createFragmentContainer(EventListCounter, {
         cursor: { type: "String" }
         theme: { type: "ID" }
         project: { type: "ID" }
+        locale: { type: "TranslationLocale" }
         search: { type: "String" }
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
@@ -33,6 +34,7 @@ export default createFragmentContainer(EventListCounter, {
         after: $cursor
         theme: $theme
         project: $project
+        locale: $locale
         search: $search
         userType: $userType
         isFuture: $isFuture

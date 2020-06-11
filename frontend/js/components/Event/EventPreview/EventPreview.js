@@ -36,7 +36,6 @@ export const EventPreview = ({
   displayReview = false,
 }: EventPreviewProps) => {
   const { title, googleMapsAddress, author, themes, timeRange, url }: EventPreview_event = event;
-
   return (
     <EventPreviewContainer
       isHighlighted={isHighlighted}

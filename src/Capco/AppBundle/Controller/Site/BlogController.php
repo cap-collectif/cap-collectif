@@ -4,11 +4,9 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\ThemeTranslation;
 use Capco\AppBundle\Form\PostSearchType;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\ThemeTranslationRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +26,8 @@ class BlogController extends Controller
      * @param mixed      $page
      * @param null|mixed $theme
      * @param null|mixed $project
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexAction(Request $request, $page, $theme = null, $project = null)
     {
@@ -58,7 +58,9 @@ class BlogController extends Controller
             }
         } else {
             $form->setData([
-                'theme' => $theme ? $this->get(ThemeTranslationRepository::class)->findOneBySlug($theme) : null,
+                'theme' => $theme
+                    ? $this->get(ThemeTranslationRepository::class)->findOneBySlug($theme)
+                    : null,
                 'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
             ]);
         }
@@ -81,6 +83,7 @@ class BlogController extends Controller
         return [
             'posts' => $posts,
             'page' => $page,
+            'locale' => $request->getLocale(),
             'theme' => $theme,
             'nbPage' => $nbPage,
             'form' => $form->createView(),

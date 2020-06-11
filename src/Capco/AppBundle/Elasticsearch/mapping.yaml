@@ -222,6 +222,11 @@ mappings:
                 properties:
                     id: { type: keyword }
                     slug: { type: keyword }
+            translations:
+                type: object
+                properties:
+                    locale: { type: keyword }
+                    slug: { type: keyword }
 
     proposal:
         properties:

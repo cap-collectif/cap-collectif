@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\EventOrderField;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class QueryEventsResolver implements ResolverInterface
 {
@@ -33,8 +34,11 @@ class QueryEventsResolver implements ResolverInterface
         $this->queryAnalyzer = $queryAnalyzer;
     }
 
-    public function __invoke(Argument $args, ResolveInfo $resolveInfo): Connection
-    {
+    public function __invoke(
+        Argument $args,
+        ResolveInfo $resolveInfo,
+        RequestStack $requestStack
+    ): Connection {
         $this->protectArguments($args);
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
@@ -82,6 +86,9 @@ class QueryEventsResolver implements ResolverInterface
                     $filters['enabled'] = $args->offsetGet('enabled');
                 } else {
                     $filters['enabled'] = true;
+                }
+                if ($args->offsetExists('locale')) {
+                    $filters['locale'] = $args->offsetGet('locale');
                 }
                 if ($args->offsetExists('search')) {
                     $search = $args->offsetGet('search');

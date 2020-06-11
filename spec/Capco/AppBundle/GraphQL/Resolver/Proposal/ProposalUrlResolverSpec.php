@@ -4,6 +4,7 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Proposal;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 
@@ -19,9 +20,11 @@ class ProposalUrlResolverSpec extends ObjectBehavior
         $this->shouldHaveType(ProposalUrlResolver::class);
     }
 
-    public function it_return_empty_with_no_proposal_step(Proposal $proposal): void
-    {
+    public function it_return_empty_with_no_proposal_step(
+        Proposal $proposal,
+        RequestStack $requestStack
+    ): void {
         $proposal->getStep()->willReturn(null);
-        $this->__invoke($proposal)->shouldReturn('');
+        $this->__invoke($proposal, $requestStack)->shouldReturn('');
     }
 }

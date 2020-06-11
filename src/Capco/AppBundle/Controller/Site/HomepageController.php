@@ -49,9 +49,12 @@ class HomepageController extends Controller
      */
     public function homepageAction(Request $request)
     {
+        $locale = $request->getLocale();
         $sections = $this->sectionResolver->getDisplayableEnabledOrdered();
         $eventsCount = $this->eventsResolver
-            ->getEventsConnection(new Argument(['isFuture' => true, 'first' => 0]))
+            ->getEventsConnection(
+                new Argument(['isFuture' => true, 'first' => 0, 'locale' => $locale])
+            )
             ->getTotalCount();
 
         $newsletterActive = $this->get(Manager::class)->isActive('newsletter');
@@ -87,7 +90,7 @@ class HomepageController extends Controller
                     );
                     /** @var User $userToNotify */
                     $userToNotify = $this->get(UserRepository::class)->findOneBy([
-                        'email' => $subscription->getEmail()
+                        'email' => $subscription->getEmail(),
                     ]);
                     $em = $this->getDoctrine()->getManager();
 
@@ -143,14 +146,14 @@ class HomepageController extends Controller
         return [
             'form' => $newsletterActive ? $form->createView() : false,
             'sections' => $sections,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
     /**
      * @Template("CapcoAppBundle:Homepage:highlighted.html.twig")
      */
-    public function highlightedContentAction(Section $section = null)
+    public function highlightedContentAction(?Section $section = null)
     {
         $highlighteds = $this->get(HighlightedContentRepository::class)->getAllOrderedByPosition(4);
         $props = $this->serializer->serialize(['highlighteds' => $highlighteds], 'json', [
@@ -162,8 +165,8 @@ class HomepageController extends Controller
                 'Themes',
                 'ThemeDetails',
                 'Default',
-                'Proposals'
-            ]
+                'Proposals',
+            ],
         ]);
 
         return ['props' => $props, 'section' => $section];
@@ -172,10 +175,10 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:metrics.html.twig")
      */
-    public function metricsSectionAction(Section $section = null)
+    public function metricsSectionAction(?Section $section = null)
     {
         $props = $this->serializer->serialize($section, 'json', [
-            'groups' => ['Section']
+            'groups' => ['Section'],
         ]);
 
         return ['props' => $props];
@@ -184,8 +187,11 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:videos.html.twig")
      */
-    public function lastVideosAction(int $max = null, int $offset = null, Section $section = null)
-    {
+    public function lastVideosAction(
+        ?int $max = null,
+        ?int $offset = null,
+        ?Section $section = null
+    ) {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
         $videos = $this->get(VideoRepository::class)->getLast($max, $offset);
@@ -238,7 +244,7 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:lastPosts.html.twig")
      */
-    public function lastPostsAction(int $max = null, int $offset = null, Section $section = null)
+    public function lastPostsAction(?int $max = null, ?int $offset = null, ?Section $section = null)
     {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
@@ -250,8 +256,11 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:lastProjects.html.twig")
      */
-    public function lastProjectsAction(int $max = null, int $offset = null, Section $section = null)
-    {
+    public function lastProjectsAction(
+        ?int $max = null,
+        ?int $offset = null,
+        ?Section $section = null
+    ) {
         $max = $max ?? 3;
         $projectRepo = $this->get(ProjectRepository::class);
         $count = $projectRepo->countPublished($this->getUser());
@@ -262,7 +271,7 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:socialNetworks.html.twig")
      */
-    public function socialNetworksAction(Section $section = null)
+    public function socialNetworksAction(?Section $section = null)
     {
         $socialNetworks = $this->getDoctrine()
             ->getManager()

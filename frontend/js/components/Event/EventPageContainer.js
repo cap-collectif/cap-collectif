@@ -153,6 +153,7 @@ export default createFragmentContainer(form, {
       @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }
+        locale: { type: "TranslationLocale" }
         theme: { type: "ID" }
         project: { type: "ID" }
         search: { type: "String" }
@@ -179,6 +180,7 @@ export default createFragmentContainer(form, {
           cursor: $cursor
           count: $count
           search: $search
+          locale: $locale
           theme: $theme
           project: $project
           userType: $userType
@@ -192,6 +194,7 @@ export default createFragmentContainer(form, {
           cursor: $cursor
           count: $count
           search: $search
+          locale: $locale
           theme: $theme
           project: $project
           userType: $userType
@@ -204,6 +207,7 @@ export default createFragmentContainer(form, {
         @arguments(
           cursor: $cursor
           count: $count
+          locale: $locale
           search: $search
           theme: $theme
           project: $project

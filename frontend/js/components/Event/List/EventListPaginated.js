@@ -163,6 +163,7 @@ export default createPaginationContainer(
           cursor: { type: "String" }
           theme: { type: "ID" }
           project: { type: "ID" }
+          locale: { type: "TranslationLocale" }
           search: { type: "String" }
           userType: { type: "ID" }
           isFuture: { type: "Boolean" }
@@ -171,17 +172,23 @@ export default createPaginationContainer(
           isRegistrable: { type: "Boolean" }
           orderBy: { type: "EventOrder" }
         ) {
-        previewPassedEvents: events(first: $previewCount, isFuture: false, orderBy: $orderBy) {
+        previewPassedEvents: events(
+          locale: $locale
+          first: $previewCount
+          isFuture: false
+          orderBy: $orderBy
+        ) {
           totalCount
         }
         ...EventPagePassedEventsPreview_query
-          @arguments(previewCount: $previewCount, orderBy: $orderBy)
+          @arguments(locale: $locale, previewCount: $previewCount, orderBy: $orderBy)
         ...EventMap_query
           @arguments(
             count: $count
             cursor: $cursor
             theme: $theme
             project: $project
+            locale: $locale
             search: $search
             userType: $userType
             isFuture: $isFuture
@@ -194,6 +201,7 @@ export default createPaginationContainer(
           after: $cursor
           theme: $theme
           project: $project
+          locale: $locale
           search: $search
           userType: $userType
           isFuture: $isFuture
@@ -242,6 +250,7 @@ export default createPaginationContainer(
         $count: Int!
         $theme: ID
         $project: ID
+        $locale: TranslationLocale
         $search: String
         $userType: ID
         $isFuture: Boolean
@@ -255,6 +264,7 @@ export default createPaginationContainer(
             count: $count
             theme: $theme
             project: $project
+            locale: $locale
             search: $search
             userType: $userType
             isFuture: $isFuture

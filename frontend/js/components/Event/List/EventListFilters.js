@@ -295,6 +295,7 @@ export default createFragmentContainer(container, {
         cursor: { type: "String" }
         theme: { type: "ID" }
         project: { type: "ID" }
+        locale: { type: "TranslationLocale" }
         search: { type: "String" }
         userType: { type: "ID" }
         isFuture: { type: "Boolean" }
@@ -306,6 +307,7 @@ export default createFragmentContainer(container, {
         @arguments(
           cursor: $cursor
           count: $count
+          locale: $locale
           search: $search
           theme: $theme
           project: $project

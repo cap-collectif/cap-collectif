@@ -1,36 +1,38 @@
 Capco\AppBundle\Entity\Event:
-  attributes:
-    id:
-      groups: [Events, ElasticsearchEvent]
-    title:
-      groups: [Events, ElasticsearchEvent]
-    body:
-      groups: [Events, ElasticsearchEvent]
-    Author:
-      serialized_name: author
-      groups: [Events, ElasticsearchEventNestedAuthor]
-    projects:
-      groups: [ElasticsearchEventNestedProject]
-    themes:
-      groups: [ElasticsearchEventNestedTheme]
-    canContribute:
-      groups: [Events]
-    createdAt:
-      groups: [Events, ElasticsearchEvent]
-    updatedAt:
-      groups: [Events]
-    startAt:
-      groups: [Default, ElasticsearchEvent]
-    endAt:
-      groups: [Default, ElasticsearchEvent]
-    media:
-      groups: [Default]
-    comments:
-      groups: [Events]
-    isEnabled:
-      serialized_name: enabled
-      groups: [Events, ElasticsearchEvent]
-    address:
-      groups: [ElasticsearchEvent]
-    link:
-      groups: [Events]
+    attributes:
+        id:
+            groups: [Events, ElasticsearchEvent]
+        title:
+            groups: [Events, ElasticsearchEvent]
+        body:
+            groups: [Events, ElasticsearchEvent]
+        Author:
+            serialized_name: author
+            groups: [Events, ElasticsearchEventNestedAuthor]
+        projects:
+            groups: [ElasticsearchEventNestedProject]
+        themes:
+            groups: [ElasticsearchEventNestedTheme]
+        canContribute:
+            groups: [Events]
+        createdAt:
+            groups: [Events, ElasticsearchEvent]
+        updatedAt:
+            groups: [Events]
+        startAt:
+            groups: [Default, ElasticsearchEvent]
+        endAt:
+            groups: [Default, ElasticsearchEvent]
+        media:
+            groups: [Default]
+        comments:
+            groups: [Events]
+        isEnabled:
+            serialized_name: enabled
+            groups: [Events, ElasticsearchEvent]
+        address:
+            groups: [ElasticsearchEvent]
+        link:
+            groups: [Events]
+        translations:
+            groups: [Events, ElasticsearchEvent]

@@ -58,8 +58,9 @@ class EventController extends Controller
                 'eventPageBody' => $this->get(SiteParameterResolver::class)->getValue(
                     'events.content.body',
                     $locale
-                )
-            ]
+                ),
+                'locale' => $request->getLocale(),
+            ],
         ];
     }
 
@@ -134,7 +135,7 @@ class EventController extends Controller
             return [
                 'viewerIsAuthor' => $event->getAuthor() === $this->getUser(),
                 'event' => $event,
-                'viewer' => $viewer
+                'viewer' => $viewer,
             ];
         }
 
@@ -144,7 +145,7 @@ class EventController extends Controller
             'registered' => $registration->isConfirmed(),
             'adminAuthorizeDataTransferTradKey' => $event->getAdminAuthorizeDataTransfer()
                 ? 'privacy-policy-accepted-2'
-                : 'privacy-policy-accepted'
+                : 'privacy-policy-accepted',
         ]);
 
         if ('POST' === $request->getMethod()) {
@@ -188,7 +189,7 @@ class EventController extends Controller
             'form' => $form->createView(),
             'event' => $event,
             'viewer' => $viewer,
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
         ];
     }
 }
