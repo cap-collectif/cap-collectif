@@ -2,7 +2,7 @@
 import styled, { type StyledComponent } from 'styled-components';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
-const AnalysisHeaderContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const AnalysisHeaderContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

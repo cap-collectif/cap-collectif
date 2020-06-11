@@ -86,7 +86,8 @@ export type Action =
   | { type: 'CHANGE_DECISION_MAKER_FILTER', payload: Uuid }
   | { type: 'CLEAR_DECISION_MAKER_FILTER' }
   | { type: 'SEARCH_TERM', payload: ?string }
-  | { type: 'CLEAR_TERM' };
+  | { type: 'CLEAR_TERM' }
+  | { type: 'CLEAR_FILTERS' };
 
 export const createReducer = (state: ProjectAdminPageState, action: Action) => {
   switch (action.type) {
@@ -336,6 +337,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           term: null,
         },
       };
+    case 'CLEAR_FILTERS':
+      return getInitialState(state.initialSelectedStep);
     default:
       throw new Error(`Unknown action : ${action.type}`);
   }

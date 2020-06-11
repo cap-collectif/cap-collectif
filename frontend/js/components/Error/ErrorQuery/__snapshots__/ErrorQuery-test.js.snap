@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorQuery /> renders correctly 1`] = `
+<ErrorIncident>
+  <FormattedMessage
+    id="loading.error"
+    tagName="p"
+    values={Object {}}
+  />
+  <FormattedMessage
+    id="loading.error.help.text"
+    tagName="p"
+    values={Object {}}
+  />
+  <ErrorQuerystyle__ButtonRetry
+    onClick={[Function]}
+    type="button"
+  >
+    <Icon
+      name="reload"
+      size={15}
+    />
+    <FormattedMessage
+      id="button.try.again"
+      values={Object {}}
+    />
+  </ErrorQuerystyle__ButtonRetry>
+</ErrorIncident>
+`;

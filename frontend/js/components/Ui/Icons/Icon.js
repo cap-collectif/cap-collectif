@@ -56,6 +56,8 @@ export const ICON_NAME: {
   stack: 'stack',
   tag: 'tag',
   pin: 'pin',
+  warningRounded: 'warningRounded',
+  reload: 'reload',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -109,6 +111,8 @@ export const ICON_NAME: {
   stack: 'stack',
   tag: 'tag',
   pin: 'pin',
+  warningRounded: 'warningRounded',
+  reload: 'reload',
 };
 
 type Props = {|
@@ -213,6 +217,8 @@ const getIcon = name => {
       return <Icons.Silent />;
     case 'warning':
       return <Icons.Warning />;
+    case 'warningRounded':
+      return <Icons.WarningRounded />;
     case 'external-link':
       return <Icons.ExternalLink />;
     case 'list':
@@ -227,6 +233,8 @@ const getIcon = name => {
       return <Icons.Tag />;
     case 'pin':
       return <Icons.Pin />;
+    case 'reload':
+      return <Icons.Reload />;
     default:
       return <div />;
   }

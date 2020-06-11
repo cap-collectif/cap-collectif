@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import ReactPlaceholder from 'react-placeholder';
 import { QueryRenderer, graphql } from 'react-relay';
 import ApiError from '~ui/ApiError';
 import environment from '~/createRelayEnvironment';
@@ -13,9 +14,12 @@ import AnalysisProjectPage, {
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage';
 import AnalysisHeader from '~/components/Analysis/AnalysisHeader/AnalysisHeader';
 import type { AnalysisProjectPageProposalsPaginatedQueryVariables } from '~relay/AnalysisProjectPageProposalsPaginatedQuery.graphql';
-import type { AnalysisProjectPageParameters } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import { useAnalysisProposalsContext } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
-import { ORDER_BY } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
+import {
+  ORDER_BY,
+  type AnalysisProjectPageParameters,
+} from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
+import AnalysisPageContentPlaceholder from '~/components/Analysis/AnalysisPagePlaceholder/AnalysisPageContentPlaceholder';
 
 const createQueryVariables = (
   parameters: AnalysisProjectPageParameters,
@@ -44,12 +48,13 @@ export const PATHS = {
 export const renderComponent = ({
   error,
   props,
+  retry,
+  parameters,
 }: {
   ...ReactRelayReadyState,
   props: ?AnalysisIndexPageQueryResponse,
+  parameters: AnalysisProjectPageParameters,
 }) => {
-  if (error) return <ApiError />;
-
   if (props) {
     const { viewerAssignedProjectsToAnalyse: projects, defaultUsers } = props;
     const allPaths = Object.values(PATHS);
@@ -96,6 +101,33 @@ export const renderComponent = ({
 
     return <ApiError />;
   }
+
+  if (window.location.pathname === BASE_URL_ANALYSIS) {
+    return (
+      <ReactPlaceholder
+        ready={false}
+        customPlaceholder={
+          <AnalysisPageContentPlaceholder isProjectPage hasError={!!error} fetchData={retry} />
+        }
+      />
+    );
+  }
+
+  if (window.location.pathname !== BASE_URL_ANALYSIS) {
+    return (
+      <ReactPlaceholder
+        ready={false}
+        customPlaceholder={
+          <AnalysisPageContentPlaceholder
+            hasError={!!error}
+            fetchData={retry}
+            selectedTab={parameters.filters.state}
+          />
+        }
+      />
+    );
+  }
+
   return <Loader />;
 };
 
@@ -144,7 +176,7 @@ const AnalysisIndexPage = () => {
           }
         }
       `}
-      render={renderComponent}
+      render={({ error, props, retry }) => renderComponent({ error, props, retry, parameters })}
     />
   );
 };

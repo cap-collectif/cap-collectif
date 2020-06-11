@@ -1,7 +1,9 @@
 // @flow
-import React from 'react';
-import { graphql, QueryRenderer } from 'react-relay';
-import environment, { graphqlError } from '~/createRelayEnvironment';
+import * as React from 'react';
+import isEqual from 'lodash/isEqual';
+import { graphql, usePreloadedQuery, useQuery } from 'relay-hooks';
+import ReactPlaceholder from 'react-placeholder';
+import type { ResultPreloadQuery, Query } from '~/types';
 import type {
   ProjectAdminAnalysisTabQueryResponse,
   ProjectAdminAnalysisTabQueryVariables,
@@ -11,11 +13,19 @@ import ProjectAdminAnalysis, {
   PROJECT_ADMIN_PROPOSAL_PAGINATION,
 } from '~/components/Admin/Project/ProjectAdminAnalysis';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
-import Loader from '~ui/FeedbacksIndicators/Loader';
 import PickableList from '~ui/List/PickableList';
+import AnalysisPlaceholderDashboard, {
+  TYPE_DASHBOARD,
+} from '~/components/Analysis/AnalysisPlaceholderdDashboard/AnalysisPlaceholderDashboard';
 
 type Props = {|
   +projectId: string,
+  +dataPrefetch: ResultPreloadQuery,
+|};
+
+type PropsQuery = {|
+  ...Query,
+  props: ProjectAdminAnalysisTabQueryResponse,
 |};
 
 const createQueryVariables = (
@@ -39,73 +49,107 @@ const createQueryVariables = (
     parameters.filters.progressState === 'ALL' ? null : parameters.filters.progressState,
 });
 
-const ProjectAdminAnalysisTab = ({ projectId }: Props) => {
+export const queryAnalysis = graphql`
+  query ProjectAdminAnalysisTabQuery(
+    $projectId: ID!
+    $count: Int!
+    $cursor: String
+    $orderBy: ProposalOrder!
+    $category: ID
+    $district: ID
+    $status: ID
+    $term: String
+    $analysts: [ID!]
+    $supervisor: ID
+    $decisionMaker: ID
+    $progressStatus: ProposalProgressState
+  ) {
+    defaultUsers: users(first: 20) {
+      edges {
+        node {
+          id
+          ...UserSearchDropdownChoice_user
+        }
+      }
+    }
+    project: node(id: $projectId) {
+      ...ProjectAdminAnalysis_project
+        @arguments(
+          projectId: $projectId
+          count: $count
+          cursor: $cursor
+          orderBy: $orderBy
+          category: $category
+          district: $district
+          status: $status
+          term: $term
+          analysts: $analysts
+          supervisor: $supervisor
+          decisionMaker: $decisionMaker
+          progressStatus: $progressStatus
+        )
+    }
+  }
+`;
+
+export const initialVariables = {
+  count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
+  cursor: null,
+  orderBy: {
+    field: 'PUBLISHED_AT',
+    direction: 'DESC',
+  },
+  category: null,
+  district: null,
+  term: null,
+  analysts: null,
+  supervisor: null,
+  decisionMaker: null,
+  progressStatus: null,
+};
+
+const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch }: Props) => {
   const { parameters } = useProjectAdminProposalsContext();
+  const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
+  const queryVariablesWithParameters = createQueryVariables(projectId, parameters);
+  const hasFilters: boolean = !isEqual(
+    { projectId, ...initialVariables },
+    queryVariablesWithParameters,
+  );
+
+  const { props: data, error, retry }: PropsQuery = useQuery(
+    queryAnalysis,
+    queryVariablesWithParameters,
+    {
+      skip: !hasFilters,
+    },
+  );
+
+  if (
+    (!hasFilters && dataPreloaded && dataPreloaded.project) ||
+    (hasFilters && data && data.project)
+  ) {
+    const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;
+    const defaultUsers: any =
+      dataPreloaded && !hasFilters ? dataPreloaded.defaultUsers : data.defaultUsers;
+
+    return (
+      <PickableList.Provider>
+        <ProjectAdminAnalysis project={project} defaultUsers={defaultUsers} />
+      </PickableList.Provider>
+    );
+  }
+
   return (
-    <QueryRenderer
-      environment={environment}
-      query={graphql`
-        query ProjectAdminAnalysisTabQuery(
-          $projectId: ID!
-          $count: Int!
-          $cursor: String
-          $orderBy: ProposalOrder!
-          $category: ID
-          $district: ID
-          $status: ID
-          $term: String
-          $analysts: [ID!]
-          $supervisor: ID
-          $decisionMaker: ID
-          $progressStatus: ProposalProgressState
-        ) {
-          defaultUsers: users(first: 20) {
-            edges {
-              node {
-                id
-                ...UserSearchDropdownChoice_user
-              }
-            }
-          }
-          project: node(id: $projectId) {
-            ...ProjectAdminAnalysis_project
-              @arguments(
-                projectId: $projectId
-                count: $count
-                cursor: $cursor
-                orderBy: $orderBy
-                category: $category
-                district: $district
-                status: $status
-                term: $term
-                analysts: $analysts
-                supervisor: $supervisor
-                decisionMaker: $decisionMaker
-                progressStatus: $progressStatus
-              )
-          }
-        }
-      `}
-      variables={createQueryVariables(projectId, parameters)}
-      render={({
-        props,
-        error,
-      }: {
-        ...ReactRelayReadyState,
-        props: ?ProjectAdminAnalysisTabQueryResponse,
-      }) => {
-        if (error) {
-          return graphqlError;
-        }
-        if (props && props.project && props.defaultUsers) {
-          return (
-            <PickableList.Provider>
-              <ProjectAdminAnalysis project={props.project} defaultUsers={props.defaultUsers} />
-            </PickableList.Provider>
-          );
-        }
-        return <Loader show />;
-      }}
+    <ReactPlaceholder
+      ready={false}
+      customPlaceholder={
+        <AnalysisPlaceholderDashboard
+          type={TYPE_DASHBOARD.BO_ANALYSIS}
+          hasError={!!error}
+          fetchData={retry}
+        />
+      }
     />
   );
 };

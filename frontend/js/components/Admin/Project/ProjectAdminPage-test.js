@@ -7,8 +7,7 @@ import ProjectAdminPage from './ProjectAdminPage';
 describe('<ProjectAdminPage />', () => {
   const defaultProps = {
     projectId: 'oui',
-    isEditMode: true,
-    adminUrl: 'https://adminUrl.com',
+    firstCollectStepId: '123456',
   };
 
   it('renders correctly when editing project', () => {
@@ -17,7 +16,7 @@ describe('<ProjectAdminPage />', () => {
   });
 
   it('renders correctly when no project', () => {
-    const wrapper = shallow(<ProjectAdminPage projectId={null} isEditMode={false} />);
+    const wrapper = shallow(<ProjectAdminPage projectId={null} firstCollectStepId={null} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

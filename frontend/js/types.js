@@ -154,3 +154,17 @@ export interface SSOConfigurationInterface {
   +id: string;
   +enabled: boolean;
 }
+
+export type ResultPreloadQuery = {|
+  dispose: () => void,
+  getValue: any => void,
+  next: (any, any, any, any) => void,
+  subscribe: any => void,
+|};
+
+export type Query = {|
+  props: any,
+  error: ?string,
+  retry: () => void,
+  cached: any,
+|};

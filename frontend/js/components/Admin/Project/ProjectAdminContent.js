@@ -1,18 +1,27 @@
 // @flow
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
+import { loadQuery, RelayEnvironmentProvider } from 'relay-hooks';
 import { formValueSelector } from 'redux-form';
 import { BrowserRouter as Router, Link, Route, Switch, useLocation } from 'react-router-dom';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { type ProjectAdminContent_project } from '~relay/ProjectAdminContent_project.graphql';
+import environment from '~/createRelayEnvironment';
 import type { FeatureToggles, GlobalState } from '~/types';
 import ProjectAdminForm from './Form/ProjectAdminForm';
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style';
-import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage';
-import ProjectAdminAnalysisTab from '~/components/Admin/Project/ProjectAdminAnalysisTab';
+import ProjectAdminProposalsPage, {
+  initialVariables as queryVariableContribution,
+  queryProposals,
+} from '~/components/Admin/Project/ProjectAdminProposalsPage';
+import ProjectAdminAnalysisTab, {
+  initialVariables as queryVariableAnalysis,
+  queryAnalysis,
+} from '~/components/Admin/Project/ProjectAdminAnalysisTab';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { BoxDeprecated, BoxContainer } from './Form/ProjectAdminForm.style';
+import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 
 type Props = {|
   +features: FeatureToggles,
@@ -27,7 +36,7 @@ type Links = Array<{|
 |}>;
 
 // TODO replace the WIP placeholder when components are ready
-const formatNavbarLinks = (project, features, path, setTitle) => {
+const formatNavbarLinks = (project, features, path, setTitle, dataPrefetchPage) => {
   const links = [];
   const hasCollectStep = project.steps.some(step => step.type === 'CollectStep');
   if (hasCollectStep)
@@ -35,7 +44,12 @@ const formatNavbarLinks = (project, features, path, setTitle) => {
       title: 'global.contribution',
       count: project.proposals.totalCount,
       url: `${path}/proposals`,
-      component: () => <ProjectAdminProposalsPage projectId={project.id} />,
+      component: () => (
+        <ProjectAdminProposalsPage
+          projectId={project.id}
+          dataPrefetch={dataPrefetchPage.contribution}
+        />
+      ),
     });
   links.push({
     title: 'capco.section.metrics.participants',
@@ -49,7 +63,9 @@ const formatNavbarLinks = (project, features, path, setTitle) => {
       title: 'proposal.tabs.evaluation',
       url: `${path}/analysis`,
       count: project.firstAnalysisStep ? project.firstAnalysisStep.proposals.totalCount : undefined,
-      component: () => <ProjectAdminAnalysisTab projectId={project.id} />,
+      component: () => (
+        <ProjectAdminAnalysisTab projectId={project.id} dataPrefetch={dataPrefetchPage.analysis} />
+      ),
     });
   links.push({
     title: 'global.configuration',
@@ -66,12 +82,33 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
   const location = useLocation();
   const [title, setTitle] = useState(project.title);
   const path = `${basePath}${project._id}`;
-  const links: Links = useMemo(() => formatNavbarLinks(project, features, path, setTitle), [
-    project,
-    features,
-    path,
-    setTitle,
-  ]);
+
+  const dataAnalysisPrefetch = loadQuery();
+  dataAnalysisPrefetch.next(
+    environment,
+    queryAnalysis,
+    { projectId: project.id, ...queryVariableAnalysis },
+    { fetchPolicy: 'store-or-network' },
+  );
+
+  const dataContributionPublishedPrefetch = loadQuery();
+  dataContributionPublishedPrefetch.next(
+    environment,
+    queryProposals,
+    { projectId: project.id, ...queryVariableContribution },
+    { fetchPolicy: 'store-or-network' },
+  );
+
+  const dataPrefetchPage = {
+    analysis: dataAnalysisPrefetch,
+    contribution: dataContributionPublishedPrefetch,
+  };
+
+  const links: Links = useMemo(
+    () => formatNavbarLinks(project, features, path, setTitle, dataPrefetchPage),
+    [project, features, path, setTitle, dataPrefetchPage],
+  );
+
   return (
     <div className="d-flex">
       <Header>
@@ -117,10 +154,21 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
   );
 };
 
-const ProjectAdminRouterWrapper = ({ project, features }: Props) => (
-  <Router>
-    <ProjectAdminContent project={project} features={features} />
-  </Router>
+const ProjectAdminRouterWrapper = ({
+  project,
+  features,
+  firstCollectStepId,
+}: {
+  ...Props,
+  +firstCollectStepId?: ?string,
+}) => (
+  <RelayEnvironmentProvider environment={environment}>
+    <Router>
+      <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
+        <ProjectAdminContent project={project} features={features} />
+      </ProjectAdminProposalsProvider>
+    </Router>
+  </RelayEnvironmentProvider>
 );
 
 const mapStateToProps = (state: GlobalState) => ({

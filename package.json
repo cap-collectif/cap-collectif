@@ -323,6 +323,8 @@
         "relay-flow-types-installer": "git+https://***REMOVED***:x-oauth-basic@github.com/cap-collectif/relay-flow-types-installer.git",
         "relay-runtime": "^9.1.0",
         "relay-test-utils": "^9.1.0",
+        "relay-hooks": "^3.5.0",
+        "react-placeholder": "^4.0.2",
         "sass-loader": "^7.1.0",
         "source-map": "^0.7.3",
         "stickyfilljs": "^2.1.0",

@@ -1,20 +1,28 @@
 // @flow
 import React from 'react';
-import { graphql, QueryRenderer } from 'react-relay';
-import environment, { graphqlError } from '~/createRelayEnvironment';
+import { useQuery, graphql, usePreloadedQuery } from 'relay-hooks';
+import isEqual from 'lodash/isEqual';
+import ReactPlaceholder from 'react-placeholder';
 import type {
   ProjectAdminProposalsPageQueryResponse,
   ProjectAdminProposalsPageQueryVariables,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
-import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer';
+import type { ResultPreloadQuery, Query } from '~/types';
+import type { ProjectAdminPageParameters } from './ProjectAdminPage.reducer';
 import ProjectAdminProposals, {
   PROJECT_ADMIN_PROPOSAL_PAGINATION,
 } from '~/components/Admin/Project/ProjectAdminProposals';
-import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
-import Loader from '~ui/FeedbacksIndicators/Loader';
+import { useProjectAdminProposalsContext } from './ProjectAdminPage.context';
+import ProjectAdminProposalsPlaceholder from './ProjectAdminProposalsPlaceholder';
 
 type Props = {|
   +projectId: string,
+  +dataPrefetch: ResultPreloadQuery,
+|};
+
+type PropsQuery = {|
+  ...Query,
+  props: ProjectAdminProposalsPageQueryResponse,
 |};
 
 const createQueryVariables = (
@@ -36,57 +44,95 @@ const createQueryVariables = (
   term: parameters.filters.term,
 });
 
-const ProjectAdminProposalsPage = ({ projectId }: Props) => {
-  const { parameters } = useProjectAdminProposalsContext();
+export const queryProposals = graphql`
+  query ProjectAdminProposalsPageQuery(
+    $projectId: ID!
+    $count: Int!
+    $cursor: String
+    $orderBy: ProposalOrder!
+    $state: ProposalsState!
+    $category: ID
+    $district: ID
+    $status: ID
+    $step: ID
+    $term: String
+  ) {
+    project: node(id: $projectId) {
+      ...ProjectAdminProposals_project
+        @arguments(
+          projectId: $projectId
+          count: $count
+          cursor: $cursor
+          orderBy: $orderBy
+          state: $state
+          category: $category
+          district: $district
+          status: $status
+          step: $step
+          term: $term
+        )
+    }
+  }
+`;
+
+export const initialVariables = {
+  count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
+  cursor: null,
+  orderBy: {
+    field: 'PUBLISHED_AT',
+    direction: 'DESC',
+  },
+  state: 'PUBLISHED',
+  category: null,
+  district: null,
+  step: null,
+  status: null,
+  term: null,
+};
+
+const ProjectAdminProposalsPage = ({ projectId, dataPrefetch }: Props) => {
+  const { parameters, firstCollectStepId } = useProjectAdminProposalsContext();
+
+  const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
+  const queryVariablesWithParameters = createQueryVariables(projectId, parameters);
+
+  const hasFilters: boolean = !isEqual(
+    {
+      ...initialVariables,
+      projectId,
+      step: firstCollectStepId,
+    },
+    queryVariablesWithParameters,
+  );
+
+  const { props: data, error, retry }: PropsQuery = useQuery(
+    queryProposals,
+    queryVariablesWithParameters,
+    {
+      fetchPolicy: 'store-or-network',
+      skip: !hasFilters,
+    },
+  );
+
+  if (
+    (!hasFilters && dataPreloaded && dataPreloaded.project) ||
+    (hasFilters && data && data.project)
+  ) {
+    const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;
+
+    return <ProjectAdminProposals project={project} />;
+  }
+
   return (
-    <QueryRenderer
-      environment={environment}
-      query={graphql`
-        query ProjectAdminProposalsPageQuery(
-          $projectId: ID!
-          $count: Int!
-          $cursor: String
-          $orderBy: ProposalOrder!
-          $state: ProposalsState!
-          $category: ID
-          $district: ID
-          $status: ID
-          $step: ID
-          $term: String
-        ) {
-          project: node(id: $projectId) {
-            ...ProjectAdminProposals_project
-              @arguments(
-                projectId: $projectId
-                count: $count
-                cursor: $cursor
-                orderBy: $orderBy
-                state: $state
-                category: $category
-                district: $district
-                status: $status
-                step: $step
-                term: $term
-              )
-          }
-        }
-      `}
-      variables={createQueryVariables(projectId, parameters)}
-      render={({
-        props,
-        error,
-      }: {
-        ...ReactRelayReadyState,
-        props: ?ProjectAdminProposalsPageQueryResponse,
-      }) => {
-        if (error) {
-          return graphqlError;
-        }
-        if (props && props.project) {
-          return <ProjectAdminProposals project={props.project} />;
-        }
-        return <Loader show />;
-      }}
+    <ReactPlaceholder
+      ready={false}
+      customPlaceholder={
+        <ProjectAdminProposalsPlaceholder
+          hasError={!!error}
+          fetchData={retry}
+          selectedTab={parameters.filters.state}
+        />
+      }
     />
   );
 };

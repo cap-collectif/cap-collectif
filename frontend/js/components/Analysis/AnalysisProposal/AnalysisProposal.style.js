@@ -19,6 +19,7 @@ export const ProposalInformationsContainer: StyledComponent<{}, {}, HTMLDivEleme
   display: flex;
   flex-direction: column;
   max-width: 50%;
+  width: 50%;
 
   a {
     color: ${colors.primaryColor};

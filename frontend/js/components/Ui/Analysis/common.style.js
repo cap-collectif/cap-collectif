@@ -2,7 +2,13 @@
 import styled, { type StyledComponent } from 'styled-components';
 import PickableList from '~ui/List/PickableList';
 
-export const AnalysisPickableListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const AnalysisPickableListContainer: StyledComponent<
+  {},
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
+  className: 'analysis-pickable-list-container',
+})`
   margin: 0 2rem 2rem 2rem;
 `;
 

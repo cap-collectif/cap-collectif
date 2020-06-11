@@ -2,7 +2,6 @@
 import React from 'react';
 import Providers from './Providers';
 import ProjectAdminPage from '../components/Admin/Project/ProjectAdminPage';
-import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
 import AlertBoxApp from '~/startup/AlertBoxApp';
 
 type ProjectAdminAppProps = {|
@@ -12,10 +11,8 @@ type ProjectAdminAppProps = {|
 
 const ProjectAdminApp = ({ projectId, firstCollectStepId }: ProjectAdminAppProps) => (
   <Providers>
-    <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
-      <AlertBoxApp />
-      <ProjectAdminPage projectId={projectId} />
-    </ProjectAdminProposalsProvider>
+    <AlertBoxApp />
+    <ProjectAdminPage projectId={projectId} firstCollectStepId={firstCollectStepId} />
   </Providers>
 );
 

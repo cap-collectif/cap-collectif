@@ -2156,6 +2156,14 @@
   resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.1.0.tgz#0e81ce56b4883b4b2a3001ebe1ab298b84237204"
   integrity sha512-afmTuJrylUU/0OtqzaRkbyYFFNgCF73Bvel/sw90pvGrWIZ+vyoIJqA6eMSoA6+nb443kTmulmBtC9NerXboNg==
 
+"@restart/hooks@^0.3.1":
+  version "0.3.25"
+  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.3.25.tgz#11004139ad1c70d2f5965a8939dcb5aeb96aa652"
+  integrity sha512-m2v3N5pxTsIiSH74/sb1yW8D9RxkJidGW+5Mfwn/lHb2QzhZNlaU1su7abSyT9EGf0xS/0waLjrf7/XxQHUk7w==
+  dependencies:
+    lodash "^4.17.15"
+    lodash-es "^4.17.15"
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -14759,6 +14767,11 @@ react-overlays@^0.8.0:
     react-transition-group "^2.2.0"
     warning "^3.0.0"
 
+react-placeholder@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/react-placeholder/-/react-placeholder-4.0.2.tgz#b1dc0d41ae22df70a96b4e835d51a5101e51869f"
+  integrity sha512-e8bd5LLk54H42/ZlD/0IOzrTh3G7I+QrxSVqTNd3HlpNYPiwhhsw1i99GGxrdz/buqqrB18MY/lJKtCj/RHPAg==
+
 react-places-autocomplete@^6.1.2:
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/react-places-autocomplete/-/react-places-autocomplete-6.1.3.tgz#1d67da64afaafa639a7695fe2f5cbbd666b610c1"
@@ -15518,6 +15531,14 @@ relay-devtools@^1.4.0:
   dependencies:
     find-package-json "^1.2.0"
     rsync "^0.6.1"
+
+relay-hooks@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/relay-hooks/-/relay-hooks-3.5.0.tgz#31828b064518fdbd728f785386b280e2d405d997"
+  integrity sha512-bnaNqdIC2KTRWQgAWnC0AqgidZULRk7fwwmvC4zkAAO3/vfD2SrgsK62Pq5FYQK3lknbWHPxR6uBH7F6QCXUBw==
+  dependencies:
+    "@restart/hooks" "^0.3.1"
+    fbjs "^1.0.0"
 
 relay-runtime@9.1.0, relay-runtime@^9.1.0:
   version "9.1.0"

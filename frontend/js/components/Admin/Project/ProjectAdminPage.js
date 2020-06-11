@@ -5,7 +5,12 @@ import environment, { graphqlError } from '~/createRelayEnvironment';
 import ProjectAdminContent from './ProjectAdminContent';
 import type { ProjectAdminPageQueryResponse } from '~relay/ProjectAdminPageQuery.graphql';
 
-const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => {
+type Props = {|
+  +projectId: ?string,
+  +firstCollectStepId: ?string,
+|};
+
+const ProjectAdminPage = ({ projectId, firstCollectStepId }: Props) => {
   return (
     <QueryRenderer
       environment={environment}
@@ -34,6 +39,7 @@ const ProjectAdminPage = ({ projectId }: { projectId: ?string }) => {
           return (
             <ProjectAdminContent
               project={props.project || null}
+              firstCollectStepId={firstCollectStepId}
             />
           );
         }

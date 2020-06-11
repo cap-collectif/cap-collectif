@@ -11,6 +11,7 @@ const ProjectAnalysisPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> =
   .card {
     height: 100%;
     width: 100%;
+    overflow: hidden;
   }
 
   .card__body {
