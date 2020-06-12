@@ -11,11 +11,12 @@ class ProposalPublicationStatusResolver implements ResolverInterface
 {
     public function __invoke(Proposal $proposal): string
     {
-        if ($proposal->isDraft()) {
-            return ProposalPublicationStatus::DRAFT;
-        }
         if ($proposal->isDeleted()) {
             return ProposalPublicationStatus::DELETED;
+        }
+        
+        if ($proposal->isDraft()) {
+            return ProposalPublicationStatus::DRAFT;
         }
 
         if ($proposal->isTrashed()) {
