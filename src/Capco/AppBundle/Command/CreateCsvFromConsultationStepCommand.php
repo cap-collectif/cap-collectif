@@ -874,7 +874,7 @@ ${versionFragment}
 {
   node(id: "${opinionId}") {
     ... on Opinion {
-      sources(first: ${versionPerPage}${versionsAfterCursor}) {
+      versions(first: ${versionPerPage}${versionsAfterCursor}) {
         totalCount
         pageInfo {
           startCursor
