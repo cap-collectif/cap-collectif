@@ -9,7 +9,7 @@ monolog:
         stdout:
             type: stream
             path: 'php://stderr'
-            level: debug
+            level: error
         console:
             type: console
             bubble: false
