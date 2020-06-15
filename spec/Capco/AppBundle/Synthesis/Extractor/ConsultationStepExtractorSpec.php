@@ -8,21 +8,21 @@ use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 
 class ConsultationStepExtractorSpec extends ObjectBehavior
 {
     public function let(
-        EntityManager $em,
+        EntityManagerInterface $em,
         TranslatorInterface $translator,
         Router $router,
         OpinionTypesResolver $opinionTypesResolver,

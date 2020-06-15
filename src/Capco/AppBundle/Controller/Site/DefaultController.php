@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\SiteParameterRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
@@ -31,18 +31,18 @@ class DefaultController extends Controller
 
             return $this->json([
                 'success' => false,
-                'reason' => 'please-confirm-your-email-address-to-login'
+                'reason' => 'please-confirm-your-email-address-to-login',
             ]);
         }
 
         if (!$this->getUser()) {
             return $this->json([
-                'success' => false
+                'success' => false,
             ]);
         }
 
         return $this->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -51,7 +51,9 @@ class DefaultController extends Controller
      */
     public function loginSamlAction(Request $request)
     {
-        $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
+        $destination =
+            $request->query->get('_destination') ??
+            $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
 
         return $this->redirect($destination);
     }
@@ -61,7 +63,9 @@ class DefaultController extends Controller
      */
     public function loginParisAction(Request $request)
     {
-        $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
+        $destination =
+            $request->query->get('_destination') ??
+            $this->generateUrl('app_homepage', ['_locale' => $request->getLocale()]);
 
         return $this->redirect($destination);
     }

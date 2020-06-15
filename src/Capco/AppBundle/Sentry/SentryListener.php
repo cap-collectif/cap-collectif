@@ -99,7 +99,7 @@ class SentryListener implements EventSubscriberInterface
 
     public function onKernelException(ExceptionEvent $event): void
     {
-        $this->hub->captureException($event->getException());
+        $this->hub->captureException($event->getThrowable());
     }
 
     public function onConsoleError(ConsoleErrorEvent $event): void
@@ -120,7 +120,7 @@ class SentryListener implements EventSubscriberInterface
             KernelEvents::TERMINATE => ['onKernelTerminate', 1],
             ConsoleEvents::COMMAND => ['onConsoleCommand', 1],
             KernelEvents::EXCEPTION => ['onKernelException', 1],
-            ConsoleEvents::ERROR => ['onConsoleError', 1]
+            ConsoleEvents::ERROR => ['onConsoleError', 1],
         ];
     }
 }

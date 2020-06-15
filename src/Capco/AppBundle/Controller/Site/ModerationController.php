@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -35,7 +35,7 @@ class ModerationController extends Controller
             'reporting.status.sexual',
             'reporting.status.offending',
             'infringement-of-rights',
-            'reporting.status.spam'
+            'reporting.status.spam',
         ];
 
         $visibleReasons = ['reporting.status.off_topic', 'moderation-guideline-violation'];
@@ -59,7 +59,7 @@ class ModerationController extends Controller
         if (\in_array($reason, $hiddenReasons, true)) {
             $contribution->setTrashedStatus(Trashable::STATUS_INVISIBLE);
             $redirectUrl = $this->get('router')->generate('app_project_show_trashed', [
-                'projectSlug' => $contribution->getProject()->getSlug()
+                'projectSlug' => $contribution->getProject()->getSlug(),
             ]);
         }
 

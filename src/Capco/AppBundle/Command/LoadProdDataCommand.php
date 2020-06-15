@@ -63,7 +63,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -173,7 +173,7 @@ class LoadProdDataCommand extends Command
             ArgumentVote::class,
             AppendixType::class,
             FranceConnectSSOConfiguration::class,
-            Oauth2SSOConfiguration::class
+            Oauth2SSOConfiguration::class,
         ];
 
         $classesProd = [Context::class];
@@ -186,7 +186,7 @@ class LoadProdDataCommand extends Command
         }
         $this->runCommands(
             [
-                'hautelook:fixtures:load' => ['-e' => $env]
+                'hautelook:fixtures:load' => ['-e' => $env],
             ],
             $output
         );
@@ -197,7 +197,7 @@ class LoadProdDataCommand extends Command
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput([
             '--force' => true,
-            '--env' => $env
+            '--env' => $env,
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);

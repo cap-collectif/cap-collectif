@@ -7,7 +7,7 @@ use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\Templating\EngineInterface;
+use Twig\Environment;
 
 class ParisAuthenticationExceptionListener
 {
@@ -17,7 +17,7 @@ class ParisAuthenticationExceptionListener
 
     public function __construct(
         LoggerInterface $logger,
-        EngineInterface $templating,
+        Environment $templating,
         OpenAmClient $client
     ) {
         $this->logger = $logger;
@@ -27,7 +27,7 @@ class ParisAuthenticationExceptionListener
 
     public function onKernelException(ExceptionEvent $event): void
     {
-        $exception = $event->getException();
+        $exception = $event->getThrowable();
         $request = $event->getRequest();
         if ($exception instanceof ParisAuthenticationException) {
             $session = $request->getSession() ? $request->getSession()->invalidate() : '';
@@ -35,7 +35,7 @@ class ParisAuthenticationExceptionListener
             $this->client->logoutUser();
             $response = new Response(
                 $this->templating->render('@CapcoApp/Default/paris_user_not_valid.html.twig', [
-                    'emailAddress' => $exception->getEmailAddress()
+                    'emailAddress' => $exception->getEmailAddress(),
                 ])
             );
             $response->headers->clearCookie(

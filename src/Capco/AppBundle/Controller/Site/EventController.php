@@ -14,7 +14,7 @@ use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,17 +28,20 @@ class EventController extends Controller
     private $eventRepository;
     private $entityManager;
     private $formFactory;
+    private $parameterResolver;
 
     public function __construct(
         EventHelper $eventHelper,
         EventRepository $eventRepository,
         EntityManagerInterface $entityManager,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        SiteParameterResolver $parameterResolver
     ) {
         $this->entityManager = $entityManager;
         $this->eventHelper = $eventHelper;
         $this->eventRepository = $eventRepository;
         $this->formFactory = $formFactory;
+        $this->parameterResolver = $parameterResolver;
     }
 
     /**
@@ -51,11 +54,11 @@ class EventController extends Controller
 
         return [
             'props' => [
-                'eventPageTitle' => $this->get(SiteParameterResolver::class)->getValue(
+                'eventPageTitle' => $this->parameterResolver->getValue(
                     'events.jumbotron.title',
                     $locale
                 ),
-                'eventPageBody' => $this->get(SiteParameterResolver::class)->getValue(
+                'eventPageBody' => $this->parameterResolver->getValue(
                     'events.content.body',
                     $locale
                 ),

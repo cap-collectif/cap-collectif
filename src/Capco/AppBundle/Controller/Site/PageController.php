@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\PageTranslation;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
@@ -27,7 +27,7 @@ class PageController extends Controller
      * @Entity("pageTranslation", class="CapcoAppBundle:PageTranslation", options={"mapping": {"slug": "slug"}})
      * @Template("CapcoAppBundle:Page:show.html.twig")
      */
-    public function showAction(Request $request, PageTranslation $pageTranslation = null)
+    public function showAction(Request $request, ?PageTranslation $pageTranslation = null)
     {
         $slugCharter = strtolower($this->get('translator')->trans('charter', [], 'CapcoAppBundle'));
 
@@ -58,7 +58,7 @@ class PageController extends Controller
 
         return [
             'page' => $page,
-            'pageTranslation' => $pageTranslation
+            'pageTranslation' => $pageTranslation,
         ];
     }
 }

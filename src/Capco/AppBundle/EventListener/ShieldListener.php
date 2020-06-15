@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Templating\EngineInterface;
+use Twig\Environment;
 
 class ShieldListener
 {
@@ -49,7 +49,7 @@ class ShieldListener
         'fos_user_resetting_request',
         'fos_user_resetting_reset',
         'fos_user_resetting_send_email',
-        'fos_user_resetting_check_email'
+        'fos_user_resetting_check_email',
     ];
     protected $manager;
     protected $tokenStorage;
@@ -58,7 +58,7 @@ class ShieldListener
     public function __construct(
         Manager $manager,
         TokenStorageInterface $tokenStorage,
-        EngineInterface $templating
+        Environment $templating
     ) {
         $this->manager = $manager;
         $this->tokenStorage = $tokenStorage;

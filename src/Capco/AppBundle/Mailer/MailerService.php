@@ -5,12 +5,11 @@ namespace Capco\AppBundle\Mailer;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Mailer\Message\MessageRecipient;
 use Capco\AppBundle\Mailer\Message\User\ContactMessage;
-use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Templating\EngineInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
 class MailerService extends MailerFactory
 {
@@ -20,7 +19,7 @@ class MailerService extends MailerFactory
 
     public function __construct(
         \Swift_Mailer $mailer,
-        EngineInterface $templating,
+        Environment $templating,
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
         RouterInterface $router
@@ -38,8 +37,14 @@ class MailerService extends MailerFactory
         ?User $recipient = null,
         ?string $recipientEmail = null
     ): bool {
-        $params['locale'] = ($recipient && $recipient->getLocale()) ? $recipient->getLocale() : $this->siteParams->getDefaultLocale();
-        return $this->sendMessage($this->createMessage($type, $element, $params, $recipient, $recipientEmail));
+        $params['locale'] =
+            $recipient && $recipient->getLocale()
+                ? $recipient->getLocale()
+                : $this->siteParams->getDefaultLocale();
+
+        return $this->sendMessage(
+            $this->createMessage($type, $element, $params, $recipient, $recipientEmail)
+        );
     }
 
     public function sendMessage(AbstractMessage $message): bool
@@ -85,7 +90,7 @@ class MailerService extends MailerFactory
     {
         $swiftMessage = new \Swift_Message();
         $swiftMessage->setContentType('text/html')->setFrom([
-            $message->getSenderEmail() => $message->getSenderName()
+            $message->getSenderEmail() => $message->getSenderName(),
         ]);
 
         if (!empty($message->getBcc())) {
@@ -153,7 +158,7 @@ class MailerService extends MailerFactory
         MessageRecipient $recipient
     ): void {
         $swiftMessage->setTo([$recipient->getEmailAddress() => $recipient->getFullName()]);
-        $this->mailer->send($swiftMessage, $this->failedRecipients);//todo not translated if not twig
+        $this->mailer->send($swiftMessage, $this->failedRecipients); //todo not translated if not twig
         // See https://github.com/mustafaileri/swiftmailer/commit/d289295235488cdc79473260e04e3dabd2dac3ef
         if ($this->mailer->getTransport()->isStarted()) {
             $this->mailer->getTransport()->stop();
@@ -168,7 +173,7 @@ class MailerService extends MailerFactory
         if (!isset($localizedParts[$locale])) {
             $localizedParts[$locale] = [
                 'body' => $this->generateLocalizedBodyFromMessage($message, $locale),
-                'subject' => $this->generateLocalizedSubjectFromMessage($message, $locale)
+                'subject' => $this->generateLocalizedSubjectFromMessage($message, $locale),
             ];
         }
     }

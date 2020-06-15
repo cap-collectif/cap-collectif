@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Translator;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Webfactory\IcuTranslationBundle\Translator\Formatting\Exception\CannotFormatException;
 use Webfactory\IcuTranslationBundle\Translator\Formatting\Exception\CannotInstantiateFormatterException;
 use Webfactory\IcuTranslationBundle\Translator\Formatting\FormatterInterface;
@@ -20,7 +20,7 @@ class FormatterDecorator implements TranslatorInterface
     /**
      * The inner translator.
      *
-     * @var \Symfony\Component\Translation\TranslatorInterface
+     * @var \Symfony\Contracts\Translation\TranslatorInterface
      */
     protected $translator;
 

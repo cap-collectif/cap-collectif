@@ -9,7 +9,7 @@ use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ReportNotifier extends BaseNotifier
 {
@@ -40,7 +40,7 @@ final class ReportNotifier extends BaseNotifier
             'type' => $type,
             'elementURL' => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
             'adminURL' => $this->urlResolver->getReportedUrl($report, true),
-            'router' => $this->router
+            'router' => $this->router,
         ]);
     }
 }

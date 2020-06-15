@@ -1,16 +1,16 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Capco\AppBundle\Form\:
-    resource: '%kernel.project_dir%/src/Capco/AppBundle/Form/*'
-  #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
+    Capco\AppBundle\Form\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Form/*'
+    #    exclude: '%kernel.project_dir%/src/Capco/AppBundle/{}'
 
-  Capco\AppBundle\Form\Extension\HelpExtension:
-    tags:
-      - {
-          name: form.type_extension,
-          extended_type: Symfony\Component\Form\Extension\Core\Type\FormType,
-        }
+    Capco\AppBundle\Form\Extension\HelpExtension:
+        tags:
+            - {
+                  name: form.type_extension,
+                  extended_type: Symfony\Component\Form\Extension\Core\Type\FormType,
+              }

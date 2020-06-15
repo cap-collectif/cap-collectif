@@ -27,8 +27,13 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface, Local
         return $id . ' ' . json_encode($parameters);
     }
 
-    public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
-    {
+    public function transChoice(
+        $id,
+        $number,
+        array $parameters = [],
+        $domain = null,
+        $locale = null
+    ) {
         return $this->trans($id, $parameters, $domain, $locale);
     }
 

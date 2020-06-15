@@ -19,7 +19,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
@@ -45,7 +45,7 @@ class StepController extends Controller
 
         return [
             'project' => $project,
-            'currentStep' => $step
+            'currentStep' => $step,
         ];
     }
 
@@ -75,7 +75,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'posts' => $posts,
             'nbPosts' => $nbPosts,
-            'showVotes' => $showVotes
+            'showVotes' => $showVotes,
         ];
     }
 
@@ -122,7 +122,7 @@ class StepController extends Controller
             'opinions' => $opinions,
             'nbOpinionsToDisplay' => $nbOpinionsToDisplay,
             'versions' => $versions,
-            'nbVersionsToDisplay' => $nbVersionsToDisplay
+            'nbVersionsToDisplay' => $nbVersionsToDisplay,
         ];
     }
 
@@ -160,7 +160,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'opinions' => $opinions,
             'page' => $page,
-            'nbPage' => ceil(\count($opinions) / 10)
+            'nbPage' => ceil(\count($opinions) / 10),
         ];
     }
 
@@ -198,7 +198,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'versions' => $versions,
             'page' => $page,
-            'nbPage' => ceil(\count($versions) / 10)
+            'nbPage' => ceil(\count($versions) / 10),
         ];
     }
 
@@ -229,7 +229,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'props' => $props
+            'props' => $props,
         ];
     }
 
@@ -255,7 +255,7 @@ class StepController extends Controller
 
         return [
             'project' => $project,
-            'currentStep' => $step
+            'currentStep' => $step,
         ];
     }
 
@@ -289,7 +289,7 @@ class StepController extends Controller
             if (!$viewer || !$decodedId || !$reply || !$reply->viewerCanSee($viewer)) {
                 return $this->redirectToRoute('app_project_show_questionnaire', [
                     'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug()
+                    'stepSlug' => $step->getSlug(),
                 ]);
             }
         }
@@ -303,18 +303,18 @@ class StepController extends Controller
                     : false,
                 'questionnaireId' => $step->getQuestionnaire()
                     ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
-                    : null
+                    : null,
             ],
             'json',
             [
-                'groups' => ['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps']
+                'groups' => ['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps'],
             ]
         );
 
         return [
             'project' => $project,
             'currentStep' => $step,
-            'props' => $props
+            'props' => $props,
         ];
     }
 
@@ -337,7 +337,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'proposalForm' => null
+            'proposalForm' => null,
         ];
     }
 
@@ -377,7 +377,7 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'props' => $props
+            'props' => $props,
         ];
     }
 
@@ -422,7 +422,7 @@ class StepController extends Controller
         if (!$consultation && $isMultiConsultation) {
             return $this->redirectToRoute('app_project_show_consultations', [
                 'stepSlug' => $step->getSlug(),
-                'projectSlug' => $project->getSlug()
+                'projectSlug' => $project->getSlug(),
             ]);
         }
 
@@ -444,13 +444,13 @@ class StepController extends Controller
             'consultation' => $consultation ?? $step->getFirstConsultation(),
             'navigationStepProps' => [
                 'id' => $cstepGlobalId,
-                'consultationSlug' => $consultationSlug
+                'consultationSlug' => $consultationSlug,
             ],
             'stepProps' => [
                 'id' => $cstepGlobalId,
                 'consultationSlug' => $consultationSlug,
-                'isMultiConsultation' => $isMultiConsultation
-            ]
+                'isMultiConsultation' => $isMultiConsultation,
+            ],
         ];
     }
 
@@ -483,7 +483,7 @@ class StepController extends Controller
         if (!$step->isMultiConsultation()) {
             return $this->redirectToRoute('app_project_show_consultation', [
                 'stepSlug' => $step->getSlug(),
-                'projectSlug' => $project->getSlug()
+                'projectSlug' => $project->getSlug(),
             ]);
         }
 
@@ -491,8 +491,8 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'stepProps' => [
-                'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId())
-            ]
+                'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
+            ],
         ];
     }
 }

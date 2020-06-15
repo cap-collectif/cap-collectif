@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 
 use Capco\AppBundle\Entity\Comment;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 class CommentBodyResolver implements ResolverInterface

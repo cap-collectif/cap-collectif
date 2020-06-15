@@ -11,8 +11,8 @@ use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Manager\ContributionManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConfirmationController extends Controller
 {
@@ -88,7 +88,7 @@ class ConfirmationController extends Controller
             $this->userManager->updateUser($user);
 
             return $this->redirectToRoute('fos_user_resetting_reset', [
-                'token' => $user->getResetPasswordToken()
+                'token' => $user->getResetPasswordToken(),
             ]);
         }
 

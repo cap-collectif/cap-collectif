@@ -14,8 +14,8 @@ services:
       tags: ['overblog_graphql.mutation']
 
   Capco\AppBundle\GraphQL\Mutation\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/*'
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php, ContactFormMutation.php}'
+    resource: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/*'
+    exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php, ContactFormMutation.php}'
 
   #follwoing mutations are legacy : now we make on mutation file for each mutation
   Capco\AppBundle\GraphQL\Mutation\ProposalMutation:

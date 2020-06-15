@@ -14,7 +14,7 @@ use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConsultationStepExtractor
 {
@@ -95,7 +95,7 @@ class ConsultationStepExtractor
      *
      * @param mixed $opinionTypes
      */
-    public function createElementsFromOpinionTypes($opinionTypes, SynthesisElement $parent = null)
+    public function createElementsFromOpinionTypes($opinionTypes, ?SynthesisElement $parent = null)
     {
         foreach ($opinionTypes as $opinionType) {
             // Create or update element from opinion type
@@ -104,7 +104,7 @@ class ConsultationStepExtractor
             // Create elements from opinions
             $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
                 'consultation' => $this->consultationStep->getFirstConsultation(),
-                'OpinionType' => $opinionType
+                'OpinionType' => $opinionType,
             ]);
             if (\count($opinions) > 0) {
                 $this->createElementsFromOpinions($opinions, $elementFromOT);
@@ -120,7 +120,7 @@ class ConsultationStepExtractor
      *
      * @param mixed $opinions
      */
-    public function createElementsFromOpinions($opinions, SynthesisElement $parent = null)
+    public function createElementsFromOpinions($opinions, ?SynthesisElement $parent = null)
     {
         foreach ($opinions as $opinion) {
             // Create or update element from opinion
@@ -177,7 +177,7 @@ class ConsultationStepExtractor
      *
      * @param mixed $versions
      */
-    public function createElementsFromVersions($versions, SynthesisElement $parent = null)
+    public function createElementsFromVersions($versions, ?SynthesisElement $parent = null)
     {
         foreach ($versions as $version) {
             // Create or update element from version
@@ -215,7 +215,7 @@ class ConsultationStepExtractor
     public function createElementsFromArguments(
         $arguments,
         SynthesisElement $prosFolder,
-        SynthesisElement $consFolder = null
+        ?SynthesisElement $consFolder = null
     ) {
         foreach ($arguments as $argument) {
             if (1 === $argument->getType() || null !== $consFolder) {
@@ -252,7 +252,7 @@ class ConsultationStepExtractor
      *
      * @param mixed $object
      */
-    public function getRelatedElement($object, SynthesisElement $parent = null): SynthesisElement
+    public function getRelatedElement($object, ?SynthesisElement $parent = null): SynthesisElement
     {
         foreach ($this->previousElements as $element) {
             if ($this->isElementExisting($element, $object)) {
@@ -477,7 +477,7 @@ class ConsultationStepExtractor
         // Set link
         if ($source->getMedia()) {
             $mediaURL = $this->router->generate('sonata_media_download', [
-                'id' => $source->getMedia()->getId()
+                'id' => $source->getMedia()->getId(),
             ]);
             $element->setLink($mediaURL);
         } elseif ($source->getLink()) {

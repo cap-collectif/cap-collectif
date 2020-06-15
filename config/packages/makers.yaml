@@ -1,8 +1,8 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Capco\AppBundle\Command\Maker\Makers\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Command/Maker/Makers/*'
+    Capco\AppBundle\Command\Maker\Makers\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Command/Maker/Makers/*'

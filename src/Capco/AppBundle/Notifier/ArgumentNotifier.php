@@ -12,7 +12,7 @@ use Capco\AppBundle\Mailer\Message\Argument\UpdateArgumentModeratorMessage;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ArgumentNotifier extends BaseNotifier
 {
@@ -42,7 +42,7 @@ class ArgumentNotifier extends BaseNotifier
         if ($consultation && $consultation->isModeratingOnCreate()) {
             $params = [
                 'moderableURL' => $this->argumentUrlResolver->__invoke($argument),
-                'authorURL' => $this->userUrlResolver->__invoke($argument->getAuthor())
+                'authorURL' => $this->userUrlResolver->__invoke($argument->getAuthor()),
             ];
             $this->mailer->createAndSendMessage(
                 NewArgumentModeratorMessage::class,
@@ -59,7 +59,7 @@ class ArgumentNotifier extends BaseNotifier
         if ($consultation && $consultation->isModeratingOnUpdate()) {
             $this->mailer->createAndSendMessage(UpdateArgumentModeratorMessage::class, $argument, [
                 'moderableURL' => $this->argumentUrlResolver->__invoke($argument),
-                'authorURL' => $this->userUrlResolver->__invoke($argument->getAuthor())
+                'authorURL' => $this->userUrlResolver->__invoke($argument->getAuthor()),
             ]);
         }
     }

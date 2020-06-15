@@ -20,27 +20,58 @@ use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomepageController extends Controller
 {
-    private $serializer;
-    private $eventsResolver;
-    private $sectionResolver;
+    private SerializerInterface $serializer;
+    private QueryEventsResolver $eventsResolver;
+    private SectionResolver $sectionResolver;
+    private Manager $manager;
+    private TranslatorInterface $translator;
+    private HighlightedContentRepository $highlightedContentRepository;
+    private VideoRepository $videoRepository;
+    private ProposalRepository $proposalRepository;
+    private PostRepository $postRepository;
+    private NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
+    private ThemeRepository $themeRepository;
+    private UserRepository $userRepository;
+    private ProjectRepository $projectRepository;
 
     public function __construct(
         SerializerInterface $serializer,
         QueryEventsResolver $eventsResolver,
-        SectionResolver $sectionResolver
+        SectionResolver $sectionResolver,
+        Manager $manager,
+        TranslatorInterface $translator,
+        HighlightedContentRepository $highlightedContentRepository,
+        VideoRepository $videoRepository,
+        ProposalRepository $proposalRepository,
+        PostRepository $postRepository,
+        NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
+        ThemeRepository $themeRepository,
+        UserRepository $userRepository,
+        ProjectRepository $projectRepository
     ) {
         $this->serializer = $serializer;
         $this->eventsResolver = $eventsResolver;
         $this->sectionResolver = $sectionResolver;
+        $this->manager = $manager;
+        $this->translator = $translator;
+        $this->videoRepository = $videoRepository;
+        $this->highlightedContentRepository = $highlightedContentRepository;
+        $this->themeRepository = $themeRepository;
+        $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
+        $this->postRepository = $postRepository;
+        $this->proposalRepository = $proposalRepository;
+        $this->userRepository = $userRepository;
+        $this->projectRepository = $projectRepository;
     }
 
     /**
@@ -57,18 +88,20 @@ class HomepageController extends Controller
             )
             ->getTotalCount();
 
-        $newsletterActive = $this->get(Manager::class)->isActive('newsletter');
+        $newsletterActive = $this->manager->isActive('newsletter');
 
-        $translator = $this->get('translator');
         $deleteType = $request->get('deleteType');
         $form = null;
 
         if ($deleteType) {
             $flashBag = $this->get('session')->getFlashBag();
             if (DeleteAccountType::SOFT === $deleteType) {
-                $flashBag->add('success', $translator->trans('account-and-contents-anonymized'));
+                $flashBag->add(
+                    'success',
+                    $this->translator->trans('account-and-contents-anonymized')
+                );
             } elseif (DeleteAccountType::HARD === $deleteType) {
-                $flashBag->add('success', $translator->trans('account-and-contents-deleted'));
+                $flashBag->add('success', $this->translator->trans('account-and-contents-deleted'));
             }
         }
 
@@ -85,11 +118,11 @@ class HomepageController extends Controller
                 if ($form->isValid()) {
                     // TODO: move this to a unique constraint in form instead
                     /** @var NewsletterSubscription $email */
-                    $email = $this->get(NewsletterSubscriptionRepository::class)->findOneByEmail(
+                    $email = $this->newsletterSubscriptionRepository->findOneByEmail(
                         $subscription->getEmail()
                     );
                     /** @var User $userToNotify */
-                    $userToNotify = $this->get(UserRepository::class)->findOneBy([
+                    $userToNotify = $this->userRepository->findOneBy([
                         'email' => $subscription->getEmail(),
                     ]);
                     $em = $this->getDoctrine()->getManager();
@@ -103,40 +136,43 @@ class HomepageController extends Controller
                             );
                             $flashBag->add(
                                 'success',
-                                $translator->trans('homepage.newsletter.success')
+                                $this->translator->trans('homepage.newsletter.success')
                             );
                             $em->persist($userToNotify);
                         } elseif ($userNotification->isConsentExternalCommunication()) {
                             $flashBag->add(
                                 'info',
-                                $translator->trans('homepage.newsletter.already_subscribed')
+                                $this->translator->trans('homepage.newsletter.already_subscribed')
                             );
                         }
                     } elseif (!$email) {
                         $em->persist($subscription);
                         $flashBag->add(
                             'success',
-                            $translator->trans('homepage.newsletter.success')
+                            $this->translator->trans('homepage.newsletter.success')
                         );
                     } elseif ($email) {
                         if ($email->getIsEnabled()) {
                             $flashBag->add(
                                 'info',
-                                $translator->trans('homepage.newsletter.already_subscribed')
+                                $this->translator->trans('homepage.newsletter.already_subscribed')
                             );
                         } else {
                             $email->setIsEnabled(true);
                             $em->persist($email);
                             $flashBag->add(
                                 'success',
-                                $translator->trans('homepage.newsletter.success')
+                                $this->translator->trans('homepage.newsletter.success')
                             );
                         }
                     }
 
                     $em->flush();
                 } else {
-                    $flashBag->add('danger', $translator->trans('homepage.newsletter.invalid'));
+                    $flashBag->add(
+                        'danger',
+                        $this->translator->trans('homepage.newsletter.invalid')
+                    );
                 }
 
                 return $this->redirect($this->generateUrl('app_homepage'));
@@ -155,7 +191,7 @@ class HomepageController extends Controller
      */
     public function highlightedContentAction(?Section $section = null)
     {
-        $highlighteds = $this->get(HighlightedContentRepository::class)->getAllOrderedByPosition(4);
+        $highlighteds = $this->highlightedContentRepository->getAllOrderedByPosition(4);
         $props = $this->serializer->serialize(['highlighteds' => $highlighteds], 'json', [
             'groups' => [
                 'HighlightedContent',
@@ -194,7 +230,7 @@ class HomepageController extends Controller
     ) {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $videos = $this->get(VideoRepository::class)->getLast($max, $offset);
+        $videos = $this->videoRepository->getLast($max, $offset);
 
         return ['videos' => $videos, 'section' => $section];
     }
@@ -210,13 +246,13 @@ class HomepageController extends Controller
         $max = $max ?? 4;
         $offset = $offset ?? 0;
         if ($section->getStep() && $section->getStep()->isCollectStep()) {
-            $proposals = $this->get(ProposalRepository::class)->getLastByStep(
+            $proposals = $this->proposalRepository->getLastByStep(
                 $max,
                 $offset,
                 $section->getStep()
             );
         } else {
-            $proposals = $this->get(ProposalRepository::class)->getLast($max, $offset);
+            $proposals = $this->proposalRepository->getLast($max, $offset);
         }
 
         $ids = array_map(function (Proposal $proposal) {
@@ -236,7 +272,7 @@ class HomepageController extends Controller
     ) {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $topics = $this->get(ThemeRepository::class)->getLast($max, $offset);
+        $topics = $this->themeRepository->getLast($max, $offset);
 
         return ['topics' => $topics, 'section' => $section];
     }
@@ -248,7 +284,7 @@ class HomepageController extends Controller
     {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $posts = $this->get(PostRepository::class)->getLast($max, $offset);
+        $posts = $this->postRepository->getLast($max, $offset);
 
         return ['posts' => $posts, 'section' => $section];
     }
@@ -262,7 +298,7 @@ class HomepageController extends Controller
         ?Section $section = null
     ) {
         $max = $max ?? 3;
-        $projectRepo = $this->get(ProjectRepository::class);
+        $projectRepo = $this->projectRepository;
         $count = $projectRepo->countPublished($this->getUser());
 
         return ['max' => $max, 'count' => $count, 'section' => $section];

@@ -7,7 +7,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -52,7 +52,7 @@ class ParametersExtension extends AbstractExtension
             new TwigFunction('has_feature_enabled', [$this, 'getHasFeatureEnabled']),
             new TwigFunction('features_list', [$this, 'getFeatures']),
             new TwigFunction('site_parameters_list', [$this, 'getSiteParameters']),
-            new TwigFunction('availableLocales', [$this, 'getAvailableLocales'])
+            new TwigFunction('availableLocales', [$this, 'getAvailableLocales']),
         ];
     }
 
@@ -107,7 +107,7 @@ class ParametersExtension extends AbstractExtension
                 'CapcoAppBundle'
             );
             $exposedParameters['signin.cgu.link'] = $this->router->generate('app_page_show', [
-                'slug' => $slug
+                'slug' => $slug,
             ]);
 
             // Add colors
@@ -120,7 +120,7 @@ class ParametersExtension extends AbstractExtension
                 'color.btn.primary.bg',
                 'color.btn.primary.text',
                 'color.section.bg',
-                'color.body.bg'
+                'color.body.bg',
             ];
 
             foreach ($colors as $color) {

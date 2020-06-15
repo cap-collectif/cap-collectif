@@ -10,7 +10,7 @@ use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ThemeController extends Controller
@@ -29,7 +29,7 @@ class ThemeController extends Controller
 
         $form = $this->createForm(ThemeSearchType::class, null, [
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ]);
 
         if ('POST' === $request->getMethod()) {
@@ -65,7 +65,7 @@ class ThemeController extends Controller
             'themes' => $themes,
             'form' => $form->createView(),
             'page' => $page,
-            'nbPage' => $nbPage
+            'nbPage' => $nbPage,
         ];
     }
 
@@ -85,7 +85,7 @@ class ThemeController extends Controller
         return [
             'theme' => $theme,
             'themeId' => $theme->getId(),
-            'max' => 12
+            'max' => 12,
         ];
     }
 }

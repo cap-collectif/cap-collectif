@@ -22,7 +22,7 @@ use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -82,7 +82,7 @@ class CommentNotifier extends BaseNotifier
                         [
                             'comment' => $comment,
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
-                            'adminURL' => $this->commentResolver->getAdminUrl($comment, true)
+                            'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
                         ]
                     );
                 } else {
@@ -93,7 +93,7 @@ class CommentNotifier extends BaseNotifier
                             'comment' => $comment,
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
-                            'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor())
+                            'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor()),
                         ]
                     );
                 }
@@ -117,7 +117,7 @@ class CommentNotifier extends BaseNotifier
                             'disableNotificationURL' => $this->userDisableNotificationsUrlResolver->__invoke(
                                 $user
                             ),
-                            'notificationURL' => $this->userShowNotificationsPreferencesUrlResolver->__invoke()
+                            'notificationURL' => $this->userShowNotificationsPreferencesUrlResolver->__invoke(),
                         ],
                         $user
                     );
@@ -133,7 +133,7 @@ class CommentNotifier extends BaseNotifier
                             'disableNotificationURL' => $this->userDisableNotificationsUrlResolver->__invoke(
                                 $user
                             ),
-                            'notificationURL' => $this->userShowNotificationsPreferencesUrlResolver->__invoke()
+                            'notificationURL' => $this->userShowNotificationsPreferencesUrlResolver->__invoke(),
                         ],
                         $user
                     );
@@ -183,7 +183,7 @@ class CommentNotifier extends BaseNotifier
                                     $comment['projectSlug'],
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
-                                )
+                                ),
                             ]
                         );
                     } else {
@@ -199,7 +199,7 @@ class CommentNotifier extends BaseNotifier
                                     $comment['projectSlug'],
                                     $comment['stepSlug'],
                                     $comment['proposalSlug']
-                                )
+                                ),
                             ]
                         );
                     }
@@ -207,18 +207,6 @@ class CommentNotifier extends BaseNotifier
                     break;
             }
         }
-    }
-
-    private function resolveProposalUrlBySlugs(
-        string $projectSlug,
-        string $stepSlug,
-        string $proposalSlug
-    ): ?string {
-        return $this->router->generate(
-            'app_project_show_proposal',
-            compact('projectSlug', 'stepSlug', 'proposalSlug'),
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
     }
 
     public function onUpdate(Comment $comment)
@@ -244,7 +232,7 @@ class CommentNotifier extends BaseNotifier
                         [
                             'comment' => $comment,
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
-                            'adminURL' => $this->commentResolver->getAdminUrl($comment, true)
+                            'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
                         ]
                     );
                 } else {
@@ -255,11 +243,23 @@ class CommentNotifier extends BaseNotifier
                             'comment' => $comment,
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
-                            'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor())
+                            'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor()),
                         ]
                     );
                 }
             }
         }
+    }
+
+    private function resolveProposalUrlBySlugs(
+        string $projectSlug,
+        string $stepSlug,
+        string $proposalSlug
+    ): ?string {
+        return $this->router->generate(
+            'app_project_show_proposal',
+            compact('projectSlug', 'stepSlug', 'proposalSlug'),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 }

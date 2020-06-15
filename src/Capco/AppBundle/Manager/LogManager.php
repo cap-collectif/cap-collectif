@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Gedmo\Loggable\Entity\LogEntry;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LogManager
 {

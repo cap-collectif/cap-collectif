@@ -80,20 +80,20 @@ services:
     #### USER
 
     Capco\UserBundle\Authenticator\:
-        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Authenticator/*'
+        resource: '%kernel.project_dir%/src/Capco/UserBundle/Authenticator/*'
 
     Capco\UserBundle\Form\:
-        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Form/*'
+        resource: '%kernel.project_dir%/src/Capco/UserBundle/Form/*'
 
     Capco\UserBundle\Listener\:
-        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Listener/*'
+        resource: '%kernel.project_dir%/src/Capco/UserBundle/Listener/*'
 
     Capco\UserBundle\MonCompteParis\:
-        resource: '%kernel.root_dir%/../src/Capco/UserBundle/MonCompteParis/*'
+        resource: '%kernel.project_dir%/src/Capco/UserBundle/MonCompteParis/*'
 
     Capco\UserBundle\Security\:
-        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Security/*'
-        exclude: '%kernel.root_dir%/../src/Capco/UserBundle/Security/Exception/*'
+        resource: '%kernel.project_dir%/src/Capco/UserBundle/Security/*'
+        exclude: '%kernel.project_dir%/src/Capco/UserBundle/Security/Exception/*'
 
     Capco\UserBundle\Security\Core\User\OauthUserProvider:
         arguments:

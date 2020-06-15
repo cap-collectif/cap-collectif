@@ -28,7 +28,7 @@ use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\MediaBundle\Provider\ImageProvider;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 {

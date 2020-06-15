@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Router;
 use JMS\I18nRoutingBundle\Router\PatternGenerationStrategyInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /*
  * This class is used to override the route naming convention from the JMS Routing Bundle.

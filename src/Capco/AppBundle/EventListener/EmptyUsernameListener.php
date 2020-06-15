@@ -5,14 +5,14 @@ namespace Capco\AppBundle\EventListener;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Templating\EngineInterface;
+use Twig\Environment;
 
 class EmptyUsernameListener
 {
     protected $tokenStorage;
     protected $templating;
 
-    public function __construct(TokenStorageInterface $tokenStorage, EngineInterface $templating)
+    public function __construct(TokenStorageInterface $tokenStorage, Environment $templating)
     {
         $this->tokenStorage = $tokenStorage;
         $this->templating = $templating;
@@ -37,7 +37,7 @@ class EmptyUsernameListener
         // Skip if route is allowed
         $routes = array_merge(ShieldListener::AVAILABLE_ROUTES, [
             'graphql_endpoint',
-            'graphql_multiple_endpoint'
+            'graphql_multiple_endpoint',
         ]);
         if (\in_array($route, $routes, true)) {
             return;

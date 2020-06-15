@@ -1,12 +1,12 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: true
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
 
-  Capco\AppBundle\Helper\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Helper/*'
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Helper/{RedisStorageHelper.php}'
+    Capco\AppBundle\Helper\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Helper/*'
+        exclude: '%kernel.project_dir%/src/Capco/AppBundle/Helper/{RedisStorageHelper.php}'
 
-  Capco\AppBundle\Helper\RedisStorageHelper:
-    arguments: ['@snc_redis.default']
+    Capco\AppBundle\Helper\RedisStorageHelper:
+        arguments: ['@snc_redis.default']

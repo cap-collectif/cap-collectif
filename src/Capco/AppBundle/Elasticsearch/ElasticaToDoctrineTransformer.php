@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Elastica\Result;
@@ -61,7 +61,7 @@ class ElasticaToDoctrineTransformer
      * model objects fetched from the doctrine repository.
      *
      * @throws \RuntimeException
-     **/
+     */
     public function transform(array $elasticaObjects): array
     {
         $objects = $ids = $toFetchByType = [];

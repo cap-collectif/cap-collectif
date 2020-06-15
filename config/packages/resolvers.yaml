@@ -1,107 +1,107 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
-    bind:
-        Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
-        Qandidate\Toggle\ToggleManager: '@qandidate.toggle.manager'
-        Qandidate\Toggle\ContextFactory: '@qandidate.toggle.user_context_factory'
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            Sonata\MediaBundle\Entity\MediaManager: '@sonata.media.manager.media'
+            Qandidate\Toggle\ToggleManager: '@qandidate.toggle.manager'
+            Qandidate\Toggle\ContextFactory: '@qandidate.toggle.user_context_factory'
 
-  Capco\AppBundle\Resolver\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Resolver/*'
-  #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
+    Capco\AppBundle\Resolver\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Resolver/*'
+    #    exclude: '%kernel.project_dir%/src/Capco/AppBundle/{}'
 
-  Capco\AppBundle\Manager\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Manager/*'
+    Capco\AppBundle\Manager\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Manager/*'
 
-  Capco\AppBundle\SiteImage\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/SiteImage/*'
+    Capco\AppBundle\SiteImage\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/SiteImage/*'
 
-  Capco\AppBundle\SiteColor\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/SiteColor/*'
+    Capco\AppBundle\SiteColor\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/SiteColor/*'
 
-  Capco\AppBundle\Following\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Following/*'
+    Capco\AppBundle\Following\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Following/*'
 
-  Capco\AppBundle\Manager\CommentResolver:
-    autowire: true
-    public: true
+    Capco\AppBundle\Manager\CommentResolver:
+        autowire: true
+        public: true
 
-  Capco\AppBundle\Manager\LogManager:
-    public: true
+    Capco\AppBundle\Manager\LogManager:
+        public: true
 
-  Capco\AppBundle\Resolver\ProjectDownloadResolver:
-    public: true
+    Capco\AppBundle\Resolver\ProjectDownloadResolver:
+        public: true
 
-  Capco\AppBundle\Resolver\ContributionResolver:
-    public: true
+    Capco\AppBundle\Resolver\ContributionResolver:
+        public: true
 
-  Capco\AppBundle\Resolver\HighlightedContentResolver:
-    public: true
+    Capco\AppBundle\Resolver\HighlightedContentResolver:
+        public: true
 
-  Capco\AppBundle\Manager\MenuItemResolver:
-    public: true
+    Capco\AppBundle\Manager\MenuItemResolver:
+        public: true
 
-  Capco\AppBundle\Resolver\OpinionTypesResolver:
-    public: true
+    Capco\AppBundle\Resolver\OpinionTypesResolver:
+        public: true
 
-  Capco\AppBundle\Resolver\SectionResolver:
-    public: true
+    Capco\AppBundle\Resolver\SectionResolver:
+        public: true
 
-  Capco\AppBundle\SiteParameter\SiteParameterResolver:
-    public: true
+    Capco\AppBundle\SiteParameter\SiteParameterResolver:
+        public: true
 
-  Capco\AppBundle\Resolver\StepResolver:
-    public: true
+    Capco\AppBundle\Resolver\StepResolver:
+        public: true
 
-  Capco\AppBundle\Resolver\UrlResolver:
-    public: true
+    Capco\AppBundle\Resolver\UrlResolver:
+        public: true
 
-  Capco\AppBundle\Resolver\ProjectStatsResolver:
-    public: true
+    Capco\AppBundle\Resolver\ProjectStatsResolver:
+        public: true
 
-  Capco\AppBundle\Manager\MediaManager:
-    public: true
+    Capco\AppBundle\Manager\MediaManager:
+        public: true
 
-  Capco\AppBundle\Resolver\Project\ProjectSearchResolver:
-    public: true
+    Capco\AppBundle\Resolver\Project\ProjectSearchResolver:
+        public: true
 
-  Capco\AppBundle\Resolver\ProposalResolver:
-    arguments:
-      $rootDir: '%kernel.root_dir%'
-    public: true
+    Capco\AppBundle\Resolver\ProposalResolver:
+        arguments:
+            $rootDir: '%kernel.root_dir%'
+        public: true
 
-  Capco\AppBundle\Following\ActivitiesResolver:
-    public: true
+    Capco\AppBundle\Following\ActivitiesResolver:
+        public: true
 
-  Capco\AppBundle\Manager\ContributionManager:
-    public: true
+    Capco\AppBundle\Manager\ContributionManager:
+        public: true
 
-  Capco\AppBundle\Toggle\Manager:
-    public: true
+    Capco\AppBundle\Toggle\Manager:
+        public: true
 
-  Capco\AppBundle\GraphQL\ConnectionBuilder: ~
-  Capco\AppBundle\GraphQL\QueryAnalyzer: ~
-  Capco\AppBundle\Resolver\LocaleResolver:
-      public: true
-      arguments:
-          $locale: '%locale%'
-          $locales: '%locales%'
+    Capco\AppBundle\GraphQL\ConnectionBuilder: ~
+    Capco\AppBundle\GraphQL\QueryAnalyzer: ~
+    Capco\AppBundle\Resolver\LocaleResolver:
+        public: true
+        arguments:
+            $locale: '%locale%'
+            $locales: '%locales%'
 
-  Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromIdQueryResolver:
-      arguments:
-          $apiToken: '%api_enterprise_token%'
-      public: true
+    Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromIdQueryResolver:
+        arguments:
+            $apiToken: '%api_enterprise_token%'
+        public: true
 
-  Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver:
-      arguments:
-          $apiToken: '%api_enterprise_token%'
-          $rootDir: '%kernel.project_dir%'
-      public: true
+    Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver:
+        arguments:
+            $apiToken: '%api_enterprise_token%'
+            $rootDir: '%kernel.project_dir%'
+        public: true
 
-  Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver:
-      arguments:
-          $apiToken: '%api_enterprise_token%'
-          $rootDir: '%kernel.project_dir%'
-      public: true
+    Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver:
+        arguments:
+            $apiToken: '%api_enterprise_token%'
+            $rootDir: '%kernel.project_dir%'
+        public: true

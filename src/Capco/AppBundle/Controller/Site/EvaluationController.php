@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryViewerCanSeeEvaluationsPageResolver;
@@ -24,13 +24,14 @@ class EvaluationController extends Controller
         $toggleManager = $this->get(Manager::class);
 
         if ($toggleManager->isActive('unstable__analysis')) {
+            $viewerCanSeeEvaluationsPageResolver = $this->get(
+                QueryViewerCanSeeEvaluationsPageResolver::class
+            );
 
-            $viewerCanSeeEvaluationsPageResolver = $this->get(QueryViewerCanSeeEvaluationsPageResolver::class);
-            
             if (!$viewerCanSeeEvaluationsPageResolver->__invoke($viewer)) {
                 throw $this->createAccessDeniedException();
             }
-            
+
             return [];
         }
 

@@ -8,7 +8,7 @@ use Capco\AppBundle\Search\GlobalSearch;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Elasticsearch\HybridResult;
 use Capco\AppBundle\Form\SearchType as SearchForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -43,7 +43,7 @@ class SearchController extends Controller
             ->get(GlobalSearch::class)
             ->search($page, $searchParams['term'], $sortField, $sortOrder, $searchParams['type']);
 
-        /**
+        /*
          * Do not display Proposal if we are not allowed.
          *
          * @var HybridResult
@@ -80,7 +80,7 @@ class SearchController extends Controller
             'q' => $searchParams,
             'count' => $searchResults['count'],
             'results' => $searchResults['results'],
-            'nbPages' => $searchResults['pages']
+            'nbPages' => $searchResults['pages'],
         ];
     }
 }

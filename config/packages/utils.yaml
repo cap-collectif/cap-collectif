@@ -1,28 +1,28 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Capco\AppBundle\Utils\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Utils/*'
-  #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
-  Capco\AppBundle\GraphQL\ConnectionTraversor:
-    public: true
+    Capco\AppBundle\Utils\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Utils/*'
+    #    exclude: '%kernel.project_dir%/src/Capco/AppBundle/{}'
+    Capco\AppBundle\GraphQL\ConnectionTraversor:
+        public: true
 
-  Capco\AppBundle\Utils\Map:
-    public: true
-    arguments:
-      $apiSeverKey: '%google_maps_key_server%'
+    Capco\AppBundle\Utils\Map:
+        public: true
+        arguments:
+            $apiSeverKey: '%google_maps_key_server%'
 
-  pmill\Doctrine\Hydrator\ArrayHydrator:
-    arguments: ['@doctrine.orm.default_entity_manager']
+    pmill\Doctrine\Hydrator\ArrayHydrator:
+        arguments: ['@doctrine.orm.default_entity_manager']
 
-  EmailChecker\EmailChecker:
-    arguments: ['@EmailChecker\Adapter\FileAdapter']
+    EmailChecker\EmailChecker:
+        arguments: ['@EmailChecker\Adapter\FileAdapter']
 
-  EmailChecker\Adapter\FileAdapter:
-    arguments: ['%kernel.project_dir%/config/throwable_emails.txt']
+    EmailChecker\Adapter\FileAdapter:
+        arguments: ['%kernel.project_dir%/config/throwable_emails.txt']
 
-  Capco\AppBundle\Helper\ConvertCsvToArray:
-    public: true
+    Capco\AppBundle\Helper\ConvertCsvToArray:
+        public: true

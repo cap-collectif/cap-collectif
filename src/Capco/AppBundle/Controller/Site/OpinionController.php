@@ -13,7 +13,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -84,7 +84,7 @@ class OpinionController extends Controller
                 'opinionTypeSlug' => $opinionTypeSlug,
                 'stepSlug' => $step->getSlug(),
                 'projectSlug' => $project->getSlug(),
-                'consultationSlug' => $step->getFirstConsultation()->getSlug()
+                'consultationSlug' => $step->getFirstConsultation()->getSlug(),
             ]);
         }
 
@@ -98,10 +98,10 @@ class OpinionController extends Controller
             'project' => $project,
             'navigationStepProps' => [
                 'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
-                'consultationSlug' => $consultation->getSlug()
+                'consultationSlug' => $consultation->getSlug(),
             ],
             'opinionType' => $opinionType,
-            'currentStep' => $step
+            'currentStep' => $step,
         ];
     }
 
@@ -155,11 +155,11 @@ class OpinionController extends Controller
             'opinion' => $opinion,
             'navigationStepProps' => [
                 'id' => $cstepGlobalId,
-                'consultationSlug' => $opinion->getConsultation()->getSlug()
+                'consultationSlug' => $opinion->getConsultation()->getSlug(),
             ],
             'currentStep' => $step,
             'project' => $project,
-            'opinionType' => $opinion->getOpinionType()
+            'opinionType' => $opinion->getOpinionType(),
         ];
     }
 
@@ -197,11 +197,11 @@ class OpinionController extends Controller
             'currentStep' => $step,
             'navigationStepProps' => [
                 'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
-                'consultationSlug' => $opinion->getConsultation()->getSlug()
+                'consultationSlug' => $opinion->getConsultation()->getSlug(),
             ],
             'project' => $project,
             'opinion' => $opinion,
-            'opinionType' => $opinion->getOpinionType()
+            'opinionType' => $opinion->getOpinionType(),
         ];
     }
 }

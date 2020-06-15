@@ -23,7 +23,7 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddEventMutation implements MutationInterface
 {
@@ -63,21 +63,29 @@ class AddEventMutation implements MutationInterface
         if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
             return [
                 'eventEdge' => null,
-                'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
+                'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
             ];
         }
 
         if (self::areDateInvalid($values)) {
             return [
                 'eventEdge' => null,
-                'userErrors' => [['message' => $this->translator->trans('event-before-date-error')]]
+                'userErrors' => [
+                    ['message' => $this->translator->trans('event-before-date-error')],
+                ],
             ];
         }
 
         if (self::hasTwoConcurrentRegistrationType($values)) {
             return [
                 'eventEdge' => null,
-                'userErrors' => [['message' => $this->translator->trans('error-alert-choosing-subscription-mode')]]
+                'userErrors' => [
+                    [
+                        'message' => $this->translator->trans(
+                            'error-alert-choosing-subscription-mode'
+                        ),
+                    ],
+                ],
             ];
         }
 
@@ -113,7 +121,9 @@ class AddEventMutation implements MutationInterface
                     $translation->setBody($values['translations'][$availableLocale]['body']);
                 }
                 if (isset($values['translations'][$availableLocale]['metaDescription'])) {
-                    $translation->setMetaDescription($values['translations'][$availableLocale]['metaDescription']);
+                    $translation->setMetaDescription(
+                        $values['translations'][$availableLocale]['metaDescription']
+                    );
                 }
                 if (isset($values['translations'][$availableLocale]['link'])) {
                     $translation->setLink($values['translations'][$availableLocale]['link']);
@@ -135,7 +145,7 @@ class AddEventMutation implements MutationInterface
                 'event.create',
                 new Message(
                     json_encode([
-                        'eventId' => $event->getId()
+                        'eventId' => $event->getId(),
                     ])
                 )
             );
@@ -173,21 +183,16 @@ class AddEventMutation implements MutationInterface
 
     private static function areDateInvalid(array $values): bool
     {
-        return (
-            isset($values['startAt']) &&
+        return isset($values['startAt']) &&
             !empty($values['startAt']) &&
             isset($values['endAt']) &&
             !empty($values['endAt']) &&
-            (new \DateTime($values['startAt']) > new \DateTime($values['endAt']))
-        );
+            new \DateTime($values['startAt']) > new \DateTime($values['endAt']);
     }
 
     private static function hasTwoConcurrentRegistrationType(array $values): bool
     {
-        if (
-            isset($values['guestListEnabled']) &&
-            !empty($values['guestListEnabled'])
-        ) {
+        if (isset($values['guestListEnabled']) && !empty($values['guestListEnabled'])) {
             foreach ($values['translations'] as $translation) {
                 if (isset($translation['link']) && !empty($translation['link'])) {
                     return true;

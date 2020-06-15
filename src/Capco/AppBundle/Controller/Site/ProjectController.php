@@ -25,7 +25,7 @@ use Capco\AppBundle\Resolver\ContributionResolver;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -47,7 +47,7 @@ class ProjectController extends Controller
                     $max,
                     $offset,
                     $this->getUser()
-                )
+                ),
             ],
             'json',
             ['Projects', 'Steps', 'UserDetails', 'StepTypes', 'ThemeDetails', 'ProjectType']
@@ -117,7 +117,7 @@ class ProjectController extends Controller
             'arguments' => $arguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-            'currentStep' => 'trash_step'
+            'currentStep' => 'trash_step',
         ];
     }
 
@@ -237,7 +237,7 @@ class ProjectController extends Controller
             'posts' => $posts,
             'page' => $page,
             'nbPage' => $nbPage,
-            'currentStep' => 'posts_step'
+            'currentStep' => 'posts_step',
         ];
     }
 
@@ -274,7 +274,7 @@ class ProjectController extends Controller
             'pagination' => $pagination,
             'nbPage' => $nbPage,
             'currentStep' => 'contributors_step',
-            'showVotes' => $showVotes
+            'showVotes' => $showVotes,
         ];
     }
 

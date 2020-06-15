@@ -12,12 +12,22 @@ use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\InputObjectType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Overblog\GraphQLBundle\Resolver\TypeResolver;
 
 class DeveloperController extends Controller
 {
     public const CACHE_KEY = 'DeveloperController';
+    private AdapterInterface $cache;
+    private TypeResolver $typeResolver;
+
+    public function __construct(AdapterInterface $cacheApp, TypeResolver $typeResolver)
+    {
+        $this->cache = $cacheApp;
+        $this->typeResolver = $typeResolver;
+    }
 
     /**
      * @Route("/developer/explorer", name="app_developer_explorer", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
@@ -53,12 +63,10 @@ class DeveloperController extends Controller
      */
     public function indexAction(Request $request, $category = null, $type = null)
     {
-        $cache = $this->get('cache.app');
-        $cachedItem = $cache->getItem(self::CACHE_KEY);
+        $cachedItem = $this->cache->getItem(self::CACHE_KEY);
 
         if (!$cachedItem->isHit()) {
-            $typeResolver = $this->get('overblog_graphql.type_resolver');
-            $typeResolver->setCurrentSchemaName('public');
+            $this->typeResolver->setCurrentSchemaName('public');
 
             $selection = null;
 
@@ -78,7 +86,7 @@ class DeveloperController extends Controller
                 'PublicUser',
                 'PublicProject',
                 'PublicConsultation',
-                'PublicUserConnection'
+                'PublicUserConnection',
             ];
 
             // Public types hard to guess :
@@ -99,10 +107,10 @@ class DeveloperController extends Controller
                 'HTML',
                 'Email',
                 'DateTime',
-                'URI'
+                'URI',
             ];
-            foreach ($typeResolver->getSolutions() as $solutionID => $solution) {
-                $aliases = $typeResolver->getSolutionAliases($solutionID);
+            foreach ($this->typeResolver->getSolutions() as $solutionID => $solution) {
+                $aliases = $this->typeResolver->getSolutionAliases($solutionID);
 
                 // We set info about preview
                 $solution->{'preview'} = false;
@@ -132,11 +140,11 @@ class DeveloperController extends Controller
                 if (($type && $solution->name === $type) || 'query' === $category) {
                     if ($solution->{'preview'}) {
                         $publicSelection = isset(
-                            $typeResolver->getSolutions()[
+                            $this->typeResolver->getSolutions()[
                                 str_replace('Preview', 'Public', $solutionID)
                             ]
                         )
-                            ? $typeResolver->getSolutions()[
+                            ? $this->typeResolver->getSolutions()[
                                 str_replace('Preview', 'Public', $solutionID)
                             ]
                             : null;
@@ -214,11 +222,11 @@ class DeveloperController extends Controller
                 'interfaces' => $interfaces,
                 'objects' => $objects,
                 'scalars' => $scalars,
-                'mutation' => $mutation
+                'mutation' => $mutation,
             ];
 
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_DAY);
-            $cache->save($cachedItem);
+            $this->cache->save($cachedItem);
         }
 
         return $cachedItem->get();

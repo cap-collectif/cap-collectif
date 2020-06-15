@@ -12,21 +12,22 @@ services:
             FOS\UserBundle\Doctrine\UserManager: '@fos_user.user_manager.default'
             $retryTtl: '%fos_user.resetting.retry_ttl%'
             $fosFormFactory: '@fos_user.resetting.form.factory'
+            $fireWall: '%fos_user.firewall_name%'
 
     Capco\AppBundle\Controller\Site\:
-        resource: '%kernel.root_dir%/../src/Capco/AppBundle/Controller/Site/'
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Site/'
         exclude: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Site/{ExportController.php}'
         calls:
             - [setContainer, ['@service_container']]
 
     Capco\AppBundle\Controller\Api\:
-        resource: '%kernel.root_dir%/../src/Capco/AppBundle/Controller/Api/'
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Api/'
         exclude: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Api/{GraphQLController.php, GraphiQLController.php}'
         calls:
             - [setContainer, ['@service_container']]
 
     Capco\AdminBundle\Controller\:
-        resource: '%kernel.root_dir%/../src/Capco/AdminBundle/Controller/'
+        resource: '%kernel.project_dir%/src/Capco/AdminBundle/Controller/'
         calls:
             - [setContainer, ['@service_container']]
 
@@ -37,7 +38,7 @@ services:
     ###################### USER BUNDLE #############################
 
     Capco\UserBundle\Controller\:
-        resource: '%kernel.root_dir%/../src/Capco/UserBundle/Controller/'
+        resource: '%kernel.project_dir%/src/Capco/UserBundle/Controller/'
         calls:
             - [setContainer, ['@service_container']]
 

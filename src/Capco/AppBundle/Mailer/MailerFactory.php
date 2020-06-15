@@ -10,7 +10,7 @@ use Capco\AppBundle\Mailer\Message\Reporting\ReportingCreateMessage;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MailerFactory
 {
@@ -74,6 +74,14 @@ class MailerFactory
         return $message;
     }
 
+    protected function setDefaultSender(AbstractMessage $message): void
+    {
+        $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');
+        $senderName = $this->siteParams->getValue('admin.mail.notifications.send_name');
+        $message->setSenderEmail($senderEmail);
+        $message->setSenderName($senderName);
+    }
+
     private function addNameAndURLToParams(array &$params): void
     {
         $params['siteName'] = $this->siteParams->getValue('global.site.fullname');
@@ -128,7 +136,7 @@ class MailerFactory
                 'moderate_contribution',
                 [
                     'token' => $moderable->getModerationToken(),
-                    'reason' => 'reporting.status.sexual'
+                    'reason' => 'reporting.status.sexual',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -136,7 +144,7 @@ class MailerFactory
                 'moderate_contribution',
                 [
                     'token' => $moderable->getModerationToken(),
-                    'reason' => 'reporting.status.offending'
+                    'reason' => 'reporting.status.offending',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -144,7 +152,7 @@ class MailerFactory
                 'moderate_contribution',
                 [
                     'token' => $moderable->getModerationToken(),
-                    'reason' => 'infringement-of-rights'
+                    'reason' => 'infringement-of-rights',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -152,7 +160,7 @@ class MailerFactory
                 'moderate_contribution',
                 [
                     'token' => $moderable->getModerationToken(),
-                    'reason' => 'reporting.status.spam'
+                    'reason' => 'reporting.status.spam',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -160,7 +168,7 @@ class MailerFactory
                 'moderate_contribution',
                 [
                     'token' => $moderable->getModerationToken(),
-                    'reason' => 'reporting.status.off_topic'
+                    'reason' => 'reporting.status.off_topic',
                 ],
                 RouterInterface::ABSOLUTE_URL
             ),
@@ -168,26 +176,20 @@ class MailerFactory
                 'moderate_contribution',
                 [
                     'token' => $moderable->getModerationToken(),
-                    'reason' => 'moderation-guideline-violation'
+                    'reason' => 'moderation-guideline-violation',
                 ],
                 RouterInterface::ABSOLUTE_URL
-            )
+            ),
         ];
         $message->setModerationLinks($moderationLinks);
-    }
-
-    protected function setDefaultSender(AbstractMessage $message): void
-    {
-        $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');
-        $senderName = $this->siteParams->getValue('admin.mail.notifications.send_name');
-        $message->setSenderEmail($senderEmail);
-        $message->setSenderName($senderName);
     }
 
     private function copyToAdminIfNeeded(AbstractMessage $message, array $params): void
     {
         if (isset($params['copyToAdmin']) && $params['copyToAdmin']) {
-            $message->addBcc($this->siteParams->getValue('admin.mail.notifications.receive_address'));
+            $message->addBcc(
+                $this->siteParams->getValue('admin.mail.notifications.receive_address')
+            );
         }
     }
 }

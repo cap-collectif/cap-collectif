@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -18,7 +19,7 @@ use Capco\AppBundle\Repository\UserArchiveRepository;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -27,21 +28,61 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/profile")
  */
 class ProfileController extends Controller
 {
-    private $userProposalsResolver;
-    private $eventDispatcher;
+    private UserProposalsResolver $userProposalsResolver;
+    private EventDispatcherInterface $eventDispatcher;
+    private UserRepository $userRepository;
+    private ReplyRepository $replyRepository;
+    private SourceRepository $sourceRepository;
+    private ArgumentRepository $argumentRepository;
+    private EventRepository $eventRepository;
+    private ProjectRepository $projectRepository;
+    private CommentRepository $commentRepository;
+    private OpinionVersionRepository $opinionVersionRepository;
+    private UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository;
+    private UserArchiveRepository $userArchiveRepository;
+    private string $fireWall;
+    private TranslatorInterface $translator;
+    private EntityManagerInterface $em;
 
     public function __construct(
         UserProposalsResolver $userProposalsResolver,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        UserRepository $userRepository,
+        ArgumentRepository $argumentRepository,
+        SourceRepository $sourceRepository,
+        ReplyRepository $replyRepository,
+        EventRepository $eventRepository,
+        ProjectRepository $projectRepository,
+        CommentRepository $commentRepository,
+        OpinionVersionRepository $opinionVersionRepository,
+        UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository,
+        UserArchiveRepository $userArchiveRepository,
+        TranslatorInterface $translator,
+        EntityManagerInterface $em,
+        string $fireWall
     ) {
         $this->userProposalsResolver = $userProposalsResolver;
         $this->eventDispatcher = $eventDispatcher;
+        $this->userRepository = $userRepository;
+        $this->argumentRepository = $argumentRepository;
+        $this->sourceRepository = $sourceRepository;
+        $this->replyRepository = $replyRepository;
+        $this->commentRepository = $commentRepository;
+        $this->projectRepository = $projectRepository;
+        $this->eventRepository = $eventRepository;
+        $this->opinionVersionRepository = $opinionVersionRepository;
+        $this->userNotificationsConfigurationRepository = $userNotificationsConfigurationRepository;
+        $this->userArchiveRepository = $userArchiveRepository;
+        $this->fireWall = $fireWall;
+        $this->translator = $translator;
+        $this->em = $em;
     }
 
     /**
@@ -59,9 +100,9 @@ class ProfileController extends Controller
      */
     public function loginAndShowEditFollowingsAction(Request $request, string $token)
     {
-        $userNotificationsConfiguration = $this->get(
-            UserNotificationsConfigurationRepository::class
-        )->findOneBy(['unsubscribeToken' => $token]);
+        $userNotificationsConfiguration = $this->userNotificationsConfigurationRepository->findOneBy(
+            ['unsubscribeToken' => $token]
+        );
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
         }
@@ -88,7 +129,7 @@ class ProfileController extends Controller
      */
     public function downloadArchiveAction(Request $request)
     {
-        $archive = $this->get(UserArchiveRepository::class)->getLastForUser($this->getUser());
+        $archive = $this->userArchiveRepository->getLastForUser($this->getUser());
 
         if (!$archive) {
             throw new NotFoundHttpException('Archive not found');
@@ -111,9 +152,9 @@ class ProfileController extends Controller
      */
     public function loginAndShowDataAction(Request $request, string $token)
     {
-        $userNotificationsConfiguration = $this->get(
-            UserNotificationsConfigurationRepository::class
-        )->findOneBy(['unsubscribeToken' => $token]);
+        $userNotificationsConfiguration = $this->userNotificationsConfigurationRepository->findOneBy(
+            ['unsubscribeToken' => $token]
+        );
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
         }
@@ -129,9 +170,9 @@ class ProfileController extends Controller
      */
     public function loginAndShowNotificationsOptionsAction(Request $request, string $token)
     {
-        $userNotificationsConfiguration = $this->get(
-            UserNotificationsConfigurationRepository::class
-        )->findOneBy(['unsubscribeToken' => $token]);
+        $userNotificationsConfiguration = $this->userNotificationsConfigurationRepository->findOneBy(
+            ['unsubscribeToken' => $token]
+        );
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
         }
@@ -149,9 +190,9 @@ class ProfileController extends Controller
     public function disableNotificationsAction(Request $request, string $token)
     {
         /** @var UserNotificationsConfiguration $userNotificationsConfiguration */
-        $userNotificationsConfiguration = $this->get(
-            UserNotificationsConfigurationRepository::class
-        )->findOneBy(['unsubscribeToken' => $token]);
+        $userNotificationsConfiguration = $this->userNotificationsConfigurationRepository->findOneBy(
+            ['unsubscribeToken' => $token]
+        );
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
         }
@@ -159,14 +200,10 @@ class ProfileController extends Controller
             $this->loginWithToken($request, $userNotificationsConfiguration);
         }
         $userNotificationsConfiguration->disableAllNotifications();
-        $this->get('doctrine.orm.default_entity_manager')->flush($userNotificationsConfiguration);
+        $this->em->flush($userNotificationsConfiguration);
         $this->addFlash(
             'sonata_flash_success',
-            $this->get('translator')->trans(
-                'resetting.notifications.flash.success',
-                [],
-                'CapcoAppBundle'
-            )
+            $this->translator->trans('resetting.notifications.flash.success', [], 'CapcoAppBundle')
         );
 
         return $this->redirectToRoute('capco_profile_notifications_edit_account');
@@ -177,7 +214,7 @@ class ProfileController extends Controller
      * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
      * @Template("@CapcoUser/Profile/show.html.twig")
      */
-    public function showAction(string $slug = null)
+    public function showAction(?string $slug = null)
     {
         if (
             !$slug &&
@@ -186,15 +223,15 @@ class ProfileController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $user = $slug ? $this->get(UserRepository::class)->findOneBySlug($slug) : $this->getUser();
+        $user = $slug ? $this->userRepository->findOneBySlug($slug) : $this->getUser();
 
         if (!$user) {
             throw $this->createNotFoundException();
         }
 
-        $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
-        $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
-        $sources = $this->get(SourceRepository::class)->getByUser($user);
+        $arguments = $this->argumentRepository->getByUser($user);
+        $replies = $this->replyRepository->getByAuthor($user);
+        $sources = $this->sourceRepository->getByUser($user);
         $eventsCount = $this->getEventsCount($user);
 
         return [
@@ -203,7 +240,7 @@ class ProfileController extends Controller
             'arguments' => $arguments,
             'replies' => $replies,
             'sources' => $sources,
-            'argumentsLabels' => Argument::$argumentTypesLabels
+            'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
     }
 
@@ -217,7 +254,7 @@ class ProfileController extends Controller
 
         return [
             'user' => $user,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -233,7 +270,7 @@ class ProfileController extends Controller
 
         return [
             'user' => $user,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -243,7 +280,7 @@ class ProfileController extends Controller
      */
     public function showOpinionVersionsAction(User $user)
     {
-        $versions = $this->get(OpinionVersionRepository::class)->getByUser($user, $this->getUser());
+        $versions = $this->opinionVersionRepository->getByUser($user, $this->getUser());
 
         return ['user' => $user, 'versions' => $versions];
     }
@@ -258,7 +295,7 @@ class ProfileController extends Controller
 
         return [
             'user' => $user,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -268,13 +305,13 @@ class ProfileController extends Controller
      */
     public function showRepliesAction(User $user)
     {
-        $replies = $this->get(ReplyRepository::class)->getByAuthor($user);
+        $replies = $this->replyRepository->getByAuthor($user);
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'replies' => $replies,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -284,7 +321,7 @@ class ProfileController extends Controller
      */
     public function showArgumentsAction(User $user)
     {
-        $arguments = $this->get(ArgumentRepository::class)->getByUser($user);
+        $arguments = $this->argumentRepository->getByUser($user);
 
         $eventsCount = $this->getEventsCount($user);
 
@@ -292,7 +329,7 @@ class ProfileController extends Controller
             'user' => $user,
             'arguments' => $arguments,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -302,14 +339,14 @@ class ProfileController extends Controller
      */
     public function showSourcesAction(User $user)
     {
-        $sources = $this->get(SourceRepository::class)->getByUser($user);
+        $sources = $this->sourceRepository->getByUser($user);
 
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'sources' => $sources,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -319,14 +356,14 @@ class ProfileController extends Controller
      */
     public function showCommentsAction(User $user)
     {
-        $comments = $this->get(CommentRepository::class)->getByUser($user);
+        $comments = $this->commentRepository->getByUser($user);
 
         $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'comments' => $comments,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -340,7 +377,7 @@ class ProfileController extends Controller
 
         return [
             'user' => $user,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -354,7 +391,7 @@ class ProfileController extends Controller
 
         return [
             'user' => $user,
-            'eventsCount' => $eventsCount
+            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -363,12 +400,7 @@ class ProfileController extends Controller
         UserNotificationsConfiguration $userNotificationsConfiguration
     ) {
         $user = $userNotificationsConfiguration->getUser();
-        $userToken = new UsernamePasswordToken(
-            $user,
-            null,
-            $this->container->getParameter('fos_user.firewall_name'),
-            $user->getRoles()
-        );
+        $userToken = new UsernamePasswordToken($user, null, $this->fireWall, $user->getRoles());
         $this->get('security.token_storage')->setToken($userToken);
         $logInEvent = new InteractiveLoginEvent($request, $userToken);
         $this->eventDispatcher->dispatch('security.interactive_login', $logInEvent);
@@ -376,13 +408,13 @@ class ProfileController extends Controller
 
     private function getProjectsCount(User $user, ?User $loggedUser): int
     {
-        $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $loggedUser);
+        $projectsRaw = $this->projectRepository->getByUser($user, $loggedUser);
 
         return \count($projectsRaw);
     }
 
     private function getEventsCount(User $user): int
     {
-        return $this->get(EventRepository::class)->countAllByUser($user);
+        return $this->eventRepository->countAllByUser($user);
     }
 }

@@ -6,10 +6,10 @@ namespace Capco\AdminBundle\Block;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Templating\EngineInterface;
 
 /**
  *  @deprecated
@@ -24,7 +24,7 @@ class LocaleSwitcherBlockService extends AbstractBlockService
 
     public function __construct(
         ?string $name = null,
-        EngineInterface $templating = null,
+        ?EngineInterface $templating = null,
         ?bool $showCountryFlags = true
     ) {
         parent::__construct($name, $templating);
@@ -53,13 +53,13 @@ class LocaleSwitcherBlockService extends AbstractBlockService
         ]);
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         return $this->renderPrivateResponse(
             $blockContext->getTemplate(),
             [
                 'block_context' => $blockContext,
-                'block' => $blockContext->getBlock()
+                'block' => $blockContext->getBlock(),
             ],
             $response
         );

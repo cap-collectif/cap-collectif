@@ -9,7 +9,7 @@ use Capco\UserBundle\Form\Type\MemberSearchType;
 use Capco\UserBundle\Repository\UserTypeRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class MembersController extends Controller
@@ -35,7 +35,7 @@ class MembersController extends Controller
 
         $form = $this->createForm(MemberSearchType::class, null, [
             'action' => $currentUrl,
-            'method' => 'POST'
+            'method' => 'POST',
         ]);
 
         if ('POST' === $request->getMethod()) {
@@ -50,14 +50,14 @@ class MembersController extends Controller
                         'userType' => $data['userType']
                             ? $data['userType']->getSlug()
                             : UserType::FILTER_ALL,
-                        'sort' => $data['sort']
+                        'sort' => $data['sort'],
                     ])
                 );
             }
         } else {
             $form->setData([
                 'userType' => $this->userTypeRepository->findOneBySlug($userType),
-                'sort' => $sort
+                'sort' => $sort,
             ]);
         }
 
@@ -77,7 +77,7 @@ class MembersController extends Controller
             'members' => $members['results'],
             'page' => $page,
             'nbPage' => $nbPage,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
     }
 }

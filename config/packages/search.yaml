@@ -1,21 +1,21 @@
 services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
 
-  Capco\AppBundle\Search\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Search/*'
-  #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
+    Capco\AppBundle\Search\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Search/*'
+    #    exclude: '%kernel.project_dir%/src/Capco/AppBundle/{}'
 
-  Capco\AppBundle\Search\GlobalSearch:
-    public: true
+    Capco\AppBundle\Search\GlobalSearch:
+        public: true
 
-  Capco\AppBundle\Search\EventSearch:
-    public: true
+    Capco\AppBundle\Search\EventSearch:
+        public: true
 
-  Capco\AppBundle\Search\UserSearch:
-    public: true
+    Capco\AppBundle\Search\UserSearch:
+        public: true
 
-  Capco\AppBundle\Search\CommentSearch:
-    public: true
+    Capco\AppBundle\Search\CommentSearch:
+        public: true

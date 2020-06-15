@@ -13,7 +13,7 @@ use Capco\AppBundle\Manager\ContributionManager;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Capco\UserBundle\Controller\ConfirmationController;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConfirmationControllerSpec extends ObjectBehavior
 {

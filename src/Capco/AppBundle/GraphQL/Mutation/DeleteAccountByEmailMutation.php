@@ -24,7 +24,7 @@ use Sonata\MediaBundle\Provider\ImageProvider;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
 {

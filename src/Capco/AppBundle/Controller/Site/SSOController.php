@@ -6,7 +6,7 @@ use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,7 +67,7 @@ class SSOController extends Controller
                 '%s?%s',
                 $ssoConfiguration->getProfileUrl(),
                 http_build_query([
-                    $referrerParameter => $request->query->get('referrer', $request->getBaseUrl())
+                    $referrerParameter => $request->query->get('referrer', $request->getBaseUrl()),
                 ])
             )
         );

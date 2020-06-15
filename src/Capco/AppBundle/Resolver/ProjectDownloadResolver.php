@@ -11,7 +11,7 @@ use Capco\AppBundle\Command\Utils\ExportUtils;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 
@@ -60,7 +60,7 @@ class ProjectDownloadResolver
             'created',
             'updated',
             'anonymous',
-            'draft'
+            'draft',
         ];
 
         foreach ($questionnaire->getRealQuestions() as $question) {
@@ -121,6 +121,17 @@ class ProjectDownloadResolver
         }
     }
 
+    public function formatText($text): string
+    {
+        $oneBreak = ['<br>', '<br/>', '&nbsp;'];
+        $twoBreaks = ['</p>'];
+        $text = str_ireplace($oneBreak, "\r", $text);
+        $text = str_ireplace($twoBreaks, "\r\n", $text);
+        $text = strip_tags($text);
+
+        return html_entity_decode($text, ENT_QUOTES);
+    }
+
     // *************************** Generate items *******************************************
 
     private function getReplyItem(array $reply, array $responses): array
@@ -135,7 +146,7 @@ class ProjectDownloadResolver
             'created' => $this->dateToString($reply['createdAt']),
             'updated' => $this->dateToString($reply['updatedAt']),
             'anonymous' => $this->booleanToString($reply['private']),
-            'draft' => $this->booleanToString($reply['draft'])
+            'draft' => $this->booleanToString($reply['draft']),
         ];
 
         foreach ($responses as $response) {
@@ -158,7 +169,7 @@ class ProjectDownloadResolver
         $mediasUrl = [];
         if ('media' === $response['response_type']) {
             $responseMedia = $this->em->getRepository(MediaResponse::class)->findOneBy([
-                'id' => $response['id']
+                'id' => $response['id'],
             ]);
 
             foreach ($responseMedia->getMedias() as $media) {
@@ -188,9 +199,7 @@ class ProjectDownloadResolver
         $phpExcelObject->getProperties()->setTitle($title);
         $phpExcelObject->setActiveSheetIndex();
         $sheet = $phpExcelObject->getActiveSheet();
-        $sheet->setTitle(
-            $this->translator->trans('global.contribution', [], 'CapcoAppBundle')
-        );
+        $sheet->setTitle($this->translator->trans('global.contribution', [], 'CapcoAppBundle'));
         \PHPExcel_Settings::setCacheStorageMethod(
             \PHPExcel_CachedObjectStorageFactory::cache_in_memory,
             ['memoryCacheSize' => '512M']
@@ -245,16 +254,5 @@ class ProjectDownloadResolver
         }
 
         return '';
-    }
-
-    public function formatText($text): string
-    {
-        $oneBreak = ['<br>', '<br/>', '&nbsp;'];
-        $twoBreaks = ['</p>'];
-        $text = str_ireplace($oneBreak, "\r", $text);
-        $text = str_ireplace($twoBreaks, "\r\n", $text);
-        $text = strip_tags($text);
-
-        return html_entity_decode($text, ENT_QUOTES);
     }
 }

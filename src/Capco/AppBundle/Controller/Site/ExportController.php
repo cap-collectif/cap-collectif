@@ -13,21 +13,21 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 const USER_FRAGMENT = '
     id
@@ -78,7 +78,7 @@ const USER_HEADERS = [
     'user_zipCode',
     'user_city',
     'user_phone',
-    'user_profileUrl'
+    'user_profileUrl',
 ];
 
 const USER_HEADERS_EVENTS = [
@@ -105,7 +105,7 @@ const USER_HEADERS_EVENTS = [
     'user_zipCode',
     'user_city',
     'user_phone',
-    'user_profileUrl'
+    'user_profileUrl',
 ];
 
 class ExportController extends Controller
@@ -154,7 +154,7 @@ class ExportController extends Controller
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getEventContributorsGraphQLQuery($event->getId()),
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 
@@ -201,7 +201,7 @@ class ExportController extends Controller
                             $contributor['zipCode'],
                             $contributor['city'],
                             $contributor['phone'],
-                            $contributor['url']
+                            $contributor['url'],
                         ]);
                     } else {
                         $writer->addRow([
@@ -228,7 +228,7 @@ class ExportController extends Controller
                             null,
                             null,
                             null,
-                            null
+                            null,
                         ]);
                     }
                 },
@@ -331,7 +331,7 @@ class ExportController extends Controller
         $step = $this->abstractStepRepository->find($stepId);
         if (!$step) {
             $this->logger->error('An error occured while downloading the csv file', [
-                'stepId' => $stepId
+                'stepId' => $stepId,
             ]);
 
             throw new \RuntimeException('An error occured while downloading the file...');

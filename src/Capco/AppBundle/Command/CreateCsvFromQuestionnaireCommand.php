@@ -13,24 +13,23 @@ use Symfony\Component\Console\Input\InputInterface;
 use Capco\AppBundle\Resolver\ProjectDownloadResolver;
 use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-
-    private $toggleManager;
-    private $projectDownloadResolver;
-    private $questionnaireRepository;
     protected $customFields;
-    protected $translator;
+    protected TranslatorInterface $translator;
 
     /**
      * @var WriterInterface
      */
     protected $writer;
-    protected $projectRootDir;
+    protected string $projectRootDir;
 
+    private Manager $toggleManager;
+    private ProjectDownloadResolver $projectDownloadResolver;
+    private QuestionnaireRepository $questionnaireRepository;
 
     public function __construct(
         ExportUtils $exportUtils,
@@ -39,8 +38,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         Manager $manager,
         TranslatorInterface $translator,
         string $projectRootDir
-    )
-    {
+    ) {
         $this->toggleManager = $manager;
         $this->projectDownloadResolver = $projectDownloadResolver;
         $this->questionnaireRepository = $questionnaireRepository;
@@ -48,6 +46,73 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         $this->translator = $translator;
         $this->projectRootDir = $projectRootDir;
         parent::__construct($exportUtils);
+    }
+
+    public function generateSheet(
+        Questionnaire $questionnaire,
+        string $fileName,
+        string $delimiter,
+        $output
+    ): void {
+        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
+        $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
+        $output->writeln(
+            '<info>' . sprintf('%s/public/export/%s', $this->projectRootDir, $fileName) . '</info>'
+        );
+        $headers = $this->projectDownloadResolver->getQuestionnaireHeaders($questionnaire);
+        $formattedHeaders = [];
+        foreach ($headers as $header) {
+            if (\is_array($header)) {
+                $formattedHeaders[] = $header['label'];
+            } else {
+                $formattedHeaders[] = $header;
+            }
+        }
+        $this->writer->addRow($formattedHeaders);
+
+        $formattedEntries = $this->getFormattedData($questionnaire);
+        $rows = [];
+        foreach ($formattedEntries as $formattedData) {
+            $row = [];
+            foreach ($formattedHeaders as $header) {
+                $row[] = \array_key_exists($header, $formattedData) ? $formattedData[$header] : '';
+            }
+            $rows[] = $row;
+        }
+        $this->writer->addRows($rows);
+        $this->writer->close();
+    }
+
+    public function getFormattedData(Questionnaire $questionnaire): array
+    {
+        $data = $this->projectDownloadResolver->getQuestionnaireData($questionnaire);
+        foreach ($data as &$d) {
+            foreach ($d as $key => $value) {
+                $d[$key] = $this->exportUtils->parseCellValue(
+                    $this->projectDownloadResolver->formatText($value)
+                );
+            }
+        }
+
+        return $data;
+    }
+
+    public static function getFileName(Questionnaire $questionnaire): string
+    {
+        $step = $questionnaire->getStep();
+        if (!$step) {
+            return self::getShortenedFilename($questionnaire->getSlug());
+        }
+
+        $fileName = '';
+        $project = $step->getProject();
+
+        if ($project) {
+            $fileName .= $project->getSlug() . '_';
+        }
+        $fileName .= $step->getSlug();
+
+        return self::getShortenedFilename($fileName);
     }
 
     protected function configure(): void
@@ -80,64 +145,5 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
         }
 
         return 0;
-    }
-
-
-    public function generateSheet(Questionnaire $questionnaire, string $fileName, string $delimiter, $output): void
-    {
-        $this->writer = WriterFactory::create(Type::CSV, $delimiter);
-        $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
-        $output->writeln('<info>'.sprintf('%s/public/export/%s', $this->projectRootDir, $fileName). '</info>');
-        $headers = $this->projectDownloadResolver->getQuestionnaireHeaders($questionnaire);
-        $formattedHeaders = [];
-        foreach ($headers as $header) {
-            if (\is_array($header)) {
-                $formattedHeaders[] = $header['label'];
-            } else {
-                $formattedHeaders[] = $header;
-            }
-        }
-        $this->writer->addRow($formattedHeaders);
-
-        $formattedEntries = $this->getFormattedData($questionnaire);
-        $rows = [];
-        foreach ($formattedEntries as $formattedData) {
-            $row = [];
-            foreach ($formattedHeaders as $header) {
-                $row[] = array_key_exists($header, $formattedData) ? $formattedData[$header] : '';
-            }
-            $rows[] = $row;
-        }
-        $this->writer->addRows($rows);
-        $this->writer->close();
-    }
-
-    public function getFormattedData(Questionnaire $questionnaire): array
-    {
-        $data = $this->projectDownloadResolver->getQuestionnaireData($questionnaire);
-        foreach ($data as &$d) {
-            foreach ($d as $key => $value) {
-                $d[$key] = $this->exportUtils->parseCellValue($this->projectDownloadResolver->formatText($value));
-            }
-        }
-        return $data;
-    }
-
-    public static function getFileName(Questionnaire $questionnaire): string
-    {
-        $step = $questionnaire->getStep();
-        if (!$step) {
-            return self::getShortenedFilename($questionnaire->getSlug());
-        }
-
-        $fileName = '';
-        $project = $step->getProject();
-
-        if ($project) {
-            $fileName .= $project->getSlug() . '_';
-        }
-        $fileName .= $step->getSlug();
-
-        return self::getShortenedFilename($fileName);
     }
 }
