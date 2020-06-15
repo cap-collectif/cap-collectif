@@ -22,7 +22,6 @@ jest-setup.js
 behat.yml
 app/config/parameters.yml
 
-# We don't ignore public/fonts folder to keep non-generated fonts public
 /public/bundles/
 /public/images/*
 /public/media/*

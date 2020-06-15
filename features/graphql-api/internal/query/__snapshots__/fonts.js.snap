@@ -48,6 +48,12 @@ Object {
     Object {
       "id": "Rm9udDpoZWx2ZXRpY2FOZXVlRm9udA==",
       "name": "Helvetica Neue",
+      "useAsBody": false,
+      "useAsHeading": false,
+    },
+    Object {
+      "id": "Rm9udDpvcGVuU2Fuc0ZvbnQ=",
+      "name": "Open Sans",
       "useAsBody": true,
       "useAsHeading": true,
     },

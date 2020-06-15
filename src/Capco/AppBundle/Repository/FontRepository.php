@@ -14,7 +14,7 @@ use Doctrine\ORM\NonUniqueResultException;
  */
 class FontRepository extends EntityRepository
 {
-    private const DEFAULT_FONT = 'Helvetica Neue';
+    private const DEFAULT_FONT = 'Open Sans';
 
     /**
      * @return iterable|Font[]

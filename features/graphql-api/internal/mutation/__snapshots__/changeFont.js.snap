@@ -53,6 +53,12 @@ Object {
         "useAsHeading": false,
       },
       Object {
+        "id": "Rm9udDpvcGVuU2Fuc0ZvbnQ=",
+        "name": "Open Sans",
+        "useAsBody": false,
+        "useAsHeading": false,
+      },
+      Object {
         "id": "Rm9udDpwYWxhdGlub0ZvbnQ=",
         "name": "Palatino",
         "useAsBody": false,

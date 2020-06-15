@@ -1,10 +1,17 @@
 Capco\AppBundle\Entity\Font:
+    fontOpenSans:
+      id: 'openSansFont'
+      name: 'Open Sans'
+      familyName: 'Open Sans, Arial, sans-serif'
+      isCustom: false
+      useAsHeading: true
+      useAsBody: true
     fontHelveticaNeue:
       name: 'Helvetica Neue'
       familyName: 'Helvetica Neue, Helvetica, Arial, sans-serif'
       isCustom: false
-      useAsHeading: true
-      useAsBody: true
+      useAsHeading: false
+      useAsBody: false
     fontHelvetica:
       name: 'Helvetica'
       family_name: 'Helvetica, Arial, sans-serif'

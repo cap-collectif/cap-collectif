@@ -8,7 +8,6 @@ __snapshots-diff__/*
 # Symfony directories
 /public/bundles/
 /public/images/*
-/public/fonts/*
 /public/assets/*
 /public/css/*
 /public/js/*
@@ -16,10 +15,6 @@ __snapshots-diff__/*
 /public/uploads/*
 /public/export/*
 
-app/Resources/fonts
-public/fonts
-app/Resources/assets/fonts
-assets/fonts
 app/bootstrap.php.cache
 
 translations/*
