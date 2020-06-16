@@ -60,10 +60,14 @@ class ProposalSearch extends Search
         $filters = $this->getFilters($providedFilters);
         foreach ($filters as $key => $value) {
             if ('proposalAnalysts.analyst.id' === $key) {
-                $term = new Terms($key, $value);
-            } else {
-                $term = new Term([$key => ['value' => $value]]);
+                foreach ($value as $analyst) {
+                    $boolQuery->addFilter(new Term([$key => ['value' => $analyst]]));
+                }
+
+                continue;
             }
+
+            $term = new Term([$key => ['value' => $value]]);
 
             if (
                 \in_array($key, ['draft', 'published', 'trashed'], true) &&
