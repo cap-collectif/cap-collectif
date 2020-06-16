@@ -35,7 +35,6 @@ type Props = {|
   refusedReasons: Array<{| value: string, label: string |}>,
   onValidate: (boolean, ?boolean) => void,
   costEstimationEnabled: boolean,
-  estimatedCost: number,
 |};
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE';
@@ -91,7 +90,6 @@ export const ProposalDecisionFormPanel = ({
   disabled,
   proposal,
   costEstimationEnabled,
-  estimatedCost,
 }: Props) => {
   const intl = useIntl();
   const [isApproved, setIsApproved] = useState(initialIsApproved);
@@ -212,23 +210,21 @@ export const ProposalDecisionFormPanel = ({
             />
           ) : null}
 
-          {estimatedCost > 0 && (
-            <FormattedMessage
-              tagName="p"
-              id={effectiveDate ? 'publication.date.personalized' : 'data.publication.automatic'}
-              values={{
-                date: intl.formatDate(effectiveDate, {
-                  year: 'numeric',
-                  month: 'numeric',
-                  day: 'numeric',
-                }),
-                hour: intl.formatDate(effectiveDate, {
-                  hour: 'numeric',
-                  minute: 'numeric',
-                }),
-              }}
-            />
-          )}
+          <FormattedMessage
+            tagName="p"
+            id={effectiveDate ? 'publication.date.personalized' : 'data.publication.automatic'}
+            values={{
+              date: intl.formatDate(effectiveDate, {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+              }),
+              hour: intl.formatDate(effectiveDate, {
+                hour: 'numeric',
+                minute: 'numeric',
+              }),
+            }}
+          />
 
           <ValidateButton
             disabled={disabled || (isApproved === null && initialIsApproved === null)}
@@ -255,7 +251,6 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
       refusedReason: proposal?.decision?.refusedReason || null,
       isDone: proposal?.decision?.state === 'DONE' || false,
     },
-    estimatedCost: formValueSelector(formName)(state, 'estimatedCost'),
     costEstimationEnabled: proposal.form?.analysisConfiguration?.costEstimationEnabled || false,
     initialIsApproved: formValueSelector(formName)(state, 'isApproved') || null,
   };
