@@ -55,7 +55,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     proposalId: proposal.id,
     body: values.body,
     authors: values.authors.map(author => author.value),
-    estimatedCost: values.estimatedCost,
+    estimatedCost: values.estimatedCost ?? 0,
     isApproved:
       values.isApproved === 'FAVOURABLE'
         ? true
@@ -229,6 +229,7 @@ export const ProposalDecisionFormPanel = ({
           <ValidateButton
             disabled={disabled || (isApproved === null && initialIsApproved === null)}
             type="button"
+            id="validate-proposal-decision-button"
             onClick={() => {
               dispatch(change(formName, 'validate', true));
             }}>

@@ -2,24 +2,27 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalDecision;
-use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
+use Capco\AppBundle\Event\DecisionEvent;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -33,132 +36,81 @@ class ChangeProposalDecisionMutation implements MutationInterface
     private $logger;
     private $proposalDecisionRepository;
     private $userRepository;
-    private $postRepository;
     private $translator;
     private $statusRepository;
+    private $eventDispatcher;
+    private $indexer;
 
     public function __construct(
         ProposalRepository $proposalRepository,
         UserRepository $userRepository,
-        PostRepository $postRepository,
         EntityManagerInterface $entityManager,
         StatusRepository $statusRepository,
         AuthorizationChecker $authorizationChecker,
         LoggerInterface $logger,
-        TranslatorInterface $translator
+        Indexer $indexer,
+        TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->proposalRepository = $proposalRepository;
         $this->entityManager = $entityManager;
         $this->authorizationChecker = $authorizationChecker;
         $this->logger = $logger;
+        $this->indexer = $indexer;
         $this->userRepository = $userRepository;
-        $this->postRepository = $postRepository;
         $this->translator = $translator;
         $this->statusRepository = $statusRepository;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function __invoke(Argument $args, $viewer): array
+    public function __invoke(Argument $args, $viewer, RequestStack $request): array
     {
         $this->preventNullableViewer($viewer);
+        $proposal = $this->getProposal($args);
 
-        list($proposalId, $body, $estimatedCost, $authors, $decision, $refusedReason, $isDone) = [
-            $args->offsetGet('proposalId'),
-            $args->offsetGet('body'),
-            $args->offsetGet('estimatedCost'),
-            $args->offsetGet('authors') ?? [],
-            $args->offsetGet('isApproved') ?? true,
-            $args->offsetGet('refusedReason'),
-            $args->offsetGet('isDone') ?? false,
-        ];
-
-        $proposalId = GlobalId::fromGlobalId($proposalId)['id'];
-        $proposal = $this->proposalRepository->find($proposalId);
-
-        if (!$proposal) {
+        $errorCode = $this->getErrorCode($proposal, $args);
+        if ($errorCode) {
             return [
                 'decision' => null,
-                'errorCode' => ProposalStatementErrorCode::NON_EXISTING_PROPOSAL,
+                'errorCode' => $errorCode,
             ];
         }
 
-        /** @var Proposal $proposal */
-        if (
-            !$this->authorizationChecker->isGranted(ProposalAnalysisRelatedVoter::DECIDE, $proposal)
-        ) {
+        $proposalDecision = $this->updateDecision(
+            $proposal,
+            $args,
+            $viewer,
+            $request->getCurrentRequest()->getLocale()
+        );
+        $post = $this->updateDecisionPost($proposalDecision->getPost(), $args);
+        $this->setRefusedReasonIfAny($proposalDecision, $args);
+
+        if ($args->offsetGet('isDone')) {
+            self::setAnalysisAndStatementAsTooLate($proposal);
+        }
+
+        $analysisConfig = $proposal->getProposalForm()->getAnalysisConfiguration();
+        if ($analysisConfig && $analysisConfig->isImmediatelyEffective()) {
+            if ($args->offsetGet('isDone')) {
+                $this->dispatchEvent($proposal, $args);
+            }
+            $this->entityManager->flush();
+            $this->index($proposal, $post);
+
             return [
-                'decision' => null,
-                'errorCode' => ProposalStatementErrorCode::NOT_ASSIGNED_PROPOSAL,
+                'decision' => $proposalDecision,
+                'proposal' => $proposal,
+                'errorCode' => null,
             ];
         }
-
-        if (false === $decision && !$refusedReason) {
-            return [
-                'decision' => null,
-                'errorCode' => ProposalStatementErrorCode::REFUSED_REASON_EMPTY,
-            ];
-        }
-
-        // If there is no proposalDecision related to the given proposal, create it.
-        if (!($proposalDecision = $proposal->getDecision())) {
-            $proposalDecision = $this->createProposalDecision($proposal);
-        }
-
-        $proposalDecision
-            ->setIsApproved($decision)
-            ->setUpdatedBy($viewer)
-            ->setEstimatedCost($estimatedCost)
-            ->setState(
-                $isDone ? ProposalStatementState::DONE : ProposalStatementState::IN_PROGRESS
-            );
-        $post = $proposalDecision->getPost();
-        if (
-            ($proposalAssessment = $proposal->getAssessment()) &&
-            $proposalAssessment->getOfficialResponse()
-        ) {
-            $post->setBody($proposalAssessment->getOfficialResponse());
-        } else {
-            $post->setBody($body);
-        }
-
-        if (!empty($authors)) {
-            $authorsIds = [];
-            foreach ($authors as $author) {
-                $authorsIds[] = GlobalId::fromGlobalId($author)['id'];
-            }
-            $post->setAuthors($this->userRepository->findBy(['id' => $authorsIds]));
-        }
-
-        if ($refusedReason) {
-            /** @var Status $status */
-            $status = $this->statusRepository->find($refusedReason);
-            $proposalDecision->setRefusedReason($status);
-        }
-
-        // If the decision is given, change state of the assessment if its not already given.
-        if ($isDone) {
-            if (
-                $proposalAssessment &&
-                ProposalStatementState::IN_PROGRESS === $proposalAssessment->getState()
-            ) {
-                $proposalAssessment->setState(ProposalStatementState::TOO_LATE);
-            }
-
-            if (null !== $proposal->getAnalyses()) {
-                /** @var ProposalAnalysis $analysis */
-                foreach ($proposal->getAnalyses() as $analysis) {
-                    if (ProposalStatementState::IN_PROGRESS === $analysis->getState()) {
-                        $analysis->setState(ProposalStatementState::TOO_LATE);
-                    }
-                }
-            }
-        }
+        $post->setIsPublished(false);
 
         try {
             $this->entityManager->flush();
         } catch (\Exception $exception) {
             $this->logger->alert(
                 'An error occurred when editing Post and ProposalDecision with proposal id :' .
-                    $proposalId .
+                    $proposal->getId() .
                     '.' .
                     $exception->getMessage()
             );
@@ -168,36 +120,162 @@ class ChangeProposalDecisionMutation implements MutationInterface
                 'errorCode' => ProposalStatementErrorCode::INTERNAL_ERROR,
             ];
         }
+        $this->index($proposal);
 
         return [
             'decision' => $proposalDecision,
+            'proposal' => $proposal,
             'errorCode' => null,
         ];
     }
 
-    private function createProposalDecision(Proposal $proposal): ProposalDecision
+    private function createProposalDecision(Proposal $proposal, string $locale): ProposalDecision
     {
         $post = new Post();
         $proposalDecision = new ProposalDecision($proposal, $post);
 
         $post
+            ->setLocale($locale)
             ->setTitle(
                 $this->translator->trans(
                     'proposal_decision.official_response',
                     [],
-                    'CapcoAppBundle'
+                    'CapcoAppBundle',
+                    $locale
                 )
             )
-            ->addProject($proposal->getProject())
             ->addProposal($proposal)
             ->setIsPublished(false)
             ->setdisplayedOnBlog(false);
 
+        $post->mergeNewTranslations();
         $proposalDecision->setProposal($proposal);
-
-        $this->entityManager->persist($post);
         $this->entityManager->persist($proposalDecision);
 
         return $proposalDecision;
+    }
+
+    private function getErrorCode(?Proposal $proposal, Argument $args): ?string
+    {
+        if (!$proposal) {
+            return ProposalStatementErrorCode::NON_EXISTING_PROPOSAL;
+        }
+        if (
+            !$this->authorizationChecker->isGranted(ProposalAnalysisRelatedVoter::DECIDE, $proposal)
+        ) {
+            return ProposalStatementErrorCode::NOT_ASSIGNED_PROPOSAL;
+        }
+        if (!$args->offsetGet('isApproved') && null === $args->offsetGet('refusedReason')) {
+            return ProposalStatementErrorCode::REFUSED_REASON_EMPTY;
+        }
+
+        return null;
+    }
+
+    private function getProposal(Argument $args): ?Proposal
+    {
+        return $this->proposalRepository->find(
+            GlobalId::fromGlobalId($args->offsetGet('proposalId'))['id']
+        );
+    }
+
+    private function updateDecision(
+        Proposal $proposal,
+        Argument $args,
+        User $viewer,
+        ?string $locale
+    ): ProposalDecision {
+        // If there is no proposalDecision related to the given proposal, create it.
+        if (!($proposalDecision = $proposal->getDecision())) {
+            $proposalDecision = $this->createProposalDecision($proposal, $locale);
+        }
+
+        return $proposalDecision
+            ->setIsApproved($args->offsetGet('isApproved') ?? false)
+            ->setUpdatedBy($viewer)
+            ->setEstimatedCost((int) $args->offsetGet('estimatedCost'))
+            ->setState(
+                $args->offsetGet('isDone') ?? false
+                    ? ProposalStatementState::DONE
+                    : ProposalStatementState::IN_PROGRESS
+            );
+    }
+
+    private function updateDecisionPost(Post $post, Argument $args): Post
+    {
+        $post->setBody($args->offsetGet('body') ?? '');
+
+        return $this->updateDecisionPostAuthors($post, $args);
+    }
+
+    private function updateDecisionPostAuthors(Post $post, Argument $args): Post
+    {
+        $authors = $args->offsetGet('authors') ?? [];
+        if (!empty($authors)) {
+            $authorsIds = [];
+            foreach ($authors as $author) {
+                $authorsIds[] = GlobalId::fromGlobalId($author)['id'];
+            }
+            $post->setAuthors($this->userRepository->findBy(['id' => $authorsIds]));
+        }
+
+        return $post;
+    }
+
+    private function setRefusedReasonIfAny(
+        ProposalDecision $proposalDecision,
+        Argument $args
+    ): ProposalDecision {
+        if ($args->offsetGet('refusedReason')) {
+            $status = $this->statusRepository->find($args->offsetGet('refusedReason'));
+            $proposalDecision->setRefusedReason($status);
+        }
+
+        return $proposalDecision;
+    }
+
+    private static function setAnalysisAndStatementAsTooLate(Proposal $proposal): Proposal
+    {
+        $proposalAssessment = $proposal->getAssessment();
+        if (
+            $proposalAssessment &&
+            ProposalStatementState::IN_PROGRESS === $proposalAssessment->getState()
+        ) {
+            $proposalAssessment->setState(ProposalStatementState::TOO_LATE);
+        }
+        if (!empty($proposal->getAnalyses())) {
+            foreach ($proposal->getAnalyses() as $analysis) {
+                if (ProposalStatementState::IN_PROGRESS === $analysis->getState()) {
+                    $analysis->setState(ProposalStatementState::TOO_LATE);
+                }
+            }
+        }
+
+        return $proposal;
+    }
+
+    private function index(Proposal $proposal, ?Post $post = null): void
+    {
+        $this->indexer->index(Proposal::class, $proposal->getId());
+        if ($post) {
+            $this->indexer->index(Post::class, $post->getId());
+        }
+
+        $this->indexer->finishBulk();
+    }
+
+    private function dispatchEvent(Proposal $proposal, Argument $args): DecisionEvent
+    {
+        $decision = $args->offsetGet('isApproved')
+            ? CapcoAppBundleEvents::DECISION_APPROVED
+            : CapcoAppBundleEvents::DECISION_REFUSED;
+        $event = new DecisionEvent(
+            $proposal,
+            $proposal->getDecision(),
+            $proposal->getProposalForm()->getAnalysisConfiguration()
+        );
+        $this->eventDispatcher->dispatch($decision, $event);
+
+        return $event;
     }
 }

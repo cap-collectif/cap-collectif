@@ -46,7 +46,6 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\SourceCategory;
 use Capco\AppBundle\Entity\OpinionAppendix;
-use Capco\AppBundle\Entity\ProposalAnalyst;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\ProposalCategory;
@@ -416,7 +415,6 @@ class ReinitCommand extends Command
             ],
             $output
         );
-        echo 'test';
     }
 
     protected function mockMigrations(OutputInterface $output)

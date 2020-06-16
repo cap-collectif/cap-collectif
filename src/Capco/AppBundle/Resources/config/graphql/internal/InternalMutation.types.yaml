@@ -278,7 +278,7 @@ InternalMutation:
                 builderConfig:
                     inputType: ChangeProposalDecisionInput
                     payloadType: ChangeProposalDecisionPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeProposalDecisionMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeProposalDecisionMutation", [value, getUser(), serv("request_stack")])'
             changeProposalAnalysis:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

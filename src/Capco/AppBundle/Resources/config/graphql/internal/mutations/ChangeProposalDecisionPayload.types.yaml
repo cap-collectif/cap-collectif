@@ -8,3 +8,9 @@ ChangeProposalDecisionPayload:
             errorCode:
                 type: 'InternalProposalStatementErrorCode'
                 description: 'Contains the error code if one occurred.'
+            proposal:
+                type: 'InternalProposal'
+                description: 'The changed proposal.'
+            post:
+                type: 'InternalPost'
+                description: 'The changed post.'

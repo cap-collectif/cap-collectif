@@ -1173,6 +1173,12 @@ type ChangeProposalDecisionPayload {
 
   """Contains the error code if one occurred."""
   errorCode: ProposalStatementErrorCode
+
+  """The changed proposal."""
+  proposal: Proposal
+
+  """The changed post."""
+  post: Post
   clientMutationId: String
 }
 

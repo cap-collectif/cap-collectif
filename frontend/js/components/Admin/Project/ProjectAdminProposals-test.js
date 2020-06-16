@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { ProjectAdminProposals } from './ProjectAdminProposals';
 import { $refType, $fragmentRefs, relayPaginationMock } from '~/mocks';
 import AnalysisNoProposal from '~/components/Analysis/AnalysisNoProposal/AnalysisNoProposal';
+import 'core-js';
 
 const DEFAULT_MERGED_PROPOSALS_PROJECT = {
   id: 'UHJvamVjdDpwcm9qZWN0Ng==',

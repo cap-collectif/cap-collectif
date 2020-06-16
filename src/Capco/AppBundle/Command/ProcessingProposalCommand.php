@@ -2,22 +2,23 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Event\DecisionEvent;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\AnalysisConfiguration;
-use Capco\AppBundle\Entity\ProposalDecision;
-use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
-use Capco\AppBundle\Repository\ProposalDecisionRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\SelectionRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Swarrot\Broker\Message;
+use Capco\AppBundle\Toggle\Manager;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Capco\AppBundle\Entity\ProposalDecision;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Capco\AppBundle\Entity\AnalysisConfiguration;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\Repository\ProposalDecisionRepository;
+use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Swarrot\Broker\Message;
 
 class ProcessingProposalCommand extends Command
 {
@@ -27,17 +28,17 @@ class ProcessingProposalCommand extends Command
     private $proposalRepository;
     private $proposalDecisionRepository;
     private $publisher;
-    private $selectionRepository;
     private $indexer;
-    private $entityManager;
+    private $eventDispatcher;
+    private $toggle;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        SelectionRepository $selectionRepository,
+        Manager $manager,
         ProposalRepository $proposalRepository,
         ProposalDecisionRepository $proposalDecisionRepository,
         AnalysisConfigurationRepository $analysisConfigurationRepository,
         Publisher $publisher,
+        EventDispatcherInterface $eventDispatcher,
         Indexer $indexer
     ) {
         $this->analysisConfigurationRepository = $analysisConfigurationRepository;
@@ -45,8 +46,8 @@ class ProcessingProposalCommand extends Command
         $this->proposalDecisionRepository = $proposalDecisionRepository;
         $this->publisher = $publisher;
         $this->indexer = $indexer;
-        $this->entityManager = $entityManager;
-        $this->selectionRepository = $selectionRepository;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->toggle = $manager;
         parent::__construct();
     }
 
@@ -72,6 +73,11 @@ class ProcessingProposalCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->toggle->isActive('unstable__analysis')) {
+            $output->writeln('error : unstable__analysis not enabled');
+
+            return -1;
+        }
         $count = 0;
         $time = $input->getOption('time');
         $shouldSendMessage = $input->getOption('message');
@@ -93,7 +99,7 @@ class ProcessingProposalCommand extends Command
                 // ProposalDecisions are decisions made by users not necessary processed. Therefore, we take all
                 // processed ProposalDecisions to dispatch the user's choice when marked as "DONE"
                 /** @var ProposalDecision[] $proposalDecisions */
-                $proposalDecisions = $this->proposalDecisionRepository->findUserProcessedFavourableByProposalIds(
+                $proposalDecisions = $this->proposalDecisionRepository->findUserProcessedProposalByIds(
                     $proposalsLinkedToFormIds
                 );
                 foreach ($proposalDecisions as $proposalDecision) {
@@ -101,31 +107,13 @@ class ProcessingProposalCommand extends Command
                     $proposal = $proposalDecision->getProposal();
                     if ($proposal) {
                         $approved = $proposalDecision->isApproved();
-                        if ($approved) {
-                            $favourableStatus = $analysisConfig->getFavourableStatus();
-                            $selection = $this->selectionRepository->findOneBy([
-                                'proposal' => $proposal,
-                                'selectionStep' => $analysisConfig->getMoveToSelectionStep(),
-                            ]);
-                            if (!$selection) {
-                                $selection = new Selection();
-                                $selection->setSelectionStep(
-                                    $analysisConfig->getMoveToSelectionStep()
-                                );
-                            }
-                            // Move proposal to selection and mark it as done at selection and proposal levels
-                            $selection->setStatus($favourableStatus);
-                            $proposal->setStatus($favourableStatus);
-                            $proposal->addSelection($selection);
-                            $this->entityManager->persist($selection);
-                        } else {
-                            // Whether or not the proposal has been moved, we must change the proposal Status
-                            $proposal->setStatus($proposalDecision->getRefusedReason());
-                        }
 
-                        // Mark it has done
-                        $analysisConfig->setEffectiveDateProcessed(true);
-                        $this->entityManager->flush();
+                        $this->eventDispatcher->dispatch(
+                            $approved
+                                ? CapcoAppBundleEvents::DECISION_APPROVED
+                                : CapcoAppBundleEvents::DECISION_REFUSED,
+                            new DecisionEvent($proposal, $proposalDecision, $analysisConfig)
+                        );
 
                         if (self::MESSAGE_YES === $shouldSendMessage) {
                             $this->publisher->publish(

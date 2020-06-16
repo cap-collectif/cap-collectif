@@ -8,6 +8,7 @@ import {
   getFormattedStepsChoicesForProject,
 } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import { $refType } from '~/mocks';
+import 'core-js';
 
 const DEFAULT_PROJECT = {
   ...$refType,

@@ -191,6 +191,14 @@ class AnalysisConfiguration implements Timestampable
         return $this;
     }
 
+    public function isImmediatelyEffective(): bool
+    {
+        $now = new \DateTime();
+
+        return null == $this->getEffectiveDate() ||
+            $this->getEffectiveDate()->getTimestamp() < $now->getTimestamp();
+    }
+
     public function removeUnfavourableStatus(Status $favourableStatus): self
     {
         if ($this->unfavourableStatuses->contains($favourableStatus)) {

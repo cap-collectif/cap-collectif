@@ -5,6 +5,32 @@ const ChangeProposalDecisionMutation = /* GraphQL */ `
   mutation ChangeProposalDecisionMutation($input: ChangeProposalDecisionInput!) {
     changeProposalDecision(input: $input) {
       errorCode
+      proposal {
+        id
+        news {
+          totalCount
+          edges {
+            node {
+              abstract
+              url
+              media {
+                url
+              }
+              title
+              themes {
+                title
+                url
+              }
+              authors {
+                id
+                url
+                vip
+                displayName
+              }
+            }
+          }
+        }
+      }
       decision {
         isApproved
         state
@@ -43,12 +69,44 @@ const ChangeProposalDecisionWithAssessmentMutation = /* GraphQL */ `
   }
 `;
 
+const ConfigureAnalysisMutation = /* GraphQL */ `
+  mutation ConfigureAnalysisMutation($input: ConfigureAnalysisInput!) {
+    configureAnalysis(input: $input) {
+      analysisConfiguration {
+        id
+        effectiveDate
+        analysisStep {
+          id
+        }
+        moveToSelectionStep {
+          id
+        }
+        selectionStepStatus {
+          id
+        }
+        proposalForm {
+          id
+        }
+        unfavourableStatuses {
+          id
+        }
+        favourableStatus {
+          id
+        }
+      }
+    }
+  }
+`;
+
 describe('mutations.changeProposalDecision', () => {
   it('should create a new empty proposal decision on the proposal.', async () => {
     const createDecision = await graphql(
       ChangeProposalDecisionMutation,
       {
-        input: { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTI=' },
+        input: {
+          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTI=',
+          isApproved: true,
+        },
       },
       'internal_decision_maker',
     );
@@ -66,7 +124,7 @@ describe('mutations.changeProposalDecision', () => {
             "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
           authors: ['VXNlcjp1c2VyU3VwZXJ2aXNvcjI=', 'VXNlcjp1c2VyRGVjaXNpb25NYWtlcg=='],
           isApproved: true,
-          isDone: false,
+          isDone: true,
         },
       },
       'internal_decision_maker',

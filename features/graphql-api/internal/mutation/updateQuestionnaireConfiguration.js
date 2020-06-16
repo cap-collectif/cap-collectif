@@ -60,9 +60,6 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
       'internal_admin',
     );
 
-    expect(
-      response.updateQuestionnaireConfiguration.questionnaire.questions[0].choices.totalCount,
-    ).toBe(1000);
     expect(response).toMatchSnapshot({
       updateQuestionnaireConfiguration: {
         questionnaire: {

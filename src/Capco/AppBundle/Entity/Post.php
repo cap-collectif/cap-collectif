@@ -217,14 +217,14 @@ class Post implements
         return $this->isPublished;
     }
 
-    public function setdisplayedOnBlog(bool $displayedOnBlog): self
+    public function setDisplayedOnBlog(bool $displayedOnBlog): self
     {
         $this->displayedOnBlog = $displayedOnBlog;
 
         return $this;
     }
 
-    public function isdisplayedOnBlog(): bool
+    public function isDisplayedOnBlog(): bool
     {
         return $this->displayedOnBlog;
     }
@@ -232,6 +232,14 @@ class Post implements
     public function setPublishedAt(?\DateTime $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function publishNow(): self
+    {
+        $this->isPublished = true;
+        $this->publishedAt = new \DateTime();
 
         return $this;
     }

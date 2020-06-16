@@ -34,7 +34,7 @@ const MultipleRadio = ({
 
   const handleChange = (event: SyntheticInputEvent<HTMLInputElement>, choiceValue: string) => {
     // value already in, no need update
-    if (finalValue.includes(choiceValue)) return;
+    if (finalValue && finalValue.includes(choiceValue)) return;
 
     const newValue = { labels: [choiceValue], other: null };
     setOtherChecked(false);
@@ -74,7 +74,7 @@ const MultipleRadio = ({
                 id={`${id}_${choiceKey}`}
                 value={choiceValue}
                 label={choice.label}
-                checked={finalValue.includes(choiceValue)}
+                checked={finalValue && finalValue.includes(choiceValue)}
                 image={choice.image ? choice.image.url : ''}
                 typeForm={typeForm}
                 disabled={disabled}

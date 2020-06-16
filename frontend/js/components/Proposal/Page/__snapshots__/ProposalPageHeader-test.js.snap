@@ -458,6 +458,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       />
     </a>
     <ProposalPageHeader__OpenAnalysisButton
+      id="side-analysis-open-button"
       type="button"
     >
       <Icon

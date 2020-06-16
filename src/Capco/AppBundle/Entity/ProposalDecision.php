@@ -55,7 +55,7 @@ class ProposalDecision implements Timestampable
     private $isApproved = true;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status")
      * @ORM\JoinColumn(nullable=true, name="refused_reason", referencedColumnName="id")
      */
     private $refusedReason;

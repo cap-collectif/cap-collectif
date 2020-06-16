@@ -189,6 +189,14 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @Given I am logged in as spyl
+     */
+    public function iAmLoggedInAsSpylou()
+    {
+        $this->iAmAuthenticatedAs('aurelien@cap-collectif.com');
+    }
+
+    /**
      * @Given I am logged in as adminCapco
      */
     public function iAmLoggedInAsAdminCapco()
@@ -374,7 +382,7 @@ class UserContext extends DefaultContext
             'name' => $serverSession->getName(),
             'value' => $serverSession->getId(),
             'path' => '/',
-            'secure' => true
+            'secure' => true,
         ];
 
         try {

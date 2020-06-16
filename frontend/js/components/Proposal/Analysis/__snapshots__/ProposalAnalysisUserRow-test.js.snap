@@ -41,12 +41,17 @@ exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
         </span>
       </Label>
     </div>
-    <Icon
-      color="#6c757d"
-      name="pen"
+    <button
+      className="edit-analysis-icon"
       onClick={[Function]}
-      size={16}
-    />
+      type="button"
+    >
+      <Icon
+        color="#6c757d"
+        name="pen"
+        size={16}
+      />
+    </button>
   </ProposalAnalysisUserRow__Row>
 </Fragment>
 `;

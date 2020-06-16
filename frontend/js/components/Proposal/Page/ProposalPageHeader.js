@@ -117,7 +117,10 @@ export class ProposalPageHeader extends React.Component<Props> {
             <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id={tradKeyToBack} />
           </a>
           {hasAnalysingButton && (
-            <OpenAnalysisButton type="button" onClick={onAnalysisClick}>
+            <OpenAnalysisButton
+              type="button"
+              id="side-analysis-open-button"
+              onClick={onAnalysisClick}>
               <Icon name={ICON_NAME.chart} size={16} color={colors.lightBlue} />
               <FormattedMessage id="panel.analysis.subtitle" />
             </OpenAnalysisButton>

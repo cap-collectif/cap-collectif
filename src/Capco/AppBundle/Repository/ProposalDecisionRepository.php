@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 
 class ProposalDecisionRepository extends EntityRepository
 {
-    public function findUserProcessedFavourableByProposalIds(array $ids): iterable
+    public function findUserProcessedProposalByIds(array $ids): iterable
     {
         return $this->createQueryBuilder('pd')
             ->leftJoin('pd.proposal', 'p')

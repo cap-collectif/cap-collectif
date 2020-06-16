@@ -308,3 +308,22 @@ Scenario: Admin deletes a proposal ...
     | projectSlug | projet-avec-beaucoup-dopinions   |
     | stepSlug | collecte-des-propositions-avec-questions-qui-va-etre-jetee   |
   Then I should not see "Proposition qui va être jetée"
+
+@database @rabbitmq
+Scenario: User wants to process a project proposal analysis immediately
+  Given feature "unstable__analysis" is enabled
+  And I am logged in as spyl
+  Then I go to "/admin/capco/app/proposalform/proposalformIdf/edit"
+  When I click on button "#link-tab-new-analysis"
+  And I wait "#step_now" to appear on current page
+  Then I click on button "#step_now"
+  And I click on button "#analysis-configuration-submit"
+  When I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quassociation-avec-siret"
+  And I wait ".edit-analysis-icon" to appear on current page
+  Then I should not see ".proposal__last__news__title"
+  When I click the ".edit-analysis-icon" element
+  And I click on button "#validate-proposal-decision-button"
+  And I wait 5 seconds
+  And I reload the page
+  And I wait ".edit-analysis-icon" to appear on current page
+  Then I should see "Réponse officielle" in the ".proposal__last__news__title" element

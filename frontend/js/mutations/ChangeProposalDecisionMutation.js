@@ -11,6 +11,37 @@ const mutation = graphql`
   mutation ChangeProposalDecisionMutation($input: ChangeProposalDecisionInput!) {
     changeProposalDecision(input: $input) {
       errorCode
+      proposal {
+        id
+        ...ProposalPageBlog_proposal
+        ...ProposalPageLastNews_proposal
+        decision {
+          state
+          estimatedCost
+          refusedReason {
+            label: name
+            value: id
+          }
+          post {
+            id
+            body
+            authors {
+              value: id
+              label: username
+            }
+          }
+          isApproved
+        }
+        form {
+          analysisConfiguration {
+            effectiveDate
+            unfavourableStatuses {
+              value: id
+              label: name
+            }
+          }
+        }
+      }
       decision {
         isApproved
         state

@@ -45,6 +45,12 @@ const Row: StyledComponent<
 > = styled.div`
   display: flex;
   align-items: center;
+
+  button {
+    background: none;
+    border: none;
+  }
+
   justify-content: space-between;
   > div {
     display: flex;
@@ -140,15 +146,19 @@ export const ProposalAnalysisUserRow = ({
           </Label>
         </div>
         {canConsult && (
-          <Icon
+          <button
+            type="button"
+            className={canEdit ? 'edit-analysis-icon' : ''}
             onClick={() => {
               if (onClick && canEdit && !disabled) onClick(false);
               else if (onClick && canConsult) onClick(true);
-            }}
-            name={canEdit ? ICON_NAME.pen : ICON_NAME.eye}
-            size={16}
-            color={colors.secondaryGray}
-          />
+            }}>
+            <Icon
+              name={canEdit ? ICON_NAME.pen : ICON_NAME.eye}
+              size={16}
+              color={colors.secondaryGray}
+            />
+          </button>
         )}
       </Row>
     </>

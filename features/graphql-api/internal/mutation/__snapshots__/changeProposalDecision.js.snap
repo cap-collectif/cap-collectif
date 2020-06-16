@@ -21,16 +21,28 @@ exports[`mutations.changeProposalDecision should create a new empty proposal dec
 Object {
   "changeProposalDecision": Object {
     "decision": Object {
-      "estimatedCost": null,
+      "estimatedCost": 0,
       "isApproved": true,
       "post": Object {
         "authors": Array [],
-        "translations": Array [],
+        "translations": Array [
+          Object {
+            "body": "",
+            "title": "proposal_decision.official_response",
+          },
+        ],
       },
       "refusedReason": null,
       "state": "IN_PROGRESS",
     },
     "errorCode": null,
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTI=",
+      "news": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+    },
   },
 }
 `;
@@ -38,17 +50,9 @@ Object {
 exports[`mutations.changeProposalDecision should create a pre-filled decision if an assessment already exist on the proposal. 1`] = `
 Object {
   "changeProposalDecision": Object {
-    "decision": Object {
-      "estimatedCost": null,
-      "isApproved": true,
-      "post": Object {
-        "authors": Array [],
-        "translations": Array [],
-      },
-      "refusedReason": null,
-      "state": "IN_PROGRESS",
-    },
-    "errorCode": null,
+    "decision": null,
+    "errorCode": "REFUSED_REASON_EMPTY",
+    "proposal": null,
   },
 }
 `;
@@ -68,12 +72,48 @@ Object {
             "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
           },
         ],
-        "translations": Array [],
+        "translations": Array [
+          Object {
+            "body": "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
+            "title": "proposal_decision.official_response",
+          },
+        ],
       },
       "refusedReason": null,
-      "state": "IN_PROGRESS",
+      "state": "DONE",
     },
     "errorCode": null,
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTI=",
+      "news": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "abstract": "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
+              "authors": Array [
+                Object {
+                  "displayName": "decisionmaker",
+                  "id": "VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==",
+                  "url": "https://capco.test/profile/decisionmaker",
+                  "vip": false,
+                },
+                Object {
+                  "displayName": "supervisor2",
+                  "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
+                  "url": "https://capco.test/profile/supervisor2",
+                  "vip": false,
+                },
+              ],
+              "media": null,
+              "themes": Array [],
+              "title": "proposal_decision.official_response",
+              "url": "https://capco.test/blog/proposal-decision-official-response",
+            },
+          },
+        ],
+        "totalCount": 1,
+      },
+    },
   },
 }
 `;
@@ -83,6 +123,7 @@ Object {
   "changeProposalDecision": Object {
     "decision": null,
     "errorCode": "REFUSED_REASON_EMPTY",
+    "proposal": null,
   },
 }
 `;
