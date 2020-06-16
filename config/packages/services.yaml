@@ -255,3 +255,7 @@ services:
     Capco\AppBundle\Command\ProcessingProposalCommand:
         bind:
             Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+
+    Egulias\EmailValidator\EmailValidator:
+        autowire: true
+        class: 'Egulias\EmailValidator\EmailValidator'
