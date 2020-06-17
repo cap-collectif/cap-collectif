@@ -33,7 +33,7 @@ class UserSearch extends Search
     public function getRegisteredUsers(
         int $pagination,
         int $page,
-        string $sort = null,
+        ?string $sort = null,
         $type = null
     ): array {
         $boolQuery = new Query\BoolQuery();
@@ -45,15 +45,15 @@ class UserSearch extends Search
         if ('activity' === $sort) {
             $query->setSort([
                 'totalContributionsCount' => [
-                    'order' => 'DESC'
+                    'order' => 'DESC',
                 ],
                 'createdAt' => [
-                    'order' => 'desc'
-                ]
+                    'order' => 'desc',
+                ],
             ]);
         } else {
             $query->addSort([
-                'createdAt' => ['order' => 'DESC']
+                'createdAt' => ['order' => 'DESC'],
             ]);
         }
 
@@ -65,7 +65,7 @@ class UserSearch extends Search
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
-            'totalCount' => $resultSet->getTotalHits()
+            'totalCount' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -115,7 +115,7 @@ class UserSearch extends Search
 
             return [
                 'users' => $users,
-                'count' => \count($authorIds)
+                'count' => \count($authorIds),
             ];
         }
 
@@ -141,7 +141,7 @@ class UserSearch extends Search
 
         return [
             'users' => $users,
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -169,38 +169,57 @@ class UserSearch extends Search
 
         return [
             'users' => $users,
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
     public function getContributorByProject(
         Project $project,
+        array $providedFilters = [],
         int $limit = 100,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('contributionsCountByProject');
-
         $boolQuery = new Query\BoolQuery();
-        $boolQuery
-            ->addFilter(
+        if (isset($providedFilters['step'])) {
+            $nestedQueryStep = new Query\Nested();
+            $nestedQueryStep->setPath('contributionsCountByStep');
+            $nestedQueryStep->setQuery(
+                (new Query\BoolQuery())->addFilter(
+                    new Term(['contributionsCountByStep.step.id' => $providedFilters['step']])
+                )
+            );
+            $boolQuery->addFilter($nestedQueryStep);
+        }
+
+        if (isset($providedFilters['vip'])) {
+            $boolQuery->addFilter(new Term(['vip' => $providedFilters['vip']]));
+        }
+
+        if (isset($providedFilters['userType'])) {
+            $boolQuery->addFilter(new Term(['userType.id' => $providedFilters['userType']]));
+        }
+
+        $nestedQueryProject = new Query\Nested();
+        $nestedQueryProject->setPath('contributionsCountByProject');
+        $nestedQueryProject->setQuery(
+            (new Query\BoolQuery())->addFilter(
                 new Query\Term(['contributionsCountByProject.project.id' => $project->getId()])
             )
-            ->addFilter(new Range('contributionsCountByProject.count', ['gt' => 0]));
+            // No need to add the range query because the contributionsCountByProject is added if only there is a contribution.
+        );
 
-        $nestedQuery->setQuery($boolQuery);
-
-        $query = new Query($nestedQuery);
+        $boolQuery->addFilter($nestedQueryProject);
+        $query = new Query($boolQuery);
         $query->setSort([
             'contributionsCountByProject.count' => [
                 'order' => 'desc',
                 'nested_filter' => [
-                    'term' => ['contributionsCountByProject.project.id' => $project->getId()]
-                ]
+                    'term' => ['contributionsCountByProject.project.id' => $project->getId()],
+                ],
             ],
             'createdAt' => [
-                'order' => 'desc'
-            ]
+                'order' => 'desc',
+            ],
         ]);
 
         $this->applyCursor($query, $cursor);
@@ -236,8 +255,8 @@ class UserSearch extends Search
         $query = new Query($nestedQuery);
         $query->setSort([
             'createdAt' => [
-                'order' => 'desc'
-            ]
+                'order' => 'desc',
+            ],
         ]);
 
         if ($limit) {
@@ -269,8 +288,8 @@ class UserSearch extends Search
 
         $query->setSort([
             'createdAt' => [
-                'order' => 'desc'
-            ]
+                'order' => 'desc',
+            ],
         ]);
 
         $this->applyCursor($query, $cursor);
@@ -289,11 +308,11 @@ class UserSearch extends Search
         $query = new Query($boolQuery);
         $query->setSort([
             'totalContributionsCount' => [
-                'order' => 'desc'
+                'order' => 'desc',
             ],
             'createdAt' => [
-                'order' => 'desc'
-            ]
+                'order' => 'desc',
+            ],
         ]);
 
         $query
@@ -305,7 +324,7 @@ class UserSearch extends Search
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
-            'totalCount' => $resultSet->getTotalHits()
+            'totalCount' => $resultSet->getTotalHits(),
         ];
     }
 

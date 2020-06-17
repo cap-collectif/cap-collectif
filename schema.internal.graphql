@@ -5155,6 +5155,15 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """The step in which the user has contributed."""
+    step: ID
+
+    """Does the user has verified his account."""
+    vip: Boolean
+
+    """The user type to filter by."""
+    userType: ID
   ): UserConnection!
 
   """Count of contributions associated with the project."""

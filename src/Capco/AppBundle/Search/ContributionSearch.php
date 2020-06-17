@@ -34,7 +34,7 @@ class ContributionSearch extends Search
         ContributionType::SOURCE => Source::class,
         ContributionType::REPLY => Reply::class,
         ContributionType::PROPOSAL => Proposal::class,
-        ContributionType::VOTE => AbstractVote::class
+        ContributionType::VOTE => AbstractVote::class,
     ];
 
     private $entityManager;
@@ -75,7 +75,7 @@ class ContributionSearch extends Search
 
     public function getSortField(?string $field): string
     {
-        if ($field === null){
+        if (null === $field) {
             return 'createdAt';
         }
         switch ($field) {
@@ -88,42 +88,41 @@ class ContributionSearch extends Search
         }
     }
 
-
-    public function getArgumentsByUserIds(
-        ?User $viewer,
-        array $keys
-    ): array {
+    public function getArgumentsByUserIds(?User $viewer, array $keys): array
+    {
         $client = $this->index->getClient();
         $globalQuery = new \Elastica\Multi\Search($client);
 
         foreach ($keys as $key) {
             $boolQuery = new BoolQuery();
-            $boolQuery->addFilter(new Query\Term(['author.id' => ['value' => $key['user']->getId()]]));
+            $boolQuery->addFilter(
+                new Query\Term(['author.id' => ['value' => $key['user']->getId()]])
+            );
 
-
-
-
-            list($cursor, $field, $direction, $limit, $includeUnpublished, $includeTrashed, $aclDisabled) = [
+            list(
+                $cursor,
+                $field,
+                $direction,
+                $limit,
+                $includeUnpublished,
+                $includeTrashed,
+                $aclDisabled,
+            ) = [
                 $key['args']->offsetGet('after'),
                 $key['args']->offsetGet('orderBy')['field'] ?? 'createdAt',
                 $key['args']->offsetGet('orderBy')['direction'] ?? 'DESC',
                 $key['args']->offsetGet('first'),
                 $key['args']->offsetGet('includeUnpublished') ?? false,
                 $key['args']->offsetGet('includeTrashed') ?? false,
-                $key['args']->offsetGet('aclDisabled') ?? false
+                $key['args']->offsetGet('aclDisabled') ?? false,
             ];
 
-            if (!$aclDisabled){
+            if (!$aclDisabled) {
                 $this->getFiltersForProjectViewerCanSee('project', $viewer);
             }
 
-            $contributionTypes = [ Argument::getElasticsearchTypeName() ];
-            $this->applyContributionsFilters(
-                $boolQuery,
-                $contributionTypes,
-                true,
-                $includeTrashed
-            );
+            $contributionTypes = [Argument::getElasticsearchTypeName()];
+            $this->applyContributionsFilters($boolQuery, $contributionTypes, true, $includeTrashed);
 
             if (!$includeUnpublished) {
                 $boolQuery->addFilter(new Term(['published' => ['value' => true]]));
@@ -151,7 +150,10 @@ class ContributionSearch extends Search
         $resultSets = $responses->getResultSets();
         foreach ($resultSets as $key => $resultSet) {
             $results[] = new ElasticsearchPaginatedResult(
-                $this->getHydratedResultsFromResultSet($this->entityManager->getRepository(Argument::class), $resultSet),
+                $this->getHydratedResultsFromResultSet(
+                    $this->entityManager->getRepository(Argument::class),
+                    $resultSet
+                ),
                 $this->getCursors($resultSet),
                 $resultSet->getTotalHits()
             );
@@ -177,7 +179,7 @@ class ContributionSearch extends Search
         $boolQuery = new Query\BoolQuery();
         list($contribuableDecodedId, $contribuableType) = [
             GlobalId::fromGlobalId($contribuableId)['id'],
-            GlobalId::fromGlobalId($contribuableId)['type']
+            GlobalId::fromGlobalId($contribuableId)['type'],
         ];
         $boolQuery->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]));
 
@@ -187,7 +189,7 @@ class ContributionSearch extends Search
                     $boolQuery
                         ->addFilter(
                             new Query\Term([
-                                'consultation.id' => ['value' => $contribuableDecodedId]
+                                'consultation.id' => ['value' => $contribuableDecodedId],
                             ])
                         )
                         ->addFilter(new Query\Exists('consultation'));
@@ -390,7 +392,7 @@ class ContributionSearch extends Search
 
     private function applyContributionsFilters(
         Query\BoolQuery $query,
-        array $contributionTypes = null,
+        ?array $contributionTypes = null,
         bool $inConsultation = false,
         bool $includeTrashed = false
     ): void {
@@ -406,7 +408,7 @@ class ContributionSearch extends Search
                     [
                         new Query\Term(['published' => ['value' => false]]),
                         new Query\Exists('comment'),
-                        new Query\Term(['draft' => ['value' => true]])
+                        new Query\Term(['draft' => ['value' => true]]),
                     ],
                     !$includeTrashed ? [new Query\Exists('trashedAt')] : []
                 )
@@ -421,7 +423,7 @@ class ContributionSearch extends Search
             Argument::getElasticsearchTypeName(),
             Source::getElasticsearchTypeName(),
             Proposal::getElasticsearchTypeName(),
-            Reply::getElasticsearchTypeName()
+            Reply::getElasticsearchTypeName(),
         ];
 
         if (!$inConsultation) {
@@ -457,13 +459,13 @@ class ContributionSearch extends Search
             case 'comments':
                 return [
                     'commentsCount' => ['order' => 'desc'],
-                    'createdAt' => ['order' => 'desc']
+                    'createdAt' => ['order' => 'desc'],
                 ];
             case 'least-popular':
                 return [
                     'votesCountNok' => ['order' => 'DESC'],
                     'votesCountOk' => ['order' => 'ASC'],
-                    'createdAt' => ['order' => 'DESC']
+                    'createdAt' => ['order' => 'DESC'],
                 ];
             case 'least-voted':
                 $sortField = 'votesCount';
@@ -484,7 +486,7 @@ class ContributionSearch extends Search
                 return [
                     'votesCountOk' => ['order' => 'DESC'],
                     'votesCountNok' => ['order' => 'ASC'],
-                    'createdAt' => ['order' => 'DESC']
+                    'createdAt' => ['order' => 'DESC'],
                 ];
             case 'voted':
                 $sortField = 'votesCount';

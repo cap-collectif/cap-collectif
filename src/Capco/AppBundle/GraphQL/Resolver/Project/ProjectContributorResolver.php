@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Search\UserSearch;
@@ -40,14 +41,28 @@ class ProjectContributorResolver implements ResolverInterface
         if (!$args) {
             $args = new Arg(['first' => 0]);
         }
+
         if (!$project->isExternal()) {
+            $providedFilters = [];
+            list(
+                $providedFilters['step'],
+                $providedFilters['vip'],
+                $providedFilters['userType'],
+            ) = [
+                GlobalId::fromGlobalId($args->offsetGet('step'))['id'],
+                $args->offsetGet('vip'),
+                $args->offsetGet('userType'),
+            ];
+
             $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
                 $project,
+                $providedFilters,
                 &$totalCount
             ) {
                 try {
                     $response = $this->userSearch->getContributorByProject(
                         $project,
+                        $providedFilters,
                         $limit,
                         $cursor
                     );

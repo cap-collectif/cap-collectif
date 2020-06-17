@@ -21,7 +21,7 @@ Capco\UserBundle\Entity\User:
     media:
       groups: [UsersInfos, UserDetails]
     vip:
-      groups: [UsersInfos, UserDetails]
+      groups: [UsersInfos, UserDetails, Elasticsearch]
     userType:
       groups: [UsersInfos, Elasticsearch]
       serialized_name: userType

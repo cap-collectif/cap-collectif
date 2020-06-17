@@ -17,6 +17,16 @@ InternalProject:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectHasAnalysisResolver", [value])'
             contributors:
                 type: 'InternalUserConnection!'
+                args:
+                    step:
+                        type: 'ID'
+                        description: 'The step in which the user has contributed.'
+                    vip:
+                        type: 'Boolean'
+                        description: 'Does the user has verified his account.'
+                    userType:
+                        type: 'ID'
+                        description: 'The user type to filter by.'
             votes:
                 type: 'InternalVoteConnection!'
             steps:

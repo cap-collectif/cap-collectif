@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.projects.contributors fetches contributors filtered by project, step 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNw==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNTIy",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNQ==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+      ],
+      "totalCount": 7,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;
+
+exports[`Internal.projects.contributors fetches contributors filtered by project, step, user type, vip 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMg==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;

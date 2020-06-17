@@ -61,6 +61,7 @@ mappings:
                 properties:
                     id:
                         type: keyword
+            vip: { type: boolean }
             contributionsCountByProject:
                 type: nested
                 properties:
