@@ -1,5 +1,10 @@
 monolog:
     handlers:
+        file:
+            type: rotating_file
+            path: '%kernel.logs_dir%/prod.log'
+            level: error
+            max_files: 4
         # Used to output error log with stack trace to Docker's stdout.
         stdout_fingers_crossed:
             type: fingers_crossed
