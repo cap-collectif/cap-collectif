@@ -12,7 +12,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class ContributionNotifier extends BaseNotifier
 {
-    protected $urlResolver;
+    protected UrlResolver $urlResolver;
 
     public function __construct(
         MailerService $mailer,

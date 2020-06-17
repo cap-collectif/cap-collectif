@@ -26,6 +26,7 @@ type Props = {
   enableViewSource?: boolean,
   /** show console.log of WysiwygEditor */
   debug?: boolean,
+  disabled?: boolean,
 };
 
 function Editor({
@@ -36,6 +37,7 @@ function Editor({
   uploadLocalImage,
   attachFile,
   debug = true,
+  disabled = false,
   enableViewSource,
   intl,
 }: Props) {
@@ -43,7 +45,7 @@ function Editor({
   const [editorMode, setEditorMode] = useState<'wysiwyg' | 'code' | null>(null);
   const [notification, setNotification] = useState<?{ type: string, message: string }>(null);
   const [fullscreen, toggleFullscreen] = useToggle(false);
-  const [editorFocused, setEditorFocused] = useState(true);
+  const [editorFocused, setEditorFocused] = useState(disabled);
   const [currentContent, setCurrentContent] = useState<?DraftEditorState>(null); // raw state
   const [htmlSource, setHtmlSource] = useState<string>(initialContent); // html state
 

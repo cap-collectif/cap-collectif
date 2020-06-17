@@ -68,7 +68,6 @@ Scenario: Logged in admin wants to review an event approved
   Given features themes, projects are enabled
   And I go to admin event page with eventId "eventCreateByAUserReviewApproved"
   And I wait "#event_title" to appear on current page
-  And I wait "#confirm-event-edit" to disappear on current page
 
 @database
 Scenario: Logged in admin wants to review an event refused
@@ -76,7 +75,6 @@ Scenario: Logged in admin wants to review an event refused
   Given features themes, projects are enabled
   And I go to admin event page with eventId "eventCreateByAUserReviewRefused"
   And I wait "#event_title" to appear on current page
-  And I wait "#confirm-event-edit" to disappear on current page
 
 @database
 Scenario: Logged in admin wants to edit an event; feature allow_users_to_propose_events is not enabled
@@ -175,7 +173,6 @@ Scenario: Logged in admin want to moderate a accepted event
   And I wait "#event_title" to appear on current page
   And event fields should be disabled
   And event moderation should be disabled
-  And I should not see an "#confirm-event-edit" element
 
 @database @rabbitmq
 Scenario: Logged in super admin want to moderate a accepted event

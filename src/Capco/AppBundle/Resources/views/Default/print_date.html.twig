@@ -1,9 +1,9 @@
 {% if object.startAt is not null %}
-    {% set startDay = object.startAt | localizeddate('full', 'none', app.request.locale) %}
+    {% set startDay = object.startAt | localizeddate('full', 'none', app.request.locale)|capitalize %}
     {% set startTime = object.startAt | localizeddate('none', 'short', app.request.locale) %}
     {% if object.endAt is not null %}
         {% set endTime = object.endAt | localizeddate('none', 'short', app.request.locale) %}
-        {% set endDay = object.endAt | localizeddate('full', 'none', app.request.locale) %}
+        {% set endDay = object.endAt | localizeddate('full', 'none', app.request.locale)|capitalize %}
         {% if object.lastOneDay %}
             {{ 'dates.part_day_start' | trans({'%date%': startDay, '%start_time%': startTime}, 'CapcoAppBundle') }}
             {{ 'dates.part_day_end' | trans({'%end_time%': endTime}, 'CapcoAppBundle') }}
@@ -25,7 +25,7 @@
     {% endif %}
 {% endif %}
 {% if object.startAt is null and object.endAt is not null %}
-    {% set endTime = object.endAt | localizeddate('none', 'short', app.request.locale) %}
+    {% set endTime = object.endAt | localizeddate('none', 'short', app.request.locale)|capitalize %}
     {% set endDay = object.endAt | localizeddate('full', 'none', app.request.locale) %}
     {% if date(object.endAt) > date() %}
         {{ endTime != '00:00'

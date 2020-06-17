@@ -5,7 +5,7 @@ import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { createFragmentContainer } from 'react-relay';
 import { reduxForm } from 'redux-form';
 import { graphql } from 'relay-runtime';
-import { Panel } from 'react-bootstrap';
+import { Button, Panel } from 'react-bootstrap';
 import type { EventPageContainer_query } from '~relay/EventPageContainer_query.graphql';
 
 import ColorBox from '../Ui/Boxes/ColorBox';
@@ -49,47 +49,77 @@ const AwaitingEventsPanel: StyledComponent<{}, {}, typeof Panel> = styled(Panel)
 
 export const formName = 'EventPageContainer';
 
-const renderAwaitingOrRefusedEvents = (query: EventPageContainer_query) =>
-  query.viewer &&
-  query.viewer.awaitingOrRefusedEvents &&
-  query.viewer.awaitingOrRefusedEvents.edges &&
-  query.viewer.awaitingOrRefusedEvents.edges
-    .filter(Boolean)
-    .map(edge => edge.node)
-    .filter(Boolean)
-    .map((node, key) => (
-      <div key={key}>
-        {key === 0 ? (
-          <AwaitingEventsPanel bsStyle="danger" className="mt-15">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">
-                <FormattedMessage
-                  id="events-waiting-admin-examination"
-                  values={{
-                    num: query.viewer?.awaitingOrRefusedEvents?.totalCount,
-                  }}
-                />
-              </Panel.Title>
-            </Panel.Heading>
+const renderAwaitingOrRefusedEvents = (query: EventPageContainer_query) => {
+  if (query.viewer && query.viewer.adminAwaitingEvents && query.viewer.adminAwaitingEvents > 0) {
+    return (
+      <AwaitingEventsPanel bsStyle="danger" className="mt-15">
+        <Panel.Heading className="justify-content-between d-flex align-items-center">
+          <Panel.Title componentClass="h3">
+            <FormattedMessage
+              id="event-waiting-admin-examination-admin"
+              values={{
+                num: query.viewer.adminAwaitingEvents,
+              }}
+            />
+          </Panel.Title>
+          <Button
+            id="examine-events"
+            bsStyle="primary"
+            className="mt-5"
+            onClick={() => {
+              window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/event/list`;
+            }}>
+            <FormattedMessage id="examine-events" />
+          </Button>
+        </Panel.Heading>
+      </AwaitingEventsPanel>
+    );
+  }
+
+  if (
+    query.viewer &&
+    query.viewer.awaitingOrRefusedEvents &&
+    query.viewer.awaitingOrRefusedEvents.edges
+  ) {
+    return query.viewer.awaitingOrRefusedEvents.edges
+      .filter(Boolean)
+      .map(edge => edge.node)
+      .filter(Boolean)
+      .map((node, key) => (
+        <div key={key}>
+          {key === 0 ? (
+            <AwaitingEventsPanel bsStyle="danger" className="mt-15">
+              <Panel.Heading>
+                <Panel.Title componentClass="h3">
+                  <FormattedMessage
+                    id="events-waiting-admin-examination"
+                    values={{
+                      num: query.viewer?.awaitingOrRefusedEvents?.totalCount,
+                    }}
+                  />
+                </Panel.Title>
+              </Panel.Heading>
+              <EventPreview
+                event={node}
+                displayReview
+                isHorizontal={!config.isMobile}
+                isDateInline
+                className="eventPreview_list"
+              />
+            </AwaitingEventsPanel>
+          ) : (
             <EventPreview
               event={node}
               displayReview
               isHorizontal={!config.isMobile}
               isDateInline
-              className="eventPreview_list"
+              className="eventPreview_list mt-15"
             />
-          </AwaitingEventsPanel>
-        ) : (
-          <EventPreview
-            event={node}
-            displayReview
-            isHorizontal={!config.isMobile}
-            isDateInline
-            className="eventPreview_list mt-15"
-          />
-        )}
-      </div>
-    ));
+          )}
+        </div>
+      ));
+  }
+};
 
 export const EventPageContainer = ({ eventPageBody, query, backgroundColor }: Props) => {
   useEffect(() => {
@@ -110,15 +140,17 @@ export const EventPageContainer = ({ eventPageBody, query, backgroundColor }: Pr
       {eventPageBody && (
         <div>
           <FormattedHTMLMessage id={eventPageBody} />
-          <div className="visible-xs-block visible-sm-block mt-15">
-            <div className="d-flex align-items-center">
-              <EventListCounter query={query} />
-              <EventListStatusFilter screen="mobile" />
-            </div>
-          </div>
         </div>
       )}
       {renderAwaitingOrRefusedEvents(query)}
+      <div>
+        <div className="visible-xs-block visible-sm-block mt-15">
+          <div className="d-flex align-items-center">
+            <EventListCounter query={query} />
+            <EventListStatusFilter screen="mobile" />
+          </div>
+        </div>
+      </div>
       <EventFiltersContainer
         darkness={0.1}
         backgroundColor={backgroundColor || colors.primaryColor}>
@@ -174,6 +206,7 @@ export default createFragmentContainer(form, {
             }
           }
         }
+        adminAwaitingEvents
       }
       ...EventRefetch_query
         @arguments(

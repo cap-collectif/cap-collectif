@@ -131,7 +131,21 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                           "name": "id",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "updatedAt",
+                          "storageKey": null,
+                        },
                       ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "deletedAt",
                       "storageKey": null,
                     },
                     Object {
@@ -452,6 +466,7 @@ fragment EventFormPage_event_FngS2 on Event {
     refusedReason
     id
   }
+  deletedAt
   author {
     id
     isAdmin
@@ -483,6 +498,7 @@ fragment EventForm_event on Event {
   commentable
   customCode
   guestListEnabled
+  deletedAt
   themes {
     id
     title
@@ -507,6 +523,7 @@ fragment EventForm_event on Event {
     status
     comment
     refusedReason
+    updatedAt
     id
   }
   translations {
@@ -664,7 +681,21 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                           "name": "id",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "updatedAt",
+                          "storageKey": null,
+                        },
                       ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "deletedAt",
                       "storageKey": null,
                     },
                     Object {
@@ -985,6 +1016,7 @@ fragment EventFormPage_event_FngS2 on Event {
     refusedReason
     id
   }
+  deletedAt
   author {
     id
     isAdmin
@@ -1016,6 +1048,7 @@ fragment EventForm_event on Event {
   commentable
   customCode
   guestListEnabled
+  deletedAt
   themes {
     id
     title
@@ -1040,6 +1073,7 @@ fragment EventForm_event on Event {
     status
     comment
     refusedReason
+    updatedAt
     id
   }
   translations {

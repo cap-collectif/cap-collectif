@@ -2,35 +2,36 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
+use Behat\Mink\Element\NodeElement;
 use PHPUnit\Framework\Assert;
 
 trait QuestionnaireStepsTrait
 {
     protected static $questionnaireStepParams = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'questionnaire-des-jo-2024/'
+        'stepSlug' => 'questionnaire-des-jo-2024/',
     ];
     protected static $conditionalQuestionnaireStepParams = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'etape-de-questionnaire-avec-questionnaire-sauts-conditionnels/'
+        'stepSlug' => 'etape-de-questionnaire-avec-questionnaire-sauts-conditionnels/',
     ];
     protected static $questionnaireStepClosedParams = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'etape-de-questionnaire-fermee/'
+        'stepSlug' => 'etape-de-questionnaire-fermee',
     ];
     protected static $questionnaireStepWithNoMultipleReplies = [
         'projectSlug' => 'projet-avec-questionnaire',
-        'stepSlug' => 'questionnaire/'
+        'stepSlug' => 'questionnaire/',
     ];
     protected static $replyLink = [
         'projectSlug' => 'projet-avec-questionnaire',
         'stepSlug' => 'questionnaire-des-jo-2024/',
-        'replyId' => 'UmVwbHk6cmVwbHky'
+        'replyId' => 'UmVwbHk6cmVwbHky',
     ];
     protected static $replyDraftLink = [
         'projectSlug' => 'projet-avec-questionnaire',
         'stepSlug' => 'questionnaire-des-jo-2024/',
-        'replyId' => 'UmVwbHk6cmVwbHk5'
+        'replyId' => 'UmVwbHk6cmVwbHk5',
     ];
 
     /**
@@ -226,10 +227,22 @@ trait QuestionnaireStepsTrait
      */
     public function theQuestionnaireFormShouldBeDisabled()
     {
+        $qlEditors = $this->getSession()
+            ->getPage()
+            ->findAll('css', '.ql-editor.ql-blank');
+        /** @var NodeElement $qlEditor */
+        foreach ($qlEditors as $qlEditor) {
+            if ($qlEditor->hasAttribute('contenteditable')) {
+                Assert::assertEquals('false', $qlEditor->getAttribute('contenteditable'));
+            }
+        }
         $inputs = $this->getSession()
             ->getPage()
             ->findAll('css', 'input');
         foreach ($inputs as $input) {
+            if ($input->hasAttribute('data-video')) {
+                continue;
+            }
             Assert::assertTrue($input->hasAttribute('disabled'));
         }
         $textareas = $this->getSession()
@@ -238,6 +251,7 @@ trait QuestionnaireStepsTrait
         foreach ($textareas as $textarea) {
             Assert::assertTrue($textarea->hasAttribute('disabled'));
         }
+
         $this->theElementHasAttribute(
             $this->getCurrentPage()->getSubmitReplyButtonSelector(),
             'disabled'

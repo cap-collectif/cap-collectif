@@ -33,6 +33,8 @@ class UrlArrayResolver
         if ('proposal' === $array['entity_type']) {
             return $this->getProposalRoute($array);
         }
+
+        return 'n/a';
     }
 
     protected function getProposalRoute(array $proposal): string

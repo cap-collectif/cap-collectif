@@ -6,15 +6,35 @@ import { EventLabelStatus } from './EventLabelStatus';
 import { $refType } from '~/mocks';
 
 describe('<EventLabelStatus />', () => {
-  const props = {
+  const propsRefused = {
     event: {
-      review: { id: 'review11', status: 'REFUSED', refusedReason: 'SPAM' },
+      review: {id: 'review11', status: 'REFUSED', refusedReason: 'SPAM'},
+      $refType,
+    },
+  };
+  const propsApproved = {
+    event: {
+      review: {id: 'review11', status: 'APPROVED', refusedReason: 'NONE'},
+      $refType,
+    },
+  };
+  const propsAwaiting = {
+    event: {
+      review: {id: 'review11', status: 'AWAITING', refusedReason: 'NONE'},
       $refType,
     },
   };
 
-  it('renders correcty', () => {
-    const wrapper = shallow(<EventLabelStatus {...props} />);
+  it('renders correcty event refused', () => {
+    const wrapper = shallow(<EventLabelStatus { ...propsRefused } />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('renders correcty event approved ', () => {
+    const wrapper = shallow(<EventLabelStatus { ...propsApproved } />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('renders correcty event event waiting', () => {
+    const wrapper = shallow(<EventLabelStatus { ...propsAwaiting } />);
     expect(wrapper).toMatchSnapshot();
   });
 });

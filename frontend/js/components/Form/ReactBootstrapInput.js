@@ -215,6 +215,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           name={props.name}
           initialContent={value}
           onChange={props.onChange}
+          {...props}
         />
       );
     }

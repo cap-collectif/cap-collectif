@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
@@ -35,7 +36,7 @@ class PostAdmin extends CapcoAdmin
         $this->tokenStorage = $tokenStorage;
     }
 
-    // For mosaic view
+    /** @var Post $object */
     public function getObjectMetadata($object)
     {
         $media = $object->getMedia();
@@ -57,6 +58,7 @@ class PostAdmin extends CapcoAdmin
         return ['blog'];
     }
 
+    /** @var Post $object */
     public function onPostPersist($object)
     {
         if ($object->getProposals()->count() > 0) {

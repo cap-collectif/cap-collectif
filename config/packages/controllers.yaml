@@ -13,6 +13,7 @@ services:
             $retryTtl: '%fos_user.resetting.retry_ttl%'
             $fosFormFactory: '@fos_user.resetting.form.factory'
             $fireWall: '%fos_user.firewall_name%'
+            $projectDir: '%kernel.project_dir%'
 
     Capco\AppBundle\Controller\Site\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Site/'

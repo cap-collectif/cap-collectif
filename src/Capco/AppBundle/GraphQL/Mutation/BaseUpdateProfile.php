@@ -17,10 +17,10 @@ abstract class BaseUpdateProfile implements MutationInterface
     public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
     public const USER_ID = 'userId';
     public const USER = 'user';
-    protected $userRepository;
-    protected $em;
-    protected $formFactory;
-    protected $logger;
+    protected UserRepository $userRepository;
+    protected EntityManagerInterface $em;
+    protected FormFactoryInterface $formFactory;
+    protected LoggerInterface $logger;
     protected $user;
     protected $arguments;
 

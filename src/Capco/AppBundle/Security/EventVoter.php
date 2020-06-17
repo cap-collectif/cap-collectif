@@ -49,7 +49,7 @@ class EventVoter extends Voter
 
     private function canView(Event $event, ?User $viewer): bool
     {
-        if(!$viewer) {
+        if (!$viewer) {
             return $event->isEnabledOrApproved();
         }
 
@@ -64,7 +64,7 @@ class EventVoter extends Voter
         if ($viewer !== $event->getAuthor() && !$viewer->isAdmin()) {
             return false;
         }
-        if ($event->getReview() && $event->getReview()->getStatus() === EventReviewStatusType::APPROVED) {
+        if (EventReviewStatusType::DELETED === $event->getStatus() && !$viewer->isSuperAdmin()) {
             return false;
         }
 

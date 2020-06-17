@@ -10601,6 +10601,9 @@ type User implements Node & UniformResourceLocatable {
 
   """Locale chosen by the user"""
   locale: String
+
+  """The event in awaiting status."""
+  adminAwaitingEvents: Int!
 }
 
 """A connection to a list of items."""

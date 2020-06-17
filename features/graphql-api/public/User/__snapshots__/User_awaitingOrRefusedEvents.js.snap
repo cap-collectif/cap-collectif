@@ -78,12 +78,26 @@ Object {
             "title": "event Create By user with review refused",
           },
         },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "node": Object {
+            "id": "RXZlbnQ6ZXZlbnRSZXZpZXdSZWZ1c2VkV2l0aG91dENvbW1lbnQ=",
+            "review": Object {
+              "status": "REFUSED",
+            },
+            "timeRange": Object {
+              "endAt": null,
+              "startAt": "2024-06-14 00:00:00",
+            },
+            "title": "evenement refusé, sans commentaire",
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "hasNextPage": false,
       },
-      "totalCount": 2,
+      "totalCount": 3,
     },
   },
 }

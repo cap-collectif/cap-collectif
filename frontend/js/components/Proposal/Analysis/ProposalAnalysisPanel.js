@@ -102,7 +102,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
       ? 'FAVOURABLE'
       : undefined;
   return (
-    <PanelsSlider home={panelState === 'HOME'}>
+    <PanelsSlider home={panelState === 'HOME'} id="proposal_analysis_panel">
       <div style={{ width: '50%' }}>
         <Panel>
           <PanelSection border>
@@ -172,7 +172,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
             </PanelSection>
           )}
           {proposal.decisionMaker && (
-            <PanelSection>
+            <PanelSection id="proposal_analysis_decision">
               <FormattedMessage id="global.decision" tagName="p" />
               <div>
                 <ProposalAnalysisUserRow

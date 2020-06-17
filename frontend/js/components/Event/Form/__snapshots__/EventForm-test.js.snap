@@ -19,6 +19,9 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
     />
   </EventForm__PageTitleContainer>
   <div
+    className="color-dark-gray font-size-16"
+  />
+  <div
     className="box-body"
   >
     <Field
@@ -374,6 +377,9 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
       className="mr-30 mt-15"
     />
   </EventForm__PageTitleContainer>
+  <div
+    className="color-dark-gray font-size-16"
+  />
   <div
     className="box-body"
   >
@@ -731,6 +737,9 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
     />
   </EventForm__PageTitleContainer>
   <div
+    className="color-dark-gray font-size-16"
+  />
+  <div
     className="box-body"
   >
     <Field
@@ -1086,6 +1095,9 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       className="mr-30 mt-15"
     />
   </EventForm__PageTitleContainer>
+  <div
+    className="color-dark-gray font-size-16"
+  />
   <div
     className="box-body"
   >

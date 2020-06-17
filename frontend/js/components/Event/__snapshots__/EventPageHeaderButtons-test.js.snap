@@ -26,14 +26,6 @@ exports[`<EventPageHeaderButtons /> renders correctly with the create event feat
       >
         Jpec
          
-        <FormattedMessage
-          id="event.header.date"
-          values={
-            Object {
-              "date": "2020:05:05",
-            }
-          }
-        />
       </div>
       <Relay(EventLabelStatus)
         event={
@@ -60,6 +52,18 @@ exports[`<EventPageHeaderButtons /> renders correctly with the create event feat
         }
       />
     </EventPageHeaderButtons__UserInfos>
+  </div>
+  <div
+    className="excerpt mt-10 ml-65"
+  >
+    <FormattedMessage
+      id="event.header.date"
+      values={
+        Object {
+          "date": "2020:05:05",
+        }
+      }
+    />
   </div>
   <EventPageHeaderButtons__Container>
     <EventDeleteButton
@@ -119,16 +123,20 @@ exports[`<EventPageHeaderButtons /> renders correcty 1`] = `
       >
         Jpec
          
-        <FormattedMessage
-          id="event.header.date"
-          values={
-            Object {
-              "date": "2020:05:05",
-            }
-          }
-        />
       </div>
     </EventPageHeaderButtons__UserInfos>
+  </div>
+  <div
+    className="excerpt mt-10 ml-65"
+  >
+    <FormattedMessage
+      id="event.header.date"
+      values={
+        Object {
+          "date": "2020:05:05",
+        }
+      }
+    />
   </div>
 </div>
 `;

@@ -135,13 +135,18 @@ Capco\AppBundle\Entity\EventTranslation:
         id: 'cosmopoliteEvent_fr'
         locale: 'fr-FR'
         translatable: '@event21'
-        title: "evenement cosmopolite"
-        slug: "evenement-cosmopolite"
-        body: "va donc, cosmopolite"
+        title: 'evenement cosmopolite'
+        slug: 'evenement-cosmopolite'
+        body: 'va donc, cosmopolite'
     event21_en:
         id: 'cosmopoliteEvent_en'
         locale: 'en-GB'
         translatable: '@event21'
-        title: "cosmopolite event"
-        slug: "cosmopolite-event"
-        body: "go then, cosmopolite"
+        title: 'cosmopolite event'
+        body: 'go then, cosmopolite'
+    event22_fr:
+        id: 'eventReviewRefusedWithoutComment_fr'
+        locale: 'fr-FR'
+        translatable: '@event22'
+        title: evenement refusé, sans commentaire
+        body: je suis refusé sans commentaire

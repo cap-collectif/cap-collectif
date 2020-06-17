@@ -8,6 +8,7 @@ Scenario: Logged in admin wants create a proposal from a merge of 2 proposals
   And I wait "#add-proposal-fusion" to appear on current page
   When I click the create merge button
   And I fill the proposal merge form
+  And I wait "#confirm-proposal-merge-create" to appear on current page
   And I submit the create merge form
   And I wait "#proposal-admin-page-tabs" to appear on current page
 

@@ -17,7 +17,7 @@ class ParticipantConnectionEdgeRegisteredAtResolver implements ResolverInterface
         $this->eventRegistrationRepository = $eventRegistrationRepository;
     }
 
-    public function __invoke(Edge $edge): \DateTime
+    public function __invoke(Edge $edge): ?\DateTime
     {
         if ($edge->getNode() instanceof EventRegistration) {
             return $edge->getNode()->getCreatedAt();
@@ -30,5 +30,7 @@ class ParticipantConnectionEdgeRegisteredAtResolver implements ResolverInterface
 
             return $registration->getCreatedAt();
         }
+
+        return null;
     }
 }

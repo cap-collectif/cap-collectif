@@ -35,7 +35,13 @@ class CreateUsersFromCsvCommand extends Command
                 InputArgument::REQUIRED,
                 'Please provide the path of the file you want to use.'
             )
-            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
+            ->addOption(
+                'delimiter',
+                'd',
+                InputOption::VALUE_OPTIONAL,
+                'Delimiter used in csv',
+                ';'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -108,6 +114,8 @@ class CreateUsersFromCsvCommand extends Command
 
             return $rows;
         }
+
+        return $rows;
     }
 
     protected function isValidHeaders($row, OutputInterface $output): bool

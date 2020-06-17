@@ -57,7 +57,7 @@ export const EventModerationMotiveView = ({ event }: Props) =>
       {event.review.refusedReason && event.review.refusedReason !== 'NONE' && (
         <FormattedMessage id={getRefusedReasonMessage(event.review.refusedReason)} />
       )}
-      <Alert bsStyle="warning">{event.review?.comment}</Alert>
+      {event.review?.comment && <Alert bsStyle="warning">{event.review?.comment}</Alert>}
     </ViewContainer>
   ) : null;
 

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ChangePasswordFormType;
@@ -16,9 +15,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
-    private $userManager;
-    private $userNotifier;
-    private $publisher;
+    private UserManager $userManager;
+    private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -26,11 +24,9 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
         LoggerInterface $logger,
         UserRepository $userRepository,
         UserManager $userManager,
-        UserNotifier $userNotifier,
         Publisher $publisher
     ) {
         $this->userManager = $userManager;
-        $this->userNotifier = $userNotifier;
         $this->publisher = $publisher;
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
@@ -39,12 +35,12 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
     {
         $arguments = $input->getArrayCopy();
         $form = $this->formFactory->create(ChangePasswordFormType::class, null, [
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
         $form->submit(
             [
                 'current_password' => $arguments['current_password'],
-                'new_password' => $arguments['new_password']
+                'new_password' => $arguments['new_password'],
             ],
             false
         );
@@ -60,7 +56,7 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
             'user.password',
             new Message(
                 json_encode([
-                    'userId' => $user->getId()
+                    'userId' => $user->getId(),
                 ])
             )
         );

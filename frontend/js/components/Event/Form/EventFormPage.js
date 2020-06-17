@@ -33,6 +33,7 @@ import type { EventFormPage_event } from '~relay/EventFormPage_event.graphql';
 import type { EventFormPage_query } from '~relay/EventFormPage_query.graphql';
 import type { FormValues as CustomFormValues } from '~/components/Admin/Field/CustomPageFields';
 import { getTranslation, handleTranslationChange } from '~/services/Translation';
+import AppDispatcher from '~/dispatchers/AppDispatcher';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -114,8 +115,7 @@ export const validate = (values: FormValues, props: Props) => {
   if (values.guestListEnabled && values.link) {
     errors.link = 'error-alert-choosing-subscription-mode';
   }
-
-  if (values.status === 'REFUSED' && !values.refusedReason) {
+  if (values.status === 'REFUSED' && (!values.refusedReason || values.refusedReason === 'NONE')) {
     errors.refusedReason = 'fill-field';
   }
   if (isFrontendView && values.authorAgreeToUsePersonalDataForEventOnly === false) {
@@ -179,6 +179,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         throw new Error('Mutation "AddEventMutation" failed.');
       }
       if (response?.addEvent?.eventEdge?.node) {
+        if (isFrontendView) {
+          AppDispatcher.dispatch({
+            actionType: 'UPDATE_ALERT',
+            alert: { bsStyle: 'success', content: 'alert.success.add.argument' },
+          });
+        }
         window.location.href = isFrontendView
           ? response.addEvent.eventEdge.node.url
           : `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`;
@@ -248,35 +254,36 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
           refusedReason: values.refusedReason,
         }
       : { id: values.id, comment: values.comment, status: values.status };
+  if (
+    !isFrontendView &&
+    event?.review &&
+    (event?.review?.status !== values.status ||
+      event?.review?.comment !== values.comment ||
+      event?.review?.refusedReason !== values.refusedReason)
+  ) {
+    return ReviewEventMutation.commit({ input: reviewInput })
+      .then(reviewResponse => {
+        if (!reviewResponse.reviewEvent || !reviewResponse.reviewEvent.event) {
+          throw new Error('Mutation "ReviewEventMutation" failed.');
+        }
+      })
+      .catch(reviewResponse => {
+        if (reviewResponse.response.message) {
+          throw new SubmissionError({
+            _error: reviewResponse.response.message,
+          });
+        } else {
+          throw new SubmissionError({
+            _error: intl.formatMessage({ id: 'global.error.server.form' }),
+          });
+        }
+      });
+  }
+
   return ChangeEventMutation.commit({ input: updateInput })
     .then(response => {
       if (!response.changeEvent || !response.changeEvent.event) {
         throw new Error('Mutation "ChangeEventMutation" failed.');
-      }
-      if (
-        !isFrontendView &&
-        event?.review &&
-        (event?.review?.status !== values.status ||
-          event?.review?.comment !== values.comment ||
-          event?.review?.refusedReason !== values.refusedReason)
-      ) {
-        return ReviewEventMutation.commit({ input: reviewInput })
-          .then(reviewResponse => {
-            if (!reviewResponse.reviewEvent || !reviewResponse.reviewEvent.event) {
-              throw new Error('Mutation "ReviewEventMutation" failed.');
-            }
-          })
-          .catch(reviewResponse => {
-            if (reviewResponse.response.message) {
-              throw new SubmissionError({
-                _error: reviewResponse.response.message,
-              });
-            } else {
-              throw new SubmissionError({
-                _error: intl.formatMessage({ id: 'global.error.server.form' }),
-              });
-            }
-          });
       }
       if (isFrontendView) {
         return window.location.reload();
@@ -322,7 +329,7 @@ export class EventFormPage extends React.Component<Props, State> {
   };
 
   renderSubmitButton = () => {
-    const { pristine, invalid, submitting, event, query, dispatch } = this.props;
+    const { pristine, submitting, event, query, dispatch } = this.props;
     if (!event) {
       return (
         <SubmitButton
@@ -338,9 +345,8 @@ export class EventFormPage extends React.Component<Props, State> {
     }
     if (
       query.viewer.isSuperAdmin ||
-      event.review === null ||
-      (event?.review?.status !== 'APPROVED' &&
-        event?.review?.status !== 'REFUSED' &&
+      ( event?.review?.status !== 'REFUSED' &&
+        event?.deletedAt === null &&
         query.viewer.isAdmin)
     ) {
       return (
@@ -348,7 +354,7 @@ export class EventFormPage extends React.Component<Props, State> {
           id={event ? 'confirm-event-edit' : 'confirm-event-create'}
           label="global.save"
           isSubmitting={submitting}
-          disabled={pristine || invalid || submitting}
+          disabled={pristine || submitting}
           onSubmit={() => {
             dispatch(submit(formName));
           }}
@@ -384,35 +390,38 @@ export class EventFormPage extends React.Component<Props, State> {
           {!isFrontendView && (
             <ButtonToolbar className="mt-45 box-content__toolbar">
               {this.renderSubmitButton()}
-
-              {event && (event.viewerDidAuthor || query.viewer.isSuperAdmin) && (
-                <>
-                  <DeleteModal
-                    closeDeleteModal={this.cancelCloseDeleteModal}
-                    showDeleteModal={showDeleteModal}
-                    deleteElement={() => {
-                      onDelete(event.id);
-                    }}
-                    deleteModalTitle="event.alert.delete"
-                    deleteModalContent="group.admin.parameters.modal.delete.content"
-                    buttonConfirmMessage="global.removeDefinitively"
-                  />
-                  <Button
-                    bsStyle="danger"
-                    className="ml-5"
-                    onClick={this.openDeleteModal}
-                    id="delete-event">
-                    <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
-                  </Button>
-                </>
+              {event &&
+                (event.viewerDidAuthor || query.viewer.isSuperAdmin) &&
+                event.deletedAt === null && (
+                  <>
+                    <DeleteModal
+                      closeDeleteModal={this.cancelCloseDeleteModal}
+                      showDeleteModal={showDeleteModal}
+                      deleteElement={() => {
+                        onDelete(event.id);
+                      }}
+                      deleteModalTitle="event.alert.delete"
+                      deleteModalContent="group.admin.parameters.modal.delete.content"
+                      buttonConfirmMessage="global.removeDefinitively"
+                    />
+                    <Button
+                      bsStyle="danger"
+                      className="ml-5"
+                      onClick={this.openDeleteModal}
+                      id="delete-event">
+                      <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+                    </Button>
+                  </>
+                )}
+              {event?.deletedAt === null && (
+                <AlertForm
+                  valid={valid}
+                  invalid={invalid}
+                  submitSucceeded={submitSucceeded}
+                  submitFailed={submitFailed}
+                  submitting={submitting}
+                />
               )}
-              <AlertForm
-                valid={valid}
-                invalid={invalid}
-                submitSucceeded={submitSucceeded}
-                submitFailed={submitFailed}
-                submitting={submitting}
-              />
             </ButtonToolbar>
           )}
         </div>
@@ -465,6 +474,7 @@ export default createFragmentContainer(EventFormCreatePage, {
         comment
         refusedReason
       }
+      deletedAt
       author {
         id
         isAdmin

@@ -76,16 +76,6 @@ export const EventPageHeaderButtons = ({ query, event, features }: Props) => {
               event.author && event.author.username
             )}
             {features.themes && event.themes.length > 0 && renderThemes(event, intl)}{' '}
-            <FormattedMessage
-              id="event.header.date"
-              values={{
-                date: intl.formatDate(event.createdAt, {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                }),
-              }}
-            />
             {event.participants.edges &&
               event.participants.edges.length > 0 &&
               renderParticipants(event.participants.edges.length)}
@@ -94,6 +84,18 @@ export const EventPageHeaderButtons = ({ query, event, features }: Props) => {
             <EventLabelStatus event={event} />
           )}
         </UserInfos>
+      </div>
+      <div className="excerpt mt-10 ml-65">
+        <FormattedMessage
+          id="event.header.date"
+          values={{
+            date: intl.formatDate(event.createdAt, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }),
+          }}
+        />
       </div>
       {event.viewerDidAuthor && features.allow_users_to_propose_events && (
         <Container>

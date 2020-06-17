@@ -474,6 +474,8 @@ class Consultation implements IndexableInterface
     public function setOpinionVersionsCount(int $opinionVersionsCount): self
     {
         $this->opinionVersionsCount = $opinionVersionsCount;
+
+        return $this;
     }
 
     public function getTrashedOpinionVersionsCount(): int
@@ -583,7 +585,7 @@ class Consultation implements IndexableInterface
             'Elasticsearch',
             'ElasticsearchOpinionNestedConsultation',
             'ElasticsearchVersionNestedConsultation',
-            'ElasticsearchVoteNestedConsultation'
+            'ElasticsearchVoteNestedConsultation',
         ];
     }
 

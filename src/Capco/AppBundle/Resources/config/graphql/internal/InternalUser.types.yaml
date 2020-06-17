@@ -325,3 +325,7 @@ InternalUser:
             locale:
                 type: 'String'
                 description: 'Locale chosen by the user'
+            adminAwaitingEvents:
+                type: 'Int!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\AdminAwaitingEventResolver",  [getUser()])'
+                description: 'The event in awaiting status.'

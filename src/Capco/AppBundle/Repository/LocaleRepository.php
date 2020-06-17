@@ -38,8 +38,9 @@ class LocaleRepository extends EntityRepository
 
     public function findEnabledLocalesCodes(): array
     {
-        return array_map(function(Locale $locale) { return $locale->getCode(); }, 
-        $this->findEnabledLocales());
+        return array_map(function (Locale $locale) {
+            return $locale->getCode();
+        }, $this->findEnabledLocales());
     }
 
     public function findEnabledLocales(): array
@@ -53,12 +54,11 @@ class LocaleRepository extends EntityRepository
     }
 
     /**
-     * @return Locale
      * @throws LocaleConfigurationException
      */
     public function findDefaultLocale(): Locale
     {
-        /** @var $defaultLocale Locale **/
+        /** @var $defaultLocale Locale */
         $defaultLocale = $this->findOneBy(['default' => true]);
         if (!$defaultLocale) {
             throw new LocaleConfigurationException(
@@ -100,6 +100,8 @@ class LocaleRepository extends EntityRepository
         } catch (NonUniqueResultException $e) {
             //todo handle request for en-AUS while we have en-US and en-GB
         }
+
+        return null;
     }
 
     private function isCodePublished(string $userLocaleCode): bool

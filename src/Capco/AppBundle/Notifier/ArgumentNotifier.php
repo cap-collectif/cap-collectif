@@ -16,9 +16,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ArgumentNotifier extends BaseNotifier
 {
-    protected $argumentUrlResolver;
-    protected $translator;
-    protected $userUrlResolver;
+    protected ArgumentUrlResolver $argumentUrlResolver;
+    protected TranslatorInterface $translator;
+    protected UserUrlResolver $userUrlResolver;
 
     public function __construct(
         MailerService $mailer,

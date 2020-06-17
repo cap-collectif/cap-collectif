@@ -14,10 +14,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class FollowerNotifier extends BaseNotifier
 {
-    protected $urlResolver;
-    protected $siteParams;
-    protected $logger;
-    protected $sendAt;
+    protected UrlResolver $urlResolver;
+    protected LoggerInterface $logger;
+    protected \DateTime $sendAt;
 
     public function __construct(
         MailerService $mailer,

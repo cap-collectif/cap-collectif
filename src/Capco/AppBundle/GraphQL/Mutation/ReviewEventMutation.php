@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventReviewType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\Security\EventReviewVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,12 +56,6 @@ class ReviewEventMutation implements MutationInterface
             return [
                 'event' => null,
                 'userErrors' => [['message' => 'Could not find your event.']]
-            ];
-        }
-        if (!$this->authorizationChecker->isGranted(EventVoter::EDIT, $event)) {
-            return [
-                'event' => null,
-                'userErrors' => [['message' => 'Access denied']]
             ];
         }
         $review = $event->getReview();

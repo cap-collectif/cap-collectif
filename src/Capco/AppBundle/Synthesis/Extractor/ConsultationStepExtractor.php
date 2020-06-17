@@ -357,7 +357,7 @@ class ConsultationStepExtractor
         SynthesisElement $element,
         // Contribution|OpinionType
         $contribution
-    ): SynthesisElement {
+    ): ?SynthesisElement {
         if ($contribution instanceof OpinionType) {
             return $this->setDataFromOpinionType($element, $contribution);
         }
@@ -373,6 +373,8 @@ class ConsultationStepExtractor
         if ($contribution instanceof Argument) {
             return $this->setDataFromArgument($element, $contribution);
         }
+
+        return null;
     }
 
     // ************************* Set element data from contributions ***************************

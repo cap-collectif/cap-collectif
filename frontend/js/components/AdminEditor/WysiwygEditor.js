@@ -381,8 +381,6 @@ function WysiwygEditor({
     const selection = editorState.getSelection();
     const newState = RichUtils.handleKeyCommand(editorState, command);
 
-    console.log('command', command);
-
     // Support handling for default command
     if (newState) {
       handleChange(newState);

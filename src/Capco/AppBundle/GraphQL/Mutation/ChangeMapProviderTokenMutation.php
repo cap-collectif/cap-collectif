@@ -45,6 +45,8 @@ class ChangeMapProviderTokenMutation implements MutationInterface
         if (MapProviderEnum::MAPBOX === $provider) {
             return $this->mutateAndGetMapboxTokenPayload($publicToken, $secretToken);
         }
+
+        return [];
     }
 
     private function mutateAndGetMapboxTokenPayload(

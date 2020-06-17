@@ -2,16 +2,15 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
 use Http\Discovery\Exception\NotFoundException;
-use Capco\AppBundle\Form\EventRegistrationType;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -20,28 +19,39 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EventController extends Controller
 {
-    private $eventHelper;
-    private $eventRepository;
-    private $entityManager;
-    private $formFactory;
-    private $parameterResolver;
+    private EventHelper $eventHelper;
+    private EventRepository $eventRepository;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private SiteParameterResolver $parameterResolver;
+    private TranslatorInterface $tranlator;
+    private SessionInterface $session;
+    private string $projectDir;
 
     public function __construct(
         EventHelper $eventHelper,
         EventRepository $eventRepository,
         EntityManagerInterface $entityManager,
         FormFactoryInterface $formFactory,
-        SiteParameterResolver $parameterResolver
+        SiteParameterResolver $parameterResolver,
+        TranslatorInterface $tranlator,
+        SessionInterface $session,
+        string $projectDir
     ) {
         $this->entityManager = $entityManager;
         $this->eventHelper = $eventHelper;
         $this->eventRepository = $eventRepository;
         $this->formFactory = $formFactory;
         $this->parameterResolver = $parameterResolver;
+        $this->tranlator = $tranlator;
+        $this->session = $session;
+        $this->projectDir = $projectDir;
     }
 
     /**
@@ -73,20 +83,19 @@ class EventController extends Controller
      */
     public function downloadAction(Request $request)
     {
-        $trans = $this->get('translator');
 
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new ProjectAccessDeniedException($trans->trans('project.error.not_exportable'));
+            throw new ProjectAccessDeniedException($this->tranlator->trans('project.error.not_exportable'));
         }
 
-        $path = sprintf('%s/public/export/', $this->container->getParameter('kernel.project_dir'));
+        $path = sprintf('%s/public/export/', $this->projectDir);
         $csvFile = 'events.csv';
 
         if (!file_exists($path . $csvFile)) {
             // We create a session for flashBag
-            $flashBag = $this->get('session')->getFlashBag();
+            $flashBag = $this->session->getFlashBag();
 
-            $flashBag->add('danger', $trans->trans('project.download.not_yet_generated'));
+            $flashBag->add('danger', $this->tranlator->trans('project.download.not_yet_generated'));
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -132,6 +141,17 @@ class EventController extends Controller
             );
         }
         $this->denyAccessUnlessGranted(EventVoter::VIEW, $event);
+
+        $now = new \DateTime();
+        $flashBag = $this->session->getFlashBag();
+
+        $diff = $event->getCreatedAt()->diff($now);
+        if ($diff->i < 2) {
+            $flashBag->add(
+                'success',
+                $this->tranlator->trans('event-review-request-to-admin')
+            );
+        }
         /** @var User $viewer */
         $viewer = $this->getUser();
         if (!$this->eventHelper->isRegistrationPossible($event)) {
@@ -158,24 +178,22 @@ class EventController extends Controller
             $registration->setConfirmed(!$registration->isConfirmed());
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($registration);
-                $em->flush();
+                $this->entityManager->persist($registration);
+                $this->entityManager->flush();
 
                 // We create a session for flashBag
-                $flashBag = $this->get('session')->getFlashBag();
 
                 if ($registration->isConfirmed()) {
                     $flashBag->add(
                         'success',
-                        $this->get('translator')->trans(
+                        $this->tranlator->trans(
                             'event_registration.create.register_success'
                         )
                     );
                 } else {
                     $flashBag->add(
                         'info',
-                        $this->get('translator')->trans(
+                        $this->tranlator->trans(
                             'event_registration.create.unregister_success'
                         )
                     );

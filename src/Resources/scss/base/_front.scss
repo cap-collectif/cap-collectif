@@ -756,3 +756,9 @@ div.embeddedContent {
   font-weight: normal;
   color: $dark;
 }
+
+#examine-events {
+    @media (max-width: $screen-xs-max) {
+        width: 100%
+    }
+}

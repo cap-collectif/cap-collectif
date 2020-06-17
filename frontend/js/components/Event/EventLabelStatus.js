@@ -28,8 +28,16 @@ const LabelStatus: StyledComponent<{ color: string }, {}, HTMLSpanElement> = sty
   white-space: nowrap;
 `;
 
-const getLabelColor = (status: EventReviewStatus) =>
-  status === 'APPROVED' ? colors.successColor : colors.dangerColor;
+const getLabelColor = (status: EventReviewStatus) => {
+  switch (status) {
+    case 'APPROVED':
+      return colors.successColor;
+    case 'AWAITING':
+      return colors.orange;
+    default:
+      return colors.dangerColor;
+  }
+}
 
 const getLabelMessage = (status: EventReviewStatus) => {
   switch (status) {
@@ -71,9 +79,10 @@ export const EventLabelStatus = ({ event }: Props) =>
       <LabelStatus
         id="event-label-status"
         color={event.review ? getLabelColor(event.review.status) : ''}>
-        {event.review && event.review.status === 'REFUSED' && (
-          <EyeBar className="mr-5" color="#fff" />
-        )}
+        {event.review &&
+          (event.review.status === 'REFUSED' || event.review.status === 'AWAITING') && (
+            <EyeBar className="mr-5" color="#fff" />
+          )}
         <FormattedMessage id={getLabelMessage(event.review.status)} />
       </LabelStatus>
     </OverlayTrigger>

@@ -1,6 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EventLabelStatus /> renders correcty 1`] = `
+exports[`<EventLabelStatus /> renders correcty event approved  1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={<React.Fragment />}
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <EventLabelStatus__LabelStatus
+    color="#088A20"
+    id="event-label-status"
+  >
+    <FormattedMessage
+      id="approved"
+      values={Object {}}
+    />
+  </EventLabelStatus__LabelStatus>
+</OverlayTrigger>
+`;
+
+exports[`<EventLabelStatus /> renders correcty event event waiting 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <_default
+      id="event-status-popover"
+      placement="top"
+    >
+      <FormattedMessage
+        id="global.private"
+        values={Object {}}
+      />
+      <br />
+       
+      <br />
+      <FormattedMessage
+        id="event-preview-waiting-exam"
+        values={Object {}}
+      />
+    </_default>
+  }
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <EventLabelStatus__LabelStatus
+    color="#f09200"
+    id="event-label-status"
+  >
+    <EyeBar
+      className="mr-5"
+      color="#fff"
+      size={16}
+    />
+    <FormattedMessage
+      id="waiting-examination"
+      values={Object {}}
+    />
+  </EventLabelStatus__LabelStatus>
+</OverlayTrigger>
+`;
+
+exports[`<EventLabelStatus /> renders correcty event refused 1`] = `
 <OverlayTrigger
   defaultOverlayShown={false}
   overlay={

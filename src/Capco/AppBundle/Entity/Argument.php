@@ -41,13 +41,13 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
     public static $argumentTypes = [
         self::TYPE_FOR => 'yes',
         self::TYPE_AGAINST => 'no',
-        self::TYPE_SIMPLE => 'simple'
+        self::TYPE_SIMPLE => 'simple',
     ];
 
     public static $argumentTypesLabels = [
         self::TYPE_FOR => 'argument.show.type.for',
         self::TYPE_AGAINST => 'argument.show.type.against',
-        self::TYPE_SIMPLE => 'global.review'
+        self::TYPE_SIMPLE => 'global.review',
     ];
 
     /**
@@ -163,6 +163,8 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
             case 1:
                 return 'argument.show.type.for';
         }
+
+        return '';
     }
 
     public function setType($type)
@@ -170,7 +172,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         $this->type = $type;
     }
 
-    public function getAuthor() : ?User
+    public function getAuthor(): ?User
     {
         return $this->Author;
     }
@@ -336,7 +338,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
             'ElasticsearchArgumentNestedOpinion',
             'ElasticsearchArgumentNestedVersion',
             'ElasticsearchArgumentNestedProject',
-            'ElasticsearchArgumentNestedConsultation'
+            'ElasticsearchArgumentNestedConsultation',
         ];
     }
 }

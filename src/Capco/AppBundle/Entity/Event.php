@@ -673,15 +673,20 @@ class Event implements
             'deletedAt',
             'slug',
             'body',
-            'title'
+            'title',
+            'currentLocale',
+            'defaultLocale',
+            'translations',
+            'newTranslations',
         ];
 
-        $class_vars = get_class_vars($this);
         foreach ($this as $key => $value) {
             if (!\in_array($key, $dontShouldBeNull)) {
                 $this->{$key} = null; //set to null instead of unsetting
             }
         }
+
+        $this->enabled = false;
     }
 
     /** ======== Elasticsearch methods ========== */
@@ -706,7 +711,7 @@ class Event implements
             'ElasticsearchEvent',
             'ElasticsearchEventNestedAuthor',
             'ElasticsearchEventNestedProject',
-            'ElasticsearchEventNestedTheme'
+            'ElasticsearchEventNestedTheme',
         ];
     }
 

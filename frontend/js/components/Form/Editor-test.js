@@ -1,9 +1,12 @@
 /* eslint-env jest */
 /* @flow */
 import React from 'react';
-import { shallow } from 'enzyme';
-import { intlMock } from '../../mocks';
+import { render } from 'enzyme';
+import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl-redux';
 import { Editor } from './Editor';
+import appStore from '../../stores/AppStore';
+import { intlMock } from '../../mocks';
 
 describe('<Editor />', () => {
   const defaultProps = {
@@ -18,7 +21,14 @@ describe('<Editor />', () => {
   };
 
   it('should render correctly with defaultProps', () => {
-    const wrapper = shallow(<Editor {...defaultProps} />);
+    const wrapper = render(
+      // $FlowFixMe
+      <Provider store={appStore({})}>
+        <IntlProvider>
+          <Editor {...defaultProps} />
+        </IntlProvider>
+      </Provider>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

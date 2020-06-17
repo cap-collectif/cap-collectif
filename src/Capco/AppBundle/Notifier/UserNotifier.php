@@ -18,10 +18,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UserNotifier extends BaseNotifier
 {
-    private $questionnaireReplyNotifier;
-    private $logger;
-    private $userRegistrationConfirmationUrlResolver;
-    private $userConfirmNewEmailUrlResolver;
+    private LoggerInterface $logger;
+    private UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver;
+    private UserConfirmNewEmailUrlResolver $userConfirmNewEmailUrlResolver;
 
     public function __construct(
         RouterInterface $router,
@@ -29,11 +28,9 @@ final class UserNotifier extends BaseNotifier
         SiteParameterResolver $siteParams,
         UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,
         UserConfirmNewEmailUrlResolver $userConfirmNewEmailUrlResolver,
-        QuestionnaireReplyNotifier $questionnaireReplyNotifier,
         LoggerInterface $logger,
         LocaleResolver $localeResolver
     ) {
-        $this->questionnaireReplyNotifier = $questionnaireReplyNotifier;
         $this->logger = $logger;
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->userRegistrationConfirmationUrlResolver = $userRegistrationConfirmationUrlResolver;

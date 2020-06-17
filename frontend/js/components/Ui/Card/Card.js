@@ -34,6 +34,7 @@ export const Container: StyledComponent<
   flex-direction: ${props => (props.isHorizontal ? 'row' : 'column')};
   width: 100%;
   border-radius: 4px;
+  clear: both;
 
   ul {
     margin-bottom: 5px;

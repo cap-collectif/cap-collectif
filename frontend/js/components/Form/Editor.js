@@ -41,73 +41,69 @@ export class Editor extends React.Component<Props> {
   }
 
   componentDidMount() {
-    const { disabled, onBlur, onChange, value, intl } = this.props;
+    const { onBlur, onChange, value, intl, disabled } = this.props;
 
-    if (!disabled) {
-      const size = Quill.import('formats/size');
-      size.whitelist = ['small', 'normal', 'large'];
+    const size = Quill.import('formats/size');
+    size.whitelist = ['small', 'normal', 'large'];
 
-      Quill.register(size, true);
-      const options = {
-        modules: {
-          toolbar: {
-            container: this.toolbarRef.current,
-          },
+    Quill.register(size, true);
+    const options = {
+      modules: {
+        toolbar: {
+          container: this.toolbarRef.current,
         },
-        theme: 'snow',
-        bounds: '#proposal_form_description',
-      };
-      this.quill = new Quill(this.editorRef.current, options);
+      },
+      theme: 'snow',
+      bounds: '#proposal_form_description',
+    };
+    this.quill = new Quill(this.editorRef.current, options);
 
-      this.quill.getModule('toolbar').addHandler('image', () => {
-        selectLocalImage(this.quill);
-      });
+    this.quill.getModule('toolbar').addHandler('image', () => {
+      selectLocalImage(this.quill);
+    });
 
-      // See https://github.com/quilljs/quill/issues/2038 for accessibility
-      this.quill.root.setAttribute('role', 'textbox');
-      this.quill.root.setAttribute('aria-multiline', 'true');
+    // See https://github.com/quilljs/quill/issues/2038 for accessibility
+    this.quill.root.setAttribute('role', 'textbox');
+    this.quill.root.setAttribute('aria-multiline', 'true');
 
-      const linkTooltip = this.quill.theme.tooltip.root;
+    const linkTooltip = this.quill.theme.tooltip.root;
 
-      if (linkTooltip) {
-        linkTooltip.setAttribute('role', 'tooltip');
-        linkTooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'global.link' })} :`);
-        const actionLink = linkTooltip.querySelector('.ql-action');
-        const removeLink = linkTooltip.querySelector('.ql-remove');
-        const input = linkTooltip.querySelector('input');
+    if (linkTooltip) {
+      linkTooltip.setAttribute('role', 'tooltip');
+      linkTooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'global.link' })} :`);
+      const actionLink = linkTooltip.querySelector('.ql-action');
+      const removeLink = linkTooltip.querySelector('.ql-remove');
+      const input = linkTooltip.querySelector('input');
 
-        if (actionLink) {
-          actionLink.setAttribute('data-content', intl.formatMessage({ id: 'action_edit' }));
-          actionLink.setAttribute(
-            'data-editing-content',
-            intl.formatMessage({ id: 'global.save' }),
-          );
-        }
-
-        if (removeLink) {
-          removeLink.setAttribute('data-content', intl.formatMessage({ id: 'global.delete' }));
-        }
-
-        if (input) {
-          input.setAttribute('aria-label', intl.formatMessage({ id: 'editor.add.link' }));
-        }
+      if (actionLink) {
+        actionLink.setAttribute('data-content', intl.formatMessage({ id: 'action_edit' }));
+        actionLink.setAttribute('data-editing-content', intl.formatMessage({ id: 'global.save' }));
       }
 
-      const defaultValue = value;
-      if (defaultValue) {
-        this.quill.clipboard.dangerouslyPasteHTML(defaultValue);
+      if (removeLink) {
+        removeLink.setAttribute('data-content', intl.formatMessage({ id: 'global.delete' }));
       }
 
-      this.quill.on('selection-change', range => {
-        if (!range && onBlur) {
-          onBlur();
-        }
-      });
-
-      this.quill.on('text-change', () => {
-        onChange(this.quill.root.innerHTML);
-      });
+      if (input) {
+        input.setAttribute('aria-label', intl.formatMessage({ id: 'editor.add.link' }));
+      }
     }
+
+    const defaultValue = value;
+    if (defaultValue) {
+      this.quill.clipboard.dangerouslyPasteHTML(defaultValue);
+    }
+
+    this.quill.on('selection-change', range => {
+      if (!range && onBlur) {
+        onBlur();
+      }
+    });
+
+    this.quill.on('text-change', () => {
+      onChange(this.quill.root.innerHTML);
+    });
+    this.quill.enable(!disabled);
   }
 
   componentDidUpdate({ currentLanguage: prevDefaultLanguage, value: prevValue }: Props) {
@@ -132,23 +128,13 @@ export class Editor extends React.Component<Props> {
   }
 
   render() {
-    const { className, disabled, id, value } = this.props;
+    const { className, id } = this.props;
 
     const classes = {
-      editor: !disabled,
-      'form-control': disabled,
+      editor: true,
+      'form-control': false,
       [className]: true,
     };
-    if (disabled) {
-      return (
-        <div
-          contentEditable={false}
-          id={id}
-          className={classNames(classes)}
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
-      );
-    }
     return (
       <div id={id} className={classNames(classes)}>
         <div ref={this.toolbarRef}>

@@ -6,16 +6,17 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\EventRegistration;
+use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Repository\EventCommentRepository;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Error\UserError;
 use Sonata\MediaBundle\Provider\ImageProvider;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteEventMutation extends BaseDeleteMutation
 {
@@ -23,7 +24,7 @@ class DeleteEventMutation extends BaseDeleteMutation
     private $indexer;
     private $publisher;
     private $registration;
-    private $eventCommentRepository;
+    private $translator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -31,15 +32,15 @@ class DeleteEventMutation extends BaseDeleteMutation
         Indexer $indexer,
         Publisher $publisher,
         EventRegistrationRepository $registration,
-        EventCommentRepository $eventCommentRepository,
-        ImageProvider $mediaProvider
+        ImageProvider $mediaProvider,
+        TranslatorInterface $translator
     ) {
         parent::__construct($em, $mediaProvider);
         $this->globalIdResolver = $globalIdResolver;
         $this->indexer = $indexer;
         $this->publisher = $publisher;
         $this->registration = $registration;
-        $this->eventCommentRepository = $eventCommentRepository;
+        $this->translator = $translator;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -60,9 +61,16 @@ class DeleteEventMutation extends BaseDeleteMutation
         if ($eventMedia) {
             $this->removeMedia($eventMedia);
         }
-
+        if ($event->getReview()) {
+            $this->em
+                ->createQueryBuilder()
+                ->delete(EventReview::class, 'er')
+                ->andWhere('er.id = :id')
+                ->setParameter('id', $event->getReview()->getId())
+                ->getQuery()
+                ->getResult();
+        }
         $event->softDelete();
-
         $this->em
             ->createQueryBuilder()
             ->delete(EventRegistration::class, 'er')
@@ -88,7 +96,7 @@ class DeleteEventMutation extends BaseDeleteMutation
             new Message(
                 json_encode([
                     'eventId' => $event->getId(),
-                    'eventParticipants' => $eventParticipants
+                    'eventParticipants' => $eventParticipants,
                 ])
             )
         );
@@ -96,7 +104,7 @@ class DeleteEventMutation extends BaseDeleteMutation
         return [
             'event' => $event,
             'deletedEventId' => $id,
-            'userErrors' => $userErrors
+            'userErrors' => $userErrors,
         ];
     }
 }

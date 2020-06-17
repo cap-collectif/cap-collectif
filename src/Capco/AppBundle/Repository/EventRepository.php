@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Event;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -140,7 +140,7 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function countByUserAndReviewStatus(?User $viewer, ?User $user, array $status)
+    public function countByUserAndReviewStatus(?User $viewer, ?User $user, array $status): int
     {
         if ($viewer) {
             $user = $viewer;
@@ -149,10 +149,12 @@ class EventRepository extends EntityRepository
             ->select('COUNT(e)')
             ->orderBy('e.createdAt', 'ASC')
             ->leftJoin('e.review', 'r')
-            ->andWhere('e.author = :author')
             ->andWhere('r.status IN (:status)')
-            ->setParameter('status', $status)
-            ->setParameter('author', $user);
+            ->setParameter('status', $status);
+
+        if ($user) {
+            $qb->andWhere('e.author = :author')->setParameter('author', $user);
+        }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }

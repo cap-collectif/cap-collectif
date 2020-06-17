@@ -207,6 +207,13 @@ exports[`<EventPageHeader /> renders correctly with a non authenticated user 1`]
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "deletedAt",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "Theme",
                       "kind": "LinkedField",
                       "name": "themes",
@@ -359,6 +366,13 @@ exports[`<EventPageHeader /> renders correctly with a non authenticated user 1`]
                           "args": null,
                           "kind": "ScalarField",
                           "name": "refusedReason",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "updatedAt",
                           "storageKey": null,
                         },
                         Object {
@@ -597,6 +611,7 @@ fragment EventForm_event on Event {
   commentable
   customCode
   guestListEnabled
+  deletedAt
   themes {
     id
     title
@@ -621,6 +636,7 @@ fragment EventForm_event on Event {
     status
     comment
     refusedReason
+    updatedAt
     id
   }
   translations {
@@ -883,6 +899,13 @@ exports[`<EventPageHeader /> renders correctly with the create event feature tog
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "deletedAt",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "Theme",
                       "kind": "LinkedField",
                       "name": "themes",
@@ -1035,6 +1058,13 @@ exports[`<EventPageHeader /> renders correctly with the create event feature tog
                           "args": null,
                           "kind": "ScalarField",
                           "name": "refusedReason",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "updatedAt",
                           "storageKey": null,
                         },
                         Object {
@@ -1273,6 +1303,7 @@ fragment EventForm_event on Event {
   commentable
   customCode
   guestListEnabled
+  deletedAt
   themes {
     id
     title
@@ -1297,6 +1328,7 @@ fragment EventForm_event on Event {
     status
     comment
     refusedReason
+    updatedAt
     id
   }
   translations {
@@ -1559,6 +1591,13 @@ exports[`<EventPageHeader /> renders correctly without title 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "deletedAt",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "Theme",
                       "kind": "LinkedField",
                       "name": "themes",
@@ -1711,6 +1750,13 @@ exports[`<EventPageHeader /> renders correctly without title 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "refusedReason",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "updatedAt",
                           "storageKey": null,
                         },
                         Object {
@@ -1949,6 +1995,7 @@ fragment EventForm_event on Event {
   commentable
   customCode
   guestListEnabled
+  deletedAt
   themes {
     id
     title
@@ -1973,6 +2020,7 @@ fragment EventForm_event on Event {
     status
     comment
     refusedReason
+    updatedAt
     id
   }
   translations {
@@ -2235,6 +2283,13 @@ exports[`<EventPageHeader /> renders correcty 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "deletedAt",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "Theme",
                       "kind": "LinkedField",
                       "name": "themes",
@@ -2387,6 +2442,13 @@ exports[`<EventPageHeader /> renders correcty 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "refusedReason",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "updatedAt",
                           "storageKey": null,
                         },
                         Object {
@@ -2625,6 +2687,7 @@ fragment EventForm_event on Event {
   commentable
   customCode
   guestListEnabled
+  deletedAt
   themes {
     id
     title
@@ -2649,6 +2712,7 @@ fragment EventForm_event on Event {
     status
     comment
     refusedReason
+    updatedAt
     id
   }
   translations {

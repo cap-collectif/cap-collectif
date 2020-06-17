@@ -14,7 +14,7 @@
   Margin
 ==== */
 
-@for $i from 0 to 10 {
+@for $i from 0 to 20 {
     $m: $i * 5;
     .m-#{$m}{
         margin: #{$m}px;
@@ -188,6 +188,10 @@
 
 .font-weight-semi-bold {
     font-weight: 600;
+}
+
+.font-size-16 {
+    font-size: 16px;
 }
 
 .font-size-30 {

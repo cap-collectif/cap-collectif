@@ -7,7 +7,7 @@ use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
-final class EventReviewMessage extends AbstractExternalMessage
+class EventReviewApprovedMessage extends AbstractExternalMessage
 {
     public const SUBJECT = 'event-approved';
     public const TEMPLATE = '@CapcoMail/Event/notifyUserReviewedEvent.html.twig';
@@ -24,7 +24,7 @@ final class EventReviewMessage extends AbstractExternalMessage
             'username' => $event->getAuthor()->getUsername(),
             'eventStatus' => $event->getStatus(),
             'color' =>
-                EventReviewStatusType::APPROVED === $event->getStatus() ? '#088A20' : '#dc3445'
+                EventReviewStatusType::APPROVED === $event->getStatus() ? '#088A20' : '#dc3445',
         ];
 
         if (EventReviewStatusType::REFUSED === $event->getStatus()) {
@@ -37,7 +37,7 @@ final class EventReviewMessage extends AbstractExternalMessage
                     EventReviewRefusedReasonType::$refusedReasonsLabels[
                         $event->getReview()->getRefusedReason()
                     ],
-                'eventComment' => $event->getReview()->getComment()
+                'eventComment' => $event->getReview()->getComment(),
             ]);
         }
 

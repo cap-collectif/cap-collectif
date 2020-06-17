@@ -2,13 +2,123 @@
 
 exports[`<Editor /> should render correctly with defaultProps 1`] = `
 <div
-  className="form-control test"
-  contentEditable={false}
-  dangerouslySetInnerHTML={
-    Object {
-      "__html": "test",
-    }
-  }
+  class="editor test"
   id="azerty"
-/>
+>
+  <div>
+    <span
+      class="ql-formats"
+    >
+      <select
+        aria-label="global.fontsize"
+        class="ql-size"
+      >
+        <option
+          value="small"
+        >
+          editor.size.small
+        </option>
+        <option
+          selected=""
+          value="normal"
+        >
+          editor.size.normal
+        </option>
+        <option
+          value="large"
+        >
+          editor.size.large
+        </option>
+      </select>
+    </span>
+    <span
+      class="ql-formats ql-editor-button"
+    >
+      <button
+        aria-label="global.bold"
+        class="ql-bold ql-editor-button"
+        type="button"
+      />
+      <button
+        aria-label="global.italic"
+        class="ql-italic ql-editor-button"
+        type="button"
+      />
+      <button
+        aria-label="global.underline"
+        class="ql-underline ql-editor-button"
+        type="button"
+      />
+      <button
+        aria-label="global.strike"
+        class="ql-strike ql-editor-button"
+        type="button"
+      />
+    </span>
+    <span
+      class="ql-formats"
+    >
+      <button
+        aria-label="editor.list"
+        class="ql-list ql-editor-button"
+        type="button"
+        value="ordered"
+      />
+      <button
+        aria-label="global.list"
+        class="ql-list ql-editor-button"
+        type="button"
+        value="bullet"
+      />
+      <button
+        aria-label="global.delete.indent"
+        class="ql-indent ql-editor-button"
+        type="button"
+        value="-1"
+      />
+      <button
+        aria-label="global.indent"
+        class="ql-indent ql-editor-button"
+        type="button"
+        value="+1"
+      />
+      <select
+        aria-label="editor.align.title"
+        class="ql-align"
+      >
+        <option
+          aria-label="editor.align.left"
+          selected=""
+        />
+        <option
+          aria-label="editor.align.center"
+          value="center"
+        />
+        <option
+          aria-label="editor.align.right"
+          value="right"
+        />
+        <option
+          aria-label="editor.align.justify"
+          value="justify"
+        />
+      </select>
+    </span>
+    <span
+      class="ql-formats"
+    >
+      <button
+        aria-label="global.link"
+        class="ql-link ql-editor-button"
+        type="button"
+      />
+      <button
+        aria-label="global.image"
+        class="ql-image ql-editor-button"
+        type="button"
+      />
+    </span>
+  </div>
+  <div />
+</div>
 `;

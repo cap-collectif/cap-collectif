@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\GraphQL\Resolver\Event\EventUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
@@ -9,18 +10,21 @@ use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
-use Capco\AppBundle\Mailer\Message\Event\EventReviewMessage;
+use Capco\AppBundle\Mailer\Message\Event\EventReviewApprovedMessage;
+use Capco\AppBundle\Mailer\Message\Event\EventReviewRefusedMessage;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
 class EventNotifier extends BaseNotifier
 {
-    private $eventUrlResolver;
-    private $eventRepository;
+    private EventUrlResolver $eventUrlResolver;
+    private EventRepository $eventRepository;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
         MailerService $mailer,
@@ -28,19 +32,21 @@ class EventNotifier extends BaseNotifier
         EventUrlResolver $eventUrlResolver,
         RouterInterface $router,
         EventRepository $eventRepository,
-        LocaleResolver $localeResolver
+        LocaleResolver $localeResolver,
+        EntityManagerInterface $entityManager
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->eventUrlResolver = $eventUrlResolver;
         $this->siteParams = $siteParams;
         $this->eventRepository = $eventRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function onCreate(Event $event): bool
     {
         return $this->mailer->createAndSendMessage(EventCreateAdminMessage::class, $event, [
             'eventURL' => $this->eventUrlResolver->__invoke($event, true),
-            'username' => 'admin'
+            'username' => 'admin',
         ]);
     }
 
@@ -48,21 +54,25 @@ class EventNotifier extends BaseNotifier
     {
         return $this->mailer->createAndSendMessage(EventEditAdminMessage::class, $event, [
             'eventURL' => $this->eventUrlResolver->__invoke($event, true),
-            'username' => 'admin'
+            'username' => 'admin',
         ]);
     }
 
     public function onDelete(array $event): array
     {
         $eventParticipants = $event['eventParticipants'] ?? null;
+        $filters = $this->entityManager->getFilters();
+        if ($filters->isEnabled('softdeleted')) {
+            $filters->disable('softdeleted');
+        }
         /** @var Event $event */
         $event = $this->eventRepository->find($event['eventId']);
-
         if (!$event) {
             throw new NotFoundHttpException('event not found');
         }
-
-        $this->mailer->createAndSendMessage(EventDeleteAdminMessage::class, $event, ['username' => 'admin']);
+        $this->mailer->createAndSendMessage(EventDeleteAdminMessage::class, $event, [
+            'username' => 'Admin',
+        ]);
         $messages = [];
 
         if (!empty($eventParticipants)) {
@@ -100,8 +110,17 @@ class EventNotifier extends BaseNotifier
             throw new \RuntimeException('Event review cant be empty');
         }
 
+        if (EventReviewStatusType::APPROVED === $event->getReview()->getStatus()) {
+            return $this->mailer->createAndSendMessage(
+                EventReviewApprovedMessage::class,
+                $event,
+                [],
+                $event->getAuthor()
+            );
+        }
+
         return $this->mailer->createAndSendMessage(
-            EventReviewMessage::class,
+            EventReviewRefusedMessage::class,
             $event,
             [],
             $event->getAuthor()

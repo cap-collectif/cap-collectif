@@ -15,8 +15,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OpinionNotifier extends BaseNotifier
 {
-    protected $consultationResolver;
-    protected $userUrlResolver;
+    protected OpinionUrlResolver $consultationResolver;
+    protected UserUrlResolver $userUrlResolver;
 
     public function __construct(
         MailerService $mailer,

@@ -148,7 +148,21 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                           "name": "id",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "updatedAt",
+                          "storageKey": null,
+                        },
                       ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "deletedAt",
                       "storageKey": null,
                     },
                     Object {
@@ -588,6 +602,7 @@ fragment EventFormPage_event_39ngnn on Event {
     refusedReason
     id
   }
+  deletedAt
   author {
     id
     isAdmin
@@ -628,6 +643,7 @@ fragment EventForm_event on Event {
   commentable
   customCode
   guestListEnabled
+  deletedAt
   themes {
     id
     title
@@ -652,6 +668,7 @@ fragment EventForm_event on Event {
     status
     comment
     refusedReason
+    updatedAt
     id
   }
   translations {

@@ -1,5 +1,4 @@
 {% extends "@CapcoMail/notifyEventLayout.html.twig" %}
-
 {% block email_body %}
     <div>
         <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:20px; font-family:helvetica, arial, sans-serif; text-align:left;">
@@ -7,7 +6,7 @@
                 {{ 'hello-username'|trans({'{username}': username,}, 'CapcoAppBundle', user_locale) | raw }}
             </p>
             <p>
-                {{ 'event-publication-request'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+                {{ 'event-delete-by-author'|trans({'{eventTitle}': eventTitle}, 'CapcoAppBundle', user_locale) | raw }}
             </p>
         </div>
     </div>

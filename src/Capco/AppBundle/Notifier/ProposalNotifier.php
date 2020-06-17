@@ -27,13 +27,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProposalNotifier extends BaseNotifier
 {
-    protected $proposalAdminUrlResolver;
-    protected $proposalUrlResolver;
-    protected $urlResolver;
-    private $translator;
-    private $userUrlResolver;
-    private $requestStack;
-    private $defaultLocale;
+    protected ProposalAdminUrlResolver $proposalAdminUrlResolver;
+    protected ProposalUrlResolver $proposalUrlResolver;
+    protected UrlResolver $urlResolver;
+    private TranslatorInterface $translator;
+    private UserUrlResolver $userUrlResolver;
+    private RequestStack $requestStack;
+    private string $defaultLocale;
 
     public function __construct(
         MailerService $mailer,

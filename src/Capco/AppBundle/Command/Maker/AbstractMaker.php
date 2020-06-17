@@ -168,6 +168,8 @@ abstract class AbstractMaker extends Command
 
             return new ReflectionClass($found[0]);
         }
+
+        return null;
     }
 
     protected function askSimpleQuestion(

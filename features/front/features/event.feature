@@ -138,6 +138,7 @@ Scenario: Logged in user wants to create an event
   Then I should be redirected to '/events/my-event'
   And I wait "#event-label-status" to appear on current page
   Then I should see "waiting-examination"
+  Then I should see "event-review-request-to-admin"
 
 @database
 Scenario: Logged in user wants to edit his refused event

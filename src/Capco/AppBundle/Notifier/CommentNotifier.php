@@ -28,13 +28,13 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CommentNotifier extends BaseNotifier
 {
-    protected $commentResolver;
-    protected $userUrlResolver;
-    protected $userShowNotificationsPreferencesUrlResolver;
-    protected $userDisableNotificationsUrlResolver;
-    protected $userShowUrlBySlugResolver;
-    protected $translator;
-    protected $commentShowUrlResolver;
+    protected CommentResolver $commentResolver;
+    protected UserUrlResolver $userUrlResolver;
+    protected UserShowNotificationsPreferencesUrlResolver $userShowNotificationsPreferencesUrlResolver;
+    protected UserDisableNotificationsUrlResolver $userDisableNotificationsUrlResolver;
+    protected UserShowUrlBySlugResolver $userShowUrlBySlugResolver;
+    protected TranslatorInterface $translator;
+    protected CommentShowUrlResolver $commentShowUrlResolver;
 
     public function __construct(
         MailerService $mailer,

@@ -57,7 +57,8 @@ class EventReviewVoter extends Voter
         if ($viewer->isSuperAdmin()) {
             return true;
         }
-        if($review->getStatus() === EventReviewStatusType::APPROVED){
+
+        if (EventReviewStatusType::AWAITING !== $review->getStatus()) {
             return false;
         }
 

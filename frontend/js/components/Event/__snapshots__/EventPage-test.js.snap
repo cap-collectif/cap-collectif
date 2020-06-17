@@ -1381,6 +1381,13 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "adminAwaitingEvents",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "id",
                       "storageKey": null,
                     },
@@ -1521,6 +1528,7 @@ fragment EventPageContainer_query_17yZ05 on Query {
         }
       }
     }
+    adminAwaitingEvents
     id
   }
   ...EventRefetch_query_307oU4
@@ -3018,6 +3026,13 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "adminAwaitingEvents",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "id",
                       "storageKey": null,
                     },
@@ -3158,6 +3173,7 @@ fragment EventPageContainer_query_17yZ05 on Query {
         }
       }
     }
+    adminAwaitingEvents
     id
   }
   ...EventRefetch_query_307oU4
@@ -4655,6 +4671,13 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "adminAwaitingEvents",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "id",
                       "storageKey": null,
                     },
@@ -4795,6 +4818,7 @@ fragment EventPageContainer_query_17yZ05 on Query {
         }
       }
     }
+    adminAwaitingEvents
     id
   }
   ...EventRefetch_query_307oU4

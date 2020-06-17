@@ -14,9 +14,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MailerFactory
 {
-    protected $translator;
-    protected $siteParams;
-    protected $router;
+    protected TranslatorInterface $translator;
+    protected SiteParameterResolver $siteParams;
+    protected RouterInterface $router;
 
     public function __construct(
         TranslatorInterface $translator,

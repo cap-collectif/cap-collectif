@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, FormattedDate, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
@@ -41,6 +42,11 @@ const PageTitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  h3 {
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e3e3e3;
+  }
 `;
 
 export const formName = 'EventForm';
@@ -61,7 +67,8 @@ export class EventForm extends React.Component<Props> {
       intl,
       handleSubmit,
     } = this.props;
-    const isDisabled = (): boolean => {
+
+    const isDisabled = (adminCanEdit = false): boolean => {
       if (
         query.viewer.isSuperAdmin ||
         (query.viewer.isAdmin && !features.allow_users_to_propose_events)
@@ -71,12 +78,16 @@ export class EventForm extends React.Component<Props> {
       if (!event) {
         return false;
       }
-      if (query.viewer.isAdmin && (event.author.isAdmin || event.review === null)) {
-        return false;
-      }
-      if (query.viewer.isAdmin && event.review?.status !== null) {
+      if (query.viewer.isAdmin && event.deletedAt !== null) {
         return true;
       }
+      if (query.viewer.isAdmin && (event.author?.isAdmin || event.review === null)) {
+        return false;
+      }
+      if (query.viewer.isAdmin && event.review?.status !== null && !adminCanEdit) {
+        return true;
+      }
+
       return !isFrontendView && !query.viewer.isAdmin;
     };
 
@@ -99,14 +110,38 @@ export class EventForm extends React.Component<Props> {
     return (
       <form className={`eventForm ${className || ''}`} onSubmit={handleSubmit}>
         {!isFrontendView && (
-          <PageTitleContainer>
-            <h3 className="box-title">
-              <FormattedMessage id="global.general" />
-            </h3>
-            <span className="mr-30 mt-15">
-              {features.unstable__multilangue && <LanguageButtonContainer />}
-            </span>
-          </PageTitleContainer>
+          <>
+            <PageTitleContainer>
+              <h3 className="box-title">
+                <FormattedMessage id="global.general" />
+              </h3>
+              <span className="mr-30 mt-15">
+                {features.unstable__multilangue && <LanguageButtonContainer />}
+              </span>
+            </PageTitleContainer>
+            <div className="color-dark-gray font-size-16">
+              {event &&
+                !event.author?.isAdmin &&
+                event.review &&
+                event.review?.status !== 'AWAITING' &&
+                event.review.updatedAt &&
+                features.allow_users_to_propose_events && (
+                  <FormattedMessage
+                    id="event-examined-on-date-by-administrator"
+                    values={{
+                      date: (
+                        <FormattedDate
+                          value={moment(event.review.updatedAt)}
+                          day="numeric"
+                          month="long"
+                          year="numeric"
+                        />
+                      ),
+                    }}
+                  />
+                )}
+            </div>
+          </>
         )}
         <div className="box-body">
           <Field
@@ -278,7 +313,7 @@ export class EventForm extends React.Component<Props> {
                 component={component}
                 disabled={
                   !!(currentValues && currentValues.link && currentValues.link !== null) ||
-                  isDisabled()
+                  isDisabled(true)
                 }
                 children={<FormattedMessage id="allow-inscriptions" />}
               />
@@ -310,7 +345,7 @@ export class EventForm extends React.Component<Props> {
                   id="event_commentable"
                   type="checkbox"
                   component={component}
-                  disabled={isDisabled()}
+                  disabled={isDisabled(true)}
                   children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
                 />
               </div>
@@ -439,8 +474,8 @@ const formContainer = reduxForm({
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
   if (props.event) {
-    const translation = props.event.translations
-      ? getTranslation(props.event.translations, state.language.currentLanguage)
+    const translation = props.event?.translations
+      ? getTranslation(props.event?.translations, state.language.currentLanguage)
       : undefined;
     return {
       currentLanguage: state.language.currentLanguage,
@@ -538,6 +573,7 @@ export default createFragmentContainer(container, {
       commentable
       customCode
       guestListEnabled
+      deletedAt
       themes {
         id
         title
@@ -562,6 +598,7 @@ export default createFragmentContainer(container, {
         status
         comment
         refusedReason
+        updatedAt
       }
       translations {
         locale

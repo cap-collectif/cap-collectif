@@ -144,7 +144,7 @@ class EventAdmin extends AbstractAdmin
                         return true;
                     },
                     'mapped' => false,
-                    'label' => 'global.published',
+                    'label' => 'global.status',
                     'translation_domain' => 'CapcoAppBundle'
                 ],
                 ChoiceType::class,
@@ -176,7 +176,8 @@ class EventAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
+                'template' => 'CapcoAdminBundle:Event:title_list_field.html.twig'
             ])
             ->add('startAt', null, [
                 'label' => 'start-date'

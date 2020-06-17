@@ -3,6 +3,7 @@
 exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
 <ProposalAnalysisPanel__PanelsSlider
   home={true}
+  id="proposal_analysis_panel"
 >
   <div
     style={
@@ -88,7 +89,9 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
           />
         </div>
       </ProposalAnalysisPanel__PanelSection>
-      <ProposalAnalysisPanel__PanelSection>
+      <ProposalAnalysisPanel__PanelSection
+        id="proposal_analysis_decision"
+      >
         <FormattedMessage
           id="global.decision"
           tagName="p"

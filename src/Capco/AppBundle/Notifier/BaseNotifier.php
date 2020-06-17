@@ -9,13 +9,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 abstract class BaseNotifier
 {
-    protected $mailer;
-    protected $siteParams;
-    protected $message;
-    protected $baseUrl;
-    protected $router;
-    protected $siteName;
-    protected $siteUrl;
+    protected MailerService $mailer;
+    protected SiteParameterResolver $siteParams;
+    protected string $baseUrl;
+    protected RouterInterface $router;
+    protected string $siteName;
+    protected string $siteUrl;
 
     public function __construct(
         MailerService $mailer,

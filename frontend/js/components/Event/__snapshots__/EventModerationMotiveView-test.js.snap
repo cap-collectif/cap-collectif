@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventModerationMotiveView /> renders correctly, with comment 1`] = `
+<EventModerationMotiveView__ViewContainer>
+  <FormattedMessage
+    id="admin.action.recent_contributions.trash.input_label"
+    values={Object {}}
+  />
+  <FormattedMessage
+    id="reporting.status.spam"
+    values={Object {}}
+  />
+  <Alert
+    bsClass="alert"
+    bsStyle="warning"
+    closeLabel="Close alert"
+  >
+    spamming is bad
+  </Alert>
+</EventModerationMotiveView__ViewContainer>
+`;
+
+exports[`<EventModerationMotiveView /> renders correctly, without comment 1`] = `
+<EventModerationMotiveView__ViewContainer>
+  <FormattedMessage
+    id="admin.action.recent_contributions.trash.input_label"
+    values={Object {}}
+  />
+  <FormattedMessage
+    id="reporting.status.spam"
+    values={Object {}}
+  />
+</EventModerationMotiveView__ViewContainer>
+`;

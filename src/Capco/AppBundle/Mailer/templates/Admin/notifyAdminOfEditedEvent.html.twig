@@ -6,7 +6,7 @@
                         {{ 'hello-username'|trans({'{username}': username,}, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                     <p>
-                        {{ 'you-received-event-modification-request'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+                        {{ 'you-received-event-modification-request'|trans({'{eventTitle}': eventTitle}, 'CapcoAppBundle', user_locale) | raw }}
                     </p>
                     <p>
                         <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;" href="{{ eventUrl }}" target="_blank" rel="noopener">

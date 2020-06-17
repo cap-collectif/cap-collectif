@@ -26,19 +26,16 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     public const QUESTIONNAIRE_REPLY_UPDATE_STATE = 'update';
     public const QUESTIONNAIRE_REPLY_DELETE_STATE = 'delete';
 
-    private $stepUrlResolver;
-    private $logger;
-    private $defaultLocale;
+    private LoggerInterface $logger;
+    private string $defaultLocale;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
-        StepUrlResolver $stepUrlResolver,
         LoggerInterface $logger,
         LocaleResolver $localeResolver
     ) {
-        $this->stepUrlResolver = $stepUrlResolver;
         $this->logger = $logger;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
         parent::__construct($mailer, $siteParams, $router, $localeResolver);

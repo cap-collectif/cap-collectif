@@ -1,31 +1,37 @@
 Capco\AppBundle\Entity\EventReview:
-  eventReview1:
-    id: reviewEvent15
-    status: awaiting
-    createdAt: <identity((new \DateTime('2015-01-14')))>
-  eventReview2:
-    id: reviewEvent16
-    status: approved
-    reviewer: '@user4'
-    createdAt: <identity((new \DateTime('2015-04-14')))>
-  eventReview3:
-    id: reviewEvent17
-    status: refused
-    reviewer: '@userMaxime'
-    createdAt: <identity((new \DateTime('2015-06-14')))>
-    refusedReason: spam
-    comment: 'This is a spam'
-  eventReview4:
-      id: reviewEvent18
-      status: refused
-      reviewer: '@userMaxime'
-      createdAt: <identity((new \DateTime('2015-06-14')))>
-      refusedReason: spam
-      comment: 'This is a spam'
-  eventReview5:
-      id: reviewEvent19
-      status: refused
-      reviewer: '@userMaxime'
-      createdAt: <identity((new \DateTime('2015-06-14')))>
-      refusedReason: spam
-      comment: 'This is a spam'
+    eventReview1:
+        id: reviewEvent15
+        status: awaiting
+        createdAt: <identity((new \DateTime('2015-01-14')))>
+    eventReview2:
+        id: reviewEvent16
+        status: approved
+        reviewer: '@user4'
+        createdAt: <identity((new \DateTime('2015-04-14')))>
+    eventReview3:
+        id: reviewEvent17
+        status: refused
+        reviewer: '@userMaxime'
+        createdAt: <identity((new \DateTime('2015-06-14')))>
+        refusedReason: spam
+        comment: 'This is a spam'
+    eventReview4:
+        id: reviewEvent18
+        status: refused
+        reviewer: '@userMaxime'
+        createdAt: <identity((new \DateTime('2015-06-14')))>
+        refusedReason: spam
+        comment: 'This is a spam'
+    eventReview5:
+        id: reviewEvent19
+        status: refused
+        reviewer: '@userMaxime'
+        createdAt: <identity((new \DateTime('2015-06-14')))>
+        refusedReason: spam
+        comment: 'This is a spam'
+    eventReview6:
+        id: reviewEvent20
+        status: refused
+        reviewer: '@userMaxime'
+        createdAt: <identity((new \DateTime('2015-06-14')))>
+        refusedReason: spam

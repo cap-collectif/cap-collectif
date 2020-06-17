@@ -107,7 +107,7 @@ Scenario: Logged in API client wants delete his event
               "participants":{
                  "totalCount":0
               },
-              "translations": []
+              "translations": [{"body":""}]
            }
         }
      }
@@ -197,7 +197,7 @@ Scenario: Logged in API client wants delete his event
               "participants":{
                  "totalCount":0
               },
-              "translations": []
+              "translations": [{"body":""}]
            }
         }
      }

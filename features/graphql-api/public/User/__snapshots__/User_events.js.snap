@@ -146,6 +146,16 @@ Object {
         Object {
           "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
           "node": Object {
+            "id": "RXZlbnQ6ZXZlbnRSZXZpZXdSZWZ1c2VkV2l0aG91dENvbW1lbnQ=",
+            "review": Object {
+              "status": "REFUSED",
+            },
+            "title": "evenement refusé, sans commentaire",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "node": Object {
             "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
             "review": Object {
               "status": "APPROVED",
@@ -154,7 +164,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
           "node": Object {
             "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXdhaXRpbmc=",
             "review": Object {
@@ -164,7 +174,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
           "node": Object {
             "id": "RXZlbnQ6ZXZlbnQ1",
             "review": null,
@@ -173,10 +183,10 @@ Object {
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "hasNextPage": false,
       },
-      "totalCount": 6,
+      "totalCount": 7,
     },
   },
 }

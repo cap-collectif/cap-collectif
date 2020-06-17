@@ -13,8 +13,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ReportNotifier extends BaseNotifier
 {
-    protected $translator;
-    protected $urlResolver;
+    protected TranslatorInterface $translator;
+    protected UrlResolver $urlResolver;
 
     public function __construct(
         MailerService $mailer,

@@ -14,6 +14,7 @@ exports[`<EventAdminFormPage /> it renders correctly with translations 1`] = `
             "id": "auth1",
             "isAdmin": true,
           },
+          "deletedAt": null,
           "id": "event1",
           "review": null,
           "translations": Array [
@@ -52,13 +53,6 @@ exports[`<EventAdminFormPage /> it renders correctly with translations 1`] = `
       bsClass="btn-toolbar"
       className="mt-45 box-content__toolbar"
     >
-      <Connect(SubmitButton)
-        disabled={false}
-        id="confirm-event-edit"
-        isSubmitting={false}
-        label="global.save"
-        onSubmit={[Function]}
-      />
       <Connect(DeleteModal)
         buttonConfirmMessage="global.removeDefinitively"
         closeDeleteModal={[Function]}
@@ -112,6 +106,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
             "id": "auth1",
             "isAdmin": true,
           },
+          "deletedAt": null,
           "id": "event1",
           "review": null,
           "translations": Array [],
@@ -135,13 +130,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
       bsClass="btn-toolbar"
       className="mt-45 box-content__toolbar"
     >
-      <Connect(SubmitButton)
-        disabled={false}
-        id="confirm-event-edit"
-        isSubmitting={false}
-        label="global.save"
-        onSubmit={[Function]}
-      />
       <Connect(DeleteModal)
         buttonConfirmMessage="global.removeDefinitively"
         closeDeleteModal={[Function]}
@@ -195,6 +183,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
             "id": "auth1",
             "isAdmin": true,
           },
+          "deletedAt": null,
           "id": "event1",
           "review": null,
           "translations": Array [],
@@ -218,13 +207,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
       bsClass="btn-toolbar"
       className="mt-45 box-content__toolbar"
     >
-      <Connect(SubmitButton)
-        disabled={false}
-        id="confirm-event-edit"
-        isSubmitting={false}
-        label="global.save"
-        onSubmit={[Function]}
-      />
       <Connect(DeleteModal)
         buttonConfirmMessage="global.removeDefinitively"
         closeDeleteModal={[Function]}
@@ -278,6 +260,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
             "id": "auth1",
             "isAdmin": true,
           },
+          "deletedAt": null,
           "id": "event1",
           "review": null,
           "translations": Array [],
@@ -301,13 +284,6 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
       bsClass="btn-toolbar"
       className="mt-45 box-content__toolbar"
     >
-      <Connect(SubmitButton)
-        disabled={false}
-        id="confirm-event-edit"
-        isSubmitting={false}
-        label="global.save"
-        onSubmit={[Function]}
-      />
       <Connect(DeleteModal)
         buttonConfirmMessage="global.removeDefinitively"
         closeDeleteModal={[Function]}
@@ -361,6 +337,7 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
             "id": "auth1",
             "isAdmin": true,
           },
+          "deletedAt": null,
           "id": "event1",
           "review": null,
           "translations": Array [],
@@ -460,13 +437,6 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
         isSubmitting={true}
         label="global.save"
         onSubmit={[Function]}
-      />
-      <AlertForm
-        invalid={true}
-        submitFailed={true}
-        submitSucceeded={true}
-        submitting={true}
-        valid={true}
       />
     </ButtonToolbar>
   </div>
