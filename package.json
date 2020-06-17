@@ -41,8 +41,7 @@
         "prettier:php": "prettier --parser php --write 'src/**/*.php'",
         "prettier:yaml": "prettier --parser yaml --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
         "prettier": "yarn run prettier:js",
-        "precommit": "flow status && lint-staged && yarn --cwd packages/trad-hook re",
-        "postinstall": "relay-flow-types-installer"
+        "precommit": "flow status && lint-staged && yarn --cwd packages/trad-hook re"
     },
     "workspaces": [
         "packages/*"
@@ -296,6 +295,7 @@
         "react-linkify": "^0.2.2",
         "react-nl2br": "^0.4.0",
         "react-on-rails": "^11.3.0",
+        "react-placeholder": "^4.0.2",
         "react-places-autocomplete": "^6.1.2",
         "react-radio": "^2.1.2",
         "react-radio-buttons": "^1.0.11",
@@ -320,11 +320,9 @@
         "relay-compiler-language-js-flow-uncommented": "^1.1.0",
         "relay-config": "^9.1.0",
         "relay-devtools": "^1.4.0",
-        "relay-flow-types-installer": "git+https://***REMOVED***:x-oauth-basic@github.com/cap-collectif/relay-flow-types-installer.git",
+        "relay-hooks": "^3.5.0",
         "relay-runtime": "^9.1.0",
         "relay-test-utils": "^9.1.0",
-        "relay-hooks": "^3.5.0",
-        "react-placeholder": "^4.0.2",
         "sass-loader": "^7.1.0",
         "source-map": "^0.7.3",
         "stickyfilljs": "^2.1.0",
