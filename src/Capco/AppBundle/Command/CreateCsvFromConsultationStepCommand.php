@@ -717,11 +717,8 @@ EOF;
             function ($edge) {
                 $this->addContributionVersionRow($edge['node']);
             },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionVersionsGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
+            function ($pageInfo) use ($contribution) {
+                return $this->getVersionsGraphQLQuery($contribution['id'], $pageInfo['endCursor']);
             }
         );
     }
@@ -757,6 +754,22 @@ ${voteFragment}
         }
       }
     }
+    ... on Version {
+        votes(first: ${votesPerPage}${votesAfterCursor}) {
+          totalCount
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              ...voteInfos
+            }
+          }
+        }
+      }
   }
 }
 EOF;
@@ -783,7 +796,7 @@ ${trashableFragment}
 ${sourceFragment}
 {
   node(id: "${opinionId}") {
-    ... on Opinion {
+    ... on Sourceable {
       sources(first: ${sourcesPerPage}${sourcesAfterCursor}) {
         totalCount
         pageInfo {
@@ -823,8 +836,8 @@ ${relatedFragment}
 ${reportingFragment}
 {
   node(id: "${opinionId}") {
-    ... on Opinion {
-      sources(first: ${reportingPerPage}${reportingsAfterCursor}) {
+    ... on Reportable {
+      reportings(first: ${reportingPerPage}${reportingsAfterCursor}) {
         totalCount
         pageInfo {
           startCursor
@@ -844,7 +857,7 @@ ${reportingFragment}
 EOF;
     }
 
-    private function getOpinionVersionsGraphQLQuery(
+    private function getVersionsGraphQLQuery(
         string $opinionId,
         ?string $versionsAfterCursor = null,
         int $versionPerPage = self::VERSION_PER_PAGE
@@ -948,10 +961,10 @@ EOF;
                 function ($edge) use ($version) {
                     $this->addContributionVotesRow($edge['node'], $version);
                 },
-                function ($pageInfos) use ($version) {
+                function ($pageInfo) use ($version) {
                     return $this->getOpinionVotesGraphQLQuery(
                         $version['id'],
-                        $pageInfos['endCursor']
+                        $pageInfo['endCursor']
                     );
                 }
             );

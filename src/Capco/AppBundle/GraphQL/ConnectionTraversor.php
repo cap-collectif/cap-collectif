@@ -27,11 +27,11 @@ class ConnectionTraversor
         do {
             $connection =
                 Arr::path($copied, $path) ??
-                Arr::path($copied, "data.node.${path}") ??
-                Arr::path($copied, "data.${path}");
+                (Arr::path($copied, "data.node.${path}") ?? Arr::path($copied, "data.${path}"));
             $edges = Arr::path($connection, 'edges');
             $pageInfo = Arr::path($connection, 'pageInfo');
             $endCursor = $pageInfo['endCursor'];
+
             if (\count($edges) > 0) {
                 foreach ($edges as $edge) {
                     $callback($edge, $pageInfo);
