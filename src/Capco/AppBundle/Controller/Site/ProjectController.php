@@ -33,9 +33,62 @@ use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ProjectController extends Controller
 {
+    protected $router;
+    private $translator;
+    private $exportDir;
+    private $siteParameterResolver;
+    private $projectUrlResolver;
+    private $questionnaireExportResultsUrlResolver;
+    private $projectStatResolver;
+    private $projectRepository;
+    private $opinionRepository;
+    private $opinionVersionRepository;
+    private $argumentRepository;
+    private $sourceRepository;
+    private $postRepository;
+    private $contributionResolver;
+    private $projectHelper;
+
+    public function __construct(
+        TranslatorInterface $translator,
+        RouterInterface $router,
+        ProjectUrlResolver $projectUrlResolver,
+        SiteParameterResolver $siteParameterResolver,
+        ProjectStatsResolver $projectStatResolver,
+        ProjectRepository $projectRepository,
+        OpinionRepository $opinionRepository,
+        OpinionVersionRepository $opinionVersionRepository,
+        ArgumentRepository $argumentRepository,
+        SourceRepository $sourceRepository,
+        ContributionResolver $contributionResolver,
+        ProjectHelper $projectHelper,
+        PostRepository $postRepository,
+        QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver,
+        $exportDir
+    ) {
+        $this->translator = $translator;
+        $this->router = $router;
+        $this->exportDir = $exportDir;
+        $this->projectUrlResolver = $projectUrlResolver;
+        $this->siteParameterResolver = $siteParameterResolver;
+        $this->projectRepository = $projectRepository;
+        $this->projectStatResolver = $projectStatResolver;
+
+        $this->postRepository = $postRepository;
+        $this->contributionResolver = $contributionResolver;
+        $this->projectHelper = $projectHelper;
+        $this->opinionRepository = $opinionRepository;
+        $this->opinionVersionRepository = $opinionVersionRepository;
+        $this->argumentRepository = $argumentRepository;
+        $this->sourceRepository = $sourceRepository;
+        $this->questionnaireExportResultsUrlResolver = $questionnaireExportResultsUrlResolver;
+    }
+
     /**
      * @Template("CapcoAppBundle:Project:lastProjects.html.twig")
      */
@@ -43,7 +96,7 @@ class ProjectController extends Controller
     {
         $props = $this->get('serializer')->serialize(
             [
-                'projects' => $this->get(ProjectRepository::class)->getLastPublished(
+                'projects' => $this->projectRepository->getLastPublished(
                     $max,
                     $offset,
                     $this->getUser()
@@ -76,7 +129,7 @@ class ProjectController extends Controller
     {
         $serializer = $this->get('serializer');
 
-        $steps = $this->get(ProjectStatsResolver::class)->getStepsWithStatsForProject($project);
+        $steps = $this->projectStatResolver->getStepsWithStatsForProject($project);
         $props = $serializer->serialize(
             ['projectId' => $project->getId(), 'steps' => $steps],
             'json'
@@ -95,20 +148,20 @@ class ProjectController extends Controller
     {
         if (!$project->canDisplay($this->getUser())) {
             throw $this->createNotFoundException(
-                $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle')
+                $this->translator->trans('project.error.not_found', [], 'CapcoAppBundle')
             );
         }
 
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new ProjectAccessDeniedException(
-                $this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle')
+                $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
             );
         }
 
-        $opinions = $this->get(OpinionRepository::class)->getTrashedByProject($project);
-        $versions = $this->get(OpinionVersionRepository::class)->getTrashedByProject($project);
-        $arguments = $this->get(ArgumentRepository::class)->getTrashedByProject($project);
-        $sources = $this->get(SourceRepository::class)->getTrashedByProject($project);
+        $opinions = $this->opinionRepository->getTrashedByProject($project);
+        $versions = $this->opinionVersionRepository->getTrashedByProject($project);
+        $arguments = $this->argumentRepository->getTrashedByProject($project);
+        $sources = $this->sourceRepository->getTrashedByProject($project);
 
         return [
             'project' => $project,
@@ -128,12 +181,8 @@ class ProjectController extends Controller
      */
     public function downloadQuestionnaireAction(Request $request, Questionnaire $questionnaire)
     {
-        $filePath = $this->get(QuestionnaireExportResultsUrlResolver::class)->getFilePath(
-            $questionnaire
-        );
-        $fileName = $this->get(QuestionnaireExportResultsUrlResolver::class)->getFileName(
-            $questionnaire
-        );
+        $filePath = $this->questionnaireExportResultsUrlResolver->getFilePath($questionnaire);
+        $fileName = $this->questionnaireExportResultsUrlResolver->getFileName($questionnaire);
 
         try {
             return $this->streamResponse(
@@ -148,7 +197,7 @@ class ProjectController extends Controller
 
             $flashBag->add(
                 'danger',
-                $this->get('translator')->trans('project.download.not_yet_generated')
+                $this->translator->trans('project.download.not_yet_generated')
             );
 
             return $this->redirect($request->headers->get('referer'));
@@ -167,27 +216,31 @@ class ProjectController extends Controller
      */
     public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
-        $path = sprintf('%s/public/export/', $this->container->getParameter('kernel.project_dir'));
         $filenameCsv = CreateCsvFromProposalStepCommand::getFilename($step);
         $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
 
-        $isCSV = file_exists($path . $filenameCsv);
+        $isCSV = file_exists($this->exportDir . $filenameCsv);
         $filename = $isCSV ? $filenameCsv : $filenameXlsx;
         $contentType = $isCSV ? 'text/csv' : 'application/vnd.ms-excel';
 
         try {
-            return $this->streamResponse($request, $path . $filename, $contentType, $filename);
+            return $this->streamResponse(
+                $request,
+                $this->exportDir . $filename,
+                $contentType,
+                $filename
+            );
         } catch (FileNotFoundException $exception) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
             $flashBag->add(
                 'danger',
-                $this->get('translator')->trans('project.download.not_yet_generated')
+                $this->translator->trans('project.download.not_yet_generated')
             );
 
             $referer = $request->headers->get('referer');
-            $homePageUrl = $this->get('router')->generate('app_homepage');
+            $homePageUrl = $this->router->generate('app_homepage');
 
             return $this->redirect($referer ?? $homePageUrl);
         }
@@ -217,9 +270,9 @@ class ProjectController extends Controller
      */
     public function showPostsAction(Project $project, $page)
     {
-        $pagination = $this->get(SiteParameterResolver::class)->getValue('blog.pagination.size');
+        $pagination = $this->siteParameterResolver->getValue('blog.pagination.size');
 
-        $posts = $this->get(PostRepository::class)->getSearchResults(
+        $posts = $this->postRepository->getSearchResults(
             $pagination,
             $page,
             null,
@@ -250,9 +303,9 @@ class ProjectController extends Controller
      */
     public function showContributorsAction(Project $project, $page)
     {
-        $pagination = $this->get(SiteParameterResolver::class)->getValue('contributors.pagination');
+        $pagination = $this->siteParameterResolver->getValue('contributors.pagination');
 
-        $contributors = $this->get(ContributionResolver::class)->getProjectContributorsOrdered(
+        $contributors = $this->contributionResolver->getProjectContributorsOrdered(
             $project,
             true,
             $pagination,
@@ -265,7 +318,7 @@ class ProjectController extends Controller
             $nbPage = ceil(\count($contributors) / $pagination);
         }
 
-        $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
+        $showVotes = $this->projectHelper->hasStepWithVotes($project);
 
         return [
             'project' => $project,
@@ -297,7 +350,7 @@ class ProjectController extends Controller
             }
         }
 
-        $limit = (int) $this->get(SiteParameterResolver::class)->getValue('projects.pagination');
+        $limit = (int) $this->siteParameterResolver->getValue('projects.pagination');
 
         return ['params' => $parameters, 'limit' => $limit];
     }
@@ -308,9 +361,7 @@ class ProjectController extends Controller
      */
     public function previewAction(Request $request, Project $project): Response
     {
-        $projectUrlResolver = $this->container->get(ProjectUrlResolver::class);
-
-        return new RedirectResponse($projectUrlResolver->__invoke($project));
+        return new RedirectResponse($this->projectUrlResolver->__invoke($project));
     }
 
     /**

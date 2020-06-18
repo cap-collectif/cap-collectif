@@ -75,3 +75,9 @@ services:
 
     Capco\AdminBundle\Controller\SettingsController:
         public: true
+
+    Capco\AppBundle\Controller\Site\ProjectController:
+        public: true
+        autowire: true
+        arguments:
+            $exportDir: '%kernel.project_dir%/public/export/'
