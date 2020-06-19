@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Finder\Finder;
@@ -33,7 +34,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         'trashedAt',
         'trashedReason',
         'responses_question_title',
-        'responses_formattedValue'
+        'responses_formattedValue',
     ];
 
     public const CONNECTIONS_EXPORT_PATHS = ['user_id', 'ipAddress', 'datetime', 'email'];
@@ -47,7 +48,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         'comment_publishedAt' => 'publishedAt',
         'comment_updatedAt' => 'updatedAt',
         'comment_pinned' => 'pinned',
-        'comment_publicationStatus' => 'publicationStatus'
+        'comment_publicationStatus' => 'publicationStatus',
     ];
     protected const COMMENTS_PER_PAGE = 150;
 
@@ -211,7 +212,7 @@ EOF;
                 'content' => $contentKey,
                 'columnName' => null,
                 'isMultiple' => false,
-                'closestPath' => $contentKey
+                'closestPath' => $contentKey,
             ];
         }
         if (isset($content[$keys[0]]) || \array_key_exists($keys[0], $content)) {
@@ -219,7 +220,7 @@ EOF;
                 return [
                     'content' => null,
                     'columnName' => null,
-                    'isMultiple' => false
+                    'isMultiple' => false,
                 ];
             }
 
@@ -234,7 +235,7 @@ EOF;
             'content' => $content,
             'columnName' => $columnName,
             'isMultiple' => true,
-            'closestPath' => $closestPath
+            'closestPath' => $closestPath,
         ];
     }
 
@@ -343,14 +344,14 @@ EOF;
             'arguments' => $this->getArgumentGraphQLQuery($userId),
             'sources' => $this->getSourceGraphQLQuery($userId),
             'votes' => $this->getVotesGraphQLQuery($userId),
-            'comments' => $this->getCommentsGraphQLQuery($userId)
+            'comments' => $this->getCommentsGraphQLQuery($userId),
         ];
 
         foreach ($types as $type => $query) {
             $datas[$type] = $this->executor
                 ->execute('internal', [
                     'query' => $query,
-                    'variables' => []
+                    'variables' => [],
                 ])
                 ->toArray();
         }
@@ -426,7 +427,7 @@ EOF;
 
         // set headers row
         $header = $this->getCleanHeadersName($data, $type);
-        $writer->addRow($header);
+        $writer->addRow(WriterEntityFactory::createRowFromArray($header));
 
         $rows = [];
         //we need to handle indepth arrays who are not mapped
@@ -459,14 +460,19 @@ EOF;
                 $rows[] = $value;
             }
         }
+
         if ('proposals' !== $type) {
             $rows = array_map([$this->exportUtils, 'parseCellValue'], $rows);
         }
 
         if (!empty($rows) && \is_array($rows[0])) {
+            foreach ($rows as $k => $row) {
+                $rows[$k] = WriterEntityFactory::createRowFromArray($row);
+            }
+
             $writer->addRows($rows);
         } else {
-            $writer->addRow($rows);
+            $writer->addRow(WriterEntityFactory::createRowFromArray($rows));
         }
 
         $writer->close();

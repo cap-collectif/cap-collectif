@@ -2,9 +2,8 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Common\Type;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Box\Spout\Reader\CSV\Reader;
-use Box\Spout\Reader\ReaderFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,7 +19,7 @@ class CreateUsersFromCsvCommand extends Command
     private $delimiter;
     private $container;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(?string $name, ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct($name);
@@ -70,6 +69,7 @@ class CreateUsersFromCsvCommand extends Command
         $loop = 1;
 
         foreach ($rows as $row) {
+            $row = $row->toArray();
             if (1 === $loop && !$this->isValidHeaders($row, $output)) {
                 return $this->generateContentException($output);
             }
@@ -102,7 +102,7 @@ class CreateUsersFromCsvCommand extends Command
     protected function getRows(): array
     {
         $rows = [];
-        $reader = ReaderFactory::create(Type::CSV);
+        $reader = ReaderEntityFactory::createCSVReader();
         $reader->setFieldDelimiter($this->delimiter ?? ';');
         $reader->open($this->filePath);
         if ($reader instanceof Reader) {

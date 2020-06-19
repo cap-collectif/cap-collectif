@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Resolver;
 
 use Box\Spout\Common\Exception\SpoutException;
 use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
@@ -22,7 +22,7 @@ class ProposalResolver
         'lastname',
         'followedAt',
         'userType_name',
-        'url'
+        'url',
     ];
     const FOLLOWER_FILE_EXPORT_NAME = 'followers_%proposal%_%date%';
 
@@ -74,9 +74,9 @@ class ProposalResolver
 
         try {
             /** @var WriterInterface $writer */
-            $writer = WriterFactory::create($fileType);
+            $writer = WriterEntityFactory::createWriter($fileType);
             $writer->openToFile($absolutePath);
-            $writer->addRow(self::FOLLOWER_HEADER);
+            $writer->addRow(WriterEntityFactory::createRowFromArray(self::FOLLOWER_HEADER));
             $writer->addRows($followers);
         } catch (SpoutException $spoutException) {
             $this->logger->addError(__METHOD__ . $spoutException->getMessage());

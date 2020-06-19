@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Toggle\Manager;
@@ -68,7 +69,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
                 $formattedHeaders[] = $header;
             }
         }
-        $this->writer->addRow($formattedHeaders);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($formattedHeaders));
 
         $formattedEntries = $this->getFormattedData($questionnaire);
         $rows = [];
@@ -77,7 +78,7 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
             foreach ($formattedHeaders as $header) {
                 $row[] = \array_key_exists($header, $formattedData) ? $formattedData[$header] : '';
             }
-            $rows[] = $row;
+            $rows[] = WriterEntityFactory::createRowFromArray($row);
         }
         $this->writer->addRows($rows);
         $this->writer->close();

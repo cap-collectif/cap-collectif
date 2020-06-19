@@ -256,6 +256,8 @@ services:
         bind:
             Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
 
+    Liuggio\ExcelBundle\Factory: ~
+
     Egulias\EmailValidator\EmailValidator:
         autowire: true
         class: 'Egulias\EmailValidator\EmailValidator'

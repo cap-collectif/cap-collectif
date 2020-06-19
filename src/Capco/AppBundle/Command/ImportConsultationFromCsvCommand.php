@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Common\Type;
+use Box\Spout\Common\Entity\Row;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Box\Spout\Reader\CSV\Reader;
-use Box\Spout\Reader\ReaderFactory;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
@@ -26,7 +26,7 @@ class ImportConsultationFromCsvCommand extends Command
 
     private $container;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(?string $name, ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct($name);
@@ -59,7 +59,13 @@ class ImportConsultationFromCsvCommand extends Command
                 InputOption::VALUE_NONE,
                 'Set this option to force data import even if opinion with same title are found.'
             )
-            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
+            ->addOption(
+                'delimiter',
+                'd',
+                InputOption::VALUE_OPTIONAL,
+                'Delimiter used in csv',
+                ';'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -133,10 +139,14 @@ class ImportConsultationFromCsvCommand extends Command
         $progress->start();
 
         $i = 1;
+        /**
+         * @var Row $row
+         */
         foreach ($opinions as $key => $row) {
             if (0 === $key) {
                 continue;
             }
+            $row = $row->toArray();
             /** @var OpinionType|null $opinionType */
             $opinionType = null;
             foreach (explode('|', $row[1]) as $index => $ot) {
@@ -146,7 +156,7 @@ class ImportConsultationFromCsvCommand extends Command
                         ->findOneBy([
                             'title' => $ot,
                             'parent' => null,
-                            'consultation' => $consultationStep->getFirstConsultation()
+                            'consultation' => $consultationStep->getFirstConsultation(),
                         ]);
                 } else {
                     $opinionType = $this->getContainer()
@@ -172,7 +182,7 @@ class ImportConsultationFromCsvCommand extends Command
                 ->get(OpinionRepository::class)
                 ->findOneBy([
                     'title' => $row[0],
-                    'consultation' => $consultationStep->getFirstConsultation()
+                    'consultation' => $consultationStep->getFirstConsultation(),
                 ]);
             if (\is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
@@ -222,7 +232,7 @@ class ImportConsultationFromCsvCommand extends Command
     protected function getOpinions(): array
     {
         /** @var Reader $reader */
-        $reader = ReaderFactory::create(Type::CSV);
+        $reader = ReaderEntityFactory::createCSVReader();
         $reader->setFieldDelimiter($this->delimiter ?? ';');
 
         $reader->open($this->filePath);

@@ -4,6 +4,10 @@ capco_locale:
     prefix: /
     options: { i18n: false }
 
+NelmioApiDocBundle:
+    resource: '@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml'
+    prefix: /api/doc
+
 # BO
 capco_admin:
     resource: '../../src/Capco/AdminBundle/Controller/'
@@ -215,7 +219,8 @@ capco_profile_edit:
 
 capco_change_password:
     path: /profile/change-password
-    defaults: { _controller: SonataUserBundle:ChangePassword:changePassword }
+    defaults:
+        { _controller: Sonata\UserBundle\Controller\ChangePasswordControlle:changePasswordAction }
 fos_user:
     resource: '@FOSUserBundle/Resources/config/routing/all.xml'
     options: { i18n: false }
@@ -246,7 +251,7 @@ capco_user:
 fos_user_registration_check_email:
     path: /check-email
     defaults:
-        _controller: SonataUserBundle:Registration:checkEmail
+        _controller: Sonata\UserBundle\Controller\RegistrationController\checkEmailAction
     options: { i18n: false }
 
 gallery:

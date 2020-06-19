@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
@@ -488,7 +489,9 @@ EOF;
 
                 $this->headersMap = $this->createHeadersMap($proposals);
                 $this->writer->addRow(
-                    array_merge(['contribution_type'], array_keys($this->headersMap))
+                    WriterEntityFactory::createRowFromArray(
+                        array_merge(['contribution_type'], array_keys($this->headersMap))
+                    )
                 );
                 $progress = new ProgressBar($output, (int) $totalCount);
                 $this->connectionTraversor->traverse(
@@ -511,11 +514,13 @@ EOF;
             } else {
                 // Add the header in CSV.
                 $this->writer->addRow(
-                    array_merge(
-                        ['contribution_type'],
+                    WriterEntityFactory::createRowFromArray(
                         array_merge(
-                            array_keys(self::PROPOSAL_HEADER),
-                            array_keys(self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER)
+                            ['contribution_type'],
+                            array_merge(
+                                array_keys(self::PROPOSAL_HEADER),
+                                array_keys(self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER)
+                            )
                         )
                     )
                 );
@@ -732,7 +737,7 @@ EOF;
         foreach ($this->headersMap as $columnName => $path) {
             $this->handleProposalValues($proposal, $columnName, $path, $row);
         }
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
 
         $this->reportingQuery($proposal, $output);
 
@@ -782,7 +787,7 @@ EOF;
             }
             $row[] = $val;
         }
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
     }
 
     protected function addProposalVotesRow(array $vote, array $proposal): void
@@ -810,7 +815,7 @@ EOF;
             }
         }
 
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
 
         $this->connectionTraversor->traverse(
             $news,
@@ -858,7 +863,7 @@ EOF;
             }
         }
 
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
 
         $this->connectionTraversor->traverse(
             $comment,
@@ -922,7 +927,7 @@ EOF;
             }
         }
 
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
     }
 
     protected function addProposalNewsCommentReportingRow(
@@ -956,7 +961,7 @@ EOF;
             }
         }
 
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
     }
 
     protected function addProposalCommentRow(array $comment, array $proposal): void
@@ -1028,7 +1033,7 @@ EOF;
             }
         }
 
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
     }
 
     protected function addProposalCommentVotesRow(
@@ -1053,7 +1058,7 @@ EOF;
             }
         }
 
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
     }
 
     protected function extractValueFromArray(string $name, array $news, $path)

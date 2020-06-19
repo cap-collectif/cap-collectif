@@ -3,10 +3,11 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
+use Capco\AppBundle\Command\WriterFactory;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -170,66 +171,70 @@ class ExportController extends Controller
         $writer = WriterFactory::create(Type::CSV);
         $response = new StreamedResponse(function () use ($writer, $data, $event) {
             $writer->openToFile('php://output');
-            $writer->addRow(USER_HEADERS_EVENTS);
+            $writer->addRow(WriterEntityFactory::createRowFromArray(USER_HEADERS_EVENTS));
             $this->connectionTraversor->traverse(
                 $data,
                 'participants',
                 function ($edge) use ($writer) {
                     $contributor = $edge['node'];
                     if (isset($contributor['id'])) {
-                        $writer->addRow([
-                            $contributor['id'],
-                            $contributor['email'],
-                            $contributor['username'],
-                            $contributor['userType'] ? $contributor['userType']['name'] : null,
-                            $edge['registeredAt'],
-                            $edge['registeredAnonymously'] ? 'yes' : 'no',
-                            $contributor['createdAt'],
-                            $contributor['updatedAt'],
-                            $contributor['lastLogin'],
-                            $contributor['rolesText'],
-                            $contributor['consentExternalCommunication'],
-                            $contributor['enabled'],
-                            $contributor['isEmailConfirmed'],
-                            $contributor['locked'],
-                            $contributor['phoneConfirmed'],
-                            $contributor['gender'],
-                            $contributor['dateOfBirth'],
-                            $contributor['websiteUrl'],
-                            $contributor['biography'],
-                            $contributor['address'],
-                            $contributor['zipCode'],
-                            $contributor['city'],
-                            $contributor['phone'],
-                            $contributor['url'],
-                        ]);
+                        $writer->addRow(
+                            WriterEntityFactory::createRowFromArray([
+                                $contributor['id'],
+                                $contributor['email'],
+                                $contributor['username'],
+                                $contributor['userType'] ? $contributor['userType']['name'] : null,
+                                $edge['registeredAt'],
+                                $edge['registeredAnonymously'] ? 'yes' : 'no',
+                                $contributor['createdAt'],
+                                $contributor['updatedAt'],
+                                $contributor['lastLogin'],
+                                $contributor['rolesText'],
+                                $contributor['consentExternalCommunication'],
+                                $contributor['enabled'],
+                                $contributor['isEmailConfirmed'],
+                                $contributor['locked'],
+                                $contributor['phoneConfirmed'],
+                                $contributor['gender'],
+                                $contributor['dateOfBirth'],
+                                $contributor['websiteUrl'],
+                                $contributor['biography'],
+                                $contributor['address'],
+                                $contributor['zipCode'],
+                                $contributor['city'],
+                                $contributor['phone'],
+                                $contributor['url'],
+                            ])
+                        );
                     } else {
-                        $writer->addRow([
-                            null,
-                            $contributor['notRegisteredEmail'],
-                            $contributor['username'],
-                            null,
-                            $edge['registeredAt'],
-                            $edge['registeredAnonymously'] ? 'yes' : 'no',
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                        ]);
+                        $writer->addRow(
+                            WriterEntityFactory::createRowFromArray([
+                                null,
+                                $contributor['notRegisteredEmail'],
+                                $contributor['username'],
+                                null,
+                                $edge['registeredAt'],
+                                $edge['registeredAnonymously'] ? 'yes' : 'no',
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                            ])
+                        );
                     }
                 },
                 function ($pageInfo) use ($event) {

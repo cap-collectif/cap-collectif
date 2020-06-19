@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Command;
 
+use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Exception\SpoutException;
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\CSV\Writer;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
@@ -87,7 +89,13 @@ class CreateUserAccountsFromCSVCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'set this option to generate email for imported users.'
             )
-            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
+            ->addOption(
+                'delimiter',
+                'd',
+                InputOption::VALUE_OPTIONAL,
+                'Delimiter used in csv',
+                ';'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -120,7 +128,7 @@ class CreateUserAccountsFromCSVCommand extends Command
             $writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
             $writer->setShouldAddBOM(false);
             $writer->openToFile($outputFilePath);
-            $writer->addRow($headersRow);
+            $writer->addRow(WriterEntityFactory::createRowFromArray($headersRow));
         } catch (SpoutException $spoutException) {
             throw new \RuntimeException(__METHOD__ . $spoutException->getMessage());
         }
@@ -188,21 +196,28 @@ class CreateUserAccountsFromCSVCommand extends Command
                     $confirmationUrl = $this->router->generate(
                         'account_confirm_email',
                         [
-                            'token' => $user->getConfirmationToken()
+                            'token' => $user->getConfirmationToken(),
                         ],
                         true
                     );
                     if ($sendEmail) {
                         $this->userNotifier->emailConfirmation($user);
                     }
-                    $writer->addRow([$user->getEmail(), $confirmationUrl]);
+                    $writer->addRow(
+                        WriterEntityFactory::createRowFromArray([
+                            $user->getEmail(),
+                            $confirmationUrl,
+                        ])
+                    );
                 } else {
-                    $writer->addRow([
-                        $user->getFirstname(),
-                        $user->getLastname(),
-                        $user->getEmail(),
-                        $generatedPassword
-                    ]);
+                    $writer->addRow(
+                        WriterEntityFactory::createRowFromArray([
+                            $user->getFirstname(),
+                            $user->getLastname(),
+                            $user->getEmail(),
+                            $generatedPassword,
+                        ])
+                    );
                 }
                 ++$createdCount;
             } catch (\Exception $e) {
@@ -224,6 +239,9 @@ class CreateUserAccountsFromCSVCommand extends Command
         $deduplicatedRows = [];
 
         foreach ($rows as $row) {
+            if ($row instanceof Row) {
+                $row = $row->toArray();
+            }
             $niddle = $row['email'];
             if (isset($deduplicatedRows[$niddle])) {
                 continue;

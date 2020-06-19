@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
@@ -135,7 +136,9 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         }
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
         $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
-        $this->writer->addRow(self::PUBLIC_USER_HEADERS_EVENTS);
+        $this->writer->addRow(
+            WriterEntityFactory::createRowFromArray(self::PUBLIC_USER_HEADERS_EVENTS)
+        );
         $writer = $this->writer;
 
         $totalCount = Arr::path($data, 'data.events.totalCount');
@@ -147,19 +150,23 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
             function ($edge) use ($writer, $progress) {
                 $contributor = $edge['node'];
                 if (isset($contributor['id'])) {
-                    $writer->addRow([
-                        $contributor['email'],
-                        $contributor['firstname'],
-                        $contributor['lastname'],
-                        $edge['registeredAnonymously'] ? 'yes' : 'no',
-                    ]);
+                    $writer->addRow(
+                        WriterEntityFactory::createRowFromArray([
+                            $contributor['email'],
+                            $contributor['firstname'],
+                            $contributor['lastname'],
+                            $edge['registeredAnonymously'] ? 'yes' : 'no',
+                        ])
+                    );
                 } else {
-                    $writer->addRow([
-                        $contributor['notRegisteredEmail'],
-                        $contributor['username'],
-                        null,
-                        $edge['registeredAnonymously'] ? 'yes' : 'no',
-                    ]);
+                    $writer->addRow(
+                        WriterEntityFactory::createRowFromArray([
+                            $contributor['notRegisteredEmail'],
+                            $contributor['username'],
+                            null,
+                            $edge['registeredAnonymously'] ? 'yes' : 'no',
+                        ])
+                    );
                 }
                 $progress->advance();
             },

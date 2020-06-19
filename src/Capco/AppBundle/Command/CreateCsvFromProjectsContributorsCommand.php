@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Toggle\Manager;
@@ -143,7 +144,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                 sprintf('%s/public/export/%s', $this->projectRootDir, $fileName)
             );
 
-            $this->writer->addRow(self::USER_HEADERS);
+            $this->writer->addRow(WriterEntityFactory::createRowFromArray(self::USER_HEADERS));
 
             if (!isset($project['data'])) {
                 $this->logger->error('GraphQL Query Error: ' . $project['error']);
@@ -185,7 +186,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                             $contributor['url'],
                         ]
                     );
-                    $this->writer->addRow($row);
+                    $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
                     $progress->advance();
                 },
                 function ($pageInfo) use ($id) {

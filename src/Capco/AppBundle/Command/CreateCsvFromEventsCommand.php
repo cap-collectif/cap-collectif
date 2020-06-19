@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
@@ -111,7 +112,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
         }
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
         $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
-        $this->writer->addRow(self::EVENTS_HEADERS);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray(self::EVENTS_HEADERS));
         $writer = $this->writer;
 
         $totalCount = Arr::path($data, 'data.events.totalCount');
@@ -122,33 +123,35 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
             'events',
             function ($edge) use ($writer, $progress) {
                 $event = $edge['node'];
-                $writer->addRow([
-                    $event['_id'],
-                    $event['id'],
-                    $event['title'],
-                    $event['body'],
-                    $event['media'] ? $event['media']['id'] : null,
-                    $event['media'] ? $event['media']['url'] : null,
-                    $event['author'] ? $event['author']['id'] : null,
-                    $event['author'] ? $event['author']['email'] : null,
-                    $event['createdAt'],
-                    $event['updatedAt'],
-                    $event['enabled'],
-                    $event['startAt'],
-                    $event['endAt'],
-                    $event['zipCode'],
-                    $event['address'],
-                    $event['city'],
-                    $event['country'],
-                    $event['lat'],
-                    $event['lng'],
-                    $event['link'],
-                    $event['guestListEnabled'],
-                    $event['comments'] ? $event['comments']['totalCount'] : null,
-                    $event['commentable'],
-                    $event['metaDescription'],
-                    $event['customCode'],
-                ]);
+                $writer->addRow(
+                    WriterEntityFactory::createRowFromArray([
+                        $event['_id'],
+                        $event['id'],
+                        $event['title'],
+                        $event['body'],
+                        $event['media'] ? $event['media']['id'] : null,
+                        $event['media'] ? $event['media']['url'] : null,
+                        $event['author'] ? $event['author']['id'] : null,
+                        $event['author'] ? $event['author']['email'] : null,
+                        $event['createdAt'],
+                        $event['updatedAt'],
+                        $event['enabled'],
+                        $event['startAt'],
+                        $event['endAt'],
+                        $event['zipCode'],
+                        $event['address'],
+                        $event['city'],
+                        $event['country'],
+                        $event['lat'],
+                        $event['lng'],
+                        $event['link'],
+                        $event['guestListEnabled'],
+                        $event['comments'] ? $event['comments']['totalCount'] : null,
+                        $event['commentable'],
+                        $event['metaDescription'],
+                        $event['customCode'],
+                    ])
+                );
                 $progress->advance();
             },
             function ($pageInfo) {

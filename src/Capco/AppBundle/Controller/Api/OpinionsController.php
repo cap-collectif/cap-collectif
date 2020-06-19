@@ -18,7 +18,8 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Form\ReportingType;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -63,14 +64,19 @@ class OpinionsController extends AbstractFOSRestController
     }
 
     /**
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Create an opinion.",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    404 = "Returned when opinion not found",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Create an opinion.",
+     *     @SWG\Response(
+     *         response="201",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Returned when opinion not found"
+     *     )
      * )
+     *
      *
      * @Post("/projects/{projectId}/steps/{stepId}/opinion_types/{typeId}/opinions")
      * @Entity("project", options={"mapping": {"projectId": "id"}})
@@ -188,15 +194,23 @@ class OpinionsController extends AbstractFOSRestController
     /**
      * Delete an opinion.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Delete an opinion",
-     *  statusCodes={
-     *    204 = "Returned when successful",
-     *    403 = "Returned when requesting user is not the opinion's author",
-     *    400 = "Returned when delete fail",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Delete an opinion",
+     *     @SWG\Response(
+     *         response="204",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="403",
+     *         description="Returned when requesting user is not the opinion's author"
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Returned when delete fail"
+     *     )
      * )
+     *
      *
      * @Delete("/opinions/{opinionId}")
      * @View(statusCode=204, serializerGroups={})

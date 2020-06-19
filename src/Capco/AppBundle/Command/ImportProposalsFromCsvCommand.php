@@ -2,9 +2,11 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Common\Type;
+use Box\Spout\Common\Entity\Row;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Box\Spout\Reader\CSV\Reader;
-use Box\Spout\Reader\ReaderFactory;
+use Box\Spout\Reader\CSV\RowIterator;
+use Box\Spout\Reader\CSV\Sheet;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Manager\MediaManager;
@@ -38,7 +40,7 @@ class ImportProposalsFromCsvCommand extends Command
         'category',
         'summary',
         'body',
-        'proposal_illustration'
+        'proposal_illustration',
     ];
 
     protected static $defaultName = 'capco:import:proposals-from-csv';
@@ -109,8 +111,13 @@ class ImportProposalsFromCsvCommand extends Command
                 InputOption::VALUE_NONE,
                 'Does the csv has illustrations path ?'
             )
-            ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';');
-
+            ->addOption(
+                'delimiter',
+                'd',
+                InputOption::VALUE_OPTIONAL,
+                'Delimiter used in csv',
+                ';'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
@@ -158,7 +165,9 @@ class ImportProposalsFromCsvCommand extends Command
         $progress->start();
 
         $loop = 1;
+        /** @var Row $row */
         foreach ($rows as $row) {
+            $row = $row->toArray();
             // if first line : check if headers are valid
             if (1 === $loop) {
                 if (!$this->isValidHeaders($output)) {
@@ -175,7 +184,7 @@ class ImportProposalsFromCsvCommand extends Command
 
                 /** @var User $author */
                 $author = $this->userRepository->findOneBy([
-                    'email' => $row[$this->headers['author']]
+                    'email' => $row[$this->headers['author']],
                 ]);
 
                 if (!$author) {
@@ -207,7 +216,7 @@ class ImportProposalsFromCsvCommand extends Command
 
                 $status = $this->statusRepository->findOneBy([
                     'name' => trim($row[$this->headers['collect_status']]),
-                    'step' => $this->proposalForm->getStep()
+                    'step' => $this->proposalForm->getStep(),
                 ]);
 
                 if (null === $author) {
@@ -231,7 +240,7 @@ class ImportProposalsFromCsvCommand extends Command
                 if ('' !== $row[$this->headers['category']]) {
                     $proposalCategory = $this->proposalCategoryRepository->findOneBy([
                         'name' => trim($row[$this->headers['category']]),
-                        'form' => $this->proposalForm
+                        'form' => $this->proposalForm,
                     ]);
                     $proposal->setCategory($proposalCategory);
                 }
@@ -363,16 +372,17 @@ class ImportProposalsFromCsvCommand extends Command
     protected function getRecords(): \Iterator
     {
         /** @var Reader $reader */
-        $reader = ReaderFactory::create(Type::CSV);
+        $reader = ReaderEntityFactory::createCSVReader();
         $reader->setFieldDelimiter($this->delimiter ?? ';');
 
         $reader->open($this->filePath);
-
+        /** @var Sheet $sheet */
         foreach ($reader->getSheetIterator() as $sheet) {
-            /** @var \Iterator $rows */
+            /** @var RowIterator $rows */
             $rows = $sheet->getRowIterator();
+            /** @var Row $row */
             foreach ($rows as $row) {
-                $a = $row;
+                $a = $row->toArray();
                 $this->questionsHeader = array_values(array_diff($a, self::HEADERS));
 
                 break;

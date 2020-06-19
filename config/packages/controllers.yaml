@@ -46,6 +46,14 @@ services:
     Capco\UserBundle\Controller\ProfileController:
         public: true
 
+    Capco\UserBundle\Controller\RedirectToServiceController:
+        public: true
+        arguments:
+            $firewallNames: '%hwi_oauth.firewall_names%'
+            $targetPathParameter: '%hwi_oauth.target_path_parameter%'
+            $failedUseReferer: '%hwi_oauth.failed_use_referer%'
+            $useReferer: '%hwi_oauth.use_referer%'
+
     Capco\AppBundle\Controller\Site\OpinionController:
         public: true
 

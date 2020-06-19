@@ -36,3 +36,11 @@ services:
     Capco\AppBundle\Command\CreateAccountsFromEmailsCommand:
         arguments:
             $name: 'capco:import:user-acounts-from-emails'
+
+    Capco\AppBundle\Command\CreateUsersFromCsvCommand:
+        arguments:
+            $name: 'capco:import:users'
+
+    Capco\AppBundle\Command\ImportConsultationFromCsvCommand:
+        arguments:
+            $name: 'capco:import:consultation-from-csv'

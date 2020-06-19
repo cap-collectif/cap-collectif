@@ -4,7 +4,8 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler;
 use Capco\AppBundle\Synthesis\Handler\SynthesisHandler;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Put;
@@ -30,15 +31,19 @@ class SynthesisController extends AbstractFOSRestController
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\Synthesis[]
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get all the syntheses",
-     *  output="Capco\AppBundle\Entity\Synthesis\Synthesis",
-     *  statusCodes={
-     *    200 = "Syntheses found",
-     *    404 = "No syntheses",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Get all the syntheses",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Syntheses found"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="No syntheses"
+     *     )
      * )
+     *
      * @Get("/syntheses")
      * @View(serializerGroups={"Syntheses", "Elements"})
      */
@@ -55,14 +60,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Create a synthesis from submitted data.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Create a synthesis",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    400 = "Returned when creation fail",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Create a synthesis",
+     *     @SWG\Response(
+     *         response="201",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Returned when creation fail"
+     *     )
      * )
+     *
      *
      * @Post("/syntheses")
      * @View(statusCode=201, serializerGroups={"SynthesisDetails", "Elements"})
@@ -88,14 +98,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Create a synthesis from submitted data and consultation step.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Create a synthesis from a consultation step",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    400 = "Returned when creation fail",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Create a synthesis from a consultation step",
+     *     @SWG\Response(
+     *         response="201",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Returned when creation fail"
+     *     )
      * )
+     *
      *
      * @Post("/syntheses/from-consultation-step/{id}")
      * @Entity("consultationStep", options={"mapping": {"id": "id"}})
@@ -126,14 +141,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Get a synthesis by id.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get a synthesis with all elements",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Synthesis does not exist",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Get a synthesis with all elements",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Synthesis does not exist"
+     *     )
      * )
+     *
      *
      * @Get("/syntheses/{id}", name="get_synthesis")
      * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -154,14 +174,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Update a synthesis.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Update a synthesis",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    400 = "Returned when update fail",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Update a synthesis",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Returned when update fail"
+     *     )
      * )
+     *
      *
      * @Put("/syntheses/{id}")
      * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -186,14 +211,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Get updated synthesis by id.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get updated synthesis with all elements",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Synthesis does not exist",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Get updated synthesis with all elements",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Synthesis does not exist"
+     *     )
      * )
+     *
      *
      * @Get("/syntheses/{id}/updated")
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
@@ -215,14 +245,47 @@ class SynthesisController extends AbstractFOSRestController
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get the elements of a synthesis, filtered by type",
-     *  statusCodes={
-     *    200 = "Syntheses element found",
-     *    404 = "Synthesis not found",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Get the elements of a synthesis, filtered by type",
+     *     @SWG\Parameter(
+     *         name="term",
+     *         in="query",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="query",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="offset",
+     *         in="query",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Syntheses element found"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Synthesis not found"
+     *     )
      * )
+     *
      *
      * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @QueryParam(name="term", nullable=true)
@@ -262,14 +325,33 @@ class SynthesisController extends AbstractFOSRestController
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get the tree of elements of a synthesis",
-     *  statusCodes={
-     *    200 = "Syntheses element found",
-     *    404 = "Synthesis not found",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Get the tree of elements of a synthesis",
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="query",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="parent",
+     *         in="query",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Syntheses element found"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Synthesis not found"
+     *     )
      * )
+     *
      *
      * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @QueryParam(name="type", nullable=true, default="published")
@@ -304,14 +386,26 @@ class SynthesisController extends AbstractFOSRestController
      *
      * @return array|\Capco\AppBundle\Entity\Synthesis\SynthesisElement[]
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Count the elements of a synthesis, filtered by type",
-     *  statusCodes={
-     *    200 = "Success",
-     *     404 = "Synthesis not found",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Count the elements of a synthesis, filtered by type",
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="query",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Success"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Synthesis not found"
+     *     )
      * )
+     *
      *
      * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @QueryParam(name="type", nullable=true)
@@ -334,21 +428,26 @@ class SynthesisController extends AbstractFOSRestController
             'count' => $this->get(SynthesisElementHandler::class)->countElementsFromSynthesisByType(
                 $synthesis,
                 $type
-            )
+            ),
         ];
     }
 
     /**
      * Get a synthesis element by id.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get the synthesis element",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Synthesis element does not exist",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Get the synthesis element",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Synthesis element does not exist"
+     *     )
      * )
+     *
      *
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}", name="get_synthesis_element")
      * @Entity("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -370,14 +469,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Create a synthesis element.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Create a synthesis element",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    400 = "Returned when creation fail",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Create a synthesis element",
+     *     @SWG\Response(
+     *         response="201",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Returned when creation fail"
+     *     )
      * )
+     *
      *
      * @Post("/syntheses/{id}/elements")
      * @Entity("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -408,14 +512,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Update a synthesis element.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Update a synthesis element",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    400 = "Returned when update fail",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Update a synthesis element",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="400",
+     *         description="Returned when update fail"
+     *     )
      * )
+     *
      *
      * @Put("/syntheses/{synthesisId}/elements/{elementId}")
      * @Entity("synthesis", options={"mapping": {"synthesisId": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -448,14 +557,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Get history of a synthesis element.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get history of a synthesis element",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when element is not found",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Get history of a synthesis element",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Returned when element is not found"
+     *     )
      * )
+     *
      *
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history", name="get_synthesis_element_history")
      * @Entity("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -478,14 +592,19 @@ class SynthesisController extends AbstractFOSRestController
     /**
      * Update synthesis display rules.
      *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Update synthesis display rules",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when synthesis is not found",
-     *  }
+     * @Operation(
+     *     tags={""},
+     *     summary="Update synthesis display rules",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     ),
+     *     @SWG\Response(
+     *         response="404",
+     *         description="Returned when synthesis is not found"
+     *     )
      * )
+     *
      *
      * @Put("/syntheses/{synthesis_id}/display")
      * @Entity("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})

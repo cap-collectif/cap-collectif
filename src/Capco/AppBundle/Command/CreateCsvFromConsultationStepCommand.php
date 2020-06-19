@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Utils\Arr;
@@ -17,6 +18,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 
 class CreateCsvFromConsultationStepCommand extends BaseExportCommand
 {
@@ -395,7 +397,9 @@ EOF;
     ): void {
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
         $this->writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $filename));
-        $this->writer->addRow(array_keys(self::COLUMN_MAPPING));
+        $this->writer->addRow(
+            WriterEntityFactory::createRowFromArray(array_keys(self::COLUMN_MAPPING), null)
+        );
 
         $contributionsQuery = $this->getContributionsGraphQLQueryByConsultationStep(
             $this->currentStep
@@ -635,7 +639,7 @@ EOF;
                 $row[] = $val;
             }
         }
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
 
         // we add Opinion's votes rows.
         $this->connectionTraversor->traverse(
@@ -662,7 +666,7 @@ EOF;
                     $row[] = '';
                 }
             }
-            $this->writer->addRow($row);
+            $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
         }
 
         // we add Opinion's sources rows.
@@ -1057,6 +1061,6 @@ EOF;
             }
             $this->recurviselySearchValue($arr, $node, $row);
         }
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
     }
 }

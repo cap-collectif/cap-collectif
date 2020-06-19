@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
 use Capco\AppBundle\Toggle\Manager;
@@ -79,7 +80,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'replies.totalCount' => 'repliesCount',
         'comments.totalCount' => 'commentsCount',
         'projects.totalCount' => 'projectsCount',
-        'deletedAccountAt' => 'deletedAccountAt'
+        'deletedAccountAt' => 'deletedAccountAt',
     ];
 
     private $customQuestions;
@@ -123,7 +124,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         $data = $this->executor
             ->execute('internal', [
                 'query' => $requestString,
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
@@ -132,7 +133,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 
         $header = $this->generateSheetHeader();
 
-        $this->writer->addRow($header);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($header));
 
         $totalCount = Arr::path($data, 'data.users.totalCount');
         $progress = new ProgressBar($output, (int) $totalCount);
@@ -203,7 +204,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
                 ++$i;
             }
         }
-        $this->writer->addRow($row);
+        $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
     }
 
     private function getUsersGraphQLQuery(?string $userCursor = null): string
@@ -329,7 +330,7 @@ EOF;
         $questionsTitles = $this->executor
             ->execute('internal', [
                 'query' => $registrationFormQuestionsQuery,
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 

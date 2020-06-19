@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -16,6 +17,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -68,7 +70,7 @@ const USER_HEADERS = [
     'user_zipCode',
     'user_city',
     'user_phone',
-    'user_profileUrl'
+    'user_profileUrl',
 ];
 
 class CreateStepContributorsCommand extends BaseExportCommand
@@ -103,42 +105,18 @@ class CreateStepContributorsCommand extends BaseExportCommand
         $this->stepRepository = $abstractStepRepository;
         parent::__construct($exportUtils);
     }
-    protected function execute(InputInterface $input, OutputInterface $output)
+
+    public static function getFilename(AbstractStep $step): string
     {
-        if (!$this->toggleManager->isActive('export')) {
-            $output->writeln('Please enable "export" feature to run this command');
-            return 1;
-        }
-        $delimiter = $input->getOption('delimiter');
-
-        $steps = $this->stepRepository->findAll();
-        foreach ($steps as $step) {
-            if ($step instanceof CollectStep || $step instanceof SelectionStep || $step instanceof QuestionnaireStep
-                || $step instanceof Consultation){
-                $fileName = self::getFilename($step);
-                $this->generateSheet($step, $fileName, $delimiter);
-                $this->executeSnapshot($input, $output, $fileName);
-            }
-        }
-
-        return 0;
-    }
-
-    public static function getFilename(AbstractStep $step) : string {
         return self::getShortenedFilename('participants_' . $step->getSlug());
     }
-    protected function configure(): void
-    {
-        parent::configure();
-        $this->configureSnapshot();
-        $this->setDescription('Create a csv file for each step');
-    }
 
-    public function generateSheet(AbstractStep $step, string $fileName, string $delimiter): void{
+    public function generateSheet(AbstractStep $step, string $fileName, string $delimiter): void
+    {
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getStepContributorsGraphQLQuery($step->getId()),
-                'variables' => []
+                'variables' => [],
             ])
             ->toArray();
 
@@ -148,36 +126,38 @@ class CreateStepContributorsCommand extends BaseExportCommand
         }
         $writer = WriterFactory::create(Type::CSV, $delimiter);
         $writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
-        $writer->addRow(USER_HEADERS);
+        $writer->addRow(WriterEntityFactory::createRowFromArray(USER_HEADERS));
         $this->connectionTraversor->traverse(
             $data,
             'contributors',
             function ($edge) use ($writer) {
                 $contributor = $edge['node'];
-                $writer->addRow([
-                    $contributor['id'],
-                    $contributor['email'],
-                    $contributor['username'],
-                    $contributor['userType'] ? $contributor['userType']['name'] : null,
-                    $contributor['createdAt'],
-                    $contributor['updatedAt'],
-                    $contributor['lastLogin'],
-                    $contributor['rolesText'],
-                    $contributor['consentExternalCommunication'],
-                    $contributor['enabled'],
-                    $contributor['isEmailConfirmed'],
-                    $contributor['locked'],
-                    $contributor['phoneConfirmed'],
-                    $contributor['gender'],
-                    $contributor['dateOfBirth'],
-                    $contributor['websiteUrl'],
-                    $contributor['biography'],
-                    $contributor['address'],
-                    $contributor['zipCode'],
-                    $contributor['city'],
-                    $contributor['phone'],
-                    $contributor['url']
-                ]);
+                $writer->addRow(
+                    WriterEntityFactory::createRowFromArray([
+                        $contributor['id'],
+                        $contributor['email'],
+                        $contributor['username'],
+                        $contributor['userType'] ? $contributor['userType']['name'] : null,
+                        $contributor['createdAt'],
+                        $contributor['updatedAt'],
+                        $contributor['lastLogin'],
+                        $contributor['rolesText'],
+                        $contributor['consentExternalCommunication'],
+                        $contributor['enabled'],
+                        $contributor['isEmailConfirmed'],
+                        $contributor['locked'],
+                        $contributor['phoneConfirmed'],
+                        $contributor['gender'],
+                        $contributor['dateOfBirth'],
+                        $contributor['websiteUrl'],
+                        $contributor['biography'],
+                        $contributor['address'],
+                        $contributor['zipCode'],
+                        $contributor['city'],
+                        $contributor['phone'],
+                        $contributor['url'],
+                    ])
+                );
             },
             function ($pageInfo) use ($step) {
                 return $this->getStepContributorsGraphQLQuery(
@@ -187,7 +167,42 @@ class CreateStepContributorsCommand extends BaseExportCommand
             }
         );
         $writer->close();
-        $this->logger->info(sprintf('Done generating %s/public/export/%s', $this->projectRootDir, $fileName));
+        $this->logger->info(
+            sprintf('Done generating %s/public/export/%s', $this->projectRootDir, $fileName)
+        );
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        if (!$this->toggleManager->isActive('export')) {
+            $output->writeln('Please enable "export" feature to run this command');
+
+            return 1;
+        }
+        $delimiter = $input->getOption('delimiter');
+
+        $steps = $this->stepRepository->findAll();
+        foreach ($steps as $step) {
+            if (
+                $step instanceof CollectStep ||
+                $step instanceof SelectionStep ||
+                $step instanceof QuestionnaireStep ||
+                $step instanceof Consultation
+            ) {
+                $fileName = self::getFilename($step);
+                $this->generateSheet($step, $fileName, $delimiter);
+                $this->executeSnapshot($input, $output, $fileName);
+            }
+        }
+
+        return 0;
+    }
+
+    protected function configure(): void
+    {
+        parent::configure();
+        $this->configureSnapshot();
+        $this->setDescription('Create a csv file for each step');
     }
 
     private function getStepContributorsGraphQLQuery(
