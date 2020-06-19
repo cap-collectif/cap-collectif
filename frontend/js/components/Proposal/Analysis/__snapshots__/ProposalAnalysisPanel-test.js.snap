@@ -35,6 +35,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
               canEdit={false}
               disabled={true}
               onClick={[Function]}
+              status="TOO_LATE"
               user={
                 Object {
                   "$fragmentRefs": null,

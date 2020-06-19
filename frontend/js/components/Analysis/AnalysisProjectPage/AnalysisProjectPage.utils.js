@@ -418,10 +418,18 @@ export const getUsersWithAnalyseBegin = (
 
   return onlySelectedProposals.reduce(
     (acc, proposal) => {
+      const assessmentStatus = getStatus(proposal.assessment);
+      const decisionStatus = getStatus(proposal.decision);
+
       if (analystsSelectedProposal.length > 0) {
         const analystsSelected = ((analystsSelectedProposal.filter(analyst => {
           const isAnalyst = proposal.analysts?.some(({ id }) => id === analyst.id);
-          const analyseStatus = getStatusAnalyst(proposal.analyses, analyst.id);
+          const analyseStatus = getStatusAnalyst(
+            proposal.analyses,
+            analyst.id,
+            decisionStatus,
+            assessmentStatus,
+          );
 
           if (isAnalyst && analyseStatus.name !== PROPOSAL_STATUS.TODO.name) {
             return analyst;
@@ -437,8 +445,8 @@ export const getUsersWithAnalyseBegin = (
         const supervisorSelected = ((supervisorsSelectedProposal.find(
           ({ id }) => id === proposal.supervisor?.id,
         ): any): Supervisor);
-        const analyseStatus = getStatus(proposal.assessment);
-        if (analyseStatus.name !== PROPOSAL_STATUS.TODO.name) {
+
+        if (assessmentStatus.name !== PROPOSAL_STATUS.TODO.name) {
           acc.supervisors.push(supervisorSelected);
         }
       }

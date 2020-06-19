@@ -10,6 +10,7 @@ import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { State } from '~/types';
 import ProposalFormSwitcher from './ProposalFormSwitcher';
+import { PROPOSAL_STATUS } from '~/constants/AnalyseConstants';
 
 const CloseIconContainer: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   right: 30px;
@@ -83,6 +84,27 @@ export const CloseIcon = ({ onClose }: { onClose: () => void }) => (
   </CloseIconContainer>
 );
 
+export const getStatus = (status: ?any, proposal: any) => {
+  if (
+    !status &&
+    ((proposal?.decision && proposal?.decision.state === PROPOSAL_STATUS.DONE.name.toUpperCase()) ||
+      (proposal?.assessment &&
+        (proposal?.assessment.state === PROPOSAL_STATUS.FAVOURABLE.name.toUpperCase() ||
+          proposal?.assessment.state === PROPOSAL_STATUS.UNFAVOURABLE.name.toUpperCase())))
+  ) {
+    return 'TOO_LATE';
+  }
+
+  if (
+    (status && status === PROPOSAL_STATUS.FAVOURABLE.name) ||
+    status === PROPOSAL_STATUS.UNFAVOURABLE.name
+  ) {
+    return status;
+  }
+
+  return status;
+};
+
 export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
   const [panelState, setPanelState] = useState<PanelState>('HOME');
   const [panelViewUser, setPanelViewUser] = useState<User>(user);
@@ -136,7 +158,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
                         !status && (closed || (proposalState && proposalState !== 'IN_PROGRESS'))
                       }
                       user={analyst}
-                      status={status?.state}
+                      status={getStatus(status?.state, proposal)}
                       onClick={(view: ?boolean) => {
                         setPanelViewUser({
                           id: analyst.id || '',
@@ -166,7 +188,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
                   }}
                   disabled={closed || proposal.assessment?.state === 'TOO_LATE'}
                   user={proposal.supervisor}
-                  status={proposal.assessment?.state}
+                  status={getStatus(proposal.assessment?.state, proposal)}
                 />
               </div>
             </PanelSection>

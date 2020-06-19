@@ -608,10 +608,18 @@ export const getUsersWithAnalyseBegin = (
 
   return onlySelectedProposals.reduce(
     (acc, proposal) => {
+      const decisionStatus = getStatus(proposal.decision, true);
+      const assessmentStatus = getStatus(proposal.assessment, false, decisionStatus);
+
       if (analystsSelectedProposal.length > 0) {
         const analystsSelected = ((analystsSelectedProposal.filter(analyst => {
           const isAnalyst = proposal.analysts?.some(({ id }) => id === analyst.id);
-          const analyseStatus = getStatusAnalyst(proposal.analyses, analyst.id);
+          const analyseStatus = getStatusAnalyst(
+            proposal.analyses,
+            analyst.id,
+            decisionStatus,
+            assessmentStatus,
+          );
 
           if (isAnalyst && analyseStatus.name !== PROPOSAL_STATUS.TODO.name) {
             return analyst;
@@ -627,9 +635,8 @@ export const getUsersWithAnalyseBegin = (
         const supervisorSelected = ((supervisorsSelectedProposal.find(
           ({ id }) => id === proposal.supervisor?.id,
         ): any): Supervisor);
-        const analyseStatus = getStatus(proposal.assessment);
 
-        if (analyseStatus.name !== PROPOSAL_STATUS.TODO.name) {
+        if (assessmentStatus.name !== PROPOSAL_STATUS.TODO.name) {
           acc.supervisors.push(supervisorSelected);
         }
       }
@@ -638,9 +645,8 @@ export const getUsersWithAnalyseBegin = (
         const decisionMakerSelected = ((decisionMakersSelectedProposal.find(
           ({ id }) => id === proposal.decisionMaker?.id,
         ): any): DecisionMaker);
-        const analyseStatus = getStatus(proposal.decision, true);
 
-        if (analyseStatus.name !== PROPOSAL_STATUS.TODO.name) {
+        if (decisionStatus.name !== PROPOSAL_STATUS.TODO.name) {
           acc.decisionMakers.push(decisionMakerSelected);
         }
       }

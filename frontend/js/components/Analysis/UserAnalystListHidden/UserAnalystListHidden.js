@@ -5,11 +5,14 @@ import { Overlay, Tooltip } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import {
   MAX_AVATAR_DISPLAY,
-  getStatus,
+  getStatus as getStatusAnalyst,
 } from '~/components/Analysis/UserAnalystList/UserAnalystList';
 import UserAvatar from '~/components/User/UserAvatar';
 import { AVATAR_SIZE } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style';
-import { getBadge } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
+import {
+  getBadge,
+  getStatus,
+} from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
 import { AvatarHidden } from '~ui/List/UserAvatarList';
 import type { UserAnalystListHidden_proposal } from '~relay/UserAnalystListHidden_proposal.graphql';
 import UserAnalystListHiddenContainer, {
@@ -27,7 +30,9 @@ type Props = {
 const UserAnalystListHidden = ({ proposal }: Props) => {
   const [isTooltipRestAnalystsDisplay, setTooltipRestAnalystsDisplay] = useState<boolean>(false);
   const refTooltipRestAnalysts = useRef(null);
-  const { analysts, analyses } = proposal;
+  const { analysts, analyses, decision, assessment } = proposal;
+  const decisionState = getStatus(decision, true);
+  const assessmentState = getStatus(assessment, false, decisionState);
 
   if (analysts && analysts.length === 0) return null;
 
@@ -64,7 +69,10 @@ const UserAnalystListHidden = ({ proposal }: Props) => {
                   user={analyst}
                   displayUrl={false}
                   size={HIDDEN_AVATAR_SIZE}
-                  badge={getBadge(getStatus(analyses, analyst.id), true)}
+                  badge={getBadge(
+                    getStatusAnalyst(analyses, analyst.id, decisionState, assessmentState),
+                    true,
+                  )}
                 />
                 <UsernameWrapper>{analyst.username}</UsernameWrapper>
               </UserAvatarWrapper>
@@ -89,6 +97,13 @@ export default createFragmentContainer(UserAnalystListHidden, {
         id
         username
         ...UserAvatar_user
+      }
+      decision {
+        isApproved
+        state
+      }
+      assessment {
+        state
       }
     }
   `,

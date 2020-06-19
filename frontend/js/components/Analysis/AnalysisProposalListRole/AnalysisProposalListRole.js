@@ -26,8 +26,28 @@ type Props = {|
   dispatch: any => void,
 |};
 
-export const getStatus = (analyse: ?Object, isDecisionMaker: boolean = false): Status => {
-  if (isEmpty(analyse) || !analyse) return PROPOSAL_STATUS.TODO;
+export const getStatus = (
+  analyse: ?Object,
+  isDecisionMaker: boolean = false,
+  decisionStatus?: Status,
+): Status => {
+  if (isEmpty(analyse) || !analyse) {
+    if (decisionStatus && decisionStatus.name === PROPOSAL_STATUS.DONE.name) {
+      return PROPOSAL_STATUS.TOO_LATE;
+    }
+
+    return PROPOSAL_STATUS.TODO;
+  }
+
+  const status = PROPOSAL_STATUS[analyse.state];
+
+  if (
+    !isDecisionMaker &&
+    decisionStatus &&
+    (status === PROPOSAL_STATUS.IN_PROGRESS || status === PROPOSAL_STATUS.TODO)
+  ) {
+    return PROPOSAL_STATUS.TOO_LATE;
+  }
 
   if (isDecisionMaker && analyse.state === 'DONE' && analyse.isApproved) {
     return PROPOSAL_STATUS.DONE;
@@ -37,7 +57,7 @@ export const getStatus = (analyse: ?Object, isDecisionMaker: boolean = false): S
     return PROPOSAL_STATUS.UNFAVOURABLE;
   }
 
-  return PROPOSAL_STATUS[analyse.state];
+  return status;
 };
 
 export const getBadge = ({ icon, color }: Status, isSmall: boolean = false): Badge => ({
@@ -50,6 +70,8 @@ export const getBadge = ({ icon, color }: Status, isSmall: boolean = false): Bad
 
 const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
   const { assessment, decision, supervisor, decisionMaker } = proposal;
+  const decisionStatus = getStatus(decision, true);
+  const assessmentStatus = getStatus(assessment, false, decisionStatus);
   const intl = useIntl();
 
   return (
@@ -71,7 +93,7 @@ const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
               user={supervisor}
               displayUrl={false}
               size={AVATAR_SIZE}
-              badge={getBadge(getStatus(assessment))}
+              badge={getBadge(assessmentStatus)}
               onClick={() => dispatch({ type: 'CHANGE_SUPERVISOR_FILTER', payload: supervisor.id })}
             />
           </OverlayTrigger>
@@ -91,7 +113,7 @@ const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
               user={decisionMaker}
               displayUrl={false}
               size={AVATAR_SIZE}
-              badge={getBadge(getStatus(decision, true))}
+              badge={getBadge(decisionStatus)}
               onClick={() =>
                 dispatch({ type: 'CHANGE_DECISION_MAKER_FILTER', payload: decisionMaker.id })
               }

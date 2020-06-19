@@ -8,6 +8,7 @@ import { AVATAR_SIZE } from '~/components/Analysis/AnalysisProposalListRole/Anal
 import UserAvatar from '~/components/User/UserAvatar';
 import {
   getBadge,
+  getStatus as getHeadStatus,
   type Status,
 } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
 import type { UserAnalystList_proposal } from '~relay/UserAnalystList_proposal.graphql';
@@ -19,18 +20,32 @@ import { PROPOSAL_STATUS } from '~/constants/AnalyseConstants';
 
 export const MAX_AVATAR_DISPLAY = 3;
 
-export const getStatus = (analyses: ?$ReadOnlyArray<Object>, idUser: string): Status => {
+export const getStatus = (
+  analyses: ?$ReadOnlyArray<Object>,
+  idUser: string,
+  decisionState: Status,
+  assessmentState: Status,
+): Status => {
   let status = PROPOSAL_STATUS.TODO;
 
-  if (!analyses || analyses?.length === 0) return status;
+  if (analyses && analyses?.length > 0) {
+    analyses.forEach(analyse => {
+      const isAnalyseMadeByUser = analyse.updatedBy.id === idUser;
 
-  analyses.forEach(analyse => {
-    const isAnalyseMadeByUser = analyse.updatedBy.id === idUser;
-
-    if (isAnalyseMadeByUser) {
-      status = PROPOSAL_STATUS[analyse.state];
-    }
-  });
+      if (isAnalyseMadeByUser) {
+        status = PROPOSAL_STATUS[analyse.state];
+      }
+    });
+  }
+  if (
+    decisionState.name === PROPOSAL_STATUS.DONE.name ||
+    ((assessmentState.name === PROPOSAL_STATUS.FAVOURABLE.name ||
+      assessmentState.name === PROPOSAL_STATUS.UNFAVOURABLE.name) &&
+      (status.name === PROPOSAL_STATUS.TODO.name ||
+        status.name === PROPOSAL_STATUS.IN_PROGRESS.name))
+  ) {
+    return PROPOSAL_STATUS.TOO_LATE;
+  }
 
   return status;
 };
@@ -42,7 +57,9 @@ type Props = {
 
 const UserAnalystList = ({ proposal, dispatch }: Props) => {
   const intl = useIntl();
-  const { analysts, analyses } = proposal;
+  const { analysts, analyses, decision, assessment } = proposal;
+  const decisionState = getHeadStatus(decision, true);
+  const assessmentState = getHeadStatus(assessment, false, decisionState);
 
   if (analysts && analysts.length === 0) return null;
 
@@ -68,7 +85,7 @@ const UserAnalystList = ({ proposal, dispatch }: Props) => {
               user={analyst}
               displayUrl={false}
               size={AVATAR_SIZE}
-              badge={getBadge(getStatus(analyses, analyst.id))}
+              badge={getBadge(getStatus(analyses, analyst.id, decisionState, assessmentState))}
               onClick={() => dispatch({ type: 'CHANGE_ANALYSTS_FILTER', payload: [analyst.id] })}
             />
           </OverlayTrigger>
@@ -94,6 +111,13 @@ export default createFragmentContainer(UserAnalystList, {
         id
         username
         ...UserAvatar_user
+      }
+      decision {
+        isApproved
+        state
+      }
+      assessment {
+        state
       }
       ...UserAnalystListHidden_proposal
     }
