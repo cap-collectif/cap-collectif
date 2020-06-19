@@ -41,6 +41,7 @@ export const ICON_NAME: {
   message: 'message',
   messageBubble: 'messageBubble',
   messageBubbleCheck: 'messageBubbleCheck',
+  download: 'download',
   doubleMessageBubble: 'doubleMessageBubble',
   taskList: 'taskList',
   done: 'done',
@@ -81,6 +82,7 @@ export const ICON_NAME: {
   close: 'close',
   error: 'error',
   trash: 'trash',
+  download: 'download',
   trash2: 'trash2',
   arrowDown: 'arrowDown',
   menu: 'menu',
@@ -202,6 +204,8 @@ const getIcon = name => {
       return <Icons.Message />;
     case 'doubleMessageBubble':
       return <Icons.DoubleMessageBubble />;
+    case 'download':
+      return <Icons.DownLoad />;
     case 'messageBubble':
       return <Icons.MessageBubble />;
     case 'taskList':

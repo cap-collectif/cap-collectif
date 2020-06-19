@@ -1,7 +1,10 @@
 // @flow
 import * as React from 'react';
+import styled, { type StyledComponent } from 'styled-components';
+import { Button } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import colors from '~/utils/colors';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import * as S from './ProjectAdminProposals.style';
@@ -63,6 +66,75 @@ type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
 |};
+
+export const ExportButtonStyle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex: 1;
+  margin-right: 10px;
+  justify-content: flex-end;
+  div[role='button'] {
+    background: white;
+    border-radius: 4px;
+    border: 1px solid rgb(238, 238, 238);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .icon-button {
+    border: none;
+    background: none;
+  }
+
+  svg.tooltip-icon-color:hover {
+    fill: ${colors.blue};
+    cursor: pointer;
+  }
+
+  .export-button-container {
+    display: flex;
+    flex: 1;
+    margin-bottom: 6px;
+  }
+
+  .export-info-container {
+    button {
+      border: none;
+      background: none;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 5px;
+  }
+
+  div[role='menu'] {
+    width: 100%;
+    .start-no-bold {
+      span {
+        font-weight: normal;
+        padding-left: 0;
+        color: #333;
+      }
+    }
+    .bold-content,
+    .bold-content span {
+      font-weight: 700;
+      color: #333;
+    }
+  }
+
+  p {
+    padding-left: 6px;
+    padding-right: 2px;
+  }
+
+  svg.no-transform-svg {
+    transform: none;
+  }
+`;
 
 const assignStepProposals = async (
   stepsAdded: Uuid[],
@@ -287,7 +359,6 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
           <S.Divider />
         </>
       )}
-
       <AnalysisFilterContainer>
         <Collapsable
           align="right"
@@ -478,6 +549,74 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
               />
             </InlineSelect.Choice>
           </InlineSelect>
+
+          <ExportButtonStyle>
+            <Collapsable align="right" key="export-button">
+              <Collapsable.Button>
+                <Icon
+                  name={ICON_NAME.download}
+                  size="12px"
+                  className="no-transform-svg"
+                  classNames="icon-button-export"
+                />
+                <FormattedMessage tagName="p" id="global.export" />
+              </Collapsable.Button>
+
+              <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'label.export.by.step' })}>
+                <DropdownSelect
+                  title={
+                    <div className="export-info-container">
+                      <FormattedMessage id="label.export.by.step" />
+                      <Button
+                        className="icon-button"
+                        onClick={() => {
+                          window.open(
+                            'https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif',
+                          );
+                        }}>
+                        <Icon
+                          className="ml-20 tooltip-icon-color"
+                          name={ICON_NAME.information}
+                          size="16px"
+                          color="rgb(204, 204, 204)"
+                          title={intl.formatMessage({ id: 'label.export.by.step' })}
+                        />
+                      </Button>
+                    </div>
+                  }>
+                  {project?.exportableSteps &&
+                    project.exportableSteps.filter(Boolean).map(projectAbstractStep => {
+                      const { position, step } = projectAbstractStep;
+                      return (
+                        <div className="start-no-bold">
+                          <DropdownSelect.Choice
+                            key={step.id}
+                            value={step.slug ?? ''}
+                            onClick={() => {
+                              window.open(
+                                `/projects/${project.slug}/step/${step.slug ?? ''}/download`,
+                              );
+                            }}>
+                            <strong className="bold-content">
+                              <FormattedMessage id="admin.label.step" />
+                              {` ${position ?? 0} ${step.title}`}
+                            </strong>
+                            {` - `}
+                            <FormattedMessage
+                              id={
+                                step.isQuestionnaireStep
+                                  ? 'list-of-answers'
+                                  : 'list-of-contributions'
+                              }
+                            />
+                          </DropdownSelect.Choice>
+                        </div>
+                      );
+                    })}
+                </DropdownSelect>
+              </Collapsable.Element>
+            </Collapsable>
+          </ExportButtonStyle>
           <ClearableInput
             id="search"
             name="search"
@@ -586,6 +725,16 @@ export default createPaginationContainer(
         ) {
         id
         adminAlphaUrl
+        slug
+        exportableSteps {
+          position
+          step {
+            id
+            title
+            isQuestionnaireStep
+            slug
+          }
+        }
         steps {
           __typename
           id

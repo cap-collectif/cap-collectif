@@ -71,6 +71,8 @@ def snapshots(tags='false'):
         'capco:export:step-contributors --quiet --updateSnapshot --delimiter ","',
         'capco:export:proposalStep --quiet --updateSnapshot --delimiter ","',
         'capco:export:events:participants --quiet --updateSnapshot --delimiter ","',
+        'capco:export:analysis --quiet --updateSnapshot --delimiter ","',
+        'capco:export:analysis --only-decisions --quiet --updateSnapshot --delimiter ","'
     ]
     user_archives_commands = [
         'capco:export:user userAdmin --updateSnapshot --delimiter ","',

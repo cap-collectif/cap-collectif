@@ -14,6 +14,8 @@ __snapshots-diff__/*
 /public/media/*
 /public/uploads/*
 /public/export/*
+/public/fonts/
+/public/fonts/OpenSans-regular.ttf
 
 app/bootstrap.php.cache
 

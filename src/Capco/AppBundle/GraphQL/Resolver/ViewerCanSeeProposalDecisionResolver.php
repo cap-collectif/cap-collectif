@@ -18,8 +18,16 @@ class ViewerCanSeeProposalDecisionResolver
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function isGranted($viewer, Proposal $proposal): bool
+    public function __invoke($viewer, Proposal $proposal, ?\ArrayObject $context = null): bool
     {
+        return $this->isGranted($viewer, $proposal, $context);
+    }
+
+    public function isGranted($viewer, Proposal $proposal, ?\ArrayObject $context = null): bool
+    {
+        if ($this->isACLDisabled($context)) {
+            return true;
+        }
         $this->preventNullableViewer($viewer);
 
         return $this->authorizationChecker->isGranted(

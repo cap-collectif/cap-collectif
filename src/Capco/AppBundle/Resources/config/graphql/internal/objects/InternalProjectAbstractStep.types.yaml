@@ -1,0 +1,14 @@
+InternalProjectAbstractStep:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: ProjectAbstractStep
+        description: 'A project abstract step.'
+        fields:
+            step:
+                description: 'The step of the association'
+                type: 'InternalStep!'
+            position:
+                description: "The step's position"
+                type: 'Int'

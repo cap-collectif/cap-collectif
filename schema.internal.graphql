@@ -1375,6 +1375,12 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   """The step's custom code"""
   customCode: String
 
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -2089,6 +2095,12 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -4880,6 +4892,12 @@ type OtherStep implements Step {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
 }
 
 """A page."""
@@ -5080,6 +5098,12 @@ type PresentationStep implements Step {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
 }
 
 """A vote that can be anonymous."""
@@ -5475,6 +5499,21 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """list of proposal categories on the project"""
   categories: [ProposalCategory!]!
+
+  """list of exportable steps in the project"""
+  exportableSteps: [ProjectAbstractStep]!
+}
+
+"""A project abstract step."""
+type ProjectAbstractStep {
+  """The ID of an object"""
+  id: ID!
+
+  """The step of the association"""
+  step: Step!
+
+  """The step's position"""
+  position: Int
 }
 
 """A connection to a list of items."""
@@ -6505,6 +6544,12 @@ interface ProposalStep {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
 
   """A list of proposals associated to the object."""
   proposals(
@@ -7544,6 +7589,12 @@ type QuestionnaireStep implements Node & Step {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
   footer: String
 
   """A list of contributor associated with the step."""
@@ -7618,6 +7669,12 @@ type RankingStep implements Node & Step {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
 }
@@ -8448,6 +8505,12 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The step's custom code"""
   customCode: String
 
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -9137,6 +9200,12 @@ interface Step {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
 }
 
 """Ways in which lists of steps can be ordered upon return."""
@@ -9247,6 +9316,12 @@ type SynthesisStep implements Step & Node {
 
   """The step's custom code"""
   customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """The step is a questionnaire step or not"""
+  isQuestionnaireStep: Boolean
 
   """Legacy url to edit a synthesis."""
   editSynthesisUrl: URI

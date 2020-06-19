@@ -57,6 +57,108 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           />
         </InlineSelect.Choice>
       </InlineSelect>
+      <ProjectAdminProposals__ExportButtonStyle>
+        <Collapsable
+          align="right"
+          key="export-button"
+        >
+          <CollapsableButton>
+            <Icon
+              className="no-transform-svg"
+              classNames="icon-button-export"
+              name="download"
+              size="12px"
+            />
+            <FormattedMessage
+              id="global.export"
+              tagName="p"
+              values={Object {}}
+            />
+          </CollapsableButton>
+          <CollapsableElement
+            ariaLabel="label.export.by.step"
+          >
+            <DropdownSelect
+              title={
+                <div
+                  className="export-info-container"
+                >
+                  <FormattedMessage
+                    id="label.export.by.step"
+                    values={Object {}}
+                  />
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="default"
+                    className="icon-button"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <Icon
+                      className="ml-20 tooltip-icon-color"
+                      color="rgb(204, 204, 204)"
+                      name="information"
+                      size="16px"
+                      title="label.export.by.step"
+                    />
+                  </Button>
+                </div>
+              }
+            >
+              <div
+                className="start-no-bold"
+              >
+                <DropdownSelect.Choice
+                  key="selectionStep1"
+                  onClick={[Function]}
+                  value="selection-step-1"
+                >
+                  <strong
+                    className="bold-content"
+                  >
+                    <FormattedMessage
+                      id="admin.label.step"
+                      values={Object {}}
+                    />
+                     0 selectionStep1
+                  </strong>
+                   - 
+                  <FormattedMessage
+                    id="list-of-answers"
+                    values={Object {}}
+                  />
+                </DropdownSelect.Choice>
+              </div>
+              <div
+                className="start-no-bold"
+              >
+                <DropdownSelect.Choice
+                  key="selectionStep2"
+                  onClick={[Function]}
+                  value="selection-step-2"
+                >
+                  <strong
+                    className="bold-content"
+                  >
+                    <FormattedMessage
+                      id="admin.label.step"
+                      values={Object {}}
+                    />
+                     1 selectionStep2
+                  </strong>
+                   - 
+                  <FormattedMessage
+                    id="list-of-contributions"
+                    values={Object {}}
+                  />
+                </DropdownSelect.Choice>
+              </div>
+            </DropdownSelect>
+          </CollapsableElement>
+        </Collapsable>
+      </ProjectAdminProposals__ExportButtonStyle>
       <ClearableInput
         icon={
           <i
@@ -88,6 +190,26 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
             Object {
               "$refType": null,
               "adminAlphaUrl": "http://example.com",
+              "exportableSteps": Array [
+                Object {
+                  "position": 0,
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "isQuestionnaireStep": true,
+                    "slug": "selection-step-1",
+                    "title": "selectionStep1",
+                  },
+                },
+                Object {
+                  "position": 1,
+                  "step": Object {
+                    "id": "selectionStep2",
+                    "isQuestionnaireStep": false,
+                    "slug": "selection-step-2",
+                    "title": "selectionStep2",
+                  },
+                },
+              ],
               "id": "UHJvamVjdDpwcm9qZWN0Ng==",
               "proposals": Object {
                 "edges": Array [
@@ -411,6 +533,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "proposalsTrashed": Object {
                 "totalCount": 3,
               },
+              "slug": "je-suis-un-slug",
               "steps": Array [
                 Object {
                   "__typename": "CollectStep",
@@ -967,6 +1090,84 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           />
         </InlineSelect.Choice>
       </InlineSelect>
+      <ProjectAdminProposals__ExportButtonStyle>
+        <Collapsable
+          align="right"
+          key="export-button"
+        >
+          <CollapsableButton>
+            <Icon
+              className="no-transform-svg"
+              classNames="icon-button-export"
+              name="download"
+              size="12px"
+            />
+            <FormattedMessage
+              id="global.export"
+              tagName="p"
+              values={Object {}}
+            />
+          </CollapsableButton>
+          <CollapsableElement
+            ariaLabel="label.export.by.step"
+          >
+            <DropdownSelect
+              title={
+                <div
+                  className="export-info-container"
+                >
+                  <FormattedMessage
+                    id="label.export.by.step"
+                    values={Object {}}
+                  />
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="default"
+                    className="icon-button"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <Icon
+                      className="ml-20 tooltip-icon-color"
+                      color="rgb(204, 204, 204)"
+                      name="information"
+                      size="16px"
+                      title="label.export.by.step"
+                    />
+                  </Button>
+                </div>
+              }
+            >
+              <div
+                className="start-no-bold"
+              >
+                <DropdownSelect.Choice
+                  key="selectionStep1"
+                  onClick={[Function]}
+                  value="selection-step-1"
+                >
+                  <strong
+                    className="bold-content"
+                  >
+                    <FormattedMessage
+                      id="admin.label.step"
+                      values={Object {}}
+                    />
+                     0 selectionStep1
+                  </strong>
+                   - 
+                  <FormattedMessage
+                    id="list-of-answers"
+                    values={Object {}}
+                  />
+                </DropdownSelect.Choice>
+              </div>
+            </DropdownSelect>
+          </CollapsableElement>
+        </Collapsable>
+      </ProjectAdminProposals__ExportButtonStyle>
       <ClearableInput
         icon={
           <i
@@ -998,7 +1199,18 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
             Object {
               "$refType": null,
               "adminAlphaUrl": "http://example.com",
-              "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+              "exportableSteps": Array [
+                Object {
+                  "position": 0,
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "isQuestionnaireStep": true,
+                    "slug": "selection-step-1",
+                    "title": "selectionStep1",
+                  },
+                },
+              ],
+              "id": "UHJvamVjdDpwcm9dzdqZWN0Ng==",
               "proposals": Object {
                 "edges": Array [
                   Object {
@@ -1321,6 +1533,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "proposalsTrashed": Object {
                 "totalCount": 3,
               },
+              "slug": "default-merged-proposal-project",
               "steps": Array [
                 Object {
                   "__typename": "CollectStep",
@@ -1877,6 +2090,108 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           />
         </InlineSelect.Choice>
       </InlineSelect>
+      <ProjectAdminProposals__ExportButtonStyle>
+        <Collapsable
+          align="right"
+          key="export-button"
+        >
+          <CollapsableButton>
+            <Icon
+              className="no-transform-svg"
+              classNames="icon-button-export"
+              name="download"
+              size="12px"
+            />
+            <FormattedMessage
+              id="global.export"
+              tagName="p"
+              values={Object {}}
+            />
+          </CollapsableButton>
+          <CollapsableElement
+            ariaLabel="label.export.by.step"
+          >
+            <DropdownSelect
+              title={
+                <div
+                  className="export-info-container"
+                >
+                  <FormattedMessage
+                    id="label.export.by.step"
+                    values={Object {}}
+                  />
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="default"
+                    className="icon-button"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <Icon
+                      className="ml-20 tooltip-icon-color"
+                      color="rgb(204, 204, 204)"
+                      name="information"
+                      size="16px"
+                      title="label.export.by.step"
+                    />
+                  </Button>
+                </div>
+              }
+            >
+              <div
+                className="start-no-bold"
+              >
+                <DropdownSelect.Choice
+                  key="selectionStep1"
+                  onClick={[Function]}
+                  value="selection-step-1"
+                >
+                  <strong
+                    className="bold-content"
+                  >
+                    <FormattedMessage
+                      id="admin.label.step"
+                      values={Object {}}
+                    />
+                     0 selectionStep1
+                  </strong>
+                   - 
+                  <FormattedMessage
+                    id="list-of-answers"
+                    values={Object {}}
+                  />
+                </DropdownSelect.Choice>
+              </div>
+              <div
+                className="start-no-bold"
+              >
+                <DropdownSelect.Choice
+                  key="selectionStep2"
+                  onClick={[Function]}
+                  value="selection-step-2"
+                >
+                  <strong
+                    className="bold-content"
+                  >
+                    <FormattedMessage
+                      id="admin.label.step"
+                      values={Object {}}
+                    />
+                     1 selectionStep2
+                  </strong>
+                   - 
+                  <FormattedMessage
+                    id="list-of-contributions"
+                    values={Object {}}
+                  />
+                </DropdownSelect.Choice>
+              </div>
+            </DropdownSelect>
+          </CollapsableElement>
+        </Collapsable>
+      </ProjectAdminProposals__ExportButtonStyle>
       <ClearableInput
         icon={
           <i
@@ -1908,6 +2223,26 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
             Object {
               "$refType": null,
               "adminAlphaUrl": "http://example.com",
+              "exportableSteps": Array [
+                Object {
+                  "position": 0,
+                  "step": Object {
+                    "id": "selectionStep1",
+                    "isQuestionnaireStep": true,
+                    "slug": "selection-step-1",
+                    "title": "selectionStep1",
+                  },
+                },
+                Object {
+                  "position": 1,
+                  "step": Object {
+                    "id": "selectionStep2",
+                    "isQuestionnaireStep": false,
+                    "slug": "selection-step-2",
+                    "title": "selectionStep2",
+                  },
+                },
+              ],
               "id": "UHJvamVjdDpwcm9qZWN0Ng==",
               "proposals": Object {
                 "edges": Array [],
@@ -1928,6 +2263,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
               "proposalsTrashed": Object {
                 "totalCount": 0,
               },
+              "slug": "je-suis-un-slug",
               "steps": Array [
                 Object {
                   "__typename": "CollectStep",

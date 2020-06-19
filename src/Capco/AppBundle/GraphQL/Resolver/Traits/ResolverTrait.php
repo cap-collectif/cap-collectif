@@ -34,4 +34,29 @@ trait ResolverTrait
 
         return $viewer;
     }
+
+    private function isACLDisabled(?\ArrayObject $context = null): bool
+    {
+        $skipVerification =
+            $context &&
+            $context->offsetExists('disable_acl') &&
+            true === $context->offsetGet('disable_acl');
+
+        if ($skipVerification) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function isAdminOrAuthorized(?\ArrayObject $context = null, $viewer = null): bool
+    {
+        $isAuthorized =
+            ($viewer instanceof User && $viewer->isAdmin()) ||
+            ($context &&
+                $context->offsetExists('disable_acl') &&
+                true === $context->offsetGet('disable_acl'));
+
+        return $isAuthorized;
+    }
 }

@@ -69,7 +69,7 @@ class ProposalNotifier extends BaseNotifier
                     $proposal,
                     $this->requestStack
                 ),
-                'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
+                'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
                 'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
             ]);
         }
@@ -113,7 +113,7 @@ class ProposalNotifier extends BaseNotifier
                     $proposal,
                     $this->requestStack
                 ),
-                'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
+                'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
                 'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
             ]);
         }
@@ -139,7 +139,7 @@ class ProposalNotifier extends BaseNotifier
                     $proposal,
                     $this->requestStack
                 ),
-                'adminURL' => $this->proposalAdminUrlResolver->__invoke($proposal),
+                'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
                 'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
             ]);
         }

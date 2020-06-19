@@ -34,3 +34,10 @@ InternalStep:
       customCode:
         description: "The step's custom code"
         type: 'String'
+      slug:
+        description: "The step's slug"
+        type: 'String'
+      isQuestionnaireStep:
+        description: "The step is a questionnaire step or not"
+        type: 'Boolean'
+        resolve: '@=value.isQuestionnaireStep()'

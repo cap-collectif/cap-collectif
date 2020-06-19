@@ -185,3 +185,8 @@ InternalProject:
                 type: '[ProposalCategory!]!'
                 description: 'list of proposal categories on the project'
                 resolve: '@=value.getCategories()'
+            exportableSteps:
+                access: "@=hasRole('ROLE_ADMIN')"
+                type: '[InternalProjectAbstractStep]!'
+                description: 'list of exportable steps in the project'
+                resolve: '@=value.getExportableSteps()'

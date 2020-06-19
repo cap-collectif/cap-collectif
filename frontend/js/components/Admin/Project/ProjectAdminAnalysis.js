@@ -2,8 +2,10 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
+import styled, { type StyledComponent } from 'styled-components';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
+import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
+import DropdownSelect from '~ui/DropdownSelect';
 import Collapsable from '~ui/Collapsable';
 import type {
   ProposalsCategoryValues,
@@ -62,6 +64,8 @@ import AnalysisProposalListRole from '~/components/Analysis/AnalysisProposalList
 import AnalysisFilterProgressState from '~/components/Analysis/AnalysisFilter/AnalysisFilterProgressState';
 import { AnalysisDataContainer } from '~/components/Admin/Project/ProjectAdminAnalysis.style';
 import AnalysisStatus from '~/components/Analysis/AnalysisStatus/AnalysisStatus';
+import { ExportButtonStyle } from '~/components/Admin/Project/ProjectAdminProposals';
+import colors from '~/utils/colors';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -388,6 +392,19 @@ const assignNobodyDecisionMaker = async (
     console.error(e);
   }
 };
+const AnalysisHeaderStyle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+  .export-button-container {
+    flex: 1;
+    div[role='menu'] {
+      right: 200px;
+    }
+  }
+`;
 
 const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }>) => {
   const intl = useIntl();
@@ -783,13 +800,74 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
 
 export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) => {
   const { status, dispatch } = useProjectAdminProposalsContext();
+  const intl = useIntl();
   const hasProposals =
     !!project.firstAnalysisStep?.proposals?.totalCount &&
     project.firstAnalysisStep?.proposals?.totalCount > 0;
 
+  const getProjectExportUrl = (type: string, projectSlug: string): string => {
+    switch (type) {
+      case 'analysis-export':
+        return `/projects/${projectSlug}/analysis/download`;
+      case 'decision-export':
+        return `/projects/${projectSlug}/decisions/download`;
+      default:
+        return '';
+    }
+  };
+
   return (
     <AnalysisPickableListContainer>
-      <ProjectAdminAnalysisShortcut project={project} />
+      <AnalysisHeaderStyle>
+        <ProjectAdminAnalysisShortcut project={project} />
+        <div className="export-button-container">
+          <ExportButtonStyle>
+            <Collapsable align="right" key="export-button">
+              <Collapsable.Button>
+                <Icon
+                  name={ICON_NAME.download}
+                  size="12px"
+                  className="no-transform-svg"
+                  color={colors.black}
+                />
+                <FormattedMessage tagName="p" id="global.export" />
+              </Collapsable.Button>
+
+              <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'label.export.by.step' })}>
+                <DropdownSelect
+                  onChange={type => {
+                    if (type !== '') {
+                      window.location.href = getProjectExportUrl(type, project.slug);
+                    }
+                  }}
+                  title={
+                    <div className="export-info-container">
+                      <FormattedMessage id="pop.over.label.export.data-set" />
+                      <div className="info-icon-container">
+                        <Icon
+                          className="tooltip-icon-color"
+                          name={ICON_NAME.information}
+                          color="rgb(204, 204, 204)"
+                          size="16px"
+                          title={intl.formatMessage({ id: 'pop.over.label.export.data-set' })}
+                        />
+                      </div>
+                    </div>
+                  }>
+                  <div className="start-no-bold">
+                    <DropdownSelect.Choice key="analysis-export" value="analysis-export">
+                      <FormattedMessage id="export.option.analysis-form" />
+                    </DropdownSelect.Choice>
+                    <DropdownSelect.Choice key="decision-export" value="decision-export">
+                      <FormattedMessage id="export.option.opinion-decision" />
+                    </DropdownSelect.Choice>
+                  </div>
+                </DropdownSelect>
+              </Collapsable.Element>
+            </Collapsable>
+          </ExportButtonStyle>
+        </div>
+      </AnalysisHeaderStyle>
       <PickableList
         isLoading={status === 'loading'}
         useInfiniteScroll={hasProposals}
@@ -861,6 +939,7 @@ export default createPaginationContainer(
           decisionMaker: { type: "ID", defaultValue: null }
         ) {
         id
+        slug
         ...ProjectAdminAnalysisNoProposals_project
         ...ProjectAdminAnalysisShortcut_project
         steps {

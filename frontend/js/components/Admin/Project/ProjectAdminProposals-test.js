@@ -8,7 +8,19 @@ import AnalysisNoProposal from '~/components/Analysis/AnalysisNoProposal/Analysi
 import 'core-js';
 
 const DEFAULT_MERGED_PROPOSALS_PROJECT = {
-  id: 'UHJvamVjdDpwcm9qZWN0Ng==',
+  id: 'UHJvamVjdDpwcm9dzdqZWN0Ng==',
+  slug: 'default-merged-proposal-project',
+  exportableSteps: [
+    {
+      position: 0,
+      step: {
+        id: 'selectionStep1',
+        slug: 'selection-step-1',
+        isQuestionnaireStep: true,
+        title: 'selectionStep1',
+      },
+    },
+  ],
   adminAlphaUrl: 'http://example.com',
   steps: [
     {
@@ -374,6 +386,27 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
 
 const DEFAULT_PROJECT = {
   id: 'UHJvamVjdDpwcm9qZWN0Ng==',
+  slug: 'je-suis-un-slug',
+  exportableSteps: [
+    {
+      position: 0,
+      step: {
+        id: 'selectionStep1',
+        slug: 'selection-step-1',
+        isQuestionnaireStep: true,
+        title: 'selectionStep1',
+      },
+    },
+    {
+      position: 1,
+      step: {
+        title: 'selectionStep2',
+        id: 'selectionStep2',
+        slug: 'selection-step-2',
+        isQuestionnaireStep: false,
+      },
+    },
+  ],
   adminAlphaUrl: 'http://example.com',
   steps: [
     {

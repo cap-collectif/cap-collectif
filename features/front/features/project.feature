@@ -315,6 +315,7 @@ Scenario: User wants to process a project proposal analysis immediately
   And I am logged in as spyl
   And I click on button "#cookie-consent"
   Then I go to "/admin/capco/app/proposalform/proposalformIdf/edit"
+  And I wait "#link-tab-new-analysis" to appear on current page
   When I click on button "#link-tab-new-analysis"
   And I wait "#step_now" to appear on current page
   Then I click on button "#step_now"

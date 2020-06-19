@@ -20,8 +20,12 @@ class ViewerCanEvaluateProposalAssessmentResolver implements ResolverInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function __invoke($viewer, Proposal $proposal): bool
+    public function __invoke($viewer, Proposal $proposal, ?\ArrayObject $context = null): bool
     {
+        if ($this->isACLDisabled($context)) {
+            return true;
+        }
+
         return $this->isGranted($viewer, $proposal);
     }
 

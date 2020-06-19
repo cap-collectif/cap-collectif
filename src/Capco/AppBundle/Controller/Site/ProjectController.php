@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
+use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
@@ -362,6 +363,68 @@ class ProjectController extends Controller
     public function previewAction(Request $request, Project $project): Response
     {
         return new RedirectResponse($this->projectUrlResolver->__invoke($project));
+    }
+
+    /**
+     * @Route("/projects/{projectSlug}/analysis/download", name="app_project_analysis_download", options={"i18n" = false})
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     */
+    public function downloadProjectAnalysisAction(Request $request, Project $project)
+    {
+        $filename = ExportAnalysisCSVCommand::getFilename($project->getSlug(), false);
+        $contentType = 'text/csv';
+        $fullPath = $this->exportDir . $filename;
+
+        try {
+            return $this->streamResponse($request, $fullPath, $contentType, $filename);
+        } catch (FileNotFoundException $exception) {
+            // We create a session for flashBag
+            $flashBag = $this->get('session')->getFlashBag();
+
+            $flashBag->add(
+                'danger',
+                $this->translator->trans('project.download.not_yet_generated')
+            );
+
+            $referer = $request->headers->get('referer');
+            $homePageUrl = $this->router->generate('app_homepage');
+
+            return $this->redirect($referer ?? $homePageUrl);
+        }
+    }
+
+    /**
+     * @Route("/projects/{projectSlug}/decisions/download", name="app_project_decisions_download", options={"i18n" = false})
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     */
+    public function downloadProjectDecisionAction(Request $request, Project $project)
+    {
+        $filename = ExportAnalysisCSVCommand::getFilename($project->getSlug(), true);
+        $contentType = 'text/csv';
+
+        try {
+            return $this->streamResponse(
+                $request,
+                $this->exportDir . $filename,
+                $contentType,
+                $filename
+            );
+        } catch (FileNotFoundException $exception) {
+            // We create a session for flashBag
+            $flashBag = $this->get('session')->getFlashBag();
+
+            $flashBag->add(
+                'danger',
+                $this->translator->trans('project.download.not_yet_generated')
+            );
+
+            $referer = $request->headers->get('referer');
+            $homePageUrl = $this->router->generate('app_homepage');
+
+            return $this->redirect($referer ?? $homePageUrl);
+        }
     }
 
     /**

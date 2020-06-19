@@ -35,6 +35,7 @@ export { default as File } from './svg/file.svg';
 export { default as Message } from './svg/message.svg';
 export { default as MessageBubble } from './svg/message-bubble.svg';
 export { default as DoubleMessageBubble } from './svg/double-message-bubble.svg';
+export { default as DownLoad } from './svg/download-bottom.svg';
 export { default as TaskList } from './svg/taskList.svg';
 export { default as Done } from './svg/done.svg';
 export { default as InProgress } from './svg/inProgress.svg';

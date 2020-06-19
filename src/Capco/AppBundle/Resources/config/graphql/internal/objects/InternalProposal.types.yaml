@@ -27,8 +27,7 @@ InternalProposal:
                 builderConfig:
                     typeName: Proposal
             adminUrl:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAdminUrlResolver", [value])'
-                access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAdminUrlResolver", [value, getUser(), context])'
             progressSteps:
                 type: '[ProgressStep!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalProgressStepsResolver", [value])'
@@ -200,37 +199,37 @@ InternalProposal:
                 type: 'InternalUser'
                 description: 'The supervisor of the proposal.'
             assessment:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAssessmentResolver").isGranted(getUser(), value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAssessmentResolver").isGranted(getUser(), value, context)'
                 type: 'InternalProposalAssessment'
                 description: "The proposal's related assessment."
             viewerCanEvaluate:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'Boolean!'
                 description: 'Does the user can evaluate the current proposal.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanEvaluateProposalAssessmentResolver", [getUser(), value])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanEvaluateProposalAssessmentResolver", [getUser(), value, context])'
             decisionMaker:
                 type: 'InternalUser'
                 description: 'The decision maker of the proposal.'
             decision:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalDecisionResolver").isGranted(getUser(), value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalDecisionResolver").isGranted(getUser(), value, context)'
                 type: 'InternalProposalDecision'
                 description: "The proposal's related decision."
             viewerCanDecide:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'Boolean!'
                 description: 'Does the user can give the final decision on the current proposal.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanDecideProposalDecisionResolver", [getUser(), value])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanDecideProposalDecisionResolver", [getUser(), value, context])'
             analysts:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalystsResolver").isGranted(getUser(), value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalystsResolver").isGranted(getUser(), value, context)'
                 type: '[InternalUser!]'
                 description: 'The analysts assigned to the proposal.'
             viewerCanAnalyse:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'Boolean!'
                 description: 'Does the user can analyse the current proposal.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanAnalyseProposalAnalysisResolver", [getUser(), value])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanAnalyseProposalAnalysisResolver", [getUser(), value, context])'
             analyses:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalysisResolver").isGranted(getUser(), value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalysisResolver").isGranted(getUser(), value, context)'
                 type: '[InternalProposalAnalysis!]'
                 description: "The proposal's related analyses."
             progressStatus:

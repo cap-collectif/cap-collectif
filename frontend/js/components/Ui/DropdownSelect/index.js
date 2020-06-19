@@ -32,7 +32,7 @@ export type Props = {|
   +initialValue?: DropdownValueType,
   +className?: string,
   +isMultiSelect?: boolean,
-  +title: string,
+  +title: React.Node | string,
   +shouldOverflow?: boolean,
   +value?: DropdownValueType,
   +onChange?: DropdownOnChangeType,
