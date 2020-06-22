@@ -7439,6 +7439,9 @@ input QuestionInput {
   description: String
   jumps: [LogicJumpInput]
   hidden: Boolean = false
+
+  """If not null, give the section s depth"""
+  level: Int
 }
 
 """Value of type of question"""
@@ -8439,6 +8442,9 @@ type SectionQuestion implements Question & Node {
 
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
+
+  """If not null, give the section s depth"""
+  level: Int
 }
 
 input SelectProposalInput {

@@ -8,6 +8,7 @@ import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 import type { Dispatch, GlobalState } from '../../types';
+import { ModalContainer } from '~/components/Question/SectionQuestionAdminModal';
 
 type Props = {|
   show: boolean,
@@ -48,74 +49,80 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
         onHide={onClose}
         aria-labelledby="proposal-form-admin-question-modal-title-lg"
         id="proposal-form-admin-question-modal">
-        <Modal.Header closeButton>
-          <Modal.Title
-            id="proposal-form-admin-question-modal-title-lg"
-            children={
-              <FormattedMessage
-                id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'}
+        <ModalContainer>
+          <Modal.Header closeButton>
+            <div className="modal-title">
+              <Modal.Title
+                id="proposal-form-admin-question-modal-title-lg"
+                children={
+                  <FormattedMessage
+                    id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'}
+                  />
+                }
               />
-            }
-          />
-        </Modal.Header>
-        <Modal.Body>
-          <Field
-            label={<FormattedMessage id="global.title" />}
-            id={`${member}.title`}
-            name={`${member}.title`}
-            type="text"
-            component={component}
-          />
-          <Field
-            name={`${member}.description`}
-            component={component}
-            type="admin-editor"
-            id={`${member}.description`}
-            label={
-              <span>
-                <FormattedMessage id="global.description" />
-                {optional}
-              </span>
-            }
-          />
-          {type === 'button' && (
+            </div>
+          </Modal.Header>
+          <Modal.Body>
             <Field
-              label={<FormattedMessage id="global.color" />}
-              id={`${member}.color`}
-              name={`${member}.color`}
-              type="select"
+              label={<FormattedMessage id="global.title" />}
+              id={`${member}.title`}
+              name={`${member}.title`}
+              type="text"
               component={component}
-              normalize={val => (val === '' ? null : val)}>
-              <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
-              <option value="PRIMARY">{intl.formatMessage({ id: 'color.btn.primary.bg' })}</option>
-              <option value="SUCCESS">{intl.formatMessage({ id: 'global.green' })}</option>
-              <option value="INFO">
-                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.info' })}
-              </option>
-              <option value="WARNING">{intl.formatMessage({ id: 'global.orange' })}</option>
-              <option value="DANGER">{intl.formatMessage({ id: 'global.red' })}</option>
-            </Field>
-          )}
-          {(type === 'radio' || type === 'checkbox' || type === 'ranking') && (
+            />
             <Field
-              id="proposal_media"
-              name={`${member}.image`}
+              name={`${member}.description`}
               component={component}
-              type="image"
+              type="admin-editor"
+              id={`${member}.description`}
               label={
                 <span>
-                  <FormattedMessage id="proposal.media" />
+                  <FormattedMessage id="global.description" />
                   {optional}
                 </span>
               }
-              help={intl.formatMessage({ id: 'global.image_uploader.image.dropzone' })}
             />
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseButton onClose={onClose} />
-          <SubmitButton label="global.validate" isSubmitting={false} onSubmit={onSubmit} />
-        </Modal.Footer>
+            {type === 'button' && (
+              <Field
+                label={<FormattedMessage id="global.color" />}
+                id={`${member}.color`}
+                name={`${member}.color`}
+                type="select"
+                component={component}
+                normalize={val => (val === '' ? null : val)}>
+                <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
+                <option value="PRIMARY">
+                  {intl.formatMessage({ id: 'color.btn.primary.bg' })}
+                </option>
+                <option value="SUCCESS">{intl.formatMessage({ id: 'global.green' })}</option>
+                <option value="INFO">
+                  {intl.formatMessage({ id: 'admin.fields.question_choice.colors.info' })}
+                </option>
+                <option value="WARNING">{intl.formatMessage({ id: 'global.orange' })}</option>
+                <option value="DANGER">{intl.formatMessage({ id: 'global.red' })}</option>
+              </Field>
+            )}
+            {(type === 'radio' || type === 'checkbox' || type === 'ranking') && (
+              <Field
+                id="proposal_media"
+                name={`${member}.image`}
+                component={component}
+                type="image"
+                label={
+                  <span>
+                    <FormattedMessage id="proposal.media" />
+                    {optional}
+                  </span>
+                }
+                help={intl.formatMessage({ id: 'global.image_uploader.image.dropzone' })}
+              />
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <CloseButton onClose={onClose} />
+            <SubmitButton label="global.validate" isSubmitting={false} onSubmit={onSubmit} />
+          </Modal.Footer>
+        </ModalContainer>
       </Modal>
     );
   }

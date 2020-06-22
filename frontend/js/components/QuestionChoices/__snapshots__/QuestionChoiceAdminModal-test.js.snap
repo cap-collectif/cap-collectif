@@ -28,76 +28,82 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
   restoreFocus={true}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
-  >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="proposal-form-admin-question-modal-title-lg"
+  <SectionQuestionAdminModal__ModalContainer>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="question_modal.update.title"
-        values={Object {}}
-      />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Field
-      component={[Function]}
-      id="string.title"
-      label={
-        <FormattedMessage
-          id="global.title"
-          values={Object {}}
-        />
-      }
-      name="string.title"
-      type="text"
-    />
-    <Field
-      component={[Function]}
-      id="string.description"
-      label={
-        <span>
+      <div
+        className="modal-title"
+      >
+        <ModalTitle
+          bsClass="modal-title"
+          componentClass="h4"
+          id="proposal-form-admin-question-modal-title-lg"
+        >
           <FormattedMessage
-            id="global.description"
+            id="question_modal.update.title"
             values={Object {}}
           />
-          <span
-            className="excerpt"
-          >
-             
+        </ModalTitle>
+      </div>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Field
+        component={[Function]}
+        id="string.title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="string.title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="string.description"
+        label={
+          <span>
             <FormattedMessage
-              id="global.optional"
+              id="global.description"
               values={Object {}}
             />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="string.description"
-      type="admin-editor"
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      isSubmitting={false}
-      label="global.validate"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
+        }
+        name="string.description"
+        type="admin-editor"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        isSubmitting={false}
+        label="global.validate"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </SectionQuestionAdminModal__ModalContainer>
 </Modal>
 `;
 
@@ -129,120 +135,126 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
   restoreFocus={true}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
-  >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="proposal-form-admin-question-modal-title-lg"
+  <SectionQuestionAdminModal__ModalContainer>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="question_modal.update.title"
-        values={Object {}}
-      />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Field
-      component={[Function]}
-      id="string.title"
-      label={
-        <FormattedMessage
-          id="global.title"
-          values={Object {}}
-        />
-      }
-      name="string.title"
-      type="text"
-    />
-    <Field
-      component={[Function]}
-      id="string.description"
-      label={
-        <span>
+      <div
+        className="modal-title"
+      >
+        <ModalTitle
+          bsClass="modal-title"
+          componentClass="h4"
+          id="proposal-form-admin-question-modal-title-lg"
+        >
           <FormattedMessage
-            id="global.description"
+            id="question_modal.update.title"
             values={Object {}}
           />
-          <span
-            className="excerpt"
-          >
-             
+        </ModalTitle>
+      </div>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Field
+        component={[Function]}
+        id="string.title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="string.title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="string.description"
+        label={
+          <span>
             <FormattedMessage
-              id="global.optional"
+              id="global.description"
               values={Object {}}
             />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="string.description"
-      type="admin-editor"
-    />
-    <Field
-      component={[Function]}
-      id="string.color"
-      label={
-        <FormattedMessage
-          id="global.color"
-          values={Object {}}
-        />
-      }
-      name="string.color"
-      normalize={[Function]}
-      type="select"
+        }
+        name="string.description"
+        type="admin-editor"
+      />
+      <Field
+        component={[Function]}
+        id="string.color"
+        label={
+          <FormattedMessage
+            id="global.color"
+            values={Object {}}
+          />
+        }
+        name="string.color"
+        normalize={[Function]}
+        type="select"
+      >
+        <option
+          value=""
+        >
+          global.select
+        </option>
+        <option
+          value="PRIMARY"
+        >
+          color.btn.primary.bg
+        </option>
+        <option
+          value="SUCCESS"
+        >
+          global.green
+        </option>
+        <option
+          value="INFO"
+        >
+          admin.fields.question_choice.colors.info
+        </option>
+        <option
+          value="WARNING"
+        >
+          global.orange
+        </option>
+        <option
+          value="DANGER"
+        >
+          global.red
+        </option>
+      </Field>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
     >
-      <option
-        value=""
-      >
-        global.select
-      </option>
-      <option
-        value="PRIMARY"
-      >
-        color.btn.primary.bg
-      </option>
-      <option
-        value="SUCCESS"
-      >
-        global.green
-      </option>
-      <option
-        value="INFO"
-      >
-        admin.fields.question_choice.colors.info
-      </option>
-      <option
-        value="WARNING"
-      >
-        global.orange
-      </option>
-      <option
-        value="DANGER"
-      >
-        global.red
-      </option>
-    </Field>
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      isSubmitting={false}
-      label="global.validate"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        isSubmitting={false}
+        label="global.validate"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </SectionQuestionAdminModal__ModalContainer>
 </Modal>
 `;
 
@@ -274,100 +286,106 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
   restoreFocus={true}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
-  >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="proposal-form-admin-question-modal-title-lg"
+  <SectionQuestionAdminModal__ModalContainer>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="question_modal.update.title"
-        values={Object {}}
+      <div
+        className="modal-title"
+      >
+        <ModalTitle
+          bsClass="modal-title"
+          componentClass="h4"
+          id="proposal-form-admin-question-modal-title-lg"
+        >
+          <FormattedMessage
+            id="question_modal.update.title"
+            values={Object {}}
+          />
+        </ModalTitle>
+      </div>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Field
+        component={[Function]}
+        id="string.title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="string.title"
+        type="text"
       />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Field
-      component={[Function]}
-      id="string.title"
-      label={
-        <FormattedMessage
-          id="global.title"
-          values={Object {}}
-        />
-      }
-      name="string.title"
-      type="text"
-    />
-    <Field
-      component={[Function]}
-      id="string.description"
-      label={
-        <span>
-          <FormattedMessage
-            id="global.description"
-            values={Object {}}
-          />
-          <span
-            className="excerpt"
-          >
-             
+      <Field
+        component={[Function]}
+        id="string.description"
+        label={
+          <span>
             <FormattedMessage
-              id="global.optional"
+              id="global.description"
               values={Object {}}
             />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="string.description"
-      type="admin-editor"
-    />
-    <Field
-      component={[Function]}
-      help="global.image_uploader.image.dropzone"
-      id="proposal_media"
-      label={
-        <span>
-          <FormattedMessage
-            id="proposal.media"
-            values={Object {}}
-          />
-          <span
-            className="excerpt"
-          >
-             
+        }
+        name="string.description"
+        type="admin-editor"
+      />
+      <Field
+        component={[Function]}
+        help="global.image_uploader.image.dropzone"
+        id="proposal_media"
+        label={
+          <span>
             <FormattedMessage
-              id="global.optional"
+              id="proposal.media"
               values={Object {}}
             />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="string.image"
-      type="image"
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      isSubmitting={false}
-      label="global.validate"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
+        }
+        name="string.image"
+        type="image"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        isSubmitting={false}
+        label="global.validate"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </SectionQuestionAdminModal__ModalContainer>
 </Modal>
 `;
 
@@ -399,76 +417,82 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
   restoreFocus={true}
   show={true}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
-  >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="proposal-form-admin-question-modal-title-lg"
+  <SectionQuestionAdminModal__ModalContainer>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="question_modal.create.title"
-        values={Object {}}
-      />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Field
-      component={[Function]}
-      id="string.title"
-      label={
-        <FormattedMessage
-          id="global.title"
-          values={Object {}}
-        />
-      }
-      name="string.title"
-      type="text"
-    />
-    <Field
-      component={[Function]}
-      id="string.description"
-      label={
-        <span>
+      <div
+        className="modal-title"
+      >
+        <ModalTitle
+          bsClass="modal-title"
+          componentClass="h4"
+          id="proposal-form-admin-question-modal-title-lg"
+        >
           <FormattedMessage
-            id="global.description"
+            id="question_modal.create.title"
             values={Object {}}
           />
-          <span
-            className="excerpt"
-          >
-             
+        </ModalTitle>
+      </div>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Field
+        component={[Function]}
+        id="string.title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="string.title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="string.description"
+        label={
+          <span>
             <FormattedMessage
-              id="global.optional"
+              id="global.description"
               values={Object {}}
             />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="string.description"
-      type="admin-editor"
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      isSubmitting={false}
-      label="global.validate"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
+        }
+        name="string.description"
+        type="admin-editor"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        isSubmitting={false}
+        label="global.validate"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </SectionQuestionAdminModal__ModalContainer>
 </Modal>
 `;
 
@@ -500,76 +524,82 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
   restoreFocus={true}
   show={false}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
-  >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="proposal-form-admin-question-modal-title-lg"
+  <SectionQuestionAdminModal__ModalContainer>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="question_modal.update.title"
-        values={Object {}}
-      />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Field
-      component={[Function]}
-      id="string.title"
-      label={
-        <FormattedMessage
-          id="global.title"
-          values={Object {}}
-        />
-      }
-      name="string.title"
-      type="text"
-    />
-    <Field
-      component={[Function]}
-      id="string.description"
-      label={
-        <span>
+      <div
+        className="modal-title"
+      >
+        <ModalTitle
+          bsClass="modal-title"
+          componentClass="h4"
+          id="proposal-form-admin-question-modal-title-lg"
+        >
           <FormattedMessage
-            id="global.description"
+            id="question_modal.update.title"
             values={Object {}}
           />
-          <span
-            className="excerpt"
-          >
-             
+        </ModalTitle>
+      </div>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Field
+        component={[Function]}
+        id="string.title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="string.title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="string.description"
+        label={
+          <span>
             <FormattedMessage
-              id="global.optional"
+              id="global.description"
               values={Object {}}
             />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="string.description"
-      type="admin-editor"
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      isSubmitting={false}
-      label="global.validate"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
+        }
+        name="string.description"
+        type="admin-editor"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        isSubmitting={false}
+        label="global.validate"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </SectionQuestionAdminModal__ModalContainer>
 </Modal>
 `;
 
@@ -601,75 +631,81 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
   restoreFocus={true}
   show={false}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
-  >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
-      id="proposal-form-admin-question-modal-title-lg"
+  <SectionQuestionAdminModal__ModalContainer>
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <FormattedMessage
-        id="question_modal.create.title"
-        values={Object {}}
-      />
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <Field
-      component={[Function]}
-      id="string.title"
-      label={
-        <FormattedMessage
-          id="global.title"
-          values={Object {}}
-        />
-      }
-      name="string.title"
-      type="text"
-    />
-    <Field
-      component={[Function]}
-      id="string.description"
-      label={
-        <span>
+      <div
+        className="modal-title"
+      >
+        <ModalTitle
+          bsClass="modal-title"
+          componentClass="h4"
+          id="proposal-form-admin-question-modal-title-lg"
+        >
           <FormattedMessage
-            id="global.description"
+            id="question_modal.create.title"
             values={Object {}}
           />
-          <span
-            className="excerpt"
-          >
-             
+        </ModalTitle>
+      </div>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <Field
+        component={[Function]}
+        id="string.title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="string.title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="string.description"
+        label={
+          <span>
             <FormattedMessage
-              id="global.optional"
+              id="global.description"
               values={Object {}}
             />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
           </span>
-        </span>
-      }
-      name="string.description"
-      type="admin-editor"
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <CloseButton
-      label="global.cancel"
-      onClose={[MockFunction]}
-    />
-    <Connect(SubmitButton)
-      isSubmitting={false}
-      label="global.validate"
-      onSubmit={[MockFunction]}
-    />
-  </ModalFooter>
+        }
+        name="string.description"
+        type="admin-editor"
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[MockFunction]}
+      />
+      <Connect(SubmitButton)
+        isSubmitting={false}
+        label="global.validate"
+        onSubmit={[MockFunction]}
+      />
+    </ModalFooter>
+  </SectionQuestionAdminModal__ModalContainer>
 </Modal>
 `;

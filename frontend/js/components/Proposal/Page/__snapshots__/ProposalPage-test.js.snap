@@ -1354,6 +1354,19 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
+                                  "name": "level",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "SectionQuestion",
+                            },
+                            Object {
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
                                   "name": "isOtherAllowed",
                                   "storageKey": null,
                                 },
@@ -7221,6 +7234,9 @@ fragment ProposalForm_proposalForm on ProposalForm {
   }
   questions {
     id
+    ... on SectionQuestion {
+      level
+    }
     __typename
     title
     number

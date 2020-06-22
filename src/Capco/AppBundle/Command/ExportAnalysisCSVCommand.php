@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -248,7 +249,6 @@ EOF;
         foreach ($proposals as $proposal) {
             $defaultRowContent = [];
             $proposal = $proposal['node'];
-            //TODO get only proposals with analyses instead of this
             $analyses = $proposal['analyses'];
             if (!$analyses) {
                 continue;
@@ -289,8 +289,9 @@ EOF;
             if (!$firstAnalysisStep) {
                 continue;
             }
-            $output->writeln('<info>Generating analysis of project ' . $project['node']['id'] . '...</info>');
-
+            $output->writeln(
+                '<info>Generating analysis of project ' . $project['node']['id'] . '...</info>'
+            );
 
             $projectSlug = $project['node']['slug'];
             $fullPath = $this->getPath($projectSlug, $isOnlyDecision);
@@ -313,18 +314,25 @@ EOF;
                     $firstAnalysisStep['form']
                 );
                 $writer->addRow(
-                    array_keys(
-                        array_merge(
-                            self::PROPOSAL_DEFAULT_HEADER,
-                            self::ANALYST_DEFAULT_HEADER,
-                            $dynamicQuestionHeaderPart
+                    WriterEntityFactory::createRowFromArray(
+                        array_keys(
+                            array_merge(
+                                self::PROPOSAL_DEFAULT_HEADER,
+                                self::ANALYST_DEFAULT_HEADER,
+                                $dynamicQuestionHeaderPart
+                            )
                         )
                     )
                 );
             } else {
                 $writer->addRow(
-                    array_keys(
-                        array_merge(self::PROPOSAL_DEFAULT_HEADER, self::DECISION_DEFAULT_HEADER)
+                    WriterEntityFactory::createRowFromArray(
+                        array_keys(
+                            array_merge(
+                                self::PROPOSAL_DEFAULT_HEADER,
+                                self::DECISION_DEFAULT_HEADER
+                            )
+                        )
                     )
                 );
             }
@@ -335,6 +343,10 @@ EOF;
                     $isOnlyDecision
                 );
                 if (!empty($rows) && \is_array($rows[0])) {
+                    foreach ($rows as $k => $row) {
+                        $rows[$k] = WriterEntityFactory::createRowFromArray($row);
+                    }
+
                     $writer->addRows($rows);
                 }
             }
@@ -373,7 +385,7 @@ EOF;
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $delimiter = $input->getOption('delimiter');
         $isOnlyDecision = $input->getOption('only-decisions');
@@ -397,6 +409,8 @@ EOF;
         $this->generateProjectProposalsCSV($input, $output, $data, $delimiter, $isOnlyDecision);
 
         $output->writeln('Done writing.');
+
+        return 0;
     }
 
     protected function getDecisionGraphQLQuery(): string

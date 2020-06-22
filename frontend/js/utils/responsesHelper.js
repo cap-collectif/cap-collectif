@@ -66,6 +66,9 @@ const QuestionAdminFragment = {
       required
       hidden
       helpText
+      ... on SectionQuestion {
+        level
+      }
       jumps(orderBy: { field: POSITION, direction: ASC }) {
         id
         origin {

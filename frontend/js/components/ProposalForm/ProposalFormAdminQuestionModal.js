@@ -11,6 +11,7 @@ import type { GlobalState, Dispatch } from '~/types';
 import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm';
 import QuestionsJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
 import type { Question } from '~/components/Form/Form.type';
+import { ModalContainer } from '~/components/Question/SectionQuestionAdminModal';
 
 type ParentProps = {
   dispatch: Dispatch,
@@ -91,241 +92,253 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
           onClose(isEmpty);
         }}
         aria-labelledby="proposal-form-admin-question-modal-title-lg">
-        <Modal.Header closeButton>
-          <Modal.Title
-            id="proposal-form-admin-question-modal-title-lg"
-            children={
-              <FormattedMessage
-                id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'}
-              />
-            }
-          />
-        </Modal.Header>
-        <Modal.Body>
-          <Field
-            label={<FormattedMessage id="title" />}
-            id={`${member}.title`}
-            name={`${member}.title`}
-            type="text"
-            component={component}
-          />
-          <Field
-            label={
-              <span>
-                <FormattedMessage id="global.help.text" />
-                {optional}
-              </span>
-            }
-            id={`${member}.helpText`}
-            name={`${member}.helpText`}
-            type="text"
-            component={component}
-          />
-          <Field
-            name={`${member}.description`}
-            component={component}
-            type="admin-editor"
-            id={`${member}.description`}
-            label={
-              <span>
-                <FormattedMessage id="global.description" />
-                {optional}
-              </span>
-            }
-          />
-          <Field
-            label={intl.formatMessage({ id: 'admin.fields.question.type' })}
-            id={`${member}.type`}
-            name={`${member}.type`}
-            type="select"
-            component={component}
-            disabled={isCreating}>
-            <option value="" disabled>
-              {intl.formatMessage({ id: 'global.select' })}
-            </option>
-            <optgroup label={intl.formatMessage({ id: 'global.question.types.free' })}>
-              <option value="text">
-                {intl.formatMessage({ id: 'global.question.types.text' })}
-              </option>
-              <option value="textarea">
-                {intl.formatMessage({ id: 'global.question.types.textarea' })}
-              </option>
-              <option value="editor">
-                {intl.formatMessage({ id: 'global.question.types.editor' })}
-              </option>
-              <option value="number">
-                {intl.formatMessage({ id: 'admin.fields.validation_rule.number' })}
-              </option>
-              <option value="medias">
-                {intl.formatMessage({ id: 'global.question.types.medias' })}
-              </option>
-              <option value="siret">
-                {intl.formatMessage({ id: 'global.question.types.siret' })}
-              </option>
-              <option value="rna">{intl.formatMessage({ id: 'global.question.types.rna' })}</option>
-            </optgroup>
-            <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
-              <option value="button">{intl.formatMessage({ id: 'question.types.button' })}</option>
-              <option value="radio">
-                {intl.formatMessage({ id: 'global.question.types.radio' })}
-              </option>
-              <option value="select">
-                {intl.formatMessage({ id: 'global.question.types.select' })}
-              </option>
-            </optgroup>
-            <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_multiple' })}>
-              <option value="checkbox">
-                {intl.formatMessage({ id: 'global.question.types.checkbox' })}
-              </option>
-              <option value="ranking">
-                {intl.formatMessage({ id: 'global.question.types.ranking' })}
-              </option>
-            </optgroup>
-          </Field>
-          {multipleChoiceQuestions.includes(type) && (
-            <div>
-              <h4 style={{ fontWeight: 'bold' }}>
-                <FormattedMessage id="admin.fields.reply.responses" />
-              </h4>
-              <FieldArray
-                name={`${member}.choices`}
-                component={QuestionChoiceAdminForm}
-                formName={formName}
-                oldMember={member}
-                type={type}
+        <ModalContainer>
+          <Modal.Header closeButton>
+            <div className="modal-title">
+              <Modal.Title
+                id="proposal-form-admin-question-modal-title-lg"
+                children={
+                  <FormattedMessage
+                    id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'}
+                  />
+                }
               />
             </div>
-          )}
-          <h4 style={{ fontWeight: 'bold' }}>
-            <span>
-              <FormattedMessage id="conditional-jumps" />
-            </span>
-          </h4>
-          {currentQuestion && currentQuestion.id ? (
-            <FieldArray
-              name={`${member}.jumps`}
-              component={QuestionsJumpAdmin}
-              formName={formName}
-              oldMember={member}
-            />
-          ) : (
-            <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
-          )}
-          <h4 style={{ fontWeight: 'bold' }}>
-            <span>
-              <FormattedMessage id="global.options" />
-            </span>
-          </h4>
-          {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
-            <div>
-              <Field
-                id={`${member}.randomQuestionChoices`}
-                name={`${member}.randomQuestionChoices`}
-                type="checkbox"
-                normalize={val => !!val}
-                children={<FormattedMessage id="admin.fields.question.random_question_choices" />}
-                component={component}
-              />
-              <Field
-                id={`${member}.isOtherAllowed`}
-                name={`${member}.isOtherAllowed`}
-                type="checkbox"
-                normalize={val => !!val}
-                children={<FormattedMessage id="admin.fields.question.other_allowed" />}
-                component={component}
-              />
-            </div>
-          )}
-          <Field
-            id={`${member}.required`}
-            name={`${member}.required`}
-            type="checkbox"
-            normalize={val => !!val}
-            children={<FormattedMessage id="global.admin.required" />}
-            component={component}
-          />
-          <Field
-            children={<FormattedMessage id="admin.fields.question.private" />}
-            id={`${member}.private`}
-            normalize={val => !!val}
-            name={`${member}.private`}
-            type="checkbox"
-            component={component}
-          />
-          {isSuperAdmin && (
+          </Modal.Header>
+          <Modal.Body>
             <Field
-              children={<FormattedMessage id="hidden-question" />}
-              id={`${member}.hidden`}
-              normalize={val => !!val}
-              name={`${member}.hidden`}
-              type="checkbox"
+              label={<FormattedMessage id="title" />}
+              id={`${member}.title`}
+              name={`${member}.title`}
+              type="text"
               component={component}
             />
-          )}
-
-          {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
-            <div>
-              <h4 style={{ fontWeight: 'bold' }}>
+            <Field
+              label={
                 <span>
-                  <FormattedMessage id="admin.fields.question.group_validation" />
+                  <FormattedMessage id="global.help.text" />
+                  {optional}
                 </span>
-              </h4>
+              }
+              id={`${member}.helpText`}
+              name={`${member}.helpText`}
+              type="text"
+              component={component}
+            />
+            <Field
+              name={`${member}.description`}
+              component={component}
+              type="admin-editor"
+              id={`${member}.description`}
+              label={
+                <span>
+                  <FormattedMessage id="global.description" />
+                  {optional}
+                </span>
+              }
+            />
+            <Field
+              label={intl.formatMessage({ id: 'admin.fields.question.type' })}
+              id={`${member}.type`}
+              name={`${member}.type`}
+              type="select"
+              component={component}
+              disabled={isCreating}>
+              <option value="" disabled>
+                {intl.formatMessage({ id: 'global.select' })}
+              </option>
+              <optgroup label={intl.formatMessage({ id: 'global.question.types.free' })}>
+                <option value="text">
+                  {intl.formatMessage({ id: 'global.question.types.text' })}
+                </option>
+                <option value="textarea">
+                  {intl.formatMessage({ id: 'global.question.types.textarea' })}
+                </option>
+                <option value="editor">
+                  {intl.formatMessage({ id: 'global.question.types.editor' })}
+                </option>
+                <option value="number">
+                  {intl.formatMessage({ id: 'admin.fields.validation_rule.number' })}
+                </option>
+                <option value="medias">
+                  {intl.formatMessage({ id: 'global.question.types.medias' })}
+                </option>
+                <option value="siret">
+                  {intl.formatMessage({ id: 'global.question.types.siret' })}
+                </option>
+                <option value="rna">
+                  {intl.formatMessage({ id: 'global.question.types.rna' })}
+                </option>
+              </optgroup>
+              <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
+                <option value="button">
+                  {intl.formatMessage({ id: 'question.types.button' })}
+                </option>
+                <option value="radio">
+                  {intl.formatMessage({ id: 'global.question.types.radio' })}
+                </option>
+                <option value="select">
+                  {intl.formatMessage({ id: 'global.question.types.select' })}
+                </option>
+              </optgroup>
+              <optgroup
+                label={intl.formatMessage({ id: 'global.question.types.multiple_multiple' })}>
+                <option value="checkbox">
+                  {intl.formatMessage({ id: 'global.question.types.checkbox' })}
+                </option>
+                <option value="ranking">
+                  {intl.formatMessage({ id: 'global.question.types.ranking' })}
+                </option>
+              </optgroup>
+            </Field>
+            {multipleChoiceQuestions.includes(type) && (
+              <div>
+                <h4 style={{ fontWeight: 'bold' }}>
+                  <FormattedMessage id="admin.fields.reply.responses" />
+                </h4>
+                <FieldArray
+                  name={`${member}.choices`}
+                  component={QuestionChoiceAdminForm}
+                  formName={formName}
+                  oldMember={member}
+                  type={type}
+                />
+              </div>
+            )}
+            <h4 style={{ fontWeight: 'bold' }}>
+              <span>
+                <FormattedMessage id="conditional-jumps" />
+              </span>
+            </h4>
+            {currentQuestion && currentQuestion.id ? (
+              <FieldArray
+                name={`${member}.jumps`}
+                component={QuestionsJumpAdmin}
+                formName={formName}
+                oldMember={member}
+              />
+            ) : (
+              <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
+            )}
+            <h4 style={{ fontWeight: 'bold' }}>
+              <span>
+                <FormattedMessage id="global.options" />
+              </span>
+            </h4>
+            <div className="regular-weight-field">
+              {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
+                <div>
+                  <Field
+                    id={`${member}.randomQuestionChoices`}
+                    name={`${member}.randomQuestionChoices`}
+                    type="checkbox"
+                    normalize={val => !!val}
+                    children={
+                      <FormattedMessage id="admin.fields.question.random_question_choices" />
+                    }
+                    component={component}
+                  />
+                  <Field
+                    id={`${member}.isOtherAllowed`}
+                    name={`${member}.isOtherAllowed`}
+                    type="checkbox"
+                    normalize={val => !!val}
+                    children={<FormattedMessage id="admin.fields.question.other_allowed" />}
+                    component={component}
+                  />
+                </div>
+              )}
               <Field
-                label={<FormattedMessage id="admin.fields.validation_rule.type" />}
-                id={`${member}.validationRule.type`}
-                name={`${member}.validationRule.type`}
-                type="select"
-                component={component}>
-                <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
-                <option value="MIN">
-                  {intl.formatMessage({ id: 'questionnaire.validation.type.min' })}
-                </option>
-                <option value="MAX">
-                  {intl.formatMessage({ id: 'questionnaire.validation.type.max' })}
-                </option>
-                <option value="EQUAL">
-                  {intl.formatMessage({ id: 'questionnaire.validation.type.equal' })}
-                </option>
-              </Field>
-              {(validationRuleType === 'MIN' ||
-                validationRuleType === 'MAX' ||
-                validationRuleType === 'EQUAL') && (
+                id={`${member}.required`}
+                name={`${member}.required`}
+                type="checkbox"
+                normalize={val => !!val}
+                children={<FormattedMessage id="global.admin.required" />}
+                component={component}
+              />
+              <Field
+                children={<FormattedMessage id="admin.fields.question.private" />}
+                id={`${member}.private`}
+                normalize={val => !!val}
+                name={`${member}.private`}
+                type="checkbox"
+                component={component}
+              />
+              {isSuperAdmin && (
                 <Field
-                  label={
-                    <span>
-                      <FormattedMessage id="admin.fields.validation_rule.number" />
-                      {optional}
-                    </span>
-                  }
-                  id={`${member}.validationRule.number`}
-                  name={`${member}.validationRule.number`}
-                  type="number"
+                  children={<FormattedMessage id="hidden-question" />}
+                  id={`${member}.hidden`}
+                  normalize={val => !!val}
+                  name={`${member}.hidden`}
+                  type="checkbox"
                   component={component}
-                  normalize={val => (val && !Number.isNaN(val) ? parseInt(val, 10) : null)}
                 />
               )}
             </div>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseButton
-            buttonId={`${member}.cancel`}
-            onClose={() => {
-              const isEmpty = this.resetQuestion();
-              onClose(isEmpty);
-            }}
-          />
-          <SubmitButton
-            id={`${member}.submit`}
-            label="global.validate"
-            isSubmitting={false}
-            onSubmit={() => {
-              this.setState({ initialQuestionValues: currentQuestion });
-              onSubmit();
-            }}
-            disabled={disabled}
-          />
-        </Modal.Footer>
+            {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
+              <div>
+                <h4 style={{ fontWeight: 'bold' }}>
+                  <span>
+                    <FormattedMessage id="admin.fields.question.group_validation" />
+                  </span>
+                </h4>
+                <Field
+                  label={<FormattedMessage id="admin.fields.validation_rule.type" />}
+                  id={`${member}.validationRule.type`}
+                  name={`${member}.validationRule.type`}
+                  type="select"
+                  component={component}>
+                  <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
+                  <option value="MIN">
+                    {intl.formatMessage({ id: 'questionnaire.validation.type.min' })}
+                  </option>
+                  <option value="MAX">
+                    {intl.formatMessage({ id: 'questionnaire.validation.type.max' })}
+                  </option>
+                  <option value="EQUAL">
+                    {intl.formatMessage({ id: 'questionnaire.validation.type.equal' })}
+                  </option>
+                </Field>
+                {(validationRuleType === 'MIN' ||
+                  validationRuleType === 'MAX' ||
+                  validationRuleType === 'EQUAL') && (
+                  <Field
+                    label={
+                      <span>
+                        <FormattedMessage id="admin.fields.validation_rule.number" />
+                        {optional}
+                      </span>
+                    }
+                    id={`${member}.validationRule.number`}
+                    name={`${member}.validationRule.number`}
+                    type="number"
+                    component={component}
+                    normalize={val => (val && !Number.isNaN(val) ? parseInt(val, 10) : null)}
+                  />
+                )}
+              </div>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <CloseButton
+              buttonId={`${member}.cancel`}
+              onClose={() => {
+                const isEmpty = this.resetQuestion();
+                onClose(isEmpty);
+              }}
+            />
+            <SubmitButton
+              id={`${member}.submit`}
+              label="global.validate"
+              isSubmitting={false}
+              onSubmit={() => {
+                this.setState({ initialQuestionValues: currentQuestion });
+                onSubmit();
+              }}
+              disabled={disabled}
+            />
+          </Modal.Footer>
+        </ModalContainer>
       </Modal>
     );
   }

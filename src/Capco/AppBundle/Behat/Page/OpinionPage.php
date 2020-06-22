@@ -56,7 +56,7 @@ class OpinionPage extends Page
         'source edit submit button' => '#confirm-opinion-source-update',
         'source delete button' => '#source-U291cmNlOnNvdXJjZTM1 .source__btn--delete',
         'source confirm delete button' => '#confirm-opinion-source-delete',
-        'source report button' => '#source-U291cmNlOnNvdXJjZTM2 .source__btn--report'
+        'source report button' => '#source-U291cmNlOnNvdXJjZTM2 .source__btn--report',
     ];
 
     /**
@@ -71,7 +71,7 @@ class OpinionPage extends Page
     {
         if (
             !$this->getSession()->wait(
-                5000,
+                10000,
                 "$('#OpinionBox').length > 0 && $('#opinion__arguments--AGAINST').length > 0 && $('#opinion-page-tabs').length > 0"
             )
         ) {

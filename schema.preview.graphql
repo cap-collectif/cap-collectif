@@ -1380,6 +1380,9 @@ type SectionQuestion implements Question & Node {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ResponseConnection!
+
+  """If not null, give the section s depth"""
+  level: Int
 }
 
 """A simple question"""

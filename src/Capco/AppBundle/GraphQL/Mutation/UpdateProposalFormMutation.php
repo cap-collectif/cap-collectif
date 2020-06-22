@@ -92,7 +92,7 @@ class UpdateProposalFormMutation implements MutationInterface
                 if (!\in_array($district->getId(), $districtsIds, true)) {
                     $deletedDistrict = [
                         'id' => $district->getId(),
-                        'name' => 'NULL'
+                        'name' => 'NULL',
                     ];
                     array_splice($arguments['districts'], $position, 0, [$deletedDistrict]);
                 }
@@ -101,9 +101,7 @@ class UpdateProposalFormMutation implements MutationInterface
             foreach ($arguments['districts'] as $districtKey => $dataDistrict) {
                 if (isset($dataDistrict['translations'])) {
                     foreach ($dataDistrict['translations'] as $translation) {
-                        $dataDistrict['translations'][
-                            $translation['locale']
-                        ] = $translation;
+                        $dataDistrict['translations'][$translation['locale']] = $translation;
                     }
                 }
                 $dataDistrict = $this->defaultBorderIfEnabled($dataDistrict);
@@ -124,7 +122,7 @@ class UpdateProposalFormMutation implements MutationInterface
                 if (!\in_array($category->getId(), $categoriesIds, true)) {
                     $deletedCategory = [
                         'id' => $category->getId(),
-                        'name' => 'NULL'
+                        'name' => 'NULL',
                     ];
                     // Add deleted category.
                     array_splice($arguments['categories'], $position, 0, [$deletedCategory]);
@@ -138,8 +136,7 @@ class UpdateProposalFormMutation implements MutationInterface
         } else {
             $form->submit($arguments, false);
         }
-
-        if (!$form->isValid()) {
+        if ($form->isSubmitted() && !$form->isValid()) {
             $this->logger->error(__METHOD__ . $form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
@@ -188,7 +185,8 @@ class UpdateProposalFormMutation implements MutationInterface
 
     private function defaultBorderIfEnabled(array $dataDistrict): array
     {
-        if (!isset($dataDistrict['border']) ||
+        if (
+            !isset($dataDistrict['border']) ||
             !isset($dataDistrict['border']['enabled']) ||
             !$dataDistrict['border']['enabled']
         ) {
@@ -202,7 +200,7 @@ class UpdateProposalFormMutation implements MutationInterface
             $dataDistrict['border']['size'] = 1;
         }
         if (!isset($dataDistrict['border']['color']) || !$dataDistrict['border']['color']) {
-            $dataDistrict['border']['color'] = "#000000";
+            $dataDistrict['border']['color'] = '#000000';
         }
 
         return $dataDistrict;
@@ -210,18 +208,22 @@ class UpdateProposalFormMutation implements MutationInterface
 
     private function defaultBackgroundIfEnabled(array $dataDistrict): array
     {
-        if (!isset($dataDistrict['background']) ||
+        if (
+            !isset($dataDistrict['background']) ||
             !isset($dataDistrict['background']['enabled']) ||
             !$dataDistrict['background']['enabled']
         ) {
             return $dataDistrict;
         }
 
-        if (!isset($dataDistrict['background']['opacity']) || !$dataDistrict['background']['opacity']) {
+        if (
+            !isset($dataDistrict['background']['opacity']) ||
+            !$dataDistrict['background']['opacity']
+        ) {
             $dataDistrict['background']['opacity'] = 0.2;
         }
         if (!isset($dataDistrict['background']['color']) || !$dataDistrict['background']['color']) {
-            $dataDistrict['background']['color'] = "#FFFFFF";
+            $dataDistrict['background']['color'] = '#FFFFFF';
         }
 
         return $dataDistrict;

@@ -694,6 +694,9 @@ export default createFragmentContainer(container, {
       }
       questions {
         id
+        ... on SectionQuestion {
+          level
+        }
         ...responsesHelper_question @relay(mask: false)
       }
       usingDistrict

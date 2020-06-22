@@ -1,10 +1,14 @@
 PreviewSectionQuestion:
-  type: object
-  inherits:
-    - PreviewQuestion
-  config:
-    name: SectionQuestion
-    interfaces:
-      - PreviewQuestion
-      - Node
-    description: 'A section is just a title in a quiz without any possible answer.'
+    type: object
+    inherits:
+        - PreviewQuestion
+    config:
+        name: SectionQuestion
+        interfaces:
+            - PreviewQuestion
+            - Node
+        description: 'A section is just a title in a quiz without any possible answer.'
+        fields:
+            level:
+                type: 'Int'
+                description: 'If not null, give the section s depth'

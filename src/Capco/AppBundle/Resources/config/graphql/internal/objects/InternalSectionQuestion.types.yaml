@@ -1,13 +1,16 @@
 InternalSectionQuestion:
-  type: object
-  inherits:
-    - InternalQuestion
-  config:
-    name: SectionQuestion
-    interfaces:
-      - InternalQuestion
-      - Node
-    description: 'A section is just a title in a quiz without any possible answer.'
-    fields:
-      kind:
-        resolve: 'section'
+    type: object
+    inherits:
+        - InternalQuestion
+    config:
+        name: SectionQuestion
+        interfaces:
+            - InternalQuestion
+            - Node
+        description: 'A section is just a title in a quiz without any possible answer.'
+        fields:
+            kind:
+                resolve: 'section'
+            level:
+                type: 'Int'
+                description: 'If not null, give the section s depth'

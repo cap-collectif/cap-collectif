@@ -958,6 +958,19 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
+                              "name": "level",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "SectionQuestion",
+                        },
+                        Object {
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
                               "name": "isOtherAllowed",
                               "storageKey": null,
                             },
@@ -1727,6 +1740,9 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
     required
     hidden
     helpText
+    ... on SectionQuestion {
+      level
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {

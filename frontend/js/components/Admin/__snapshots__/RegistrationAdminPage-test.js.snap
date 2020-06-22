@@ -376,6 +376,19 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "level",
+                          "storageKey": null,
+                        },
+                      ],
+                      "type": "SectionQuestion",
+                    },
+                    Object {
+                      "kind": "InlineFragment",
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "isOtherAllowed",
                           "storageKey": null,
                         },
@@ -629,6 +642,9 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     required
     hidden
     helpText
+    ... on SectionQuestion {
+      level
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -1192,6 +1208,19 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "level",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "SectionQuestion",
+                          },
+                          Object {
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "isOtherAllowed",
                                 "storageKey": null,
                               },
@@ -1445,6 +1474,9 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     required
     hidden
     helpText
+    ... on SectionQuestion {
+      level
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -1982,6 +2014,19 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "level",
+                          "storageKey": null,
+                        },
+                      ],
+                      "type": "SectionQuestion",
+                    },
+                    Object {
+                      "kind": "InlineFragment",
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "isOtherAllowed",
                           "storageKey": null,
                         },
@@ -2235,6 +2280,9 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     required
     hidden
     helpText
+    ... on SectionQuestion {
+      level
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {

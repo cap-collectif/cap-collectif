@@ -13,6 +13,7 @@ type Props = {|
   +isIndeterminate?: boolean,
   +disabled?: boolean,
   +className?: string,
+  +hasBody?: boolean,
   +onClick?: (e: Event) => void | Promise<any>,
   +emitChange?: boolean,
   +value: string | Object,
@@ -48,6 +49,7 @@ const DropdownSelectChoice = ({
   value,
   onClick,
   className,
+  hasBody = false,
   disabled = false,
   isIndeterminate = false,
   emitChange = true,
@@ -158,7 +160,7 @@ const DropdownSelectChoice = ({
     <S.Container onClick={handler} className={className} isDisabled={disabled || dropdownDisabled}>
       {indeterminate && <Icon name={ICON_NAME.plus} size="1rem" />}
       {isChecked && !indeterminate && <Icon name={ICON_NAME.check} size="1rem" color="#333" />}
-      <span>{children}</span>
+      {hasBody ? <div className="dropdown-inside-container">{children}</div> : <span>{children}</span>}
     </S.Container>
   );
 };

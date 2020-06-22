@@ -105,6 +105,7 @@ export type Question = {|
   +title: string,
   +number: number,
   +private: boolean,
+  +level?: ?number,
   +position: number,
   +required: boolean,
   +helpText: ?string,

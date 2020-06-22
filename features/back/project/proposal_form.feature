@@ -5,6 +5,7 @@ Feature: Edit a proposal form
 Scenario: Logged in admin wants edit a proposal form page content
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
+  And I wait "#proposal-form-admin-page" to appear on current page
   And I check a proposal form checkbox "summary toggle"
   And I check a proposal form checkbox "illustration toggle"
   And I fill in the following:
@@ -26,17 +27,25 @@ Scenario: Logged in admin wants edit a proposal form page content
     | lngMap | 2.2069771 |
   And I check element "proposal_form_district_proposalInAZoneRequired"
   And I change the proposal form select "proposal form address zoom" with option 11
-  And I click on a proposal form button "personal-field add"
+  And I click the "#perso-field-add" element
+  And I click the ".create-question" element
   And I fill in the following:
     | questions[0].title | test title |
-    | questions[0].helpText | test helptext |
+    | questions[0].helpText | test description question |
   And I select "medias" from "questions[0].type"
   And I check element "questions[0].required"
   And I click on a proposal form button "personal-field add popup save"
-  And I click on a proposal form button "personal-section add"
+  And I click the "#perso-field-add" element
+  And I click the ".create-section" element
   And  fill in the following:
     | questions[1].title | test section |
-    | questions[1].description | greate description for my section |
+    | questions[1].description | great description for my section |
+  And I click on a proposal form button "personal-field add popup save"
+  And I click the "#perso-field-add" element
+  And I click the ".create-sub-section" element
+  And  fill in the following:
+    | questions[2].title | test sub section |
+    | questions[2].description | great description for my sub section |
   And I click on a proposal form button "personal-field add popup save"
   Then I save current admin proposal form "content"
   And I wait ".alert__form_succeeded-message" to appear on current page

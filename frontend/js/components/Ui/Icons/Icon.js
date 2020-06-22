@@ -8,6 +8,9 @@ export const ICON_NAME: {
   pen: 'pen',
   eye: 'eye',
   clock: 'clock',
+  addCircle: 'addCircle',
+  smallCaps: 'smallCaps',
+  textStyle: 'textStyle',
   unfavorable: 'unfavorable',
   ongoing: 'ongoing',
   calendar: 'calendar',
@@ -39,6 +42,7 @@ export const ICON_NAME: {
   file: 'file',
   check: 'check',
   message: 'message',
+  askBubble: 'askBubble',
   messageBubble: 'messageBubble',
   messageBubbleCheck: 'messageBubbleCheck',
   download: 'download',
@@ -75,6 +79,9 @@ export const ICON_NAME: {
   facebook: 'facebook',
   twitter: 'twitter',
   linkedin: 'linkedin',
+  addCircle: 'addCircle',
+  smallCaps: 'smallCaps',
+  textStyle: 'textStyle',
   franceConnect: 'franceConnect',
   radioButton: 'radioButton',
   radioButtonChecked: 'radioButton--checked',
@@ -96,6 +103,7 @@ export const ICON_NAME: {
   file: 'file',
   check: 'check',
   message: 'message',
+  askBubble: 'askBubble',
   messageBubble: 'messageBubble',
   messageBubbleCheck: 'messageBubbleCheck',
   doubleMessageBubble: 'doubleMessageBubble',
@@ -159,6 +167,14 @@ const getIcon = name => {
       return <Icons.Twitter />;
     case 'linkedin':
       return <Icons.Linkedin />;
+    case 'textStyle':
+      return <Icons.TextStyle />;
+    case 'smallCaps':
+      return <Icons.SmallCaps />;
+    case 'addCircle':
+      return <Icons.AddCircle />;
+    case 'askBubble':
+      return <Icons.AskBubble />;
     case 'franceConnect':
       return <Icons.FranceConnect />;
     case 'radioButton':

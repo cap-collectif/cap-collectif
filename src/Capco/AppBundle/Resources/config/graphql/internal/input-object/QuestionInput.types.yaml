@@ -1,36 +1,39 @@
 QuestionInput:
-  type: input-object
-  config:
-    fields:
-      id:
-        type: 'String'
-        description: 'If null, a new question will be created.'
-      alwaysJumpDestinationQuestion:
-        type: 'ID'
-      title:
-        type: 'String!'
-      type:
-        type: 'QuestionTypeValue!'
-      private:
-        type: 'Boolean!'
-        defaultValue: false
-      required:
-        type: 'Boolean!'
-        defaultValue: false
-      helpText:
-        type: 'String'
-      randomQuestionChoices:
-        type: 'Boolean'
-      otherAllowed:
-        type: 'Boolean'
-      validationRule:
-        type: 'MultipleChoiceQuestionValidationRuleInput'
-      choices:
-        type: '[QuestionChoiceInput]'
-      description:
-        type: 'String'
-      jumps:
-        type: '[LogicJumpInput]'
-      hidden:
-        type: 'Boolean'
-        defaultValue: false
+    type: input-object
+    config:
+        fields:
+            id:
+                type: 'String'
+                description: 'If null, a new question will be created.'
+            alwaysJumpDestinationQuestion:
+                type: 'ID'
+            title:
+                type: 'String!'
+            type:
+                type: 'QuestionTypeValue!'
+            private:
+                type: 'Boolean!'
+                defaultValue: false
+            required:
+                type: 'Boolean!'
+                defaultValue: false
+            helpText:
+                type: 'String'
+            randomQuestionChoices:
+                type: 'Boolean'
+            otherAllowed:
+                type: 'Boolean'
+            validationRule:
+                type: 'MultipleChoiceQuestionValidationRuleInput'
+            choices:
+                type: '[QuestionChoiceInput]'
+            description:
+                type: 'String'
+            jumps:
+                type: '[LogicJumpInput]'
+            hidden:
+                type: 'Boolean'
+                defaultValue: false
+            level:
+                description: 'If not null, give the section s depth'
+                type: 'Int'

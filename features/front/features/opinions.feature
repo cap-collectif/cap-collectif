@@ -90,14 +90,15 @@ Scenario: Author of an opinion lose their votes when updating it
     | opinionSlug      | opinion-3                        |
   And I should see 'global.votes {"num":1}'
   When I press "global.edit"
-  And I wait 1 seconds
+  And I wait "#opinion-edit-form" to appear on current page
   And I fill in the following:
     | opinion_body | Je modifie ma proposition !   |
   Then I check the checkbox to confirm
   And I press "confirm-opinion-update"
+  And I wait "confirm-opinion-update" to disappear on current page
   And I wait 1 seconds
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3"
-  And I wait 1 seconds
+  And I wait "#OpinionBox" to appear on current page
   And I should see 'global.votes {"num":0}'
 
 @security

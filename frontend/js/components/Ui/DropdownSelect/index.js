@@ -32,7 +32,7 @@ export type Props = {|
   +initialValue?: DropdownValueType,
   +className?: string,
   +isMultiSelect?: boolean,
-  +title: React.Node | string,
+  +title?: React.Node | string,
   +shouldOverflow?: boolean,
   +value?: DropdownValueType,
   +onChange?: DropdownOnChangeType,
@@ -105,7 +105,7 @@ const DropdownSelect = ({
   return (
     <DropdownSelectContext.Provider value={contextValue}>
       <S.Container shouldOverflow={shouldOverflow} className={className}>
-        <S.Header>{title}</S.Header>
+        {title && <S.Header>{title}</S.Header>}
         <S.Body>{children}</S.Body>
       </S.Container>
     </DropdownSelectContext.Provider>

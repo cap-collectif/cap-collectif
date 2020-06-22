@@ -8,18 +8,23 @@ import SubmitButton from '../Form/SubmitButton';
 type Props = {
   isShow: boolean,
   deleteType: string,
+  level: ?number,
   cancelAction: () => void,
   deleteAction: () => void,
 };
 
 export const ProposalFormAdminDeleteQuestionModal = (props: Props) => {
-  const { isShow, cancelAction, deleteAction, deleteType } = props;
+  const { isShow, cancelAction, deleteAction, deleteType, level } = props;
 
-  let titleId = 'question.alert.delete';
-
-  if (deleteType === 'section') {
-    titleId = 'delete-section-alert';
-  }
+  const titleId = (()=> {
+    if (deleteType === 'section') {
+      if (level === 1){
+        return 'delete-sub-section-alert';
+      }
+      return 'delete-section-alert';
+    }
+    return 'question.alert.delete';
+  })();
 
   return (
     <Modal

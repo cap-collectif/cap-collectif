@@ -109,4 +109,16 @@ class AdminProposalFormPage extends Page
     {
         $this->getElement($element)->click();
     }
+
+    /**
+     * Overload to verify if we're on an expected page. Throw an exception otherwise.
+     */
+    public function verifyPage()
+    {
+        if (!$this->getSession()->wait(10000, "$('.admin_proposal_form').length > 0")) {
+            throw new \RuntimeException(
+                'AdminProposalFormPage did not fully load, check selector in "verifyPage".'
+            );
+        }
+    }
 }

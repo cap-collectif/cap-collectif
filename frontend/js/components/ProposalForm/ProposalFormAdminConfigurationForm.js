@@ -393,21 +393,21 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
     );
 
     return (
-      <div className="box box-primary container-fluid mt-10">
-        <div className="box-header">
-          <h3 className="box-title">
-            <FormattedMessage id="global.formulaire" />
-          </h3>
-          <a
-            className="pull-right link"
-            rel="noopener noreferrer"
-            href={intl.formatMessage({ id: 'admin.help.link.form.configuration' })}>
-            <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
-          </a>
-        </div>
+      <form onSubmit={handleSubmit} id="proposalFormVote">
+        <div className="box box-primary container-fluid mt-10">
+          <div className="box-header">
+            <h3 className="box-title">
+              <FormattedMessage id="global.formulaire" />
+            </h3>
+            <a
+              className="pull-right link"
+              rel="noopener noreferrer"
+              href={intl.formatMessage({ id: 'admin.help.link.form.configuration' })}>
+              <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
+            </a>
+          </div>
 
-        <div className="box-content">
-          <form onSubmit={handleSubmit} id="proposalFormVote">
+          <div className="box-content">
             <Field
               name="isProposalForm"
               component={select}
@@ -431,6 +431,10 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               id="proposal_form_description"
               label={<FormattedMessage id="global.intro" />}
             />
+          </div>
+        </div>
+        <div className="box box-primary container-fluid mt-10">
+          <div className="box-header">
             <div className="box-header">
               <h3 className="box-title">
                 <FormattedMessage id="proposal_form.admin.configuration.permanent_field" />
@@ -455,300 +459,300 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                 />
               </div>
             </div>
-            <div className="box-header">
-              <h3 className="box-title">
-                <FormattedMessage id="proposal_form.admin.configuration.optional_field" />
-              </h3>
-            </div>
-            <Panel
-              id="proposal_form_admin_description_panel_body"
-              expanded={usingDescription}
-              onToggle={() => {}}>
-              <Panel.Heading>{headerPanelUsingDescription}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="descriptionMandatory"
-                    component={component}
-                    type="checkbox"
-                    id="proposal_form_description_mandatory">
-                    <FormattedMessage id="global.mandatory" />
-                  </Field>
-                  <Field
-                    name="descriptionHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_description_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="global.help.text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                </Panel.Body>
-              </Panel.Collapse>
-            </Panel>
-            <Panel
-              id="proposal_form_admin_summary_panel_body"
-              expanded={usingSummary}
-              onToggle={() => {}}>
-              <Panel.Heading>{headerPanelUsingSummary}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="summaryHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_summary_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="global.help.text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                </Panel.Body>
-              </Panel.Collapse>
-            </Panel>
-            <Panel
-              id="proposal_form_admin_illustration_panel_body"
-              expanded={usingIllustration}
-              onToggle={() => {}}>
-              <Panel.Heading>{headerPanelUsingIllustration}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="illustrationHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_illustration_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="global.help.text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                </Panel.Body>
-              </Panel.Collapse>
-            </Panel>
-            {features.themes && (
-              <Panel expanded={usingThemes} onToggle={() => {}}>
-                <Panel.Heading>{headerPanelUsingThemes}</Panel.Heading>
-                <Panel.Collapse>
-                  <Panel.Body>
-                    <Field
-                      name="themeMandatory"
-                      component={component}
-                      type="checkbox"
-                      id="proposal_form_theme_mandatory">
-                      <FormattedMessage id="global.mandatory" />
-                    </Field>
-                    <Field
-                      name="themeHelpText"
-                      component={component}
-                      type="text"
-                      id="proposal_form_theme_help_text"
-                      label={
-                        <span>
-                          <FormattedMessage id="global.help.text" />
-                          {optional}
-                        </span>
-                      }
-                    />
-                  </Panel.Body>
-                </Panel.Collapse>
-              </Panel>
-            )}
-            <Panel
-              id="proposal_form_admin_category_panel_body"
-              expanded={usingCategories}
-              onToggle={() => {}}>
-              <Panel.Heading>{headerPanelUsingCategories}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="categoryMandatory"
-                    component={component}
-                    type="checkbox"
-                    id="proposal_form_category_mandatory">
-                    <FormattedMessage id="global.mandatory" />
-                  </Field>
-                  <Field
-                    name="categoryHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_category_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="global.help.text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                  <FieldArray
-                    name="categories"
-                    component={ProposalFormAdminCategories}
-                    props={{ query }}
-                  />
-                </Panel.Body>
-              </Panel.Collapse>
-            </Panel>
-            <Panel id="address-body" expanded={usingAddress} onToggle={() => {}}>
-              <Panel.Heading>{headerPanelUsingAddress}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="addressHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_address_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="global.help.text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                  <p className="link">
-                    <Glyphicon glyph="info-sign" />{' '}
-                    <FormattedMessage id="the-proposals-will-be-posted-on-a-map" />
-                  </p>
-                  <Field
-                    name="proposalInAZoneRequired"
-                    component={component}
-                    type="checkbox"
-                    id="proposal_form_district_proposalInAZoneRequired">
-                    <FormattedMessage id="proposal_form.proposalInAZoneRequired" />
-                  </Field>
-                  <h5 className="mt-20 font-weight-bold">
-                    <FormattedMessage id="initial-position-of-the-map" />
-                  </h5>
-                  <Row>
-                    <Col xs={12} md={4}>
-                      <Field
-                        name="latMap"
-                        component={component}
-                        type="number"
-                        id="proposal_form_lat_map"
-                        normalize={val => val && parseFloat(val)}
-                        lang="us"
-                        step="any"
-                        label={<FormattedMessage id="proposal_form.lat_map" />}
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Field
-                        name="lngMap"
-                        component={component}
-                        type="number"
-                        id="proposal_form_lng_map"
-                        normalize={val => val && parseFloat(val)}
-                        lang="us"
-                        step="any"
-                        label={<FormattedMessage id="proposal_form.lng_map" />}
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Field
-                        name="zoomMap"
-                        component={component}
-                        type="select"
-                        id="proposal_form_zoom_map"
-                        normalize={val => (val ? parseInt(val, 10) : null)}
-                        label={<FormattedMessage id="proposal_form.zoom" />}>
-                        <FormattedMessage id="proposal_form.select.zoom">
-                          {(message: string) => <option value="">{message}</option>}
-                        </FormattedMessage>
-                        {zoomLevels.map(level => (
-                          <option key={level.id} value={level.id}>
-                            {level.name}
-                          </option>
-                        ))}
-                      </Field>
-                    </Col>
-                  </Row>
-                </Panel.Body>
-              </Panel.Collapse>
-            </Panel>
-            {features.districts && (
-              <Panel expanded={usingDistrict} onToggle={() => {}}>
-                <Panel.Heading>{headerPanelUsingDistrict}</Panel.Heading>
-                <Panel.Collapse>
-                  <Panel.Body>
-                    <Field
-                      name="districtMandatory"
-                      component={component}
-                      type="checkbox"
-                      id="proposal_form_district_mandatory">
-                      <FormattedMessage id="global.mandatory" />
-                    </Field>
-                    <Field
-                      name="districtHelpText"
-                      component={component}
-                      type="text"
-                      id="proposal_form_district_help_text"
-                      label={
-                        <span>
-                          <FormattedMessage id="global.help.text" />
-                          {optional}
-                        </span>
-                      }
-                    />
-                    <FieldArray name="districts" component={ProposalFormAdminDistricts} />
-                  </Panel.Body>
-                </Panel.Collapse>
-              </Panel>
-            )}
-            {query.viewer.isSuperAdmin && (
-              <Field
-                id="proposal_form_canContact_field"
-                name="canContact"
-                component={toggle}
-                normalize={val => !!val}
-                label={<FormattedMessage id="allow-author-contact" />}
-              />
-            )}
-            <div className="box-header">
-              <h3 className="box-title">
-                <FormattedMessage id="proposal_form.admin.configuration.custom_field" />
-              </h3>
-            </div>
-            <FieldArray
-              name="questions"
-              component={ProposalFormAdminQuestions}
-              formName={formName}
-            />
-            <Field
-              name="allowAknowledge"
-              component={component}
-              type="checkbox"
-              id="proposal_form_allow_aknowledge">
-              <FormattedMessage id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor" />
-            </Field>
-            <ButtonToolbar className="box-content__toolbar">
-              <Button
-                disabled={invalid || pristine || submitting}
-                type="submit"
-                bsStyle="primary"
-                id="proposal-form-admin-content-save">
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-              </Button>
-              <Button bsStyle="danger" disabled>
-                <FormattedMessage id="global.delete" />
-              </Button>
-              <AlertForm
-                valid={valid}
-                invalid={invalid}
-                submitSucceeded={submitSucceeded}
-                submitFailed={submitFailed}
-                submitting={submitting}
-              />
-            </ButtonToolbar>
-          </form>
+          </div>
         </div>
-      </div>
+        <div className="box box-primary container-fluid mt-10">
+          <div className="box-header">
+            <h3 className="box-title">
+              <FormattedMessage id="proposal_form.admin.configuration.optional_field" />
+            </h3>
+          </div>
+          <Panel
+            id="proposal_form_admin_description_panel_body"
+            expanded={usingDescription}
+            onToggle={() => {}}>
+            <Panel.Heading>{headerPanelUsingDescription}</Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+                <Field
+                  name="descriptionMandatory"
+                  component={component}
+                  type="checkbox"
+                  id="proposal_form_description_mandatory">
+                  <FormattedMessage id="global.mandatory" />
+                </Field>
+                <Field
+                  name="descriptionHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_description_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="global.help.text" />
+                      {optional}
+                    </span>
+                  }
+                />
+              </Panel.Body>
+            </Panel.Collapse>
+          </Panel>
+          <Panel
+            id="proposal_form_admin_summary_panel_body"
+            expanded={usingSummary}
+            onToggle={() => {}}>
+            <Panel.Heading>{headerPanelUsingSummary}</Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+                <Field
+                  name="summaryHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_summary_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="global.help.text" />
+                      {optional}
+                    </span>
+                  }
+                />
+              </Panel.Body>
+            </Panel.Collapse>
+          </Panel>
+          <Panel
+            id="proposal_form_admin_illustration_panel_body"
+            expanded={usingIllustration}
+            onToggle={() => {}}>
+            <Panel.Heading>{headerPanelUsingIllustration}</Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+                <Field
+                  name="illustrationHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_illustration_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="global.help.text" />
+                      {optional}
+                    </span>
+                  }
+                />
+              </Panel.Body>
+            </Panel.Collapse>
+          </Panel>
+          {features.themes && (
+            <Panel expanded={usingThemes} onToggle={() => {}}>
+              <Panel.Heading>{headerPanelUsingThemes}</Panel.Heading>
+              <Panel.Collapse>
+                <Panel.Body>
+                  <Field
+                    name="themeMandatory"
+                    component={component}
+                    type="checkbox"
+                    id="proposal_form_theme_mandatory">
+                    <FormattedMessage id="global.mandatory" />
+                  </Field>
+                  <Field
+                    name="themeHelpText"
+                    component={component}
+                    type="text"
+                    id="proposal_form_theme_help_text"
+                    label={
+                      <span>
+                        <FormattedMessage id="global.help.text" />
+                        {optional}
+                      </span>
+                    }
+                  />
+                </Panel.Body>
+              </Panel.Collapse>
+            </Panel>
+          )}
+          <Panel
+            id="proposal_form_admin_category_panel_body"
+            expanded={usingCategories}
+            onToggle={() => {}}>
+            <Panel.Heading>{headerPanelUsingCategories}</Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+                <Field
+                  name="categoryMandatory"
+                  component={component}
+                  type="checkbox"
+                  id="proposal_form_category_mandatory">
+                  <FormattedMessage id="global.mandatory" />
+                </Field>
+                <Field
+                  name="categoryHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_category_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="global.help.text" />
+                      {optional}
+                    </span>
+                  }
+                />
+                <FieldArray
+                  name="categories"
+                  component={ProposalFormAdminCategories}
+                  props={{ query }}
+                />
+              </Panel.Body>
+            </Panel.Collapse>
+          </Panel>
+          <Panel id="address-body" expanded={usingAddress} onToggle={() => {}}>
+            <Panel.Heading>{headerPanelUsingAddress}</Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+                <Field
+                  name="addressHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_address_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="global.help.text" />
+                      {optional}
+                    </span>
+                  }
+                />
+                <p className="link">
+                  <Glyphicon glyph="info-sign" />{' '}
+                  <FormattedMessage id="the-proposals-will-be-posted-on-a-map" />
+                </p>
+                <Field
+                  name="proposalInAZoneRequired"
+                  component={component}
+                  type="checkbox"
+                  id="proposal_form_district_proposalInAZoneRequired">
+                  <FormattedMessage id="proposal_form.proposalInAZoneRequired" />
+                </Field>
+                <h5 className="mt-20 font-weight-bold">
+                  <FormattedMessage id="initial-position-of-the-map" />
+                </h5>
+                <Row>
+                  <Col xs={12} md={4}>
+                    <Field
+                      name="latMap"
+                      component={component}
+                      type="number"
+                      id="proposal_form_lat_map"
+                      normalize={val => val && parseFloat(val)}
+                      lang="us"
+                      step="any"
+                      label={<FormattedMessage id="proposal_form.lat_map" />}
+                    />
+                  </Col>
+                  <Col xs={12} md={4}>
+                    <Field
+                      name="lngMap"
+                      component={component}
+                      type="number"
+                      id="proposal_form_lng_map"
+                      normalize={val => val && parseFloat(val)}
+                      lang="us"
+                      step="any"
+                      label={<FormattedMessage id="proposal_form.lng_map" />}
+                    />
+                  </Col>
+                  <Col xs={12} md={4}>
+                    <Field
+                      name="zoomMap"
+                      component={component}
+                      type="select"
+                      id="proposal_form_zoom_map"
+                      normalize={val => (val ? parseInt(val, 10) : null)}
+                      label={<FormattedMessage id="proposal_form.zoom" />}>
+                      <FormattedMessage id="proposal_form.select.zoom">
+                        {(message: string) => <option value="">{message}</option>}
+                      </FormattedMessage>
+                      {zoomLevels.map(level => (
+                        <option key={level.id} value={level.id}>
+                          {level.name}
+                        </option>
+                      ))}
+                    </Field>
+                  </Col>
+                </Row>
+              </Panel.Body>
+            </Panel.Collapse>
+          </Panel>
+          {features.districts && (
+            <Panel expanded={usingDistrict} onToggle={() => {}}>
+              <Panel.Heading>{headerPanelUsingDistrict}</Panel.Heading>
+              <Panel.Collapse>
+                <Panel.Body>
+                  <Field
+                    name="districtMandatory"
+                    component={component}
+                    type="checkbox"
+                    id="proposal_form_district_mandatory">
+                    <FormattedMessage id="global.mandatory" />
+                  </Field>
+                  <Field
+                    name="districtHelpText"
+                    component={component}
+                    type="text"
+                    id="proposal_form_district_help_text"
+                    label={
+                      <span>
+                        <FormattedMessage id="global.help.text" />
+                        {optional}
+                      </span>
+                    }
+                  />
+                  <FieldArray name="districts" component={ProposalFormAdminDistricts} />
+                </Panel.Body>
+              </Panel.Collapse>
+            </Panel>
+          )}
+          {query.viewer.isSuperAdmin && (
+            <Field
+              id="proposal_form_canContact_field"
+              name="canContact"
+              component={toggle}
+              normalize={val => !!val}
+              label={<FormattedMessage id="allow-author-contact" />}
+            />
+          )}
+        </div>
+        <div className="box box-primary container-fluid mt-10">
+          <div className="box-header">
+            <h3 className="box-title">
+              <FormattedMessage id="proposal_form.admin.configuration.custom_field" />
+            </h3>
+          </div>
+          <FieldArray name="questions" component={ProposalFormAdminQuestions} formName={formName} />
+          <Field
+            name="allowAknowledge"
+            component={component}
+            type="checkbox"
+            id="proposal_form_allow_aknowledge">
+            <FormattedMessage id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor" />
+          </Field>
+          <ButtonToolbar className="box-content__toolbar">
+            <Button
+              disabled={invalid || pristine || submitting}
+              type="submit"
+              bsStyle="primary"
+              id="proposal-form-admin-content-save">
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+            </Button>
+            <Button bsStyle="danger" disabled>
+              <FormattedMessage id="global.delete" />
+            </Button>
+            <AlertForm
+              valid={valid}
+              invalid={invalid}
+              submitSucceeded={submitSucceeded}
+              submitFailed={submitFailed}
+              submitting={submitting}
+            />
+          </ButtonToolbar>
+        </div>
+      </form>
     );
   }
 }

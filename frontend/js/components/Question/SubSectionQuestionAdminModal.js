@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Field, getFormSyncErrors, formValueSelector, change } from 'redux-form';
 import { Modal } from 'react-bootstrap';
-import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import type { GlobalState, Dispatch } from '../../types';
@@ -10,6 +9,7 @@ import component from '../Form/Field';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import type { Questions } from '~/components/Form/Form.type';
+import { ModalContainer } from '~/components/Question/SectionQuestionAdminModal';
 
 type DefaultProps = {|
   +show: boolean,
@@ -47,21 +47,7 @@ const optional = (
   </span>
 );
 
-export const ModalContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  .modal-title,
-  .label-container,
-  .panel-title {
-    font-weight: 600;
-  }
-
-  .regular-weight-field {
-    .label-container {
-      font-weight: normal;
-    }
-  }
-`;
-
-const SectionQuestionAdminModal = ({
+const SubSectionQuestionAdminModal = ({
   show,
   onClose,
   member,
@@ -90,7 +76,9 @@ const SectionQuestionAdminModal = ({
           <div className="modal-title">
             <Modal.Title
               id="proposal-form-admin-question-modal-title-lg"
-              children={<FormattedMessage id={!isCreating ? 'create-section' : 'modify-section'} />}
+              children={
+                <FormattedMessage id={!isCreating ? 'create-sub-section' : 'modify-sub-section'} />
+              }
             />
           </div>
         </Modal.Header>
@@ -99,6 +87,7 @@ const SectionQuestionAdminModal = ({
             id={`${member}.title`}
             name={`${member}.title`}
             type="text"
+            className="modal-title"
             label={<FormattedMessage id="global.title" />}
             component={component}
           />
@@ -192,4 +181,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SectionQuestionAdminModal));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(injectIntl(SubSectionQuestionAdminModal));
