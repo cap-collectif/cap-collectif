@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Status;
@@ -113,24 +114,28 @@ class ProposalStatusDataLoader extends BatchDataLoader
         $viewer,
         \ArrayObject $context
     ): ?Status {
-        if ($args->offsetExists('step') && $args->offsetGet('step')) {
-            $stepId = $args->offsetGet('step');
-            $step = $this->globalIdResolver->resolve($stepId, $viewer, $context);
-
-            if ($step instanceof CollectStep) {
-                return $proposal->getStatus();
-            }
+        if ($args->offsetGet('step')) {
+            $step = $this->globalIdResolver->resolve($args->offsetGet('step'), $viewer, $context);
 
             if ($step instanceof SelectionStep) {
-                /** @var Selection $selection */
-                foreach ($proposal->getSelections() as $selection) {
-                    if ($selection->getStep()->getId() === $step->getId()) {
-                        return $selection->getStatus();
-                    }
-                }
+                return self::resolveSelectionStep($step, $proposal);
             }
 
-            throw new UserError('Unknown step with id:' . $step->getId());
+            //else : CollectStep, ConsultationStep, PresentationStep, QuestionnaireStep, RankingStep, SynthesisStep, OtherStep
+        }
+
+        return $proposal->getStatus();
+    }
+
+    /**
+     * If the step if a selection step, we use the status of the selection.
+     */
+    private static function resolveSelectionStep(AbstractStep $step, Proposal $proposal): ?Status
+    {
+        foreach ($proposal->getSelections() as $selection) {
+            if ($selection->getStep()->getId() === $step->getId()) {
+                return $selection->getStatus();
+            }
         }
 
         return $proposal->getStatus();
