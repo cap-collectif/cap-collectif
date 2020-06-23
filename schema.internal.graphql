@@ -5188,6 +5188,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """The user type to filter by."""
     userType: ID
+    orderBy: UserOrder
   ): UserConnection!
 
   """Count of contributions associated with the project."""
@@ -10787,6 +10788,9 @@ input UserOrder {
 enum UserOrderField {
   """Allows ordering a list of users by when they were created."""
   CREATED_AT
+
+  """Allowing ordering a list of user by their activity."""
+  ACTIVITY
 }
 
 """3 possible values"""

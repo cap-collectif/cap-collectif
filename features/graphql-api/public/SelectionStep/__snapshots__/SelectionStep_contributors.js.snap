@@ -7,6 +7,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "_id": "userAdmin",
+            "createdAt": "2015-01-04 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
             "_id": "user50",
             "createdAt": "2017-01-01 00:50:00",
           },
@@ -29,15 +35,9 @@ Object {
             "createdAt": "2017-01-01 00:47:00",
           },
         },
-        Object {
-          "node": Object {
-            "_id": "user46",
-            "createdAt": "2017-01-01 00:46:00",
-          },
-        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToxOntpOjA7aToxNDgzMjI3OTYwMDAwO30=",
+        "endCursor": "YToyOntpOjA7aToxO2k6MTtpOjE0ODMyMjgwMjAwMDA7fQ==",
         "hasNextPage": true,
       },
       "totalCount": 47,

@@ -45,30 +45,37 @@ class ContributionSearch extends Search
         $this->entityManager = $entityManager;
     }
 
-    public function getContributionsByAuthor(User $user): ResultSet
+    public function getSubmissionsByAuthor(User $user, string $resultType): ResultSet
     {
         $boolQuery = (new Query\BoolQuery())->addFilter(
             new Query\Term(['author.id' => ['value' => $user->getId()]])
         );
-        $this->applyContributionsFilters($boolQuery);
+
+        $this->applyContributionsFilters(
+            $boolQuery,
+            $this->getTypesFilterByResultType($resultType)
+        );
 
         $query = new Query($boolQuery);
         $query->setSize(0);
         $query->addAggregation(
-            (new Terms('projects'))
+            (new Terms($resultType . 'ByProject'))
                 ->setField('project.id')
                 ->setSize(Search::BIG_INT_VALUE)
                 ->addAggregation(
-                    (new Terms('steps'))
+                    $stepAggregation = (new Terms($resultType . 'ByStep'))
                         ->setField('step.id')
                         ->setSize(Search::BIG_INT_VALUE)
-                        ->addAggregation(
-                            (new Terms('consultations'))
-                                ->setField('consultation.id')
-                                ->setSize(Search::BIG_INT_VALUE)
-                        )
                 )
         );
+
+        if ('participations' === $resultType) {
+            $stepAggregation->addAggregation(
+                (new Terms($resultType . 'ByConsultation'))
+                    ->setField('consultation.id')
+                    ->setSize(Search::BIG_INT_VALUE)
+            );
+        }
 
         return $this->index->search($query);
     }
@@ -518,5 +525,37 @@ class ContributionSearch extends Search
         }
 
         return $query;
+    }
+
+    private function getTypesFilterByResultType(string $resultType): array
+    {
+        if ('participations' === $resultType) {
+            return [
+                Opinion::getElasticsearchTypeName(),
+                OpinionVersion::getElasticsearchTypeName(),
+                Argument::getElasticsearchTypeName(),
+                Source::getElasticsearchTypeName(),
+                Proposal::getElasticsearchTypeName(),
+                Reply::getElasticsearchTypeName(),
+                AbstractVote::getElasticsearchTypeName(),
+            ];
+        }
+
+        if ('contributions' === $resultType) {
+            return [
+                Opinion::getElasticsearchTypeName(),
+                OpinionVersion::getElasticsearchTypeName(),
+                Argument::getElasticsearchTypeName(),
+                Source::getElasticsearchTypeName(),
+                Proposal::getElasticsearchTypeName(),
+                Reply::getElasticsearchTypeName(),
+            ];
+        }
+
+        if ('votes' === $resultType) {
+            return [AbstractVote::getElasticsearchTypeName()];
+        }
+
+        throw new \RuntimeException('The provided result type did not match any conditions.');
     }
 }

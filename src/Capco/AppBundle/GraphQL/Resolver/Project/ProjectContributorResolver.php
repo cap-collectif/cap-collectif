@@ -48,20 +48,24 @@ class ProjectContributorResolver implements ResolverInterface
                 $providedFilters['step'],
                 $providedFilters['vip'],
                 $providedFilters['userType'],
+                $orderBy,
             ) = [
                 GlobalId::fromGlobalId($args->offsetGet('step'))['id'],
                 $args->offsetGet('vip'),
                 $args->offsetGet('userType'),
+                $args->offsetGet('orderBy') ?: [],
             ];
 
             $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
                 $project,
+                $orderBy,
                 $providedFilters,
                 &$totalCount
             ) {
                 try {
                     $response = $this->userSearch->getContributorByProject(
                         $project,
+                        $orderBy,
                         $providedFilters,
                         $limit,
                         $cursor

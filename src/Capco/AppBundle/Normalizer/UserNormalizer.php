@@ -34,7 +34,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         'ElasticsearchVersionNestedProject',
         'ElasticsearchProposalNestedProject',
         'ElasticsearchEventNestedProject',
-        'ElasticsearchNestedAuthor'
+        'ElasticsearchNestedAuthor',
     ];
 
     private $router;
@@ -78,7 +78,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                     'email' => $object->getEmail(),
                     'userType' => $object->getUserType()
                         ? ['id' => $object->getUserType()->getId()]
-                        : null
+                        : null,
                 ];
             }
         }
@@ -87,49 +87,13 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {
-            $contributionsCountByProject = [];
-            $contributionsCountByStep = [];
-            $contributionsCountByConsultation = [];
-
-            $contributions = $this->contributionSearch->getContributionsByAuthor($object);
-            $data['totalContributionsCount'] = $contributions->getTotalHits();
-
-            foreach (
-                $contributions->getAggregation('projects')['buckets']
-                as $projectContributions
-            ) {
-                $contributionsCountByProject[] = [
-                    'count' => $projectContributions['doc_count'],
-                    'project' => ['id' => $projectContributions['key']]
-                ];
-                if (!empty($projectContributions['steps']['buckets'])) {
-                    foreach ($projectContributions['steps']['buckets'] as $stepContributions) {
-                        $contributionsCountByStep[] = [
-                            'count' => $stepContributions['doc_count'],
-                            'step' => ['id' => $stepContributions['key']]
-                        ];
-                        if (!empty($stepContributions['consultations']['buckets'])) {
-                            foreach (
-                                $stepContributions['consultations']['buckets']
-                                as $consultationContributions
-                            ) {
-                                $contributionsCountByConsultation[] = [
-                                    'count' => $consultationContributions['doc_count'],
-                                    'consultation' => ['id' => $consultationContributions['key']]
-                                ];
-                            }
-                        }
-                    }
-                }
-            }
-
-            $data['contributionsCountByProject'] = $contributionsCountByProject;
-            $data['contributionsCountByStep'] = $contributionsCountByStep;
-            $data['contributionsCountByConsultation'] = $contributionsCountByConsultation;
+            $this->addAggregateCounter('participations', $data, $object);
+            $this->addAggregateCounter('contributions', $data, $object);
+            $this->addAggregateCounter('votes', $data, $object);
         }
 
         $links = [
-            'settings' => $this->_capcoProfileEdit
+            'settings' => $this->_capcoProfileEdit,
         ];
 
         if ($this->manager->isActive('profiles')) {
@@ -148,5 +112,51 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof User;
+    }
+
+    private function addAggregateCounter(string $aggregatePrefix, array &$data, $object): void
+    {
+        $resultsCountByProject = [];
+        $resultsCountByStep = [];
+        $resultsCountByConsultation = [];
+
+        $results = $this->contributionSearch->getSubmissionsByAuthor($object, $aggregatePrefix);
+        $data['total' . ucfirst($aggregatePrefix) . 'Count'] = $results->getTotalHits();
+
+        foreach (
+            $results->getAggregation($aggregatePrefix . 'ByProject')['buckets']
+            as $projectResults
+        ) {
+            $resultsCountByProject[] = [
+                'count' => $projectResults['doc_count'],
+                'project' => ['id' => $projectResults['key']],
+            ];
+            if (!empty($projectResults[$aggregatePrefix . 'ByStep']['buckets'])) {
+                foreach ($projectResults[$aggregatePrefix . 'ByStep']['buckets'] as $stepResults) {
+                    $resultsCountByStep[] = [
+                        'count' => $stepResults['doc_count'],
+                        'step' => ['id' => $stepResults['key']],
+                    ];
+                    if (
+                        'participations' === $aggregatePrefix &&
+                        !empty($stepResults[$aggregatePrefix . 'ByConsultation']['buckets'])
+                    ) {
+                        foreach (
+                            $stepResults[$aggregatePrefix . 'ByConsultation']['buckets']
+                            as $consultationResults
+                        ) {
+                            $resultsCountByConsultation[] = [
+                                'count' => $consultationResults['doc_count'],
+                                'consultation' => ['id' => $consultationResults['key']],
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
+        $data[$aggregatePrefix . 'CountByProject'] = $resultsCountByProject;
+        $data[$aggregatePrefix . 'CountByStep'] = $resultsCountByStep;
+        $data[$aggregatePrefix . 'CountByConsultation'] = $resultsCountByConsultation;
     }
 }

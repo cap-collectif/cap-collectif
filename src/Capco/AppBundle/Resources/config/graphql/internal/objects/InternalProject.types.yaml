@@ -27,6 +27,8 @@ InternalProject:
                     userType:
                         type: 'ID'
                         description: 'The user type to filter by.'
+                    orderBy:
+                        type: 'UserOrder'
             votes:
                 type: 'InternalVoteConnection!'
             steps:

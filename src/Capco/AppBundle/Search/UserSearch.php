@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\SortField;
+use Capco\AppBundle\Enum\UserOrderField;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserRepository;
 use Elastica\Index;
@@ -44,7 +45,7 @@ class UserSearch extends Search
         $query->setQuery($boolQuery);
         if ('activity' === $sort) {
             $query->setSort([
-                'totalContributionsCount' => [
+                'totalParticipationsCount' => [
                     'order' => 'DESC',
                 ],
                 'createdAt' => [
@@ -175,20 +176,35 @@ class UserSearch extends Search
 
     public function getContributorByProject(
         Project $project,
+        array $orderBy,
         array $providedFilters = [],
         int $limit = 100,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
+        $sort = [];
         $boolQuery = new Query\BoolQuery();
         if (isset($providedFilters['step'])) {
             $nestedQueryStep = new Query\Nested();
-            $nestedQueryStep->setPath('contributionsCountByStep');
+            $nestedQueryStep->setPath('participationsCountByStep');
             $nestedQueryStep->setQuery(
                 (new Query\BoolQuery())->addFilter(
-                    new Term(['contributionsCountByStep.step.id' => $providedFilters['step']])
+                    new Term(['participationsCountByStep.step.id' => $providedFilters['step']])
                 )
             );
             $boolQuery->addFilter($nestedQueryStep);
+            if (!empty($orderBy) && UserOrderField::ACTIVITY === $orderBy['field']) {
+                $sort = [
+                    'participationsCountByStep.count' => [
+                        'order' => strtolower($orderBy['direction']),
+                        'nested_path' => 'participationsCountByStep',
+                        'nested_filter' => [
+                            'term' => [
+                                'participationsCountByStep.step.id' => $providedFilters['step'],
+                            ],
+                        ],
+                    ],
+                ];
+            }
         }
 
         if (isset($providedFilters['vip'])) {
@@ -200,28 +216,36 @@ class UserSearch extends Search
         }
 
         $nestedQueryProject = new Query\Nested();
-        $nestedQueryProject->setPath('contributionsCountByProject');
+        $nestedQueryProject->setPath('participationsCountByProject');
         $nestedQueryProject->setQuery(
             (new Query\BoolQuery())->addFilter(
-                new Query\Term(['contributionsCountByProject.project.id' => $project->getId()])
+                new Query\Term(['participationsCountByProject.project.id' => $project->getId()])
             )
-            // No need to add the range query because the contributionsCountByProject is added if only there is a contribution.
+            // No need to add the range query because the participationsCountByProject is added if only there is a contribution.
         );
 
         $boolQuery->addFilter($nestedQueryProject);
         $query = new Query($boolQuery);
-        $query->setSort([
-            'contributionsCountByProject.count' => [
-                'order' => 'desc',
-                'nested_filter' => [
-                    'term' => ['contributionsCountByProject.project.id' => $project->getId()],
+        if (empty($sort) && !empty($orderBy) && UserOrderField::ACTIVITY === $orderBy['field']) {
+            $sort = [
+                'participationsCountByProject.count' => [
+                    'order' => strtolower($orderBy['direction']),
+                    'nested_path' => 'participationsCountByProject',
+                    'nested_filter' => [
+                        'term' => ['participationsCountByProject.project.id' => $project->getId()],
+                    ],
                 ],
-            ],
-            'createdAt' => [
-                'order' => 'desc',
-            ],
-        ]);
+            ];
+        }
 
+        $query->setSort(
+            array_merge($sort, [
+                'createdAt' => [
+                    'order' => 'desc',
+                ],
+                'id' => new \stdClass(),
+            ])
+        );
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
@@ -235,25 +259,21 @@ class UserSearch extends Search
         int $limit = 100,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        // Unstable sort by top contributors.
-        // It will be used in the future for projects counters.
-        // $query->setSort([
-        //     'contributionsCountByStep.count' => [
-        //         'order' => 'desc',
-        //         'nested_filter' => [
-        //             'term' => ['contributionsCountByStep.step.id' => $step->getId()],
-        //         ],
-        //     ],
-        // ]);
-
         $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('contributionsCountByStep');
+        $nestedQuery->setPath('participationsCountByStep');
         $boolQuery = new Query\BoolQuery();
-        $boolQuery->addFilter(new Term(['contributionsCountByStep.step.id' => $step->getId()]));
-        $boolQuery->addFilter(new Range('contributionsCountByStep.count', ['gt' => 0]));
+        $boolQuery->addFilter(new Term(['participationsCountByStep.step.id' => $step->getId()]));
+        $boolQuery->addFilter(new Range('participationsCountByStep.count', ['gt' => 0]));
         $nestedQuery->setQuery($boolQuery);
         $query = new Query($nestedQuery);
         $query->setSort([
+            'participationsCountByStep.count' => [
+                'order' => 'desc',
+                'nested_path' => 'participationsCountByStep',
+                'nested_filter' => [
+                    'term' => ['participationsCountByStep.step.id' => $step->getId()],
+                ],
+            ],
             'createdAt' => [
                 'order' => 'desc',
             ],
@@ -277,12 +297,14 @@ class UserSearch extends Search
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('contributionsCountByConsultation');
+        $nestedQuery->setPath('participationsCountByConsultation');
         $boolQuery = new Query\BoolQuery();
         $boolQuery->addFilter(
-            new Term(['contributionsCountByConsultation.consultation.id' => $consultation->getId()])
+            new Term([
+                'participationsCountByConsultation.consultation.id' => $consultation->getId(),
+            ])
         );
-        $boolQuery->addFilter(new Range('contributionsCountByConsultation.count', ['gt' => 0]));
+        $boolQuery->addFilter(new Range('participationsCountByConsultation.count', ['gt' => 0]));
         $nestedQuery->setQuery($boolQuery);
         $query = new Query($nestedQuery);
 
@@ -303,11 +325,11 @@ class UserSearch extends Search
     public function getAllContributors(int $offset, int $limit): array
     {
         $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(new Range('totalContributionsCount', ['gt' => 0]));
+        $boolQuery->addMust(new Range('totalParticipationsCount', ['gt' => 0]));
 
         $query = new Query($boolQuery);
         $query->setSort([
-            'totalContributionsCount' => [
+            'totalParticipationsCount' => [
                 'order' => 'desc',
             ],
             'createdAt' => [
@@ -346,6 +368,8 @@ class UserSearch extends Search
                 break;
             default:
                 throw new \RuntimeException("Unknown order: ${orderBy}");
+
+                break;
         }
 
         return [$sortField => ['order' => $orderBy['direction']], 'id' => new \stdClass()];

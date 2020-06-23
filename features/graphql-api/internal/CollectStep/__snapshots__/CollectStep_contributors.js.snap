@@ -7,32 +7,32 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
-            "id": "VXNlcjp1c2VyNw==",
-            "username": "user7",
+            "id": "VXNlcjp1c2VyMg==",
+            "username": "sfavot",
           },
         },
         Object {
           "node": Object {
-            "id": "VXNlcjp1c2VyNTIy",
-            "username": "johnsmith",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
-            "username": "welcomattic",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "VXNlcjp1c2VyNQ==",
-            "username": "user",
+            "id": "VXNlcjp1c2VyMQ==",
+            "username": "lbrunet",
           },
         },
         Object {
           "node": Object {
             "id": "VXNlcjp1c2VyQWRtaW4=",
             "username": "admin",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNw==",
+            "username": "user7",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "username": "welcomattic",
           },
         },
       ],

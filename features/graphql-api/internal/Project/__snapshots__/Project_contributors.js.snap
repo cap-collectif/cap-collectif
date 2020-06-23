@@ -97,3 +97,119 @@ Object {
   },
 }
 `;
+
+exports[`Internal.projects.contributors fetches contributors sorted by their activities asc 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNTIy",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNQ==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNw==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+      ],
+      "totalCount": 7,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;
+
+exports[`Internal.projects.contributors fetches contributors sorted by their activities desc 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMg==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMQ==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyQWRtaW4=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyNw==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+      ],
+      "totalCount": 7,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;
