@@ -9381,6 +9381,12 @@ enum TranslationLocale {
 
   """Swedish - SWEDEN locale"""
   SV_SE
+
+  """Basque - EUSKADIA locale"""
+  EU_EU
+
+  """Gascon - OCCITAN locale"""
+  OC_OC
 }
 
 """Entities that can be trashed."""

@@ -4,7 +4,7 @@ import chalk from "chalk";
 
 const LOCO_KEY = "Kh235TDAO5xH5bGdOkrrXrmajHjPXhPG";
 
-const locales = ["fr-FR", "es-ES", "en-GB", "de-DE", "nl-NL", "sv-SE"];
+const locales = ["fr-FR", "es-ES", "en-GB", "de-DE", "nl-NL", "sv-SE", "eu-EU", "oc-OC"];
 const domains = [
   "CapcoAppBundle",
   "SonataAdminBundle",

@@ -7,4 +7,6 @@ export const TranslationLocaleEnum = {
   'fr-FR': 'FR_FR',
   'nl-NL': 'NL_NL',
   'sv-SE': 'SV_SE',
+  'oc-OC': 'OC_OC',
+  'eu-EU': 'EU_EU',
 };

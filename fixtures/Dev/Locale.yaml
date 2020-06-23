@@ -27,3 +27,9 @@ Capco\AppBundle\Entity\Locale:
     locale_suedois:
         __construct: ['sv-SE', 'swedish']
         id: 'locale-sv-SE'
+    locale_basque:
+        __construct: ['eu-EU', 'basque']
+        id: 'locale-eu-EU'
+    locale_gascon:
+        __construct: ['oc-OC', 'gascon']
+        id: 'locale-oc-OC'

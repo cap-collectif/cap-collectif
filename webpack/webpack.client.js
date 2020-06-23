@@ -88,6 +88,7 @@ const devConf = {
       // – if a specific locale name (e.g. ru-ru) is absent, but a more generic locale (ru) is available,
       // the generic one will be kept bundled.
       localesToKeep: webpackConfig.locales,
+      ignoreInvalidLocales: true
     }),
     // Copy some legacy deps
     // TODO: Remove this legacy deps

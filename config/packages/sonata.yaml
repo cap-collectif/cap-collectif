@@ -37,6 +37,9 @@ sonata_intl:
             en-GB: Europe/London
             de-DE: Europe/Berlin
             nl-NL: Europe/Berlin
+            sv-SE: Europe/Berlin
+            eu-EU: Europe/Berlin
+            oc-OC: Europe/Berlin
 
 sonata_translation:
     locale_switcher: true

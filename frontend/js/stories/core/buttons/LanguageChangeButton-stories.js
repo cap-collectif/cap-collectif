@@ -17,6 +17,8 @@ storiesOf('Core|Buttons/LanguageButton', module).add('default', () => {
       { $refType, $fragmentRefs, id: 'de-DE', code: 'DE_DE' },
       { $refType, $fragmentRefs, id: 'nl-NL', code: 'NL_NL' },
       { $refType, $fragmentRefs, id: 'sv-SE', code: 'SV_SE' },
+      { $refType, $fragmentRefs, id: 'oc-OC', code: 'OC_OC' },
+      { $refType, $fragmentRefs, id: 'eu-EU', code: 'EU_EU' },
     ],
   };
   const pullRight = boolean('pullright', false);

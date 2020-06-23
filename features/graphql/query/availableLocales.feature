@@ -48,7 +48,6 @@ Scenario: GraphQL admin client wants to get all locales
   }
   """
 
-
 Scenario: GraphQL admin client wants to get all locales, including the disabled ones
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -92,6 +91,13 @@ Scenario: GraphQL admin client wants to get all locales, including the disabled 
           "isDefault": false
         },
         {
+          "traductionKey": "basque",
+          "code": "EU_EU",
+          "isEnabled": false,
+          "isPublished": false,
+          "isDefault": false
+        },
+        {
           "traductionKey": "french",
           "code": "FR_FR",
           "isEnabled": true,
@@ -101,6 +107,13 @@ Scenario: GraphQL admin client wants to get all locales, including the disabled 
         {
           "traductionKey": "dutchman",
           "code": "NL_NL",
+          "isEnabled": false,
+          "isPublished": false,
+          "isDefault": false
+        },
+        {
+          "traductionKey": "gascon",
+          "code": "OC_OC",
           "isEnabled": false,
           "isPublished": false,
           "isDefault": false

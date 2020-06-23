@@ -10,6 +10,8 @@ final class TranslationLocale implements EnumType
     public const DE_DE = 'de-DE';
     public const NL_NL = 'nl-NL';
     public const SV_SE = 'sv-SE';
+    public const EU_EU = 'eu-EU';
+    public const OC_OC = 'oc-OC';
 
     public static function isValid($value): bool
     {
@@ -18,7 +20,16 @@ final class TranslationLocale implements EnumType
 
     public static function getAvailableTypes(): array
     {
-        return [self::EN_GB, self::FR_FR, self::ES_ES, self::DE_DE, self::NL_NL, self::SV_SE];
+        return [
+            self::EN_GB,
+            self::FR_FR,
+            self::ES_ES,
+            self::DE_DE,
+            self::NL_NL,
+            self::SV_SE,
+            self::EU_EU,
+            self::OC_OC,
+        ];
     }
 
     public static function getAvailableTypesToString(): string
