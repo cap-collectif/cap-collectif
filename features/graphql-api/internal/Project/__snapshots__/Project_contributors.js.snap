@@ -213,3 +213,47 @@ Object {
   },
 }
 `;
+
+exports[`Internal.projects.contributors fetches contributors that match term parameter 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyMg==",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;
+
+exports[`Internal.projects.contributors fetches contributors that match term, step, userType, vip 1`] = `
+Object {
+  "project": Object {
+    "contributors": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
+            "userType": Object {
+              "id": "1",
+            },
+            "vip": true,
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0Ng==",
+  },
+}
+`;

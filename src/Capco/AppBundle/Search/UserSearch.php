@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\SortField;
 use Capco\AppBundle\Enum\UserOrderField;
+use Capco\AppBundle\Enum\UserRole;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserRepository;
 use Elastica\Index;
@@ -15,6 +16,7 @@ use Elastica\Query;
 use Elastica\Query\Range;
 use Elastica\Query\Term;
 use Elastica\ResultSet;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserSearch extends Search
 {
@@ -22,13 +24,19 @@ class UserSearch extends Search
 
     private $userRepo;
     private $eventSearch;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(Index $index, UserRepository $userRepo, EventSearch $eventSearch)
-    {
+    public function __construct(
+        Index $index,
+        UserRepository $userRepo,
+        EventSearch $eventSearch,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         parent::__construct($index);
         $this->userRepo = $userRepo;
         $this->eventSearch = $eventSearch;
         $this->type = 'user';
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function getRegisteredUsers(
@@ -205,6 +213,20 @@ class UserSearch extends Search
                     ],
                 ];
             }
+        }
+
+        // add search query that match provided term with selected fields.
+        if (isset($providedFilters['term'])) {
+            $multiMatchQueryFields = ['username', 'lastname', 'firstname'];
+            if ($this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN)) {
+                $multiMatchQueryFields[] = 'email';
+            }
+            $boolQuery->addMust(
+                (new Query\MultiMatch())
+                    ->setQuery($providedFilters['term'])
+                    ->setType('phrase_prefix')
+                    ->setFields($multiMatchQueryFields)
+            );
         }
 
         if (isset($providedFilters['vip'])) {

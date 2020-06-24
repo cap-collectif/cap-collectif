@@ -47,14 +47,16 @@ mappings:
             id: { type: keyword }
             slug: { type: keyword }
             createdAt: { type: date }
-            #      email: { type: keyword } # enable it for the next migration
-            username: &text_analysis_highlighted
+            email: &text_analysis_highlighted
                 type: text
                 analyzer: capco_french
                 index_options: offsets
                 fields:
                     std: { type: text, analyzer: capco_standard }
+            username: *text_analysis_highlighted
             biography: *text_analysis_highlighted
+            firstname: *text_analysis_highlighted
+            lastname: *text_analysis_highlighted
             roles: { type: text }
             userType:
                 type: object

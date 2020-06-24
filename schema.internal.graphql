@@ -5189,6 +5189,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """The user type to filter by."""
     userType: ID
     orderBy: UserOrder
+
+    """Search contributor by his email, username, lastname"""
+    term: String
   ): UserConnection!
 
   """Count of contributions associated with the project."""

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
@@ -18,6 +19,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProjectContributorResolver implements ResolverInterface
 {
+    use ResolverTrait;
+
     private $userSearch;
     private $logger;
     private $proposalSelectionVoteRepository;
@@ -48,11 +51,13 @@ class ProjectContributorResolver implements ResolverInterface
                 $providedFilters['step'],
                 $providedFilters['vip'],
                 $providedFilters['userType'],
+                $providedFilters['term'],
                 $orderBy,
             ) = [
                 GlobalId::fromGlobalId($args->offsetGet('step'))['id'],
                 $args->offsetGet('vip'),
                 $args->offsetGet('userType'),
+                $args->offsetGet('term'),
                 $args->offsetGet('orderBy') ?: [],
             ];
 

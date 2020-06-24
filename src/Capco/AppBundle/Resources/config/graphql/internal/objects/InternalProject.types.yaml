@@ -29,6 +29,9 @@ InternalProject:
                         description: 'The user type to filter by.'
                     orderBy:
                         type: 'UserOrder'
+                    term:
+                        type: 'String'
+                        description: 'Search contributor by his email, username, lastname'
             votes:
                 type: 'InternalVoteConnection!'
             steps:
