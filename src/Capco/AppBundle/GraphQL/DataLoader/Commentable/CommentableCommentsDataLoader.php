@@ -212,7 +212,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             }
             list($field, $direction) = [
                 $args->offsetGet('orderBy')['field'],
-                $args->offsetGet('orderBy')['direction']
+                $args->offsetGet('orderBy')['direction'],
             ];
 
             return $repository
@@ -240,7 +240,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         return [
             'commentableId' => $key['commentable']->getId(),
             'isAdmin' => $key['viewer'] ? $key['viewer']->isAdmin() : false,
-            'args' => $key['args']
+            'args' => $key['args'],
         ];
     }
 
@@ -249,7 +249,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         return [$key['commentable']->getId()];
     }
 
-    private function getIdAccordingToType(string $type, $commentable): string
+    private function getIdAccordingToType(string $type, $commentable): ?string
     {
         switch ($type) {
             case Proposal::class:
@@ -269,7 +269,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         }
     }
 
-    private function getCommentableRepositoryWithType(string $type): EntityRepository
+    private function getCommentableRepositoryWithType(string $type): ?EntityRepository
     {
         switch ($type) {
             case Proposal::class:
@@ -286,7 +286,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         }
     }
 
-    private function getCommentableRepository(CommentableInterface $commentable): EntityRepository
+    private function getCommentableRepository(CommentableInterface $commentable): ?EntityRepository
     {
         switch (true) {
             case $commentable instanceof Proposal:

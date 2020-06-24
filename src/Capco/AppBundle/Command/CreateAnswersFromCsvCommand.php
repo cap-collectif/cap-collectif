@@ -7,11 +7,12 @@ use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
+use Capco\UserBundle\Doctrine\UserManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
@@ -19,12 +20,30 @@ class CreateAnswersFromCsvCommand extends Command
 {
     private $userEmail = 'coucou@cap-collectif.com';
     private $title = 'Réponse du gouvernement';
-    private $container;
 
-    public function __construct(?string $name, ContainerInterface $container)
-    {
-        $this->container = $container;
+    private EntityManagerInterface $em;
+    private ConvertCsvToArray $convertCsvToArray;
+    private UserManager $userManager;
+    private OpinionRepository $opinionRepository;
+    private OpinionVersionRepository $opinionVersionRepository;
+    private UrlResolver $urlResolver;
+
+    public function __construct(
+        ?string $name,
+        EntityManagerInterface $em,
+        ConvertCsvToArray $convertCsvToArray,
+        UserManager $userManager,
+        OpinionRepository $opinionRepository,
+        OpinionVersionRepository $opinionVersionRepository,
+        UrlResolver $urlResolver
+    ) {
         parent::__construct($name);
+        $this->em = $em;
+        $this->convertCsvToArray = $convertCsvToArray;
+        $this->userManager = $userManager;
+        $this->opinionVersionRepository = $opinionVersionRepository;
+        $this->opinionRepository = $opinionRepository;
+        $this->urlResolver = $urlResolver;
     }
 
     protected function configure()
@@ -43,16 +62,8 @@ class CreateAnswersFromCsvCommand extends Command
 
     protected function import(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()
-            ->get('doctrine')
-            ->getManager();
-
-        $answers = $this->getContainer()
-            ->get(ConvertCsvToArray::class)
-            ->convert('pjl/answers.csv', '|');
-        $author = $this->getContainer()
-            ->get('fos_user.user_manager')
-            ->findOneBy(['email' => $this->userEmail]);
+        $answers = $this->convertCsvToArray->convert('pjl/answers.csv', '|');
+        $author = $this->userManager->findOneBy(['email' => $this->userEmail]);
         if (!$author) {
             throw new UsernameNotFoundException('Author email does not exist in db');
         }
@@ -75,13 +86,9 @@ class CreateAnswersFromCsvCommand extends Command
             $type = \in_array('versions', explode('/', $row['slug']), true) ? 'version' : 'opinion';
             $object = null;
             if ('opinion' === $type) {
-                $object = $this->getContainer()
-                    ->get(OpinionRepository::class)
-                    ->findOneBy(['slug' => $slug]);
+                $object = $this->opinionRepository->findOneBy(['slug' => $slug]);
             } elseif ('version' === $type) {
-                $object = $this->getContainer()
-                    ->get(OpinionVersionRepository::class)
-                    ->findOneBy(['slug' => $slug]);
+                $object = $this->opinionVersionRepository->findOneBy(['slug' => $slug]);
             }
 
             if (!$object) {
@@ -89,21 +96,17 @@ class CreateAnswersFromCsvCommand extends Command
             }
 
             if ($object->getAnswer()) {
-                $em->remove($object->getAnswer());
+                $this->em->remove($object->getAnswer());
             }
 
             $object->setAnswer($answer);
-
-            $em->persist($object);
-
-            $em->flush();
+            $this->em->persist($object);
+            $this->em->flush();
 
             $dump .=
                 '<li>' .
                 '<a href="' .
-                $this->getContainer()
-                    ->get(UrlResolver::class)
-                    ->getObjectUrl($object, false) .
+                $this->urlResolver->getObjectUrl($object, false) .
                 '">' .
                 $object->getAuthor()->getUsername() .
                 ' - ' .
@@ -120,10 +123,5 @@ class CreateAnswersFromCsvCommand extends Command
         $progress->finish();
 
         $output->writeln(\count($answers) . ' answers have been created !');
-    }
-
-    private function getContainer()
-    {
-        return $this->container;
     }
 }

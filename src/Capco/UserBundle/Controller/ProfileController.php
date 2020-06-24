@@ -48,6 +48,7 @@ class ProfileController extends Controller
     private UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository;
     private UserArchiveRepository $userArchiveRepository;
     private string $fireWall;
+    private string $projectDir;
     private TranslatorInterface $translator;
     private EntityManagerInterface $em;
 
@@ -66,7 +67,8 @@ class ProfileController extends Controller
         UserArchiveRepository $userArchiveRepository,
         TranslatorInterface $translator,
         EntityManagerInterface $em,
-        string $fireWall
+        string $fireWall,
+        string $projectDir
     ) {
         $this->userProposalsResolver = $userProposalsResolver;
         $this->eventDispatcher = $eventDispatcher;
@@ -81,6 +83,7 @@ class ProfileController extends Controller
         $this->userNotificationsConfigurationRepository = $userNotificationsConfigurationRepository;
         $this->userArchiveRepository = $userArchiveRepository;
         $this->fireWall = $fireWall;
+        $this->projectDir = $projectDir;
         $this->translator = $translator;
         $this->em = $em;
     }
@@ -135,7 +138,7 @@ class ProfileController extends Controller
             throw new NotFoundHttpException('Archive not found');
         }
 
-        $file = $this->get('kernel')->getRootDir() . '/../public/export/' . $archive->getPath();
+        $file = $this->projectDir . '/public/export/' . $archive->getPath();
 
         if (!file_exists($file)) {
             throw new NotFoundHttpException('Export not found');

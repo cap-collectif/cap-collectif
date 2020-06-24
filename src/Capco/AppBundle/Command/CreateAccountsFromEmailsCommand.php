@@ -2,22 +2,28 @@
 
 namespace Capco\AppBundle\Command;
 
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CreateAccountsFromEmailsCommand extends Command
 {
-    private $container;
+    private UserManagerInterface $userManager;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
-    public function __construct(string $name = null, ContainerInterface $container)
-    {
-        $this->container = $container;
+    public function __construct(
+        ?string $name,
+        UserManagerInterface $userManager,
+        UserPasswordEncoderInterface $passwordEncoder
+    ) {
         parent::__construct($name);
+        $this->userManager = $userManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     protected function configure()
@@ -55,9 +61,6 @@ class CreateAccountsFromEmailsCommand extends Command
             $contents = $file->getContents();
         }
 
-        $userManager = $this->getContainer()->get('fos_user.user_manager');
-        $passwordEncoder = $this->getContainer()->get('security.password_encoder');
-
         $emails = explode(' ', $contents);
         $dump = '';
         foreach ($emails as $key => $email) {
@@ -67,12 +70,12 @@ class CreateAccountsFromEmailsCommand extends Command
             $username = 'DRIVE' . ($key + 1);
             $password = bin2hex(openssl_random_pseudo_bytes(4));
 
-            $user = $userManager->createUser();
+            $user = $this->userManager->createUser();
             $user->setUsername($username);
             $user->setEmail($email);
-            $user->setPassword($passwordEncoder->encodePassword($user, $password));
+            $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
             $user->setEnabled(true);
-            $userManager->updateUser($user);
+            $this->userManager->updateUser($user);
             $dump .= $email . ' ' . $username . ' ' . $password . "\r\n";
         }
 
@@ -81,10 +84,5 @@ class CreateAccountsFromEmailsCommand extends Command
         $output->writeln(\count($emails) . ' accounts have been created !');
 
         return 0;
-    }
-
-    private function getContainer()
-    {
-        return $this->container;
     }
 }

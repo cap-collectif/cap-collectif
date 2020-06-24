@@ -2,23 +2,34 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Generator\DiffGenerator;
+use Capco\AppBundle\Repository\OpinionModalRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ComputeDiffCommand extends Command
 {
-    private $container;
+    private EntityManagerInterface $em;
+    private OpinionVersionRepository $opinionVersionRepository;
+    private OpinionModalRepository $modalRepository;
+    private DiffGenerator $diffGenerator;
 
-    public function __construct(string $name = null, ContainerInterface $container)
-    {
-        $this->container = $container;
+    public function __construct(
+        ?string $name,
+        EntityManagerInterface $em,
+        OpinionVersionRepository $opinionVersionRepository,
+        OpinionModalRepository $modalRepository,
+        DiffGenerator $diffGenerator
+    ) {
+        $this->em = $em;
+        $this->opinionVersionRepository = $opinionVersionRepository;
+        $this->modalRepository = $modalRepository;
+        $this->diffGenerator = $diffGenerator;
         parent::__construct($name);
     }
 
@@ -36,29 +47,25 @@ class ComputeDiffCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-        $em = $container->get('doctrine')->getManager();
-        $repo = $this->getContainer()->get(OpinionVersionRepository::class);
-
-        $versions = $repo->getAllIds();
+        $versions = $this->opinionVersionRepository->getAllIds();
 
         $progress = new ProgressBar($output, \count($versions));
 
         foreach ($versions as $versionId) {
-            $version = $repo->find($versionId);
+            $version = $this->opinionVersionRepository->find($versionId);
             if ('' === $version->getDiff() || $input->getOption('force')) {
-                $container->get(DiffGenerator::class)->generate($version);
-                $em->flush();
+                $this->diffGenerator->generate($version);
+                $this->em->flush();
             }
             $progress->advance();
         }
         $progress->finish();
 
-        $modals = $em->getRepository(OpinionModal::class)->findAll();
+        $modals = $this->modalRepository->findAll();
         $progress = new ProgressBar($output, \count($modals));
         foreach ($modals as $modal) {
-            $container->get(DiffGenerator::class)->generate($modal);
-            $em->flush();
+            $this->diffGenerator->generate($modal);
+            $this->em->flush();
             $progress->advance();
         }
         $progress->finish();
@@ -66,10 +73,5 @@ class ComputeDiffCommand extends Command
         $output->writeln('Computation completed');
 
         return 0;
-    }
-
-    private function getContainer()
-    {
-        return $this->container;
     }
 }

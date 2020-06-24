@@ -12,9 +12,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ThemeController extends Controller
 {
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
      * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
@@ -78,7 +86,7 @@ class ThemeController extends Controller
     {
         if (!$theme->canDisplay()) {
             throw new ProjectAccessDeniedException(
-                $this->get('translator')->trans('restricted-access', [], 'CapcoAppBundle')
+                $this->translator->trans('restricted-access', [], 'CapcoAppBundle')
             );
         }
 

@@ -33,8 +33,9 @@ services:
         arguments:
             $webDir: '%kernel.project_dir%/public/'
 
-    Capco\AppBundle\Mailer\MailerService: null
-    Capco\AppBundle\Generator\DiffGenerator: null
+    Capco\AppBundle\Mailer\MailerService: ~
+    Capco\AppBundle\Generator\DiffGenerator: ~
+
     Geocoder\Provider\GoogleMaps\GoogleMaps:
         arguments:
             $apiKey: '%google_maps_key_server%'

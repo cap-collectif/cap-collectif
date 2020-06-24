@@ -11,17 +11,23 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ModerationController extends Controller
 {
-    private $logger;
+    private LoggerInterface $logger;
+    private TranslatorInterface $translator;
+    private Publisher $publisher;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, TranslatorInterface $translator, Publisher $publisher)
     {
         $this->logger = $logger;
+        $this->translator = $translator;
+        $this->publisher = $publisher;
     }
 
     /**
@@ -49,7 +55,7 @@ class ModerationController extends Controller
             throw new NotFoundHttpException('This trash reason is not available.');
         }
 
-        $trashedReason = $this->get('translator')->trans($reason);
+        $trashedReason = $this->translator->trans($reason);
 
         $contribution
             ->setTrashedStatus(Trashable::STATUS_VISIBLE)
@@ -67,27 +73,27 @@ class ModerationController extends Controller
 
         $trashedMessage = '';
         if ($contribution instanceof Opinion) {
-            $this->get('swarrot.publisher')->publish(
+            $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::OPINION_TRASH,
                 new Message(json_encode(['opinionId' => $contribution->getId()]))
             );
-            $trashedMessage = $this->get('translator')->trans(
+            $trashedMessage = $this->translator->trans(
                 'the-proposal-has-been-successfully-moved-to-the-trash'
             );
         }
 
         if ($contribution instanceof Argument) {
-            $this->get('swarrot.publisher')->publish(
+            $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::ARGUMENT_TRASH,
                 new Message(json_encode(['argumentId' => $contribution->getId()]))
             );
-            $trashedMessage = $this->get('translator')->trans(
+            $trashedMessage = $this->translator->trans(
                 'the-argument-has-been-successfully-moved-to-the-trash'
             );
         }
 
         if ($contribution instanceof OpinionVersion) {
-            $trashedMessage = $this->get('translator')->trans(
+            $trashedMessage = $this->translator->trans(
                 'the-proposal-has-been-successfully-moved-to-the-trash'
             );
         }

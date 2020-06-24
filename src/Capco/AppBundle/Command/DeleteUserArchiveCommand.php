@@ -4,19 +4,31 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Repository\UserArchiveRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class DeleteUserArchiveCommand extends Command
 {
-    private $container;
+    private EntityManagerInterface $em;
+    private UserArchiveRepository $userArchiveRepository;
+    private Filesystem $filesystem;
+    private string $projectDir;
 
-    public function __construct(string $name = null, ContainerInterface $container)
-    {
-        $this->container = $container;
+    public function __construct(
+        ?string $name,
+        EntityManagerInterface $em,
+        UserArchiveRepository $userArchiveRepository,
+        Filesystem $filesystem,
+        string $projectRootDir
+    ) {
+        $this->em = $em;
+        $this->userArchiveRepository = $userArchiveRepository;
+        $this->filesystem = $filesystem;
+        $this->projectDir = $projectRootDir;
         parent::__construct($name);
     }
 
@@ -29,14 +41,11 @@ class DeleteUserArchiveCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $currDate = new \DateTime();
         $dateToDelete = $currDate->modify('-7 days');
 
         $output->writeln('Retrieving archives ...');
-        $archives = $this->getContainer()
-            ->get(UserArchiveRepository::class)
-            ->getArchivesToDelete($dateToDelete);
+        $archives = $this->userArchiveRepository->getArchivesToDelete($dateToDelete);
 
         $output->writeln(\count($archives) . ' archives to delete.');
         $progress = new ProgressBar($output, \count($archives));
@@ -50,7 +59,7 @@ class DeleteUserArchiveCommand extends Command
             $progress->advance();
         }
 
-        $em->flush();
+        $this->em->flush();
 
         $output->writeln('Old users archives are deleted !');
 
@@ -59,18 +68,9 @@ class DeleteUserArchiveCommand extends Command
 
     protected function removeArchiveFile(UserArchive $archive)
     {
-        $fileSystem = $this->getContainer()->get('filesystem');
-        $zipFile =
-            $this->getContainer()->getParameter('kernel.root_dir') .
-            '/../public/export/' .
-            $archive->getPath();
-        if ($fileSystem->exists($zipFile)) {
-            $fileSystem->remove($zipFile);
+        $zipFile = $this->projectDir . '/public/export/' . $archive->getPath();
+        if ($this->filesystem->exists($zipFile)) {
+            $this->filesystem->remove($zipFile);
         }
-    }
-
-    private function getContainer()
-    {
-        return $this->container;
     }
 }

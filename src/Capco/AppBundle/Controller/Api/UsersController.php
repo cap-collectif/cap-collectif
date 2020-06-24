@@ -36,20 +36,20 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UsersController extends AbstractFOSRestController
 {
-    private $logger;
-    private $notifier;
-    private $toggleManager;
-    private $encoderFactory;
-    private $commentRepository;
-    private $userManager;
-    private $userSearch;
-    private $userRepository;
-    private $responsesFormatter;
-    private $tokenGenerator;
-    private $userNotifier;
-    private $emailDomainRepository;
-    private $publisher;
-    private $userDefaultLocaleMutation;
+    private LoggerInterface $logger;
+    private FOSNotifier $notifier;
+    private Manager $toggleManager;
+    private EncoderFactoryInterface $encoderFactory;
+    private CommentRepository $commentRepository;
+    private UserManagerInterface $userManager;
+    private UserSearch $userSearch;
+    private UserRepository $userRepository;
+    private ResponsesFormatter $responsesFormatter;
+    private TokenGeneratorInterface $tokenGenerator;
+    private UserNotifier $userNotifier;
+    private EmailDomainRepository $emailDomainRepository;
+    private Publisher $publisher;
+    private SetUserDefaultLocaleMutation $userDefaultLocaleMutation;
 
     public function __construct(
         LoggerInterface $logger,
@@ -263,7 +263,7 @@ class UsersController extends AbstractFOSRestController
         }
 
         if ($user->getNewEmailToConfirm()) {
-            $this->get('swarrot.publisher')->publish(
+            $this->publisher->publish(
                 'user.email',
                 new Message(
                     json_encode([

@@ -157,7 +157,6 @@ EOF;
     protected $executor;
     protected $listener;
     protected $projectRootDir;
-    protected $kernelRootDir;
     protected $userRepository;
 
     private $projectRepository;
@@ -169,8 +168,7 @@ EOF;
         GraphQlAclListener $listener,
         UserRepository $userRepository,
         ExportUtils $exportUtils,
-        string $projectRootDir,
-        string $kernelRootDir
+        string $projectRootDir
     ) {
         parent::__construct($exportUtils);
         $listener->disableAcl();
@@ -179,7 +177,6 @@ EOF;
         $this->userRepository = $userRepository;
         $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
-        $this->kernelRootDir = $kernelRootDir;
     }
 
     public function getRowCellValue(array $proposal, string $headerCell)

@@ -44,3 +44,7 @@ services:
     Capco\AppBundle\Command\ImportConsultationFromCsvCommand:
         arguments:
             $name: 'capco:import:consultation-from-csv'
+
+    Capco\AppBundle\Command\DeleteUserArchiveCommand:
+        arguments:
+            $name: 'capco:user_archives:delete'

@@ -28,7 +28,7 @@ abstract class AbstractMaker extends Command
     protected $className;
     private $container;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(?string $name = null, ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct($name);
@@ -114,7 +114,7 @@ abstract class AbstractMaker extends Command
         $this->sourcePath =
             $this->getContainer()
                 ->get('kernel')
-                ->getRootDir() . '/../src';
+                ->getProjectDir() . '/src';
         $this->finder = new Finder();
         $defaultDirectories = ['src/Capco/AppBundle/Entity', 'src/Capco/UserBundle/Entity'];
         $directories = array_merge($this->getDirectories(), $defaultDirectories);

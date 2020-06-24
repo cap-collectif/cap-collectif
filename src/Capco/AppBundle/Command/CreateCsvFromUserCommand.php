@@ -117,7 +117,6 @@ EOF;
     protected $executor;
     protected $listener;
     protected $projectRootDir;
-    protected $kernelRootDir;
 
     public function __construct(
         UserRepository $userRepository,
@@ -126,8 +125,7 @@ EOF;
         Executor $executor,
         GraphQlAclListener $listener,
         ExportUtils $exportUtils,
-        string $projectRootDir,
-        string $kernelRootDir
+        string $projectRootDir
     ) {
         $listener->disableAcl();
         $this->userRepository = $userRepository;
@@ -136,7 +134,6 @@ EOF;
         $this->executor = $executor;
         $this->listener = $listener;
         $this->projectRootDir = $projectRootDir;
-        $this->kernelRootDir = $kernelRootDir;
 
         parent::__construct($exportUtils);
     }

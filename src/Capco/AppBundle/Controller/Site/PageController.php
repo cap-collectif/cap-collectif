@@ -9,17 +9,22 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/pages")
  */
 class PageController extends Controller
 {
-    private $siteParameterRepository;
+    private SiteParameterRepository $siteParameterRepository;
+    private TranslatorInterface $translator;
 
-    public function __construct(SiteParameterRepository $siteParameterRepository)
-    {
+    public function __construct(
+        SiteParameterRepository $siteParameterRepository,
+        TranslatorInterface $translator
+    ) {
         $this->siteParameterRepository = $siteParameterRepository;
+        $this->translator = $translator;
     }
 
     /**
@@ -29,13 +34,13 @@ class PageController extends Controller
      */
     public function showAction(Request $request, ?PageTranslation $pageTranslation = null)
     {
-        $slugCharter = strtolower($this->get('translator')->trans('charter', [], 'CapcoAppBundle'));
+        $slugCharter = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle'));
 
         if (null === $pageTranslation && $request->get('slug') === $slugCharter) {
             $body = $this->siteParameterRepository->getValue('charter.body', $request->getLocale());
             if (null === $body) {
                 throw $this->createNotFoundException(
-                    $this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle')
+                    $this->translator->trans('page.error.not_found', [], 'CapcoAppBundle')
                 );
             }
 
@@ -44,7 +49,7 @@ class PageController extends Controller
 
         if (!$pageTranslation) {
             throw $this->createNotFoundException(
-                $this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle')
+                $this->translator->trans('page.error.not_found', [], 'CapcoAppBundle')
             );
         }
 
@@ -52,7 +57,7 @@ class PageController extends Controller
 
         if (!$page->getIsEnabled()) {
             throw $this->createNotFoundException(
-                $this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle')
+                $this->translator->trans('page.error.not_found', [], 'CapcoAppBundle')
             );
         }
 

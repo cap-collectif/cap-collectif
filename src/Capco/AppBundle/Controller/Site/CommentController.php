@@ -9,21 +9,41 @@ use Capco\AppBundle\Form\CommentType as CommentForm;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CommentController extends Controller
 {
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
+    private CommentableCommentsDataLoader $commentableCommentsDataLoader;
+    private CommentResolver $commentResolver;
+    private TranslatorInterface $translator;
+    private EntityManagerInterface $em;
+    private SessionInterface $session;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        CommentableCommentsDataLoader $commentableCommentsDataLoader,
+        CommentResolver $commentResolver,
+        TranslatorInterface $translator,
+        EntityManagerInterface $em,
+        SessionInterface $session
+    ) {
         $this->eventDispatcher = $eventDispatcher;
+        $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
+        $this->commentResolver = $commentResolver;
+        $this->translator = $translator;
+        $this->em = $em;
+        $this->session = $session;
     }
 
     /**
@@ -40,7 +60,7 @@ class CommentController extends Controller
     {
         if (false === $comment->canContribute($this->getUser())) {
             throw new ProjectAccessDeniedException(
-                $this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
+                $this->translator->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
             );
         }
 
@@ -49,7 +69,7 @@ class CommentController extends Controller
 
         if ($userCurrent !== $userPostComment) {
             throw new ProjectAccessDeniedException(
-                $this->get('translator')->trans('comment.error.not_author', [], 'CapcoAppBundle')
+                $this->translator->trans('comment.error.not_author', [], 'CapcoAppBundle')
             );
         }
 
@@ -58,28 +78,22 @@ class CommentController extends Controller
             $form->handleRequest($request);
 
             // We create a session for flashBag
-            $flashBag = $this->get('session')->getFlashBag();
+            $flashBag = $this->session->getFlashBag();
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 $comment->resetVotes();
-                $em->persist($comment);
-                $em->flush();
+                $this->em->persist($comment);
+                $this->em->flush();
                 $this->eventDispatcher->dispatch(
                     CapcoAppBundleEvents::COMMENT_CHANGED,
                     new CommentChangedEvent($comment, 'update')
                 );
 
-                $flashBag->add(
-                    'success',
-                    $this->get('translator')->trans('comment.update.success')
-                );
+                $flashBag->add('success', $this->translator->trans('comment.update.success'));
 
-                return $this->redirect(
-                    $this->get(CommentResolver::class)->getUrlOfRelatedObject($comment)
-                );
+                return $this->redirect($this->commentResolver->getUrlOfRelatedObject($comment));
             }
-            $flashBag->add('danger', $this->get('translator')->trans('comment.update.error'));
+            $flashBag->add('danger', $this->translator->trans('comment.update.error'));
         }
 
         return ['form' => $form->createView(), 'comment' => $comment];
@@ -99,7 +113,7 @@ class CommentController extends Controller
     {
         if (false === $comment->canContribute($this->getUser())) {
             throw new ProjectAccessDeniedException(
-                $this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
+                $this->translator->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
             );
         }
 
@@ -108,7 +122,7 @@ class CommentController extends Controller
 
         if ($userCurrent !== $userPostComment) {
             throw new ProjectAccessDeniedException(
-                $this->get('translator')->trans('comment.error.not_author', [], 'CapcoAppBundle')
+                $this->translator->trans('comment.error.not_author', [], 'CapcoAppBundle')
             );
         }
 
@@ -119,28 +133,25 @@ class CommentController extends Controller
             $form->handleRequest($request);
 
             // We create a session for flashBag
-            $flashBag = $this->get('session')->getFlashBag();
+            $flashBag = $this->session->getFlashBag();
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->remove($comment);
+                $this->em->remove($comment);
                 $this->eventDispatcher->dispatch(
                     CapcoAppBundleEvents::COMMENT_CHANGED,
                     new CommentChangedEvent($comment, 'remove')
                 );
-                $em->flush();
+                $this->em->flush();
 
-                $flashBag->add('info', $this->get('translator')->trans('comment.delete.success'));
+                $flashBag->add('info', $this->translator->trans('comment.delete.success'));
 
-                $this->get(CommentableCommentsDataLoader::class)->invalidate(
+                $this->commentableCommentsDataLoader->invalidate(
                     $comment->getRelatedObject()->getId()
                 );
 
-                return $this->redirect(
-                    $this->get(CommentResolver::class)->getUrlOfRelatedObject($comment)
-                );
+                return $this->redirect($this->commentResolver->getUrlOfRelatedObject($comment));
             }
-            $flashBag->add('danger', $this->get('translator')->trans('comment.delete.error'));
+            $flashBag->add('danger', $this->translator->trans('comment.delete.error'));
         }
 
         return ['form' => $form->createView(), 'comment' => $comment];

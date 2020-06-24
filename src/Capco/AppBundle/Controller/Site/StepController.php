@@ -23,9 +23,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class StepController extends Controller
 {
+    private TranslatorInterface $translator;
+    private SerializerInterface $serializer;
+    private AuthorizationCheckerInterface $authorizationChecker;
+
+    public function __construct(TranslatorInterface $translator, SerializerInterface $serializer, AuthorizationCheckerInterface $authorizationChecker)
+    {
+        $this->translator = $translator;
+        $this->serializer = $serializer;
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
     /**
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
@@ -219,9 +233,7 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $serializer = $this->get('serializer');
-
-        $props = $serializer->serialize(
+        $props = $th->serialize(
             ['synthesis_id' => $step->getSynthesis()->getId(), 'mode' => 'view'],
             'json'
         );
@@ -287,15 +299,17 @@ class StepController extends Controller
                 $reply = $this->get(ReplyRepository::class)->find($decodedId);
             }
             if (!$viewer || !$decodedId || !$reply || !$reply->viewerCanSee($viewer)) {
-                return $this->redirectToRoute('app_project_show_questionnaire', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                ]);
+                return $this->redirectToRoute(
+                    'app_project_show_questionnaire',
+                    [
+                        'projectSlug' => $project->getSlug(),
+                        'stepSlug' => $step->getSlug(),
+                    ]
+                );
             }
         }
 
-        $serializer = $this->get('serializer');
-        $props = $serializer->serialize(
+        $props = $this->serializer->serialize(
             [
                 'step' => $step,
                 'isPrivateResult' => $step->getQuestionnaire()
@@ -360,16 +374,14 @@ class StepController extends Controller
 
         if (
             !$step->getSynthesis()->isEditable() ||
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->authorizationChecker->isGranted('ROLE_ADMIN')
         ) {
             throw new ProjectAccessDeniedException(
-                $this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle')
+                $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
             );
         }
 
-        $serializer = $this->get('serializer');
-
-        $props = $serializer->serialize(
+        $props = $this->serializer->serialize(
             ['synthesis_id' => $step->getSynthesis()->getId(), 'mode' => 'edit'],
             'json'
         );
@@ -408,7 +420,7 @@ class StepController extends Controller
         ?Consultation $consultation = null
     ) {
         if (!$step->canDisplay($this->getUser())) {
-            $error = $this->get('translator')->trans(
+            $error = $this->translator->trans(
                 'project.error.not_found',
                 [],
                 'CapcoAppBundle'
@@ -420,10 +432,13 @@ class StepController extends Controller
         $isMultiConsultation = $step->isMultiConsultation();
 
         if (!$consultation && $isMultiConsultation) {
-            return $this->redirectToRoute('app_project_show_consultations', [
-                'stepSlug' => $step->getSlug(),
-                'projectSlug' => $project->getSlug(),
-            ]);
+            return $this->redirectToRoute(
+                'app_project_show_consultations',
+                [
+                    'stepSlug' => $step->getSlug(),
+                    'projectSlug' => $project->getSlug(),
+                ]
+            );
         }
 
         // To keep the same old URI to handle consultion show and supporting the new URI for showing a consultation
@@ -471,7 +486,7 @@ class StepController extends Controller
     public function showConsultationsAction(Project $project, ConsultationStep $step)
     {
         if (!$step->canDisplay($this->getUser())) {
-            $error = $this->get('translator')->trans(
+            $error = $this->translator->trans(
                 'project.error.not_found',
                 [],
                 'CapcoAppBundle'
@@ -481,10 +496,13 @@ class StepController extends Controller
         }
 
         if (!$step->isMultiConsultation()) {
-            return $this->redirectToRoute('app_project_show_consultation', [
-                'stepSlug' => $step->getSlug(),
-                'projectSlug' => $project->getSlug(),
-            ]);
+            return $this->redirectToRoute(
+                'app_project_show_consultation',
+                [
+                    'stepSlug' => $step->getSlug(),
+                    'projectSlug' => $project->getSlug(),
+                ]
+            );
         }
 
         return [
