@@ -54,7 +54,7 @@ trait ExportDatasUserTrait
         }
         // @TODO we do not compare media (eg: .jpg) for now
 
-        (new Process('rm -rf ' . $extractTo))->mustRun();
+        (Process::fromShellCommandline('rm -rf ' . $extractTo))->mustRun();
     }
 
     /**

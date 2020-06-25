@@ -319,42 +319,50 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         proposalForm: '@proposalformIdf'
         question: '@multiplequestionIdfGrandOrLocal'
         position: 2
+    qaqIdfGrandProject:
+        proposalForm: '@proposalformIdf'
+        question: '@sectionIdfGrandProjet'
+        position: 3        
     qaqIdfGrandProjectInfo1:
         proposalForm: '@proposalformIdf'
         question: '@sectionIdfInfoGrandProjet'
-        position: 3
+        position: 4
     qaqIdfGrandProjectInfo2:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfGrandProjectInfo1'
-        position: 4
+        position: 5
     qaqIdfGrandProjectInfo3:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfGrandProjectInfo2'
-        position: 5
+        position: 6
     qaqIdfGrandProjectInfo4:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfGrandProjectInfo3'
-        position: 6
+        position: 7
     qaqIdfGrandProjectInfo5:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfGrandProjectInfo4'
-        position: 7
+        position: 8
     qaqIdfGrandProjectPorteur1:
         proposalForm: '@proposalformIdf'
         question: '@sectionIdfPorteurGrandProjet'
-        position: 8
+        position: 9
     qaqIdfGrandProjectPorteur2:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfGrandProjectPorteur1'
-        position: 9
+        position: 10
     qaqIdfGrandProjectPorteur3:
         proposalForm: '@proposalformIdf'
         question: '@multiplequestionIdfGrandProjet1'
-        position: 10
+        position: 11
     qaqIdfGrandProjectPorteur4:
         proposalForm: '@proposalformIdf'
         question: '@simplequestionIdfGrandProjectPorteur2'
-        position: 11
+        position: 12
+    qaqIdfProjectLocal:
+        proposalForm: '@proposalformIdf'
+        question: '@sectionIdfProjectLocal'
+        position: 19
     qaqIdfProjectLocalInfo1:
         proposalForm: '@proposalformIdf'
         question: '@sectionIdfInfoProjectLocal'

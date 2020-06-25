@@ -60,7 +60,7 @@ class MigrationOnRealDatabasesCommand extends Command
         );
 
         $output->writeln('<info>Loading data...</info>');
-        $job = new Process('mysql -h database -u root symfony < ' . 'databases/' . $database);
+        $job = Process::fromShellCommandline('mysql -h database -u root symfony < ' . 'databases/' . $database);
         $job->setTimeout(3600 * 20);
         $job->run();
         $output->writeln('<info>Done loading data.</info>');
@@ -99,7 +99,7 @@ class MigrationOnRealDatabasesCommand extends Command
         } catch (\Exception $e) {
             if (!$process->isSuccessful()) {
                 //cleaning to be sure no private date remain in case of error
-                throw new ProcessFailedException($process);
+                throw new Process($process);
             }
             $this->launchCommand($wdir, ['rm', '-f', '*.gz']);
             $this->launchCommand($wdir, ['rm', '-f', '*.sql']);

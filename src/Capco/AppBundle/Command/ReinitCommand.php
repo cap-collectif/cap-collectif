@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Post;
-use Joli\JoliNotif\Notification;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Reply;
@@ -15,7 +14,6 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\MediaBundle\Entity\Media;
-use Joli\JoliNotif\NotifierFactory;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Proposal;
@@ -83,6 +81,8 @@ use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader;
+use Capco\AppBundle\DataFixtures\Processor\MediaProcessor;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ReinitCommand extends Command
 {
@@ -90,11 +90,14 @@ class ReinitCommand extends Command
     private $doctrine;
     private $em;
     private $container;
+    private $mediaProcessor;
+    private $stopwatch;
 
     public function __construct(
         string $name,
         ManagerRegistry $managerRegistry,
         EntityManagerInterface $em,
+        MediaProcessor $mediaProcessor,
         ContainerInterface $container
     ) {
         parent::__construct($name);
@@ -102,6 +105,7 @@ class ReinitCommand extends Command
         $this->doctrine = $managerRegistry;
         $this->em = $em;
         $this->container = $container;
+        $this->mediaProcessor = $mediaProcessor;
     }
 
     protected function configure()
@@ -135,10 +139,11 @@ class ReinitCommand extends Command
 
             return 1;
         }
+        $this->stopwatch = new Stopwatch();
+
+        $this->mediaProcessor->setOutput($output);
 
         $this->env = $input->getOption('env');
-
-        $notifier = NotifierFactory::create();
 
         try {
             $this->dropDatabase($output);
@@ -219,37 +224,38 @@ class ReinitCommand extends Command
 
         $output->writeln('<info>Synthesis updated !</info>');
 
-        if ($notifier) {
-            $notifier->send(
-                (new Notification())->setTitle('Success')->setBody('Database reseted.')
-            );
-        }
-
         return 0;
     }
 
     protected function createDatabase(OutputInterface $output)
     {
+        $this->stopwatch->start('createDatabase');
         $this->runCommands(
             [
                 'doctrine:database:create' => [],
             ],
             $output
         );
+        $event = $this->stopwatch->stop('createDatabase');
+        $output->writeln('Creating database duration: <info>' . $event->getDuration()  . '</info>ms');
     }
 
     protected function createSchema(OutputInterface $output)
     {
+        $this->stopwatch->start('createSchema');
         $this->runCommands(
             [
                 'doctrine:schema:create' => [],
             ],
             $output
         );
+        $event = $this->stopwatch->stop('createSchema');
+        $output->writeln('Creating database schema duration: <info>' . $event->getDuration()  . '</info>ms');
     }
 
     protected function dropDatabase(OutputInterface $output)
     {
+        $this->stopwatch->start('dropDatabase');
         $this->runCommands(
             [
                 'doctrine:database:drop' => ['--force' => true],
@@ -262,6 +268,8 @@ class ReinitCommand extends Command
             $connection->close();
             $output->writeln('<info>previous connection closed</info>');
         }
+        $event = $this->stopwatch->stop('dropDatabase');
+        $output->writeln('Dropping database duration: <info>' . $event->getDuration()  . '</info>ms');
     }
 
     protected function loadFixtures(OutputInterface $output, $env = 'dev')
@@ -339,12 +347,16 @@ class ReinitCommand extends Command
             $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
             $metadata->setIdGenerator(new AssignedGenerator());
         }
+        $this->stopwatch->start('loadFixtures');
+
         $this->runCommands(
             [
                 'hautelook:fixtures:load' => ['-e' => $env],
             ],
             $output
         );
+        $event = $this->stopwatch->stop('loadFixtures');
+        $output->writeln('Loading fixtures duration: <info>' . $event->getDuration()  . '</info>ms');
     }
 
     protected function loadToggles(OutputInterface $output)
@@ -409,12 +421,18 @@ class ReinitCommand extends Command
 
     protected function executeMigrations(OutputInterface $output)
     {
+        $this->stopwatch->start('executeMigrations');
+
         $this->runCommands(
             [
                 'doctrine:migration:migrate' => ['--no-interaction' => true],
             ],
             $output
         );
+        $event = $this->stopwatch->stop('executeMigrations');
+
+        $output->writeln('Adding migrations duration: <info>' . $event->getDuration()  . '</info>ms');
+
     }
 
     protected function mockMigrations(OutputInterface $output)

@@ -99,13 +99,13 @@ Capco\AppBundle\Entity\LogicJump:
         id: logicjumpIdfGrandProjet
         position: 1
         origin: '@multiplequestionIdfGrandOrLocal'
-        destination: '@sectionIdfInfoGrandProjet'
+        destination: '@sectionIdfGrandProjet'
         conditions: ['@ljcIdfProjectGrand']
     logicjumpIdfProjetLocal:
         id: logicjumpIdfProjetLocal
         position: 2
         origin: '@multiplequestionIdfGrandOrLocal'
-        destination: '@sectionIdfInfoProjectLocal'
+        destination: '@sectionIdfProjectLocal'
         conditions: ['@ljcIdfProjectLocal']
     logicjumpLocalAssociation:
         id: logicjumpLocalAssociation

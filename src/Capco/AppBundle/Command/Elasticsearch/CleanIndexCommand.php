@@ -34,7 +34,7 @@ class CleanIndexCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('all')) {
-            $job = new Process('curl -sS -XDELETE http://elasticsearch:9200/_all');
+            $job = Process::fromShellCommandline('curl -sS -XDELETE http://elasticsearch:9200/_all');
             echo $job->getCommandLine() . PHP_EOL;
             $job->mustRun();
 

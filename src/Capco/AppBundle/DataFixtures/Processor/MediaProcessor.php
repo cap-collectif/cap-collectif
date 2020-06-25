@@ -10,6 +10,7 @@ use Sonata\ClassificationBundle\Model\ContextInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Process\Process;
 use Liip\ImagineBundle\Service\FilterService;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class MediaProcessor implements ProcessorInterface
 {
@@ -17,6 +18,9 @@ class MediaProcessor implements ProcessorInterface
     private $em;
     private $filterService;
     private $projectDir;
+    private $output;
+    private $progressBar;
+
 
     public function __construct(
         EntityManagerInterface $em,
@@ -28,8 +32,24 @@ class MediaProcessor implements ProcessorInterface
         $this->projectDir = $projectDir;
     }
 
+    public function setOutput($output) {
+        $this->output = $output;
+    }
+
     public function preProcess(string $id, $object): void
     {
+        if ($this->output) {
+            if (!$this->progressBar) {
+                ProgressBar::setFormatDefinition('custom', ' %current%/%max% -- %message%');
+                $this->progressBar = new ProgressBar($this->output, 8000);
+                $this->progressBar->setFormat('custom');
+                $this->progressBar->setMessage('Pre processing…');
+                $this->progressBar->start();
+            }
+            $this->progressBar->setMessage('Pre processing…<info>' . \get_class($object). '</info>' . PHP_EOL);
+            $this->progressBar->advance();
+        }
+        
         if ($object instanceof Media) {
             $this->referenceMap[$id] = $object->getProviderReference();
 
@@ -50,6 +70,10 @@ class MediaProcessor implements ProcessorInterface
      */
     public function postProcess(string $id, $object): void
     {
+        if ($this->output) {
+            $this->progressBar->setMessage('Post processing…<info>' . \get_class($object). '</info>' . PHP_EOL);
+            $this->progressBar->advance();
+        }
         /* TODO: Please investigate why this is slow since SF4. */
         if ($object instanceof Media) {
             $newProviderReference = $this->referenceMap[$id];
@@ -57,7 +81,7 @@ class MediaProcessor implements ProcessorInterface
                 !empty($newProviderReference) &&
                 $newProviderReference !== $object->getProviderReference()
             ) {
-                (new Process(
+                (Process::fromShellCommandline(
                     'mv /var/www/public/media/default/0001/01/' .
                         $object->getProviderReference() .
                         ' /var/www/public/media/default/0001/01/' .

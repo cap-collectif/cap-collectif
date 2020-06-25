@@ -4,26 +4,39 @@ Capco\AppBundle\Entity\Questions\SectionQuestion:
     title: Nouvelle section <current()>
     description: ma super description <current()>
     type: 10
-
+  sectionIdfGrandProjet:
+    id: 350
+    title: Grand Projet
+    type: 10
+    alwaysJumpDestinationQuestion: '@sectionIdfInfoGrandProjet'
   sectionIdfInfoGrandProjet:
     id: 304
-    title: Grand Projet / Informations complémentaires sur mon projet
+    level: 1
+    title: Informations complémentaires sur mon projet
     type: 10
     alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectInfo1'
   sectionIdfPorteurGrandProjet:
     id: 305
-    title: Grand projet / Informations sur le porteur de projet
+    level: 1
+    title: Informations sur le porteur de projet
     type: 10
     alwaysJumpDestinationQuestion: '@simplequestionIdfGrandProjectPorteur1'
+  sectionIdfProjectLocal:
+    id: 351
+    title: Projet local
+    type: 10
+    alwaysJumpDestinationQuestion: '@sectionIdfInfoProjectLocal'
   sectionIdfPorteurProjectLocal:
     id: 306
-    title: Projet local / Informations sur le porteur de projet
+    title: Informations sur le porteur de projet
     type: 10
+    level: 1
     alwaysJumpDestinationQuestion: '@multiplequestionIdfProjetLocal1'
   sectionIdfInfoProjectLocal:
     id: 307
-    title: Projet Local / Informations complémentaires sur mon projet
+    title: Informations complémentaires sur mon projet
     type: 10
+    level: 1
     alwaysJumpDestinationQuestion: '@simplequestionIdfProjetLocalInfo1'
   sectionEvalIdf1:
     id: 308

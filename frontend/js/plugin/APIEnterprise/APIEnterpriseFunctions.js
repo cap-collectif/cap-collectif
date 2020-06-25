@@ -27,11 +27,11 @@ import {
 import type { Dispatch } from '~/types';
 import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type';
 
-const INDEX_TYPE_QUESTION = 20;
-const INDEX_RNA_QUESTION = 33;
-const INDEX_ASSOC_SIRET_QUESTION = 22;
-const INDEX_ENTER_QUESTION = 49;
-const INDEX_PUB_ORGA_QUESTION = 61;
+const INDEX_TYPE_QUESTION = 22;
+const INDEX_RNA_QUESTION = 35;
+const INDEX_ASSOC_SIRET_QUESTION = 24;
+const INDEX_ENTER_QUESTION = 51;
+const INDEX_PUB_ORGA_QUESTION = 63;
 
 export const getApiEnterpriseType = (type: string): string => {
   switch (type.trim().toLowerCase()) {

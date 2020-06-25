@@ -92,8 +92,8 @@ class ApplicationContext extends UserContext
     {
         // We reset everything
         $jobs = [
-            new Process('curl -sS -XBAN http://capco.test:8181'),
-            new Process('redis-cli -h redis FLUSHALL'),
+            Process::fromShellCommandline('curl -sS -XBAN http://capco.test:8181'),
+            Process::fromShellCommandline('redis-cli -h redis FLUSHALL'),
         ];
 
         $scenario = $scope->getScenario();
@@ -105,7 +105,7 @@ class ApplicationContext extends UserContext
             foreach ($messagesTypes as $messageType) {
                 $this->queues[] = $messageType['routing_key'];
             }
-            $jobs[] = new Process(
+            $jobs[] = Process::fromShellCommandline(
                 'php bin/rabbit vhost:mapping:create --password=' .
                     $this->getParameter('rabbitmq_password') .
                     ' --user=' .
@@ -123,8 +123,8 @@ class ApplicationContext extends UserContext
         // Indeed, we have no way to only copy paste medias because of SonataMediaBundle's workflow.
         // It launch a complete reinit. Use it carefully !
         if ($scenario->hasTag('media')) {
-            $jobs[] = new Process('rm -rf public/media/*');
-            $jobs[] = new Process(
+            $jobs[] = Process::fromShellCommandline('rm -rf public/media/*');
+            $jobs[] = Process::fromShellCommandline(
                 'php -d memory_limit=-1 bin/console capco:reinit --force --env=test'
             );
         }
@@ -168,7 +168,7 @@ class ApplicationContext extends UserContext
     public function resetExports(AfterScenarioScope $scope)
     {
         if ($scope->getScenario()->hasTag('export')) {
-            $job = new Process('rm -rf public/export/*');
+            $job = Process::fromShellCommandline('rm -rf public/export/*');
             echo $job->getCommandLine() . PHP_EOL;
             echo 'Clearing exports...' . PHP_EOL;
             $job->mustRun();
@@ -182,7 +182,7 @@ class ApplicationContext extends UserContext
     {
         $scenario = $scope->getScenario();
         if ($scenario->hasTag('database')) {
-            $job = new Process('mysql -h database -u root symfony < var/db.backup');
+            $job = Process::fromShellCommandline('mysql -h database -u root symfony < var/db.backup');
             echo $job->getCommandLine() . PHP_EOL;
             $job->mustRun();
         }

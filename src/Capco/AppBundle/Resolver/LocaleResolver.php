@@ -42,9 +42,9 @@ class LocaleResolver
             $defaultLocale = $this->localeRepository->getDefaultCode();
         } catch (LocaleConfigurationException $e) {
             $defaultLocale = $this->symfonyConfigurationLocale;
-            $this->logger->warning(
-                'Default locale is not configured with unstable__multilangue yet activated: using symfony s default locale'
-            );
+            // $this->logger->warning(
+            //     'Default locale is not configured with unstable__multilangue yet activated: using symfony s default locale'
+            // );
         }
 
         return $defaultLocale;

@@ -29,7 +29,7 @@ final class Version20200302163542 extends AbstractMigration implements Container
         // Delete all sessions because the format changed with sf4
         $redis_host = $this->container->getParameter('redis_dsn');
 
-        $job = new Process(
+        $job = Process::fromShellCommandline(
             'redis-cli -h ' .
                 $redis_host .
                 ' keys session* | xargs redis-cli -h ' .

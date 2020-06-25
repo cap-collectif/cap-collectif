@@ -152,7 +152,7 @@ EOF;
         $matchTo = self::getSnapshotDir($userId);
 
         // Delete current snapshot
-        (new Process('rm -rf ' . $matchTo))->mustRun();
+        (Process::fromShellCommandline('rm -rf ' . $matchTo))->mustRun();
         if (!mkdir($matchTo, 0755) && !is_dir($matchTo)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $matchTo));
         }
@@ -182,7 +182,7 @@ EOF;
         $finder->files()->in($extractTo);
 
         foreach ($finder as $file) {
-            (new Process(
+            (Process::fromShellCommandline(
                 'mv ' .
                     $extractTo .
                     $file->getRelativePathname() .
@@ -193,7 +193,7 @@ EOF;
             chmod($matchTo . $file->getRelativePathname(), 0755);
         }
 
-        (new Process('rm -rf ' . $extractTo))->mustRun();
+        (Process::fromShellCommandline('rm -rf ' . $extractTo))->mustRun();
     }
 
     public function getNodeContent($content, ?string $columnName, string $closestPath = ''): array

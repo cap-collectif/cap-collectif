@@ -35,10 +35,10 @@ trait SnapshotCommandTrait
         $generatedDirectory = $this->projectRootDir . "/public/export/${id}";
         $gitDirectory = $this->projectRootDir . "/__snapshots__/exports/${id}";
 
-        (new Process('rm -rf ' . $gitDirectory))->mustRun();
+        (Process::fromShellCommandline('rm -rf ' . $gitDirectory))->mustRun();
 
         chmod($generatedDirectory, 0755);
 
-        (new Process("mv ${generatedDirectory} ${gitDirectory}"))->mustRun();
+        (Process::fromShellCommandline("mv ${generatedDirectory} ${gitDirectory}"))->mustRun();
     }
 }
