@@ -22,13 +22,14 @@ class UserVotesResolver implements ResolverInterface
     public function __invoke(
         $viewer,
         User $user,
-        Argument $args = null,
+        ?Argument $args = null,
         ?\ArrayObject $context = null
     ): ConnectionInterface {
         if (!$args) {
             $args = new Argument(['first' => 0]);
         }
 
+        $contribuableId = $args->offsetGet('contribuableId');
         $aclDisabled =
             $context &&
             $context->offsetExists('disable_acl') &&
@@ -36,6 +37,7 @@ class UserVotesResolver implements ResolverInterface
         $validViewer = $viewer instanceof UserInterface;
 
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $contribuableId,
             $aclDisabled,
             $user,
             $validViewer,
@@ -48,6 +50,7 @@ class UserVotesResolver implements ResolverInterface
                 return $this->voteSearch->getVotesByAuthorViewerCanSee(
                     $user,
                     $viewer,
+                    $contribuableId,
                     $limit,
                     $cursor
                 );

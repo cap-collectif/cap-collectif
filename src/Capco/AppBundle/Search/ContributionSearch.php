@@ -22,6 +22,7 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
 use Elastica\ResultSet;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ContributionSearch extends Search
@@ -34,7 +35,6 @@ class ContributionSearch extends Search
         ContributionType::SOURCE => Source::class,
         ContributionType::REPLY => Reply::class,
         ContributionType::PROPOSAL => Proposal::class,
-        ContributionType::VOTE => AbstractVote::class,
     ];
 
     private $entityManager;
@@ -181,7 +181,7 @@ class ContributionSearch extends Search
         bool $includeTrashed = false
     ): ElasticsearchPaginatedResult {
         $contributions = ['results' => []];
-        $inConsultation = false;
+        $inConsultation = true;
         $contributionTypes = null;
         $boolQuery = new Query\BoolQuery();
         list($contribuableDecodedId, $contribuableType) = [
@@ -211,12 +211,20 @@ class ContributionSearch extends Search
                         ->addFilter(new Query\Exists('project'));
 
                     break;
-                default:
+                case false !== strpos($contribuableType, 'Step'):
                     $boolQuery
                         ->addFilter(
                             new Query\Term(['step.id' => ['value' => $contribuableDecodedId]])
                         )
                         ->addFilter(new Query\Exists('step'));
+
+                    break;
+                default:
+                    throw new UserError(
+                        'The contribuableId "' .
+                            $contribuableId .
+                            '" does not match any Project, Step or Consultation'
+                    );
 
                     break;
             }

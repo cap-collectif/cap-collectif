@@ -329,3 +329,63 @@ Object {
   },
 }
 `;
+
+exports[`User.votes connection fetches user votes on a specific project 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDIyNzQ1MzIwMDAwO2k6MTtzOjU6IjkxMDAyIjt9",
+          "node": Object {
+            "id": "91002",
+            "related": Object {
+              "_id": "proposalComment2",
+              "commentable": Object {
+                "project": Object {
+                  "_id": "project6",
+                  "visibility": "PUBLIC",
+                },
+              },
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxNDIyNzQ1MzIwMDAwO2k6MTtzOjU6IjkxMDAyIjt9",
+        "hasNextPage": false,
+      },
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`User.votes connection fetches user votes on specific step 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzNjU0MDAwO2k6MTtzOjQ6IjEwNTQiO30=",
+          "node": Object {
+            "id": "1054",
+            "related": Object {
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxNw==",
+              "project": Object {
+                "_id": "project11",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNjU0MDAwO2k6MTtzOjQ6IjEwNTQiO30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 1,
+    },
+  },
+}
+`;

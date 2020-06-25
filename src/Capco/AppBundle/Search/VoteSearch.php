@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\UserBundle\Entity\User;
@@ -13,6 +14,8 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\ResultSet;
+use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class VoteSearch extends Search
 {
@@ -29,10 +32,11 @@ class VoteSearch extends Search
     public function getVotesByAuthorViewerCanSee(
         User $author,
         User $viewer,
+        ?string $contribuableId,
         int $limit = 100,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        $query = $this->createVotesByAuthorViewerCanSeeQuery($author, $viewer);
+        $query = $this->createVotesByAuthorViewerCanSeeQuery($author, $viewer, $contribuableId);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
@@ -118,12 +122,12 @@ class VoteSearch extends Search
                 $key['args']->offsetGet('after'),
                 $key['args']->offsetGet('orderBy')['field'],
                 $key['args']->offsetGet('orderBy')['direction'],
-                $key['args']->offsetGet('first')
+                $key['args']->offsetGet('first'),
             ];
 
             $query = new Query($boolQuery);
             $this->setSortWithId($query, [
-                $this->getSortField($field) => ['order' => $direction]
+                $this->getSortField($field) => ['order' => $direction],
             ]);
             if ($limit) {
                 $query->setSize($limit + 1);
@@ -159,13 +163,45 @@ class VoteSearch extends Search
         );
     }
 
-    private function createVotesByAuthorViewerCanSeeQuery(User $author, User $viewer): Query
-    {
+    private function createVotesByAuthorViewerCanSeeQuery(
+        User $author,
+        User $viewer,
+        ?string $contribuableId
+    ): Query {
         $boolQuery = new BoolQuery();
+
+        if ($contribuableId) {
+            $globalId = GlobalId::fromGlobalId($contribuableId);
+            list($type, $id) = [$globalId['type'], $globalId['id']];
+            if ($type === ucfirst(Project::getElasticsearchTypeName())) {
+                $boolQuery
+                    ->addFilter(
+                        new Query\Term([
+                            'project.id' => ['value' => $id],
+                        ])
+                    )
+                    ->addFilter(new Query\Exists('project'));
+            } elseif (strpos($type, 'Step')) {
+                $boolQuery
+                    ->addFilter(
+                        new Query\Term([
+                            'step.id' => ['value' => $id],
+                        ])
+                    )
+                    ->addFilter(new Query\Exists('step'));
+            } else {
+                throw new UserError(
+                    'The contribuableId "' .
+                        $contribuableId .
+                        '" does not match any Project or Step.'
+                );
+            }
+        }
+
         $conditions = [
             new Term(['user.id' => ['value' => $author->getId()]]),
             new Term(['published' => ['value' => true]]),
-            new Term(['private' => ['value' => false]])
+            new Term(['private' => ['value' => false]]),
         ];
 
         if ($viewer !== $author && !$viewer->isSuperAdmin()) {
@@ -176,7 +212,7 @@ class VoteSearch extends Search
                         new Exists('project'),
                         (new BoolQuery())->addShould(
                             $this->getFiltersForProjectViewerCanSee('project', $viewer)
-                        )
+                        ),
                     ]),
                 (new BoolQuery())
                     ->addMustNot(new Exists('comment'))
@@ -186,7 +222,7 @@ class VoteSearch extends Search
                             [
                                 (new BoolQuery())->addShould(
                                     $this->getFiltersForProjectViewerCanSee('project', $viewer)
-                                )
+                                ),
                             ],
                             !$viewer->isAdmin()
                                 ? [new Term(['proposal.visible' => ['value' => true]])]
@@ -205,17 +241,17 @@ class VoteSearch extends Search
                                                 'project',
                                                 $viewer
                                             )
-                                        )
+                                        ),
                                     ],
                                     !$viewer->isAdmin()
                                         ? [new Term(['proposal.visible' => ['value' => true]])]
                                         : []
                                 )
                             ),
-                            (new BoolQuery())->addMustNot(new Exists('proposal'))
-                        ])
+                            (new BoolQuery())->addMustNot(new Exists('proposal')),
+                        ]),
                     ])
-                    ->addMustNot(new Exists('comment.trashedStatus'))
+                    ->addMustNot(new Exists('comment.trashedStatus')),
             ]);
         }
 
@@ -238,18 +274,18 @@ class VoteSearch extends Search
                         new Exists('project'),
                         new Term([
                             'project.visibility' => [
-                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                            ]
-                        ])
+                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                            ],
+                        ]),
                     ]),
                 (new BoolQuery())->addMustNot(new Exists('comment'))->addMust([
                     new Exists('proposal'),
                     new Term([
                         'project.visibility' => [
-                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                        ]
+                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                        ],
                     ]),
-                    new Term(['proposal.visible' => ['value' => true]])
+                    new Term(['proposal.visible' => ['value' => true]]),
                 ]),
                 (new BoolQuery())
                     ->addMust([
@@ -259,20 +295,20 @@ class VoteSearch extends Search
                                 (new BoolQuery())->addMust(
                                     new Term([
                                         'project.visibility' => [
-                                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                                        ]
+                                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                                        ],
                                     ])
                                 ),
-                                new Term(['proposal.visible' => ['value' => true]])
+                                new Term(['proposal.visible' => ['value' => true]]),
                             ]),
-                            (new BoolQuery())->addMustNot(new Exists('proposal'))
-                        ])
+                            (new BoolQuery())->addMustNot(new Exists('proposal')),
+                        ]),
                     ])
-                    ->addMustNot(new Exists('comment.trashedStatus'))
+                    ->addMustNot(new Exists('comment.trashedStatus')),
             ]),
             new Term(['published' => ['value' => true]]),
             new Term(['user.id' => ['value' => $author->getId()]]),
-            new Term(['private' => ['value' => false]])
+            new Term(['private' => ['value' => false]]),
         ]);
 
         $query = new Query($boolQuery);
@@ -286,7 +322,7 @@ class VoteSearch extends Search
         $boolQuery = new BoolQuery();
         $boolQuery->addMust([
             new Term(['published' => ['value' => true]]),
-            new Term(['user.id' => ['value' => $user->getId()]])
+            new Term(['user.id' => ['value' => $user->getId()]]),
         ]);
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);

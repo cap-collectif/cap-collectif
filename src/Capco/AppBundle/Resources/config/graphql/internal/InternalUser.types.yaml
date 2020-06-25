@@ -209,6 +209,10 @@ InternalUser:
                 type: 'InternalVoteConnection!'
                 argsBuilder: 'Relay::Connection'
                 description: 'Get all votes of the user.'
+                args:
+                    contribuableId:
+                        type: 'ID'
+                        description: 'The id of the contribuable entity (Project, Step)'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [getUser(), value, args, context])'
             groups:
                 type: 'GroupConnection!'

@@ -97,12 +97,6 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "SourceVote",
-            "id": "60000",
-          },
-        },
-        Object {
-          "node": Object {
             "__typename": "Source",
             "id": "U291cmNlOnNvdXJjZTI=",
           },
@@ -113,8 +107,14 @@ Object {
             "id": "U291cmNlOnNvdXJjZTM=",
           },
         },
+        Object {
+          "node": Object {
+            "__typename": "Source",
+            "id": "U291cmNlOnNvdXJjZTQ=",
+          },
+        },
       ],
-      "totalCount": 104,
+      "totalCount": 102,
     },
   },
 }
@@ -150,18 +150,12 @@ Object {
         },
         Object {
           "node": Object {
-            "__typename": "ProposalVote",
-            "id": "1002",
-          },
-        },
-        Object {
-          "node": Object {
             "__typename": "Proposal",
             "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           },
         },
       ],
-      "totalCount": 4,
+      "totalCount": 3,
     },
   },
 }
@@ -191,7 +185,7 @@ Object {
           },
         },
       ],
-      "totalCount": 104,
+      "totalCount": 102,
     },
   },
 }

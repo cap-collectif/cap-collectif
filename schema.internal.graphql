@@ -10454,6 +10454,9 @@ type User implements Node & UniformResourceLocatable {
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """The id of the contribuable entity (Project, Step)"""
+    contribuableId: ID
   ): VoteConnection!
 
   """Get all groups where the user is."""

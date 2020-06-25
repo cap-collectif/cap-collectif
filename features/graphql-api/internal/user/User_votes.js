@@ -1,9 +1,9 @@
 /* eslint-env jest */
 const UserVotesQuery = /* GraphQL */ `
-  query UserVotesQuery($id: ID!, $count: Int!, $cursor: String) {
+  query UserVotesQuery($id: ID!, $count: Int, $cursor: String, $contribuableId: ID) {
     node(id: $id) {
       ... on User {
-        votes(first: $count, after: $cursor) {
+        votes(first: $count, after: $cursor, contribuableId: $contribuableId) {
           pageInfo {
             hasNextPage
             endCursor
@@ -147,5 +147,33 @@ describe('User.votes connection', () => {
         ).resolves.toMatchSnapshot(id);
       }),
     );
+  });
+
+  it('fetches user votes on a specific project', async () => {
+    await expect(
+      graphql(
+        UserVotesQuery,
+        {
+          id: 'VXNlcjp1c2VyMg==',
+          contribuableId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+          first: 5,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches user votes on specific step', async () => {
+    await expect(
+      graphql(
+        UserVotesQuery,
+        {
+          id: 'VXNlcjp1c2VyMg==',
+          contribuableId: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==',
+          first: 5,
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
   });
 });
