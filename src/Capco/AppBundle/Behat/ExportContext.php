@@ -5,26 +5,23 @@ namespace Capco\AppBundle\Behat;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
-use Box\Spout\Common\Entity\Cell;
-use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Type;
-use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
-use Box\Spout\Reader\Common\Creator\ReaderFactory;
 use Box\Spout\Reader\CSV\Reader;
+use Box\Spout\Reader\Common\Creator\ReaderFactory;
 use Box\Spout\Reader\ReaderInterface;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Box\Spout\Reader\CSV\Sheet;
 
 class ExportContext implements KernelAwareContext
 {
     use KernelDictionary;
 
-    private const SNAPSHOTS_DIRNAME = '/__snapshots__/exports';
+    private const SNAPSHOTS_DIRNAME = '/../__snapshots__/exports';
+
     private $config = [
         'readerType' => Type::CSV,
         'delimiter' => ',',
-        'enclosure' => '"',
+        'enclosure' => '"'
     ];
 
     public function setKernel(KernelInterface $kernel): void
@@ -99,13 +96,13 @@ class ExportContext implements KernelAwareContext
         $csvHeader = array_shift($csvLines);
         $snapshotLines = $this->getFileLines($snapshotPath);
         $snapshotHeader = array_shift($snapshotLines);
+
         $output = $this->getCleanOutput(
             $snapshotHeader->toArray(),
             $snapshotLines,
             $csvHeader->toArray(),
             $csvLines
         );
-
         $this->compareOutput($output);
     }
 
@@ -140,12 +137,12 @@ class ExportContext implements KernelAwareContext
 
     private function getExportDir(): string
     {
-        return $this->getKernel()->getProjectDir() . '/public/export';
+        return $this->getKernel()->getRootDir() . '/../public/export';
     }
 
     private function getSnapshotsDir(): string
     {
-        return $this->getKernel()->getProjectDir() . self::SNAPSHOTS_DIRNAME;
+        return $this->getKernel()->getRootDir() . self::SNAPSHOTS_DIRNAME;
     }
 
     private function getConfig(): array
@@ -188,7 +185,6 @@ class ExportContext implements KernelAwareContext
         $reader = $this->getReader();
 
         $reader->open($path);
-        /** @var Sheet $sheet */
         $sheet = current(iterator_to_array($reader->getSheetIterator()));
         $lines = iterator_to_array($sheet->getRowIterator());
         $reader->close();
@@ -244,12 +240,7 @@ class ExportContext implements KernelAwareContext
     private function compareLines(array $expected, array $actual): void
     {
         foreach ($expected as $i => $expectedLine) {
-            /**
-             * @var $columnName
-             * @var Cell        $cellValue
-             */
             foreach ($expectedLine as $columnName => $cellValue) {
-                $cellValue = $cellValue->getValue();
                 $suffix = strtolower(substr($columnName, -2));
                 // We skip date values because they can be dynamic
                 if ('at' === $suffix) {
@@ -268,7 +259,7 @@ class ExportContext implements KernelAwareContext
                         )
                     );
                 }
-                if ($actual[$i][$columnName]->getValue() !== $cellValue) {
+                if ($actual[$i][$columnName] !== $cellValue) {
                     throw new \RuntimeException(
                         sprintf(
                             "\n\nRow %s does not match the expected one. Given:\n\n\t%s\n\nExpected:\n\n\t%s\n\nInvalid cell value: %s",
@@ -291,29 +282,26 @@ class ExportContext implements KernelAwareContext
     ): array {
         $output['expected'] = [
             'header' => $expectedHeader,
-            'lines' => array_map(function (Row $expectedLine) use ($expectedHeader) {
+            'lines' => array_map(function (array $expectedLine) use ($expectedHeader) {
                 $result = [];
-                /**
-                 * @var Cell $csvField
-                 */
-                foreach ($expectedLine->getCells() as $i => $csvField) {
+                foreach ($expectedLine as $i => $csvField) {
                     $result[$expectedHeader[$i]] = $csvField;
                 }
 
                 return $result;
-            }, $expectedLines),
+            }, $expectedLines)
         ];
 
         $output['actual'] = [
             'header' => $actualHeader,
-            'lines' => array_map(function (Row $actualLine) use ($actualHeader) {
+            'lines' => array_map(function (array $actualLine) use ($actualHeader) {
                 $result = [];
-                foreach ($actualLine->getCells() as $i => $field) {
+                foreach ($actualLine as $i => $field) {
                     $result[$actualHeader[$i]] = $field;
                 }
 
                 return $result;
-            }, $actualLines),
+            }, $actualLines)
         ];
 
         return $output;

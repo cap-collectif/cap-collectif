@@ -22,7 +22,7 @@ class ProposalResolver
         'lastname',
         'followedAt',
         'userType_name',
-        'url',
+        'url'
     ];
     const FOLLOWER_FILE_EXPORT_NAME = 'followers_%proposal%_%date%';
 

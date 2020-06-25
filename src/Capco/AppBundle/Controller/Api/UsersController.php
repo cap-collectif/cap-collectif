@@ -13,8 +13,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
-use Nelmio\ApiDocBundle\Annotation\Operation;
-use Swagger\Annotations as SWG;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -95,7 +94,7 @@ class UsersController extends AbstractFOSRestController
         return [
             'contributors' => $registeredContributorCount + $anonymousComments,
             'registeredContributors' => $registeredContributorCount,
-            'anonymousComments' => $anonymousComments,
+            'anonymousComments' => $anonymousComments
         ];
     }
 
@@ -114,15 +113,13 @@ class UsersController extends AbstractFOSRestController
     /**
      * Create a user.
      *
-     * @Operation(
-     *     tags={""},
-     *     summary="Create a user.",
-     *     @SWG\Response(
-     *         response="201",
-     *         description="Returned when successful"
-     *     )
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Create a user.",
+     *  statusCodes={
+     *    201 = "Returned when successful",
+     *  }
      * )
-     *
      *
      * @Post("/users", defaults={"_feature_flags" = "registration"})
      * @View(statusCode=201, serializerGroups={"UserId"})
@@ -185,7 +182,7 @@ class UsersController extends AbstractFOSRestController
             throw new AccessDeniedHttpException('Not authorized.');
         }
         $response = [
-            'userId' => $user->getId(),
+            'userId' => $user->getId()
         ];
 
         if ($localeCode) {
@@ -197,7 +194,13 @@ class UsersController extends AbstractFOSRestController
             $request->setLocale($localeCode);
             $response['code'] = $localeCode;
         }
-        if ($email && (($localeCode && $user->getEmail() !== $email) || null === $localeCode)) {
+        if (
+            $email &&
+            (
+                ($localeCode && $user->getEmail() !== $email) ||
+                is_null($localeCode)
+            )
+        ) {
             $retEmail = $this->updateEmail($request);
 
             if ($retEmail instanceof FormInterface) {
@@ -267,7 +270,7 @@ class UsersController extends AbstractFOSRestController
                 'user.email',
                 new Message(
                     json_encode([
-                        'userId' => $user->getId(),
+                        'userId' => $user->getId()
                     ])
                 )
             );
@@ -302,7 +305,7 @@ class UsersController extends AbstractFOSRestController
         if (
             $this->toggleManager->isActive('restrict_registration_via_email_domain') &&
             !$this->emailDomainRepository->findOneBy([
-                'value' => explode('@', $newEmailToConfirm)[1],
+                'value' => explode('@', $newEmailToConfirm)[1]
             ])
         ) {
             return ['error' => 'Unauthorized email domain.'];
@@ -322,7 +325,7 @@ class UsersController extends AbstractFOSRestController
             'user.email',
             new Message(
                 json_encode([
-                    'userId' => $user->getId(),
+                    'userId' => $user->getId()
                 ])
             )
         );

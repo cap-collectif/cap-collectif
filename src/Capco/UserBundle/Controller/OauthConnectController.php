@@ -6,13 +6,10 @@ use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
-use HWI\Bundle\OAuthBundle\Security\Http\ResourceOwnerMapLocator;
-use HWI\Bundle\OAuthBundle\Security\OAuthUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * ConnectController.
@@ -23,26 +20,8 @@ class OauthConnectController extends ConnectController
         'facebook' => ['login_facebook'],
         'google' => ['login_gplus'],
         'twitter' => ['login_twitter'],
-        'franceconnect' => ['login_franceconnect'],
+        'franceconnect' => ['login_franceconnect']
     ];
-
-    private TranslatorInterface $translator;
-    private Manager $toggleManager;
-    private Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository;
-
-    public function __construct(
-        OAuthUtils $oauthUtils,
-        ResourceOwnerMapLocator $resourceOwnerMapLocator,
-        TranslatorInterface $translator,
-        Manager $toggleManager,
-        Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository
-    ) {
-        $this->translator = $translator;
-        $this->toggleManager = $toggleManager;
-        $this->oauth2SSOConfigurationRepository = $oauth2SSOConfigurationRepository;
-
-        parent::__construct($oauthUtils, $resourceOwnerMapLocator);
-    }
 
     public function getFeaturesForService($service): array
     {
@@ -82,7 +61,6 @@ class OauthConnectController extends ConnectController
             $logger = $this->get('logger');
             $logger->error('Oauth authentication error', ['error' => $error->getMessage()]);
         }
-
         return new RedirectResponse($this->generateUrl('app_homepage'));
     }
 
@@ -92,29 +70,50 @@ class OauthConnectController extends ConnectController
      * @param Request $request The active request
      * @param string  $service Name of the resource owner to connect to
      *
-     * @return Response
-     *
      * @throws NotFoundHttpException if features associated to web service are not enabled
+     *
+     * @return Response
      */
     public function connectServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+            $message = $this->container
+                ->get('translator')
+                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
 
             throw new NotFoundHttpException($message);
         }
-
         return parent::connectServiceAction($request, $service);
+    }
+
+    /**
+     * @param string $service
+     *
+     * @throws NotFoundHttpException if features associated to web service are not enabled
+     *
+     * @return RedirectResponse
+     */
+    public function redirectToServiceAction(Request $request, $service)
+    {
+        if (!$this->serviceHasEnabledFeature($service)) {
+            $message = $this->container
+                ->get('translator')
+                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+
+            throw new NotFoundHttpException($message);
+        }
+        return parent::redirectToServiceAction($request, $service);
     }
 
     protected function serviceHasEnabledFeature(string $service): bool
     {
-        if ('openid' === $service) {
-            return $this->oauth2SSOConfigurationRepository->findOneBy(['enabled' => true])
-                ? true
-                : false;
-        }
+        $toggleManager = $this->container->get(Manager::class);
 
-        return $this->toggleManager->hasOneActive($this->getFeaturesForService($service));
+        if ('openid' === $service) {
+            $oauth2Repository = $this->get(Oauth2SSOConfigurationRepository::class);
+
+            return $oauth2Repository->findOneBy(['enabled' => true]) ? true : false;
+        }
+        return $toggleManager->hasOneActive($this->getFeaturesForService($service));
     }
 }

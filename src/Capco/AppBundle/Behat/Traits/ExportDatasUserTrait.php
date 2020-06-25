@@ -78,7 +78,7 @@ trait ExportDatasUserTrait
         }
 
         $archiveFile = $archive->getPath();
-        $directory = $this->getContainer()->getParameter('kernel.project_dir') . '/public/export/';
+        $directory = $this->getContainer()->getParameter('kernel.root_dir') . '/../public/export/';
 
         Assert::assertFileNotExists("${directory}/${archiveFile}");
     }

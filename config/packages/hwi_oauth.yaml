@@ -1,74 +1,57 @@
 hwi_oauth:
-    http:
-        client: httplug.client.hwi
-    connect:
-        account_connector: Capco\UserBundle\Security\Core\User\OauthUserProvider
-    firewall_names: [main]
-    target_path_parameter: _destination
-    fosub:
-        username_iterations: 30
-        properties:
-            facebook: facebook_id
-            google: google_id
-    resource_owners:
-        facebook:
-            type: facebook
-            client_id: '%facebook_app_id%'
-            client_secret: '%facebook_app_secret%'
-            scope: 'email'
-            options:
-                display: page
-        google:
-            type: google
-            client_id: '%google_app_id%'
-            client_secret: '%google_app_secret%'
-            scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
-            options:
-                access_type: offline
-                approval_prompt: auto
-                display: page
-                login_hint: email address
-        openid:
-            class: Capco\UserBundle\OpenID\OpenIDResourceOwner
-            type: oauth2
-            options_modifier: Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier
-            # Parameters below need to be set and must be a non-empty string because of options resolver's validation from library.
-            client_id: 'fake'
-            client_secret: 'fake'
-            access_token_url: 'fake'
-            authorization_url: 'fake'
-            infos_url: 'fake'
-            options:
-                logout_url: 'fake'
-        franceconnect:
-            class: Capco\UserBundle\FranceConnect\FranceConnectResourceOwner
-            type: oauth2
-            options_modifier: Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier
-            # Parameters below need to be set and must be a non-empty string because of options resolver's validation from library.
-            client_id: 'fake'
-            client_secret: 'fake'
-            access_token_url: 'fake'
-            authorization_url: 'fake'
-            infos_url: 'fake'
-            options:
-                logout_url: 'fake'
-                # France Connect is using state parameter to avoid CSRF.
-                # See https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#glossary
-                csrf: true
-
-services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
-
-    HWI\Bundle\OAuthBundle\Security\OAuthUtils:
-        arguments:
-            $connect: '%hwi_oauth.connect%'
-            $grantRule: '%hwi_oauth.grant_rule%'
-
-    HWI\Bundle\OAuthBundle\Security\Http\ResourceOwnerMapLocator: ~
-
-    HWI\Bundle\OAuthBundle\Util\DomainWhitelist:
-        arguments:
-            $targetPathDomainsWhiteList: '%hwi_oauth.target_path_domains_whitelist%'
+  http:
+    client: httplug.client.hwi
+  connect:
+    account_connector: Capco\UserBundle\Security\Core\User\OauthUserProvider
+  firewall_names: [main]
+  target_path_parameter: _destination
+  fosub:
+    username_iterations: 30
+    properties:
+      facebook: facebook_id
+      google: google_id
+  resource_owners:
+    facebook:
+      type: facebook
+      client_id: '%facebook_app_id%'
+      client_secret: '%facebook_app_secret%'
+      scope: 'email'
+      options:
+        display: page
+    google:
+      type: google
+      client_id: '%google_app_id%'
+      client_secret: '%google_app_secret%'
+      scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+      options:
+        access_type: offline
+        approval_prompt: auto
+        display: page
+        login_hint: email address
+    openid:
+      class: Capco\UserBundle\OpenID\OpenIDResourceOwner
+      type: oauth2
+      options_modifier: Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier
+      # Parameters below need to be set and must be a non-empty string because of options resolver's validation from library.
+      client_id: 'fake'
+      client_secret: 'fake'
+      access_token_url: 'fake'
+      authorization_url: 'fake'
+      infos_url: 'fake'
+      options:
+        logout_url: 'fake'
+    franceconnect:
+      class: Capco\UserBundle\FranceConnect\FranceConnectResourceOwner
+      type: oauth2
+      options_modifier: Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier
+      # Parameters below need to be set and must be a non-empty string because of options resolver's validation from library.
+      client_id: 'fake'
+      client_secret: 'fake'
+      access_token_url: 'fake'
+      authorization_url: 'fake'
+      infos_url: 'fake'
+      options:
+        logout_url: 'fake'
+        # France Connect is using state parameter to avoid CSRF.
+        # See https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#glossary
+        csrf: true
