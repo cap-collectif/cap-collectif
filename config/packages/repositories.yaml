@@ -388,4 +388,4 @@ services:
     Capco\AppBundle\Repository\OpinionModalRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments: ['CapcoAppBundle:OptionModal']
+        arguments: ['CapcoAppBundle:OpinionModal']
