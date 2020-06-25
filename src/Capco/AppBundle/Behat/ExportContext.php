@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Behat;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
+use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\CSV\Reader;
 use Box\Spout\Reader\Common\Creator\ReaderFactory;
@@ -282,7 +283,7 @@ class ExportContext implements KernelAwareContext
     ): array {
         $output['expected'] = [
             'header' => $expectedHeader,
-            'lines' => array_map(function (array $expectedLine) use ($expectedHeader) {
+            'lines' => array_map(function (Row $expectedLine) use ($expectedHeader) {
                 $result = [];
                 foreach ($expectedLine as $i => $csvField) {
                     $result[$expectedHeader[$i]] = $csvField;
@@ -294,7 +295,7 @@ class ExportContext implements KernelAwareContext
 
         $output['actual'] = [
             'header' => $actualHeader,
-            'lines' => array_map(function (array $actualLine) use ($actualHeader) {
+            'lines' => array_map(function (Row $actualLine) use ($actualHeader) {
                 $result = [];
                 foreach ($actualLine as $i => $field) {
                     $result[$actualHeader[$i]] = $field;
