@@ -41,6 +41,7 @@ type Props = {|
   intl: IntlShape,
   dispatch: Dispatch,
   effectiveDateEnabled: boolean,
+  effectiveDate: ?string,
   evaluationFormId: ?string,
   moveToSelectionStep: ?string,
 |};
@@ -107,6 +108,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
   effectiveDateEnabled,
   evaluationFormId,
   moveToSelectionStep,
+  effectiveDate,
   handleSubmit,
   pristine,
   dispatch,
@@ -122,13 +124,13 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
   ]);
 
   React.useEffect(() => {
-    if (selectedAnalysisStep) {
+    if (selectedAnalysisStep && !effectiveDate) {
       const dateEndStep =
         proposalForm.step?.project?.steps.find(step => step.id === selectedAnalysisStep)?.timeRange
           ?.endAt || null;
       dispatch(change(formName, 'effectiveDate', dateEndStep));
     }
-  }, [selectedAnalysisStep, proposalForm.step, dispatch]);
+  }, [selectedAnalysisStep, proposalForm.step, dispatch, effectiveDate]);
 
   const openQuestionnaire = (
     availableQuestionnaires: $PropertyType<
@@ -140,7 +142,6 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
 
     window.open(questionnaire?.adminUrl, '_blank');
   };
-
   return (
     <ProposalFormAdminContainer onSubmit={handleSubmit(onSubmit)}>
       <div className="box box-primary container-fluid mt-10">
@@ -525,6 +526,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
     evaluationFormId: formValueSelector(formName)(state, 'evaluationForm'),
     moveToSelectionStep: formValueSelector(formName)(state, 'moveToSelectionStep'),
     moveToSelectionStatus: formValueSelector(formName)(state, 'moveToSelectionStatus'),
+    effectiveDate: formValueSelector(formName)(state, 'effectiveDate'),
     initialValues: {
       analysisStep: analysisConfiguration?.analysisStep?.id || null,
       evaluationForm: analysisConfiguration?.evaluationForm?.id || null,

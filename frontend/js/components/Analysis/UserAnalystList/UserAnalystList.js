@@ -38,11 +38,10 @@ export const getStatus = (
     });
   }
   if (
-    decisionState.name === PROPOSAL_STATUS.DONE.name ||
-    ((assessmentState.name === PROPOSAL_STATUS.FAVOURABLE.name ||
-      assessmentState.name === PROPOSAL_STATUS.UNFAVOURABLE.name) &&
-      (status.name === PROPOSAL_STATUS.TODO.name ||
-        status.name === PROPOSAL_STATUS.IN_PROGRESS.name))
+    (decisionState.name === PROPOSAL_STATUS.DONE.name ||
+      assessmentState.name === PROPOSAL_STATUS.FAVOURABLE.name ||
+        assessmentState.name === PROPOSAL_STATUS.UNFAVOURABLE.name) &&
+    (status.name === PROPOSAL_STATUS.TODO.name || status.name === PROPOSAL_STATUS.IN_PROGRESS.name)
   ) {
     return PROPOSAL_STATUS.TOO_LATE;
   }
