@@ -157,7 +157,7 @@ Scenario: Can not have access to download if export is disabled
 
 Scenario: Can not download a project if export is disabled
   Given I visited "home page"
-  When I try to download "projets/strategie-technologique-de-letat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download"
+  When I try to download "/projets/strategie-technologique-de-letat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download"
   Then I should see "error.404.title"
 
 Scenario: Can not access trash if feature is disabled

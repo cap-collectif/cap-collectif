@@ -5,6 +5,8 @@ namespace Capco\AppBundle\Behat;
 use Behat\Mink\Element\DocumentElement;
 use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
 use Capco\AppBundle\Behat\Traits\LocaleTrait;
+use Capco\AppBundle\Command\CreateStepContributorsCommand;
+use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Elastica\Snapshot;
@@ -182,7 +184,9 @@ class ApplicationContext extends UserContext
     {
         $scenario = $scope->getScenario();
         if ($scenario->hasTag('database')) {
-            $job = Process::fromShellCommandline('mysql -h database -u root symfony < var/db.backup');
+            $job = Process::fromShellCommandline(
+                'mysql -h database -u root symfony < var/db.backup'
+            );
             echo $job->getCommandLine() . PHP_EOL;
             $job->mustRun();
         }
@@ -884,9 +888,33 @@ class ApplicationContext extends UserContext
             ],
         ]);
 
-        $url = $this->getSession()->getCurrentUrl() . ltrim($path, '/');
+        $url = 'https://capco.test' . $path;
         $this->headers = get_headers($url);
         $this->getSession()->visit($url);
+    }
+
+    /**
+     * @When I download file at :path
+     */
+    public function iDownloadFile(string $path)
+    {
+        // Fix SSL problem.
+        stream_context_set_default([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ],
+        ]);
+
+        $url = 'https://capco.test' . $path;
+        $this->headers = get_headers($url);
+        $this->getSession()->visit($url);
+        $this->assertSession()->pageTextNotContains($this->fixStepArgument('error.404.title'));
+        $this->assertSession()->elementTextNotContains(
+            'css',
+            '#symfony-flash-messages',
+            $this->fixStepArgument('file.not-found')
+        );
     }
 
     /**
@@ -898,7 +926,7 @@ class ApplicationContext extends UserContext
         // are written by crons
         $fileName = CreateCsvFromProposalStepCommand::getShortenedFilename(
             $projectSlug . '_' . $stepSlug,
-            $format
+            '.' . $format
         );
         file_put_contents('/var/www/public/export/' . $fileName, '');
 
@@ -906,7 +934,52 @@ class ApplicationContext extends UserContext
             'projectSlug' => $projectSlug,
             'stepSlug' => $stepSlug,
         ]);
-        $this->iTryToDownload($url);
+        $this->iDownloadFile($url);
+    }
+
+    /**
+     * @When I can download participant :format export for step :stepId with slug :stepSlug
+     */
+    public function iCanDownloadParticipantExport(string $format, string $stepId, string $stepSlug)
+    {
+        $fileName = CreateStepContributorsCommand::getShortenedFilename(
+            'participants_' . $stepSlug,
+            '.' . $format
+        );
+        file_put_contents('/var/www/public/export/' . $fileName, '');
+
+        $url = $this->getService('router')->generate('app_export_step_contributors', [
+            'stepId' => $stepId,
+        ]);
+        $this->iDownloadFile($url);
+    }
+
+    /**
+     * @When I can download analysis export with project slug :projectSlug
+     */
+    public function iCanDownloadAnalysisExport(string $projectSlug)
+    {
+        $fileName = ExportAnalysisCSVCommand::getFilename($projectSlug, false);
+        file_put_contents('/var/www/public/export/' . $fileName, '');
+
+        $url = $this->getService('router')->generate('app_project_analysis_download', [
+            'projectSlug' => $projectSlug,
+        ]);
+        $this->iDownloadFile($url);
+    }
+
+    /**
+     * @When I can download decision export with project slug :projectSlug
+     */
+    public function iCanDownloadDecisionExport(string $projectSlug)
+    {
+        $fileName = ExportAnalysisCSVCommand::getFilename($projectSlug, true);
+        file_put_contents('/var/www/public/export/' . $fileName, '');
+
+        $url = $this->getService('router')->generate('app_project_decisions_download', [
+            'projectSlug' => $projectSlug,
+        ]);
+        $this->iDownloadFile($url);
     }
 
     /**

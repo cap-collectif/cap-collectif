@@ -323,18 +323,21 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
-     * @Entity("step", options={"mapping": {"stepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function downloadStepContributorsAction(Request $request, $stepId): Response
     {
+        $id = GlobalId::fromGlobalId($stepId);
+        if ($id && isset($id['id'])) {
+            $stepId = $id['id'];
+        }
         $step = $this->abstractStepRepository->find($stepId);
         if (!$step) {
             $this->logger->error('An error occured while downloading the csv file', [
                 'stepId' => $stepId,
             ]);
 
-            throw new \RuntimeException('An error occured while downloading the file...');
+            throw new BadRequestHttpException('You must provide a valid step id.');
         }
 
         $fileName = CreateStepContributorsCommand::getFilename($step);
@@ -346,6 +349,10 @@ class ExportController extends Controller
                 'danger',
                 $this->translator->trans('file.not-found', [], 'CapcoAppBundle')
             );
+
+            $this->logger->error('File not found', [
+                'filename' => $absolutePath,
+            ]);
 
             return $this->redirect($request->headers->get('referer'));
         }

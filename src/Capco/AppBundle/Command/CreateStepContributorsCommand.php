@@ -5,9 +5,9 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
@@ -17,7 +17,6 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -187,9 +186,11 @@ class CreateStepContributorsCommand extends BaseExportCommand
                 $step instanceof CollectStep ||
                 $step instanceof SelectionStep ||
                 $step instanceof QuestionnaireStep ||
-                $step instanceof Consultation
+                $step instanceof ConsultationStep
             ) {
+                $type = $step->getType();
                 $fileName = self::getFilename($step);
+                $output->writeln("<info>Generating ${fileName} sheet as ${type}</info>");
                 $this->generateSheet($step, $fileName, $delimiter);
                 $this->executeSnapshot($input, $output, $fileName);
             }
@@ -217,7 +218,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         return <<<EOF
         query {
           node(id: "${stepId}") {
-            ... on Consultation {
+            ... on ConsultationStep {
               contributors(first: 50 ${userCursor}) {
                 edges {
                   cursor

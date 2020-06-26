@@ -242,17 +242,26 @@ EOF;
     }
 
     public function getProposalRows(
+        OutputInterface $output,
         array $proposals,
         array $dynamicQuestionHeaderPart,
-        bool $isOnlyDecision
+        bool $isOnlyDecision,
+        bool $isVerbose = false
     ): array {
         $rows = [];
+        $hasRow = false;
         foreach ($proposals as $proposal) {
             $defaultRowContent = [];
             $proposal = $proposal['node'];
             $analyses = $proposal['analyses'];
-            if (!$analyses) {
+            if (!$analyses || 0 === \count($analyses)) {
                 continue;
+            }
+            $hasRow = true;
+            if ($isVerbose) {
+                $output->writeln(
+                    "\t<info>Adding analysis of proposal ${proposal['title']}.</info>"
+                );
             }
 
             // We iterate over each column of a row to fill them
@@ -272,8 +281,41 @@ EOF;
                 );
             }
         }
+        if (!$hasRow) {
+            $output->writeln(
+                "\t<info>/!\\ There is no analysis in any proposal -> generating empty export.</info>"
+            );
+        }
 
         return $rows;
+    }
+
+    public function writeHeader($writer, bool $isOnlyDecision, array $firstAnalysisStepForm): void
+    {
+        if (!$isOnlyDecision) {
+            $dynamicQuestionHeaderPart = $this->getDynamicQuestionHeaderForProject(
+                $firstAnalysisStepForm
+            );
+            $writer->addRow(
+                WriterEntityFactory::createRowFromArray(
+                    array_keys(
+                        array_merge(
+                            self::PROPOSAL_DEFAULT_HEADER,
+                            self::ANALYST_DEFAULT_HEADER,
+                            $dynamicQuestionHeaderPart
+                        )
+                    )
+                )
+            );
+        } else {
+            $writer->addRow(
+                WriterEntityFactory::createRowFromArray(
+                    array_keys(
+                        array_merge(self::PROPOSAL_DEFAULT_HEADER, self::DECISION_DEFAULT_HEADER)
+                    )
+                )
+            );
+        }
     }
 
     public function generateProjectProposalsCSV(
@@ -281,20 +323,19 @@ EOF;
         OutputInterface $output,
         array $projects,
         string $delimiter,
-        bool $isOnlyDecision
+        bool $isOnlyDecision,
+        bool $isVerbose
     ): void {
         $output->writeln('<info>Starting generation of csv...</info>');
         foreach ($projects as $project) {
             $firstAnalysisStep = $project['node']['firstAnalysisStep'];
-            //TODO fetch only projects having a firstAnalysisStep not null
             if (!$firstAnalysisStep) {
                 continue;
             }
-            $output->writeln(
-                '<info>Generating analysis of project '.$project['node']['id'].'...</info>'
-            );
-
             $projectSlug = $project['node']['slug'];
+
+            $output->writeln('<info>Generating analysis of project ' . $projectSlug . '...</info>');
+
             $fullPath = $this->getPath($projectSlug, $isOnlyDecision);
 
             $writer = WriterFactory::create(Type::CSV, $delimiter);
@@ -309,46 +350,26 @@ EOF;
             }
 
             $dynamicQuestionHeaderPart = [];
-            //Only use with analysts
-            if (!$isOnlyDecision) {
-                $dynamicQuestionHeaderPart = $this->getDynamicQuestionHeaderForProject(
-                    $firstAnalysisStep['form']
-                );
-                $writer->addRow(
-                    WriterEntityFactory::createRowFromArray(
-                        array_keys(
-                            array_merge(
-                                self::PROPOSAL_DEFAULT_HEADER,
-                                self::ANALYST_DEFAULT_HEADER,
-                                $dynamicQuestionHeaderPart
-                            )
-                        )
-                    )
-                );
-            } else {
-                $writer->addRow(
-                    WriterEntityFactory::createRowFromArray(
-                        array_keys(
-                            array_merge(
-                                self::PROPOSAL_DEFAULT_HEADER,
-                                self::DECISION_DEFAULT_HEADER
-                            )
-                        )
-                    )
-                );
-            }
-            if (isset($firstAnalysisStep['proposals']['edges'])) {
+            $this->writeHeader($writer, $isOnlyDecision, $firstAnalysisStep['form']);
+            if (
+                isset($firstAnalysisStep['proposals']['edges']) &&
+                0 !== \count($firstAnalysisStep['proposals']['edges'])
+            ) {
                 $rows = $this->getProposalRows(
+                    $output,
                     $firstAnalysisStep['proposals']['edges'],
                     $dynamicQuestionHeaderPart,
-                    $isOnlyDecision
+                    $isOnlyDecision,
+                    $isVerbose
                 );
                 if (!empty($rows) && \is_array($rows[0])) {
                     foreach ($rows as $k => $row) {
                         $rows[$k] = WriterEntityFactory::createRowFromArray($row);
                     }
+                    $writer->addRows($rows);
                 }
-                $writer->addRows($rows);
+            } else {
+                $output->writeln('<info>Empty export.</info>');
             }
             $writer->close();
             if (true === $input->getOption('updateSnapshot')) {
@@ -383,11 +404,18 @@ EOF;
             InputOption::VALUE_NONE,
             'Only selecting decisions'
         );
+        $this->addOption(
+            'proposal-verbose',
+            'p',
+            InputOption::VALUE_NONE,
+            'Explain process of one proposal after another'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $delimiter = $input->getOption('delimiter');
+        $isVerbose = $input->getOption('proposal-verbose');
         $isOnlyDecision = $input->getOption('only-decisions');
         if ($isOnlyDecision) {
             $data = $this->executor
@@ -412,7 +440,14 @@ EOF;
                 ->toArray();
             $data = Arr::path($data, 'data.projects.edges');
         }
-        $this->generateProjectProposalsCSV($input, $output, $data, $delimiter, $isOnlyDecision);
+        $this->generateProjectProposalsCSV(
+            $input,
+            $output,
+            $data,
+            $delimiter,
+            $isOnlyDecision,
+            $isVerbose
+        );
 
         $output->writeln('Done writing.');
 
