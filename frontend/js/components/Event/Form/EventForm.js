@@ -256,7 +256,6 @@ export class EventForm extends React.Component<Props> {
           <Field
             id="event_media"
             name="media"
-            disabled={isDisabled()}
             label={
               <div>
                 <FormattedMessage id="global.illustration" />
@@ -281,7 +280,7 @@ export class EventForm extends React.Component<Props> {
           <SelectTheme
             optional={isFrontendView}
             query={query}
-            disabled={isDisabled()}
+            disabled={isDisabled(true)}
             multi
             clearable
             name="themes"
@@ -294,7 +293,7 @@ export class EventForm extends React.Component<Props> {
           multi
           clearable
           name="projects"
-          disabled={isDisabled()}
+          disabled={isDisabled(true)}
           label="global.participative.project"
           optional={isFrontendView}
         />
@@ -318,7 +317,7 @@ export class EventForm extends React.Component<Props> {
                 children={<FormattedMessage id="allow-inscriptions" />}
               />
             </div>
-            {!isFrontendView && query.viewer.isAdmin && (event?.author.isAdmin || !event) && (
+            {!isFrontendView && query.viewer.isAdmin && (
               <div className="clearfix">
                 <Field
                   name="link"
@@ -327,7 +326,7 @@ export class EventForm extends React.Component<Props> {
                   placeholder="http://"
                   type="text"
                   disabled={
-                    isDisabled() ||
+                    isDisabled(true) ||
                     (currentValues &&
                     currentValues.guestListEnabled &&
                     currentValues.guestListEnabled !== null
@@ -387,7 +386,7 @@ export class EventForm extends React.Component<Props> {
                   <FormattedMessage id="admin.fields.step.advanced" />
                 </h3>
               </div>
-              <CustomPageFields disabled={isDisabled()} />
+              <CustomPageFields disabled={isDisabled(true)} />
               <div className="box-header pt-0">
                 <h3 className="box-title">
                   <FormattedMessage id="global.publication" />

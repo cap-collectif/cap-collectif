@@ -60,9 +60,11 @@ export const EventEditModal = ({
       <EventFormInModal query={query} event={event} isFrontendView />
     </Modal.Body>
     <Modal.Footer>
-      <NotifyInfoMessage>
-        <FormattedMessage id="event-modification-notification-to-members" />
-      </NotifyInfoMessage>
+      {event && event.participants.totalCount > 0 && (
+        <NotifyInfoMessage>
+          <FormattedMessage id="event-modification-notification-to-members" />
+        </NotifyInfoMessage>
+      )}
       <div className="mt-10">
         <CloseButton onClose={handleClose} />
         <SubmitButton
@@ -96,6 +98,9 @@ export default createFragmentContainer(container, {
   event: graphql`
     fragment EventEditModal_event on Event {
       ...EventForm_event
+      participants {
+        totalCount
+      }
     }
   `,
 });

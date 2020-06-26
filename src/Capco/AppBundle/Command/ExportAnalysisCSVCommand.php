@@ -158,7 +158,6 @@ EOF;
     protected $listener;
     protected $projectRootDir;
     protected $userRepository;
-
     private $projectRepository;
     private $header;
 
@@ -212,7 +211,9 @@ EOF;
                 $cellValue = $this->getRowCellValue($analysis, $headerPath);
                 $dynamicRowContent[] = $cellValue;
             }
-            $rows[] = array_merge($defaultRowContent, $dynamicRowContent);
+            $rows[] = WriterEntityFactory::createRowFromArray(
+                array_merge($defaultRowContent, $dynamicRowContent)
+            );
         }
     }
 
@@ -235,7 +236,9 @@ EOF;
                 ? $this->formatAuthors($cellValue)
                 : $cellValue;
         }
-        $rows[] = array_merge($defaultRowContent, $dynamicRowContent);
+        $rows[] = WriterEntityFactory::createRowFromArray(
+            array_merge($defaultRowContent, $dynamicRowContent)
+        );
     }
 
     public function getProposalRows(
@@ -288,7 +291,7 @@ EOF;
                 continue;
             }
             $output->writeln(
-                '<info>Generating analysis of project ' . $project['node']['id'] . '...</info>'
+                '<info>Generating analysis of project '.$project['node']['id'].'...</info>'
             );
 
             $projectSlug = $project['node']['slug'];
@@ -302,7 +305,7 @@ EOF;
             try {
                 $writer->openToFile($fullPath);
             } catch (IOException $e) {
-                throw new \RuntimeException('Error while opening file: ' . $e->getMessage());
+                throw new \RuntimeException('Error while opening file: '.$e->getMessage());
             }
 
             $dynamicQuestionHeaderPart = [];
@@ -344,9 +347,8 @@ EOF;
                     foreach ($rows as $k => $row) {
                         $rows[$k] = WriterEntityFactory::createRowFromArray($row);
                     }
-
-                    $writer->addRows($rows);
                 }
+                $writer->addRows($rows);
             }
             $writer->close();
             if (true === $input->getOption('updateSnapshot')) {
@@ -367,8 +369,8 @@ EOF;
 
     protected function getPath(string $projectSlug, bool $isOnlyDecision): string
     {
-        return $this->projectRootDir .
-            '/public/export/' .
+        return $this->projectRootDir.
+            '/public/export/'.
             self::getFilename($projectSlug, $isOnlyDecision);
     }
 
@@ -389,18 +391,24 @@ EOF;
         $isOnlyDecision = $input->getOption('only-decisions');
         if ($isOnlyDecision) {
             $data = $this->executor
-                ->execute('internal', [
-                    'query' => $this->getDecisionGraphQLQuery(),
-                    'variables' => [],
-                ])
+                ->execute(
+                    'internal',
+                    [
+                        'query' => $this->getDecisionGraphQLQuery(),
+                        'variables' => [],
+                    ]
+                )
                 ->toArray();
             $data = Arr::path($data, 'data.projects.edges');
         } else {
             $data = $this->executor
-                ->execute('internal', [
-                    'query' => $this->getAnalysisGraphQLQuery(),
-                    'variables' => [],
-                ])
+                ->execute(
+                    'internal',
+                    [
+                        'query' => $this->getAnalysisGraphQLQuery(),
+                        'variables' => [],
+                    ]
+                )
                 ->toArray();
             $data = Arr::path($data, 'data.projects.edges');
         }

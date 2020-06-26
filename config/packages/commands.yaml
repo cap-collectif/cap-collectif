@@ -5,7 +5,6 @@ services:
         public: false
         bind:
             $projectRootDir: '%kernel.project_dir%'
-            $kernelRootDir: '%kernel.root_dir%'
             Predis\ClientInterface: '@snc_redis.default'
             $logger: '@logger'
 

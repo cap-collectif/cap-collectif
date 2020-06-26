@@ -91,7 +91,10 @@ class EventNotifier extends BaseNotifier
                     $messages[$recipient->getUsername()] = $this->mailer->createAndSendMessage(
                         EventDeleteMessage::class,
                         $event,
-                        ['eventURL' => null, 'username' => $recipient->getUsername()],
+                        [
+                            'eventURL' => $this->eventUrlResolver->__invoke($event),
+                            'username' => $recipient->getUsername(),
+                        ],
                         $recipient
                     );
                 }
@@ -109,12 +112,13 @@ class EventNotifier extends BaseNotifier
         if (!$event->getReview()) {
             throw new \RuntimeException('Event review cant be empty');
         }
+        $url = $this->eventUrlResolver->__invoke($event);
 
         if (EventReviewStatusType::APPROVED === $event->getReview()->getStatus()) {
             return $this->mailer->createAndSendMessage(
                 EventReviewApprovedMessage::class,
                 $event,
-                [],
+                ['eventURL' => $url],
                 $event->getAuthor()
             );
         }
@@ -122,7 +126,7 @@ class EventNotifier extends BaseNotifier
         return $this->mailer->createAndSendMessage(
             EventReviewRefusedMessage::class,
             $event,
-            [],
+            ['eventURL' => $url],
             $event->getAuthor()
         );
     }

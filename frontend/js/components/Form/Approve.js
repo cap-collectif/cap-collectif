@@ -19,7 +19,7 @@ const Approve: StyledComponent<{ active: boolean }, {}, HTMLButtonElement> = sty
   border-radius: 4px 0 0 4px;
   border: 1px solid rgb(0, 138, 25);
   color: #008a19;
-  background: ${({ active }) => active && 'rgba(6, 138, 32, 0.12)'};
+  background: ${({ active }) => (active ? 'rgba(6, 138, 32, 0.12)' : '#fff')};
   font-weight: ${({ active }) => active && '600'};
 `;
 
@@ -29,7 +29,7 @@ const Refuse: StyledComponent<{ active: boolean }, {}, HTMLButtonElement> = styl
   border-radius: 0 4px 4px 0;
   border: 1px solid rgb(220, 53, 69);
   color: #dd3c4c;
-  background: ${({ active }) => active && 'rgba(221, 60, 76, 0.12)'};
+  background: ${({ active }) => (active ? 'rgba(221, 60, 76, 0.12)' : '#fff')};
   font-weight: ${({ active }) => active && '600'};
 `;
 

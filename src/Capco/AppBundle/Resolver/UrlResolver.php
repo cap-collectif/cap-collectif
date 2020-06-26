@@ -59,7 +59,7 @@ class UrlResolver
                     'stepSlug' => $object->getStep()->getSlug(),
                     'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
                     'opinionSlug' => $object->getSlug(),
-                    '_locale' => $locale
+                    '_locale' => $locale,
                 ],
                 $referenceType
             );
@@ -77,7 +77,7 @@ class UrlResolver
                         'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
                         'opinionSlug' => $opinion->getSlug(),
                         'versionSlug' => $object->getSlug(),
-                        '_locale' => $locale
+                        '_locale' => $locale,
                     ],
                     $referenceType
                 );
@@ -92,7 +92,7 @@ class UrlResolver
                         'projectSlug' => $object->getProject()->getSlug(),
                         'stepSlug' => $object->getStep()->getSlug(),
                         'proposalSlug' => $object->getSlug(),
-                        '_locale' => $locale
+                        '_locale' => $locale,
                     ],
                     $referenceType
                 )
@@ -123,7 +123,7 @@ class UrlResolver
         $args = [
             'projectSlug' => $step->getProject()->getSlug(),
             'stepSlug' => $step->getSlug(),
-            '_locale' => $locale
+            '_locale' => $locale,
         ];
         if ($step->isConsultationStep()) {
             // @var ConsultationStep $step

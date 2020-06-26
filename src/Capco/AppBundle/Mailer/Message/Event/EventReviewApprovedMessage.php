@@ -17,7 +17,7 @@ class EventReviewApprovedMessage extends AbstractExternalMessage
     {
         $var = [
             'eventTitle' => self::escape($event->getTitle()),
-            'eventUrl' => null,
+            'eventUrl' => $params['eventURL'],
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
             'siteUrl' => $params['siteURL'],

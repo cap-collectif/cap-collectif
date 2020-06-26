@@ -150,3 +150,15 @@ Capco\AppBundle\Entity\EventTranslation:
         translatable: '@event22'
         title: evenement refusé, sans commentaire
         body: je suis refusé sans commentaire
+    event23_fr:
+        id: 'eventCreateByAUserReviewApprovedEn_fr'
+        locale: 'fr-FR'
+        translatable: '@event19'
+        title: evenement créer par un utilisateur anglais avec review approved
+        body: Boir une café
+    event24_fr:
+        id: 'eventCreateByAUserReviewRefusedEn_fr'
+        locale: 'fr-FR'
+        translatable: '@event20'
+        title: evenement créer par un utilisateur anglais avec review refused
+        body: En text en français

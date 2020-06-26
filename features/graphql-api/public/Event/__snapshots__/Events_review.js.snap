@@ -5,6 +5,7 @@ Object {
   "node": Object {
     "review": null,
     "title": "Event with registrations",
+    "url": "https://capco.test/events/event-with-registrations",
   },
 }
 `;
@@ -21,6 +22,7 @@ Object {
       "status": "APPROVED",
     },
     "title": "event Create By user with review approved",
+    "url": "https://capco.test/events/event-create-by-user-with-review-approved",
   },
 }
 `;
@@ -35,6 +37,7 @@ Object {
       "status": "AWAITING",
     },
     "title": "event Create By user with review in awaiting",
+    "url": "https://capco.test/events/event-create-by-user-with-review-in-awaiting",
   },
 }
 `;
@@ -51,6 +54,24 @@ Object {
       "status": "REFUSED",
     },
     "title": "event Create By user with review refused",
+    "url": "https://capco.test/events/event-create-by-user-with-review-refused",
+  },
+}
+`;
+
+exports[`Event.review it fetches an event review: eventCreateByAUserReviewRefusedEn 1`] = `
+Object {
+  "node": Object {
+    "review": Object {
+      "comment": "This is a spam",
+      "refusedReason": "SPAM",
+      "reviewer": Object {
+        "_id": "userMaxime",
+      },
+      "status": "REFUSED",
+    },
+    "title": "evenement créer par un utilisateur anglais avec review refused",
+    "url": "https://capco.test/events/evenement-creer-par-un-utilisateur-anglais-avec-review-refused",
   },
 }
 `;

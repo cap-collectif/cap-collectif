@@ -4,6 +4,7 @@ const EventReviewQuery = /* GraphQL */ `
     node(id: $id) {
       ... on Event {
         title
+        url
         review {
           status
           reviewer {
@@ -25,6 +26,7 @@ describe('Event.review', () => {
         'eventCreateByAUserReviewAwaiting',
         'eventCreateByAUserReviewApproved',
         'eventCreateByAUserReviewRefused',
+        'eventCreateByAUserReviewRefusedEn',
       ].map(async id => {
         await expect(
           graphql(

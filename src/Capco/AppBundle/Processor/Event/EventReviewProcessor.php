@@ -35,6 +35,7 @@ class EventReviewProcessor implements ProcessorInterface
         if (!$event) {
             throw new \RuntimeException('Unable to find event with id : ' . $id);
         }
+
         $this->notifier->onReview($event);
         $this->logger->info(__METHOD__ . ' : message sends to administrators and participants');
 

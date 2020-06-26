@@ -600,7 +600,7 @@ class Event implements
         return $this;
     }
 
-    public function getAdminAuthorizeDataTransfer()
+    public function getAdminAuthorizeDataTransfer(): bool
     {
         return $this->adminAuthorizeDataTransfer;
     }
