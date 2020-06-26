@@ -1,6 +1,7 @@
 // @flow
 import { commitLocalUpdate, fetchQuery } from 'react-relay';
 import { type IntlShape } from 'react-intl';
+import config from '~/config';
 import { checkRNA, checkSiret } from '~/services/Validator';
 import environment from '~/createRelayEnvironment';
 import colors from '~/utils/colors';
@@ -27,11 +28,17 @@ import {
 import type { Dispatch } from '~/types';
 import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type';
 
-const INDEX_TYPE_QUESTION = 22;
-const INDEX_RNA_QUESTION = 35;
-const INDEX_ASSOC_SIRET_QUESTION = 24;
-const INDEX_ENTER_QUESTION = 51;
-const INDEX_PUB_ORGA_QUESTION = 63;
+
+/**
+ * /!\ Warning /!\
+ *
+ * Here in development we have 2 questions more than in prod.
+ */
+const INDEX_TYPE_QUESTION = config.isDev ? 22 : 20;
+const INDEX_RNA_QUESTION = config.isDev ? 35 : 33;
+const INDEX_ASSOC_SIRET_QUESTION = config.isDev ? 24 : 22;
+const INDEX_ENTER_QUESTION = config.isDev ? 51 : 49;
+const INDEX_PUB_ORGA_QUESTION = config.isDev ? 63 : 61;
 
 export const getApiEnterpriseType = (type: string): string => {
   switch (type.trim().toLowerCase()) {
