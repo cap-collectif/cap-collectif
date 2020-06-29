@@ -43,6 +43,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\SourceCategory;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -67,45 +68,75 @@ use Capco\AppBundle\Entity\ContactForm\ContactForm;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Symfony\Component\Console\Input\InputInterface;
+use Capco\AppBundle\Controller\Api\MediasController;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Capco\AppBundle\DataFixtures\Processor\ProgressBarProcessor;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Project\ProjectProposalsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader;
-use Capco\AppBundle\DataFixtures\Processor\MediaProcessor;
-use Symfony\Component\Stopwatch\Stopwatch;
 
 class ReinitCommand extends Command
 {
     private $env;
     private $doctrine;
     private $em;
-    private $container;
-    private $mediaProcessor;
+    private $eventManager;
+    private $progressBarProcessor;
+    private $elasticsearchListener;
+    private $publishableListener;
+    private $referenceListener;
+    private $stepContributionDataloader;
+    private $proposalFormProposalsDataloader;
+    private $collectStepContributorsDataloader;
+    private $stepVotesCountDataloader;
+    private $projectProposalsDataloader;
+    private $projectCurrentVotableStepDataloader;
     private $stopwatch;
 
     public function __construct(
         string $name,
         ManagerRegistry $managerRegistry,
         EntityManagerInterface $em,
-        MediaProcessor $mediaProcessor,
-        ContainerInterface $container
+        ProgressBarProcessor $progressBarProcessor,
+        DoctrineListener $publishableListener,
+        ElasticsearchDoctrineListener $elasticsearchListener,
+        ReferenceEventListener $referenceListener,
+        StepContributionsDataLoader $stepContributionDataloader,
+        ProposalFormProposalsDataLoader $proposalFormProposalsDataloader,
+        CollectStepContributorCountDataLoader $collectStepContributorsDataloader,
+        StepVotesCountDataLoader $stepVotesCountDataloader,
+        ProjectProposalsDataLoader $projectProposalsDataloader,
+        ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader,
+        Stopwatch $stopwatch
     ) {
         parent::__construct($name);
 
         $this->doctrine = $managerRegistry;
         $this->em = $em;
-        $this->container = $container;
-        $this->mediaProcessor = $mediaProcessor;
+        $this->eventManager = $em->getEventManager();
+        $this->progressBarProcessor = $progressBarProcessor;
+        $this->publishableListener = $publishableListener;
+        $this->elasticsearchListener = $elasticsearchListener;
+        $this->stepContributionDataloader = $stepContributionDataloader;
+        $this->proposalFormProposalsDataloader = $proposalFormProposalsDataloader;
+        $this->collectStepContributorsDataloader = $collectStepContributorsDataloader;
+        $this->stepVotesCountDataloader = $stepVotesCountDataloader;
+        $this->projectProposalsDataloader = $projectProposalsDataloader;
+        $this->projectCurrentVotableStepDataloader = $projectCurrentVotableStepDataloader;
+        $this->referenceListener = $referenceListener;
+        $this->stopwatch = $stopwatch;
     }
 
     protected function configure()
@@ -139,11 +170,14 @@ class ReinitCommand extends Command
 
             return 1;
         }
-        $this->stopwatch = new Stopwatch();
 
-        $this->mediaProcessor->setOutput($output);
+            $this->stopwatch->start('reinit');
+
+        $this->progressBarProcessor->setOutput($output);
 
         $this->env = $input->getOption('env');
+
+        $output->writeln('Droping database…');
 
         try {
             $this->dropDatabase($output);
@@ -153,43 +187,40 @@ class ReinitCommand extends Command
             );
         }
 
-        $eventManager = $this->container
-            ->get('doctrine')
-            ->getManager()
-            ->getEventManager();
-        $elasticsearchListener = $this->container->get(ElasticsearchDoctrineListener::class);
-        $publishableListener = $this->container->get(DoctrineListener::class);
+        $output->writeln('<info>Database is cleared !</info>');
+        $output->writeln('Disable event listeners…');
 
-        $eventManager->removeEventListener(
-            $elasticsearchListener->getSubscribedEvents(),
-            $elasticsearchListener
-        );
-        $output->writeln('Disabled <info>' . \get_class($elasticsearchListener) . '</info>.');
+        $listeners = [
+            $this->elasticsearchListener,
+            $this->publishableListener,
+            // $this->referenceListener,
+            // TODO perf improvment disable SluggableListener here
+        ];
 
-        $eventManager->removeEventListener(
-            $publishableListener->getSubscribedEvents(),
-            $publishableListener
-        );
-        $output->writeln('Disabled <info>' . \get_class($publishableListener) . '</info>.');
+        foreach ($listeners as $listener) {
+            $this->eventManager->removeEventListener(
+                $listener->getSubscribedEvents(),
+                $listener
+            );
+            $output->writeln('Disabled <info>' . \get_class($listener) . '</info>.');
+    
+        }
+
+        $output->writeln('Disable dataloader\'s cache…');
 
         // Disable some dataloader cache
-        $stepContributions = $this->container->get(StepContributionsDataLoader::class);
-        $stepContributions->disableCache();
-        $proposalFormProposals = $this->container->get(ProposalFormProposalsDataLoader::class);
-        $proposalFormProposals->disableCache();
-        $collectStepContributionsCount = $this->container->get(
-            CollectStepContributorCountDataLoader::class
-        );
-        $collectStepContributionsCount->disableCache();
-        $stepVotesCount = $this->container->get(StepVotesCountDataLoader::class);
-        $stepVotesCount->disableCache();
-
-        $output->writeln('Disabled <info>' . \get_class($stepContributions) . '</info>.');
-        $output->writeln('Disabled <info>' . \get_class($proposalFormProposals) . '</info>.');
-        $output->writeln(
-            'Disabled <info>' . \get_class($collectStepContributionsCount) . '</info>.'
-        );
-        $output->writeln('Disabled <info>' . \get_class($stepVotesCount) . '</info>.');
+        $dataloaders = [
+            $this->stepContributionDataloader,
+            $this->proposalFormProposalsDataloader,
+            $this->collectStepContributorsDataloader,
+            $this->stepVotesCountDataloader,
+            $this->projectProposalsDataloader,
+            $this->projectCurrentVotableStepDataloader,
+        ];
+        foreach ($dataloaders as $dl) {
+            $dl->disableCache();
+            $output->writeln('Disabled <info>' . \get_class($dl) . '</info>.');
+        }
 
         $this->createDatabase($output);
         if ($input->getOption('migrate')) {
@@ -199,81 +230,92 @@ class ReinitCommand extends Command
             $this->mockMigrations($output);
         }
         $this->loadFixtures($output, $this->env);
+        $output->writeln('<info>Database is ready !</info>');
+
         if (!$input->getOption('no-toggles')) {
             $this->loadToggles($output);
         }
-        $output->writeln('<info>Database loaded !</info>');
+        $output->writeln('<info>Redis is ready !</info>');
 
-        $this->container
-            ->get('doctrine')
-            ->getManager()
-            ->clear();
+        $this->em->clear();
 
         $this->recalculateCounters($output);
 
-        $output->writeln('<info>Counters updated !</info>');
+        $output->writeln('<info>Database counters are ready !</info>');
 
         $this->populateElasticsearch($output);
 
-        $this->container
-            ->get('doctrine')
-            ->getManager()
-            ->clear();
+        $output->writeln('<info>Elasticsearch is ready !</info>');
+
+        $this->em->clear();
 
         $this->updateSyntheses($output);
 
         $output->writeln('<info>Synthesis updated !</info>');
+
+        $event = $this->stopwatch->stop('reinit');
+        $output->writeln(
+            'Total command duration: <info>' .
+                floor($event->getDuration() / 1000) .
+                '</info>s. ' .
+                MediasController::formatBytes($event->getMemory()) .
+                '.'
+        );
 
         return 0;
     }
 
     protected function createDatabase(OutputInterface $output)
     {
-        $this->stopwatch->start('createDatabase');
+
+            $this->stopwatch->start('createDatabase');
         $this->runCommands(
             [
                 'doctrine:database:create' => [],
             ],
             $output
         );
-        $event = $this->stopwatch->stop('createDatabase');
-        $output->writeln('Creating database duration: <info>' . $event->getDuration()  . '</info>ms');
+            $event = $this->stopwatch->stop('createDatabase');
+            $output->writeln(
+                'Creating database duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+            );
     }
 
     protected function createSchema(OutputInterface $output)
     {
-        $this->stopwatch->start('createSchema');
+            $this->stopwatch->start('createSchema');
         $this->runCommands(
             [
                 'doctrine:schema:create' => [],
             ],
             $output
         );
-        $event = $this->stopwatch->stop('createSchema');
-        $output->writeln('Creating database schema duration: <info>' . $event->getDuration()  . '</info>ms');
+            $event = $this->stopwatch->stop('createSchema');
+            $output->writeln(
+                'Creating database schema duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+            );
     }
 
     protected function dropDatabase(OutputInterface $output)
     {
-        $this->stopwatch->start('dropDatabase');
+            $this->stopwatch->start('dropDatabase');
         $this->runCommands(
             [
                 'doctrine:database:drop' => ['--force' => true],
             ],
             $output
         );
-        $connection = $this->container->get('doctrine')->getConnection();
+            $event = $this->stopwatch->stop('dropDatabase');
+            $output->writeln(
+                'Dropping database duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+            );
 
-        if ($connection->isConnected()) {
-            $connection->close();
-            $output->writeln('<info>previous connection closed</info>');
-        }
-        $event = $this->stopwatch->stop('dropDatabase');
-        $output->writeln('Dropping database duration: <info>' . $event->getDuration()  . '</info>ms');
     }
 
     protected function loadFixtures(OutputInterface $output, $env = 'dev')
     {
+            $this->stopwatch->start('loadFixtures');
+
         $manager = $this->doctrine->getManager();
         $classesDev = [
             Media::class,
@@ -347,16 +389,21 @@ class ReinitCommand extends Command
             $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
             $metadata->setIdGenerator(new AssignedGenerator());
         }
-        $this->stopwatch->start('loadFixtures');
 
         $this->runCommands(
             [
-                'hautelook:fixtures:load' => ['-e' => $env],
+                'hautelook:fixtures:load' => ['-e' => $env, '--append' => true],
             ],
             $output
         );
-        $event = $this->stopwatch->stop('loadFixtures');
-        $output->writeln('Loading fixtures duration: <info>' . $event->getDuration()  . '</info>ms');
+
+        $this->progressBarProcessor->finish();
+
+            $event = $this->stopwatch->stop('loadFixtures');
+            $output->writeln(
+                'Loading fixtures duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+            );
+    
     }
 
     protected function loadToggles(OutputInterface $output)
@@ -397,6 +444,8 @@ class ReinitCommand extends Command
 
     protected function populateElasticsearch(OutputInterface $output)
     {
+            $this->stopwatch->start('populate');
+
         $this->runCommands(
             [
                 'capco:es:clean' => ['--all' => true, '--no-debug' => true],
@@ -417,11 +466,16 @@ class ReinitCommand extends Command
             ],
             $output
         );
+
+            $event = $this->stopwatch->stop('populate');
+            $output->writeln(
+                'Populate Elasticsearch duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+            );
     }
 
     protected function executeMigrations(OutputInterface $output)
     {
-        $this->stopwatch->start('executeMigrations');
+            $this->stopwatch->start('executeMigrations');
 
         $this->runCommands(
             [
@@ -429,14 +483,17 @@ class ReinitCommand extends Command
             ],
             $output
         );
-        $event = $this->stopwatch->stop('executeMigrations');
 
-        $output->writeln('Adding migrations duration: <info>' . $event->getDuration()  . '</info>ms');
-
+            $event = $this->stopwatch->stop('executeMigrations');
+            $output->writeln(
+                'Adding migrations duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+            );
     }
 
     protected function mockMigrations(OutputInterface $output)
     {
+            $this->stopwatch->start('mockMigrations');
+
         $this->runCommands(
             [
                 'doctrine:migration:version' => [
@@ -448,6 +505,11 @@ class ReinitCommand extends Command
             ],
             $output
         );
+
+            $event = $this->stopwatch->stop('mockMigrations');
+            $output->writeln(
+                'Mocking migrations duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+            );
     }
 
     private function runCommands(array $commands, $output)

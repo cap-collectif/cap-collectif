@@ -10,12 +10,16 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
+class ThemeNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
     private $mediaExtension;
 
     public function __construct(
@@ -26,6 +30,11 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->mediaExtension = $mediaExtension;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -47,10 +56,10 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
             'show' => $this->router->generate(
                 'app_theme_show',
                 [
-                    'slug' => $object->translate()->getSlug()
+                    'slug' => $object->translate()->getSlug(),
                 ],
                 true
-            )
+            ),
         ];
 
         try {

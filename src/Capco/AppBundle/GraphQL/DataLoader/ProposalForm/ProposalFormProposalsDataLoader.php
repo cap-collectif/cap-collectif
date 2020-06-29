@@ -2,22 +2,23 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
+use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Search\ProposalSearch;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Enum\ProposalAffiliations;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Search\ProposalSearch;
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
@@ -36,9 +37,9 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
-    )
-    {
+    ) {
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
         parent::__construct(
@@ -50,6 +51,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -64,13 +66,13 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         if ($this->debug && $this->enableCache) {
             $this->logger->info(
                 __METHOD__ .
-                'called for keys : ' .
-                var_export(
-                    array_map(function ($key) {
-                        return $this->serializeKey($key);
-                    }, $keys),
-                    true
-                )
+                    'called for keys : ' .
+                    var_export(
+                        array_map(function ($key) {
+                            return $this->serializeKey($key);
+                        }, $keys),
+                        true
+                    )
             );
         }
 
@@ -101,7 +103,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
         $cacheKey = [
             'form' => $proposalForm->getId(),
-            'args' => $args->getArrayCopy()
+            'args' => $args->getArrayCopy(),
         ];
 
         if (
@@ -120,8 +122,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         Arg $args,
         $viewer,
         ?RequestStack $request
-    ): ConnectionInterface
-    {
+    ): ConnectionInterface {
         $totalCount = 0;
         $filters = [];
         list(
@@ -139,8 +140,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $filters['category'],
             $filters['status'],
             $filters['trashedStatus'],
-            $filters['includeDraft']
-            ) = [
+            $filters['includeDraft'],
+        ) = [
             $args->offsetGet('term'),
             $args->offsetGet('includeUnpublished'),
             $args->offsetGet('author'),
@@ -155,7 +156,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $args->offsetGet('category'),
             $args->offsetGet('status'),
             $args->offsetGet('trashedStatus'),
-            $args->offsetGet('includeDraft')
+            $args->offsetGet('includeDraft'),
         ];
         $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);
 

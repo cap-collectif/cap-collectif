@@ -816,6 +816,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-01-01 00:00:10'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        # TODO: This district is not on the ProposalForm
         district: '@district1'
         category: '@pCategoryAssigned1'
     assignedProposals{126..129}:
@@ -828,5 +829,6 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-01-01 00:00:10'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        # TODO: This district is not on the ProposalForm
         district: '@district2'
         category: '@pCategoryAssigned2'

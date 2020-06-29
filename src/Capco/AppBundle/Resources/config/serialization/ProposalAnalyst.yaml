@@ -1,4 +1,5 @@
 Capco\AppBundle\Entity\ProposalAnalyst:
+    exclusion_policy: ALL
     attributes:
         analyst:
             groups: [ElasticsearchProposal]

@@ -2,11 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepContributorResolver;
@@ -24,6 +25,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->stepContributorResolver = $stepContributorResolver;
@@ -36,6 +38,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -64,7 +67,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
     protected function serializeKey($key): array
     {
         return [
-            'collectStepId' => $key['collectStep']->getId()
+            'collectStepId' => $key['collectStep']->getId(),
         ];
     }
 

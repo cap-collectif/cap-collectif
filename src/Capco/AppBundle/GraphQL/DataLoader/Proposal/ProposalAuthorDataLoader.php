@@ -2,14 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Capco\UserBundle\Repository\UserRepository;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
 class ProposalAuthorDataLoader extends BatchDataLoader
 {
@@ -24,6 +25,7 @@ class ProposalAuthorDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         parent::__construct(
@@ -35,6 +37,7 @@ class ProposalAuthorDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
 

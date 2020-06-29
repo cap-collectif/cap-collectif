@@ -2,6 +2,8 @@ imports:
     - { resource: ../services.yaml }
 
 framework:
+    profiler:
+        collect: false
     validation:
         cache: validator.mapping.cache.doctrine.apc
 

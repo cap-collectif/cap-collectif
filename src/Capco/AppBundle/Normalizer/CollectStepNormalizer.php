@@ -11,12 +11,16 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInterface
+class CollectStepNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
 
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
     private $collectStepProposalCountResolver;
     private $collectStepContributorCountResolver;
     private $adapter;
@@ -34,6 +38,11 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
         $this->collectStepContributorCountResolver = $collectStepContributorCountResolver;
         $this->adapter = $adapter;
         $this->logger = $logger;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])

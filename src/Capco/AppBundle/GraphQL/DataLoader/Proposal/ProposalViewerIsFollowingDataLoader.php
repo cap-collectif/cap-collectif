@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use GraphQL\Executor\Promise\Promise;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
+use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
@@ -24,6 +25,7 @@ class ProposalViewerIsFollowingDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->followerRepository = $followerRepository;
@@ -36,6 +38,7 @@ class ProposalViewerIsFollowingDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }

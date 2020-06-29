@@ -36,7 +36,7 @@ class CreateIndexCommand extends Command
         $newIndex = $this->indexManager->createIndex();
         $this->indexManager->slowDownRefresh($newIndex);
 
-        $output->writeln([sprintf('<info>Index %s created.</info>', $newIndex->getName()), '']);
+        $output->writeln([sprintf('Index <info>%s</info> created.', $newIndex->getName())]);
 
         $this->indexManager->speedUpRefresh($newIndex);
 
@@ -57,7 +57,7 @@ class CreateIndexCommand extends Command
         }
 
         $this->indexManager->markAsLive($newIndex);
-        $output->writeln(['', '', 'New Index is now LIVE!']);
+        $output->writeln(['<info>New Index is now LIVE!</info>']);
 
         return 0;
     }

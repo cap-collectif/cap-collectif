@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo "Starting redirectionio-agent"
-exec /tmp/redirection-agent/redirectionio-agent
+exec /usr/local/bin/redirection-agent/redirectionio-agent

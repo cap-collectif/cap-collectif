@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
 class ProposalLikersDataLoader extends BatchDataLoader
 {
@@ -19,6 +20,7 @@ class ProposalLikersDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         parent::__construct(
@@ -30,6 +32,7 @@ class ProposalLikersDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }

@@ -200,7 +200,7 @@ class UserSearch extends Search
                 )
             );
             $boolQuery->addFilter($nestedQueryStep);
-            if (!empty($orderBy) && UserOrderField::ACTIVITY === $orderBy['field']) {
+            if (!empty($orderBy) && $orderBy['direction'] && UserOrderField::ACTIVITY === $orderBy['field']) {
                 $sort = [
                     'participationsCountByStep.count' => [
                         'order' => strtolower($orderBy['direction']),
@@ -248,7 +248,7 @@ class UserSearch extends Search
 
         $boolQuery->addFilter($nestedQueryProject);
         $query = new Query($boolQuery);
-        if (empty($sort) && !empty($orderBy) && UserOrderField::ACTIVITY === $orderBy['field']) {
+        if (empty($sort) && !empty($orderBy) && $orderBy['direction'] && UserOrderField::ACTIVITY === $orderBy['field']) {
             $sort = [
                 'participationsCountByProject.count' => [
                     'order' => strtolower($orderBy['direction']),

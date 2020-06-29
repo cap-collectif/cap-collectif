@@ -260,3 +260,6 @@ services:
     Egulias\EmailValidator\EmailValidator:
         autowire: true
         class: 'Egulias\EmailValidator\EmailValidator'
+
+    Overblog\PromiseAdapter\PromiseAdapterInterface:
+        alias: overblog_dataloader.webonyx_graphql_sync_promise_adapter

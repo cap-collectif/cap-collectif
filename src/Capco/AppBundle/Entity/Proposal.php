@@ -436,6 +436,7 @@ class Proposal implements
      */
     public function getAnalysts(): Collection
     {
+        // TODO, wtf with this getter ?
         $analysts = new ArrayCollection();
         if (!empty($this->proposalAnalysts)) {
             /** @var ProposalAnalyst $analyst */
@@ -464,6 +465,11 @@ class Proposal implements
     public function getProposalAnalysts(): Collection
     {
         return $this->proposalAnalysts;
+    }
+
+    public function getProposalAnalystsArray(): array
+    {
+        return $this->proposalAnalysts ? $this->proposalAnalysts->toArray() : [];
     }
 
     public function addAnalysts(array $analysts): self
@@ -520,6 +526,11 @@ class Proposal implements
     public function getAnalyses(): iterable
     {
         return $this->analyses;
+    }
+
+    public function getAnalysesArray(): array
+    {
+        return $this->analyses ? $this->analyses->toArray() : [];
     }
 
     public function addAnalysis(ProposalAnalysis $proposalAnalysis): self
@@ -749,6 +760,11 @@ class Proposal implements
         return $this->selections;
     }
 
+    public function getSelectionsArray(): iterable
+    {
+        return $this->selections->toArray();
+    }
+
     public function getClassName(): string
     {
         return 'Proposal';
@@ -766,7 +782,7 @@ class Proposal implements
         return $this->getAuthor() === $user;
     }
 
-    /** @var User $user */
+    /** @var User */
     public function viewerCanSeeInBo($user = null): bool
     {
         return $user && $user->isAdmin();
@@ -916,7 +932,7 @@ class Proposal implements
 
     public function getSelectionStepsIds(): array
     {
-        $ids = array_filter(
+        return array_filter(
             array_map(function ($value) {
                 return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
             }, $this->getSelections()->getValues()),
@@ -924,8 +940,6 @@ class Proposal implements
                 return null !== $value;
             }
         );
-
-        return $ids;
     }
 
     public function getProgressSteps(): Collection

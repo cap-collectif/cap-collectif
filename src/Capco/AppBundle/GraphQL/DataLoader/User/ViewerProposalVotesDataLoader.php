@@ -2,14 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
+use DeepCopy\DeepCopy;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -20,8 +23,6 @@ use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use DeepCopy\DeepCopy;
 
 class ViewerProposalVotesDataLoader extends BatchDataLoader
 {
@@ -47,6 +48,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache,
         AbstractVoteRepository $abstractVoteRepository
     ) {
@@ -66,6 +68,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -182,7 +185,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     {
         return [
             'userId' => $key['user']->getId(),
-            'args' => $key['args']
+            'args' => $key['args']->getArrayCopy(),
         ];
     }
 

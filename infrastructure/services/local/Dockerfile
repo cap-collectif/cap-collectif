@@ -43,7 +43,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.4-redis \
         php7.4-xsl \
         php7.4-zip \
-        php7.4-pcov \
+        #php7.4-pcov \
         php-amqp \
     && \
     apt-get clean && \
@@ -63,11 +63,19 @@ RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     apt-get update && \
     apt-get install -y --allow-unauthenticated blackfire-agent blackfire-php && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
-    mkdir -p /var/run/blackfire && \
-    curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/71 && \
-    tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
-    mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/*
+
+RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
+    && mkdir -p /tmp/blackfire \
+    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
+    && mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so
+
+COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
+COPY blackfire/blackfire-agent.ini /etc/php/7.4/fpm/conf.d/90-blackfire-agent.ini
+COPY blackfire/blackfire-agent.ini /etc/php/7.4/cli/conf.d/90-blackfire-agent.ini
+COPY blackfire/blackfire-php.ini /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
+COPY blackfire/blackfire-php.ini /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
 
  # Install rabbitmq
 ENV LANG C.UTF-8
@@ -115,13 +123,6 @@ RUN apt-get update && \
 # Install fake user 1000
 RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid 1000 --home /home/capco --shell /bin/bash --gid 1000 capco
-
-# Blackfire
-COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
-COPY blackfire/blackfire-agent.ini /etc/php/7.4/fpm/conf.d/90-blackfire-agent.ini
-COPY blackfire/blackfire-agent.ini /etc/php/7.4/cli/conf.d/90-blackfire-agent.ini
-COPY blackfire/blackfire-php.ini /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
-COPY blackfire/blackfire-php.ini /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
 
 
 #RedirectionIO

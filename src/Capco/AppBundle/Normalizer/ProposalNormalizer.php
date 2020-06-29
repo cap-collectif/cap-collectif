@@ -11,11 +11,15 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterface
+class ProposalNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
     private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
     private $commentableCommentsDataLoader;
@@ -30,6 +34,11 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -70,12 +79,11 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         $data['votesCountByStep'] = $stepCounter;
         $data['votesCount'] = $totalCount;
 
-        $args = new Argument([
-            'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
-            'first' => 0,
-        ]);
-
         if ($object->isCommentable()) {
+            $args = new Argument([
+                'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                'first' => 0,
+            ]);
             $commentsConnection = $this->commentableCommentsDataLoader->resolve(
                 $object,
                 $args,

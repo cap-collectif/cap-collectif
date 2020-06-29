@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5286142f4733418139e555fd950b448e",
+    "content-hash": "674fa5a001f019d2b4f9d8cfb59c3e27",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -951,20 +951,6 @@
                 "common",
                 "doctrine",
                 "php"
-            ],
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fcommon",
-                    "type": "tidelift"
-                }
             ],
             "time": "2020-05-29T17:35:20+00:00"
         },
@@ -2115,9 +2101,9 @@
                 "ckeditor"
             ],
             "support": {
-                "source": "https://github.com/kejwmen/IvoryCKEditorBundle/tree/feature/symfony4-compat"
+                "source": "https://github.com/cap-collectif/IvoryCKEditorBundle/tree/feature/symfony4-compat"
             },
-            "time": "2017-12-19T00:00:05+00:00"
+            "time": "2019-03-28T11:25:51+00:00"
         },
         {
             "name": "egeloen/json-builder",
@@ -2614,7 +2600,7 @@
                 "mongodb",
                 "search"
             ],
-            "time": "2020-01-10T16:46:33+00:00"
+            "time": "2019-12-03T11:03:29+00:00"
         },
         {
             "name": "friendsofsymfony/http-cache",
@@ -6467,7 +6453,7 @@
                     "name": "Andreas Heigl",
                     "email": "andreas@heigl.org",
                     "homepage": "http://andreas.heigl.org",
-                    "role": "developer"
+                    "role": "Developer"
                 }
             ],
             "description": "Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
@@ -6480,34 +6466,35 @@
         },
         {
             "name": "overblog/dataloader-bundle",
-            "version": "v0.4.2",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/dataloader-bundle.git",
-                "reference": "c063b356c2685e3f98f4dee194c4d22eef288b4f"
+                "reference": "f2e88d24777ec8f39c5bbaa5c4d72712e98acba8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/dataloader-bundle/zipball/c063b356c2685e3f98f4dee194c4d22eef288b4f",
-                "reference": "c063b356c2685e3f98f4dee194c4d22eef288b4f",
+                "url": "https://api.github.com/repos/overblog/dataloader-bundle/zipball/f2e88d24777ec8f39c5bbaa5c4d72712e98acba8",
+                "reference": "f2e88d24777ec8f39c5bbaa5c4d72712e98acba8",
                 "shasum": ""
             },
             "require": {
                 "overblog/dataloader-php": "^0.5.0",
-                "php": ">=5.5",
-                "symfony/dependency-injection": "^2.7 || ^3.1 || ^4.0"
+                "php": ">=7.2",
+                "symfony/dependency-injection": "^4.3 || ^5.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.1 || ^5.5 || ^6.0",
                 "react/promise": "^2.5",
-                "sensio/framework-extra-bundle": "^3.0",
-                "symfony/phpunit-bridge": "^2.7 || ^3.1 || ^4.0",
-                "symfony/yaml": "^2.7 || ^3.1 || ^4.0"
+                "symfony/dependency-injection": "^4.3 || ^5.0",
+                "symfony/framework-bundle": "^4.3 || ^5.0",
+                "symfony/phpunit-bridge": "^4.3 || ^5.0",
+                "symfony/yaml": "^4.3 || ^5.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4-dev"
+                    "dev-master": "0.5-dev"
                 }
             },
             "autoload": {
@@ -6534,7 +6521,7 @@
                 "caching",
                 "dataLoader"
             ],
-            "time": "2018-12-07T14:04:30+00:00"
+            "time": "2019-11-29T14:43:40+00:00"
         },
         {
             "name": "overblog/dataloader-php",
@@ -6853,12 +6840,6 @@
                 "pagination",
                 "paginator",
                 "paging"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/mbabker",
-                    "type": "github"
-                }
             ],
             "time": "2019-07-17T20:56:16+00:00"
         },
@@ -12170,16 +12151,16 @@
                 "friendsofsymfony/rest-bundle": "^2.1",
                 "jackalope/jackalope-doctrine-dbal": "^1.1",
                 "liip/imagine-bundle": "^1.9",
-                "matthiasnoback/symfony-dependency-injection-test": "^3.1",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
                 "nelmio/api-doc-bundle": "^2.11",
                 "sonata-project/admin-bundle": "^3.31",
-                "sonata-project/block-bundle": "^3.14",
+                "sonata-project/block-bundle": "^3.11",
                 "sonata-project/datagrid-bundle": "^2.3",
                 "sonata-project/doctrine-orm-admin-bundle": "^3.4",
                 "sonata-project/formatter-bundle": "^3.4 || ^4.0",
                 "sonata-project/notification-bundle": "^3.3",
                 "sonata-project/seo-bundle": "^2.5",
-                "symfony/phpunit-bridge": "^4.2",
+                "symfony/phpunit-bridge": "^4.0",
                 "symfony/security-csrf": "^2.8 || ^3.2 || ^4.0"
             },
             "suggest": {
@@ -13632,20 +13613,6 @@
             "homepage": "https://symfony.com",
             "keywords": [
                 "framework"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
             ],
             "time": "2020-05-31T05:26:09+00:00"
         },
@@ -15259,9 +15226,9 @@
             "authors": [
                 {
                     "name": "Tibor Kotosz",
+                    "role": "Developer",
                     "email": "kotosy@gmail.com",
-                    "homepage": "https://github.com/tkotosz",
-                    "role": "Developer"
+                    "homepage": "https://github.com/tkotosz"
                 }
             ],
             "description": "Extension for behat to help find slow scenario steps by logging the step times",
@@ -17655,16 +17622,6 @@
                 "testing",
                 "xunit"
             ],
-            "funding": [
-                {
-                    "url": "https://phpunit.de/donate.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
             "time": "2020-05-22T13:51:52+00:00"
         },
         {
@@ -18654,6 +18611,5 @@
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "platform-dev": []
 }

@@ -111,37 +111,6 @@ parameters:
     jms_i18n_routing.pattern_generation_strategy.class: Capco\AppBundle\Router\DefaultPatternGenerationStrategy
     webfactory_icu_translation.translator: Capco\AppBundle\Translator\FormatterDecorator
 
-framework:
-    secret: '%secret%'
-    serializer:
-        enabled: true
-    cache:
-        app: cache.adapter.redis
-        default_redis_provider: 'redis://%redis_dsn%'
-    router:
-        strict_requirements: null
-    form: null
-    csrf_protection: null
-    validation:
-        enabled: true
-        enable_annotations: true
-    templating:
-        engines:
-            - twig
-    assets:
-        version: '%assets_version%'
-    default_locale: '%locale%'
-    trusted_hosts: null
-    session:
-        handler_id: snc_redis.session.handler
-        cookie_httponly: true
-        cookie_secure: true
-    fragments: null
-    http_method_override: true
-    translator:
-        paths:
-            - '%kernel.project_dir%/translations'
-
 nelmio_api_doc: null
 
 sensio_framework_extra:

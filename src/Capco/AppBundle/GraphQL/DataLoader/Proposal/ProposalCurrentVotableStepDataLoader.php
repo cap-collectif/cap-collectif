@@ -2,11 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
@@ -27,6 +28,7 @@ class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->resolver = $resolver;
@@ -40,6 +42,7 @@ class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }

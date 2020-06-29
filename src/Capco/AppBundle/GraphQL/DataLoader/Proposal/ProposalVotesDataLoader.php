@@ -2,23 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Search\VoteSearch;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Search\VoteSearch;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 
 class ProposalVotesDataLoader extends BatchDataLoader
 {
@@ -33,6 +25,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->voteSearch = $voteSearch;
@@ -45,6 +38,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -69,6 +63,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
             );
         }
         $connections = $this->resolveBatch($keys);
+
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
@@ -79,19 +74,16 @@ class ProposalVotesDataLoader extends BatchDataLoader
             // ?TODO? toGlobalId
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,
             'args' => $key['args']->getArrayCopy(),
-            'includeUnpublished' => $key['includeUnpublished']
+            'includeUnpublished' => $key['includeUnpublished'],
         ];
     }
 
     private function resolveBatch($keys): array
     {
         $includeUnpublished = $keys[0]['includeUnpublished'] ?? false;
-        $paginatedResults = $this->voteSearch->searchProposalVotes(
-            $keys,
-            $includeUnpublished
-        );
+        $paginatedResults = $this->voteSearch->searchProposalVotes($keys, $includeUnpublished);
         $connections = [];
-        if (!empty($paginatedResults)){
+        if (!empty($paginatedResults)) {
             foreach ($keys as $i => $key) {
                 $paginator = new ElasticsearchPaginator(static function (
                     ?string $cursor,

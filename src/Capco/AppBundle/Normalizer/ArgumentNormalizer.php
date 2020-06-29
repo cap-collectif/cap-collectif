@@ -2,37 +2,38 @@
 
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Entity\Argument;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class ArgumentNormalizer implements NormalizerInterface, SerializerAwareInterface
+class ArgumentNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
 
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
 
-    public function __construct(
-        ObjectNormalizer $normalizer
-    ) {
+    public function __construct(ObjectNormalizer $normalizer)
+    {
         $this->normalizer = $normalizer;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = $this->normalizer->normalize($object, $format, $context);
-
-        // Let's faster our argument indexation
+        return $this->normalizer->normalize($object, $format, $context);
+        // Let's faster our indexation
         // We can see what's serialized using
         // dump($data);
-
-        return $data;
     }
 
     public function supportsNormalization($data, $format = null): bool

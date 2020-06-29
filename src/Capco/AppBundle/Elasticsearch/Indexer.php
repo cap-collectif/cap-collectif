@@ -9,6 +9,7 @@ use Elastica\Document;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\AbstractVote;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -56,19 +57,21 @@ class Indexer
      */
     private $classes;
     private $logger;
-    private $stopWatch;
+    private $stopwatch;
 
     public function __construct(
         RegistryInterface $registry,
         SerializerInterface $serializer,
         Index $index,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Stopwatch $stopwatch
     ) {
         $this->index = $index;
         $this->client = $index->getClient();
         $this->em = $registry->getManager();
         $this->serializer = $serializer;
         $this->logger = $logger;
+        $this->stopwatch = $stopwatch;
     }
 
     public function getIndex(): Index
@@ -79,7 +82,7 @@ class Indexer
     /**
      * Fetch ALL the indexable entities and send them to bulks.
      */
-    public function indexAll(OutputInterface $output = null): void
+    public function indexAll(?OutputInterface $output = null): void
     {
         $this->disableBuiltinSoftdelete();
         $classes = $this->getClassesToIndex();
@@ -95,8 +98,11 @@ class Indexer
         }
     }
 
-    public function indexAllForType(string $type, int $offset, OutputInterface $output = null): void
-    {
+    public function indexAllForType(
+        string $type,
+        int $offset,
+        ?OutputInterface $output = null
+    ): void {
         $this->disableBuiltinSoftdelete();
         $classes = $this->getClassesToIndex();
 
@@ -207,9 +213,9 @@ class Indexer
 
         try {
             $json = $this->serializer->serialize($object, 'json', [
-                'groups' => $object->getElasticsearchSerializationGroups()
+                'groups' => $object->getElasticsearchSerializationGroups(),
             ]);
-        } catch (\Exception $exception) {
+        } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . $exception->getMessage());
         }
 
@@ -245,13 +251,19 @@ class Indexer
         return array_search($entityFQN, $classes, true);
     }
 
-    private function indexType(string $class, int $offset, OutputInterface $output = null): void
+    private function indexType(string $class, int $offset, ?OutputInterface $output = null): void
     {
-        $stopwatch = new Stopwatch();
-        $stopwatch->start($class);
+        $this->stopwatch->start($this->getTypeFromEntityFQN($class));
         $repository = $this->em->getRepository($class);
 
         $query = $repository->createQueryBuilder('a')->getQuery();
+        // TODO: all iterated queries should be ordered.
+        if (Proposal::class === $class) {
+            $query = $repository
+                ->createQueryBuilder('a')
+                ->orderBy('a.id')
+                ->getQuery();
+        }
         $iterableResult = $query->iterate();
 
         if ($output) {
@@ -260,7 +272,6 @@ class Indexer
                 ->select('count(a)')
                 ->getQuery()
                 ->getSingleScalarResult();
-            // @todo ajouter un tri
             $output->writeln(PHP_EOL . "<info> Indexing ${count} ${class}</info>");
             $progress = new ProgressBar($output, $count);
             $progress->start();
@@ -268,19 +279,14 @@ class Indexer
         $correctlyIndexed = 0;
         $correctlyDeleted = 0;
         foreach ($iterableResult as $key => $row) {
-            if ($key < $offset) {
-                if (isset($progress)) {
-                    $progress->advance();
-                }
-
-                continue;
-            }
             /** @var IndexableInterface $object */
             $object = $row[0];
 
             if ($object->isIndexable()) {
                 $document = $this->buildDocument($object);
+
                 $this->addToBulk($document);
+
                 ++$correctlyIndexed;
             } else {
                 // Empty mean DELETE
@@ -296,16 +302,17 @@ class Indexer
             $this->em->clear();
         }
         $this->finishBulk();
-        $event = $stopwatch->stop($class);
+
+        $event = $this->stopwatch->stop($this->getTypeFromEntityFQN($class));
         if (isset($progress)) {
             $progress->finish();
             $output->writeln([
                 '',
-                $event->getDuration() > 100
+                $event->getDuration() > 500
                     ? '- <error>' . $event->getDuration() . '</error> ms'
                     : '- <comment>' . $event->getDuration() . '</comment> ms',
                 '- <comment>' . $correctlyIndexed . '</comment> indexations',
-                '- <comment>' . $correctlyDeleted . '</comment> deletions'
+                '- <comment>' . $correctlyDeleted . '</comment> deletions',
             ]);
         }
     }

@@ -7,6 +7,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
 use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
@@ -29,6 +30,7 @@ class ProjectProposalsDataLoader extends BatchDataLoader
         ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->proposalFormProposalsDataLoader = $proposalFormProposalsDataLoader;
@@ -42,6 +44,7 @@ class ProjectProposalsDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -66,29 +69,31 @@ class ProjectProposalsDataLoader extends BatchDataLoader
     {
         return [
             'projectId' => $key['project']->getId(),
-            'args' => $key['args'],
+            'args' => $key['args']->getArrayCopy(),
             'viewer' => $key['viewer'] ? $key['viewer']->getId() : null,
         ];
     }
 
-    private function resolveWithoutBatch(Project $project, Argument $args, ?User $viewer = null): Connection
-    {
+    private function resolveWithoutBatch(
+        Project $project,
+        Argument $args,
+        ?User $viewer = null
+    ): Connection {
         $data = ConnectionBuilder::empty();
 
         // For now, to simplify, we consider that only one collect step is possible on a project.
         $step = $project->getFirstCollectStep();
         if ($step && $step->getProposalForm()) {
-            $promise =
-                $this->proposalFormProposalsDataLoader
-                    ->load([
-                        'form' => $step->getProposalForm(),
-                        'args' => $args,
-                        'viewer' => $viewer,
-                        'request' => null,
-                    ])
-                    ->then(function (Connection $connection) use (&$data) {
-                        $data = $connection;
-                    });
+            $promise = $this->proposalFormProposalsDataLoader
+                ->load([
+                    'form' => $step->getProposalForm(),
+                    'args' => $args,
+                    'viewer' => $viewer,
+                    'request' => null,
+                ])
+                ->then(function (Connection $connection) use (&$data) {
+                    $data = $connection;
+                });
             $this->adapter->await($promise);
         }
 

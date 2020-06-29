@@ -12,13 +12,17 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
+class CommentNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
     private $tokenStorage;
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
 
     public function __construct(
         RouterInterface $router,
@@ -28,6 +32,11 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->tokenStorage = $tokenStorage;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -44,7 +53,7 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
                 'app_comment_edit',
                 ['commentId' => $object->getId()],
                 true
-            )
+            ),
         ];
 
         $data['hasUserVoted'] = $this->hasUserVoted($object);

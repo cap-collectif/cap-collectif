@@ -13,12 +13,16 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
+class OpinionNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
     private $toggleManager;
     private $tokenStorage;
     private $voteRepository;
@@ -38,6 +42,11 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->voteRepository = $voteRepository;
         $this->toggleManager = $toggleManager;
         $this->voteSearch = $voteSearch;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -95,7 +104,7 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
                         'projectSlug' => $project->getSlug(),
                         'stepSlug' => $step->getSlug(),
                         'opinionTypeSlug' => $opinionType->getSlug(),
-                        'opinionSlug' => $object->getSlug()
+                        'opinionSlug' => $object->getSlug(),
                     ],
                     true
                 )
@@ -108,10 +117,10 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
                         'projectSlug' => $project->getSlug(),
                         'stepSlug' => $step->getSlug(),
                         'consultationSlug' => $opinionType->getConsultation()->getSlug(),
-                        'opinionTypeSlug' => $opinionType->getSlug()
+                        'opinionTypeSlug' => $opinionType->getSlug(),
                     ],
                     true
-                )
+                ),
             ];
         }
         $data['userVote'] =
@@ -121,7 +130,7 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
         $data['hasUserReported'] = 'anon.' === $user ? false : $object->userHasReport($user);
         if (\in_array('Opinions', $groups) && $this->toggleManager->isActive('votes_evolution')) {
             $data['history'] = [
-                'votes' => $this->voteRepository->getHistoryFor('opinion', $object)
+                'votes' => $this->voteRepository->getHistoryFor('opinion', $object),
             ];
         }
 

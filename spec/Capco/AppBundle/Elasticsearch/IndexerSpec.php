@@ -14,6 +14,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class IndexerSpec extends ObjectBehavior
 {
@@ -23,7 +24,8 @@ class IndexerSpec extends ObjectBehavior
         Index $index,
         LoggerInterface $logger,
         EntityManagerInterface $em,
-        ClassMetadataFactory $factory
+        ClassMetadataFactory $factory,
+        Stopwatch $stopwatch
     ): void {
         $registry->getManager()->willReturn($em);
         $em->getMetadataFactory()->willReturn($factory);
@@ -35,7 +37,7 @@ class IndexerSpec extends ObjectBehavior
                 new ClassMetadata(PostComment::class)
             ]);
 
-        $this->beConstructedWith($registry, $serializer, $index, $logger);
+        $this->beConstructedWith($registry, $serializer, $index, $logger, $stopwatch);
     }
 
     public function it_is_initializable(): void

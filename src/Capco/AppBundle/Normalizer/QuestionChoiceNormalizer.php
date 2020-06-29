@@ -7,16 +7,25 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class QuestionChoiceNormalizer implements NormalizerInterface, SerializerAwareInterface
+class QuestionChoiceNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
 
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
 
     public function __construct(ObjectNormalizer $normalizer)
     {
         $this->normalizer = $normalizer;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     /**
@@ -25,7 +34,7 @@ class QuestionChoiceNormalizer implements NormalizerInterface, SerializerAwareIn
     public function normalize($object, $format = null, array $context = [])
     {
         return $this->normalizer->normalize($object, $format, $context);
-        // Let's faster our argument indexation
+        // Let's faster our indexation
         // We can see what's serialized using
         // dump($data);
     }

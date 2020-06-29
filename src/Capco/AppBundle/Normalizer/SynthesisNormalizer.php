@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
@@ -7,12 +8,16 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class SynthesisNormalizer implements NormalizerInterface, SerializerAwareInterface
+class SynthesisNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
 
     public function __construct(UrlGeneratorInterface $router, ObjectNormalizer $normalizer)
     {
@@ -20,7 +25,12 @@ class SynthesisNormalizer implements NormalizerInterface, SerializerAwareInterfa
         $this->normalizer = $normalizer;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
+    }
+
+    public function normalize($object, $format = null, array $context = [])
     {
         $data = $this->normalizer->normalize($object, $format, $context);
         $data['_links']['self']['href'] = $this->router->generate(
@@ -37,6 +47,7 @@ class SynthesisNormalizer implements NormalizerInterface, SerializerAwareInterfa
             ],
             true
         );
+
         return $data;
     }
 

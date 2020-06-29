@@ -379,7 +379,7 @@ DQL;
             }
         }
 
-        $output->writeln('Calculation completed');
+        $output->writeln('<info>Counters calculation completed !</info>');
 
         return 0;
     }

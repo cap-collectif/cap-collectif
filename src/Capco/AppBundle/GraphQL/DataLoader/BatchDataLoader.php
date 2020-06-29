@@ -15,15 +15,15 @@ use Symfony\Component\Stopwatch\Stopwatch;
 abstract class BatchDataLoader extends DataLoader
 {
     private const DATALOADER_PROFILING_EVENT_NAME = 'dataloader_profiling';
-    protected $cache;
-    protected $cacheKey;
-    protected $logger;
-    protected $cachePrefix;
-    protected $cacheDriver;
-    protected $cacheTtl;
-    protected $debug;
-    protected $enableCache = true;
-    private $collector;
+    protected AdapterInterface $cache;
+    protected string $cacheKey;
+    protected LoggerInterface $logger;
+    protected string $cachePrefix;
+    protected int $cacheTtl;
+    protected bool $debug;
+    protected bool $enableCache;
+    private GraphQLCollector $collector;
+    private Stopwatch $stopwatch;
 
     public function __construct(
         callable $batchFunction,
@@ -34,7 +34,8 @@ abstract class BatchDataLoader extends DataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
-        bool $enableCache = true
+        Stopwatch $stopwatch,
+        bool $enableCache
     ) {
         $this->cachePrefix = $cachePrefix;
         $this->cache = $cache;
@@ -43,6 +44,7 @@ abstract class BatchDataLoader extends DataLoader
         $this->debug = $debug;
         $this->enableCache = $enableCache;
         $this->collector = $collector;
+        $this->stopwatch = $stopwatch;
         $options = new Option([
             'cacheKeyFn' => function ($key) {
                 $serializedKey = $this->serializeKey($key);
@@ -57,7 +59,7 @@ abstract class BatchDataLoader extends DataLoader
                             : base64_encode(var_export($this->serializeKey($key), true))) .
                         ']-'
                 );
-            }
+            },
         ]);
         parent::__construct(
             function ($ids) use ($batchFunction) {
@@ -107,9 +109,8 @@ abstract class BatchDataLoader extends DataLoader
             $cacheItem = $this->cache->getItem($cacheKey);
         }
 
-        $stopwatch = new Stopwatch();
         if ($this->debug) {
-            $stopwatch->start(self::DATALOADER_PROFILING_EVENT_NAME);
+            $this->stopwatch->start(self::DATALOADER_PROFILING_EVENT_NAME . $this->cachePrefix);
         }
 
         if (!$this->enableCache || !$cacheItem->isHit()) {
@@ -122,19 +123,22 @@ abstract class BatchDataLoader extends DataLoader
             }
             $promise = parent::load($key);
             if ($promise instanceof Promise) {
-                $promise->then(function ($value) use ($key, &$result, $cacheItem, $stopwatch) {
+                $promise->then(function ($value) use ($key, &$result, $cacheItem) {
                     $this->prime($key, $value);
                     $parts = explode('\\', static::class);
                     $subtype = array_pop($parts);
-                    $duration = $stopwatch
-                        ->stop(self::DATALOADER_PROFILING_EVENT_NAME)
+                    $duration = $this->stopwatch
+                        ->stop(self::DATALOADER_PROFILING_EVENT_NAME . $this->cachePrefix)
                         ->getDuration();
-                    $this->collector->addCacheMiss(
-                        $this->serializeKey($key),
-                        $subtype,
-                        $duration,
-                        $value
-                    );
+
+                    if ($this->debug) {
+                        $this->collector->addCacheMiss(
+                            $this->serializeKey($key),
+                            $subtype,
+                            $duration,
+                            $value
+                        );
+                    }
 
                     if ($this->enableCache) {
                         $cacheItem
@@ -164,7 +168,9 @@ abstract class BatchDataLoader extends DataLoader
             if ($this->debug) {
                 $parts = explode('\\', static::class);
                 $subtype = array_pop($parts);
-                $duration = $stopwatch->stop(self::DATALOADER_PROFILING_EVENT_NAME)->getDuration();
+                $duration = $this->stopwatch
+                    ->stop(self::DATALOADER_PROFILING_EVENT_NAME . $this->cachePrefix)
+                    ->getDuration();
                 $this->collector->addCacheHit(
                     $this->serializeKey($key),
                     $subtype,
@@ -193,8 +199,6 @@ abstract class BatchDataLoader extends DataLoader
      * The getCacheTag function is used to set tags on cache item.
      *
      * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
-     *
-     * @return array
      */
     protected function getCacheTag($key): array
     {

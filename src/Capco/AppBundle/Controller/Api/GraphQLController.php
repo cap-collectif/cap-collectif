@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Overblog\GraphQLBundle\Request as GraphQLRequest;
-use Symfony\Component\Routing\Annotation\Route;
 use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
 
 class GraphQLController extends BaseController
@@ -27,22 +28,26 @@ class GraphQLController extends BaseController
      */
     private $requestParser;
 
+    private $logger;
+
     public function __construct(
         GraphQLRequest\ParserInterface $batchParser,
         GraphQLRequest\Executor $requestExecutor,
-        GraphQLRequest\ParserInterface $requestParser
+        GraphQLRequest\ParserInterface $requestParser,
+        LoggerInterface $logger
     ) {
         parent::__construct($batchParser, $requestExecutor, $requestParser, false, false);
         $this->batchParser = $batchParser;
         $this->requestExecutor = $requestExecutor;
         $this->requestParser = $requestParser;
+        $this->logger = $logger;
     }
 
     /**
      * @Route("/graphql", name="graphql_endpoint", defaults={"_feature_flags" = "public_api"}, options={"i18n" = false})
      * @Route("/graphql/{schemaName}", name="graphql_multiple_endpoint", requirements={"schemaName" = "public|internal"}, options={"i18n" = false})
      */
-    public function endpointAction(Request $request, string $schemaName = null)
+    public function endpointAction(Request $request, ?string $schemaName = null)
     {
         if (!$schemaName) {
             $schemaName = 'public';
@@ -51,23 +56,24 @@ class GraphQLController extends BaseController
             }
         }
 
-        return $this->createResponse($request, $schemaName, false);
+        try {
+            return $this->createResponse($request, $schemaName, false);
+        } catch (BadRequestHttpException $e) {
+            if ('public' === $schemaName || 'preview' === $schemaName) {
+                $this->logger->warn('Wrong public query');
+            } else {
+                throw $e;
+            }
+        }
     }
 
     // See https://github.com/overblog/GraphQLBundle/blob/master/src/Controller/GraphController.php
 
     /**
-     * @param Request     $request
-     * @param string|null $schemaName
-     * @param bool        $batched
-     *
      * @return JsonResponse|Response
      */
-    private function createResponse(
-        Request $request,
-        string $schemaName = null,
-        bool $batched
-    ): Response {
+    private function createResponse(Request $request, ?string $schemaName, bool $batched): Response
+    {
         if ('OPTIONS' === $request->getMethod()) {
             $response = new JsonResponse([], 200);
         } else {
@@ -90,14 +96,7 @@ class GraphQLController extends BaseController
     {
     }
 
-    /**
-     * @param Request     $request
-     * @param string|null $schemaName
-     * @param bool        $batched
-     *
-     * @return array
-     */
-    private function processQuery(Request $request, string $schemaName = null, bool $batched): array
+    private function processQuery(Request $request, ?string $schemaName, bool $batched): array
     {
         if ($batched) {
             $payload = $this->processBatchQuery($request, $schemaName);
@@ -108,13 +107,7 @@ class GraphQLController extends BaseController
         return $payload;
     }
 
-    /**
-     * @param Request     $request
-     * @param string|null $schemaName
-     *
-     * @return array
-     */
-    private function processBatchQuery(Request $request, string $schemaName = null): array
+    private function processBatchQuery(Request $request, ?string $schemaName = null): array
     {
         $queries = $this->batchParser->parse($request);
         $payloads = [];
@@ -134,13 +127,7 @@ class GraphQLController extends BaseController
         return $payloads;
     }
 
-    /**
-     * @param Request     $request
-     * @param string|null $schemaName
-     *
-     * @return array
-     */
-    private function processNormalQuery(Request $request, string $schemaName = null): array
+    private function processNormalQuery(Request $request, ?string $schemaName = null): array
     {
         $params = $this->requestParser->parse($request);
 

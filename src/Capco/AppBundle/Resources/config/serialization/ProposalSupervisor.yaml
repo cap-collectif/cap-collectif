@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\ProposalSupervisor:
+    exclusion_policy: ALL
+    attributes:
+        id:
+            groups: [ElasticsearchProposal]

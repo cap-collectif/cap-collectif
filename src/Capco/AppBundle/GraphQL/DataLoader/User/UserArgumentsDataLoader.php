@@ -2,21 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Search\ContributionSearch;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Capco\AppBundle\Search\ContributionSearch;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 
 class UserArgumentsDataLoader extends BatchDataLoader
 {
-
     private $contributionSearch;
-
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -26,6 +24,7 @@ class UserArgumentsDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         ContributionSearch $contributionSearch,
         bool $enableCache
     ) {
@@ -40,6 +39,7 @@ class UserArgumentsDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -54,19 +54,22 @@ class UserArgumentsDataLoader extends BatchDataLoader
         if ($this->debug) {
             $this->logger->info(
                 __METHOD__ .
-                'called for keys : ' .
-                var_export(
-                    array_map(function ($key) {
-                        return $this->serializeKey($key);
-                    }, $keys),
-                    true
-                )
+                    'called for keys : ' .
+                    var_export(
+                        array_map(function ($key) {
+                            return $this->serializeKey($key);
+                        }, $keys),
+                        true
+                    )
             );
         }
         $viewer = $keys[0]['viewer'];
-        $argumentPaginatedResults = $this->contributionSearch->getArgumentsByUserIds($viewer, $keys);
+        $argumentPaginatedResults = $this->contributionSearch->getArgumentsByUserIds(
+            $viewer,
+            $keys
+        );
         $connections = [];
-        if (!empty($argumentPaginatedResults)){
+        if (!empty($argumentPaginatedResults)) {
             foreach ($keys as $i => $key) {
                 $paginator = new ElasticsearchPaginator(static function (
                     ?string $cursor,
@@ -77,6 +80,7 @@ class UserArgumentsDataLoader extends BatchDataLoader
                 $connections[] = $paginator->auto($key['args']);
             }
         }
+
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
@@ -89,11 +93,9 @@ class UserArgumentsDataLoader extends BatchDataLoader
     {
         return [
             'userId' => $key['user']->getId(),
-            'args' => $key['args'] ?? [],
+            'args' => $key['args'] ? $key['args']->getArrayCopy() : [],
             'viewerId' => $key['viewer'] ? $key['viewer']->getId() : null,
-            'aclDisabled' => $key['aclDisabled']
+            'aclDisabled' => $key['aclDisabled'],
         ];
     }
-
 }
-

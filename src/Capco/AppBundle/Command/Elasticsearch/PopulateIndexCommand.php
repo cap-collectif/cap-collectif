@@ -64,7 +64,7 @@ class PopulateIndexCommand extends Command
             return 1;
         }
 
-        $output->writeln(['', '', 'All the documents are LIVE!']);
+        $output->writeln(['All the documents are LIVE!']);
 
         return 0;
     }

@@ -1,10 +1,10 @@
 Capco\AppBundle\Entity\ProposalAssessment:
+    exclusion_policy: ALL
     attributes:
         id:
             groups: [ElasticsearchProposal]
-        getProposal:
+        proposal:
             type: object
-            serialized_name: proposal
             groups: [ElasticsearchAnalysisNestedProposal]
         updatedBy:
             groups: [ElasticsearchProposal]

@@ -15,12 +15,16 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Capco\AppBundle\Twig\MediaExtension;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
+class ProjectNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
     private $helper;
     private $mediaExtension;
     private $stepResolver;
@@ -43,6 +47,11 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->stepResolver = $stepResolver;
         $this->contributionResolver = $contributionResolver;
         $this->eventRepository = $eventRepository;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -70,7 +79,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             if ($object->isLocalized()) {
                 $data['locale'] = [
                     'id' => $object->getLocale()->getId(),
-                    'code' => $object->getLocaleCode()
+                    'code' => $object->getLocaleCode(),
                 ];
             }
 
@@ -105,7 +114,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         $links = [
             'show' => $this->stepResolver->getFirstStepLinkForProject($object),
-            'external' => $object->getExternalLink()
+            'external' => $object->getExternalLink(),
         ];
 
         if (\in_array('ProjectAdmin', $groups, true)) {
@@ -131,7 +140,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         if (\in_array('Projects', $groups, true) && $object->getCover()) {
             try {
                 $data['cover'] = [
-                    'url' => $this->mediaExtension->path($object->getCover(), 'project')
+                    'url' => $this->mediaExtension->path($object->getCover(), 'project'),
                 ];
             } catch (RouteNotFoundException $e) {
                 // Avoid some SonataMedia problems

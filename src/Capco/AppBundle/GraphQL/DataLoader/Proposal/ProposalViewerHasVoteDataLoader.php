@@ -2,18 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
+use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use GraphQL\Executor\Promise\Promise;
 
 class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 {
@@ -34,6 +35,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
@@ -49,6 +51,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -149,7 +152,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         return [
             'proposalId' => $key['proposal']->getId(),
             'stepId' => $key['stepId'],
-            'user' => $key['user']->getId()
+            'user' => $key['user']->getId(),
         ];
     }
 

@@ -46,8 +46,7 @@ class ResetFeatureFlagsCommand extends Command
         }
 
         $env = $this->getContainer()->getParameter('kernel.environment');
-        $output->writeln('');
-        $output->writeln('Resetting the feature toggles to the default ' . $env . ' configuration');
+        $output->writeln('Resetting the feature toggles to the default <info>' . $env . '</info> configuration');
 
         $this->manager->activate('blog');
         $this->manager->activate('calendar');
@@ -130,7 +129,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('unstable__analysis');
         }
 
-        $output->writeln('Feature flags reseted');
+        $output->writeln('<info>Feature flags reseted ! </info>');
 
         return 0;
     }

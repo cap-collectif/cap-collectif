@@ -9,6 +9,8 @@ services:
 
   liip_imagine.service.filter: '@Liip\ImagineBundle\Service\FilterService'
 
+  Capco\AppBundle\DataFixtures\Processor\ProgressBarProcessor: ~
+
   Capco\AppBundle\DataFixtures\Processor\MediaProcessor:
     arguments:
       $filterService: '@Liip\ImagineBundle\Service\FilterService'

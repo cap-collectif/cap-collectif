@@ -2,16 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Question;
 
-use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Entity\LogicJump;
-use Capco\AppBundle\Enum\JumpsOrderField;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Repository\LogicJumpRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\LogicJump;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\JumpsOrderField;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Capco\AppBundle\Repository\LogicJumpRepository;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
 class QuestionJumpsDataLoader extends BatchDataLoader
 {
@@ -25,6 +26,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache,
         LogicJumpRepository $repository
     ) {
@@ -37,6 +39,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
         $this->repository = $repository;
@@ -81,7 +84,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
     {
         return [
             'questionId' => $key['question']->getId(),
-            'args' => $key['args']->getArrayCopy()
+            'args' => $key['args']->getArrayCopy(),
         ];
     }
 }

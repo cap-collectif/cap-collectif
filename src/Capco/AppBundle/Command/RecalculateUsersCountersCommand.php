@@ -134,7 +134,7 @@ class RecalculateUsersCountersCommand extends Command
        )'
         );
 
-        $output->writeln('Calculation completed');
+        $output->writeln('<info>User counters calculation completed !</info>');
 
         return 0;
     }

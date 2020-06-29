@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -21,6 +21,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 
 class StepContributionsDataLoader extends BatchDataLoader
@@ -48,6 +49,7 @@ class StepContributionsDataLoader extends BatchDataLoader
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->opinionRepository = $opinionRepository;
@@ -66,6 +68,7 @@ class StepContributionsDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -90,7 +93,7 @@ class StepContributionsDataLoader extends BatchDataLoader
     {
         return [
             'stepId' => $key['step']->getId(),
-            'args' => $key['args']
+            'args' => $key['args']->getArrayCopy(),
         ];
     }
 

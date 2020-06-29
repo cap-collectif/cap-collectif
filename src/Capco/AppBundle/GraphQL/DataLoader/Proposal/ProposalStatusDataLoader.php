@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Selection;
-use Overblog\GraphQLBundle\Error\UserError;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
 class ProposalStatusDataLoader extends BatchDataLoader
@@ -30,6 +30,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->globalIdResolver = $globalIdResolver;
@@ -42,6 +43,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -83,7 +85,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
         return [
             'proposalId' => $key['proposal']->getId(),
             'args' => $key['args']->getArrayCopy(),
-            'context' => $key['context']
+            'context' => $key['context'],
         ];
     }
 

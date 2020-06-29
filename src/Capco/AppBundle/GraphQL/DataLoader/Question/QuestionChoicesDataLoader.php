@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Question;
 
-use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Search\QuestionChoiceSearch;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Capco\AppBundle\Search\QuestionChoiceSearch;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 
 class QuestionChoicesDataLoader extends BatchDataLoader
 {
@@ -22,6 +23,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache,
         QuestionChoiceSearch $questionChoiceSearch
     ) {
@@ -34,6 +36,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
         $this->questionChoiceSearch = $questionChoiceSearch;
@@ -46,7 +49,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
                 'id' => $key['question']->getId(),
                 'isRandomQuestionChoices' => $key['question']->isRandomQuestionChoices(),
                 'args' => $key['args'],
-                'seed' => $key['seed']
+                'seed' => $key['seed'],
             ];
         }, $keys);
 
@@ -74,7 +77,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
             'id' => $key['question']->getId(),
             'isRandomQuestionChoices' => $key['question']->isRandomQuestionChoices(),
             'args' => $key['args']->getArrayCopy(),
-            'seed' => $key['seed']
+            'seed' => $key['seed'],
         ];
     }
 }

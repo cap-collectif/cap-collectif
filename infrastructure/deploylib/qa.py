@@ -201,8 +201,6 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
     php_option = ''
     env_option = '--format=junit --out=./coverage --format=pretty --out=std'
 
-    if env.environment == 'ci':
-        php_option = '-dpcov.enabled=1'
 
     for job in profiles:
         command = ('php ' + php_option + ' -d memory_limit=-1 ./bin/behat ' + env_option + ('', ' --log-step-times')[

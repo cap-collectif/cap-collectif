@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\Sentry;
 
-use Sentry\ClientBuilder;
-use Sentry\Integration\RequestIntegration;
 use Sentry\State\Hub;
+use Sentry\ClientBuilder;
 use Sentry\State\HubInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Kernel;
+use Sentry\Integration\RequestIntegration;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -35,6 +36,7 @@ class SentryFactory
                 AccessDeniedException::class, 
                 NotFoundHttpException::class,
                 AccessDeniedHttpException::class,
+                BadRequestHttpException::class,
             ],
             'attach_stacktrace' => false,
             'tags' => [

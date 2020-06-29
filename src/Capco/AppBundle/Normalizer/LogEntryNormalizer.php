@@ -9,12 +9,16 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterface
+class LogEntryNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
     private $logManager;
 
     public function __construct(
@@ -25,6 +29,11 @@ class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterfac
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->logManager = $logManager;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])

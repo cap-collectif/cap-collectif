@@ -32,14 +32,14 @@ class MediasController extends AbstractFOSRestController
         return [
             'name' => $media->getName(),
             'id' => $media->getId(),
-            'size' => $this->formatBytes($media->getSize()),
+            'size' => self::formatBytes($media->getSize()),
             'url' =>
                 $request->getUriForPath('/media') .
                 $this->get(MediaExtension::class)->path($media, 'reference')
         ];
     }
 
-    private function formatBytes(int $bytes): string
+    public static function formatBytes(int $bytes): string
     {
         $units = ['O', 'Ko', 'Mo', 'Go', 'To'];
         $power = $bytes > 0 ? floor(log($bytes, 1024)) : 0;

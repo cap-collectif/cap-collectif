@@ -12,15 +12,19 @@ use Symfony\Component\Process\Process;
 use Liip\ImagineBundle\Service\FilterService;
 use Symfony\Component\Console\Helper\ProgressBar;
 
+/**
+ * This processor generate our medias with liip, to display in development
+ * images on the first page load and not the second.
+ */
 class MediaProcessor implements ProcessorInterface
 {
     private $referenceMap = [];
     private $em;
     private $filterService;
     private $projectDir;
-    private $output;
-    private $progressBar;
 
+    /* TODO: Please investigate why this is slow since SF4. */
+    const ENABLE_PROCESSOR = true;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -32,24 +36,8 @@ class MediaProcessor implements ProcessorInterface
         $this->projectDir = $projectDir;
     }
 
-    public function setOutput($output) {
-        $this->output = $output;
-    }
-
     public function preProcess(string $id, $object): void
     {
-        if ($this->output) {
-            if (!$this->progressBar) {
-                ProgressBar::setFormatDefinition('custom', ' %current%/%max% -- %message%');
-                $this->progressBar = new ProgressBar($this->output, 8000);
-                $this->progressBar->setFormat('custom');
-                $this->progressBar->setMessage('Pre processing…');
-                $this->progressBar->start();
-            }
-            $this->progressBar->setMessage('Pre processing…<info>' . \get_class($object). '</info>' . PHP_EOL);
-            $this->progressBar->advance();
-        }
-        
         if ($object instanceof Media) {
             $this->referenceMap[$id] = $object->getProviderReference();
 
@@ -70,11 +58,9 @@ class MediaProcessor implements ProcessorInterface
      */
     public function postProcess(string $id, $object): void
     {
-        if ($this->output) {
-            $this->progressBar->setMessage('Post processing…<info>' . \get_class($object). '</info>' . PHP_EOL);
-            $this->progressBar->advance();
+        if (!self::ENABLE_PROCESSOR) {
+            return;
         }
-        /* TODO: Please investigate why this is slow since SF4. */
         if ($object instanceof Media) {
             $newProviderReference = $this->referenceMap[$id];
             if (
@@ -102,7 +88,6 @@ class MediaProcessor implements ProcessorInterface
                         );
                     }
                 }
-
                 // Flush new provider reference
                 $this->em->flush();
             }

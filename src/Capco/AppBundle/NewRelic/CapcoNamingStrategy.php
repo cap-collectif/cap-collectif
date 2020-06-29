@@ -7,6 +7,7 @@ use Overblog\GraphQLBundle\Request\Parser;
 use Overblog\GraphQLBundle\Request\ParserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use GraphQL\Error\SyntaxError;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CapcoNamingStrategy implements TransactionNamingStrategyInterface
 {
@@ -27,7 +28,7 @@ class CapcoNamingStrategy implements TransactionNamingStrategyInterface
                 
                 // We could use a query hash instead of UnknownQuery
                 $transactionName = $parameters[ParserInterface::PARAM_OPERATION_NAME] ?? 'Unknown query';
-            } catch (SyntaxError $syntaxError) {
+            } catch (SyntaxError | BadRequestHttpException $e) {
                 $transactionName = "Syntax error query";
             }
 

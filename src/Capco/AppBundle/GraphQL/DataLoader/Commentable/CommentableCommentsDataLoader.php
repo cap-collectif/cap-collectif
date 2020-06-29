@@ -2,28 +2,29 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Commentable;
 
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\GraphQL\DataLoader\DataLoaderUtils;
-use Capco\AppBundle\GraphQL\DataLoader\EntityRepositoryLinker;
-use Doctrine\Common\Persistence\Proxy;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Proposal;
+use Doctrine\Common\Persistence\Proxy;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\EventComment;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Model\CommentableInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\Repository\PostCommentRepository;
 use Capco\AppBundle\Repository\EventCommentRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\DataLoaderUtils;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
+use Capco\AppBundle\GraphQL\DataLoader\EntityRepositoryLinker;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
 class CommentableCommentsDataLoader extends BatchDataLoader
@@ -43,6 +44,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
+        Stopwatch $stopwatch,
         bool $enableCache
     ) {
         $this->proposalCommentRepository = $proposalCommentRepository;
@@ -57,6 +59,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             $cacheTtl,
             $debug,
             $collector,
+            $stopwatch,
             $enableCache
         );
     }
@@ -240,7 +243,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         return [
             'commentableId' => $key['commentable']->getId(),
             'isAdmin' => $key['viewer'] ? $key['viewer']->isAdmin() : false,
-            'args' => $key['args'],
+            'args' => $key['args']->getArrayCopy(),
         ];
     }
 

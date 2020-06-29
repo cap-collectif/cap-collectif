@@ -10,7 +10,7 @@ def generate(migrate='false', environement='dev'):
         # Delete media cache and source files
         env.service_command('rm -rf public/media/*', 'application')
         env.service_command('mkdir -p public/media', 'application')
-        env.service_command('php -d memory_limit=-1 bin/console capco:reinit --force --env=' + environement + ('', ' --migrate')[migrate == 'true'], 'application', env.www_app)
+        env.service_command('php -d memory_limit=512M bin/console capco:reinit --force --env=' + environement + ('', ' --migrate')[migrate == 'true'], 'application', env.www_app)
     else:
         print "Option environment must be 'dev', 'test' or 'prod'."
 

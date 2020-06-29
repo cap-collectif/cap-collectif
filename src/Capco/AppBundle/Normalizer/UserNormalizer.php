@@ -11,8 +11,12 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
+class UserNormalizer implements
+    NormalizerInterface,
+    SerializerAwareInterface,
+    CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
 
@@ -38,7 +42,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     ];
 
     private $router;
-    private $normalizer;
+    private ObjectNormalizer $normalizer;
     private $manager;
     private $contributionProjectResolver;
     private $contributionStepResolver;
@@ -58,6 +62,11 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->normalizer = $normalizer;
         $this->manager = $manager;
         $this->contributionSearch = $contributionSearch;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return true;
     }
 
     public function normalize($object, $format = null, array $context = [])
