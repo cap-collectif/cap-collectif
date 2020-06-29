@@ -6,6 +6,7 @@ use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -196,11 +197,10 @@ EOF;
     }
 
     public function setAnalysisRows(
-        array &$rows,
         array $defaultRowContent,
         array $analyses,
         array $dynamicQuestionHeaderPart
-    ): void {
+    ): Row {
         foreach ($analyses as $analysis) {
             $dynamicRowContent = [];
             foreach (self::ANALYST_DEFAULT_HEADER as $headerKey => $headerPath) {
@@ -211,7 +211,8 @@ EOF;
                 $cellValue = $this->getRowCellValue($analysis, $headerPath);
                 $dynamicRowContent[] = $cellValue;
             }
-            $rows[] = WriterEntityFactory::createRowFromArray(
+
+            return WriterEntityFactory::createRowFromArray(
                 array_merge($defaultRowContent, $dynamicRowContent)
             );
         }
@@ -227,7 +228,7 @@ EOF;
         return implode(', ', $authorUsernames);
     }
 
-    public function setDecisionRows(array &$rows, array $defaultRowContent, array $proposal): void
+    public function setDecisionRows(array $defaultRowContent, array $proposal): Row
     {
         $dynamicRowContent = [];
         foreach (self::DECISION_DEFAULT_HEADER as $headerKey => $headerPath) {
@@ -236,25 +237,32 @@ EOF;
                 ? $this->formatAuthors($cellValue)
                 : $cellValue;
         }
-        $rows[] = WriterEntityFactory::createRowFromArray(
+
+        return WriterEntityFactory::createRowFromArray(
             array_merge($defaultRowContent, $dynamicRowContent)
         );
     }
 
-    public function getProposalRows(
+    public function addProposalRows(
+        WriterInterface $writer,
         OutputInterface $output,
         array $proposals,
         array $dynamicQuestionHeaderPart,
         bool $isOnlyDecision,
         bool $isVerbose = false
-    ): array {
-        $rows = [];
+    ): void {
         $hasRow = false;
         foreach ($proposals as $proposal) {
             $defaultRowContent = [];
             $proposal = $proposal['node'];
             $analyses = $proposal['analyses'];
             if (!$analyses || 0 === \count($analyses)) {
+                if ($isVerbose) {
+                    $output->writeln(
+                        "\t<fg=red>/!\\No analysis for proposal ${proposal['title']}.</>"
+                    );
+                }
+
                 continue;
             }
             $hasRow = true;
@@ -270,24 +278,20 @@ EOF;
                 $defaultRowContent[] = $cellValue;
             }
 
-            if ($isOnlyDecision) {
-                $this->setDecisionRows($rows, $defaultRowContent, $proposal);
-            } else {
-                $this->setAnalysisRows(
-                    $rows,
+            $row = $isOnlyDecision
+                ? $this->setDecisionRows($defaultRowContent, $proposal)
+                : $this->setAnalysisRows(
                     $defaultRowContent,
                     $proposal['analyses'],
                     $dynamicQuestionHeaderPart
                 );
-            }
+            $writer->addRow($row);
         }
         if (!$hasRow) {
             $output->writeln(
                 "\t<info>/!\\ There is no analysis in any proposal -> generating empty export.</info>"
             );
         }
-
-        return $rows;
     }
 
     public function writeHeader($writer, bool $isOnlyDecision, array $firstAnalysisStepForm): void
@@ -329,12 +333,16 @@ EOF;
         $output->writeln('<info>Starting generation of csv...</info>');
         foreach ($projects as $project) {
             $firstAnalysisStep = $project['node']['firstAnalysisStep'];
+            $projectSlug = $project['node']['slug'];
             if (!$firstAnalysisStep) {
+                if ($isVerbose) {
+                    $output->writeln("<fg=red>No firstAnalysisStep for project ${projectSlug}!</>");
+                }
+
                 continue;
             }
-            $projectSlug = $project['node']['slug'];
 
-            $output->writeln('<info>Generating analysis of project ' . $projectSlug . '...</info>');
+            $output->writeln('<fg=green>Generating analysis of project ' . $projectSlug . '...</>');
 
             $fullPath = $this->getPath($projectSlug, $isOnlyDecision);
 
@@ -346,7 +354,7 @@ EOF;
             try {
                 $writer->openToFile($fullPath);
             } catch (IOException $e) {
-                throw new \RuntimeException('Error while opening file: '.$e->getMessage());
+                throw new \RuntimeException('Error while opening file: ' . $e->getMessage());
             }
 
             $dynamicQuestionHeaderPart = [];
@@ -355,21 +363,18 @@ EOF;
                 isset($firstAnalysisStep['proposals']['edges']) &&
                 0 !== \count($firstAnalysisStep['proposals']['edges'])
             ) {
-                $rows = $this->getProposalRows(
+                $this->addProposalRows(
+                    $writer,
                     $output,
                     $firstAnalysisStep['proposals']['edges'],
                     $dynamicQuestionHeaderPart,
                     $isOnlyDecision,
                     $isVerbose
                 );
-                if (!empty($rows) && \is_array($rows[0])) {
-                    foreach ($rows as $k => $row) {
-                        $rows[$k] = WriterEntityFactory::createRowFromArray($row);
-                    }
-                    $writer->addRows($rows);
-                }
             } else {
-                $output->writeln('<info>Empty export.</info>');
+                $output->writeln(
+                    '<fg=red>/!\ There is no analysis in any proposal -> generating empty export.</>'
+                );
             }
             $writer->close();
             if (true === $input->getOption('updateSnapshot')) {
@@ -390,8 +395,8 @@ EOF;
 
     protected function getPath(string $projectSlug, bool $isOnlyDecision): string
     {
-        return $this->projectRootDir.
-            '/public/export/'.
+        return $this->projectRootDir .
+            '/public/export/' .
             self::getFilename($projectSlug, $isOnlyDecision);
     }
 
@@ -404,39 +409,27 @@ EOF;
             InputOption::VALUE_NONE,
             'Only selecting decisions'
         );
-        $this->addOption(
-            'proposal-verbose',
-            'p',
-            InputOption::VALUE_NONE,
-            'Explain process of one proposal after another'
-        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $delimiter = $input->getOption('delimiter');
-        $isVerbose = $input->getOption('proposal-verbose');
+        $isVerbose = $input->getOption('verbose');
         $isOnlyDecision = $input->getOption('only-decisions');
         if ($isOnlyDecision) {
             $data = $this->executor
-                ->execute(
-                    'internal',
-                    [
-                        'query' => $this->getDecisionGraphQLQuery(),
-                        'variables' => [],
-                    ]
-                )
+                ->execute('internal', [
+                    'query' => $this->getDecisionGraphQLQuery(),
+                    'variables' => [],
+                ])
                 ->toArray();
             $data = Arr::path($data, 'data.projects.edges');
         } else {
             $data = $this->executor
-                ->execute(
-                    'internal',
-                    [
-                        'query' => $this->getAnalysisGraphQLQuery(),
-                        'variables' => [],
-                    ]
-                )
+                ->execute('internal', [
+                    'query' => $this->getAnalysisGraphQLQuery(),
+                    'variables' => [],
+                ])
                 ->toArray();
             $data = Arr::path($data, 'data.projects.edges');
         }
