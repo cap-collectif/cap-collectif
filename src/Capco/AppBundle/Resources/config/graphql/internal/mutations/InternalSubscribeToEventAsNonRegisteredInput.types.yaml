@@ -1,0 +1,13 @@
+SubscribeToEventAsNonRegisteredInput:
+    type: relay-mutation-input
+    config:
+        description: 'Subscribe to event when user is not registered.'
+        fields:
+            eventId:
+                type: 'ID!'
+            email:
+                type: 'String!'
+                description: 'Email of user'
+            username:
+                type: 'String!'
+                description: 'Username of user'

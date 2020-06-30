@@ -105,3 +105,5 @@ services:
             $apiToken: '%api_enterprise_token%'
             $rootDir: '%kernel.project_dir%'
         public: true
+
+    Capco\AppBundle\GraphQL\Resolver\Participant\IsViewerParticipatingAtEventResolver: ~

@@ -1,0 +1,7 @@
+SubscribeToEventAsRegisteredPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Subscribe to event.'
+        fields:
+            eventId:
+                type: 'ID!'

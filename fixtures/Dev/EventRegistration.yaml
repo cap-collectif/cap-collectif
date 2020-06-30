@@ -1,17 +1,33 @@
 Capco\AppBundle\Entity\EventRegistration:
-  eventRegistration{1..50}:
-    event: '@event1'
-    username: <username()>
-    email: <email()>
-    private: false
-    confirmed: true
-  eventRegistration51:
-    event: '@event1'
-    user: '@user1'
-    private: false
-    confirmed: true
-  eventRegistration52:
-    event: '@event2'
-    user: '@user3'
-    private: false
-    confirmed: true
+    eventRegistration{1..50}:
+        event: '@event1'
+        username: <username()>
+        email: <email()>
+        private: false
+        confirmed: true
+    eventRegistration51:
+        event: '@event1'
+        user: '@user1'
+        private: false
+        confirmed: true
+    eventRegistration52:
+        event: '@event2'
+        user: '@user3'
+        private: false
+        confirmed: true
+    eventRegistration53:
+        event: '@event4'
+        user: '@user520'
+        private: false
+        confirmed: true
+    eventRegistration54:
+        event: '@event4'
+        user: '@userSpyl'
+        private: false
+        confirmed: true
+    eventRegistration55:
+        event: '@event4'
+        private: false
+        confirmed: true
+        username: 'Jpec'
+        email: 'jpec@benkyou.com'

@@ -83,9 +83,10 @@ class EventController extends Controller
      */
     public function downloadAction(Request $request)
     {
-
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new ProjectAccessDeniedException($this->tranlator->trans('project.error.not_exportable'));
+            throw new ProjectAccessDeniedException(
+                $this->tranlator->trans('project.error.not_exportable')
+            );
         }
 
         $path = sprintf('%s/public/export/', $this->projectDir);
@@ -147,10 +148,7 @@ class EventController extends Controller
 
         $diff = $event->getCreatedAt()->diff($now);
         if ($diff->i < 2) {
-            $flashBag->add(
-                'success',
-                $this->tranlator->trans('event-review-request-to-admin')
-            );
+            $flashBag->add('success', $this->tranlator->trans('event-review-request-to-admin'));
         }
         /** @var User $viewer */
         $viewer = $this->getUser();
@@ -186,16 +184,12 @@ class EventController extends Controller
                 if ($registration->isConfirmed()) {
                     $flashBag->add(
                         'success',
-                        $this->tranlator->trans(
-                            'event_registration.create.register_success'
-                        )
+                        $this->tranlator->trans('event_registration.create.register_success')
                     );
                 } else {
                     $flashBag->add(
                         'info',
-                        $this->tranlator->trans(
-                            'event_registration.create.unregister_success'
-                        )
+                        $this->tranlator->trans('event_registration.create.unregister_success')
                     );
                 }
 

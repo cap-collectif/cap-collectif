@@ -3083,6 +3083,9 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """Admin authorize data transfer"""
   adminAuthorizeDataTransfer: Boolean
+
+  """Show if user is already participating at event"""
+  isViewerParticipatingAtEvent: Boolean!
 }
 
 """A connection to a list of items."""
@@ -4363,6 +4366,10 @@ type Mutation {
   updateRedirectIOKey(input: UpdateRedirectIOProjectIdInput!): UpdateRedirectIOProjectIdPayload
   revokeAnalystsToProposals(input: RevokeAnalystsToProposalsInput!): RevokeAnalystsToProposalsPayload
   assignAnalystsToProposals(input: AssignAnalystsToProposalsInput!): AssignAnalystsToProposalsPayload
+  subscribeToEventAsNonRegistered(input: SubscribeToEventAsNonRegisteredInput!): SubscribeToEventAsNonRegisteredPayload
+  unsubscribeToEventAsNonRegistered(input: UnsubscribeToEventAsNonRegisteredInput!): UnsubscribeToEventAsNonRegisteredPayload
+  subscribeToEventAsRegistered(input: SubscribeToEventAsRegisteredInput!): SubscribeToEventAsRegisteredPayload
+  unsubscribeToEventAsRegistered(input: UnsubscribeToEventAsRegisteredInput!): UnsubscribeToEventAsRegisteredPayload
 }
 
 """A connection to a list of items."""
@@ -9274,6 +9281,32 @@ type Style {
   size: Int
 }
 
+input SubscribeToEventAsNonRegisteredInput {
+  eventId: ID!
+
+  """Email of user"""
+  email: String!
+
+  """Username of user"""
+  username: String!
+  clientMutationId: String
+}
+
+type SubscribeToEventAsNonRegisteredPayload {
+  eventId: ID!
+  clientMutationId: String
+}
+
+input SubscribeToEventAsRegisteredInput {
+  eventId: ID!
+  clientMutationId: String
+}
+
+type SubscribeToEventAsRegisteredPayload {
+  eventId: ID!
+  clientMutationId: String
+}
+
 """3 possible values for a subscription."""
 enum SubscriptionTypeValue {
   """Get all notifications for this subscription"""
@@ -9473,6 +9506,32 @@ input UnselectProposalInput {
 
 type UnselectProposalPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+input UnsubscribeToEventAsNonRegisteredInput {
+  eventId: ID!
+
+  """Email of user if not registered"""
+  email: String!
+
+  """Username of user if not registered"""
+  username: String!
+  clientMutationId: String
+}
+
+type UnsubscribeToEventAsNonRegisteredPayload {
+  eventId: ID!
+  clientMutationId: String
+}
+
+input UnsubscribeToEventAsRegisteredInput {
+  eventId: ID!
+  clientMutationId: String
+}
+
+type UnsubscribeToEventAsRegisteredPayload {
+  eventId: ID!
   clientMutationId: String
 }
 

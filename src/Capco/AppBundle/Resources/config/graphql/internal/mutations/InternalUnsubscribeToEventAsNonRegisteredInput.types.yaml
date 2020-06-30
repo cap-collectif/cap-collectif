@@ -1,0 +1,13 @@
+UnsubscribeToEventAsNonRegisteredInput:
+    type: relay-mutation-input
+    config:
+        description: 'Unsubscribe to event.'
+        fields:
+            eventId:
+                type: 'ID!'
+            email:
+                type: 'String!'
+                description: 'Email of user if not registered'
+            username:
+                type: 'String!'
+                description: 'Username of user if not registered'

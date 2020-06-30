@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class EventRegistrationRepository extends EntityRepository
@@ -57,15 +58,42 @@ class EventRegistrationRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getOneByUserAndEvent(User $user, Event $event): ?EventRegistration
+    public function getByEventQuery(Event $event): QueryBuilder
     {
         $qb = $this->createQueryBuilder('registration');
 
+        return $qb->andWhere('registration.event = :event')->setParameter('event', $event);
+    }
+
+    public function getOneByUserAndEvent(User $user, Event $event): ?EventRegistration
+    {
+        $qb = $this->getByEventQuery($event);
+
         return $qb
             ->andWhere('registration.user = :user')
-            ->andWhere('registration.event = :event')
-            ->setParameter('event', $event)
             ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function getOneByUserEmailAndEvent(string $email, Event $event): ?EventRegistration
+    {
+        $qb = $this->getByEventQuery($event);
+
+        return $qb
+            ->andWhere('registration.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function getOneByUsernameAndEvent(string $username, Event $event): ?EventRegistration
+    {
+        $qb = $this->getByEventQuery($event);
+
+        return $qb
+            ->andWhere('registration.username = :username')
+            ->setParameter('username', $username)
             ->getQuery()
             ->getOneOrNullResult();
     }

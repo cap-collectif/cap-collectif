@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.unsubscribeToEvent admin wants to unsubscribe from event. 1`] = `
+Object {
+  "unsubscribeToEventAsRegistered": Object {
+    "eventId": "RXZlbnQ6ZXZlbnQ0",
+  },
+}
+`;
+
+exports[`mutations.unsubscribeToEvent anonymous wants to unsubscribe from event. 1`] = `
+Object {
+  "unsubscribeToEventAsNonRegistered": Object {
+    "eventId": "RXZlbnQ6ZXZlbnQ0",
+  },
+}
+`;
+
+exports[`mutations.unsubscribeToEvent user wants to unsubscribe from event. 1`] = `
+Object {
+  "unsubscribeToEventAsRegistered": Object {
+    "eventId": "RXZlbnQ6ZXZlbnQ0",
+  },
+}
+`;

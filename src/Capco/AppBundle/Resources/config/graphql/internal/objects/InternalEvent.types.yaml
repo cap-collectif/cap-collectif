@@ -81,3 +81,8 @@ InternalEvent:
             adminAuthorizeDataTransfer:
                 type: 'Boolean'
                 description: 'Admin authorize data transfer'
+            isViewerParticipatingAtEvent:
+                access: "@=hasRole('ROLE_USER')"
+                type: 'Boolean!'
+                description: 'Show if user is already participating at event'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\IsViewerParticipatingAtEventResolver", [value, getUser()])'

@@ -1,0 +1,7 @@
+UnsubscribeToEventAsNonRegisteredPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Unsubscribe to event.'
+        fields:
+            eventId:
+                type: 'ID!'

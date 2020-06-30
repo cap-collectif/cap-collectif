@@ -1,0 +1,7 @@
+SubscribeToEventAsRegisteredInput:
+    type: relay-mutation-input
+    config:
+        description: 'Subscribe to event.'
+        fields:
+            eventId:
+                type: 'ID!'

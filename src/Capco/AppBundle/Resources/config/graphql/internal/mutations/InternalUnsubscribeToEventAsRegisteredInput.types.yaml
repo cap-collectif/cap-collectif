@@ -1,0 +1,7 @@
+UnsubscribeToEventAsRegisteredInput:
+    type: relay-mutation-input
+    config:
+        description: 'Unsubscribe to event.'
+        fields:
+            eventId:
+                type: 'ID!'
