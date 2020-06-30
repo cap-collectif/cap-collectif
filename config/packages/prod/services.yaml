@@ -9,9 +9,15 @@ framework:
 
 doctrine:
     orm:
-        metadata_cache_driver: apcu
-        query_cache_driver: apcu
-        result_cache_driver: apcu
+        metadata_cache_driver:
+            type: pool
+            pool: Symfony\Component\Cache\Adapter\ApcuAdapter
+        query_cache_driver:
+            type: pool
+            pool: Symfony\Component\Cache\Adapter\ApcuAdapter
+        result_cache_driver:
+            type: pool
+            pool: Symfony\Component\Cache\Adapter\ApcuAdapter
 
 swiftmailer:
     default_mailer: mandrill
