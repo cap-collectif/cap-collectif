@@ -3,28 +3,27 @@ import * as React from 'react';
 import styled, { css, type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 
-const commonStyle = (color, fontSize) => css`
+type Style = {
+  color: string,
+  fontSize: number,
+  uppercase?: boolean,
+};
+
+const commonStyle = (color, fontSize, uppercase) => css`
   color: ${colors.white};
   border-radius: 20px;
   padding: 3px 6px;
   background-color: ${color};
   font-size: ${`${fontSize}px`};
+  text-transform: ${uppercase ? 'uppercase' : 'initial'};
 `;
 
-const Container: StyledComponent<
-  { color: string, fontSize: number },
-  {},
-  HTMLSpanElement,
-> = styled.span`
-  ${({ color, fontSize }) => commonStyle(color, fontSize)};
+const Container: StyledComponent<Style, {}, HTMLSpanElement> = styled.span`
+  ${({ color, fontSize, uppercase }) => commonStyle(color, fontSize, uppercase)};
 `;
 
-const ClickableContainer: StyledComponent<
-  { color: string, fontSize: number },
-  {},
-  HTMLButtonElement,
-> = styled.button`
-  ${({ color, fontSize }) => commonStyle(color, fontSize)};
+const ClickableContainer: StyledComponent<Style, {}, HTMLButtonElement> = styled.button`
+  ${({ color, fontSize, uppercase }) => commonStyle(color, fontSize, uppercase)};
   border: none;
 `;
 
@@ -34,15 +33,21 @@ type Props = {|
   fontSize: number,
   className?: string,
   onClick?: () => void,
+  uppercase?: boolean,
 |};
 
-export const Label = ({ children, color, fontSize, className, onClick }: Props) =>
+export const Label = ({ children, color, fontSize, className, onClick, uppercase }: Props) =>
   onClick ? (
-    <ClickableContainer color={color} fontSize={fontSize} className={className} onClick={onClick}>
+    <ClickableContainer
+      color={color}
+      fontSize={fontSize}
+      className={className}
+      onClick={onClick}
+      uppercase={uppercase}>
       {children}
     </ClickableContainer>
   ) : (
-    <Container color={color} fontSize={fontSize} className={className}>
+    <Container color={color} fontSize={fontSize} className={className} uppercase={uppercase}>
       {children}
     </Container>
   );

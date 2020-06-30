@@ -8,6 +8,9 @@ import { $fragmentRefs, $refType } from '~/mocks';
 const user = {
   $fragmentRefs,
   $refType,
+  media: {
+    url: "url de l'image",
+  },
 };
 
 describe('<TagUser />', () => {

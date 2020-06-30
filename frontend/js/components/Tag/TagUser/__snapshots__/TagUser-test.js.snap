@@ -9,6 +9,9 @@ exports[`<TagUser /> should render correctly 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "media": Object {
+            "url": "url de l'image",
+          },
         }
       }
     />
@@ -20,6 +23,9 @@ exports[`<TagUser /> should render correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "media": Object {
+          "url": "url de l'image",
+        },
       }
     }
   />
@@ -35,6 +41,9 @@ exports[`<TagUser /> should render correctly with other size 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "media": Object {
+            "url": "url de l'image",
+          },
         }
       }
     />
@@ -46,6 +55,9 @@ exports[`<TagUser /> should render correctly with other size 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "media": Object {
+          "url": "url de l'image",
+        },
       }
     }
   />

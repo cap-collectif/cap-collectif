@@ -6,7 +6,6 @@ import Truncate from 'react-truncate';
 import Card from '~/components/Ui/Card/Card';
 import TagUser from '~/components/Tag/TagUser/TagUser';
 import TagCity from '~/components/Tag/TagCity/TagCity';
-import TagDate from '~/components/Tag/TagDate/TagDate';
 import TagsList from '~/components/Ui/List/TagsList';
 import EventImage from '~/components/Event/EventImage/EventImage';
 import EventMapPreviewContainer from './EventMapPreview.style';
@@ -34,7 +33,7 @@ export const EventMapPreview = ({ hasIllustrationDisplayed, event }: EventMapPre
 
           <TagsList>
             {author && <TagUser user={author} size={16} />}
-            {timeRange && timeRange.startAt && <TagDate date={timeRange.startAt} size="16px" />}
+            {timeRange && timeRange.startAt && <Card.Date date={timeRange.startAt} />}
             {googleMapsAddress && <TagCity googleMapsAddress={googleMapsAddress} size="16px" />}
           </TagsList>
         </Card.Body>

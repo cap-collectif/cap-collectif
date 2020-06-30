@@ -52,6 +52,8 @@ const devConf = {
       path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
+      path.join(webpackConfig.nodeModulesDir, 'slick-carousel/slick/slick.css'),
+      path.join(webpackConfig.nodeModulesDir, 'slick-carousel/slick/slick-theme.css'),
       path.join(webpackConfig.assetsDir, 'js/fancybox/jquery.fancybox.css'),
       path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
       // Let style.scss at the bottom, it overrides some rules

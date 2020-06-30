@@ -292,6 +292,8 @@
         "react-intl-redux": "^2.0.2",
         "react-leaflet": "^2.4.0",
         "react-leaflet-markercluster": "^2.0.0-rc3",
+        "react-slick": "0.26.1",
+        "slick-carousel": "1.8.1",
         "react-linkify": "^0.2.2",
         "react-nl2br": "^0.4.0",
         "react-on-rails": "^11.3.0",

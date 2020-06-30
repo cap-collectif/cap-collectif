@@ -2,18 +2,36 @@
 
 exports[`<TagCity /> should render correctly 1`] = `
 <Tag
-  icon="cap cap-marker-1"
   size="15px"
 >
+  <IconRounded
+    color="#707070"
+    size={18}
+  >
+    <Icon
+      color="#fff"
+      name="pin2"
+      size={10}
+    />
+  </IconRounded>
   Lyon
 </Tag>
 `;
 
 exports[`<TagCity /> should render correctly with other size 1`] = `
 <Tag
-  icon="cap cap-marker-1"
   size="10px"
 >
+  <IconRounded
+    color="#707070"
+    size={18}
+  >
+    <Icon
+      color="#fff"
+      name="pin2"
+      size={10}
+    />
+  </IconRounded>
   Lyon
 </Tag>
 `;

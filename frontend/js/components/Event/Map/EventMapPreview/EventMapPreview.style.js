@@ -20,6 +20,10 @@ export const EventMapPreviewContainer: StyledComponent<{}, {}, HTMLDivElement> =
     font-weight: 600;
   }
 
+  .card__date {
+    padding-left: 5px;
+  }
+
   .tag {
     i {
       color: ${colors.darkGray};

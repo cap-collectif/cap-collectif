@@ -6,11 +6,10 @@ import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { formName } from '../EventPageContainer';
+import { formName } from '../EventListPageContainer';
 import EventPreview from '../EventPreview/EventPreview';
 import type { Dispatch } from '~/types';
 import type { EventPagePassedEventsPreview_query } from '~relay/EventPagePassedEventsPreview_query.graphql';
-import config from '~/config';
 
 type Props = {|
   query: EventPagePassedEventsPreview_query,
@@ -42,15 +41,7 @@ export const EventPagePassedEventsPreview = ({ query, dispatch }: Props) =>
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
-              .map((node, key) => (
-                <EventPreview
-                  key={key}
-                  event={node}
-                  className="eventPreview_list"
-                  isHorizontal={!config.isMobile}
-                  isDateInline
-                />
-              ))}
+              .map((node, key) => <EventPreview key={key} event={node} />)}
         </Col>
       </Row>
       <Row>

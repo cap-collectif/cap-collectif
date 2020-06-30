@@ -37,6 +37,7 @@ export const ICON_NAME: {
   openId: 'openId',
   saml: 'saml',
   chevronLeft: 'chevron-left',
+  chevronRight: 'chevron-right',
   checkbox: 'checkbox',
   checkboxChecked: 'checkboxChecked',
   file: 'file',
@@ -61,8 +62,16 @@ export const ICON_NAME: {
   stack: 'stack',
   tag: 'tag',
   pin: 'pin',
+  pin2: 'pin2',
   warningRounded: 'warningRounded',
   reload: 'reload',
+  folder: 'folder',
+  micro: 'micro',
+  eventOnline: 'eventOnline',
+  eventPhysical: 'eventPhysical',
+  camera: 'camera',
+  step: 'step',
+  user: 'user',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -98,6 +107,7 @@ export const ICON_NAME: {
   openId: 'openId',
   saml: 'saml',
   chevronLeft: 'chevron-left',
+  chevronRight: 'chevron-right',
   checkbox: 'checkbox',
   checkboxChecked: 'checkboxChecked',
   file: 'file',
@@ -121,8 +131,16 @@ export const ICON_NAME: {
   stack: 'stack',
   tag: 'tag',
   pin: 'pin',
+  pin2: 'pin2',
   warningRounded: 'warningRounded',
   reload: 'reload',
+  folder: 'folder',
+  micro: 'micro',
+  eventOnline: 'eventOnline',
+  eventPhysical: 'eventPhysical',
+  camera: 'camera',
+  step: 'step',
+  user: 'user',
 };
 
 type Props = {|
@@ -207,6 +225,8 @@ const getIcon = name => {
       return <Icons.OpenId />;
     case 'chevron-left':
       return <Icons.ChevronLeft />;
+    case 'chevron-right':
+      return <Icons.ChevronRight />;
     case 'checkbox':
       return <Icons.Checkbox />;
     case 'checkboxChecked':
@@ -253,8 +273,24 @@ const getIcon = name => {
       return <Icons.Tag />;
     case 'pin':
       return <Icons.Pin />;
+    case 'pin2':
+      return <Icons.Pin2 />;
     case 'reload':
       return <Icons.Reload />;
+    case 'folder':
+      return <Icons.Folder />;
+    case 'micro':
+      return <Icons.Micro />;
+    case 'eventOnline':
+      return <Icons.EventOnline />;
+    case 'eventPhysical':
+      return <Icons.EventPhysical />;
+    case 'camera':
+      return <Icons.Camera />;
+    case 'step':
+      return <Icons.Step />;
+    case 'user':
+      return <Icons.User />;
     default:
       return <div />;
   }

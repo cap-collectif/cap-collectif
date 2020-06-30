@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-import Icon, { ICON_NAME as ALL_ICONS } from '~/components/Ui/Icons/Icon';
+import Icon, { ICON_NAME, ICON_NAME as ALL_ICONS } from '~/components/Ui/Icons/Icon';
+import IconRounded from '~ui/Icons/IconRounded';
 
 const Container = styled.ul`
   display: flex;
@@ -30,7 +31,13 @@ const IconContainer = styled.li`
   }
 `;
 
-storiesOf('Core|Icons/Icon', module).add('default', () => <Icon name="link" />);
+storiesOf('Core|Icons/Icon', module)
+  .add('default', () => <Icon name="link" size={80} color="red" />)
+  .add('rounded', () => (
+    <IconRounded size={80} color="rgba(240, 0, 0, .7)">
+      <Icon name={ICON_NAME.trash} size={50} color="#fff" />
+    </IconRounded>
+  ));
 
 storiesOf('Core|Icons/Icon', module).add('All', () => {
   return (

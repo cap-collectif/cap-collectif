@@ -8,9 +8,9 @@ import { $fragmentRefs, $refType } from '~/mocks';
 const baseEvent = {
   $fragmentRefs,
   $refType,
-  id: '1',
   title: 'Lorem ipsum dolor sit amet, consectetur adipiscing.',
   url: '#',
+  guestListEnabled: false,
   timeRange: {
     startAt: '2030-03-10 00:00:00',
   },
@@ -42,6 +42,10 @@ const event = {
       startAt: null,
     },
   },
+  withGuestEnabled: {
+    ...baseEvent,
+    guestListEnabled: true,
+  },
 };
 
 describe('<EventPreview />', () => {
@@ -67,6 +71,13 @@ describe('<EventPreview />', () => {
 
   it('should render correctly when no date', () => {
     const wrapper = shallow(<EventPreview event={event.withoutDate} hasIllustrationDisplayed />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly when guest enabled', () => {
+    const wrapper = shallow(
+      <EventPreview event={event.withGuestEnabled} hasIllustrationDisplayed />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

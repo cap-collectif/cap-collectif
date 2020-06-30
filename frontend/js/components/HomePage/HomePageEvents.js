@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import EventPreview from '../Event/EventPreview/EventPreview';
 import { mediaQueryMobile } from '~/utils/sizes';
-
 import type {
   HomePageEventsQueryResponse,
   HomePageEventsQueryVariables,
@@ -94,7 +93,7 @@ class HomePageEvents extends React.Component<Props> {
                 .filter(Boolean)
                 .map(edge => edge.node)
                 .filter(Boolean)
-                .map((node, key) => <EventPreview isHighlighted={false} event={node} key={key} />)}
+                .map(node => <EventPreview event={node} key={node.id} />)}
           </EventContainer>
           <a href={showAllUrl} className="btn btn-primary btn--outline">
             <FormattedMessage id="event.see_all" />

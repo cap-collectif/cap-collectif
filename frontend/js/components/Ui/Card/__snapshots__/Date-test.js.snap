@@ -1,35 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Date /> should render correctly 1`] = `
-<Date__Container
-  isInline={false}
->
-  <span
-    className="card__date__month"
+<Date__Container>
+  <IconRounded
+    color="#707070"
+    size={18}
   >
-    mars
-  </span>
+    <Icon
+      color="#fff"
+      name="calendar"
+      size={10}
+    />
+  </IconRounded>
   <span
-    className="card__date__day"
+    className="date"
   >
-    10
+    10 mars 2030 00:00
   </span>
 </Date__Container>
 `;
 
 exports[`<Date /> should render correctly with other date 1`] = `
-<Date__Container
-  isInline={false}
->
-  <span
-    className="card__date__month"
+<Date__Container>
+  <IconRounded
+    color="#707070"
+    size={18}
   >
-    juin
-  </span>
+    <Icon
+      color="#fff"
+      name="calendar"
+      size={10}
+    />
+  </IconRounded>
   <span
-    className="card__date__day"
+    className="date"
   >
-    15
+    15 juin 2032 00:00
   </span>
 </Date__Container>
 `;

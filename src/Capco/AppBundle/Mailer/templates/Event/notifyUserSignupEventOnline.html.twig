@@ -1,0 +1,41 @@
+{% extends "@CapcoMail/notifyEventLayout.html.twig" %}
+{% block email_body %}
+    <div>
+        <div class="resp-punchline" style="color:#666; text-decoration:none; font-size:16px; font-family:openSans, arial, sans-serif; text-align:left; padding: 25px;">
+
+            <p style="margin-bottom: 20px;">Merci de votre inscription à l'événement <span style="font-weight: bold">"{{ eventTitle }}"</span> qui sera animé par {{ speaker }}</p>
+
+            <p style="margin: 0">Comment rejoindre l'événement ?</p>
+
+            <div style="font-weight: bold; margin-left: 20px; margin-bottom: 20px">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <div style="display: flex; align-items: center; justify-content: center; background-color: #707070; width: 16px; height: 16px; border-radius: 8px; margin-right: 8px;">
+                        <img src="{{ baseUrl ~ asset('svg/calendar.svg') }}" style="width: 8px; height: 8px; fill: #fff;" />
+                    </div>
+                    <span>{{ date }}</span>
+                </div>
+
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <div style="display: flex; align-items: center; justify-content: center; background-color: #707070; width: 16px; height: 16px; border-radius: 8px; margin-right: 8px;">
+                        <img src="{{ baseUrl ~ asset('svg/calendar.svg') }}" style="width: 8px; height: 8px;fill: #fff;" />
+                    </div>
+                    <span>{{ duration }}</span>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 20px">
+                <p style="margin:0 5px 0 0;">Ajouter à votre calendrier :</p>
+                <a href="#">Outlook Calendar</a>
+                <span style="margin: 0 4px">|</span>
+                <a href="#">Google Calendar</a>
+                <span style="margin: 0 4px">|</span>
+                <a href="#">iCal</a>
+            </div>
+
+            <div style="display: inline-flex; flex-direction: column;">
+                <p style="font-weight: bold; margin: 0;">Cliquer sur le lien ci-dessous pour rejoindre l'événement à la date et heure indiquées :</p>
+                <a href="#" style="background-color:#007bff; padding:8px 12px; margin-top: 10px; color: #fff; border-radius: 4px; width: 40%; text-align: center;">Rejoindre l'événement</a>
+            </div>
+         </div>
+    </div>
+{% endblock %}

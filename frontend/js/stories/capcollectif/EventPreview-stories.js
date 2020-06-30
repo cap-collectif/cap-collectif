@@ -3,52 +3,126 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Truncate from 'react-truncate';
 import Card from '~/components/Ui/Card/Card';
-import Image from '~/components/Ui/Medias/Image';
-import TagsList from '~/components/Ui/List/TagsList';
 import Tag from '~/components/Ui/Labels/Tag';
 import DefaultAvatar from '~/components/Ui/Medias/DefaultAvatar';
-import EventPreviewContainer from '~/components/Event/EventPreview/EventPreview.style';
+import EventPreviewContainer, {
+  HeadContent,
+  Content,
+  TitleContainer,
+  TagsList,
+} from '~/components/Event/EventPreview/EventPreview.style';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import colors from '~/utils/colors';
+import Label from '~ui/Labels/Label';
+import InlineList from '~ui/List/InlineList';
+import { EventImageContainer } from '~/components/Event/EventImage/EventImage';
+import TagCity from '~/components/Tag/TagCity/TagCity';
+import { TYPE_EVENT } from '~/components/Event/EventPreview/EventPreview';
+import DefaultEventCover from '~/components/Event/DefaultEventCover';
 
 type Props = {
-  isHorizontal?: boolean,
-  isDateInline?: boolean,
+  type?: $Values<typeof TYPE_EVENT>,
+  replay?: boolean,
 };
 
-export const EventPreview = ({ isHorizontal, isDateInline }: Props) => (
-  <EventPreviewContainer className={isHorizontal ? 'isHorizontal' : ''}>
-    <Card>
-      <Card.Cover>
-        <Image src="https://picsum.photos/300/400" />
-      </Card.Cover>
+const eventProps = {
+  title: 'Ceci est le titre',
+  url: '#',
+  timeRange: {
+    startAt: new Date().toISOString(),
+  },
+  googleMapsAddress: {
+    json:
+      '[{"address_components":[{"long_name":"111","short_name":"111","types":["street_number"]},{"long_name":"Avenue Jean Jaurès","short_name":"Avenue Jean Jaurès","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rhône","short_name":"Rhône","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rhône-Alpes","short_name":"Auvergne-Rhône-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69007","short_name":"69007","types":["postal_code"]}],"formatted_address":"111 Avenue Jean Jaurès, 69007 Lyon, France","geometry":{"location":{"lat":45.742842,"lng":4.84068000000002},"location_type":"ROOFTOP","viewport":{"south":45.7414930197085,"west":4.839331019708538,"north":45.74419098029149,"east":4.842028980291502}},"place_id":"ChIJHyD85zjq9EcR8Yaae-eQdeQ","plus_code":{"compound_code":"PRVR+47 Lyon, France","global_code":"8FQ6PRVR+47"},"types":["street_address"]}]',
+  },
+};
+
+export const EventPreview = ({ type = TYPE_EVENT.PHYSICAL, replay }: Props) => {
+  const { timeRange, url, title, googleMapsAddress } = eventProps;
+
+  return (
+    <EventPreviewContainer>
+      <EventImageContainer>
+        <DefaultEventCover />
+      </EventImageContainer>
 
       <Card.Body>
-        <Card.Date date="2016-12-20T09:00:24+01:00" isInline={isHorizontal || isDateInline} />
-        <div className="wrapper-content">
-          <Card.Title>
-            <a href="#event" title="Titre événement">
-              <Truncate lines={3}>Titre événement</Truncate>
-            </a>
-          </Card.Title>
+        <HeadContent>
+          {timeRange?.startAt && <Card.Date date={timeRange.startAt} />}
+
+          <InlineList>
+            {type === TYPE_EVENT.ONLINE && !replay && (
+              <li>
+                <Label color={colors.dangerColor} fontSize={10} uppercase>
+                  Live
+                </Label>
+              </li>
+            )}
+
+            {type === TYPE_EVENT.ONLINE && replay && (
+              <li>
+                <Label color={colors.lightBlue} fontSize={10} uppercase>
+                  Replay
+                </Label>
+              </li>
+            )}
+
+            {type === TYPE_EVENT.PHYSICAL && (
+              <li>
+                <Label color={colors.lightBlue} fontSize={10} uppercase>
+                  Inscription requise
+                </Label>
+              </li>
+            )}
+
+            <li>
+              <Label color={colors.successColor} fontSize={10}>
+                Approved
+              </Label>
+            </li>
+          </InlineList>
+        </HeadContent>
+
+        <Content>
+          <TitleContainer>
+            <Icon
+              name={type === TYPE_EVENT.ONLINE ? ICON_NAME.eventOnline : ICON_NAME.eventPhysical}
+              size={17}
+              color={colors.lightBlue}
+            />
+            <Card.Title>
+              <a href={url} title={title}>
+                <Truncate lines={2}>{title}</Truncate>
+              </a>
+            </Card.Title>
+          </TitleContainer>
 
           <TagsList>
             <Tag size="22px" CustomImage={<DefaultAvatar size={22} />}>
               Jean Dupont
             </Tag>
-            <Tag size="22px" icon="cap cap-marker-1">
-              Lyon
-            </Tag>
-            <Tag size="22px" icon="cap cap-folder-2">
-              Immobilier et 2 autres thèmes
-            </Tag>
+
+            <TagCity googleMapsAddress={googleMapsAddress} size="16px" />
           </TagsList>
-        </div>
+        </Content>
       </Card.Body>
-    </Card>
-  </EventPreviewContainer>
-);
+    </EventPreviewContainer>
+  );
+};
 
-storiesOf('Cap Collectif|EventPreview', module).add('default', () => <EventPreview />);
-
-storiesOf('Cap Collectif|EventPreview', module).add('horizontal', () => (
-  <EventPreview isHorizontal />
-));
+storiesOf('Cap Collectif|EventPreview', module)
+  .add('default', () => (
+    <div style={{ maxWidth: 600 }}>
+      <EventPreview event={eventProps} type={TYPE_EVENT.PHYSICAL} />
+    </div>
+  ))
+  .add('online', () => (
+    <div style={{ maxWidth: 600 }}>
+      <EventPreview event={eventProps} type={TYPE_EVENT.ONLINE} />
+    </div>
+  ))
+  .add('replay', () => (
+    <div style={{ maxWidth: 600 }}>
+      <EventPreview event={eventProps} type={TYPE_EVENT.ONLINE} replay />
+    </div>
+  ));

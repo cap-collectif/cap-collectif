@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 
-const DefaultEventCover = ({ isHorizontal }: { isHorizontal?: boolean }) =>
-  isHorizontal ? (
+const DefaultEventCover = ({ isMobile }: { isMobile?: boolean }) =>
+  isMobile ? (
     <svg viewBox="0 0 180 120">
       <defs>
         <path id="prefix__a" d="M0 0h306v121H0z" />

@@ -2,9 +2,9 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { EventPage } from './EventPage';
+import { EventListPage } from './EventListPage';
 
-describe('<EventPage />', () => {
+describe('<EventListPage />', () => {
   const props = {
     eventPageTitle: 'Titre personnalisé',
     eventPageBody: 'Description',
@@ -13,18 +13,18 @@ describe('<EventPage />', () => {
   };
 
   it('renders correctly in french', () => {
-    const wrapper = shallow(<EventPage {...props} locale="fr-FR" />);
+    const wrapper = shallow(<EventListPage {...props} locale="fr-FR" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly in english', () => {
-    const wrapper = shallow(<EventPage {...props} locale="en-GB" />);
+    const wrapper = shallow(<EventListPage {...props} locale="en-GB" />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly without title and body', () => {
     const wrapper = shallow(
-      <EventPage
+      <EventListPage
         backgroundColor="red"
         eventPageTitle=""
         eventPageBody=""

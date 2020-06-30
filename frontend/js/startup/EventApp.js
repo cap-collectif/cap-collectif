@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import Providers from './Providers';
-import EventPage from '../components/Event/EventPage';
+import EventListPage from '~/components/Event/EventListPage';
 
 export default (props: Object) => (
   <Providers>
-      <EventPage {...props} />
-    </Providers>
+    <EventListPage {...props} />
+  </Providers>
 );

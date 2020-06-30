@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EventPage /> renders correctly in english 1`] = `
+exports[`<EventListPage /> renders correctly in english 1`] = `
 <div
   className="event-page"
 >
@@ -85,7 +85,7 @@ exports[`<EventPage /> renders correctly in english 1`] = `
           ],
           "kind": "Fragment",
           "metadata": null,
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "selections": Array [
             Object {
               "args": Array [
@@ -151,7 +151,7 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                 },
               ],
               "kind": "FragmentSpread",
-              "name": "EventPageContainer_query",
+              "name": "EventListPageContainer_query",
             },
             Object {
               "args": Array [
@@ -162,12 +162,12 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                 },
               ],
               "kind": "FragmentSpread",
-              "name": "EventPageHeader_queryViewer",
+              "name": "EventListPageHeader_queryViewer",
             },
           ],
           "type": "Query",
         },
-        "hash": "5adfa9da8ee9553fda34938f3c1a85cb",
+        "hash": "061e48022186b2e9e8cbe8fbbc3fec35",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -245,7 +245,7 @@ exports[`<EventPage /> renders correctly in english 1`] = `
             },
           ],
           "kind": "Operation",
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "selections": Array [
             Object {
               "alias": "previewPassedEvents",
@@ -303,13 +303,6 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "title",
                           "storageKey": null,
                         },
@@ -318,6 +311,13 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
                           "storageKey": null,
                         },
                         Object {
@@ -392,20 +392,6 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
-                              "kind": "ScalarField",
-                              "name": "url",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "username",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
                               "concreteType": "Media",
                               "kind": "LinkedField",
                               "name": "media",
@@ -426,6 +412,20 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                                   "storageKey": null,
                                 },
                               ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
                               "storageKey": null,
                             },
                             Object {
@@ -506,6 +506,13 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                               "storageKey": null,
                             },
                           ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
                           "storageKey": null,
                         },
                       ],
@@ -706,6 +713,13 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "TimeRange",
                           "kind": "LinkedField",
                           "name": "timeRange",
@@ -757,20 +771,6 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
-                              "kind": "ScalarField",
-                              "name": "url",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "username",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
                               "concreteType": "Media",
                               "kind": "LinkedField",
                               "name": "media",
@@ -791,6 +791,20 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                                   "storageKey": null,
                                 },
                               ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
                               "storageKey": null,
                             },
                             Object {
@@ -1183,6 +1197,13 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "guestListEnabled",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
                                   "concreteType": "TimeRange",
                                   "kind": "LinkedField",
                                   "name": "timeRange",
@@ -1252,20 +1273,6 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                                     Object {
                                       "alias": null,
                                       "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "url",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "username",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
                                       "concreteType": "Media",
                                       "kind": "LinkedField",
                                       "name": "media",
@@ -1286,6 +1293,20 @@ exports[`<EventPage /> renders correctly in english 1`] = `
                                           "storageKey": null,
                                         },
                                       ],
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "username",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -1408,9 +1429,9 @@ exports[`<EventPage /> renders correctly in english 1`] = `
         "params": Object {
           "id": null,
           "metadata": Object {},
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "operationKind": "query",
-          "text": "query EventPageQuery(
+          "text": "query EventListPageQuery(
   $cursor: String
   $count: Int!
   $locale: TranslationLocale
@@ -1424,8 +1445,8 @@ exports[`<EventPage /> renders correctly in english 1`] = `
   $orderBy: EventOrder!
   $isAuthenticated: Boolean!
 ) {
-  ...EventPageContainer_query_17yZ05
-  ...EventPageHeader_queryViewer_39ngnn
+  ...EventListPageContainer_query_17yZ05
+  ...EventListPageHeader_queryViewer_39ngnn
 }
 
 fragment EventImage_event on Event {
@@ -1467,6 +1488,32 @@ fragment EventListFilters_query_307oU4 on Query {
   ...EventListCounter_query_307oU4
   ...SelectTheme_query
   ...SelectProject_query_2yiOJi
+}
+
+fragment EventListPageContainer_query_17yZ05 on Query {
+  viewer @include(if: $isAuthenticated) {
+    awaitingOrRefusedEvents {
+      totalCount
+      edges {
+        node {
+          id
+          ...EventPreview_event
+        }
+      }
+    }
+    adminAwaitingEvents
+    id
+  }
+  ...EventRefetch_query_307oU4
+  ...EventListFilters_query_307oU4
+  ...EventListCounter_query_307oU4
+}
+
+fragment EventListPageHeader_queryViewer_39ngnn on Query {
+  viewer @include(if: $isAuthenticated) {
+    isAdmin
+    id
+  }
 }
 
 fragment EventListPaginated_query_307oU4 on Query {
@@ -1517,32 +1564,6 @@ fragment EventMap_query_307oU4 on Query {
   }
 }
 
-fragment EventPageContainer_query_17yZ05 on Query {
-  viewer @include(if: $isAuthenticated) {
-    awaitingOrRefusedEvents {
-      totalCount
-      edges {
-        node {
-          id
-          ...EventPreview_event
-        }
-      }
-    }
-    adminAwaitingEvents
-    id
-  }
-  ...EventRefetch_query_307oU4
-  ...EventListFilters_query_307oU4
-  ...EventListCounter_query_307oU4
-}
-
-fragment EventPageHeader_queryViewer_39ngnn on Query {
-  viewer @include(if: $isAuthenticated) {
-    isAdmin
-    id
-  }
-}
-
 fragment EventPagePassedEventsPreview_query_qo3MD on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
@@ -1556,9 +1577,9 @@ fragment EventPagePassedEventsPreview_query_qo3MD on Query {
 }
 
 fragment EventPreview_event on Event {
-  id
   title
   url
+  guestListEnabled
   timeRange {
     startAt
   }
@@ -1600,6 +1621,10 @@ fragment SelectTheme_query on Query {
 }
 
 fragment TagUser_user on User {
+  media {
+    url
+    id
+  }
   ...UserAvatar_user
   ...UserLink_user
 }
@@ -1645,7 +1670,7 @@ fragment UserLink_user on User {
 </div>
 `;
 
-exports[`<EventPage /> renders correctly in french 1`] = `
+exports[`<EventListPage /> renders correctly in french 1`] = `
 <div
   className="event-page"
 >
@@ -1730,7 +1755,7 @@ exports[`<EventPage /> renders correctly in french 1`] = `
           ],
           "kind": "Fragment",
           "metadata": null,
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "selections": Array [
             Object {
               "args": Array [
@@ -1796,7 +1821,7 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                 },
               ],
               "kind": "FragmentSpread",
-              "name": "EventPageContainer_query",
+              "name": "EventListPageContainer_query",
             },
             Object {
               "args": Array [
@@ -1807,12 +1832,12 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                 },
               ],
               "kind": "FragmentSpread",
-              "name": "EventPageHeader_queryViewer",
+              "name": "EventListPageHeader_queryViewer",
             },
           ],
           "type": "Query",
         },
-        "hash": "5adfa9da8ee9553fda34938f3c1a85cb",
+        "hash": "061e48022186b2e9e8cbe8fbbc3fec35",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -1890,7 +1915,7 @@ exports[`<EventPage /> renders correctly in french 1`] = `
             },
           ],
           "kind": "Operation",
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "selections": Array [
             Object {
               "alias": "previewPassedEvents",
@@ -1948,13 +1973,6 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "title",
                           "storageKey": null,
                         },
@@ -1963,6 +1981,13 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
                           "storageKey": null,
                         },
                         Object {
@@ -2037,20 +2062,6 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
-                              "kind": "ScalarField",
-                              "name": "url",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "username",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
                               "concreteType": "Media",
                               "kind": "LinkedField",
                               "name": "media",
@@ -2071,6 +2082,20 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                                   "storageKey": null,
                                 },
                               ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
                               "storageKey": null,
                             },
                             Object {
@@ -2151,6 +2176,13 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                               "storageKey": null,
                             },
                           ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
                           "storageKey": null,
                         },
                       ],
@@ -2351,6 +2383,13 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "TimeRange",
                           "kind": "LinkedField",
                           "name": "timeRange",
@@ -2402,20 +2441,6 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
-                              "kind": "ScalarField",
-                              "name": "url",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "username",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
                               "concreteType": "Media",
                               "kind": "LinkedField",
                               "name": "media",
@@ -2436,6 +2461,20 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                                   "storageKey": null,
                                 },
                               ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
                               "storageKey": null,
                             },
                             Object {
@@ -2828,6 +2867,13 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "guestListEnabled",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
                                   "concreteType": "TimeRange",
                                   "kind": "LinkedField",
                                   "name": "timeRange",
@@ -2897,20 +2943,6 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                                     Object {
                                       "alias": null,
                                       "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "url",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "username",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
                                       "concreteType": "Media",
                                       "kind": "LinkedField",
                                       "name": "media",
@@ -2931,6 +2963,20 @@ exports[`<EventPage /> renders correctly in french 1`] = `
                                           "storageKey": null,
                                         },
                                       ],
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "username",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -3053,9 +3099,9 @@ exports[`<EventPage /> renders correctly in french 1`] = `
         "params": Object {
           "id": null,
           "metadata": Object {},
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "operationKind": "query",
-          "text": "query EventPageQuery(
+          "text": "query EventListPageQuery(
   $cursor: String
   $count: Int!
   $locale: TranslationLocale
@@ -3069,8 +3115,8 @@ exports[`<EventPage /> renders correctly in french 1`] = `
   $orderBy: EventOrder!
   $isAuthenticated: Boolean!
 ) {
-  ...EventPageContainer_query_17yZ05
-  ...EventPageHeader_queryViewer_39ngnn
+  ...EventListPageContainer_query_17yZ05
+  ...EventListPageHeader_queryViewer_39ngnn
 }
 
 fragment EventImage_event on Event {
@@ -3112,6 +3158,32 @@ fragment EventListFilters_query_307oU4 on Query {
   ...EventListCounter_query_307oU4
   ...SelectTheme_query
   ...SelectProject_query_2yiOJi
+}
+
+fragment EventListPageContainer_query_17yZ05 on Query {
+  viewer @include(if: $isAuthenticated) {
+    awaitingOrRefusedEvents {
+      totalCount
+      edges {
+        node {
+          id
+          ...EventPreview_event
+        }
+      }
+    }
+    adminAwaitingEvents
+    id
+  }
+  ...EventRefetch_query_307oU4
+  ...EventListFilters_query_307oU4
+  ...EventListCounter_query_307oU4
+}
+
+fragment EventListPageHeader_queryViewer_39ngnn on Query {
+  viewer @include(if: $isAuthenticated) {
+    isAdmin
+    id
+  }
 }
 
 fragment EventListPaginated_query_307oU4 on Query {
@@ -3162,32 +3234,6 @@ fragment EventMap_query_307oU4 on Query {
   }
 }
 
-fragment EventPageContainer_query_17yZ05 on Query {
-  viewer @include(if: $isAuthenticated) {
-    awaitingOrRefusedEvents {
-      totalCount
-      edges {
-        node {
-          id
-          ...EventPreview_event
-        }
-      }
-    }
-    adminAwaitingEvents
-    id
-  }
-  ...EventRefetch_query_307oU4
-  ...EventListFilters_query_307oU4
-  ...EventListCounter_query_307oU4
-}
-
-fragment EventPageHeader_queryViewer_39ngnn on Query {
-  viewer @include(if: $isAuthenticated) {
-    isAdmin
-    id
-  }
-}
-
 fragment EventPagePassedEventsPreview_query_qo3MD on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
@@ -3201,9 +3247,9 @@ fragment EventPagePassedEventsPreview_query_qo3MD on Query {
 }
 
 fragment EventPreview_event on Event {
-  id
   title
   url
+  guestListEnabled
   timeRange {
     startAt
   }
@@ -3245,6 +3291,10 @@ fragment SelectTheme_query on Query {
 }
 
 fragment TagUser_user on User {
+  media {
+    url
+    id
+  }
   ...UserAvatar_user
   ...UserLink_user
 }
@@ -3290,7 +3340,7 @@ fragment UserLink_user on User {
 </div>
 `;
 
-exports[`<EventPage /> renders correctly without title and body 1`] = `
+exports[`<EventListPage /> renders correctly without title and body 1`] = `
 <div
   className="event-page"
 >
@@ -3375,7 +3425,7 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
           ],
           "kind": "Fragment",
           "metadata": null,
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "selections": Array [
             Object {
               "args": Array [
@@ -3441,7 +3491,7 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                 },
               ],
               "kind": "FragmentSpread",
-              "name": "EventPageContainer_query",
+              "name": "EventListPageContainer_query",
             },
             Object {
               "args": Array [
@@ -3452,12 +3502,12 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                 },
               ],
               "kind": "FragmentSpread",
-              "name": "EventPageHeader_queryViewer",
+              "name": "EventListPageHeader_queryViewer",
             },
           ],
           "type": "Query",
         },
-        "hash": "5adfa9da8ee9553fda34938f3c1a85cb",
+        "hash": "061e48022186b2e9e8cbe8fbbc3fec35",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -3535,7 +3585,7 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
             },
           ],
           "kind": "Operation",
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "selections": Array [
             Object {
               "alias": "previewPassedEvents",
@@ -3593,13 +3643,6 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "title",
                           "storageKey": null,
                         },
@@ -3608,6 +3651,13 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
                           "storageKey": null,
                         },
                         Object {
@@ -3682,20 +3732,6 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
-                              "kind": "ScalarField",
-                              "name": "url",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "username",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
                               "concreteType": "Media",
                               "kind": "LinkedField",
                               "name": "media",
@@ -3716,6 +3752,20 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                                   "storageKey": null,
                                 },
                               ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
                               "storageKey": null,
                             },
                             Object {
@@ -3796,6 +3846,13 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                               "storageKey": null,
                             },
                           ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
                           "storageKey": null,
                         },
                       ],
@@ -3996,6 +4053,13 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "guestListEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "TimeRange",
                           "kind": "LinkedField",
                           "name": "timeRange",
@@ -4047,20 +4111,6 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
-                              "kind": "ScalarField",
-                              "name": "url",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "username",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
                               "concreteType": "Media",
                               "kind": "LinkedField",
                               "name": "media",
@@ -4081,6 +4131,20 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                                   "storageKey": null,
                                 },
                               ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
                               "storageKey": null,
                             },
                             Object {
@@ -4473,6 +4537,13 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "guestListEnabled",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
                                   "concreteType": "TimeRange",
                                   "kind": "LinkedField",
                                   "name": "timeRange",
@@ -4542,20 +4613,6 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                                     Object {
                                       "alias": null,
                                       "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "url",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "username",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
                                       "concreteType": "Media",
                                       "kind": "LinkedField",
                                       "name": "media",
@@ -4576,6 +4633,20 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
                                           "storageKey": null,
                                         },
                                       ],
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "username",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -4698,9 +4769,9 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
         "params": Object {
           "id": null,
           "metadata": Object {},
-          "name": "EventPageQuery",
+          "name": "EventListPageQuery",
           "operationKind": "query",
-          "text": "query EventPageQuery(
+          "text": "query EventListPageQuery(
   $cursor: String
   $count: Int!
   $locale: TranslationLocale
@@ -4714,8 +4785,8 @@ exports[`<EventPage /> renders correctly without title and body 1`] = `
   $orderBy: EventOrder!
   $isAuthenticated: Boolean!
 ) {
-  ...EventPageContainer_query_17yZ05
-  ...EventPageHeader_queryViewer_39ngnn
+  ...EventListPageContainer_query_17yZ05
+  ...EventListPageHeader_queryViewer_39ngnn
 }
 
 fragment EventImage_event on Event {
@@ -4757,6 +4828,32 @@ fragment EventListFilters_query_307oU4 on Query {
   ...EventListCounter_query_307oU4
   ...SelectTheme_query
   ...SelectProject_query_2yiOJi
+}
+
+fragment EventListPageContainer_query_17yZ05 on Query {
+  viewer @include(if: $isAuthenticated) {
+    awaitingOrRefusedEvents {
+      totalCount
+      edges {
+        node {
+          id
+          ...EventPreview_event
+        }
+      }
+    }
+    adminAwaitingEvents
+    id
+  }
+  ...EventRefetch_query_307oU4
+  ...EventListFilters_query_307oU4
+  ...EventListCounter_query_307oU4
+}
+
+fragment EventListPageHeader_queryViewer_39ngnn on Query {
+  viewer @include(if: $isAuthenticated) {
+    isAdmin
+    id
+  }
 }
 
 fragment EventListPaginated_query_307oU4 on Query {
@@ -4807,32 +4904,6 @@ fragment EventMap_query_307oU4 on Query {
   }
 }
 
-fragment EventPageContainer_query_17yZ05 on Query {
-  viewer @include(if: $isAuthenticated) {
-    awaitingOrRefusedEvents {
-      totalCount
-      edges {
-        node {
-          id
-          ...EventPreview_event
-        }
-      }
-    }
-    adminAwaitingEvents
-    id
-  }
-  ...EventRefetch_query_307oU4
-  ...EventListFilters_query_307oU4
-  ...EventListCounter_query_307oU4
-}
-
-fragment EventPageHeader_queryViewer_39ngnn on Query {
-  viewer @include(if: $isAuthenticated) {
-    isAdmin
-    id
-  }
-}
-
 fragment EventPagePassedEventsPreview_query_qo3MD on Query {
   previewPassedEvents: events(locale: $locale, first: 5, isFuture: false, orderBy: $orderBy) {
     totalCount
@@ -4846,9 +4917,9 @@ fragment EventPagePassedEventsPreview_query_qo3MD on Query {
 }
 
 fragment EventPreview_event on Event {
-  id
   title
   url
+  guestListEnabled
   timeRange {
     startAt
   }
@@ -4890,6 +4961,10 @@ fragment SelectTheme_query on Query {
 }
 
 fragment TagUser_user on User {
+  media {
+    url
+    id
+  }
   ...UserAvatar_user
   ...UserLink_user
 }

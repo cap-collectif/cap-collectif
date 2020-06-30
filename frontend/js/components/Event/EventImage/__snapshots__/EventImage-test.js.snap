@@ -15,7 +15,9 @@ exports[`<EventImage /> should render correctly 1`] = `
 
 exports[`<EventImage /> should render correctly when image not find 1`] = `
 <EventImage__EventImageContainer>
-  <DefaultEventCover />
+  <DefaultEventCover
+    isMobile={false}
+  />
 </EventImage__EventImageContainer>
 `;
 

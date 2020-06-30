@@ -49,16 +49,13 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       onMouseOver={[Function]}
     >
       <Relay(Connect(EventPreview))
-        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
             "id": "event1",
           }
         }
-        isDateInline={true}
         isHighlighted={null}
-        isHorizontal={true}
       />
     </div>
     <div
@@ -66,16 +63,13 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       onMouseOver={[Function]}
     >
       <Relay(Connect(EventPreview))
-        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
             "id": "event2",
           }
         }
-        isDateInline={true}
         isHighlighted={null}
-        isHorizontal={true}
       />
     </div>
     <div
@@ -83,16 +77,13 @@ exports[`<EventListPaginated /> renders correctly when status all 1`] = `
       onMouseOver={[Function]}
     >
       <Relay(Connect(EventPreview))
-        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
             "id": "event3",
           }
         }
-        isDateInline={true}
         isHighlighted={null}
-        isHorizontal={true}
       />
     </div>
   </EventListPaginated__EventListContainer>

@@ -2,9 +2,18 @@
 
 exports[`<TagThemes /> should render correctly 1`] = `
 <Tag
-  icon="cap cap-folder-2"
   size="15px"
 >
+  <IconRounded
+    color="#707070"
+    size={18}
+  >
+    <Icon
+      color="#fff"
+      name="folder"
+      size={10}
+    />
+  </IconRounded>
   <span>
     Justice
      
@@ -22,9 +31,18 @@ exports[`<TagThemes /> should render correctly 1`] = `
 
 exports[`<TagThemes /> should render correctly with other size 1`] = `
 <Tag
-  icon="cap cap-folder-2"
   size="12px"
 >
+  <IconRounded
+    color="#707070"
+    size={18}
+  >
+    <Icon
+      color="#fff"
+      name="folder"
+      size={10}
+    />
+  </IconRounded>
   <span>
     Justice
      

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { EventPreview } from './EventPreview-stories';
 import { mediaQueryMobile } from '~/utils/sizes';
 import { events as eventsMock } from '../mocks/event';
+import { TYPE_EVENT } from '~/components/Event/EventPreview/EventPreview';
 
 const EventContainer = styled.ul`
   display: flex;
@@ -41,16 +42,16 @@ const HomePageEvents = () => (
       <EventPreview />
     </li>
     <li key="2">
-      <EventPreview />
+      <EventPreview type={TYPE_EVENT.ONLINE} />
     </li>
     <li key="3">
       <EventPreview />
     </li>
     <li key="4">
-      <EventPreview />
+      <EventPreview type={TYPE_EVENT.ONLINE} />
     </li>
     <li key="5">
-      <EventPreview />
+      <EventPreview type={TYPE_EVENT.ONLINE} />
     </li>
   </EventContainer>
 );

@@ -2,7 +2,9 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 
-const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span.attrs({
+  className: 'tag',
+})`
   font-size: 14px;
   display: inline-block;
   white-space: nowrap;
@@ -19,10 +21,15 @@ const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
     text-decoration: none;
   }
 
+  & > .icon,
+  & > .icon-rounded {
+    margin-right: 5px;
+  }
+
   .customImage {
     margin: 0;
     padding: 0 5px 0 0;
-    vertical-align: inherit;
+    vertical-align: top;
 
     * {
       margin: 0;

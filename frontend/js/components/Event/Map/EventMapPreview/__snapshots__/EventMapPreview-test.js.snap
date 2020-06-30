@@ -51,9 +51,8 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
             }
           }
         />
-        <TagDate
+        <Date
           date="2030-03-10 00:00:00"
-          size="16px"
         />
         <TagCity
           googleMapsAddress={
@@ -120,9 +119,8 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
             }
           }
         />
-        <TagDate
+        <Date
           date="2030-03-10 00:00:00"
-          size="16px"
         />
         <TagCity
           googleMapsAddress={
@@ -252,9 +250,8 @@ exports[`<EventMapPreview /> should render correctly when no googleMapsAddress 1
             }
           }
         />
-        <TagDate
+        <Date
           date="2030-03-10 00:00:00"
-          size="16px"
         />
       </TagsList>
     </Body>

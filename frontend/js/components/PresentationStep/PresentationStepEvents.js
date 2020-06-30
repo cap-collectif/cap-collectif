@@ -2,16 +2,43 @@
 import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import environment, { graphqlError } from '../../createRelayEnvironment';
-import EventPreview from '../Event/EventPreview/EventPreview';
+import Slider from 'react-slick';
+import environment, { graphqlError } from '~/createRelayEnvironment';
 import type {
   PresentationStepEventsQueryResponse,
   PresentationStepEventsQueryVariables,
 } from '~relay/PresentationStepEventsQuery.graphql';
-import { EventContainer } from '~/components/HomePage/HomePageEvents';
+import ProjectEventPreview from '~/components/Event/ProjectEventPreview/ProjectEventPreview';
+import { Container } from './PresentationStepEvents.style';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import Arrow from '~ui/Slider/Arrow';
+import IconRounded from '~ui/Icons/IconRounded';
+import colors from '~/utils/colors';
+import config from '~/config';
+
+const settingsSlider = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: config.isMobile ? 1 : 2,
+  arrows: !config.isMobile,
+  prevArrow: (
+    <Arrow>
+      <IconRounded size={36} borderColor={colors.borderColor}>
+        <Icon name={ICON_NAME.chevronLeft} size={18} color={colors.iconGrayColor} />
+      </IconRounded>
+    </Arrow>
+  ),
+  nextArrow: (
+    <Arrow>
+      <IconRounded size={36} borderColor={colors.borderColor}>
+        <Icon name={ICON_NAME.chevronRight} size={18} color={colors.iconGrayColor} />
+      </IconRounded>
+    </Arrow>
+  ),
+};
 
 export type Props = {|
-  +showAllUrl: string,
   +limit: number,
   +projectId: string,
 |};
@@ -28,31 +55,22 @@ class PresentationStepEvents extends React.Component<Props> {
       return graphqlError;
     }
     if (props && props.events.edges && props.events.edges.length > 0) {
-      const { showAllUrl } = this.props;
       return (
-        <div id="PresentationStepEvents" className="block">
+        <Container id="PresentationStepEvents" className="block">
           <h2 className="h2">
             <FormattedMessage id="global.events" />{' '}
             <span className="small excerpt">{props.events.totalCount}</span>
           </h2>
-          <EventContainer>
+
+          <Slider {...settingsSlider}>
             {props.events.edges &&
               props.events.edges
                 .filter(Boolean)
                 .map(edge => edge.node)
                 .filter(Boolean)
-                .map((node, key) => (
-                  <div key={key}>
-                    <EventPreview event={node} />
-                  </div>
-                ))}
-          </EventContainer>
-          {props.events.totalCount > 2 && (
-            <a id="project-events" href={showAllUrl} className="btn btn-primary btn--outline">
-              <FormattedMessage id="event.see_all" />
-            </a>
-          )}
-        </div>
+                .map(node => <ProjectEventPreview event={node} key={node.id} />)}
+          </Slider>
+        </Container>
       );
     }
     return null;
@@ -71,7 +89,7 @@ class PresentationStepEvents extends React.Component<Props> {
               edges {
                 node {
                   id
-                  ...EventPreview_event
+                  ...ProjectEventPreview_event
                 }
               }
             }

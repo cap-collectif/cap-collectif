@@ -24,36 +24,27 @@ exports[`<EventPagePassedEventsPreviews /> renders correctly 1`] = `
       xs={12}
     >
       <Relay(Connect(EventPreview))
-        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
           }
         }
-        isDateInline={true}
-        isHorizontal={true}
         key="0"
       />
       <Relay(Connect(EventPreview))
-        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
           }
         }
-        isDateInline={true}
-        isHorizontal={true}
         key="1"
       />
       <Relay(Connect(EventPreview))
-        className="eventPreview_list"
         event={
           Object {
             "$fragmentRefs": null,
           }
         }
-        isDateInline={true}
-        isHorizontal={true}
         key="2"
       />
     </Col>

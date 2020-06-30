@@ -6,8 +6,7 @@ import { createFragmentContainer } from 'react-relay';
 import { reduxForm } from 'redux-form';
 import { graphql } from 'relay-runtime';
 import { Button, Panel } from 'react-bootstrap';
-import type { EventPageContainer_query } from '~relay/EventPageContainer_query.graphql';
-
+import type { EventListPageContainer_query } from '~relay/EventListPageContainer_query.graphql';
 import ColorBox from '../Ui/Boxes/ColorBox';
 import EventListFilters from './List/EventListFilters';
 import EventRefetch from './List/EventRefetch';
@@ -17,10 +16,9 @@ import colors from '~/utils/colors';
 import { UPDATE_ALERT } from '~/constants/AlertConstants';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
 import EventPreview from './EventPreview/EventPreview';
-import config from '~/config';
 
 type Props = {|
-  +query: EventPageContainer_query,
+  +query: EventListPageContainer_query,
   +eventPageBody: ?string,
   +backgroundColor: ?string,
 |};
@@ -32,7 +30,6 @@ const EventFiltersContainer: StyledComponent<{}, {}, typeof ColorBox> = styled(C
   position: sticky;
   top: 50px;
   z-index: 1010;
-
   .event-search-group .form-group {
     margin-bottom: 0;
   }
@@ -41,7 +38,6 @@ const EventFiltersContainer: StyledComponent<{}, {}, typeof ColorBox> = styled(C
 const AwaitingEventsPanel: StyledComponent<{}, {}, typeof Panel> = styled(Panel)`
   margin-top: 15px;
   margin-bottom: 0 !important;
-
   div:last-child {
     border-radius: 0 !important;
   }
@@ -49,7 +45,7 @@ const AwaitingEventsPanel: StyledComponent<{}, {}, typeof Panel> = styled(Panel)
 
 export const formName = 'EventPageContainer';
 
-const renderAwaitingOrRefusedEvents = (query: EventPageContainer_query) => {
+const renderAwaitingOrRefusedEvents = (query: EventListPageContainer_query) => {
   if (query.viewer && query.viewer.adminAwaitingEvents && query.viewer.adminAwaitingEvents > 0) {
     return (
       <AwaitingEventsPanel bsStyle="danger" className="mt-15">
@@ -99,29 +95,17 @@ const renderAwaitingOrRefusedEvents = (query: EventPageContainer_query) => {
                   />
                 </Panel.Title>
               </Panel.Heading>
-              <EventPreview
-                event={node}
-                displayReview
-                isHorizontal={!config.isMobile}
-                isDateInline
-                className="eventPreview_list"
-              />
+              <EventPreview event={node} displayReview />
             </AwaitingEventsPanel>
           ) : (
-            <EventPreview
-              event={node}
-              displayReview
-              isHorizontal={!config.isMobile}
-              isDateInline
-              className="eventPreview_list mt-15"
-            />
+            <EventPreview event={node} displayReview />
           )}
         </div>
       ));
   }
 };
 
-export const EventPageContainer = ({ eventPageBody, query, backgroundColor }: Props) => {
+export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }: Props) => {
   useEffect(() => {
     if (window.location.href.indexOf('?delete=success') !== -1) {
       AppDispatcher.dispatch({
@@ -177,11 +161,11 @@ const form = reduxForm({
   form: formName,
   destroyOnUnmount: false,
   initialValues: getInitialValues(),
-})(EventPageContainer);
+})(EventListPageContainer);
 
 export default createFragmentContainer(form, {
   query: graphql`
-    fragment EventPageContainer_query on Query
+    fragment EventListPageContainer_query on Query
       @argumentDefinitions(
         count: { type: "Int!" }
         cursor: { type: "String" }

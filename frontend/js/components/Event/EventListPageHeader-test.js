@@ -2,11 +2,11 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { EventPageHeader } from './EventPageHeader';
-import { intlMock, $refType } from '../../mocks';
-import { features } from '../../redux/modules/default';
+import { EventListPageHeader } from './EventListPageHeader';
+import { intlMock, $refType } from '~/mocks';
+import { features } from '~/redux/modules/default';
 
-describe('<EventPageHeader />', () => {
+describe('<EventListPageHeader />', () => {
   const props = {
     eventPageTitle: '<p>Titre personnalisé</p>',
     intl: intlMock,
@@ -23,7 +23,7 @@ describe('<EventPageHeader />', () => {
   };
 
   it('renders correcty', () => {
-    const wrapper = shallow(<EventPageHeader {...props} />);
+    const wrapper = shallow(<EventListPageHeader {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -32,7 +32,7 @@ describe('<EventPageHeader />', () => {
       ...props,
       eventPageTitle: '',
     };
-    const wrapper = shallow(<EventPageHeader {...noTitle} />);
+    const wrapper = shallow(<EventListPageHeader {...noTitle} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -41,7 +41,7 @@ describe('<EventPageHeader />', () => {
       ...props,
       isAuthenticated: false,
     };
-    const wrapper = shallow(<EventPageHeader {...nonAuthenticated} />);
+    const wrapper = shallow(<EventListPageHeader {...nonAuthenticated} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -53,7 +53,7 @@ describe('<EventPageHeader />', () => {
         allow_users_to_propose_events: true,
       },
     };
-    const wrapper = shallow(<EventPageHeader {...createEventTrue} />);
+    const wrapper = shallow(<EventListPageHeader {...createEventTrue} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

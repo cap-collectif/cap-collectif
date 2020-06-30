@@ -31,7 +31,7 @@ storiesOf('Core|Label', module)
     const fontSize = number('fontSize', 12);
 
     return (
-      <Label color={labelColor} fontSize={fontSize}>
+      <Label color={labelColor} fontSize={fontSize} uppercase>
         <i className="cap cap-add-1" /> Favorable
       </Label>
     );

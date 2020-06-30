@@ -15,7 +15,6 @@ import type { EventListPaginated_query } from '~relay/EventListPaginated_query.g
 import type { GlobalState, Dispatch, FeatureToggles } from '~/types';
 import { changeEventSelected } from '~/redux/modules/event';
 import sizes from '~/utils/sizes';
-import config from '~/config';
 
 type OwnProps = {|
   query: EventListPaginated_query,
@@ -109,9 +108,6 @@ export const EventListPaginated = (props: Props) => {
                   <EventPreview
                     isHighlighted={eventSelected && eventSelected === node.id}
                     event={node}
-                    className="eventPreview_list"
-                    isHorizontal={!config.isMobile}
-                    isDateInline
                   />
                 </div>
               ))}
