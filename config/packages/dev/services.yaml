@@ -12,6 +12,3 @@ services:
             - [setRedirectToHost, ['%jms_i18n_routing.redirect_to_host%']]
 
     jms_i18n_routing.router: '@Capco\AppBundle\Router\I18nRouter'
-
-    Symfony\Component\Cache\Adapter\ApcuAdapter:
-        public: true

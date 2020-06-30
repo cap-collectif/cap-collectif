@@ -25,7 +25,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
-        php-apcu \
         php7.4-apcu \
         php7.4-apc \
         php7.4-cli \
@@ -49,10 +48,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN echo "extension=apcu.so" > /etc/php/7.4/php.ini
-RUN echo "apc.enable_cli=1" > /etc/php/7.4/php.ini
-RUN echo "apc.enable=1" > /etc/php/7.4//php.ini
 
 # Install nodejs and deps for npm install
 ENV NPM_CONFIG_LOGLEVEL warn

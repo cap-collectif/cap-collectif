@@ -12,7 +12,7 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\AbstractVote;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -60,7 +60,7 @@ class Indexer
     private $stopwatch;
 
     public function __construct(
-        ManagerRegistry $registry,
+        RegistryInterface $registry,
         SerializerInterface $serializer,
         Index $index,
         LoggerInterface $logger,
