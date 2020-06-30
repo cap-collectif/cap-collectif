@@ -10,6 +10,7 @@ use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RecalculateCountersCommand extends Command
 {
+    use LockableTrait;
+
     public $force;
 
     /**

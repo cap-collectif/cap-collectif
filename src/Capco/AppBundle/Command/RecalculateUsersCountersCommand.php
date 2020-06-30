@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,6 +12,8 @@ use Predis\ClientInterface;
 
 class RecalculateUsersCountersCommand extends Command
 {
+    use LockableTrait;
+
     public $force;
     public $em;
     public $redis;
