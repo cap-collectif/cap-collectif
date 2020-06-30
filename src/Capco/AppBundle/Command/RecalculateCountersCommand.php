@@ -48,6 +48,11 @@ class RecalculateCountersCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->lock()) {
+            $output->writeln('The command is already running in another process.');
+
+            return 0;
+        }
         $container = $this->getContainer();
         $this->entityManager = $container->get('doctrine')->getManager();
         $contributionResolver = $container->get(ContributionResolver::class);

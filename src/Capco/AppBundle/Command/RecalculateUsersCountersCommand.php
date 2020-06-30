@@ -68,6 +68,11 @@ class RecalculateUsersCountersCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->lock()) {
+            $output->writeln('The command is already running in another process.');
+
+            return 0;
+        }
         $redisKey = 'recalculate_user_counters';
         $this->force = $input->getOption('force');
         $this->ids = $this->redis->smembers($redisKey);
