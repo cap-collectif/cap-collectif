@@ -1,8 +1,9 @@
 Feature: Remind confirmation Commands
 
 @parallel-scenario
-Scenario: Cron job wants to remind users to confirme their accounts
+Scenario:
   Given user "user_not_confirmed" registered less than 1 week ago
+  And feature "remind_user_account_confirmation" is enabled
   And user "user_not_confirmed_with_contribution" registered less than 1 week ago
   # This user is already confirmed and should not be reminded
   And user "user1" registered less than 1 week ago

@@ -54,6 +54,7 @@ class Manager
         'restrict_connection',
         'secure_password',
         'read_more',
+        'remind_user_account_confirmation',
         'display_pictures_in_depository_proposals_list',
         'display_pictures_in_event_list',
         'external_project',

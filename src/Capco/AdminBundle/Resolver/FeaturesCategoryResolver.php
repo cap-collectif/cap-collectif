@@ -65,6 +65,7 @@ class FeaturesCategoryResolver
                 UserRole::ROLE_SUPER_ADMIN => [
                     'disconnect_openid',
                     'votes_evolution',
+                    'remind_user_account_confirmation',
                     'server_side_rendering',
                     'export',
                     'indexation',

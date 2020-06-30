@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,18 +17,21 @@ class RemindUserAccountConfirmationCommand extends Command
     private $entityManager;
     private $userNotifier;
     private $userRepository;
+    private Manager $toggleManager;
 
     public function __construct(
         LoggerInterface $logger,
         ?string $name = null,
         EntityManagerInterface $entityManager,
         UserNotifier $userNotifier,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        Manager $toggleManager
     ) {
         $this->logger = $logger;
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
         $this->userNotifier = $userNotifier;
+        $this->toggleManager = $toggleManager;
         parent::__construct($name);
     }
 
@@ -40,6 +44,13 @@ class RemindUserAccountConfirmationCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (!$this->toggleManager->isActive('remind_user_account_confirmation')) {
+            $this->logger->warning(
+                __CLASS__ . ": remind-user-account feature toggle is not active."
+            );
+            return 0;
+        }
+
         $userIds = $this->userRepository->findNotEmailConfirmedUserIdsSince24Hours();
 
         foreach ($userIds as $id) {

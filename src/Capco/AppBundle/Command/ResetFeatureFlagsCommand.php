@@ -94,6 +94,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('display_pictures_in_event_list');
         $this->manager->activate('unstable__analysis');
         $this->manager->activate('sentry_log');
+        $this->manager->activate('remind_user_account_confirmation');
 
         if ('test' === $env) {
             $this->manager->deactivate('shield_mode');
