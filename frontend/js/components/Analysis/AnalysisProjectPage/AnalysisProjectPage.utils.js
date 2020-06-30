@@ -21,7 +21,7 @@ import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQue
 type ProjectWithAllSteps = {
   +steps: $ReadOnlyArray<{|
     +__typename: string,
-    +form?: {|
+    +form?: ?{|
       +districts: $ReadOnlyArray<{|
         +id: string,
         +name: ?string,

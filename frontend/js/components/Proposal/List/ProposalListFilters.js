@@ -7,7 +7,11 @@ import { connect } from 'react-redux';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import ProposalListSearch from './ProposalListSearch';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
-import { changeFilter, changeProposalListView, type Filters } from '../../../redux/modules/proposal';
+import {
+  changeFilter,
+  changeProposalListView,
+  type Filters,
+} from '../../../redux/modules/proposal';
 import ProposalListToggleViewBtn from './ProposalListToggleViewBtn';
 import type { ProposalListFilters_step } from '~relay/ProposalListFilters_step.graphql';
 import Select from '../../Ui/Form/Select/Select';
@@ -36,8 +40,8 @@ type Props = {|
 
 type Options = {|
   types: $ReadOnlyArray<defaultOption>,
-  categories: $ReadOnlyArray<defaultOption>,
-  districts: $ReadOnlyArray<defaultOption>,
+  categories?: $ReadOnlyArray<defaultOption>,
+  districts?: $ReadOnlyArray<defaultOption>,
   themes: $ReadOnlyArray<themeOption>,
   statuses: $ReadOnlyArray<defaultOption>,
 |};
@@ -76,8 +80,8 @@ export class ProposalListFilters extends React.Component<Props> {
 
     const options = {
       types,
-      categories: form.categories,
-      districts: form.districts,
+      categories: form?.categories,
+      districts: form?.districts,
       themes,
       statuses: step.statuses,
     };
@@ -85,25 +89,32 @@ export class ProposalListFilters extends React.Component<Props> {
     const displayedFilters: string[] = []
       .concat(features.user_type && options.types.length > 0 ? ['types'] : [])
       .concat(
-        features.districts && options.districts.length > 0 && form.usingDistrict
+        features.districts &&
+          options.districts &&
+          options.districts.length > 0 &&
+          form?.usingDistrict
           ? ['districts']
           : [],
       )
-      .concat(features.themes && form.usingThemes && options.themes.length > 0 ? ['themes'] : [])
-      .concat(form.usingCategories && options.categories.length > 1 ? ['categories'] : [])
+      .concat(features.themes && form?.usingThemes && options.themes.length > 0 ? ['themes'] : [])
+      .concat(
+        form?.usingCategories && options.categories && options.categories.length > 1
+          ? ['categories']
+          : [],
+      )
       .concat(options.statuses.length > 0 ? ['statuses'] : []);
 
     const orderByVotes = step.voteType !== 'DISABLED';
-    const orderByComments = form.commentable;
-    const orderByCost = form.costable;
-    const showMapButton = form.usingAddress && !step.private && !!features.display_map;
+    const orderByComments = form?.commentable;
+    const orderByCost = form?.costable;
+    const showMapButton = form?.usingAddress && !step.private && !!features.display_map;
 
     return (
       <div className="mb-15 mt-30">
         <Row>
           <Col xs={12} sm={6} md={4} lg={3}>
             <ProposalListToggleViewBtn
-              showMapButton={showMapButton}
+              showMapButton={showMapButton ?? false}
               onChange={mode => {
                 dispatch(changeProposalListView(mode));
               }}

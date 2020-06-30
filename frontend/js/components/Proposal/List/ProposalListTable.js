@@ -14,7 +14,7 @@ import ProgressList from '../../Ui/List/ProgressList';
 import ProgressListItem from '../../Ui/List/ProgressListItem';
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated';
 import InlineList from '../../Ui/List/InlineList';
-import {translateContent} from "~/utils/ContentTranslator";
+import { translateContent } from '~/utils/ContentTranslator';
 
 type Props = {
   proposals: ProposalListTable_proposals,
@@ -76,11 +76,15 @@ export class ProposalListTable extends React.Component<Props, State> {
         .filter(Boolean)
         .map(node => {
           const getProposalTitle =
-            node.title.length > 55 ? `${node.title.substring(0, 55)}…` : translateContent(node.title);
+            node.title.length > 55
+              ? `${node.title.substring(0, 55)}…`
+              : translateContent(node.title);
 
           return {
             title: {
-              text: step.form.isProposalForm ? 'admin.fields.selection.proposal' : 'question-title',
+              text: step.form?.isProposalForm
+                ? 'admin.fields.selection.proposal'
+                : 'question-title',
               value: { displayTitle: getProposalTitle, url: node.url && node.url },
               width: '250px',
             },

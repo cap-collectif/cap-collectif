@@ -1537,7 +1537,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     last: Int
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
-  form: ProposalForm!
+  form: ProposalForm
   private: Boolean!
   defaultStatus: Status
 
@@ -6711,7 +6711,7 @@ interface ProposalStep {
     last: Int
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
-  form: ProposalForm!
+  form: ProposalForm
 }
 
 """Type of vote."""
@@ -8677,7 +8677,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     last: Int
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
-  form: ProposalForm!
+  form: ProposalForm
   position: Int!
 
   """

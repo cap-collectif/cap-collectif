@@ -37,7 +37,7 @@ class AnalysisConfiguration implements Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
-     * @ORM\JoinColumn(name="analysis_step", referencedColumnName="id")
+     * @ORM\JoinColumn(name="analysis_step", referencedColumnName="id", onDelete="SET NULL")
      */
     private $analysisStep;
 
@@ -53,15 +53,15 @@ class AnalysisConfiguration implements Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
-     * @ORM\JoinColumn(nullable=true, name="favourable_status")
+     * @ORM\JoinColumn(nullable=true, name="favourable_status", onDelete="SET NULL")
      */
     private $favourableStatus;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Status")
      * @ORM\JoinTable(name="analysis_unfavourable_statuses",
-     *      joinColumns={@ORM\JoinColumn(name="analysis_configuration_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="status_id", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="analysis_configuration_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="status_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
     private $unfavourableStatuses;

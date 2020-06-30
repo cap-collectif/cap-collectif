@@ -33,7 +33,7 @@ InternalCollectStep:
             defaultStatus:
                 type: Status
             form:
-                type: 'ProposalForm!'
+                type: 'ProposalForm'
                 resolve: '@=value.getProposalForm()'
             contributors:
                 type: 'InternalUserConnection!'
