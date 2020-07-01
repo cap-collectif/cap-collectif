@@ -149,6 +149,11 @@ e2e:
       contexts: *core-config
       filters:
         tags: '@core&&~@event_registration&&~@randomly-failing'
+    export-feature:
+      paths: ['%paths.base%/features/front/features']
+      contexts: *bp-config
+      filters:
+        tags: '@export&&~@randomly-failing'
     core-user:
       paths: ['%paths.base%/features/front/user']
       contexts: *core-config

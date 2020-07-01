@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Behat;
 use Behat\Mink\Element\DocumentElement;
 use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
 use Capco\AppBundle\Behat\Traits\LocaleTrait;
+use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Entity\Locale;
@@ -950,6 +951,20 @@ class ApplicationContext extends UserContext
 
         $url = $this->getService('router')->generate('app_export_step_contributors', [
             'stepId' => $stepId,
+        ]);
+        $this->iDownloadFile($url);
+    }
+
+    /**
+     * @When I can download event participant export with eventId :eventId and eventSlug :eventSlug
+     */
+    public function iCanDownloadEventParticipantsExport(string $eventId, string $eventSlug)
+    {
+        $fileName = CreateCsvFromEventParticipantsCommand::getFilename($eventSlug);
+        file_put_contents('/var/www/public/export/' . $fileName, '');
+
+        $url = $this->getService('router')->generate('app_export_my_event_participants', [
+            'eventId' => $eventId,
         ]);
         $this->iDownloadFile($url);
     }

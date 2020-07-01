@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -110,8 +111,13 @@ class CreateStepContributorsCommand extends BaseExportCommand
         return self::getShortenedFilename('participants_' . $step->getSlug());
     }
 
-    public function generateSheet(AbstractStep $step, string $fileName, string $delimiter): void
-    {
+    public function generateSheet(
+        OutputInterface $output,
+        AbstractStep $step,
+        string $fileName,
+        string $delimiter,
+        bool $isVerbose
+    ): void {
         $data = $this->executor
             ->execute('internal', [
                 'query' => $this->getStepContributorsGraphQLQuery($step->getId()),
@@ -122,6 +128,13 @@ class CreateStepContributorsCommand extends BaseExportCommand
         if (!isset($data['data'])) {
             $this->logger->error('GraphQL Query Error: ' . $data['error']);
             $this->logger->info('GraphQL query: ' . json_encode($data));
+        }
+        if (
+            $isVerbose &&
+            isset($data['data']['node']['contributors']['totalCount']) &&
+            0 === $data['data']['node']['contributors']['totalCount']
+        ) {
+            $output->writeln("\t<fg=magenta>Empty export: there is no contributor.</>");
         }
         $writer = WriterFactory::create(Type::CSV, $delimiter);
         $writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
@@ -179,19 +192,25 @@ class CreateStepContributorsCommand extends BaseExportCommand
             return 1;
         }
         $delimiter = $input->getOption('delimiter');
+        $isVerbose = $input->getOption('verbose');
 
         $steps = $this->stepRepository->findAll();
         foreach ($steps as $step) {
+            $type = $step->getType();
+            if ($isVerbose) {
+                $stepSlug = $step->getSlug();
+                $output->writeln("<fg=white>Examining step ${stepSlug} of type ${type}</>");
+            }
             if (
                 $step instanceof CollectStep ||
                 $step instanceof SelectionStep ||
                 $step instanceof QuestionnaireStep ||
-                $step instanceof ConsultationStep
+                $step instanceof ConsultationStep ||
+                $step instanceof Consultation
             ) {
-                $type = $step->getType();
                 $fileName = self::getFilename($step);
-                $output->writeln("<info>Generating ${fileName} sheet as ${type}</info>");
-                $this->generateSheet($step, $fileName, $delimiter);
+                $output->writeln("\t<info>Generating ${fileName} sheet as ${type}</info>");
+                $this->generateSheet($output, $step, $fileName, $delimiter, $isVerbose);
                 $this->executeSnapshot($input, $output, $fileName);
             }
         }
@@ -218,6 +237,22 @@ class CreateStepContributorsCommand extends BaseExportCommand
         return <<<EOF
         query {
           node(id: "${stepId}") {
+           ... on Consultation {
+              contributors(first: 50 ${userCursor}) {
+                edges {
+                  cursor
+                  node {
+                    ${USER_FRAGMENT}
+                  }
+                }
+                totalCount
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
+              }
+            }
             ... on ConsultationStep {
               contributors(first: 50 ${userCursor}) {
                 edges {
@@ -226,6 +261,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
                     ${USER_FRAGMENT}
                   }
                 }
+                totalCount
                 pageInfo {
                   startCursor
                   endCursor
@@ -241,6 +277,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
                     ${USER_FRAGMENT}
                   }              
                 }
+                totalCount
                 pageInfo {
                   startCursor
                   endCursor
@@ -256,6 +293,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
                     ${USER_FRAGMENT}
                   }               
                 }
+                totalCount
                 pageInfo {
                   startCursor
                   endCursor
@@ -269,8 +307,9 @@ class CreateStepContributorsCommand extends BaseExportCommand
                   cursor
                   node {
                     ${USER_FRAGMENT}
-                  }              
+                  }     
                 }
+                totalCount
                 pageInfo {
                   startCursor
                   endCursor
