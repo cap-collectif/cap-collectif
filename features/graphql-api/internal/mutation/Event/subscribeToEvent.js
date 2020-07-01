@@ -4,7 +4,9 @@ import '../../../_setup';
 const SubscribeToEventAsRegisteredMutation = /* GraphQL*/ `
   mutation SubscribeToEventAsRegistered($input: SubscribeToEventAsRegisteredInput!) {
     subscribeToEventAsRegistered(input: $input) {
-      eventId
+      event{
+        id
+      }
     }
   }
 `;
@@ -12,7 +14,9 @@ const SubscribeToEventAsRegisteredMutation = /* GraphQL*/ `
 const SubscribeToEventAsNonRegisteredMutation = /* GraphQL*/ `
   mutation SubscribeToEventAsNonRegistered($input: SubscribeToEventAsNonRegisteredInput!) {
     subscribeToEventAsNonRegistered(input: $input) {
-      eventId
+      event{
+        id
+      }
     }
   }
 `;
@@ -29,7 +33,7 @@ describe('mutations.subscribeToEvent', () => {
     expect(subscribeToEvent).toMatchSnapshot();
   });
 
-  it('user wants to subscribe from event.', async () => {
+  it('user wants to subscribe to event.', async () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsRegisteredMutation,
       {
@@ -39,11 +43,39 @@ describe('mutations.subscribeToEvent', () => {
     );
     expect(subscribeToEvent).toMatchSnapshot();
   });
-  it('anonymous wants to subscribe from event.', async () => {
+
+  it('user wants to subscribe to event as anonymous.', async () => {
+    const subscribeToEvent = await graphql(
+      SubscribeToEventAsRegisteredMutation,
+      {
+        input: { eventId: 'RXZlbnQ6ZXZlbnQ0', private: true },
+      },
+      'internal_user_conseil_regional',
+    );
+    expect(subscribeToEvent).toMatchSnapshot();
+  });
+
+  it('anonymous wants to subscribe to event.', async () => {
     const subscribeToEvent = await graphql(
       SubscribeToEventAsNonRegisteredMutation,
       {
         input: { eventId: 'RXZlbnQ6ZXZlbnQ0', email: 'jpec@cap-collectif.com', username: 'Jpec' },
+      },
+      'internal',
+    );
+    expect(subscribeToEvent).toMatchSnapshot();
+  });
+
+  it('anonymous wants to subscribe to event as anonymous.', async () => {
+    const subscribeToEvent = await graphql(
+      SubscribeToEventAsNonRegisteredMutation,
+      {
+        input: {
+          eventId: 'RXZlbnQ6ZXZlbnQ0',
+          email: 'jpec-anonymous@cap-collectif.com',
+          username: 'Jpec',
+          private: true,
+        },
       },
       'internal',
     );

@@ -4367,7 +4367,6 @@ type Mutation {
   revokeAnalystsToProposals(input: RevokeAnalystsToProposalsInput!): RevokeAnalystsToProposalsPayload
   assignAnalystsToProposals(input: AssignAnalystsToProposalsInput!): AssignAnalystsToProposalsPayload
   subscribeToEventAsNonRegistered(input: SubscribeToEventAsNonRegisteredInput!): SubscribeToEventAsNonRegisteredPayload
-  unsubscribeToEventAsNonRegistered(input: UnsubscribeToEventAsNonRegisteredInput!): UnsubscribeToEventAsNonRegisteredPayload
   subscribeToEventAsRegistered(input: SubscribeToEventAsRegisteredInput!): SubscribeToEventAsRegisteredPayload
   unsubscribeToEventAsRegistered(input: UnsubscribeToEventAsRegisteredInput!): UnsubscribeToEventAsRegisteredPayload
 }
@@ -9289,21 +9288,30 @@ input SubscribeToEventAsNonRegisteredInput {
 
   """Username of user"""
   username: String!
+
+  """Should the event registration be private"""
+  private: Boolean = false
   clientMutationId: String
 }
 
 type SubscribeToEventAsNonRegisteredPayload {
-  eventId: ID!
+  """Event"""
+  event: Event
   clientMutationId: String
 }
 
 input SubscribeToEventAsRegisteredInput {
+  """Event global id"""
   eventId: ID!
+
+  """Should the event registration be private"""
+  private: Boolean = false
   clientMutationId: String
 }
 
 type SubscribeToEventAsRegisteredPayload {
-  eventId: ID!
+  """Event"""
+  event: Event
   clientMutationId: String
 }
 
@@ -9509,29 +9517,14 @@ type UnselectProposalPayload {
   clientMutationId: String
 }
 
-input UnsubscribeToEventAsNonRegisteredInput {
-  eventId: ID!
-
-  """Email of user if not registered"""
-  email: String!
-
-  """Username of user if not registered"""
-  username: String!
-  clientMutationId: String
-}
-
-type UnsubscribeToEventAsNonRegisteredPayload {
-  eventId: ID!
-  clientMutationId: String
-}
-
 input UnsubscribeToEventAsRegisteredInput {
   eventId: ID!
   clientMutationId: String
 }
 
 type UnsubscribeToEventAsRegisteredPayload {
-  eventId: ID!
+  """Event"""
+  event: Event
   clientMutationId: String
 }
 

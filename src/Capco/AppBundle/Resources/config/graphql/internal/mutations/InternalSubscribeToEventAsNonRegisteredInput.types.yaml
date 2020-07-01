@@ -11,3 +11,7 @@ SubscribeToEventAsNonRegisteredInput:
             username:
                 type: 'String!'
                 description: 'Username of user'
+            private:
+                type: 'Boolean'
+                description: 'Should the event registration be private'
+                defaultValue: false

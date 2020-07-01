@@ -3,5 +3,6 @@ UnsubscribeToEventAsRegisteredPayload:
     config:
         description: 'Unsubscribe to event.'
         fields:
-            eventId:
-                type: 'ID!'
+            event:
+                type: 'InternalEvent'
+                description: 'Event'

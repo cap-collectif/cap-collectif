@@ -3,5 +3,6 @@ SubscribeToEventAsRegisteredPayload:
     config:
         description: 'Subscribe to event.'
         fields:
-            eventId:
-                type: 'ID!'
+            event:
+                type: 'InternalEvent'
+                description: 'Event'

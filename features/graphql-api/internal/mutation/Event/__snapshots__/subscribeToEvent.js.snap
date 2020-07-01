@@ -3,23 +3,49 @@
 exports[`mutations.subscribeToEvent admin wants to subscribe to an event. 1`] = `
 Object {
   "subscribeToEventAsRegistered": Object {
-    "eventId": "RXZlbnQ6ZXZlbnQ0",
+    "event": Object {
+      "id": "RXZlbnQ6ZXZlbnQ0",
+    },
   },
 }
 `;
 
-exports[`mutations.subscribeToEvent anonymous wants to subscribe from event. 1`] = `
+exports[`mutations.subscribeToEvent anonymous wants to subscribe to event as anonymous. 1`] = `
 Object {
   "subscribeToEventAsNonRegistered": Object {
-    "eventId": "RXZlbnQ6ZXZlbnQ0",
+    "event": Object {
+      "id": "RXZlbnQ6ZXZlbnQ0",
+    },
   },
 }
 `;
 
-exports[`mutations.subscribeToEvent user wants to subscribe from event. 1`] = `
+exports[`mutations.subscribeToEvent anonymous wants to subscribe to event. 1`] = `
+Object {
+  "subscribeToEventAsNonRegistered": Object {
+    "event": Object {
+      "id": "RXZlbnQ6ZXZlbnQ0",
+    },
+  },
+}
+`;
+
+exports[`mutations.subscribeToEvent user wants to subscribe to event as anonymous. 1`] = `
 Object {
   "subscribeToEventAsRegistered": Object {
-    "eventId": "RXZlbnQ6ZXZlbnQ0",
+    "event": Object {
+      "id": "RXZlbnQ6ZXZlbnQ0",
+    },
+  },
+}
+`;
+
+exports[`mutations.subscribeToEvent user wants to subscribe to event. 1`] = `
+Object {
+  "subscribeToEventAsRegistered": Object {
+    "event": Object {
+      "id": "RXZlbnQ6ZXZlbnQ0",
+    },
   },
 }
 `;

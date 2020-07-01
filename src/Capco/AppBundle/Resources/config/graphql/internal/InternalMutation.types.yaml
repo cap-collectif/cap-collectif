@@ -886,12 +886,6 @@ InternalMutation:
                     inputType: SubscribeToEventAsNonRegisteredInput
                     payloadType: SubscribeToEventAsNonRegisteredPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\SubscribeToEventAsNonRegisteredMutation", [value, getUser(), serv("request_stack")])'
-            unsubscribeToEventAsNonRegistered:
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: UnsubscribeToEventAsNonRegisteredInput
-                    payloadType: UnsubscribeToEventAsNonRegisteredPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnsubscribeToEventAsNonRegisteredMutation", [value, getUser()])'
             subscribeToEventAsRegistered:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

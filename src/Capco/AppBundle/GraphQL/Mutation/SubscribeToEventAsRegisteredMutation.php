@@ -34,6 +34,8 @@ class SubscribeToEventAsRegisteredMutation implements MutationInterface
     {
         $request = $requestStack->getCurrentRequest();
         $eventId = $input->offsetGet('eventId');
+        $isPrivate = $input->offsetGet('private');
+
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($eventId, $viewer);
         if (!$event) {
@@ -52,6 +54,7 @@ class SubscribeToEventAsRegisteredMutation implements MutationInterface
         }
         $eventRegistration = new EventRegistration($event);
         $eventRegistration
+            ->setPrivate($isPrivate)
             ->setUser($viewer)
             ->setUsername($username)
             ->setIpAddress($request ? $request->getClientIp() : null)
@@ -61,7 +64,7 @@ class SubscribeToEventAsRegisteredMutation implements MutationInterface
         $this->entityManager->flush();
 
         return [
-            'eventId' => $eventId,
+            'event' => $event,
         ];
     }
 }

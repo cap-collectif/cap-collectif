@@ -47,7 +47,7 @@ class UnsubscribeToEventAsRegisteredMutation implements MutationInterface
         $this->entityManager->flush();
 
         return [
-            'eventId' => $eventId,
+            'event' => $event,
         ];
     }
 

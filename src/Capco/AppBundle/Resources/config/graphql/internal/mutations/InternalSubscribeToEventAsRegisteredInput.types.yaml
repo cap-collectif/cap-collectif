@@ -5,3 +5,8 @@ SubscribeToEventAsRegisteredInput:
         fields:
             eventId:
                 type: 'ID!'
+                description: 'Event global id'
+            private:
+                type: 'Boolean'
+                description: 'Should the event registration be private'
+                defaultValue: false
