@@ -1,6 +1,8 @@
 ekino_new_relic:
-  enabled: true # Defaults to true
-  api_key: ***REMOVED***
+  enabled: true
+  application_name: '%instance_name%'
+  api_key: '%newrelic_api_key%'
+  license_key: '%newrelic_license_key%'
   twig: true
   http:
     enabled: true

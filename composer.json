@@ -137,7 +137,7 @@
         "nelmio/api-doc-bundle": "^2.13",
         "liuggio/excelbundle": "dev-prepare-symfony-4",
         "snc/redis-bundle": "^3.1",
-        "ekino/newrelic-bundle": "^2.0",
+        "ekino/newrelic-bundle": "2.2.0",
         "google/recaptcha": "^1.1",
         "mattketmo/email-checker": "^1.5",
         "twilio/sdk": "^4.10",
