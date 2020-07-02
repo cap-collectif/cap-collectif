@@ -6,6 +6,7 @@ use Behat\Mink\Element\DocumentElement;
 use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
 use Capco\AppBundle\Behat\Traits\LocaleTrait;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
+use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Entity\Locale;
@@ -993,6 +994,20 @@ class ApplicationContext extends UserContext
 
         $url = $this->getService('router')->generate('app_project_decisions_download', [
             'projectSlug' => $projectSlug,
+        ]);
+        $this->iDownloadFile($url);
+    }
+
+    /**
+     * @When I can download project contributor export with project slug :projectSlug and projectId :projectId
+     */
+    public function iCanDownloadProjectContributorsExport(string $projectSlug, string $projectId)
+    {
+        $fileName = CreateCsvFromProjectsContributorsCommand::getFilename($projectSlug);
+        file_put_contents('/var/www/public/export/' . $fileName, '');
+
+        $url = $this->getService('router')->generate('app_export_project_contributors', [
+            'projectId' => $projectId,
         ]);
         $this->iDownloadFile($url);
     }
