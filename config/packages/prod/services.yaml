@@ -6,13 +6,11 @@ framework:
         collect: false
     validation:
         cache: validator.mapping.cache.doctrine.apc
-
-doctrine:
-    orm:
-        metadata_cache_driver: apcu
-        query_cache_driver: apcu
-        result_cache_driver: apcu
-
+    cache:
+        # cache for doctrine https://symfony.com/doc/4.4/cache.html
+        app: cache.adapter.apcu
+        system: cache.adapter.system
+        directory: '%kernel.cache_dir%/pools' # Only used with cache.adapter.filesystem
 swiftmailer:
     default_mailer: mandrill
 

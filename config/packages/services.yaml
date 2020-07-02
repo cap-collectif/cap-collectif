@@ -263,3 +263,6 @@ services:
 
     Overblog\PromiseAdapter\PromiseAdapterInterface:
         alias: overblog_dataloader.webonyx_graphql_sync_promise_adapter
+
+    Symfony\Component\Cache\Adapter\ApcuAdapter:
+        public: true
