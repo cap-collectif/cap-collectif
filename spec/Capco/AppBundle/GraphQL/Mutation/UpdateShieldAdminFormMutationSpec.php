@@ -2,12 +2,12 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Entity\SiteParameter;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\Mutation\UpdateShieldAdminFormMutation;
-use Capco\AppBundle\GraphQL\Resolver\TimeRangeResolver;
+use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -20,14 +20,21 @@ use PhpSpec\ObjectBehavior;
 class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
 {
     public function let(
+        RedisCache $cache,
         SiteImageRepository $siteImageRepository,
         EntityManagerInterface $em,
         MediaRepository $mediaRepository,
         SiteParameterRepository $siteParameterRepository,
         Manager $toggleManager
     ) {
-        $this->beConstructedWith($siteImageRepository, $em, $mediaRepository, $siteParameterRepository, $toggleManager);
-
+        $this->beConstructedWith(
+            $cache,
+            $siteImageRepository,
+            $em,
+            $mediaRepository,
+            $siteParameterRepository,
+            $toggleManager
+        );
     }
 
     public function it_is_initializable(): void
@@ -36,12 +43,14 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
     }
 
     public function it_update_shield(
+        Locale $locale,
         SiteImageRepository $siteImageRepository,
         SiteImage $siteImage,
         EntityManagerInterface $em,
         MediaRepository $mediaRepository,
         Media $media,
         SiteParameterRepository $siteParameterRepository,
+        LocaleRepository $localeRepository,
         Manager $toggleManager,
         SiteParameter $currentIntroductionParameter,
         Arg $arguments
@@ -55,13 +64,15 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $shieldMode = true;
         $introduction = '';
         $siteImage->getIsEnabled()->willReturn(true);
-        $siteImage->getKeyname()->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY);
+        $siteImage
+            ->getKeyname()
+            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY);
 
-        $siteImageRepository->findOneBy(
-            [
+        $siteImageRepository
+            ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY,
-            ]
-        )->willReturn($siteImage);
+            ])
+            ->willReturn($siteImage);
 
         $media->getId()->willReturn($argumentsValues['mediaId']);
         $mediaRepository->find('image')->willReturn($media);
@@ -70,21 +81,32 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $siteImage->getMedia()->willReturn($media);
         $siteImage->getIsEnabled()->willReturn(true);
 
-        $toggleManager->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)->willReturn(true);
-        $toggleManager->set(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY, $shieldMode)->shouldBeCalled();
+        $toggleManager
+            ->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)
+            ->willReturn(true);
+        $toggleManager
+            ->set(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY, $shieldMode)
+            ->shouldBeCalled();
         $currentIntroductionParameter->setValue($introduction)->shouldBeCalled();
-        $currentIntroductionParameter->getKeyname()->willReturn(
-            UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY
-        );
+        $currentIntroductionParameter->mergeNewTranslations()->shouldBeCalled();
+        $currentIntroductionParameter
+            ->getKeyname()
+            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY);
 
-        $siteParameterRepository->findOneBy(
-            [
+        $siteParameterRepository
+            ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY,
-            ]
-        )->willReturn($currentIntroductionParameter);
+            ])
+            ->willReturn($currentIntroductionParameter);
         $em->flush()->shouldBeCalled();
 
-        $this->__invoke($arguments)->shouldBe(['shieldAdminForm' => compact('media', 'introduction', 'shieldMode')]);
+        $em->getRepository(Locale::class)->willReturn($localeRepository);
+        $localeRepository->findAll()->willReturn([$locale]);
+        $locale->getCode()->willReturn('fr_FR');
+
+        $this->__invoke($arguments)->shouldBe([
+            'shieldAdminForm' => compact('media', 'introduction', 'shieldMode'),
+        ]);
     }
 
     public function it_update_shield_image_disabled(
@@ -93,8 +115,10 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         MediaRepository $mediaRepository,
         SiteParameterRepository $siteParameterRepository,
+        LocaleRepository $localeRepository,
         Manager $toggleManager,
         SiteParameter $currentIntroductionParameter,
+        Locale $locale,
         Arg $arguments
     ): void {
         $argumentsValues = ['mediaId' => null, 'shieldMode' => true, 'introduction' => ''];
@@ -106,13 +130,15 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $shieldMode = true;
         $introduction = '';
         $siteImage->getIsEnabled()->willReturn(true);
-        $siteImage->getKeyname()->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY);
+        $siteImage
+            ->getKeyname()
+            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY);
 
-        $siteImageRepository->findOneBy(
-            [
+        $siteImageRepository
+            ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY,
-            ]
-        )->willReturn($siteImage);
+            ])
+            ->willReturn($siteImage);
         $media = null;
         $mediaRepository->find('image')->willReturn(null);
         $siteImage->setMedia($media)->shouldBeCalled();
@@ -120,20 +146,31 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $siteImage->getMedia()->willReturn($media);
         $siteImage->getIsEnabled()->willReturn(false);
 
-        $toggleManager->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)->willReturn(true);
-        $toggleManager->set(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY, $shieldMode)->shouldBeCalled();
+        $toggleManager
+            ->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)
+            ->willReturn(true);
+        $toggleManager
+            ->set(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY, $shieldMode)
+            ->shouldBeCalled();
         $currentIntroductionParameter->setValue($introduction)->shouldBeCalled();
-        $currentIntroductionParameter->getKeyname()->willReturn(
-            UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY
-        );
+        $currentIntroductionParameter->mergeNewTranslations()->shouldBeCalled();
+        $currentIntroductionParameter
+            ->getKeyname()
+            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY);
 
-        $siteParameterRepository->findOneBy(
-            [
+        $siteParameterRepository
+            ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY,
-            ]
-        )->willReturn($currentIntroductionParameter);
+            ])
+            ->willReturn($currentIntroductionParameter);
         $em->flush()->shouldBeCalled();
 
-        $this->__invoke($arguments)->shouldBe(['shieldAdminForm' => compact('media', 'introduction', 'shieldMode')]);
+        $em->getRepository(Locale::class)->willReturn($localeRepository);
+        $localeRepository->findAll()->willReturn([$locale]);
+        $locale->getCode()->willReturn('fr_FR');
+
+        $this->__invoke($arguments)->shouldBe([
+            'shieldAdminForm' => compact('media', 'introduction', 'shieldMode'),
+        ]);
     }
 }

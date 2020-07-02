@@ -2,9 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Twig\ParametersExtension;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -22,8 +25,10 @@ class UpdateShieldAdminFormMutation implements MutationInterface
     private $em;
     private $toggleManager;
     private $siteParameterRepository;
+    private RedisCache $cache;
 
     public function __construct(
+        RedisCache $cache,
         SiteImageRepository $siteImageRepository,
         EntityManagerInterface $em,
         MediaRepository $mediaRepository,
@@ -35,6 +40,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         $this->em = $em;
         $this->siteParameterRepository = $siteParameterRepository;
         $this->toggleManager = $toggleManager;
+        $this->cache = $cache;
     }
 
     public function __invoke(Argument $input): array
@@ -42,11 +48,11 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         list($mediaId, $shieldMode, $introduction) = [
             $input->offsetGet('mediaId'),
             $input->offsetGet('shieldMode'),
-            $input->offsetGet('introduction')
+            $input->offsetGet('introduction'),
         ];
 
         $siteImage = $this->siteImageRepository->findOneBy([
-            'keyname' => self::SHIELD_IMAGE_PARAMETER_KEY
+            'keyname' => self::SHIELD_IMAGE_PARAMETER_KEY,
         ]);
 
         if (!$siteImage) {
@@ -61,11 +67,21 @@ class UpdateShieldAdminFormMutation implements MutationInterface
             $this->toggleManager->set(self::SHIELD_MODE_TOGGLE_KEY, $shieldMode);
         }
 
-        $currentIntroductionParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => self::SHIELD_INTRODUCTION_PARAMETER_KEY
-        ]);
-        $currentIntroductionParameter->setValue($introduction);
+        if (
+            $currentIntroductionParameter = $this->siteParameterRepository->findOneBy([
+                'keyname' => self::SHIELD_INTRODUCTION_PARAMETER_KEY,
+            ])
+        ) {
+            $currentIntroductionParameter->setValue($introduction);
+            $currentIntroductionParameter->mergeNewTranslations();
+        }
+
         $this->em->flush();
+        $locales = $this->em->getRepository(Locale::class)->findAll();
+        /** @var Locale $locale */
+        foreach ($locales as $locale) {
+            $this->cache->deleteItem(ParametersExtension::CACHE_KEY . $locale->getCode());
+        }
 
         return ['shieldAdminForm' => compact('media', 'introduction', 'shieldMode')];
     }

@@ -748,7 +748,7 @@ InternalMutation:
                 builderConfig:
                     inputType: InternalUpdateShieldAdminFormInput
                     payloadType: InternalUpdateShieldAdminFormPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateShieldAdminFormMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateShieldAdminFormMutation", [value, serv("request_stack")])'
 
             # SSO Configuration
             createOauth2SSOConfiguration:
