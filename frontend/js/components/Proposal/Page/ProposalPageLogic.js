@@ -52,7 +52,8 @@ export const ProposalPageLogic = ({ query, features }: Props) => {
       proposal?.viewerCanAnalyse ||
       proposal?.viewerCanEvaluate ||
       proposal?.supervisor?.id === query?.viewer?.id) &&
-    features.unstable__analysis;
+    features.unstable__analysis &&
+    !!query?.viewer;
   const [show, setShow] = useState(isMobile && hasAnalysis);
   const [isAnalysing, setIsAnalysing] = useState(hasAnalysis);
   if (!proposal) return null;

@@ -330,3 +330,9 @@ Scenario: User wants to process a project proposal analysis immediately
   And I wait "#proposal_analysis_decision" to appear on current page
   And I wait ".proposal__last__news__title" to appear on current page
   Then I should see "Réponse officielle" in the ".proposal__last__news__title" element
+
+@database
+Scenario: Can not see the analysis panel when not logged in
+  Given feature "unstable__analysis" is enabled
+  And I go to "/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/test-de-publication-avec-accuse-de-reception"
+  Then I should not see "#proposal_analysis_panel"
