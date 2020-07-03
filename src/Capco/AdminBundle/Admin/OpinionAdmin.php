@@ -71,6 +71,7 @@ class OpinionAdmin extends CapcoAdmin
 
     public function getBatchActions()
     {
+        return [];
     }
 
     /**

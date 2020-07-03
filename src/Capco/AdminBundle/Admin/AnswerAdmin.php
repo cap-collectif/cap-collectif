@@ -10,16 +10,17 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 class AnswerAdmin extends CapcoAdmin
 {
     protected $formOptions = [
-        'cascade_validation' => true
+        'cascade_validation' => true,
     ];
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     ];
 
     public function getBatchActions()
     {
+        return [];
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -27,7 +28,7 @@ class AnswerAdmin extends CapcoAdmin
         $formMapper
             ->add('title', null, [
                 'label' => 'global.title',
-                'required' => false
+                'required' => false,
             ])
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
@@ -35,12 +36,12 @@ class AnswerAdmin extends CapcoAdmin
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
-                'required' => true
+                'required' => true,
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
-                'required' => true
+                'required' => true,
             ]);
     }
 

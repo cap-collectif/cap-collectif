@@ -7,7 +7,7 @@ use JMS\Serializer\Naming\PropertyNamingStrategyInterface;
 
 class IdenticalUnlessSpecifiedPropertyNamingStrategy implements PropertyNamingStrategyInterface
 {
-    public function translateName(PropertyMetadata $property)
+    public function translateName(PropertyMetadata $property): string
     {
         return $property->serializedName ?: $property->name;
     }

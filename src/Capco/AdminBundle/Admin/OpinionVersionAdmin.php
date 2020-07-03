@@ -35,6 +35,7 @@ class OpinionVersionAdmin extends AbstractAdmin
 
     public function getBatchActions()
     {
+        return [];
     }
 
     /**
