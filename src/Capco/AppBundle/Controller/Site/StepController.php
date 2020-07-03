@@ -33,8 +33,11 @@ class StepController extends Controller
     private SerializerInterface $serializer;
     private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(TranslatorInterface $translator, SerializerInterface $serializer, AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        SerializerInterface $serializer,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->translator = $translator;
         $this->serializer = $serializer;
         $this->authorizationChecker = $authorizationChecker;
@@ -233,7 +236,7 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $props = $th->serialize(
+        $props = $this->serializer->serialize(
             ['synthesis_id' => $step->getSynthesis()->getId(), 'mode' => 'view'],
             'json'
         );
@@ -299,13 +302,10 @@ class StepController extends Controller
                 $reply = $this->get(ReplyRepository::class)->find($decodedId);
             }
             if (!$viewer || !$decodedId || !$reply || !$reply->viewerCanSee($viewer)) {
-                return $this->redirectToRoute(
-                    'app_project_show_questionnaire',
-                    [
-                        'projectSlug' => $project->getSlug(),
-                        'stepSlug' => $step->getSlug(),
-                    ]
-                );
+                return $this->redirectToRoute('app_project_show_questionnaire', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                ]);
             }
         }
 
@@ -420,11 +420,7 @@ class StepController extends Controller
         ?Consultation $consultation = null
     ) {
         if (!$step->canDisplay($this->getUser())) {
-            $error = $this->translator->trans(
-                'project.error.not_found',
-                [],
-                'CapcoAppBundle'
-            );
+            $error = $this->translator->trans('project.error.not_found', [], 'CapcoAppBundle');
 
             throw new ProjectAccessDeniedException($error);
         }
@@ -432,13 +428,10 @@ class StepController extends Controller
         $isMultiConsultation = $step->isMultiConsultation();
 
         if (!$consultation && $isMultiConsultation) {
-            return $this->redirectToRoute(
-                'app_project_show_consultations',
-                [
-                    'stepSlug' => $step->getSlug(),
-                    'projectSlug' => $project->getSlug(),
-                ]
-            );
+            return $this->redirectToRoute('app_project_show_consultations', [
+                'stepSlug' => $step->getSlug(),
+                'projectSlug' => $project->getSlug(),
+            ]);
         }
 
         // To keep the same old URI to handle consultion show and supporting the new URI for showing a consultation
@@ -486,23 +479,16 @@ class StepController extends Controller
     public function showConsultationsAction(Project $project, ConsultationStep $step)
     {
         if (!$step->canDisplay($this->getUser())) {
-            $error = $this->translator->trans(
-                'project.error.not_found',
-                [],
-                'CapcoAppBundle'
-            );
+            $error = $this->translator->trans('project.error.not_found', [], 'CapcoAppBundle');
 
             throw new ProjectAccessDeniedException($error);
         }
 
         if (!$step->isMultiConsultation()) {
-            return $this->redirectToRoute(
-                'app_project_show_consultation',
-                [
-                    'stepSlug' => $step->getSlug(),
-                    'projectSlug' => $project->getSlug(),
-                ]
-            );
+            return $this->redirectToRoute('app_project_show_consultation', [
+                'stepSlug' => $step->getSlug(),
+                'projectSlug' => $project->getSlug(),
+            ]);
         }
 
         return [
