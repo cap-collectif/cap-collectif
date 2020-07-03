@@ -1,96 +1,104 @@
 Capco\AppBundle\Entity\Steps\ConsultationStep:
-  cstep1:
-    id: cstep1
-    title: Collecte des avis
-    label: Consultation
-    isEnabled: true
-    startAt: <identity((new \DateTime('2018-11-01')))>
-    endAt: <identity((new \DateTime('2032-11-01')))>
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    opinionCount: 0
-    votesCount: 10
-    requirementsReason: Vous devez avoir un numéro de téléphone.
-  cstep2:
-    id: cstep2
-    title: Collecte des avis pour une meilleur stratégie
-    label: Consultation
-    isEnabled: true
-    startAt: <(new \DateTime('2014-08-14'))>
-    endAt: <(new \DateTime('2014-09-27'))>
-    opinionCount: 0
-  cstep3:
-    id: cstep3
-    title: Ma futur collecte de proposition
-    label: Consultation
-    isEnabled: true
-    startAt: <(new \DateTime('2015-09-20'))>
-    endAt: <(new \DateTime('2015-10-20'))>
-    opinionCount: 0
-  cstep4:
-    id: cstep4
-    title: Projet
-    label: Consultation
-    isEnabled: true
-    startAt: <identity((new \DateTime('2018-11-02')))>
-    endAt: <identity((new \DateTime('2032-11-02')))>
-    opinionCount: 0
-  cstep5:
-    id: cstep5
-    title: Elaboration de la Loi
-    label: Consultation
-    isEnabled: true
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    startAt: <identity((new \DateTime('2018-11-03')))>
-    endAt: <identity((new \DateTime('2032-11-03')))>
-    opinionCount: 0
-  cstep6:
-    id: 'cstep6'
-    title: 'Étape participation continue'
-    label: Consultation
-    isEnabled: true
-    body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-    opinionCount: 0
-    timeless: true
-  cstep7:
-    id: 'cstep7'
-    title: 'Consultation step in private project (admin only)'
-    label: Consultation
-    isEnabled: true
-    body: Bonjour je suis une étape de consultation dans un projet réservé aux admins, ça va toi ?
-    opinionCount: 0
-    timeless: true
-  cstep8:
-    id: 'cstep8'
-    title: 'Consultation step in project with custom access (group 2, 3)'
-    label: Consultation
-    isEnabled: true
-    body: Bonjour je suis une étape de consultation dans un projet avec un accès custom (2, 3), bien ?
-    opinionCount: 1
-    timeless: true
-  multiCstep1:
-    id: 'multiCstep1'
-    title: 'Étape de multi-consultation'
-    label: Multi consultation
-    isEnabled: true
-    body: Je suis une belle étape de multi consultation, regardez comme je suis belle.
-    startAt: <identity((new \DateTime('2018-11-03')))>
-    endAt: <identity((new \DateTime('2032-11-03')))>
-  cstepOpinions:
-    id: 'cstepOpinions'
-    title: 'Consultation step in project with many opinions'
-    label: Consultation
-    isEnabled: true
-    body: Bonjour je suis une étape de consultation dans un projet avec pleins d'opinions
-    opinionCount: 20
-    timeless: true
-  cstepProjectWithLongName:
-      id: cstepProjectWithLongName
-      title: Collecte des avis avec projet au nom très long
-      label: Consultation
-      isEnabled: true
-      startAt: <identity((new \DateTime('2018-11-01')))>
-      endAt: <identity((new \DateTime('2032-11-01')))>
-      body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
-      opinionCount: 0
-      votesCount: 10
-      requirementsReason: Vous devez avoir un numéro de téléphone.
+    cstep1:
+        id: cstep1
+        title: Collecte des avis
+        label: Consultation
+        isEnabled: true
+        startAt: <identity((new \DateTime('2018-11-01')))>
+        endAt: <identity((new \DateTime('2032-11-01')))>
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        opinionCount: 0
+        votesCount: 10
+        requirementsReason: Vous devez avoir un numéro de téléphone.
+    cstep2:
+        id: cstep2
+        title: Collecte des avis pour une meilleur stratégie
+        label: Consultation
+        isEnabled: true
+        startAt: <(new \DateTime('2014-08-14'))>
+        endAt: <(new \DateTime('2014-09-27'))>
+        opinionCount: 0
+    cstep3:
+        id: cstep3
+        title: Ma futur collecte de proposition
+        label: Consultation
+        isEnabled: true
+        startAt: <(new \DateTime('2015-09-20'))>
+        endAt: <(new \DateTime('2015-10-20'))>
+        opinionCount: 0
+    cstep4:
+        id: cstep4
+        title: Projet
+        label: Consultation
+        isEnabled: true
+        startAt: <identity((new \DateTime('2018-11-02')))>
+        endAt: <identity((new \DateTime('2032-11-02')))>
+        opinionCount: 0
+    cstep5:
+        id: cstep5
+        title: Elaboration de la Loi
+        label: Consultation
+        isEnabled: true
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2018-11-03')))>
+        endAt: <identity((new \DateTime('2032-11-03')))>
+        opinionCount: 0
+    cstep6:
+        id: 'cstep6'
+        title: 'Étape participation continue'
+        label: Consultation
+        isEnabled: true
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        opinionCount: 0
+        timeless: true
+    cstep7:
+        id: 'cstep7'
+        title: 'Consultation step in private project (admin only)'
+        label: Consultation
+        isEnabled: true
+        body: Bonjour je suis une étape de consultation dans un projet réservé aux admins, ça va toi ?
+        opinionCount: 0
+        timeless: true
+    cstep8:
+        id: 'cstep8'
+        title: 'Consultation step in project with custom access (group 2, 3)'
+        label: Consultation
+        isEnabled: true
+        body: Bonjour je suis une étape de consultation dans un projet avec un accès custom (2, 3), bien ?
+        opinionCount: 1
+        timeless: true
+    multiCstep1:
+        id: 'multiCstep1'
+        title: 'Étape de multi-consultation'
+        label: Multi consultation
+        isEnabled: true
+        body: Je suis une belle étape de multi consultation, regardez comme je suis belle.
+        startAt: <identity((new \DateTime('2018-11-03')))>
+        endAt: <identity((new \DateTime('2032-11-03')))>
+    cstepOpinions:
+        id: 'cstepOpinions'
+        title: 'Consultation step in project with many opinions'
+        label: Consultation
+        isEnabled: true
+        body: Bonjour je suis une étape de consultation dans un projet avec pleins d'opinions
+        opinionCount: 20
+        timeless: true
+    cstepProjectWithLongName:
+        id: cstepProjectWithLongName
+        title: Collecte des avis avec projet au nom très long
+        label: Consultation
+        isEnabled: true
+        startAt: <identity((new \DateTime('2018-11-01')))>
+        endAt: <identity((new \DateTime('2032-11-01')))>
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
+        opinionCount: 0
+        votesCount: 10
+        requirementsReason: Vous devez avoir un numéro de téléphone.
+    multiCstepExport:
+        id: 'multiCstepExport'
+        title: 'Étape de multi-consultation export'
+        label: Multi consultation
+        isEnabled: true
+        body: Je suis une belle étape de multi consultation, regardez comme je suis belle.
+        startAt: <identity((new \DateTime('2019-11-03')))>
+        endAt: <identity((new \DateTime('2032-11-03')))>

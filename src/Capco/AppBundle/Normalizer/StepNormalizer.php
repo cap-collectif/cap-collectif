@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Normalizer;
 
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -31,8 +33,14 @@ class StepNormalizer implements
     {
         return $this->normalizer->normalize($object, $format, $context);
     }
+
     public function supportsNormalization($data, $format = null)
     {
+        // Exclude custom normalizers
+        if ($data instanceof CollectStep || $data instanceof SelectionStep) {
+            return false;
+        }
+
         return $data instanceof AbstractStep;
     }
 }

@@ -832,3 +832,27 @@ Capco\AppBundle\Entity\Proposal:
         # TODO: This district is not on the ProposalForm
         district: '@district2'
         category: '@pCategoryAssigned2'
+    proposal130:
+        id: 'proposal130'
+        title: 'Proposal 130'
+        body: Et si on gardait le TT à vie ?
+        author: '@userSpyl'
+        proposalForm: '@proposalformExport'
+        reference: '130'
+        district: '@districtIdf1'
+        publishedAt: <(new \DateTime('2020-07-01 00:00:10'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        category: '@pCategoryAssigned2'
+    proposal131:
+        id: 'proposal131'
+        title: 'Proposal 131'
+        body: Imagine un monde où tout le monde s'entreaide pour améliorer les exports
+        author: '@userJpec'
+        proposalForm: '@proposalformExport'
+        reference: '131'
+        district: '@districtIdf1'
+        publishedAt: <(new \DateTime('2020-07-01 00:00:10'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        category: '@pCategoryAssigned2'

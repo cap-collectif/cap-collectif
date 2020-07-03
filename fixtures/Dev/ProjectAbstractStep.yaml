@@ -329,3 +329,13 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectstepCorona'
         project: '@projectCorona'
         position: 1
+    pasExport:
+        id: pasExport
+        step: '@collectStepExport'
+        project: '@projectExport'
+        position: 1
+    pasExport2:
+        id: pasExport2
+        step: '@multiCstepExport'
+        project: '@projectExport'
+        position: 2

@@ -75,3 +75,13 @@ Capco\AppBundle\Entity\Consultation:
         id: anotherConsultationWithoutStep
         title: 'Another Consultation in project without step'
         position: 1
+    multiConsult1:
+        id: multiConsult1
+        title: 'Consultation in project with multi consult first part'
+        step: '@multiCstepExport'
+        position: 1
+    multiConsult2:
+        id: multiConsult2
+        title: 'Consultation in project with multi consult second part'
+        step: '@multiCstepExport'
+        position: 2

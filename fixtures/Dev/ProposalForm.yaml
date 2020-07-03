@@ -346,3 +346,13 @@ Capco\AppBundle\Entity\ProposalForm:
         descriptionMandatory: true
         usingIllustration: true
         canContact: true
+    proposalformExport:
+        id: proposalformExport
+        title: Appel à l'aide pour les exports
+        description: on désespère alors on rajoute des fixtures et tests
+        step: '@collectStepExport'
+        reference: 20
+        usingDescription: true
+        descriptionMandatory: true
+        usingIllustration: true
+        canContact: true

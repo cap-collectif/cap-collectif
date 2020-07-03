@@ -117,6 +117,9 @@ Scenario: GraphQL client wants to list sections
           "id": "opinionTypeFirstInFirstConsultationM"
         },
         {
+          "id": "opinionTypeFirstInMultiForExport"
+        },
+        {
           "id": "opinionTypeFirstInSecondConsultation"
         },
         {
@@ -127,6 +130,9 @@ Scenario: GraphQL client wants to list sections
         },
         {
           "id": "opinionTypeSecondInFirstConsultation"
+        },
+        {
+          "id": "opinionTypeSecondInMultiForExport"
         },
         {
           "id": "opinionTypeSecondInSecondConsultatio"
@@ -153,33 +159,36 @@ Scenario: GraphQL client wants to list sections by user
   Then the JSON response should match:
   """
   {
-   "data":{
-      "sections":[
-         {
-            "id":"opinionType6"
-         },
-         {
-            "id":"opinionTypeManyOptions"
-         },
-         {
-            "id":"opinionTypeFirstInFirstConsultationM"
-         },
-         {
-            "id":"opinionType5"
-         },
-         {
-            "id":"opinionType8"
-         },
-         {
-            "id":"opinionTypeSecondInFirstConsultation"
-         },
-         {
-            "id":"opinionType12"
-         },
-         {
-            "id":"opinionType10"
-         }
+    "data": {
+      "sections": [
+        {
+          "id": "opinionTypeFirstInMultiForExport"
+        },
+        {
+          "id": "opinionType6"
+        },
+        {
+          "id": "opinionTypeManyOptions"
+        },
+        {
+          "id": "opinionTypeFirstInFirstConsultationM"
+        },
+        {
+          "id": "opinionType5"
+        },
+        {
+          "id": "opinionType8"
+        },
+        {
+          "id": "opinionTypeSecondInFirstConsultation"
+        },
+        {
+          "id": "opinionType12"
+        },
+        {
+          "id": "opinionType10"
+        }
       ]
-   }
-}
+    }
+  }
   """

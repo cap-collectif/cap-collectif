@@ -197,10 +197,11 @@ EOF;
     }
 
     public function setAnalysisRows(
+        WriterInterface $writer,
         array $defaultRowContent,
         array $analyses,
         array $dynamicQuestionHeaderPart
-    ): Row {
+    ): void {
         foreach ($analyses as $analysis) {
             $dynamicRowContent = [];
             foreach (self::ANALYST_DEFAULT_HEADER as $headerKey => $headerPath) {
@@ -211,9 +212,10 @@ EOF;
                 $cellValue = $this->getRowCellValue($analysis, $headerPath);
                 $dynamicRowContent[] = $cellValue;
             }
-
-            return WriterEntityFactory::createRowFromArray(
-                array_merge($defaultRowContent, $dynamicRowContent)
+            $writer->addRow(
+                WriterEntityFactory::createRowFromArray(
+                    array_merge($defaultRowContent, $dynamicRowContent)
+                )
             );
         }
     }
@@ -228,8 +230,11 @@ EOF;
         return implode(', ', $authorUsernames);
     }
 
-    public function setDecisionRows(array $defaultRowContent, array $proposal): Row
-    {
+    public function setDecisionRows(
+        WriterInterface $writer,
+        array $defaultRowContent,
+        array $proposal
+    ): void {
         $dynamicRowContent = [];
         foreach (self::DECISION_DEFAULT_HEADER as $headerKey => $headerPath) {
             $cellValue = $this->getRowCellValue($proposal, $headerPath);
@@ -238,8 +243,10 @@ EOF;
                 : $cellValue;
         }
 
-        return WriterEntityFactory::createRowFromArray(
-            array_merge($defaultRowContent, $dynamicRowContent)
+        $writer->addRow(
+            WriterEntityFactory::createRowFromArray(
+                array_merge($defaultRowContent, $dynamicRowContent)
+            )
         );
     }
 
@@ -278,14 +285,16 @@ EOF;
                 $defaultRowContent[] = $cellValue;
             }
 
-            $row = $isOnlyDecision
-                ? $this->setDecisionRows($defaultRowContent, $proposal)
-                : $this->setAnalysisRows(
+            if ($isOnlyDecision) {
+                $this->setDecisionRows($writer, $defaultRowContent, $proposal);
+            } else {
+                $this->setAnalysisRows(
+                    $writer,
                     $defaultRowContent,
                     $proposal['analyses'],
                     $dynamicQuestionHeaderPart
                 );
-            $writer->addRow($row);
+            }
         }
         if (!$hasRow) {
             $output->writeln(
@@ -294,8 +303,9 @@ EOF;
         }
     }
 
-    public function writeHeader($writer, bool $isOnlyDecision, array $firstAnalysisStepForm): void
+    public function writeHeader($writer, bool $isOnlyDecision, array $firstAnalysisStepForm): array
     {
+        $dynamicQuestionHeaderPart = [];
         if (!$isOnlyDecision) {
             $dynamicQuestionHeaderPart = $this->getDynamicQuestionHeaderForProject(
                 $firstAnalysisStepForm
@@ -320,6 +330,8 @@ EOF;
                 )
             );
         }
+
+        return $dynamicQuestionHeaderPart;
     }
 
     public function generateProjectProposalsCSV(
@@ -357,8 +369,12 @@ EOF;
                 throw new \RuntimeException('Error while opening file: ' . $e->getMessage());
             }
 
-            $dynamicQuestionHeaderPart = [];
-            $this->writeHeader($writer, $isOnlyDecision, $firstAnalysisStep['form']);
+            $dynamicQuestionHeaderPart = $this->writeHeader(
+                $writer,
+                $isOnlyDecision,
+                $firstAnalysisStep['form']
+            );
+
             if (
                 isset($firstAnalysisStep['proposals']['edges']) &&
                 0 !== \count($firstAnalysisStep['proposals']['edges'])

@@ -147,6 +147,8 @@ Scenario: Admin wants to export consultation steps
   And exported "csv" file with name "participants_selection-avec-vote-simple.csv" should match its snapshot
   And exported "csv" file with name "participants_selection-avec-vote-budget-limite.csv" should match its snapshot
   And exported "csv" file with name "participants_selection-avec-vote-classement-limite.csv" should match its snapshot
+  And exported "csv" file with name "participants_etape-de-multi-consultation-export.csv" should match its snapshot
+  And exported "csv" file with name "participants_etape-de-depot-des-exports.csv" should match its snapshot
 
 Scenario: Admin wants to export events
   Given I run a command "capco:export:events" with parameters:

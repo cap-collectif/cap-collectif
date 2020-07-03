@@ -22,7 +22,7 @@ class ExportContext implements KernelAwareContext
     private $config = [
         'readerType' => Type::CSV,
         'delimiter' => ',',
-        'enclosure' => '"'
+        'enclosure' => '"',
     ];
 
     public function setKernel(KernelInterface $kernel): void
@@ -285,24 +285,24 @@ class ExportContext implements KernelAwareContext
             'header' => $expectedHeader,
             'lines' => array_map(function (Row $expectedLine) use ($expectedHeader) {
                 $result = [];
-                foreach ($expectedLine as $i => $csvField) {
-                    $result[$expectedHeader[$i]] = $csvField;
+                foreach ($expectedLine->getCells() as $i => $csvField) {
+                    $result[$expectedHeader[$i]] = $csvField->getValue();
                 }
 
                 return $result;
-            }, $expectedLines)
+            }, $expectedLines),
         ];
 
         $output['actual'] = [
             'header' => $actualHeader,
             'lines' => array_map(function (Row $actualLine) use ($actualHeader) {
                 $result = [];
-                foreach ($actualLine as $i => $field) {
-                    $result[$actualHeader[$i]] = $field;
+                foreach ($actualLine->getCells() as $i => $field) {
+                    $result[$actualHeader[$i]] = $field->getValue();
                 }
 
                 return $result;
-            }, $actualLines)
+            }, $actualLines),
         ];
 
         return $output;
