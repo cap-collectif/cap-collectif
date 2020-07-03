@@ -38,6 +38,7 @@ RUN set -x \
 ENV LANG C.UTF-8
 
 # Install php7
+RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \

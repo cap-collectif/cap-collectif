@@ -21,6 +21,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install php
+RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
