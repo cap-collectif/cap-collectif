@@ -13,7 +13,9 @@ def setup_env_vars():
     Set the correct values for the .env.local file
     """
     asset_host = 'assets.cap.co'
-    variables = """SYMFONY_DATABASE_HOST={host}
+    variables = """APP_ENV=dev
+SYMFONY_ENV=dev
+SYMFONY_DATABASE_HOST={host}
 SYMFONY_REDIS_HOST={host}
 SYMFONY_ELASTICSEARCH_HOST={host}
 SYMFONY_RABBITMQ_HOST={host}
