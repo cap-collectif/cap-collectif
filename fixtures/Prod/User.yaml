@@ -4,7 +4,7 @@ Capco\UserBundle\Entity\User:
     email: admin@cap-collectif.com
     enabled: true
     userType: '@UserType2'
-    plainPassword: ***REMOVED***
+    password: <('$2y$12$nKBg0YKe01L9njCWsGnjC.UCVn0damZCyMz1rKK7G5QynEVsc0ij.')> # ***REMOVED*** using bcrypt
     roles:
       - 'ROLE_SUPER_ADMIN'
     confirmationToken: ~

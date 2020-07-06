@@ -7,7 +7,7 @@ Capco\UserBundle\Entity\User:
         email: lbrunet@jolicode.com
         phone: '+3300000000'
         userType: '@UserType1'
-        plainPassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicLaurent'
@@ -22,7 +22,7 @@ Capco\UserBundle\Entity\User:
         lastname: Favot
         email: sfavot@jolicode.com
         userType: '@UserType1'
-        plainPassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicSfavot'
@@ -42,7 +42,7 @@ Capco\UserBundle\Entity\User:
         lastname: Lacot
         email: xlacot@jolicode.com
         userType: '@UserType1'
-        plainPassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicXavier'
@@ -56,7 +56,7 @@ Capco\UserBundle\Entity\User:
         lastname: authentifier
         email: admin@test.com
         userType: '@UserType1'
-        plainPassword: admin
+        password: <('$2y$12$D6LQy1KGI6fXReGEsAPDzucPbKfIwF77cht.K9diBzMK2mRMLsbf6')> # admin using bcrypt
         roles:
             - 'ROLE_ADMIN'
         vip: true
@@ -73,7 +73,7 @@ Capco\UserBundle\Entity\User:
         lastname: authentifier
         email: admin@cap-collectif.com
         userType: '@UserType1'
-        plainPassword: admin
+        password: <('$2y$12$D6LQy1KGI6fXReGEsAPDzucPbKfIwF77cht.K9diBzMK2mRMLsbf6')> # admin using bcrypt
         roles:
             - 'ROLE_ADMIN'
         vip: true
@@ -91,7 +91,7 @@ Capco\UserBundle\Entity\User:
         notificationsConfiguration: '@allDisabledUserNotifications'
         userType: '@UserType1'
         media: null
-        plainPassword: user
+        password: <('$2y$12$z.7JtnA7apFRuoXio/JWAO4fA6O99Ai6R3yBvSCbPz1lGJUI.GC4e')> # user using bcrypt
         dateOfBirth: <(new \DateTime('1996-03-01'))>
         address: '12 rue des boulets'
         address2: '2ieme etages'
@@ -115,7 +115,7 @@ Capco\UserBundle\Entity\User:
         lastname: lastname<current()>
         userType: '@UserType1'
         salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
-        password: <htmlentities('$2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe')>
+        password: <('$2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe')>
         roles:
             - 'ROLE_USER'
         enabled: true
@@ -128,7 +128,7 @@ Capco\UserBundle\Entity\User:
         lastname: David
         email: aurelien@cap-collectif.com
         userType: '@UserType1'
-        plainPassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicSpyl'
@@ -144,7 +144,7 @@ Capco\UserBundle\Entity\User:
         lastname: Santostefano
         email: msantostefano@jolicode.com
         userType: '@UserType1'
-        plainPassword: capco
+        password: <('2y$12$90Uq5U9wdcZmbmLuBWICZumatqul7mRuKMWcxAkVyBHHbtlwWplUu')> # capco using bcrypt
         roles:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicWelcomattic'
@@ -160,7 +160,7 @@ Capco\UserBundle\Entity\User:
         email: disabled@test.com
         enabled: false
         userType: '@UserType1'
-        plainPassword: disabled
+        password: <('$2y$12$ihSDoylObdT1ygvaqdNamOXoSHaaoO2TG3qNAhx.ogfr3Dsy2PPIC')> # disabled using bcrypt
         roles:
             - 'ROLE_USER'
         media: '@ProfilePicSfavot'
@@ -174,7 +174,7 @@ Capco\UserBundle\Entity\User:
         lastname: nom
         email: conseilregional@test.com
         userType: '@UserType1'
-        plainPassword: monsupermotdepassetropsafe
+        password: <('$2y$12$R8sdj7bs21FceQD/.aBH.eNa0xQiKINig3H2/5jvxBzLdoxzoepCK')> # monsupermotdepassetropsafe using bcrypt
         roles:
             - 'ROLE_USER'
         media: null
@@ -189,7 +189,7 @@ Capco\UserBundle\Entity\User:
         lastname: Tondereau
         email: pierre@cap-collectif.com
         userType: '@UserType1'
-        plainPassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_USER'
         media: '@ProfilePicKiroule'
@@ -205,7 +205,7 @@ Capco\UserBundle\Entity\User:
         lastname: user_not_confirmed
         email: user_not_confirmed@test.com
         userType: '@UserType1'
-        plainPassword: user_not_confirmed
+        password: <('$2y$12$9sasBDPn3iKt1YJMWiknl.i5seVfL0HU6I3YeouU3qS/W95wC4x4W')> # user_not_confirmed using bcrypt
         phone: '+33628353289'
         roles:
             - 'ROLE_USER'
@@ -221,7 +221,7 @@ Capco\UserBundle\Entity\User:
         lastname: user_not_confirmed_with_contributions
         email: user_not_confirmed_with_contributions@test.com
         userType: '@UserType1'
-        plainPassword: user_not_confirmed_with_contributions
+        password: <('$2y$12$VjCJZudlhfmOke2fXxveHOqJvpe4hnpDpfpASdnn8KYOYLv9zpT.m')> # user_not_confirmed_with_contributions using bcrypt
         roles:
             - 'ROLE_USER'
         media: null
@@ -236,7 +236,7 @@ Capco\UserBundle\Entity\User:
         lastname: user_without_phone
         email: user_without_phone@test.com
         userType: '@UserType1'
-        plainPassword: user_without_phone
+        password: <('$2y$12$6HcI2U0S.K3tURpL/o/CseHntHz7lo3/fycAX87YMBF9IOHNJ.08i')> # user_without_phone using bcrypt
         roles:
             - 'ROLE_USER'
         media: null
@@ -250,7 +250,7 @@ Capco\UserBundle\Entity\User:
         lastname: user_with_phone_not_phone_confirmed
         email: user_with_phone_not_phone_confirmed@test.com
         userType: '@UserType1'
-        plainPassword: user_with_phone_not_phone_confirmed
+        password: <('$2y$12$2Xl1UrESCHzxwFbSUDKIP.WE9WNh0jI0scSTJicXk1djklne7dXvu')> # user_with_phone_not_phone_confirmed using bcrypt
         roles:
             - 'ROLE_USER'
         media: null
@@ -265,7 +265,7 @@ Capco\UserBundle\Entity\User:
         lastname: user_with_code_not_phone_confirmed
         email: user_with_code_not_phone_confirmed@test.com
         userType: '@UserType1'
-        plainPassword: user_with_code_not_phone_confirmed
+        password: <('$2y$12$c2GhFHFAEbwqQpips9yaMeVwz8be0eool/XookQX8ID4joUrzJLpW')> # user_with_code_not_phone_confirmed using bcrypt
         roles:
             - 'ROLE_USER'
         media: null
@@ -312,7 +312,7 @@ Capco\UserBundle\Entity\User:
         lastname: AURIAU
         email: 'maxime.auriau@cap-collectif.com'
         userType: '@UserType1'
-        plainPassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicMaxiDev'
@@ -329,7 +329,7 @@ Capco\UserBundle\Entity\User:
         lastname: Bellenger
         email: pierre.bellenger@cap-collectif.com
         userType: '@UserType1'
-        plainPassword: azerty
+        password: <('$2y$12$IkSmRHAUE.HZ2diue2H59.OFuRnqChTmXoYFo5lJBcq79bqlIKR5i')> # azerty using bcrypt
         roles:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicBellenger'
@@ -348,7 +348,7 @@ Capco\UserBundle\Entity\User:
         slug: user518
         email: no_name@cap-collectif.com
         userType: '@UserType1'
-        plainPassword: no_name
+        password: <('$2y$12$52ZTfQwsjNqNW8s2SGSXHu45hoMQklCpNy9S0t3mLz9ETCi6g3.u2')> # no_name using bcrypt
         roles:
             - 'ROLE_USER'
         enabled: true
@@ -361,7 +361,7 @@ Capco\UserBundle\Entity\User:
         lastname: Treibert
         email: jean@cap-collectif.com
         userType: '@UserType1'
-        plainPassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicJean'
@@ -378,7 +378,7 @@ Capco\UserBundle\Entity\User:
         lastname: Dono
         email: saitama@cap-collectif.com
         userType: '@UserType1'
-        plainPassword: mob?
+        password: <('$2y$12$k0mSghLHJJpZ8lvalLboquw99QFSCNrK6xb/FhyDfF1tCC1HMJ7GO')> # mob? using bcrypt
         roles:
             - 'ROLE_USER'
         media: '@ProfilePicSfavot'
@@ -395,7 +395,7 @@ Capco\UserBundle\Entity\User:
         lastname: userToDelete
         email: userToDelete@cap-collectif.com
         userType: '@UserType1'
-        plainPassword: delete
+        password: <('2y$12$ddZQhizd0iR4qJcAhSJBn.YZZwmG5sQHTTHzi4sRqihPLi/0sLJ1S')> # delete using bcrypt
         roles:
             - 'ROLE_USER'
         biography: Supprime ma vie stp.
@@ -428,7 +428,7 @@ Capco\UserBundle\Entity\User:
         lastname: supervisor
         email: supervisor@cap-collectif.com
         userType: '@UserType1'
-        plainpassword: supervisor
+        password: <('$2y$12$7CeTK/imZZQtbi5FObZtX.jdLQnM4tFzlYcKqRQMAc3WcNX97sGxW')> # supervisor using bcrypt
         roles:
             - 'ROLE_USER'
         biography: Je super vise.
@@ -444,7 +444,7 @@ Capco\UserBundle\Entity\User:
         lastname: supervisor2
         email: supervisor2@cap-collectif.com
         userType: '@UserType1'
-        plainpassword: supervisor2
+        password: <('$2y$12$YK6cu6oAkDLG8DVMgt2VXOEOAJcgMw.u55abNJo4RpGCjwSSGRNFe')> # supervisor2 using bcrypt
         roles:
             - 'ROLE_USER'
         biography: Je super vise deux fois.
@@ -460,7 +460,7 @@ Capco\UserBundle\Entity\User:
         lastname: decisionmaker
         email: decisionmaker@cap-collectif.com
         userType: '@UserType1'
-        plainpassword: decisionmaker
+        password: <('$2y$12$fAyeqAKwYjS4AMwrDNpfkOlgUbKoQSDN3YhU3/kCH8.aIxVAqBP6K')> # decisionmaker using bcrypt
         roles:
             - 'ROLE_USER'
         biography: CÉ MOI QUI DÉCIDE.
@@ -476,7 +476,7 @@ Capco\UserBundle\Entity\User:
         lastname: analyst
         email: analyst@cap-collectif.com
         userType: '@UserType1'
-        plainpassword: analyst
+        password: <('$2y$12$c.Va/Qk5beca2BLpfwQ4j.k1lO6OvFlCyJCKINzMoKVMLDMcpV7La')> # analyst using bcrypt
         roles:
             - 'ROLE_USER'
         biography: Je suis l'analyste.
@@ -492,7 +492,7 @@ Capco\UserBundle\Entity\User:
         lastname: analyst2
         email: analyst2@cap-collectif.com
         userType: '@UserType1'
-        plainpassword: analyst2
+        password: <('$2y$12$RRkeOW70.7JHBgFNCMcrwOqN6VbzWahKwNwWfhknBCHTkz94uAeuC')> # analyst2 using bcrypt
         roles:
             - 'ROLE_USER'
         biography: Je suis l'analyste 2.
@@ -506,7 +506,7 @@ Capco\UserBundle\Entity\User:
         firstname: Julien
         lastname: AGUILAR
         email: julien.aguilar@cap-collectif.com
-        plainpassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         media: '@ProfilePicAgui'
         roles:
             - 'ROLE_USER'
@@ -520,7 +520,7 @@ Capco\UserBundle\Entity\User:
         lastname: DEPLAIS
         media: '@ProfilePicVincent'
         email: vincent@cap-collectif.com
-        plainpassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_USER'
         emailConfirmationSentAt: <(new \DateTime('2019-12-02 09:30:00'))>
@@ -532,7 +532,7 @@ Capco\UserBundle\Entity\User:
         firstname: Omar
         lastname: Jbara
         email: omar@cap-collectif.com
-        plainpassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         media: '@ProfilePicOmar'
         roles:
             - 'ROLE_USER'
@@ -545,7 +545,7 @@ Capco\UserBundle\Entity\User:
         firstname: Théo
         lastname: Bourgoin
         email: theo@cap-collectif.com
-        plainpassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         media: '@ProfilePicTheo'
         roles:
             - 'ROLE_USER'
@@ -558,7 +558,7 @@ Capco\UserBundle\Entity\User:
         firstname: Jean Paul
         lastname: Bella
         email: jpec@cap-collectif.com
-        plainpassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         media: '@ProfilePicJpec'
         roles:
             - 'ROLE_USER'
@@ -573,7 +573,7 @@ Capco\UserBundle\Entity\User:
         biography: "La raclette c'est bon."
         media: '@ProfilePicMickael'
         email: mickaelS@cap-collectif.com
-        plainpassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_USER'
         emailConfirmationSentAt: <(new \DateTime('2019-11-04 09:30:00'))>
@@ -585,7 +585,7 @@ Capco\UserBundle\Entity\User:
         firstname: Ian
         lastname: DUCROT--THOLLON-POMMEROL
         email: ian@cap-collectif.com
-        plainpassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         media: '@ProfilePicIan'
         roles:
             - 'ROLE_USER'
@@ -600,7 +600,7 @@ Capco\UserBundle\Entity\User:
         lastname: QA
         media: '@ProfilePicMaxQA'
         email: maxime.pouessel@cap-collectif.com
-        plainpassword: toto
+        password: <('$2y$12$NQ7QzVKqRkJDOIRCvfefPOyqRdy1ci97iEtUTka1IUgFmdIL/tr9e')> # toto using bcrypt
         roles:
             - 'ROLE_USER'
         emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
