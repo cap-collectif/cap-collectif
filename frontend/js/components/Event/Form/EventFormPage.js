@@ -244,7 +244,6 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
       props.currentLanguage,
     ),
   };
-
   const reviewInput =
     values.refusedReason !== 'NONE'
       ? {
@@ -254,36 +253,35 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
           refusedReason: values.refusedReason,
         }
       : { id: values.id, comment: values.comment, status: values.status };
-  if (
-    !isFrontendView &&
-    event?.review &&
-    (event?.review?.status !== values.status ||
-      event?.review?.comment !== values.comment ||
-      event?.review?.refusedReason !== values.refusedReason)
-  ) {
-    return ReviewEventMutation.commit({ input: reviewInput })
-      .then(reviewResponse => {
-        if (!reviewResponse.reviewEvent || !reviewResponse.reviewEvent.event) {
-          throw new Error('Mutation "ReviewEventMutation" failed.');
-        }
-      })
-      .catch(reviewResponse => {
-        if (reviewResponse.response.message) {
-          throw new SubmissionError({
-            _error: reviewResponse.response.message,
-          });
-        } else {
-          throw new SubmissionError({
-            _error: intl.formatMessage({ id: 'global.error.server.form' }),
-          });
-        }
-      });
-  }
-
   return ChangeEventMutation.commit({ input: updateInput })
     .then(response => {
       if (!response.changeEvent || !response.changeEvent.event) {
         throw new Error('Mutation "ChangeEventMutation" failed.');
+      }
+      if (
+        !isFrontendView &&
+        event?.review &&
+        (event?.review?.status !== values.status ||
+          event?.review?.comment !== values.comment ||
+          event?.review?.refusedReason !== values.refusedReason)
+      ) {
+        return ReviewEventMutation.commit({ input: reviewInput })
+          .then(reviewResponse => {
+            if (!reviewResponse.reviewEvent || !reviewResponse.reviewEvent.event) {
+              throw new Error('Mutation "ReviewEventMutation" failed.');
+            }
+          })
+          .catch(reviewResponse => {
+            if (reviewResponse.response.message) {
+              throw new SubmissionError({
+                _error: reviewResponse.response.message,
+              });
+            } else {
+              throw new SubmissionError({
+                _error: intl.formatMessage({ id: 'global.error.server.form' }),
+              });
+            }
+          });
       }
       if (isFrontendView) {
         return window.location.reload();
@@ -345,9 +343,7 @@ export class EventFormPage extends React.Component<Props, State> {
     }
     if (
       query.viewer.isSuperAdmin ||
-      ( event?.review?.status !== 'REFUSED' &&
-        event?.deletedAt === null &&
-        query.viewer.isAdmin)
+      (event?.review?.status !== 'REFUSED' && event?.deletedAt === null && query.viewer.isAdmin)
     ) {
       return (
         <SubmitButton
