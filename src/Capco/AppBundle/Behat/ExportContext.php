@@ -90,9 +90,6 @@ class ExportContext implements KernelAwareContext
 
     public function compareFileWithSnapshot(string $realPath, string $snapshotPath)
     {
-        Assert::assertFileExists($realPath);
-        Assert::assertFileExists($snapshotPath);
-
         $csvLines = $this->getFileLines($realPath);
         $csvHeader = array_shift($csvLines);
         $snapshotLines = $this->getFileLines($snapshotPath);
@@ -105,6 +102,7 @@ class ExportContext implements KernelAwareContext
             $csvLines
         );
         $this->compareOutput($output);
+        Assert::assertFileEquals($realPath, $snapshotPath);
     }
 
     /**

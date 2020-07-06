@@ -32,10 +32,13 @@ Scenario: Anonymous wants to register
   | username             | Naruto42             |
   | email                | naruto42@gmail.com   |
   | password             | narutoisThebest91    |
+  And I wait "#registration-form-responses0" to appear on current page
+  And I fill in the following:
   | responses[0].value   | plop                 |
   And I select "Sangohan" from react "#registration-form-responses2"
   And I check element "charte"
   And I press "global.register"
+  And I wait "#alert-email-not-confirmed" to appear on current page
   Then I can see I am logged in as "Naruto42"
   And I open mail with subject "email-subject-registration-confirmation"
   And I should see "user.register.confirmation_message.validate" in mail
