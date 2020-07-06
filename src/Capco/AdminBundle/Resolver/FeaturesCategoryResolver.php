@@ -15,14 +15,14 @@ class FeaturesCategoryResolver
             'conditions' => ['calendar'],
             'features' => [
                 UserRole::ROLE_SUPER_ADMIN => ['allow_users_to_propose_events'],
-                UserRole::ROLE_ADMIN => []
-            ]
+                UserRole::ROLE_ADMIN => [],
+            ],
         ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
         'pages.projects' => ['conditions' => [], 'features' => ['projects_form', 'project_trash']],
         'pages.registration' => [
             'conditions' => [],
-            'features' => ['user_type', 'zipcode_at_register']
+            'features' => ['user_type', 'zipcode_at_register'],
         ],
         'pages.members' => ['conditions' => ['members_list'], 'features' => []],
         'pages.login' => ['conditions' => [], 'features' => []],
@@ -58,9 +58,8 @@ class FeaturesCategoryResolver
                     'read_more',
                     'secure_password',
                     'restrict_connection',
-                    'login_franceconnect',
                     'public_api',
-                    'developer_documentation'
+                    'developer_documentation',
                 ],
                 UserRole::ROLE_SUPER_ADMIN => [
                     'disconnect_openid',
@@ -77,15 +76,16 @@ class FeaturesCategoryResolver
                     'login_openid',
                     'login_saml',
                     'login_paris',
+                    'login_franceconnect',
                     'unstable__admin_editor',
                     'unstable__analysis',
                     'report_browers_errors_to_sentry',
                     'http_redirects',
-                ]
-            ]
+                ],
+            ],
         ],
         'settings.notifications' => ['conditions' => [], 'features' => []],
-        'settings.appearance' => ['conditions' => [], 'features' => []]
+        'settings.appearance' => ['conditions' => [], 'features' => []],
     ];
 
     protected $manager;
@@ -131,7 +131,7 @@ class FeaturesCategoryResolver
                     foreach ($features as $feature) {
                         $toggles[$feature] = [
                             'active' => $this->manager->isActive($feature),
-                            'access' => $access
+                            'access' => $access,
                         ];
                     }
                 }
@@ -140,7 +140,7 @@ class FeaturesCategoryResolver
             foreach (self::$categories[$category]['features'] as $feature) {
                 if ($this->authorizationChecker->isGranted(UserRole::ROLE_ADMIN)) {
                     $toggles[$feature] = [
-                        'active' => $this->manager->isActive($feature)
+                        'active' => $this->manager->isActive($feature),
                     ];
                 }
             }
