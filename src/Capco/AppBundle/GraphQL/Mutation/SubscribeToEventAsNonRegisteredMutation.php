@@ -54,7 +54,8 @@ class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
             ->setUsername($username)
             ->setPrivate($isPrivate)
             ->setIpAddress($request ? $request->getClientIp() : null)
-            ->setEmail($email);
+            ->setEmail($email)
+            ->setConfirmed(true);
 
         $this->entityManager->persist($eventRegistration);
         $this->entityManager->flush();

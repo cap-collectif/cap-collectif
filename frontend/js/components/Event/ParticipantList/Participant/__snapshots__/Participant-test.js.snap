@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Participant /> should render correctly 1`] = `
+<Participantstyle__Container>
+  <Relay(Connect(UserAvatar))
+    user={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "username": "Username test",
+      }
+    }
+  />
+  <Participantstyle__UserInfo>
+    <span>
+      Username test
+    </span>
+  </Participantstyle__UserInfo>
+</Participantstyle__Container>
+`;
+
+exports[`<Participant /> should render correctly when registeredAnonymously 1`] = `
+<Participantstyle__Container>
+  <Relay(Connect(UserAvatar))
+    needDefaultAvatar={true}
+    user={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "username": "Username test",
+      }
+    }
+  />
+  <Participantstyle__UserInfo>
+    <FormattedMessage
+      id="global.anonymous"
+      values={Object {}}
+    />
+  </Participantstyle__UserInfo>
+</Participantstyle__Container>
+`;

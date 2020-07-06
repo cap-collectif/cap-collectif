@@ -64,3 +64,20 @@ exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
   />
 </UserAvatar__UserAvatarContainer>
 `;
+
+exports[`<UserAvatar /> renders correctly with default avatar needed 1`] = `
+<UserAvatar__UserAvatarContainer
+  className="mr-10"
+  hasBadge={false}
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+  style={Object {}}
+>
+  <DefaultAvatar
+    className="img-circle avatar user-avatar mr-10 mr-10"
+    size={16}
+  />
+</UserAvatar__UserAvatarContainer>
+`;

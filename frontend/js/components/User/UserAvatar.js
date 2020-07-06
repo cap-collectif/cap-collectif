@@ -31,6 +31,7 @@ type Props = {|
   onMouseOut?: () => void,
   onClick?: () => void,
   badge?: Badge,
+  needDefaultAvatar?: boolean
 |};
 
 const commonStyleAvatar = hasBadge => css`
@@ -77,10 +78,10 @@ export class UserAvatar extends React.Component<Props> {
   };
 
   renderAvatar() {
-    const { user, defaultAvatar, size, className } = this.props;
+    const { user, defaultAvatar, size, className, needDefaultAvatar } = this.props;
     const mediaSize = size && `${size}px`;
 
-    if (user && user.media) {
+    if (user && user.media && !needDefaultAvatar) {
       return (
         <img
           src={user.media.url}

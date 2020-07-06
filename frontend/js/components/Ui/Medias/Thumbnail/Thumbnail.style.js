@@ -5,7 +5,9 @@ export const Container: StyledComponent<
   { image?: string, width?: string, height?: string },
   {},
   HTMLDivElement,
-> = styled.div`
+> = styled.div.attrs({
+  className: 'thumbnail-container',
+})`
   position: relative;
   display: flex;
   align-items: center;
@@ -19,5 +21,6 @@ export const Container: StyledComponent<
       background-image: url(${props.image});
       background-repeat: no-repeat;
       background-size: cover;
+      background-position: center;
     `}
 `;

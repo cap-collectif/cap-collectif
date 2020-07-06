@@ -11,7 +11,6 @@ import TagCity from '~/components/Tag/TagCity/TagCity';
 import TagThemes from '~/components/Tag/TagThemes/TagThemes';
 import EventImage from '~/components/Event/EventImage/EventImage';
 import EventPreviewContainer, {
-  EventLabelStatusContainer,
   HeadContent,
   Content,
   TagsList,
@@ -119,9 +118,7 @@ export const EventPreview = ({
 
               {displayReview && (
                 <li>
-                  <EventLabelStatusContainer>
-                    <EventLabelStatus event={event} />
-                  </EventLabelStatusContainer>
+                  <EventLabelStatus event={event} />
                 </li>
               )}
             </InlineList>

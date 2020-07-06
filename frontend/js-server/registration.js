@@ -62,10 +62,9 @@ import EventFormPageApp from '../js/startup/EventFormPageApp';
 import AccordionApp from '../js/startup/AccordionApp';
 import AdminRightNavbarApp from '../js/startup/AdminRightNavbarApp';
 import FooterApp from '../js/startup/FooterApp';
-import EventPageHeaderButtonsApp from '../js/startup/EventPageHeaderButtonsApp';
 import CalendarApp from '../js/startup/CalendarApp';
 import EngagementListApp from '../js/startup/EngagementListApp';
-import LanguageButtonApp from "~/startup/LanguageButtonApp";
+import LanguageButtonApp from '~/startup/LanguageButtonApp';
 
 const emptyFunction = () => {};
 
@@ -135,7 +134,6 @@ ReactOnRails.register({
   AccordionApp,
   AdminRightNavbarApp,
   FooterApp,
-  EventPageHeaderButtonsApp,
   CalendarApp,
   EngagementListApp,
   LanguageButtonApp,

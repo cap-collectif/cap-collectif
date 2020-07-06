@@ -86,3 +86,7 @@ InternalEvent:
                 type: 'Boolean!'
                 description: 'Show if user is already participating at event'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\IsViewerParticipatingAtEventResolver", [value, getUser()])'
+            isRegistrationPossible:
+                type: 'Boolean'
+                description: 'Show if registration is enabled'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsRegistrationPossibleResolver", [value])'

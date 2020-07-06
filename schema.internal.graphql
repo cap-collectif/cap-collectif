@@ -3086,6 +3086,9 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """Show if user is already participating at event"""
   isViewerParticipatingAtEvent: Boolean!
+
+  """Show if registration is enabled"""
+  isRegistrationPossible: Boolean
 }
 
 """A connection to a list of items."""

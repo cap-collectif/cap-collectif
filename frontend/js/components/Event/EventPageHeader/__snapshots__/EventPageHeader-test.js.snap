@@ -1,0 +1,586 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventPageHeader /> should render correctly 1`] = `
+<EventPageHeaderstyle__Container>
+  <div>
+    <EventPageHeaderstyle__TitleContainer>
+      <Icon
+        color="#007bff"
+        name="eventPhysical"
+        size={30}
+      />
+      <h1>
+        Ceci est un titre
+      </h1>
+    </EventPageHeaderstyle__TitleContainer>
+    <EventPageHeaderstyle__InfoContainer>
+      <Relay(Connect(UserAvatar))
+        size={60}
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "url": "https://monurl.fr",
+            "username": "Jean Necrideteste",
+          }
+        }
+      />
+      <div>
+        <EventPageHeaderstyle__UsernameContainer>
+          <span
+            className="username"
+          >
+            author.username
+          </span>
+        </EventPageHeaderstyle__UsernameContainer>
+        <EventPageHeaderstyle__TagsList>
+          <Tag
+            CustomImage={
+              <Icon
+                color="#707070"
+                name="clock"
+                size={22}
+              />
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="date.start.to.date.end"
+              values={
+                Object {
+                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
+                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                }
+              }
+            />
+          </Tag>
+          <TagThemes
+            size="16px"
+            themes={
+              Array [
+                Object {
+                  "title": "Big party",
+                },
+                Object {
+                  "title": "Private party",
+                },
+              ]
+            }
+          />
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="pin2"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            12 rue des pissenlits - 75002 Paris, France
+          </Tag>
+        </EventPageHeaderstyle__TagsList>
+      </div>
+    </EventPageHeaderstyle__InfoContainer>
+    <EventPageHeaderstyle__InfoLineContainer>
+      <div>
+        <span
+          className="number"
+        >
+          12
+        </span>
+        <FormattedMessage
+          id="comment.dynamic"
+          values={
+            Object {
+              "num": 12,
+            }
+          }
+        />
+      </div>
+      <div>
+        <span
+          className="number"
+        >
+          1
+        </span>
+        <FormattedMessage
+          id="registered.dynamic"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </div>
+    </EventPageHeaderstyle__InfoLineContainer>
+  </div>
+</EventPageHeaderstyle__Container>
+`;
+
+exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] = `
+<EventPageHeaderstyle__Container>
+  <div>
+    <EventPageHeaderstyle__TitleContainer>
+      <Icon
+        color="#007bff"
+        name="eventPhysical"
+        size={30}
+      />
+      <h1>
+        Ceci est un titre
+      </h1>
+    </EventPageHeaderstyle__TitleContainer>
+    <EventPageHeaderstyle__InfoContainer>
+      <Relay(Connect(UserAvatar))
+        size={60}
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "url": "https://monurl.fr",
+            "username": "Jean Necrideteste",
+          }
+        }
+      />
+      <div>
+        <EventPageHeaderstyle__UsernameContainer>
+          <span
+            className="username"
+          >
+            author.username
+          </span>
+        </EventPageHeaderstyle__UsernameContainer>
+        <EventPageHeaderstyle__TagsList>
+          <Tag
+            CustomImage={
+              <Icon
+                color="#707070"
+                name="clock"
+                size={22}
+              />
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="date.start.to.date.end"
+              values={
+                Object {
+                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
+                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                }
+              }
+            />
+          </Tag>
+          <TagThemes
+            size="16px"
+            themes={
+              Array [
+                Object {
+                  "title": "Big party",
+                },
+                Object {
+                  "title": "Private party",
+                },
+              ]
+            }
+          />
+        </EventPageHeaderstyle__TagsList>
+      </div>
+    </EventPageHeaderstyle__InfoContainer>
+    <EventPageHeaderstyle__InfoLineContainer>
+      <div>
+        <span
+          className="number"
+        >
+          12
+        </span>
+        <FormattedMessage
+          id="comment.dynamic"
+          values={
+            Object {
+              "num": 12,
+            }
+          }
+        />
+      </div>
+      <div>
+        <span
+          className="number"
+        >
+          1
+        </span>
+        <FormattedMessage
+          id="registered.dynamic"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </div>
+    </EventPageHeaderstyle__InfoLineContainer>
+  </div>
+</EventPageHeaderstyle__Container>
+`;
+
+exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
+<EventPageHeaderstyle__Container>
+  <div>
+    <EventPageHeaderstyle__TitleContainer>
+      <Icon
+        color="#007bff"
+        name="eventPhysical"
+        size={30}
+      />
+      <h1>
+        Ceci est un titre
+      </h1>
+    </EventPageHeaderstyle__TitleContainer>
+    <EventPageHeaderstyle__InfoContainer>
+      <Relay(Connect(UserAvatar))
+        size={60}
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "url": "https://monurl.fr",
+            "username": "Jean Necrideteste",
+          }
+        }
+      />
+      <div>
+        <EventPageHeaderstyle__UsernameContainer>
+          <span
+            className="username"
+          >
+            author.username
+          </span>
+        </EventPageHeaderstyle__UsernameContainer>
+        <EventPageHeaderstyle__TagsList>
+          <Tag
+            CustomImage={
+              <Icon
+                color="#707070"
+                name="clock"
+                size={22}
+              />
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="date.start.to.date.end"
+              values={
+                Object {
+                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
+                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                }
+              }
+            />
+          </Tag>
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="pin2"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            12 rue des pissenlits - 75002 Paris, France
+          </Tag>
+        </EventPageHeaderstyle__TagsList>
+      </div>
+    </EventPageHeaderstyle__InfoContainer>
+    <EventPageHeaderstyle__InfoLineContainer>
+      <div>
+        <span
+          className="number"
+        >
+          12
+        </span>
+        <FormattedMessage
+          id="comment.dynamic"
+          values={
+            Object {
+              "num": 12,
+            }
+          }
+        />
+      </div>
+      <div>
+        <span
+          className="number"
+        >
+          1
+        </span>
+        <FormattedMessage
+          id="registered.dynamic"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </div>
+    </EventPageHeaderstyle__InfoLineContainer>
+  </div>
+</EventPageHeaderstyle__Container>
+`;
+
+exports[`<EventPageHeader /> should render correctly when type online 1`] = `
+<EventPageHeaderstyle__Container>
+  <div>
+    <EventPageHeaderstyle__TitleContainer>
+      <Icon
+        color="#007bff"
+        name="eventOnline"
+        size={30}
+      />
+      <h1>
+        Ceci est un titre
+      </h1>
+    </EventPageHeaderstyle__TitleContainer>
+    <EventPageHeaderstyle__InfoContainer>
+      <Relay(Connect(UserAvatar))
+        size={60}
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "url": "https://monurl.fr",
+            "username": "Jean Necrideteste",
+          }
+        }
+      />
+      <div>
+        <EventPageHeaderstyle__UsernameContainer>
+          <span
+            className="username"
+          >
+            author.username
+          </span>
+        </EventPageHeaderstyle__UsernameContainer>
+        <EventPageHeaderstyle__TagsList>
+          <Tag
+            CustomImage={
+              <Icon
+                color="#707070"
+                name="clock"
+                size={22}
+              />
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="date.start.to.date.end"
+              values={
+                Object {
+                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
+                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                }
+              }
+            />
+          </Tag>
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="calendar"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            <Component />
+          </Tag>
+          <TagThemes
+            size="16px"
+            themes={
+              Array [
+                Object {
+                  "title": "Big party",
+                },
+                Object {
+                  "title": "Private party",
+                },
+              ]
+            }
+          />
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="pin2"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            12 rue des pissenlits - 75002 Paris, France
+          </Tag>
+        </EventPageHeaderstyle__TagsList>
+      </div>
+    </EventPageHeaderstyle__InfoContainer>
+    <EventPageHeaderstyle__InfoLineContainer>
+      <div>
+        <span
+          className="number"
+        >
+          12
+        </span>
+        <FormattedMessage
+          id="comment.dynamic"
+          values={
+            Object {
+              "num": 12,
+            }
+          }
+        />
+      </div>
+      <div>
+        <span
+          className="number"
+        >
+          1
+        </span>
+        <FormattedMessage
+          id="registered.dynamic"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </div>
+    </EventPageHeaderstyle__InfoLineContainer>
+  </div>
+</EventPageHeaderstyle__Container>
+`;
+
+exports[`<EventPageHeader /> should render correctly when viewer is author 1`] = `
+<EventPageHeaderstyle__Container>
+  <div>
+    <EventPageHeaderstyle__TitleContainer>
+      <Icon
+        color="#007bff"
+        name="eventPhysical"
+        size={30}
+      />
+      <h1>
+        Ceci est un titre
+      </h1>
+    </EventPageHeaderstyle__TitleContainer>
+    <EventPageHeaderstyle__InfoContainer>
+      <Relay(Connect(UserAvatar))
+        size={60}
+        user={
+          Object {
+            "$fragmentRefs": null,
+            "url": "https://monurl.fr",
+            "username": "Jean Necrideteste",
+          }
+        }
+      />
+      <div>
+        <EventPageHeaderstyle__UsernameContainer>
+          <a
+            className="username"
+            href="https://monurl.fr"
+          >
+            Jean Necrideteste
+          </a>
+        </EventPageHeaderstyle__UsernameContainer>
+        <EventPageHeaderstyle__TagsList>
+          <Tag
+            CustomImage={
+              <Icon
+                color="#707070"
+                name="clock"
+                size={22}
+              />
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="date.start.to.date.end"
+              values={
+                Object {
+                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
+                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                }
+              }
+            />
+          </Tag>
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="pin2"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            12 rue des pissenlits - 75002 Paris, France
+          </Tag>
+        </EventPageHeaderstyle__TagsList>
+      </div>
+    </EventPageHeaderstyle__InfoContainer>
+    <EventPageHeaderstyle__InfoLineContainer>
+      <div>
+        <span
+          className="number"
+        >
+          12
+        </span>
+        <FormattedMessage
+          id="comment.dynamic"
+          values={
+            Object {
+              "num": 12,
+            }
+          }
+        />
+      </div>
+      <div>
+        <span
+          className="number"
+        >
+          1
+        </span>
+        <FormattedMessage
+          id="registered.dynamic"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </div>
+    </EventPageHeaderstyle__InfoLineContainer>
+  </div>
+</EventPageHeaderstyle__Container>
+`;

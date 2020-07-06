@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserRegister /> should render correctly 1`] = `
+<UserRegisterstyle__Container>
+  <div>
+    <Relay(Connect(UserAvatar))
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "username": "Username test",
+        }
+      }
+    />
+     
+    Username test
+  </div>
+  <UserRegisterstyle__ButtonUnsubscribe
+    onClick={[Function]}
+    type="button"
+  >
+    <FormattedMessage
+      id="event_registration.unsubscribe"
+      values={Object {}}
+    />
+  </UserRegisterstyle__ButtonUnsubscribe>
+</UserRegisterstyle__Container>
+`;

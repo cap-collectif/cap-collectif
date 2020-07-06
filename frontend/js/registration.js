@@ -69,6 +69,7 @@ import QuestionnaireCreateButtonApp from './startup/QuestionnaireCreateButtonApp
 import ArgumentListApp from './startup/ArgumentListApp';
 import VoteListApp from './startup/VoteListApp';
 import EventApp from './startup/EventApp';
+import EventPageApp from './startup/EventPageApp';
 import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
 import ProjectAdminApp from './startup/ProjectAdminApp';
 import ProjectAdminAppDeprecated from './startup/ProjectAdminAppDeprecated';
@@ -103,7 +104,6 @@ import ProjectExternalProjectAdminAppDeprecated from './startup/ProjectExternalP
 import AdminRightNavbarApp from './startup/AdminRightNavbarApp';
 import FooterApp from './startup/FooterApp';
 import FontAdminPageApp from './startup/FontAdminPageApp';
-import EventPageHeaderButtonsApp from './startup/EventPageHeaderButtonsApp';
 import CalendarApp from './startup/CalendarApp';
 import EngagementListApp from './startup/EngagementListApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
@@ -190,6 +190,7 @@ ReactOnRails.register({
   ArgumentListApp,
   VoteListApp,
   EventApp,
+  EventPageApp,
   ProjectAdminApp,
   ProjectAdminAppDeprecated,
   ProjectDistrictAdminApp,
@@ -214,7 +215,6 @@ ReactOnRails.register({
   AdminRightNavbarApp,
   FooterApp,
   FontAdminPageApp,
-  EventPageHeaderButtonsApp,
   CalendarApp,
   EngagementListApp,
   RedirectIoAdminPageApp,

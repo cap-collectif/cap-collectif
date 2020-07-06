@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Fixed /> should render correctly 1`] = `
+<Fixedstyle__Container
+  position={
+    Object {
+      "left": "50px",
+      "top": "50px",
+    }
+  }
+  width="auto"
+>
+  <p>
+    Test
+  </p>
+</Fixedstyle__Container>
+`;

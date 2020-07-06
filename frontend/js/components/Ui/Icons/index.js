@@ -65,3 +65,6 @@ export { default as EventPhysical } from './svg/event-physical.svg';
 export { default as Camera } from './svg/camera.svg';
 export { default as Step } from './svg/step.svg';
 export { default as User } from './svg/user.svg';
+export { default as Play } from './svg/play.svg';
+export { default as UserLive } from './svg/user-live.svg';
+export { default as Join } from './svg/join.svg';

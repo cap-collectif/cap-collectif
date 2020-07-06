@@ -55,4 +55,23 @@ describe('<UserAvatar />', () => {
     const wrapper = shallow(<UserAvatar {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly with default avatar needed', () => {
+    const props = {
+      features,
+      user: {
+        $refType,
+        username: 'toto',
+        media: {
+          url: 'http://media12/profileAvatar.jpg',
+        },
+        url: '',
+      },
+      size: 16,
+      className: 'mr-10',
+      needDefaultAvatar: true,
+    };
+    const wrapper = shallow(<UserAvatar {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

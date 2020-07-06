@@ -58,7 +58,8 @@ class SubscribeToEventAsRegisteredMutation implements MutationInterface
             ->setUser($viewer)
             ->setUsername($username)
             ->setIpAddress($request ? $request->getClientIp() : null)
-            ->setEmail($email);
+            ->setEmail($email)
+            ->setConfirmed(true);
 
         $this->entityManager->persist($eventRegistration);
         $this->entityManager->flush();

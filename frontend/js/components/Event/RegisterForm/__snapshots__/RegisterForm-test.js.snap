@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegisterForm /> should render correctly 1`] = `
+<RegisterFormstyle__FormContainer
+  id="RegisterFormEvent"
+  onSubmit={[MockFunction]}
+>
+  <RegisterFormstyle__UserInfo>
+    <Relay(Connect(UserAvatar))
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "username": "Username test",
+        }
+      }
+    />
+     
+    Username test
+  </RegisterFormstyle__UserInfo>
+  <div>
+    <Field
+      component={[Function]}
+      id="private"
+      name="private"
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="make-my-registration-anonymous"
+        values={Object {}}
+      />
+    </Field>
+    <Field
+      component={[Function]}
+      id="privacyPolicy"
+      name="privacyPolicy"
+      type="checkbox"
+    >
+      <FormattedHTMLMessage
+        id="privacy-policy-accepted-2"
+        tagName="span"
+        values={Object {}}
+      />
+    </Field>
+  </div>
+  <Connect(SubmitButton)
+    bsStyle="success"
+    disabled={true}
+    label="event_registration.create.register"
+    onSubmit={[Function]}
+  />
+</RegisterFormstyle__FormContainer>
+`;
+
+exports[`<RegisterForm /> should render correctly when no user 1`] = `
+<RegisterFormstyle__FormContainer
+  id="RegisterFormEvent"
+  onSubmit={[MockFunction]}
+>
+  <Field
+    component={[Function]}
+    id="username"
+    label={
+      <FormattedMessage
+        id="global.name"
+        values={Object {}}
+      />
+    }
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="email"
+    label={
+      <FormattedMessage
+        id="global.email"
+        values={Object {}}
+      />
+    }
+    name="email"
+    type="text"
+  />
+  <div>
+    <Field
+      component={[Function]}
+      id="private"
+      name="private"
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="make-my-registration-anonymous"
+        values={Object {}}
+      />
+    </Field>
+    <Field
+      component={[Function]}
+      id="privacyPolicy"
+      name="privacyPolicy"
+      type="checkbox"
+    >
+      <FormattedHTMLMessage
+        id="privacy-policy-accepted-2"
+        tagName="span"
+        values={Object {}}
+      />
+    </Field>
+  </div>
+  <Connect(SubmitButton)
+    bsStyle="success"
+    disabled={true}
+    label="event_registration.create.register"
+    onSubmit={[Function]}
+  />
+</RegisterFormstyle__FormContainer>
+`;

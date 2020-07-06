@@ -44,7 +44,7 @@ Scenario: Logged in admin wants to add a new event
   And I wait 1 seconds
   Then I visited eventpage with:
     | slug | test |
-  And I should see "samedi 17 ao\u00fbt 2030"
+  And I should see "août 17 2030, 12:13:14 pm"
 
 @database
 Scenario: Logged in admin wants to edit an event

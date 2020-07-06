@@ -72,6 +72,9 @@ export const ICON_NAME: {
   camera: 'camera',
   step: 'step',
   user: 'user',
+  play: 'play',
+  userLive: 'userLive',
+  join: 'join',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -141,6 +144,9 @@ export const ICON_NAME: {
   camera: 'camera',
   step: 'step',
   user: 'user',
+  play: 'play',
+  userLive: 'userLive',
+  join: 'join',
 };
 
 type Props = {|
@@ -291,6 +297,12 @@ const getIcon = name => {
       return <Icons.Step />;
     case 'user':
       return <Icons.User />;
+    case 'play':
+      return <Icons.Play />;
+    case 'userLive':
+      return <Icons.UserLive />;
+    case 'join':
+      return <Icons.Join />;
     default:
       return <div />;
   }

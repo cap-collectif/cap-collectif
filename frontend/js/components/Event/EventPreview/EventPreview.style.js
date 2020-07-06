@@ -79,15 +79,15 @@ const EventPreviewContainer: StyledComponent<
   }
 `;
 
-export const EventLabelStatusContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  margin-bottom: 10px;
-`;
-
 export const HeadContent: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
+  
+  .inline-list {
+    margin: 0;
+  }
 `;
 
 export const Content: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -122,9 +122,7 @@ export const TagsList: StyledComponent<{ vertical?: boolean }, {}, HTMLDivElemen
   }
 `;
 
-export const TitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
-  className: 'title-container',
-})`
+export const TitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -133,6 +131,7 @@ export const TitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
 
   .icon {
     margin-right: 5px;
+    margin-top: 2px;
   }
 
   h3 {

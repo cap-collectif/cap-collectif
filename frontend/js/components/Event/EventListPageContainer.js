@@ -38,7 +38,7 @@ const EventFiltersContainer: StyledComponent<{}, {}, typeof ColorBox> = styled(C
 const AwaitingEventsPanel: StyledComponent<{}, {}, typeof Panel> = styled(Panel)`
   margin-top: 15px;
   margin-bottom: 0 !important;
-  div:last-child {
+  & > div:last-child {
     border-radius: 0 !important;
   }
 `;
