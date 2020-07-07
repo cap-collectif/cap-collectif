@@ -3,12 +3,13 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Writer\Common\Creator;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
@@ -23,104 +24,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-const USER_FRAGMENT = '
-    id
-    email
-    username
-    userType {
-      name
-    }
-    createdAt
-    updatedAt
-    lastLogin
-    rolesText
-    consentExternalCommunication
-    enabled
-    isEmailConfirmed
-    locked
-    phoneConfirmed
-    gender
-    dateOfBirth
-    websiteUrl
-    biography
-    address
-    zipCode
-    city
-    phone
-    url
-';
-
-const USER_HEADERS = [
-    'user_id',
-    'user_email',
-    'user_userName',
-    'user_TypeName',
-    'user_createdAt',
-    'user_updatedAt',
-    'user_lastLogin',
-    'user_rolesText',
-    'user_consentExternalCommunication',
-    'user_enabled',
-    'user_isEmailConfirmed',
-    'user_locked',
-    'user_phoneConfirmed',
-    'user_gender',
-    'user_dateOfBirth',
-    'user_websiteUrl',
-    'user_biography',
-    'user_address',
-    'user_zipCode',
-    'user_city',
-    'user_phone',
-    'user_profileUrl',
-];
-
-const USER_HEADERS_EVENTS = [
-    'user_id',
-    'user_email',
-    'user_userName',
-    'user_TypeName',
-    'event_RegisteredOn',
-    'event_privateRegistration',
-    'user_createdAt',
-    'user_updatedAt',
-    'user_lastLogin',
-    'user_rolesText',
-    'user_consentExternalCommunication',
-    'user_enabled',
-    'user_isEmailConfirmed',
-    'user_locked',
-    'user_phoneConfirmed',
-    'user_gender',
-    'user_dateOfBirth',
-    'user_websiteUrl',
-    'user_biography',
-    'user_address',
-    'user_zipCode',
-    'user_city',
-    'user_phone',
-    'user_profileUrl',
-];
-
 class ExportController extends Controller
 {
-    private $flashBag;
-    private $translator;
-    private $exportDir;
-    private $aclListener;
-    private $connectionTraversor;
-    private $executor;
-    private $logger;
-    /**
-     * @var AbstractStepRepository
-     */
-    private $abstractStepRepository;
+    private FlashBagInterface $flashBag;
+    private TranslatorInterface $translator;
+    private string $exportDir;
+    private GraphQlAclListener $aclListener;
+    private ConnectionTraversor $connectionTraversor;
+    private Executor $executor;
+    private LoggerInterface $logger;
+    private AbstractStepRepository $abstractStepRepository;
 
     public function __construct(
         GraphQlAclListener $aclListener,
@@ -167,69 +87,77 @@ class ExportController extends Controller
             '-registeredAttendees-' .
             $event->getSlug() .
             '.csv';
-        $writer = WriterFactory::create(Type::CSV);
+        $writer = Creator\WriterFactory::createFromType(Type::CSV);
         $response = new StreamedResponse(function () use ($writer, $data, $event) {
             $writer->openToFile('php://output');
-            $writer->addRow(USER_HEADERS_EVENTS);
+            $writer->addRow(
+                Creator\WriterEntityFactory::createRowFromArray(
+                    GraphqlQueryAndCsvHeaderHelper::USER_HEADERS_EVENTS
+                )
+            );
             $this->connectionTraversor->traverse(
                 $data,
                 'participants',
                 function ($edge) use ($writer) {
                     $contributor = $edge['node'];
                     if (isset($contributor['id'])) {
-                        $writer->addRow([
-                            $contributor['id'],
-                            $contributor['email'],
-                            $contributor['username'],
-                            $contributor['userType'] ? $contributor['userType']['name'] : null,
-                            $edge['registeredAt'],
-                            $edge['registeredAnonymously'] ? 'yes' : 'no',
-                            $contributor['createdAt'],
-                            $contributor['updatedAt'],
-                            $contributor['lastLogin'],
-                            $contributor['rolesText'],
-                            $contributor['consentExternalCommunication'],
-                            $contributor['enabled'],
-                            $contributor['isEmailConfirmed'],
-                            $contributor['locked'],
-                            $contributor['phoneConfirmed'],
-                            $contributor['gender'],
-                            $contributor['dateOfBirth'],
-                            $contributor['websiteUrl'],
-                            $contributor['biography'],
-                            $contributor['address'],
-                            $contributor['zipCode'],
-                            $contributor['city'],
-                            $contributor['phone'],
-                            $contributor['url'],
-                        ]);
+                        $writer->addRow(
+                            Creator\WriterEntityFactory::createRowFromArray([
+                                $contributor['id'],
+                                $contributor['email'],
+                                $contributor['username'],
+                                $contributor['userType'] ? $contributor['userType']['name'] : null,
+                                $edge['registeredAt'],
+                                $edge['registeredAnonymously'] ? 'yes' : 'no',
+                                $contributor['createdAt'],
+                                $contributor['updatedAt'],
+                                $contributor['lastLogin'],
+                                $contributor['rolesText'],
+                                $contributor['consentExternalCommunication'],
+                                $contributor['enabled'],
+                                $contributor['isEmailConfirmed'],
+                                $contributor['locked'],
+                                $contributor['phoneConfirmed'],
+                                $contributor['gender'],
+                                $contributor['dateOfBirth'],
+                                $contributor['websiteUrl'],
+                                $contributor['biography'],
+                                $contributor['address'],
+                                $contributor['zipCode'],
+                                $contributor['city'],
+                                $contributor['phone'],
+                                $contributor['url'],
+                            ])
+                        );
                     } else {
-                        $writer->addRow([
-                            null,
-                            $contributor['notRegisteredEmail'],
-                            $contributor['username'],
-                            null,
-                            $edge['registeredAt'],
-                            $edge['registeredAnonymously'] ? 'yes' : 'no',
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                        ]);
+                        $writer->addRow(
+                            Creator\WriterEntityFactory::createRowFromArray([
+                                null,
+                                $contributor['notRegisteredEmail'],
+                                $contributor['username'],
+                                null,
+                                $edge['registeredAt'],
+                                $edge['registeredAnonymously'] ? 'yes' : 'no',
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                            ])
+                        );
                     }
                 },
                 function ($pageInfo) use ($event) {
@@ -375,7 +303,7 @@ class ExportController extends Controller
         }
 
         $eventId = GlobalId::toGlobalId('Event', $eventId);
-        $USER_FRAGMENT = USER_FRAGMENT;
+        $USER_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
 
         return <<<EOF
         query {

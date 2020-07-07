@@ -226,7 +226,7 @@ class UrlResolver
                     ['slug' => $object->getSlug(), '_locale' => $locale],
                     $referenceType
                 )
-                : null;
+                : '';
         }
 
         if (false !== ($url = $this->generateOpinionOrProposalRoute($object, $absolute))) {

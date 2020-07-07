@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
@@ -20,58 +21,6 @@ use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-
-const USER_FRAGMENT = '
-    id
-    email
-    username
-    userType {
-      name
-    }
-    createdAt
-    updatedAt
-    lastLogin
-    rolesText
-    consentExternalCommunication
-    enabled
-    isEmailConfirmed
-    locked
-    phoneConfirmed
-    gender
-    dateOfBirth
-    websiteUrl
-    biography
-    address
-    zipCode
-    city
-    phone
-    url
-';
-
-const USER_HEADERS = [
-    'user_id',
-    'user_email',
-    'user_userName',
-    'user_TypeName',
-    'user_createdAt',
-    'user_updatedAt',
-    'user_lastLogin',
-    'user_rolesText',
-    'user_consentExternalCommunication',
-    'user_enabled',
-    'user_isEmailConfirmed',
-    'user_locked',
-    'user_phoneConfirmed',
-    'user_gender',
-    'user_dateOfBirth',
-    'user_websiteUrl',
-    'user_biography',
-    'user_address',
-    'user_zipCode',
-    'user_city',
-    'user_phone',
-    'user_profileUrl',
-];
 
 class CreateStepContributorsCommand extends BaseExportCommand
 {
@@ -138,7 +87,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         }
         $writer = WriterFactory::create(Type::CSV, $delimiter);
         $writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
-        $writer->addRow(WriterEntityFactory::createRowFromArray(USER_HEADERS));
+        $writer->addRow(WriterEntityFactory::createRowFromArray(GraphqlQueryAndCsvHeaderHelper::USER_HEADERS));
         $this->connectionTraversor->traverse(
             $data,
             'contributors',
@@ -232,7 +181,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         if ($userCursor) {
             $userCursor = sprintf(', after: "%s"', $userCursor);
         }
-        $USER_FRAGMENT = USER_FRAGMENT;
+        $USER_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
 
         return <<<EOF
         query {

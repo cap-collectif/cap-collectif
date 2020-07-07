@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Toggle\Manager;
@@ -22,33 +23,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-
-    private const USER_FRAGMENT = '
-    id
-    email
-    username
-    userType {
-      name
-    }
-    createdAt
-    updatedAt
-    lastLogin
-    rolesText
-    consentExternalCommunication
-    enabled
-    isEmailConfirmed
-    locked
-    phoneConfirmed
-    gender
-    dateOfBirth
-    websiteUrl
-    biography
-    address
-    zipCode
-    city
-    phone
-    url
-';
 
     private const USER_HEADERS = [
         'id',
@@ -78,13 +52,13 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
      * @var WriterInterface
      */
     protected $writer;
-    protected $connectionTraversor;
-    protected $listener;
-    protected $executor;
-    protected $projectRootDir;
-    protected $logger;
-    protected $toggleManager;
-    protected $projectRepository;
+    protected ConnectionTraversor $connectionTraversor;
+    protected GraphQlAclListener $listener;
+    protected Executor $executor;
+    protected string $projectRootDir;
+    protected LoggerInterface $logger;
+    protected Manager $toggleManager;
+    protected ProjectRepository $projectRepository;
 
     public function __construct(
         GraphQlAclListener $listener,
@@ -213,7 +187,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
             $userCursor = sprintf(', after: "%s"', $userCursor);
         }
 
-        $userFragment = self::USER_FRAGMENT;
+        $userFragment = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
 
         return <<<EOF
         query {

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Finder\Finder;
@@ -91,23 +92,6 @@ fragment commentInfos on Comment {
   }
 }
 EOF;
-    protected const AUTHOR_INFOS_FRAGMENT = <<<'EOF'
-fragment authorInfos on User {
-  id
-  username
-  isEmailConfirmed
-  email
-  userType {
-    ...userTypeInfos
-  }
-}
-EOF;
-    protected const USER_TYPE_INFOS_FRAGMENT = <<<'EOF'
-fragment userTypeInfos on UserType {
-  id
-  name
-}
-EOF;
 
     protected static $defaultName = 'capco:export:user';
 
@@ -152,7 +136,7 @@ EOF;
         $matchTo = self::getSnapshotDir($userId);
 
         // Delete current snapshot
-        (Process::fromShellCommandline('rm -rf ' . $matchTo))->mustRun();
+        Process::fromShellCommandline('rm -rf ' . $matchTo)->mustRun();
         if (!mkdir($matchTo, 0755) && !is_dir($matchTo)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $matchTo));
         }
@@ -182,18 +166,18 @@ EOF;
         $finder->files()->in($extractTo);
 
         foreach ($finder as $file) {
-            (Process::fromShellCommandline(
+            Process::fromShellCommandline(
                 'mv ' .
                     $extractTo .
                     $file->getRelativePathname() .
                     ' ' .
                     $matchTo .
                     $file->getRelativePathname()
-            ))->mustRun();
+            )->mustRun();
             chmod($matchTo . $file->getRelativePathname(), 0755);
         }
 
-        (Process::fromShellCommandline('rm -rf ' . $extractTo))->mustRun();
+        Process::fromShellCommandline('rm -rf ' . $extractTo)->mustRun();
     }
 
     public function getNodeContent($content, ?string $columnName, string $closestPath = ''): array
@@ -793,8 +777,8 @@ EOF;
         ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
     ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
-        $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
         if ($commentsAfter) {
             $commentsAfter = ', after: "' . $commentsAfter . '"';
         }

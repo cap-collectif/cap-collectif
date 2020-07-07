@@ -20,7 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ImportConsultationFromCsvCommand extends Command
 {
-    const HEADERS = ['titre', 'type', 'contenu'];
     private $filePath;
     private $delimiter;
 

@@ -31,13 +31,13 @@ class CreateUserAccountsFromCSVCommand extends Command
     protected const HEADERS_WITH_FORGOT_PASSWORD_LINK = ['email', 'confirmation_link'];
     protected const HEADERS_WITH_PASSWORD = ['first_name', 'last_name', 'email', 'password'];
 
-    protected $userManager;
-    protected $tokenGenerator;
-    protected $userRepository;
-    protected $router;
-    protected $csvReader;
-    protected $registrationFormRepository;
-    protected $userNotifier;
+    protected UserManagerInterface $userManager;
+    protected TokenGeneratorInterface $tokenGenerator;
+    protected UserRepository $userRepository;
+    protected RouterInterface $router;
+    protected ConvertCsvToArray $csvReader;
+    protected RegistrationFormRepository $registrationFormRepository;
+    protected UserNotifier $userNotifier;
 
     public function __construct(
         UserManagerInterface $userManager,

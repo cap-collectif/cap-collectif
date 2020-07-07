@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
@@ -151,23 +152,6 @@ fragment voteInfos on CommentVote{
   publishedAt
   author {
     ... authorInfos
-  }
-}
-EOF;
-    protected const USER_TYPE_INFOS_FRAGMENT = <<<'EOF'
-fragment userTypeInfos on UserType {
-  id
-  name
-}
-EOF;
-    protected const AUTHOR_INFOS_FRAGMENT = <<<'EOF'
-fragment authorInfos on User {
-  id
-  username
-  isEmailConfirmed
-  email
-  userType {
-    ...userTypeInfos
   }
 }
 EOF;
@@ -1164,8 +1148,8 @@ EOF;
         ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
     ): string {
         $VOTE_INFOS_FRAGMENT = self::PROPOSAL_VOTE_INFOS_FRAGMENT;
-        $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
 
         if ($votesAfter) {
             $votesAfter = ', after: "' . $votesAfter . '"';
@@ -1203,8 +1187,8 @@ EOF;
         ?string $reportingsAfter = null,
         ?int $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
     ): string {
-        $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
 
         if ($reportingsAfter) {
@@ -1244,9 +1228,9 @@ EOF;
         ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
     ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
-        $USER_TYPE_INFOS_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
+        $USER_TYPE_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
         $COMMENT_VOTE_INFOS = self::COMMENT_VOTE_INFOS;
 
         if ($commentsAfter) {
@@ -1294,8 +1278,8 @@ EOF;
         ?int $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE,
         ?int $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
     ): string {
-        $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
         $VOTES_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
 
@@ -1410,8 +1394,8 @@ EOF;
         ?string $reportsAfter = null,
         ?int $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE
     ): string {
-        $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
 
         if ($reportsAfter) {
@@ -1451,8 +1435,8 @@ EOF;
         ?int $VOTES_PER_PAGE = self::VOTES_PER_PAGE
     ): string {
         $VOTE_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS;
-        $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
 
         if ($votesAfter) {
             $votesAfter = ', after: "' . $votesAfter . '"';
@@ -1498,8 +1482,8 @@ EOF;
         int $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
     ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
-        $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
+        $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
+        $AUTHOR_INFOS_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
 
         $VOTE_INFOS_FRAGMENT = self::PROPOSAL_VOTE_INFOS_FRAGMENT;
