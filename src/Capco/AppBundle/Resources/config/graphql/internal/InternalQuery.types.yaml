@@ -393,3 +393,14 @@ InternalQuery:
                 access: "@=hasRole('ROLE_USER')"
                 description: 'Whether or not this user can access our evaluations page.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSupervisedProposalsResolver", [getUser(), args])'
+            geocode:
+                type: 'PreviewGoogleMapsAddress'
+                args:
+                    latitude:
+                        type: 'Float!'
+                        description: 'the latitude of geocode'
+                    longitude:
+                        type: 'Float!'
+                        description: 'the longitude of geocode'
+                description: 'An address from Google Maps.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryGeocodeResolver", [args["latitude"], args["longitude"]])'

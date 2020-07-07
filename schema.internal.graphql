@@ -7261,6 +7261,15 @@ type Query {
 
   """Whether or not this user can access our evaluations page."""
   viewerCanSeeEvaluationsPage: Boolean!
+
+  """An address from Google Maps."""
+  geocode(
+    """the latitude of geocode"""
+    latitude: Float!
+
+    """the longitude of geocode"""
+    longitude: Float!
+  ): GoogleMapsAddress
 }
 
 """Fetches an object given its ID"""
