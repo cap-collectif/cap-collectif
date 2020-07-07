@@ -3,6 +3,7 @@ const ProjectContributorsQuery = /* GraphQL */ `
   query ProjectContributors(
     $projectId: ID!
     $userTypeId: ID
+    $contribuableId: ID
     $stepId: ID
     $isVip: Boolean
     $orderBy: UserOrder
@@ -27,6 +28,12 @@ const ProjectContributorsQuery = /* GraphQL */ `
                 id
               }
               vip
+              contributions(contribuableId: $contribuableId) {
+                totalCount
+              }
+              votes(contribuableId: $contribuableId) {
+                totalCount
+              }
             }
           }
         }
@@ -43,6 +50,7 @@ describe('Internal.projects.contributors', () => {
         {
           projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
           stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
           isVip: true,
           userTypeId: 1,
         },
@@ -58,6 +66,7 @@ describe('Internal.projects.contributors', () => {
         {
           projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
           stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
         },
         'internal_admin',
       ),
@@ -72,6 +81,7 @@ describe('Internal.projects.contributors', () => {
           projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
           stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
           orderBy: { field: 'ACTIVITY', direction: 'DESC' },
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
         },
         'internal_admin',
       ),
@@ -85,6 +95,7 @@ describe('Internal.projects.contributors', () => {
         {
           projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
           stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
           orderBy: { field: 'ACTIVITY', direction: 'ASC' },
         },
         'internal_admin',
@@ -97,6 +108,8 @@ describe('Internal.projects.contributors', () => {
       ProjectContributorsQuery,
       {
         projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        contribuableId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+
         term: 'sf',
       },
       'internal_admin',
@@ -111,6 +124,7 @@ describe('Internal.projects.contributors', () => {
       {
         projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
         stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+        contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
         isVip: true,
         userTypeId: 1,
         term: 'msantos',
@@ -127,6 +141,7 @@ describe('Internal.projects.contributors', () => {
       {
         projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
         stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+        contribuableId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
         term: 'jolicode',
       },
       'internal_user',

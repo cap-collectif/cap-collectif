@@ -201,10 +201,10 @@ class VoteSearch extends Search
         $conditions = [
             new Term(['user.id' => ['value' => $author->getId()]]),
             new Term(['published' => ['value' => true]]),
-            new Term(['private' => ['value' => false]]),
         ];
 
         if ($viewer !== $author && !$viewer->isSuperAdmin()) {
+            $conditions[] = new Term(['private' => ['value' => false]]);
             $conditions[] = (new BoolQuery())->addShould([
                 (new BoolQuery())
                     ->addMustNot([new Exists('proposal'), new Exists('comment')])

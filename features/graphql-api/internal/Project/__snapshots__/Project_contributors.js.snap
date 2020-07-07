@@ -7,47 +7,77 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 2,
+            },
             "id": "VXNlcjp1c2VyNw==",
             "userType": Object {
               "id": "1",
             },
             "vip": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 1,
+            },
             "id": "VXNlcjp1c2VyNTIy",
             "userType": Object {
               "id": "1",
             },
             "vip": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 2,
+            },
             "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 1,
+            },
             "id": "VXNlcjp1c2VyNQ==",
             "userType": Object {
               "id": "1",
             },
             "vip": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 4,
+            },
             "id": "VXNlcjp1c2VyQWRtaW4=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
       ],
@@ -65,29 +95,47 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 2,
+            },
             "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 4,
+            },
             "id": "VXNlcjp1c2VyQWRtaW4=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 50,
+            },
             "id": "VXNlcjp1c2VyMg==",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
       ],
@@ -105,47 +153,77 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 1,
+            },
             "id": "VXNlcjp1c2VyNTIy",
             "userType": Object {
               "id": "1",
             },
             "vip": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 1,
+            },
             "id": "VXNlcjp1c2VyNQ==",
             "userType": Object {
               "id": "1",
             },
             "vip": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 2,
+            },
             "id": "VXNlcjp1c2VyNw==",
             "userType": Object {
               "id": "1",
             },
             "vip": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 2,
+            },
             "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 4,
+            },
             "id": "VXNlcjp1c2VyQWRtaW4=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
       ],
@@ -163,47 +241,77 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 50,
+            },
             "id": "VXNlcjp1c2VyMg==",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 50,
+            },
             "id": "VXNlcjp1c2VyMQ==",
             "userType": Object {
               "id": "1",
             },
             "vip": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 4,
+            },
             "id": "VXNlcjp1c2VyQWRtaW4=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 2,
+            },
             "id": "VXNlcjp1c2VyNw==",
             "userType": Object {
               "id": "1",
             },
             "vip": false,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 2,
+            },
             "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
       ],
@@ -221,11 +329,17 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 50,
+            },
             "id": "VXNlcjp1c2VyMg==",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 1,
+            },
           },
         },
       ],
@@ -243,11 +357,17 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "contributions": Object {
+              "totalCount": 2,
+            },
             "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
             "userType": Object {
               "id": "1",
             },
             "vip": true,
+            "votes": Object {
+              "totalCount": 0,
+            },
           },
         },
       ],
