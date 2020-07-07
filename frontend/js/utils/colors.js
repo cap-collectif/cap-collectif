@@ -52,6 +52,7 @@ const colors = {
   formBgc: '#fafafa',
   paleGrey: '#ecf0f5',
   secondaryGray: '#6c757d',
+  disabledGray: '#eee',
   grayF4: '#f4f4f4',
 };
 

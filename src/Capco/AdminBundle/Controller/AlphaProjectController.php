@@ -30,4 +30,13 @@ class AlphaProjectController extends \Sonata\AdminBundle\Controller\CRUDControll
             'action' => 'edit'
         ]);
     }
+
+    public function editParticipantsAction()
+    {
+        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+            'object' => $this->admin->getSubject(),
+            'form' => $this->admin->getForm()->createView(),
+            'action' => 'edit'
+        ]);
+    }
 }

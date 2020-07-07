@@ -21,6 +21,6 @@ export const BASE_INPUT = css`
   width: 300px;
 
   &:disabled {
-    background-color: #eee;
+    background-color: ${colors.disabledGray};
   }
 `;

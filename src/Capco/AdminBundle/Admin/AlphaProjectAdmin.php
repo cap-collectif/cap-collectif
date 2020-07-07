@@ -49,12 +49,14 @@ class AlphaProjectAdmin extends CapcoAdmin
         $collection->add('editAnalysis', $this->getRouterIdParameter() . '/analysis');
         $collection->add('editContributors', $this->getRouterIdParameter() . '/contributors');
         $collection->add('editProposals', $this->getRouterIdParameter() . '/proposals');
+        $collection->add('editParticipants', $this->getRouterIdParameter() . '/participants');
         $collection->clearExcept([
             'create',
             'edit',
             'editAnalysis',
             'editContributors',
-            'editProposals'
+            'editProposals',
+            'editParticipants'
         ]);
     }
 }

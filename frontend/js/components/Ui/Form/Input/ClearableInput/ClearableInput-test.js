@@ -57,4 +57,11 @@ describe('<ClearableInput />', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render correctly when disabled', () => {
+    const wrapper = shallow(
+      <ClearableInput id="search" name="search" type="text" placeholder="Rechercher" disabled />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 });

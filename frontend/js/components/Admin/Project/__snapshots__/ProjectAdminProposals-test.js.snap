@@ -4,175 +4,123 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
 <Provider>
   <commonstyle__AnalysisPickableListContainer>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
-      <InlineSelect
-        onChange={[Function]}
-        value="PUBLISHED"
-      >
-        <InlineSelect.Choice
-          value="ALL"
-        >
-          <FormattedMessage
-            id="filter.count.status.all"
-            values={
-              Object {
-                "num": 9,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
+      <div>
+        <InlineSelect
+          onChange={[Function]}
           value="PUBLISHED"
         >
-          <FormattedMessage
-            id="filter.count.status.published"
-            values={
-              Object {
-                "num": 4,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
-          value="DRAFT"
-        >
-          <FormattedMessage
-            id="filter.count.status.draft"
-            values={
-              Object {
-                "num": 2,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
-          value="TRASHED"
-        >
-          <FormattedMessage
-            id="filter.count.status.trash"
-            values={
-              Object {
-                "num": 3,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-      </InlineSelect>
-      <ProjectAdminProposals__ExportButtonStyle>
-        <Collapsable
-          align="right"
-          key="export-button"
-        >
-          <CollapsableButton>
-            <Icon
-              className="no-transform-svg"
-              classNames="icon-button-export"
-              name="download"
-              size="12px"
-            />
+          <InlineSelect.Choice
+            value="ALL"
+          >
             <FormattedMessage
-              id="global.export"
-              tagName="p"
+              id="filter.count.status.all"
+              values={
+                Object {
+                  "num": 9,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="PUBLISHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.published"
+              values={
+                Object {
+                  "num": 4,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="DRAFT"
+          >
+            <FormattedMessage
+              id="filter.count.status.draft"
+              values={
+                Object {
+                  "num": 2,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="TRASHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.trash"
+              values={
+                Object {
+                  "num": 3,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+        </InlineSelect>
+      </div>
+      <div>
+        <ExportButton
+          disabled={false}
+          hasMarginRight={true}
+          linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
+          onChange={[Function]}
+        >
+          <DropdownSelect.Choice
+            key="selectionStep1"
+            value="selectionStep1"
+          >
+            <strong
+              className="bold-content"
+            >
+              <FormattedMessage
+                id="admin.label.step"
+                values={Object {}}
+              />
+              0 selectionStep1
+            </strong>
+             - 
+            <FormattedMessage
+              id="list-of-answers"
               values={Object {}}
             />
-          </CollapsableButton>
-          <CollapsableElement
-            ariaLabel="label.export.by.step"
+          </DropdownSelect.Choice>
+          <DropdownSelect.Choice
+            key="selectionStep2"
+            value="selectionStep2"
           >
-            <DropdownSelect
-              title={
-                <div
-                  className="export-info-container"
-                >
-                  <FormattedMessage
-                    id="label.export.by.step"
-                    values={Object {}}
-                  />
-                  <Button
-                    active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="default"
-                    className="icon-button"
-                    disabled={false}
-                    onClick={[Function]}
-                  >
-                    <Icon
-                      className="ml-20 tooltip-icon-color"
-                      color="rgb(204, 204, 204)"
-                      name="information"
-                      size="16px"
-                      title="label.export.by.step"
-                    />
-                  </Button>
-                </div>
-              }
+            <strong
+              className="bold-content"
             >
-              <div
-                className="start-no-bold"
-              >
-                <DropdownSelect.Choice
-                  key="selectionStep1"
-                  onClick={[Function]}
-                  value="selection-step-1"
-                >
-                  <strong
-                    className="bold-content"
-                  >
-                    <FormattedMessage
-                      id="admin.label.step"
-                      values={Object {}}
-                    />
-                     0 selectionStep1
-                  </strong>
-                   - 
-                  <FormattedMessage
-                    id="list-of-answers"
-                    values={Object {}}
-                  />
-                </DropdownSelect.Choice>
-              </div>
-              <div
-                className="start-no-bold"
-              >
-                <DropdownSelect.Choice
-                  key="selectionStep2"
-                  onClick={[Function]}
-                  value="selection-step-2"
-                >
-                  <strong
-                    className="bold-content"
-                  >
-                    <FormattedMessage
-                      id="admin.label.step"
-                      values={Object {}}
-                    />
-                     1 selectionStep2
-                  </strong>
-                   - 
-                  <FormattedMessage
-                    id="list-of-contributions"
-                    values={Object {}}
-                  />
-                </DropdownSelect.Choice>
-              </div>
-            </DropdownSelect>
-          </CollapsableElement>
-        </Collapsable>
-      </ProjectAdminProposals__ExportButtonStyle>
-      <ClearableInput
-        icon={
-          <i
-            className="cap cap-magnifier"
-          />
-        }
-        id="search"
-        initialValue={null}
-        name="search"
-        onClear={[Function]}
-        onSubmit={[Function]}
-        placeholder="global.menu.search"
-        type="text"
-      />
+              <FormattedMessage
+                id="admin.label.step"
+                values={Object {}}
+              />
+              1 selectionStep2
+            </strong>
+             - 
+            <FormattedMessage
+              id="list-of-contributions"
+              values={Object {}}
+            />
+          </DropdownSelect.Choice>
+        </ExportButton>
+        <ClearableInput
+          disabled={false}
+          icon={
+            <i
+              className="cap cap-magnifier"
+            />
+          }
+          id="search"
+          initialValue={null}
+          name="search"
+          onClear={[Function]}
+          onSubmit={[Function]}
+          placeholder="global.menu.search"
+          type="text"
+        />
+      </div>
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}
@@ -1037,151 +985,104 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
 <Provider>
   <commonstyle__AnalysisPickableListContainer>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
-      <InlineSelect
-        onChange={[Function]}
-        value="PUBLISHED"
-      >
-        <InlineSelect.Choice
-          value="ALL"
-        >
-          <FormattedMessage
-            id="filter.count.status.all"
-            values={
-              Object {
-                "num": 9,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
+      <div>
+        <InlineSelect
+          onChange={[Function]}
           value="PUBLISHED"
         >
-          <FormattedMessage
-            id="filter.count.status.published"
-            values={
-              Object {
-                "num": 4,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
-          value="DRAFT"
-        >
-          <FormattedMessage
-            id="filter.count.status.draft"
-            values={
-              Object {
-                "num": 2,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
-          value="TRASHED"
-        >
-          <FormattedMessage
-            id="filter.count.status.trash"
-            values={
-              Object {
-                "num": 3,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-      </InlineSelect>
-      <ProjectAdminProposals__ExportButtonStyle>
-        <Collapsable
-          align="right"
-          key="export-button"
-        >
-          <CollapsableButton>
-            <Icon
-              className="no-transform-svg"
-              classNames="icon-button-export"
-              name="download"
-              size="12px"
-            />
+          <InlineSelect.Choice
+            value="ALL"
+          >
             <FormattedMessage
-              id="global.export"
-              tagName="p"
+              id="filter.count.status.all"
+              values={
+                Object {
+                  "num": 9,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="PUBLISHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.published"
+              values={
+                Object {
+                  "num": 4,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="DRAFT"
+          >
+            <FormattedMessage
+              id="filter.count.status.draft"
+              values={
+                Object {
+                  "num": 2,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="TRASHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.trash"
+              values={
+                Object {
+                  "num": 3,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+        </InlineSelect>
+      </div>
+      <div>
+        <ExportButton
+          disabled={false}
+          hasMarginRight={true}
+          linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
+          onChange={[Function]}
+        >
+          <DropdownSelect.Choice
+            key="selectionStep1"
+            value="selectionStep1"
+          >
+            <strong
+              className="bold-content"
+            >
+              <FormattedMessage
+                id="admin.label.step"
+                values={Object {}}
+              />
+              0 selectionStep1
+            </strong>
+             - 
+            <FormattedMessage
+              id="list-of-answers"
               values={Object {}}
             />
-          </CollapsableButton>
-          <CollapsableElement
-            ariaLabel="label.export.by.step"
-          >
-            <DropdownSelect
-              title={
-                <div
-                  className="export-info-container"
-                >
-                  <FormattedMessage
-                    id="label.export.by.step"
-                    values={Object {}}
-                  />
-                  <Button
-                    active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="default"
-                    className="icon-button"
-                    disabled={false}
-                    onClick={[Function]}
-                  >
-                    <Icon
-                      className="ml-20 tooltip-icon-color"
-                      color="rgb(204, 204, 204)"
-                      name="information"
-                      size="16px"
-                      title="label.export.by.step"
-                    />
-                  </Button>
-                </div>
-              }
-            >
-              <div
-                className="start-no-bold"
-              >
-                <DropdownSelect.Choice
-                  key="selectionStep1"
-                  onClick={[Function]}
-                  value="selection-step-1"
-                >
-                  <strong
-                    className="bold-content"
-                  >
-                    <FormattedMessage
-                      id="admin.label.step"
-                      values={Object {}}
-                    />
-                     0 selectionStep1
-                  </strong>
-                   - 
-                  <FormattedMessage
-                    id="list-of-answers"
-                    values={Object {}}
-                  />
-                </DropdownSelect.Choice>
-              </div>
-            </DropdownSelect>
-          </CollapsableElement>
-        </Collapsable>
-      </ProjectAdminProposals__ExportButtonStyle>
-      <ClearableInput
-        icon={
-          <i
-            className="cap cap-magnifier"
-          />
-        }
-        id="search"
-        initialValue={null}
-        name="search"
-        onClear={[Function]}
-        onSubmit={[Function]}
-        placeholder="global.menu.search"
-        type="text"
-      />
+          </DropdownSelect.Choice>
+        </ExportButton>
+        <ClearableInput
+          disabled={false}
+          icon={
+            <i
+              className="cap cap-magnifier"
+            />
+          }
+          id="search"
+          initialValue={null}
+          name="search"
+          onClear={[Function]}
+          onSubmit={[Function]}
+          placeholder="global.menu.search"
+          type="text"
+        />
+      </div>
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}
@@ -2037,175 +1938,123 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
 <Provider>
   <commonstyle__AnalysisPickableListContainer>
     <ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
-      <InlineSelect
-        onChange={[Function]}
-        value="PUBLISHED"
-      >
-        <InlineSelect.Choice
-          value="ALL"
-        >
-          <FormattedMessage
-            id="filter.count.status.all"
-            values={
-              Object {
-                "num": 0,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
+      <div>
+        <InlineSelect
+          onChange={[Function]}
           value="PUBLISHED"
         >
-          <FormattedMessage
-            id="filter.count.status.published"
-            values={
-              Object {
-                "num": 0,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
-          value="DRAFT"
-        >
-          <FormattedMessage
-            id="filter.count.status.draft"
-            values={
-              Object {
-                "num": 0,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-        <InlineSelect.Choice
-          value="TRASHED"
-        >
-          <FormattedMessage
-            id="filter.count.status.trash"
-            values={
-              Object {
-                "num": 0,
-              }
-            }
-          />
-        </InlineSelect.Choice>
-      </InlineSelect>
-      <ProjectAdminProposals__ExportButtonStyle>
-        <Collapsable
-          align="right"
-          key="export-button"
-        >
-          <CollapsableButton>
-            <Icon
-              className="no-transform-svg"
-              classNames="icon-button-export"
-              name="download"
-              size="12px"
-            />
+          <InlineSelect.Choice
+            value="ALL"
+          >
             <FormattedMessage
-              id="global.export"
-              tagName="p"
+              id="filter.count.status.all"
+              values={
+                Object {
+                  "num": 0,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="PUBLISHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.published"
+              values={
+                Object {
+                  "num": 0,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="DRAFT"
+          >
+            <FormattedMessage
+              id="filter.count.status.draft"
+              values={
+                Object {
+                  "num": 0,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+          <InlineSelect.Choice
+            value="TRASHED"
+          >
+            <FormattedMessage
+              id="filter.count.status.trash"
+              values={
+                Object {
+                  "num": 0,
+                }
+              }
+            />
+          </InlineSelect.Choice>
+        </InlineSelect>
+      </div>
+      <div>
+        <ExportButton
+          disabled={true}
+          hasMarginRight={true}
+          linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
+          onChange={[Function]}
+        >
+          <DropdownSelect.Choice
+            key="selectionStep1"
+            value="selectionStep1"
+          >
+            <strong
+              className="bold-content"
+            >
+              <FormattedMessage
+                id="admin.label.step"
+                values={Object {}}
+              />
+              0 selectionStep1
+            </strong>
+             - 
+            <FormattedMessage
+              id="list-of-answers"
               values={Object {}}
             />
-          </CollapsableButton>
-          <CollapsableElement
-            ariaLabel="label.export.by.step"
+          </DropdownSelect.Choice>
+          <DropdownSelect.Choice
+            key="selectionStep2"
+            value="selectionStep2"
           >
-            <DropdownSelect
-              title={
-                <div
-                  className="export-info-container"
-                >
-                  <FormattedMessage
-                    id="label.export.by.step"
-                    values={Object {}}
-                  />
-                  <Button
-                    active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="default"
-                    className="icon-button"
-                    disabled={false}
-                    onClick={[Function]}
-                  >
-                    <Icon
-                      className="ml-20 tooltip-icon-color"
-                      color="rgb(204, 204, 204)"
-                      name="information"
-                      size="16px"
-                      title="label.export.by.step"
-                    />
-                  </Button>
-                </div>
-              }
+            <strong
+              className="bold-content"
             >
-              <div
-                className="start-no-bold"
-              >
-                <DropdownSelect.Choice
-                  key="selectionStep1"
-                  onClick={[Function]}
-                  value="selection-step-1"
-                >
-                  <strong
-                    className="bold-content"
-                  >
-                    <FormattedMessage
-                      id="admin.label.step"
-                      values={Object {}}
-                    />
-                     0 selectionStep1
-                  </strong>
-                   - 
-                  <FormattedMessage
-                    id="list-of-answers"
-                    values={Object {}}
-                  />
-                </DropdownSelect.Choice>
-              </div>
-              <div
-                className="start-no-bold"
-              >
-                <DropdownSelect.Choice
-                  key="selectionStep2"
-                  onClick={[Function]}
-                  value="selection-step-2"
-                >
-                  <strong
-                    className="bold-content"
-                  >
-                    <FormattedMessage
-                      id="admin.label.step"
-                      values={Object {}}
-                    />
-                     1 selectionStep2
-                  </strong>
-                   - 
-                  <FormattedMessage
-                    id="list-of-contributions"
-                    values={Object {}}
-                  />
-                </DropdownSelect.Choice>
-              </div>
-            </DropdownSelect>
-          </CollapsableElement>
-        </Collapsable>
-      </ProjectAdminProposals__ExportButtonStyle>
-      <ClearableInput
-        icon={
-          <i
-            className="cap cap-magnifier"
-          />
-        }
-        id="search"
-        initialValue={null}
-        name="search"
-        onClear={[Function]}
-        onSubmit={[Function]}
-        placeholder="global.menu.search"
-        type="text"
-      />
+              <FormattedMessage
+                id="admin.label.step"
+                values={Object {}}
+              />
+              1 selectionStep2
+            </strong>
+             - 
+            <FormattedMessage
+              id="list-of-contributions"
+              values={Object {}}
+            />
+          </DropdownSelect.Choice>
+        </ExportButton>
+        <ClearableInput
+          disabled={true}
+          icon={
+            <i
+              className="cap cap-magnifier"
+            />
+          }
+          id="search"
+          initialValue={null}
+          name="search"
+          onClear={[Function]}
+          onSubmit={[Function]}
+          placeholder="global.menu.search"
+          type="text"
+        />
+      </div>
     </ProjectAdminProposalsstyle__ProjectAdminProposalsHeader>
     <PickableList
       hasMore={false}

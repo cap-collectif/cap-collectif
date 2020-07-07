@@ -14,3 +14,14 @@ export const AnalysisDataContainer: StyledComponent<{}, {}, HTMLDivElement> = st
     flex-shrink: 0;
   }
 `;
+
+export const AnalysisHeader: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+
+  & > p {
+    margin: 0;
+  }
+`;

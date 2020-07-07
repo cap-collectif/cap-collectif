@@ -57,4 +57,21 @@ storiesOf('Core|Input/Clearable Input', module)
         </Col>
       </Row>
     );
+  })
+  .add('disabled', () => {
+    return (
+      <Row>
+        <Col xs={12} sm={6} md={4} lg={3}>
+          <ClearableInput
+            disabled
+            id="search"
+            name="search"
+            type="text"
+            placeholder="Je suis disabled..."
+            onClear={noop}
+            onSubmit={noop}
+          />
+        </Col>
+      </Row>
+    );
   });

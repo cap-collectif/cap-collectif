@@ -19,13 +19,19 @@ import ProjectAdminAnalysisTab, {
   initialVariables as queryVariableAnalysis,
   queryAnalysis,
 } from '~/components/Admin/Project/ProjectAdminAnalysisTab';
+import ProjectAdminParticipantTab, {
+  initialVariables as queryVariableParticipant,
+  queryParticipant,
+} from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipantTab';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { BoxDeprecated, BoxContainer } from './Form/ProjectAdminForm.style';
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context';
+import { ProjectAdminParticipantsProvider } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context';
 
 type Props = {|
   +features: FeatureToggles,
   +project: ProjectAdminContent_project,
+  +firstCollectStepId: ?string,
 |};
 
 type Links = Array<{|
@@ -35,8 +41,14 @@ type Links = Array<{|
   component: any,
 |}>;
 
-// TODO replace the WIP placeholder when components are ready
-const formatNavbarLinks = (project, features, path, setTitle, dataPrefetchPage) => {
+const formatNavbarLinks = (
+  project,
+  features,
+  path,
+  setTitle,
+  firstCollectStepId,
+  dataPrefetchPage,
+) => {
   const links = [];
   const hasCollectStep = project.steps.some(step => step.type === 'CollectStep');
   if (hasCollectStep)
@@ -45,17 +57,26 @@ const formatNavbarLinks = (project, features, path, setTitle, dataPrefetchPage) 
       count: project.proposals.totalCount,
       url: `${path}/proposals`,
       component: () => (
-        <ProjectAdminProposalsPage
-          projectId={project.id}
-          dataPrefetch={dataPrefetchPage.contribution}
-        />
+        <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
+          <ProjectAdminProposalsPage
+            projectId={project.id}
+            dataPrefetch={dataPrefetchPage.contribution}
+          />
+        </ProjectAdminProposalsProvider>
       ),
     });
   links.push({
     title: 'capco.section.metrics.participants',
     count: project.contributors.totalCount,
-    url: `#`,
-    component: () => <p style={{ marginLeft: '45%' }}>WIP</p>,
+    url: `${path}/participants`,
+    component: () => (
+      <ProjectAdminParticipantsProvider>
+        <ProjectAdminParticipantTab
+          projectId={project.id}
+          dataPrefetch={dataPrefetchPage.participant}
+        />
+      </ProjectAdminParticipantsProvider>
+    ),
   });
 
   if (features.unstable__analysis && project.hasAnalysis)
@@ -64,7 +85,12 @@ const formatNavbarLinks = (project, features, path, setTitle, dataPrefetchPage) 
       url: `${path}/analysis`,
       count: project.firstAnalysisStep ? project.firstAnalysisStep.proposals.totalCount : undefined,
       component: () => (
-        <ProjectAdminAnalysisTab projectId={project.id} dataPrefetch={dataPrefetchPage.analysis} />
+        <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
+          <ProjectAdminAnalysisTab
+            projectId={project.id}
+            dataPrefetch={dataPrefetchPage.analysis}
+          />
+        </ProjectAdminProposalsProvider>
       ),
     });
   links.push({
@@ -78,7 +104,7 @@ const formatNavbarLinks = (project, features, path, setTitle, dataPrefetchPage) 
 // TODO: change when the page is complete
 const basePath = '/admin/alpha/project/';
 
-export const ProjectAdminContent = ({ project, features }: Props) => {
+export const ProjectAdminContent = ({ project, firstCollectStepId, features }: Props) => {
   const location = useLocation();
   const [title, setTitle] = useState(project.title);
   const path = `${basePath}${project._id}`;
@@ -99,14 +125,24 @@ export const ProjectAdminContent = ({ project, features }: Props) => {
     { fetchPolicy: 'store-or-network' },
   );
 
+  const dataParticipantPrefetch = loadQuery();
+  dataParticipantPrefetch.next(
+    environment,
+    queryParticipant,
+    { projectId: project.id, ...queryVariableParticipant(project.id) },
+    { fetchPolicy: 'store-or-network' },
+  );
+
   const dataPrefetchPage = {
     analysis: dataAnalysisPrefetch,
     contribution: dataContributionPublishedPrefetch,
+    participant: dataParticipantPrefetch,
   };
 
   const links: Links = useMemo(
-    () => formatNavbarLinks(project, features, path, setTitle, dataPrefetchPage),
-    [project, features, path, setTitle, dataPrefetchPage],
+    () =>
+      formatNavbarLinks(project, features, path, setTitle, firstCollectStepId, dataPrefetchPage),
+    [project, features, path, setTitle, firstCollectStepId, dataPrefetchPage],
   );
 
   return (
@@ -164,9 +200,11 @@ const ProjectAdminRouterWrapper = ({
 }) => (
   <RelayEnvironmentProvider environment={environment}>
     <Router>
-      <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
-        <ProjectAdminContent project={project} features={features} />
-      </ProjectAdminProposalsProvider>
+      <ProjectAdminContent
+        project={project}
+        features={features}
+        firstCollectStepId={firstCollectStepId}
+      />
     </Router>
   </RelayEnvironmentProvider>
 );

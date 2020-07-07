@@ -117,12 +117,8 @@ export const ProjectAdminMergeModale = ({
             <ProjectAdminMergeModaleStyle>
               <ul>
                 {proposalsSelected.map(proposal => (
-                  <li>
-                    <a
-                      key={proposal.id}
-                      href={proposal.adminUrl}
-                      target="_blank"
-                      rel="noopener noreferrer">
+                  <li key={proposal.id}>
+                    <a href={proposal.adminUrl} target="_blank" rel="noopener noreferrer">
                       {proposal.title}
                     </a>
                   </li>

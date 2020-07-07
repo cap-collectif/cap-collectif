@@ -4,7 +4,13 @@ import { TextRow } from 'react-placeholder/lib/placeholders';
 import colors from '~/utils/colors';
 import PickableList from '~ui/List/PickableList';
 
-export const PickableHeader: any = styled(PickableList.Header)`
+export const PickableContainer: StyledComponent<{}, {}, typeof PickableList> = styled(PickableList)`
+  margin: 0 2rem 2rem 2rem;
+`;
+
+export const PickableHeader: StyledComponent<{}, {}, typeof PickableList.Header> = styled(
+  PickableList.Header,
+)`
   justify-content: flex-end;
 
   & > * {

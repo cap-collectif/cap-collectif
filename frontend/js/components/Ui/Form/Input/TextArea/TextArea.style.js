@@ -16,7 +16,7 @@ const TextAreaContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.at
     resize: vertical;
 
     &:disabled {
-      background-color: #eee;
+      background-color: ${colors.disabledGray};
     }
   }
 `;

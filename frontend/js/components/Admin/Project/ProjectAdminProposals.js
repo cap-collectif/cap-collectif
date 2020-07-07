@@ -1,10 +1,7 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
-import { Button } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import colors from '~/utils/colors';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import * as S from './ProjectAdminProposals.style';
@@ -38,7 +35,6 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
 import FilterTag from '~ui/Analysis/FilterTag';
 import {
-  AnalysisFilterContainer,
   AnalysisPickableListContainer,
   AnalysisProposalListHeaderContainer,
   AnalysisProposalListFiltersContainer,
@@ -57,6 +53,7 @@ import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFil
 import AnalysisFilterCategory from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
 import AnalysisFilterDistrict from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
 import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
+import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -66,75 +63,6 @@ type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
 |};
-
-export const ExportButtonStyle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  flex: 1;
-  margin-right: 10px;
-  justify-content: flex-end;
-  div[role='button'] {
-    background: white;
-    border-radius: 4px;
-    border: 1px solid rgb(238, 238, 238);
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-
-  .icon-button {
-    border: none;
-    background: none;
-  }
-
-  svg.tooltip-icon-color:hover {
-    fill: ${colors.blue};
-    cursor: pointer;
-  }
-
-  .export-button-container {
-    display: flex;
-    flex: 1;
-    margin-bottom: 6px;
-  }
-
-  .export-info-container {
-    button {
-      border: none;
-      background: none;
-    }
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-right: 5px;
-  }
-
-  div[role='menu'] {
-    width: 100%;
-    .start-no-bold {
-      span {
-        font-weight: normal;
-        padding-left: 0;
-        color: #333;
-      }
-    }
-    .bold-content,
-    .bold-content span {
-      font-weight: 700;
-      color: #333;
-    }
-  }
-
-  p {
-    padding-left: 6px;
-    padding-right: 2px;
-  }
-
-  svg.no-transform-svg {
-    transform: none;
-  }
-`;
 
 const assignStepProposals = async (
   stepsAdded: Uuid[],
@@ -282,62 +210,58 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
       )}
 
       {stepStatuses?.length > 0 && !isRestricted && (
-        <AnalysisFilterContainer>
-          <Collapsable align="right" key="status-filter">
-            <Collapsable.Button>
-              <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
-            </Collapsable.Button>
-            <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
-              <DropdownSelect
-                value={parameters.filters.status}
-                defaultValue="ALL"
-                onChange={newValue => {
-                  dispatch({
-                    type: 'CHANGE_STATUS_FILTER',
-                    payload: ((newValue: any): SortValues),
-                  });
-                }}
-                title={intl.formatMessage({ id: 'filter-by' })}>
-                <DropdownSelect.Choice value="ALL">
-                  {intl.formatMessage({ id: 'global.select_statuses' })}
+        <Collapsable align="right" key="status-filter">
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
+          </Collapsable.Button>
+          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
+            <DropdownSelect
+              value={parameters.filters.status}
+              defaultValue="ALL"
+              onChange={newValue => {
+                dispatch({
+                  type: 'CHANGE_STATUS_FILTER',
+                  payload: ((newValue: any): SortValues),
+                });
+              }}
+              title={intl.formatMessage({ id: 'filter-by' })}>
+              <DropdownSelect.Choice value="ALL">
+                {intl.formatMessage({ id: 'global.select_statuses' })}
+              </DropdownSelect.Choice>
+              <DropdownSelect.Choice value="NONE">
+                {intl.formatMessage({ id: 'global.select_propositions-without-status' })}
+              </DropdownSelect.Choice>
+              {stepStatuses.map(stepStatus => (
+                <DropdownSelect.Choice key={stepStatus.id} value={stepStatus.id}>
+                  {stepStatus.name}
                 </DropdownSelect.Choice>
-                <DropdownSelect.Choice value="NONE">
-                  {intl.formatMessage({ id: 'global.select_propositions-without-status' })}
-                </DropdownSelect.Choice>
-                {stepStatuses.map(stepStatus => (
-                  <DropdownSelect.Choice key={stepStatus.id} value={stepStatus.id}>
-                    {stepStatus.name}
-                  </DropdownSelect.Choice>
-                ))}
-              </DropdownSelect>
-            </Collapsable.Element>
-          </Collapsable>
-        </AnalysisFilterContainer>
+              ))}
+            </DropdownSelect>
+          </Collapsable.Element>
+        </Collapsable>
       )}
 
       {!isRestricted && (
-        <AnalysisFilterContainer>
-          <Collapsable align="right" key="step-filter">
-            <Collapsable.Button>
-              <FormattedMessage tagName="p" id="admin.label.step" />
-            </Collapsable.Button>
-            <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
-              <DropdownSelect
-                value={parameters.filters.step}
-                defaultValue={firstCollectStepId || steps[0].id}
-                onChange={newValue => {
-                  dispatch({ type: 'CHANGE_STEP_FILTER', payload: ((newValue: any): SortValues) });
-                }}
-                title={intl.formatMessage({ id: 'filter-by' })}>
-                {steps.map(s => (
-                  <DropdownSelect.Choice key={s.id} value={s.id}>
-                    {s.title}
-                  </DropdownSelect.Choice>
-                ))}
-              </DropdownSelect>
-            </Collapsable.Element>
-          </Collapsable>
-        </AnalysisFilterContainer>
+        <Collapsable align="right" key="step-filter">
+          <Collapsable.Button>
+            <FormattedMessage tagName="p" id="admin.label.step" />
+          </Collapsable.Button>
+          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
+            <DropdownSelect
+              value={parameters.filters.step}
+              defaultValue={firstCollectStepId || steps[0].id}
+              onChange={newValue => {
+                dispatch({ type: 'CHANGE_STEP_FILTER', payload: ((newValue: any): SortValues) });
+              }}
+              title={intl.formatMessage({ id: 'filter-by' })}>
+              {steps.map(s => (
+                <DropdownSelect.Choice key={s.id} value={s.id}>
+                  {s.title}
+                </DropdownSelect.Choice>
+              ))}
+            </DropdownSelect>
+          </Collapsable.Element>
+        </Collapsable>
       )}
 
       <AnalysisFilterSort
@@ -359,93 +283,87 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
           <S.Divider />
         </>
       )}
-      <AnalysisFilterContainer>
-        <Collapsable
-          align="right"
-          onClose={() =>
-            assignStepProposals(
-              selectionSteps.added,
-              selectionSteps.removed,
-              selectedRows,
-              selectedStepId,
-              dispatch,
-            )
-          }>
-          <Collapsable.Button>
-            <FormattedMessage tagName="p" id="synthesis.edition.action.publish.field.parent" />
-          </Collapsable.Button>
-          <Collapsable.Element
-            ariaLabel={intl.formatMessage({ id: 'synthesis.edition.action.publish.field.parent' })}>
-            <DropdownSelect
-              shouldOverflow
-              isMultiSelect
-              mode="add-remove"
-              title={intl.formatMessage({ id: 'move.in.step' })}
-              initialValue={getCommonStepIdWithinProposalIds(project, selectedRows)}
-              value={selectionSteps}
-              onChange={setSelectionSteps}>
-              {steps.map(step => (
-                <S.ProposalListDropdownChoice
-                  key={step.id}
-                  value={step.id}
-                  isIndeterminate={isStepIndeterminate(project, selectedRows, step.id)}
-                  disabled={collectSteps.includes(step.id)}>
-                  {step.title}
-                </S.ProposalListDropdownChoice>
-              ))}
-            </DropdownSelect>
-          </Collapsable.Element>
-        </Collapsable>
-      </AnalysisFilterContainer>
+      <Collapsable
+        align="right"
+        onClose={() =>
+          assignStepProposals(
+            selectionSteps.added,
+            selectionSteps.removed,
+            selectedRows,
+            selectedStepId,
+            dispatch,
+          )
+        }>
+        <Collapsable.Button>
+          <FormattedMessage tagName="p" id="synthesis.edition.action.publish.field.parent" />
+        </Collapsable.Button>
+        <Collapsable.Element
+          ariaLabel={intl.formatMessage({ id: 'synthesis.edition.action.publish.field.parent' })}>
+          <DropdownSelect
+            shouldOverflow
+            isMultiSelect
+            mode="add-remove"
+            title={intl.formatMessage({ id: 'move.in.step' })}
+            initialValue={getCommonStepIdWithinProposalIds(project, selectedRows)}
+            value={selectionSteps}
+            onChange={setSelectionSteps}>
+            {steps.map(step => (
+              <S.ProposalListDropdownChoice
+                key={step.id}
+                value={step.id}
+                isIndeterminate={isStepIndeterminate(project, selectedRows, step.id)}
+                disabled={collectSteps.includes(step.id)}>
+                {step.title}
+              </S.ProposalListDropdownChoice>
+            ))}
+          </DropdownSelect>
+        </Collapsable.Element>
+      </Collapsable>
 
-      <AnalysisFilterContainer>
-        <Collapsable align="right">
-          {closeDropdown => (
-            <>
-              <Collapsable.Button>
-                <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
-              </Collapsable.Button>
-              <Collapsable.Element
-                ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.status' })}>
-                <DropdownSelect
-                  value={selectionStatus}
-                  onChange={newValue =>
-                    assignStatus(newValue, selectedStepId, selectedRows, closeDropdown, dispatch)
-                  }
-                  title={intl.formatMessage({ id: 'change.status.to' })}>
-                  {stepStatuses.length === 0 && (
-                    <DropdownSelect.Message>
-                      <S.EmptyStatuses>
-                        <Icon name={ICON_NAME.warning} size={15} />
-                        <div>
-                          <FormattedMessage tagName="p" id="no.filter.available" />
-                          <FormattedMessage
-                            tagName="span"
-                            id="help.add.filters"
-                            values={{
-                              link_to_step: (
-                                <a href={project.adminAlphaUrl}>{selectedStep?.title}</a>
-                              ),
-                            }}
-                          />
-                        </div>
-                      </S.EmptyStatuses>
-                    </DropdownSelect.Message>
-                  )}
-                  {stepStatuses.map(status => (
-                    <DropdownSelect.Choice
-                      key={status.id}
-                      value={status.id}
-                      isIndeterminate={isStatusIndeterminate(project, selectedRows, status.id)}>
-                      {status.name}
-                    </DropdownSelect.Choice>
-                  ))}
-                </DropdownSelect>
-              </Collapsable.Element>
-            </>
-          )}
-        </Collapsable>
-      </AnalysisFilterContainer>
+      <Collapsable align="right">
+        {closeDropdown => (
+          <>
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="admin.fields.proposal.status" />
+            </Collapsable.Button>
+            <Collapsable.Element
+              ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.status' })}>
+              <DropdownSelect
+                value={selectionStatus}
+                onChange={newValue =>
+                  assignStatus(newValue, selectedStepId, selectedRows, closeDropdown, dispatch)
+                }
+                title={intl.formatMessage({ id: 'change.status.to' })}>
+                {stepStatuses.length === 0 && (
+                  <DropdownSelect.Message>
+                    <S.EmptyStatuses>
+                      <Icon name={ICON_NAME.warning} size={15} />
+                      <div>
+                        <FormattedMessage tagName="p" id="no.filter.available" />
+                        <FormattedMessage
+                          tagName="span"
+                          id="help.add.filters"
+                          values={{
+                            link_to_step: <a href={project.adminAlphaUrl}>{selectedStep?.title}</a>,
+                          }}
+                        />
+                      </div>
+                    </S.EmptyStatuses>
+                  </DropdownSelect.Message>
+                )}
+                {stepStatuses.map(status => (
+                  <DropdownSelect.Choice
+                    key={status.id}
+                    value={status.id}
+                    isIndeterminate={isStatusIndeterminate(project, selectedRows, status.id)}>
+                    {status.name}
+                  </DropdownSelect.Choice>
+                ))}
+              </DropdownSelect>
+            </Collapsable.Element>
+          </>
+        )}
+      </Collapsable>
     </React.Fragment>
   );
 
@@ -516,127 +434,86 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
     <PickableList.Provider>
       <AnalysisPickableListContainer>
         <S.ProjectAdminProposalsHeader>
-          <InlineSelect
-            value={parameters.filters.state}
-            onChange={newValue => {
-              dispatch({
-                type: 'CHANGE_STATE_FILTER',
-                payload: ((newValue: any): ProposalsStateValues),
-              });
-            }}>
-            <InlineSelect.Choice value="ALL">
-              <FormattedMessage
-                id="filter.count.status.all"
-                values={{ num: project.proposalsAll?.totalCount }}
-              />
-            </InlineSelect.Choice>
-            <InlineSelect.Choice value="PUBLISHED">
-              <FormattedMessage
-                id="filter.count.status.published"
-                values={{ num: project.proposalsPublished?.totalCount }}
-              />
-            </InlineSelect.Choice>
-            <InlineSelect.Choice value="DRAFT">
-              <FormattedMessage
-                id="filter.count.status.draft"
-                values={{ num: project.proposalsDraft?.totalCount }}
-              />
-            </InlineSelect.Choice>
-            <InlineSelect.Choice value="TRASHED">
-              <FormattedMessage
-                id="filter.count.status.trash"
-                values={{ num: project.proposalsTrashed?.totalCount }}
-              />
-            </InlineSelect.Choice>
-          </InlineSelect>
-
-          <ExportButtonStyle>
-            <Collapsable align="right" key="export-button">
-              <Collapsable.Button>
-                <Icon
-                  name={ICON_NAME.download}
-                  size="12px"
-                  className="no-transform-svg"
-                  classNames="icon-button-export"
+          <div>
+            <InlineSelect
+              value={parameters.filters.state}
+              onChange={newValue => {
+                dispatch({
+                  type: 'CHANGE_STATE_FILTER',
+                  payload: ((newValue: any): ProposalsStateValues),
+                });
+              }}>
+              <InlineSelect.Choice value="ALL">
+                <FormattedMessage
+                  id="filter.count.status.all"
+                  values={{ num: project.proposalsAll?.totalCount }}
                 />
-                <FormattedMessage tagName="p" id="global.export" />
-              </Collapsable.Button>
+              </InlineSelect.Choice>
+              <InlineSelect.Choice value="PUBLISHED">
+                <FormattedMessage
+                  id="filter.count.status.published"
+                  values={{ num: project.proposalsPublished?.totalCount }}
+                />
+              </InlineSelect.Choice>
+              <InlineSelect.Choice value="DRAFT">
+                <FormattedMessage
+                  id="filter.count.status.draft"
+                  values={{ num: project.proposalsDraft?.totalCount }}
+                />
+              </InlineSelect.Choice>
+              <InlineSelect.Choice value="TRASHED">
+                <FormattedMessage
+                  id="filter.count.status.trash"
+                  values={{ num: project.proposalsTrashed?.totalCount }}
+                />
+              </InlineSelect.Choice>
+            </InlineSelect>
+          </div>
 
-              <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'label.export.by.step' })}>
-                <DropdownSelect
-                  title={
-                    <div className="export-info-container">
-                      <FormattedMessage id="label.export.by.step" />
-                      <Button
-                        className="icon-button"
-                        onClick={() => {
-                          window.open(
-                            'https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif',
-                          );
-                        }}>
-                        <Icon
-                          className="ml-20 tooltip-icon-color"
-                          name={ICON_NAME.information}
-                          size="16px"
-                          color="rgb(204, 204, 204)"
-                          title={intl.formatMessage({ id: 'label.export.by.step' })}
-                        />
-                      </Button>
-                    </div>
-                  }>
-                  {project?.exportableSteps &&
-                    project.exportableSteps.filter(Boolean).map(projectAbstractStep => {
-                      const { position, step } = projectAbstractStep;
-                      return (
-                        <div className="start-no-bold">
-                          <DropdownSelect.Choice
-                            key={step.id}
-                            value={step.slug ?? ''}
-                            onClick={() => {
-                              window.open(
-                                `/projects/${project.slug}/step/${step.slug ?? ''}/download`,
-                              );
-                            }}>
-                            <strong className="bold-content">
-                              <FormattedMessage id="admin.label.step" />
-                              {` ${position ?? 0} ${step.title}`}
-                            </strong>
-                            {` - `}
-                            <FormattedMessage
-                              id={
-                                step.isQuestionnaireStep
-                                  ? 'list-of-answers'
-                                  : 'list-of-contributions'
-                              }
-                            />
-                          </DropdownSelect.Choice>
-                        </div>
-                      );
-                    })}
-                </DropdownSelect>
-              </Collapsable.Element>
-            </Collapsable>
-          </ExportButtonStyle>
-          <ClearableInput
-            id="search"
-            name="search"
-            type="text"
-            icon={<i className="cap cap-magnifier" />}
-            onClear={() => {
-              if (parameters.filters.term !== null) {
-                dispatch({ type: 'CLEAR_TERM' });
-              }
-            }}
-            initialValue={parameters.filters.term}
-            onSubmit={term => {
-              if (term === '' && parameters.filters.term !== null) {
-                dispatch({ type: 'CLEAR_TERM' });
-              } else if (term !== '' && parameters.filters.term !== term) {
-                dispatch({ type: 'SEARCH_TERM', payload: term });
-              }
-            }}
-            placeholder={intl.formatMessage({ id: 'global.menu.search' })}
-          />
+          <div>
+            <ExportButton
+              hasMarginRight
+              disabled={!hasProposals}
+              onChange={stepSlug => {
+                window.open(`/projects/${project.slug}/step/${stepSlug ?? ''}/download`, '_blank');
+              }}
+              linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif">
+              {project.exportableSteps.filter(Boolean).map(({ position, step }) => (
+                <DropdownSelect.Choice key={step.id} value={step.id}>
+                  <strong className="bold-content">
+                    <FormattedMessage id="admin.label.step" />
+                    {`${position ?? 0} ${step.title}`}
+                  </strong>
+                  {` - `}
+                  <FormattedMessage
+                    id={step.isQuestionnaireStep ? 'list-of-answers' : 'list-of-contributions'}
+                  />
+                </DropdownSelect.Choice>
+              ))}
+            </ExportButton>
+
+            <ClearableInput
+              id="search"
+              name="search"
+              type="text"
+              icon={<i className="cap cap-magnifier" />}
+              disabled={!hasProposals}
+              onClear={() => {
+                if (parameters.filters.term !== null) {
+                  dispatch({ type: 'CLEAR_TERM' });
+                }
+              }}
+              initialValue={parameters.filters.term}
+              onSubmit={term => {
+                if (term === '' && parameters.filters.term !== null) {
+                  dispatch({ type: 'CLEAR_TERM' });
+                } else if (term !== '' && parameters.filters.term !== term) {
+                  dispatch({ type: 'SEARCH_TERM', payload: term });
+                }
+              }}
+              placeholder={intl.formatMessage({ id: 'global.menu.search' })}
+            />
+          </div>
         </S.ProjectAdminProposalsHeader>
 
         <PickableList

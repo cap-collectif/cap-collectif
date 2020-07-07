@@ -265,7 +265,7 @@ const getFormattedFiltersOrdered = (
         };
       }
 
-      if (filter.type === 'progressState' && filter.id !== 'ALL') {
+      if (filter.type === 'progressState') {
         const progressState = PROPOSAL_STATUS[filter.id];
 
         return {

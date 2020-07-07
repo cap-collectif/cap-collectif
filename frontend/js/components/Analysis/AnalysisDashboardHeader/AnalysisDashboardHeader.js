@@ -34,7 +34,6 @@ import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQue
 import { TYPE_ACTION, TYPE_ROLE } from '~/constants/AnalyseConstants';
 import FilterTag from '~ui/Analysis/FilterTag';
 import {
-  AnalysisFilterContainer,
   AnalysisProposalListFiltersContainer,
   AnalysisProposalListFiltersAction,
   AnalysisProposalListFiltersList,
@@ -304,167 +303,155 @@ const AnalysisDashboardHeader = ({
   const renderActions = (
     <>
       {actionsShown.includes(ANALYST) && (
-        <AnalysisFilterContainer>
-          <Collapsable
-            align="right"
-            key="action-analyst"
-            onClose={() =>
-              assignAnalysts(
-                analysts.added,
-                analysts.removed,
-                selectedRows,
-                analystsWithAnalyseBegin,
-                dispatch,
-              )
-            }>
-            {closeDropdown => (
-              <React.Fragment>
-                <Collapsable.Button>
-                  <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
-                </Collapsable.Button>
-                <Collapsable.Element
-                  ariaLabel={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}>
-                  <SearchableDropdownSelect
-                    disabled={analystsWithAnalyseBegin.length === 10}
-                    searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-                    shouldOverflow
-                    mode="add-remove"
-                    isMultiSelect
-                    initialValue={getCommonAnalystIdsWithinProposalIds(project, selectedRows)}
-                    value={analysts}
-                    onChange={setAnalysts}
-                    noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-                    clearChoice={{
-                      enabled:
-                        !isOnlyAnalyst(roleUserConnected) && analystsWithAnalyseBegin.length === 0,
-                      message: intl.formatMessage({ id: 'assigned.to.nobody' }),
-                      onClear: async () => {
-                        try {
-                          closeDropdown();
-                          dispatch({ type: 'START_LOADING' });
-                          await RevokeAnalystsToProposalsMutation.commit({
-                            input: {
-                              proposalIds: selectedRows,
-                              analystIds: analysts.all,
-                            },
-                          });
-                          dispatch({ type: 'STOP_LOADING' });
-                        } catch (e) {
-                          FluxDispatcher.dispatch({
-                            actionType: UPDATE_ALERT,
-                            alert: {
-                              type: TYPE_ALERT.ERROR,
-                              content: 'global.error.server.form',
-                            },
-                          });
-                          // eslint-disable-next-line no-console
-                          console.error(e);
-                        }
-                      },
-                    }}
-                    title={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}
-                    defaultOptions={formatDefaultUsers(defaultUsers, selectedAnalystsByProposals)}
-                    loadOptions={loadOptions}>
-                    {users =>
-                      users.map(user => (
-                        <UserSearchDropdownChoice
-                          key={user.id}
-                          type={TYPE_ROLE.ANALYST}
-                          isIndeterminate={isRowIndeterminate(
-                            user,
-                            project,
-                            selectedRows,
-                            'analyst',
-                          )}
-                          user={user}
-                          disabled={
-                            (analystsWithAnalyseBegin.some(a => a.id === user.id) &&
-                              !isRowIndeterminate(user, project, selectedRows, 'analyst')) ||
-                            userConnected.id === user.id
-                          }
-                        />
-                      ))
-                    }
-                  </SearchableDropdownSelect>
-                </Collapsable.Element>
-              </React.Fragment>
-            )}
-          </Collapsable>
-        </AnalysisFilterContainer>
-      )}
-
-      {actionsShown.includes(SUPERVISOR) && (
-        <AnalysisFilterContainer>
-          <Collapsable align="right" key="action-supervisor">
-            {closeDropdown => (
-              <React.Fragment>
-                <Collapsable.Button>
-                  <FormattedMessage tagName="p" id="global.review" />
-                </Collapsable.Button>
-                <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-supervisor' })}>
-                  <SearchableDropdownSelect
-                    disabled={supervisorsWithAnalyseBegin.length > 0}
-                    shouldOverflow
-                    searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-                    value={supervisor}
-                    onChange={assigneeId =>
-                      assignSupervisor(
-                        assigneeId,
-                        supervisor,
-                        supervisorsWithAnalyseBegin,
-                        selectedRows,
-                        closeDropdown,
-                        dispatch,
-                      )
-                    }
-                    noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-                    clearChoice={{
-                      enabled: supervisorsWithAnalyseBegin.length === 0,
-                      message: intl.formatMessage({ id: 'assigned.to.nobody' }),
-                      onClear: async () => {
+        <Collapsable
+          align="right"
+          key="action-analyst"
+          onClose={() =>
+            assignAnalysts(
+              analysts.added,
+              analysts.removed,
+              selectedRows,
+              analystsWithAnalyseBegin,
+              dispatch,
+            )
+          }>
+          {closeDropdown => (
+            <React.Fragment>
+              <Collapsable.Button>
+                <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
+              </Collapsable.Button>
+              <Collapsable.Element
+                ariaLabel={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}>
+                <SearchableDropdownSelect
+                  disabled={analystsWithAnalyseBegin.length === 10}
+                  searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
+                  shouldOverflow
+                  mode="add-remove"
+                  isMultiSelect
+                  initialValue={getCommonAnalystIdsWithinProposalIds(project, selectedRows)}
+                  value={analysts}
+                  onChange={setAnalysts}
+                  noResultsMessage={intl.formatMessage({ id: 'no_result' })}
+                  clearChoice={{
+                    enabled:
+                      !isOnlyAnalyst(roleUserConnected) && analystsWithAnalyseBegin.length === 0,
+                    message: intl.formatMessage({ id: 'assigned.to.nobody' }),
+                    onClear: async () => {
+                      try {
                         closeDropdown();
                         dispatch({ type: 'START_LOADING' });
-                        await AssignSupervisorToProposalsMutation.commit({
+                        await RevokeAnalystsToProposalsMutation.commit({
                           input: {
                             proposalIds: selectedRows,
-                            supervisorId: null,
+                            analystIds: analysts.all,
                           },
                         });
                         dispatch({ type: 'STOP_LOADING' });
-                      },
-                    }}
-                    title={intl.formatMessage({ id: 'assign-supervisor' })}
-                    defaultOptions={formatDefaultUsers(
-                      defaultUsers,
-                      selectedSupervisorsByProposals,
-                    )}
-                    loadOptions={loadOptions}>
-                    {users =>
-                      users.map(user => (
-                        <UserSearchDropdownChoice
-                          key={user.id}
-                          type={TYPE_ROLE.SUPERVISOR}
-                          isIndeterminate={isRowIndeterminate(
-                            user,
-                            project,
-                            selectedRows,
-                            'supervisor',
-                          )}
-                          user={user}
-                          disabled={
-                            (supervisorsWithAnalyseBegin.some(s => s.id === user.id) &&
-                              !isRowIndeterminate(user, project, selectedRows, 'supervisor')) ||
-                            userConnected.id === user.id
-                          }
-                        />
-                      ))
-                    }
-                  </SearchableDropdownSelect>
-                </Collapsable.Element>
-              </React.Fragment>
-            )}
-          </Collapsable>
-        </AnalysisFilterContainer>
+                      } catch (e) {
+                        FluxDispatcher.dispatch({
+                          actionType: UPDATE_ALERT,
+                          alert: {
+                            type: TYPE_ALERT.ERROR,
+                            content: 'global.error.server.form',
+                          },
+                        });
+                        // eslint-disable-next-line no-console
+                        console.error(e);
+                      }
+                    },
+                  }}
+                  title={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}
+                  defaultOptions={formatDefaultUsers(defaultUsers, selectedAnalystsByProposals)}
+                  loadOptions={loadOptions}>
+                  {users =>
+                    users.map(user => (
+                      <UserSearchDropdownChoice
+                        key={user.id}
+                        type={TYPE_ROLE.ANALYST}
+                        isIndeterminate={isRowIndeterminate(user, project, selectedRows, 'analyst')}
+                        user={user}
+                        disabled={
+                          (analystsWithAnalyseBegin.some(a => a.id === user.id) &&
+                            !isRowIndeterminate(user, project, selectedRows, 'analyst')) ||
+                          userConnected.id === user.id
+                        }
+                      />
+                    ))
+                  }
+                </SearchableDropdownSelect>
+              </Collapsable.Element>
+            </React.Fragment>
+          )}
+        </Collapsable>
+      )}
+
+      {actionsShown.includes(SUPERVISOR) && (
+        <Collapsable align="right" key="action-supervisor">
+          {closeDropdown => (
+            <React.Fragment>
+              <Collapsable.Button>
+                <FormattedMessage tagName="p" id="global.review" />
+              </Collapsable.Button>
+              <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-supervisor' })}>
+                <SearchableDropdownSelect
+                  disabled={supervisorsWithAnalyseBegin.length > 0}
+                  shouldOverflow
+                  searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
+                  value={supervisor}
+                  onChange={assigneeId =>
+                    assignSupervisor(
+                      assigneeId,
+                      supervisor,
+                      supervisorsWithAnalyseBegin,
+                      selectedRows,
+                      closeDropdown,
+                      dispatch,
+                    )
+                  }
+                  noResultsMessage={intl.formatMessage({ id: 'no_result' })}
+                  clearChoice={{
+                    enabled: supervisorsWithAnalyseBegin.length === 0,
+                    message: intl.formatMessage({ id: 'assigned.to.nobody' }),
+                    onClear: async () => {
+                      closeDropdown();
+                      dispatch({ type: 'START_LOADING' });
+                      await AssignSupervisorToProposalsMutation.commit({
+                        input: {
+                          proposalIds: selectedRows,
+                          supervisorId: null,
+                        },
+                      });
+                      dispatch({ type: 'STOP_LOADING' });
+                    },
+                  }}
+                  title={intl.formatMessage({ id: 'assign-supervisor' })}
+                  defaultOptions={formatDefaultUsers(defaultUsers, selectedSupervisorsByProposals)}
+                  loadOptions={loadOptions}>
+                  {users =>
+                    users.map(user => (
+                      <UserSearchDropdownChoice
+                        key={user.id}
+                        type={TYPE_ROLE.SUPERVISOR}
+                        isIndeterminate={isRowIndeterminate(
+                          user,
+                          project,
+                          selectedRows,
+                          'supervisor',
+                        )}
+                        user={user}
+                        disabled={
+                          (supervisorsWithAnalyseBegin.some(s => s.id === user.id) &&
+                            !isRowIndeterminate(user, project, selectedRows, 'supervisor')) ||
+                          userConnected.id === user.id
+                        }
+                      />
+                    ))
+                  }
+                </SearchableDropdownSelect>
+              </Collapsable.Element>
+            </React.Fragment>
+          )}
+        </Collapsable>
       )}
     </>
   );

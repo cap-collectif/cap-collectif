@@ -46,6 +46,7 @@ export const ICON_NAME: {
   askBubble: 'askBubble',
   messageBubble: 'messageBubble',
   messageBubbleCheck: 'messageBubbleCheck',
+  messageBubbleFilled: 'messageBubbleFilled',
   download: 'download',
   doubleMessageBubble: 'doubleMessageBubble',
   taskList: 'taskList',
@@ -75,6 +76,12 @@ export const ICON_NAME: {
   play: 'play',
   userLive: 'userLive',
   join: 'join',
+  vip: 'vip',
+  verified: 'verified',
+  singleMan: 'singleMan',
+  singleManFilled: 'singleManFilled',
+  like: 'like',
+  paperPlane: 'paperPlane',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -119,6 +126,7 @@ export const ICON_NAME: {
   askBubble: 'askBubble',
   messageBubble: 'messageBubble',
   messageBubbleCheck: 'messageBubbleCheck',
+  messageBubbleFilled: 'messageBubbleFilled',
   doubleMessageBubble: 'doubleMessageBubble',
   taskList: 'taskList',
   done: 'done',
@@ -147,6 +155,12 @@ export const ICON_NAME: {
   play: 'play',
   userLive: 'userLive',
   join: 'join',
+  vip: 'vip',
+  verified: 'verified',
+  singleMan: 'singleMan',
+  singleManFilled: 'singleManFilled',
+  like: 'like',
+  paperPlane: 'paperPlane',
 };
 
 type Props = {|
@@ -250,6 +264,8 @@ const getIcon = name => {
       return <Icons.DownLoad />;
     case 'messageBubble':
       return <Icons.MessageBubble />;
+    case 'messageBubbleFilled':
+      return <Icons.MessageBubbleFilled />;
     case 'taskList':
     case 'todo':
       return <Icons.TaskList />;
@@ -303,6 +319,18 @@ const getIcon = name => {
       return <Icons.UserLive />;
     case 'join':
       return <Icons.Join />;
+    case 'vip':
+      return <Icons.Vip />;
+    case 'verified':
+      return <Icons.Verified />;
+    case 'singleMan':
+      return <Icons.SingleMan />;
+    case 'singleManFilled':
+      return <Icons.SingleManFilled />;
+    case 'like':
+      return <Icons.Like />;
+    case 'paperPlane':
+      return <Icons.PaperPlane />;
     default:
       return <div />;
   }

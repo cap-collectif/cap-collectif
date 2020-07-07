@@ -15,9 +15,10 @@ export const ORDER_BY: {
 type Props = {|
   value: $Values<typeof ORDER_BY>,
   onChange: (newValue: string) => void,
+  isParticipant?: boolean,
 |};
 
-const AnalysisFilterSort = ({ value, onChange }: Props) => {
+const AnalysisFilterSort = ({ value, onChange, isParticipant }: Props) => {
   const intl = useIntl();
 
   return (
@@ -33,10 +34,14 @@ const AnalysisFilterSort = ({ value, onChange }: Props) => {
           onChange={newValue => onChange(newValue)}
           title={intl.formatMessage({ id: 'sort-by' })}>
           <DropdownSelect.Choice value={ORDER_BY.NEWEST}>
-            {intl.formatMessage({ id: 'global.filter_f_last' })}
+            {intl.formatMessage({
+              id: isParticipant ? 'most.active.users' : 'global.filter_f_last',
+            })}
           </DropdownSelect.Choice>
           <DropdownSelect.Choice value={ORDER_BY.OLDEST}>
-            {intl.formatMessage({ id: 'global.filter_f_old' })}
+            {intl.formatMessage({
+              id: isParticipant ? 'least.active.users' : 'global.filter_f_old',
+            })}
           </DropdownSelect.Choice>
         </DropdownSelect>
       </Collapsable.Element>

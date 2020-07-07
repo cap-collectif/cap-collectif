@@ -8,6 +8,7 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type ChildrenProps = {|
   +children?: React.Node,
+  +disabled?: boolean,
 |};
 
 type CollapsableElementProps = {|
@@ -16,12 +17,14 @@ type CollapsableElementProps = {|
 |};
 
 const CollapsableButton = ({ children }: ChildrenProps) => {
-  const { setVisible, visible, onClose } = React.useContext(CollapsableContext);
+  const { setVisible, visible, onClose, disabled } = React.useContext(CollapsableContext);
   const button = React.useRef<HTMLDivElement | null>(null);
   const toggleVisibility = React.useCallback(() => {
+    if (disabled) return;
+
     setVisible(v => !v);
     if (onClose && visible) onClose();
-  }, [setVisible, onClose, visible]);
+  }, [setVisible, onClose, visible, disabled]);
   useKeyboardShortcuts(
     [
       {
@@ -61,6 +64,9 @@ export type CollapsableAlignment = 'left' | 'right';
 
 type Props = {|
   +align?: CollapsableAlignment,
+  +className?: string,
+  +id?: string,
+  +disabled?: boolean,
   +onClose?: () => void | Promise<any>,
   +children:
     | React.ChildrenArray<
@@ -75,7 +81,7 @@ type Props = {|
       >),
 |};
 
-const Collapsable = ({ children, onClose, align = 'left' }: Props) => {
+const Collapsable = ({ children, onClose, align = 'left', className, id, disabled }: Props) => {
   const [visible, setVisible] = React.useState(false);
   const closeDropdown = () => {
     if (onClose) {
@@ -88,8 +94,9 @@ const Collapsable = ({ children, onClose, align = 'left' }: Props) => {
       visible,
       setVisible,
       onClose,
+      disabled,
     }),
-    [visible, setVisible, onClose],
+    [visible, setVisible, onClose, disabled],
   );
   const collapsable = React.useRef<HTMLDivElement | null>(null);
   useClickAway(
@@ -104,7 +111,12 @@ const Collapsable = ({ children, onClose, align = 'left' }: Props) => {
   );
   return (
     <CollapsableContext.Provider value={contextValue}>
-      <S.Container ref={collapsable} align={align}>
+      <S.Container
+        ref={collapsable}
+        align={align}
+        className={className}
+        id={id}
+        disabled={disabled}>
         {typeof children === 'function' ? children(closeDropdown) : children}
       </S.Container>
     </CollapsableContext.Provider>

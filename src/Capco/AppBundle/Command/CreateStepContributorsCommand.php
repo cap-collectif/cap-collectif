@@ -86,6 +86,9 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $output->writeln("\t<fg=magenta>Empty export: there is no contributor.</>");
         }
         $writer = WriterFactory::create(Type::CSV, $delimiter);
+        if (!$writer) {
+            throw new \RuntimeException('An exception occured while creating a writer.');
+        }
         $writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
         $writer->addRow(WriterEntityFactory::createRowFromArray(GraphqlQueryAndCsvHeaderHelper::USER_HEADERS));
         $this->connectionTraversor->traverse(

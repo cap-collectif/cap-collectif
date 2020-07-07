@@ -80,20 +80,22 @@ exports[`<ProjectAdminMergeModale /> renders correctly 1`] = `
       >
         <ProjectAdminMergeModale__ProjectAdminMergeModaleStyle>
           <ul>
-            <li>
+            <li
+              key="UHJvcG9zYWw6cHJvcG9zYWwxMDk="
+            >
               <a
                 href="https://capco.dev/admin/capco/app/proposal/proposal109/edit?_locale=fr-FR"
-                key="UHJvcG9zYWw6cHJvcG9zYWwxMDk="
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 Luffy
               </a>
             </li>
-            <li>
+            <li
+              key="UHJvcGzdzMDk="
+            >
               <a
                 href="https://capco.dev/admin/capco/app/proposal/proposal120/edit?_locale=fr-FR"
-                key="UHJvcGzdzMDk="
                 rel="noopener noreferrer"
                 target="_blank"
               >

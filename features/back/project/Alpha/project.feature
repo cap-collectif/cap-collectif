@@ -180,3 +180,12 @@ Scenario: Admin merges two proposals
   And I wait ".analysis-pickable-list-container" to appear on current page
   And the number 1 element in ".pickableList-row h2 a" should contain "Merged proposal"
   And I should see 2 ".merge-tag" elements
+
+@database
+Scenario: Admin merges two proposals
+  Given I am logged in as admin
+  And I go to "/admin/alpha/project/projectIdf/participants"
+  And I wait "#export-button" to appear on current page
+  And I click on button "#export-button"
+  # Only 1 export should be visible for other don't have participants
+  And I should see 1 ".export-option" elements

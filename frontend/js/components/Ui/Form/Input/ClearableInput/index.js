@@ -5,11 +5,13 @@ import styled, { css, type StyledComponent } from 'styled-components';
 import type { Props as InputProps } from '~ui/Form/Input/Input';
 import { BASE_INPUT } from '~/utils/styles/variables';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 type Props = {|
   ...$Diff<InputProps, { value: *, defaultValue: * }>,
   className?: string,
   initialValue?: ?string,
+  disabled?: boolean,
   icon?: React.Node,
   onSubmit?: (value: string) => void,
   onClear?: () => void,
@@ -18,13 +20,14 @@ type Props = {|
 const CloseIcon = styled(Icon)``;
 
 const ClearableInputContainer: StyledComponent<
-  { hasIcon: boolean },
+  { hasIcon: boolean, disabled?: boolean },
   {},
   HTMLDivElement,
 > = styled.div.attrs({
   className: 'clearable-input',
 })`
   position: relative;
+  opacity: ${props => (props.disabled ? '.5' : 1)};
   & i,
   svg:not(${/* sc-selector */ CloseIcon}) {
     position: absolute;
@@ -37,6 +40,7 @@ const ClearableInputContainer: StyledComponent<
     max-width: 14px;
     align-items: center;
   }
+
   input {
     ${BASE_INPUT};
     padding-right: 35px;
@@ -47,6 +51,16 @@ const ClearableInputContainer: StyledComponent<
       `};
     width: 100%;
   }
+
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.5;
+      border: 1px solid ${colors.disabledGray};
+      & input:disabled {
+        background-color: #fff;
+      }
+    `}
 `;
 
 const CloseIconContainer: StyledComponent<
@@ -75,7 +89,16 @@ const CloseIconContainer: StyledComponent<
   }
 `;
 
-const ClearableInput = ({ icon, onSubmit, onClear, onChange, className, initialValue, ...rest }: Props) => {
+const ClearableInput = ({
+  icon,
+  onSubmit,
+  onClear,
+  onChange,
+  className,
+  initialValue,
+  disabled,
+  ...rest
+}: Props) => {
   const [input, clearInput] = useInput(initialValue || '');
   const onChangeHandler = e => {
     if (onChange) {
@@ -126,9 +149,9 @@ const ClearableInput = ({ icon, onSubmit, onClear, onChange, className, initialV
     [canClear],
   );
   return (
-    <ClearableInputContainer hasIcon={!!icon} className={className}>
+    <ClearableInputContainer hasIcon={!!icon} className={className} disabled={disabled}>
       {icon}
-      <input {...rest} {...input} onChange={onChangeHandler} ref={inputRef} />
+      <input disabled={disabled} {...rest} {...input} onChange={onChangeHandler} ref={inputRef} />
       <CloseIconContainer
         ref={closeIconContainerRef}
         tabIndex={0}

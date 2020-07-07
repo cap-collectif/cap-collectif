@@ -85,7 +85,7 @@ const AnalysisProjectPage = ({ project, defaultUsers, relay }: Props) => {
           }}
           hasMore={relay.hasMore()}
           loader={<AnalysisProposalListLoader key="loader" />}>
-          <AnalysisProposalListHeaderContainer>
+          <AnalysisProposalListHeaderContainer disabled={!hasSelectedFilters && !hasProposals}>
             <AnalysisDashboardHeader project={project} defaultUsers={defaultUsers} />
           </AnalysisProposalListHeaderContainer>
 

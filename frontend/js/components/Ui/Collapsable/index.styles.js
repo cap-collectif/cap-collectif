@@ -11,7 +11,7 @@ export const CollapsableBody: StyledComponent<{}, {}, HTMLDivElement> = styled.d
 `;
 
 export const Container: StyledComponent<
-  { align: CollapsableAlignment },
+  { align: CollapsableAlignment, disabled?: boolean },
   {},
   HTMLDivElement,
 > = styled.div`
@@ -30,6 +30,13 @@ export const Container: StyledComponent<
       & ${/* sc-selector */ CollapsableBody} {
         right: 0;
       }
+    `}
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.5;
+      border: 1px solid #eee;
+      background-color: #fff;
     `}
 `;
 

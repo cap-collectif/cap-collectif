@@ -46,4 +46,18 @@ describe('<Collapsable />', () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render correctly when disabled', () => {
+    const wrapper = shallow(
+      <Collapsable disabled>
+        <Collapsable.Button>
+          <p>Tri</p>
+        </Collapsable.Button>
+        <Collapsable.Element ariaLabel="Contenu">
+          <h1>Je suis caché hihi faut cliquer sur Tri pour me voir</h1>
+        </Collapsable.Element>
+      </Collapsable>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 });

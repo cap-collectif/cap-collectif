@@ -524,14 +524,30 @@ export const getDifferenceFilters = (
     category: filters.category,
     district: filters.district,
     status: filters.status,
-    step: filters.step,
   };
 
   const defaultFilters = {
     category: DEFAULT_FILTERS.category,
     district: DEFAULT_FILTERS.district,
     status: DEFAULT_FILTERS.status,
-    step: DEFAULT_FILTERS.step,
+  };
+
+  return !isEqual(defaultFilters, filtersFormatted);
+};
+
+export const getDifferenceFiltersAnalysis = (
+  filters: $PropertyType<ProjectAdminPageState, 'filters'>,
+): boolean => {
+  const filtersFormatted = {
+    category: filters.category,
+    district: filters.district,
+    progressState: filters.progressState,
+  };
+
+  const defaultFilters = {
+    category: DEFAULT_FILTERS.category,
+    district: DEFAULT_FILTERS.district,
+    progressState: DEFAULT_FILTERS.progressState,
   };
 
   return !isEqual(defaultFilters, filtersFormatted);

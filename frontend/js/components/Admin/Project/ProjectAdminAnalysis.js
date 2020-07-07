@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
-import styled, { type StyledComponent } from 'styled-components';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
 import DropdownSelect from '~ui/DropdownSelect';
@@ -27,12 +26,12 @@ import {
   getAllUserAssigned,
   getUsersWithAnalyseBegin,
   formatDefaultUsers,
+  getDifferenceFiltersAnalysis,
 } from './ProjectAdminProposals.utils';
 import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
 import UserSearchDropdownChoice from '~/components/Admin/Project/UserSearchDropdownChoice';
 import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql';
 import {
-  AnalysisFilterContainer,
   AnalysisPickableListContainer,
   AnalysisProposalListFiltersAction,
   AnalysisProposalListFiltersContainer,
@@ -62,10 +61,9 @@ import AssignAnalystsToProposalsMutation from '~/mutations/AssignAnalystsToPropo
 import type { Supervisor, DecisionMaker, Analyst } from './ProjectAdminProposals.utils';
 import AnalysisProposalListRole from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
 import AnalysisFilterProgressState from '~/components/Analysis/AnalysisFilter/AnalysisFilterProgressState';
-import { AnalysisDataContainer } from '~/components/Admin/Project/ProjectAdminAnalysis.style';
+import { AnalysisDataContainer, AnalysisHeader } from './ProjectAdminAnalysis.style';
 import AnalysisStatus from '~/components/Analysis/AnalysisStatus/AnalysisStatus';
-import { ExportButtonStyle } from '~/components/Admin/Project/ProjectAdminProposals';
-import colors from '~/utils/colors';
+import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -392,19 +390,6 @@ const assignNobodyDecisionMaker = async (
     console.error(e);
   }
 };
-const AnalysisHeaderStyle: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  align-items: center;
-  p {
-    margin: 0;
-  }
-  .export-button-container {
-    flex: 1;
-    div[role='menu'] {
-      right: 200px;
-    }
-  }
-`;
 
 const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }>) => {
   const intl = useIntl();
@@ -552,196 +537,186 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
 
   const renderActions = (
     <React.Fragment>
-      <AnalysisFilterContainer>
-        <Collapsable
-          align="right"
-          key="action-analyst"
-          onClose={() =>
-            assignAnalysts(
-              analysts.added,
-              analysts.removed,
-              selectedRows,
-              analystsWithAnalyseBegin,
-              setDataModal,
-              dispatch,
-            )
-          }>
-          {closeDropdown => (
-            <React.Fragment>
-              <Collapsable.Button>
-                <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
-              </Collapsable.Button>
-              <Collapsable.Element
-                ariaLabel={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}>
-                <SearchableDropdownSelect
-                  searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-                  shouldOverflow
-                  mode="add-remove"
-                  isMultiSelect
-                  initialValue={getCommonAnalystIdsWithinProposalIds(project, selectedRows)}
-                  value={analysts}
-                  onChange={setAnalysts}
-                  noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-                  clearChoice={{
-                    enabled: true,
-                    message: intl.formatMessage({ id: 'assigned.to.nobody' }),
-                    onClear: () =>
-                      assignNobodyAnalysts(
-                        analysts.all,
-                        selectedRows,
-                        analystsWithAnalyseBegin,
-                        closeDropdown,
-                        setDataModal,
-                        dispatch,
-                      ),
-                  }}
-                  title={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}
-                  defaultOptions={formatDefaultUsers(defaultUsers, selectedAnalystsByProposals)}
-                  loadOptions={loadOptions}>
-                  {users =>
-                    users.map(user => (
-                      <UserSearchDropdownChoice
-                        type={TYPE_ROLE.ANALYST}
-                        isIndeterminate={isRowIndeterminate(user, project, selectedRows, 'analyst')}
-                        key={user.id}
-                        user={user}
-                      />
-                    ))
-                  }
-                </SearchableDropdownSelect>
-              </Collapsable.Element>
-            </React.Fragment>
-          )}
-        </Collapsable>
-      </AnalysisFilterContainer>
+      <Collapsable
+        align="right"
+        key="action-analyst"
+        onClose={() =>
+          assignAnalysts(
+            analysts.added,
+            analysts.removed,
+            selectedRows,
+            analystsWithAnalyseBegin,
+            setDataModal,
+            dispatch,
+          )
+        }>
+        {closeDropdown => (
+          <React.Fragment>
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
+            </Collapsable.Button>
+            <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}>
+              <SearchableDropdownSelect
+                searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
+                shouldOverflow
+                mode="add-remove"
+                isMultiSelect
+                initialValue={getCommonAnalystIdsWithinProposalIds(project, selectedRows)}
+                value={analysts}
+                onChange={setAnalysts}
+                noResultsMessage={intl.formatMessage({ id: 'no_result' })}
+                clearChoice={{
+                  enabled: true,
+                  message: intl.formatMessage({ id: 'assigned.to.nobody' }),
+                  onClear: () =>
+                    assignNobodyAnalysts(
+                      analysts.all,
+                      selectedRows,
+                      analystsWithAnalyseBegin,
+                      closeDropdown,
+                      setDataModal,
+                      dispatch,
+                    ),
+                }}
+                title={intl.formatMessage({ id: 'assign-up-to-10-analyst' })}
+                defaultOptions={formatDefaultUsers(defaultUsers, selectedAnalystsByProposals)}
+                loadOptions={loadOptions}>
+                {users =>
+                  users.map(user => (
+                    <UserSearchDropdownChoice
+                      type={TYPE_ROLE.ANALYST}
+                      isIndeterminate={isRowIndeterminate(user, project, selectedRows, 'analyst')}
+                      key={user.id}
+                      user={user}
+                    />
+                  ))
+                }
+              </SearchableDropdownSelect>
+            </Collapsable.Element>
+          </React.Fragment>
+        )}
+      </Collapsable>
 
-      <AnalysisFilterContainer>
-        <Collapsable align="right" key="action-supervisor">
-          {closeDropdown => (
-            <React.Fragment>
-              <Collapsable.Button>
-                <FormattedMessage tagName="p" id="global.review" />
-              </Collapsable.Button>
-              <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-supervisor' })}>
-                <SearchableDropdownSelect
-                  searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-                  shouldOverflow
-                  value={supervisor}
-                  onChange={assigneeId =>
-                    assignSupervisor(
-                      assigneeId,
+      <Collapsable align="right" key="action-supervisor">
+        {closeDropdown => (
+          <React.Fragment>
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="global.review" />
+            </Collapsable.Button>
+            <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'assign-supervisor' })}>
+              <SearchableDropdownSelect
+                searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
+                shouldOverflow
+                value={supervisor}
+                onChange={assigneeId =>
+                  assignSupervisor(
+                    assigneeId,
+                    selectedSupervisorsByProposals,
+                    supervisorsWithAnalyseBegin,
+                    selectedRows,
+                    closeDropdown,
+                    setDataModal,
+                    dispatch,
+                  )
+                }
+                noResultsMessage={intl.formatMessage({ id: 'no_result' })}
+                clearChoice={{
+                  enabled: true,
+                  message: intl.formatMessage({ id: 'assigned.to.nobody' }),
+                  onClear: () =>
+                    assignNobodySupervisor(
                       selectedSupervisorsByProposals,
                       supervisorsWithAnalyseBegin,
                       selectedRows,
                       closeDropdown,
                       setDataModal,
                       dispatch,
-                    )
-                  }
-                  noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-                  clearChoice={{
-                    enabled: true,
-                    message: intl.formatMessage({ id: 'assigned.to.nobody' }),
-                    onClear: () =>
-                      assignNobodySupervisor(
-                        selectedSupervisorsByProposals,
-                        supervisorsWithAnalyseBegin,
+                    ),
+                }}
+                title={intl.formatMessage({ id: 'assign-supervisor' })}
+                defaultOptions={formatDefaultUsers(defaultUsers, selectedSupervisorsByProposals)}
+                loadOptions={loadOptions}>
+                {users =>
+                  users.map(user => (
+                    <UserSearchDropdownChoice
+                      type={TYPE_ROLE.SUPERVISOR}
+                      isIndeterminate={isRowIndeterminate(
+                        user,
+                        project,
                         selectedRows,
-                        closeDropdown,
-                        setDataModal,
-                        dispatch,
-                      ),
-                  }}
-                  title={intl.formatMessage({ id: 'assign-supervisor' })}
-                  defaultOptions={formatDefaultUsers(defaultUsers, selectedSupervisorsByProposals)}
-                  loadOptions={loadOptions}>
-                  {users =>
-                    users.map(user => (
-                      <UserSearchDropdownChoice
-                        type={TYPE_ROLE.SUPERVISOR}
-                        isIndeterminate={isRowIndeterminate(
-                          user,
-                          project,
-                          selectedRows,
-                          'supervisor',
-                        )}
-                        key={user.id}
-                        user={user}
-                      />
-                    ))
-                  }
-                </SearchableDropdownSelect>
-              </Collapsable.Element>
-            </React.Fragment>
-          )}
-        </Collapsable>
-      </AnalysisFilterContainer>
+                        'supervisor',
+                      )}
+                      key={user.id}
+                      user={user}
+                    />
+                  ))
+                }
+              </SearchableDropdownSelect>
+            </Collapsable.Element>
+          </React.Fragment>
+        )}
+      </Collapsable>
 
-      <AnalysisFilterContainer>
-        <Collapsable align="right" key="action-decision-maker">
-          {closeDropdown => (
-            <React.Fragment>
-              <Collapsable.Button>
-                <FormattedMessage tagName="p" id="global.decision" />
-              </Collapsable.Button>
-              <Collapsable.Element
-                ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}>
-                <SearchableDropdownSelect
-                  searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
-                  shouldOverflow
-                  value={decisionMaker}
-                  onChange={assigneeId =>
-                    assignDecisionMaker(
-                      assigneeId,
+      <Collapsable align="right" key="action-decision-maker">
+        {closeDropdown => (
+          <React.Fragment>
+            <Collapsable.Button>
+              <FormattedMessage tagName="p" id="global.decision" />
+            </Collapsable.Button>
+            <Collapsable.Element
+              ariaLabel={intl.formatMessage({ id: 'filter.by.assigned.decision-maker' })}>
+              <SearchableDropdownSelect
+                searchPlaceholder={intl.formatMessage({ id: 'search.user' })}
+                shouldOverflow
+                value={decisionMaker}
+                onChange={assigneeId =>
+                  assignDecisionMaker(
+                    assigneeId,
+                    selectedDecisionMakersByProposals,
+                    decisionMakersWithAnalyseBegin,
+                    selectedRows,
+                    closeDropdown,
+                    setDataModal,
+                    dispatch,
+                  )
+                }
+                noResultsMessage={intl.formatMessage({ id: 'no_result' })}
+                clearChoice={{
+                  enabled: true,
+                  message: intl.formatMessage({ id: 'assigned.to.nobody' }),
+                  onClear: () =>
+                    assignNobodyDecisionMaker(
                       selectedDecisionMakersByProposals,
                       decisionMakersWithAnalyseBegin,
                       selectedRows,
                       closeDropdown,
                       setDataModal,
                       dispatch,
-                    )
-                  }
-                  noResultsMessage={intl.formatMessage({ id: 'no_result' })}
-                  clearChoice={{
-                    enabled: true,
-                    message: intl.formatMessage({ id: 'assigned.to.nobody' }),
-                    onClear: () =>
-                      assignNobodyDecisionMaker(
-                        selectedDecisionMakersByProposals,
-                        decisionMakersWithAnalyseBegin,
+                    ),
+                }}
+                title={intl.formatMessage({ id: 'assign-decision-maker' })}
+                defaultOptions={formatDefaultUsers(defaultUsers, selectedDecisionMakersByProposals)}
+                loadOptions={loadOptions}>
+                {users =>
+                  users.map(user => (
+                    <UserSearchDropdownChoice
+                      type={TYPE_ROLE.DECISION_MAKER}
+                      isIndeterminate={isRowIndeterminate(
+                        user,
+                        project,
                         selectedRows,
-                        closeDropdown,
-                        setDataModal,
-                        dispatch,
-                      ),
-                  }}
-                  title={intl.formatMessage({ id: 'assign-decision-maker' })}
-                  defaultOptions={formatDefaultUsers(
-                    defaultUsers,
-                    selectedDecisionMakersByProposals,
-                  )}
-                  loadOptions={loadOptions}>
-                  {users =>
-                    users.map(user => (
-                      <UserSearchDropdownChoice
-                        type={TYPE_ROLE.DECISION_MAKER}
-                        isIndeterminate={isRowIndeterminate(
-                          user,
-                          project,
-                          selectedRows,
-                          'decision-maker',
-                        )}
-                        key={user.id}
-                        user={user}
-                      />
-                    ))
-                  }
-                </SearchableDropdownSelect>
-              </Collapsable.Element>
-            </React.Fragment>
-          )}
-        </Collapsable>
-      </AnalysisFilterContainer>
+                        'decision-maker',
+                      )}
+                      key={user.id}
+                      user={user}
+                    />
+                  ))
+                }
+              </SearchableDropdownSelect>
+            </Collapsable.Element>
+          </React.Fragment>
+        )}
+      </Collapsable>
     </React.Fragment>
   );
 
@@ -799,18 +774,18 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
 };
 
 export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) => {
-  const { status, dispatch } = useProjectAdminProposalsContext();
-  const intl = useIntl();
+  const { parameters, status, dispatch } = useProjectAdminProposalsContext();
   const hasProposals =
     !!project.firstAnalysisStep?.proposals?.totalCount &&
     project.firstAnalysisStep?.proposals?.totalCount > 0;
+  const hasSelectedFilters = getDifferenceFiltersAnalysis(parameters.filters);
 
-  const getProjectExportUrl = (type: string, projectSlug: string): string => {
+  const getProjectExportUrl = (type: string): string => {
     switch (type) {
       case 'analysis-export':
-        return `/projects/${projectSlug}/analysis/download`;
+        return `/projects/${project.slug}/analysis/download`;
       case 'decision-export':
-        return `/projects/${projectSlug}/decisions/download`;
+        return `/projects/${project.slug}/decisions/download`;
       default:
         return '';
     }
@@ -818,56 +793,24 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
 
   return (
     <AnalysisPickableListContainer>
-      <AnalysisHeaderStyle>
+      <AnalysisHeader>
         <ProjectAdminAnalysisShortcut project={project} />
-        <div className="export-button-container">
-          <ExportButtonStyle>
-            <Collapsable align="right" key="export-button">
-              <Collapsable.Button>
-                <Icon
-                  name={ICON_NAME.download}
-                  size="12px"
-                  className="no-transform-svg"
-                  color={colors.black}
-                />
-                <FormattedMessage tagName="p" id="global.export" />
-              </Collapsable.Button>
 
-              <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'label.export.by.step' })}>
-                <DropdownSelect
-                  onChange={type => {
-                    if (type !== '') {
-                      window.location.href = getProjectExportUrl(type, project.slug);
-                    }
-                  }}
-                  title={
-                    <div className="export-info-container">
-                      <FormattedMessage id="pop.over.label.export.data-set" />
-                      <div className="info-icon-container">
-                        <Icon
-                          className="tooltip-icon-color"
-                          name={ICON_NAME.information}
-                          color="rgb(204, 204, 204)"
-                          size="16px"
-                          title={intl.formatMessage({ id: 'pop.over.label.export.data-set' })}
-                        />
-                      </div>
-                    </div>
-                  }>
-                  <div className="start-no-bold">
-                    <DropdownSelect.Choice key="analysis-export" value="analysis-export">
-                      <FormattedMessage id="export.option.analysis-form" />
-                    </DropdownSelect.Choice>
-                    <DropdownSelect.Choice key="decision-export" value="decision-export">
-                      <FormattedMessage id="export.option.opinion-decision" />
-                    </DropdownSelect.Choice>
-                  </div>
-                </DropdownSelect>
-              </Collapsable.Element>
-            </Collapsable>
-          </ExportButtonStyle>
-        </div>
-      </AnalysisHeaderStyle>
+        <ExportButton
+          onChange={type => {
+            window.open(getProjectExportUrl(type), '_blank');
+          }}
+          disabled={!hasProposals}
+          linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif">
+          <DropdownSelect.Choice key="analysis-export" value="analysis-export">
+            <FormattedMessage id="export.option.analysis-form" />
+          </DropdownSelect.Choice>
+          <DropdownSelect.Choice key="decision-export" value="decision-export">
+            <FormattedMessage id="export.option.opinion-decision" />
+          </DropdownSelect.Choice>
+        </ExportButton>
+      </AnalysisHeader>
+
       <PickableList
         isLoading={status === 'loading'}
         useInfiniteScroll={hasProposals}
@@ -876,7 +819,7 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
         }}
         hasMore={project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage}
         loader={<AnalysisProposalListLoader key="loader" />}>
-        <AnalysisProposalListHeaderContainer>
+        <AnalysisProposalListHeaderContainer disabled={!hasSelectedFilters && !hasProposals}>
           <ProposalListHeader project={project} defaultUsers={defaultUsers} />
         </AnalysisProposalListHeaderContainer>
 
@@ -980,6 +923,7 @@ export default createPaginationContainer(
                 "analysts"
                 "supervisor"
                 "decisionMaker"
+                "progressStatus"
               ]
             ) {
             totalCount

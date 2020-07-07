@@ -5,7 +5,7 @@ import PickableList from '~ui/List/PickableList';
 export const AnalysisPickableListContainer: StyledComponent<
   {},
   {},
-  HTMLDivElement,
+  HTMLDivElement
 > = styled.div.attrs({
   className: 'analysis-pickable-list-container',
 })`
@@ -30,7 +30,7 @@ export const AnalysisProposalListHeaderContainer: any = styled(PickableList.Head
 export const AnalysisProposalListFiltersContainer: StyledComponent<
   {},
   {},
-  HTMLDivElement,
+  HTMLDivElement
 > = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,12 +67,6 @@ export const AnalysisProposalListFiltersList: StyledComponent<{}, {}, HTMLDivEle
       margin: 0;
     }
   }
-`;
-
-export const AnalysisFilterContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
 `;
 
 export const AnalysisProposalListRowMeta: StyledComponent<{}, {}, HTMLDivElement> = styled.div`

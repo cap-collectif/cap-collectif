@@ -6,16 +6,24 @@ import HeaderAnalysis from './Analysis/Header';
 import ContentAnalysis from './Analysis/Content';
 import HeaderContribution from './Contribution/Header';
 import ContentContribution from './Contribution/Content';
-import { PickableHeader, ContentContainer } from './AnalysisPlaceholderDashboard.style';
+import HeaderParticipant from './Participant/Header';
+import {
+  PickableContainer,
+  PickableHeader,
+  ContentContainer,
+} from './AnalysisPlaceholderDashboard.style';
 import ErrorQuery from '~/components/Error/ErrorQuery/ErrorQuery';
+import AnalysisPlaceholderParticipant from '~/components/Analysis/AnalysisPlaceholderParticipant/AnalysisPlaceholderParticipant';
 
 export const TYPE_DASHBOARD: {
   BO_CONTRIBUTION: 'BO_CONTRIBUTION',
   BO_ANALYSIS: 'BO_ANALYSIS',
+  BO_PARTICIPANT: 'BO_PARTICIPANT',
   ANALYSIS: 'ANALYSIS',
 } = {
   BO_CONTRIBUTION: 'BO_CONTRIBUTION',
   BO_ANALYSIS: 'BO_ANALYSIS',
+  BO_PARTICIPANT: 'BO_PARTICIPANT',
   ANALYSIS: 'ANALYSIS',
 };
 
@@ -44,6 +52,8 @@ const renderHeaderProposal = (type: $Values<typeof TYPE_DASHBOARD>) => {
       return <HeaderContribution />;
     case TYPE_DASHBOARD.BO_ANALYSIS:
       return <HeaderAnalysis isAdmin />;
+    case TYPE_DASHBOARD.BO_PARTICIPANT:
+      return <HeaderParticipant />;
     case TYPE_DASHBOARD.ANALYSIS:
       return <HeaderAnalysis />;
     default:
@@ -51,26 +61,34 @@ const renderHeaderProposal = (type: $Values<typeof TYPE_DASHBOARD>) => {
   }
 };
 
-const AnalysisPlaceholderDashboard = ({ type, fetchData, hasError }: Props) => (
-  <PickableList style={{ margin: '0 2rem 2rem 2rem' }}>
-    <PickableHeader disabled isSelectable={false}>
-      {renderHeaderProposal(type)}
-    </PickableHeader>
+const AnalysisPlaceholderDashboard = ({ type, fetchData, hasError }: Props) => {
+  const isParticipant = type === TYPE_DASHBOARD.BO_PARTICIPANT;
 
-    <PickableList.Body>
-      <ContentContainer>
-        {hasError ? (
-          <ErrorQuery retry={fetchData} />
-        ) : (
-          new Array(10).fill(null).map((value, idx) => (
-            <AnalysisPlaceholderProposal rowKey={idx} key={idx}>
-              {renderContentProposal(type)}
-            </AnalysisPlaceholderProposal>
-          ))
-        )}
-      </ContentContainer>
-    </PickableList.Body>
-  </PickableList>
-);
+  return (
+    <PickableContainer>
+      <PickableHeader disabled isSelectable={false}>
+        {renderHeaderProposal(type)}
+      </PickableHeader>
+
+      <PickableList.Body>
+        <ContentContainer>
+          {hasError ? (
+            <ErrorQuery retry={fetchData} />
+          ) : (
+            new Array(10).fill(null).map((value, idx) =>
+              isParticipant ? (
+                <AnalysisPlaceholderParticipant rowKey={idx} key={idx} />
+              ) : (
+                <AnalysisPlaceholderProposal rowKey={idx} key={idx}>
+                  {renderContentProposal(type)}
+                </AnalysisPlaceholderProposal>
+              ),
+            )
+          )}
+        </ContentContainer>
+      </PickableList.Body>
+    </PickableContainer>
+  );
+};
 
 export default AnalysisPlaceholderDashboard;
