@@ -51,12 +51,14 @@ services:
 
     Capco\AppBundle\SiteParameter\SiteParameterResolver:
         public: true
+        lazy: true
 
     Capco\AppBundle\Resolver\StepResolver:
         public: true
 
     Capco\AppBundle\Resolver\UrlResolver:
         public: true
+        lazy: true
 
     Capco\AppBundle\Resolver\ProjectStatsResolver:
         public: true
@@ -80,6 +82,7 @@ services:
 
     Capco\AppBundle\Toggle\Manager:
         public: true
+        lazy: true
 
     Capco\AppBundle\GraphQL\ConnectionBuilder: ~
     Capco\AppBundle\GraphQL\QueryAnalyzer: ~

@@ -1,59 +1,67 @@
 services:
-  _defaults:
-    autoconfigure: true
-    autowire: true
-    public: false
-    bind:
-        Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+        bind:
+            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
 
-  Capco\AppBundle\Elasticsearch\:
-    resource: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/*'
-    exclude: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/{ElasticsearchHelper.php}'
+    Capco\AppBundle\Elasticsearch\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/*'
+        exclude: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/{ElasticsearchHelper.php}'
+        lazy: true
 
-  Capco\AppBundle\Elasticsearch\Client:
-    autowire: true
-    public: true
-    arguments:
-      - { host: '%elasticsearch_host%', port: '9200', username: '%elasticsearch_username%' ,password: '%elasticsearch_password%' }
-      - ~
-      - '@Capco\AppBundle\Elasticsearch\ElasticsearchLogger'
-      - '%kernel.debug%'
+    Capco\AppBundle\Elasticsearch\Client:
+        autowire: true
+        public: true
+        lazy: true
+        arguments:
+            $config: { host: '%elasticsearch_host%', port: '9200', username: '%elasticsearch_username%' ,password: '%elasticsearch_password%' }
+            $logger: '@Capco\AppBundle\Elasticsearch\ElasticsearchLogger'
+            $debug: '%kernel.debug%'
 
-  Capco\AppBundle\Elasticsearch\IndexBuilder:
-    autowire: true
-    public: true
-    arguments:
-      $indexName: '%elasticsearch_index%'
+    Capco\AppBundle\Elasticsearch\IndexBuilder:
+        autowire: true
+        public: true
+        lazy: true
+        arguments:
+            $indexName: '%elasticsearch_index%'
 
-  Capco\AppBundle\Elasticsearch\Indexer:
-    autowire: true
-    public: true
+    Capco\AppBundle\Elasticsearch\Indexer:
+        autowire: true
+        public: true
+        lazy: true
 
-  Elastica\Index:
-    autowire: true
-    public: true
-    factory: ['@Capco\AppBundle\Elasticsearch\IndexBuilder', getLiveSearchIndex]
+    Elastica\Index:
+        autowire: true
+        public: true
+        lazy: true
+        factory: ['@Capco\AppBundle\Elasticsearch\IndexBuilder', getLiveSearchIndex]
 
-  Elastica\Client:
-      autowire: true
-      public: true
-      arguments:
-          $config: {host: '%elasticsearch_host%', port: '9200'}
+    Elastica\Client:
+        autowire: true
+        public: true
+        lazy: true
+        arguments:
+            $config: {host: '%elasticsearch_host%', port: '9200'}
 
-  Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer:
-    autowire: true
-    public: true
-    calls:
-      - ['setPropertyAccessor', ['@property_accessor']]
+    Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer:
+        autowire: true
+        public: true
+        lazy: true
+        calls:
+            - ['setPropertyAccessor', ['@property_accessor']]
 
-  Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener:
-    autowire: true
-    public: true
-    tags:
-      - { name: doctrine.event_subscriber, connection: default }
+    Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener:
+        autowire: true
+        public: true
+        lazy: true
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
 
-  Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener:
-    autowire: true
-    public: true
-    tags:
-      - { name: kernel.event_subscriber }
+    Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener:
+        autowire: true
+        public: true
+        lazy: true
+        tags:
+            - { name: kernel.event_subscriber }

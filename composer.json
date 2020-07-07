@@ -201,7 +201,8 @@
         "accord/mandrill-swiftmailer-bundle": "*",
         "tecnickcom/tcpdf": "^6.3",
         "redirectionio/proxy-symfony": "^0.2.1",
-        "doctrine/cache": "^1.10"
+        "doctrine/cache": "^1.10",
+        "symfony/proxy-manager-bridge": "4.4.10"
     },
     "require-dev": {
         "behat/behat": "^3.3",
