@@ -299,8 +299,8 @@ class Indexer
             if (isset($progress)) {
                 $progress->advance();
             }
-            $this->em->clear();
         }
+        $this->em->clear();
         $this->finishBulk();
 
         $event = $this->stopwatch->stop($this->getTypeFromEntityFQN($class));
