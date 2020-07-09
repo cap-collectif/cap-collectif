@@ -36,7 +36,7 @@ trait FranceConnectTrait
 
         $this->getSession()
             ->getPage()
-            ->find('css', '[value="Continuer sur CAP COLLECTIF - 835"]')
+            ->find('css', 'button.content__continue')
             ->click();
     }
 
