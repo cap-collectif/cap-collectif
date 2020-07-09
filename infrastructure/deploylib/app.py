@@ -33,10 +33,10 @@ def prepare_php(environment='dev'):
     local('rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*')
     local('rm -rf vendor/simplesamlphp/simplesamlphp/cert')
     local('cp -R app/config/simplesamlphp vendor/simplesamlphp')
-    local('bin/console graphql:compile')
+    local('php -d memory_limit=-1 bin/console graphql:compile')
     local('composer dump-autoload --optimize --apcu')
-    local('php bin/console cache:warmup --no-optional-warmers --env=' + environment)
-    local('php bin/console assets:install public --symlink --env=' + environment)
+    local('php -d memory_limit=-1 bin/console cache:warmup --no-optional-warmers --env=' + environment)
+    local('php -d memory_limit=-1 bin/console assets:install public --symlink --env=' + environment)
 
 
 @task(environments=['local', 'ci'])
@@ -45,8 +45,6 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
     if environment == 'dev':
         if _platform == 'darwin' and mode == 'symfony_bin':
             setup_env_vars()
-        local('yarn run fonts')
-        print cyan('Successfully downloaded latests fonts.')
         print cyan('Successfully downloaded dependencies.')
         prepare_php()
     env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')

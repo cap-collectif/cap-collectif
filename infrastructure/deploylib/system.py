@@ -59,8 +59,10 @@ def dinghy_install(force=False):
         result = local('which dinghy')
         if force or not result.succeeded:
             dinghy_deps()
-    with settings(warn_only=True):
-        local('dinghy create --provider=xhyve --memory=4096 --cpus=8 --disk=60000 --boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso')
+    local('dinghy create --provider=xhyve --memory=4096 --cpus=8 --disk=60000')
+    # In case of error, consider using virtualbox but perf is lower
+    # local('dinghy create --provider=virtualbox --memory=4096 --cpus=8 --disk=60000')
+
 
 @task
 def symfony_bin_install(force=False):
