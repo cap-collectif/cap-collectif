@@ -491,7 +491,7 @@ ${PROPOSAL_FRAGMENT}
               }
             }
           }
-          proposals {
+          proposals(includeUnpublished: true) {
             edges {
               node {
                 ...proposalInfos
@@ -527,8 +527,6 @@ ${PROPOSAL_FRAGMENT}
                     ...decisionMakerInfos
                   }  
                 }
-                
-
               }
             }
           }
@@ -555,19 +553,19 @@ ${PROPOSAL_FRAGMENT}
         id
         slug
         firstAnalysisStep {
+          proposals(includeUnpublished: true) {
+            edges {
+              node {
+                ...proposalInfos
+              }
+            }
+          }
           form {
             analysisConfiguration {
               evaluationForm {
                 questions {
                   title
                 }
-              }
-            }
-          }
-          proposals {
-            edges {
-              node {
-                ...proposalInfos
               }
             }
           }
