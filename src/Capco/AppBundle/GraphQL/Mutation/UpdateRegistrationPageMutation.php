@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Repository\SiteParameterRepository;
-use Capco\AppBundle\Twig\SiteParameterExtension;
+use Capco\AppBundle\Twig\SiteParameterRuntime;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -29,7 +29,7 @@ class UpdateRegistrationPageMutation implements MutationInterface
     {
         $customcode = $args->offsetGet('customcode');
         $codeParameter = $this->siteParameterRepository->findOneBy([
-            'keyname' => SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME
+            'keyname' => SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME,
         ]);
 
         if ($codeParameter) {
@@ -38,7 +38,7 @@ class UpdateRegistrationPageMutation implements MutationInterface
         }
 
         $this->cache->deleteItem(
-            SiteParameterExtension::CACHE_KEY .
+            SiteParameterRuntime::CACHE_KEY .
                 SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME
         );
 

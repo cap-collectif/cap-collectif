@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Twig\ParametersExtension;
+use Capco\AppBundle\Twig\ParametersRuntime;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -80,7 +80,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         $locales = $this->em->getRepository(Locale::class)->findAll();
         /** @var Locale $locale */
         foreach ($locales as $locale) {
-            $this->cache->deleteItem(ParametersExtension::CACHE_KEY . $locale->getCode());
+            $this->cache->deleteItem(ParametersRuntime::CACHE_KEY . $locale->getCode());
         }
 
         return ['shieldAdminForm' => compact('media', 'introduction', 'shieldMode')];

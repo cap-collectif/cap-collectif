@@ -65,17 +65,19 @@ services:
                 '%assets_host%',
             ]
 
-    Capco\AppBundle\Twig\ThemeExtension:
+    Capco\AppBundle\Twig\ThemeRuntime:
         arguments:
             $twig: '@twig.extension.intl'
         tags:
-            - { name: twig.extension }
+            - { name: twig.runtime }
 
-    Capco\AppBundle\Twig\ReactRenderExtension:
+    Capco\AppBundle\Twig\ReactRenderRuntime:
         arguments:
             - '@limenius_react.render_extension'
             - '@Capco\AppBundle\Toggle\Manager'
             - '@security.token_storage'
+        tags:
+            - { name: twig.runtime }
 
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
