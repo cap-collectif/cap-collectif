@@ -1,0 +1,114 @@
+InternalFeatureFlagType:
+    type: enum
+    config:
+        name: FeatureFlagType
+        description: 'The possible types for a feature flag.'
+        values:
+            graphql_query_analytics:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::graphql_query_analytics")'
+            new_feature_questionnaire_result:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::new_feature_questionnaire_result")'
+            blog:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::blog")'
+            calendar:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::calendar")'
+            captcha:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::captcha")'
+            consent_external_communication:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::consent_external_communication")'
+            developer_documentation:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::developer_documentation")'
+            public_api:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::public_api")'
+            login_facebook:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_facebook")'
+            login_gplus:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_gplus")'
+            login_paris:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_paris")'
+            privacy_policy:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::privacy_policy")'
+            members_list:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::members_list")'
+            newsletter:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::newsletter")'
+            profiles:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::profiles")'
+            projects_form:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::projects_form")'
+            project_trash:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::project_trash")'
+            search:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::search")'
+            share_buttons:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::share_buttons")'
+            shield_mode:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::shield_mode")'
+            registration:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::registration")'
+            restrict_registration_via_email_domain:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::restrict_registration_via_email_domain")'
+            themes:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::themes")'
+            export:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::export")'
+            districts:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::districts")'
+            user_type:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::user_type")'
+            votes_evolution:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::votes_evolution")'
+            server_side_rendering:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::server_side_rendering")'
+            zipcode_at_register:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::zipcode_at_register")'
+            indexation:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::indexation")'
+            consultation_plan:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::consultation_plan")'
+            consent_internal_communication:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::consent_internal_communication")'
+            disconnect_openid:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::disconnect_openid")'
+            sso_by_pass_auth:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::sso_by_pass_auth")'
+            allow_users_to_propose_events:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::allow_users_to_propose_events")'
+            login_franceconnect:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_franceconnect")'
+            restrict_connection:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::restrict_connection")'
+            secure_password:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::secure_password")'
+            read_more:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::read_more")'
+            remind_user_account_confirmation:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::remind_user_account_confirmation")'
+            display_pictures_in_depository_proposals_list:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_pictures_in_depository_proposals_list")'
+            display_pictures_in_event_list:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_pictures_in_event_list")'
+            external_project:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::external_project")'
+            app_news:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::app_news")'
+            sentry_log:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::sentry_log")'
+            unstable__multilangue:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__multilangue")'
+            unstable__admin_editor:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__admin_editor")'
+            unstable__analysis:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__analysis")'
+            http_redirects:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::http_redirects")'
+            report_browers_errors_to_sentry:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::report_browers_errors_to_sentry")'
+            login_saml:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_saml")'
+            phone_confirmation:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::phone_confirmation")'
+            reporting:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::reporting")'
+            display_map:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_map")'

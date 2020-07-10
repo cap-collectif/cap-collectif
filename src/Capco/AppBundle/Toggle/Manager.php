@@ -8,64 +8,118 @@ use Qandidate\Toggle\ToggleManager;
 
 class Manager
 {
-    protected $toggleManager;
+    public const graphql_query_analytics = 'graphql_query_analytics';
+    public const new_feature_questionnaire_result = 'new_feature_questionnaire_result';
+    public const blog = 'blog';
+    public const calendar = 'calendar';
+    public const captcha = 'captcha';
+    public const consent_external_communication = 'consent_external_communication';
+    public const developer_documentation = 'developer_documentation';
+    public const public_api = 'public_api';
+    public const login_facebook = 'login_facebook';
+    public const login_gplus = 'login_gplus';
+    public const login_paris = 'login_paris';
+    public const login_saml = 'login_saml';
+    public const privacy_policy = 'privacy_policy';
+    public const members_list = 'members_list';
+    public const newsletter = 'newsletter';
+    public const profiles = 'profiles';
+    public const projects_form = 'projects_form';
+    public const project_trash = 'project_trash';
+    public const search = 'search';
+    public const share_buttons = 'share_buttons';
+    public const shield_mode = 'shield_mode';
+    public const registration = 'registration';
+    public const restrict_registration_via_email_domain = 'restrict_registration_via_email_domain';
+    public const themes = 'themes';
+    public const export = 'export';
+    public const districts = 'districts';
+    public const user_type = 'user_type';
+    public const votes_evolution = 'votes_evolution';
+    public const server_side_rendering = 'server_side_rendering';
+    public const zipcode_at_register = 'zipcode_at_register';
+    public const indexation = 'indexation';
+    public const consultation_plan = 'consultation_plan';
+    public const display_map = 'display_map';
+    public const consent_internal_communication = 'consent_internal_communication';
+    public const disconnect_openid = 'disconnect_openid';
+    public const sso_by_pass_auth = 'sso_by_pass_auth';
+    public const allow_users_to_propose_events = 'allow_users_to_propose_events';
+    public const login_franceconnect = 'login_franceconnect';
+    public const restrict_connection = 'restrict_connection';
+    public const secure_password = 'secure_password';
+    public const read_more = 'read_more';
+    public const remind_user_account_confirmation = 'remind_user_account_confirmation';
+    public const display_pictures_in_depository_proposals_list = 'display_pictures_in_depository_proposals_list';
+    public const display_pictures_in_event_list = 'display_pictures_in_event_list';
+    public const external_project = 'external_project';
+    public const app_news = 'app_news';
+    public const sentry_log = 'sentry_log';
+    public const unstable__multilangue = 'unstable__multilangue';
+    public const unstable__admin_editor = 'unstable__admin_editor';
+    public const unstable__analysis = 'unstable__analysis';
+    public const http_redirects = 'http_redirects';
+    public const report_browers_errors_to_sentry = 'report_browers_errors_to_sentry';
+    public const phone_confirmation = 'phone_confirmation';
+    public const reporting = 'reporting';
 
-    protected static $toggles = [
-        'graphql_query_analytics',
-        'new_feature_questionnaire_result',
-        'blog',
-        'calendar',
-        'captcha',
-        'consent_external_communication',
-        'developer_documentation',
-        'public_api',
-        'login_facebook',
-        'login_gplus',
-        'login_saml',
-        'login_paris',
-        'privacy_policy',
-        'members_list',
-        'newsletter',
-        'profiles',
-        'projects_form',
-        'project_trash',
-        'search',
-        'share_buttons',
-        'shield_mode',
-        'registration',
-        'phone_confirmation',
-        'reporting',
-        'restrict_registration_via_email_domain',
-        'themes',
-        'export',
-        'districts',
-        'user_type',
-        'votes_evolution',
-        'server_side_rendering',
-        'zipcode_at_register',
-        'indexation',
-        'consultation_plan',
-        'display_map',
-        'consent_internal_communication',
-        'disconnect_openid',
-        'sso_by_pass_auth',
-        'allow_users_to_propose_events',
-        'login_franceconnect',
-        'restrict_connection',
-        'secure_password',
-        'read_more',
-        'remind_user_account_confirmation',
-        'display_pictures_in_depository_proposals_list',
-        'display_pictures_in_event_list',
-        'external_project',
-        'app_news',
-        'sentry_log',
-        'unstable__multilangue',
-        'unstable__admin_editor',
-        'unstable__analysis',
-        'http_redirects',
-        'report_browers_errors_to_sentry',
+    public static $toggles = [
+        self::graphql_query_analytics,
+        self::new_feature_questionnaire_result,
+        self::blog,
+        self::calendar,
+        self::captcha,
+        self::consent_external_communication,
+        self::developer_documentation,
+        self::public_api,
+        self::login_facebook,
+        self::login_gplus,
+        self::login_saml,
+        self::login_paris,
+        self::privacy_policy,
+        self::members_list,
+        self::newsletter,
+        self::profiles,
+        self::projects_form,
+        self::project_trash,
+        self::search,
+        self::share_buttons,
+        self::shield_mode,
+        self::registration,
+        self::phone_confirmation,
+        self::reporting,
+        self::restrict_registration_via_email_domain,
+        self::themes,
+        self::export,
+        self::districts,
+        self::user_type,
+        self::votes_evolution,
+        self::server_side_rendering,
+        self::zipcode_at_register,
+        self::indexation,
+        self::consultation_plan,
+        self::display_map,
+        self::consent_internal_communication,
+        self::disconnect_openid,
+        self::sso_by_pass_auth,
+        self::allow_users_to_propose_events,
+        self::login_franceconnect,
+        self::restrict_connection,
+        self::secure_password,
+        self::read_more,
+        self::remind_user_account_confirmation,
+        self::display_pictures_in_depository_proposals_list,
+        self::display_pictures_in_event_list,
+        self::external_project,
+        self::app_news,
+        self::sentry_log,
+        self::unstable__multilangue,
+        self::unstable__admin_editor,
+        self::unstable__analysis,
+        self::http_redirects,
+        self::report_browers_errors_to_sentry,
     ];
+    protected $toggleManager;
 
     protected $context;
 

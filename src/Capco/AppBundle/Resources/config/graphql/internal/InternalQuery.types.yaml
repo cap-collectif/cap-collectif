@@ -404,3 +404,7 @@ InternalQuery:
                         description: 'the longitude of geocode'
                 description: 'An address from Google Maps.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryGeocodeResolver", [args["latitude"], args["longitude"]])'
+            featureFlags:
+                description: 'List all feature flags.'
+                type: '[InternalFeatureFlag!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryFeatureFlagsResolver", [])'

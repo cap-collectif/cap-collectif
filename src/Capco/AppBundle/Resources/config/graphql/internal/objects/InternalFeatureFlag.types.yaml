@@ -1,0 +1,10 @@
+InternalFeatureFlag:
+    type: object
+    config:
+        description: 'A feature flag.'
+        name: FeatureFlag
+        fields:
+            type:
+                type: 'InternalFeatureFlagType!'
+            enabled:
+                type: 'Boolean!'

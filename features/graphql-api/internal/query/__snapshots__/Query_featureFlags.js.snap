@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.featureFlags fetches all feature flags 1`] = `
+Object {
+  "featureFlags": Array [
+    Object {
+      "enabled": false,
+      "type": "graphql_query_analytics",
+    },
+    Object {
+      "enabled": true,
+      "type": "new_feature_questionnaire_result",
+    },
+    Object {
+      "enabled": true,
+      "type": "blog",
+    },
+    Object {
+      "enabled": true,
+      "type": "calendar",
+    },
+    Object {
+      "enabled": true,
+      "type": "captcha",
+    },
+    Object {
+      "enabled": false,
+      "type": "consent_external_communication",
+    },
+    Object {
+      "enabled": true,
+      "type": "developer_documentation",
+    },
+    Object {
+      "enabled": true,
+      "type": "public_api",
+    },
+    Object {
+      "enabled": true,
+      "type": "login_facebook",
+    },
+    Object {
+      "enabled": true,
+      "type": "login_gplus",
+    },
+    Object {
+      "enabled": false,
+      "type": "login_saml",
+    },
+    Object {
+      "enabled": false,
+      "type": "login_paris",
+    },
+    Object {
+      "enabled": true,
+      "type": "privacy_policy",
+    },
+    Object {
+      "enabled": true,
+      "type": "members_list",
+    },
+    Object {
+      "enabled": true,
+      "type": "newsletter",
+    },
+    Object {
+      "enabled": true,
+      "type": "profiles",
+    },
+    Object {
+      "enabled": true,
+      "type": "projects_form",
+    },
+    Object {
+      "enabled": true,
+      "type": "project_trash",
+    },
+    Object {
+      "enabled": true,
+      "type": "search",
+    },
+    Object {
+      "enabled": true,
+      "type": "share_buttons",
+    },
+    Object {
+      "enabled": false,
+      "type": "shield_mode",
+    },
+    Object {
+      "enabled": true,
+      "type": "registration",
+    },
+    Object {
+      "enabled": false,
+      "type": "phone_confirmation",
+    },
+    Object {
+      "enabled": true,
+      "type": "reporting",
+    },
+    Object {
+      "enabled": false,
+      "type": "restrict_registration_via_email_domain",
+    },
+    Object {
+      "enabled": true,
+      "type": "themes",
+    },
+    Object {
+      "enabled": false,
+      "type": "export",
+    },
+    Object {
+      "enabled": true,
+      "type": "districts",
+    },
+    Object {
+      "enabled": true,
+      "type": "user_type",
+    },
+    Object {
+      "enabled": false,
+      "type": "votes_evolution",
+    },
+    Object {
+      "enabled": true,
+      "type": "server_side_rendering",
+    },
+    Object {
+      "enabled": false,
+      "type": "zipcode_at_register",
+    },
+    Object {
+      "enabled": true,
+      "type": "indexation",
+    },
+    Object {
+      "enabled": true,
+      "type": "consultation_plan",
+    },
+    Object {
+      "enabled": true,
+      "type": "display_map",
+    },
+    Object {
+      "enabled": true,
+      "type": "consent_internal_communication",
+    },
+    Object {
+      "enabled": false,
+      "type": "disconnect_openid",
+    },
+    Object {
+      "enabled": false,
+      "type": "sso_by_pass_auth",
+    },
+    Object {
+      "enabled": false,
+      "type": "allow_users_to_propose_events",
+    },
+    Object {
+      "enabled": false,
+      "type": "login_franceconnect",
+    },
+    Object {
+      "enabled": false,
+      "type": "restrict_connection",
+    },
+    Object {
+      "enabled": false,
+      "type": "secure_password",
+    },
+    Object {
+      "enabled": false,
+      "type": "read_more",
+    },
+    Object {
+      "enabled": true,
+      "type": "remind_user_account_confirmation",
+    },
+    Object {
+      "enabled": false,
+      "type": "display_pictures_in_depository_proposals_list",
+    },
+    Object {
+      "enabled": true,
+      "type": "display_pictures_in_event_list",
+    },
+    Object {
+      "enabled": false,
+      "type": "external_project",
+    },
+    Object {
+      "enabled": false,
+      "type": "app_news",
+    },
+    Object {
+      "enabled": false,
+      "type": "sentry_log",
+    },
+    Object {
+      "enabled": true,
+      "type": "unstable__multilangue",
+    },
+    Object {
+      "enabled": false,
+      "type": "unstable__admin_editor",
+    },
+    Object {
+      "enabled": true,
+      "type": "unstable__analysis",
+    },
+    Object {
+      "enabled": true,
+      "type": "http_redirects",
+    },
+    Object {
+      "enabled": false,
+      "type": "report_browers_errors_to_sentry",
+    },
+  ],
+}
+`;

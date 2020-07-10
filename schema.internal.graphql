@@ -3230,6 +3230,70 @@ type EventTranslation {
   metaDescription: String
 }
 
+"""A feature flag."""
+type FeatureFlag {
+  type: FeatureFlagType!
+  enabled: Boolean!
+}
+
+"""The possible types for a feature flag."""
+enum FeatureFlagType {
+  graphql_query_analytics
+  new_feature_questionnaire_result
+  blog
+  calendar
+  captcha
+  consent_external_communication
+  developer_documentation
+  public_api
+  login_facebook
+  login_gplus
+  login_paris
+  privacy_policy
+  members_list
+  newsletter
+  profiles
+  projects_form
+  project_trash
+  search
+  share_buttons
+  shield_mode
+  registration
+  restrict_registration_via_email_domain
+  themes
+  export
+  districts
+  user_type
+  votes_evolution
+  server_side_rendering
+  zipcode_at_register
+  indexation
+  consultation_plan
+  consent_internal_communication
+  disconnect_openid
+  sso_by_pass_auth
+  allow_users_to_propose_events
+  login_franceconnect
+  restrict_connection
+  secure_password
+  read_more
+  remind_user_account_confirmation
+  display_pictures_in_depository_proposals_list
+  display_pictures_in_event_list
+  external_project
+  app_news
+  sentry_log
+  unstable__multilangue
+  unstable__admin_editor
+  unstable__analysis
+  http_redirects
+  report_browers_errors_to_sentry
+  login_saml
+  phone_confirmation
+  reporting
+  display_map
+}
+
 """Require a firstname"""
 type FirstnameRequirement implements Node & Requirement {
   """The ID of an object"""
@@ -7270,6 +7334,9 @@ type Query {
     """the longitude of geocode"""
     longitude: Float!
   ): GoogleMapsAddress
+
+  """List all feature flags."""
+  featureFlags: [FeatureFlag!]!
 }
 
 """Fetches an object given its ID"""
