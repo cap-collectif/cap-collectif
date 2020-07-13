@@ -10,6 +10,7 @@ use Capco\AppBundle\Enum\ProposalTrashedStatus;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
 use Elastica\ResultSet;
@@ -198,36 +199,24 @@ class ProposalSearch extends Search
             }
             $boolQuery->addFilter($term);
         }
-        $roleTask = [
-            'supervisor.id' => 'assessment',
-            'proposalAnalysts.analyst.id' => 'analyses',
-            'decisionMaker.id' => 'decision',
-        ];
-
-        $rootBoolShouldQuery = new Query\BoolQuery();
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $projectId]]));
+
+        $shouldQuery = new Query\BoolQuery();
         if (ProposalStatementState::TODO === $state) {
-            foreach ($roleTask as $role => $task) {
-                $rootBoolShouldQuery->addShould(
-                    $this->queryProposalsAssignedTodo($role, $task, $viewerId)
-                );
-            }
+            $this->addAssignedViewerProposalsTodo($shouldQuery, $viewerId);
         } elseif (ProposalStatementState::DONE === $state) {
-            foreach ($roleTask as $role => $task) {
-                $rootBoolShouldQuery->addShould(
-                    $this->queryProposalsAssignedDone($role, $task, $viewerId)
-                );
-            }
+            $this->addAssignedViewerProposalsDone($shouldQuery, $viewerId);
         } else {
-            $rootBoolShouldQuery->addShould([
+            $shouldQuery->addShould([
                 new Term(['proposalAnalysts.analyst.id' => ['value' => $viewerId]]),
                 new Term(['supervisor.id' => ['value' => $viewerId]]),
                 new Term(['decisionMaker.id' => ['value' => $viewerId]]),
             ]);
         }
 
-        $boolQuery->addFilter($rootBoolShouldQuery);
+        $boolQuery->addFilter($shouldQuery);
         $query = new Query($boolQuery);
+
         if ($order) {
             $query->setSort([$this->getSort($order, null), ['id' => new \stdClass()]]);
         }
@@ -235,60 +224,116 @@ class ProposalSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-
         $cursors = $this->getCursors($resultSet);
 
         return $this->getData($cursors, $resultSet);
     }
 
-    private function queryProposalsAssignedTodo($role, $task, $viewerId): Query\BoolQuery
+    private function addAssignedViewerProposalsTodo(BoolQuery $boolQuery, string $viewerId): void
     {
-        $secondBoolFilterQueryIntoRoot = new Query\BoolQuery();
-        $secondBoolFilterQueryIntoRoot->addFilter(new Term([$role => ['value' => $viewerId]]));
-
-        $thirdBoolShouldQueryIntoSecond = new Query\BoolQuery();
-        $fourthBoolFilterQueryIntoThird = new Query\BoolQuery();
-        $fourthBoolFilterQueryIntoThird->addFilter(
-            new Term(["${task}.updatedBy.id" => ['value' => $viewerId]])
-        );
-        $fourthBoolFilterQueryIntoThird->addFilter(
-            new Term(["${task}.state" => ['value' => 'IN_PROGRESS']])
-        );
-        $thirdBoolShouldQueryIntoSecond->addShould($fourthBoolFilterQueryIntoThird);
-
-        $fifthBoolFilterQueryIntoThird = new Query\BoolQuery();
-        $sixthBoolFilterQueryIntoThird = new Query\BoolQuery();
-        $sixthBoolFilterQueryIntoThird->addMustNot(new Query\Exists($task));
-        $fifthBoolFilterQueryIntoThird->addShould($sixthBoolFilterQueryIntoThird);
-        $thirdBoolShouldQueryIntoSecond->addShould($fifthBoolFilterQueryIntoThird);
-
-        $secondBoolFilterQueryIntoRoot->addFilter($thirdBoolShouldQueryIntoSecond);
-
-        return $secondBoolFilterQueryIntoRoot;
+        $boolQuery->addShould([
+            // Analyst case
+            (new BoolQuery())->addShould([
+                (new BoolQuery())
+                    ->addMustNot(
+                        (new Query\Nested())
+                            ->setPath('analyses')
+                            ->setQuery(
+                                (new BoolQuery())->addFilter(
+                                    new Term(['analyses.updatedBy.id' => ['value' => $viewerId]])
+                                )
+                            )
+                    )
+                    ->addFilter(
+                        new Term(['proposalAnalysts.analyst.id' => ['value' => $viewerId]])
+                    ),
+                (new Query\Nested())->setPath('analyses')->setQuery(
+                    (new BoolQuery())
+                        ->addFilter(new Term(['analyses.updatedBy.id' => ['value' => $viewerId]]))
+                        ->addFilter(
+                            new Term([
+                                'analyses.state' => [
+                                    'value' => ProposalStatementState::IN_PROGRESS,
+                                ],
+                            ])
+                        )
+                ),
+            ]),
+            // End analyst case
+            // Supervisor case
+            (new BoolQuery())
+                ->addFilter(new Term(['supervisor.id' => ['value' => $viewerId]]))
+                ->addFilter(
+                    (new BoolQuery())->addShould([
+                        (new BoolQuery())
+                            ->addFilter(
+                                new Term(['assessment.updatedBy.id' => ['value' => $viewerId]])
+                            )
+                            ->addFilter(
+                                new Term([
+                                    'assessment.state' => [
+                                        'value' => ProposalStatementState::IN_PROGRESS,
+                                    ],
+                                ])
+                            ),
+                        (new BoolQuery())->addMustNot(new Query\Exists('assessment')),
+                    ])
+                ),
+            // End supervisor case
+            // Decision maker case
+            (new BoolQuery())
+                ->addFilter(new Term(['decisionMaker.id' => ['value' => $viewerId]]))
+                ->addFilter(
+                    (new BoolQuery())->addShould([
+                        (new BoolQuery())
+                            ->addFilter(
+                                new Term(['decision.updatedBy.id' => ['value' => $viewerId]])
+                            )
+                            ->addFilter(
+                                new Term([
+                                    'decision.state' => [
+                                        'value' => ProposalStatementState::IN_PROGRESS,
+                                    ],
+                                ])
+                            ),
+                        (new BoolQuery())->addMustNot(new Query\Exists('decision')),
+                    ])
+                ),
+            // End decision maker case
+        ]);
     }
 
-    private function queryProposalsAssignedDone($role, $task, $viewerId): Query\BoolQuery
+    private function addAssignedViewerProposalsDone(BoolQuery $boolQuery, string $viewerId): void
     {
-        $secondBoolFilterQueryIntoRoot = new Query\BoolQuery();
-        $secondBoolFilterQueryIntoRoot->addFilter(new Term([$role => ['value' => $viewerId]]));
-
-        $thirdBoolShouldQueryIntoSecond = new Query\BoolQuery();
-        $fourthBoolFilterQueryIntoThird = new Query\BoolQuery();
-        $fifthBoolMustNotQueryIntoFourth = new Query\BoolQuery();
-
-        $fourthBoolFilterQueryIntoThird->addFilter(
-            new Term(["${task}.updatedBy.id" => ['value' => $viewerId]])
-        );
-        $fifthBoolMustNotQueryIntoFourth->addMustNot(
-            new Term(["${task}.state" => ['value' => 'IN_PROGRESS']])
-        );
-
-        $fourthBoolFilterQueryIntoThird->addFilter($fifthBoolMustNotQueryIntoFourth);
-        $thirdBoolShouldQueryIntoSecond->addShould($fourthBoolFilterQueryIntoThird);
-
-        $secondBoolFilterQueryIntoRoot->addFilter($thirdBoolShouldQueryIntoSecond);
-
-        return $secondBoolFilterQueryIntoRoot;
+        $boolQuery->addShould([
+            (new Query\Nested())->setPath('analyses')->setQuery(
+                (new BoolQuery())
+                    ->addFilter(new Term(['analyses.updatedBy.id' => ['value' => $viewerId]]))
+                    ->addMustNot(
+                        new Term([
+                            'analyses.state' => [
+                                'value' => ProposalStatementState::IN_PROGRESS,
+                            ],
+                        ])
+                    )
+            ),
+            (new BoolQuery())
+                ->addFilter(new Term(['supervisor.id' => ['value' => $viewerId]]))
+                ->addFilter(new Query\Exists('assessment'))
+                ->addFilter(
+                    (new BoolQuery())->addMustNot(
+                        new Term([
+                            'assessment.state' => ['value' => ProposalStatementState::IN_PROGRESS],
+                        ])
+                    )
+                ),
+            (new BoolQuery())
+                ->addFilter(new Term(['decisionMaker.id' => ['value' => $viewerId]]))
+                ->addFilter(new Query\Exists('decision'))
+                ->addFilter(
+                    new Term(['decision.state' => ['value' => ProposalStatementState::DONE]])
+                ),
+        ]);
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult

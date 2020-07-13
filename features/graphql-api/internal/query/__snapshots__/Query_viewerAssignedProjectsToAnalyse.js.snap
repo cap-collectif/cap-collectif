@@ -414,8 +414,17 @@ Object {
     Object {
       "title": "Project Analyse",
       "viewerAssignedProposals": Object {
-        "edges": Array [],
-        "totalCount": 0,
+        "edges": Array [
+          Object {
+            "node": Object {
+              "category": null,
+              "district": null,
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTA=",
+              "title": "Proposal 110",
+            },
+          },
+        ],
+        "totalCount": 1,
       },
     },
     Object {
@@ -941,5 +950,16 @@ Object {
       },
     },
   ],
+}
+`;
+
+exports[`Internal|Query.viewerAssignedProjectsToAnalyse fetches viewer's assigned TODO proposal by project 1`] = `
+Object {
+  "node": Object {
+    "viewerAssignedProposals": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+  },
 }
 `;

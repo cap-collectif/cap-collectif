@@ -297,7 +297,7 @@ mappings:
             supervisor: *Author
             decisionMaker: *Author
             analyses:
-                type: object
+                type: nested
                 properties:
                     updatedBy: *Author
                     state: { type: keyword }

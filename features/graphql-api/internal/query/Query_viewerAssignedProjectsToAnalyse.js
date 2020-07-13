@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import '../../_setup';
+
 const InternalQuery = /* GraphQL */ `
   query ViewerAssignedProjectsToAnalyse {
     viewerAssignedProjectsToAnalyse {
@@ -59,6 +61,27 @@ const InternalSortProposalQuery = /* GraphQL */ `
             }
             category {
               id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const AssignedViewerProposalsByProjectQuery = /* GraphQL */ `
+  query AssignedViewerProposalsByProjectQuery($projectId: ID!, $state: ProposalTaskState) {
+    node(id: $projectId) {
+      ... on Project {
+        viewerAssignedProposals(state: $state) {
+          totalCount
+          edges {
+            node {
+              id
+              analyses {
+                id
+                state
+              }
             }
           }
         }
@@ -188,6 +211,19 @@ describe('Internal|Query.viewerAssignedProjectsToAnalyse', () => {
           analysts: ['VXNlcjp1c2VyQW5hbHlzdA=='],
         },
         'internal_supervisor',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it("fetches viewer's assigned TODO proposal by project", async () => {
+    await expect(
+      graphql(
+        AssignedViewerProposalsByProjectQuery,
+        {
+          projectId: 'UHJvamVjdDpwcm9qZWN0QW5hbHlzZQ==',
+          state: 'TODO',
+        },
+        'internal_theo',
       ),
     ).resolves.toMatchSnapshot();
   });
