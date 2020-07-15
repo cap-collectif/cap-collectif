@@ -23,8 +23,13 @@ class MediaExtension extends \Sonata\MediaBundle\Twig\Extension\MediaExtension
     private $assetsHost;
     private $routerRequestContextHost;
 
-    public function __construct(Pool $mediaService, ManagerInterface $mediaManager, ContainerInterface $container, string $routerRequestContextHost, ?string $assetsHost = null)
-    {
+    public function __construct(
+        Pool $mediaService,
+        ManagerInterface $mediaManager,
+        ContainerInterface $container,
+        string $routerRequestContextHost,
+        ?string $assetsHost = null
+    ) {
         parent::__construct($mediaService, $mediaManager);
         $this->container = $container;
         $this->assetsHost = $assetsHost;
@@ -44,8 +49,7 @@ class MediaExtension extends \Sonata\MediaBundle\Twig\Extension\MediaExtension
             return '';
         }
 
-        $provider = $this->getMediaService()
-            ->getProvider($media->getProviderName());
+        $provider = $this->getMediaService()->getProvider($media->getProviderName());
 
         $format = $provider->getFormatName($media, $format);
         $format_definition = $provider->getFormat($format);
@@ -56,10 +60,10 @@ class MediaExtension extends \Sonata\MediaBundle\Twig\Extension\MediaExtension
             'alt' => $media->getName(),
         ];
 
-        if ($format_definition['width']) {
+        if (\is_array($format_definition) && $format_definition['width']) {
             $defaultOptions['width'] = $format_definition['width'];
         }
-        if ($format_definition['height']) {
+        if (\is_array($format_definition) && $format_definition['height']) {
             $defaultOptions['height'] = $format_definition['height'];
         }
 
@@ -81,8 +85,7 @@ class MediaExtension extends \Sonata\MediaBundle\Twig\Extension\MediaExtension
             return '';
         }
 
-        $provider = $this->getMediaService()
-            ->getProvider($media->getProviderName());
+        $provider = $this->getMediaService()->getProvider($media->getProviderName());
 
         $format = $provider->getFormatName($media, $format);
 
@@ -100,20 +103,23 @@ class MediaExtension extends \Sonata\MediaBundle\Twig\Extension\MediaExtension
         return $this->generatePublicUrlForProvider($provider, $media, $format);
     }
 
-    private function generatePublicUrlForProvider(MediaProviderInterface $provider, MediaInterface $media, string $format)
-    {
-        return $this->assetsHost ?
-            str_replace(
+    private function generatePublicUrlForProvider(
+        MediaProviderInterface $provider,
+        MediaInterface $media,
+        string $format
+    ) {
+        return $this->assetsHost
+            ? str_replace(
                 $this->routerRequestContextHost,
                 $this->assetsHost,
                 $provider->generatePublicUrl($media, $format)
-            ) :
-            $provider->generatePublicUrl($media, $format);
+            )
+            : $provider->generatePublicUrl($media, $format);
     }
 
     private function getMedia($media): ?MediaInterface
     {
-        if (!$media instanceof MediaInterface && (string)$media !== '') {
+        if (!$media instanceof MediaInterface && '' !== (string) $media) {
             $media = $this->mediaManager->findOneBy([
                 'id' => $media,
             ]);
