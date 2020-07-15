@@ -52,16 +52,6 @@ class ThemeNormalizer implements
             return $data;
         }
 
-        $data['_links'] = [
-            'show' => $this->router->generate(
-                'app_theme_show',
-                [
-                    'slug' => $object->translate()->getSlug(),
-                ],
-                true
-            ),
-        ];
-
         try {
             $data['media']['url'] = $this->mediaExtension->path($object->getMedia(), 'slider');
         } catch (RouteNotFoundException $e) {
