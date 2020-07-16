@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -213,7 +214,7 @@ class ProposalRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getByUser(User $user, int $limit = null, int $offset = null): array
+    public function getByUser(User $user, ?int $limit = null, ?int $offset = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->andWhere('proposal.author = :author')
@@ -260,7 +261,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getLast(int $limit = null, int $offset = null)
+    public function getLast(?int $limit = null, ?int $offset = null)
     {
         $limit = $limit ?? 1;
         $offset = $offset ?? 0;
@@ -289,7 +290,7 @@ class ProposalRepository extends EntityRepository
      * @param mixed $limit
      * @param mixed $offset
      */
-    public function getLastByStep($limit, $offset, CollectStep $step)
+    public function getLastByStep($limit, $offset, AbstractStep $step)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
@@ -370,7 +371,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getProposalsWithCostsForStep(CollectStep $step, int $limit = null): array
+    public function getProposalsWithCostsForStep(CollectStep $step, ?int $limit = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('proposal.title as name', 'proposal.estimation as value')

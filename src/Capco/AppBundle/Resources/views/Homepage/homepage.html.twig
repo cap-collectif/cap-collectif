@@ -70,29 +70,29 @@
         {% endif %}
 
         {% if section.type == 'highlight' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:highlightedContent', {'section': section})) }}
+            {{ get_highlighted_content(section) }}
         {% elseif section.type == 'introduction' %}
             {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} only %}
         {% elseif section.type == 'videos' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:lastVideos', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ get_last_videos(section.nbObjects, 0, section) }}
         {% elseif section.type == 'projects' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:lastProjects', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ get_last_projects(section.nbObjects, 0, section) }}
         {% elseif section.type == 'themes' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:lastThemes', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ get_last_themes(section.nbObjects, 0, section) }}
         {% elseif section.type == 'news' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:lastPosts', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ get_last_posts(section.nbObjects, 0, section) }}
         {% elseif section.type == 'events' %}
             {% include 'CapcoAppBundle:Homepage:lastEvents.html.twig' with {'section': section} %}
         {% elseif section.type == 'newsletter' %}
             {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section, 'form': form} only %}
         {% elseif section.type == 'social-networks' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:socialNetworks', {'section': section})) }}
+            {{ get_social_networks(section) }}
         {% elseif section.type == 'custom' %}
             {% include '@CapcoApp/Homepage/custom_section.html.twig' with {'section': section} only %}
         {% elseif section.type == 'proposals' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:lastProposals', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
+            {{ get_last_proposals(section.nbObjects, 0, section) }}
         {% elseif section.type == 'metrics' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:metricsSection', {'section': section})) }}
+            {{ get_metrics_section(section) }}
         {% endif %}
 
     {% endfor %}

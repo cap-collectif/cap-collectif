@@ -2,76 +2,45 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Section;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Enum\DeleteAccountType;
-use Capco\AppBundle\Resolver\SectionResolver;
-use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\ThemeRepository;
-use Capco\AppBundle\Repository\VideoRepository;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\Routing\Annotation\Route;
-use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Entity\NewsletterSubscription;
-use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Capco\AppBundle\Entity\UserNotificationsConfiguration;
-use Capco\AppBundle\Repository\HighlightedContentRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
+use Capco\AppBundle\Resolver\SectionResolver;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomepageController extends Controller
 {
-    private SerializerInterface $serializer;
     private QueryEventsResolver $eventsResolver;
     private SectionResolver $sectionResolver;
     private Manager $manager;
     private TranslatorInterface $translator;
-    private HighlightedContentRepository $highlightedContentRepository;
-    private VideoRepository $videoRepository;
-    private ProposalRepository $proposalRepository;
-    private PostRepository $postRepository;
     private NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
-    private ThemeRepository $themeRepository;
     private UserRepository $userRepository;
-    private ProjectRepository $projectRepository;
 
     public function __construct(
-        SerializerInterface $serializer,
         QueryEventsResolver $eventsResolver,
         SectionResolver $sectionResolver,
         Manager $manager,
         TranslatorInterface $translator,
-        HighlightedContentRepository $highlightedContentRepository,
-        VideoRepository $videoRepository,
-        ProposalRepository $proposalRepository,
-        PostRepository $postRepository,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
-        ThemeRepository $themeRepository,
-        UserRepository $userRepository,
-        ProjectRepository $projectRepository
+        UserRepository $userRepository
     ) {
-        $this->serializer = $serializer;
         $this->eventsResolver = $eventsResolver;
         $this->sectionResolver = $sectionResolver;
         $this->manager = $manager;
         $this->translator = $translator;
-        $this->videoRepository = $videoRepository;
-        $this->highlightedContentRepository = $highlightedContentRepository;
-        $this->themeRepository = $themeRepository;
         $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
-        $this->postRepository = $postRepository;
-        $this->proposalRepository = $proposalRepository;
         $this->userRepository = $userRepository;
-        $this->projectRepository = $projectRepository;
     }
 
     /**
@@ -128,7 +97,6 @@ class HomepageController extends Controller
                     $em = $this->getDoctrine()->getManager();
 
                     if ($userToNotify) {
-                        /** @var UserNotificationsConfiguration $userNotification */
                         $userNotification = $userToNotify->getNotificationsConfiguration();
                         if (!$userNotification->isConsentExternalCommunication()) {
                             $userToNotify->setNotificationsConfiguration(
@@ -184,136 +152,5 @@ class HomepageController extends Controller
             'sections' => $sections,
             'eventsCount' => $eventsCount,
         ];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:highlighted.html.twig")
-     */
-    public function highlightedContentAction(?Section $section = null)
-    {
-        $highlighteds = $this->highlightedContentRepository->getAllOrderedByPosition(4);
-        $props = $this->serializer->serialize(['highlighteds' => $highlighteds], 'json', [
-            'groups' => [
-                'HighlightedContent',
-                'Posts',
-                'Events',
-                'Projects',
-                'Themes',
-                'ThemeDetails',
-                'Default',
-                'Proposals',
-            ],
-        ]);
-
-        return ['props' => $props, 'section' => $section];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:metrics.html.twig")
-     */
-    public function metricsSectionAction(?Section $section = null)
-    {
-        $props = $this->serializer->serialize($section, 'json', [
-            'groups' => ['Section'],
-        ]);
-
-        return ['props' => $props];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:videos.html.twig")
-     */
-    public function lastVideosAction(
-        ?int $max = null,
-        ?int $offset = null,
-        ?Section $section = null
-    ) {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
-        $videos = $this->videoRepository->getLast($max, $offset);
-
-        return ['videos' => $videos, 'section' => $section];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
-     */
-    public function lastProposalsAction(
-        ?int $max = null,
-        ?int $offset = null,
-        ?Section $section = null
-    ) {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
-        if ($section->getStep() && $section->getStep()->isCollectStep()) {
-            $proposals = $this->proposalRepository->getLastByStep(
-                $max,
-                $offset,
-                $section->getStep()
-            );
-        } else {
-            $proposals = $this->proposalRepository->getLast($max, $offset);
-        }
-
-        $ids = array_map(function (Proposal $proposal) {
-            return $proposal->getId();
-        }, $proposals);
-
-        return ['proposals' => $ids, 'section' => $section];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
-     */
-    public function lastThemesAction(
-        ?int $max = null,
-        ?int $offset = null,
-        ?Section $section = null
-    ) {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
-        $topics = $this->themeRepository->getLast($max, $offset);
-
-        return ['topics' => $topics, 'section' => $section];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:lastPosts.html.twig")
-     */
-    public function lastPostsAction(?int $max = null, ?int $offset = null, ?Section $section = null)
-    {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
-        $posts = $this->postRepository->getLast($max, $offset);
-
-        return ['posts' => $posts, 'section' => $section];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:lastProjects.html.twig")
-     */
-    public function lastProjectsAction(
-        ?int $max = null,
-        ?int $offset = null,
-        ?Section $section = null
-    ) {
-        $max = $max ?? 3;
-        $projectRepo = $this->projectRepository;
-        $count = $projectRepo->countPublished($this->getUser());
-
-        return ['max' => $max, 'count' => $count, 'section' => $section];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Homepage:socialNetworks.html.twig")
-     */
-    public function socialNetworksAction(?Section $section = null)
-    {
-        $socialNetworks = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('CapcoAppBundle:SocialNetwork')
-            ->getEnabled();
-
-        return ['socialNetworks' => $socialNetworks, 'section' => $section];
     }
 }

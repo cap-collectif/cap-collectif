@@ -375,6 +375,11 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:FooterSocialNetwork']
 
+    Capco\AppBundle\Repository\SocialNetworkRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:SocialNetwork']
+
     Capco\AppBundle\Repository\MapTokenRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
