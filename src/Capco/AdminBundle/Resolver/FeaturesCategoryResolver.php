@@ -14,8 +14,8 @@ class FeaturesCategoryResolver
         'pages.events' => [
             'conditions' => ['calendar'],
             'features' => [
-                UserRole::ROLE_SUPER_ADMIN => ['allow_users_to_propose_events'],
-                UserRole::ROLE_ADMIN => [],
+                UserRole::ROLE_SUPER_ADMIN => [],
+                UserRole::ROLE_ADMIN => ['allow_users_to_propose_events']
             ],
         ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
