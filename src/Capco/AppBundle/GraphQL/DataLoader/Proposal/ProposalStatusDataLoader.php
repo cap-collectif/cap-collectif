@@ -19,7 +19,7 @@ use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
 class ProposalStatusDataLoader extends BatchDataLoader
 {
-    private $globalIdResolver;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -122,8 +122,16 @@ class ProposalStatusDataLoader extends BatchDataLoader
             if ($step instanceof SelectionStep) {
                 return self::resolveSelectionStep($step, $proposal);
             }
+            if (!($step instanceof CollectStep)) {
+                $this->logger->error(
+                    __METHOD__ .
+                        'step ' .
+                        $step->getId() .
+                        ' is neither a SelectionStep nor a CollectStep'
+                );
 
-            //else : CollectStep, ConsultationStep, PresentationStep, QuestionnaireStep, RankingStep, SynthesisStep, OtherStep
+                return null;
+            }
         }
 
         return $proposal->getStatus();
