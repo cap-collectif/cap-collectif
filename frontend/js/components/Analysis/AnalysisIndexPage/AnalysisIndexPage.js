@@ -3,7 +3,6 @@ import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import ReactPlaceholder from 'react-placeholder';
 import { QueryRenderer, graphql } from 'react-relay';
-import ApiError from '~ui/ApiError';
 import environment from '~/createRelayEnvironment';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
@@ -98,8 +97,6 @@ export const renderComponent = ({
         </Router>
       );
     }
-
-    return <ApiError />;
   }
 
   if (window.location.pathname === BASE_URL_ANALYSIS) {
@@ -107,7 +104,11 @@ export const renderComponent = ({
       <ReactPlaceholder
         ready={false}
         customPlaceholder={
-          <AnalysisPageContentPlaceholder isProjectPage hasError={!!error} fetchData={retry} />
+          <AnalysisPageContentPlaceholder
+            isProjectPage
+            hasError={!!error || (!!props && !props?.viewerAssignedProjectsToAnalyse)}
+            fetchData={retry}
+          />
         }
       />
     );
@@ -119,7 +120,7 @@ export const renderComponent = ({
         ready={false}
         customPlaceholder={
           <AnalysisPageContentPlaceholder
-            hasError={!!error}
+            hasError={!!error || (!!props && !props?.viewerAssignedProjectsToAnalyse)}
             fetchData={retry}
             selectedTab={parameters.filters.state}
           />
