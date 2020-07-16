@@ -479,7 +479,7 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
               }}
               linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif">
               {project.exportableSteps.filter(Boolean).map(({ position, step }) => (
-                <DropdownSelect.Choice key={step.id} value={step.id}>
+                <DropdownSelect.Choice key={step.id} value={step.slug}>
                   <strong className="bold-content">
                     <FormattedMessage id="admin.label.step" />
                     {`${position ?? 0} ${step.title}`}

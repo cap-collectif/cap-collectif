@@ -68,7 +68,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
         >
           <DropdownSelect.Choice
             key="selectionStep1"
-            value="selectionStep1"
+            value="selection-step-1"
           >
             <strong
               className="bold-content"
@@ -87,7 +87,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           </DropdownSelect.Choice>
           <DropdownSelect.Choice
             key="selectionStep2"
-            value="selectionStep2"
+            value="selection-step-2"
           >
             <strong
               className="bold-content"
@@ -1049,7 +1049,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
         >
           <DropdownSelect.Choice
             key="selectionStep1"
-            value="selectionStep1"
+            value="selection-step-1"
           >
             <strong
               className="bold-content"
@@ -2002,7 +2002,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
         >
           <DropdownSelect.Choice
             key="selectionStep1"
-            value="selectionStep1"
+            value="selection-step-1"
           >
             <strong
               className="bold-content"
@@ -2021,7 +2021,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
           </DropdownSelect.Choice>
           <DropdownSelect.Choice
             key="selectionStep2"
-            value="selectionStep2"
+            value="selection-step-2"
           >
             <strong
               className="bold-content"
