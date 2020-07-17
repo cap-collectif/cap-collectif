@@ -120,7 +120,9 @@ export const ProposalFormSwitcher = ({
               text="global.filter_belated"
             />
           ) : (
-            <FormattedMessage id={submitting ? 'global.saving' : 'all.data.saved'} />
+            <FormattedMessage id={submitting ? 'global.saving' : 'all.data.saved'}>
+              {(txt: string) => <span className={submitting ? 'saving' : 'saved'}>{txt}</span>}
+            </FormattedMessage>
           )}
         </DataStatus>
       </Header>

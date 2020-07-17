@@ -241,6 +241,7 @@ export const ProposalAnalysisFormPanel = ({
             />
           </Field>
           <ValidateButton
+            id="validate-proposal-analysis-button"
             disabled={disabled || (!status && !initialStatus)}
             type="button"
             onClick={() => {

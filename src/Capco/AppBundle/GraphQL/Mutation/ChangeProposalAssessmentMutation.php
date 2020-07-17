@@ -88,14 +88,11 @@ class ChangeProposalAssessmentMutation implements MutationInterface
             ->setState(ProposalStatementState::IN_PROGRESS)
             ->setUpdatedBy($viewer)
             ->setBody($body)
-            ->setProposal($proposal)
             ->setOfficialResponse($officialResponse)
             ->setEstimatedCost($estimatedCost);
 
         try {
-            if (!$proposal->getAssessment()) {
-                $this->entityManager->persist($proposalAssessment);
-            }
+            $this->entityManager->persist($proposalAssessment);
             $this->entityManager->flush();
         } catch (\Exception $exception) {
             $this->logger->alert(

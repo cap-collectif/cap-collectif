@@ -61,7 +61,7 @@ class ProposalAssessment implements Timestampable
 
     public function __construct(Proposal $proposal)
     {
-        $this->proposal = $proposal;
+        $this->setProposal($proposal);
     }
 
     public function getProposal(): ?Proposal

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Form\ProposalAnalysisType;
@@ -100,10 +101,8 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
                 'updatedBy' => $viewer,
             ]))
         ) {
-            return [
-                'analysis' => null,
-                'errorCode' => ProposalStatementErrorCode::NON_EXISTING_ANALYSIS,
-            ];
+            $proposalAnalysis = new ProposalAnalysis();
+            $proposal->addAnalysis($proposalAnalysis);
         }
 
         $proposalAnalysis
@@ -124,6 +123,7 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
         }
 
         try {
+            $this->entityManager->persist($proposalAnalysis);
             $this->entityManager->flush();
         } catch (\Exception $exception) {
             $this->logger->alert(

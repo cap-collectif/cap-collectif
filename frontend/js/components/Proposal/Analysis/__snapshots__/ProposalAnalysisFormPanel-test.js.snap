@@ -116,6 +116,7 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly 1`] = `
       </Field>
       <ProposalAnalysisFormPanel__ValidateButton
         disabled={false}
+        id="validate-proposal-analysis-button"
         onClick={[Function]}
         type="button"
       >

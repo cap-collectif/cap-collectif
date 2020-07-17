@@ -106,4 +106,25 @@ describe('mutations.changeProposalAnalysis', () => {
       },
     });
   });
+
+  it('should analyse successfully the newly created analysis', async () => {
+    const analyseCreatedAnalysis = await graphql(
+      AnalyseProposalAnalysisMutation,
+      {
+        input: {
+          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWxJZGY2',
+          comment: 'aled',
+          decision: 'FAVOURABLE',
+        },
+      },
+      { email: 'jpec@cap-collectif.com', password: 'toto' },
+    );
+    expect(analyseCreatedAnalysis).toMatchSnapshot({
+      analyseProposalAnalysis: {
+        analysis: {
+          id: expect.any(String),
+        },
+      },
+    });
+  });
 });

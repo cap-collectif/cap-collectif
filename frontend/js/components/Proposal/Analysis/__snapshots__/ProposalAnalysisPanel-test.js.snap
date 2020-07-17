@@ -15,6 +15,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
     <ProposalAnalysisPanel__Panel>
       <ProposalAnalysisPanel__PanelSection
         border={true}
+        id="proposal_analysis_analyses"
       >
         <ProposalAnalysisPanel__CloseIconWrapper>
           <FormattedMessage
@@ -67,6 +68,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
       </ProposalAnalysisPanel__PanelSection>
       <ProposalAnalysisPanel__PanelSection
         border={true}
+        id="proposal_analysis_assessment"
       >
         <FormattedMessage
           id="global.review"

@@ -28,6 +28,7 @@ type Props = {|
   initialStatus: Decision,
   onValidate: (boolean, ?boolean) => void,
   costEstimationEnabled: boolean,
+  officialResponse: ?string,
 |};
 
 export type FormValues = {|
@@ -50,7 +51,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   };
   if (values.validate && values.status) {
     return EvaluateProposalAssessmentMutation.commit({
-      input: { ...input, decision: values.status },
+      input: { ...input, decision: values.status, officialResponse: values.officialResponse || '' },
     })
       .then(() => {
         onValidate(false, values.goBack);
@@ -87,6 +88,7 @@ export const ProposalAssessmentFormPanel = ({
   initialStatus,
   costEstimationEnabled,
   disabled,
+  officialResponse,
 }: Props) => {
   const [status, setStatus] = useState(initialStatus);
   const { width } = useResize();
@@ -175,7 +177,8 @@ export const ProposalAssessmentFormPanel = ({
             />
           </Field>
           <ValidateButton
-            disabled={disabled || (!status && !initialStatus)}
+            id="validate-proposal-assessment-button"
+            disabled={disabled || (!status && !initialStatus) || !officialResponse}
             type="button"
             onClick={() => {
               dispatch(change(formName, 'validate', true));
@@ -201,6 +204,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
     },
     costEstimationEnabled: proposal.form?.analysisConfiguration?.costEstimationEnabled || false,
     initialStatus: initialStatusValue !== 'IN_PROGRESS' ? initialStatusValue : null,
+    officialResponse: formValueSelector(formName)(state, 'officialResponse'),
   };
 };
 

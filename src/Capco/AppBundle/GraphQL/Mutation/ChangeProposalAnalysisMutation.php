@@ -106,9 +106,9 @@ class ChangeProposalAnalysisMutation implements MutationInterface
 
         $proposalAnalysis
             ->setUpdatedBy($viewer)
-            ->setProposal($proposal)
             ->setComment($comment)
             ->setState(ProposalStatementState::IN_PROGRESS);
+        $proposal->addAnalysis($proposalAnalysis);
 
         // Handle responses
         if (!empty($responses)) {
@@ -122,12 +122,8 @@ class ChangeProposalAnalysisMutation implements MutationInterface
         }
 
         try {
-            if (!$proposal->getAnalyses()->contains($proposalAnalysis)) {
-                $this->entityManager->persist($proposalAnalysis);
-            }
+            $this->entityManager->persist($proposalAnalysis);
             $this->entityManager->flush();
-
-            $proposal->addAnalysis($proposalAnalysis);
         } catch (\Exception $exception) {
             $this->logger->alert(
                 'An error occurred when editing ProposalAnalysis with proposal id :' .

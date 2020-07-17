@@ -310,7 +310,7 @@ Scenario: Admin deletes a proposal ...
   Then I should not see "Proposition qui va être jetée"
 
 @database @rabbitmq
-Scenario: User wants to process a project proposal analysis immediately
+Scenario: User wants to evaluate a project proposal analysis immediately
   Given feature "unstable__analysis" is enabled
   And I am logged in as spyl
   And I click on button "#cookie-consent"
@@ -325,11 +325,52 @@ Scenario: User wants to process a project proposal analysis immediately
   Then I should not see ".proposal__last__news__title"
   When I click the ".edit-analysis-icon" element
   And I click on button "#validate-proposal-decision-button"
-  And I wait 5 seconds
+  And I wait ".saving" to appear on current page
+  And I wait ".saved" to appear on current page
   And I reload the page
   And I wait "#proposal_analysis_decision" to appear on current page
   And I wait ".proposal__last__news__title" to appear on current page
   Then I should see "Réponse officielle" in the ".proposal__last__news__title" element
+
+@database @rabbitmq
+Scenario: User wants to assess a project proposal analysis immediately
+  Given feature "unstable__analysis" is enabled
+  And I am logged in as spyl
+  And I click on button "#cookie-consent"
+  Then I go to "/admin/capco/app/proposalform/proposalformIdf/edit"
+  And I wait "#link-tab-new-analysis" to appear on current page
+  When I click on button "#link-tab-new-analysis"
+  And I wait "#step_now" to appear on current page
+  Then I click on button "#step_now"
+  And I click on button "#analysis-configuration-submit"
+  When I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public"
+  And I wait "#proposal_analysis_assessment" to appear on current page
+  When I click the ".edit-analysis-icon" element
+  And I fill in the following:
+    | proposalAssessment-officialResponse | J'apprécie a moitié garçon |
+  And I click on button "#label-radio-status-FAVOURABLE"
+  And I click on button "#validate-proposal-assessment-button"
+  And I wait ".saving" to appear on current page
+  And I wait ".saved" to appear on current page
+  And I reload the page
+  And I wait "#proposal_analysis_assessment" to appear on current page
+  Then I should see "global.favorable" in the "#proposal_analysis_assessment" element
+
+@database @rabbitmq
+Scenario: User wants to analyse a project proposal analysis immediately
+  Given feature "unstable__analysis" is enabled
+  And I am logged in as Agui
+  And I click on button "#cookie-consent"
+  When I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public"
+  And I wait "#proposal_analysis_analyses" to appear on current page
+  When I click the ".edit-analysis-icon" element
+  And I click on button "#label-radio-status-FAVOURABLE"
+  And I click on button "#validate-proposal-analysis-button"
+  And I wait ".saving" to appear on current page
+  And I wait ".saved" to appear on current page
+  And I reload the page
+  And I wait "#proposal_analysis_analyses" to appear on current page
+  Then I should see "global.favorable" in the "#proposal_analysis_analyses" element
 
 @database
 Scenario: Can not see the analysis panel when not logged in

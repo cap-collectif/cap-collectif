@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`mutations.changeProposalAnalysis should analyse successfully the newly created analysis 1`] = `
+Object {
+  "analyseProposalAnalysis": Object {
+    "analysis": Object {
+      "comment": "aled",
+      "id": Any<String>,
+      "state": "FAVOURABLE",
+    },
+    "errorCode": null,
+  },
+}
+`;
+
 exports[`mutations.changeProposalAnalysis should analyse successfully the proposal's analysis 1`] = `
 Object {
   "analyseProposalAnalysis": Object {

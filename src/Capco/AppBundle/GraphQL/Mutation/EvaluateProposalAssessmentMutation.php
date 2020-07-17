@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
+use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
@@ -72,10 +73,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         }
 
         if (!($proposalAssessment = $proposal->getAssessment())) {
-            return [
-                'assessment' => null,
-                'errorCode' => ProposalStatementErrorCode::NON_EXISTING_ASSESSMENT,
-            ];
+            $proposalAssessment = new ProposalAssessment($proposal);
         }
 
         $proposalAssessment
@@ -102,6 +100,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         }
 
         try {
+            $this->entityManager->persist($proposalAssessment);
             $this->entityManager->flush();
         } catch (\Exception $exception) {
             $this->logger->alert(

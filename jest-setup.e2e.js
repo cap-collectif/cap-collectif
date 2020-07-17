@@ -59,9 +59,10 @@ const authenticatedInternalRequest = (username, password, query, variables) => {
 };
 
 global.graphql = (query, variables, client = 'anonymous') => {
+  if (typeof client === "object") {
+    return authenticatedInternalRequest(client.email, client.password, query, variables);
+  }
   switch (client) {
-    case typeof client === 'object':
-      return authenticatedInternalRequest(client.email, client.password, query, variables);
     case 'admin':
       return adminClient.request(query, variables);
     case 'super_admin':

@@ -127,7 +127,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
     <PanelsSlider home={panelState === 'HOME'} id="proposal_analysis_panel">
       <div style={{ width: '50%' }}>
         <Panel>
-          <PanelSection border>
+          <PanelSection border id="proposal_analysis_analyses">
             <CloseIconWrapper>
               <FormattedMessage id="panel.analysis.subtitle" tagName="p" />
               <CloseIcon
@@ -173,7 +173,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
             </div>
           </PanelSection>
           {proposal.supervisor && (
-            <PanelSection border>
+            <PanelSection border id="proposal_analysis_assessment">
               <FormattedMessage id="global.review" tagName="p" />
               <div>
                 <ProposalAnalysisUserRow
