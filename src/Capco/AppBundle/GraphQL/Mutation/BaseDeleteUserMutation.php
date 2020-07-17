@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\CommentVote;
+use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
@@ -16,6 +17,7 @@ use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
@@ -49,6 +51,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected $valueResponseRepository;
     protected $reportingRepository;
     protected $eventRepository;
+    protected $highlightedContentRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -66,7 +69,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         MediaResponseRepository $mediaResponseRepository,
         ValueResponseRepository $valueResponseRepository,
         ReportingRepository $reportingRepository,
-        EventRepository $eventRepository
+        EventRepository $eventRepository,
+        HighlightedContentRepository $highlightedContentRepository
     ) {
         parent::__construct($em, $mediaProvider);
         $this->translator = $translator;
@@ -83,6 +87,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->valueResponseRepository = $valueResponseRepository;
         $this->reportingRepository = $reportingRepository;
         $this->eventRepository = $eventRepository;
+        $this->highlightedContentRepository = $highlightedContentRepository;
     }
 
     public function softDelete(User $user): void
@@ -90,6 +95,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $contributions = $user->getContributions();
         $reports = $this->reportingRepository->findBy(['Reporter' => $user]);
         $events = $this->eventRepository->findBy(['author' => $user]);
+        $highlightedContents = $this->highlightedContentRepository->findAll();
 
         foreach ($contributions as $contribution) {
             if (method_exists($contribution, 'setTitle')) {
@@ -119,6 +125,14 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         }
 
         foreach ($events as $event) {
+            foreach ($highlightedContents as $content) {
+                if (
+                    $content instanceof HighlightedEvent &&
+                    $content->getEvent()->getId() === $event->getId()
+                ) {
+                    $this->em->remove($content);
+                }
+            }
             $this->em->remove($event);
         }
 

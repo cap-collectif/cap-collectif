@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
@@ -49,7 +50,8 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         MediaResponseRepository $mediaResponseRepository,
         ValueResponseRepository $valueResponseRepository,
         ReportingRepository $reportingRepository,
-        EventRepository $eventRepository
+        EventRepository $eventRepository,
+        HighlightedContentRepository $highlightedContentRepository
     ) {
         parent::__construct(
             $em,
@@ -67,7 +69,8 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $mediaResponseRepository,
             $valueResponseRepository,
             $reportingRepository,
-            $eventRepository
+            $eventRepository,
+            $highlightedContentRepository
         );
         $this->userRepository = $userRepository;
         $this->logger = $logger;
