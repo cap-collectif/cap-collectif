@@ -60,8 +60,11 @@ class Status
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="statuses", cascade={"persist"})
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     * @todo the column should not be nullable but for an unknown reason, the loading fails if not.
+     * This should have a conflict with the defaultStatus relation.
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="statuses")
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true)
      * @CapcoAssert\IsCollectOrSelectionStep()
      */
     private $step;

@@ -368,7 +368,7 @@ class StepAdmin extends CapcoAdmin
                     'purify_html_profile' => 'default'
                 ])
                 ->end();
-            if ($subject instanceof CollectStep) {
+            if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {
                 $formMapper->add('defaultStatus', ModelType::class, [
                     'label' => 'admin.fields.step.default_status',
                     'query' => $this->createQueryForDefaultStatus(),
@@ -379,6 +379,8 @@ class StepAdmin extends CapcoAdmin
                     'placeholder' => 'global.none'
                 ]);
                 $formMapper->end();
+            }
+            if ($subject instanceof CollectStep) {
                 $formMapper
                     ->with('admin.fields.step.group_selections')
                     ->add('private', CheckboxType::class, [

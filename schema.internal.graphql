@@ -5702,9 +5702,9 @@ input ProjectStepInput {
   proposalsHidden: Boolean
   allowingProgressSteps: Boolean
   statuses: [StepStatusInput]
+  defaultStatus: ID
   private: Boolean
   proposalForm: ID
-  defaultStatus: ID
   questionnaire: ID
   footer: HTML
   nbOpinionsToDisplay: Int
@@ -8789,6 +8789,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
+  defaultStatus: Status
 }
 
 input SendContactFormInput {

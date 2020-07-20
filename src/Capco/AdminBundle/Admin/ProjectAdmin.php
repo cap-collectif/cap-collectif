@@ -7,6 +7,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -76,7 +77,7 @@ final class ProjectAdmin extends CapcoAdmin
     public function preRemove($object)
     {
         foreach ($object->getRealSteps() as $step) {
-            if ($step instanceof CollectStep) {
+            if ($step instanceof CollectStep || $step instanceof SelectionStep) {
                 $step->setDefaultStatus(null);
             }
         }

@@ -43,6 +43,7 @@ export const ProjectAdminSelectionStepForm = ({
   isLimitEnabled,
 }: Props) => {
   const intl = useIntl();
+  const statusesWithId = statuses?.filter(s => s.id) || [];
   return (
     <>
       <StepVotesFields
@@ -112,6 +113,20 @@ export const ProjectAdminSelectionStepForm = ({
         }>
         <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
       </Button>
+      {statusesWithId?.length ? (
+        <Field
+          labelClassName="control-label"
+          inputClassName="fake-inputClassName"
+          component={select}
+          name="defaultStatus"
+          id="step-defaultStatus"
+          placeholder=" "
+          label={<FormattedMessage id="admin.fields.step.default_status" />}
+          options={statusesWithId.map(s => ({ label: s.name, value: s.id }))}
+        />
+      ) : (
+        ''
+      )}
     </>
   );
 };

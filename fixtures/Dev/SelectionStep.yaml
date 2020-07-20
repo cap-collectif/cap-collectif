@@ -36,6 +36,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
             | Attendez-vous à la pareille.
         voteType: 1
         votesHelpText: <stripslashes('\<p>\')>Bon vote<stripslashes('\</p>\')>
+        defaultStatus: '@status4'
     selectionstep2:
         id: selectionstep2
         title: Vainqueur
@@ -72,6 +73,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
             | Trompeurs, c'est pour vous que j'écris
             | Attendez-vous à la pareille.
         voteType: 0
+        defaultStatus: '@status6'
     selectionstep3:
         id: selectionstep3
         title: Fermée
@@ -411,6 +413,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         startAt: <identity((new \DateTime('2018-11-11')))>
         endAt: <identity((new \DateTime('2032-08-02')))>
         voteType: 0
+        defaultStatus: '@statusIdfAnalyse4'
         body: 'La pré-sélection est en cours ! Les votes seront ouverts le 27 mai, un peu de patience...'
     selectionStepIdfVote:
         id: selectionStepIdfVote
@@ -419,6 +422,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         startAt: <identity((new \DateTime('2018-11-11')))>
         endAt: <identity((new \DateTime('2032-08-02')))>
         voteType: 1
+        defaultStatus: '@statusIdfVote1'
         body: Franciliens, prêts à voter
     selectionStepIdfWiners:
         id: selectionStepIdfWiners
@@ -427,4 +431,5 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         startAt: <identity((new \DateTime('2018-11-11')))>
         endAt: <identity((new \DateTime('2032-08-02')))>
         voteType: 0
+        defaultStatus: '@statusIdfWinner1'
         body: Gardez un oeil sur les projets !

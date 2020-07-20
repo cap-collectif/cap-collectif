@@ -61,15 +61,15 @@ ProjectStepInput:
                 type: 'Boolean'
             allowingProgressSteps:
                 type: 'Boolean'
-            # statuses is used only by CollectStep and SelectionStep
+            # statuses and defaultStatus are used only by CollectStep and SelectionStep
             statuses:
                 type: '[StepStatusInput]'
+            defaultStatus:
+                type: 'ID'
             # CollectStep
             private:
                 type: 'Boolean'
             proposalForm:
-                type: 'ID'
-            defaultStatus:
                 type: 'ID'
             # QuestionnaireStep
             questionnaire:

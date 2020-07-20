@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Mutation\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -29,27 +28,29 @@ class AddProposalsToStepsMutation extends AbstractProposalStepMutation implement
 
         return [
             'proposals' => $this->getConnection($proposals, $args),
-            'error' => $error
+            'error' => $error,
         ];
     }
 
     private function addStepsToProposals(array $steps, array $proposals): void
     {
         $changedProposals = [];
+        $updateStatusProposals = [];
         foreach ($proposals as $proposal) {
-            $hasChanged = false;
+            $oldStatus = $proposal->getStatus();
             foreach ($steps as $step) {
                 if ($this->addOneStepToOneProposal($step, $proposal)) {
-                    $hasChanged = true;
+                    $changedProposals[] = $proposal;
+                    if ($proposal->getStatus() !== $oldStatus) {
+                        $updateStatusProposals[] = $proposal;
+                    }
                 }
             }
-
-            if ($hasChanged) {
-                $changedProposals[] = $proposal;
-            }
         }
+
         $this->entityManager->flush();
-        $this->publish($changedProposals);
+        $this->updateStatusPublish($updateStatusProposals);
+        $this->reindexProposals($changedProposals);
     }
 
     private function addOneStepToOneProposal(SelectionStep $step, Proposal $proposal): bool
@@ -60,7 +61,7 @@ class AddProposalsToStepsMutation extends AbstractProposalStepMutation implement
 
         $selection = new Selection();
         $selection->setSelectionStep($step);
-        $selection->setStatus(null);
+        $selection->setStatus($step->getDefaultStatus());
         $proposal->addSelection($selection);
 
         $this->entityManager->persist($selection);

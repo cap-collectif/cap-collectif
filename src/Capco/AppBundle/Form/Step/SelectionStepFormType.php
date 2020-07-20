@@ -30,6 +30,7 @@ class SelectionStepFormType extends AbstractStepFormType
                         ->setColor($itemFromUser->getColor());
                 }
             ])
+            ->add('defaultStatus')
             ->add('defaultSort')
             ->add('proposalsHidden');
     }

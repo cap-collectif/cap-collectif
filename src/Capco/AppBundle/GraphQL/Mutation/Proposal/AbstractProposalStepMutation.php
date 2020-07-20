@@ -66,6 +66,12 @@ abstract class AbstractProposalStepMutation
 
     protected function publish(array $proposals): void
     {
+        $this->updateStatusPublish($proposals);
+        $this->reindexProposals($proposals);
+    }
+
+    protected function updateStatusPublish(array $proposals): void
+    {
         foreach ($proposals as $proposal) {
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
@@ -78,6 +84,12 @@ abstract class AbstractProposalStepMutation
                     )
                 )
             );
+        }
+    }
+
+    protected function reindexProposals(array $proposals): void
+    {
+        foreach ($proposals as $proposal) {
             $this->indexer->index(Proposal::class, $proposal->getId());
         }
         $this->indexer->finishBulk();

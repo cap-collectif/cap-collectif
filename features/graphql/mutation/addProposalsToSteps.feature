@@ -130,7 +130,7 @@ Scenario: Admin add an already present step to a proposal
   """
 
 @database @rabbitmq
-Scenario: Admin add a step to two proposals, one already having it
+Scenario: Admin add a step to two proposals, one already having it. The new step has default status
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
@@ -144,6 +144,9 @@ Scenario: Admin add a step to two proposals, one already having it
               id
               selections {
                 step {
+                  id
+                }
+                status {
                   id
                 }
               }
@@ -175,11 +178,17 @@ Scenario: Admin add a step to two proposals, one already having it
                   {
                     "step": {
                       "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
+                    },
+                    "status": {
+                      "id": "status4"
                     }
                   },
                   {
                     "step": {
                       "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="
+                    },
+                    "status": {
+                      "id": "status6"
                     }
                   }
                 ]
@@ -192,12 +201,16 @@ Scenario: Admin add a step to two proposals, one already having it
                   {
                     "step": {
                       "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
+                    },
+                    "status": {
+                      "id": "status5"
                     }
                   },
                   {
                     "step": {
                       "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg=="
-                    }
+                    },
+                    "status": null
                   }
                 ]
               }

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalSort;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
@@ -81,6 +82,12 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
      */
     private $defaultSort = ProposalSort::RANDOM;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
+     * @ORM\JoinColumn(name="default_status_id", nullable=true, onDelete="SET NULL")
+     */
+    private $defaultStatus;
+
     public function __construct()
     {
         parent::__construct();
@@ -143,6 +150,18 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     public function setDefaultSort($defaultSort)
     {
         $this->defaultSort = $defaultSort;
+
+        return $this;
+    }
+
+    public function getDefaultStatus(): ?Status
+    {
+        return $this->defaultStatus;
+    }
+
+    public function setDefaultStatus(?Status $defaultStatus): self
+    {
+        $this->defaultStatus = $defaultStatus;
 
         return $this;
     }
