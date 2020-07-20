@@ -50,8 +50,8 @@ fi
 
 echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."
 chmod -R 777 var/ && chown -R capco:capco var/ 
-gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
-gosu capco php bin/console assets:install public --symlink --env=prod --no-interaction --quiet
+gosu capco php -d memory_limit=-1 bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
+gosu capco php -d memory_limit=-1 bin/console assets:install public --symlink --env=prod --no-interaction --quiet
 echo "[$(date -u)][PHP-FPM] Cache warmed!"
 
 # Retry variables for migrations (max 3)

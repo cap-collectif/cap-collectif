@@ -123,7 +123,7 @@ InternalUser:
                 type: 'InternalProposalConnection!'
                 argsBuilder: 'Relay::Connection'
                 description: 'Get all proposals of the user.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", [getUser(), value, args, context])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", [getUser(), value, args, context, info])'
             proposalVotesCount:
                 type: 'Int!'
             commentVotes:

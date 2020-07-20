@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use ArrayObject;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -24,7 +25,8 @@ class UserProposalsResolver implements ResolverInterface
         $viewer,
         User $user,
         Argument $args = null,
-        ?ArrayObject $context = null
+        ?ArrayObject $context = null,
+        ?ResolveInfo $resolveInfo= null
     ): Connection {
         if (!$args) {
             $args = new Argument(['first' => 0]);
@@ -36,10 +38,15 @@ class UserProposalsResolver implements ResolverInterface
             true === $context->offsetGet('disable_acl');
         $validViewer = $viewer instanceof UserInterface;
 
+        // Sometimes we only use `totalCount` and we don't need to fetch edges.
+        $needEdges = $resolveInfo ? isset($resolveInfo->getFieldSelection()['edges']) : false;
+
         if ($aclDisabled) {
             /** @var User $viewer */
-            $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
-                return $this->proposalRepository->getByUser($user, $limit, $offset);
+            $paginator = new Paginator(function (int $offset, int $limit) use ($user, $needEdges) {
+                return $needEdges
+                    ? $this->proposalRepository->getByUser($user, $limit, $offset)
+                    : [];
             });
             $totalCount = $this->proposalRepository->countByUser($user);
         } elseif ($validViewer && $user) {
