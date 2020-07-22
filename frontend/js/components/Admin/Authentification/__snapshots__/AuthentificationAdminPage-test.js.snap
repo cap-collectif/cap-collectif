@@ -23,7 +23,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                 Object {
                   "args": null,
                   "kind": "FragmentSpread",
-                  "name": "ShieldAdminForm_shieldAdminForm",
+                  "name": "AuthentificationAdminPageContent_shieldAdminForm",
                 },
               ],
               "storageKey": null,
@@ -39,7 +39,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                 Object {
                   "args": null,
                   "kind": "FragmentSpread",
-                  "name": "ListSSOConfiguration_ssoConfigurations",
+                  "name": "AuthentificationAdminPageContent_ssoConfigurations",
                 },
               ],
               "storageKey": null,
@@ -47,7 +47,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "82d4c6b9b0fdbb015a661a3b579d4b91",
+        "hash": "6516368b10fa432876db9f095abb927c",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [],
@@ -72,8 +72,26 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
-                  "kind": "ScalarField",
-                  "name": "introduction",
+                  "concreteType": "ShieldAdminFormTranslation",
+                  "kind": "LinkedField",
+                  "name": "translations",
+                  "plural": true,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "locale",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "introduction",
+                      "storageKey": null,
+                    },
+                  ],
                   "storageKey": null,
                 },
                 Object {
@@ -298,11 +316,19 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           "operationKind": "query",
           "text": "query AuthentificationAdminPageQuery {
   shieldAdminForm {
-    ...ShieldAdminForm_shieldAdminForm
+    ...AuthentificationAdminPageContent_shieldAdminForm
   }
   ssoConfigurations {
-    ...ListSSOConfiguration_ssoConfigurations
+    ...AuthentificationAdminPageContent_ssoConfigurations
   }
+}
+
+fragment AuthentificationAdminPageContent_shieldAdminForm on ShieldAdminForm {
+  ...ShieldAdminForm_shieldAdminForm
+}
+
+fragment AuthentificationAdminPageContent_ssoConfigurations on InternalSSOConfigurationConnection {
+  ...ListSSOConfiguration_ssoConfigurations
 }
 
 fragment FranceConnectConfigurationModal_ssoConfiguration on FranceConnectSSOConfiguration {
@@ -366,7 +392,10 @@ fragment SSOConfigurationItem_configuration on SSOConfiguration {
 
 fragment ShieldAdminForm_shieldAdminForm on ShieldAdminForm {
   shieldMode
-  introduction
+  translations {
+    locale
+    introduction
+  }
   media {
     id
     url

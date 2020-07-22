@@ -37,10 +37,10 @@ export class AuthentificationAdminPage extends React.Component<{}> {
           query={graphql`
             query AuthentificationAdminPageQuery {
               shieldAdminForm {
-                ...ShieldAdminForm_shieldAdminForm
+                ...AuthentificationAdminPageContent_shieldAdminForm
               }
               ssoConfigurations {
-                ...ListSSOConfiguration_ssoConfigurations
+                ...AuthentificationAdminPageContent_ssoConfigurations
               }
             }
           `}

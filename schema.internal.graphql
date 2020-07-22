@@ -3804,8 +3804,8 @@ input InternalUpdateShieldAdminFormInput {
   """Enable or disable shield mode."""
   shieldMode: Boolean!
 
-  """Introduction text to show on shield page."""
-  introduction: HTML
+  """introduction"""
+  translations: [UpdateShieldAdminFormTranslationInput!]
 
   """The image id to associate for the shield image."""
   mediaId: ID
@@ -8865,6 +8865,15 @@ type ShieldAdminForm {
 
   """Image to show in shield page."""
   media: Media
+  translations: [ShieldAdminFormTranslation!]!
+}
+
+type ShieldAdminFormTranslation {
+  """The locale of the translation"""
+  locale: String!
+
+  """Introduction text to show in shield page."""
+  introduction: HTML
 }
 
 """A simple question"""
@@ -10215,6 +10224,14 @@ type UpdateShieldAdminFormPayload {
   """The shield admin form."""
   shieldAdminForm: ShieldAdminForm!
   clientMutationId: String
+}
+
+input UpdateShieldAdminFormTranslationInput {
+  """The locale of the translation"""
+  locale: String!
+
+  """Introduction text to show on shield page."""
+  introduction: HTML
 }
 
 input UpdateUserAccountInput {

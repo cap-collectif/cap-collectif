@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
 import ShieldAdminForm from './ShieldAdminForm';
 import ListSSOConfiguration from './ListSSOConfiguration';
-import type { ShieldAdminForm_shieldAdminForm } from '~relay/ShieldAdminForm_shieldAdminForm.graphql';
-import type { ListSSOConfiguration_ssoConfigurations } from '~relay/ListSSOConfiguration_ssoConfigurations.graphql';
+import type { AuthentificationAdminPageContent_shieldAdminForm } from '~relay/AuthentificationAdminPageContent_shieldAdminForm.graphql';
+import type { AuthentificationAdminPageContent_ssoConfigurations } from '~relay/AuthentificationAdminPageContent_ssoConfigurations.graphql';
 
 type Props = {|
-  +shieldAdminForm: ShieldAdminForm_shieldAdminForm,
-  +ssoConfigurations: ListSSOConfiguration_ssoConfigurations,
+  +shieldAdminForm: AuthentificationAdminPageContent_shieldAdminForm,
+  +ssoConfigurations: AuthentificationAdminPageContent_ssoConfigurations,
 |};
 
 export class AuthentificationAdminPageContent extends React.Component<Props> {
@@ -24,4 +25,15 @@ export class AuthentificationAdminPageContent extends React.Component<Props> {
   }
 }
 
-export default AuthentificationAdminPageContent;
+export default createFragmentContainer(AuthentificationAdminPageContent, {
+  shieldAdminForm: graphql`
+    fragment AuthentificationAdminPageContent_shieldAdminForm on ShieldAdminForm {
+      ...ShieldAdminForm_shieldAdminForm
+    }
+  `,
+  ssoConfigurations: graphql`
+    fragment AuthentificationAdminPageContent_ssoConfigurations on InternalSSOConfigurationConnection {
+      ...ListSSOConfiguration_ssoConfigurations
+    }
+  `,
+});

@@ -5,24 +5,22 @@ exports[`<ShieldAdminForm /> renders correctly 1`] = `
   className="box box-primary container-fluid"
 >
   <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="admin.label.pages.shield"
-        values={Object {}}
-      />
-    </h3>
-  </div>
-  <div
     className="box-content box-content__content-form"
   >
     <form
       id="shield-admin-form"
       onSubmit={[MockFunction]}
     >
+      <ShieldAdminForm__Title>
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="admin.label.pages.shield"
+            values={Object {}}
+          />
+        </h3>
+      </ShieldAdminForm__Title>
       <div
         className="d-flex align-items-center mb-15"
       >

@@ -15,6 +15,10 @@ Scenario: GraphQL admin client wants to get current configuration of shield
           name
           url
         }
+        translations {
+          locale
+          introduction
+        }
       }
     }"
   }
@@ -33,7 +37,14 @@ Scenario: GraphQL admin client wants to get current configuration of shield
           "id": @string@,
           "name": @string@,
           "url": @string@
-        }
+        },
+        "translations":
+        [
+          {
+            "locale": "fr-FR",
+            "introduction": @string@
+          }
+        ]
       }
     }
   }

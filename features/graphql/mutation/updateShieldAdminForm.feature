@@ -47,6 +47,10 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
         shieldAdminForm {
           shieldMode
           introduction
+          translations {
+            locale
+            introduction
+          }
           media {
             id
             name
@@ -58,7 +62,16 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
       "input": {
         "mediaId": null,
         "shieldMode": true,
-        "introduction": "<p>Jean is a great person and he deserve a great wife.</p>"
+        "translations": [
+          {
+            "locale": "fr-FR",
+            "introduction": "<p>Jean est une belle personne</p>"
+          },
+          {
+            "locale": "en-GB",
+            "introduction": "<p>Jean is a great person and he deserve a great wife.</p>"
+          }
+        ]
       }
     }
   }
@@ -73,7 +86,17 @@ Scenario: GraphQL admin client wants to update configuration of shield mode
         "shieldAdminForm":
         {
           "shieldMode": true,
-          "introduction": "<p>Jean is a great person and he deserve a great wife.</p>",
+          "introduction": "<p>Jean est une belle personne</p>",
+          "translations": [
+            {
+              "locale": "fr-FR",
+              "introduction": "<p>Jean est une belle personne</p>"
+            },
+            {
+              "locale": "en-GB",
+              "introduction": "<p>Jean is a great person and he deserve a great wife.</p>"
+            }
+          ],
           "media": null
         }
       }

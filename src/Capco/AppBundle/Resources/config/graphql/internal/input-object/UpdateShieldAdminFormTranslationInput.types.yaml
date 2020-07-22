@@ -1,0 +1,11 @@
+UpdateShieldAdminFormTranslationInput:
+    type: input-object
+    config:
+        name: UpdateShieldAdminFormTranslationInput
+        fields:
+            locale:
+                type: 'String!'
+                description: 'The locale of the translation'
+            introduction:
+                type: 'HTML'
+                description: 'Introduction text to show on shield page.'

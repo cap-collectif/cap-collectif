@@ -12,3 +12,5 @@ InternalShieldAdminForm:
       media:
         description: 'Image to show in shield page.'
         type: 'InternalMedia'
+      translations:
+        type: '[InternalShieldAdminFormTranslation!]!'

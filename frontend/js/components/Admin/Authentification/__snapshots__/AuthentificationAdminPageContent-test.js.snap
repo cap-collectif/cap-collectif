@@ -2,7 +2,7 @@
 
 exports[`<AuthentificationAdminPageContent /> renders correctly 1`] = `
 <Fragment>
-  <Relay(Connect(ReduxForm))
+  <Relay(Connect(injectIntl(ReduxForm)))
     shieldAdminForm={
       Object {
         "introduction": "<p>Introduction text in shield mode</p>",
