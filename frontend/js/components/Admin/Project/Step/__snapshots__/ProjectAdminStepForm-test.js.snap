@@ -279,3 +279,283 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
   </ModalFooter>
 </Fragment>
 `;
+
+exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
+<Fragment>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <ProjectAdminStepFormstyle__FormContainer
+      id="formName"
+      onSubmit={[MockFunction]}
+    >
+      <ProjectAdminFormstyle__ProjectBoxHeader>
+        <h5>
+          <FormattedMessage
+            id="global.general"
+            values={Object {}}
+          />
+        </h5>
+      </ProjectAdminFormstyle__ProjectBoxHeader>
+      <Field
+        component={[Function]}
+        id="step-label"
+        label={
+          <FormattedMessage
+            id="color.main_menu.text"
+            values={Object {}}
+          />
+        }
+        name="label"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="step-title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <ProjectAdminStepFormstyle__DateContainer>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          formName="ProjectAdminForm"
+          id="step-startAt"
+          label={
+            <FormattedMessage
+              id="start"
+              values={Object {}}
+            />
+          }
+          name="startAt"
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          formName="ProjectAdminForm"
+          id="step-endAt"
+          label={
+            <div>
+              end
+              <span
+                className="excerpt inline"
+              >
+                global.optional
+                 
+              </span>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </ProjectAdminStepFormstyle__DateContainer>
+      <Field
+        component={[Function]}
+        id="step-body"
+        label={
+          <div>
+            proposal.body
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+            </span>
+          </div>
+        }
+        name="body"
+        type="editor"
+      />
+      <Field
+        component={[Function]}
+        id="step-metaDescription"
+        label={
+          <div>
+            global.meta.description
+            <span
+              className="excerpt inline"
+            >
+              global.optional
+               
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <_default
+                    className="text-left"
+                    id="tooltip-top"
+                    style={
+                      Object {
+                        "wordBreak": "break-word",
+                      }
+                    }
+                  >
+                    <FormattedHTMLMessage
+                      id="admin.help.metadescription"
+                      tagName="span"
+                      values={Object {}}
+                    />
+                  </_default>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
+              >
+                <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+              </OverlayTrigger>
+            </span>
+          </div>
+        }
+        name="metaDescription"
+        type="textarea"
+      />
+      <ProjectAdminFormstyle__ProjectBoxHeader>
+        <h5>
+          <FormattedMessage
+            id="global.publication"
+            values={Object {}}
+          />
+        </h5>
+      </ProjectAdminFormstyle__ProjectBoxHeader>
+      <Field
+        component={[Function]}
+        icons={true}
+        id="step-isEnabled"
+        label={
+          <FormattedMessage
+            id="global.published"
+            values={Object {}}
+          />
+        }
+        name="isEnabled"
+        normalize={[Function]}
+      />
+       
+      <ProjectAdminFormstyle__PermalinkWrapper>
+        <strong>
+          <FormattedMessage
+            id="permalink"
+            values={Object {}}
+          />
+           :
+        </strong>
+         
+        <a
+          href="/sku"
+          target="blank"
+        >
+          /sku
+        </a>
+      </ProjectAdminFormstyle__PermalinkWrapper>
+      <ProjectAdminFormstyle__ProjectBoxHeader>
+        <h5>
+          <FormattedMessage
+            id="global-customization"
+            values={Object {}}
+          />
+        </h5>
+      </ProjectAdminFormstyle__ProjectBoxHeader>
+      <ProjectAdminStepFormstyle__CustomCodeArea>
+        <Field
+          component={[Function]}
+          id="step-customCode"
+          label={
+            <div>
+              admin.customcode
+              <span
+                className="excerpt inline"
+              >
+                global.optional
+                 
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <_default
+                      className="text-left"
+                      id="tooltip-top"
+                      style={
+                        Object {
+                          "wordBreak": "break-word",
+                        }
+                      }
+                    >
+                      <FormattedHTMLMessage
+                        id="admin.help.customcode"
+                        tagName="span"
+                        values={Object {}}
+                      />
+                    </_default>
+                  }
+                  placement="top"
+                  trigger={
+                    Array [
+                      "hover",
+                      "focus",
+                    ]
+                  }
+                >
+                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                </OverlayTrigger>
+              </span>
+            </div>
+          }
+          name="customCode"
+          placeholder="<script type=\\"text/javascript\\"> </script>"
+          rows={4}
+          type="textarea"
+        />
+      </ProjectAdminStepFormstyle__CustomCodeArea>
+    </ProjectAdminStepFormstyle__FormContainer>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+    >
+      <FormattedMessage
+        id="global.cancel"
+        values={Object {}}
+      />
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={false}
+      id="step-modal-submit"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </ModalFooter>
+</Fragment>
+`;

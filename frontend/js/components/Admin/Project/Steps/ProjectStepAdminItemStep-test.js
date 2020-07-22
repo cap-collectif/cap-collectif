@@ -2,7 +2,8 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import ProjectStepAdminItemStep from './ProjectStepAdminItemStep';
+import { ProjectStepAdminItemStep } from './ProjectStepAdminItemStep';
+import { $fragmentRefs, $refType } from '~/mocks';
 
 const defaultStep = {
   id: '1',
@@ -15,6 +16,10 @@ const defaultProps = {
   index: 0,
   step: defaultStep,
   fields: { length: 0, map: () => [], remove: jest.fn() },
+  project: {
+    $fragmentRefs,
+    $refType,
+  },
 };
 
 describe('<ProjectStepAdminItemStep />', () => {

@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminStepFormModal } from './ProjectAdminStepFormModal';
+import { $fragmentRefs, $refType } from '~/mocks';
 
 describe('<ProjectAdminStepFormModal />', () => {
   const defaultProps = {
@@ -11,6 +12,10 @@ describe('<ProjectAdminStepFormModal />', () => {
     form: 'ProjectAdminStepForm',
     step: null,
     type: 'OtherStep',
+    project: {
+      $fragmentRefs,
+      $refType,
+    },
   };
 
   it('renders correctly', () => {

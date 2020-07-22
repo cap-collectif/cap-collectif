@@ -40,6 +40,7 @@ import Input from '~/components/Ui/Form/Input/Input';
 import FileUpload from '~/components/Form/FileUpload/FileUpload';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import isQuestionnaire from '~/utils/isQuestionnaire';
+import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInput';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -119,6 +120,8 @@ export type ParentProps = {|
   dateTimeInputProps?: Object,
   forwardedRef?: any,
   typeForm?: $Values<typeof TYPE_FORM>,
+  getOpacity?: (opacity: number) => void,
+  opacity?: ?number,
 |};
 
 type Props = {|
@@ -469,6 +472,10 @@ class ReactBootstrapInput extends React.Component<Props> {
       if (isQuestionnaire(typeForm)) {
         formControl = <TextArea value={value} maxLength={props.maxLength} {...props} />;
       }
+    }
+
+    if (type === 'color-picker') {
+      return <ColorPickerInput value={value} {...props} />;
     }
 
     if (popover) {

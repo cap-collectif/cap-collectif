@@ -3,12 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalStepPageRendered } from './ProposalStepPage';
-import { features } from '../../redux/modules/default';
-import { $fragmentRefs } from '../../mocks';
+import { features } from '~/redux/modules/default';
+import { $fragmentRefs } from '~/mocks';
 
 describe('<ProposalStepPage />', () => {
   const props = {
-    selectedViewByStep: 'map',
     count: 10,
     isAuthenticated: true,
     features: { ...features, display_map: true },

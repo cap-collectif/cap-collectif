@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
-
+import { createFragmentContainer, graphql } from 'react-relay';
 import { type Step } from './ProjectStepAdminList';
 import DeleteModal from '~/components/Modal/DeleteModal';
 import ProjectAdminStepFormModal from '../Step/ProjectAdminStepFormModal';
+import type { ProjectStepAdminItemStep_project } from '~relay/ProjectStepAdminItemStep_project.graphql';
 
 type Props = {|
   step: Step,
@@ -15,6 +16,7 @@ type Props = {|
   fields: { length: number, map: Function, remove: Function },
   handleClickEdit?: (index: number, type: any) => void,
   handleClickDelete?: (index: number, type: any) => void,
+  project: ProjectStepAdminItemStep_project,
 |};
 
 const ItemQuestionWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -42,11 +44,9 @@ const onDeleteStep = (fields, index) => {
   fields.remove(index);
 };
 
-export default function ProjectStepAdminItemStep(props: Props) {
+export const ProjectStepAdminItemStep = ({ step, index, fields, formName, project }: Props) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-
-  const { step, index, fields, formName } = props;
 
   return (
     <StepRow>
@@ -84,6 +84,7 @@ export default function ProjectStepAdminItemStep(props: Props) {
             show={showEditModal}
             form={formName}
             index={index}
+            project={project}
           />
           <DeleteModal
             showDeleteModal={showDeleteModal}
@@ -96,4 +97,12 @@ export default function ProjectStepAdminItemStep(props: Props) {
       </Col>
     </StepRow>
   );
-}
+};
+
+export default createFragmentContainer(ProjectStepAdminItemStep, {
+  project: graphql`
+    fragment ProjectStepAdminItemStep_project on Project {
+      ...ProjectAdminStepFormModal_project
+    }
+  `,
+});

@@ -1,6 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import { FieldArray } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar } from 'react-bootstrap';
 import { FormattedMessage, type IntlShape } from 'react-intl';
 import ProjectStepAdminList from './ProjectStepAdminList';
@@ -13,11 +14,13 @@ import {
 } from '../Form/ProjectAdminForm.style';
 import { STEP_TYPES } from '~/constants/StepTypeConstants';
 import { type StepTypes } from '../Form/ProjectAdminForm';
+import type { ProjectStepAdmin_project } from '~relay/ProjectStepAdmin_project.graphql';
 
 type Props = {|
   ...ReduxFormFormProps,
   form: string,
   intl: IntlShape,
+  project: ProjectStepAdmin_project,
 |};
 
 export const validate = ({ steps }: StepTypes) => {
@@ -42,11 +45,10 @@ export const validate = ({ steps }: StepTypes) => {
   return errors;
 };
 
-export default function ProjectStepAdmin(props: Props) {
+export const ProjectStepAdmin = ({ form, project }: Props) => {
   const [stepType, setStepType] = useState('OtherStep');
   const [showAddStepModal, displayAddStepModal] = useState(false);
 
-  const { form } = props;
   return (
     <div className="col-md-12">
       <ProjectBoxContainer className="box container-fluid">
@@ -57,7 +59,12 @@ export default function ProjectStepAdmin(props: Props) {
         </ProjectBoxHeader>
         <div className="box-content">
           <div className="form-group" id="project_form_admin_steps_panel">
-            <FieldArray name="steps" component={ProjectStepAdminList} formName={form} />
+            <FieldArray
+              name="steps"
+              component={ProjectStepAdminList}
+              formName={form}
+              project={project}
+            />
             <ButtonToolbar>
               <ProjectAdminStepFormModal
                 onClose={() => displayAddStepModal(false)}
@@ -66,6 +73,7 @@ export default function ProjectStepAdmin(props: Props) {
                 type={stepType}
                 show={showAddStepModal}
                 form={form}
+                project={project}
               />
               <StepCreateButton
                 id="js-btn-create-step"
@@ -75,8 +83,9 @@ export default function ProjectStepAdmin(props: Props) {
                     <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
                   </>
                 }>
-                {STEP_TYPES.map(st => (
+                {STEP_TYPES.map((st, idx) => (
                   <StepMenuItem
+                    key={idx}
                     id={st.label}
                     onClick={() => {
                       setStepType(st.value);
@@ -92,4 +101,13 @@ export default function ProjectStepAdmin(props: Props) {
       </ProjectBoxContainer>
     </div>
   );
-}
+};
+
+export default createFragmentContainer(ProjectStepAdmin, {
+  project: graphql`
+    fragment ProjectStepAdmin_project on Project {
+      ...ProjectAdminStepFormModal_project
+      ...ProjectStepAdminList_project
+    }
+  `,
+});

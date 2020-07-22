@@ -76,7 +76,7 @@ type Props = {
   defaultMapOptions: MapOptions,
   geoJsons: Array<GeoJson>,
   displayMap: boolean,
-  view: ProposalViewMode,
+  displayMode: ProposalViewMode,
   count: number,
 };
 type State = {
@@ -124,7 +124,15 @@ export class ProposalListView extends React.Component<Props, State> {
   };
 
   render() {
-    const { displayMap, geoJsons, defaultMapOptions, step, viewer, view, count } = this.props;
+    const {
+      displayMap,
+      geoJsons,
+      defaultMapOptions,
+      step,
+      viewer,
+      displayMode,
+      count,
+    } = this.props;
     const { hasRefetchError, isRefetching } = this.state;
 
     if (hasRefetchError) {
@@ -143,7 +151,7 @@ export class ProposalListView extends React.Component<Props, State> {
         count={count}
         step={step}
         viewer={viewer}
-        view={view}
+        displayMode={displayMode}
       />
     );
   }

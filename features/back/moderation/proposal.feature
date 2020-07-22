@@ -25,7 +25,7 @@ Scenario: Logged in admin wants edit a proposal advancement tab
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal advancement tab
-  And I toggle a proposal advancement "proposal advancement selection"
+  And I check element "selections[0].selected"
   And I wait "#proposal-admin-page-tabs-pane-2" to appear on current page
   And I change the proposal advancement select "proposal advancement selection status" with option "Soumis au vote"
   Then I save current proposal admin advancement
@@ -115,7 +115,7 @@ Scenario: Logged in admin wants add a proposal realisation step
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal advancement tab
-  And I toggle a proposal advancement "proposal advancement realisation to come"
+  And I check element "selections[4].selected"
   And I wait "#proposal-admin-page-tabs-pane-2" to appear on current page
   And I click on button "[id='proposal-admin-progress-steps-add']"
   And I wait "#realisation-step-modal" to appear on current page

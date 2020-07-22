@@ -458,6 +458,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "mainView",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "alias": "proposalForm",
                                 "args": null,
                                 "concreteType": "ProposalForm",
@@ -477,6 +484,27 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                     "args": null,
                                     "kind": "ScalarField",
                                     "name": "title",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "isGridViewEnabled",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "isListViewEnabled",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "isMapViewEnabled",
                                     "storageKey": null,
                                   },
                                   Object {
@@ -715,6 +743,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "args": null,
                                 "kind": "ScalarField",
                                 "name": "budget",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "mainView",
                                 "storageKey": null,
                               },
                             ],
@@ -1081,6 +1116,63 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "CollectStep",
+                        "kind": "LinkedField",
+                        "name": "firstCollectStep",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProposalForm",
+                            "kind": "LinkedField",
+                            "name": "form",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isGridViewEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isListViewEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isMapViewEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "kind": "ScalarField",
                         "name": "visibility",
                         "storageKey": null,
@@ -1267,6 +1359,15 @@ fragment ProjectAdminForm_project on Project {
       }
     }
   }
+  firstCollectStep {
+    form {
+      isGridViewEnabled
+      isListViewEnabled
+      isMapViewEnabled
+      id
+    }
+    id
+  }
   steps {
     __typename
     id
@@ -1291,9 +1392,13 @@ fragment ProjectAdminForm_project on Project {
     }
     ... on CollectStep {
       defaultSort
+      mainView
       proposalForm: form {
         value: id
         label: title
+        isGridViewEnabled
+        isListViewEnabled
+        isMapViewEnabled
         id
       }
       private
@@ -1344,6 +1449,7 @@ fragment ProjectAdminForm_project on Project {
       proposalsHidden
       allowingProgressSteps
       budget
+      mainView
       requirements {
         reason
         edges {
@@ -1435,11 +1541,28 @@ fragment ProjectAdminForm_project on Project {
     id
   }
   url
+  ...ProjectStepAdmin_project
   ...ProjectContentAdminForm_project
   ...ProjectExternalAdminPage_project
   ...ProjectAccessAdminForm_project
   ...ProjectProposalsAdminForm_project
   ...ProjectPublishAdminForm_project
+}
+
+fragment ProjectAdminStepFormModal_project on Project {
+  ...ProjectAdminStepForm_project
+}
+
+fragment ProjectAdminStepForm_project on Project {
+  firstCollectStep {
+    form {
+      isGridViewEnabled
+      isListViewEnabled
+      isMapViewEnabled
+      id
+    }
+    id
+  }
 }
 
 fragment ProjectContentAdminForm_project on Project {
@@ -1503,6 +1626,23 @@ fragment ProjectPublishAdminForm_project on Project {
     id
   }
   url
+}
+
+fragment ProjectStepAdminItemStep_project on Project {
+  ...ProjectAdminStepFormModal_project
+}
+
+fragment ProjectStepAdminItem_project on Project {
+  ...ProjectStepAdminItemStep_project
+}
+
+fragment ProjectStepAdminList_project on Project {
+  ...ProjectStepAdminItem_project
+}
+
+fragment ProjectStepAdmin_project on Project {
+  ...ProjectAdminStepFormModal_project
+  ...ProjectStepAdminList_project
 }
 ",
       },
@@ -1976,6 +2116,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "mainView",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "alias": "proposalForm",
                                 "args": null,
                                 "concreteType": "ProposalForm",
@@ -1995,6 +2142,27 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                     "args": null,
                                     "kind": "ScalarField",
                                     "name": "title",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "isGridViewEnabled",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "isListViewEnabled",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "isMapViewEnabled",
                                     "storageKey": null,
                                   },
                                   Object {
@@ -2233,6 +2401,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "args": null,
                                 "kind": "ScalarField",
                                 "name": "budget",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "mainView",
                                 "storageKey": null,
                               },
                             ],
@@ -2599,6 +2774,63 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
+                        "concreteType": "CollectStep",
+                        "kind": "LinkedField",
+                        "name": "firstCollectStep",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProposalForm",
+                            "kind": "LinkedField",
+                            "name": "form",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isGridViewEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isListViewEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isMapViewEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
                         "kind": "ScalarField",
                         "name": "visibility",
                         "storageKey": null,
@@ -2785,6 +3017,15 @@ fragment ProjectAdminForm_project on Project {
       }
     }
   }
+  firstCollectStep {
+    form {
+      isGridViewEnabled
+      isListViewEnabled
+      isMapViewEnabled
+      id
+    }
+    id
+  }
   steps {
     __typename
     id
@@ -2809,9 +3050,13 @@ fragment ProjectAdminForm_project on Project {
     }
     ... on CollectStep {
       defaultSort
+      mainView
       proposalForm: form {
         value: id
         label: title
+        isGridViewEnabled
+        isListViewEnabled
+        isMapViewEnabled
         id
       }
       private
@@ -2862,6 +3107,7 @@ fragment ProjectAdminForm_project on Project {
       proposalsHidden
       allowingProgressSteps
       budget
+      mainView
       requirements {
         reason
         edges {
@@ -2953,11 +3199,28 @@ fragment ProjectAdminForm_project on Project {
     id
   }
   url
+  ...ProjectStepAdmin_project
   ...ProjectContentAdminForm_project
   ...ProjectExternalAdminPage_project
   ...ProjectAccessAdminForm_project
   ...ProjectProposalsAdminForm_project
   ...ProjectPublishAdminForm_project
+}
+
+fragment ProjectAdminStepFormModal_project on Project {
+  ...ProjectAdminStepForm_project
+}
+
+fragment ProjectAdminStepForm_project on Project {
+  firstCollectStep {
+    form {
+      isGridViewEnabled
+      isListViewEnabled
+      isMapViewEnabled
+      id
+    }
+    id
+  }
 }
 
 fragment ProjectContentAdminForm_project on Project {
@@ -3021,6 +3284,23 @@ fragment ProjectPublishAdminForm_project on Project {
     id
   }
   url
+}
+
+fragment ProjectStepAdminItemStep_project on Project {
+  ...ProjectAdminStepFormModal_project
+}
+
+fragment ProjectStepAdminItem_project on Project {
+  ...ProjectStepAdminItemStep_project
+}
+
+fragment ProjectStepAdminList_project on Project {
+  ...ProjectStepAdminItem_project
+}
+
+fragment ProjectStepAdmin_project on Project {
+  ...ProjectAdminStepFormModal_project
+  ...ProjectStepAdminList_project
 }
 ",
       },

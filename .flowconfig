@@ -34,7 +34,7 @@ unnecessary-optional-chain=off
 .*/node_modules/draft-js/*
 .*/node_modules/draft-js-export-html/*
 ; ignore compiled files
-.*/public/*
+.*/public/*.js
 ; large dirs that are not imported
 .*/vendor/*
 .*/assets/*
@@ -102,3 +102,4 @@ esproposal.decorators=ignore
 ; Flow mapping to handle webpack aliases
 module.name_mapper='~ui\/\(.*\)$' -> '<PROJECT_ROOT>/frontend/js/components/Ui/\1'
 module.name_mapper='~/\(.*\)$' -> '<PROJECT_ROOT>/frontend/js/\1'
+module.name_mapper='~svg\/\(.*\)$' -> '<PROJECT_ROOT>/public/svg/\1'

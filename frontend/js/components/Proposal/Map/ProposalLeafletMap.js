@@ -8,8 +8,8 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import styled, { type StyledComponent } from 'styled-components';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
-import type { State } from '../../../types';
-import type { MapTokens } from '../../../redux/modules/user';
+import type { State } from '~/types';
+import type { MapTokens } from '~/redux/modules/user';
 import ProposalMapPopover from './ProposalMapPopover';
 import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql';
 
@@ -71,12 +71,12 @@ function convertToGeoJsonStyle(style: Style) {
   if (style.border) {
     districtStyle.color = style.border.color;
     districtStyle.weight = style.border.size;
-    districtStyle.opacity = style.border.opacity;
+    districtStyle.opacity = style.border.opacity / 100;
   }
 
   if (style.background) {
     districtStyle.fillColor = style.background.color;
-    districtStyle.fillOpacity = style.background.opacity;
+    districtStyle.fillOpacity = style.background.opacity / 100;
   }
 
   return districtStyle || defaultDistrictStyle;

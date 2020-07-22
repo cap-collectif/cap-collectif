@@ -14,4 +14,16 @@ export type CommonPropsInput = {|
   minlength?: number,
   onChange?: Function,
   onBlur?: Function,
+  onFocus?: Function,
+|};
+
+export type NativeInput = {|
+  name: string,
+  onBlur: () => void,
+  onChange: () => void,
+  onDragStart: () => void,
+  onDrop: () => void,
+  onFocus: () => void,
+  value: ?string | ?number | ?boolean,
+  checked?: ?boolean,
 |};

@@ -27,6 +27,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly empty 1`] = `
       <Field
         component={[Function]}
         icons={true}
+        id="toggle-activity-tracking"
         label={
           <div>
             activity-tracking
@@ -96,6 +97,7 @@ exports[`<ProjectProposalsAdminForm /> renders correctly with a project 1`] = `
       <Field
         component={[Function]}
         icons={true}
+        id="toggle-activity-tracking"
         label={
           <div>
             activity-tracking

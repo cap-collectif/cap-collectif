@@ -26,6 +26,7 @@ use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
 use Capco\AppBundle\Utils\Diff;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -40,7 +41,7 @@ class ProjectStepPersister
         ConsultationStep::TYPE,
         CollectStep::TYPE,
         SelectionStep::TYPE,
-        SynthesisStep::TYPE
+        SynthesisStep::TYPE,
     ];
 
     private $em;
@@ -70,6 +71,7 @@ class ProjectStepPersister
         $userSteps = new ArrayCollection($steps);
         foreach ($userSteps as $i => $step) {
             list($type, $entity) = $this->getFormEntity($step);
+
             $form = $this->formFactory->create($type, $entity);
             unset($step['id']);
             $form->submit($step);
@@ -80,7 +82,7 @@ class ProjectStepPersister
             }
             $match = $this->pasRepository->findOneBy([
                 'project' => $project,
-                'step' => $form->getData()
+                'step' => $form->getData(),
             ]);
             if (!$match) {
                 $pas = new ProjectAbstractStep();
@@ -136,51 +138,56 @@ class ProjectStepPersister
      */
     private function getFormEntity(array $step): array
     {
-        $editMode = isset($step['id']) && null !== $step['id'] && '' !== $step['id'];
-
         switch ($step['type']) {
             case OtherStep::TYPE:
-                return [
-                    OtherStepFormType::class,
-                    $editMode ? $this->repository->find($step['id']) : new OtherStep()
-                ];
+                $return = [OtherStepFormType::class, new OtherStep()];
+
+                break;
             case PresentationStep::TYPE:
-                return [
-                    PresentationStepFormType::class,
-                    $editMode ? $this->repository->find($step['id']) : new PresentationStep()
-                ];
+                $return = [PresentationStepFormType::class, new PresentationStep()];
+
+                break;
             case RankingStep::TYPE:
-                return [
-                    RankingStepFormType::class,
-                    $editMode ? $this->repository->find($step['id']) : new RankingStep()
-                ];
+                $return = [RankingStepFormType::class, new RankingStep()];
+
+                break;
             case ConsultationStep::TYPE:
-                return [
-                    ConsultationStepFormType::class,
-                    $editMode ? $this->repository->find($step['id']) : new ConsultationStep()
-                ];
+                $return = [ConsultationStepFormType::class, new ConsultationStep()];
+
+                break;
             case SelectionStep::TYPE:
-                return [
-                    SelectionStepFormType::class,
-                    $editMode ? $this->repository->find($step['id']) : new SelectionStep()
-                ];
+                $return = [SelectionStepFormType::class, new SelectionStep()];
+
+                break;
             case CollectStep::TYPE:
-                return [
-                    CollectStepFormType::class,
-                    $editMode ? $this->repository->find($step['id']) : new CollectStep()
-                ];
+                $return = [CollectStepFormType::class, new CollectStep()];
+
+                break;
             case QuestionnaireStep::TYPE:
-                return [
-                    QuestionnaireStepFormType::class,
-                    $editMode ? $this->repository->find($step['id']) : new QuestionnaireStep()
-                ];
+                $return = [QuestionnaireStepFormType::class, new QuestionnaireStep()];
+
+                break;
             case SynthesisStep::TYPE:
-                return [
-                    SynthesisStepFormType::class,
-                    $editMode ? $this->repository->find($step['id']) : new SynthesisStep()
-                ];
+                $return = [SynthesisStepFormType::class, new SynthesisStep()];
+
+                break;
             default:
                 throw new \LogicException(sprintf('Unknown step type given: "%s"', $step['type']));
         }
+
+        if (self::isEditMode($step)) {
+            $entity = $this->repository->find($step['id']);
+            if (null === $entity) {
+                throw new UserError('Unknown step ' . $step['id'] . '.');
+            }
+            $return[1] = $entity;
+        }
+
+        return $return;
+    }
+
+    private static function isEditMode(array $stepData): bool
+    {
+        return isset($stepData['id']) && null !== $stepData['id'] && '' !== $stepData['id'];
     }
 }

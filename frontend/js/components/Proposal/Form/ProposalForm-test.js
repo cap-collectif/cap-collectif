@@ -3,8 +3,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalForm } from './ProposalForm';
-import { $refType, intlMock, formMock } from '../../../mocks';
-import { features } from '../../../redux/modules/default';
+import { $refType, intlMock, formMock } from '~/mocks';
+import { features } from '~/redux/modules/default';
 
 describe('<ProposalForm />', () => {
   const hiddenQuestionsProposalForm = {

@@ -39,6 +39,13 @@ describe('<ProjectAdminForm />', () => {
       externalContributionsCount: null,
       locale: null,
       restrictedViewers: null,
+      firstCollectStep: {
+        form: {
+          isGridViewEnabled: true,
+          isListViewEnabled: false,
+          isMapViewEnabled: false,
+        },
+      },
     },
     features,
     initialGroups: [],

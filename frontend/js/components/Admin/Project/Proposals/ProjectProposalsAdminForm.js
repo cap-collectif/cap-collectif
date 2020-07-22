@@ -39,6 +39,7 @@ export const ProjectProposalsAdminForm = ({ intl }: Props) => (
           </h4>
         </ProjectBoxHeader>
         <Field
+          id="toggle-activity-tracking"
           icons
           component={toggle}
           name="opinionCanBeFollowed"

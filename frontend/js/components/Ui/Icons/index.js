@@ -33,6 +33,8 @@ export { default as ArrowThickCircleDown } from './svg/arrow-thick-circle-down.s
 export { default as OpenId } from './svg/openId.svg';
 export { default as ChevronLeft } from './svg/chevron-left.svg';
 export { default as ChevronRight } from './svg/chevron-right.svg';
+export { default as ChevronUp } from './svg/chevron-up.svg';
+export { default as ChevronDown } from './svg/chevron-down.svg';
 export { default as Checkbox } from './svg/checkbox.svg';
 export { default as CheckboxChecked } from './svg/checkboxChecked.svg';
 export { default as Check } from './svg/check.svg';
@@ -75,3 +77,6 @@ export { default as SingleMan } from './svg/single-man.svg';
 export { default as SingleManFilled } from './svg/single-man-filled.svg';
 export { default as Like } from './svg/like.svg';
 export { default as PaperPlane } from './svg/paper-plane.svg';
+export { default as LocationTarget } from './svg/location-target.svg';
+export { default as LocationNotAuthorize } from './svg/location-not-authorize.svg';
+export { default as Search } from './svg/search.svg';

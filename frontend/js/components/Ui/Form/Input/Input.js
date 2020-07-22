@@ -37,6 +37,7 @@ const Input = ({
   minlength,
   onChange,
   onBlur,
+  onFocus,
   required,
   disabled = false,
   readonly = false,
@@ -54,6 +55,7 @@ const Input = ({
       minLength={minlength}
       onChange={onChange}
       onBlur={onBlur}
+      onFocus={onFocus}
       value={value}
       aria-required={required}
     />

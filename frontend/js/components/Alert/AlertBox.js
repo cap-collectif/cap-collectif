@@ -47,6 +47,7 @@ class AlertBox extends React.Component<Props, State> {
       ) : (
         <Alert onDismiss={this.handleDismiss} type={alert.type}>
           <FormattedHTMLMessage id={alert.content} values={alert.values} />
+          {alert.extraContent}
         </Alert>
       )
     ) : null;

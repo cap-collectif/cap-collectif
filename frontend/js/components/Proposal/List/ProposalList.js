@@ -52,7 +52,7 @@ export class ProposalList extends React.Component<Props> {
 
     if (proposals.totalCount === 0) {
       return (
-        <p className={classNames({ 'p--centered': true })} style={{ marginBottom: '40px' }}>
+        <p className="p--centered mb-40">
           <FormattedMessage
             id={
               step && isInterpellationContextFromStep(step)
@@ -71,14 +71,14 @@ export class ProposalList extends React.Component<Props> {
       <React.Fragment>
         {proposalsVisiblePublicly.edges && proposalsVisiblePublicly.edges.length > 0 && (
           <React.Fragment>
-            {view === 'mosaic'
+            {view === 'grid'
               ? renderProposals(proposalsVisiblePublicly, step, viewer)
               : renderProposalListTableView(proposalsVisiblePublicly, step)}
           </React.Fragment>
         )}
         {proposalsVisibleOnlyByViewer.edges && proposalsVisibleOnlyByViewer.edges.length > 0 && (
           <VisibilityBox enabled>
-            {view === 'mosaic'
+            {view === 'grid'
               ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer)
               : renderProposalListTableView(proposalsVisibleOnlyByViewer, step)}
           </VisibilityBox>

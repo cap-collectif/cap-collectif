@@ -7,7 +7,7 @@ Background:
 @database
 Scenario: Logged in admin want to update shield configuration
   Given I go to the admin shield configuration page
-  And I toggle shield mode
+  And I check element "shield-admin-form_shieldMode"
   And I fill in the following:
     | shield-admin-form_introduction | Shield intro |
   And I attach the file "/var/www/features/files/image.jpg" to "shield-admin-form_media_field"

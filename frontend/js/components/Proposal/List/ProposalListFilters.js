@@ -4,18 +4,15 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
+import type { GlobalState, Dispatch, FeatureToggles } from '~/types';
 import ProposalListSearch from './ProposalListSearch';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
-import {
-  changeFilter,
-  changeProposalListView,
-  type Filters,
-} from '../../../redux/modules/proposal';
+import { changeFilter, type Filters } from '~/redux/modules/proposal';
 import ProposalListToggleViewBtn from './ProposalListToggleViewBtn';
 import type { ProposalListFilters_step } from '~relay/ProposalListFilters_step.graphql';
-import Select from '../../Ui/Form/Select/Select';
-import SelectOption from '../../Ui/Form/Select/SelectOption';
+import Select from '~ui/Form/Select/Select';
+import SelectOption from '~ui/Form/Select/SelectOption';
+import type { ProposalViewMode } from '~/redux/modules/proposal';
 
 type defaultOption = {|
   +id: string,
@@ -36,6 +33,8 @@ type Props = {|
   filters: Filters,
   types: $ReadOnlyArray<defaultOption>,
   themes: Array<themeOption>,
+  setDisplayMode: () => void,
+  displayMode: ProposalViewMode,
 |};
 
 type Options = {|
@@ -74,7 +73,7 @@ export class ProposalListFilters extends React.Component<Props> {
   };
 
   render() {
-    const { dispatch, features, step, filters, types, themes } = this.props;
+    const { features, step, filters, types, themes, setDisplayMode, displayMode } = this.props;
 
     const { form } = step;
 
@@ -112,14 +111,13 @@ export class ProposalListFilters extends React.Component<Props> {
     return (
       <div className="mb-15 mt-30">
         <Row>
-          <Col xs={12} sm={6} md={4} lg={3}>
-            <ProposalListToggleViewBtn
-              showMapButton={showMapButton ?? false}
-              onChange={mode => {
-                dispatch(changeProposalListView(mode));
-              }}
-            />
-          </Col>
+          <ProposalListToggleViewBtn
+            step={step}
+            showMapButton={showMapButton ?? false}
+            setDisplayMode={setDisplayMode}
+            displayMode={displayMode}
+          />
+
           <Col xs={12} sm={6} md={4} lg={3}>
             {/* $FlowFixMe please use mapDispatchToProps */}
             <ProposalListSearch />
@@ -211,6 +209,7 @@ export default createFragmentContainer(container, {
           name
         }
       }
+      ...ProposalListToggleViewBtn_step
     }
   `,
 });

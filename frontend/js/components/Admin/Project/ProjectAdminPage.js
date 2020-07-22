@@ -10,7 +10,7 @@ type Props = {|
   +firstCollectStepId: ?string,
 |};
 
-const ProjectAdminPage = ({ projectId, firstCollectStepId }: Props) => {
+export const ProjectAdminPage = ({ projectId, firstCollectStepId }: Props) => {
   return (
     <QueryRenderer
       environment={environment}

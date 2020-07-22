@@ -13,17 +13,20 @@ exports[`<ProjectExternalAdminForm /> renders correctly empty 1`] = `
       <Field
         component={[Function]}
         icons={true}
+        id="toggle-isExternal"
+        label={
+          <div
+            className="mb-15"
+          >
+            <FormattedMessage
+              id="admin.fields.project.group_external"
+              values={Object {}}
+            />
+          </div>
+        }
         name="isExternal"
         normalize={[Function]}
       />
-      <div
-        className="mb-15"
-      >
-        <FormattedMessage
-          id="admin.fields.project.group_external"
-          values={Object {}}
-        />
-      </div>
     </h4>
   </ProjectAdminFormstyle__ProjectBoxHeader>
   <ProjectExternalAdminForm__Container>
@@ -133,17 +136,20 @@ exports[`<ProjectExternalAdminForm /> renders correctly with a project 1`] = `
       <Field
         component={[Function]}
         icons={true}
+        id="toggle-isExternal"
+        label={
+          <div
+            className="mb-15"
+          >
+            <FormattedMessage
+              id="admin.fields.project.group_external"
+              values={Object {}}
+            />
+          </div>
+        }
         name="isExternal"
         normalize={[Function]}
       />
-      <div
-        className="mb-15"
-      >
-        <FormattedMessage
-          id="admin.fields.project.group_external"
-          values={Object {}}
-        />
-      </div>
     </h4>
   </ProjectAdminFormstyle__ProjectBoxHeader>
   <ProjectExternalAdminForm__Container>

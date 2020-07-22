@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ColorPickerInput /> renders correctly 1`] = `
+<ColorPickerInputstyle__ColorPickerInputContainer
+  hasValue={true}
+>
+  <ColorPickerInputstyle__PreviewColor
+    color="#ABCDEF"
+  />
+  <FormControl
+    bsClass="form-control"
+    componentClass="input"
+    onChange={[MockFunction]}
+    onFocus={[Function]}
+    type="text"
+    value="#ABCDEF"
+  />
+</ColorPickerInputstyle__ColorPickerInputContainer>
+`;

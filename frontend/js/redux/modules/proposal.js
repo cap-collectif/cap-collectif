@@ -11,7 +11,7 @@ import {
   isInterpellationContextFromProposal,
 } from '~/utils/interpellationLabelHelper';
 
-export type ProposalViewMode = 'mosaic' | 'table' | 'map';
+export type ProposalViewMode = 'list' | 'grid' | 'map';
 
 export type Filters = {|
   types: ?string,
@@ -53,10 +53,6 @@ type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
 type OpenDetailLikersModalAction = { type: 'proposal/OPEN_DETAIL_LIKERS_MODAL', id: string };
 type CloseDetailLikersModalAction = { type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL' };
-type ChangeProposalListViewAction = {
-  type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
-  mode: ProposalViewMode,
-};
 type Step = {
   type?: string,
   statuses?: Array<Status>,
@@ -84,7 +80,6 @@ export type State = {
   +lastEditedStepId: ?Uuid,
   +lastEditedProposalId: ?Uuid,
   +lastNotifiedStepId: ?Uuid,
-  +selectedViewByStep: ProposalViewMode,
   +referer: ?string,
   +showDetailLikersModal: ?string,
 };
@@ -112,7 +107,6 @@ export const initialState: State = {
   terms: null,
   lastEditedProposalId: null,
   lastNotifiedStepId: null,
-  selectedViewByStep: 'mosaic',
   referer: null,
   showDetailLikersModal: null,
 };
@@ -165,10 +159,6 @@ export const changeFilter = (filter: string, value: string): ChangeFilterAction 
   type: 'proposal/CHANGE_FILTER',
   filter,
   value,
-});
-export const changeProposalListView = (mode: ProposalViewMode): ChangeProposalListViewAction => ({
-  type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
-  mode,
 });
 export const openDetailLikersModal = (id: string): OpenDetailLikersModalAction => ({
   type: 'proposal/OPEN_DETAIL_LIKERS_MODAL',
@@ -303,7 +293,6 @@ export type ProposalAction =
   | CloseVoteModalAction
   | CloseDeleteProposalModalAction
   | RequestDeleteAction
-  | ChangeProposalListViewAction
   | OpenCreateFusionModalAction
   | CloseCreateFusionModalAction
   | OpenEditProposalModalAction

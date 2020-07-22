@@ -63,6 +63,10 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
         form {
           title
         }
+        mainView
+      }
+      ... on SelectionStep {
+        mainView
       }
       ... on ProposalStep {
         requirements {
@@ -170,6 +174,7 @@ const BASE_SELECTION_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape SelectionStep",
   label: 'SelectionStep',
+  mainView: 'list',
 };
 
 const BASE_PRESENTATION_STEP = {
@@ -194,6 +199,7 @@ const BASE_COLLECT_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape CollectStep",
   label: 'CollectStep',
+  mainView: 'grid',
 };
 
 describe('Internal|updateAlphaProject simple mutations', () => {

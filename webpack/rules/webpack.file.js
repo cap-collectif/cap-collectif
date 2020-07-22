@@ -7,7 +7,7 @@ function getRulesConf() {
       rules: [
         {
           test: /\.(woff|woff2|ttf|eot|svg)$/,
-          exclude: webpackConfig.frontendDir,
+          exclude: [webpackConfig.frontendDir, `${webpackConfig.outputDir}/svg`],
           use: [
             {
               loader: 'file-loader',

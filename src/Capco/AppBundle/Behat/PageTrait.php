@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Mink\Element\NodeElement;
-
 trait PageTrait
 {
     public function containsElement($element)
@@ -33,19 +31,5 @@ trait PageTrait
     public function clickOnTab($tab)
     {
         $this->getElement("${tab} tab")->click();
-    }
-
-    public function togglePerformance(): ?NodeElement
-    {
-        $element = '#cookies-performance > div span.elegant-toggle';
-
-        return $this->find('css', $element)->click();
-    }
-
-    public function toggleAdvertising(): ?NodeElement
-    {
-        $element = '#cookies-advertising > div span.elegant-toggle';
-
-        return $this->find('css', $element)->click();
     }
 }

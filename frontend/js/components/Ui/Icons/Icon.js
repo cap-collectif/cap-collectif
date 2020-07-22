@@ -38,6 +38,8 @@ export const ICON_NAME: {
   saml: 'saml',
   chevronLeft: 'chevron-left',
   chevronRight: 'chevron-right',
+  chevronUp: 'chevron-up',
+  chevronDown: 'chevron-down',
   checkbox: 'checkbox',
   checkboxChecked: 'checkboxChecked',
   file: 'file',
@@ -82,6 +84,9 @@ export const ICON_NAME: {
   singleManFilled: 'singleManFilled',
   like: 'like',
   paperPlane: 'paperPlane',
+  locationTarget: 'location-target',
+  locationNotAuthorize: 'location-not-authorize',
+  search: 'search',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -118,6 +123,8 @@ export const ICON_NAME: {
   saml: 'saml',
   chevronLeft: 'chevron-left',
   chevronRight: 'chevron-right',
+  chevronUp: 'chevron-up',
+  chevronDown: 'chevron-down',
   checkbox: 'checkbox',
   checkboxChecked: 'checkboxChecked',
   file: 'file',
@@ -161,6 +168,9 @@ export const ICON_NAME: {
   singleManFilled: 'singleManFilled',
   like: 'like',
   paperPlane: 'paperPlane',
+  locationTarget: 'location-target',
+  locationNotAuthorize: 'location-not-authorize',
+  search: 'search',
 };
 
 type Props = {|
@@ -247,6 +257,10 @@ const getIcon = name => {
       return <Icons.ChevronLeft />;
     case 'chevron-right':
       return <Icons.ChevronRight />;
+    case 'chevron-up':
+      return <Icons.ChevronUp />;
+    case 'chevron-down':
+      return <Icons.ChevronDown />;
     case 'checkbox':
       return <Icons.Checkbox />;
     case 'checkboxChecked':
@@ -331,6 +345,12 @@ const getIcon = name => {
       return <Icons.Like />;
     case 'paperPlane':
       return <Icons.PaperPlane />;
+    case 'location-target':
+      return <Icons.LocationTarget />;
+    case 'location-not-authorize':
+      return <Icons.LocationNotAuthorize />;
+    case 'search':
+      return <Icons.Search />;
     default:
       return <div />;
   }

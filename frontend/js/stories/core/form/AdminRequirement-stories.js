@@ -59,7 +59,11 @@ const DraggableMember = ({ id, placeholder, draggableId }: DragglableMemberProps
               {...provided.draggableProps}
               {...provided.dragHandleProps}>
               <ListGroupItem style={{ display: 'flex' }}>
-                <Toggle checked={toggled} onChange={() => setToggled(!toggled)} />
+                <Toggle
+                  id="toggle-admin-requirement"
+                  checked={toggled}
+                  onChange={() => setToggled(!toggled)}
+                />
                 <RightNavSide>
                   {toggled && id === 3 ? (
                     <>

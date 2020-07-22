@@ -13,16 +13,6 @@ trait AdminShieldTrait
     }
 
     /**
-     * @When I toggle shield mode
-     */
-    public function iToggleShieldMode()
-    {
-        $page = $this->getCurrentPage();
-        $page->clickOnButtonOrRadio('shield admin form toggle');
-        $this->iWait(1);
-    }
-
-    /**
      * @When I save shield admin form
      */
     public function iSaveShieldAdminForm()

@@ -14,8 +14,8 @@ import type {
   SSOConfigurationInterface,
   State as GlobalState,
 } from '~/types';
-import { toggleFeature } from '../../../redux/modules/default';
-import { toggleStatus } from '../../../mutations/ToggleSSOConfigurationStatusMutation';
+import { toggleFeature } from '~/redux/modules/default';
+import { toggleStatus } from '~/mutations/ToggleSSOConfigurationStatusMutation';
 import FranceConnectConfigurationModal from './FranceConnectConfigurationModal';
 import type { ListPublicSSO_ssoConfigurations } from '~relay/ListPublicSSO_ssoConfigurations.graphql';
 import type { FranceConnectConfigurationModal_ssoConfiguration$ref } from '~relay/FranceConnectConfigurationModal_ssoConfiguration.graphql';
@@ -80,14 +80,16 @@ export class ListPublicSSO extends React.Component<Props, State> {
           {features.login_franceconnect && franceConnect && (
             <ListGroupItemWithJustifyContentEnd>
               <Toggle
+                id="toggle-franceConnect"
                 checked={franceConnect.enabled}
-                onChange={() => {
-                  toggleStatus(franceConnect);
-                }}
+                onChange={() => toggleStatus(franceConnect)}
+                label={
+                  <h5 className="mb-0 mt-0">
+                    <FormattedMessage id="capco.module.login_franceconnect" />
+                  </h5>
+                }
               />
-              <h5 className="mb-0 mt-0">
-                <FormattedMessage id="capco.module.login_franceconnect" />
-              </h5>
+
               <ButtonWithMarginLeftAuto
                 bsStyle="warning"
                 className="btn-outline-warning"
@@ -108,23 +110,31 @@ export class ListPublicSSO extends React.Component<Props, State> {
           )}
           <ListGroupItemWithJustifyContentEnd>
             <Toggle
+              id="toggle-facebook"
               checked={features.login_facebook}
               onChange={() => onToggle('login_facebook', !features.login_facebook)}
+              label={<h5 className="mb-0 mt-0">Facebook</h5>}
             />
-            <h5 className="mb-0 mt-0">Facebook</h5>
           </ListGroupItemWithJustifyContentEnd>
           <ListGroupItemWithJustifyContentEnd>
             <Toggle
+              id="toggle-google-plus"
               checked={features.login_gplus}
               onChange={() => onToggle('login_gplus', !features.login_gplus)}
+              label={<h5 className="mb-0 mt-0">Google</h5>}
             />
-            <h5 className="mb-0 mt-0">Google</h5>
           </ListGroupItemWithJustifyContentEnd>
           <ListGroupItemWithJustifyContentEnd>
-            <Toggle checked disabled />
-            <h5 className="mb-0 mt-0">
-              <FormattedMessage id="global.email" />
-            </h5>
+            <Toggle
+              id="toggle-email"
+              checked
+              disabled
+              label={
+                <h5 className="mb-0 mt-0">
+                  <FormattedMessage id="global.email" />
+                </h5>
+              }
+            />
           </ListGroupItemWithJustifyContentEnd>
         </ListGroup>
       </>
@@ -135,6 +145,7 @@ export class ListPublicSSO extends React.Component<Props, State> {
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 });
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature: FeatureToggle, value: boolean) => {
     toggleFeature(dispatch, feature, value);

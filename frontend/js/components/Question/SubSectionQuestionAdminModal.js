@@ -137,7 +137,9 @@ const SubSectionQuestionAdminModal = ({
                     question => question.id && currentSection && question.id !== currentSection.id,
                   )
                   .map((question, i) => (
-                    <option value={question.id}>{`${i + 1}. ${question.title}`}</option>
+                    <option value={question.id} key={question.id}>{`${i + 1}. ${
+                      question.title
+                    }`}</option>
                   ))}
               </Field>
             </div>

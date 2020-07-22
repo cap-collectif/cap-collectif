@@ -38,7 +38,7 @@ Scenario: An anonymous wants to toggle cookies performance
   And I wait "#cookies-management" to appear on current page
   When I click on button "#cookies-management"
   And I should see "global.disabled" appear on current page in "body"
-  Then I toggle performance cookies
+  Then I check element "cookies-enable-analytic"
   And I should see "list.label_enabled"
   And I click on button "#cookies-save"
   And I should not see "cookies.content.page"
@@ -54,7 +54,7 @@ Scenario: An anonymous wants to toggle cookies advertising
   And I scroll to the bottom
   When I click on button "#cookies-management"
   And I should see "global.disabled"
-  Then I toggle advertising cookies
+  Then I check element "cookies-enable-ads"
   And I should see "list.label_enabled"
   And I click on button "#cookies-save"
   And I should not see "texte-cookie-audience-communication"
@@ -80,7 +80,7 @@ Scenario: An anonymous accept cookies then change is mind and the cookies should
   And I create a cookie named "_pk_id.2733"
   And I visited "projects page"
   When I click on button "#cookies-management"
-  And I toggle performance cookies
+  Then I check element "cookies-enable-analytic"
   And I click on button "#cookies-save"
   Then I should not see a cookie named "_pk_id.2733"
 

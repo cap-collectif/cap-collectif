@@ -7,6 +7,7 @@ import TextArea from '~/components/Ui/Form/Input/TextArea/TextArea';
 import Input from '~/components/Ui/Form/Input/Input';
 import Dropzone from '~/components/Ui/Form/Dropzone/Dropzone';
 import Toggle from '~/components/Ui/Toggle/Toggle';
+import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInput';
 
 /* ------ INPUT ------ */
 
@@ -36,7 +37,7 @@ storiesOf('Core|Form/Checkbox', module).add('Checked', () => {
 
 storiesOf('Core|Form/Checkbox', module).add('With image', () => {
   return (
-    <Checkbox id="1" name="test" image="https://i.picsum.photos/id/74/300/200.jpg" value="test1" />
+    <Checkbox id="1" name="test" image="https://source.unsplash.com/random/300x200" value="test1" />
   );
 });
 
@@ -45,7 +46,7 @@ storiesOf('Core|Form/Checkbox', module).add('With image checked', () => {
     <Checkbox
       id="1"
       name="test"
-      image="https://i.picsum.photos/id/74/300/200.jpg"
+      image="https://source.unsplash.com/random/300x200"
       value="test1"
       checked
     />
@@ -66,7 +67,7 @@ storiesOf('Core|Form/Radio', module).add('Checked', () => {
 
 storiesOf('Core|Form/Radio', module).add('With image', () => {
   return (
-    <Radio id="1" name="test" image="https://i.picsum.photos/id/74/300/200.jpg" value="test1" />
+    <Radio id="1" name="test" image="https://source.unsplash.com/random/300x200" value="test1" />
   );
 });
 
@@ -75,7 +76,7 @@ storiesOf('Core|Form/Radio', module).add('With image checked', () => {
     <Radio
       id="1"
       name="test"
-      image="https://i.picsum.photos/id/74/300/200.jpg"
+      image="https://source.unsplash.com/random/300x200"
       value="test1"
       checked
     />
@@ -195,12 +196,27 @@ storiesOf('Core|Form/Dropzone', module).add('Default', () => {
 /* ------ TOGGLE ------ */
 
 storiesOf('Core|Form/Toggle', module).add('Default', () => {
-  return (
-    <>
-      <Toggle checked />
-      <Toggle />
-    </>
-  );
+  return <Toggle id="1" name="test" value="test1" label="Toggler" />;
+});
+
+storiesOf('Core|Form/Toggle', module).add('Checked', () => {
+  return <Toggle id="2" name="test" value="test2" label="Toggler" checked />;
+});
+
+storiesOf('Core|Form/Toggle', module).add('Disabled', () => {
+  return <Toggle id="3" name="test" value="test3" label="Toggler" disabled />;
 });
 
 /* ------ END TOGGLE ------ */
+
+/* ------ COLOR PICKER ------ */
+
+storiesOf('Core|Form/ColorPicker', module).add('Default', () => {
+  return <ColorPickerInput onChange={() => {}} placeholder="#ABCDEF" />;
+});
+
+storiesOf('Core|Form/ColorPicker', module).add('With value', () => {
+  return <ColorPickerInput onChange={() => {}} value="#ABCDEF" />;
+});
+
+/* ------ END COLOR PICKER ------ */

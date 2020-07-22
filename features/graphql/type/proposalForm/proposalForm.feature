@@ -134,3 +134,30 @@ Scenario: Anonymous wants to retrieve evaluation form questions
     }
   }
   """
+
+Scenario: GraphQL client wants to get proposalform configuration
+  Given I am logged in to graphql as user
+  When I send a GraphQL request:
+  """
+  {
+    proposalForm: node(id: "proposalForm1") {
+      ... on ProposalForm {
+        isGridViewEnabled
+        isListViewEnabled
+        isMapViewEnabled
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "proposalForm": {
+        "isGridViewEnabled": true,
+        "isListViewEnabled": false,
+        "isMapViewEnabled": false
+      }
+    }
+  }
+  """

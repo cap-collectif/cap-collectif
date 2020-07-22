@@ -1,246 +1,197 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalListToggleViewBtn /> should render a toggle button with map selected 1`] = `
-<div
-  aria-label="global.filter.chose.display.type"
-  className="btn-group d-flex mb-15"
-  id="step-view-toggle"
-  role="group"
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
+exports[`<ProposalListToggleViewBtn /> should render a toggle button with grid selected 1`] = `
+<Col
+  bsClass="col"
+  componentClass="div"
+  lg={3}
+  md={4}
+  sm={6}
+  xs={12}
 >
-  <Button
-    active={false}
-    aria-checked={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    role="checkbox"
+  <div
+    aria-label="global.filter.chose.display.type"
+    className="btn-group d-flex mb-15"
+    id="step-view-toggle"
+    role="group"
     style={
       Object {
-        "flex": "1 0 auto",
+        "width": "100%",
       }
     }
-    title={null}
   >
-    <i
-      className="cap cap-android-menu"
-    />
-     
-    <FormattedMessage
-      id="global.list"
-      values={Object {}}
-    />
-  </Button>
-  <Button
-    active={false}
-    aria-checked={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    role="checkbox"
-    style={
-      Object {
-        "flex": "1 0 auto",
+    <Button
+      active={false}
+      aria-checked={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[Function]}
+      role="checkbox"
+      style={
+        Object {
+          "flex": "1 0 auto",
+        }
       }
-    }
-    title={null}
-  >
-    <i
-      className="cap cap-th-large"
-    />
-     
-    <FormattedMessage
-      id="grid"
-      values={Object {}}
-    />
-  </Button>
-  <Button
-    active={true}
-    aria-checked={true}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    role="checkbox"
-    style={
-      Object {
-        "flex": "1 0 auto",
+      title={null}
+    >
+      <i
+        className="cap cap-android-menu"
+      />
+       
+      <FormattedMessage
+        id="global.list"
+        values={Object {}}
+      />
+    </Button>
+    <Button
+      active={true}
+      aria-checked={true}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[Function]}
+      role="checkbox"
+      style={
+        Object {
+          "flex": "1 0 auto",
+        }
       }
-    }
-    title="map-selected"
-  >
-    <i
-      className="cap cap-map-location"
-    />
-     
-    <FormattedMessage
-      id="capco.module.display_map"
-      values={Object {}}
-    />
-  </Button>
-</div>
+      title="mosaic-selected"
+    >
+      <i
+        className="cap cap-th-large"
+      />
+       
+      <FormattedMessage
+        id="grid"
+        values={Object {}}
+      />
+    </Button>
+    <Button
+      active={false}
+      aria-checked={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[Function]}
+      role="checkbox"
+      style={
+        Object {
+          "flex": "1 0 auto",
+        }
+      }
+      title={null}
+    >
+      <i
+        className="cap cap-map-location"
+      />
+      <FormattedMessage
+        id="capco.module.display_map"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+</Col>
 `;
 
-exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic selected 1`] = `
-<div
-  aria-label="global.filter.chose.display.type"
-  className="btn-group d-flex mb-15"
-  id="step-view-toggle"
-  role="group"
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
+exports[`<ProposalListToggleViewBtn /> should render correctly when SelectionStep 1`] = `
+<Col
+  bsClass="col"
+  componentClass="div"
+  lg={3}
+  md={4}
+  sm={6}
+  xs={12}
 >
-  <Button
-    active={false}
-    aria-checked={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    role="checkbox"
+  <div
+    aria-label="global.filter.chose.display.type"
+    className="btn-group d-flex mb-15"
+    id="step-view-toggle"
+    role="group"
     style={
       Object {
-        "flex": "1 0 auto",
+        "width": "100%",
       }
     }
-    title={null}
   >
-    <i
-      className="cap cap-android-menu"
-    />
-     
-    <FormattedMessage
-      id="global.list"
-      values={Object {}}
-    />
-  </Button>
-  <Button
-    active={true}
-    aria-checked={true}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    role="checkbox"
-    style={
-      Object {
-        "flex": "1 0 auto",
+    <Button
+      active={false}
+      aria-checked={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[Function]}
+      role="checkbox"
+      style={
+        Object {
+          "flex": "1 0 auto",
+        }
       }
-    }
-    title="mosaic-selected"
-  >
-    <i
-      className="cap cap-th-large"
-    />
-     
-    <FormattedMessage
-      id="grid"
-      values={Object {}}
-    />
-  </Button>
-  <Button
-    active={false}
-    aria-checked={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    role="checkbox"
-    style={
-      Object {
-        "flex": "1 0 auto",
+      title={null}
+    >
+      <i
+        className="cap cap-android-menu"
+      />
+       
+      <FormattedMessage
+        id="global.list"
+        values={Object {}}
+      />
+    </Button>
+    <Button
+      active={true}
+      aria-checked={true}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[Function]}
+      role="checkbox"
+      style={
+        Object {
+          "flex": "1 0 auto",
+        }
       }
-    }
-    title={null}
-  >
-    <i
-      className="cap cap-map-location"
-    />
-     
-    <FormattedMessage
-      id="capco.module.display_map"
-      values={Object {}}
-    />
-  </Button>
-</div>
-`;
-
-exports[`<ProposalListToggleViewBtn /> should render a toggle button without map & with table selected 1`] = `
-<div
-  aria-label="global.filter.chose.display.type"
-  className="btn-group d-flex mb-15"
-  id="step-view-toggle"
-  role="group"
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
->
-  <Button
-    active={true}
-    aria-checked={true}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    role="checkbox"
-    style={
-      Object {
-        "flex": "1 0 auto",
+      title="mosaic-selected"
+    >
+      <i
+        className="cap cap-th-large"
+      />
+       
+      <FormattedMessage
+        id="grid"
+        values={Object {}}
+      />
+    </Button>
+    <Button
+      active={false}
+      aria-checked={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[Function]}
+      role="checkbox"
+      style={
+        Object {
+          "flex": "1 0 auto",
+        }
       }
-    }
-    title="table-selected"
-  >
-    <i
-      className="cap cap-android-menu"
-    />
-     
-    <FormattedMessage
-      id="global.list"
-      values={Object {}}
-    />
-  </Button>
-  <Button
-    active={false}
-    aria-checked={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    role="checkbox"
-    style={
-      Object {
-        "flex": "1 0 auto",
-      }
-    }
-    title={null}
-  >
-    <i
-      className="cap cap-th-large"
-    />
-     
-    <FormattedMessage
-      id="grid"
-      values={Object {}}
-    />
-  </Button>
-</div>
+      title={null}
+    >
+      <i
+        className="cap cap-map-location"
+      />
+      <FormattedMessage
+        id="capco.module.display_map"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+</Col>
 `;

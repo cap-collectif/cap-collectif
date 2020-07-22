@@ -22,28 +22,30 @@ exports[`<SSOByPassAuthForm /> renders correctly 1`] = `
     <div
       className="d-flex flex-row align-items-baseline mb-15"
     >
-      <_default
+      <Toggle
         checked={false}
+        id="toggle-sso-by-pass-auth"
+        label={
+          <div
+            className="d-flex flex-column"
+          >
+            <FormattedMessage
+              id="instant-authentication"
+              tagName="strong"
+              values={Object {}}
+            />
+            <div
+              className="color-dark-gray"
+            >
+              <FormattedMessage
+                id="bypass-the-selection-of-an-authentication-method"
+                values={Object {}}
+              />
+            </div>
+          </div>
+        }
         onChange={[Function]}
       />
-      <div
-        className="d-flex flex-column"
-      >
-        <strong>
-          <FormattedMessage
-            id="instant-authentication"
-            values={Object {}}
-          />
-        </strong>
-        <div
-          className="color-dark-gray"
-        >
-          <FormattedMessage
-            id="bypass-the-selection-of-an-authentication-method"
-            values={Object {}}
-          />
-        </div>
-      </div>
     </div>
   </div>
 </div>

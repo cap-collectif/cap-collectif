@@ -35,6 +35,9 @@ export const getAvailableProposals = graphql`
     availableProposalForms {
       id
       title
+      isGridViewEnabled
+      isListViewEnabled
+      isMapViewEnabled
     }
   }
 `;
@@ -44,7 +47,11 @@ export const loadProposalOptions = (proposal: ?{| label: string, value: string |
     const proposals = data.availableProposalForms.map(p => ({
       value: p.id,
       label: p.title,
+      isGridViewEnabled: p.isGridViewEnabled,
+      isListViewEnabled: p.isListViewEnabled,
+      isMapViewEnabled: p.isMapViewEnabled,
     }));
+
     if (proposal && !proposals.some(q => q.value === proposal.value)) proposals.push(proposal);
     return proposals;
   });

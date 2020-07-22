@@ -4,8 +4,10 @@ namespace Capco\AppBundle\Form\Step;
 
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Form\StatusFormType;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,17 +31,20 @@ class CollectStepFormType extends AbstractStepFormType
                     $itemFromDb
                         ->setName($itemFromUser->getName())
                         ->setColor($itemFromUser->getColor());
-                }
+                },
             ])
             ->add('defaultSort')
-            ->add('defaultStatus');
+            ->add('defaultStatus')
+            ->add('mainView', ChoiceType::class, [
+                'choices' => ViewConfiguration::ALL,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => CollectStep::class
+            'data_class' => CollectStep::class,
         ]);
     }
 }

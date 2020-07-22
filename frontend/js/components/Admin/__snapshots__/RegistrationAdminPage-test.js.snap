@@ -732,13 +732,16 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       <div
         className="d-flex align-items-baseline mb-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-registration"
+          label={
+            <FormattedMessage
+              id="allow-registration"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="allow-registration"
-          values={Object {}}
         />
       </div>
       <h4>
@@ -750,13 +753,16 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-restrict-registration-email-domain"
+          label={
+            <FormattedMessage
+              id="limit-registration-to-some-domains"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="limit-registration-to-some-domains"
-          values={Object {}}
         />
       </div>
     </div>
@@ -776,49 +782,61 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={true}
           disabled={true}
-        />
-        <FormattedMessage
-          id="global.fullname"
-          values={Object {}}
+          id="toggle-fullname"
+          label={
+            <FormattedMessage
+              id="global.fullname"
+              values={Object {}}
+            />
+          }
         />
       </div>
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={true}
           disabled={true}
-        />
-        <FormattedMessage
-          id="registration.password"
-          values={Object {}}
+          id="toggle-password"
+          label={
+            <FormattedMessage
+              id="registration.password"
+              values={Object {}}
+            />
+          }
         />
       </div>
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-zipcode"
+          label={
+            <FormattedMessage
+              id="user.register.zipcode"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="user.register.zipcode"
-          values={Object {}}
         />
       </div>
       <div
         className="d-flex align-items-baseline mb-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-userType"
+          label={
+            <FormattedMessage
+              id="registration.type"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="registration.type"
-          values={Object {}}
         />
       </div>
       <Well
@@ -1556,73 +1574,81 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     <div
       className="box-content box-content__content-form"
     >
-      <h3>
-        <FormattedMessage
-          id="capco.module.newsletter"
-          values={Object {}}
-        />
-      </h3>
+      <FormattedMessage
+        id="capco.module.newsletter"
+        tagName="h3"
+        values={Object {}}
+      />
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
           disabled={false}
+          id="toggle-consent-internal-communication"
+          label={
+            <span>
+              <strong>
+                <FormattedMessage
+                  id="request-consent-to-receive-information-related-to-the-platform"
+                  values={Object {}}
+                />
+              </strong>
+            </span>
+          }
           onChange={[Function]}
         />
-        <span>
-          <strong>
-            <FormattedMessage
-              id="request-consent-to-receive-information-related-to-the-platform"
-              values={Object {}}
-            />
-          </strong>
-        </span>
       </div>
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-consent-external-communication"
+          label={
+            <span>
+              <strong>
+                <FormattedMessage
+                  id="registration.enable_consent_external_communication.title"
+                  values={Object {}}
+                />
+              </strong>
+              <br />
+              <FormattedMessage
+                id="registration.enable_consent_external_communication.subtitle"
+                values={
+                  Object {
+                    "link": <a
+                      className="external-link"
+                      href="http://localhost/admin/settings/settings.global/list"
+                    >
+                      <FormattedMessage
+                        id="global.general"
+                        values={Object {}}
+                      />
+                    </a>,
+                  }
+                }
+              />
+            </span>
+          }
           onChange={[Function]}
         />
-        <span>
-          <strong>
-            <FormattedMessage
-              id="registration.enable_consent_external_communication.title"
-              values={Object {}}
-            />
-          </strong>
-          <br />
-          <FormattedMessage
-            id="registration.enable_consent_external_communication.subtitle"
-            values={
-              Object {
-                "link": <a
-                  className="external-link"
-                  href="http://localhost/admin/settings/settings.global/list"
-                >
-                  <FormattedMessage
-                    id="global.general"
-                    values={Object {}}
-                  />
-                </a>,
-              }
-            }
-          />
-        </span>
       </div>
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
           disabled={false}
+          id="toggle-captcha"
+          label={
+            <FormattedMessage
+              id="i-am-not-a-bot"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="i-am-not-a-bot"
-          values={Object {}}
         />
       </div>
     </div>
@@ -2370,13 +2396,16 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       <div
         className="d-flex align-items-baseline mb-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-registration"
+          label={
+            <FormattedMessage
+              id="allow-registration"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="allow-registration"
-          values={Object {}}
         />
       </div>
       <h4>
@@ -2388,13 +2417,16 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-restrict-registration-email-domain"
+          label={
+            <FormattedMessage
+              id="limit-registration-to-some-domains"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="limit-registration-to-some-domains"
-          values={Object {}}
         />
       </div>
     </div>
@@ -2414,49 +2446,61 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={true}
           disabled={true}
-        />
-        <FormattedMessage
-          id="global.fullname"
-          values={Object {}}
+          id="toggle-fullname"
+          label={
+            <FormattedMessage
+              id="global.fullname"
+              values={Object {}}
+            />
+          }
         />
       </div>
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={true}
           disabled={true}
-        />
-        <FormattedMessage
-          id="registration.password"
-          values={Object {}}
+          id="toggle-password"
+          label={
+            <FormattedMessage
+              id="registration.password"
+              values={Object {}}
+            />
+          }
         />
       </div>
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-zipcode"
+          label={
+            <FormattedMessage
+              id="user.register.zipcode"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="user.register.zipcode"
-          values={Object {}}
         />
       </div>
       <div
         className="d-flex align-items-baseline mb-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-userType"
+          label={
+            <FormattedMessage
+              id="registration.type"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="registration.type"
-          values={Object {}}
         />
       </div>
     </div>
@@ -2467,73 +2511,81 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     <div
       className="box-content box-content__content-form"
     >
-      <h3>
-        <FormattedMessage
-          id="capco.module.newsletter"
-          values={Object {}}
-        />
-      </h3>
+      <FormattedMessage
+        id="capco.module.newsletter"
+        tagName="h3"
+        values={Object {}}
+      />
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
           disabled={true}
+          id="toggle-consent-internal-communication"
+          label={
+            <span>
+              <strong>
+                <FormattedMessage
+                  id="request-consent-to-receive-information-related-to-the-platform"
+                  values={Object {}}
+                />
+              </strong>
+            </span>
+          }
           onChange={[Function]}
         />
-        <span>
-          <strong>
-            <FormattedMessage
-              id="request-consent-to-receive-information-related-to-the-platform"
-              values={Object {}}
-            />
-          </strong>
-        </span>
       </div>
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
+          id="toggle-consent-external-communication"
+          label={
+            <span>
+              <strong>
+                <FormattedMessage
+                  id="registration.enable_consent_external_communication.title"
+                  values={Object {}}
+                />
+              </strong>
+              <br />
+              <FormattedMessage
+                id="registration.enable_consent_external_communication.subtitle"
+                values={
+                  Object {
+                    "link": <a
+                      className="external-link"
+                      href="http://localhost/admin/settings/settings.global/list"
+                    >
+                      <FormattedMessage
+                        id="global.general"
+                        values={Object {}}
+                      />
+                    </a>,
+                  }
+                }
+              />
+            </span>
+          }
           onChange={[Function]}
         />
-        <span>
-          <strong>
-            <FormattedMessage
-              id="registration.enable_consent_external_communication.title"
-              values={Object {}}
-            />
-          </strong>
-          <br />
-          <FormattedMessage
-            id="registration.enable_consent_external_communication.subtitle"
-            values={
-              Object {
-                "link": <a
-                  className="external-link"
-                  href="http://localhost/admin/settings/settings.global/list"
-                >
-                  <FormattedMessage
-                    id="global.general"
-                    values={Object {}}
-                  />
-                </a>,
-              }
-            }
-          />
-        </span>
       </div>
       <div
         className="d-flex align-items-baseline mb-15 mt-15"
       >
-        <_default
+        <Toggle
           checked={false}
           disabled={true}
+          id="toggle-captcha"
+          label={
+            <FormattedMessage
+              id="i-am-not-a-bot"
+              values={Object {}}
+            />
+          }
           onChange={[Function]}
-        />
-        <FormattedMessage
-          id="i-am-not-a-bot"
-          values={Object {}}
         />
       </div>
     </div>

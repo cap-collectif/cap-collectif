@@ -47,6 +47,7 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "mainView": "grid",
           "private": false,
           "requirements": Object {
             "edges": Array [
@@ -93,6 +94,7 @@ Object {
           "defaultSort": "random",
           "enabled": true,
           "id": Any<String>,
+          "mainView": "list",
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -167,6 +169,7 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "mainView": "grid",
           "private": false,
           "requirements": Object {
             "edges": Array [
@@ -197,6 +200,7 @@ Object {
           "defaultSort": "random",
           "enabled": true,
           "id": Any<String>,
+          "mainView": "list",
           "requirements": Object {
             "edges": Array [],
             "totalCount": 0,
@@ -271,6 +275,7 @@ Object {
             "title": "Formulaire attaché à aucun projet",
           },
           "id": Any<String>,
+          "mainView": "grid",
           "private": false,
           "requirements": Object {
             "edges": Array [],

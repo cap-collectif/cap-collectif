@@ -29,8 +29,14 @@ export function StepVotesFields({
     <>
       <ProjectBoxHeader>
         <h5 className="d-flex align-items-center m-0 mb-15">
-          <Field component={toggle} id="step-votable" name="votable" normalize={val => !!val} />
-          <FormattedMessage id="project_download.values.content_type.vote" />
+          <Field
+            bold
+            id="step-votable"
+            component={toggle}
+            name="votable"
+            normalize={val => !!val}
+            label={<FormattedMessage id="project_download.values.content_type.vote" />}
+          />
         </h5>
       </ProjectBoxHeader>
       {votable && (

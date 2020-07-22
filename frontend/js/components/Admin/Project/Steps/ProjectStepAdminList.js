@@ -13,12 +13,13 @@ import {
   type DropResult,
   type DroppableProvided,
 } from 'react-beautiful-dnd';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { formValueSelector, arrayMove } from 'redux-form';
 import colors from '~/utils/colors';
 import type { GlobalState } from '~/types';
-
 import ProjectStepAdminItem from './ProjectStepAdminItem';
 import { NoStepsPlaceholder } from '../Form/ProjectAdminForm.style';
+import type { ProjectStepAdminList_project } from '~relay/ProjectStepAdminList_project.graphql';
 
 export type Step = {|
   +id: ?string,
@@ -60,6 +61,7 @@ type Props = {|
   dispatch: Dispatch,
   formName: string,
   meta?: {| error: ?string |},
+  project: ProjectStepAdminList_project,
 |};
 
 export function ProjectStepAdminList(props: Props) {
@@ -74,7 +76,7 @@ export function ProjectStepAdminList(props: Props) {
     dispatch(arrayMove(formName, 'steps', result.source.index, result.destination.index));
   };
 
-  const { fields, steps, formName, meta } = props;
+  const { fields, steps, formName, meta, project } = props;
   return (
     <>
       <List>
@@ -89,10 +91,12 @@ export function ProjectStepAdminList(props: Props) {
                 )}
                 {fields.map((field: string, index: number) => (
                   <ProjectStepAdminItem
+                    key={index}
                     step={steps[index]}
                     index={index}
                     fields={fields}
                     formName={formName}
+                    project={project}
                   />
                 ))}
                 {provided.placeholder}
@@ -117,4 +121,12 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   };
 };
 
-export default connect(mapStateToProps)(ProjectStepAdminList);
+const ProjectStepAdminListConnected = connect(mapStateToProps)(ProjectStepAdminList);
+
+export default createFragmentContainer(ProjectStepAdminListConnected, {
+  project: graphql`
+    fragment ProjectStepAdminList_project on Project {
+      ...ProjectStepAdminItem_project
+    }
+  `,
+});

@@ -65,6 +65,13 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "externalLink": null,
         "externalParticipantsCount": null,
         "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
         "id": "1",
         "isExternal": false,
         "locale": null,
@@ -154,6 +161,13 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "externalLink": null,
         "externalParticipantsCount": null,
         "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
         "id": "1",
         "isExternal": false,
         "locale": null,
@@ -182,7 +196,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     valid={true}
     warning={null}
   />
-  <ProjectStepAdmin
+  <Relay(ProjectStepAdmin)
     anyTouched={false}
     array={
       Object {
@@ -231,6 +245,43 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
     }
     invalid={false}
     pristine={true}
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "Cover": null,
+        "authors": Array [],
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
+        "id": "1",
+        "isExternal": false,
+        "locale": null,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "opinionTerm": 1,
+        "publishedAt": "22/22/22",
+        "restrictedViewers": null,
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
     reset={[MockFunction]}
     submitFailed={false}
     submitSucceeded={false}
@@ -354,6 +405,13 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "externalLink": null,
         "externalParticipantsCount": null,
         "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
         "id": "1",
         "isExternal": false,
         "locale": null,
@@ -443,6 +501,13 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "externalLink": null,
         "externalParticipantsCount": null,
         "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
         "id": "1",
         "isExternal": false,
         "locale": null,
@@ -582,6 +647,13 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "externalLink": null,
         "externalParticipantsCount": null,
         "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
         "id": "1",
         "isExternal": false,
         "locale": null,

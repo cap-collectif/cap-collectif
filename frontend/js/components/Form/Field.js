@@ -81,6 +81,8 @@ type Props = {|
   dateTimeInputProps?: Object,
   medias?: Array<Object>,
   typeForm?: $Values<typeof TYPE_FORM>,
+  getOpacity?: (opacity: number) => void,
+  opacity?: ?number,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -127,6 +129,8 @@ class Field extends React.Component<Props> {
       medias,
       rows,
       typeForm = TYPE_FORM.DEFAULT,
+      getOpacity,
+      opacity,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -190,6 +194,8 @@ class Field extends React.Component<Props> {
         step={step}
         medias={medias}
         dateTimeInputProps={dateTimeInputProps}
+        getOpacity={getOpacity}
+        opacity={opacity}
         {...input}>
         {children}
       </Input>

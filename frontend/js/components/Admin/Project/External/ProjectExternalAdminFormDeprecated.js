@@ -58,10 +58,18 @@ export function ProjectExternalAdminFormDeprecated(props: Props) {
   return (
     <form onSubmit={handleSubmit} id={formName} className="mt-15">
       <h4 className="box-title d-flex align-items-baseline m-0">
-        <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
-        <div className="mb-15">
-          <FormattedMessage id="admin.fields.project.group_external" />
-        </div>
+        <Field
+          id="toggle-isExternal"
+          icons
+          component={toggle}
+          name="isExternal"
+          normalize={val => !!val}
+          label={
+            <div className="mb-15">
+              <FormattedMessage id="admin.fields.project.group_external" />
+            </div>
+          }
+        />
       </h4>
 
       {isExternal ? (

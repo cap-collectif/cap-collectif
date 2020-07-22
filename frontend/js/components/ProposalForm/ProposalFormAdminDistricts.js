@@ -54,7 +54,9 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
 
     return (
       <div className="form-group">
-        <span className="control-label" style={{ marginBottom: 15, marginTop: 15 }}>
+        <span
+          className="control-label mb-15 mt-15"
+          style={{ display: 'block', fontWeight: 'bold' }}>
           <FormattedMessage id="proposal_form.admin.configuration.district_list" />
         </span>
         <ListGroup>

@@ -553,6 +553,7 @@ export class ProposalForm extends React.Component<Props, State> {
             ))}
           </Field>
         )}
+
         {proposalForm.usingDescription && (
           <Field
             id="proposal_body"

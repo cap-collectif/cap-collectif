@@ -2,6 +2,7 @@
 import styled, { type StyledComponent } from 'styled-components';
 import { ListGroupItem } from 'react-bootstrap';
 import colors from '~/utils/colors';
+import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
 export const DateContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
@@ -103,5 +104,79 @@ export const PrivacyInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   span:first-child {
     margin-left: 0;
     font-weight: bold;
+  }
+`;
+
+export const ViewsContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .help-block {
+    margin: 16px 0;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.formBgc};
+    border: 1px solid ${colors.lightGray};
+    padding: 15px 35px;
+    margin-right: 20px;
+    ${MAIN_BORDER_RADIUS};
+  }
+
+  label {
+    margin: 0 !important;
+  }
+
+  .icon {
+    margin: 0;
+  }
+`;
+
+export const LabelField: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid ${colors.lightGray};
+
+  h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  a {
+    color: ${colors.blue};
+  }
+
+  span {
+    vertical-align: middle;
+  }
+`;
+
+export const LabelView: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  span {
+    margin: 10px 0;
+  }
+
+  svg {
+    height: 65px;
+    width: auto;
+    border: 1px solid ${colors.lightGray};
+    ${MAIN_BORDER_RADIUS};
   }
 `;

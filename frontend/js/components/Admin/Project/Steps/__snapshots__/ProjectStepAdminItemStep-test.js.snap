@@ -66,10 +66,16 @@ exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
           className="fa fa-trash"
         />
       </Button>
-      <ProjectAdminStepFormModal
+      <Relay(ProjectAdminStepFormModal)
         form="oui"
         index={0}
         onClose={[Function]}
+        project={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
         show={false}
         step={
           Object {

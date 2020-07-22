@@ -86,6 +86,7 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
     }
   />
   <Relay(Connect(injectIntl(ProposalListFilters)))
+    setDisplayMode={[Function]}
     step={
       Object {
         "$fragmentRefs": null,
@@ -160,7 +161,6 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
         "voteType": "BUDGET",
       }
     }
-    view="map"
     viewer={null}
   />
   <Connect(LoginModal) />

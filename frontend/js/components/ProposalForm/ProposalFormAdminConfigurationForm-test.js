@@ -16,6 +16,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       viewer: { isSuperAdmin: false },
     },
     proposalForm: {
+      $fragmentRefs,
       $refType,
       canContact: false,
       allowAknowledge: true,
@@ -45,6 +46,9 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       usingDistrict: true,
       districtHelpText: '',
       districtMandatory: true,
+      isMapViewEnabled: false,
+      isListViewEnabled: false,
+      isGridViewEnabled: false,
       categories: [
         {
           id: 'category1',
@@ -80,6 +84,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     usingDescription: true,
     usingIllustration: false,
     usingSummary: false,
+    isMapViewEnabled: false,
     features,
     relay: relayRefetchMock,
   };

@@ -1,77 +1,143 @@
 // @flow
 import React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
-import type { State } from '../../../types';
-import config from '../../../config';
-import type { ProposalViewMode } from '../../../redux/modules/proposal';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Button, Col } from 'react-bootstrap';
+import config from '~/config';
+import type { ProposalViewMode } from '~/redux/modules/proposal';
+import type { ProposalListToggleViewBtn_step } from '~relay/ProposalListToggleViewBtn_step.graphql';
 
 type Props = {
-  onChange: Function,
-  mode?: ProposalViewMode,
   showMapButton: boolean,
-  intl: IntlShape,
+  setDisplayMode: (displayMode: ProposalViewMode) => void,
+  displayMode: ProposalViewMode,
+  step: ProposalListToggleViewBtn_step,
 };
 
-export class ProposalListToggleViewBtn extends React.Component<Props> {
-  handleClick = (chooseMode: $FlowFixMe) => {
-    const { onChange, mode } = this.props;
-    if (chooseMode && chooseMode !== mode) {
-      onChange(chooseMode);
-    }
+const getDisplayModeEnabled = (step: ProposalListToggleViewBtn_step) => {
+  if (step.__typename === 'CollectStep') {
+    return {
+      isGridViewEnabled: step.form?.isGridViewEnabled,
+      isListViewEnabled: step.form?.isListViewEnabled,
+      isMapViewEnabled: step.form?.isMapViewEnabled,
+    };
+  }
+
+  if (step.__typename === 'SelectionStep') {
+    return {
+      isGridViewEnabled: step?.project?.firstCollectStep?.form?.isGridViewEnabled,
+      isListViewEnabled: step?.project?.firstCollectStep?.form?.isListViewEnabled,
+      isMapViewEnabled: step?.project?.firstCollectStep?.form?.isMapViewEnabled,
+    };
+  }
+
+  return {
+    isGridViewEnabled: true,
+    isListViewEnabled: true,
+    isMapViewEnabled: true,
   };
+};
 
-  render() {
-    const { mode, showMapButton, intl } = this.props;
+const getCountDisplayModeEnabled = (
+  displayModeEnabled,
+  isMobile: boolean,
+  showMapButtonEnabled: boolean,
+) => {
+  let count = 0;
+  if (displayModeEnabled.isGridViewEnabled) count++;
+  if (displayModeEnabled.isListViewEnabled) count++;
+  if (displayModeEnabled.isMapViewEnabled && showMapButtonEnabled && !isMobile) count++;
+  return count;
+};
 
-    return (
+export const ProposalListToggleViewBtn = ({
+  displayMode,
+  setDisplayMode,
+  showMapButton,
+  step,
+}: Props) => {
+  const intl = useIntl();
+  const displayModeEnabled = getDisplayModeEnabled(step);
+  const countDisplayModeEnabled = getCountDisplayModeEnabled(
+    displayModeEnabled,
+    config.isMobile,
+    showMapButton,
+  );
+
+  return countDisplayModeEnabled > 1 ? (
+    <Col xs={12} sm={6} md={4} lg={3}>
       <div
         id="step-view-toggle"
         className="btn-group d-flex mb-15"
         style={{ width: '100%' }}
         role="group"
         aria-label={intl.formatMessage({ id: 'global.filter.chose.display.type' })}>
-        <Button
-          bsStyle="default"
-          active={mode === 'table'}
-          role="checkbox"
-          aria-checked={mode === 'table'}
-          title={mode === 'table' ? intl.formatMessage({ id: 'table-selected' }) : null}
-          style={{ flex: '1 0 auto' }}
-          onClick={this.handleClick.bind(this, 'table')}>
-          <i className="cap cap-android-menu" /> <FormattedMessage id="global.list" />
-        </Button>
-        <Button
-          bsStyle="default"
-          active={mode === 'mosaic'}
-          role="checkbox"
-          aria-checked={mode === 'mosaic'}
-          title={mode === 'mosaic' ? intl.formatMessage({ id: 'mosaic-selected' }) : null}
-          style={{ flex: '1 0 auto' }}
-          onClick={this.handleClick.bind(this, 'mosaic')}>
-          <i className="cap cap-th-large" /> <FormattedMessage id="grid" />
-        </Button>
-        {!config.isMobile && showMapButton && (
+        {displayModeEnabled.isListViewEnabled && (
+          <Button
+            bsStyle="default"
+            active={displayMode === 'list'}
+            role="checkbox"
+            aria-checked={displayMode === 'list'}
+            title={displayMode === 'list' ? intl.formatMessage({ id: 'table-selected' }) : null}
+            style={{ flex: '1 0 auto' }}
+            onClick={() => setDisplayMode('list')}>
+            <i className="cap cap-android-menu" /> <FormattedMessage id="global.list" />
+          </Button>
+        )}
+
+        {displayModeEnabled.isGridViewEnabled && (
+          <Button
+            bsStyle="default"
+            active={displayMode === 'grid'}
+            role="checkbox"
+            aria-checked={displayMode === 'grid'}
+            title={displayMode === 'grid' ? intl.formatMessage({ id: 'mosaic-selected' }) : null}
+            style={{ flex: '1 0 auto' }}
+            onClick={() => setDisplayMode('grid')}>
+            <i className="cap cap-th-large" /> <FormattedMessage id="grid" />
+          </Button>
+        )}
+
+        {!config.isMobile && showMapButton && displayModeEnabled.isMapViewEnabled && (
           <Button
             bsStyle="default"
             style={{ flex: '1 0 auto' }}
             role="checkbox"
-            aria-checked={mode === 'map'}
-            title={mode === 'map' ? intl.formatMessage({ id: 'map-selected' }) : null}
-            active={mode === 'map'}
-            onClick={this.handleClick.bind(this, 'map')}>
-            <i className="cap cap-map-location" />{' '}
+            aria-checked={displayMode === 'map'}
+            title={displayMode === 'map' ? intl.formatMessage({ id: 'map-selected' }) : null}
+            active={displayMode === 'map'}
+            onClick={() => setDisplayMode('map')}>
+            <i className="cap cap-map-location" />
             <FormattedMessage id="capco.module.display_map" />
           </Button>
         )}
       </div>
-    );
-  }
-}
+    </Col>
+  ) : null;
+};
 
-const mapStateToProps = (state: State) => ({
-  mode: state.proposal.selectedViewByStep || 'mosaic',
+export default createFragmentContainer(ProposalListToggleViewBtn, {
+  step: graphql`
+    fragment ProposalListToggleViewBtn_step on Step {
+      __typename
+      ... on CollectStep {
+        form {
+          isGridViewEnabled
+          isListViewEnabled
+          isMapViewEnabled
+        }
+      }
+      ... on SelectionStep {
+        project {
+          firstCollectStep {
+            form {
+              isGridViewEnabled
+              isListViewEnabled
+              isMapViewEnabled
+            }
+          }
+        }
+      }
+    }
+  `,
 });
-
-export default connect(mapStateToProps)(injectIntl(ProposalListToggleViewBtn));

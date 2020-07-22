@@ -6,8 +6,8 @@ Scenario: Logged in admin wants edit a proposal form page content
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
   And I wait "#proposal-form-admin-page" to appear on current page
-  And I check a proposal form checkbox "summary toggle"
-  And I check a proposal form checkbox "illustration toggle"
+  And I check element "proposal_form_using_summary_field"
+  And I check element "proposal_form_using_illustration_field"
   And I fill in the following:
     | proposal_form_description | test intro text |
     | titleHelpText | test help text |
@@ -20,13 +20,9 @@ Scenario: Logged in admin wants edit a proposal form page content
   And  fill in the following:
     | categories[0].name | test title |
   And I click on a proposal form button "category add popup save"
-  And I check a proposal form checkbox "address toggle"
+  And I check element "proposal_form_using_address_field"
   And I fill in the following:
     | addressHelpText | test text |
-    | latMap | 48.8587741 |
-    | lngMap | 2.2069771 |
-  And I check element "proposal_form_district_proposalInAZoneRequired"
-  And I change the proposal form select "proposal form address zoom" with option 11
   And I click the "#perso-field-add" element
   And I click the ".create-question" element
   And I fill in the following:

@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectStepAdminList } from './ProjectStepAdminList';
+import { $fragmentRefs, $refType } from '~/mocks';
 
 const defaultStep = {
   id: '1',
@@ -16,6 +17,10 @@ const defaultProps = {
   formName: 'oui',
   steps: [defaultStep, defaultStep],
   fields: { length: 0, map: () => [], remove: jest.fn() },
+  project: {
+    $fragmentRefs,
+    $refType,
+  },
 };
 
 describe('<ProjectStepAdminList />', () => {

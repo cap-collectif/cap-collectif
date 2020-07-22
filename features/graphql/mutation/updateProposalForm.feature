@@ -672,3 +672,85 @@ Scenario: GraphQL client wants to delete the first category
     }
   }
   """
+
+@database
+Scenario: GraphQL admin wants to update the view configuration of the form
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateProposalFormInput!) {
+      updateProposalForm(input: $input) {
+        proposalForm {
+          id
+          isGridViewEnabled
+          isListViewEnabled
+          isMapViewEnabled
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalFormId": "proposalForm13",
+        "isGridViewEnabled": false,
+        "isListViewEnabled": true
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateProposalForm": {
+        "proposalForm": {
+          "id": "proposalform13",
+          "isGridViewEnabled": false,
+          "isListViewEnabled": true,
+          "isMapViewEnabled": false
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL admin wants to disable all views and fails
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateProposalFormInput!) {
+      updateProposalForm(input: $input) {
+        proposalForm {
+          id
+          isGridViewEnabled
+          isListViewEnabled
+          isMapViewEnabled
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalFormId": "proposalForm13",
+        "isGridViewEnabled": false,
+        "isListViewEnabled": false,
+        "isMapViewEnabled": false
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors": [
+      {
+        "message": "No view is active. At least one must be selected",
+        "@*@": "@*@"
+      }
+    ],
+    "data": {
+      "updateProposalForm": null
+    }
+  }
+  """

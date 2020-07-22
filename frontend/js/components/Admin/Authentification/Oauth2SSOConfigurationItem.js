@@ -6,7 +6,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import Toggle from '~/components/Ui/Toggle/Toggle';
 import DeleteModal from '../../Modal/DeleteModal';
 import Oauth2SSOConfigurationModal from './Oauth2SSOConfigurationModal';
-import DeleteOauth2SSOConfigurationMutation from '../../../mutations/DeleteOauth2SSOConfigurationMutation';
+import DeleteOauth2SSOConfigurationMutation from '~/mutations/DeleteOauth2SSOConfigurationMutation';
 import type { Oauth2SSOConfigurationItem_configuration } from '~relay/Oauth2SSOConfigurationItem_configuration.graphql';
 import { toggleStatus } from '~/mutations/ToggleSSOConfigurationStatusMutation';
 
@@ -48,17 +48,20 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
       <>
         <div className="d-flex align-items-center">
           <Toggle
+            id="configuration-enabled"
             checked={configuration.enabled}
             onChange={() => {
               toggleStatus(configuration);
             }}
+            label={
+              <div className="d-flex flex-column">
+                <h5 className="mb-0 mt-0">{configuration.name}</h5>
+                <div className="color-dark-gray">
+                  <FormattedMessage id="capco.module.login_openid" />
+                </div>
+              </div>
+            }
           />
-          <div className="d-flex flex-column">
-            <h5 className="mb-0 mt-0">{configuration.name}</h5>
-            <div className="color-dark-gray">
-              <FormattedMessage id="capco.module.login_openid" />
-            </div>
-          </div>
         </div>
         <ButtonToolbar>
           <Button

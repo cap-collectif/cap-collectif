@@ -71,7 +71,6 @@ class ProjectPersister
 
             throw GraphQLException::fromFormErrors($form);
         }
-
         try {
             $this->em->persist($project);
             $this->em->flush();

@@ -340,7 +340,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
               <FormattedMessage id="admin.global.add" />
             </div>
           </Collapsable.Button>
-          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'admin.global.add1' })}>
+          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'admin.global.add' })}>
             <DropdownSelect
               onChange={value => {
                 switch (value) {

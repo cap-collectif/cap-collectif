@@ -48,7 +48,7 @@ exports[`<Cookie /> should render advertising only accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <_default
+        <Toggle
           checked={false}
           className="cookie-manager"
           id="cookies-enable-analytic"
@@ -103,7 +103,7 @@ exports[`<Cookie /> should render advertising only accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <_default
+        <Toggle
           checked={true}
           className="cookie-manager"
           id="cookies-enable-ads"
@@ -174,7 +174,7 @@ exports[`<Cookie /> should render all accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <_default
+        <Toggle
           checked={true}
           className="cookie-manager"
           id="cookies-enable-analytic"
@@ -229,7 +229,7 @@ exports[`<Cookie /> should render all accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <_default
+        <Toggle
           checked={true}
           className="cookie-manager"
           id="cookies-enable-ads"
@@ -300,7 +300,7 @@ exports[`<Cookie /> should render all refused 1`] = `
             values={Object {}}
           />
         </div>
-        <_default
+        <Toggle
           checked={false}
           className="cookie-manager"
           id="cookies-enable-analytic"
@@ -355,7 +355,7 @@ exports[`<Cookie /> should render all refused 1`] = `
             values={Object {}}
           />
         </div>
-        <_default
+        <Toggle
           checked={false}
           className="cookie-manager"
           id="cookies-enable-ads"
@@ -426,7 +426,7 @@ exports[`<Cookie /> should render analytics only accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <_default
+        <Toggle
           checked={true}
           className="cookie-manager"
           id="cookies-enable-analytic"
@@ -481,7 +481,7 @@ exports[`<Cookie /> should render analytics only accepted 1`] = `
             values={Object {}}
           />
         </div>
-        <_default
+        <Toggle
           checked={false}
           className="cookie-manager"
           id="cookies-enable-ads"

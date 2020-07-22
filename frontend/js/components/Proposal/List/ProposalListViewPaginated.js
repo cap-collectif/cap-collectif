@@ -15,75 +15,65 @@ type Props = {
   relay: RelayPaginationProp,
   displayMap: boolean,
   step: ProposalListViewPaginated_step,
-  view: ProposalViewMode,
+  displayMode: ProposalViewMode,
   defaultMapOptions: MapOptions,
   geoJsons: Array<GeoJson>,
   viewer: ?ProposalListViewPaginated_viewer,
   count: number,
 };
-type State = {
-  loading: boolean,
+
+const ProposalListViewPaginated = ({
+  step,
+  viewer,
+  geoJsons,
+  defaultMapOptions,
+  displayMap,
+  relay,
+  displayMode,
+  count,
+}: Props) => {
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  return (
+    <div>
+      {displayMap && displayMode === 'map' ? (
+        // $FlowFixMe
+        <ProposalsDisplayMap
+          className="zi-0"
+          step={step}
+          geoJsons={geoJsons}
+          defaultMapOptions={defaultMapOptions}
+        />
+      ) : (
+        <React.Fragment>
+          <VisibilityBox enabled={step.private || false}>
+            <ProposalList
+              step={step}
+              proposals={step.proposals}
+              viewer={viewer}
+              view={displayMode}
+              id="proposals-list"
+            />
+          </VisibilityBox>
+          <div id="proposal-list-pagination-footer" className="text-center">
+            {relay.hasMore() && (
+              <Button
+                disabled={loading}
+                onClick={() => {
+                  setLoading(true);
+                  relay.loadMore(count, () => {
+                    setLoading(false);
+                  });
+                }}>
+                <FormattedMessage id={loading ? 'global.loading' : 'see-more-proposals'} />
+              </Button>
+            )}
+          </div>
+        </React.Fragment>
+      )}
+    </div>
+  );
 };
-
-export class ProposalListViewPaginated extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
-
-  render() {
-    const {
-      step,
-      viewer,
-      geoJsons,
-      defaultMapOptions,
-      displayMap,
-      relay,
-      view,
-      count,
-    } = this.props;
-
-    const { loading } = this.state;
-    return (
-      <div>
-        {displayMap && view === 'map' ? (
-          // $FlowFixMe
-          <ProposalsDisplayMap
-            className="zi-0"
-            step={step}
-            geoJsons={geoJsons}
-            defaultMapOptions={defaultMapOptions}
-          />
-        ) : (
-          <React.Fragment>
-            <VisibilityBox enabled={step.private || false}>
-              <ProposalList
-                step={step}
-                proposals={step.proposals}
-                viewer={viewer}
-                view={view}
-                id="proposals-list"
-              />
-            </VisibilityBox>
-            <div id="proposal-list-pagination-footer" className="text-center">
-              {relay.hasMore() && (
-                <Button
-                  disabled={loading}
-                  onClick={() => {
-                    this.setState({ loading: true });
-                    relay.loadMore(count, () => {
-                      this.setState({ loading: false });
-                    });
-                  }}>
-                  <FormattedMessage id={loading ? 'global.loading' : 'see-more-proposals'} />
-                </Button>
-              )}
-            </div>
-          </React.Fragment>
-        )}
-      </div>
-    );
-  }
-}
 
 export default createPaginationContainer(
   ProposalListViewPaginated,

@@ -145,6 +145,7 @@ const BASE_SELECTION_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape SelectionStep",
   label: 'SelectionStep',
+  mainView: 'grid',
 };
 
 const BASE_PRESENTATION_STEP = {
@@ -169,6 +170,7 @@ const BASE_COLLECT_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape CollectStep",
   label: 'CollectStep',
+  mainView: 'grid',
 };
 
 describe('Internal|createAlphaProject simple mutations', () => {

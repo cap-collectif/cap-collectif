@@ -1,7 +1,7 @@
 // @flow
-
 import React from 'react';
 import { connect } from 'react-redux';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal, Button } from 'react-bootstrap';
 import { submit, reduxForm, Field, arrayPush, change, formValueSelector } from 'redux-form';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
@@ -12,13 +12,27 @@ import type { Dispatch, GlobalState } from '~/types';
 import { ProjectBoxHeader, PermalinkWrapper } from '../Form/ProjectAdminForm.style';
 import ProjectAdminQuestionnaireStepForm from './ProjectAdminQuestionnaireStepForm';
 import ProjectAdminConsultationStepForm from './ProjectAdminConsultationStepForm';
-import { FormContainer, DateContainer, CustomCodeArea } from './ProjectAdminStepForm.style';
+import {
+  FormContainer,
+  DateContainer,
+  CustomCodeArea,
+  LabelField,
+  LabelView,
+  ViewsContainer,
+} from './ProjectAdminStepForm.style';
 import { createRequirements, type Requirement, formatRequirements } from './StepRequirementsList';
 import ProjectAdminSynthesisStepForm from './ProjectAdminSynthesisStepForm';
 import ProjectAdminSelectionStepForm from './ProjectAdminSelectionStepForm';
 import { type Status } from './StepStatusesList';
+import type { ProjectAdminStepForm_project } from '~relay/ProjectAdminStepForm_project.graphql';
 import ProjectAdminRankingStepForm from './ProjectAdminRankingStepForm';
 import ProjectAdminCollectStepForm from './ProjectAdminCollectStepForm';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import colors from '~/utils/colors';
+import IconListView from '~svg/list_view.svg';
+import IconGridView from '~svg/grid_view.svg';
+import IconMapView from '~svg/map_view.svg';
+import type { ProposalViewMode } from '~/redux/modules/proposal';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -57,11 +71,24 @@ type Props = {|
     nbVersionsToDisplay?: ?number,
     nbOpinionsToDisplay?: ?number,
     defaultStatus?: ?string,
-    proposalForm?: {| value: string, label: string |},
+    proposalForm?: {|
+      value: string,
+      label: string,
+      isGridViewEnabled: boolean,
+      isListViewEnabled: boolean,
+      isMapViewEnabled: boolean,
+    |},
+    form?: {|
+      isGridViewEnabled: boolean,
+      isListViewEnabled: boolean,
+      isMapViewEnabled: boolean,
+    |},
     private?: ?boolean,
+    mainView: string,
   },
   intl: IntlShape,
   formName: string,
+  isCreating: boolean,
   index?: number,
   timeless: boolean,
   requirements?: ?Array<Requirement>,
@@ -71,7 +98,18 @@ type Props = {|
   isTresholdEnabled?: boolean,
   isLimitEnabled?: boolean,
   isPrivate?: ?boolean,
+  isGridViewEnabled: boolean,
+  isListViewEnabled: boolean,
+  isMapViewEnabled: boolean,
+  project: ProjectAdminStepForm_project,
+  mainView: ?ProposalViewMode,
 |};
+
+type DisplayMode = {
+  isGridViewEnabled: boolean,
+  isListViewEnabled: boolean,
+  isMapViewEnabled: boolean,
+};
 
 export type FormValues = {|
   label: string,
@@ -101,7 +139,64 @@ export type FormValues = {|
   defaultStatus?: ?string,
   proposalForm?: string,
   private?: ?boolean,
+  mainView?: ProposalViewMode,
 |};
+
+const getMainView = (
+  isGridViewEnabled: ?boolean,
+  isListViewEnabled: ?boolean,
+  isMapViewEnabled: ?boolean,
+) => {
+  if (isGridViewEnabled) return 'grid';
+  if (isListViewEnabled) return 'list';
+  if (isMapViewEnabled) return 'map';
+};
+
+const getValueDisplayMode = (
+  step: $PropertyType<Props, 'step'>,
+  project: ProjectAdminStepForm_project,
+  isCreating: boolean,
+  proposalFormSelected,
+) => {
+  let displayModeEnabled = {};
+
+  if (step.type === 'CollectStep' && !isCreating) {
+    displayModeEnabled = {
+      isGridViewEnabled: step.form?.isGridViewEnabled,
+      isListViewEnabled: step.form?.isListViewEnabled,
+      isMapViewEnabled: step.form?.isMapViewEnabled,
+    };
+  }
+
+  if (step.type === 'CollectStep' && isCreating) {
+    displayModeEnabled = {
+      isGridViewEnabled: proposalFormSelected?.isGridViewEnabled,
+      isListViewEnabled: proposalFormSelected?.isListViewEnabled,
+      isMapViewEnabled: proposalFormSelected?.isMapViewEnabled,
+    };
+  }
+
+  if (step.type === 'SelectionStep') {
+    displayModeEnabled = {
+      isGridViewEnabled: project.firstCollectStep?.form?.isGridViewEnabled,
+      isListViewEnabled: project.firstCollectStep?.form?.isListViewEnabled,
+      isMapViewEnabled: project.firstCollectStep?.form?.isMapViewEnabled,
+    };
+  }
+
+  const mainView =
+    step?.mainView ||
+    getMainView(
+      displayModeEnabled.isGridViewEnabled,
+      displayModeEnabled.isListViewEnabled,
+      displayModeEnabled.isMapViewEnabled,
+    );
+
+  return {
+    ...((displayModeEnabled: any): DisplayMode),
+    mainView,
+  };
+};
 
 const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
   const requirements = formValues.requirements ? formatRequirements(formValues.requirements) : [];
@@ -217,7 +312,24 @@ export function ProjectAdminStepForm({
   isTresholdEnabled,
   isLimitEnabled,
   isPrivate,
+  isGridViewEnabled,
+  isListViewEnabled,
+  isMapViewEnabled,
+  mainView,
+  isCreating,
 }: Props) {
+  const canSetDisplayMode =
+    (step.type === 'SelectionStep' || step.type === 'CollectStep') &&
+    (isGridViewEnabled || isListViewEnabled || isMapViewEnabled);
+
+  React.useEffect(() => {
+    // mainView is not in the reduxForm's initialValues because the proposalForm is selected after.
+    // Normally, need to use enableReinitialize but it resets the form...
+    if (mainView && isCreating && step.type === 'CollectStep') {
+      dispatch(change('stepForm', 'mainView', mainView));
+    }
+  }, [dispatch, isCreating, mainView, step.type]);
+
   return (
     <>
       <Modal.Body>
@@ -269,6 +381,7 @@ export function ProjectAdminStepForm({
             label={renderLabel('global.meta.description', intl, 'admin.help.metadescription')}
             component={renderComponent}
           />
+
           {step.type === 'QuestionnaireStep' && (
             <ProjectAdminQuestionnaireStepForm questionnaire={step.questionnaire} />
           )}
@@ -301,6 +414,80 @@ export function ProjectAdminStepForm({
               votable={votable}
               requirements={requirements}
             />
+          )}
+
+          {canSetDisplayMode && (
+            <ViewsContainer>
+              <LabelField>
+                <FormattedMessage id="display.mode" tagName="h5" />
+                <a
+                  href="https://aide.cap-collectif.com/article/51-creer-un-formulaire-de-depot#affichage"
+                  rel="noopener noreferrer"
+                  target="_blank">
+                  <Icon
+                    name={ICON_NAME.information}
+                    size={16}
+                    color={colors.blue}
+                    className="mr-5"
+                  />
+                  <FormattedMessage id="global.help" />
+                </a>
+              </LabelField>
+
+              <span className="help-block">
+                <FormattedMessage id="select.default.display.mode" />
+              </span>
+
+              <div>
+                {isListViewEnabled && (
+                  <Field
+                    id="listView"
+                    type="radio"
+                    name="mainView"
+                    value="list"
+                    component={renderComponent}
+                    label={
+                      <LabelView>
+                        <IconListView className="icon-illustration" />
+                        <FormattedMessage id="list.view" />
+                      </LabelView>
+                    }
+                  />
+                )}
+
+                {isGridViewEnabled && (
+                  <Field
+                    id="gridView"
+                    type="radio"
+                    name="mainView"
+                    value="grid"
+                    component={renderComponent}
+                    label={
+                      <LabelView>
+                        <IconGridView className="icon-illustration" />
+                        <FormattedMessage id="grid.view" />
+                      </LabelView>
+                    }
+                  />
+                )}
+
+                {isMapViewEnabled && (
+                  <Field
+                    id="mapView"
+                    type="radio"
+                    name="mainView"
+                    value="map"
+                    component={renderComponent}
+                    label={
+                      <LabelView>
+                        <IconMapView className="icon-illustration" />
+                        <FormattedMessage id="map.view" />
+                      </LabelView>
+                    }
+                  />
+                )}
+              </div>
+            </ViewsContainer>
           )}
 
           {renderSubSection('global.publication')}
@@ -360,60 +547,86 @@ export function ProjectAdminStepForm({
   );
 }
 
-const mapStateToProps = (state: GlobalState, { step }: Props) => ({
-  initialValues: {
-    // AbstractStep
-    url: step?.url ? step.url : null,
-    type: step?.type ? step.type : null,
-    label: step?.label ? step.label : null,
-    body: step?.body ? step.body : null,
-    title: step?.title ? step.title : null,
-    endAt: step?.endAt ? step.endAt : null,
-    startAt: step?.startAt ? step.startAt : null,
-    isEnabled: step?.isEnabled ? step.isEnabled : true,
-    timeless: step?.timeless ? step.timeless : false,
-    metaDescription: step?.metaDescription ? step.metaDescription : null,
-    customCode: step?.customCode ? step.customCode : null,
-    requirementsReason: step?.requirementsReason || null,
-    // QuestionnaireStep
-    questionnaire: step?.questionnaire || null,
-    footer: step?.footer ? step.footer : null,
-    // ConsultationStep
-    consultations: step?.consultations || [],
-    requirements: step ? createRequirements(step) : [],
-    // SelectionStep
-    statuses: step?.statuses?.length ? step.statuses : [],
-    defaultSort: step?.defaultSort?.toUpperCase() || 'RANDOM',
-    proposalsHidden: step?.proposalsHidden ? 1 : 0,
-    allowingProgressSteps: step?.allowingProgressSteps || false,
-    // CollectStep
-    defaultStatus: step?.defaultStatus || null,
-    proposalForm: step?.proposalForm || null,
-    // RankingStep
-    nbVersionsToDisplay: step?.nbVersionsToDisplay || null,
-    nbOpinionsToDisplay: step?.nbOpinionsToDisplay || null,
-    // Votable Trait
-    votable: step?.votable || false,
-    votesHelpText: step?.votesHelpText || null,
-    votesLimit: step?.votesLimit || null,
-    votesRanking: step?.votesRanking || false,
-    voteThreshold: step?.voteThreshold || null,
-    budget: step?.budget || null,
-    isBudgetEnabled: step?.isBudgetEnabled || false,
-    isLimitEnabled: step?.isLimitEnabled || false,
-    isTresholdEnabled: step?.isTresholdEnabled || false,
-    private: step?.private || false,
-  },
-  isBudgetEnabled: formValueSelector('stepForm')(state, 'isBudgetEnabled') || false,
-  isLimitEnabled: formValueSelector('stepForm')(state, 'isLimitEnabled') || false,
-  isTresholdEnabled: formValueSelector('stepForm')(state, 'isTresholdEnabled') || false,
-  votable: formValueSelector('stepForm')(state, 'votable') || false,
-  timeless: formValueSelector('stepForm')(state, 'timeless') || false,
-  requirements: formValueSelector('stepForm')(state, 'requirements') || [],
-  statuses: formValueSelector('stepForm')(state, 'statuses') || [],
-  // "private" is a reserved word in js (will be)
-  isPrivate: formValueSelector('stepForm')(state, 'private') || false,
-});
+const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Props) => {
+  const { isGridViewEnabled, isListViewEnabled, isMapViewEnabled, mainView } = getValueDisplayMode(
+    step,
+    project,
+    isCreating,
+    formValueSelector('stepForm')(state, 'proposalForm'),
+  );
+
+  return {
+    initialValues: {
+      // AbstractStep
+      url: step?.url ? step.url : null,
+      type: step?.type ? step.type : null,
+      label: step?.label ? step.label : null,
+      body: step?.body ? step.body : null,
+      title: step?.title ? step.title : null,
+      endAt: step?.endAt ? step.endAt : null,
+      startAt: step?.startAt ? step.startAt : null,
+      isEnabled: step?.isEnabled ? step.isEnabled : true,
+      timeless: step?.timeless ? step.timeless : false,
+      metaDescription: step?.metaDescription ? step.metaDescription : null,
+      customCode: step?.customCode ? step.customCode : null,
+      requirementsReason: step?.requirementsReason || null,
+      isGridViewEnabled,
+      isListViewEnabled,
+      isMapViewEnabled,
+      mainView,
+      // QuestionnaireStep
+      questionnaire: step?.questionnaire || null,
+      footer: step?.footer ? step.footer : null,
+      // ConsultationStep
+      consultations: step?.consultations || [],
+      requirements: step ? createRequirements(step) : [],
+      // SelectionStep
+      statuses: step?.statuses?.length ? step.statuses : [],
+      defaultSort: step?.defaultSort?.toUpperCase() || 'RANDOM',
+      proposalsHidden: step?.proposalsHidden ? 1 : 0,
+      allowingProgressSteps: step?.allowingProgressSteps || false,
+      // CollectStep
+      defaultStatus: step?.defaultStatus || null,
+      proposalForm: step?.proposalForm || null,
+      // RankingStep
+      nbVersionsToDisplay: step?.nbVersionsToDisplay || null,
+      nbOpinionsToDisplay: step?.nbOpinionsToDisplay || null,
+      // Votable Trait
+      votable: step?.votable || false,
+      votesHelpText: step?.votesHelpText || null,
+      votesLimit: step?.votesLimit || null,
+      votesRanking: step?.votesRanking || false,
+      voteThreshold: step?.voteThreshold || null,
+      budget: step?.budget || null,
+      isBudgetEnabled: step?.isBudgetEnabled || false,
+      isLimitEnabled: step?.isLimitEnabled || false,
+      isTresholdEnabled: step?.isTresholdEnabled || false,
+      private: step?.private || false,
+    },
+    isBudgetEnabled: formValueSelector('stepForm')(state, 'isBudgetEnabled') || false,
+    isLimitEnabled: formValueSelector('stepForm')(state, 'isLimitEnabled') || false,
+    isTresholdEnabled: formValueSelector('stepForm')(state, 'isTresholdEnabled') || false,
+    isGridViewEnabled:
+      step.type === 'CollectStep'
+        ? formValueSelector('stepForm')(state, 'proposalForm')?.isGridViewEnabled
+        : formValueSelector('stepForm')(state, 'isGridViewEnabled'),
+    isListViewEnabled:
+      step.type === 'CollectStep'
+        ? formValueSelector('stepForm')(state, 'proposalForm')?.isListViewEnabled
+        : formValueSelector('stepForm')(state, 'isListViewEnabled'),
+    isMapViewEnabled:
+      step.type === 'CollectStep'
+        ? formValueSelector('stepForm')(state, 'proposalForm')?.isMapViewEnabled
+        : formValueSelector('stepForm')(state, 'isMapViewEnabled'),
+    mainView: formValueSelector('stepForm')(state, 'mainView') || mainView,
+    votable: formValueSelector('stepForm')(state, 'votable') || false,
+    timeless: formValueSelector('stepForm')(state, 'timeless') || false,
+    requirements: formValueSelector('stepForm')(state, 'requirements') || [],
+    statuses: formValueSelector('stepForm')(state, 'statuses') || [],
+    // "private" is a reserved word in js (will be)
+    isPrivate: formValueSelector('stepForm')(state, 'private') || false,
+  };
+};
 
 const form = injectIntl(
   reduxForm({
@@ -423,4 +636,18 @@ const form = injectIntl(
   })(ProjectAdminStepForm),
 );
 
-export default connect(mapStateToProps)(form);
+const ProjectAdminStepFormConnected = connect(mapStateToProps)(form);
+
+export default createFragmentContainer(ProjectAdminStepFormConnected, {
+  project: graphql`
+    fragment ProjectAdminStepForm_project on Project {
+      firstCollectStep {
+        form {
+          isGridViewEnabled
+          isListViewEnabled
+          isMapViewEnabled
+        }
+      }
+    }
+  `,
+});

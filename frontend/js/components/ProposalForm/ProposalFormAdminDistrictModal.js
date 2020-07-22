@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
-import { DistrictAdminFields } from '../District/DistrictAdminFields';
+import { DistrictAdminFieldsConnected } from '../District/DistrictAdminFields';
 import { isValid } from '~/services/GeoJsonValidator';
 
 export type District = {|
@@ -72,14 +72,14 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props, Modal
             id="report-modal-title-lg"
             children={
               <FormattedMessage
-                id={!isCreating ? 'district_modal.create.title' : 'district_modal.update.title'}
+                id={!isCreating ? 'district_modal.create.title' : 'add.geographical.area'}
               />
             }
           />
         </Modal.Header>
         <Modal.Body>
           {/* $FlowFixMe Here we pass the redux form props instead of fragment */}
-          <DistrictAdminFields
+          <DistrictAdminFieldsConnected
             member={member}
             district={district}
             enableDesignFields

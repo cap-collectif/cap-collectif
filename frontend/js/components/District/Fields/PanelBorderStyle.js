@@ -1,81 +1,98 @@
 // @flow
 import * as React from 'react';
-import { Panel, Row, Col } from 'react-bootstrap';
-import { FormSection, Field } from 'redux-form';
+import { Panel } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { change, Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import component from '../../Form/Field';
-import colorPicker from '../../Form/ColorPicker';
 import toggle from '../../Form/Toggle';
 import withPanelStyle from './withPanelStyle';
+import { PanelBody, PanelHeader } from './PanelStyle.style';
+import { formName, selector } from '~/components/ProposalForm/ProposalFormAdminConfigurationForm';
+import type { State } from '~/types';
 
 type Props = {
   member: string,
   isPanelOpen: boolean,
-  opacities: Array<number>,
   handlePanelToggle: () => void,
+  dispatch: Dispatch,
+  opacity?: number,
 };
 
-const PanelBorderStyle = ({ member, isPanelOpen, opacities, handlePanelToggle }: Props) => (
+const PanelBorderStyle = ({ member, isPanelOpen, handlePanelToggle, dispatch, opacity }: Props) => (
   <Panel expanded={isPanelOpen} onToggle={() => {}}>
-    <Panel.Heading>
-      <Row>
-        <Col md={8} xs={6}>
-          <h4>
-            <FormattedMessage id="border" />
-          </h4>
-        </Col>
-        <Col md={4} xs={6} style={{ paddingLeft: '50px' }}>
-          <FormSection name={`${member}.border`}>
-            <Field
-              component={toggle}
-              type="checkbox"
-              labelSide="RIGHT"
-              id="enabled"
-              name="enabled"
-              onChange={handlePanelToggle}
-              normalize={val => !!val}
-              format={val => !!val}
-            />
-          </FormSection>
-        </Col>
-      </Row>
-    </Panel.Heading>
+    <PanelHeader>
+      <Field
+        component={toggle}
+        id="border-enabled"
+        name={`${member}.border.enabled`}
+        onChange={handlePanelToggle}
+        label={<FormattedMessage id="border" />}
+        normalize={val => !!val}
+        format={val => !!val}
+      />
+    </PanelHeader>
+
     <Panel.Collapse>
-      <Panel.Body>
-        <FormSection name={`${member}.border`}>
-          <Field
-            component={component}
-            type="number"
-            id="size"
-            name="size"
-            normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
-            label={<FormattedMessage id="thickness" />}
-          />
-          <Field
-            component={component}
-            type="select"
-            id="opacity"
-            name="opacity"
-            format={value => String(value * 100)}
-            normalize={value => parseFloat(value / 100)}
-            label={<FormattedMessage id="opacity" />}>
-            {opacities.map(opacityValue => (
-              <option key={opacityValue} value={opacityValue}>
-                {opacityValue}
-              </option>
-            ))}
-          </Field>
-          <Field
-            component={colorPicker}
-            type="text"
-            id="color"
-            name="color"
-            label={<FormattedMessage id="color" />}
-          />
-        </FormSection>
-      </Panel.Body>
+      <PanelBody>
+        <Field
+          component={component}
+          type="color-picker"
+          id="color"
+          opacity={opacity}
+          getOpacity={colorOpacity =>
+            dispatch(change(formName, `${member}.border.opacity`, colorOpacity))
+          }
+          placeholder="#000000"
+          name={`${member}.border.color`}
+          label={
+            <div>
+              <FormattedMessage id="global.color" />
+              <div className="excerpt inline">
+                <FormattedMessage id="unit.hex" />
+              </div>
+            </div>
+          }
+        />
+        <Field
+          component={component}
+          type="number"
+          min={1}
+          max={100}
+          id="opacity"
+          name={`${member}.border.opacity`}
+          normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : 0)}
+          label={
+            <div>
+              <FormattedMessage id="opacity" />
+              <div className="excerpt inline">
+                <FormattedMessage id="unit.percentage" />
+              </div>
+            </div>
+          }
+        />
+        <Field
+          component={component}
+          type="number"
+          id="size"
+          name={`${member}.border.size`}
+          normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
+          label={
+            <span>
+              <FormattedMessage id="thickness" />
+              <span className="excerpt inline">
+                <FormattedMessage id="unit.pixel" />
+              </span>
+            </span>
+          }
+        />
+      </PanelBody>
     </Panel.Collapse>
   </Panel>
 );
 
-export default withPanelStyle(PanelBorderStyle);
+const mapStateToProps = (state: State, props: Props) => ({
+  opacity: selector(state, `${props.member}.border.opacity`),
+});
+
+export default withPanelStyle(connect(mapStateToProps)(PanelBorderStyle));

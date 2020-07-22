@@ -149,6 +149,7 @@ export function StepRequirementsList({
                           <i className="cap cap-android-menu" />
                           {isToggle ? (
                             <Field
+                              id={`requirement-${index}`}
                               name={field}
                               component={toggle}
                               props={{

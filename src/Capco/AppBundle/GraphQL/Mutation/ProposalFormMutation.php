@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType;
-use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,36 +49,6 @@ class ProposalFormMutation
         }
 
         $this->em->persist($proposalForm);
-        $this->em->flush();
-
-        return ['proposalForm' => $proposalForm];
-    }
-
-    public function update(Argument $input): array
-    {
-        $arguments = $input->getArrayCopy();
-        $id = $arguments['proposalFormId'];
-        $proposalForm = $this->proposalFormRepository->find($id);
-
-        if (!$proposalForm) {
-            throw new UserError(
-                sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId'])
-            );
-        }
-
-        unset($arguments['proposalFormId']);
-
-        $form = $this->formFactory->create(ProposalFormUpdateType::class, $proposalForm);
-        $form->submit($arguments, false);
-
-        if (!$form->isValid()) {
-            $this->logger->error(
-                \get_class($this) . ' update: ' . (string) $form->getErrors(true, false)
-            );
-
-            throw new UserError('Can\'t update this proposal form!');
-        }
-
         $this->em->flush();
 
         return ['proposalForm' => $proposalForm];

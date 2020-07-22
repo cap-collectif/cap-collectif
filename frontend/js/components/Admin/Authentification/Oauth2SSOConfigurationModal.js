@@ -12,7 +12,6 @@ import { isUrl } from '../../../services/Validator';
 import type { GlobalState, Uri, Uuid } from '../../../types';
 import AddOauth2SSOConfigurationMutation from '../../../mutations/AddOauth2SSOConfigurationMutation';
 import UpdateOauth2SSOConfigurationMutation from '../../../mutations/UpdateOauth2SSOConfigurationMutation';
-import ColorPickerInput from '../../Form/ColorPickerInput';
 
 type FormValues = {|
   id?: ?Uuid,
@@ -223,17 +222,17 @@ export class Oauth2SSOConfigurationModal extends React.Component<Props> {
             <Field
               id={`${formName}_buttonColor`}
               name="buttonColor"
-              type="text"
+              type="color-picker"
               required
-              component={ColorPickerInput}
+              component={component}
               label={<FormattedMessage id="color.btn.bg" />}
             />
             <Field
               id={`${formName}_labelColor`}
-              name="labelColor"
+              name="color-picker"
               type="text"
               required
-              component={ColorPickerInput}
+              component={component}
               label={<FormattedMessage id="label-color" />}
             />
             <h4>Configuration</h4>

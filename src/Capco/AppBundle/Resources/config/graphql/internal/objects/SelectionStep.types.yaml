@@ -33,5 +33,8 @@ SelectionStep:
                 description: 'A list of contributor associated with the consultation.'
                 argsBuilder: 'Relay::Connection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+            mainView:
+                type: 'String!'
+                description: 'The main view : grid, list or map'
             defaultStatus:
                 type: Status

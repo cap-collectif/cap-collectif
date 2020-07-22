@@ -23,9 +23,15 @@ exports[`<ProjectAdminStepFormModal /> renders correctly 1`] = `
       />
     </ProjectAdminFormstyle__StepModalTitle>
   </ModalHeader>
-  <Connect(injectIntl(ReduxForm))
+  <Relay(Connect(injectIntl(ReduxForm)))
     formName="ProjectAdminStepForm"
     handleClose={[MockFunction]}
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     step={
       Object {
         "type": "OtherStep",
@@ -58,9 +64,15 @@ exports[`<ProjectAdminStepFormModal /> renders correctly hided 1`] = `
       />
     </ProjectAdminFormstyle__StepModalTitle>
   </ModalHeader>
-  <Connect(injectIntl(ReduxForm))
+  <Relay(Connect(injectIntl(ReduxForm)))
     formName="ProjectAdminStepForm"
     handleClose={[MockFunction]}
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     step={
       Object {
         "type": "OtherStep",
@@ -93,9 +105,15 @@ exports[`<ProjectAdminStepFormModal /> renders correctly with step 1`] = `
       />
     </ProjectAdminFormstyle__StepModalTitle>
   </ModalHeader>
-  <Connect(injectIntl(ReduxForm))
+  <Relay(Connect(injectIntl(ReduxForm)))
     formName="ProjectAdminStepForm"
     handleClose={[MockFunction]}
+    project={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+      }
+    }
     step={
       Object {
         "title": "test",

@@ -1,81 +1,90 @@
 UpdateProposalFormInput:
-  type: relay-mutation-input
-  config:
-    description: ''
-    fields:
-      proposalFormId:
-        type: 'ID!'
-      title:
-        type: 'String'
-      description:
-        type: 'String'
-      summaryHelpText:
-        type: 'String'
-      illustrationHelpText:
-        type: 'String'
-      usingThemes:
-        type: 'Boolean'
-      themeMandatory:
-        type: 'Boolean'
-      themeHelpText:
-        type: 'String'
-      usingDistrict:
-        type: 'Boolean'
-      districtMandatory:
-        type: 'Boolean'
-      commentable:
-        type: 'Boolean'
-      costable:
-        type: 'Boolean'
-      districtHelpText:
-        type: 'String'
-      usingCategories:
-        type: 'Boolean'
-      categoryMandatory:
-        type: 'Boolean'
-      categoryHelpText:
-        type: 'String'
-      usingAddress:
-        type: 'Boolean'
-      proposalInAZoneRequired:
-        type: 'Boolean'
-      titleHelpText:
-        type: 'String'
-      descriptionHelpText:
-        type: 'String'
-      addressHelpText:
-        type: 'String'
-      latMap:
-        type: 'Float'
-      lngMap:
-        type: 'Float'
-      zoomMap:
-        type: 'Int'
-      categories:
-        type: '[ProposalCategoryInput!]'
-      districts:
-        type: '[DistrictInput!]'
-      questions:
-        type: '[QuestionnaireAbstractQuestionInput!]'
-      allowAknowledge:
-        type: 'Boolean'
-      isProposalForm:
-        type: 'Boolean'
-        description: 'Proposal form is type of Proposal or Question'
-      usingDescription:
-        type: 'Boolean'
-        description: 'Proposal form using description field'
-      usingIllustration:
-        type: 'Boolean'
-        description: 'Proposal form using illustration field'
-      usingSummary:
-        type: 'Boolean'
-        description: 'Proposal form using summary field'
-      suggestingSimilarProposals:
-        type: 'Boolean'
-      descriptionMandatory:
-        type: 'Boolean'
-        description: 'Proposal form is description field is mandatory or not'
-      canContact:
-        type: 'Boolean'
-        description: 'can the viewer send a contact message to the proposals author'
+    type: relay-mutation-input
+    config:
+        description: ''
+        fields:
+            proposalFormId:
+                type: 'ID!'
+            title:
+                type: 'String'
+            description:
+                type: 'String'
+            summaryHelpText:
+                type: 'String'
+            illustrationHelpText:
+                type: 'String'
+            usingThemes:
+                type: 'Boolean'
+            themeMandatory:
+                type: 'Boolean'
+            themeHelpText:
+                type: 'String'
+            usingDistrict:
+                type: 'Boolean'
+            districtMandatory:
+                type: 'Boolean'
+            commentable:
+                type: 'Boolean'
+            costable:
+                type: 'Boolean'
+            districtHelpText:
+                type: 'String'
+            usingCategories:
+                type: 'Boolean'
+            categoryMandatory:
+                type: 'Boolean'
+            categoryHelpText:
+                type: 'String'
+            usingAddress:
+                type: 'Boolean'
+            proposalInAZoneRequired:
+                type: 'Boolean'
+            titleHelpText:
+                type: 'String'
+            descriptionHelpText:
+                type: 'String'
+            addressHelpText:
+                type: 'String'
+            latMap:
+                type: 'Float'
+            lngMap:
+                type: 'Float'
+            zoomMap:
+                type: 'Int'
+            categories:
+                type: '[ProposalCategoryInput!]'
+            districts:
+                type: '[DistrictInput!]'
+            questions:
+                type: '[QuestionnaireAbstractQuestionInput!]'
+            allowAknowledge:
+                type: 'Boolean'
+            isProposalForm:
+                type: 'Boolean'
+                description: 'Proposal form is type of Proposal or Question'
+            usingDescription:
+                type: 'Boolean'
+                description: 'Proposal form using description field'
+            usingIllustration:
+                type: 'Boolean'
+                description: 'Proposal form using illustration field'
+            usingSummary:
+                type: 'Boolean'
+                description: 'Proposal form using summary field'
+            suggestingSimilarProposals:
+                type: 'Boolean'
+            descriptionMandatory:
+                type: 'Boolean'
+                description: 'Proposal form is description field is mandatory or not'
+            canContact:
+                type: 'Boolean'
+                description: 'can the viewer send a contact message to the proposals author'
+            isGridViewEnabled:
+                type: 'Boolean'
+                description: 'can the viewer see the proposals as a grid'
+            isListViewEnabled:
+                type: 'Boolean'
+                description: 'can the viewer see the proposals as a list'
+            isMapViewEnabled:
+                type: 'Boolean'
+                description: 'can the viewer see the proposals as a map'

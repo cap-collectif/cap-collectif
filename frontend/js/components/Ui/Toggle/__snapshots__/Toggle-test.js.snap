@@ -1,12 +1,194 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Toggle /> renders correctly 1`] = `
-<Toggle
-  input={
-    Object {
-      "onChange": [Function],
-      "value": true,
-    }
-  }
-/>
+exports[`<Toggle /> should render correctly 1`] = `
+<Togglestyle__ToggleContainer
+  className="mr-10"
+>
+  <Togglestyle__LabelContainer
+    htmlFor="toggle-it"
+    labelSide="RIGHT"
+  >
+    <Togglestyle__TogglerWrapper
+      checked={false}
+      disabled={false}
+    >
+      <span
+        className="circle-toggler"
+      />
+    </Togglestyle__TogglerWrapper>
+    <span
+      className="label-toggler"
+    >
+      Click to toggle
+    </span>
+  </Togglestyle__LabelContainer>
+  <input
+    checked={false}
+    disabled={false}
+    id="toggle-it"
+    name="option"
+    onBlur={[MockFunction]}
+    onChange={[Function]}
+    type="checkbox"
+    value="value of checkbox"
+  />
+</Togglestyle__ToggleContainer>
+`;
+
+exports[`<Toggle /> should render correctly when disabled 1`] = `
+<Togglestyle__ToggleContainer
+  className="mr-10"
+>
+  <Togglestyle__LabelContainer
+    htmlFor="toggle-it"
+    labelSide="RIGHT"
+  >
+    <Togglestyle__TogglerWrapper
+      checked={false}
+      disabled={true}
+    >
+      <span
+        className="circle-toggler"
+      />
+    </Togglestyle__TogglerWrapper>
+    <span
+      className="label-toggler"
+    >
+      Click to toggle
+    </span>
+  </Togglestyle__LabelContainer>
+  <input
+    checked={false}
+    disabled={true}
+    id="toggle-it"
+    name="option"
+    onBlur={[MockFunction]}
+    onChange={[Function]}
+    type="checkbox"
+    value="value of checkbox"
+  />
+</Togglestyle__ToggleContainer>
+`;
+
+exports[`<Toggle /> should render correctly when not label 1`] = `
+<Togglestyle__ToggleContainer
+  className="mr-10"
+>
+  <Togglestyle__LabelContainer
+    htmlFor="toggle-it"
+    labelSide="RIGHT"
+  >
+    <Togglestyle__TogglerWrapper
+      checked={false}
+      disabled={false}
+    >
+      <span
+        className="circle-toggler"
+      />
+    </Togglestyle__TogglerWrapper>
+  </Togglestyle__LabelContainer>
+  <input
+    checked={false}
+    disabled={false}
+    id="toggle-it"
+    name="option"
+    onBlur={[MockFunction]}
+    onChange={[Function]}
+    type="checkbox"
+    value="value of checkbox"
+  />
+</Togglestyle__ToggleContainer>
+`;
+
+exports[`<Toggle /> should render correctly with tooltip 1`] = `
+<Togglestyle__ToggleContainer
+  className="mr-10"
+>
+  <Togglestyle__LabelContainer
+    htmlFor="toggle-it"
+    labelSide="RIGHT"
+  >
+    <Togglestyle__TogglerWrapper
+      checked={false}
+      disabled={false}
+    >
+      <span
+        className="circle-toggler"
+      />
+      <Overlay
+        animation={[Function]}
+        placement="top"
+        rootClose={false}
+        show={false}
+        target={null}
+      >
+        <Togglestyle__PopoverContainer
+          id="tooltip-toggle"
+          width="12px"
+        >
+          <Togglestyle__TooltipContent>
+            <p>
+              CONTENT
+            </p>
+            <Togglestyle__CloseButton
+              onClick={[Function]}
+              type="button"
+            >
+              <Icon
+                color="#707070"
+                name="close"
+                size={12}
+              />
+            </Togglestyle__CloseButton>
+          </Togglestyle__TooltipContent>
+          <Togglestyle__TooltipFooter>
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="default"
+              className="btn-cancel"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="global.cancel"
+                values={Object {}}
+              />
+            </Button>
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="default"
+              className="btn-confirm"
+              disabled={false}
+              onClick={[Function]}
+            >
+              <FormattedMessage
+                id="action_disable"
+                values={Object {}}
+              />
+            </Button>
+          </Togglestyle__TooltipFooter>
+        </Togglestyle__PopoverContainer>
+      </Overlay>
+    </Togglestyle__TogglerWrapper>
+    <span
+      className="label-toggler"
+    >
+      Click to toggle
+    </span>
+  </Togglestyle__LabelContainer>
+  <input
+    checked={false}
+    disabled={false}
+    id="toggle-it"
+    name="option"
+    onBlur={[MockFunction]}
+    onChange={[Function]}
+    type="checkbox"
+    value="value of checkbox"
+  />
+</Togglestyle__ToggleContainer>
 `;

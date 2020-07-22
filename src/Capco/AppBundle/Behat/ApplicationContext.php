@@ -29,7 +29,6 @@ use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
-use Capco\AppBundle\Behat\Traits\CookiesTrait;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Capco\AppBundle\Elasticsearch\IndexBuilder;
 use Capco\AppBundle\Behat\Traits\AdminEventTrait;
@@ -74,7 +73,6 @@ class ApplicationContext extends UserContext
     use UserProfileTrait;
     use AdminTrait;
     use ExportDatasUserTrait;
-    use CookiesTrait;
     use AdminEventTrait;
     use AdminGeneralTait;
     use AdminDashboardTait;

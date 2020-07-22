@@ -5,9 +5,10 @@ because it does not actually support jsconfig.json
 */
 /* eslint-disable */
 System.config({
-  "paths": {
-    "~relay/*": "./frontend/js/__generated__/~relay/*",
-    "~ui/*": "./frontend/js/components/Ui/*",
-    "~/*": "./frontend/js/*",
-  }
+  paths: {
+    '~relay/*': './frontend/js/__generated__/~relay/*',
+    '~ui/*': './frontend/js/components/Ui/*',
+    '~svg/*': './public/svg/*',
+    '~/*': './frontend/js/*',
+  },
 });

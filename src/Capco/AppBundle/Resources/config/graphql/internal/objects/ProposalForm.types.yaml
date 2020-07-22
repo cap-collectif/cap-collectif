@@ -125,3 +125,12 @@ ProposalForm:
             analysisConfiguration:
                 type: 'InternalAnalysisConfiguration'
                 description: 'The configuration for the related analysis.'
+            isGridViewEnabled:
+                type: 'Boolean!'
+                description: 'True if the grid view is enabled.'
+            isListViewEnabled:
+                type: 'Boolean!'
+                description: 'True if the grid view is enabled.'
+            isMapViewEnabled:
+                type: 'Boolean!'
+                description: 'True if the grid view is enabled.'

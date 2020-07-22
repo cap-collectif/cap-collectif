@@ -909,7 +909,7 @@ trait ProposalStepsTrait
      * @When I click the proposal vote button
      * @When I click the proposal :id vote button
      */
-    public function iClickTheProposalVoteButton(string $id = null)
+    public function iClickTheProposalVoteButton(?string $id = null)
     {
         $this->clickProposalVoteButtonWithLabel('global.vote.for', $id);
     }
@@ -1050,20 +1050,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I check the proposal vote private checkbox
-     */
-    public function iCheckTheProposalVotePrivateCheckbox()
-    {
-        $this->getSession()
-            ->getPage()
-            ->find(
-                'css',
-                '#UHJvcG9zYWw6cHJvcG9zYWwy-proposal-vote__private .form-group .elegant-toggle'
-            )
-            ->click();
-    }
-
-    /**
      * @When I submit the proposal vote form
      */
     public function iSubmitTheProposalVoteForm()
@@ -1097,7 +1083,7 @@ trait ProposalStepsTrait
      * @Then the proposal vote button must be disabled
      * @Then the proposal :id vote button must be disabled
      */
-    public function theProposalVoteButtonMustBeDisabled(string $id = null): void
+    public function theProposalVoteButtonMustBeDisabled(?string $id = null): void
     {
         if ($id) {
             $id = $id ? GlobalId::toGlobalId('Proposal', $id) : $this->getProposalId();
@@ -1119,7 +1105,7 @@ trait ProposalStepsTrait
      * @Then the proposal vote button with id :id must not be present
      * @Then the proposal vote button must not be present
      */
-    public function theProposalVoteButtonWithIdMustNotBePresent(string $id = null)
+    public function theProposalVoteButtonWithIdMustNotBePresent(?string $id = null)
     {
         $exceptionMessage = $id
             ? '"proposal vote button ' . $id . '" element is not present on the page'
@@ -1595,7 +1581,7 @@ trait ProposalStepsTrait
         throw new \Exception('Unknown proposalId');
     }
 
-    protected function clickProposalVoteButtonWithLabel(string $label, string $id = null)
+    protected function clickProposalVoteButtonWithLabel(string $label, ?string $id = null)
     {
         $page = $this->getCurrentPage();
         $proposalId = $id ?: $this->getProposalId();

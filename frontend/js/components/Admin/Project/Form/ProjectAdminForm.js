@@ -69,6 +69,26 @@ const opinionTerms = [
 
 const formatAuthors = (authors: Author[]): string[] => authors.map(author => author.value);
 
+const getViewEnabled = (stepType: string, proposalForm, firstCollectStepForm) => {
+  if (stepType === 'CollectStep') {
+    return {
+      isGridViewEnabled: proposalForm?.isGridViewEnabled,
+      isListViewEnabled: proposalForm?.isListViewEnabled,
+      isMapViewEnabled: proposalForm?.isMapViewEnabled,
+    };
+  }
+
+  if (stepType === 'SelectionStep') {
+    return {
+      isGridViewEnabled: firstCollectStepForm?.isGridViewEnabled,
+      isListViewEnabled: firstCollectStepForm?.isListViewEnabled,
+      isMapViewEnabled: firstCollectStepForm?.isMapViewEnabled,
+    };
+  }
+
+  return {};
+};
+
 // Initially I planned to do typename.slice(0, -4).toUpperCase() but Flow being Flow, I can't ¯\_(ツ)_/¯
 const convertTypenameToConcreteStepType = (typename: string): ConcreteStepType => {
   switch (typename) {
@@ -137,7 +157,6 @@ const onSubmit = (
     projectType,
     Cover: Cover ? Cover.id : null,
     video,
-
     themes: themes ? themes.map(theme => theme.value) : [],
     districts: districts ? districts.map(district => district.value) : [],
     metaDescription,
@@ -154,6 +173,9 @@ const onSubmit = (
     steps: steps // I cannot type step properly given the unability to create union Input type
       ? steps.map(({ url, ...s }: any) => ({
           ...s,
+          isGridViewEnabled: undefined,
+          isListViewEnabled: undefined,
+          isMapViewEnabled: undefined,
           timeless:
             s.type === 'SelectionStep' ||
             s.type === 'CollectStep' ||
@@ -169,6 +191,7 @@ const onSubmit = (
           consultations: s.consultations?.length ? s.consultations.map(c => c.value) : undefined,
           footer: s.type === 'QuestionnaireStep' ? s.footer : undefined,
           type: convertTypenameToConcreteStepType(s.type),
+          mainView: s.type === 'CollectStep' || s.type === 'SelectionStep' ? s.mainView : undefined,
           requirements: s.requirements?.length ? s.requirements : [],
           requirementsReason:
             s.type === 'ConsultationStep' || s.type === 'CollectStep'
@@ -348,7 +371,7 @@ export function ProjectAdminForm(props: Props) {
         formName={formName}
         {...rest}
       />
-      <ProjectStepAdmin handleSubmit={handleSubmit} form={formName} {...rest} />
+      <ProjectStepAdmin handleSubmit={handleSubmit} form={formName} project={project} {...rest} />
       <ProjectAccessAdminForm {...props} formName={formName} initialGroups={initialGroups} />
       <ProjectProposalsAdminForm project={project} handleSubmit={handleSubmit} {...rest} />
       <ProjectPublishAdminForm
@@ -362,72 +385,75 @@ export function ProjectAdminForm(props: Props) {
   );
 }
 
-const mapStateToProps = (state: GlobalState, { project }: Props) => ({
-  features: state.default.features,
-  initialValues: {
-    opinionTerm: project ? project.opinionTerm : opinionTerms[0].id,
-    authors: project ? project.authors : [],
-    title: project ? project.title : null,
-    projectType: project && project.type ? project.type.id : null,
-    steps: project?.steps
-      ? project.steps.map(step => ({
-          ...step,
-          endAt: step?.endAt?.endAt ? step.endAt.endAt : null,
-          startAt: step?.startAt?.startAt ? step.startAt.startAt : null,
-          requirements: step.requirements?.edges?.map(edge => ({
-            ...edge?.node,
-            type:
-              edge?.node?.type === 'DateOfBirthRequirement'
-                ? 'DATE_OF_BIRTH'
-                : edge?.node?.type.slice(0, -11).toUpperCase(),
-          })),
-          requirementsReason: step.requirements?.reason || null,
-          consultations: step.consultations?.edges?.map(edge => edge?.node) || [],
-          isBudgetEnabled: !!step.budget,
-          isLimitEnabled: !!step.votesLimit,
-          isTresholdEnabled: !!step.voteThreshold,
-          defaultSort: step.defaultSort?.toUpperCase() || 'RANDOM',
-        }))
-      : [],
-    visibility: project ? project.visibility : 'ADMIN',
-    publishedAt: project ? project.publishedAt : null,
-    themes: project ? project.themes && project.themes.map(theme => theme) : [],
-    video: project ? project.video : null,
-    Cover: project ? project.Cover : null,
-    opinionCanBeFollowed: project ? project.opinionCanBeFollowed : null,
-    isExternal: project ? project.isExternal : false,
-    externalLink: project ? project.externalLink : null,
-    externalContributionsCount: project ? project.externalContributionsCount : null,
-    externalParticipantsCount: project ? project.externalParticipantsCount : null,
-    externalVotesCount: project ? project.externalVotesCount : null,
-    metaDescription: project ? project.metaDescription : null,
-    districts:
-      project?.districts?.edges
-        ?.filter(Boolean)
-        .map(edge => edge.node)
-        .filter(Boolean)
-        .map(d => {
-          return { value: d.value, label: d.label };
-        }) || [],
-    restrictedViewerGroups:
-      project?.restrictedViewers?.edges
-        ?.filter(Boolean)
-        .map(edge => edge.node)
-        .filter(Boolean)
-        .map(d => {
-          return { value: d.value, label: d.label };
-        }) || [],
-    locale:
-      project && project.locale
-        ? {
-            value: project.locale.value,
-            label: <FormattedMessage id={project.locale.label} />,
-          }
-        : null,
-  },
-  title: formValueSelector(formName)(state, 'title'),
-  initialGroups: formValueSelector(formName)(state, 'restrictedViewersGroups') || [],
-});
+const mapStateToProps = (state: GlobalState, { project }: Props) => {
+  return {
+    features: state.default.features,
+    initialValues: {
+      opinionTerm: project ? project.opinionTerm : opinionTerms[0].id,
+      authors: project ? project.authors : [],
+      title: project ? project.title : null,
+      projectType: project && project.type ? project.type.id : null,
+      steps: project?.steps
+        ? project.steps.map(step => ({
+            ...step,
+            endAt: step?.endAt?.endAt ? step.endAt.endAt : null,
+            startAt: step?.startAt?.startAt ? step.startAt.startAt : null,
+            requirements: step.requirements?.edges?.map(edge => ({
+              ...edge?.node,
+              type:
+                edge?.node?.type === 'DateOfBirthRequirement'
+                  ? 'DATE_OF_BIRTH'
+                  : edge?.node?.type.slice(0, -11).toUpperCase(),
+            })),
+            requirementsReason: step.requirements?.reason || null,
+            consultations: step.consultations?.edges?.map(edge => edge?.node) || [],
+            isBudgetEnabled: !!step.budget,
+            isLimitEnabled: !!step.votesLimit,
+            isTresholdEnabled: !!step.voteThreshold,
+            defaultSort: step.defaultSort?.toUpperCase() || 'RANDOM',
+            ...getViewEnabled(step.type, step.proposalForm, project?.firstCollectStep?.form),
+          }))
+        : [],
+      visibility: project ? project.visibility : 'ADMIN',
+      publishedAt: project ? project.publishedAt : null,
+      themes: project ? project.themes && project.themes.map(theme => theme) : [],
+      video: project ? project.video : null,
+      Cover: project ? project.Cover : null,
+      opinionCanBeFollowed: project ? project.opinionCanBeFollowed : null,
+      isExternal: project ? project.isExternal : false,
+      externalLink: project ? project.externalLink : null,
+      externalContributionsCount: project ? project.externalContributionsCount : null,
+      externalParticipantsCount: project ? project.externalParticipantsCount : null,
+      externalVotesCount: project ? project.externalVotesCount : null,
+      metaDescription: project ? project.metaDescription : null,
+      districts:
+        project?.districts?.edges
+          ?.filter(Boolean)
+          .map(edge => edge.node)
+          .filter(Boolean)
+          .map(d => {
+            return { value: d.value, label: d.label };
+          }) || [],
+      restrictedViewerGroups:
+        project?.restrictedViewers?.edges
+          ?.filter(Boolean)
+          .map(edge => edge.node)
+          .filter(Boolean)
+          .map(d => {
+            return { value: d.value, label: d.label };
+          }) || [],
+      locale:
+        project && project.locale
+          ? {
+              value: project.locale.value,
+              label: <FormattedMessage id={project.locale.label} />,
+            }
+          : null,
+    },
+    title: formValueSelector(formName)(state, 'title'),
+    initialGroups: formValueSelector(formName)(state, 'restrictedViewersGroups') || [],
+  };
+};
 
 const form = injectIntl(
   reduxForm({
@@ -480,6 +506,13 @@ export default createFragmentContainer(container, {
           }
         }
       }
+      firstCollectStep {
+        form {
+          isGridViewEnabled
+          isListViewEnabled
+          isMapViewEnabled
+        }
+      }
       steps {
         id
         body
@@ -503,9 +536,13 @@ export default createFragmentContainer(container, {
         }
         ... on CollectStep {
           defaultSort
+          mainView
           proposalForm: form {
             value: id
             label: title
+            isGridViewEnabled
+            isListViewEnabled
+            isMapViewEnabled
           }
           private
           defaultStatus {
@@ -553,6 +590,7 @@ export default createFragmentContainer(container, {
           proposalsHidden
           allowingProgressSteps
           budget
+          mainView
           requirements {
             reason
             edges {
@@ -638,6 +676,7 @@ export default createFragmentContainer(container, {
         label: traductionKey
       }
       url
+      ...ProjectStepAdmin_project
       ...ProjectContentAdminForm_project
       ...ProjectExternalAdminPage_project
       ...ProjectAccessAdminForm_project

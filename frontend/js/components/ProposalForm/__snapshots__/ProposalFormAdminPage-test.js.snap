@@ -165,6 +165,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
+                                  "name": "__typename",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
                                   "name": "title",
                                   "storageKey": null,
                                 },
@@ -212,11 +219,83 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                                   "storageKey": null,
                                 },
                                 Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "__typename",
-                                  "storageKey": null,
+                                  "kind": "InlineFragment",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "mainView",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "ProposalForm",
+                                      "kind": "LinkedField",
+                                      "name": "form",
+                                      "plural": false,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "isGridViewEnabled",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "isListViewEnabled",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "isMapViewEnabled",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "type": "CollectStep",
+                                },
+                                Object {
+                                  "kind": "InlineFragment",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "mainView",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "type": "SelectionStep",
                                 },
                               ],
                               "storageKey": null,
@@ -226,6 +305,63 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "CollectStep",
+                              "kind": "LinkedField",
+                              "name": "firstCollectStep",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "ProposalForm",
+                                  "kind": "LinkedField",
+                                  "name": "form",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isGridViewEnabled",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isListViewEnabled",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isMapViewEnabled",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                              ],
                               "storageKey": null,
                             },
                           ],
@@ -330,6 +466,27 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                       "args": null,
                       "kind": "ScalarField",
                       "name": "zoomMap",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isGridViewEnabled",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isMapViewEnabled",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isListViewEnabled",
                       "storageKey": null,
                     },
                     Object {
@@ -1588,6 +1745,29 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
   ...ProposalFormAdminPageTabs_query
 }
 
+fragment PopoverToggleView_proposalForm on ProposalForm {
+  step {
+    project {
+      steps {
+        __typename
+        id
+        ... on CollectStep {
+          title
+          url
+          mainView
+        }
+        ... on SelectionStep {
+          title
+          url
+          mainView
+        }
+      }
+      id
+    }
+    id
+  }
+}
+
 fragment ProposalFormAdminAnalysisConfigurationForm_proposalForm on ProposalForm {
   id
   analysisConfiguration {
@@ -1682,6 +1862,9 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
   latMap
   lngMap
   zoomMap
+  isGridViewEnabled
+  isMapViewEnabled
+  isListViewEnabled
   proposalInAZoneRequired
   illustrationHelpText
   addressHelpText
@@ -1805,6 +1988,7 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
       }
     }
   }
+  ...SectionDisplayMode_proposalForm
 }
 
 fragment ProposalFormAdminConfigurationForm_query on Query {
@@ -1861,6 +2045,41 @@ fragment ProposalFormAdminSettingsForm_proposalForm on ProposalForm {
   commentable
   costable
   suggestingSimilarProposals
+}
+
+fragment SectionDisplayMode_proposalForm on ProposalForm {
+  ...PopoverToggleView_proposalForm
+  step {
+    project {
+      firstCollectStep {
+        form {
+          isGridViewEnabled
+          isListViewEnabled
+          isMapViewEnabled
+          id
+        }
+        id
+      }
+      steps {
+        __typename
+        ... on CollectStep {
+          mainView
+          form {
+            isGridViewEnabled
+            isListViewEnabled
+            isMapViewEnabled
+            id
+          }
+        }
+        ... on SelectionStep {
+          mainView
+        }
+        id
+      }
+      id
+    }
+    id
+  }
 }
 ",
         },

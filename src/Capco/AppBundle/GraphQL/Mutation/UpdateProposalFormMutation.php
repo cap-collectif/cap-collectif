@@ -6,6 +6,8 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\CategoryImage;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Enum\ViewConfiguration;
+use Capco\AppBundle\Exception\ViewConfigurationException;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
@@ -77,7 +79,6 @@ class UpdateProposalFormMutation implements MutationInterface
             throw new UserError(sprintf('Unknown proposal form with id "%s"', $id));
         }
         unset($arguments['proposalFormId']);
-
         $form = $this->formFactory->create(ProposalFormUpdateType::class, $proposalForm);
 
         if (isset($arguments['districts'])) {
@@ -130,16 +131,35 @@ class UpdateProposalFormMutation implements MutationInterface
             }
         }
 
+        $hasViewConfigurationChanged =
+            (array_key_exists('isGridViewEnabled', $arguments) &&
+                $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||
+            (array_key_exists('isListViewEnabled', $arguments) &&
+                $arguments['isListViewEnabled'] !== $proposalForm->isListViewEnabled()) ||
+            (array_key_exists('isMapViewEnabled', $arguments) &&
+                $arguments['isMapViewEnabled'] !== $proposalForm->isMapViewEnabled());
+
         if (isset($arguments['questions'])) {
             $oldChoices = $this->getQuestionChoicesValues($proposalForm->getId());
             $this->handleQuestions($form, $proposalForm, $arguments, 'proposal');
         } else {
             $form->submit($arguments, false);
         }
+
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->logger->error(__METHOD__ . $form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
+        }
+
+        try {
+            ViewConfiguration::checkProposalForm($proposalForm);
+        } catch (ViewConfigurationException $exception) {
+            throw new UserError($exception->getMessage());
+        }
+
+        if ($hasViewConfigurationChanged) {
+            ViewConfiguration::updateStepsFromProposal($proposalForm);
         }
 
         // Associate the new categoryImage from uploaded image to proposalCategory

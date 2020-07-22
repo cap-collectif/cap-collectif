@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Enum\ViewConfiguration;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Project;
@@ -55,7 +56,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     public static $stepStates = [
         'closed' => self::STATE_CLOSED,
         'open' => self::STATE_OPENED,
-        'future' => self::STATE_FUTURE
+        'future' => self::STATE_FUTURE,
     ];
 
     /**
@@ -69,7 +70,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         'ranking' => 'step.types.ranking',
         'selection' => 'step.types.selection',
         'questionnaire' => 'step.types.questionnaire',
-        'realisation' => 'step.types.realisation'
+        'realisation' => 'step.types.realisation',
     ];
 
     /**
@@ -78,6 +79,11 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
      */
     protected $projectAbstractStep;
+
+    /**
+     * @ORM\Column(name="main_view", type="string", nullable=true, options={"default": "grid"})
+     */
+    protected string $mainView = ViewConfiguration::GRID;
 
     /**
      * @ORM\Column(name="body", type="text", nullable=true)
@@ -392,7 +398,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
             if ($time) {
                 return [
                     'days' => (int) $time->format('%a'),
-                    'hours' => (int) $time->format('%h')
+                    'hours' => (int) $time->format('%h'),
                 ];
             }
         }
@@ -474,6 +480,18 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         foreach ($value as $item) {
             $this->addStatus($item);
         }
+
+        return $this;
+    }
+
+    public function getMainView(): string
+    {
+        return $this->mainView;
+    }
+
+    public function setMainView(string $mainView): self
+    {
+        $this->mainView = $mainView;
 
         return $this;
     }

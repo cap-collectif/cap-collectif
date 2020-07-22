@@ -65,7 +65,8 @@ Scenario: Logged in user wants to vote for a proposal anonymously
   And the proposal has 1 votes
   And I go to the proposal votes tab
   When I click the proposal vote button
-  And I check the proposal vote private checkbox
+  And I check element "UHJvcG9zYWw6cHJvcG9zYWwz-proposal-vote__private-toggle"
+  And I check element "UHJvcG9zYWw6cHJvcG9zYWwy-proposal-vote__private-toggle"
   And I submit the proposal vote form
   And I wait "#global-alert-box" to appear on current page
   And I should see "vote.add_success" in the "#global-alert-box" element
@@ -144,13 +145,12 @@ Scenario: Logged in user wants to set a vote as anonymous
   When I got to the votes details page of project with requirements
   And I wait 1 seconds
   And I should not see "global.anonymous"
-  Then I toggle vote access of proposal "[id='UHJvcG9zYWw6cHJvcG9zYWwyNg==-proposal-vote__private']"
+  Then I check element "UHJvcG9zYWw6cHJvcG9zYWwyNg==-proposal-vote__private-toggle"
   And I should see "global.anonymous" appear on current page in "body"
   Then I click on button "#confirm-update-votes"
   And I wait 1 seconds
   Then I reload the page
   And I should see "global.anonymous" appear on current page in "body"
-
 
 @database
 Scenario: Logged in user wants to delete a vote

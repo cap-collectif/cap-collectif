@@ -8,19 +8,41 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
     bsClass="row"
     componentClass="div"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      lg={3}
-      md={4}
-      sm={6}
-      xs={12}
-    >
-      <Connect(injectIntl(ProposalListToggleViewBtn))
-        onChange={[Function]}
-        showMapButton={false}
-      />
-    </Col>
+    <Relay(ProposalListToggleViewBtn)
+      displayMode="grid"
+      setDisplayMode={[MockFunction]}
+      showMapButton={false}
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "defaultSort": "random",
+          "form": Object {
+            "categories": Array [
+              Object {
+                "id": "2",
+                "name": "Category1",
+              },
+            ],
+            "commentable": true,
+            "costable": true,
+            "districts": Array [
+              Object {
+                "id": "1",
+                "name": "Ouagadougou",
+              },
+            ],
+            "usingAddress": true,
+            "usingCategories": true,
+            "usingDistrict": true,
+            "usingThemes": true,
+          },
+          "id": "test",
+          "statuses": Array [],
+          "voteType": "DISABLED",
+        }
+      }
+    />
     <Col
       bsClass="col"
       componentClass="div"
@@ -59,19 +81,41 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
     bsClass="row"
     componentClass="div"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      lg={3}
-      md={4}
-      sm={6}
-      xs={12}
-    >
-      <Connect(injectIntl(ProposalListToggleViewBtn))
-        onChange={[Function]}
-        showMapButton={false}
-      />
-    </Col>
+    <Relay(ProposalListToggleViewBtn)
+      displayMode="grid"
+      setDisplayMode={[MockFunction]}
+      showMapButton={false}
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "defaultSort": "random",
+          "form": Object {
+            "categories": Array [
+              Object {
+                "id": "2",
+                "name": "Category1",
+              },
+            ],
+            "commentable": true,
+            "costable": true,
+            "districts": Array [
+              Object {
+                "id": "1",
+                "name": "Ouagadougou",
+              },
+            ],
+            "usingAddress": true,
+            "usingCategories": true,
+            "usingDistrict": true,
+            "usingThemes": true,
+          },
+          "id": "test",
+          "statuses": Array [],
+          "voteType": "DISABLED",
+        }
+      }
+    />
     <Col
       bsClass="col"
       componentClass="div"

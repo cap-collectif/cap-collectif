@@ -118,7 +118,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 <span
                   className="excerpt"
                 >
-                   
                   <FormattedMessage
                     id="global.optional"
                     values={Object {}}
@@ -133,6 +132,72 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       </div>
     </div>
   </div>
+  <Relay(Connect(SectionDisplayMode))
+    dispatch={[MockFunction]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "addressHelpText": "",
+        "allowAknowledge": true,
+        "canContact": false,
+        "categories": Array [
+          Object {
+            "categoryImage": null,
+            "id": "category1",
+            "name": "Category 1 ",
+          },
+        ],
+        "categoryHelpText": "",
+        "categoryMandatory": true,
+        "description": "description",
+        "descriptionHelpText": "",
+        "descriptionMandatory": true,
+        "districtHelpText": "",
+        "districtMandatory": true,
+        "districts": Array [],
+        "id": "proposalFormId",
+        "illustrationHelpText": "",
+        "isGridViewEnabled": false,
+        "isListViewEnabled": false,
+        "isMapViewEnabled": false,
+        "isProposalForm": true,
+        "latMap": 0,
+        "lngMap": 0,
+        "proposalInAZoneRequired": true,
+        "questions": Array [
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": "des cryptes Sion",
+            "helpText": null,
+            "hidden": false,
+            "id": "field-1",
+            "jumps": Array [],
+            "level": 0,
+            "number": 1,
+            "position": 1,
+            "private": false,
+            "required": false,
+            "title": "Titre 1",
+            "type": "text",
+          },
+        ],
+        "summaryHelpText": "",
+        "themeHelpText": "",
+        "themeMandatory": true,
+        "titleHelpText": "",
+        "usingAddress": true,
+        "usingCategories": true,
+        "usingDescription": true,
+        "usingDistrict": true,
+        "usingIllustration": false,
+        "usingSummary": false,
+        "usingThemes": true,
+        "zoomMap": 0,
+      }
+    }
+  />
   <div
     className="box box-primary container-fluid mt-10"
   >
@@ -213,7 +278,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 <span
                   className="excerpt"
                 >
-                   
                   <FormattedMessage
                     id="global.optional"
                     values={Object {}}
@@ -281,7 +345,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 <span
                   className="excerpt"
                 >
-                   
                   <FormattedMessage
                     id="global.optional"
                     values={Object {}}
@@ -349,7 +412,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 <span
                   className="excerpt"
                 >
-                   
                   <FormattedMessage
                     id="global.optional"
                     values={Object {}}
@@ -428,7 +490,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 <span
                   className="excerpt"
                 >
-                   
                   <FormattedMessage
                     id="global.optional"
                     values={Object {}}
@@ -489,6 +550,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           >
             <Field
               component={[Function]}
+              disabled={false}
               id="proposal_form_using_address_field"
               name="usingAddress"
               normalize={[Function]}
@@ -518,7 +580,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 <span
                   className="excerpt"
                 >
-                   
                   <FormattedMessage
                     id="global.optional"
                     values={Object {}}
@@ -542,221 +603,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               values={Object {}}
             />
           </p>
-          <Field
-            component={[Function]}
-            id="proposal_form_district_proposalInAZoneRequired"
-            name="proposalInAZoneRequired"
-            type="checkbox"
-          >
-            <FormattedMessage
-              id="proposal_form.proposalInAZoneRequired"
-              values={Object {}}
-            />
-          </Field>
-          <h5
-            className="mt-20 font-weight-bold"
-          >
-            <FormattedMessage
-              id="initial-position-of-the-map"
-              values={Object {}}
-            />
-          </h5>
-          <Row
-            bsClass="row"
-            componentClass="div"
-          >
-            <Col
-              bsClass="col"
-              componentClass="div"
-              md={4}
-              xs={12}
-            >
-              <Field
-                component={[Function]}
-                id="proposal_form_lat_map"
-                label={
-                  <FormattedMessage
-                    id="proposal_form.lat_map"
-                    values={Object {}}
-                  />
-                }
-                lang="us"
-                name="latMap"
-                normalize={[Function]}
-                step="any"
-                type="number"
-              />
-            </Col>
-            <Col
-              bsClass="col"
-              componentClass="div"
-              md={4}
-              xs={12}
-            >
-              <Field
-                component={[Function]}
-                id="proposal_form_lng_map"
-                label={
-                  <FormattedMessage
-                    id="proposal_form.lng_map"
-                    values={Object {}}
-                  />
-                }
-                lang="us"
-                name="lngMap"
-                normalize={[Function]}
-                step="any"
-                type="number"
-              />
-            </Col>
-            <Col
-              bsClass="col"
-              componentClass="div"
-              md={4}
-              xs={12}
-            >
-              <Field
-                component={[Function]}
-                id="proposal_form_zoom_map"
-                label={
-                  <FormattedMessage
-                    id="proposal_form.zoom"
-                    values={Object {}}
-                  />
-                }
-                name="zoomMap"
-                normalize={[Function]}
-                type="select"
-              >
-                <FormattedMessage
-                  id="proposal_form.select.zoom"
-                  values={Object {}}
-                >
-                  <Component />
-                </FormattedMessage>
-                <option
-                  key="1"
-                  value={1}
-                >
-                  1 - Le monde
-                </option>
-                <option
-                  key="2"
-                  value={2}
-                >
-                  2
-                </option>
-                <option
-                  key="3"
-                  value={3}
-                >
-                  3
-                </option>
-                <option
-                  key="4"
-                  value={4}
-                >
-                  4
-                </option>
-                <option
-                  key="5"
-                  value={5}
-                >
-                  5 - La masse continentale/le continent
-                </option>
-                <option
-                  key="6"
-                  value={6}
-                >
-                  6
-                </option>
-                <option
-                  key="7"
-                  value={7}
-                >
-                  7
-                </option>
-                <option
-                  key="8"
-                  value={8}
-                >
-                  8
-                </option>
-                <option
-                  key="9"
-                  value={9}
-                >
-                  9
-                </option>
-                <option
-                  key="10"
-                  value={10}
-                >
-                  10 - Ville
-                </option>
-                <option
-                  key="11"
-                  value={11}
-                >
-                  11
-                </option>
-                <option
-                  key="12"
-                  value={12}
-                >
-                  12
-                </option>
-                <option
-                  key="13"
-                  value={13}
-                >
-                  13
-                </option>
-                <option
-                  key="14"
-                  value={14}
-                >
-                  14
-                </option>
-                <option
-                  key="15"
-                  value={15}
-                >
-                  15 - Rues
-                </option>
-                <option
-                  key="16"
-                  value={16}
-                >
-                  16
-                </option>
-                <option
-                  key="17"
-                  value={17}
-                >
-                  17
-                </option>
-                <option
-                  key="18"
-                  value={18}
-                >
-                  18
-                </option>
-                <option
-                  key="19"
-                  value={19}
-                >
-                  19
-                </option>
-                <option
-                  key="20"
-                  value={20}
-                >
-                  20 - Immeubles
-                </option>
-              </Field>
-            </Col>
-          </Row>
         </PanelBody>
       </PanelCollapse>
     </Uncontrolled(Panel)>

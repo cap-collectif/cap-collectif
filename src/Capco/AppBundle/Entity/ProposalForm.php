@@ -53,6 +53,20 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     // Sonata always triggering _clone so we had to do this :/
     //@todo change this https://github.com/cap-collectif/platform/issues/5700
     protected $cloneEnable = false;
+    /**
+     * @ORM\Column(name="grid_view_enabled", type="boolean", nullable=false, options={"default": true})
+     */
+    protected bool $isGridViewEnabled = true;
+
+    /**
+     * @ORM\Column(name="list_view_enabled", type="boolean", nullable=false, options={"default": true})
+     */
+    protected bool $isListViewEnabled = false;
+
+    /**
+     * @ORM\Column(name="map_view_enabled", type="boolean", nullable=false, options={"default": false})
+     */
+    protected bool $isMapViewEnabled = false;
 
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -340,7 +354,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->proposalInAZoneRequired;
     }
 
-    public function setDescription(string $description = null): self
+    public function setDescription(?string $description = null): self
     {
         $this->description = $description;
 
@@ -435,7 +449,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->step ? $this->step->getProject() : null;
     }
 
-    public function setStep(CollectStep $step = null): self
+    public function setStep(?CollectStep $step = null): self
     {
         $this->step = $step;
 
@@ -480,7 +494,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->titleHelpText;
     }
 
-    public function setTitleHelpText(string $titleHelpText = null): self
+    public function setTitleHelpText(?string $titleHelpText = null): self
     {
         $this->titleHelpText = $titleHelpText;
 
@@ -504,7 +518,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->themeHelpText;
     }
 
-    public function setThemeHelpText(string $themeHelpText = null): self
+    public function setThemeHelpText(?string $themeHelpText = null): self
     {
         $this->themeHelpText = $themeHelpText;
 
@@ -516,7 +530,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->districtHelpText;
     }
 
-    public function setDistrictHelpText(string $districtHelpText = null): self
+    public function setDistrictHelpText(?string $districtHelpText = null): self
     {
         $this->districtHelpText = $districtHelpText;
 
@@ -668,7 +682,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->categoryHelpText;
     }
 
-    public function setCategoryHelpText(string $categoryHelpText = null): self
+    public function setCategoryHelpText(?string $categoryHelpText = null): self
     {
         $this->categoryHelpText = $categoryHelpText;
 
@@ -739,7 +753,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->addressHelpText;
     }
 
-    public function setAddressHelpText(string $addressHelpText = null): self
+    public function setAddressHelpText(?string $addressHelpText = null): self
     {
         $this->addressHelpText = $addressHelpText;
 
@@ -751,7 +765,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->zoomMap;
     }
 
-    public function setZoomMap(int $zoomMap = null): self
+    public function setZoomMap(?int $zoomMap = null): self
     {
         $this->zoomMap = $zoomMap;
 
@@ -763,7 +777,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->latMap;
     }
 
-    public function setLatMap(float $latMap = null): self
+    public function setLatMap(?float $latMap = null): self
     {
         $this->latMap = $latMap;
 
@@ -775,7 +789,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->lngMap;
     }
 
-    public function setLngMap(float $lngMap = null): self
+    public function setLngMap(?float $lngMap = null): self
     {
         $this->lngMap = $lngMap;
 
@@ -799,7 +813,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->evaluationForm;
     }
 
-    public function setEvaluationForm(Questionnaire $evaluationForm = null): self
+    public function setEvaluationForm(?Questionnaire $evaluationForm = null): self
     {
         $this->evaluationForm = $evaluationForm;
 
@@ -933,5 +947,41 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function getAnalysisConfiguration(): ?AnalysisConfiguration
     {
         return $this->analysisConfiguration;
+    }
+
+    public function isGridViewEnabled(): bool
+    {
+        return $this->isGridViewEnabled;
+    }
+
+    public function setIsGridViewEnabled(bool $isGridViewEnabled): self
+    {
+        $this->isGridViewEnabled = $isGridViewEnabled;
+
+        return $this;
+    }
+
+    public function isListViewEnabled(): bool
+    {
+        return $this->isListViewEnabled;
+    }
+
+    public function setIsListViewEnabled(bool $isListViewEnabled): self
+    {
+        $this->isListViewEnabled = $isListViewEnabled;
+
+        return $this;
+    }
+
+    public function isMapViewEnabled(): bool
+    {
+        return $this->isMapViewEnabled;
+    }
+
+    public function setIsMapViewEnabled(bool $isMapViewEnabled): self
+    {
+        $this->isMapViewEnabled = $isMapViewEnabled;
+
+        return $this;
     }
 }

@@ -113,6 +113,7 @@ Scenario: Logged in admin wants to add collect step to a project
   And I fill the date field in ".modal-content"
   And I click the "#step-proposalForm .select-container" element
   And I fill the "#step-proposalForm" react element with child number 1
+  And I check element "grid"
   And I click the "#step-modal-submit" element
   And I click the "#submit-project-content" element
   And I wait ".alert__form_succeeded-message" to appear on current page

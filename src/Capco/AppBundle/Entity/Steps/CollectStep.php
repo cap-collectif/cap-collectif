@@ -31,7 +31,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         'comments',
         'random',
         'expensive',
-        'cheap'
+        'cheap',
     ];
 
     public static $sortLabels = [
@@ -42,7 +42,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         'step.sort.votes' => 'votes',
         'step.sort.least-votes' => 'least-votes',
         'step.sort.expensive' => 'expensive',
-        'step.sort.cheap' => 'cheap'
+        'step.sort.cheap' => 'cheap',
     ];
 
     /**
@@ -72,7 +72,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         return $this->defaultStatus;
     }
 
-    public function setDefaultStatus(Status $defaultStatus = null): self
+    public function setDefaultStatus(?Status $defaultStatus = null): self
     {
         $this->defaultStatus = $defaultStatus;
 
@@ -89,7 +89,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         return $this->proposalForm ? $this->proposalForm->getId() : null;
     }
 
-    public function setProposalForm(ProposalForm $proposalForm = null): self
+    public function setProposalForm(?ProposalForm $proposalForm = null): self
     {
         if ($this->proposalForm) {
             $this->proposalForm->setStep(null);

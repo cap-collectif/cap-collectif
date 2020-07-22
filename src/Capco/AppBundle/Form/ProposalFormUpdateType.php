@@ -96,7 +96,7 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'delete_empty' => function (ProposalCategory $category = null) {
+                'delete_empty' => function (?ProposalCategory $category = null) {
                     return null === $category || 'NULL' === $category->getName();
                 },
             ])
@@ -106,7 +106,7 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'delete_empty' => function (ProposalDistrict $district = null) {
+                'delete_empty' => function (?ProposalDistrict $district = null) {
                     return null === $district || 'NULL' === $district->getName();
                 },
             ])
@@ -117,7 +117,7 @@ class ProposalFormUpdateType extends AbstractType
                 'entry_type' => QuestionnaireAbstractQuestionType::class,
                 'by_reference' => false,
                 'delete_empty' => function (
-                    QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
+                    ?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
                 ) {
                     return null === $questionnaireAbstractQuestion ||
                         null === $questionnaireAbstractQuestion->getQuestion()->getTitle() ||
@@ -128,7 +128,9 @@ class ProposalFormUpdateType extends AbstractType
             ->add('allowAknowledge', CheckboxType::class)
             ->add('isProposalForm', CheckboxType::class)
             ->add('canContact', CheckboxType::class)
-        ;
+            ->add('isGridViewEnabled', CheckboxType::class)
+            ->add('isListViewEnabled', CheckboxType::class)
+            ->add('isMapViewEnabled', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

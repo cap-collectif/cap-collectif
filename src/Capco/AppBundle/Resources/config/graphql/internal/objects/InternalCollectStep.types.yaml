@@ -49,3 +49,6 @@ InternalCollectStep:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
             viewerProposalsUnpublished:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepViewerProposalsUnpublishedResolver", [value, args, getUser()])'
+            mainView:
+                type: 'String!'
+                description: 'The main view : grid, list or map'

@@ -31,13 +31,11 @@ type Props = {|
   order: ?string,
   terms: ?string,
   isAuthenticated: boolean,
-  selectedViewByStep: string,
   features: FeatureToggles,
 |};
 
 type RenderedProps = {|
   ...ProposalStepPageQueryResponse,
-  selectedViewByStep: string,
   count: number,
   isAuthenticated: boolean,
   features: FeatureToggles,
@@ -57,7 +55,12 @@ const parseGeoJson = (district: { +geojson: string, +id: string }) => {
 };
 
 export const ProposalStepPageRendered = (props: RenderedProps) => {
-  const { viewer, isAuthenticated, features, step, selectedViewByStep, count } = props;
+  const { viewer, isAuthenticated, features, step, count } = props;
+  const [displayMode, setDisplayMode] = React.useState(step?.mainView);
+
+  React.useEffect(() => {
+    if (!displayMode && step?.mainView) setDisplayMode(step?.mainView);
+  }, [displayMode, setDisplayMode, step]);
 
   if (!step) {
     return graphqlError;
@@ -87,18 +90,18 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
         <UnpublishedProposalListView step={step} viewer={viewer} />
       )}
       <ProposalStepPageHeader step={step} />
-      <ProposalListFilters step={step} />
+      <ProposalListFilters step={step} setDisplayMode={setDisplayMode} displayMode={displayMode} />
       <ProposalListView
         displayMap={features.display_map}
         geoJsons={geoJsons}
         step={step}
         count={count}
+        displayMode={displayMode}
         viewer={viewer || null}
         defaultMapOptions={{
           center: { lat: form.latMap || 48.8586047, lng: form.lngMap || 2.3137325 },
           zoom: form.zoomMap || 10,
         }}
-        view={selectedViewByStep}
       />
       <LoginModal />
     </div>
@@ -117,7 +120,7 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 
   render() {
-    const { count, stepId, isAuthenticated, selectedViewByStep, features } = this.props;
+    const { count, stepId, isAuthenticated, features } = this.props;
 
     return (
       <div className="proposal__step-page">
@@ -184,7 +187,11 @@ export class ProposalStepPage extends React.Component<Props> {
                   ...ProposalStepPageHeader_step
                   ... on CollectStep {
                     private
+                    mainView
                     ...DraftProposalList_step @arguments(isAuthenticated: $isAuthenticated)
+                  }
+                  ... on SelectionStep {
+                    mainView
                   }
                 }
               }
@@ -218,7 +225,6 @@ export class ProposalStepPage extends React.Component<Props> {
                   count={count}
                   isAuthenticated={isAuthenticated}
                   features={features}
-                  selectedViewByStep={selectedViewByStep}
                 />
               );
             }
@@ -239,7 +245,6 @@ const mapStateToProps = (state: State) => ({
   filters: state.proposal.filters || {},
   terms: state.proposal.terms,
   order: state.proposal.order,
-  selectedViewByStep: state.proposal.selectedViewByStep || 'mosaic',
   features: state.default.features,
 });
 

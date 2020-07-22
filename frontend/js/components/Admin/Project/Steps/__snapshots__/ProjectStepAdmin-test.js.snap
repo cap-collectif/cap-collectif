@@ -23,17 +23,36 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
         id="project_form_admin_steps_panel"
       >
         <FieldArray
-          component={[Function]}
-          formName="formName"
+          component={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "__ComponentClass": [Function],
+              "displayName": "Relay(Connect(ProjectStepAdminList))",
+              "render": [Function],
+            }
+          }
+          formName="testForm"
           name="steps"
+          project={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
         />
         <ButtonToolbar
           bsClass="btn-toolbar"
         >
-          <ProjectAdminStepFormModal
-            form="formName"
+          <Relay(ProjectAdminStepFormModal)
+            form="testForm"
             isCreating={true}
             onClose={[Function]}
+            project={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+              }
+            }
             show={false}
             step={null}
             type="OtherStep"
@@ -56,6 +75,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
           >
             <ProjectAdminFormstyle__StepMenuItem
               id="presentation_step"
+              key="0"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -65,6 +85,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="collect_step"
+              key="1"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -74,6 +95,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="selection_step"
+              key="2"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -83,6 +105,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="global.consultation"
+              key="3"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -92,6 +115,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="global.synthesis"
+              key="4"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -101,6 +125,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="global.ranking"
+              key="5"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -110,6 +135,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="global.questionnaire"
+              key="6"
               onClick={[Function]}
             >
               <FormattedMessage
@@ -119,6 +145,7 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
             </ProjectAdminFormstyle__StepMenuItem>
             <ProjectAdminFormstyle__StepMenuItem
               id="global.custom.feminine"
+              key="7"
               onClick={[Function]}
             >
               <FormattedMessage

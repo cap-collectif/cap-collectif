@@ -68,10 +68,18 @@ export function ProjectExternalAdminForm(props: Props) {
     <div className="mt-15">
       <ProjectBoxHeader noBorder>
         <h4 className="d-flex align-items-center m-0">
-          <Field icons component={toggle} name="isExternal" normalize={val => !!val} />
-          <div className="mb-15">
-            <FormattedMessage id="admin.fields.project.group_external" />
-          </div>
+          <Field
+            id="toggle-isExternal"
+            icons
+            component={toggle}
+            name="isExternal"
+            normalize={val => !!val}
+            label={
+              <div className="mb-15">
+                <FormattedMessage id="admin.fields.project.group_external" />
+              </div>
+            }
+          />
         </h4>
       </ProjectBoxHeader>
       {isExternal ? (

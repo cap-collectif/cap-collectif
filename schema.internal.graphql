@@ -1576,6 +1576,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the last `n` elements from the list."""
     last: Int
   ): ProposalConnection!
+
+  """The main view : grid, list or map"""
+  mainView: String!
 }
 
 """A color on hexadecimal format (#DDDDDD)."""
@@ -5702,9 +5705,12 @@ input ProjectStepInput {
   proposalsHidden: Boolean
   allowingProgressSteps: Boolean
   statuses: [StepStatusInput]
-  defaultStatus: ID
+
+  """the default view : grid, list or map"""
+  mainView: String
   private: Boolean
   proposalForm: ID
+  defaultStatus: ID
   questionnaire: ID
   footer: HTML
   nbOpinionsToDisplay: Int
@@ -6458,6 +6464,15 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   """The configuration for the related analysis."""
   analysisConfiguration: AnalysisConfiguration
+
+  """True if the grid view is enabled."""
+  isGridViewEnabled: Boolean!
+
+  """True if the grid view is enabled."""
+  isListViewEnabled: Boolean!
+
+  """True if the grid view is enabled."""
+  isMapViewEnabled: Boolean!
 }
 
 """Ways in which proposal connections can be ordered."""
@@ -8789,6 +8804,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the last `n` elements from the list."""
     last: Int
   ): UserConnection!
+
+  """The main view : grid, list or map"""
+  mainView: String!
   defaultStatus: Status
 }
 
@@ -10037,6 +10055,15 @@ input UpdateProposalFormInput {
 
   """can the viewer send a contact message to the proposals author"""
   canContact: Boolean
+
+  """can the viewer see the proposals as a grid"""
+  isGridViewEnabled: Boolean
+
+  """can the viewer see the proposals as a list"""
+  isListViewEnabled: Boolean
+
+  """can the viewer see the proposals as a map"""
+  isMapViewEnabled: Boolean
   clientMutationId: String
 }
 

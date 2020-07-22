@@ -2,12 +2,7 @@
 
 exports[`<ProposalList /> should not render list if proposal is not provided 1`] = `
 <p
-  className="p--centered"
-  style={
-    Object {
-      "marginBottom": "40px",
-    }
-  }
+  className="p--centered mb-40"
 >
   <FormattedMessage
     id="proposal.empty"
@@ -104,12 +99,7 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
 
 exports[`<ProposalList /> should render a collectStep with empty interpellation list 1`] = `
 <p
-  className="p--centered"
-  style={
-    Object {
-      "marginBottom": "40px",
-    }
-  }
+  className="p--centered mb-40"
 >
   <FormattedMessage
     id="interpellation.empty"

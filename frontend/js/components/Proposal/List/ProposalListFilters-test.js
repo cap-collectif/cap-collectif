@@ -3,14 +3,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalListFilters } from './ProposalListFilters';
-import { features } from '../../../redux/modules/default';
-import { $refType } from '../../../mocks';
+import { features } from '~/redux/modules/default';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<ProposalListFilters />', () => {
   const defaultProps = {
+    setDisplayMode: jest.fn(),
     dispatch: jest.fn(),
     step: {
       $refType,
+      $fragmentRefs,
       id: 'test',
       defaultSort: 'random',
       voteType: 'DISABLED',
@@ -46,6 +48,7 @@ describe('<ProposalListFilters />', () => {
       statuses: null,
       types: null,
     },
+    displayMode: 'grid',
   };
 
   it('should render correctly', () => {
