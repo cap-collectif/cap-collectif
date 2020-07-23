@@ -11,7 +11,7 @@ describe('<ProjectPublishAdminForm />', () => {
     ...formMock,
     intl: intlMock,
     project: null,
-    features
+    features,
   };
 
   it('renders correctly empty', () => {
@@ -21,7 +21,7 @@ describe('<ProjectPublishAdminForm />', () => {
 
   it('renders correctly without multilangue', () => {
     const props = {
-      ...defaultProps
+      ...defaultProps,
     };
     props.features.unstable__multilangue = false;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
@@ -36,9 +36,9 @@ describe('<ProjectPublishAdminForm />', () => {
         id: '1',
         url: '/sku',
         publishedAt: '18/08/1998',
-        locale: null
+        locale: null,
       },
-      features
+      features,
     };
     props.features.unstable__multilangue = true;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
@@ -54,11 +54,11 @@ describe('<ProjectPublishAdminForm />', () => {
         url: '/sku',
         publishedAt: '18/08/1998',
         locale: {
-          value: 'locale-fr-FR',
-          label: 'french'
-        }
+          value: 'locale-en-GB',
+          label: 'french',
+        },
       },
-      features
+      features,
     };
     props.features.unstable__multilangue = true;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);

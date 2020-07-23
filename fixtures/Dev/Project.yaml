@@ -263,14 +263,14 @@ Capco\AppBundle\Entity\Project:
         versionsRankingThreshold: 20
         visibility: 2
     p27:
-        id: 'frenchProject'
-        title: 'Projet Français'
+        id: 'englishProject'
+        title: 'English Project'
         projectType: '@projectType1'
         themes: []
         createdAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
         updatedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
         publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 9 days"))>
-        locale: '@locale_francais'
+        locale: '@locale_anglais'
         visibility: 2
     projectAnalyse:
         id: 'projectAnalyse'

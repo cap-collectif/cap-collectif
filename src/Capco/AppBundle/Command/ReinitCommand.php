@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
@@ -171,7 +172,7 @@ class ReinitCommand extends Command
             return 1;
         }
 
-            $this->stopwatch->start('reinit');
+        $this->stopwatch->start('reinit');
 
         $this->progressBarProcessor->setOutput($output);
 
@@ -229,6 +230,7 @@ class ReinitCommand extends Command
             $this->createSchema($output);
             $this->mockMigrations($output);
         }
+
         $this->loadFixtures($output, $this->env);
         $output->writeln('<info>Database is ready !</info>');
 
@@ -314,9 +316,10 @@ class ReinitCommand extends Command
 
     protected function loadFixtures(OutputInterface $output, $env = 'dev')
     {
-            $this->stopwatch->start('loadFixtures');
+        $this->stopwatch->start('loadFixtures');
 
-        $manager = $this->doctrine->getManager();
+        $this->setDefaultLocale();
+
         $classesDev = [
             Media::class,
             Argument::class,
@@ -385,7 +388,7 @@ class ReinitCommand extends Command
         $classes = 'prod' === $env ? $classesProd : $classesDev;
         foreach ($classes as $class) {
             /** @var ClassMetadata $metadata */
-            $metadata = $manager->getClassMetaData($class);
+            $metadata = $this->doctrine->getManager()->getClassMetaData($class);
             $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
             $metadata->setIdGenerator(new AssignedGenerator());
         }
@@ -399,11 +402,10 @@ class ReinitCommand extends Command
 
         $this->progressBarProcessor->finish();
 
-            $event = $this->stopwatch->stop('loadFixtures');
-            $output->writeln(
-                'Loading fixtures duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-            );
-    
+        $event = $this->stopwatch->stop('loadFixtures');
+        $output->writeln(
+            'Loading fixtures duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+        );
     }
 
     protected function loadToggles(OutputInterface $output)
@@ -521,5 +523,17 @@ class ReinitCommand extends Command
                 ->find($key)
                 ->run($input, $output);
         }
+    }
+
+    private function setDefaultLocale(): Locale
+    {
+        $defaultLocale = new Locale('fr-FR', 'french');
+        $defaultLocale->enable();
+        $defaultLocale->publish();
+        $defaultLocale->setDefault();
+        $this->doctrine->getManager()->persist($defaultLocale);
+        $this->doctrine->getManager()->flush();
+
+        return $defaultLocale;
     }
 }

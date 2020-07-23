@@ -202,7 +202,7 @@ Scenario: GraphQL client wants to add a locale to a project
       "variables": {
         "input": {
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-          "locale": "locale-fr-FR"
+          "locale": "locale-en-GB"
         }
       }
     }
@@ -213,7 +213,7 @@ Scenario: GraphQL client wants to add a locale to a project
     "data":{
       "updateProject":{
         "project":{
-          "locale":{"code":"FR_FR"}
+          "locale":{"code":"EN_GB"}
         }
       }
     }
@@ -238,7 +238,7 @@ Scenario: GraphQL client wants to remove locale from a project
       "variables": {
         "input": {
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
-          "locale": "locale-fr-FR"
+          "locale": "locale-en-GB"
         }
       }
     }

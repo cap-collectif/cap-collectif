@@ -138,7 +138,7 @@ Scenario: GraphQL client wants to create a project without authors
   """
 
 @database
-Scenario: GraphQL client wants to create a project in french
+Scenario: GraphQL client wants to create a project in english
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
    """
@@ -166,12 +166,12 @@ Scenario: GraphQL client wants to create a project in french
           "authors": ["VXNlcjp1c2VyQWRtaW4=", "VXNlcjp1c2VyMQ=="],
           "opinionTerm": 2,
           "projectType": "2",
-          "locale": "locale-fr-FR"
+          "locale": "locale-en-GB"
         }
       }
     }
   """
-    Then the JSON response should match:
+  Then the JSON response should match:
   """
     {
       "data":{
@@ -184,7 +184,7 @@ Scenario: GraphQL client wants to create a project in french
             ],
             "visibility":"ADMIN",
             "locale": {
-              "code": "FR_FR"
+              "code": "EN_GB"
             }
           }
         }

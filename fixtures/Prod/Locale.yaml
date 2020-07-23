@@ -1,11 +1,5 @@
 Capco\AppBundle\Entity\Locale:
-    locale_francais:
-        __construct: ['fr-FR', 'french']
-        id: 'locale-fr-FR'
-        __calls:
-            - enable: []
-            - publish: []
-            - setDefault: []
+    # french locale is loaded before fixtures
     locale_anglais:
         __construct: ['en-GB', 'english']
         id: 'locale-en-GB'
