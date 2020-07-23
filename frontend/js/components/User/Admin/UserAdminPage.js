@@ -31,9 +31,9 @@ const component = ({
     return graphqlError;
   }
   if (props) {
-    const { user } = props;
+    const { user, viewer } = props;
     if (user) {
-      return <UserAdminPageTabs user={user} />;
+      return <UserAdminPageTabs user={user} viewer={viewer} />;
     }
     return graphqlError;
   }
@@ -66,6 +66,9 @@ export class UserAdminPage extends React.Component<Props> {
             query UserAdminPageQuery($id: ID!) {
               user: node(id: $id) {
                 ...UserAdminPageTabs_user
+              }
+              viewer {
+                ...UserAdminPageTabs_viewer
               }
             }
           `}

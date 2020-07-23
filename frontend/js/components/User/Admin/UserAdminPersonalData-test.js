@@ -11,6 +11,11 @@ describe('<UserAdminPersonalData/>', () => {
     intl: intlMock,
   };
 
+  const viewer = {
+    $refType,
+    isSuperAdmin: true,
+  };
+
   const user = {
     $refType,
     id: '1',
@@ -41,13 +46,23 @@ describe('<UserAdminPersonalData/>', () => {
 
   it('should render when user is confirmed by email and viewer is super admin', () => {
     const wrapper = shallow(
-      <UserAdminPersonalData {...props1} user={userIsConfirmed} isViewerOrSuperAdmin />,
+      <UserAdminPersonalData
+        {...props1}
+        user={userIsConfirmed}
+        viewer={viewer}
+        isViewerOrSuperAdmin
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
   it('should render when user is not confirmed by email and viewer is not super admin', () => {
     const wrapper = shallow(
-      <UserAdminPersonalData {...props1} user={userIsNotConfirmed} isViewerOrSuperAdmin={false} />,
+      <UserAdminPersonalData
+        {...props1}
+        user={userIsNotConfirmed}
+        viewer={viewer}
+        isViewerOrSuperAdmin={false}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

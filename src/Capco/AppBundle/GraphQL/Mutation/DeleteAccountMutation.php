@@ -28,7 +28,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountMutation extends BaseDeleteUserMutation
 {
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -77,7 +77,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         $deleteType = $input['type'];
         $user = $viewer;
 
-        if ($viewer->isSuperAdmin() && isset($input['userId'])) {
+        if ($viewer->isAdmin() && isset($input['userId'])) {
             $userId = GlobalId::fromGlobalId($input['userId'])['id'];
             $user = $this->userRepository->find($userId);
             if (!$user) {

@@ -10,18 +10,20 @@ import AlertForm from '../../Alert/AlertForm';
 import type { GlobalState, Dispatch } from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
 import type { UserAdminAccount_user } from '~relay/UserAdminAccount_user.graphql';
+import type { UserAdminAccount_viewer } from '~relay/UserAdminAccount_viewer.graphql';
 import DeleteAccountModal from '../DeleteAccountModal';
 import SelectUserRole from '../../Form/SelectUserRole';
 import DatesInterval from '../../Utils/DatesInterval';
 
 type RelayProps = {|
   user: UserAdminAccount_user,
+  viewer: UserAdminAccount_viewer,
 |};
 type Props = {|
   ...ReduxFormFormProps,
   ...RelayProps,
   intl: IntlShape,
-  isViewerOrSuperAdmin: boolean,
+  isViewerOrAdmin: boolean,
 |};
 
 const formName = 'user-admin-edit-account';
@@ -88,7 +90,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
       user,
       submitting,
       handleSubmit,
-      isViewerOrSuperAdmin,
+      isViewerOrAdmin,
     } = this.props;
     const { showDeleteAccountModal } = this.state;
     return (
@@ -158,7 +160,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-              {isViewerOrSuperAdmin && (
+              {isViewerOrAdmin && (
                 <Button
                   id="delete-account-profile-button"
                   bsStyle="danger"
@@ -177,7 +179,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 submitting={submitting}
               />
             </ButtonToolbar>
-            {isViewerOrSuperAdmin && (
+            {isViewerOrAdmin && (
               <DeleteAccountModal
                 viewer={user}
                 redirectToAdminUrl
@@ -202,7 +204,7 @@ const form = reduxForm({
   form: formName,
 })(UserAdminAccount);
 
-const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
+const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
   initialValues: {
     vip: user.vip,
     enabled: user.enabled,
@@ -210,8 +212,7 @@ const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
     roles: { labels: user.roles, other: null },
     newsletter: user.isSubscribedToNewsLetter,
   },
-  isViewerOrSuperAdmin:
-    user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  isViewerOrAdmin: user.isViewer || viewer.isAdmin,
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -228,6 +229,11 @@ export default createFragmentContainer(container, {
       isSubscribedToNewsLetter
       subscribedToNewsLetterAt
       ...DeleteAccountModal_viewer
+    }
+  `,
+  viewer: graphql`
+    fragment UserAdminAccount_viewer on User {
+      isAdmin
     }
   `,
 });

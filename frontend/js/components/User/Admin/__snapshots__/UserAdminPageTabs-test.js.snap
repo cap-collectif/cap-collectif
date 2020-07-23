@@ -35,6 +35,12 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
             "url": "https://fr.wikipedia.org/wiki/Dahu",
           }
         }
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
       />
     </Tab>
     <Tab
@@ -49,6 +55,12 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
             "url": "https://fr.wikipedia.org/wiki/Dahu",
           }
         }
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+          }
+        }
       />
     </Tab>
     <Tab
@@ -61,6 +73,12 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
             "$fragmentRefs": null,
             "$refType": null,
             "url": "https://fr.wikipedia.org/wiki/Dahu",
+          }
+        }
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
           }
         }
       />

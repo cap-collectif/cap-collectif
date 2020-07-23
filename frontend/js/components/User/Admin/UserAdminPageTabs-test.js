@@ -16,8 +16,13 @@ describe('<UserAdminPageTabs/>', () => {
     url: 'https://fr.wikipedia.org/wiki/Dahu',
   };
 
+  const viewer = {
+    $refType,
+    $fragmentRefs,
+  };
+
   it('should render', () => {
-    const wrapper = shallow(<UserAdminPageTabs {...props1} user={user} />);
+    const wrapper = shallow(<UserAdminPageTabs {...props1} user={user} viewer={viewer} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -7,13 +7,14 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../../types';
 import type { UserAdminPersonalData_user } from '~relay/UserAdminPersonalData_user.graphql';
+import type { UserAdminPersonalData_viewer } from '~relay/UserAdminPersonalData_viewer.graphql';
 import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import DatesInterval from '../../Utils/DatesInterval';
 
-type RelayProps = {| user: UserAdminPersonalData_user |};
+type RelayProps = {| user: UserAdminPersonalData_user, viewer: UserAdminPersonalData_viewer |};
 type GenderValue = 'FEMALE' | 'MALE' | 'OTHER';
 type FormValue = {|
   address: string,
@@ -284,7 +285,7 @@ const form = reduxForm({
   form: formName,
 })(UserAdminPersonalData);
 
-const mapStateToProps = (state: State, { user }: RelayProps) => ({
+const mapStateToProps = (state: State, { user, viewer }: RelayProps) => ({
   initialValues: {
     email: user.email ? user.email : null,
     firstname: user.firstname ? user.firstname : null,
@@ -299,8 +300,7 @@ const mapStateToProps = (state: State, { user }: RelayProps) => ({
     phoneConfirmed: user ? user.phoneConfirmed : null,
     isEmailConfirmed: user ? user.isEmailConfirmed : null,
   },
-  isViewerOrSuperAdmin:
-    user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  isViewerOrSuperAdmin: user.isViewer || viewer.isSuperAdmin,
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -324,6 +324,11 @@ export default createFragmentContainer(container, {
       phone
       phoneConfirmed
       isViewer
+    }
+  `,
+  viewer: graphql`
+    fragment UserAdminPersonalData_viewer on User {
+      isSuperAdmin
     }
   `,
 });

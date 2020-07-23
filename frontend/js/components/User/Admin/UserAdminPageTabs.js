@@ -6,14 +6,19 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import UserAdminAccount from './UserAdminAccount';
 import UserAdminProfile from './UserAdminProfile';
 import { type UserAdminPageTabs_user } from '~relay/UserAdminPageTabs_user.graphql';
+import { type UserAdminPageTabs_viewer } from '~relay/UserAdminPageTabs_viewer.graphql';
 import UserAdminPersonalData from './UserAdminPersonalData';
 import UserAdminPassword from './UserAdminPassword';
 
-type Props = {| +user: UserAdminPageTabs_user, +intl: IntlShape |};
+type Props = {|
+  +user: UserAdminPageTabs_user,
+  +viewer: UserAdminPageTabs_viewer,
+  +intl: IntlShape,
+|};
 
 export class UserAdminPageTabs extends Component<Props> {
   render() {
-    const { intl, user } = this.props;
+    const { intl, user, viewer } = this.props;
     return (
       <div>
         <p>
@@ -24,13 +29,13 @@ export class UserAdminPageTabs extends Component<Props> {
         </p>
         <Tabs defaultActiveKey={1} id="UserAdminPageTabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'user.profile.edit.account' })}>
-            <UserAdminAccount user={user} />
+            <UserAdminAccount user={user} viewer={viewer} />
           </Tab>
           <Tab eventKey={2} title={intl.formatMessage({ id: 'user.profile.title' })}>
-            <UserAdminProfile user={user} />
+            <UserAdminProfile user={user} viewer={viewer} />
           </Tab>
           <Tab eventKey={3} title={intl.formatMessage({ id: 'global.data' })}>
-            <UserAdminPersonalData user={user} />
+            <UserAdminPersonalData user={user} viewer={viewer} />
           </Tab>
           <Tab eventKey={4} title={intl.formatMessage({ id: 'global.password' })}>
             <UserAdminPassword user={user} />
@@ -51,6 +56,13 @@ export default createFragmentContainer(container, {
       ...UserAdminProfile_user
       ...UserAdminPersonalData_user
       ...UserAdminPassword_user
+    }
+  `,
+  viewer: graphql`
+    fragment UserAdminPageTabs_viewer on User {
+      ...UserAdminAccount_viewer
+      ...UserAdminPersonalData_viewer
+      ...UserAdminProfile_viewer
     }
   `,
 });

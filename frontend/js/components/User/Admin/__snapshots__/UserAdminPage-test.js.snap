@@ -43,10 +43,26 @@ exports[`<UserAdminPage/> should render 1`] = `
               ],
               "storageKey": null,
             },
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "User",
+              "kind": "LinkedField",
+              "name": "viewer",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "UserAdminPageTabs_viewer",
+                },
+              ],
+              "storageKey": null,
+            },
           ],
           "type": "Query",
         },
-        "hash": "55a85e33972d73c665a2994abe6d2c11",
+        "hash": "e334a2a8ef74b5aff53705a5adc4a642",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -389,6 +405,38 @@ exports[`<UserAdminPage/> should render 1`] = `
               ],
               "storageKey": null,
             },
+            Object {
+              "alias": null,
+              "args": null,
+              "concreteType": "User",
+              "kind": "LinkedField",
+              "name": "viewer",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "isAdmin",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "isSuperAdmin",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
           ],
         },
         "params": Object {
@@ -402,6 +450,10 @@ exports[`<UserAdminPage/> should render 1`] = `
   user: node(id: $id) {
     __typename
     ...UserAdminPageTabs_user
+    id
+  }
+  viewer {
+    ...UserAdminPageTabs_viewer
     id
   }
 }
@@ -427,12 +479,22 @@ fragment UserAdminAccount_user on User {
   ...DeleteAccountModal_viewer
 }
 
+fragment UserAdminAccount_viewer on User {
+  isAdmin
+}
+
 fragment UserAdminPageTabs_user on User {
   url
   ...UserAdminAccount_user
   ...UserAdminProfile_user
   ...UserAdminPersonalData_user
   ...UserAdminPassword_user
+}
+
+fragment UserAdminPageTabs_viewer on User {
+  ...UserAdminAccount_viewer
+  ...UserAdminPersonalData_viewer
+  ...UserAdminProfile_viewer
 }
 
 fragment UserAdminPassword_user on User {
@@ -458,6 +520,10 @@ fragment UserAdminPersonalData_user on User {
   isViewer
 }
 
+fragment UserAdminPersonalData_viewer on User {
+  isSuperAdmin
+}
+
 fragment UserAdminProfile_user on User {
   id
   media {
@@ -479,6 +545,10 @@ fragment UserAdminProfile_user on User {
   }
   neighborhood
   isViewer
+}
+
+fragment UserAdminProfile_viewer on User {
+  isSuperAdmin
 }
 ",
         },

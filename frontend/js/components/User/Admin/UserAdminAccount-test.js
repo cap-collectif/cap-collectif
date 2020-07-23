@@ -10,6 +10,12 @@ describe('<UserAdminAccount/>', () => {
     ...formMock,
     intl: intlMock,
   };
+
+  const viewer = {
+    $refType,
+    isAdmin: true,
+  };
+
   it('should render when user is admin or viewer', () => {
     const userSubscribed = {
       $refType,
@@ -24,7 +30,7 @@ describe('<UserAdminAccount/>', () => {
       isSubscribedToNewsLetter: true,
     };
     const wrapper = shallow(
-      <UserAdminAccount {...props1} isViewerOrSuperAdmin user={userSubscribed} />,
+      <UserAdminAccount {...props1} isViewerOrAdmin viewer={viewer} user={userSubscribed} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -43,7 +49,12 @@ describe('<UserAdminAccount/>', () => {
       isSubscribedToNewsLetter: false,
     };
     const wrapper = shallow(
-      <UserAdminAccount {...props1} user={userNotSubscribed} isViewerOrSuperAdmin={false} />,
+      <UserAdminAccount
+        {...props1}
+        user={userNotSubscribed}
+        viewer={viewer}
+        isViewerOrAdmin={false}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

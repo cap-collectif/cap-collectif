@@ -7,11 +7,12 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State, GlobalState } from '../../../types';
 import type { UserAdminProfile_user } from '~relay/UserAdminProfile_user.graphql';
+import type { UserAdminProfile_viewer } from '~relay/UserAdminProfile_viewer.graphql';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
 
-type RelayProps = {| user: UserAdminProfile_user |};
+type RelayProps = {| user: UserAdminProfile_user, viewer: UserAdminProfile_viewer |};
 
 type FormValues = {|
   +id: string,
@@ -293,9 +294,8 @@ const form = reduxForm({
   form: formName,
 })(UserAdminProfile);
 
-const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  currentUser: state.user.user,
+const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
+  isSuperAdmin: viewer.isSuperAdmin,
   initialValues: {
     username: user.username ? user.username : null,
     biography: user.biography ? user.biography : null,
@@ -310,8 +310,7 @@ const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
   },
   userTypes: state.default.userTypes,
   features: state.default.features,
-  isViewerOrSuperAdmin:
-    user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  isViewerOrSuperAdmin: user.isViewer || viewer.isSuperAdmin,
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -340,6 +339,11 @@ export default createFragmentContainer(container, {
       }
       neighborhood
       isViewer
+    }
+  `,
+  viewer: graphql`
+    fragment UserAdminProfile_viewer on User {
+      isSuperAdmin
     }
   `,
 });

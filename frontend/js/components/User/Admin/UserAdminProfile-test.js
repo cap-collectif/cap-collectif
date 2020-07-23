@@ -26,6 +26,10 @@ describe('<UserAdminProfile/>', () => {
       profilePageIndexed: true,
       neighborhood: 'neighborhood1',
     },
+    viewer: {
+      $refType,
+      isSuperAdmin: true,
+    },
   };
 
   it('should render, with user confirmed by email adn viewer is super admin ', () => {
