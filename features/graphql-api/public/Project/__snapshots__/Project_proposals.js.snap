@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Preview|Project.proposals connection fetches the proposals of a private project 1`] = `
-Object {
-  "edges": Array [],
-  "totalCount": 0,
-}
-`;
-
 exports[`Preview|Project.proposals connection fetches the proposals of a private project as an admin 1`] = `
 Object {
   "edges": Array [
@@ -69,6 +62,6 @@ Object {
       },
     },
   ],
-  "totalCount": 8,
+  "totalCount": 73,
 }
 `;

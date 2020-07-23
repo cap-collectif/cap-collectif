@@ -171,7 +171,6 @@ class ProjectController extends Controller
             'arguments' => $arguments,
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-            'currentStep' => 'trash_step',
         ];
     }
 

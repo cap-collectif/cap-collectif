@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ProposalsState;
 use Capco\AppBundle\Enum\ProposalStatementState;
@@ -42,6 +43,43 @@ class ProposalSearch extends Search
         $this->type = 'proposal';
     }
 
+    public function searchProposalsByProject(
+        Project $project,
+        string $order,
+        array $providedFilters,
+        int $limit,
+        ?string $cursor
+    ): ElasticsearchPaginatedResult {
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery->addFilter(new Term(['project.id' => ['value' => $project->getId()]]));
+        $this->applyInaplicableFilters($boolQuery, $providedFilters);
+        $filters = $this->getFilters($providedFilters);
+        foreach ($filters as $key => $filter) {
+            $boolQuery->addFilter(new Term([$key => ['value' => $filter]]));
+        }
+
+        $query = new Query($boolQuery);
+        $this->applyCursor($query, $cursor);
+        $query->setSource(['id'])->setSize($limit);
+        if ($order) {
+            $query->setSort([
+                $this->getSort($order, $providedFilters['step'] ?? null),
+                ['id' => new \stdClass()],
+            ]);
+        }
+        $resultSet = $this->index->getType($this->type)->search($query);
+        $ids = [];
+        $cursors = [];
+        foreach ($resultSet as $result) {
+            $ids[] = $result->getData()['id'];
+            $cursors[] = $result->getParam('sort');
+        }
+        $proposals = $this->getHydratedResults($this->proposalRepo, $ids);
+
+        return new ElasticsearchPaginatedResult($proposals, $cursors, $resultSet->getTotalHits());
+    }
+
+    // This method is called in ProposalFormProposalsDataLoader and is based only on the first collectstep of the project.
     public function searchProposals(
         int $limit,
         $terms,
@@ -57,6 +95,7 @@ class ProposalSearch extends Search
             $terms,
             'phrase_prefix'
         );
+        $this->applyInaplicableFilters($boolQuery, $providedFilters);
         $stateTerms = [];
         $filters = $this->getFilters($providedFilters);
         foreach ($filters as $key => $value) {
@@ -80,22 +119,6 @@ class ProposalSearch extends Search
                 $boolQuery->addFilter($term);
             }
         }
-
-        $inapplicableFilters = [
-            'district' => $providedFilters['district'],
-            'category' => $providedFilters['category'],
-            'status' => $providedFilters['status'],
-        ];
-        $existsFilters = [];
-        foreach ($inapplicableFilters as $key => $inapplicableFilter) {
-            if (Search::NONE_VALUE === $inapplicableFilter) {
-                $existsFilters[] = new Query\Exists($key);
-            }
-        }
-        if (!empty($existsFilters)) {
-            $boolQuery->addMustNot($existsFilters);
-        }
-
         if (\count($stateTerms) > 0) {
             $boolQuery->addFilter((new Query\BoolQuery())->addShould($stateTerms));
         }
@@ -493,6 +516,9 @@ class ProposalSearch extends Search
         if (isset($providedFilters['decisionMaker'])) {
             $filters['decisionMaker.id'] = $providedFilters['decisionMaker'];
         }
+        if (isset($providedFilters['visible'])) {
+            $filters['visible'] = $providedFilters['visible'];
+        }
 
         if (isset($providedFilters['state'])) {
             switch ($providedFilters['state']) {
@@ -528,5 +554,24 @@ class ProposalSearch extends Search
         }
 
         return $filters;
+    }
+
+    private function applyInaplicableFilters(BoolQuery $boolQuery, array &$filters): void
+    {
+        $inapplicableFilters = [
+            'district' => $filters['district'],
+            'category' => $filters['category'],
+            'status' => $filters['status'],
+        ];
+        $existsFilters = [];
+        foreach ($inapplicableFilters as $key => $inapplicableFilter) {
+            if (Search::NONE_VALUE === $inapplicableFilter) {
+                $existsFilters[] = new Query\Exists($key);
+            }
+        }
+        if (!empty($existsFilters)) {
+            $boolQuery->addMustNot($existsFilters);
+            unset($filters['district'], $filters['category'], $filters['status']);
+        }
     }
 }

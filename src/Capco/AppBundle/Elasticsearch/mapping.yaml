@@ -233,6 +233,7 @@ mappings:
     proposal:
         properties:
             id: { type: keyword }
+            visible: { type: boolean }
             title: &text_analysis_highlighted_autocompleted
                 type: text
                 analyzer: capco_french

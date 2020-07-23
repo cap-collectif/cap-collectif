@@ -55,6 +55,7 @@ Capco\AppBundle\Entity\Proposal:
             groups:
                 [
                     PrivateProposals,
+                    ElasticsearchProposal,
                     ElasticsearchCommentNestedProposal,
                     ElasticsearchVoteNestedProposal,
                 ]

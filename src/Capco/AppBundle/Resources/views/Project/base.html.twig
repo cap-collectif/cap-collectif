@@ -1,6 +1,5 @@
 {% extends '@CapcoApp/Project/layout_with_widget.html.twig' %}
 
-{% set currentStepSlug = currentStep.slug is defined ? currentStep.slug : currentStep %}
 {#
    We only want to display the project header when we are in in a step that is either not a consultation, or if it is
    the case, we only want to display the header when we are consulting the list of consultations (if it has many)
