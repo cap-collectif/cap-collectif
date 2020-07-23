@@ -1,4 +1,56 @@
 /*eslint-disable */
+import * as moment from 'moment';
+import 'moment-timezone';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'url-search-params-polyfill';
+
+if (process.env.NODE_ENV === 'development') {
+  if (new URLSearchParams(window.location.search).get('axe')) {
+    global.axe(React, ReactDOM, 1000);
+  }
+}
+
+/* ## MOMENT ## */
+
+// Use window.locale to set the current locale data
+const { locale, timeZone } = window;
+
+if (locale) {
+  let localeMoment = null;
+
+  switch (locale) {
+    case 'en-GB':
+    case 'eu-EU':
+      localeMoment = 'en-gb';
+      break;
+    case 'de-DE':
+      localeMoment = 'de';
+      break;
+    case 'es-ES':
+      localeMoment = 'es';
+      break;
+    case 'nl-NL':
+      localeMoment = 'nl';
+      break;
+    case 'sv-SE':
+      localeMoment = 'sv';
+      break;
+    case 'fr-FR':
+    case 'oc-OC':
+    default:
+      localeMoment = 'fr';
+      break;
+  }
+
+  import(`moment/locale/${localeMoment}`).then(() => {
+    moment.locale(localeMoment);
+    moment.tz.setDefault(timeZone);
+  });
+}
+
+window.__SERVER__ = false;
+
 // Sometimes an iframe import babel-polyfill (eg: typeform)
 // This trick avoid multiple babel-polyfill loaded
 if (!global._babelPolyfill) {

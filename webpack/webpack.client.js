@@ -44,21 +44,32 @@ const devConf = {
       path.join(webpackConfig.frontendDir, 'js/googleCharts.js'),
       path.join(webpackConfig.frontendDir, 'js/browserUpdate.js'),
       path.join(webpackConfig.frontendDir, 'js/modernizr.js'),
-    ],
-
-    // Main file for JS/CSS
-    app: [
-      path.join(webpackConfig.frontendDir, 'js/app.js'),
-      path.join(webpackConfig.frontendDir, 'js/registration.js'),
-      path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
       path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
+      path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
+      path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
+      path.join(webpackConfig.nodeModulesDir, 'leaflet-geosearch/dist/geosearch.css'),
       path.join(webpackConfig.nodeModulesDir, 'slick-carousel/slick/slick.css'),
       path.join(webpackConfig.nodeModulesDir, 'slick-carousel/slick/slick-theme.css'),
       path.join(webpackConfig.assetsDir, 'js/fancybox/jquery.fancybox.css'),
-      path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
+    ],
+
+    // Common file for JS/CSS
+    app: [
       // Let style.scss at the bottom, it overrides some rules
       path.join(webpackConfig.srcDir, 'Resources/scss/style.scss'),
+    ],
+
+    admin: [
+      // Let app.js here, to let moment set the globally locale
+      path.join(webpackConfig.frontendDir, 'js/app.js'),
+      path.join(webpackConfig.frontendDir, 'js/registrationAdmin.js'),
+    ],
+
+    front: [
+      // Let app.js here, to let moment set the globally locale
+      path.join(webpackConfig.frontendDir, 'js/app.js'),
+      path.join(webpackConfig.frontendDir, 'js/registration.js'),
     ],
 
     // TODO: include rules for print.css with a media query and merge it with app.css
@@ -68,11 +79,6 @@ const devConf = {
     // Same as print but for backoffice
     'style-admin': [
       path.join(webpackConfig.srcDir, 'Resources/scss/style-admin.scss'),
-      path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
-      path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
-      path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
-      path.join(webpackConfig.nodeModulesDir, 'leaflet-geosearch/dist/geosearch.css'),
-      path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
       path.join(webpackConfig.nodeModulesDir, 'jquery-minicolors/jquery.minicolors.css'),
     ],
   },

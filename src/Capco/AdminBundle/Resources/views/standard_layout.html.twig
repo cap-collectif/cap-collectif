@@ -57,7 +57,7 @@
         }
     </style>
 
-    <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
 {% endblock %}
 
@@ -82,7 +82,7 @@
     {% else %}
         <script src="{{ asset('js/'~intl_locale()~'.js') }}"></script>
     {% endif %}
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
     {# Sonata javascript #}
     {{ parent() }}
 
