@@ -23,6 +23,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class PostAdmin extends CapcoAdmin
 {
+    protected $classnameLabel = 'post';
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
     private $tokenStorage;
 
@@ -36,7 +37,7 @@ class PostAdmin extends CapcoAdmin
         $this->tokenStorage = $tokenStorage;
     }
 
-    /** @var Post $object */
+    /** @var Post */
     public function getObjectMetadata($object)
     {
         $media = $object->getMedia();
@@ -58,7 +59,7 @@ class PostAdmin extends CapcoAdmin
         return ['blog'];
     }
 
-    /** @var Post $object */
+    /** @var Post */
     public function onPostPersist($object)
     {
         if ($object->getProposals()->count() > 0) {
@@ -73,7 +74,7 @@ class PostAdmin extends CapcoAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title', KnpTranslationFieldFilter::class, [
-            'label' => 'global.title'
+            'label' => 'global.title',
         ]);
         if (
             $this->getConfigurationPool()
@@ -108,7 +109,7 @@ class PostAdmin extends CapcoAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($entity, $property) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    }
+                    },
                 ]
             );
     }
@@ -118,7 +119,7 @@ class PostAdmin extends CapcoAdmin
         $listMapper
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('Authors', CollectionType::class, [
-                'label' => 'admin.fields.blog_post.authors'
+                'label' => 'admin.fields.blog_post.authors',
             ]);
         if (
             $this->getConfigurationPool()
@@ -134,17 +135,17 @@ class PostAdmin extends CapcoAdmin
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('isPublished', null, [
                 'editable' => true,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('publishedAt', null, ['label' => 'global.updated.date'])
             ->add('commentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
-                'editable' => true
+                'editable' => true,
             ])
             ->add('commentsCount', null, ['label' => 'admin.fields.blog_post.comments_count'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 
@@ -154,13 +155,13 @@ class PostAdmin extends CapcoAdmin
 
         $formMapper->with('global.contenu')->add('title', TextType::class, [
             'label' => 'global.title',
-            'required' => true
+            'required' => true,
         ]);
         if ($editMode) {
             $formMapper->add('slug', TextType::class, [
                 'disabled' => true,
                 'attr' => ['readonly' => true],
-                'label' => 'global.link'
+                'label' => 'global.link',
             ]);
         }
         $formMapper
@@ -171,26 +172,26 @@ class PostAdmin extends CapcoAdmin
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
                 'multiple' => true,
-                'required' => false
+                'required' => false,
             ])
             ->add('abstract', TextType::class, ['label' => 'global.summary', 'required' => false])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add(
                 'media',
                 ModelListType::class,
                 [
                     'required' => false,
-                    'label' => 'global.illustration'
+                    'label' => 'global.illustration',
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image'
-                    ]
+                        'provider' => 'sonata.media.provider.image',
+                    ],
                 ]
             )
             ->end();
@@ -199,7 +200,7 @@ class PostAdmin extends CapcoAdmin
             ->add('metaDescription', TextType::class, [
                 'label' => 'global.meta.description',
                 'required' => false,
-                'help' => 'admin.help.metadescription'
+                'help' => 'admin.help.metadescription',
             ])
             ->add('customCode', null, [
                 'label' => 'admin.customcode',
@@ -207,8 +208,8 @@ class PostAdmin extends CapcoAdmin
                 'help' => 'admin.help.customcode',
                 'attr' => [
                     'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>'
-                ]
+                    'placeholder' => '<script type="text/javascript"> </script>',
+                ],
             ])
             ->end();
 
@@ -225,7 +226,7 @@ class PostAdmin extends CapcoAdmin
                 'required' => false,
                 'multiple' => true,
                 'btn_add' => false,
-                'by_reference' => false
+                'by_reference' => false,
             ]);
         }
 
@@ -235,7 +236,7 @@ class PostAdmin extends CapcoAdmin
                 'required' => false,
                 'multiple' => true,
                 'btn_add' => false,
-                'by_reference' => false
+                'by_reference' => false,
             ])
             ->add('proposals', ModelAutocompleteType::class, [
                 'property' => 'title',
@@ -243,11 +244,11 @@ class PostAdmin extends CapcoAdmin
                 'help' => 'L\'auteur de la proposition sera notifié d\'un nouvel article',
                 'required' => false,
                 'multiple' => true,
-                'by_reference' => false
+                'by_reference' => false,
             ])
             ->add('displayedOnBlog', null, [
                 'label' => 'admin.fields.blog_post.displayedOnBlog',
-                'required' => false
+                'required' => false,
             ]);
         $formMapper
             ->end()
@@ -256,15 +257,15 @@ class PostAdmin extends CapcoAdmin
                 'required' => true,
                 'label' => 'global.updated.date',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm']
+                'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
             ])
             ->add('isPublished', null, [
                 'label' => 'global.published',
-                'required' => false
+                'required' => false,
             ])
             ->add('commentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
-                'required' => false
+                'required' => false,
             ]);
     }
 
@@ -287,12 +288,12 @@ class PostAdmin extends CapcoAdmin
             ->add('abstract', null, ['label' => 'global.summary'])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:Post:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.blog_post.media'
+                'label' => 'admin.fields.blog_post.media',
             ])
             ->add('isPublished', null, ['label' => 'global.published'])
             ->add('publishedAt', null, ['label' => 'global.updated.date'])

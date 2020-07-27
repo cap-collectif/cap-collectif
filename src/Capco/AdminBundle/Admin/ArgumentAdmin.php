@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ArgumentAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'argument';
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
     private $tokenStorage;
 

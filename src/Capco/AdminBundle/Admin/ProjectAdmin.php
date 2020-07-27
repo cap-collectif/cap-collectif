@@ -35,6 +35,7 @@ use Symfony\Component\Validator\Constraints\Required;
 
 final class ProjectAdmin extends CapcoAdmin
 {
+    protected $classnameLabel = 'project';
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'publishedAt'];
 
     protected $formOptions = ['cascade_validation' => true];

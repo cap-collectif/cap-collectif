@@ -11,9 +11,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class NewsletterSubscriptionAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'newsletter_subscription';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'email'
+        '_sort_by' => 'email',
     ];
 
     public function getFeatures()
@@ -25,13 +26,13 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('email', null, [
-                'label' => 'share.mail'
+                'label' => 'share.mail',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.newsletter_subscription.is_enabled'
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ]);
     }
 
@@ -41,21 +42,21 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('email', null, [
-                'label' => 'share.mail'
+                'label' => 'share.mail',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.newsletter_subscription.is_enabled'
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -63,11 +64,11 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('email', null, [
-                'label' => 'share.mail'
+                'label' => 'share.mail',
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
-                'required' => false
+                'required' => false,
             ]);
     }
 
@@ -75,14 +76,14 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('email', null, [
-                'label' => 'share.mail'
+                'label' => 'share.mail',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.newsletter_subscription.is_enabled'
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ]);
     }
 

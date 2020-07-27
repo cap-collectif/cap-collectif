@@ -19,9 +19,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class VideoAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'video';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     ];
 
     // For mosaic view
@@ -45,30 +46,30 @@ class VideoAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', KnpTranslationFieldFilter::class, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add(
                 'Author',
                 ModelAutocompleteFilter::class,
                 [
-                    'label' => 'global.author'
+                    'label' => 'global.author',
                 ],
                 null,
                 [
                     'property' => 'email,username',
                     'to_string_callback' => function ($entity, $property) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    }
+                    },
                 ]
             )
             ->add('isEnabled', null, [
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ]);
     }
 
@@ -76,31 +77,31 @@ class VideoAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('Author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'editable' => true
+                'editable' => true,
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -108,26 +109,26 @@ class VideoAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', TextType::class, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('body', TextareaType::class, [
-                'label' => 'global.description'
+                'label' => 'global.description',
             ])
             ->add('Author', ModelType::class, [
                 'label' => 'global.author',
 
-                'required' => true
+                'required' => true,
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.video.link',
                 'required' => true,
                 'help' => 'admin.help.project.video',
                 'attr' => [
-                    'placeholder' => 'http://'
-                ]
+                    'placeholder' => 'http://',
+                ],
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add(
                 'media',
@@ -135,19 +136,19 @@ class VideoAdmin extends AbstractAdmin
                 [
                     'label' => 'global.image',
                     'required' => false,
-                    'help' => 'admin.help.video.media'
+                    'help' => 'admin.help.video.media',
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image'
-                    ]
+                        'provider' => 'sonata.media.provider.image',
+                    ],
                 ]
             )
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'required' => false
+                'required' => false,
             ]);
     }
 
@@ -155,28 +156,28 @@ class VideoAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('body', null, [
-                'label' => 'global.description'
+                'label' => 'global.description',
             ])
             ->add('Author', null, [
-                'label' => 'global.author'
+                'label' => 'global.author',
             ])
             ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'global.image'
+                'label' => 'global.image',
             ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'editable' => true
+                'editable' => true,
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ]);
     }
 }

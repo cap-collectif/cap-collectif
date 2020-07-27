@@ -15,9 +15,10 @@ use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class PageAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'page';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     ];
 
     // Fields to be shown on create/edit forms
@@ -28,18 +29,18 @@ class PageAdmin extends AbstractAdmin
             // can not guess type on translation entity
             // but it's propably better like that :-)
             ->add('title', TextType::class, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('slug', TextType::class, [
-                'label' => 'global.link'
+                'label' => 'global.link',
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'required' => false
+                'required' => false,
             ])
             ->end();
         $formMapper
@@ -50,7 +51,7 @@ class PageAdmin extends AbstractAdmin
                 'help' => 'admin.help.metadescription',
                 'strip_tags' => true,
                 'purify_html' => true,
-                'purify_html_profile' => 'default'
+                'purify_html_profile' => 'default',
             ])
             ->add(
                 'cover',
@@ -58,14 +59,14 @@ class PageAdmin extends AbstractAdmin
                 [
                     'required' => false,
                     'label' => 'global.image',
-                    'help' => 'admin.help.social_network_thumbnail'
+                    'help' => 'admin.help.social_network_thumbnail',
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image'
-                    ]
+                        'provider' => 'sonata.media.provider.image',
+                    ],
                 ]
             )
             ->add('customCode', TextareaType::class, [
@@ -74,8 +75,8 @@ class PageAdmin extends AbstractAdmin
                 'help' => 'admin.help.customcode',
                 'attr' => [
                     'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>'
-                ]
+                    'placeholder' => '<script type="text/javascript"> </script>',
+                ],
             ])
             ->end();
     }
@@ -85,16 +86,16 @@ class PageAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', KnpTranslationFieldFilter::class, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('MenuItems', null, [
-                'label' => 'admin.fields.page.menu_items'
+                'label' => 'admin.fields.page.menu_items',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ]);
     }
 
@@ -105,26 +106,26 @@ class PageAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('slug', null, [
-                'label' => 'global.link'
+                'label' => 'global.link',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('MenuItems', null, [
-                'label' => 'admin.fields.page.menu_items'
+                'label' => 'admin.fields.page.menu_items',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 }

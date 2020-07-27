@@ -14,6 +14,7 @@ use Capco\AppBundle\Enum\ProjectVisibilityMode;
 
 class QuestionnaireAdmin extends CapcoAdmin
 {
+    protected $classnameLabel = 'questionnaire';
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
     protected $formOptions = ['cascade_validation' => true];
@@ -99,7 +100,7 @@ class QuestionnaireAdmin extends CapcoAdmin
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 

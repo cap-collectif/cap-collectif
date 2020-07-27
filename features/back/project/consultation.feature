@@ -25,7 +25,7 @@ Scenario: Logged in admin wants to see home / sections page list
   Given I am logged in as admin
   When I go to the admin section list page
   Then I should not see "error.500"
-  And I should see "Section List"
+  And I should see "section_list"
 
 Scenario: Logged in admin wants to edit a section
   Given I am logged in as admin

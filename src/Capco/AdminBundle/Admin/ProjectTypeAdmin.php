@@ -10,9 +10,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ProjectTypeAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'project_type';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'slug'
+        '_sort_by' => 'slug',
     ];
 
     public function getBatchActions()
@@ -34,15 +35,15 @@ class ProjectTypeAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('title', null, [
                 'label' => 'global.type',
-                'template' => 'CapcoAdminBundle:ProjectType:list_title.html.twig'
+                'template' => 'CapcoAdminBundle:ProjectType:list_title.html.twig',
             ])
             ->add('color', null, [
                 'label' => 'global.color',
                 'template' => 'CapcoAdminBundle:ProjectType:list_color.html.twig',
-                'header_style' => 'width: 13%'
+                'header_style' => 'width: 13%',
             ]);
         $listMapper->add('_action', 'actions', [
-            'actions' => ['edit' => ['header_style' => 'width: 5%; text-align: center']]
+            'actions' => ['edit' => ['header_style' => 'width: 5%; text-align: center']],
         ]);
     }
 
@@ -50,7 +51,7 @@ class ProjectTypeAdmin extends AbstractAdmin
     {
         $formMapper->add('color', null, [
             'label' => 'global.value',
-            'attr' => ['class' => 'minicolors-input']
+            'attr' => ['class' => 'minicolors-input'],
         ]);
     }
 

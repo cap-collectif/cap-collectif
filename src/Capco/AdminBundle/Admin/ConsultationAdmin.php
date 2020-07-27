@@ -15,9 +15,10 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ConsultationAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'consultation';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     ];
 
     private $opinionTypeRepository;
@@ -45,16 +46,16 @@ class ConsultationAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('opinionTypes', null, [
-                'label' => 'admin.fields.consultation.opinion_types'
+                'label' => 'admin.fields.consultation.opinion_types',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ]);
     }
 
@@ -64,37 +65,37 @@ class ConsultationAdmin extends AbstractAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('step', null, [
-                'label' => 'global.participative.project.label'
+                'label' => 'global.participative.project.label',
             ])
             ->add('opinionTypes', ModelType::class, [
-                'label' => 'admin.fields.consultation.opinion_types'
+                'label' => 'admin.fields.consultation.opinion_types',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->with('admin.fields.step.group_general')->add('title', null, [
-            'label' => 'global.title'
+            'label' => 'global.title',
         ]);
         if ($this->getSubject()->getId()) {
             $formMapper
                 ->add('description', CKEditorType::class, [
                     'label' => 'global.description',
                     'config_name' => 'admin_editor',
-                    'required' => false
+                    'required' => false,
                 ])
                 ->add(
                     'illustration',
@@ -102,19 +103,19 @@ class ConsultationAdmin extends AbstractAdmin
                     [
                         'required' => false,
                         'label' => 'global.illustration',
-                        'help' => 'help-text-description-step'
+                        'help' => 'help-text-description-step',
                     ],
                     [
                         'link_parameters' => [
                             'context' => 'default',
                             'hide_context' => true,
-                            'provider' => 'sonata.media.provider.image'
-                        ]
+                            'provider' => 'sonata.media.provider.image',
+                        ],
                     ]
                 )
                 ->add('step', null, [
                     'label' => 'admin.label.step',
-                    'required' => false
+                    'required' => false,
                 ]);
         }
         $formMapper->end();
@@ -123,7 +124,7 @@ class ConsultationAdmin extends AbstractAdmin
                 ->with('plan-consultation')
                 ->add('opinionCountShownBySection', null, [
                     'label' => 'admin.fields.step.opinionCountShownBySection',
-                    'required' => true
+                    'required' => true,
                 ])
                 ->add('opinionTypes', ModelType::class, [
                     'label' => 'admin.fields.consultation.opinion_types',
@@ -134,41 +135,41 @@ class ConsultationAdmin extends AbstractAdmin
                     'required' => true,
                     'tree' => true,
 
-                    'disabled' => true
+                    'disabled' => true,
                 ])
                 ->end()
                 ->with('submission-of-proposals')
                 ->add('titleHelpText', null, [
                     'label' => 'admin.fields.proposal_form.title_help_text',
                     'required' => false,
-                    'help' => 'admin.fields.proposal_form.help_text_title_help_text'
+                    'help' => 'admin.fields.proposal_form.help_text_title_help_text',
                 ])
                 ->add('descriptionHelpText', null, [
                     'label' => 'admin.fields.proposal_form.description_help_text',
                     'required' => false,
-                    'help' => 'admin.fields.proposal_form.help_text_description_help_text'
+                    'help' => 'admin.fields.proposal_form.help_text_description_help_text',
                 ])
                 ->end()
                 ->with('admin.label.settings.notifications', [
-                    'description' => 'receive-email-notification-when-a-contribution-is'
+                    'description' => 'receive-email-notification-when-a-contribution-is',
                 ])
                 ->add('moderatingOnReport', CheckboxType::class, [
                     'label' => 'reported',
                     'mapped' => false,
                     'value' => true,
                     'disabled' => true,
-                    'attr' => ['readonly' => true, 'checked' => true]
+                    'attr' => ['readonly' => true, 'checked' => true],
                 ])
                 ->add('moderatingOnCreate', null, ['label' => 'admin.fields.synthesis.enabled'])
                 ->add('moderatingOnUpdate', null, [
-                    'label' => 'global.modified'
+                    'label' => 'global.modified',
                 ])
                 ->end()
                 ->with('admin.fields.step.advanced')
                 ->add('metaDescription', null, [
                     'label' => 'global.meta.description',
                     'required' => false,
-                    'help' => 'admin.help.metadescription'
+                    'help' => 'admin.help.metadescription',
                 ])
                 ->add('customCode', null, [
                     'label' => 'admin.customcode',
@@ -176,8 +177,8 @@ class ConsultationAdmin extends AbstractAdmin
                     'help' => 'admin.help.customcode',
                     'attr' => [
                         'rows' => 10,
-                        'placeholder' => '<script type="text/javascript"> </script>'
-                    ]
+                        'placeholder' => '<script type="text/javascript"> </script>',
+                    ],
                 ])
                 ->end();
         }
@@ -187,16 +188,16 @@ class ConsultationAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('opinionTypes', null, [
-                'label' => 'admin.fields.consultation.opinion_types'
+                'label' => 'admin.fields.consultation.opinion_types',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ]);
     }
 

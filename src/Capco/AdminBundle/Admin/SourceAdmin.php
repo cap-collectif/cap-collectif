@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class SourceAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'source';
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
     private $tokenStorage;

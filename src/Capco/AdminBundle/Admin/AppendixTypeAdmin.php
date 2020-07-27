@@ -9,23 +9,24 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class AppendixTypeAdmin extends CapcoAdmin
 {
+    protected $classnameLabel = 'appendix_type';
     protected $formOptions = [
-        'cascade_validation' => true
+        'cascade_validation' => true,
     ];
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     ];
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('helpText', null, [
-                'label' => 'global.help.text'
+                'label' => 'global.help.text',
             ]);
     }
 
@@ -35,17 +36,17 @@ class AppendixTypeAdmin extends CapcoAdmin
 
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('helpText', null, [
-                'label' => 'global.help.text'
+                'label' => 'global.help.text',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -53,10 +54,10 @@ class AppendixTypeAdmin extends CapcoAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('helpText', null, [
-                'label' => 'global.help.text'
+                'label' => 'global.help.text',
             ]);
     }
 
@@ -65,11 +66,11 @@ class AppendixTypeAdmin extends CapcoAdmin
         $formMapper
             ->add('title', null, [
                 'label' => 'global.title',
-                'required' => true
+                'required' => true,
             ])
             ->add('helpText', null, [
                 'label' => 'global.help.text',
-                'required' => false
+                'required' => false,
             ]);
     }
 }

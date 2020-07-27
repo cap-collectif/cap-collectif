@@ -11,6 +11,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class ReportingAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'reporting';
+
     public function getFeatures()
     {
         return ['reporting'];

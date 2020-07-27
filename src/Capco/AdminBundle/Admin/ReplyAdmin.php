@@ -15,6 +15,7 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ReplyAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'reply';
     private $tokenStorage;
 
     public function __construct(

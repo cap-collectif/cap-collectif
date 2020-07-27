@@ -9,10 +9,6 @@
     {{ "title_edit"|trans({'%name%': username }, 'SonataAdminBundle') }}
 {% endblock %}
 
-{% block sonata_breadcrumb %}
-    {# empty to override #}
-{% endblock %}
-
 {% block form %}
     {# override sonata's form to render a react component instead #}
     {% include '@CapcoApp/redux_store.html.twig' %}

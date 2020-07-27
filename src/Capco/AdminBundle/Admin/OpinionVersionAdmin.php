@@ -20,6 +20,7 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 
 class OpinionVersionAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'opinion_version';
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
     private $tokenStorage;
 

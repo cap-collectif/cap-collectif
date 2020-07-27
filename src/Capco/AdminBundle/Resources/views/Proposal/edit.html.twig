@@ -10,9 +10,6 @@
     {{ "title_edit"|trans({'%name%': title }, 'SonataAdminBundle') }}
 {% endblock %}
 
-{% block sonata_breadcrumb %}
-{% endblock %}
-
 {% block form %}
 {% include '@CapcoApp/redux_store.html.twig' with {
   'project': admin.subject.proposalForm.step.getProject()

@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class SiteParameterAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'site_parameter';
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'isEnabled'];
 
     public function toString($object)

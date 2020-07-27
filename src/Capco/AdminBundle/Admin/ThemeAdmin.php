@@ -22,9 +22,10 @@ use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class ThemeAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'theme';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     ];
     private $indexer;
 
@@ -71,41 +72,41 @@ class ThemeAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', KnpTranslationFieldFilter::class, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('isEnabled', null, [
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('projects', null, [
-                'label' => 'global.participative.project'
+                'label' => 'global.participative.project',
             ])
             ->add('events', null, [
-                'label' => 'global.events'
+                'label' => 'global.events',
             ])
             ->add('posts', null, [
-                'label' => 'global.articles'
+                'label' => 'global.articles',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add(
                 'Author',
                 ModelAutocompleteFilter::class,
                 [
-                    'label' => 'global.author'
+                    'label' => 'global.author',
                 ],
                 null,
                 [
                     'property' => 'email,username',
                     'to_string_callback' => function ($entity, $property) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    }
+                    },
                 ]
             );
     }
@@ -114,40 +115,40 @@ class ThemeAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('Author', null, [
-                'label' => 'global.author'
+                'label' => 'global.author',
             ])
             ->add('status', null, [
                 'label' => 'global.status',
                 'template' => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
-                'statusesLabels' => Theme::$statusesLabels
+                'statusesLabels' => Theme::$statusesLabels,
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('eventsCount', null, [
                 'label' => 'global.events',
-                'template' => 'CapcoAdminBundle:Theme:events_count_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Theme:events_count_list_field.html.twig',
             ])
             ->add('postsCount', null, [
                 'label' => 'global.articles',
-                'template' => 'CapcoAdminBundle:Theme:posts_count_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Theme:posts_count_list_field.html.twig',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('updatedAt', 'datetime', [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -157,14 +158,14 @@ class ThemeAdmin extends AbstractAdmin
 
         $formMapper->add('title', TextType::class, [
             'label' => 'global.title',
-            'required' => true
+            'required' => true,
         ]);
 
         if ($editMode) {
             $formMapper->add('slug', TextType::class, [
                 'disabled' => true,
                 'attr' => ['readonly' => true],
-                'label' => 'global.link'
+                'label' => 'global.link',
             ]);
         }
         $formMapper
@@ -173,44 +174,44 @@ class ThemeAdmin extends AbstractAdmin
                 'property' => 'username,email',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'required' => false
+                'required' => false,
             ])
             ->add('position', IntegerType::class, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('teaser', TextareaType::class, [
                 'label' => 'global.subtitle',
-                'required' => false
+                'required' => false,
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.description',
                 'config_name' => 'admin_editor',
-                'required' => false
+                'required' => false,
             ])
             ->add('status', ChoiceType::class, [
                 'label' => 'global.status',
                 'choices' => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
-                'placeholder' => 'global.no_status'
+                'placeholder' => 'global.no_status',
             ])
             ->add(
                 'media',
                 ModelListType::class,
                 [
                     'required' => false,
-                    'label' => 'global.image'
+                    'label' => 'global.image',
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image'
-                    ]
+                        'provider' => 'sonata.media.provider.image',
+                    ],
                 ]
             )
             ->end();
@@ -219,7 +220,7 @@ class ThemeAdmin extends AbstractAdmin
             ->add('metaDescription', TextType::class, [
                 'label' => 'global.meta.description',
                 'required' => false,
-                'help' => 'admin.help.metadescription'
+                'help' => 'admin.help.metadescription',
             ])
             ->add('customCode', null, [
                 'label' => 'admin.customcode',
@@ -227,8 +228,8 @@ class ThemeAdmin extends AbstractAdmin
                 'help' => 'admin.help.customcode',
                 'attr' => [
                     'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>'
-                ]
+                    'placeholder' => '<script type="text/javascript"> </script>',
+                ],
             ])
             ->end();
     }
@@ -237,46 +238,46 @@ class ThemeAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('teaser', null, [
-                'label' => 'global.subtitle'
+                'label' => 'global.subtitle',
             ])
             ->add('body', null, [
-                'label' => 'global.description'
+                'label' => 'global.description',
             ])
             ->add('status', null, [
                 'label' => 'global.status',
                 'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
-                'statusesLabels' => array_flip(Theme::$statusesLabels)
+                'statusesLabels' => array_flip(Theme::$statusesLabels),
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('Author', null, [
-                'label' => 'global.author'
+                'label' => 'global.author',
             ])
             ->add('projects', null, [
-                'label' => 'global.participative.project'
+                'label' => 'global.participative.project',
             ])
             ->add('events', null, [
-                'label' => 'global.events'
+                'label' => 'global.events',
             ])
             ->add('posts', null, [
-                'label' => 'global.articles'
+                'label' => 'global.articles',
             ])
             ->add('media', null, [
                 'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',
-                'label' => 'global.image'
+                'label' => 'global.image',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ]);
     }
 }

@@ -22,6 +22,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class OpinionAdmin extends CapcoAdmin
 {
+    protected $classnameLabel = 'proposal';
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
     protected $formOptions = ['cascade_validation' => true];

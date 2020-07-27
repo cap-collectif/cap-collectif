@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ProposalAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'proposal';
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
     private $tokenStorage;
     private $indexer;
@@ -161,32 +162,32 @@ class ProposalAdmin extends AbstractAdmin
             ->add('fullReference', null, ['label' => 'global.reference'])
             ->add('titleInfo', null, [
                 'label' => 'global.title',
-                'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig',
             ])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
             ])
             ->add('project', ModelType::class, [
                 'label' => 'global.participative.project.label',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
             ])
             ->add('category', ModelType::class, ['label' => 'global.category'])
             ->add('district', ModelType::class, ['label' => 'proposal.district'])
             ->add('lastStatus', null, [
                 'label' => 'global.status',
-                'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
             ])
             ->add('state', null, [
                 'mapped' => false,
                 'label' => 'global.state',
-                'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig',
             ])
             ->add('evaluers', null, ['label' => 'admin.fields.proposal.evaluers'])
             ->addIdentifier('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedInfo', 'datetime', [
                 'label' => 'global.maj',
-                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig'
+                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
             ]);
     }
 
@@ -215,7 +216,7 @@ class ProposalAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($entity, $property) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    }
+                    },
                 ]
             )
             ->add('district', null, ['label' => 'proposal.district'])
@@ -223,7 +224,7 @@ class ProposalAdmin extends AbstractAdmin
                 'property' => 'email,username',
                 'to_string_callback' => function ($entity, $property) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
-                }
+                },
             ])
             ->add(
                 'likers',
@@ -234,7 +235,7 @@ class ProposalAdmin extends AbstractAdmin
                     'property' => 'email,username',
                     'to_string_callback' => function ($entity, $property) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    }
+                    },
                 ]
             )
             ->add('updatedAt', null, ['label' => 'admin.fields.proposal.updated_at']);
@@ -245,7 +246,7 @@ class ProposalAdmin extends AbstractAdmin
             ->add('status', null, ['label' => 'global.status'])
             ->add('estimation', null, ['label' => 'admin.fields.proposal.estimation'])
             ->add('proposalForm.step.projectAbstractStep.project', null, [
-                'label' => 'global.participative.project.label'
+                'label' => 'global.participative.project.label',
             ])
             ->add('evaluers', null, ['label' => 'admin.global.evaluers']);
     }

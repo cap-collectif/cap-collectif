@@ -5,7 +5,36 @@
 {% block tab_menu %}{% endblock %}
 {% block actions %}{% endblock %}
 
+{% set title = 'website-icon'|trans({}, 'CapcoAppBundle') %}
+
+{% block title %}
+    - {{ title }}
+{% endblock %}
+
+{% block navbar_title %}
+    {{ title }}
+{% endblock %}
+
 {% block sonata_breadcrumb %}
+    <div class="hidden-xs">
+        {% if _breadcrumb is not empty or action is defined %}
+            <ol class="nav navbar-top-links breadcrumb">
+
+                {%- set breadcrumb = breadcrumbs_builder.breadcrumbs(admin, action) -%}
+                {% if breadcrumb|length > 0 %}
+                    {%- set dashboard = breadcrumb[0] -%}
+                    {%- set translation_domain = dashboard.extra('translation_domain', 'messages') -%}
+                    <li>
+                        <a href="{{ dashboard.uri }}">
+                            {{ dashboard.label|trans(dashboard.extra('translation_params', {}), translation_domain) }}
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="active"><span>{{ 'website-icon'|trans({}, 'CapcoAppBundle') }}</span></li>
+            </ol>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block form %}

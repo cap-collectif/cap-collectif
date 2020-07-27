@@ -14,9 +14,10 @@ use Sonata\MediaBundle\Form\Type\MediaType;
 
 class SocialNetworkAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'social_network';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title'
+        '_sort_by' => 'title',
     ];
 
     // For mosaic view
@@ -40,19 +41,19 @@ class SocialNetworkAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('link', null, [
-                'label' => 'global.link'
+                'label' => 'global.link',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ]);
     }
 
@@ -60,32 +61,32 @@ class SocialNetworkAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('link', null, [
-                'label' => 'global.link'
+                'label' => 'global.link',
             ])
             ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'global.image'
+                'label' => 'global.image',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
@@ -93,31 +94,31 @@ class SocialNetworkAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'required' => false
+                'required' => false,
             ])
             ->add('link', null, [
-                'label' => 'global.link'
+                'label' => 'global.link',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add(
                 'media',
                 ModelListType::class,
                 [
                     'required' => false,
-                    'label' => 'global.image'
+                    'label' => 'global.image',
                 ],
                 [
                     'link_parameters' => [
                         'context' => 'default',
                         'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image'
-                    ]
+                        'provider' => 'sonata.media.provider.image',
+                    ],
                 ]
             );
     }
@@ -126,26 +127,26 @@ class SocialNetworkAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('link', null, [
-                'label' => 'global.link'
+                'label' => 'global.link',
             ])
             ->add('media', MediaType::class, [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_show_field.html.twig',
-                'label' => 'global.image'
+                'label' => 'global.image',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ]);
     }
 

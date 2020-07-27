@@ -23,6 +23,8 @@ class RecentReportingController extends Controller
         $reports = $resolver->getRecentReports();
 
         return [
+            'action' => 'list',
+            'breadcrumbs_builder' => $this->get('sonata.admin.breadcrumbs_builder'),
             'reports' => $reports,
             'statusLabels' => Reporting::$statusesLabels,
             'recentReporting' => true,

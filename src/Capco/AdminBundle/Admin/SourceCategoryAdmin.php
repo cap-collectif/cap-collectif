@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SourceCategoryAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'source_category';
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -20,7 +21,7 @@ class SourceCategoryAdmin extends AbstractAdmin
             ->add('title', TextType::class, ['label' => 'global.title'])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
-                'required' => false
+                'required' => false,
             ]);
     }
 
@@ -28,12 +29,12 @@ class SourceCategoryAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', KnpTranslationFieldFilter::class, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('sources', null, ['label' => 'global.sources.label'])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('createdAt', null, ['label' => 'global.creation']);
     }
@@ -46,11 +47,11 @@ class SourceCategoryAdmin extends AbstractAdmin
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []]
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }
 
@@ -60,7 +61,7 @@ class SourceCategoryAdmin extends AbstractAdmin
             ->add('title', null, ['label' => 'global.title'])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('createdAt', null, ['label' => 'global.creation']);

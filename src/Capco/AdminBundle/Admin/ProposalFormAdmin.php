@@ -15,6 +15,7 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ProposalFormAdmin extends CapcoAdmin
 {
+    protected $classnameLabel = 'proposal_form';
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
     protected $formOptions = ['cascade_validation' => true];
@@ -76,7 +77,7 @@ class ProposalFormAdmin extends CapcoAdmin
         $datagridMapper
             ->add('title', null, ['label' => 'global.title'])
             ->add('step', null, ['label' => 'project'], EntityType::class, [
-                'query_builder' => $this->filterByCollectStepQuery()
+                'query_builder' => $this->filterByCollectStepQuery(),
             ])
             ->add('updatedAt', null, ['label' => 'global.maj']);
     }
@@ -90,7 +91,7 @@ class ProposalFormAdmin extends CapcoAdmin
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('project', ModelType::class, [
                 'label' => 'project',
-                'template' => 'CapcoAdminBundle:ProposalForm:project_show_field.html.twig'
+                'template' => 'CapcoAdminBundle:ProposalForm:project_show_field.html.twig',
             ])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
@@ -98,10 +99,10 @@ class ProposalFormAdmin extends CapcoAdmin
                 'actions' => [
                     'duplicate' => [
                         'template' =>
-                            'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig'
+                            'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig',
                     ],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 

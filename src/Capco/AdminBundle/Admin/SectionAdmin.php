@@ -22,9 +22,10 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class SectionAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'section';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position'
+        '_sort_by' => 'position',
     ];
 
     public function createQuery($context = 'list')
@@ -61,25 +62,25 @@ class SectionAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('title', KnpTranslationFieldFilter::class, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('teaser', KnpTranslationFieldFilter::class, [
-                'label' => 'global.subtitle'
+                'label' => 'global.subtitle',
             ])
             ->add('body', KnpTranslationFieldFilter::class, [
-                'label' => 'global.contenu'
+                'label' => 'global.contenu',
             ])
             ->add('enabled', null, [
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ]);
     }
 
@@ -95,33 +96,33 @@ class SectionAdmin extends AbstractAdmin
                 'code' => 'Action',
                 'actions' => [
                     'up' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_up.html.twig'
+                        'template' => 'CapcoAdminBundle:Section:list__action_up.html.twig',
                     ],
                     'down' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_down.html.twig'
-                    ]
-                ]
+                        'template' => 'CapcoAdminBundle:Section:list__action_down.html.twig',
+                    ],
+                ],
             ])
             ->addIdentifier('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('enabled', null, [
                 'label' => 'global.published',
-                'editable' => true
+                'editable' => true,
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
                     'delete' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig'
-                    ]
-                ]
+                        'template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig',
+                    ],
+                ],
             ]);
     }
 
@@ -135,12 +136,12 @@ class SectionAdmin extends AbstractAdmin
             $formMapper->add('title', TextType::class, [
                 'label' => 'global.title',
                 'required' => false,
-                'help' => 'be-concise-1-or-2-words'
+                'help' => 'be-concise-1-or-2-words',
             ]);
         } else {
             $formMapper->add('title', TextType::class, [
                 'label' => 'global.title',
-                'attr' => ['readonly' => true]
+                'attr' => ['readonly' => true],
             ]);
         }
 
@@ -148,20 +149,20 @@ class SectionAdmin extends AbstractAdmin
             $formMapper->add('teaser', TextType::class, [
                 'label' => 'global.subtitle',
                 'required' => false,
-                'help' => 'support-your-title'
+                'help' => 'support-your-title',
             ]);
         }
 
         if ($fields['body']) {
             $formMapper->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ]);
         }
 
         if ($fields['nbObjects']) {
             $formMapper->add('nbObjects', null, [
-                'label' => 'admin.fields.section.nb_objects'
+                'label' => 'admin.fields.section.nb_objects',
             ]);
         }
 
@@ -169,7 +170,7 @@ class SectionAdmin extends AbstractAdmin
             $formMapper->add('step', ModelType::class, [
                 'label' => 'global.collect.step.label',
                 'required' => true,
-                'query' => $this->createQueryForCollectSteps()
+                'query' => $this->createQueryForCollectSteps(),
             ]);
         }
         $formMapper->end();
@@ -189,10 +190,10 @@ class SectionAdmin extends AbstractAdmin
             $formMapper
                 ->with('admin.label.section.display.metrics')
                 ->add('metricsToDisplayBasics', null, [
-                    'label' => $basicsMetricsLabel
+                    'label' => $basicsMetricsLabel,
                 ])
                 ->add('metricsToDisplayProjects', null, [
-                    'label' => 'admin.fields.section.projectsMetrics'
+                    'label' => 'admin.fields.section.projectsMetrics',
                 ]);
 
             $events = $this->getConfigurationPool()
@@ -201,7 +202,7 @@ class SectionAdmin extends AbstractAdmin
                 ->getEventsConnection($args);
             if ($events->getTotalCount() > 0) {
                 $formMapper->add('metricsToDisplayEvents', null, [
-                    'label' => 'global.events'
+                    'label' => 'global.events',
                 ]);
             }
             $formMapper->end();
@@ -210,11 +211,11 @@ class SectionAdmin extends AbstractAdmin
         $formMapper
             ->with('admin.label.section.publication')
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('enabled', null, [
                 'label' => 'global.published',
-                'required' => false
+                'required' => false,
             ])
             ->end();
     }
@@ -223,30 +224,30 @@ class SectionAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('title', null, [
-                'label' => 'global.title'
+                'label' => 'global.title',
             ])
             ->add('enabled', null, [
-                'label' => 'global.published'
+                'label' => 'global.published',
             ])
             ->add('position', null, [
-                'label' => 'global.position'
+                'label' => 'global.position',
             ])
             ->add('teaser', CKEditorType::class, [
                 'label' => 'global.subtitle',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
-                'config_name' => 'admin_editor'
+                'config_name' => 'admin_editor',
             ])
             ->add('nbObjects', null, [
-                'label' => 'admin.fields.section.nb_objects'
+                'label' => 'admin.fields.section.nb_objects',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ]);
     }
 

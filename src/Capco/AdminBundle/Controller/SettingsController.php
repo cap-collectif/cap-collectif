@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AdminBundle\Admin\SiteParameterAdmin;
 use Capco\AdminBundle\Resolver\FeaturesCategoryResolver;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\SiteParameter;
@@ -41,6 +42,9 @@ class SettingsController extends Controller
         $adminPool = $this->get('sonata.admin.pool');
 
         return [
+            'breadcrumbs_builder' => $this->get('sonata.admin.breadcrumbs_builder'),
+            'action' => 'list',
+            'admin' => $this->get(SiteParameterAdmin::class),
             'admin_pool' => $adminPool,
         ];
     }
@@ -55,6 +59,9 @@ class SettingsController extends Controller
         $adminPool = $this->get('sonata.admin.pool');
 
         return [
+            'breadcrumbs_builder' => $this->get('sonata.admin.breadcrumbs_builder'),
+            'action' => 'list',
+            'admin' => $this->get(SiteParameterAdmin::class),
             'admin_pool' => $adminPool,
         ];
     }
@@ -91,6 +98,9 @@ class SettingsController extends Controller
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 
         return [
+            'breadcrumbs_builder' => $this->get('sonata.admin.breadcrumbs_builder'),
+            'action' => 'list',
+            'admin' => $this->get(SiteParameterAdmin::class),
             'admin_pool' => $admin_pool,
             'category' => $category,
             'parameters' => $parameters,

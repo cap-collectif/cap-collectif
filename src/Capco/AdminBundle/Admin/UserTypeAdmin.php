@@ -12,9 +12,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class UserTypeAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'user_type';
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'id'
+        '_sort_by' => 'id',
     ];
 
     public function getFeatures()
@@ -26,13 +27,13 @@ class UserTypeAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('name', KnpTranslationFieldFilter::class, [
-                'label' => 'global.type'
+                'label' => 'global.type',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ]);
     }
 
@@ -40,24 +41,24 @@ class UserTypeAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('name', null, [
-                'label' => 'global.type'
+                'label' => 'global.type',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => []
-                ]
+                    'delete' => [],
+                ],
             ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', TextType::class, [
-            'label' => 'global.type'
+            'label' => 'global.type',
         ]);
     }
 
@@ -65,13 +66,13 @@ class UserTypeAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('name', null, [
-                'label' => 'global.type'
+                'label' => 'global.type',
             ])
             ->add('createdAt', null, [
-                'label' => 'global.creation'
+                'label' => 'global.creation',
             ])
             ->add('updatedAt', null, [
-                'label' => 'global.maj'
+                'label' => 'global.maj',
             ]);
     }
 }

@@ -17,6 +17,11 @@ class HighlightedPost extends HighlightedContent
      */
     private $post;
 
+    public function __toString()
+    {
+        return $this->getPost() ? $this->getPost()->getTitle() : 'New Highlighted Post';
+    }
+
     /**
      * Gets the value of post.
      *
