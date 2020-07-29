@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const devConf = require('./webpack.client');
@@ -44,4 +44,4 @@ const prodConf = {
   },
 };
 
-module.exports = merge.smart(devConf, prodConf);
+module.exports = merge(devConf, prodConf);

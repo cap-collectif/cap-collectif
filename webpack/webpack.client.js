@@ -2,7 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
@@ -103,20 +103,25 @@ const devConf = {
     }),
     // Copy some legacy deps
     // TODO: Remove this legacy deps
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../node_modules/jquery-minicolors/jquery.minicolors.min.js'),
-        to: path.resolve(__dirname, '../public/js/jquery.minicolors.js'),
-      },
-      {
-        from: path.resolve(__dirname, '../node_modules/jquery-minicolors/jquery.minicolors.png'),
-        to: path.resolve(__dirname, '../public/css/jquery.minicolors.png'),
-      },
-      {
-        from: path.resolve(__dirname, '../assets/js/'),
-        to: path.resolve(__dirname, '../public/js/'),
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(
+            __dirname,
+            '../node_modules/jquery-minicolors/jquery.minicolors.min.js',
+          ),
+          to: path.resolve(__dirname, '../public/js/jquery.minicolors.js'),
+        },
+        {
+          from: path.resolve(__dirname, '../node_modules/jquery-minicolors/jquery.minicolors.png'),
+          to: path.resolve(__dirname, '../public/css/jquery.minicolors.png'),
+        },
+        {
+          from: path.resolve(__dirname, '../assets/js/'),
+          to: path.resolve(__dirname, '../public/js/'),
+        },
+      ],
+    }),
   ],
   module: {
     rules: [
@@ -130,4 +135,4 @@ const devConf = {
   },
 };
 
-module.exports = merge.smart(devConf, webpackJsx, webpackFile, webpackScss);
+module.exports = merge(devConf, webpackJsx, webpackFile, webpackScss);
