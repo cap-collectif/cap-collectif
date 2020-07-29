@@ -89,7 +89,10 @@ const assignAnalysts = async (
   dispatch: any => void,
 ) => {
   try {
-    const needConfirm: boolean = analystsWithAnalyseBegin.length > 0;
+    const needConfirm: boolean =
+      analystsWithAnalyseBegin.length > 0 &&
+      analystsRemoved
+        .filter(analystId => analystsWithAnalyseBegin.some(({ id }) => id === analystId)).length > 0;
 
     if (analystsAdded.length > 0) {
       dispatch({ type: 'START_LOADING' });

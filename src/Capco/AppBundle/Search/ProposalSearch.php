@@ -51,11 +51,30 @@ class ProposalSearch extends Search
         ?string $cursor
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
+        $boolQuery = $this->searchTermsInMultipleFields(
+            $boolQuery,
+            self::SEARCH_FIELDS,
+            $providedFilters['term'],
+            'phrase_prefix'
+        );
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $project->getId()]]));
         $this->applyInaplicableFilters($boolQuery, $providedFilters);
+        $stateTerms = [];
         $filters = $this->getFilters($providedFilters);
-        foreach ($filters as $key => $filter) {
-            $boolQuery->addFilter(new Term([$key => ['value' => $filter]]));
+        foreach ($filters as $key => $value) {
+            $term = new Term([$key => ['value' => $value]]);
+            if (
+                \in_array($key, ['draft', 'published', 'trashed'], true) &&
+                (isset($providedFilters['state']) &&
+                    ProposalsState::ALL === $providedFilters['state'])
+            ) {
+                $stateTerms[] = $term;
+            } else {
+                $boolQuery->addFilter($term);
+            }
+        }
+        if (\count($stateTerms) > 0) {
+            $boolQuery->addFilter((new Query\BoolQuery())->addShould($stateTerms));
         }
 
         $query = new Query($boolQuery);

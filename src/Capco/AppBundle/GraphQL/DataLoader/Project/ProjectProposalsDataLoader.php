@@ -78,6 +78,8 @@ class ProjectProposalsDataLoader extends BatchDataLoader
         $viewer
     ): ConnectionInterface {
         [
+            $providedFilters['term'],
+            $providedFilters['state'],
             $providedFilters['step'],
             $providedFilters['category'],
             $providedFilters['status'],
@@ -87,6 +89,8 @@ class ProjectProposalsDataLoader extends BatchDataLoader
             $direction,
             $isExporting,
         ] = [
+            $args->offsetGet('term'),
+            $args->offsetGet('state'),
             $args->offsetGet('step'),
             $args->offsetGet('category'),
             $args->offsetGet('status'),
