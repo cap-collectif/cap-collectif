@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
+use Capco\AppBundle\Entity\ProposalAnalysis;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\LogicJump;
@@ -271,6 +272,19 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
         iterable $responses,
         Constraint $constraint
     ): void {
+        if (
+            $this->context->getObject() instanceof ProposalAnalysis &&
+            null !== $this->context->getRoot()
+        ) {
+            $formOptions = $this->context
+                ->getRoot()
+                ->getConfig()
+                ->getOptions();
+            if (isset($formOptions['is_draft']) && true === $formOptions['is_draft']) {
+                return;
+            }
+        }
+
         foreach ($questionsToValidate as $question) {
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {
                 $this->context

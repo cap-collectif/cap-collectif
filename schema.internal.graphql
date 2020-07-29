@@ -448,7 +448,7 @@ input AnalyseProposalAnalysisInput {
   proposalId: ID!
 
   """The responses from the evaluation form."""
-  responses: [ResponseInput!]
+  responses: [ResponseInput!]!
 
   """The comment related to the analysis."""
   comment: String!
@@ -1057,7 +1057,7 @@ input ChangeProposalAnalysisInput {
   proposalId: ID!
 
   """The responses from the evaluation form."""
-  responses: [ResponseInput!]
+  responses: [ResponseInput!]!
 
   """The comment related to the analysis."""
   comment: String
@@ -6594,6 +6594,9 @@ enum ProposalStatementErrorCode {
 
   """The proposal analysis does not exist."""
   NON_EXISTING_ANALYSIS
+
+  """The provided responses are not valid."""
+  INVALID_FORM
 }
 
 """A proposal step"""

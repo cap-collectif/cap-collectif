@@ -54,8 +54,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         ValueResponse $response2,
         Questionnaire $questionnaire,
         Reply $reply,
-        HasResponsesToRequiredQuestions $constraint,
-        RegistrationFormRepository $formRepo
+        HasResponsesToRequiredQuestions $constraint
     ) {
         $question1->isRequired()->willReturn(true);
         $question1->getId()->willReturn(1);
@@ -73,6 +72,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         $reply->getResponsesArray()->willReturn([$response1]);
 
         $this->shouldErrorForQuestionId(1, $builder, $context);
+        $context->getObject()->willReturn(null);
         $this->validate($reply, $constraint);
     }
 
@@ -86,6 +86,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         $this->prepareFormWithLogicJumps($reply, AbstractQuestion::QUESTION_TYPE_SELECT, 'Choix 1');
         $this->shouldErrorForQuestionId(2, $builder, $context);
         $logger->debug('Validator found questions to validate: [1,2]')->shouldBeCalled();
+        $context->getObject()->willReturn(null);
         $this->validate($reply, $constraint);
     }
 
@@ -105,6 +106,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         );
         $logger->debug('Validator found questions to validate: [1,2,4,5]')->shouldBeCalled();
         $this->shouldErrorForQuestionId(4, $builder, $context);
+        $context->getObject()->willReturn(null);
         $this->validate($reply, $constraint);
     }
 
@@ -118,6 +120,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         $this->prepareFormWithLogicJumps($reply, AbstractQuestion::QUESTION_TYPE_SELECT, 'Choix 2');
         $this->shouldErrorForQuestionId(3, $builder, $context);
         $logger->debug('Validator found questions to validate: [1,3,5]')->shouldBeCalled();
+        $context->getObject()->willReturn(null);
         $this->validate($reply, $constraint);
     }
 
@@ -136,6 +139,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         );
         $context->buildViolation()->shouldNotBeCalled();
         $logger->debug('Validator found questions to validate: [1,3,5]')->shouldBeCalled();
+        $context->getObject()->willReturn(null);
         $this->validate($reply, $constraint);
     }
 
@@ -154,6 +158,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         );
         $context->buildViolation()->shouldNotBeCalled();
         $logger->debug('Validator found questions to validate: [1,3,5]')->shouldBeCalled();
+        $context->getObject()->willReturn(null);
         $this->validate($reply, $constraint);
     }
 
@@ -172,6 +177,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         );
         $context->buildViolation()->shouldNotBeCalled();
         $logger->debug('Validator found questions to validate: [1,3,5]')->shouldBeCalled();
+        $context->getObject()->willReturn(null);
         $this->validate($reply, $constraint);
     }
 
@@ -190,6 +196,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         );
         $context->buildViolation()->shouldNotBeCalled();
         $logger->debug('Validator found questions to validate: [1,3,5]')->shouldBeCalled();
+        $context->getObject()->willReturn(null);
         $this->validate($reply, $constraint);
     }
 

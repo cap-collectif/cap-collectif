@@ -11,6 +11,7 @@ class ProposalStatementErrorCode implements EnumType
     public const NON_EXISTING_ANALYSIS = 'NON_EXISTING_ANALYSIS';
     public const INTERNAL_ERROR = 'INTERNAL_ERROR';
     public const REFUSED_REASON_EMPTY = 'REFUSED_REASON_EMPTY';
+    public const INVALID_FORM = 'INVALID_FORM';
 
     public static function isValid($value): bool
     {
@@ -27,6 +28,7 @@ class ProposalStatementErrorCode implements EnumType
             self::INTERNAL_ERROR,
             self::REFUSED_REASON_EMPTY,
             self::NON_EXISTING_ANALYSIS,
+            self::INVALID_FORM,
         ];
     }
 

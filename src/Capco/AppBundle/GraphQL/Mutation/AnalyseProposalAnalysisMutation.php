@@ -15,7 +15,6 @@ use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Error\UserErrors;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -112,14 +111,17 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
             ->setState($decision);
 
         // Handle responses
-        if (!empty($responses)) {
-            $responses = $this->responsesFormatter->format($responses);
-            $form = $this->formFactory->create(ProposalAnalysisType::class, $proposalAnalysis);
-            $form->submit(compact('responses'), false);
+        $responses = $this->responsesFormatter->format($responses);
+        $form = $this->formFactory->create(ProposalAnalysisType::class, $proposalAnalysis, [
+            'is_draft' => false,
+        ]);
+        $form->submit(compact('responses'), false);
 
-            if (!$form->isValid()) {
-                $this->handleErrors($form);
-            }
+        if (!$form->isValid() && $this->handleErrors($form)) {
+            return [
+                'analysis' => null,
+                'errorCode' => ProposalStatementErrorCode::INVALID_FORM,
+            ];
         }
 
         try {
@@ -142,7 +144,7 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
         return ['analysis' => $proposalAnalysis, 'errorCode' => null];
     }
 
-    private function handleErrors(FormInterface $form): void
+    private function handleErrors(FormInterface $form): bool
     {
         $errors = [];
         foreach ($form->getErrors() as $error) {
@@ -150,8 +152,11 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
             $this->logger->error(implode('', $form->getExtraData()));
             $errors[] = (string) $error->getMessage();
         }
+
         if (!empty($errors)) {
-            throw new UserErrors($errors);
+            return true;
         }
+
+        return false;
     }
 }

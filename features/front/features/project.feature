@@ -364,6 +364,8 @@ Scenario: User wants to analyse a project proposal analysis immediately
   When I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-local-en-tant-quorganisme-public"
   And I wait "#proposal_analysis_analyses" to appear on current page
   When I click the ".edit-analysis-icon" element
+  And I fill the element "#proposal-analysis-form-responses10" with value 42
+  And I fill the element "#proposal-analysis-form-responses11" with value 12
   And I click on button "#label-radio-status-FAVOURABLE"
   And I click on button "#validate-proposal-analysis-button"
   And I wait ".saving" to appear on current page

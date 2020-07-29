@@ -22,3 +22,6 @@ InternalProposalStatementErrorCode:
             NON_EXISTING_ANALYSIS:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::NON_EXISTING_ANALYSIS")'
                 description: 'The proposal analysis does not exist.'
+            INVALID_FORM:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::INVALID_FORM")'
+                description: 'The provided responses are not valid.'

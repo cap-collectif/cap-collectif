@@ -1,11 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mutations.changeProposalAnalysis should analyse successfully the newly created analysis 1`] = `
+exports[`mutations.changeProposalAnalysis should analyse successfully the proposal's analysis 1`] = `
 Object {
   "analyseProposalAnalysis": Object {
     "analysis": Object {
-      "comment": "aled",
+      "comment": "La proposition remplie bien nos critères de séléction",
       "id": Any<String>,
+      "responses": Array [
+        Object {
+          "formattedValue": "Je suis la réponse a la question",
+        },
+        Object {
+          "formattedValue": "premier choix",
+        },
+        Object {
+          "formattedValue": "",
+        },
+      ],
       "state": "FAVOURABLE",
     },
     "errorCode": null,
@@ -13,13 +24,53 @@ Object {
 }
 `;
 
-exports[`mutations.changeProposalAnalysis should analyse successfully the proposal's analysis 1`] = `
+exports[`mutations.changeProposalAnalysis should change successfully the newly created analysis with missing responses to required questions 1`] = `
 Object {
-  "analyseProposalAnalysis": Object {
+  "changeProposalAnalysis": Object {
     "analysis": Object {
-      "comment": "caca",
+      "comment": null,
       "id": Any<String>,
-      "state": "FAVOURABLE",
+      "responses": Array [
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": null,
+        },
+      ],
+      "updatedBy": Object {
+        "id": "VXNlcjp1c2VySnBlYw==",
+      },
     },
     "errorCode": null,
   },
@@ -30,13 +81,33 @@ exports[`mutations.changeProposalAnalysis should create successfully the proposa
 Object {
   "changeProposalAnalysis": Object {
     "analysis": Object {
-      "comment": "caca",
+      "comment": "Validons ensemble cette proposition !",
       "id": Any<String>,
+      "responses": Array [
+        Object {
+          "formattedValue": "Oui biensur.",
+        },
+        Object {
+          "formattedValue": "premier choix",
+        },
+        Object {
+          "formattedValue": "",
+        },
+      ],
       "updatedBy": Object {
         "id": "VXNlcjp1c2VyQW5hbHlzdA==",
       },
     },
     "errorCode": null,
+  },
+}
+`;
+
+exports[`mutations.changeProposalAnalysis should not analyse the analysis with missing required responses to required questions 1`] = `
+Object {
+  "analyseProposalAnalysis": Object {
+    "analysis": null,
+    "errorCode": "INVALID_FORM",
   },
 }
 `;
@@ -55,6 +126,57 @@ Object {
   "changeProposalAnalysis": Object {
     "analysis": null,
     "errorCode": "NOT_ASSIGNED_PROPOSAL",
+  },
+}
+`;
+
+exports[`mutations.changeProposalAnalysis should successfully analyse the analysis with required responses to required questions 1`] = `
+Object {
+  "analyseProposalAnalysis": Object {
+    "analysis": Object {
+      "comment": "aled",
+      "id": Any<String>,
+      "responses": Array [
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": "",
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": null,
+        },
+        Object {
+          "formattedValue": "42",
+        },
+        Object {
+          "formattedValue": "12",
+        },
+      ],
+      "state": "FAVOURABLE",
+    },
+    "errorCode": null,
   },
 }
 `;

@@ -322,7 +322,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     qaqIdfGrandProject:
         proposalForm: '@proposalformIdf'
         question: '@sectionIdfGrandProjet'
-        position: 3        
+        position: 3
     qaqIdfGrandProjectInfo1:
         proposalForm: '@proposalformIdf'
         question: '@sectionIdfInfoGrandProjet'
@@ -631,3 +631,11 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@questionnaireEvaluationIdf'
         question: '@simplequestionIdfEval2'
         position: 10
+    qaqEvalIdf11:
+        questionnaire: '@questionnaireEvaluationIdf'
+        question: '@simplequestionIdfEval7'
+        position: 12
+    qaqEvalIdf12:
+        questionnaire: '@questionnaireEvaluationIdf'
+        question: '@simplequestionIdfEval8'
+        position: 13

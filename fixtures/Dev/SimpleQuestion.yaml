@@ -400,3 +400,13 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: Une idée du coût ?
         required: false
         type: 9 # number
+    simplequestionIdfEval7:
+        id: 1382
+        title: 6 x 7 ?
+        required: true
+        type: 9 # number
+    simplequestionIdfEval8:
+        id: 1383
+        title: 3 x 4 ?
+        required: true
+        type: 9 # number

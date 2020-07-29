@@ -111,14 +111,14 @@ class ChangeProposalAnalysisMutation implements MutationInterface
         $proposal->addAnalysis($proposalAnalysis);
 
         // Handle responses
-        if (!empty($responses)) {
-            $responses = $this->responsesFormatter->format($responses);
-            $form = $this->formFactory->create(ProposalAnalysisType::class, $proposalAnalysis);
-            $form->submit(compact('responses'), false);
+        $responses = $this->responsesFormatter->format($responses);
+        $form = $this->formFactory->create(ProposalAnalysisType::class, $proposalAnalysis, [
+            'is_draft' => true,
+        ]);
+        $form->submit(compact('responses'), false);
 
-            if (!$form->isValid()) {
-                $this->handleErrors($form);
-            }
+        if (!$form->isValid()) {
+            $this->handleErrors($form);
         }
 
         try {
