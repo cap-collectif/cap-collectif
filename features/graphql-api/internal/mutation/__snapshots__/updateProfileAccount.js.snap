@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateProfileAccountEmail should  update user email 1`] = `
+Object {
+  "updateProfileAccountEmail": Object {
+    "error": null,
+    "viewer": Object {
+      "email": "user@test.com",
+      "newEmailToConfirm": "nouvelleadresseemail@cap-collectif.com",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfileAccountEmail should not update user email, cause bad email 1`] = `
+Object {
+  "updateProfileAccountEmail": Object {
+    "error": "UNAUTHORIZED_EMAIL_DOMAIN",
+    "viewer": null,
+  },
+}
+`;
+
+exports[`mutations.updateProfileAccountEmail should not update user email, cause of bad password 1`] = `
+Object {
+  "updateProfileAccountEmail": Object {
+    "error": "SPECIFY_PASSWORD",
+    "viewer": null,
+  },
+}
+`;
+
+exports[`mutations.updateProfileAccountEmail should not update user email, cause of email ever used 1`] = `
+Object {
+  "updateProfileAccountEmail": Object {
+    "error": "ALREADY_USED_EMAIL",
+    "viewer": null,
+  },
+}
+`;
+
+exports[`mutations.updateProfileAccountEmail should update user is locale 1`] = `
+Object {
+  "updateProfileAccountLocale": Object {
+    "error": null,
+    "viewer": Object {
+      "locale": "en-GB",
+    },
+  },
+}
+`;

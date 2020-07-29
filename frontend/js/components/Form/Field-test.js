@@ -18,6 +18,7 @@ describe('<Field />', () => {
       touched: false,
       dirty: false,
     },
+    hideValidationMessage: false,
   };
 
   it('pass input props to children', () => {

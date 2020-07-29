@@ -1,0 +1,8 @@
+UpdateProfileAccountLocaleInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update your locale'
+        fields:
+            locale:
+                type: 'TranslationLocale'
+                description: 'The locale to change'

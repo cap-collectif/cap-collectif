@@ -4,6 +4,11 @@ import 'babel-polyfill';
 import 'whatwg-fetch';
 global['fetch'] = require('fetch-cookie/node-fetch')(require('node-fetch')); // Allow fetch to use cookies
 
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
+const env = process.env.CI ? 'ci' : 'local';
+
 const GraphQLClient = require('graphql-request').GraphQLClient;
 
 jest.setTimeout(50000);
@@ -56,6 +61,24 @@ const authenticatedInternalRequest = (username, password, query, variables) => {
       password,
     }),
   }).then(r => (r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request')));
+};
+
+global.enableFeatureFlag = async name => {
+  console.log(`Enabling feature flag "${name}"...`);
+  const { stderr } = await exec(`pipenv run fab ${env}.app.toggle_enable:toggle=${name},environment=test`);
+  if (stderr) {
+    console.error(stderr);
+  }
+  console.log(`Successfully enabled "${name}"`);
+};
+
+global.disableFeatureFlag = async name => {
+  console.log(`Disabling feature flag "${name}"...`);
+  const { stderr } = await exec(`pipenv run fab ${env}.app.toggle_disable:toggle=${name},environment=test`);
+  if (stderr) {
+    console.error(stderr);
+  }
+  console.log(`Successfully disabled "${name}"`);
 };
 
 global.graphql = (query, variables, client = 'anonymous') => {

@@ -23,8 +23,7 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
         </div>
       </PanelTitle>
     </PanelHeading>
-    <injectIntl(Connect(ReduxForm))
-      defaultLocale="fr-FR"
+    <Relay(Connect(injectIntl(ReduxForm)))
       languageList={
         Array [
           Object {
@@ -41,7 +40,6 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "locale": "fr-FR",
         }
       }
     />
@@ -72,8 +70,7 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
         </div>
       </PanelTitle>
     </PanelHeading>
-    <injectIntl(Connect(ReduxForm))
-      defaultLocale="fr-FR"
+    <Relay(Connect(injectIntl(ReduxForm)))
       languageList={
         Array [
           Object {
@@ -90,7 +87,6 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "locale": "fr-FR",
         }
       }
     />
@@ -121,8 +117,7 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
         </div>
       </PanelTitle>
     </PanelHeading>
-    <injectIntl(Connect(ReduxForm))
-      defaultLocale="fr-FR"
+    <Relay(Connect(injectIntl(ReduxForm)))
       languageList={
         Array [
           Object {
@@ -139,7 +134,6 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
         Object {
           "$fragmentRefs": null,
           "$refType": null,
-          "locale": "fr-FR",
         }
       }
     />

@@ -17,20 +17,16 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
-use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UsersController extends AbstractFOSRestController
@@ -94,7 +90,7 @@ class UsersController extends AbstractFOSRestController
         return [
             'contributors' => $registeredContributorCount + $anonymousComments,
             'registeredContributors' => $registeredContributorCount,
-            'anonymousComments' => $anonymousComments
+            'anonymousComments' => $anonymousComments,
         ];
     }
 
@@ -170,55 +166,6 @@ class UsersController extends AbstractFOSRestController
     }
 
     /**
-     * @Put("/users/me")
-     * @View(statusCode=204)
-     */
-    public function putMeAction(Request $request)
-    {
-        $user = $this->getUser();
-        $email = $request->request->get('email');
-        $localeCode = $request->request->get('language');
-        if (!$user || 'anon.' === $user) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-        $response = [
-            'userId' => $user->getId()
-        ];
-
-        if ($localeCode) {
-            try {
-                $this->userDefaultLocaleMutation->setUserDefaultLocale($user, $localeCode);
-            } catch (BadRequestHttpException $exception) {
-                return new JsonResponse(['message' => $exception->getMessage()], 400);
-            }
-            $request->setLocale($localeCode);
-            $response['code'] = $localeCode;
-        }
-        if (
-            $email &&
-            (
-                ($localeCode && $user->getEmail() !== $email) ||
-                is_null($localeCode)
-            )
-        ) {
-            $retEmail = $this->updateEmail($request);
-
-            if ($retEmail instanceof FormInterface) {
-                return $retEmail;
-            }
-            if ($user->getEmail() === $email) {
-                return new JsonResponse(['message' => 'Already used email.'], 400);
-            }
-            if (isset($retEmail['error']) || isset($retEmail['errors'])) {
-                return new JsonResponse(['message' => $retEmail['error']], 400);
-            }
-            $response['email'] = $email;
-        }
-
-        return new JsonResponse($response, 200);
-    }
-
-    /**
      * @Post("/account/cancel_email_change")
      * @View(statusCode=200, serializerGroups={})
      */
@@ -270,7 +217,7 @@ class UsersController extends AbstractFOSRestController
                 'user.email',
                 new Message(
                     json_encode([
-                        'userId' => $user->getId()
+                        'userId' => $user->getId(),
                     ])
                 )
             );
@@ -279,58 +226,6 @@ class UsersController extends AbstractFOSRestController
         }
 
         $user->setEmailConfirmationSentAt(new \DateTime());
-        $this->getDoctrine()
-            ->getManager()
-            ->flush();
-    }
-
-    private function updateEmail(Request $request)
-    {
-        $user = $this->getUser();
-        if (!$user || 'anon.' === $user) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-        $newEmailToConfirm = $request->request->get('email');
-        $password = $request->request->get('password');
-
-        $encoder = $this->encoderFactory->getEncoder($user);
-        if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
-            return ['error' => 'You must specify your password to update your email.'];
-        }
-
-        if ($this->userRepository->findOneByEmail($newEmailToConfirm)) {
-            return ['error' => 'Already used email.'];
-        }
-
-        if (
-            $this->toggleManager->isActive('restrict_registration_via_email_domain') &&
-            !$this->emailDomainRepository->findOneBy([
-                'value' => explode('@', $newEmailToConfirm)[1]
-            ])
-        ) {
-            return ['error' => 'Unauthorized email domain.'];
-        }
-
-        $form = $this->createForm(ApiProfileAccountFormType::class, $user);
-        $form->submit(['newEmailToConfirm' => $newEmailToConfirm], false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        // We generate a confirmation token to validate the new email
-        $token = $this->tokenGenerator->generateToken();
-
-        $this->publisher->publish(
-            'user.email',
-            new Message(
-                json_encode([
-                    'userId' => $user->getId()
-                ])
-            )
-        );
-
-        $user->setNewEmailConfirmationToken($token);
         $this->getDoctrine()
             ->getManager()
             ->flush();

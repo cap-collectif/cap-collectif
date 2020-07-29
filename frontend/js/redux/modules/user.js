@@ -1,5 +1,5 @@
 // @flow
-import { submit, change, SubmissionError } from 'redux-form';
+import { change, SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
@@ -8,6 +8,7 @@ import config from '../../config';
 import CookieMonster from '../../CookieMonster';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
+import { formName as accountForm } from '~/components/User/Profile/AccountForm';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
 
@@ -52,9 +53,6 @@ export type State = {
   +showLocaleHeader: boolean,
   +displayChartModal: boolean,
   +showRegistrationModal: boolean,
-  +isSubmittingAccountForm: boolean,
-  +showConfirmPasswordModal: boolean,
-  +confirmationEmailResent: boolean,
   +mapTokens: MapTokens,
   +registration_form: {
     +bottomTextDisplayed: boolean,
@@ -98,15 +96,7 @@ type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
 type DisplayChartModalAction = { type: 'DISPLAY_CHART_MODAL' };
 type HideChartModalAction = {| type: 'HIDE_CHART_MODAL' |};
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
-type StartSubmittingAccountFormAction = { type: 'SUBMIT_ACCOUNT_FORM' };
-type StopSubmittingAccountFormAction = { type: 'STOP_SUBMIT_ACCOUNT_FORM' };
 type CancelEmailChangeSucceedAction = { type: 'CANCEL_EMAIL_CHANGE' };
-type ConfirmPasswordAction = { type: 'SHOW_CONFIRM_PASSWORD_MODAL' };
-export type SubmitConfirmPasswordAction = {
-  type: 'SUBMIT_CONFIRM_PASSWORD_FORM',
-  password: string,
-};
-type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 type ReorderSucceededAction = { type: 'REORDER_REGISTRATION_QUESTIONS', questions: Array<Object> };
 type GroupAdminUsersUserDeletionSuccessfulAction = {
   type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
@@ -126,15 +116,10 @@ export type UserAction =
   | DisplayChartModalAction
   | HideChartModalAction
   | CloseLoginModalAction
-  | StartSubmittingAccountFormAction
-  | ConfirmPasswordAction
-  | StopSubmittingAccountFormAction
   | CancelEmailChangeSucceedAction
-  | CloseConfirmPasswordModalAction
   | UserRequestEmailChangeAction
   | ReorderSucceededAction
   | AddRegistrationFieldAction
-  | SubmitConfirmPasswordAction
   | GroupAdminUsersUserDeletionSuccessfulAction
   | GroupAdminUsersUserDeletionFailedAction
   | GroupAdminUsersUserDeletionResetAction;
@@ -144,9 +129,6 @@ const initialState: State = {
   showLocaleHeader: true,
   displayChartModal: false,
   showRegistrationModal: false,
-  isSubmittingAccountForm: false,
-  confirmationEmailResent: false,
-  showConfirmPasswordModal: false,
   user: null,
   mapTokens: {
     MAPBOX: {
@@ -193,18 +175,6 @@ export const closeLoginModal = (): CloseLoginModalAction => ({ type: 'CLOSE_LOGI
 export const showLoginModal = (): ShowLoginModalAction => ({ type: 'SHOW_LOGIN_MODAL' });
 export const displayChartModal = (): DisplayChartModalAction => ({ type: 'DISPLAY_CHART_MODAL' });
 export const hideChartModal = (): HideChartModalAction => ({ type: 'HIDE_CHART_MODAL' });
-export const confirmPassword = (): ConfirmPasswordAction => ({
-  type: 'SHOW_CONFIRM_PASSWORD_MODAL',
-});
-export const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({
-  type: 'CLOSE_CONFIRM_PASSWORD_MODAL',
-});
-export const startSubmittingAccountForm = (): StartSubmittingAccountFormAction => ({
-  type: 'SUBMIT_ACCOUNT_FORM',
-});
-export const stopSubmittingAccountForm = (): StopSubmittingAccountFormAction => ({
-  type: 'STOP_SUBMIT_ACCOUNT_FORM',
-});
 export const userRequestEmailChange = (email: string): UserRequestEmailChangeAction => ({
   type: 'USER_REQUEST_EMAIL_CHANGE',
   email,
@@ -212,9 +182,6 @@ export const userRequestEmailChange = (email: string): UserRequestEmailChangeAct
 export const cancelEmailChangeSucceed = (): CancelEmailChangeSucceedAction => ({
   type: 'CANCEL_EMAIL_CHANGE',
 });
-export const submitConfirmPasswordFormSucceed = (
-  password: string,
-): SubmitConfirmPasswordAction => ({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password });
 
 export const setRegistrationEmailDomains = (values: {
   domains: Array<{ value: string }>,
@@ -352,21 +319,10 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, qu
     });
 };
 
-export const submitConfirmPasswordForm = (
-  { password }: { password: string },
-  dispatch: Dispatch,
-): void => {
-  dispatch(submitConfirmPasswordFormSucceed(password));
-  dispatch(closeConfirmPasswordModal());
-  setTimeout((): void => {
-    dispatch(submit('account'));
-  }, 1000);
-};
-
 export const cancelEmailChange = (dispatch: Dispatch, previousEmail: string): void => {
   Fetcher.post('/account/cancel_email_change').then(() => {
     dispatch(cancelEmailChangeSucceed());
-    dispatch(change('account', 'email', previousEmail));
+    dispatch(change(accountForm, 'email', previousEmail));
   });
 };
 
@@ -381,55 +337,6 @@ export const resendConfirmation = (): void => {
   Fetcher.post('/account/resend_confirmation_email')
     .then(sendEmail)
     .catch(sendEmail);
-};
-
-export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*> => {
-  dispatch(startSubmittingAccountForm());
-  return Fetcher.putToJson('/users/me', values)
-    .then((response: { userId: string, email?: string, code?: string }) => {
-      dispatch(stopSubmittingAccountForm());
-      if (response && response.email) {
-        dispatch(userRequestEmailChange(values.email));
-      }
-      if (response && response.code) {
-        CookieMonster.setLocale(response.code);
-        const prefix = response.code ? response.code.split('-')[0] : '';
-        window.location.href = `/${prefix}/profile/edit-profile#account`;
-      }
-    })
-    .catch(
-      ({
-        response: { message, errors },
-      }: {
-        response: { message: string, errors: { children?: ?Object } },
-      }): void => {
-        dispatch(stopSubmittingAccountForm());
-        if (message === 'You must specify your password to update your email.') {
-          throw new SubmissionError({ _error: 'user.confirm.wrong_password' });
-        }
-        if (message === 'Already used email.') {
-          throw new SubmissionError({ _error: 'registration.constraints.email.already_used' });
-        }
-        if (message === 'Unauthorized email domain.') {
-          throw new SubmissionError({ _error: 'unauthorized-domain-name' });
-        }
-        if (message === 'Validation Failed.') {
-          if (
-            errors.children &&
-            errors.children.newEmailToConfirm &&
-            errors.children.newEmailToConfirm.errors &&
-            Array.isArray(errors.children.newEmailToConfirm.errors) &&
-            errors.children.newEmailToConfirm.errors[0]
-          ) {
-            throw new SubmissionError({
-              // $FlowFixMe
-              _error: `registration.constraints.${errors.children.newEmailToConfirm.errors[0]}`,
-            });
-          }
-        }
-        throw new SubmissionError({ _error: 'global.error.server.form' });
-      },
-    );
 };
 
 const reorderSuceeded = (questions: Array<Object>): ReorderSucceededAction => ({
@@ -474,19 +381,10 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
         ...state,
         // $FlowFixMe Redux is untyped
         user: { ...state.user, newEmailToConfirm: null },
-        confirmationEmailResent: false,
       };
-    case 'SUBMIT_ACCOUNT_FORM':
-      return { ...state, isSubmittingAccountForm: true };
-    case 'STOP_SUBMIT_ACCOUNT_FORM':
-      return { ...state, isSubmittingAccountForm: false };
     case 'USER_REQUEST_EMAIL_CHANGE':
       // $FlowFixMe Redux is untyped
       return { ...state, user: { ...state.user, newEmailToConfirm: action.email } };
-    case 'SHOW_CONFIRM_PASSWORD_MODAL':
-      return { ...state, showConfirmPasswordModal: true };
-    case 'CLOSE_CONFIRM_PASSWORD_MODAL':
-      return { ...state, showConfirmPasswordModal: false };
     case 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL':
       return { ...state, groupAdminUsersUserDeletionSuccessful: true };
     case 'GROUP_ADMIN_USERS_USER_DELETION_FAILED':

@@ -247,38 +247,6 @@ Scenario: Admin API client can register an other admin
   And I open mail with subject 'email-subject-confirm-admin-account {"{sitename}":"Cap-Collectif"}'
   Then I should see 'email-content-confirm-admin-account' in mail
 
-@database
-Scenario: API client wants to update his email
-  Given I am logged in to api as user
-  When I send a PUT request to "/api/users/me" with json:
-  """
-  {
-    "email": "popopopopo@gmail.com",
-    "password": "user"
-  }
-  """
-  Then the JSON response status code should be 200
-  And user "user" email_to_confirm should be "popopopopo@gmail.com"
-
-@database
-Scenario: API client wants to update his email and the domain email is restricted
-  Given I am logged in to api as user
-  Given feature "restrict_registration_via_email_domain" is enabled
-  When I send a PUT request to "/api/users/me" with json:
-  """
-  {
-    "email": "popopopopo@gmail.com",
-    "password": "user"
-  }
-  """
-  Then the JSON response status code should be 400
-  Then the JSON response should match:
-  """
-  {
-    "message": "Unauthorized email domain."
-  }
-  """
-
 @security @database
 Scenario: Anonymous API client wants to hack register form with username payload
   Given feature "registration" is enabled

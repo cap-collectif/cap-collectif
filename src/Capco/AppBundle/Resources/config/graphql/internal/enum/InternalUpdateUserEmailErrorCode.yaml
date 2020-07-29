@@ -1,0 +1,15 @@
+InternalUpdateUserEmailErrorCode:
+    type: enum
+    config:
+        name: UpdateUserEmailErrorCode
+        description: 'Available errors on user email related mutations.'
+        values:
+            SPECIFY_PASSWORD:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::SPECIFY_PASSWORD")'
+                description: 'You must specify your password to update your email.'
+            ALREADY_USED_EMAIL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::ALREADY_USED_EMAIL")'
+                description: 'Already used email.'
+            UNAUTHORIZED_EMAIL_DOMAIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::UNAUTHORIZED_EMAIL_DOMAIN")'
+                description: 'Unauthorized email domain.'

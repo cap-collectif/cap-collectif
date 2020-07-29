@@ -17,7 +17,6 @@ import { reducer as defaultReducer } from '~/redux/modules/default';
 import { reducer as eventReducer } from '~/redux/modules/event';
 import { reducer as languageReducer } from '~/redux/modules/language';
 
-import type { SubmitConfirmPasswordAction } from '~/redux/modules/user';
 import type { Store, GlobalState } from '~/types';
 
 export default function configureStore(initialState: GlobalState): Store {
@@ -37,37 +36,34 @@ export default function configureStore(initialState: GlobalState): Store {
       initialState.proposal.filters = filtersByStep[initialState.project.currentProjectStepById];
     }
   }
-  if (
-    initialState.project &&
-    initialState.project.currentProjectStepById
-  ) {
+  if (initialState.project && initialState.project.currentProjectStepById) {
     const urlSearch = new URLSearchParams(window.location.search);
     if (urlSearch) {
-          const themeId: ?string = urlSearch.get('theme') || null;
-          if (themeId) {
-            // $FlowExpectedError not writable
-            proposalInitialState.filters.themes = themeId;
-          }
-          const categoryId: ?string = urlSearch.get('category') || null;
-          if (categoryId) {
-            // $FlowExpectedError not writable
-            proposalInitialState.filters.categories = categoryId;
-          }
-          const statusId: ?string = urlSearch.get('status') || null;
-          if (statusId) {
-            // $FlowExpectedError not writable
-            proposalInitialState.filters.statuses = statusId;
-          }
-          const typeId: ?string = urlSearch.get('type') || null;
-          if (typeId) {
-            // $FlowExpectedError not writable
-            proposalInitialState.filters.types = typeId;
-          }
-          const districtId: ?string = urlSearch.get('district') || null;
-          if (districtId) {
-            // $FlowExpectedError not writable
-            proposalInitialState.filters.districts = districtId;
-          }
+      const themeId: ?string = urlSearch.get('theme') || null;
+      if (themeId) {
+        // $FlowExpectedError not writable
+        proposalInitialState.filters.themes = themeId;
+      }
+      const categoryId: ?string = urlSearch.get('category') || null;
+      if (categoryId) {
+        // $FlowExpectedError not writable
+        proposalInitialState.filters.categories = categoryId;
+      }
+      const statusId: ?string = urlSearch.get('status') || null;
+      if (statusId) {
+        // $FlowExpectedError not writable
+        proposalInitialState.filters.statuses = statusId;
+      }
+      const typeId: ?string = urlSearch.get('type') || null;
+      if (typeId) {
+        // $FlowExpectedError not writable
+        proposalInitialState.filters.types = typeId;
+      }
+      const districtId: ?string = urlSearch.get('district') || null;
+      if (districtId) {
+        // $FlowExpectedError not writable
+        proposalInitialState.filters.districts = districtId;
+      }
     }
   }
   if (
@@ -99,7 +95,9 @@ export default function configureStore(initialState: GlobalState): Store {
     initialState.project.showConsultationPlanById &&
     LocalStorageService.isValid('project.showConsultationPlanById')
   ) {
-    const showConsultationPlanById: ?Object = LocalStorageService.get('project.showConsultationPlanById');
+    const showConsultationPlanById: ?Object = LocalStorageService.get(
+      'project.showConsultationPlanById',
+    );
     if (showConsultationPlanById) {
       // $FlowExpectedError not writable
       initialState.project.showConsultationPlanById = showConsultationPlanById;
@@ -127,17 +125,6 @@ export default function configureStore(initialState: GlobalState): Store {
               return { ...state, values: { ...state.values, displayCaptcha: true } };
             }
             return state;
-          default:
-            return state;
-        }
-      },
-      account: (state, action: SubmitConfirmPasswordAction) => {
-        switch (action.type) {
-          case 'SUBMIT_CONFIRM_PASSWORD_FORM':
-            return {
-              ...state,
-              values: { ...state.values, password: action.password },
-            };
           default:
             return state;
         }

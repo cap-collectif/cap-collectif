@@ -89,10 +89,6 @@ const canCheckValidation = (check, typeForm, disableValidation) =>
   (check && !isQuestionnaire(typeForm)) || (!disableValidation && isQuestionnaire(typeForm));
 
 class Field extends React.Component<Props> {
-  static defaultProps = {
-    hideValidationMessage: false,
-  };
-
   render() {
     const {
       meta: { touched, dirty, error, warning },
@@ -121,7 +117,7 @@ class Field extends React.Component<Props> {
       validationRule,
       style,
       radioImage,
-      hideValidationMessage,
+      hideValidationMessage = false,
       lang,
       step,
       min,

@@ -1,0 +1,11 @@
+UpdateProfileAccountEmailInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update your email'
+        fields:
+            passwordConfirm:
+                type: 'String!'
+                description: 'The password to confirm action'
+            email:
+                type: 'String!'
+                description: 'The email to change'

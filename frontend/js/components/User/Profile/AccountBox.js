@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { isInvalid } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import AccountForm from './AccountForm';
+import AccountForm, { formName as accountForm } from './AccountForm';
 import type { GlobalState, Dispatch } from '../../../types';
 import type { AccountBox_viewer } from '~relay/AccountBox_viewer.graphql';
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
@@ -14,7 +14,6 @@ type Props = {|
   viewer: AccountBox_viewer,
   dispatch: Dispatch,
   invalid: boolean,
-  submitting: boolean,
   +languageList: Array<LocaleMap>,
 |};
 
@@ -31,15 +30,14 @@ export const AccountBox = ({ viewer, languageList }: Props) => {
             </div>
           </Panel.Title>
         </Panel.Heading>
-        <AccountForm languageList={languageList} defaultLocale={viewer.locale} viewer={viewer} />
+        <AccountForm languageList={languageList} viewer={viewer} />
       </Panel>
     </React.Fragment>
   );
 };
 
 const mapStateToProps = (state: GlobalState) => ({
-  submitting: state.user.isSubmittingAccountForm,
-  invalid: isInvalid('account')(state),
+  invalid: isInvalid(accountForm)(state),
 });
 
 const container = connect(mapStateToProps)(AccountBox);
@@ -48,7 +46,7 @@ export default createFragmentContainer(container, {
   viewer: graphql`
     fragment AccountBox_viewer on User {
       ...DeleteAccountModal_viewer
-      locale
+      ...AccountForm_viewer
     }
   `,
 });

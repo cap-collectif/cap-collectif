@@ -3,12 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { DeleteAccountModal } from './DeleteAccountModal';
-
-const mockRefType: any = null;
+import { $refType } from '../../mocks';
 
 describe('<DeleteAccountModal />', () => {
   const viewer = {
-    $refType: mockRefType,
+    $refType,
     contributionsCount: 20,
     votes: {
       totalCount: 10,
@@ -20,18 +19,15 @@ describe('<DeleteAccountModal />', () => {
   const props = {
     redirectToAdminUrl: false,
     userDeletedIsNotViewer: true,
+    handleClose: jest.fn(),
   };
 
   it('should render an visible modal', () => {
-    const wrapper = shallow(
-      <DeleteAccountModal show {...props} viewer={viewer} handleClose={() => {}} />,
-    );
+    const wrapper = shallow(<DeleteAccountModal show {...props} viewer={viewer} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render an hidden modal', () => {
-    const wrapper = shallow(
-      <DeleteAccountModal show={false} viewer={viewer} {...props} handleClose={() => {}} />,
-    );
+    const wrapper = shallow(<DeleteAccountModal show={false} viewer={viewer} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

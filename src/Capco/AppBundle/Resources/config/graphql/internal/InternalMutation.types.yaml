@@ -900,3 +900,17 @@ InternalMutation:
                     inputType: UnsubscribeToEventAsRegisteredInput
                     payloadType: UnsubscribeToEventAsRegisteredPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnsubscribeToEventAsRegisteredMutation", [value, getUser()])'
+            updateProfileAccountEmail:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProfileAccountEmailInput
+                    payloadType: UpdateProfileAccountEmailPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfileAccountEmailMutation", [value, getUser()])'
+            updateProfileAccountLocale:
+                access: "@=hasRole('ROLE_USER')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateProfileAccountLocaleInput
+                    payloadType: UpdateProfileAccountLocalePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfileAccountLocaleMutation", [value, getUser(), serv("request_stack")])'

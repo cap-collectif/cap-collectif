@@ -261,6 +261,9 @@ InternalUser:
                 type: 'DateTime'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSubscribedToNewsLetterAtResolver", [value])'
                 description: 'When the user subscribed to the newsletter.'
+            newEmailToConfirm:
+                type: 'String'
+                description: 'The new email to confirm ?'
             isEmailConfirmed:
                 type: 'Boolean'
                 description: 'Has the user confirmed his email address ?'

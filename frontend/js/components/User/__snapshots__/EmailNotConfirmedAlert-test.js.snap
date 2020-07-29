@@ -24,7 +24,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
         tagName="span"
         values={
           Object {
-            "emailAddress": undefined,
+            "emailAddress": "updated-email@test.com",
           }
         }
       />
@@ -107,7 +107,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
         tagName="span"
         values={
           Object {
-            "emailAddress": undefined,
+            "emailAddress": "updated-email@test.com",
           }
         }
       />
@@ -190,7 +190,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
         tagName="span"
         values={
           Object {
-            "emailAddress": undefined,
+            "emailAddress": "updated-email@test.com",
           }
         }
       />
@@ -250,4 +250,85 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
 
 exports[`<EmailNotConfirmedAlert /> renders nothing if logged user has confirmed his email 1`] = `""`;
 
-exports[`<EmailNotConfirmedAlert /> renders nothing if not logged 1`] = `""`;
+exports[`<EmailNotConfirmedAlert /> renders nothing if not logged 1`] = `
+<Alert
+  bsClass="alert"
+  bsStyle="warning"
+  className="mb-0"
+  closeLabel="Close alert"
+  id="alert-email-not-confirmed"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="col-md-7"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }
+    >
+      <FormattedHTMLMessage
+        id="email-address-confirmation-banner-message"
+        tagName="span"
+        values={
+          Object {
+            "emailAddress": null,
+          }
+        }
+      />
+       
+      <a
+        href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+      >
+        <FormattedMessage
+          id="cnil.learn"
+          values={Object {}}
+        />
+      </a>
+    </div>
+    <div
+      className="col-md-5"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "marginBottom": 5,
+            "marginRight": 15,
+          }
+        }
+      >
+        <FormattedMessage
+          id="user.confirm.resend"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        href="http://localhost/profile/edit-profile#account"
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }
+      >
+        <FormattedMessage
+          id="user.confirm.update"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  </div>
+</Alert>
+`;

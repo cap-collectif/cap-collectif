@@ -62,7 +62,13 @@ def deploy(environment='dev', user='capco', mode='symfony_bin'):
 @task(environments=['local', 'ci'])
 def toggle_enable(toggle='public_api', environment='test'):
     "Enable a feature toggle."
-    env.service_command('php bin/console capco:toggle:enable ' + toggle + ' --env=' + environment, 'application', env.www_app)
+    env.service_command('php bin/console capco:toggle:enable ' + toggle + ' --no-interaction --env=' + environment, 'application', env.www_app, "capco", False)
+
+
+@task(environments=['local', 'ci'])
+def toggle_disable(toggle='public_api', environment='test'):
+    "Disable a feature toggle."
+    env.service_command('php bin/console capco:toggle:disable ' + toggle + ' --no-interaction --env=' + environment, 'application', env.www_app, "capco", False)
 
 
 @task(environments=['local'])

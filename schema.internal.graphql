@@ -4439,6 +4439,8 @@ type Mutation {
   subscribeToEventAsNonRegistered(input: SubscribeToEventAsNonRegisteredInput!): SubscribeToEventAsNonRegisteredPayload
   subscribeToEventAsRegistered(input: SubscribeToEventAsRegisteredInput!): SubscribeToEventAsRegisteredPayload
   unsubscribeToEventAsRegistered(input: UnsubscribeToEventAsRegisteredInput!): UnsubscribeToEventAsRegisteredPayload
+  updateProfileAccountEmail(input: UpdateProfileAccountEmailInput!): UpdateProfileAccountEmailPayload
+  updateProfileAccountLocale(input: UpdateProfileAccountLocaleInput!): UpdateProfileAccountLocalePayload
 }
 
 """A connection to a list of items."""
@@ -9820,6 +9822,42 @@ type UpdateLocaleStatusPayload {
   clientMutationId: String
 }
 
+input UpdateProfileAccountEmailInput {
+  """The password to confirm action"""
+  passwordConfirm: String!
+
+  """The email to change"""
+  email: String!
+  clientMutationId: String
+}
+
+type UpdateProfileAccountEmailPayload {
+  """The user who just have been updated"""
+  viewer: User
+
+  """The error"""
+  error: UpdateUserEmailErrorCode
+  clientMutationId: String
+}
+
+input UpdateProfileAccountLocaleInput {
+  """The locale to change"""
+  locale: TranslationLocale
+  clientMutationId: String
+}
+
+type UpdateProfileAccountLocalePayload {
+  """The user who just have been updated"""
+  viewer: User
+
+  """The new locale code"""
+  locale: TranslationLocale
+
+  """The error"""
+  error: String
+  clientMutationId: String
+}
+
 input UpdateProfileInput {
   username: String
   clientMutationId: String
@@ -10286,6 +10324,18 @@ type UpdateUserAccountPayload {
   clientMutationId: String
 }
 
+"""Available errors on user email related mutations."""
+enum UpdateUserEmailErrorCode {
+  """You must specify your password to update your email."""
+  SPECIFY_PASSWORD
+
+  """Already used email."""
+  ALREADY_USED_EMAIL
+
+  """Unauthorized email domain."""
+  UNAUTHORIZED_EMAIL_DOMAIN
+}
+
 """A user is an individual's account."""
 type User implements Node & UniformResourceLocatable {
   """The ID of an object."""
@@ -10738,6 +10788,9 @@ type User implements Node & UniformResourceLocatable {
 
   """When the user subscribed to the newsletter."""
   subscribedToNewsLetterAt: DateTime
+
+  """The new email to confirm ?"""
+  newEmailToConfirm: String
 
   """Has the user confirmed his email address ?"""
   isEmailConfirmed: Boolean

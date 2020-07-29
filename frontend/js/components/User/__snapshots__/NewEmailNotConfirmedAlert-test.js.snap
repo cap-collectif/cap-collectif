@@ -11,19 +11,14 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
     className="container"
   >
     <div
-      className="col-md-7"
-      style={
-        Object {
-          "marginBottom": 5,
-        }
-      }
+      className="col-md-7 mb-5"
     >
       <FormattedHTMLMessage
         id="user.confirm.new_email_send_succeed"
         tagName="span"
         values={
           Object {
-            "email": "new-email@test.com",
+            "email": "new-email-to-confirm@test.com",
           }
         }
       />
@@ -36,14 +31,9 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
         block={false}
         bsClass="btn"
         bsStyle="default"
+        className="mr-15 mb-5"
         disabled={false}
         onClick={[Function]}
-        style={
-          Object {
-            "marginBottom": 5,
-            "marginRight": 15,
-          }
-        }
       >
         <FormattedMessage
           id="user.confirm.resend"
@@ -55,13 +45,9 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
         block={false}
         bsClass="btn"
         bsStyle="link"
+        className="mb-5"
         disabled={false}
         href="http://localhost/profile/edit-profile#account"
-        style={
-          Object {
-            "marginBottom": 5,
-          }
-        }
       >
         <FormattedMessage
           id="user.confirm.new_email_send_succeed_cancel_or_update"

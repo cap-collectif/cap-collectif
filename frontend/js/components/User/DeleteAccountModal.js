@@ -19,8 +19,8 @@ type Props = {|
   ...RelayProps,
   show: boolean,
   handleClose: () => void,
-  redirectToAdminUrl: boolean,
-  userDeletedIsNotViewer: boolean,
+  redirectToAdminUrl?: boolean,
+  userDeletedIsNotViewer?: boolean,
 |};
 
 type ModalState = {

@@ -1,0 +1,10 @@
+UpdateProfileAccountEmailPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            viewer:
+                type: 'InternalUser'
+                description: 'The user who just have been updated'
+            error:
+                type: 'InternalUpdateUserEmailErrorCode'
+                description: 'The error'

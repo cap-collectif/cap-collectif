@@ -100,19 +100,9 @@ class renderSelect extends React.Component<Props> {
 
   debouncedLoadOptions: any;
 
-  static defaultProps = {
-    multi: false,
-    disabled: false,
-    autoload: false,
-    debounce: false,
-    debounceMs: 1300,
-    cacheOptions: false,
-    clearable: true,
-  };
-
   constructor(props: Props) {
     super(props);
-    const { loadOptions, debounceMs } = props;
+    const { loadOptions, debounceMs = 1300 } = props;
     this.myRef = React.createRef();
 
     this.debouncedLoadOptions = debouncePromise(loadOptions, debounceMs, {
@@ -138,21 +128,21 @@ class renderSelect extends React.Component<Props> {
       label,
       labelClassName,
       inputClassName,
-      multi,
+      multi = false,
+      disabled = false,
+      autoload = false,
+      debounce = false,
+      cacheOptions = false,
+      clearable = true,
       options,
-      disabled,
-      autoload,
-      clearable,
       searchable = true,
       controlShouldRenderValue = true,
       placeholder,
       loadOptions,
       filterOption,
-      debounce,
       selectFieldIsObject,
       id,
       help,
-      cacheOptions,
       meta: { error },
       description,
       typeForm,

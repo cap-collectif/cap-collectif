@@ -1,0 +1,13 @@
+UpdateProfileAccountLocalePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            viewer:
+                type: 'InternalUser'
+                description: 'The user who just have been updated'
+            locale:
+                type: 'TranslationLocale'
+                description: 'The new locale code'
+            error:
+                type: 'String'
+                description: 'The error'

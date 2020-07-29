@@ -1,25 +1,21 @@
 // @flow
 import React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { Alert, Button } from 'react-bootstrap';
 import Fetcher from '../../services/Fetcher';
-import type { GlobalState } from '../../types';
+import type { EmailNotConfirmedAlert_viewer } from '~relay/EmailNotConfirmedAlert_viewer.graphql';
 
-type Props = {
-  user?: ?Object,
-};
+type Props = {|
+  viewer: ?EmailNotConfirmedAlert_viewer,
+|};
 
-type State = {
+type State = {|
   resendingConfirmation: boolean,
   confirmationSent: boolean,
-};
+|};
 
 export class EmailNotConfirmedAlert extends React.Component<Props, State> {
-  static defaultProps = {
-    user: null,
-  };
-
   state = {
     resendingConfirmation: false,
     confirmationSent: false,
@@ -43,8 +39,8 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
   };
 
   render() {
-    const { user } = this.props;
-    if (!user || user.isEmailConfirmed) {
+    const { viewer } = this.props;
+    if (!viewer || viewer.isEmailConfirmed) {
       return null;
     }
     const editEmailUrl = `${window.location.protocol}//${window.location.host}/profile/edit-profile#account`;
@@ -56,7 +52,7 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
             <FormattedHTMLMessage
               id="email-address-confirmation-banner-message"
               values={{
-                emailAddress: user.email,
+                emailAddress: viewer.email,
               }}
             />{' '}
             <a href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique">
@@ -90,8 +86,11 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-  user: state.user.user,
+export default createFragmentContainer(EmailNotConfirmedAlert, {
+  viewer: graphql`
+    fragment EmailNotConfirmedAlert_viewer on User {
+      email
+      isEmailConfirmed
+    }
+  `,
 });
-
-export default connect(mapStateToProps)(EmailNotConfirmedAlert);

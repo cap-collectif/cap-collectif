@@ -10,22 +10,24 @@ describe('<AccountBox />', () => {
     viewer: {
       $refType,
       $fragmentRefs,
-      locale: 'fr-FR',
     },
-    languageList: [{ translationKey: 'french', code: 'fr-FR' }, { translationKey: 'english', code: 'en-GB' }],
+    languageList: [
+      { translationKey: 'french', code: 'fr-FR' },
+      { translationKey: 'english', code: 'en-GB' },
+    ],
     dispatch: jest.fn(),
   };
 
   it('should render a disabled button when the form is invalid', () => {
-    const wrapper = shallow(<AccountBox invalid {...props} submitting={false} />);
+    const wrapper = shallow(<AccountBox invalid {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render and enabled button when the form is valid', () => {
-    const wrapper = shallow(<AccountBox invalid={false} {...props} submitting={false} />);
+    const wrapper = shallow(<AccountBox invalid={false} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render a disabled button when the form is submitting', () => {
-    const wrapper = shallow(<AccountBox invalid={false} {...props} submitting />);
+    const wrapper = shallow(<AccountBox invalid={false} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

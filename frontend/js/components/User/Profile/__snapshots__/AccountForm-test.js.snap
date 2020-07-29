@@ -6,14 +6,6 @@ exports[`<AccountForm /> should render a form 1`] = `
     bsClass="panel"
     collapsible={false}
   >
-    <h2
-      className="page-header"
-    >
-      <FormattedMessage
-        id="profile.account.title"
-        values={Object {}}
-      />
-    </h2>
     <form
       id="profile-account"
       onSubmit={[MockFunction]}
@@ -48,9 +40,13 @@ exports[`<AccountForm /> should render a form 1`] = `
             values={Object {}}
           />
         </span>
+        <Connect(ConfirmPasswordModal)
+          handleClose={[Function]}
+          show={false}
+        />
       </AccountForm__AccountContainer>
       <div
-        className="col-sm-6 col-sm-offset-3"
+        className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100"
         id="profile-alert-form"
       >
         <AlertForm
@@ -63,7 +59,6 @@ exports[`<AccountForm /> should render a form 1`] = `
         />
       </div>
     </form>
-    <Connect(ConfirmPasswordModal) />
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -91,14 +86,10 @@ exports[`<AccountForm /> should render a form 1`] = `
           block={false}
           bsClass="btn"
           bsStyle="danger"
+          className="ml-15"
           disabled={false}
           id="delete-account-profile-button"
           onClick={[Function]}
-          style={
-            Object {
-              "marginLeft": 15,
-            }
-          }
         >
           <FormattedMessage
             id="delete-account"
@@ -113,7 +104,9 @@ exports[`<AccountForm /> should render a form 1`] = `
           Object {
             "$fragmentRefs": null,
             "$refType": null,
+            "email": "user@test.com",
             "locale": "fr-FR",
+            "newEmailToConfirm": null,
           }
         }
       />
@@ -128,14 +121,6 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
     bsClass="panel"
     collapsible={false}
   >
-    <h2
-      className="page-header"
-    >
-      <FormattedMessage
-        id="profile.account.title"
-        values={Object {}}
-      />
-    </h2>
     <form
       id="profile-account"
       onSubmit={[MockFunction]}
@@ -170,9 +155,13 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
             values={Object {}}
           />
         </span>
+        <Connect(ConfirmPasswordModal)
+          handleClose={[Function]}
+          show={false}
+        />
       </AccountForm__AccountContainer>
       <div
-        className="col-sm-6 col-sm-offset-3"
+        className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100"
         id="profile-alert-form"
       >
         <AlertForm
@@ -185,7 +174,6 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
         />
       </div>
     </form>
-    <Connect(ConfirmPasswordModal) />
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -213,14 +201,10 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
           block={false}
           bsClass="btn"
           bsStyle="danger"
+          className="ml-15"
           disabled={false}
           id="delete-account-profile-button"
           onClick={[Function]}
-          style={
-            Object {
-              "marginLeft": 15,
-            }
-          }
         >
           <FormattedMessage
             id="delete-account"
@@ -235,7 +219,9 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
           Object {
             "$fragmentRefs": null,
             "$refType": null,
+            "email": "user@test.com",
             "locale": "fr-FR",
+            "newEmailToConfirm": null,
           }
         }
       />
@@ -250,28 +236,10 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
     bsClass="panel"
     collapsible={false}
   >
-    <h2
-      className="page-header"
-    >
-      <FormattedMessage
-        id="profile.account.title"
-        values={Object {}}
-      />
-    </h2>
     <form
       id="profile-account"
       onSubmit={[MockFunction]}
     >
-      <Alert
-        bsClass="alert"
-        bsStyle="warning"
-        closeLabel="Close alert"
-      >
-        <FormattedMessage
-          id="account.email_confirmation_sent"
-          values={Object {}}
-        />
-      </Alert>
       <AccountForm__AccountContainer>
         <label
           className="col-sm-3 control-label"
@@ -302,49 +270,13 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
             values={Object {}}
           />
         </span>
+        <Connect(ConfirmPasswordModal)
+          handleClose={[Function]}
+          show={false}
+        />
       </AccountForm__AccountContainer>
       <div
-        className="col-sm-6 col-sm-offset-3"
-      >
-        <p
-          className="small excerpt"
-        >
-          <FormattedHTMLMessage
-            id="user.confirm.profile_help"
-            tagName="span"
-            values={
-              Object {
-                "email": "new-email@test.com",
-              }
-            }
-          />
-        </p>
-        <p
-          className="small excerpt col-sm-6 col-sm-offset-3"
-        >
-          <a
-            href="#resend"
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="user.confirm.resend"
-              values={Object {}}
-            />
-          </a>
-           · 
-          <a
-            href="#cancel"
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="user.confirm.cancel"
-              values={Object {}}
-            />
-          </a>
-        </p>
-      </div>
-      <div
-        className="col-sm-6 col-sm-offset-3"
+        className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100"
         id="profile-alert-form"
       >
         <AlertForm
@@ -357,7 +289,6 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
         />
       </div>
     </form>
-    <Connect(ConfirmPasswordModal) />
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -385,14 +316,10 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
           block={false}
           bsClass="btn"
           bsStyle="danger"
+          className="ml-15"
           disabled={false}
           id="delete-account-profile-button"
           onClick={[Function]}
-          style={
-            Object {
-              "marginLeft": 15,
-            }
-          }
         >
           <FormattedMessage
             id="delete-account"
@@ -407,7 +334,9 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
           Object {
             "$fragmentRefs": null,
             "$refType": null,
+            "email": "user@test.com",
             "locale": "fr-FR",
+            "newEmailToConfirm": null,
           }
         }
       />
@@ -422,14 +351,6 @@ exports[`<AccountForm /> should render a form with information about new email 1
     bsClass="panel"
     collapsible={false}
   >
-    <h2
-      className="page-header"
-    >
-      <FormattedMessage
-        id="profile.account.title"
-        values={Object {}}
-      />
-    </h2>
     <form
       id="profile-account"
       onSubmit={[MockFunction]}
@@ -464,49 +385,13 @@ exports[`<AccountForm /> should render a form with information about new email 1
             values={Object {}}
           />
         </span>
+        <Connect(ConfirmPasswordModal)
+          handleClose={[Function]}
+          show={false}
+        />
       </AccountForm__AccountContainer>
       <div
-        className="col-sm-6 col-sm-offset-3"
-      >
-        <p
-          className="small excerpt"
-        >
-          <FormattedHTMLMessage
-            id="user.confirm.profile_help"
-            tagName="span"
-            values={
-              Object {
-                "email": "new-email@test.com",
-              }
-            }
-          />
-        </p>
-        <p
-          className="small excerpt col-sm-6 col-sm-offset-3"
-        >
-          <a
-            href="#resend"
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="user.confirm.resend"
-              values={Object {}}
-            />
-          </a>
-           · 
-          <a
-            href="#cancel"
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="user.confirm.cancel"
-              values={Object {}}
-            />
-          </a>
-        </p>
-      </div>
-      <div
-        className="col-sm-6 col-sm-offset-3"
+        className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100"
         id="profile-alert-form"
       >
         <AlertForm
@@ -519,7 +404,6 @@ exports[`<AccountForm /> should render a form with information about new email 1
         />
       </div>
     </form>
-    <Connect(ConfirmPasswordModal) />
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -547,14 +431,10 @@ exports[`<AccountForm /> should render a form with information about new email 1
           block={false}
           bsClass="btn"
           bsStyle="danger"
+          className="ml-15"
           disabled={false}
           id="delete-account-profile-button"
           onClick={[Function]}
-          style={
-            Object {
-              "marginLeft": 15,
-            }
-          }
         >
           <FormattedMessage
             id="delete-account"
@@ -569,7 +449,9 @@ exports[`<AccountForm /> should render a form with information about new email 1
           Object {
             "$fragmentRefs": null,
             "$refType": null,
+            "email": "user@test.com",
             "locale": "fr-FR",
+            "newEmailToConfirm": null,
           }
         }
       />
