@@ -136,12 +136,13 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
               <div
                 className="row"
               >
-                <div
+                <DeleteAccountModal__DeleteDiv
                   className="col-sm-7"
                 >
                   <Radio
                     bsClass="radio"
                     checked={true}
+                    className="ml-15"
                     disabled={false}
                     inline={false}
                     name="type-of-removal"
@@ -149,10 +150,14 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                     title=""
                     value="soft"
                   >
-                    <FormattedMessage
-                      id="delete-account-and-anonymize-contents"
-                      values={Object {}}
-                    />
+                    <div
+                      className="ml-20"
+                    >
+                      <FormattedMessage
+                        id="delete-account-and-anonymize-contents"
+                        values={Object {}}
+                      />
+                    </div>
                   </Radio>
                   <p
                     className="delete__content__choice"
@@ -170,7 +175,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                       }
                     />
                   </p>
-                </div>
+                </DeleteAccountModal__DeleteDiv>
                 <div
                   className="col-sm-5"
                 >
@@ -231,12 +236,13 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
               <div
                 className="row"
               >
-                <div
+                <DeleteAccountModal__DeleteDiv
                   className="col-sm-7"
                 >
                   <Radio
                     bsClass="radio"
                     checked={false}
+                    className="ml-15"
                     disabled={false}
                     inline={false}
                     name="type-of-removal"
@@ -244,10 +250,14 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                     title=""
                     value="hard"
                   >
-                    <FormattedMessage
-                      id="delete-account-and-contents"
-                      values={Object {}}
-                    />
+                    <div
+                      className="ml-20"
+                    >
+                      <FormattedMessage
+                        id="delete-account-and-contents"
+                        values={Object {}}
+                      />
+                    </div>
                   </Radio>
                   <p
                     className="delete__content__choice"
@@ -263,7 +273,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                       }
                     />
                   </p>
-                </div>
+                </DeleteAccountModal__DeleteDiv>
                 <div
                   className="col-sm-5"
                 >
@@ -488,12 +498,13 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
               <div
                 className="row"
               >
-                <div
+                <DeleteAccountModal__DeleteDiv
                   className="col-sm-7"
                 >
                   <Radio
                     bsClass="radio"
                     checked={true}
+                    className="ml-15"
                     disabled={false}
                     inline={false}
                     name="type-of-removal"
@@ -501,10 +512,14 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                     title=""
                     value="soft"
                   >
-                    <FormattedMessage
-                      id="delete-account-and-anonymize-contents"
-                      values={Object {}}
-                    />
+                    <div
+                      className="ml-20"
+                    >
+                      <FormattedMessage
+                        id="delete-account-and-anonymize-contents"
+                        values={Object {}}
+                      />
+                    </div>
                   </Radio>
                   <p
                     className="delete__content__choice"
@@ -522,7 +537,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                       }
                     />
                   </p>
-                </div>
+                </DeleteAccountModal__DeleteDiv>
                 <div
                   className="col-sm-5"
                 >
@@ -583,12 +598,13 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
               <div
                 className="row"
               >
-                <div
+                <DeleteAccountModal__DeleteDiv
                   className="col-sm-7"
                 >
                   <Radio
                     bsClass="radio"
                     checked={false}
+                    className="ml-15"
                     disabled={false}
                     inline={false}
                     name="type-of-removal"
@@ -596,10 +612,14 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                     title=""
                     value="hard"
                   >
-                    <FormattedMessage
-                      id="delete-account-and-contents"
-                      values={Object {}}
-                    />
+                    <div
+                      className="ml-20"
+                    >
+                      <FormattedMessage
+                        id="delete-account-and-contents"
+                        values={Object {}}
+                      />
+                    </div>
                   </Radio>
                   <p
                     className="delete__content__choice"
@@ -615,7 +635,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                       }
                     />
                   </p>
-                </div>
+                </DeleteAccountModal__DeleteDiv>
                 <div
                   className="col-sm-5"
                 >

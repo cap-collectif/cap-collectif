@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
 import { Modal, Button, Radio, Panel } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { DeleteAccountModal_viewer } from '~relay/DeleteAccountModal_viewer.graphql';
@@ -26,6 +27,12 @@ type Props = {|
 type ModalState = {
   removalType: DeleteAccountType,
 };
+
+const DeleteDiv: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  .radio input[type='radio'] {
+    margin-left: 0;
+  }
+`;
 
 export class DeleteAccountModal extends Component<Props, ModalState> {
   constructor(props: Props) {
@@ -123,13 +130,16 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                   onClick={() => this.onPanelClick('SOFT')}>
                   <Panel.Body id="delete-account-soft">
                     <div className="row">
-                      <div className="col-sm-7">
+                      <DeleteDiv className="col-sm-7">
                         <Radio
                           value="soft"
+                          className="ml-15"
                           name={removalName}
                           onClick={() => this.onPanelClick('SOFT')}
                           checked={removalType === 'SOFT'}>
-                          <FormattedMessage id="delete-account-and-anonymize-contents" />
+                          <div className="ml-20">
+                            <FormattedMessage id="delete-account-and-anonymize-contents" />
+                          </div>
                         </Radio>
                         <p className="delete__content__choice">
                           <FormattedHTMLMessage
@@ -143,7 +153,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                             }}
                           />
                         </p>
-                      </div>
+                      </DeleteDiv>
                       <div className="col-sm-5">
                         <div className="panel panel-default inception__panel">
                           <div className="panel-body">
@@ -173,13 +183,16 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                   onClick={() => this.onPanelClick('HARD')}>
                   <Panel.Body id="delete-account-hard">
                     <div className="row">
-                      <div className="col-sm-7">
+                      <DeleteDiv className="col-sm-7">
                         <Radio
                           value="hard"
+                          className="ml-15"
                           name={removalName}
                           onClick={() => this.onPanelClick('HARD')}
                           checked={removalType === 'HARD'}>
-                          <FormattedMessage id="delete-account-and-contents" />
+                          <div className="ml-20">
+                            <FormattedMessage id="delete-account-and-contents" />
+                          </div>
                         </Radio>
                         <p className="delete__content__choice">
                           <FormattedHTMLMessage
@@ -190,7 +203,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                             }}
                           />
                         </p>
-                      </div>
+                      </DeleteDiv>
                       <div className="col-sm-5">
                         <div className="panel panel-default inception__panel">
                           <div className="panel-body">
