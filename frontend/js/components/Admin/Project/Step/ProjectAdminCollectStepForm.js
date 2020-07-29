@@ -31,8 +31,8 @@ type Props = {|
 |};
 
 export const getAvailableProposals = graphql`
-  query ProjectAdminCollectStepFormProposalsQuery {
-    availableProposalForms {
+  query ProjectAdminCollectStepFormProposalsQuery($term: String) {
+    availableProposalForms(term: $term) {
       id
       title
       isGridViewEnabled
@@ -42,8 +42,13 @@ export const getAvailableProposals = graphql`
   }
 `;
 
-export const loadProposalOptions = (proposal: ?{| label: string, value: string |}) => {
-  return fetchQuery(environment, getAvailableProposals, {}).then(data => {
+export const loadProposalOptions = (
+  proposal: ?{| label: string, value: string |},
+  term: ?string,
+) => {
+  return fetchQuery(environment, getAvailableProposals, {
+    term: term === '' ? null : term,
+  }).then(data => {
     const proposals = data.availableProposalForms.map(p => ({
       value: p.id,
       label: p.title,
@@ -87,7 +92,9 @@ export const ProjectAdminCollectStepForm = ({
         role="combobox"
         aria-autocomplete="list"
         aria-haspopup="true"
-        loadOptions={() => loadProposalOptions(proposal)}
+        defaultOptions
+        cacheOptions
+        loadOptions={term => loadProposalOptions(proposal, term)}
         clearable
       />
       {renderSubSection('global.proposals')}

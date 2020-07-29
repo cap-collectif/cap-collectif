@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -20,7 +21,23 @@ class ProposalFormRepository extends EntityRepository
             ->leftJoin('pf.questions', 'q')
             ->andWhere('pf.id = :id')
             ->setParameter('id', $id);
+
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function searchByTerm(string $term): array
+    {
+        $qb = $this->createQueryBuilder('f');
+        $qb->andWhere(
+            $qb
+                ->expr()
+                ->andX(
+                    $qb->expr()->like('f.title', $qb->expr()->literal('%' . $term . '%')),
+                    $qb->expr()->isNull('f.step')
+                )
+        );
+
+        return $qb->getQuery()->getResult();
     }
 
     public function getLastProposalReference(string $formId): int

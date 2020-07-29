@@ -20,29 +20,23 @@ class ConsultationRepository extends EntityRepository
 {
     public static function createSlugCriteria(string $slug): Criteria
     {
-        return Criteria::create()
-            ->andWhere(Criteria::expr()->eq('slug', $slug));
+        return Criteria::create()->andWhere(Criteria::expr()->eq('slug', $slug));
     }
 
-    public function findOneBySlugs(string $stepSlug,
-                                   string $projectSlug,
-                                   ?string $consultationSlug = null): ?Consultation
-    {
+    public function findOneBySlugs(
+        string $stepSlug,
+        string $projectSlug,
+        ?string $consultationSlug = null
+    ): ?Consultation {
         $qb = $this->createQueryBuilder('c');
 
         return $qb
             ->leftJoin('c.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
-            ->andWhere(
-                $qb->expr()->eq('c.slug', ':consultationSlug')
-            )
-            ->andWhere(
-                $qb->expr()->eq('p.slug', ':projectSlug')
-            )
-            ->andWhere(
-                $qb->expr()->eq('s.slug', ':stepSlug')
-            )
+            ->andWhere($qb->expr()->eq('c.slug', ':consultationSlug'))
+            ->andWhere($qb->expr()->eq('p.slug', ':projectSlug'))
+            ->andWhere($qb->expr()->eq('s.slug', ':stepSlug'))
             ->setParameters(compact('stepSlug', 'projectSlug', 'consultationSlug'))
             ->getQuery()
             ->getOneOrNullResult();
@@ -52,8 +46,7 @@ class ConsultationRepository extends EntityRepository
         ConsultationStep $cs,
         int $offset = 0,
         int $limit = 100
-    ): Paginator
-    {
+    ): Paginator {
         $qb = $this->createQueryBuilder('c');
 
         $query = $qb
@@ -76,5 +69,20 @@ class ConsultationRepository extends EntityRepository
             ->setParameter('cs', $cs)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function searchByTerm(string $term): array
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->andWhere(
+            $qb
+                ->expr()
+                ->andX(
+                    $qb->expr()->like('c.title', $qb->expr()->literal('%' . $term . '%')),
+                    $qb->expr()->isNull('c.step')
+                )
+        );
+
+        return $qb->getQuery()->getResult();
     }
 }

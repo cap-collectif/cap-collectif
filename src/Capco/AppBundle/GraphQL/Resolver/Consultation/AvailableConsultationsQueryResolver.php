@@ -14,8 +14,12 @@ class AvailableConsultationsQueryResolver implements ResolverInterface
         $this->consultationRepository = $consultationRepository;
     }
 
-    public function __invoke(): array
+    public function __invoke(?string $term = null): array
     {
+        if (null !== $term) {
+            return $this->consultationRepository->searchByTerm($term);
+        }
+
         return $this->consultationRepository->findBy(['step' => null]);
     }
 }

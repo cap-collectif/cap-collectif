@@ -7190,7 +7190,10 @@ type Query {
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [ProposalDistrict!]!
 
   """Lookup proposalForms available to use in a collect step."""
-  availableProposalForms: [ProposalForm!]!
+  availableProposalForms(
+    """Retrieve proposal forms where title match term param."""
+    term: String
+  ): [ProposalForm!]!
 
   """TO BE REMOVED"""
   contributions(
@@ -7312,7 +7315,10 @@ type Query {
   ): SiteParameter
 
   """get consultations without step"""
-  availableConsultations: [Consultation]!
+  availableConsultations(
+    """Retrieve consultation where title match term param."""
+    term: String
+  ): [Consultation]!
 
   """Autocomplete several fields based on siret"""
   apiEnterpriseAutocompleteFromSiret(

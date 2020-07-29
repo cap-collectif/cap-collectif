@@ -20,8 +20,8 @@ type Props = {|
 |};
 
 export const getAvailableConsultations = graphql`
-  query ProjectAdminConsultationStepFormConsultationsQuery {
-    availableConsultations {
+  query ProjectAdminConsultationStepFormConsultationsQuery($term: String) {
+    availableConsultations(term: $term) {
       id
       title
     }
@@ -30,8 +30,11 @@ export const getAvailableConsultations = graphql`
 
 export const loadConsultationOptions = (
   initialConsultations: ?Array<{| label: string, value: string |}>,
+  term: ?string,
 ) => {
-  return fetchQuery(environment, getAvailableConsultations, {}).then(data => {
+  return fetchQuery(environment, getAvailableConsultations, {
+    term: term === '' ? null : term,
+  }).then(data => {
     const consultations = data.availableConsultations.map(c => ({
       value: c.id,
       label: c.title,
@@ -68,7 +71,9 @@ export const ProjectAdminConsultationStepForm = ({
         role="combobox"
         aria-autocomplete="list"
         aria-haspopup="true"
-        loadOptions={() => loadConsultationOptions(consultations)}
+        defaultOptions
+        cacheOptions
+        loadOptions={term => loadConsultationOptions(consultations, term)}
         clearable
       />
       {renderSubSection('requirements')}

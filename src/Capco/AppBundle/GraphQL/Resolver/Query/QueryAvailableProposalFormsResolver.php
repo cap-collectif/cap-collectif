@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\ProposalFormRepository;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryAvailableProposalFormsResolver implements ResolverInterface
@@ -15,8 +14,12 @@ class QueryAvailableProposalFormsResolver implements ResolverInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(): array
+    public function __invoke(?string $term = null): array
     {
+        if (null !== $term) {
+            return $this->repository->searchByTerm($term);
+        }
+
         return $this->repository->findBy(['step' => null]);
     }
 }

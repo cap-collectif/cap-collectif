@@ -254,7 +254,11 @@ InternalQuery:
                 description: 'Lookup proposalForms available to use in a collect step.'
                 type: '[ProposalForm!]!'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryAvailableProposalFormsResolver")'
+                args:
+                    term:
+                        type: 'String'
+                        description: 'Retrieve proposal forms where title match term param.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryAvailableProposalFormsResolver", [args["term"]])'
             contributions:
                 type: '[InternalOpinion!]!'
                 description: 'TO BE REMOVED'
@@ -349,7 +353,11 @@ InternalQuery:
             availableConsultations:
                 type: '[InternalConsultation]!'
                 description: 'get consultations without step'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\AvailableConsultationsQueryResolver")'
+                args:
+                    term:
+                        type: 'String'
+                        description: 'Retrieve consultation where title match term param.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\AvailableConsultationsQueryResolver", [args["term"]])'
 
             apiEnterpriseAutocompleteFromSiret:
                 description: 'Autocomplete several fields based on siret'
