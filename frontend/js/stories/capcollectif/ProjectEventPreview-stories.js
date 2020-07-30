@@ -16,7 +16,7 @@ import colors from '~/utils/colors';
 import Label from '~ui/Labels/Label';
 import InlineList from '~ui/List/InlineList';
 import TagCity from '~/components/Tag/TagCity/TagCity';
-import { TYPE_EVENT } from '~/components/Event/EventPreview/EventPreview';
+import { TYPE_EVENT } from './EventPreview-stories';
 
 type Props = {
   event: any,
@@ -97,7 +97,7 @@ const ProjectEventPreview = ({ event, type, replay }: Props) => {
               Jean Dupont
             </Tag>
 
-            <TagCity googleMapsAddress={googleMapsAddress} size="16px" />
+            <TagCity address={googleMapsAddress} size="16px" />
           </TagsList>
         </Content>
       </Card.Body>

@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use ArrayObject;
-use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserProposalsResolver implements ResolverInterface
 {
@@ -24,7 +24,7 @@ class UserProposalsResolver implements ResolverInterface
     public function __invoke(
         $viewer,
         User $user,
-        Argument $args = null,
+        ?Argument $args = null,
         ?ArrayObject $context = null,
         ?ResolveInfo $resolveInfo= null
     ): Connection {
@@ -42,7 +42,6 @@ class UserProposalsResolver implements ResolverInterface
         $needEdges = $resolveInfo ? isset($resolveInfo->getFieldSelection()['edges']) : false;
 
         if ($aclDisabled) {
-            /** @var User $viewer */
             $paginator = new Paginator(function (int $offset, int $limit) use ($user, $needEdges) {
                 return $needEdges
                     ? $this->proposalRepository->getByUser($user, $limit, $offset)

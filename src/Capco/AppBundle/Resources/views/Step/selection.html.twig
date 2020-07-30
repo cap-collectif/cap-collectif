@@ -34,6 +34,9 @@
             <p><strong>{{ 'step.collect.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.selection.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
         </div>
     {% endif %}
+    {% if is_feature_enabled('calendar') %}
+        {{ react_render_component('StepEventsApp', { 'props': {'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'stepId': currentStep.id|toGlobalId('SelectionStep')} }) }}
+    {% endif %}
 
     {{ react_render_component('ProposalStepPageApp', { 'props': {  'stepId': currentStep.id|toGlobalId('SelectionStep'), count: capco_site_parameter_value('proposal.pagination') * 1 } }) }}
 {% endblock %}

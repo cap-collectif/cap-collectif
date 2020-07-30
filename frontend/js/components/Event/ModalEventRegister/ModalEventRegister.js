@@ -10,7 +10,7 @@ import UserRegister from '~/components/Event/UserRegister/UserRegister';
 type Props = {|
   show: boolean,
   onClose: () => void,
-  user?: ModalEventRegister_user,
+  user?: ?ModalEventRegister_user,
   event: ModalEventRegister_event,
 |};
 
@@ -23,7 +23,7 @@ const ModalEventRegister = ({ show, onClose, user, event }: Props) => (
     aria-labelledby="contained-modal-title-lg">
     <Modal.Header closeButton />
     <Modal.Body>
-      {!event.isViewerParticipatingAtEvent ? (
+      {!event.isViewerParticipatingAtEvent || !user ? (
         <RegisterForm user={user} event={event} />
       ) : (
         <UserRegister user={user} event={event} />

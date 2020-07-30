@@ -9,6 +9,7 @@ use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Elastica\Snapshot;
@@ -418,6 +419,26 @@ class ApplicationContext extends UserContext
         }
         $ssoConfig->setEnabled(true);
         $entityManager->persist($ssoConfig);
+        $entityManager->flush();
+        $entityManager->clear();
+    }
+
+    /**
+     * @Then I set currentDate as the start event date for event :eventId
+     */
+    public function setStartDateForEvent(string $eventId)
+    {
+        $entityManager = $this->getEntityManager();
+        $eventRepository = $entityManager->getRepository(Event::class);
+        /** @var Event $event */
+        $event = $eventRepository->find($eventId);
+        if (null === $event) {
+            throw new \RuntimeException('Cannot find event ' . $eventId);
+        }
+        $currentDate = new \DateTime();
+        $currentDate->sub(new \DateInterval('PT1H'));
+        $event->setStartAt($currentDate);
+        $entityManager->persist($event);
         $entityManager->flush();
         $entityManager->clear();
     }

@@ -34,8 +34,10 @@ export type MediaFromAPI = {|
   +url: Uri,
 |};
 
+// TODO We can (now) extract this enum from our GraphQL schema
 export type FeatureToggles = {
   blog: ?boolean,
+  unstable__remote_events: ?boolean,
   new_feature_questionnaire_result: ?boolean,
   unstable__admin_editor: ?boolean,
   calendar: ?boolean,

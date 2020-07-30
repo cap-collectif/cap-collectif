@@ -5,7 +5,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import L from 'leaflet';
-import { TYPE_EVENT } from '~/components/Event/EventPreview/EventPreview';
 import Thumbnail from '~ui/Medias/Thumbnail/Thumbnail';
 import config from '~/config';
 import Fixed from '~ui/Fixed/Fixed';
@@ -13,11 +12,11 @@ import ShareButtonDropdownApp from '~/startup/ShareButtonDropdownApp';
 import CommentSectionApp from '~/startup/CommentSectionApp';
 import ParticipantList from '~/components/Event/ParticipantList/ParticipantList';
 import type { EventPageContent_event } from '~relay/EventPageContent_event.graphql';
-import type { EventPageContent_user } from '~relay/EventPageContent_user.graphql';
+import type { EventPageContent_viewer } from '~relay/EventPageContent_viewer.graphql';
 import ModalParticipantList from '~/components/Event/ModalParticipantList/ModalParticipantList';
 import RegisterForm from '~/components/Event/RegisterForm/RegisterForm';
 import UserRegister, { unsubscribe } from '~/components/Event/UserRegister/UserRegister';
-import EventOnlineThumbnail from '~/components/Event/EventOnlineThumbnail/EventOnlineThumbnail';
+import EventPageRemoteContent from '~/components/Event/EventPageContent/EventPageRemoteContent';
 import { Container, Content, ButtonSubscribe, ButtonUnsubscribe } from './EventPageContent.style';
 import ModalEventRegister from '~/components/Event/ModalEventRegister/ModalEventRegister';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
@@ -25,18 +24,12 @@ import EventModerationMotiveView from '~/components/Event/EventModerationMotiveV
 import type { State } from '~/types';
 
 type Props = {|
-  event: EventPageContent_event,
-  user?: EventPageContent_user,
-  type?: $Values<typeof TYPE_EVENT>,
-  hasProposeEventEnabled?: boolean,
+  +event: EventPageContent_event,
+  +viewer?: ?EventPageContent_viewer,
+  +hasProposeEventEnabled: boolean,
 |};
 
-export const EventPageContent = ({
-  type = TYPE_EVENT.PHYSICAL,
-  event,
-  user,
-  hasProposeEventEnabled,
-}: Props) => {
+export const EventPageContent = ({ event, viewer, hasProposeEventEnabled }: Props) => {
   const {
     participants,
     commentable,
@@ -46,26 +39,25 @@ export const EventPageContent = ({
     isRegistrationPossible,
     isViewerParticipatingAtEvent,
     viewerDidAuthor,
+    isPresential,
   } = event;
-  const [showModalParticipant, setShowModalParticipant] = React.useState<boolean>(false);
-  const [showModalRegister, setShowModalRegister] = React.useState<boolean>(false);
   const publicToken =
     '***REMOVED***';
+  const [showModalParticipant, setShowModalParticipant] = React.useState<boolean>(false);
+  const [showModalRegister, setShowModalRegister] = React.useState<boolean>(false);
 
   return (
     <Container>
       <Content>
         {viewerDidAuthor && hasProposeEventEnabled && <EventModerationMotiveView event={event} />}
 
-        {media?.url && type === TYPE_EVENT.PHYSICAL && (
-          <Thumbnail width="100%" height="400px" image={media.url} />
-        )}
+        {media?.url && isPresential && <Thumbnail width="100%" height="400px" image={media.url} />}
 
-        {type === TYPE_EVENT.ONLINE && <EventOnlineThumbnail event={event} />}
+        {!isPresential && <EventPageRemoteContent event={event} viewer={viewer} />}
 
         {body && <WYSIWYGRender className="description" value={body} />}
 
-        {googleMapsAddress && type === TYPE_EVENT.PHYSICAL && (
+        {googleMapsAddress && isPresential && (
           <Map
             center={[googleMapsAddress.lat, googleMapsAddress.lng]}
             zoom={10}
@@ -96,9 +88,7 @@ export const EventPageContent = ({
         <ParticipantList event={event} setShowModalParticipant={setShowModalParticipant} />
       )}
 
-      {commentable && type === TYPE_EVENT.PHYSICAL && (
-        <CommentSectionApp commentableId={event.id} />
-      )}
+      {commentable && isPresential && <CommentSectionApp commentableId={event.id} />}
 
       {participants.totalCount > 0 && (
         <ModalParticipantList
@@ -111,10 +101,10 @@ export const EventPageContent = ({
       {isRegistrationPossible &&
         (!config.isMobile ? (
           <Fixed position={{ left: '66%' }} width="300px">
-            {!isViewerParticipatingAtEvent ? (
-              <RegisterForm user={user} event={event} />
+            {!isViewerParticipatingAtEvent || !viewer ? (
+              <RegisterForm user={viewer} event={event} />
             ) : (
-              <UserRegister user={user} event={event} />
+              <UserRegister user={viewer} event={event} />
             )}
           </Fixed>
         ) : (
@@ -135,7 +125,7 @@ export const EventPageContent = ({
         <ModalEventRegister
           show={showModalRegister}
           onClose={() => setShowModalRegister(false)}
-          user={user}
+          user={viewer}
           event={event}
         />
       )}
@@ -154,6 +144,7 @@ export default createFragmentContainer(EventPageContentConnected, {
     fragment EventPageContent_event on Event
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
+      ...EventPageRemoteContent_event @arguments(isAuthenticated: $isAuthenticated)
       title
       url
       body
@@ -171,6 +162,7 @@ export default createFragmentContainer(EventPageContentConnected, {
       participants {
         totalCount
       }
+      isPresential
       ...RegisterForm_event
       ...UserRegister_event
       ...ModalEventRegister_event @arguments(isAuthenticated: $isAuthenticated)
@@ -180,11 +172,13 @@ export default createFragmentContainer(EventPageContentConnected, {
       ...EventModerationMotiveView_event
     }
   `,
-  user: graphql`
-    fragment EventPageContent_user on User {
+  viewer: graphql`
+    fragment EventPageContent_viewer on User {
+      id
       ...RegisterForm_user
       ...UserRegister_user
       ...ModalEventRegister_user
+      ...EventPageRemoteContent_viewer
     }
   `,
 });

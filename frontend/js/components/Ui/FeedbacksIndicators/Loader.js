@@ -4,13 +4,14 @@ import styled, { type StyledComponent } from 'styled-components';
 import { Circle } from 'styled-spinkit';
 import colors from '../../../utils/colors';
 
-type Props = {
-  show: boolean,
-  inline: boolean,
-  size: number,
-  color: string,
-  children?: ?React.Node,
-};
+type Props = {|
+  +show: boolean,
+  +inline: boolean,
+  +size: number,
+  +color: string,
+  +id?: string,
+  +children?: ?React.Node,
+|};
 
 export const Container: StyledComponent<{ inline?: boolean }, {}, HTMLDivElement> = styled.div`
   text-align: center;
@@ -35,10 +36,10 @@ export class Loader extends React.Component<Props> {
   };
 
   render() {
-    const { children, show, inline, size, color } = this.props;
+    const { children, show, inline, size, color, id } = this.props;
     if (show) {
       return (
-        <Container className="loader" inline={inline}>
+        <Container id={id} className="loader" inline={inline}>
           <Circle size={size} color={color} />
         </Container>
       );

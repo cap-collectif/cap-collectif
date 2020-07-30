@@ -1,43 +1,52 @@
 InternalStep:
-  type: interface
-  inherits:
-    - Node
-    - PreviewTimeRangeable
-    - PreviewStep
-  config:
-    name: Step
-    description: 'A step inside a project.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
-    fields:
-      # TODO remove
-      kind:
-        description: 'The kind of the step'
-        type: 'String!'
-      type:
-        description: 'The type of the step'
-        type: 'String'
-      timeless:
-        description: 'Does the step have a end date ?'
-        type: 'Boolean'
-      body:
-        type: 'HTML'
-        description: 'The introduction text of the step.'
-      enabled:
-        description: 'Is the step enabled or not'
-        type: 'Boolean!'
-      label:
-        description: 'The label of the step'
-        type: 'String!'
-      metaDescription:
-        description: "The step's metadescription"
-        type: 'String'
-      customCode:
-        description: "The step's custom code"
-        type: 'String'
-      slug:
-        description: "The step's slug"
-        type: 'String'
-      isQuestionnaireStep:
-        description: "The step is a questionnaire step or not"
-        type: 'Boolean'
-        resolve: '@=value.isQuestionnaireStep()'
+    type: interface
+    inherits:
+        - Node
+        - PreviewTimeRangeable
+        - PreviewStep
+    config:
+        name: Step
+        description: 'A step inside a project.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
+        fields:
+            # TODO remove
+            kind:
+                description: 'The kind of the step'
+                type: 'String!'
+            type:
+                description: 'The type of the step'
+                type: 'String'
+            timeless:
+                description: 'Does the step have a end date ?'
+                type: 'Boolean'
+            body:
+                type: 'HTML'
+                description: 'The introduction text of the step.'
+            enabled:
+                description: 'Is the step enabled or not'
+                type: 'Boolean!'
+            label:
+                description: 'The label of the step'
+                type: 'String!'
+            metaDescription:
+                description: "The step's metadescription"
+                type: 'String'
+            customCode:
+                description: "The step's custom code"
+                type: 'String'
+            slug:
+                description: "The step's slug"
+                type: 'String'
+            isQuestionnaireStep:
+                description: 'The step is a questionnaire step or not'
+                type: 'Boolean'
+                resolve: '@=value.isQuestionnaireStep()'
+            events:
+                description: 'Events linked to the step'
+                type: 'InternalEventConnection!'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    orderBy:
+                        type: 'PreviewEventOrder!'
+                        defaultValue: { field: START_AT, direction: DESC }
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepEventsResolver", [value, args])'

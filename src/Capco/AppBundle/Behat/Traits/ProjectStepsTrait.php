@@ -8,7 +8,7 @@ trait ProjectStepsTrait
 {
     protected static $collectStepWithVote = [
         'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'depot-avec-vote'
+        'stepSlug' => 'depot-avec-vote',
     ];
 
     /**
@@ -39,7 +39,7 @@ trait ProjectStepsTrait
     public function iGoToAProjectStatsPage()
     {
         $this->visitPageWithParams('project stats page', [
-            'projectSlug' => 'depot-avec-selection-vote-budget'
+            'projectSlug' => 'depot-avec-selection-vote-budget',
         ]);
         $this->iWaitElementToAppearOnPage('.stats__step-details');
     }
@@ -114,6 +114,18 @@ trait ProjectStepsTrait
     public function iGoToACollectStepWithVote()
     {
         $this->visitPageWithParams('collect page', self::$collectStepWithVote);
+        $this->iWait(1);
+    }
+
+    /**
+     * @When I go to the collect step IDF
+     */
+    public function iGoToTheCollectStepIDF()
+    {
+        $this->visitPageWithParams('collect page', [
+            'projectSlug' => 'budget-participatif-idf',
+            'stepSlug' => 'collecte-des-projets-idf-privee',
+        ]);
         $this->iWait(1);
     }
 

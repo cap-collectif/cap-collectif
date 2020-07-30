@@ -127,6 +127,9 @@ InternalQuery:
             events:
                 type: 'InternalEventConnection!'
                 args:
+                    isPresential:
+                        type: 'Boolean'
+                        description: 'If true, return the presential events, if false return the remote events.'
                     # TODO
                     # rename to query.
                     search:

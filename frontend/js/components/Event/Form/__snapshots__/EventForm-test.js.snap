@@ -1,150 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EventForm /> it renders correctly with event complete 1`] = `
-<form
-  className="eventForm "
-  onSubmit={[MockFunction]}
->
-  <EventForm__PageTitleContainer>
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="global.general"
-        values={Object {}}
-      />
-    </h3>
-    <span
-      className="mr-30 mt-15"
-    />
-  </EventForm__PageTitleContainer>
-  <div
-    className="color-dark-gray font-size-16"
-  />
-  <div
-    className="box-body"
+exports[`<EventForm /> it does not render toggle on frontend even with remote event enabled 1`] = `
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
   >
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="event_title"
-      label={
-        <FormattedMessage
-          id="global.title"
-          values={Object {}}
-        />
-      }
-      name="title"
-      type="text"
-    />
-    <UserListField
-      ariaControls="EventForm-filter-user-listbox"
-      authorOfEvent={false}
-      autoload={true}
-      className=""
-      clearable={false}
-      debounce={false}
-      disabled={false}
-      id="event_author"
-      inputClassName="fake-inputClassName"
-      label={
-        <FormattedMessage
-          id="global.author"
-          values={Object {}}
-        />
-      }
-      labelClassName={null}
-      multi={false}
-      name="author"
-      placeholder={null}
-      selectFieldIsObject={true}
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      formName="EventForm"
-      id="event_address"
-      label={
-        <div>
-          <FormattedMessage
-            id="proposal_form.address"
-            values={Object {}}
-          />
-          <div
-            className="excerpt inline"
-          >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
-          </div>
-        </div>
-      }
-      name="addressText"
-      placeholder="proposal.map.form.placeholder"
-      type="address"
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="event_body"
-      label={
-        <FormattedMessage
-          id="global.description"
-          values={Object {}}
-        />
-      }
-      name="body"
-      type="admin-editor"
-    />
     <div
-      className="datePickContainer"
+      className="box-body"
     >
       <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
-          />
-        }
         component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "disabled": false,
-            "id": "event_input_startAt",
-          }
-        }
-        formName="EventForm"
-        id="event_startAt"
+        disabled={false}
+        id="event_title"
         label={
           <FormattedMessage
-            id="start-date"
+            id="global.title"
             values={Object {}}
           />
         }
-        name="startAt"
-        timeFormat={false}
-        type="datetime"
+        name="title"
+        type="text"
       />
       <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
-          />
-        }
-        className="adminDate"
         component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "disabled": false,
-            "id": "event_input_endAt",
-          }
-        }
+        disabled={false}
         formName="EventForm"
-        id="event_endAt"
+        id="event_address"
         label={
           <div>
             <FormattedMessage
-              id="ending-date"
+              id="proposal_form.address"
               values={Object {}}
             />
             <div
@@ -157,352 +43,376 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
             </div>
           </div>
         }
-        name="endAt"
-        type="datetime"
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label={
+          <FormattedMessage
+            id="global.description"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              <FormattedMessage
+                id="ending-date"
+                values={Object {}}
+              />
+              <div
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
       />
     </div>
     <Field
       component={[Function]}
-      id="event_media"
+      disabled={false}
       label={
-        <div>
+        <React.Fragment>
           <FormattedMessage
-            id="global.illustration"
+            id="global.meta.description"
             values={Object {}}
           />
-          <div
+          <span
             className="excerpt inline"
           >
             <FormattedMessage
               id="global.optional"
               values={Object {}}
             />
-          </div>
-        </div>
+             
+            <OverlayTrigger
+              defaultOverlayShown={false}
+              overlay={
+                <_default
+                  className="text-left"
+                  id="tooltip-top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <FormattedMessage
+                    id="admin.help.metadescription"
+                    values={Object {}}
+                  />
+                </_default>
+              }
+              placement="top"
+              trigger={
+                Array [
+                  "hover",
+                  "focus",
+                ]
+              }
+            >
+              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+            </OverlayTrigger>
+          </span>
+        </React.Fragment>
       }
-      name="media"
-      type="image"
+      name="metadescription"
+      type="textarea"
     />
-  </div>
-  <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
+    <div
+      className="box-header d-flex"
     >
-      <FormattedMessage
-        id="form.label_category"
-        values={Object {}}
-      />
-    </h3>
-  </div>
-  <span
-    className="help-block"
-  >
-    <FormattedMessage
-      id="allow-event-linking"
-      values={Object {}}
-    />
-  </span>
-  <Relay(injectIntl(SelectProject))
-    clearable={true}
-    disabled={false}
-    label="global.participative.project"
-    multi={true}
-    name="projects"
-    optional={false}
-    query={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "viewer": Object {
-          "isAdmin": true,
-          "isSuperAdmin": false,
-        },
-      }
-    }
-  />
-  <div>
-    <div>
-      <div
-        className="box-header"
+      <h3
+        className="box-title"
       >
-        <h3
-          className="box-title"
-        >
+        <FormattedMessage
+          id="form.label_category"
+          values={Object {}}
+        />
+        <EventForm__TitleHint>
+            
+           
           <FormattedMessage
-            id="global.options"
+            id="allow-event-linking"
             values={Object {}}
           />
-        </h3>
-      </div>
-      <div
-        className="ml-10 pl-10"
-      >
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <Relay(injectIntl(SelectProject))
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={true}
+      placeholder="select-project"
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <Relay(injectIntl(SelectStep))
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={true}
+      projectIds={Array []}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <div>
+      <div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.options"
+              values={Object {}}
+            />
+          </h3>
+        </div>
         <Field
           component={[Function]}
           disabled={false}
           id="event_registrable"
-          name="guestListEnabled"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="allow-inscriptions"
-            values={Object {}}
-          />
-        </Field>
-      </div>
-      <div
-        className="clearfix"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          id="event_link"
           label={
             <FormattedMessage
-              id="admin.fields.event.link"
+              id="inscriptions-on-platform"
               values={Object {}}
             />
           }
-          name="link"
-          placeholder="http://"
-          type="text"
+          name="guestListEnabled"
+          type="checkbox"
         />
       </div>
-      <div
-        className="ml-10 pl-10"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          id="event_commentable"
-          name="commentable"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="admin.fields.blog_post.is_commentable"
-            values={Object {}}
-          />
-        </Field>
-      </div>
-      <div
-        className="ml-10 pl-10"
-      >
-        <Field
-          component={[Function]}
-          id="event_adminAuthorizeDataTransfer"
-          name="adminAuthorizeDataTransfer"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="authorize-transfer-of-data-to-event-organizer"
-            values={Object {}}
-          />
-        </Field>
-      </div>
     </div>
-    <div>
-      <div
-        className="box-header"
-      >
-        <h3
-          className="box-title"
-        >
-          <FormattedMessage
-            id="admin.fields.step.advanced"
-            values={Object {}}
-          />
-        </h3>
-      </div>
-      <CustomPageFields
-        disabled={false}
-      />
-      <div
-        className="box-header pt-0"
-      >
-        <h3
-          className="box-title"
-        >
-          <FormattedMessage
-            id="global.publication"
-            values={Object {}}
-          />
-        </h3>
-      </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_enabled"
-        label={
-          <div>
-            <FormattedMessage
-              id="global.published"
-              values={Object {}}
-            />
-            <div
-              className="excerpt inline"
-            >
-              <FormattedMessage
-                id="global.optional"
-                values={Object {}}
-              />
-            </div>
-          </div>
-        }
-        name="enabled"
-        type="checkbox"
-      />
-    </div>
-  </div>
-</form>
+  </form>
+</EventForm__FormContainer>
 `;
 
-exports[`<EventForm /> it renders correctly with initialValue 1`] = `
-<form
-  className="eventForm "
-  onSubmit={[MockFunction]}
->
-  <EventForm__PageTitleContainer>
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="global.general"
-        values={Object {}}
-      />
-    </h3>
-    <span
-      className="mr-30 mt-15"
-    />
-  </EventForm__PageTitleContainer>
-  <div
-    className="color-dark-gray font-size-16"
-  />
-  <div
-    className="box-body"
+exports[`<EventForm /> it renders correctly a remote event 1`] = `
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
   >
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="event_title"
-      label={
+    <EventForm__PageTitleContainer>
+      <h3
+        className="box-title"
+      >
         <FormattedMessage
-          id="global.title"
+          id="global.general"
           values={Object {}}
         />
-      }
-      name="title"
-      type="text"
-    />
-    <UserListField
-      ariaControls="EventForm-filter-user-listbox"
-      authorOfEvent={false}
-      autoload={true}
-      className=""
-      clearable={false}
-      debounce={false}
-      disabled={false}
-      id="event_author"
-      inputClassName="fake-inputClassName"
-      label={
-        <FormattedMessage
-          id="global.author"
-          values={Object {}}
-        />
-      }
-      labelClassName={null}
-      multi={false}
-      name="author"
-      placeholder={null}
-      selectFieldIsObject={true}
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      formName="EventForm"
-      id="event_address"
-      label={
-        <div>
-          <FormattedMessage
-            id="proposal_form.address"
-            values={Object {}}
-          />
-          <div
-            className="excerpt inline"
-          >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
-          </div>
-        </div>
-      }
-      name="addressText"
-      placeholder="proposal.map.form.placeholder"
-      type="address"
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="event_body"
-      label={
-        <FormattedMessage
-          id="global.description"
-          values={Object {}}
-        />
-      }
-      name="body"
-      type="admin-editor"
+      </h3>
+      <span
+        className="mr-30 mt-15"
+      />
+    </EventForm__PageTitleContainer>
+    <div
+      className="color-dark-gray font-size-16"
     />
     <div
-      className="datePickContainer"
+      className="box-body"
     >
       <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
-          />
-        }
         component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "disabled": false,
-            "id": "event_input_startAt",
-          }
-        }
-        formName="EventForm"
-        id="event_startAt"
+        id="isPresential"
         label={
           <FormattedMessage
-            id="start-date"
+            id="global.type"
             values={Object {}}
           />
         }
-        name="startAt"
-        timeFormat={false}
-        type="datetime"
-      />
+        name="isPresential"
+        type="radio-buttons"
+      >
+        <ToggleButton
+          id="presential"
+          onClick={[Function]}
+          value={true}
+        >
+          <FormattedMessage
+            id="global.presential"
+            values={Object {}}
+          />
+        </ToggleButton>
+        <ToggleButton
+          id="remote"
+          onClick={[Function]}
+          value={false}
+        >
+          <FormattedMessage
+            id="global.online"
+            values={Object {}}
+          />
+        </ToggleButton>
+      </Field>
       <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
+        component={[Function]}
+        disabled={false}
+        id="event_title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
           />
         }
-        className="adminDate"
-        component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "disabled": false,
-            "id": "event_input_endAt",
-          }
+        name="title"
+        type="text"
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
+          />
         }
+        labelClassName={null}
+        multi={false}
+        name="author"
+        placeholder="select-author"
+        selectFieldIsObject={true}
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_animator"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.animator"
+            values={Object {}}
+          />
+        }
+        labelClassName={null}
+        multi={false}
+        name="animator"
+        placeholder={null}
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
         formName="EventForm"
-        id="event_endAt"
+        id="event_address"
         label={
           <div>
             <FormattedMessage
-              id="ending-date"
+              id="proposal_form.address"
               values={Object {}}
             />
             <div
@@ -515,187 +425,511 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
             </div>
           </div>
         }
-        name="endAt"
-        type="datetime"
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label={
+          <FormattedMessage
+            id="global.description"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              <FormattedMessage
+                id="ending-date"
+                values={Object {}}
+              />
+              <div
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
       />
     </div>
     <Field
       component={[Function]}
-      id="event_media"
+      disabled={false}
       label={
-        <div>
+        <React.Fragment>
           <FormattedMessage
-            id="global.illustration"
+            id="global.meta.description"
             values={Object {}}
           />
-          <div
+          <span
             className="excerpt inline"
           >
             <FormattedMessage
               id="global.optional"
               values={Object {}}
             />
-          </div>
-        </div>
+             
+            <OverlayTrigger
+              defaultOverlayShown={false}
+              overlay={
+                <_default
+                  className="text-left"
+                  id="tooltip-top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <FormattedMessage
+                    id="admin.help.metadescription"
+                    values={Object {}}
+                  />
+                </_default>
+              }
+              placement="top"
+              trigger={
+                Array [
+                  "hover",
+                  "focus",
+                ]
+              }
+            >
+              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+            </OverlayTrigger>
+          </span>
+        </React.Fragment>
       }
-      name="media"
-      type="image"
+      name="metadescription"
+      type="textarea"
     />
-  </div>
-  <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
+    <div
+      className="box-header d-flex"
     >
-      <FormattedMessage
-        id="form.label_category"
-        values={Object {}}
-      />
-    </h3>
-  </div>
-  <span
-    className="help-block"
-  >
-    <FormattedMessage
-      id="allow-event-linking"
-      values={Object {}}
-    />
-  </span>
-  <Relay(injectIntl(SelectProject))
-    clearable={true}
-    disabled={false}
-    label="global.participative.project"
-    multi={true}
-    name="projects"
-    optional={false}
-    query={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "viewer": Object {
-          "isAdmin": true,
-          "isSuperAdmin": false,
-        },
-      }
-    }
-  />
-  <div>
-    <div>
-      <div
-        className="box-header"
+      <h3
+        className="box-title"
       >
-        <h3
-          className="box-title"
-        >
+        <FormattedMessage
+          id="form.label_category"
+          values={Object {}}
+        />
+        <EventForm__TitleHint>
+            
+           
           <FormattedMessage
-            id="global.options"
+            id="allow-event-linking"
             values={Object {}}
           />
-        </h3>
-      </div>
-      <div
-        className="ml-10 pl-10"
-      >
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <Relay(injectIntl(SelectProject))
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={false}
+      placeholder="select-project"
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <Relay(injectIntl(SelectStep))
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={false}
+      projectIds={Array []}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <div>
+      <div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.options"
+              values={Object {}}
+            />
+          </h3>
+        </div>
         <Field
           component={[Function]}
           disabled={false}
           id="event_registrable"
-          name="guestListEnabled"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="allow-inscriptions"
-            values={Object {}}
-          />
-        </Field>
-      </div>
-      <div
-        className="clearfix"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          id="event_link"
           label={
             <FormattedMessage
-              id="admin.fields.event.link"
+              id="inscriptions-on-platform"
               values={Object {}}
             />
           }
-          name="link"
-          placeholder="http://"
-          type="text"
+          name="guestListEnabled"
+          type="checkbox"
         />
-      </div>
-      <div
-        className="ml-10 pl-10"
-      >
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          label={
+            <FormattedMessage
+              id="authorize-transfer-of-data-to-event-organizer"
+              values={Object {}}
+            />
+          }
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        />
         <Field
           component={[Function]}
           disabled={false}
           id="event_commentable"
+          label={
+            <FormattedMessage
+              id="admin.fields.proposal.comments"
+              values={Object {}}
+            />
+          }
           name="commentable"
           type="checkbox"
-        >
-          <FormattedMessage
-            id="admin.fields.blog_post.is_commentable"
-            values={Object {}}
-          />
-        </Field>
+        />
       </div>
-      <div
-        className="ml-10 pl-10"
-      >
+      <div>
+        <div
+          className="box-header pt-0"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.publication"
+              values={Object {}}
+            />
+          </h3>
+        </div>
         <Field
           component={[Function]}
-          id="event_adminAuthorizeDataTransfer"
-          name="adminAuthorizeDataTransfer"
+          disabled={false}
+          id="event_enabled"
+          label={
+            <FormattedMessage
+              id="global.published"
+              values={Object {}}
+            />
+          }
+          name="enabled"
           type="checkbox"
+        />
+        <div
+          className="box-header"
         >
-          <FormattedMessage
-            id="authorize-transfer-of-data-to-event-organizer"
-            values={Object {}}
-          />
-        </Field>
+          <h3
+            className="box-title replay-container"
+          >
+            <FormattedMessage
+              id="global.replay"
+              values={Object {}}
+            />
+          </h3>
+          <EventForm__JitsiNoReplayContainer>
+            <FormattedHTMLMessage
+              id="activate-jitsi-recording-hint"
+              tagName="span"
+              values={Object {}}
+            />
+          </EventForm__JitsiNoReplayContainer>
+        </div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global-customization"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label={
+            <React.Fragment>
+              <FormattedMessage
+                id="admin.customcode"
+                values={Object {}}
+              />
+              <span
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+                 
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <_default
+                      className="text-left"
+                      id="tooltip-top"
+                      style={
+                        Object {
+                          "wordBreak": "break-word",
+                        }
+                      }
+                    >
+                      <FormattedMessage
+                        id="admin.help.customcode"
+                        values={Object {}}
+                      />
+                    </_default>
+                  }
+                  placement="top"
+                  trigger={
+                    Array [
+                      "hover",
+                      "focus",
+                    ]
+                  }
+                >
+                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                </OverlayTrigger>
+              </span>
+            </React.Fragment>
+          }
+          name="customcode"
+          placeholder="<script type=\\"text/javascript\\"> </script>\\""
+          type="textarea"
+        />
       </div>
     </div>
-    <div>
-      <div
-        className="box-header"
+  </form>
+</EventForm__FormContainer>
+`;
+
+exports[`<EventForm /> it renders correctly on BO a toggle with remote event enabled 1`] = `
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
+  >
+    <EventForm__PageTitleContainer>
+      <h3
+        className="box-title"
       >
-        <h3
-          className="box-title"
-        >
-          <FormattedMessage
-            id="admin.fields.step.advanced"
-            values={Object {}}
-          />
-        </h3>
-      </div>
-      <CustomPageFields
-        disabled={false}
+        <FormattedMessage
+          id="global.general"
+          values={Object {}}
+        />
+      </h3>
+      <span
+        className="mr-30 mt-15"
       />
-      <div
-        className="box-header pt-0"
-      >
-        <h3
-          className="box-title"
-        >
+    </EventForm__PageTitleContainer>
+    <div
+      className="color-dark-gray font-size-16"
+    />
+    <div
+      className="box-body"
+    >
+      <Field
+        component={[Function]}
+        id="isPresential"
+        label={
           <FormattedMessage
-            id="global.publication"
+            id="global.type"
             values={Object {}}
           />
-        </h3>
-      </div>
+        }
+        name="isPresential"
+        type="radio-buttons"
+      >
+        <ToggleButton
+          id="presential"
+          onClick={[Function]}
+          value={true}
+        >
+          <FormattedMessage
+            id="global.presential"
+            values={Object {}}
+          />
+        </ToggleButton>
+        <ToggleButton
+          id="remote"
+          onClick={[Function]}
+          value={false}
+        >
+          <FormattedMessage
+            id="global.online"
+            values={Object {}}
+          />
+        </ToggleButton>
+      </Field>
       <Field
         component={[Function]}
         disabled={false}
-        id="event_enabled"
+        id="event_title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
+          />
+        }
+        labelClassName={null}
+        multi={false}
+        name="author"
+        placeholder="select-author"
+        selectFieldIsObject={true}
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_animator"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.animator"
+            values={Object {}}
+          />
+        }
+        labelClassName={null}
+        multi={false}
+        name="animator"
+        placeholder={null}
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        formName="EventForm"
+        id="event_address"
         label={
           <div>
             <FormattedMessage
-              id="global.published"
+              id="proposal_form.address"
               values={Object {}}
             />
             <div
@@ -708,159 +942,962 @@ exports[`<EventForm /> it renders correctly with initialValue 1`] = `
             </div>
           </div>
         }
-        name="enabled"
-        type="checkbox"
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label={
+          <FormattedMessage
+            id="global.description"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              <FormattedMessage
+                id="ending-date"
+                values={Object {}}
+              />
+              <div
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
       />
     </div>
-  </div>
-</form>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label={
+        <React.Fragment>
+          <FormattedMessage
+            id="global.meta.description"
+            values={Object {}}
+          />
+          <span
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+             
+            <OverlayTrigger
+              defaultOverlayShown={false}
+              overlay={
+                <_default
+                  className="text-left"
+                  id="tooltip-top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <FormattedMessage
+                    id="admin.help.metadescription"
+                    values={Object {}}
+                  />
+                </_default>
+              }
+              placement="top"
+              trigger={
+                Array [
+                  "hover",
+                  "focus",
+                ]
+              }
+            >
+              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+            </OverlayTrigger>
+          </span>
+        </React.Fragment>
+      }
+      name="metadescription"
+      type="textarea"
+    />
+    <div
+      className="box-header d-flex"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="form.label_category"
+          values={Object {}}
+        />
+        <EventForm__TitleHint>
+            
+           
+          <FormattedMessage
+            id="allow-event-linking"
+            values={Object {}}
+          />
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <Relay(injectIntl(SelectProject))
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={false}
+      placeholder="select-project"
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <Relay(injectIntl(SelectStep))
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={false}
+      projectIds={Array []}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <div>
+      <div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.options"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          label={
+            <FormattedMessage
+              id="inscriptions-on-platform"
+              values={Object {}}
+            />
+          }
+          name="guestListEnabled"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          label={
+            <FormattedMessage
+              id="authorize-transfer-of-data-to-event-organizer"
+              values={Object {}}
+            />
+          }
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          label={
+            <FormattedMessage
+              id="admin.fields.proposal.comments"
+              values={Object {}}
+            />
+          }
+          name="commentable"
+          type="checkbox"
+        />
+      </div>
+      <div>
+        <div
+          className="box-header pt-0"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.publication"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_enabled"
+          label={
+            <FormattedMessage
+              id="global.published"
+              values={Object {}}
+            />
+          }
+          name="enabled"
+          type="checkbox"
+        />
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title replay-container"
+          >
+            <FormattedMessage
+              id="global.replay"
+              values={Object {}}
+            />
+          </h3>
+          <EventForm__JitsiNoReplayContainer>
+            <FormattedHTMLMessage
+              id="activate-jitsi-recording-hint"
+              tagName="span"
+              values={Object {}}
+            />
+          </EventForm__JitsiNoReplayContainer>
+        </div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global-customization"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label={
+            <React.Fragment>
+              <FormattedMessage
+                id="admin.customcode"
+                values={Object {}}
+              />
+              <span
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+                 
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <_default
+                      className="text-left"
+                      id="tooltip-top"
+                      style={
+                        Object {
+                          "wordBreak": "break-word",
+                        }
+                      }
+                    >
+                      <FormattedMessage
+                        id="admin.help.customcode"
+                        values={Object {}}
+                      />
+                    </_default>
+                  }
+                  placement="top"
+                  trigger={
+                    Array [
+                      "hover",
+                      "focus",
+                    ]
+                  }
+                >
+                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                </OverlayTrigger>
+              </span>
+            </React.Fragment>
+          }
+          name="customcode"
+          placeholder="<script type=\\"text/javascript\\"> </script>\\""
+          type="textarea"
+        />
+      </div>
+    </div>
+  </form>
+</EventForm__FormContainer>
+`;
+
+exports[`<EventForm /> it renders correctly with event complete 1`] = `
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
+  >
+    <EventForm__PageTitleContainer>
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="global.general"
+          values={Object {}}
+        />
+      </h3>
+      <span
+        className="mr-30 mt-15"
+      />
+    </EventForm__PageTitleContainer>
+    <div
+      className="color-dark-gray font-size-16"
+    />
+    <div
+      className="box-body"
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
+          />
+        }
+        labelClassName={null}
+        multi={false}
+        name="author"
+        placeholder="select-author"
+        selectFieldIsObject={true}
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_animator"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.animator"
+            values={Object {}}
+          />
+        }
+        labelClassName={null}
+        multi={false}
+        name="animator"
+        placeholder={null}
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        formName="EventForm"
+        id="event_address"
+        label={
+          <div>
+            <FormattedMessage
+              id="proposal_form.address"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
+        }
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label={
+          <FormattedMessage
+            id="global.description"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              <FormattedMessage
+                id="ending-date"
+                values={Object {}}
+              />
+              <div
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
+      />
+    </div>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label={
+        <React.Fragment>
+          <FormattedMessage
+            id="global.meta.description"
+            values={Object {}}
+          />
+          <span
+            className="excerpt inline"
+          >
+            <FormattedMessage
+              id="global.optional"
+              values={Object {}}
+            />
+             
+            <OverlayTrigger
+              defaultOverlayShown={false}
+              overlay={
+                <_default
+                  className="text-left"
+                  id="tooltip-top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <FormattedMessage
+                    id="admin.help.metadescription"
+                    values={Object {}}
+                  />
+                </_default>
+              }
+              placement="top"
+              trigger={
+                Array [
+                  "hover",
+                  "focus",
+                ]
+              }
+            >
+              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+            </OverlayTrigger>
+          </span>
+        </React.Fragment>
+      }
+      name="metadescription"
+      type="textarea"
+    />
+    <div
+      className="box-header d-flex"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="form.label_category"
+          values={Object {}}
+        />
+        <EventForm__TitleHint>
+            
+           
+          <FormattedMessage
+            id="allow-event-linking"
+            values={Object {}}
+          />
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <Relay(injectIntl(SelectProject))
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={false}
+      placeholder="select-project"
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <Relay(injectIntl(SelectStep))
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={false}
+      projectIds={Array []}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <div>
+      <div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.options"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_registrable"
+          label={
+            <FormattedMessage
+              id="inscriptions-on-platform"
+              values={Object {}}
+            />
+          }
+          name="guestListEnabled"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          label={
+            <FormattedMessage
+              id="authorize-transfer-of-data-to-event-organizer"
+              values={Object {}}
+            />
+          }
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          label={
+            <FormattedMessage
+              id="admin.fields.proposal.comments"
+              values={Object {}}
+            />
+          }
+          name="commentable"
+          type="checkbox"
+        />
+      </div>
+      <div>
+        <div
+          className="box-header pt-0"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.publication"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_enabled"
+          label={
+            <FormattedMessage
+              id="global.published"
+              values={Object {}}
+            />
+          }
+          name="enabled"
+          type="checkbox"
+        />
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title replay-container"
+          >
+            <FormattedMessage
+              id="global.replay"
+              values={Object {}}
+            />
+          </h3>
+          <EventForm__JitsiNoReplayContainer>
+            <FormattedHTMLMessage
+              id="activate-jitsi-recording-hint"
+              tagName="span"
+              values={Object {}}
+            />
+          </EventForm__JitsiNoReplayContainer>
+        </div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global-customization"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label={
+            <React.Fragment>
+              <FormattedMessage
+                id="admin.customcode"
+                values={Object {}}
+              />
+              <span
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+                 
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <_default
+                      className="text-left"
+                      id="tooltip-top"
+                      style={
+                        Object {
+                          "wordBreak": "break-word",
+                        }
+                      }
+                    >
+                      <FormattedMessage
+                        id="admin.help.customcode"
+                        values={Object {}}
+                      />
+                    </_default>
+                  }
+                  placement="top"
+                  trigger={
+                    Array [
+                      "hover",
+                      "focus",
+                    ]
+                  }
+                >
+                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                </OverlayTrigger>
+              </span>
+            </React.Fragment>
+          }
+          name="customcode"
+          placeholder="<script type=\\"text/javascript\\"> </script>\\""
+          type="textarea"
+        />
+      </div>
+    </div>
+  </form>
+</EventForm__FormContainer>
 `;
 
 exports[`<EventForm /> it renders correctly without default props 1`] = `
-<form
-  className="eventForm "
-  onSubmit={[MockFunction]}
->
-  <EventForm__PageTitleContainer>
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="global.general"
-        values={Object {}}
-      />
-    </h3>
-    <span
-      className="mr-30 mt-15"
-    />
-  </EventForm__PageTitleContainer>
-  <div
-    className="color-dark-gray font-size-16"
-  />
-  <div
-    className="box-body"
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
   >
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="event_title"
-      label={
+    <EventForm__PageTitleContainer>
+      <h3
+        className="box-title"
+      >
         <FormattedMessage
-          id="global.title"
+          id="global.general"
           values={Object {}}
         />
-      }
-      name="title"
-      type="text"
-    />
-    <UserListField
-      ariaControls="EventForm-filter-user-listbox"
-      authorOfEvent={false}
-      autoload={true}
-      className=""
-      clearable={false}
-      debounce={false}
-      disabled={false}
-      id="event_author"
-      inputClassName="fake-inputClassName"
-      label={
-        <FormattedMessage
-          id="global.author"
-          values={Object {}}
-        />
-      }
-      labelClassName={null}
-      multi={false}
-      name="author"
-      placeholder={null}
-      selectFieldIsObject={true}
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      formName="EventForm"
-      id="event_address"
-      label={
-        <div>
-          <FormattedMessage
-            id="proposal_form.address"
-            values={Object {}}
-          />
-          <div
-            className="excerpt inline"
-          >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
-          </div>
-        </div>
-      }
-      name="addressText"
-      placeholder="proposal.map.form.placeholder"
-      type="address"
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="event_body"
-      label={
-        <FormattedMessage
-          id="global.description"
-          values={Object {}}
-        />
-      }
-      name="body"
-      type="admin-editor"
+      </h3>
+      <span
+        className="mr-30 mt-15"
+      />
+    </EventForm__PageTitleContainer>
+    <div
+      className="color-dark-gray font-size-16"
     />
     <div
-      className="datePickContainer"
+      className="box-body"
     >
       <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
-          />
-        }
         component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "disabled": false,
-            "id": "event_input_startAt",
-          }
-        }
-        formName="EventForm"
-        id="event_startAt"
+        disabled={false}
+        id="event_title"
         label={
           <FormattedMessage
-            id="start-date"
+            id="global.title"
             values={Object {}}
           />
         }
-        name="startAt"
-        timeFormat={false}
-        type="datetime"
+        name="title"
+        type="text"
       />
-      <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
           />
         }
-        className="adminDate"
-        component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "disabled": false,
-            "id": "event_input_endAt",
-          }
+        labelClassName={null}
+        multi={false}
+        name="author"
+        placeholder="select-author"
+        selectFieldIsObject={true}
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_animator"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.animator"
+            values={Object {}}
+          />
         }
+        labelClassName={null}
+        multi={false}
+        name="animator"
+        placeholder={null}
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
         formName="EventForm"
-        id="event_endAt"
+        id="event_address"
         label={
           <div>
             <FormattedMessage
-              id="ending-date"
+              id="proposal_form.address"
               values={Object {}}
             />
             <div
@@ -873,352 +1910,478 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
             </div>
           </div>
         }
-        name="endAt"
-        type="datetime"
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label={
+          <FormattedMessage
+            id="global.description"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              <FormattedMessage
+                id="ending-date"
+                values={Object {}}
+              />
+              <div
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
       />
     </div>
     <Field
       component={[Function]}
-      id="event_media"
+      disabled={false}
       label={
-        <div>
+        <React.Fragment>
           <FormattedMessage
-            id="global.illustration"
+            id="global.meta.description"
             values={Object {}}
           />
-          <div
+          <span
             className="excerpt inline"
           >
             <FormattedMessage
               id="global.optional"
               values={Object {}}
             />
-          </div>
-        </div>
+             
+            <OverlayTrigger
+              defaultOverlayShown={false}
+              overlay={
+                <_default
+                  className="text-left"
+                  id="tooltip-top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <FormattedMessage
+                    id="admin.help.metadescription"
+                    values={Object {}}
+                  />
+                </_default>
+              }
+              placement="top"
+              trigger={
+                Array [
+                  "hover",
+                  "focus",
+                ]
+              }
+            >
+              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+            </OverlayTrigger>
+          </span>
+        </React.Fragment>
       }
-      name="media"
-      type="image"
+      name="metadescription"
+      type="textarea"
     />
-  </div>
-  <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
+    <div
+      className="box-header d-flex"
     >
-      <FormattedMessage
-        id="form.label_category"
-        values={Object {}}
-      />
-    </h3>
-  </div>
-  <span
-    className="help-block"
-  >
-    <FormattedMessage
-      id="allow-event-linking"
-      values={Object {}}
-    />
-  </span>
-  <Relay(injectIntl(SelectProject))
-    clearable={true}
-    disabled={false}
-    label="global.participative.project"
-    multi={true}
-    name="projects"
-    optional={false}
-    query={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "viewer": Object {
-          "isAdmin": true,
-          "isSuperAdmin": false,
-        },
-      }
-    }
-  />
-  <div>
-    <div>
-      <div
-        className="box-header"
+      <h3
+        className="box-title"
       >
-        <h3
-          className="box-title"
-        >
+        <FormattedMessage
+          id="form.label_category"
+          values={Object {}}
+        />
+        <EventForm__TitleHint>
+            
+           
           <FormattedMessage
-            id="global.options"
+            id="allow-event-linking"
             values={Object {}}
           />
-        </h3>
-      </div>
-      <div
-        className="ml-10 pl-10"
-      >
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <Relay(injectIntl(SelectProject))
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={false}
+      placeholder="select-project"
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <Relay(injectIntl(SelectStep))
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={false}
+      projectIds={Array []}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <div>
+      <div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.options"
+              values={Object {}}
+            />
+          </h3>
+        </div>
         <Field
           component={[Function]}
           disabled={false}
           id="event_registrable"
-          name="guestListEnabled"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="allow-inscriptions"
-            values={Object {}}
-          />
-        </Field>
-      </div>
-      <div
-        className="clearfix"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          id="event_link"
           label={
             <FormattedMessage
-              id="admin.fields.event.link"
+              id="inscriptions-on-platform"
               values={Object {}}
             />
           }
-          name="link"
-          placeholder="http://"
-          type="text"
+          name="guestListEnabled"
+          type="checkbox"
         />
-      </div>
-      <div
-        className="ml-10 pl-10"
-      >
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          label={
+            <FormattedMessage
+              id="authorize-transfer-of-data-to-event-organizer"
+              values={Object {}}
+            />
+          }
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        />
         <Field
           component={[Function]}
           disabled={false}
           id="event_commentable"
+          label={
+            <FormattedMessage
+              id="admin.fields.proposal.comments"
+              values={Object {}}
+            />
+          }
           name="commentable"
           type="checkbox"
-        >
-          <FormattedMessage
-            id="admin.fields.blog_post.is_commentable"
-            values={Object {}}
-          />
-        </Field>
+        />
       </div>
-      <div
-        className="ml-10 pl-10"
-      >
+      <div>
+        <div
+          className="box-header pt-0"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.publication"
+              values={Object {}}
+            />
+          </h3>
+        </div>
         <Field
           component={[Function]}
-          id="event_adminAuthorizeDataTransfer"
-          name="adminAuthorizeDataTransfer"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="authorize-transfer-of-data-to-event-organizer"
-            values={Object {}}
-          />
-        </Field>
-      </div>
-    </div>
-    <div>
-      <div
-        className="box-header"
-      >
-        <h3
-          className="box-title"
-        >
-          <FormattedMessage
-            id="admin.fields.step.advanced"
-            values={Object {}}
-          />
-        </h3>
-      </div>
-      <CustomPageFields
-        disabled={false}
-      />
-      <div
-        className="box-header pt-0"
-      >
-        <h3
-          className="box-title"
-        >
-          <FormattedMessage
-            id="global.publication"
-            values={Object {}}
-          />
-        </h3>
-      </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_enabled"
-        label={
-          <div>
+          disabled={false}
+          id="event_enabled"
+          label={
             <FormattedMessage
               id="global.published"
               values={Object {}}
             />
-            <div
-              className="excerpt inline"
-            >
+          }
+          name="enabled"
+          type="checkbox"
+        />
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title replay-container"
+          >
+            <FormattedMessage
+              id="global.replay"
+              values={Object {}}
+            />
+          </h3>
+          <EventForm__JitsiNoReplayContainer>
+            <FormattedHTMLMessage
+              id="activate-jitsi-recording-hint"
+              tagName="span"
+              values={Object {}}
+            />
+          </EventForm__JitsiNoReplayContainer>
+        </div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global-customization"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label={
+            <React.Fragment>
               <FormattedMessage
-                id="global.optional"
+                id="admin.customcode"
                 values={Object {}}
               />
-            </div>
-          </div>
-        }
-        name="enabled"
-        type="checkbox"
-      />
+              <span
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+                 
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <_default
+                      className="text-left"
+                      id="tooltip-top"
+                      style={
+                        Object {
+                          "wordBreak": "break-word",
+                        }
+                      }
+                    >
+                      <FormattedMessage
+                        id="admin.help.customcode"
+                        values={Object {}}
+                      />
+                    </_default>
+                  }
+                  placement="top"
+                  trigger={
+                    Array [
+                      "hover",
+                      "focus",
+                    ]
+                  }
+                >
+                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                </OverlayTrigger>
+              </span>
+            </React.Fragment>
+          }
+          name="customcode"
+          placeholder="<script type=\\"text/javascript\\"> </script>\\""
+          type="textarea"
+        />
+      </div>
     </div>
-  </div>
-</form>
+  </form>
+</EventForm__FormContainer>
 `;
 
 exports[`<EventForm /> it renders event form disabled 1`] = `
-<form
-  className="eventForm "
-  onSubmit={[MockFunction]}
->
-  <EventForm__PageTitleContainer>
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="global.general"
-        values={Object {}}
-      />
-    </h3>
-    <span
-      className="mr-30 mt-15"
-    />
-  </EventForm__PageTitleContainer>
-  <div
-    className="color-dark-gray font-size-16"
-  />
-  <div
-    className="box-body"
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
   >
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="event_title"
-      label={
+    <EventForm__PageTitleContainer>
+      <h3
+        className="box-title"
+      >
         <FormattedMessage
-          id="global.title"
+          id="global.general"
           values={Object {}}
         />
-      }
-      name="title"
-      type="text"
-    />
-    <UserListField
-      ariaControls="EventForm-filter-user-listbox"
-      authorOfEvent={false}
-      autoload={true}
-      className=""
-      clearable={false}
-      debounce={false}
-      disabled={false}
-      id="event_author"
-      inputClassName="fake-inputClassName"
-      label={
-        <FormattedMessage
-          id="global.author"
-          values={Object {}}
-        />
-      }
-      labelClassName={null}
-      multi={false}
-      name="author"
-      placeholder={null}
-      selectFieldIsObject={true}
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      formName="EventForm"
-      id="event_address"
-      label={
-        <div>
-          <FormattedMessage
-            id="proposal_form.address"
-            values={Object {}}
-          />
-          <div
-            className="excerpt inline"
-          >
-            <FormattedMessage
-              id="global.optional"
-              values={Object {}}
-            />
-          </div>
-        </div>
-      }
-      name="addressText"
-      placeholder="proposal.map.form.placeholder"
-      type="address"
-    />
-    <Field
-      component={[Function]}
-      disabled={false}
-      id="event_body"
-      label={
-        <FormattedMessage
-          id="global.description"
-          values={Object {}}
-        />
-      }
-      name="body"
-      type="admin-editor"
+      </h3>
+      <span
+        className="mr-30 mt-15"
+      />
+    </EventForm__PageTitleContainer>
+    <div
+      className="color-dark-gray font-size-16"
     />
     <div
-      className="datePickContainer"
+      className="box-body"
     >
       <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
-          />
-        }
         component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "disabled": false,
-            "id": "event_input_startAt",
-          }
-        }
-        formName="EventForm"
-        id="event_startAt"
+        disabled={false}
+        id="event_title"
         label={
           <FormattedMessage
-            id="start-date"
+            id="global.title"
             values={Object {}}
           />
         }
-        name="startAt"
-        timeFormat={false}
-        type="datetime"
+        name="title"
+        type="text"
       />
-      <Field
-        addonAfter={
-          <i
-            className="cap-calendar-2"
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
           />
         }
-        className="adminDate"
-        component={[Function]}
-        dateTimeInputProps={
-          Object {
-            "disabled": false,
-            "id": "event_input_endAt",
-          }
+        labelClassName={null}
+        multi={false}
+        name="author"
+        placeholder="select-author"
+        selectFieldIsObject={true}
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_animator"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.animator"
+            values={Object {}}
+          />
         }
+        labelClassName={null}
+        multi={false}
+        name="animator"
+        placeholder={null}
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
         formName="EventForm"
-        id="event_endAt"
+        id="event_address"
         label={
           <div>
             <FormattedMessage
-              id="ending-date"
+              id="proposal_form.address"
               values={Object {}}
             />
             <div
@@ -1231,203 +2394,383 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
             </div>
           </div>
         }
-        name="endAt"
-        type="datetime"
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label={
+          <FormattedMessage
+            id="global.description"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label={
+            <FormattedMessage
+              id="start-date"
+              values={Object {}}
+            />
+          }
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              <FormattedMessage
+                id="ending-date"
+                values={Object {}}
+              />
+              <div
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+            <div
+              className="excerpt inline"
+            >
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
       />
     </div>
     <Field
       component={[Function]}
-      id="event_media"
+      disabled={false}
       label={
-        <div>
+        <React.Fragment>
           <FormattedMessage
-            id="global.illustration"
+            id="global.meta.description"
             values={Object {}}
           />
-          <div
+          <span
             className="excerpt inline"
           >
             <FormattedMessage
               id="global.optional"
               values={Object {}}
             />
-          </div>
-        </div>
+             
+            <OverlayTrigger
+              defaultOverlayShown={false}
+              overlay={
+                <_default
+                  className="text-left"
+                  id="tooltip-top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <FormattedMessage
+                    id="admin.help.metadescription"
+                    values={Object {}}
+                  />
+                </_default>
+              }
+              placement="top"
+              trigger={
+                Array [
+                  "hover",
+                  "focus",
+                ]
+              }
+            >
+              <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+            </OverlayTrigger>
+          </span>
+        </React.Fragment>
       }
-      name="media"
-      type="image"
+      name="metadescription"
+      type="textarea"
     />
-  </div>
-  <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
+    <div
+      className="box-header d-flex"
     >
-      <FormattedMessage
-        id="form.label_category"
-        values={Object {}}
-      />
-    </h3>
-  </div>
-  <span
-    className="help-block"
-  >
-    <FormattedMessage
-      id="allow-event-linking"
-      values={Object {}}
-    />
-  </span>
-  <Relay(injectIntl(SelectProject))
-    clearable={true}
-    disabled={false}
-    label="global.participative.project"
-    multi={true}
-    name="projects"
-    optional={false}
-    query={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "viewer": Object {
-          "isAdmin": true,
-          "isSuperAdmin": false,
-        },
-      }
-    }
-  />
-  <div>
-    <div>
-      <div
-        className="box-header"
+      <h3
+        className="box-title"
       >
-        <h3
-          className="box-title"
-        >
+        <FormattedMessage
+          id="form.label_category"
+          values={Object {}}
+        />
+        <EventForm__TitleHint>
+            
+           
           <FormattedMessage
-            id="global.options"
+            id="allow-event-linking"
             values={Object {}}
           />
-        </h3>
-      </div>
-      <div
-        className="ml-10 pl-10"
-      >
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <Relay(injectIntl(SelectProject))
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={false}
+      placeholder="select-project"
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <Relay(injectIntl(SelectStep))
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={false}
+      projectIds={Array []}
+      query={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "viewer": Object {
+            "isAdmin": true,
+            "isSuperAdmin": false,
+          },
+        }
+      }
+    />
+    <div>
+      <div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.options"
+              values={Object {}}
+            />
+          </h3>
+        </div>
         <Field
           component={[Function]}
           disabled={false}
           id="event_registrable"
-          name="guestListEnabled"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="allow-inscriptions"
-            values={Object {}}
-          />
-        </Field>
-      </div>
-      <div
-        className="clearfix"
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          id="event_link"
           label={
             <FormattedMessage
-              id="admin.fields.event.link"
+              id="inscriptions-on-platform"
               values={Object {}}
             />
           }
-          name="link"
-          placeholder="http://"
-          type="text"
+          name="guestListEnabled"
+          type="checkbox"
         />
-      </div>
-      <div
-        className="ml-10 pl-10"
-      >
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          label={
+            <FormattedMessage
+              id="authorize-transfer-of-data-to-event-organizer"
+              values={Object {}}
+            />
+          }
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        />
         <Field
           component={[Function]}
           disabled={false}
           id="event_commentable"
+          label={
+            <FormattedMessage
+              id="admin.fields.proposal.comments"
+              values={Object {}}
+            />
+          }
           name="commentable"
           type="checkbox"
-        >
-          <FormattedMessage
-            id="admin.fields.blog_post.is_commentable"
-            values={Object {}}
-          />
-        </Field>
+        />
       </div>
-      <div
-        className="ml-10 pl-10"
-      >
+      <div>
+        <div
+          className="box-header pt-0"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global.publication"
+              values={Object {}}
+            />
+          </h3>
+        </div>
         <Field
           component={[Function]}
-          id="event_adminAuthorizeDataTransfer"
-          name="adminAuthorizeDataTransfer"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="authorize-transfer-of-data-to-event-organizer"
-            values={Object {}}
-          />
-        </Field>
-      </div>
-    </div>
-    <div>
-      <div
-        className="box-header"
-      >
-        <h3
-          className="box-title"
-        >
-          <FormattedMessage
-            id="admin.fields.step.advanced"
-            values={Object {}}
-          />
-        </h3>
-      </div>
-      <CustomPageFields
-        disabled={false}
-      />
-      <div
-        className="box-header pt-0"
-      >
-        <h3
-          className="box-title"
-        >
-          <FormattedMessage
-            id="global.publication"
-            values={Object {}}
-          />
-        </h3>
-      </div>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="event_enabled"
-        label={
-          <div>
+          disabled={false}
+          id="event_enabled"
+          label={
             <FormattedMessage
               id="global.published"
               values={Object {}}
             />
-            <div
-              className="excerpt inline"
-            >
+          }
+          name="enabled"
+          type="checkbox"
+        />
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title replay-container"
+          >
+            <FormattedMessage
+              id="global.replay"
+              values={Object {}}
+            />
+          </h3>
+          <EventForm__JitsiNoReplayContainer>
+            <FormattedHTMLMessage
+              id="activate-jitsi-recording-hint"
+              tagName="span"
+              values={Object {}}
+            />
+          </EventForm__JitsiNoReplayContainer>
+        </div>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            <FormattedMessage
+              id="global-customization"
+              values={Object {}}
+            />
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label={
+            <React.Fragment>
               <FormattedMessage
-                id="global.optional"
+                id="admin.customcode"
                 values={Object {}}
               />
-            </div>
-          </div>
-        }
-        name="enabled"
-        type="checkbox"
-      />
+              <span
+                className="excerpt inline"
+              >
+                <FormattedMessage
+                  id="global.optional"
+                  values={Object {}}
+                />
+                 
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <_default
+                      className="text-left"
+                      id="tooltip-top"
+                      style={
+                        Object {
+                          "wordBreak": "break-word",
+                        }
+                      }
+                    >
+                      <FormattedMessage
+                        id="admin.help.customcode"
+                        values={Object {}}
+                      />
+                    </_default>
+                  }
+                  placement="top"
+                  trigger={
+                    Array [
+                      "hover",
+                      "focus",
+                    ]
+                  }
+                >
+                  <ForwardRef(ProjectContentAdminForm__InformationIcon) />
+                </OverlayTrigger>
+              </span>
+            </React.Fragment>
+          }
+          name="customcode"
+          placeholder="<script type=\\"text/javascript\\"> </script>\\""
+          type="textarea"
+        />
+      </div>
     </div>
-  </div>
-</form>
+  </form>
+</EventForm__FormContainer>
 `;

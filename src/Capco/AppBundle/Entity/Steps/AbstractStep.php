@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Status;
@@ -154,6 +155,11 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     private $label = '';
 
     /**
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Event", mappedBy="steps", cascade={"persist"})
+     */
+    private $events;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -161,6 +167,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         $this->updatedAt = new \DateTime();
         $this->statuses = new ArrayCollection();
         $this->requirements = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -480,6 +487,27 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         foreach ($value as $item) {
             $this->addStatus($item);
         }
+
+        return $this;
+    }
+
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        $this->events->removeElement($event);
 
         return $this;
     }

@@ -59,6 +59,7 @@ import SSOSwitchUserApp from './startup/SSOSwitchUserApp';
 import LastProposalsApp from './startup/LastProposalsApp';
 import HomePageEventsApp from './startup/HomePageEventsApp';
 import PresentationStepEventsApp from './startup/PresentationStepEventsApp';
+import StepEventsApp from './startup/StepEventsApp';
 import ProfileUserCommentApp from './startup/ProfileUserCommentApp';
 import ConsultationListPageApp from './startup/ConsultationListPageApp';
 import ProjectTrashApp from './startup/ProjectTrashApp';
@@ -136,4 +137,5 @@ ReactOnRails.register({
   CalendarApp,
   EngagementListApp,
   LanguageButtonApp,
+  StepEventsApp
 });

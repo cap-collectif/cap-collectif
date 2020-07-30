@@ -57,6 +57,9 @@ parameters:
     newrelic_license_key: '%env(NEWRELIC_LICENSE_KEY)%'
     agent_tcp: 'tcp://127.0.0.1:10301'
     agent_unix: 'unix:///var/run/redirectionio_agent.sock'
+    jitsi_jwt_key: '***REMOVED***'
+    jitsi_encryption_key: '***REMOVED***'
+    jitsi_hex_iv: '***REMOVED***'
     traits:
         selflinkable:
             interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]

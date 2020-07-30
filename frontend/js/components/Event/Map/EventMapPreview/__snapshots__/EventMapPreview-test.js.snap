@@ -13,7 +13,8 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
             "$fragmentRefs": null,
           },
           "googleMapsAddress": Object {
-            "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+            "$fragmentRefs": null,
+            "__typename": "GoogleMapsAddress",
           },
           "id": "1",
           "timeRange": Object {
@@ -54,10 +55,11 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
         <Date
           date="2030-03-10 00:00:00"
         />
-        <TagCity
-          googleMapsAddress={
+        <Relay(TagCity)
+          address={
             Object {
-              "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
             }
           }
           size="16px"
@@ -81,7 +83,8 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
             "$fragmentRefs": null,
           },
           "googleMapsAddress": Object {
-            "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+            "$fragmentRefs": null,
+            "__typename": "GoogleMapsAddress",
           },
           "id": "1",
           "timeRange": Object {
@@ -122,10 +125,11 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
         <Date
           date="2030-03-10 00:00:00"
         />
-        <TagCity
-          googleMapsAddress={
+        <Relay(TagCity)
+          address={
             Object {
-              "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
             }
           }
           size="16px"
@@ -149,7 +153,8 @@ exports[`<EventMapPreview /> should render correctly when no date 1`] = `
             "$fragmentRefs": null,
           },
           "googleMapsAddress": Object {
-            "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+            "$fragmentRefs": null,
+            "__typename": "GoogleMapsAddress",
           },
           "id": "1",
           "timeRange": Object {
@@ -187,10 +192,11 @@ exports[`<EventMapPreview /> should render correctly when no date 1`] = `
             }
           }
         />
-        <TagCity
-          googleMapsAddress={
+        <Relay(TagCity)
+          address={
             Object {
-              "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
             }
           }
           size="16px"

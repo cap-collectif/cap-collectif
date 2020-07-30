@@ -1,0 +1,11 @@
+GenerateJitsiRoomMutationPayload:
+    type: relay-mutation-payload
+    config:
+        name: GenerateJitsiRoomMutationPayload
+        fields:
+            roomName:
+                type: 'String!'
+                description: 'The jitsi room name.'
+            jitsiToken:
+                type: 'String!'
+                description: 'The jitsi token'

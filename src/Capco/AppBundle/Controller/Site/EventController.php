@@ -143,13 +143,15 @@ class EventController extends Controller
         }
         $this->denyAccessUnlessGranted(EventVoter::VIEW, $event);
 
-        $now = new \DateTime();
-        $flashBag = $this->session->getFlashBag();
+        // TODO https://github.com/cap-collectif/platform/issues/10940
+        // we can use session to avoid this.
+        // $now = new \DateTime();
+        // $flashBag = $this->session->getFlashBag();
+        // $diff = $event->getCreatedAt()->diff($now);
+        // if ($diff->i < 2) {
+        //     $flashBag->add('success', $this->tranlator->trans('event-review-request-to-admin'));
+        // }
 
-        $diff = $event->getCreatedAt()->diff($now);
-        if ($diff->i < 2) {
-            $flashBag->add('success', $this->tranlator->trans('event-review-request-to-admin'));
-        }
         /** @var User $viewer */
         $viewer = $this->getUser();
         if (!$this->eventHelper->isRegistrationPossible($event)) {

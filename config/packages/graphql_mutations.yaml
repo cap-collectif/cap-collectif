@@ -53,3 +53,10 @@ services:
       - { name: overblog_graphql.mutation, alias: 'deleteGroup', method: 'delete' }
       - { name: overblog_graphql.mutation, alias: 'deleteUserInGroup', method: 'deleteUserInGroup' }
       - { name: overblog_graphql.mutation, alias: 'addUsersInGroup', method: 'addUsersInGroup' }
+
+  Capco\AppBundle\GraphQL\Mutation\GenerateJitsiRoomMutation:
+      arguments:
+          $baseUrl: '%router.request_context.scheme%://%router.request_context.host%'
+          $jwtKey: '%jitsi_jwt_key%'
+          $jitsiEncryptionKey: '%jitsi_encryption_key%'
+          $jitsiHexIv: '%jitsi_hex_iv%'

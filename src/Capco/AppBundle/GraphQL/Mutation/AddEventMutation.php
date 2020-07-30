@@ -27,14 +27,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddEventMutation implements MutationInterface
 {
-    private $em;
-    private $formFactory;
-    private $logger;
-    private $indexer;
-    private $globalIdResolver;
-    private $translator;
-    private $publisher;
-    private $localeRepository;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private LoggerInterface $logger;
+    private Indexer $indexer;
+    private GlobalIdResolver $globalIdResolver;
+    private TranslatorInterface $translator;
+    private Publisher $publisher;
+    private LocaleRepository $localeRepository;
+    private GenerateJitsiRoomMutation $generateJitsiRoomMutation;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -44,7 +45,8 @@ class AddEventMutation implements MutationInterface
         Indexer $indexer,
         Publisher $publisher,
         TranslatorInterface $translator,
-        LocaleRepository $localeRepository
+        LocaleRepository $localeRepository,
+        GenerateJitsiRoomMutation $generateJitsiRoomMutation
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -54,6 +56,7 @@ class AddEventMutation implements MutationInterface
         $this->translator = $translator;
         $this->publisher = $publisher;
         $this->localeRepository = $localeRepository;
+        $this->generateJitsiRoomMutation = $generateJitsiRoomMutation;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -107,7 +110,7 @@ class AddEventMutation implements MutationInterface
 
         LocaleUtils::indexTranslations($values);
 
-        static::initEvent($event, $values, $this->formFactory);
+        $this->submitEventFormData($event, $values, $this->formFactory);
 
         foreach ($this->localeRepository->findEnabledLocalesCodes() as $availableLocale) {
             if (isset($values['translations'][$availableLocale])) {
@@ -156,11 +159,8 @@ class AddEventMutation implements MutationInterface
         return ['eventEdge' => $edge, 'userErrors' => []];
     }
 
-    public static function initEvent(
-        Event $event,
-        array &$values,
-        FormFactoryInterface $formFactory
-    ): void {
+    public function submitEventFormData(Event $event, array &$values, FormFactoryInterface $formFactory): void
+    {
         if (isset($values['startAt'])) {
             $event->setStartAt(new \DateTime($values['startAt']));
             unset($values['startAt']);
@@ -171,6 +171,18 @@ class AddEventMutation implements MutationInterface
         }
         if (isset($values['author'])) {
             unset($values['author']);
+        }
+
+        if (isset($values['animator'])) {
+            unset($values['animator']);
+        }
+
+        if (
+            isset($values['isPresential']) &&
+            !$values['isPresential'] &&
+            null === $event->getRoomName()
+        ) {
+            $this->generateJitsiRoomMutation->createJitsiRoomForEvent($event);
         }
 
         $form = $formFactory->create(EventType::class, $event);

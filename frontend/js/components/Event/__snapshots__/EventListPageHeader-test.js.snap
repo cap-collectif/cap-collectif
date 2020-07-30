@@ -114,6 +114,52 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                   Object {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "isPresential",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "recordingUrl",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isRecordingPublished",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "animator",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "TimeRange",
                     "kind": "LinkedField",
                     "name": "timeRange",
@@ -243,6 +289,38 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                     "name": "projects",
                     "plural": true,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "steps",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -524,6 +602,38 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                             "name": "title",
                             "storageKey": null,
                           },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": null,
+                            "kind": "LinkedField",
+                            "name": "steps",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "__typename",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "title",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -596,6 +706,13 @@ fragment EventCreateModal_query_39ngnn on Query {
 
 fragment EventForm_event on Event {
   id
+  isPresential
+  recordingUrl
+  isRecordingPublished
+  animator {
+    id
+    displayName
+  }
   timeRange {
     startAt
     endAt
@@ -616,6 +733,11 @@ fragment EventForm_event on Event {
     title
   }
   projects {
+    id
+    title
+  }
+  steps {
+    __typename
     id
     title
   }
@@ -652,6 +774,7 @@ fragment EventForm_event on Event {
 fragment EventForm_query on Query {
   ...SelectTheme_query
   ...SelectProject_query
+  ...SelectStep_query
   viewer {
     isAdmin
     isSuperAdmin
@@ -665,6 +788,22 @@ fragment SelectProject_query on Query {
       node {
         id
         title
+      }
+    }
+  }
+}
+
+fragment SelectStep_query on Query {
+  projects(withEventOnly: false) {
+    edges {
+      node {
+        id
+        title
+        steps {
+          __typename
+          id
+          title
+        }
       }
     }
   }
@@ -804,6 +943,52 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                   Object {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "isPresential",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "recordingUrl",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isRecordingPublished",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "animator",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "TimeRange",
                     "kind": "LinkedField",
                     "name": "timeRange",
@@ -933,6 +1118,38 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                     "name": "projects",
                     "plural": true,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "steps",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -1214,6 +1431,38 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                             "name": "title",
                             "storageKey": null,
                           },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": null,
+                            "kind": "LinkedField",
+                            "name": "steps",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "__typename",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "title",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -1286,6 +1535,13 @@ fragment EventCreateModal_query_39ngnn on Query {
 
 fragment EventForm_event on Event {
   id
+  isPresential
+  recordingUrl
+  isRecordingPublished
+  animator {
+    id
+    displayName
+  }
   timeRange {
     startAt
     endAt
@@ -1306,6 +1562,11 @@ fragment EventForm_event on Event {
     title
   }
   projects {
+    id
+    title
+  }
+  steps {
+    __typename
     id
     title
   }
@@ -1342,6 +1603,7 @@ fragment EventForm_event on Event {
 fragment EventForm_query on Query {
   ...SelectTheme_query
   ...SelectProject_query
+  ...SelectStep_query
   viewer {
     isAdmin
     isSuperAdmin
@@ -1355,6 +1617,22 @@ fragment SelectProject_query on Query {
       node {
         id
         title
+      }
+    }
+  }
+}
+
+fragment SelectStep_query on Query {
+  projects(withEventOnly: false) {
+    edges {
+      node {
+        id
+        title
+        steps {
+          __typename
+          id
+          title
+        }
       }
     }
   }
@@ -1494,6 +1772,52 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "isPresential",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "recordingUrl",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isRecordingPublished",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "animator",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "TimeRange",
                     "kind": "LinkedField",
                     "name": "timeRange",
@@ -1623,6 +1947,38 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                     "name": "projects",
                     "plural": true,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "steps",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -1904,6 +2260,38 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                             "name": "title",
                             "storageKey": null,
                           },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": null,
+                            "kind": "LinkedField",
+                            "name": "steps",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "__typename",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "title",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -1976,6 +2364,13 @@ fragment EventCreateModal_query_39ngnn on Query {
 
 fragment EventForm_event on Event {
   id
+  isPresential
+  recordingUrl
+  isRecordingPublished
+  animator {
+    id
+    displayName
+  }
   timeRange {
     startAt
     endAt
@@ -1996,6 +2391,11 @@ fragment EventForm_event on Event {
     title
   }
   projects {
+    id
+    title
+  }
+  steps {
+    __typename
     id
     title
   }
@@ -2032,6 +2432,7 @@ fragment EventForm_event on Event {
 fragment EventForm_query on Query {
   ...SelectTheme_query
   ...SelectProject_query
+  ...SelectStep_query
   viewer {
     isAdmin
     isSuperAdmin
@@ -2045,6 +2446,22 @@ fragment SelectProject_query on Query {
       node {
         id
         title
+      }
+    }
+  }
+}
+
+fragment SelectStep_query on Query {
+  projects(withEventOnly: false) {
+    edges {
+      node {
+        id
+        title
+        steps {
+          __typename
+          id
+          title
+        }
       }
     }
   }
@@ -2184,6 +2601,52 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "isPresential",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "recordingUrl",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isRecordingPublished",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "animator",
+                    "plural": false,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "displayName",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "TimeRange",
                     "kind": "LinkedField",
                     "name": "timeRange",
@@ -2313,6 +2776,38 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                     "name": "projects",
                     "plural": true,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "steps",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -2594,6 +3089,38 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                             "name": "title",
                             "storageKey": null,
                           },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": null,
+                            "kind": "LinkedField",
+                            "name": "steps",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "__typename",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "title",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -2666,6 +3193,13 @@ fragment EventCreateModal_query_39ngnn on Query {
 
 fragment EventForm_event on Event {
   id
+  isPresential
+  recordingUrl
+  isRecordingPublished
+  animator {
+    id
+    displayName
+  }
   timeRange {
     startAt
     endAt
@@ -2686,6 +3220,11 @@ fragment EventForm_event on Event {
     title
   }
   projects {
+    id
+    title
+  }
+  steps {
+    __typename
     id
     title
   }
@@ -2722,6 +3261,7 @@ fragment EventForm_event on Event {
 fragment EventForm_query on Query {
   ...SelectTheme_query
   ...SelectProject_query
+  ...SelectStep_query
   viewer {
     isAdmin
     isSuperAdmin
@@ -2735,6 +3275,22 @@ fragment SelectProject_query on Query {
       node {
         id
         title
+      }
+    }
+  }
+}
+
+fragment SelectStep_query on Query {
+  projects(withEventOnly: false) {
+    edges {
+      node {
+        id
+        title
+        steps {
+          __typename
+          id
+          title
+        }
       }
     }
   }

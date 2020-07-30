@@ -2,6 +2,15 @@
 
 {% block sonata_breadcrumb %}
 {% endblock %}
+
+{% block navbar_title %}
+    {% if objectId|default(admin.id(object)) is not null %}
+        {{ 'title_edit'|trans({'%name%': admin.toString(object)|truncate(100) }, 'SonataAdminBundle') }}
+    {% else %}
+        {{ 'add-event'|trans({}, 'CapcoAppBundle') }}
+    {% endif %}
+{% endblock %}
+
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' with {
         'data' : {

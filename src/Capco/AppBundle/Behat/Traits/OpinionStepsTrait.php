@@ -680,12 +680,11 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I click the source report button.
-     *
      * @When I click the source report button
      */
     public function iClickTheSourceReportButton()
     {
+        $this->waitAndThrowOnFailure(2000, "$('" . $this->getCurrentPage()->getSelector('source report button') . "').length > 0");
         $this->getCurrentPage()->clickSourceReportButton();
         $this->iWait(1);
     }

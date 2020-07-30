@@ -286,3 +286,58 @@ Scenario: User wants to change his refused event
   """
   {"data":{"changeEvent":{"event":{"id":"RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3UmVmdXNlZA==","title":"Rencontre avec les habitants","body":"Tout le monde est invit\u00e9","review":{"reviewer":{"username":"mauriau"},"status":"AWAITING"}},"userErrors":[]}}}
   """
+
+@database
+Scenario: Admin wants to change an event to add steps
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: ChangeEventInput!) {
+      changeEvent(input: $input) {
+        event {
+          id
+          steps {
+            id
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RXZlbnQ6ZXZlbnQx",
+        "startAt": "2018-03-07 00:00:00",
+        "guestListEnabled": true,
+        "steps": ["Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx", "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA=="],
+        "translations": [
+          {
+            "locale": "fr-FR",
+            "title": "Rencontre avec les habitants",
+            "body": "Tout le monde est invité",
+            "link": "http://perdu.com"
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "changeEvent":{
+           "event":{
+              "id":"RXZlbnQ6ZXZlbnQx",
+              "steps":[
+                 {
+                    "id":"Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx"
+                 },
+                 {
+                    "id":"U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA=="
+                 }
+              ]
+           }
+        }
+     }
+  }
+  """

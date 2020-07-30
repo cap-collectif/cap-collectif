@@ -8,13 +8,12 @@ Background:
 @parallel-scenario
 Scenario: Anonymous wants to list events
   Given I visited "events page"
-  And I wait ".eventPreview" to appear on current page
-  Then I should see 11 ".eventPreview" elements
+  Then I should see 12 ".eventPreview" elements
 
+@read-only
 Scenario: Events can be filtered by projects
   Given feature "projects_form" is enabled
   And I visited "events page"
-  And I wait ".eventPreview" to appear on current page
   And I click the "#event-button-filter" element
   And I select "UHJvamVjdDpwcm9qZWN0MQ==" from react "#SelectProject-filter-project"
   And I wait 1 seconds
@@ -24,10 +23,10 @@ Scenario: Events can be filtered by projects
   And I wait 2 seconds
   Then I should see 1 ".eventPreview" elements
 
+@read-only
 Scenario: Events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
-  And I wait ".eventPreview" to appear on current page
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#SelectTheme-filter-theme"
   And I wait 1 seconds
@@ -35,10 +34,10 @@ Scenario: Events can be filtered by theme
   And I should see "Event with registrations"
   And I should not see "ParisWeb2015"
 
+@read-only
 Scenario: Archived events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
-  And I wait ".eventPreview" to appear on current page
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#SelectTheme-filter-theme"
   And I click the "#event-status-filter-button-desktop" element
@@ -49,9 +48,9 @@ Scenario: Archived events can be filtered by theme
   And I should see "evenementPasseSansDateDeFin"
   And I should not see "PHPTourDuFuture"
 
+@read-only
 Scenario: Events can be filtered by title
   Given I visited "events page"
-  And I wait ".eventPreview" to appear on current page
   When I fill in the following:
     | event-search-input | without |
   And I wait ".eventPreview" to disappear on current page
@@ -60,9 +59,9 @@ Scenario: Events can be filtered by title
   And I should see "Event without registrations"
   And I should not see "Event with registrations"
 
+@read-only
 Scenario: Archived events can be filtered by title
   Given I visited "events page"
-  And I wait ".eventPreview" to appear on current page
   And I click the "#event-status-filter-button-desktop" element
   And I check element "finished-events"
   When I fill in the following:
@@ -75,8 +74,7 @@ Scenario: Archived events can be filtered by title
 
 @database
 Scenario: Anonymous wants to comment an event
-  Given I visited eventpage with:
-    | slug | event-with-registrations |
+  Given I go to event page with slug "event-with-registrations"
   And I wait "#CommentForm" to appear on current page
   And I fill in the following:
     | body        | J'ai un truc à dire |
@@ -90,8 +88,7 @@ Scenario: Anonymous wants to comment an event
 @database
 Scenario: Logged in user wants to comment an event
   Given I am logged in as user
-  And I visited eventpage with:
-    | slug | event-with-registrations |
+  And I go to event page with slug "event-with-registrations"
   And I wait "#CommentForm" to appear on current page
   And I fill in the following:
     | body        | J'ai un truc à dire |
@@ -99,8 +96,7 @@ Scenario: Logged in user wants to comment an event
 
 @database
 Scenario: Anonymous wants to comment an event without email
-  Given I visited eventpage with:
-    | slug | event-with-registrations |
+  Given I go to event page with slug "event-with-registrations"
   And I wait "#CommentForm" to appear on current page
   And I fill in the following:
     | body        | J'ai un truc à dire |
@@ -110,6 +106,7 @@ Scenario: Anonymous wants to comment an event without email
   And I wait 2 seconds
   Then I should not see "J'ai un truc à dire" in the "#CommentListViewPaginated" element
 
+@read-only
 Scenario: Anonymous wants to create an event
   Given feature "allow_users_to_propose_events" is enabled
   And I visited "events page"
@@ -138,7 +135,8 @@ Scenario: Logged in user wants to create an event
   Then I should be redirected to '/events/my-event'
   And I wait "#event-label-status" to appear on current page
   Then I should see "waiting-examination"
-  Then I should see "event-review-request-to-admin"
+  # See TODO https://github.com/cap-collectif/platform/issues/10940
+  #Then I should see "event-review-request-to-admin"
 
 @database
 Scenario: Logged in user wants to edit his refused event
@@ -159,8 +157,11 @@ Scenario: Logged in user wants to edit his refused event
   When I click on button "#confirm-event-submit"
   Then I should be redirected to '/events/event-create-by-user-with-review-refused'
   And I wait "#event-label-status" to appear on current page
+  # Not working without this. Maybe text is not already changed when the check is performed
+  And I wait 3 seconds
   Then I wait "waiting-examination" to appear on current page in "#event-label-status"
 
+@read-only
 Scenario: Feature allow users to propose events is disabled
   Given feature "allow_users_to_propose_events" is disabled
   And I visited "events page"

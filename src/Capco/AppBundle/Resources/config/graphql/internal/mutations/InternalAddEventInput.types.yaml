@@ -1,48 +1,60 @@
 InternalAddEventInput:
-  type: relay-mutation-input
-  inherits:
-    - PreviewAddEventInput
-  config:
-    name: AddEventInput
-    description: 'Input type of addEvent.'
-    fields:
-      enabled:
-        type: 'Boolean'
-        defaultValue: true
-        description: 'Whether or not this event is published.'
-      media:
-        type: 'ID'
-        description: 'The media to illustrate the event.'
-      commentable:
-        type: 'Boolean'
-        defaultValue: true
-        description: 'Whether or not this event is commentable.'
-      # TODO rename to googleMapsAddress ?
-      addressJson:
-        type: 'String'
-        description: 'The contents of the event addressJson.'
-      customCode:
-        type: 'String'
-        description: 'The contents of the event customCode.'
-      # cannot add access in type: relay-mutation-input
-      projects:
-        type: '[ID]'
-        description: 'An array of Node IDs of projects associated to this event.'
-      themes:
-        type: '[ID]'
-        description: 'An array of Node IDs of themes associated to this event.'
-      guestListEnabled:
-        type: 'Boolean!'
-        defaultValue: false
-        description: 'Whether or not this event is allow registrations.'
-      author:
-        type: 'ID'
-        description: 'The Node ID of the author for this event.'
-      translations:
-          type: '[InternalEventTranslationInput!]!'
-      authorAgreeToUsePersonalDataForEventOnly:
-          type: 'Boolean'
-          description: 'Author of event agree to use personal data for event only'
-      adminAuthorizeDataTransfer:
-          type: 'Boolean'
-          description: 'Admin authorize data transfer'
+    type: relay-mutation-input
+    inherits:
+        - PreviewAddEventInput
+    config:
+        name: AddEventInput
+        description: 'Input type of addEvent.'
+        fields:
+            enabled:
+                type: 'Boolean'
+                defaultValue: true
+                description: 'Whether or not this event is published.'
+            media:
+                type: 'ID'
+                description: 'The media to illustrate the event.'
+            commentable:
+                type: 'Boolean'
+                defaultValue: true
+                description: 'Whether or not this event is commentable.'
+            # TODO rename to googleMapsAddress ?
+            addressJson:
+                type: 'String'
+                description: 'The contents of the event addressJson.'
+            customCode:
+                type: 'String'
+                description: 'The contents of the event customCode.'
+            # cannot add access in type: relay-mutation-input
+            projects:
+                type: '[ID]'
+                description: 'An array of Node IDs of projects associated to this event.'
+            themes:
+                type: '[ID]'
+                description: 'An array of Node IDs of themes associated to this event.'
+            guestListEnabled:
+                type: 'Boolean!'
+                defaultValue: false
+                description: 'Whether or not this event is allow registrations.'
+            author:
+                type: 'ID'
+                description: 'The Node ID of the author for this event.'
+            translations:
+                type: '[InternalEventTranslationInput!]!'
+            authorAgreeToUsePersonalDataForEventOnly:
+                type: 'Boolean'
+                description: 'Author of event agree to use personal data for event only'
+            adminAuthorizeDataTransfer:
+                type: 'Boolean'
+                description: 'Admin authorize data transfer'
+            steps:
+                type: '[ID!]'
+                description: 'An array of Node IDs of steps associated to this event.'
+            isPresential:
+                type: 'Boolean'
+                description: 'Is the event presential or remotely accessible'
+            isRecordingPublished:
+                type: 'Boolean'
+                description: 'Should the event be recorded or not'
+            animator:
+                type: 'ID'
+                description: 'The Node ID of the animator for this event if there is one.'

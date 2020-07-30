@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\GraphQL\Mutation\GenerateJitsiRoomMutation;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
@@ -35,7 +36,8 @@ class AddEventMutationSpec extends ObjectBehavior
         Indexer $indexer,
         Publisher $publisher,
         Translator $translator,
-        LocaleRepository $localeRepository
+        LocaleRepository $localeRepository,
+        GenerateJitsiRoomMutation $generateJitsiRoomMutation
     ) {
         $localeRepository->findEnabledLocalesCodes()->willReturn(['fr-FR']);
         $this->beConstructedWith(
@@ -46,7 +48,8 @@ class AddEventMutationSpec extends ObjectBehavior
             $indexer,
             $publisher,
             $translator,
-            $localeRepository
+            $localeRepository,
+            $generateJitsiRoomMutation
         );
     }
 
@@ -70,9 +73,9 @@ class AddEventMutationSpec extends ObjectBehavior
             'translations' => [
                 [
                     'locale' => 'fr-FR',
-                    'body' => 'My body'
-                ]
-            ]
+                    'body' => 'My body',
+                ],
+            ],
         ];
 
         $event->getBody()->willReturn('My body');
@@ -123,9 +126,9 @@ class AddEventMutationSpec extends ObjectBehavior
             'translations' => [
                 [
                     'locale' => 'fr-FR',
-                    'body' => 'My body'
-                ]
-            ]
+                    'body' => 'My body',
+                ],
+            ],
         ];
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
@@ -136,7 +139,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
         $payload['userErrors']->shouldBe([
-            ['message' => 'You are not authorized to add customCode field.']
+            ['message' => 'You are not authorized to add customCode field.'],
         ]);
         $payload['eventEdge']->shouldBe(null);
     }
@@ -156,9 +159,9 @@ class AddEventMutationSpec extends ObjectBehavior
             'translations' => [
                 [
                     'locale' => 'fr-FR',
-                    'body' => 'My body'
-                ]
-            ]
+                    'body' => 'My body',
+                ],
+            ],
         ];
 
         $event->getBody()->willReturn('My body');
@@ -172,7 +175,7 @@ class AddEventMutationSpec extends ObjectBehavior
             ->submit(
                 [
                     'customCode' => 'abc',
-                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']]
+                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']],
                 ],
                 false
             )
@@ -210,9 +213,9 @@ class AddEventMutationSpec extends ObjectBehavior
             'translations' => [
                 [
                     'locale' => 'fr-FR',
-                    'body' => ''
-                ]
-            ]
+                    'body' => '',
+                ],
+            ],
         ];
         $arguments->getArrayCopy()->willReturn($values);
 
@@ -235,7 +238,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
         $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during('__invoke', [
             $arguments,
-            $viewer
+            $viewer,
         ]);
     }
 }

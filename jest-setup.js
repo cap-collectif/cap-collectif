@@ -53,6 +53,21 @@ console.error = () => {
   return;
 };
 
+// $FlowFixMe we are in jest mode
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
 /**
  * This is a global function to test Relay components.
  * You can provide the GraphQL query with a great mock API.

@@ -223,19 +223,19 @@ fos_user:
 #These routes must be translated for they render html
 fos_user_resetting_request:
     path: /resetting/request
-    defaults: { _controller: CapcoUserBundle:Resetting:request }
+    defaults: { _controller: Capco\UserBundle\Controller\ResettingController::requestAction }
 
 fos_user_resetting_reset:
     path: /resetting/reset/{token}
-    defaults: { _controller: CapcoUserBundle:Resetting:reset }
+    defaults: { _controller: Capco\UserBundle\Controller\ResettingController::resetAction }
 
 fos_user_resetting_send_email:
     path: /resetting/send-email
-    defaults: { _controller: CapcoUserBundle:Resetting:sendEmail }
+    defaults: { _controller: Capco\UserBundle\Controller\ResettingController::sendEmailAction }
 
 fos_user_resetting_check_email:
     path: /resetting/check-email
-    defaults: { _controller: CapcoUserBundle:Resetting:checkEmail }
+    defaults: { _controller: Capco\UserBundle\Controller\ResettingController::checkEmailAction }
 #end
 
 capco_user:

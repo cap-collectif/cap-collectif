@@ -14,6 +14,7 @@ use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
 {
@@ -22,7 +23,8 @@ class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
         RedisTagCache $cache,
         LoggerInterface $logger,
         FollowerRepository $followerRepository,
-        GraphQLCollector $collector
+        GraphQLCollector $collector,
+        Stopwatch $stopwatch
     ) {
         $this->beConstructedWith(
             $promiseFactory,
@@ -33,6 +35,7 @@ class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
             60,
             false,
             $collector,
+            $stopwatch,
             true
         );
     }

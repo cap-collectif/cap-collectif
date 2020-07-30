@@ -123,7 +123,7 @@ class SettingsController extends Controller
             throw $this->createAccessDeniedException();
         }
         if (
-            'display_map' === $toggle &&
+            'display_map' !== $toggle &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
         ) {
             throw $this->createAccessDeniedException();

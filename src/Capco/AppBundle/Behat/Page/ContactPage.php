@@ -19,7 +19,7 @@ class ContactPage extends Page
         if (
             !$this->getSession()->wait(
                 10000,
-                "document.querySelectorAll('.contact__form__list button:first-of-type').length > 0"
+                "document.querySelectorAll('.contact__form').length > 0"
             )
         ) {
             throw new \RuntimeException(

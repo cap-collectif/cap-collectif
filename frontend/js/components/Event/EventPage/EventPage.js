@@ -32,7 +32,7 @@ const EventPage = ({ eventId, isAuthenticated }: Props) => (
           }
         }
         viewer @include(if: $isAuthenticated) {
-          ...EventPageContent_user
+          ...EventPageContent_viewer
         }
       }
     `}
@@ -48,8 +48,8 @@ const EventPage = ({ eventId, isAuthenticated }: Props) => (
       if (props && props.event) {
         return (
           <Container>
-            <EventPageHeader event={props.event} query={props} />
-            <EventPageContent event={props.event} user={props.viewer} />
+            <EventPageHeader event={props.event} query={props} viewer={props.viewer || null} />
+            <EventPageContent event={props.event} viewer={props.viewer || null} />
           </Container>
         );
       }

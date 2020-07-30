@@ -45,6 +45,7 @@ export type State = {|
 
 export const features: FeatureToggles = {
   report_browers_errors_to_sentry: false,
+  unstable__remote_events: false,
   login_saml: false,
   login_paris: false,
   disconnect_openid: false,

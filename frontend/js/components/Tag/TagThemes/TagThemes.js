@@ -1,10 +1,12 @@
 // @flow
 import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import Tag from '~/components/Ui/Labels/Tag';
 import IconRounded from '~ui/Icons/IconRounded';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import type { TagThemes_themes } from '~relay/TagThemes_themes.graphql';
 
 const renderThemes = themes => {
   if (themes.length === 2) {
@@ -31,12 +33,12 @@ const renderThemes = themes => {
   return <span>{themes[0].title}</span>;
 };
 
-type TagThemesProps = {
-  themes: $ReadOnlyArray<{| +title: string |}>,
-  size: string,
-};
+type TagThemesProps = {|
+  +themes: TagThemes_themes,
+  +size: string,
+|};
 
-const TagThemes = ({ themes, size }: TagThemesProps) => (
+export const TagThemes = ({ themes, size }: TagThemesProps) => (
   <Tag size={size}>
     <IconRounded size={18} color={colors.darkGray}>
       <Icon name={ICON_NAME.folder} color="#fff" size={10} />
@@ -46,4 +48,10 @@ const TagThemes = ({ themes, size }: TagThemesProps) => (
   </Tag>
 );
 
-export default TagThemes;
+export default createFragmentContainer(TagThemes, {
+  themes: graphql`
+    fragment TagThemes_themes on Theme @relay(plural: true) {
+      title
+    }
+  `,
+});

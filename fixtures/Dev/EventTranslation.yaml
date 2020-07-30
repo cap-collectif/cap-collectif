@@ -49,20 +49,20 @@ Capco\AppBundle\Entity\EventTranslation:
         id: 'event8_fr'
         locale: 'fr-FR'
         translatable: '@event8'
-        title: Event 8
-        body: So much fun
+        title: Le droit de suite
+        body: <('Faire participer c’est bien ! Recréer durablement de la confiance sur votre territoire, c’est mieux ! Comment organiser le retour aux participants une fois qu’ils ont apporté leur contribution ? Du mail de remerciement (une politesse élémentaire qui n’est finalement pas si fréquente en pratique) aux comités citoyens de suivi et d’évaluation, nous dresserons un panorama des pratiques existantes et nous interrogerons sur les moyens de les encourager voire les systématiser.')>
     event9_fr:
         id: 'event9_fr'
         locale: 'fr-FR'
         translatable: '@event9'
-        title: Event 9
-        body: So much gange
+        title: Quelle complémentarité entre numérique et présentiel ?
+        body: <('Numérique et présentiel sont complémentaires de l’affirmation à la pratique, quelle articulation pertinente mettre en place ? Toute personne qui a assisté à un colloque récemment a forcément entendu la phrase magique “numérique et présentiel sont complémentaires” derrière l’unanimisme, il s’agit de réfléchir concrètement à la bonne articulation en prenant le meilleur des deux, en étant lucide sur ce que l’un et l’autre ne savent pas faire, le tout en réfléchissant à la meilleure allocation possible des ressources et des moyens. Nous reviendrons en détail sur 3 cas d’usages possibles , qui nous paraissent les plus pertinents :les ateliers de cadrage en amont pour structurer la consultation en ligne,les ateliers-relais pendant la consultation pour toucher les publics dits éloignés,les ateliers délibératifs à l’issue de la consultation en ligne pour approfondir les points clivants ou idées nouvelles.')>
     event10_fr:
         id: 'event10_fr'
         locale: 'fr-FR'
         translatable: '@event10'
-        title: Event 10
-        body: Only numbers 10 in my team
+        title: 'Remobiliser ses collaborateurs par l’intelligence collective mode d’emploi'
+        body: <('Comment favoriser le retour des équipes dans de bonnes conditions ? Comment adapter l\'organisation du travail à une nouvelle réalité ?  Comment re-créer l\’engagement autour du projet et de la mission de l’entreprise ? Comment tirer les enseignements des mois de confinement pour identifier les forces et faiblesses de son organisation ? Face à autant d’inconnues, dans un contexte inédit où nul expert ne peut prétendre détenir la vérité, la réponse ne peut être que collective. Depuis 2014, à Cap Collectif, nous accompagnons les entreprises dans la construction de leurs démarches d’intelligence collective afin de faire émerger les meilleures solutions à des problématiques données et  développer la confiance et l’engagement au sein des organisations. Au travers de ce webinar, nous souhaitons partager avec vous notre méthodologie de sortie de crise par le collectif capable de répondre aux enjeux actuels.')>
     event11_fr:
         id: 'event11_fr'
         locale: 'fr-FR'
@@ -162,3 +162,21 @@ Capco\AppBundle\Entity\EventTranslation:
         translatable: '@event20'
         title: evenement créer par un utilisateur anglais avec review refused
         body: En text en français
+    eventRemote_fr:
+        id: 'eventRemote_fr'
+        locale: 'fr-FR'
+        translatable: '@eventRemote'
+        title: On vous présente Agui, l’ami du BP
+        body: <('La phase d’analyse dans un BP est aussi fastidieuse à réaliser que passionnante à étudier, aussi méconnue du public que redoutée des services ! Petit tour d’horizon des enjeux. Avant de découvrir Agui, le dernier né chez Capco, l’outil d’analyse intégré à la plateforme qui va transformer votre chemin de croix en promenade du dimanche.')>
+    eventRemotePastWithoutReplay_fr:
+        id: 'eventRemotePastWithoutReplay_fr'
+        locale: 'fr-FR'
+        translatable: '@eventRemotePastWithoutReplay'
+        title: Il n'y a pas que le budget participatif dans la vie
+        body: <('“Innovation”, le mot est lâché. Nous souhaitons ici présenter des cas d’usage qui méritent l’attention par leur caractère singulier. Au-delà de la présentation de ces cas d’usage, nous lancerons la discussion sur ce qu’il y a dans ces initiatives de radicalement différent des pratiques les plus courantes. <br />- projet d’entraide directe pendant le Covid (Orléans, Albi, Rennes, Paris…)<br />- consultations sur le plan climat (Grenoble, Poitiers)<br />- consultation budgétaire (Corrèze)')>
+    eventRemotePastWithReplay_fr:
+        id: 'eventRemotePastWithReplay_fr'
+        locale: 'fr-FR'
+        translatable: '@eventRemotePastWithReplay'
+        title: "+ de tech dans la civictech : c'est quoi une API ?"
+        body: <('Terme barbare mais qui vous sera expliqué avec pédagogie par notre Directeur technique, Aurélien David. Au-delà de la définition, il vous expliquera les usages immédiats possibles pour vous et en quoi les API seront bien le pilier demain des démarches numériques sur votre territoire.')>

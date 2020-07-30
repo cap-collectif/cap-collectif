@@ -70,6 +70,23 @@ InternalEvent:
                 type: '[InternalEventTranslation!]!'
             link:
                 type: 'URI'
+            jitsiToken:
+                type: 'String'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'The jitsi admin token if there is one'
+            isPresential:
+                type: 'Boolean!'
+                description: 'Whether or not this event is presential.'
+            isRecordingPublished:
+                type: 'Boolean!'
+                description: 'Whether or not this event has a public recording URL.'
+            roomName:
+                type: 'String'
+                description: 'The jitsi room name available on remote events only.'
+            recordingUrl:
+                type: 'URI'
+                description: 'The URL used to stream this event recording.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventRecordingUrlResolver", [value, getUser()])'
             slug:
                 type: 'String!'
                 description: 'The slug of event'
@@ -86,7 +103,17 @@ InternalEvent:
                 type: 'Boolean!'
                 description: 'Show if user is already participating at event'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\IsViewerParticipatingAtEventResolver", [value, getUser()])'
+            animator:
+                type: 'InternalUser'
+                description: 'The jitsi room animator available on remote events only.'
+            steps:
+                type: '[InternalStep!]!'
+                description: 'The steps corresponding to this event.'
             isRegistrationPossible:
                 type: 'Boolean'
-                description: 'Show if registration is enabled'
+                description: 'Wheter or not registration is enabled on this event.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsRegistrationPossibleResolver", [value])'
+            viewerIsRoomAnimator:
+                type: 'Boolean!'
+                description: 'Wheter or not the viewer can join the room before it starts.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventViewerCanJoinBeforeStartResolver", [value, getUser()])'

@@ -29,6 +29,8 @@
 {% endblock %}
 
 {% block javascripts %}
+    {# Include Jitsi code only where it can be rendered #}
+    <script src='https://jitsi.cap-collectif.com/external_api.js'></script>
     {{ parent() }}
     {% if event.customCode is defined and event.customCode != '' %}{{ event.customCode | raw }}{% endif %}
 {% endblock %}

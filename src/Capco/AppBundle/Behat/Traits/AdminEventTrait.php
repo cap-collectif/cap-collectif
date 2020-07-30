@@ -17,11 +17,54 @@ trait AdminEventTrait
     }
 
     /**
+     * @When I go to the admin event create page
+     */
+    public function iGoToTheAdminEventCreatePage()
+    {
+        $this->iVisitedPage('AdminEventCreatePage');
+    }
+
+    /**
      * @When I go to admin event page with eventId :eventId
      */
     public function iGoToTheAdminEventPageWithId(string $eventId)
     {
         $this->visitPageWithParams('admin event page', ['eventId' => $eventId]);
+    }
+
+    /**
+     * @When I go to event page with slug :eventSlug
+     */
+    public function iGoToTheEventPageWithSlug(string $eventSlug)
+    {
+        $this->visitPageWithParams('event page', ['slug' => $eventSlug]);
+    }
+
+    /**
+     * @When I can participate in jitsi room
+     */
+    public function iCanParticipateInJitsiRoom()
+    {
+        $this->iWaitElementToAppearOnPage('#jitsi-container');
+        $this->iWaitElementToAppearOnPage('#jitsi-join-button');
+        $this->iClickOnButton('#jitsi-join-button');
+        $this->iWaitElementToAppearOnPage('#jitsi-loader');
+    }
+
+    /**
+     * @When I can not participate in jitsi room
+     */
+    public function iCanNotParticipateInJitsiRoom()
+    {
+        $this->iWaitElementToDisappearOnPage('#jitsi-join-button');
+    }
+
+    /**
+     * @When I can see the jitsi replay
+     */
+    public function iCanSeeTheJitsiReplay()
+    {
+        $this->iWaitElementToAppearOnPage('#jitsi-replay-container');
     }
 
     /**

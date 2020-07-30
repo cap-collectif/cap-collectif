@@ -36,14 +36,14 @@ Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQxMA==",
           "review": null,
-          "title": "Event 10",
+          "title": "Remobiliser ses collaborateurs par l’intelligence collective mode d’emploi",
         },
       },
       Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ5",
           "review": null,
-          "title": "Event 9",
+          "title": "Quelle complémentarité entre numérique et présentiel ?",
         },
       },
       Object {
@@ -57,7 +57,7 @@ Object {
         "node": Object {
           "id": "RXZlbnQ6ZXZlbnQ4",
           "review": null,
-          "title": "Event 8",
+          "title": "Le droit de suite",
         },
       },
       Object {
@@ -90,6 +90,27 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
+          "review": null,
+          "title": "On vous présente Agui, l’ami du BP",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
+          "review": null,
+          "title": "+ de tech dans la civictech : c'est quoi une API ?",
+        },
+      },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aG91dFJlcGxheQ==",
+          "review": null,
+          "title": "Il n'y a pas que le budget participatif dans la vie",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6Y29zbW9wb2xpdGVFdmVudA==",
           "review": null,
           "title": "evenement cosmopolite",
@@ -118,10 +139,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE0",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
       "hasNextPage": false,
     },
-    "totalCount": 15,
+    "totalCount": 18,
   },
 }
 `;

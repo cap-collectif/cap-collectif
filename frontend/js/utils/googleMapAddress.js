@@ -1,7 +1,7 @@
 // @flow
 
-export const getCityFromGoogleAddress = (googleAddress: Object) => {
-  if (typeof googleAddress === 'object') googleAddress = JSON.parse(googleAddress.json);
+export const getCityFromGoogleAddress = (googleAddressJson: string): ?string => {
+  const googleAddress = JSON.parse(googleAddressJson);
 
   const locality = googleAddress[0].address_components.find(({ types }) => {
     // sometimes googleApi doesn't send locality

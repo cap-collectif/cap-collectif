@@ -46,6 +46,7 @@ class ProposalNormalizer implements
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
+
         if (\in_array('ElasticsearchNestedProposal', $groups)) {
             return $data;
         }

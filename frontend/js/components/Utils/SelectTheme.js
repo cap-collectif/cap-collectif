@@ -16,6 +16,7 @@ type Props = {|
   +divId: string,
   +label: string,
   +optional: boolean,
+  +placeholder?: string,
   +disabled: boolean,
 |};
 
@@ -55,6 +56,7 @@ export class SelectTheme extends React.Component<Props> {
       label,
       optional,
       disabled,
+      placeholder
     } = this.props;
     const renderOptions =
       query && query.themes ? query.themes.map(p => ({ value: p.id, label: p.title })) : [];
@@ -65,7 +67,7 @@ export class SelectTheme extends React.Component<Props> {
           component={select}
           id="SelectTheme-filter-theme"
           name={name}
-          placeholder={intl.formatMessage({ id: 'global.select_themes' })}
+          placeholder={intl.formatMessage({ id: placeholder ?? 'global.select_themes' })}
           label={renderLabel(intl, label, optional)}
           options={renderOptions}
           role="combobox"

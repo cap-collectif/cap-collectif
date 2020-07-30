@@ -9,6 +9,32 @@ import { features } from '../../../redux/modules/default';
 const googleMapsAddress =
   '[{"address_components":[{"long_name":"111","short_name":"111","types":["street_number"]},{"long_name":"Avenue Jean Jaurès","short_name":"Avenue Jean Jaurès","types":["route"]},{"long_name":"Lyon","short_name":"Lyon","types":["locality","political"]},{"long_name":"Rhône","short_name":"Rhône","types":["administrative_area_level_2","political"]},{"long_name":"Auvergne-Rhône-Alpes","short_name":"Auvergne-Rhône-Alpes","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"69007","short_name":"69007","types":["postal_code"]}],"formatted_address":"111 Avenue Jean Jaurès, 69007 Lyon, France","geometry":{"location":{"lat":45.742842,"lng":4.84068000000002},"location_type":"ROOFTOP","viewport":{"south":45.7414930197085,"west":4.839331019708538,"north":45.74419098029149,"east":4.842028980291502}},"place_id":"ChIJHyD85zjq9EcR8Yaae-eQdeQ","plus_code":{"compound_code":"PRVR+47 Lyon, France","global_code":"8FQ6PRVR+47"},"types":["street_address"]}]';
 
+const initialValuesEmpty = {
+  id: null,
+  title: null,
+  status: null,
+  startAt: null,
+  endAt: null,
+  body: null,
+  enabled: false,
+  commentable: false,
+  guestListEnabled: true,
+  link: null,
+  metaDescription: null,
+  customCode: null,
+  addressText: null,
+  isPresential: true,
+  isRecordingPublished: false,
+  adminAuthorizeDataTransfer: false,
+  recordingUrl: null,
+  steps: [],
+  media: null,
+  themes: [],
+  projects: [],
+  author: { value: 'author1', label: 'author' },
+  json: null,
+};
+
 const defaultProps = {
   intl: intlMock,
   ...formMock,
@@ -16,7 +42,7 @@ const defaultProps = {
   dispatch: jest.fn(),
   autoload: true,
   multi: true,
-  initialValues: {},
+  isFrontendView: false,
   query: {
     viewer: {
       isSuperAdmin: false,
@@ -27,6 +53,16 @@ const defaultProps = {
   },
 };
 
+const presentialInitialValues = {
+  ...initialValuesEmpty,
+  isPresential: true,
+};
+
+const remoteInitialValues = {
+  ...initialValuesEmpty,
+  isPresential: false,
+};
+
 const eventNotComplete = {
   event: {
     id: 'event1',
@@ -34,15 +70,29 @@ const eventNotComplete = {
       startAt: '2019-04-21',
       endAt: '',
     },
-    title: 'my event',
+    translations: [
+      {
+        locale: 'fr-FR',
+        title: 'my event',
+        body: '<p>My body</p>',
+        metaDescription: '',
+        link: 'http://weezevent.com',
+      },
+    ],
+    review: null,
+    deletedAt: null,
+    isPresential: true,
+    isRecordingPublished: false,
+    recordingUrl: null,
+    steps: [],
     googleMapsAddress: null,
-    metaDescription: '',
     customCode: '',
     enabled: true,
-    body: '<p>My body</p>',
     commentable: true,
     guestListEnabled: true,
-    link: 'http://weezevent.com',
+    adminAuthorizeDataTransfer: false,
+    authorAgreeToUsePersonalDataForEventOnly: false,
+    animator: null,
     themes: [],
     projects: [],
     media: {
@@ -76,7 +126,6 @@ const eventComplete = {
     },
     lat: 45.749842,
     lng: 4.94068000000002,
-    metaDescription: 'meta description',
     customCode: 'custom code',
     themes: [{ id: '1', title: 'theme-1' }],
     projects: [{ id: '1', title: 'project-1' }],
@@ -88,6 +137,9 @@ const eventApproved = {
     ...eventComplete.event,
     review: {
       status: 'APPROVED',
+      refusedReason: null,
+      comment: null,
+      updatedAt: null,
     },
   },
 };
@@ -98,6 +150,7 @@ const initialValuesComplete = {
     id: 'event1',
     title: 'my super event',
     startAt: '2019-05-05',
+    status: null,
     endAt: '2019-05-31',
     body: 'my body',
     enabled: false,
@@ -114,7 +167,6 @@ const initialValuesComplete = {
     projects: [{ id: '1', title: 'project-1' }],
     author: { value: 'author1', label: 'author' },
     json: googleMapsAddress,
-    addressText: '111 Avenue Jean Jaurès, 69007 Lyon, France',
   },
 };
 
@@ -124,7 +176,7 @@ describe('<EventForm />', () => {
       ...defaultProps,
       ...eventNotComplete,
     };
-    const wrapper = shallow(<EventForm {...props} />);
+    const wrapper = shallow(<EventForm {...props} initialValues={initialValuesEmpty} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -133,16 +185,54 @@ describe('<EventForm />', () => {
       ...defaultProps,
       ...eventComplete,
     };
-    const wrapper = shallow(<EventForm {...props} />);
+    const wrapper = shallow(<EventForm {...props} initialValues={initialValuesEmpty} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('it renders correctly with initialValue', () => {
+  it('it does not render toggle on frontend even with remote event enabled', () => {
     const props = {
       ...initialValuesComplete,
       ...eventComplete,
     };
-    const wrapper = shallow(<EventForm {...props} />);
+    const wrapper = shallow(
+      <EventForm
+        {...props}
+        isFrontendView
+        features={{ ...features, unstable__remote_events: true }}
+        initialValues={initialValuesEmpty}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('it renders correctly on BO a toggle with remote event enabled', () => {
+    const props = {
+      ...initialValuesComplete,
+      ...eventComplete,
+    };
+    const wrapper = shallow(
+      <EventForm
+        {...props}
+        isFrontendView={false}
+        features={{ ...features, unstable__remote_events: true }}
+        initialValues={initialValuesEmpty}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('it renders correctly a remote event', () => {
+    const props = {
+      ...initialValuesComplete,
+      ...eventComplete,
+    };
+    const wrapper = shallow(
+      <EventForm
+        {...props}
+        features={{ ...features, unstable__remote_events: true }}
+        initialValues={remoteInitialValues}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -151,7 +241,7 @@ describe('<EventForm />', () => {
       ...initialValuesComplete,
       ...eventApproved,
     };
-    const wrapper = shallow(<EventForm {...props} />);
+    const wrapper = shallow(<EventForm {...props} initialValues={presentialInitialValues} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

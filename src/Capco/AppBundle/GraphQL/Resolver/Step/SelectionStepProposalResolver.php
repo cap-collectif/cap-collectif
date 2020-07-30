@@ -58,9 +58,11 @@ class SelectionStepProposalResolver implements ResolverInterface
             $selectionStep->getId(),
         ];
 
+        $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);
+
         // Viewer is asking for unpublished proposals
         if (true === $args->offsetGet('includeUnpublishedOnly')) {
-            return ConnectionBuilder::empty(['fusionCount' => 0]);
+            return $emptyConnection;
         }
 
         if (null !== $args->offsetGet('analysts')) {
@@ -107,9 +109,9 @@ class SelectionStepProposalResolver implements ResolverInterface
 
             return $connection;
         } catch (\RuntimeException $exception) {
-            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+            $this->logger->critical(__METHOD__ . ' : ' . $exception->getMessage());
 
-            throw new \RuntimeException('Could not find proposals for selection step');
+            return $emptyConnection;
         }
     }
 }

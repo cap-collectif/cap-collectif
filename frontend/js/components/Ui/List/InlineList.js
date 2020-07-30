@@ -2,12 +2,12 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 
-type Props = {
-  margin: boolean,
-  children: ?React.Node,
-  className?: string,
-  separator?: string,
-};
+type Props = {|
+  +margin: boolean,
+  +children: ?React.Node,
+  +className?: string,
+  +separator?: string,
+|};
 
 const Container: StyledComponent<{}, {}, HTMLUListElement> = styled.ul.attrs({
   className: 'inline-list',

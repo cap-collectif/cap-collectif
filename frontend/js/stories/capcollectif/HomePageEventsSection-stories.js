@@ -2,10 +2,9 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-import { EventPreview } from './EventPreview-stories';
+import { EventPreview, TYPE_EVENT } from './EventPreview-stories';
 import { mediaQueryMobile } from '~/utils/sizes';
 import { events as eventsMock } from '../mocks/event';
-import { TYPE_EVENT } from '~/components/Event/EventPreview/EventPreview';
 
 const EventContainer = styled.ul`
   display: flex;

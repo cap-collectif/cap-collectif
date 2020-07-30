@@ -1,0 +1,9 @@
+GenerateJitsiRoomMutationInput:
+    type: relay-mutation-input
+    config:
+        name: GenerateJitsiRoomMutationInput
+        description: 'Input type of GenerateJitsiRoom.'
+        fields:
+            eventId:
+                type: 'ID'
+                description: 'Event id.'

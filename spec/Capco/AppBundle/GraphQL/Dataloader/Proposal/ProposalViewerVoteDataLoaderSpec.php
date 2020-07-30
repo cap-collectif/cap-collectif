@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
+use Symfony\Component\Stopwatch\Stopwatch;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
@@ -27,7 +28,8 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         GlobalIdResolver $globalIdResolver,
-        GraphQLCollector $collector
+        GraphQLCollector $collector,
+        Stopwatch $stopwatch
     ) {
         $this->beConstructedWith(
             $promiseFactory,
@@ -40,6 +42,7 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
             60,
             false,
             $collector,
+            $stopwatch,
             true
         );
     }

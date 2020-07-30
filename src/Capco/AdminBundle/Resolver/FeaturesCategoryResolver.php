@@ -72,6 +72,7 @@ class FeaturesCategoryResolver
                     'display_pictures_in_event_list',
                     'app_news',
                     'unstable__multilangue',
+                    'unstable__remote_events',
                     'sentry_log',
                     'login_openid',
                     'login_saml',

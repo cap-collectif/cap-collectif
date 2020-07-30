@@ -236,6 +236,52 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "isPresential",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "recordingUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isRecordingPublished",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "User",
+                      "kind": "LinkedField",
+                      "name": "animator",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "displayName",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "TimeRange",
                       "kind": "LinkedField",
                       "name": "timeRange",
@@ -378,6 +424,38 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "concreteType": null,
+                      "kind": "LinkedField",
+                      "name": "steps",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "Media",
                       "kind": "LinkedField",
                       "name": "media",
@@ -484,6 +562,13 @@ fragment EventFormPage_event_FngS2 on Event {
 
 fragment EventForm_event on Event {
   id
+  isPresential
+  recordingUrl
+  isRecordingPublished
+  animator {
+    id
+    displayName
+  }
   timeRange {
     startAt
     endAt
@@ -504,6 +589,11 @@ fragment EventForm_event on Event {
     title
   }
   projects {
+    id
+    title
+  }
+  steps {
+    __typename
     id
     title
   }
@@ -786,6 +876,52 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "isPresential",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "recordingUrl",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "isRecordingPublished",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "User",
+                      "kind": "LinkedField",
+                      "name": "animator",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "displayName",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "TimeRange",
                       "kind": "LinkedField",
                       "name": "timeRange",
@@ -928,6 +1064,38 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "concreteType": null,
+                      "kind": "LinkedField",
+                      "name": "steps",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "Media",
                       "kind": "LinkedField",
                       "name": "media",
@@ -1034,6 +1202,13 @@ fragment EventFormPage_event_FngS2 on Event {
 
 fragment EventForm_event on Event {
   id
+  isPresential
+  recordingUrl
+  isRecordingPublished
+  animator {
+    id
+    displayName
+  }
   timeRange {
     startAt
     endAt
@@ -1054,6 +1229,11 @@ fragment EventForm_event on Event {
     title
   }
   projects {
+    id
+    title
+  }
+  steps {
+    __typename
     id
     title
   }

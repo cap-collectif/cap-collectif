@@ -20,19 +20,21 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ChangeEventMutation implements MutationInterface
 {
-    private $em;
-    private $globalIdResolver;
-    private $formFactory;
-    private $logger;
-    private $indexer;
-    private $publisher;
-    private $authorizationChecker;
+    private EntityManagerInterface $em;
+    private GlobalIdResolver $globalIdResolver;
+    private FormFactoryInterface $formFactory;
+    private LoggerInterface $logger;
+    private Indexer $indexer;
+    private Publisher $publisher;
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private AddEventMutation $addEventMutation;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
+        AddEventMutation $addEventMutation,
         Indexer $indexer,
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker
@@ -44,6 +46,7 @@ class ChangeEventMutation implements MutationInterface
         $this->indexer = $indexer;
         $this->publisher = $publisher;
         $this->authorizationChecker = $authorizationChecker;
+        $this->addEventMutation = $addEventMutation;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -52,7 +55,7 @@ class ChangeEventMutation implements MutationInterface
         if (isset($values['customCode']) && !empty($values['customCode']) && !$viewer->isAdmin()) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
+                'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
             ];
         }
 
@@ -61,14 +64,14 @@ class ChangeEventMutation implements MutationInterface
         if (!$event) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'Could not find your event.']]
+                'userErrors' => [['message' => 'Could not find your event.']],
             ];
         }
 
         if (!$this->authorizationChecker->isGranted(EventVoter::EDIT, $event)) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'Access denied']]
+                'userErrors' => [['message' => 'Access denied']],
             ];
         }
 
@@ -85,12 +88,26 @@ class ChangeEventMutation implements MutationInterface
             $event->setAuthor($newAuthor);
         }
 
-        // a user want to edit his refused event
-        if (!$viewer->isAdmin() && EventReviewStatusType::REFUSED === $event->getStatus() && $event->getReview()) {
-           $event->getReview()->setStatus(EventReviewStatusType::AWAITING);
+        /** @var User $newAnimator */
+        $newAnimator = isset($values['animator'])
+            ? $this->globalIdResolver->resolve($values['animator'], $viewer)
+            : null;
+
+        // admin and superAdmin can change the event's animator
+        if ($newAnimator && $viewer->isAdmin() && $newAnimator !== $event->getAnimator()) {
+            $event->setAnimator($newAnimator);
         }
 
-        AddEventMutation::initEvent($event, $values, $this->formFactory);
+        // a user want to edit his refused event
+        if (
+            !$viewer->isAdmin() &&
+            EventReviewStatusType::REFUSED === $event->getStatus() &&
+            $event->getReview()
+        ) {
+            $event->getReview()->setStatus(EventReviewStatusType::AWAITING);
+        }
+
+        $this->addEventMutation->submitEventFormData($event, $values, $this->formFactory);
 
         $this->em->flush();
 
@@ -102,7 +119,7 @@ class ChangeEventMutation implements MutationInterface
                 'event.update',
                 new Message(
                     json_encode([
-                        'eventId' => $event->getId()
+                        'eventId' => $event->getId(),
                     ])
                 )
             );

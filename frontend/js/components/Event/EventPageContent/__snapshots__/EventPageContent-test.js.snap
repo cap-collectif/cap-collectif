@@ -15,6 +15,7 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
             "lng": 123454321,
           },
           "id": "123id",
+          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -101,6 +102,7 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -131,6 +133,7 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -167,6 +170,7 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
             "lng": 123454321,
           },
           "id": "123id",
+          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -184,6 +188,7 @@ exports[`<EventPageContent /> should render correctly when event refused 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "id": "jpecId",
         }
       }
     />
@@ -266,6 +271,7 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -276,7 +282,6 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     setShowModalParticipant={[Function]}
@@ -293,6 +298,7 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -303,7 +309,6 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     onClose={[Function]}
@@ -329,6 +334,7 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
             "lng": 123454321,
           },
           "id": "123id",
+          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -339,13 +345,13 @@ exports[`<EventPageContent /> should render correctly when no commentable 1`] = 
           },
           "title": "Je suis un événement",
           "url": "https://jesuislurl.com",
-          "viewerDidAuthor": false,
         }
       }
       user={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "id": "jpecId",
         }
       }
     />
@@ -380,6 +386,7 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
         "commentable": true,
         "googleMapsAddress": null,
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -390,7 +397,6 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     setShowModalParticipant={[Function]}
@@ -407,6 +413,7 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
         "commentable": true,
         "googleMapsAddress": null,
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -417,7 +424,6 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     onClose={[Function]}
@@ -440,6 +446,7 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
           "commentable": true,
           "googleMapsAddress": null,
           "id": "123id",
+          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -450,13 +457,13 @@ exports[`<EventPageContent /> should render correctly when no google address 1`]
           },
           "title": "Je suis un événement",
           "url": "https://jesuislurl.com",
-          "viewerDidAuthor": false,
         }
       }
       user={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "id": "jpecId",
         }
       }
     />
@@ -539,6 +546,7 @@ exports[`<EventPageContent /> should render correctly when no registration possi
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": false,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -549,7 +557,6 @@ exports[`<EventPageContent /> should render correctly when no registration possi
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     setShowModalParticipant={[Function]}
@@ -569,6 +576,7 @@ exports[`<EventPageContent /> should render correctly when no registration possi
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": false,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -579,7 +587,6 @@ exports[`<EventPageContent /> should render correctly when no registration possi
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     onClose={[Function]}
@@ -588,10 +595,10 @@ exports[`<EventPageContent /> should render correctly when no registration possi
 </EventPageContentstyle__Container>
 `;
 
-exports[`<EventPageContent /> should render correctly when type online 1`] = `
+exports[`<EventPageContent /> should render correctly when remote event 1`] = `
 <EventPageContentstyle__Container>
   <EventPageContentstyle__Content>
-    <Relay(EventOnlineThumbnail)
+    <Relay(EventPageRemoteContent)
       event={
         Object {
           "$fragmentRefs": null,
@@ -603,6 +610,7 @@ exports[`<EventPageContent /> should render correctly when type online 1`] = `
             "lng": 123454321,
           },
           "id": "123id",
+          "isPresential": false,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -613,7 +621,13 @@ exports[`<EventPageContent /> should render correctly when type online 1`] = `
           },
           "title": "Je suis un événement",
           "url": "https://jesuislurl.com",
-          "viewerDidAuthor": false,
+        }
+      }
+      viewer={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "jpecId",
         }
       }
     />
@@ -639,6 +653,7 @@ exports[`<EventPageContent /> should render correctly when type online 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": false,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -649,7 +664,6 @@ exports[`<EventPageContent /> should render correctly when type online 1`] = `
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     setShowModalParticipant={[Function]}
@@ -666,6 +680,7 @@ exports[`<EventPageContent /> should render correctly when type online 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": false,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -676,7 +691,6 @@ exports[`<EventPageContent /> should render correctly when type online 1`] = `
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     onClose={[Function]}
@@ -702,6 +716,7 @@ exports[`<EventPageContent /> should render correctly when type online 1`] = `
             "lng": 123454321,
           },
           "id": "123id",
+          "isPresential": false,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -712,13 +727,13 @@ exports[`<EventPageContent /> should render correctly when type online 1`] = `
           },
           "title": "Je suis un événement",
           "url": "https://jesuislurl.com",
-          "viewerDidAuthor": false,
         }
       }
       user={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "id": "jpecId",
         }
       }
     />
@@ -801,6 +816,7 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -811,7 +827,6 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     setShowModalParticipant={[Function]}
@@ -831,6 +846,7 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
           "lng": 123454321,
         },
         "id": "123id",
+        "isPresential": true,
         "isRegistrationPossible": true,
         "isViewerParticipatingAtEvent": true,
         "media": Object {
@@ -841,7 +857,6 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
         },
         "title": "Je suis un événement",
         "url": "https://jesuislurl.com",
-        "viewerDidAuthor": false,
       }
     }
     onClose={[Function]}
@@ -867,6 +882,7 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
             "lng": 123454321,
           },
           "id": "123id",
+          "isPresential": true,
           "isRegistrationPossible": true,
           "isViewerParticipatingAtEvent": true,
           "media": Object {
@@ -877,13 +893,13 @@ exports[`<EventPageContent /> should render correctly when type physical 1`] = `
           },
           "title": "Je suis un événement",
           "url": "https://jesuislurl.com",
-          "viewerDidAuthor": false,
         }
       }
       user={
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "id": "jpecId",
         }
       }
     />

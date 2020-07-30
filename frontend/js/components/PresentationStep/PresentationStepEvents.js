@@ -20,8 +20,6 @@ const settingsSlider = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: config.isMobile ? 1 : 2,
-  arrows: !config.isMobile,
   prevArrow: (
     <Arrow>
       <IconRounded size={36} borderColor={colors.borderColor}>
@@ -39,7 +37,6 @@ const settingsSlider = {
 };
 
 export type Props = {|
-  +limit: number,
   +projectId: string,
 |};
 
@@ -54,7 +51,14 @@ class PresentationStepEvents extends React.Component<Props> {
     if (error) {
       return graphqlError;
     }
-    if (props && props.events.edges && props.events.edges.length > 0) {
+    if (
+      props &&
+      props.events.edges &&
+      props.events.edges
+        .filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean).length > 0
+    ) {
       return (
         <Container id="PresentationStepEvents" className="block">
           <h2 className="h2">
@@ -62,7 +66,12 @@ class PresentationStepEvents extends React.Component<Props> {
             <span className="small excerpt">{props.events.totalCount}</span>
           </h2>
 
-          <Slider {...settingsSlider}>
+          <Slider
+            {...{
+              ...settingsSlider,
+              slidesToShow: config.isMobile || props.events.totalCount === 1 ? 1 : 2,
+              arrows: props.events.totalCount > 2 && !config.isMobile,
+            }}>
             {props.events.edges &&
               props.events.edges
                 .filter(Boolean)
@@ -73,11 +82,12 @@ class PresentationStepEvents extends React.Component<Props> {
         </Container>
       );
     }
+    // We display nothing in case of loading or empty result
     return null;
   };
 
   render() {
-    const { limit, projectId } = this.props;
+    const { projectId } = this.props;
 
     return (
       <QueryRenderer
@@ -97,10 +107,10 @@ class PresentationStepEvents extends React.Component<Props> {
         `}
         variables={
           ({
-            count: limit,
+            count: 100,
             project: projectId,
             orderBy: {
-              field: 'END_AT',
+              field: 'START_AT',
               direction: 'DESC',
             },
           }: PresentationStepEventsQueryVariables)

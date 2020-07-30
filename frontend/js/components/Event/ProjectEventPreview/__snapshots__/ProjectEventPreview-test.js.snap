@@ -38,14 +38,77 @@ exports[`<ProjectEventPreview /> should render correctly 1`] = `
       <EventPreviewstyle__TagsList
         vertical={true}
       >
-        <TagCity
-          googleMapsAddress={
+        <Relay(TagCity)
+          address={
             Object {
-              "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
             }
           }
           size="16px"
         />
+      </EventPreviewstyle__TagsList>
+    </EventPreviewstyle__Content>
+  </Body>
+</EventPreviewstyle__EventPreviewContainer>
+`;
+
+exports[`<ProjectEventPreview /> should render correctly for remote event 1`] = `
+<EventPreviewstyle__EventPreviewContainer
+  isProject={true}
+>
+  <Body>
+    <EventPreviewstyle__TitleContainer>
+      <Icon
+        color="#007bff"
+        name="eventOnline"
+        size={17}
+      />
+      <Title
+        tagName="h3"
+      >
+        <a
+          href="#"
+          title="Lorem ipsum dolor sit amet, consectetur adipiscing."
+        >
+          <Truncate
+            ellipsis="…"
+            lines={2}
+            trimWhitespace={false}
+            width={0}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing.
+          </Truncate>
+        </a>
+      </Title>
+    </EventPreviewstyle__TitleContainer>
+    <EventPreviewstyle__HeadContent>
+      <Date
+        date="2030-03-10 00:00:00"
+      />
+    </EventPreviewstyle__HeadContent>
+    <EventPreviewstyle__Content>
+      <EventPreviewstyle__TagsList
+        vertical={true}
+      >
+        <Tag
+          size="16px"
+        >
+          <IconRounded
+            color="#707070"
+            size={18}
+          >
+            <Icon
+              color="#fff"
+              name="camera"
+              size={10}
+            />
+          </IconRounded>
+          <FormattedMessage
+            id="global.online"
+            values={Object {}}
+          />
+        </Tag>
       </EventPreviewstyle__TagsList>
     </EventPreviewstyle__Content>
   </Body>
@@ -105,10 +168,11 @@ exports[`<ProjectEventPreview /> should render correctly when guest enabled 1`] 
       <EventPreviewstyle__TagsList
         vertical={true}
       >
-        <TagCity
-          googleMapsAddress={
+        <Relay(TagCity)
+          address={
             Object {
-              "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
             }
           }
           size="16px"
@@ -153,10 +217,11 @@ exports[`<ProjectEventPreview /> should render correctly when no date 1`] = `
       <EventPreviewstyle__TagsList
         vertical={true}
       >
-        <TagCity
-          googleMapsAddress={
+        <Relay(TagCity)
+          address={
             Object {
-              "json": "[{\\"address_components\\":[{\\"long_name\\":\\"111\\",\\"short_name\\":\\"111\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Jean Jaurès\\",\\"short_name\\":\\"Avenue Jean Jaurès\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Lyon\\",\\"short_name\\":\\"Lyon\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Rhône\\",\\"short_name\\":\\"Rhône\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Auvergne-Rhône-Alpes\\",\\"short_name\\":\\"Auvergne-Rhône-Alpes\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"69007\\",\\"short_name\\":\\"69007\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"111 Avenue Jean Jaurès, 69007 Lyon, France\\",\\"geometry\\":{\\"location\\":{\\"lat\\":45.742842,\\"lng\\":4.84068000000002},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":45.7414930197085,\\"west\\":4.839331019708538,\\"north\\":45.74419098029149,\\"east\\":4.842028980291502}},\\"place_id\\":\\"ChIJHyD85zjq9EcR8Yaae-eQdeQ\\",\\"plus_code\\":{\\"compound_code\\":\\"PRVR+47 Lyon, France\\",\\"global_code\\":\\"8FQ6PRVR+47\\"},\\"types\\":[\\"street_address\\"]}]",
+              "$fragmentRefs": null,
+              "__typename": "GoogleMapsAddress",
             }
           }
           size="16px"
@@ -205,6 +270,68 @@ exports[`<ProjectEventPreview /> should render correctly when no googleMapsAddre
       <EventPreviewstyle__TagsList
         vertical={true}
       />
+    </EventPreviewstyle__Content>
+  </Body>
+</EventPreviewstyle__EventPreviewContainer>
+`;
+
+exports[`<ProjectEventPreview /> should render correctly when when recording published 1`] = `
+<EventPreviewstyle__EventPreviewContainer
+  isProject={true}
+>
+  <Body>
+    <EventPreviewstyle__TitleContainer>
+      <Icon
+        color="#007bff"
+        name="eventOnline"
+        size={17}
+      />
+      <Title
+        tagName="h3"
+      >
+        <a
+          href="#"
+          title="Lorem ipsum dolor sit amet, consectetur adipiscing."
+        >
+          <Truncate
+            ellipsis="…"
+            lines={2}
+            trimWhitespace={false}
+            width={0}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing.
+          </Truncate>
+        </a>
+      </Title>
+    </EventPreviewstyle__TitleContainer>
+    <EventPreviewstyle__HeadContent>
+      <Date
+        date="2030-03-10 00:00:00"
+      />
+    </EventPreviewstyle__HeadContent>
+    <EventPreviewstyle__Content>
+      <EventPreviewstyle__TagsList
+        vertical={true}
+      >
+        <Tag
+          size="16px"
+        >
+          <IconRounded
+            color="#707070"
+            size={18}
+          >
+            <Icon
+              color="#fff"
+              name="camera"
+              size={10}
+            />
+          </IconRounded>
+          <FormattedMessage
+            id="global.online"
+            values={Object {}}
+          />
+        </Tag>
+      </EventPreviewstyle__TagsList>
     </EventPreviewstyle__Content>
   </Body>
 </EventPreviewstyle__EventPreviewContainer>

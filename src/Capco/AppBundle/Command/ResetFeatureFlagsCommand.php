@@ -3,38 +3,31 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ResetFeatureFlagsCommand extends Command
 {
-    private $container;
+    private $env;
     private $manager;
 
-    public function __construct(
-        string $name = null,
-        ContainerInterface $container,
-        Manager $manager
-    ) {
-        $this->container = $container;
-        $this->manager = $manager;
+    public function __construct(string $name, Manager $manager, string $env)
+    {
         parent::__construct($name);
+        $this->env = $env;
+        $this->manager = $manager;
     }
 
     protected function configure()
     {
-        $this->setName('capco:reset-feature-flags')
-            ->setDescription('Reset the feature flags to default values')
-            ->addOption(
-                'force',
-                false,
-                InputOption::VALUE_NONE,
-                'set this option to force the reinit. Warning, this may de/activate some features'
-            );
+        $this->setDescription('Reset the feature flags to default values')->addOption(
+            'force',
+            false,
+            InputOption::VALUE_NONE,
+            'set this option to force the reinit. Warning, this may de/activate some features'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -45,8 +38,11 @@ class ResetFeatureFlagsCommand extends Command
             return 1;
         }
 
-        $env = $this->getContainer()->getParameter('kernel.environment');
-        $output->writeln('Resetting the feature toggles to the default <info>' . $env . '</info> configuration');
+        $output->writeln(
+            'Resetting the feature toggles to the default <info>' .
+                $this->env .
+                '</info> configuration'
+        );
 
         $this->manager->activate('blog');
         $this->manager->activate('calendar');
@@ -95,16 +91,18 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('unstable__analysis');
         $this->manager->activate('sentry_log');
         $this->manager->activate('remind_user_account_confirmation');
+        $this->manager->activate('unstable__remote_events');
 
-        if ('test' === $env) {
+        if ('test' === $this->env) {
             $this->manager->deactivate('shield_mode');
             $this->manager->activate('public_api');
             $this->manager->activate('indexation');
             $this->manager->deactivate('sentry_log');
             $this->manager->deactivate('login_franceconnect');
+            $this->manager->deactivate('unstable__remote_events');
         }
 
-        if ('prod' === $env) {
+        if ('prod' === $this->env) {
             $this->manager->deactivate('display_pictures_in_event_list');
             $this->manager->deactivate('registration');
             $this->manager->deactivate('login_facebook');
@@ -133,10 +131,5 @@ class ResetFeatureFlagsCommand extends Command
         $output->writeln('<info>Feature flags reseted ! </info>');
 
         return 0;
-    }
-
-    private function getContainer()
-    {
-        return $this->container;
     }
 }

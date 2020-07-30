@@ -34,7 +34,7 @@ export const EventMapPreview = ({ hasIllustrationDisplayed, event }: EventMapPre
           <TagsList>
             {author && <TagUser user={author} size={16} />}
             {timeRange && timeRange.startAt && <Card.Date date={timeRange.startAt} />}
-            {googleMapsAddress && <TagCity googleMapsAddress={googleMapsAddress} size="16px" />}
+            {googleMapsAddress && <TagCity address={googleMapsAddress} size="16px" />}
           </TagsList>
         </Card.Body>
       </Card>
@@ -58,7 +58,8 @@ export default createFragmentContainer(Container, {
         startAt
       }
       googleMapsAddress {
-        json
+        __typename
+        ...TagCity_address
       }
       author {
         ...TagUser_user

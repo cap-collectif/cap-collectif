@@ -51,6 +51,7 @@ class ProposalResponsesResolver implements ResolverInterface
             $isLegacyAnalyst,
             $isAnalyst
         );
+
         $iterator = $responses->getIterator();
 
         $iterator->uasort(function ($a, $b) {

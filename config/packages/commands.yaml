@@ -47,3 +47,8 @@ services:
     Capco\AppBundle\Command\DeleteUserArchiveCommand:
         arguments:
             $name: 'capco:user_archives:delete'
+
+    Capco\AppBundle\Command\ResetFeatureFlagsCommand:
+        arguments:
+            $name: 'capco:reset-feature-flags'
+            $env: '%kernel.environment%'

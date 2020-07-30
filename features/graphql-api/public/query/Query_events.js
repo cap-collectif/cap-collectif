@@ -125,6 +125,25 @@ const InternalLocaleEventsQuery = /* GraphQL */ `
   }
 `;
 
+const InternalRemoteEventsQuery = /* GraphQL */ `
+  query InternalRemoteEventsQuery(
+    $count: Int!
+    $cursor: String
+    $isPresential: Boolean!
+    $orderBy: EventOrder!
+  ) {
+    events(first: $count, after: $cursor, orderBy: $orderBy, isPresential: $isPresential) {
+      totalCount
+      edges {
+        node {
+          id
+          isPresential
+        }
+      }
+    }
+  }
+`;
+
 describe('Preview|Query.events connection', () => {
   it('fetches the first hundred events with a cursor', async () => {
     await expect(graphql(OpenDataEventsQuery, { count: 100 })).resolves.toMatchSnapshot();
@@ -220,6 +239,34 @@ describe('Preview|Query.events connection', () => {
         {
           count: 100,
           locale: 'EN_GB',
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches all presential events', async () => {
+    await expect(
+      graphql(
+        InternalRemoteEventsQuery,
+        {
+          count: 100,
+          isPresential: true,
+          orderBy: { field: 'START_AT', direction: 'ASC' },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches all remote events', async () => {
+    await expect(
+      graphql(
+        InternalRemoteEventsQuery,
+        {
+          count: 100,
+          isPresential: false,
+          orderBy: { field: 'START_AT', direction: 'ASC' },
         },
         'internal',
       ),

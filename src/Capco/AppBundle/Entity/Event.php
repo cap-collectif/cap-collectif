@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\CustomCodeTrait;
@@ -131,11 +132,22 @@ class Event implements
     private $projects;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="events", cascade={"persist"})
+     * @ORM\JoinTable(name="event_step")
+     */
+    private $steps;
+    /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
      */
     private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="animator_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private $animator;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventComment", mappedBy="Event",  cascade={"persist", "remove"})
@@ -151,6 +163,31 @@ class Event implements
      * @ORM\Column(name="guest_list_enabled", type="boolean", nullable=false)
      */
     private $guestListEnabled = false;
+
+    /**
+     * @ORM\Column(name="room_name", type="text", nullable=true)
+     */
+    private $roomName;
+
+    /**
+     * @ORM\Column(name="jitsi_token", type="text", nullable=true)
+     */
+    private $jitsiToken;
+
+    /**
+     * @ORM\Column(name="is_presential", type="boolean", nullable=false, options={"default": true})
+     */
+    private $isPresential = true;
+
+    /**
+     * @ORM\Column(name="recording_link", type="text", nullable=true)
+     */
+    private $recordingLink;
+
+    /**
+     * @ORM\Column(name="is_recording_published", type="boolean", nullable=false, options={"default": false})
+     */
+    private $isRecordingPublished = false;
 
     /**
      * TODO to remove after recette is ok.
@@ -189,6 +226,7 @@ class Event implements
         $this->registrations = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->steps = new ArrayCollection();
     }
 
     public function __toString()
@@ -233,6 +271,41 @@ class Event implements
     {
         $this->themes->removeElement($theme);
         $theme->removeEvent($this);
+
+        return $this;
+    }
+
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(AbstractStep $step): self
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps->add($step);
+        }
+        $step->addEvent($this);
+
+        return $this;
+    }
+
+    public function removeStep(AbstractStep $step): self
+    {
+        $this->steps->removeElement($step);
+        $step->removeEvent($this);
+
+        return $this;
+    }
+
+    public function getRecordingLink(): ?string
+    {
+        return $this->recordingLink;
+    }
+
+    public function setRecordingLink(?string $recordingLink): self
+    {
+        $this->recordingLink = $recordingLink;
 
         return $this;
     }
@@ -788,6 +861,66 @@ class Event implements
     public function setMetaDescription(?string $metaDescription = null): self
     {
         $this->translate(null, false)->setMetaDescription($metaDescription);
+
+        return $this;
+    }
+
+    public function getRoomName(): ?string
+    {
+        return $this->roomName;
+    }
+
+    public function setRoomName(?string $roomName): self
+    {
+        $this->roomName = $roomName;
+
+        return $this;
+    }
+
+    public function getJitsiToken(): ?string
+    {
+        return $this->jitsiToken;
+    }
+
+    public function setJitsiToken(?string $jitsiToken): self
+    {
+        $this->jitsiToken = $jitsiToken;
+
+        return $this;
+    }
+
+    public function getIsPresential(): bool
+    {
+        return $this->isPresential;
+    }
+
+    public function setIsPresential(bool $isPresential): self
+    {
+        $this->isPresential = $isPresential;
+
+        return $this;
+    }
+
+    public function getIsRecordingPublished(): bool
+    {
+        return $this->isRecordingPublished;
+    }
+
+    public function setIsRecordingPublished(bool $isRecordingPublished): self
+    {
+        $this->isRecordingPublished = $isRecordingPublished;
+
+        return $this;
+    }
+
+    public function getAnimator(): ?User
+    {
+        return $this->animator;
+    }
+
+    public function setAnimator(?User $animator): self
+    {
+        $this->animator = $animator;
 
         return $this;
     }

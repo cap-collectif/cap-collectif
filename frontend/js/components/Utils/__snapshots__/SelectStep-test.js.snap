@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectStep /> should render correctly 1`] = `
+<Field
+  aria-autocomplete="list"
+  aria-controls="SelectStep-filter-listbox"
+  aria-haspopup="true"
+  clearable={true}
+  component={[Function]}
+  disabled={false}
+  id="SelectStep-filter"
+  label="steps"
+  multi={true}
+  name="steps"
+  options={
+    Array [
+      Object {
+        "label": "Save the world",
+        "value": "step1",
+      },
+    ]
+  }
+  placeholder="step.select"
+  role="combobox"
+/>
+`;
+
+exports[`<SelectStep /> should render disabled 1`] = `
+<Field
+  aria-autocomplete="list"
+  aria-controls="SelectStep-filter-listbox"
+  aria-haspopup="true"
+  clearable={true}
+  component={[Function]}
+  disabled={true}
+  id="SelectStep-filter"
+  label="steps"
+  multi={true}
+  name="steps"
+  options={
+    Array [
+      Object {
+        "label": "Save the world",
+        "value": "step1",
+      },
+    ]
+  }
+  placeholder="step.select"
+  role="combobox"
+/>
+`;
+
+exports[`<SelectStep /> should render empty list 1`] = `
+<Field
+  aria-autocomplete="list"
+  aria-controls="SelectStep-filter-listbox"
+  aria-haspopup="true"
+  clearable={true}
+  component={[Function]}
+  disabled={false}
+  id="SelectStep-filter"
+  label="steps"
+  multi={true}
+  name="steps"
+  options={Array []}
+  placeholder="step.select"
+  role="combobox"
+/>
+`;
+
+exports[`<SelectStep /> should render without project 1`] = `
+<Field
+  aria-autocomplete="list"
+  aria-controls="SelectStep-filter-listbox"
+  aria-haspopup="true"
+  clearable={true}
+  component={[Function]}
+  disabled={false}
+  id="SelectStep-filter"
+  label="steps"
+  multi={true}
+  name="steps"
+  options={Array []}
+  placeholder="step.select"
+  role="combobox"
+/>
+`;

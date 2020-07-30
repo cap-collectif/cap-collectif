@@ -1,41 +1,87 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, FormattedDate, injectIntl, type IntlShape } from 'react-intl';
+import {
+  FormattedMessage,
+  FormattedDate,
+  injectIntl,
+  type IntlShape,
+  FormattedHTMLMessage,
+} from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
-import { type FormProps, Field, reduxForm, formValueSelector } from 'redux-form';
-import component from '~/components//Form/Field';
+import { Field, reduxForm, formValueSelector, change } from 'redux-form';
+import { Button, OverlayTrigger, ToggleButton } from 'react-bootstrap';
+import Tooltip from '~/components/Utils/Tooltip';
 import toggle from '~/components//Form/Toggle';
 import type { Dispatch, FeatureToggles, GlobalState } from '~/types';
-import type { EventForm_event, EventRefusedReason } from '~relay/EventForm_event.graphql';
+import type {
+  EventForm_event,
+  EventRefusedReason,
+  EventReviewStatus,
+} from '~relay/EventForm_event.graphql';
 import type { EventForm_query } from '~relay/EventForm_query.graphql';
+import component from '~/components/Form/Field';
 import UserListField from '~/components//Admin/Field/UserListField';
 import SelectTheme from '~/components//Utils/SelectTheme';
 import SelectProject from '~/components//Utils/SelectProject';
-import CustomPageFields from '~/components//Admin/Field/CustomPageFields';
 import select from '~/components/Form/Select';
 import approve from '~/components/Form/Approve';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 import { getTranslation } from '~/services/Translation';
 import { validate } from '~/components/Event/Form/EventFormPage';
+import SelectStep from '~/components/Utils/SelectStep';
+import colors from '~/utils/colors';
+import { InformationIcon } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
+
+type SelectedCurrentValues = {|
+  guestListEnabled: boolean,
+  link: ?string,
+  status: ?EventReviewStatus,
+  projects: Array<{| value: string, label: string |}>,
+  isPresential: boolean,
+|};
+
+type Values = {|
+  ...SelectedCurrentValues,
+  adminAuthorizeDataTransfer: boolean,
+  id: ?string,
+  customCode: ?string,
+  media: ?Object,
+  author: ?{| value: string, label: string |},
+  enabled: boolean,
+  commentable: boolean,
+  guestListEnabled: boolean,
+  addressText: ?string,
+  json: ?string,
+  themes: Array<{| id: string, label: string |}>,
+  steps: Array<{| id: string, label: string |}>,
+  startAt: ?string,
+  endAt: ?string,
+  recordingUrl: ?string,
+  isRecordingPublished: boolean,
+  title: ?string,
+  body: ?string,
+  metaDescription: ?string,
+  link: ?string,
+|};
 
 type Props = {|
-  ...FormProps,
+  ...ReduxFormFormProps,
   event: ?EventForm_event,
   query: EventForm_query,
   features: FeatureToggles,
   dispatch: Dispatch,
   intl: IntlShape,
-  initialValues: Object,
-  currentValues?: ?{},
+  initialValues: Values,
+  currentValues?: ?SelectedCurrentValues,
   autoload: boolean,
   multi: boolean,
   className?: string,
   isFrontendView: boolean,
-  currentLanguage: string,
+  currentLanguage?: string,
 |};
 
 const PageTitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -45,69 +91,147 @@ const PageTitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   h3 {
     width: 100%;
     padding-bottom: 15px;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid ${colors.borderColor};
+  }
+`;
+
+const JitsiNoReplayContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  background: ${colors.formBgc};
+  border-radius: 4px;
+  border: 2px solid ${colors.borderColor};
+  padding: 30px;
+  color: ${colors.darkGray};
+  display: flex;
+  justify-content: center;
+  span {
+    text-align: center;
+  }
+`;
+
+const TitleHint: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+  font-size: 14px;
+  color: ${colors.darkGray};
+  margin-left: 10px;
+  font-weight: normal;
+`;
+
+const FormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  h3 {
+    font-weight: 600;
+  }
+
+  #submit-project-content {
+    margin-right: 10px;
   }
 `;
 
 export const formName = 'EventForm';
 
-export class EventForm extends React.Component<Props> {
-  static defaultProps = {
-    isFrontendView: false,
+export const EventForm = ({
+  features,
+  event,
+  query,
+  currentValues,
+  dispatch,
+  className,
+  isFrontendView = false,
+  intl,
+  handleSubmit,
+}: Props) => {
+  const [isReplayAvailable, setReplayAvailability] = React.useState(false);
+
+  React.useEffect(() => {
+    async function testrecordingUrl(link: string) {
+      const response = await fetch(link);
+      setReplayAvailability(response.status !== 404);
+    }
+    if (event?.recordingUrl) {
+      testrecordingUrl(event.recordingUrl);
+    }
+  }, [event, isReplayAvailable]);
+
+  const isDisabled = (adminCanEdit = false): boolean => {
+    if (
+      query.viewer.isSuperAdmin ||
+      (query.viewer.isAdmin && !features.allow_users_to_propose_events)
+    ) {
+      return false;
+    }
+    if (!event) {
+      return false;
+    }
+    if (query.viewer.isAdmin && event.deletedAt !== null) {
+      return true;
+    }
+    if (query.viewer.isAdmin && (event.author?.isAdmin || event.review === null)) {
+      return false;
+    }
+    if (query.viewer.isAdmin && event.review?.status !== null && !adminCanEdit) {
+      return true;
+    }
+
+    return !isFrontendView && !query.viewer.isAdmin;
   };
 
-  render() {
-    const {
-      features,
-      event,
-      query,
-      currentValues,
-      className,
-      isFrontendView,
-      intl,
-      handleSubmit,
-    } = this.props;
+  const isModerationDisable = (): boolean => {
+    if (query.viewer.isSuperAdmin) {
+      return false;
+    }
+    return event?.review?.status !== 'AWAITING';
+  };
 
-    const isDisabled = (adminCanEdit = false): boolean => {
-      if (
-        query.viewer.isSuperAdmin ||
-        (query.viewer.isAdmin && !features.allow_users_to_propose_events)
-      ) {
-        return false;
-      }
-      if (!event) {
-        return false;
-      }
-      if (query.viewer.isAdmin && event.deletedAt !== null) {
-        return true;
-      }
-      if (query.viewer.isAdmin && (event.author?.isAdmin || event.review === null)) {
-        return false;
-      }
-      if (query.viewer.isAdmin && event.review?.status !== null && !adminCanEdit) {
-        return true;
-      }
-
-      return !isFrontendView && !query.viewer.isAdmin;
-    };
-
-    const isModerationDisable = (): boolean => {
-      if (query.viewer.isSuperAdmin) {
-        return false;
-      }
-      return event?.review?.status !== 'AWAITING';
-    };
-
-    const refusedReasons: Array<{| value: EventRefusedReason, label: string |}> = [
-      { value: 'OFFENDING', label: intl.formatMessage({ id: 'reporting.status.offending' }) },
-      { value: 'OFF_TOPIC', label: intl.formatMessage({ id: 'reporting.status.off_topic' }) },
-      { value: 'SEX', label: intl.formatMessage({ id: 'reporting.status.sexual' }) },
-      { value: 'SPAM', label: intl.formatMessage({ id: 'reporting.status.spam' }) },
-      { value: 'SYNTAX_ERROR', label: intl.formatMessage({ id: 'syntax-error' }) },
-      { value: 'WRONG_CONTENT', label: intl.formatMessage({ id: 'reporting.status.error' }) },
-    ];
-
+  const renderJistiSection = () => {
+    if (event && event.recordingUrl && isReplayAvailable) {
+      return (
+        <div className="mr-10">
+          <Button
+            id="submit-project-content"
+            bsStyle="primary"
+            onClick={() => {
+              if (event.recordingUrl) {
+                window.open(event.recordingUrl);
+              }
+            }}>
+            <FormattedMessage id="global.play.video" />
+          </Button>
+          <a id="download-replay" href={event.recordingUrl} download className="btn btn-primary">
+            <FormattedMessage id="global.download" />
+          </a>
+          <div className="mt-10">
+            <Field
+              name="isRecordingPublished"
+              id="event_isRecordingPublished"
+              component={toggle}
+              disabled={isDisabled(true)}
+              label={<FormattedMessage id="global.published" />}
+            />
+          </div>
+        </div>
+      );
+    }
     return (
+      <JitsiNoReplayContainer>
+        <FormattedHTMLMessage id="activate-jitsi-recording-hint" />
+      </JitsiNoReplayContainer>
+    );
+  };
+
+  const refusedReasons: Array<{| value: EventRefusedReason, label: string |}> = [
+    { value: 'OFFENDING', label: intl.formatMessage({ id: 'reporting.status.offending' }) },
+    { value: 'OFF_TOPIC', label: intl.formatMessage({ id: 'reporting.status.off_topic' }) },
+    { value: 'SEX', label: intl.formatMessage({ id: 'reporting.status.sexual' }) },
+    { value: 'SPAM', label: intl.formatMessage({ id: 'reporting.status.spam' }) },
+    { value: 'SYNTAX_ERROR', label: intl.formatMessage({ id: 'syntax-error' }) },
+    { value: 'WRONG_CONTENT', label: intl.formatMessage({ id: 'reporting.status.error' }) },
+  ];
+
+  const selectedProjectIds =
+    currentValues && currentValues.projects
+      ? currentValues.projects.map(project => project.value)
+      : [];
+
+  return (
+    <FormContainer>
       <form className={`eventForm ${className || ''}`} onSubmit={handleSubmit}>
         {!isFrontendView && (
           <>
@@ -144,6 +268,27 @@ export class EventForm extends React.Component<Props> {
           </>
         )}
         <div className="box-body">
+          {!isFrontendView && features.unstable__remote_events ? (
+            <Field
+              type="radio-buttons"
+              id="isPresential"
+              name="isPresential"
+              label={<FormattedMessage id="global.type" />}
+              component={component}>
+              <ToggleButton
+                id="presential"
+                value={!!1}
+                onClick={() => dispatch(change(formName, 'isPresential', true))}>
+                <FormattedMessage id="global.presential" />
+              </ToggleButton>
+              <ToggleButton
+                id="remote"
+                value={!!0}
+                onClick={() => dispatch(change(formName, 'isPresential', false))}>
+                <FormattedMessage id="global.online" />
+              </ToggleButton>
+            </Field>
+          ) : null}
           <Field
             name="title"
             label={<FormattedMessage id="global.title" />}
@@ -162,6 +307,21 @@ export class EventForm extends React.Component<Props> {
               disabled={!query.viewer.isAdmin || isDisabled()}
               id="event_author"
               name="author"
+              placeholder={intl.formatMessage({ id: 'select-author' })}
+              labelClassName={null}
+              selectFieldIsObject
+            />
+          )}
+          {query.viewer.isAdmin && !isFrontendView && !currentValues?.isPresential && (
+            <UserListField
+              clearable={false}
+              label={<FormattedMessage id="global.animator" />}
+              ariaControls="EventForm-filter-user-listbox"
+              inputClassName="fake-inputClassName"
+              autoload
+              disabled={!query.viewer.isAdmin || isDisabled()}
+              id="event_animator"
+              name="animator"
               placeholder={null}
               labelClassName={null}
               selectFieldIsObject
@@ -268,14 +428,41 @@ export class EventForm extends React.Component<Props> {
             type="image"
           />
         </div>
-        <div className="box-header">
+        <Field
+          name="metadescription"
+          type="textarea"
+          label={
+            <>
+              <FormattedMessage id="global.meta.description" />
+              <span className="excerpt inline">
+                <FormattedMessage id="global.optional" />{' '}
+                <OverlayTrigger
+                  key="top"
+                  placement="top"
+                  overlay={
+                    <Tooltip
+                      id="tooltip-top"
+                      className="text-left"
+                      style={{ wordBreak: 'break-word' }}>
+                      <FormattedMessage id="admin.help.metadescription" />
+                    </Tooltip>
+                  }>
+                  <InformationIcon />
+                </OverlayTrigger>
+              </span>
+            </>
+          }
+          component={component}
+          disabled={isDisabled(true)}
+        />
+        <div className="box-header d-flex">
           <h3 className="box-title">
             <FormattedMessage id="form.label_category" />
+            <TitleHint>
+              {'  '} <FormattedMessage id="allow-event-linking" />
+            </TitleHint>
           </h3>
         </div>
-        <span className="help-block">
-          <FormattedMessage id="allow-event-linking" />
-        </span>
         {features.themes && (
           <SelectTheme
             optional={isFrontendView}
@@ -284,6 +471,7 @@ export class EventForm extends React.Component<Props> {
             multi
             clearable
             name="themes"
+            placeholder="select-themes"
             divId="event_theme"
             label="global.themes"
           />
@@ -293,8 +481,19 @@ export class EventForm extends React.Component<Props> {
           multi
           clearable
           name="projects"
-          disabled={isDisabled(true)}
-          label="global.participative.project"
+          disabled={isDisabled()}
+          label="admin.fields.theme.projects_count"
+          placeholder="select-project"
+          optional={isFrontendView}
+        />
+        <SelectStep
+          query={query}
+          multi
+          clearable
+          projectIds={selectedProjectIds}
+          name="steps"
+          disabled={selectedProjectIds.length === 0}
+          label="project.show.meta.step.title"
           optional={isFrontendView}
         />
         <div>
@@ -304,61 +503,44 @@ export class EventForm extends React.Component<Props> {
                 <FormattedMessage id="global.options" />
               </h3>
             </div>
-            <div className={isFrontendView ? `` : `ml-10 pl-10`}>
-              <Field
-                name="guestListEnabled"
-                id="event_registrable"
-                type="checkbox"
-                component={component}
-                disabled={
-                  !!(currentValues && currentValues.link && currentValues.link !== null) ||
-                  isDisabled(true)
-                }
-                children={<FormattedMessage id="allow-inscriptions" />}
-              />
-            </div>
-            {!isFrontendView && query.viewer.isAdmin && (
-              <div className="clearfix">
+            <Field
+              name="guestListEnabled"
+              id="event_registrable"
+              type="checkbox"
+              component={toggle}
+              disabled={!!(currentValues && currentValues.link) || isDisabled(true)}
+              label={<FormattedMessage id="inscriptions-on-platform" />}
+            />
+            {currentValues?.guestListEnabled === false &&
+              !isFrontendView &&
+              query.viewer.isAdmin && (
                 <Field
                   name="link"
-                  label={<FormattedMessage id="admin.fields.event.link" />}
+                  label={<FormattedMessage id="link-external-subscription" />}
                   component={component}
-                  placeholder="http://"
+                  placeholder="https://"
                   type="text"
-                  disabled={
-                    isDisabled(true) ||
-                    (currentValues &&
-                    currentValues.guestListEnabled &&
-                    currentValues.guestListEnabled !== null
-                      ? currentValues.guestListEnabled
-                      : false)
-                  }
                   id="event_link"
                 />
-              </div>
+              )}
+            {query.viewer.isAdmin && !isFrontendView && (
+              <Field
+                name="adminAuthorizeDataTransfer"
+                id="event_adminAuthorizeDataTransfer"
+                type="checkbox"
+                component={toggle}
+                label={<FormattedMessage id="authorize-transfer-of-data-to-event-organizer" />}
+              />
             )}
             {!isFrontendView && (
-              <div className="ml-10 pl-10">
-                <Field
-                  name="commentable"
-                  id="event_commentable"
-                  type="checkbox"
-                  component={component}
-                  disabled={isDisabled(true)}
-                  children={<FormattedMessage id="admin.fields.blog_post.is_commentable" />}
-                />
-              </div>
-            )}
-            {query.viewer.isAdmin && !isFrontendView && (
-              <div className="ml-10 pl-10">
-                <Field
-                  name="adminAuthorizeDataTransfer"
-                  id="event_adminAuthorizeDataTransfer"
-                  type="checkbox"
-                  component={component}
-                  children={<FormattedMessage id="authorize-transfer-of-data-to-event-organizer" />}
-                />
-              </div>
+              <Field
+                name="commentable"
+                id="event_commentable"
+                type="checkbox"
+                component={toggle}
+                disabled={isDisabled(true)}
+                label={<FormattedMessage id="admin.fields.proposal.comments" />}
+              />
             )}
           </div>
           {!query.viewer.isAdmin && isFrontendView && (
@@ -381,12 +563,6 @@ export class EventForm extends React.Component<Props> {
           )}
           {query.viewer.isAdmin && !isFrontendView && (
             <div>
-              <div className="box-header">
-                <h3 className="box-title">
-                  <FormattedMessage id="admin.fields.step.advanced" />
-                </h3>
-              </div>
-              <CustomPageFields disabled={isDisabled(true)} />
               <div className="box-header pt-0">
                 <h3 className="box-title">
                   <FormattedMessage id="global.publication" />
@@ -394,7 +570,7 @@ export class EventForm extends React.Component<Props> {
               </div>
 
               {event &&
-              !event.author.isAdmin &&
+              !event.author?.isAdmin &&
               event.review?.status &&
               features.allow_users_to_propose_events ? (
                 <>
@@ -413,7 +589,7 @@ export class EventForm extends React.Component<Props> {
                       <FormattedMessage id="admin.action.recent_contributions.unpublish.input_label" />
                     }
                   />
-                  {currentValues.status === 'REFUSED' && (
+                  {currentValues?.status === 'REFUSED' && (
                     <>
                       <Field
                         name="refusedReason"
@@ -445,23 +621,58 @@ export class EventForm extends React.Component<Props> {
                   type="checkbox"
                   component={toggle}
                   disabled={isDisabled()}
-                  label={
-                    <div>
-                      <FormattedMessage id="global.published" />
-                      <div className="excerpt inline">
-                        <FormattedMessage id="global.optional" />
-                      </div>
-                    </div>
-                  }
+                  label={<FormattedMessage id="global.published" />}
                 />
               )}
+              {!currentValues?.isPresential && (
+                <div className="box-header">
+                  <h3 className="box-title replay-container">
+                    <FormattedMessage id="global.replay" />
+                  </h3>
+                  {renderJistiSection()}
+                </div>
+              )}
+              <div className="box-header">
+                <h3 className="box-title">
+                  <FormattedMessage id="global-customization" />
+                </h3>
+              </div>
+
+              <Field
+                name="customcode"
+                type="textarea"
+                label={
+                  <>
+                    <FormattedMessage id="admin.customcode" />
+                    <span className="excerpt inline">
+                      <FormattedMessage id="global.optional" />{' '}
+                      <OverlayTrigger
+                        key="top"
+                        placement="top"
+                        overlay={
+                          <Tooltip
+                            id="tooltip-top"
+                            className="text-left"
+                            style={{ wordBreak: 'break-word' }}>
+                            <FormattedMessage id="admin.help.customcode" />
+                          </Tooltip>
+                        }>
+                        <InformationIcon />
+                      </OverlayTrigger>
+                    </span>
+                  </>
+                }
+                component={component}
+                disabled={isDisabled(true)}
+                placeholder='<script type="text/javascript"> </script>"'
+              />
             </div>
           )}
         </div>
       </form>
-    );
-  }
-}
+    </FormContainer>
+  );
+};
 
 const selector = formValueSelector(formName);
 
@@ -488,7 +699,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
         enabled: props.event ? props.event.enabled : null,
         commentable: props.event ? props.event.commentable : null,
         guestListEnabled: props.event ? props.event.guestListEnabled : null,
-        adminAuthorizeDataTransfer: props.event?.adminAuthorizeDataTransfer || null,
+        adminAuthorizeDataTransfer: props.event?.adminAuthorizeDataTransfer || false,
         authorAgreeToUsePersonalDataForEventOnly: props.event
           ?.authorAgreeToUsePersonalDataForEventOnly
           ? props.event.authorAgreeToUsePersonalDataForEventOnly
@@ -509,6 +720,13 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
                 label: p.title,
               }))
             : [],
+        steps:
+          props.event && props.event.steps
+            ? props.event.steps.map(p => ({
+                value: p.id,
+                label: p.title,
+              }))
+            : [],
         themes:
           props.event && props.event.themes
             ? props.event.themes.map(th => ({
@@ -524,20 +742,43 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
           props.event && props.event.googleMapsAddress
             ? props.event.googleMapsAddress.formatted
             : null,
+        recordingUrl: props.event && props.event.recordingUrl,
+        isPresential: props.event ? props.event.isPresential : true,
+        animator:
+          props.event && props.event.animator
+            ? { value: props.event.animator.id, label: props.event.animator.displayName }
+            : null,
+        isRecordingPublished: props.event && props.event.isRecordingPublished,
         addressJson:
           props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
         translations: props.event && props.event.translations ? props.event.translations : [],
       },
-      currentValues: selector(state, 'guestListEnabled', 'link', 'status'),
+      currentValues: selector(
+        state,
+        'guestListEnabled',
+        'link',
+        'status',
+        'projects',
+        'isPresential',
+      ),
     };
   }
 
   return {
     currentLanguage: state.language.currentLanguage,
     features: state.default.features,
-    currentValues: selector(state, 'guestListEnabled', 'link', 'status'),
+    currentValues: selector(
+      state,
+      'guestListEnabled',
+      'link',
+      'status',
+      'projects',
+      'isPresential',
+    ),
     initialValues: {
       authorAgreeToUsePersonalDataForEventOnly: false,
+      isPresential: true,
+      guestListEnabled: false,
     },
   };
 };
@@ -549,6 +790,7 @@ export default createFragmentContainer(container, {
     fragment EventForm_query on Query {
       ...SelectTheme_query
       ...SelectProject_query
+      ...SelectStep_query
       viewer {
         isAdmin
         isSuperAdmin
@@ -558,6 +800,13 @@ export default createFragmentContainer(container, {
   event: graphql`
     fragment EventForm_event on Event {
       id
+      isPresential
+      recordingUrl
+      isRecordingPublished
+      animator {
+        id
+        displayName
+      }
       timeRange {
         startAt
         endAt
@@ -578,6 +827,10 @@ export default createFragmentContainer(container, {
         title
       }
       projects {
+        id
+        title
+      }
+      steps {
         id
         title
       }

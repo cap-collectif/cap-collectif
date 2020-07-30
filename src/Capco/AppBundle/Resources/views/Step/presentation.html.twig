@@ -48,7 +48,7 @@
     {% endif %}
 
     {% if is_feature_enabled('calendar') %}
-        {{ react_render_component('PresentationStepEventsApp', { 'props': {'limit': 4, 'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'projectId': project.id|toGlobalId('Project')} }) }}
+        {{ react_render_component('PresentationStepEventsApp', { 'props': {'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'projectId': project.id|toGlobalId('Project')} }) }}
     {% endif %}
 
     {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}

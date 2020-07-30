@@ -212,6 +212,7 @@ mappings:
             endAt: { type: date }
             author: *Author
             isRegistrable: { type: boolean }
+            isPresential: { type: boolean }
             link: *text_analysis_highlighted
             enabled: { type: boolean }
             themes:

@@ -2234,6 +2234,13 @@
   resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-2.2.3.tgz#9e5ab8610b4b96c1be6f0f6119fc2fad96d3b297"
   integrity sha512-CeswyzLq2A3uu7dFptBTn1j815B/stndfHMr+ZPj0QxaN/Q9zLRTQxMYskRW07uPp+a7XobLFqEJHLrMu/tZEw==
 
+"@formatjs/intl-utils@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-3.6.0.tgz#25c11a099c01ac9b7b904dda84cb840417893fa3"
+  integrity sha512-KojfGYH3b0HbyN8H+HRHxEYOctC9tOne8jU1MNw7O+g8QyIPK9y0y1cyXlj6FoLsHRi26u9jR1CJg5XrRfArug==
+  dependencies:
+    emojis-list "^3.0.0"
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
@@ -15832,6 +15839,11 @@ react-is@^16.8.6:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
+
+react-jitsi@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-jitsi/-/react-jitsi-1.0.4.tgz#2aa4a0010a07818808eea357bb2ac66cfd38aa77"
+  integrity sha512-7Q4cmjxNNvoPOuTWT/AcDhHRr+K74BqYitiNcKo2D3nQH9ozDIec+yT7KiPlAPR/U2XW5tD/nc9L3uZMkZXTFA==
 
 react-leaflet-markercluster@^2.0.0-rc3:
   version "2.0.0-rc3"

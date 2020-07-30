@@ -2,7 +2,9 @@
 
 exports[`<EventPageHeader /> should render correctly 1`] = `
 <EventPageHeaderstyle__Container>
-  <div>
+  <div
+    className="event-header-info"
+  >
     <EventPageHeaderstyle__TitleContainer>
       <Icon
         color="#007bff"
@@ -19,6 +21,7 @@ exports[`<EventPageHeader /> should render correctly 1`] = `
         user={
           Object {
             "$fragmentRefs": null,
+            "id": "authorId",
             "url": "https://monurl.fr",
             "username": "Jean Necrideteste",
           }
@@ -26,11 +29,12 @@ exports[`<EventPageHeader /> should render correctly 1`] = `
       />
       <div>
         <EventPageHeaderstyle__UsernameContainer>
-          <span
+          <a
             className="username"
+            href="https://monurl.fr"
           >
-            author.username
-          </span>
+            Jean Necrideteste
+          </a>
         </EventPageHeaderstyle__UsernameContainer>
         <EventPageHeaderstyle__TagsList>
           <Tag
@@ -53,19 +57,43 @@ exports[`<EventPageHeader /> should render correctly 1`] = `
               }
             />
           </Tag>
-          <TagThemes
+          <Relay(TagThemes)
             size="16px"
             themes={
               Array [
                 Object {
-                  "title": "Big party",
+                  "$fragmentRefs": null,
+                  "__typename": "Theme",
                 },
                 Object {
-                  "title": "Private party",
+                  "$fragmentRefs": null,
+                  "__typename": "Theme",
                 },
               ]
             }
           />
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="micro"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="driven.by"
+              values={Object {}}
+            />
+             : 
+            Jean Necrideteste
+          </Tag>
           <Tag
             CustomImage={
               <IconRounded
@@ -124,7 +152,9 @@ exports[`<EventPageHeader /> should render correctly 1`] = `
 
 exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] = `
 <EventPageHeaderstyle__Container>
-  <div>
+  <div
+    className="event-header-info"
+  >
     <EventPageHeaderstyle__TitleContainer>
       <Icon
         color="#007bff"
@@ -141,6 +171,7 @@ exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] =
         user={
           Object {
             "$fragmentRefs": null,
+            "id": "authorId",
             "url": "https://monurl.fr",
             "username": "Jean Necrideteste",
           }
@@ -148,11 +179,12 @@ exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] =
       />
       <div>
         <EventPageHeaderstyle__UsernameContainer>
-          <span
+          <a
             className="username"
+            href="https://monurl.fr"
           >
-            author.username
-          </span>
+            Jean Necrideteste
+          </a>
         </EventPageHeaderstyle__UsernameContainer>
         <EventPageHeaderstyle__TagsList>
           <Tag
@@ -175,19 +207,43 @@ exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] =
               }
             />
           </Tag>
-          <TagThemes
+          <Relay(TagThemes)
             size="16px"
             themes={
               Array [
                 Object {
-                  "title": "Big party",
+                  "$fragmentRefs": null,
+                  "__typename": "Theme",
                 },
                 Object {
-                  "title": "Private party",
+                  "$fragmentRefs": null,
+                  "__typename": "Theme",
                 },
               ]
             }
           />
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="micro"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="driven.by"
+              values={Object {}}
+            />
+             : 
+            Jean Necrideteste
+          </Tag>
         </EventPageHeaderstyle__TagsList>
       </div>
     </EventPageHeaderstyle__InfoContainer>
@@ -229,7 +285,9 @@ exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] =
 
 exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
 <EventPageHeaderstyle__Container>
-  <div>
+  <div
+    className="event-header-info"
+  >
     <EventPageHeaderstyle__TitleContainer>
       <Icon
         color="#007bff"
@@ -246,6 +304,7 @@ exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
         user={
           Object {
             "$fragmentRefs": null,
+            "id": "authorId",
             "url": "https://monurl.fr",
             "username": "Jean Necrideteste",
           }
@@ -253,11 +312,12 @@ exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
       />
       <div>
         <EventPageHeaderstyle__UsernameContainer>
-          <span
+          <a
             className="username"
+            href="https://monurl.fr"
           >
-            author.username
-          </span>
+            Jean Necrideteste
+          </a>
         </EventPageHeaderstyle__UsernameContainer>
         <EventPageHeaderstyle__TagsList>
           <Tag
@@ -279,6 +339,28 @@ exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
                 }
               }
             />
+          </Tag>
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="micro"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="driven.by"
+              values={Object {}}
+            />
+             : 
+            Jean Necrideteste
           </Tag>
           <Tag
             CustomImage={
@@ -338,7 +420,9 @@ exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
 
 exports[`<EventPageHeader /> should render correctly when type online 1`] = `
 <EventPageHeaderstyle__Container>
-  <div>
+  <div
+    className="event-header-info"
+  >
     <EventPageHeaderstyle__TitleContainer>
       <Icon
         color="#007bff"
@@ -355,6 +439,7 @@ exports[`<EventPageHeader /> should render correctly when type online 1`] = `
         user={
           Object {
             "$fragmentRefs": null,
+            "id": "authorId",
             "url": "https://monurl.fr",
             "username": "Jean Necrideteste",
           }
@@ -362,11 +447,12 @@ exports[`<EventPageHeader /> should render correctly when type online 1`] = `
       />
       <div>
         <EventPageHeaderstyle__UsernameContainer>
-          <span
+          <a
             className="username"
+            href="https://monurl.fr"
           >
-            author.username
-          </span>
+            Jean Necrideteste
+          </a>
         </EventPageHeaderstyle__UsernameContainer>
         <EventPageHeaderstyle__TagsList>
           <Tag
@@ -404,21 +490,45 @@ exports[`<EventPageHeader /> should render correctly when type online 1`] = `
             }
             size="16px"
           >
-            <Component />
+            23:53:00
           </Tag>
-          <TagThemes
+          <Relay(TagThemes)
             size="16px"
             themes={
               Array [
                 Object {
-                  "title": "Big party",
+                  "$fragmentRefs": null,
+                  "__typename": "Theme",
                 },
                 Object {
-                  "title": "Private party",
+                  "$fragmentRefs": null,
+                  "__typename": "Theme",
                 },
               ]
             }
           />
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="micro"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="driven.by"
+              values={Object {}}
+            />
+             : 
+            Jean Necrideteste
+          </Tag>
           <Tag
             CustomImage={
               <IconRounded
@@ -477,7 +587,9 @@ exports[`<EventPageHeader /> should render correctly when type online 1`] = `
 
 exports[`<EventPageHeader /> should render correctly when viewer is author 1`] = `
 <EventPageHeaderstyle__Container>
-  <div>
+  <div
+    className="event-header-info"
+  >
     <EventPageHeaderstyle__TitleContainer>
       <Icon
         color="#007bff"
@@ -494,6 +606,7 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
         user={
           Object {
             "$fragmentRefs": null,
+            "id": "authorId",
             "url": "https://monurl.fr",
             "username": "Jean Necrideteste",
           }
@@ -507,6 +620,51 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
           >
             Jean Necrideteste
           </a>
+          <Relay(EventLabelStatus)
+            event={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "animator": null,
+                "author": Object {
+                  "$fragmentRefs": null,
+                  "id": "authorId",
+                  "url": "https://monurl.fr",
+                  "username": "Jean Necrideteste",
+                },
+                "comments": Object {
+                  "totalCount": 12,
+                },
+                "googleMapsAddress": Object {
+                  "formatted": "12 rue des pissenlits - 75002 Paris, France",
+                },
+                "id": "123454321",
+                "isPresential": true,
+                "participants": Object {
+                  "totalCount": 1,
+                },
+                "review": Object {
+                  "status": "APPROVED",
+                },
+                "themes": Array [
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "Theme",
+                  },
+                  Object {
+                    "$fragmentRefs": null,
+                    "__typename": "Theme",
+                  },
+                ],
+                "timeRange": Object {
+                  "endAt": "2020-07-01T13:55:28.082Z",
+                  "startAt": "2020-07-01T13:48:28.082Z",
+                },
+                "title": "Ceci est un titre",
+                "viewerDidAuthor": true,
+              }
+            }
+          />
         </EventPageHeaderstyle__UsernameContainer>
         <EventPageHeaderstyle__TagsList>
           <Tag
@@ -528,6 +686,43 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
                 }
               }
             />
+          </Tag>
+          <Relay(TagThemes)
+            size="16px"
+            themes={
+              Array [
+                Object {
+                  "$fragmentRefs": null,
+                  "__typename": "Theme",
+                },
+                Object {
+                  "$fragmentRefs": null,
+                  "__typename": "Theme",
+                },
+              ]
+            }
+          />
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="micro"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            <FormattedMessage
+              id="driven.by"
+              values={Object {}}
+            />
+             : 
+            Jean Necrideteste
           </Tag>
           <Tag
             CustomImage={
@@ -581,6 +776,11 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
         />
       </div>
     </EventPageHeaderstyle__InfoLineContainer>
+    <EventPageHeaderstyle__ActionContainer>
+      <EventDeleteButton
+        eventId="123454321"
+      />
+    </EventPageHeaderstyle__ActionContainer>
   </div>
 </EventPageHeaderstyle__Container>
 `;

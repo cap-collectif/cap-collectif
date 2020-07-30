@@ -5,7 +5,11 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\EventReview;
+use Capco\AppBundle\GraphQL\Mutation\AddEventMutation;
+use Capco\AppBundle\Security\EventVoter;
+use DateTime;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -29,6 +33,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactory $formFactory,
         LoggerInterface $logger,
+        AddEventMutation $addEventMutation,
         Indexer $indexer,
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker
@@ -38,6 +43,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
             $em,
             $formFactory,
             $logger,
+            $addEventMutation,
             $indexer,
             $publisher,
             $authorizationChecker
@@ -67,34 +73,30 @@ class ChangeEventMutationSpec extends ObjectBehavior
             'translations' => [
                 [
                     'locale' => 'fr-FR',
-                    'body' => 'My body'
-                ]
-            ]
+                    'body' => 'My body',
+                ],
+            ],
         ];
 
         $viewer->isAdmin()->willReturn(true);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
-        $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
+        $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);
         $form
             ->submit(
                 [
                     'customCode' => 'abc',
-                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']]
+                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']],
                 ],
                 false
             )
             ->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
-        $authorizationChecker
-            ->isGranted('edit', \Prophecy\Argument::type(Event::class))
-            ->willReturn(true);
-        $publisher
-            ->publish('event.update', \Prophecy\Argument::type(Message::class))
-            ->shouldNotBeCalled();
+        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
+        $publisher->publish('event.update', Argument::type(Message::class))->shouldNotBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -112,46 +114,55 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve('base64id', $viewer)->willReturn(null);
         $this->__invoke($arguments, $viewer)->shouldBe([
             'event' => null,
-            'userErrors' => [['message' => 'Could not find your event.']]
+            'userErrors' => [['message' => 'Could not find your event.']],
         ]);
     }
 
     public function it_throws_error_on_invalid_form(
         GlobalIdResolver $globalIdResolver,
-        Arg $arguments,
+        Arg $input,
         FormFactory $formFactory,
         Form $form,
         FormError $error,
         User $viewer,
         Event $event,
         EventReview $eventReview,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        AddEventMutation $addEventMutation
     ) {
         $values = ['id' => 'base64id', 'body' => '', 'translations' => []];
 
-        $viewer->isAdmin()->willReturn(false);
-        $arguments->getArrayCopy()->willReturn($values);
-        $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
+        $viewer
+            ->isAdmin()
+            ->shouldBeCalled()
+            ->willReturn(false);
+        $input
+            ->getArrayCopy()
+            ->shouldBeCalled()
+            ->willReturn($values);
+        $globalIdResolver
+            ->resolve('base64id', $viewer)
+            ->shouldBeCalled()
+            ->willReturn($event);
+        $authorizationChecker
+            ->isGranted(EventVoter::EDIT, $event)
+            ->shouldBeCalled()
+            ->willReturn(true);
         $formFactory->create(EventType::class, $event)->willReturn($form);
-
         $eventReview->getStatus()->willReturn(EventReviewStatusType::AWAITING);
+        $event->getId()->willReturn('id');
         $event->getAuthor()->willReturn($viewer);
         $event->getReview()->willReturn($eventReview);
         $event->getStatus()->willReturn(EventReviewStatusType::AWAITING);
-
         $form->submit(['body' => '', 'translations' => []], false)->willReturn(null);
         $error->getMessage()->willReturn('Invalid data.');
         $form->getErrors()->willReturn([$error]);
         $form->all()->willReturn([]);
         $form->isValid()->willReturn(false);
-        $authorizationChecker
-            ->isGranted('edit', \Prophecy\Argument::type(Event::class))
-            ->willReturn(true);
+        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
 
-        $this->shouldThrow(GraphQLException::fromString('Invalid data.'))->during('__invoke', [
-            $arguments,
-            $viewer
-        ]);
+        $this->__invoke($input, $viewer);
+        $this->shouldThrow(GraphQLException::fromString('Invalid data.'));
     }
 
     public function it_try_to_persists_new_event_with_customCode_as_user(
@@ -166,7 +177,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $arguments->getArrayCopy()->willReturn($values);
         $this->__invoke($arguments, $viewer)->shouldBe([
             'event' => null,
-            'userErrors' => [['message' => 'You are not authorized to add customCode field.']]
+            'userErrors' => [['message' => 'You are not authorized to add customCode field.']],
         ]);
     }
 
@@ -190,14 +201,12 @@ class ChangeEventMutationSpec extends ObjectBehavior
 
         $event->getAuthor()->willReturn($author);
 
-        $authorizationChecker
-            ->isGranted('edit', \Prophecy\Argument::type(Event::class))
-            ->willReturn(false);
+        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(false);
 
         $arguments->getArrayCopy()->willReturn($values);
         $this->__invoke($arguments, $viewer)->shouldBe([
             'event' => null,
-            'userErrors' => [['message' => 'Access denied']]
+            'userErrors' => [['message' => 'Access denied']],
         ]);
     }
 
@@ -220,9 +229,9 @@ class ChangeEventMutationSpec extends ObjectBehavior
             'translations' => [
                 [
                     'locale' => 'fr-FR',
-                    'body' => 'New body'
-                ]
-            ]
+                    'body' => 'New body',
+                ],
+            ],
         ];
 
         $viewer->isAdmin()->willReturn(false);
@@ -239,7 +248,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
 
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
-        $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
+        $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
 
         $eventReview->setStatus(EventReviewStatusType::AWAITING)->shouldBeCalled();
 
@@ -253,12 +262,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
 
-        $authorizationChecker
-            ->isGranted('edit', \Prophecy\Argument::type(Event::class))
-            ->willReturn(true);
-        $publisher
-            ->publish('event.update', \Prophecy\Argument::type(Message::class))
-            ->shouldBeCalled();
+        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
+        $publisher->publish('event.update', Argument::type(Message::class))->shouldBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);

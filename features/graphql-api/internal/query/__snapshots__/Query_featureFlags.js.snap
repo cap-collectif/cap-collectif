@@ -219,6 +219,10 @@ Object {
       "enabled": false,
       "type": "report_browers_errors_to_sentry",
     },
+    Object {
+      "enabled": false,
+      "type": "unstable__remote_events",
+    },
   ],
 }
 `;

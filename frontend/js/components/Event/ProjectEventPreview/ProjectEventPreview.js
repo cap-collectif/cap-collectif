@@ -17,46 +17,54 @@ import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import Label from '~ui/Labels/Label';
 import InlineList from '~ui/List/InlineList';
-import { TYPE_EVENT } from '~/components/Event/EventPreview/EventPreview';
 import IconRounded from '~ui/Icons/IconRounded';
 import Tag from '~ui/Labels/Tag';
+import {
+  getEndDateFromStartAt,
+  isEventLive,
+} from '~/components/Event/EventPageContent/EventHelperFunctions';
 
-type Props = {
-  event: ProjectEventPreview_event,
-  className?: string,
-  live?: boolean,
-  replay?: boolean,
-  speaker?: string,
-  registrationRequired?: boolean,
-  type?: $Values<typeof TYPE_EVENT>,
-};
+type Props = {|
+  +event: ProjectEventPreview_event,
+  +className?: string,
+|};
 
-export const ProjectEventPreview = ({
-  event,
-  live,
-  replay,
-  speaker,
-  type = TYPE_EVENT.PHYSICAL,
-}: Props) => {
+export const ProjectEventPreview = ({ event }: Props) => {
   const {
     title,
     googleMapsAddress,
     timeRange,
-    url,
+    isPresential,
+    animator,
+    author,
+    isRecordingPublished,
     guestListEnabled,
+    url,
   }: ProjectEventPreview_event = event;
-  const hasTag = live || replay || guestListEnabled;
+  const startAt = timeRange?.startAt;
+  const endAt = timeRange?.endAt;
 
-  // Flow doesn't understand that startAt for moment is not null here...
-  // $FlowFixMe
-  const isPast = timeRange?.startAt ? moment(new Date()).isAfter(timeRange.startAt) : null;
+  const isLive = isEventLive(startAt, endAt);
+  const eventAnimator = animator ?? author;
+
+  const isPast = startAt ? moment(new Date()).isAfter(startAt) : false;
+  const isStarted = startAt != null ? new Date(startAt).getTime() <= new Date().getTime() : false;
+  const isEnded =
+    endAt != null
+      ? new Date(endAt).getTime() <= new Date().getTime()
+      : startAt != null
+      ? getEndDateFromStartAt(startAt).getTime() <= new Date().getTime()
+      : false;
+  const isEventDone = isStarted && isEnded;
+  const hasTag =
+    (!isPresential && isLive) || (isEventDone && isRecordingPublished) || guestListEnabled;
 
   return (
     <EventPreviewContainer isProject>
       <Card.Body>
         <TitleContainer>
           <Icon
-            name={type === TYPE_EVENT.ONLINE ? ICON_NAME.eventOnline : ICON_NAME.eventPhysical}
+            name={isPresential ? ICON_NAME.eventPhysical : ICON_NAME.eventOnline}
             size={17}
             color={colors.lightBlue}
           />
@@ -68,9 +76,9 @@ export const ProjectEventPreview = ({
         </TitleContainer>
 
         <HeadContent>
-          {timeRange?.startAt && <Card.Date date={timeRange.startAt} />}
+          {startAt && <Card.Date date={startAt} />}
 
-          {isPast && timeRange?.startAt && (
+          {isPast && (
             <div className="past-container">
               <span className="separator">-</span>
               <FormattedMessage id="passed-singular" />
@@ -79,7 +87,7 @@ export const ProjectEventPreview = ({
 
           {hasTag && (
             <InlineList>
-              {live && (
+              {!isPresential && isLive && (
                 <li>
                   <Label color={colors.dangerColor} fontSize={10}>
                     <FormattedMessage id="en-direct" />
@@ -87,7 +95,7 @@ export const ProjectEventPreview = ({
                 </li>
               )}
 
-              {replay && (
+              {isEventDone && isRecordingPublished && (
                 <li>
                   <Label color={colors.lightBlue} fontSize={10}>
                     <FormattedMessage id="replay" />
@@ -108,19 +116,20 @@ export const ProjectEventPreview = ({
 
         <Content>
           <TagsList vertical>
-            {googleMapsAddress && type === TYPE_EVENT.PHYSICAL && (
-              <TagCity googleMapsAddress={googleMapsAddress} size="16px" />
+            {googleMapsAddress && isPresential && (
+              <TagCity address={googleMapsAddress} size="16px" />
             )}
 
-            {speaker && (
+            {eventAnimator && (
               <Tag size="16px">
                 <IconRounded size={18} color={colors.darkGray}>
                   <Icon name={ICON_NAME.micro} color="#fff" size={10} />
                 </IconRounded>
+                {eventAnimator?.username}
               </Tag>
             )}
 
-            {type === TYPE_EVENT.ONLINE && (
+            {!isPresential && (
               <Tag size="16px">
                 <IconRounded size={18} color={colors.darkGray}>
                   <Icon name={ICON_NAME.camera} color="#fff" size={10} />
@@ -138,14 +147,25 @@ export const ProjectEventPreview = ({
 export default createFragmentContainer(ProjectEventPreview, {
   event: graphql`
     fragment ProjectEventPreview_event on Event {
+      id
       title
       url
+      isPresential
+      isRecordingPublished
+      animator {
+        username
+      }
+      author {
+        username
+      }
       guestListEnabled
       timeRange {
         startAt
+        endAt
       }
       googleMapsAddress {
-        json
+        __typename
+        ...TagCity_address
       }
     }
   `,

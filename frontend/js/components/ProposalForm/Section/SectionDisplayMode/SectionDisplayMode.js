@@ -31,6 +31,7 @@ import PopoverToggleView from './PopoverToggleView/PopoverToggleView';
 import environment from '~/createRelayEnvironment';
 import { getCityFromGoogleAddress } from '~/utils/googleMapAddress';
 import type { SectionDisplayMode_proposalForm } from '~relay/SectionDisplayMode_proposalForm.graphql';
+import type { SectionDisplayMode_GeoCodeQueryQueryResponse } from '~relay/SectionDisplayMode_GeoCodeQueryQuery.graphql';
 
 const publicToken =
   '***REMOVED***';
@@ -103,13 +104,23 @@ const USER_LOCATION_QUERY = graphql`
   }
 `;
 
-export const loadLocationUser = (latitude: number, longitude: number): Promise<void> =>
+export const loadLocationUser = (
+  latitude: number,
+  longitude: number,
+): Promise<?{|
+  +formatted: ?string,
+  +json: string,
+|}> =>
   new Promise(async resolve => {
-    const response = await fetchQuery(environment, USER_LOCATION_QUERY, {
-      latitude,
-      longitude,
-    });
-    resolve(response.results);
+    const response: ?SectionDisplayMode_GeoCodeQueryQueryResponse = await fetchQuery(
+      environment,
+      USER_LOCATION_QUERY,
+      {
+        latitude,
+        longitude,
+      },
+    );
+    resolve(response ? response.results : null);
   });
 
 export const SectionDisplayMode = ({
@@ -136,9 +147,11 @@ export const SectionDisplayMode = ({
 
   const getLocationUser = async (lat: number, lng: number) => {
     const dataLocationUser = await loadLocationUser(lat, lng);
-    const cityUser = getCityFromGoogleAddress(dataLocationUser);
-    setCity(cityUser);
-    setAddress(dataLocationUser?.formatted);
+    if (dataLocationUser) {
+      const cityUser = getCityFromGoogleAddress(dataLocationUser.json);
+      setCity(cityUser);
+      setAddress(dataLocationUser?.formatted);
+    }
   };
 
   const setPosition = React.useCallback(

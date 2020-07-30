@@ -2,10 +2,14 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import TagThemes from './TagThemes';
+import { TagThemes } from './TagThemes';
+import { $refType } from '~/mocks';
 
 const theme = {
-  basic: [{ title: 'Justice' }, { title: 'Éducation' }],
+  basic: [
+    { $refType, title: 'Justice' },
+    { $refType, title: 'Éducation' },
+  ],
 };
 
 describe('<TagThemes />', () => {

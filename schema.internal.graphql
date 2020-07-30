@@ -224,6 +224,18 @@ input AddEventInput {
 
   """Admin authorize data transfer"""
   adminAuthorizeDataTransfer: Boolean
+
+  """An array of Node IDs of steps associated to this event."""
+  steps: [ID!]
+
+  """Is the event presential or remotely accessible"""
+  isPresential: Boolean
+
+  """Should the event be recorded or not"""
+  isRecordingPublished: Boolean
+
+  """The Node ID of the animator for this event if there is one."""
+  animator: ID
 }
 
 type AddEventPayload {
@@ -1003,6 +1015,18 @@ input ChangeEventInput {
   """Admin authorize data transfer"""
   adminAuthorizeDataTransfer: Boolean
 
+  """An array of Node IDs of steps associated to this event."""
+  steps: [ID!]
+
+  """Is the event presential or remotely accessible"""
+  isPresential: Boolean
+
+  """Should the event be recorded or not"""
+  isRecordingPublished: Boolean
+
+  """The Node ID of the animator for this event if there is one."""
+  animator: ID
+
   """The ID of the Event to modify."""
   id: ID!
 }
@@ -1380,6 +1404,26 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
 
   """A list of proposals associated to the object."""
   proposals(
@@ -2104,6 +2148,26 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -3077,6 +3141,21 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """The delete date."""
   deletedAt: DateTime
 
+  """The jitsi admin token if there is one"""
+  jitsiToken: String
+
+  """Whether or not this event is presential."""
+  isPresential: Boolean!
+
+  """Whether or not this event has a public recording URL."""
+  isRecordingPublished: Boolean!
+
+  """The jitsi room name available on remote events only."""
+  roomName: String
+
+  """The URL used to stream this event recording."""
+  recordingUrl: URI
+
   """The slug of event"""
   slug: String!
   metaDescription: String
@@ -3090,8 +3169,17 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """Show if user is already participating at event"""
   isViewerParticipatingAtEvent: Boolean!
 
-  """Show if registration is enabled"""
+  """The jitsi room animator available on remote events only."""
+  animator: User
+
+  """The steps corresponding to this event."""
+  steps: [Step!]!
+
+  """Wheter or not registration is enabled on this event."""
   isRegistrationPossible: Boolean
+
+  """Wheter or not the viewer can join the room before it starts."""
+  viewerIsRoomAnimator: Boolean!
 }
 
 """A connection to a list of items."""
@@ -3295,6 +3383,7 @@ enum FeatureFlagType {
   phone_confirmation
   reporting
   display_map
+  unstable__remote_events
 }
 
 """Require a firstname"""
@@ -3459,6 +3548,21 @@ enum GenderValue {
   MALE
   FEMALE
   OTHER
+}
+
+input GenerateJitsiRoomMutationInput {
+  """Event id."""
+  eventId: ID
+  clientMutationId: String
+}
+
+type GenerateJitsiRoomMutationPayload {
+  """The jitsi room name."""
+  roomName: String!
+
+  """The jitsi token"""
+  jitsiToken: String!
+  clientMutationId: String
 }
 
 """A string containing GeoJSON code."""
@@ -4439,6 +4543,7 @@ type Mutation {
   subscribeToEventAsNonRegistered(input: SubscribeToEventAsNonRegisteredInput!): SubscribeToEventAsNonRegisteredPayload
   subscribeToEventAsRegistered(input: SubscribeToEventAsRegisteredInput!): SubscribeToEventAsRegisteredPayload
   unsubscribeToEventAsRegistered(input: UnsubscribeToEventAsRegisteredInput!): UnsubscribeToEventAsRegisteredPayload
+  generateJitsiRoomMutation(input: GenerateJitsiRoomMutationInput!): GenerateJitsiRoomMutationPayload
   updateProfileAccountEmail(input: UpdateProfileAccountEmailInput!): UpdateProfileAccountEmailPayload
   updateProfileAccountLocale(input: UpdateProfileAccountLocaleInput!): UpdateProfileAccountLocalePayload
 }
@@ -4976,6 +5081,26 @@ type OtherStep implements Step {
 
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
 }
 
 """A page."""
@@ -5182,6 +5307,26 @@ type PresentationStep implements Step {
 
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
 }
 
 """A vote that can be anonymous."""
@@ -6648,6 +6793,26 @@ interface ProposalStep {
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
 
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -7042,6 +7207,11 @@ type Query {
     ID of a Project to filter by. If non-null, only events belonging to the project will be returned.
     """
     project: ID
+
+    """
+    If true, return the presential events, if false return the remote events.
+    """
+    isPresential: Boolean
 
     """If provided, searches events by title and description."""
     search: String
@@ -7713,6 +7883,26 @@ type QuestionnaireStep implements Node & Step {
 
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
   footer: String
 
   """A list of contributor associated with the step."""
@@ -7793,6 +7983,26 @@ type RankingStep implements Node & Step {
 
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
 }
@@ -8632,6 +8842,26 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
 
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -9340,6 +9570,26 @@ interface Step {
 
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
 }
 
 """Ways in which lists of steps can be ordered upon return."""
@@ -9491,6 +9741,26 @@ type SynthesisStep implements Step & Node {
 
   """The step is a questionnaire step or not"""
   isQuestionnaireStep: Boolean
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
 
   """Legacy url to edit a synthesis."""
   editSynthesisUrl: URI

@@ -13,7 +13,6 @@ import {
   ActionContainer,
   UsernameContainer,
 } from './EventPageHeader.style';
-import { TYPE_EVENT } from '~/components/Event/EventPreview/EventPreview';
 import TagDate from '~/components/Tag/TagDate/TagDate';
 import UserAvatar from '~/components/User/UserAvatar';
 import type { State } from '~/types';
@@ -29,43 +28,43 @@ import type { EventPageHeader_query } from '~relay/EventPageHeader_query.graphql
 import EventLabelStatus from '~/components/Event/EventLabelStatus';
 import config from '~/config';
 
-type Props = {
-  event: EventPageHeader_event,
-  query: EventPageHeader_query,
-  type?: $Values<typeof TYPE_EVENT>,
-  hasProfileEnabled?: boolean,
-  hasThemeEnabled?: boolean,
-  hasProposeEventEnabled?: boolean,
-  speaker?: string,
-};
+type Props = {|
+  +event: EventPageHeader_event,
+  +query: EventPageHeader_query,
+  +hasProfileEnabled: boolean,
+  +hasThemeEnabled: boolean,
+  +hasProposeEventEnabled: boolean,
+|};
 
 export const EventPageHeader = ({
-  type = TYPE_EVENT.PHYSICAL,
   event,
   query,
   hasProfileEnabled,
   hasThemeEnabled,
   hasProposeEventEnabled,
-  speaker,
 }: Props) => {
   const {
+    isPresential,
+    animator,
     title,
     googleMapsAddress,
     timeRange,
-    author,
     comments,
     participants,
     themes,
     viewerDidAuthor,
+    author,
   } = event;
+
+  const speaker = animator ?? author;
 
   return (
     <Container>
-      <div>
+      <div className="event-header-info">
         <TitleContainer>
           {!config.isMobile && (
             <Icon
-              name={type === TYPE_EVENT.ONLINE ? ICON_NAME.eventOnline : ICON_NAME.eventPhysical}
+              name={!isPresential ? ICON_NAME.eventOnline : ICON_NAME.eventPhysical}
               size={30}
               color={colors.lightBlue}
             />
@@ -75,7 +74,6 @@ export const EventPageHeader = ({
 
         <InfoContainer>
           <UserAvatar user={author} size={60} />
-
           <div>
             <UsernameContainer>
               {hasProfileEnabled && author ? (
@@ -83,7 +81,7 @@ export const EventPageHeader = ({
                   {author.username}
                 </a>
               ) : (
-                <span className="username">author.username</span>
+                <span className="username">{author && author.username}</span>
               )}
 
               {viewerDidAuthor && hasProposeEventEnabled && <EventLabelStatus event={event} />}
@@ -106,7 +104,7 @@ export const EventPageHeader = ({
                 </Tag>
               )}
 
-              {timeRange?.startAt && timeRange?.endAt && type === TYPE_EVENT.ONLINE && (
+              {timeRange?.startAt && timeRange?.endAt && !isPresential && (
                 <Tag
                   size="16px"
                   CustomImage={
@@ -114,7 +112,13 @@ export const EventPageHeader = ({
                       <Icon name={ICON_NAME.calendar} color="#fff" size={10} />
                     </IconRounded>
                   }>
-                  {moment.duration(moment(timeRange.startAt).diff(timeRange.endAt))}
+                  {moment
+                    .utc(
+                      moment
+                        .duration(moment(timeRange.startAt).diff(timeRange.endAt))
+                        .as('milliseconds'),
+                    )
+                    .format('HH:mm:ss')}
                 </Tag>
               )}
 
@@ -132,7 +136,7 @@ export const EventPageHeader = ({
                   }>
                   <FormattedMessage id="driven.by" />
                   {' : '}
-                  {speaker}
+                  {speaker.username}
                 </Tag>
               )}
 
@@ -176,9 +180,9 @@ export const EventPageHeader = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  hasProfileEnabled: state.default.features.profiles,
-  hasThemeEnabled: state.default.features.themes,
-  hasProposeEventEnabled: state.default.features.allow_users_to_propose_events,
+  hasProfileEnabled: state.default.features.profiles || false,
+  hasThemeEnabled: state.default.features.themes || false,
+  hasProposeEventEnabled: state.default.features.allow_users_to_propose_events || false,
 });
 
 const EventPageHeaderConnected = connect(mapStateToProps)(EventPageHeader);
@@ -195,6 +199,11 @@ export default createFragmentContainer(EventPageHeaderConnected, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       title
+      isPresential
+      animator {
+        id
+        username
+      }
       viewerDidAuthor @include(if: $isAuthenticated)
       timeRange {
         startAt
@@ -204,9 +213,11 @@ export default createFragmentContainer(EventPageHeaderConnected, {
         formatted
       }
       themes {
-        title
+        __typename
+        ...TagThemes_themes
       }
       author {
+        id
         username
         url
         ...UserAvatar_user

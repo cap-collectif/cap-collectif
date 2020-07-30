@@ -62,6 +62,7 @@ class Manager
     public const report_browers_errors_to_sentry = 'report_browers_errors_to_sentry';
     public const phone_confirmation = 'phone_confirmation';
     public const reporting = 'reporting';
+    public const unstable__remote_events = 'unstable__remote_events';
 
     public static $toggles = [
         self::graphql_query_analytics,
@@ -118,6 +119,7 @@ class Manager
         self::unstable__analysis,
         self::http_redirects,
         self::report_browers_errors_to_sentry,
+        self::unstable__remote_events,
     ];
     protected $toggleManager;
 
