@@ -32,6 +32,7 @@ import AlertBoxApp from '~/startup/AlertBoxApp';
 import ProposalCreateFusionButtonApp from '~/startup/ProposalCreateFusionButtonApp';
 import EventFormPageApp from './startup/EventFormPageApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
+import UserInviteAdminPageApp from '~/startup/UserInviteAdminPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -66,4 +67,5 @@ ReactOnRails.register({
   FontAdminPageApp,
   RedirectIoAdminPageApp,
   LanguageButtonApp,
+  UserInviteAdminPageApp,
 });

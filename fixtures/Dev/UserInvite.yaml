@@ -1,0 +1,22 @@
+Capco\AppBundle\Entity\UserInvite:
+    remInvitation:
+        id: 'remInvitation'
+        createdAt: <(new \DateTime('2020-03-01 00:00:51'))>
+        email: 'rem@chan.com'
+        token: 'oniiiichaaan'
+        expiresAt: <identity((new \DateTime('2030-01-01 00:00:00')))>
+        isAdmin: true
+    ramInvitation:
+        id: 'ramInvitation'
+        createdAt: <(new \DateTime('2020-03-02 00:00:51'))>
+        email: 'ram@chan.com'
+        token: 'daiski'
+        expiresAt: <identity((new \DateTime('2030-01-01 00:00:00')))>
+        isAdmin: false
+    expiredInvitation:
+        id: 'expiredInvitation'
+        createdAt: <(new \DateTime('2020-03-02 00:00:51'))>
+        email: 'sad@expired.com'
+        token: 'sorryiamtheexpiredtoken'
+        expiresAt: <(new \DateTime('1999-03-02 00:00:51'))>
+        isAdmin: false

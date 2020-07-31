@@ -92,6 +92,7 @@ export const features: FeatureToggles = {
   unstable__multilangue: false,
   display_pictures_in_event_list: false,
   unstable__analysis: false,
+  user_invitations: false,
 };
 
 export const initialState: State = {

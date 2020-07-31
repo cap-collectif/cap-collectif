@@ -1,151 +1,157 @@
 /:
-  exchanges:
-    capco_direct_exchange:
-      type: direct
-      durable: true
-      with_unroutable: true
-  queues:
-    elasticsearch_indexation:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: elasticsearch_indexation
-    opinion_create:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: opinion_create
-    opinion_update:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: opinion_update
-    opinion_delete:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: opinion_delete
-    opinion_trash:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: opinion_trash
-    argument_create:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: argument_create
-    argument_update:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: argument_update
-    argument_delete:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: argument_delete
-    argument_trash:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: argument_trash
-    proposal_create:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: proposal_create
-    proposal_update:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: proposal_update
-    proposal_update_status:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: proposal_update_status
-    proposal_delete:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: proposal_delete
-    comment_create:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: comment_create
-    comment_update:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: comment_update
-    comment_delete:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: comment_delete
-    user_archive_request:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: user_archive_request
-    questionnaire_reply:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: questionnaire_reply
-    user_password:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: user_password
-    user_email:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: user_email
-    event_create:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: event_create
-    event_update:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: event_update
-    event_delete:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: event_delete
-    event_review:
-      durable: true
-      retries: [25, 125, 625]
-      bindings:
-        - exchange: capco_direct_exchange
-          routing_key: event_review
+    exchanges:
+        capco_direct_exchange:
+            type: direct
+            durable: true
+            with_unroutable: true
+    queues:
+        elasticsearch_indexation:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: elasticsearch_indexation
+        opinion_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: opinion_create
+        opinion_update:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: opinion_update
+        opinion_delete:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: opinion_delete
+        opinion_trash:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: opinion_trash
+        argument_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: argument_create
+        argument_update:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: argument_update
+        argument_delete:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: argument_delete
+        argument_trash:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: argument_trash
+        proposal_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_create
+        proposal_update:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_update
+        proposal_update_status:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_update_status
+        proposal_delete:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_delete
+        comment_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: comment_create
+        comment_update:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: comment_update
+        comment_delete:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: comment_delete
+        user_archive_request:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: user_archive_request
+        questionnaire_reply:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: questionnaire_reply
+        user_password:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: user_password
+        user_email:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: user_email
+        event_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: event_create
+        event_update:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: event_update
+        event_delete:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: event_delete
+        event_review:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: event_review
+        user_invite_invitation:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: user_invite_invitation

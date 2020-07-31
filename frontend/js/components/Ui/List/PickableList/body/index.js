@@ -6,7 +6,7 @@ import Row from '~ui/List/PickableList/row';
 import { usePickableList } from '~ui/List/PickableList';
 
 type Props = {
-  children?: null | React.Node | React.ChildrenArray<React.Element<typeof Row>>,
+  children?: null | React.ChildrenArray<React.Element<typeof Row | any>>,
 };
 
 const PickableListBody = ({ children }: Props) => {

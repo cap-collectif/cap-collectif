@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserSearch extends Search
 {
-    public const SEARCH_FIELDS = ['username', 'username.std'];
+    public const SEARCH_FIELDS = ['username', 'username.std', 'email'];
 
     private $userRepo;
     private $eventSearch;

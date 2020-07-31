@@ -3,6 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
+import PickableListPlaceholder from '~ui/List/PickableList/placeholder';
 
 const items = [
   {
@@ -183,4 +184,7 @@ storiesOf('Core|List/PickableList', module)
     {
       decorators: [storyFn => <PickableList.Provider>{storyFn()}</PickableList.Provider>],
     },
-  );
+  )
+  .add('placeholder', () => {
+    return <PickableListPlaceholder />;
+  });

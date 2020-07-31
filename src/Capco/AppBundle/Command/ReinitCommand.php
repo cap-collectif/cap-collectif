@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Entity\UserInvite;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Status;
@@ -204,7 +205,7 @@ class ReinitCommand extends Command
                 $listener
             );
             $output->writeln('Disabled <info>' . \get_class($listener) . '</info>.');
-    
+
         }
 
         $output->writeln('Disable dataloader\'s cache…');
@@ -382,6 +383,7 @@ class ReinitCommand extends Command
             ArgumentVote::class,
             AppendixType::class,
             Post::class,
+            UserInvite::class
         ];
 
         $classesProd = [Context::class];

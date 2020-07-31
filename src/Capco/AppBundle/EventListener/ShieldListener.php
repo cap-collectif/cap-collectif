@@ -45,6 +45,9 @@ class ShieldListener
         // Registration
         'capco_app_api_users_postuser',
 
+        // Invitation
+        'capco_app_user_invitation',
+
         // Password reset
         'fos_user_resetting_request',
         'fos_user_resetting_reset',

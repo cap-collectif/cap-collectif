@@ -2,15 +2,18 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\Mutation\Locale\SetUserDefaultLocaleMutation;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Notifier\UserNotifier;
+use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Search\UserSearch;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -27,7 +30,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UsersController extends AbstractFOSRestController
 {
@@ -117,15 +122,43 @@ class UsersController extends AbstractFOSRestController
      *  }
      * )
      *
-     * @Post("/users", defaults={"_feature_flags" = "registration"})
+     * @Post("/users")
      * @View(statusCode=201, serializerGroups={"UserId"})
      */
-    public function postUserAction(Request $request)
-    {
+    public function postUserAction(
+        Request $request,
+        UserInviteRepository $userInviteRepository,
+        EntityManagerInterface $em,
+        TranslatorInterface $translator
+    ) {
         $submittedData = $request->request->all();
-        unset($submittedData['postRegistrationScript']);
+        $invitationToken = $submittedData['invitationToken'] ?? '';
+        unset($submittedData['postRegistrationScript'], $submittedData['invitationToken']);
+
+        $invitation = $userInviteRepository->findOneByTokenNotExpiredAndEmail(
+            $invitationToken,
+            $submittedData['email']
+        );
+
+        if (!$invitation && !$this->toggleManager->isActive('registration')) {
+            // If the request is not made from an invitation and the feature toggle is not active
+            // e.g traditional registration flow
+            $message = sprintf(
+                '%s (%s)',
+                $translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle'),
+                'registration'
+            );
+            $this->logger->warning($message);
+
+            throw new NotFoundHttpException($message);
+        }
+
         /** @var User $user */
         $user = $this->userManager->createUser();
+
+        if ($invitation && $invitation->isAdmin()) {
+            $user->addRole(UserRole::ROLE_ADMIN);
+        }
 
         $creatingAnAdmin = $this->getUser() && $this->getUser()->isAdmin();
 
@@ -151,13 +184,20 @@ class UsersController extends AbstractFOSRestController
         // This allow the user to login
         $user->setEnabled(true);
 
-        // We generate a confirmation token to validate email
-        $token = $this->tokenGenerator->generateToken();
-        $user->setConfirmationToken($token);
-        if ($creatingAnAdmin) {
-            $this->userNotifier->adminConfirmation($user);
+        if ($invitation) {
+            // If the user has been invited by an admin, we auto confirm the user
+            $user->setConfirmationToken(null)->setConfirmedAccountAt(new \DateTime());
+
+            $em->remove($invitation);
         } else {
-            $this->notifier->sendConfirmationEmailMessage($user);
+            // We generate a confirmation token to validate email
+            $token = $this->tokenGenerator->generateToken();
+            $user->setConfirmationToken($token);
+            if ($creatingAnAdmin) {
+                $this->userNotifier->adminConfirmation($user);
+            } else {
+                $this->notifier->sendConfirmationEmailMessage($user);
+            }
         }
 
         $this->userManager->updateUser($user);

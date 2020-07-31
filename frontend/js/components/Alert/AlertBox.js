@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import AlertStore from '~/stores/AlertStore';
 import AlertAutoDismissable from './AlertAutoDismissable';
 import Alert from './Alert';
 
-export type Props = {||};
+export type Props = {| +children?: React.Node |};
 
 type State = {
   alert: ?Object,

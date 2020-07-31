@@ -35,6 +35,7 @@ use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -265,6 +266,10 @@ class NodeTypeResolver implements ResolverInterface
             }
 
             return $this->typeResolver->resolve('InternalQuestionChoice');
+        }
+
+        if ($node instanceof UserInvite) {
+            return $this->typeResolver->resolve('UserInvite');
         }
 
         throw new UserError('Could not resolve type of Node.');

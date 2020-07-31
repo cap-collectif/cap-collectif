@@ -228,7 +228,7 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan-symfony": "^0.11",
         "phpstan/phpstan": "^0.11",
-        "symfony/maker-bundle": "^1.11",
+        "symfony/maker-bundle": "^1.20",
         "dg/bypass-finals": "^1.1",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3",
         "rector/rector": "^0.5.22",

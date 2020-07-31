@@ -80,3 +80,7 @@ services:
         autowire: true
         tags:
             - kernel.event_subscriber
+
+    Capco\AppBundle\EventListener\UserInviteListener:
+        tags:
+            - { name: doctrine.orm.entity_listener, lazy: true }

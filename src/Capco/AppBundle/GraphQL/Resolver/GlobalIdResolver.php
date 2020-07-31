@@ -40,6 +40,7 @@ use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\SynthesisStepRepository;
+use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -194,6 +195,10 @@ class GlobalIdResolver
                     break;
                 case 'Version':
                     $node = $this->container->get(OpinionVersionRepository::class)->find($uuid);
+
+                    break;
+                case 'UserInvite':
+                    $node = $this->container->get(UserInviteRepository::class)->find($uuid);
 
                     break;
                 default:
@@ -409,7 +414,7 @@ class GlobalIdResolver
         return $node;
     }
 
-    private function viewerCanSee($node, User $user = null, bool $skipVerification): bool
+    private function viewerCanSee($node, ?User $user, bool $skipVerification): bool
     {
         $projectContributionClass = [
             Project::class,

@@ -1,0 +1,19 @@
+UserInvite:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: UserInvite
+        description: 'A user invitation'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: UserInvite
+            email:
+                type: 'String!'
+                description: 'Get the invited email'
+            isAdmin:
+                type: 'Boolean!'
+                description: 'Will the invited user be an admin?'

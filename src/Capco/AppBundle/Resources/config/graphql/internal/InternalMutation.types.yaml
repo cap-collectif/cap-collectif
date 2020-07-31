@@ -922,3 +922,19 @@ InternalMutation:
                     inputType: UpdateProfileAccountLocaleInput
                     payloadType: UpdateProfileAccountLocalePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfileAccountLocaleMutation", [value, getUser(), serv("request_stack")])'
+            inviteUsers:
+                description: 'Invite users in the application'
+                access: "@=hasRole('ROLE_SUPER_ADMIN') and hasFeatureFlag('user_invitations')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: InviteUsersInput
+                    payloadType: InviteUsersPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\InviteUsersMutation", [value])'
+            cancelUserInvitations:
+                description: 'Cancel user invitation in the application'
+                access: "@=hasRole('ROLE_SUPER_ADMIN') and hasFeatureFlag('user_invitations')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CancelUserInvitationsInput
+                    payloadType: CancelUserInvitationsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CancelUserInvitationsMutation", [value])'

@@ -910,6 +910,18 @@ input BorderStyleInput {
   size: Int
 }
 
+input CancelUserInvitationsInput {
+  """The list of invitations to cancel"""
+  invitationsIds: [ID!]!
+  clientMutationId: String
+}
+
+type CancelUserInvitationsPayload {
+  """The cancelled invitations IDs"""
+  cancelledInvitationsIds: [ID!]!
+  clientMutationId: String
+}
+
 """A category image"""
 type CategoryImage {
   """Identifies the date and time when the object was last updated."""
@@ -3384,6 +3396,7 @@ enum FeatureFlagType {
   reporting
   display_map
   unstable__remote_events
+  user_invitations
 }
 
 """Require a firstname"""
@@ -3916,6 +3929,27 @@ input InternalUpdateShieldAdminFormInput {
 
   """The image id to associate for the shield image."""
   mediaId: ID
+  clientMutationId: String
+}
+
+input InviteUsersInput {
+  """Set the maximum results to return"""
+  maxResults: Int = 100
+
+  """The list of emails to invite"""
+  emails: [String!]!
+
+  """Does the newly invited users will be administrators?"""
+  isAdmin: Boolean!
+  clientMutationId: String
+}
+
+type InviteUsersPayload {
+  """The newly added user invitations edge"""
+  newInvitations: [UserInviteEdge!]!
+
+  """The updated user invitations edge"""
+  updatedInvitations: [UserInviteEdge!]!
   clientMutationId: String
 }
 
@@ -4546,6 +4580,12 @@ type Mutation {
   generateJitsiRoomMutation(input: GenerateJitsiRoomMutationInput!): GenerateJitsiRoomMutationPayload
   updateProfileAccountEmail(input: UpdateProfileAccountEmailInput!): UpdateProfileAccountEmailPayload
   updateProfileAccountLocale(input: UpdateProfileAccountLocaleInput!): UpdateProfileAccountLocalePayload
+
+  """Invite users in the application"""
+  inviteUsers(input: InviteUsersInput!): InviteUsersPayload
+
+  """Cancel user invitation in the application"""
+  cancelUserInvitations(input: CancelUserInvitationsInput!): CancelUserInvitationsPayload
 }
 
 """A connection to a list of items."""
@@ -7533,6 +7573,23 @@ type Query {
 
   """List all feature flags."""
   featureFlags: [FeatureFlag!]!
+
+  """List all invited users."""
+  userInvitations(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+    first: Int = 50
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): UserInviteConnection!
 }
 
 """Fetches an object given its ID"""
@@ -11279,6 +11336,38 @@ type UserError {
 
   """Path to input field which caused the error."""
   field: [String!]
+}
+
+"""A user invitation"""
+type UserInvite {
+  """The ID of an object."""
+  id: ID!
+
+  """Get the invited email"""
+  email: String!
+
+  """Will the invited user be an admin?"""
+  isAdmin: Boolean!
+}
+
+"""A connection to a list of items."""
+type UserInviteConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [UserInviteEdge]
+}
+
+"""An edge in a connection."""
+type UserInviteEdge {
+  """The item at the end of the edge."""
+  node: UserInvite
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """A user's notifications configuration"""

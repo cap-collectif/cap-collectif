@@ -1071,6 +1071,22 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return string[]
+     */
+    public function findByEmails(array $emails): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $results = $qb
+            ->select('u.email')
+            ->where('u.email IN (:emails)')
+            ->setParameter('emails', $emails)
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_map(fn(array $row) => $row['email'], $results);
+    }
+
     public function getAllAdmin(): array
     {
         return $this->findByRole('ROLE_ADMIN');

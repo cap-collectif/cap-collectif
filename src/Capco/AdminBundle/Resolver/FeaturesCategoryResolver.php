@@ -82,6 +82,7 @@ class FeaturesCategoryResolver
                     'unstable__analysis',
                     'report_browers_errors_to_sentry',
                     'http_redirects',
+                    'user_invitations',
                 ],
             ],
         ],

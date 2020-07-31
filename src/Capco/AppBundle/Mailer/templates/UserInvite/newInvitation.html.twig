@@ -1,0 +1,4 @@
+{{ 'email-user-invitation-body'|trans({
+    '{organizationName}': organizationName,
+    '{invitationUrl}': invitationUrl,
+}, 'CapcoAppBundle', user_locale) | raw }}

@@ -1,0 +1,45 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block mainContent %}
+    {% set footerLinks = getFooterLinks() %}
+    {% set footerLegals = getLegalsPages() %}
+    {# Footer #}
+    {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
+    {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
+    {% set bannerTrad = '' %}
+    {% if analytic_js is not empty and ads_js is empty %}
+        {% set bannerTrad =  'text-audience-cookie'|trans({}, 'CapcoAppBundle') %}
+    {% elseif ads_js  is not empty and analytic_js is empty %}
+        {% set bannerTrad =  'text-cookie-communication'|trans({}, 'CapcoAppBundle') %}
+    {% elseif ads_js is not empty and analytic_js is not empty %}
+        {% set bannerTrad =  'texte-cookie-audience-communication'|trans({}, 'CapcoAppBundle') %}
+    {% endif %}
+    {% if bannerTrad is defined and bannerTrad is not empty %}
+        {{ react_render_component('CookieManagerApp', {
+            'props': {
+                'bannerTrad': bannerTrad,
+                'isLink': false,
+            }
+        }) }}
+    {% endif %}
+    <style>
+        body {
+            background-color: #F6F6F6;
+            padding-top: 0;
+        }
+        button[variant="link"] {
+            width: auto;
+            position: relative;
+            top: -1px;
+        }
+        .flash-notif {
+            transform: translate(-50%, 20px);
+        }
+    </style>
+    {% include 'CapcoAppBundle:Homepage:flashbag.html.twig' %}
+    {{ react_render_component('UserInvitationPageApp', {'rendering': 'client_side', props: {
+        token: token,
+        logo: media_public_url(capco_site_image_media('image.shield'), 'default_shield'),
+        email: email
+    } }) }}
+{% endblock %}

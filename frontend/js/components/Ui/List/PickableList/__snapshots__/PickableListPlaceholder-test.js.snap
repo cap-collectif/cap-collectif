@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PickableListPlaceholder /> should render correctly 1`] = `
+<div
+  class="styles__Container-sc-19fy1kf-0 kLoACa placeholder__PlaceholderPickableList-sc-1i18b6r-0 helLBu"
+>
+  <div
+    class="styles__Container-sc-1ig07ym-0 hpsUPr pickableList-header"
+  >
+    <p
+      style="margin:0"
+    >
+      <span>
+         
+      </span>
+    </p>
+  </div>
+  <div
+    class="styles__Container-sc-1u6boa9-0 dXlWzY"
+  >
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+    <div
+      class="styles__Container-sc-15na44m-0 iTaMBY pickableList-row"
+    >
+      <div
+        class="styles__ChildWrapper-sc-15na44m-1 kzqZYR pickableList-row-content"
+      >
+        <div
+          class="text-row"
+          style="width:200px;height:16px;background-color:#e3e3e3;margin-top:0.7em;margin:0"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

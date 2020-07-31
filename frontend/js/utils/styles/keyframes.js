@@ -3,11 +3,11 @@ import { keyframes } from 'styled-components';
 
 export const blink = keyframes`
   from {
-    opacity: 1;
+    opacity: 0.4;
   }
   to {
-    opacity: 0.5;
-  }
+    opacity: 1;
+  } 
 `;
 
 export const slideInUp = keyframes`

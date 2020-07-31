@@ -3,6 +3,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { TextRow } from 'react-placeholder/lib/placeholders';
 import colors from '~/utils/colors';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
+import { blink } from '~/utils/styles/keyframes';
 
 const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
@@ -15,16 +16,7 @@ const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   border: 1px solid ${colors.borderColor};
   ${MAIN_BORDER_RADIUS};
   overflow: hidden;
-  animation: blink 0.6s linear infinite alternate;
-
-  @keyframes blink {
-    from {
-      opacity: 0.4;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  animation: ${blink} 0.6s linear infinite alternate;
 `;
 
 export const Picture: StyledComponent<{}, {}, typeof TextRow> = styled(TextRow)`

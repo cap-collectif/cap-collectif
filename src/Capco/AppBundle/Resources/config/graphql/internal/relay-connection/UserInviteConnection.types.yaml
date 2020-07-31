@@ -1,0 +1,7 @@
+UserInviteConnection:
+    type: relay-connection
+    config:
+        nodeType: UserInvite
+        connectionFields:
+            totalCount:
+                type: Int!

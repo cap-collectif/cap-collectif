@@ -419,3 +419,13 @@ InternalQuery:
                 description: 'List all feature flags.'
                 type: '[InternalFeatureFlag!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryFeatureFlagsResolver", [])'
+            userInvitations:
+                description: 'List all invited users.'
+                type: 'UserInviteConnection!'
+                access: "@=hasRole('ROLE_SUPER_ADMIN') and hasFeatureFlag('user_invitations')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserInvitationsResolver", [args])'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    first:
+                        type: 'Int'
+                        defaultValue: 50

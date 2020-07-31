@@ -8,7 +8,7 @@ export type CommonPropsInput = {|
   readonly?: boolean,
   required?: boolean,
   placeholder?: string,
-  label?: string,
+  label?: React.Node,
   className?: string,
   maxlength?: number,
   minlength?: number,

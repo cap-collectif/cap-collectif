@@ -456,12 +456,14 @@ class ApplicationContext extends UserContext
      * @Given features :featureA, :featureB are enabled
      * @Given features :featureA, :featureB, :featureC are enabled
      * @Given features :featureA, :featureB, :featureC, :featureD are enabled
+     * @Given features :featureA, :featureB, :featureC, :featureD, :featureE are enabled
      */
     public function activateFeatures(
         string $featureA,
         ?string $featureB = null,
         ?string $featureC = null,
-        ?string $featureD = null
+        ?string $featureD = null,
+        ?string $featureE = null
     ) {
         $this->getService(Manager::class)->activate($featureA);
         if ($featureB) {
@@ -471,6 +473,38 @@ class ApplicationContext extends UserContext
             }
             if ($featureD) {
                 $this->getService(Manager::class)->activate($featureD);
+            }
+            if ($featureE) {
+                $this->getService(Manager::class)->activate($featureE);
+            }
+        }
+    }
+
+    /**
+     * @Given I disable feature :featureA
+     * @Given I disable features :featureA, :featureB
+     * @Given I disable features :featureA, :featureB, :featureC
+     * @Given I disable features :featureA, :featureB, :featureC, :featureD
+     * @Given I disable features :featureA, :featureB, :featureC, :featureD, :featureE
+     */
+    public function deactivateFeatures(
+        string $featureA,
+        ?string $featureB = null,
+        ?string $featureC = null,
+        ?string $featureD = null,
+        ?string $featureE = null
+    ) {
+        $this->getService(Manager::class)->deactivate($featureA);
+        if ($featureB) {
+            $this->getService(Manager::class)->deactivate($featureB);
+            if ($featureC) {
+                $this->getService(Manager::class)->deactivate($featureC);
+            }
+            if ($featureD) {
+                $this->getService(Manager::class)->deactivate($featureD);
+            }
+            if ($featureE) {
+                $this->getService(Manager::class)->deactivate($featureE);
             }
         }
     }

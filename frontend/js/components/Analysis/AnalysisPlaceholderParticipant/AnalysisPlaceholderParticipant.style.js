@@ -1,19 +1,11 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
+import { blink } from '~/utils/styles/keyframes';
 
 export const InformationsContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: column;
-  animation: blink 0.6s linear infinite alternate;
-
-  @keyframes blink {
-    from {
-      opacity: 0.4;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  animation: ${blink} 0.6s linear infinite alternate;
 `;
 
 export const TagContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({

@@ -1,0 +1,8 @@
+CancelUserInvitationsPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of cancelUserInvitations mutation'
+        fields:
+            cancelledInvitationsIds:
+                type: '[ID!]!'
+                description: 'The cancelled invitations IDs'

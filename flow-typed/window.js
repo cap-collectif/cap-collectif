@@ -9,8 +9,8 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   +devicePixelRatio: number;
   +document: {
     ...Document,
-    +fonts: any;
-    createElement(tag: string): any;
+    +fonts: any,
+    createElement(tag: string): any,
   };
   +doNotTrack: string;
   +frameElement: Element;
@@ -193,7 +193,7 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
     optionsOrUseCapture?: EventListenerOptionsOrUseCapture,
   ): void;
 
-  FontFace: any,
+  FontFace: any;
   _capco_executeAnalyticScript(): void;
   _capco_ga_cookie_value(key: string): any;
   _capco_executeAdsScript(): void;
@@ -203,6 +203,8 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   __REDUX_DEVTOOLS_EXTENSION__: any;
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: typeof compose;
   sentryDsn?: ?string;
+  btoa(decoded: string): string;
+  atob(encoded: string): string;
 
   // hack to avoid error flow because of react-beautiful-dnd
   Element: any;
@@ -220,4 +222,3 @@ declare class Touch {
 }
 
 declare var window: Window;
-

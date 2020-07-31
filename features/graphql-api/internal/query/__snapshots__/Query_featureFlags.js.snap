@@ -223,6 +223,10 @@ Object {
       "enabled": false,
       "type": "unstable__remote_events",
     },
+    Object {
+      "enabled": false,
+      "type": "user_invitations",
+    },
   ],
 }
 `;

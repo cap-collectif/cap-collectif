@@ -5,7 +5,7 @@ import { usePickableList } from '~ui/List/PickableList';
 
 type Props = {
   className?: string,
-  children: React.Node | (({ selectedRows: string[], rowsCount: number }) => React.Node),
+  children?: React.Node | (({ selectedRows: string[], rowsCount: number }) => React.Node),
   isSelectable?: boolean,
   disabled?: boolean,
 };

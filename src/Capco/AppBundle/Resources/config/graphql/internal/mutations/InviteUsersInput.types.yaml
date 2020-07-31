@@ -1,0 +1,15 @@
+InviteUsersInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of inviteUsers mutation'
+        fields:
+            maxResults:
+                type: 'Int'
+                defaultValue: 100
+                description: 'Set the maximum results to return'
+            emails:
+                type: '[String!]!'
+                description: 'The list of emails to invite'
+            isAdmin:
+                type: 'Boolean!'
+                description: 'Does the newly invited users will be administrators?'

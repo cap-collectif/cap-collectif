@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|UserInvitations query should fetch the current available user invitations when the flag is activated 1`] = `
+Object {
+  "userInvitations": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "email": "rem@chan.com",
+          "id": "VXNlckludml0ZTpyZW1JbnZpdGF0aW9u",
+          "isAdmin": true,
+        },
+      },
+      Object {
+        "node": Object {
+          "email": "sad@expired.com",
+          "id": "VXNlckludml0ZTpleHBpcmVkSW52aXRhdGlvbg==",
+          "isAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
+          "email": "ram@chan.com",
+          "id": "VXNlckludml0ZTpyYW1JbnZpdGF0aW9u",
+          "isAdmin": false,
+        },
+      },
+    ],
+  },
+}
+`;

@@ -1,0 +1,8 @@
+CancelUserInvitationsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of cancelUserInvitations mutation'
+        fields:
+            invitationsIds:
+                type: '[ID!]!'
+                description: 'The list of invitations to cancel'

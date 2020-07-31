@@ -36,6 +36,8 @@ type Props = {|
   shieldEnabled: boolean,
   dispatch: Dispatch,
   query: RegistrationForm_query,
+  email?: string,
+  invitationToken?: string,
 |};
 
 type FormValues = {
@@ -75,6 +77,7 @@ export class RegistrationForm extends React.Component<Props> {
       organizationName,
       privacyPolicyRequired,
       dispatch,
+      email,
     } = this.props;
 
     const privacyPolicyComponent = privacyPolicyRequired ? (
@@ -118,6 +121,7 @@ export class RegistrationForm extends React.Component<Props> {
         />
         <Field
           name="email"
+          disabled={!!email}
           id="email"
           component={renderComponent}
           type="email"
@@ -290,6 +294,8 @@ const mapStateToProps = (state: State, props: Props) => ({
   responses: formValueSelector(form)(state, 'responses'),
   initialValues: {
     responses: [],
+    email: props.email,
+    invitationToken: props.invitationToken,
     postRegistrationScript: props.query ? props.query.registrationScript : '',
   },
 });

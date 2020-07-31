@@ -24,6 +24,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     ariaRequired={true}
     autoComplete="email"
     component={[Function]}
+    disabled={false}
     id="email"
     label={
       <FormattedMessage
@@ -1216,6 +1217,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     ariaRequired={true}
     autoComplete="email"
     component={[Function]}
+    disabled={false}
     id="email"
     label={
       <FormattedMessage
@@ -1351,6 +1353,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     ariaRequired={true}
     autoComplete="email"
     component={[Function]}
+    disabled={false}
     id="email"
     label={
       <FormattedMessage
@@ -1523,6 +1526,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     ariaRequired={true}
     autoComplete="email"
     component={[Function]}
+    disabled={false}
     id="email"
     label={
       <FormattedMessage

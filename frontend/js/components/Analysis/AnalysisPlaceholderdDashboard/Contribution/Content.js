@@ -3,13 +3,14 @@ import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { TextRow } from 'react-placeholder/lib/placeholders';
 import colors from '~/utils/colors';
+import { blink } from '~/utils/styles/keyframes';
 
 export const ContentContributionContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  animation: blink 0.6s linear infinite alternate;
+  animation: ${blink} 0.6s linear infinite alternate;
 
   .text-row {
     margin-top: 0 !important;
@@ -22,15 +23,6 @@ export const ContentContributionContainer: StyledComponent<{}, {}, HTMLDivElemen
 
     &:last-of-type {
       opacity: 0.15;
-    }
-  }
-
-  @keyframes blink {
-    from {
-      opacity: 0.4;
-    }
-    to {
-      opacity: 1;
     }
   }
 `;

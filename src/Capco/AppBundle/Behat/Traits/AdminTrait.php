@@ -169,6 +169,14 @@ trait AdminTrait
     }
 
     /**
+     * @When I go to the admin user invite page
+     */
+    public function iGoToTheAdminUserInvitePage()
+    {
+        $this->visitPageWithParams('admin user invite page');
+    }
+
+    /**
      * @When I go to the admin user list page
      */
     public function iGoToTheAdminUserListPage()

@@ -65,24 +65,18 @@ const authenticatedInternalRequest = (username, password, query, variables) => {
 
 global.enableFeatureFlag = async name => {
   console.log(`Enabling feature flag "${name}"...`);
-  const { stderr } = await exec(`pipenv run fab ${env}.app.toggle_enable:toggle=${name},environment=test`);
-  if (stderr) {
-    console.error(stderr);
-  }
+  await exec(`pipenv run fab ${env}.app.toggle_enable:toggle=${name},environment=test`);
   console.log(`Successfully enabled "${name}"`);
 };
 
 global.disableFeatureFlag = async name => {
   console.log(`Disabling feature flag "${name}"...`);
-  const { stderr } = await exec(`pipenv run fab ${env}.app.toggle_disable:toggle=${name},environment=test`);
-  if (stderr) {
-    console.error(stderr);
-  }
+  await exec(`pipenv run fab ${env}.app.toggle_disable:toggle=${name},environment=test`,);
   console.log(`Successfully disabled "${name}"`);
 };
 
 global.graphql = (query, variables, client = 'anonymous') => {
-  if (typeof client === "object") {
+  if (typeof client === 'object') {
     return authenticatedInternalRequest(client.email, client.password, query, variables);
   }
   switch (client) {
@@ -102,15 +96,35 @@ global.graphql = (query, variables, client = 'anonymous') => {
     case 'internal_analyst':
       return authenticatedInternalRequest('analyst@cap-collectif.com', 'analyst', query, variables);
     case 'internal_analyst2':
-      return authenticatedInternalRequest('analyst2@cap-collectif.com', 'analyst2', query, variables);
+      return authenticatedInternalRequest(
+        'analyst2@cap-collectif.com',
+        'analyst2',
+        query,
+        variables,
+      );
     case 'internal_supervisor':
-      return authenticatedInternalRequest('supervisor@cap-collectif.com', 'supervisor', query, variables);
+      return authenticatedInternalRequest(
+        'supervisor@cap-collectif.com',
+        'supervisor',
+        query,
+        variables,
+      );
     case 'internal_supervisor2':
-      return authenticatedInternalRequest('supervisor2@cap-collectif.com', 'supervisor2', query, variables);
+      return authenticatedInternalRequest(
+        'supervisor2@cap-collectif.com',
+        'supervisor2',
+        query,
+        variables,
+      );
     case 'internal_spylou':
       return authenticatedInternalRequest('aurelien@cap-collectif.com', 'toto', query, variables);
     case 'internal_decision_maker':
-      return authenticatedInternalRequest('decisionmaker@cap-collectif.com', 'decisionmaker', query, variables);
+      return authenticatedInternalRequest(
+        'decisionmaker@cap-collectif.com',
+        'decisionmaker',
+        query,
+        variables,
+      );
     case 'internal_evaluer':
       return authenticatedInternalRequest('pierre@cap-collectif.com', 'toto', query, variables);
     case 'internal_admin':

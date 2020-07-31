@@ -9,9 +9,15 @@ import FileUpload from '../Form/FileUpload';
 import { CSV_MAX_UPLOAD_SIZE } from '~/components/Event/Admin/AdminImportEventsCsvInput';
 
 type FileUploadFieldProps = {
-  ...FieldProps,
-  showMoreError: boolean,
-  onClickShowMoreError: (event: SyntheticEvent<HTMLButtonElement>) => void,
+  input: {
+    value: $PropertyType<$PropertyType<FieldProps, 'input'>, 'value'>,
+    name: $PropertyType<$PropertyType<FieldProps, 'input'>, 'name'>,
+  },
+  meta: {
+    asyncValidating: $PropertyType<$PropertyType<FieldProps, 'meta'>, 'asyncValidating'>,
+  },
+  showMoreError?: boolean,
+  onClickShowMoreError?: (event: SyntheticEvent<HTMLButtonElement>) => void,
   onPostDrop: (droppedFiles: Array<DropzoneFile>, input: Object) => void,
   disabled: boolean,
   currentFile: ?DropzoneFile,
@@ -20,11 +26,11 @@ type FileUploadFieldProps = {
 export const CsvDropZoneInput = ({
   input,
   meta: { asyncValidating },
-  showMoreError,
-  onClickShowMoreError,
   onPostDrop,
   disabled,
   currentFile,
+  onClickShowMoreError,
+  showMoreError = false,
 }: FileUploadFieldProps) => {
   const colWidth = input.value.notFoundEmails && input.value.notFoundEmails.length === 0 ? 12 : 6;
 
@@ -53,7 +59,7 @@ export const CsvDropZoneInput = ({
             onPostDrop(files, input);
           }}
         />
-        {!asyncValidating && input.value.importedUsers && (
+        {!asyncValidating && input.value.importedUsers && input.value.importedUsers.length > 0 && (
           <React.Fragment>
             <div className="h5">
               <FormattedHTMLMessage id="document-analysis" /> {currentFile ? currentFile.name : ''}

@@ -258,7 +258,7 @@ export const register = (values: Object, dispatch: Dispatch, { shieldEnabled, qu
   }
   return Fetcher.post('/users', form)
     .then(() => {
-      if (shieldEnabled) {
+      if (shieldEnabled && !form.invitationToken) {
         FluxDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
           alert: {

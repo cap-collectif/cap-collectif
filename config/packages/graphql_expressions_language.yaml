@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Capco\AppBundle\GraphQL\ExpressionLanguage\HasFeatureFlag:
+        tags: ['overblog_graphql.expression_function']

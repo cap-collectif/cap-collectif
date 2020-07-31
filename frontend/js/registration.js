@@ -69,6 +69,7 @@ import CalendarApp from './startup/CalendarApp';
 import EngagementListApp from './startup/EngagementListApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
 import appStore from '~/stores/AppStore';
+import UserInvitationPageApp from '~/startup/UserInvitationPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -137,5 +138,6 @@ ReactOnRails.register({
   CalendarApp,
   EngagementListApp,
   LanguageButtonApp,
-  StepEventsApp
+  StepEventsApp,
+  UserInvitationPageApp,
 });

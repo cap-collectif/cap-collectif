@@ -18,6 +18,13 @@ export type Uri = string;
 export type Opinion = { id: Uuid };
 export type Version = { id: Uuid, parent: Object };
 
+// small subset copy of 'relay-runtime/handlers/connection/ConnectionHandler'
+// because ESLint could not resolve the internal type
+export type ConnectionMetadata = {|
+  cursor: ?string,
+  count: ?string,
+|};
+
 export type ArgumentType = 'FOR' | 'AGAINST' | 'SIMPLE';
 export type StepPropositionNavigationType =
   | 'ConsultationStep'
@@ -84,6 +91,7 @@ export type FeatureToggles = {
   display_pictures_in_event_list: ?boolean,
   unstable__analysis: ?boolean,
   report_browers_errors_to_sentry: ?boolean,
+  user_invitations: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;

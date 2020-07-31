@@ -4,22 +4,14 @@ import styled, { type StyledComponent } from 'styled-components';
 import { RoundShape } from 'react-placeholder/lib/placeholders';
 import colors from '~/utils/colors';
 import { Avatar, AvatarContainer, ProgressState } from '../AnalysisPlaceholderDashboard.style';
+import { blink } from '~/utils/styles/keyframes';
 
 export const ContentAnalysisContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  animation: blink 0.6s linear infinite alternate;
-
-  @keyframes blink {
-    from {
-      opacity: 0.4;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  animation: ${blink} 0.6s linear infinite alternate;
 `;
 
 type Props = {

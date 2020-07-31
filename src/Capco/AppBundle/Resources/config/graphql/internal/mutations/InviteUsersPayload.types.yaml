@@ -1,0 +1,11 @@
+InviteUsersPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of inviteUsers mutation'
+        fields:
+            newInvitations:
+                type: '[UserInviteEdge!]!'
+                description: 'The newly added user invitations edge'
+            updatedInvitations:
+                type: '[UserInviteEdge!]!'
+                description: 'The updated user invitations edge'
