@@ -80,9 +80,12 @@ class ProposalSearch extends Search
         $query = new Query($boolQuery);
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
+
         if ($order) {
             $query->setSort([
-                $this->getSort($order, $providedFilters['step'] ?? null),
+                !$providedFilters['term']
+                    ? $this->getSort($order, $providedFilters['step'] ?? null)
+                    : ['_score' => ['order' => 'desc']],
                 ['id' => new \stdClass()],
             ]);
         }

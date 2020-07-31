@@ -45,3 +45,31 @@ Object {
   },
 }
 `;
+
+exports[`Internal.projects.proposals search project's proposals by given term, ordered by score 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategoryIdf2",
+          "name": "Propreté, prévention et gestion des déchets, économie circulaire",
+        },
+        "district": Object {
+          "id": "districtIdf2",
+          "name": "Val de marne (94)",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+        "reference": "6",
+        "status": Object {
+          "color": "info",
+          "id": "statusIdfCollect1",
+          "name": "Nouveau projet",
+        },
+        "title": "Mon projet local en tant qu'organisme public",
+      },
+    },
+  ],
+  "totalCount": 1,
+}
+`;

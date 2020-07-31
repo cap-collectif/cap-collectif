@@ -7,6 +7,7 @@ const ProjectProposalQuery = /* GraphQL */ `
     $district: ID
     $status: ID
     $step: ID
+    $term: String
   ) {
     project: node(id: $projectId) {
       __typename
@@ -18,6 +19,7 @@ const ProjectProposalQuery = /* GraphQL */ `
           district: $district
           step: $step
           status: $status
+          term: $term
         ) {
           totalCount
           edges {
@@ -40,6 +42,35 @@ const ProjectProposalQuery = /* GraphQL */ `
               }
             }
           }
+        }
+      }
+    }
+  }
+`;
+
+const ProjectProposalTotalCountQuery = /* GraphQL */ `
+  query getProjectProposalsTotalCount(
+    $projectId: ID!
+    $count: Int
+    $category: ID
+    $district: ID
+    $status: ID
+    $step: ID
+    $state: ProposalsState
+  ) {
+    project: node(id: $projectId) {
+      __typename
+      id
+      ... on Project {
+        proposals(
+          first: $count
+          category: $category
+          district: $district
+          step: $step
+          status: $status
+          state: $state
+        ) {
+          totalCount
         }
       }
     }
@@ -81,5 +112,67 @@ describe('Internal.projects.proposals', () => {
         'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
+  });
+
+  it("fetches project proposal's total count (draft)", async () => {
+    const response = await graphql(
+      ProjectProposalTotalCountQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+        state: 'DRAFT',
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals.totalCount).toBe(1);
+  });
+
+  it("fetches project proposal's total count (published)", async () => {
+    const response = await graphql(
+      ProjectProposalTotalCountQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+        state: 'PUBLISHED',
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals.totalCount).toBe(8);
+  });
+
+  it("fetches project proposal's total count (all)", async () => {
+    const response = await graphql(
+      ProjectProposalTotalCountQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+        state: 'ALL',
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals.totalCount).toBe(10);
+  });
+
+  it("fetches project proposal's total count (trashed)", async () => {
+    const response = await graphql(
+      ProjectProposalTotalCountQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+        state: 'TRASHED',
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals.totalCount).toBe(1);
+  });
+
+  it("search project's proposals by given term, ordered by score", async () => {
+    const response = await graphql(
+      ProjectProposalQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+        state: 'ALL',
+        term: 'organisme',
+        count: 10,
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals).toMatchSnapshot();
   });
 });
