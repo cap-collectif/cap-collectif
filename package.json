@@ -23,6 +23,7 @@
         "trad-analyser": "node --experimental-modules trad-analyser.mjs --max-same 816 --max-unused 858",
         "fetch-translations": "node --experimental-modules ./fetch_translations.mjs",
         "trad": "yarn run fetch-translations",
+        "email-snapshots": "node ./email-snapshots",
         "compile-graphql": "pipenv run fab local.app.cmd:'graphql:compile --no-debug' && composer dump-autoload",
         "dump-graphql-schemas": "pipenv run fab local.qa.graphql_schemas",
         "clean-cache": "rm -rf var/cache/* && pipenv run fab local.app.clear_cache",
@@ -263,6 +264,7 @@
         "node-sass": "^4.13.1",
         "now": "19.2.0",
         "papaparse": "^5.2.0",
+        "points-cluster": "^0.1.4",
         "polished": "^3.4.1",
         "postinstall-postinstall": "^2.0.0",
         "pre-commit": "^1.2.2",
@@ -369,6 +371,8 @@
         "minimist": "^0.2.1"
     },
     "devDependencies": {
-        "@prettier/plugin-php": "https://github.com/prettier/plugin-php#0a250c0506d295d07a88b1a3b5ae7cfaaaf19367"
+        "@prettier/plugin-php": "https://github.com/prettier/plugin-php#0a250c0506d295d07a88b1a3b5ae7cfaaaf19367",
+        "fast-xml-parser": "^3.17.4",
+        "playwright": "^1.2.1"
     }
 }
