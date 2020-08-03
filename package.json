@@ -350,6 +350,8 @@
         "serialize-javascript": "^2.1.1",
         "https-proxy-agent": ">=3.0.0",
         "axios": ">=0.18.1",
+        "dot-prop": ">=5.1.1",
+        "elliptic": ">=6.5.3",
         "tar": "^4.4.8",
         "fstream": "^1.0.12",
         "jquery": "^3.4.0",
