@@ -55,12 +55,22 @@ class LocaleRepository extends EntityRepository
 
     /**
      * @throws LocaleConfigurationException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function findDefaultLocale(): Locale
     {
         /** @var $defaultLocale Locale */
         $defaultLocale = $this->findOneBy(['default' => true]);
         if (!$defaultLocale) {
+            $defaultLocale = new Locale('fr-FR', 'french');
+            $defaultLocale->enable();
+            $defaultLocale->publish();
+            $defaultLocale->setDefault();
+            $em = $this->getEntityManager();
+            $em->persist($defaultLocale);
+            $em->flush();
+
             throw new LocaleConfigurationException(
                 LocaleConfigurationException::MESSAGE_DEFAULT_NONE
             );

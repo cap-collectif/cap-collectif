@@ -52,3 +52,7 @@ services:
         arguments:
             $name: 'capco:reset-feature-flags'
             $env: '%kernel.environment%'
+
+    Capco\AppBundle\Command\ResetDefaultLocaleCommand:
+        arguments:
+            $name: 'capco:reset:default-locale'

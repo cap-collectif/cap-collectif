@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
@@ -200,12 +199,8 @@ class ReinitCommand extends Command
         ];
 
         foreach ($listeners as $listener) {
-            $this->eventManager->removeEventListener(
-                $listener->getSubscribedEvents(),
-                $listener
-            );
+            $this->eventManager->removeEventListener($listener->getSubscribedEvents(), $listener);
             $output->writeln('Disabled <info>' . \get_class($listener) . '</info>.');
-
         }
 
         $output->writeln('Disable dataloader\'s cache…');
@@ -270,56 +265,54 @@ class ReinitCommand extends Command
 
     protected function createDatabase(OutputInterface $output)
     {
-
-            $this->stopwatch->start('createDatabase');
+        $this->stopwatch->start('createDatabase');
         $this->runCommands(
             [
                 'doctrine:database:create' => [],
             ],
             $output
         );
-            $event = $this->stopwatch->stop('createDatabase');
-            $output->writeln(
-                'Creating database duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-            );
+        $event = $this->stopwatch->stop('createDatabase');
+        $output->writeln(
+            'Creating database duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+        );
     }
 
     protected function createSchema(OutputInterface $output)
     {
-            $this->stopwatch->start('createSchema');
+        $this->stopwatch->start('createSchema');
         $this->runCommands(
             [
                 'doctrine:schema:create' => [],
             ],
             $output
         );
-            $event = $this->stopwatch->stop('createSchema');
-            $output->writeln(
-                'Creating database schema duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-            );
+        $event = $this->stopwatch->stop('createSchema');
+        $output->writeln(
+            'Creating database schema duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+        );
     }
 
     protected function dropDatabase(OutputInterface $output)
     {
-            $this->stopwatch->start('dropDatabase');
+        $this->stopwatch->start('dropDatabase');
         $this->runCommands(
             [
                 'doctrine:database:drop' => ['--force' => true],
             ],
             $output
         );
-            $event = $this->stopwatch->stop('dropDatabase');
-            $output->writeln(
-                'Dropping database duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-            );
-
+        $event = $this->stopwatch->stop('dropDatabase');
+        $output->writeln(
+            'Dropping database duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+        );
     }
 
     protected function loadFixtures(OutputInterface $output, $env = 'dev')
     {
         $this->stopwatch->start('loadFixtures');
 
-        $this->setDefaultLocale();
+        $this->setDefaultLocale($output);
 
         $classesDev = [
             Media::class,
@@ -383,7 +376,7 @@ class ReinitCommand extends Command
             ArgumentVote::class,
             AppendixType::class,
             Post::class,
-            UserInvite::class
+            UserInvite::class,
         ];
 
         $classesProd = [Context::class];
@@ -448,7 +441,7 @@ class ReinitCommand extends Command
 
     protected function populateElasticsearch(OutputInterface $output)
     {
-            $this->stopwatch->start('populate');
+        $this->stopwatch->start('populate');
 
         $this->runCommands(
             [
@@ -471,15 +464,15 @@ class ReinitCommand extends Command
             $output
         );
 
-            $event = $this->stopwatch->stop('populate');
-            $output->writeln(
-                'Populate Elasticsearch duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-            );
+        $event = $this->stopwatch->stop('populate');
+        $output->writeln(
+            'Populate Elasticsearch duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+        );
     }
 
     protected function executeMigrations(OutputInterface $output)
     {
-            $this->stopwatch->start('executeMigrations');
+        $this->stopwatch->start('executeMigrations');
 
         $this->runCommands(
             [
@@ -488,15 +481,15 @@ class ReinitCommand extends Command
             $output
         );
 
-            $event = $this->stopwatch->stop('executeMigrations');
-            $output->writeln(
-                'Adding migrations duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-            );
+        $event = $this->stopwatch->stop('executeMigrations');
+        $output->writeln(
+            'Adding migrations duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+        );
     }
 
     protected function mockMigrations(OutputInterface $output)
     {
-            $this->stopwatch->start('mockMigrations');
+        $this->stopwatch->start('mockMigrations');
 
         $this->runCommands(
             [
@@ -510,10 +503,23 @@ class ReinitCommand extends Command
             $output
         );
 
-            $event = $this->stopwatch->stop('mockMigrations');
-            $output->writeln(
-                'Mocking migrations duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-            );
+        $event = $this->stopwatch->stop('mockMigrations');
+        $output->writeln(
+            'Mocking migrations duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+        );
+    }
+
+    private function setDefaultLocale(OutputInterface $output): void
+    {
+        $this->runCommands(
+            [
+                'capco:reset:default-locale' => [
+                    '--code' => 'fr-FR',
+                    '--locale' => 'french',
+                ],
+            ],
+            $output
+        );
     }
 
     private function runCommands(array $commands, $output)
@@ -525,17 +531,5 @@ class ReinitCommand extends Command
                 ->find($key)
                 ->run($input, $output);
         }
-    }
-
-    private function setDefaultLocale(): Locale
-    {
-        $defaultLocale = new Locale('fr-FR', 'french');
-        $defaultLocale->enable();
-        $defaultLocale->publish();
-        $defaultLocale->setDefault();
-        $this->doctrine->getManager()->persist($defaultLocale);
-        $this->doctrine->getManager()->flush();
-
-        return $defaultLocale;
     }
 }
