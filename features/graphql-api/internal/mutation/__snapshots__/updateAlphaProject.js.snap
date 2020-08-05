@@ -502,7 +502,10 @@ Object {
           "body": "Le beau body de l'étape QuestionnaireStep",
           "enabled": true,
           "id": Any<String>,
-          "questionnaire": null,
+          "questionnaire": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+            "title": "Votre avis sur les JO 2024 à Paris",
+          },
           "timeless": false,
           "title": "Le beau titre de l'étape QuestionnaireStep",
         },
