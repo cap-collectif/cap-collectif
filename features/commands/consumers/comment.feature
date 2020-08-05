@@ -10,8 +10,8 @@ Scenario: Email should be sent to admin if a message is sent to the comment_crea
   }
   """
   And I consume "comment_create"
-  Then I open mail with subject "notification.email.comment.create.subject"
-  And I should see "notification.email.comment.create.body" in mail
+  Then I open mail with subject "notification.comment.create.subject"
+  And I should see "notification.comment.create.body" in mail
 
 @rabbitmq
 Scenario: Email sent to admin should have correct subject and footer if comment author is anonymous when I consume comment create
@@ -22,8 +22,8 @@ Scenario: Email sent to admin should have correct subject and footer if comment 
   }
   """
   And I consume "comment_create"
-  Then I open mail with subject "notification.email.anonymous_comment.create.subject"
-  And I should see "notification.email.anonymous_comment.create.body" in mail
+  Then I open mail with subject "notification.comment.create.subject"
+  And I should see "notification.comment.create.anonymous.body" in mail
 
 @rabbitmq
 Scenario: Email should be sent to admin if a message is sent to the comment_update queue
@@ -34,8 +34,8 @@ Scenario: Email should be sent to admin if a message is sent to the comment_upda
   }
   """
   And I consume "comment_update"
-  Then I open mail with subject "notification.email.comment.update.subject"
-  And I should see "notification.email.comment.update.body" in mail
+  Then I open mail with subject "notification.comment.update.subject"
+  And I should see "notification.comment.update.body" in mail
 
 @rabbitmq
 Scenario: Email sent to admin should have correct subject and footer if comment author is anonymous when I consume comment_update
@@ -67,8 +67,8 @@ Scenario: Email should be sent to admin if a message is sent to the comment_dele
   }
   """
   And I consume "comment_delete"
-  Then I open mail with subject "notification.email.comment.delete.subject"
-  And I should see "notification.email.comment.delete.body" in mail
+  Then I open mail with subject "notification.comment.delete.subject"
+  And I should see "notification.comment.delete.body" in mail
 
 @rabbitmq
 Scenario: Email sent to admin should have correct subject and footer if comment author is anonymous when I consume comment_delete

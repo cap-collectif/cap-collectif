@@ -8,7 +8,7 @@
     {# OpenGraph doesn't support svg as image so no default avatar :'( #}
     {% set userMedia %}{% if user.media %}{% path user.media, 'avatar' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle'),
+        'title':       'usernames-profile'|trans({'userName': user.username }, 'CapcoAppBundle'),
         'description':  user.biography,
         'url':          url('capco_user_profile_show_all', {'slug': user.slug}),
         'type':         'profile',
@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'usernames-profile'|trans({'userName': user.username }, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}

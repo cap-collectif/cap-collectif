@@ -100,7 +100,7 @@ Scenario: Admin should not be notified when an user deletes his proposal on an n
   And I go to a proposal which is not notifiable
   When I click the delete proposal button
   And I confirm proposal deletion
-  Then I should not see mail with subject "notification.email.proposal.delete.subject"
+  Then I should not see mail with subject "notification.proposal.delete.subject"
 
 @database @rabbitmq
 Scenario: Author of a proposal should be notified when someone comment if he has turned on comments notifications

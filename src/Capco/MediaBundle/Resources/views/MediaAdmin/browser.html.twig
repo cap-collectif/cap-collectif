@@ -119,7 +119,7 @@
                                         {% endblock %}
 
                                         {% block num_results %}
-                                            {% transchoice admin.datagrid.pager.nbresults with {'%count%': admin.datagrid.pager.nbresults} from 'CapcoAppBundle' %}list_results_count{% endtranschoice %}
+                                            {{ 'search-results-count' | trans({'count': admin.datagrid.pager.nbresults}, 'CapcoAppBundle') }}
                                             &nbsp;-&nbsp;
                                         {% endblock %}
 

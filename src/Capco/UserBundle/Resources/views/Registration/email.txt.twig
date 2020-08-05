@@ -20,7 +20,7 @@
     <table>
         <tr>
             <td style="font-family: sans-serif; font-size: 16px;">
-                <p>{{ 'user.register.confirmation_message.hello'|trans({'%username%': user.username}, 'CapcoAppBundle') }}</p></br>
+                <p>{{ user.username}},</p></br>
                 <p>{{ 'user.register.confirmation_message.thanks'|trans({'%sitename%': '<a href="' ~ url('app_homepage') ~ '">' ~ sitename ~ '</a>'}, 'CapcoAppBundle') }}</p><br/>
                 <p>{{ 'user.register.confirmation_message.please'|trans({}, 'CapcoAppBundle') }}</p>
                 <p style="margin-bottom: 45px">
@@ -35,8 +35,14 @@
                 <p>{{ 'user.register.confirmation_message.data'|trans({'%profile%': profile, '%sitename%': sitename}, 'CapcoAppBundle') }}</p><br/>
                 <p>{{ 'global.participation'|trans({}, 'CapcoAppBundle') }}</p><br/>
                 <hr />
-                <p style="color: #707070; line-height: 21px">{{ 'user.register.confirmation_message.footer1'|trans({'%sitename%': '<a href="' ~ url('app_homepage') ~ '" style="color: #707070;">' ~ sitename ~ '</a>'}, 'CapcoAppBundle') }}<br/>
-                {{ 'user.register.confirmation_message.footer2'|trans({'%sitename%': '<a href="' ~ url('app_homepage') ~ '" style="color: #707070;">' ~ sitename ~ '</a>'}, 'CapcoAppBundle') }}</p>
+                <p style="color: #707070; line-height: 21px">
+                    <hr />
+                    <p>
+                        {{ 'notification.register.footer'|trans({'sitename': '<a href="' ~ url('app_homepage') ~ '" style="color: #707070;">' ~ sitename ~ '</a>'}, 'CapcoAppBundle') }}
+                    </p>
+                    <br/>
+                    {{ 'user.register.confirmation_message.footer2'|trans({'%sitename%': '<a href="' ~ url('app_homepage') ~ '" style="color: #707070;">' ~ sitename ~ '</a>'}, 'CapcoAppBundle') }}
+                </p>
             </td>
         </tr>
     </table>

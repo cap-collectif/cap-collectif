@@ -7,22 +7,22 @@ use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
 final class ProposalCreateAdminMessage extends AbstractAdminMessage
 {
-    public const SUBJECT = 'notification.email.proposal.create.subject';
-    public const TEMPLATE = 'notification.email.proposal.create.body';
+    public const SUBJECT = 'notification.proposal.create.subject';
+    public const TEMPLATE = 'notification.proposal.create.body';
 
     public static function getMyTemplateVars(Proposal $proposal, array $params): array
     {
         return [
-            '%userUrl%' => $params['authorURL'],
-            '%username%' => self::escape($proposal->getAuthor()->getDisplayName()),
-            '%proposal%' => self::escape($proposal->getTitle()),
-            '%date%' => $proposal->getPublishedAt()->format('d/m/Y'),
-            '%time%' => $proposal->getPublishedAt()->format('H:i:s'),
-            '%proposalSummary%' => $params['proposalSummary'],
-            '%proposalDescription%' => $proposal->getBodyTextExcerpt(140),
-            '%proposalUrl%' => $params['proposalURL'],
-            '%proposalUrlBack%' => $params['adminURL'],
-            '%project%' => self::escape(
+            'userUrl' => $params['authorURL'],
+            'username' => self::escape($proposal->getAuthor()->getDisplayName()),
+            'proposal' => self::escape($proposal->getTitle()),
+            'date' => $proposal->getPublishedAt()->format('d/m/Y'),
+            'time' => $proposal->getPublishedAt()->format('H:i:s'),
+            'proposalSummary' => $params['proposalSummary'],
+            'proposalDescription' => $proposal->getBodyTextExcerpt(140),
+            'proposalUrl' => $params['proposalURL'],
+            'proposalUrlBack' => $params['adminURL'],
+            'project' => self::escape(
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle())
         ];
     }
@@ -30,8 +30,8 @@ final class ProposalCreateAdminMessage extends AbstractAdminMessage
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
         return [
-            '%username%' => self::escape($proposal->getAuthor()->getDisplayName()),
-            '%project%' => self::escape(
+            'username' => self::escape($proposal->getAuthor()->getDisplayName()),
+            'project' => self::escape(
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
             )
         ];

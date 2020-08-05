@@ -34,14 +34,9 @@
                     {% if votes is not defined %}
                         {% set votes = userVotesResolver.__invoke(app.user, user).totalCount | default(0) %}
                     {% endif %}
-                    {% transchoice contributions with {'%count%': contributions} from 'CapcoAppBundle' %}
-                        event_registration.listing.contribution
-                    {% endtranschoice %}
+                    {{ 'global.counters.contributions' | trans({'num': contributions}, 'CapcoAppBundle') }}
                     {% if showVotes is not defined or showVotes %}
-                       •
-                      {% transchoice votes with {'%count%': votes} from 'CapcoAppBundle' %}
-                          event_registration.listing.votes
-                      {% endtranschoice %}
+                       • {{ 'votes-count' | trans({'count': votes}, 'CapcoAppBundle') }}
                     {% endif %}
                 {% endif %}
             </span>

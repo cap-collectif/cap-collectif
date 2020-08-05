@@ -23,7 +23,7 @@ async function main() {
     ).then(res => {
       for (const domain of domains) {
         const xlf = fs.createWriteStream(
-          `translations/${domain}.${locale}.xlf`
+          `translations/${domain}+intl-icu.${locale}.xlf`
         );
         res.body.pipe(xlf);
       }

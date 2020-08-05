@@ -8,37 +8,29 @@
         %}
         {% set opinionLabel = project.opinionTerm == 0
             ? projectType is not null and projectType is same as('project.types.interpellation')
-                ? 'project.show.meta.interpellations_count'
-                : 'project.show.opinions'
-            : 'project.show.meta.articlesCount' %}
-        {{ opinionLabel | transchoice(opinions, {}, 'CapcoAppBundle') }}
+                ? 'interpellation.count'
+                : 'proposal-count'
+            : 'article-count' %}
+        {{ opinionLabel | trans({'count': opinions}, 'CapcoAppBundle') }}
         </br>
     {% endif %}
     {% set versions = project.totalVersionsCount %}
     {% if versions > 0 %}
-        {% transchoice versions with {'%count%': versions} from 'CapcoAppBundle'  %}
-            project.show.meta.versionsCount
-        {% endtranschoice %}
+        {{ 'amendment-count' | trans({'count': version}, 'CapcoAppBundle') }}
         </br>
     {% endif %}
     {% set arguments = project.totalArgumentsCount %}
     {% if arguments > 0 %}
-        {% transchoice arguments with {'%count%': arguments} from 'CapcoAppBundle'  %}
-            project.show.meta.argumentsCount
-        {% endtranschoice %}
+        {{ 'argument-count' | trans({'count': arguments}, 'CapcoAppBundle') }}
         </br>
     {% endif %}
     {% set sources = project.totalSourcesCount %}
     {% if sources > 0 %}
-        {% transchoice sources with {'%count%': sources} from 'CapcoAppBundle'  %}
-            project.show.meta.sourcesCount
-        {% endtranschoice %}
+        {{ 'source-count' | trans({'count': sources}, 'CapcoAppBundle') }}
     {% endif %}
     {% set replies = project.totalRepliesCount %}
     {% if replies > 0 %}
-        {% transchoice replies with {'%count%': replies} from 'CapcoAppBundle'  %}
-        project.show.meta.repliesCount
-        {% endtranschoice %}
+        {{ 'answer-count' | trans({'count': replies}, 'CapcoAppBundle') }}
     {% endif %}
 {% endspaceless %}{% endmacro %}
 
@@ -107,9 +99,7 @@
                         <i class="cap cap-file-edit-1"></i>
                         <span class="value">{{ contributionsCount }}</span>
                         <span class="excerpt category">
-                            {% transchoice contributionsCount with {'%count%': contributionsCount} from 'CapcoAppBundle' %}
-                                project.show.meta.total_count
-                            {% endtranschoice %}
+                            {{ 'project.preview.counters.contributions' | trans({'num': contributionsCount}, 'CapcoAppBundle') }}
                         </span>
                     </li>
                 {% endif %}
@@ -128,9 +118,7 @@
                         <i class="cap cap-contacts-1"></i>
                         <span class="value">{{ contributorsCount }}</span>
                         <span class="excerpt category">
-                        {% transchoice contributorsCount with {'%count%': contributorsCount} from 'CapcoAppBundle' %}
-                            project.show.meta.contributors_count
-                        {% endtranschoice %}
+                            {{ 'project.preview.counters.contributors' | trans({'num': contributorsCount}, 'CapcoAppBundle') }}
                         </span>
                     </li>
                 {% endif %}

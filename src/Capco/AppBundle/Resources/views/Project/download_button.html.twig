@@ -12,7 +12,7 @@
                 {% for pas in steps %}
                     <li>
                         <a class="btn  btn-link" href="{{ path('app_project_download', {'stepSlug': pas.step.slug, 'projectSlug': project.slug}) }}">
-                            {{ 'project.download.step' | trans({'%position%': pas.position, '%title%': pas.step.title}, 'CapcoAppBundle') }}
+                            {{ 'project-step-position-title' | trans({'position': pas.position, 'title': pas.step.title}, 'CapcoAppBundle') }}
                         </a>
                     </li>
                 {% endfor %}

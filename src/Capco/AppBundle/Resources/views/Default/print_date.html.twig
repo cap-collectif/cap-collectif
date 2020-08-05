@@ -5,22 +5,21 @@
         {% set endTime = object.endAt | localizeddate('none', 'short', app.request.locale) %}
         {% set endDay = object.endAt | localizeddate('full', 'none', app.request.locale)|capitalize %}
         {% if object.lastOneDay %}
-            {{ 'dates.part_day_start' | trans({'%date%': startDay, '%start_time%': startTime}, 'CapcoAppBundle') }}
-            {{ 'dates.part_day_end' | trans({'%end_time%': endTime}, 'CapcoAppBundle') }}
+            {{ 'global.dates.part_day' | trans({'date': startDay, 'startTime': startTime, 'endTime': endTime}, 'CapcoAppBundle') }}
         {% else %}
             {{ startTime != '00:00'
-                ? 'dates.between_start'|trans({'%start%': startDay, '%start_time%': startTime}, 'CapcoAppBundle')
-                : 'dates.between_start_no_time'|trans({'{start}': startDay}, 'CapcoAppBundle')
+                ? 'global.dates.between.start'|trans({'start': startDay, 'start_time': startTime}, 'CapcoAppBundle')
+                : 'dates.between_start_no_time'|trans({'start': startDay}, 'CapcoAppBundle')
             }}
             {{ endTime != '00:00'
-                ? 'dates.between_end'|trans({'%end%': endDay, '%end_time%': endTime}, 'CapcoAppBundle')
-                : 'dates.between_end_no_time'|trans({'%end%': endDay}, 'CapcoAppBundle')
+                ? 'global.dates.between.end'|trans({'end': endDay, 'end_time': endTime}, 'CapcoAppBundle')
+                : 'global.date.between.end.no_time'|trans({'end': endDay}, 'CapcoAppBundle')
             }}
         {% endif %}
     {% else %}
         {{ startTime != '00:00'
-            ? 'dates.full_day'|trans({'%date%': startDay, '%time%': startTime}, 'CapcoAppBundle')
-            : 'dates.full_day_no_time'|trans({'%date%': startDay}, 'CapcoAppBundle')
+            ? 'global.dates.full_day'|trans({'date': startDay, 'time': startTime}, 'CapcoAppBundle')
+            : 'global.date'|trans({'date': startDay}, 'CapcoAppBundle')
         }}
     {% endif %}
 {% endif %}
@@ -29,10 +28,10 @@
     {% set endDay = object.endAt | localizeddate('full', 'none', app.request.locale) %}
     {% if date(object.endAt) > date() %}
         {{ endTime != '00:00'
-        ? 'dates.end_before_start'|trans({'%end%': endDay, '%end_time%': endTime}, 'CapcoAppBundle')
-        : 'dates.end_before_start_no_time'|trans({'%end%': endDay}, 'CapcoAppBundle')
+        ? 'global.dates.endDate'|trans({'endD': endDay, 'endT': endTime}, 'CapcoAppBundle')
+        : 'global.dates.endDate.endNoTime'|trans({'endD': endDay}, 'CapcoAppBundle')
         }}
     {% else %}
-        {{ 'dates.end_after_start'|trans({'%end%': endDay}, 'CapcoAppBundle') }}
+        {{ 'global.dates.pastDate'|trans({'endD': endDay}, 'CapcoAppBundle') }}
     {% endif %}
 {% endif %}

@@ -121,7 +121,7 @@ class CRUDController extends Controller
                     $this->addFlash(
                         'sonata_flash_success',
                         $this->trans(
-                            'flash_edit_success',
+                            'success.edition.flash',
                             [
                                 '%name%' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
@@ -164,7 +164,7 @@ class CRUDController extends Controller
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->trans(
-                            'flash_edit_error',
+                            'error.edition.flash',
                             [
                                 '%name%' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)

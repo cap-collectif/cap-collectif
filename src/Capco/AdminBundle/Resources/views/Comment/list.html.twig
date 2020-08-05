@@ -29,7 +29,7 @@ file that was distributed with this source code.
     #}
 
     {% if admin.isChild and admin.parent.subject %}
-        {{ "title_edit"|trans({'%name%': admin.parent.toString(admin.parent.subject)|truncate(15) }, 'SonataAdminBundle') }}
+        {{ "global.edit.title"|trans({'name': admin.parent.toString(admin.parent.subject)|truncate(15) }, 'SonataAdminBundle') }}
     {% endif %}
 {% endblock %}
 

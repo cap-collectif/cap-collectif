@@ -655,7 +655,7 @@ Scenario: API client wants to get a synthesis element that is published
         "loggedAt": "@string@.isDateTime()",
         "version": 2,
         "sentences": [
-          "synthesis.logs.sentence.update {\"%author%\":null}"
+          "logs.synthesis.sentence.update {\"author\":null}"
         ]
       },
       {
@@ -1018,7 +1018,7 @@ Scenario: API client wants to get a synthesis element history
       "loggedAt": "@string@.isDateTime()",
       "version": 2,
       "sentences": [
-        "synthesis.logs.sentence.update {\"%author%\":null}"
+        "logs.synthesis.sentence.update {\"author\":null}"
       ]
     },
     {
@@ -1027,7 +1027,7 @@ Scenario: API client wants to get a synthesis element history
       "loggedAt": "@string@.isDateTime()",
       "version": 1,
       "sentences": [
-        "synthesis.logs.sentence.create {\"%author%\":null}"
+        "synthesis.logs.sentence.create"
       ]
     }
   ]

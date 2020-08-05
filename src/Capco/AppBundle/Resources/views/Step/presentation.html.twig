@@ -60,9 +60,7 @@
             <span class="small excerpt">
                 {{ contributorsCount }}
                 {% if anonymousCount > 0 %}
-                    {% transchoice anonymousCount with {'%count%': anonymousCount} from 'CapcoAppBundle' %}
-                    project.show.contributors.anonymous
-                    {% endtranschoice %}
+                    {{ 'contributors-anonymous-count' | trans({'count': anonymousCount}, 'CapcoAppBundle') }}
                 {% endif %}
             </span>
             {% if is_feature_enabled('share_buttons') %}

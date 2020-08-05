@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_project_delete_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}{% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ 'opinion.delete.page_title'|trans({'%title%': opinion.title}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'oproposal.delete.title'|trans({'title': opinion.title}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}

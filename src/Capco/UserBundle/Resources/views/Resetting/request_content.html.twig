@@ -8,7 +8,7 @@
                             {% if invalid_email is defined %}
                                 <div class="alert alert-danger alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'global.close'|trans({}, 'CapcoAppBundle') }}</span></button>
-                                    <span class="h5">{{ 'resetting.request.invalid_email'|trans({'%email%': invalid_email}, 'CapcoAppBundle') }}</span>
+                                    <span class="h5">{{ 'global.error.email'|trans({'email': invalid_email}, 'CapcoAppBundle') }}</span>
                                 </div>
                             {% endif %}
                             <label for="email" class="control-label">{{ 'global.email'|trans({}, 'CapcoAppBundle') }}</label>

@@ -126,8 +126,8 @@ class OpinionController extends Controller
                     $this->addFlash(
                         'sonata_flash_success',
                         $this->admin->trans(
-                            'flash_create_success',
-                            ['%name%' => $this->escapeHtml($this->admin->toString($object))],
+                            'success.creation.flash',
+                            ['name' => $this->escapeHtml($this->admin->toString($object))],
                             'CapcoAppBundle'
                         )
                     );
@@ -147,8 +147,8 @@ class OpinionController extends Controller
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->admin->trans(
-                            'flash_create_error',
-                            ['%name%' => $this->escapeHtml($this->admin->toString($object))],
+                            'error.creation.flash',
+                            ['name' => $this->escapeHtml($this->admin->toString($object))],
                             'CapcoAppBundle'
                         )
                     );
@@ -240,7 +240,7 @@ class OpinionController extends Controller
                     $this->addFlash(
                         'sonata_flash_success',
                         $this->admin->trans(
-                            'flash_edit_success',
+                            'success.edition.flash',
                             ['%name%' => $this->escapeHtml($this->admin->toString($object))],
                             'CapcoAppBundle'
                         )
@@ -277,7 +277,7 @@ class OpinionController extends Controller
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->admin->trans(
-                            'flash_edit_error',
+                            'error.edition.flash',
                             ['%name%' => $this->escapeHtml($this->admin->toString($object))],
                             'CapcoAppBundle'
                         )
@@ -382,7 +382,7 @@ class OpinionController extends Controller
                 $this->addFlash(
                     'sonata_flash_success',
                     $this->admin->trans(
-                        'flash_delete_success',
+                        'success.delete.flash',
                         ['%name%' => $this->escapeHtml($objectName)],
                         'CapcoAppBundle'
                     )
@@ -397,7 +397,7 @@ class OpinionController extends Controller
                 $this->addFlash(
                     'sonata_flash_error',
                     $this->admin->trans(
-                        'flash_delete_error',
+                        'error.delete.flash',
                         ['%name%' => $this->escapeHtml($objectName)],
                         'CapcoAppBundle'
                     )

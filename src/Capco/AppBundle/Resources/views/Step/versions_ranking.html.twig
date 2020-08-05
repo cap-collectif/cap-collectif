@@ -33,7 +33,7 @@
         <div class="opinion opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
                 <div class="pull-left opinion__header__title">
-                    {{ 'project.ranking.versions' | transchoice(versions | length, {}, 'CapcoAppBundle')  }}
+                    {{ 'amendment-ranking' | trans({'count': versions | length}, 'CapcoAppBundle') }}
                 </div>
             </div>
         </div>

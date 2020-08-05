@@ -21,7 +21,7 @@ Scenario: User has lost password
   When I follow "global.forgot_password"
   And  I fill in "email" with "user@test.com"
   And I press "global.submit"
-  Then I should see 'resetting.check_email {"%email%":"user@test.com"}'
+  Then I should see 'resetting-check-email {"email":"user@test.com"}'
 
 @database
 Scenario: User has lost password and email should be sent
@@ -29,7 +29,7 @@ Scenario: User has lost password and email should be sent
   When I follow "global.forgot_password"
   And  I fill in "email" with "user@test.com"
   And I press "global.submit"
-  Then I should see 'resetting.check_email {"%email%":"user@test.com"}'
+  Then I should see 'resetting-check-email {"email":"user@test.com"}'
   And I open mail to "user@test.com"
   And I should see "email-content-resetting-password" in mail
 

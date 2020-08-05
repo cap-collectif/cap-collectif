@@ -41,9 +41,7 @@
             {% if post.projects | length > 0 %}
                 <div class="block blog_link-project">
                     <p>
-                        {% transchoice post.projects | length from 'CapcoAppBundle' %}
-                            blog.show.projects.title
-                        {% endtranschoice %}
+                        {{ 'blog.show.projects.title' | trans({'count': post.projects | length}, 'CapcoAppBundle') }}
                     </p>
                     <ul>
                         {% for project in post.projects %}

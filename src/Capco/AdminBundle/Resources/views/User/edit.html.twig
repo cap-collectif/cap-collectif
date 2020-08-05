@@ -2,11 +2,11 @@
 {% set username = admin.subject.displayName|trans({}, 'CapcoAppBundle') %}
 
 {% block title %}
-    {{ "title_edit"|trans({'%name%': username|truncate(15) }, 'SonataAdminBundle') }}
+    {{ "global.edit.title"|trans({'name': username|truncate(15) }, 'SonataAdminBundle') }}
 {% endblock %}
 
 {% block navbar_title %}
-    {{ "title_edit"|trans({'%name%': username }, 'SonataAdminBundle') }}
+    {{ "global.edit.title"|trans({'name': username }, 'SonataAdminBundle') }}
 {% endblock %}
 
 {% block form %}

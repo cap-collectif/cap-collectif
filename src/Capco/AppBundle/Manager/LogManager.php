@@ -74,14 +74,14 @@ class LogManager
 
     public function makeSentence($action, $username)
     {
-        $transBase = 'synthesis.logs.sentence.';
+        if ('update' === $action) {
+            return $this->translator->trans(
+                'logs.synthesis.sentence.update',
+                ['author' => $username],
+                'CapcoAppBundle'
+            );
+        }
 
-        return $this->translator->trans(
-            $transBase . $action,
-            [
-                '%author%' => $username,
-            ],
-            'CapcoAppBundle'
-        );
+        return $this->translator->trans("synthesis.logs.sentence.${action}", [], 'CapcoAppBundle');
     }
 }

@@ -2,11 +2,9 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
-use Capco\UserBundle\Entity\User;
-
 abstract class AbstractAdminMessage extends AbstractMessage
 {
-    public const FOOTER = 'notification.email.admin_footer';
+    public const FOOTER = 'notification.footer.admin';
 
     public function __construct(
         string $recipientEmail,
@@ -32,9 +30,9 @@ abstract class AbstractAdminMessage extends AbstractMessage
         string $siteURL = ''
     ): array {
         return [
-            '%to%' => $recipientEmail,
-            '%sitename%' => $siteName,
-            '%siteUrl%' => $siteURL
+            'to' => $recipientEmail,
+            'sitename' => $siteName,
+            'siteUrl' => $siteURL,
         ];
     }
 }

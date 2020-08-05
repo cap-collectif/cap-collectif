@@ -25,7 +25,7 @@
             {% set up = min(current+2, nb) %}
             {% for p in range(down, up) %}
                 <li{% if p == current %} class="active"{% endif %}>
-                    <a href="{{ render.link(p, route, params, pageName) }}" aria-label="{{ 'global.pagination.page' | trans({'%page%': p}, 'CapcoAppBundle') }}">{{ p }}</a>
+                    <a href="{{ render.link(p, route, params, pageName) }}" aria-label="{{ 'global.pagination.goto' | trans({'page': p}, 'CapcoAppBundle') }}">{{ p }}</a>
                 </li>
             {% endfor %}
             <li {% if current >= nb %} class="disabled"{% endif %}>

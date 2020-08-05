@@ -21,10 +21,10 @@
             {% endif %}
 
             {% if top is not null and opinion.ranking is not null and opinion.ranking <= top %}
-                {% set topLabel = isVersion ? 'opinion.show.ranking.versions'
+                {% set topLabel = isVersion ? 'opinion.ranking.versions'
                     : opinionTerm is defined and opinionTerm == 1
-                        ? 'opinion.show.ranking.articles'
-                        : 'opinion.show.ranking.opinions'
+                        ? 'opinion.ranking.articles'
+                        : 'opinion.ranking.opinions'
                 %}
                 <span class="opinion__label opinion__label--green">
                     <i class="cap cap-trophy"></i>
@@ -63,27 +63,27 @@
         {% set opinionType = isVersion ? opinion.parent.opinionType : opinion.opinionType %}
         <p class="opinion__votes  excerpt  small">
             {% if opinionType.voteWidgetType != 0 %}
-                <span>{% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
-                    project.show.votes
-                {% endtranschoice %}</span>
+                <span>
+                    {{ 'votes-count' | trans({'count': nbVotes}, 'CapcoAppBundle') }}
+                </span>
             {% endif %}
             {% if isVersion == false and opinionType.versionable %}
                 <span class="count__separator"> • </span>
-                <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
-                    project.show.versions
-                    {% endtranschoice %}</span>
+                <span>
+                    {{ 'global.versions' | trans({'count': nbVersions, 'num': nbVersions}, 'CapcoAppBundle') }}
+                </span>
             {% endif %}
             {% if opinionType.commentSystem != 0 %}
                 <span class="count__separator"> • </span>
-                <span>{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
-                    project.show.arguments
-                {% endtranschoice %}</span>
+                <span>
+                    {{ 'argument-count' | trans({'count': nbArguments}, 'CapcoAppBundle') }}
+                </span>
             {% endif %}
             {% if opinionType.sourceable %}
                 <span class="count__separator"> • </span>
-                <span>{% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
-                    project.show.sources
-                {% endtranschoice %}</span>
+                <span>
+                    {{ 'global.sources' | trans({'count': nbSources, 'num': nbSources}, 'CapcoAppBundle') }}
+                </span>
             {% endif %}
         </p>
     </div>

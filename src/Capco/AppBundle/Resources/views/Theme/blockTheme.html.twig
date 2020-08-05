@@ -25,23 +25,17 @@
                 <ul class="theme__counters__list">
                 {% if nbProjects > 0 %}
                     <li class="theme__counters__list--counter">
-                        {% transchoice nbProjects with {'%count%': nbProjects} from 'CapcoAppBundle' %}
-                            theme.index.projects
-                        {% endtranschoice %}
+                        {{ 'project-count' | trans({'count': nbProjects}, 'CapcoAppBundle') }}
                     </li>
                 {% endif %}
                 {% if nbPosts > 0 %}
                     <li class="theme__counters__list--counter">
-                        {% transchoice nbPosts with {'%count%': nbPosts} from 'CapcoAppBundle' %}
-                            theme.index.posts
-                        {% endtranschoice %}
+                        {{ 'article-count' | trans({'count': nbPosts}, 'CapcoAppBundle') }}
                     </li>
                 {% endif %}
                 {% if nbEvents > 0 %}
                     <li class="theme__counters__list--counter">
-                        {% transchoice nbEvents with {'%count%': nbEvents} from 'CapcoAppBundle' %}
-                            theme.index.events
-                        {% endtranschoice %}
+                        {{ 'number-of-events' | trans({'count': nbEvents}, 'CapcoAppBundle') }}
                     </li>
                 {% endif %}
                 </ul>

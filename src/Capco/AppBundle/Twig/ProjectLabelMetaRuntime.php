@@ -24,19 +24,41 @@ class ProjectLabelMetaRuntime implements RuntimeExtensionInterface
             ? $currentStep->getProject()->getProjectType()
             : false;
         $title = $projectType ? $projectType->getTitle() : false;
-        if ('votes_count' === $label && $title) {
-            if ('project.types.interpellation' === $title) {
-                return $this->createTransChoice('project.show.meta.supports_count', $count);
-            }
+        $transKey = self::getTransKeyFromLabel($label, $title);
 
-            return $this->createTransChoice('project.show.meta.votes_count', $count);
-        }
-
-        return $this->createTransChoice('project.show.meta.' . $label, $count);
+        return $this->translator->trans($transKey, ['count' => $count], 'CapcoAppBundle');
     }
 
-    private function createTransChoice(string $id, int $count): string
+    private static function getTransKeyFromLabel(string $label, string $title): string
     {
-        return $this->translator->transChoice($id, $count, ['%count%' => $count], 'CapcoAppBundle');
+        if ('contributors_count' === $label) {
+            return 'global.counters.contributors';
+        }
+        if ('articlesCount' === $label) {
+            return 'article-count';
+        }
+        if ('repliesCount' === $label) {
+            return 'answer-count';
+        }
+        if ('sourcesCount' === $label) {
+            return 'source-count';
+        }
+        if ('total_count' === $label) {
+            return 'global.counters.contributions';
+        }
+        if ('versionsCount' === $label) {
+            return 'amendment-count';
+        }
+        if ('votes_count' === $label && 'project.types.interpellation' === $title) {
+            return 'support.count_no_nb';
+        }
+        if ('votes_count' === $label) {
+            return 'vote.count_no_nb';
+        }
+        if ('supports_count' === $label) {
+            return 'support.count_no_nb';
+        }
+
+        return '';
     }
 }

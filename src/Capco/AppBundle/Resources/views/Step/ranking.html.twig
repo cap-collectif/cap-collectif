@@ -37,11 +37,11 @@
 
     <div id="opinions--ranking" class="anchor-offset  block  block--bordered">
 
-        {% set opinionsLabel = project.opinionTerm == 0 ? 'project.ranking.opinions' : 'project.ranking.articles' %}
+        {% set opinionsLabel = project.opinionTerm == 0 ? 'proposal-ranking' : 'article-ranking' %}
         <div class="opinion opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
                 <div class="pull-left opinion__header__title">
-                    {{ opinionsLabel | transchoice(opinions | length, {}, 'CapcoAppBundle')  }}
+                    {{ opinionsLabel | trans({'count': opinions | length}, 'CapcoAppBundle') }}
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
             <div class="opinion opinion--default">
                 <div class="opinion__header  opinion__header--mobile-centered">
                     <div class="pull-left opinion__header__title">
-                        {{ 'project.ranking.versions' | transchoice(versions | length, {}, 'CapcoAppBundle')  }}
+                        {{ 'amendment-ranking' | trans({'count': versions | length}, 'CapcoAppBundle') }}
                     </div>
                 </div>
             </div>

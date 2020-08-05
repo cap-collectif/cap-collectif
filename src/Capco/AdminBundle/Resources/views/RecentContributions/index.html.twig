@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    {{ 'admin.fields.recent_contributions.number' | transchoice(contributions | length, {'%count%': contributions | length}, 'CapcoAppBundle') }}
+                    {{ 'global.counters.contributions' | trans({'num': contributions | length}, 'CapcoAppBundle') }}
                 </a>
             </div>
         </div>

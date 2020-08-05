@@ -56,7 +56,7 @@ class CommentController extends CRUDController
                 $this->addFlash(
                     'sonata_flash_success',
                     $this->trans(
-                        'flash_delete_success',
+                        'success.delete.flash',
                         ['%name%' => $this->escapeHtml($objectName)],
                         'SonataAdminBundle'
                     )
@@ -71,7 +71,7 @@ class CommentController extends CRUDController
                 $this->addFlash(
                     'sonata_flash_error',
                     $this->trans(
-                        'flash_delete_error',
+                        'error.delete.flash',
                         ['%name%' => $this->escapeHtml($objectName)],
                         'SonataAdminBundle'
                     )

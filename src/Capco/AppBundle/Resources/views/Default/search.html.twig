@@ -63,8 +63,7 @@
 
                     <div class="col-xs-12 col-sm-9">
                         <h2 class="h2 search__results-nb" style="margin-top: 0;">
-                            {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}
-                            search.results.title{% endtranschoice %}
+                            {{ 'search-results-count' | trans({'count': count}, 'CapcoAppBundle') }}
                             <span class="pull-right">
                                 {{ form_widget(form.sort) }}
                             </span>
@@ -76,7 +75,7 @@
                             {% for result in results %}
                                 {% set entity = result.transformed %}
                                 {% set default_title = 'global.more' | trans({}, 'CapcoAppBundle') %}
-                                {% set type_label    = 'search.results.type.' ~ result.result.hit['_type'] %}
+                                {% set type_label    = 'global.' ~ result.result.hit['_type'] %}
 
                                 {% if result.result.hit['_type'] == 'user' %}
                                     {% set title = result.result.hit['_source']['displayName'] is defined ? result.result.hit['_source']['displayName'] : result.transformed.displayName %}

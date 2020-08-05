@@ -1,13 +1,13 @@
 {% block body_text %}
     {% autoescape false %}
-        {{ 'proposal_status_change_collect.notification.body'|trans(
+        {{ 'notification.proposal.status.collect.body'|trans(
             {
-                '%sitename%': capco_site_parameter_value('global.site.fullname'),
-                '%project%': proposal.step.project.title,
-                '%proposal%': proposal.title,
-                '%status%': proposal.status.name,
-                '%proposal_link%': url('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'stepSlug': proposal.step.slug, 'proposalSlug': proposal.slug}),
-                '%user%': proposal.author.getDisplayName(),
+                'sitename': capco_site_parameter_value('global.site.fullname'),
+                'project': proposal.step.project.title,
+                'proposal': proposal.title,
+                'status': proposal.status.name,
+                'proposal_link': url('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'stepSlug': proposal.step.slug, 'proposalSlug': proposal.slug}),
+                'user': proposal.author.getDisplayName(),
             },
             'CapcoAppBundle',
             user_locale

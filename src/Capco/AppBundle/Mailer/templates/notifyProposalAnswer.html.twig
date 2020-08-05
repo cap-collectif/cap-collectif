@@ -1,14 +1,14 @@
 {% block body_text %}
     {% autoescape false %}
-        {{ 'proposal_answer.notification.body'|trans(
+        {{ 'notification.proposal.answer.body'|trans(
             {
-                '%sitename%': capco_site_parameter_value('global.site.fullname'),
-                '%project%': proposal.step.project.title,
-                '%proposal%': proposal.title,
-                '%answer%': proposal.answer.body,
-                '%proposal_link%': url('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'stepSlug': proposal.step.slug, 'proposalSlug': proposal.slug}),
-                '%step%': proposal.step.title,
-                '%user%': proposal.author.getDisplayName(),
+                'sitename': capco_site_parameter_value('global.site.fullname'),
+                'project': proposal.step.project.title,
+                'proposal': proposal.title,
+                'answer': proposal.answer.body,
+                'proposal_link': url('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'stepSlug': proposal.step.slug, 'proposalSlug': proposal.slug}),
+                'step': proposal.step.title,
+                'user': proposal.author.getDisplayName(),
             },
             'CapcoAppBundle',
             user_locale

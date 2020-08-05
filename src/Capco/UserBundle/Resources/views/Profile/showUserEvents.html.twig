@@ -6,7 +6,7 @@
 {% block metaTags %}
     {% set userMedia %}{% if user.media %}{% path user.media, 'avatar' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle')~' - '~'user.profile.show.propositions.arguments.title'|trans({}, 'CapcoAppBundle'),
+        'title':       'usernames-profile'|trans({'userName': user.username }, 'CapcoAppBundle')~' - '~'user.profile.show.propositions.arguments.title'|trans({}, 'CapcoAppBundle'),
         'description': user.biography,
         'url':         url('capco_user_profile_show_events', {'slug': user.slug}),
         'type':        'profile',
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }} - {{ 'user.profile.show.propositions.arguments.title'|trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'usernames-profile'|trans({'userName': user.username }, 'CapcoAppBundle') }} - {{ 'user.profile.show.propositions.arguments.title'|trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}
