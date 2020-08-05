@@ -30,10 +30,17 @@ class PageAdmin extends AbstractAdmin
             // but it's propably better like that :-)
             ->add('title', TextType::class, [
                 'label' => 'global.title',
-            ])
-            ->add('slug', TextType::class, [
+            ]);
+
+        if ($this->getSubject()->getId()) {
+            $formMapper->add('slug', TextType::class, [
+                'disabled' => true,
+                'attr' => ['readonly' => true],
                 'label' => 'global.link',
-            ])
+            ]);
+        }
+
+        $formMapper
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
