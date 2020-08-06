@@ -4586,6 +4586,9 @@ type Mutation {
 
   """Cancel user invitation in the application"""
   cancelUserInvitations(input: CancelUserInvitationsInput!): CancelUserInvitationsPayload
+
+  """Reset password"""
+  resetPassword(input: ResetPasswordInput!): ResetPasswordPayload
 }
 
 """A connection to a list of items."""
@@ -8516,6 +8519,24 @@ enum RequirementType {
 
   """The requirement is a date of birth"""
   DATE_OF_BIRTH
+}
+
+input ResetPasswordInput {
+  """The token needed to identify the user"""
+  token: String!
+
+  """The new password"""
+  password: String!
+  clientMutationId: String
+}
+
+type ResetPasswordPayload {
+  """The modified user"""
+  user: User
+
+  """In case of error a message is given here"""
+  error: String
+  clientMutationId: String
 }
 
 """A response to a question."""

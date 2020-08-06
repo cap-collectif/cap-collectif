@@ -938,3 +938,10 @@ InternalMutation:
                     inputType: CancelUserInvitationsInput
                     payloadType: CancelUserInvitationsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CancelUserInvitationsMutation", [value])'
+            resetPassword:
+                description: 'Reset password'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: ResetPasswordInput
+                    payloadType: ResetPasswordPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ResetPasswordMutation", [value])'

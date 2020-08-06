@@ -8,20 +8,18 @@ Scenario: Admin wants to enable his account and set his password
   Then I should be redirected to "/resetting/reset/reset-my-password-token"
   And I wait "#reset-content-confirm" to appear on current page
   When I fill in the following:
-    | recreate_password_form_plainPassword_first  | a |
-    | recreate_password_form_plainPassword_second | a |
-  And I press "reset-content-confirm"
-  And I wait ".form-error-message" to appear on current page
+    | password-form-new  | a |
+    | password-form-confirmation | a |
   And I should see "at-least-8-characters-one-digit-one-uppercase-one-lowercase"
   When I fill in the following:
-    | recreate_password_form_plainPassword_first  | a |
-    | recreate_password_form_plainPassword_second | q |
-  And I press "reset-content-confirm"
+    | new_password  | a |
+    | new_password_confirmation | q |
   Then I should see "fos_user.password.mismatch"
   When I fill in the following:
-    | recreate_password_form_plainPassword_first  | Toto91toto  |
-    | recreate_password_form_plainPassword_second | Toto91toto  |
+    | new_password  | Toto91toto  |
+    | new_password_confirmation | Toto91toto  |
   And I press "reset-content-confirm"
+  And I wait "global.loading" to disappear on current page
   Then I should be redirected to "/"
   Then I can see I am logged in as "admin_without_password"
   And I should see "resetting.flash.success"

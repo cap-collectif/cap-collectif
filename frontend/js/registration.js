@@ -70,6 +70,7 @@ import EngagementListApp from './startup/EngagementListApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
 import appStore from '~/stores/AppStore';
 import UserInvitationPageApp from '~/startup/UserInvitationPageApp';
+import ResetPasswordApp from '~/startup/ResetPasswordApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -140,4 +141,5 @@ ReactOnRails.register({
   LanguageButtonApp,
   StepEventsApp,
   UserInvitationPageApp,
+  ResetPasswordApp,
 });

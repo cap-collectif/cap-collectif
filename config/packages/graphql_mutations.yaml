@@ -60,3 +60,7 @@ services:
           $jwtKey: '%jitsi_jwt_key%'
           $jitsiEncryptionKey: '%jitsi_encryption_key%'
           $jitsiHexIv: '%jitsi_hex_iv%'
+
+  Capco\AppBundle\GraphQL\Mutation\ResetPasswordMutation:
+      arguments:
+          $firewallName: '%fos_user.firewall_name%'
