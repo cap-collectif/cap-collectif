@@ -1,7 +1,7 @@
 @consultation @sources
 Feature: Source
 
-@database @randomly-failing
+@database
 Scenario: User wants to add a source in a contribuable opinion
   Given I am logged in as user
   And I go to an opinion with no sources
@@ -29,7 +29,7 @@ Scenario: Can vote for a source
   When I delete my vote for the first source
 
 # Update
-@database @randomly-failing
+@database
 Scenario: Author of a source loose their votes when updating it
   Given I am logged in as user
   And I go to an opinion

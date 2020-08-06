@@ -112,7 +112,7 @@ Scenario: Logged in user wants to see his votes on a project and remove one
   And I should see 'count-proposal {"num":0}'
   And I should have 2 votes
 
-@database @randomly-failing
+@database
 Scenario: Logged in as user who doesn't full fill requirements and want to vote...
   Given I am logged in as pierre
   When I go to a project with requirement condition to vote and ranking

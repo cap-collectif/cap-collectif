@@ -134,13 +134,12 @@ Scenario: Anonymous wants to delete an argument on an opinion
 
 ## Delete from version
 
-@database @randomly-failing
+@database
 Scenario: Author of an argument on a version wants to delete it
   Given I am logged in as user
   And I go to a version
   When I delete my argument
-  And I wait 1 seconds
-  Then I should see "alert.success.delete.argument" in the "#global-alert-box" element
+  And I should see "alert.success.delete.argument" appear on current page in "#global-alert-box"
   And I should not see my argument anymore
 
 @security

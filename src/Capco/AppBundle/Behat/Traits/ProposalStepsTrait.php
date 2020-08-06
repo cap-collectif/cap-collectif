@@ -752,6 +752,7 @@ trait ProposalStepsTrait
     public function iGoToAProposalWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithBudgetVoteParams);
+        $this->iWaitElementToAppearOnPage('#proposal-page-tabs');
     }
 
     /**
@@ -760,6 +761,7 @@ trait ProposalStepsTrait
     public function iGoBPWithVoteRankingPage()
     {
         $this->visitPageWithParams('collect page', self::$bpVoteClassement);
+        $this->iWaitElementToAppearOnPage('.project__step-dates');
     }
 
     /**

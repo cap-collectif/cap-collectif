@@ -76,12 +76,14 @@ Scenario: Logged in admin adds a conditional jump on a question
   And I wait ".alert__form_succeeded-message" to appear on current page maximum "30"
   Then I should see "global.saved"
 
-@database @rabbitmq @randomly-failing
+@database @rabbitmq
 Scenario: Logged in admin edit questionnaire, import choices
   Given I am logged in as admin
   And I go to the admin questionnaire edit page with id questionnaireAdmin
-  Then I wait "#js-btn-create-question" to appear on current page
-  And I click on button "#js-btn-create-question"
+  Then I wait "#parameters-submit" to appear on current page
+  And I click the "#perso-field-add" element
+  And I wait "question_modal.create.title" to appear on current page in "body"
+  And I click the ".create-question" element
   And I wait "#proposal-form-admin-question-modal-title-lg" to appear on current page
   Then I fill in the following:
     | questions[0].title | Question title edited with test |

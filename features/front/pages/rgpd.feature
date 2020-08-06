@@ -31,7 +31,6 @@ Scenario: An anonymous wants to show cookie page
   And I should not see "cookies.content.page"
   Then I should see "texte-cookie-audience-communication"
 
-@randomly-failing
 Scenario: An anonymous wants to toggle cookies performance
   Given I visited "projects page" with cookies not accepted
   And I scroll to the bottom
@@ -132,7 +131,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
   And I wait "#changeLanguageProposalContainer" to appear on current page
   Then I should see a cookie named "locale"
 
-@international @randomly-failing
+@international
 Scenario: An anonymous wants to change locale through footer
   Given feature "unstable__multilangue" is enabled
   Given I visited "home page"
