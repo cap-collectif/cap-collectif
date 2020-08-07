@@ -15,7 +15,7 @@ class FeaturesCategoryResolver
             'conditions' => ['calendar'],
             'features' => [
                 UserRole::ROLE_SUPER_ADMIN => [],
-                UserRole::ROLE_ADMIN => ['allow_users_to_propose_events']
+                UserRole::ROLE_ADMIN => ['allow_users_to_propose_events'],
             ],
         ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
@@ -59,6 +59,7 @@ class FeaturesCategoryResolver
                     'secure_password',
                     'restrict_connection',
                     'public_api',
+                    'votes_min',
                     'developer_documentation',
                 ],
                 UserRole::ROLE_SUPER_ADMIN => [

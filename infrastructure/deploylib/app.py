@@ -100,7 +100,7 @@ def ssh(user='capco'):
 def clear_cache(environment='dev'):
     "Clear cache"
     env.service_command('rm -rf var/cache/' + environment, 'application', env.www_app, 'root')
-    env.service_command('bin/console cache:pool:clear cache.app', 'application', env.www_app, 'capco')
+    env.service_command('php -d memory_limit=-1 bin/console cache:pool:clear cache.app', 'application', env.www_app, 'capco')
 
 
 @task(environments=['local'])

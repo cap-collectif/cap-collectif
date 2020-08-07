@@ -339,3 +339,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@multiCstepExport'
         project: '@projectExport'
         position: 2
+    pasExport3:
+        id: pasExport3
+        step: '@selectionStepExport'
+        project: '@projectExport'
+        position: 3

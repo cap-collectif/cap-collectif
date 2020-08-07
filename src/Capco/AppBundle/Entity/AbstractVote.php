@@ -86,6 +86,10 @@ abstract class AbstractVote implements
      * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
+    /**
+     * @ORM\Column(name="is_accounted", type="boolean", options={"default": true})
+     */
+    private $isAccounted = true;
 
     public function getKind(): string
     {
@@ -152,6 +156,17 @@ abstract class AbstractVote implements
     public function getConsultation(): ?Consultation
     {
         return null;
+    }
+
+    public function getIsAccounted(): bool
+    {
+        return $this->isAccounted;
+    }
+
+    public function setIsAccounted(bool $isAccounted): self
+    {
+        $this->isAccounted = $isAccounted;
+        return $this;
     }
 
     public static function getElasticsearchPriority(): int

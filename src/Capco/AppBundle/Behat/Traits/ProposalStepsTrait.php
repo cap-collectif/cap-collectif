@@ -700,7 +700,7 @@ trait ProposalStepsTrait
     public function iGoToTheVotesDetailsOfProjectWithRequirementsPage()
     {
         $this->visitPageWithParams('project user votes page', self::$bpVoteClassement);
-        $this->waitAndThrowOnFailure(3000, '$("#ProposalsUserVotesPage").length > 0');
+        $this->waitAndThrowOnFailure(5000, '$("#ProposalsUserVotesPage").length > 0');
     }
 
     /**

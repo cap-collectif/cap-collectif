@@ -34,6 +34,8 @@ export const renderSortValues = (intl: IntlShape) => [
   { label: intl.formatMessage({ id: 'global.filter_f_expensive' }), value: 'EXPENSIVE' },
 ];
 
+const formName = 'stepForm';
+
 export const ProjectAdminSelectionStepForm = ({
   votable,
   statuses,
@@ -62,14 +64,14 @@ export const ProjectAdminSelectionStepForm = ({
           component={component}>
           <ToggleButton
             id="step_now"
-            onClick={() => dispatch(change('stepForm', 'proposalsHidden', 0))}
+            onClick={() => dispatch(change(formName, 'proposalsHidden', 0))}
             value={0}>
             <FormattedMessage id="global.immediate" />
           </ToggleButton>
           <ToggleButton
             id="step_start"
             value={1}
-            onClick={() => dispatch(change('stepForm', 'proposalsHidden', 1))}>
+            onClick={() => dispatch(change(formName, 'proposalsHidden', 1))}>
             <FormattedMessage id="step_start" />
           </ToggleButton>
         </Field>
@@ -93,19 +95,14 @@ export const ProjectAdminSelectionStepForm = ({
         label={<FormattedMessage id="admin.fields.step.allowingProgressSteps" />}
       />
       {renderSubSection('admin.fields.step.statuses')}
-      <FieldArray
-        name="statuses"
-        component={StepStatusesList}
-        formName="stepForm"
-        statuses={statuses}
-      />
+      <FieldArray name="statuses" component={StepStatusesList} formName statuses={statuses} />
       <Button
         id="js-btn-create-step-status"
         bsStyle="primary"
         className="btn-outline-primary box-content__toolbar mb-20"
         onClick={() =>
           dispatch(
-            arrayPush('stepForm', 'statuses', {
+            arrayPush(formName, 'statuses', {
               id: null,
               color: 'primary',
             }),

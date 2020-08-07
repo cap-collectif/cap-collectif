@@ -10,6 +10,7 @@ describe('<ProposalVoteBasketWidget />', () => {
     step: {
       $refType,
       id: '1',
+      votesMin: null,
       title: 'step title',
       votesLimit: null,
       voteType: 'SIMPLE',
@@ -41,6 +42,7 @@ describe('<ProposalVoteBasketWidget />', () => {
     step: {
       $refType,
       id: '1',
+      votesMin: null,
       title: 'step title',
       voteType: 'SIMPLE',
       budget: null,
@@ -73,6 +75,7 @@ describe('<ProposalVoteBasketWidget />', () => {
     step: {
       $refType,
       id: '1',
+      votesMin: null,
       title: 'step title',
       voteType: 'SIMPLE',
       budget: 350000,
@@ -104,6 +107,7 @@ describe('<ProposalVoteBasketWidget />', () => {
     step: {
       $refType,
       id: '1',
+      votesMin: 2,
       title: 'step title',
       voteType: 'SIMPLE',
       budget: 350000,
@@ -136,6 +140,7 @@ describe('<ProposalVoteBasketWidget />', () => {
       id: '1',
       title: 'step title',
       voteType: 'SIMPLE',
+      votesMin: null,
       budget: null,
       votesLimit: 2,
       form: {

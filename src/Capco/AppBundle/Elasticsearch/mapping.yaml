@@ -405,6 +405,7 @@ mappings:
             createdAt: { type: date }
             project: *Project
             published: { type: boolean }
+            isAccounted: { type: boolean }
             publishedAt: { type: date }
             step: *Step
             value: { type: long }

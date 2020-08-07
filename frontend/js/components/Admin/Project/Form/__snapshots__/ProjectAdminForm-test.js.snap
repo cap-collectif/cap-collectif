@@ -368,6 +368,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "user_invitations": false,
         "user_type": false,
         "votes_evolution": false,
+        "votes_min": false,
         "zipcode_at_register": false,
       }
     }
@@ -615,6 +616,7 @@ exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
         "user_invitations": false,
         "user_type": false,
         "votes_evolution": false,
+        "votes_min": false,
         "zipcode_at_register": false,
       }
     }

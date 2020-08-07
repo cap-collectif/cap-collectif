@@ -23,3 +23,6 @@ InternalVote:
       kind:
         type: 'String!'
         description: 'Returns Type of vote'
+      isAccounted:
+        type: 'Boolean!'
+        description: 'Returns if vote is accounted or not'

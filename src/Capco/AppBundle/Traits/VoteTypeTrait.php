@@ -31,6 +31,12 @@ trait VoteTypeTrait
     private $votesLimit;
 
     /**
+     * @ORM\Column(name="votes_min", type="integer", nullable=true)
+     * @Assert\Length(min=1)
+     */
+    private $votesMin;
+
+    /**
      * @ORM\Column(name="votes_ranking", type="boolean", nullable=false, options={"default": false})
      */
     private $votesRanking = false;
@@ -40,7 +46,7 @@ trait VoteTypeTrait
         return [
             'global.disabled' => VoteType::DISABLED,
             'step.vote_type.simple' => VoteType::SIMPLE,
-            'step.vote_type.budget' => VoteType::BUDGET
+            'step.vote_type.budget' => VoteType::BUDGET,
         ];
     }
 
@@ -61,7 +67,7 @@ trait VoteTypeTrait
         return $this->budget;
     }
 
-    public function setBudget(float $budget = null): self
+    public function setBudget(?float $budget = null): self
     {
         $this->budget = $budget;
 
@@ -78,7 +84,7 @@ trait VoteTypeTrait
         return $this->votesLimit;
     }
 
-    public function setVotesLimit(int $limit = null): self
+    public function setVotesLimit(?int $limit = null): self
     {
         $this->votesLimit = $limit;
 
@@ -112,9 +118,21 @@ trait VoteTypeTrait
         return $this->votesHelpText;
     }
 
-    public function setVotesHelpText(string $votesHelpText = null): self
+    public function setVotesHelpText(?string $votesHelpText = null): self
     {
         $this->votesHelpText = $votesHelpText;
+
+        return $this;
+    }
+
+    public function getVotesMin(): ?int
+    {
+        return $this->votesMin;
+    }
+
+    public function setVotesMin(?int $votesMin): self
+    {
+        $this->votesMin = $votesMin;
 
         return $this;
     }

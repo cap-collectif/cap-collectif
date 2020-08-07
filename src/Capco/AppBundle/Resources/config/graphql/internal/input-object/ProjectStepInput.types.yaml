@@ -50,6 +50,10 @@ ProjectStepInput:
                 type: 'Float'
             votesLimit:
                 type: 'Int'
+                description: 'Maximum number of votes a user can submit.'
+            votesMin:
+                type: 'Int'
+                description: 'Minimum number of votes a user must submit for his votes to be counted.'
             votesRanking:
                 type: 'Boolean'
             voteThreshold:

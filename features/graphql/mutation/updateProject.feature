@@ -340,3 +340,209 @@ Scenario: GraphQL client wants to update project with empty group in custom view
     "@*@": "@*@"
   }
   """
+
+@database
+Scenario: GraphQL client wants to update project with votesMin greater than votesLimit
+  Given I am logged in to graphql as admin
+  And feature "votes_min" is enabled
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation UpdateAlphaProject($input: UpdateAlphaProjectInput!) {
+        updateAlphaProject(input: $input) {
+          project {
+            title
+            steps {
+              ... on ConsultationStep {
+                consultations {
+                  totalCount
+                  edges {
+                    node {
+                      id
+                      title
+                    }
+                  }
+                }
+              }
+              ... on CollectStep {
+                votesMin
+                votesLimit
+              }
+              ... on SelectionStep {
+                votesMin
+                votesLimit
+              }
+            }
+          }
+        }
+      }",
+      "variables": {
+         "input":{
+            "projectId":"UHJvamVjdDpwcm9qZWN0Q29yb25h",
+            "restrictedViewerGroups":[
+
+            ],
+            "title":"Je suis un projet simple",
+            "Cover":"media1",
+            "video":"https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+            "authors":[
+               "VXNlcjp1c2VyQWRtaW4=",
+               "VXNlcjp1c2VyMQ=="
+            ],
+            "opinionTerm":2,
+            "metaDescription":"Je suis la super meta",
+            "visibility":"PUBLIC",
+            "themes":[
+               "theme3"
+            ],
+            "isExternal":false,
+            "publishedAt":"2019-03-01 12:00:00",
+            "opinionCanBeFollowed":true,
+            "steps":[
+               {
+                  "type":"COLLECT",
+                  "body":"Le beau body de l'étape CollectStep",
+                  "requirements":[
+
+                  ],
+                  "statuses":[
+
+                  ],
+                  "voteType":"DISABLED",
+                  "defaultSort":"RANDOM",
+                  "private":false,
+                  "proposalForm":"proposalform13",
+                  "timeless":false,
+                  "isEnabled":true,
+                  "title":"Le beau titre de l'étape CollectStep",
+                  "label":"CollectStep",
+                  "mainView":"grid",
+                  "votesMin":3,
+                  "votesLimit":1
+               }
+            ],
+            "districts":[
+
+            ]
+         }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors": [
+      {
+        "message": "maximum-vote-must-be-higher-than-minimum",
+        "extensions": {
+          "category": "user"
+        },
+        "@*@": "@*@"
+      }
+    ],
+    "@*@": "@*@"
+  }
+  """
+
+@database
+Scenario: GraphQL client wants to update project with votesMin below 1
+  Given I am logged in to graphql as admin
+  And feature "votes_min" is enabled
+  And I send a GraphQL POST request:
+   """
+    {
+      "query": "mutation UpdateAlphaProject($input: UpdateAlphaProjectInput!) {
+        updateAlphaProject(input: $input) {
+          project {
+            title
+            steps {
+              ... on ConsultationStep {
+                consultations {
+                  totalCount
+                  edges {
+                    node {
+                      id
+                      title
+                    }
+                  }
+                }
+              }
+              ... on CollectStep {
+                votesMin
+                votesLimit
+              }
+              ... on SelectionStep {
+                votesMin
+                votesLimit
+              }
+            }
+          }
+        }
+      }",
+      "variables": {
+         "input":{
+            "projectId":"UHJvamVjdDpwcm9qZWN0Q29yb25h",
+            "restrictedViewerGroups":[
+
+            ],
+            "title":"Je suis un projet simple",
+            "Cover":"media1",
+            "video":"https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+            "authors":[
+               "VXNlcjp1c2VyQWRtaW4=",
+               "VXNlcjp1c2VyMQ=="
+            ],
+            "opinionTerm":2,
+            "metaDescription":"Je suis la super meta",
+            "visibility":"PUBLIC",
+            "themes":[
+               "theme3"
+            ],
+            "isExternal":false,
+            "publishedAt":"2019-03-01 12:00:00",
+            "opinionCanBeFollowed":true,
+            "steps":[
+               {
+                  "type":"COLLECT",
+                  "body":"Le beau body de l'étape CollectStep",
+                  "requirements":[
+
+                  ],
+                  "statuses":[
+
+                  ],
+                  "voteType":"DISABLED",
+                  "defaultSort":"RANDOM",
+                  "private":false,
+                  "proposalForm":"proposalform13",
+                  "timeless":false,
+                  "isEnabled":true,
+                  "title":"Le beau titre de l'étape CollectStep",
+                  "label":"CollectStep",
+                  "mainView":"grid",
+                  "votesMin":0,
+                  "votesLimit":1
+               }
+            ],
+            "districts":[
+
+            ]
+         }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors": [
+      {
+        "message": "minimum-vote-must-be-greater-than-or-equal",
+        "extensions": {
+          "category": "user"
+        },
+        "@*@": "@*@"
+      }
+    ],
+    "@*@": "@*@"
+  }
+  """

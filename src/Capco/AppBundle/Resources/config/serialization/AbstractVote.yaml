@@ -6,6 +6,8 @@ Capco\AppBundle\Entity\AbstractVote:
       groups: [OpinionVersions, UserMedias, ElasticsearchVoteNestedAuthor]
     published:
       groups: [ElasticsearchVote]
+    isAccounted:
+        groups: [ElasticsearchVote, ElasticsearchVoteNestedAuthor]
     createdAt:
       groups: [ElasticsearchVote]
     private:

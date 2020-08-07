@@ -10,3 +10,5 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
       groups: [Steps, Statuses]
     voteThreshold:
       groups: [VoteThreshold]
+    votesMin:
+      groups: [Elasticsearch, Steps, ElasticsearchVoteNestedStep]

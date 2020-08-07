@@ -80,6 +80,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('display_map');
         $this->manager->activate('privacy_policy');
         $this->manager->activate('public_api');
+        $this->manager->deactivate('votes_min');
         $this->manager->activate('consent_internal_communication');
         $this->manager->activate('new_feature_questionnaire_result');
         $this->manager->activate('unstable__multilangue');
@@ -94,6 +95,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('unstable__remote_events');
 
         if ('test' === $this->env) {
+            $this->manager->activate('votes_min');
             $this->manager->deactivate('shield_mode');
             $this->manager->activate('public_api');
             $this->manager->activate('indexation');
@@ -103,6 +105,7 @@ class ResetFeatureFlagsCommand extends Command
         }
 
         if ('prod' === $this->env) {
+            $this->manager->deactivate('votes_min');
             $this->manager->deactivate('display_pictures_in_event_list');
             $this->manager->deactivate('registration');
             $this->manager->deactivate('login_facebook');

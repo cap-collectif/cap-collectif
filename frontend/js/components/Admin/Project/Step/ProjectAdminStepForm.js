@@ -61,6 +61,7 @@ type Props = {|
     votable?: ?boolean,
     votesHelpText?: ?string,
     voteThreshold?: number,
+    votesMin?: number,
     votesLimit?: number,
     votesRanking?: number,
     budget?: number,
@@ -128,6 +129,7 @@ export type FormValues = {|
   votesHelpText?: ?string,
   voteThreshold?: number,
   votesLimit?: number,
+  votesMin?: number,
   votesRanking?: number,
   budget?: number,
   isBudgetEnabled?: ?boolean,
@@ -141,6 +143,8 @@ export type FormValues = {|
   private?: ?boolean,
   mainView?: ProposalViewMode,
 |};
+
+const stepFormName = 'stepForm';
 
 const getMainView = (
   isGridViewEnabled: ?boolean,
@@ -233,6 +237,8 @@ const validate = ({
   startAt,
   questionnaire,
   consultations,
+  votesLimit,
+  votesMin,
   proposalForm,
 }: FormValues) => {
   const errors = {};
@@ -261,6 +267,22 @@ const validate = ({
     if (!consultations || !consultations.length) errors.consultations = 'global.required';
   }
 
+  if (votesMin != null) {
+    if (votesLimit != null && votesLimit < votesMin) {
+      errors.votesMin = 'maximum-vote-must-be-higher-than-minimum';
+    }
+    if (votesMin <= 0) {
+      errors.votesMin = 'minimum-vote-must-be-greater-than-or-equal';
+    }
+  }
+
+  if (votesLimit != null && votesLimit <= 0) {
+    if (errors.votesMin) {
+      errors.votesMin = 'maximum-vote-must-be-greater-than-or-equal';
+    } else {
+      errors.votesLimit = 'maximum-vote-must-be-greater-than-or-equal';
+    }
+  }
   return errors;
 };
 
@@ -326,7 +348,7 @@ export function ProjectAdminStepForm({
     // mainView is not in the reduxForm's initialValues because the proposalForm is selected after.
     // Normally, need to use enableReinitialize but it resets the form...
     if (mainView && isCreating && step.type === 'CollectStep') {
-      dispatch(change('stepForm', 'mainView', mainView));
+      dispatch(change(stepFormName, 'mainView', mainView));
     }
   }, [dispatch, isCreating, mainView, step.type]);
 
@@ -552,9 +574,8 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
     step,
     project,
     isCreating,
-    formValueSelector('stepForm')(state, 'proposalForm'),
+    formValueSelector(stepFormName)(state, 'proposalForm'),
   );
-
   return {
     initialValues: {
       // AbstractStep
@@ -594,6 +615,7 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       // Votable Trait
       votable: step?.votable || false,
       votesHelpText: step?.votesHelpText || null,
+      votesMin: step?.votesMin || null,
       votesLimit: step?.votesLimit || null,
       votesRanking: step?.votesRanking || false,
       voteThreshold: step?.voteThreshold || null,
@@ -603,28 +625,28 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       isTresholdEnabled: step?.isTresholdEnabled || false,
       private: step?.private || false,
     },
-    isBudgetEnabled: formValueSelector('stepForm')(state, 'isBudgetEnabled') || false,
-    isLimitEnabled: formValueSelector('stepForm')(state, 'isLimitEnabled') || false,
-    isTresholdEnabled: formValueSelector('stepForm')(state, 'isTresholdEnabled') || false,
+    isBudgetEnabled: formValueSelector(stepFormName)(state, 'isBudgetEnabled') || false,
+    isLimitEnabled: formValueSelector(stepFormName)(state, 'isLimitEnabled') || false,
+    isTresholdEnabled: formValueSelector(stepFormName)(state, 'isTresholdEnabled') || false,
     isGridViewEnabled:
       step.type === 'CollectStep'
-        ? formValueSelector('stepForm')(state, 'proposalForm')?.isGridViewEnabled
-        : formValueSelector('stepForm')(state, 'isGridViewEnabled'),
+        ? formValueSelector(stepFormName)(state, 'proposalForm')?.isGridViewEnabled
+        : formValueSelector(stepFormName)(state, 'isGridViewEnabled'),
     isListViewEnabled:
       step.type === 'CollectStep'
-        ? formValueSelector('stepForm')(state, 'proposalForm')?.isListViewEnabled
-        : formValueSelector('stepForm')(state, 'isListViewEnabled'),
+        ? formValueSelector(stepFormName)(state, 'proposalForm')?.isListViewEnabled
+        : formValueSelector(stepFormName)(state, 'isListViewEnabled'),
     isMapViewEnabled:
       step.type === 'CollectStep'
-        ? formValueSelector('stepForm')(state, 'proposalForm')?.isMapViewEnabled
-        : formValueSelector('stepForm')(state, 'isMapViewEnabled'),
-    mainView: formValueSelector('stepForm')(state, 'mainView') || mainView,
-    votable: formValueSelector('stepForm')(state, 'votable') || false,
-    timeless: formValueSelector('stepForm')(state, 'timeless') || false,
-    requirements: formValueSelector('stepForm')(state, 'requirements') || [],
-    statuses: formValueSelector('stepForm')(state, 'statuses') || [],
+        ? formValueSelector(stepFormName)(state, 'proposalForm')?.isMapViewEnabled
+        : formValueSelector(stepFormName)(state, 'isMapViewEnabled'),
+    mainView: formValueSelector(stepFormName)(state, 'mainView') || mainView,
+    votable: formValueSelector(stepFormName)(state, 'votable') || false,
+    timeless: formValueSelector(stepFormName)(state, 'timeless') || false,
+    requirements: formValueSelector(stepFormName)(state, 'requirements') || [],
+    statuses: formValueSelector(stepFormName)(state, 'statuses') || [],
     // "private" is a reserved word in js (will be)
-    isPrivate: formValueSelector('stepForm')(state, 'private') || false,
+    isPrivate: formValueSelector(stepFormName)(state, 'private') || false,
   };
 };
 
@@ -632,7 +654,7 @@ const form = injectIntl(
   reduxForm({
     validate,
     onSubmit,
-    form: 'stepForm',
+    form: stepFormName,
   })(ProjectAdminStepForm),
 );
 

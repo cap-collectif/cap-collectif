@@ -856,3 +856,28 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: $publishedAt
         updatedAt: $publishedAt
         category: '@pCategoryAssigned2'
+    proposal132:
+        id: 'proposal132'
+        title: 'Proposal 132'
+        body: Imagine Juan est de bonne humeur aujourd'hui... Non je déconne. Mais imagine quand même
+        author: '@userJpec'
+        proposalForm: '@proposalformExport'
+        reference: '132'
+        district: '@districtIdf1'
+        publishedAt: <(new \DateTime('2020-07-01 00:00:11'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        category: '@pCategoryAssigned2'
+    selectionExportProposals{133..137}:
+        id: 'selectionExportProposals<current()>'
+        title: 'Selection Export Proposal <current()>'
+        body: Propositions random
+        author: '@user160'
+        proposalForm: '@proposalformExport'
+        reference: '9<current()>'
+        publishedAt: <(new \DateTime('2020-09-01 00:00:10'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        # TODO: This district is not on the ProposalForm
+        district: '@district1'
+        category: '@pCategoryAssigned1'

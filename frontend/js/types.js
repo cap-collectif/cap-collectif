@@ -56,6 +56,7 @@ export type FeatureToggles = {
   login_saml: ?boolean,
   login_paris: ?boolean,
   privacy_policy: ?boolean,
+  votes_min: ?boolean,
   disconnect_openid: ?boolean,
   members_list: ?boolean,
   newsletter: ?boolean,

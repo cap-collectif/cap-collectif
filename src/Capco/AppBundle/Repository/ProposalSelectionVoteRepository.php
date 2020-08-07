@@ -71,10 +71,10 @@ class ProposalSelectionVoteRepository extends EntityRepository
     public function getByAuthorAndStep(
         User $author,
         SelectionStep $step,
-        int $limit,
-        int $offset,
-        string $field = null,
-        string $direction = null
+        int $limit = 0,
+        int $offset = 0,
+        ?string $field = null,
+        ?string $direction = null
     ): Paginator {
         $qb = $this->createQueryBuilder('pv')
             ->andWhere('pv.selectionStep = :step')
@@ -119,8 +119,10 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
-    {
+    public function getUserVotesGroupedByStepIds(
+        array $selectionStepsIds,
+        ?User $user = null
+    ): array {
         $userVotes = [];
         if ($user) {
             foreach ($selectionStepsIds as $id) {
@@ -349,14 +351,22 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countPublishedSelectionVoteByStep(SelectionStep $step): int
-    {
-        return $this->createQueryBuilder('pv')
+    public function countPublishedSelectionVoteByStep(
+        SelectionStep $step,
+        bool $onlyAccounted = true
+    ): int {
+        $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv.id)')
             ->andWhere('pv.selectionStep = :step')
             ->innerJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1')
+            ->andWhere('pv.published = 1');
+        if ($onlyAccounted) {
+            $qb->andWhere('pv.isAccounted = 1');
+        }
+
+        return $qb
+            ->andWhere('pv.isAccounted = 1')
             ->andWhere('proposal.draft = 0')
             ->andWhere('proposal.trashedAt IS NULL')
             ->andWhere('proposal.published = 1')

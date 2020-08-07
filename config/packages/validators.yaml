@@ -75,3 +75,6 @@ services:
     Capco\AppBundle\Validator\Constraints\HasUserGroupIfVisibilityGroupValidator:
         tags:
             - {name: validator.constraint_validator, alias: has_user_group_if_mandatory.validator}
+    Capco\AppBundle\Validator\Constraints\VoteMinValidator:
+        tags:
+            - {name: validator.constraint_validator, alias: vote_min.validator}

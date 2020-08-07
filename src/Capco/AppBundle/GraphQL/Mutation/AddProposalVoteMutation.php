@@ -34,17 +34,19 @@ class AddProposalVoteMutation implements MutationInterface
     private $logger;
     private $resolver;
     private $proposalVotesDataLoader;
-    private $proposalCollectVote;
+    private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
     private $viewerProposalVotesDataLoader;
     private $globalIdResolver;
+    private $proposalVoteAccountHandler;
 
     public function __construct(
         EntityManagerInterface $em,
         ValidatorInterface $validator,
         LoggerInterface $logger,
+        ProposalVoteAccountHandler $proposalVoteAccountHandler,
         StepRequirementsResolver $resolver,
         ProposalVotesDataLoader $proposalVotesDataLoader,
         ProposalCollectVoteRepository $proposalCollectVote,
@@ -58,8 +60,9 @@ class AddProposalVoteMutation implements MutationInterface
         $this->validator = $validator;
         $this->logger = $logger;
         $this->resolver = $resolver;
+        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
-        $this->proposalCollectVote = $proposalCollectVote;
+        $this->proposalCollectVoteRepository = $proposalCollectVote;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
@@ -92,7 +95,7 @@ class AddProposalVoteMutation implements MutationInterface
                 throw new UserError('This proposal is not associated to this collect step.');
             }
 
-            $countUserVotes = $this->proposalCollectVote->countVotesByStepAndUser($step, $user);
+            $countUserVotes = $this->proposalCollectVoteRepository->countVotesByStepAndUser($step, $user);
             $vote = (new ProposalCollectVote())->setCollectStep($step);
         } elseif ($step instanceof SelectionStep) {
             if (!\in_array($step, $proposal->getSelectionSteps(), true)) {
@@ -134,6 +137,7 @@ class AddProposalVoteMutation implements MutationInterface
             throw new UserError((string) $error->getMessage());
         }
 
+        $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted($step, $vote, $user, true);
         $this->em->persist($vote);
 
         try {

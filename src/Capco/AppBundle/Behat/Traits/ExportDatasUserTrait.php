@@ -16,6 +16,9 @@ trait ExportDatasUserTrait
     {
         $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
+        if (!$user) {
+            throw new \RuntimeException("User with id ${userId} does not exist.");
+        }
         $archive = $this->getRepository('CapcoAppBundle:UserArchive')->getLastForUser($user);
         if (!$archive) {
             throw new \RuntimeException("UserArchive with id ${userId} does not exist.");
@@ -54,7 +57,7 @@ trait ExportDatasUserTrait
         }
         // @TODO we do not compare media (eg: .jpg) for now
 
-        (Process::fromShellCommandline('rm -rf ' . $extractTo))->mustRun();
+        Process::fromShellCommandline('rm -rf ' . $extractTo)->mustRun();
     }
 
     /**

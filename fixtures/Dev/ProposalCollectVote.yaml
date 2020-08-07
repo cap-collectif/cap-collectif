@@ -1,56 +1,74 @@
 Capco\AppBundle\Entity\ProposalCollectVote:
-  proposalCollectVote{1..50}:
-    id: <(1999+$current)>
-    proposal: '@proposal14'
-    collectStep: '@collectstep5'
-    user: '@user<current()>'
-    publishedAt: <((new \DateTime('2017-02-01 00:00:00'))->modify("+ $current minutes"))>
-    createdAt: <((new \DateTime('2017-02-01 00:00:00'))->modify("+ $current minutes"))>
-  proposalCollectVote51:
-    id: 2051
-    proposal: '@proposal24'
-    collectStep: '@collectstepVoteClassement'
-    user: '@user5'
-    position: 3
-    publishedAt: <(new \DateTime('2015-03-01 00:00:51'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:51'))>
-  proposalCollectVote52:
-    id: 2052
-    proposal: '@proposal25'
-    collectStep: '@collectstepVoteClassement'
-    user: '@user5'
-    position: 2
-    publishedAt: <(new \DateTime('2015-03-01 00:00:52'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:52'))>
-  proposalCollectVote53:
-    id: 2053
-    proposal: '@proposal26'
-    collectStep: '@collectstepVoteClassement'
-    user: '@user5'
-    position: 1
-    publishedAt: <(new \DateTime('2015-03-01 00:00:53'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:53'))>
-  questionCollectVote54:
-    id: 2054
-    proposal: '@question1'
-    collectStep: '@collectQuestionVoteAvecClassement'
-    user: '@user5'
-    position: 1
-    publishedAt: <(new \DateTime('2015-03-01 00:00:54'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:54'))>
-  questionCollectVote55:
-    id: 2055
-    proposal: '@question2'
-    collectStep: '@collectQuestionVoteAvecClassement'
-    user: '@user5'
-    position: 2
-    publishedAt: <(new \DateTime('2015-03-01 00:00:55'))>
-    createdAt: <(new \DateTime('2015-03-01 00:00:55'))>
-  proposalCollectVote56:
-    id: 2056
-    proposal: '@proposal37'
-    collectStep: '@collectstep12'
-    user: '@user5'
-    position: 3
-    publishedAt: <(new \DateTime('2019-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2019-03-01 00:00:00'))>
+    proposalCollectVote{1..50}:
+        id: <(1999+$current)>
+        proposal: '@proposal14'
+        collectStep: '@collectstep5'
+        user: '@user<current()>'
+        publishedAt: <((new \DateTime('2017-02-01 00:00:00'))->modify("+ $current minutes"))>
+        createdAt: <((new \DateTime('2017-02-01 00:00:00'))->modify("+ $current minutes"))>
+    proposalCollectVote51:
+        id: 2051
+        proposal: '@proposal24'
+        collectStep: '@collectstepVoteClassement'
+        user: '@user5'
+        position: 3
+        publishedAt: <(new \DateTime('2015-03-01 00:00:51'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:51'))>
+    proposalCollectVote52:
+        id: 2052
+        proposal: '@proposal25'
+        collectStep: '@collectstepVoteClassement'
+        user: '@user5'
+        position: 2
+        publishedAt: <(new \DateTime('2015-03-01 00:00:52'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:52'))>
+    proposalCollectVote53:
+        id: 2053
+        proposal: '@proposal26'
+        collectStep: '@collectstepVoteClassement'
+        user: '@user5'
+        position: 1
+        publishedAt: <(new \DateTime('2015-03-01 00:00:53'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:53'))>
+    questionCollectVote54:
+        id: 2054
+        proposal: '@question1'
+        collectStep: '@collectQuestionVoteAvecClassement'
+        user: '@user5'
+        position: 1
+        publishedAt: <(new \DateTime('2015-03-01 00:00:54'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:54'))>
+    questionCollectVote55:
+        id: 2055
+        proposal: '@question2'
+        collectStep: '@collectQuestionVoteAvecClassement'
+        user: '@user5'
+        position: 2
+        publishedAt: <(new \DateTime('2015-03-01 00:00:55'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:55'))>
+    proposalCollectVote56:
+        id: 2056
+        proposal: '@proposal37'
+        collectStep: '@collectstep12'
+        user: '@user5'
+        position: 3
+        createdAt: <(new \DateTime('2019-03-01 00:00:00'))>
+        publishedAt: $createdAt
+    proposalCollectVote57:
+        id: 2057
+        proposal: '@proposal132'
+        collectStep: '@collectStepExport'
+        user: '@userSpyl'
+        isAccounted: false
+        position: 1
+        createdAt: <(new \DateTime('2019-03-01 00:00:01'))>
+        publishedAt: $createdAt
+    proposalCollectVote58:
+        id: 2058
+        proposal: '@proposal132'
+        collectStep: '@collectStepExport'
+        user: '@user5'
+        isAccounted: false
+        position: 1
+        createdAt: <(new \DateTime('2019-03-01 00:00:02'))>
+        publishedAt: $createdAt

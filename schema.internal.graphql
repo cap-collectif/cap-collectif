@@ -751,6 +751,9 @@ type ArgumentVote implements Vote & Publishable & Contribution {
   """Returns Type of vote"""
   kind: String!
 
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
+
   """Whether or not the entity is published."""
   published: Boolean!
 
@@ -1562,6 +1565,11 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   ): RequirementConnection!
   project: Project
   votesLimit: Int
+
+  """
+  Minimum number of votes a user must submit for his votes to be counted.
+  """
+  votesMin: Int
   budget: Int
   voteType: ProposalStepVoteType!
   votable: Boolean!
@@ -1834,6 +1842,9 @@ type CommentVote implements Node & Vote & Publishable {
 
   """Returns 'commentVote'."""
   kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -3397,6 +3408,7 @@ enum FeatureFlagType {
   display_map
   unstable__remote_events
   user_invitations
+  votes_min
 }
 
 """Require a firstname"""
@@ -5053,6 +5065,9 @@ type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   """Returns 'opinionVote'."""
   kind: String!
 
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
+
   """Whether or not the entity is published."""
   published: Boolean!
 
@@ -5888,7 +5903,14 @@ input ProjectStepInput {
   votesHelpText: String
   voteType: ProposalStepVoteType
   budget: Float
+
+  """Maximum number of votes a user can submit."""
   votesLimit: Int
+
+  """
+  Minimum number of votes a user must submit for his votes to be counted.
+  """
+  votesMin: Int
   votesRanking: Boolean
   voteThreshold: Int
   defaultSort: ProposalSort
@@ -6159,6 +6181,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
     """(ROLE_SUPER_ADMIN only) Select also unpublished votes."""
     includeUnpublished: Boolean = false
+
+    """(ROLE_SUPER_ADMIN only) Select also not accounted votes."""
+    includeNotAccounted: Boolean = false
   ): ProposalVoteConnection!
 
   """Check if the proposal has been merged with another"""
@@ -6981,6 +7006,11 @@ interface ProposalStep {
   ): RequirementConnection!
   project: Project
   votesLimit: Int
+
+  """
+  Minimum number of votes a user must submit for his votes to be counted.
+  """
+  votesMin: Int
   budget: Int
   voteType: ProposalStepVoteType!
   votable: Boolean!
@@ -7070,6 +7100,9 @@ type ProposalVote implements Vote & Publishable & PrivatableVote & Contribution 
 
   """Returns 'proposalVote'."""
   kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
 
   """Whether the author of the vote is anonymous or not."""
   private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2020-01-01 UTC.")
@@ -7481,6 +7514,9 @@ type Query {
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """Get only accounted votes."""
+    onlyAccounted: Boolean = true
   ): VoteConnection!
 
   """Get the current shield admin form."""
@@ -8187,6 +8223,7 @@ type RemoveProposalVotePayload {
   proposal: Proposal!
   viewer: User!
   previousVoteId: ID
+  areRemainingVotesAccounted: Boolean!
   clientMutationId: String
 }
 
@@ -9065,6 +9102,11 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   ): RequirementConnection!
   project: Project
   votesLimit: Int
+
+  """
+  Minimum number of votes a user must submit for his votes to be counted.
+  """
+  votesMin: Int
   budget: Int
   voteType: ProposalStepVoteType!
   votable: Boolean!
@@ -9498,6 +9540,9 @@ type SourceVote implements Vote & Publishable & Contribution {
 
   """Returns 'sourceVote'."""
   kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -11040,6 +11085,9 @@ type User implements Node & UniformResourceLocatable {
 
     """The id of the contribuable entity (Project, Step)"""
     contribuableId: ID
+
+    """Get only accounted votes."""
+    onlyAccounted: Boolean = false
   ): VoteConnection!
 
   """Get all groups where the user is."""
@@ -11756,6 +11804,9 @@ type VersionVote implements YesNoPairedVote & Publishable & Vote {
   """Returns 'vote'."""
   kind: String!
 
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
+
   """Whether or not the entity is published."""
   published: Boolean!
 
@@ -11784,6 +11835,9 @@ interface Vote {
 
   """Returns Type of vote"""
   kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
 }
 
 """A connection to a list of items."""
@@ -11846,6 +11900,9 @@ interface YesNoPairedVote {
 
   """Returns Type of vote"""
   kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
 
   """Whether or not the entity is published."""
   published: Boolean!

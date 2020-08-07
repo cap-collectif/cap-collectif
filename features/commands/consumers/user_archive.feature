@@ -2,7 +2,7 @@
 Feature: User archive consumer
 
 @rabbitmq @export @database
-Scenario: User request for personal archive is asynchronous
+Scenario: User request for personal archive is asynchronous by user1
   Given I publish in "user_archive_request" with message below:
   """
   {
@@ -13,7 +13,7 @@ Scenario: User request for personal archive is asynchronous
   Then personal data archive for user "user1" should match its snapshot
 
 @rabbitmq @export @database
-Scenario: User request for personal archive is asynchronous
+Scenario: User request for personal archive is asynchronous by user5
   Given I publish in "user_archive_request" with message below:
   """
   {

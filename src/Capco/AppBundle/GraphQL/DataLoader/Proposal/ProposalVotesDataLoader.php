@@ -75,13 +75,19 @@ class ProposalVotesDataLoader extends BatchDataLoader
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,
             'args' => $key['args']->getArrayCopy(),
             'includeUnpublished' => $key['includeUnpublished'],
+            'includeNotAccounted' => $key['includeNotAccounted'],
         ];
     }
 
     private function resolveBatch($keys): array
     {
         $includeUnpublished = $keys[0]['includeUnpublished'] ?? false;
-        $paginatedResults = $this->voteSearch->searchProposalVotes($keys, $includeUnpublished);
+        $includeNotAccounted = $keys[0]['includeNotAccounted'] ?? false;
+        $paginatedResults = $this->voteSearch->searchProposalVotes(
+            $keys,
+            $includeUnpublished,
+            $includeNotAccounted
+        );
         $connections = [];
         if (!empty($paginatedResults)) {
             foreach ($keys as $i => $key) {

@@ -37,6 +37,10 @@ Object {
     },
     Object {
       "enabled": true,
+      "type": "votes_min",
+    },
+    Object {
+      "enabled": true,
       "type": "login_facebook",
     },
     Object {

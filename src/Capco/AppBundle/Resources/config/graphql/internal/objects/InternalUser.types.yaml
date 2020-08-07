@@ -213,6 +213,10 @@ InternalUser:
                     contribuableId:
                         type: 'ID'
                         description: 'The id of the contribuable entity (Project, Step)'
+                    onlyAccounted:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'Get only accounted votes.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [getUser(), value, args, context])'
             groups:
                 type: 'GroupConnection!'

@@ -932,6 +932,7 @@ EOF;
               url
             }
             createdAt
+            isAccounted
             ... on PrivatableVote {
                 private
             }

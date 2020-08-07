@@ -40,7 +40,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
           className="widget__counter__label"
         >
           <FormattedMessage
-            id="global.vote"
+            id="project.votes.widget.votes_spent"
             values={Object {}}
           />
         </p>
@@ -125,6 +125,23 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple s
           className="widget__counter__label"
         >
           <FormattedMessage
+            id="project.votes.widget.votes_spent"
+            values={Object {}}
+          />
+        </p>
+        <span
+          className="widget__counter__value"
+        >
+          1
+        </span>
+      </li>
+      <li
+        className="navbar-text widget__counter"
+      >
+        <p
+          className="widget__counter__label"
+        >
+          <FormattedMessage
             id="global.support"
             values={Object {}}
           />
@@ -143,23 +160,6 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple s
         >
           <FormattedMessage
             id="project.votes.widget.votes_left"
-            values={Object {}}
-          />
-        </p>
-        <span
-          className="widget__counter__value"
-        >
-          1
-        </span>
-      </li>
-      <li
-        className="navbar-text widget__counter"
-      >
-        <p
-          className="widget__counter__label"
-        >
-          <FormattedMessage
-            id="project.votes.widget.votes_spent"
             values={Object {}}
           />
         </p>
@@ -269,6 +269,23 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
           className="widget__counter__label"
         >
           <FormattedMessage
+            id="project.votes.widget.votes_spent"
+            values={Object {}}
+          />
+        </p>
+        <span
+          className="widget__counter__value"
+        >
+          1
+        </span>
+      </li>
+      <li
+        className="navbar-text widget__counter"
+      >
+        <p
+          className="widget__counter__label"
+        >
+          <FormattedMessage
             id="global.vote"
             values={Object {}}
           />
@@ -287,23 +304,6 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         >
           <FormattedMessage
             id="project.votes.widget.votes_left"
-            values={Object {}}
-          />
-        </p>
-        <span
-          className="widget__counter__value"
-        >
-          1
-        </span>
-      </li>
-      <li
-        className="navbar-text widget__counter"
-      >
-        <p
-          className="widget__counter__label"
-        >
-          <FormattedMessage
-            id="project.votes.widget.votes_spent"
             values={Object {}}
           />
         </p>
@@ -397,7 +397,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
           className="widget__counter__label"
         >
           <FormattedMessage
-            id="global.vote"
+            id="project.votes.widget.votes_spent"
             values={Object {}}
           />
         </p>

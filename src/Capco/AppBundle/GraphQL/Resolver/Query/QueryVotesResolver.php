@@ -38,8 +38,9 @@ class QueryVotesResolver implements ResolverInterface
     {
         $totalCount = 0;
         $projectArgs = new Argument(['first' => 100]);
+        $onlyAccounted = true === $args->offsetGet('onlyAccounted');
         foreach ($this->projectsResolver->resolve($projectArgs)->getEdges() as $edge) {
-            $totalCount += $this->countProjectVotes($edge->getNode());
+            $totalCount += $this->countProjectVotes($edge->getNode(), $onlyAccounted);
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) {
@@ -52,25 +53,25 @@ class QueryVotesResolver implements ResolverInterface
         return $connection;
     }
 
-    public function countProjectVotes(Project $project): int
+    public function countProjectVotes(Project $project, bool $onlyAccounted): int
     {
         $totalCount = 0;
 
         foreach ($project->getSteps() as $pas) {
-            $totalCount += $this->countStepVotes($pas->getStep());
+            $totalCount += $this->countStepVotes($pas->getStep(), $onlyAccounted);
         }
 
         return $totalCount;
     }
 
-    public function countStepVotes(AbstractStep $step): int
+    public function countStepVotes(AbstractStep $step, bool $onlyAccounted): int
     {
         $count = 0;
         if ($step instanceof ConsultationStep) {
             $count = $step->getVotesCount();
         } elseif ($step instanceof SelectionStep || $step instanceof CollectStep) {
             $promise = $this->stepVotesCountResolver
-                ->__invoke($step)
+                ->__invoke($step, $onlyAccounted)
                 ->then(function ($value) use (&$count) {
                     $count += $value;
                 });

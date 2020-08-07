@@ -21,6 +21,7 @@ class SelectionStepFormType extends AbstractStepFormType
             ->add('voteType')
             ->add('budget')
             ->add('allowingProgressSteps')
+            ->add('votesMin')
             ->add('votesLimit')
             ->add('votesRanking')
             ->add('voteThreshold')

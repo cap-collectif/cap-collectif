@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Elasticsearch\Indexer;
@@ -28,6 +29,7 @@ class RemoveProposalVoteMutation implements MutationInterface
     private $proposalVotesDataLoader;
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
+    private $proposalVoteAccountHandler;
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
     private $viewerProposalVotesDataLoader;
@@ -44,12 +46,14 @@ class RemoveProposalVoteMutation implements MutationInterface
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
+        ProposalVoteAccountHandler $proposalVoteAccountHandler,
         Indexer $indexer,
         GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
         $this->stepRepo = $stepRepo;
         $this->proposalRepo = $proposalRepo;
+        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -72,6 +76,7 @@ class RemoveProposalVoteMutation implements MutationInterface
             throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
         }
 
+        /** @var AbstractVote $vote */
         $vote = null;
         if ($step instanceof CollectStep) {
             $vote = $this->proposalCollectVoteRepository->findOneBy([
@@ -98,6 +103,7 @@ class RemoveProposalVoteMutation implements MutationInterface
             throw new UserError('This step is no longer contributable.');
         }
 
+        $isAccounted = $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted($step, $vote, $user, false);
         $previousVoteId = $vote->getId();
 
         $this->em->remove($vote);
@@ -113,6 +119,7 @@ class RemoveProposalVoteMutation implements MutationInterface
         return [
             'viewer' => $user,
             'previousVoteId' => $previousVoteId,
+            'areRemainingVotesAccounted' => $isAccounted,
             'step' => $step,
         ];
     }

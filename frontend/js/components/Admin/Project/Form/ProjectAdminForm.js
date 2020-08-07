@@ -557,6 +557,7 @@ export default createFragmentContainer(container, {
           votable
           votesHelpText
           votesLimit
+          votesMin
           votesRanking
           voteThreshold
           voteType

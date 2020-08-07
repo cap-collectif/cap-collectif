@@ -56,30 +56,45 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
           )}
         </Navbar.Header>
         <Navbar.Collapse>
-          {step.voteType === 'SIMPLE' && step.votesLimit && (
+          {step.voteType === 'SIMPLE' && (
             <Nav>
-              <li className="navbar-text widget__counter">
-                <p className="widget__counter__label">
-                  <FormattedMessage
-                    id={isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'}
-                  />
-                </p>
-                <span className="widget__counter__value">{step.votesLimit}</span>
-              </li>
-              <li className="navbar-text widget__counter">
-                <p className="widget__counter__label">
-                  <FormattedMessage id="project.votes.widget.votes_left" />
-                </p>
-                <span className="widget__counter__value">
-                  {step.votesLimit ? step.votesLimit - votesCount : votesCount}
-                </span>
-              </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
                   <FormattedMessage id="project.votes.widget.votes_spent" />
                 </p>
                 <span className="widget__counter__value">{votesCount}</span>
               </li>
+              {/* TODO activate once toggle vote_min is activated */}
+              {false && step.votesMin && (
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    <FormattedMessage id="global-minimum-full" />
+                  </p>
+                  <span className="widget__counter__value">{step.votesMin}</span>
+                </li>
+              )}
+              {step.votesLimit && (
+                <>
+                  <li className="navbar-text widget__counter">
+                    <p className="widget__counter__label">
+                      <FormattedMessage
+                        id={
+                          isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'
+                        }
+                      />
+                    </p>
+                    <span className="widget__counter__value">{step.votesLimit}</span>
+                  </li>
+                  <li className="navbar-text widget__counter">
+                    <p className="widget__counter__label">
+                      <FormattedMessage id="project.votes.widget.votes_left" />
+                    </p>
+                    <span className="widget__counter__value">
+                      {step.votesLimit ? step.votesLimit - votesCount : votesCount}
+                    </span>
+                  </li>
+                </>
+              )}
             </Nav>
           )}
           {step.voteType === 'BUDGET' && (
@@ -127,6 +142,15 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
                   />
                 </span>
               </li>
+              {/* TODO activate once toggle vote_min is activated */}
+              {false && step.votesMin && (
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    <FormattedMessage id="VOTE_MIN" />
+                  </p>
+                  <span className="widget__counter__value">{step.votesMin}</span>
+                </li>
+              )}
               {step.votesLimit && (
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
@@ -135,18 +159,6 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
                   <span className="widget__counter__value">{step.votesLimit - votesCount}</span>
                 </li>
               )}
-            </Nav>
-          )}
-          {step.voteType === 'SIMPLE' && !step.votesLimit && (
-            <Nav>
-              <li className="navbar-text widget__counter">
-                <p className="widget__counter__label">
-                  <FormattedMessage
-                    id={isInterpellationContextFromStep(step) ? 'global.support' : 'global.vote'}
-                  />
-                </p>
-                <span className="widget__counter__value">{votesCount}</span>
-              </li>
             </Nav>
           )}
           <Button
@@ -181,6 +193,7 @@ export default createFragmentContainer(ProposalVoteBasketWidget, {
       title
       voteType
       votesLimit
+      votesMin
       budget
       ...interpellationLabelHelper_step @relay(mask: false)
     }

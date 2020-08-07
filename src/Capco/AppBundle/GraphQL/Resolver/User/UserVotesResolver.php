@@ -29,6 +29,7 @@ class UserVotesResolver implements ResolverInterface
             $args = new Argument(['first' => 0]);
         }
 
+        $onlyAccounted = true === $args->offsetGet('onlyAccounted');
         $contribuableId = $args->offsetGet('contribuableId');
         $aclDisabled =
             $context &&
@@ -40,11 +41,12 @@ class UserVotesResolver implements ResolverInterface
             $contribuableId,
             $aclDisabled,
             $user,
+            $onlyAccounted,
             $validViewer,
             $viewer
         ) {
             if ($aclDisabled) {
-                return $this->voteSearch->getVotesByUser($user, $limit, $cursor);
+                return $this->voteSearch->getVotesByUser($user, $limit, $cursor, $onlyAccounted);
             }
             if ($validViewer && $viewer) {
                 return $this->voteSearch->getVotesByAuthorViewerCanSee(
@@ -52,11 +54,17 @@ class UserVotesResolver implements ResolverInterface
                     $viewer,
                     $contribuableId,
                     $limit,
-                    $cursor
+                    $cursor,
+                    $onlyAccounted
                 );
             }
 
-            return $this->voteSearch->getPublicVotesByAuthor($user, $limit, $cursor);
+            return $this->voteSearch->getPublicVotesByAuthor(
+                $user,
+                $limit,
+                $cursor,
+                $onlyAccounted
+            );
         });
 
         return $paginator->auto($args);

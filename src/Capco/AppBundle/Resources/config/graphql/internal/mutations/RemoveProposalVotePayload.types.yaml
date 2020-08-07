@@ -10,3 +10,5 @@ RemoveProposalVotePayload:
         type: 'InternalUser!'
       previousVoteId:
         type: 'ID'
+      areRemainingVotesAccounted:
+        type: 'Boolean!'

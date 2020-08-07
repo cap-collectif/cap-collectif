@@ -98,3 +98,64 @@ Scenario: Logged in API client wants to remove a vote
     }
   }
   """
+
+@database
+Scenario: Logged in API client wants to remove a vote for proposal until his votes are not taken into account anymore
+  Given I am logged in to graphql as user
+  And feature "votes_min" is enabled
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: RemoveProposalVoteInput!) {
+      removeProposalVote(input: $input) {
+        previousVoteId
+        areRemainingVotesAccounted
+      }
+    }",
+    "variables": {
+      "input": {
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwRXhwb3J0",
+        "proposalId": "UHJvcG9zYWw6c2VsZWN0aW9uRXhwb3J0UHJvcG9zYWxzMTMz"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "removeProposalVote": {
+        "previousVoteId": @string@,
+        "areRemainingVotesAccounted": true
+      }
+    }
+  }
+  """
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: RemoveProposalVoteInput!) {
+      removeProposalVote(input: $input) {
+        previousVoteId
+        areRemainingVotesAccounted
+      }
+    }",
+    "variables": {
+      "input": {
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwRXhwb3J0",
+        "proposalId": "UHJvcG9zYWw6c2VsZWN0aW9uRXhwb3J0UHJvcG9zYWxzMTM0"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "removeProposalVote": {
+        "previousVoteId": @string@,
+        "areRemainingVotesAccounted": false
+      }
+    }
+  }
+  """

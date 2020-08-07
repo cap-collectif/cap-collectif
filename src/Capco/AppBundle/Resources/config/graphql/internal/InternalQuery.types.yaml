@@ -303,6 +303,11 @@ InternalQuery:
                 description: 'List all the votes in the platform.'
                 type: 'InternalVoteConnection!'
                 argsBuilder: 'Relay::Connection'
+                args:
+                    onlyAccounted:
+                        type: 'Boolean'
+                        defaultValue: true
+                        description: 'Get only accounted votes.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'
             shieldAdminForm:
                 type: 'InternalShieldAdminForm!'

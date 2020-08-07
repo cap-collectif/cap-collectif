@@ -21,6 +21,7 @@ class CollectStepFormType extends AbstractStepFormType
             ->add('private')
             ->add('voteType')
             ->add('budget')
+            ->add('votesMin')
             ->add('votesLimit')
             ->add('votesRanking')
             ->add('voteThreshold')

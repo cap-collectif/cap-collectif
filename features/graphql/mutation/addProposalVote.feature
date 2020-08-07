@@ -379,3 +379,72 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
     }
   }
   """
+
+@database
+Scenario: Logged in API client wants to vote for proposals until his votes are taken into account
+  Given I am logged in to graphql as admin
+  And feature "votes_min" is enabled
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: AddProposalVoteInput!) {
+      addProposalVote(input: $input) {
+        vote {
+          id
+          isAccounted
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "stepId": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBFeHBvcnQ=",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMzI="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "addProposalVote": {
+        "vote": {
+          "id": @string@,
+          "isAccounted": false
+        }
+      }
+    }
+  }
+  """
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: AddProposalVoteInput!) {
+      addProposalVote(input: $input) {
+        vote {
+          id
+          isAccounted
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "stepId": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBFeHBvcnQ=",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMzE="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "addProposalVote": {
+        "vote": {
+          "id": @string@,
+          "isAccounted": true
+        }
+      }
+    }
+  }
+  """

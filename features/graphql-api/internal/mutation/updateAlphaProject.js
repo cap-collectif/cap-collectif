@@ -60,6 +60,8 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
       }
       ... on CollectStep {
         private
+        votesMin
+        votesLimit
         form {
           title
         }
@@ -67,6 +69,8 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
       }
       ... on SelectionStep {
         mainView
+        votesMin
+        votesLimit
       }
       ... on ProposalStep {
         requirements {
@@ -921,4 +925,36 @@ it('update a newly created project and add a group', async () => {
       },
     },
   });
+});
+
+it('update a newly created project and add a minimum vote number', async () => {
+  const createResponse = await graphql(
+    CreateAlphaProjectMutation,
+    {
+      input: {
+        ...BASE_PROJECT,
+      },
+    },
+    'internal_admin',
+  );
+  const projectId = createResponse.createAlphaProject.project.id;
+
+  const updateResponse = await graphql(
+    UpdateAlphaProjectMutation,
+    {
+      input: {
+        projectId,
+        ...BASE_PROJECT,
+        steps: [
+          {
+            ...BASE_COLLECT_STEP,
+            votesMin: 1,
+            votesLimit: 3,
+          },
+        ],
+      },
+    },
+    'internal_admin',
+  );
+  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
 });

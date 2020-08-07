@@ -87,6 +87,8 @@ Object {
           ],
           "timeless": false,
           "title": "Le beau titre de l'étape CollectStep",
+          "votesLimit": null,
+          "votesMin": null,
         },
         Object {
           "__typename": "SelectionStep",
@@ -113,6 +115,8 @@ Object {
           ],
           "timeless": false,
           "title": "Le beau titre de l'étape SelectionStep",
+          "votesLimit": null,
+          "votesMin": null,
         },
       ],
       "themes": Array [
@@ -193,6 +197,8 @@ Object {
           "statuses": Array [],
           "timeless": false,
           "title": "Le beau titre de l'étape CollectStep",
+          "votesLimit": null,
+          "votesMin": null,
         },
         Object {
           "__typename": "SelectionStep",
@@ -219,6 +225,8 @@ Object {
           ],
           "timeless": false,
           "title": "Le beau titre de l'étape SelectionStep",
+          "votesLimit": null,
+          "votesMin": null,
         },
       ],
       "themes": Array [
@@ -284,6 +292,8 @@ Object {
           "statuses": Array [],
           "timeless": false,
           "title": "Le beau titre de l'étape CollectStep",
+          "votesLimit": null,
+          "votesMin": null,
         },
       ],
       "themes": Array [

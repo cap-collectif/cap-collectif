@@ -7,6 +7,8 @@ Capco\AppBundle\Entity\Steps\CollectStep:
       groups: [Steps]
     voteThreshold:
       groups: [VoteThreshold]
+    votesMin:
+      groups: [Elasticsearch, Steps, ElasticsearchVoteNestedStep]
     votesLimit:
       groups: [Steps]
     budget:

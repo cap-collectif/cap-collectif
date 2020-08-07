@@ -91,4 +91,23 @@ Capco\AppBundle\Entity\Selection:
     selectionStep: '@selectionStepIdfAnalyse'
     createdAt: <(new \DateTime('2020-01-01 00:00:06'))>
     status: '@statusIdfAnalyse4'
-
+  selectionExport:
+    proposal: '@selectionExportProposals133'
+    selectionStep: '@selectionStepExport'
+    createdAt: <(new \DateTime('2020-01-01 00:00:07'))>
+    status: '@statusIdfAnalyse4'
+  selectionExport2:
+    proposal: '@selectionExportProposals134'
+    selectionStep: '@selectionStepExport'
+    createdAt: <(new \DateTime('2020-01-01 00:00:08'))>
+    status: '@statusIdfAnalyse4'
+  selectionExport3:
+    proposal: '@selectionExportProposals135'
+    selectionStep: '@selectionStepExport'
+    createdAt: <(new \DateTime('2020-01-01 00:00:09'))>
+    status: '@statusIdfAnalyse4'
+  selectionExport4:
+    proposal: '@selectionExportProposals136'
+    selectionStep: '@selectionStepExport'
+    createdAt: <(new \DateTime('2020-01-01 00:00:10'))>
+    status: '@statusIdfAnalyse4'

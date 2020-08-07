@@ -133,9 +133,10 @@ fragment commentInfos on Comment {
 }
 EOF;
     protected const PROPOSAL_VOTE_INFOS_FRAGMENT = <<<'EOF'
-fragment proposalVoteInfos on ProposalVote{
+fragment proposalVoteInfos on ProposalVote {
   id
   createdAt
+  isAccounted
   publishedAt
   anonymous
   ranking
@@ -214,6 +215,7 @@ EOF;
         'proposal_votes_createdAt' => 'vote.createdAt',
         'proposal_votes_publishedAt' => 'vote.publishedAt',
         'proposal_votes_published' => 'vote.published',
+        'proposal_votes_accounted' => 'vote.isAccounted',
         'proposal_votes_anonymous' => 'vote.anonymous',
         'proposal_votes_author_id' => 'vote.author.id',
         'proposal_votes_author_username' => 'vote.author.username',

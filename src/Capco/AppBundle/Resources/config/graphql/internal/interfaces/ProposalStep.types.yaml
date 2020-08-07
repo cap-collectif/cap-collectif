@@ -12,6 +12,9 @@ ProposalStep:
                 type: 'InternalProject'
             votesLimit:
                 type: 'Int'
+            votesMin:
+                type: 'Int'
+                description: 'Minimum number of votes a user must submit for his votes to be counted.'
             budget:
                 type: 'Int'
             voteType:

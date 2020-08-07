@@ -613,6 +613,13 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "votesMin",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "votesRanking",
                                 "storageKey": null,
                               },
@@ -1415,6 +1422,7 @@ fragment ProjectAdminForm_project on Project {
       votable
       votesHelpText
       votesLimit
+      votesMin
       votesRanking
       voteThreshold
       voteType
@@ -2271,6 +2279,13 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "votesMin",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "votesRanking",
                                 "storageKey": null,
                               },
@@ -3073,6 +3088,7 @@ fragment ProjectAdminForm_project on Project {
       votable
       votesHelpText
       votesLimit
+      votesMin
       votesRanking
       voteThreshold
       voteType

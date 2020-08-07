@@ -49,6 +49,7 @@ export const features: FeatureToggles = {
   login_saml: false,
   login_paris: false,
   disconnect_openid: false,
+  votes_min: false,
   blog: false,
   calendar: false,
   login_facebook: false,

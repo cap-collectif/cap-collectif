@@ -20,6 +20,7 @@ class Manager
     public const login_gplus = 'login_gplus';
     public const login_paris = 'login_paris';
     public const login_saml = 'login_saml';
+    public const votes_min = 'votes_min';
     public const privacy_policy = 'privacy_policy';
     public const members_list = 'members_list';
     public const newsletter = 'newsletter';
@@ -74,6 +75,7 @@ class Manager
         self::consent_external_communication,
         self::developer_documentation,
         self::public_api,
+        self::votes_min,
         self::login_facebook,
         self::login_gplus,
         self::login_saml,

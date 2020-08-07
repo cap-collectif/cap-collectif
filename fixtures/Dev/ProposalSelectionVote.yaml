@@ -63,3 +63,35 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         createdAt: <(new \DateTime('2017-02-01 00:00:57'))>
         publishedAt: <(new \DateTime('2017-02-01 00:00:57'))>
         private: false
+    exportSelectionVote:
+        id: 1058
+        proposal: '@selectionExportProposals133'
+        selectionStep: '@selectionStepExport'
+        user: '@user5'
+        createdAt: <(new \DateTime('2017-02-01 00:00:58'))>
+        publishedAt: $createdAt
+        private: false
+    exportSelectionVote1:
+        id: 1059
+        proposal: '@selectionExportProposals134'
+        selectionStep: '@selectionStepExport'
+        user: '@user5'
+        createdAt: <(new \DateTime('2017-02-01 00:00:59'))>
+        publishedAt: $createdAt
+        private: false
+    exportSelectionVote2:
+        id: 1060
+        proposal: '@selectionExportProposals135'
+        selectionStep: '@selectionStepExport'
+        user: '@user5'
+        createdAt: <(new \DateTime('2017-02-01 00:01:00'))>
+        publishedAt: $createdAt
+        private: false
+    exportSelectionVote3:
+        id: 1061
+        proposal: '@selectionExportProposals136'
+        selectionStep: '@selectionStepExport'
+        user: '@user5'
+        createdAt: <(new \DateTime('2017-02-01 00:01:01'))>
+        publishedAt: $createdAt
+        private: false

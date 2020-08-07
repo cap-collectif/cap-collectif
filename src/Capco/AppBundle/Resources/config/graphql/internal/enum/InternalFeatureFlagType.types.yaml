@@ -116,3 +116,5 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__remote_events")'
             user_invitations:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::user_invitations")'
+            votes_min:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::votes_min")'

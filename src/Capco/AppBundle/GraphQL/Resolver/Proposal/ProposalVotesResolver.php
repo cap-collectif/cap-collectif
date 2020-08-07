@@ -23,6 +23,7 @@ class ProposalVotesResolver implements ResolverInterface
 
     public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context, $user)
     {
+        $includeNotAccounted = true === $args->offsetGet('includeNotAccounted');
         $includeUnpublished =
             true === $args->offsetGet('includeUnpublished') ||
             ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
@@ -30,12 +31,12 @@ class ProposalVotesResolver implements ResolverInterface
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user, $context);
 
             return $this->proposalVotesDataLoader->load(
-                compact('proposal', 'step', 'args', 'includeUnpublished')
+                compact('proposal', 'step', 'args', 'includeUnpublished', 'includeNotAccounted')
             );
         }
 
         return $this->proposalVotesDataLoader->load(
-            compact('proposal', 'args', 'includeUnpublished')
+            compact('proposal', 'args', 'includeUnpublished', 'includeNotAccounted')
         );
     }
 }

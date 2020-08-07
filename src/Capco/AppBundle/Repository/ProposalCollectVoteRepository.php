@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
-use Doctrine\DBAL\Types\Type;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
@@ -129,10 +128,10 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function getByAuthorAndStep(
         User $author,
         CollectStep $step,
-        int $limit,
-        int $offset,
-        string $field = null,
-        string $direction = null
+        int $limit = 0,
+        int $offset = 0,
+        ?string $field = null,
+        ?string $direction = null
     ): Paginator {
         $qb = $this->createQueryBuilder('pv')
             ->andWhere('pv.collectStep = :step')
@@ -177,7 +176,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getUserVotesGroupedByStepIds(array $collectStepsIds, User $user = null): array
+    public function getUserVotesGroupedByStepIds(array $collectStepsIds, ?User $user = null): array
     {
         $userVotes = [];
         if ($user) {
@@ -368,14 +367,21 @@ class ProposalCollectVoteRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countPublishedCollectVoteByStep(CollectStep $step): int
-    {
-        return $this->createQueryBuilder('pv')
+    public function countPublishedCollectVoteByStep(
+        CollectStep $step,
+        bool $onlyAccounted = true
+    ): int {
+        $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv.id)')
             ->andWhere('pv.collectStep = :step')
             ->innerJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1')
+            ->andWhere('pv.published = 1');
+        if ($onlyAccounted) {
+            $qb->andWhere('pv.isAccounted = 1');
+        }
+
+        return $qb
             ->andWhere('proposal.draft = 0')
             ->andWhere('proposal.trashedAt IS NULL')
             ->andWhere('proposal.published = 1')

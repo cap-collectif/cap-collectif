@@ -74,6 +74,9 @@ class ProjectStepPersister
 
             $form = $this->formFactory->create($type, $entity);
             unset($step['id']);
+            if (!$entity instanceof CollectStep && !$entity instanceof SelectionStep) {
+                unset($step['votesMin']);
+            }
             $form->submit($step);
             if (!$form->isValid()) {
                 $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));

@@ -433,3 +433,13 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         voteType: 0
         defaultStatus: '@statusIdfWinner1'
         body: Gardez un oeil sur les projets !
+    selectionStepExport:
+        id: selectionStepExport
+        title: selectionStepExport
+        label: Salamèche, je te choisis
+        startAt: <identity((new \DateTime('2019-11-11')))>
+        endAt: <identity((new \DateTime('2032-08-02')))>
+        voteType: 1
+        votesMin: 3
+        defaultStatus: '@statusIdfWinner1'
+        body: Attrapez les tous

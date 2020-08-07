@@ -34,9 +34,15 @@ class VoteSearch extends Search
         User $viewer,
         ?string $contribuableId,
         int $limit = 100,
-        ?string $cursor = null
+        ?string $cursor = null,
+        bool $onlyAccounted = false
     ): ElasticsearchPaginatedResult {
-        $query = $this->createVotesByAuthorViewerCanSeeQuery($author, $viewer, $contribuableId);
+        $query = $this->createVotesByAuthorViewerCanSeeQuery(
+            $author,
+            $viewer,
+            $contribuableId,
+            $onlyAccounted
+        );
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
@@ -48,9 +54,10 @@ class VoteSearch extends Search
     public function getVotesByUser(
         User $user,
         int $limit = 100,
-        ?string $cursor = null
+        ?string $cursor = null,
+        bool $onlyAccounted = false
     ): ElasticsearchPaginatedResult {
-        $query = $this->createVotesByUserQuery($user);
+        $query = $this->createVotesByUserQuery($user, $onlyAccounted);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
@@ -62,9 +69,10 @@ class VoteSearch extends Search
     public function getPublicVotesByAuthor(
         User $author,
         int $limit = 100,
-        ?string $cursor = null
+        ?string $cursor = null,
+        bool $onlyAccounted = false
     ): ElasticsearchPaginatedResult {
-        $query = $this->createPublicVotesByAuthorQuery($author);
+        $query = $this->createPublicVotesByAuthorQuery($author, $onlyAccounted);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->getType($this->type)->search($query);
@@ -101,8 +109,11 @@ class VoteSearch extends Search
         }
     }
 
-    public function searchProposalVotes(array $keys, bool $includeUnpublished): array
-    {
+    public function searchProposalVotes(
+        array $keys,
+        bool $includeUnpublished,
+        bool $includeNotAccounted = false
+    ): array {
         $client = $this->index->getClient();
         $globalQuery = new \Elastica\Multi\Search($client);
 
@@ -116,6 +127,10 @@ class VoteSearch extends Search
 
             if (!$includeUnpublished) {
                 $boolQuery->addFilter(new Term(['published' => true]));
+            }
+
+            if (!$includeNotAccounted) {
+                $boolQuery->addFilter(new Term(['isAccounted' => true]));
             }
 
             list($cursor, $field, $direction, $limit) = [
@@ -166,7 +181,8 @@ class VoteSearch extends Search
     private function createVotesByAuthorViewerCanSeeQuery(
         User $author,
         User $viewer,
-        ?string $contribuableId
+        ?string $contribuableId,
+        bool $onlyAccounted = false
     ): Query {
         $boolQuery = new BoolQuery();
 
@@ -202,6 +218,10 @@ class VoteSearch extends Search
             new Term(['user.id' => ['value' => $author->getId()]]),
             new Term(['published' => ['value' => true]]),
         ];
+
+        if ($onlyAccounted) {
+            $boolQuery->addFilter(new Term(['isAccounted' => ['value' => true]]));
+        }
 
         if ($viewer !== $author && !$viewer->isSuperAdmin()) {
             $conditions[] = new Term(['private' => ['value' => false]]);
@@ -262,8 +282,10 @@ class VoteSearch extends Search
         return $query;
     }
 
-    private function createPublicVotesByAuthorQuery(User $author): Query
-    {
+    private function createPublicVotesByAuthorQuery(
+        User $author,
+        bool $onlyAccounted = false
+    ): Query {
         $boolQuery = new BoolQuery();
 
         $boolQuery->addMust([
@@ -311,19 +333,25 @@ class VoteSearch extends Search
             new Term(['private' => ['value' => false]]),
         ]);
 
+        if ($onlyAccounted) {
+            $boolQuery->addFilter(new Term(['isAccounted' => ['value' => true]]));
+        }
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
         return $query;
     }
 
-    private function createVotesByUserQuery(User $user): Query
+    private function createVotesByUserQuery(User $user, bool $onlyAccounted = false): Query
     {
         $boolQuery = new BoolQuery();
         $boolQuery->addMust([
             new Term(['published' => ['value' => true]]),
             new Term(['user.id' => ['value' => $user->getId()]]),
         ]);
+        if ($onlyAccounted) {
+            $boolQuery->addFilter(new Term(['isAccounted' => ['value' => true]]));
+        }
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 

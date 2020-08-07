@@ -16,10 +16,11 @@ class StepVotesCountResolver implements ResolverInterface
         $this->votesCountDataLoader = $votesCountDataLoader;
     }
 
-    public function __invoke(AbstractStep $step): Promise
+    public function __invoke(AbstractStep $step, bool $onlyAccounted = true): Promise
     {
         return $this->votesCountDataLoader->load([
             'step' => $step,
+            'onlyAccounted' => $onlyAccounted,
         ]);
     }
 }

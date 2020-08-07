@@ -112,6 +112,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
                 "user_invitations": false,
                 "user_type": false,
                 "votes_evolution": false,
+                "votes_min": false,
                 "zipcode_at_register": false,
               }
             }

@@ -8,10 +8,12 @@ import component from '~/components/Form/Field';
 import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import { VoteFieldContainer } from './ProjectAdminStepForm.style';
+import type { FeatureToggles, State } from '~/types';
 
 type Props = {|
   ...ReduxFormFieldArrayProps,
   dispatch: Dispatch,
+  features: FeatureToggles,
   votable: boolean,
   isBudgetEnabled: boolean,
   isTresholdEnabled: boolean,
@@ -19,6 +21,7 @@ type Props = {|
 |};
 
 export function StepVotesFields({
+  features,
   votable,
   isBudgetEnabled,
   isTresholdEnabled,
@@ -50,14 +53,30 @@ export function StepVotesFields({
             label={<FormattedMessage id="Number-of-votes-per-person" />}
           />
           {isLimitEnabled && (
-            <Field
-              type="number"
-              min={0}
-              name="votesLimit"
-              id="step-votesLimit"
-              label={<FormattedMessage id="maximum-vote" />}
-              component={component}
-            />
+            <div className="d-flex">
+              {features.votes_min && (
+                <div className="mr-30">
+                  <Field
+                    type="number"
+                    min={1}
+                    parse={value => Number(value)}
+                    name="votesMin"
+                    id="step-votesMin"
+                    label={<FormattedMessage id="global-minimum-full" />}
+                    component={component}
+                  />
+                </div>
+              )}
+              <Field
+                type="number"
+                min={1}
+                parse={value => Number(value)}
+                name="votesLimit"
+                id="step-votesLimit"
+                label={<FormattedMessage id="maximum-vote" />}
+                component={component}
+              />
+            </div>
           )}
           <Field
             component={toggle}
@@ -111,5 +130,8 @@ export function StepVotesFields({
     </>
   );
 }
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+});
 
-export default connect()(StepVotesFields);
+export default connect(mapStateToProps)(StepVotesFields);

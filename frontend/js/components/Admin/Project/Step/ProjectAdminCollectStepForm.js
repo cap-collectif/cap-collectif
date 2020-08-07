@@ -62,6 +62,8 @@ export const loadProposalOptions = (
   });
 };
 
+const formName = 'stepForm';
+
 export const ProjectAdminCollectStepForm = ({
   votable,
   requirements,
@@ -118,7 +120,7 @@ export const ProjectAdminCollectStepForm = ({
             <MenuItem
               id="public-collect"
               onClick={() => {
-                dispatch(change('stepForm', 'private', false));
+                dispatch(change(formName, 'private', false));
               }}>
               <PrivacyInfo>
                 <FormattedMessage id="public" />
@@ -128,7 +130,7 @@ export const ProjectAdminCollectStepForm = ({
             <MenuItem
               id="private-collect"
               onClick={() => {
-                dispatch(change('stepForm', 'private', true));
+                dispatch(change(formName, 'private', true));
               }}>
               <PrivacyInfo>
                 <FormattedMessage id="global-restricted" />
@@ -138,17 +140,19 @@ export const ProjectAdminCollectStepForm = ({
           </DropdownButton>
         </PrivacyContainer>
       </ProjectSmallFieldsContainer>
+
       <StepVotesFields
         votable={votable}
         isBudgetEnabled={isBudgetEnabled}
         isTresholdEnabled={isTresholdEnabled}
         isLimitEnabled={isLimitEnabled}
       />
+
       {renderSubSection('admin.fields.step.statuses')}
       <FieldArray
         name="statuses"
         component={StepStatusesList}
-        formName="stepForm"
+        formName={formName}
         statuses={statuses}
       />
       <Button
@@ -157,7 +161,7 @@ export const ProjectAdminCollectStepForm = ({
         className="btn-outline-primary box-content__toolbar mb-20"
         onClick={() =>
           dispatch(
-            arrayPush('stepForm', 'statuses', {
+            arrayPush(formName, 'statuses', {
               id: null,
               color: 'primary',
             }),
@@ -183,7 +187,7 @@ export const ProjectAdminCollectStepForm = ({
       <FieldArray
         name="requirements"
         component={StepRequirementsList}
-        formName="stepForm"
+        formName={formName}
         requirements={requirements}
       />
       <Button
@@ -192,7 +196,7 @@ export const ProjectAdminCollectStepForm = ({
         className="btn-outline-primary box-content__toolbar mb-20"
         onClick={() =>
           dispatch(
-            arrayPush('stepForm', 'requirements', {
+            arrayPush(formName, 'requirements', {
               uniqueId: getUId(),
               id: null,
               type: 'CHECKBOX',

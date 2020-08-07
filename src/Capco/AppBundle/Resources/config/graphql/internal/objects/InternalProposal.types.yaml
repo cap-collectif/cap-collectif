@@ -136,6 +136,10 @@ InternalProposal:
                         type: 'Boolean'
                         description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
                         defaultValue: false
+                    includeNotAccounted:
+                        type: 'Boolean'
+                        description: '(ROLE_SUPER_ADMIN only) Select also not accounted votes.'
+                        defaultValue: false
             hasBeenMerged:
                 type: 'Boolean'
                 description: 'Check if the proposal has been merged with another'
