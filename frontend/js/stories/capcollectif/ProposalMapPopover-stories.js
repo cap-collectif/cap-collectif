@@ -3,18 +3,19 @@ import * as React from 'react';
 import L from 'leaflet';
 import { storiesOf } from '@storybook/react';
 import { Map, TileLayer, Marker } from 'react-leaflet';
-import { BlankPopup } from '../../components/Proposal/Map/ProposalLeafletMap';
+import { BlankPopup } from '~/components/Proposal/Map/ProposalLeafletMap.style';
 import {
-  PopoverCover,
+  PopoverContent,
   PopoverContainer,
-  AuthorContainer,
-  TitleContainer,
-} from '../../components/Proposal/Map/ProposalMapPopover';
+  Status,
+  PopoverInfo,
+} from '~/components/Proposal/Map/ProposalMapPopover';
 import { proposal as proposalMock } from '../mocks/proposal';
-import { UserAvatar } from '../../components/User/UserAvatar';
-import { UserLink } from '../../components/User/UserLink';
-import type { FeatureToggles } from '../../types';
-import { features as defaultFeatures } from '../../redux/modules/default';
+import { UserLink } from '~/components/User/UserLink';
+import type { FeatureToggles } from '~/types';
+import { features as defaultFeatures } from '~/redux/modules/default';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 // TODO: mieux typer l'ensemble du storybook
 type Props = {
@@ -56,20 +57,30 @@ export const ProposalMapPopover = (props: Props) => {
             popupAnchor: [0, -40],
           })}>
           <BlankPopup closeButton={false}>
-            {features.display_pictures_in_depository_proposals_list && proposal.media && (
-              <PopoverCover src={proposal.media.url} alt="proposal-illustration" />
-            )}
             <PopoverContainer>
-              <AuthorContainer>
-                <UserAvatar className="pull-left" user={proposal.author} />
-                <UserLink user={proposal.author} toggled />
+              {proposal.status && <Status color="#5bc0de">{proposal.status?.name}</Status>}
+              <PopoverContent>
+                <h4>
+                  <a href="/skusku">{proposal.title}</a>
+                </h4>
                 <div>
-                  <span>12 avril 2017</span>
+                  {features.display_pictures_in_depository_proposals_list && (
+                    <img src={proposal.media.url} alt="proposal-illustration" />
+                  )}
+                  <div>
+                    {proposal.category && (
+                      <PopoverInfo>
+                        <Icon name={ICON_NAME.tag} size={12} color={colors.iconGrayColor} />
+                        <span>{proposal.category.name}</span>
+                      </PopoverInfo>
+                    )}
+                    <PopoverInfo>
+                      <Icon name={ICON_NAME.newUser} size={12} color={colors.iconGrayColor} />
+                      <UserLink user={proposal.author} toggled={false} />
+                    </PopoverInfo>
+                  </div>
                 </div>
-              </AuthorContainer>
-              <TitleContainer>
-                <a href={proposal.url}>{proposal.title}</a>
-              </TitleContainer>
+              </PopoverContent>
             </PopoverContainer>
           </BlankPopup>
         </Marker>

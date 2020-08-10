@@ -12,7 +12,7 @@ import type { ProposalDecisionFormPanel_proposal } from '~relay/ProposalDecision
 import colors from '~/utils/colors';
 import { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { GlobalState } from '~/types';
-import sizes from '~/utils/sizes';
+import { bootstrapGrid } from '~/utils/sizes';
 import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
@@ -94,7 +94,7 @@ export const ProposalDecisionFormPanel = ({
   const intl = useIntl();
   const [isApproved, setIsApproved] = useState(initialIsApproved);
   const { width } = useResize();
-  const isLarge = width < sizes.bootstrapGrid.mdMax;
+  const isLarge = width < bootstrapGrid.mdMax;
   const refusedReasons = proposal?.form.analysisConfiguration?.unfavourableStatuses || [];
   const effectiveDate = proposal?.form.analysisConfiguration?.effectiveDate;
   return (

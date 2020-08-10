@@ -80,3 +80,4 @@ export { default as PaperPlane } from './svg/paper-plane.svg';
 export { default as LocationTarget } from './svg/location-target.svg';
 export { default as LocationNotAuthorize } from './svg/location-not-authorize.svg';
 export { default as Search } from './svg/search.svg';
+export { default as NewUser } from './svg/new-user.svg';

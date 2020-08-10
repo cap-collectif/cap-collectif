@@ -11,7 +11,7 @@ import ProposalPageTabs from './ProposalPageTabs';
 import type { FeatureToggles, State } from '~/types';
 import ProposalAnalysisPanel from '../Analysis/ProposalAnalysisPanel';
 import type { ProposalPageLogic_query } from '~relay/ProposalPageLogic_query.graphql';
-import sizes from '~/utils/sizes';
+import { bootstrapGrid } from '~/utils/sizes';
 import ProposalAnalysisOnMobileModal from '../Analysis/ProposalAnalysisOnMobileModal';
 
 export type Props = {|
@@ -44,8 +44,8 @@ const PanelContainer: StyledComponent<
 
 export const ProposalPageLogic = ({ query, features }: Props) => {
   const { width } = useResize();
-  const isMobile = width < sizes.bootstrapGrid.smMax;
-  const isLarge = width < sizes.bootstrapGrid.mdMax;
+  const isMobile = width < bootstrapGrid.smMax;
+  const isLarge = width < bootstrapGrid.mdMax;
   const { proposal } = query;
   const hasAnalysis =
     (proposal?.viewerCanDecide ||

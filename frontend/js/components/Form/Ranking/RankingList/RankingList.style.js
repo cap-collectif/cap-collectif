@@ -1,7 +1,7 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
-import sizes, { mediaQueryMobile } from '~/utils/sizes';
+import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes';
 import { spaceItemPosition } from '~/components/Ui/DragnDrop/List/List.style';
 
 const RankingListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
@@ -18,7 +18,7 @@ const RankingListContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div
     color: ${colors.lightGray};
   }
 
-  @media (max-width: ${sizes.bootstrapGrid.mdMax}px) {
+  @media (max-width: ${bootstrapGrid.mdMax}px) {
     .list-dragndrop {
       width: 48%;
 

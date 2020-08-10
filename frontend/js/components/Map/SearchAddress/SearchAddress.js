@@ -24,6 +24,7 @@ type Props = {|
   className?: string,
   address?: string,
   getPosition?: (lat: number, lng: number) => void,
+  isMobile?: boolean,
 |};
 
 export const SearchAddress = ({
@@ -31,6 +32,7 @@ export const SearchAddress = ({
   getPosition,
   language,
   address: addressPreFilled,
+  isMobile,
 }: Props) => {
   const intl = useIntl();
   const { map } = useLeaflet();
@@ -94,17 +96,33 @@ export const SearchAddress = ({
   };
 
   return (
-    <Container className={className}>
+    <Container className={className} isMobile={isMobile}>
       <SearchContainer>
-        <Icon name={ICON_NAME.search} size={15} color={colors.darkGray} className="icon-search" />
-        <input
-          type="text"
-          value={address}
-          onChange={e => handleAddress(e.target.value)}
-          placeholder={intl.formatMessage({ id: 'map.search.placeholder.text' })}
-        />
+        {!isMobile && (
+          <>
+            <Icon
+              name={ICON_NAME.search}
+              size={15}
+              color={colors.darkGray}
+              className="icon-search"
+            />
+            <input
+              type="text"
+              value={address}
+              onChange={e => handleAddress(e.target.value)}
+              placeholder={intl.formatMessage({ id: 'map.search.placeholder.text' })}
+            />
+          </>
+        )}
 
-        <ButtonLocation type="button" onClick={getLocation} disabled={!hasLocationAuthorize}>
+        <ButtonLocation
+          isMobile={isMobile}
+          type="button"
+          onClick={e => {
+            e.preventDefault();
+            getLocation();
+          }}
+          disabled={!hasLocationAuthorize}>
           {hasLocationAuthorize ? (
             <Icon name={ICON_NAME.locationTarget} size={16} color={colors.darkGray} />
           ) : (

@@ -97,8 +97,7 @@ export const ProposalListToggleViewBtn = ({
             <i className="cap cap-th-large" /> <FormattedMessage id="grid" />
           </Button>
         )}
-
-        {!config.isMobile && showMapButton && displayModeEnabled.isMapViewEnabled && (
+        {showMapButton && displayModeEnabled.isMapViewEnabled && (
           <Button
             bsStyle="default"
             style={{ flex: '1 0 auto' }}

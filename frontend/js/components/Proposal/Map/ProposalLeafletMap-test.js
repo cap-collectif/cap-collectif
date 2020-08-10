@@ -13,6 +13,7 @@ describe('<ProposalLeafletMap />', () => {
 
   const proposals = [
     {
+      id: 'pid1',
       $fragmentRefs,
       $refType,
       address: {
@@ -21,6 +22,8 @@ describe('<ProposalLeafletMap />', () => {
       },
     },
     {
+      id: 'pid2',
+
       $fragmentRefs,
       $refType,
       address: {
@@ -28,8 +31,9 @@ describe('<ProposalLeafletMap />', () => {
         lng: 21.0122,
       },
     },
-    { $fragmentRefs, $refType, address: null },
+    { id: 'pid3', $fragmentRefs, $refType, address: null },
     {
+      id: 'pid4',
       $fragmentRefs,
       $refType,
       address: {
@@ -59,9 +63,9 @@ describe('<ProposalLeafletMap />', () => {
         proposals={proposals}
       />,
     );
-    const popup = wrapper.find('ProposalLeafletMap__BlankPopup');
-    expect(popup).toHaveLength(3);
+    const popup = wrapper.find('ProposalLeafletMapstyle__BlankPopup');
     expect(wrapper).toMatchSnapshot();
+    expect(popup).toHaveLength(3);
   });
 
   it('should not render a map with visible = false', () => {

@@ -1,12 +1,12 @@
 // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { type StyledComponent, css } from 'styled-components';
 import colors from '~/utils/colors';
 import { BASE_INPUT, MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Container: StyledComponent<{ isMobile?: boolean }, {}, HTMLDivElement> = styled.div`
   position: absolute;
   top: 15px;
-  left: 15px;
+  ${({ isMobile }) => (isMobile ? 'right: 15px' : 'left: 15px')};
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -32,12 +32,25 @@ export const SearchContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.d
   }
 `;
 
-export const ButtonLocation: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+export const ButtonLocation: StyledComponent<
+  { isMobile?: boolean },
+  {},
+  HTMLButtonElement,
+> = styled.button`
   background-color: #fafafa;
   border: 1px solid ${colors.lightGray};
-  border-radius: 0 ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE} 0;
-  border-left: none;
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          border-radius: ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE}
+            ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE};
+        `
+      : css`
+          border-radius: 0 ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE} 0;
+        `};
+  border-left: ${({ isMobile }) => !isMobile && 'none'};
   padding: 0 10px;
+  height: ${({ isMobile }) => isMobile && '35px'};
 `;
 
 export const ResultContainer: StyledComponent<{}, {}, HTMLUListElement> = styled.ul`

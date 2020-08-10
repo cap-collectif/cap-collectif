@@ -11,7 +11,7 @@ import type { ProposalAssessmentFormPanel_proposal } from '~relay/ProposalAssess
 import colors from '~/utils/colors';
 import { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { GlobalState } from '~/types';
-import sizes from '~/utils/sizes';
+import { bootstrapGrid } from '~/utils/sizes';
 import component from '~/components/Form/Field';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import { TYPE_FORM } from '~/constants/FormConstants';
@@ -92,7 +92,7 @@ export const ProposalAssessmentFormPanel = ({
 }: Props) => {
   const [status, setStatus] = useState(initialStatus);
   const { width } = useResize();
-  const isLarge = width < sizes.bootstrapGrid.mdMax;
+  const isLarge = width < bootstrapGrid.mdMax;
   return (
     <>
       <form id={formName}>

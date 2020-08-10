@@ -24,7 +24,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
       attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
       url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
     />
-    <ForwardRef(Leaflet(t))
+    <ForwardRef(Leaflet(MarkerClusterGroup))
       maxClusterRadius={30}
       onPopupClose={[Function]}
       showCoverageOnHover={false}

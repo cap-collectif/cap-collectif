@@ -22,7 +22,7 @@ import type {
 import colors from '~/utils/colors';
 import { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { GlobalState } from '~/types';
-import sizes from '~/utils/sizes';
+import { bootstrapGrid } from '~/utils/sizes';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import renderResponses from '~/components/Form/RenderResponses';
@@ -152,7 +152,7 @@ export const ProposalAnalysisFormPanel = ({
   const intl = useIntl();
   const [status, setStatus] = useState(initialStatus);
   const { width } = useResize();
-  const isLarge = width < sizes.bootstrapGrid.mdMax;
+  const isLarge = width < bootstrapGrid.mdMax;
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
     'availableQuestions',
   );

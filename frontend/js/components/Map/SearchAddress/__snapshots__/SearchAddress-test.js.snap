@@ -22,7 +22,7 @@ exports[`<SearchAddress /> should render correctly 1`] = `
     >
       <Icon
         color="#707070"
-        name="location-target"
+        name="locationTarget"
         size={16}
       />
     </SearchAddressstyle__ButtonLocation>
@@ -52,7 +52,7 @@ exports[`<SearchAddress /> should render correctly with address prefilled 1`] = 
     >
       <Icon
         color="#707070"
-        name="location-target"
+        name="locationTarget"
         size={16}
       />
     </SearchAddressstyle__ButtonLocation>

@@ -48,6 +48,16 @@ global.Modernizr = {
 
 global.window.__SERVER__ = false;
 
+global.window.matchMedia =
+  window.matchMedia ||
+  function() {
+    return {
+      matches: false,
+      addListener() {},
+      removeListener() {},
+    };
+  };
+
 // $FlowFixMe we are in jest mode
 console.error = () => {
   return;

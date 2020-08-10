@@ -6,7 +6,7 @@ import { useResize } from '@liinkiing/react-hooks';
 import styled, { type StyledComponent } from 'styled-components';
 import type { ProposalViewAnalysisPanel_proposal } from '~relay/ProposalViewAnalysisPanel_proposal.graphql';
 import colors from '~/utils/colors';
-import sizes from '~/utils/sizes';
+import { bootstrapGrid } from '~/utils/sizes';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import { getLabelData } from './ProposalAnalysisUserRow';
 import ProposalResponse from '../Page/ProposalResponse';
@@ -40,7 +40,7 @@ export const CommentView: StyledComponent<
 
 export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
   const { width } = useResize();
-  const isLarge = width < sizes.bootstrapGrid.mdMax;
+  const isLarge = width < bootstrapGrid.mdMax;
   const analysis = proposal.analyses?.find(a => a.updatedBy.id === userId);
   if (!analysis) return null;
   const { state } = analysis;

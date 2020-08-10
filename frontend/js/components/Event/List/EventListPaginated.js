@@ -14,7 +14,7 @@ import EventPagePassedEventsPreview from './EventPagePassedEventsPreview';
 import type { EventListPaginated_query } from '~relay/EventListPaginated_query.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '~/types';
 import { changeEventSelected } from '~/redux/modules/event';
-import sizes from '~/utils/sizes';
+import { bootstrapGrid } from '~/utils/sizes';
 
 type OwnProps = {|
   query: EventListPaginated_query,
@@ -60,14 +60,14 @@ export const EventListPaginated = (props: Props) => {
 
   const shouldRenderToggleListOrMap = (component: 'list' | 'map'): boolean => {
     if (component === 'list') {
-      if (width > sizes.bootstrapGrid.smMax) {
+      if (width > bootstrapGrid.smMax) {
         return true;
       }
       return isMobileListView;
     }
 
     if (component === 'map' && features.display_map) {
-      if (width > sizes.bootstrapGrid.smMax) {
+      if (width > bootstrapGrid.smMax) {
         return true;
       }
       return !isMobileListView;
@@ -104,7 +104,7 @@ export const EventListPaginated = (props: Props) => {
                 // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
                 <div
                   key={key}
-                  onMouseOver={() => (width > sizes.bootstrapGrid.smMax ? onFocus(node.id) : null)}>
+                  onMouseOver={() => (width > bootstrapGrid.smMax ? onFocus(node.id) : null)}>
                   <EventPreview
                     isHighlighted={eventSelected && eventSelected === node.id}
                     event={node}

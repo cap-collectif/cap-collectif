@@ -11,18 +11,20 @@ describe('<ProposalMapPopover />', () => {
     $refType,
     url: 'http://test.com',
     title: 'testProposal',
-    publishedAt: '2017-02-01 00:04:00',
     author: { $fragmentRefs },
     media: { url: 'media.jpg' },
+    category: null,
+    status: null,
   };
 
   const proposalWithoutMedia = {
     $refType,
     url: 'http://test.com',
     title: 'testProposal',
-    publishedAt: '2017-02-01 00:04:00',
     author: { $fragmentRefs },
     media: null,
+    category: { name: 'Cat', categoryImage: null },
+    status: { name: 'cv ou quoi le frer le boss lacoste tn ou pas?', color: 'success' },
   };
 
   it('should render popover with a picture given the feature is enabled', () => {
@@ -31,9 +33,9 @@ describe('<ProposalMapPopover />', () => {
       proposal,
     };
     const wrapper = shallow(<ProposalMapPopover {...props} />);
-    const cover = wrapper.find('ProposalMapPopover__PopoverCover');
-    expect(cover).toHaveLength(1);
+    const cover = wrapper.find('img');
     expect(wrapper).toMatchSnapshot();
+    expect(cover).toHaveLength(1);
   });
 
   it('should render popover without a picture given the feature is disabled', () => {
@@ -42,9 +44,9 @@ describe('<ProposalMapPopover />', () => {
       proposal,
     };
     const wrapper = shallow(<ProposalMapPopover {...props} />);
-    const cover = wrapper.find('ProposalMapPopover__PopoverCover');
-    expect(cover).toHaveLength(0);
+    const cover = wrapper.find('img');
     expect(wrapper).toMatchSnapshot();
+    expect(cover).toHaveLength(0);
   });
 
   it('should render popover with a default picture given a proposal without a media', () => {
@@ -53,8 +55,8 @@ describe('<ProposalMapPopover />', () => {
       proposal: proposalWithoutMedia,
     };
     const wrapper = shallow(<ProposalMapPopover {...props} />);
-    const cover = wrapper.find('ProposalMapPopover__PopoverCover');
-    expect(cover).toHaveLength(1);
+    const cover = wrapper.find('img');
     expect(wrapper).toMatchSnapshot();
+    expect(cover).toHaveLength(1);
   });
 });

@@ -3,172 +3,193 @@
 exports[`<ProposalLeafletMap /> should not render a map with visible = false 1`] = `""`;
 
 exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] = `
-<Map
-  center={
-    Object {
-      "lat": 48.8586047,
-      "lng": 2.3137325,
+<Fragment>
+  <ProposalLeafletMapstyle__StyledMap
+    center={
+      Object {
+        "lat": 48.8586047,
+        "lng": 2.3137325,
+      }
     }
-  }
-  maxZoom={18}
-  style={
-    Object {
-      "height": "50vw",
-      "width": "100%",
+    dragging={true}
+    maxZoom={18}
+    onClick={[Function]}
+    onPopupClose={[Function]}
+    onZoomStart={[Function]}
+    style={
+      Object {
+        "height": "50vw",
+      }
     }
-  }
-  zoom={12}
->
-  <ForwardRef(Leaflet(TileLayer))
-    attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
-    url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
-  />
-  <ForwardRef(Leaflet(t))
-    maxClusterRadius={30}
-    showCoverageOnHover={false}
-    spiderfyOnMaxZoom={true}
-    zoomToBoundsOnClick={true}
+    tap={true}
+    zoom={12}
+    zoomControl={false}
   >
-    <ForwardRef(Leaflet(Marker))
-      icon={
-        NewClass {
-          "_initHooksCalled": true,
-          "options": Object {
-            "iconAnchor": Array [
-              20,
-              40,
-            ],
-            "iconSize": Array [
-              40,
-              40,
-            ],
-            "iconUrl": "/svg/marker.svg",
-            "popupAnchor": Array [
-              0,
-              -40,
-            ],
-          },
-        }
-      }
-      key="0"
-      position={
-        Array [
-          49.8397,
-          24.0297,
-        ]
-      }
+    <ForwardRef(Leaflet(TileLayer))
+      attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
+      url="https://api.mapbox.com/styles/v1/capcollectif/***REMOVED***/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
+    />
+    <ForwardRef(Leaflet(MarkerClusterGroup))
+      maxClusterRadius={30}
+      showCoverageOnHover={false}
+      spiderfyOnMaxZoom={true}
+      zoomToBoundsOnClick={true}
     >
-      <ProposalLeafletMap__BlankPopup
-        closeButton={false}
-      >
-        <Relay(Connect(ProposalMapPopover))
-          proposal={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "address": Object {
-                "lat": 49.8397,
-                "lng": 24.0297,
-              },
-            }
+      <ForwardRef(Leaflet(Marker))
+        alt="marker-0"
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "iconUrl": "/svg/marker-not-selected.svg",
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
           }
-        />
-      </ProposalLeafletMap__BlankPopup>
-    </ForwardRef(Leaflet(Marker))>
-    <ForwardRef(Leaflet(Marker))
-      icon={
-        NewClass {
-          "_initHooksCalled": true,
-          "options": Object {
-            "iconAnchor": Array [
-              20,
-              40,
-            ],
-            "iconSize": Array [
-              40,
-              40,
-            ],
-            "iconUrl": "/svg/marker.svg",
-            "popupAnchor": Array [
-              0,
-              -40,
-            ],
-          },
         }
-      }
-      key="1"
-      position={
-        Array [
-          52.2297,
-          21.0122,
-        ]
-      }
-    >
-      <ProposalLeafletMap__BlankPopup
-        closeButton={false}
-      >
-        <Relay(Connect(ProposalMapPopover))
-          proposal={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "address": Object {
-                "lat": 52.2297,
-                "lng": 21.0122,
-              },
-            }
-          }
-        />
-      </ProposalLeafletMap__BlankPopup>
-    </ForwardRef(Leaflet(Marker))>
-    <ForwardRef(Leaflet(Marker))
-      icon={
-        NewClass {
-          "_initHooksCalled": true,
-          "options": Object {
-            "iconAnchor": Array [
-              20,
-              40,
-            ],
-            "iconSize": Array [
-              40,
-              40,
-            ],
-            "iconUrl": "/svg/marker.svg",
-            "popupAnchor": Array [
-              0,
-              -40,
-            ],
-          },
+        key="0"
+        onClick={[Function]}
+        position={
+          Array [
+            49.8397,
+            24.0297,
+          ]
         }
-      }
-      key="2"
-      position={
-        Array [
-          51.5074,
-          -0.0901,
-        ]
-      }
-    >
-      <ProposalLeafletMap__BlankPopup
-        closeButton={false}
       >
-        <Relay(Connect(ProposalMapPopover))
-          proposal={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "address": Object {
-                "lat": 51.5074,
-                "lng": -0.0901,
-              },
+        <ProposalLeafletMapstyle__BlankPopup
+          closeButton={false}
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "address": Object {
+                  "lat": 49.8397,
+                  "lng": 24.0297,
+                },
+                "id": "pid1",
+              }
             }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(Leaflet(Marker))>
+      <ForwardRef(Leaflet(Marker))
+        alt="marker-1"
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "iconUrl": "/svg/marker-not-selected.svg",
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
           }
-        />
-      </ProposalLeafletMap__BlankPopup>
-    </ForwardRef(Leaflet(Marker))>
-  </ForwardRef(Leaflet(t))>
-  <ForwardRef(Leaflet(injectIntl(LocateControl))) />
-  <Connect(Component) />
-</Map>
+        }
+        key="1"
+        onClick={[Function]}
+        position={
+          Array [
+            52.2297,
+            21.0122,
+          ]
+        }
+      >
+        <ProposalLeafletMapstyle__BlankPopup
+          closeButton={false}
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "address": Object {
+                  "lat": 52.2297,
+                  "lng": 21.0122,
+                },
+                "id": "pid2",
+              }
+            }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(Leaflet(Marker))>
+      <ForwardRef(Leaflet(Marker))
+        alt="marker-2"
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "iconUrl": "/svg/marker-not-selected.svg",
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
+          }
+        }
+        key="2"
+        onClick={[Function]}
+        position={
+          Array [
+            51.5074,
+            -0.0901,
+          ]
+        }
+      >
+        <ProposalLeafletMapstyle__BlankPopup
+          closeButton={false}
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "address": Object {
+                  "lat": 51.5074,
+                  "lng": -0.0901,
+                },
+                "id": "pid4",
+              }
+            }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(Leaflet(Marker))>
+    </ForwardRef(Leaflet(MarkerClusterGroup))>
+    <Connect(SearchAddress)
+      getPosition={[Function]}
+      isMobile={false}
+    />
+    <ForwardRef(Leaflet(ZoomControl))
+      position="bottomright"
+    />
+  </ProposalLeafletMapstyle__StyledMap>
+</Fragment>
 `;

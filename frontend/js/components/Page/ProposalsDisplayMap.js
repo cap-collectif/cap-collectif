@@ -44,6 +44,7 @@ export default createFragmentContainer(ProposalsDisplayMap, {
           node {
             id
             ...ProposalLeafletMap_proposals
+            ...ProposalMapPopover_proposal
           }
         }
       }

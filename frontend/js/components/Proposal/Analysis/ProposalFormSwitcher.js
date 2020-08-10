@@ -7,7 +7,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import type { ProposalFormSwitcher_proposal } from '~relay/ProposalFormSwitcher_proposal.graphql';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
-import sizes from '~/utils/sizes';
+import { bootstrapGrid } from '~/utils/sizes';
 import { CloseIcon } from './ProposalAnalysisPanel';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import type { PanelState, User } from './ProposalAnalysisPanel';
@@ -88,7 +88,7 @@ export const ProposalFormSwitcher = ({
 }: Props) => {
   const [submitting, setSubmitting] = useState(false);
   const { width } = useResize();
-  const isLarge = width < sizes.bootstrapGrid.mdMax;
+  const isLarge = width < bootstrapGrid.mdMax;
   const finishedSubmitting = (newSubmitting, goBack) => {
     setSubmitting(newSubmitting);
     if (goBack) onBackClick();

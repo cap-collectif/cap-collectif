@@ -84,9 +84,10 @@ export const ICON_NAME: {
   singleManFilled: 'singleManFilled',
   like: 'like',
   paperPlane: 'paperPlane',
-  locationTarget: 'location-target',
   locationNotAuthorize: 'location-not-authorize',
   search: 'search',
+  newUser: 'new-user',
+  locationTarget: 'locationTarget',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -168,9 +169,10 @@ export const ICON_NAME: {
   singleManFilled: 'singleManFilled',
   like: 'like',
   paperPlane: 'paperPlane',
-  locationTarget: 'location-target',
   locationNotAuthorize: 'location-not-authorize',
   search: 'search',
+  newUser: 'new-user',
+  locationTarget: 'locationTarget',
 };
 
 type Props = {|
@@ -345,12 +347,14 @@ const getIcon = name => {
       return <Icons.Like />;
     case 'paperPlane':
       return <Icons.PaperPlane />;
-    case 'location-target':
-      return <Icons.LocationTarget />;
     case 'location-not-authorize':
       return <Icons.LocationNotAuthorize />;
     case 'search':
       return <Icons.Search />;
+    case 'new-user':
+      return <Icons.NewUser />;
+    case 'locationTarget':
+      return <Icons.LocationTarget />;
     default:
       return <div />;
   }

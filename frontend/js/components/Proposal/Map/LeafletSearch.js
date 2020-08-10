@@ -11,15 +11,17 @@ type Props = {
   intl: IntlShape,
   messageSearch: ?string,
   mapCountry: ?string,
+  position?: string,
 };
 
 export class LeafletSearch extends MapControl<Props> {
   static defaultProps = {
-    messageSearch: 'global.menu.search',
+    messageSearch: 'proposal_form.address',
+    position: 'topright',
   };
 
   createLeafletElement() {
-    const { intl, messageSearch, mapCountry } = this.props;
+    const { intl, messageSearch, mapCountry, position } = this.props;
 
     const googleProvider = new GoogleProvider({
       params: {
@@ -29,7 +31,7 @@ export class LeafletSearch extends MapControl<Props> {
     });
 
     return GeoSearchControl({
-      position: 'topright',
+      position,
       style: 'button',
       provider: googleProvider,
       showMarker: false,
