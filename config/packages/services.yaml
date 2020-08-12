@@ -162,8 +162,17 @@ services:
             $resourceOwner: '@hwi_oauth.resource_owner.franceconnect'
             $environment: '%kernel.environment%'
 
-    Capco\AppBundle\Client\MapboxClient:
+    Capco\AppBundle\Client\:
         autowire: true
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Client/*'
+
+    Capco\AppBundle\Client\OccitanieClient:
+        autowire: true
+        arguments:
+            $username: '%occitanie_username%'
+            $password: '%occitanie_password%'
+            $clientId: '%occitanie_client_id%'
+            $clientSecret: '%occitanie_client_secret%'
 
     Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface: '@security.authentication.trust_resolver'
 

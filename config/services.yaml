@@ -65,6 +65,13 @@ parameters:
             interfaces: [Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface]
         votable:
             interfaces: [Capco\AppBundle\Entity\Interfaces\VotableInterface]
+    nelmio_alice.seed: 1
+    jms_i18n_routing.pattern_generation_strategy.class: Capco\AppBundle\Router\DefaultPatternGenerationStrategy
+    webfactory_icu_translation.translator: Capco\AppBundle\Translator\FormatterDecorator
+    occitanie_username: '%env(SYMFONY_OCCITANIE_USERNAME)%'
+    occitanie_password: '%env(SYMFONY_OCCITANIE_PASSWORD)%'
+    occitanie_client_id: '%env(SYMFONY_OCCITANIE_CLIENT_ID)%'
+    occitanie_client_secret: '%env(SYMFONY_OCCITANIE_CLIENT_SECRET)%'
     env(API_ENTERPRISE_TOKEN): ***REMOVED***.***REMOVED***
     env(SYMFONY_MAILER_URL): 'smtp://mailcatchersmtp:25'
     env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -115,9 +122,13 @@ parameters:
     # NEWRELIC, see https://tech.cap-collectif.com/docs/infrastructure/newrelic.html
     env(NEWRELIC_API_KEY): ***REMOVED***
     env(NEWRELIC_LICENSE_KEY): ***REMOVED***
-    nelmio_alice.seed: 1
-    jms_i18n_routing.pattern_generation_strategy.class: Capco\AppBundle\Router\DefaultPatternGenerationStrategy
-    webfactory_icu_translation.translator: Capco\AppBundle\Translator\FormatterDecorator
+    # API KEYS FOR OCCITANIE
+    env(SYMFONY_OCCITANIE_USERNAME): test
+    # TODO: Delete this env var
+    # See: deployment-tools/issues/294
+    env(SYMFONY_OCCITANIE_PASSWORD): ***REMOVED***
+    env(SYMFONY_OCCITANIE_CLIENT_ID): test
+    env(SYMFONY_OCCITANIE_CLIENT_SECRET): test
 
 nelmio_api_doc: null
 

@@ -3,22 +3,28 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Search\UserSearch;
+use Capco\AppBundle\Client\OccitanieClient;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+
 
 class QueryContributorsResolver implements ResolverInterface
 {
     public $useElasticsearch = true;
-    private $userSearch;
+    private UserSearch $userSearch;
+    private OccitanieClient $occitanieClient;
 
-    public function __construct(UserSearch $userSearch)
-    {
+    public function __construct(
+        UserSearch $userSearch,
+        OccitanieClient $occitanieClient
+    ) {
         $this->userSearch = $userSearch;
+        $this->occitanieClient = $occitanieClient;
     }
 
-    public function __invoke(?Arg $args = null): Connection
+    public function __invoke(?Arg $args = null): ConnectionInterface
     {
         $totalCount = 0;
         if (!$args) {
@@ -29,10 +35,20 @@ class QueryContributorsResolver implements ResolverInterface
             $value = $this->userSearch->getAllContributors($offset, $limit);
             $totalCount = (int) $value['totalCount'];
 
+            if (
+                strpos(getenv('SYMFONY_INSTANCE_NAME'), 'occitanie') !== false
+            ) {
+                $totalCount = $this->occitanieClient->getUserCounters();
+            }
+
             return $value['results'];
         });
 
+        // TODO: This resolver uses the old ES pagination method
+        // Please use the Elasticsearch Paginator and implement cursor management in the getAllContributors function.
+
         $connection = $paginator->auto($args, $totalCount);
+
         $connection->setTotalCount($totalCount);
         $connection->{'anonymousCount'} = 0;
 
