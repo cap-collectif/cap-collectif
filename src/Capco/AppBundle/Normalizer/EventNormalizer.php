@@ -60,11 +60,12 @@ class EventNormalizer implements
             return $data;
         }
 
+
         $data['_links'] = [
             'show' => $this->router->generate(
                 'app_event_show',
                 [
-                    'slug' => $object->getSlug(null, true),
+                    'slug' => self::getSlug($object),
                 ],
                 true
             ),
@@ -82,5 +83,20 @@ class EventNormalizer implements
     public function supportsNormalization($data, $format = null)
     {
         return $data instanceof Event;
+    }
+
+    private static function getSlug(Event $event): string
+    {
+        if ("" !== $event->getSlug(null, true)) {
+            return $event->getSlug(null, true);
+        }
+
+        foreach ($event->getTranslations() as $translation) {
+            if ("" !== $translation->getSlug()) {
+                return $translation->getSlug();
+            }
+        }
+
+        return (string) $event->getId();
     }
 }
