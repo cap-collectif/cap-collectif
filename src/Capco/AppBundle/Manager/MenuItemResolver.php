@@ -61,31 +61,33 @@ class MenuItemResolver
 
             foreach ($parents as $parent) {
                 $navs = [];
-                foreach ($children as $child) {
-                    if ($child->getParent()->getId() === $parent->getId()) {
-                        $link = $this->getMenuUrl($child, $request);
-                        $navs[] = [
-                            'id' => $child->getId(),
-                            'title' => $child->getTitle(),
-                            'link' => $link,
-                            'hasEnabledFeature' => $this->manager->containsEnabledFeature(
-                                $child->getAssociatedFeatures()
-                            ),
-                            'active' => $this->urlMatchCurrent($link, $currentUrl),
-                        ];
+                if ($parent->getTitle()) {
+                    foreach ($children as $child) {
+                        if ($child->getParent()->getId() === $parent->getId()) {
+                            $link = $this->getMenuUrl($child, $request);
+                            $navs[] = [
+                                'id' => $child->getId(),
+                                'title' => $child->getTitle(),
+                                'link' => $link,
+                                'hasEnabledFeature' => $this->manager->containsEnabledFeature(
+                                    $child->getAssociatedFeatures()
+                                ),
+                                'active' => $this->urlMatchCurrent($link, $currentUrl),
+                            ];
+                        }
                     }
+                    $link = $this->getMenuUrl($parent, $request);
+                    $links[] = [
+                        'id' => $parent->getId(),
+                        'title' => $parent->getTitle(),
+                        'link' => $link,
+                        'hasEnabledFeature' => $this->manager->containsEnabledFeature(
+                            $parent->getAssociatedFeatures()
+                        ),
+                        'children' => $navs,
+                        'active' => $this->urlMatchCurrent($link, $currentUrl),
+                    ];
                 }
-                $link = $this->getMenuUrl($parent, $request);
-                $links[] = [
-                    'id' => $parent->getId(),
-                    'title' => $parent->getTitle(),
-                    'link' => $link,
-                    'hasEnabledFeature' => $this->manager->containsEnabledFeature(
-                        $parent->getAssociatedFeatures()
-                    ),
-                    'children' => $navs,
-                    'active' => $this->urlMatchCurrent($link, $currentUrl),
-                ];
             }
 
             $cachedItem->set($links)->expiresAfter(RedisCache::ONE_MINUTE);
@@ -115,7 +117,7 @@ class MenuItemResolver
                 '_locale' => $locale,
             ]);
         }
-        $url = $item->getLink();
+        $url = $item->getLink(null, true);
         if ('/' === $url) {
             return $this->router->generate('app_homepage', ['_locale' => $locale]);
         }

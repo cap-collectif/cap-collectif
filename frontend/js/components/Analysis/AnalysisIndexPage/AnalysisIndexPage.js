@@ -60,7 +60,7 @@ export const renderComponent = ({
 
     if (projects && projects.length > 0) {
       return (
-        <Router basename={BASE_URL_ANALYSIS}>
+        <Router basename={window.location.pathname}>
           <ScrollToTop />
 
           <Route

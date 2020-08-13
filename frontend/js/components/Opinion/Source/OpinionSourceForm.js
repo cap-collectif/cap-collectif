@@ -15,6 +15,11 @@ import type { OpinionSourceForm_source } from '~relay/OpinionSourceForm_source.g
 import type { OpinionSourceForm_sourceable } from '~relay/OpinionSourceForm_sourceable.graphql';
 import type { State } from '../../../types';
 
+type SourceCategory = {
+  title: ?string,
+  id: string,
+};
+
 type FormValues = {
   title: ?string,
   body: ?string,
@@ -38,6 +43,10 @@ type Props = {|
   user: { isEmailConfirmed: boolean },
   intl: IntlShape,
 |};
+
+const isSourceCategoryTranslated = (sourceCategory: SourceCategory) => {
+  return !!sourceCategory.title;
+};
 
 const validate = ({ title, body, category, link, check }: FormValues) => {
   const errors = {};
@@ -158,11 +167,14 @@ class OpinionSourceForm extends React.Component<Props> {
             </option>
           )}
           {sourceable.availableSourceCategories &&
-            sourceable.availableSourceCategories.filter(Boolean).map(category => (
-              <option key={category.id} value={category.id}>
-                {category.title}
-              </option>
-            ))}
+            // $FlowFixMe
+            sourceable.availableSourceCategories
+              .filter(isSourceCategoryTranslated)
+              .map(category => (
+                <option key={category.id} value={category.id}>
+                  {category.title}
+                </option>
+              ))}
         </Field>
         <Field
           id="sourceLink"

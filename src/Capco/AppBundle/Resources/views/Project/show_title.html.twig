@@ -16,7 +16,7 @@
     {% endif %}
     {% set versions = project.totalVersionsCount %}
     {% if versions > 0 %}
-        {{ 'amendment-count' | trans({'count': version}, 'CapcoAppBundle') }}
+        {{ 'amendment-count' | trans({'count': versions}, 'CapcoAppBundle') }}
         </br>
     {% endif %}
     {% set arguments = project.totalArgumentsCount %}

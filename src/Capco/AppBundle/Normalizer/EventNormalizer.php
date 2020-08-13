@@ -64,7 +64,7 @@ class EventNormalizer implements
             'show' => $this->router->generate(
                 'app_event_show',
                 [
-                    'slug' => $object->getSlug(),
+                    'slug' => $object->getSlug(null, true),
                 ],
                 true
             ),

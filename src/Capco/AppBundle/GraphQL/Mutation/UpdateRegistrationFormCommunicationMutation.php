@@ -21,7 +21,7 @@ class UpdateRegistrationFormCommunicationMutation implements MutationInterface
         $this->registrationFormRepository = $registrationFormRepository;
     }
 
-    public function __invoke(Argument $input): array 
+    public function __invoke(Argument $input): array
     {
         $arguments = $input->getArrayCopy();
 
@@ -39,9 +39,10 @@ class UpdateRegistrationFormCommunicationMutation implements MutationInterface
 
         if (isset($arguments['translations'])) {
             foreach ($arguments['translations'] as $translation) {
-                $registrationForm->translate($translation['locale'], false)
-                    ->setTopText($translation['topText'])
-                    ->setBottomText($translation['bottomText']);
+                $registrationForm
+                    ->translate($translation['locale'], false)
+                    ->setTopText($translation['topText'] ?? '')
+                    ->setBottomText($translation['bottomText'] ?? '');
             }
             $registrationForm->mergeNewTranslations();
         }
