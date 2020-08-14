@@ -58,9 +58,30 @@ echo "[$(date -u)][PHP-FPM] Cache warmed!"
 retry=0
 maxRetries=3
 
-VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
-database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
-if [ "$database" != "0" ]; then
+SYMFONY_DATABASE_NAME=symfony
+database=`mysql --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD} --skip-column-names -e "SHOW DATABASES LIKE '${SYMFONY_DATABASE_NAME}'"`
+if [ "$database" == "$SYMFONY_DATABASE_NAME" ]; then
+    echo "[$(date -u)][PHP-FPM] Database ${SYMFONY_DATABASE_NAME} already exists."
+    VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
+    migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`
+    if [ "$migrations" == "0" ]; then
+      echo "[$(date -u)][PHP-FPM] No migrations to execute."
+    else
+        echo "[$(date -u)][PHP-FPM] Migrating an existing database..."
+        until [ ${retry} -ge ${maxRetries} ]
+        do
+            su capco -c "php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction" && break
+            echo "[$(date -u)][PHP-FPM] Database migration failed... Exiting" >&2
+            retry=$[${retry}+1]
+        done
+        if [ ${retry} -ge ${maxRetries} ]; then
+            echo "[$(date -u)][PHP-FPM] Database migration failed after ${maxRetries} attempts!"
+            # Kill docker
+            kill -9 1
+        fi
+    fi
+else
+    echo "[$(date -u)][PHP-FPM] Database ${SYMFONY_DATABASE_NAME} does not exist yet."
     echo "[$(date -u)][PHP-FPM] Cleaning ElasticSearch index..."
     while ! curl http://${SYMFONY_ELASTICSEARCH_HOST:-127.0.0.1}:9200 > /dev/null 2>&1;
       do sleep $timeout
@@ -74,24 +95,6 @@ if [ "$database" != "0" ]; then
     gosu capco php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction --quiet
     chmod -R 777 var/ && chown -R capco:capco var/
     gosu capco php bin/console capco:load-prod-data --force --env=prod --no-interaction --quiet
-else
-  migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`
-  if [ "$migrations" == "0" ]; then
-      echo "[$(date -u)][PHP-FPM] No migrations to execute."
-  else
-    echo "[$(date -u)][PHP-FPM] Migrating an existing database..."
-    until [ ${retry} -ge ${maxRetries} ]
-    do
-      su capco -c "php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction" && break
-      echo "[$(date -u)][PHP-FPM] Database migration failed... Exiting" >&2
-      retry=$[${retry}+1]
-    done
-    if [ ${retry} -ge ${maxRetries} ]; then
-      echo "[$(date -u)][PHP-FPM] Database migration failed after ${maxRetries} attempts!"
-      # Kill docker
-      kill -9 1
-    fi
-  fi
 fi
 echo "[$(date -u)][PHP-FPM] Database is ready!"
 
