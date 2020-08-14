@@ -5,7 +5,7 @@ services:
         autowire: true
 
     Capco\AdminBundle\Admin\PageAdmin:
-        arguments: [~, Capco\AppBundle\Entity\Page, Sonata\AdminBundle\Controller\CRUDController]
+        arguments: [~, Capco\AppBundle\Entity\Page, Capco\AdminBundle\Controller\PageController]
         tags:
             - {
                 name: sonata.admin,
