@@ -6,75 +6,84 @@ services:
 
     Capco\AppBundle\Validator\Constraints\CheckEmailDomainValidator:
         tags:
-            - {name: validator.constraint_validator, alias: capco.check_email_domain.validator}
+            - { name: validator.constraint_validator, alias: capco.check_email_domain.validator }
     Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestionsValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_required_responses.validator}
+            - { name: validator.constraint_validator, alias: has_required_responses.validator }
     Capco\AppBundle\Validator\Constraints\DidNotAlreadyVoteValidator:
         tags:
-            - {name: validator.constraint_validator, alias: already_vote.validator}
+            - { name: validator.constraint_validator, alias: already_vote.validator }
     Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator:
         tags:
-            - {name: validator.constraint_validator, alias: email_belongs_not.validator}
+            - { name: validator.constraint_validator, alias: email_belongs_not.validator }
     Capco\AppBundle\Validator\Constraints\EndAfterStartValidator:
         tags:
-            - {name: validator.constraint_validator, alias: end_after_start.validator}
+            - { name: validator.constraint_validator, alias: end_after_start.validator }
     Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_theme_if_activated.validator}
+            - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
     Capco\AppBundle\Validator\Constraints\CheckExternalLinkValidator:
         tags:
-            - {name: validator.constraint_validator, alias: check_external_link.validator}
+            - { name: validator.constraint_validator, alias: check_external_link.validator }
     Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator:
         tags:
-            - {name: validator.constraint_validator, alias: is_social_network_url.validator}
+            - { name: validator.constraint_validator, alias: is_social_network_url.validator }
     Capco\AppBundle\Validator\Constraints\HasUnlistedEmailValidator:
         tags:
-            - {name: validator.constraint_validator, alias: unlisted_email.validator}
+            - { name: validator.constraint_validator, alias: unlisted_email.validator }
     Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_enough_credits.validator}
+            - { name: validator.constraint_validator, alias: has_enough_credits.validator }
     Capco\AppBundle\Validator\Constraints\ReCaptchaValidator:
         arguments:
             $privateKey: '%recaptcha_private_key%'
         tags:
-            - {name: validator.constraint_validator, alias: recaptcha.validator}
+            - { name: validator.constraint_validator, alias: recaptcha.validator }
     Capco\AppBundle\Validator\Constraints\HasThemeIfMandatoryValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_theme_if_mandatory.validator}
+            - { name: validator.constraint_validator, alias: has_theme_if_mandatory.validator }
     Capco\AppBundle\Validator\Constraints\HasCategoryIfMandatoryValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_category_if_mandatory.validator}
+            - { name: validator.constraint_validator, alias: has_category_if_mandatory.validator }
     Capco\AppBundle\Validator\Constraints\CheckRegisterValidator:
         tags:
-            - {name: validator.constraint_validator, alias: check_register.validator}
+            - { name: validator.constraint_validator, alias: check_register.validator }
     Capco\AppBundle\Validator\Constraints\HasValidAddressValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_valid_address.validator}
+            - { name: validator.constraint_validator, alias: has_valid_address.validator }
     Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_only_one_selection_step_allowing_progress_step.validator}
+            - {
+                  name: validator.constraint_validator,
+                  alias: has_only_one_selection_step_allowing_progress_step.validator,
+              }
     Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_district_if_mandatory.validator}
+            - { name: validator.constraint_validator, alias: has_district_if_mandatory.validator }
     Capco\AppBundle\Validator\Constraints\HasAddressIfMandatoryValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_address_if_mandatory.validator}
+            - { name: validator.constraint_validator, alias: has_address_if_mandatory.validator }
     Capco\AppBundle\Validator\Constraints\NotThrowableEmailValidator:
         tags:
-            - {name: validator.constraint_validator, alias: capco.not_throwable_email.validator}
+            - { name: validator.constraint_validator, alias: capco.not_throwable_email.validator }
     Capco\AppBundle\Validator\Constraints\PasswordComplexityValidator:
         tags:
-            - {name: validator.constraint_validator, alias: password_complexity.validator}
+            - { name: validator.constraint_validator, alias: password_complexity.validator }
     Capco\AppBundle\Validator\Constraints\CheckGeoJsonValidator:
         tags:
-            - {name: validator.constraint_validator, alias: geojson.validator}
+            - { name: validator.constraint_validator, alias: geojson.validator }
     Capco\AdminBundle\Validator\Constraints\LessThanIfMetaDescriptionValidator:
         tags:
-            - {name: validator.constraint_validator, alias: less_than_if_meta_description.validator}
+            - {
+                  name: validator.constraint_validator,
+                  alias: less_than_if_meta_description.validator,
+              }
     Capco\AppBundle\Validator\Constraints\HasUserGroupIfVisibilityGroupValidator:
         tags:
-            - {name: validator.constraint_validator, alias: has_user_group_if_mandatory.validator}
+            - { name: validator.constraint_validator, alias: has_user_group_if_mandatory.validator }
     Capco\AppBundle\Validator\Constraints\VoteMinValidator:
         tags:
-            - {name: validator.constraint_validator, alias: vote_min.validator}
+            - { name: validator.constraint_validator, alias: vote_min.validator }
+    Capco\AppBundle\Validator\Constraints\CheckColorValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: check_color.validator }

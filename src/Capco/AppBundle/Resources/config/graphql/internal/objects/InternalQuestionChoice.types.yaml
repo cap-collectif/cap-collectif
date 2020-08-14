@@ -1,25 +1,26 @@
 InternalQuestionChoice:
-  type: object
-  inherits:
-    - PreviewQuestionChoice
-  config:
-    name: QuestionChoice
-    interfaces:
-      - Node
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: QuestionChoice
-      description:
-        type: 'String'
-      color:
-        type: 'QuestionChoiceColor'
-      image:
-        type: 'InternalMedia'
-      responses:
-        type: 'InternalResponseConnection!'
-      ranking:
-        type: '[InternalQuestionChoiceRanking]'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", [value])'
-        description: 'Return the ranking of the given question choice'
+    type: object
+    inherits:
+        - PreviewQuestionChoice
+    config:
+        name: QuestionChoice
+        interfaces:
+            - Node
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: QuestionChoice
+            description:
+                type: 'String'
+            color:
+                type: 'Color'
+                description: 'The color assign with the question'
+            image:
+                type: 'InternalMedia'
+            responses:
+                type: 'InternalResponseConnection!'
+            ranking:
+                type: '[InternalQuestionChoiceRanking]'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", [value])'
+                description: 'Return the ranking of the given question choice'

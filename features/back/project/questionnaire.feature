@@ -105,3 +105,51 @@ Scenario: Logged in admin edit questionnaire, import choices
   When I click on button "[id='parameters-submit']"
   And I wait 7 seconds
   And I should be redirected to "/admin/capco/app/questionnaire/questionnaireAdmin/edit"
+
+@database @rabbitmq
+Scenario: Logged in admin edits questionnaire section and add specific color
+  Given I am logged in as admin
+  And I go to the admin questionnaire edit page with id questionnaireAdmin
+  And I click the "#perso-field-add" element
+  And I wait "question_modal.create.title" to appear on current page in "body"
+  And I click the ".create-question" element
+  And I wait "#proposal-form-admin-question-modal-title-lg" to appear on current page
+  Then I fill in the following:
+    | questions[0].title | Question with specific color |
+  And I select "question.types.button" from "questions[0].type"
+  And I click on button "#add-answer-in-question-button"
+  Then I wait "#proposal-form-admin-question-modal-title-lg" to appear on current page
+  And I fill in the following:
+    | questions[0].choices[0].title | Answer title edited with test |
+  When I fill the element ".color-picker-input-container input" with value "#915791"
+  And I click on button "[id='question-choice-submit']"
+  Then I should see "Question with specific color"
+  When I click on button "[id='questions[0].submit']"
+  And I should see "your-question-has-been-registered"
+  And I click on button "[id='parameters-submit']"
+  And I wait ".alert__form_succeeded-message" to appear on current page maximum "30"
+  Then I should see "global.saved"
+
+@database @rabbitmq
+Scenario: Logged in admin edits questionnaire section and add a non valid color
+  Given I am logged in as admin
+  And I go to the admin questionnaire edit page with id questionnaireAdmin
+  And I click the "#perso-field-add" element
+  And I wait "question_modal.create.title" to appear on current page in "body"
+  And I click the ".create-question" element
+  And I wait "#proposal-form-admin-question-modal-title-lg" to appear on current page
+  Then I fill in the following:
+    | questions[0].title | Question with specific color |
+  And I select "question.types.button" from "questions[0].type"
+  And I click on button "#add-answer-in-question-button"
+  Then I wait "#proposal-form-admin-question-modal-title-lg" to appear on current page
+  And I fill in the following:
+    | questions[0].choices[0].title | Answer title edited with test |
+  When I fill the element ".color-picker-input-container input" with value "Psartek cousin"
+  And I click on button "[id='question-choice-submit']"
+  Then I should see "Question with specific color"
+  When I click on button "[id='questions[0].submit']"
+  And I should see "your-question-has-been-registered"
+  And I click on button "[id='parameters-submit']"
+  And I wait ".alert__form_invalid-field" to appear on current page maximum "30"
+  Then I should see "global.invalid.form"

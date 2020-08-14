@@ -8,120 +8,120 @@ services:
         arguments: [~, Capco\AppBundle\Entity\Page, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.page,
-                  show_in_dashboard: true,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.content,
+                label: admin.label.page,
+                show_in_dashboard: true,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\MenuItemAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\MenuItem, Capco\AdminBundle\Controller\MenuItemController]
+          [~, Capco\AppBundle\Entity\MenuItem, Capco\AdminBundle\Controller\MenuItemController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.menu_item,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: admin.label.menu_item,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\OpinionAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Opinion,
-                Capco\AdminBundle\Controller\OpinionController,
-                '@security.token_storage',
-                '@Capco\AppBundle\Repository\OpinionTypeRepository',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Opinion,
+              Capco\AdminBundle\Controller\OpinionController,
+              '@security.token_storage',
+              '@Capco\AppBundle\Repository\OpinionTypeRepository',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.opinion,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.opinion,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\ArgumentAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Argument,
-                Capco\AdminBundle\Controller\CRUDController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Argument,
+              Capco\AdminBundle\Controller\CRUDController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.argument,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.argument,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\OpinionAppendixAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\OpinionAppendix,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\OpinionAppendix,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.appendix,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.appendix,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\AppendixTypeAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\AppendixType, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\AppendixType, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.appendix_type,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.project,
+                label: admin.label.appendix_type,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\OpinionTypeAppendixTypeAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\OpinionTypeAppendixType,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\OpinionTypeAppendixType,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.appendixTypes,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.appendixTypes,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\ArgumentVoteAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\ArgumentVote, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\ArgumentVote, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.argument_vote }
         calls:
@@ -129,11 +129,11 @@ services:
 
     Capco\AdminBundle\Admin\ProposalCollectVoteAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\ProposalCollectVote,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\ProposalCollectVote,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.proposal_collect_vote }
         calls:
@@ -141,11 +141,11 @@ services:
 
     Capco\AdminBundle\Admin\ProposalSelectionVoteAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\ProposalSelectionVote,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\ProposalSelectionVote,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.proposal_collect_vote }
         calls:
@@ -153,44 +153,44 @@ services:
 
     Capco\AdminBundle\Admin\ProjectAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Project,
-                Capco\AdminBundle\Controller\CRUDController,
-                '@security.token_storage',
-                '@Capco\AppBundle\Repository\ProjectDistrictRepository',
-                '@Capco\AppBundle\Elasticsearch\Indexer',
-                '@doctrine.orm.entity_manager',
-                '@Capco\AppBundle\Toggle\Manager',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Project,
+              Capco\AdminBundle\Controller\CRUDController,
+              '@security.token_storage',
+              '@Capco\AppBundle\Repository\ProjectDistrictRepository',
+              '@Capco\AppBundle\Elasticsearch\Indexer',
+              '@doctrine.orm.entity_manager',
+              '@Capco\AppBundle\Toggle\Manager',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.project,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.project,
+                label: admin.label.project,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\ProposalAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Proposal,
-                Capco\AdminBundle\Controller\CRUDController,
-                '@security.token_storage',
-                '@Capco\AppBundle\Elasticsearch\Indexer',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Proposal,
+              Capco\AdminBundle\Controller\CRUDController,
+              '@security.token_storage',
+              '@Capco\AppBundle\Elasticsearch\Indexer',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.proposal,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.proposal,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, [edit, CapcoAdminBundle:Proposal:edit.html.twig]]
@@ -198,70 +198,62 @@ services:
 
     Capco\AdminBundle\Admin\ReplyAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Reply,
-                Capco\AdminBundle\Controller\CRUDController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Reply,
+              Capco\AdminBundle\Controller\CRUDController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.reply,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.reply,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\QuestionnaireAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Questionnaire,
-                Capco\AdminBundle\Controller\CRUDController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Questionnaire,
+              Capco\AdminBundle\Controller\CRUDController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  label: admin.label.questionnaire,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                label: admin.label.questionnaire,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, [edit, CapcoAdminBundle:Questionnaire:edit.html.twig]]
 
     Capco\AdminBundle\Admin\ProposalFormAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\ProposalForm,
-                Capco\AdminBundle\Controller\ProposalFormController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\ProposalForm,
+              Capco\AdminBundle\Controller\ProposalFormController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.proposal_form,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.project,
+                label: admin.label.proposal_form,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, [edit, CapcoAdminBundle:ProposalForm:edit.html.twig]]
             - [setTemplate, [list, CapcoAdminBundle:ProposalForm:list.html.twig]]
-
-    Capco\AdminBundle\Admin\QuestionChoiceAdmin:
-        arguments:
-            [~, Capco\AppBundle\Entity\QuestionChoice, Sonata\AdminBundle\Controller\CRUDController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.label.question_choice }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\StatusAdmin:
         arguments: [~, Capco\AppBundle\Entity\Status, Sonata\AdminBundle\Controller\CRUDController]
@@ -272,7 +264,7 @@ services:
 
     Capco\AdminBundle\Admin\RequirementAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\Requirement, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\Requirement, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.status }
         calls:
@@ -280,19 +272,19 @@ services:
 
     Capco\AdminBundle\Admin\FooterSocialNetworkAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\FooterSocialNetwork,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\FooterSocialNetwork,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.footer_social_network,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: admin.label.footer_social_network,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
@@ -312,102 +304,102 @@ services:
         arguments: [~, Capco\AppBundle\Entity\Locale, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: global-languages,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: global-languages,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\MapTokenAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\MapToken, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\MapToken, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin-settings-map,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: admin-settings-map,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\ProjectDistrictAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\District\ProjectDistrict,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\District\ProjectDistrict,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.project_district,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: admin.label.project_district,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\NewsletterSubscription,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\NewsletterSubscription,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: sonata.admin.group.user,
-                  label: admin.label.newsletter_subscription,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: sonata.admin.group.user,
+                label: admin.label.newsletter_subscription,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\OpinionTypeAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\OpinionType,
-                Capco\AdminBundle\Controller\OpinionTypeController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\OpinionType,
+              Capco\AdminBundle\Controller\OpinionTypeController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.opinion_type,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.project,
+                label: admin.label.opinion_type,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\ReportingAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\Reporting, Capco\AdminBundle\Controller\ReportingController]
+          [~, Capco\AppBundle\Entity\Reporting, Capco\AdminBundle\Controller\ReportingController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.reporting,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.reporting,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\StepAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Steps\AbstractStep,
-                Capco\AdminBundle\Controller\StepController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Steps\AbstractStep,
+              Capco\AdminBundle\Controller\StepController,
+          ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.step }
         calls:
@@ -416,26 +408,26 @@ services:
 
     Capco\AdminBundle\Admin\ThemeAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Theme,
-                Sonata\AdminBundle\Controller\CRUDController,
-                '@Capco\AppBundle\Elasticsearch\Indexer',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Theme,
+              Sonata\AdminBundle\Controller\CRUDController,
+              '@Capco\AppBundle\Elasticsearch\Indexer',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.theme,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.content,
+                label: admin.label.theme,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\OpinionVoteAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\OpinionVote, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\OpinionVote, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.opinion_vote }
         calls:
@@ -443,168 +435,168 @@ services:
 
     Capco\AdminBundle\Admin\SiteParameterAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\SiteParameter,
-                Capco\AdminBundle\Controller\SiteParameterController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\SiteParameter,
+              Capco\AdminBundle\Controller\SiteParameterController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.site_parameter,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: admin.label.site_parameter,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\SiteColorAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\SiteColor,
-                Capco\AdminBundle\Controller\SiteParameterController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\SiteColor,
+              Capco\AdminBundle\Controller\SiteParameterController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.site_color,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: admin.label.site_color,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\SiteFaviconAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\SiteImage,
-                Capco\AdminBundle\Controller\SiteFaviconController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\SiteImage,
+              Capco\AdminBundle\Controller\SiteFaviconController,
+          ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: website-icon }
 
     Capco\AdminBundle\Admin\SocialNetworkAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\SocialNetwork, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\SocialNetwork, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.social_network,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: admin.label.social_network,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\SiteImageAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\SiteImage,
-                Capco\AdminBundle\Controller\SiteParameterController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\SiteImage,
+              Capco\AdminBundle\Controller\SiteParameterController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.site_image,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.parameters,
+                label: admin.label.site_image,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\ContactAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\SiteParameter,
-                Capco\AdminBundle\Controller\ContactController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\SiteParameter,
+              Capco\AdminBundle\Controller\ContactController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  group: admin.group.project,
-                  manager_type: orm,
-                  label: contact.title,
-              }
+                name: sonata.admin,
+                group: admin.group.project,
+                manager_type: orm,
+                label: contact.title,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\SourceCategoryAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\SourceCategory, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\SourceCategory, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.category,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.project,
+                label: admin.label.category,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\SourceAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Source,
-                Capco\AdminBundle\Controller\CRUDController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Source,
+              Capco\AdminBundle\Controller\CRUDController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.source,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.source,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\PostAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Post,
-                Sonata\AdminBundle\Controller\CRUDController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Post,
+              Sonata\AdminBundle\Controller\CRUDController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.post,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.content,
+                label: admin.label.post,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\EventAdmin:
         class: Capco\AdminBundle\Admin\EventAdmin
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Event,
-                Capco\AdminBundle\Controller\EventController,
-                '@Capco\AppBundle\Elasticsearch\Indexer',
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Event,
+              Capco\AdminBundle\Controller\EventController,
+              '@Capco\AppBundle\Elasticsearch\Indexer',
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.events,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.content,
+                label: admin.label.events,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, ['list', 'CapcoAdminBundle:Event:list.html.twig'], ['create', 'CapcoAdminBundle:Event:create.html.twig']]
@@ -613,38 +605,38 @@ services:
         arguments: [~, Capco\AppBundle\Entity\Video, Capco\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.video,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.content,
+                label: admin.label.video,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\CommentAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Comment,
-                Capco\AdminBundle\Controller\CommentController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Comment,
+              Capco\AdminBundle\Controller\CommentController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.comment,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.comment,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setSubClasses, [{event_comment: Capco\AppBundle\Entity\EventComment, post_comment: Capco\AppBundle\Entity\PostComment, proposal_comment: Capco\AppBundle\Entity\ProposalComment,},],]
 
     Capco\AdminBundle\Admin\CommentVoteAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\CommentVote, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\CommentVote, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.comment_vote }
         calls:
@@ -652,66 +644,66 @@ services:
 
     Capco\AdminBundle\Admin\ConsultationAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Consultation,
-                Sonata\AdminBundle\Controller\CRUDController,
-                '@Capco\AppBundle\Repository\OpinionTypeRepository',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Consultation,
+              Sonata\AdminBundle\Controller\CRUDController,
+              '@Capco\AppBundle\Repository\OpinionTypeRepository',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.consultation,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.project,
+                label: admin.label.consultation,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\SectionAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\Section, Capco\AdminBundle\Controller\SectionController]
+          [~, Capco\AppBundle\Entity\Section, Capco\AdminBundle\Controller\SectionController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.pages,
-                  label: admin.label.section,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.pages,
+                label: admin.label.section,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\UserTypeAdmin:
         arguments:
-            [~, Capco\UserBundle\Entity\UserType, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\UserBundle\Entity\UserType, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: sonata.admin.group.user,
-                  label: admin.label.user_type,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: sonata.admin.group.user,
+                label: admin.label.user_type,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\HighlightedContentAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\HighlightedContent,
-                Capco\AdminBundle\Controller\HighlightedContentController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\HighlightedContent,
+              Capco\AdminBundle\Controller\HighlightedContentController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.highlighted,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.content,
+                label: admin.label.highlighted,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, [list, CapcoAdminBundle:HighlightedContent:list.html.twig]]
@@ -719,11 +711,11 @@ services:
 
     Capco\AdminBundle\Admin\ProjectAbstractStepAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Steps\ProjectAbstractStep,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Steps\ProjectAbstractStep,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.project_abstractstep }
         calls:
@@ -731,27 +723,27 @@ services:
 
     Capco\AdminBundle\Admin\QuestionnaireAbstractQuestionAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  label: admin.label.questionnaire_abstractquestion,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                label: admin.label.questionnaire_abstractquestion,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\SynthesisAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Synthesis\Synthesis,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Synthesis\Synthesis,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.synthesis }
         calls:
@@ -759,20 +751,20 @@ services:
 
     Capco\AdminBundle\Admin\OpinionVersionAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\OpinionVersion,
-                Sonata\AdminBundle\Controller\CRUDController,
-                '@security.token_storage',
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\OpinionVersion,
+              Sonata\AdminBundle\Controller\CRUDController,
+              '@security.token_storage',
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.opinion_version,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.opinion_version,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
@@ -780,21 +772,21 @@ services:
         arguments: [~, Capco\AppBundle\Entity\Answer, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.answer,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.answer,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\SelectionStepAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Steps\SelectionStep,
-                Capco\AdminBundle\Controller\StepController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Steps\SelectionStep,
+              Capco\AdminBundle\Controller\StepController,
+          ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.step }
         calls:
@@ -802,28 +794,28 @@ services:
 
     Capco\AdminBundle\Admin\ResponseAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Responses\AbstractResponse,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\Responses\AbstractResponse,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.moderation,
-                  label: admin.label.response,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.moderation,
+                label: admin.label.response,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\ProposalCategoryAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\ProposalCategory,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\ProposalCategory,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.proposal_category }
         calls:
@@ -831,31 +823,31 @@ services:
 
     Capco\AdminBundle\Admin\ProposalFormNotificationConfigurationAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration,
-                Sonata\AdminBundle\Controller\CRUDController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration,
+              Sonata\AdminBundle\Controller\CRUDController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  label: admin.label.proposal_form.notifications,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                label: admin.label.proposal_form.notifications,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\ProjectTypeAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\ProjectType, Sonata\AdminBundle\Controller\CRUDController]
+          [~, Capco\AppBundle\Entity\ProjectType, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.pages.types,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.project,
+                label: admin.label.pages.types,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
@@ -872,12 +864,12 @@ services:
         arguments: [~, Capco\AppBundle\Entity\Group, Sonata\AdminBundle\Controller\CRUDController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: sonata.admin.group.user,
-                  label: admin.label.group,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: sonata.admin.group.user,
+                label: admin.label.group,
+                label_translator_strategy: 'sonata.admin.label.strategy.noop',
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, [edit, CapcoAdminBundle:Group:edit.html.twig]]
@@ -892,28 +884,28 @@ services:
         arguments: [~, Capco\UserBundle\Entity\User, Capco\AdminBundle\Controller\UserController]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  label: users,
-                  group: sonata.admin.group.user,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                label: users,
+                group: sonata.admin.group.user,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\AlphaProjectAdmin:
         arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\AlphaProject,
-                Capco\AdminBundle\Controller\AlphaProjectController,
-            ]
+          [
+              ~,
+              Capco\AppBundle\Entity\AlphaProject,
+              Capco\AdminBundle\Controller\AlphaProjectController,
+          ]
         tags:
             - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.project,
-                  label: admin.label.alpha.project,
-              }
+                name: sonata.admin,
+                manager_type: orm,
+                group: admin.group.project,
+                label: admin.label.alpha.project,
+            }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
@@ -964,12 +956,12 @@ services:
     sonata_translation.admin.extension.knplabs_translatable:
         class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
         arguments:
-            [
-                '@sonata_translation.checker.translatable',
-                '@Capco\AppBundle\Toggle\Manager',
-                '@Capco\AppBundle\Repository\SiteParameterRepository',
-                '@Capco\AppBundle\Repository\LocaleRepository',
-            ]
+          [
+              '@sonata_translation.checker.translatable',
+              '@Capco\AppBundle\Toggle\Manager',
+              '@Capco\AppBundle\Repository\SiteParameterRepository',
+              '@Capco\AppBundle\Repository\LocaleRepository',
+          ]
         public: true
         tags:
             - { name: sonata.admin.extension }
@@ -979,12 +971,8 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: global-typeface }
 
+
     Capco\AdminBundle\Admin\UserInviteAdmin:
-        arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\UserInvite,
-                Capco\AdminBundle\Controller\UserInviteController,
-            ]
+        arguments: [~, Capco\AppBundle\Entity\UserInvite, Capco\AdminBundle\Controller\UserInviteController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin-menu-invite-users-label }

@@ -18,21 +18,23 @@ use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 {
     use QuestionPersisterTrait;
 
-    private $em;
-    private $formFactory;
-    private $questionnaireRepository;
-    private $logger;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private QuestionnaireRepository $questionnaireRepository;
+    private LoggerInterface $logger;
 
     /** used in QuestionPersisterTrait */
-    private $questionRepo;
-    private $abstractQuestionRepo;
-    private $indexer;
-    private $choiceQuestionRepository;
+    private QuestionnaireAbstractQuestionRepository $questionRepo;
+    private AbstractQuestionRepository $abstractQuestionRepo;
+    private Indexer $indexer;
+    private MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    private ValidatorInterface $colorValidator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -42,7 +44,8 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         AbstractQuestionRepository $abstractQuestionRepo,
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
         LoggerInterface $logger,
-        Indexer $indexer
+        Indexer $indexer,
+        ValidatorInterface $colorValidator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -51,6 +54,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->logger = $logger;
         $this->indexer = $indexer;
+        $this->colorValidator = $colorValidator;
         $this->choiceQuestionRepository = $choiceQuestionRepository;
     }
 

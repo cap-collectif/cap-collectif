@@ -4,13 +4,13 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Enum\QuestionChoiceColors;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\TitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Table(name="question_choice")
@@ -21,14 +21,6 @@ class QuestionChoice implements IndexableInterface
     use UuidTrait;
     use TitleTrait;
     use PositionableTrait;
-
-    public static $availableColors = [
-        'color.btn.primary.bg' => QuestionChoiceColors::PRIMARY,
-        'global.green' => QuestionChoiceColors::SUCCESS,
-        'admin.fields.question_choice.colors.info' => QuestionChoiceColors::INFO,
-        'global.orange' => QuestionChoiceColors::WARNING,
-        'global.red' => QuestionChoiceColors::DANGER
-    ];
 
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -49,7 +41,8 @@ class QuestionChoice implements IndexableInterface
     private $question;
 
     /**
-     * @ORM\Column(name="color", type="string", nullable=true)
+     * @CapcoAssert\CheckColor
+     * @ORM\Column(name="color", type="string", length=7, nullable=true)
      */
     private $color;
 
@@ -112,7 +105,7 @@ class QuestionChoice implements IndexableInterface
         return $this->image;
     }
 
-    public function setImage(Media $image = null): self
+    public function setImage(?Media $image = null): self
     {
         $this->image = $image;
 

@@ -175,6 +175,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
           </div>
         )}
         <Button
+          id="add-answer-in-question-button"
           bsStyle="primary"
           className="btn--outline box-content__toolbar"
           onClick={() => {

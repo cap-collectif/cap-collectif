@@ -7734,20 +7734,13 @@ type QuestionChoice implements Node {
     last: Int
   ): ResponseConnection!
   description: String
-  color: QuestionChoiceColor
+
+  """The color assign with the question"""
+  color: Color
   image: Media
 
   """Return the ranking of the given question choice"""
   ranking: [QuestionChoiceRanking]
-}
-
-"""Available colors for a question choice"""
-enum QuestionChoiceColor {
-  PRIMARY
-  SUCCESS
-  INFO
-  WARNING
-  DANGER
 }
 
 """A connection to a list of items."""
@@ -7775,7 +7768,9 @@ input QuestionChoiceInput {
   id: ID
   title: String!
   description: String
-  color: QuestionChoiceColor
+
+  """The color assign with the question choice"""
+  color: Color
   image: ID
 }
 

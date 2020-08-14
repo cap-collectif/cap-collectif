@@ -43,7 +43,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
           id="proposal-form-admin-question-modal-title-lg"
         >
           <FormattedMessage
-            id="question_modal.update.title"
+            id="global-edit-answer"
             values={Object {}}
           />
         </ModalTitle>
@@ -98,6 +98,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
         onClose={[MockFunction]}
       />
       <Connect(SubmitButton)
+        id="question-choice-submit"
         isSubmitting={false}
         label="global.validate"
         onSubmit={[MockFunction]}
@@ -150,7 +151,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
           id="proposal-form-admin-question-modal-title-lg"
         >
           <FormattedMessage
-            id="question_modal.update.title"
+            id="global-edit-answer"
             values={Object {}}
           />
         </ModalTitle>
@@ -205,40 +206,8 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
           />
         }
         name="string.color"
-        normalize={[Function]}
-        type="select"
-      >
-        <option
-          value=""
-        >
-          global.select
-        </option>
-        <option
-          value="PRIMARY"
-        >
-          color.btn.primary.bg
-        </option>
-        <option
-          value="SUCCESS"
-        >
-          global.green
-        </option>
-        <option
-          value="INFO"
-        >
-          admin.fields.question_choice.colors.info
-        </option>
-        <option
-          value="WARNING"
-        >
-          global.orange
-        </option>
-        <option
-          value="DANGER"
-        >
-          global.red
-        </option>
-      </Field>
+        type="color-picker"
+      />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
@@ -249,6 +218,7 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
         onClose={[MockFunction]}
       />
       <Connect(SubmitButton)
+        id="question-choice-submit"
         isSubmitting={false}
         label="global.validate"
         onSubmit={[MockFunction]}
@@ -301,7 +271,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
           id="proposal-form-admin-question-modal-title-lg"
         >
           <FormattedMessage
-            id="question_modal.update.title"
+            id="global-edit-answer"
             values={Object {}}
           />
         </ModalTitle>
@@ -380,6 +350,7 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
         onClose={[MockFunction]}
       />
       <Connect(SubmitButton)
+        id="question-choice-submit"
         isSubmitting={false}
         label="global.validate"
         onSubmit={[MockFunction]}
@@ -432,7 +403,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
           id="proposal-form-admin-question-modal-title-lg"
         >
           <FormattedMessage
-            id="question_modal.create.title"
+            id="global-add-answer"
             values={Object {}}
           />
         </ModalTitle>
@@ -487,6 +458,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
         onClose={[MockFunction]}
       />
       <Connect(SubmitButton)
+        id="question-choice-submit"
         isSubmitting={false}
         label="global.validate"
         onSubmit={[MockFunction]}
@@ -539,7 +511,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
           id="proposal-form-admin-question-modal-title-lg"
         >
           <FormattedMessage
-            id="question_modal.update.title"
+            id="global-edit-answer"
             values={Object {}}
           />
         </ModalTitle>
@@ -594,6 +566,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
         onClose={[MockFunction]}
       />
       <Connect(SubmitButton)
+        id="question-choice-submit"
         isSubmitting={false}
         label="global.validate"
         onSubmit={[MockFunction]}
@@ -646,7 +619,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
           id="proposal-form-admin-question-modal-title-lg"
         >
           <FormattedMessage
-            id="question_modal.create.title"
+            id="global-add-answer"
             values={Object {}}
           />
         </ModalTitle>
@@ -701,6 +674,7 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
         onClose={[MockFunction]}
       />
       <Connect(SubmitButton)
+        id="question-choice-submit"
         isSubmitting={false}
         label="global.validate"
         onSubmit={[MockFunction]}

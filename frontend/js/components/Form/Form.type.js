@@ -2,7 +2,6 @@
 import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
 import type {
   MultipleChoiceQuestionValidationRulesTypes,
-  QuestionChoiceColor,
 } from '~relay/responsesHelper_question.graphql';
 import type { ReactSelectValue } from '~/components/Form/Select';
 
@@ -89,7 +88,7 @@ export type QuestionChoice = {|
   +id: string,
   +title: string,
   +description: ?string,
-  +color: ?QuestionChoiceColor,
+  +color: ?string,
   +image: ?{|
     +id: string,
     +url: string,

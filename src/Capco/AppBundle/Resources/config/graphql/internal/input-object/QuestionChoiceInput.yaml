@@ -1,15 +1,16 @@
 QuestionChoiceInput:
-  type: input-object
-  config:
-    description: 'A possible choice of a question'
-    fields:
-      id:
-        type: 'ID'
-      title:
-        type: 'String!'
-      description:
-        type: 'String'
-      color:
-        type: 'QuestionChoiceColor'
-      image:
-        type: 'ID'
+    type: input-object
+    config:
+        description: 'A possible choice of a question'
+        fields:
+            id:
+                type: 'ID'
+            title:
+                type: 'String!'
+            description:
+                type: 'String'
+            color:
+                type: 'Color'
+                description: 'The color assign with the question choice'
+            image:
+                type: 'ID'

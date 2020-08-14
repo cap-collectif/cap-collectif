@@ -39,7 +39,6 @@ export type Jump = {|
 
 export type Jumps = ?$ReadOnlyArray<Jump>;
 export type MultipleChoiceQuestionValidationRulesTypes = 'EQUAL' | 'MAX' | 'MIN';
-export type QuestionChoiceColor = 'DANGER' | 'INFO' | 'PRIMARY' | 'SUCCESS' | 'WARNING';
 export type QuestionTypeValue =
   | 'button'
   | 'checkbox'

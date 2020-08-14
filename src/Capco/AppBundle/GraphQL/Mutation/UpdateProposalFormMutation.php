@@ -24,22 +24,24 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateProposalFormMutation implements MutationInterface
 {
     use QuestionPersisterTrait;
 
-    private $em;
-    private $formFactory;
-    private $proposalFormRepo;
-    private $logger;
-    private $questionRepo;
-    private $abstractQuestionRepo;
-    private $mediaRepository;
-    private $categoryImagesResolver;
-    private $categoryImageRepository;
-    private $choiceQuestionRepository;
-    private $indexer;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private ProposalFormRepository $proposalFormRepo;
+    private LoggerInterface $logger;
+    private QuestionnaireAbstractQuestionRepository $questionRepo;
+    private AbstractQuestionRepository $abstractQuestionRepo;
+    private MediaRepository $mediaRepository;
+    private QueryCategoryImagesResolver $categoryImagesResolver;
+    private CategoryImageRepository $categoryImageRepository;
+    private MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    private Indexer $indexer;
+    private ValidatorInterface $colorValidator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -52,7 +54,8 @@ class UpdateProposalFormMutation implements MutationInterface
         QueryCategoryImagesResolver $categoryImagesResolver,
         CategoryImageRepository $categoryImageRepository,
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
-        Indexer $indexer
+        Indexer $indexer,
+        ValidatorInterface $colorValidator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -65,6 +68,7 @@ class UpdateProposalFormMutation implements MutationInterface
         $this->categoryImageRepository = $categoryImageRepository;
         $this->choiceQuestionRepository = $choiceQuestionRepository;
         $this->indexer = $indexer;
+        $this->colorValidator = $colorValidator;
     }
 
     public function __invoke(Argument $input): array
@@ -132,11 +136,11 @@ class UpdateProposalFormMutation implements MutationInterface
         }
 
         $hasViewConfigurationChanged =
-            (array_key_exists('isGridViewEnabled', $arguments) &&
+            (\array_key_exists('isGridViewEnabled', $arguments) &&
                 $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||
-            (array_key_exists('isListViewEnabled', $arguments) &&
+            (\array_key_exists('isListViewEnabled', $arguments) &&
                 $arguments['isListViewEnabled'] !== $proposalForm->isListViewEnabled()) ||
-            (array_key_exists('isMapViewEnabled', $arguments) &&
+            (\array_key_exists('isMapViewEnabled', $arguments) &&
                 $arguments['isMapViewEnabled'] !== $proposalForm->isMapViewEnabled());
 
         if (isset($arguments['questions'])) {

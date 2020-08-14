@@ -6,7 +6,9 @@ use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
+use Capco\AppBundle\Validator\Constraints\CheckColor;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
@@ -353,6 +355,13 @@ trait QuestionPersisterTrait
                 }
 
                 if (isset($choiceData['color'])) {
+                    $violations = $this->colorValidator->validate(
+                        $choiceData['color'],
+                        new CheckColor()
+                    );
+                    if (0 !== \count($violations)) {
+                        throw GraphQLException::fromString($violations[0]->getMessage());
+                    }
                     $choice->setColor($choiceData['color']);
                 }
                 if (isset($choiceData['image'])) {

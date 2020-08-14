@@ -3,25 +3,10 @@ import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import Label from '~/components/Ui/Form/Label/Label';
 import { sharedStyleCheckboxRadio, type PropsCommonCheckboxRadio } from '../commonCheckboxRadio';
-import { BsStyleColors } from '~/utils/colors';
-
-export const COLORS: {
-  SUCCESS: 'SUCCESS',
-  INFO: 'INFO',
-  WARNING: 'WARNING',
-  DANGER: 'DANGER',
-  PRIMARY: 'PRIMARY',
-} = {
-  SUCCESS: 'SUCCESS',
-  INFO: 'INFO',
-  WARNING: 'WARNING',
-  DANGER: 'DANGER',
-  PRIMARY: 'PRIMARY',
-};
 
 type Props = {
   ...PropsCommonCheckboxRadio,
-  color: $Values<typeof COLORS> | string,
+  color: string,
 };
 
 const RadioButtonContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
@@ -30,23 +15,6 @@ const RadioButtonContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div
   ${sharedStyleCheckboxRadio()}
 `;
 
-const getColor = (color: string) => {
-  switch (color) {
-    case COLORS.SUCCESS:
-      return BsStyleColors.success;
-    case COLORS.INFO:
-      return BsStyleColors.info;
-    case COLORS.WARNING:
-      return BsStyleColors.warning;
-    case COLORS.DANGER:
-      return BsStyleColors.danger;
-    case COLORS.PRIMARY:
-      return BsStyleColors.primary;
-    default:
-      return BsStyleColors.default;
-  }
-};
-
 const LabelRadioButton: StyledComponent<
   { isChecked: boolean, color: string },
   {},
@@ -54,7 +22,7 @@ const LabelRadioButton: StyledComponent<
 > = styled.div.attrs({
   className: 'radio-container',
 })`
-  background-color: ${props => getColor(props.color)};
+  background-color: ${props => props.color};
   box-shadow: ${props => props.isChecked && 'inset 0 3px 5px rgba(0,0,0,.150)'};
   color: #fff;
   padding: 10px;

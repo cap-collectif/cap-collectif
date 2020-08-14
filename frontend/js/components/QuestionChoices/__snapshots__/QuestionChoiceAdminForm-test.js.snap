@@ -24,6 +24,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
     bsStyle="primary"
     className="btn--outline box-content__toolbar"
     disabled={false}
+    id="add-answer-in-question-button"
     onClick={[Function]}
   >
     <i
@@ -81,6 +82,7 @@ exports[`<ProposalUserVoteItem /> should render correctly modal to edit question
     bsStyle="primary"
     className="btn--outline box-content__toolbar"
     disabled={false}
+    id="add-answer-in-question-button"
     onClick={[Function]}
   >
     <i
@@ -184,6 +186,7 @@ exports[`<ProposalUserVoteItem /> should render correctly modal to import file o
     bsStyle="primary"
     className="btn--outline box-content__toolbar"
     disabled={false}
+    id="add-answer-in-question-button"
     onClick={[Function]}
   >
     <i
@@ -241,6 +244,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without choices 1`] = 
     bsStyle="primary"
     className="btn--outline box-content__toolbar"
     disabled={false}
+    id="add-answer-in-question-button"
     onClick={[Function]}
   >
     <i

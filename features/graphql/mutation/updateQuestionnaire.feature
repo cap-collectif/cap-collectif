@@ -2088,3 +2088,156 @@ Scenario: GraphQL admin wants to edit first question
      }
   }
   """
+
+@database
+Scenario: GraphQL admin wants to edit first question with valid color
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateQuestionnaireConfigurationInput!) {
+      updateQuestionnaireConfiguration(input: $input) {
+        questionnaire {
+          questions {
+            id
+            title
+            type
+            ... on MultipleChoiceQuestion {
+              choices(allowRandomize: false) {
+                edges {
+                  node {
+                    id
+                    title
+                    color
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+        "title": "Questionnaire non rattaché",
+        "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+        "questions": [
+          {
+            "question": {
+              "id": "UXVlc3Rpb246NDk=",
+              "private": false,
+              "otherAllowed": false,
+              "randomQuestionChoices": false,
+              "choices": [
+                {
+                  "color": "#ff0000",
+                  "description": null,
+                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNQ==",
+                  "image": null,
+                  "title": "premier choix"
+                }
+              ],
+              "required": false,
+              "title": "J'ai plusieurs choix?",
+              "type": "radio"
+            }
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateQuestionnaireConfiguration": {
+        "questionnaire": {
+          "questions": [
+            {
+              "id": "UXVlc3Rpb246NDk=",
+              "title": "J'ai plusieurs choix?",
+              "type": "radio",
+              "choices": {
+                "edges": [
+                  {
+                    "node": {
+                      "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNQ==",
+                      "title": "premier choix",
+                      "color": "#ff0000"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL admin wants to edit first question with invalid color
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateQuestionnaireConfigurationInput!) {
+      updateQuestionnaireConfiguration(input: $input) {
+        questionnaire {
+          questions {
+            id
+            title
+            type
+            ... on MultipleChoiceQuestion {
+              choices(allowRandomize: false) {
+                edges {
+                  node {
+                    id
+                    title
+                    color
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+        "title": "Questionnaire non rattaché",
+        "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+        "questions": [
+          {
+            "question": {
+              "id": "UXVlc3Rpb246NDk=",
+              "private": false,
+              "otherAllowed": false,
+              "randomQuestionChoices": false,
+              "choices": [
+                {
+                  "color": "https://www.youtube.com/watch?v=diH1xNRyZ_o",
+                  "description": null,
+                  "id": "UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UzNQ==",
+                  "image": null,
+                  "title": "premier choix"
+                }
+              ],
+              "required": false,
+              "title": "J'ai plusieurs choix?",
+              "type": "radio"
+            }
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"errors":[{"message":"color-not-valid","@*@": "@*@"}],"data":{"updateQuestionnaireConfiguration":null}}
+  """

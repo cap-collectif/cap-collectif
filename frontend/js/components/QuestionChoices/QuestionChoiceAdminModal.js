@@ -55,9 +55,7 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
               <Modal.Title
                 id="proposal-form-admin-question-modal-title-lg"
                 children={
-                  <FormattedMessage
-                    id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'}
-                  />
+                  <FormattedMessage id={!isCreating ? 'global-add-answer' : 'global-edit-answer'} />
                 }
               />
             </div>
@@ -87,20 +85,9 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
                 label={<FormattedMessage id="global.color" />}
                 id={`${member}.color`}
                 name={`${member}.color`}
-                type="select"
+                type="color-picker"
                 component={component}
-                normalize={val => (val === '' ? null : val)}>
-                <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
-                <option value="PRIMARY">
-                  {intl.formatMessage({ id: 'color.btn.primary.bg' })}
-                </option>
-                <option value="SUCCESS">{intl.formatMessage({ id: 'global.green' })}</option>
-                <option value="INFO">
-                  {intl.formatMessage({ id: 'admin.fields.question_choice.colors.info' })}
-                </option>
-                <option value="WARNING">{intl.formatMessage({ id: 'global.orange' })}</option>
-                <option value="DANGER">{intl.formatMessage({ id: 'global.red' })}</option>
-              </Field>
+              />
             )}
             {(type === 'radio' || type === 'checkbox' || type === 'ranking') && (
               <Field
@@ -120,7 +107,12 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={onClose} />
-            <SubmitButton label="global.validate" isSubmitting={false} onSubmit={onSubmit} />
+            <SubmitButton
+              label="global.validate"
+              isSubmitting={false}
+              onSubmit={onSubmit}
+              id="question-choice-submit"
+            />
           </Modal.Footer>
         </ModalContainer>
       </Modal>

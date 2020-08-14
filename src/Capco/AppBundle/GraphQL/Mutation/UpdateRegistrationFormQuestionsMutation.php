@@ -16,19 +16,21 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateRegistrationFormQuestionsMutation implements MutationInterface
 {
     use QuestionPersisterTrait;
 
-    private $em;
-    private $formFactory;
-    private $registrationFormRepository;
-    private $logger;
-    private $questionRepo;
-    private $abstractQuestionRepo;
-    private $choiceQuestionRepository;
-    private $indexer;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private RegistrationFormRepository $registrationFormRepository;
+    private LoggerInterface $logger;
+    private QuestionnaireAbstractQuestionRepository $questionRepo;
+    private AbstractQuestionRepository $abstractQuestionRepo;
+    private MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    private Indexer $indexer;
+    private ValidatorInterface $colorValidator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -38,7 +40,8 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo,
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
-        Indexer $indexer
+        Indexer $indexer,
+        ValidatorInterface $colorValidator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -48,6 +51,7 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
         $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->choiceQuestionRepository = $choiceQuestionRepository;
         $this->indexer = $indexer;
+        $this->colorValidator = $colorValidator;
     }
 
     public function __invoke(Argument $input): array
