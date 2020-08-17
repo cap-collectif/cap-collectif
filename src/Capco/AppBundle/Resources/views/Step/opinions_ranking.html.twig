@@ -22,6 +22,7 @@
 {% block jumbotron %}{% endblock %}
 
 {% block details %}
+
     <p id="back-button">
         <a href="{{ path('app_project_show_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" class="btn btn-default">
             <i class="cap cap-arrow-1-1"></i> {{ 'project.show.global.title' | trans({}, 'CapcoAppBundle') }}

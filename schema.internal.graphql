@@ -5094,7 +5094,7 @@ enum OrderDirection {
 }
 
 """A step inside a project."""
-type OtherStep implements Step {
+type OtherStep implements Node & Step {
   """The ID of an object"""
   id: ID!
 
@@ -5320,7 +5320,7 @@ type PostTranslation {
 }
 
 """A step inside a project."""
-type PresentationStep implements Step {
+type PresentationStep implements Node & Step {
   """The ID of an object"""
   id: ID!
 

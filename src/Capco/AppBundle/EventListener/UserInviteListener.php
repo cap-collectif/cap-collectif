@@ -31,9 +31,8 @@ class UserInviteListener
                     ])
                 )
             );
-        } catch (\Exception $exception) {
-            // Fail silently
-            $this->logger->warning(__CLASS__ . ': could not publish to rabbitmq.');
+        } catch (\RuntimeException $exception) {
+            $this->logger->error(__CLASS__ . ': could not publish to rabbitmq.');
         }
     }
 }

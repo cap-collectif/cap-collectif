@@ -2,52 +2,54 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Event;
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Event;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Model\ModerableInterface;
-use Capco\AppBundle\Repository\AbstractQuestionRepository;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\ConsultationRepository;
-use Capco\AppBundle\Repository\ConsultationStepRepository;
-use Capco\AppBundle\Repository\ContactFormRepository;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
-use Capco\AppBundle\Repository\GroupRepository;
-use Capco\AppBundle\Repository\MapTokenRepository;
-use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ProposalFormRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\QuestionChoiceRepository;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\AppBundle\Repository\RequirementRepository;
-use Capco\AppBundle\Repository\SelectionStepRepository;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Repository\SynthesisStepRepository;
-use Capco\AppBundle\Repository\UserInviteRepository;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\GroupRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\AppBundle\Repository\MapTokenRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\OtherStepRepository;
+use Capco\AppBundle\Repository\UserInviteRepository;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\ContactFormRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\AppBundle\Repository\RequirementRepository;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ConsultationRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\AppBundle\Repository\SynthesisStepRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\QuestionChoiceRepository;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
+use Capco\AppBundle\Repository\QuestionnaireStepRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 
 class GlobalIdResolver
 {
@@ -117,10 +119,6 @@ class GlobalIdResolver
                     $node = $this->container->get(ConsultationRepository::class)->find($uuid);
 
                     break;
-                case 'ConsultationStep':
-                    $node = $this->container->get(ConsultationStepRepository::class)->find($uuid);
-
-                    break;
                 case 'MapToken':
                     $node = $this->container->get(MapTokenRepository::class)->find($uuid);
 
@@ -129,18 +127,16 @@ class GlobalIdResolver
                     $node = $this->container->get(RequirementRepository::class)->find($uuid);
 
                     break;
+                case 'ConsultationStep':
+                case 'OtherStep':
+                case 'QuestionnaireStep':
+                case 'PresentationStep':
                 case 'CollectStep':
-                    $node = $this->container->get(CollectStepRepository::class)->find($uuid);
-
-                    break;
                 case 'SelectionStep':
-                    $node = $this->container->get(SelectionStepRepository::class)->find($uuid);
-
-                    break;
                 case 'SynthesisStep':
-                    $node = $this->container->get(SynthesisStepRepository::class)->find($uuid);
-
-                    break;
+                case 'RankingStep':
+                        $node = $this->container->get(AbstractStepRepository::class)->find($uuid);
+                        break;
                 case 'Proposal':
                     $node = $this->container->get(ProposalRepository::class)->find($uuid);
 

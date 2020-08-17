@@ -35,9 +35,6 @@
     {% endif %}
 
     {% block content %}
-        {% if is_feature_enabled('calendar') %}
-            {{ react_render_component('StepEventsApp', { 'props': {'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'stepId': currentStep.id|toGlobalId('ConsultationStep')} }) }}
-        {% endif %}
         {{ react_render_component('ConsultationListPageApp', { 'props': stepProps }) }}
     {% endblock %}
 {% endblock %}

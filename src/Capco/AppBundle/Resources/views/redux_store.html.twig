@@ -1,15 +1,6 @@
-{% set stepId = currentStep.id|default(null) %}
-
+{% set stepId = null %}
 {% if currentStep is defined and currentStep.type is defined %}
-    {% if currentStep.type == 'collect' %}
-        {% set stepId = stepId|toGlobalId('CollectStep') %}
-    {% elseif currentStep.type == 'selection' %}
-        {% set stepId = stepId|toGlobalId('SelectionStep') %}
-    {% elseif currentStep.type == 'synthesis' %}
-        {% set stepId = stepId|toGlobalId('SynthesisStep') %}
-    {% elseif currentStep.type == 'consultation' %}
-        {% set stepId = stepId|toGlobalId('ConsultationStep') %}
-    {% endif %}
+    {% set stepId = currentStep|toStepGlobalId() %}
 {% endif %}
 {% set currentProjectById = null %}
 {% if project is defined %}

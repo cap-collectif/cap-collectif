@@ -46,9 +46,6 @@
             </p>
         </div>
     {% else %}
-        {% if is_feature_enabled('calendar') %}
-            {{ react_render_component('StepEventsApp', { 'props': {'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'stepId': currentStep.id|toGlobalId('CollectStep')} }) }}
-        {% endif %}
         {{ react_render_component('ProposalStepPageApp', { 'props': { 'stepId': currentStep.id|toGlobalId('CollectStep'), count: capco_site_parameter_value('proposal.pagination') * 1 } }) }}
     {% endif %}
 

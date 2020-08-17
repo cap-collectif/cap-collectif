@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Entity\UserInvite;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Status;
@@ -22,6 +21,7 @@ use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\UserBundle\Entity\UserType;
 use Capco\AppBundle\Entity\SourceVote;
+use Capco\AppBundle\Entity\UserInvite;
 use Doctrine\DBAL\ConnectionException;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Capco\AppBundle\Entity\CommentVote;
@@ -75,6 +75,7 @@ use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\EventListener\UserInviteListener;
 use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
@@ -90,6 +91,8 @@ use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCo
 
 class ReinitCommand extends Command
 {
+    public const ENTITIES_WITH_LISTENERS = [UserInvite::class];
+    public const LISTENERS_TO_DISABLE = [UserInviteListener::class];
     private $env;
     private $doctrine;
     private $em;
@@ -195,12 +198,26 @@ class ReinitCommand extends Command
             $this->elasticsearchListener,
             $this->publishableListener,
             // $this->referenceListener,
-            // TODO perf improvment disable SluggableListener here
         ];
 
         foreach ($listeners as $listener) {
             $this->eventManager->removeEventListener($listener->getSubscribedEvents(), $listener);
             $output->writeln('Disabled <info>' . \get_class($listener) . '</info>.');
+        }
+
+        foreach (self::ENTITIES_WITH_LISTENERS as $entity) {
+            $metadata = $this->em->getMetadataFactory()->getMetadataFor($entity);
+
+            foreach ($metadata->entityListeners as $event => $listeners) {
+                foreach ($listeners as $key => $listener) {
+                    if (\in_array($listener['class'], self::LISTENERS_TO_DISABLE)) {
+                        unset($listeners[$key]);
+                        $output->writeln('Disabled <info>' . $listener['class'] . '</info>.');
+                    }
+                }
+                $metadata->entityListeners[$event] = $listeners;
+            }
+            $this->em->getMetadataFactory()->setMetadataFor($entity, $metadata);
         }
 
         $output->writeln('Disable dataloader\'s cache…');
@@ -390,7 +407,11 @@ class ReinitCommand extends Command
 
         $this->runCommands(
             [
-                'hautelook:fixtures:load' => ['-e' => $env, '--append' => true],
+                'hautelook:fixtures:load' => [
+                    '-e' => $env,
+                    '--append' => true,
+                    '--no-bundles' => true,
+                ],
             ],
             $output
         );

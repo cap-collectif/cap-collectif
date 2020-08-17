@@ -22,9 +22,6 @@
 {% block jumbotron %}{% endblock %}
 
 {% block details %}
-    {% if is_feature_enabled('calendar') %}
-        {{ react_render_component('StepEventsApp', { 'props': {'showAllUrl': path('app_project_show_events', {'projectSlug': project.slug}), 'stepId': currentStep.id|toGlobalId('SynthesisStep')} }) }}
-    {% endif %}
     {{ react_render_component('SynthesisViewBoxApp', {
         'props': props,
         'rendering': 'client_side'
