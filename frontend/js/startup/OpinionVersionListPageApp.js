@@ -1,11 +1,17 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import OpinionVersionListPage from '../components/OpinionVersion/OpinionVersionListPage';
-import type { Props } from '../components/OpinionVersion/OpinionVersionListPage';
+import type { Props } from '~/components/OpinionVersion/OpinionVersionListPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const OpinionVersionListPage = lazy(() =>
+  import('~/components/OpinionVersion/OpinionVersionListPage'),
+);
 
 export default (props: Props) => (
-  <Providers>
-    <OpinionVersionListPage {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <OpinionVersionListPage {...props} />
+    </Providers>
+  </Suspense>
 );

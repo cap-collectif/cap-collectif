@@ -1,11 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import type { Props } from '../components/Source/SourcePage';
-import SourcePage from '../components/Source/SourcePage';
+import type { Props } from '~/components/Source/SourcePage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const SourcePage = lazy(() => import('~/components/Source/SourcePage'));
 
 export default (props: Props) => (
-  <Providers>
-    <SourcePage {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <SourcePage {...props} />
+    </Providers>
+  </Suspense>
 );

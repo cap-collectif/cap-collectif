@@ -7,6 +7,6 @@ type Props = Object;
 
 export default (props: Props) => (
   <Providers>
-      <Accordion {...props} />
-    </Providers>
+    <Accordion {...props} />
+  </Providers>
 );

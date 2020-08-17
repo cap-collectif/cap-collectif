@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import StepEventsQueryRender, { type Props } from '../components/Steps/StepEventsQueryRender';
+import type { Props } from '~/components/Steps/StepEventsQueryRender';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const StepEventsQueryRender = lazy(() => import('~/components/Steps/StepEventsQueryRender'));
 
 export default (props: Props) => (
-  <Providers>
-    <StepEventsQueryRender {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <StepEventsQueryRender {...props} />
+    </Providers>
+  </Suspense>
 );

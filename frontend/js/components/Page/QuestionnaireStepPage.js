@@ -12,10 +12,14 @@ import QuestionnaireReplyPage from '~/components/Questionnaire/QuestionnaireRepl
 import { baseUrl } from '~/config';
 import ScrollToTop from '~/components/Utils/ScrollToTop';
 
-export type Props = {|
+export type PropsNotConnected = {|
   +questionnaireId: ?string,
-  +isAuthenticated: boolean,
   +isPrivateResult: boolean,
+|};
+
+type Props = {|
+  ...PropsNotConnected,
+  +isAuthenticated: boolean,
   +enableResults: boolean,
 |};
 

@@ -1,10 +1,13 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import Providers from './Providers';
 import environment, { graphqlError } from '../createRelayEnvironment';
-import ProjectStepTabs, { type Props } from '../components/Project/ProjectStepTabs';
 import { type ProjectStepTabsAppQueryResponse } from '~relay/ProjectStepTabsAppQuery.graphql';
+import type { Props } from '~/components/Project/ProjectStepTabs';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProjectStepTabs = lazy(() => import('~/components/Project/ProjectStepTabs'));
 
 const ProjectStepTabsAppRender = ({
   error,
@@ -22,9 +25,8 @@ const ProjectStepTabsAppRender = ({
   return null;
 };
 
-export default (props: Props) => {
-  const { projectId } = props;
-  return (
+export default ({ projectId }: Props) => (
+  <Suspense fallback={<Loader />}>
     <Providers>
       <QueryRenderer
         environment={environment}
@@ -41,5 +43,5 @@ export default (props: Props) => {
         render={ProjectStepTabsAppRender}
       />
     </Providers>
-  );
-};
+  </Suspense>
+);

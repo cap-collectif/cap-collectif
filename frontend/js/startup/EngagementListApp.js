@@ -5,6 +5,6 @@ import EngagementList from '~/components/InteClient/Engagement/EngagementList/En
 
 export default (props: Object) => (
   <Providers>
-      <EngagementList {...props} />
-    </Providers>
+    <EngagementList {...props} />
+  </Providers>
 );

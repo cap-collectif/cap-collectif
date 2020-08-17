@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ConsultationListBox, { type Props } from '../components/Consultation/ConsultationListBox';
+import type { Props } from '~/components/Consultation/ConsultationListBox';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ConsultationListBox = lazy(() => import('~/components/Consultation/ConsultationListBox'));
 
 export default (props: Props) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <ConsultationListBox {...props} />
     </Providers>
+  </Suspense>
 );

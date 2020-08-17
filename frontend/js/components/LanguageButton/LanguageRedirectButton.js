@@ -1,8 +1,11 @@
 // @flow
 import React from 'react';
-import {useIntl} from 'react-intl';
-import {DropdownLanguageButton, MenuLanguageItem} from "~/components/LanguageButton/LanguageButton";
-import {LanguageContainer, LanguageTitle} from "~/components/LanguageButton/Language";
+import { useIntl } from 'react-intl';
+import {
+  DropdownLanguageButton,
+  MenuLanguageItem,
+} from '~/components/LanguageButton/LanguageButton';
+import { LanguageContainer, LanguageTitle } from '~/components/LanguageButton/Language';
 
 type CurrentLanguageProps = {|
   language: string,
@@ -11,7 +14,7 @@ type CurrentLanguageProps = {|
 type AvailableLanguageProps = {|
   id: string,
   redirect: string,
-  traductionKey: string
+  traductionKey: string,
 |};
 
 export type Props = {|
@@ -29,20 +32,16 @@ const Language = ({ language }: CurrentLanguageProps) => {
   );
 };
 
-export const LanguageRedirectButton = ({languages, currentLanguage}: Props) => {
+export const LanguageRedirectButton = ({ languages, currentLanguage }: Props) => {
   return (
-    <DropdownLanguageButton
-      bsStyle="default"
-      title={<Language language={currentLanguage} />}
-      >
+    <DropdownLanguageButton bsStyle="default" title={<Language language={currentLanguage} />}>
       {languages.map(language => (
-        <MenuLanguageItem
-          key={language.id}
-          href={language.redirect}
-        >
+        <MenuLanguageItem key={language.id} href={language.redirect}>
           <Language language={language.traductionKey} />
         </MenuLanguageItem>
       ))}
     </DropdownLanguageButton>
-  )
+  );
 };
+
+export default LanguageRedirectButton;

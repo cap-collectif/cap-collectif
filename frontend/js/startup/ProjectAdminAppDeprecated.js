@@ -1,12 +1,18 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProjectAdminPageDeprecated from '../components/Admin/Project/Deprecated/ProjectAdminPageDeprecated';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProjectAdminPageDeprecated = lazy(() =>
+  import('~/components/Admin/Project/Deprecated/ProjectAdminPageDeprecated'),
+);
 
 const ProjectAdminAppDeprecated = ({ projectId }: { projectId: ?string }) => (
-  <Providers>
-    <ProjectAdminPageDeprecated projectId={projectId} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <ProjectAdminPageDeprecated projectId={projectId} />
+    </Providers>
+  </Suspense>
 );
 
 export default ProjectAdminAppDeprecated;

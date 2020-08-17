@@ -1,10 +1,14 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ContactsList from '../components/Contact/ContactsList';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ContactsList = lazy(() => import('~/components/Contact/ContactsList'));
 
 export default () => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <ContactsList />
     </Providers>
+  </Suspense>
 );

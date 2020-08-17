@@ -13,8 +13,7 @@ import OpinionPageApp from './startup/OpinionPageApp';
 import CommentSectionApp from './startup/CommentSectionApp';
 // $FlowFixMe we don't cover Synthesis
 import SynthesisViewBoxApp from './startup/SynthesisViewBoxApp';
-// $FlowFixMe we don't cover Synthesis
-import SynthesisEditBoxApp from './startup/SynthesisEditBoxApp';
+// import SynthesisEditBoxApp from './startup/SynthesisEditBoxApp'; // It returns null ?
 import ProposalPageApp from './startup/ProposalPageApp';
 import QuestionnaireStepPageApp from './startup/QuestionnaireStepPageApp';
 import ProjectStatsPageApp from './startup/ProjectStatsPageApp';
@@ -99,7 +98,7 @@ ReactOnRails.register({
   OpinionPageApp,
   CommentSectionApp,
   SynthesisViewBoxApp,
-  SynthesisEditBoxApp,
+  // SynthesisEditBoxApp,
   ProposalPageApp,
   QuestionnaireStepPageApp,
   ProjectStatsPageApp,
@@ -134,12 +133,14 @@ ReactOnRails.register({
   ProfileUserCommentApp,
   ProjectTrashApp,
   OpinionVersionListPageApp,
-  AccordionApp,
   FooterApp,
-  CalendarApp,
-  EngagementListApp,
   LanguageButtonApp,
   StepEventsApp,
   UserInvitationPageApp,
   ResetPasswordApp,
+
+  /* # COMPONENTS INTE CLIENT # */
+  CalendarApp,
+  EngagementListApp,
+  AccordionApp,
 });

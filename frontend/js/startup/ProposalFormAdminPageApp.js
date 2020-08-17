@@ -1,14 +1,17 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProposalFormAdminPage, {
-  type Props,
-} from '../components/ProposalForm/ProposalFormAdminPage';
+import type { Props } from '~/components/ProposalForm/ProposalFormAdminPage';
 import AlertBoxApp from '~/startup/AlertBoxApp';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProposalFormAdminPage = lazy(() => import('~/components/ProposalForm/ProposalFormAdminPage'));
 
 export default (props: Props) => (
-  <Providers>
-    <AlertBoxApp />
-    <ProposalFormAdminPage {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <AlertBoxApp />
+      <ProposalFormAdminPage {...props} />
+    </Providers>
+  </Suspense>
 );

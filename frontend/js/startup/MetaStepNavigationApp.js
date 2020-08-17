@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import MetaStepNavigationBox, { type Props } from '../components/Steps/MetaStepNavigationBox';
+import type { Props } from '~/components/Steps/MetaStepNavigationBox';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const MetaStepNavigationBox = lazy(() => import('~/components/Steps/MetaStepNavigationBox'));
 
 export default (props: Props) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <MetaStepNavigationBox {...props} />
     </Providers>
+  </Suspense>
 );

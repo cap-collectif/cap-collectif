@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import { GroupAdminPage, type Props } from '../components/Group/Admin/GroupAdminPage';
+import type { Props } from '~/components/Group/Admin/GroupAdminPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const GroupAdminPage = lazy(() => import('~/components/Group/Admin/GroupAdminPage'));
 
 export default (props: Props) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <GroupAdminPage {...props} />
     </Providers>
+  </Suspense>
 );

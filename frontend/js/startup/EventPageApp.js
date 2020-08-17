@@ -1,7 +1,9 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import EventPage from '~/components/Event/EventPage/EventPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const EventPage = lazy(() => import('~/components/Event/EventPage/EventPage'));
 
 type Props = {
   userId?: string,
@@ -9,7 +11,9 @@ type Props = {
 };
 
 export default (props: Props) => (
-  <Providers>
-    <EventPage {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <EventPage {...props} />
+    </Providers>
+  </Suspense>
 );

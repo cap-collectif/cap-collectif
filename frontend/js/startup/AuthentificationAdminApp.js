@@ -1,10 +1,16 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import AuthentificationAdminPage from '../components/Admin/Authentification/AuthentificationAdminPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const AuthentificationAdminPage = lazy(() =>
+  import('~/components/Admin/Authentification/AuthentificationAdminPage'),
+);
 
 export default () => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <AuthentificationAdminPage />
-  </Providers>
+    </Providers>
+  </Suspense>
 );

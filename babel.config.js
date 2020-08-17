@@ -48,6 +48,7 @@ module.exports = function(api) {
       '@babel/plugin-proposal-nullish-coalescing-operator',
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-proposal-optional-chaining',
+      '@babel/plugin-syntax-dynamic-import',
       'babel-plugin-dev-expression',
       'styled-components',
       'react-docgen',

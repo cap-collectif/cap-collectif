@@ -1,10 +1,14 @@
 // @flow
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import { EditProfileBox } from '../components/User/Profile/EditProfileBox';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const EditProfileBox = lazy(() => import('~/components/User/Profile/EditProfileBox'));
 
 export default (props: Object) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <EditProfileBox {...props} />
     </Providers>
+  </Suspense>
 );

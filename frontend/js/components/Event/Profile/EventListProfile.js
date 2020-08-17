@@ -5,7 +5,7 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { EventListProfileQueryResponse } from '~relay/EventListProfileQuery.graphql';
 import EventListProfileRefetch from './EventListProfileRefetch';
 
-type Props = {
+export type Props = {
   userId?: string,
   isAuthenticated?: boolean,
 };

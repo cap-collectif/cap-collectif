@@ -1,8 +1,7 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql } from 'react-relay';
-import EventFormPage from '../components/Event/Form/EventFormPage';
 import Providers from './Providers';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type {
@@ -11,13 +10,16 @@ import type {
 } from '~relay/EventFormPageAppQuery.graphql';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 
+const EventFormPage = lazy(() => import('~/components/Event/Form/EventFormPage'));
+
 type Props = {|
   +eventId: string,
   +isAuthenticated: boolean,
 |};
 
 export default ({ eventId, isAuthenticated }: Props) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <QueryRenderer
         environment={environment}
         query={graphql`
@@ -55,4 +57,5 @@ export default ({ eventId, isAuthenticated }: Props) => (
         }}
       />
     </Providers>
+  </Suspense>
 );

@@ -38,11 +38,11 @@ ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
   AlertBoxApp,
+  SiteFaviconAdminPageApp,
   AdminRightNavbarApp,
   ProjectCreateButtonApp,
   ProposalFormCreateButtonApp,
   QuestionnaireCreateButtonApp,
-  SiteFaviconAdminPageApp,
   ProposalFormAdminPageApp,
   QuestionnaireAdminPageApp,
   GroupAdminPageApp,

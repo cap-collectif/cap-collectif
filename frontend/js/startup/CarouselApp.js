@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import CarouselContainer, { type Props } from '../components/Carousel/CarouselContainer';
+import type { Props } from '~/components/Carousel/CarouselContainer';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const CarouselContainer = lazy(() => import('~/components/Carousel/CarouselContainer'));
 
 export default (props: Props) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <CarouselContainer {...props} />
     </Providers>
+  </Suspense>
 );

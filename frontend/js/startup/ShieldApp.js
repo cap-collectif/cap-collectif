@@ -1,10 +1,14 @@
 // @flow
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import Shield from '../components/Page/ShieldPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const Shield = lazy(() => import('~/components/Page/ShieldPage'));
 
 export default (props: { chartBody: ?string }) => (
-  <Providers>
-    <Shield {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <Shield {...props} />
+    </Providers>
+  </Suspense>
 );

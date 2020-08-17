@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProposalPage, { type Props } from '../components/Proposal/Page/ProposalPage';
+import type { Props } from '~/components/Proposal/Page/ProposalPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProposalPage = lazy(() => import('~/components/Proposal/Page/ProposalPage'));
 
 export default (props: Props) => (
-  <Providers>
-    <ProposalPage {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <ProposalPage {...props} />
+    </Providers>
+  </Suspense>
 );

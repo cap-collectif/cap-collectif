@@ -19,7 +19,7 @@ import type {
   SynthesisBoxQueryVariables,
 } from '~relay/SynthesisBoxQuery.graphql';
 
-type Props = {|
+export type Props = {|
   +stepId: string,
   +user: User,
   +mode: string,

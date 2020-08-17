@@ -1,10 +1,14 @@
 // @flow
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import PrivacyModal from '../components/StaticPage/PrivacyModal';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const PrivacyModal = lazy(() => import('~/components/StaticPage/PrivacyModal'));
 
 export default (props: Object) => (
-  <Providers>
-    <PrivacyModal {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <PrivacyModal {...props} />
+    </Providers>
+  </Suspense>
 );

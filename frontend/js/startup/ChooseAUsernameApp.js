@@ -1,10 +1,14 @@
 // @flow
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ChooseAUsernameModal from '../components/User/Profile/ChooseAUsernameModal';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ChooseAUsernameModal = lazy(() => import('~/components/User/Profile/ChooseAUsernameModal'));
 
 export default (props: Object) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <ChooseAUsernameModal {...props} />
     </Providers>
+  </Suspense>
 );

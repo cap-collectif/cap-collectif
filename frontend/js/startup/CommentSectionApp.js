@@ -1,12 +1,16 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import CommentSection from '../components/Comment/CommentSection';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const CommentSection = lazy(() => import('~/components/Comment/CommentSection'));
 
 type Props = { commentableId: string };
 
 export default ({ commentableId }: Props) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <CommentSection commentableId={commentableId} />
     </Providers>
+  </Suspense>
 );

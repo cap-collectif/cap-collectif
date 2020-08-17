@@ -1,20 +1,20 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProposalStepPage from '../components/Page/ProposalStepPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProposalStepPage = lazy(() => import('~/components/Page/ProposalStepPage'));
 
 type Props = {|
   +stepId: string,
   +count: number,
 |};
 
-const mainNode = (props: Props) => {
-  return (
+export default (props: Props) => (
+  <Suspense fallback={<Loader />}>
     <Providers>
       {/* $FlowFixMe  */}
       <ProposalStepPage {...props} />
     </Providers>
-  );
-};
-
-export default mainNode;
+  </Suspense>
+);

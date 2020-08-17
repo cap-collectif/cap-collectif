@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProjectTrash, { type Props } from '../components/Project/ProjectTrash';
+import type { Props } from '~/components/Project/ProjectTrash';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProjectTrash = lazy(() => import('~/components/Project/ProjectTrash'));
 
 export default (props: Props) => (
-  <Providers>
-    <ProjectTrash {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <ProjectTrash {...props} />
+    </Providers>
+  </Suspense>
 );

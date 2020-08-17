@@ -17,8 +17,13 @@ const devConf = {
   target: 'web',
   output: {
     pathinfo: true,
+    publicPath: '/',
     filename: 'js/[name].js',
+    chunkFilename: 'js/chunks/[name].[chunkhash].js',
     path: webpackConfig.outputDir,
+  },
+  optimization: {
+    namedChunks: true,
   },
   resolve: {
     alias: {

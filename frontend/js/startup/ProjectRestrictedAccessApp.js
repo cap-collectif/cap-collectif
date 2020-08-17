@@ -1,10 +1,16 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProjectRestrictedAccess from '../components/Project/Page/ProjectRestrictedAccess';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProjectRestrictedAccess = lazy(() =>
+  import('~/components/Project/Page/ProjectRestrictedAccess'),
+);
 
 export default (props: { projectId: string }) => (
-  <Providers>
-    <ProjectRestrictedAccess {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <ProjectRestrictedAccess {...props} />
+    </Providers>
+  </Suspense>
 );

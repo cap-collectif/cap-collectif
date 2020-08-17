@@ -1,16 +1,20 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import Providers from './Providers';
-import ProposalsUserVotesPage from '../components/Project/Votes/ProposalsUserVotesPage';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type {
   ProposalsUserVotesPageAppQueryResponse,
   ProposalsUserVotesPageAppQueryVariables,
 } from '~relay/ProposalsUserVotesPageAppQuery.graphql';
+import Loader from '~ui/FeedbacksIndicators/Loader';
 
-const mainNode = (data: { projectId: string }) => {
-  return (
+const ProposalsUserVotesPage = lazy(() =>
+  import('~/components/Project/Votes/ProposalsUserVotesPage'),
+);
+
+export default (data: { projectId: string }) => (
+  <Suspense fallback={<Loader />}>
     <Providers>
       <QueryRenderer
         variables={
@@ -47,7 +51,5 @@ const mainNode = (data: { projectId: string }) => {
         }}
       />
     </Providers>
-  );
-};
-
-export default mainNode;
+  </Suspense>
+);

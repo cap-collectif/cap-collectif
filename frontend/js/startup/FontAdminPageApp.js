@@ -1,10 +1,14 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import FontAdminPage from '~/components/Admin/Font/FontAdminPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const FontAdminPage = lazy(() => import('~/components/Admin/Font/FontAdminPage'));
 
 export default () => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <FontAdminPage />
     </Providers>
+  </Suspense>
 );

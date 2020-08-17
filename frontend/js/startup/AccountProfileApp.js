@@ -1,10 +1,14 @@
 // @flow
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import AccountBox from '../components/User/Profile/AccountBox';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const AccountBox = lazy(() => import('~/components/User/Profile/AccountBox'));
 
 export default (props: Object) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <AccountBox {...props} />
     </Providers>
+  </Suspense>
 );

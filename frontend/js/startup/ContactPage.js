@@ -1,10 +1,14 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ContactForm from '../components/Contact/ContactForm';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ContactForm = lazy(() => import('~/components/Contact/ContactForm'));
 
 export default () => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <ContactForm />
     </Providers>
+  </Suspense>
 );

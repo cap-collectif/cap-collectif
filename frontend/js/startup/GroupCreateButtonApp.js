@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import GroupCreateButton, { type Props } from '../components/Group/GroupCreateButton';
+import type { Props } from '~/components/Group/GroupCreateButton';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const GroupCreateButton = lazy(() => import('~/components/Group/GroupCreateButton'));
 
 export default (props: Props) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <GroupCreateButton {...props} />
     </Providers>
+  </Suspense>
 );

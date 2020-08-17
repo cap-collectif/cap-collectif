@@ -1,11 +1,15 @@
 // @flow
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import SSOSwitchUserPage from '../components/Page/SSOSwitchUserPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const SSOSwitchUserPage = lazy(() => import('~/components/Page/SSOSwitchUserPage'));
 
 export default (props: { destination: ?string, user: ?{| username: string |} }) => (
-  <Providers>
-    {/** $FlowFixMe redux overrides user type, incomprehensible */}
-    <SSOSwitchUserPage {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      {/** $FlowFixMe redux overrides user type, incomprehensible */}
+      <SSOSwitchUserPage {...props} />
+    </Providers>
+  </Suspense>
 );

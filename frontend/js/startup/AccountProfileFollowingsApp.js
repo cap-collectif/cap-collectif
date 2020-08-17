@@ -1,10 +1,14 @@
 // @flow
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import FollowingsBox from '../components/User/Following/FollowingsBox';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const FollowingsBox = lazy(() => import('~/components/User/Following/FollowingsBox'));
 
 export default (props: Object) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <FollowingsBox {...props} />
     </Providers>
+  </Suspense>
 );

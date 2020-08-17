@@ -1,12 +1,16 @@
 // @flow
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 import Providers from './Providers';
 import type { GlobalState } from '~/types';
 import AlertBoxApp from '~/startup/AlertBoxApp';
-import EvaluationsIndexPage from '~/components/Evaluation/EvaluationsIndexPage';
-import AnalysisIndexPage from '~/components/Analysis/AnalysisIndexPage/AnalysisIndexPage';
 import { AnalysisProposalsProvider } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const EvaluationsIndexPage = lazy(() => import('~/components/Evaluation/EvaluationsIndexPage'));
+const AnalysisIndexPage = lazy(() =>
+  import('~/components/Analysis/AnalysisIndexPage/AnalysisIndexPage'),
+);
 
 const SwitchAnalysisAndLegacyEvaluation = ({ isLegacyAnalysis, ...props }: Object) =>
   isLegacyAnalysis ? (
@@ -27,9 +31,11 @@ const SwitchAnalysisAndLegacyEvaluationContainer = connect(mapStateToProps)(
 );
 
 const EvaluationsIndexPageApp = (props: Object) => (
-  <Providers>
-    <SwitchAnalysisAndLegacyEvaluationContainer {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <SwitchAnalysisAndLegacyEvaluationContainer {...props} />
+    </Providers>
+  </Suspense>
 );
 
 export default EvaluationsIndexPageApp;

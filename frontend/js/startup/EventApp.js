@@ -1,10 +1,14 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import EventListPage from '~/components/Event/EventListPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const EventListPage = lazy(() => import('~/components/Event/EventListPage'));
 
 export default (props: Object) => (
-  <Providers>
-    <EventListPage {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <EventListPage {...props} />
+    </Providers>
+  </Suspense>
 );

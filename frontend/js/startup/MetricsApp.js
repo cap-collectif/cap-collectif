@@ -1,10 +1,15 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import { SectionContainer, type Props } from '../components/Section/SectionContainer';
+import type { Props } from '~/components/Section/SectionContainer';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const SectionContainer = lazy(() => import('~/components/Section/SectionContainer'));
 
 export default (props: Props) => (
-  <Providers>
-    <SectionContainer {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <SectionContainer {...props} />
+    </Providers>
+  </Suspense>
 );

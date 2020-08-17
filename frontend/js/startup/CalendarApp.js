@@ -5,6 +5,6 @@ import Calendar from '~/components/InteClient/Calendar/Calendar';
 
 export default (props: Object) => (
   <Providers>
-      <Calendar {...props} />
-    </Providers>
+    <Calendar {...props} />
+  </Providers>
 );

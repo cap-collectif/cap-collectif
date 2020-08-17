@@ -1,11 +1,12 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import Providers from './Providers';
-import RegistrationAdminPage from '../components/Admin/RegistrationAdminPage';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 import type { RegistrationAdminAppQueryResponse } from '~relay/RegistrationAdminAppQuery.graphql';
+
+const RegistrationAdminPage = lazy(() => import('~/components/Admin/RegistrationAdminPage'));
 
 const renderRegistrationAdminPage = ({
   error,
@@ -25,16 +26,18 @@ const renderRegistrationAdminPage = ({
 };
 
 export default () => (
-  <Providers>
-    <QueryRenderer
-      environment={environment}
-      query={graphql`
-        query RegistrationAdminAppQuery {
-          ...RegistrationAdminPage_query
-        }
-      `}
-      variables={{}}
-      render={renderRegistrationAdminPage}
-    />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query RegistrationAdminAppQuery {
+            ...RegistrationAdminPage_query
+          }
+        `}
+        variables={{}}
+        render={renderRegistrationAdminPage}
+      />
+    </Providers>
+  </Suspense>
 );

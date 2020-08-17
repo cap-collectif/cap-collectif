@@ -1,15 +1,19 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProjectHeaderDistricts from '../components/Project/ProjectHeaderDistricts';
-import type { Uuid } from '../types';
+import type { Uuid } from '~/types';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProjectHeaderDistricts = lazy(() => import('~/components/Project/ProjectHeaderDistricts'));
 
 type Props = {
   projectId: Uuid,
 };
 
 export default (props: Props) => (
-  <Providers>
-    <ProjectHeaderDistricts {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <ProjectHeaderDistricts {...props} />
+    </Providers>
+  </Suspense>
 );

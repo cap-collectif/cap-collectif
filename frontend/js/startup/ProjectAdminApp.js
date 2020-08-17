@@ -1,8 +1,10 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProjectAdminPage from '../components/Admin/Project/ProjectAdminPage';
 import AlertBoxApp from '~/startup/AlertBoxApp';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProjectAdminPage = lazy(() => import('~/components/Admin/Project/ProjectAdminPage'));
 
 type ProjectAdminAppProps = {|
   +projectId: ?string,
@@ -10,10 +12,12 @@ type ProjectAdminAppProps = {|
 |};
 
 const ProjectAdminApp = ({ projectId, firstCollectStepId }: ProjectAdminAppProps) => (
-  <Providers>
-    <AlertBoxApp />
-    <ProjectAdminPage projectId={projectId} firstCollectStepId={firstCollectStepId} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <AlertBoxApp />
+      <ProjectAdminPage projectId={projectId} firstCollectStepId={firstCollectStepId} />
+    </Providers>
+  </Suspense>
 );
 
 export default ProjectAdminApp;

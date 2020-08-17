@@ -1,10 +1,14 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import MapAdminPage from '../components/User/Admin/MapAdminPage';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const MapAdminPage = lazy(() => import('~/components/User/Admin/MapAdminPage'));
 
 export default (props: {}) => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <MapAdminPage {...props} />
     </Providers>
+  </Suspense>
 );

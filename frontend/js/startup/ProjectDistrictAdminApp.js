@@ -1,12 +1,18 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import ProjectDistrictAdmin from '~/components/ProjectDistrict/ProjectDistrictAdmin';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const ProjectDistrictAdmin = lazy(() =>
+  import('~/components/ProjectDistrict/ProjectDistrictAdmin'),
+);
 
 type Props = {};
 
 export default (props: Props) => (
-  <Providers>
-    <ProjectDistrictAdmin {...props} />
-  </Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
+      <ProjectDistrictAdmin {...props} />
+    </Providers>
+  </Suspense>
 );

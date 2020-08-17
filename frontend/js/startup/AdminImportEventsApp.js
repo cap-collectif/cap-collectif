@@ -1,10 +1,16 @@
 // @flow
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Providers from './Providers';
-import AdminImportEventsButton from '../components/Event/Admin/AdminImportEventsButton';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+
+const AdminImportEventsButton = lazy(() =>
+  import('~/components/Event/Admin/AdminImportEventsButton'),
+);
 
 export default () => (
-  <Providers>
+  <Suspense fallback={<Loader />}>
+    <Providers>
       <AdminImportEventsButton />
     </Providers>
+  </Suspense>
 );
