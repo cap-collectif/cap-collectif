@@ -421,6 +421,7 @@ export function ProjectAdminStepForm({
               isLimitEnabled={isLimitEnabled}
               statuses={statuses}
               votable={votable}
+              requirements={requirements}
             />
           )}
           {step.type === 'RankingStep' && <ProjectAdminRankingStepForm />}

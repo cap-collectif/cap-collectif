@@ -1,0 +1,376 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
+<Fragment>
+  <Connect(StepVotesFields)
+    isBudgetEnabled={true}
+    isLimitEnabled={true}
+    isTresholdEnabled={true}
+    votable={true}
+  />
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="global.proposals"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+    <Field
+      component={[Function]}
+      id="step-proposalsHidden"
+      label={
+        <FormattedMessage
+          id="global.updated.date"
+          values={Object {}}
+        />
+      }
+      name="proposalsHidden"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        id="step_now"
+        onClick={[Function]}
+        value={0}
+      >
+        <FormattedMessage
+          id="global.immediate"
+          values={Object {}}
+        />
+      </ToggleButton>
+      <ToggleButton
+        id="step_start"
+        onClick={[Function]}
+        value={1}
+      >
+        <FormattedMessage
+          id="step_start"
+          values={Object {}}
+        />
+      </ToggleButton>
+    </Field>
+    <Field
+      clearable={false}
+      component={[Function]}
+      id="step-defaultSort"
+      inputClassName="fake-inputClassName"
+      label={
+        <FormattedMessage
+          id="admin.fields.opinion_type.default_filter"
+          values={Object {}}
+        />
+      }
+      labelClassName="control-label"
+      name="defaultSort"
+      options={
+        Array [
+          Object {
+            "label": "global.random",
+            "value": "RANDOM",
+          },
+          Object {
+            "label": "global.filter_f_comments",
+            "value": "COMMENTS",
+          },
+          Object {
+            "label": "global.filter_f_last",
+            "value": "LAST",
+          },
+          Object {
+            "label": "global.filter_f_old",
+            "value": "OLD",
+          },
+          Object {
+            "label": "step.sort.votes",
+            "value": "VOTES",
+          },
+          Object {
+            "label": "global.filter_f_least-votes",
+            "value": "LEAST_VOTE",
+          },
+          Object {
+            "label": "global.filter_f_cheap",
+            "value": "CHEAP",
+          },
+          Object {
+            "label": "global.filter_f_expensive",
+            "value": "EXPENSIVE",
+          },
+        ]
+      }
+      placeholder=" "
+    />
+  </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+  <Field
+    component={[Function]}
+    id="step-allowingProgressSteps"
+    label={
+      <FormattedMessage
+        id="admin.fields.step.allowingProgressSteps"
+        values={Object {}}
+      />
+    }
+    name="allowingProgressSteps"
+    normalize={[Function]}
+  />
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="admin.fields.step.statuses"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <FieldArray
+    component={[Function]}
+    formName={true}
+    name="statuses"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn-outline-primary box-content__toolbar mb-20"
+    disabled={false}
+    id="js-btn-create-step-status"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-plus-circle"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="requirements"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <FieldArray
+    component={[Function]}
+    formName="stepForm"
+    name="requirements"
+    requirements={
+      Array [
+        Object {
+          "checked": false,
+          "label": "Sku",
+          "type": "CHECKBOX",
+        },
+        Object {
+          "id": "fumier",
+          "type": "LASTNAME",
+        },
+      ]
+    }
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn-outline-primary box-content__toolbar mb-20"
+    disabled={false}
+    id="js-btn-create-step"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-plus-circle"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+</Fragment>
+`;
+
+exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial data 1`] = `
+<Fragment>
+  <Connect(StepVotesFields)
+    isBudgetEnabled={false}
+    isLimitEnabled={false}
+    isTresholdEnabled={false}
+    votable={false}
+  />
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="global.proposals"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+    <Field
+      component={[Function]}
+      id="step-proposalsHidden"
+      label={
+        <FormattedMessage
+          id="global.updated.date"
+          values={Object {}}
+        />
+      }
+      name="proposalsHidden"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        id="step_now"
+        onClick={[Function]}
+        value={0}
+      >
+        <FormattedMessage
+          id="global.immediate"
+          values={Object {}}
+        />
+      </ToggleButton>
+      <ToggleButton
+        id="step_start"
+        onClick={[Function]}
+        value={1}
+      >
+        <FormattedMessage
+          id="step_start"
+          values={Object {}}
+        />
+      </ToggleButton>
+    </Field>
+    <Field
+      clearable={false}
+      component={[Function]}
+      id="step-defaultSort"
+      inputClassName="fake-inputClassName"
+      label={
+        <FormattedMessage
+          id="admin.fields.opinion_type.default_filter"
+          values={Object {}}
+        />
+      }
+      labelClassName="control-label"
+      name="defaultSort"
+      options={
+        Array [
+          Object {
+            "label": "global.random",
+            "value": "RANDOM",
+          },
+          Object {
+            "label": "global.filter_f_comments",
+            "value": "COMMENTS",
+          },
+          Object {
+            "label": "global.filter_f_last",
+            "value": "LAST",
+          },
+          Object {
+            "label": "global.filter_f_old",
+            "value": "OLD",
+          },
+          Object {
+            "label": "step.sort.votes",
+            "value": "VOTES",
+          },
+          Object {
+            "label": "global.filter_f_least-votes",
+            "value": "LEAST_VOTE",
+          },
+          Object {
+            "label": "global.filter_f_cheap",
+            "value": "CHEAP",
+          },
+          Object {
+            "label": "global.filter_f_expensive",
+            "value": "EXPENSIVE",
+          },
+        ]
+      }
+      placeholder=" "
+    />
+  </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+  <Field
+    component={[Function]}
+    id="step-allowingProgressSteps"
+    label={
+      <FormattedMessage
+        id="admin.fields.step.allowingProgressSteps"
+        values={Object {}}
+      />
+    }
+    name="allowingProgressSteps"
+    normalize={[Function]}
+  />
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="admin.fields.step.statuses"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <FieldArray
+    component={[Function]}
+    formName={true}
+    name="statuses"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn-outline-primary box-content__toolbar mb-20"
+    disabled={false}
+    id="js-btn-create-step-status"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-plus-circle"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+  <ProjectAdminFormstyle__ProjectBoxHeader>
+    <h5>
+      <FormattedMessage
+        id="requirements"
+        values={Object {}}
+      />
+    </h5>
+  </ProjectAdminFormstyle__ProjectBoxHeader>
+  <FieldArray
+    component={[Function]}
+    formName="stepForm"
+    name="requirements"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="btn-outline-primary box-content__toolbar mb-20"
+    disabled={false}
+    id="js-btn-create-step"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-plus-circle"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+</Fragment>
+`;

@@ -13,8 +13,10 @@ import StepStatusesList, { type Status } from './StepStatusesList';
 import type { Dispatch } from '~/types';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
 import StepVotesFields from './StepVotesFields';
+import StepRequirementsList, { getUId, type Requirement } from './StepRequirementsList';
 
 type Props = {|
+  requirements?: Array<Requirement>,
   statuses?: Array<Status>,
   dispatch: Dispatch,
   votable: boolean,
@@ -38,6 +40,7 @@ const formName = 'stepForm';
 
 export const ProjectAdminSelectionStepForm = ({
   votable,
+  requirements,
   statuses,
   dispatch,
   isBudgetEnabled,
@@ -124,6 +127,28 @@ export const ProjectAdminSelectionStepForm = ({
       ) : (
         ''
       )}
+      {renderSubSection('requirements')}
+      <FieldArray
+        name="requirements"
+        component={StepRequirementsList}
+        formName={formName}
+        requirements={requirements}
+      />
+      <Button
+        id="js-btn-create-step"
+        bsStyle="primary"
+        className="btn-outline-primary box-content__toolbar mb-20"
+        onClick={() =>
+          dispatch(
+            arrayPush(formName, 'requirements', {
+              uniqueId: getUId(),
+              id: null,
+              type: 'CHECKBOX',
+            }),
+          )
+        }>
+        <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+      </Button>
     </>
   );
 };
