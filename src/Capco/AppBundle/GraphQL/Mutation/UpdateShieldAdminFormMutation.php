@@ -103,7 +103,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
 
     private function updateIntroductionTranslation(
         SiteParameter $parameter,
-        string $translation,
+        ?string $translation,
         string $locale
     ): SiteParameter {
         foreach ($parameter->getTranslations() as $oldTranslation) {
