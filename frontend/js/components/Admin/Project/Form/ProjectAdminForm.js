@@ -200,7 +200,9 @@ const onSubmit = (
           proposalsHidden: s.type === 'SelectionStep' ? s.proposalsHidden : undefined,
           statuses: s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.statuses : undefined,
           defaultStatus:
-            s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.defaultStatus?.value || s.defaultStatus : undefined,
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? s.defaultStatus?.value || s.defaultStatus
+              : undefined,
           private: s.type === 'CollectStep' ? s.private : undefined,
           defaultSort:
             s.type === 'SelectionStep' || s.type === 'CollectStep' ? s.defaultSort : undefined,
@@ -584,6 +586,7 @@ export default createFragmentContainer(container, {
           votable
           votesHelpText
           votesLimit
+          votesMin
           votesRanking
           voteThreshold
           voteType
