@@ -14,6 +14,13 @@ export const Container: StyledComponent<{}, {}, typeof PickableList.Row> = style
   padding: 60px;
   width: 100%;
 
+  .pickableList-row-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
   .icon {
     margin-bottom: 15px;
   }

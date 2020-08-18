@@ -7,12 +7,32 @@ type Props = {
   children: React.Node,
   rowId?: string | number,
   isSelectable?: boolean,
+  className?: string,
+  onFocus?: () => void,
+  onBlur?: () => void,
+  onMouseLeave?: () => void,
+  onMouseOver?: () => void,
 };
 
-const PickableListRow = ({ children, rowId, isSelectable = true, ...rest }: Props) => {
+const PickableListRow = ({
+  children,
+  rowId,
+  isSelectable = true,
+  className,
+  onFocus,
+  onBlur,
+  onMouseLeave,
+  onMouseOver,
+  ...rest
+}: Props) => {
   const { dispatch, isRowChecked } = usePickableList();
   return (
-    <S.Container>
+    <S.Container
+      className={className}
+      onMouseLeave={onMouseLeave}
+      onMouseOver={onMouseOver}
+      onFocus={onFocus}
+      onBlur={onBlur}>
       {isSelectable && (
         <input
           type="checkbox"

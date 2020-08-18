@@ -54,6 +54,8 @@ import AnalysisFilterCategory from '~/components/Analysis/AnalysisFilter/Analysi
 import AnalysisFilterDistrict from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
 import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
 import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
+import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal';
+import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -424,6 +426,10 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
     project,
     parameters.filters.step,
   ]);
+  const [proposalSelected, setProposalSelected] = React.useState<?string>(null);
+  const [proposalModalDelete, setProposalModalDelete] = React.useState<?AnalysisProposal_proposal>(
+    null,
+  );
 
   const isInteractive =
     parameters.filters.state !== 'ALL' &&
@@ -538,13 +544,16 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                 .filter(Boolean)
                 .map(proposal => (
                   <AnalysisProposal
-                    isAdminUrl
+                    isAdminView
                     hasRegroupTag
                     proposal={proposal}
-                    key={proposal.id}
                     rowId={proposal.id}
+                    key={proposal.id}
                     dispatch={dispatch}
-                    hasStateTag={parameters.filters.state === 'ALL'}>
+                    hasStateTag={parameters.filters.state === 'ALL'}
+                    setProposalModalDelete={setProposalModalDelete}
+                    proposalSelected={proposalSelected || null}
+                    setProposalSelected={setProposalSelected}>
                     <S.ProposalListRowInformationsStepState>
                       {stepDisplay && (
                         <S.ProposalVotableStep>{stepDisplay.title}</S.ProposalVotableStep>
@@ -575,6 +584,16 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
             )}
           </PickableList.Body>
         </PickableList>
+
+        {!!proposalModalDelete && (
+          <ModalDeleteProposal
+            proposal={proposalModalDelete}
+            parentConnectionId={project.id}
+            show={!!proposalModalDelete}
+            onClose={() => setProposalModalDelete(null)}
+            parametersConnection={parameters}
+          />
+        )}
       </AnalysisPickableListContainer>
     </PickableList.Provider>
   );
@@ -655,6 +674,8 @@ export default createPaginationContainer(
           }
           edges {
             node {
+              id
+              title
               hasBeenMerged
               author {
                 id
@@ -673,8 +694,6 @@ export default createPaginationContainer(
                 name
               }
               reference(full: false)
-              id
-              title
               status(step: $step) {
                 id
                 name

@@ -18,7 +18,7 @@ import InlineList from '~ui/List/InlineList';
 import { EventImageContainer } from '~/components/Event/EventImage/EventImage';
 import TagCity from '~/components/Tag/TagCity/TagCity';
 import DefaultEventCover from '~/components/Event/DefaultEventCover';
-import { $refType, $fragmentRefs } from '~/mocks';
+import { $refType, $fragmentRefs } from '../mocks/relay';
 
 export const TYPE_EVENT: {
   PHYSICAL: 'PHYSICAL',

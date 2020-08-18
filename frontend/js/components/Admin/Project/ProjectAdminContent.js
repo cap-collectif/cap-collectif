@@ -106,7 +106,7 @@ const basePath = '/admin/alpha/project/';
 
 export const ProjectAdminContent = ({ project, firstCollectStepId, features }: Props) => {
   const location = useLocation();
-  const [title, setTitle] = useState(project.title);
+  const [title, setTitle] = useState<string>(project.title);
   const path = `${basePath}${project._id}`;
 
   const dataAnalysisPrefetch = loadQuery();
@@ -121,7 +121,7 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
   dataContributionPublishedPrefetch.next(
     environment,
     queryProposals,
-    { projectId: project.id, ...queryVariableContribution },
+    { projectId: project.id, ...queryVariableContribution, step: firstCollectStepId },
     { fetchPolicy: 'store-or-network' },
   );
 

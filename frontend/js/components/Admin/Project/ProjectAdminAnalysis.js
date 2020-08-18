@@ -64,6 +64,8 @@ import AnalysisFilterProgressState from '~/components/Analysis/AnalysisFilter/An
 import { AnalysisDataContainer, AnalysisHeader } from './ProjectAdminAnalysis.style';
 import AnalysisStatus from '~/components/Analysis/AnalysisStatus/AnalysisStatus';
 import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
+import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal';
+import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -91,8 +93,9 @@ const assignAnalysts = async (
   try {
     const needConfirm: boolean =
       analystsWithAnalyseBegin.length > 0 &&
-      analystsRemoved
-        .filter(analystId => analystsWithAnalyseBegin.some(({ id }) => id === analystId)).length > 0;
+      analystsRemoved.filter(analystId =>
+        analystsWithAnalyseBegin.some(({ id }) => id === analystId),
+      ).length > 0;
 
     if (analystsAdded.length > 0) {
       dispatch({ type: 'START_LOADING' });
@@ -782,6 +785,10 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
     !!project.firstAnalysisStep?.proposals?.totalCount &&
     project.firstAnalysisStep?.proposals?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFiltersAnalysis(parameters.filters);
+  const [proposalSelected, setProposalSelected] = React.useState<?string>(null);
+  const [proposalModalDelete, setProposalModalDelete] = React.useState<?AnalysisProposal_proposal>(
+    null,
+  );
 
   const getProjectExportUrl = (type: string): string => {
     switch (type) {
@@ -834,11 +841,14 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
               .filter(Boolean)
               .map(proposal => (
                 <AnalysisProposal
-                  isAdminUrl
+                  isAdminView
                   proposal={proposal}
                   key={proposal.id}
                   rowId={proposal.id}
-                  dispatch={dispatch}>
+                  dispatch={dispatch}
+                  setProposalModalDelete={setProposalModalDelete}
+                  proposalSelected={proposalSelected || null}
+                  setProposalSelected={setProposalSelected}>
                   <AnalysisDataContainer>
                     <AnalysisStatus
                       status={PROPOSAL_STATUS[proposal.progressStatus]}
@@ -858,6 +868,17 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
           )}
         </PickableList.Body>
       </PickableList>
+
+      {!!proposalModalDelete && (
+        <ModalDeleteProposal
+          isAnalysis
+          proposal={proposalModalDelete}
+          parentConnectionId={project.firstAnalysisStep?.id}
+          show={!!proposalModalDelete}
+          onClose={() => setProposalModalDelete(null)}
+          parametersConnection={parameters}
+        />
+      )}
     </AnalysisPickableListContainer>
   );
 };
@@ -904,6 +925,7 @@ export default createPaginationContainer(
           }
         }
         firstAnalysisStep {
+          id
           proposals(
             first: $count
             after: $cursor

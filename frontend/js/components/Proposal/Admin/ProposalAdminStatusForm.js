@@ -42,13 +42,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const input = {
     publicationStatus: values.publicationStatus,
     proposalId: props.proposal.id,
-    trashedReason: undefined,
+    trashedReason: values.trashedReason || undefined,
   };
-  if (values.trashedReason) {
-    input.trashedReason = values.trashedReason;
-  }
+
   return ChangeProposalPublicationStatusMutation.commit({
     input,
+    author: props.proposal.author,
   });
 };
 

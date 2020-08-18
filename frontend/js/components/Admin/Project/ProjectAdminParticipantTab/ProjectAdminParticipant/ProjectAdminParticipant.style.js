@@ -9,6 +9,17 @@ export const Container: StyledComponent<{}, {}, typeof PickableList.Row> = style
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  .pickableList-row-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .user-avatar {
+    margin-right: 0;
+  }
 `;
 
 export const UsernameContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`

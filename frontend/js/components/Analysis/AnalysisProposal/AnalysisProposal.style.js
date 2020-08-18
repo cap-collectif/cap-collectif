@@ -9,10 +9,16 @@ export const AnalysisProposalContainer: StyledComponent<
   {},
   typeof PickableList.Row,
 > = styled(PickableList.Row)`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 90%;
+  &:hover {
+    background: ${colors.paleGrey};
+  }
+
+  & > .pickableList-row-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+  }
 `;
 
 export const ProposalInformationsContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -65,6 +71,34 @@ export const ProposalTag: StyledComponent<{}, {}, typeof Tag> = styled(Tag)`
   &:hover {
     cursor: pointer;
     color: ${colors.primaryColor};
+  }
+`;
+
+export const ActionContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 12px 0 0 0;
+
+  button {
+    background: none;
+    border: none;
+    color: ${colors.primaryColor};
+    padding: 2px 10px 2px 0;
+    margin-left: 12px;
+    border-right: 1px solid ${colors.lightGray};
+
+    &:hover {
+      font-weight: 600;
+    }
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      border-right: none;
+    }
   }
 `;
 

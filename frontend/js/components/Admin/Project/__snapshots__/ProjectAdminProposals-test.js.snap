@@ -549,7 +549,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
           proposal={
             Object {
@@ -595,7 +595,10 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -610,7 +613,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
           proposal={
             Object {
@@ -656,7 +659,10 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -671,7 +677,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
           proposal={
             Object {
@@ -710,7 +716,10 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -725,7 +734,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
           proposal={
             Object {
@@ -771,7 +780,10 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -786,7 +798,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
           proposal={
             Object {
@@ -818,7 +830,10 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -833,7 +848,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
           proposal={
             Object {
@@ -869,7 +884,10 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -884,7 +902,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
           proposal={
             Object {
@@ -920,7 +938,10 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -935,7 +956,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
           proposal={
             Object {
@@ -964,7 +985,10 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -1502,7 +1526,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
           proposal={
             Object {
@@ -1548,7 +1572,10 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwx"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -1563,7 +1590,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
           proposal={
             Object {
@@ -1609,7 +1636,10 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -1624,7 +1654,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
           proposal={
             Object {
@@ -1663,7 +1693,10 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwy"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -1678,7 +1711,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
           proposal={
             Object {
@@ -1724,7 +1757,10 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwz"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -1739,7 +1775,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
           proposal={
             Object {
@@ -1771,7 +1807,10 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWw0"
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -1786,7 +1825,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
           proposal={
             Object {
@@ -1822,7 +1861,10 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -1837,7 +1879,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
           proposal={
             Object {
@@ -1873,7 +1915,10 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
@@ -1888,7 +1933,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
-          isAdminUrl={true}
+          isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
           proposal={
             Object {
@@ -1917,7 +1962,10 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "trashed": false,
             }
           }
+          proposalSelected={null}
           rowId="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
+          setProposalModalDelete={[Function]}
+          setProposalSelected={[Function]}
         >
           <ProjectAdminProposalsstyle__ProposalListRowInformationsStepState>
             <ProjectAdminProposalsstyle__Label
