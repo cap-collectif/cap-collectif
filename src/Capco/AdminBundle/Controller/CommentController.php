@@ -57,7 +57,7 @@ class CommentController extends CRUDController
                     'sonata_flash_success',
                     $this->trans(
                         'success.delete.flash',
-                        ['%name%' => $this->escapeHtml($objectName)],
+                        ['name' => $this->escapeHtml($objectName)],
                         'SonataAdminBundle'
                     )
                 );
@@ -72,7 +72,7 @@ class CommentController extends CRUDController
                     'sonata_flash_error',
                     $this->trans(
                         'error.delete.flash',
-                        ['%name%' => $this->escapeHtml($objectName)],
+                        ['name' => $this->escapeHtml($objectName)],
                         'SonataAdminBundle'
                     )
                 );
@@ -92,34 +92,5 @@ class CommentController extends CRUDController
             ],
             null
         );
-    }
-
-    private function checkParentChildAssociation(Request $request, $object)
-    {
-        if (!($parentAdmin = $this->admin->getParent())) {
-            return;
-        }
-
-        // NEXT_MAJOR: remove this check
-        if (!$this->admin->getParentAssociationMapping()) {
-            return;
-        }
-
-        $parentId = $request->get($parentAdmin->getIdParameter());
-
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $propertyPath = new PropertyPath($this->admin->getParentAssociationMapping());
-
-        if (
-            $parentAdmin->getObject($parentId) !==
-            $propertyAccessor->getValue($object, $propertyPath)
-        ) {
-            // NEXT_MAJOR: make this exception
-            @trigger_error(
-                "Accessing a child that isn't connected to a given parent is deprecated since 3.34" .
-                    " and won't be allowed in 4.0.",
-                E_USER_DEPRECATED
-            );
-        }
     }
 }

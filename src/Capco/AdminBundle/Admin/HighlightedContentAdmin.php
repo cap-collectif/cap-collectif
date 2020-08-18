@@ -58,6 +58,7 @@ class HighlightedContentAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:HighlightedContent:list__object.html.twig',
             ])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => [
                     'edit' => [],
                     'delete' => [],

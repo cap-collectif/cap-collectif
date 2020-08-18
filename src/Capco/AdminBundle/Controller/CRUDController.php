@@ -3,8 +3,6 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Exception\LockException;
@@ -15,6 +13,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
@@ -33,21 +32,6 @@ class CRUDController extends Controller
             throw $this->createNotFoundException(
                 sprintf('unable to find the object with id: %s', $id)
             );
-        }
-
-        if (\is_object($existingObject)) {
-            if (
-                $existingObject instanceof DisplayableInBOInterface &&
-                !$existingObject->viewerCanSeeInBo($this->getUser())
-            ) {
-                throw new ProjectAccessDeniedException();
-            }
-            if (
-                !$existingObject instanceof DisplayableInBOInterface &&
-                !$existingObject->canDisplay($this->getUser())
-            ) {
-                throw new ProjectAccessDeniedException();
-            }
         }
 
         $this->checkParentChildAssociation($request, $existingObject);
@@ -123,7 +107,7 @@ class CRUDController extends Controller
                         $this->trans(
                             'success.edition.flash',
                             [
-                                '%name%' => $this->escapeHtml(
+                                'name' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
                                 ),
                             ],
@@ -143,14 +127,14 @@ class CRUDController extends Controller
                         $this->trans(
                             'flash_lock_error',
                             [
-                                '%name%' => $this->escapeHtml(
+                                'name' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
                                 ),
-                                '%link_start%' =>
+                                'link_start' =>
                                     '<a href="' .
                                     $this->admin->generateObjectUrl('edit', $existingObject) .
                                     '">',
-                                '%link_end%' => '</a>',
+                                'link_end' => '</a>',
                             ],
                             'SonataAdminBundle'
                         )
@@ -166,7 +150,7 @@ class CRUDController extends Controller
                         $this->trans(
                             'error.edition.flash',
                             [
-                                '%name%' => $this->escapeHtml(
+                                'name' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
                                 ),
                             ],
@@ -197,6 +181,204 @@ class CRUDController extends Controller
                 'form' => $formView,
                 'object' => $existingObject,
                 'objectId' => $objectId,
+            ],
+            null
+        );
+    }
+
+    public function createAction()
+    {
+        $request = $this->getRequest();
+        // the key used to lookup the template
+        $templateKey = 'edit';
+
+        $this->admin->checkAccess('create');
+
+        $class = new \ReflectionClass(
+            $this->admin->hasActiveSubClass()
+                ? $this->admin->getActiveSubClass()
+                : $this->admin->getClass()
+        );
+
+        if ($class->isAbstract()) {
+            return $this->renderWithExtraParams(
+                '@SonataAdmin/CRUD/select_subclass.html.twig',
+                [
+                    'base_template' => $this->getBaseTemplate(),
+                    'admin' => $this->admin,
+                    'action' => 'create',
+                ],
+                null
+            );
+        }
+
+        $newObject = $this->admin->getNewInstance();
+
+        $preResponse = $this->preCreate($request, $newObject);
+        if (null !== $preResponse) {
+            return $preResponse;
+        }
+
+        $this->admin->setSubject($newObject);
+
+        $form = $this->admin->getForm();
+
+        $form->setData($newObject);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $isFormValid = $form->isValid();
+
+            // persist if the form was valid and if in preview mode the preview was approved
+            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+                $submittedObject = $form->getData();
+                $this->admin->setSubject($submittedObject);
+                $this->admin->checkAccess('create', $submittedObject);
+
+                try {
+                    $newObject = $this->admin->create($submittedObject);
+
+                    if ($this->isXmlHttpRequest()) {
+                        return $this->renderJson(
+                            [
+                                'result' => 'ok',
+                                'objectId' => $newObject->getId(),
+                                'objectName' => $this->escapeHtml(
+                                    $this->admin->toString($newObject)
+                                ),
+                            ],
+                            200,
+                            []
+                        );
+                    }
+
+                    $this->addFlash(
+                        'sonata_flash_success',
+                        $this->trans(
+                            'success.creation.flash',
+                            ['name' => $this->escapeHtml($this->admin->toString($newObject))],
+                            'SonataAdminBundle'
+                        )
+                    );
+
+                    // redirect to edit mode
+                    return $this->redirectTo($newObject);
+                } catch (ModelManagerException $e) {
+                    $this->handleModelManagerException($e);
+
+                    $isFormValid = false;
+                }
+            }
+
+            // show an error message if the form failed validation
+            if (!$isFormValid) {
+                $this->addFlash(
+                    'sonata_flash_error',
+                    $this->trans(
+                        'error.creation.flash',
+                        ['name' => $this->escapeHtml($this->admin->toString($newObject))],
+                        'SonataAdminBundle'
+                    )
+                );
+            } elseif ($this->isPreviewRequested()) {
+                // pick the preview template if the form was valid and preview was requested
+                $templateKey = 'preview';
+                $this->admin->getShow();
+            }
+        }
+
+        $formView = $form->createView();
+        // set the theme for the current Admin Form
+        $this->setFormTheme($formView, $this->admin->getFormTheme());
+        // NEXT_MAJOR: Remove this line and use commented line below it instead
+        $template = $this->admin->getTemplate($templateKey);
+        // $template = $this->templateRegistry->getTemplate($templateKey);
+
+        return $this->renderWithExtraParams(
+            $template,
+            [
+                'action' => 'create',
+                'form' => $formView,
+                'object' => $newObject,
+                'objectId' => null,
+            ],
+            null
+        );
+    }
+
+    public function deleteAction($id)
+    {
+        // NEXT_MAJOR: Remove the unused $id parameter
+        $request = $this->getRequest();
+        $id = $request->get($this->admin->getIdParameter());
+        $object = $this->admin->getObject($id);
+
+        if (!$object) {
+            throw $this->createNotFoundException(
+                sprintf('unable to find the object with id: %s', $id)
+            );
+        }
+
+        $this->checkParentChildAssociation($request, $object);
+
+        $this->admin->checkAccess('delete', $object);
+
+        $preResponse = $this->preDelete($request, $object);
+        if (null !== $preResponse) {
+            return $preResponse;
+        }
+
+        if (Request::METHOD_DELETE === $this->getRestMethod()) {
+            // check the csrf token
+            $this->validateCsrfToken('sonata.delete');
+
+            $objectName = $this->admin->toString($object);
+
+            try {
+                $this->admin->delete($object);
+
+                if ($this->isXmlHttpRequest()) {
+                    return $this->renderJson(['result' => 'ok'], Response::HTTP_OK, []);
+                }
+
+                $this->addFlash(
+                    'sonata_flash_success',
+                    $this->trans(
+                        'success.delete.flash',
+                        ['name' => $this->escapeHtml($objectName)],
+                        'SonataAdminBundle'
+                    )
+                );
+            } catch (ModelManagerException $e) {
+                $this->handleModelManagerException($e);
+
+                if ($this->isXmlHttpRequest()) {
+                    return $this->renderJson(['result' => 'error'], Response::HTTP_OK, []);
+                }
+
+                $this->addFlash(
+                    'sonata_flash_error',
+                    $this->trans(
+                        'error.delete.flash',
+                        ['name' => $this->escapeHtml($objectName)],
+                        'SonataAdminBundle'
+                    )
+                );
+            }
+
+            return $this->redirectTo($object);
+        }
+
+        // NEXT_MAJOR: Remove this line and use commented line below it instead
+        $template = $this->admin->getTemplate('delete');
+        // $template = $this->templateRegistry->getTemplate('delete');
+
+        return $this->renderWithExtraParams(
+            $template,
+            [
+                'object' => $object,
+                'action' => 'delete',
+                'csrf_token' => $this->getCsrfToken('sonata.delete'),
             ],
             null
         );
@@ -481,7 +663,7 @@ class CRUDController extends Controller
         return new RedirectResponse($url);
     }
 
-    private function checkParentChildAssociation(Request $request, $object)
+    protected function checkParentChildAssociation(Request $request, $object)
     {
         if (!($parentAdmin = $this->admin->getParent())) {
             return;
@@ -515,7 +697,7 @@ class CRUDController extends Controller
      *
      * @param string $theme
      */
-    private function setFormTheme(FormView $formView, $theme)
+    protected function setFormTheme(FormView $formView, $theme)
     {
         $twig = $this->get('twig');
 

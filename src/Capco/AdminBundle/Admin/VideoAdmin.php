@@ -97,6 +97,7 @@ class VideoAdmin extends AbstractAdmin
                 'label' => 'global.position',
             ])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => [
                     'show' => [],
                     'edit' => [],

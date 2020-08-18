@@ -1,0 +1,14 @@
+{% extends 'CapcoAdminBundle:CRUD:edit.html.twig' %}
+
+
+{% block tab_menu_navbar_header %}
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+            {% if object.id %}
+                {{ 'global.edit.title'|trans({'name':object.title | trans({}, 'SonataAdminBundle') }, 'SonataAdminBundle') }}
+            {% else %}
+                {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
+            {% endif %}
+        </a>
+    </div>
+{% endblock %}

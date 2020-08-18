@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Capco\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OpinionTypeController extends Controller

@@ -124,7 +124,10 @@ class OpinionVersionAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
-            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
+            ->add('_action', 'actions', [
+                'label' => 'link_actions',
+                'actions' => ['delete' => []],
+            ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)

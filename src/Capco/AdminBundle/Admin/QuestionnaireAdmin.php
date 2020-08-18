@@ -100,6 +100,7 @@ class QuestionnaireAdmin extends CapcoAdmin
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }

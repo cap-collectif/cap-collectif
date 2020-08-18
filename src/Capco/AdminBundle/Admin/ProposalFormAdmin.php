@@ -96,6 +96,7 @@ class ProposalFormAdmin extends CapcoAdmin
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => [
                     'duplicate' => [
                         'template' =>

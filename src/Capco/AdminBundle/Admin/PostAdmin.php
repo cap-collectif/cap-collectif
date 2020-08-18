@@ -145,6 +145,7 @@ class PostAdmin extends CapcoAdmin
             ->add('commentsCount', null, ['label' => 'admin.fields.blog_post.comments_count'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }

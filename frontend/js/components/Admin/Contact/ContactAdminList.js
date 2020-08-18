@@ -34,7 +34,7 @@ class ContactAdminList extends React.Component<Props> {
       <div className="form-group">
         <h4>
           <strong>
-            <FormattedMessage id="forms-list" />
+            <FormattedMessage id="proposal_form_list" />
             <br />
             <span className="excerpt small">
               <FormattedMessage id="forms-list-helptext" />

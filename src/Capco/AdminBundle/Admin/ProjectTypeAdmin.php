@@ -43,6 +43,7 @@ class ProjectTypeAdmin extends AbstractAdmin
                 'header_style' => 'width: 13%',
             ]);
         $listMapper->add('_action', 'actions', [
+            'label' => 'link_actions',
             'actions' => ['edit' => ['header_style' => 'width: 5%; text-align: center']],
         ]);
     }

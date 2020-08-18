@@ -82,6 +82,7 @@ class SocialNetworkAdmin extends AbstractAdmin
                 'label' => 'global.maj',
             ])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => [
                     'show' => [],
                     'edit' => [],

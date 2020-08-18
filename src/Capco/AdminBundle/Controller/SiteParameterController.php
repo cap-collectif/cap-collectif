@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Capco\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,7 +16,7 @@ class SiteParameterController extends Controller
      *
      * @return RedirectResponse
      */
-    protected function redirectTo($object, Request $request = null)
+    protected function redirectTo($object, ?Request $request = null)
     {
         $url = $this->generateUrl('capco_admin_settings', ['category' => $object->getCategory()]);
 

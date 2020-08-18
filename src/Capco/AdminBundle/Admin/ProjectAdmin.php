@@ -222,6 +222,7 @@ final class ProjectAdmin extends CapcoAdmin
             ])
             ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => [
                     'display' => [
                         'template' => 'CapcoAdminBundle:Project:list__action_display.html.twig',

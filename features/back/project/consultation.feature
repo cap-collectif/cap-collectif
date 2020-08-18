@@ -40,4 +40,4 @@ Scenario: An admin wants to create a consultation
   And I fill in the following:
     | global.title | Ma belle consultation |
   And I click the "button[name='btn_create_and_edit']" element
-  And I should see "flash_create_success"
+  And I should see "success.creation.flash"

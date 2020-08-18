@@ -42,6 +42,7 @@ class AppendixTypeAdmin extends CapcoAdmin
                 'label' => 'global.help.text',
             ])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => [
                     'show' => [],
                     'edit' => [],

@@ -177,6 +177,7 @@ class OpinionAdmin extends CapcoAdmin
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }

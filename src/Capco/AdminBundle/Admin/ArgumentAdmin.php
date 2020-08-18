@@ -127,6 +127,7 @@ class ArgumentAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', 'datetime', ['label' => 'global.maj'])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []],
             ]);
     }

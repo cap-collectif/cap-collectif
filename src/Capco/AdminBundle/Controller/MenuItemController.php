@@ -3,7 +3,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Repository\MenuItemRepository;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Capco\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

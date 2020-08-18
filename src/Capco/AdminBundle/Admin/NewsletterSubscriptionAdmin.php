@@ -52,6 +52,7 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
                 'label' => 'global.creation',
             ])
             ->add('_action', 'actions', [
+                'label' => 'link_actions',
                 'actions' => [
                     'show' => [],
                     'edit' => [],

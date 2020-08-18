@@ -125,7 +125,10 @@ class SourceAdmin extends AbstractAdmin
                 'label' => 'global.is_trashed',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
-            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
+            ->add('_action', 'actions', [
+                'label' => 'link_actions',
+                'actions' => ['delete' => []],
+            ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)
