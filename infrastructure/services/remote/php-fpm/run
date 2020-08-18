@@ -54,20 +54,17 @@ gosu capco php -d memory_limit=-1 bin/console cache:warmup --no-debug --env=prod
 gosu capco php -d memory_limit=-1 bin/console assets:install public --symlink --env=prod --no-interaction --quiet
 echo "[$(date -u)][PHP-FPM] Cache warmed!"
 
-# Retry variables for migrations (max 3)
-retry=0
-maxRetries=3
-
 SYMFONY_DATABASE_NAME=symfony
 database=`mysql --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD} --skip-column-names -e "SHOW DATABASES LIKE '${SYMFONY_DATABASE_NAME}'"`
 if [ "$database" == "$SYMFONY_DATABASE_NAME" ]; then
     echo "[$(date -u)][PHP-FPM] Database ${SYMFONY_DATABASE_NAME} already exists."
-    VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
-    migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`
-    if [ "$migrations" == "0" ]; then
+    upToDate=`php bin/console doctrine:migrations:up-to-date --env=prod --no-interaction | grep -o "Up-to-date!" | wc -l`
+    if [ "$upToDate" == "1" ]; then
       echo "[$(date -u)][PHP-FPM] No migrations to execute."
     else
         echo "[$(date -u)][PHP-FPM] Migrating an existing database..."
+        retry=0
+        maxRetries=3
         until [ ${retry} -ge ${maxRetries} ]
         do
             su capco -c "php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction" && break
