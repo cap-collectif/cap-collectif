@@ -2,8 +2,9 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock } from '../../../mocks';
-import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
+import { intlMock, formMock, $refType } from '~/mocks';
+import { ModalRegistrationFormQuestions } from './ModalRegistrationFormQuestions';
+import { simple as questions } from '~/utils/form/test/mocks';
 
 describe('<ModalRegistrationFormQuestions/>', () => {
   const props = {
@@ -12,16 +13,15 @@ describe('<ModalRegistrationFormQuestions/>', () => {
     ...formMock,
     form: 'registration-form',
     responses: [],
-    questions: [
-      {
-        type: 'text',
-        required: true,
-        private: false,
-        question: 'Champ pas facultatif',
-        slug: 'champ-pas-facultatif',
-        id: 6,
+    registrationForm: {
+      $refType,
+      questions,
+    },
+    memoizeAvailableQuestions: {
+      cache: {
+        get: jest.fn(),
       },
-    ],
+    },
   };
 
   it('renders a form with dynamic fields', () => {

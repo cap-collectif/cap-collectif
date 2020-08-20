@@ -59,1062 +59,48 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     labelClassName="font-weight-normal"
     name="plainPassword"
   />
-  <ReactRelayQueryRenderer
-    environment={"RelayModernEnvironment()"}
-    query={
+  <Relay(ModalRegistrationFormQuestions)
+    change={[MockFunction]}
+    form="registration-form"
+    memoizeAvailableQuestions={[Function]}
+    registrationForm={
       Object {
-        "fragment": Object {
-          "argumentDefinitions": Array [],
-          "kind": "Fragment",
-          "metadata": null,
-          "name": "RegistrationFormQuery",
-          "selections": Array [
-            Object {
-              "alias": null,
-              "args": null,
-              "concreteType": "RegistrationForm",
-              "kind": "LinkedField",
-              "name": "registrationForm",
-              "plural": false,
-              "selections": Array [
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "id",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "concreteType": null,
-                  "kind": "LinkedField",
-                  "name": "questions",
-                  "plural": true,
-                  "selections": Array [
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "id",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "__typename",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "title",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "number",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "private",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "position",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "required",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "helpText",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "hidden",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": Array [
-                        Object {
-                          "kind": "Literal",
-                          "name": "orderBy",
-                          "value": Object {
-                            "direction": "ASC",
-                            "field": "POSITION",
-                          },
-                        },
-                      ],
-                      "concreteType": "LogicJump",
-                      "kind": "LinkedField",
-                      "name": "jumps",
-                      "plural": true,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": null,
-                          "kind": "LinkedField",
-                          "name": "origin",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": null,
-                          "kind": "LinkedField",
-                          "name": "destination",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "number",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "MultipleChoiceQuestionLogicJumpCondition",
-                          "kind": "LinkedField",
-                          "name": "conditions",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "operator",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": null,
-                              "kind": "LinkedField",
-                              "name": "question",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "id",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "title",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "type",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "QuestionChoice",
-                              "kind": "LinkedField",
-                              "name": "value",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "id",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "title",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": "jumps(orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"POSITION\\"})",
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": null,
-                      "kind": "LinkedField",
-                      "name": "alwaysJumpDestinationQuestion",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "title",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "number",
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "description",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "type",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "kind": "InlineFragment",
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isOtherAllowed",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "randomQuestionChoices",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "MultipleChoiceQuestionValidationRule",
-                          "kind": "LinkedField",
-                          "name": "validationRule",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "type",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "number",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": Array [
-                            Object {
-                              "kind": "Literal",
-                              "name": "allowRandomize",
-                              "value": true,
-                            },
-                          ],
-                          "concreteType": "QuestionChoiceConnection",
-                          "kind": "LinkedField",
-                          "name": "choices",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "PageInfo",
-                              "kind": "LinkedField",
-                              "name": "pageInfo",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "hasNextPage",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "totalCount",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "QuestionChoiceEdge",
-                              "kind": "LinkedField",
-                              "name": "edges",
-                              "plural": true,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "QuestionChoice",
-                                  "kind": "LinkedField",
-                                  "name": "node",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "title",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "description",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "color",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "concreteType": "Media",
-                                      "kind": "LinkedField",
-                                      "name": "image",
-                                      "plural": false,
-                                      "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "url",
-                                          "storageKey": null,
-                                        },
-                                      ],
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": "choices(allowRandomize:true)",
-                        },
-                      ],
-                      "type": "MultipleChoiceQuestion",
-                    },
-                  ],
-                  "storageKey": null,
-                },
-              ],
-              "storageKey": null,
-            },
-          ],
-          "type": "Query",
-        },
-        "hash": "4b5bc53620e79251c2669cf4143bc36a",
-        "kind": "Request",
-        "operation": Object {
-          "argumentDefinitions": Array [],
-          "kind": "Operation",
-          "name": "RegistrationFormQuery",
-          "selections": Array [
-            Object {
-              "alias": null,
-              "args": null,
-              "concreteType": "RegistrationForm",
-              "kind": "LinkedField",
-              "name": "registrationForm",
-              "plural": false,
-              "selections": Array [
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "id",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "concreteType": null,
-                  "kind": "LinkedField",
-                  "name": "questions",
-                  "plural": true,
-                  "selections": Array [
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "id",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "__typename",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "title",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "number",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "private",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "position",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "required",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "helpText",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "hidden",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": Array [
-                        Object {
-                          "kind": "Literal",
-                          "name": "orderBy",
-                          "value": Object {
-                            "direction": "ASC",
-                            "field": "POSITION",
-                          },
-                        },
-                      ],
-                      "concreteType": "LogicJump",
-                      "kind": "LinkedField",
-                      "name": "jumps",
-                      "plural": true,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": null,
-                          "kind": "LinkedField",
-                          "name": "origin",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "__typename",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": null,
-                          "kind": "LinkedField",
-                          "name": "destination",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "__typename",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "number",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "MultipleChoiceQuestionLogicJumpCondition",
-                          "kind": "LinkedField",
-                          "name": "conditions",
-                          "plural": true,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "operator",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": null,
-                              "kind": "LinkedField",
-                              "name": "question",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "__typename",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "id",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "title",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "type",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "QuestionChoice",
-                              "kind": "LinkedField",
-                              "name": "value",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "id",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "title",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": "jumps(orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"POSITION\\"})",
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": null,
-                      "kind": "LinkedField",
-                      "name": "alwaysJumpDestinationQuestion",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "__typename",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "title",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "number",
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "description",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "type",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "kind": "InlineFragment",
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isOtherAllowed",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "randomQuestionChoices",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "MultipleChoiceQuestionValidationRule",
-                          "kind": "LinkedField",
-                          "name": "validationRule",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "type",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "number",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": Array [
-                            Object {
-                              "kind": "Literal",
-                              "name": "allowRandomize",
-                              "value": true,
-                            },
-                          ],
-                          "concreteType": "QuestionChoiceConnection",
-                          "kind": "LinkedField",
-                          "name": "choices",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "PageInfo",
-                              "kind": "LinkedField",
-                              "name": "pageInfo",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "hasNextPage",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "totalCount",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "QuestionChoiceEdge",
-                              "kind": "LinkedField",
-                              "name": "edges",
-                              "plural": true,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "QuestionChoice",
-                                  "kind": "LinkedField",
-                                  "name": "node",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "title",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "description",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "color",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "concreteType": "Media",
-                                      "kind": "LinkedField",
-                                      "name": "image",
-                                      "plural": false,
-                                      "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "url",
-                                          "storageKey": null,
-                                        },
-                                      ],
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": "choices(allowRandomize:true)",
-                        },
-                      ],
-                      "type": "MultipleChoiceQuestion",
-                    },
-                  ],
-                  "storageKey": null,
-                },
-              ],
-              "storageKey": null,
-            },
-          ],
-        },
-        "params": Object {
-          "id": null,
-          "metadata": Object {},
-          "name": "RegistrationFormQuery",
-          "operationKind": "query",
-          "text": "query RegistrationFormQuery {
-  registrationForm {
-    id
-    questions {
-      id
-      __typename
-      title
-      number
-      private
-      position
-      required
-      helpText
-      hidden
-      jumps(orderBy: {field: POSITION, direction: ASC}) {
-        id
-        origin {
-          __typename
-          id
-        }
-        destination {
-          __typename
-          id
-          title
-          number
-        }
-        conditions {
-          id
-          operator
-          question {
-            __typename
-            id
-            title
-            type
-          }
-          value {
-            id
-            title
-          }
-        }
-      }
-      alwaysJumpDestinationQuestion {
-        __typename
-        id
-        title
-        number
-      }
-      description
-      type
-      ... on MultipleChoiceQuestion {
-        isOtherAllowed
-        randomQuestionChoices
-        validationRule {
-          type
-          number
-        }
-        choices(allowRandomize: true) {
-          pageInfo {
-            hasNextPage
-          }
-          totalCount
-          edges {
-            node {
-              id
-              title
-              description
-              color
-              image {
-                id
-                url
-              }
-            }
-          }
-        }
+        "$fragmentRefs": null,
+        "questions": Array [
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": null,
+            "helpText": null,
+            "hidden": false,
+            "id": "UXVlc3Rpb246NDg1",
+            "jumps": Array [],
+            "number": 1,
+            "position": 1,
+            "private": false,
+            "required": false,
+            "title": "Question 1",
+            "type": "text",
+          },
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": null,
+            "helpText": null,
+            "hidden": false,
+            "id": "UXVlc3Rpb246NDg0",
+            "jumps": Array [],
+            "number": 2,
+            "position": 2,
+            "private": false,
+            "required": true,
+            "title": "Question 2",
+            "type": "text",
+          },
+        ],
       }
     }
-  }
-}
-",
-        },
-      }
-    }
-    render={[Function]}
-    variables={Object {}}
+    responses={Array []}
   />
   <Field
     ariaRequired={true}
@@ -1251,6 +237,49 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     }
     labelClassName="font-weight-normal"
     name="plainPassword"
+  />
+  <Relay(ModalRegistrationFormQuestions)
+    change={[MockFunction]}
+    form="registration-form"
+    memoizeAvailableQuestions={[Function]}
+    registrationForm={
+      Object {
+        "$fragmentRefs": null,
+        "questions": Array [
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": null,
+            "helpText": null,
+            "hidden": false,
+            "id": "UXVlc3Rpb246NDg1",
+            "jumps": Array [],
+            "number": 1,
+            "position": 1,
+            "private": false,
+            "required": false,
+            "title": "Question 1",
+            "type": "text",
+          },
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": null,
+            "helpText": null,
+            "hidden": false,
+            "id": "UXVlc3Rpb246NDg0",
+            "jumps": Array [],
+            "number": 2,
+            "position": 2,
+            "private": false,
+            "required": true,
+            "title": "Question 2",
+            "type": "text",
+          },
+        ],
+      }
+    }
+    responses={Array []}
   />
   <Field
     ariaRequired={true}
@@ -1425,6 +454,49 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
       type_1
     </option>
   </Field>
+  <Relay(ModalRegistrationFormQuestions)
+    change={[MockFunction]}
+    form="registration-form"
+    memoizeAvailableQuestions={[Function]}
+    registrationForm={
+      Object {
+        "$fragmentRefs": null,
+        "questions": Array [
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": null,
+            "helpText": null,
+            "hidden": false,
+            "id": "UXVlc3Rpb246NDg1",
+            "jumps": Array [],
+            "number": 1,
+            "position": 1,
+            "private": false,
+            "required": false,
+            "title": "Question 1",
+            "type": "text",
+          },
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": null,
+            "helpText": null,
+            "hidden": false,
+            "id": "UXVlc3Rpb246NDg0",
+            "jumps": Array [],
+            "number": 2,
+            "position": 2,
+            "private": false,
+            "required": true,
+            "title": "Question 2",
+            "type": "text",
+          },
+        ],
+      }
+    }
+    responses={Array []}
+  />
   <Field
     ariaRequired={true}
     component={[Function]}
@@ -1585,6 +657,49 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     labelClassName="font-weight-normal"
     name="zipcode"
     type="text"
+  />
+  <Relay(ModalRegistrationFormQuestions)
+    change={[MockFunction]}
+    form="registration-form"
+    memoizeAvailableQuestions={[Function]}
+    registrationForm={
+      Object {
+        "$fragmentRefs": null,
+        "questions": Array [
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": null,
+            "helpText": null,
+            "hidden": false,
+            "id": "UXVlc3Rpb246NDg1",
+            "jumps": Array [],
+            "number": 1,
+            "position": 1,
+            "private": false,
+            "required": false,
+            "title": "Question 1",
+            "type": "text",
+          },
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": null,
+            "helpText": null,
+            "hidden": false,
+            "id": "UXVlc3Rpb246NDg0",
+            "jumps": Array [],
+            "number": 2,
+            "position": 2,
+            "private": false,
+            "required": true,
+            "title": "Question 2",
+            "type": "text",
+          },
+        ],
+      }
+    }
+    responses={Array []}
   />
   <Field
     ariaRequired={true}

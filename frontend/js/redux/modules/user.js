@@ -59,7 +59,6 @@ export type State = {
     +topTextDisplayed: boolean,
     +bottomText: string,
     +topText: string,
-    +hasQuestions: boolean,
     +domains: Array<string>,
   },
   +user: ?{
@@ -97,7 +96,6 @@ type DisplayChartModalAction = { type: 'DISPLAY_CHART_MODAL' };
 type HideChartModalAction = {| type: 'HIDE_CHART_MODAL' |};
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
 type CancelEmailChangeSucceedAction = { type: 'CANCEL_EMAIL_CHANGE' };
-type ReorderSucceededAction = { type: 'REORDER_REGISTRATION_QUESTIONS', questions: Array<Object> };
 type GroupAdminUsersUserDeletionSuccessfulAction = {
   type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
 };
@@ -118,7 +116,6 @@ export type UserAction =
   | CloseLoginModalAction
   | CancelEmailChangeSucceedAction
   | UserRequestEmailChangeAction
-  | ReorderSucceededAction
   | AddRegistrationFieldAction
   | GroupAdminUsersUserDeletionSuccessfulAction
   | GroupAdminUsersUserDeletionFailedAction
@@ -337,15 +334,6 @@ export const resendConfirmation = (): void => {
   Fetcher.post('/account/resend_confirmation_email')
     .then(sendEmail)
     .catch(sendEmail);
-};
-
-const reorderSuceeded = (questions: Array<Object>): ReorderSucceededAction => ({
-  type: 'REORDER_REGISTRATION_QUESTIONS',
-  questions,
-});
-export const reorderRegistrationQuestions = (questions: Array<Object>, dispatch: Dispatch) => {
-  Fetcher.patch('/registration_form/questions', { questions });
-  dispatch(reorderSuceeded(questions));
 };
 
 export const groupAdminUsersUserDeletionSuccessful = (): GroupAdminUsersUserDeletionSuccessfulAction => ({

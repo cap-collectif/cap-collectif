@@ -2,8 +2,9 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock, $refType } from '../../../mocks';
+import { intlMock, formMock, $refType, $fragmentRefs } from '~/mocks';
 import { RegistrationForm } from './RegistrationForm';
+import { simple as questions } from '~/utils/form/test/mocks';
 
 describe('<RegistrationForm />', () => {
   const props = {
@@ -17,18 +18,22 @@ describe('<RegistrationForm />', () => {
     ...formMock,
     intl: intlMock,
     cguName: 'la charte',
-    hasQuestions: false,
     responses: [],
     organizationName: 'Cap Collectif',
     internalCommunicationFrom: 'de Cap Collectif',
     dispatch: jest.fn(),
     shieldEnabled: false,
     privacyPolicyRequired: true,
+    questions,
   };
 
   const defaultQuery = {
     $refType,
-    registrationScript: 'console.log("Jpec");',
+    registrationScript: 'console.log("RIP Jpec");',
+    registrationForm: {
+      $fragmentRefs,
+      questions,
+    },
   };
 
   it('renders a form with inputs and a captcha', () => {
@@ -54,7 +59,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a form with dynamic fields', () => {
-    const wrapper = shallow(<RegistrationForm query={defaultQuery} {...props} hasQuestions />);
+    const wrapper = shallow(<RegistrationForm query={defaultQuery} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

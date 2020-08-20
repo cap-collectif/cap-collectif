@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationModal } from './RegistrationModal';
-import { $refType } from '../../../mocks';
+import { $refType, $fragmentRefs } from '~/mocks';
 
 describe('<RegistrationModal />', () => {
   const props = {
@@ -19,7 +19,7 @@ describe('<RegistrationModal />', () => {
 
   const defaultQuery = {
     $refType,
-    registrationScript: '<script>console.log("Jpec");</script>',
+    $fragmentRefs,
   };
 
   it('renders hidden modal if not shown', () => {

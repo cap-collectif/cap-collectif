@@ -4,13 +4,16 @@ import { FormattedMessage } from 'react-intl';
 import { isSubmitting, submit } from 'redux-form';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import type { Dispatch, State } from '../../types';
+import { graphql, QueryRenderer } from 'react-relay';
+import type { Dispatch, State } from '~/types';
 import LoginButton from '../User/Login/LoginButton';
 import LoginBox from '../User/Login/LoginBox';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import RegistrationModal from '~/components/User/Registration/RegistrationModal';
 import LoginModal from '~/components/User/Login/LoginModal';
 import { loginWithOpenID } from '~/redux/modules/default';
+import environment, { graphqlError } from '~/createRelayEnvironment';
+import type { ShieldPageQueryResponse } from '~relay/ShieldPageQuery.graphql';
 
 type Props = {|
   showRegistration: boolean,
@@ -62,17 +65,41 @@ const getShieldBody = ({
   );
 };
 
-export class ShieldPage extends React.Component<Props> {
-  render() {
-    return (
-      <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
-        <LoginModal />
-        <RegistrationModal />
-        <div className="panel-body">{getShieldBody(this.props)}</div>
-      </div>
-    );
+const renderRegistrationForm = ({
+  error,
+  props,
+}: {
+  ...ReactRelayReadyState,
+  props: ?ShieldPageQueryResponse,
+}) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
   }
-}
+
+  if (props) return <RegistrationModal query={props} />;
+
+  return null;
+};
+
+export const ShieldPage = (props: Props) => (
+  <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
+    <LoginModal />
+
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query ShieldPageQuery {
+          ...RegistrationModal_query
+        }
+      `}
+      variables={{}}
+      render={renderRegistrationForm}
+    />
+
+    <div className="panel-body">{getShieldBody(props)}</div>
+  </div>
+);
 
 const mapStateToProps = (state: State) => ({
   showRegistration: state.default.features.registration,

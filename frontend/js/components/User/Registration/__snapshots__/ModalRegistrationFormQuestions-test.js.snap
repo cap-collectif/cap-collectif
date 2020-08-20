@@ -2,44 +2,7 @@
 
 exports[`<ModalRegistrationFormQuestions/> renders a form with dynamic fields 1`] = `
 <FieldArray
-  change={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          "questions",
-          Array [
-            Object {
-              "id": 6,
-              "private": false,
-              "question": "Champ pas facultatif",
-              "required": true,
-              "slug": "champ-pas-facultatif",
-              "type": "text",
-            },
-          ],
-        ],
-        Array [
-          "responses",
-          Array [
-            Object {
-              "question": 6,
-              "value": null,
-            },
-          ],
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
+  change={[MockFunction]}
   component={[Function]}
   form="registration-form"
   intl={
@@ -57,16 +20,56 @@ exports[`<ModalRegistrationFormQuestions/> renders a form with dynamic fields 1`
       "now": [Function],
     }
   }
-  memoize={[Function]}
+  memoize={
+    Object {
+      "cache": Object {
+        "get": [MockFunction] {
+          "calls": Array [
+            Array [
+              "availableQuestions",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        },
+      },
+    }
+  }
   name="responses"
   questions={
     Array [
       Object {
-        "id": 6,
+        "__typename": "SimpleQuestion",
+        "alwaysJumpDestinationQuestion": null,
+        "description": null,
+        "helpText": null,
+        "hidden": false,
+        "id": "UXVlc3Rpb246NDg1",
+        "jumps": Array [],
+        "number": 1,
+        "position": 1,
         "private": false,
-        "question": "Champ pas facultatif",
+        "required": false,
+        "title": "Question 1",
+        "type": "text",
+      },
+      Object {
+        "__typename": "SimpleQuestion",
+        "alwaysJumpDestinationQuestion": null,
+        "description": null,
+        "helpText": null,
+        "hidden": false,
+        "id": "UXVlc3Rpb246NDg0",
+        "jumps": Array [],
+        "number": 2,
+        "position": 2,
+        "private": false,
         "required": true,
-        "slug": "champ-pas-facultatif",
+        "title": "Question 2",
         "type": "text",
       },
     ]

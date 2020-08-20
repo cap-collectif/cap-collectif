@@ -1,6 +1,7 @@
 /* @flow */
 import React, { useState, useRef, type Element } from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
+import { graphql, QueryRenderer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
 import TabsBar from '../Ui/TabsBar/TabsBar';
@@ -14,7 +15,9 @@ import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
 import type { Dispatch, GlobalState } from '~/types';
 import { useBoundingRect } from '~/utils/hooks/useBoundingRect';
 import { useEventListener } from '~/utils/hooks/useEventListener';
-import type {LocaleChoiceTranslation} from "~/components/Navbar/LanguageHeader";
+import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader';
+import environment, { graphqlError } from '~/createRelayEnvironment';
+import type { NavbarQueryResponse } from '~relay/NavbarQuery.graphql';
 
 type LanguageProps = {|
   currentRouteParams: [],
@@ -79,6 +82,23 @@ export const Navbar = ({
     setLogoLoaded(true);
   };
 
+  const renderRegistrationForm = ({
+    error,
+    props,
+  }: {
+    ...ReactRelayReadyState,
+    props: ?NavbarQueryResponse,
+  }) => {
+    if (error) {
+      console.log(error); // eslint-disable-line no-console
+      return graphqlError;
+    }
+
+    if (props) return <RegistrationModal query={props} />;
+
+    return null;
+  };
+
   useEventListener('resize', handleResize);
 
   return (
@@ -104,8 +124,17 @@ export const Navbar = ({
               />
             ) : null}
             <div className="container">
-              {/* $FlowFixMe */}
-              <RegistrationModal />
+              <QueryRenderer
+                environment={environment}
+                query={graphql`
+                  query NavbarQuery {
+                    ...RegistrationModal_query
+                  }
+                `}
+                variables={{}}
+                render={renderRegistrationForm}
+              />
+
               <LoginModal />
               <NavigationSkip />
               <S.NavigationContainer id="main-navbar" role="navigation">

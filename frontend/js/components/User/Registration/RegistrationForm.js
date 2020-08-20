@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
+import memoize from 'lodash/memoize';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
@@ -8,7 +9,6 @@ import { Button } from 'react-bootstrap';
 import { isEmail } from '~/services/Validator';
 import type { Dispatch, State } from '~/types';
 import { register as onSubmit, displayChartModal } from '~/redux/modules/user';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
 import PrivacyModal from '../../StaticPage/PrivacyModal';
@@ -16,12 +16,12 @@ import UserPasswordField from '../UserPasswordField';
 import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import validateResponses from '~/utils/form/validateResponses';
+import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 
 type Props = {|
   ...ReduxFormFormProps,
   intl: IntlShape,
   responses: Array<Object>,
-  hasQuestions: boolean,
   addUserTypeField: boolean,
   addZipcodeField: boolean,
   addCaptchaField: boolean,
@@ -38,6 +38,10 @@ type Props = {|
   query: RegistrationForm_query,
   email?: string,
   invitationToken?: string,
+  questions: Array<{
+    id: string,
+    type: string,
+  }>,
 |};
 
 type FormValues = {
@@ -50,255 +54,247 @@ type FormValues = {
   questions: Array<Object>,
 };
 
-const getCustomFieldsErrors = (values: FormValues, props: Props) =>
-  values.questions && values.responses
-    ? // TODO: remove this parameter from the function or create a specific traduction key
-      validateResponses(values.questions, values.responses, 'reply', props.intl).responses
-    : [];
+const memoizeAvailableQuestions: any = memoize(() => {});
+
+const getCustomFieldsErrors = (values: FormValues, props: Props) => {
+  // TODO: remove this parameter from the function or create a specific traduction key
+  if (values.questions && values.responses) {
+    const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
+      'availableQuestions',
+    );
+
+    return validateResponses(
+      values.questions,
+      values.responses,
+      'reply',
+      props.intl,
+      false,
+      availableQuestions,
+    ).responses;
+  }
+
+  return [];
+};
 
 export const form = 'registration-form';
 
-export class RegistrationForm extends React.Component<Props> {
-  render() {
-    const {
-      cguName,
-      hasQuestions,
-      responses,
-      change,
-      intl,
-      addZipcodeField,
-      addUserTypeField,
-      addConsentExternalCommunicationField,
-      addConsentInternalCommunicationField,
-      internalCommunicationFrom,
-      userTypes,
-      handleSubmit,
-      addCaptchaField,
-      organizationName,
-      privacyPolicyRequired,
-      dispatch,
-      email,
-    } = this.props;
+export const RegistrationForm = ({
+  cguName,
+  responses,
+  change,
+  query,
+  addZipcodeField,
+  addUserTypeField,
+  addConsentExternalCommunicationField,
+  addConsentInternalCommunicationField,
+  internalCommunicationFrom,
+  userTypes,
+  handleSubmit,
+  addCaptchaField,
+  organizationName,
+  privacyPolicyRequired,
+  dispatch,
+  email,
+  questions,
+}: Props) => {
+  const privacyPolicyComponent = privacyPolicyRequired ? (
+    <PrivacyModal
+      title="capco.module.privacy_policy"
+      linkKeyword="and-the"
+      className="text-decoration-none"
+    />
+  ) : null;
 
-    const privacyPolicyComponent = privacyPolicyRequired ? (
-      <PrivacyModal
-        title="capco.module.privacy_policy"
-        linkKeyword="and-the"
-        className="text-decoration-none"
+  const chartLinkComponent = (
+    <FormattedMessage
+      id="registration.charte"
+      values={{
+        link: (
+          <Button
+            className="p-0 text-decoration-none"
+            variant="link"
+            bsStyle="link"
+            onClick={() => {
+              dispatch(displayChartModal());
+            }}>
+            {cguName}
+          </Button>
+        ),
+      }}
+    />
+  );
+
+  return (
+    <form onSubmit={handleSubmit} id="registration-form">
+      <Field
+        name="username"
+        id="username"
+        component={renderComponent}
+        ariaRequired
+        autoComplete="username"
+        type="text"
+        label={<FormattedMessage id="global.fullname" />}
+        labelClassName="font-weight-normal"
       />
-    ) : null;
-
-    const chartLinkComponent = (
-      <FormattedMessage
-        id="registration.charte"
-        values={{
-          link: (
-            <Button
-              className="p-0 text-decoration-none"
-              variant="link"
-              bsStyle="link"
-              onClick={() => {
-                dispatch(displayChartModal());
-              }}>
-              {cguName}
-            </Button>
-          ),
+      <Field
+        name="email"
+        disabled={!!email}
+        id="email"
+        component={renderComponent}
+        type="email"
+        autoComplete="email"
+        ariaRequired
+        label={<FormattedMessage id="global.email" />}
+        labelClassName="font-weight-normal"
+        popover={{
+          id: 'registration-email-tooltip',
+          message: <FormattedMessage id="registration.tooltip.email" />,
         }}
       />
-    );
+      <UserPasswordField
+        formName={form}
+        id="password"
+        name="plainPassword"
+        ariaRequired
+        autoComplete="new-password"
+        label={<FormattedMessage id="registration.password" />}
+        labelClassName="font-weight-normal"
+      />
 
-    return (
-      <form onSubmit={handleSubmit} id="registration-form">
+      {addUserTypeField && (
         <Field
-          name="username"
-          id="username"
+          id="user_type"
+          name="userType"
           component={renderComponent}
-          ariaRequired
-          autoComplete="username"
+          type="select"
+          labelClassName="font-weight-normal"
+          label={
+            <span>
+              <FormattedMessage id="registration.type" />{' '}
+              <span className="excerpt">
+                <FormattedMessage id="global.optional" />
+              </span>
+            </span>
+          }>
+          <FormattedMessage id="registration.select.type">
+            {(message: string) => <option value="">{message}</option>}
+          </FormattedMessage>
+          {userTypes.map((type, i) => (
+            <option key={i + 1} value={type.id}>
+              {type.name}
+            </option>
+          ))}
+        </Field>
+      )}
+      {addZipcodeField && (
+        <Field
+          id="zipcode"
+          name="zipcode"
+          component={renderComponent}
           type="text"
-          label={<FormattedMessage id="global.fullname" />}
           labelClassName="font-weight-normal"
-        />
-        <Field
-          name="email"
-          disabled={!!email}
-          id="email"
-          component={renderComponent}
-          type="email"
-          autoComplete="email"
-          ariaRequired
-          label={<FormattedMessage id="global.email" />}
-          labelClassName="font-weight-normal"
-          popover={{
-            id: 'registration-email-tooltip',
-            message: <FormattedMessage id="registration.tooltip.email" />,
-          }}
-        />
-        <UserPasswordField
-          formName={form}
-          id="password"
-          name="plainPassword"
-          ariaRequired
-          autoComplete="new-password"
-          label={<FormattedMessage id="registration.password" />}
-          labelClassName="font-weight-normal"
-        />
-
-        {addUserTypeField && (
-          <Field
-            id="user_type"
-            name="userType"
-            component={renderComponent}
-            type="select"
-            labelClassName="font-weight-normal"
-            label={
-              <span>
-                <FormattedMessage id="registration.type" />{' '}
-                <span className="excerpt">
-                  <FormattedMessage id="global.optional" />
-                </span>
+          label={
+            <span>
+              <FormattedMessage id="user.register.zipcode" />{' '}
+              <span className="excerpt">
+                <FormattedMessage id="global.optional" />
               </span>
-            }>
-            <FormattedMessage id="registration.select.type">
-              {(message: string) => <option value="">{message}</option>}
-            </FormattedMessage>
-            {userTypes.map((type, i) => (
-              <option key={i + 1} value={type.id}>
-                {type.name}
-              </option>
-            ))}
-          </Field>
-        )}
-        {addZipcodeField && (
-          <Field
-            id="zipcode"
-            name="zipcode"
-            component={renderComponent}
-            type="text"
-            labelClassName="font-weight-normal"
-            label={
-              <span>
-                <FormattedMessage id="user.register.zipcode" />{' '}
-                <span className="excerpt">
-                  <FormattedMessage id="global.optional" />
-                </span>
-              </span>
-            }
-            autoComplete="postal-code"
-          />
-        )}
-        {hasQuestions && (
-          <QueryRenderer
-            environment={environment}
-            query={graphql`
-              query RegistrationFormQuery {
-                registrationForm {
-                  id
-                  questions {
-                    id
-                    ...responsesHelper_question @relay(mask: false)
-                  }
-                }
-              }
-            `}
-            variables={{}}
-            render={({ error, props }) => {
-              if (error) {
-                console.log(error); // eslint-disable-line no-console
-                return graphqlError;
-              }
-              if (props && props.registrationForm && props.registrationForm.questions) {
-                return (
-                  <ModalRegistrationFormQuestions
-                    change={change}
-                    responses={responses}
-                    form={form}
-                    questions={props.registrationForm.questions}
-                    intl={intl}
-                  />
-                );
-              }
+            </span>
+          }
+          autoComplete="postal-code"
+        />
+      )}
 
-              return null;
-            }}
-          />
-        )}
+      {questions && questions.length > 0 && query?.registrationForm && (
+        <ModalRegistrationFormQuestions
+          change={change}
+          registrationForm={query.registrationForm}
+          responses={responses}
+          form={form}
+          memoizeAvailableQuestions={memoizeAvailableQuestions}
+        />
+      )}
+
+      <Field
+        id="charte"
+        name="charte"
+        component={renderComponent}
+        ariaRequired
+        type="checkbox"
+        labelClassName="font-weight-normal"
+        children={
+          <span>
+            {chartLinkComponent} {privacyPolicyComponent}
+          </span>
+        }
+      />
+      {addConsentInternalCommunicationField && (
         <Field
-          id="charte"
-          name="charte"
+          id="consent-internal-communication"
+          name="consentInternalCommunication"
           component={renderComponent}
-          ariaRequired
           type="checkbox"
           labelClassName="font-weight-normal"
           children={
-            <span>
-              {chartLinkComponent} {privacyPolicyComponent}
-            </span>
+            <FormattedMessage
+              id="receive-news-and-results-of-the-consultations"
+              values={{
+                from: internalCommunicationFrom,
+              }}
+            />
           }
         />
-        {addConsentInternalCommunicationField && (
-          <Field
-            id="consent-internal-communication"
-            name="consentInternalCommunication"
-            component={renderComponent}
-            type="checkbox"
-            labelClassName="font-weight-normal"
-            children={
-              <FormattedMessage
-                id="receive-news-and-results-of-the-consultations"
-                values={{
-                  from: internalCommunicationFrom,
-                }}
-              />
-            }
-          />
-        )}
-        {addConsentExternalCommunicationField && (
-          <Field
-            id="consent-external-communication"
-            name="consentExternalCommunication"
-            component={renderComponent}
-            type="checkbox"
-            labelClassName="font-weight-normal"
-            children={
-              <FormattedMessage
-                id="registration.consent_external_communication"
-                values={{
-                  organization_name: organizationName,
-                }}
-              />
-            }
-          />
-        )}
-        {addCaptchaField && (
-          <Field id="captcha" component={renderComponent} name="captcha" type="captcha" />
-        )}
-      </form>
-    );
-  }
-}
+      )}
+      {addConsentExternalCommunicationField && (
+        <Field
+          id="consent-external-communication"
+          name="consentExternalCommunication"
+          component={renderComponent}
+          type="checkbox"
+          labelClassName="font-weight-normal"
+          children={
+            <FormattedMessage
+              id="registration.consent_external_communication"
+              values={{
+                organization_name: organizationName,
+              }}
+            />
+          }
+        />
+      )}
+      {addCaptchaField && (
+        <Field id="captcha" component={renderComponent} name="captcha" type="captcha" />
+      )}
+    </form>
+  );
+};
 
-const mapStateToProps = (state: State, props: Props) => ({
-  hasQuestions: state.user.registration_form.hasQuestions,
-  addCaptchaField: state.default.features.captcha,
-  addUserTypeField: state.default.features.user_type,
-  addZipcodeField: state.default.features.zipcode_at_register,
-  addConsentExternalCommunicationField: state.default.features.consent_external_communication,
-  addConsentInternalCommunicationField: state.default.features.consent_internal_communication,
-  userTypes: state.default.userTypes,
-  cguName: state.default.parameters['signin.cgu.name'],
-  organizationName: state.default.parameters['global.site.organization_name'],
-  internalCommunicationFrom: state.default.parameters['global.site.communication_from'],
-  shieldEnabled: state.default.features.shield_mode,
-  privacyPolicyRequired: state.default.features.privacy_policy,
-  responses: formValueSelector(form)(state, 'responses'),
-  initialValues: {
-    responses: [],
-    email: props.email,
-    invitationToken: props.invitationToken,
-    postRegistrationScript: props.query ? props.query.registrationScript : '',
-  },
-});
+const mapStateToProps = (state: State, props: Props) => {
+  const questions = props.query?.registrationForm?.questions || [];
+
+  return {
+    addCaptchaField: state.default.features.captcha,
+    addUserTypeField: state.default.features.user_type,
+    addZipcodeField: state.default.features.zipcode_at_register,
+    addConsentExternalCommunicationField: state.default.features.consent_external_communication,
+    addConsentInternalCommunicationField: state.default.features.consent_internal_communication,
+    userTypes: state.default.userTypes,
+    cguName: state.default.parameters['signin.cgu.name'],
+    organizationName: state.default.parameters['global.site.organization_name'],
+    internalCommunicationFrom: state.default.parameters['global.site.communication_from'],
+    shieldEnabled: state.default.features.shield_mode,
+    privacyPolicyRequired: state.default.features.privacy_policy,
+    questions: props.query ? questions : [],
+    responses: formValueSelector(form)(state, 'responses'),
+    initialValues: {
+      questions: props.query ? questions : [],
+      responses: props.query ? formatInitialResponsesValues(questions, []) : [],
+      email: props.email,
+      invitationToken: props.invitationToken,
+      postRegistrationScript: props.query ? props.query.registrationScript : '',
+    },
+  };
+};
 
 export const validate = (values: FormValues, props: Props) => {
   const errors = {};
@@ -334,10 +330,20 @@ const formContainer = reduxForm({
   onSubmit,
 })(RegistrationForm);
 
-export default createFragmentContainer(connect(mapStateToProps)(injectIntl(formContainer)), {
+const RegistrationFormConnected = connect(mapStateToProps)(injectIntl(formContainer));
+
+export default createFragmentContainer(RegistrationFormConnected, {
   query: graphql`
     fragment RegistrationForm_query on Query {
       registrationScript
+      registrationForm {
+        questions {
+          id
+          type
+          ...responsesHelper_question @relay(mask: false)
+        }
+        ...ModalRegistrationFormQuestions_registrationForm
+      }
     }
   `,
 });

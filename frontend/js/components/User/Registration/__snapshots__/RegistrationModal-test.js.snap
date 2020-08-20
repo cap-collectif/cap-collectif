@@ -113,58 +113,13 @@ exports[`<RegistrationModal /> renders a form 1`] = `
       <Connect(LoginSocialButtons)
         prefix="registration."
       />
-      <ReactRelayQueryRenderer
-        environment={"RelayModernEnvironment()"}
+      <Relay(Connect(injectIntl(ReduxForm)))
         query={
           Object {
-            "fragment": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Fragment",
-              "metadata": null,
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "args": null,
-                  "kind": "FragmentSpread",
-                  "name": "RegistrationForm_query",
-                },
-              ],
-              "type": "Query",
-            },
-            "hash": "3b5fc5bbf78570afecc5275e1aeed3b2",
-            "kind": "Request",
-            "operation": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Operation",
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "registrationScript",
-                  "storageKey": null,
-                },
-              ],
-            },
-            "params": Object {
-              "id": null,
-              "metadata": Object {},
-              "name": "RegistrationModalQuery",
-              "operationKind": "query",
-              "text": "query RegistrationModalQuery {
-  ...RegistrationForm_query
-}
-
-fragment RegistrationForm_query on Query {
-  registrationScript
-}
-",
-            },
+            "$fragmentRefs": null,
+            "$refType": null,
           }
         }
-        render={[Function]}
-        variables={Object {}}
       />
     </ModalBody>
     <ModalFooter
@@ -309,58 +264,13 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
       <Connect(LoginSocialButtons)
         prefix="registration."
       />
-      <ReactRelayQueryRenderer
-        environment={"RelayModernEnvironment()"}
+      <Relay(Connect(injectIntl(ReduxForm)))
         query={
           Object {
-            "fragment": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Fragment",
-              "metadata": null,
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "args": null,
-                  "kind": "FragmentSpread",
-                  "name": "RegistrationForm_query",
-                },
-              ],
-              "type": "Query",
-            },
-            "hash": "3b5fc5bbf78570afecc5275e1aeed3b2",
-            "kind": "Request",
-            "operation": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Operation",
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "registrationScript",
-                  "storageKey": null,
-                },
-              ],
-            },
-            "params": Object {
-              "id": null,
-              "metadata": Object {},
-              "name": "RegistrationModalQuery",
-              "operationKind": "query",
-              "text": "query RegistrationModalQuery {
-  ...RegistrationForm_query
-}
-
-fragment RegistrationForm_query on Query {
-  registrationScript
-}
-",
-            },
+            "$fragmentRefs": null,
+            "$refType": null,
           }
         }
-        render={[Function]}
-        variables={Object {}}
       />
       <WYSIWYGRender
         className="text-center small excerpt mt-15"
@@ -499,58 +409,13 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
       <Connect(LoginSocialButtons)
         prefix="registration."
       />
-      <ReactRelayQueryRenderer
-        environment={"RelayModernEnvironment()"}
+      <Relay(Connect(injectIntl(ReduxForm)))
         query={
           Object {
-            "fragment": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Fragment",
-              "metadata": null,
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "args": null,
-                  "kind": "FragmentSpread",
-                  "name": "RegistrationForm_query",
-                },
-              ],
-              "type": "Query",
-            },
-            "hash": "3b5fc5bbf78570afecc5275e1aeed3b2",
-            "kind": "Request",
-            "operation": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Operation",
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "registrationScript",
-                  "storageKey": null,
-                },
-              ],
-            },
-            "params": Object {
-              "id": null,
-              "metadata": Object {},
-              "name": "RegistrationModalQuery",
-              "operationKind": "query",
-              "text": "query RegistrationModalQuery {
-  ...RegistrationForm_query
-}
-
-fragment RegistrationForm_query on Query {
-  registrationScript
-}
-",
-            },
+            "$fragmentRefs": null,
+            "$refType": null,
           }
         }
-        render={[Function]}
-        variables={Object {}}
       />
     </ModalBody>
     <ModalFooter
@@ -685,58 +550,13 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
       <Connect(LoginSocialButtons)
         prefix="registration."
       />
-      <ReactRelayQueryRenderer
-        environment={"RelayModernEnvironment()"}
+      <Relay(Connect(injectIntl(ReduxForm)))
         query={
           Object {
-            "fragment": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Fragment",
-              "metadata": null,
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "args": null,
-                  "kind": "FragmentSpread",
-                  "name": "RegistrationForm_query",
-                },
-              ],
-              "type": "Query",
-            },
-            "hash": "3b5fc5bbf78570afecc5275e1aeed3b2",
-            "kind": "Request",
-            "operation": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Operation",
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "registrationScript",
-                  "storageKey": null,
-                },
-              ],
-            },
-            "params": Object {
-              "id": null,
-              "metadata": Object {},
-              "name": "RegistrationModalQuery",
-              "operationKind": "query",
-              "text": "query RegistrationModalQuery {
-  ...RegistrationForm_query
-}
-
-fragment RegistrationForm_query on Query {
-  registrationScript
-}
-",
-            },
+            "$fragmentRefs": null,
+            "$refType": null,
           }
         }
-        render={[Function]}
-        variables={Object {}}
       />
     </ModalBody>
     <ModalFooter
@@ -871,58 +691,13 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
       <Connect(LoginSocialButtons)
         prefix="registration."
       />
-      <ReactRelayQueryRenderer
-        environment={"RelayModernEnvironment()"}
+      <Relay(Connect(injectIntl(ReduxForm)))
         query={
           Object {
-            "fragment": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Fragment",
-              "metadata": null,
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "args": null,
-                  "kind": "FragmentSpread",
-                  "name": "RegistrationForm_query",
-                },
-              ],
-              "type": "Query",
-            },
-            "hash": "3b5fc5bbf78570afecc5275e1aeed3b2",
-            "kind": "Request",
-            "operation": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Operation",
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "registrationScript",
-                  "storageKey": null,
-                },
-              ],
-            },
-            "params": Object {
-              "id": null,
-              "metadata": Object {},
-              "name": "RegistrationModalQuery",
-              "operationKind": "query",
-              "text": "query RegistrationModalQuery {
-  ...RegistrationForm_query
-}
-
-fragment RegistrationForm_query on Query {
-  registrationScript
-}
-",
-            },
+            "$fragmentRefs": null,
+            "$refType": null,
           }
         }
-        render={[Function]}
-        variables={Object {}}
       />
     </ModalBody>
     <ModalFooter
@@ -1057,58 +832,13 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
       <Connect(LoginSocialButtons)
         prefix="registration."
       />
-      <ReactRelayQueryRenderer
-        environment={"RelayModernEnvironment()"}
+      <Relay(Connect(injectIntl(ReduxForm)))
         query={
           Object {
-            "fragment": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Fragment",
-              "metadata": null,
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "args": null,
-                  "kind": "FragmentSpread",
-                  "name": "RegistrationForm_query",
-                },
-              ],
-              "type": "Query",
-            },
-            "hash": "3b5fc5bbf78570afecc5275e1aeed3b2",
-            "kind": "Request",
-            "operation": Object {
-              "argumentDefinitions": Array [],
-              "kind": "Operation",
-              "name": "RegistrationModalQuery",
-              "selections": Array [
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "registrationScript",
-                  "storageKey": null,
-                },
-              ],
-            },
-            "params": Object {
-              "id": null,
-              "metadata": Object {},
-              "name": "RegistrationModalQuery",
-              "operationKind": "query",
-              "text": "query RegistrationModalQuery {
-  ...RegistrationForm_query
-}
-
-fragment RegistrationForm_query on Query {
-  registrationScript
-}
-",
-            },
+            "$fragmentRefs": null,
+            "$refType": null,
           }
         }
-        render={[Function]}
-        variables={Object {}}
       />
     </ModalBody>
     <ModalFooter

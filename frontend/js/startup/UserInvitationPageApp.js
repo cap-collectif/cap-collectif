@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
-import { graphql, loadQuery, RelayEnvironmentProvider } from 'relay-hooks';
+import { QueryRenderer, graphql } from 'react-relay';
 import AlertBoxApp from '~/startup/AlertBoxApp';
 import UserInvitationPage from '~/components/User/Invitation/UserInvitationPage';
-import environment from '~/createRelayEnvironment';
+import environment, { graphqlError } from '~/createRelayEnvironment';
+import type { UserInvitationPageAppQueryResponse } from '~relay/UserInvitationPageAppQuery.graphql';
+import Loader from '~ui/FeedbacksIndicators/Loader';
 
 export type UserInvitationPageAppProps = {|
   +email: string,
@@ -13,19 +15,29 @@ export type UserInvitationPageAppProps = {|
 
 type Props = UserInvitationPageAppProps;
 
-const query = graphql`
-  query UserInvitationPageAppQuery {
-    ...RegistrationForm_query
-  }
-`;
-
-const prefetch = loadQuery();
-prefetch.next(environment, query, {}, { fetchPolicy: 'store-or-network' });
-
-export default (props: Props) => (
+export default (propsComponent: Props) => (
   <AlertBoxApp>
-    <RelayEnvironmentProvider environment={environment}>
-      <UserInvitationPage prefetch={prefetch} {...props} />
-    </RelayEnvironmentProvider>
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query UserInvitationPageAppQuery {
+          ...UserInvitationPage_query
+        }
+      `}
+      variables={{}}
+      render={({
+        error,
+        props,
+      }: {
+        ...ReactRelayReadyState,
+        props: ?UserInvitationPageAppQueryResponse,
+      }) => {
+        if (error) return graphqlError;
+
+        if (props) return <UserInvitationPage query={props} {...propsComponent} />;
+
+        return <Loader />;
+      }}
+    />
   </AlertBoxApp>
 );
