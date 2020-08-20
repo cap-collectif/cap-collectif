@@ -1,8 +1,13 @@
 /* eslint-disable */
-/* eslint-env jest */
 import 'babel-polyfill';
 import 'whatwg-fetch';
 global['fetch'] = require('fetch-cookie/node-fetch')(require('node-fetch')); // Allow fetch to use cookies
+
+// In development you can use, if you prefer:
+// - https://capco.dev
+// - https://127.0.0.1:8000
+const HOSTNAME = 'https://capco.test';
+const ENDPOINT = HOSTNAME + '/graphql';
 
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
@@ -13,27 +18,26 @@ const GraphQLClient = require('graphql-request').GraphQLClient;
 
 jest.setTimeout(50000);
 
-const endpoint = 'https://capco.test/graphql';
-const adminClient = new GraphQLClient(endpoint, {
+const adminClient = new GraphQLClient(ENDPOINT, {
   headers: {
     authorization: 'Bearer iamthetokenofadmin',
     accept: 'application/vnd.cap-collectif.preview+json',
   },
 });
-const superAdminClient = new GraphQLClient(endpoint, {
+const superAdminClient = new GraphQLClient(ENDPOINT, {
   headers: {
     authorization: 'Bearer iamthetokenofsuperadmin',
     accept: 'application/vnd.cap-collectif.preview+json',
   },
 });
 
-const anonymousClient = new GraphQLClient(endpoint, {
+const anonymousClient = new GraphQLClient(ENDPOINT, {
   headers: {
     accept: 'application/vnd.cap-collectif.preview+json',
   },
 });
 
-const internalClient = new GraphQLClient('https://capco.test/graphql/internal', {
+const internalClient = new GraphQLClient(ENDPOINT + '/internal', {
   headers: {
     accept: 'application/json',
   },
@@ -51,7 +55,7 @@ async function asyncForEach(array, callback) {
 }
 
 const authenticatedInternalRequest = (username, password, query, variables) => {
-  return fetch('https://capco.test/login_check', {
+  return fetch(HOSTNAME + '/login_check', {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -71,7 +75,7 @@ global.enableFeatureFlag = async name => {
 
 global.disableFeatureFlag = async name => {
   console.log(`Disabling feature flag "${name}"...`);
-  await exec(`pipenv run fab ${env}.app.toggle_disable:toggle=${name},environment=test`,);
+  await exec(`pipenv run fab ${env}.app.toggle_disable:toggle=${name},environment=test`);
   console.log(`Successfully disabled "${name}"`);
 };
 

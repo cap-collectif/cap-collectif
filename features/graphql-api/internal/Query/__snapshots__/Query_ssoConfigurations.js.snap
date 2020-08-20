@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.ssoConfigurations fetches all configurations 1`] = `
+Object {
+  "ssoConfigurations": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "accessTokenUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/token",
+          "authorizationUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize",
+          "buttonColor": "#7498c0",
+          "clientId": "***REMOVED***",
+          "enabled": true,
+          "environment": "TESTING",
+          "id": "RnJhbmNlQ29ubmVjdFNTT0NvbmZpZ3VyYXRpb246ZnJhbmNlQ29ubmVjdA==",
+          "labelColor": "#FFFFFF",
+          "logoutUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/logout",
+          "name": "France Connect",
+          "profileUrl": null,
+          "redirectUri": "https://capco.test/login/check-franceconnect?_locale=fr-FR",
+          "secret": "***REMOVED***",
+          "userInfoUrl": "https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo",
+        },
+      },
+      Object {
+        "node": Object {
+          "accessTokenUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/token",
+          "authorizationUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/auth",
+          "buttonColor": "#7498c0",
+          "clientId": "account",
+          "enabled": false,
+          "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
+          "labelColor": "#FFFFFF",
+          "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
+          "name": "Cap collectif Oauth2 Provider",
+          "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account",
+          "redirectUri": "https://capco.test/login/check-openid?_locale=fr-FR",
+          "secret": "***REMOVED***",
+          "userInfoUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/userinfo",
+        },
+      },
+    ],
+    "totalCount": 2,
+  },
+}
+`;

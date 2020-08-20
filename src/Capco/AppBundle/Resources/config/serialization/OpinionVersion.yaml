@@ -50,3 +50,7 @@ Capco\AppBundle\Entity\OpinionVersion:
       type: object
       serialized_name: consultation
       groups: [ElasticsearchVersionNestedConsultation]
+    getParent:
+      type: object
+      serialized_name: opinion
+      groups: [ElasticsearchVersion]

@@ -59,16 +59,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     protected $sources;
 
     /**
-     * @ORM\Column(name="sources_count", type="integer")
-     */
-    protected $sourcesCount = 0;
-
-    /**
-     * @ORM\Column(name="arguments_count", type="integer")
-     */
-    protected $argumentsCount = 0;
-
-    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="opinionVersion", cascade={"persist", "remove"})
      */
     protected $reports;
@@ -266,46 +256,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
-    public function getSourcesCount(): int
-    {
-        return $this->sourcesCount;
-    }
-
-    public function setSourcesCount(int $sourcesCount)
-    {
-        $this->sourcesCount = $sourcesCount;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getArgumentsCount()
-    {
-        return $this->argumentsCount;
-    }
-
-    /**
-     * @param mixed $argumentsCount
-     */
-    public function setArgumentsCount($argumentsCount)
-    {
-        $this->argumentsCount = $argumentsCount;
-    }
-
-    public function incrementSourcesCount()
-    {
-        ++$this->sourcesCount;
-
-        return $this;
-    }
-
-    public function decrementSourcesCount()
-    {
-        --$this->sourcesCount;
-
-        return $this;
-    }
-
     /**
      * @return mixed
      */
@@ -333,42 +283,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         }
 
         return false;
-    }
-
-    public function getArgumentForCount()
-    {
-        $i = 0;
-        foreach ($this->arguments as $argument) {
-            if (Argument::TYPE_FOR === $argument->getType()) {
-                ++$i;
-            }
-        }
-
-        return $i;
-    }
-
-    public function getArgumentAgainstCount()
-    {
-        $i = 0;
-        foreach ($this->arguments as $argument) {
-            if (Argument::TYPE_AGAINST === $argument->getType()) {
-                ++$i;
-            }
-        }
-
-        return $i;
-    }
-
-    public function getArgumentsCountByType($type)
-    {
-        if ('yes' === $type) {
-            return $this->getArgumentForCount();
-        }
-        if ('no' === $type) {
-            return $this->getArgumentAgainstCount();
-        }
-
-        return 0;
     }
 
     public function getOpinionType()
@@ -414,20 +328,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
             $this->getAuthor() === $user;
     }
 
-    public function increaseArgumentsCount()
-    {
-        ++$this->argumentsCount;
-
-        return $this;
-    }
-
-    public function decreaseArgumentsCount()
-    {
-        --$this->argumentsCount;
-
-        return $this;
-    }
-
     public function isIndexable(): bool
     {
         return $this->isPublished() && $this->getProject() && $this->getProject()->isIndexable();
@@ -451,7 +351,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
             'ElasticsearchVersionNestedProject',
             'ElasticsearchVersionNestedConsultation',
             'ElasticsearchVersionNestedStep',
-            'ElasticsearchVoteNestedVersion'
+            'ElasticsearchVoteNestedVersion',
         ];
     }
 }

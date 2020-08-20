@@ -204,7 +204,8 @@
         "ext-openssl": "*",
         "redirectionio/proxy-symfony": "^0.2.1",
         "doctrine/cache": "^1.10",
-        "symfony/proxy-manager-bridge": "4.4.10"
+        "symfony/proxy-manager-bridge": "4.4.10",
+        "symfony/maker-bundle": "^1.20"
     },
     "require-dev": {
         "behat/behat": "^3.3",
@@ -228,7 +229,6 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan-symfony": "^0.11",
         "phpstan/phpstan": "^0.11",
-        "symfony/maker-bundle": "^1.20",
         "dg/bypass-finals": "^1.1",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3",
         "rector/rector": "^0.5.22",

@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
+use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Enum\OpinionOrderField;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\OpinionVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -24,8 +26,20 @@ class OpinionVotesResolver implements ResolverInterface
         $this->versionVoteRepository = $versionVoteRepository;
     }
 
-    public function __invoke(OpinionContributionInterface $contribution, Argument $args): Connection
-    {
+    public function __invoke(
+        OpinionContributionInterface $contribution,
+        ?Argument $args = null
+    ): Connection {
+        if (!$args) {
+            $args = new Argument([
+                'first' => 0,
+                'orderBy' => [
+                    'field' => OpinionOrderField::PUBLISHED_AT,
+                    'direction' => OrderDirection::DESC,
+                ],
+            ]);
+        }
+
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
 

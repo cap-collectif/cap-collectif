@@ -97,6 +97,22 @@ class VoteSearch extends Search
         return $this->index->getType($this->type)->search($query);
     }
 
+    public function getVotesCountsByVersion(string $versionId): ResultSet
+    {
+        $boolQuery = new BoolQuery();
+        $boolQuery
+            ->addFilter(new Term(['opinionVersion.id' => $versionId]))
+            ->addFilter(new Term(['opinionVersion.published' => true]));
+
+        $query = new Query($boolQuery);
+        $query->setSize(0);
+        $agg = new Terms('votesCounts');
+        $agg->setField('value')->setSize(Search::BIG_INT_VALUE);
+        $query->addAggregation($agg);
+
+        return $this->index->getType($this->type)->search($query);
+    }
+
     public function getSortField(string $field): string
     {
         switch ($field) {

@@ -3,17 +3,18 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Capco\AppBundle\Search\VoteSearch;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Search\VoteSearch;
+use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
+use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\SerializerAwareInterface;
-use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionNormalizer implements
     NormalizerInterface,
@@ -27,6 +28,7 @@ class OpinionNormalizer implements
     private $tokenStorage;
     private $voteRepository;
     private $voteSearch;
+    private ArgumentRepository $argumentRepository;
 
     public function __construct(
         UrlGeneratorInterface $router,
@@ -34,7 +36,8 @@ class OpinionNormalizer implements
         TokenStorageInterface $tokenStorage,
         AbstractVoteRepository $voteRepository,
         Manager $toggleManager,
-        VoteSearch $voteSearch
+        VoteSearch $voteSearch,
+        ArgumentRepository $argumentRepository
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
@@ -42,6 +45,7 @@ class OpinionNormalizer implements
         $this->voteRepository = $voteRepository;
         $this->toggleManager = $toggleManager;
         $this->voteSearch = $voteSearch;
+        $this->argumentRepository = $argumentRepository;
     }
 
     public function hasCacheableSupportsMethod(): bool
@@ -87,6 +91,7 @@ class OpinionNormalizer implements
         $data['votesCountNok'] = $voteCountNok;
         $data['votesCountOk'] = $voteCountOk;
         $data['votesCountMitige'] = $voteCountMitige;
+        $data['argumentsCount'] = $this->argumentRepository->countByContributionAndType($object);
 
         $opinionType = $object->getOpinionType();
         $step = $object->getStep();

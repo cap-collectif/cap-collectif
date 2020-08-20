@@ -1,7 +1,9 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
+{% set nbVotes = opinionVotesResolver.__invoke(object).totalCount %}
+
 {% block field %}
     <div>
-        <span>{{ object.getVotesCountAll }}</span>
+        <span>{{ nbVotes }}</span>
     </div>
 {% endblock %}

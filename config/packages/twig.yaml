@@ -15,6 +15,10 @@ twig:
         app_version: '%app_version%'
         google_maps_key: '%google_maps_key%'
         # Register here any services accessibles in templates
+        #
+        # Please use this only for legacy pages, because it's **very bad** for perfomance.
+        #
+        opinionVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionVotesResolver'
         opinionVersionsResolver: '@Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionVersionsResolver'
         userRepliesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserRepliesResolver'
         userVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\User\UserVotesResolver'

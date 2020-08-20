@@ -4,7 +4,7 @@ from fabric.api import env
 import time
 from sys import platform as _platform
 import app
-from fabric.colors import red
+from fabric.colors import red, cyan
 from fabric.utils import abort
 
 
@@ -25,6 +25,7 @@ def up(force_recreate='false', no_cache='false', mode='symfony_bin'):
     if _platform == 'darwin' and mode == 'symfony_bin':
         local('symfony local:proxy:start')
         local('symfony local:server:start --daemon')
+        print(cyan('Some browsers (e.g. Chrome) require to re-apply proxy settings (clicking on "Re-apply settings" button on the "chrome://net-internals/#proxy" page) or a full restart after starting the proxy. Otherwise, you ll see a "This webpage is not available" error (ERR_NAME_NOT_RESOLVED).'))
 
 
 @task(environments=['local'])

@@ -16,6 +16,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @deprecated
+ */
 class ConsultationStepExtractor
 {
     const LABEL_ARG_PROS = 'synthesis.consultation_step.arguments.pros';

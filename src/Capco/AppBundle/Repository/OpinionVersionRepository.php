@@ -145,7 +145,6 @@ class OpinionVersionRepository extends EntityRepository
     public function getByContributionQB(Opinion $opinion)
     {
         return $this->getIsEnabledQueryBuilder()
-            ->select('o', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
             ->andWhere('o.parent = :opinion')
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('opinion', $opinion);
@@ -169,40 +168,6 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('opinion', $opinion)
             ->getQuery()
             ->getResult();
-    }
-
-    public function getByContribution(
-        Opinion $opinion,
-        ?int $limit,
-        ?int $first,
-        string $field,
-        string $direction
-    ) {
-        $qb = $this->getByContributionQB($opinion);
-
-        if (VersionOrderField::PUBLISHED_AT === $field) {
-            $qb->addOrderBy('o.publishedAt', $direction);
-        }
-
-        if (VersionOrderField::VOTES === $field) {
-            $qb->addOrderBy('vnb', $direction);
-        }
-
-        if (VersionOrderField::VOTES_OK === $field) {
-            $qb->addOrderBy('o.votesCountOk', $direction);
-        }
-
-        if (VersionOrderField::ARGUMENTS === $field) {
-            $qb->addOrderBy('o.argumentsCount', $direction);
-        }
-
-        if (VersionOrderField::RANDOM === $field) {
-            $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
-        }
-
-        $qb->setFirstResult($first)->setMaxResults($limit);
-
-        return new Paginator($qb);
     }
 
     public function getByUser(User $user, ?User $viewer = null)
@@ -336,87 +301,6 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('author', $user);
 
         $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Get all versions in a project.
-     *
-     * @param string|User|null $excludedAuthor
-     */
-    public function getEnabledByProject(
-        Project $project,
-        $excludedAuthor = null,
-        bool $orderByRanking = false,
-        ?int $limit = null,
-        int $page = 1
-    ) {
-        /*: array|Paginator*/ $qb = $this->getIsEnabledQueryBuilder('ov')
-            ->addSelect('o', 'ot', 's', 'aut', 'm', 'oc')
-            ->leftJoin('ov.parent', 'o')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('ov.author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->innerJoin('o.consultation', 'oc')
-            ->innerJoin('oc.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->andWhere('cas.project = :project')
-            ->andWhere('ov.trashedAt IS NULL')
-            ->setParameter('project', $project);
-        if (null !== $excludedAuthor) {
-            $qb->andWhere('aut.id != :author')->setParameter('author', $excludedAuthor);
-        }
-
-        if ($orderByRanking) {
-            $qb
-                ->orderBy('ov.ranking', 'ASC')
-                ->addOrderBy('ov.votesCountOk', 'DESC')
-                ->addOrderBy('ov.votesCountNok', 'ASC')
-                ->addOrderBy('ov.updatedAt', 'DESC');
-        }
-
-        $qb->addOrderBy('ov.updatedAt', 'DESC');
-
-        if (null !== $limit && \is_int($limit) && 0 < $limit) {
-            $query = $qb
-                ->getQuery()
-                ->setFirstResult(($page - 1) * $limit)
-                ->setMaxResults($limit);
-
-            return new Paginator($query);
-        }
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Get all versions by project ordered by votesCountOk.
-     *
-     * @param $project
-     * @param null|mixed $excludedAuthor
-     *
-     * @return mixed
-     */
-    public function getEnabledByProjectsOrderedByVotes(Project $project, $excludedAuthor = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('ov')
-            ->innerJoin('ov.parent', 'o')
-            ->innerJoin('o.consultation', 'oc')
-            ->innerJoin('oc.step', 's')
-            ->innerJoin('s.projectAbstractStep', 'cas')
-            ->innerJoin('cas.project', 'c')
-            ->andWhere('ov.trashedAt IS NULL')
-            ->andWhere('cas.project = :project')
-            ->setParameter('project', $project);
-        if (null !== $excludedAuthor) {
-            $qb
-                ->innerJoin('ov.author', 'a')
-                ->andWhere('a.id != :author')
-                ->setParameter('author', $excludedAuthor);
-        }
-
-        $qb->orderBy('ov.votesCountOk', 'DESC');
 
         return $qb->getQuery()->getResult();
     }

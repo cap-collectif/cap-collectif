@@ -3,11 +3,13 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Search\Search;
 use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Search\VersionSearch;
 use Capco\AppBundle\Enum\VersionOrderField;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -16,37 +18,58 @@ class OpinionVersionsResolver implements ResolverInterface
 {
     use ResolverTrait;
 
-    private $versionRepository;
+    private VersionSearch $versionSearch;
 
-    public function __construct(OpinionVersionRepository $versionRepository)
+    public function __construct(VersionSearch $versionSearch)
     {
-        $this->versionRepository = $versionRepository;
+        $this->versionSearch = $versionSearch;
     }
 
-    public function __invoke(Opinion $opinion, ?Argument $args = null): Connection
-    {
+    public function __invoke(
+        Opinion $opinion,
+        ?Argument $args = null,
+        $viewer = null,
+        ?RequestStack $request = null,
+        ?\ArrayObject $context = null
+    ): Connection {
         if (!$args) {
             $args = new Argument([
                 'first' => 0,
                 'orderBy' => [
                     'field' => VersionOrderField::PUBLISHED_AT,
-                    'direction' => OrderDirection::DESC
-                ]
+                    'direction' => OrderDirection::DESC,
+                ],
             ]);
         }
         $this->protectArguments($args);
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($opinion, $args) {
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
+        $isACLDisabled = $this->isACLDisabled($context);
+        $field = $args->offsetGet('orderBy')['field'];
+        $direction = $args->offsetGet('orderBy')['direction'];
+        $order = VersionSearch::findOrderFromFieldAndDirection($field, $direction);
 
-            return $this->versionRepository
-                ->getByContribution($opinion, $limit, $offset, $field, $direction)
-                ->getIterator()
-                ->getArrayCopy();
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $opinion,
+            $viewer,
+            $request,
+            $isACLDisabled,
+            $order
+        ) {
+            $seed = Search::generateSeed($request, $viewer);
+
+            return $this->versionSearch->getByCriteriaOrdered(
+                [
+                    'opinion.id' => $opinion->getId(),
+                ],
+                $order,
+                $limit,
+                $cursor,
+                $viewer,
+                $seed,
+                $isACLDisabled
+            );
         });
-        $totalCount = $this->versionRepository->countByContribution($opinion);
 
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto($args);
     }
 }

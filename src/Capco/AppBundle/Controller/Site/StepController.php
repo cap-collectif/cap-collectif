@@ -5,6 +5,8 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Search\OpinionSearch;
+use Capco\AppBundle\Search\VersionSearch;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
@@ -18,29 +20,35 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class StepController extends Controller
 {
     private TranslatorInterface $translator;
     private SerializerInterface $serializer;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private OpinionSearch $opinionSearch;
+    private VersionSearch $versionSearch;
 
     public function __construct(
         TranslatorInterface $translator,
         SerializerInterface $serializer,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        OpinionSearch $opinionSearch,
+        VersionSearch $versionSearch
     ) {
         $this->translator = $translator;
         $this->serializer = $serializer;
         $this->authorizationChecker = $authorizationChecker;
+        $this->opinionSearch = $opinionSearch;
+        $this->versionSearch = $versionSearch;
     }
 
     /**
@@ -97,6 +105,12 @@ class StepController extends Controller
     }
 
     /**
+     * @deprecated
+     * This step only used for:
+     * - (Dev) https://capco.dev/project/croissance-innovation-disruption/ranking/classement-des-propositions-et-modifications
+     * - (Prod) https://www.republique-numerique.fr/project/projet-de-loi-numerique/ranking/reponses-du-gouvernement
+     * - (Prod) https://monterritoireendebat.fr/project/une-demarche-participative-pour-les-plages-de-demain/ranking/resultat-du-questionnaire-et-synthese-des-idees
+     *
      * @Route("/project/{projectSlug}/ranking/{stepSlug}", name="app_project_show_ranking")
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
@@ -113,25 +127,28 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $excludedAuthor = !$project->getIncludeAuthorInRanking()
-            ? $project->getFirstAuthor()->getId()
-            : null;
+        $opinions = $this->opinionSearch
+            ->getByCriteriaOrdered(
+                [
+                    'project.id' => $project->getId(),
+                ],
+                'popular',
+                500
+            )
+            ->getEntities();
 
         $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() ?? 10;
-        $opinions = $this->get(OpinionRepository::class)->getEnabledByProject(
-            $project,
-            $excludedAuthor,
-            true,
-            $nbOpinionsToDisplay
-        );
-
         $nbVersionsToDisplay = $step->getNbVersionsToDisplay() ?? 10;
-        $versions = $this->get(OpinionVersionRepository::class)->getEnabledByProject(
-            $project,
-            $excludedAuthor,
-            true,
-            $nbVersionsToDisplay
-        );
+
+        $versions = $this->versionSearch
+            ->getByCriteriaOrdered(
+                [
+                    'project.id' => $project->getId(),
+                ],
+                'popular',
+                500
+            )
+            ->getEntities();
 
         return [
             'project' => $project,
@@ -237,7 +254,7 @@ class StepController extends Controller
         }
 
         $props = $this->serializer->serialize(
-            ['synthesis_id' => $step->getSynthesis()->getId(), 'mode' => 'view'],
+            ['synthesis_id' => $step->getSynthesis() ? $step->getSynthesis()->getId() : null, 'mode' => 'view'],
             'json'
         );
 

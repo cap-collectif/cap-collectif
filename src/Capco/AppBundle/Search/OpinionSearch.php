@@ -33,7 +33,8 @@ class OpinionSearch extends Search
         $order,
         $limit = 50,
         ?string $cursor = null,
-        User $viewer = null,
+        ?User $viewer = null,
+        // Wtf seed en dur ?
         int $seed = 91243
     ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
@@ -48,8 +49,8 @@ class OpinionSearch extends Search
         if (!$viewer) {
             $conditions[] = new Term([
                 'project.visibility' => [
-                    'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                ]
+                    'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                ],
             ]);
         }
 
@@ -100,7 +101,7 @@ class OpinionSearch extends Search
         int $offset,
         int $limit,
         string $sectionId,
-        string $order = null,
+        ?string $order,
         int $seed
     ): array {
         $boolQuery = new Query\BoolQuery();
@@ -129,7 +130,7 @@ class OpinionSearch extends Search
 
         return [
             'opinions' => $this->getHydratedResultsFromResultSet($this->opinionRepo, $resultSet),
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -238,14 +239,14 @@ class OpinionSearch extends Search
                 break;
             case 'comments':
                 return [
-                    'commentsCount' => ['order' => 'desc'],
-                    'createdAt' => ['order' => 'desc']
+                    'argumentsCount' => ['order' => 'desc'],
+                    'createdAt' => ['order' => 'desc'],
                 ];
             case 'least-popular':
                 return [
                     'votesCountNok' => ['order' => 'DESC'],
                     'votesCountOk' => ['order' => 'ASC'],
-                    'createdAt' => ['order' => 'DESC']
+                    'createdAt' => ['order' => 'DESC'],
                 ];
             case 'least-voted':
                 $sortField = 'votesCount';
@@ -266,7 +267,7 @@ class OpinionSearch extends Search
                 return [
                     'votesCountOk' => ['order' => 'DESC'],
                     'votesCountNok' => ['order' => 'ASC'],
-                    'createdAt' => ['order' => 'DESC']
+                    'createdAt' => ['order' => 'DESC'],
                 ];
             case 'voted':
                 $sortField = 'votesCount';
@@ -290,6 +291,10 @@ class OpinionSearch extends Search
 
         if (isset($providedFilters['step'])) {
             $filters['step.id'] = $providedFilters['step'];
+        }
+
+        if (isset($providedFilters['project'])) {
+            $filters['project.id'] = $providedFilters['project'];
         }
 
         if (isset($providedFilters['section'])) {

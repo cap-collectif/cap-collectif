@@ -125,61 +125,6 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get all opinions in a project.
-     *
-     * @param $project
-     * @param $excludedAuthor
-     * @param $orderByRanking
-     * @param $limit
-     * @param $page
-     *
-     * @return mixed
-     */
-    public function getEnabledByProject(
-        $project,
-        $excludedAuthor = null,
-        $orderByRanking = false,
-        $limit = null,
-        $page = 1
-    ) {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 'oc', 's', 'aut', 'm')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->leftJoin('o.consultation', 'oc')
-            ->leftJoin('oc.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->andWhere('cas.project = :project')
-            ->andWhere('o.trashedAt IS NULL')
-            ->setParameter('project', $project);
-        if (null !== $excludedAuthor) {
-            $qb->andWhere('aut.id != :author')->setParameter('author', $excludedAuthor);
-        }
-
-        if ($orderByRanking) {
-            $qb
-                ->orderBy('o.ranking', 'ASC')
-                ->addOrderBy('o.votesCountOk', 'DESC')
-                ->addOrderBy('o.votesCountNok', 'ASC')
-                ->addOrderBy('o.updatedAt', 'DESC');
-        }
-
-        $qb->addOrderBy('o.updatedAt', 'DESC');
-
-        if (null !== $limit && \is_int($limit) && 0 < $limit) {
-            $query = $qb
-                ->getQuery()
-                ->setFirstResult(($page - 1) * $limit)
-                ->setMaxResults($limit);
-
-            return new Paginator($query);
-        }
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
      * Get all trashed or unpublished opinions.
      */
     public function getTrashedByProject(Project $project)
@@ -381,36 +326,6 @@ class OpinionRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->getSingleScalarResult();
-    }
-
-    /**
-     * Get all opinions by project ordered by votesCountOk.
-     *
-     * @param $project
-     * @param $excludedAuthor
-     *
-     * @return mixed
-     */
-    public function getEnabledByProjectsOrderedByVotes(Project $project, $excludedAuthor = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->innerJoin('o.consultation', 'oc')
-            ->innerJoin('oc.step', 'ocs')
-            ->innerJoin('ocs.projectAbstractStep', 'cas')
-            ->innerJoin('cas.project', 'c')
-            ->andWhere('o.trashedAt IS NULL')
-            ->andWhere('cas.project = :project')
-            ->setParameter('project', $project);
-        if (null !== $excludedAuthor) {
-            $qb
-                ->innerJoin('o.Author', 'a')
-                ->andWhere('a.id != :author')
-                ->setParameter('author', $excludedAuthor);
-        }
-
-        $qb->orderBy('o.votesCountOk', 'DESC');
-
-        return $qb->getQuery()->getResult();
     }
 
     public function getUnpublishedByConsultationAndAuthor(

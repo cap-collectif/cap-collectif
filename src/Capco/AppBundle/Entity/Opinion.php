@@ -54,7 +54,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         'opinion.sort.old' => 'old',
         'opinion.sort.favorable' => 'favorable',
         'opinion.sort.votes' => 'votes',
-        'opinion.sort.comments' => 'comments'
+        'opinion.sort.comments' => 'comments',
     ];
 
     /**
@@ -168,7 +168,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         return $this->position;
     }
 
-    public function setPosition(int $position = null): self
+    public function setPosition(?int $position = null): self
     {
         $this->position = $position;
 
@@ -404,42 +404,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         return false;
     }
 
-    public function getArgumentForCount(): int
-    {
-        $i = 0;
-        foreach ($this->arguments as $argument) {
-            if (Argument::TYPE_FOR === $argument->getType()) {
-                ++$i;
-            }
-        }
-
-        return $i;
-    }
-
-    public function getArgumentAgainstCount(): int
-    {
-        $i = 0;
-        foreach ($this->arguments as $argument) {
-            if (Argument::TYPE_AGAINST === $argument->getType()) {
-                ++$i;
-            }
-        }
-
-        return $i;
-    }
-
-    public function getArgumentsCountByType($type): int
-    {
-        $count = 0;
-        foreach ($this->arguments as $arg) {
-            if (Argument::$argumentTypes[$arg->getType()] === $type) {
-                ++$count;
-            }
-        }
-
-        return $count;
-    }
-
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
      */
@@ -581,7 +545,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
             'ElasticsearchOpinionNestedProject',
             'ElasticsearchOpinionNestedConsultation',
             'ElasticsearchOpinionNestedStep',
-            'ElasticsearchOpinionNestedOpinionType'
+            'ElasticsearchOpinionNestedOpinionType',
         ];
     }
 }

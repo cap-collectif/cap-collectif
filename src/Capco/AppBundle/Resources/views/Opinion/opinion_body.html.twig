@@ -1,4 +1,6 @@
 {% set date = opinion.updatedAt | localizeddate('medium', 'none') %}
+{% set nbVotes = opinionVotesResolver.__invoke(opinion).totalCount %}
+
 <div class="opinion__body  box">
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': opinion.Author, 'link_classes': 'pull-left'} only %}
     <div class="opinion__data">

@@ -262,12 +262,6 @@ class ReinitCommand extends Command
 
         $output->writeln('<info>Elasticsearch is ready !</info>');
 
-        $this->em->clear();
-
-        $this->updateSyntheses($output);
-
-        $output->writeln('<info>Synthesis updated !</info>');
-
         $event = $this->stopwatch->stop('reinit');
         $output->writeln(
             'Total command duration: <info>' .
@@ -445,18 +439,6 @@ class ReinitCommand extends Command
             [
                 'capco:compute:users-counters' => ['--env' => $this->env, '--force' => true],
                 'capco:compute:counters' => ['--env' => $this->env, '--force' => true],
-            ],
-            $output
-        );
-    }
-
-    protected function updateSyntheses(OutputInterface $output)
-    {
-        $this->runCommands(
-            [
-                'capco:syntheses:update' => [],
-                'capco:syntheses:fix-urls' => [],
-                'capco:syntheses:counters' => [],
             ],
             $output
         );

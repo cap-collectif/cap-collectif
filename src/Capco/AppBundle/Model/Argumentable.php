@@ -6,10 +6,6 @@ interface Argumentable
 {
     public function getArguments();
 
-    public function getArgumentForCount();
-
-    public function getArgumentAgainstCount();
-
     public function canContribute($user = null);
 
     public function getOpinionType();

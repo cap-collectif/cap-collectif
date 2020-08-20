@@ -336,6 +336,7 @@ mappings:
             votesCountOk: { type: long }
             votesCountNok: { type: long }
             votesCountMitige: { type: long }
+            argumentsCount: { type: long }
             type:
                 type: object
                 properties:
@@ -356,6 +357,15 @@ mappings:
             step: *Step
             project: *Project
             consultation: *Consultation
+            votesCount: { type: long }
+            votesCountOk: { type: long }
+            votesCountNok: { type: long }
+            votesCountMitige: { type: long }
+            argumentsCount: { type: long }
+            opinion:
+                type: object
+                properties:
+                    id: { type: keyword }
 
     post:
         properties:

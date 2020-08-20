@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal Opinion_versions fetches versions of an opinion 1`] = `
+Object {
+  "opinion": Object {
+    "versions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvbjp2ZXJzaW9uMTA=",
+            "parent": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            },
+            "published": true,
+            "title": "Modification 10",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvbjp2ZXJzaW9uOQ==",
+            "parent": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            },
+            "published": true,
+            "title": "Modification 9",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvbjp2ZXJzaW9uOA==",
+            "parent": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            },
+            "published": true,
+            "title": "Modification 8",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvbjp2ZXJzaW9uNw==",
+            "parent": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            },
+            "published": true,
+            "title": "Modification 7",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvbjp2ZXJzaW9uNg==",
+            "parent": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            },
+            "published": true,
+            "title": "Modification 6",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvbjp2ZXJzaW9uNQ==",
+            "parent": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            },
+            "published": true,
+            "title": "Modification 5",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvbjp2ZXJzaW9uNA==",
+            "parent": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uNTg=",
+            },
+            "published": true,
+            "title": "Modification 4",
+          },
+        },
+      ],
+      "totalCount": 7,
+    },
+  },
+}
+`;
+
+exports[`Internal Opinion_versions fetches versions of an opinion in restricted project when autorized 1`] = `
+Object {
+  "opinion": Object {
+    "versions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvbjp2ZXJzaW9uMTg=",
+            "parent": Object {
+              "id": "T3BpbmlvbjpvcGluaW9uMTA0",
+            },
+            "published": true,
+            "title": "Je suis une opinion version d'un opinion d'une consultation dans un project avec un accès custom.",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

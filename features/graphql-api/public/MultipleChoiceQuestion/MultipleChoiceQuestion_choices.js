@@ -20,32 +20,26 @@ const MultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
 
 const PaginatedMultipleChoiceQuestionChoicesQuery = /* GraphQL */ `
   query PaginatedMultipleChoiceQuestionChoicesByTermQuery(
-    $id1: ID!
-    $id2: ID!
+    $id: ID!
     $term: String
     $cursor: String
     $limit: Int
   ) {
-    q1: node(id: $id1) {
+    question: node(id: $id) {
       ... on MultipleChoiceQuestion {
-        choices(first: $limit, term: $term) {
+        choices(after: $cursor, term: $term, first: $limit) {
+          totalCount
           edges {
             node {
               id
               title
             }
           }
-        }
-      }
-    }
-    q1Bis: node(id: $id2) {
-      ... on MultipleChoiceQuestion {
-        choices(after: $cursor, term: $term, first: $limit) {
-          edges {
-            node {
-              id
-              title
-            }
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+            hasPreviousPage
           }
         }
       }
@@ -67,34 +61,50 @@ describe('MultipleChoiceQuestion.choices array', () => {
   });
 
   it("fetches a question's choices that match the given term and paginate the results", async () => {
-    await expect(
-      graphql(
-        PaginatedMultipleChoiceQuestionChoicesQuery,
-        {
-          id1: toGlobalId('Question', '3916'),
-          id2: toGlobalId('Question', '3916'),
-          term: 'sku',
-          limit: 1,
-          cursor: 'YToyOntpOjA7ZDozLjgzMjM5ODc7aToxO3M6MTY6InF1ZXN0aW9uY2hvaWNlNDQiO30=',
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
+    const variables = {
+      id: toGlobalId('Question', '3916'),
+      term: 'sku',
+      limit: 1,
+      cursor: null,
+    };
+    const response1 = await graphql(
+      PaginatedMultipleChoiceQuestionChoicesQuery,
+      variables,
+      'internal',
+    );
+    const endCursor = response1.question.choices.pageInfo.endCursor;
+    expect(response1.question.choices.pageInfo.hasNextPage).toBe(true);
+    expect(response1.question.choices.edges).toMatchSnapshot();
+    const response2 = await graphql(
+      PaginatedMultipleChoiceQuestionChoicesQuery,
+      { ...variables, cursor: endCursor },
+      'internal',
+    );
+    expect(response2.question.choices.pageInfo.hasNextPage).toBe(false);
+    expect(response2.question.choices.edges).toMatchSnapshot();
   });
 
   it("fetches a question's choices and paginate the results", async () => {
-    await expect(
-      graphql(
-        PaginatedMultipleChoiceQuestionChoicesQuery,
-        {
-          id1: toGlobalId('Question', '3916'),
-          id2: toGlobalId('Question', '3916'),
-          term: '',
-          limit: 5,
-          cursor: 'YToyOntpOjA7ZDo0MjtpOjE7czoxNjoicXVlc3Rpb25jaG9pY2U0MiI7fQ==',
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot();
+    const variables = {
+      id: toGlobalId('Question', '3916'),
+      term: null,
+      limit: 10,
+      cursor: null,
+    };
+    const response1 = await graphql(
+      PaginatedMultipleChoiceQuestionChoicesQuery,
+      variables,
+      'internal',
+    );
+    const endCursor = response1.question.choices.pageInfo.endCursor;
+    expect(response1.question.choices.pageInfo.hasNextPage).toBe(true);
+    expect(response1.question.choices.edges).toMatchSnapshot();
+    const response2 = await graphql(
+      PaginatedMultipleChoiceQuestionChoicesQuery,
+      { ...variables, cursor: endCursor },
+      'internal',
+    );
+    expect(response2.question.choices.pageInfo.hasNextPage).toBe(false);
+    expect(response2.question.choices.edges).toMatchSnapshot();
   });
 });

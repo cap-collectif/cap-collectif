@@ -20,15 +20,11 @@ class RecalculateCountersCommand extends Command
 {
     use LockableTrait;
 
-    public $force;
+    public bool $force;
+    private EntityManager $entityManager;
+    private ContainerInterface $container;
 
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-    private $container;
-
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(string $name, ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct($name);
@@ -49,7 +45,9 @@ class RecalculateCountersCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$this->lock()) {
-            $output->writeln('The command is already running in another process.');
+            $output->writeln(
+                'The command ' . __METHOD__ . ' is already running in another process.'
+            );
 
             return 0;
         }
@@ -60,14 +58,6 @@ class RecalculateCountersCommand extends Command
         $this->force = $input->getOption('force');
 
         // ****************************** Opinion counters **********************************************
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Opinion o set o.sourcesCount = (
-          select count(DISTINCT s.id)
-          from CapcoAppBundle:Source s
-          WHERE s.published = 1 AND s.trashedAt IS NULL AND s.opinion = o
-        )'
-        );
 
         // Currently, you cannot UPDATE a table and select from the same table in a subquery.
         $this->executeQuery(
@@ -85,74 +75,9 @@ class RecalculateCountersCommand extends Command
             true
         );
 
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Opinion a set a.votesCountOk = (
-          select count(DISTINCT ov.id)
-          from CapcoAppBundle:OpinionVote ov
-          where ov.opinion = a AND ov.value = 1 group by ov.opinion
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Opinion a set a.votesCountMitige = (
-          select count(DISTINCT ov.id)
-          from CapcoAppBundle:OpinionVote ov
-          where ov.opinion = a AND ov.value = 0 group by ov.opinion
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Opinion a set a.votesCountNok = (
-          select count(DISTINCT ov.id)
-          from CapcoAppBundle:OpinionVote ov
-          where ov.opinion = a AND ov.value = -1 group by ov.opinion
-        )'
-        );
-
-        // ******************************** Opinion version counters ****************************************
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:OpinionVersion ov set ov.argumentsCount = (
-          select count(DISTINCT a.id)
-          from CapcoAppBundle:Argument a
-          WHERE a.published = 1 AND a.trashedAt IS NULL AND a.opinionVersion = ov
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:OpinionVersion ov set ov.sourcesCount = (
-          select count(DISTINCT s.id)
-          from CapcoAppBundle:Source s
-          WHERE s.published = 1 AND s.trashedAt IS NULL AND s.opinionVersion = ov
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountOk = (
-          select count(DISTINCT ovv.id)
-          from CapcoAppBundle:OpinionVersionVote ovv
-          where ovv.opinionVersion = ov AND ovv.published = 1 AND ovv.value = 1 group by ovv.opinionVersion
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountMitige = (
-          select count(DISTINCT ovv.id)
-          from CapcoAppBundle:OpinionVersionVote ovv
-          where ovv.opinionVersion = ov AND ovv.published = 1 AND ovv.value = 0 group by ovv.opinionVersion
-        )'
-        );
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountNok = (
-          select count(DISTINCT ovv.id)
-          from CapcoAppBundle:OpinionVersionVote ovv
-          where ovv.opinionVersion = ov AND ovv.published = 1 AND ovv.value = -1 group by ovv.opinionVersion
-        )'
-        );
-
         // ************************************ Votes counters **********************************************
 
+        // TODO fix this performance issue
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Argument a set a.votesCount = (
           select count(DISTINCT av.id)
@@ -161,6 +86,7 @@ class RecalculateCountersCommand extends Command
         )'
         );
 
+        // TODO fix this performance issue
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Source s set s.votesCount = (
           select count(DISTINCT sv.id)
@@ -169,6 +95,7 @@ class RecalculateCountersCommand extends Command
         )'
         );
 
+        // TODO fix this performance issue
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Comment c set c.votesCount = (
           select count(DISTINCT cv.id)

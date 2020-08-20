@@ -182,6 +182,8 @@ class Project implements IndexableInterface
     private $versionsRankingThreshold;
 
     /**
+     * TODO: no more used, delete me.
+     * 
      * @ORM\Column(name="include_author_in_ranking", type="boolean")
      */
     private $includeAuthorInRanking = false;

@@ -1,91 +1,91 @@
 Capco\AppBundle\Entity\Opinion:
-  attributes:
-    id:
-      groups:
-        [
-          Opinions,
-          OpinionVersions,
-          OpinionLinkPreviews,
-          ElasticsearchOpinion,
-          ElasticsearchVoteNestedOpinion,
-          ElasticsearchArgumentNestedOpinion,
-          ElasticsearchSourceNestedOpinion,
-        ]
-    title:
-      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, ElasticsearchOpinion]
-    body:
-      groups: [Opinions, OpinionVersions, ElasticsearchOpinion]
-    OpinionType:
-      serialized_name: type
-      groups:
-        [
-          Opinions,
-          OpinionVersions,
-          OpinionVersionPreviews,
-          OpinionLinkPreviews,
-          ElasticsearchOpinionNestedOpinionType,
-        ]
-    published:
-      groups:
-        [
-          Opinions,
-          ElasticsearchOpinion,
-          ElasticsearchVoteNestedOpinion,
-          ElasticsearchArgumentNestedOpinion,
-          ElasticsearchSourceNestedOpinion,
-        ]
-    pinned:
-      groups: [Opinions, ElasticsearchOpinion]
-    consultation:
-      groups: [Opinions, ElasticsearchOpinionNestedConsultation]
-    publishedAt:
-      groups: [Opinions, ElasticsearchOpinion, ElasticsearchArgumentNestedOpinion, ElasticsearchVoteNestedOpinion]
-    trashedAt:
-      groups:
-        [
-          Opinions,
-          ElasticsearchOpinion,
-          ElasticsearchArgumentNestedOpinion,
-          ElasticsearchSourceNestedOpinion,
-        ]
-    position:
-      groups: [Opinions, ElasticsearchOpinion]
-    createdAt:
-      groups: [Opinions, OpinionLinkPreviews, ElasticsearchOpinion]
-    updatedAt:
-      groups: [Opinions, OpinionLinkPreviews, ElasticsearchOpinion]
-    appendices:
-      groups: [Opinions, OpinionVersions]
-    votes:
-      groups: [Opinions]
-    arguments:
-      groups: [Opinions]
-    modals:
-      groups: [Opinions, OpinionVersions]
-    sources:
-      groups: [Opinions]
-    Author:
-      serialized_name: author
-      groups: [Opinions, UserMedias, OpinionLinkPreviews, ElasticsearchOpinionNestedAuthor]
-    answer:
-      groups: [Opinions]
-    ranking:
-      groups: [Opinions]
-    canContribute:
-      serialized_name: isContribuable
-      groups: [Opinions, OpinionVersions]
-    getArgumentForCount:
-      serialized_name: argumentsYesCount
-      groups: [Opinions]
-    getArgumentAgainstCount:
-      type: integer
-      serialized_name: argumentsNoCount
-      groups: [Opinions]
-    getStep:
-      type: object
-      serialized_name: step
-      groups: [Opinions, ElasticsearchOpinionNestedStep]
-    getProject:
-      type: object
-      serialized_name: project
-      groups: [ElasticsearchOpinionNestedProject]
+    attributes:
+        id:
+            groups:
+                [
+                    Opinions,
+                    OpinionVersions,
+                    ElasticsearchVersion,
+                    OpinionLinkPreviews,
+                    ElasticsearchOpinion,
+                    ElasticsearchVoteNestedOpinion,
+                    ElasticsearchArgumentNestedOpinion,
+                    ElasticsearchSourceNestedOpinion,
+                ]
+        title:
+            groups: [Opinions, OpinionVersions, OpinionLinkPreviews, ElasticsearchOpinion]
+        body:
+            groups: [Opinions, OpinionVersions, ElasticsearchOpinion]
+        OpinionType:
+            serialized_name: type
+            groups:
+                [
+                    Opinions,
+                    OpinionVersions,
+                    OpinionVersionPreviews,
+                    OpinionLinkPreviews,
+                    ElasticsearchOpinionNestedOpinionType,
+                ]
+        published:
+            groups:
+                [
+                    Opinions,
+                    ElasticsearchOpinion,
+                    ElasticsearchVoteNestedOpinion,
+                    ElasticsearchArgumentNestedOpinion,
+                    ElasticsearchSourceNestedOpinion,
+                ]
+        pinned:
+            groups: [Opinions, ElasticsearchOpinion]
+        consultation:
+            groups: [Opinions, ElasticsearchOpinionNestedConsultation]
+        publishedAt:
+            groups:
+                [
+                    Opinions,
+                    ElasticsearchOpinion,
+                    ElasticsearchArgumentNestedOpinion,
+                    ElasticsearchVoteNestedOpinion,
+                ]
+        trashedAt:
+            groups:
+                [
+                    Opinions,
+                    ElasticsearchOpinion,
+                    ElasticsearchArgumentNestedOpinion,
+                    ElasticsearchSourceNestedOpinion,
+                ]
+        position:
+            groups: [Opinions, ElasticsearchOpinion]
+        createdAt:
+            groups: [Opinions, OpinionLinkPreviews, ElasticsearchOpinion]
+        updatedAt:
+            groups: [Opinions, OpinionLinkPreviews, ElasticsearchOpinion]
+        appendices:
+            groups: [Opinions, OpinionVersions]
+        # votes:
+        #   groups: [Opinions]
+        # arguments:
+        #   groups: [Opinions]
+        modals:
+            groups: [Opinions, OpinionVersions]
+        sources:
+            groups: [Opinions]
+        Author:
+            serialized_name: author
+            groups: [Opinions, UserMedias, OpinionLinkPreviews, ElasticsearchOpinionNestedAuthor]
+        answer:
+            groups: [Opinions]
+        ranking:
+            groups: [Opinions]
+        canContribute:
+            serialized_name: isContribuable
+            groups: [Opinions, OpinionVersions]
+        getStep:
+            type: object
+            serialized_name: step
+            groups: [Opinions, ElasticsearchOpinionNestedStep]
+        getProject:
+            type: object
+            serialized_name: project
+            groups: [ElasticsearchOpinionNestedProject]

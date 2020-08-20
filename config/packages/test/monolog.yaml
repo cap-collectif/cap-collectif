@@ -7,4 +7,5 @@ monolog:
         file:
             type: stream
             path: '%kernel.logs_dir%/test.log'
-            level: debug
+            # Edit this in development for more informations.
+            level: error
