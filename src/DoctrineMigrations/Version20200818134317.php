@@ -36,23 +36,26 @@ final class Version20200818134317 extends AbstractMigration implements Container
 
     public function up(Schema $schema): void
     {
-        $defaultLocale = $this->entityManager->getRepository(Locale::class)->getDefaultCode();
-        $locales = $this->getLocales($defaultLocale);
+        $defaultLocale = $this->getDefaultLocale();
+        $allLocales = $this->getLocales();
 
         foreach (self::PARAMETERS as $parameterKey) {
-            $parameter = $this->entityManager->getRepository(SiteParameter::class)->findOneBy([
-                'keyname' => $parameterKey,
-            ]);
-            if ($parameter) {
-                $defaultValue = $this->getDefaultValue($parameterKey, $defaultLocale);
-                foreach ($locales as $locale) {
-                    $this->addSql(
-                        self::addTranslationSQL(
-                            $parameter->getId(),
-                            $defaultValue,
-                            $locale->getCode()
-                        )
-                    );
+            $parameterId = $this->getParameterId($parameterKey);
+            if ($parameterId) {
+                $existingTranslations = $this->getExistingTranslations($parameterId);
+
+                $defaultValue = $this->getDefaultValue($defaultLocale, $existingTranslations);
+
+                foreach ($allLocales as $locale) {
+                    if (!isset($existingTranslations[$locale])) {
+                        $this->addSql(
+                            self::addTranslationSQL(
+                                $parameterId,
+                                $defaultValue,
+                                $locale
+                            )
+                        );
+                    }
                 }
             }
         }
@@ -62,20 +65,45 @@ final class Version20200818134317 extends AbstractMigration implements Container
     {
     }
 
-    private function getDefaultValue(string $parameterKey, string $defaultLocale): string
+    private function getDefaultLocale(): string
     {
-        return (string) $this->entityManager
-            ->getRepository(SiteParameter::class)
-            ->getValue($parameterKey, $defaultLocale);
+        return $this->connection->fetchColumn('SELECT code FROM locale WHERE is_default = 1');
     }
 
-    private function getLocales(string $defaultLocale): array
+    private function getParameterId(string $parameterKey): ?string
     {
+        $id = $this->connection->fetchColumn("SELECT id FROM site_parameter WHERE keyname = '$parameterKey'");
+        if (!$id) {
+            return null;
+        }
+
+        return $id;
+    }
+
+    private function getDefaultValue(string $defaultLocale, array $translations): string
+    {
+        return isset($existingTranslations[$defaultLocale]) ? $existingTranslations[$defaultLocale] : '';
+    }
+
+    private function getExistingTranslations(string $parameterId): array
+    {
+        $existingTranslations = [];
+        $query = $this->connection->query(
+            "SELECT id, value, locale FROM site_parameter_translation WHERE translatable_id = '$parameterId'"
+        );
+        while ($row = $query->fetch()) {
+            $existingTranslations[$row['locale']] = $row['value'];
+        }
+
+        return $existingTranslations;
+    }
+
+    private function getLocales(): array
+    {
+        $query = $this->connection->query('SELECT code FROM locale');
         $locales = [];
-        foreach ($this->entityManager->getRepository(Locale::class)->findAll() as $locale) {
-            if ($locale->getCode() !== $defaultLocale) {
-                $locales[] = $locale;
-            }
+        while($code = $query->fetchColumn(0)) {
+            $locales[] = $code;
         }
 
         return $locales;
@@ -86,6 +114,7 @@ final class Version20200818134317 extends AbstractMigration implements Container
         string $value,
         string $locale
     ): string {
+
         $uuid = $this->uuidGenerator->generate($this->entityManager, null);
 
         return 'INSERT INTO `site_parameter_translation` (`id`, `translatable_id`, `value`, `locale`)' .
