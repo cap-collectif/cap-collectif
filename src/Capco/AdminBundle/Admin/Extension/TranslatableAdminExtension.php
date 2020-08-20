@@ -29,7 +29,7 @@ class TranslatableAdminExtension extends Base
 
     public function getEnabledTranslationLocales(): array
     {
-        $locales = $this->toggleManager->isActive('unstable__multilangue')
+        $locales = $this->toggleManager->isActive('multilangue')
             ? $this->localeRepository->findEnabledLocales()
             : [$this->localeRepository->findDefaultLocale()];
 

@@ -14,7 +14,7 @@ class LocaleAdmin extends BaseAdmin
 
     public function getFeatures(): array
     {
-        return ['unstable__multilangue'];
+        return ['multilangue'];
     }
 
     public function getTemplate($name)

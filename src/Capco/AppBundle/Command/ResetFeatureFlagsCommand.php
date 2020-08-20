@@ -83,7 +83,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate('votes_min');
         $this->manager->activate('consent_internal_communication');
         $this->manager->activate('new_feature_questionnaire_result');
-        $this->manager->activate('unstable__multilangue');
+        $this->manager->activate('multilangue');
         $this->manager->activate('http_redirects');
         $this->manager->activate('login_franceconnect');
         $this->manager->deactivate('read_more');
@@ -119,15 +119,11 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('search');
             $this->manager->deactivate('login_franceconnect');
             $this->manager->deactivate('http_redirects');
-
             $this->manager->activate('captcha');
             $this->manager->activate('consent_internal_communication');
-
             $this->manager->activate('export');
-
             $this->manager->activate('shield_mode');
-
-            $this->manager->deactivate('unstable__multilangue');
+            $this->manager->deactivate('multilangue');
             $this->manager->deactivate('unstable__analysis');
         }
 

@@ -33,7 +33,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader
     ) {
         $defaultLocaleCodeDataloader->__invoke()->willReturn('fr-FR');
-        $manager->isActive('unstable__multilangue')->willReturn(false);
+        $manager->isActive('multilangue')->willReturn(false);
         $this->getBrowserLanguage($request)->shouldReturn('fr-FR');
     }
 
@@ -53,7 +53,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
             new Locale('de-DE', 'deutsch'),
         ];
         $dataloader->__invoke()->willReturn($availableLocales);
-        $manager->isActive('unstable__multilangue')->willReturn(true);
+        $manager->isActive('multilangue')->willReturn(true);
         $this->getBrowserLanguage($request)->shouldReturn('en-GB');
     }
 
@@ -72,7 +72,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
             new Locale('de-DE', 'deutsch'),
         ];
         $dataloader->__invoke()->willReturn($availableLocales);
-        $manager->isActive('unstable__multilangue')->willReturn(true);
+        $manager->isActive('multilangue')->willReturn(true);
         $defaultLocaleCodeDataloader->__invoke()->willReturn('fr-FR');
 
         $bag->has('locale')->willReturn(false);
@@ -113,7 +113,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         );
         $request->headers = $headerBag;
 
-        $manager->isActive('unstable__multilangue')->willReturn(true);
+        $manager->isActive('multilangue')->willReturn(true);
         $this->getBrowserLanguage($request)->shouldReturn('fr-FR');
     }
 
@@ -144,7 +144,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         );
         $request->headers = $headerBag;
 
-        $manager->isActive('unstable__multilangue')->willReturn(true);
+        $manager->isActive('multilangue')->willReturn(true);
         $this->getBrowserLanguage($request)->shouldReturn('fr-FR');
     }
 }

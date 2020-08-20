@@ -189,7 +189,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 const mapStateToProps = (state: GlobalState) => {
   return {
     isLocaleHeaderVisible: state.user.showLocaleHeader || true,
-    isMultilangueEnabled: state.default.features.unstable__multilangue,
+    isMultilangueEnabled: state.default.features.multilangue,
   };
 };
 

@@ -79,7 +79,7 @@ export const ProjectPublishAdminForm = ({ project, features }: Props) => (
             component={renderComponent}
             addonAfter={<i className="cap-calendar-2" />}
           />
-          {features.unstable__multilangue && (
+          {features.multilangue && (
             <Field
               selectFieldIsObject
               autoload

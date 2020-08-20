@@ -240,7 +240,7 @@ export const EventForm = ({
                 <FormattedMessage id="global.general" />
               </h3>
               <span className="mr-30 mt-15">
-                {features.unstable__multilangue && <LanguageButtonContainer />}
+                {features.multilangue && <LanguageButtonContainer />}
               </span>
             </PageTitleContainer>
             <div className="color-dark-gray font-size-16">

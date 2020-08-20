@@ -88,7 +88,7 @@ export type FeatureToggles = {
   display_pictures_in_depository_proposals_list: ?boolean,
   external_project: ?boolean,
   app_news: ?boolean,
-  unstable__multilangue: ?boolean,
+  multilangue: ?boolean,
   display_pictures_in_event_list: ?boolean,
   unstable__analysis: ?boolean,
   report_browers_errors_to_sentry: ?boolean,

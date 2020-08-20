@@ -186,7 +186,7 @@ export const AccountForm = ({
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
 
   const _renderLanguageSection = () => {
-    if (features.unstable__multilangue) {
+    if (features.multilangue) {
       const localeListOptions = languageList.map((languageObject: LocaleMap) => {
         return {
           value: TranslationLocaleEnum[languageObject.code],

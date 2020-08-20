@@ -98,7 +98,7 @@ export class RegistrationFormCommunication extends Component<Props> {
                 <FormattedMessage id="communication" />
               </h3>
               <span className="mr-30 mt-15">
-                {features.unstable__multilangue && <LanguageButtonContainer />}
+                {features.multilangue && <LanguageButtonContainer />}
               </span>
             </Title>
             <Field

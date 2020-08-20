@@ -36,7 +36,7 @@ describe('<RegistrationFormCommunication />', () => {
   };
 
   it('renders correctly', () => {
-    props.features.unstable__multilangue = false;
+    props.features.multilangue = false;
     const wrapper = shallow(<RegistrationFormCommunication {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

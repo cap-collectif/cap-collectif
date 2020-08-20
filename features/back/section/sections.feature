@@ -2,7 +2,7 @@
 Feature: Admin Section
 
 Background:
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
 
 @database
 Scenario: Logged in super admin wants to edit a user profile

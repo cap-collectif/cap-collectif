@@ -27,7 +27,7 @@ class I18nLoader
     public function load(RouteCollection $collection)
     {
         try {
-            if (!$this->manager->isActive('unstable__multilangue')){
+            if (!$this->manager->isActive('multilangue')){
                 return $collection;
             }
         }catch (\Exception $e){

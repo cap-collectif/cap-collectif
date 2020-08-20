@@ -6,7 +6,7 @@ Feature: Write blog posts
 
 @database
 Scenario: Adminstrator wants to edit a blog post in fr-FR with multilangues enabled
-  Given feature 'unstable__multilangue' is enabled
+  Given feature 'multilangue' is enabled
   And I am logged in as admin
   And I set my locale to "fr-FR"
   And I go to the admin blog post list page
@@ -18,7 +18,7 @@ Scenario: Adminstrator wants to edit a blog post in fr-FR with multilangues enab
 
 @database
 Scenario: Administrator wants to edit a blog post in en-GB with multilangues enabled
-  Given feature 'unstable__multilangue' is enabled
+  Given feature 'multilangue' is enabled
   And I am logged in as admin
   And I set my locale to "en-GB"
   And I go to the admin blog post list page
@@ -30,7 +30,7 @@ Scenario: Administrator wants to edit a blog post in en-GB with multilangues ena
 
 @database
 Scenario: Adminstrator wants to edit a blog post in fr-FR with multilangues disabled
-  Given feature 'unstable__multilangue' is disabled
+  Given feature 'multilangue' is disabled
   And default locale is set to "fr-FR"
   And I am logged in as admin
   And I go to the admin blog post list page
@@ -42,7 +42,7 @@ Scenario: Adminstrator wants to edit a blog post in fr-FR with multilangues disa
 
 @database
 Scenario: Adminstrator wants to edit a blog post in en-GB with multilangues disabled
-  Given feature 'unstable__multilangue' is disabled
+  Given feature 'multilangue' is disabled
   And default locale is set to "en-GB"
   And I am logged in as admin
   And I go to the admin blog post list page

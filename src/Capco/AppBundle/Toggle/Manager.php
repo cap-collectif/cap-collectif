@@ -56,7 +56,7 @@ class Manager
     public const external_project = 'external_project';
     public const app_news = 'app_news';
     public const sentry_log = 'sentry_log';
-    public const unstable__multilangue = 'unstable__multilangue';
+    public const multilangue = 'multilangue';
     public const unstable__admin_editor = 'unstable__admin_editor';
     public const unstable__analysis = 'unstable__analysis';
     public const http_redirects = 'http_redirects';
@@ -117,7 +117,7 @@ class Manager
         self::external_project,
         self::app_news,
         self::sentry_log,
-        self::unstable__multilangue,
+        self::multilangue,
         self::unstable__admin_editor,
         self::unstable__analysis,
         self::http_redirects,

@@ -43,7 +43,7 @@ class LocaleResolver
         } catch (LocaleConfigurationException $e) {
             $defaultLocale = $this->symfonyConfigurationLocale;
              $this->logger->warning(
-                 'Default locale is not configured with unstable__multilangue yet activated: using symfony s default locale'
+                 'Default locale is not configured with multilangue yet activated: using symfony s default locale'
              );
         }
 

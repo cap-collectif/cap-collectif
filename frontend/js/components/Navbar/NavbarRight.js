@@ -43,7 +43,7 @@ export class NavbarRight extends React.Component<Props> {
   render() {
     const { user, features, vertical, intl, loginWithOpenId, currentLanguage, instanceName } = this.props;
 
-    const prefix = (features.unstable__multilangue) ? `/${currentLanguage.split('-')[0]}` : '';
+    const prefix = (features.multilangue) ? `/${currentLanguage.split('-')[0]}` : '';
 
     return (
       <>

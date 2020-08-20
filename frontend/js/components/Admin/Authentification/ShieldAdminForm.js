@@ -97,7 +97,7 @@ export const ShieldAdminForm = (props: Props) => {
             <h3 className="box-title">
               <FormattedMessage id="admin.label.pages.shield" />
             </h3>
-            {features.unstable__multilangue && (
+            {features.multilangue && (
               <span className="mr-30 mt-15">
                 <LanguageButtonContainer />
               </span>

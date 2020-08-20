@@ -27,7 +27,7 @@ class SiteParameterResolver
 
     public function getValue(string $key, ?string $locale = null, ?string $defaultValue = null)
     {
-        if (null === $locale && !$this->toggleManager->isActive('unstable__multilangue')) {
+        if (null === $locale && !$this->toggleManager->isActive('multilangue')) {
             $locale = $this->getDefaultLocale();
         }
 

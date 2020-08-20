@@ -28,7 +28,7 @@ class BrowserLanguageRuntime implements RuntimeExtensionInterface
 
     public function getBrowserLanguage(Request $request): string
     {
-        if ($this->toggleManager->isActive('unstable__multilangue')) {
+        if ($this->toggleManager->isActive('multilangue')) {
             $availableLocales = array_map(function (Locale $locale) {
                 return $locale->getCode();
             }, $this->localeDataloader->__invoke());

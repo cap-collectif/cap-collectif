@@ -26,7 +26,7 @@ class ChooseLanguageMessageRuntime implements RuntimeExtensionInterface
     public function getLocaleChoiceTranslations(): array
     {
         $translations = [];
-        if ($this->toggleManager->isActive('unstable__multilangue')) {
+        if ($this->toggleManager->isActive('multilangue')) {
             $publishedLocales = $this->localeDataloader->__invoke();
             foreach ($publishedLocales as $locale) {
                 $code = $locale->getCode();

@@ -27,7 +27,7 @@ class LocaleLanguageRuntime implements RuntimeExtensionInterface
     public function getLocaleMap(): array
     {
         $parsedLocales = [];
-        if ($this->manager->isActive('unstable__multilangue')) {
+        if ($this->manager->isActive('multilangue')) {
             $publishedLocales = $this->localesDataloader->__invoke();
             $parsedLocales = array_map(function (Locale $locale) {
                 return [

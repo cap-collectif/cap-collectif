@@ -31,7 +31,7 @@ const component = ({
 };
 
 export const LanguageButtonContainer = ({ features }: Props) => {
-  if (!features.unstable__multilangue) {
+  if (!features.multilangue) {
     return null;
   }
 

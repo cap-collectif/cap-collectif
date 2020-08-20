@@ -94,8 +94,8 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::app_news")'
             sentry_log:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::sentry_log")'
-            unstable__multilangue:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__multilangue")'
+            multilangue:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::multilangue")'
             unstable__admin_editor:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__admin_editor")'
             unstable__analysis:

@@ -96,7 +96,7 @@ Scenario: An anonymous visit legal page
 @international
 Scenario: An anonymous goes to a page not in his default language and should see banner only the first time, not
   after selecting a locale
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   Given I go to "/de/"
   And I should not see a cookie named "locale"
   And I select "fr-FR" in the language header
@@ -106,7 +106,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
 @international
 Scenario: An anonymous goes to a page not in his default language and should see banner only the first time,
   not after dismissing it
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   Given I go to "/de/"
   And I should not see a cookie named "locale"
   And I wait "#changeLanguageProposalContainer" to appear on current page
@@ -118,7 +118,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
 @international
 Scenario: An anonymous goes to a page not in his default language and should see banner. Then, after his choice, all
   pages not in his locale should show the banner
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   Given I go to "/de/"
   And I should not see a cookie named "locale"
   And I wait "#changeLanguageProposalContainer" to appear on current page
@@ -133,7 +133,7 @@ Scenario: An anonymous goes to a page not in his default language and should see
 
 @international
 Scenario: An anonymous wants to change locale through footer
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   Given I visited "home page"
   And I wait "#footer-links" to appear on current page
   And I should not see a cookie named "locale"
@@ -145,7 +145,7 @@ Scenario: An anonymous wants to change locale through footer
 
 @international
 Scenario: An anonymous wants to change locale through footer in route with params
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   Given I visited homepage
   Then I go to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
   And I wait "#footer-links" to appear on current page
@@ -158,7 +158,7 @@ Scenario: An anonymous wants to change locale through footer in route with param
 
 @international
 Scenario: An anonymous wants to change locale through profile page
-  Given features "unstable__multilangue", "profiles" are enabled
+  Given features "multilangue", "profiles" are enabled
   And I go to "/"
   And I am logged in as user
   Then I go to "/profile/edit-profile#account"

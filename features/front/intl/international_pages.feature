@@ -3,20 +3,20 @@ Feature: Users can browse using translated URLs for each locale
 
 @database
 Scenario: User wants to go to the english version of capco while toggle not activated
-  Given feature "unstable__multilangue" is disabled
+  Given feature "multilangue" is disabled
   And I go to "/en/"
   Then I should see "error.404.title"
 
 @database
 Scenario: User wants to go to the english version of capco
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   And I go to "/en/projects"
   And I should be redirected to "/en/projects"
   And the locale should be "en-GB"
 
 @database
 Scenario: User wants to go to the english version of capco and keeps the language setting accross pages
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   And I go to "/en"
   And I click on button "#tabs-navbar-link-11"
   And I should be redirected to "/en/projects"
@@ -26,7 +26,7 @@ Scenario: User wants to go to the english version of capco and keeps the languag
 @database
 Scenario: User wants to go to the english version of capco then do some admin stuff
   and keep language setting
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   And I am logged in as admin
   And I go to "/en"
   And I go to "/admin"
@@ -34,21 +34,21 @@ Scenario: User wants to go to the english version of capco then do some admin st
   And the locale should be "en-GB"
 
 @database
-Scenario: User wants to go to the english version of capco but "unstable__multilangue" is not activated
-  Given feature "unstable__multilangue" is disabled
+Scenario: User wants to go to the english version of capco but "multilangue" is not activated
+  Given feature "multilangue" is disabled
   And I go to "/en/projects"
   And the locale should be "fr-FR"
 
 @database
-Scenario: User wants to go to the english version of capco with "unstable__multilangue" activated
-  Given feature "unstable__multilangue" is enabled
+Scenario: User wants to go to the english version of capco with "multilangue" activated
+  Given feature "multilangue" is enabled
   And I go to "/en/projects"
   And I should be redirected to "/en/projects"
   And the locale should be "en-GB"
 
 @database
 Scenario: User wants to go to the english version of capco with platform default set as "fr-FR"
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   Given default locale is set to "fr-FR"
   And I go to "/"
   And the locale should be "fr-FR"
@@ -63,7 +63,7 @@ Scenario: User wants to go to the english version of capco with platform default
 
 @database
 Scenario: User wants to go to the english version of capco with platform default set as "en-GB"
-  Given feature "unstable__multilangue" is enabled
+  Given feature "multilangue" is enabled
   Given default locale is set to "en-GB"
   And I go to "/"
   And the locale should be "en-GB"

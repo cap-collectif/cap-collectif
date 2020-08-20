@@ -99,7 +99,7 @@ export const Footer = ({
       cookiesPath={cookiesPath}
       privacyPath={privacyPath}
       legalPath={legalPath}
-      multilingual={features.unstable__multilangue || false}
+      multilingual={features.multilangue || false}
     />
   </FooterContainer>
 );

@@ -23,7 +23,7 @@ describe('<ProjectPublishAdminForm />', () => {
     const props = {
       ...defaultProps,
     };
-    props.features.unstable__multilangue = false;
+    props.features.multilangue = false;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -40,7 +40,7 @@ describe('<ProjectPublishAdminForm />', () => {
       },
       features,
     };
-    props.features.unstable__multilangue = true;
+    props.features.multilangue = true;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -60,7 +60,7 @@ describe('<ProjectPublishAdminForm />', () => {
       },
       features,
     };
-    props.features.unstable__multilangue = true;
+    props.features.multilangue = true;
     const wrapper = shallow(<ProjectPublishAdminForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

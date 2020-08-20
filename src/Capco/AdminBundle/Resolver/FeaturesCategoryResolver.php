@@ -72,7 +72,7 @@ class FeaturesCategoryResolver
                     'new_feature_questionnaire_result',
                     'display_pictures_in_event_list',
                     'app_news',
-                    'unstable__multilangue',
+                    'multilangue',
                     'unstable__remote_events',
                     'sentry_log',
                     'login_openid',

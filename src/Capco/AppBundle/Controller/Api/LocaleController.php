@@ -33,7 +33,7 @@ class LocaleController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/api/change-locale/{localeCode}", name="change_locale", defaults={"_feature_flags" = "unstable__multilangue"})
+     * @Route("/api/change-locale/{localeCode}", name="change_locale", defaults={"_feature_flags" = "multilangue"})
      */
     public function setUserLocale(Request $request, string $localeCode): JsonResponse
     {

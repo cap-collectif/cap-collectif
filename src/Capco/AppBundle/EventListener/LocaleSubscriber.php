@@ -38,7 +38,7 @@ class LocaleSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
 
         $inputLocale = null;
-        if ($this->toggleManager->isActive('unstable__multilangue') && $request->getLocale()) {
+        if ($this->toggleManager->isActive('multilangue') && $request->getLocale()) {
             $inputLocale = $request->getLocale();
         }
         $request->setLocale($this->getValidLocale($inputLocale));

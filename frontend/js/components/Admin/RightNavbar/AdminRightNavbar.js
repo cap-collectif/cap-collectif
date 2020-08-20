@@ -86,7 +86,7 @@ const AdminRightNavbar = ({ localesData, currentLocale, features, query }: Props
         }
       />
     )}
-    {features.unstable__multilangue && (
+    {features.multilangue && (
       <NavbarItem
         pullRight
         id="admin-multilangue-dropdown-navbar"

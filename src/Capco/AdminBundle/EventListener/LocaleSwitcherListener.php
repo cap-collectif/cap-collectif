@@ -20,7 +20,7 @@ class LocaleSwitcherListener
     public function onBlock(BlockEvent $event, $eventName)
     {
         // We hide locale switcher when multilangue is disabled
-        if (!$this->toggleManager->isActive('unstable__multilangue')) {
+        if (!$this->toggleManager->isActive('multilangue')) {
             return;
         }
 

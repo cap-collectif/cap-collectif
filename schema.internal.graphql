@@ -3397,7 +3397,7 @@ enum FeatureFlagType {
   external_project
   app_news
   sentry_log
-  unstable__multilangue
+  multilangue
   unstable__admin_editor
   unstable__analysis
   http_redirects
