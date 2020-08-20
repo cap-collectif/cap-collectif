@@ -29,11 +29,15 @@ class ResetDefaultLocaleCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $localeCode = $input->getOption('code');
-        $localeTranslationKey = $input->getOption('locale');
-        $this->setDefaultLocale($localeCode, $localeTranslationKey);
+        if ($this->isDefaultLocaleMissing()) {
+            $localeCode = $input->getOption('code');
+            $localeTranslationKey = $input->getOption('locale');
+            $this->setDefaultLocale($localeCode, $localeTranslationKey);
 
-        return 1;
+            return 1;
+        }
+
+        return 0;
     }
 
     private function setDefaultLocale(string $localeCode, string $localeTransKey): Locale
@@ -46,5 +50,14 @@ class ResetDefaultLocaleCommand extends Command
         $this->em->flush();
 
         return $defaultLocale;
+    }
+
+    private function isDefaultLocaleMissing(): bool
+    {
+        return empty(
+            $this->em->getRepository(Locale::class)->findBy([
+                'default' => true,
+            ])
+        );
     }
 }

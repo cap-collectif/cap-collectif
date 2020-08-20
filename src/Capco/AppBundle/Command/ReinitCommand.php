@@ -416,6 +416,8 @@ class ReinitCommand extends Command
             $output
         );
 
+        $this->translateBaseParameters($output);
+
         $this->progressBarProcessor->finish();
 
         $event = $this->stopwatch->stop('loadFixtures');
@@ -537,6 +539,18 @@ class ReinitCommand extends Command
                 'capco:reset:default-locale' => [
                     '--code' => 'fr-FR',
                     '--locale' => 'french',
+                ],
+            ],
+            $output
+        );
+    }
+
+    private function translateBaseParameters(OutputInterface $output): void
+    {
+        $this->runCommands(
+            [
+                'capco:reset:translate-parameters' => [
+                    '--defaultLocale' => 'fr-FR',
                 ],
             ],
             $output

@@ -56,3 +56,7 @@ services:
     Capco\AppBundle\Command\ResetDefaultLocaleCommand:
         arguments:
             $name: 'capco:reset:default-locale'
+
+    Capco\AppBundle\Command\TranslateBasicParameters:
+        arguments:
+            $name: 'capco:reset:translate-parameters'

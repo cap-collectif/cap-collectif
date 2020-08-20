@@ -190,6 +190,7 @@ class LoadProdDataCommand extends Command
             ],
             $output
         );
+        $this->translateBaseParameters($output);
     }
 
     protected function loadToggles(OutputInterface $output, string $env = 'dev')
@@ -201,6 +202,18 @@ class LoadProdDataCommand extends Command
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
+    }
+
+    private function translateBaseParameters(OutputInterface $output): void
+    {
+        $this->runCommands(
+            [
+                'capco:reset:translate-parameters' => [
+                    '--defaultLocale' => 'fr-FR',
+                ],
+            ],
+            $output
+        );
     }
 
     private function runCommands(array $commands, $output)
