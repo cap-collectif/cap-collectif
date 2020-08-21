@@ -349,11 +349,16 @@ EOF;
         $row[] = $val;
     }
 
+    /**
+     * We have to make sure the string is unique for each step.
+     */
     public static function getFilename(AbstractStep $step, string $extension = '.csv'): string
     {
         $filename = '';
         if ($step->getProject()) {
             $filename .= $step->getProject()->getSlug() . '_';
+        } else {
+            $filename .= $step->getId() . '_';
         }
         $filename .= $step->getSlug();
 

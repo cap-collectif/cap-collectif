@@ -2,16 +2,18 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Behat\Symfony2Extension\Context\KernelDictionary;
-use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Type;
-use Box\Spout\Reader\CSV\Reader;
-use Box\Spout\Reader\Common\Creator\ReaderFactory;
-use Box\Spout\Reader\ReaderInterface;
 use PHPUnit\Framework\Assert;
+use Box\Spout\Common\Entity\Row;
+use Box\Spout\Reader\CSV\Reader;
+use Behat\Gherkin\Node\PyStringNode;
+use Box\Spout\Reader\ReaderInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Box\Spout\Reader\Common\Creator\ReaderFactory;
+use Behat\Symfony2Extension\Context\KernelDictionary;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Capco\AppBundle\Command\CreateStepContributorsCommand;
 
 class ExportContext implements KernelAwareContext
 {
@@ -71,6 +73,21 @@ class ExportContext implements KernelAwareContext
 
         $lines = $this->getFileLines($path);
         Assert::assertCount($rows, $lines);
+    }
+
+    /**
+     * @Then exported step contributors files should match their snapshots
+     */
+    public function exportedStepContributorsFilesShouldMatch()
+    {
+        $steps = $this->kernel->getContainer()->get(AbstractStepRepository::class)->findAll();
+        foreach ($steps as $step) {
+            if ($step->isParticipative()) {
+                $fileName = CreateStepContributorsCommand::getFilename($step);
+                echo 'Checking ' . $fileName . ' snapshot…' . PHP_EOL ;
+                $this->exportedFileTypeFileWithNameShouldLooksLikeItsSnapshot('csv', $fileName);
+            }
+        }
     }
 
     /**

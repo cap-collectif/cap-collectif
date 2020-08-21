@@ -74,7 +74,7 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
               },
             },
           ],
-          isIndexationDone: false,
+          isIndexationDone: true,
         },
       },
     });
@@ -121,7 +121,7 @@ describe('Internal|updateQuestionnaireConfiguration mutation', () => {
     expect(response).toMatchSnapshot({
       updateQuestionnaireConfiguration: {
         questionnaire: {
-          isIndexationDone: false,
+          isIndexationDone: true,
           questions: [{ choices: { edges: [], totalCount: 0 } }],
         },
       },

@@ -55,9 +55,19 @@ class CreateStepContributorsCommand extends BaseExportCommand
         parent::__construct($exportUtils);
     }
 
+    /**
+     * We have to make sure the string is unique for each step.
+     */
     public static function getFilename(AbstractStep $step): string
     {
-        return self::getShortenedFilename('participants_' . $step->getSlug());
+        $slug = '';
+        if ($step->getProject()) {
+            $slug .= $step->getProject()->getSlug() . '_';
+        } else {
+            $slug .= $step->getId() . '_';
+        }
+        $slug .= $step->getSlug();
+        return self::getShortenedFilename('participants_' . $slug);
     }
 
     public function generateSheet(
@@ -154,11 +164,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
                 $output->writeln("<fg=white>Examining step ${stepSlug} of type ${type}</>");
             }
             if (
-                $step instanceof CollectStep ||
-                $step instanceof SelectionStep ||
-                $step instanceof QuestionnaireStep ||
-                $step instanceof ConsultationStep ||
-                $step instanceof Consultation
+                $step->isParticipative()
             ) {
                 $fileName = self::getFilename($step);
                 $output->writeln("\t<info>Generating ${fileName} sheet as ${type}</info>");

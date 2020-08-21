@@ -120,38 +120,7 @@ Scenario: Admin wants to export consultation steps participants
   Given I run a command "capco:export:step-contributors" with parameters:
     | --delimiter |,|
   Then the command exit code should be 0
-  And exported "csv" file with name "participants_questionnaire-step-pour-admins.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-questions-chez-youpie.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions-pour-conquerir-le-monde.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions-pour-la-capcobeer.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions-liberer-les-nains-de-jardin.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions-fermee.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions-1.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-avec-vote-simple-limite-2.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions-pour-la-force.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-avec-vote-classement-limite.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions-avec-questions.csv" should match its snapshot
-  And exported "csv" file with name "participants_collecte-des-propositions-avec-questions-qui-va-etre-jetee.csv" should match its snapshot
-  And exported "csv" file with name "participants_depot-avec-vote.csv" should match its snapshot
-  And exported "csv" file with name "participants_questionnaire-des-jo-2024.csv" should match its snapshot
-  And exported "csv" file with name "participants_questionnaire.csv" should match its snapshot
-  And exported "csv" file with name "participants_etape-de-questionnaire-fermee.csv" should match its snapshot
-  And exported "csv" file with name "participants_questionnaire-step-pour-group2.csv" should match its snapshot
-  And exported "csv" file with name "participants_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels.csv" should match its snapshot
-  And exported "csv" file with name "participants_questionnaire-step-pour-admins.csv" should match its snapshot
-  And exported "csv" file with name "participants_selection-de-questions-avec-vote-classement-limite.csv" should match its snapshot
-  And exported "csv" file with name "participants_selection.csv" should match its snapshot
-  And exported "csv" file with name "participants_vainqueur.csv" should match its snapshot
-  And exported "csv" file with name "participants_fermee.csv" should match its snapshot
-  And exported "csv" file with name "participants_selection-avec-vote-selon-le-budget.csv" should match its snapshot
-  And exported "csv" file with name "participants_realisation.csv" should match its snapshot
-  And exported "csv" file with name "participants_selection-a-venir.csv" should match its snapshot
-  And exported "csv" file with name "participants_selection-avec-vote-simple.csv" should match its snapshot
-  And exported "csv" file with name "participants_selection-avec-vote-budget-limite.csv" should match its snapshot
-  And exported "csv" file with name "participants_selection-avec-vote-classement-limite.csv" should match its snapshot
-  And exported "csv" file with name "participants_etape-de-multi-consultation-export.csv" should match its snapshot
-  And exported "csv" file with name "participants_etape-de-depot-des-exports.csv" should match its snapshot
+  And exported step contributors files should match their snapshots
 
 Scenario: Admin wants to export events
   Given I run a command "capco:export:events" with parameters:

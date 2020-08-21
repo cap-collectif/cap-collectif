@@ -400,13 +400,16 @@ EOF;
         }
     }
 
+    /**
+     * We have to make sure the string is unique for each step.
+     */
     public static function getFilename(string $projectSlug, bool $isOnlyDecision): string
     {
         if ($isOnlyDecision) {
-            return "project-${projectSlug}-decision.csv";
+            return self::getShortenedFilename("project-${projectSlug}-decision");
         }
 
-        return "project-${projectSlug}-analysis.csv";
+        return self::getShortenedFilename("project-${projectSlug}-analysis");
     }
 
     protected function getPath(string $projectSlug, bool $isOnlyDecision): string

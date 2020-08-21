@@ -205,7 +205,7 @@ Object {
     },
     Object {
       "enabled": true,
-      "type": "unstable__multilangue",
+      "type": "multilangue",
     },
     Object {
       "enabled": false,

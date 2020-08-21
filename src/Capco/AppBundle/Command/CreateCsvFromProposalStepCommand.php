@@ -391,7 +391,7 @@ EOF;
         string $extension = '.csv'
     ): string {
         return self::getShortenedFilename(
-            sprintf('%s_%s', $selectionStep->getProject()->getSlug(), $selectionStep->getSlug()),
+            sprintf('%s_%s', $selectionStep->getProject() ? $selectionStep->getProject()->getSlug() : $selectionStep->getId(), $selectionStep->getSlug()),
             $extension
         );
     }

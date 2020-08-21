@@ -67,6 +67,9 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         parent::__construct($exportUtils);
     }
 
+    /**
+     * We have to make sure the string is unique for each step.
+     */
     public static function getFilename(string $eventSlug): string
     {
         return self::getShortenedFilename('participants-' . $eventSlug);
