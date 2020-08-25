@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocaleController extends AbstractFOSRestController
 {
@@ -19,17 +20,20 @@ class LocaleController extends AbstractFOSRestController
     private $router;
     private $userDefaultLocaleMutation;
     private $defaultLocaleCodeDataloader;
+    private $translator;
 
     public function __construct(
         LocaleRepository $localeRepository,
         RouterInterface $router,
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader,
-        SetUserDefaultLocaleMutation $userDefaultLocaleMutation
+        SetUserDefaultLocaleMutation $userDefaultLocaleMutation,
+        TranslatorInterface $translator
     ) {
         $this->localeRepository = $localeRepository;
         $this->router = $router;
         $this->userDefaultLocaleMutation = $userDefaultLocaleMutation;
         $this->defaultLocaleCodeDataloader = $defaultLocaleCodeDataloader;
+        $this->translator = $translator;
     }
 
     /**
@@ -58,6 +62,8 @@ class LocaleController extends AbstractFOSRestController
         $request->setLocale($localeCode);
         $keptParams['_locale'] = $localeCode;
 
+        $this->handleCharter($keptParams);
+
         try {
             $redirectPath = $this->router->generate($routeName, $keptParams);
             $defaultLocaleCode = $this->defaultLocaleCodeDataloader->__invoke();
@@ -75,5 +81,21 @@ class LocaleController extends AbstractFOSRestController
             'locale' => $localeCode,
             'path' => $redirectPath,
         ]);
+    }
+
+    /**
+     * Charter is a particular case where we have to translate the slug.
+     */
+    private function handleCharter(array &$params): void
+    {
+        if (isset($params['slug'])) {
+            foreach ($this->localeRepository->findPublishedLocales() as $locale) {
+                $translation = $this->translator->trans('charter', [], 'CapcoAppBundle', $locale->getCode());
+                if ($params['slug'] === strtolower($translation)) {
+                $params['slug'] = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle', $params['_locale']));
+                break;
+                }
+            }
+        }
     }
 }
