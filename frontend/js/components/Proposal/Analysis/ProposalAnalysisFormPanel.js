@@ -269,7 +269,7 @@ const mapStateToProps = (state: GlobalState, { proposal, userId }: Props) => {
       responses: defaultResponses,
       comment: analysis?.comment,
       status: analysis?.state,
-      validate: analysis?.state !== 'IN_PROGRESS',
+      validate: analysis && analysis.state !== 'IN_PROGRESS',
     },
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
     initialStatus: initialStatusValue !== 'IN_PROGRESS' ? initialStatusValue : null,

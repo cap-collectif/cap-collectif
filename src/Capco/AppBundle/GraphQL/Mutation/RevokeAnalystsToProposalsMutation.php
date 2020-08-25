@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -25,7 +26,7 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
     private $globalIdResolver;
     private $em;
     private $builder;
-    /** @var ProposalAnalystRepository $proposalAnalystRepository */
+    /** @var ProposalAnalystRepository */
     private $proposalAnalystRepository;
     private $propsalDeci;
     private $authorizationChecker;
@@ -81,7 +82,10 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
         }
 
         //   check if viewer is not analyst in proposal list
-        if ($this->isViewerAnalystOfProposals($proposals, $viewer)) {
+        if (
+            $this->isViewerAnalystOfProposals($proposals, $viewer) &&
+            \in_array(GlobalId::toGlobalId('User', $viewer->getId()), $analystIds, true)
+        ) {
             return $this->buildPayload(
                 $connection,
                 $viewer,
