@@ -124,7 +124,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
   </ProjectAdminFormstyle__ProjectBoxHeader>
   <FieldArray
     component={[Function]}
-    formName={true}
+    formName="stepForm"
     name="statuses"
   />
   <Button
@@ -318,7 +318,7 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
   </ProjectAdminFormstyle__ProjectBoxHeader>
   <FieldArray
     component={[Function]}
-    formName={true}
+    formName="stepForm"
     name="statuses"
   />
   <Button

@@ -98,7 +98,12 @@ export const ProjectAdminSelectionStepForm = ({
         label={<FormattedMessage id="admin.fields.step.allowingProgressSteps" />}
       />
       {renderSubSection('admin.fields.step.statuses')}
-      <FieldArray name="statuses" component={StepStatusesList} formName statuses={statuses} />
+      <FieldArray
+        name="statuses"
+        component={StepStatusesList}
+        formName={formName}
+        statuses={statuses}
+      />
       <Button
         id="js-btn-create-step-status"
         bsStyle="primary"
