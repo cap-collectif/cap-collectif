@@ -20,6 +20,22 @@ exports[`<LoginSocialButton /> should render correctly 1`] = `
 </LoginSocialButton__LinkButton>
 `;
 
+exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`] = `
+<LoginSocialButton__GrandLyonConnectButton
+  type="grandLyonConnect"
+>
+  <a
+    href="/login/openid?_destination=http://localhost/"
+    title="openId"
+  >
+    <SocialIcon
+      className="loginIcon"
+      name="grandLyonConnect"
+    />
+  </a>
+</LoginSocialButton__GrandLyonConnectButton>
+`;
+
 exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] = `
 <LoginSocialButton__LinkButton
   buttonColor="#000000"

@@ -88,6 +88,7 @@ export const ICON_NAME: {
   search: 'search',
   newUser: 'new-user',
   locationTarget: 'locationTarget',
+  grandLyonConnect: 'grandLyonConnect'
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -173,6 +174,7 @@ export const ICON_NAME: {
   search: 'search',
   newUser: 'new-user',
   locationTarget: 'locationTarget',
+  grandLyonConnect: 'grandLyonConnect',
 };
 
 type Props = {|
@@ -355,6 +357,8 @@ const getIcon = name => {
       return <Icons.NewUser />;
     case 'locationTarget':
       return <Icons.LocationTarget />;
+    case 'grandLyonConnect':
+      return <Icons.GrandLyonConnect />;
     default:
       return <div />;
   }

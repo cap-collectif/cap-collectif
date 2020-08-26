@@ -161,12 +161,32 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
   }
 `;
 
+const GrandLyonConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  position: relative;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  a {
+    width: 100%;
+  }
+`;
+
 export default class LoginSocialButton extends React.Component<Props, State> {
   render() {
     const { type, switchUserMode, text, labelColor, buttonColor } = this.props;
     const redirectUri = switchUserMode
       ? `${baseUrl}/sso/switch-user`
       : `${window && window.location.href}`;
+
+    if(text === "grandLyonConnect") {
+      return <GrandLyonConnectButton type={text} labelColor={labelColor} buttonColor={buttonColor}>
+        <a href={getButtonLinkForType(type, redirectUri)} title={type}>
+          <SocialIcon className="loginIcon" name={text} />
+        </a>
+      </GrandLyonConnectButton>;
+    }
+
     return (
       <LinkButton type={type} labelColor={labelColor} buttonColor={buttonColor}>
         <SocialIcon className="loginIcon" name={type} />

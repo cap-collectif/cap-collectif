@@ -14,6 +14,16 @@ describe('<LoginSocialButton />', () => {
     const wrapper = shallow(<LoginSocialButton {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render correctly with grandLyonConnect', () => {
+    const props = {
+      type: 'openId',
+      text: 'grandLyonConnect',
+    };
+    const wrapper = shallow(<LoginSocialButton {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render correctly with switchusermode', () => {
     const props = {
       type: 'openId',
