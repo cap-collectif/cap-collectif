@@ -54,7 +54,6 @@ export const Validation: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElemen
 
 export const AnalysisForm: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   margin-top: 100px;
-  overflow: scroll;
   padding: 20px;
   background: ${colors.white};
 `;
