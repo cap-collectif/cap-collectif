@@ -3,7 +3,19 @@
 exports[`<ProposalLeafletMap /> should not render a map with visible = false 1`] = `""`;
 
 exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] = `
-<Fragment>
+<ProposalLeafletMapstyle__MapContainer
+  isMobile={false}
+>
+  <Address
+    debounce={1200}
+    getAddress={[Function]}
+    getPosition={[Function]}
+    id="address"
+    onChange={[Function]}
+    placeholder="proposal.map.form.placeholder"
+    showSearchBar={true}
+    value={null}
+  />
   <ProposalLeafletMapstyle__StyledMap
     center={
       Object {
@@ -183,13 +195,9 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         </ProposalLeafletMapstyle__BlankPopup>
       </ForwardRef(Leaflet(Marker))>
     </ForwardRef(Leaflet(MarkerClusterGroup))>
-    <Connect(SearchAddress)
-      getPosition={[Function]}
-      isMobile={false}
-    />
     <ForwardRef(Leaflet(ZoomControl))
       position="bottomright"
     />
   </ProposalLeafletMapstyle__StyledMap>
-</Fragment>
+</ProposalLeafletMapstyle__MapContainer>
 `;

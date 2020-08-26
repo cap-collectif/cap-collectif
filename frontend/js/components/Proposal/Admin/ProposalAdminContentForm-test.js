@@ -16,7 +16,7 @@ describe('<ProposalAdminContentForm />', () => {
     summary: null,
     author: { id: 'toto', label: 'Toto', value: 'toto' },
     theme: null,
-    addresstext: null,
+    addressText: null,
     category: null,
     district: null,
     address: null,

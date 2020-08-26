@@ -3,6 +3,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { Panel } from 'react-bootstrap';
 import colors from '~/utils/colors';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
+import { getStyleSearchBarAddress } from '~/components/Form/Address/Address.style';
 
 export const PanelHeader: StyledComponent<{}, {}, typeof Panel.Heading> = styled(Panel.Heading)`
   display: flex;
@@ -29,6 +30,7 @@ export const MapViewContent: StyledComponent<{}, {}, HTMLDivElement> = styled.di
 `;
 
 export const MapContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -43,6 +45,10 @@ export const MapContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 
   .fields {
     flex: 1;
+  }
+
+  .search-address {
+    ${getStyleSearchBarAddress('left')};
   }
 `;
 

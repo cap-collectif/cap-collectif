@@ -20,9 +20,10 @@ import {
   CLOSED_MARKER,
   OPENED_MARKER,
   locationMarkerCode,
+  MapContainer,
 } from './ProposalLeafletMap.style';
 import { bootstrapGrid } from '~/utils/sizes';
-import SearchAddress from '~/components/Map/SearchAddress/SearchAddress';
+import Address from '~/components/Form/Address/Address';
 
 type MapCenterObject = {|
   lat: number,
@@ -163,6 +164,7 @@ export const ProposalLeafletMap = ({
   const slickRef = useRef(null);
   const [isMobileSliderOpen, setIsMobileSliderOpen] = useState(false);
   const [initialSlide, setInitialSlide] = useState<number | null>(null);
+  const [address, setAddress] = useState(null);
   const { width } = useResize();
   const isMobile = width < bootstrapGrid.smMin;
 
@@ -175,7 +177,20 @@ export const ProposalLeafletMap = ({
   }
 
   return (
-    <>
+    <MapContainer isMobile={isMobile}>
+      <Address
+        id="address"
+        getPosition={(lat, lng) => flyToPosition(mapRef, lat, lng)}
+        getAddress={addressSelected =>
+          flyToPosition(mapRef, addressSelected.latLng.lat, addressSelected.latLng.lng)
+        }
+        showSearchBar={!isMobile}
+        debounce={1200}
+        value={address}
+        onChange={setAddress}
+        placeholder="proposal.map.form.placeholder"
+      />
+
       <StyledMap
         center={defaultMapOptions.center}
         zoom={defaultMapOptions.zoom}
@@ -202,7 +217,7 @@ export const ProposalLeafletMap = ({
           showCoverageOnHover={false}
           zoomToBoundsOnClick
           maxClusterRadius={30}>
-          {markers?.length &&
+          {markers?.length > 0 &&
             markers.map((mark, key) => {
               const iconUrl = key === initialSlide ? OPENED_MARKER : CLOSED_MARKER;
               const size = key === initialSlide ? OPENED_MARKER_SIZE : CLOSED_MARKER_SIZE;
@@ -241,10 +256,7 @@ export const ProposalLeafletMap = ({
               data={geoJson.district}
             />
           ))}
-        <SearchAddress
-          getPosition={(lat, lng) => flyToPosition(mapRef, lat, lng)}
-          isMobile={isMobile}
-        />
+
         {!isMobile && <ZoomControl position="bottomright" />}
       </StyledMap>
       {isMobileSliderOpen && isMobile && (
@@ -263,9 +275,10 @@ export const ProposalLeafletMap = ({
           ))}
         </SliderPane>
       )}
-    </>
+    </MapContainer>
   );
 };
+
 ProposalLeafletMap.defaultProps = {
   proposals: [],
   defaultMapOptions: {

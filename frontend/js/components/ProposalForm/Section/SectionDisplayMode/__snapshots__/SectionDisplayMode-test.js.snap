@@ -203,6 +203,22 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
           values={Object {}}
         />
         <SectionDisplayModestyle__MapContainer>
+          <Field
+            addressProps={
+              Object {
+                "getAddress": [Function],
+                "getPosition": [Function],
+              }
+            }
+            component={[Function]}
+            debounce={1200}
+            divClassName="search-address"
+            formName="proposal-form-admin-configuration"
+            id="address"
+            name="address"
+            placeholder="proposal.map.form.placeholder"
+            type="address"
+          />
           <Map
             center={
               Array [
@@ -211,6 +227,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
               ]
             }
             className="map"
+            doubleClickZoom={false}
             style={
               Object {
                 "zIndex": 1,
@@ -219,10 +236,6 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
             zoom={10}
             zoomControl={false}
           >
-            <Connect(SearchAddress)
-              address=""
-              getPosition={[Function]}
-            />
             <ForwardRef(Leaflet(TileLayer))
               attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
               url="https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"

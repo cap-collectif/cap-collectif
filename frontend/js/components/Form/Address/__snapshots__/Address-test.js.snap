@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Address /> renders correctly 1`] = `
+<PlacesAutocomplete
+  debounce={200}
+  highlightFirstSuggestion={false}
+  onChange={[MockFunction]}
+  onError={[Function]}
+  onSelect={[Function]}
+  searchOptions={Object {}}
+  shouldFetchSuggestions={true}
+  value="12 rue des tulipes"
+>
+  <Component />
+</PlacesAutocomplete>
+`;
+
+exports[`<Address /> renders correctly when hide search bar 1`] = `
+<PlacesAutocomplete
+  debounce={200}
+  highlightFirstSuggestion={false}
+  onChange={[MockFunction]}
+  onError={[Function]}
+  onSelect={[Function]}
+  searchOptions={Object {}}
+  shouldFetchSuggestions={true}
+  value="12 rue des tulipes"
+>
+  <Component />
+</PlacesAutocomplete>
+`;
+
+exports[`<Address /> renders correctly with get address 1`] = `
+<PlacesAutocomplete
+  debounce={200}
+  highlightFirstSuggestion={false}
+  onChange={[MockFunction]}
+  onError={[Function]}
+  onSelect={[Function]}
+  searchOptions={Object {}}
+  shouldFetchSuggestions={true}
+  value="12 rue des tulipes"
+>
+  <Component />
+</PlacesAutocomplete>
+`;
+
+exports[`<Address /> renders correctly with get position of user 1`] = `
+<PlacesAutocomplete
+  debounce={200}
+  highlightFirstSuggestion={false}
+  onChange={[MockFunction]}
+  onError={[Function]}
+  onSelect={[Function]}
+  searchOptions={Object {}}
+  shouldFetchSuggestions={true}
+  value="12 rue des tulipes"
+>
+  <Component />
+</PlacesAutocomplete>
+`;

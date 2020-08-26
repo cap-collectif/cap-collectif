@@ -75,10 +75,10 @@ trait AdminProposalTrait
         $this->waitAndThrowOnFailure(3000, "$('#proposal_address').length > 0");
         $this->fillField('proposal_address', $address);
         $this->waitAndThrowOnFailure(
-            3000,
-            "$('#PlacesAutocomplete__autocomplete-container > div:first-child').length > 0"
+            2000,
+            "$('#list-suggestion > li:first-child').length > 0"
         );
-        $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
+        $this->iClickElement('#list-suggestion > li:first-child');
         $this->iWait(1);
     }
 

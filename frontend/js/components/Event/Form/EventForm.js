@@ -327,25 +327,27 @@ export const EventForm = ({
               selectFieldIsObject
             />
           )}
-          {
-            <Field
-              id="event_address"
-              component={component}
-              type={isDisabled() ? 'text' : 'address'}
-              name="addressText"
-              formName={formName}
-              disabled={isDisabled()}
-              label={
-                <div>
-                  <FormattedMessage id="proposal_form.address" />
-                  <div className="excerpt inline">
-                    <FormattedMessage id="global.optional" />
-                  </div>
+          <Field
+            id="event_address"
+            component={component}
+            type={isDisabled() ? 'text' : 'address'}
+            name="addressText"
+            formName={formName}
+            disabled={isDisabled()}
+            label={
+              <div>
+                <FormattedMessage id="proposal_form.address" />
+                <div className="excerpt inline">
+                  <FormattedMessage id="global.optional" />
                 </div>
-              }
-              placeholder="proposal.map.form.placeholder"
-            />
-          }
+              </div>
+            }
+            placeholder="proposal.map.form.placeholder"
+            addressProps={{
+              getAddressComplete: addressComplete =>
+                dispatch(change(formName, 'address', JSON.stringify(addressComplete))),
+            }}
+          />
           {/* This part is tempory, it will be delete after migration complete */}
           {query.viewer.isSuperAdmin && !isFrontendView && (
             <div className="mb-5">

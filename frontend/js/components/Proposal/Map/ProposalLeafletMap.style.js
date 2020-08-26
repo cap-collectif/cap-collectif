@@ -4,6 +4,7 @@ import { Map, Popup } from 'react-leaflet';
 import Slider from 'react-slick';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
+import { getStyleSearchBarAddress } from '~/components/Form/Address/Address.style';
 
 export const CLOSED_MARKER_SIZE = 40;
 export const OPENED_MARKER_SIZE = 42;
@@ -24,7 +25,7 @@ export const BlankPopup: StyledComponent<{}, {}, typeof Popup> = styled(Popup)`
 `;
 
 export const StyledMap: StyledComponent<{}, {}, typeof Map> = styled(Map)`
-  width: '100%';
+  width: 100%;
 
   .leaflet-control-attribution.leaflet-control {
     display: none;
@@ -50,6 +51,14 @@ export const StyledMap: StyledComponent<{}, {}, typeof Map> = styled(Map)`
       transform: scale(2.5, 2.5);
       opacity: 0;
     }
+  }
+`;
+
+export const MapContainer: StyledComponent<{ isMobile: boolean }, {}, HTMLDivElement> = styled.div`
+  position: relative;
+
+  .address-container {
+    ${props => getStyleSearchBarAddress(props.isMobile ? 'right' : 'left')};
   }
 `;
 

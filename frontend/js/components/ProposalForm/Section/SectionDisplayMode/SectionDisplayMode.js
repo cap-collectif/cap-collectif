@@ -24,7 +24,6 @@ import {
   zoomLevels,
   selector as formSelector,
 } from '~/components/ProposalForm/ProposalFormAdminConfigurationForm';
-import SearchAddress from '~/components/Map/SearchAddress/SearchAddress';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import PopoverToggleView from './PopoverToggleView/PopoverToggleView';
@@ -32,6 +31,7 @@ import environment from '~/createRelayEnvironment';
 import { getCityFromGoogleAddress } from '~/utils/googleMapAddress';
 import type { SectionDisplayMode_proposalForm } from '~relay/SectionDisplayMode_proposalForm.graphql';
 import type { SectionDisplayMode_GeoCodeQueryQueryResponse } from '~relay/SectionDisplayMode_GeoCodeQueryQuery.graphql';
+import type { FormattedAddress, AddressType } from '~/components/Form/Address/Address.type';
 
 const publicToken =
   '***REMOVED***';
@@ -85,6 +85,19 @@ const getStepsDependOfView = (
   });
 };
 
+const getZoomDependOfAddress = (addressType: AddressType) => {
+  switch (addressType) {
+    case 'continent':
+      return zoomLevels[4];
+    case 'route':
+    case 'street_address':
+      return zoomLevels[14];
+    case 'country':
+    default:
+      return zoomLevels[9];
+  }
+};
+
 type Props = {|
   dispatch: Dispatch,
   latitude: number,
@@ -133,8 +146,8 @@ export const SectionDisplayMode = ({
   errorViewEnabled,
 }: Props) => {
   const [isOpen, setIsOpen] = React.useState(true);
-  const [city, setCity] = React.useState(null);
-  const [address, setAddress] = React.useState('');
+  const [previewLocation, setPreviewLocation] = React.useState(null);
+  const [addressSelected, setAddressSelected] = React.useState<?FormattedAddress>(null);
 
   const refMap = React.useRef(null);
   const intl = useIntl();
@@ -145,14 +158,20 @@ export const SectionDisplayMode = ({
   const stepsList = getStepsDependOfView(proposalForm, 'list');
   const stepsMap = getStepsDependOfView(proposalForm, 'map');
 
-  const getLocationUser = async (lat: number, lng: number) => {
-    const dataLocationUser = await loadLocationUser(lat, lng);
-    if (dataLocationUser) {
-      const cityUser = getCityFromGoogleAddress(dataLocationUser.json);
-      setCity(cityUser);
-      setAddress(dataLocationUser?.formatted);
-    }
-  };
+  const getLocationUser = React.useCallback(
+    async (lat: number, lng: number) => {
+      const dataLocationUser = await loadLocationUser(lat, lng);
+
+      if (dataLocationUser) {
+        const cityUser = getCityFromGoogleAddress(dataLocationUser.json);
+        setPreviewLocation(cityUser);
+        dispatch(change(formName, 'address', dataLocationUser?.formatted));
+      }
+    },
+    [dispatch],
+  );
+
+  const setAddress = (address: FormattedAddress) => setAddressSelected(address);
 
   const setPosition = React.useCallback(
     (lat: number, lng: number, zoomId?: number) => {
@@ -167,7 +186,7 @@ export const SectionDisplayMode = ({
         refMap.current.leafletElement.setView([lat, lng], zoomId || zoomBuilding.id);
       }
     },
-    [dispatch],
+    [dispatch, getLocationUser],
   );
 
   React.useEffect(() => {
@@ -182,7 +201,14 @@ export const SectionDisplayMode = ({
       }
       getLocationUser(latitude, longitude);
     }
-  }, [refMap, zoom, isMapDisplay, latitude, longitude, setPosition]);
+  }, [refMap, zoom, isMapDisplay, latitude, longitude, setPosition, getLocationUser]);
+
+  React.useEffect(() => {
+    if (addressSelected) {
+      const zoomLevel = getZoomDependOfAddress(addressSelected.type);
+      setPosition(addressSelected.latLng.lat, addressSelected.latLng.lng, zoomLevel.id);
+    }
+  }, [addressSelected, setPosition]);
 
   return (
     <Panel id="display-mode">
@@ -264,7 +290,12 @@ export const SectionDisplayMode = ({
                 {isMapViewEnabled && (
                   <FormattedMessage
                     id="map.configuration.zone.longitude.latitude.zoom"
-                    values={{ zone: city, latitude: position[0], longitude: position[1], zoom }}
+                    values={{
+                      zone: previewLocation,
+                      latitude: position[0],
+                      longitude: position[1],
+                      zoom,
+                    }}
                   />
                 )}
               </div>
@@ -291,16 +322,31 @@ export const SectionDisplayMode = ({
               <FormattedMessage id="initial-position-of-the-map" tagName="h5" />
 
               <MapContainer>
+                <Field
+                  type="address"
+                  id="address"
+                  divClassName="search-address"
+                  component={component}
+                  name="address"
+                  formName={formName}
+                  placeholder="proposal.map.form.placeholder"
+                  addressProps={{
+                    getPosition: setPosition,
+                    getAddress: setAddress,
+                  }}
+                  debounce={1200}
+                />
+
                 <Map
                   ref={refMap}
                   className="map"
                   center={position}
                   zoom={zoom || 10}
                   zoomControl={false}
+                  doubleClickZoom={false}
                   style={{
                     zIndex: 1,
                   }}>
-                  <SearchAddress getPosition={setPosition} address={address} />
                   <TileLayer
                     attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
                     url={`https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}

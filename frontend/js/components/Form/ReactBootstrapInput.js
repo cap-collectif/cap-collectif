@@ -25,7 +25,8 @@ import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
 import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
-import Address from './Address';
+import Address from './Address/Address';
+import type { AddressProps } from './Address/Address.type';
 import QuestionPrintHelpText from './QuestionPrintHelpText';
 import Notepad from '../Ui/Form/Notepad';
 import RadioImages from './RadioImages';
@@ -122,6 +123,8 @@ export type ParentProps = {|
   typeForm?: $Values<typeof TYPE_FORM>,
   getOpacity?: (opacity: number) => void,
   opacity?: ?number,
+  debounce?: number,
+  addressProps?: AddressProps,
 |};
 
 type Props = {|
@@ -190,7 +193,12 @@ class ReactBootstrapInput extends React.Component<Props> {
     ariaRequired,
     isOtherAllowed,
     min,
+    dateTimeInputProps,
     typeForm,
+    getOpacity,
+    opacity,
+    addressProps,
+    debounce,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -318,7 +326,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     );
 
     if (type === 'datetime') {
-      const { dateTimeInputProps } = this.props;
       formControl = (
         <DateTime
           value={value}
@@ -400,7 +407,15 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'address') {
-      return <Address formName={formName} value={value} {...props} />;
+      return (
+        <Address
+          formName={formName}
+          value={value}
+          debounce={debounce}
+          {...addressProps}
+          {...props}
+        />
+      );
     }
 
     if (type === 'radio-buttons') {
@@ -475,7 +490,9 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'color-picker') {
-      return <ColorPickerInput value={value} {...props} />;
+      return (
+        <ColorPickerInput value={value} getOpacity={getOpacity} opacity={opacity} {...props} />
+      );
     }
 
     if (popover) {

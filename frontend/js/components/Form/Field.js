@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Input from './Input';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import isQuestionnaire from '~/utils/isQuestionnaire';
+import type { AddressProps } from '~/components/Form/Address/Address.type';
 
 type Props = {|
   meta: {
@@ -83,6 +84,8 @@ type Props = {|
   typeForm?: $Values<typeof TYPE_FORM>,
   getOpacity?: (opacity: number) => void,
   opacity?: ?number,
+  debounce?: number,
+  addressProps?: AddressProps,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -127,6 +130,8 @@ class Field extends React.Component<Props> {
       typeForm = TYPE_FORM.DEFAULT,
       getOpacity,
       opacity,
+      debounce,
+      addressProps,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -192,6 +197,8 @@ class Field extends React.Component<Props> {
         dateTimeInputProps={dateTimeInputProps}
         getOpacity={getOpacity}
         opacity={opacity}
+        debounce={debounce}
+        addressProps={addressProps}
         {...input}>
         {children}
       </Input>

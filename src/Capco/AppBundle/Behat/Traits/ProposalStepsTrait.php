@@ -1504,8 +1504,11 @@ trait ProposalStepsTrait
         if ($fillDistrict) {
             $this->selectOption('proposal_district', 'Beauregard');
         }
-        $this->iWait(1);
-        $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
+        $this->waitAndThrowOnFailure(
+            2000,
+            "$('#list-suggestion > li:first-child').length > 0"
+        );
+        $this->iClickElement('#list-suggestion > li:first-child');
         $this->iWait(1);
     }
 

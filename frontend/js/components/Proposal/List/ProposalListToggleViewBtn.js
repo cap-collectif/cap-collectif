@@ -3,7 +3,6 @@ import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Col } from 'react-bootstrap';
-import config from '~/config';
 import type { ProposalViewMode } from '~/redux/modules/proposal';
 import type { ProposalListToggleViewBtn_step } from '~relay/ProposalListToggleViewBtn_step.graphql';
 
@@ -38,15 +37,11 @@ const getDisplayModeEnabled = (step: ProposalListToggleViewBtn_step) => {
   };
 };
 
-const getCountDisplayModeEnabled = (
-  displayModeEnabled,
-  isMobile: boolean,
-  showMapButtonEnabled: boolean,
-) => {
+const getCountDisplayModeEnabled = (displayModeEnabled, showMapButtonEnabled: boolean) => {
   let count = 0;
   if (displayModeEnabled.isGridViewEnabled) count++;
   if (displayModeEnabled.isListViewEnabled) count++;
-  if (displayModeEnabled.isMapViewEnabled && showMapButtonEnabled && !isMobile) count++;
+  if (displayModeEnabled.isMapViewEnabled && showMapButtonEnabled) count++;
   return count;
 };
 
@@ -58,11 +53,7 @@ export const ProposalListToggleViewBtn = ({
 }: Props) => {
   const intl = useIntl();
   const displayModeEnabled = getDisplayModeEnabled(step);
-  const countDisplayModeEnabled = getCountDisplayModeEnabled(
-    displayModeEnabled,
-    config.isMobile,
-    showMapButton,
-  );
+  const countDisplayModeEnabled = getCountDisplayModeEnabled(displayModeEnabled, showMapButton);
 
   return countDisplayModeEnabled > 1 ? (
     <Col xs={12} sm={6} md={4} lg={3}>
@@ -97,7 +88,8 @@ export const ProposalListToggleViewBtn = ({
             <i className="cap cap-th-large" /> <FormattedMessage id="grid" />
           </Button>
         )}
-        {showMapButton && displayModeEnabled.isMapViewEnabled && (
+
+        {displayModeEnabled.isMapViewEnabled && showMapButton && (
           <Button
             bsStyle="default"
             style={{ flex: '1 0 auto' }}

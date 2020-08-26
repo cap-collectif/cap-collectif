@@ -43,7 +43,7 @@ type FormValues = {|
   summary?: ?string,
   author?: { value: Uuid, label: string },
   theme?: ?Uuid,
-  addresstext?: ?string,
+  addressText?: ?string,
   category?: ?Uuid,
   district?: ?Uuid,
   address?: ?string,
@@ -124,9 +124,11 @@ export const checkProposalContent = (
   ) {
     messages.body = 'proposal.constraints.body';
   }
+
   if (proposalForm.usingAddress && !values.address) {
     messages.addressText = 'proposal.constraints.address';
   }
+
   if (
     proposalForm.categories.length &&
     proposalForm.usingCategories &&
@@ -472,6 +474,10 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 formName={formName}
                 label={<FormattedMessage id="proposal_form.address" />}
                 placeholder="proposal.map.form.placeholder"
+                addressProps={{
+                  getAddressComplete: addressComplete =>
+                    change('address', JSON.stringify(addressComplete)),
+                }}
               />
             )}
             <Field

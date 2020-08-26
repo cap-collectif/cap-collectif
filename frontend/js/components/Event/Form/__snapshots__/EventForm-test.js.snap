@@ -23,6 +23,11 @@ exports[`<EventForm /> it does not render toggle on frontend even with remote ev
         type="text"
       />
       <Field
+        addressProps={
+          Object {
+            "getAddressComplete": [Function],
+          }
+        }
         component={[Function]}
         disabled={false}
         formName="EventForm"
@@ -405,6 +410,11 @@ exports[`<EventForm /> it renders correctly a remote event 1`] = `
         selectFieldIsObject={true}
       />
       <Field
+        addressProps={
+          Object {
+            "getAddressComplete": [Function],
+          }
+        }
         component={[Function]}
         disabled={false}
         formName="EventForm"
@@ -922,6 +932,11 @@ exports[`<EventForm /> it renders correctly on BO a toggle with remote event ena
         selectFieldIsObject={true}
       />
       <Field
+        addressProps={
+          Object {
+            "getAddressComplete": [Function],
+          }
+        }
         component={[Function]}
         disabled={false}
         formName="EventForm"
@@ -1406,6 +1421,11 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         selectFieldIsObject={true}
       />
       <Field
+        addressProps={
+          Object {
+            "getAddressComplete": [Function],
+          }
+        }
         component={[Function]}
         disabled={false}
         formName="EventForm"
@@ -1890,6 +1910,11 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         selectFieldIsObject={true}
       />
       <Field
+        addressProps={
+          Object {
+            "getAddressComplete": [Function],
+          }
+        }
         component={[Function]}
         disabled={false}
         formName="EventForm"
@@ -2374,6 +2399,11 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
         selectFieldIsObject={true}
       />
       <Field
+        addressProps={
+          Object {
+            "getAddressComplete": [Function],
+          }
+        }
         component={[Function]}
         disabled={false}
         formName="EventForm"

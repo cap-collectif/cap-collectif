@@ -332,6 +332,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     __fragmentOwner: undefined,
     __fragments: undefined,
     viewEnabled: undefined,
+    address: undefined,
     proposalFormId: props.proposalForm.id,
     districts: getDistrictsTranslated(values.districts, defaultLanguage),
     categories: values.categories.map(category => ({
