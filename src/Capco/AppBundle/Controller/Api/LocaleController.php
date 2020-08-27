@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\GraphQL\Mutation\Locale\SetUserDefaultLocaleMutation;
 use Capco\AppBundle\Locale\DefaultLocaleCodeDataloader;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Repository\PageRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class LocaleController extends AbstractFOSRestController
 {
     private $localeRepository;
+    private $pageRepository;
     private $router;
     private $userDefaultLocaleMutation;
     private $defaultLocaleCodeDataloader;
@@ -24,12 +26,14 @@ class LocaleController extends AbstractFOSRestController
 
     public function __construct(
         LocaleRepository $localeRepository,
+        PageRepository $pageRepository,
         RouterInterface $router,
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader,
         SetUserDefaultLocaleMutation $userDefaultLocaleMutation,
         TranslatorInterface $translator
     ) {
         $this->localeRepository = $localeRepository;
+        $this->pageRepository = $pageRepository;
         $this->router = $router;
         $this->userDefaultLocaleMutation = $userDefaultLocaleMutation;
         $this->defaultLocaleCodeDataloader = $defaultLocaleCodeDataloader;
@@ -62,7 +66,7 @@ class LocaleController extends AbstractFOSRestController
         $request->setLocale($localeCode);
         $keptParams['_locale'] = $localeCode;
 
-        $this->handleCharter($keptParams);
+        $this->handlePageSlug($routeName, $keptParams);
 
         try {
             $redirectPath = $this->router->generate($routeName, $keptParams);
@@ -83,18 +87,38 @@ class LocaleController extends AbstractFOSRestController
         ]);
     }
 
+    private function handlePageSlug(?string $routeName, array &$params): void
+    {
+        if ($routeName && isset($params['slug'], $params['_locale'])) {
+            if ('app_page_show' === $routeName) {
+                $page = $this->pageRepository->getBySlug($params['slug']);
+                if ($page && ($slug = $page->getSlug($params['_locale']))) {
+                    $params['slug'] = $slug;
+                }
+            } else {
+                $this->handleCharterSlug($params);
+            }
+        }
+    }
+
     /**
      * Charter is a particular case where we have to translate the slug.
      */
-    private function handleCharter(array &$params): void
+    private function handleCharterSlug(array &$params): void
     {
-        if (isset($params['slug'])) {
-            foreach ($this->localeRepository->findPublishedLocales() as $locale) {
-                $translation = $this->translator->trans('charter', [], 'CapcoAppBundle', $locale->getCode());
-                if ($params['slug'] === strtolower($translation)) {
-                $params['slug'] = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle', $params['_locale']));
+        foreach ($this->localeRepository->findPublishedLocales() as $locale) {
+            $translation = $this->translator->trans(
+                'charter',
+                [],
+                'CapcoAppBundle',
+                $locale->getCode()
+            );
+            if ($params['slug'] === strtolower($translation)) {
+                $params['slug'] = strtolower(
+                    $this->translator->trans('charter', [], 'CapcoAppBundle', $params['_locale'])
+                );
+
                 break;
-                }
             }
         }
     }
