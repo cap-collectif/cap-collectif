@@ -66,6 +66,7 @@ import AnalysisStatus from '~/components/Analysis/AnalysisStatus/AnalysisStatus'
 import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal';
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
+import ClearableInput from '~ui/Form/Input/ClearableInput';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 
@@ -780,6 +781,7 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
 };
 
 export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) => {
+  const intl = useIntl();
   const { parameters, status, dispatch } = useProjectAdminProposalsContext();
   const hasProposals =
     !!project.firstAnalysisStep?.proposals?.totalCount &&
@@ -806,19 +808,43 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
       <AnalysisHeader>
         <ProjectAdminAnalysisShortcut project={project} />
 
-        <ExportButton
-          onChange={type => {
-            window.open(getProjectExportUrl(type), '_blank');
-          }}
-          disabled={!hasProposals}
-          linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif">
-          <DropdownSelect.Choice key="analysis-export" value="analysis-export">
-            <FormattedMessage id="export.option.analysis-form" />
-          </DropdownSelect.Choice>
-          <DropdownSelect.Choice key="decision-export" value="decision-export">
-            <FormattedMessage id="export.option.opinion-decision" />
-          </DropdownSelect.Choice>
-        </ExportButton>
+        <div>
+          <ExportButton
+            onChange={type => {
+              window.open(getProjectExportUrl(type), '_blank');
+            }}
+            disabled={!hasProposals}
+            linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif">
+            <DropdownSelect.Choice key="analysis-export" value="analysis-export">
+              <FormattedMessage id="export.option.analysis-form" />
+            </DropdownSelect.Choice>
+            <DropdownSelect.Choice key="decision-export" value="decision-export">
+              <FormattedMessage id="export.option.opinion-decision" />
+            </DropdownSelect.Choice>
+          </ExportButton>
+
+          <ClearableInput
+            id="search"
+            name="search"
+            type="text"
+            icon={<i className="cap cap-magnifier" />}
+            disabled={!hasProposals}
+            onClear={() => {
+              if (parameters.filters.term !== null) {
+                dispatch({ type: 'CLEAR_TERM' });
+              }
+            }}
+            initialValue={parameters.filters.term}
+            onSubmit={term => {
+              if (term === '' && parameters.filters.term !== null) {
+                dispatch({ type: 'CLEAR_TERM' });
+              } else if (term !== '' && parameters.filters.term !== term) {
+                dispatch({ type: 'SEARCH_TERM', payload: term });
+              }
+            }}
+            placeholder={intl.formatMessage({ id: 'global.menu.search' })}
+          />
+        </div>
       </AnalysisHeader>
 
       <PickableList

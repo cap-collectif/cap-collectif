@@ -17,11 +17,22 @@ export const AnalysisDataContainer: StyledComponent<{}, {}, HTMLDivElement> = st
 
 export const AnalysisHeader: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin: 1rem 0;
 
   & > p {
     margin: 0;
+    width: 50%;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .clearable-input {
+      margin-left: 10px;
+    }
   }
 `;

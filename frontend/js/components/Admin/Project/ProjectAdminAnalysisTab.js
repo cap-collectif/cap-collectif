@@ -14,9 +14,7 @@ import ProjectAdminAnalysis, {
 } from '~/components/Admin/Project/ProjectAdminAnalysis';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
 import PickableList from '~ui/List/PickableList';
-import AnalysisPlaceholderDashboard, {
-  TYPE_DASHBOARD,
-} from '~/components/Analysis/AnalysisPlaceholderdDashboard/AnalysisPlaceholderDashboard';
+import ProjectAdminAnalysisPlaceholder from './ProjectAdminAnalysisPlaceholder';
 
 type Props = {|
   +projectId: string,
@@ -143,13 +141,7 @@ const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch }: Props) => {
   return (
     <ReactPlaceholder
       ready={false}
-      customPlaceholder={
-        <AnalysisPlaceholderDashboard
-          type={TYPE_DASHBOARD.BO_ANALYSIS}
-          hasError={!!error}
-          fetchData={retry}
-        />
-      }
+      customPlaceholder={<ProjectAdminAnalysisPlaceholder hasError={!!error} fetchData={retry} />}
     />
   );
 };
