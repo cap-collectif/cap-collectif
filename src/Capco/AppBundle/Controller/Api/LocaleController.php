@@ -89,22 +89,25 @@ class LocaleController extends AbstractFOSRestController
 
     private function handlePageSlug(?string $routeName, array &$params): void
     {
-        if ($routeName && isset($params['slug'], $params['_locale'])) {
-            if ('app_page_show' === $routeName) {
+        if (
+            $routeName &&
+            isset($params['slug'], $params['_locale']) &&
+            'app_page_show' === $routeName
+        ) {
+            if (!$this->handleCharterSlug($params)) {
                 $page = $this->pageRepository->getBySlug($params['slug']);
                 if ($page && ($slug = $page->getSlug($params['_locale']))) {
                     $params['slug'] = $slug;
                 }
-            } else {
-                $this->handleCharterSlug($params);
             }
         }
     }
 
     /**
      * Charter is a particular case where we have to translate the slug.
+     * Return true if slug matches a charter.
      */
-    private function handleCharterSlug(array &$params): void
+    private function handleCharterSlug(array &$params): bool
     {
         foreach ($this->localeRepository->findPublishedLocales() as $locale) {
             $translation = $this->translator->trans(
@@ -118,8 +121,10 @@ class LocaleController extends AbstractFOSRestController
                     $this->translator->trans('charter', [], 'CapcoAppBundle', $params['_locale'])
                 );
 
-                break;
+                return true;
             }
         }
+
+        return false;
     }
 }
