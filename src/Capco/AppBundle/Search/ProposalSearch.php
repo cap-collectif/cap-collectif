@@ -233,17 +233,19 @@ class ProposalSearch extends Search
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
-
-        $filters = $this->getFilters($providedFilters);
-
-        foreach ($filters as $key => $value) {
-            if ('proposalAnalysts.analyst.id' === $key) {
-                $term = new Terms($key, $value);
-            } else {
-                $term = new Term([$key => ['value' => $value]]);
+        if (!empty($providedFilters)) {
+            $this->applyInaplicableFilters($boolQuery, $providedFilters);
+            $filters = $this->getFilters($providedFilters);
+            foreach ($filters as $key => $value) {
+                if ('proposalAnalysts.analyst.id' === $key) {
+                    $term = new Terms($key, $value);
+                } else {
+                    $term = new Term([$key => ['value' => $value]]);
+                }
+                $boolQuery->addFilter($term);
             }
-            $boolQuery->addFilter($term);
         }
+
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $projectId]]));
 
         $shouldQuery = new Query\BoolQuery();
@@ -580,20 +582,19 @@ class ProposalSearch extends Search
 
     private function applyInaplicableFilters(BoolQuery $boolQuery, array &$filters): void
     {
-        $inapplicableFilters = [
-            'district' => $filters['district'],
-            'category' => $filters['category'],
-            'status' => $filters['status'],
-        ];
+        $inapplicableFilters = ['district', 'category', 'status'];
         $existsFilters = [];
-        foreach ($inapplicableFilters as $key => $inapplicableFilter) {
-            if (Search::NONE_VALUE === $inapplicableFilter) {
-                $existsFilters[] = new Query\Exists($key);
+        foreach ($inapplicableFilters as $inapplicableFilter) {
+            if (
+                isset($filters[$inapplicableFilter]) &&
+                Search::NONE_VALUE === $filters[$inapplicableFilter]
+            ) {
+                $existsFilters[] = new Query\Exists($inapplicableFilter);
+                unset($filters[$inapplicableFilter]);
             }
         }
         if (!empty($existsFilters)) {
             $boolQuery->addMustNot($existsFilters);
-            unset($filters['district'], $filters['category'], $filters['status']);
         }
     }
 }

@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Project.viewerAssignedProposals fetches viewer's assigned proposals by project, category (NONE) 1`] = `
+Object {
+  "project": Object {
+    "__typename": "Project",
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+    "viewerAssignedProposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "category": null,
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|Project.viewerAssignedProposals fetches viewer's assigned proposals by project, category (pCategoryIdf2). 1`] = `
+Object {
+  "project": Object {
+    "__typename": "Project",
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+    "viewerAssignedProposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "category": Object {
+              "id": "pCategoryIdf2",
+              "name": "Propreté, prévention et gestion des déchets, économie circulaire",
+            },
+            "district": Object {
+              "id": "districtIdf2",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+          },
+        },
+        Object {
+          "node": Object {
+            "category": Object {
+              "id": "pCategoryIdf2",
+              "name": "Propreté, prévention et gestion des déchets, économie circulaire",
+            },
+            "district": Object {
+              "id": "districtIdf1",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
+          },
+        },
+        Object {
+          "node": Object {
+            "category": Object {
+              "id": "pCategoryIdf2",
+              "name": "Propreté, prévention et gestion des déchets, économie circulaire",
+            },
+            "district": Object {
+              "id": "districtIdf1",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY0",
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal|Project.viewerAssignedProposals fetches viewer's assigned proposals by project, district (NONE). 1`] = `
+Object {
+  "project": Object {
+    "__typename": "Project",
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+    "viewerAssignedProposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "category": null,
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|Project.viewerAssignedProposals fetches viewer's assigned proposals by project, district (districtIdf2). 1`] = `
+Object {
+  "project": Object {
+    "__typename": "Project",
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+    "viewerAssignedProposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "category": Object {
+              "id": "pCategoryIdf2",
+              "name": "Propreté, prévention et gestion des déchets, économie circulaire",
+            },
+            "district": Object {
+              "id": "districtIdf2",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+          },
+        },
+        Object {
+          "node": Object {
+            "category": Object {
+              "id": "pCategoryIdf1",
+              "name": "Espaces verts et biodiversité",
+            },
+            "district": Object {
+              "id": "districtIdf2",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYy",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
