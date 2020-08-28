@@ -583,6 +583,10 @@ export default createFragmentContainer(container, {
             color
             name
           }
+          defaultStatus {
+            value: id
+            label: name
+          }
           votable
           votesHelpText
           votesLimit

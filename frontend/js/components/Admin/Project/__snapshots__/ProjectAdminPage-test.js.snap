@@ -685,6 +685,38 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "concreteType": "Status",
+                                "kind": "LinkedField",
+                                "name": "defaultStatus",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": "value",
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": "label",
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "name",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "kind": "ScalarField",
                                 "name": "votable",
                                 "storageKey": null,
@@ -1453,6 +1485,11 @@ fragment ProjectAdminForm_project on Project {
         id
         color
         name
+      }
+      defaultStatus {
+        value: id
+        label: name
+        id
       }
       votable
       votesHelpText
@@ -2359,6 +2396,38 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "concreteType": "Status",
+                                "kind": "LinkedField",
+                                "name": "defaultStatus",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": "value",
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": "label",
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "name",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "kind": "ScalarField",
                                 "name": "votable",
                                 "storageKey": null,
@@ -3127,6 +3196,11 @@ fragment ProjectAdminForm_project on Project {
         id
         color
         name
+      }
+      defaultStatus {
+        value: id
+        label: name
+        id
       }
       votable
       votesHelpText
