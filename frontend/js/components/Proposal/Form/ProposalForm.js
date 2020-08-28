@@ -454,6 +454,7 @@ export class ProposalForm extends React.Component<Props, State> {
             type="textarea"
             id="global.summary"
             maxLength="140"
+            minLength="2"
             autoComplete="off"
             help={proposalForm.summaryHelpText}
             label={

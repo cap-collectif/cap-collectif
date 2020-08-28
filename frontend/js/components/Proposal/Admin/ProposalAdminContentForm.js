@@ -176,6 +176,17 @@ export const validateProposalContent = (
     errors.title = 'question.title.max_length';
   }
 
+  if (
+    proposalForm.usingSummary &&
+    values.summary &&
+    (values.summary.length > 140 || values.summary.length < 2)
+  ) {
+    errors.summary =
+      values.summary.length > 140
+        ? 'proposal.constraints.summary'
+        : 'proposal.constraints.min.summary';
+  }
+
   const responsesError = validateResponses(
     proposalForm.questions,
     values.responses,

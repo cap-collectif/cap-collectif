@@ -86,6 +86,8 @@ type Props = {|
   opacity?: ?number,
   debounce?: number,
   addressProps?: AddressProps,
+  maxLength?: string,
+  minLength?: string,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -132,6 +134,8 @@ class Field extends React.Component<Props> {
       opacity,
       debounce,
       addressProps,
+      maxLength,
+      minLength,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -199,6 +203,8 @@ class Field extends React.Component<Props> {
         opacity={opacity}
         debounce={debounce}
         addressProps={addressProps}
+        maxLength={maxLength}
+        minLength={minLength}
         {...input}>
         {children}
       </Input>

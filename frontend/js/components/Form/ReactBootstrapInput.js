@@ -102,7 +102,8 @@ export type ParentProps = {|
   choices?: Array<any>,
   onChange?: any,
   checkedValue?: ?string,
-  maxLength?: ?string,
+  maxLength?: string,
+  minLength?: string,
   onBlur?: any,
   autoComplete?: string,
   autoFocus?: boolean,
@@ -474,6 +475,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         <React.Fragment>
           <AutosizedTextarea
             maxLength={props.maxLength}
+            minLength={props.minLength}
             value={value}
             {...props}
             aria-describedby={ariaDescribedBy}
