@@ -269,6 +269,7 @@ export default createPaginationContainer(
           orderBy: $orderBy
           term: $term
           userType: $userType
+          step: $step
         )
           @connection(
             key: "ProjectAdminParticipants_participants"

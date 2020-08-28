@@ -77,7 +77,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNDUxNjg5MjAwMDAwO2k6MTtzOjY6IjcwMDA1MiI7fQ==",
         "hasNextPage": true,
       },
-      "totalCount": 14,
+      "totalCount": 10,
     },
   },
 }
@@ -160,7 +160,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
         "hasNextPage": true,
       },
-      "totalCount": 21,
+      "totalCount": 16,
     },
   },
 }
@@ -243,7 +243,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
         "hasNextPage": true,
       },
-      "totalCount": 21,
+      "totalCount": 16,
     },
   },
 }
@@ -324,7 +324,7 @@ Object {
         "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
         "hasNextPage": true,
       },
-      "totalCount": 20,
+      "totalCount": 15,
     },
   },
 }
@@ -334,28 +334,12 @@ exports[`User.votes connection fetches user votes on a specific project 1`] = `
 Object {
   "node": Object {
     "votes": Object {
-      "edges": Array [
-        Object {
-          "cursor": "YToyOntpOjA7aToxNDIyNzQ1MzIwMDAwO2k6MTtzOjU6IjkxMDAyIjt9",
-          "node": Object {
-            "id": "91002",
-            "related": Object {
-              "_id": "proposalComment2",
-              "commentable": Object {
-                "project": Object {
-                  "_id": "project6",
-                  "visibility": "PUBLIC",
-                },
-              },
-            },
-          },
-        },
-      ],
+      "edges": Array [],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDIyNzQ1MzIwMDAwO2k6MTtzOjU6IjkxMDAyIjt9",
+        "endCursor": null,
         "hasNextPage": false,
       },
-      "totalCount": 1,
+      "totalCount": 0,
     },
   },
 }

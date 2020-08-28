@@ -146,7 +146,7 @@ export default createFragmentContainer(ProjectAdminParticipant, {
       votes(contribuableId: $contribuableId) {
         totalCount
       }
-      contributions(contribuableId: $contribuableId) {
+      contributions(contribuableId: $contribuableId, includeTrashed: true) {
         totalCount
       }
       ...UserAvatar_user

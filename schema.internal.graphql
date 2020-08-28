@@ -5460,6 +5460,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the last `n` elements from the list."""
     last: Int
+    orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
 
     """The step in which the user has contributed."""
     step: ID
@@ -5469,7 +5470,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """The user type to filter by."""
     userType: ID
-    orderBy: UserOrder
 
     """Search contributor by his email, username, lastname"""
     term: String
@@ -5495,6 +5495,10 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """Filter contributions by a specific type."""
+    type: ContributionType
+    orderBy: ContributionOrder = {field: CREATED_AT, direction: DESC}
   ): ContributionConnection!
 
   """The cover image associated with the project."""

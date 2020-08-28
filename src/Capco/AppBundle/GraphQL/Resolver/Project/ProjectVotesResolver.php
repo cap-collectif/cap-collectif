@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepVotesCountResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
@@ -27,7 +27,7 @@ class ProjectVotesResolver implements ResolverInterface
         $this->stepVotesCountResolver = $stepVotesCountResolver;
     }
 
-    public function __invoke(Project $project, ?Arg $args = null): Connection
+    public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface
     {
         if (!$args) {
             $args = new Arg(['first' => 0]);

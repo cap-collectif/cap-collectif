@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\SortField;
 use Capco\AppBundle\Enum\UserOrderField;
 use Capco\AppBundle\Enum\UserRole;
@@ -195,12 +196,18 @@ class UserSearch extends Search
             $nestedQueryStep = new Query\Nested();
             $nestedQueryStep->setPath('participationsCountByStep');
             $nestedQueryStep->setQuery(
-                (new Query\BoolQuery())->addFilter(
-                    new Term(['participationsCountByStep.step.id' => $providedFilters['step']])
-                )
+                (new Query\BoolQuery())
+                    ->addFilter(
+                        new Term(['participationsCountByStep.step.id' => $providedFilters['step']])
+                    )
+                    ->addFilter(new Range('participationsCountByStep.count', ['gt' => 0]))
             );
             $boolQuery->addFilter($nestedQueryStep);
-            if (!empty($orderBy) && $orderBy['direction'] && UserOrderField::ACTIVITY === $orderBy['field']) {
+            if (
+                !empty($orderBy) &&
+                $orderBy['direction'] &&
+                UserOrderField::ACTIVITY === $orderBy['field']
+            ) {
                 $sort = [
                     'participationsCountByStep.count' => [
                         'order' => strtolower($orderBy['direction']),
@@ -211,8 +218,23 @@ class UserSearch extends Search
                             ],
                         ],
                     ],
+                    'id' => new \stdClass(),
                 ];
             }
+        } else {
+            $nestedQueryProject = new Query\Nested();
+            $nestedQueryProject->setPath('participationsCountByProject');
+            $nestedQueryProject->setQuery(
+                (new Query\BoolQuery())
+                    ->addFilter(
+                        new Query\Term([
+                            'participationsCountByProject.project.id' => $project->getId(),
+                        ])
+                    )
+                    ->addFilter(new Range('participationsCountByProject.count', ['gt' => 0]))
+            );
+
+            $boolQuery->addFilter($nestedQueryProject);
         }
 
         // add search query that match provided term with selected fields.
@@ -227,6 +249,12 @@ class UserSearch extends Search
                     ->setType('phrase_prefix')
                     ->setFields($multiMatchQueryFields)
             );
+            $sort = [
+                '_score' => [
+                    'order' => 'desc',
+                ],
+                'id' => new \stdClass(),
+            ];
         }
 
         if (isset($providedFilters['vip'])) {
@@ -237,18 +265,13 @@ class UserSearch extends Search
             $boolQuery->addFilter(new Term(['userType.id' => $providedFilters['userType']]));
         }
 
-        $nestedQueryProject = new Query\Nested();
-        $nestedQueryProject->setPath('participationsCountByProject');
-        $nestedQueryProject->setQuery(
-            (new Query\BoolQuery())->addFilter(
-                new Query\Term(['participationsCountByProject.project.id' => $project->getId()])
-            )
-            // No need to add the range query because the participationsCountByProject is added if only there is a contribution.
-        );
-
-        $boolQuery->addFilter($nestedQueryProject);
         $query = new Query($boolQuery);
-        if (empty($sort) && !empty($orderBy) && $orderBy['direction'] && UserOrderField::ACTIVITY === $orderBy['field']) {
+        if (
+            empty($sort) &&
+            !empty($orderBy) &&
+            $orderBy['direction'] &&
+            UserOrderField::ACTIVITY === $orderBy['field']
+        ) {
             $sort = [
                 'participationsCountByProject.count' => [
                     'order' => strtolower($orderBy['direction']),
@@ -257,16 +280,24 @@ class UserSearch extends Search
                         'term' => ['participationsCountByProject.project.id' => $project->getId()],
                     ],
                 ],
+                'id' => new \stdClass(),
             ];
         }
 
         $query->setSort(
-            array_merge($sort, [
-                'createdAt' => [
-                    'order' => 'desc',
-                ],
-                'id' => new \stdClass(),
-            ])
+            empty($sort)
+                ? [
+                    !empty($orderBy) && $orderBy['field']
+                        ? SortField::SORT_FIELD[$orderBy['field']]
+                        : 'createdAt' => [
+                        'order' =>
+                            !empty($orderBy) && $orderBy['direction']
+                                ? OrderDirection::SORT_DIRECTION[$orderBy['direction']]
+                                : 'DESC',
+                    ],
+                    'id' => new \stdClass(),
+                ]
+                : $sort
         );
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);

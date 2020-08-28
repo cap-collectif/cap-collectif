@@ -292,6 +292,7 @@ class VoteSearch extends Search
         }
 
         $boolQuery->addMust($conditions);
+        $boolQuery->addMustNot(new Exists('comment'));
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 

@@ -29,6 +29,7 @@ InternalProject:
                         description: 'The user type to filter by.'
                     orderBy:
                         type: 'UserOrder'
+                        defaultValue: { field: CREATED_AT, direction: DESC }
                     term:
                         type: 'String'
                         description: 'Search contributor by his email, username, lastname'
@@ -130,6 +131,14 @@ InternalProject:
             externalLink:
                 type: 'URI'
                 description: 'URL of the external project.'
+            contributions:
+                args:
+                    type:
+                        type: 'ContributionType'
+                        description: 'Filter contributions by a specific type.'
+                    orderBy:
+                        type: 'InternalContributionOrder'
+                        defaultValue: { field: CREATED_AT, direction: DESC }
             externalContributionsCount:
                 type: 'Int'
                 description: 'Contributions count of the external project.'

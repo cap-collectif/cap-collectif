@@ -28,7 +28,7 @@ const ProjectContributorsQuery = /* GraphQL */ `
                 id
               }
               vip
-              contributions(contribuableId: $contribuableId) {
+              contributions(contribuableId: $contribuableId, includeTrashed: true) {
                 totalCount
               }
               votes(contribuableId: $contribuableId) {

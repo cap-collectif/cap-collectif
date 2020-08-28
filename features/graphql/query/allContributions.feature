@@ -1,7 +1,7 @@
 @allContributions
 Feature: Comment
 
-Scenario: GraphQL admin want to get users including superadmin
+Scenario: GraphQL admin want to get all contributions
   Given I send a GraphQL POST request:
   """
   {
@@ -15,7 +15,7 @@ Scenario: GraphQL admin want to get users including superadmin
   """
   {
     "data": {
-      "allContributions": 723
+      "allContributions": 722
     }
   }
   """

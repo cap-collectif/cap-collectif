@@ -42,7 +42,13 @@ class ProjectContributorResolver implements ResolverInterface
     {
         $totalCount = 0;
         if (!$args) {
-            $args = new Arg(['first' => 0]);
+            $args = new Arg([
+                'first' => 0,
+                'orderBy' => [
+                    'field' => 'CREATED_AT',
+                    'direction' => 'DESC',
+                ],
+            ]);
         }
 
         if (!$project->isExternal()) {

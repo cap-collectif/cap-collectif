@@ -46,7 +46,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 9,
           },
           "contributionsCount": 0,
           "contributors": Object {
@@ -122,7 +122,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 54,
+            "totalCount": 53,
           },
           "contributionsCount": 54,
           "contributors": Object {
@@ -178,11 +178,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 132,
+            "totalCount": 121,
           },
           "contributionsCount": 132,
           "contributors": Object {
-            "totalCount": 80,
+            "totalCount": 81,
           },
           "cover": Object {
             "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
@@ -198,7 +198,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "contributions": Object {
-            "totalCount": 175,
+            "totalCount": 177,
           },
           "contributionsCount": 175,
           "contributors": Object {
@@ -398,7 +398,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
         "node": Object {
           "contributions": Object {
-            "totalCount": 9,
+            "totalCount": 8,
           },
           "contributionsCount": 9,
           "contributors": Object {
@@ -416,7 +416,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 32,
+            "totalCount": 5,
           },
           "contributionsCount": 32,
           "contributors": Object {
@@ -434,7 +434,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
         "node": Object {
           "contributions": Object {
-            "totalCount": 6,
+            "totalCount": 5,
           },
           "contributionsCount": 6,
           "contributors": Object {
@@ -764,7 +764,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "contributions": Object {
-            "totalCount": 175,
+            "totalCount": 177,
           },
           "contributionsCount": 175,
           "id": "UHJvamVjdDpwcm9qZWN0Ng==",
@@ -776,7 +776,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
           "contributions": Object {
-            "totalCount": 132,
+            "totalCount": 121,
           },
           "contributionsCount": 132,
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
@@ -812,7 +812,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
           "contributions": Object {
-            "totalCount": 54,
+            "totalCount": 53,
           },
           "contributionsCount": 54,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
@@ -860,7 +860,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 9,
           },
           "contributionsCount": 0,
           "id": "UHJvamVjdDpwcm9qZWN0SWRm",
@@ -948,7 +948,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 0,
+            "totalCount": 9,
           },
           "contributionsCount": 0,
           "contributors": Object {
@@ -1024,7 +1024,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 54,
+            "totalCount": 53,
           },
           "contributionsCount": 54,
           "contributors": Object {
@@ -1080,11 +1080,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 132,
+            "totalCount": 121,
           },
           "contributionsCount": 132,
           "contributors": Object {
-            "totalCount": 80,
+            "totalCount": 81,
           },
           "cover": Object {
             "url": "https://capco.test/media/default/0001/01/providerReference1.jpg",
@@ -1100,7 +1100,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "contributions": Object {
-            "totalCount": 175,
+            "totalCount": 177,
           },
           "contributionsCount": 175,
           "contributors": Object {

@@ -53,7 +53,9 @@ class ContributionSearch extends Search
 
         $this->applyContributionsFilters(
             $boolQuery,
-            $this->getTypesFilterByResultType($resultType)
+            $this->getTypesFilterByResultType($resultType),
+            false,
+            true
         );
 
         $query = new Query($boolQuery);
@@ -253,44 +255,11 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
-        $cursors = $this->getCursors($response);
-
         if (0 === $limit && null === $cursor) {
             return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
-        foreach ($response->getResults() as $result) {
-            $contributions['types'][$result->getType()][] = $result->getId();
-            $contributions['ids'][] = $result->getId();
-        }
-
-        // We regroup each contribution by type to make a single query for each type.
-        if (!empty($contributions['types'])) {
-            foreach ($contributions['types'] as $contributionType => $contributionsData) {
-                if (ContributionType::isValid(strtoupper($contributionType))) {
-                    $contributions['results'] = array_merge(
-                        $contributions['results'],
-                        $this->entityManager
-                            ->getRepository(
-                                self::CONTRIBUTION_TYPE_CLASS_MAPPING[strtoupper($contributionType)]
-                            )
-                            ->findBy(['id' => $contributionsData])
-                    );
-                }
-            }
-            unset($contributions['types']);
-        } else {
-            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
-        }
-
-        $ids = $contributions['ids'];
-        $results = $contributions['results'];
-        // We recreate the original order from ES.
-        usort($results, static function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-
-        return new ElasticsearchPaginatedResult($results, $cursors, $response->getTotalHits());
+        return $this->getQueryOrderedResults($response);
     }
 
     public function getContributionsByConsultation(
@@ -302,7 +271,6 @@ class ContributionSearch extends Search
         ?string $cursor = null,
         bool $includeTrashed = false
     ): ElasticsearchPaginatedResult {
-        $contributions = ['results' => []];
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(new Query\Term(['consultation.id' => $consultationId]))
@@ -319,42 +287,59 @@ class ContributionSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
         $response = $this->index->search($query);
-        $cursors = $this->getCursors($response);
 
         if (0 === $limit && null === $cursor) {
             return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
-        foreach ($response->getResults() as $result) {
-            $contributions['types'][$result->getType()][] = $result->getId();
-            $contributions['ids'][] = $result->getId();
-        }
+        return $this->getQueryOrderedResults($response);
+    }
 
-        if (!empty($contributions['types'])) {
-            foreach ($contributions['types'] as $type => $contributionsData) {
-                if (ContributionType::isValid(strtoupper($type))) {
-                    $contributions['results'] = array_merge(
-                        $contributions['results'],
-                        $this->entityManager
-                            ->getRepository(
-                                self::CONTRIBUTION_TYPE_CLASS_MAPPING[strtoupper($type)]
-                            )
-                            ->findBy(['id' => $contributionsData])
-                    );
-                }
+    public function getContributionsByProject(
+        string $projectId,
+        string $order,
+        array $filters,
+        int $limit,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
+
+        if (!empty($filters)) {
+            foreach ($filters as $filter) {
+                $boolQuery->addFilter(new Query\Term($filter));
             }
-            unset($contributions['types']);
-        } else {
+        }
+        $boolQuery->addFilter(
+            (new BoolQuery())->addShould([
+                (new BoolQuery())
+                    ->addFilter(new Query\Exists('opinion'))
+                    ->addFilter(new Term(['opinion.published' => ['value' => true]])),
+                (new BoolQuery())
+                    ->addFilter(new Query\Exists('opinionVersion'))
+                    ->addFilter(new Term(['opinionVersion.published' => ['value' => true]])),
+                (new BoolQuery())->addMustNot([
+                    new Query\Exists('opinion'),
+                    new Query\Exists('opinionVersion'),
+                ]),
+            ])
+        );
+
+        $this->applyContributionsFilters($boolQuery, null, true, true);
+
+        $query = new Query($boolQuery);
+        if ($order) {
+            $query->setSort([$this->getSort($order), ['id' => new \stdClass()]]);
+        }
+        $this->applyCursor($query, $cursor);
+        $query->setSize($limit);
+        $response = $this->index->search($query);
+
+        if (0 === $limit && null === $cursor) {
             return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
         }
 
-        $ids = $contributions['ids'];
-        $results = $contributions['results'];
-        usort($results, static function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-
-        return new ElasticsearchPaginatedResult($results, $cursors, $response->getTotalHits());
+        return $this->getQueryOrderedResults($response);
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
@@ -403,6 +388,43 @@ class ContributionSearch extends Search
         }
 
         return $order;
+    }
+
+    private function getQueryOrderedResults(ResultSet $response): ElasticsearchPaginatedResult
+    {
+        // Re-order results back in the order given by doctrine
+        $contributions = ['results' => []];
+        $cursors = $this->getCursors($response);
+        foreach ($response->getResults() as $result) {
+            $contributions['types'][$result->getType()][] = $result->getId();
+            $contributions['ids'][] = $result->getId();
+        }
+
+        if (!empty($contributions['types'])) {
+            foreach ($contributions['types'] as $type => $contributionsData) {
+                if (ContributionType::isValid(strtoupper($type))) {
+                    $contributions['results'] = array_merge(
+                        $contributions['results'],
+                        $this->entityManager
+                            ->getRepository(
+                                self::CONTRIBUTION_TYPE_CLASS_MAPPING[strtoupper($type)]
+                            )
+                            ->findBy(['id' => $contributionsData])
+                    );
+                }
+            }
+            unset($contributions['types']);
+        } else {
+            return new ElasticsearchPaginatedResult([], [], $response->getTotalHits());
+        }
+
+        $ids = $contributions['ids'];
+        $results = $contributions['results'];
+        usort($results, static function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return new ElasticsearchPaginatedResult($results, $cursors, $response->getTotalHits());
     }
 
     private function applyContributionsFilters(

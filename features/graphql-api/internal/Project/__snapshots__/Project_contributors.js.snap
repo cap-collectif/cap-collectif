@@ -156,7 +156,7 @@ Object {
             "contributions": Object {
               "totalCount": 1,
             },
-            "id": "VXNlcjp1c2VyNTIy",
+            "id": "VXNlcjp1c2VyNQ==",
             "userType": Object {
               "id": "1",
             },
@@ -171,7 +171,7 @@ Object {
             "contributions": Object {
               "totalCount": 1,
             },
-            "id": "VXNlcjp1c2VyNQ==",
+            "id": "VXNlcjp1c2VyNTIy",
             "userType": Object {
               "id": "1",
             },
@@ -244,11 +244,11 @@ Object {
             "contributions": Object {
               "totalCount": 50,
             },
-            "id": "VXNlcjp1c2VyMg==",
+            "id": "VXNlcjp1c2VyMQ==",
             "userType": Object {
               "id": "1",
             },
-            "vip": true,
+            "vip": false,
             "votes": Object {
               "totalCount": 0,
             },
@@ -259,11 +259,11 @@ Object {
             "contributions": Object {
               "totalCount": 50,
             },
-            "id": "VXNlcjp1c2VyMQ==",
+            "id": "VXNlcjp1c2VyMg==",
             "userType": Object {
               "id": "1",
             },
-            "vip": false,
+            "vip": true,
             "votes": Object {
               "totalCount": 0,
             },
@@ -338,7 +338,7 @@ Object {
             },
             "vip": true,
             "votes": Object {
-              "totalCount": 1,
+              "totalCount": 0,
             },
           },
         },

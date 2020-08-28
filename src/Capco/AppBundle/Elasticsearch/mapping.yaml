@@ -90,7 +90,6 @@ mappings:
                                     code: { type: keyword }
                     count:
                         type: long
-
             participationsCountByStep:
                 type: nested
                 properties:
