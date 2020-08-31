@@ -1,5 +1,13 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
+{% block title %}
+    {# NEXT_MAJOR: remove default filter #}
+    {% if objectId|default(admin.id(object)) is not null %}
+        {{ 'global.edit.title'|trans({'name': admin.toString(object)|truncate(15) }, 'SonataAdminBundle') }}
+    {% else %}
+        {{ 'title_create'|trans({}, 'SonataAdminBundle')|truncate(15) }}
+    {% endif %}
+{% endblock %}
 
 {% block tab_menu_navbar_header %}
     <div class="navbar-header">
