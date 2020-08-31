@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MediaUploadModal /> renders correctly 1`] = `
+<MediaUploadModal__UploadModal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  bsSize="medium"
+  dialogClassName="custom-modal-dialog"
+  onHide={[MockFunction]}
+  show={true}
+>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <button
+      onClick={[MockFunction]}
+      type="button"
+    >
+      <Icon
+        name="close"
+        size={15}
+      />
+    </button>
+    <div>
+      <FileUpload
+        id="media-upload"
+        onChange={[Function]}
+        typeForm="default"
+        value={null}
+      />
+    </div>
+  </ModalBody>
+</MediaUploadModal__UploadModal>
+`;

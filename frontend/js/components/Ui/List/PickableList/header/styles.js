@@ -5,7 +5,7 @@ import colors from '~/utils/colors';
 import { Container as PickableListBodyContainer } from '~ui/List/PickableList/body/styles';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
-export const CHECKBOX_CELL_WIDTH = '24px';
+export const CHECKBOX_CELL_WIDTH = '16px';
 
 // For the sc-selector tag, see https://github.com/styled-components/stylelint-processor-styled-components/issues/81#issuecomment-467765645
 // It helps the linter to correctly interprets and parse string litterals
@@ -18,7 +18,7 @@ export const Container: StyledComponent<
   className: 'pickableList-header',
 })`
   position: relative;
-  padding: 15px 10px;
+  padding: 8px 15px;
   display: flex;
   align-items: center;
   background: ${colors.formBgc};
@@ -31,9 +31,11 @@ export const Container: StyledComponent<
     min-width: ${CHECKBOX_CELL_WIDTH};
     max-width: ${CHECKBOX_CELL_WIDTH};
     width: ${CHECKBOX_CELL_WIDTH};
-    margin-top: 4px;
+    height: ${CHECKBOX_CELL_WIDTH};
+    margin-top: 2px;
     flex: none;
     align-self: start;
+    margin-right: 8px;
   }
   & + ${/* sc-selector */ PickableListBodyContainer} {
     border-top: none;

@@ -741,6 +741,15 @@ InternalMutation:
                     payloadType: CreateProjectDistrictPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UpdateProjectDistrictMutation", [value])'
 
+            # Media Admin
+            deleteMediaAdmin:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteMediaAdminInput
+                    payloadType: DeleteMediaAdminPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteMediaAdminMutation", [value])'
+
             # Shield admin form
             updateShieldAdminForm:
                 access: "@=hasRole('ROLE_ADMIN')"

@@ -65,7 +65,6 @@ const FileUpload = ({ id, typeForm, className, onChange, disabled, value }: Prop
   return (
     <FileUploadContainer id={id} className={className}>
       <Help typeForm={typeForm}>
-        <FormattedMessage id="max-documents-number" values={{ n: MAX_FILE }} />{' '}
         <FormattedMessage id="max-weight-10mo" />
       </Help>
 

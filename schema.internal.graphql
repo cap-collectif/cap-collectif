@@ -2835,6 +2835,19 @@ type DeleteGroupPayload {
   clientMutationId: String
 }
 
+input DeleteMediaAdminInput {
+  """List of media ID to delete."""
+  ids: [ID!]!
+}
+
+type DeleteMediaAdminPayload {
+  deletedMediaIds: [ID]!
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
 input DeleteOpinionInput {
   """The opinion id"""
   opinionId: ID!
@@ -4213,6 +4226,28 @@ type Media implements UniformResourceLocatable {
   copyright: String
   contentType: String!
   providerReference: String!
+  height: Int
+  width: Int
+}
+
+"""A connection to a list of items."""
+type MediaConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [MediaEdge]
+}
+
+"""An edge in a connection."""
+type MediaEdge {
+  """The item at the end of the edge."""
+  node: Media!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """A media question."""
@@ -4568,6 +4603,7 @@ type Mutation {
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
+  deleteMediaAdmin(input: DeleteMediaAdminInput!): DeleteMediaAdminPayload
   updateShieldAdminForm(input: InternalUpdateShieldAdminFormInput!): UpdateShieldAdminFormPayload
   createOauth2SSOConfiguration(input: InternalCreateOauth2SSOConfigurationInput!): InternalCreateOauth2SSOConfigurationPayload
   updateOauth2SSOConfiguration(input: InternalUpdateOauth2SSOConfigurationInput!): InternalUpdateOauth2SSOConfigurationPayload
@@ -7550,6 +7586,28 @@ type Query {
     """Filter by contributor of section."""
     user: ID
   ): [Section!]!
+
+  """List all medias"""
+  medias(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Search by term."""
+    term: String
+  ): MediaConnection!
 
   """List all locales on the platform."""
   availableLocales(includeDisabled: Boolean): [Locale!]!

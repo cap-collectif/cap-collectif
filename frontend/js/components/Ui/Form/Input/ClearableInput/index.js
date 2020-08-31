@@ -13,13 +13,14 @@ type Props = {|
   initialValue?: ?string,
   disabled?: boolean,
   icon?: React.Node,
+  iconRight?: boolean,
   onSubmit?: (value: string) => void,
   onClear?: () => void,
 |};
 
 const CloseIcon = styled(Icon)``;
 
-const ClearableInputContainer: StyledComponent<
+export const ClearableInputContainer: StyledComponent<
   { hasIcon: boolean, disabled?: boolean },
   {},
   HTMLDivElement,
@@ -89,8 +90,17 @@ const CloseIconContainer: StyledComponent<
   }
 `;
 
+const RightIconContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  padding: 0 30px 0 10px;
+`;
+
 const ClearableInput = ({
   icon,
+  iconRight,
   onSubmit,
   onClear,
   onChange,
@@ -149,8 +159,11 @@ const ClearableInput = ({
     [canClear],
   );
   return (
-    <ClearableInputContainer hasIcon={!!icon} className={className} disabled={disabled}>
-      {icon}
+    <ClearableInputContainer
+      hasIcon={!!icon && !iconRight}
+      className={className}
+      disabled={disabled}>
+      {!iconRight && icon}
       <input disabled={disabled} {...rest} {...input} onChange={onChangeHandler} ref={inputRef} />
       <CloseIconContainer
         ref={closeIconContainerRef}
@@ -159,6 +172,7 @@ const ClearableInput = ({
         onClick={clear}>
         {canClear && <CloseIcon name={ICON_NAME.close} size="0.8rem" />}
       </CloseIconContainer>
+      {!canClear && iconRight && <RightIconContainer>{icon}</RightIconContainer>}
     </ClearableInputContainer>
   );
 };

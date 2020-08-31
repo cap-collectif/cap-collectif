@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
+import { type StyledComponent } from 'styled-components';
 import * as S from './styles';
 import Header from './header';
 import Body from './body';
@@ -15,7 +16,12 @@ type Props = {
   useInfiniteScroll?: boolean,
   hasMore?: boolean,
   loader?: React.Node,
-  children: React.ChildrenArray<React.Element<typeof Header> | React.Element<typeof Body>>,
+  children: React.ChildrenArray<
+    | React.Element<typeof Header>
+    | React.Element<typeof Body>
+    | React.Element<StyledComponent<{}, {}, typeof Body>>
+    | React.Element<StyledComponent<{}, {}, typeof Header>>,
+  >,
 };
 
 export const usePickableList = (): Context => {

@@ -88,7 +88,12 @@ export const ICON_NAME: {
   search: 'search',
   newUser: 'new-user',
   locationTarget: 'locationTarget',
-  grandLyonConnect: 'grandLyonConnect'
+  grandLyonConnect: 'grandLyonConnect',
+  pdfIcon: 'pdfIcon',
+  zipIcon: 'zipIcon',
+  vidIcon: 'vidIcon',
+  docIcon: 'docIcon',
+  fileIcon: 'fileIcon',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -175,6 +180,11 @@ export const ICON_NAME: {
   newUser: 'new-user',
   locationTarget: 'locationTarget',
   grandLyonConnect: 'grandLyonConnect',
+  pdfIcon: 'pdfIcon',
+  zipIcon: 'zipIcon',
+  vidIcon: 'vidIcon',
+  docIcon: 'docIcon',
+  fileIcon: 'fileIcon',
 };
 
 type Props = {|
@@ -359,6 +369,16 @@ const getIcon = name => {
       return <Icons.LocationTarget />;
     case 'grandLyonConnect':
       return <Icons.GrandLyonConnect />;
+    case 'pdfIcon':
+      return <Icons.PdfIcon />;
+    case 'vidIcon':
+      return <Icons.VidIcon />;
+    case 'zipIcon':
+      return <Icons.ZipIcon />;
+    case 'docIcon':
+      return <Icons.DocIcon />;
+    case 'fileIcon':
+      return <Icons.FileIcon />;
     default:
       return <div />;
   }

@@ -26,6 +26,7 @@ import AuthentificationAdminApp from '~/startup/AuthentificationAdminApp';
 import EventAdminEditPageApp from '~/startup/EventAdminEditPageApp';
 import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalProjectAdminAppDeprecated';
 import FontAdminPageApp from '~/startup/FontAdminPageApp';
+import MediaAdminPageApp from '~/startup/MediaAdminPageApp';
 import RedirectIoAdminPageApp from '~/startup/RedirectIoAdminPageApp';
 import appStore from '~/stores/AppStore';
 import AlertBoxApp from '~/startup/AlertBoxApp';
@@ -68,4 +69,5 @@ ReactOnRails.register({
   RedirectIoAdminPageApp,
   LanguageButtonApp,
   UserInviteAdminPageApp,
+  MediaAdminPageApp,
 });

@@ -199,6 +199,13 @@ admin_capco_media_media_upload:
         _sonata_admin: sonata.media.admin.media
     options: { i18n: false }
 
+admin_capco_media_media_list:
+    path: /admin/capco/media/media/list
+    controller: Capco\AdminBundle\Controller\MediaAdminController::listAction
+    defaults:
+        _sonata_admin: sonata.media.admin.media
+    options: { i18n: false }
+
 # Dummy route for fos
 fos_user_profile_show:
     path: /profile/redirect-fos-show

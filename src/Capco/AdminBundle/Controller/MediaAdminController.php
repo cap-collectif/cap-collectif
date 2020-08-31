@@ -8,9 +8,30 @@ use CoopTilleuls\Bundle\CKEditorSonataMediaBundle\Controller\MediaAdminControlle
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
 
 class MediaAdminController extends BaseMediaAdminController
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function listAction(?Request $request = null)
+    {
+        $this->admin->checkAccess('list');
+
+        $datagrid = $this->admin->getDatagrid();
+
+        $formView = $datagrid->getForm()->createView();
+
+        return $this->renderWithExtraParams('CapcoMediaBundle:MediaAdmin:list.html.twig', [
+            'action' => 'list',
+            'form' => $formView,
+            'datagrid' => $datagrid,
+            'root_category' => null,
+            'csrf_token' => $this->getCsrfToken('sonata.batch'),
+        ]);
+    }
+
     public function browserAction()
     {
         if (false === $this->admin->isGranted('LIST')) {
@@ -41,7 +62,7 @@ class MediaAdminController extends BaseMediaAdminController
             'formats' => $formats,
             'media_pool' => $this->get('sonata.media.pool'),
             'base_template' => $this->admin->getTemplate('layout'),
-            'persistent_parameters' => $this->admin->getPersistentParameters()
+            'persistent_parameters' => $this->admin->getPersistentParameters(),
         ]);
     }
 
@@ -70,7 +91,7 @@ class MediaAdminController extends BaseMediaAdminController
             'id' => $media->getId(),
             'url' =>
                 $request->getUriForPath('/media') .
-                $this->get(MediaExtension::class)->path($media, 'reference')
+                $this->get(MediaExtension::class)->path($media, 'reference'),
         ]);
     }
 

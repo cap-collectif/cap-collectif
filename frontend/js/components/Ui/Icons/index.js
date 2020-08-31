@@ -82,4 +82,8 @@ export { default as LocationNotAuthorize } from './svg/location-not-authorize.sv
 export { default as Search } from './svg/search.svg';
 export { default as NewUser } from './svg/new-user.svg';
 export { default as GrandLyonConnect } from './svg/grand-lyon-connect.svg';
-
+export { default as PdfIcon } from './svg/pdf-icn.svg';
+export { default as VidIcon } from './svg/vid-icn.svg';
+export { default as ZipIcon } from './svg/zip-icn.svg';
+export { default as DocIcon } from './svg/doc-icn.svg';
+export { default as FileIcon } from './svg/file-icn.svg';

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MediaAdminFileView /> renders correctly 1`] = `
+<MediaAdminFileView__Container>
+  <Icon
+    color="#ffffff"
+    name="fileIcon"
+    size={15}
+  />
+</MediaAdminFileView__Container>
+`;

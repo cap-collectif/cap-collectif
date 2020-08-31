@@ -1,0 +1,7 @@
+DeleteMediaAdminInput:
+  type: input-object
+  config:
+    fields:
+      ids:
+        type: '[ID!]!'
+        description: 'List of media ID to delete.'

@@ -54,6 +54,17 @@ const colors = {
   secondaryGray: '#6c757d',
   disabledGray: '#eee',
   grayF4: '#f4f4f4',
+  red: '#fd4d4f',
+};
+
+// WIP but usefull. Waiting for the full table with real names
+export const styleGuideColors = {
+  red: '#e02020',
+  darkBlue: '#001b38',
+  gray: '#6b7885',
+  darkGray: '#374850',
+  blue: '#3b88fd',
+  white: '#ffffff',
 };
 
 export const socialColors = {

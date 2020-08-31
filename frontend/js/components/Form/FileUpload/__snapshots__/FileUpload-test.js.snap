@@ -8,15 +8,6 @@ exports[`<FileUpload /> should render correctly 1`] = `
     typeForm="default"
   >
     <FormattedMessage
-      id="max-documents-number"
-      values={
-        Object {
-          "n": 5,
-        }
-      }
-    />
-     
-    <FormattedMessage
       id="max-weight-10mo"
       values={Object {}}
     />
@@ -114,15 +105,6 @@ exports[`<FileUpload /> should render correctly when disabled 1`] = `
   <Help
     typeForm="default"
   >
-    <FormattedMessage
-      id="max-documents-number"
-      values={
-        Object {
-          "n": 5,
-        }
-      }
-    />
-     
     <FormattedMessage
       id="max-weight-10mo"
       values={Object {}}
@@ -222,15 +204,6 @@ exports[`<FileUpload /> should render correctly when in questionnaire form 1`] =
     typeForm="questionnaire"
   >
     <FormattedMessage
-      id="max-documents-number"
-      values={
-        Object {
-          "n": 5,
-        }
-      }
-    />
-     
-    <FormattedMessage
       id="max-weight-10mo"
       values={Object {}}
     />
@@ -328,15 +301,6 @@ exports[`<FileUpload /> should render correctly when no value 1`] = `
   <Help
     typeForm="default"
   >
-    <FormattedMessage
-      id="max-documents-number"
-      values={
-        Object {
-          "n": 5,
-        }
-      }
-    />
-     
     <FormattedMessage
       id="max-weight-10mo"
       values={Object {}}

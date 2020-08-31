@@ -15,7 +15,7 @@ type Props = {|
   onDelete: () => void,
 |};
 
-const convertFileSize = (size: number) => {
+export const convertFileSize = (size: number) => {
   size = Math.abs(parseInt(size, 10));
 
   const formats = [

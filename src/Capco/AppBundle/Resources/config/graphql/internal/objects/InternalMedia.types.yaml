@@ -34,3 +34,7 @@ InternalMedia:
         type: 'String!'
       providerReference:
         type: 'String!'
+      height:
+          type: 'Int'
+      width:
+          type: 'Int'

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Link /> renders correctly 1`] = `
+<Link__Container
+  onMouseLeave={[Function]}
+>
+  <input
+    disabled={true}
+    type="text"
+    value="/url.url"
+  />
+  <CopyToClipboard
+    onCopy={[Function]}
+    text="/url.url"
+  >
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      key="top"
+      overlay={
+        <_default
+          id="tooltip-url-/url.url"
+          style={
+            Object {
+              "transition": "unset",
+              "width": "86px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="copy-link"
+            values={Object {}}
+          />
+        </_default>
+      }
+      placement="top"
+      trigger={
+        Array [
+          "hover",
+          "focus",
+        ]
+      }
+    >
+      <button
+        type="button"
+      >
+        <Icon
+          color="#ffffff"
+          name="link"
+          size={15}
+        />
+      </button>
+    </OverlayTrigger>
+  </CopyToClipboard>
+</Link__Container>
+`;
