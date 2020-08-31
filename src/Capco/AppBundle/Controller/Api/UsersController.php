@@ -156,6 +156,15 @@ class UsersController extends AbstractFOSRestController
         /** @var User $user */
         $user = $this->userManager->createUser();
 
+        if ($this->toggleManager->isActive('multilangue')) {
+            if (isset($submittedData['locale']) && $submittedData['locale']) {
+                $user->setLocale($submittedData['locale']);
+            } else {
+                $user->setLocale($request->getLocale());
+            }
+        }
+        unset($submittedData['locale']);
+
         if ($invitation && $invitation->isAdmin()) {
             $user->addRole(UserRole::ROLE_ADMIN);
         }

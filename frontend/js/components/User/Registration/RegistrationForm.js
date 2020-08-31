@@ -42,9 +42,11 @@ type Props = {|
     id: string,
     type: string,
   }>,
+  locale?: string,
 |};
 
 type FormValues = {
+  locale: string,
   username: string,
   email: string,
   plainPassword: string,
@@ -96,6 +98,7 @@ export const RegistrationForm = ({
   dispatch,
   email,
   questions,
+  locale,
 }: Props) => {
   const privacyPolicyComponent = privacyPolicyRequired ? (
     <PrivacyModal
@@ -126,6 +129,7 @@ export const RegistrationForm = ({
 
   return (
     <form onSubmit={handleSubmit} id="registration-form">
+      <Field name="locale" id="locale" component={renderComponent} value={locale} type="hidden" />
       <Field
         name="username"
         id="username"
@@ -287,6 +291,7 @@ const mapStateToProps = (state: State, props: Props) => {
     questions: props.query ? questions : [],
     responses: formValueSelector(form)(state, 'responses'),
     initialValues: {
+      locale: props.locale,
       questions: props.query ? questions : [],
       responses: props.query ? formatInitialResponsesValues(questions, []) : [],
       email: props.email,

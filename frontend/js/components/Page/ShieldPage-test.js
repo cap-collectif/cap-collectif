@@ -10,6 +10,7 @@ describe('<ShieldPage />', () => {
     submitting: false,
     loginWithOpenId: false,
     byPassAuth: false,
+    locale: 'fr-FR',
   };
 
   it('renders with registration enabled', () => {
@@ -30,6 +31,7 @@ describe('<ShieldPage />', () => {
         loginWithOpenId
         submitting={false}
         onSubmit={jest.fn()}
+        locale="fr-FR"
       />,
     );
     expect(wrapper).toMatchSnapshot();

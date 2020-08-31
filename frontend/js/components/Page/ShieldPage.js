@@ -21,6 +21,7 @@ type Props = {|
   loginWithOpenId: boolean,
   byPassAuth: boolean,
   onSubmit: (e: Event) => void,
+  locale: string,
 |};
 
 const getShieldBody = ({
@@ -68,38 +69,45 @@ const getShieldBody = ({
 const renderRegistrationForm = ({
   error,
   props,
+  locale,
 }: {
   ...ReactRelayReadyState,
   props: ?ShieldPageQueryResponse,
+  locale: string,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
   }
 
-  if (props) return <RegistrationModal query={props} />;
+  if (props) return <RegistrationModal query={props} locale={locale} />;
 
   return null;
 };
 
-export const ShieldPage = (props: Props) => (
-  <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
-    <LoginModal />
+export const ShieldPage = (shieldBodyProps: Props) => {
+  const { locale } = shieldBodyProps;
+  return (
+    <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
+      <LoginModal />
 
-    <QueryRenderer
-      environment={environment}
-      query={graphql`
-        query ShieldPageQuery {
-          ...RegistrationModal_query
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query ShieldPageQuery {
+            ...RegistrationModal_query
+          }
+        `}
+        variables={{}}
+        render={({ error, props, retry }) =>
+          renderRegistrationForm({ error, props, retry, locale })
         }
-      `}
-      variables={{}}
-      render={renderRegistrationForm}
-    />
+      />
 
-    <div className="panel-body">{getShieldBody(props)}</div>
-  </div>
-);
+      <div className="panel-body">{getShieldBody(shieldBodyProps)}</div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
   showRegistration: state.default.features.registration,

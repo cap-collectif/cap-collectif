@@ -33,6 +33,7 @@ type Props = {|
   ...StateProps,
   ...DispatchProps,
   query: RegistrationModal_query,
+  locale?: string,
 |};
 
 export const RegistrationModal = ({
@@ -46,6 +47,7 @@ export const RegistrationModal = ({
   onCloseChart,
   charterBody,
   query,
+  locale,
 }: Props) => (
   <>
     <Modal
@@ -89,7 +91,7 @@ export const RegistrationModal = ({
         )}
         <LoginSocialButtons prefix="registration." />
 
-        <RegistrationForm query={query} />
+        <RegistrationForm query={query} locale={locale} />
 
         {textBottom && (
           <WYSIWYGRender className="text-center small excerpt mt-15" value={textBottom} />

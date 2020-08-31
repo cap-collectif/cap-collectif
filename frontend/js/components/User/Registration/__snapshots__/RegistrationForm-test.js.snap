@@ -6,6 +6,12 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   onSubmit={[MockFunction]}
 >
   <Field
+    component={[Function]}
+    id="locale"
+    name="locale"
+    type="hidden"
+  />
+  <Field
     ariaRequired={true}
     autoComplete="username"
     component={[Function]}
@@ -185,6 +191,12 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   onSubmit={[MockFunction]}
 >
   <Field
+    component={[Function]}
+    id="locale"
+    name="locale"
+    type="hidden"
+  />
+  <Field
     ariaRequired={true}
     autoComplete="username"
     component={[Function]}
@@ -363,6 +375,12 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   id="registration-form"
   onSubmit={[MockFunction]}
 >
+  <Field
+    component={[Function]}
+    id="locale"
+    name="locale"
+    type="hidden"
+  />
   <Field
     ariaRequired={true}
     autoComplete="username"
@@ -579,6 +597,12 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   id="registration-form"
   onSubmit={[MockFunction]}
 >
+  <Field
+    component={[Function]}
+    id="locale"
+    name="locale"
+    type="hidden"
+  />
   <Field
     ariaRequired={true}
     autoComplete="username"

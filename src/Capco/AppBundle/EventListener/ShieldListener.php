@@ -96,7 +96,9 @@ class ShieldListener
         }
 
         $response = new Response(
-            $this->templating->render('CapcoAppBundle:Default:shield.html.twig')
+            $this->templating->render('CapcoAppBundle:Default:shield.html.twig', [
+                'locale' => $request->getLocale(),
+            ])
         );
         $event->setResponse($response);
     }
