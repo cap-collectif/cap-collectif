@@ -450,15 +450,33 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "kind": "ScalarField",
-                      "name": "latMap",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "lngMap",
+                      "concreteType": "GoogleMapsAddress",
+                      "kind": "LinkedField",
+                      "name": "mapCenter",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "lat",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "lng",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "json",
+                          "storageKey": null,
+                        },
+                      ],
                       "storageKey": null,
                     },
                     Object {
@@ -1859,8 +1877,11 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
   usingIllustration
   descriptionMandatory
   canContact
-  latMap
-  lngMap
+  mapCenter {
+    lat
+    lng
+    json
+  }
   zoomMap
   isGridViewEnabled
   isMapViewEnabled

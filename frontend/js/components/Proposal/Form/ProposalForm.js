@@ -55,6 +55,7 @@ import {
   handleVisibilityAccordingToType,
   TRIGGER_FOR,
 } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -530,8 +531,8 @@ export class ProposalForm extends React.Component<Props, State> {
             label={<FormattedMessage id="proposal_form.address" />}
             placeholder="proposal.map.form.placeholder"
             addressProps={{
-              getAddressComplete: addressComplete =>
-                changeProps('address', JSON.stringify(addressComplete)),
+              getAddress: (addressComplete: AddressComplete) =>
+                changeProps('address', JSON.stringify([addressComplete])),
             }}
           />
         )}

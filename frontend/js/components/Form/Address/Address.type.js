@@ -9,7 +9,7 @@ export type FormattedAddress = {|
   |},
 |};
 
-type AddressComplete = {|
+export type AddressComplete = {|
   address_components: Array<{
     long_name: string,
     short_name: string,
@@ -18,11 +18,11 @@ type AddressComplete = {|
   formatted_address: string,
   geometry: {
     location: {
-      lat: Function,
-      lng: Function,
+      lat: number,
+      lng: number,
     },
     location_type: string,
-    viewport: {
+    viewport?: {
       Va: {
         i: number,
         j: number,
@@ -32,13 +32,28 @@ type AddressComplete = {|
         j: number,
       },
     },
-    place_id: string,
-    plus_code: {
-      compound_code: string,
-      global_code: string,
-    },
-    types: string[],
   },
+  place_id?: string,
+  plus_code?: {
+    compound_code: string,
+    global_code: string,
+  },
+  types: string[],
+|};
+
+export type AddressCompleteFormatted = {|
+  address: string,
+  latLng: {
+    lat: number,
+    lng: number,
+  },
+  type: string,
+  address_components: Array<{
+    long_name: string,
+    short_name: string,
+    types: string[],
+  }>,
+  addressOriginal: AddressComplete,
 |};
 
 export type GoogleAddressAPI = {|
@@ -64,9 +79,16 @@ export type GoogleAddressAPI = {|
 
 export type AddressProps = {|
   getPosition?: (lat: number, lng: number) => void,
-  getAddress?: (address: FormattedAddress) => void,
-  getAddressComplete?: (addressComplete: AddressComplete) => void,
+  getAddress?: (address: AddressComplete) => void,
   showSearchBar?: boolean,
 |};
 
-export type AddressType = 'continent' | 'route' | 'street_address' | 'country' | string;
+// AddressType => https://developers.google.com/places/supported_types
+export type AddressType =
+  | 'continent'
+  | 'route'
+  | 'street_address'
+  | 'country'
+  | 'point_of_interest'
+  | 'locality'
+  | string;

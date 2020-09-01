@@ -82,9 +82,7 @@ class ProposalFormUpdateType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
-
-            ->add('latMap', NumberType::class)
-            ->add('lngMap', NumberType::class)
+            ->add('mapCenter', TextType::class)
             ->add('zoomMap', IntegerType::class)
 
             ->add('commentable', CheckboxType::class)

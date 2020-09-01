@@ -40,9 +40,7 @@ Capco\AppBundle\Entity\ProposalForm:
       groups: [ProposalForms]
     zoomMap:
       groups: [ProposalForms]
-    latMap:
-      groups: [ProposalForms]
-    lngMap:
+    mapCenter:
       groups: [ProposalForms]
     commentable:
       groups: [ProposalForms]

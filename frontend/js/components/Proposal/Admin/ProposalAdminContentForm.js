@@ -32,6 +32,7 @@ import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesVal
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import warnResponses from '~/utils/form/warnResponses';
 import renderResponses from '~/components/Form/RenderResponses';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 type ProposalForm = ProposalForm_proposalForm;
 type FormValues = {|
@@ -486,8 +487,8 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 label={<FormattedMessage id="proposal_form.address" />}
                 placeholder="proposal.map.form.placeholder"
                 addressProps={{
-                  getAddressComplete: addressComplete =>
-                    change('address', JSON.stringify(addressComplete)),
+                  getAddress: (addressComplete: AddressComplete) =>
+                    change('address', JSON.stringify([addressComplete])),
                 }}
               />
             )}

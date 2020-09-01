@@ -28,10 +28,14 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import PopoverToggleView from './PopoverToggleView/PopoverToggleView';
 import environment from '~/createRelayEnvironment';
-import { getCityFromGoogleAddress } from '~/utils/googleMapAddress';
+import { formatAddressFromGoogleAddress, getDataFromGoogleAddress } from '~/utils/googleMapAddress';
 import type { SectionDisplayMode_proposalForm } from '~relay/SectionDisplayMode_proposalForm.graphql';
 import type { SectionDisplayMode_GeoCodeQueryQueryResponse } from '~relay/SectionDisplayMode_GeoCodeQueryQuery.graphql';
-import type { FormattedAddress, AddressType } from '~/components/Form/Address/Address.type';
+import type {
+  AddressType,
+  AddressCompleteFormatted,
+  AddressComplete,
+} from '~/components/Form/Address/Address.type';
 
 const publicToken =
   '***REMOVED***';
@@ -88,11 +92,12 @@ const getStepsDependOfView = (
 const getZoomDependOfAddress = (addressType: AddressType) => {
   switch (addressType) {
     case 'continent':
+    case 'country':
       return zoomLevels[4];
     case 'route':
     case 'street_address':
       return zoomLevels[14];
-    case 'country':
+    case 'locality':
     default:
       return zoomLevels[9];
   }
@@ -106,12 +111,16 @@ type Props = {|
   isMapViewEnabled: boolean,
   proposalForm: SectionDisplayMode_proposalForm,
   errorViewEnabled: ?string,
+  dataMap: {
+    json: string,
+    lat: number,
+    lng: number,
+  },
 |};
 
 const USER_LOCATION_QUERY = graphql`
   query SectionDisplayMode_GeoCodeQueryQuery($latitude: Float!, $longitude: Float!) {
     results: geocode(latitude: $latitude, longitude: $longitude) {
-      formatted
       json
     }
   }
@@ -120,12 +129,11 @@ const USER_LOCATION_QUERY = graphql`
 export const loadLocationUser = (
   latitude: number,
   longitude: number,
-): Promise<?{|
-  +formatted: ?string,
+): Promise<{|
   +json: string,
 |}> =>
   new Promise(async resolve => {
-    const response: ?SectionDisplayMode_GeoCodeQueryQueryResponse = await fetchQuery(
+    const response: SectionDisplayMode_GeoCodeQueryQueryResponse = await fetchQuery(
       environment,
       USER_LOCATION_QUERY,
       {
@@ -133,7 +141,8 @@ export const loadLocationUser = (
         longitude,
       },
     );
-    resolve(response ? response.results : null);
+
+    resolve(((response.results: any): {| +json: string |}));
   });
 
 export const SectionDisplayMode = ({
@@ -144,13 +153,14 @@ export const SectionDisplayMode = ({
   isMapViewEnabled,
   proposalForm,
   errorViewEnabled,
+  dataMap,
 }: Props) => {
+  const intl = useIntl();
   const [isOpen, setIsOpen] = React.useState(true);
   const [previewLocation, setPreviewLocation] = React.useState(null);
-  const [addressSelected, setAddressSelected] = React.useState<?FormattedAddress>(null);
+  const [addressSelected, setAddressSelected] = React.useState<?AddressComplete>(null);
 
   const refMap = React.useRef(null);
-  const intl = useIntl();
   const isMapDisplay = isMapViewEnabled && isOpen;
   const position = [latitude || LOCATION_PARIS.lat, longitude || LOCATION_PARIS.lng];
 
@@ -158,55 +168,98 @@ export const SectionDisplayMode = ({
   const stepsList = getStepsDependOfView(proposalForm, 'list');
   const stepsMap = getStepsDependOfView(proposalForm, 'map');
 
-  const getLocationUser = React.useCallback(
-    async (lat: number, lng: number) => {
-      const dataLocationUser = await loadLocationUser(lat, lng);
-
-      if (dataLocationUser) {
-        const cityUser = getCityFromGoogleAddress(dataLocationUser.json);
-        setPreviewLocation(cityUser);
-        dispatch(change(formName, 'address', dataLocationUser?.formatted));
-      }
+  const updateInfoLocation = React.useCallback(
+    (dataLocation: AddressCompleteFormatted, previewLocationDisplay: string) => {
+      if (previewLocationDisplay) setPreviewLocation(previewLocationDisplay);
+      dispatch(change(formName, 'address', dataLocation.address));
     },
     [dispatch],
   );
 
-  const setAddress = (address: FormattedAddress) => setAddressSelected(address);
-
   const setPosition = React.useCallback(
-    (lat: number, lng: number, zoomId?: number) => {
-      const zoomBuilding = zoomLevels[zoomLevels.length - 1];
+    (
+      lat: number,
+      lng: number,
+      zoomId: number,
+      dataLocation: AddressCompleteFormatted,
+      previewLocationDisplay?: string,
+    ) => {
+      if (dataLocation && previewLocationDisplay) {
+        updateInfoLocation(dataLocation, previewLocationDisplay);
+      }
 
-      getLocationUser(lat, lng);
-      dispatch(change(formName, 'latMap', lat));
-      dispatch(change(formName, 'lngMap', lng));
-      dispatch(change(formName, 'zoomMap', zoomId || zoomBuilding.id));
+      dispatch(change(formName, 'mapCenter.lat', lat));
+      dispatch(change(formName, 'mapCenter.lng', lng));
+      dispatch(change(formName, 'mapCenter.json', dataLocation.addressOriginal));
+      dispatch(change(formName, 'zoomMap', zoomId));
 
       if (refMap.current?.leafletElement) {
-        refMap.current.leafletElement.setView([lat, lng], zoomId || zoomBuilding.id);
+        refMap.current.leafletElement.setView([lat, lng], zoomId);
       }
     },
-    [dispatch, getLocationUser],
+    [dispatch, updateInfoLocation],
   );
+
+  const getLocationUser = React.useCallback(
+    async (lat: number, lng: number, zoomId?: number) => {
+      const zoomBuilding = zoomLevels[zoomLevels.length - 1];
+      const zoomValue = zoomId || zoomBuilding.id;
+      const addressLocationUser = await loadLocationUser(lat, lng);
+
+      const userAddressFormatted = formatAddressFromGoogleAddress(
+        JSON.parse(addressLocationUser.json)[0],
+      );
+      const city = getDataFromGoogleAddress(userAddressFormatted, 'locality');
+
+      setPosition(lat, lng, zoomValue, userAddressFormatted, city);
+    },
+    [setPosition],
+  );
+
+  const setAddress = (address: AddressComplete) => setAddressSelected(address);
 
   React.useEffect(() => {
     if (isMapDisplay && refMap) {
-      if (!latitude && !longitude && !zoom) {
+      // default position if no one
+      if (!latitude || !longitude || !zoom) {
         const zoomCity = zoomLevels[9].id;
-        return setPosition(LOCATION_PARIS.lat, LOCATION_PARIS.lng, zoomCity);
-      }
+        getLocationUser(LOCATION_PARIS.lat, LOCATION_PARIS.lng, zoomCity);
+      } else if (!previewLocation) {
+        const addressFormatted = formatAddressFromGoogleAddress(JSON.parse(dataMap.json)[0]);
+        const zoomLevel = getZoomDependOfAddress(addressFormatted.type);
+        const previewLocationDisplay = getDataFromGoogleAddress(
+          addressFormatted,
+          addressFormatted.type,
+        );
 
-      if (refMap.current?.leafletElement) {
-        refMap.current.leafletElement.setView([latitude, longitude], zoom);
+        setPosition(
+          addressFormatted.latLng.lat,
+          addressFormatted.latLng.lng,
+          zoomLevel.id,
+          addressFormatted,
+          previewLocationDisplay,
+        );
       }
-      getLocationUser(latitude, longitude);
     }
-  }, [refMap, zoom, isMapDisplay, latitude, longitude, setPosition, getLocationUser]);
+  }, [refMap, zoom, isMapDisplay, latitude, longitude, setPosition, updateInfoLocation, dataMap, previewLocation, getLocationUser]);
 
   React.useEffect(() => {
     if (addressSelected) {
-      const zoomLevel = getZoomDependOfAddress(addressSelected.type);
-      setPosition(addressSelected.latLng.lat, addressSelected.latLng.lng, zoomLevel.id);
+      const addressFormatted = formatAddressFromGoogleAddress(addressSelected);
+
+      const zoomLevel = getZoomDependOfAddress(addressFormatted.type);
+      const previewLocationDisplay = getDataFromGoogleAddress(
+        addressFormatted,
+        addressFormatted.type,
+      );
+
+      setPosition(
+        addressFormatted.latLng.lat,
+        addressFormatted.latLng.lng,
+        zoomLevel.id,
+        addressFormatted,
+        previewLocationDisplay,
+      );
     }
   }, [addressSelected, setPosition]);
 
@@ -331,7 +384,7 @@ export const SectionDisplayMode = ({
                   formName={formName}
                   placeholder="proposal.map.form.placeholder"
                   addressProps={{
-                    getPosition: setPosition,
+                    getPosition: getLocationUser,
                     getAddress: setAddress,
                   }}
                   debounce={1200}
@@ -365,7 +418,7 @@ export const SectionDisplayMode = ({
                 <div className="fields">
                   <Field
                     type="text"
-                    name="latMap"
+                    name="mapCenter.lat"
                     id="latitude"
                     component={component}
                     label={<FormattedMessage id="admin.fields.proposal_form.latitude" />}
@@ -373,7 +426,7 @@ export const SectionDisplayMode = ({
 
                   <Field
                     type="text"
-                    name="lngMap"
+                    name="mapCenter.lng"
                     id="longitude"
                     component={component}
                     label={<FormattedMessage id="admin.fields.proposal_form.longitude" />}
@@ -405,8 +458,9 @@ export const SectionDisplayMode = ({
 };
 
 const mapStateToProps = state => ({
-  latitude: formSelector(state, 'latMap'),
-  longitude: formSelector(state, 'lngMap'),
+  latitude: formSelector(state, 'mapCenter')?.lat,
+  longitude: formSelector(state, 'mapCenter')?.lng,
+  dataMap: formSelector(state, 'mapCenter'),
   zoom: formSelector(state, 'zoomMap'),
   isMapViewEnabled: formSelector(state, 'viewEnabled')?.isMapViewEnabled,
   errorViewEnabled: getFormSyncErrors(formName)(state)?.viewEnabled,

@@ -14,8 +14,10 @@ describe('<ProposalStepPage />', () => {
     step: {
       defaultSort: 'random',
       form: {
-        latMap: 50.633333,
-        lngMap: 3.066667,
+        mapCenter: {
+          lat: 50.633333,
+          lng: 3.066667,
+        },
         zoomMap: 10,
         districts: [
           {

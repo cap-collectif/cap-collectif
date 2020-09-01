@@ -1,6 +1,7 @@
 // @flow
 import React, { useRef, useState } from 'react';
 import { TileLayer, GeoJSON, Marker, withLeaflet } from 'react-leaflet';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import L from 'leaflet';
@@ -24,6 +25,7 @@ import {
 } from './ProposalLeafletMap.style';
 import { bootstrapGrid } from '~/utils/sizes';
 import Address from '~/components/Form/Address/Address';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 type MapCenterObject = {|
   lat: number,
@@ -159,6 +161,7 @@ export const ProposalLeafletMap = ({
   mapTokens,
   className,
 }: Props) => {
+  const intl = useIntl();
   const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
   const mapRef = useRef(null);
   const slickRef = useRef(null);
@@ -181,14 +184,18 @@ export const ProposalLeafletMap = ({
       <Address
         id="address"
         getPosition={(lat, lng) => flyToPosition(mapRef, lat, lng)}
-        getAddress={addressSelected =>
-          flyToPosition(mapRef, addressSelected.latLng.lat, addressSelected.latLng.lng)
+        getAddress={(addressSelected: AddressComplete) =>
+          flyToPosition(
+            mapRef,
+            addressSelected.geometry.location.lat,
+            addressSelected.geometry.location.lng,
+          )
         }
         showSearchBar={!isMobile}
         debounce={1200}
         value={address}
         onChange={setAddress}
-        placeholder="proposal.map.form.placeholder"
+        placeholder={intl.formatMessage({ id: 'proposal.map.form.placeholder' })}
       />
 
       <StyledMap

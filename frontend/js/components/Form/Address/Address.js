@@ -9,7 +9,7 @@ import config from '~/config';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import { SearchContainer, ButtonLocation, ResultContainer, LoaderContainer } from './Address.style';
-import type { AddressProps, GoogleAddressAPI, FormattedAddress } from './Address.type';
+import type { AddressProps, GoogleAddressAPI, AddressComplete } from './Address.type';
 
 type Props = {|
   id: string,
@@ -28,7 +28,6 @@ const Address = ({
   debounce,
   getPosition,
   getAddress,
-  getAddressComplete,
   showSearchBar = true,
 }: Props) => {
   const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true);
@@ -64,31 +63,25 @@ const Address = ({
   };
 
   const handleSelect = (address: string) => {
-    const formattedAddress = {};
+    let formattedAddress = {};
 
     // react-places-autocomplete use onSelect and not onChange when a suggestion is selected
     // then we don't need to make all request if we just want an onChange()
-    if (!getAddress && !getAddressComplete) onChange(address);
-
-    if (getAddressComplete) {
-      return geocodeByAddress(address).then(results => {
-        onChange(address);
-        return getAddressComplete(results);
-      });
-    }
+    if (!getAddress) onChange(address);
 
     return geocodeByAddress(address)
       .then(results => {
-        formattedAddress.address = results[0].formatted_address;
         // eslint-disable-next-line prefer-destructuring
-        formattedAddress.type = results[0].types[0];
-
+        formattedAddress = results[0];
         return getLatLng(results[0]);
       })
       .then(latLng => {
-        formattedAddress.latLng = latLng;
+        formattedAddress.geometry.location = {
+          lat: latLng.lat,
+          lng: latLng.lng,
+        };
 
-        if (getAddress) getAddress(((formattedAddress: any): FormattedAddress));
+        if (getAddress) getAddress(((formattedAddress: any): AddressComplete));
         onChange(address);
       })
       .catch(error => console.error('Error', error));
@@ -125,7 +118,7 @@ const Address = ({
 
                 <input
                   {...getInputProps({
-                    placeholder: intl.formatMessage({ id: placeholder || '' }),
+                    placeholder: placeholder || '',
                     className: 'form-control',
                     id,
                   })}

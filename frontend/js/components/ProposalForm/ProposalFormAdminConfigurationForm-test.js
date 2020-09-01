@@ -4,7 +4,14 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { features } from '../../redux/modules/default';
 import { ProposalFormAdminConfigurationForm } from './ProposalFormAdminConfigurationForm';
-import { intlMock, formMock, $refType, relayRefetchMock, $fragmentRefs } from '../../mocks';
+import {
+  intlMock,
+  formMock,
+  $refType,
+  relayRefetchMock,
+  $fragmentRefs,
+  googleAddressMock,
+} from '~/mocks';
 
 describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
@@ -32,8 +39,11 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       usingDescription: true,
       usingIllustration: false,
       usingSummary: false,
-      latMap: 0,
-      lngMap: 0,
+      mapCenter: {
+        lat: 0,
+        lng: 0,
+        json: googleAddressMock.json,
+      },
       zoomMap: 0,
       illustrationHelpText: '',
       addressHelpText: '',

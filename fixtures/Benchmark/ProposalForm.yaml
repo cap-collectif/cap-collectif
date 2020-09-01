@@ -20,8 +20,7 @@ Capco\AppBundle\Entity\ProposalForm:
     usingAddress: false
     proposalInAZoneRequired: false
     zoomMap: 12
-    latMap: 48.1159675
-    lngMap: -1.7234738
+    mapCenter: '[{"address_components":[{"long_name":"Rennes","short_name":"Rennes","types":["locality", "political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Rennes,France","geometry":{"location":{"lat":48.117266,"lng":-1.6777926},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
     reference: 1
     evaluationForm: '@questionnaire1'
     allowAknowledge: true

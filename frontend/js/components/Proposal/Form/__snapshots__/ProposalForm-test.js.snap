@@ -174,7 +174,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   <Field
     addressProps={
       Object {
-        "getAddressComplete": [Function],
+        "getAddress": [Function],
       }
     }
     component={[Function]}
@@ -494,7 +494,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   <Field
     addressProps={
       Object {
-        "getAddressComplete": [Function],
+        "getAddress": [Function],
       }
     }
     component={[Function]}
@@ -814,7 +814,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   <Field
     addressProps={
       Object {
-        "getAddressComplete": [Function],
+        "getAddress": [Function],
       }
     }
     component={[Function]}
@@ -1134,7 +1134,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   <Field
     addressProps={
       Object {
-        "getAddressComplete": [Function],
+        "getAddress": [Function],
       }
     }
     component={[Function]}

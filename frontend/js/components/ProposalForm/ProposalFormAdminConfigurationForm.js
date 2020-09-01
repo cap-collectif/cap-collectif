@@ -89,12 +89,12 @@ const validate = (values: Object) => {
       errors.zoomMap = 'admin.fields.proposal_form.errors.zoom';
     }
 
-    if (!values.latMap || values.latMap.length === 0) {
-      errors.latMap = 'admin.fields.proposal_form.errors.lat';
+    if (values.mapCenter && !values.mapCenter.lat) {
+      errors.lat = 'admin.fields.proposal_form.errors.lat';
     }
 
-    if (!values.lngMap || values.lngMap.length === 0) {
-      errors.lngMap = 'admin.fields.proposal_form.errors.lng';
+    if (values.mapCenter && !values.mapCenter.lng) {
+      errors.lng = 'admin.fields.proposal_form.errors.lng';
     }
   }
 
@@ -346,6 +346,10 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     isGridViewEnabled: values.viewEnabled.isGridViewEnabled,
     isListViewEnabled: values.viewEnabled.isListViewEnabled,
     isMapViewEnabled: values.viewEnabled.isMapViewEnabled,
+    mapCenter:
+      values.mapCenter && values.viewEnabled.isMapViewEnabled
+        ? JSON.stringify([values.mapCenter.json])
+        : null,
   };
 
   const nbChoices = input.questions.reduce((acc, array) => {
@@ -829,8 +833,11 @@ export default createRefetchContainer(
         usingIllustration
         descriptionMandatory
         canContact
-        latMap
-        lngMap
+        mapCenter {
+          lat
+          lng
+          json
+        }
         zoomMap
         isGridViewEnabled
         isMapViewEnabled

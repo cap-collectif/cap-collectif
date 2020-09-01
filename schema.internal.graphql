@@ -6680,8 +6680,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
   descriptionHelpText: String
   addressHelpText: String
   questions: [Question!]!
-  latMap: Float
-  lngMap: Float
+  mapCenter: GoogleMapsAddress
   zoomMap: Int
   adminUrl: URI!
   notificationsConfiguration: NotificationsConfiguration!
@@ -10535,8 +10534,9 @@ input UpdateProposalFormInput {
   titleHelpText: String
   descriptionHelpText: String
   addressHelpText: String
-  latMap: Float
-  lngMap: Float
+
+  """the json of the googleMapsAddress"""
+  mapCenter: String
   zoomMap: Int
   categories: [ProposalCategoryInput!]
   districts: [DistrictInput!]

@@ -35,6 +35,7 @@ import { validate } from '~/components/Event/Form/EventFormPage';
 import SelectStep from '~/components/Utils/SelectStep';
 import colors from '~/utils/colors';
 import { InformationIcon } from '~/components/Admin/Project/Content/ProjectContentAdminForm';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 type SelectedCurrentValues = {|
   guestListEnabled: boolean,
@@ -344,8 +345,8 @@ export const EventForm = ({
             }
             placeholder="proposal.map.form.placeholder"
             addressProps={{
-              getAddressComplete: addressComplete =>
-                dispatch(change(formName, 'address', JSON.stringify(addressComplete))),
+              getAddress: (addressComplete: AddressComplete) =>
+                dispatch(change(formName, 'address', JSON.stringify([addressComplete]))),
             }}
           />
           {/* This part is tempory, it will be delete after migration complete */}

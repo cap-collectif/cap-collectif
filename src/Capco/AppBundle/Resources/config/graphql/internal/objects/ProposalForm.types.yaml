@@ -77,10 +77,9 @@ ProposalForm:
             questions:
                 type: '[InternalQuestion!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
-            latMap:
-                type: 'Float'
-            lngMap:
-                type: 'Float'
+            mapCenter:
+                type: 'PreviewGoogleMapsAddress'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFormMapCenterResolver", [value])'
             zoomMap:
                 type: 'Int'
             adminUrl:

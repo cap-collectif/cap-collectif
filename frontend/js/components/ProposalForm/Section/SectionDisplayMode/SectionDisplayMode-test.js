@@ -3,13 +3,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { SectionDisplayMode, LOCATION_PARIS } from './SectionDisplayMode';
-import { $refType, $fragmentRefs } from '~/mocks';
+import { $refType, $fragmentRefs, googleAddressMock } from '~/mocks';
 
 const props = {
   dispatch: jest.fn(),
   latitude: LOCATION_PARIS.lat,
   longitude: LOCATION_PARIS.lng,
   errorViewEnabled: null,
+  dataMap: googleAddressMock,
   proposalForm: {
     $fragmentRefs,
     $refType,

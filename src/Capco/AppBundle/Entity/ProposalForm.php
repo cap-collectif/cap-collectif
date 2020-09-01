@@ -210,14 +210,9 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     private $zoomMap;
 
     /**
-     * @ORM\Column(name="lat_map", nullable=true, type="float")
+     * @ORM\Column(name="map_center", type="text", nullable=true)
      */
-    private $latMap;
-
-    /**
-     * @ORM\Column(name="lng_map", nullable=true, type="float")
-     */
-    private $lngMap;
+    private $mapCenter;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="proposalForm", cascade={"persist"})
@@ -772,26 +767,14 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getLatMap()
+    public function getMapCenter(): ?string
     {
-        return $this->latMap;
+        return $this->mapCenter;
     }
 
-    public function setLatMap(?float $latMap = null): self
+    public function setMapCenter(?string $mapCenter): self
     {
-        $this->latMap = $latMap;
-
-        return $this;
-    }
-
-    public function getLngMap()
-    {
-        return $this->lngMap;
-    }
-
-    public function setLngMap(?float $lngMap = null): self
-    {
-        $this->lngMap = $lngMap;
+        $this->mapCenter = $mapCenter;
 
         return $this;
     }

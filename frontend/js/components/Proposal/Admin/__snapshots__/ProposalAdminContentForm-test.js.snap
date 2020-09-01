@@ -337,7 +337,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       <Field
         addressProps={
           Object {
-            "getAddressComplete": [Function],
+            "getAddress": [Function],
           }
         }
         component={[Function]}

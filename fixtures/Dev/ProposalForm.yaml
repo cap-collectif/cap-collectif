@@ -23,8 +23,7 @@ Capco\AppBundle\Entity\ProposalForm:
         usingAddress: true
         proposalInAZoneRequired: true
         zoomMap: 12
-        latMap: 48.1159675
-        lngMap: -1.7234738
+        mapCenter: '[{"address_components":[{"long_name":"Rennes","short_name":"Rennes","types":["locality", "political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Rennes,France","geometry":{"location":{"lat":48.117266,"lng":-1.6777926},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
         reference: 1
         evaluationForm: '@questionnaire4'
         allowAknowledge: true
@@ -137,8 +136,7 @@ Capco\AppBundle\Entity\ProposalForm:
         usingAddress: true
         proposalInAZoneRequired: true
         zoomMap: 12
-        latMap: 44.8799786
-        lngMap: 0.3404569
+        mapCenter: '[{"address_components":[{"long_name":"La Force","short_name":"La Force","types":["locality", "political"]},{"long_name":"Nouvelle-Aquitaine","short_name":"Nouvelle-Aquitaine","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"La Force,France","geometry":{"location":{"lat":44.8672479,"lng": 0.376642},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
         reference: 1980
         evaluationForm: '@questionnaire6'
         allowAknowledge: true
@@ -333,8 +331,7 @@ Capco\AppBundle\Entity\ProposalForm:
         descriptionMandatory: true
         categoryMandatory: true
         zoomMap: 9
-        latMap: 48.8499198
-        lngMap: 2.6370411
+        mapCenter: '[{"address_components":[{"long_name":"Paris","short_name":"Paris","types":["locality", "political"]},{"long_name":"Ile-de-France","short_name":"Ile-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Paris,France","geometry":{"location":{"lat":48.8499198,"lng":2.6370411},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
         addressHelpText: Précisez l'adresse principale où sera mis en oeuvre votre projet
     proposalformCorona:
         id: proposalformCorona

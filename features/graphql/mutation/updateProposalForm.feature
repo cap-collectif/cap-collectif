@@ -35,8 +35,10 @@ Scenario: GraphQL client wants to update a proposal form
               descriptionMandatory
               isProposalForm
               proposalInAZoneRequired
-              latMap
-              lngMap
+              mapCenter {
+                lat
+                lng
+              }
               zoomMap
               commentable
               costable
@@ -96,8 +98,7 @@ Scenario: GraphQL client wants to update a proposal form
         "usingIllustration": true,
         "descriptionMandatory": true,
         "isProposalForm": true,
-        "latMap": 0.0,
-        "lngMap": 0.0,
+        "mapCenter": "[{\"geometry\":{\"location_type\":\"GEOMETRIC_CENTER\",\"location\":{\"lat\":\"42\",\"lng\":\"0\"}}}]",
         "zoomMap": 0,
         "commentable": true,
         "costable": true,
@@ -173,8 +174,10 @@ Scenario: GraphQL client wants to update a proposal form
             "descriptionMandatory":true,
             "isProposalForm":true,
             "proposalInAZoneRequired":true,
-            "latMap":0,
-            "lngMap":0,
+            "mapCenter": {
+              "lat": 42,
+              "lng": 0
+            },
             "zoomMap":0,
             "commentable":true,
             "costable":true,

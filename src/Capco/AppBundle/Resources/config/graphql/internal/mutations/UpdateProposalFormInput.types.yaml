@@ -45,10 +45,9 @@ UpdateProposalFormInput:
                 type: 'String'
             addressHelpText:
                 type: 'String'
-            latMap:
-                type: 'Float'
-            lngMap:
-                type: 'Float'
+            mapCenter:
+                type: 'String'
+                description: 'the json of the googleMapsAddress'
             zoomMap:
                 type: 'Int'
             categories:

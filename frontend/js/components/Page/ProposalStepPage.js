@@ -99,7 +99,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
         displayMode={displayMode}
         viewer={viewer || null}
         defaultMapOptions={{
-          center: { lat: form.latMap || 48.8586047, lng: form.lngMap || 2.3137325 },
+          center: { lat: form.mapCenter?.lat || 48.8586047, lng: form.mapCenter?.lng || 2.3137325 },
           zoom: form.zoomMap || 10,
         }}
       />
@@ -155,8 +155,10 @@ export class ProposalStepPage extends React.Component<Props> {
                     name
                   }
                   form {
-                    latMap
-                    lngMap
+                    mapCenter {
+                      lat
+                      lng
+                    }
                     zoomMap
                     districts(order: ALPHABETICAL) @include(if: $isMapDisplay) {
                       displayedOnMap

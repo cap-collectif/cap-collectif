@@ -280,7 +280,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
                   values={Object {}}
                 />
               }
-              name="latMap"
+              name="mapCenter.lat"
               type="text"
             />
             <Field
@@ -292,7 +292,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
                   values={Object {}}
                 />
               }
-              name="lngMap"
+              name="mapCenter.lng"
               type="text"
             />
             <Field
