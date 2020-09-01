@@ -34,18 +34,6 @@ class MediaRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    private function getQueryBuilderWithoutCategory(?string $term = null): QueryBuilder {
-        $qb = $this->createQueryBuilder('m')
-            ->leftJoin('CapcoAppBundle:CategoryImage', 'ci', 'WITH', 'm.id = ci.image')
-            ->andWhere('ci.image IS NULL');
-
-        if ($term) {
-            $qb->andWhere('m.name LIKE :term')->setParameter('term', '%' . $term . '%');
-        }
-
-        return $qb;
-    }
-
     public function getWithoutCategoryPaginated(
         int $offset = 0,
         int $limit = 10,
@@ -60,11 +48,22 @@ class MediaRepository extends EntityRepository
 
     public function countAllWithoutCategory(?string $term = null): int
     {
-        $qb = $this->getQueryBuilderWithoutCategory($term)
-            ->select('COUNT(m.id)');
+        $qb = $this->getQueryBuilderWithoutCategory($term)->select('COUNT(m.id)');
 
-        return (int) $qb
-            ->getQuery()
-            ->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    private function getQueryBuilderWithoutCategory(?string $term = null): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('m')
+            ->leftJoin('CapcoAppBundle:CategoryImage', 'ci', 'WITH', 'm.id = ci.image')
+            ->andWhere('ci.image IS NULL')
+            ->orderBy('m.createdAt', 'DESC');
+
+        if ($term) {
+            $qb->andWhere('m.name LIKE :term')->setParameter('term', '%' . $term . '%');
+        }
+
+        return $qb;
     }
 }
