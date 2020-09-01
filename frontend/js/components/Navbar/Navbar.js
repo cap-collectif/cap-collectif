@@ -94,7 +94,7 @@ export const Navbar = ({
       return graphqlError;
     }
 
-    if (props) return <RegistrationModal query={props} />;
+    if (props) return <RegistrationModal query={props} locale={currentLanguage} />;
 
     return null;
   };
@@ -133,7 +133,7 @@ export const Navbar = ({
                 `}
                 variables={{}}
                 render={renderRegistrationForm}
-              />
+            />
 
               <LoginModal />
               <NavigationSkip />

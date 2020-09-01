@@ -33,7 +33,7 @@ type Props = {|
   ...StateProps,
   ...DispatchProps,
   query: RegistrationModal_query,
-  locale?: string,
+  locale: string,
 |};
 
 export const RegistrationModal = ({

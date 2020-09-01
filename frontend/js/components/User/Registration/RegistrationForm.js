@@ -42,7 +42,7 @@ type Props = {|
     id: string,
     type: string,
   }>,
-  locale?: string,
+  locale: string,
 |};
 
 type FormValues = {

@@ -15,6 +15,7 @@ describe('<RegistrationModal />', () => {
     displayChartModal: false,
     onCloseChart: jest.fn(),
     charterBody: 'Super charte !!',
+    locale: 'fr-FR'
   };
 
   const defaultQuery = {

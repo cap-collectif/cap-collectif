@@ -25,6 +25,7 @@ describe('<RegistrationForm />', () => {
     shieldEnabled: false,
     privacyPolicyRequired: true,
     questions,
+    locale: 'fr-FR',
   };
 
   const defaultQuery = {
@@ -48,6 +49,7 @@ describe('<RegistrationForm />', () => {
         {...props}
         userTypes={[{ id: 1, name: 'type_1' }]}
         addUserTypeField
+        locale='fr-FR'
       />,
     );
     expect(wrapper).toMatchSnapshot();

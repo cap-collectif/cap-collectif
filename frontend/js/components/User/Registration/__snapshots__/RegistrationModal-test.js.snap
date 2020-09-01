@@ -114,6 +114,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
         prefix="registration."
       />
       <Relay(Connect(injectIntl(ReduxForm)))
+        locale="fr-FR"
         query={
           Object {
             "$fragmentRefs": null,
@@ -265,6 +266,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
         prefix="registration."
       />
       <Relay(Connect(injectIntl(ReduxForm)))
+        locale="fr-FR"
         query={
           Object {
             "$fragmentRefs": null,
@@ -410,6 +412,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
         prefix="registration."
       />
       <Relay(Connect(injectIntl(ReduxForm)))
+        locale="fr-FR"
         query={
           Object {
             "$fragmentRefs": null,
@@ -551,6 +554,7 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
         prefix="registration."
       />
       <Relay(Connect(injectIntl(ReduxForm)))
+        locale="fr-FR"
         query={
           Object {
             "$fragmentRefs": null,
@@ -692,6 +696,7 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
         prefix="registration."
       />
       <Relay(Connect(injectIntl(ReduxForm)))
+        locale="fr-FR"
         query={
           Object {
             "$fragmentRefs": null,
@@ -833,6 +838,7 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
         prefix="registration."
       />
       <Relay(Connect(injectIntl(ReduxForm)))
+        locale="fr-FR"
         query={
           Object {
             "$fragmentRefs": null,
