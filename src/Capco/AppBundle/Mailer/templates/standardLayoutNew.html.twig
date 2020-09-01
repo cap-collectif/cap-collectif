@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="format-detection" content="telephone=no">
     <title>
-            </title>
+        {% block html_title %}{% endblock %}
+    </title>
     <style type="text/css" media="screen">
         .ExternalClass * {line-height:100%}
         .bb {
@@ -51,21 +52,21 @@
 
         @font-face {
             font-family: "OpenSans";
-            src: url("https://capco.dev//fonts/openSans/OpenSans-Regular.ttf?v1") format("truetype");
+            src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Regular.ttf') }}") format("truetype");
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
             font-family: "OpenSans";
-            src: url("https://capco.dev//fonts/openSans/OpenSans-Semibold.ttf?v1") format("truetype");
+            src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Semibold.ttf') }}") format("truetype");
             font-weight: 600;
             font-style: normal;
         }
 
         @font-face {
             font-family: "OpenSans";
-            src: url("https://capco.dev//fonts/openSans/OpenSans-Bold.ttf?v1") format("truetype");
+            src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Bold.ttf') }}") format("truetype");
             font-weight: bold;
             font-style: normal;
         }
@@ -77,28 +78,12 @@
         <tr>
             <td>
                 <table width="100%" id="top-mail" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
-                                                            <tr style="margin-top: 20px">
+                    {% block header_mail %}
+                    {% endblock %}
+                    <tr style="margin-top: 20px">
                         <td class="resp-full-td-center" valign="top" style="font-family: 'OpenSans', helvetica, arial, sans-serif; font-size: 15px">
-                                <div>
-                    <img style="margin-bottom: 20px;" src="https://capco.dev/media/cache/default_logo/default/0001/01/providerReferenceForLogo.png" alt="logo Cap Collectif" />
-        
-        <h1 style="font-size: 24px; font-weight: 600; margin: 0 0 25px 0">
-            invite-join-platform {"{organizationName}":"Cap Collectif"}
-        </h1>
-
-        <p style="margin: 0;line-height: 22px;">
-            global-hello 👋,<br />
-            click-button-accept-invitation
-        </p>
-
-        <p style="margin: 20px 0">
-            <a href="https://capco.dev/invitation?token=oniiiichaaan" style="display: inline-block;color:#ffffff;padding:18px 24px;border-radius:4px;background-color: #00acc1;font-weight: bold;">accept-invitation</a>
-        </p>
-
-        <p style="margin:0;line-height: 22px;">or-copy-past-url:<br/>
-            <a href="https://capco.dev/invitation?token=oniiiichaaan" style="display: inline-block;margin-top: 4px;color: #00acc1">https://capco.dev/invitation?token=oniiiichaaan</a>
-        </p>
-    </div>
+                            {% block core_mail %}
+                            {% endblock %}
                         </td>
                     </tr>
                 </table>
@@ -112,12 +97,8 @@
                 <table id="footer-mail" style="width: 100%; font-size: 13px;"  class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="resp-full-td" style="text-align: center;font-family: 'OpenSans', helvetica, arial, sans-serif;">
-                                <p style="text-align: left;margin: 0 0 20px 0">email-right-data-protection</p>
-    <p style="display:flex;flex-direction: row;align-items: center;text-align: left;margin: 0">
-        email.propulsed.by
-        <img src="https://capco.dev//capco-logo-mail.png?v1" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
-        Cap Collectif
-    </p>
+                            {% block footer_mail %}
+                            {% endblock %}
                         </td>
                     </tr>
                 </table>
@@ -127,4 +108,3 @@
 </div>
 </body>
 </html>
-notification.email.external_footer {"{to}":"rem@chan.com","{sitename}":"Cap-Collectif","{siteUrl}":"https:\/\/capco.dev\/","{businessUrl}":"https:\/\/cap-collectif.com","{business}":"Cap Collectif"}

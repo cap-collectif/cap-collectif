@@ -21,6 +21,9 @@ final class UserInviteNewInvitation extends AbstractExternalMessage
         return [
             'organizationName' => $params['organizationName'],
             'invitationUrl' => $params['invitationUrl'],
+            'baseUrl' => $params['baseURL'],
+            'siteName' => $params['siteName'],
+            'siteUrl' => $params['siteURL']
         ];
     }
 }

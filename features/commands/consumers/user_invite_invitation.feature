@@ -1,7 +1,7 @@
 @consumers
 Feature: User invite invitation consumer
 
-@rabbitmq
+@rabbitmq @snapshot-email
 Scenario: A user invitation is asynchronous
   Given I publish in "user_invite_invitation" with message below:
   """
