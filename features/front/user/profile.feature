@@ -180,8 +180,7 @@ Scenario: Logged as user, I want to update my firstname
   And I should not see "global.invalid.form"
   And the button "personal-data-form-save" should not be disabled
   Then I click on button "#personal-data-form-save"
-  And I wait 2 seconds
-  And I should see "global.saved"
+  And I wait "global.saved" to appear on current page in "body"
   Then I reload the page
   And I wait ".page-header" to appear on current page
   And the "firstname" field should contain "myNewFirstname"
@@ -208,8 +207,7 @@ Scenario: Logged as user, I want to delete my address
   And I should not see "form.label_zip_code"
   And the button "personal-data-form-save" should not be disabled
   Then I click on button "#personal-data-form-save"
-  And I wait 1 seconds
-  And I should see "global.saved"
+  And I wait "global.saved" to appear on current page in "body"
   Then I reload the page
   And I wait "#personal-data" to appear on current page
   And I should not see "form.label_address"

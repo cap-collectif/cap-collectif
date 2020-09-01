@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Behat\Traits;
 trait UserProfileTrait
 {
     protected static $profile = [
-        'userSlug' => 'admin'
+        'userSlug' => 'admin',
     ];
 
     /**
@@ -16,6 +16,8 @@ trait UserProfileTrait
     public function iGoToAUserProfile()
     {
         $this->visitPageWithParams('profile page', self::$profile);
+        $this->getSession()->wait(3000, '$(\'.loader\').length > 0');
+        $this->getSession()->wait(3000, '$(\'.loader\').length == 0');
     }
 
     /**

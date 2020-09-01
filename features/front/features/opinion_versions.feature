@@ -6,7 +6,7 @@ Scenario: Author of a version wants to delete it
   Given I am logged in as user
   And I go to a version
   When I click the delete version button
-  And I wait "#confirm-opinion-delete" to appear on current page
+  And I wait "#confirm-opinion-delete" to appear on current page maximum 15
   And I confirm version deletion
   Then I go to "projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-1"
   And I should see "error.404.title"

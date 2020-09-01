@@ -815,10 +815,24 @@ trait ProposalStepsTrait
         $this->fillField('month', '3');
         $this->fillField('year', '1992');
 
-        $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
-        $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy');
-        $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz');
-        $this->iWait(2);
+        $field1 = $this->getSession()
+            ->getPage()
+            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx'), null);
+        while (!$field1->isChecked()) {
+            $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
+        }
+        $field2 = $this->getSession()
+            ->getPage()
+            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy'), null);
+        while (!$field2->isChecked()) {
+            $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy');
+        }
+        $field3 = $this->getSession()
+            ->getPage()
+            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz'), null);
+        while (!$field3->isChecked()) {
+            $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz');
+        }
     }
 
     /**
@@ -1504,10 +1518,7 @@ trait ProposalStepsTrait
         if ($fillDistrict) {
             $this->selectOption('proposal_district', 'Beauregard');
         }
-        $this->waitAndThrowOnFailure(
-            2000,
-            "$('#list-suggestion > li:first-child').length > 0"
-        );
+        $this->waitAndThrowOnFailure(2000, "$('#list-suggestion > li:first-child').length > 0");
         $this->iClickElement('#list-suggestion > li:first-child');
         $this->iWait(1);
     }

@@ -35,6 +35,7 @@ Scenario: Author of a source loose their votes when updating it
   And I go to an opinion
   And I go on the sources tab
   And I wait "#sources-list" to appear on current page
+  And I wait "#source-form__add" to appear on current page
   When I edit my source
   Then I wait "#current-alert" to appear on current page
   Then I should see "alert.success.update.source" in the "#global-alert-box" element
@@ -45,6 +46,7 @@ Scenario: Author of a source try to update without checking the confirm checkbox
   Given I am logged in as user
   And I go to an opinion
   And I go on the sources tab
+  And I wait "#source-form__add" to appear on current page
   And I wait "#sources-list" to appear on current page
   When I edit my source without confirming my votes lost
   Then I should see "source.constraints.check"

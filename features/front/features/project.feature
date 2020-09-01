@@ -116,10 +116,14 @@ Scenario: Restricted project should display in projects list
   And I am logged in as super admin
   And I visited "projects page"
   And I wait "#project-search-button" to appear on current page
+  And I wait "#project-button-filter" to appear on current page
+  And I wait ".loader" to disappear on current page
   When I fill in the following:
     | project-search-input | custom |
-  And I wait 1 seconds
+  And I focus the "#project-search-input" element
+  And I click the "#project-search-input" element
   And I click the "#project-search-button" element
+  And I wait ".loader" to appear on current page
   And I wait ".project-preview" to appear on current page
   Then I should see 1 ".project-preview" elements
   And I should see "Un avenir meilleur pour les nains de jardins (custom access)"

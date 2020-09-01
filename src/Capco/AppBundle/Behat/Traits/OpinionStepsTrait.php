@@ -10,34 +10,34 @@ trait OpinionStepsTrait
         'projectSlug' => 'croissance-innovation-disruption',
         'stepSlug' => 'collecte-des-avis',
         'opinionTypeSlug' => 'les-causes',
-        'opinionSlug' => 'opinion-2'
+        'opinionSlug' => 'opinion-2',
     ];
 
     protected static $opinionInClosedStep = [
         'projectSlug' => 'strategie-technologique-de-letat-et-services-publics',
         'stepSlug' => 'collecte-des-avis-pour-une-meilleur-strategie',
         'opinionTypeSlug' => 'les-causes',
-        'opinionSlug' => 'opinion-51'
+        'opinionSlug' => 'opinion-51',
     ];
     protected static $opinionWithVersions = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
         'opinionTypeSlug' =>
             'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
-        'opinionSlug' => 'article-1'
+        'opinionSlug' => 'article-1',
     ];
     protected static $opinionWithLoadsOfVotes = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
         'opinionTypeSlug' =>
             'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
-        'opinionSlug' => 'article-2'
+        'opinionSlug' => 'article-2',
     ];
     protected static $opinionWithNoSources = [
         'projectSlug' => 'croissance-innovation-disruption',
         'stepSlug' => 'collecte-des-avis',
         'opinionTypeSlug' => 'les-causes',
-        'opinionSlug' => 'opinion-sans-sources'
+        'opinionSlug' => 'opinion-sans-sources',
     ];
     protected static $version = [
         'projectSlug' => 'projet-de-loi-renseignement',
@@ -45,7 +45,7 @@ trait OpinionStepsTrait
         'opinionTypeSlug' =>
             'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
-        'versionSlug' => 'modification-1'
+        'versionSlug' => 'modification-1',
     ];
     protected static $opinionVersionWithLoadsOfVotes = [
         'projectSlug' => 'projet-de-loi-renseignement',
@@ -53,7 +53,7 @@ trait OpinionStepsTrait
         'opinionTypeSlug' =>
             'chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
-        'versionSlug' => 'modification-2'
+        'versionSlug' => 'modification-2',
     ];
 
     protected static $versionWithLoadsOfVotes = [
@@ -62,19 +62,19 @@ trait OpinionStepsTrait
         'opinionTypeSlug' =>
             'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-2',
-        'versionSlug' => 'modification-2'
+        'versionSlug' => 'modification-2',
     ];
     protected static $versionInClosedStep = [
         'projectSlug' => 'strategie-technologique-de-letat-et-services-publics',
         'stepSlug' => 'collecte-des-avis-pour-une-meilleur-strategie',
         'opinionTypeSlug' => 'les-causes',
         'opinionSlug' => 'opinion-51',
-        'versionSlug' => 'version-sur-une-etape-fermee'
+        'versionSlug' => 'version-sur-une-etape-fermee',
     ];
 
     protected static $rankingStepWithOpinions = [
         'projectSlug' => 'croissance-innovation-disruption',
-        'stepSlug' => 'classement-des-propositions-et-modifications'
+        'stepSlug' => 'classement-des-propositions-et-modifications',
     ];
 
     protected static $versionEditable = [
@@ -82,7 +82,7 @@ trait OpinionStepsTrait
         'stepSlug' => 'etape-participation-continue',
         'opinionTypeSlug' => 'premiere-section-encore-un-sous-titre',
         'opinionSlug' => 'opinion-endless',
-        'versionSlug' => 'modification-16'
+        'versionSlug' => 'modification-16',
     ];
 
     /**
@@ -91,6 +91,7 @@ trait OpinionStepsTrait
     public function iGoToAnOpinion()
     {
         $this->visitPageWithParams('opinion page', self::$opinion);
+        $this->iWaitTextToAppearOnPage('no-argument-for', '#opinion__arguments--FOR');
     }
 
     /**
@@ -175,7 +176,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->waitAndThrowOnFailure(
-            3000,
+            5000,
             "$('" . $page->getSelector('sources tab') . "').length > 0"
         );
         $page->clickSourcesTab();
@@ -189,7 +190,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->waitAndThrowOnFailure(
-            3000,
+            5000,
             "$('" . $page->getSelector('arguments tab') . "').length > 0"
         );
         $page->clickArgumentsTab();
@@ -620,6 +621,7 @@ trait OpinionStepsTrait
     public function iEditMySourceWithoutConfirmingMyVotesLost()
     {
         $page = $this->getCurrentPage();
+        $this->iWaitElementToAppearOnPage('#source-U291cmNlOnNvdXJjZTM1 .opinion__votes-nb');
         $votesCount = $page->getSourceVotesCount();
         Assert::assertNotEquals(
             0,
@@ -684,7 +686,10 @@ trait OpinionStepsTrait
      */
     public function iClickTheSourceReportButton()
     {
-        $this->waitAndThrowOnFailure(2000, "$('" . $this->getCurrentPage()->getSelector('source report button') . "').length > 0");
+        $this->waitAndThrowOnFailure(
+            5000,
+            "$('" . $this->getCurrentPage()->getSelector('source report button') . "').length > 0"
+        );
         $this->getCurrentPage()->clickSourceReportButton();
         $this->iWait(1);
     }
@@ -779,7 +784,7 @@ trait OpinionStepsTrait
      */
     public function iClickTheDeleteVersionButton()
     {
-        $this->waitAndThrowOnFailure(3000, "$('#opinion-delete').length > 0");
+        $this->waitAndThrowOnFailure(4000, "$('#opinion-delete').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickDeleteButton();
     }
 
