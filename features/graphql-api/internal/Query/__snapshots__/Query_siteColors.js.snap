@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.siteColors fetches all site colors. 1`] = `
+Object {
+  "siteColors": Array [
+    Object {
+      "keyname": "color.bg.primary",
+      "value": "#e3e3e3",
+    },
+    Object {
+      "keyname": "color.votes_bar.btn.text",
+      "value": "#000000",
+    },
+    Object {
+      "keyname": "color.votes_bar.btn.bg",
+      "value": "#FFFFFF",
+    },
+    Object {
+      "keyname": "color.votes_bar.border",
+      "value": "#E7E7E7",
+    },
+    Object {
+      "keyname": "color.votes_bar.text",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.votes_bar.bg",
+      "value": "#29434e",
+    },
+    Object {
+      "keyname": "color.user.vip.bg",
+      "value": "#F7F7F7",
+    },
+    Object {
+      "keyname": "color.footer.title",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.main_menu.bg_active",
+      "value": "#00ACC1",
+    },
+    Object {
+      "keyname": "color.main_menu.bg",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.main_menu.text_hover",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.main_menu.text_active",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.main_menu.text",
+      "value": "#000000",
+    },
+    Object {
+      "keyname": "color.section.text",
+      "value": "#000000",
+    },
+    Object {
+      "keyname": "color.section.bg",
+      "value": "#f6f6f6",
+    },
+    Object {
+      "keyname": "color.footer2.bg",
+      "value": "#546E7A",
+    },
+    Object {
+      "keyname": "color.footer2.text",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.footer.bg",
+      "value": "#29434e",
+    },
+    Object {
+      "keyname": "color.footer.text",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.link.hover",
+      "value": "#007c91",
+    },
+    Object {
+      "keyname": "color.link.default",
+      "value": "#00acc1",
+    },
+    Object {
+      "keyname": "color.btn.ghost.base",
+      "value": "#546E7A",
+    },
+    Object {
+      "keyname": "color.btn.ghost.hover",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.btn.primary.text",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.btn.primary.bg",
+      "value": "#546E7A",
+    },
+    Object {
+      "keyname": "color.h6",
+      "value": null,
+    },
+    Object {
+      "keyname": "color.h5",
+      "value": null,
+    },
+    Object {
+      "keyname": "color.h4",
+      "value": null,
+    },
+    Object {
+      "keyname": "color.h3",
+      "value": "#29434e",
+    },
+    Object {
+      "keyname": "color.h2",
+      "value": "#5ECDD4",
+    },
+    Object {
+      "keyname": "color.h1",
+      "value": null,
+    },
+    Object {
+      "keyname": "color.btn.text",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.btn.bg",
+      "value": "#00acc1",
+    },
+    Object {
+      "keyname": "color.header2.title",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.header2.text",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.header2.bg",
+      "value": "#546E7A",
+    },
+    Object {
+      "keyname": "color.header.text",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.home.title",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.home.bg",
+      "value": "#546E7A",
+    },
+    Object {
+      "keyname": "color.header.title",
+      "value": "#ffffff",
+    },
+    Object {
+      "keyname": "color.header.bg",
+      "value": "#29434e",
+    },
+    Object {
+      "keyname": "color.body.text",
+      "value": "#333333",
+    },
+    Object {
+      "keyname": "color.body.bg",
+      "value": "#ffffff",
+    },
+  ],
+}
+`;

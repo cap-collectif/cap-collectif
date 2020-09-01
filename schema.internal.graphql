@@ -7691,6 +7691,9 @@ type Query {
     """Returns the last `n` elements from the list."""
     last: Int
   ): UserInviteConnection!
+
+  """List all site colors."""
+  siteColors: [SiteColor!]!
 }
 
 """Fetches an object given its ID"""
@@ -9386,6 +9389,12 @@ type SimpleQuestion implements Question & Node {
 
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
+}
+
+"""A site color."""
+type SiteColor {
+  keyname: String!
+  value: String
 }
 
 """A site image"""

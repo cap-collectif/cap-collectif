@@ -444,3 +444,7 @@ InternalQuery:
                     first:
                         type: 'Int'
                         defaultValue: 50
+            siteColors:
+                description: 'List all site colors.'
+                type: '[InternalSiteColor!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QuerySiteColorsResolver", [])'

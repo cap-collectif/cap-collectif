@@ -1,0 +1,10 @@
+InternalSiteColor:
+    type: object
+    config:
+        description: 'A site color.'
+        name: SiteColor
+        fields:
+            keyname:
+                type: 'String!'
+            value:
+                type: 'String'
