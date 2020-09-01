@@ -20,6 +20,7 @@ import ChangeProposalDecisionMutation from '~/mutations/ChangeProposalDecisionMu
 import UserListField from '~/components/Admin/Field/UserListField';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import { Validation, ValidateButton, AnalysisForm } from './ProposalAnalysisFormPanel';
+import { type SubmittingState } from './ProposalFormSwitcher';
 
 const PostWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   margin-top: 10px;
@@ -32,8 +33,7 @@ type Props = {|
   proposal: ProposalDecisionFormPanel_proposal,
   disabled?: boolean,
   initialIsApproved: boolean,
-  refusedReasons: Array<{| value: string, label: string |}>,
-  onValidate: (boolean, ?boolean) => void,
+  onValidate: (SubmittingState, ?boolean) => void,
   costEstimationEnabled: boolean,
 |};
 
@@ -65,12 +65,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     refusedReason: values.isApproved === 'UNFAVOURABLE' ? values.refusedReason?.value : null,
     isDone: values.validate ? true : values.isDone,
   };
-  onValidate(true);
+  onValidate(values.validate || values.isDone ? 'SAVING' : 'DRAFT_SAVING');
   return ChangeProposalDecisionMutation.commit({
     input,
   })
     .then(() => {
-      onValidate(false, values.validate);
+      onValidate(values.validate || values.isDone ? 'SAVED' : 'DRAFT_SAVED', values.validate);
     })
     .catch(e => {
       if (e instanceof SubmissionError) {

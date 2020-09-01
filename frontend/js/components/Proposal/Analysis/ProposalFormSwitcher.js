@@ -78,6 +78,15 @@ type Props = {|
   panelState: PanelState,
 |};
 
+export type SubmittingState = 'SAVED' | 'SAVING' | 'DRAFT_SAVED' | 'DRAFT_SAVING';
+
+const stateToKey = {
+  SAVED: 'all.data.saved',
+  SAVING: 'global.saving',
+  DRAFT_SAVED: 'label.draft.saved',
+  DRAFT_SAVING: 'label.draft.being.saved',
+};
+
 export const ProposalFormSwitcher = ({
   onClose,
   proposal,
@@ -86,11 +95,11 @@ export const ProposalFormSwitcher = ({
   disabled,
   panelState,
 }: Props) => {
-  const [submitting, setSubmitting] = useState(false);
-  const { width } = useResize();
+  const [submittingState, setSubmittingState] = useState<?SubmittingState>(null);
+  const { width }: { width: number } = useResize();
   const isLarge = width < bootstrapGrid.mdMax;
-  const finishedSubmitting = (newSubmitting, goBack) => {
-    setSubmitting(newSubmitting);
+  const finishedSubmitting = (newSubmitting: SubmittingState, goBack: boolean) => {
+    setSubmittingState(newSubmitting);
     if (goBack) onBackClick();
   };
   const isView =
@@ -110,7 +119,7 @@ export const ProposalFormSwitcher = ({
           <span>{user.displayName}</span>
           <CloseIcon onClose={onClose} />
         </Top>
-        <DataStatus hide={isView}>
+        <DataStatus hide={isView || !submittingState}>
           {disabled ? (
             <ProposalAnalysisStatusLabel
               fontSize={8}
@@ -120,8 +129,17 @@ export const ProposalFormSwitcher = ({
               text="global.filter_belated"
             />
           ) : (
-            <FormattedMessage id={submitting ? 'global.saving' : 'all.data.saved'}>
-              {(txt: string) => <span className={submitting ? 'saving' : 'saved'}>{txt}</span>}
+            <FormattedMessage id={stateToKey[submittingState || 'SAVED']}>
+              {(txt: string) => (
+                <span
+                  className={
+                    submittingState === 'SAVING' || submittingState === 'DRAFT_SAVING'
+                      ? 'saving'
+                      : 'saved'
+                  }>
+                  {txt}
+                </span>
+              )}
             </FormattedMessage>
           )}
         </DataStatus>

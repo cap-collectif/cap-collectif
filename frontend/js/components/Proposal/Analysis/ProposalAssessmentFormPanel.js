@@ -18,6 +18,7 @@ import { TYPE_FORM } from '~/constants/FormConstants';
 import { Validation, ValidateButton, AnalysisForm } from './ProposalAnalysisFormPanel';
 import ChangeProposalAssessmentMutation from '~/mutations/ChangeProposalAssessmentMutation';
 import EvaluateProposalAssessmentMutation from '~/mutations/EvaluateProposalAssessmentMutation';
+import { type SubmittingState } from './ProposalFormSwitcher';
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE';
 
@@ -26,7 +27,7 @@ type Props = {|
   proposal: ProposalAssessmentFormPanel_proposal,
   disabled?: boolean,
   initialStatus: Decision,
-  onValidate: (boolean, ?boolean) => void,
+  onValidate: (SubmittingState, ?boolean) => void,
   costEstimationEnabled: boolean,
   officialResponse: ?string,
 |};
@@ -42,7 +43,7 @@ export type FormValues = {|
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposal, onValidate } = props;
-  onValidate(true);
+  onValidate(values.validate && values.status ? 'SAVING' : 'DRAFT_SAVING');
   const input = {
     proposalId: proposal.id,
     body: values.body,
@@ -54,7 +55,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       input: { ...input, decision: values.status, officialResponse: values.officialResponse || '' },
     })
       .then(() => {
-        onValidate(false, values.goBack);
+        onValidate('SAVED', values.goBack);
       })
       .catch(e => {
         if (e instanceof SubmissionError) {
@@ -69,7 +70,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     input,
   })
     .then(() => {
-      onValidate(false);
+      onValidate('DRAFT_SAVED');
     })
     .catch(e => {
       if (e instanceof SubmissionError) {

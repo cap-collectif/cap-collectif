@@ -261,7 +261,7 @@ const onSubmit = (
       if (data.updateAlphaProject && data.updateAlphaProject.project) {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+          alert: { bsStyle: 'success', content: 'all.data.saved' },
         });
       }
     });
@@ -271,7 +271,7 @@ const onSubmit = (
       window.location.href = data.createAlphaProject.project.adminUrl;
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+        alert: { bsStyle: 'success', content: 'all.data.saved' },
       });
     }
   });

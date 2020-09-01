@@ -31,6 +31,7 @@ import component from '~/components/Form/Field';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import ChangeProposalAnalysisMutation from '~/mutations/ChangeProposalAnalysisMutation';
 import AnalyseProposalAnalysisMutation from '~/mutations/AnalyseProposalAnalysisMutation';
+import { type SubmittingState } from './ProposalFormSwitcher';
 
 import { TYPE_FORM } from '~/constants/FormConstants';
 
@@ -82,7 +83,7 @@ type Props = {|
   responses: ResponsesInReduxForm,
   initialStatus: ProposalAnalysisState,
   userId: string,
-  onValidate: (boolean, ?boolean) => void,
+  onValidate: (SubmittingState, ?boolean) => void,
 |};
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE' | 'NONE';
@@ -97,7 +98,7 @@ export type FormValues = {|
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposal, onValidate } = props;
-  onValidate(true);
+  onValidate(values.validate && values.status ? 'SAVING' : 'DRAFT_SAVING');
   const input = {
     responses: formatSubmitResponses(
       values.responses,
@@ -111,7 +112,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       input: { ...input, decision: values.status },
     })
       .then(() => {
-        onValidate(false, values.goBack);
+        onValidate('SAVED', values.goBack);
       })
       .catch(e => {
         if (e instanceof SubmissionError) {
@@ -126,7 +127,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     input,
   })
     .then(() => {
-      onValidate(false);
+      onValidate('DRAFT_SAVED');
     })
     .catch(e => {
       if (e instanceof SubmissionError) {
@@ -150,7 +151,7 @@ export const ProposalAnalysisFormPanel = ({
 }: Props) => {
   const intl = useIntl();
   const [status, setStatus] = useState(initialStatus);
-  const { width } = useResize();
+  const { width }: { width: number } = useResize();
   const isLarge = width < bootstrapGrid.mdMax;
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
     'availableQuestions',

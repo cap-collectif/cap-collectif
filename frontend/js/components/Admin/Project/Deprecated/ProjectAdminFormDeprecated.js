@@ -76,7 +76,7 @@ const onSubmit = (
       if (data.updateProject && data.updateProject.project) {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+          alert: { bsStyle: 'success', content: 'all.data.saved' },
         });
       }
     });
@@ -86,7 +86,7 @@ const onSubmit = (
       window.location.href = data.createProject.project.adminUrl;
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+        alert: { bsStyle: 'success', content: 'all.data.saved' },
       });
     }
   });
