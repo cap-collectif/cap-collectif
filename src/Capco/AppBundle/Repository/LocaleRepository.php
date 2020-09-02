@@ -97,6 +97,17 @@ class LocaleRepository extends EntityRepository
         }
     }
 
+    public function isCodePublished(string $userLocaleCode): bool
+    {
+        $qb = $this->createQueryBuilder('l');
+        $qb
+            ->select('COUNT(l.id)')
+            ->where('l.code = :userCode')
+            ->setParameter('userCode', $userLocaleCode);
+
+        return 0 < $qb->getQuery()->getSingleScalarResult();
+    }
+
     private function getSimilarCode(string $userCode): ?string
     {
         $qb = $this->createQueryBuilder('l');
@@ -112,16 +123,5 @@ class LocaleRepository extends EntityRepository
         }
 
         return null;
-    }
-
-    private function isCodePublished(string $userLocaleCode): bool
-    {
-        $qb = $this->createQueryBuilder('l');
-        $qb
-            ->select('COUNT(l.id)')
-            ->where('l.code = :userCode')
-            ->setParameter('userCode', $userLocaleCode);
-
-        return 0 < $qb->getQuery()->getSingleScalarResult();
     }
 }

@@ -8,6 +8,8 @@ use Capco\AppBundle\Locale\DefaultLocaleCodeDataloader;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\PageRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -17,12 +19,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocaleController extends AbstractFOSRestController
 {
-    private $localeRepository;
-    private $pageRepository;
-    private $router;
-    private $userDefaultLocaleMutation;
-    private $defaultLocaleCodeDataloader;
-    private $translator;
+    private LocaleRepository $localeRepository;
+    private PageRepository $pageRepository;
+    private RouterInterface $router;
+    private SetUserDefaultLocaleMutation $userDefaultLocaleMutation;
+    private DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader;
+    private TranslatorInterface $translator;
+    private LoggerInterface $logger;
 
     public function __construct(
         LocaleRepository $localeRepository,
@@ -30,7 +33,8 @@ class LocaleController extends AbstractFOSRestController
         RouterInterface $router,
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader,
         SetUserDefaultLocaleMutation $userDefaultLocaleMutation,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        LoggerInterface $logger
     ) {
         $this->localeRepository = $localeRepository;
         $this->pageRepository = $pageRepository;
@@ -38,6 +42,7 @@ class LocaleController extends AbstractFOSRestController
         $this->userDefaultLocaleMutation = $userDefaultLocaleMutation;
         $this->defaultLocaleCodeDataloader = $defaultLocaleCodeDataloader;
         $this->translator = $translator;
+        $this->logger = $logger;
     }
 
     /**
@@ -53,38 +58,47 @@ class LocaleController extends AbstractFOSRestController
         if (null !== $user) {
             $this->userDefaultLocaleMutation->setUserDefaultLocale($user, $localeCode);
         } else {
-            $locale = $this->localeRepository->findOneBy([
-                'code' => $localeCode,
-                'published' => true,
-            ]);
-            if (!$locale || !($locale instanceof Locale)) {
-                throw new BadRequestHttpException(
-                    "The locale with code ${localeCode} does not exist or is not enabled."
-                );
-            }
+            $this->checkLocaleIsPublished($localeCode);
         }
-        $request->setLocale($localeCode);
+        self::updateRequestLocale($request, $localeCode);
         $keptParams['_locale'] = $localeCode;
 
         $this->handlePageSlug($routeName, $keptParams);
-
-        try {
-            $redirectPath = $this->router->generate($routeName, $keptParams);
-            $defaultLocaleCode = $this->defaultLocaleCodeDataloader->__invoke();
-            if (
-                $localeCode !== $defaultLocaleCode &&
-                0 !== strpos($redirectPath, '/' . substr($localeCode, 0, 2) . '/')
-            ) {
-                $redirectPath = $this->router->generate('app_homepage', $localeCode);
-            }
-        } catch (\Exception $exception) {
-            $redirectPath = $this->router->generate('app_homepage', ['_locale' => $localeCode]);
-        }
+        $redirectPath = $this->getRedirectPath($routeName, $keptParams);
 
         return new JsonResponse([
             'locale' => $localeCode,
             'path' => $redirectPath,
         ]);
+    }
+
+    private function checkLocaleIsPublished(string $localeCode): void
+    {
+        if (!$this->localeRepository->isCodePublished($localeCode)) {
+            throw new BadRequestHttpException(
+                "The locale with code ${localeCode} does not exist or is not enabled."
+            );
+        }
+    }
+
+    private static function updateRequestLocale(Request $request, string $localeCode): void
+    {
+        $request->setLocale($localeCode);
+        $request->getSession()->set('_locale', $localeCode);
+    }
+
+    private function getRedirectPath(string $routeName, array $params): string
+    {
+        try {
+            $redirectPath = $this->router->generate($routeName, $params);
+        } catch (\Exception $exception) {
+            $this->logger->log(LogLevel::ERROR, $exception->getMessage());
+            $redirectPath = $this->router->generate('app_homepage', [
+                '_locale' => $params['_locale'],
+            ]);
+        }
+
+        return $redirectPath;
     }
 
     private function handlePageSlug(?string $routeName, array &$params): void
