@@ -1,6 +1,7 @@
 // @flow
 import type { Uuid } from '~/types';
 import type { AnalysisProjectPageStatus } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
+import { INITIAL_STATE } from './AnalysisProjectPage.context';
 
 export type ProposalsDistrictValues = 'ALL' | 'NONE' | Uuid;
 
@@ -78,7 +79,8 @@ export type Action =
   | { type: 'CHANGE_SUPERVISOR_FILTER', payload: Uuid }
   | { type: 'CLEAR_SUPERVISOR_FILTER' }
   | { type: 'CHANGE_DECISION_MAKER_FILTER', payload: Uuid }
-  | { type: 'CLEAR_DECISION_MAKER_FILTER' };
+  | { type: 'CLEAR_DECISION_MAKER_FILTER' }
+  | { type: 'CLEAR_FILTERS' };
 
 export const createReducer = (state: AnalysisProjectPageState, action: Action) => {
   switch (action.type) {
@@ -225,6 +227,8 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         ...state,
         sort: action.payload,
       };
+    case 'CLEAR_FILTERS':
+      return INITIAL_STATE;
     default:
       throw new Error(`Unknown action : ${action.type}`);
   }

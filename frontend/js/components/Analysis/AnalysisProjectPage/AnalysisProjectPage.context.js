@@ -25,6 +25,13 @@ export const DEFAULT_FILTERS: Filters = {
   decisionMaker: null,
 };
 
+export const INITIAL_STATE = {
+  status: DEFAULT_STATUS,
+  sort: DEFAULT_SORT,
+  filters: DEFAULT_FILTERS,
+  filtersOrdered: [],
+};
+
 type ProviderProps = {|
   +children: React.Node,
 |};

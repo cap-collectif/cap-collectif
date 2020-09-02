@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import ReactPlaceholder from 'react-placeholder';
 import { QueryRenderer, graphql } from 'react-relay';
@@ -19,6 +20,7 @@ import {
   type AnalysisProjectPageParameters,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import AnalysisPageContentPlaceholder from '~/components/Analysis/AnalysisPagePlaceholder/AnalysisPageContentPlaceholder';
+import type { GlobalState } from '~/types';
 
 const createQueryVariables = (
   parameters: AnalysisProjectPageParameters,
@@ -49,18 +51,25 @@ export const renderComponent = ({
   props,
   retry,
   parameters,
+  language,
 }: {
   ...ReactRelayReadyState,
   props: ?AnalysisIndexPageQueryResponse,
   parameters: AnalysisProjectPageParameters,
+  language: string,
 }) => {
   if (props) {
     const { viewerAssignedProjectsToAnalyse: projects, defaultUsers } = props;
+    const languageUrl: string = language.split('-')[0];
     const allPaths = Object.values(PATHS);
 
+    /**
+     * Why the Redirect from="/evaluations" ?
+     * We have to force the language in url to be sure of the basename for the url
+     */
     if (projects && projects.length > 0) {
       return (
-        <Router basename={window.location.pathname}>
+        <Router basename={`/${languageUrl}${BASE_URL_ANALYSIS}`}>
           <ScrollToTop />
 
           <Route
@@ -72,6 +81,8 @@ export const renderComponent = ({
           />
 
           <Switch>
+            <Redirect from="/evaluations" to="/" exact strict />
+
             <Route exact path={PATHS.INDEX}>
               {projects.length === 1 ? (
                 <Redirect to={`/project/${projects[0].slug}`} />
@@ -132,7 +143,11 @@ export const renderComponent = ({
   return <Loader />;
 };
 
-const AnalysisIndexPage = () => {
+type Props = {|
+  language: string,
+|};
+
+const AnalysisIndexPage = ({ language }: Props) => {
   const { parameters } = useAnalysisProposalsContext();
 
   return (
@@ -177,9 +192,15 @@ const AnalysisIndexPage = () => {
           }
         }
       `}
-      render={({ error, props, retry }) => renderComponent({ error, props, retry, parameters })}
+      render={({ error, props, retry }) =>
+        renderComponent({ error, props, retry, parameters, language })
+      }
     />
   );
 };
 
-export default AnalysisIndexPage;
+const mapStateToProps = (state: GlobalState) => ({
+  language: state.language.currentLanguage,
+});
+
+export default connect(mapStateToProps)(AnalysisIndexPage);

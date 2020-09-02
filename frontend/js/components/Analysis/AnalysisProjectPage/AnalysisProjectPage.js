@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import type { History } from 'react-router-dom';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { AnalysisProjectPage_project } from '~relay/AnalysisProjectPage_project.graphql';
 import PickableList from '~ui/List/PickableList';
@@ -24,9 +25,10 @@ export type Props = {|
   project: AnalysisProjectPage_project,
   defaultUsers: $PropertyType<AnalysisIndexPageQueryResponse, 'defaultUsers'>,
   relay: RelayPaginationProp,
+  history: History,
 |};
 
-const AnalysisProjectPage = ({ project, defaultUsers, relay }: Props) => {
+const AnalysisProjectPage = ({ project, defaultUsers, relay, history }: Props) => {
   const {
     sortedProposals: dataProposals,
     viewerProposalsTodo,
@@ -38,6 +40,17 @@ const AnalysisProjectPage = ({ project, defaultUsers, relay }: Props) => {
   const { parameters, dispatch, status } = useAnalysisProposalsContext();
   const descriptionProject = project.firstCollectStep?.form?.analysisConfiguration?.body;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
+
+  React.useEffect(() => {
+    // Listenning that current location changed.
+    const stopListenningHistory = history.listen(() => {
+      dispatch({ type: 'CLEAR_FILTERS' });
+    });
+
+    return () => {
+      stopListenningHistory();
+    };
+  }, [dispatch, history]);
 
   return (
     <AnalysisProjectPageContainer>
