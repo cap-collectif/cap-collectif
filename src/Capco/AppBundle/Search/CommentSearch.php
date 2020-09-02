@@ -80,10 +80,9 @@ class CommentSearch extends Search
     private function createCommentsByUserQuery(User $user): Query
     {
         $boolQuery = new BoolQuery();
-        $boolQuery->addMust([
-            new Term(['published' => ['value' => true]]),
-            new Term(['author.id' => ['value' => $user->getId()]])
-        ]);
+        $boolQuery
+            ->addFilter(new Term(['published' => ['value' => true]]))
+            ->addFilter(new Term(['author.id' => ['value' => $user->getId()]]));
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
@@ -93,22 +92,24 @@ class CommentSearch extends Search
     private function createPublicCommentsByAuthorQuery(User $author): Query
     {
         $boolQuery = new BoolQuery();
-        $boolQuery->addMust([
+        $boolQuery->addFilter(
             (new BoolQuery())->addShould([
                 (new BoolQuery())->addMustNot([new Exists('proposal')]),
-                (new BoolQuery())->addMust([
-                    new Term([
-                        'proposal.project.visibility' => [
-                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC
-                        ]
-                    ]),
-                    new Term(['proposal.visible' => ['value' => true]])
-                ])
-            ]),
+                (new BoolQuery())
+                    ->addFilter(
+                        new Term([
+                            'proposal.project.visibility' => [
+                                'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                            ],
+                        ])
+                    )
+                    ->addFilter(new Term(['proposal.visible' => ['value' => true]])),
+            ])
+        );
+        $boolQuery
+            ->addFilter(new Term(['published' => ['value' => true]]))
+            ->addFilter(new Term(['author.id' => ['value' => $author->getId()]]));
 
-            new Term(['published' => ['value' => true]]),
-            new Term(['author.id' => ['value' => $author->getId()]])
-        ]);
         $boolQuery->addMustNot([new Exists('trashedStatus')]);
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
@@ -121,7 +122,7 @@ class CommentSearch extends Search
         $boolQuery = new BoolQuery();
         $conditions = [
             new Term(['author.id' => ['value' => $author->getId()]]),
-            new Term(['published' => ['value' => true]])
+            new Term(['published' => ['value' => true]]),
         ];
 
         if ($viewer !== $author && !$viewer->isSuperAdmin()) {
@@ -140,11 +141,13 @@ class CommentSearch extends Search
                         [(new BoolQuery())->addShould($superAdminSubConditions)],
                         $adminSubConditions
                     )
-                )
+                ),
             ]);
         }
 
-        $boolQuery->addMust($conditions);
+        foreach ($conditions as $condition) {
+            $boolQuery->addFilter($condition);
+        }
         $boolQuery->addMustNot(new Exists('trashedStatus'));
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);

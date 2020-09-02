@@ -33,8 +33,8 @@ class VersionSearch extends Search
         string $order,
         int $limit,
         ?string $cursor = null,
-        ?User $viewer  = null,
-        ?int $seed  = null,
+        ?User $viewer = null,
+        ?int $seed = null,
         bool $isACLDisabled = false
     ): ElasticsearchPaginatedResult {
         $boolQuery = new BoolQuery();
@@ -42,17 +42,19 @@ class VersionSearch extends Search
 
         if (!$isACLDisabled) {
             if ($viewer && !$viewer->isSuperAdmin()) {
-                $conditions[] = (new BoolQuery())->addShould(
-                    $this->getFiltersForProjectViewerCanSee('project', $viewer)
-                );
+                $boolQuery
+                    ->addFilter(new BoolQuery())
+                    ->addShould($this->getFiltersForProjectViewerCanSee('project', $viewer));
             }
 
             if (!$viewer) {
-                $conditions[] = new Term([
-                    'project.visibility' => [
-                        'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
-                    ],
-                ]);
+                $boolQuery->addFilter(
+                    new Term([
+                        'project.visibility' => [
+                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                        ],
+                    ])
+                );
             }
         }
 
@@ -63,10 +65,8 @@ class VersionSearch extends Search
             unset($filters['trashed']);
         }
         foreach ($filters as $key => $value) {
-            $conditions[] = new Term([$key => ['value' => $value]]);
+            $boolQuery->addFilter(new Term([$key => ['value' => $value]]));
         }
-
-        $boolQuery->addMust($conditions);
 
         if (ContributionOrderField::RANDOM === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);

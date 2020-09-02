@@ -42,12 +42,12 @@ abstract class Search
             // sprintf with %u is here in order to avoid negative int.
             return sprintf('%u', crc32($viewer->getId()));
         }
-        
+
         if ($request && $request->getCurrentRequest()) {
             // sprintf with %u is here in order to avoid negative int.
             return sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
         }
-        
+
         return random_int(0, PHP_INT_MAX);
     }
 
@@ -148,20 +148,24 @@ abstract class Search
                 ]),
                 new Query\Terms("${projectPath}.authors.id", [$viewer->getId()]),
             ]),
-            (new BoolQuery())->addMust([
-                new Term([
-                    "${projectPath}.visibility" => [
-                        'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM,
-                    ],
-                ]),
-                new Query\Terms("${projectPath}.restrictedViewerIds", [$viewer->getId()]),
-            ]),
-            (new BoolQuery())->addMust([
-                new Query\Terms("${projectPath}.visibility", $visibility),
-                new Query\Range("${projectPath}.visibility", [
-                    'lt' => ProjectVisibilityMode::VISIBILITY_CUSTOM,
-                ]),
-            ]),
+            (new BoolQuery())
+                ->addFilter(
+                    new Term([
+                        "${projectPath}.visibility" => [
+                            'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM,
+                        ],
+                    ])
+                )
+                ->addFilter(
+                    new Query\Terms("${projectPath}.restrictedViewerIds", [$viewer->getId()])
+                ),
+            (new BoolQuery())
+                ->addFilter(new Query\Terms("${projectPath}.visibility", $visibility))
+                ->addFilter(
+                    new Query\Range("${projectPath}.visibility", [
+                        'lt' => ProjectVisibilityMode::VISIBILITY_CUSTOM,
+                    ])
+                ),
         ];
     }
 

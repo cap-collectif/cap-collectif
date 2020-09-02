@@ -48,7 +48,7 @@ class UserSearch extends Search
     ): array {
         $boolQuery = new Query\BoolQuery();
         if (null !== $type && UserType::FILTER_ALL !== $type) {
-            $boolQuery->addMust(new Term(['userType.id' => ['value' => $type->getId()]]));
+            $boolQuery->addFilter(new Term(['userType.id' => ['value' => $type->getId()]]));
         }
         $query = new Query();
         $query->setQuery($boolQuery);
@@ -378,7 +378,7 @@ class UserSearch extends Search
     public function getAllContributors(int $offset, int $limit): array
     {
         $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(new Range('totalParticipationsCount', ['gt' => 0]));
+        $boolQuery->addFilter(new Range('totalParticipationsCount', ['gt' => 0]));
 
         $query = new Query($boolQuery);
         $query->setSort([

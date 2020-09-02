@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Elastica\Index;
@@ -23,7 +22,7 @@ class ProjectSearch extends Search
         'object',
         'object.std',
         'teaser',
-        'teaser.std'
+        'teaser.std',
     ];
     private const POPULAR = 'POPULAR';
     private const PUBLISHED_AT = 'PUBLISHED_AT';
@@ -41,7 +40,7 @@ class ProjectSearch extends Search
         int $offset,
         int $limit,
         array $orderBy,
-        string $term = null,
+        ?string $term,
         array $providedFilters
     ): array {
         $boolQuery = new Query\BoolQuery();
@@ -58,7 +57,7 @@ class ProjectSearch extends Search
         ) {
             $withEventOnlyBoolQuery = new Query\BoolQuery();
             $withEventOnlyBoolQuery->addShould(new Query\Range('eventCount', ['gt' => 0]));
-            $boolQuery->addMust($withEventOnlyBoolQuery);
+            $boolQuery->addFilter($withEventOnlyBoolQuery);
             unset($providedFilters['withEventOnly']);
         }
 
@@ -67,20 +66,19 @@ class ProjectSearch extends Search
             $localeBoolQuery = new Query\BoolQuery();
             $localeBoolQuery->addShould([
                 new Term(['locale.id' => ['value' => $providedFilters['locale']]]),
-                (new Query\BoolQuery())->addMustNot(new Exists('locale'))
+                (new Query\BoolQuery())->addMustNot(new Exists('locale')),
             ]);
-            $boolQuery->addMust($localeBoolQuery);
+            $boolQuery->addFilter($localeBoolQuery);
             unset($providedFilters['locale']);
         }
 
-
         foreach ($providedFilters as $key => $value) {
             if (null !== $value) {
-                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+                $boolQuery->addFilter(new Term([$key => ['value' => $value]]));
             }
         }
 
-        $boolQuery->addMust(new Exists('id'));
+        $boolQuery->addFilter(new Exists('id'));
 
         $query = new Query($boolQuery);
 
@@ -94,10 +92,9 @@ class ProjectSearch extends Search
         $resultSet = $this->index->getType($this->type)->search($query);
         $results = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
 
-
         return [
             'projects' => $results,
-            'count' => $resultSet->getTotalHits()
+            'count' => $resultSet->getTotalHits(),
         ];
     }
 
@@ -127,7 +124,7 @@ class ProjectSearch extends Search
             case self::POPULAR:
                 return [
                     'contributionsCount' => ['order' => $orderBy['direction']],
-                    'createdAt' => ['order' => 'desc']
+                    'createdAt' => ['order' => 'desc'],
                 ];
             case self::PUBLISHED_AT:
                 $sortField = 'publishedAt';

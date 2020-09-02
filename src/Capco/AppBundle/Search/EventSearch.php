@@ -62,7 +62,7 @@ class EventSearch extends Search
                     $dateBoolQuery->addShould(new Query\Range('endAt', ['lt' => 'now/d']));
                     $endDateIsNullQuery->addMustNot(new Query\Exists('endAt'));
                     $dateBoolQuery->addShould($endDateIsNullQuery);
-                    $boolQuery->addMust($dateBoolQuery);
+                    $boolQuery->addFilter($dateBoolQuery);
                     $boolQuery->addMust(new Query\Range('startAt', ['lt' => 'now/d']));
 
                     break;
@@ -71,7 +71,7 @@ class EventSearch extends Search
                     $dateBoolQuery = new Query\BoolQuery();
                     $dateBoolQuery->addShould(new Query\Range('startAt', ['gte' => 'now/d']));
                     $dateBoolQuery->addShould(new Query\Range('endAt', ['gte' => 'now/d']));
-                    $boolQuery->addMust($dateBoolQuery);
+                    $boolQuery->addFilter($dateBoolQuery);
 
                     break;
                 // FUTURE and PASSED (null case)
@@ -83,9 +83,9 @@ class EventSearch extends Search
         $filters = $this->getFilters($providedFilters);
 
         foreach ($filters as $key => $value) {
-            $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            $boolQuery->addFilter(new Term([$key => ['value' => $value]]));
         }
-        $boolQuery->addMust(new Exists('id'));
+        $boolQuery->addFilter(new Exists('id'));
 
         if ('random' === $orderBy['field']) {
             $query = $this->getRandomSortedQuery($boolQuery);

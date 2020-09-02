@@ -64,8 +64,9 @@ class OpinionSearch extends Search
             $conditions[] = new Term([$key => ['value' => $value]]);
         }
 
-        $boolQuery->addMust($conditions);
-
+        foreach ($conditions as $condition) {
+            $boolQuery->addFilter($condition);
+        }
         if (ContributionOrderField::RANDOM === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
             $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
@@ -109,10 +110,10 @@ class OpinionSearch extends Search
 
         foreach ($filters as $key => $value) {
             if ($value) {
-                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+                $boolQuery->addFilter(new Term([$key => ['value' => $value]]));
             }
         }
-        $boolQuery->addMust(new Exists('id'));
+        $boolQuery->addFilter(new Exists('id'));
 
         if ('random' === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
