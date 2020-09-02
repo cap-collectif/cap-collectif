@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Authenticator;
 
 use Capco\UserBundle\Entity\User;
@@ -20,7 +21,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     protected $logger;
 
     public function __construct(
-        ?Simple $samlAuth = null,
+        ?Simple $samlAuth,
         string $samlIdp,
         HttpUtils $httpUtils,
         LoggerInterface $logger
@@ -33,19 +34,12 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
 
     public function getAuthenticationAttribute(): string
     {
-        if ('oda' === $this->samlIdp) {
-            return 'oda_id';
-        }
         if ('daher' === $this->samlIdp) {
             return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn';
         }
 
-        if ('afd-interne' === $this->samlIdp) {
-            return 'mail';
-        }
-
-        if ('pole-emploi' === $this->samlIdp) {
-            return 'mail';
+        if ('grandest-preprod' === $this->samlIdp || 'grandest' === $this->samlIdp) {
+            return 'email';
         }
 
         throw new \Exception('Could not find your authentication attribute.');

@@ -204,9 +204,6 @@ class User extends BaseUser implements
             return;
         }
 
-        if ('oda' === $idp) {
-            $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
-        }
         if ('daher' === $idp) {
             $this->setUsername(
                 $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
@@ -220,16 +217,11 @@ class User extends BaseUser implements
                 )
             );
         }
-        if ('afd-interne' === $idp) {
-            $this->setUsername($attributes['cn'][0]);
-            $this->setEmail($attributes['mail'][0]);
-            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
-        }
 
-        if ('pole-emploi' === $idp) {
-            $this->setUsername($attributes['cn'][0]);
-            $this->setEmail($attributes['mail'][0]);
-            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
+        if ('grandest-preprod' === $idp || 'grandest' === $idp) {
+            $this->setUsername($attributes['prenom'][0]);
+            $this->setEmail($attributes['email'][0]);
+            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['email'][0]));
         }
     }
 
@@ -357,7 +349,7 @@ class User extends BaseUser implements
         return $this->newEmailToConfirm;
     }
 
-    public function setNewEmailToConfirm(string $email = null): self
+    public function setNewEmailToConfirm(?string $email = null): self
     {
         $this->newEmailToConfirm = $email;
 
@@ -369,7 +361,7 @@ class User extends BaseUser implements
         return $this->newEmailConfirmationToken;
     }
 
-    public function setNewEmailConfirmationToken(string $token = null): self
+    public function setNewEmailConfirmationToken(?string $token = null): self
     {
         $this->newEmailConfirmationToken = $token;
 
@@ -545,7 +537,7 @@ class User extends BaseUser implements
         $this->twitterUrl = $twitterUrl;
     }
 
-    public function setMedia(Media $media = null): self
+    public function setMedia(?Media $media = null): self
     {
         $this->media = $media;
 
@@ -848,7 +840,7 @@ class User extends BaseUser implements
         return $this->emailConfirmationSentAt;
     }
 
-    public function setEmailConfirmationSentAt(\DateTime $date = null)
+    public function setEmailConfirmationSentAt(?\DateTime $date = null)
     {
         $this->emailConfirmationSentAt = $date;
 
@@ -872,7 +864,7 @@ class User extends BaseUser implements
         return $this->confirmedAccountAt;
     }
 
-    public function setConfirmedAccountAt(\DateTime $confirmedAccountAt = null): self
+    public function setConfirmedAccountAt(?\DateTime $confirmedAccountAt = null): self
     {
         $this->confirmedAccountAt = $confirmedAccountAt;
 
@@ -884,7 +876,7 @@ class User extends BaseUser implements
         return $this->smsConfirmationSentAt;
     }
 
-    public function setSmsConfirmationSentAt(\DateTime $date = null)
+    public function setSmsConfirmationSentAt(?\DateTime $date = null)
     {
         $this->smsConfirmationSentAt = $date;
 
