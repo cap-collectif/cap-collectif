@@ -304,10 +304,12 @@ class ContributionSearch extends Search
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
+        $this->applyContributionsFilters($boolQuery, $filters['_type'], true, true);
+        unset($filters['_type']);
 
         if (!empty($filters)) {
-            foreach ($filters as $filter) {
-                $boolQuery->addFilter(new Query\Term($filter));
+            foreach ($filters as $key => $filter) {
+                $boolQuery->addFilter(new Query\Term([$key => ['value' => $filter]]));
             }
         }
         $boolQuery->addFilter(
@@ -318,14 +320,9 @@ class ContributionSearch extends Search
                 (new BoolQuery())
                     ->addFilter(new Query\Exists('opinionVersion'))
                     ->addFilter(new Term(['opinionVersion.published' => ['value' => true]])),
-                (new BoolQuery())->addMustNot([
-                    new Query\Exists('opinion'),
-                    new Query\Exists('opinionVersion'),
-                ]),
+                new Query\MatchAll(),
             ])
         );
-
-        $this->applyContributionsFilters($boolQuery, null, true, true);
 
         $query = new Query($boolQuery);
         if ($order) {

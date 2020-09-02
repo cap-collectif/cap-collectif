@@ -102,7 +102,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 234,
+            "totalCount": 264,
           },
           "contributionsCount": 234,
           "contributors": Object {
@@ -122,7 +122,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 53,
+            "totalCount": 54,
           },
           "contributionsCount": 54,
           "contributors": Object {
@@ -178,7 +178,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 121,
+            "totalCount": 132,
           },
           "contributionsCount": 132,
           "contributors": Object {
@@ -398,7 +398,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
         "node": Object {
           "contributions": Object {
-            "totalCount": 8,
+            "totalCount": 9,
           },
           "contributionsCount": 9,
           "contributors": Object {
@@ -416,7 +416,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 5,
+            "totalCount": 32,
           },
           "contributionsCount": 32,
           "contributors": Object {
@@ -434,7 +434,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
         "node": Object {
           "contributions": Object {
-            "totalCount": 5,
+            "totalCount": 6,
           },
           "contributionsCount": 6,
           "contributors": Object {
@@ -558,7 +558,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 234,
+            "totalCount": 264,
           },
           "contributionsCount": 234,
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -776,7 +776,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
           "contributions": Object {
-            "totalCount": 121,
+            "totalCount": 132,
           },
           "contributionsCount": 132,
           "id": "UHJvamVjdDpwcm9qZWN0NQ==",
@@ -812,7 +812,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
           "contributions": Object {
-            "totalCount": 53,
+            "totalCount": 54,
           },
           "contributionsCount": 54,
           "id": "UHJvamVjdDpwcm9qZWN0Mg==",
@@ -824,7 +824,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
           "contributions": Object {
-            "totalCount": 234,
+            "totalCount": 264,
           },
           "contributionsCount": 234,
           "id": "UHJvamVjdDpwcm9qZWN0MQ==",
@@ -1004,7 +1004,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 234,
+            "totalCount": 264,
           },
           "contributionsCount": 234,
           "contributors": Object {
@@ -1024,7 +1024,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 53,
+            "totalCount": 54,
           },
           "contributionsCount": 54,
           "contributors": Object {
@@ -1080,7 +1080,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 121,
+            "totalCount": 132,
           },
           "contributionsCount": 132,
           "contributors": Object {

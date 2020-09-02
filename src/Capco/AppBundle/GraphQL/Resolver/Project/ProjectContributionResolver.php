@@ -40,9 +40,17 @@ class ProjectContributionResolver implements ResolverInterface
                 } else {
                     $order = 'last';
                 }
-                if ($type = $args->offsetGet('type')) {
-                    $filters['_type'] = $type;
-                }
+
+                $filters['_type'] = $args->offsetExists('type')
+                    ? [
+                        \call_user_func([
+                            ContributionSearch::CONTRIBUTION_TYPE_CLASS_MAPPING[
+                                $args->offsetGet('type')
+                            ],
+                            'getElasticsearchTypeName',
+                        ]),
+                    ]
+                    : null;
 
                 $response = $this->contributionSearch->getContributionsByProject(
                     $project->getId(),
