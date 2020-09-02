@@ -47,7 +47,7 @@ export type AddressCompleteFormatted = {|
     lat: number,
     lng: number,
   },
-  type: string,
+  type: ?string,
   address_components: Array<{
     long_name: string,
     short_name: string,
@@ -91,4 +91,4 @@ export type AddressType =
   | 'country'
   | 'point_of_interest'
   | 'locality'
-  | string;
+  | ?string;

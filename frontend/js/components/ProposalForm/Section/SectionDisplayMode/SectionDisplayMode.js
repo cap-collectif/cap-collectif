@@ -89,7 +89,7 @@ const getStepsDependOfView = (
   });
 };
 
-const getZoomDependOfAddress = (addressType: AddressType) => {
+const getZoomDependOfAddress = (addressType?: AddressType) => {
   switch (addressType) {
     case 'continent':
     case 'country':
@@ -226,22 +226,43 @@ export const SectionDisplayMode = ({
         getLocationUser(LOCATION_PARIS.lat, LOCATION_PARIS.lng, zoomCity);
       } else if (!previewLocation) {
         const addressFormatted = formatAddressFromGoogleAddress(JSON.parse(dataMap.json)[0]);
-        const zoomLevel = getZoomDependOfAddress(addressFormatted.type);
-        const previewLocationDisplay = getDataFromGoogleAddress(
-          addressFormatted,
-          addressFormatted.type,
-        );
 
-        setPosition(
-          addressFormatted.latLng.lat,
-          addressFormatted.latLng.lng,
-          zoomLevel.id,
-          addressFormatted,
-          previewLocationDisplay,
-        );
+        // case we don't have address
+        if (!addressFormatted.address_components || !addressFormatted.type) {
+          getLocationUser(
+            addressFormatted.latLng.lat,
+            addressFormatted.latLng.lng,
+            zoomLevels[9].id,
+          );
+        } else {
+          const zoomLevel = getZoomDependOfAddress(addressFormatted.type);
+          const previewLocationDisplay = getDataFromGoogleAddress(
+            addressFormatted,
+            addressFormatted.type || 'locality',
+          );
+
+          setPosition(
+            addressFormatted.latLng.lat,
+            addressFormatted.latLng.lng,
+            zoomLevel.id,
+            addressFormatted,
+            previewLocationDisplay,
+          );
+        }
       }
     }
-  }, [refMap, zoom, isMapDisplay, latitude, longitude, setPosition, updateInfoLocation, dataMap, previewLocation, getLocationUser]);
+  }, [
+    refMap,
+    zoom,
+    isMapDisplay,
+    latitude,
+    longitude,
+    setPosition,
+    updateInfoLocation,
+    dataMap,
+    previewLocation,
+    getLocationUser,
+  ]);
 
   React.useEffect(() => {
     if (addressSelected) {

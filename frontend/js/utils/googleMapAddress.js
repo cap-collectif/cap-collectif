@@ -45,7 +45,7 @@ export const formatAddressFromGoogleAddress = ({
     lat: geometry.location.lat,
     lng: geometry.location.lng,
   },
-  type: types[0],
+  type: types ? types[0] : null,
   address_components,
   addressOriginal: {
     formatted_address,
