@@ -9,6 +9,7 @@ final class ProposalAknowledgeUpdateMessage extends AbstractExternalMessage
 {
     public const SUBJECT = 'acknowledgement-of-receipt';
     public const TEMPLATE = '@CapcoMail/aknowledgeProposal.html.twig';
+    public const FOOTER = '';
 
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
@@ -39,7 +40,7 @@ final class ProposalAknowledgeUpdateMessage extends AbstractExternalMessage
             'business' => 'Cap Collectif',
             'businessUrl' => 'https://cap-collectif.com/',
             'isTimeless' => $proposal->getStep()->isTimeless(),
-            'baseUrl' => $params['baseURL']
+            'baseUrl' => $params['baseURL'],
         ];
     }
 }
