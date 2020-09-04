@@ -119,11 +119,12 @@ class SettingsController extends Controller
      */
     public function switchToggleAction(string $toggle)
     {
+        $allowedToggles = ['allow_users_to_propose_events', 'display_map'];
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
         if (
-            'display_map' !== $toggle &&
+            !\in_array($toggle, $allowedToggles) &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
         ) {
             throw $this->createAccessDeniedException();
