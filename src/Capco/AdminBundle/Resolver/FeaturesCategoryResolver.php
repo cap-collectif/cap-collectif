@@ -59,10 +59,10 @@ class FeaturesCategoryResolver
                     'secure_password',
                     'restrict_connection',
                     'public_api',
-                    'votes_min',
                     'developer_documentation',
                 ],
                 UserRole::ROLE_SUPER_ADMIN => [
+                    'votes_min',
                     'disconnect_openid',
                     'votes_evolution',
                     'remind_user_account_confirmation',
