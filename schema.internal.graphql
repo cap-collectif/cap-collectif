@@ -7693,6 +7693,9 @@ type Query {
 
   """List all site colors."""
   siteColors: [SiteColor!]!
+
+  """Retrieve the current version of the app."""
+  appVersion: String
 }
 
 """Fetches an object given its ID"""
