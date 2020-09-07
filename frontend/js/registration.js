@@ -70,6 +70,11 @@ import LanguageButtonApp from '~/startup/LanguageButtonApp';
 import appStore from '~/stores/AppStore';
 import UserInvitationPageApp from '~/startup/UserInvitationPageApp';
 import ResetPasswordApp from '~/startup/ResetPasswordApp';
+import ConsultationStepApp from '~/startup/ConsultationStepApp';
+import ProposalPreviewApp from '~/startup/ProposalPreviewApp';
+import DebatePreviewApp from '~/startup/DebatePreviewApp';
+import UserSliderApp from '~/startup/UserSliderApp';
+import GlobalStepApp from '~/startup/GlobalStepApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -143,4 +148,9 @@ ReactOnRails.register({
   CalendarApp,
   EngagementListApp,
   AccordionApp,
+  ConsultationStepApp,
+  ProposalPreviewApp,
+  DebatePreviewApp,
+  UserSliderApp,
+  GlobalStepApp,
 });

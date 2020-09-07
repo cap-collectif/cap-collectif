@@ -1,0 +1,48 @@
+// @flow
+import styled, { type StyledComponent } from 'styled-components';
+
+export type Colors = {|
+  primary: string,
+  secondary: string,
+|};
+
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'consultation-step-item',
+})`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title,
+  .date {
+    margin: 0;
+  }
+
+  .date {
+    color: #6b7885;
+    font-weight: bold;
+  }
+`;
+
+export const Number: StyledComponent<{ colors: Colors }, {}, HTMLParagraphElement> = styled.p`
+  position: relative;
+  color: ${props => props.colors.primary};
+  margin: 0 15px 0 0;
+  font-size: 24px;
+  font-weight: bold;
+
+  .line {
+    position: absolute;
+    left: 0;
+    bottom: 6px;
+    z-index: -1;
+    width: 16px;
+    height: 8px;
+    background-color: ${props => props.colors.secondary};
+  }
+`;
