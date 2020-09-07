@@ -17,7 +17,7 @@ PreviewQuery:
                         type: 'PreviewProjectOrder'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                         description: 'Ordering options for projects returning from the connection.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProjectsResolver", [args, getUser(), info])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProjectsResolver", [args, getUser(), serv("request_stack"), info])'
             events:
                 type: 'PreviewEventConnection!'
                 argsBuilder: 'Relay::Connection'

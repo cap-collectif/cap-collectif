@@ -19,6 +19,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class QueryProjectsResolver implements ResolverInterface
 {
@@ -44,30 +45,35 @@ class QueryProjectsResolver implements ResolverInterface
     public function __invoke(
         Argument $args,
         ?User $viewer,
+        RequestStack $request,
         ResolveInfo $resolveInfo
     ): ConnectionInterface {
         $this->protectArguments($args);
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
-        return $this->resolve($args, $viewer);
+        return $this->resolve($args, $request, $viewer);
     }
 
-    public function resolve(Argument $args, ?User $viewer = null): ConnectionInterface
-    {
+    public function resolve(
+        Argument $args,
+        ?RequestStack $request = null,
+        ?User $viewer = null
+    ): ConnectionInterface {
         try {
             $totalCount = 0;
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 $args,
+                $request,
                 $viewer,
                 &$totalCount
             ) {
-                $this->setLocaleId($args, $viewer);
+                $this->setLocaleId($args, $request);
                 $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
                 $orderBy = $args->offsetExists('orderBy')
                     ? $args->offsetGet('orderBy')
                     : [
                         'field' => ProjectOrderField::PUBLISHED_AT,
-                        'direction' => OrderDirection::DESC
+                        'direction' => OrderDirection::DESC,
                     ];
                 $onlyPublic = $args->offsetExists('onlyPublic')
                     ? $args->offsetGet('onlyPublic')
@@ -107,7 +113,7 @@ class QueryProjectsResolver implements ResolverInterface
             return $connection;
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' ' . $exception->getMessage(), [
-                'exception' => $exception
+                'exception' => $exception,
             ]);
         }
 
@@ -142,17 +148,18 @@ class QueryProjectsResolver implements ResolverInterface
         return $filters;
     }
 
-    private function setLocaleId(Argument $argument, ?User $viewer): void
+    private function setLocaleId(Argument $argument, ?RequestStack $request): void
     {
-        $localeCode = $argument->offsetGet('locale') ??
-            ($viewer && $viewer->getLocale()) ? $viewer->getLocale() :
-                null;
+        $localeCode =
+            $argument->offsetGet('locale') ?? $request && $request->getCurrentRequest()
+                ? $request->getCurrentRequest()->getLocale()
+                : null;
         if ($localeCode) {
             $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);
             if ($locale && $locale->isEnabled()) {
                 $argument->offsetSet('locale', $locale->getId());
             } else {
-                throw new UserError("the locale $locale is not enabled");
+                throw new UserError("the locale ${locale} is not enabled");
             }
         }
     }
