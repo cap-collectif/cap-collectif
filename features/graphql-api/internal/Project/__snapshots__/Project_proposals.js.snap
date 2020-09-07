@@ -10,6 +10,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYxMA==",
         "reference": "10",
         "status": null,
+        "theme": null,
         "title": "Mon autre grand projet",
       },
     },
@@ -36,6 +37,7 @@ Object {
               "id": "statusIdfAnalyse4",
               "name": "En cours d'analyse",
             },
+            "theme": null,
             "title": "Mon grand projet",
           },
         },
@@ -66,10 +68,251 @@ Object {
           "id": "statusIdfCollect1",
           "name": "Nouveau projet",
         },
+        "theme": null,
         "title": "Mon projet local en tant qu'organisme public",
       },
     },
   ],
   "totalCount": 1,
+}
+`;
+
+exports[`Internal.projects.proposals search project's proposals by given theme 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategory2",
+          "name": "Politique",
+        },
+        "district": Object {
+          "id": "district1",
+          "name": "Beauregard",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "reference": "1",
+        "status": Object {
+          "color": "info",
+          "id": "status1",
+          "name": "En cours",
+        },
+        "theme": Object {
+          "id": "theme2",
+        },
+        "title": "Ravalement de la façade de la bibliothèque municipale",
+      },
+    },
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategory1",
+          "name": "Aménagement",
+        },
+        "district": Object {
+          "id": "district3",
+          "name": "Maurepas Patton",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
+        "reference": "1",
+        "status": Object {
+          "color": "info",
+          "id": "status7",
+          "name": "En cours",
+        },
+        "theme": Object {
+          "id": "theme2",
+        },
+        "title": "Proposition plus votable",
+      },
+    },
+    Object {
+      "node": Object {
+        "category": null,
+        "district": Object {
+          "id": "district3",
+          "name": "Maurepas Patton",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
+        "reference": "2",
+        "status": Object {
+          "color": "info",
+          "id": "status1",
+          "name": "En cours",
+        },
+        "theme": Object {
+          "id": "theme2",
+        },
+        "title": "Proposition plus votable 2",
+      },
+    },
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategory1",
+          "name": "Aménagement",
+        },
+        "district": Object {
+          "id": "district2",
+          "name": "Nord Saint-Martin",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+        "reference": "12",
+        "status": Object {
+          "color": "success",
+          "id": "status2",
+          "name": "Approuvé",
+        },
+        "theme": Object {
+          "id": "theme3",
+        },
+        "title": "Renovation of the gymnasium",
+      },
+    },
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategory1",
+          "name": "Aménagement",
+        },
+        "district": Object {
+          "id": "district2",
+          "name": "Nord Saint-Martin",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+        "reference": "2",
+        "status": Object {
+          "color": "success",
+          "id": "status2",
+          "name": "Approuvé",
+        },
+        "theme": Object {
+          "id": "theme3",
+        },
+        "title": "Rénovation du gymnase",
+      },
+    },
+  ],
+  "totalCount": 75,
+}
+`;
+
+exports[`Internal.projects.proposals search project's proposals with theme value NONE 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategory2",
+          "name": "Politique",
+        },
+        "district": Object {
+          "id": "district1",
+          "name": "Beauregard",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "reference": "1",
+        "status": Object {
+          "color": "info",
+          "id": "status1",
+          "name": "En cours",
+        },
+        "theme": Object {
+          "id": "theme2",
+        },
+        "title": "Ravalement de la façade de la bibliothèque municipale",
+      },
+    },
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategory1",
+          "name": "Aménagement",
+        },
+        "district": Object {
+          "id": "district3",
+          "name": "Maurepas Patton",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
+        "reference": "1",
+        "status": Object {
+          "color": "info",
+          "id": "status7",
+          "name": "En cours",
+        },
+        "theme": Object {
+          "id": "theme2",
+        },
+        "title": "Proposition plus votable",
+      },
+    },
+    Object {
+      "node": Object {
+        "category": null,
+        "district": Object {
+          "id": "district3",
+          "name": "Maurepas Patton",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
+        "reference": "2",
+        "status": Object {
+          "color": "info",
+          "id": "status1",
+          "name": "En cours",
+        },
+        "theme": Object {
+          "id": "theme2",
+        },
+        "title": "Proposition plus votable 2",
+      },
+    },
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategory1",
+          "name": "Aménagement",
+        },
+        "district": Object {
+          "id": "district2",
+          "name": "Nord Saint-Martin",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
+        "reference": "12",
+        "status": Object {
+          "color": "success",
+          "id": "status2",
+          "name": "Approuvé",
+        },
+        "theme": Object {
+          "id": "theme3",
+        },
+        "title": "Renovation of the gymnasium",
+      },
+    },
+    Object {
+      "node": Object {
+        "category": Object {
+          "id": "pCategory1",
+          "name": "Aménagement",
+        },
+        "district": Object {
+          "id": "district2",
+          "name": "Nord Saint-Martin",
+        },
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+        "reference": "2",
+        "status": Object {
+          "color": "success",
+          "id": "status2",
+          "name": "Approuvé",
+        },
+        "theme": Object {
+          "id": "theme3",
+        },
+        "title": "Rénovation du gymnase",
+      },
+    },
+  ],
+  "totalCount": 75,
 }
 `;

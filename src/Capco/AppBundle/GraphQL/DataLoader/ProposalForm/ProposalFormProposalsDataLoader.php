@@ -135,7 +135,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $filters['step'],
             $filters['state'],
             $filters['district'],
-            $filters['themes'],
+            $filters['theme'],
             $filters['types'],
             $filters['category'],
             $filters['status'],

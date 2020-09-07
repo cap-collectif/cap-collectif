@@ -63,6 +63,9 @@ class ProjectViewerAssignedProposalsResolver implements ResolverInterface
             if ($args->offsetExists('state')) {
                 $state = $args->offsetGet('state');
             }
+            if ($args->offsetExists('theme')) {
+                $filters['theme'] = $args->offsetGet('theme');
+            }
             list($direction, $field) = [
                 $args->offsetGet('orderBy')['direction'],
                 $args->offsetGet('orderBy')['field'],

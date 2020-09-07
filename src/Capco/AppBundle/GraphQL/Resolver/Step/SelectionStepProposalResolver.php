@@ -37,7 +37,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $direction,
             $term,
             $filters['district'],
-            $filters['themes'],
+            $filters['theme'],
             $filters['userType'],
             $filters['category'],
             $filters['status'],

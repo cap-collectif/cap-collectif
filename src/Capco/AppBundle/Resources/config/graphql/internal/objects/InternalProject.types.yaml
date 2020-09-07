@@ -167,6 +167,8 @@ InternalProject:
                 description: 'Get all assigned proposals of the viewer.'
                 access: "@=hasRole('ROLE_USER')"
                 args:
+                    theme:
+                        type: 'ID'
                     district:
                         type: 'ID'
                     analysts:

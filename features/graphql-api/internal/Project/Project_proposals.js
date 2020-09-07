@@ -24,6 +24,9 @@ const ProjectProposalQuery = /* GraphQL */ `
           totalCount
           edges {
             node {
+              theme {
+                id
+              }
               district {
                 id
                 name
@@ -170,6 +173,32 @@ describe('Internal.projects.proposals', () => {
         state: 'ALL',
         term: 'organisme',
         count: 10,
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals).toMatchSnapshot();
+  });
+
+  it("search project's proposals by given theme", async () => {
+    const response = await graphql(
+      ProjectProposalQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        theme: 'theme2',
+        count: 5,
+      },
+      'internal_admin',
+    );
+    expect(response.project.proposals).toMatchSnapshot();
+  });
+
+  it("search project's proposals with theme value NONE", async () => {
+    const response = await graphql(
+      ProjectProposalQuery,
+      {
+        projectId: 'UHJvamVjdDpwcm9qZWN0Ng==',
+        theme: 'NONE',
+        count: 5,
       },
       'internal_admin',
     );

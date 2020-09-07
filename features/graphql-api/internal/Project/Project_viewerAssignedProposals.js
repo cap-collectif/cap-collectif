@@ -9,6 +9,9 @@ const ProjectViewerAssignedProposalsQuery = /* GraphQL */ `
           edges {
             node {
               id
+              theme {
+                id
+              }
               category {
                 id
                 name
@@ -101,5 +104,18 @@ describe('Internal|Project.viewerAssignedProposals', () => {
       { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
     );
     expect(response.project.viewerAssignedProposals.totalCount).toBe(0);
+  });
+
+  it("fetches viewer's assigned proposals by project, theme (NONE).", async () => {
+    await expect(
+      graphql(
+        ProjectViewerAssignedProposalsQuery,
+        {
+          projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+          theme: 'NONE',
+        },
+        { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
+      ),
+    ).resolves.toMatchSnapshot();
   });
 });

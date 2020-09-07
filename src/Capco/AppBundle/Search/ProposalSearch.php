@@ -504,15 +504,14 @@ class ProposalSearch extends Search
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
 
-        if (
-            isset($providedFilters['district']) &&
-            Search::NONE_VALUE !== $providedFilters['district']
-        ) {
+        if (isset($providedFilters['district'])) {
             $filters['district.id'] = $providedFilters['district'];
         }
-        if (isset($providedFilters['themes'])) {
-            $filters['theme.id'] = $providedFilters['themes'];
+
+        if (isset($providedFilters['theme'])) {
+            $filters['theme.id'] = $providedFilters['theme'];
         }
+
         if (isset($providedFilters['types']) && $providedFilters['types'] > 0) {
             $filters['author.userType.id'] = $providedFilters['types'];
         }
@@ -582,7 +581,7 @@ class ProposalSearch extends Search
 
     private function applyInaplicableFilters(BoolQuery $boolQuery, array &$filters): void
     {
-        $inapplicableFilters = ['district', 'category', 'status'];
+        $inapplicableFilters = ['district', 'category', 'status', 'theme'];
         $existsFilters = [];
         foreach ($inapplicableFilters as $inapplicableFilter) {
             if (
