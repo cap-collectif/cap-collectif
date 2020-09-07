@@ -5,10 +5,11 @@ namespace Capco\UserBundle\OpenID;
 use Capco\UserBundle\OpenID\ReferrerResolver\DefaultReferrerResolver;
 use Capco\UserBundle\OpenID\ReferrerResolver\GrandLyonReferrerResolver;
 use Capco\UserBundle\OpenID\ReferrerResolver\OccitanieReferrerResolver;
+use Capco\UserBundle\OpenID\ReferrerResolver\ReferrerInterface;
 
 class OpenIDReferrerResolver
 {
-    private $refererResolver;
+    private ReferrerInterface $refererResolver;
 
     public function __construct(string $instanceName)
     {

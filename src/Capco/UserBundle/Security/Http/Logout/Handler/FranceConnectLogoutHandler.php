@@ -11,11 +11,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class FranceConnectLogoutHandler implements LogoutHandlerInterface
 {
-    private $toggleManager;
-    private $resourceOwner;
-    private $router;
-    private $tokenStorage;
-    private $environment;
+    private Manager $toggleManager;
+    private ResourceOwnerInterface $resourceOwner;
+    private RouterInterface $router;
+    private TokenStorageInterface $tokenStorage;
+    private string $environment;
 
     public function __construct(
         Manager $toggleManager,
@@ -35,7 +35,6 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
         $token = $this->tokenStorage->getToken();
-
         // This if statement help to not trigger France Connect logout redirection
         // when a user was logged in with another workflow (classic auth, facebook, etc...).
         if (
@@ -46,12 +45,10 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
         ) {
             $logoutURL = $this->resourceOwner->getOption('logout_url');
 
-            $homepageUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
-
             $parameters = [
-                'post_logout_redirect_uri' => $homepageUrl,
+                'post_logout_redirect_uri' => $responseWithRequest->getResponse()->getTargetUrl(),
                 'state' => $this->generateNonce(),
-                'id_token_hint' => $token->getRawToken()['id_token']
+                'id_token_hint' => $token->getRawToken()['id_token'],
             ];
 
             $responseWithRequest->setResponse(

@@ -3,9 +3,21 @@ import React, { useState } from 'react';
 import { FormattedMessage, FormattedHTMLMessage, type IntlShape, injectIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import { Button, Panel } from 'react-bootstrap';
-import { formValueSelector, reduxForm, submit, Field, SubmissionError } from 'redux-form';
-import styled, { type StyledComponent } from 'styled-components';
+import { Button, Panel, ListGroupItem, OverlayTrigger } from 'react-bootstrap';
+import {
+  formValueSelector,
+  hasSubmitFailed,
+  hasSubmitSucceeded,
+  isInvalid,
+  isPristine,
+  isSubmitting,
+  isValid,
+  SubmissionError,
+  reduxForm,
+  submit,
+  Field,
+} from 'redux-form';
+import styled, { css, type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
@@ -25,21 +37,30 @@ import type {
   TranslationLocale,
 } from '~relay/UpdateProfileAccountLocaleMutation.graphql';
 import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale';
+import ListGroup from '../../Ui/List/ListGroup';
+import SocialIcon from '~ui/Icons/SocialIcon';
+import { getButtonLinkForType } from '~ui/Button/LoginSocialButton';
+import DissociateSsoModal from '~/components/User/Profile/DissociateSsoModal';
+import Tooltip from '~/components/Utils/Tooltip';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 export const formName = 'accountForm';
 
 type RelayProps = {| viewer: AccountForm_viewer |};
 
+type StateProps = {|
+  +features: FeatureToggles,
+|};
+
 type Props = {|
   ...RelayProps,
+  ...StateProps,
   ...ReduxFormFormProps,
   newEmail?: ?string,
   newEmailToConfirm?: ?string,
   initialValues: Object,
   currentLanguage: ?string,
-  +defaultLocale: string,
   +dispatch: Dispatch,
-  +features: FeatureToggles,
   +languageList: Array<LocaleMap>,
   +intl: IntlShape,
 |};
@@ -158,12 +179,69 @@ const AccountContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 const FooterContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   justify-content: space-between;
-  button.btn-danger {
-    background-color: ${colors.dangerColor};
+`;
+
+const SsoDiv: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  align-items: center;
+  a {
+    font-size: 13px;
   }
-  button.btn-primary {
-    background-color: ${colors.primaryColor};
+`;
+
+const SsoIcon: StyledComponent<{ type?: string }, {}, HTMLDivElement> = styled.div`
+  width: 40px;
+  margin-right: 5px;
+  .loginIcon {
+    ${props =>
+      props.type === 'google' &&
+      css`
+        border-radius: 50%;
+        padding: 7px;
+        background-color: #fff;
+        border: solid 1px #ddd;
+      `}
+    & > svg {
+      ${props => {
+        if (props.type === 'franceConnect') {
+          return 'height: 45px;transform: translate(5px , 5px);';
+        }
+        if (props.type === 'google') {
+          return 'height: 22px;transform: translate(0px , -2px);';
+        }
+        if (props.type === 'fb') {
+          return 'height: 45px;transform: translate(-12px , -2px);';
+        }
+        return 'height: 35px;transform: translate(0px , -2px);';
+      }}
+    }
   }
+`;
+
+const SsoGroup: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  margin-top: 10px;
+  padding-left: 15px;
+
+  span.sign-in-method {
+    font-size: 14px;
+    color: ${colors.gray};
+  }
+`;
+
+const AssociateLink: StyledComponent<
+  { color: string, bcd: string },
+  {},
+  HTMLAnchorElement,
+> = styled.a`
+  padding: 5px;
+  width: 84px;
+  height: 30px;
+  background: ${props => props.bcd};
+  border-radius: 17.5px;
+  color: ${props => props.color};
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
 `;
 
 export const AccountForm = ({
@@ -184,6 +262,7 @@ export const AccountForm = ({
 }: Props) => {
   const [showConfirmPasswordModal, setConfirmPasswordModal] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
+  const [showDissociateSsoModal, setShowDissociateSsoModal] = useState(false);
 
   const _renderLanguageSection = () => {
     if (features.multilangue) {
@@ -193,11 +272,25 @@ export const AccountForm = ({
           label: intl.formatMessage({ id: languageObject.translationKey }),
         };
       });
-
+      const tooltipDelete = (
+        <Tooltip id="tooltip" className="account-form-hint">
+          <FormattedMessage id="display-language-hint" />
+        </Tooltip>
+      );
       return (
         <>
           <label className="col-sm-3 control-label" htmlFor="display__language">
             <FormattedMessage id="display-language" />
+            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+              <span className="ml-5 excerpt" style={{ fontSize: 15 }}>
+                <Icon
+                  name={ICON_NAME.information}
+                  size={15}
+                  color={colors.darkGray}
+                  className="mr-5"
+                />
+              </span>
+            </OverlayTrigger>
           </label>
           <div className="col-sm-6">
             <Field
@@ -208,13 +301,33 @@ export const AccountForm = ({
               options={localeListOptions}
             />
           </div>
-          <span className="account-form-hint">
-            <FormattedMessage id="display-language-hint" />
-          </span>
         </>
       );
     }
     return null;
+  };
+
+  const dissociate = (service: string, title: string) => {
+    return (
+      <>
+        <DissociateSsoModal
+          handleClose={() => setShowDissociateSsoModal(false)}
+          dispatch
+          viewer={viewer}
+          service={service}
+          title={title}
+          show={showDissociateSsoModal}
+        />
+        <AssociateLink
+          bcd="rgba(51, 51, 51, 0.08)"
+          color="rgb(51, 51, 51)"
+          onClick={() => setShowDissociateSsoModal(true)}
+          title={intl.formatMessage({ id: 'global-unlink' })}
+          id={`dissociate-event-${service}`}>
+          <FormattedMessage id="global-unlink" />
+        </AssociateLink>
+      </>
+    );
   };
 
   const footer = (
@@ -261,17 +374,16 @@ export const AccountForm = ({
             <label className="col-sm-3 control-label" htmlFor="account__email">
               <FormattedMessage id="global.email" />
             </label>
-            <div>
-              <Field
-                type="email"
-                component={renderComponent}
-                name="email"
-                id="account__email"
-                divClassName="col-sm-6"
-              />
-            </div>
+            <Field
+              type="email"
+              component={renderComponent}
+              name="email"
+              disabled={!viewer.hasPassword || viewer.isFranceConnectAccount}
+              id="account__email"
+              divClassName="col-sm-6"
+            />
             <span className="account-form-hint">
-              <i className="icon cap-lock-2" />
+              {viewer.isFranceConnectAccount && <FormattedMessage id="data-from-FranceConnect" />}
               <FormattedMessage id="account.your_email_is_not_public" />
             </span>
             {_renderLanguageSection()}
@@ -310,6 +422,116 @@ export const AccountForm = ({
             />
           </div>
         </form>
+        <SsoGroup>
+          <span className="font-weight-bold">
+            <FormattedMessage id="Sign-in-option" />
+          </span>
+          <span className="clearfix sign-in-method">
+            <FormattedMessage id="Sign-in-method" />
+          </span>
+          <ListGroup className="mt-10">
+            {features.login_franceconnect && (
+              <ListGroupItem className="bgc-fa h-70">
+                <SsoDiv>
+                  <SsoIcon type="franceConnect">
+                    <SocialIcon className="loginIcon" name="franceConnectIcon" />
+                  </SsoIcon>
+                  <span>
+                    <b>FranceConnect</b>
+                    <br />
+                    {viewer.isFranceConnectAccount ? (
+                      <a
+                        href="https://fcp.integ01.dev-franceconnect.fr/traces/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        <FormattedMessage id="fc-archive-connection" />
+                      </a>
+                    ) : (
+                      <a
+                        href="https://franceconnect.gouv.fr/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Qu’est-ce-que FranceConnect ?
+                      </a>
+                    )}
+                  </span>
+                </SsoDiv>
+                <>
+                  {!viewer.isFranceConnectAccount ? (
+                    <AssociateLink
+                      bcd="rgba(3, 136, 204, 0.08)"
+                      color="rgb(0, 140, 214)"
+                      href={getButtonLinkForType(
+                        'franceConnect',
+                        `${window && window.location.origin + window.location.pathname}`,
+                      )}
+                      title="franceConnect">
+                      <FormattedMessage id="global-link" />
+                    </AssociateLink>
+                  ) : (
+                    <>{dissociate('FRANCE_CONNECT', 'FranceConnect')}</>
+                  )}
+                </>
+              </ListGroupItem>
+            )}
+            {features.login_facebook && (
+              <ListGroupItem className="bgc-fa h-70">
+                <SsoDiv>
+                  <SsoIcon type="fb">
+                    <SocialIcon className="loginIcon" name="facebookF" />
+                  </SsoIcon>
+                  <span>
+                    <b>Facebook</b>
+                  </span>
+                </SsoDiv>
+                <>
+                  {!viewer.facebookId ? (
+                    <AssociateLink
+                      bcd="rgba(3, 136, 204, 0.08)"
+                      color="rgb(0, 140, 214)"
+                      href={getButtonLinkForType(
+                        'facebook',
+                        `${window && window.location.origin + window.location.pathname}`,
+                      )}
+                      title="facebook">
+                      <FormattedMessage id="global-link" />
+                    </AssociateLink>
+                  ) : (
+                    <>{dissociate('FACEBOOK', 'Facebook')}</>
+                  )}
+                </>
+              </ListGroupItem>
+            )}
+            {features.login_gplus && (
+              <ListGroupItem className="bgc-fa h-70">
+                <SsoDiv>
+                  <SsoIcon type="google">
+                    <SocialIcon className="loginIcon" name="googleColored" />
+                  </SsoIcon>
+                  <span>
+                    <b>Google</b>
+                  </span>
+                </SsoDiv>
+                <>
+                  {!viewer.googleId ? (
+                    <AssociateLink
+                      bcd="rgba(3, 136, 204, 0.08)"
+                      color="rgb(0, 140, 214)"
+                      href={getButtonLinkForType(
+                        'google',
+                        `${window && window.location.origin + window.location.pathname}`,
+                      )}
+                      title="google">
+                      <FormattedMessage id="global-link" />
+                    </AssociateLink>
+                  ) : (
+                    <>{dissociate('GOOGLE', 'Google')}</>
+                  )}
+                </>
+              </ListGroupItem>
+            )}
+          </ListGroup>
+        </SsoGroup>
       </Panel.Body>
       <Panel.Footer>{footer}</Panel.Footer>
     </>
@@ -331,9 +553,16 @@ const mapStateToProps = (state: State, props: Props) => {
     newEmail: formValueSelector(formName)(state, 'email'),
     passwordConfirm: formValueSelector(passwordForm)(state, 'password'),
     language: formValueSelector(formName)(state, 'language'),
+    pristine: isPristine(formName)(state),
+    valid: isValid(formName)(state),
+    invalid: isInvalid(formName)(state),
+    submitting: isSubmitting(formName)(state),
+    submitSucceeded: hasSubmitSucceeded(formName)(state),
+    submitFailed: hasSubmitFailed(formName)(state),
     initialValues: {
       email: props.viewer.email ? props.viewer.email : null,
       language: props.viewer.locale ? TranslationLocaleEnum[props.viewer.locale] : null,
+      isFranceConnectAccount: props.viewer.isFranceConnectAccount || null,
     },
     currentValues: selector(state, 'email', 'language'),
   };
@@ -347,7 +576,12 @@ export default createFragmentContainer(container, {
       email
       locale
       newEmailToConfirm
+      facebookId
+      googleId
+      hasPassword
+      isFranceConnectAccount
       ...DeleteAccountModal_viewer
+      ...DissociateSsoModal_viewer
     }
   `,
 });

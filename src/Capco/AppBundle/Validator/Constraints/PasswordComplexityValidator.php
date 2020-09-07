@@ -52,7 +52,7 @@ class PasswordComplexityValidator extends ConstraintValidator
         }
     }
 
-    public function getErrorMessage(bool $hasDigit, bool $hasUpperLower, bool $length): string
+    public function getErrorMessage(bool $hasDigit, bool $hasUpperLower, bool $length): ?string
     {
         $sum = ($length ? 0 : 1) + ($hasUpperLower ? 0 : 2) + ($hasDigit ? 0 : 4);
         switch ($sum) {

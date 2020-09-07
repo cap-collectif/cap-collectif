@@ -22,6 +22,8 @@ describe('<PersonalData />', () => {
     city: 'Paris',
     gender: 'MALE',
     phoneConfirmed: true,
+    birthPlace: 'Loguetown',
+    isFranceConnectAccount: false,
   };
 
   const props1 = {
@@ -38,6 +40,8 @@ describe('<PersonalData />', () => {
       city: 'Paris',
       gender: 'MALE',
       phoneConfirmed: true,
+      isFranceConnectAccount: false,
+      birthPlace: 'Noxus',
     },
     currentValues: {
       firstname: 'Utilisateur',
@@ -49,6 +53,8 @@ describe('<PersonalData />', () => {
       zipCode: '75012',
       city: 'Paris',
       gender: 'MALE',
+      birthPlace: 'Demacia',
+      isFranceConnectAccount: false,
     },
   };
   const props2 = {
@@ -65,6 +71,8 @@ describe('<PersonalData />', () => {
       city: null,
       gender: 'MALE',
       phoneConfirmed: true,
+      birthPlace: null,
+      isFranceConnectAccount: false,
     },
     currentValues: {
       firstname: 'Utilisateur',
@@ -76,6 +84,8 @@ describe('<PersonalData />', () => {
       zipCode: null,
       city: null,
       gender: 'MALE',
+      birthPlace: null,
+      isFranceConnectAccount: false,
     },
   };
 
@@ -95,6 +105,8 @@ describe('<PersonalData />', () => {
     phone: '0123456789',
     gender: 'MALE',
     phoneConfirmed: true,
+    birthPlace: 'Paris',
+    isFranceConnectAccount: false,
   };
   const props3 = {
     ...formMock,
@@ -110,6 +122,8 @@ describe('<PersonalData />', () => {
       city: 'Paris',
       gender: null,
       phoneConfirmed: true,
+      birthPlace: 'Paris',
+      isFranceConnectAccount: false,
     },
     currentValues: {
       firstname: 'Utilisateur',
@@ -121,6 +135,8 @@ describe('<PersonalData />', () => {
       zipCode: '75012',
       city: 'Paris',
       gender: null,
+      birthPlace: 'Paris',
+      isFranceConnectAccount: false,
     },
   };
   const viewer3 = {
@@ -139,6 +155,8 @@ describe('<PersonalData />', () => {
     address2: '2ième etage',
     zipCode: '75012',
     city: 'Paris',
+    birthPlace: 'Paris',
+    isFranceConnectAccount: false,
   };
 
   it('should render with full user', () => {

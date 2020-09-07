@@ -13,7 +13,7 @@ abstract class BaseNotifier
     protected SiteParameterResolver $siteParams;
     protected string $baseUrl;
     protected RouterInterface $router;
-    protected string $siteName;
+    protected ?string $siteName;
     protected string $siteUrl;
 
     public function __construct(

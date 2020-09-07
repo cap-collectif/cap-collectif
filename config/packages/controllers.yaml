@@ -46,6 +46,12 @@ services:
     Capco\UserBundle\Controller\ProfileController:
         public: true
 
+    Capco\UserBundle\Controller\OauthConnectController:
+        arguments:
+            $authUtils: '@hwi_oauth.security.oauth_utils'
+        calls:
+            - [setContainer, ['@service_container']]
+
     Capco\AppBundle\Controller\Site\OpinionController:
         public: true
 

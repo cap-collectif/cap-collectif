@@ -5,6 +5,29 @@ Object {
   "users": Object {
     "edges": Array [
       Object {
+        "cursor": "YToyOntpOjA7aToxNTgzODI5MDAwMDAwO2k6MTtzOjI2OiJ1c2VyQ29ubmVjdGVkRnJhbmNlQ29ubmVjdCI7fQ==",
+        "node": Object {
+          "biography": "Je suis créé via france connect",
+          "consentInternalCommunication": null,
+          "createdAt": "2020-03-10 09:30:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjp1c2VyQ29ubmVjdGVkRnJhbmNlQ29ubmVjdA==",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "updatedAt": null,
+          "url": "https://capco.test/profile/lampegeraldine",
+          "userType": null,
+          "username": "LAMPE Geraldine",
+          "websiteUrl": null,
+        },
+      },
+      Object {
         "cursor": "YToyOntpOjA7aToxNTgzNzQyNjAwMDAwO2k6MTtzOjc6InVzZXJJYW4iO30=",
         "node": Object {
           "biography": null,
@@ -24,6 +47,29 @@ Object {
           "url": "https://capco.test/profile/ianapprentidevops",
           "userType": null,
           "username": "Ian apprenti DevOps",
+          "websiteUrl": null,
+        },
+      },
+      Object {
+        "cursor": "YToyOntpOjA7aToxNTgzNzQyNjAwMDAwO2k6MTtzOjI5OiJ1c2VyTm90Q29ubmVjdGVkRnJhbmNlQ29ubmVjdCI7fQ==",
+        "node": Object {
+          "biography": "Je suis france connect pas encore associé.",
+          "consentInternalCommunication": null,
+          "createdAt": "2020-03-09 09:30:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjp1c2VyTm90Q29ubmVjdGVkRnJhbmNlQ29ubmVjdA==",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "updatedAt": null,
+          "url": "https://capco.test/profile/angelaclairelouise",
+          "userType": null,
+          "username": "Angela Claire Louise",
           "websiteUrl": null,
         },
       },
@@ -2440,64 +2486,14 @@ Object {
           "websiteUrl": null,
         },
       },
-      Object {
-        "cursor": "YToyOntpOjA7aToxNDgzMjMxNzQwMDAwO2k6MTtzOjc6InVzZXIxMDkiO30=",
-        "node": Object {
-          "biography": null,
-          "consentInternalCommunication": null,
-          "createdAt": "2017-01-01 01:49:00",
-          "deletedAccountAt": null,
-          "email": null,
-          "enabled": true,
-          "facebookUrl": null,
-          "id": "VXNlcjp1c2VyMTA5",
-          "linkedInUrl": null,
-          "responses": Object {
-            "edges": Array [],
-          },
-          "twitterUrl": null,
-          "updatedAt": null,
-          "url": "https://capco.test/profile/user109",
-          "userType": Object {
-            "name": "Citoyen",
-          },
-          "username": "user109",
-          "websiteUrl": null,
-        },
-      },
-      Object {
-        "cursor": "YToyOntpOjA7aToxNDgzMjMxNjgwMDAwO2k6MTtzOjc6InVzZXIxMDgiO30=",
-        "node": Object {
-          "biography": null,
-          "consentInternalCommunication": null,
-          "createdAt": "2017-01-01 01:48:00",
-          "deletedAccountAt": null,
-          "email": null,
-          "enabled": true,
-          "facebookUrl": null,
-          "id": "VXNlcjp1c2VyMTA4",
-          "linkedInUrl": null,
-          "responses": Object {
-            "edges": Array [],
-          },
-          "twitterUrl": null,
-          "updatedAt": null,
-          "url": "https://capco.test/profile/user108",
-          "userType": Object {
-            "name": "Citoyen",
-          },
-          "username": "user108",
-          "websiteUrl": null,
-        },
-      },
     ],
     "pageInfo": Object {
-      "endCursor": "YToyOntpOjA7aToxNDgzMjMxNjgwMDAwO2k6MTtzOjc6InVzZXIxMDgiO30=",
+      "endCursor": "YToyOntpOjA7aToxNDgzMjMxODAwMDAwO2k6MTtzOjc6InVzZXIxMTAiO30=",
       "hasNextPage": true,
       "hasPreviousPage": false,
-      "startCursor": "YToyOntpOjA7aToxNTgzNzQyNjAwMDAwO2k6MTtzOjc6InVzZXJJYW4iO30=",
+      "startCursor": "YToyOntpOjA7aToxNTgzODI5MDAwMDAwO2k6MTtzOjI2OiJ1c2VyQ29ubmVjdGVkRnJhbmNlQ29ubmVjdCI7fQ==",
     },
-    "totalCount": 223,
+    "totalCount": 225,
   },
 }
 `;
@@ -2508,7 +2504,19 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "_id": "userConnectedFranceConnect",
+          "isSuperAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
           "_id": "userIan",
+          "isSuperAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
+          "_id": "userNotConnectedFranceConnect",
           "isSuperAdmin": false,
         },
       },
@@ -2521,18 +2529,6 @@ Object {
       Object {
         "node": Object {
           "_id": "userMickael",
-          "isSuperAdmin": false,
-        },
-      },
-      Object {
-        "node": Object {
-          "_id": "userAgui",
-          "isSuperAdmin": false,
-        },
-      },
-      Object {
-        "node": Object {
-          "_id": "userJpec",
           "isSuperAdmin": false,
         },
       },
@@ -2547,7 +2543,19 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "_id": "userConnectedFranceConnect",
+          "createdAt": "2020-03-10 09:30:00",
+        },
+      },
+      Object {
+        "node": Object {
           "_id": "userIan",
+          "createdAt": "2020-03-09 09:30:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "_id": "userNotConnectedFranceConnect",
           "createdAt": "2020-03-09 09:30:00",
         },
       },
@@ -2561,18 +2569,6 @@ Object {
         "node": Object {
           "_id": "userMickael",
           "createdAt": "2019-11-04 09:30:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "_id": "userAgui",
-          "createdAt": "2019-09-09 09:30:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "_id": "userJpec",
-          "createdAt": "2019-07-15 09:30:00",
         },
       },
     ],
@@ -2716,7 +2712,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxNjEiO30=",
     },
-    "totalCount": 223,
+    "totalCount": 225,
   },
 }
 `;

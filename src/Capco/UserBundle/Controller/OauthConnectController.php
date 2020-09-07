@@ -6,22 +6,46 @@ use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
+use HWI\Bundle\OAuthBundle\Security\OAuthUtils;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * ConnectController.
- */
 class OauthConnectController extends ConnectController
 {
     protected $featuresForServices = [
         'facebook' => ['login_facebook'],
         'google' => ['login_gplus'],
         'twitter' => ['login_twitter'],
-        'franceconnect' => ['login_franceconnect']
+        'franceconnect' => ['login_franceconnect'],
     ];
+
+    protected HttpUtils $httpUtils;
+    protected OAuthUtils $authUtils;
+    protected Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository;
+    protected Manager $manager;
+    protected TranslatorInterface $translator;
+    protected LoggerInterface $logger;
+
+    public function __construct(
+        HttpUtils $httpUtils,
+        OAuthUtils $authUtils,
+        Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository,
+        Manager $manager,
+        TranslatorInterface $translator,
+        LoggerInterface $logger
+    ) {
+        $this->httpUtils = $httpUtils;
+        $this->authUtils = $authUtils;
+        $this->oauth2SSOConfigurationRepository = $oauth2SSOConfigurationRepository;
+        $this->manager = $manager;
+        $this->translator = $translator;
+        $this->logger = $logger;
+    }
 
     public function getFeaturesForService($service): array
     {
@@ -58,9 +82,9 @@ class OauthConnectController extends ConnectController
         }
 
         if ($error) {
-            $logger = $this->get('logger');
-            $logger->error('Oauth authentication error', ['error' => $error->getMessage()]);
+            $this->logger->error('Oauth authentication error', ['error' => $error->getMessage()]);
         }
+
         return new RedirectResponse($this->generateUrl('app_homepage'));
     }
 
@@ -70,50 +94,108 @@ class OauthConnectController extends ConnectController
      * @param Request $request The active request
      * @param string  $service Name of the resource owner to connect to
      *
-     * @throws NotFoundHttpException if features associated to web service are not enabled
-     *
      * @return Response
+     *
+     * @throws NotFoundHttpException if features associated to web service are not enabled
      */
     public function connectServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container
-                ->get('translator')
-                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+            $message = $this->translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
 
             throw new NotFoundHttpException($message);
         }
+
         return parent::connectServiceAction($request, $service);
     }
 
     /**
      * @param string $service
      *
-     * @throws NotFoundHttpException if features associated to web service are not enabled
-     *
      * @return RedirectResponse
+     *
+     * @throws NotFoundHttpException if features associated to web service are not enabled
      */
     public function redirectToServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container
-                ->get('translator')
-                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+            $message = $this->translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
 
             throw new NotFoundHttpException($message);
         }
+
+        if (
+            $this->container->getParameter('hwi_oauth.connect') &&
+            $this->isGranted($this->container->getParameter('hwi_oauth.grant_rule'))
+        ) {
+            return $this->associateToService($request, $service);
+        }
+
         return parent::redirectToServiceAction($request, $service);
     }
 
     protected function serviceHasEnabledFeature(string $service): bool
     {
-        $toggleManager = $this->container->get(Manager::class);
-
         if ('openid' === $service) {
-            $oauth2Repository = $this->get(Oauth2SSOConfigurationRepository::class);
-
-            return $oauth2Repository->findOneBy(['enabled' => true]) ? true : false;
+            return $this->oauth2SSOConfigurationRepository->findOneBy(['enabled' => true])
+                ? true
+                : false;
         }
-        return $toggleManager->hasOneActive($this->getFeaturesForService($service));
+
+        return $this->manager->hasOneActive($this->getFeaturesForService($service));
+    }
+
+    private function associateToService(Request $request, $service): RedirectResponse
+    {
+        try {
+            $redirectUrl = $this->httpUtils->generateUri(
+                $request,
+                $this->authUtils->getResourceOwnerCheckPath($service)
+            );
+            $resourceOwner = $this->authUtils->getResourceOwner($service);
+            $authorizationUrl = $resourceOwner->getAuthorizationUrl($redirectUrl, []);
+        } catch (\RuntimeException $e) {
+            throw new NotFoundHttpException($e->getMessage(), $e);
+        }
+
+        $session = $request->getSession();
+
+        // Check for a return path and store it before redirect
+        if (null !== $session) {
+            // initialize the session for preventing SessionUnavailableException
+            if (!$session->isStarted()) {
+                $session->start();
+            }
+
+            foreach ($this->container->getParameter('hwi_oauth.firewall_names') as $providerKey) {
+                $sessionKey = '_security.' . $providerKey . '.target_path';
+                $sessionKeyFailure = '_security.' . $providerKey . '.failed_target_path';
+
+                $param = $this->container->getParameter('hwi_oauth.target_path_parameter');
+                if (!empty($param) && ($targetUrl = $request->get($param))) {
+                    $session->set($sessionKey, $targetUrl);
+                }
+
+                if (
+                    $this->container->getParameter('hwi_oauth.failed_use_referer') &&
+                    !$session->has($sessionKeyFailure) &&
+                    ($targetUrl = $request->headers->get('Referer')) &&
+                    $targetUrl !== $authorizationUrl
+                ) {
+                    $session->set($sessionKeyFailure, $targetUrl);
+                }
+
+                if (
+                    $this->container->getParameter('hwi_oauth.use_referer') &&
+                    !$session->has($sessionKey) &&
+                    ($targetUrl = $request->headers->get('Referer')) &&
+                    $targetUrl !== $authorizationUrl
+                ) {
+                    $session->set($sessionKey, $targetUrl);
+                }
+            }
+        }
+
+        return $this->redirect($authorizationUrl);
     }
 }

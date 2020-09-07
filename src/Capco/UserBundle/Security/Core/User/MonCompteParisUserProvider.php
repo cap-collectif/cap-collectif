@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Exception\ParisAuthenticationException;
@@ -10,8 +11,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class MonCompteParisUserProvider implements UserProviderInterface
 {
-    private $userManager;
-    private $openAmCaller;
+    private UserManager $userManager;
+    private OpenAmClient $openAmCaller;
 
     public function __construct(UserManager $manager, OpenAmClient $openAmCaller)
     {
@@ -24,7 +25,7 @@ class MonCompteParisUserProvider implements UserProviderInterface
         $user = $this->userManager->findUserBy(['parisId' => $id]);
         if (null === $user) {
             $informations = $this->openAmCaller->getUserInformations($id);
-            if ("false" === $informations['validatedAccount']) {
+            if ('false' === $informations['validatedAccount']) {
                 throw new ParisAuthenticationException(
                     $id,
                     'Please validate your account from Mon Compte Paris'

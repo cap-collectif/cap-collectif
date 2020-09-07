@@ -1,0 +1,414 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DissociateSsoModal /> should render modal close 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="medium"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={false}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={false}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="contained-modal-title-lg"
+    >
+      <b>
+        <FormattedMessage
+          id="unlink-account"
+          values={
+            Object {
+              "service": "FranceConnect",
+            }
+          }
+        />
+      </b>
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <p
+      className="excerpt"
+    >
+      <FormattedMessage
+        id="unlink-account-next-step"
+        values={
+          Object {
+            "service": "FranceConnect",
+          }
+        }
+      />
+    </p>
+    <DissociateSsoModal__CreatePassword>
+      <label
+        className="col-sm-6 control-label p-0"
+      >
+        <p
+          className="mb-0"
+        >
+          <FormattedMessage
+            id="global.fullname"
+            values={Object {}}
+          />
+        </p>
+      </label>
+      <span
+        className="col-sm-9 mb-10 p-0"
+      >
+        user
+      </span>
+      <label
+        className="col-sm-6 control-label p-0"
+      >
+        <p
+          className="mb-0"
+        >
+          <FormattedMessage
+            id="global.email"
+            values={Object {}}
+          />
+        </p>
+      </label>
+      <span
+        className="col-sm-9  mb-10 p-0"
+      >
+        user@franceconnect.com
+      </span>
+      <form
+        name="dissociate-sso"
+        onSubmit={[Function]}
+      >
+        <Field
+          component={[Function]}
+          id="service"
+          name="service"
+          type="hidden"
+        />
+        <label
+          className="col-sm-6 p-0"
+          htmlFor="create-password"
+        >
+          <p
+            className="mb-0"
+          >
+            <FormattedMessage
+              id="registration.password"
+              values={Object {}}
+            />
+          </p>
+        </label>
+        <Field
+          component={[Function]}
+          divClassName="col-sm-9 p-0"
+          id="create-password"
+          name="plainPassword"
+          required={true}
+          type="password"
+        />
+      </form>
+    </DissociateSsoModal__CreatePassword>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      bsStyle="danger"
+      className="ml-5"
+      disabled={false}
+      id="dissociate-confirm"
+      isSubmitting={false}
+      label="button-unlink"
+      onSubmit={[Function]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<DissociateSsoModal /> should render modal open with password 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="medium"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={false}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="contained-modal-title-lg"
+    >
+      <b>
+        <FormattedMessage
+          id="unlink-account"
+          values={
+            Object {
+              "service": "FranceConnect",
+            }
+          }
+        />
+      </b>
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <p
+      className="excerpt"
+    >
+      <FormattedMessage
+        id="unlink-account-next-step"
+        values={
+          Object {
+            "service": "FranceConnect",
+          }
+        }
+      />
+    </p>
+    <DissociateSsoModal__CreatePassword>
+      <form
+        name="dissociate-sso"
+        onSubmit={[Function]}
+      >
+        <Field
+          component={[Function]}
+          id="service"
+          name="service"
+          type="hidden"
+        />
+      </form>
+    </DissociateSsoModal__CreatePassword>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      bsStyle="danger"
+      className="ml-5"
+      disabled={false}
+      id="dissociate-confirm"
+      isSubmitting={false}
+      label="global-unlink"
+      onSubmit={[Function]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<DissociateSsoModal /> should render modal open without password 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="medium"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={false}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="contained-modal-title-lg"
+    >
+      <b>
+        <FormattedMessage
+          id="unlink-account"
+          values={
+            Object {
+              "service": "FranceConnect",
+            }
+          }
+        />
+      </b>
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <p
+      className="excerpt"
+    >
+      <FormattedMessage
+        id="unlink-account-next-step"
+        values={
+          Object {
+            "service": "FranceConnect",
+          }
+        }
+      />
+    </p>
+    <DissociateSsoModal__CreatePassword>
+      <label
+        className="col-sm-6 control-label p-0"
+      >
+        <p
+          className="mb-0"
+        >
+          <FormattedMessage
+            id="global.fullname"
+            values={Object {}}
+          />
+        </p>
+      </label>
+      <span
+        className="col-sm-9 mb-10 p-0"
+      >
+        user
+      </span>
+      <label
+        className="col-sm-6 control-label p-0"
+      >
+        <p
+          className="mb-0"
+        >
+          <FormattedMessage
+            id="global.email"
+            values={Object {}}
+          />
+        </p>
+      </label>
+      <span
+        className="col-sm-9  mb-10 p-0"
+      >
+        user@franceconnect.com
+      </span>
+      <form
+        name="dissociate-sso"
+        onSubmit={[Function]}
+      >
+        <Field
+          component={[Function]}
+          id="service"
+          name="service"
+          type="hidden"
+        />
+        <label
+          className="col-sm-6 p-0"
+          htmlFor="create-password"
+        >
+          <p
+            className="mb-0"
+          >
+            <FormattedMessage
+              id="registration.password"
+              values={Object {}}
+            />
+          </p>
+        </label>
+        <Field
+          component={[Function]}
+          divClassName="col-sm-9 p-0"
+          id="create-password"
+          name="plainPassword"
+          required={true}
+          type="password"
+        />
+      </form>
+    </DissociateSsoModal__CreatePassword>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      bsStyle="danger"
+      className="ml-5"
+      disabled={false}
+      id="dissociate-confirm"
+      isSubmitting={false}
+      label="button-unlink"
+      onSubmit={[Function]}
+    />
+  </ModalFooter>
+</Modal>
+`;

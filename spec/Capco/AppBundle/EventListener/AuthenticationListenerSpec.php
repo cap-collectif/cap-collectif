@@ -4,15 +4,16 @@ namespace spec\Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\UserConnection;
 use Capco\AppBundle\EventListener\AuthenticationListener;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class AuthenticationListenerSpec extends ObjectBehavior
@@ -75,19 +76,36 @@ class AuthenticationListenerSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         InteractiveLoginEvent $event,
         Request $request,
-        TokenInterface $tokenInterface,
-        User $user
+        UserInterface $user,
+        Session $session,
+        OAuthToken $tokenInterface
     ) {
         $headerBag = new HeaderBag(['user-agent' => 'TEST']);
         $event
             ->getRequest()
             ->shouldBeCalled()
             ->willReturn($request);
-
+        $tokenInterface
+            ->serialize()
+            ->shouldBeCalled()
+            ->willReturn(
+                'a:7:{i:0;s:9:"sqdqsdsqd";i:1;a:1:{s:12:"access_token";s:9:"sqdqsdsqd";}i:2;s:7:"refresh";i:3;i:60;i:4;i:1596457723;i:5;N;i:6;a:5:{i:0;N;i:1;b:0;i:2;a:0:{}i:3;a:0:{}i:4;a:0:{}}}'
+            );
         $event
             ->getAuthenticationToken()
             ->shouldBeCalled()
             ->willReturn($tokenInterface);
+
+        $request
+            ->getSession()
+            ->shouldBeCalled()
+            ->willReturn($session);
+        $session
+            ->set(
+                'theToken',
+                'a:7:{i:0;s:9:"sqdqsdsqd";i:1;a:1:{s:12:"access_token";s:9:"sqdqsdsqd";}i:2;s:7:"refresh";i:3;i:60;i:4;i:1596457723;i:5;N;i:6;a:5:{i:0;N;i:1;b:0;i:2;a:0:{}i:3;a:0:{}i:4;a:0:{}}}'
+            )
+            ->shouldBeCalled();
         $tokenInterface
             ->getUser()
             ->shouldBeCalled()
@@ -112,8 +130,7 @@ class AuthenticationListenerSpec extends ObjectBehavior
         $this->onAuthenticationSuccess($event);
         $entityManager
             ->persist(
-                Argument::that(function ($userConnection) use (
-                    $expectedUserConnection) : bool {
+                Argument::that(function ($userConnection) use ($expectedUserConnection): bool {
                     return $userConnection->isSuccess() === $expectedUserConnection->isSuccess() &&
                         $userConnection->getEmail() === $expectedUserConnection->getEmail() &&
                         $userConnection->getIpAddress() ===

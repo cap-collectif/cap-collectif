@@ -10,10 +10,10 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OpenIDLogoutHandler implements LogoutHandlerInterface
 {
-    private $toggleManager;
-    private $resourceOwner;
-    private $router;
-    private $refererResolver;
+    private Manager $toggleManager;
+    private ResourceOwnerInterface $resourceOwner;
+    private RouterInterface $router;
+    private OpenIDReferrerResolver $refererResolver;
 
     public function __construct(
         Manager $toggleManager,
@@ -30,9 +30,7 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
     public function handle(
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
-        if (
-            $this->toggleManager->isActive('disconnect_openid')
-        ) {
+        if ($this->toggleManager->isActive('disconnect_openid')) {
             $logoutURL = $this->resourceOwner->getOption('logout_url');
 
             $homepageUrl = $this->router->generate(
@@ -43,16 +41,14 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
 
             $parameters = [];
 
-            if($responseWithRequest->getRequest()->query->get('ssoSwitchUser')) {
+            if ($responseWithRequest->getRequest()->query->get('ssoSwitchUser')) {
                 $parameters = [
                     $this->refererResolver->getRefererParameterForLogout() =>
-                        $homepageUrl . '/login/openid?_destination=' . $homepageUrl
+                        $homepageUrl . '/login/openid?_destination=' . $homepageUrl,
                 ];
-            }
-            else {
+            } else {
                 $parameters = [
-                    $this->refererResolver->getRefererParameterForLogout() =>
-                        $homepageUrl
+                    $this->refererResolver->getRefererParameterForLogout() => $homepageUrl,
                 ];
             }
 

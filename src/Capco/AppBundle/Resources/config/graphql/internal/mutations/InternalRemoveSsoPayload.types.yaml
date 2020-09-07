@@ -1,0 +1,11 @@
+InternalRemoveSsoPayload:
+    type: relay-mutation-payload
+    config:
+        name: RemoveSsoPayload
+        description: 'Payload type of RemoveSso'
+        fields:
+            viewer:
+                type: 'InternalUser!'
+            redirectUrl:
+                type: 'URI'
+                description: 'The redirect URI to disconnect the sso'

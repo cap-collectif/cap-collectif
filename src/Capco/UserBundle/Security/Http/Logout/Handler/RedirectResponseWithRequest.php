@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class RedirectResponseWithRequest
 {
-    private $request;
-    private $response;
+    private Request $request;
+    private RedirectResponse $response;
 
     public function __construct(Request $request, RedirectResponse $response)
     {

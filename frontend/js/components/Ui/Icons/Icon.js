@@ -19,10 +19,13 @@ export const ICON_NAME: {
   link: 'link',
   mail: 'mail',
   google: 'google',
+  googleColored: 'googleColored',
   facebook: 'facebook',
+  facebookF: 'facebookF',
   twitter: 'twitter',
   linkedin: 'linkedin',
   franceConnect: 'franceConnect',
+  franceConnectIcon: 'franceConnectIcon',
   radioButton: 'radioButton',
   radioButtonChecked: 'radioButton--checked',
   plus: 'plus',
@@ -107,13 +110,16 @@ export const ICON_NAME: {
   link: 'link',
   mail: 'mail',
   google: 'google',
+  googleColored: 'googleColored',
   facebook: 'facebook',
+  facebookF: 'facebookF',
   twitter: 'twitter',
   linkedin: 'linkedin',
   addCircle: 'addCircle',
   smallCaps: 'smallCaps',
   textStyle: 'textStyle',
   franceConnect: 'franceConnect',
+  franceConnectIcon: 'franceConnectIcon',
   radioButton: 'radioButton',
   radioButtonChecked: 'radioButton--checked',
   plus: 'plus',
@@ -223,8 +229,12 @@ const getIcon = name => {
       return <Icons.Mail />;
     case 'google':
       return <Icons.Google />;
+    case 'googleColored':
+      return <Icons.GoogleColored />;
     case 'facebook':
       return <Icons.Facebook />;
+    case 'facebookF':
+      return <Icons.FacebookF />;
     case 'twitter':
       return <Icons.Twitter />;
     case 'linkedin':
@@ -239,6 +249,8 @@ const getIcon = name => {
       return <Icons.AskBubble />;
     case 'franceConnect':
       return <Icons.FranceConnect />;
+    case 'franceConnectIcon':
+      return <Icons.FranceConnectIcon />;
     case 'radioButton':
       return <Icons.RadioButton />;
     case 'radioButton--checked':

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Alert, Well, Panel, ButtonGroup, Button, OverlayTrigger } from 'react-bootstrap';
+import { Alert, Well, Panel, Button, OverlayTrigger } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
   reduxForm,
@@ -111,6 +111,7 @@ if (config.canUseDOM && window.locale) {
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
+  delete values.isFranceConnectAccount;
   const input = {
     ...values,
   };
@@ -289,75 +290,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 <div>
                   {hasData(viewer, currentValues) && (
                     <div>
-                      {currentValues.firstname !== null && (
-                        <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-                          <label
-                            className="col-sm-3 control-label"
-                            htmlFor="personal-data-form-firstname">
-                            <FormattedMessage id="form.label_firstname" />
-                          </label>
-                          <div>
-                            <Field
-                              name="firstname"
-                              component={component}
-                              type="text"
-                              id="personal-data-form-firstname"
-                              divClassName="col-sm-4"
-                            />
-                          </div>
-                          <div className="col-sm-4 btn--delete">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              ref="firstname"
-                              overlay={this.popover('firstname')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-firstname">
-                                  <i className="icon cap-ios-close" />
-                                </span>
-                              </OverlayTrigger>
-                            </OverlayTrigger>
-                          </div>
-                        </div>
-                      )}
-                      {currentValues.lastname !== null && (
-                        <div className="horizontal_field_with_border_top">
-                          <label
-                            className="col-sm-3 control-label"
-                            htmlFor="personal-data-form-lastname">
-                            <FormattedMessage id="global.name" />
-                          </label>
-                          <div>
-                            <Field
-                              name="lastname"
-                              component={component}
-                              type="text"
-                              id="personal-data-form-lastname"
-                              divClassName="col-sm-4"
-                            />
-                          </div>
-                          <div className="col-sm-4 btn--delete">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              ref="lastname"
-                              overlay={this.popover('lastname')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-lastname">
-                                  <i className="icon cap-ios-close" />
-                                </span>
-                              </OverlayTrigger>
-                            </OverlayTrigger>
-                          </div>
-                        </div>
-                      )}
                       {currentValues.gender !== null && (
-                        <div className="horizontal_field_with_border_top">
+                        <div className="horizontal_field_with_border_top no-border">
                           <label
                             className="col-sm-3 control-label"
                             htmlFor="personal-data-form-gender">
@@ -368,6 +302,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               name="gender"
                               component={component}
                               type="select"
+                              disabled={viewer.isFranceConnectAccount}
                               id="personal-data-form-gender"
                               divClassName="col-sm-4">
                               <option value="MALE">
@@ -381,22 +316,118 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               </option>
                             </Field>
                           </div>
-                          <div className="col-sm-4 btn--delete">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              ref="gender"
-                              overlay={this.popover('gender')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-gender">
-                                  <i className="icon cap-ios-close" />
-                                </span>
+                          {!viewer.isFranceConnectAccount && (
+                            <div className="col-sm-4 btn--delete">
+                              <OverlayTrigger
+                                trigger="click"
+                                placement="top"
+                                rootClose
+                                ref="gender"
+                                overlay={this.popover('gender')}>
+                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                  <span
+                                    className="personal-data-delete-field"
+                                    id="personal-data-gender">
+                                    <i className="icon cap-ios-close" />
+                                  </span>
+                                </OverlayTrigger>
                               </OverlayTrigger>
-                            </OverlayTrigger>
+                            </div>
+                          )}
+                          {viewer.isFranceConnectAccount && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id="data-from-FranceConnect" />
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {currentValues.firstname !== null && (
+                        <div className="horizontal_field_with_border_top">
+                          <label
+                            className="col-sm-3 control-label"
+                            htmlFor="personal-data-form-firstname">
+                            <FormattedMessage id="form.label_firstname" />
+                          </label>
+                          <div>
+                            <Field
+                              name="firstname"
+                              component={component}
+                              disabled={viewer.isFranceConnectAccount}
+                              type="text"
+                              id="personal-data-form-firstname"
+                              divClassName="col-sm-4"
+                            />
                           </div>
+                          {!viewer.isFranceConnectAccount && (
+                            <div className="col-sm-4 btn--delete">
+                              <OverlayTrigger
+                                trigger="click"
+                                placement="top"
+                                rootClose
+                                ref="firstname"
+                                overlay={this.popover('firstname')}>
+                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                  <span
+                                    className="personal-data-delete-field"
+                                    id="personal-data-firstname">
+                                    <i className="icon cap-ios-close" />
+                                  </span>
+                                </OverlayTrigger>
+                              </OverlayTrigger>
+                            </div>
+                          )}
+                          {viewer.isFranceConnectAccount && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id="data-from-FranceConnect" />
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {currentValues.lastname !== null && (
+                        <div className="horizontal_field_with_border_top">
+                          <label
+                            className="col-sm-3 control-label"
+                            htmlFor="personal-data-form-lastname">
+                            <FormattedMessage id="global.name" />
+                          </label>
+                          <div>
+                            <Field
+                              name="lastname"
+                              component={component}
+                              disabled={viewer.isFranceConnectAccount}
+                              type="text"
+                              id="personal-data-form-lastname"
+                              divClassName="col-sm-4"
+                            />
+                          </div>
+                          {!viewer.isFranceConnectAccount && (
+                            <div className="col-sm-4 btn--delete">
+                              <OverlayTrigger
+                                trigger="click"
+                                placement="top"
+                                ref="lastname"
+                                overlay={this.popover('lastname')}>
+                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                  <span
+                                    className="personal-data-delete-field"
+                                    id="personal-data-lastname">
+                                    <i className="icon cap-ios-close" />
+                                  </span>
+                                </OverlayTrigger>
+                              </OverlayTrigger>
+                            </div>
+                          )}
+                          {viewer.isFranceConnectAccount && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id="data-from-FranceConnect" />
+                            </div>
+                          )}
                         </div>
                       )}
                       {currentValues.dateOfBirth !== null && (
@@ -406,6 +437,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               name="dateOfBirth"
                               id="dateOfBirth"
                               component={DateDropdownPicker}
+                              disabled={viewer.isFranceConnectAccount}
                               locale={wLocale}
                               dayId="personal-data-date-of-birth-day"
                               monthId="personal-data-date-of-birth-month"
@@ -416,23 +448,75 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               divClassName="col-sm-6"
                             />
                           </div>
-                          <div className="col-sm-2 btn--delete" style={{ marginBottom: 15 }}>
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              // eslint-disable-next-line react/no-string-refs
-                              ref="dateOfBirth"
-                              overlay={this.popover('dateOfBirth')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-dateOfBirth">
-                                  <i className="icon cap-ios-close" />
-                                </span>
+                          {!viewer.isFranceConnectAccount && (
+                            <div className="col-sm-2 btn--delete" style={{ marginBottom: 15 }}>
+                              <OverlayTrigger
+                                trigger="click"
+                                placement="top"
+                                rootClose
+                                // eslint-disable-next-line react/no-string-refs
+                                ref="dateOfBirth"
+                                overlay={this.popover('dateOfBirth')}>
+                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                  <span
+                                    className="personal-data-delete-field"
+                                    id="personal-data-dateOfBirth">
+                                    <i className="icon cap-ios-close" />
+                                  </span>
+                                </OverlayTrigger>
                               </OverlayTrigger>
-                            </OverlayTrigger>
+                            </div>
+                          )}
+                          {viewer.isFranceConnectAccount && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 mt-10 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id="data-from-FranceConnect" />
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {currentValues.birthPlace !== null && (
+                        <div className="horizontal_field_with_border_top">
+                          <label
+                            className="col-sm-3 control-label"
+                            htmlFor="personal-data-form-birthPlace">
+                            <FormattedMessage id="birthPlace" />
+                          </label>
+                          <div>
+                            <Field
+                              name="birthPlace"
+                              component={component}
+                              disabled={viewer.isFranceConnectAccount}
+                              type="text"
+                              id="personal-data-form-birthPlace"
+                              divClassName="col-sm-4"
+                            />
                           </div>
+                          {!viewer.isFranceConnectAccount && (
+                            <div className="col-sm-4 btn--delete">
+                              <OverlayTrigger
+                                trigger="click"
+                                placement="top"
+                                ref="birthPlace"
+                                overlay={this.popover('birthPlace')}>
+                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                  <span
+                                    className="personal-data-delete-field"
+                                    id="personal-data-birthPlace">
+                                    <i className="icon cap-ios-close" />
+                                  </span>
+                                </OverlayTrigger>
+                              </OverlayTrigger>
+                            </div>
+                          )}
+                          {viewer.isFranceConnectAccount && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id="data-from-FranceConnect" />
+                            </div>
+                          )}
                         </div>
                       )}
                       {hasAddressData(viewer, currentValues) && (
@@ -565,23 +649,26 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       )}
                     </div>
                   )}
-                  <div className="horizontal_field_with_border_top">
-                    <div className="col-sm-3" />
-                    <ButtonGroup className="col-sm-4 pl-0">
-                      <AlertForm
-                        valid={valid}
-                        invalid={invalid}
-                        errorMessage={error}
-                        submitSucceeded={submitSucceeded}
-                        submitFailed={submitFailed}
-                        submitting={submitting}
-                      />
-                    </ButtonGroup>
-                  </div>
+                  <>
+                    <AlertForm
+                      valid={valid}
+                      invalid={invalid}
+                      errorMessage={error}
+                      submitSucceeded={submitSucceeded}
+                      submitFailed={submitFailed}
+                      submitting={submitting}
+                    />
+                  </>
                 </div>
               )}
             </Panel.Body>
-            <Panel.Footer>{footer}</Panel.Footer>
+            {((viewer.isFranceConnectAccount &&
+              (viewer.address ||
+                viewer.address2 ||
+                viewer.city ||
+                viewer.zipCode ||
+                viewer.phone)) ||
+              !viewer.isFranceConnectAccount) && <Panel.Footer>{footer}</Panel.Footer>}
           </Panel>
         </form>
         <Panel>
@@ -600,7 +687,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     <FormattedMessage id="help-text-data-download-button" />
                   </p>
                 )}
-                <p className="excerpt">
+                <p className="excerpt mt-15">
                   <FormattedMessage id="data-copy-help-text" />
                 </p>
               </div>
@@ -632,6 +719,8 @@ const mapStateToProps = (state: State, props: Props) => ({
     phone: props.viewer.phone ? props.viewer.phone : null,
     gender: props.viewer.gender ? props.viewer.gender : null,
     dateOfBirth: props.viewer.dateOfBirth ? props.viewer.dateOfBirth : null,
+    birthPlace: props.viewer.birthPlace ? props.viewer.birthPlace : null,
+    isFranceConnectAccount: props.viewer.isFranceConnectAccount || null,
   },
   currentValues: selector(
     state,
@@ -644,6 +733,7 @@ const mapStateToProps = (state: State, props: Props) => ({
     'city',
     'zipCode',
     'phone',
+    'birthPlace',
   ),
 });
 
@@ -665,6 +755,8 @@ export default createFragmentContainer(container, {
       email
       phoneConfirmed
       isArchiveReady
+      birthPlace
+      isFranceConnectAccount
       ...UserArchiveRequestButton_viewer
     }
   `,

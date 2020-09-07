@@ -30,17 +30,17 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
 {
     private const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
 
-    private $tokenGenerator;
-    private $mailerService;
-    private $userManager;
-    private $formFactory;
-    private $session;
-    private $router;
-    private $userResettingPasswordUrlResolver;
-    private $userPasswordEncoder;
-    private $translator;
-    private $twig;
-    private $loginManager;
+    private TokenGenerator $tokenGenerator;
+    private MailerService $mailerService;
+    private UserManager $userManager;
+    private FormFactoryInterface $formFactory;
+    private SessionInterface $session;
+    private RouterInterface $router;
+    private UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver;
+    private UserPasswordEncoderInterface $userPasswordEncoder;
+    private TranslatorInterface $translator;
+    private \Twig\Environment $twig;
+    private LoginManagerInterface $loginManager;
 
     public function __construct(
         TokenGenerator $tokenGenerator,
@@ -95,9 +95,9 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
             );
         }
         if (
-        !$user->isPasswordRequestNonExpired(
-            $this->container->getParameter('fos_user.resetting.token_ttl')
-        )
+            !$user->isPasswordRequestNonExpired(
+                $this->container->getParameter('fos_user.resetting.token_ttl')
+            )
         ) {
             return new RedirectResponse($this->router->generate('fos_user_resetting_request'));
         }
@@ -125,13 +125,10 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
             return $response;
         }
 
-        $render = $this->twig->render(
-            'CapcoUserBundle:Resetting:reset.html.twig',
-            [
-                'token' => $token,
-                'form' => $form->createView(),
-            ]
-        );
+        $render = $this->twig->render('CapcoUserBundle:Resetting:reset.html.twig', [
+            'token' => $token,
+            'form' => $form->createView(),
+        ]);
         $response = new Response();
         $response->setContent($render);
 
@@ -147,13 +144,9 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
         $errors = $this->get('validator')->validate($email, new EmailConstraint());
 
         if (\count($errors) > 0) {
-            $render =  $this->twig
-                ->render(
-                    'CapcoUserBundle:Resetting:request.html.twig',
-                    [
-                        'invalid_email' => $email,
-                    ]
-                );
+            $render = $this->twig->render('CapcoUserBundle:Resetting:request.html.twig', [
+                'invalid_email' => $email,
+            ]);
 
             return (new Response())->setContent($render);
         }
@@ -213,12 +206,11 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
     protected function authenticateUser(UserInterface $user, Response $response): void
     {
         try {
-            $this->loginManager
-                ->logInUser(
-                    $this->container->getParameter('fos_user.firewall_name'),
-                    $user,
-                    $response
-                );
+            $this->loginManager->logInUser(
+                $this->container->getParameter('fos_user.firewall_name'),
+                $user,
+                $response
+            );
         } catch (AccountStatusException $ex) {
             // We simply do not authenticate users which do not pass the user
             // checker (not enabled, locked, etc.).

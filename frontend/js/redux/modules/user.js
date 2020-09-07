@@ -88,10 +88,10 @@ type UpdateRegistrationFieldAction = {
   element: Object,
 };
 type CloseRegistrationModalAction = {| type: 'CLOSE_REGISTRATION_MODAL' |};
-type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
+export type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
 type ChangeLocaleAction = { type: 'CHANGE_LOCALE_ACTION' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
-type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
+export type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
 type DisplayChartModalAction = { type: 'DISPLAY_CHART_MODAL' };
 type HideChartModalAction = {| type: 'HIDE_CHART_MODAL' |};
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };

@@ -11,7 +11,7 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 class OpenIDExtraMapper
 {
     private $extraMapper;
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(string $instanceName, LoggerInterface $logger)
     {

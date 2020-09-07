@@ -8,11 +8,9 @@ use Psr\Log\LoggerInterface;
 
 class OccitanieExtraMapper
 {
-    /** @var User */
-    protected $user;
-
-    protected $userInfoData;
-    protected $logger;
+    protected User $user;
+    protected array $userInfoData;
+    protected LoggerInterface $logger;
 
     public function __invoke(
         User $user,

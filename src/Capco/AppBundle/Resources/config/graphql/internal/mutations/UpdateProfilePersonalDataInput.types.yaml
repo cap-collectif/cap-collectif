@@ -39,3 +39,6 @@ UpdateProfilePersonalDataInput:
       email:
         type: 'String'
         description: 'Your email'
+      birthPlace:
+        type: 'String'
+        description: 'Your birth place'

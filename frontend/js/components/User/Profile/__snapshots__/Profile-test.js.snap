@@ -27,21 +27,8 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
       bsClass="panel"
       collapsible={false}
     >
-      <h2
-        className="page-header"
-      >
-        <FormattedMessage
-          id="user.edition"
-          values={Object {}}
-        />
-      </h2>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -94,12 +81,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         />
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -131,12 +113,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -172,12 +149,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -199,12 +171,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -226,12 +193,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -262,12 +224,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         />
       </h2>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -290,12 +247,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -318,12 +270,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -448,21 +395,8 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
       bsClass="panel"
       collapsible={false}
     >
-      <h2
-        className="page-header"
-      >
-        <FormattedMessage
-          id="user.edition"
-          values={Object {}}
-        />
-      </h2>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -515,12 +449,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         />
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -552,12 +481,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -579,12 +503,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -606,12 +525,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -642,12 +556,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         />
       </h2>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -670,12 +579,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"
@@ -698,12 +602,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         </div>
       </div>
       <div
-        className="horizontal_field_with_border_top"
-        style={
-          Object {
-            "border": 0,
-          }
-        }
+        className="horizontal_field_with_border_top no-border"
       >
         <label
           className="col-sm-3 control-label"

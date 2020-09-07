@@ -40,6 +40,38 @@ trait FranceConnectTrait
             ->click();
     }
 
+    /**
+     * @When I dissociate from FranceConnect
+     */
+    public function IDissociateFromFranceConnect()
+    {
+        $this->waitAndThrowOnFailure(1000, '$("#dissociate-event-FRANCE_CONNECT").length > 0');
+        $this->iClickElement('#dissociate-event-FRANCE_CONNECT');
+
+        $this->assertPageContainsText('unlink-account');
+        $this->iClickElement('#dissociate-confirm');
+    }
+
+    /**
+     * @When I should be disconnected from FranceConnect
+     */
+    public function IShouldBeDisconnectedFromFranceConnect()
+    {
+        $this->visit('https://fcp.integ01.dev-franceconnect.fr/traces/');
+        $this->assertPageContainsText("Vous n'êtes pas authentifié auprès de FranceConnect.");
+    }
+
+    /**
+     * @When The fields gender, lastname, firstname and birthdate, birthplace are not updatable
+     */
+    public function theFieldsAreNotUpdatable()
+    {
+        $this->theFieldShouldBeDisabled('#personal-data-form-firstname');
+        $this->theFieldShouldBeDisabled('#month');
+        $this->theFieldShouldBeDisabled('#personal-data-form-birthPlace');
+        $this->theFieldShouldBeDisabled('#personal-data-form-lastname');
+    }
+
     private function IJumpToFranceConnectLoginScreen()
     {
         $this->getSession()->visit(

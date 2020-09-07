@@ -23,8 +23,6 @@ class DefaultController extends Controller
             $this->get(Manager::class)->isActive('shield_mode') &&
             !$this->getUser()->isEmailConfirmed()
         ) {
-            $this->get('security.token_storage')->setToken();
-
             if ($request->getSession()) {
                 $request->getSession()->invalidate();
             }
@@ -86,13 +84,16 @@ class DefaultController extends Controller
     public function cookiesAction(Request $request)
     {
         try {
-            $cookiesList = $this->get(SiteParameterRepository::class)->getValue('cookies-list', $request->getLocale());
+            $cookiesList = $this->get(SiteParameterRepository::class)->getValue(
+                'cookies-list',
+                $request->getLocale()
+            );
         } catch (NoResultException $exception) {
             return $this->createNotFoundException();
         }
 
         return [
-            'cookiesList' => html_entity_decode($cookiesList)
+            'cookiesList' => html_entity_decode($cookiesList),
         ];
     }
 
@@ -103,13 +104,16 @@ class DefaultController extends Controller
     public function privacyPolicyAction(Request $request)
     {
         try {
-            $policy = $this->get(SiteParameterRepository::class)->getValue('privacy-policy', $request->getLocale());
+            $policy = $this->get(SiteParameterRepository::class)->getValue(
+                'privacy-policy',
+                $request->getLocale()
+            );
         } catch (NoResultException $exception) {
             return $this->createNotFoundException();
         }
 
         return [
-            'privacy' => html_entity_decode($policy)
+            'privacy' => html_entity_decode($policy),
         ];
     }
 
@@ -120,13 +124,16 @@ class DefaultController extends Controller
     public function legalMentionsAction(Request $request)
     {
         try {
-            $legal = $this->get(SiteParameterRepository::class)->getValue('legal-mentions', $request->getLocale());
+            $legal = $this->get(SiteParameterRepository::class)->getValue(
+                'legal-mentions',
+                $request->getLocale()
+            );
         } catch (NoResultException $exception) {
             return $this->createNotFoundException();
         }
 
         return [
-            'legal' => html_entity_decode($legal)
+            'legal' => html_entity_decode($legal),
         ];
     }
 

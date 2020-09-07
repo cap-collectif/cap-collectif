@@ -45,6 +45,7 @@ class PersonalDataFormType extends AbstractType
             ->add('phone')
             ->add('email', EmailType::class)
             ->add('phoneConfirmed')
+            ->add('birthPlace')
             ->add('dateOfBirth', DateTimeType::class, [
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd',

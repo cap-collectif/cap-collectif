@@ -4,11 +4,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, type BsStyle } from 'react-bootstrap';
 import { baseUrl } from '../../../config';
-import { showLoginModal } from '../../../redux/modules/user';
+import { showLoginModal, type ShowLoginModalAction } from '../../../redux/modules/user';
 import type { State } from '../../../types';
 import { loginWithOpenID as isLoginWithOpenID } from '../../../redux/modules/default';
-
-type Action = typeof showLoginModal;
 
 type StateProps = {|
   loginWithMonCompteParis: boolean,
@@ -97,7 +95,7 @@ const mapDispatchToProps = dispatch => ({
   openLoginModal: () => dispatch(showLoginModal()),
 });
 
-export default connect<Props, State, Action, _, _>(
+export default connect<Props, State, ShowLoginModalAction, _, _>(
   mapStateToProps,
   mapDispatchToProps,
 )(LoginButton);

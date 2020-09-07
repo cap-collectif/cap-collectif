@@ -19,7 +19,20 @@ class FranceConnectMapper
             $birthday->setTime(0, 0);
         }
         $user->setDateOfBirth($birthday);
-
-        $user->setGender(mb_strtolower($userInfoData['gender']));
+        $firstName = ucfirst(strtolower($userInfoData['given_name']));
+        $user->setFirstName($firstName);
+        $user->setLastName($userInfoData['family_name']);
+        $user->setUsername($userInfoData['family_name'] . ' ' . $firstName);
+        if (isset($userInfoData['birthplace'])) {
+            $user->setBirthPlace($userInfoData['birthplace']);
+        }
+        $gender = 'o';
+        if ('female' === $userInfoData['gender']) {
+            $gender = 'f';
+        }
+        if ('male' === $userInfoData['gender']) {
+            $gender = 'm';
+        }
+        $user->setGender($gender);
     }
 }

@@ -1,0 +1,12 @@
+InternalRemoveSsoInput:
+    type: relay-mutation-input
+    config:
+        name: RemoveSsoInput
+        description: 'The input of dissociate sso from account'
+        fields:
+            plainPassword:
+                type: 'String'
+                description: The password to set.
+            service:
+                type: 'AvailableSso!'
+                description: The service to dissociate.

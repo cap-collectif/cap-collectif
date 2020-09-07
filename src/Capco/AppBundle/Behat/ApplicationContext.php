@@ -344,6 +344,12 @@ class ApplicationContext extends UserContext
     {
         $suiteName = $suiteScope->getSuite()->getName();
         $resultCode = $suiteScope->getTestResult()->getResultCode();
+
+        $job = Process::fromShellCommandline('redis-cli -h redis FLUSHALL');
+        echo $job->getCommandLine() . PHP_EOL;
+        echo 'Reset feature flag...' . PHP_EOL;
+        $job->mustRun();
+
         if ($notifier = NotifierFactory::create()) {
             $notification = new Notification();
             if (TestResult::PASSED === $resultCode) {
@@ -834,6 +840,32 @@ class ApplicationContext extends UserContext
             '
                 );
         }
+    }
+
+    /**
+     * @When The field :field should be disabled
+     */
+    public function theFieldShouldBeDisabled($field)
+    {
+        $page = $this->getCurrentPage();
+        $field = $this->fixStepArgument($field);
+
+        $element = $page->find('css', $field);
+
+        Assert::assertTrue($element->hasAttribute('disabled'));
+    }
+
+    /**
+     * @When The field :field should be enabled
+     */
+    public function theFieldShouldBeEnabled($field)
+    {
+        $page = $this->getCurrentPage();
+        $field = $this->fixStepArgument($field);
+
+        $element = $page->find('css', $field);
+
+        Assert::assertFalse($element->hasAttribute('disabled'));
     }
 
     /**

@@ -3,15 +3,11 @@ import React, { cloneElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger } from 'react-bootstrap';
-import { showRegistrationModal } from '../../redux/modules/user';
+import { showRegistrationModal, type ShowRegistrationModalAction } from '../../redux/modules/user';
 import type { State } from '../../types';
 import LoginButton from '../User/Login/LoginButton';
 import Popover from './Popover';
 import { loginWithOpenID } from '~/redux/modules/default';
-
-type Action = {|
-  type: 'SHOW_REGISTRATION_MODAL',
-|};
 
 export type Placement = 'top' | 'bottom' | 'left' | 'right';
 
@@ -115,7 +111,7 @@ const mapDispatchToProps = dispatch => ({
   openRegistrationModal: () => dispatch(showRegistrationModal()),
 });
 
-export default connect<Props, State, Action, _, _>(
+export default connect<Props, State, ShowRegistrationModalAction, _, _>(
   mapStateToProps,
   mapDispatchToProps,
 )(LoginOverlay);

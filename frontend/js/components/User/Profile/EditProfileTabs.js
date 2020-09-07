@@ -99,7 +99,7 @@ export class EditProfileTabs extends Component<Props> {
                       <FormattedMessage id="data" />
                     </ListGroupItem>
                   </NavItem>
-                  {!features.login_paris && !loginWithOpenId && (
+                  {!features.login_paris && !loginWithOpenId && viewer.hasPassword && (
                     <NavItem eventKey="password" href="#password">
                       <ListGroupItem>
                         <span className="icon cap-key-1" />
@@ -138,9 +138,11 @@ export class EditProfileTabs extends Component<Props> {
               <Tab.Pane eventKey="personal-data">
                 <PersonalData viewer={viewer} />
               </Tab.Pane>
-              <Tab.Pane eventKey="password">
-                {!features.login_paris && !loginWithOpenId && <ChangePasswordForm />}
-              </Tab.Pane>
+              {viewer.hasPassword && (
+                <Tab.Pane eventKey="password">
+                  {!features.login_paris && !loginWithOpenId && <ChangePasswordForm />}
+                </Tab.Pane>
+              )}
               <Tab.Pane eventKey="notifications">
                 <NotificationsForm viewer={viewer} />
               </Tab.Pane>
@@ -165,6 +167,7 @@ const container = connect(mapStateToProps)(EditProfileTabs);
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment EditProfileTabs_viewer on User {
+      hasPassword
       ...UserAvatar_user
       ...FollowingsTab_viewer
       ...NotificationsForm_viewer

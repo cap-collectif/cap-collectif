@@ -14,9 +14,9 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
 {
     protected const REDIS_CACHE_KEY = 'FranceConnectSSOConfiguration';
 
-    protected $repository;
-    protected $redisCache;
-    protected $toggleManager;
+    protected FranceConnectSSOConfigurationRepository $repository;
+    protected RedisCache $redisCache;
+    protected Manager $toggleManager;
 
     public function __construct(
         FranceConnectSSOConfigurationRepository $repository,
@@ -40,7 +40,7 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
 
         if (!$ssoConfigurationCachedItem->isHit()) {
             $newSsoConfiguration = $this->repository->findOneBy([
-                'enabled' => true
+                'enabled' => true,
             ]);
 
             if (!$newSsoConfiguration) {
@@ -55,7 +55,7 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
                         'access_token_url' => $newSsoConfiguration->getAccessTokenUrl(),
                         'authorization_url' => $newSsoConfiguration->getAuthorizationUrl(),
                         'infos_url' => $newSsoConfiguration->getUserInfoUrl(),
-                        'logout_url' => $newSsoConfiguration->getLogoutUrl()
+                        'logout_url' => $newSsoConfiguration->getLogoutUrl(),
                     ])
                     ->expiresAfter($this->redisCache::ONE_DAY);
             }

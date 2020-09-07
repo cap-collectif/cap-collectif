@@ -7,7 +7,7 @@ use Capco\AppBundle\Repository\LocaleRepository;
 class PublishedLocalesDataloader
 {
     private $publishedLocales;
-    private $localeRepository;
+    private LocaleRepository $localeRepository;
 
     public function __construct(LocaleRepository $localeRepository)
     {
@@ -16,11 +16,10 @@ class PublishedLocalesDataloader
 
     public function __invoke(): array
     {
-        if (!$this->publishedLocales){
+        if (!$this->publishedLocales) {
             $this->publishedLocales = $this->localeRepository->findPublishedLocales();
         }
 
         return $this->publishedLocales;
     }
-
 }

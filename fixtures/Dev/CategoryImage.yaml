@@ -1,51 +1,64 @@
 Capco\AppBundle\Entity\CategoryImage:
-  CategoryImage1:
-    image: '@MediaAgriculture'
-    isDefault: true
-  CategoryImage2:
-    image: '@MediaAttractivite'
-    isDefault: true
-  CategoryImage3:
-    image: '@MediaPMR'
-    isDefault: true
-  CategoryImage4:
-    image: '@MediaCulture'
-    isDefault: true
-  CategoryImage5:
-    image: '@MediaEnvironnement'
-    isDefault: true
-  CategoryImage6:
-    image: '@MediaJeunesse'
-    isDefault: true
-  CategoryImage7:
-    image: '@MediaMobilite'
-    isDefault: true
-  CategoryImage8:
-    image: '@MediaProprete'
-    isDefault: true
-  CategoryImage9:
-    image: '@MediaQualiteDeVie'
-    isDefault: true
-  CategoryImage10:
-    image: '@MediaSolidarite'
-    isDefault: true
-  CategoryImage11:
-    image: '@MediaSecurite'
-    isDefault: true
-  CategoryImage12:
-    id: 'school'
-    image: '@MediaScolarite'
-    isDefault: true
-  CategoryImage13:
-    image: '@MediaSport'
-    isDefault: true
-  CategoryImage14:
-    image: '@MediaSante'
-    isDefault: true
-  CategoryImage15:
-    id: 'categoryImage15'
-    image: '@MediaUrbanisme'
-    isDefault: true
-  CategoryImage16:
-    id: 'categoryImage16'
-    image: '@ProposalFormGymnase'
+    CategoryImage1:
+        id: CategoryImage1
+        image: '@MediaAgriculture'
+        isDefault: true
+    CategoryImage2:
+        id: CategoryImage2
+        image: '@MediaAttractivite'
+        isDefault: true
+    CategoryImage3:
+        id: CategoryImage3
+        image: '@MediaPMR'
+        isDefault: true
+    CategoryImage4:
+        id: CategoryImage4
+        image: '@MediaCulture'
+        isDefault: true
+    CategoryImage5:
+        id: CategoryImage5
+        image: '@MediaEnvironnement'
+        isDefault: true
+    CategoryImage6:
+        id: CategoryImage6
+        image: '@MediaJeunesse'
+        isDefault: true
+    CategoryImage7:
+        id: CategoryImage7
+        image: '@MediaMobilite'
+        isDefault: true
+    CategoryImage8:
+        id: CategoryImage8
+        image: '@MediaProprete'
+        isDefault: true
+    CategoryImage9:
+        id: CategoryImage9
+        image: '@MediaQualiteDeVie'
+        isDefault: true
+    CategoryImage10:
+        id: CategoryImage10
+        image: '@MediaSolidarite'
+        isDefault: true
+    CategoryImage11:
+        id: CategoryImage11
+        image: '@MediaSecurite'
+        isDefault: true
+    CategoryImage12:
+        id: 'school'
+        image: '@MediaScolarite'
+        isDefault: true
+    CategoryImage13:
+        id: CategoryImage13
+        image: '@MediaSport'
+        isDefault: true
+    CategoryImage14:
+        id: CategoryImage14
+        image: '@MediaSante'
+        isDefault: true
+    CategoryImage15:
+        id: 'categoryImage15'
+        image: '@MediaUrbanisme'
+        isDefault: true
+    CategoryImage16:
+        id: 'categoryImage16'
+        image: '@ProposalFormGymnase'

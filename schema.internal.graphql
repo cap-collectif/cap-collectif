@@ -900,6 +900,18 @@ type AssignSupervisorToProposalsPayload {
   clientMutationId: String
 }
 
+"""Type of sso service"""
+enum AvailableSso {
+  """FranceConnect sso service"""
+  FRANCE_CONNECT
+
+  """Google sso service"""
+  GOOGLE
+
+  """Facebook sso service"""
+  FACEBOOK
+}
+
 input BackgroundStyleInput {
   enabled: Boolean
   color: Color
@@ -4637,6 +4649,7 @@ type Mutation {
 
   """Reset password"""
   resetPassword(input: ResetPasswordInput!): ResetPasswordPayload
+  removeSso(input: RemoveSsoInput!): RemoveSsoPayload
 }
 
 """A connection to a list of items."""
@@ -8329,6 +8342,23 @@ type RemoveSourceVotePayload {
   clientMutationId: String
 }
 
+input RemoveSsoInput {
+  """The password to set."""
+  plainPassword: String
+
+  """The service to dissociate."""
+  service: AvailableSso!
+  clientMutationId: String
+}
+
+type RemoveSsoPayload {
+  viewer: User!
+
+  """The redirect URI to disconnect the sso"""
+  redirectUrl: URI
+  clientMutationId: String
+}
+
 """Represents a type that can be retrieved by a URL."""
 type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable {
   """The ID of an object."""
@@ -10386,6 +10416,9 @@ input UpdateProfilePersonalDataInput {
 
   """Your email"""
   email: String
+
+  """Your birth place"""
+  birthPlace: String
   clientMutationId: String
 }
 
@@ -10928,6 +10961,7 @@ type User implements Node & UniformResourceLocatable {
   googleId: String
   facebookId: String
   samlId: String
+  franceConnectId: String
 
   """Get all sources of the user"""
   sources(
@@ -11401,6 +11435,9 @@ type User implements Node & UniformResourceLocatable {
 
   """The event in awaiting status."""
   adminAwaitingEvents: Int!
+  birthPlace: String
+  isFranceConnectAccount: Boolean
+  hasPassword: Boolean
 }
 
 """A connection to a list of items."""

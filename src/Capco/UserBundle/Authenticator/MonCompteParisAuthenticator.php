@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Authenticator;
 
 use Capco\UserBundle\Authenticator\Token\ParisToken;
@@ -12,9 +13,9 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
 {
-    protected $httpUtils;
-    protected $logger;
-    protected $openAmCaller;
+    protected HttpUtils $httpUtils;
+    protected LoggerInterface $logger;
+    protected OpenAmClient $openAmCaller;
 
     public function __construct(
         HttpUtils $httpUtils,
@@ -53,6 +54,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         }
 
         $this->openAmCaller->setCookie($cookieValue);
+
         try {
             $parisId = $this->openAmCaller->getUid();
         } catch (\RuntimeException $e) {

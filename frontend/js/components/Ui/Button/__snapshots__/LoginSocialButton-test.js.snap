@@ -1,23 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginSocialButton /> should render correctly 1`] = `
-<LoginSocialButton__LinkButton
-  type="facebook"
->
-  <SocialIcon
-    className="loginIcon"
-    name="facebook"
-  />
-  <a
-    href="/login/facebook?_destination=http://localhost/"
-    title="facebook"
+<div>
+  <LoginSocialButton__LinkButton
+    type="facebook"
   >
-    <FormattedMessage
-      id="Facebook"
-      values={Object {}}
+    <SocialIcon
+      className="loginIcon"
+      name="facebook"
     />
-  </a>
-</LoginSocialButton__LinkButton>
+    <a
+      href="/login/facebook?_destination=http://localhost/"
+      title="facebook"
+    >
+      <FormattedMessage
+        id="Facebook"
+        values={Object {}}
+      />
+    </a>
+  </LoginSocialButton__LinkButton>
+</div>
+`;
+
+exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
+<div>
+  <LoginSocialButton__FranceConnectButton>
+    <a
+      href="/login/franceconnect?_destination=http://localhost/"
+      title="franceConnect"
+    >
+      <SocialIcon
+        className="loginIcon"
+        name="franceConnect"
+      />
+    </a>
+  </LoginSocialButton__FranceConnectButton>
+  <LoginSocialButton__FranceConnectLink>
+    <a
+      href="https://franceconnect.gouv.fr/"
+    >
+      <FormattedMessage
+        id="what-is-fc"
+        values={Object {}}
+      />
+    </a>
+  </LoginSocialButton__FranceConnectLink>
+</div>
 `;
 
 exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`] = `
@@ -37,22 +65,24 @@ exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`]
 `;
 
 exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] = `
-<LoginSocialButton__LinkButton
-  buttonColor="#000000"
-  labelColor="#ffffff"
-  type="openId"
->
-  <SocialIcon
-    className="loginIcon"
-    name="openId"
-  />
-  <a
-    href="/login/openid?_destination=http://localhost/sso/switch-user"
-    title="openId"
+<div>
+  <LoginSocialButton__LinkButton
+    buttonColor="#000000"
+    labelColor="#ffffff"
+    type="openId"
   >
-    <span>
-      openid
-    </span>
-  </a>
-</LoginSocialButton__LinkButton>
+    <SocialIcon
+      className="loginIcon"
+      name="openId"
+    />
+    <a
+      href="/login/openid?_destination=http://localhost/sso/switch-user"
+      title="openId"
+    >
+      <span>
+        openid
+      </span>
+    </a>
+  </LoginSocialButton__LinkButton>
+</div>
 `;

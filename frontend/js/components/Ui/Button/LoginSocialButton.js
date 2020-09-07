@@ -55,7 +55,7 @@ const getButtonColorForType = (type: LoginSocialButtonType, bgColor?: string): s
       return '#034ea2';
   }
 };
-const getButtonLinkForType = (type: LoginSocialButtonType, redirectUri: string): string => {
+export const getButtonLinkForType = (type: LoginSocialButtonType, redirectUri: string): string => {
   switch (type) {
     case 'facebook':
       return `/login/facebook?_destination=${window && window.location.href}`;
@@ -70,7 +70,9 @@ const getButtonLinkForType = (type: LoginSocialButtonType, redirectUri: string):
       return `/login-saml?_destination=${window && window.location.href}`;
 
     case 'franceConnect':
-      return `/login/franceconnect?_destination=${window && window.location.href}`;
+      return redirectUri
+        ? `/login/franceconnect?_destination=${redirectUri}`
+        : `/login/franceconnect?_destination=${window && window.location.href}`;
     default:
       return '';
   }
@@ -83,8 +85,6 @@ const getButtonContentForType = (type: string): string => {
       return 'Google';
     case 'saml':
       return 'Saml';
-    case 'franceConnect':
-      return 'France Connect';
     default:
       return '';
   }
@@ -129,9 +129,6 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
         if (props.type === 'openId' || props.type === 'saml') {
           return 'transform: translate(3px, 2px) scale(1.3);';
         }
-        if (props.type === 'franceConnect') {
-          return 'transform: translate(6px, 4px) scale(1.7);';
-        }
       }}
     }
   }
@@ -153,10 +150,30 @@ const LinkButton: StyledComponent<LinkButtonProps, {}, HTMLDivElement> = styled.
   &:focus,
   &:hover {
     background-color: ${props => darken(0.1, getButtonColorForType(props.type, props.buttonColor))};
-
     .loginIcon {
       background-color: ${props =>
         darken(0.2, getButtonColorForType(props.type, props.buttonColor))};
+    }
+  }
+`;
+
+const FranceConnectLink: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  margin-top: 8px;
+  margin-left: 42px;
+  color: #00acc1;
+  font-size: 13px;
+`;
+
+const FranceConnectButton: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  position: relative;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .loginIcon {
+    & > svg {
+      height: 45px;
     }
   }
 `;
@@ -188,16 +205,33 @@ export default class LoginSocialButton extends React.Component<Props, State> {
     }
 
     return (
-      <LinkButton type={type} labelColor={labelColor} buttonColor={buttonColor}>
-        <SocialIcon className="loginIcon" name={type} />
-        <a href={getButtonLinkForType(type, redirectUri)} title={type}>
-          {text !== undefined ? (
-            <span>{text}</span>
-          ) : (
-            <FormattedMessage id={getButtonContentForType(type)} />
-          )}
-        </a>
-      </LinkButton>
+      <div>
+        {type === 'franceConnect' ? (
+          <>
+            <FranceConnectButton>
+              <a href={getButtonLinkForType(type, redirectUri)} title={type}>
+                <SocialIcon className="loginIcon" name={type} />
+              </a>
+            </FranceConnectButton>
+            <FranceConnectLink>
+              <a href="https://franceconnect.gouv.fr/">
+                <FormattedMessage id="what-is-fc" />
+              </a>
+            </FranceConnectLink>
+          </>
+        ) : (
+          <LinkButton type={type} labelColor={labelColor} buttonColor={buttonColor}>
+            <SocialIcon className="loginIcon" name={type} />
+            <a href={getButtonLinkForType(type, redirectUri)} title={type}>
+              {text !== undefined ? (
+                <span>{text}</span>
+              ) : (
+                <FormattedMessage id={getButtonContentForType(type)} />
+              )}
+            </a>
+          </LinkButton>
+        )}
+      </div>
     );
   }
 }

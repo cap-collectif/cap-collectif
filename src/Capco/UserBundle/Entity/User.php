@@ -155,6 +155,10 @@ class User extends BaseUser implements
 
     private $resetPasswordToken;
 
+    private $birthPlace;
+
+    private $isFranceConnectAccount = false;
+
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="supervisor")
      */
@@ -183,7 +187,7 @@ class User extends BaseUser implements
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            $setter = 'set' . ucfirst($key);
+            $setter = 'set'.ucfirst($key);
             if ('id' === $key) {
                 $this->id = $value;
 
@@ -282,7 +286,7 @@ class User extends BaseUser implements
     public function sanitizePhoneNumber()
     {
         if ($this->phone) {
-            $this->phone = '+' . preg_replace('/\D/', '', $this->phone);
+            $this->phone = '+'.preg_replace('/\D/', '', $this->phone);
         }
     }
 
@@ -909,16 +913,20 @@ class User extends BaseUser implements
 
     public function getSupervisedProposals(): iterable
     {
-        return $this->supervisedProposals->map(static function (ProposalSupervisor $supervisor) {
-            return $supervisor->getProposal();
-        });
+        return $this->supervisedProposals->map(
+            static function (ProposalSupervisor $supervisor) {
+                return $supervisor->getProposal();
+            }
+        );
     }
 
     public function getAllowedProposalAsDecisionMaker(): iterable
     {
-        return $this->proposals->map(static function (Proposal $proposal) {
-            return $proposal->getProposalDecisionMaker();
-        });
+        return $this->proposals->map(
+            static function (Proposal $proposal) {
+                return $proposal->getProposalDecisionMaker();
+            }
+        );
     }
 
     public function addSupervisedProposal(ProposalSupervisor $proposalSupervisor): self
@@ -1266,4 +1274,27 @@ class User extends BaseUser implements
     {
         return $this->resetPasswordToken;
     }
+
+    public function getBirthPlace(): ?string
+    {
+        return $this->birthPlace;
+    }
+
+    public function setBirthPlace(?string $birthPlace): self
+    {
+        $this->birthPlace = $birthPlace;
+
+        return $this;
+    }
+
+    public function isFranceConnectAccount(): bool
+    {
+        return null !== $this->franceConnectAccessToken;
+    }
+
+    public function hasPassword(): bool
+    {
+        return $this->password !== null;
+    }
+
 }

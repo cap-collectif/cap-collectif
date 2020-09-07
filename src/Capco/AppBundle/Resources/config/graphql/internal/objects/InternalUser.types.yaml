@@ -108,6 +108,9 @@ InternalUser:
             samlId:
                 type: 'String'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+            franceConnectId:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             sources:
                 type: 'SourceConnection!'
                 argsBuilder: 'Relay::Connection'
@@ -340,3 +343,12 @@ InternalUser:
                 type: 'Int!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\AdminAwaitingEventResolver",  [getUser()])'
                 description: 'The event in awaiting status.'
+            birthPlace:
+                type: 'String'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+            isFranceConnectAccount:
+                type: 'Boolean'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+            hasPassword:
+                type: 'Boolean'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'

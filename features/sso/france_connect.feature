@@ -10,37 +10,51 @@ Background:
 
 Scenario: Display France Connect login screen
   Given I open login modal
-  When I follow "France Connect"
+  When I follow "franceConnect"
   Then I should see the France Connect login screen
 
+@database
 Scenario: User can authentication via France Connect using a suitable identity provider
   Given I am on the France Connect authentication page of an identity provider with the appropriate level of eIDAS trust
   When I authenticate France Connect and validate
   Then I should be redirected to "/"
-  And I can see I am logged in as "Angela Claire Louise DUBOIS"
+  And I can see I am logged in as "Angela Claire Louise"
 
-## TODO in next PR:
+@database
+Scenario: Authenticated France Connect user can access his profile
+  Given I am on the France Connect authentication page of an identity provider with the appropriate level of eIDAS trust
+  When I authenticate France Connect and validate
+  Then I should be redirected to "/"
+  And I can see I am logged in as "Angela Claire Louise"
+  When I visited "edit profile page"
+  And I click the "#account-tabs-tab-account" element
+  And I wait "fc-archive-connection" to appear on current page in "body"
+  And The field "#account__email" should be disabled
+  When I click the "#account-tabs-tab-personal-data" element
+  And I wait "#personal-data-form-firstname" to appear on current page
+  And The fields gender, lastname, firstname and birthdate, birthplace are not updatable
+  And the "body" element should not contain "#personal-data-firstname"
 
-# Scenario: Authenticated France Connect user can access his profile
-#   Given I am authenticated via France Connect
-#   When I visited "edit profile page"
-#   Then I should see "Vous êtes identifié grâce à FranceConnect"
-#   # Then I should see un lien "Qu'est-ce-que FranceConnect ?"
-#   # Then I should see un lien "Historique des connexions/échanges de données"
-#   # les champs sexe, nom, prénoms, date et lieu de naissance sont non modifiables. 
-#   # les champs email, numéro de téléphone et adresse postale sont modifiables.
+@database
+Scenario: Logout a France Connect user
+  Given I am on the France Connect authentication page of an identity provider with the appropriate level of eIDAS trust
+  When I authenticate France Connect and validate
+  Then I should be redirected to "/"
+  And I can see I am logged in as "Angela Claire Louise"
+  When I logout
+  Then I should see "global.login"
+  Then I should be disconnected from FranceConnect
 
-# Scenario: Logout a France Connect user
-#   Given I am authenticated via France Connect
-#   When I logout
-#   Then I should see "global.login"
-#   # Alors je dois être déconnecté de ma session FranceConnect ainsi que celle du fournisseur de service
-#   # Je suis redirigé vers l'URL de callback de déconnexion du fournisseur de service
-
-# Scenario: Authenticated France Connect user can dissociate his account
-#   Given I am authenticated via France Connect
-#   When I visited "edit profile page"
-#   Then I should see "Vous êtes identifié grâce à FranceConnect"
+@database
+Scenario: Authenticated France Connect user can dissociate his account
+  Given I am on the France Connect authentication page of an identity provider with the appropriate level of eIDAS trust
+  When I authenticate France Connect and validate
+  Then I go to "/profile/edit-profile"
+  And I click the "#account-tabs-tab-account" element
+  And I dissociate from FranceConnect
+  And I wait 5 seconds
+  And I wait "#profile-account" to appear on current page
+  Then I should be disconnected from FranceConnect
 
 # Scenario: Authenticated France Connect user can not associate another account
 # # Sachant que je possède un compte local et un compte FranceConnect auprès d'un fournisseur de service

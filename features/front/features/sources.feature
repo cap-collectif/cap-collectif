@@ -24,7 +24,7 @@ Scenario: Can vote for a source
   Given I am logged in as admin
   And I go to an opinion
   And I go on the sources tab
-  And I wait "#sources-list" to appear on current page
+  And I wait "#source-form__add" to appear on current page
   When I vote for the first source
   When I delete my vote for the first source
 
@@ -34,7 +34,6 @@ Scenario: Author of a source loose their votes when updating it
   Given I am logged in as user
   And I go to an opinion
   And I go on the sources tab
-  And I wait "#sources-list" to appear on current page
   And I wait "#source-form__add" to appear on current page
   When I edit my source
   Then I wait "#current-alert" to appear on current page
@@ -47,7 +46,6 @@ Scenario: Author of a source try to update without checking the confirm checkbox
   And I go to an opinion
   And I go on the sources tab
   And I wait "#source-form__add" to appear on current page
-  And I wait "#sources-list" to appear on current page
   When I edit my source without confirming my votes lost
   Then I should see "source.constraints.check"
 
@@ -55,7 +53,7 @@ Scenario: Non author of a source can not update or delete
   Given I am logged in as admin
   And I go to an opinion
   And I go on the sources tab
-  And I wait "#sources-list" to appear on current page
+  And I wait "#source-form__add" to appear on current page
   Then I should not see the source edit button
   Then I should not see the source delete button
 
@@ -66,6 +64,7 @@ Scenario: Author of a source wants to delete it
   And I go to an opinion
   And I go on the sources tab
   And I wait "#sources-list" to appear on current page
+  And I wait "#source-form__add" to appear on current page
   When I delete my source
   And I wait 2 seconds
   Then I should see "alert.success.delete.source" in the "#global-alert-box" element
@@ -78,7 +77,7 @@ Scenario: Author of a source can not report it
   And I am logged in as user
   And I go to an opinion
   And I go on the sources tab
-  And I wait "#sources-list" to appear on current page
+  And I wait "#source-form__add" to appear on current page
   And I should not see the source report button
 
 @database
@@ -87,7 +86,7 @@ Scenario: Non author of a source can report it
   And I am logged in as admin
   And I go to an opinion
   And I go on the sources tab
-  And I wait "#sources-list" to appear on current page
+  And I wait "#source-form__add" to appear on current page
   And I click the source report button
   And I fill the reporting form
   And I submit the reporting form

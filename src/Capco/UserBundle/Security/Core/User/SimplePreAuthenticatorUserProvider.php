@@ -10,13 +10,13 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class SimplePreAuthenticatorUserProvider implements UserProviderInterface
 {
-    private $toggleManager;
-    private $samlProvider;
-    private $parisProvider;
+    private Manager $toggleManager;
+    private ?SamlUserProvider $samlProvider;
+    private MonCompteParisUserProvider $parisProvider;
 
     public function __construct(
         Manager $toggleManager,
-        ?SamlUserProvider $samlProvider = null,
+        ?SamlUserProvider $samlProvider,
         MonCompteParisUserProvider $parisProvider
     ) {
         $this->toggleManager = $toggleManager;

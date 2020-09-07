@@ -45,9 +45,10 @@ const Container = styled.div`
   .full-width {
     width: 100%;
   }
-
-  .no-border {
-    border: 0;
+  .horizontal_field_with_border_top{
+    .no-border {
+      border: 0;
+    }
   }
 `;
 
@@ -115,12 +116,9 @@ export class ChangePasswordForm extends Component<Props> {
         <Panel id="capco_horizontal_form">
           <Panel.Heading>{header}</Panel.Heading>
           <Panel.Body>
-            <h2 className="page-header">
-              <FormattedMessage id="form.new_password" />
-            </h2>
             <Container>
               <div className="flex-column">
-                <div className="horizontal_field_with_border_top no-border">
+                <div className="no-border horizontal_field_with_border_top">
                   <label className="col-sm-3 control-label" htmlFor="password-form-current">
                     <FormattedMessage id="form.current_password" />
                   </label>
@@ -172,7 +170,7 @@ export class ChangePasswordForm extends Component<Props> {
                   </div>
                 </div>
                 <div className="clearfix" />
-                <div className="horizontal_field_with_border_top">
+                <div className="horizontal_field_with_border_top no-border">
                   <div className="col-sm-3" />
                   <ButtonToolbar className="col-sm-6 pl-0">
                     <AlertForm

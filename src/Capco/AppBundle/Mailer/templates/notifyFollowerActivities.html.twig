@@ -99,14 +99,14 @@
                                                         {% if proposal.votes > 0 %}
                                                             <li>
                                                                 <span style="color: #000000;">
-                                                                    {{ 'new-vote-count' | trans({'count': project.votes, 'num': project.votes}, 'CapcoAppBundle') }}
+                                                                    {{ 'new-vote-count' | trans({'count': proposal.votes, 'num': proposal.votes}, 'CapcoAppBundle') }}
                                                                 </span>
                                                             </li>
                                                         {% endif %}
                                                         {% if proposal.comments > 0 %}
                                                             <li>
                                                                 <span style="color: #000000;">
-                                                                    {{ 'new-comment-count' | trans({'count': project.comments, 'num': project.comments}, 'CapcoAppBundle') }}
+                                                                    {{ 'new-comment-count' | trans({'count': proposal.comments, 'num': proposal.comments}, 'CapcoAppBundle') }}
                                                                 </span>
                                                             </li>
                                                         {% endif %}

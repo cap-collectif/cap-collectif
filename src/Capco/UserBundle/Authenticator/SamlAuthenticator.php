@@ -15,10 +15,10 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 class SamlAuthenticator implements SimplePreAuthenticatorInterface
 {
-    protected $samlAuth;
-    protected $samlIdp;
-    protected $httpUtils;
-    protected $logger;
+    protected Simple $samlAuth;
+    protected string $samlIdp;
+    protected HttpUtils $httpUtils;
+    protected LoggerInterface $logger;
 
     public function __construct(
         ?Simple $samlAuth,

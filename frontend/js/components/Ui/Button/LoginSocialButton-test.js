@@ -14,6 +14,14 @@ describe('<LoginSocialButton />', () => {
     const wrapper = shallow(<LoginSocialButton {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
+  it('should render correctly franceConnect', () => {
+    const props = {
+      type: 'franceConnect',
+      switchUserMode: false,
+    };
+    const wrapper = shallow(<LoginSocialButton {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 
   it('should render correctly with grandLyonConnect', () => {
     const props = {

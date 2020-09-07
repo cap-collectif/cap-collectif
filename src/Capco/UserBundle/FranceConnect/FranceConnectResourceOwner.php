@@ -14,7 +14,8 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         'email' => 'email',
         'firstname' => 'given_name',
         'lastname' => 'family_name',
-        'nickname' => 'preferred_username'
+        'nickname' => 'preferred_username',
+        'birthplace' => 'birthplace',
     ];
 
     public function getAuthorizationUrl($redirectUri, array $extraParameters = []): string
@@ -22,7 +23,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         // https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#glossary
         $extraParameters = array_merge(
             [
-                'nonce' => $this->generateNonce()
+                'nonce' => $this->generateNonce(),
             ],
             $extraParameters
         );
@@ -30,7 +31,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         if ('dev' === EnvHelper::get('SYMFONY_INSTANCE_NAME')) {
             $extraParameters = array_merge(
                 [
-                    'acr_values' => 'eidas1'
+                    'acr_values' => 'eidas1',
                 ],
                 $extraParameters
             );
@@ -53,7 +54,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
 
         $resolver
             ->setDefaults([
-                'scope' => 'openid email profile'
+                'scope' => 'openid email identite_pivot',
             ])
             ->setRequired('logout_url');
     }

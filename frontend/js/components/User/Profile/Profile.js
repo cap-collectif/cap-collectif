@@ -121,10 +121,7 @@ export class Profile extends Component<Props> {
         <Panel id="capco_horizontal_form">
           <Panel.Heading>{renderHeader}</Panel.Heading>
           <Panel.Body>
-            <h2 className="page-header">
-              <FormattedMessage id="user.edition" />
-            </h2>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="profile_avatar">
                 <FormattedMessage id="sonata.media.provider.image" />
               </label>
@@ -140,7 +137,7 @@ export class Profile extends Component<Props> {
                 divClassName="col-sm-6"
               />
             </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="profile-form-username">
                 <FormattedMessage id="global.fullname" />
                 <br />
@@ -160,7 +157,7 @@ export class Profile extends Component<Props> {
               </div>
             </div>
             {features.user_type && (
-              <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+              <div className="horizontal_field_with_border_top no-border">
                 <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
                   <FormattedMessage id="registration.type" />{' '}
                 </label>
@@ -183,7 +180,7 @@ export class Profile extends Component<Props> {
                 </div>
               </div>
             )}
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="public-data-form-biography">
                 <FormattedMessage id="form.label_biography" />
               </label>
@@ -197,7 +194,7 @@ export class Profile extends Component<Props> {
                 />
               </div>
             </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="public-data-form-neighborhood">
                 <FormattedMessage id="form.label_neighborhood" />
               </label>
@@ -211,7 +208,7 @@ export class Profile extends Component<Props> {
                 />
               </div>
             </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="public-data-form-website">
                 <FormattedMessage id="form.label_website" />
               </label>
@@ -229,7 +226,7 @@ export class Profile extends Component<Props> {
             <h2>
               <FormattedMessage id="social-medias" />
             </h2>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="public-data-form-facebook">
                 <FormattedMessage id="user.profile.edit.facebook" />
               </label>
@@ -244,7 +241,7 @@ export class Profile extends Component<Props> {
                 />
               </div>
             </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="public-data-form-twitter">
                 <FormattedMessage id="user.profile.edit.twitter" />
               </label>
@@ -259,7 +256,7 @@ export class Profile extends Component<Props> {
                 />
               </div>
             </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="public-data-form-linkedIn">
                 <FormattedMessage id="show.label_linked_in_url" />
               </label>

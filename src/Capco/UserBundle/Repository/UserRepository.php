@@ -1087,6 +1087,25 @@ class UserRepository extends EntityRepository
         return array_map(fn(array $row) => $row['email'], $results);
     }
 
+    public function findByEmailOrAccessToken(string $email, string $accessToken): ?User
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('u')
+            ->where('u.email = :email')
+            ->orWhere('u.email = :email')
+            ->orWhere('u.franceConnectAccessToken = :accessToken')
+            ->orWhere('u.facebook_access_token = :accessToken')
+            ->orWhere('u.google_access_token = :accessToken')
+            ->orWhere('u.openIdAccessToken = :accessToken')
+            ->orWhere('u.twitter_access_token = :accessToken')
+            ->setParameter('email', $email)
+            ->setParameter('accessToken', $accessToken)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function getAllAdmin(): array
     {
         return $this->findByRole('ROLE_ADMIN');

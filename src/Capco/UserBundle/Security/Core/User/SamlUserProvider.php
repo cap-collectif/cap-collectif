@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\UserBundle\Doctrine\UserManager;
@@ -8,8 +9,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class SamlUserProvider implements UserProviderInterface
 {
-    private $userManager;
-    private $samlIdp;
+    private UserManager $userManager;
+    private string $samlIdp;
 
     public function __construct(UserManager $manager, string $samlIdp)
     {

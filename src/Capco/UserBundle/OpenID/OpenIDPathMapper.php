@@ -5,12 +5,13 @@ namespace Capco\UserBundle\OpenID;
 use Capco\UserBundle\OpenID\Mapping\DecathlonMapping;
 use Capco\UserBundle\OpenID\Mapping\DevOpenIDMapping;
 use Capco\UserBundle\OpenID\Mapping\GrandLyonMapping;
+use Capco\UserBundle\OpenID\Mapping\MappingInterface;
 use Capco\UserBundle\OpenID\Mapping\NantesMapping;
 use Capco\UserBundle\OpenID\Mapping\OccitanieMapping;
 
 class OpenIDPathMapper
 {
-    private $instanceMapper;
+    private MappingInterface $instanceMapper;
 
     public function __construct(string $instance)
     {

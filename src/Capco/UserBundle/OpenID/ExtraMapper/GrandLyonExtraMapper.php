@@ -8,12 +8,15 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 
 class GrandLyonExtraMapper
 {
-    protected $user;
-    protected $userInfoData;
-    protected $logger;
+    protected User $user;
+    protected array $userInfoData;
+    protected LoggerInterface $logger;
 
-    public function __invoke(User $user, UserResponseInterface $response, LoggerInterface $logger): void
-    {
+    public function __invoke(
+        User $user,
+        UserResponseInterface $response,
+        LoggerInterface $logger
+    ): void {
         $this->user = $user;
         $this->logger = $logger;
         $this->userInfoData = $response->getData();

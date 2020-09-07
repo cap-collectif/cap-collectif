@@ -7,7 +7,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class BasicAuthLogoutHandler implements LogoutHandlerInterface
 {
-    private $router;
+    private RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {
@@ -18,16 +18,18 @@ class BasicAuthLogoutHandler implements LogoutHandlerInterface
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
         $deleteType = $responseWithRequest->getRequest()->get('deleteType');
-        $returnTo =
-            DeleteAccountType::SOFT === $deleteType || DeleteAccountType::HARD === $deleteType
-                ? $this->router->generate('app_homepage', ['deleteType' => $deleteType])
-                : $responseWithRequest->getRequest()->headers->get('referer', '/');
+        if ($deleteType) {
+            $returnTo =
+                DeleteAccountType::SOFT === $deleteType || DeleteAccountType::HARD === $deleteType
+                    ? $this->router->generate('app_homepage', ['deleteType' => $deleteType])
+                    : $responseWithRequest->getRequest()->headers->get('referer', '/');
 
-        $responseWithRequest->getResponse()->setTargetUrl($returnTo);
-        $responseWithRequest
-            ->getRequest()
-            ->getSession()
-            ->invalidate();
+            $responseWithRequest->getResponse()->setTargetUrl($returnTo);
+            $responseWithRequest
+                ->getRequest()
+                ->getSession()
+                ->invalidate();
+        }
 
         return $responseWithRequest;
     }

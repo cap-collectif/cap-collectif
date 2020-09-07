@@ -13,3 +13,4 @@ describe('Internal|Query.featureFlags', () => {
     await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot();
   });
 });
+

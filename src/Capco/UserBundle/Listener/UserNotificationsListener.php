@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Listener;
 
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
@@ -6,7 +7,7 @@ use FOS\UserBundle\Util\TokenGeneratorInterface;
 
 class UserNotificationsListener
 {
-    private $tokenGenerator;
+    private TokenGeneratorInterface $tokenGenerator;
 
     public function __construct(TokenGeneratorInterface $tokenGenerator)
     {

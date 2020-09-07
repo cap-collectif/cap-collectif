@@ -7,8 +7,8 @@ use SimpleSAML\Auth\Simple;
 
 class SAMLLogoutHandler implements LogoutHandlerInterface
 {
-    private $toggleManager;
-    private $samlClient;
+    private Manager $toggleManager;
+    private ?Simple $samlClient;
 
     public function __construct(Manager $toggleManager, ?Simple $samlClient = null)
     {

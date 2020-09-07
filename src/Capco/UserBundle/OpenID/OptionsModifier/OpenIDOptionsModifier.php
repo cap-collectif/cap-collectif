@@ -13,9 +13,9 @@ class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsMo
 {
     public const REDIS_CACHE_KEY = 'SSOConfiguration';
 
-    protected $oauthSsoConfigurationRepository;
-    protected $redisCache;
-    protected $toggleManager;
+    protected Oauth2SSOConfigurationRepository $oauthSsoConfigurationRepository;
+    protected RedisCache $redisCache;
+    protected Manager $toggleManager;
 
     public function __construct(
         Oauth2SSOConfigurationRepository $oauthSsoConfigurationRepository,
@@ -35,7 +35,7 @@ class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsMo
 
         if (!$ssoConfigurationCachedItem->isHit()) {
             $newSsoConfiguration = $this->oauthSsoConfigurationRepository->findOneBy([
-                'enabled' => true
+                'enabled' => true,
             ]);
 
             if (!$newSsoConfiguration) {
@@ -50,7 +50,7 @@ class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsMo
                         'access_token_url' => $newSsoConfiguration->getAccessTokenUrl(),
                         'authorization_url' => $newSsoConfiguration->getAuthorizationUrl(),
                         'infos_url' => $newSsoConfiguration->getUserInfoUrl(),
-                        'logout_url' => $newSsoConfiguration->getLogoutUrl()
+                        'logout_url' => $newSsoConfiguration->getLogoutUrl(),
                     ])
                     ->expiresAfter($this->redisCache::ONE_DAY);
             }

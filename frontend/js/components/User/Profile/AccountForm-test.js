@@ -7,25 +7,30 @@ import { features } from '~/redux/modules/default';
 import { intlMock, formMock, $refType, $fragmentRefs } from '~/mocks';
 
 describe('<AccountForm />', () => {
+  const defaultViewer = {
+    $refType,
+    $fragmentRefs,
+    locale: 'fr-FR',
+    email: 'initial-email@gmail.fr',
+    facebookId: null,
+    googleId: null,
+    isFranceConnectAccount: false,
+    newEmailToConfirm: null,
+    hasPassword: true,
+  };
+
   const props = {
     ...formMock,
     currentLanguage: 'fr-FR',
-    defaultLocale: 'en-GB',
     features,
     languageList: [
       { translationKey: 'french', code: 'fr-FR' },
       { translationKey: 'english', code: 'en-GB' },
     ],
+    viewer: defaultViewer,
     intl: intlMock,
     dispatch: jest.fn(),
     handleSubmit: jest.fn(),
-    viewer: {
-      $refType,
-      $fragmentRefs,
-      locale: 'fr-FR',
-      email: 'user@test.com',
-      newEmailToConfirm: null,
-    },
     initialValues: { email: 'initial-email@gmail.fr' },
   };
 
@@ -36,6 +41,22 @@ describe('<AccountForm />', () => {
 
   it('should render a form with an alert if submitted password is wrong', () => {
     const wrapper = shallow(<AccountForm {...props} error="user.confirm.wrong_password" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a form with associated account', () => {
+    const franceConnectViewer = {
+      ...defaultViewer,
+      hasPassword: false,
+      isFranceConnectAccount: true,
+    };
+    const Props = {
+      ...props,
+      viewer: {
+        ...franceConnectViewer,
+      },
+    };
+    const wrapper = shallow(<AccountForm {...Props} />);
     expect(wrapper).toMatchSnapshot();
   });
 

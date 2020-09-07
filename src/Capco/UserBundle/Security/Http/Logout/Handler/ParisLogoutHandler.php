@@ -7,8 +7,8 @@ use Capco\UserBundle\MonCompteParis\OpenAmClient;
 
 class ParisLogoutHandler implements LogoutHandlerInterface
 {
-    private $toggleManager;
-    private $client;
+    private Manager $toggleManager;
+    private OpenAmClient $client;
 
     public function __construct(Manager $toggleManager, OpenAmClient $client)
     {

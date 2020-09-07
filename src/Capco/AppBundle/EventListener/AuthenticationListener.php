@@ -12,9 +12,9 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
-    protected $requestStack;
+    protected RequestStack $requestStack;
 
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
@@ -49,6 +49,9 @@ class AuthenticationListener implements EventSubscriberInterface
     public function onAuthenticationSuccess(InteractiveLoginEvent $event): void
     {
         $request = $event->getRequest();
+        $session = $request->getSession();
+        $serialized = $event->getAuthenticationToken()->serialize();
+        $session->set('theToken', $serialized);
         $email = null;
         if (null !== $request) {
             $data = json_decode($request->getContent(), true);
@@ -72,7 +75,7 @@ class AuthenticationListener implements EventSubscriberInterface
     {
         return [
             AuthenticationEvents::AUTHENTICATION_FAILURE => 'onAuthenticationFailure',
-            AuthenticationEvents::AUTHENTICATION_SUCCESS => 'onAuthenticationSuccess'
+            AuthenticationEvents::AUTHENTICATION_SUCCESS => 'onAuthenticationSuccess',
         ];
     }
 }

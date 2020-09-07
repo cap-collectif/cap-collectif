@@ -12,6 +12,7 @@ Capco\UserBundle\Entity\User:
             - 'ROLE_SUPER_ADMIN'
         media: '@ProfilePicLaurent'
         enabled: true
+        birthPlace: East blue
         createdAt: <identity((new \DateTime('2015-01-01 00:00:00')))>
         confirmedAccountAt: <identity((new \DateTime('2015-01-01 00:00:00'))->modify("+ 4 days"))>
 
@@ -57,6 +58,7 @@ Capco\UserBundle\Entity\User:
         email: admin@test.com
         userType: '@UserType1'
         plainPassword: admin
+        birthPlace: 'Alabasta'
         roles:
             - 'ROLE_ADMIN'
         vip: true
@@ -97,6 +99,7 @@ Capco\UserBundle\Entity\User:
         address2: '2ieme etages'
         zip_code: '75012'
         city: 'Paris'
+        birthPlace: Skipiéa
         roles:
             - 'ROLE_USER'
         phoneConfirmed: true
@@ -606,3 +609,32 @@ Capco\UserBundle\Entity\User:
         emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:18:00'))>
         enabled: true
         createdAt: <identity((new \DateTime('2015-01-01 03:02:01'))->modify("+ 19 days"))>
+    userNotConnectedFranceConnect:
+        id: 'userNotConnectedFranceConnect'
+        username: Angela Claire Louise
+        firstname: Angela Claire Louise
+        lastname: DUBOIS
+        email: wossewodda-3728@yopmail.com
+        dateOfBirth: <(new \DateTime('1990-03-10'))>
+        birthplace: 'nowhere'
+        gender: 'f'
+        plainpassword: toto
+        roles:
+            - 'ROLE_USER'
+        emailConfirmationSentAt: <(new \DateTime('2020-03-09 09:30:00'))>
+        enabled: true
+        createdAt: <(new \DateTime('2020-03-09 09:30:00'))>
+        biography: Je suis france connect pas encore associé.
+    userConnectedFranceConnect:
+        id: 'userConnectedFranceConnect'
+        username: LAMPE Geraldine
+        firstname: Geraldine
+        lastname: LAMPE
+        email: ducowanet-7006@yopmail.com
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        createdAt: <(new \DateTime('2020-03-10 09:30:00'))>
+        biography: Je suis créé via france connect
+        franceConnectId: '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1'
+        franceConnectAccessToken: '***REMOVED***'

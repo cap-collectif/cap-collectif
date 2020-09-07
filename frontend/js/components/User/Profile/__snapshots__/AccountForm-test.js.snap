@@ -20,21 +20,17 @@ exports[`<AccountForm /> should render a form 1`] = `
             values={Object {}}
           />
         </label>
-        <div>
-          <Field
-            component={[Function]}
-            divClassName="col-sm-6"
-            id="account__email"
-            name="email"
-            type="email"
-          />
-        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          divClassName="col-sm-6"
+          id="account__email"
+          name="email"
+          type="email"
+        />
         <span
           className="account-form-hint"
         >
-          <i
-            className="icon cap-lock-2"
-          />
           <FormattedMessage
             id="account.your_email_is_not_public"
             values={Object {}}
@@ -59,6 +55,27 @@ exports[`<AccountForm /> should render a form 1`] = `
         />
       </div>
     </form>
+    <AccountForm__SsoGroup>
+      <span
+        className="font-weight-bold"
+      >
+        <FormattedMessage
+          id="Sign-in-option"
+          values={Object {}}
+        />
+      </span>
+      <span
+        className="clearfix sign-in-method"
+      >
+        <FormattedMessage
+          id="Sign-in-method"
+          values={Object {}}
+        />
+      </span>
+      <ListGroup
+        className="mt-10"
+      />
+    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -104,7 +121,11 @@ exports[`<AccountForm /> should render a form 1`] = `
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "email": "user@test.com",
+            "email": "initial-email@gmail.fr",
+            "facebookId": null,
+            "googleId": null,
+            "hasPassword": true,
+            "isFranceConnectAccount": false,
             "locale": "fr-FR",
             "newEmailToConfirm": null,
           }
@@ -135,21 +156,17 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
             values={Object {}}
           />
         </label>
-        <div>
-          <Field
-            component={[Function]}
-            divClassName="col-sm-6"
-            id="account__email"
-            name="email"
-            type="email"
-          />
-        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          divClassName="col-sm-6"
+          id="account__email"
+          name="email"
+          type="email"
+        />
         <span
           className="account-form-hint"
         >
-          <i
-            className="icon cap-lock-2"
-          />
           <FormattedMessage
             id="account.your_email_is_not_public"
             values={Object {}}
@@ -174,6 +191,27 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
         />
       </div>
     </form>
+    <AccountForm__SsoGroup>
+      <span
+        className="font-weight-bold"
+      >
+        <FormattedMessage
+          id="Sign-in-option"
+          values={Object {}}
+        />
+      </span>
+      <span
+        className="clearfix sign-in-method"
+      >
+        <FormattedMessage
+          id="Sign-in-method"
+          values={Object {}}
+        />
+      </span>
+      <ListGroup
+        className="mt-10"
+      />
+    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -219,7 +257,11 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "email": "user@test.com",
+            "email": "initial-email@gmail.fr",
+            "facebookId": null,
+            "googleId": null,
+            "hasPassword": true,
+            "isFranceConnectAccount": false,
             "locale": "fr-FR",
             "newEmailToConfirm": null,
           }
@@ -250,21 +292,17 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
             values={Object {}}
           />
         </label>
-        <div>
-          <Field
-            component={[Function]}
-            divClassName="col-sm-6"
-            id="account__email"
-            name="email"
-            type="email"
-          />
-        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          divClassName="col-sm-6"
+          id="account__email"
+          name="email"
+          type="email"
+        />
         <span
           className="account-form-hint"
         >
-          <i
-            className="icon cap-lock-2"
-          />
           <FormattedMessage
             id="account.your_email_is_not_public"
             values={Object {}}
@@ -289,6 +327,27 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
         />
       </div>
     </form>
+    <AccountForm__SsoGroup>
+      <span
+        className="font-weight-bold"
+      >
+        <FormattedMessage
+          id="Sign-in-option"
+          values={Object {}}
+        />
+      </span>
+      <span
+        className="clearfix sign-in-method"
+      >
+        <FormattedMessage
+          id="Sign-in-method"
+          values={Object {}}
+        />
+      </span>
+      <ListGroup
+        className="mt-10"
+      />
+    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -334,7 +393,151 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "email": "user@test.com",
+            "email": "initial-email@gmail.fr",
+            "facebookId": null,
+            "googleId": null,
+            "hasPassword": true,
+            "isFranceConnectAccount": false,
+            "locale": "fr-FR",
+            "newEmailToConfirm": null,
+          }
+        }
+      />
+    </div>
+  </PanelFooter>
+</Fragment>
+`;
+
+exports[`<AccountForm /> should render a form with associated account 1`] = `
+<Fragment>
+  <PanelBody
+    bsClass="panel"
+    collapsible={false}
+  >
+    <form
+      id="profile-account"
+      onSubmit={[MockFunction]}
+    >
+      <AccountForm__AccountContainer>
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="account__email"
+        >
+          <FormattedMessage
+            id="global.email"
+            values={Object {}}
+          />
+        </label>
+        <Field
+          component={[Function]}
+          disabled={true}
+          divClassName="col-sm-6"
+          id="account__email"
+          name="email"
+          type="email"
+        />
+        <span
+          className="account-form-hint"
+        >
+          <FormattedMessage
+            id="data-from-FranceConnect"
+            values={Object {}}
+          />
+          <FormattedMessage
+            id="account.your_email_is_not_public"
+            values={Object {}}
+          />
+        </span>
+        <Connect(ConfirmPasswordModal)
+          handleClose={[Function]}
+          show={false}
+        />
+      </AccountForm__AccountContainer>
+      <div
+        className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100"
+        id="profile-alert-form"
+      >
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </div>
+    </form>
+    <AccountForm__SsoGroup>
+      <span
+        className="font-weight-bold"
+      >
+        <FormattedMessage
+          id="Sign-in-option"
+          values={Object {}}
+        />
+      </span>
+      <span
+        className="clearfix sign-in-method"
+      >
+        <FormattedMessage
+          id="Sign-in-method"
+          values={Object {}}
+        />
+      </span>
+      <ListGroup
+        className="mt-10"
+      />
+    </AccountForm__SsoGroup>
+  </PanelBody>
+  <PanelFooter
+    bsClass="panel"
+  >
+    <div
+      className="pl-15"
+    >
+      <AccountForm__FooterContainer>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="edit-account-profile-button"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          className="ml-15"
+          disabled={false}
+          id="delete-account-profile-button"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="delete-account"
+            values={Object {}}
+          />
+        </Button>
+      </AccountForm__FooterContainer>
+      <Relay(DeleteAccountModal)
+        handleClose={[Function]}
+        show={false}
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "email": "initial-email@gmail.fr",
+            "facebookId": null,
+            "googleId": null,
+            "hasPassword": false,
+            "isFranceConnectAccount": true,
             "locale": "fr-FR",
             "newEmailToConfirm": null,
           }
@@ -365,21 +568,17 @@ exports[`<AccountForm /> should render a form with information about new email 1
             values={Object {}}
           />
         </label>
-        <div>
-          <Field
-            component={[Function]}
-            divClassName="col-sm-6"
-            id="account__email"
-            name="email"
-            type="email"
-          />
-        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          divClassName="col-sm-6"
+          id="account__email"
+          name="email"
+          type="email"
+        />
         <span
           className="account-form-hint"
         >
-          <i
-            className="icon cap-lock-2"
-          />
           <FormattedMessage
             id="account.your_email_is_not_public"
             values={Object {}}
@@ -404,6 +603,27 @@ exports[`<AccountForm /> should render a form with information about new email 1
         />
       </div>
     </form>
+    <AccountForm__SsoGroup>
+      <span
+        className="font-weight-bold"
+      >
+        <FormattedMessage
+          id="Sign-in-option"
+          values={Object {}}
+        />
+      </span>
+      <span
+        className="clearfix sign-in-method"
+      >
+        <FormattedMessage
+          id="Sign-in-method"
+          values={Object {}}
+        />
+      </span>
+      <ListGroup
+        className="mt-10"
+      />
+    </AccountForm__SsoGroup>
   </PanelBody>
   <PanelFooter
     bsClass="panel"
@@ -449,7 +669,11 @@ exports[`<AccountForm /> should render a form with information about new email 1
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "email": "user@test.com",
+            "email": "initial-email@gmail.fr",
+            "facebookId": null,
+            "googleId": null,
+            "hasPassword": true,
+            "isFranceConnectAccount": false,
             "locale": "fr-FR",
             "newEmailToConfirm": null,
           }
