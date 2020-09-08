@@ -7,13 +7,14 @@ import DebatePreviewItem, {
 
 export type Props = {
   debates: Array<DebatePreviewItemProps>,
+  lang: string,
   style?: Object,
 };
 
-const DebatePreviewList = ({ debates, style }: Props) => (
+const DebatePreviewList = ({ debates, lang, style }: Props) => (
   <Container style={style}>
     {debates.map((debate, idx) => (
-      <DebatePreviewItem {...debate} key={`debate-preview-${idx}`} />
+      <DebatePreviewItem {...debate} lang={lang} key={`debate-preview-${idx}`} />
     ))}
   </Container>
 );

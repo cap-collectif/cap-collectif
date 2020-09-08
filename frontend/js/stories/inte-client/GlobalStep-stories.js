@@ -1,49 +1,63 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { arrayObject } from 'storybook-addon-knobs';
+import { arrayObject, text } from 'storybook-addon-knobs';
 import GlobalStepItem from '~/components/InteClient/GlobalStep/GlobalStepItem/GlobalStepItem';
 import GlobalStepList from '~/components/InteClient/GlobalStep/GlobalStepList/GlobalStepList';
 
 const inputs = [
   {
-    title: '1 Débattez',
-    subtitle: 'avec 50 dirigeant(e)s européens',
-    description:
-      'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
+    title: { fr: '1 Débattez', en: '1 Debate' },
+    subtitle: { fr: 'avec 50 dirigeant(e)s européens', en: 'with many european leaders' },
+    description: {
+      fr:
+        'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
+      en: 'Civic tech Cap Collectif in english',
+    },
     colors: { line: '#C2E0FF' },
   },
   {
-    title: '2 Votez',
-    subtitle: 'et proposez vos solutions',
-    description:
-      'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
+    title: { fr: '2 Votez', en: '2 Vote' },
+    subtitle: { fr: 'avec 50 dirigeant(e)s européens', en: 'with many european leaders' },
+    description: {
+      fr:
+        'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
+      en: 'Civic tech Cap Collectif in english',
+    },
     colors: { line: '#FFD08A' },
   },
   {
-    title: '3 Construisez',
-    subtitle: 'la synthèse remise au Ministre',
-    description:
-      'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
+    title: { fr: '3 Construisez', en: '3 Develop' },
+    subtitle: { fr: 'avec 50 dirigeant(e)s européens', en: 'with many european leaders' },
+    description: {
+      fr:
+        'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
+      en: 'Civic tech Cap Collectif in english',
+    },
     colors: { line: '#CEF3D6' },
   },
 ];
 
 storiesOf('Inté client|GlobalStep/List', module).add(
   'Default',
-  () => <GlobalStepList steps={arrayObject('users', inputs)} />,
+  () => <GlobalStepList steps={arrayObject('users', inputs)} lang={text('lang', 'fr')} />,
   {
     knobsToBo: {
-      componentName: 'UserSliderApp',
+      componentName: 'GlobalStepApp',
     },
   },
 );
 
 storiesOf('Inté client|GlobalStep/Item', module).add('Default', () => (
   <GlobalStepItem
-    title="1 Débattez"
-    subtitle="avec 50 dirigeant(e)s européens"
-    description="La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société."
+    title={{ fr: '1 Débattez', en: '1 Debate' }}
+    subtitle={{ fr: 'avec 50 dirigeant(e)s européens', en: 'with many european leaders' }}
+    description={{
+      fr:
+        'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
+      en: 'Civic tech Cap Collectif in english',
+    }}
     colors={{ line: '#C2E0FF' }}
+    lang={text('lang', 'fr')}
   />
 ));
