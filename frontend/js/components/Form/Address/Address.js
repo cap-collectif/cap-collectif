@@ -88,13 +88,10 @@ const Address = ({
   };
 
   React.useEffect(() => {
-    window.navigator.permissions.query({ name: 'geolocation' }).then(permission => {
-      if (permission.state === 'granted' || permission.state === 'prompt') {
-        setHasLocationAuthorize(true);
-      } else {
-        setHasLocationAuthorize(false);
-      }
-    });
+    window.navigator.geolocation.getCurrentPosition(
+      () => setHasLocationAuthorize(true),
+      () => setHasLocationAuthorize(false),
+    );
   }, []);
 
   return (
