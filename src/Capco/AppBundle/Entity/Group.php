@@ -48,6 +48,11 @@ class Group
      */
     private $userGroups;
 
+    /**
+     * @ORM\Column(type="boolean", name="is_deletable")
+     */
+    private bool $isDeletable = true;
+
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
@@ -122,7 +127,7 @@ class Group
         return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
-            'description' => $this->getDescription()
+            'description' => $this->getDescription(),
         ];
     }
 
@@ -150,6 +155,18 @@ class Group
         if ($this->projectsVisibleByTheGroup->get($project)) {
             $this->projectsVisibleByTheGroup->remove($project);
         }
+
+        return $this;
+    }
+
+    public function isDeletable(): bool
+    {
+        return $this->isDeletable;
+    }
+
+    public function setIsDeletable(bool $isDeletable): self
+    {
+        $this->isDeletable = $isDeletable;
 
         return $this;
     }

@@ -4,11 +4,12 @@ namespace Capco\UserBundle\Security\Http\Logout\Handler;
 
 use Capco\AppBundle\Toggle\Manager;
 use SimpleSAML\Auth\Simple;
+use SimpleSAML\Session;
 
 class SAMLLogoutHandler implements LogoutHandlerInterface
 {
     private Manager $toggleManager;
-    private ?Simple $samlClient;
+    private Simple $samlClient;
 
     public function __construct(Manager $toggleManager, ?Simple $samlClient = null)
     {
@@ -20,7 +21,14 @@ class SAMLLogoutHandler implements LogoutHandlerInterface
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
         if ($this->samlClient && $this->toggleManager->isActive('login_saml')) {
+            $responseWithRequest
+                ->getRequest()
+                ->getSession()
+                ->invalidate();
+
             $this->samlClient->logout($responseWithRequest->getResponse()->getTargetUrl());
+
+            Session::getSessionFromRequest()->cleanup();
         }
 
         return $responseWithRequest;

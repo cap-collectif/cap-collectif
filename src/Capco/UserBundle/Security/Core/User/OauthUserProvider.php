@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\UserBundle\FranceConnect\FranceConnectMapper;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
 use Capco\UserBundle\Repository\UserRepository;
@@ -16,17 +17,21 @@ class OauthUserProvider extends FOSUBUserProvider
     protected OpenIDExtraMapper $extraMapper;
     private Indexer $indexer;
     private UserRepository $userRepository;
+    private GroupMutation $groupMutation;
 
     public function __construct(
         UserManagerInterface $userManager,
         UserRepository $userRepository,
         OpenIDExtraMapper $extraMapper,
         Indexer $indexer,
-        array $properties
+        array $properties,
+        GroupMutation $groupMutation
     ) {
         $this->userRepository = $userRepository;
         $this->extraMapper = $extraMapper;
         $this->indexer = $indexer;
+        $this->groupMutation = $groupMutation;
+
         parent::__construct($userManager, $properties);
     }
 
@@ -97,6 +102,7 @@ class OauthUserProvider extends FOSUBUserProvider
             $this->indexer->index(\get_class($user), $user->getId());
             $this->indexer->finishBulk();
         }
+        $this->groupMutation->createAndAddUserInGroup($user, 'SSO');
 
         return $user;
     }

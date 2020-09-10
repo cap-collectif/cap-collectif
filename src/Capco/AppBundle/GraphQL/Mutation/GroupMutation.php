@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Form\GroupCreateType;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
+use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,12 +20,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class GroupMutation implements MutationInterface
 {
-    private $logger;
-    private $entityManager;
-    private $formFactory;
-    private $userRepository;
-    private $userGroupRepository;
-    private $groupRepository;
+    private LoggerInterface $logger;
+    private UserManager $userManager;
+    private UserRepository $userRepository;
+    private GroupRepository $groupRepository;
+    private FormFactoryInterface $formFactory;
+    private EntityManagerInterface $entityManager;
+    private UserGroupRepository $userGroupRepository;
 
     public function __construct(
         LoggerInterface $logger,
@@ -32,14 +34,16 @@ class GroupMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         UserRepository $userRepository,
         UserGroupRepository $userGroupRepository,
-        GroupRepository $groupRepository
+        GroupRepository $groupRepository,
+        UserManager $userManager
     ) {
-        $this->entityManager = $entityManager;
         $this->logger = $logger;
         $this->formFactory = $formFactory;
+        $this->userManager = $userManager;
+        $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
         $this->groupRepository = $groupRepository;
         $this->userGroupRepository = $userGroupRepository;
-        $this->userRepository = $userRepository;
     }
 
     public function create(Argument $input): array
@@ -89,10 +93,17 @@ class GroupMutation implements MutationInterface
 
     public function delete(string $groupId): array
     {
+        /** @var ?Group $group */
         $group = $this->groupRepository->find($groupId);
 
         if (!$group) {
             throw new UserError(sprintf('Unknown group with id "%s"', $groupId));
+        }
+
+        if (!$group->isDeletable()) {
+            throw new UserError(
+                sprintf('This group can\'t be deleted because it\'s protected "%s"', $groupId)
+            );
         }
 
         try {
@@ -112,7 +123,7 @@ class GroupMutation implements MutationInterface
         $userId = GlobalId::fromGlobalId($userId)['id'];
         $userGroup = $this->userGroupRepository->findOneBy([
             'user' => $userId,
-            'group' => $groupId
+            'group' => $groupId,
         ]);
 
         if (!$userGroup) {
@@ -131,7 +142,27 @@ class GroupMutation implements MutationInterface
         return ['group' => $group];
     }
 
-    public function addUsersInGroup(array $users, string $groupId): array
+    public function createAndAddUserInGroup(User $user, string $groupName): void
+    {
+        /** @var Group $group */
+        $group = $this->groupRepository->getOneByTitle($groupName);
+
+        if (!$group) {
+            $group = new Group();
+            $group
+                ->setTitle($groupName)
+                ->setIsDeletable(false)
+                ->setDescription('Group for ' . $groupName . ' Users')
+                ->setSlug('group-' . $groupName);
+
+            $this->entityManager->persist($group);
+            $this->entityManager->flush();
+        }
+
+        $this->addUsersInGroup([$user->getId()], $group->getId(), false);
+    }
+
+    public function addUsersInGroup(array $users, string $groupId, bool $isGlobalID = true): array
     {
         /** @var Group $group */
         $group = $this->groupRepository->find($groupId);
@@ -140,19 +171,21 @@ class GroupMutation implements MutationInterface
             $error = sprintf('Cannot find the group "%g"', $groupId);
             $this->logger->error(__METHOD__ . ' addUsersInGroup: ' . $error);
 
-            throw new UserError('Can\'t add users in group.');
+            throw new UserError('Can\'t add users in group.', $groupId);
         }
 
         try {
             foreach ($users as $userId) {
-                $userId = GlobalId::fromGlobalId($userId)['id'];
+                if ($isGlobalID) {
+                    $userId = GlobalId::fromGlobalId($userId)['id'];
+                }
                 /** @var User $user */
                 $user = $this->userRepository->find($userId);
 
                 if ($user) {
                     $userGroup = $this->userGroupRepository->findOneBy([
                         'user' => $user,
-                        'group' => $group
+                        'group' => $group,
                     ]);
 
                     if (!$userGroup) {

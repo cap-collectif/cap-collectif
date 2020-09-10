@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -8,6 +10,15 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class GroupRepository extends EntityRepository
 {
+    public function getOneByTitle(string $title): ?Group
+    {
+        $qb = $this->createQueryBuilder('g')
+            ->andWhere('g.title = :title')
+            ->setParameter('title', $title);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function getGroupsByUser(User $user): array
     {
         $qb = $this->createQueryBuilder('g');
@@ -35,9 +46,7 @@ class GroupRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
-        $paginator = new Paginator($query);
-
-        return $paginator;
+        return new Paginator($query);
     }
 
     public function countGroupsAllowedForProject(Project $project): int

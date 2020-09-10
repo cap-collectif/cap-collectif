@@ -2,8 +2,9 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
-use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Doctrine\UserManager;
+use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -11,11 +12,13 @@ class SamlUserProvider implements UserProviderInterface
 {
     private UserManager $userManager;
     private string $samlIdp;
+    private GroupMutation $groupMutation;
 
-    public function __construct(UserManager $manager, string $samlIdp)
+    public function __construct(UserManager $manager, string $samlIdp, GroupMutation $groupMutation)
     {
-        $this->userManager = $manager;
         $this->samlIdp = $samlIdp;
+        $this->userManager = $manager;
+        $this->groupMutation = $groupMutation;
     }
 
     public function loadUserByUsername($id)
@@ -29,13 +32,6 @@ class SamlUserProvider implements UserProviderInterface
             // for daher, afd-interne, pole-emploi the id is the email
             $email = $id;
 
-            // Warning: do not update "@fake-email-cap-collectif.com"
-            // Because this is used to authenticate users.
-
-            if ('oda' === $this->samlIdp) {
-                $email = $id . '@fake-email-cap-collectif.com';
-            }
-
             // If the id is not a valid email, we create a fake one...
             if (false === filter_var($email, FILTER_SANITIZE_EMAIL)) {
                 $email = preg_replace('/\s+/', '', $id) . '@fake-email-cap-collectif.com';
@@ -47,6 +43,8 @@ class SamlUserProvider implements UserProviderInterface
             $this->userManager->updateUser($user);
         }
 
+        $this->groupMutation->createAndAddUserInGroup($user, 'SAML');
+
         return $user;
     }
 
@@ -55,6 +53,8 @@ class SamlUserProvider implements UserProviderInterface
         if ($user instanceof User) {
             return $this->userManager->findUserBy(['samlId' => $user->getSamlId()]);
         }
+
+        return null;
     }
 
     public function supportsClass($class): bool

@@ -42,7 +42,11 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
             return 'email';
         }
 
-        throw new \Exception('Could not find your authentication attribute.');
+        if ('dev' === $this->samlIdp) {
+            return 'https://samltest.id/attributes/role';
+        }
+
+        throw new \Exception('Could not find authentication attribute for idp: ' . $this->samlIdp);
     }
 
     public function findUsernameInResponse(array $attributes)

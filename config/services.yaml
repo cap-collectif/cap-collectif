@@ -84,8 +84,9 @@ parameters:
     env(SYMFONY_RABBITMQ_LOGIN): guest
     env(SYMFONY_RABBITMQ_PASSWORD): guest
     env(SYMFONY_RABBITMQ_VHOST): capco
-    env(SYMFONY_SAML_SP): oda
-    env(SYMFONY_SAML_PROTECT): true
+    env(SYMFONY_SAML_SP): dev
+    env(SYMFONY_SAML_PROTECT): false
+    env(SYMFONY_LOGIN_SAML_ALLOWED): True
     env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
     env(SYMFONY_REDIS_HOST): 127.0.0.1
     env(SYMFONY_ELASTICSEARCH_INDEX): capco
