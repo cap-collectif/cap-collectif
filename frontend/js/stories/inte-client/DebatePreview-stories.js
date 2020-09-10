@@ -12,6 +12,7 @@ const inputs = [
       en: 'How are you ?',
     },
     img: 'https://source.unsplash.com/random/800x800',
+    link: 'https://url.com',
   },
   {
     title: {
@@ -19,6 +20,7 @@ const inputs = [
       en: 'How are you ?',
     },
     img: 'https://source.unsplash.com/random/800x800',
+    link: 'https://url.com',
   },
   {
     title: {
@@ -26,6 +28,7 @@ const inputs = [
       en: 'How are you ?',
     },
     img: 'https://source.unsplash.com/random/800x800',
+    link: 'https://url.com',
   },
 ];
 
@@ -45,6 +48,7 @@ storiesOf('Inté client|DebatePreview/Item', module).add('Default', () => (
       fr: "Comment dépasser la recherche de profit à court terme de l'entreprise ?",
       en: 'How are you ?',
     }}
+    link="https://gogo.com"
     img="https://source.unsplash.com/random/800x800"
     lang={text('lang', 'fr')}
   />

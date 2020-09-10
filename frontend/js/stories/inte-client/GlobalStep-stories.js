@@ -31,7 +31,7 @@ const inputs = [
     subtitle: { fr: 'avec 50 dirigeant(e)s européens', en: 'with many european leaders' },
     description: {
       fr:
-        'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
+        'La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société. La civic tech Cap Collectif, le NextGen Entreprise Summit et 50 dirigeant(e)s français et internationaux s’associent aujourd’hui pour vous proposer de repenser le rôle de l’entreprise dans la société.',
       en: 'Civic tech Cap Collectif in english',
     },
     colors: { line: '#CEF3D6' },
@@ -40,7 +40,7 @@ const inputs = [
 
 storiesOf('Inté client|GlobalStep/List', module).add(
   'Default',
-  () => <GlobalStepList steps={arrayObject('users', inputs)} lang={text('lang', 'fr')} />,
+  () => <GlobalStepList steps={arrayObject('steps', inputs)} lang={text('lang', 'fr')} />,
   {
     knobsToBo: {
       componentName: 'GlobalStepApp',

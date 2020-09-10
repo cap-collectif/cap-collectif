@@ -1,7 +1,9 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'user-slider',
+})`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,7 +11,7 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   overflow-x: scroll;
 
   .user-slide {
-    width: 22%;
-    flex-shrink: 0;
+    margin-right: 40px;
+    flex: 1 0 auto;
   }
 `;

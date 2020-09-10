@@ -2,7 +2,7 @@
 import styled, { type StyledComponent } from 'styled-components';
 import { LIGHT_BOX_SHADOW } from '~/utils/styles/variables';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+export const Container: StyledComponent<{}, {}, HTMLAnchorElement> = styled.a.attrs({
   className: 'debate-preview-item',
 })`
   display: flex;

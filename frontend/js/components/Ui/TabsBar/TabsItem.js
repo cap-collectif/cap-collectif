@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape } from 'react-intl';
+import cn from 'classnames';
 
 import TabsBarDropdown from './TabsBarDropdown';
 
@@ -39,6 +40,7 @@ class TabsItem extends React.PureComponent<Props> {
           id={`tabs-navbar-link-${item.id}`}
           href={item.link}
           active={item.active}
+          className={cn({ 'tabs-navbar-link-active': item.active })}
           title={item.active ? ariaTitle : null}>
           {item.title}
         </S.TabsLink>

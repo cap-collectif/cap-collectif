@@ -26,13 +26,15 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
   .date {
     color: #6b7885;
     font-weight: bold;
+    margin-top: 2px;
   }
 `;
 
 export const Number: StyledComponent<{ colors: Colors }, {}, HTMLParagraphElement> = styled.p`
   position: relative;
+  z-index: 1;
   color: ${props => props.colors.primary};
-  margin: 0 15px 0 0;
+  margin: 0 20px 0 0;
   font-size: 24px;
   font-weight: bold;
 

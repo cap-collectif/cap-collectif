@@ -19,6 +19,7 @@ export const Container: StyledComponent<
 
   & > div {
     position: relative;
+    z-index: 1;
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 16px;
