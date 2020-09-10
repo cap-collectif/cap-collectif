@@ -9,7 +9,7 @@ use SimpleSAML\Session;
 class SAMLLogoutHandler implements LogoutHandlerInterface
 {
     private Manager $toggleManager;
-    private Simple $samlClient;
+    private ?Simple $samlClient;
 
     public function __construct(Manager $toggleManager, ?Simple $samlClient = null)
     {
