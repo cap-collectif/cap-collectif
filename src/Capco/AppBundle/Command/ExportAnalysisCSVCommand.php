@@ -2,17 +2,18 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
-use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -161,13 +162,16 @@ EOF;
     protected $userRepository;
     private $projectRepository;
     private $header;
+    private ConnectionTraversor $connectionTraversor;
 
     public function __construct(
         EntityManagerInterface $em,
         Executor $executor,
         GraphQlAclListener $listener,
         UserRepository $userRepository,
+        ProjectRepository $projectRepository,
         ExportUtils $exportUtils,
+        ConnectionTraversor $connectionTraversor,
         string $projectRootDir
     ) {
         parent::__construct($exportUtils);
@@ -177,6 +181,8 @@ EOF;
         $this->userRepository = $userRepository;
         $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
+        $this->projectRepository = $projectRepository;
+        $this->connectionTraversor = $connectionTraversor;
     }
 
     public function getRowCellValue(array $proposal, string $headerCell)
@@ -250,55 +256,45 @@ EOF;
         );
     }
 
-    public function addProposalRows(
+    public function addProposalRow(
         WriterInterface $writer,
         OutputInterface $output,
-        array $proposals,
+        array $proposal,
         array $dynamicQuestionHeaderPart,
         bool $isOnlyDecision,
         bool $isVerbose = false
     ): void {
-        $hasRow = false;
-        foreach ($proposals as $proposal) {
-            $defaultRowContent = [];
-            $proposal = $proposal['node'];
-            $analyses = $proposal['analyses'];
-            if (!$analyses || 0 === \count($analyses)) {
-                if ($isVerbose) {
-                    $output->writeln(
-                        "\t<fg=red>/!\\No analysis for proposal ${proposal['title']}.</>"
-                    );
-                }
-
-                continue;
-            }
-            $hasRow = true;
+        $defaultRowContent = [];
+        $analyses = $proposal['analyses'];
+        if (!$analyses || 0 === \count($analyses)) {
             if ($isVerbose) {
-                $output->writeln(
-                    "\t<info>Adding analysis of proposal ${proposal['title']}.</info>"
-                );
+                $output->writeln("\t<fg=red>/!\\No analysis for proposal ${proposal['title']}.</>");
             }
 
-            // We iterate over each column of a row to fill them
-            foreach (self::PROPOSAL_DEFAULT_HEADER as $headerKey => $headerPath) {
-                $cellValue = $this->getRowCellValue($proposal, $headerPath);
-                $defaultRowContent[] = $cellValue;
-            }
-
-            if ($isOnlyDecision) {
-                $this->setDecisionRows($writer, $defaultRowContent, $proposal);
-            } else {
-                $this->setAnalysisRows(
-                    $writer,
-                    $defaultRowContent,
-                    $proposal['analyses'],
-                    $dynamicQuestionHeaderPart
-                );
-            }
-        }
-        if (!$hasRow) {
             $output->writeln(
-                "\t<info>/!\\ There is no analysis in any proposal -> generating empty export.</info>"
+                "\t<info>/!\\ There is no analysis in this proposal -> generating empty export.</info>"
+            );
+
+            return;
+        }
+        if ($isVerbose) {
+            $output->writeln("\t<info>Adding analysis of proposal ${proposal['title']}.</info>");
+        }
+
+        // We iterate over each column of a row to fill them
+        foreach (self::PROPOSAL_DEFAULT_HEADER as $headerKey => $headerPath) {
+            $cellValue = $this->getRowCellValue($proposal, $headerPath);
+            $defaultRowContent[] = $cellValue;
+        }
+
+        if ($isOnlyDecision) {
+            $this->setDecisionRows($writer, $defaultRowContent, $proposal);
+        } else {
+            $this->setAnalysisRows(
+                $writer,
+                $defaultRowContent,
+                $proposal['analyses'],
+                $dynamicQuestionHeaderPart
             );
         }
     }
@@ -337,66 +333,84 @@ EOF;
     public function generateProjectProposalsCSV(
         InputInterface $input,
         OutputInterface $output,
-        array $projects,
+        array $project,
         string $delimiter,
         bool $isOnlyDecision,
         bool $isVerbose
     ): void {
-        $output->writeln('<info>Starting generation of csv...</info>');
-        foreach ($projects as $project) {
-            $firstAnalysisStep = $project['node']['firstAnalysisStep'];
-            $projectSlug = $project['node']['slug'];
-            if (!$firstAnalysisStep) {
-                if ($isVerbose) {
-                    $output->writeln("<fg=red>No firstAnalysisStep for project ${projectSlug}!</>");
-                }
-
-                continue;
+        $firstAnalysisStep = $project['node']['firstAnalysisStep'];
+        $projectSlug = $project['node']['slug'];
+        $projectId = $project['node']['id'];
+        if (!$firstAnalysisStep) {
+            if ($isVerbose) {
+                $output->writeln("<fg=red>No firstAnalysisStep for project ${projectSlug}!</>");
             }
 
-            $output->writeln('<fg=green>Generating analysis of project ' . $projectSlug . '...</>');
+            return;
+        }
 
-            $fullPath = $this->getPath($projectSlug, $isOnlyDecision);
+        $output->writeln('<fg=green>Generating analysis of project ' . $projectSlug . '...</>');
 
-            $writer = WriterFactory::create(Type::CSV, $delimiter);
-            if (null === $writer) {
-                throw new \RuntimeException('Error while opening writer.');
-            }
+        $fullPath = $this->getPath($projectSlug, $isOnlyDecision);
 
-            try {
-                $writer->openToFile($fullPath);
-            } catch (IOException $e) {
-                throw new \RuntimeException('Error while opening file: ' . $e->getMessage());
-            }
+        $writer = WriterFactory::create(Type::CSV, $delimiter);
+        if (null === $writer) {
+            throw new \RuntimeException('Error while opening writer.');
+        }
 
-            $dynamicQuestionHeaderPart = $this->writeHeader(
-                $writer,
-                $isOnlyDecision,
-                $firstAnalysisStep['form']
-            );
+        try {
+            $writer->openToFile($fullPath);
+        } catch (IOException $e) {
+            throw new \RuntimeException('Error while opening file: ' . $e->getMessage());
+        }
 
-            if (
-                isset($firstAnalysisStep['proposals']['edges']) &&
-                0 !== \count($firstAnalysisStep['proposals']['edges'])
-            ) {
-                $this->addProposalRows(
+        $dynamicQuestionHeaderPart = $this->writeHeader(
+            $writer,
+            $isOnlyDecision,
+            $firstAnalysisStep['form']
+        );
+
+        if (
+            isset($firstAnalysisStep['proposals']['edges']) &&
+            0 !== \count($firstAnalysisStep['proposals']['edges'])
+        ) {
+            $this->connectionTraversor->traverse(
+                $project['node'],
+                'firstAnalysisStep.proposals',
+                function ($edge) use (
                     $writer,
                     $output,
-                    $firstAnalysisStep['proposals']['edges'],
                     $dynamicQuestionHeaderPart,
                     $isOnlyDecision,
                     $isVerbose
-                );
-            } else {
-                $output->writeln(
-                    '<fg=red>/!\ There is no analysis in any proposal -> generating empty export.</>'
-                );
-            }
-            $writer->close();
-            if (true === $input->getOption('updateSnapshot')) {
-                $this->updateSnapshot(self::getFilename($projectSlug, $isOnlyDecision));
-                $output->writeln('<info>Snapshot has been written !</info>');
-            }
+                ) {
+                    $proposal = $edge['node'];
+                    $this->addProposalRow(
+                        $writer,
+                        $output,
+                        $proposal,
+                        $dynamicQuestionHeaderPart,
+                        $isOnlyDecision,
+                        $isVerbose
+                    );
+                },
+                function ($pageInfo) use ($isOnlyDecision, $projectId) {
+                    if ($isOnlyDecision) {
+                        return $this->getDecisionGraphQLQuery($projectId, $pageInfo['endCursor']);
+                    }
+
+                    return $this->getAnalysisGraphQLQuery($projectId, $pageInfo['endCursor']);
+                }
+            );
+        } else {
+            $output->writeln(
+                '<fg=red>/!\ There is no analysis in any proposal -> generating empty export.</>'
+            );
+        }
+        $writer->close();
+        if (true === $input->getOption('updateSnapshot')) {
+            $this->updateSnapshot(self::getFilename($projectSlug, $isOnlyDecision));
+            $output->writeln('<info>Snapshot has been written !</info>');
         }
     }
 
@@ -435,43 +449,51 @@ EOF;
         $delimiter = $input->getOption('delimiter');
         $isVerbose = $input->getOption('verbose');
         $isOnlyDecision = $input->getOption('only-decisions');
-        if ($isOnlyDecision) {
-            $data = $this->executor
-                ->execute('internal', [
-                    'query' => $this->getDecisionGraphQLQuery(),
-                    'variables' => [],
-                ])
-                ->toArray();
-            $data = Arr::path($data, 'data.projects.edges');
-        } else {
-            $data = $this->executor
-                ->execute('internal', [
-                    'query' => $this->getAnalysisGraphQLQuery(),
-                    'variables' => [],
-                ])
-                ->toArray();
-            $data = Arr::path($data, 'data.projects.edges');
+        $projects = $this->projectRepository->findAllIdsWithSlugs();
+        $output->writeln('<info>Starting generation of csv...</info>');
+        foreach ($projects as $project) {
+            $projectId = GlobalId::toGlobalId('Project', $project['id']);
+            if ($isOnlyDecision) {
+                $data = $this->executor
+                    ->execute('internal', [
+                        'query' => $this->getDecisionGraphQLQuery($projectId),
+                        'variables' => [],
+                    ])
+                    ->toArray();
+            } else {
+                $data = $this->executor
+                    ->execute('internal', [
+                        'query' => $this->getAnalysisGraphQLQuery($projectId),
+                        'variables' => [],
+                    ])
+                    ->toArray();
+            }
+
+            $this->generateProjectProposalsCSV(
+                $input,
+                $output,
+                $data['data'],
+                $delimiter,
+                $isOnlyDecision,
+                $isVerbose
+            );
         }
-        $this->generateProjectProposalsCSV(
-            $input,
-            $output,
-            $data,
-            $delimiter,
-            $isOnlyDecision,
-            $isVerbose
-        );
 
         $output->writeln('Done writing.');
 
         return 0;
     }
 
-    protected function getDecisionGraphQLQuery(): string
+    protected function getDecisionGraphQLQuery(string $projectId, ?string $cursor = null): string
     {
         $ANALYST_FRAGMENT = self::ANALYST_FRAGMENT;
         $DECISION_MAKER_FRAGMENT = self::DECISION_MAKER_FRAGMENT;
         $SUPERVISOR_FRAGMENT = self::SUPERVISOR_FRAGMENT;
         $PROPOSAL_FRAGMENT = self::PROPOSAL_ANALYSIS_FRAGMENT;
+
+        if ($cursor) {
+            $cursor = ', after: "' . $cursor . '"';
+        }
 
         return <<<EOF
 ${ANALYST_FRAGMENT}
@@ -479,9 +501,8 @@ ${DECISION_MAKER_FRAGMENT}
 ${SUPERVISOR_FRAGMENT}
 ${PROPOSAL_FRAGMENT}
 {
-  projects {
-    edges {
-      node {
+  node(id: "${projectId}") {
+    ...on Project {
         id
         slug
         firstAnalysisStep {
@@ -494,8 +515,13 @@ ${PROPOSAL_FRAGMENT}
               }
             }
           }
-          proposals(includeUnpublished: true) {
+          proposals(includeUnpublished: true${cursor}) {
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
+              cursor
               node {
                 ...proposalInfos
                 
@@ -518,7 +544,6 @@ ${PROPOSAL_FRAGMENT}
                   estimatedCost
                   isApproved
                   post {
-
                     title
                     body
                     
@@ -534,30 +559,37 @@ ${PROPOSAL_FRAGMENT}
             }
           }
         }
-      }
     }
   }
 }
 EOF;
     }
 
-    protected function getAnalysisGraphQLQuery(): string
+    protected function getAnalysisGraphQLQuery(string $projectId, ?string $cursor = null): string
     {
         $ANALYST_FRAGMENT = self::ANALYST_FRAGMENT;
         $PROPOSAL_FRAGMENT = self::PROPOSAL_ANALYSIS_FRAGMENT;
+
+        if ($cursor) {
+            $cursor = ', after: "' . $cursor . '"';
+        }
 
         return <<<EOF
 ${ANALYST_FRAGMENT}
 ${PROPOSAL_FRAGMENT}
 {
-  projects {
-    edges {
-      node {
+  node(id: "${projectId}") {
+    ...on Project {
         id
         slug
         firstAnalysisStep {
-          proposals(includeUnpublished: true) {
+          proposals(includeUnpublished: true${cursor}) {
+            pageInfo {
+               hasNextPage
+               endCursor
+            }
             edges {
+              cursor
               node {
                 ...proposalInfos
               }
@@ -573,7 +605,6 @@ ${PROPOSAL_FRAGMENT}
             }
           }
         }
-      }
     }
   }
 }
