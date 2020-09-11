@@ -50,7 +50,7 @@ export const validateResponses = (
       if (
         !value || // default
         (!value && !otherValue) || // checkbox & radio
-        (value && value.length === 0) || // checkbox & radio & ranking & media
+        (value && value.length === 0 && !otherValue) || // checkbox & radio & ranking & media
         (type === 'editor' && typeof value === 'string' && !stripHtml(value)) // editor
       ) {
         return { idQuestion, value: `${className}.constraints.field_mandatory` };
