@@ -67,9 +67,9 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
         bsClass="panel"
         collapsible={false}
       >
-        <p>
-          We need to collect
-        </p>
+        <WYSIWYGRender
+          value="We need to collect"
+        />
         <Relay(Connect(ReduxForm))
           step={
             Object {
@@ -269,9 +269,9 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
         bsClass="panel"
         collapsible={false}
       >
-        <p>
-          We need to collect
-        </p>
+        <WYSIWYGRender
+          value="We need to collect"
+        />
         <Relay(Connect(ReduxForm))
           step={
             Object {
@@ -471,9 +471,9 @@ exports[`<ProposalVoteModal /> should render correctly with interpellation 1`] =
         bsClass="panel"
         collapsible={false}
       >
-        <p>
-          We need to collect
-        </p>
+        <WYSIWYGRender
+          value="We need to collect"
+        />
         <Relay(Connect(ReduxForm))
           step={
             Object {

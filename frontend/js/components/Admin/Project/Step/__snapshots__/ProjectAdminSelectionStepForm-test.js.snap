@@ -191,6 +191,18 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
       values={Object {}}
     />
   </Button>
+  <Field
+    component={[Function]}
+    id="step-requirementsReason"
+    label={
+      <FormattedMessage
+        id="reason-for-collection"
+        values={Object {}}
+      />
+    }
+    name="requirementsReason"
+    type="editor"
+  />
 </Fragment>
 `;
 
@@ -372,5 +384,17 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
       values={Object {}}
     />
   </Button>
+  <Field
+    component={[Function]}
+    id="step-requirementsReason"
+    label={
+      <FormattedMessage
+        id="reason-for-collection"
+        values={Object {}}
+      />
+    }
+    name="requirementsReason"
+    type="editor"
+  />
 </Fragment>
 `;

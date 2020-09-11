@@ -6,6 +6,7 @@ import { Alert, Panel, Label } from 'react-bootstrap';
 import { reduxForm, Field, clearSubmitErrors, SubmissionError } from 'redux-form';
 import Fetcher, { json } from '../../../services/Fetcher';
 import renderInput from '../../Form/Field';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { Dispatch } from '../../../types';
 import type { OpinionCreateForm_section } from '~relay/OpinionCreateForm_section.graphql';
@@ -83,7 +84,7 @@ export class OpinionCreateForm extends React.Component<Props> {
         </Panel.Heading>
         {!consultationStep.requirements.viewerMeetsTheRequirements && (
           <Panel.Body>
-            <p>{consultationStep.requirements.reason}</p>
+            <WYSIWYGRender value={consultationStep.requirements.reason} />
             <RequirementsForm step={consultationStep} />
           </Panel.Body>
         )}

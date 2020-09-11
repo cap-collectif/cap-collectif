@@ -194,7 +194,7 @@ const onSubmit = (
           mainView: s.type === 'CollectStep' || s.type === 'SelectionStep' ? s.mainView : undefined,
           requirements: s.requirements?.length ? s.requirements : [],
           requirementsReason:
-            s.type === 'ConsultationStep' || s.type === 'CollectStep'
+            s.type === 'ConsultationStep' || s.type === 'CollectStep' || s.type === 'SelectionStep'
               ? s.requirementsReason
               : undefined,
           proposalsHidden: s.type === 'SelectionStep' ? s.proposalsHidden : undefined,

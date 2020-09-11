@@ -8,6 +8,7 @@ import { submit, isSubmitting } from 'redux-form';
 import OpinionSourceFormInfos from './OpinionSourceFormInfos';
 import OpinionSourceFormModalTitle from './OpinionSourceFormModalTitle';
 import OpinionSourceForm, { formName } from './OpinionSourceForm';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
@@ -65,7 +66,7 @@ class OpinionSourceFormModal extends React.Component<Props> {
               </Panel.Heading>
               {!step.requirements.viewerMeetsTheRequirements && (
                 <Panel.Body>
-                  <p>{step.requirements.reason}</p>
+                  <WYSIWYGRender value={step.requirements.reason} />
                   <RequirementsForm step={step} stepId={step.id} />
                 </Panel.Body>
               )}

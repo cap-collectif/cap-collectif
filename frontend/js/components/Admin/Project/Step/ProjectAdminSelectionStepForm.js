@@ -154,6 +154,13 @@ export const ProjectAdminSelectionStepForm = ({
         }>
         <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
       </Button>
+      <Field
+        type="editor"
+        name="requirementsReason"
+        id="step-requirementsReason"
+        label={<FormattedMessage id="reason-for-collection" />}
+        component={component}
+      />
     </>
   );
 };

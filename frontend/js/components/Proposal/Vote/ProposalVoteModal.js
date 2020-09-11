@@ -227,7 +227,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
               </Panel.Heading>
               {!step.requirements.viewerMeetsTheRequirements && (
                 <Panel.Body>
-                  <p>{step.requirements.reason}</p>
+                  <WYSIWYGRender value={step.requirements.reason} />
                   <RequirementsForm step={step} />
                 </Panel.Body>
               )}
