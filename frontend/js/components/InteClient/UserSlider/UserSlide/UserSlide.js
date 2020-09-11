@@ -12,7 +12,9 @@ export type Props = {|
 
 const UserSlide = ({ name, job, img, lang, colors }: Props) => (
   <Container nameColor={colors.name}>
-    <img src={img} alt="" />
+    <div className="avatar-wrapper">
+      <img src={img} alt="" />
+    </div>
 
     <div>
       <p className="name">{name}</p>

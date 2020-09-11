@@ -2,7 +2,9 @@
 import styled, { type StyledComponent } from 'styled-components';
 import { mediaQueryMobile } from '~/utils/sizes';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'debate-preview-list',
+})`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -18,6 +20,11 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     .debate-preview-item {
       width: 100%;
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 `;

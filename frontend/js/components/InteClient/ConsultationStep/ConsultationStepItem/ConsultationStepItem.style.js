@@ -23,6 +23,10 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
     margin: 0;
   }
 
+  .title {
+    font-size: 18px;
+  }
+
   .date {
     color: #6b7885;
     font-weight: bold;
@@ -43,7 +47,7 @@ export const Number: StyledComponent<{ colors: Colors }, {}, HTMLParagraphElemen
     left: 0;
     bottom: 6px;
     z-index: -1;
-    width: 16px;
+    width: 20px;
     height: 8px;
     background-color: ${props => props.colors.secondary};
   }

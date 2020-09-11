@@ -20,6 +20,10 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
     .global-step-item {
       width: 100%;
       margin-bottom: 30px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 `;

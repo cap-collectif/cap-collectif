@@ -3,16 +3,18 @@ import * as React from 'react';
 import { Container, Header, Footer, type Colors } from './ProposalPreviewItem.style';
 
 export type Props = {|
-  content: { [string]: string },
+  content: {
+    [string]: string,
+  },
   author: string,
   job: {
     [string]: string,
   },
   img: string,
-  buttonLabel: { [string]: string },
-  link: {
+  buttonLabel: {
     [string]: string,
   },
+  link: string,
   lang: string,
   colors: Colors,
 |};
@@ -30,7 +32,7 @@ const ProposalPreviewItem = ({
   <Container>
     <Header btnColor={colors.button}>
       <img src={img} alt="avatar" />
-      <a href={link[lang]}>{buttonLabel[lang]}</a>
+      <a href={link}>{buttonLabel[lang]}</a>
     </Header>
 
     <p className="proposal-content">{content[lang]}</p>

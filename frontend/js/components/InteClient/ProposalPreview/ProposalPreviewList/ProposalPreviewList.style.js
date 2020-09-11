@@ -23,6 +23,10 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     .proposal-preview-item {
       width: 100%;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 `;

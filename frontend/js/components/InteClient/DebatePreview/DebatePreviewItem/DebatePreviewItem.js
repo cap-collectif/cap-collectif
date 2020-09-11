@@ -7,12 +7,14 @@ export type Props = {|
     [string]: string,
   },
   img: string,
-  link: string,
+  link: {
+    [string]: string,
+  },
   lang: string,
 |};
 
-const DebatePreviewItem = ({ title, img, link = '#', lang }: Props) => (
-  <Container href={link}>
+const DebatePreviewItem = ({ title, img, link, lang }: Props) => (
+  <Container href={link[lang]}>
     <img src={img} alt="" />
     <p>{title[lang]}</p>
   </Container>

@@ -23,10 +23,7 @@ const inputs = [
       en: 'Important job',
     },
     colors: { button: '#40408E', name: '#79A3E0' },
-    link: {
-      fr: 'https://go.com',
-      en: 'https://go.com',
-    },
+    link: 'https://go.com',
   },
   {
     content: {
@@ -45,10 +42,7 @@ const inputs = [
       en: 'Important job',
     },
     colors: { button: '#40408E', name: '#79A3E0' },
-    link: {
-      fr: 'https://go.com',
-      en: 'https://go.com',
-    },
+    link: 'https://go.com',
   },
   {
     content: {
@@ -67,10 +61,7 @@ const inputs = [
       en: 'Important job',
     },
     colors: { button: '#40408E', name: '#79A3E0' },
-    link: {
-      fr: 'https://go.com',
-      en: 'https://go.com',
-    },
+    link: 'https://go.com',
   },
   {
     content: {
@@ -89,10 +80,7 @@ const inputs = [
       en: 'Important job',
     },
     colors: { button: '#40408E', name: '#79A3E0' },
-    link: {
-      fr: 'https://go.com',
-      en: 'https://go.com',
-    },
+    link: 'https://go.com',
   },
   {
     content: {
@@ -111,10 +99,7 @@ const inputs = [
       en: 'Important job',
     },
     colors: { button: '#40408E', name: '#79A3E0' },
-    link: {
-      fr: 'https://go.com',
-      en: 'https://go.com',
-    },
+    link: 'https://go.com',
   },
 ];
 
@@ -148,10 +133,7 @@ storiesOf('Inté client|ProposalPreview/Item', module).add('Default', () => (
       en: 'Important job',
     }}
     colors={{ button: '#40408E', name: '#79A3E0' }}
-    link={{
-      fr: 'https://go.com',
-      en: 'https://go.com',
-    }}
+    link="https://go.com"
     lang={text('lang', 'fr')}
   />
 ));

@@ -35,7 +35,9 @@ export const Header: StyledComponent<{ btnColor: string }, {}, HTMLDivElement> =
   a {
     background-color: ${props => props.btnColor};
     color: #fff;
-    padding: 6px 14px;
+    padding: 8px 14px;
+    text-transform: uppercase;
+    font-size: 12px;
     ${MAIN_BORDER_RADIUS};
   }
 `;
@@ -50,6 +52,7 @@ export const Footer: StyledComponent<{ authorColor: string }, {}, HTMLDivElement
   }
 
   .author {
+    margin-bottom: 4px;
     color: ${props => props.authorColor};
     font-weight: bold;
   }
@@ -59,6 +62,7 @@ export const Footer: StyledComponent<{ authorColor: string }, {}, HTMLDivElement
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 600;
+    margin-bottom: 2px;
   }
 `;
 
