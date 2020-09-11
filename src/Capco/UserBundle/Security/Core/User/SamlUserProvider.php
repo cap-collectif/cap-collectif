@@ -26,21 +26,29 @@ class SamlUserProvider implements UserProviderInterface
         $user = $this->userManager->findUserBy(['samlId' => $id]);
 
         if (null === $user) {
-            $user = $this->userManager->createUser();
-            $user->setSamlId($id);
-            $user->setUsername($id);
-            // for daher, afd-interne, pole-emploi the id is the email
-            $email = $id;
+            $user = $this->userManager->findUserByEmail($id);
 
-            // If the id is not a valid email, we create a fake one...
-            if (false === filter_var($email, FILTER_SANITIZE_EMAIL)) {
-                $email = preg_replace('/\s+/', '', $id) . '@fake-email-cap-collectif.com';
+            if(null !== $user) {
+                $user->setSamlId($id);
+                $this->userManager->updateUser($user);
             }
+            else {
+                $user = $this->userManager->createUser();
+                $user->setSamlId($id);
+                $user->setUsername($id);
+                // for daher, afd-interne, pole-emploi the id is the email
+                $email = $id;
 
-            $user->setEmail($email);
-            $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
-            $user->setEnabled(true);
-            $this->userManager->updateUser($user);
+                // If the id is not a valid email, we create a fake one...
+                if (false === filter_var($email, FILTER_SANITIZE_EMAIL)) {
+                    $email = preg_replace('/\s+/', '', $id) . '@fake-email-cap-collectif.com';
+                }
+
+                $user->setEmail($email);
+                $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
+                $user->setEnabled(true);
+                $this->userManager->updateUser($user);
+            }
         }
 
         $this->groupMutation->createAndAddUserInGroup($user, 'SAML');
