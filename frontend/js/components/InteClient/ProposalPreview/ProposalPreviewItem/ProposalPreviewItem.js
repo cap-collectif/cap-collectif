@@ -14,7 +14,7 @@ export type Props = {|
   buttonLabel: {
     [string]: string,
   },
-  link: string,
+  link: { [string]: string },
   lang: string,
   colors: Colors,
 |};
@@ -31,8 +31,10 @@ const ProposalPreviewItem = ({
 }: Props) => (
   <Container>
     <Header btnColor={colors.button}>
-      <img src={img} alt="avatar" />
-      <a href={link}>{buttonLabel[lang]}</a>
+      <div className="avatar-wrapper">
+        <img src={img} alt="" />
+      </div>
+      <a href={link[lang]}>{buttonLabel[lang]}</a>
     </Header>
 
     <p className="proposal-content">{content[lang]}</p>

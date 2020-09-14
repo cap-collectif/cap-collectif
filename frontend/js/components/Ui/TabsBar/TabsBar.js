@@ -48,7 +48,11 @@ const TabsBar = ({ items, vertical }: Props) => {
     <S.TabsBarContainer show vertical={vertical} ref={containerRef}>
       {items.map((item, index) => {
         return index < overflowIndex ? (
-          <S.TabsItemContainer key={index} vertical={vertical} ref={handleItemWidth}>
+          <S.TabsItemContainer
+            key={index}
+            vertical={vertical}
+            ref={handleItemWidth}
+            className="tabsbar-item-wrapper">
             <TabsItem key={index} item={item} intl={intl} vertical={vertical} />
           </S.TabsItemContainer>
         ) : null;

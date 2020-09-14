@@ -15,6 +15,7 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
   border: 1px solid #e8ebed;
   background-color: #fff;
   padding: 20px;
+  ${MAIN_BORDER_RADIUS};
 
   .proposal-content {
     margin: 20px 0;
@@ -27,9 +28,21 @@ export const Header: StyledComponent<{ btnColor: string }, {}, HTMLDivElement> =
   align-items: flex-start;
   justify-content: space-between;
 
-  img {
+  .avatar-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     width: 55px;
+    height: 55px;
     border-radius: 26.5px;
+    margin-right: 14px;
+    background-color: #fff;
+    overflow: hidden;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
   }
 
   a {
