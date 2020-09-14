@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Font:
     fontOpenSans:
       id: 'openSansFont'
       name: 'Open Sans'
-      familyName: 'Open Sans, Arial, sans-serif'
+      familyName: 'OpenSans, Arial, sans-serif'
       isCustom: false
       useAsHeading: true
       useAsBody: true
