@@ -176,7 +176,6 @@ class ReplyRepository extends EntityRepository
     public function getEnabledByQuestionnaireAsArray(Questionnaire $questionnaire): array
     {
         $qb = $this->createQueryBuilder('reply')
-            ->andWhere('reply.published = true')
             ->addSelect('author')
             ->leftJoin('reply.author', 'author')
             ->andWhere('reply.questionnaire = :questionnaire')

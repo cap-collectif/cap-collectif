@@ -63,16 +63,17 @@ def graphql_schemas(checkSame=False):
 def snapshots(tags='false'):
     "Generate all snapshots"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
+    # You can run these commands individually.
     export_commands = [
-        'capco:export:users --quiet --updateSnapshot --delimiter ","',
-        'capco:export:questionnaire --quiet --updateSnapshot --delimiter ","',
-        'capco:export:consultation --quiet --updateSnapshot --delimiter ","',
-        'capco:export:projects-contributors --quiet --updateSnapshot --delimiter ","',
-        'capco:export:step-contributors --quiet --updateSnapshot --delimiter ","',
-        'capco:export:proposalStep --quiet --updateSnapshot --delimiter ","',
-        'capco:export:events:participants --quiet --updateSnapshot --delimiter ","',
-        'capco:export:analysis --quiet --updateSnapshot --delimiter ","',
-        'capco:export:analysis --only-decisions --quiet --updateSnapshot --delimiter ","'
+        'capco:export:users --updateSnapshot --delimiter "," --env test',
+        'capco:export:questionnaire --updateSnapshot --delimiter "," --env test',
+        'capco:export:consultation --updateSnapshot --delimiter "," --env test',
+        'capco:export:projects-contributors --updateSnapshot --delimiter "," --env test',
+        'capco:export:step-contributors --updateSnapshot --delimiter "," --env test',
+        'capco:export:proposalStep --updateSnapshot --delimiter "," --env test',
+        'capco:export:events:participants --updateSnapshot --delimiter "," --env test',
+        'capco:export:analysis --updateSnapshot --delimiter "," --env test',
+        'capco:export:analysis --only-decisions --updateSnapshot --delimiter "," --env test'
     ]
     user_archives_commands = [
         'capco:export:user userAdmin --updateSnapshot --delimiter ","',
@@ -118,7 +119,7 @@ def snapshots(tags='false'):
         print
         cyan('Running export commands...')
         for command in export_commands:
-            env.service_command('bin/console ' + command + ' --env test --no-debug', 'application', env.www_app)
+            env.service_command('bin/console ' + command + ' --quiet --no-debug', 'application', env.www_app)
 
     print
     cyan('Successfully generated snapshots !')

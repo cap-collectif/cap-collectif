@@ -1,1 +1,1 @@
-﻿id,published,author,author_id,author_email,phone,created,updated,anonymous,draft,"Comment allez vous","Jai plusieurs choix leu"
+﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,"Comment allez vous","Jai plusieurs choix leu"

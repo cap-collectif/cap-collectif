@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Preview|QuestionnaireStep.contributors connection fetches the contributors of a collect step 1`] = `
+exports[`Preview|QuestionnaireStep.contributors connection fetches the contributors of a questionnaire step 1`] = `
 Object {
   "node": Object {
     "contributors": Object {
@@ -9,12 +9,6 @@ Object {
           "node": Object {
             "id": "VXNlcjp1c2VyNTE1",
             "username": "user_updating_email",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "VXNlcjp1c2VyX25vdF9jb25maXJtZWQ=",
-            "username": "user_not_confirmed",
           },
         },
         Object {
@@ -36,7 +30,7 @@ Object {
           },
         },
       ],
-      "totalCount": 5,
+      "totalCount": 4,
     },
     "id": "questionnairestep1",
     "title": "Questionnaire des JO 2024",

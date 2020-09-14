@@ -234,11 +234,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 7,
+            "totalCount": 6,
           },
-          "contributionsCount": 7,
+          "contributionsCount": 6,
           "contributors": Object {
-            "totalCount": 5,
+            "totalCount": 4,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
@@ -710,9 +710,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 7,
+            "totalCount": 6,
           },
-          "contributionsCount": 7,
+          "contributionsCount": 6,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
           "publishedAt": "2014-12-24 00:00:00",
           "title": "Projet avec questionnaire",
@@ -1106,11 +1106,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 7,
+            "totalCount": 6,
           },
-          "contributionsCount": 7,
+          "contributionsCount": 6,
           "contributors": Object {
-            "totalCount": 5,
+            "totalCount": 4,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",

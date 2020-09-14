@@ -1,1 +1,1 @@
-﻿id,published,author,author_id,author_email,phone,created,updated,anonymous,draft
+﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft

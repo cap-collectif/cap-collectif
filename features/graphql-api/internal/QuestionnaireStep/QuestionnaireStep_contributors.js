@@ -20,7 +20,7 @@ const QuestionnaireStepContributorsQuery = /* GraphQL */ `
 `;
 
 describe('Preview|QuestionnaireStep.contributors connection', () => {
-  it('fetches the contributors of a collect step', async () => {
+  it('fetches the contributors of a questionnaire step', async () => {
     await expect(
       graphql(
         QuestionnaireStepContributorsQuery,

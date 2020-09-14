@@ -1,104 +1,104 @@
 Capco\AppBundle\Entity\Reply:
-  reply1:
-    id: 'reply1'
-    author: '@userWelcomattic'
-    draft: 0
-    questionnaire: '@questionnaire1'
-    publishedAt: <(new \DateTime('2016-03-01'))>
-    createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
-  reply2:
-    id: 'reply2'
-    draft: 0
-    author: '@user4'
-    questionnaire: '@questionnaire1'
-    publishedAt: <(new \DateTime('2016-03-02'))>
-    createdAt: <(new \DateTime('2016-03-02'))>
-    updatedAt: <(new \DateTime('2019-03-02'))>
-  reply3:
-    id: 'reply3'
-    draft: 0
-    author: '@user4'
-    questionnaire: '@questionnaire2'
-    createdAt: <(new \DateTime('2016-03-03'))>
-    publishedAt: <(new \DateTime('2016-03-03'))>
-    updatedAt: <(new \DateTime('2019-03-03'))>
-  reply4:
-    id: 'reply4'
-    draft: 0
-    author: '@user4'
-    questionnaire: '@questionnaire3'
-    createdAt: <(new \DateTime('2016-03-04'))>
-    updatedAt: <(new \DateTime('2019-03-04'))>
-    publishedAt: <(new \DateTime('2016-03-04'))>
-  reply5:
-    id: 'reply5'
-    author: '@user4'
-    questionnaire: '@questionnaire1'
-    createdAt: <(new \DateTime('2016-03-05'))>
-    publishedAt: <(new \DateTime('2016-03-05'))>
-    draft: true
-    updatedAt: <(new \DateTime('2019-03-05'))>
-  reply6:
-    id: 'reply6'
-    draft: 0
-    author: '@user_updating_email'
-    questionnaire: '@questionnaire1'
-    publishedAt: <(new \DateTime('2016-03-06'))>
-    createdAt: <(new \DateTime('2016-03-06'))>
-    updatedAt: <(new \DateTime('2019-03-06'))>
-  reply7:
-    id: 'reply7'
-    draft: 0
-    author: '@user_not_confirmed'
-    questionnaire: '@questionnaire1'
-    publishedAt: <(new \DateTime('2016-03-07'))>
-    createdAt: <(new \DateTime('2016-03-07'))>
-    updatedAt: <(new \DateTime('2019-03-07'))>
-  # Reply on a private result questionnaire
-  reply8:
-    id: 'reply8'
-    draft: 0
-    author: '@user5'
-    questionnaire: '@questionnaire10'
-    publishedAt: <(new \DateTime('2016-03-08'))>
-    createdAt: <(new \DateTime('2016-03-08'))>
-    updatedAt: <(new \DateTime('2019-03-08'))>
-  reply9:
-    id: 'reply9'
-    author: '@user4'
-    draft: 1
-    questionnaire: '@questionnaire1'
-    publishedAt: <(new \DateTime('2016-03-22'))>
-    createdAt: <(new \DateTime('2016-03-05'))>
-    updatedAt: <(new \DateTime('2016-03-20'))>
+    reply1:
+        id: 'reply1'
+        author: '@userWelcomattic'
+        draft: 0
+        questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2016-03-01'))>
+        createdAt: <(new \DateTime('2016-03-01'))>
+        updatedAt: <(new \DateTime('2016-03-01'))>
+    reply2:
+        id: 'reply2'
+        draft: 0
+        author: '@user4'
+        questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2016-03-02'))>
+        createdAt: <(new \DateTime('2016-03-02'))>
+        updatedAt: <(new \DateTime('2019-03-02'))>
+    reply3:
+        id: 'reply3'
+        draft: 0
+        author: '@user4'
+        questionnaire: '@questionnaire2'
+        createdAt: <(new \DateTime('2016-03-03'))>
+        publishedAt: <(new \DateTime('2016-03-03'))>
+        updatedAt: <(new \DateTime('2019-03-03'))>
+    reply4:
+        id: 'reply4'
+        draft: 0
+        author: '@user4'
+        questionnaire: '@questionnaire3'
+        createdAt: <(new \DateTime('2016-03-04'))>
+        updatedAt: <(new \DateTime('2019-03-04'))>
+        publishedAt: <(new \DateTime('2016-03-04'))>
+    reply5:
+        id: 'reply5'
+        author: '@user4'
+        questionnaire: '@questionnaire1'
+        createdAt: <(new \DateTime('2016-03-05'))>
+        publishedAt: <(new \DateTime('2016-03-05'))>
+        draft: true
+        updatedAt: <(new \DateTime('2019-03-05'))>
+    reply6:
+        id: 'reply6'
+        draft: 0
+        author: '@user_updating_email'
+        questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2016-03-06'))>
+        createdAt: <(new \DateTime('2016-03-06'))>
+        updatedAt: <(new \DateTime('2019-03-06'))>
+    # Unpublished replies
+    reply7:
+        id: 'reply7'
+        draft: 0
+        author: '@user_not_confirmed'
+        questionnaire: '@questionnaire1'
+        createdAt: <(new \DateTime('2016-03-07'))>
+        updatedAt: <(new \DateTime('2019-03-07'))>
+    # Reply on a private result questionnaire
+    reply8:
+        id: 'reply8'
+        draft: 0
+        author: '@user5'
+        questionnaire: '@questionnaire10'
+        publishedAt: <(new \DateTime('2016-03-08'))>
+        createdAt: <(new \DateTime('2016-03-08'))>
+        updatedAt: <(new \DateTime('2019-03-08'))>
+    reply9:
+        id: 'reply9'
+        author: '@user4'
+        draft: 1
+        questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2016-03-22'))>
+        createdAt: <(new \DateTime('2016-03-05'))>
+        updatedAt: <(new \DateTime('2016-03-20'))>
 
-  replyPrivate:
-    id: 'replyPrivate'
-    author: '@user5'
-    draft: 0
-    private: true
-    questionnaire: '@questionnaire1'
-    publishedAt: <(new \DateTime('2019-03-20'))>
-    createdAt: <(new \DateTime('2019-03-20'))>
-    updatedAt: <(new \DateTime('2019-03-20'))>
+    replyPrivate:
+        id: 'replyPrivate'
+        author: '@user5'
+        draft: 0
+        private: true
+        questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2019-03-20'))>
+        createdAt: <(new \DateTime('2019-03-20'))>
+        updatedAt: <(new \DateTime('2019-03-20'))>
 
-  replyAdmin:
-    id: 'replyAdmin'
-    author: '@user4'
-    draft: 0
-    private: true
-    questionnaire: '@questionnaireAdmin'
-    publishedAt: <(new \DateTime('2019-03-20'))>
-    createdAt: <(new \DateTime('2019-03-20'))>
-    updatedAt: <(new \DateTime('2019-03-20'))>
+    replyAdmin:
+        id: 'replyAdmin'
+        author: '@user4'
+        draft: 0
+        private: true
+        questionnaire: '@questionnaireAdmin'
+        publishedAt: <(new \DateTime('2019-03-20'))>
+        createdAt: <(new \DateTime('2019-03-20'))>
+        updatedAt: <(new \DateTime('2019-03-20'))>
 
-  replyGroup:
-    id: 'replyGroup'
-    author: '@user5'
-    draft: 0
-    private: true
-    questionnaire: '@questionnaireGroup'
-    publishedAt: <(new \DateTime('2019-03-20'))>
-    createdAt: <(new \DateTime('2019-03-20'))>
-    updatedAt: <(new \DateTime('2019-03-20'))>
+    replyGroup:
+        id: 'replyGroup'
+        author: '@user5'
+        draft: 0
+        private: true
+        questionnaire: '@questionnaireGroup'
+        publishedAt: <(new \DateTime('2019-03-20'))>
+        createdAt: <(new \DateTime('2019-03-20'))>
+        updatedAt: <(new \DateTime('2019-03-20'))>

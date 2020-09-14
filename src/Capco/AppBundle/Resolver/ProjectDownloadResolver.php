@@ -53,12 +53,13 @@ class ProjectDownloadResolver
         $headers = [
             'id',
             'published',
+            'published_at',
             'author',
             'author_id',
             'author_email',
             'phone',
-            'created',
-            'updated',
+            'created_at',
+            'updated_at',
             'anonymous',
             'draft',
         ];
@@ -138,13 +139,14 @@ class ProjectDownloadResolver
     {
         $item = [
             'id' => $reply['id'],
-            'published' => $reply['published'],
+            'published' => $this->booleanToString($reply['published']),
+            'published_at' => $this->dateToString($reply['publishedAt']),
             'author' => $reply['author']['username'],
             'author_id' => $reply['author']['id'],
             'author_email' => $reply['author']['email'],
             'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
-            'created' => $this->dateToString($reply['createdAt']),
-            'updated' => $this->dateToString($reply['updatedAt']),
+            'created_at' => $this->dateToString($reply['createdAt']),
+            'updated_at' => $this->dateToString($reply['updatedAt']),
             'anonymous' => $this->booleanToString($reply['private']),
             'draft' => $this->booleanToString($reply['draft']),
         ];
