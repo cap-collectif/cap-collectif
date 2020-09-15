@@ -1,0 +1,99 @@
+{% extends "@CapcoMail/standardLayout.html.twig" %}
+
+{% block html_title %}
+    {{ 'notification.title.assigned'|trans({}, 'CapcoAppBundle', user_locale) }}
+{% endblock %}
+
+{% set logoUrl = app_logo_url() %}
+
+{% block header_mail %}
+    <img style="margin-bottom: 20px;" src="{{ logoUrl }}" alt="logo {{ siteName }}" />
+    <h1>
+         {{ siteName }} : {{ projectName }}
+    </h1>
+{% endblock %}
+
+
+{% block core_mail %}
+    <div class="resp-punchline"
+         style="padding: 20px 27px 20px 27px;text-decoration:none; text-align:left;color: rgb(51, 51, 51);font-size: 18px;font-family: 'OpenSans-SemiBold',helvetica,arial,sans-serif;font-weight: 600; background-color:#EEE">
+        <table width="100%" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    {% if assignation %}
+                        {% if 2 <= proposals|length %}
+                            {{ 'notification.title.multiple.assigned'|trans(
+                                {
+                                    'count':proposals|length,
+                                    'role': role | trans({}, 'CapcoAppBundle', user_locale)
+                                },
+                                'CapcoAppBundle',user_locale) | raw
+                            }}
+                        {% else %}
+                            {{ 'notification.body.assigned' | trans({
+                                'proposalName': (proposals|first).title,
+                                'proposalUrl': (proposals|first).url,
+                                'role': role | trans({}, 'CapcoAppBundle', user_locale)
+                            },
+                                'CapcoAppBundle', user_locale) | raw
+                            }}
+                        {% endif %}
+                    {% else %}
+                        {% if 2 <= proposals|length %}
+                            {{ 'notification.body.multiple.unassigned' | trans(
+                                {
+                                    'count': proposals|length
+                                },
+                                'CapcoAppBundle', user_locale)
+                            }}
+                        {% else %}
+                            {{ 'notification.title.unassigned' | trans(
+                                {
+                                    'proposalName': (proposals|first).title
+                                },
+                                'CapcoAppBundle', user_locale)
+                            }}
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if 2 <= proposals|length %}
+                {% for proposal in proposals | slice(0, 5) %}
+                    <tr>
+                        <td>
+                            <div style="background-color: #FFF;padding: 10px 10px;margin: 10px 0px;">
+                                {% if assignation %}
+                                    <a href="{{ proposal.url }}">{{ proposal.title }}</a>
+                                {% else %}
+                                    {{ proposal.title }}
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            {% if assignation %}
+                <tr>
+                    <td style="padding-top: 30px;">
+                        {% if 2 <= proposals|length %}
+                            <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;"
+                               href="{{ evaluationsUrl }}">
+                                {{ 'global.more' |trans({}, 'CapcoAppBundle', user_locale) }}
+                            </a>
+                        {% else %}
+                            <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;"
+                               href="{{ (proposals|first).url }}">
+                                {{ 'global.consult' |trans({}, 'CapcoAppBundle', user_locale) }}
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block footer_mail %}
+    {% include '@CapcoMail/footerLayout.html.twig' %}
+{% endblock %}

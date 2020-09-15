@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Enum\ProposalAssignmentErrorCode;
@@ -15,29 +16,35 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AssignSupervisorToProposalsMutation implements MutationInterface
 {
     use ResolverTrait;
-    private $globalIdResolver;
-    private $em;
-    private $builder;
-    private $proposalSupervisorRepository;
-    private $authorizationChecker;
+
+    private GlobalIdResolver $globalIdResolver;
+    private EntityManagerInterface $em;
+    private ConnectionBuilder $builder;
+    private ProposalSupervisorRepository $proposalSupervisorRepository;
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private Publisher $publisher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         ConnectionBuilder $builder,
         ProposalSupervisorRepository $proposalSupervisorRepository,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        Publisher $publisher
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->builder = $builder;
         $this->proposalSupervisorRepository = $proposalSupervisorRepository;
         $this->authorizationChecker = $authorizationChecker;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -75,6 +82,7 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
             return $this->revokeSupervisorToProposals($proposals, $input);
         }
 
+        /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
             $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
             if (
@@ -93,7 +101,11 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
             }
         }
 
-        return $this->assignSupervisorToProposals($proposals, $supervisor, $viewer, $input);
+        $assignationChanges = self::getAssignationChanges($proposals, $supervisor);
+        $payload = $this->assignSupervisorToProposals($proposals, $supervisor, $viewer, $input);
+        $this->notify($assignationChanges, $supervisor);
+
+        return $payload;
     }
 
     private function revokeSupervisorToProposals(array $proposals, Arg $input): array
@@ -150,6 +162,62 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
         return [
             'proposals' => $proposalConnexion,
             'errorCode' => $errorMessage,
+        ];
+    }
+
+    private function notify(array $assignationsChanges, User $supervisor): void
+    {
+        $message = [
+            'assigned' => $supervisor->getId(),
+            'role' => 'tag.filter.opinion',
+            'proposals' => [],
+        ];
+        foreach ($assignationsChanges['newAssignations'] as $proposal) {
+            $message['proposals'][] = $proposal->getId();
+        }
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::PROPOSAL_ASSIGNATION,
+            new Message(json_encode($message))
+        );
+
+        foreach ($assignationsChanges['revokations'] as $revokation) {
+            $message = [
+                'assigned' => $revokation['supervisor']->getId(),
+                'proposals' => [],
+            ];
+            foreach ($revokation['unassignations'] as $proposal) {
+                $message['proposals'][] = $proposal->getId();
+            }
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_REVOKE,
+                new Message(json_encode($message))
+            );
+        }
+    }
+
+    private static function getAssignationChanges(array $proposals, User $newSupervisor): array
+    {
+        $newAssignations = [];
+        $revokations = [];
+        foreach ($proposals as $proposal) {
+            $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
+            if ($proposal->getSupervisor() !== $newSupervisor) {
+                $newAssignations[] = $proposal;
+                if ($supervisor = $proposal->getSupervisor()) {
+                    if (!isset($revokations[$supervisor->getUsername()])) {
+                        $revokations[$supervisor->getUsername()] = [
+                            'supervisor' => $supervisor,
+                            'unassignations' => [],
+                        ];
+                    }
+                    $revokations[$supervisor->getUsername()]['unassignations'][] = $proposal;
+                }
+            }
+        }
+
+        return [
+            'newAssignations' => $newAssignations,
+            'revokations' => $revokations,
         ];
     }
 }

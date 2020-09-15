@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Enum\ProposalAssignmentErrorCode;
@@ -18,20 +19,22 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RevokeAnalystsToProposalsMutation implements MutationInterface
 {
     use ResolverTrait;
-    private $globalIdResolver;
-    private $em;
-    private $builder;
-    /** @var ProposalAnalystRepository */
-    private $proposalAnalystRepository;
-    private $propsalDeci;
-    private $authorizationChecker;
-    private $proposalAnalysisRepository;
-    private $logger;
+
+    private GlobalIdResolver $globalIdResolver;
+    private EntityManagerInterface $em;
+    private ConnectionBuilder $builder;
+    private ProposalAnalystRepository $proposalAnalystRepository;
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private ProposalAnalysisRepository $proposalAnalysisRepository;
+    private LoggerInterface $logger;
+    private Publisher $publisher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
@@ -40,7 +43,8 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
         AuthorizationCheckerInterface $authorizationChecker,
         ProposalAnalystRepository $proposalAnalystRepository,
         ProposalAnalysisRepository $proposalAnalysisRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Publisher $publisher
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
@@ -49,6 +53,7 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
         $this->authorizationChecker = $authorizationChecker;
         $this->proposalAnalysisRepository = $proposalAnalysisRepository;
         $this->logger = $logger;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Arg $input, $viewer): array
@@ -116,6 +121,20 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
             }
         } else {
             $this->revokeAnalystsFromProposalsAndAnalysts($proposals, $analysts, $viewer);
+        }
+
+        foreach ($analysts as $analyst) {
+            $message = [
+                'assigned' => $analyst->getId(),
+                'proposals' => [],
+            ];
+            foreach ($proposals as $proposal) {
+                $message['proposals'][] = $proposal->getId();
+            }
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_REVOKE,
+                new Message(json_encode($message))
+            );
         }
 
         $connection = $this->builder->connectionFromArray($proposals, $input);

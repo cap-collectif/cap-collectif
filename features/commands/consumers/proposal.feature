@@ -116,3 +116,58 @@ Scenario: Proposal english author receive message after, admin updated status of
   And I consume "proposal_update_status"
   Then I open mail to "john.smith@england.uk"
   And email should match snapshot "notifyProposal_AuthorStatusChangeEnglish.html"
+
+@rabbitmq @snapshot-email
+Scenario: analyst receive message after being assigned to a proposal
+  Given I publish in "proposal_assignation" with message below:
+  """
+  {
+    "assigned":"userMickael",
+    "role":"admin.global.evaluers",
+    "proposals":["proposal110"]
+  }
+  """
+  And I consume "proposal_assignation"
+  Then I open mail to "mickaelS@cap-collectif.com"
+  And email should match snapshot "notifyAnalyst_NewAnalyst.html"
+
+@rabbitmq @snapshot-email
+Scenario: supervisor receive message after being assigned to two proposals
+  Given I publish in "proposal_assignation" with message below:
+  """
+  {
+    "assigned":"userMickael",
+    "role":"tag.filter.opinion",
+    "proposals":["proposal110", "proposal111"]
+  }
+  """
+  And I consume "proposal_assignation"
+  Then I open mail to "mickaelS@cap-collectif.com"
+  And email should match snapshot "notifyAnalyst_NewSupervisor.html"
+
+@rabbitmq @snapshot-email
+Scenario: decisionMaker receive message after being assigned to a proposal
+  Given I publish in "proposal_assignation" with message below:
+  """
+  {
+    "assigned":"userMickael",
+    "role":"tag.filter.decision",
+    "proposals":["proposal110"]
+  }
+  """
+  And I consume "proposal_assignation"
+  Then I open mail to "mickaelS@cap-collectif.com"
+  And email should match snapshot "notifyAnalyst_NewDecisionMaker.html"
+
+@rabbitmq @snapshot-email
+Scenario: someone receive message after being revoked from two proposals
+  Given I publish in "proposal_revoke" with message below:
+  """
+  {
+    "assigned":"userMickael",
+    "proposals":["proposal110", "proposal111"]
+  }
+  """
+  And I consume "proposal_revoke"
+  Then I open mail to "mickaelS@cap-collectif.com"
+  And email should match snapshot "notifyAnalyst_RevokeAnalyst.html"

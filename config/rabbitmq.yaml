@@ -83,6 +83,18 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: proposal_delete
+        proposal_assignation:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_assignation
+        proposal_revoke:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_revoke
         comment_create:
             durable: true
             retries: [25, 125, 625]
