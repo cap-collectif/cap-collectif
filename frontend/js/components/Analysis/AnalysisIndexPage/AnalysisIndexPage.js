@@ -83,6 +83,13 @@ export const renderComponent = ({
           <Switch>
             <Redirect from="/evaluations" to="/" exact strict />
 
+            <Redirect
+              from={`${BASE_URL_ANALYSIS}${PATHS.PROJECT}`}
+              to={PATHS.PROJECT}
+              exact
+              strict
+            />
+
             <Route exact path={PATHS.INDEX}>
               {projects.length === 1 ? (
                 <Redirect to={`/project/${projects[0].slug}`} />
