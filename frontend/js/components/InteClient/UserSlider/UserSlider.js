@@ -1,16 +1,19 @@
 // @flow
 import * as React from 'react';
-import { Container } from './UserSlider.style';
+import cn from 'classnames';
 import UserSlide, { type Props as UserSlideProps } from './UserSlide/UserSlide';
+import { Container } from './UserSlider.style';
+import type { SettingsSlider } from '~/types';
 
 export type Props = {
   users: Array<UserSlideProps>,
+  settingsSlider: SettingsSlider,
   lang: string,
-  style?: Object,
+  className?: string,
 };
 
-const UserSlider = ({ users, lang, style }: Props) => (
-  <Container style={style}>
+const UserSlider = ({ users, lang, className, settingsSlider }: Props) => (
+  <Container {...settingsSlider} className={cn('user-slider', className)}>
     {users.map((user, idx) => (
       <UserSlide {...user} key={`user-slide-${idx}`} lang={lang} />
     ))}
