@@ -5,6 +5,7 @@ Feature: Opinion Versions
 Scenario: Author of a version wants to delete it
   Given I am logged in as user
   And I go to a version
+  And I wait ".loader" to disappear on current page
   When I click the delete version button
   And I wait "#confirm-opinion-delete" to appear on current page maximum 15
   And I confirm version deletion

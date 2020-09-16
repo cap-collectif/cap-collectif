@@ -341,6 +341,7 @@ trait ProposalStepsTrait
     public function iSortProposalsByDate()
     {
         $this->pressButton('proposal-filter-sorting-button');
+        $this->iWaitElementToAppearOnPage('#proposal-filter-sorting');
         $this->selectOptionAccessible('#proposal-filter-sorting', 'last');
         $this->IwaitForSuccessfulRefetchQuery();
     }
@@ -351,6 +352,7 @@ trait ProposalStepsTrait
     public function iSortProposalsByComments()
     {
         $this->pressButton('proposal-filter-sorting-button');
+        $this->iWaitElementToAppearOnPage('#proposal-filter-sorting');
         $this->selectOptionAccessible('#proposal-filter-sorting', 'comments');
         $this->IwaitForSuccessfulRefetchQuery();
     }
@@ -935,7 +937,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalUnvoteButton()
     {
-        $this->clickProposalVoteButtonWithLabel('proposal.vote.voted');
+        $this->clickProposalVoteButtonWithLabel('global.voted');
     }
 
     /**

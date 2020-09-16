@@ -12,7 +12,7 @@ Scenario: Logged in user wants to vote for a proposal in a selection step
   And I should see "vote.add_success" in the "#global-alert-box" element
   Then the proposal should have 2 votes
   Then I click the proposal unvote button
-  And I should see "vote.delete_success" in the "#global-alert-box" element
+  And I should see "vote.delete_success" appear on current page in "#global-alert-box"
   Then the proposal should have 1 votes
 
 @security @elasticsearch @votes_from_selection_step
@@ -89,7 +89,7 @@ Scenario: Proposal should stay voted after user refresh the page
   And I should see "vote.add_success" in the "#global-alert-box" element
   # And I should see 'global.cancel'
   Then I go to a collect step with vote
-  And I should see "proposal.vote.voted"
+  And I should see "global.voted"
 
 @security @votes_from_proposal
 Scenario: Anonymous user wants to vote for a proposal that is not votable yet

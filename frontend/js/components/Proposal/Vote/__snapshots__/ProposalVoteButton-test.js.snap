@@ -39,7 +39,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
     target={[Function]}
   />
   <FormattedMessage
-    id="proposal.vote.voted"
+    id="global.voted"
     values={Object {}}
   />
 </Button>

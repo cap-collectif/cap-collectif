@@ -784,7 +784,7 @@ trait OpinionStepsTrait
      */
     public function iClickTheDeleteVersionButton()
     {
-        $this->waitAndThrowOnFailure(4000, "$('#opinion-delete').length > 0");
+        $this->waitAndThrowOnFailure(5000, "$('#opinion-delete').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickDeleteButton();
     }
 
