@@ -1,15 +1,19 @@
 // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { type StyledComponent, css } from 'styled-components';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
-const ItemContainer: StyledComponent<{ isEmpty?: boolean }, {}, HTMLDivElement> = styled.div.attrs({
+const ItemContainer: StyledComponent<
+  { isEmpty?: boolean, width?: string, center?: boolean, mobileTop?: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
   className: 'list__item',
 })`
   display: flex;
-  align-items: flex-start;
+  align-items: ${props => (props.center ? 'center' : 'flex-start')};
   border: 1px solid #ddd;
-  width: 372px;
+  width: ${props => props.width || '372px'};
   border-radius: 4px;
   min-height: ${props => props.isEmpty && '46px'};
   padding: ${props => (props.isEmpty ? '8px 15px' : '12px 15px')};
@@ -57,6 +61,16 @@ const ItemContainer: StyledComponent<{ isEmpty?: boolean }, {}, HTMLDivElement> 
       margin-right: 15px;
       margin-left: 0;
     }
+
+    ${props =>
+      props.mobileTop &&
+      css`
+        .icon-menu {
+          position: absolute;
+          right: 20px;
+          top: 15px;
+        }
+      `}
   }
 `;
 

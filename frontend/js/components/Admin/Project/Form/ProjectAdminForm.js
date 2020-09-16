@@ -228,8 +228,14 @@ const onSubmit = (
               : undefined,
           votesLimit:
             s.type === 'SelectionStep' || s.type === 'CollectStep'
-              ? s.isLimitEnabled && s.votable
+              ? s.isLimitEnabled && s.votable && s.votesLimit
                 ? s.votesLimit
+                : null
+              : undefined,
+          votesMin:
+            s.type === 'SelectionStep' || s.type === 'CollectStep'
+              ? s.isLimitEnabled && s.votable && s.votesMin
+                ? s.votesMin
                 : null
               : undefined,
           voteThreshold:

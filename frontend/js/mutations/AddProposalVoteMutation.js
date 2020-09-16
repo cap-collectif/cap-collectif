@@ -23,6 +23,7 @@ const mutation = graphql`
             ...UserBox_user
           }
           step {
+            votesMin
             id
             viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
               ...ProposalsUserVotesTable_votes
@@ -30,6 +31,9 @@ const mutation = graphql`
               edges {
                 node {
                   id
+                  proposal {
+                    id
+                  }
                 }
               }
             }
@@ -74,28 +78,61 @@ const commit = (
     ],
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('addProposalVote');
-
       if (!payload || !payload.getLinkedRecord('voteEdge')) {
         return;
       }
 
       const proposalProxy = store.get(variables.input.proposalId);
-
       if (!proposalProxy) return;
+
+      const votesArgs = {
+        first: 0,
+        stepId: variables.input.stepId,
+      };
 
       proposalProxy.setValue(true, 'viewerHasVote', { step: variables.input.stepId });
 
-      const proposalVotesProxy =
-        proposalProxy.getLinkedRecord('votes', {
-          first: 0,
-          stepId: variables.input.stepId,
-        }) || proposalProxy.getLinkedRecord('votes', { first: 0 });
+      const stepProxy = store.get(variables.input.stepId);
+      if (!stepProxy) return;
+      const stepConnection = stepProxy.getLinkedRecord('viewerVotes', {
+        orderBy: { field: 'POSITION', direction: 'ASC' },
+      });
+      if (!stepConnection) return;
 
-      if (!proposalVotesProxy) return;
-      const previousValue = parseInt(proposalVotesProxy.getValue('totalCount'), 10);
+      const totalCount = parseInt(stepConnection.getValue('totalCount'), 10);
+      stepConnection.setValue(totalCount + 1, 'totalCount');
 
-      proposalVotesProxy.setValue(previousValue + 1, 'totalCount');
+      let votesMin = parseInt(stepProxy.getValue('votesMin'), 10);
+      if (!votesMin || Number.isNaN(votesMin)) votesMin = 1;
+      if (votesMin && votesMin > 1 && totalCount < votesMin) return;
 
+      if (votesMin && votesMin > 1 && totalCount === votesMin) {
+        const ids =
+          stepConnection.getLinkedRecords('edges')?.map(edge => {
+            return String(
+              edge
+                ?.getLinkedRecord('node')
+                ?.getLinkedRecord('proposal')
+                ?.getValue('id'),
+            );
+          }) || [];
+
+        ids.forEach((id: string) => {
+          const proposal = store.get(id);
+          const proposalStore = proposal?.getLinkedRecord('votes', votesArgs);
+          if (!proposalStore) return;
+          const previousValue = parseInt(proposalStore.getValue('totalCount'), 10);
+          proposalStore.setValue(previousValue + 1, 'totalCount');
+        });
+      } else {
+        const proposalVotesProxy =
+          proposalProxy.getLinkedRecord('votes', votesArgs) ||
+          proposalProxy.getLinkedRecord('votes', { first: 0 });
+
+        if (!proposalVotesProxy) return;
+        const previousValue = parseInt(proposalVotesProxy.getValue('totalCount'), 10);
+        proposalVotesProxy.setValue(previousValue + 1, 'totalCount');
+      }
       const connectionConfig = {
         stepId: variables.input.stepId,
       };

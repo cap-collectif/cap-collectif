@@ -8,6 +8,7 @@ type Props = {
   labelColor: string,
   sectionColor: string,
   bodyColor: string,
+  linkColor: string,
 };
 
 // HOC to add backgroundColor and labelColor into the props of a component.
@@ -23,6 +24,12 @@ const withColors = (Component: React.ComponentType<any>) => {
     labelColor: state.default.parameters['color.btn.primary.text'],
     sectionColor: state.default.parameters['color.section.bg'],
     bodyColor: state.default.parameters['color.body.bg'],
+    linkColor: state.default.parameters['color.link.default'],
+    voteBarBackgroundColor: state.default.parameters['color.votes_bar.bg'],
+    voteBarTextColor: state.default.parameters['color.votes_bar.text'],
+    voteBarBorderColor: state.default.parameters['color.votes_bar.border'],
+    voteBarButtonBgColor: state.default.parameters['color.votes_bar.btn.bg'],
+    voteBarButtonTextColor: state.default.parameters['color.votes_bar.btn.text'],
   });
 
   return connect(mapStateToProps)(ComponentWithColors);

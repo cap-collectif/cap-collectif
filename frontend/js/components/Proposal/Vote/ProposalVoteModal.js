@@ -6,19 +6,21 @@ import { ConnectionHandler } from 'relay-runtime';
 import { Modal, Panel, Label } from 'react-bootstrap';
 import { submit, isPristine, isInvalid } from 'redux-form';
 import { connect } from 'react-redux';
+import styled, { type StyledComponent } from 'styled-components';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeVoteModal, vote } from '../../../redux/modules/proposal';
 import ProposalsUserVotesTable, { getFormName } from '../../Project/Votes/ProposalsUserVotesTable';
-import environment from '../../../createRelayEnvironment';
-import type { GlobalState, Dispatch } from '../../../types';
+import environment from '~/createRelayEnvironment';
+import type { GlobalState, Dispatch } from '~/types';
 import RequirementsForm, { formName } from '../../Requirements/RequirementsForm';
-import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
+import UpdateProposalVotesMutation from '~/mutations/UpdateProposalVotesMutation';
 import type { ProposalVoteModal_proposal } from '~relay/ProposalVoteModal_proposal.graphql';
 import type { ProposalVoteModal_step } from '~relay/ProposalVoteModal_step.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import invariant from '../../../utils/invariant';
+import invariant from '~/utils/invariant';
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
+import VoteMinAlert from '~/components/Project/Votes/VoteMinAlert';
 
 type ParentProps = {
   proposal: ProposalVoteModal_proposal,
@@ -35,6 +37,19 @@ type Props = {
   viewerIsConfirmedByEmail: boolean,
   isAuthenticated: boolean,
 };
+
+const ProposalVoteModalContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal).attrs({
+  className: 'proposalVote__modal',
+})`
+  && .custom-modal-dialog {
+    transform: none;
+  }
+
+  #confirm-proposal-vote {
+    background: #0488cc !important;
+    border-color: #0488cc !important;
+  }
+`;
 
 type State = {
   keyboard: boolean,
@@ -170,9 +185,9 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   getModalVoteTranslation = (step: ProposalVoteModal_step) => {
     if (step.form && step.form.isProposalForm) {
       if (isInterpellationContextFromStep(step)) {
-        return 'count.interpellation';
+        return 'interpellation.support.count';
       }
-      return 'count-proposal';
+      return 'votes-count';
     }
     return 'count-questions';
   };
@@ -200,7 +215,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
     const keyTradForModalVoteTitle = this.getModalVoteTitleTranslation(step);
 
     return step.requirements ? (
-      <Modal
+      <ProposalVoteModalContainer
         animation={false}
         enforceFocus={false}
         keyboard={keyboard}
@@ -208,6 +223,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
         onHide={this.onHide}
         bsSize="large"
         role="dialog"
+        dialogClassName="custom-modal-dialog"
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
@@ -233,17 +249,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
               )}
             </Panel>
           )}
-          <h3 className="d-ib mr-10 mb-10">
-            <FormattedMessage id={keyTradForModalVoteTitle} />
-          </h3>
-          <h4 className="excerpt d-ib mt-15">
-            <FormattedMessage
-              id={keyTradForModalVote}
-              values={{
-                num: step.viewerVotes ? step.viewerVotes.totalCount : 0,
-              }}
-            />
-          </h4>
+          <VoteMinAlert step={step} translationKey={keyTradForModalVote} />
           <ProposalsUserVotesTable
             onSubmit={this.onSubmit}
             step={step}
@@ -276,13 +282,13 @@ export class ProposalVoteModal extends React.Component<Props, State> {
             onSubmit={() => {
               dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
             }}
-            label="global.validate"
+            label="global.save"
             isSubmitting={isSubmitting}
             bsStyle={!proposal.viewerHasVote || isSubmitting ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
           />
         </Modal.Footer>
-      </Modal>
+      </ProposalVoteModalContainer>
     ) : null;
   }
 }
@@ -313,6 +319,7 @@ export default createFragmentContainer(container, {
       id
       votesRanking
       votesHelpText
+      ...VoteMinAlert_step
       ... on RequirementStep {
         requirements {
           viewerMeetsTheRequirements @include(if: $isAuthenticated)

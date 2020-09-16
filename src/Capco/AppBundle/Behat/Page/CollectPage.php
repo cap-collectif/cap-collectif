@@ -25,7 +25,7 @@ class CollectPage extends Page
         'sorting select' => 'select#proposal-filter-sorting-button',
         'follow proposal button' => '.proposal__button__follow',
         'type of follow proposal' => '.proposal__follow',
-        'my votes' => '.widget__button.navbar-btn.pull-right.btn.btn-default',
+        'my votes' => '.widget__button',
         'restricted-access' => '#restricted-access',
         'restricted-access-link' => '#restricted-access > button',
         'restricted-group-link' => ' > button',

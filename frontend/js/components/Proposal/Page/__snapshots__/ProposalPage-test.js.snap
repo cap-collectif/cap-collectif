@@ -6203,6 +6203,81 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "votesMin",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "ProposalForm",
+                      "kind": "LinkedField",
+                      "name": "form",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isProposalForm",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "Project",
+                      "kind": "LinkedField",
+                      "name": "project",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "ProjectType",
+                          "kind": "LinkedField",
+                          "name": "type",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "RequirementConnection",
                       "kind": "LinkedField",
                       "name": "requirements",
@@ -6383,74 +6458,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "storageKey": null,
                     },
                     Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": "ProposalForm",
-                      "kind": "LinkedField",
-                      "name": "form",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isProposalForm",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": "Project",
-                      "kind": "LinkedField",
-                      "name": "project",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "ProjectType",
-                          "kind": "LinkedField",
-                          "name": "type",
-                          "plural": false,
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                          ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": null,
-                    },
-                    Object {
                       "condition": "isAuthenticated",
                       "kind": "Condition",
                       "passingValue": true,
@@ -6472,6 +6479,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "name": "viewerVotes",
                           "plural": false,
                           "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "totalCount",
+                              "storageKey": null,
+                            },
                             Object {
                               "alias": null,
                               "args": null,
@@ -6573,13 +6587,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                   "storageKey": null,
                                 },
                               ],
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "totalCount",
                               "storageKey": null,
                             },
                           ],
@@ -7966,7 +7973,7 @@ fragment ProposalUserVoteItem_vote on ProposalVote {
     id
     title
     url
-    ...ProposalDetailEstimation_proposal
+    estimation
   }
 }
 
@@ -8107,6 +8114,7 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
   id
   votesRanking
   votesHelpText
+  ...VoteMinAlert_step
   ... on RequirementStep {
     requirements {
       viewerMeetsTheRequirements @include(if: $isAuthenticated)
@@ -8141,6 +8149,10 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
 fragment ProposalsUserVotesTable_step on ProposalStep {
   id
   votesRanking
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
+    totalCount
+  }
+  votesMin
   ...ProposalUserVoteItem_step
 }
 
@@ -8240,6 +8252,24 @@ fragment UserPreview_user on User {
 fragment VoteButtonOverlay_step on ProposalStep {
   id
   votesLimit
+}
+
+fragment VoteMinAlert_step on ProposalStep {
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
+    totalCount
+  }
+  votesMin
+  form {
+    isProposalForm
+    id
+  }
+  project {
+    type {
+      title
+      id
+    }
+    id
+  }
 }
 ",
         },

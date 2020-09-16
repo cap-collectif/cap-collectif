@@ -268,15 +268,15 @@ const validate = ({
   }
 
   if (votesMin != null) {
-    if (votesLimit != null && votesLimit < votesMin) {
+    if (votesLimit != null && votesLimit < votesMin && votesLimit > 0) {
       errors.votesMin = 'maximum-vote-must-be-higher-than-minimum';
     }
-    if (votesMin <= 0) {
+    if (votesMin < 0) {
       errors.votesMin = 'minimum-vote-must-be-greater-than-or-equal';
     }
   }
 
-  if (votesLimit != null && votesLimit <= 0) {
+  if (votesLimit != null && votesLimit < 0) {
     if (errors.votesMin) {
       errors.votesMin = 'maximum-vote-must-be-greater-than-or-equal';
     } else {

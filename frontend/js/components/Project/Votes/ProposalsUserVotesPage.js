@@ -5,6 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalsUserVotesStep from './ProposalsUserVotesStep';
 import type { ProposalsUserVotesPage_project } from '~relay/ProposalsUserVotesPage_project.graphql';
 import { getVotePageLabelByType } from '~/utils/interpellationLabelHelper';
+import { TitleContainer } from './ProposalsUserVotes.style';
 
 type Props = {
   project: ProposalsUserVotesPage_project,
@@ -15,8 +16,8 @@ class ProposalsUserVotesPage extends React.Component<Props> {
     const { project } = this.props;
 
     return (
-      <section id="ProposalsUserVotesPage" className="section--custom">
-        <div className="container text-center">
+      <section id="ProposalsUserVotesPage">
+        <TitleContainer>
           <h1 className="mb-0">
             <FormattedMessage
               id={
@@ -26,8 +27,8 @@ class ProposalsUserVotesPage extends React.Component<Props> {
               }
             />
           </h1>
-        </div>
-        <div className="section--custom">
+        </TitleContainer>
+        <div>
           <div className="container">
             {project.votableSteps.length > 0 ? (
               project.votableSteps

@@ -796,7 +796,7 @@ trait ProposalStepsTrait
      */
     public function iCannotConfirmMyVote()
     {
-        $this->buttonShouldBeDisabled('global.validate');
+        $this->buttonShouldBeDisabled('global.save');
     }
 
     /**
@@ -843,7 +843,7 @@ trait ProposalStepsTrait
     public function iConfirmMyVote()
     {
         $this->waitAndThrowOnFailure(1000, "$('#confirm-proposal-vote').length > 0");
-        $this->buttonShouldNotBeDisabled('global.validate');
+        $this->buttonShouldNotBeDisabled('global.save');
         $this->iClickOnButton('#confirm-proposal-vote');
     }
 

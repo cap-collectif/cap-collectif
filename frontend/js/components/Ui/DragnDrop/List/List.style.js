@@ -14,6 +14,8 @@ const ListContainer: StyledComponent<
 > = styled.div.attrs({
   className: 'list-dragndrop',
 })`
+  width: 100%;
+
   .wrapper-item-container {
     position: relative;
     list-style: none;
@@ -39,7 +41,8 @@ const ListContainer: StyledComponent<
 export const ListItemContainer: StyledComponent<{}, {}, HTMLLIElement> = styled.li.attrs({})`
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: row !important;
+  align-items: center;
   margin-bottom: 10px;
 
   .item__position {

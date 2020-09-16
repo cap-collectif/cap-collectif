@@ -13,7 +13,7 @@ describe('<ProposalUserVoteItem />', () => {
     createdAt: '2015-01-01 00:00:00',
     proposal: {
       id: '1',
-      $fragmentRefs,
+      estimation: null,
       title: 'proposal',
       url: 'http://capco.test/proposal',
     },
@@ -88,7 +88,7 @@ describe('<ProposalUserVoteItem />', () => {
     createdAt: '',
     proposal: {
       id: '1',
-      $fragmentRefs,
+      estimation: 4,
       title: 'proposal',
       url: 'http://capco.test/proposal',
     },

@@ -107,9 +107,7 @@ Scenario: Logged in user wants to see his votes on a project and remove one
   Given I am logged in as admin
   When I go to the votes details page
   Then I should have 3 votes
-  And I should see 'count-proposal {"num":1}'
   And I remove the first vote
-  And I should see 'count-proposal {"num":0}'
   And I should have 2 votes
 
 @database
@@ -127,7 +125,7 @@ Scenario: Logged in as user who doesn't full fill requirements and want to vote.
   And I wait 1 seconds
   And I vote for the first proposal
   And I should see "requirements filled"
-  And the button "global.validate" should not be disabled
+  And the button "global.save" should not be disabled
   Then I click on button "#confirm-proposal-vote"
 
 @database

@@ -90,3 +90,6 @@ export { default as VidIcon } from './svg/vid-icn.svg';
 export { default as ZipIcon } from './svg/zip-icn.svg';
 export { default as DocIcon } from './svg/doc-icn.svg';
 export { default as FileIcon } from './svg/file-icn.svg';
+export { default as Budget } from './svg/budget.svg';
+export { default as Vote } from './svg/vote.svg';
+export { default as Urne } from './svg/urne.svg';

@@ -58,7 +58,7 @@ export function StepVotesFields({
                 <div className="mr-30">
                   <Field
                     type="number"
-                    min={1}
+                    min={0}
                     parse={value => Number(value)}
                     name="votesMin"
                     id="step-votesMin"
@@ -69,7 +69,7 @@ export function StepVotesFields({
               )}
               <Field
                 type="number"
-                min={1}
+                min={0}
                 parse={value => Number(value)}
                 name="votesLimit"
                 id="step-votesLimit"

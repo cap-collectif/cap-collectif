@@ -24,7 +24,7 @@ const FormGroupContainer: StyledComponent<{}, {}, typeof FormGroup> = styled(For
 
 const InputStaticContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
-  width: 100%;
+  width: calc(100% - 45px);
   justify-content: space-between;
   align-items: center;
   font-weight: 600;

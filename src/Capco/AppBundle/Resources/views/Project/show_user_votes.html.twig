@@ -7,7 +7,7 @@
         and project.projectType is not null
         and project.projectType.title is same as('project.types.interpellation')
         ? 'project.supports.title'
-        : 'project.type.title'
+        : 'project.votes.title'
     %}
     {{ title | trans({}, 'CapcoAppBundle') }}
 {% endblock %}

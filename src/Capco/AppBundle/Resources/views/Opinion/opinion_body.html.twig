@@ -66,7 +66,7 @@
         <p class="opinion__votes  excerpt  small">
             {% if opinionType.voteWidgetType != 0 %}
                 <span>
-                    {{ 'votes-count' | trans({'count': nbVotes}, 'CapcoAppBundle') }}
+                    {{ 'votes-count' | trans({'num': nbVotes}, 'CapcoAppBundle') }}
                 </span>
             {% endif %}
             {% if isVersion == false and opinionType.versionable %}

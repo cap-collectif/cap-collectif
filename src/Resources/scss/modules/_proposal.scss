@@ -166,12 +166,6 @@
     font-size: 120%;
 }
 
-.proposals-user-votes__table {
-    border: 1px solid $border-color;
-    margin-bottom: 5px;
-    border-radius: 5px;
-}
-
 .proposals-user-votes__draggable-item > div {
     background-color: $white;
 }
@@ -243,11 +237,6 @@
         font-size: 17px;
         font-weight: 500;
     }
-}
-
-.proposals-user-votes__table.row {
-    margin-left: 0;
-    margin-right: 0;
 }
 
 .proposal__votes .proposal__vote .media--aligned {
@@ -398,11 +387,6 @@
         justify-content: flex-start;
     }
 
-    .proposal-vote-col__delete {
-        position: absolute;
-        top: 42%;
-    }
-
     .proposals-user-votes__content .cap-android-menu {
         display: none;
     }
@@ -415,12 +399,6 @@
 .has-vote-widget {
     body {
         padding-top: $navbar-height * 2;
-    }
-
-    @media (max-width: $screen-xs-max) {
-        body {
-            padding-top: $navbar-height + $navbar-collapsed-height;
-        }
     }
 
     @media (min-width: $screen-md-min) {

@@ -97,6 +97,9 @@ export const ICON_NAME: {
   vidIcon: 'vidIcon',
   docIcon: 'docIcon',
   fileIcon: 'fileIcon',
+  budget: 'budget',
+  vote: 'vote',
+  urne: 'urne',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -191,6 +194,9 @@ export const ICON_NAME: {
   vidIcon: 'vidIcon',
   docIcon: 'docIcon',
   fileIcon: 'fileIcon',
+  budget: 'budget',
+  vote: 'vote',
+  urne: 'urne',
 };
 
 type Props = {|
@@ -391,6 +397,12 @@ const getIcon = name => {
       return <Icons.DocIcon />;
     case 'fileIcon':
       return <Icons.FileIcon />;
+    case 'budget':
+      return <Icons.Budget />;
+    case 'vote':
+      return <Icons.Vote />;
+    case 'urne':
+      return <Icons.Urne />;
     default:
       return <div />;
   }

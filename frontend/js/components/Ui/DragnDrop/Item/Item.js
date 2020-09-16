@@ -12,12 +12,28 @@ type ItemProps = {
   preview?: React.Node,
   isDisabled?: boolean,
   onRemove?: Function,
+  width?: string,
+  center?: boolean,
+  mobileTop?: boolean,
 };
 
-const Item = ({ preview, children, id, position, isDisabled, onRemove }: ItemProps) => (
+const Item = ({
+  preview,
+  children,
+  id,
+  position,
+  isDisabled,
+  onRemove,
+  width,
+  center,
+  mobileTop,
+}: ItemProps) => (
   <Draggable draggableId={id} key={id} index={position} isDragDisabled={!children || isDisabled}>
     {(provided: DraggableProvided) => (
       <ItemContainer
+        width={width}
+        center={center}
+        mobileTop={mobileTop}
         isEmpty={!children}
         ref={provided.innerRef}
         {...provided.draggableProps}

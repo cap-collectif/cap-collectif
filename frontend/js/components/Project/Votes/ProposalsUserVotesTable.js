@@ -1,31 +1,31 @@
 // @flow
 import * as React from 'react';
-import { Row } from 'react-bootstrap';
 import styled, { type StyledComponent } from 'styled-components';
-import ReactDOM from 'react-dom';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { reduxForm, FieldArray, arrayMove } from 'redux-form';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import {
-  DragDropContext,
-  Draggable,
-  Droppable,
   type DragStart,
   type DropResult,
   type DragUpdate,
-  type DraggableProvided,
-  type DroppableProvided,
   type DraggableStateSnapshot,
-  type DroppableStateSnapshot,
   type ResponderProvided,
 } from 'react-beautiful-dnd';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import type { ProposalsUserVotesTable_step } from '~relay/ProposalsUserVotesTable_step.graphql';
 import type { ProposalsUserVotesTable_votes } from '~relay/ProposalsUserVotesTable_votes.graphql';
-import type { State, Dispatch } from '../../../types';
-import config from '../../../config';
-import invariant from '../../../utils/invariant';
+import type { State, Dispatch, FeatureToggles } from '~/types';
+import config from '~/config';
+import invariant from '~/utils/invariant';
+import Context from '~/components/Ui/DragnDrop/Context/Context';
+import List from '~/components/Ui/DragnDrop/List/List';
+import Item from '~/components/Ui/DragnDrop/Item/Item';
+import {
+  NonDraggableItemContainer,
+  VotePlaceholder,
+  ItemPosition,
+} from './ProposalsUserVotes.style';
 
 type RelayProps = {|
   step: ProposalsUserVotesTable_step,
@@ -43,12 +43,14 @@ type Props = {|
   disabledKeyboard?: () => void,
   activeKeyboard?: () => void,
   isDropDisabled?: boolean,
+  features: FeatureToggles,
 |};
 
 type VotesProps = {|
   ...ReduxFormFieldArrayProps,
   ...RelayProps,
   deletable: boolean,
+  votesMin: number,
 |};
 
 export const Wrapper: StyledComponent<
@@ -85,7 +87,23 @@ if (config.canUseDOM && document) {
   }
 }
 
-const renderMembers = ({ fields, votes, step, deletable }: VotesProps): any => (
+const renderPlaceholders = (
+  step: ProposalsUserVotesTable_step,
+  length: number,
+  isDraggable: boolean,
+  startNumber?: number,
+) => {
+  return [...Array(length)].map((e, i) => {
+    return (
+      <VotePlaceholder key={i} isDraggable={isDraggable}>
+        {isDraggable && <ItemPosition>{startNumber + i}</ItemPosition>}
+        <div />
+      </VotePlaceholder>
+    );
+  });
+};
+
+const renderMembers = ({ fields, votes, step, deletable, votesMin }: VotesProps): any => (
   <React.Fragment>
     {fields.map((member: string, index: number) => {
       const voteInReduxForm: ?{ id: string, public: boolean } = fields.get(index);
@@ -96,22 +114,28 @@ const renderMembers = ({ fields, votes, step, deletable }: VotesProps): any => (
       if (!voteEdge) return null;
       const vote = voteEdge.node;
       return (
-        <ProposalUserVoteItem
-          key={index}
-          member={member}
-          isVoteVisibilityPublic={voteInReduxForm.public}
-          vote={vote}
-          step={step}
-          onDelete={
-            deletable
-              ? () => {
-                  fields.remove(index);
-                }
-              : null
-          }
-        />
+        <NonDraggableItemContainer>
+          <ProposalUserVoteItem
+            key={index}
+            member={member}
+            isVoteVisibilityPublic={voteInReduxForm.public}
+            vote={vote}
+            step={step}
+            onDelete={
+              deletable
+                ? () => {
+                    fields.remove(index);
+                  }
+                : null
+            }
+          />
+        </NonDraggableItemContainer>
       );
     })}
+    {votesMin &&
+      step?.viewerVotes &&
+      step?.viewerVotes.totalCount < votesMin &&
+      renderPlaceholders(step, votesMin - fields.length, false)}
   </React.Fragment>
 );
 
@@ -120,7 +144,8 @@ const renderDraggableMembers = ({
   votes,
   step,
   deletable,
-  intl,
+  votesMin,
+  form,
 }: {|
   ...VotesProps,
   ...Props,
@@ -130,59 +155,41 @@ const renderDraggableMembers = ({
   }
 
   return (
-    <React.Fragment>
-      {fields.map((member: string, index: number) => {
-        const voteInReduxForm: ?{ id: string, public: boolean } = fields.get(index);
-        invariant(voteInReduxForm, 'The vote should be found.');
-        const voteId = voteInReduxForm.id;
-        const voteEdge =
-          votes.edges && votes.edges.filter(Boolean).filter(edge => edge.node.id === voteId)[0];
-        if (!voteEdge) return null;
-        const vote = voteEdge.node;
+    <div style={{ width: '100%' }}>
+      <List id={`droppable${form}`} hasPositionDisplayed>
+        {fields.map((member: string, index: number) => {
+          const voteInReduxForm: ?{ id: string, public: boolean } = fields.get(index);
+          invariant(voteInReduxForm, 'The vote should be found.');
+          const voteId = voteInReduxForm.id;
+          const voteEdge =
+            votes.edges && votes.edges.filter(Boolean).filter(edge => edge.node.id === voteId)[0];
+          if (!voteEdge) return null;
+          const vote = voteEdge.node;
 
-        return (
-          <Draggable key={vote.proposal.id} draggableId={vote.proposal.id} index={index}>
-            {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => {
-              const usePortal: boolean = snapshot.isDragging;
-
-              const child = (
-                <div
-                  className={`proposals-user-votes__draggable-item ${
-                    usePortal ? 'item-in-portal' : ''
-                  }`}>
-                  <DraggableItem
-                    ref={provided.innerRef}
-                    isDragging={snapshot.isDragging}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    aria-roledescription={intl.formatMessage(
-                      { id: 'vote-dragndrop-item-description' },
-                      { title: vote.proposal.title, position: index + 1 },
-                    )}>
-                    <ProposalUserVoteItem
-                      member={member}
-                      ranking={index + 1}
-                      isVoteVisibilityPublic={voteInReduxForm.public}
-                      vote={vote}
-                      step={step}
-                      showDraggableIcon={fields.length > 1}
-                      onDelete={deletable ? () => fields.remove(index) : null}
-                    />
-                  </DraggableItem>
-                </div>
-              );
-
-              if (config.isMobile || !portal || !usePortal) {
-                return child;
-              }
-
-              // if dragging - put the item in a portal
-              return ReactDOM.createPortal(child, portal);
-            }}
-          </Draggable>
-        );
-      })}
-    </React.Fragment>
+          return (
+            <Item
+              id={vote.proposal.id}
+              key={vote.proposal.id}
+              position={index}
+              width="100%"
+              center
+              mobileTop>
+              <ProposalUserVoteItem
+                member={member}
+                isVoteVisibilityPublic={voteInReduxForm.public}
+                vote={vote}
+                step={step}
+                onDelete={deletable ? () => fields.remove(index) : null}
+              />
+            </Item>
+          );
+        })}
+      </List>
+      {votesMin &&
+        step?.viewerVotes &&
+        step?.viewerVotes.totalCount < votesMin &&
+        renderPlaceholders(step, votesMin - fields.length, true, fields.length + 1)}
+    </div>
   );
 };
 
@@ -277,49 +284,41 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   };
 
   render() {
-    const { form, step, votes, deletable, intl, isDropDisabled = false } = this.props;
+    const { form, step, votes, deletable, isDropDisabled = false, features } = this.props;
 
     if (!step.votesRanking) {
       return (
-        <Row className="proposals-user-votes__table">
+        <div className="proposals-user-votes__table">
           <FieldArray
             step={step}
             votes={votes}
+            votesMin={features.votes_min && step.votesMin ? step.votesMin : 1}
             deletable={deletable}
             name="votes"
             component={renderMembers}
           />
-        </Row>
+        </div>
       );
     }
 
     return (
-      <Row className="proposals-user-votes__table" style={{ boxSizing: 'border-box' }}>
-        <DragDropContext
+      <div className="proposals-user-votes__table" style={{ boxSizing: 'border-box' }}>
+        <Context
           onDragEnd={this.onDragEnd}
           onDragStart={this.onDragStart}
-          onDragUpdate={this.onDragUpdate}>
-          <Droppable droppableId={`droppable${form}`}>
-            {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
-              <Wrapper
-                isDraggingOver={snapshot.isDraggingOver}
-                ref={provided.innerRef}
-                isDropDisabled={isDropDisabled}
-                {...provided.droppableProps}>
-                <FieldArray
-                  step={step}
-                  votes={votes}
-                  intl={intl}
-                  deletable={deletable}
-                  name="votes"
-                  component={renderDraggableMembers}
-                />
-                {provided.placeholder}
-              </Wrapper>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </Row>
+          onDragUpdate={this.onDragUpdate}
+          isDisabled={isDropDisabled}>
+          <FieldArray
+            step={step}
+            votes={votes}
+            votesMin={features.votes_min && step.votesMin ? step.votesMin : 1}
+            form={form}
+            deletable={deletable}
+            name="votes"
+            component={renderDraggableMembers}
+          />
+        </Context>
+      </div>
     );
   }
 }
@@ -331,6 +330,7 @@ const form = reduxForm({
 export const getFormName = (step: { +id: string }) => `proposal-user-vote-form-step-${step.id}`;
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
+  features: state.default.features,
   form: getFormName(props.step),
   initialValues: {
     votes:
@@ -362,6 +362,10 @@ export default createFragmentContainer(container, {
     fragment ProposalsUserVotesTable_step on ProposalStep {
       id
       votesRanking
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+        totalCount
+      }
+      votesMin
       ...ProposalUserVoteItem_step
     }
   `,

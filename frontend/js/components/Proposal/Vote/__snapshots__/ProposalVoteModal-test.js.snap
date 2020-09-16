@@ -1,31 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalVoteModal /> should render correctly 1`] = `
-<Modal
+<ProposalVoteModal__ProposalVoteModalContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
+  dialogClassName="custom-modal-dialog"
   enforceFocus={false}
   keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   role="dialog"
   show={true}
 >
@@ -101,26 +84,36 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
         />
       </PanelBody>
     </Uncontrolled(Panel)>
-    <h3
-      className="d-ib mr-10 mb-10"
-    >
-      <FormattedMessage
-        id="global.vote.for"
-        values={Object {}}
-      />
-    </h3>
-    <h4
-      className="excerpt d-ib mt-15"
-    >
-      <FormattedMessage
-        id="count-proposal"
-        values={
-          Object {
-            "num": 0,
-          }
+    <Relay(Connect(VoteMinAlert))
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "form": Object {
+            "isProposalForm": true,
+          },
+          "id": "step1",
+          "project": Object {
+            "type": Object {
+              "title": "global.consultation",
+            },
+          },
+          "requirements": Object {
+            "reason": "We need to collect",
+            "totalCount": 3,
+            "viewerMeetsTheRequirements": false,
+          },
+          "viewerVotes": Object {
+            "$fragmentRefs": null,
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "votesHelpText": "Help",
+          "votesRanking": false,
         }
-      />
-    </h4>
+      }
+      translationKey="votes-count"
+    />
     <Relay(Connect(injectIntl(ReduxForm)))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
@@ -190,7 +183,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
       disabled={false}
       id="confirm-proposal-vote"
       isSubmitting={false}
-      label="global.validate"
+      label="global.save"
       onSubmit={[Function]}
       style={
         Object {
@@ -199,35 +192,18 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
       }
     />
   </ModalFooter>
-</Modal>
+</ProposalVoteModal__ProposalVoteModalContainer>
 `;
 
 exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
-<Modal
+<ProposalVoteModal__ProposalVoteModalContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
+  dialogClassName="custom-modal-dialog"
   enforceFocus={false}
   keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   role="dialog"
   show={true}
 >
@@ -303,26 +279,36 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
         />
       </PanelBody>
     </Uncontrolled(Panel)>
-    <h3
-      className="d-ib mr-10 mb-10"
-    >
-      <FormattedMessage
-        id="global.vote.for"
-        values={Object {}}
-      />
-    </h3>
-    <h4
-      className="excerpt d-ib mt-15"
-    >
-      <FormattedMessage
-        id="count-questions"
-        values={
-          Object {
-            "num": 0,
-          }
+    <Relay(Connect(VoteMinAlert))
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "form": Object {
+            "isProposalForm": false,
+          },
+          "id": "step1",
+          "project": Object {
+            "type": Object {
+              "title": "global.consultation",
+            },
+          },
+          "requirements": Object {
+            "reason": "We need to collect",
+            "totalCount": 3,
+            "viewerMeetsTheRequirements": false,
+          },
+          "viewerVotes": Object {
+            "$fragmentRefs": null,
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "votesHelpText": "Help",
+          "votesRanking": false,
         }
-      />
-    </h4>
+      }
+      translationKey="count-questions"
+    />
     <Relay(Connect(injectIntl(ReduxForm)))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
@@ -392,7 +378,7 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
       disabled={false}
       id="confirm-proposal-vote"
       isSubmitting={false}
-      label="global.validate"
+      label="global.save"
       onSubmit={[Function]}
       style={
         Object {
@@ -401,35 +387,18 @@ exports[`<ProposalVoteModal /> should render correctly as Question 1`] = `
       }
     />
   </ModalFooter>
-</Modal>
+</ProposalVoteModal__ProposalVoteModalContainer>
 `;
 
 exports[`<ProposalVoteModal /> should render correctly with interpellation 1`] = `
-<Modal
+<ProposalVoteModal__ProposalVoteModalContainer
   animation={false}
   aria-labelledby="contained-modal-title-lg"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="large"
-  dialogComponentClass={[Function]}
+  dialogClassName="custom-modal-dialog"
   enforceFocus={false}
   keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
   onHide={[Function]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   role="dialog"
   show={true}
 >
@@ -505,26 +474,36 @@ exports[`<ProposalVoteModal /> should render correctly with interpellation 1`] =
         />
       </PanelBody>
     </Uncontrolled(Panel)>
-    <h3
-      className="d-ib mr-10 mb-10"
-    >
-      <FormattedMessage
-        id="global.support.for"
-        values={Object {}}
-      />
-    </h3>
-    <h4
-      className="excerpt d-ib mt-15"
-    >
-      <FormattedMessage
-        id="count.interpellation"
-        values={
-          Object {
-            "num": 0,
-          }
+    <Relay(Connect(VoteMinAlert))
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "form": Object {
+            "isProposalForm": true,
+          },
+          "id": "step1",
+          "project": Object {
+            "type": Object {
+              "title": "project.types.interpellation",
+            },
+          },
+          "requirements": Object {
+            "reason": "We need to collect",
+            "totalCount": 3,
+            "viewerMeetsTheRequirements": false,
+          },
+          "viewerVotes": Object {
+            "$fragmentRefs": null,
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "votesHelpText": "Help",
+          "votesRanking": false,
         }
-      />
-    </h4>
+      }
+      translationKey="interpellation.support.count"
+    />
     <Relay(Connect(injectIntl(ReduxForm)))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
@@ -594,7 +573,7 @@ exports[`<ProposalVoteModal /> should render correctly with interpellation 1`] =
       disabled={false}
       id="confirm-proposal-vote"
       isSubmitting={false}
-      label="global.validate"
+      label="global.save"
       onSubmit={[Function]}
       style={
         Object {
@@ -603,5 +582,5 @@ exports[`<ProposalVoteModal /> should render correctly with interpellation 1`] =
       }
     />
   </ModalFooter>
-</Modal>
+</ProposalVoteModal__ProposalVoteModalContainer>
 `;

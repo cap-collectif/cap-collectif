@@ -36,7 +36,7 @@
                     {% endif %}
                     {{ 'global.counters.contributions' | trans({'num': contributions}, 'CapcoAppBundle') }}
                     {% if showVotes is not defined or showVotes %}
-                       • {{ 'votes-count' | trans({'count': votes}, 'CapcoAppBundle') }}
+                       • {{ 'votes-count' | trans({'num': votes}, 'CapcoAppBundle') }}
                     {% endif %}
                 {% endif %}
             </span>

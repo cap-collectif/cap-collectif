@@ -109,6 +109,12 @@ class ParametersRuntime implements RuntimeExtensionInterface
                 'color.btn.primary.text',
                 'color.section.bg',
                 'color.body.bg',
+                'color.votes_bar.bg',
+                'color.votes_bar.text',
+                'color.votes_bar.border',
+                'color.votes_bar.btn.bg',
+                'color.votes_bar.btn.text',
+                'color.link.default',
             ];
 
             foreach ($colors as $color) {

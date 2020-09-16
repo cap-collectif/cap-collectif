@@ -661,7 +661,7 @@ declare module "react-bootstrap" {
     onMouseOut?: Function,
     onMouseOver?: Function,
     target?: null,
-    onHide?: null,
+    onHide?: Function,
     show?: null,
     ...
   }> {}

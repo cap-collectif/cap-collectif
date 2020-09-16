@@ -1,253 +1,220 @@
 // @flow
-import * as React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   FormattedDate,
+  FormattedNumber,
   FormattedMessage,
   FormattedTime,
   type IntlShape,
   injectIntl,
 } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button, Row, Col, OverlayTrigger } from 'react-bootstrap';
+import { Button, Col, Overlay } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import moment from 'moment';
 import toggle from '../../Form/Toggle';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
-import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
 import Popover from '../../Utils/Popover';
 import type { ProposalUserVoteItem_vote } from '~relay/ProposalUserVoteItem_vote.graphql';
 import type { ProposalUserVoteItem_step } from '~relay/ProposalUserVoteItem_step.graphql';
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import colors from '~/utils/colors';
+import { ButtonDeleteVote, VoteItemContainer } from './ProposalsUserVotes.style';
 
 type Props = {|
   vote: ProposalUserVoteItem_vote,
   step: ProposalUserVoteItem_step,
-  ranking?: number,
   isVoteVisibilityPublic: boolean,
   intl: IntlShape,
   onDelete: ?() => void,
   member: string,
-  showDraggableIcon: boolean,
 |};
 
-export class ProposalUserVoteItem extends React.Component<Props> {
-  static defaultProps = {
-    showDraggableIcon: false,
+export const ProposalUserVoteItem = ({
+  isVoteVisibilityPublic,
+  onDelete,
+  member,
+  step,
+  intl,
+  vote,
+}: Props) => {
+  const { proposal } = vote;
+  const target = useRef(null);
+  const [show, setShow] = useState<boolean>(false);
+
+  const colTitleWidth = () => {
+    if (step.votesRanking === true && step.voteType === 'BUDGET') {
+      return 6;
+    }
+
+    if (step.votesRanking === true) {
+      return 8;
+    }
+
+    if (step.voteType === 'BUDGET') {
+      return 7;
+    }
+
+    return 9;
   };
 
-  render() {
-    const {
-      isVoteVisibilityPublic,
-      onDelete,
-      member,
-      showDraggableIcon,
-      step,
-      intl,
-      vote,
-      ranking,
-    } = this.props;
-    const { proposal } = vote;
+  const getTitle = title => {
+    const windowWidth = window.innerWidth;
 
-    const colTitleWidth = () => {
-      if (step.votesRanking === true && step.voteType === 'BUDGET') {
-        return 6;
-      }
+    let maxItemLength;
 
-      if (step.votesRanking === true) {
-        return 8;
-      }
+    if (windowWidth > 400) {
+      maxItemLength = 85;
+    } else {
+      maxItemLength = 60;
+    }
 
-      if (step.voteType === 'BUDGET') {
-        return 7;
-      }
+    return title.length > maxItemLength ? `${title.substring(0, maxItemLength)}...` : title;
+  };
 
-      return 9;
-    };
+  const getToggleLabel = () => {
+    if (isVoteVisibilityPublic) {
+      return intl.formatMessage({ id: 'public' });
+    }
 
-    const getTitle = title => {
-      const windowWidth = window.innerWidth;
+    return intl.formatMessage({ id: 'global.anonymous' });
+  };
 
-      let maxItemLength;
-
-      if (windowWidth > 400) {
-        maxItemLength = 85;
-      } else {
-        maxItemLength = 60;
-      }
-
-      return title.length > maxItemLength ? `${title.substring(0, maxItemLength)}...` : title;
-    };
-
-    const getToggleLabel = () => {
-      if (isVoteVisibilityPublic) {
-        return intl.formatMessage({ id: 'public' });
-      }
-
-      return intl.formatMessage({ id: 'global.anonymous' });
-    };
-
-    const popoverConfirmDelete = (
-      <Popover id="popover-positioned-right">
-        <i className="cap cap-attention icon--red" />
-        <FormattedMessage
-          id={
-            isInterpellationContextFromStep(step)
-              ? 'support.confirm.delete'
-              : 'are-you-sure-you-want-to-delete-this-vote'
-          }
-        />
-        <div className="mt-10 d-flex justify-content-end">
-          <Button
-            bsStyle="default"
-            onClick={() => {
-              // eslint-disable-next-line react/no-string-refs
-              this.refs.popover.hide();
-            }}
-            className="mr-10">
-            <FormattedMessage id="global.no" />
-          </Button>
-          {onDelete && (
-            <Button
-              bsStyle="danger"
-              onClick={() => {
-                onDelete();
-                // eslint-disable-next-line react/no-string-refs
-                this.refs.popover.hide();
-              }}
-              className="proposal-vote__delete-confirm"
-              disabled={!step.open}>
-              <FormattedMessage id="btn-delete" />
-            </Button>
-          )}
-        </div>
-      </Popover>
-    );
-
-    return (
-      <Row
-        className="proposals-user-votes__row d-flex flex-wrap"
-        id={`vote-step${step.id}-proposal${proposal.id}`}>
-        {ranking && (
-          <Col md={1} sm={12} xs={12} className="proposals-user-votes__col">
-            <div className="proposals-user-votes__content justify-content-between">
-              {showDraggableIcon && <i className="cap cap-android-menu excerpt mr-5" />}
-              <div className="d-flex">
-                <span className="badge label-primary m-auto">{ranking}</span>
-              </div>
-            </div>
-          </Col>
-        )}
-        <Col className="proposals-user-votes__col" md={colTitleWidth()} sm={12} xs={12}>
-          <div className="proposals-user-votes__content">
-            <div>
-              <a href={proposal.url} className="proposals-user-votes__title">
-                {getTitle(proposal.title)}
-              </a>
-              <br />
-              {vote.createdAt ? (
-                <FormattedMessage
-                  id={
-                    isInterpellationContextFromStep(step)
-                      ? 'supported.date-at-time'
-                      : 'voted-on-date-at-time'
-                  }
-                  values={{
-                    date: (
-                      <FormattedDate
-                        value={moment(vote.createdAt)}
-                        day="numeric"
-                        month="long"
-                        year="numeric"
-                      />
-                    ),
-                    time: (
-                      <FormattedTime
-                        value={moment(vote.createdAt)}
-                        hour="numeric"
-                        minute="numeric"
-                      />
-                    ),
-                  }}
-                />
-              ) : (
-                <FormattedMessage
-                  id={
-                    isInterpellationContextFromStep(step)
-                      ? 'notification.subject.new-support'
-                      : 'notification-subject-new-vote'
-                  }
-                />
-              )}
-              {!vote.published && (
-                <div>
-                  <UnpublishedLabel publishable={vote} />
-                </div>
-              )}
-            </div>
-          </div>
-        </Col>
-        <Col
-          id={`${proposal.id}-proposal-vote__private`}
-          className="proposals-user-votes__col"
-          md={onDelete ? 2 : 3}
-          sm={12}
-          xs={12}>
-          <div className="proposals-user-votes__content justify-content-end">
-            <div className="toggle-group">
-              <Field
-                labelSide="RIGHT"
-                component={toggle}
-                label={getToggleLabel()}
-                roledescription={intl.formatMessage({ id: 'vote-toggle-aria-roledescription' })}
-                name={`${member}.public`}
-                normalize={val => !!val}
-                id={`${proposal.id}-proposal-vote__private-toggle`}
-              />
-            </div>
-          </div>
-        </Col>
-        {step.voteType === 'BUDGET' && (
-          <Col className="proposals-user-votes__col" md={2} sm={12} xs={12}>
-            <div className="proposals-user-votes__content justify-content-center">
-              <ProposalDetailEstimation proposal={proposal} showNullEstimation />
-            </div>
-          </Col>
-        )}
+  const popoverConfirmDelete = (
+    <Popover id="popover-positioned-right">
+      <i className="cap cap-attention icon--red" />
+      <FormattedMessage
+        id={
+          isInterpellationContextFromStep(step)
+            ? 'support.confirm.delete'
+            : 'are-you-sure-you-want-to-delete-this-vote'
+        }
+      />
+      <div className="mt-10 d-flex justify-content-end">
+        <Button bsStyle="default" onClick={() => setShow(false)} className="mr-10">
+          <FormattedMessage id="global.no" />
+        </Button>
         {onDelete && (
-          <Col className="proposals-user-votes__col proposal-vote-col__delete" md={1}>
-            <OverlayTrigger
-              trigger="click"
-              placement="bottom"
-              overlay={popoverConfirmDelete}
-              // eslint-disable-next-line react/no-string-refs
-              ref="popover">
-              <Button
-                bsStyle="link"
-                onClick={() => {}}
-                className="proposal-vote__delete"
-                disabled={!step.open}
-                aria-label={intl.formatMessage(
+          <Button
+            bsStyle="danger"
+            onClick={() => {
+              onDelete();
+              setShow(false);
+            }}
+            className="proposal-vote__delete-confirm"
+            disabled={!step.open}>
+            <FormattedMessage id="btn-delete" />
+          </Button>
+        )}
+      </div>
+    </Popover>
+  );
+
+  return (
+    <VoteItemContainer id={`vote-step${step.id}-proposal${proposal.id}`}>
+      <Col md={colTitleWidth()} sm={12} xs={12}>
+        <div>
+          <div>
+            <a href={proposal.url} className="proposals-user-votes__title">
+              {getTitle(proposal.title)}
+            </a>
+            <br />
+            {vote.createdAt ? (
+              <FormattedMessage
+                id={
                   isInterpellationContextFromStep(step)
-                    ? { id: 'aria.label.delete-support' }
-                    : { id: 'aria-label-delete-vote' },
-                )}>
-                <i
-                  className="cap cap-ios-close"
-                  id={`${proposal.id}-proposal-vote__private-delete`}
-                />
-              </Button>
-            </OverlayTrigger>
-          </Col>
-        )}
-        {showDraggableIcon && (
-          <div className="draggable-icon__mobile">
-            <i className="cap cap-android-menu excerpt" />
+                    ? 'supported.date-at-time'
+                    : 'voted-on-date-at-time'
+                }
+                values={{
+                  date: (
+                    <FormattedDate
+                      value={moment(vote.createdAt)}
+                      day="numeric"
+                      month="long"
+                      year="numeric"
+                    />
+                  ),
+                  time: (
+                    <FormattedTime value={moment(vote.createdAt)} hour="numeric" minute="numeric" />
+                  ),
+                }}
+              />
+            ) : (
+              <FormattedMessage
+                id={
+                  isInterpellationContextFromStep(step)
+                    ? 'notification.subject.new-support'
+                    : 'notification-subject-new-vote'
+                }
+              />
+            )}
+            {!vote.published && (
+              <div>
+                <UnpublishedLabel publishable={vote} />
+              </div>
+            )}
           </div>
-        )}
-      </Row>
-    );
-  }
-}
+        </div>
+      </Col>
+      {step.voteType === 'BUDGET' && (
+        <Col md={2} sm={12} xs={12}>
+          <div>
+            <FormattedNumber
+              minimumFractionDigits={0}
+              value={proposal.estimation || 0}
+              style="currency"
+              currency="EUR"
+            />
+          </div>
+        </Col>
+      )}
+      <Col id={`${proposal.id}-proposal-vote__private`} md={onDelete ? 2 : 3} sm={12} xs={12}>
+        <div>
+          <div className="toggle-group">
+            <Field
+              labelSide="RIGHT"
+              component={toggle}
+              label={getToggleLabel()}
+              roledescription={intl.formatMessage({ id: 'vote-toggle-aria-roledescription' })}
+              name={`${member}.public`}
+              normalize={val => !!val}
+              id={`${proposal.id}-proposal-vote__private-toggle`}
+            />
+          </div>
+        </div>
+      </Col>
+      {onDelete && (
+        <Col md={1} className="proposal-vote__delete-container">
+          <ButtonDeleteVote
+            ref={target}
+            id={`${proposal.id}-proposal-vote__private-delete`}
+            type="button"
+            onClick={() => setShow(!show)}
+            disabled={!step.open}
+            className="proposal-vote__delete"
+            aria-label={intl.formatMessage(
+              isInterpellationContextFromStep(step)
+                ? { id: 'aria.label.delete-support' }
+                : { id: 'aria-label-delete-vote' },
+            )}>
+            <Icon name={ICON_NAME.trash} size={16} color={colors.dangerColor} />
+          </ButtonDeleteVote>
+          <Overlay
+            trigger="click"
+            onHide={() => setShow(false)}
+            placement="bottom"
+            target={target.current}
+            rootClose
+            children={popoverConfirmDelete}
+            show={show}
+          />
+        </Col>
+      )}
+    </VoteItemContainer>
+  );
+};
 
 const container = injectIntl(ProposalUserVoteItem);
 
@@ -261,7 +228,7 @@ export default createFragmentContainer(container, {
         id
         title
         url
-        ...ProposalDetailEstimation_proposal
+        estimation
       }
     }
   `,
