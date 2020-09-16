@@ -26,6 +26,10 @@ const items = [
     id: 'item5',
     title: 'Je suis un bel item #5',
   },
+  {
+    id: 'item6',
+    title: 'Je suis un bel item #6',
+  },
 ];
 
 const PickableListHeaderContainer = styled(PickableList.Header)`
