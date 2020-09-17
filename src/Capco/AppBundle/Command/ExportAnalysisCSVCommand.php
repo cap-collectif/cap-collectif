@@ -265,8 +265,10 @@ EOF;
         bool $isVerbose = false
     ): void {
         $defaultRowContent = [];
-        $analyses = $proposal['analyses'];
-        if (!$analyses || 0 === \count($analyses)) {
+        $analyses = $proposal['analyses'] ?? [];
+        $assessment = $proposal['assessment'] ?? [];
+        $decision = $proposal['decision'] ?? [];
+        if (!$analyses && !$assessment && !$decision) {
             if ($isVerbose) {
                 $output->writeln("\t<fg=red>/!\\No analysis for proposal ${proposal['title']}.</>");
             }
