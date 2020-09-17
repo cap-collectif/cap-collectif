@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import React, { useEffect, useState } from 'react';
+import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { GeoJson, MapOptions } from '../Proposal/Map/ProposalLeafletMap';
 import ProposalLeafletMap from '../Proposal/Map/ProposalLeafletMap';
 import type { ProposalsDisplayMap_step } from '~relay/ProposalsDisplayMap_step.graphql';
@@ -12,42 +12,122 @@ type RelayProps = {|
 
 type Props = {|
   ...RelayProps,
+  +relay: RelayPaginationProp,
   +mapTokens: MapTokens,
   +geoJsons?: Array<GeoJson>,
   +defaultMapOptions: MapOptions,
 |};
 
-export const ProposalsDisplayMap = ({ step, ...rest }: Props) => {
+const PAGINATION = 50;
+
+let hasMore = false;
+export const ProposalsDisplayMap = ({ step, relay, ...rest }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  hasMore = step.proposals?.pageInfo.hasNextPage || false;
+
+  const loadMore = () => {
+    if (!hasMore) {
+      setIsLoading(false);
+      return;
+    }
+    relay.loadMore(PAGINATION, (error: ?Error) => {
+      if (error) setHasError(true);
+      else loadMore();
+    });
+  };
+
+  const retry = () => {
+    setHasError(false);
+    relay.refetchConnection(PAGINATION, (error: ?Error) => {
+      if (error) setHasError(true);
+      else loadMore();
+    });
+  };
+
+  useEffect(() => {
+    if (step.proposals.pageInfo.hasNextPage) {
+      setIsLoading(step.proposals.pageInfo.hasNextPage);
+      loadMore();
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return step.proposals && step.proposals.edges ? (
     <ProposalLeafletMap
       proposals={step.proposals.edges.filter(Boolean).map(edge => edge.node)}
+      isLoading={isLoading}
+      hasMore={hasMore}
+      hasError={hasError}
+      retry={retry}
       {...rest}
     />
   ) : null;
 };
 
-export default createFragmentContainer(ProposalsDisplayMap, {
-  step: graphql`
-    fragment ProposalsDisplayMap_step on ProposalStep {
-      proposals(
-        first: $count
-        after: $cursor
-        orderBy: $orderBy
-        term: $term
-        district: $district
-        theme: $theme
-        category: $category
-        status: $status
-        userType: $userType
-      ) @connection(key: "ProposalsDisplayMap_proposals", filters: []) {
-        edges {
-          node {
-            id
-            ...ProposalLeafletMap_proposals
-            ...ProposalMapPopover_proposal
+export default createPaginationContainer(
+  ProposalsDisplayMap,
+  {
+    step: graphql`
+      fragment ProposalsDisplayMap_step on ProposalStep {
+        proposals(
+          first: $count
+          after: $cursor
+          orderBy: $orderBy
+          term: $term
+          district: $district
+          theme: $theme
+          category: $category
+          status: $status
+          userType: $userType
+        ) @connection(key: "ProposalsDisplayMap_proposals", filters: []) {
+          pageInfo {
+            hasNextPage
+            endCursor
+            hasPreviousPage
+            startCursor
+          }
+          edges {
+            node {
+              id
+              ...ProposalLeafletMap_proposals
+              ...ProposalMapPopover_proposal
+            }
           }
         }
       }
-    }
-  `,
-});
+    `,
+  },
+  {
+    direction: 'forward',
+    getFragmentVariables(prevVars) {
+      return {
+        ...prevVars,
+      };
+    },
+    getVariables(props: Props, { count, cursor }, fragmentVariables) {
+      return {
+        ...fragmentVariables,
+        count,
+        cursor,
+      };
+    },
+    query: graphql`
+      query ProposalsDisplayMapQuery(
+        $stepId: ID!
+        $cursor: String
+        $count: Int
+        $orderBy: ProposalOrder
+        $term: String
+        $district: ID
+        $category: ID
+        $status: ID
+        $theme: ID
+        $userType: ID
+      ) {
+        step: node(id: $stepId) {
+          ...ProposalsDisplayMap_step
+        }
+      }
+    `,
+  },
+);

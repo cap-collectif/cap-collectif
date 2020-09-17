@@ -13,6 +13,9 @@ exports[`should render correctly with proposals 1`] = `
       "zoom": 12,
     }
   }
+  hasError={false}
+  hasMore={false}
+  isLoading={false}
   mapTokens={
     Object {
       "MAPBOX": Object {
@@ -39,5 +42,6 @@ exports[`should render correctly with proposals 1`] = `
       },
     ]
   }
+  retry={[Function]}
 />
 `;

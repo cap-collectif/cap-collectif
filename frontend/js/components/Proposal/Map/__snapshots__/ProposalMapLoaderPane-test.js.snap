@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalMapLoaderPane /> should render correctly 1`] = `
+<ForwardRef(Leaflet(LeafletControl))
+  position="bottomleft"
+>
+  <ProposalLeafletMapstyle__LoaderPane>
+    <div>
+      <Loader
+        color="#333333"
+        inline={false}
+        show={true}
+        size={14}
+      />
+      <FormattedMessage
+        id="loading.proposals"
+        values={Object {}}
+      />
+    </div>
+  </ProposalLeafletMapstyle__LoaderPane>
+</ForwardRef(Leaflet(LeafletControl))>
+`;
+
+exports[`<ProposalMapLoaderPane /> should render correctly with error 1`] = `
+<ForwardRef(Leaflet(LeafletControl))
+  position="bottomleft"
+>
+  <ProposalLeafletMapstyle__LoaderPane>
+    <div>
+      <Icon
+        color="#f00040"
+        name="removeCircle"
+        size={14}
+      />
+      <FormattedMessage
+        id="loading.failed.retry"
+        values={Object {}}
+      />
+      <button
+        onClick={[MockFunction]}
+        type="button"
+      >
+        <FormattedMessage
+          id="global.retry"
+          values={Object {}}
+        />
+      </button>
+    </div>
+  </ProposalLeafletMapstyle__LoaderPane>
+</ForwardRef(Leaflet(LeafletControl))>
+`;

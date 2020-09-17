@@ -100,6 +100,8 @@ export const ICON_NAME: {
   budget: 'budget',
   vote: 'vote',
   urne: 'urne',
+  wifiOff: 'wifiOff',
+  removeCircle: 'removeCircle',
 } = {
   chart: 'chart',
   pen: 'pen',
@@ -197,6 +199,8 @@ export const ICON_NAME: {
   budget: 'budget',
   vote: 'vote',
   urne: 'urne',
+  wifiOff: 'wifiOff',
+  removeCircle: 'removeCircle',
 };
 
 type Props = {|
@@ -403,6 +407,10 @@ const getIcon = name => {
       return <Icons.Vote />;
     case 'urne':
       return <Icons.Urne />;
+    case 'removeCircle':
+      return <Icons.RemoveCircle />;
+    case 'wifiOff':
+      return <Icons.WifiOff />;
     default:
       return <div />;
   }

@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalLeafletMap } from './ProposalLeafletMap';
-import { $fragmentRefs, $refType } from '../../../mocks';
+import { $fragmentRefs, $refType } from '~/mocks';
 
 describe('<ProposalLeafletMap />', () => {
   const defaultMapOptions = {
@@ -54,9 +54,12 @@ describe('<ProposalLeafletMap />', () => {
     },
   };
 
+  const props = { hasError: false, hasMore: false, isLoading: false, retry: jest.fn() };
+
   it('should render a map with only valid markers', () => {
     const wrapper = shallow(
       <ProposalLeafletMap
+        {...props}
         defaultMapOptions={defaultMapOptions}
         visible
         mapTokens={mapTokens}
@@ -71,8 +74,24 @@ describe('<ProposalLeafletMap />', () => {
   it('should not render a map with visible = false', () => {
     const wrapper = shallow(
       <ProposalLeafletMap
+        {...props}
         defaultMapOptions={defaultMapOptions}
         visible={false}
+        mapTokens={mapTokens}
+        proposals={proposals}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a map with proposals still loading', () => {
+    const wrapper = shallow(
+      <ProposalLeafletMap
+        {...props}
+        hasMore
+        isLoading
+        defaultMapOptions={defaultMapOptions}
+        visible
         mapTokens={mapTokens}
         proposals={proposals}
       />,

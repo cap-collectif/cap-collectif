@@ -99,7 +99,6 @@ export default createFragmentContainer(ProposalList, {
       id
       ...ProposalListTable_step
       ...ProposalPreview_step
-      ...ProposalsDisplayMap_step
       ...interpellationLabelHelper_step @relay(mask: false)
     }
   `,

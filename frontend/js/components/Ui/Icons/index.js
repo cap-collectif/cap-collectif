@@ -93,3 +93,5 @@ export { default as FileIcon } from './svg/file-icn.svg';
 export { default as Budget } from './svg/budget.svg';
 export { default as Vote } from './svg/vote.svg';
 export { default as Urne } from './svg/urne.svg';
+export { default as WifiOff } from './svg/wifiOff.svg';
+export { default as RemoveCircle } from './svg/removeCircle.svg';

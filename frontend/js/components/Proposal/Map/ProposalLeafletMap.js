@@ -26,6 +26,7 @@ import {
 import { bootstrapGrid } from '~/utils/sizes';
 import Address from '~/components/Form/Address/Address';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
+import ProposalMapLoaderPane from './ProposalMapLoaderPane';
 
 type MapCenterObject = {|
   lat: number,
@@ -81,6 +82,10 @@ type Props = {|
   defaultMapOptions: MapOptions,
   visible: boolean,
   className?: string,
+  hasMore: boolean,
+  isLoading: boolean,
+  hasError: boolean,
+  retry: () => void,
 |};
 
 const convertToGeoJsonStyle = (style: Style) => {
@@ -160,6 +165,9 @@ export const ProposalLeafletMap = ({
   visible,
   mapTokens,
   className,
+  hasMore,
+  hasError,
+  retry,
 }: Props) => {
   const intl = useIntl();
   const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
@@ -191,7 +199,6 @@ export const ProposalLeafletMap = ({
             addressSelected.geometry.location.lng,
           )
         }
-        showSearchBar={!isMobile}
         debounce={1200}
         value={address}
         onChange={setAddress}
@@ -265,6 +272,7 @@ export const ProposalLeafletMap = ({
           ))}
 
         {!isMobile && <ZoomControl position="bottomright" />}
+        {hasMore && <ProposalMapLoaderPane hasError={hasError} retry={retry} />}
       </StyledMap>
       {isMobileSliderOpen && isMobile && (
         <SliderPane

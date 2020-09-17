@@ -35,6 +35,25 @@ const Address = ({
 
   const onErrorGeolocation = () => setHasLocationAuthorize(false);
 
+  const dispatchLocationWarning = () => {
+    FluxDispatcher.dispatch({
+      actionType: UPDATE_ALERT,
+      alert: {
+        type: TYPE_ALERT.ERROR,
+        content: 'warning.gps.off',
+        extraContent: (
+          <a
+            href={intl.formatMessage({ id: 'geolocation.help.link' })}
+            rel="noopener noreferrer"
+            target="_blank"
+            className="ml-5">
+            <FormattedMessage id="learn.more" />
+          </a>
+        ),
+      },
+    });
+  };
+
   const getLocation = () => {
     if (hasLocationAuthorize) {
       window.navigator.geolocation.getCurrentPosition(position => {
@@ -43,22 +62,7 @@ const Address = ({
         }
       }, onErrorGeolocation);
     } else {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'warning.gps.off',
-          extraContent: (
-            <a
-              href={intl.formatMessage({ id: 'geolocation.help.link' })}
-              rel="noopener noreferrer"
-              target="_blank"
-              className="ml-5">
-              <FormattedMessage id="learn.more" />
-            </a>
-          ),
-        },
-      });
+      dispatchLocationWarning();
     }
   };
 
@@ -129,9 +133,9 @@ const Address = ({
                 type="button"
                 onClick={e => {
                   e.preventDefault();
-                  getLocation();
-                }}
-                disabled={!hasLocationAuthorize}>
+                  if (hasLocationAuthorize) getLocation();
+                  else dispatchLocationWarning();
+                }}>
                 {hasLocationAuthorize ? (
                   <Icon name={ICON_NAME.locationTarget} size={16} color={colors.darkGray} />
                 ) : (

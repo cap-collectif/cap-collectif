@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 import { getStyleSearchBarAddress } from '~/components/Form/Address/Address.style';
+import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
 export const CLOSED_MARKER_SIZE = 40;
 export const OPENED_MARKER_SIZE = 42;
@@ -26,6 +27,15 @@ export const BlankPopup: StyledComponent<{}, {}, typeof Popup> = styled(Popup)`
 
 export const StyledMap: StyledComponent<{}, {}, typeof Map> = styled(Map)`
   width: 100%;
+
+  /**
+    Leaflet ne permet nativement pas de centrer des éléments, c'est éclaté 
+    https://github.com/Leaflet/Leaflet/pull/6935
+  **/
+  .leaflet-bottom.leaflet-left {
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
 
   .leaflet-control-attribution.leaflet-control {
     display: none;
@@ -74,3 +84,32 @@ export const locationMarkerCode = `
 <circle id="circle3" r="7" style="animation-delay: -1s"/>
 <circle id="circle4" r="7" style="animation-delay: -0s"/>
 </svg>`;
+
+export const LoaderPane: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  background: ${colors.white};
+  ${MAIN_BORDER_RADIUS};
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);
+  padding: 9px 16px;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+
+  svg {
+    margin-right: 8px;
+  }
+
+  > div > div {
+    padding: 0;
+    width: unset;
+    margin-right: 8px;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    background: none;
+    text-decoration: underline;
+  }
+`;

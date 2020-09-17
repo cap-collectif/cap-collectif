@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalsDisplayMap } from './ProposalsDisplayMap';
-import { $fragmentRefs, $refType } from '../../mocks';
+import { $fragmentRefs, $refType, relayPaginationMock } from '~/mocks';
 
 const defaultMapOptions = {
   center: { lat: 48.8586047, lng: 2.3137325 },
@@ -42,8 +42,20 @@ it('should render correctly with proposals', () => {
       },
     },
   ];
-  const step = { ...$refType, proposals: { edges: proposals } };
+  const step = {
+    ...$refType,
+    proposals: {
+      pageInfo: {
+        hasNextPage: false,
+        endCursor: '',
+        hasPreviousPage: false,
+        startCursor: '',
+      },
+      edges: proposals,
+    },
+  };
   const props = {
+    relay: relayPaginationMock,
     step,
     defaultMapOptions,
     mapTokens,
@@ -54,11 +66,7 @@ it('should render correctly with proposals', () => {
 
 it('should not render when no proposals are in the step', () => {
   const step = { ...$refType };
-  const props = {
-    step,
-    defaultMapOptions,
-    mapTokens,
-  };
+  const props = { relay: relayPaginationMock, step, defaultMapOptions, mapTokens };
   const wrapper = shallow(<ProposalsDisplayMap {...props} />);
   expect(wrapper).toMatchSnapshot();
 });
