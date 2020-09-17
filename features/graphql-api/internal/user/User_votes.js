@@ -78,6 +78,24 @@ const UserVotesQuery = /* GraphQL */ `
   }
 `;
 
+const UserVotesMinQuery = /* GraphQL */ `
+  query UserVotesMinQuery($id: ID!, $onlyAccounted: Boolean!) {
+    node(id: $id) {
+      ... on User {
+        votes(first: 100, onlyAccounted: $onlyAccounted) {
+          totalCount
+          edges {
+            node {
+              id
+              isAccounted
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 describe('User.votes connection', () => {
   it("fetches a user's votes as super admin.", async () => {
     await Promise.all(
@@ -173,6 +191,32 @@ describe('User.votes connection', () => {
           first: 5,
         },
         'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches user votes including some not accounted', async () => {
+    await expect(
+      graphql(
+        UserVotesMinQuery,
+        {
+          id: toGlobalId('User', 'user5'),
+          onlyAccounted: false,
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches user votes accounted', async () => {
+    await expect(
+      graphql(
+        UserVotesMinQuery,
+        {
+          id: toGlobalId('User', 'user5'),
+          onlyAccounted: true,
+        },
+        'internal',
       ),
     ).resolves.toMatchSnapshot();
   });

@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.Proposal_votes fetches a proposal's accounted votes. 1`] = `
+Object {
+  "proposal": Object {
+    "allVotes": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+    "votes": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+  },
+}
+`;
+
+exports[`Internal.Proposal_votes fetches a proposal's votes including not accounted and unpublished. 1`] = `
+Object {
+  "proposal": Object {
+    "allVotes": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "2058",
+            "isAccounted": false,
+            "published": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2057",
+            "isAccounted": false,
+            "published": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2059",
+            "isAccounted": false,
+            "published": false,
+          },
+        },
+      ],
+      "totalCount": 3,
+    },
+  },
+}
+`;
+
+exports[`Internal.Proposal_votes fetches a proposal's votes including not accounted. 1`] = `
+Object {
+  "proposal": Object {
+    "allVotes": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "2058",
+            "isAccounted": false,
+            "published": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2057",
+            "isAccounted": false,
+            "published": true,
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;

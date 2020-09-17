@@ -924,7 +924,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      votes {
+      votes(first: 100, onlyAccounted: false) {
         edges {
           node {
             kind

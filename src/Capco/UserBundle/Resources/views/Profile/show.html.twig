@@ -30,7 +30,7 @@
     {% set opinionsCount = userOpinionsResolver.getCountPublicPublished(user, true, app.user) %}
     {% set projectsCount = userProjectsResolver.__invoke(user).totalCount %}
     {% set sourcesCount = userSourcesResolver.__invoke(app.user, user).totalCount %}
-    {% set votesCount = userVotesResolver.__invoke(app.user, user).totalCount %}
+    {% set votesCount = userVotesResolver.getAccountedVotes(app.user, user).totalCount %}
     {% set versionCount = userOpinionVersionResolver.__invoke(app.user, user).totalCount %}
     {% set argumentsCount = userArgumentsResolver.getArgumentTotalCount(app.user, user) %}
     

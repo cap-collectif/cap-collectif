@@ -11191,7 +11191,7 @@ type User implements Node & UniformResourceLocatable {
     contribuableId: ID
 
     """Get only accounted votes."""
-    onlyAccounted: Boolean = false
+    onlyAccounted: Boolean = true
   ): VoteConnection!
 
   """Get all groups where the user is."""

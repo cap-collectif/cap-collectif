@@ -391,7 +391,13 @@ EOF;
         string $extension = '.csv'
     ): string {
         return self::getShortenedFilename(
-            sprintf('%s_%s', $selectionStep->getProject() ? $selectionStep->getProject()->getSlug() : $selectionStep->getId(), $selectionStep->getSlug()),
+            sprintf(
+                '%s_%s',
+                $selectionStep->getProject()
+                    ? $selectionStep->getProject()->getSlug()
+                    : $selectionStep->getId(),
+                $selectionStep->getSlug()
+            ),
             $extension
         );
     }
@@ -1164,7 +1170,7 @@ ${AUTHOR_INFOS_FRAGMENT}
 {
   node(id: "${proposalId}") {
     ... on Proposal {
-      votes(includeUnpublished: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter}) {
+      votes(includeUnpublished: true, includeNotAccounted: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter}) {
         totalCount
         pageInfo {
           startCursor
@@ -1663,7 +1669,7 @@ ${COMMENT_VOTE_INFOS}
                   }
                 }
               }
-            votes(includeUnpublished: true, stepId: "{$proposalStep->getId()}", first: ${VOTES_PER_PAGE}${votesAfter}) {
+            votes(includeUnpublished: true, includeNotAccounted: true, stepId: "{$proposalStep->getId()}", first: ${VOTES_PER_PAGE}${votesAfter}) {
                 totalCount
                 pageInfo {
                   startCursor

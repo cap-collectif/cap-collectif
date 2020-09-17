@@ -330,6 +330,264 @@ Object {
 }
 `;
 
+exports[`User.votes connection fetches user votes accounted 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTE=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTA=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2056",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODY=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "60003",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1002",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2004",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1061",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1060",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1059",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1058",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1053",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2055",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2054",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2053",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2052",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2051",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6NQ==",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDU=",
+            "isAccounted": true,
+          },
+        },
+      ],
+      "totalCount": 19,
+    },
+  },
+}
+`;
+
+exports[`User.votes connection fetches user votes including some not accounted 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTE=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTA=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2058",
+            "isAccounted": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2056",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6ODY=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "60003",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1002",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2004",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1061",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1060",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1059",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1058",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1053",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2055",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2054",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2053",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2052",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2051",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6NQ==",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDU=",
+            "isAccounted": true,
+          },
+        },
+      ],
+      "totalCount": 20,
+    },
+  },
+}
+`;
+
 exports[`User.votes connection fetches user votes on a specific project 1`] = `
 Object {
   "node": Object {

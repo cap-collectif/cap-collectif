@@ -48,6 +48,7 @@ def symfony_bin_deps():
     local('brew install imagemagick')
     local('printf "\n" | pecl install imagick')
     local('printf "\n" | pecl install redis')
+    local('printf "\n" | pecl install pcov')
     local('echo $(brew --prefix rabbitmq-c) | pecl install amqp')
 
 @task(environments=['local'])

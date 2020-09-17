@@ -27,6 +27,7 @@ class ProposalVotesResolver implements ResolverInterface
         $includeUnpublished =
             true === $args->offsetGet('includeUnpublished') ||
             ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
+
         if ($args->offsetExists('stepId')) {
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user, $context);
 

@@ -125,11 +125,8 @@ class VoteSearch extends Search
         }
     }
 
-    public function searchProposalVotes(
-        array $keys,
-        bool $includeUnpublished,
-        bool $includeNotAccounted = false
-    ): array {
+    public function searchProposalVotes(array $keys): array
+    {
         $client = $this->index->getClient();
         $globalQuery = new \Elastica\Multi\Search($client);
 
@@ -141,11 +138,11 @@ class VoteSearch extends Search
                 $boolQuery->addFilter(new Term(['step.id' => $step->getId()]));
             }
 
-            if (!$includeUnpublished) {
+            if (!$key['includeUnpublished']) {
                 $boolQuery->addFilter(new Term(['published' => true]));
             }
 
-            if (!$includeNotAccounted) {
+            if (!$key['includeNotAccounted']) {
                 $boolQuery->addFilter(new Term(['isAccounted' => true]));
             }
 

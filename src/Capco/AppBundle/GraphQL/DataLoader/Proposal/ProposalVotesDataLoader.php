@@ -71,7 +71,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
     {
         return [
             'proposalId' => $key['proposal']->getId(),
-            // ?TODO? toGlobalId
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,
             'args' => $key['args']->getArrayCopy(),
             'includeUnpublished' => $key['includeUnpublished'],
@@ -79,25 +78,29 @@ class ProposalVotesDataLoader extends BatchDataLoader
         ];
     }
 
-    private function resolveBatch($keys): array
+    private function resolveBatch(array $keys): array
     {
-        $includeUnpublished = $keys[0]['includeUnpublished'] ?? false;
-        $includeNotAccounted = $keys[0]['includeNotAccounted'] ?? false;
-        $paginatedResults = $this->voteSearch->searchProposalVotes(
-            $keys,
-            $includeUnpublished,
-            $includeNotAccounted
-        );
+        $paginatedResults = $this->voteSearch->searchProposalVotes($keys);
+
+        return $this->transformPaginatedResultstoConnections($paginatedResults, $keys);
+    }
+
+    private function transformPaginatedResultstoConnections(
+        array $paginatedResults,
+        array $keys
+    ): array {
         $connections = [];
         if (!empty($paginatedResults)) {
+            $index = 0;
             foreach ($keys as $i => $key) {
                 $paginator = new ElasticsearchPaginator(static function (
                     ?string $cursor,
                     int $limit
-                ) use ($paginatedResults, $i) {
-                    return $paginatedResults[$i];
+                ) use ($paginatedResults, $index) {
+                    return $paginatedResults[$index];
                 });
-                $connections[] = $paginator->auto($key['args']);
+                $connections[$i] = $paginator->auto($key['args']);
+                ++$index;
             }
         }
 

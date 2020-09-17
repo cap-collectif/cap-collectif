@@ -72,3 +72,11 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         position: 1
         createdAt: <(new \DateTime('2019-03-01 00:00:02'))>
         publishedAt: $createdAt
+    proposalCollectVote59:
+        id: 2059
+        proposal: '@proposal132'
+        collectStep: '@collectStepExport'
+        user: '@user_not_confirmed'
+        isAccounted: false
+        position: 1
+        createdAt: <(new \DateTime('2019-03-01 00:00:03'))>
