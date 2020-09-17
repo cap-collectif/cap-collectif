@@ -12,11 +12,13 @@ module.exports = {
     '!**/*.graphql.js',
   ],
   moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif)$': '<rootDir>/__mocks__/file.js',
     '\\.svg': '<rootDir>/__mocks__/svg.js',
     '~relay(.*)$': '<rootDir>/frontend/js/__generated__/~relay/$1',
     '~ui(.*)$': '<rootDir>/frontend/js/components/Ui/$1',
     '~(.*)$': '<rootDir>/frontend/js/$1',
     '~svg(.*)$': '<rootDir>/public/svg/$1',
+    '~image(.*)$': '<rootDir>/public/image/$1',
   },
   coverageReporters: ['json-summary', 'lcov', 'clover', 'json'],
   modulePaths: ['<rootDir>/frontend/js/__generated__'],

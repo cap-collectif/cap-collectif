@@ -15,7 +15,7 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import Label from '~ui/Labels/Label';
 import InlineList from '~ui/List/InlineList';
-import TagCity from '~/components/Tag/TagCity/TagCity';
+import { TagCity } from '~/components/Tag/TagCity/TagCity';
 import { TYPE_EVENT } from './EventPreview-stories';
 
 type Props = {

@@ -32,6 +32,7 @@ const devConf = {
       '~': path.resolve(__dirname, '../frontend/js'),
       '~fonts': path.resolve(__dirname, '../public/fonts'),
       '~svg': path.resolve(__dirname, '../public/svg'),
+      '~image': path.resolve(__dirname, '../public/image'),
       react: path.resolve('./node_modules/react'),
     },
   },

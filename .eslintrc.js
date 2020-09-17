@@ -164,6 +164,7 @@ module.exports = {
           ['~relay', './frontend/js/__generated__/~relay'],
           ['~ui', './frontend/js/components/Ui'],
           ['~svg', './public/svg'],
+          ['~image', './public/image'],
           ['~', './frontend/js/'],
         ],
       },

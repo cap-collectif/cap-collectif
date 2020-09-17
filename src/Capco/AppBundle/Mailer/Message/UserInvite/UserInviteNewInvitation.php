@@ -7,9 +7,9 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 final class UserInviteNewInvitation extends AbstractExternalMessage
 {
-
     public const SUBJECT = 'email-user-invitation-subject';
     public const TEMPLATE = '@CapcoMail/UserInvite/newInvitation.html.twig';
+    public const FOOTER = '';
 
     public static function getMySubjectVars(UserInvite $invite, array $params): array
     {
@@ -23,7 +23,7 @@ final class UserInviteNewInvitation extends AbstractExternalMessage
             'invitationUrl' => $params['invitationUrl'],
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
-            'siteUrl' => $params['siteURL']
+            'siteUrl' => $params['siteURL'],
         ];
     }
 }

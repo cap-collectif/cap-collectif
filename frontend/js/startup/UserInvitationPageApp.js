@@ -22,6 +22,9 @@ export default (propsComponent: Props) => (
       query={graphql`
         query UserInvitationPageAppQuery {
           ...UserInvitationPage_query
+          siteColors {
+            ...UserInvitationPage_colors
+          }
         }
       `}
       variables={{}}
@@ -34,7 +37,9 @@ export default (propsComponent: Props) => (
       }) => {
         if (error) return graphqlError;
 
-        if (props) return <UserInvitationPage query={props} {...propsComponent} />;
+        if (props) {
+          return <UserInvitationPage query={props} colors={props.siteColors} {...propsComponent} />;
+        }
 
         return <Loader />;
       }}

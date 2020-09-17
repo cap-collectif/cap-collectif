@@ -105,3 +105,4 @@ esproposal.decorators=ignore
 module.name_mapper='~ui\/\(.*\)$' -> '<PROJECT_ROOT>/frontend/js/components/Ui/\1'
 module.name_mapper='~/\(.*\)$' -> '<PROJECT_ROOT>/frontend/js/\1'
 module.name_mapper='~svg\/\(.*\)$' -> '<PROJECT_ROOT>/public/svg/\1'
+module.name_mapper='~image\/\(.*\)$' -> '<PROJECT_ROOT>/public/image/\1'

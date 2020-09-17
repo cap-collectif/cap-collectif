@@ -23,6 +23,14 @@
         }) }}
     {% endif %}
     <style>
+        html,
+        body,
+        body > #app-wrapper,
+        .user-invitation-page-app-container,
+        .user-invitation-page-app-container > div {
+            height: 100%;
+        }
+
         body {
             background-color: #F6F6F6;
             padding-top: 0;
@@ -37,9 +45,11 @@
         }
     </style>
     {% include 'CapcoAppBundle:Homepage:flashbag.html.twig' %}
+    <div class="user-invitation-page-app-container">
     {{ react_render_component('UserInvitationPageApp', {'rendering': 'client_side', props: {
         token: token,
-        logo: media_public_url(capco_site_image_media('image.shield'), 'default_shield'),
+        logo: app_logo_url(),
         email: email
     } }) }}
+    </div>
 {% endblock %}
