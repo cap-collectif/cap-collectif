@@ -708,10 +708,8 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
           ? props.event.authorAgreeToUsePersonalDataForEventOnly
           : false,
         link: translation ? translation.link : null,
-        custom: {
-          metadescription: translation ? translation.metaDescription : null,
-          customcode: props.event ? props.event.customCode : null,
-        },
+        metadescription: translation ? translation.metaDescription : null,
+        customcode: props.event ? props.event.customCode : null,
         media: props.event ? props.event.media : null,
         comment: props.event && props.event.review ? props.event.review.comment : null,
         status: props.event && props.event.review ? props.event.review.status : null,

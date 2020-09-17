@@ -31,7 +31,6 @@ import ChangeEventMutation from '~/mutations/ChangeEventMutation';
 import DeleteEventMutation from '~/mutations/DeleteEventMutation';
 import type { EventFormPage_event } from '~relay/EventFormPage_event.graphql';
 import type { EventFormPage_query } from '~relay/EventFormPage_query.graphql';
-import type { FormValues as CustomFormValues } from '~/components/Admin/Field/CustomPageFields';
 import { getTranslation, handleTranslationChange } from '~/services/Translation';
 import AppDispatcher from '~/dispatchers/AppDispatcher';
 
@@ -47,7 +46,8 @@ type Props = {|
 |};
 
 type FormValues = {|
-  custom: ?CustomFormValues,
+  customcode: string,
+  metadescription: string,
   title: string,
   body: string,
   author?: { value: string, label: string },
@@ -152,7 +152,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     locale: props.currentLanguage,
     title: values.title,
     body: values.body,
-    metaDescription: values.custom ? values.custom.metadescription : undefined,
+    metaDescription: values.metadescription ? values.metadescription : undefined,
     link: values.link,
   };
 
@@ -164,7 +164,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     ),
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-    customCode: values.custom?.customcode || null,
+    customCode: values.customcode,
     commentable,
     guestListEnabled,
     addressJson,
@@ -224,7 +224,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     locale: props.currentLanguage,
     title: values.title,
     body: values.body,
-    metaDescription: values.custom ? values.custom.metadescription : undefined,
+    metaDescription: values.metadescription ? values.metadescription : null,
     link: values.link,
   };
 
@@ -232,7 +232,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     id: values.id,
     startAt: moment(values.startAt).format('YYYY-MM-DD HH:mm:ss'),
     endAt: values.endAt ? moment(values.endAt).format('YYYY-MM-DD HH:mm:ss') : null,
-    customCode: values.custom?.customcode || null,
+    customCode: values.customcode,
     commentable,
     guestListEnabled,
     addressJson,
