@@ -1,33 +1,33 @@
 InternalProposalVote:
-  type: object
-  inherits:
-    - PublicPublishable
-    - InternalVote
-    - InternalPrivatableVote
-    - Contribution
-  config:
-    name: ProposalVote
-    interfaces:
-      - InternalVote
-      - PublicPublishable
-      - InternalPrivatableVote
-      - Contribution
-    fields:
-      proposal:
-        type: 'InternalProposal!'
-        description: 'Return the proposal.'
-      step:
-        type: 'ProposalStep!'
-        description: 'Return the step.'
-      ranking:
-        type: 'Int'
-        description: 'Return the ranking of the vote (if any)'
-        resolve: '@=value.getPosition() === null ? null : value.getPosition() + 1'
-      author:
-        type: 'InternalUser'
-        description: 'The author of the contribution. If null, the vote is anonymous.'
-        resolve: '@=value.isPrivate() ? null : value.getUser()'
-      kind:
-        type: 'String!'
-        description: "Returns 'proposalVote'."
-        resolve: 'proposalVote'
+    type: object
+    inherits:
+        - PublicPublishable
+        - InternalVote
+        - InternalPrivatableVote
+        - Contribution
+    config:
+        name: ProposalVote
+        interfaces:
+            - InternalVote
+            - PublicPublishable
+            - InternalPrivatableVote
+            - Contribution
+        fields:
+            proposal:
+                type: 'InternalProposal!'
+                description: 'Return the proposal.'
+            step:
+                type: 'ProposalStep!'
+                description: 'Return the step.'
+            ranking:
+                type: 'Int'
+                description: 'Return the ranking of the vote (if any)'
+                resolve: '@=value.getPosition() === null ? null : value.getPosition() + 1'
+            author:
+                type: 'InternalUser'
+                description: 'The author of the contribution. If null, the vote is anonymous.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVoteAuthorResolver", [value, context])'
+            kind:
+                type: 'String!'
+                description: "Returns 'proposalVote'."
+                resolve: 'proposalVote'
