@@ -20,7 +20,7 @@ Scenario: Email should be sent if a message is sent to the proposal_delete queue
   Given I publish in "proposal_delete" with message below:
   """
   {
-    "proposalId": "UHJvcG9zYWw6ZGVsZXRlZFByb3Bvc2FsMQ=="
+    "proposalId": "proposal12"
   }
   """
   And I consume "proposal_delete"
@@ -96,8 +96,8 @@ Scenario: Proposal author receive message after, admin updated status of his pro
   Given I publish in "proposal_update_status" with message below:
   """
   {
-  "proposalId": "proposal2",
-  "date": "12-12-2012 12:12:12"
+    "proposalId": "proposal2",
+    "date": "12-12-2012 12:12:12"
   }
   """
   And I consume "proposal_update_status"
@@ -109,8 +109,8 @@ Scenario: Proposal english author receive message after, admin updated status of
   Given I publish in "proposal_update_status" with message below:
   """
   {
-  "proposalId": "proposal108",
-  "date": "12-12-2012 12:12:12"
+    "proposalId": "proposal108",
+    "date": "12-12-2012 12:12:12"
   }
   """
   And I consume "proposal_update_status"
@@ -171,3 +171,29 @@ Scenario: someone receive message after being revoked from two proposals
   And I consume "proposal_revoke"
   Then I open mail to "mickaelS@cap-collectif.com"
   And email should match snapshot "notifyAnalyst_RevokeAnalyst.html"
+
+@rabbitmq @snapshot-email @database
+Scenario: analysts receive message when  proposal is updated
+  Given I publish in "proposal_update" with message below:
+  """
+  {
+    "proposalId": "proposal110",
+    "date": "12-12-2012 12:12:12"
+  }
+  """
+  And I consume "proposal_update"
+  Then I open mail to "analyst2@cap-collectif.com"
+  And email should match snapshot "notifyAnalyst_updateProposal"
+
+@rabbitmq @snapshot-email
+Scenario: deicisionmaker receive message when  proposal is deleted
+  Given I publish in "proposal_delete" with message below:
+  """
+  {
+    "proposalId": "deletedProposal1",
+    "decisionMakerId": "userDecisionMaker"
+  }
+  """
+  And I consume "proposal_delete"
+  Then I open mail to "decisionmaker@cap-collectif.com"
+  And email should match snapshot "notifyAnalyst_deleteProposal"

@@ -68,7 +68,32 @@ Scenario: User GraphQL client can delete his proposal
   }
   """
   And the queue associated to "proposal_delete" producer has messages below:
-  | 0 | {"proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMg=="} |
+  | 0 | {"proposalId": "proposal12"} |
+
+@database @rabbitmq
+Scenario: The rabbitmq message contains id of supervisor and decisionMaker on delete
+  Given feature "unstable__analysis" is enabled
+  And I am logged in to graphql as super admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: DeleteProposalInput!) {
+      deleteProposal(input: $input) {
+        proposal {
+          id
+          deletedAt
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMTA="
+      }
+    }
+  }
+  """
+  Then the queue associated to "proposal_delete" producer has messages below:
+    | 0 | {"proposalId": "proposal110", "supervisorId": "userSupervisor", "decisionMakerId": "userDecisionMaker"} |
 
 @database
 Scenario: GraphQL client wants delete a proposal

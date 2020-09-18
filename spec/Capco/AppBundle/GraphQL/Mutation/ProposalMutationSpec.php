@@ -97,6 +97,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposal->setUpdateAuthor($author)->shouldBeCalled();
         $proposal->getUpdateAuthor()->willReturn($author);
         $proposal->getProposalForm()->willReturn($proposalForm);
+        $proposal->getUpdatedAt()->willReturn(new \DateTime());
 
         $globalIdResolver->resolve($values['id'], $user)->willReturn($proposal);
 

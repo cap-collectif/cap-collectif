@@ -28,19 +28,35 @@ class ProposalUpdateProcessor implements ProcessorInterface
     public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
-        /** @var Proposal $proposal */
-        $proposal = $this->proposalRepository->find($json['proposalId']);
 
+        $proposal = $this->getProposalFromMessage($json);
         if (!$proposal) {
-            $this->logger->error(
-                __CLASS__ . ' - Unable to find proposal with id: ' . $json['proposalId']
-            );
-
             return false;
         }
 
-        $this->notifier->onUpdate($proposal);
+        $this->notifier->onUpdate(
+            $proposal,
+            $this->getUpdateDateFromMessageOrProposal($json, $proposal)
+        );
 
         return true;
+    }
+
+    private function getProposalFromMessage(array $json): ?Proposal
+    {
+        $proposal = $this->proposalRepository->find($json['proposalId']);
+
+        if (is_null($proposal)) {
+            $this->logger->error(
+                __CLASS__ . ' - Unable to find proposal with id: ' . $json['proposalId']
+            );
+        }
+
+        return $proposal;
+    }
+
+    private function getUpdateDateFromMessageOrProposal(array $json, Proposal $proposal): \DateTimeInterface
+    {
+        return isset($json['date']) ? new \DateTime($json['date']) : $proposal->getUpdatedAt();
     }
 }

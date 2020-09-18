@@ -8,6 +8,8 @@ use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAdminUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\Proposal\Analysis\ProposalDeleteMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\Analysis\ProposalUpdateMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeCreateMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeUpdateMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
@@ -20,6 +22,7 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -104,9 +107,19 @@ class ProposalNotifier extends BaseNotifier
         }
     }
 
-    public function onDelete(Proposal $proposal)
-    {
-        if (!$proposal->isDraft()) {
+    public function onDelete(
+        Proposal $proposal,
+        ?User $supervisor = null,
+        ?User $decisionMaker = null
+    ) {
+        if (
+            $proposal->getProposalForm()->getNotificationsConfiguration() &&
+            $proposal
+                ->getProposalForm()
+                ->getNotificationsConfiguration()
+                ->isOnDelete() &&
+            !$proposal->isDraft()
+        ) {
             $this->mailer->createAndSendMessage(ProposalDeleteAdminMessage::class, $proposal, [
                 'proposal' => $proposal,
                 'proposalURL' => $this->proposalUrlResolver->__invoke(
@@ -117,15 +130,12 @@ class ProposalNotifier extends BaseNotifier
                 'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
             ]);
         }
+
+        $this->notifyAllAnalystsOnDelete($proposal, $supervisor, $decisionMaker);
     }
 
-    public function onUpdate(Proposal $proposal)
+    public function onUpdate(Proposal $proposal, \DateTimeInterface $updateDateTime)
     {
-        $locale = $this->defaultLocale;
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request) {
-            $locale = $request->getLocale();
-        }
         if (
             !$proposal->isDraft() &&
             $proposal
@@ -171,6 +181,8 @@ class ProposalNotifier extends BaseNotifier
                 $proposal->getAuthor()
             );
         }
+
+        $this->notifyAllAnalystsOnUpdate($proposal, $updateDateTime);
     }
 
     public function onUpdateStatus(Proposal $proposal, \DateTime $date)
@@ -235,5 +247,65 @@ class ProposalNotifier extends BaseNotifier
                 $child->getAuthor()
             );
         }
+    }
+
+    private function notifyAllAnalystsOnDelete(
+        Proposal $proposal,
+        ?User $supervisor,
+        ?User $decisionMaker
+    ): void {
+        $params = [
+            'baseUrl' => $this->router->generate(
+                'app_homepage',
+                [],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ),
+            'isDeleted' => true,
+            'updateDate' => $proposal->getDeletedAt()->format('d/m/Y'),
+            'updateTime' => $proposal->getDeletedAt()->format('H:i:s'),
+        ];
+
+        if ($decisionMaker) {
+            $this->notifyOneAnalyst($proposal, $params, $decisionMaker);
+        }
+        if ($supervisor) {
+            $this->notifyOneAnalyst($proposal, $params, $supervisor);
+        }
+        foreach ($proposal->getAnalysts() as $analyst) {
+            $this->notifyOneAnalyst($proposal, $params, $analyst);
+        }
+    }
+
+    private function notifyAllAnalystsOnUpdate(Proposal $proposal, \DateTimeInterface $updateDateTime): void
+    {
+        $params = [
+            'baseUrl' => $this->router->generate(
+                'app_homepage',
+                [],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ),
+            'proposalUrl' => $this->proposalUrlResolver->__invoke($proposal, $this->requestStack),
+            'updateDate' => $updateDateTime->format('d/m/Y'),
+            'updateTime' => $updateDateTime->format('H:i:s'),
+            'isDeleted' => false,
+        ];
+
+        if ($proposal->getDecisionMaker()) {
+            $this->notifyOneAnalyst($proposal, $params, $proposal->getDecisionMaker());
+        }
+        if ($proposal->getSupervisor()) {
+            $this->notifyOneAnalyst($proposal, $params, $proposal->getSupervisor());
+        }
+        foreach ($proposal->getAnalysts() as $analyst) {
+            $this->notifyOneAnalyst($proposal, $params, $analyst);
+        }
+    }
+
+    private function notifyOneAnalyst(Proposal $proposal, array $params, User $analyst): void
+    {
+        $messageType = $params['isDeleted']
+            ? ProposalDeleteMessage::class
+            : ProposalUpdateMessage::class;
+        $this->mailer->createAndSendMessage($messageType, $proposal, $params, $analyst);
     }
 }

@@ -2,29 +2,32 @@
 
 namespace Capco\AppBundle\Processor\Proposal;
 
+use Capco\UserBundle\Repository\UserRepository;
 use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Swarrot\Processor\ProcessorInterface;
 use Capco\AppBundle\Notifier\ProposalNotifier;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\ProposalRepository;
 
 class ProposalDeleteProcessor implements ProcessorInterface
 {
     private $em;
     private $proposalRepository;
+    private $userRepository;
     private $notifier;
     private $logger;
 
     public function __construct(
         EntityManagerInterface $em,
         ProposalRepository $proposalRepository,
+        UserRepository $userRepository,
         ProposalNotifier $notifier,
         LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->proposalRepository = $proposalRepository;
+        $this->userRepository = $userRepository;
         $this->notifier = $notifier;
         $this->logger = $logger;
     }
@@ -32,16 +35,20 @@ class ProposalDeleteProcessor implements ProcessorInterface
     public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
-        
+
         // Disable the built-in softdelete
         $filters = $this->em->getFilters();
         if ($filters->isEnabled('softdeleted')) {
             $filters->disable('softdeleted');
         }
-        
-        $decodedId = GlobalId::fromGlobalId($json['proposalId'])['id'];
-        /** @var Proposal $proposal */
-        $proposal = $this->proposalRepository->find($decodedId);
+
+        $proposal = $this->proposalRepository->find($json['proposalId']);
+        $supervisor = (isset($json['supervisorId']) && $json['supervisorId'])
+            ? $this->userRepository->find($json['supervisorId'])
+            : null;
+        $decisionMaker = (isset($json['decisionMakerId']) && $json['decisionMakerId'])
+            ? $this->userRepository->find($json['decisionMakerId'])
+            : null;
 
         if (!$filters->isEnabled('softdeleted')) {
             $filters->enable('softdeleted');
@@ -49,21 +56,13 @@ class ProposalDeleteProcessor implements ProcessorInterface
 
         if (!$proposal) {
             $this->logger->error(
-                __CLASS__ . ' - Unable to find proposal with id: ' . $decodedId
+                __CLASS__ . ' - Unable to find proposal with id: ' . $json['proposalId']
             );
 
             return false;
         }
 
-        if (
-            $proposal->getProposalForm()->getNotificationsConfiguration() &&
-            $proposal
-                ->getProposalForm()
-                ->getNotificationsConfiguration()
-                ->isOnDelete()
-        ) {
-            $this->notifier->onDelete($proposal);
-        }
+        $this->notifier->onDelete($proposal, $supervisor, $decisionMaker);
 
         return true;
     }

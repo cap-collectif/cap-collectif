@@ -544,17 +544,19 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setUpdateAuthor($viewer);
         $this->em->flush();
 
+        $messageData = ['proposalId' => $proposal->getId()];
         if ($wasDraft && !$proposal->isDraft()) {
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_CREATE;
         } else {
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
+            $messageData['date'] = $proposal->getUpdatedAt();
         }
 
         $this->container
             ->get('swarrot.publisher')
             ->publish(
                 $proposalQueue,
-                new Message(json_encode(['proposalId' => $proposal->getId()]))
+                new Message(json_encode($messageData))
             );
 
         // Synchronously index draft proposals being publish

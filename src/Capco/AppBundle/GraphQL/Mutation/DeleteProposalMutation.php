@@ -53,14 +53,7 @@ class DeleteProposalMutation implements MutationInterface
 
         $this->redisHelper->recomputeUserCounters($author);
 
-        $this->publisher->publish(
-            'proposal.delete',
-            new Message(
-                json_encode([
-                    'proposalId' => $proposalId,
-                ])
-            )
-        );
+        $this->publish($proposal);
 
         // Synchronous indexation
         $this->indexer->remove(\get_class($proposal), $proposal->getId());
@@ -70,5 +63,22 @@ class DeleteProposalMutation implements MutationInterface
         $this->dataloader->invalidate($proposalForm);
 
         return ['proposal' => $proposal, 'viewer' => $user, 'step' => $proposalForm->getStep()];
+    }
+
+    private function publish(Proposal $proposal): void
+    {
+        $message = [
+            'proposalId' => $proposal->getId(),
+            'supervisorId' => null,
+            'decisionMakerId' => null,
+        ];
+        if ($proposal->getSupervisor()) {
+            $message['supervisorId'] = $proposal->getSupervisor()->getId();
+        }
+        if ($proposal->getDecisionMaker()) {
+            $message['decisionMakerId'] = $proposal->getDecisionMaker()->getId();
+        }
+
+        $this->publisher->publish('proposal.delete', new Message(json_encode($message)));
     }
 }
