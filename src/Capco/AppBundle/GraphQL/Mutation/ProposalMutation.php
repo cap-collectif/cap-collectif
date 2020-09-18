@@ -83,7 +83,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : '.$form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $this->em->flush();
@@ -103,7 +103,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : '.$form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $this->em->flush();
@@ -139,7 +139,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : '.$form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $this->em->flush();
@@ -147,7 +147,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeCollectStatus(string $proposalId, $user, string $statusId = null): array
+    public function changeCollectStatus(string $proposalId, $user, ?string $statusId = null): array
     {
         $proposal = $this->globalIdResolver->resolve($proposalId, $user);
         if (!$proposal) {
@@ -164,12 +164,10 @@ class ProposalMutation implements ContainerAwareInterface
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
             new Message(
-                json_encode(
-                    [
-                        'proposalId' => $proposal->getId(),
-                        'date' => new \DateTime(),
-                    ]
-                )
+                json_encode([
+                    'proposalId' => $proposal->getId(),
+                    'date' => new \DateTime(),
+                ])
             )
         );
 
@@ -185,17 +183,15 @@ class ProposalMutation implements ContainerAwareInterface
         string $proposalId,
         string $stepId,
         $user,
-        string $statusId = null
+        ?string $statusId = null
     ): array {
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
         /** @var Selection $selection */
-        $selection = $this->container->get(SelectionRepository::class)->findOneBy(
-            [
-                'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-                'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
-            ]
-        );
+        $selection = $this->container->get(SelectionRepository::class)->findOneBy([
+            'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
+            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+        ]);
 
         if (!$selection) {
             throw new UserError('Cant find the selection');
@@ -218,12 +214,10 @@ class ProposalMutation implements ContainerAwareInterface
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
             new Message(
-                json_encode(
-                    [
-                        'proposalId' => $proposal->getId(),
-                        'date' => new \DateTime(),
-                    ]
-                )
+                json_encode([
+                    'proposalId' => $proposal->getId(),
+                    'date' => new \DateTime(),
+                ])
             )
         );
 
@@ -240,12 +234,10 @@ class ProposalMutation implements ContainerAwareInterface
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
 
-        $selection = $this->container->get(SelectionRepository::class)->findOneBy(
-            [
-                'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-                'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
-            ]
-        );
+        $selection = $this->container->get(SelectionRepository::class)->findOneBy([
+            'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
+            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+        ]);
 
         if (!$selection) {
             throw new UserError('Cant find the selection');
@@ -269,17 +261,15 @@ class ProposalMutation implements ContainerAwareInterface
         string $proposalId,
         string $stepId,
         User $user,
-        string $statusId = null
+        ?string $statusId = null
     ): array {
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
 
-        $selection = $this->container->get(SelectionRepository::class)->findOneBy(
-            [
-                'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-                'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
-            ]
-        );
+        $selection = $this->container->get(SelectionRepository::class)->findOneBy([
+            'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
+            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+        ]);
         if ($selection) {
             throw new UserError('Already selected');
         }
@@ -303,12 +293,10 @@ class ProposalMutation implements ContainerAwareInterface
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
             new Message(
-                json_encode(
-                    [
-                        'proposalId' => $proposal->getId(),
-                        'date' => new \DateTime(),
-                    ]
-                )
+                json_encode([
+                    'proposalId' => $proposal->getId(),
+                    'date' => new \DateTime(),
+                ])
             )
         );
         // Synchronously index
@@ -432,16 +420,12 @@ class ProposalMutation implements ContainerAwareInterface
             $proposal->setStatus($defaultStatus);
         }
 
-        $form = $this->formFactory->create(
-            ProposalType::class,
-            $proposal,
-            [
-                'proposalForm' => $proposalForm,
-                'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
-            ]
-        );
+        $form = $this->formFactory->create(ProposalType::class, $proposal, [
+            'proposalForm' => $proposalForm,
+            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
+        ]);
 
-        $this->logger->info('createProposal: '.json_encode($values, true));
+        $this->logger->info('createProposal: ' . json_encode($values, true));
         $form->submit($values);
 
         if (!$form->isValid()) {
@@ -471,7 +455,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-        public function changeContent(Argument $input, $viewer): array
+    public function changeContent(Argument $input, $viewer): array
     {
         $viewer = $this->preventNullableViewer($viewer);
         $values = $input->getArrayCopy();
@@ -512,14 +496,10 @@ class ProposalMutation implements ContainerAwareInterface
         $values = $this->fixValues($values, $proposalForm);
 
         /** @var Form $form */
-        $form = $this->formFactory->create(
-            ProposalAdminType::class,
-            $proposal,
-            [
-                'proposalForm' => $proposalForm,
-                'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
-            ]
-        );
+        $form = $this->formFactory->create(ProposalAdminType::class, $proposal, [
+            'proposalForm' => $proposalForm,
+            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
+        ]);
 
         if (!$viewer->isAdmin()) {
             if (isset($values['author'])) {
@@ -531,7 +511,7 @@ class ProposalMutation implements ContainerAwareInterface
             $form->remove('author');
         }
 
-        $this->logger->info(__METHOD__.' : '.var_export($values, true));
+        $this->logger->info(__METHOD__ . ' : ' . var_export($values, true));
         $form->submit($values, false);
 
         if (!$form->isValid()) {
@@ -549,15 +529,12 @@ class ProposalMutation implements ContainerAwareInterface
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_CREATE;
         } else {
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
-            $messageData['date'] = $proposal->getUpdatedAt();
+            $messageData['date'] = $proposal->getUpdatedAt()->format('Y-m-d H:i:s');
         }
 
         $this->container
             ->get('swarrot.publisher')
-            ->publish(
-                $proposalQueue,
-                new Message(json_encode($messageData))
-            );
+            ->publish($proposalQueue, new Message(json_encode($messageData)));
 
         // Synchronously index draft proposals being publish
         $indexer = $this->container->get(Indexer::class);
@@ -606,16 +583,16 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $errors = [];
         foreach ($form->getErrors() as $error) {
-            $this->logger->error(__METHOD__.' : '.$error->getMessage());
+            $this->logger->error(__METHOD__ . ' : ' . $error->getMessage());
             $this->logger->error(
-                __METHOD__.
-                ' : '.
-                $form->getName().
-                ' '.
-                'Extra data: '.
-                implode('', $form->getExtraData())
+                __METHOD__ .
+                    ' : ' .
+                    $form->getName() .
+                    ' ' .
+                    'Extra data: ' .
+                    implode('', $form->getExtraData())
             );
-            $errors[] = (string)$error->getMessage();
+            $errors[] = (string) $error->getMessage();
         }
         if (!empty($errors)) {
             throw new UserErrors($errors);
