@@ -1,9 +1,21 @@
 /*eslint-disable */
+import 'core-js/es/map';
+import 'core-js/es/set';
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import 'raf/polyfill';
 import * as moment from 'moment';
 import 'moment-timezone';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'url-search-params-polyfill';
+import 'moment/locale/fr';
+import 'moment/locale/nl';
+import 'moment/locale/en-gb';
+import 'moment/locale/es';
+import 'moment/locale/de';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -43,10 +55,8 @@ if (locale) {
       break;
   }
 
-  import(`moment/locale/${localeMoment}`).then(() => {
-    moment.locale(localeMoment);
-    moment.tz.setDefault(timeZone);
-  });
+  moment.locale(localeMoment);
+  moment.tz.setDefault(timeZone);
 }
 
 window.__SERVER__ = false;
