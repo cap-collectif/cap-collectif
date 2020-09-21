@@ -23,7 +23,7 @@ class ProposalsUserVotesPage extends React.Component<Props> {
               id={
                 project.type
                   ? getVotePageLabelByType(project.type.title, 'project.votes.title')
-                  : 'project.supports.title'
+                  : 'project.votes.title'
               }
             />
           </h1>
