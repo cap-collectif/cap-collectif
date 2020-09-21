@@ -1,21 +1,10 @@
 /*eslint-disable */
-import 'core-js/es/map';
-import 'core-js/es/set';
-import 'react-app-polyfill/ie9';
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
-import 'raf/polyfill';
+import 'core-js/es/object';
 import * as moment from 'moment';
 import 'moment-timezone';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'url-search-params-polyfill';
-import 'moment/locale/fr';
-import 'moment/locale/nl';
-import 'moment/locale/en-gb';
-import 'moment/locale/es';
-import 'moment/locale/de';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -55,8 +44,21 @@ if (locale) {
       break;
   }
 
-  moment.locale(localeMoment);
-  moment.tz.setDefault(timeZone);
+  // Quick way to detect IE11 as it also needs Intl polyfills
+  if (!Intl.PluralRules) {
+    require('moment/locale/fr');
+    require('moment/locale/nl');
+    require('moment/locale/en-gb');
+    require('moment/locale/es');
+    require('moment/locale/de');
+    moment.locale(localeMoment);
+    moment.tz.setDefault(timeZone);
+  } else {
+    import(`moment/locale/${localeMoment}`).then(() => {
+      moment.locale(localeMoment);
+      moment.tz.setDefault(timeZone);
+    });
+  }
 }
 
 window.__SERVER__ = false;

@@ -1,6 +1,5 @@
 /* eslint-disable */
 import 'babel-polyfill';
-import 'whatwg-fetch';
 global['fetch'] = require('fetch-cookie/node-fetch')(require('node-fetch')); // Allow fetch to use cookies
 
 // In development you can use, if you prefer:
