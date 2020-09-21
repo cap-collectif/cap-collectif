@@ -33,8 +33,6 @@ const Address = ({
   const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true);
   const intl = useIntl();
 
-  const onErrorGeolocation = () => setHasLocationAuthorize(false);
-
   const dispatchLocationWarning = () => {
     FluxDispatcher.dispatch({
       actionType: UPDATE_ALERT,
@@ -55,15 +53,18 @@ const Address = ({
   };
 
   const getLocation = () => {
-    if (hasLocationAuthorize) {
-      window.navigator.geolocation.getCurrentPosition(position => {
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+        setHasLocationAuthorize(true);
         if (getPosition) {
           getPosition(position.coords.latitude, position.coords.longitude);
         }
-      }, onErrorGeolocation);
-    } else {
-      dispatchLocationWarning();
-    }
+      },
+      () => {
+        setHasLocationAuthorize(false);
+        dispatchLocationWarning();
+      },
+    );
   };
 
   const handleSelect = (address: string) => {
@@ -90,13 +91,6 @@ const Address = ({
       })
       .catch(error => console.error('Error', error));
   };
-
-  React.useEffect(() => {
-    window.navigator.geolocation.getCurrentPosition(
-      () => setHasLocationAuthorize(true),
-      () => setHasLocationAuthorize(false),
-    );
-  }, []);
 
   return (
     <PlacesAutocomplete
@@ -133,8 +127,7 @@ const Address = ({
                 type="button"
                 onClick={e => {
                   e.preventDefault();
-                  if (hasLocationAuthorize) getLocation();
-                  else dispatchLocationWarning();
+                  getLocation();
                 }}>
                 {hasLocationAuthorize ? (
                   <Icon name={ICON_NAME.locationTarget} size={16} color={colors.darkGray} />
