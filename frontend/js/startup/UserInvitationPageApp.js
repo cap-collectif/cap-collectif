@@ -9,7 +9,6 @@ import Loader from '~ui/FeedbacksIndicators/Loader';
 
 export type UserInvitationPageAppProps = {|
   +email: string,
-  +logo: string,
   +token: string,
 |};
 
@@ -25,6 +24,9 @@ export default (propsComponent: Props) => (
           siteColors {
             ...UserInvitationPage_colors
           }
+          siteImage(keyname: "image.logo") {
+            ...UserInvitationPage_logo
+          }
         }
       `}
       variables={{}}
@@ -37,8 +39,15 @@ export default (propsComponent: Props) => (
       }) => {
         if (error) return graphqlError;
 
-        if (props) {
-          return <UserInvitationPage query={props} colors={props.siteColors} {...propsComponent} />;
+        if (props && props.siteImage && props.siteColors) {
+          return (
+            <UserInvitationPage
+              query={props}
+              colors={props.siteColors}
+              logo={props.siteImage}
+              {...propsComponent}
+            />
+          );
         }
 
         return <Loader />;

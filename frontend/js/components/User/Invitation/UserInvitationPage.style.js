@@ -44,7 +44,8 @@ export const LogoContainer: StyledComponent<
   background-color: ${props => props.bgColor};
 
   img {
-    max-height: 80px;
+    max-width: 300px;
+    max-height: 130px;
     z-index: 1;
   }
 
@@ -56,6 +57,8 @@ export const LogoContainer: StyledComponent<
 
     img {
       height: 80px;
+      max-height: 80px;
+      max-width: initial;
     }
   }
 `;
@@ -67,8 +70,7 @@ export const Symbols: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 100%;
   height: 100%;
   background-image: url("${baseUrl}/image/pattern-triangle.png");
-  opacity: 0.1;
-  background-size: auto;
+  background-size: 10%;
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     display: none;

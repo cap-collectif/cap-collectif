@@ -11,6 +11,7 @@ import RegistrationForm, { form } from '~/components/User/Registration/Registrat
 import SubmitButton from '~/components/Form/SubmitButton';
 import type { UserInvitationPage_query } from '~relay/UserInvitationPage_query.graphql';
 import type { UserInvitationPage_colors } from '~relay/UserInvitationPage_colors.graphql';
+import type { UserInvitationPage_logo } from '~relay/UserInvitationPage_logo.graphql';
 
 type StateProps = {|
   +organizationName: string,
@@ -31,17 +32,18 @@ type Props = {|
   ...UserInvitationPageAppProps,
   query: UserInvitationPage_query,
   colors: UserInvitationPage_colors,
+  logo: UserInvitationPage_logo,
 |};
 
 export const UserInvitationPage = ({
   email,
   onSubmit,
   organizationName,
-  logo,
   token,
   submitting,
   query,
   colors,
+  logo,
   defaultColor: { defaultPrimaryColor, defaultColorText },
 }: Props) => {
   const primaryColor =
@@ -78,7 +80,7 @@ export const UserInvitationPage = ({
 
       <LogoContainer bgColor={primaryColor}>
         <Symbols />
-        <img src={logo} alt={`logo ${organizationName}`} />
+        {logo.media?.url && <img src={logo.media.url} alt={`logo ${organizationName}`} />}
       </LogoContainer>
     </Container>
   );
@@ -112,6 +114,13 @@ export default createFragmentContainer(UserInvitationPageConnected, {
     fragment UserInvitationPage_colors on SiteColor @relay(plural: true) {
       keyname
       value
+    }
+  `,
+  logo: graphql`
+    fragment UserInvitationPage_logo on SiteImage {
+      media {
+        url(format: "reference")
+      }
     }
   `,
 });
