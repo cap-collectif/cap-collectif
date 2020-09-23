@@ -41,6 +41,7 @@ export const MapContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     height: 350px;
     ${MAIN_BORDER_RADIUS};
     margin-right: 10px;
+    z-index: 0;
   }
 
   .fields {

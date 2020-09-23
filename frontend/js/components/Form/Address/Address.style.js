@@ -82,7 +82,7 @@ export const getStyleSearchBarAddress = (side: 'left' | 'right' = 'left') => css
   top: 15px;
   left: ${side === 'left' ? '15px' : 'initial'};
   right: ${side === 'right' ? '15px' : 'initial'};
-  z-index: 400;
+  z-index: 1;
 
   input {
     width: 300px;

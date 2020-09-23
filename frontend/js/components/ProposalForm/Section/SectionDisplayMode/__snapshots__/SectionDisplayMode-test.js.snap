@@ -228,11 +228,6 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
             }
             className="map"
             doubleClickZoom={false}
-            style={
-              Object {
-                "zIndex": 1,
-              }
-            }
             zoom={10}
             zoomControl={false}
           >

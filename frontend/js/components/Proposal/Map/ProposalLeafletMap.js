@@ -211,6 +211,7 @@ export const ProposalLeafletMap = ({
         maxZoom={18}
         style={{
           height: isMobile ? '100vw' : '50vw',
+          zIndex: 0,
         }}
         zoomControl={false}
         ref={mapRef}

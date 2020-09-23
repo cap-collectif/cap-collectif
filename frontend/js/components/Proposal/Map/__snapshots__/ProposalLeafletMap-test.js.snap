@@ -30,6 +30,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     style={
       Object {
         "height": "50vw",
+        "zIndex": 0,
       }
     }
     tap={true}
@@ -229,6 +230,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     style={
       Object {
         "height": "50vw",
+        "zIndex": 0,
       }
     }
     tap={true}

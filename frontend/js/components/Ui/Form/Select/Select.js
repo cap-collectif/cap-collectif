@@ -10,7 +10,7 @@ const Ul = styled.ul.attrs({
   position: absolute;
   padding: 0;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   border-radius: 4px;
   border: 1px solid ${colors.borderColor};
