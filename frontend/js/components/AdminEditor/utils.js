@@ -55,7 +55,7 @@ export function insertAtomicBlock(
 /**
  * Function returns collection of currently selected blocks.
  */
-export function getSelectedBlocksMap(editorState: EditorState): Object {
+export function getSelectedBlocksMap(editorState: typeof EditorState): Object {
   const selectionState = editorState.getSelection();
   const contentState = editorState.getCurrentContent();
   const startKey = selectionState.getStartKey();

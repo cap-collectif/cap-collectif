@@ -16,7 +16,7 @@ import {
 import { createFragmentContainer, graphql } from 'react-relay';
 import { formValueSelector, arrayMove } from 'redux-form';
 import colors from '~/utils/colors';
-import type { GlobalState } from '~/types';
+import type { GlobalState, Dispatch } from '~/types';
 import ProjectStepAdminItem from './ProjectStepAdminItem';
 import { NoStepsPlaceholder } from '../Form/ProjectAdminForm.style';
 import type { ProjectStepAdminList_project } from '~relay/ProjectStepAdminList_project.graphql';

@@ -33,9 +33,7 @@ export const DialogBackdrop: ComponentType<DialogBackdropProps> = styled('div').
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
-type DialogWrapperProps = DialogState & {
-  role: string,
-};
+type DialogWrapperProps = { ...DialogState, role: string };
 
 export const DialogWrapper: ComponentType<DialogWrapperProps> = styled('div')`
   ${hidden}
@@ -65,9 +63,7 @@ export function useDialogState(initialState: boolean = false): DialogState {
   };
 }
 
-type DialogProps = DialogState & {
-  children?: Node,
-};
+type DialogProps = {| ...DialogState, children?: Node |};
 
 function Dialog({ children, ...rest }: DialogProps) {
   return (

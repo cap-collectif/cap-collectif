@@ -6,10 +6,11 @@ import { useDialogState, type DialogState } from './Dialog';
 
 type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 
-export type PopoverState = DialogState & {
+export type PopoverState = {|
+  ...DialogState,
   gutter?: number,
   placement?: PopoverPlacement,
-};
+|};
 
 type PopoverWrapperProps = {
   visible: boolean,
@@ -48,9 +49,10 @@ export function usePopoverState(
   return { ...dialog, ...popoverState };
 }
 
-type PopoverProps = PopoverState & {
+type PopoverProps = {|
+  ...PopoverState,
   children?: Node,
-};
+|};
 
 export function Popover({ children, ...rest }: PopoverProps) {
   const { visible, hide } = rest;
@@ -79,6 +81,7 @@ export function Popover({ children, ...rest }: PopoverProps) {
   }, [visible, hide]);
 
   return (
+    // $FlowFixMe To rework when WYSIWYG development restarts
     <PopoverWrapper ref={node} {...rest}>
       {visible && children}
     </PopoverWrapper>

@@ -10,7 +10,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm, { form } from './RegistrationForm';
 import LoginSocialButtons from '../Login/LoginSocialButtons';
 import { closeRegistrationModal, hideChartModal } from '~/redux/modules/user';
-import type { State } from '~/types';
+import type { Dispatch } from '~/types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import type { RegistrationModal_query } from '~relay/RegistrationModal_query.graphql';
 
@@ -123,16 +123,13 @@ const mapStateToProps = state => ({
   charterBody: state.default.parameters['charter.body'],
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onClose: () => dispatch(closeRegistrationModal()),
   onSubmit: () => dispatch(submit(form)),
   onCloseChart: () => dispatch(hideChartModal()),
 });
 
-const RegistrationModalConnected = connect<Props, State, _, StateProps, _, _>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(RegistrationModal);
+const RegistrationModalConnected = connect(mapStateToProps, mapDispatchToProps)(RegistrationModal);
 
 export default createFragmentContainer(RegistrationModalConnected, {
   query: graphql`

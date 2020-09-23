@@ -11,7 +11,7 @@ import CloseButton from '~/components/Form/CloseButton';
 import DistrictAdminFields from '~/components/District/DistrictAdminFields';
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
 import { getTranslation, handleTranslationChange } from '~/services/Translation';
-import type { District, GlobalState } from '~/types';
+import type { District, GlobalState, Dispatch } from '~/types';
 import CreateProjectDistrictMutation from '~/mutations/CreateProjectDistrictMutation';
 import UpdateProjectDistrictMutation from '~/mutations/UpdateProjectDistrictMutation';
 import type { ProjectDistrictForm_district } from '~relay/ProjectDistrictForm_district.graphql';

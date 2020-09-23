@@ -182,7 +182,9 @@ const form = reduxForm({
   onSubmit,
 })(ProposalFusionForm);
 
-const container = connect(mapStateToProps, { onProjectChange: change })(injectIntl(form));
+const container = connect(mapStateToProps, {
+  onProjectChange: (change: (field: string, value: any) => void),
+})(injectIntl(form));
 
 export default createFragmentContainer(container, {
   query: graphql`

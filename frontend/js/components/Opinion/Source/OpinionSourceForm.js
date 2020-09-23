@@ -6,14 +6,14 @@ import { Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError, clearSubmitErrors } from 'redux-form';
 import renderComponent from '../../Form/Field';
-import { isUrl } from '../../../services/Validator';
-import FluxDispatcher from '../../../dispatchers/AppDispatcher';
-import AddSourceMutation from '../../../mutations/AddSourceMutation';
-import ChangeSourceMutation from '../../../mutations/ChangeSourceMutation';
-import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
+import { isUrl } from '~/services/Validator';
+import FluxDispatcher from '~/dispatchers/AppDispatcher';
+import AddSourceMutation from '~/mutations/AddSourceMutation';
+import ChangeSourceMutation from '~/mutations/ChangeSourceMutation';
+import { hideSourceCreateModal, hideSourceEditModal } from '~/redux/modules/opinion';
 import type { OpinionSourceForm_source } from '~relay/OpinionSourceForm_source.graphql';
 import type { OpinionSourceForm_sourceable } from '~relay/OpinionSourceForm_sourceable.graphql';
-import type { State } from '../../../types';
+import type { State } from '~/types';
 
 type SourceCategory = {
   title: ?string,
@@ -167,8 +167,8 @@ class OpinionSourceForm extends React.Component<Props> {
             </option>
           )}
           {sourceable.availableSourceCategories &&
-            // $FlowFixMe
             sourceable.availableSourceCategories
+              // $FlowFixMe
               .filter(isSourceCategoryTranslated)
               .map(category => (
                 <option key={category.id} value={category.id}>

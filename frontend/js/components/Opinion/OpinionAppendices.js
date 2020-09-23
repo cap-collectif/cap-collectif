@@ -4,10 +4,14 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionAppendix from './OpinionAppendix';
 import type { OpinionAppendices_opinion } from '~relay/OpinionAppendices_opinion.graphql';
 
-type Props = { opinion: OpinionAppendices_opinion };
+type Props = {| opinion: {| ...OpinionAppendices_opinion, __typename: 'Version' | 'Opinion' |} |};
 
-const getAppendices = (opinion: OpinionAppendices_opinion) => {
+const getAppendices = (opinion: {
+  ...OpinionAppendices_opinion,
+  __typename: 'Version' | 'Opinion',
+}) => {
   if (opinion.__typename === 'Opinion') {
+    // $FlowFixMe this is on rely side
     return opinion.appendices;
   }
   return [];

@@ -47,13 +47,7 @@ declare module "react-redux" {
     getWrappedInstance(): React$ElementRef<WC>;
   }
 
-  declare type Dispatch<A> = (action: A) => A;
 
-  declare type MapStateToProps<-S, -OP, +SP> = (state: S, ownProps: OP) => SP;
-  declare type MapDispatchToPropsFn<A, -OP, +DP> = (
-    dispatch: Dispatch<A>,
-    ownProps: OP,
-  ) => DP;
 
   // The connector function actaully perfoms the wrapping,
   // returning a connected component.

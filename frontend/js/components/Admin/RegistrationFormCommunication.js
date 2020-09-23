@@ -1,19 +1,19 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Field, formValueSelector, reduxForm, SubmissionError} from 'redux-form';
+import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import styled from "styled-components";
-import type { StyledComponent } from "styled-components";
+import styled from 'styled-components';
+import type { StyledComponent } from 'styled-components';
 import type { RegistrationFormCommunication_registrationForm } from '~relay/RegistrationFormCommunication_registrationForm.graphql';
-import type {FeatureToggles, State} from '../../types';
-import LanguageButtonContainer from "~/components/LanguageButton/LanguageButtonContainer";
-import renderInput from "~/components/Form/Field";
+import type { FeatureToggles, State, Dispatch } from '../../types';
+import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer';
+import renderInput from '~/components/Form/Field';
 import UpdateRegistrationFormCommunicationMutation from '~/mutations/UpdateRegistrationFormCommunicationMutation';
-import {getTranslation, handleTranslationChange} from "~/services/Translation";
-import AlertForm from "~/components/Alert/AlertForm";
+import { getTranslation, handleTranslationChange } from '~/services/Translation';
+import AlertForm from '~/components/Alert/AlertForm';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -29,8 +29,8 @@ type FormValues = {|
   topTextDisplayed: boolean,
   topText: string,
   bottomTextDisplayed: boolean,
-  bottomText: string
-|}
+  bottomText: string,
+|};
 
 const Title: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
@@ -45,15 +45,15 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const translation = {
     locale: props.currentLanguage,
     topText: values.topText,
-    bottomText: values.bottomText
+    bottomText: values.bottomText,
   };
   const input = {
     translations: handleTranslationChange(
-      (props.registrationForm && props.registrationForm.translations) ?
-        props.registrationForm.translations :
-        [],
+      props.registrationForm && props.registrationForm.translations
+        ? props.registrationForm.translations
+        : [],
       translation,
-      props.currentLanguage
+      props.currentLanguage,
     ),
     topTextDisplayed: values.topTextDisplayed,
     bottomTextDisplayed: values.bottomTextDisplayed,
@@ -116,7 +116,9 @@ export class RegistrationFormCommunication extends Component<Props> {
               component={renderInput}
               id="display-message-below-form"
             />
-            {useBottomText && <Field name="bottomText" type="admin-editor" component={renderInput} />}
+            {useBottomText && (
+              <Field name="bottomText" type="admin-editor" component={renderInput} />
+            )}
             <div className="box-content__toolbar btn-toolbar">
               <Button type="submit" disabled={submitting} className="btn btn-primary">
                 {submitting ? (
@@ -129,7 +131,7 @@ export class RegistrationFormCommunication extends Component<Props> {
                 submitting={submitting}
                 submitSucceeded={submitSucceeded}
                 submitFailed={submitFailed}
-                />
+              />
             </div>
           </form>
         </div>
@@ -146,9 +148,7 @@ const form = reduxForm({
 
 const mapStateToProps = (state: State, { registrationForm }: Props) => {
   const translation = getTranslation(
-    (registrationForm && registrationForm.translations) ?
-      registrationForm.translations
-      : [],
+    registrationForm && registrationForm.translations ? registrationForm.translations : [],
     state.language.currentLanguage,
   );
 
@@ -162,8 +162,8 @@ const mapStateToProps = (state: State, { registrationForm }: Props) => {
     },
     useTopText: formValueSelector(formName)(state, 'topTextDisplayed'),
     useBottomText: formValueSelector(formName)(state, 'bottomTextDisplayed'),
-    features: state.default.features
-  }
+    features: state.default.features,
+  };
 };
 
 const container = connect(mapStateToProps)(injectIntl(form));

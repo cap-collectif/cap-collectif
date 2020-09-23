@@ -241,11 +241,11 @@ function WysiwygEditor({
     insertImageDialog.show();
   }
 
-  function insertTable(size) {
+  function insertTable(size): Promise<void> | void {
     let selection = editorState.getSelection();
 
     if (!selection.isCollapsed()) {
-      return null;
+      return;
     }
     // don't insert a table within a table
     if (
@@ -254,7 +254,7 @@ function WysiwygEditor({
         .getBlockForKey(selection.getAnchorKey())
         .getType() === 'table'
     ) {
-      return null;
+      return;
     }
 
     const defaultCellStyle = {
@@ -318,7 +318,7 @@ function WysiwygEditor({
     insertTableDialog.show();
   }
 
-  async function insertImage(data) {
+  async function insertImage(data): Promise<void> {
     const img = await getImageInitialSize(data.src);
     data.width = img.width;
     data.height = img.height;

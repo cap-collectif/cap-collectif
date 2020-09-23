@@ -1,5 +1,5 @@
 [version]
-0.118.0
+0.134.0
 
 [lints]
 all=warn
@@ -15,13 +15,30 @@ unnecessary-optional-chain=off
 .*/node_modules/react-beautiful-dnd/src/state/position.js
 .*/node_modules/react-beautiful-dnd/src/state/publish-while-dragging-in-virtual/index.js
 .*/node_modules/react-beautiful-dnd/src/state/reducer.js
+.*/node_modules/react-beautiful-dnd/src/state/store-types.js
+.*/node_modules/react-beautiful-dnd/src/view/event-bindings/bind-events.js
+.*/node_modules/react-beautiful-dnd/src/view/use-sensor-marshal/use-sensor-marshal.js
+.*/node_modules/react-beautiful-dnd/src/view/drag-drop-context/app.jsx
+.*/node_modules/react-beautiful-dnd/src/view/context/store-context.js
+.*/node_modules/react-beautiful-dnd/src/state/middleware/style.js
+.*/node_modules/react-beautiful-dnd/src/state/middleware/scroll-listener.js
+.*/node_modules/react-beautiful-dnd/src/state/middleware/responders/responders-middleware.js
+.*/node_modules/react-beautiful-dnd/src/state/middleware/pending-drop.js
+.*/node_modules/react-beautiful-dnd/src/state/middleware/focus.js
+.*/node_modules/react-beautiful-dnd/src/state/middleware/lift.js
 .*/node_modules/react-simple-code-editor/lib/index.js.flow
 .*/node_modules/relay-compiler/transforms/RelayRelayDirectiveTransform.js.flow
-.*/node_modules/relay-runtime/store/StoreInspector.js.flow
-.*/node_modules/relay-runtime/store/RelayModernQueryExecutor.js.flow
-.*/node_modules/relay-runtime/util/createPayloadFor3DField.js.flow
+.*/node_modules/react-relay/ReactRelayPaginationContainer.js.flow
+.*/node_modules/relay-test-utils/RelayModernMockEnvironment.js.flow
 .*/node_modules/polished/lib/shorthands/position.js.flow
 .*/node_modules/immutable/dist/immutable.js
+
+; We need a massive relay upgrade
+[declarations] 
+.*/node_modules/relay-runtime/store/DataChecker.js.flow
+.*/node_modules/relay-runtime/store/RelayModernQueryExecutor.js.flow
+.*/node_modules/relay-runtime/store/RelayReferenceMarker.js.flow
+.*/node_modules/relay-runtime/util/createPayloadFor3DField.js.flow
 
 [ignore]
 ; ignore module source to prefer libdef
@@ -33,6 +50,8 @@ unnecessary-optional-chain=off
 .*/node_modules/fbjs/*
 .*/node_modules/draft-js/*
 .*/node_modules/draft-js-export-html/*
+.*/node_modules/redux-form/*
+.*/node_modules/react-dropzone/*
 ; ignore compiled files
 .*/public/*.js
 ; large dirs that are not imported
@@ -73,13 +92,9 @@ suppress_type=$FlowFixMe
 suppress_type=$FlowFixMeProps
 suppress_type=$FlowFixMeState
 
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(site=[a-z,_]*oss[a-z,_]*\\)?)\\)
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*oss[a-z,_]*\\)?)\\)?:? #[0-9]+
-suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
-suppress_comment= \\(.\\|\n\\)*\\$ExpectError
-
 emoji=true
 module.use_strict=true
+types_first=false
 
 module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=__generated__

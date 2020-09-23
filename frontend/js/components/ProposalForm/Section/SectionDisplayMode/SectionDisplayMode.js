@@ -7,6 +7,7 @@ import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { Panel } from 'react-bootstrap';
 import L from 'leaflet';
 import { Map, Marker, TileLayer, ZoomControl } from 'react-leaflet';
+import type { Dispatch } from '~/types';
 import viewChoice from './ViewChoice/ViewChoice';
 import {
   PanelHeader,

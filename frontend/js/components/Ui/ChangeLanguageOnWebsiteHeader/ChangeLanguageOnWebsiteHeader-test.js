@@ -11,9 +11,21 @@ describe('<ChangeLanguageOnWebsiteHeader />', () => {
     onClose: jest.fn(),
     defaultLanguage: 'en-GB',
     localeChoiceTranslations: [
-      {code: 'de-DE', message: "Möchten Sie die Seite in Ihrer Sprache anzeigen?", label: 'Weiter'},
-      {code: 'en-GB', message: "Do you want to consult the website in your language?", label: 'Continue'},
-      {code: 'fr-FR', message: "Voulez-vous consulter le site dans votre langue ?", label: 'Continuer'},
+      {
+        code: 'de-DE',
+        message: 'Möchten Sie die Seite in Ihrer Sprache anzeigen?',
+        label: 'Weiter',
+      },
+      {
+        code: 'en-GB',
+        message: 'Do you want to consult the website in your language?',
+        label: 'Continue',
+      },
+      {
+        code: 'fr-FR',
+        message: 'Voulez-vous consulter le site dans votre langue ?',
+        label: 'Continuer',
+      },
     ],
     languageList: [
       { translationKey: 'french', code: 'fr-FR' },
@@ -33,6 +45,7 @@ describe('<ChangeLanguageOnWebsiteHeader />', () => {
   it('should return null with a wrong defaultLanguage', () => {
     const wrapper = mount(<ChangeLanguageOnWebsiteHeader {...props} defaultLanguage="Dothraki" />);
     expect(wrapper).toMatchSnapshot();
+    // $FlowFixMe enzyme and styled-components have a type conflict
     expect(wrapper.contains(Content)).toBe(false);
   });
 });

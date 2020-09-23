@@ -41,7 +41,7 @@ type MapRef = {
         flyTo: (Array<number>, ?number) => void,
         panTo: (?Array<number> | null) => void,
         getPanes: () => { markerPane?: { children: Array<HTMLImageElement> } } | null,
-        removeLayer: L.Marker => void,
+        removeLayer: (typeof L.Marker) => void,
       },
     },
   },
@@ -115,7 +115,7 @@ const convertToGeoJsonStyle = (style: Style) => {
   return districtStyle || defaultDistrictStyle;
 };
 
-const setIcon = (element: { setIcon: (options: L.IconOptions) => void }) => {
+const setIcon = (element: { setIcon: (options: typeof L.IconOptions) => void }) => {
   element.setIcon(
     L.icon({
       iconUrl: CLOSED_MARKER,
@@ -135,7 +135,7 @@ const locationIcon = L.divIcon({
   iconSize: [48, 48],
 });
 
-let locationMarker: L.Marker = {};
+let locationMarker: typeof L.Marker = {};
 
 const flyToPosition = (mapRef: MapRef, lat: number, lng: number) => {
   if (mapRef.current) {

@@ -9,7 +9,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import CloseButton from '../../Form/CloseButton';
-import type { GlobalState, Uri } from '../../../types';
+import type { GlobalState, Uri, Dispatch } from '../../../types';
 import type {
   FranceConnectConfigurationModal_ssoConfiguration,
   SSOEnvironment,

@@ -1,46 +1,3 @@
-// @flow
-import type { Dispatch } from 'redux';
-
-type ReduxFormFields = {|
-  _isFieldArray: boolean,
-  forEach(callback: Function): void,
-  get(index: number): any,
-  getAll(): Array<any>,
-  insert(index: number, value: any): void,
-  length: number,
-  map(callback: Function): Array<any>,
-  move(from: number, to: number): void,
-  name: string,
-  pop(): any,
-  push(value: any): void,
-  reduce(callback: Function): any,
-  remove(index: number): void,
-  removeAll(): void,
-  shift(): any,
-  some(callback: Function): boolean,
-  swap(from: number, to: number): void,
-  unshift(value: any): void
-|}
-
-// FlowTypes exported by redux-form are not exact right now, so I added this one
-// to be able to use exact types.
-type ReduxFormFieldArrayProps = {|
-    fields: ReduxFormFields,
-    meta: {
-      dirty: boolean,
-      error?: any,
-      form: string,
-      invalid: boolean,
-      pristine: boolean,
-      submitting: boolean,
-      submitFailed: boolean,
-      touched: boolean,
-      valid: boolean,
-      warning?: any
-    },
-    ref?: (ref: ?React.Component<*, *>) => void
-  |};
-
 type ReduxFormFormProps = {|
   anyTouched: boolean,
   array: {
@@ -86,436 +43,26 @@ type ReduxFormFormProps = {|
   untouch: (...fields: string[]) => void,
   valid: boolean,
   warning: any
-|}
+  |}
 
-
-type GetFormErrorInterface = (state: any) => any
-
-type OnChangeFunction = (
-  values: Values,
-  dispatch: Dispatch<*>,
-  props: Object,
-  previousValues: Values,
-) => void
-type OnSubmitFail = (
-  errors: ?Object,
-  dispatch: Dispatch<*>,
-  submitError: ?any,
-  props: Object,
-) => void
-type OnSubmitSuccess = (
-  result: ?any,
-  dispatch: Dispatch<*>,
-  props: Object,
-) => void
-type OnSubmitFunction = (
-  values: Values,
-  dispatch: Dispatch<*>,
-  props: Object,
-) => Promise<*> | void
-
-type ReduxFormEvent = {
-  preventDefault(): void,
-  stopPropagation(): void,
-  target: {
-    value: any,
-    type: string,
-    options?: Array<Option>,
-    checked?: boolean,
-    files?: Array<Object>
-  },
-  dataTransfer: {
-    files: Array<Object>,
-    getData: { (key: string): any },
-    setData: { (key: string, data: any): void }
-  },
-  nativeEvent?: {
-    text?: string
-  }
-};
-
-type Validator = (
-  value: any,
-  allValues: Object,
-  props: Object,
-  name: string,
-) => ?any
-
-interface Structure<M, L> {
-  allowsArrayErrors: boolean;
-  empty: M;
-  emptyList: L;
-
-  getIn(state: any, field: string): any;
-
-  setIn(state: any, field: string, value: any): any;
-
-  deepEqual(a: any, b: any): boolean;
-
-  deleteIn(state: any, field: string): any;
-
-  forEach(list: L, callback: { (item: any, index: number): void }): void;
-
-  fromJS(value: any): any;
-
-  keys(value: M): L;
-
-  size(array: L): number;
-
-  some(list: L, callback: { (item: any, index: number): boolean }): boolean;
-
-  splice(array: L, index: number, removeNum: number, value: any): L;
-
-  toJS(value: M): any;
-}
-
-type FieldType = 'Field' | 'FieldArray'
-
-type Values = any
-
-type GetFormState = { (state: any): any }
-
-type Option = {
-  selected: boolean,
-  value: any
-}
-
-/*
-type Context = {
-  form: string,
-  getFormState: GetFormState,
-  asyncValidate: { (name: ?string, value: ?any, trigger: 'blur' | 'change'): Promise<*> },
-  getValues: { (): Object },
-  sectionPrefix?: string,
-  register: (
-    name: string,
-    type: string,
-    getValidator: ?() => ?(Validator | Validator[]),
-    getWarner: ?() => ?(Validator | Validator[]),
-  ) => void,
-  unregister: (name: string) => void,
-  registerInnerOnSubmit: (innerOnSubmit: Function) => void,
-  focus: (name: string) => void,
-  change: (name: string, value: any) => void,
-  blur: (name: string, value: any) => void
-}*/
-
-type ReactContext = {
-  _reduxForm: any //Context
-}
-
-type GetFormNamesInterface<L> = (state: any) => L
-
-type Fields = {
-  _isFieldArray: boolean,
-  forEach(callback: Function): void,
-  get(index: number): any,
-  getAll(): Array<any>,
-  insert(index: number, value: any): void,
-  length: number,
-  map(callback: Function): Array<any>,
-  move(from: number, to: number): void,
-  name: string,
-  pop(): any,
-  push(value: any): void,
-  reduce(callback: Function): any,
-  remove(index: number): void,
-  removeAll(): void,
-  shift(): any,
-  some(callback: Function): boolean,
-  swap(from: number, to: number): void,
-  unshift(value: any): void
-}
-
-export type ArrayInsertAction = {
-  type: '@@redux-form/ARRAY_INSERT',
-  meta: { form: string, field: string, index: number },
-  payload: any
-}
-export type ArrayInsert = {
-  (form: string, field: string, index: number, value: any): ArrayInsertAction
-}
-export type ArrayMoveAction = {
-  type: '@@redux-form/ARRAY_MOVE',
-  meta: { form: string, field: string, from: number, to: number }
-}
-export type ArrayMove = {
-  (form: string, field: string, from: number, to: number): ArrayMoveAction
-}
-export type ArrayPopAction = {
-  type: '@@redux-form/ARRAY_POP',
-  meta: { form: string, field: string }
-}
-export type ArrayPop = { (form: string, field: string): ArrayPopAction }
-export type ArrayPushAction = {
-  type: '@@redux-form/ARRAY_PUSH',
-  meta: { form: string, field: string },
-  payload: any
-}
-export type ArrayPush = {
-  (form: string, field: string, value: any): ArrayPushAction
-}
-export type ArrayRemoveAction = {
-  type: '@@redux-form/ARRAY_REMOVE',
-  meta: { form: string, field: string, index: number }
-}
-export type ArrayRemove = {
-  (form: string, field: string, index: number): ArrayRemoveAction
-}
-export type ArrayRemoveAllAction = {
-  type: '@@redux-form/ARRAY_REMOVE_ALL',
-  meta: { form: string, field: string }
-}
-export type ArrayRemoveAll = {
-  (form: string, field: string): ArrayRemoveAllAction
-}
-export type ArrayShiftAction = {
-  type: '@@redux-form/ARRAY_SHIFT',
-  meta: { form: string, field: string }
-}
-export type ArrayShift = { (form: string, field: string): ArrayShiftAction }
-export type ArraySpliceAction = {
-  type: '@@redux-form/ARRAY_SPLICE',
+// FlowTypes exported by redux-form are not exact right now, so I added this one
+// to be able to use exact types.
+type ReduxFormFieldArrayProps = {|
+  fields: ReduxFormFields,
   meta: {
+    dirty: boolean,
+    error?: any,
     form: string,
-    field: string,
-    index: number,
-    removeNum: number
+    invalid: boolean,
+    pristine: boolean,
+    submitting: boolean,
+    submitFailed: boolean,
+    touched: boolean,
+    valid: boolean,
+    warning?: any
   },
-  payload?: any
-}
-export type ArraySplice = {
-  (
-    form: string,
-    field: string,
-    index: number,
-    removeNum: number,
-    value: any,
-  ): ArraySpliceAction
-}
-export type ArraySwapAction = {
-  type: '@@redux-form/ARRAY_SWAP',
-  meta: { form: string, field: string, indexA: number, indexB: number }
-}
-export type ArraySwap = {
-  (form: string, field: string, indexA: number, indexB: number): ArraySwapAction
-}
-export type ArrayUnshiftAction = {
-  type: '@@redux-form/ARRAY_UNSHIFT',
-  meta: { form: string, field: string },
-  payload: any
-}
-export type ArrayUnshift = {
-  (form: string, field: string, value: any): ArrayUnshiftAction
-}
-export type AutofillAction = {
-  type: '@@redux-form/AUTOFILL',
-  meta: { form: string, field: string },
-  payload: any
-}
-export type Autofill = {
-  (form: string, field: string, value: any): AutofillAction
-}
-export type BlurAction = {
-  type: '@@redux-form/BLUR',
-  meta: { form: string, field: string, touch: boolean },
-  payload: any
-}
-export type Blur = {
-  (form: string, field: string, value: any, touch: boolean): BlurAction
-}
-export type ChangeAction = {
-  type: '@@redux-form/CHANGE',
-  meta: {
-    form: string,
-    field: string,
-    touch: ?boolean,
-    persistentSubmitErrors: ?boolean
-  },
-  payload: any
-}
-export type Change = {
-  (
-    form: string,
-    field: string,
-    value: any,
-    touch?: boolean,
-    persistentSubmitErrors?: boolean,
-  ): ChangeAction
-}
-export type ClearSubmitAction = {
-  type: '@@redux-form/CLEAR_SUBMIT',
-  meta: { form: string }
-}
-export type ClearSubmit = { (form: string): ClearSubmitAction }
-export type ClearSubmitErrorsAction = {
-  type: '@@redux-form/CLEAR_SUBMIT_ERRORS',
-  meta: { form: string }
-}
-export type ClearSubmitErrors = { (form: string): ClearSubmitErrorsAction }
-export type ClearAsyncErrorAction = {
-  type: '@@redux-form/CLEAR_ASYNC_ERROR',
-  meta: { form: string, field: string }
-}
-export type ClearAsyncError = {
-  (form: string, field: string): ClearAsyncErrorAction
-}
-// export type ClearFieldsAction = {
-//   type: string,
-//   meta: {
-//     form: string,
-//     keepTouched: boolean,
-//     persistentSubmitErrors: boolean,
-//     fields: string[]
-//   }
-// }
-// export type ClearFields = {
-//   (
-//     form: string,
-//     keepTouched: boolean,
-//     persistentSubmitErrors: boolean,
-//     ...fields: string[]
-//   ): ClearFieldsAction
-// }
-export type DestroyAction = { type: '@@redux-form/DESTROY', meta: { form: string[] } }
-export type Destroy = { (...forms: string[]): DestroyAction }
-export type FocusAction = {
-  type: '@@redux-form/FOCUS',
-  meta: { form: string, field: string }
-}
-export type Focus = { (form: string, field: string): FocusAction }
-export type InitializeAction = {
-  type: '@@redux-form/INITIALIZE',
-  meta: { form: string, keepDirty: boolean },
-  payload: Object
-}
-export type Initialize = {
-  (
-    form: string,
-    values: Object,
-    keepDirty: boolean,
-    otherMeta: Object,
-  ): InitializeAction
-}
-export type RegisterFieldAction = {
-  type: '@@redux-form/REGISTER_FIELD',
-  meta: { form: string },
-  payload: { name: string, type: FieldType }
-}
-export type RegisterField = {
-  (form: string, name: string, type: FieldType): RegisterFieldAction
-}
-export type ResetAction = { type: '@@redux-form/RESET', meta: { form: string } }
-export type Reset = { (form: string): ResetAction }
-export type StartAsyncValidationAction = {
-  type: '@@redux-form/START_ASYNC_VALIDATION',
-  meta: { form: string, field: string }
-}
-export type StartAsyncValidation = {
-  (
-    form: string,
-    field: string,
-    index: number,
-    value: any,
-  ): StartAsyncValidationAction
-}
-export type StartSubmitAction = {
-  type: '@@redux-form/START_SUBMIT',
-  meta: { form: string }
-}
-export type StartSubmit = { (form: string): StartSubmitAction }
-export type StopAsyncValidationAction = {
-  type: '@@redux-form/STOP_ASYNC_VALIDATION',
-  meta: { form: string },
-  payload: ?Object,
-  error: boolean
-}
-export type StopAsyncValidation = {
-  (form: string, errors: ?Object): StopAsyncValidationAction
-}
-export type StopSubmitAction = {
-  type: '@@redux-form/STOP_SUBMIT',
-  meta: { form: string },
-  payload: ?Object,
-  error: boolean
-}
-export type StopSubmit = { (form: string, errors: ?Object): StopSubmitAction }
-export type SubmitAction = {| type: '@@redux-form/SUBMIT', meta: { form: string } |}
-export type Submit = { (form: string): SubmitAction }
-export type SetSubmitFailedAction = {
-  type: '@@redux-form/SET_SUBMIT_FAILED',
-  meta: { form: string, fields: string[] },
-  error: true
-}
-export type SetSubmitFailed = {
-  (form: string, ...fields: string[]): SetSubmitFailedAction
-}
-export type SetSubmitSucceededAction = {
-  type: '@@redux-form/SET_SUBMIT_SUCCEEDED',
-  meta: { form: string, fields: string[] },
-  error: false
-}
-export type SetSubmitSucceeded = {
-  (form: string, ...fields: string[]): SetSubmitSucceededAction
-}
-export type TouchAction = {
-  type: '@@redux-form/TOUCH',
-  meta: { form: string, fields: string[] }
-}
-export type Touch = { (form: string, ...fields: string[]): TouchAction }
-export type UnregisterFieldAction = {
-  type: '@@redux-form/UNREGISTER_FIELD',
-  meta: { form: string },
-  payload: { name: string, destroyOnUnmount: boolean }
-}
-export type UnregisterField = {
-  (form: string, name: string, destroyOnUnmount: boolean): UnregisterFieldAction
-}
-export type UntouchAction = {
-  type: '@@redux-form/UNTOUCH',
-  meta: { form: string, fields: string[] }
-}
-export type Untouch = { (form: string, ...fields: string[]): UntouchAction }
-export type UpdateSyncErrorsAction = {
-  type: '@@redux-form/UPDATE_SYNC_ERRORS',
-  meta: { form: string },
-  payload: { syncErrors: Object, error: any }
-}
-export type UpdateSyncErrors = {
-  (form: string, syncErrors: Object, error: any): UpdateSyncErrorsAction
-}
-export type UpdateSyncWarningsAction = {
-  type: '@@redux-form/UPDATE_SYNC_WARNINGS',
-  meta: { form: string },
-  payload: { syncWarnings: Object, warning: any }
-}
-export type UpdateSyncWarnings = {
-  (form: string, syncWarnings: Object, warning: any): UpdateSyncWarningsAction
-}
-
-type ValidateFunction = (values: Values, props: Object) => Object
-
-type ReduxFormConfig = {
-  asyncBlurFields?: string[],
-  destroyOnUnmount?: boolean,
-  forceUnregisterOnUnmount?: boolean,
-  enableReinitialize?: boolean,
-  keepDirtyOnReinitialize?: boolean,
-  form?: string, // TODO mark as required
-  initialValues?: Values,
-  getFormState?: GetFormState,
-  onChange?: OnChangeFunction,
-  onSubmit?: OnSubmitFunction,
-  onSubmitFail?: OnSubmitFail,
-  onSubmitSuccess?: OnSubmitSuccess,
-  propNamespace?: string,
-  validate?: ValidateFunction,
-  warn?: ValidateFunction,
-  touchOnBlur?: boolean,
-  touchOnChange?: boolean,
-  persistentSubmitErrors?: boolean,
-  registeredFields?: any
-}
+  ref?: (ref: ?React.Component<*, *>) => void
+|};
 
 declare module 'redux-form' {
 
@@ -555,39 +102,46 @@ declare module 'redux-form' {
     UpdateSyncErrorsAction |
     UpdateSyncWarningsAction
     ;
-  // modified by @liinkiing and adapted from typescript definitions files (https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/redux-form/lib/reducer.d.ts)
-  // to allow usage of `formReducer.plugin` in `AppStore.js` and to reflect a more precise type than the default in flow typed
-  declare type FormStateMap = {
-    [formName: string]: FormState;
-  }
 
-  declare type FormState = {
-    registeredFields: RegisteredFieldState[];
-    fields?: { [name: string]: FieldState };
-    values?: { [fieldName: string]: any };
-    active?: string;
-    anyTouched?: boolean;
-    submitting?: boolean;
-    submitErrors?: { [fieldName: string]: string };
-    submitFailed?: boolean;
-  }
+  declare export type InputProps = {
+    name: string,
+    value: string | boolean,
+    valid: boolean,
+    invalid: boolean,
+    dirty: boolean,
+    pristine: boolean,
+    active: boolean,
+    touched: boolean,
+    visited: boolean,
+    autofilled: boolean,
+    error?: string,
+    onChange: (eventOrValue: SyntheticEvent<any> | string | boolean) => mixed,
+    onUpdate: (eventOrValue: SyntheticEvent<any>  | string | boolean) => mixed,
+    onBlur: (eventOrValue: SyntheticEvent<any>  | string | boolean) => mixed,
+    onDragStart: Function,
+    onDrop: Function,
+    onFocus: Function,
+  };
 
-  declare type RegisteredFieldState = {
-    name: string;
-    type: FieldType;
-  }
+  declare export type MetaProps = {
+    active: boolean,
+    autofilled: boolean,
+    asyncValidating: boolean,
+    dirty: boolean,
+    dispatch: Function,
+    error?: string,
+    invalid: boolean,
+    pristine: boolean,
+    submitting: boolean,
+    touched: boolean,
+    valid: boolean,
+    visited: boolean,
+  };
 
-  declare type FieldState = {
-    active?: boolean;
-    touched?: boolean;
-    visited?: boolean;
-  }
-  declare type Reducer<S = any, A = any> = (state: S | void, action: A) => S;
-
-  declare type FormReducer = Reducer<FormStateMap> & {
-    plugin(reducers: any): Reducer<FormStateMap>;
-  }
-  declare export var reducer: FormReducer;
+  declare export type FieldInputProps = {
+    input: InputProps,
+    meta: MetaProps,
+  };
 
   declare export type FieldProps = {
     input: {
@@ -623,198 +177,303 @@ declare module 'redux-form' {
     }
   };
 
-  declare export var Field: React.ComponentType<{
-    name: string,
-    component: React.ComponentType<*> | Function | string,
-    format?: ?(value: any, name: string) => ?string,
-    normalize?: (
-      value: any,
-      previousValue: any,
-      allValues: Object,
-      previousAllValues: Object,
-    ) => ?any,
-    onBlur?: (event: ReduxFormEvent, newValue: any, previousValue: any) => void,
-    onChange?: (event: ReduxFormEvent, newValue: any, previousValue: any) => void,
-    onDragStart?: (event: ReduxFormEvent) => void,
-    onDrop?: (event: ReduxFormEvent, newValue: any, previousValue: any) => void,
-    onFocus?: (event: ReduxFormEvent) => void,
-    parse?: (value: any, name: string) => any,
-    props?: Object,
-    validate?: Validator | Validator[],
-    warn?: Validator | Validator[],
-    withRef?: boolean
-  }>;
-  declare export var Fields: React.ComponentType<{
-    names: string[],
-    component: Function | React.ComponentType<*>,
-    format?: (value: any, name: string) => ?any,
-    parse?: (value: any, name: string) => ?any,
-    props?: Object,
-    withRef?: boolean
-  }>;
+  declare export type RegisteredField<T> = {
+    name: $Keys<T>,
+    type: string,
+  };
 
-  declare export type FieldArrayProps = {|
-    fields: Fields,
-    meta: {
-      dirty: boolean,
-      error?: any,
-      form: string,
-      invalid: boolean,
-      pristine: boolean,
-      submitting: boolean,
-      submitFailed: boolean,
-      touched: boolean,
-      valid: boolean,
-      warning?: any
+  declare export type FormState<T> = {
+    values: T,
+    initial: T,
+    registeredFields: Array<RegisteredField<T>>,
+  };
+
+  declare export type FormProps = {
+    active: string,
+    asyncValidate: (values: Object, dispatch: Function, props: Object) => Promise<void>,
+    asyncValidating: string | boolean,
+    destroyForm: Function,
+    dirty: boolean,
+    error: string,
+    fields: { [fieldName: string]: InputProps },
+    handleSubmit: (data: { [field: string]: string }) => void | Promise<any>,
+    initializeForm: (data:Object) => any,
+    invalid: boolean,
+    pristine: boolean,
+    resetForm: Function,
+    formKey: string,
+    submitting: boolean,
+    submitFailed: boolean,
+    touch: (...fields: Array<string>) => void,
+    touchAll: () => void,
+    untouch: (...fields: Array<string>) => void,
+    untouchAll: () => void,
+    valid: boolean,
+    values: Object
+  };
+
+  declare export type FormConfig = {
+    fields: Array<string>,
+    form: string,
+    alwaysAsyncValidate?: boolean,
+    asyncBlurFields?: Array<string>,
+    asyncValidate?: (values: Object, dispatch: Function, props: Object) => Promise<void>,
+    destroyOnUnmount?: boolean,
+    formKey?: string,
+    getFormState?: (state: Object, reduxMountPoint: string) => mixed,
+    initialValues?: { [field: string]: string },
+    onSubmit?: Function,
+    onSubmitFail?: Function,
+    onSubmitSuccess?: Function,
+    overwriteOnInitialValuesChange?: boolean,
+    propNamespace?: string,
+    readonly?: boolean,
+    reduxMountPoint?: String,
+    returnRejectedSubmitPromise?: boolean,
+    touchOnBlur?: boolean,
+    touchOnChange?: boolean,
+    validate?: (values:Object, props:Object) => Object
+  };
+
+  declare export type FormComponentProps = {
+    // State:
+    asyncValidating: boolean,   // true if async validation is running
+    dirty: boolean,             // true if any values are different from initialValues
+    error: any,                 // form-wide error from '_error' key in validation result
+    warning: any,               // form-wide warning from '_warning' key in validation result
+    invalid: boolean,           // true if there are any validation errors
+    initialized: boolean,       // true if the form has been initialized
+    pristine: boolean,          // true if the values are the same as initialValues
+    submitting: boolean,        // true if the form is in the process of being submitted
+    submitFailed: boolean,      // true if the form was submitted and failed for any reason
+    submitSucceeded: boolean,   // true if the form was successfully submitted
+    valid: boolean,             // true if there are no validation errors
+    // Actions:
+    array: {
+      insert: Function,          // function to insert a value into an array field
+      move: Function,            // function to move a value within an array field
+      pop: Function,             // function to pop a value off of an array field
+      push: Function,            // function to push a value onto an array field
+      remove: Function,          // function to remove a value from an array field
+      removeAll: Function,       // function to remove all the values from an array field
+      shift: Function,           // function to shift a value out of an array field
+      splice: Function,          // function to splice a value into an array field
+      swap: Function,            // function to swap values in an array field
     },
-    ref?: (ref: ?React.Component<*, *>) => void
-  |}
+    asyncValidate: Function,     // function to trigger async validation
+    blur: Function,              // action to mark a field as blurred
+    change: Function,            // action to change the value of a field
+    destroy: Function,           // action to destroy the form's data in Redux
+    dispatch: Function,          // the Redux dispatch action
+    handleSubmit: Function,      // function to submit the form
+    initialize: Function,        // action to initialize form data
+    reset: Function,             // action to reset the form data to previously initialized values
+    touch: Function,             // action to mark fields as touched
+    untouch: Function,           // action to mark fields as untouched
+  };
 
+  declare function getValues(state: any): any;
+  declare export class Field<P> extends React.Component<FieldProps<P>, void> {}
+  declare export function reducer(state: any, action: Object): any;
+  declare export function reduxForm<P>(config: FormConfig):
+    (component: React.ComponentType<P>) => React.StatelessFunctionalComponent<$Diff<P, FormComponentProps>, void>
 
-  declare export var FieldArray: React.ComponentType<{
-    name: string,
-    component: React.ComponentType<*> | Function,
-    props?: Object,
-    rerenderOnEveryChange?: boolean,
-    validate?: (value: any, allValues: Object, props: Object) => ?any,
-    warn?: (value: any, allValues: Object, props: Object) => ?any,
-    withRef?: boolean
-  }>;
-
-  declare export function formValueSelector(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any, ...fields: string[]) => any
-
-  declare export function formValues(
-    firstArg: string | Object,
-    ...rest: string[]
-  ): {
-    (firstArg: string | Object, ...rest: string[]): Object
-  }
-
-  declare export function getFormError(
-    getFormState: ?GetFormState,
-  ): GetFormErrorInterface<*>
-
-  declare export function getFormNames(
-    getFormState: ?GetFormState,
-  ): GetFormNamesInterface<*>
-
-  declare export function getFormValues(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => any
-
-  declare export function getFormInitialValues(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => Object
-
-  declare export function getFormSyncErrors(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => Object
-
-  declare export function getFormMeta(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => Object
-
-  declare export function getFormAsyncErrors(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => Object
-
-  declare export function getFormSyncWarnings(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => Object
-
-  declare export function getFormSubmitErrors(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => Object
-
-  declare export function hasSubmitSucceeded(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => boolean
-
-  declare export function hasSubmitFailed(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => boolean
-
-  declare export function isDirty(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => boolean
-
-  declare export function isInvalid(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => boolean
-
-  declare export function isPristine(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => boolean
-
-  declare export function isValid(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => boolean
-
-  declare export function isSubmitting(
-    form: string,
-    getFormState: ?GetFormState,
-  ): (state: any) => boolean
-
-  declare export function reduxForm(
-    config: ReduxFormConfig,
-  ): { (WrappedComponent: React.ComponentType<*>): React.ComponentType<*> }
-
-  declare export class SubmissionError {
-    constructor(errors: Object): void;
-  }
-
-  declare export function values(
-    config: {
+    
+    declare export var FormSection: ComponentType<{ name: string, className: string }>;
+  
+  
+    declare export var Field: React.ComponentType<{
+      name: string,
+      component: React.ComponentType<*> | Function | string,
+      format?: ?(value: any, name: string) => ?string,
+      normalize?: (
+        value: any,
+        previousValue: any,
+        allValues: Object,
+        previousAllValues: Object,
+      ) => ?any,
+      onBlur?: (event: ReduxFormEvent, newValue: any, previousValue: any) => void,
+      onChange?: (event: ReduxFormEvent, newValue: any, previousValue: any) => void,
+      onDragStart?: (event: ReduxFormEvent) => void,
+      onDrop?: (event: ReduxFormEvent, newValue: any, previousValue: any) => void,
+      onFocus?: (event: ReduxFormEvent) => void,
+      parse?: (value: any, name: string) => any,
+      props?: Object,
+      validate?: Validator | Validator[],
+      warn?: Validator | Validator[],
+      withRef?: boolean
+    }>;
+    declare export var Fields: React.ComponentType<{
+      names: string[],
+      component: Function | React.ComponentType<*>,
+      format?: (value: any, name: string) => ?any,
+      parse?: (value: any, name: string) => ?any,
+      props?: Object,
+      withRef?: boolean
+    }>;
+  
+    declare export type FieldArrayProps = {|
+      fields: Fields,
+      meta: {
+        dirty: boolean,
+        error?: any,
+        form: string,
+        invalid: boolean,
+        pristine: boolean,
+        submitting: boolean,
+        submitFailed: boolean,
+        touched: boolean,
+        valid: boolean,
+        warning?: any
+      },
+      ref?: (ref: ?React.Component<*, *>) => void
+    |}
+  
+  
+    declare export var FieldArray: ComponentType<{
+      name: string,
+      component: React.ComponentType<*> | Function,
+      props?: Object,
+      rerenderOnEveryChange?: boolean,
+      validate?: (value: any, allValues: Object, props: Object) => ?any,
+      warn?: (value: any, allValues: Object, props: Object) => ?any,
+      withRef?: boolean
+    }>;
+  
+    declare export function formValueSelector(
       form: string,
-      getFormState?: GetFormState,
-      prop?: string
-    },
-  ): { (React.ComponentType<*>): React.ComponentType<*> }
-
-// Action creators
-  declare export var arrayInsert: ArrayInsert;
-  declare export var arrayMove: ArrayMove;
-  declare export var arrayPop: ArrayPop;
-  declare export var arrayPush: ArrayPush;
-  declare export var arrayRemove: ArrayRemove;
-  declare export var arrayRemoveAll: ArrayRemoveAll;
-  declare export var arrayShift: ArrayShift;
-  declare export var arraySplice: ArraySplice;
-  declare export var arraySwap: ArraySwap;
-  declare export var arrayUnshift: ArrayUnshift;
-  declare export var autofill: Autofill;
-  declare export var blur: Blur;
-  declare export var change: Change;
-  declare export var clearSubmitErrors: ClearSubmitErrors;
-  declare export var destroy: Destroy;
-  declare export var focus: Focus;
-  declare export var initialize: Initialize;
-  declare export var registerField: RegisterField;
-  declare export var reset: Reset;
-  declare export var setSubmitFailed: SetSubmitFailed;
-  declare export var setSubmitSucceeded: SetSubmitSucceeded;
-  declare export var startAsyncValidation: StartAsyncValidation;
-  declare export var startSubmit: StartSubmit;
-  declare export var stopAsyncValidation: StopAsyncValidation;
-  declare export var stopSubmit: StopSubmit;
-  declare export var submit: Submit;
-  declare export var touch: Touch;
-  declare export var unregisterField: UnregisterField;
-  declare export var untouch: Untouch;
+      getFormState: ?GetFormState,
+    ): (state: any, ...fields: string[]) => any
+  
+    declare export function formValues(
+      firstArg: string | Object,
+      ...rest: string[]
+    ): {
+      (firstArg: string | Object, ...rest: string[]): Object
+    }
+  
+    declare export function getFormError(
+      getFormState: ?GetFormState,
+    ): GetFormErrorInterface<*>
+  
+    declare export function getFormNames(
+      getFormState: ?GetFormState,
+    ): GetFormNamesInterface<*>
+  
+    declare export function getFormValues(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => any
+  
+    declare export function getFormInitialValues(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => Object
+  
+    declare export function getFormSyncErrors(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => Object
+  
+    declare export function getFormMeta(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => Object
+  
+    declare export function getFormAsyncErrors(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => Object
+  
+    declare export function getFormSyncWarnings(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => Object
+  
+    declare export function getFormSubmitErrors(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => Object
+  
+    declare export function hasSubmitSucceeded(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => boolean
+  
+    declare export function hasSubmitFailed(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => boolean
+  
+    declare export function isDirty(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => boolean
+  
+    declare export function isInvalid(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => boolean
+  
+    declare export function isPristine(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => boolean
+  
+    declare export function isValid(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => boolean
+  
+    declare export function isSubmitting(
+      form: string,
+      getFormState: ?GetFormState,
+    ): (state: any) => boolean
+  
+    declare export function reduxForm(
+      config: ReduxFormConfig,
+    ): { (WrappedComponent: ComponentType<*>): ComponentType<*> }
+  
+    declare export class SubmissionError {
+      constructor(errors: Object): void;
+    }
+  
+    declare export function values(
+      config: {
+        form: string,
+        getFormState?: GetFormState,
+        prop?: string
+      },
+    ): { (React.ComponentType<*>): React.ComponentType<*> }
+  
+  // Action creators
+    declare export var arrayInsert: ArrayInsert;
+    declare export var arrayMove: ArrayMove;
+    declare export var arrayPop: ArrayPop;
+    declare export var arrayPush: ArrayPush;
+    declare export var arrayRemove: ArrayRemove;
+    declare export var arrayRemoveAll: ArrayRemoveAll;
+    declare export var arrayShift: ArrayShift;
+    declare export var arraySplice: ArraySplice;
+    declare export var arraySwap: ArraySwap;
+    declare export var arrayUnshift: ArrayUnshift;
+    declare export var autofill: Autofill;
+    declare export var blur: Blur;
+    declare export var change: Change;
+    declare export var clearSubmitErrors: ClearSubmitErrors;
+    declare export var destroy: Destroy;
+    declare export var focus: Focus;
+    declare export var initialize: Initialize;
+    declare export var registerField: RegisterField;
+    declare export var reset: Reset;
+    declare export var setSubmitFailed: SetSubmitFailed;
+    declare export var setSubmitSucceeded: SetSubmitSucceeded;
+    declare export var startAsyncValidation: StartAsyncValidation;
+    declare export var startSubmit: StartSubmit;
+    declare export var stopAsyncValidation: StopAsyncValidation;
+    declare export var stopSubmit: StopSubmit;
+    declare export var submit: Submit;
+    declare export var touch: Touch;
+    declare export var unregisterField: UnregisterField;
+    declare export var untouch: Untouch;
 }

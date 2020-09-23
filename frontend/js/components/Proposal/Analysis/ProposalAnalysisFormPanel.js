@@ -21,7 +21,7 @@ import type {
 } from '~relay/ProposalAnalysisFormPanel_proposal.graphql';
 import colors from '~/utils/colors';
 import { ICON_NAME } from '~/components/Ui/Icons/Icon';
-import type { GlobalState } from '~/types';
+import type { GlobalState, Dispatch } from '~/types';
 import { bootstrapGrid } from '~/utils/sizes';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
@@ -278,7 +278,6 @@ const mapStateToProps = (state: GlobalState, { proposal, userId }: Props) => {
 
 const form = reduxForm({
   form: formName,
-  validate: null,
   onChange: debounce(onSubmit, 1000),
   onSubmit,
 })(ProposalAnalysisFormPanel);

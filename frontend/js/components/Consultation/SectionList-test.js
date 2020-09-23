@@ -8,8 +8,7 @@ import { $fragmentRefs } from '../../mocks';
 describe('<SectionList />', () => {
   const props = {
     section: {
-      __id: 'section1',
-      sections: [{ __id: 'section2', sections: [], $fragmentRefs }],
+      sections: [{ sections: [], $fragmentRefs }],
       $fragmentRefs,
     },
     consultation: {},

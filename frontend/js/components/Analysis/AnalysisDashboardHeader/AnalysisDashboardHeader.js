@@ -71,7 +71,7 @@ const USER_SEARCH_QUERY = graphql`
   }
 `;
 
-export const loadOptions = (terms: string): Promise<void> =>
+export const loadOptions = (terms: string): Promise<$ReadOnlyArray<any>> =>
   new Promise(async resolve => {
     const response = await fetchQuery(environment, USER_SEARCH_QUERY, {
       terms,

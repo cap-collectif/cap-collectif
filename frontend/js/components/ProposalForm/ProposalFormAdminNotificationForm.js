@@ -9,7 +9,7 @@ import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import UpdateProposalFormNotificationsConfigurationMutation from '../../mutations/UpdateProposalFormNotificationsConfigurationMutation';
 import type { ProposalFormAdminNotificationForm_proposalForm } from '~relay/ProposalFormAdminNotificationForm_proposalForm.graphql';
-import type { State } from '../../types';
+import type { State, Dispatch } from '../../types';
 
 type RelayProps = {|
   proposalForm: ProposalFormAdminNotificationForm_proposalForm,

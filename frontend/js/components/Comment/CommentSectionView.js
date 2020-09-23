@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
-import CommentListView from './CommentListView';
+import CommentListView, { type CommentOrderBy } from './CommentListView';
 import CommentForm from './CommentForm';
 import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
 
@@ -14,10 +14,11 @@ type Props = {|
 |};
 
 export function CommentSectionView(props: Props) {
-  const [order, setOrder] = useState('last');
+  const [order, setOrder] = useState<CommentOrderBy>('last');
   const { isAuthenticated, intl, useBodyColor, commentable } = props;
 
-  const updateSelectedValue = (e: any) => {
+  const updateSelectedValue = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    /* $FlowFixMe who did dis */
     setOrder({
       order: e.target.value,
     });

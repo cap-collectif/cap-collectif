@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 
-import type { State } from '~/types';
+import type { State, Dispatch } from '~/types';
 
 import LanguageButton from './LanguageButton';
 import type { LanguageButtonWrapper_languages } from '~relay/LanguageButtonWrapper_languages.graphql';

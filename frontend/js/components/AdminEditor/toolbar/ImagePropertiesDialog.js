@@ -24,12 +24,13 @@ const DimensionsWrappeer: ComponentType<{}> = styled('div')`
   }
 `;
 
-type ImagePropertiesDialogProps = DialogState & {
-  onConfirm: (data: ImageEntityData) => void,
+type ImagePropertiesDialogProps = {|
+  ...DialogState,
+  onConfirm: (data: ImageEntityData) => Promise<void> | void,
   initialData?: ImageEntityData,
   intl: IntlShape,
   mode?: 'insert' | 'edit',
-};
+|};
 
 function getSubmitButtonMessage(mode) {
   switch (mode) {

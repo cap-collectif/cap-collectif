@@ -11,7 +11,7 @@ declare module "react-dropzone" {
   }
   
   declare export default function Dropzone(
-    props: DropzoneProps & React.RefAttributes<DropzoneRef>
+    props: DropzoneProps
   ): JSX.Element;
 
   declare export type DropzoneProps = {
@@ -60,16 +60,18 @@ declare module "react-dropzone" {
 
   declare export interface DropzoneRef {
     open(): void;
+    getRootProps(props?: DropzoneRootProps): DropzoneRootProps,
+    getInputProps(props?: DropzoneInputProps): DropzoneInputProps
   }
 
   declare export type DropzoneRootProps = {
     refKey?: string,
     [key: string]: any
-  } & React.HTMLAttributes<HTMLElement>;
+  } & HTMLAttributes;
 
   declare export type DropzoneInputProps = {
     refKey?: string
-  } & React.InputHTMLAttributes<HTMLInputElement>;
+  } & React.InputHTMLAttributes;
 
   declare type PropTypes =
     | "multiple"

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import autosize from 'autosize';
 import { FormControl } from 'react-bootstrap';
 
-type Props = {};
+type Props = {||};
 
 class AutosizedTextarea extends React.Component<Props> {
   refFormControl: ?React.Component<*>;

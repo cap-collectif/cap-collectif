@@ -1,4 +1,5 @@
 // @flow
+import { type Node } from 'react';
 
 export type CommonPropsInput = {|
   id: string,
@@ -8,7 +9,7 @@ export type CommonPropsInput = {|
   readonly?: boolean,
   required?: boolean,
   placeholder?: string,
-  label?: React.Node,
+  label?: Node,
   className?: string,
   maxlength?: number,
   minlength?: number,

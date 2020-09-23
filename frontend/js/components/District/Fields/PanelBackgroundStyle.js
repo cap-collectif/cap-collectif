@@ -9,7 +9,7 @@ import toggle from '../../Form/Toggle';
 import withPanelStyle from './withPanelStyle';
 import { PanelHeader, PanelBody } from './PanelStyle.style';
 import { formName, selector } from '~/components/ProposalForm/ProposalFormAdminConfigurationForm';
-import type { State } from '~/types';
+import type { State, Dispatch } from '~/types';
 
 type Props = {
   member: string,

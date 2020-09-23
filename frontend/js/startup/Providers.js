@@ -36,6 +36,7 @@ class Providers extends React.Component<Props> {
 
     return (
       <Provider store={store}>
+        {/** $FlowFixMe */}
         <IntlProvider timeZone={window.timeZone}>{children}</IntlProvider>
       </Provider>
     );

@@ -55,6 +55,9 @@ export default createFragmentContainer(SectionRecursiveList, {
               ...Section_section
               sections {
                 ...Section_section
+                sections {
+                  ...Section_section
+                }
               }
             }
           }

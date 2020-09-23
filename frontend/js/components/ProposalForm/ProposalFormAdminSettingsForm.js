@@ -9,7 +9,7 @@ import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import ChangeProposalFormParametersMutation from '../../mutations/ChangeProposalFormParametersMutation';
 import type { ProposalFormAdminSettingsForm_proposalForm } from '~relay/ProposalFormAdminSettingsForm_proposalForm.graphql';
-import type { State } from '../../types';
+import type { State, Dispatch } from '../../types';
 
 type RelayProps = {|
   isSuperAdmin: boolean,

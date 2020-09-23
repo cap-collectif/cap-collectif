@@ -11,6 +11,7 @@ import type { StatusColor } from '~relay/UpdateProjectAlphaMutation.graphql';
 import CircleColor, { type Color } from '~/components/Ui/CircleColor/CircleColor';
 import { RequirementDragItem } from './ProjectAdminStepForm.style';
 import { NoStepsPlaceholder } from '../Form/ProjectAdminForm.style';
+import type { Dispatch } from '~/types';
 
 export type Status = {|
   id?: ?string,

@@ -61,13 +61,14 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
     const popoverId = `vote-tooltip-proposal-${proposal.id}`;
     if (step.voteType === 'SIMPLE') {
       return (
-        /* $FlowFixMe */
         <VoteButtonOverlay
           popoverId={popoverId}
           step={step}
           userHasVote={proposal.viewerHasVote || false}
           hasReachedLimit={
-            !proposal.viewerHasVote && step.votesLimit && step.votesLimit - viewerVotesCount <= 0
+            !proposal.viewerHasVote &&
+            (step.votesLimit || false) &&
+            (step.votesLimit || 0) - viewerVotesCount <= 0
           }>
           <HoverObserver>
             <ProposalVoteButton
@@ -83,12 +84,13 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
     }
 
     return (
-      /* $FlowFixMe */
       <VoteButtonOverlay
         popoverId={popoverId}
         step={step}
-        userHasVote={proposal.viewerHasVote}
-        hasReachedLimit={step.votesLimit && step.votesLimit - viewerVotesCount <= 0}
+        userHasVote={proposal.viewerHasVote || false}
+        hasReachedLimit={
+          (step.votesLimit || false) && (step.votesLimit || 0) - viewerVotesCount <= 0
+        }
         hasUserEnoughCredits={this.userHasEnoughCredits()}>
         <HoverObserver>
           <ProposalVoteButton

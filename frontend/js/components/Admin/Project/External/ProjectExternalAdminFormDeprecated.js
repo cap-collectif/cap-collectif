@@ -202,7 +202,6 @@ const onSubmit = (
       }
     });
   }
-  return null;
 };
 
 const validate = () => {

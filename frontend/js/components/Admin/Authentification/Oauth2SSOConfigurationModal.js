@@ -9,7 +9,7 @@ import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import CloseButton from '../../Form/CloseButton';
 import { isUrl } from '../../../services/Validator';
-import type { GlobalState, Uri, Uuid } from '../../../types';
+import type { GlobalState, Uri, Uuid, Dispatch } from '../../../types';
 import AddOauth2SSOConfigurationMutation from '../../../mutations/AddOauth2SSOConfigurationMutation';
 import UpdateOauth2SSOConfigurationMutation from '../../../mutations/UpdateOauth2SSOConfigurationMutation';
 

@@ -1,4 +1,5 @@
 // @flow
+import { type Node } from 'react';
 import { css } from 'styled-components';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
@@ -11,7 +12,7 @@ export type PropsCommonCheckboxRadio = {|
   checked?: boolean,
   className?: string,
   disabled?: boolean,
-  label?: React.Node | string,
+  label?: Node | string,
   image?: string,
   onChange?: Function,
   onBlur?: Function,

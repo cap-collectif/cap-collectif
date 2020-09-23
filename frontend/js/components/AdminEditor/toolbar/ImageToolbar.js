@@ -71,7 +71,7 @@ function ImageToolbar({ block, entityData, children, intl }: ImageToolbarProps) 
     editImageDialog.show();
   }
 
-  function handleEdit(data) {
+  function handleEdit(data): void {
     dispatchAction({ type: 'editBlockEntityData', data, block });
   }
 

@@ -3,7 +3,6 @@
 exports[`<SectionList /> renders correcty 1`] = `
 <div
   className="section-list_container"
-  id="section1"
 >
   <Relay(Section)
     consultation={Object {}}
@@ -12,11 +11,9 @@ exports[`<SectionList /> renders correcty 1`] = `
     section={
       Object {
         "$fragmentRefs": null,
-        "__id": "section1",
         "sections": Array [
           Object {
             "$fragmentRefs": null,
-            "__id": "section2",
             "sections": Array [],
           },
         ],
@@ -31,7 +28,6 @@ exports[`<SectionList /> renders correcty 1`] = `
     section={
       Object {
         "$fragmentRefs": null,
-        "__id": "section2",
         "sections": Array [],
       }
     }

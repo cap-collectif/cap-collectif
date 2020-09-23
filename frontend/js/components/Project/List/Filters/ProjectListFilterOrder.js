@@ -4,7 +4,7 @@ import { injectIntl, type IntlShape } from 'react-intl';
 import { FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeOrderBy } from '../../../../redux/modules/project';
-import type { GlobalState } from '../../../../types';
+import type { GlobalState, Dispatch } from '../../../../types';
 
 type Props = {
   dispatch: Dispatch,

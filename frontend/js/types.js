@@ -1,5 +1,6 @@
 // @flow
-import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
+import { type Node } from 'react';
+import { type Store as ReduxStore, type Dispatch as ReduxDispatch } from 'redux';
 // $FlowFixMe TODO we need to refacto all of redux-form typing
 import type { Actions as ReduxFormAction } from 'redux-form';
 import type { State as ProposalState, ProposalAction } from './redux/modules/proposal';
@@ -126,6 +127,7 @@ export type State = GlobalState;
 export type User = UserState;
 
 export type Store = ReduxStore<State, Action>;
+
 export type Dispatch = ReduxDispatch<Action>;
 
 export type BorderStyle = {|
@@ -185,7 +187,7 @@ export type SettingsSlider = {|
   accessibility?: boolean,
   adaptativeHeight?: boolean,
   afterChange?: (index: string) => void,
-  appendDots?: (dots: any) => React.Node,
+  appendDots?: (dots: any) => Node,
   arrows?: boolean,
   autoPlaySpeed?: boolean,
   autoPlay?: boolean,
@@ -193,7 +195,7 @@ export type SettingsSlider = {|
   centerMode?: boolean,
   centerPadding?: string,
   className?: string,
-  customPaging?: (index: string) => React.Node,
+  customPaging?: (index: string) => Node,
   dotsClass?: string,
   dots?: boolean,
   draggable?: boolean,

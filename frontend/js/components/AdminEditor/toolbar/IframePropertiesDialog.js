@@ -13,12 +13,13 @@ const ActionsWrapper: ComponentType<{}> = styled('div')`
   margin-top: 32px;
 `;
 
-type IframePropertiesDialogProps = DialogState & {
+type IframePropertiesDialogProps = {|
+  ...DialogState,
   onConfirm: (data: IframeEntityData) => void,
   initialData?: IframeEntityData,
   intl: IntlShape,
   mode?: 'insert' | 'edit',
-};
+|};
 
 function getSubmitButtonMessage(mode) {
   switch (mode) {

@@ -12,12 +12,8 @@ import type { State, Dispatch } from '../../../types';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 import type { OpinionEditModal_opinion } from '~relay/OpinionEditModal_opinion.graphql';
 
-type RelayProps = {|
-  opinion: OpinionEditModal_opinion,
-|};
-
 type Props = {|
-  ...RelayProps,
+  opinion: OpinionEditModal_opinion,
   intl: IntlShape,
   show: boolean,
   submitting: boolean,
@@ -69,7 +65,7 @@ export class OpinionEditModal extends React.Component<Props & { intl: IntlShape 
   }
 }
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: { opinion: OpinionEditModal_opinion }) => ({
   show: !!(state.opinion.showOpinionEditModal === props.opinion.id),
   submitting: isSubmitting(formName)(state),
 });

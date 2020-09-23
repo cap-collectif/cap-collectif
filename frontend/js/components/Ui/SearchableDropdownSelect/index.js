@@ -32,7 +32,7 @@ type Props = {|
   +defaultOptions?: $ReadOnlyArray<any>,
   +options?: $ReadOnlyArray<any>,
   +onChangeSearch?: (terms: string) => void,
-  +loadOptions?: (terms: string) => Promise<$ReadOnlyArray<any> | void>,
+  +loadOptions?: (terms: string) => Promise<$ReadOnlyArray<any>>,
   +children: (results: $ReadOnlyArray<any>) => React.Node,
 |};
 

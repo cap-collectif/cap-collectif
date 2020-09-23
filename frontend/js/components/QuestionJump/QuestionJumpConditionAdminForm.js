@@ -9,7 +9,8 @@ import type { QuestionsInReduxForm } from '~/utils/submitQuestion';
 import type { QuestionChoice } from '~/components/Form/Form.type';
 
 type ReduxProps = { selectedQuestion: string };
-type Props = ReduxProps & {
+type Props = {
+  ...ReduxProps,
   fields: { length: number, map: () => void, remove: () => void },
   questions: Object,
   formName: string,

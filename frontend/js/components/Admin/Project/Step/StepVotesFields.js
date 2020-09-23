@@ -8,7 +8,7 @@ import component from '~/components/Form/Field';
 import { ProjectBoxHeader } from '../Form/ProjectAdminForm.style';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import { VoteFieldContainer } from './ProjectAdminStepForm.style';
-import type { FeatureToggles, State } from '~/types';
+import type { FeatureToggles, State, Dispatch } from '~/types';
 
 type Props = {|
   ...ReduxFormFieldArrayProps,

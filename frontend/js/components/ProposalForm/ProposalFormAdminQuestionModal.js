@@ -13,7 +13,7 @@ import QuestionsJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
 import type { Question } from '~/components/Form/Form.type';
 import { ModalContainer } from '~/components/Question/SectionQuestionAdminModal';
 
-type ParentProps = {
+type ParentProps = {|
   dispatch: Dispatch,
   show: boolean,
   onClose: (isEmpty: boolean) => void,
@@ -21,7 +21,7 @@ type ParentProps = {
   member: string,
   isCreating: boolean,
   formName: string,
-};
+|};
 
 type Props = {
   type: string,
@@ -30,7 +30,8 @@ type Props = {
   currentQuestion: Question,
   intl: IntlShape,
   isSuperAdmin: boolean,
-} & ParentProps;
+  ...ParentProps,
+};
 
 type State = {|
   initialQuestionValues: Question,

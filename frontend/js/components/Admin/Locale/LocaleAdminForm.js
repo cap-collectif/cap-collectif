@@ -52,8 +52,8 @@ const onSubmit = (values: FormValues) => {
       })
       .then(() => {
         delete values.defaultLocale;
-        // $FlowFixMe we can't know the exact format of values...
         return UpdateLocaleStatusMutation.commit({
+          // $FlowFixMe we can't know the exact format of values...
           input: { locales: { ...values.locales } },
         }).catch(() => {
           throw new SubmissionError({
@@ -65,8 +65,8 @@ const onSubmit = (values: FormValues) => {
 
   delete values.defaultLocale;
 
-  // $FlowFixMe we can't know the exact format of values...
   return UpdateLocaleStatusMutation.commit({
+    // $FlowFixMe we can't know the exact format of values...
     input: { locales: { ...values.locales } },
   }).catch(() => {
     throw new SubmissionError({

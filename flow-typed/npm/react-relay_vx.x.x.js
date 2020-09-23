@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 declare module "areEqual" {
   declare module.exports: any;
 };

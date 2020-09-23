@@ -9,6 +9,7 @@ type Props = {|
 |};
 
 export default ({ children, ...rest }: Props) => (
+  // $FlowFixMe we have too different intl sources, react-intl and react-intl-redux, which brings conflicts
   <IntlProvider>
     <Popover {...rest}>{children}</Popover>
   </IntlProvider>

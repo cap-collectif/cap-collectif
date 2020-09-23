@@ -11,7 +11,7 @@ import Tooltip from '../Utils/Tooltip';
 import type { OpinionInfos_opinion } from '~relay/OpinionInfos_opinion.graphql';
 
 type Props = {
-  opinion: OpinionInfos_opinion,
+  opinion: { ...OpinionInfos_opinion, __typename: 'Version' | 'Opinion' },
   showUpdatedDate: boolean,
   rankingThreshold?: ?number,
   opinionTerm?: number,

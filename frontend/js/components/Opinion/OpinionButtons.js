@@ -14,7 +14,7 @@ import type { OpinionButtons_opinion } from '~relay/OpinionButtons_opinion.graph
 import OpinionFollowButton from './Follow/OpinionFollowButton';
 
 type Props = {
-  opinion: OpinionButtons_opinion,
+  opinion: { ...OpinionButtons_opinion, __typename: 'Version' | 'Opinion' },
   user?: Object,
 };
 

@@ -13,12 +13,13 @@ const ActionsWrapper: ComponentType<{}> = styled('div')`
   margin-top: 32px;
 `;
 
-type TablePropertiesDialogProps = DialogState & {
-  onConfirm: (data: TableEntityData) => void,
+type TablePropertiesDialogProps = {|
+  ...DialogState,
+  onConfirm: (data: TableEntityData) => Promise<void> | void,
   initialData?: TableEntityData,
   intl: IntlShape,
   mode?: 'insert' | 'edit',
-};
+|};
 
 function getSubmitButtonMessage(mode) {
   switch (mode) {

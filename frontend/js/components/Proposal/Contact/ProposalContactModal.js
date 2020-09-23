@@ -8,7 +8,7 @@ import CloseButton from '~/components/Form/CloseButton';
 import SubmitButton from '~/components/Form/SubmitButton';
 import component from '~/components/Form/Field';
 import { isEmail } from '~/services/Validator';
-import type { State } from '~/types';
+import type { State, Dispatch } from '~/types';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import ContactProposalAuthorMutation from '~/mutations/ContactProposalAuthorMutation';
 

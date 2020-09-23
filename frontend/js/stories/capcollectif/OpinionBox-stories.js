@@ -47,7 +47,7 @@ const voteWidgetTypes = {
 };
 
 /* eslint-disable react/prop-types */
-const OpinionItem = ({ item, typeLabel }) => (
+const OpinionItem = ({ item, typeLabel = null }) => (
   <React.Fragment>
     <Media>
       <Media.Left>
@@ -165,7 +165,6 @@ const OpinionBox = ({ section, opinion }) => (
       <ListGroup className="mb-0">
         <ListGroupItem className="list-group-item__opinion no-border">
           <div className="left-block">
-            {/* $FlowFixMe */}
             <OpinionItem item={opinion} />
           </div>
         </ListGroupItem>

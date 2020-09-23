@@ -6,7 +6,7 @@ import { isSubmitting, submit } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Container, LogoContainer, ContentContainer, Symbols } from './UserInvitationPage.style';
 import type { UserInvitationPageAppProps } from '~/startup/UserInvitationPageApp';
-import type { State } from '~/types';
+import type { State, Dispatch } from '~/types';
 import RegistrationForm, { form } from '~/components/User/Registration/RegistrationForm';
 import SubmitButton from '~/components/Form/SubmitButton';
 import type { UserInvitationPage_query } from '~relay/UserInvitationPage_query.graphql';
@@ -95,7 +95,7 @@ const mapStateToProps = state => ({
   },
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit: () => dispatch(submit(form)),
 });
 

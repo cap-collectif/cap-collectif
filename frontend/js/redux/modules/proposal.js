@@ -354,9 +354,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, isVoting: false };
     case 'proposal/DELETE_REQUEST':
       return { ...state, isDeleting: true };
-    case 'proposal/CHANGE_PROPOSAL_LIST_VIEW': {
-      return { ...state, selectedViewByStep: action.mode };
-    }
     case 'proposal/OPEN_DETAIL_LIKERS_MODAL':
       return { ...state, showDetailLikersModal: action.id };
     case 'proposal/CLOSE_DETAIL_LIKERS_MODAL':

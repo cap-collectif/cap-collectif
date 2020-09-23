@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import type { ContactAdminPage_query } from '~relay/ContactAdminPage_query.graphql';
 
-import type { State } from '~/types';
+import type { State, Dispatch } from '~/types';
 import AlertForm from '../../Alert/AlertForm';
 import ContactAdminList from './ContactAdminList';
 import ContactAdminForm from './ContactAdminForm';

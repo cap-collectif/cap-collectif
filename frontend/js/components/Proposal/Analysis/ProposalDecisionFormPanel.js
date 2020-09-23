@@ -11,7 +11,7 @@ import { reduxForm, formValueSelector, change, Field, SubmissionError } from 're
 import type { ProposalDecisionFormPanel_proposal } from '~relay/ProposalDecisionFormPanel_proposal.graphql';
 import colors from '~/utils/colors';
 import { ICON_NAME } from '~/components/Ui/Icons/Icon';
-import type { GlobalState } from '~/types';
+import type { GlobalState, Dispatch } from '~/types';
 import { bootstrapGrid } from '~/utils/sizes';
 import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
@@ -259,7 +259,6 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
 
 const form = reduxForm({
   form: formName,
-  validate: null,
   onChange: debounce(onSubmit, 1000),
   onSubmit,
 })(ProposalDecisionFormPanel);

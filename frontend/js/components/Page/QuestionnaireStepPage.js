@@ -38,12 +38,7 @@ const component = ({
     const { questionnaire } = props;
     if (questionnaire) {
       return (
-        <Router
-          basename={
-            questionnaire.step &&
-            questionnaire.step.url &&
-            questionnaire.step.url.replace(baseUrl, '')
-          }>
+        <Router basename={questionnaire?.step?.url?.replace(baseUrl, '')}>
           <ScrollToTop />
 
           <Switch>

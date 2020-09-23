@@ -535,6 +535,137 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                               ],
                                               "storageKey": null,
                                             },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "concreteType": "Section",
+                                              "kind": "LinkedField",
+                                              "name": "sections",
+                                              "plural": true,
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "title",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "slug",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "subtitle",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "description",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "contribuable",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "contributionsCount",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "id",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "concreteType": "SectionAppendixType",
+                                                  "kind": "LinkedField",
+                                                  "name": "appendixTypes",
+                                                  "plural": true,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "id",
+                                                      "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "title",
+                                                      "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "helpText",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "url",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "defaultOrderBy",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "color",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "concreteType": "OpinionConnection",
+                                                  "kind": "LinkedField",
+                                                  "name": "opinions",
+                                                  "plural": false,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "totalCount",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "storageKey": null,
+                                            },
                                           ],
                                           "storageKey": null,
                                         },
@@ -2205,6 +2336,10 @@ fragment SectionRecursiveList_consultation_39ngnn on Consultation {
           ...Section_section
           sections {
             ...Section_section
+            sections {
+              ...Section_section
+              id
+            }
             id
           }
           id
@@ -2826,6 +2961,137 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                               ],
                                               "storageKey": null,
                                             },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "concreteType": "Section",
+                                              "kind": "LinkedField",
+                                              "name": "sections",
+                                              "plural": true,
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "title",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "slug",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "subtitle",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "description",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "contribuable",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "contributionsCount",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "id",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "concreteType": "SectionAppendixType",
+                                                  "kind": "LinkedField",
+                                                  "name": "appendixTypes",
+                                                  "plural": true,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "id",
+                                                      "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "title",
+                                                      "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "helpText",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "url",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "defaultOrderBy",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "color",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "concreteType": "OpinionConnection",
+                                                  "kind": "LinkedField",
+                                                  "name": "opinions",
+                                                  "plural": false,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "totalCount",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "storageKey": null,
+                                            },
                                           ],
                                           "storageKey": null,
                                         },
@@ -4496,6 +4762,10 @@ fragment SectionRecursiveList_consultation_39ngnn on Consultation {
           ...Section_section
           sections {
             ...Section_section
+            sections {
+              ...Section_section
+              id
+            }
             id
           }
           id

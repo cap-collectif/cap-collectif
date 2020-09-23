@@ -48,8 +48,7 @@ export class CommentSection extends React.Component<Props> {
             if (props) {
               if (props.commentable) {
                 return (
-                  // $FlowFixMe CommentSectionView should be a fragment
-                  <CommentSectionView
+                  <CommentSectionView // $FlowFixMe CommentSectionView should be a fragment
                     commentable={props.commentable}
                     isAuthenticated={isAuthenticated}
                     useBodyColor={false}

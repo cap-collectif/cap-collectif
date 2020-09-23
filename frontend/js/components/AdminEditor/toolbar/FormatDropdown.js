@@ -90,6 +90,7 @@ function FormatDropdown({ children, panel, active = false, ...props }: FormatDro
   }
 
   return (
+    // $FlowFixMe To rework when WYSIWYG development restarts
     <Wrapper ref={node}>
       <FormatButton {...props} active={open || active} onClick={handleClick}>
         {children}{' '}

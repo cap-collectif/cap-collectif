@@ -48,9 +48,9 @@ export const ProposalFormAdminPageTabs = ({
 }: Props) => (
   <ProposalFormAdminPageTabsContainer id="proposal-form-admin-page">
     <MemoryRouter
-      initialEntries={[...Object.values(TABS)]}
+      initialEntries={[...Object.values(TABS)].map(v => String(v))}
       initialIndex={0}
-      keylLength={Object.values(TABS).length}>
+      keyLength={Object.values(TABS).length}>
       <header>
         <div>
           <FormattedMessage

@@ -18,6 +18,7 @@ import toggle from '~/components/Form/Toggle';
 import InputRequirement from '~/components/Ui/Form/InputRequirement';
 import type { RequirementType } from '~relay/UpdateProjectAlphaMutation.graphql';
 import { RequirementDragItem, CheckboxPlaceholder } from './ProjectAdminStepForm.style';
+import type { Dispatch } from '~/types';
 
 export type Requirement = {|
   type: RequirementType | string,

@@ -19,7 +19,7 @@ type Props = {|
   +theme: ?string,
   +project: ?string,
   +userType: ?string,
-  +status: ?boolean,
+  +status: ?string,
   +isRegistrable: ?string,
   +author: ?{ value: string },
   +orderBy: EventOrder,

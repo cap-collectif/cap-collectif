@@ -13,12 +13,13 @@ const ActionsWrapper: ComponentType<{}> = styled('div')`
   margin-top: 32px;
 `;
 
-type LinkPropertiesDialogProps = DialogState & {
+type LinkPropertiesDialogProps = {|
+  ...DialogState,
   onConfirm: (data: LinkEntityData) => void,
   initialData?: LinkEntityData,
   intl: IntlShape,
   mode?: 'insert' | 'edit',
-};
+|};
 
 function getSubmitButtonMessage(mode) {
   switch (mode) {

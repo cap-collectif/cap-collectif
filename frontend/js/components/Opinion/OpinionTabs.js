@@ -74,12 +74,12 @@ class OpinionTabs extends React.Component<Props> {
 
   isSourceable = () => {
     const { opinion } = this.props;
-    return opinion.section && opinion.section.sourceable;
+    return (opinion.section && opinion.section.sourceable) || false;
   };
 
   isFollowable = () => {
     const { opinion } = this.props;
-    return opinion.project && opinion.project.opinionCanBeFollowed;
+    return (opinion.project && opinion.project.opinionCanBeFollowed) || false;
   };
 
   isCommentable = () =>
@@ -88,7 +88,9 @@ class OpinionTabs extends React.Component<Props> {
 
   isVersionable = () => {
     const { opinion } = this.props;
-    return opinion.__typename === 'Opinion' && opinion.section && opinion.section.versionable;
+    return (
+      (opinion.__typename === 'Opinion' && opinion.section && opinion.section.versionable) || false
+    );
   };
 
   renderFollowerBox = opinion =>

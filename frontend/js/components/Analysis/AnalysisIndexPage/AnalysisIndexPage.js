@@ -61,7 +61,7 @@ export const renderComponent = ({
   if (props) {
     const { viewerAssignedProjectsToAnalyse: projects, defaultUsers } = props;
     const languageUrl: string = language.split('-')[0];
-    const allPaths = Object.values(PATHS);
+    const allPaths = Object.values(PATHS).map(v => String(v));
 
     /**
      * Why the Redirect from="/evaluations" ?

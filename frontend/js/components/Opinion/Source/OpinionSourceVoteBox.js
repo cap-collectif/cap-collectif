@@ -14,10 +14,9 @@ class OpinionSourceVoteBox extends React.Component<Props> {
     return (
       <span>
         <form className="opinion__votes-button">
-          {/* $FlowFixMe */}
           <OpinionSourceVoteButton
             source={source}
-            disabled={!source.contribuable || source.author.isViewer}
+            disabled={!source.contribuable || source.author.isViewer || false}
           />
         </form>
         <span className="opinion__votes-nb">{source.votes ? source.votes.totalCount : 0}</span>

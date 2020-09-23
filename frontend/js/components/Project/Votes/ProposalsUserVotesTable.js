@@ -96,7 +96,9 @@ const renderPlaceholders = (
   return [...Array(length)].map((e, i) => {
     return (
       <VotePlaceholder key={i} isDraggable={isDraggable}>
-        {isDraggable && <ItemPosition>{startNumber + i}</ItemPosition>}
+        {isDraggable && (
+          <ItemPosition>{typeof startNumber === 'number' ? startNumber + i : i}</ItemPosition>
+        )}
         <div />
       </VotePlaceholder>
     );

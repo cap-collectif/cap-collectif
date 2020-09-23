@@ -10,7 +10,7 @@ import {
   reduxForm,
   SubmissionError,
 } from 'redux-form';
-import { withRouter, type History } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import memoize from 'lodash/memoize';
@@ -84,7 +84,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
               : 'reply.request.create.success',
           },
         });
-
+        // $FlowFixMe react-router-dom is not typed
         history.replace('/');
       })
       .catch(() => {

@@ -8,7 +8,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import type { QuestionnaireAdminParametersForm_questionnaire } from '~relay/QuestionnaireAdminParametersForm_questionnaire.graphql';
-import type { GlobalState } from '../../types';
+import type { GlobalState, Dispatch } from '../../types';
 import UpdateQuestionnaireParametersMutation from '../../mutations/UpdateQuestionnaireParametersMutation';
 
 type RelayProps = {|

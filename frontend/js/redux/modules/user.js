@@ -119,6 +119,7 @@ export type UserAction =
   | AddRegistrationFieldAction
   | GroupAdminUsersUserDeletionSuccessfulAction
   | GroupAdminUsersUserDeletionFailedAction
+  | ChangeLocaleAction
   | GroupAdminUsersUserDeletionResetAction;
 
 const initialState: State = {

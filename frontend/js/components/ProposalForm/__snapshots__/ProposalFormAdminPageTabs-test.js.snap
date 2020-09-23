@@ -15,7 +15,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
       ]
     }
     initialIndex={0}
-    keylLength={5}
+    keyLength={5}
   >
     <header>
       <div>
@@ -189,7 +189,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new) analysis tab, if fe
       ]
     }
     initialIndex={0}
-    keylLength={5}
+    keyLength={5}
   >
     <header>
       <div>
@@ -371,7 +371,7 @@ exports[`<ProposalFormAdminPageTabs /> render a (new) analysis tab 1`] = `
       ]
     }
     initialIndex={0}
-    keylLength={5}
+    keyLength={5}
   >
     <header>
       <div>

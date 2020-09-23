@@ -157,7 +157,6 @@ const memoizeAvailableQuestions: any = memoize(() => {});
 
 export const validateProposalContent = (
   values: FormValues | FrontendFormValues,
-  // $FlowFixMe
   proposalForm: ProposalForm,
   features: FeatureToggles,
   intl: IntlShape,
@@ -229,7 +228,7 @@ const validate = (values: FormValues, { proposal, features, intl }: Props) => {
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
     'availableQuestions',
   );
-
+  // $FlowFixMe
   validateProposalContent(values, proposal.form, features, intl, values.draft, availableQuestions);
 };
 

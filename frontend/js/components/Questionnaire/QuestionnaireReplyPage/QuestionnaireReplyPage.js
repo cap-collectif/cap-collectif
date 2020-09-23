@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage, FormattedDate, injectIntl } from 'react-intl';
-import type { History } from 'react-router-dom';
+import type { RouterHistory } from 'react-router-dom';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { submit, reset } from 'redux-form';
@@ -20,7 +20,7 @@ import type { Dispatch } from '~/types';
 type Props = {|
   questionnaire: ?QuestionnaireReplyPage_questionnaire,
   reply: QuestionnaireReplyPage_reply,
-  history: History,
+  history: RouterHistory,
   submitReplyForm: (replyId: string) => void,
   resetReplyForm: (replyId: string) => void,
 |};

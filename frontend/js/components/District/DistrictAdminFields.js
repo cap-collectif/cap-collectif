@@ -12,7 +12,7 @@ import type { DistrictAdminFields_district } from '~relay/DistrictAdminFields_di
 import { isValid } from '~/services/GeoJsonValidator';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
-import type { State } from '~/types';
+import type { State, Dispatch } from '~/types';
 import { selector } from '~/components/ProposalForm/ProposalFormAdminConfigurationForm';
 
 type Props = {|

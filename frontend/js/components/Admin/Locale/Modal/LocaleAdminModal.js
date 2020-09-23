@@ -6,7 +6,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, SubmissionError, submit } from 'redux-form';
 
-import type { GlobalState } from '~/types';
+import type { GlobalState, Dispatch } from '~/types';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import LocaleAdminModalList from './LocaleAdminModalList';
 import type { LocaleAdminModal_locales } from '~relay/LocaleAdminModal_locales.graphql';

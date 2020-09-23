@@ -20,6 +20,11 @@ import {
 } from '../Form/ProjectAdminForm.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
+type Option = {|
+  value: string,
+  label: string,
+|};
+
 export type FormValues = {|
   title: string,
   authors: Author[],

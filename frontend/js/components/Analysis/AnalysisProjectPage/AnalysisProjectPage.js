@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import type { History } from 'react-router-dom';
+import type { RouterHistory } from 'react-router-dom';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { AnalysisProjectPage_project } from '~relay/AnalysisProjectPage_project.graphql';
 import PickableList from '~ui/List/PickableList';
@@ -25,7 +25,7 @@ export type Props = {|
   project: AnalysisProjectPage_project,
   defaultUsers: $PropertyType<AnalysisIndexPageQueryResponse, 'defaultUsers'>,
   relay: RelayPaginationProp,
-  history: History,
+  history: RouterHistory,
 |};
 
 const AnalysisProjectPage = ({ project, defaultUsers, relay, history }: Props) => {

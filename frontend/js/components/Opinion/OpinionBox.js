@@ -10,15 +10,16 @@ import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
 import OpinionVotesBox from './Votes/OpinionVotesBox';
 import type { OpinionBox_opinion } from '~relay/OpinionBox_opinion.graphql';
+
 import TrashedMessage from '../Trashed/TrashedMessage';
 import ListGroup from '../Ui/List/ListGroup';
 import { translateContent } from '~/utils/ContentTranslator';
 
-type Props = {
-  +opinion: OpinionBox_opinion,
+type Props = {|
+  +opinion: { ...OpinionBox_opinion, __typename: 'Version' | 'Opinion' },
   rankingThreshold: number,
   opinionTerm: number,
-};
+|};
 
 export class OpinionBox extends React.Component<Props> {
   getBoxLabel = () => {
@@ -38,11 +39,11 @@ export class OpinionBox extends React.Component<Props> {
 
     const { color } = section;
 
-    const parentTitle = opinion.__typename === 'Version' ? opinion.parent.title : section.title;
+    const parentTitle = opinion.__typename === 'Version' ? opinion.parent?.title : section.title;
 
     const headerTitle = this.getBoxLabel();
 
-    const backLink = opinion.__typename === 'Version' ? opinion.parent.url : section.url;
+    const backLink = opinion.__typename === 'Version' ? opinion.parent?.url : section.url;
 
     const colorClass = `opinion opinion--${color} opinion--current`;
 

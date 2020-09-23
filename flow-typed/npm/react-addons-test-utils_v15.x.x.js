@@ -1,8 +1,6 @@
 // flow-typed signature: edc151d4ee06b1d20021425952030a4b
 // flow-typed version: cdb403dbea/react-addons-test-utils_v15.x.x/flow_>=v0.15.x
 
-import React from 'react';
-
 declare module 'react-addons-test-utils' {
   declare var Simulate: {
     [eventName: string]: (element: Element, eventData?: Object) => void;
