@@ -21,9 +21,10 @@ Scenario: A user which has been invited should be able to register
     | responses[0].value   | plop                 |
   And I select "Citoyen" from "user_type"
   And I select "Sangohan" from react "#registration-form-responses2"
+  And I scroll to element "#confirm-register"
   And I check element "charte"
   And should see an "#recaptcha" element
-  And I press "global.register"
+  And I press "confirm-register"
   And I wait ".flash-notif" to appear on current page
   Then I should see "alert.success.add.user"
   And I should be redirected to "/"
@@ -41,9 +42,10 @@ Scenario: A user which has been invited should be able to register even with shi
     | responses[0].value   | plop                 |
   And I select "Citoyen" from "user_type"
   And I select "Sangohan" from react "#registration-form-responses2"
+  And I scroll to element "#confirm-register"
   And I check element "charte"
   And should see an "#recaptcha" element
-  And I press "global.register"
+  And I press "confirm-register"
   And I wait ".flash-notif" to appear on current page
   Then I should see "alert.success.add.user"
   And I should be redirected to "/"
@@ -61,9 +63,10 @@ Scenario: A user which has been invited should be able to register even when reg
     | responses[0].value   | plop                 |
   And I select "Citoyen" from "user_type"
   And I select "Sangohan" from react "#registration-form-responses2"
+  And I scroll to element "#confirm-register"
   And I check element "charte"
   And should see an "#recaptcha" element
-  And I press "global.register"
+  And I press "confirm-register"
   And I wait ".flash-notif" to appear on current page
   Then I should see "alert.success.add.user"
   And I should be redirected to "/"

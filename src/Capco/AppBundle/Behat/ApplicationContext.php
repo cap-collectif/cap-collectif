@@ -881,7 +881,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I scroll to element :elementId
+     * @When I scroll to element :selector
      */
     public function scrollToElement(string $selector)
     {
@@ -1258,6 +1258,9 @@ class ApplicationContext extends UserContext
         $this->visitPageWithParams('home page');
     }
 
+    /**
+     * @When I set cookie consent
+     */
     public function setCookieConsent()
     {
         if ($this->cookieConsented) {
