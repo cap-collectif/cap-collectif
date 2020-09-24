@@ -3,106 +3,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import * as Icons from './index';
 
-export const ICON_NAME: {
-  chart: 'chart',
-  pen: 'pen',
-  eye: 'eye',
-  clock: 'clock',
-  addCircle: 'addCircle',
-  smallCaps: 'smallCaps',
-  textStyle: 'textStyle',
-  unfavorable: 'unfavorable',
-  ongoing: 'ongoing',
-  calendar: 'calendar',
-  networkAdd: 'network-add',
-  share: 'share',
-  link: 'link',
-  mail: 'mail',
-  google: 'google',
-  googleColored: 'googleColored',
-  facebook: 'facebook',
-  facebookF: 'facebookF',
-  twitter: 'twitter',
-  linkedin: 'linkedin',
-  franceConnect: 'franceConnect',
-  franceConnectIcon: 'franceConnectIcon',
-  radioButton: 'radioButton',
-  radioButtonChecked: 'radioButton--checked',
-  plus: 'plus',
-  close: 'close',
-  error: 'error',
-  trash: 'trash',
-  trash2: 'trash2',
-  arrowDown: 'arrowDown',
-  menu: 'menu',
-  information: 'information',
-  arrowThickCircleDown: 'arrow-thick-circle-down',
-  openId: 'openId',
-  saml: 'saml',
-  chevronLeft: 'chevron-left',
-  chevronRight: 'chevron-right',
-  chevronUp: 'chevron-up',
-  chevronDown: 'chevron-down',
-  checkbox: 'checkbox',
-  checkboxChecked: 'checkboxChecked',
-  file: 'file',
-  check: 'check',
-  message: 'message',
-  askBubble: 'askBubble',
-  messageBubble: 'messageBubble',
-  messageBubbleCheck: 'messageBubbleCheck',
-  messageBubbleFilled: 'messageBubbleFilled',
-  download: 'download',
-  doubleMessageBubble: 'doubleMessageBubble',
-  taskList: 'taskList',
-  done: 'done',
-  todo: 'todo',
-  inProgress: 'inProgress',
-  silent: 'silent',
-  favorable: 'favorable',
-  crossRounded: 'cross--rounded',
-  warning: 'warning',
-  externalLink: 'external-link',
-  list: 'list',
-  draft: 'draft',
-  stack: 'stack',
-  tag: 'tag',
-  pin: 'pin',
-  pin2: 'pin2',
-  warningRounded: 'warningRounded',
-  reload: 'reload',
-  folder: 'folder',
-  micro: 'micro',
-  eventOnline: 'eventOnline',
-  eventPhysical: 'eventPhysical',
-  camera: 'camera',
-  step: 'step',
-  user: 'user',
-  play: 'play',
-  userLive: 'userLive',
-  join: 'join',
-  vip: 'vip',
-  verified: 'verified',
-  singleMan: 'singleMan',
-  singleManFilled: 'singleManFilled',
-  like: 'like',
-  paperPlane: 'paperPlane',
-  locationNotAuthorize: 'location-not-authorize',
-  search: 'search',
-  newUser: 'new-user',
-  locationTarget: 'locationTarget',
-  grandLyonConnect: 'grandLyonConnect',
-  pdfIcon: 'pdfIcon',
-  zipIcon: 'zipIcon',
-  vidIcon: 'vidIcon',
-  docIcon: 'docIcon',
-  fileIcon: 'fileIcon',
-  budget: 'budget',
-  vote: 'vote',
-  urne: 'urne',
-  wifiOff: 'wifiOff',
-  removeCircle: 'removeCircle',
-} = {
+export const ICON_NAME = {
   chart: 'chart',
   pen: 'pen',
   eye: 'eye',
@@ -201,6 +102,14 @@ export const ICON_NAME: {
   urne: 'urne',
   wifiOff: 'wifiOff',
   removeCircle: 'removeCircle',
+  arrowRight: 'arrowRight',
+  bubbleO: 'bubble-o',
+  calendarO: 'calendar-o',
+  clockO: 'clock-o',
+  debateO: 'debate-o',
+  reporteO: 'reporte-o',
+  sendO: 'send-o',
+  writeO: 'write-o',
 };
 
 type Props = {|
@@ -411,6 +320,22 @@ const getIcon = name => {
       return <Icons.RemoveCircle />;
     case 'wifiOff':
       return <Icons.WifiOff />;
+    case 'arrowRight':
+      return <Icons.ArrowRight />;
+    case 'bubble-o':
+      return <Icons.BubbleO />;
+    case 'calendar-o':
+      return <Icons.CalendarO />;
+    case 'clock-o':
+      return <Icons.ClockO />;
+    case 'debate-o':
+      return <Icons.DebateO />;
+    case 'reporte-o':
+      return <Icons.ReporteO />;
+    case 'send-o':
+      return <Icons.SendO />;
+    case 'write-o':
+      return <Icons.WriteO />;
     default:
       return <div />;
   }

@@ -75,6 +75,8 @@ import ProposalPreviewApp from '~/startup/ProposalPreviewApp';
 import DebatePreviewApp from '~/startup/DebatePreviewApp';
 import UserSliderApp from '~/startup/UserSliderApp';
 import GlobalStepApp from '~/startup/GlobalStepApp';
+import HomeHeaderApp from '~/startup/HomeHeaderApp';
+import ImageSliderApp from '~/startup/ImageSliderApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -153,4 +155,6 @@ ReactOnRails.register({
   DebatePreviewApp,
   UserSliderApp,
   GlobalStepApp,
+  HomeHeaderApp,
+  ImageSliderApp,
 });
