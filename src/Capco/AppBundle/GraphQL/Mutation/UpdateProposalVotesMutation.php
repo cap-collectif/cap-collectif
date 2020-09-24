@@ -18,13 +18,14 @@ use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 
 class UpdateProposalVotesMutation implements MutationInterface
 {
-    private $em;
-    private $proposalCollectVoteRepository;
-    private $proposalSelectionVoteRepository;
-    private $stepRepo;
-    private $logger;
-    private $viewerProposalVotesDataLoader;
-    private $globalIdResolver;
+    private EntityManagerInterface $em;
+    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private AbstractStepRepository $stepRepo;
+    private ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
+    private LoggerInterface $logger;
+    private GlobalIdResolver $globalIdResolver;
+    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -33,15 +34,17 @@ class UpdateProposalVotesMutation implements MutationInterface
         AbstractStepRepository $stepRepo,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver
+        GlobalIdResolver $globalIdResolver,
+        ProposalVoteAccountHandler $proposalVoteAccountHandler
     ) {
         $this->em = $em;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->stepRepo = $stepRepo;
-        $this->logger = $logger;
         $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
+        $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
+        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -82,6 +85,12 @@ class UpdateProposalVotesMutation implements MutationInterface
                     throw new UserError('This step is not contribuable.');
                 }
                 $this->em->remove($vote);
+                $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted(
+                    $step,
+                    $vote,
+                    $viewer,
+                    false
+                );
             }
         }
 
