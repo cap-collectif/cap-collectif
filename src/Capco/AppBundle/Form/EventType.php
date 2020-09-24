@@ -70,10 +70,9 @@ class EventType extends AbstractType
             ->add('zipCode', TextType::class)
             ->add('country', TextType::class)
             ->add('customCode', TextType::class)
-            ->add('themes', EntityType::class, [
-                'class' => Theme::class,
+            ->add('themes', RelayNodeType::class, [
                 'multiple' => true,
-                'expanded' => true,
+                'class' => Theme::class,
             ])
             ->add('review', EventReviewType::class)
             ->add('authorAgreeToUsePersonalDataForEventOnly', CheckboxType::class)
