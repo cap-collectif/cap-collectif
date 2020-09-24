@@ -20,7 +20,7 @@ exports[`<MultipleRadioButton /> should render correctly 1`] = `
     <Radio
       checked={false}
       className="choice-field"
-      color="SUCCESS"
+      color="#0FFF00"
       disabled={false}
       id="1_choice-1"
       image=""
@@ -35,7 +35,7 @@ exports[`<MultipleRadioButton /> should render correctly 1`] = `
     <Radio
       checked={false}
       className="choice-field"
-      color="INFO"
+      color="#0BB800"
       disabled={false}
       id="1_choice-2"
       image=""
@@ -71,7 +71,7 @@ exports[`<MultipleRadioButton /> should render correctly when disabled 1`] = `
     <Radio
       checked={false}
       className="choice-field"
-      color="SUCCESS"
+      color="#0FFF00"
       disabled={true}
       id="1_choice-1"
       image=""
@@ -86,7 +86,7 @@ exports[`<MultipleRadioButton /> should render correctly when disabled 1`] = `
     <Radio
       checked={false}
       className="choice-field"
-      color="INFO"
+      color="#0BB800"
       disabled={true}
       id="1_choice-2"
       image=""
@@ -122,7 +122,7 @@ exports[`<MultipleRadioButton /> should render correctly when in questionnaire f
     <Radio
       checked={false}
       className="choice-field"
-      color="SUCCESS"
+      color="#0FFF00"
       disabled={false}
       id="1_choice-1"
       image=""
@@ -137,7 +137,7 @@ exports[`<MultipleRadioButton /> should render correctly when in questionnaire f
     <Radio
       checked={false}
       className="choice-field"
-      color="INFO"
+      color="#0BB800"
       disabled={false}
       id="1_choice-2"
       image=""

@@ -6,24 +6,10 @@ import RadioContainer, { LabelRadioButtonContainer } from './Radio.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import isQuestionnaire from '~/utils/isQuestionnaire';
 
-export const COLORS: {
-  SUCCESS: 'SUCCESS',
-  INFO: 'INFO',
-  WARNING: 'WARNING',
-  DANGER: 'DANGER',
-  PRIMARY: 'PRIMARY',
-} = {
-  SUCCESS: 'SUCCESS',
-  INFO: 'INFO',
-  WARNING: 'WARNING',
-  DANGER: 'DANGER',
-  PRIMARY: 'PRIMARY',
-};
-
 type Props = {|
   ...PropsCommonCheckboxRadio,
   isButton?: boolean,
-  color?: $Values<typeof COLORS> | string,
+  color?: ?string,
 |};
 
 const Radio = ({

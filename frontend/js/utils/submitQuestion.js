@@ -56,6 +56,7 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
             ...choice,
             // We only send ids to the server
             image: choice.image ? choice.image.id : null,
+            color: choice.color || null,
             // List of not send properties to server
             kind: undefined,
           }))

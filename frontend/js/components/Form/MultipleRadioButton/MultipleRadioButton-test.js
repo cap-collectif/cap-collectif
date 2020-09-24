@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import MultipleRadioButton from './MultipleRadioButton';
-import { COLORS } from '~/components/Ui/Form/Input/Radio/Radio';
 import { TYPE_FORM } from '~/constants/FormConstants';
 
 const baseProps = {
@@ -11,18 +10,18 @@ const baseProps = {
   typeForm: TYPE_FORM.DEFAULT,
   field: {
     id: '123',
-    type: 'checkbox',
+    type: 'button',
     isOtherAllowed: false,
     choices: [
       {
         id: '1',
         label: 'Pomme',
-        color: COLORS.SUCCESS,
+        color: '#0FFF00',
       },
       {
         id: '2',
         label: 'Poire',
-        color: COLORS.INFO,
+        color: '#0BB800',
       },
     ],
     checked: false,

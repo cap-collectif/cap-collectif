@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Checkbox from '~/components/Ui/Form/Input/Checkbox/Checkbox';
-import Radio, { COLORS } from '~/components/Ui/Form/Input/Radio/Radio';
+import Radio from '~/components/Ui/Form/Input/Radio/Radio';
 import TextArea from '~/components/Ui/Form/Input/TextArea/TextArea';
 import Input from '~/components/Ui/Form/Input/Input';
 import Dropzone from '~/components/Ui/Form/Dropzone/Dropzone';
@@ -94,7 +94,7 @@ storiesOf('Core|Form/RadioButton', module).add('Default', () => {
       id="2"
       name="test"
       value="test2"
-      color={COLORS.SUCCESS}
+      color="#0AA900"
       isButton
     />
   );
@@ -107,57 +107,10 @@ storiesOf('Core|Form/RadioButton', module).add('Checked', () => {
       id="2"
       name="test"
       value="test2"
-      color={COLORS.SUCCESS}
+      color="#0AA900"
       checked
       isButton
     />
-  );
-});
-
-storiesOf('Core|Form/RadioButton', module).add('All', () => {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <Radio
-        label="Je ne suis pas checked"
-        id="1"
-        name="test"
-        value="test1"
-        color={COLORS.SUCCESS}
-        isButton
-      />
-      <Radio
-        label="Je ne suis pas checked"
-        id="2"
-        name="test"
-        value="test2"
-        color={COLORS.INFO}
-        isButton
-      />
-      <Radio
-        label="Je ne suis pas checked"
-        id="3"
-        name="test"
-        value="test3"
-        color={COLORS.WARNING}
-        isButton
-      />
-      <Radio
-        label="Je ne suis pas checked"
-        id="4"
-        name="test"
-        value="test4"
-        color={COLORS.DANGER}
-        isButton
-      />
-      <Radio
-        label="Je ne suis pas checked"
-        id="5"
-        name="test"
-        value="test5"
-        color={COLORS.PRIMARY}
-        isButton
-      />
-    </div>
   );
 });
 
