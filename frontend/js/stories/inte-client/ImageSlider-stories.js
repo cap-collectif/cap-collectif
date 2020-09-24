@@ -51,7 +51,7 @@ const inputs = [
   },
 ];
 
-const settingsSlider = object('settings slider', {
+const settingsSlider = object('settingsSlider', {
   dots: true,
   infinite: true,
   speed: 400,

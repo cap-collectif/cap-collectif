@@ -30,7 +30,7 @@ storiesOf('Inté client|HomeHeader', module).add(
       },
     });
 
-    const mainLink = object('Main link', {
+    const mainLink = object('mainLink', {
       link: 'http://www.donothingfor2minutes.com/',
       text: 'Je participe',
       colors: {
@@ -39,18 +39,23 @@ storiesOf('Inté client|HomeHeader', module).add(
       },
     });
 
-    const secondLink = object('Second link', {
+    const secondLink = object('secondLink', {
       link: 'http://www.donothingfor2minutes.com/',
       text: 'Voir les consultations',
       textColor: '#4211D0',
     });
+
+    const mainImg = text(
+      'mainImage',
+      'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png',
+    );
 
     return (
       <div style={{ width: 1444, height: 600, padding: '30px 30px', border: '1px solid red' }}>
         <HomeHeader
           title={title}
           description={description}
-          img="https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png"
+          img={mainImg}
           tag={tag}
           mainLink={mainLink}
           secondLink={secondLink}

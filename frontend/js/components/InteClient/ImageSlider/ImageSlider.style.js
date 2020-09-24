@@ -11,4 +11,8 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled(Slider)
   .slick-slide {
     padding: 0 20px;
   }
+
+  .slick-slide img {
+    width: 100%;
+  }
 `;

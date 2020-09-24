@@ -39,9 +39,11 @@ const HomeHeader = ({ title, description, img, tag, mainLink, secondLink, style 
       <p className="description">{description}</p>
 
       <div className="wrapper-link">
-        <a href={mainLink.link} className="main-link">
-          {mainLink.text}
-        </a>
+        {mainLink.text && (
+          <a href={mainLink.link} className="main-link">
+            {mainLink.text}
+          </a>
+        )}
         <a href={secondLink.link} className="second-link">
           <span>{secondLink.text}</span>
           <Icon name={ICON_NAME.arrowRight} size={16} color={secondLink.textColor} />

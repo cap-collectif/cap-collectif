@@ -18,7 +18,14 @@ export type Props = {
 const ImageSlider = ({ images, className, settingsSlider }: Props) => (
   <Container {...settingsSlider} className={cn('image-slider', className)}>
     {images.map((img, idx) => (
-      <img src={img.url} alt="" key={`image-slide-${idx}`} />
+      <div key={`image-slide-${idx}`}>
+        <img
+          src={img.url}
+          alt={img.alt}
+          /* eslint-disable-next-line no-undef */
+          onLoad={() => window.dispatchEvent(new Event('resize'))}
+        />
+      </div>
     ))}
   </Container>
 );
