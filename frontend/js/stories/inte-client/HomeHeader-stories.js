@@ -8,16 +8,16 @@ storiesOf('Inté client|HomeHeader', module).add(
   'Default',
   () => {
     const title = text(
-      'Title',
-      "Revenu de base :<br/><span style='color:red'>co-construisez</span> la loi",
+      'title',
+      'Revenu de base :<br/><span style="color:red">co-construisez</span> la loi',
     );
 
     const description = text(
-      'Description',
+      'description',
       'Le groupe Socialiste à l’Assemblée Nationale lance une grande consultation sur le revenu de base et la dotation universelle.',
     );
 
-    const tag = object('Tag', {
+    const tag = object('tag', {
       icon: 'clock-o',
       text: 'Consultation en cours',
       colors: {
@@ -46,7 +46,7 @@ storiesOf('Inté client|HomeHeader', module).add(
     });
 
     const mainImg = text(
-      'mainImage',
+      'img',
       'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png',
     );
 

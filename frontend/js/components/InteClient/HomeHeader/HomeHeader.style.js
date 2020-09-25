@@ -13,7 +13,6 @@ export type Colors = {|
 const getColorHover = (color: string) => {
   const colorRgb = hexToRgb(color);
   const colorRgbFormatted = formatRgb(colorRgb);
-
   const { h, s, l } = rgbToHsl(colorRgbFormatted);
 
   return formatHsl({ h, s, l: l - 10 });
@@ -28,9 +27,10 @@ export const Container: StyledComponent<
 })`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
+  text-align: left;
 
   & > div {
     display: flex;
@@ -39,7 +39,8 @@ export const Container: StyledComponent<
   }
 
   h1 {
-    font-size: 48px;
+    color: #000 !important;
+    font-size: 48px !important;
     line-height: 56px;
     font-weight: bold;
     margin: 14px 0 0 0;
@@ -53,7 +54,8 @@ export const Container: StyledComponent<
   }
 
   .illustration {
-    height: 100%;
+    height: auto;
+    width: 100%;
   }
 
   .description {
@@ -90,6 +92,7 @@ export const Container: StyledComponent<
 
     &:hover {
       text-decoration: underline;
+      color: ${props => props.secondLinkColor};
     }
 
     span {
@@ -146,7 +149,7 @@ export const Container: StyledComponent<
 export const Tag: StyledComponent<{ colors: Colors }, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   color: ${props => props.colors.text};
   background-color: ${props => props.colors.background};
   padding: 4px 10px;

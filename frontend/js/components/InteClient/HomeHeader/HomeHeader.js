@@ -31,7 +31,7 @@ const HomeHeader = ({ title, description, img, tag, mainLink, secondLink, style 
   <Container style={style} mainLinkColors={mainLink.colors} secondLinkColor={secondLink.textColor}>
     <div>
       <Tag colors={config.isMobile ? tag.mobileColors : tag.colors}>
-        {tag.icon && <Icon name={tag.icon} size={20} color={tag.colors.text} />}
+        {tag.icon && <Icon name={tag.icon} size={24} color={tag.colors.text} />}
         <span>{tag.text}</span>
       </Tag>
 

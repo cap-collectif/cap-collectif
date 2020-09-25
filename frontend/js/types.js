@@ -228,4 +228,5 @@ export type SettingsSlider = {|
   useTransform?: boolean,
   variableWidth?: boolean,
   vertical?: boolean,
+  edgeFriction?: number,
 |};
