@@ -22,7 +22,7 @@ class ProjectListFilterOrder extends React.Component<Props> {
         type="select"
         name="orderBy"
         value={orderBy}
-        onChange={e => {
+        onChange={(e: SyntheticInputEvent<HTMLInputElement>) => {
           dispatch(changeOrderBy(e.target.value));
         }}>
         <option key="date" value="PUBLISHED_AT">

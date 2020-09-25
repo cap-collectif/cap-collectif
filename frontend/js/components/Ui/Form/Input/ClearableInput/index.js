@@ -16,6 +16,7 @@ type Props = {|
   iconRight?: boolean,
   onSubmit?: (value: string) => void,
   onClear?: () => void,
+  ariaLabel?: string,
 |};
 
 const CloseIcon = styled(Icon)``;
@@ -107,6 +108,7 @@ const ClearableInput = ({
   className,
   initialValue,
   disabled,
+  ariaLabel,
   ...rest
 }: Props) => {
   const [input, clearInput] = useInput(initialValue || '');
@@ -164,7 +166,14 @@ const ClearableInput = ({
       className={className}
       disabled={disabled}>
       {!iconRight && icon}
-      <input disabled={disabled} {...rest} {...input} onChange={onChangeHandler} ref={inputRef} />
+      <input
+        disabled={disabled}
+        {...rest}
+        {...input}
+        onChange={onChangeHandler}
+        ref={inputRef}
+        aria-label={ariaLabel}
+      />
       <CloseIconContainer
         ref={closeIconContainerRef}
         tabIndex={0}

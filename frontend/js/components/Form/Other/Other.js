@@ -56,7 +56,7 @@ const Other = ({
         type="text"
         name={`reply-${field.id}_choice-other--field`}
         id={`reply-${field.id}_choice-other--field`}
-        onChange={e => onChange(e.target.value)}
+        onChange={(e: SyntheticInputEvent<HTMLInputElement>) => onChange(e.target.value)}
         value={value}
         disabled={disabled}
       />

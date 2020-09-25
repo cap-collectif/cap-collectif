@@ -53,7 +53,7 @@ export const MediaAdminContainer = () => {
   const intl = useIntl();
   const { props: data }: PropsQuery = useQuery(queryMedias, queryVariablesWithParameters);
 
-  const onInputChange = debounce(e => {
+  const onInputChange = debounce((e: SyntheticInputEvent<HTMLInputElement>) => {
     const term = e.target.value;
     if (term === '' && parameters.filters.term !== null) {
       dispatch({ type: 'CLEAR_TERM' });

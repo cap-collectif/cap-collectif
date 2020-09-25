@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
+import { debounce } from 'lodash';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
-import { changeTerm } from '../../../redux/modules/proposal';
-import Input from '../../Form/Input';
-import type { GlobalState, Dispatch } from '../../../types';
+import ClearableInput from '~ui/Form/Input/ClearableInput';
+import { changeTerm } from '~/redux/modules/proposal';
+import type { GlobalState, Dispatch } from '~/types';
 
 type Props = {|
   +dispatch: Dispatch,
@@ -13,61 +13,34 @@ type Props = {|
   +intl: Object,
 |};
 
-type State = {|
-  +terms: string,
-|};
+export const ProposalListSearch = ({ dispatch, intl }: Props) => {
+  const onInputChange = debounce((e: SyntheticInputEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    dispatch(changeTerm(term || ''));
+  }, 500);
 
-export class ProposalListSearch extends React.Component<Props, State> {
-  _input: any;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      terms: props.terms,
-    };
-
-    this._input = React.createRef();
-  }
-
-  handleSubmit = (e: Event) => {
-    const { dispatch } = this.props;
-
-    e.preventDefault();
-    let value = this._input.current.getValue();
-    value = value.length > 0 ? value : null;
-    if (value) {
-      dispatch(changeTerm(value));
-    }
+  const handleClear = () => {
+    dispatch(changeTerm(''));
   };
 
-  handleChange = (event: $FlowFixMe) => {
-    this.setState({ terms: event.target.value });
-  };
-
-  render() {
-    const { intl } = this.props;
-    const { terms } = this.state;
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <Input
-          id="proposal-search-input"
-          type="text"
-          ariaLabel={intl.formatMessage({ id: 'global.menu.search' })}
-          ref={this._input}
-          placeholder="proposal.search"
-          buttonAfter={
-            <Button id="proposal-search-button" type="submit">
-              <i className="cap cap-magnifier" />
-            </Button>
-          }
-          value={terms}
-          onChange={this.handleChange}
-        />
-      </form>
-    );
-  }
-}
+  return (
+    <form style={{ marginBottom: '15px' }}>
+      <ClearableInput
+        id="proposal-search-input"
+        name="search"
+        ariaLabel={intl.formatMessage({ id: 'global.menu.search' })}
+        type="text"
+        icon={<i className="cap cap-magnifier" />}
+        placeholder={intl.formatMessage({ id: 'proposal.search' })}
+        onChange={(e: SyntheticInputEvent<HTMLInputElement>) => {
+          e.persist();
+          onInputChange(e);
+        }}
+        onClear={handleClear}
+      />
+    </form>
+  );
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   terms: state.proposal.terms ? state.proposal.terms : '',

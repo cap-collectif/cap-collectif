@@ -365,7 +365,6 @@ trait ProposalStepsTrait
     public function iSearchForProposalsWithTerms($terms)
     {
         $this->fillField('proposal-search-input', $terms);
-        $this->pressButton('proposal-search-button');
         $this->IwaitForSuccessfulRefetchQuery();
     }
 

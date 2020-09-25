@@ -2,30 +2,25 @@
 
 exports[`<ProposalListSearch /> should render correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  style={
+    Object {
+      "marginBottom": "15px",
+    }
+  }
 >
-  <ForwardRef
+  <ClearableInput
     ariaLabel="global.menu.search"
-    buttonAfter={
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        id="proposal-search-button"
-        type="submit"
-      >
-        <i
-          className="cap cap-magnifier"
-        />
-      </Button>
+    icon={
+      <i
+        className="cap cap-magnifier"
+      />
     }
     id="proposal-search-input"
+    name="search"
     onChange={[Function]}
+    onClear={[Function]}
     placeholder="proposal.search"
     type="text"
-    value="This is some terms"
   />
 </form>
 `;
