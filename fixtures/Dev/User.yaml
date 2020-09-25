@@ -575,7 +575,7 @@ Capco\UserBundle\Entity\User:
         lastname: Buliard
         biography: "La raclette c'est bon."
         media: '@ProfilePicMickael'
-        email: mickaelS@cap-collectif.com
+        email: mickael@cap-collectif.com
         plainpassword: toto
         roles:
             - 'ROLE_USER'

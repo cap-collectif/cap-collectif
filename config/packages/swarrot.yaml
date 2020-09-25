@@ -54,6 +54,9 @@ swarrot:
         proposal.revoke:
             exchange: capco_direct_exchange
             routing_key: proposal_revoke
+        proposal.analyse:
+            exchange: capco_direct_exchange
+            routing_key: proposal_analyse
         comment.create:
             exchange: capco_direct_exchange
             routing_key: comment_create
@@ -345,6 +348,23 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'proposal_revoke_retry_%%attempt%%'
+        proposal_analyse:
+            processor: Capco\AppBundle\Processor\Proposal\ProposalAnalyseProcessor
+            middleware_stack:
+                -   configurator: swarrot.processor.signal_handler
+                -   configurator: swarrot.processor.max_execution_time
+                    extras:
+                        max_execution_time: 100
+                -   configurator: swarrot.processor.max_messages
+                -   configurator: swarrot.processor.doctrine_connection
+                -   configurator: swarrot.processor.doctrine_object_manager
+                -   configurator: swarrot.processor.exception_catcher
+                -   configurator: swarrot.processor.ack
+                -   configurator: swarrot.processor.retry
+                    extras:
+                        retry_attempts: 3
+                        retry_exchange: 'retry'
+                        retry_routing_key_pattern: 'proposal_analyse_retry_%%attempt%%'
         comment_create:
             processor: Capco\AppBundle\Processor\Comment\CommentCreateProcessor
             middleware_stack:

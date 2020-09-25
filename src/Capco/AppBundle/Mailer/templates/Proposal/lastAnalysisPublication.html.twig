@@ -1,0 +1,73 @@
+{% extends "@CapcoMail/standardLayout.html.twig" %}
+
+{% block html_title %}
+    {{ 'notification.proposal.analysis.last.title'|trans({'proposalName': proposal.title}, 'CapcoAppBundle', user_locale) }}
+{% endblock %}
+
+{% set logoUrl = app_logo_url() %}
+
+{% block header_mail %}
+    <img style="margin-bottom: 20px;" src="{{ logoUrl }}" alt="logo {{ siteName }}" />
+    <h1>
+        {{ siteName }} : {{ projectName }}
+    </h1>
+{% endblock %}
+
+
+{% block core_mail %}
+    <div class="resp-punchline"
+         style="padding: 20px 27px 20px 27px;text-decoration:none; text-align:left;color: rgb(51, 51, 51);font-size: 18px;font-family: 'OpenSans-SemiBold',helvetica,arial,sans-serif;font-weight: 600; background-color:#EEE">
+        <table width="100%" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    {{ 'notification.proposal.analysis.last.body'
+                        |trans({
+                            'proposalUrl': proposalUrl,
+                            'proposalName': proposal.title
+                        }, 'CapcoAppBundle', user_locale)
+                        |raw
+                    }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ 'global.logs'|trans({}, 'CapcoAppBundle', user_locale)|capitalize }}
+                </td>
+            </tr>
+            {% for analysis in proposal.analyses | slice(0, 5) %}
+                <tr>
+                    <td>
+                        <div style="background-color: #FFF;padding: 10px 10px;margin: 10px 0px;">
+                            <table width="100%" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>
+                                        <a href="{{ analysis.updatedBy.url }}">{{ analysis.updatedBy.username }}</a>
+                                    </td>
+                                    <td style="text-align: right">
+                                        {{ 'on-date-at-time'|trans({
+                                            'date': analysis.updatedAt|date("d/m/Y"),
+                                            'heure': analysis.updatedAt|date("H:i")
+                                        }, 'CapcoAppBundle', user_locale) }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td style="padding-top: 30px;">
+                    <a style="background-color: #3b88fd; border-radius: 5px;color: #fff;padding: 5px 9px;font-size: 14px;"
+                       href="{{ proposalUrl }}">
+                        {{ 'global.consult' |trans({}, 'CapcoAppBundle', user_locale) }}
+                    </a>
+                </td>
+                </tr>
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block footer_mail %}
+    {% include '@CapcoMail/footerLayout.html.twig' %}
+{% endblock %}

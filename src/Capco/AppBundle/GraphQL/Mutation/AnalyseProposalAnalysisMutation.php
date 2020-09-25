@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
@@ -17,6 +18,8 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -25,13 +28,14 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
 {
     use ResolverTrait;
 
-    private $proposalRepository;
-    private $authorizationChecker;
-    private $analysisRepository;
-    private $logger;
-    private $responsesFormatter;
-    private $entityManager;
-    private $formFactory;
+    private ProposalRepository $proposalRepository;
+    private AuthorizationChecker $authorizationChecker;
+    private ProposalAnalysisRepository $analysisRepository;
+    private LoggerInterface $logger;
+    private ResponsesFormatter $responsesFormatter;
+    private EntityManagerInterface $entityManager;
+    private FormFactoryInterface $formFactory;
+    private Publisher $publisher;
 
     public function __construct(
         ProposalRepository $proposalRepository,
@@ -40,7 +44,8 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
         LoggerInterface $logger,
         ResponsesFormatter $responsesFormatter,
         EntityManagerInterface $entityManager,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        Publisher $publisher
     ) {
         $this->proposalRepository = $proposalRepository;
         $this->authorizationChecker = $authorizationChecker;
@@ -49,6 +54,7 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
         $this->responsesFormatter = $responsesFormatter;
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $args, $viewer)
@@ -104,6 +110,8 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
             $proposal->addAnalysis($proposalAnalysis);
         }
 
+        $oldState = $proposalAnalysis->getState();
+
         $proposalAnalysis
             ->setUpdatedBy($viewer)
             ->setProposal($proposal)
@@ -141,6 +149,8 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
             ];
         }
 
+        $this->notifyIfDecision($oldState, $proposalAnalysis);
+
         return ['analysis' => $proposalAnalysis, 'errorCode' => null];
     }
 
@@ -158,5 +168,29 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
         }
 
         return false;
+    }
+
+    private function notifyIfDecision(string $oldState, ProposalAnalysis $proposalAnalysis): void
+    {
+        $updateDate = $proposalAnalysis->getUpdatedAt();
+        if (is_null($updateDate)) {
+            $updateDate = new \DateTime();
+        }
+
+        $message = [
+            'type' => 'analysis',
+            'analysisId' => $proposalAnalysis->getId(),
+            'proposalId' => $proposalAnalysis->getProposal()->getId(),
+            'date' => $updateDate->format('Y-m-d H:i:s')
+        ];
+        if (
+            $proposalAnalysis->getState() !== $oldState &&
+            \in_array($proposalAnalysis->getState(), ProposalStatementState::getDecisionalTypes())
+        ) {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,
+                new Message(json_encode($message))
+            );
+        }
     }
 }

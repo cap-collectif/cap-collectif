@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
@@ -11,6 +12,7 @@ use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Event\DecisionEvent;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
@@ -21,6 +23,8 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -30,16 +34,17 @@ class ChangeProposalDecisionMutation implements MutationInterface
 {
     use ResolverTrait;
 
-    private $proposalRepository;
-    private $entityManager;
-    private $authorizationChecker;
-    private $logger;
-    private $proposalDecisionRepository;
-    private $userRepository;
-    private $translator;
-    private $statusRepository;
-    private $eventDispatcher;
-    private $indexer;
+    private ProposalRepository $proposalRepository;
+    private EntityManagerInterface $entityManager;
+    private AuthorizationChecker $authorizationChecker;
+    private LoggerInterface $logger;
+    private ProposalDecisionRepository $proposalDecisionRepository;
+    private UserRepository $userRepository;
+    private TranslatorInterface $translator;
+    private StatusRepository $statusRepository;
+    private EventDispatcherInterface $eventDispatcher;
+    private Indexer $indexer;
+    private Publisher $publisher;
 
     public function __construct(
         ProposalRepository $proposalRepository,
@@ -50,7 +55,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
         LoggerInterface $logger,
         Indexer $indexer,
         TranslatorInterface $translator,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        Publisher $publisher
     ) {
         $this->proposalRepository = $proposalRepository;
         $this->entityManager = $entityManager;
@@ -61,6 +67,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         $this->translator = $translator;
         $this->statusRepository = $statusRepository;
         $this->eventDispatcher = $eventDispatcher;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $args, $viewer, RequestStack $request): array
@@ -76,12 +83,15 @@ class ChangeProposalDecisionMutation implements MutationInterface
             ];
         }
 
-        $proposalDecision = $this->updateDecision(
-            $proposal,
-            $args,
-            $viewer,
-            $request->getCurrentRequest()->getLocale()
-        );
+        if (!($proposalDecision = $proposal->getDecision())) {
+            $proposalDecision = $this->createProposalDecision(
+                $proposal,
+                $request->getCurrentRequest()->getLocale()
+            );
+        }
+        $oldState = $proposalDecision->getState();
+
+        $this->updateDecision($proposalDecision, $args, $viewer);
         $post = $this->updateDecisionPost($proposalDecision->getPost(), $args);
         $this->setRefusedReasonIfAny($proposalDecision, $args);
 
@@ -96,6 +106,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
             }
             $this->entityManager->flush();
             $this->index($proposal, $post);
+            $this->notifyIfDecision($oldState, $proposalDecision);
 
             return [
                 'decision' => $proposalDecision,
@@ -121,6 +132,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
             ];
         }
         $this->index($proposal);
+
+        $this->notifyIfDecision($oldState, $proposalDecision);
 
         return [
             'decision' => $proposalDecision,
@@ -180,17 +193,11 @@ class ChangeProposalDecisionMutation implements MutationInterface
     }
 
     private function updateDecision(
-        Proposal $proposal,
+        ProposalDecision $proposalDecision,
         Argument $args,
-        User $viewer,
-        ?string $locale
-    ): ProposalDecision {
-        // If there is no proposalDecision related to the given proposal, create it.
-        if (!($proposalDecision = $proposal->getDecision())) {
-            $proposalDecision = $this->createProposalDecision($proposal, $locale);
-        }
-
-        return $proposalDecision
+        User $viewer
+    ): void {
+        $proposalDecision
             ->setIsApproved($args->offsetGet('isApproved') ?? false)
             ->setUpdatedBy($viewer)
             ->setEstimatedCost((int) $args->offsetGet('estimatedCost'))
@@ -277,5 +284,23 @@ class ChangeProposalDecisionMutation implements MutationInterface
         $this->eventDispatcher->dispatch($decision, $event);
 
         return $event;
+    }
+
+    private function notifyIfDecision(string $oldState, ProposalDecision $proposalDecision): void
+    {
+        $message = [
+            'type' => 'decision',
+            'proposalId' => $proposalDecision->getProposal()->getId(),
+            'date' => $proposalDecision->getUpdatedAt()->format('Y-m-d H:i:s')
+        ];
+        if (
+            ProposalStatementState::DONE === $proposalDecision->getState() &&
+            $proposalDecision->getState() != $oldState
+        ) {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,
+                new Message(json_encode($message))
+            );
+        }
     }
 }

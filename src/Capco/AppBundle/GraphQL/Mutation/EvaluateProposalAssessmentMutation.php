@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalAssessment;
@@ -15,27 +16,32 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class EvaluateProposalAssessmentMutation implements MutationInterface
 {
     use ResolverTrait;
 
-    private $proposalRepository;
-    private $authorizationChecker;
-    private $entityManager;
-    private $logger;
+    private ProposalRepository $proposalRepository;
+    private AuthorizationChecker $authorizationChecker;
+    private EntityManagerInterface $entityManager;
+    private LoggerInterface $logger;
+    private Publisher $publisher;
 
     public function __construct(
         ProposalRepository $proposalRepository,
         AuthorizationChecker $authorizationChecker,
         EntityManagerInterface $entityManager,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Publisher $publisher
     ) {
         $this->proposalRepository = $proposalRepository;
         $this->authorizationChecker = $authorizationChecker;
         $this->entityManager = $entityManager;
         $this->logger = $logger;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $args, $viewer): array
@@ -75,6 +81,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         if (!($proposalAssessment = $proposal->getAssessment())) {
             $proposalAssessment = new ProposalAssessment($proposal);
         }
+        $oldState = $proposalAssessment->getState();
 
         $proposalAssessment
             ->setEstimatedCost($cost)
@@ -102,6 +109,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         try {
             $this->entityManager->persist($proposalAssessment);
             $this->entityManager->flush();
+            $this->notifyIfDecision($oldState, $proposalAssessment);
         } catch (\Exception $exception) {
             $this->logger->alert(
                 'An error occurred when evaluating ProposalAssessment with proposal id :' .
@@ -120,5 +128,30 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
             'assessment' => $proposalAssessment,
             'errorCode' => null,
         ];
+    }
+
+    private function notifyIfDecision(
+        string $oldState,
+        ProposalAssessment $proposalAssessment
+    ): void {
+        $updateDate = $proposalAssessment->getUpdatedAt();
+        if (is_null($updateDate)) {
+            $updateDate = new \DateTime();
+        }
+
+        $message = [
+            'type' => 'assessment',
+            'proposalId' => $proposalAssessment->getProposal()->getId(),
+            'date' => $updateDate->format('Y-m-d H:i:s'),
+        ];
+        if (
+            $proposalAssessment->getState() != $oldState &&
+            \in_array($proposalAssessment->getState(), ProposalStatementState::getDecisionalTypes())
+        ) {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,
+                new Message(json_encode($message))
+            );
+        }
     }
 }

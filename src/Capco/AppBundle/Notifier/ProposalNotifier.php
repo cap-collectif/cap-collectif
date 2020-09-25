@@ -3,11 +3,17 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAdminUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\Proposal\Analysis\AnalysisPublicationMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\Analysis\AssessmentPublicationMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\Analysis\DecisionPublicationAdminMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\Analysis\DecisionPublicationMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\Analysis\LastAnalysisPublicationMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\Analysis\ProposalDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\Analysis\ProposalUpdateMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeCreateMessage;
@@ -23,6 +29,7 @@ use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -37,6 +44,7 @@ class ProposalNotifier extends BaseNotifier
     private UserUrlResolver $userUrlResolver;
     private RequestStack $requestStack;
     private string $defaultLocale;
+    private UserRepository $userRepository;
 
     public function __construct(
         MailerService $mailer,
@@ -48,7 +56,8 @@ class ProposalNotifier extends BaseNotifier
         TranslatorInterface $translator,
         UserUrlResolver $userUrlResolver,
         RequestStack $requestStack,
-        LocaleResolver $localeResolver
+        LocaleResolver $localeResolver,
+        UserRepository $userRepository
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->proposalAdminUrlResolver = $proposalAdminUrlResolver;
@@ -58,6 +67,7 @@ class ProposalNotifier extends BaseNotifier
         $this->userUrlResolver = $userUrlResolver;
         $this->requestStack = $requestStack;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
+        $this->userRepository = $userRepository;
     }
 
     public function onCreate(Proposal $proposal)
@@ -249,6 +259,138 @@ class ProposalNotifier extends BaseNotifier
         }
     }
 
+    public function onAnalysisPublication(
+        Proposal $proposal,
+        \DateTime $date,
+        ProposalAnalysis $analysis
+    ): void {
+        $params = [
+            'proposal' => $proposal,
+            'proposalUrl' => $this->proposalUrlResolver->__invoke($proposal, $this->requestStack),
+            'analyst' => $analysis->getUpdatedBy(),
+            'analystUrl' => $this->userUrlResolver->__invoke($analysis->getUpdatedBy()),
+            'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
+            'publicationDate' => $date,
+        ];
+
+        if ($proposal->getSupervisor()) {
+            $this->mailer->createAndSendMessage(
+                AnalysisPublicationMessage::class,
+                $proposal,
+                $params,
+                $proposal->getSupervisor()
+            );
+        }
+        if ($proposal->getDecisionMaker()) {
+            $this->mailer->createAndSendMessage(
+                AnalysisPublicationMessage::class,
+                $proposal,
+                $params,
+                $proposal->getDecisionMaker()
+            );
+        }
+    }
+
+    public function onLastAnalysisPublication(Proposal $proposal): void
+    {
+        $params = [
+            'proposal' => $proposal,
+            'proposalUrl' => $this->proposalUrlResolver->__invoke($proposal, $this->requestStack),
+            'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
+        ];
+        foreach ($proposal->getAnalyses() as $analysis) {
+            $analysis->getUpdatedBy()->url = $this->userUrlResolver->__invoke(
+                $analysis->getUpdatedBy()
+            );
+        }
+        if ($proposal->getSupervisor()) {
+            $this->mailer->createAndSendMessage(
+                LastAnalysisPublicationMessage::class,
+                $proposal,
+                $params,
+                $proposal->getSupervisor()
+            );
+        }
+        if ($proposal->getDecisionMaker()) {
+            $this->mailer->createAndSendMessage(
+                LastAnalysisPublicationMessage::class,
+                $proposal,
+                $params,
+                $proposal->getDecisionMaker()
+            );
+        }
+    }
+
+    public function onAssessmentPublication(Proposal $proposal, \DateTime $date): void
+    {
+        if ($proposal->getDecisionMaker()) {
+            $params = [
+                'proposal' => $proposal,
+                'proposalUrl' => $this->proposalUrlResolver->__invoke(
+                    $proposal,
+                    $this->requestStack
+                ),
+                'supervisorUrl' => $this->userUrlResolver->__invoke($proposal->getSupervisor()),
+                'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
+                'publicationDate' => $date,
+            ];
+            $this->mailer->createAndSendMessage(
+                AssessmentPublicationMessage::class,
+                $proposal,
+                $params,
+                $proposal->getDecisionMaker()
+            );
+        }
+    }
+
+    public function onDecisionPublication(Proposal $proposal, \DateTime $date): void
+    {
+        $params = [
+            'proposal' => $proposal,
+            'proposalUrl' => $this->proposalUrlResolver->__invoke($proposal, $this->requestStack),
+            'decisionMakerUrl' => $this->userUrlResolver->__invoke($proposal->getDecisionMaker()),
+            'adminURL' => $this->proposalAdminUrlResolver->getEditUrl($proposal),
+            'publicationDate' => $date,
+        ];
+        $this->mailer->createAndSendMessage(
+            DecisionPublicationAdminMessage::class,
+            $proposal,
+            $params
+        );
+        foreach ($this->userRepository->getAllAdmin() as $admin) {
+            if ($admin->isConsentInternalCommunication()) {
+                $this->mailer->createAndSendMessage(
+                    DecisionPublicationMessage::class,
+                    $proposal,
+                    $params,
+                    $admin
+                );
+            }
+        }
+        if ($proposal->getSupervisor()) {
+            $this->mailer->createAndSendMessage(
+                DecisionPublicationMessage::class,
+                $proposal,
+                $params,
+                $proposal->getSupervisor()
+            );
+        }
+        foreach ($proposal->getAnalysts() as $analyst) {
+            $this->mailer->createAndSendMessage(
+                DecisionPublicationMessage::class,
+                $proposal,
+                $params,
+                $analyst
+            );
+        }
+        $this->mailer->createAndSendMessage(
+            DecisionPublicationMessage::class,
+            $proposal,
+            $params,
+            $proposal->getAuthor()
+        );
+    }
+
     private function notifyAllAnalystsOnDelete(
         Proposal $proposal,
         ?User $supervisor,
@@ -276,8 +418,10 @@ class ProposalNotifier extends BaseNotifier
         }
     }
 
-    private function notifyAllAnalystsOnUpdate(Proposal $proposal, \DateTimeInterface $updateDateTime): void
-    {
+    private function notifyAllAnalystsOnUpdate(
+        Proposal $proposal,
+        \DateTimeInterface $updateDateTime
+    ): void {
         $params = [
             'baseUrl' => $this->router->generate(
                 'app_homepage',

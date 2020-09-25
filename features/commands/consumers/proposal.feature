@@ -128,7 +128,7 @@ Scenario: analyst receive message after being assigned to a proposal
   }
   """
   And I consume "proposal_assignation"
-  Then I open mail to "mickaelS@cap-collectif.com"
+  Then I open mail to "mickael@cap-collectif.com"
   And email should match snapshot "notifyAnalyst_NewAnalyst.html"
 
 @rabbitmq @snapshot-email
@@ -142,7 +142,7 @@ Scenario: supervisor receive message after being assigned to two proposals
   }
   """
   And I consume "proposal_assignation"
-  Then I open mail to "mickaelS@cap-collectif.com"
+  Then I open mail to "mickael@cap-collectif.com"
   And email should match snapshot "notifyAnalyst_NewSupervisor.html"
 
 @rabbitmq @snapshot-email
@@ -156,7 +156,7 @@ Scenario: decisionMaker receive message after being assigned to a proposal
   }
   """
   And I consume "proposal_assignation"
-  Then I open mail to "mickaelS@cap-collectif.com"
+  Then I open mail to "mickael@cap-collectif.com"
   And email should match snapshot "notifyAnalyst_NewDecisionMaker.html"
 
 @rabbitmq @snapshot-email
@@ -169,7 +169,7 @@ Scenario: someone receive message after being revoked from two proposals
   }
   """
   And I consume "proposal_revoke"
-  Then I open mail to "mickaelS@cap-collectif.com"
+  Then I open mail to "mickael@cap-collectif.com"
   And email should match snapshot "notifyAnalyst_RevokeAnalyst.html"
 
 @rabbitmq @snapshot-email @database
@@ -197,3 +197,34 @@ Scenario: deicisionmaker receive message when  proposal is deleted
   And I consume "proposal_delete"
   Then I open mail to "decisionmaker@cap-collectif.com"
   And email should match snapshot "notifyAnalyst_deleteProposal"
+
+@rabbitmq
+Scenario: decisionmaker receive message when assessment is published
+  Given I publish in "proposal_analyse" with message below:
+  """
+  {
+    "type": "assessment",
+    "proposalId": "proposalIdf3",
+    "date": "12-12-2012 12:12:12"
+  }
+  """
+  And I consume "proposal_analyse"
+  Then I should see mail to "aurelien@cap-collectif.com"
+  And I should see mail with subject "notification.proposal.assessment.title"
+
+@rabbitmq
+Scenario: everyone receive message when decision is published
+  Given I publish in "proposal_analyse" with message below:
+  """
+  {
+    "type": "decision",
+    "proposalId": "proposalIdf3",
+    "date": "12-12-2012 12:12:12"
+  }
+  """
+  And I consume "proposal_analyse"
+  Then I should see mail to "maxime.pouessel@cap-collectif.com"
+  And I should see mail to "theo@cap-collectif.com"
+  And I should see mail to "maxime.auriau@cap-collectif.com"
+  And I should see mail to "mickael@cap-collectif.com"
+  And I should see mail with subject "notification.proposal.decision.title"

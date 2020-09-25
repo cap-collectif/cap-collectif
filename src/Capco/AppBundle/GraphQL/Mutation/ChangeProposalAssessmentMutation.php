@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalDecision;
@@ -15,28 +16,32 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class ChangeProposalAssessmentMutation implements MutationInterface
 {
     use ResolverTrait;
 
-    private $proposalRepository;
-    private $entityManager;
-    private $authorizationChecker;
-    private $logger;
-    private $proposalDecisionRepository;
+    private ProposalRepository $proposalRepository;
+    private EntityManagerInterface $entityManager;
+    private AuthorizationChecker $authorizationChecker;
+    private LoggerInterface $logger;
+    private Publisher $publisher;
 
     public function __construct(
         ProposalRepository $proposalRepository,
         EntityManagerInterface $entityManager,
         AuthorizationChecker $authorizationChecker,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Publisher $publisher
     ) {
         $this->proposalRepository = $proposalRepository;
         $this->entityManager = $entityManager;
         $this->authorizationChecker = $authorizationChecker;
         $this->logger = $logger;
+        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $args, $viewer): array
@@ -84,7 +89,14 @@ class ChangeProposalAssessmentMutation implements MutationInterface
             ];
         }
 
-        $proposalAssessment = ($proposal->getAssessment() ?? new ProposalAssessment($proposal))
+        $proposalAssessment = $proposal->getAssessment();
+        if (null === $proposalAssessment) {
+            $proposalAssessment = new ProposalAssessment($proposal);
+        }
+
+        $oldState = $proposalAssessment->getState();
+
+        $proposalAssessment
             ->setState(ProposalStatementState::IN_PROGRESS)
             ->setUpdatedBy($viewer)
             ->setBody($body)
@@ -108,9 +120,31 @@ class ChangeProposalAssessmentMutation implements MutationInterface
             ];
         }
 
+        $this->notifyIfDecision($oldState, $proposalAssessment);
+
         return [
             'assessment' => $proposalAssessment,
             'errorCode' => null,
         ];
+    }
+
+    private function notifyIfDecision(
+        string $oldState,
+        ProposalAssessment $proposalAssessment
+    ): void {
+        $message = [
+            'type' => 'assessment',
+            'proposalId' => $proposalAssessment->getProposal()->getId(),
+            'date' => $proposalAssessment->getUpdatedAt()->format('Y-m-d H:i:s')
+        ];
+        if (
+            $proposalAssessment->getState() !== $oldState &&
+            \in_array($proposalAssessment->getState(), ProposalStatementState::getDecisionalTypes())
+        ) {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,
+                new Message(json_encode($message))
+            );
+        }
     }
 }
