@@ -73,6 +73,11 @@ class ProjectSearch extends Search
         }
 
         foreach ($providedFilters as $key => $value) {
+            if ('authors.id' === $key && $value) {
+                $boolQuery->addFilter(new Query\Terms($key, [$value]));
+
+                continue;
+            }
             if (null !== $value) {
                 $boolQuery->addFilter(new Term([$key => ['value' => $value]]));
             }

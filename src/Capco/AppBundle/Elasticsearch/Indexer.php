@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Elastica\Bulk;
 use Elastica\Index;
 use Elastica\Client;
@@ -82,9 +83,13 @@ class Indexer
     /**
      * Fetch ALL the indexable entities and send them to bulks.
      */
-    public function indexAll(?OutputInterface $output = null): void
+    public function indexAll(?OutputInterface $output = null, bool $isCli = false): void
     {
         $this->disableBuiltinSoftdelete();
+        if ($isCli) {
+            $this->getIndex()->setSettings(['index' => ['refresh_interval' => '-1']]);
+        }
+
         $classes = $this->getClassesToIndex();
 
         $classesOrdered = array_values($classes);
@@ -96,17 +101,30 @@ class Indexer
         foreach ($classesOrdered as $class) {
             $this->indexType($class, 0, $output);
         }
+
+        if ($isCli) {
+            $this->getIndex()->setSettings(['index' => ['refresh_interval' => '1s']]);
+            $this->index->forcemerge(['max_num_segments' => 5]);
+        }
     }
 
     public function indexAllForType(
         string $type,
         int $offset,
-        ?OutputInterface $output = null
+        ?OutputInterface $output = null,
+        bool $isCli = false
     ): void {
         $this->disableBuiltinSoftdelete();
-        $classes = $this->getClassesToIndex();
+        if ($isCli) {
+            $this->getIndex()->setSettings(['index' => ['refresh_interval' => '-1']]);
+        }
 
+        $classes = $this->getClassesToIndex();
         $this->indexType($classes[$type], $offset, $output);
+        if ($isCli) {
+            $this->getIndex()->setSettings(['index' => ['refresh_interval' => '1s']]);
+            $this->index->forcemerge(['max_num_segments' => 5]);
+        }
     }
 
     /**
@@ -145,7 +163,7 @@ class Indexer
      * We do two different calls because we ignore 404 for DELETE operations,
      * but zero tolerance for error on UPSERT.
      */
-    public function finishBulk(): void
+    public function finishBulk(bool $isCli = false): void
     {
         if (\count($this->currentInsertBulk) > 0) {
             $bulk = new Bulk($this->client);
@@ -165,7 +183,9 @@ class Indexer
             }
         }
 
-        $this->getIndex()->refresh();
+        if (!$isCli) {
+            $this->getIndex()->refresh();
+        }
         $this->currentInsertBulk = [];
         $this->currentDeleteBulk = [];
     }
@@ -191,6 +211,7 @@ class Indexer
 
         $this->classes['comment'] = Comment::class;
         $this->classes['vote'] = AbstractVote::class;
+        $this->classes['response'] = AbstractResponse::class;
 
         return $this->classes;
     }

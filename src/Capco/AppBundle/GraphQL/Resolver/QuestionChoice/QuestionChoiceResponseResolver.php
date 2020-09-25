@@ -3,26 +3,26 @@
 namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
 use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\AppBundle\Search\ResponseSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class QuestionChoiceResponseResolver implements ResolverInterface
 {
-    private $responseRepository;
+    private ResponseSearch $responseSearch;
 
-    public function __construct(ValueResponseRepository $responseRepository)
+    public function __construct(ResponseSearch $responseSearch)
     {
-        $this->responseRepository = $responseRepository;
+        $this->responseSearch = $responseSearch;
     }
 
-    public function __invoke(QuestionChoice $questionChoice, Arg $args): Connection
+    public function __invoke(QuestionChoice $questionChoice, Arg $args): ConnectionInterface
     {
-        $responses = $this->responseRepository->getAllByQuestionWithoutPaginator(
-            $questionChoice->getQuestion()
-        );
+        $responses = $this->responseSearch
+            ->getResponsesByQuestion($questionChoice->getQuestion(), false, -1)
+            ->getEntities();
         $totalCount = 0;
         // Responses values are in an array so we can't directly request them. Maybe SQL request with JSON conditions ?
         foreach ($responses as $response) {

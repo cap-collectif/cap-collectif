@@ -53,11 +53,11 @@ class PopulateIndexCommand extends Command
 
         try {
             if ($type) {
-                $this->indexer->indexAllForType($type, $offset, $output);
+                $this->indexer->indexAllForType($type, $offset, $output, true);
             } else {
-                $this->indexer->indexAll($output);
+                $this->indexer->indexAll($output, true);
             }
-            $this->indexer->finishBulk();
+            $this->indexer->finishBulk(true);
         } catch (\RuntimeException $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');
 

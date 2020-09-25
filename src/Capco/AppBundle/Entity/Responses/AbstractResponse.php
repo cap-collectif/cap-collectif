@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Responses;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalEvaluation;
@@ -38,7 +39,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "media"  = "MediaResponse",
  * })
  */
-abstract class AbstractResponse
+abstract class AbstractResponse implements IndexableInterface
 {
     use IdTrait;
     use TimestampableTrait;
@@ -97,7 +98,7 @@ abstract class AbstractResponse
         return $this->proposal;
     }
 
-    public function setProposal(Proposal $proposal = null): self
+    public function setProposal(?Proposal $proposal = null): self
     {
         $this->proposal = $proposal;
 
@@ -141,7 +142,7 @@ abstract class AbstractResponse
         return $this->reply;
     }
 
-    public function setReply(Reply $reply = null): self
+    public function setReply(?Reply $reply = null): self
     {
         $this->reply = $reply;
 
@@ -153,7 +154,7 @@ abstract class AbstractResponse
         return $this->proposalEvaluation;
     }
 
-    public function setProposalEvaluation(ProposalEvaluation $proposalEvaluation = null): self
+    public function setProposalEvaluation(?ProposalEvaluation $proposalEvaluation = null): self
     {
         $this->proposalEvaluation = $proposalEvaluation;
 
@@ -180,5 +181,33 @@ abstract class AbstractResponse
         if ($this->getUpdatedAt() && $this->getProposal()) {
             $this->getProposal()->setUpdatedAt(new \DateTime());
         }
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 15;
+    }
+
+    public function isIndexable(): bool
+    {
+        if ($this->reply) {
+            return !$this->reply->isDraft();
+        }
+
+        return true;
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'response';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return [
+            'ElasticsearchResponse',
+            'ElasticsearchResponseNestedReply',
+            'ElasticsearchResponseNestedQuestion',
+        ];
     }
 }

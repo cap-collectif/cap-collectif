@@ -52,8 +52,10 @@ class AbstractResponseRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByEvaluation(ProposalEvaluation $evaluation, bool $showPrivate = false): iterable
-    {
+    public function getByEvaluation(
+        ProposalEvaluation $evaluation,
+        bool $showPrivate = false
+    ): iterable {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('question')
             ->leftJoin('r.question', 'question')
@@ -64,6 +66,14 @@ class AbstractResponseRepository extends EntityRepository
         if (!$showPrivate) {
             $qb->andWhere('question.private = false');
         }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->where('r.id IN (:ids)')->setParameter('ids', $ids);
 
         return $qb->getQuery()->getResult();
     }

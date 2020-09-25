@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
@@ -33,16 +35,28 @@ class AbstractResponseNormalizer implements
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        return $this->normalizer->normalize($object, $format, $context);
-        // Let's faster our indexation
-        // We can see what's serialized using
-        // dump($data);
+        $data = $this->normalizer->normalize($object, $format, $context);
+        if (!($object instanceof MediaResponse)) {
+            if (\is_string($responseValue = $object->getValue())) {
+                $data['textValue'] = $responseValue;
+            } else {
+                $data['objectValue'] = $responseValue;
+            }
+        } else {
+            /** @var PersistentCollection $medias */
+            $medias = $object->getMedias();
+            $data['medias'] = array_map(static function ($media) {
+                return $media->getId();
+            }, $medias->toArray());
+        }
+
+        return $data;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof AbstractResponse;
     }

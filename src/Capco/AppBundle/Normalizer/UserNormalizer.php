@@ -38,6 +38,7 @@ class UserNormalizer implements
         'ElasticsearchVersionNestedProject',
         'ElasticsearchProposalNestedProject',
         'ElasticsearchEventNestedProject',
+        'ElasticsearchResponseNestedReply',
         'ElasticsearchNestedAuthor',
     ];
 
@@ -46,11 +47,11 @@ class UserNormalizer implements
     private $manager;
     private $contributionProjectResolver;
     private $contributionStepResolver;
+    private $contributionSearch;
 
     // local "state" for data used on every User
     private $_capcoProfileEdit;
     private $_allProjects;
-    private $contributionSearch;
 
     public function __construct(
         UrlGeneratorInterface $router,

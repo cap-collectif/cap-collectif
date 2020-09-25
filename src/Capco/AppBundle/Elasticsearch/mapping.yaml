@@ -469,6 +469,33 @@ mappings:
                 properties:
                     id: { type: keyword }
 
+    response:
+        properties:
+            id: { type: keyword }
+            responseType: { type: keyword }
+            createdAt: { type: date }
+            textValue: *text_analysis_highlighted
+            objectValue:
+                type: object
+                properties:
+                    labels: { type: text }
+                    other: { type: keyword }
+            question:
+                type: object
+                properties:
+                    id: { type: keyword }
+            reply:
+                type: object
+                properties:
+                    id: { type: keyword }
+                    author: *Author
+                    createdAt: { type: date }
+                    published: { type: boolean }
+            questionnaire:
+                type: object
+                properties:
+                    id: { type: keyword }
+
     #
     # This allow ous to monitore the usage of our API.
     #

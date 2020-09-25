@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\Responses\MediaResponse:
+    attributes:
+        medias:
+            groups: [Proposals, Replies]

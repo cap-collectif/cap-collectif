@@ -227,8 +227,6 @@ class ContributionSearch extends Search
                             $contribuableId .
                             '" does not match any Project, Step or Consultation'
                     );
-
-                    break;
             }
         }
 

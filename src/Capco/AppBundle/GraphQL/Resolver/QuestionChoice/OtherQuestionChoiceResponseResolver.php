@@ -1,43 +1,31 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Search\ResponseSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class OtherQuestionChoiceResponseResolver implements ResolverInterface
 {
-    private $responseRepository;
+    private ResponseSearch $responseSearch;
 
-    public function __construct(AbstractResponseRepository $responseRepository)
+    public function __construct(ResponseSearch $responseSearch)
     {
-        $this->responseRepository = $responseRepository;
+        $this->responseSearch = $responseSearch;
     }
 
-    public function __invoke(MultipleChoiceQuestion $question, Arg $args): Connection
+    public function __invoke(MultipleChoiceQuestion $question, Arg $args): ConnectionInterface
     {
-        $responses = $this->responseRepository->findBy([
-            'question' => $question,
-        ]);
-        $totalCount = 0;
-
-        // Responses values are in an array so we can't directly request them. Maybe SQL request with JSON conditions ?
-        foreach ($responses as $response) {
-            $responseValue = $response ? $response->getValue() : null;
-            if ($responseValue) {
-                if (isset($responseValue['other']) && $responseValue['other'] !== null) {
-                    ++$totalCount;
-                }
-            }
-        }
-
-        $paginator = new Paginator(function () use ($responses) {
-            return $responses;
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $question
+        ) {
+            return $this->responseSearch->getOtherReponsesByQuestion($question, $limit, $cursor);
         });
 
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto($args);
     }
 }

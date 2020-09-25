@@ -45,8 +45,8 @@ class CreateIndexCommand extends Command
 
             try {
                 $this->indexer->setIndex($newIndex);
-                $this->indexer->indexAll($output);
-                $this->indexer->finishBulk();
+                $this->indexer->indexAll($output, true);
+                $this->indexer->finishBulk(true);
             } catch (\RuntimeException $e) {
                 $output->writeln('<error>' . $e->getMessage() . '</error>');
 

@@ -2,33 +2,24 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Search\ResponseSearch;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\Repository\MediaResponseRepository;
-use Capco\AppBundle\Repository\ValueResponseRepository;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class QuestionResponsesResolver implements ResolverInterface
 {
-    private $mediaResponseRepository;
-    private $valueResponseRepository;
     private $logger;
+    private ResponseSearch $responseSearch;
 
-    public function __construct(
-        ValueResponseRepository $valueResponseRepository,
-        MediaResponseRepository $mediaResponseRepository,
-        LoggerInterface $logger
-    ) {
-        $this->mediaResponseRepository = $mediaResponseRepository;
-        $this->valueResponseRepository = $valueResponseRepository;
+    public function __construct(ResponseSearch $responseSearch, LoggerInterface $logger)
+    {
         $this->logger = $logger;
+        $this->responseSearch = $responseSearch;
     }
 
     public function __invoke(AbstractQuestion $question, Arg $args, $viewer)
@@ -47,7 +38,6 @@ class QuestionResponsesResolver implements ResolverInterface
             return $emptyConnection;
         }
 
-        $totalCount = 0;
         $arguments = $args->getArrayCopy();
         $withNotConfirmedUser =
             isset($arguments['withNotConfirmedUser']) &&
@@ -58,45 +48,18 @@ class QuestionResponsesResolver implements ResolverInterface
             return $emptyConnection;
         }
 
-        if ($question instanceof MultipleChoiceQuestion || $question instanceof SimpleQuestion) {
-            $totalCount = $this->valueResponseRepository->countByQuestion(
-                $question,
-                $withNotConfirmedUser
-            );
-        }
-        if ($question instanceof MediaQuestion) {
-            $totalCount = $this->mediaResponseRepository->countByQuestion(
-                $question,
-                $withNotConfirmedUser
-            );
-        }
-
         // get data of $question instanceof MultipleChoiceQuestion && $question instanceof SimpleQuestion && $question instanceof MediaQuestion
-        $paginator = new Paginator(function ($offset, $limit) use (
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $question,
             $withNotConfirmedUser
         ) {
             try {
-                if (
-                    $question instanceof MultipleChoiceQuestion ||
-                    $question instanceof SimpleQuestion
-                ) {
-                    $responses = $this->valueResponseRepository->getAllByQuestion(
-                        $question,
-                        $limit,
-                        $offset,
-                        $withNotConfirmedUser
-                    );
-                } else {
-                    $responses = $this->mediaResponseRepository->getAllByQuestion(
-                        $question,
-                        $limit,
-                        $offset,
-                        $withNotConfirmedUser
-                    );
-                }
-
-                return $responses->getIterator()->getArrayCopy();
+                return $this->responseSearch->getResponsesByQuestion(
+                    $question,
+                    $withNotConfirmedUser,
+                    $limit,
+                    $cursor
+                );
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
@@ -104,6 +67,6 @@ class QuestionResponsesResolver implements ResolverInterface
             }
         });
 
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto($args);
     }
 }
