@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9bcfd7c72d4ddcd0be3af812acc776c",
+    "content-hash": "9c437bc8a9451b0fd1008f4912f38f58",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -14800,16 +14800,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v4.4.11",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "f5721c658ea5752000baca99f07cc0554708b56f"
+                "reference": "9b8314080fb15e84e030f94488d9e1fa17adb846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/f5721c658ea5752000baca99f07cc0554708b56f",
-                "reference": "f5721c658ea5752000baca99f07cc0554708b56f",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/9b8314080fb15e84e030f94488d9e1fa17adb846",
+                "reference": "9b8314080fb15e84e030f94488d9e1fa17adb846",
                 "shasum": ""
             },
             "require": {
@@ -14910,7 +14910,7 @@
                 "doctrine/cache": "~1.6",
                 "doctrine/collections": "~1.0",
                 "doctrine/data-fixtures": "^1.1",
-                "doctrine/dbal": "~2.4",
+                "doctrine/dbal": "~2.4|^3.0",
                 "doctrine/doctrine-bundle": "^1.5|^2.0",
                 "doctrine/orm": "~2.4,>=2.4.5",
                 "doctrine/reflection": "~1.0",
@@ -14926,7 +14926,7 @@
                 "predis/predis": "~1.1",
                 "psr/http-client": "^1.0",
                 "psr/simple-cache": "^1.0",
-                "symfony/phpunit-bridge": "^5.0.8",
+                "symfony/phpunit-bridge": "^5.2",
                 "symfony/security-acl": "~2.8|~3.0",
                 "twig/cssinliner-extra": "^2.12",
                 "twig/inky-extra": "^2.12",
@@ -14973,7 +14973,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2020-07-24T04:10:27+00:00"
+            "time": "2020-09-02T08:11:15+00:00"
         },
         {
             "name": "tecnickcom/tcpdf",
@@ -16572,12 +16572,12 @@
             ],
             "authors": [
                 {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com"
-                },
-                {
                     "name": "Christophe Coevoet",
                     "email": "stof@notk.org"
+                },
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com"
                 }
             ],
             "description": "Symfony2 framework extension for Behat",
@@ -19665,7 +19665,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:sjparkinson/behat-file-system-context.git",
+                "url": "https://github.com/sjparkinson/behat-file-system-context.git",
                 "reference": "25e398c4416797181f6ce807bc92bc572c8a9a7d"
             },
             "dist": {
