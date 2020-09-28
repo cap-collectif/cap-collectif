@@ -28,7 +28,9 @@ class UpdateProfileAccountLocaleMutation implements MutationInterface
                 $viewer,
                 $arguments['locale']
             );
-            $request->setLocale($arguments['locale']);
+            if ($arguments['locale']) {
+                $request->setLocale($arguments['locale']);
+            }
         } catch (BadRequestHttpException $exception) {
             return ['error' => $exception->getMessage()];
         }
