@@ -6,7 +6,7 @@ exports[`<Oauth2SSOConfigurationItem /> renders correctly 1`] = `
     className="d-flex align-items-center"
   >
     <Toggle
-      id="configuration-enabled"
+      id="Open ID Provider"
       label={
         <div
           className="d-flex flex-column"

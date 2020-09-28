@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Overlay } from 'react-bootstrap';
+import classNames from 'classnames';
 import type { PropsCommonCheckboxRadio } from '~ui/Form/Input/commonCheckboxRadio';
 import {
   ToggleContainer,
@@ -56,9 +57,19 @@ const Toggle = ({
     if (onChange) onChange(e, isChecked);
   };
 
+  const classes = classNames({
+    checked,
+    unchecked: !checked,
+  });
+
   return (
     <ToggleContainer className={className}>
-      <LabelContainer htmlFor={id} labelSide={labelSide} bold={bold}>
+      <LabelContainer
+        className={classNames(classes)}
+        disabled={disabled}
+        htmlFor={id}
+        labelSide={labelSide}
+        bold={bold}>
         <TogglerWrapper disabled={disabled} checked={checked} ref={referenceToggle}>
           <span className="circle-toggler" />
 

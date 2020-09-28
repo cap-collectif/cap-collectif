@@ -32,7 +32,7 @@ Object {
           "id": "T2F1dGgyU1NPQ29uZmlndXJhdGlvbjpzc29PYXV0aDI=",
           "labelColor": "#FFFFFF",
           "logoutUrl": "https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout",
-          "name": "Cap collectif Oauth2 Provider",
+          "name": "Oauth2",
           "profileUrl": "https://keycloak.cap-collectif.com/auth/realms/master/account",
           "redirectUri": "https://capco.test/login/check-openid?_locale=fr-FR",
           "secret": "***REMOVED***",

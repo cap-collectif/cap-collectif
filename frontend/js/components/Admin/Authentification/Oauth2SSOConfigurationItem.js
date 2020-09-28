@@ -48,7 +48,7 @@ export class Oauth2SSOConfigurationItem extends React.Component<Props, State> {
       <>
         <div className="d-flex align-items-center">
           <Toggle
-            id="configuration-enabled"
+            id={configuration.name}
             checked={configuration.enabled}
             onChange={() => {
               toggleStatus(configuration);

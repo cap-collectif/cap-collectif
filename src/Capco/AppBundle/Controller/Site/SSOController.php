@@ -2,29 +2,37 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 
 class SSOController extends Controller
 {
-    protected $toggleManager;
-    protected $ssoRepository;
-    protected $referrerResolver;
+    protected Manager $toggleManager;
+    protected AbstractSSOConfigurationRepository $ssoRepository;
+    protected Oauth2SSOConfigurationRepository $authRepository;
+    protected FranceConnectSSOConfigurationRepository $fcRepository;
+    protected OpenIDReferrerResolver $referrerResolver;
 
     public function __construct(
         Manager $toggleManager,
         AbstractSSOConfigurationRepository $ssoRepository,
-        OpenIDReferrerResolver $referrerResolver
+        OpenIDReferrerResolver $referrerResolver,
+        FranceConnectSSOConfigurationRepository $fcRepository,
+        Oauth2SSOConfigurationRepository $authRepository
     ) {
         $this->toggleManager = $toggleManager;
-        $this->ssoRepository = $ssoRepository;
         $this->referrerResolver = $referrerResolver;
+        $this->ssoRepository = $ssoRepository;
+        $this->authRepository = $authRepository;
+        $this->fcRepository = $fcRepository;
     }
 
     /**
@@ -33,7 +41,6 @@ class SSOController extends Controller
      */
     public function switchUserAction()
     {
-        // : RedirectResponse|array
         $user = $this->getUser();
 
         if (!$user || !$this->toggleManager->isActive('disconnect_openid')) {
@@ -54,7 +61,15 @@ class SSOController extends Controller
             return $this->redirect('/');
         }
 
-        $ssoConfiguration = $this->ssoRepository->findOneBy(['enabled' => 1]);
+        $ssoConfiguration = null;
+
+        if ($user->isFranceConnectAccount()) {
+            $ssoConfiguration = $this->fcRepository->findOneBy(['enabled' => 1]);
+        } elseif ($user->isOpenidAccount()) {
+            $ssoConfiguration = $this->authRepository->findOneBy(['enabled' => 1]);
+        } else {
+            $ssoConfiguration = $this->ssoRepository->findOneBy(['enabled' => 1]);
+        }
 
         if (!$ssoConfiguration || !$ssoConfiguration->getProfileUrl()) {
             return $this->redirect('/');

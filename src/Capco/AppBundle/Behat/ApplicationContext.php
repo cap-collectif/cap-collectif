@@ -1284,6 +1284,42 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Given I disable toggle :value
+     *
+     * @param mixed $value
+     */
+    public function iDisableElement($value)
+    {
+        $input = ".checked[for='${value}']";
+
+        $inputId = $this->getSession()
+            ->getPage()
+            ->find('css', $input);
+
+        if (null !== $inputId) {
+            $this->checkElement($value);
+        }
+    }
+
+    /**
+     * @Given I enable toggle :value
+     *
+     * @param mixed $value
+     */
+    public function iEnableElement($value)
+    {
+        $input = ".unchecked[for='${value}']";
+
+        $inputId = $this->getSession()
+            ->getPage()
+            ->find('css', $input);
+
+        if (null !== $inputId) {
+            $this->checkElement($value);
+        }
+    }
+
+    /**
      * @Then The element :element should be disabled
      *
      * @param mixed $element

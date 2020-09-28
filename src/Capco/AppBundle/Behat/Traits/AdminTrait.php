@@ -23,6 +23,14 @@ trait AdminTrait
     }
 
     /**
+     * @When I go to the admin authentification page
+     */
+    public function iGoToTheAdminAuthentificationPage()
+    {
+        $this->visitPageWithParams('admin proposal list page');
+    }
+
+    /**
      * @When I click the create merge button
      */
     public function iClickTheMergeButton()

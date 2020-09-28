@@ -14,7 +14,19 @@ class AdminShieldConfigurationPage extends Page
     protected $elements = [
         'save button' => '#shield-admin-form_submit',
         'shield admin form toggle' => '#shield-admin-form .form-group .elegant-toggle',
+        'toggle france connect' => '#toggle-franceConnect',
+        'toggle oauth2' => 'input[for=\'Oauth2\']'
     ];
+
+    public function toggleOauth()
+    {
+        $this->getElement('toggle oauth2')->click();
+    }
+
+    public function toggleFranceConnect()
+    {
+        $this->getElement('toggle france connect')->click();
+    }
 
     public function clickSaveButton()
     {

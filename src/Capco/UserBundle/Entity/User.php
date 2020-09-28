@@ -187,7 +187,7 @@ class User extends BaseUser implements
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            $setter = 'set'.ucfirst($key);
+            $setter = 'set' . ucfirst($key);
             if ('id' === $key) {
                 $this->id = $value;
 
@@ -286,7 +286,7 @@ class User extends BaseUser implements
     public function sanitizePhoneNumber()
     {
         if ($this->phone) {
-            $this->phone = '+'.preg_replace('/\D/', '', $this->phone);
+            $this->phone = '+' . preg_replace('/\D/', '', $this->phone);
         }
     }
 
@@ -913,20 +913,16 @@ class User extends BaseUser implements
 
     public function getSupervisedProposals(): iterable
     {
-        return $this->supervisedProposals->map(
-            static function (ProposalSupervisor $supervisor) {
-                return $supervisor->getProposal();
-            }
-        );
+        return $this->supervisedProposals->map(static function (ProposalSupervisor $supervisor) {
+            return $supervisor->getProposal();
+        });
     }
 
     public function getAllowedProposalAsDecisionMaker(): iterable
     {
-        return $this->proposals->map(
-            static function (Proposal $proposal) {
-                return $proposal->getProposalDecisionMaker();
-            }
-        );
+        return $this->proposals->map(static function (Proposal $proposal) {
+            return $proposal->getProposalDecisionMaker();
+        });
     }
 
     public function addSupervisedProposal(ProposalSupervisor $proposalSupervisor): self
@@ -1292,9 +1288,13 @@ class User extends BaseUser implements
         return null !== $this->franceConnectAccessToken;
     }
 
-    public function hasPassword(): bool
+    public function isOpenidAccount(): bool
     {
-        return $this->password !== null;
+        return null !== $this->openId;
     }
 
+    public function hasPassword(): bool
+    {
+        return null !== $this->password;
+    }
 }

@@ -7,6 +7,12 @@ Feature: France Connect
 
 Background:
   Given feature "login_franceconnect" is enabled
+  Given I am logged in as super admin
+  And I go to the admin shield configuration page
+  And I enable toggle "toggle-franceConnect"
+  And I go to "/"
+  And I logout
+  Then I should see "global.login"
 
 Scenario: Display France Connect login screen
   Given I open login modal

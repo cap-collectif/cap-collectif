@@ -5,6 +5,8 @@ exports[`<Toggle /> should render correctly 1`] = `
   className="mr-10"
 >
   <Togglestyle__LabelContainer
+    className="unchecked"
+    disabled={false}
     htmlFor="toggle-it"
     labelSide="RIGHT"
   >
@@ -40,6 +42,8 @@ exports[`<Toggle /> should render correctly when disabled 1`] = `
   className="mr-10"
 >
   <Togglestyle__LabelContainer
+    className="unchecked"
+    disabled={true}
     htmlFor="toggle-it"
     labelSide="RIGHT"
   >
@@ -75,6 +79,8 @@ exports[`<Toggle /> should render correctly when not label 1`] = `
   className="mr-10"
 >
   <Togglestyle__LabelContainer
+    className="unchecked"
+    disabled={false}
     htmlFor="toggle-it"
     labelSide="RIGHT"
   >
@@ -105,6 +111,8 @@ exports[`<Toggle /> should render correctly with tooltip 1`] = `
   className="mr-10"
 >
   <Togglestyle__LabelContainer
+    className="unchecked"
+    disabled={false}
     htmlFor="toggle-it"
     labelSide="RIGHT"
   >
