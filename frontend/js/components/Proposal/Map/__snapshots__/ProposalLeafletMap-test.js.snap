@@ -43,6 +43,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     />
     <ForwardRef(Leaflet(MarkerClusterGroup))
       maxClusterRadius={30}
+      onClusterClick={[Function]}
       showCoverageOnHover={false}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}
@@ -243,6 +244,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     />
     <ForwardRef(Leaflet(MarkerClusterGroup))
       maxClusterRadius={30}
+      onClusterClick={[Function]}
       showCoverageOnHover={false}
       spiderfyOnMaxZoom={true}
       zoomToBoundsOnClick={true}

@@ -158,6 +158,7 @@ const settingsSlider = {
   arrows: false,
 };
 
+let isOnCluster = false;
 export const ProposalLeafletMap = ({
   geoJsons,
   defaultMapOptions,
@@ -221,8 +222,14 @@ export const ProposalLeafletMap = ({
         onPopupClose={e => {
           setIcon(e.popup._source);
         }}
-        onClick={() => setIsMobileSliderOpen(false)}
-        onZoomStart={() => setIsMobileSliderOpen(false)}>
+        onClick={() => {
+          setIsMobileSliderOpen(false);
+          isOnCluster = false;
+        }}
+        onZoomStart={() => {
+          setIsMobileSliderOpen(false);
+          isOnCluster = false;
+        }}>
         <TileLayer
           attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
           url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
@@ -231,6 +238,9 @@ export const ProposalLeafletMap = ({
           spiderfyOnMaxZoom
           showCoverageOnHover={false}
           zoomToBoundsOnClick
+          onClusterClick={() => {
+            isOnCluster = true;
+          }}
           maxClusterRadius={30}>
           {markers?.length > 0 &&
             markers.map((mark, key) => {
@@ -249,11 +259,23 @@ export const ProposalLeafletMap = ({
                   })}
                   onClick={e => {
                     const isOpen: boolean = e.target.isPopupOpen();
-                    setInitialSlide(isOpen ? key : null);
-                    setIsMobileSliderOpen(isOpen);
-                    if (isMobile) {
-                      goToPosition(mapRef, markers[key].address);
-                      if (slickRef?.current) slickRef.current.slickGoTo(key);
+                    if (!isOnCluster || isMobile) {
+                      setInitialSlide(isOpen ? key : null);
+                      setIsMobileSliderOpen(isOpen);
+                      if (isMobile) {
+                        goToPosition(mapRef, markers[key].address);
+                        if (slickRef?.current) slickRef.current.slickGoTo(key);
+                      }
+                    } else {
+                      const markerSize = isOpen ? OPENED_MARKER_SIZE : CLOSED_MARKER_SIZE;
+                      e.target.setIcon(
+                        L.icon({
+                          iconUrl: isOpen ? OPENED_MARKER : CLOSED_MARKER,
+                          iconSize: [markerSize, markerSize],
+                          iconAnchor: [markerSize / 2, markerSize],
+                          popupAnchor: [0, -markerSize],
+                        }),
+                      );
                     }
                   }}>
                   <BlankPopup closeButton={false}>
