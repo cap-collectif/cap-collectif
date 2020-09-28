@@ -213,6 +213,20 @@ Capco\AppBundle\Entity\Event:
         steps: ['@collectstepIdf', '@selectionStepIdfVote']
         enabled: true
         guestListEnabled: true
+    eventRemoteUserAnimator:
+        id: eventRemoteUserAnimator
+        # Make sure to have a future date here, for CI
+        startAt: <identity((new \DateTime('2021-04-28')))>
+        author: '@userAgui'
+        createdAt: <identity((new \DateTime('2015-04-14')))>
+        isPresential: false
+        animator: '@user5'
+        projects: ['@projectIdf']
+        roomName: I_AM_A_RANDOM_GENERATED_ROOM_NAME_3
+        jitsiToken: I_AM_A_RANDOM_GENERATED_TOKEN_3
+        steps: ['@collectstepIdf', '@selectionStepIdfVote']
+        enabled: true
+        guestListEnabled: true
     eventRemotePastWithoutReplay:
         id: eventRemotePastWithoutReplay
         startAt: <identity((new \DateTime('2020-05-27')))>

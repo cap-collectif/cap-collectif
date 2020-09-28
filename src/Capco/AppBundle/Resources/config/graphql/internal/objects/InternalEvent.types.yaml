@@ -72,8 +72,9 @@ InternalEvent:
                 type: 'URI'
             jitsiToken:
                 type: 'String'
-                access: "@=hasRole('ROLE_ADMIN')"
-                description: 'The jitsi admin token if there is one'
+                access: "@=hasRole('ROLE_USER')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventJitsiTokenResolver", [value, getUser()])'
+                description: 'The jitsi admin/animator token if there is one'
             isPresential:
                 type: 'Boolean!'
                 description: 'Whether or not this event is presential.'

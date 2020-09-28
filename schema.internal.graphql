@@ -3189,7 +3189,7 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   """The delete date."""
   deletedAt: DateTime
 
-  """The jitsi admin token if there is one"""
+  """The jitsi admin/animator token if there is one"""
   jitsiToken: String
 
   """Whether or not this event is presential."""

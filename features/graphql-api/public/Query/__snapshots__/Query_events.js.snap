@@ -163,6 +163,17 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
+          "translations": Array [
+            Object {
+              "locale": "fr-FR",
+              "title": "Evenement animé par l'utilisateur User",
+            },
+          ],
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
           "translations": Array [
             Object {
@@ -232,7 +243,7 @@ Object {
         },
       },
     ],
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
@@ -355,12 +366,18 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
+          "isPresential": false,
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGU=",
           "isPresential": false,
         },
       },
     ],
-    "totalCount": 3,
+    "totalCount": 4,
   },
 }
 `;
@@ -513,6 +530,19 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
+          "projects": Array [
+            Object {
+              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+            },
+          ],
+          "review": null,
+          "themes": Array [],
+          "title": "Evenement animé par l'utilisateur User",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
           "projects": Array [
             Object {
@@ -586,10 +616,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
       "hasNextPage": false,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
@@ -742,6 +772,19 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
+          "projects": Array [
+            Object {
+              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+            },
+          ],
+          "review": null,
+          "themes": Array [],
+          "title": "Evenement animé par l'utilisateur User",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
           "projects": Array [
             Object {
@@ -815,10 +858,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
       "hasNextPage": false,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
@@ -971,6 +1014,19 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
+          "projects": Array [
+            Object {
+              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+            },
+          ],
+          "review": null,
+          "themes": Array [],
+          "title": "Evenement animé par l'utilisateur User",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
           "projects": Array [
             Object {
@@ -1044,10 +1100,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
       "hasNextPage": false,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
@@ -1198,12 +1254,25 @@ Object {
           "title": "On vous présente Agui, l’ami du BP",
         },
       },
+      Object {
+        "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
+          "projects": Array [
+            Object {
+              "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+            },
+          ],
+          "review": null,
+          "themes": Array [],
+          "title": "Evenement animé par l'utilisateur User",
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjEx",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjEy",
       "hasNextPage": false,
     },
-    "totalCount": 12,
+    "totalCount": 13,
   },
 }
 `;
@@ -1328,7 +1397,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
@@ -1366,7 +1435,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
@@ -1404,7 +1473,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
@@ -1442,7 +1511,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjI=",
       "hasNextPage": true,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
@@ -1776,6 +1845,31 @@ Object {
       Object {
         "node": Object {
           "author": Object {
+            "id": "VXNlcjp1c2VyQWd1aQ==",
+            "responses": Object {
+              "edges": Array [],
+            },
+            "userType": null,
+          },
+          "body": "Vous savez, moi je ne crois pas qu’il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd’hui avec vous, je dirais que c’est d’abord des rencontres. Des gens qui m’ont tendu la main, peut-être à un moment où je ne pouvais pas, où j’étais seul chez moi. Et c’est assez curieux de se dire que les hasards, les rencontres forgent une destinée… Parce que quand on a le goût de la chose, quand on a le goût de la chose bien faite, le beau geste, parfois on ne trouve pas l’interlocuteur en face je dirais, le miroir qui vous aide à avancer. Alors ça n’est pas mon cas, comme je disais là, puisque moi au contraire, j’ai pu ':' et je dis merci à la vie, je lui dis merci, je chante la vie, je danse la vie… je ne suis qu’amour ! Et finalement, quand beaucoup de gens aujourd’hui me disent « Mais comment fais-tu pour avoir cette humanité ? », et bien je leur réponds très simplement, je leur dis que c’est ce goût de l’amour ce goût donc qui m’a poussé aujourd’hui à entreprendre une construction mécanique, mais demain qui sait ? Peut-être simplement à me mettre au service de la communauté, à faire le don, le don de soi…",
+          "createdAt": "2015-04-14 00:00:00",
+          "enabled": true,
+          "endAt": null,
+          "fullAddress": "",
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
+          "lat": null,
+          "link": null,
+          "lng": null,
+          "startAt": "2021-04-28 00:00:00",
+          "title": "Evenement animé par l'utilisateur User",
+          "updatedAt": null,
+          "url": "https://capco.test/events/evenement-anime-par-lutilisateur-user",
+          "zipCode": null,
+        },
+      },
+      Object {
+        "node": Object {
+          "author": Object {
             "id": "VXNlcjp1c2VyU3B5bA==",
             "responses": Object {
               "edges": Array [],
@@ -1929,10 +2023,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
       "hasNextPage": false,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;

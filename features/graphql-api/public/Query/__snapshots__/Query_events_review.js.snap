@@ -97,6 +97,13 @@ Object {
       },
       Object {
         "node": Object {
+          "id": "RXZlbnQ6ZXZlbnRSZW1vdGVVc2VyQW5pbWF0b3I=",
+          "review": null,
+          "title": "Evenement animé par l'utilisateur User",
+        },
+      },
+      Object {
+        "node": Object {
           "id": "RXZlbnQ6ZXZlbnRSZW1vdGVQYXN0V2l0aFJlcGxheQ==",
           "review": null,
           "title": "+ de tech dans la civictech : c'est quoi une API ?",
@@ -139,10 +146,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjE3",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjE4",
       "hasNextPage": false,
     },
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;
