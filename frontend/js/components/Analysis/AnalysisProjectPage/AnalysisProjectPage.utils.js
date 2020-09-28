@@ -17,11 +17,16 @@ import { DEFAULT_FILTERS } from './AnalysisProjectPage.context';
 import { getStatus as getStatusAnalyst } from '~/components/Analysis/UserAnalystList/UserAnalystList';
 import { getStatus } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
+import type { ThemeFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
+import type { AnalysisProjectPage_project } from '~relay/AnalysisProjectPage_project.graphql';
+import type { AnalysisDashboardHeader_themes } from '~relay/AnalysisDashboardHeader_themes.graphql';
+import type { ProjectAdminAnalysis_themes } from '~relay/ProjectAdminAnalysis_themes.graphql';
 
 type ProjectWithAllSteps = {
   +steps: $ReadOnlyArray<{|
     +__typename: string,
     +form?: ?{|
+      +usingThemes?: boolean,
       +districts: $ReadOnlyArray<{|
         +id: string,
         +name: ?string,
@@ -29,6 +34,14 @@ type ProjectWithAllSteps = {
       +categories: $ReadOnlyArray<{|
         +id: string,
         +name: string,
+      |}>,
+    |},
+    +proposals?: {|
+      +totalCount: number,
+      +edges: ?$ReadOnlyArray<?{|
+        +node: {|
+          +id: string,
+        |},
       |}>,
     |},
   |}>,
@@ -41,6 +54,7 @@ type FilterOrderedFormatted = {|
   +type:
     | 'category'
     | 'district'
+    | 'theme'
     | 'step'
     | 'status'
     | 'progressState'
@@ -231,10 +245,26 @@ export const getFormattedDistrictsChoicesForProject = (
   return uniqBy(flattened, 'id');
 };
 
+export const getFormattedProposalsWithTheme = (
+  project: AnalysisProjectPage_project,
+): $ReadOnlyArray<string> => {
+  return project.steps
+    .filter(Boolean)
+    .filter(step => SHOWING_STEP_TYPENAME.includes(step.__typename) && step.form?.usingThemes)
+    .reduce((acc, step) => {
+      if (step.proposals?.edges && step.proposals.totalCount > 0) {
+        acc = [...acc, ...step.proposals.edges?.filter(Boolean).map(edge => edge.node.id)];
+      }
+
+      return acc;
+    }, []);
+};
+
 const getFormattedFiltersOrdered = (
   filtersOrdered: $PropertyType<AnalysisProjectPageState, 'filtersOrdered'>,
   categories: $ReadOnlyArray<CategoryFilter>,
   districts: $ReadOnlyArray<DistrictFilter>,
+  themes: AnalysisDashboardHeader_themes | ProjectAdminAnalysis_themes,
   intl: IntlShape,
 ): $ReadOnlyArray<FilterOrderedFormatted> => {
   return ((filtersOrdered
@@ -262,6 +292,18 @@ const getFormattedFiltersOrdered = (
           type: 'district',
           action: 'CLEAR_DISTRICT_FILTER',
           icon: 'pin',
+        };
+      }
+
+      if (filter.type === 'theme' && themes?.length > 0) {
+        const theme = ((themes.find(({ id }) => id === filter.id): any): ThemeFilter);
+
+        return {
+          id: theme.id,
+          name: theme.title,
+          type: 'theme',
+          action: 'CLEAR_THEME_FILTER',
+          icon: 'bookmark',
         };
       }
 
@@ -318,6 +360,7 @@ export const getAllFormattedChoicesForProject = (
   project: ProjectWithAllSteps,
   filtersOrdered: $PropertyType<AnalysisProjectPageState, 'filtersOrdered'>,
   intl: IntlShape,
+  themes: AnalysisDashboardHeader_themes | ProjectAdminAnalysis_themes,
 ): AllFormattedChoicesReturn => {
   const categories = getFormattedCategoriesChoicesForProject(project);
   const districts = getFormattedDistrictsChoicesForProject(project);
@@ -325,7 +368,7 @@ export const getAllFormattedChoicesForProject = (
   return {
     categories,
     districts,
-    filtersOrdered: getFormattedFiltersOrdered(filtersOrdered, categories, districts, intl),
+    filtersOrdered: getFormattedFiltersOrdered(filtersOrdered, categories, districts, themes, intl),
   };
 };
 

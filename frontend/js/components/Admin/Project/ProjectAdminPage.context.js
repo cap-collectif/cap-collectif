@@ -34,6 +34,7 @@ export const DEFAULT_FILTERS: Filters = {
   state: 'PUBLISHED',
   progressState: 'ALL',
   category: 'ALL',
+  theme: 'ALL',
   district: 'ALL',
   step: null,
   status: 'ALL',

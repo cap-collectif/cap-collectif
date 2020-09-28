@@ -3,6 +3,7 @@ import type { IntlShape } from 'react-intl';
 import uniqBy from 'lodash/uniqBy';
 import isEqual from 'lodash/isEqual';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
+import type { ProjectAdminProposals_themes } from '~relay/ProjectAdminProposals_themes.graphql';
 import type { Uuid } from '~/types';
 import type { ProjectAdminPageState, ProposalsStepValues } from './ProjectAdminPage.reducer';
 import type {
@@ -22,6 +23,7 @@ import { getStatus } from '~/components/Analysis/AnalysisProposalListRole/Analys
 import type { CategoryFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
 import type { DistrictFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
 import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql';
+import type { ThemeFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
 
 type StepStatusFilter = {|
   +id: Uuid,
@@ -32,6 +34,7 @@ type StepStatusFilter = {|
 export type StepFilter = {|
   +id: Uuid,
   +title: string,
+  +hasTheme: boolean,
 |};
 
 type FilterOrderedFormatted = {|
@@ -119,6 +122,7 @@ export const getFormattedStepsChoicesForProject = (
     .map(step => ({
       id: step.id,
       title: step.title,
+      hasTheme: step.form?.usingThemes,
     })): any): $ReadOnlyArray<StepFilter>);
 };
 
@@ -169,6 +173,7 @@ const getFormattedFiltersOrdered = (
   districts: $ReadOnlyArray<DistrictFilter>,
   steps: $ReadOnlyArray<StepFilter>,
   stepStatuses: $ReadOnlyArray<StepStatusFilter>,
+  themes: ProjectAdminProposals_themes = [],
   intl: IntlShape,
 ): $ReadOnlyArray<FilterOrderedFormatted> => {
   return ((filtersOrdered
@@ -194,6 +199,18 @@ const getFormattedFiltersOrdered = (
           type: 'district',
           action: 'CLEAR_DISTRICT_FILTER',
           icon: 'pin',
+        };
+      }
+
+      if (filter.type === 'theme' && themes?.length > 0) {
+        const theme = ((themes.find(({ id }) => id === filter.id): any): ThemeFilter);
+
+        return {
+          id: theme.id,
+          name: theme.title,
+          type: 'theme',
+          action: 'CLEAR_THEME_FILTER',
+          icon: 'bookmark',
         };
       }
 
@@ -259,6 +276,7 @@ export const getAllFormattedChoicesForProject = (
   selectedRows: string[],
   filtersOrdered: $PropertyType<ProjectAdminPageState, 'filtersOrdered'>,
   intl: IntlShape,
+  themes: ProjectAdminProposals_themes,
 ): AllFormattedChoicesReturn => {
   const categories = getFormattedCategoriesChoicesForProject(project);
   const districts = getFormattedDistrictsChoicesForProject(project);
@@ -276,6 +294,7 @@ export const getAllFormattedChoicesForProject = (
       districts,
       steps,
       stepStatuses,
+      themes,
       intl,
     ),
   };
@@ -524,12 +543,14 @@ export const getDifferenceFilters = (
     category: filters.category,
     district: filters.district,
     status: filters.status,
+    theme: filters.theme,
   };
 
   const defaultFilters = {
     category: DEFAULT_FILTERS.category,
     district: DEFAULT_FILTERS.district,
     status: DEFAULT_FILTERS.status,
+    theme: DEFAULT_FILTERS.theme,
   };
 
   return !isEqual(defaultFilters, filtersFormatted);
@@ -542,12 +563,14 @@ export const getDifferenceFiltersAnalysis = (
     category: filters.category,
     district: filters.district,
     progressState: filters.progressState,
+    theme: filters.theme,
   };
 
   const defaultFilters = {
     category: DEFAULT_FILTERS.category,
     district: DEFAULT_FILTERS.district,
     progressState: DEFAULT_FILTERS.progressState,
+    theme: DEFAULT_FILTERS.theme,
   };
 
   return !isEqual(defaultFilters, filtersFormatted);
@@ -703,4 +726,19 @@ export const getStepDisplay = (
     .flat(): any): StepFilter[]);
 
   return ((steps.find(step => step?.id === filterStepId): any): StepFilter);
+};
+
+export const getFormattedProposalsWithTheme = (
+  project: ProjectAdminAnalysis_project,
+): $ReadOnlyArray<string> => {
+  return project.steps
+    .filter(Boolean)
+    .filter(step => SHOWING_STEP_TYPENAME.includes(step.__typename) && step.form?.usingThemes)
+    .reduce((acc, step) => {
+      if (step.proposals?.edges && step.proposals.totalCount > 0) {
+        acc = [...acc, ...step.proposals.edges?.filter(Boolean).map(edge => edge.node.id)];
+      }
+
+      return acc;
+    }, []);
 };

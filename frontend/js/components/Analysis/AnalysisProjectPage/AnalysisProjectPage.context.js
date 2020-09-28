@@ -20,6 +20,7 @@ export const DEFAULT_FILTERS: Filters = {
   state: STATE.TODO,
   district: 'ALL',
   category: 'ALL',
+  theme: 'ALL',
   analysts: [],
   supervisor: null,
   decisionMaker: null,

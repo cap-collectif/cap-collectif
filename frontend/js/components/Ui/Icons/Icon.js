@@ -97,6 +97,7 @@ export const ICON_NAME = {
   vidIcon: 'vidIcon',
   docIcon: 'docIcon',
   fileIcon: 'fileIcon',
+  bookmark: 'bookmark',
   budget: 'budget',
   vote: 'vote',
   urne: 'urne',
@@ -310,6 +311,8 @@ const getIcon = name => {
       return <Icons.DocIcon />;
     case 'fileIcon':
       return <Icons.FileIcon />;
+    case 'bookmark':
+      return <Icons.Bookmark />;
     case 'budget':
       return <Icons.Budget />;
     case 'vote':

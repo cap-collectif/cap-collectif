@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import type { ProjectAdminAnalysis_project } from '~relay/ProjectAdminAnalysis_project.graphql';
+import type { ProjectAdminAnalysis_themes } from '~relay/ProjectAdminAnalysis_themes.graphql';
 import DropdownSelect from '~ui/DropdownSelect';
 import Collapsable from '~ui/Collapsable';
 import type {
@@ -12,6 +13,7 @@ import type {
   SortValues,
   Action,
   ProposalsProgressStateValues,
+  ProposalsThemeValues,
 } from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
 import { getAllFormattedChoicesForProject } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
@@ -27,6 +29,7 @@ import {
   getUsersWithAnalyseBegin,
   formatDefaultUsers,
   getDifferenceFiltersAnalysis,
+  getFormattedProposalsWithTheme,
 } from './ProjectAdminProposals.utils';
 import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
 import UserSearchDropdownChoice from '~/components/Admin/Project/UserSearchDropdownChoice';
@@ -55,6 +58,9 @@ import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFil
 import AnalysisFilterCategory from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
 import AnalysisFilterDistrict from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
 import AnalysisFilterRole from '~/components/Analysis/AnalysisFilter/AnalysisFilterRole';
+import AnalysisFilterTheme, {
+  type ThemeFilter,
+} from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
 import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
 import { loadOptions } from '~/components/Analysis/AnalysisDashboardHeader/AnalysisDashboardHeader';
 import AssignAnalystsToProposalsMutation from '~/mutations/AssignAnalystsToProposalsMutation';
@@ -81,6 +87,7 @@ type Props = {|
   +relay: RelayPaginationProp,
   +defaultUsers: $PropertyType<ProjectAdminAnalysisTabQueryResponse, 'defaultUsers'>,
   +project: ProjectAdminAnalysis_project,
+  +themes: ProjectAdminAnalysis_themes,
 |};
 
 const assignAnalysts = async (
@@ -398,7 +405,7 @@ const assignNobodyDecisionMaker = async (
   }
 };
 
-const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }>) => {
+const ProposalListHeader = ({ project, themes, defaultUsers }: $Diff<Props, { relay: * }>) => {
   const intl = useIntl();
   const { selectedRows, rowsCount } = usePickableList();
 
@@ -421,9 +428,11 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
   });
   const [dataModal, setDataModal] = React.useState<?DataModalState>(null);
 
+  const proposalsWithTheme = getFormattedProposalsWithTheme(project);
+
   const { categories, districts, filtersOrdered } = React.useMemo(
-    () => getAllFormattedChoicesForProject(project, parameters.filtersOrdered, intl),
-    [project, parameters.filtersOrdered, intl],
+    () => getAllFormattedChoicesForProject(project, parameters.filtersOrdered, intl, themes),
+    [project, parameters.filtersOrdered, intl, themes],
   );
   const selectedSupervisorsByProposals = React.useMemo(
     () => getSelectedSupervisorsByProposals(project, selectedRows),
@@ -454,6 +463,19 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
               payload: ((newValue: any): ProposalsDistrictValues),
             })
           }
+        />
+      )}
+
+      {proposalsWithTheme?.length > 0 && themes?.length > 0 && (
+        <AnalysisFilterTheme
+          themes={((themes: any): $ReadOnlyArray<ThemeFilter>)}
+          value={parameters.filters.theme}
+          onChange={newValue => {
+            dispatch({
+              type: 'CHANGE_THEME_FILTER',
+              payload: ((newValue: any): ProposalsThemeValues),
+            });
+          }}
         />
       )}
 
@@ -780,9 +802,11 @@ const ProposalListHeader = ({ project, defaultUsers }: $Diff<Props, { relay: * }
   );
 };
 
-export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) => {
+export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: Props) => {
   const intl = useIntl();
   const { parameters, status, dispatch } = useProjectAdminProposalsContext();
+  const proposalsWithTheme = getFormattedProposalsWithTheme(project);
+
   const hasProposals =
     !!project.firstAnalysisStep?.proposals?.totalCount &&
     project.firstAnalysisStep?.proposals?.totalCount > 0;
@@ -856,7 +880,7 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
         hasMore={project.firstAnalysisStep?.proposals?.pageInfo.hasNextPage}
         loader={<AnalysisProposalListLoader key="loader" />}>
         <AnalysisProposalListHeaderContainer disabled={!hasSelectedFilters && !hasProposals}>
-          <ProposalListHeader project={project} defaultUsers={defaultUsers} />
+          <ProposalListHeader project={project} defaultUsers={defaultUsers} themes={themes} />
         </AnalysisProposalListHeaderContainer>
 
         <PickableList.Body>
@@ -874,7 +898,8 @@ export const ProjectAdminAnalysis = ({ project, defaultUsers, relay }: Props) =>
                   dispatch={dispatch}
                   setProposalModalDelete={setProposalModalDelete}
                   proposalSelected={proposalSelected || null}
-                  setProposalSelected={setProposalSelected}>
+                  setProposalSelected={setProposalSelected}
+                  hasThemeEnabled={proposalsWithTheme?.length > 0}>
                   <AnalysisDataContainer>
                     <AnalysisStatus
                       status={PROPOSAL_STATUS[proposal.progressStatus]}
@@ -924,6 +949,7 @@ export default createPaginationContainer(
           }
           category: { type: "ID", defaultValue: null }
           district: { type: "ID", defaultValue: null }
+          theme: { type: "ID", defaultValue: null }
           progressStatus: { type: "ProposalProgressState", defaultValue: null }
           status: { type: "ID", defaultValue: null }
           term: { type: "String", defaultValue: null }
@@ -939,6 +965,7 @@ export default createPaginationContainer(
           __typename
           ... on ProposalStep {
             form {
+              usingThemes
               districts {
                 id
                 name
@@ -946,6 +973,14 @@ export default createPaginationContainer(
               categories {
                 id
                 name
+              }
+            }
+            proposals {
+              totalCount
+              edges {
+                node {
+                  id
+                }
               }
             }
           }
@@ -958,6 +993,7 @@ export default createPaginationContainer(
             orderBy: $orderBy
             category: $category
             district: $district
+            theme: $theme
             term: $term
             progressStatus: $progressStatus
             analysts: $analysts
@@ -970,6 +1006,7 @@ export default createPaginationContainer(
                 "orderBy"
                 "category"
                 "district"
+                "theme"
                 "term"
                 "analysts"
                 "supervisor"
@@ -1031,6 +1068,12 @@ export default createPaginationContainer(
         }
       }
     `,
+    themes: graphql`
+      fragment ProjectAdminAnalysis_themes on Theme @relay(plural: true) {
+        id
+        title
+      }
+    `,
   },
   {
     direction: 'forward',
@@ -1067,6 +1110,7 @@ export default createPaginationContainer(
         $orderBy: ProposalOrder!
         $category: ID
         $district: ID
+        $theme: ID
         $term: String
         $progressStatus: ProposalProgressState
         $analysts: [ID!]
@@ -1083,6 +1127,7 @@ export default createPaginationContainer(
               orderBy: $orderBy
               category: $category
               district: $district
+              theme: $theme
               term: $term
               progressStatus: $progressStatus
               analysts: $analysts

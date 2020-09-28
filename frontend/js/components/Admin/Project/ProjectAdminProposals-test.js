@@ -40,6 +40,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
         },
       ],
       form: {
+        usingThemes: false,
         categories: [
           {
             id: 'pCategory1',
@@ -426,6 +427,7 @@ const DEFAULT_PROJECT = {
         },
       ],
       form: {
+        usingThemes: false,
         categories: [
           {
             id: 'pCategory1',
@@ -770,6 +772,24 @@ const DEFAULT_PROJECT = {
   },
 };
 
+const themes = [
+  {
+    $refType,
+    id: 'theme-1',
+    title: 'Immobilier',
+  },
+  {
+    $refType,
+    id: 'theme-2',
+    title: 'Justice',
+  },
+  {
+    $refType,
+    id: 'theme-3',
+    title: 'Environnement',
+  },
+];
+
 describe('<ProjectAdminProposals />', () => {
   const defaultProps = {
     relay: { ...relayPaginationMock },
@@ -777,6 +797,7 @@ describe('<ProjectAdminProposals />', () => {
       $refType,
       ...DEFAULT_PROJECT,
     },
+    themes,
   };
 
   const mergedProposalsProps = {
@@ -785,6 +806,7 @@ describe('<ProjectAdminProposals />', () => {
       $refType,
       ...DEFAULT_MERGED_PROPOSALS_PROJECT,
     },
+    themes,
   };
 
   it('renders correctly when the project have proposals', () => {

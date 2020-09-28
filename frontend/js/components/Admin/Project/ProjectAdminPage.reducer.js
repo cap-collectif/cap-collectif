@@ -12,6 +12,8 @@ export type ProposalsCategoryValues = 'ALL' | 'NONE' | Uuid;
 
 export type ProposalsDistrictValues = 'ALL' | 'NONE' | Uuid;
 
+export type ProposalsThemeValues = 'ALL' | 'NONE' | Uuid;
+
 export type ProposalsStepValues = ?Uuid;
 
 export type ProposalsStatusValues = 'ALL' | 'NONE' | string;
@@ -29,6 +31,7 @@ export type Filters = {|
   +progressState: ProposalsProgressStateValues,
   +category: ProposalsCategoryValues,
   +district: ProposalsDistrictValues,
+  +theme: ProposalsThemeValues,
   +step: ProposalsStepValues,
   +status: ProposalsStatusValues,
   +term: ?string,
@@ -42,6 +45,7 @@ export type Filter = {|
   +type:
     | 'district'
     | 'category'
+    | 'theme'
     | 'status'
     | 'step'
     | 'progressState'
@@ -76,6 +80,8 @@ export type Action =
   | { type: 'CLEAR_CATEGORY_FILTER' }
   | { type: 'CHANGE_DISTRICT_FILTER', payload: ProposalsDistrictValues }
   | { type: 'CLEAR_DISTRICT_FILTER' }
+  | { type: 'CHANGE_THEME_FILTER', payload: ProposalsThemeValues }
+  | { type: 'CLEAR_THEME_FILTER' }
   | { type: 'CHANGE_PROGRESS_STATE_FILTER', payload: ProposalsProgressStateValues }
   | { type: 'CLEAR_PROGRESS_STATE_FILTER' }
   | { type: 'CHANGE_STATE_FILTER', payload: ProposalsStateValues }
@@ -135,6 +141,30 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
           category: 'ALL',
         },
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'category')],
+      };
+    case 'CHANGE_THEME_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          theme: action.payload,
+        },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'theme',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'theme'),
+        ],
+      };
+    case 'CLEAR_THEME_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          theme: 'ALL',
+        },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'theme')],
       };
     case 'CHANGE_STEP_FILTER':
       return {

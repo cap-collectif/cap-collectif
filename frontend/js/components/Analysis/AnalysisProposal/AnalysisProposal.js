@@ -16,12 +16,15 @@ import { AnalysisProposalListRowMeta } from '~ui/Analysis/common.style';
 import type {
   ProposalsCategoryValues,
   ProposalsDistrictValues,
+  ProposalsThemeValues,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type Props = {
   proposal: AnalysisProposal_proposal,
   children: React.Node,
   dispatch: any => void,
+  hasThemeEnabled: boolean,
   hasStateTag?: boolean,
   hasRegroupTag?: boolean,
   isAdminView?: boolean,
@@ -32,8 +35,9 @@ type Props = {
 
 const AnalysisProposal = ({
   proposal,
-  dispatch,
   children,
+  dispatch,
+  hasThemeEnabled,
   hasStateTag,
   hasRegroupTag,
   isAdminView,
@@ -105,6 +109,21 @@ const AnalysisProposal = ({
                 })
               }>
               {proposal.district.name}
+            </ProposalTag>
+          )}
+
+          {proposal.theme && hasThemeEnabled && (
+            <ProposalTag
+              title={proposal.theme.title}
+              size="10px"
+              onClick={() =>
+                dispatch({
+                  type: 'CHANGE_THEME_FILTER',
+                  payload: ((proposal.theme?.id: any): ProposalsThemeValues),
+                })
+              }>
+              <Icon name={ICON_NAME.bookmark} size={10} className="mr-5" />
+              {proposal.theme.title}
             </ProposalTag>
           )}
 
@@ -180,6 +199,10 @@ export default createFragmentContainer(AnalysisProposal, {
       category {
         id
         name
+      }
+      theme {
+        id
+        title
       }
       ...ModalDeleteProposal_proposal
     }

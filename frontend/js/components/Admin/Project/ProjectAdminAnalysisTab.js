@@ -39,6 +39,7 @@ const createQueryVariables = (
   },
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
+  theme: parameters.filters.theme === 'ALL' ? null : parameters.filters.theme,
   term: parameters.filters.term,
   analysts: parameters.filters.analysts.length > 0 ? parameters.filters.analysts : null,
   supervisor: parameters.filters.supervisor,
@@ -55,6 +56,7 @@ export const queryAnalysis = graphql`
     $orderBy: ProposalOrder!
     $category: ID
     $district: ID
+    $theme: ID
     $status: ID
     $term: String
     $analysts: [ID!]
@@ -79,6 +81,7 @@ export const queryAnalysis = graphql`
           orderBy: $orderBy
           category: $category
           district: $district
+          theme: $theme
           status: $status
           term: $term
           analysts: $analysts
@@ -86,6 +89,9 @@ export const queryAnalysis = graphql`
           decisionMaker: $decisionMaker
           progressStatus: $progressStatus
         )
+    }
+    themes {
+      ...ProjectAdminAnalysis_themes
     }
   }
 `;
@@ -99,6 +105,7 @@ export const initialVariables = {
   },
   category: null,
   district: null,
+  theme: null,
   term: null,
   analysts: null,
   supervisor: null,
@@ -130,10 +137,11 @@ const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch }: Props) => {
     const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;
     const defaultUsers: any =
       dataPreloaded && !hasFilters ? dataPreloaded.defaultUsers : data.defaultUsers;
+    const themes: any = dataPreloaded && !hasFilters ? dataPreloaded.themes : data.themes;
 
     return (
       <PickableList.Provider>
-        <ProjectAdminAnalysis project={project} defaultUsers={defaultUsers} />
+        <ProjectAdminAnalysis project={project} defaultUsers={defaultUsers} themes={themes} />
       </PickableList.Provider>
     );
   }

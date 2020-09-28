@@ -70,28 +70,30 @@ const DashboardHeader = ({ project }: $Diff<Props, { relay: * }>) => {
         </Collapsable.Element>
       </Collapsable>
 
-      <Collapsable align="right">
-        <Collapsable.Button>
-          <FormattedMessage id="admin.fields.source.category" />
-        </Collapsable.Button>
-        <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
-          <DropdownSelect
-            shouldOverflow
-            value={parameters.filters.type}
-            defaultValue="ALL"
-            onChange={newValue => dispatch({ type: 'CHANGE_TYPE_FILTER', payload: newValue })}
-            title={intl.formatMessage({ id: 'filter-by' })}>
-            <DropdownSelect.Choice value="ALL">
-              {intl.formatMessage({ id: 'global.select_user.type' })}
-            </DropdownSelect.Choice>
-            {userTypes.map(userType => (
-              <DropdownSelect.Choice value={userType.id} key={userType.id}>
-                {intl.formatMessage({ id: userType.name })}
+      {userTypes?.length > 0 && (
+        <Collapsable align="right">
+          <Collapsable.Button>
+            <FormattedMessage id="admin.fields.source.category" />
+          </Collapsable.Button>
+          <Collapsable.Element ariaLabel={intl.formatMessage({ id: 'filter-by' })}>
+            <DropdownSelect
+              shouldOverflow
+              value={parameters.filters.type}
+              defaultValue="ALL"
+              onChange={newValue => dispatch({ type: 'CHANGE_TYPE_FILTER', payload: newValue })}
+              title={intl.formatMessage({ id: 'filter-by' })}>
+              <DropdownSelect.Choice value="ALL">
+                {intl.formatMessage({ id: 'global.select_user.type' })}
               </DropdownSelect.Choice>
-            ))}
-          </DropdownSelect>
-        </Collapsable.Element>
-      </Collapsable>
+              {userTypes.map(userType => (
+                <DropdownSelect.Choice value={userType.id} key={userType.id}>
+                  {intl.formatMessage({ id: userType.name })}
+                </DropdownSelect.Choice>
+              ))}
+            </DropdownSelect>
+          </Collapsable.Element>
+        </Collapsable>
+      )}
 
       <AnalysisFilterSort
         isParticipant

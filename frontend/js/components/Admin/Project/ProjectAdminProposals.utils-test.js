@@ -32,6 +32,7 @@ const DEFAULT_PROJECT = {
         },
       ],
       form: {
+        usingThemes: false,
         categories: [
           {
             id: 'pCategory1',
@@ -76,6 +77,7 @@ const DEFAULT_PROJECT = {
         },
       ],
       form: {
+        usingThemes: false,
         categories: [
           {
             id: 'pCategory1',
@@ -316,6 +318,20 @@ const DEFAULT_PROJECT = {
       },
     ],
   },
+  themes: [
+    {
+      id: 'theme-1',
+      title: 'Immobilier',
+    },
+    {
+      id: 'theme-2',
+      title: 'Justice',
+    },
+    {
+      id: 'theme-3',
+      title: 'Environnement',
+    },
+  ],
 };
 
 describe('ProjectAdminProposals utils functions', () => {

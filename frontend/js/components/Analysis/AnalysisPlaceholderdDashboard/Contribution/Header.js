@@ -13,6 +13,12 @@ const Header = () => (
 
     <Collapsable align="right">
       <Collapsable.Button>
+        <FormattedMessage id="admin.fields.proposal.theme" />
+      </Collapsable.Button>
+    </Collapsable>
+
+    <Collapsable align="right">
+      <Collapsable.Button>
         <FormattedMessage id="admin.fields.proposal.category" />
       </Collapsable.Button>
     </Collapsable>

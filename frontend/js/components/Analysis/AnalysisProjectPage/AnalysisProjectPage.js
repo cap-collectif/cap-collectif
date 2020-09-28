@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import type { RouterHistory } from 'react-router-dom';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { AnalysisProjectPage_project } from '~relay/AnalysisProjectPage_project.graphql';
+import type { AnalysisProjectPage_themes } from '~relay/AnalysisProjectPage_themes.graphql';
 import PickableList from '~ui/List/PickableList';
 import BodyInfos from '~ui/Boxes/BodyInfos';
 import InlineSelect from '~ui/InlineSelect';
@@ -14,7 +15,11 @@ import AnalysisDashboardHeader from '../AnalysisDashboardHeader/AnalysisDashboar
 import AnalysisProposal from '../AnalysisProposal/AnalysisProposal';
 import { useAnalysisProposalsContext } from './AnalysisProjectPage.context';
 import { STATE, type StateValues } from './AnalysisProjectPage.reducer';
-import { getDifferenceFilters, getWordingEmpty } from './AnalysisProjectPage.utils';
+import {
+  getDifferenceFilters,
+  getWordingEmpty,
+  getFormattedProposalsWithTheme,
+} from './AnalysisProjectPage.utils';
 import { AnalysisProposalListHeaderContainer } from '~ui/Analysis/common.style';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
 import AnalysisProposalListRole from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
@@ -23,23 +28,26 @@ export const ANALYSIS_PROJECT_PROPOSALS_PAGINATION = 20;
 
 export type Props = {|
   project: AnalysisProjectPage_project,
+  themes: AnalysisProjectPage_themes,
   defaultUsers: $PropertyType<AnalysisIndexPageQueryResponse, 'defaultUsers'>,
   relay: RelayPaginationProp,
   history: RouterHistory,
 |};
 
-const AnalysisProjectPage = ({ project, defaultUsers, relay, history }: Props) => {
+const AnalysisProjectPage = ({ project, themes = [], defaultUsers, relay, history }: Props) => {
   const {
     sortedProposals: dataProposals,
     viewerProposalsTodo,
     viewerProposalsDone,
     viewerProposalsAll,
   } = project;
+
   const proposals = dataProposals?.edges?.filter(Boolean).map(edge => edge.node);
   const hasProposals = dataProposals?.totalCount > 0;
   const { parameters, dispatch, status } = useAnalysisProposalsContext();
   const descriptionProject = project.firstCollectStep?.form?.analysisConfiguration?.body;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
+  const proposalsWithTheme = getFormattedProposalsWithTheme(project);
 
   React.useEffect(() => {
     // Listenning that current location changed.
@@ -99,7 +107,11 @@ const AnalysisProjectPage = ({ project, defaultUsers, relay, history }: Props) =
           hasMore={relay.hasMore()}
           loader={<AnalysisProposalListLoader key="loader" />}>
           <AnalysisProposalListHeaderContainer disabled={!hasSelectedFilters && !hasProposals}>
-            <AnalysisDashboardHeader project={project} defaultUsers={defaultUsers} />
+            <AnalysisDashboardHeader
+              project={project}
+              defaultUsers={defaultUsers}
+              themes={themes}
+            />
           </AnalysisProposalListHeaderContainer>
 
           <PickableList.Body>
@@ -109,7 +121,8 @@ const AnalysisProjectPage = ({ project, defaultUsers, relay, history }: Props) =
                   proposal={proposal}
                   key={proposal.id}
                   rowId={proposal.id}
-                  dispatch={dispatch}>
+                  dispatch={dispatch}
+                  hasThemeEnabled={proposalsWithTheme.includes(proposal.id)}>
                   <AnalysisProposalListRole proposal={proposal} dispatch={dispatch} />
                 </AnalysisProposal>
               ))
@@ -143,6 +156,7 @@ export default createPaginationContainer(
           }
           category: { type: "ID", defaultValue: null }
           district: { type: "ID", defaultValue: null }
+          theme: { type: "ID", defaultValue: null }
           analysts: { type: "[ID!]", defaultValue: null }
           supervisor: { type: "ID", defaultValue: null }
           decisionMaker: { type: "ID", defaultValue: null }
@@ -157,12 +171,29 @@ export default createPaginationContainer(
             }
           }
         }
+        steps {
+          __typename
+          ... on ProposalStep {
+            form {
+              usingThemes
+            }
+            proposals {
+              totalCount
+              edges {
+                node {
+                  id
+                }
+              }
+            }
+          }
+        }
         sortedProposals: viewerAssignedProposals(
           first: $count
           after: $cursor
           orderBy: $orderBy
           category: $category
           district: $district
+          theme: $theme
           analysts: $analysts
           supervisor: $supervisor
           decisionMaker: $decisionMaker
@@ -174,6 +205,7 @@ export default createPaginationContainer(
               "orderBy"
               "category"
               "district"
+              "theme"
               "analysts"
               "supervisor"
               "decisionMaker"
@@ -209,11 +241,17 @@ export default createPaginationContainer(
             orderBy: $orderBy
             category: $category
             district: $district
+            theme: $theme
             analysts: $analysts
             supervisor: $supervisor
             decisionMaker: $decisionMaker
             state: $state
           )
+      }
+    `,
+    themes: graphql`
+      fragment AnalysisProjectPage_themes on Theme @relay(plural: true) {
+        ...AnalysisDashboardHeader_themes
       }
     `,
   },
@@ -249,6 +287,7 @@ export default createPaginationContainer(
         $orderBy: ProposalOrder!
         $category: ID
         $district: ID
+        $theme: ID
         $analysts: [ID!]
         $supervisor: ID
         $decisionMaker: ID
@@ -263,11 +302,15 @@ export default createPaginationContainer(
               orderBy: $orderBy
               category: $category
               district: $district
+              theme: $theme
               analysts: $analysts
               supervisor: $supervisor
               decisionMaker: $decisionMaker
               state: $state
             )
+        }
+        themes {
+          ...AnalysisDashboardHeader_themes
         }
       }
     `,

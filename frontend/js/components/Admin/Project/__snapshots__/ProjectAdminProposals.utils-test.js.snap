@@ -64,10 +64,12 @@ Array [
 exports[`ProjectAdminProposals utils functions should get a correctly formatted steps choices for a given project 1`] = `
 Array [
   Object {
+    "hasTheme": false,
     "id": "cstep1",
     "title": "Étape de dépôt",
   },
   Object {
+    "hasTheme": false,
     "id": "sstep1",
     "title": "Étape de sélection",
   },

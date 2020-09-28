@@ -21,7 +21,7 @@ const FilterTagContainer: StyledComponent<{ bgColor?: ?string }, {}, HTMLDivElem
   display: flex;
   color: ${colors.white};
   padding: 0 0.75rem;
-  align-items: baseline;
+  align-items: center;
   max-width: 150px;
   ${props =>
     props.bgColor

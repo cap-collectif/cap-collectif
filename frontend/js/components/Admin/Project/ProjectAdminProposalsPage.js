@@ -39,6 +39,7 @@ const createQueryVariables = (
   state: parameters.filters.state,
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
+  theme: parameters.filters.theme === 'ALL' ? null : parameters.filters.theme,
   step: parameters.filters.step || null,
   status: parameters.filters.status === 'ALL' ? null : parameters.filters.status,
   term: parameters.filters.term,
@@ -53,6 +54,7 @@ export const queryProposals = graphql`
     $state: ProposalsState!
     $category: ID
     $district: ID
+    $theme: ID
     $status: ID
     $step: ID
     $term: String
@@ -67,10 +69,14 @@ export const queryProposals = graphql`
           state: $state
           category: $category
           district: $district
+          theme: $theme
           status: $status
           step: $step
           term: $term
         )
+    }
+    themes {
+      ...ProjectAdminProposals_themes
     }
   }
 `;
@@ -85,6 +91,7 @@ export const initialVariables = {
   state: 'PUBLISHED',
   category: null,
   district: null,
+  theme: null,
   step: null,
   status: null,
   term: null,
@@ -119,8 +126,9 @@ const ProjectAdminProposalsPage = ({ projectId, dataPrefetch }: Props) => {
     (hasFilters && data && data.project)
   ) {
     const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;
+    const themes: any = dataPreloaded && !hasFilters ? dataPreloaded.themes : data.themes;
 
-    return <ProjectAdminProposals project={project} />;
+    return <ProjectAdminProposals project={project} themes={themes} />;
   }
 
   return (

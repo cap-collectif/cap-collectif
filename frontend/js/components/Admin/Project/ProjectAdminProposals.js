@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
+import type { ProjectAdminProposals_themes } from '~relay/ProjectAdminProposals_themes.graphql';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import * as S from './ProjectAdminProposals.style';
 import DropdownSelect from '~ui/DropdownSelect';
@@ -12,6 +13,7 @@ import type {
   Action,
   ProposalsCategoryValues,
   ProposalsDistrictValues,
+  ProposalsThemeValues,
   ProposalsStateValues,
   ProposalsStatusValues,
   ProposalsStepValues,
@@ -30,6 +32,7 @@ import {
   isStepIndeterminate,
   getCommonStepIdWithinProposalIds,
   getStepDisplay,
+  getFormattedStepsChoicesForProject,
 } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
@@ -52,6 +55,9 @@ import AnalysisProposalListLoader from '~/components/Analysis/AnalysisProposalLi
 import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
 import AnalysisFilterCategory from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory';
 import AnalysisFilterDistrict from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict';
+import AnalysisFilterTheme, {
+  type ThemeFilter,
+} from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
 import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisProposal';
 import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal';
@@ -64,6 +70,7 @@ const STATE_RESTRICTED = ['DRAFT', 'TRASHED'];
 type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminProposals_project,
+  +themes: ProjectAdminProposals_themes,
 |};
 
 const assignStepProposals = async (
@@ -139,7 +146,7 @@ const assignStatus = async (
   }
 };
 
-const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
+const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>) => {
   const [isMergeModaleVisible, setIsMergeModaleVisible] = React.useState(false);
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
@@ -153,12 +160,15 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
         selectedRows,
         parameters.filtersOrdered,
         intl,
+        themes,
       ),
-    [project, parameters.filters.step, parameters.filtersOrdered, selectedRows, intl],
+    [project, parameters.filters.step, parameters.filtersOrdered, selectedRows, intl, themes],
   );
   const collectSteps = getFormattedCollectStepsForProject(project);
   const selectedStepId: ProposalsStepValues = parameters.filters.step;
-  const selectedStep: ?StepFilter = steps.find(({ id }) => id === selectedStepId);
+  const selectedStep: StepFilter = ((steps.find(
+    ({ id }) => id === selectedStepId,
+  ): any): StepFilter);
   const isRestricted = STATE_RESTRICTED.includes(parameters.filters.state);
 
   const selectedProposals = project.proposals?.edges
@@ -193,6 +203,19 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
             dispatch({
               type: 'CHANGE_DISTRICT_FILTER',
               payload: ((newValue: any): ProposalsDistrictValues),
+            });
+          }}
+        />
+      )}
+
+      {selectedStep?.hasTheme && themes?.length > 0 && (
+        <AnalysisFilterTheme
+          themes={((themes: any): $ReadOnlyArray<ThemeFilter>)}
+          value={parameters.filters.theme}
+          onChange={newValue => {
+            dispatch({
+              type: 'CHANGE_THEME_FILTER',
+              payload: ((newValue: any): ProposalsThemeValues),
             });
           }}
         />
@@ -416,7 +439,7 @@ const ProposalListHeader = ({ project }: $Diff<Props, { relay: * }>) => {
   );
 };
 
-export const ProjectAdminProposals = ({ project, relay }: Props) => {
+export const ProjectAdminProposals = ({ project, themes, relay }: Props) => {
   const { parameters, dispatch, status } = useProjectAdminProposalsContext();
   const intl = useIntl();
   const hasProposals = project.proposals?.totalCount > 0;
@@ -426,6 +449,11 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
     project,
     parameters.filters.step,
   ]);
+
+  const steps = getFormattedStepsChoicesForProject(project);
+  const selectedStepId: ProposalsStepValues = parameters.filters.step;
+  const selectedStep: ?StepFilter = steps.find(({ id }) => id === selectedStepId);
+
   const [proposalSelected, setProposalSelected] = React.useState<?string>(null);
   const [proposalModalDelete, setProposalModalDelete] = React.useState<?AnalysisProposal_proposal>(
     null,
@@ -533,7 +561,7 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
           <AnalysisProposalListHeaderContainer
             isSelectable={isInteractive}
             disabled={!hasProposals && !hasSelectedFilters}>
-            <ProposalListHeader project={project} />
+            <ProposalListHeader project={project} themes={themes} />
           </AnalysisProposalListHeaderContainer>
 
           <PickableList.Body>
@@ -553,7 +581,8 @@ export const ProjectAdminProposals = ({ project, relay }: Props) => {
                     hasStateTag={parameters.filters.state === 'ALL'}
                     setProposalModalDelete={setProposalModalDelete}
                     proposalSelected={proposalSelected || null}
-                    setProposalSelected={setProposalSelected}>
+                    setProposalSelected={setProposalSelected}
+                    hasThemeEnabled={selectedStep?.hasTheme || false}>
                     <S.ProposalListRowInformationsStepState>
                       {stepDisplay && (
                         <S.ProposalVotableStep>{stepDisplay.title}</S.ProposalVotableStep>
@@ -615,6 +644,7 @@ export default createPaginationContainer(
           state: { type: "ProposalsState!", defaultValue: ALL }
           category: { type: "ID", defaultValue: null }
           district: { type: "ID", defaultValue: null }
+          theme: { type: "ID", defaultValue: null }
           status: { type: "ID", defaultValue: null }
           step: { type: "ID", defaultValue: null }
           term: { type: "String", defaultValue: null }
@@ -642,6 +672,7 @@ export default createPaginationContainer(
               color
             }
             form {
+              usingThemes
               districts {
                 id
                 name
@@ -660,13 +691,14 @@ export default createPaginationContainer(
           state: $state
           category: $category
           district: $district
+          theme: $theme
           status: $status
           step: $step
           term: $term
         )
           @connection(
             key: "ProjectAdminProposals_proposals"
-            filters: ["orderBy", "state", "category", "district", "status", "step", "term"]
+            filters: ["orderBy", "state", "category", "district", "theme", "status", "step", "term"]
           ) {
           totalCount
           pageInfo {
@@ -730,6 +762,12 @@ export default createPaginationContainer(
         }
       }
     `,
+    themes: graphql`
+      fragment ProjectAdminProposals_themes on Theme @relay(plural: true) {
+        id
+        title
+      }
+    `,
   },
   {
     direction: 'forward',
@@ -763,6 +801,7 @@ export default createPaginationContainer(
         $state: ProposalsState!
         $category: ID
         $district: ID
+        $theme: ID
         $status: ID
         $step: ID
         $term: String
@@ -778,6 +817,7 @@ export default createPaginationContainer(
               state: $state
               category: $category
               district: $district
+              theme: $theme
               status: $status
               step: $step
               term: $term

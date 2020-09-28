@@ -506,6 +506,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                         "name": "Noisyzoo",
                       },
                     ],
+                    "usingThemes": false,
                   },
                   "id": "cstep1",
                   "statuses": Array [
@@ -542,6 +543,25 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               ],
             }
           }
+          themes={
+            Array [
+              Object {
+                "$refType": null,
+                "id": "theme-1",
+                "title": "Immobilier",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-2",
+                "title": "Justice",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-3",
+                "title": "Environnement",
+              },
+            ]
+          }
         />
       </commonstyle__AnalysisProposalListHeaderContainer>
       <PickableList.Body>
@@ -549,6 +569,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
           proposal={
@@ -613,6 +634,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
           proposal={
@@ -677,6 +699,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
           proposal={
@@ -734,6 +757,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
           proposal={
@@ -798,6 +822,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
           proposal={
@@ -848,6 +873,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
           proposal={
@@ -902,6 +928,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
           proposal={
@@ -956,6 +983,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
           proposal={
@@ -1483,6 +1511,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                         "name": "Noisyzoo",
                       },
                     ],
+                    "usingThemes": false,
                   },
                   "id": "cstep1",
                   "statuses": Array [
@@ -1519,6 +1548,25 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               ],
             }
           }
+          themes={
+            Array [
+              Object {
+                "$refType": null,
+                "id": "theme-1",
+                "title": "Immobilier",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-2",
+                "title": "Justice",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-3",
+                "title": "Environnement",
+              },
+            ]
+          }
         />
       </commonstyle__AnalysisProposalListHeaderContainer>
       <PickableList.Body>
@@ -1526,6 +1574,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwx"
           proposal={
@@ -1590,6 +1639,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDg="
           proposal={
@@ -1654,6 +1704,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwy"
           proposal={
@@ -1711,6 +1762,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwz"
           proposal={
@@ -1775,6 +1827,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWw0"
           proposal={
@@ -1825,6 +1878,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMA=="
           proposal={
@@ -1879,6 +1933,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
           proposal={
@@ -1933,6 +1988,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
           dispatch={[Function]}
           hasRegroupTag={true}
           hasStateTag={false}
+          hasThemeEnabled={false}
           isAdminView={true}
           key="UHJvcG9zYWw6cHJvcG9zYWwxMDQ="
           proposal={
@@ -2185,6 +2241,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                         "name": "Noisyzoo",
                       },
                     ],
+                    "usingThemes": false,
                   },
                   "id": "cstep1",
                   "statuses": Array [
@@ -2220,6 +2277,25 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                 },
               ],
             }
+          }
+          themes={
+            Array [
+              Object {
+                "$refType": null,
+                "id": "theme-1",
+                "title": "Immobilier",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-2",
+                "title": "Justice",
+              },
+              Object {
+                "$refType": null,
+                "id": "theme-3",
+                "title": "Environnement",
+              },
+            ]
           }
         />
       </commonstyle__AnalysisProposalListHeaderContainer>

@@ -6,6 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import type { GlobalState, Uuid } from '~/types';
 import type { User } from '~/redux/modules/user';
 import type { AnalysisDashboardHeader_project } from '~relay/AnalysisDashboardHeader_project.graphql';
+import type { AnalysisDashboardHeader_themes } from '~relay/AnalysisDashboardHeader_themes.graphql';
 import { usePickableList } from '~ui/List/PickableList';
 import { useAnalysisProposalsContext } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 import {
@@ -27,6 +28,7 @@ import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
 import type {
   ProposalsCategoryValues,
   ProposalsDistrictValues,
+  ProposalsThemeValues,
   SortValues,
   Action,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
@@ -54,11 +56,14 @@ import type {
   Analyst,
   Supervisor,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils';
+import AnalysisFilterTheme from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
+import type { ThemeFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme';
 
 type Props = {|
-  project: AnalysisDashboardHeader_project,
-  userConnected: User,
-  defaultUsers: $PropertyType<AnalysisIndexPageQueryResponse, 'defaultUsers'>,
+  +project: AnalysisDashboardHeader_project,
+  +themes: AnalysisDashboardHeader_themes,
+  +userConnected: User,
+  +defaultUsers: $PropertyType<AnalysisIndexPageQueryResponse, 'defaultUsers'>,
 |};
 
 const USER_SEARCH_QUERY = graphql`
@@ -169,6 +174,7 @@ const assignSupervisor = async (
 
 const AnalysisDashboardHeader = ({
   project,
+  themes,
   userConnected,
   defaultUsers,
 }: $Diff<Props, { relay: * }>) => {
@@ -178,8 +184,8 @@ const AnalysisDashboardHeader = ({
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useAnalysisProposalsContext();
   const { categories, districts, filtersOrdered } = React.useMemo(
-    () => getAllFormattedChoicesForProject(project, parameters.filtersOrdered, intl),
-    [project, parameters.filtersOrdered, intl],
+    () => getAllFormattedChoicesForProject(project, parameters.filtersOrdered, intl, themes),
+    [project, parameters.filtersOrdered, intl, themes],
   );
 
   const [supervisor, setSupervisor] = React.useState(null);
@@ -222,6 +228,19 @@ const AnalysisDashboardHeader = ({
               payload: ((newValue: any): ProposalsDistrictValues),
             })
           }
+        />
+      )}
+
+      {themes?.length > 0 && (
+        <AnalysisFilterTheme
+          themes={((themes: any): $ReadOnlyArray<ThemeFilter>)}
+          value={parameters.filters.theme}
+          onChange={newValue => {
+            dispatch({
+              type: 'CHANGE_THEME_FILTER',
+              payload: ((newValue: any): ProposalsThemeValues),
+            });
+          }}
         />
       )}
 
@@ -506,6 +525,7 @@ export default createPaginationContainer(
           }
           category: { type: "ID", defaultValue: null }
           district: { type: "ID", defaultValue: null }
+          theme: { type: "ID", defaultValue: null }
           analysts: { type: "[ID!]", defaultValue: null }
           supervisor: { type: "ID", defaultValue: null }
           decisionMaker: { type: "ID", defaultValue: null }
@@ -533,6 +553,7 @@ export default createPaginationContainer(
           orderBy: $orderBy
           category: $category
           district: $district
+          theme: $theme
           analysts: $analysts
           supervisor: $supervisor
           decisionMaker: $decisionMaker
@@ -544,6 +565,7 @@ export default createPaginationContainer(
               "orderBy"
               "category"
               "district"
+              "theme"
               "analysts"
               "supervisor"
               "decisionMaker"
@@ -593,6 +615,12 @@ export default createPaginationContainer(
         }
       }
     `,
+    themes: graphql`
+      fragment AnalysisDashboardHeader_themes on Theme @relay(plural: true) {
+        id
+        title
+      }
+    `,
   },
   {
     direction: 'forward',
@@ -626,6 +654,7 @@ export default createPaginationContainer(
         $orderBy: ProposalOrder!
         $category: ID
         $district: ID
+        $theme: ID
         $analysts: [ID!]
         $supervisor: ID
         $decisionMaker: ID
@@ -640,6 +669,7 @@ export default createPaginationContainer(
               orderBy: $orderBy
               category: $category
               district: $district
+              theme: $theme
               analysts: $analysts
               supervisor: $supervisor
               decisionMaker: $decisionMaker

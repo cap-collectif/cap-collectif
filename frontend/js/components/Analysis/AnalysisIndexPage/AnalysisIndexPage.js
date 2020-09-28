@@ -33,6 +33,7 @@ const createQueryVariables = (
   },
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
+  theme: parameters.filters.theme === 'ALL' ? null : parameters.filters.theme,
   analysts: parameters.filters.analysts.length > 0 ? parameters.filters.analysts : null,
   supervisor: parameters.filters.supervisor,
   decisionMaker: parameters.filters.decisionMaker,
@@ -59,7 +60,7 @@ export const renderComponent = ({
   language: string,
 }) => {
   if (props) {
-    const { viewerAssignedProjectsToAnalyse: projects, defaultUsers } = props;
+    const { viewerAssignedProjectsToAnalyse: projects, themes, defaultUsers } = props;
     const languageUrl: string = language.split('-')[0];
     const allPaths = Object.values(PATHS).map(v => String(v));
 
@@ -107,6 +108,7 @@ export const renderComponent = ({
                   project={projects.find(
                     ({ slug }) => slug === routeProps.match.params.projectSlug,
                   )}
+                  themes={themes}
                   {...routeProps}
                 />
               )}
@@ -168,6 +170,7 @@ const AnalysisIndexPage = ({ language }: Props) => {
           $orderBy: ProposalOrder!
           $category: ID
           $district: ID
+          $theme: ID
           $analysts: [ID!]
           $supervisor: ID
           $decisionMaker: ID
@@ -191,11 +194,15 @@ const AnalysisIndexPage = ({ language }: Props) => {
                 orderBy: $orderBy
                 category: $category
                 district: $district
+                theme: $theme
                 analysts: $analysts
                 supervisor: $supervisor
                 decisionMaker: $decisionMaker
                 state: $state
               )
+          }
+          themes {
+            ...AnalysisProjectPage_themes
           }
         }
       `}

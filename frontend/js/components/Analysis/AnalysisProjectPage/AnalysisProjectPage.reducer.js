@@ -7,6 +7,8 @@ export type ProposalsDistrictValues = 'ALL' | 'NONE' | Uuid;
 
 export type ProposalsCategoryValues = 'ALL' | 'NONE' | Uuid;
 
+export type ProposalsThemeValues = 'ALL' | 'NONE' | Uuid;
+
 export const ORDER_BY: {
   OLDEST: 'oldest',
   NEWEST: 'newest',
@@ -33,6 +35,7 @@ export type Filters = {|
   +state: StateValues,
   +district: ProposalsDistrictValues,
   +category: ProposalsCategoryValues,
+  +theme: ProposalsThemeValues,
   +analysts: Uuid[],
   +supervisor: ?Uuid,
   +decisionMaker: ?Uuid,
@@ -44,6 +47,7 @@ export type Filter = {|
   +type:
     | 'district'
     | 'category'
+    | 'theme'
     | 'status'
     | 'step'
     | 'progressState'
@@ -73,6 +77,8 @@ export type Action =
   | { type: 'CLEAR_CATEGORY_FILTER' }
   | { type: 'CHANGE_DISTRICT_FILTER', payload: ProposalsDistrictValues }
   | { type: 'CLEAR_DISTRICT_FILTER' }
+  | { type: 'CHANGE_THEME_FILTER', payload: ProposalsThemeValues }
+  | { type: 'CLEAR_THEME_FILTER' }
   | { type: 'CHANGE_STATE_FILTER', payload: StateValues }
   | { type: 'CHANGE_ANALYSTS_FILTER', payload: Uuid[] }
   | { type: 'CLEAR_ANALYSTS_FILTER' }
@@ -149,6 +155,30 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
           district: 'ALL',
         },
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'district')],
+      };
+    case 'CHANGE_THEME_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          theme: action.payload,
+        },
+        filtersOrdered: [
+          {
+            id: action.payload,
+            type: 'theme',
+          },
+          ...state.filtersOrdered.filter(filter => filter.type !== 'theme'),
+        ],
+      };
+    case 'CLEAR_THEME_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          theme: 'ALL',
+        },
+        filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'theme')],
       };
     case 'CHANGE_ANALYSTS_FILTER':
       return {
