@@ -29,7 +29,7 @@ const ProposalPreviewItem = ({
   link,
   lang,
 }: Props) => (
-  <Container>
+  <Container href={link[lang]}>
     <Header btnColor={colors.button}>
       <div className="avatar-wrapper">
         <img src={img} alt="" />

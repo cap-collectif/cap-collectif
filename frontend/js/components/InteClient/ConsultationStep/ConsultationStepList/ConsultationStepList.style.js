@@ -2,7 +2,11 @@
 import styled, { type StyledComponent } from 'styled-components';
 import { mediaQueryMobile } from '~/utils/sizes';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+export const Container: StyledComponent<
+  { columnHeight: string },
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
   className: 'consultation-step-list',
 })`
   display: flex;
@@ -11,7 +15,7 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.att
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
-  max-height: 400px;
+  max-height: ${props => props.columnHeight};
 
   .consultation-step-item {
     width: 42%;

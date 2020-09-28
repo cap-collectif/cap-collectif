@@ -40,7 +40,13 @@ const inputs = [
 
 storiesOf('Inté client|ConsultationStep/List', module).add(
   'Default',
-  () => <ConsultationStepList steps={arrayObject('steps', inputs)} lang={text('lang', 'fr')} />,
+  () => (
+    <ConsultationStepList
+      steps={arrayObject('steps', inputs)}
+      lang={text('lang', 'fr')}
+      columnHeight={text('columnHeight', '400px')}
+    />
+  ),
   {
     knobsToBo: {
       componentName: 'ConsultationStepApp',

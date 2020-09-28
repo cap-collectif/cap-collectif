@@ -8,11 +8,12 @@ import ConsultationStepItem, {
 export type Props = {
   steps: Array<ConsultationItemProps>,
   lang: string,
+  columnHeight?: string,
   style?: Object,
 };
 
-const ConsultationStepList = ({ steps, lang, style }: Props) => (
-  <Container style={style}>
+const ConsultationStepList = ({ steps, lang, style, columnHeight = '300px' }: Props) => (
+  <Container style={style} columnHeight={columnHeight}>
     {steps.map((step, idx) => (
       <ConsultationStepItem {...step} key={`consultation-step-${idx}`} lang={lang} />
     ))}

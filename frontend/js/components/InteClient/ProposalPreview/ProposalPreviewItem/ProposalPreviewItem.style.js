@@ -7,18 +7,25 @@ export type Colors = {|
   name: string,
 |};
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+export const Container: StyledComponent<{}, {}, HTMLAnchorElement> = styled.a.attrs({
   className: 'proposal-preview-item',
 })`
   display: flex;
   flex-direction: column;
   border: 1px solid #e8ebed;
   background-color: #fff;
+  color: #000;
   padding: 20px;
   ${MAIN_BORDER_RADIUS};
+  transition: all 0.3s;
 
   .proposal-content {
     margin: 20px 0;
+  }
+
+  &:hover {
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.15);
+    color: #000;
   }
 `;
 

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Container, Tag, type Colors } from './HomeHeader.style';
+import { Container, Tag, Content, Illustration, type Colors } from './HomeHeader.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import config from '~/config';
 
@@ -28,10 +28,16 @@ export type Props = {
 };
 
 const HomeHeader = ({ title, description, img, tag, mainLink, secondLink, style }: Props) => (
-  <Container style={style} mainLinkColors={mainLink.colors} secondLinkColor={secondLink.textColor}>
-    <div>
+  <Container style={style}>
+    <Content mainLinkColors={mainLink.colors} secondLinkColor={secondLink.textColor}>
       <Tag colors={config.isMobile ? tag.mobileColors : tag.colors}>
-        {tag.icon && <Icon name={tag.icon} size={24} color={tag.colors.text} />}
+        {tag.icon && (
+          <Icon
+            name={tag.icon}
+            size={24}
+            color={config.isMobile ? tag.mobileColors.text : tag.colors.text}
+          />
+        )}
         <span>{tag.text}</span>
       </Tag>
 
@@ -49,11 +55,11 @@ const HomeHeader = ({ title, description, img, tag, mainLink, secondLink, style 
           <Icon name={ICON_NAME.arrowRight} size={16} color={secondLink.textColor} />
         </a>
       </div>
-    </div>
+    </Content>
 
-    <div className="illustration-wrapper">
-      <img src={img} alt="" className="illustration" />
-    </div>
+    <Illustration img={img}>
+      {!config.isMobile && <img src={img} alt="" className="illustration" />}
+    </Illustration>
   </Container>
 );
 

@@ -11,16 +11,9 @@ const inputs = [
       fr: "Comment dépasser la recherche de profit à court terme de l'entreprise ?",
       en: 'How are you ?',
     },
-    img: 'https://source.unsplash.com/random/800x800',
-    link: {
-      fr: 'https://gogo.com',
-      en: 'https://gogo.com',
-    },
-  },
-  {
-    title: {
-      fr: "Comment dépasser la recherche de profit à court terme de l'entreprise ?",
-      en: 'How are you ?',
+    buttonText: {
+      fr: 'Participer',
+      en: 'Participate',
     },
     img: 'https://source.unsplash.com/random/800x800',
     link: {
@@ -32,6 +25,25 @@ const inputs = [
     title: {
       fr: "Comment dépasser la recherche de profit à court terme de l'entreprise ?",
       en: 'How are you ?',
+    },
+    buttonText: {
+      fr: 'Participer',
+      en: 'Participate',
+    },
+    img: 'https://source.unsplash.com/random/800x800',
+    link: {
+      fr: 'https://gogo.com',
+      en: 'https://gogo.com',
+    },
+  },
+  {
+    title: {
+      fr: "Comment dépasser la recherche de profit à court terme de l'entreprise ?",
+      en: 'How are you ?',
+    },
+    buttonText: {
+      fr: 'Participer',
+      en: 'Participate',
     },
     img: 'https://source.unsplash.com/random/800x800',
     link: {
@@ -60,6 +72,10 @@ storiesOf('Inté client|DebatePreview/Item', module).add('Default', () => (
     link={{
       fr: 'https://gogo.com',
       en: 'https://gogo.com',
+    }}
+    buttonText={{
+      fr: 'Participer',
+      en: 'Participate',
     }}
     img="https://source.unsplash.com/random/800x800"
     lang={text('lang', 'fr')}

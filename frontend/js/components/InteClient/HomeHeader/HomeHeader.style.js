@@ -18,11 +18,7 @@ const getColorHover = (color: string) => {
   return formatHsl({ h, s, l: l - 10 });
 };
 
-export const Container: StyledComponent<
-  { mainLinkColors: Colors },
-  {},
-  HTMLDivElement,
-> = styled.div.attrs({
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'home-header',
 })`
   display: flex;
@@ -32,11 +28,23 @@ export const Container: StyledComponent<
   height: 100%;
   text-align: left;
 
-  & > div {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    position: relative;
+    z-index: 1;
+    justify-content: center;
   }
+`;
+
+export const Content: StyledComponent<
+  { mainLinkColors: Colors, secondLinkColor: string },
+  {},
+  HTMLDivElement,
+> = styled.div.attrs({
+  className: 'home-content-wrapper',
+})`
+  display: flex;
+  flex-direction: column;
+  width: 40%;
 
   h1 {
     color: #000 !important;
@@ -44,18 +52,6 @@ export const Container: StyledComponent<
     line-height: 56px;
     font-weight: bold;
     margin: 14px 0 0 0;
-  }
-
-  .illustration-wrapper {
-    height: 100%;
-    width: 50%;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-
-  .illustration {
-    height: auto;
-    width: 100%;
   }
 
   .description {
@@ -105,33 +101,16 @@ export const Container: StyledComponent<
   }
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
-    position: relative;
-    z-index: 1;
-    justify-content: center;
-
-    & > div {
-      width: 80%;
-      align-items: center;
-    }
+    width: 100%;
+    align-items: center;
 
     h1 {
-      font-size: 40px;
-      line-height: 48px;
+      font-size: 40px !important;
+      line-height: 48px !important;
     }
 
     .description {
       text-align: center;
-    }
-
-    .illustration-wrapper {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.2;
-      border-radius: inherit;
     }
 
     .wrapper-link {
@@ -143,6 +122,36 @@ export const Container: StyledComponent<
       margin-bottom: 15px;
       padding: 14px 18px;
     }
+  }
+`;
+
+export const Illustration: StyledComponent<{ img: string }, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'illustration-wrapper',
+})`
+  display: flex;
+  height: 100%;
+  width: 50%;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .illustration {
+    height: auto;
+    width: 100%;
+  }
+
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.2;
+    border-radius: inherit;
+    background-image: ${props => `url(${props.img})`};
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 `;
 

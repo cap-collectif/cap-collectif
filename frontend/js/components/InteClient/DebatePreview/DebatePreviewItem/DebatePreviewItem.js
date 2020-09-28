@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Container } from './DebatePreviewItem.style';
+import { Container, ImageContainer } from './DebatePreviewItem.style';
 
 export type Props = {|
   title: {
@@ -10,12 +10,18 @@ export type Props = {|
   link: {
     [string]: string,
   },
+  buttonText: {
+    [string]: string,
+  },
   lang: string,
 |};
 
-const DebatePreviewItem = ({ title, img, link, lang }: Props) => (
+const DebatePreviewItem = ({ title, img, link, lang, buttonText }: Props) => (
   <Container href={link[lang]}>
-    <img src={img} alt="" />
+    <ImageContainer img={img}>
+      <button type="button">{buttonText[lang]}</button>
+      <div className="overlay" />
+    </ImageContainer>
     <p>{title[lang]}</p>
   </Container>
 );
