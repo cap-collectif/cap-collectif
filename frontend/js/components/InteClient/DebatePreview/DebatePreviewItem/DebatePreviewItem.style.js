@@ -10,6 +10,7 @@ export const Container: StyledComponent<{}, {}, HTMLAnchorElement> = styled.a.at
   padding: 18px;
   ${MAIN_BORDER_RADIUS};
   transition: all 0.3s;
+  text-decoration: none;
 
   p {
     margin: 15px 0 0 0;

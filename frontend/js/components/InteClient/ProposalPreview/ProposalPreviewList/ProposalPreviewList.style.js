@@ -2,7 +2,9 @@
 import styled, { type StyledComponent } from 'styled-components';
 import { mediaQueryMobile } from '~/utils/sizes';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'proposal-preview-list-container',
+})`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

@@ -7,6 +7,7 @@ import type { SettingsSlider } from '~/types';
 type Image = {|
   url: string,
   alt: string,
+  link?: string,
 |};
 
 export type Props = {
@@ -17,11 +18,17 @@ export type Props = {
 
 const ImageSlider = ({ images, className, settingsSlider }: Props) => (
   <Container {...settingsSlider} className={cn('image-slider', className)}>
-    {images.map((img, idx) => (
-      <div key={`image-slide-${idx}`} className="image-slide">
-        <img src={img.url} alt={img.alt} />
-      </div>
-    ))}
+    {images.map((img, idx) =>
+      img.link ? (
+        <a href={img.link} key={`image-slide-${idx}`} className="image-slide">
+          <img src={img.url} alt={img.alt} />
+        </a>
+      ) : (
+        <div key={`image-slide-${idx}`} className="image-slide">
+          <img src={img.url} alt={img.alt} />
+        </div>
+      ),
+    )}
   </Container>
 );
 

@@ -14,6 +14,7 @@ const inputs = [
     url:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Lemonde_fr_2005_logo.svg/1280px-Lemonde_fr_2005_logo.svg.png',
     alt: 'logo 1',
+    link: 'https://toto.fr',
   },
   {
     url:

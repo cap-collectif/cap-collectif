@@ -55,7 +55,7 @@ export const Content: StyledComponent<
   }
 
   .description {
-    color: #515058;
+    color: #36353b;
     font-size: 18px;
     line-height: 24px;
     margin: 16px 0 24px 0;
@@ -146,7 +146,7 @@ export const Illustration: StyledComponent<{ img: string }, {}, HTMLDivElement> 
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.2;
+    opacity: 0.1;
     border-radius: inherit;
     background-image: ${props => `url(${props.img})`};
     background-repeat: no-repeat;
