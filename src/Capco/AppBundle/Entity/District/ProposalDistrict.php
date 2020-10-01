@@ -44,6 +44,10 @@ class ProposalDistrict extends AbstractDistrict
     {
         if ($this->id) {
             $this->id = null;
+            foreach ($this->translations as $translation) {
+                $clonedTranslation = clone $translation;
+                $this->addTranslation($clonedTranslation);
+            }
         }
     }
 

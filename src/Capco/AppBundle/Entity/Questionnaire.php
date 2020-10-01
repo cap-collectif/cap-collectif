@@ -33,7 +33,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
      */
     protected $updatedAt;
 
-
     /**
      * @var string
      *
@@ -56,7 +55,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
 
     /**
      * @Assert\Valid
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="questionnaire", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="questionnaire", cascade={"remove","persist"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $questions;
@@ -208,8 +207,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     }
 
     /**
-     * @param ArrayCollection $questions
-     *
      * @return $this
      */
     public function setQuestions(ArrayCollection $questions)
@@ -222,7 +219,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     /**
      * Add question.
      *
-     * @param QuestionnaireAbstractQuestion $question
      *
      * @return $this
      */
@@ -239,7 +235,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     /**
      * Remove question.
      *
-     * @param QuestionnaireAbstractQuestion $question
      *
      * @return $this
      */
@@ -273,7 +268,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
      *
      * @return $this
      */
-    public function setStep(QuestionnaireStep $step = null)
+    public function setStep(?QuestionnaireStep $step = null)
     {
         $this->step = $step;
 
@@ -361,7 +356,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     /**
      * Add reply.
      *
-     * @param Reply $reply
      *
      * @return $this
      */
@@ -378,7 +372,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
     /**
      * Remove reply.
      *
-     * @param Reply $reply
      *
      * @return $this
      */

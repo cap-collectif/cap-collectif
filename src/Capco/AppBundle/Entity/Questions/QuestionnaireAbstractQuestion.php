@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\ProposalForm;
@@ -34,33 +35,34 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class QuestionnaireAbstractQuestion
 {
-    use IdTrait, PositionableTrait;
+    use IdTrait;
+    use PositionableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="questions", cascade={"persist"})
      * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     **/
+     */
     protected $questionnaire;
 
     /**
      * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="questions", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     **/
+     */
     protected $proposalForm;
 
     /**
      * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\RegistrationForm", inversedBy="questions", cascade={"persist"})
      * @ORM\JoinColumn(name="registration_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     **/
+     */
     protected $registrationForm;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="questionnaireAbstractQuestion", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="questionnaireAbstractQuestion", cascade={"remove", "persist"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
-     **/
+     */
     protected $question;
 
     public function __toString()
@@ -76,11 +78,12 @@ class QuestionnaireAbstractQuestion
     {
         if ($this->id) {
             $this->id = null;
-            $this->question = clone $this->question;
+            $clonedQuestion = clone $this->question;
+            $this->setQuestion($clonedQuestion);
         }
     }
 
-    public function setQuestionnaire(Questionnaire $questionnaire = null): self
+    public function setQuestionnaire(?Questionnaire $questionnaire = null): self
     {
         $this->questionnaire = $questionnaire;
 
@@ -110,7 +113,7 @@ class QuestionnaireAbstractQuestion
         return $this->proposalForm;
     }
 
-    public function setProposalForm(ProposalForm $proposalForm = null): self
+    public function setProposalForm(?ProposalForm $proposalForm = null): self
     {
         $this->proposalForm = $proposalForm;
 
@@ -122,7 +125,7 @@ class QuestionnaireAbstractQuestion
         return $this->registrationForm;
     }
 
-    public function setRegistrationForm(RegistrationForm $registrationForm = null): self
+    public function setRegistrationForm(?RegistrationForm $registrationForm = null): self
     {
         $this->registrationForm = $registrationForm;
 

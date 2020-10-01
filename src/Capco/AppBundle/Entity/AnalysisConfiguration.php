@@ -30,7 +30,7 @@ class AnalysisConfiguration implements Timestampable
     private $proposalForm;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
      */
     private $evaluationForm;
@@ -94,6 +94,19 @@ class AnalysisConfiguration implements Timestampable
         $this->unfavourableStatuses = new ArrayCollection();
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            $this->evaluationForm = $this->evaluationForm ? clone $this->evaluationForm : null;
+            $this->favourableStatus = null;
+            $this->unfavourableStatuses = new ArrayCollection();
+            $this->moveToSelectionStep = null;
+            $this->selectionStepStatus = null;
+            $this->analysisStep = null;
+        }
+    }
+
     public function getProposalForm(): ProposalForm
     {
         return $this->proposalForm;
@@ -119,7 +132,7 @@ class AnalysisConfiguration implements Timestampable
         return $this;
     }
 
-    public function getAnalysisStep(): AbstractStep
+    public function getAnalysisStep(): ?AbstractStep
     {
         return $this->analysisStep;
     }

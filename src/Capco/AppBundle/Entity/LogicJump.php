@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -24,7 +25,8 @@ class LogicJump
     protected $origin;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", cascade={"persist"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $destination;
 
@@ -37,6 +39,13 @@ class LogicJump
     public function __construct()
     {
         $this->conditions = new ArrayCollection();
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
     }
 
     public function getOrigin(): ?AbstractQuestion
@@ -87,6 +96,13 @@ class LogicJump
                 $condition->setJump(null);
             }
         }
+
+        return $this;
+    }
+
+    public function setConditions(Collection $conditions): self
+    {
+        $this->conditions = $conditions;
 
         return $this;
     }

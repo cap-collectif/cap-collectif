@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
@@ -257,7 +258,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\AnalysisConfiguration", mappedBy="proposalForm", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true, name="analysis_configuration")
+     * @ORM\JoinColumn(nullable=true, name="analysis_configuration", onDelete="SET NULL")
      */
     private $analysisConfiguration;
 
@@ -283,11 +284,117 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                 $this->updatedAt = null;
                 $this->proposals = new ArrayCollection();
 
+                if ($this->analysisConfiguration) {
+                    /** @var AnalysisConfiguration $clonedAnalysisConfig */
+                    $clonedAnalysisConfig = clone $this->analysisConfiguration;
+                    $clonedAnalysisConfig->setProposalForm($this);
+                } else {
+                    $this->analysisConfiguration = null;
+                }
+
+                $cloneReferences = [];
                 $questionsClone = new ArrayCollection();
-                foreach ($this->questions as $question) {
-                    $itemClone = clone $question;
-                    $itemClone->setProposalForm($this);
-                    $questionsClone->add($itemClone);
+
+                /** @var QuestionnaireAbstractQuestion $question */
+                $toCloneQuestions = $this->questions;
+                foreach ($toCloneQuestions as $question) {
+                    if (
+                        !($reference = $this->getCloneReference(
+                            $cloneReferences,
+                            $question->getQuestion()->getTitle()
+                        ))
+                    ) {
+                        $clonedQuestion = clone $question;
+                        $clonedQuestion->setProposalForm($this);
+                        $cloneReferences[
+                            $clonedQuestion->getQuestion()->getTitle()
+                        ] = $clonedQuestion;
+                    } else {
+                        $clonedQuestion = $reference;
+                    }
+
+                    if (
+                        ($aq = $question->getQuestion()) &&
+                        !empty(($questionJumps = $aq->getJumps()))
+                    ) {
+                        $clonedQuestionAq = $clonedQuestion->getQuestion();
+
+                        if (
+                            $questionAqAlwaysJump = $question
+                                ->getQuestion()
+                                ->getAlwaysJumpDestinationQuestion()
+                        ) {
+                            if (
+                                $cloneReferenceQaq = $this->getCloneReference(
+                                    $cloneReferences,
+                                    $questionAqAlwaysJump->getTitle()
+                                )
+                            ) {
+                                $clonedQuestionAq->setAlwaysJumpDestinationQuestion(
+                                    $cloneReferenceQaq->getQuestion()
+                                );
+                            } else {
+                                $clonedQuestionAqAlwaysJump = clone $questionAqAlwaysJump;
+                                $clonedQuestionAqAlwaysJump->setQuestionnaireAbstractQuestion(
+                                    $clonedQuestion
+                                );
+                                $clonedQuestionAq->setAlwaysJumpDestinationQuestion(
+                                    $clonedQuestionAqAlwaysJump
+                                );
+                            }
+                        }
+
+                        /** @var LogicJump $jump */
+                        $clonedJumps = new ArrayCollection();
+                        foreach ($questionJumps as $jump) {
+                            $clonedJump = clone $jump;
+                            $clonedJump->setConditions(new ArrayCollection());
+                            $clonedJump->setOrigin($clonedQuestionAq);
+                            if ($jump->getDestination()) {
+                                if (
+                                    $cloneReferenceJumpQaq = $this->getCloneReference(
+                                        $cloneReferences,
+                                        $jump
+                                            ->getDestination()
+                                            ->getQuestionnaireAbstractQuestion()
+                                            ->getQuestion()
+                                            ->getTitle()
+                                    )
+                                ) {
+                                    $clonedJump->setDestination(
+                                        $cloneReferenceJumpQaq->getQuestion()
+                                    );
+                                } else {
+                                    $clonedJumpQaq = clone $jump
+                                        ->getDestination()
+                                        ->getQuestionnaireAbstractQuestion();
+                                    $clonedJumpQaq->setProposalForm($this);
+                                    $clonedJump->setDestination($clonedJumpQaq->getQuestion());
+                                    $cloneReferences[
+                                        $clonedJumpQaq->getQuestion()->getTitle()
+                                    ] = $clonedJumpQaq;
+                                }
+                                $clonedJumps->add($clonedJump);
+                            }
+                            /** @var AbstractLogicJumpCondition $condition */
+                            foreach ($jump->getConditions() as $condition) {
+                                $clonedCondition = clone $condition;
+                                $clonedCondition->setQuestion($clonedQuestionAq);
+                                $clonedCondition->setJump($clonedJump);
+                                if ($clonedQuestionAq instanceof MultipleChoiceQuestion) {
+                                    $clonedCondition->setValue(
+                                        $this->findChoiceByTitle(
+                                            $clonedQuestionAq->getChoices()->toArray(),
+                                            $condition->getValue()->getTitle()
+                                        )
+                                    );
+                                }
+                                $clonedJump->addCondition($clonedCondition);
+                            }
+                        }
+                        $clonedQuestionAq->setJumps($clonedJumps);
+                    }
+                    $questionsClone->add($clonedQuestion);
                 }
 
                 $districtsClone = new ArrayCollection();
@@ -966,5 +1073,27 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         $this->isMapViewEnabled = $isMapViewEnabled;
 
         return $this;
+    }
+
+    private function getCloneReference(
+        array $cloneReferences,
+        string $questionTitle
+    ): ?QuestionnaireAbstractQuestion {
+        if (\array_key_exists($questionTitle, $cloneReferences)) {
+            return $cloneReferences[$questionTitle];
+        }
+
+        return null;
+    }
+
+    private function findChoiceByTitle(array $array, string $title)
+    {
+        foreach ($array as $element) {
+            if ($title === $element->getTitle()) {
+                return $element;
+            }
+        }
+
+        return false;
     }
 }

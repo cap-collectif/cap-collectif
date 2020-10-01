@@ -38,6 +38,13 @@ abstract class AbstractLogicJumpCondition
      */
     protected $jump;
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
+    }
+
     public function getOperator(): ?string
     {
         return $this->operator;

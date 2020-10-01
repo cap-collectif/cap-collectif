@@ -17,11 +17,11 @@ class MultipleChoiceQuestion extends AbstractQuestion
         'question.types.radio' => self::QUESTION_TYPE_RADIO,
         'question.types.select' => self::QUESTION_TYPE_SELECT,
         'question.types.checkbox' => self::QUESTION_TYPE_CHECKBOX,
-        'question.types.ranking' => self::QUESTION_TYPE_RANKING
+        'question.types.ranking' => self::QUESTION_TYPE_RANKING,
     ];
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"remove"}, orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"remove", "persist"}, orphanRemoval=true, fetch="EAGER")
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $choices;
@@ -51,6 +51,18 @@ class MultipleChoiceQuestion extends AbstractQuestion
     {
         parent::__construct();
         $this->choices = new ArrayCollection();
+    }
+
+    public function __clone()
+    {
+        parent::__clone();
+        $clonedChoices = new ArrayCollection();
+        foreach ($this->choices as $choice) {
+            $clonedChoice = clone $choice;
+            $clonedChoice->setQuestion($this);
+            $clonedChoices->add($clonedChoice);
+        }
+        $this->choices = $clonedChoices;
     }
 
     public function getChoices(): Collection

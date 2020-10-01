@@ -46,6 +46,13 @@ class QuestionChoice implements IndexableInterface
      */
     private $color;
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
+    }
+
     public function __toString()
     {
         return $this->title ?? 'New QuestionChoice';
@@ -138,6 +145,6 @@ class QuestionChoice implements IndexableInterface
 
     public static function getElasticsearchPriority(): int
     {
-        return 14;
+        return 16;
     }
 }

@@ -58,7 +58,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         self::QUESTION_TYPE_SECTION => 'section',
         self::QUESTION_TYPE_NUMBER => 'number',
         self::QUESTION_TYPE_SIRET => 'siret',
-        self::QUESTION_TYPE_RNA => 'rna'
+        self::QUESTION_TYPE_RNA => 'rna',
     ];
 
     public static $questionTypesLabels = [];
@@ -90,7 +90,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     protected $jumps;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", cascade={"persist"})
      * @ORM\JoinColumn(name="always_jump_destination_question_id", nullable=true, onDelete="SET NULL")
      */
     protected $alwaysJumpDestinationQuestion;
@@ -150,6 +150,8 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     {
         if ($this->id) {
             $this->id = null;
+            $this->createdAt = new \DateTime();
+            $this->updatedAt = null;
         }
     }
 
@@ -277,7 +279,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         }
     }
 
-    public function setInputType(string $type = null): self
+    public function setInputType(?string $type = null): self
     {
         if (\in_array($type, self::$questionTypesInputs, true)) {
             $this->setType(array_search($type, self::$questionTypesInputs, true));
@@ -356,7 +358,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
 
     public function hasAlwaysJumpDestinationQuestion(): bool
     {
-        return $this->alwaysJumpDestinationQuestion != null;
+        return null != $this->alwaysJumpDestinationQuestion;
     }
 
     public function getAlwaysJumpDestinationQuestion(): ?self
@@ -380,7 +382,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public function setHidden(bool $hidden): self
     {
         $this->hidden = $hidden;
+
         return $this;
     }
-
 }

@@ -32,7 +32,7 @@ class Status
         'success' => StatusColor::SUCCESS,
         'info' => StatusColor::INFO,
         'warning' => StatusColor::WARNING,
-        'danger' => StatusColor::DANGER
+        'danger' => StatusColor::DANGER,
     ];
 
     public static $statusesLabels = [
@@ -41,7 +41,7 @@ class Status
         'statuses.labels.success' => StatusColor::SUCCESS,
         'statuses.labels.info' => StatusColor::INFO,
         'statuses.labels.warning' => StatusColor::WARNING,
-        'statuses.labels.danger' => StatusColor::DANGER
+        'statuses.labels.danger' => StatusColor::DANGER,
     ];
 
     /**
@@ -81,6 +81,13 @@ class Status
     {
         $this->updatedAt = new \DateTime();
         $this->proposals = new ArrayCollection();
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
     }
 
     public function __toString()
