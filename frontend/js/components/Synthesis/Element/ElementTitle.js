@@ -9,7 +9,7 @@ type Props = {
   hasLink: boolean,
   className: string,
   style: Object,
-  onClick: Function,
+  onClick: () => void,
 };
 
 class ElementTitle extends React.Component<Props> {

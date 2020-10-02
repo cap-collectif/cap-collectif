@@ -11,7 +11,7 @@ import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonC
 type Props = {|
   show: boolean,
   contactForm: ?ContactFormAdminModal_contactForm,
-  onClose: Function,
+  onClose: () => void,
 |};
 
 const ContactFormAdminModal = ({ contactForm, show, onClose }: Props) => (

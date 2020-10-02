@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
 type Props = {
-  handleClick: Function,
+  handleClick: () => void,
   disabled?: boolean,
 };
 

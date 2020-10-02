@@ -10,7 +10,7 @@ type Props = {
   id: string,
   reported: boolean,
   className: ?string,
-  onClick: Function,
+  onClick: () => void,
   style: ?Object,
   bsSize?: BsSize,
 };

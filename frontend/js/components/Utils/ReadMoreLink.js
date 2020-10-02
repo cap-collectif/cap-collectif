@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 type Props = {
   visible?: boolean,
   expanded?: boolean,
-  onClick: Function,
+  onClick: () => void,
 };
 
 class ReadMoreLink extends React.Component<Props> {
