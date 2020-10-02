@@ -33,7 +33,7 @@ export const LinkList: StyledComponent<{ left?: boolean }, {}, HTMLUListElement>
   margin: ${props => (props.left ? '0' : 'auto')};
   padding: 0;
   display: flex;
-  justify-content: ${props => !props.left ? 'center' : undefined};
+  justify-content: ${props => (!props.left ? 'center' : undefined)};
   flex-wrap: wrap;
   a {
     color: inherit;
@@ -135,7 +135,7 @@ const FooterLinksRender = ({
       )}
       {legals.privacy && (
         <li ref={handleItemWidth} left={left}>
-          <LinkSeparator>|</LinkSeparator>
+          {legals.cookies && <LinkSeparator>|</LinkSeparator>}
           <a href={privacyPath}>
             <FormattedMessage id="privacy-policy" />
           </a>
@@ -143,7 +143,7 @@ const FooterLinksRender = ({
       )}
       {legals.legal && (
         <li ref={handleItemWidth}>
-          <LinkSeparator>|</LinkSeparator>
+          {(legals.privacy || legals.cookies) && <LinkSeparator>|</LinkSeparator>}
           <a href={legalPath}>
             <FormattedMessage id="legal-mentions" />
           </a>
@@ -151,13 +151,19 @@ const FooterLinksRender = ({
       )}
       {cookiesText && (
         <li ref={handleItemWidth}>
-          <CookieManagerModal bannerTrad={cookiesText} isLink separator="|" />
+          <CookieManagerModal
+            bannerTrad={cookiesText}
+            isLink
+            separator={legals.cookies || legals.privacy || legals.legal ? '|' : ''}
+          />
         </li>
       )}
       {links.map((link: FooterLink, index: number) =>
         index < overflowIndex - activeNumber ? (
           <li key={link.name} ref={handleItemWidth}>
-            {!index && legals.legal && <LinkSeparator>|</LinkSeparator>}
+            {!index && (legals.legal || legals.privacy || legals.cookies || cookiesText) && (
+              <LinkSeparator>|</LinkSeparator>
+            )}
             <a href={link.url}>{link.name}</a>
             {index < overflowIndex - activeNumber - 1 && <LinkSeparator>|</LinkSeparator>}
           </li>

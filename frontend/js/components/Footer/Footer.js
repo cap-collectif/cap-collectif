@@ -6,7 +6,7 @@ import colors from '../../utils/colors';
 import type { GlobalState, FeatureToggles } from '../../types';
 import FooterAbout from './FooterAbout';
 import FooterLinks from './FooterLinks';
-import type {LocaleMap} from "~ui/Button/SiteLanguageChangeButton";
+import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
 
 export type SocialNetwork = {|
   link: string,
