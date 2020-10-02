@@ -9,24 +9,22 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "id",
-              "type": "ID!",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
               "name": "count",
-              "type": "Int!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "id",
             },
           ],
           "kind": "Fragment",
@@ -82,19 +80,16 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "id",
-              "type": "ID!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
             },
           ],
           "kind": "Operation",
@@ -129,6 +124,7 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -337,6 +333,7 @@ exports[`<GroupAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "bdd3784cec0cf58e476afbb76fefa83d",
           "id": null,
           "metadata": Object {},
           "name": "GroupAdminPageQuery",

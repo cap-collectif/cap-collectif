@@ -33,7 +33,6 @@ unnecessary-optional-chain=off
 .*/node_modules/polished/lib/shorthands/position.js.flow
 .*/node_modules/immutable/dist/immutable.js
 
-; We need a massive relay upgrade
 [declarations] 
 .*/node_modules/relay-runtime/store/DataChecker.js.flow
 .*/node_modules/relay-runtime/store/RelayModernQueryExecutor.js.flow

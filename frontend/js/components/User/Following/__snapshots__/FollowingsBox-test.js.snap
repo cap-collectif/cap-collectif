@@ -7,6 +7,7 @@ exports[`<FollowingsBox /> render 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -158,6 +159,7 @@ exports[`<FollowingsBox /> render 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "4a40df871138d73ebd6d3b6d93647b75",
           "id": null,
           "metadata": Object {},
           "name": "FollowingsBoxQuery",

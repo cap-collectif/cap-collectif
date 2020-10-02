@@ -7,12 +7,12 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "eventId",
-              "type": "ID!",
             },
           ],
           "kind": "Fragment",
@@ -58,7 +58,6 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "eventId",
-              "type": "ID!",
             },
           ],
           "kind": "Operation",
@@ -93,6 +92,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -522,6 +522,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "e4b3be387fd23678867f76b42614f876",
           "id": null,
           "metadata": Object {},
           "name": "EventAdminQuery",
@@ -647,12 +648,12 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "eventId",
-              "type": "ID!",
             },
           ],
           "kind": "Fragment",
@@ -698,7 +699,6 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "eventId",
-              "type": "ID!",
             },
           ],
           "kind": "Operation",
@@ -733,6 +733,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -1162,6 +1163,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "e4b3be387fd23678867f76b42614f876",
           "id": null,
           "metadata": Object {},
           "name": "EventAdminQuery",

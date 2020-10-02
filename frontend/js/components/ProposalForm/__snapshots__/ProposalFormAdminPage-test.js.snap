@@ -9,12 +9,12 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "id",
-              "type": "ID!",
             },
           ],
           "kind": "Fragment",
@@ -41,6 +41,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                   "name": "ProposalFormAdminPageTabs_proposalForm",
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -72,7 +73,6 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "id",
-              "type": "ID!",
             },
           ],
           "kind": "Operation",
@@ -107,6 +107,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -158,13 +159,6 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
-                                  "name": "id",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
                                   "name": "__typename",
                                   "storageKey": null,
                                 },
@@ -172,55 +166,20 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
-                                  "name": "title",
+                                  "name": "id",
                                   "storageKey": null,
                                 },
                                 Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "TimeRange",
-                                  "kind": "LinkedField",
-                                  "name": "timeRange",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "endAt",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "Status",
-                                  "kind": "LinkedField",
-                                  "name": "statuses",
-                                  "plural": true,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "name",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                                Object {
+                                  "abstractKey": null,
                                   "kind": "InlineFragment",
                                   "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "title",
+                                      "storageKey": null,
+                                    },
                                     Object {
                                       "alias": null,
                                       "args": null,
@@ -278,8 +237,16 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                                   "type": "CollectStep",
                                 },
                                 Object {
+                                  "abstractKey": null,
                                   "kind": "InlineFragment",
                                   "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "title",
+                                      "storageKey": null,
+                                    },
                                     Object {
                                       "alias": null,
                                       "args": null,
@@ -296,6 +263,63 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                                     },
                                   ],
                                   "type": "SelectionStep",
+                                },
+                                Object {
+                                  "abstractKey": "__isProposalStep",
+                                  "kind": "InlineFragment",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "title",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "TimeRange",
+                                      "kind": "LinkedField",
+                                      "name": "timeRange",
+                                      "plural": false,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "endAt",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "concreteType": "Status",
+                                      "kind": "LinkedField",
+                                      "name": "statuses",
+                                      "plural": true,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "name",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "type": "ProposalStep",
                                 },
                               ],
                               "storageKey": null,
@@ -834,15 +858,19 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "id",
+                          "name": "__typename",
                           "storageKey": null,
                         },
                         Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "__typename",
+                          "name": "id",
                           "storageKey": null,
+                        },
+                        Object {
+                          "abstractKey": "__isQuestion",
+                          "kind": "TypeDiscriminator",
                         },
                         Object {
                           "alias": null,
@@ -1127,6 +1155,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "abstractKey": null,
                           "kind": "InlineFragment",
                           "selections": Array [
                             Object {
@@ -1140,6 +1169,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                           "type": "SectionQuestion",
                         },
                         Object {
+                          "abstractKey": null,
                           "kind": "InlineFragment",
                           "selections": Array [
                             Object {
@@ -1745,6 +1775,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "6eea548cb5f3e88be8ab5aecee44cc1e",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -1822,6 +1853,7 @@ fragment ProposalFormAdminAnalysisConfigurationForm_proposalForm on ProposalForm
     project {
       steps {
         ... on ProposalStep {
+          __isProposalStep: __typename
           id
           title
           timeRange {
@@ -1935,8 +1967,9 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
     }
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private

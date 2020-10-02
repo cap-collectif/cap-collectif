@@ -7,24 +7,22 @@ exports[`<ProjectRestrictedAccess /> should render correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "projectId",
-              "type": "ID!",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
               "name": "count",
-              "type": "Int",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "projectId",
             },
           ],
           "kind": "Fragment",
@@ -46,6 +44,7 @@ exports[`<ProjectRestrictedAccess /> should render correctly 1`] = `
               "plural": false,
               "selections": Array [
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -70,19 +69,16 @@ exports[`<ProjectRestrictedAccess /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "projectId",
-              "type": "ID!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
             },
           ],
           "kind": "Operation",
@@ -117,6 +113,7 @@ exports[`<ProjectRestrictedAccess /> should render correctly 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -440,6 +437,7 @@ exports[`<ProjectRestrictedAccess /> should render correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "1dde0cf3647839eebd5f1cfea3c10724",
           "id": null,
           "metadata": Object {},
           "name": "ProjectRestrictedAccessQuery",

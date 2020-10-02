@@ -30,18 +30,17 @@ exports[`<EvaluationsIndexPage /> renders correcty 1`] = `
   query={
     Object {
       "fragment": Object {
+        "abstractKey": null,
         "argumentDefinitions": Array [
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "count",
-            "type": "Int!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "cursor",
-            "type": "String",
           },
         ],
         "kind": "Fragment",
@@ -93,13 +92,11 @@ exports[`<EvaluationsIndexPage /> renders correcty 1`] = `
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "count",
-            "type": "Int!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "cursor",
-            "type": "String",
           },
         ],
         "kind": "Operation",
@@ -415,6 +412,7 @@ exports[`<EvaluationsIndexPage /> renders correcty 1`] = `
         ],
       },
       "params": Object {
+        "cacheID": "eff0445657392edbfcbac73db3e0c379",
         "id": null,
         "metadata": Object {},
         "name": "EvaluationsIndexPageQuery",

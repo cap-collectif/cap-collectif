@@ -11,6 +11,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -58,6 +59,13 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "__typename",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "id",
                       "storageKey": null,
                     },
@@ -69,11 +77,8 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
                       "storageKey": null,
                     },
                     Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "__typename",
-                      "storageKey": null,
+                      "abstractKey": "__isQuestion",
+                      "kind": "TypeDiscriminator",
                     },
                     Object {
                       "alias": null,
@@ -351,6 +356,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
                       "storageKey": null,
                     },
                     Object {
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
                         Object {
@@ -528,6 +534,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "cea04b99863bcc1147048c4d2bdb0969",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -539,6 +546,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
 fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
   questions {
     __typename
+    __isQuestion: __typename
     id
     title
     number
@@ -615,9 +623,10 @@ fragment RegistrationForm_query on Query {
   registrationScript
   registrationForm {
     questions {
+      __typename
       id
       type
-      __typename
+      __isQuestion: __typename
       title
       number
       private
@@ -742,6 +751,7 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -789,6 +799,13 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "__typename",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "id",
                       "storageKey": null,
                     },
@@ -800,11 +817,8 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
                       "storageKey": null,
                     },
                     Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "__typename",
-                      "storageKey": null,
+                      "abstractKey": "__isQuestion",
+                      "kind": "TypeDiscriminator",
                     },
                     Object {
                       "alias": null,
@@ -1082,6 +1096,7 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
                       "storageKey": null,
                     },
                     Object {
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
                         Object {
@@ -1259,6 +1274,7 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
           ],
         },
         "params": Object {
+          "cacheID": "cea04b99863bcc1147048c4d2bdb0969",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -1270,6 +1286,7 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
 fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
   questions {
     __typename
+    __isQuestion: __typename
     id
     title
     number
@@ -1346,9 +1363,10 @@ fragment RegistrationForm_query on Query {
   registrationScript
   registrationForm {
     questions {
+      __typename
       id
       type
-      __typename
+      __isQuestion: __typename
       title
       number
       private
@@ -1453,6 +1471,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -1500,6 +1519,13 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "__typename",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "id",
                       "storageKey": null,
                     },
@@ -1511,11 +1537,8 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
                       "storageKey": null,
                     },
                     Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "__typename",
-                      "storageKey": null,
+                      "abstractKey": "__isQuestion",
+                      "kind": "TypeDiscriminator",
                     },
                     Object {
                       "alias": null,
@@ -1793,6 +1816,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
                       "storageKey": null,
                     },
                     Object {
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
                         Object {
@@ -1970,6 +1994,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "cea04b99863bcc1147048c4d2bdb0969",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -1981,6 +2006,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
 fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
   questions {
     __typename
+    __isQuestion: __typename
     id
     title
     number
@@ -2057,9 +2083,10 @@ fragment RegistrationForm_query on Query {
   registrationScript
   registrationForm {
     questions {
+      __typename
       id
       type
-      __typename
+      __isQuestion: __typename
       title
       number
       private

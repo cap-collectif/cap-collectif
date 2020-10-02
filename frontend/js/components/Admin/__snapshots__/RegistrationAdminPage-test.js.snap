@@ -7,6 +7,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -77,15 +78,19 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "id",
+                      "name": "__typename",
                       "storageKey": null,
                     },
                     Object {
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "__typename",
+                      "name": "id",
                       "storageKey": null,
+                    },
+                    Object {
+                      "abstractKey": "__isQuestion",
+                      "kind": "TypeDiscriminator",
                     },
                     Object {
                       "alias": null,
@@ -370,6 +375,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                       "storageKey": null,
                     },
                     Object {
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
                         Object {
@@ -383,6 +389,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                       "type": "SectionQuestion",
                     },
                     Object {
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
                         Object {
@@ -606,6 +613,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "0c18727a11c4e0fb3b88c474bce3589e",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -633,8 +641,9 @@ fragment RegistrationFormCommunication_registrationForm on RegistrationForm {
 fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
   id
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -857,6 +866,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
           query={
             Object {
               "fragment": Object {
+                "abstractKey": null,
                 "argumentDefinitions": Array [],
                 "kind": "Fragment",
                 "metadata": null,
@@ -927,15 +937,19 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "id",
+                            "name": "__typename",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "__typename",
+                            "name": "id",
                             "storageKey": null,
+                          },
+                          Object {
+                            "abstractKey": "__isQuestion",
+                            "kind": "TypeDiscriminator",
                           },
                           Object {
                             "alias": null,
@@ -1220,6 +1234,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                             "storageKey": null,
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -1233,6 +1248,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                             "type": "SectionQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -1456,6 +1472,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                 ],
               },
               "params": Object {
+                "cacheID": "0c18727a11c4e0fb3b88c474bce3589e",
                 "id": null,
                 "metadata": Object {},
                 "name": "RegistrationAdminPageQuery",
@@ -1483,8 +1500,9 @@ fragment RegistrationFormCommunication_registrationForm on RegistrationForm {
 fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
   id
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -1671,6 +1689,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -1741,15 +1760,19 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "id",
+                      "name": "__typename",
                       "storageKey": null,
                     },
                     Object {
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "__typename",
+                      "name": "id",
                       "storageKey": null,
+                    },
+                    Object {
+                      "abstractKey": "__isQuestion",
+                      "kind": "TypeDiscriminator",
                     },
                     Object {
                       "alias": null,
@@ -2034,6 +2057,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                       "storageKey": null,
                     },
                     Object {
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
                         Object {
@@ -2047,6 +2071,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                       "type": "SectionQuestion",
                     },
                     Object {
+                      "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
                         Object {
@@ -2270,6 +2295,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
           ],
         },
         "params": Object {
+          "cacheID": "0c18727a11c4e0fb3b88c474bce3589e",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -2297,8 +2323,9 @@ fragment RegistrationFormCommunication_registrationForm on RegistrationForm {
 fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
   id
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private

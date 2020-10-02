@@ -17,18 +17,17 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
       query={
         Object {
           "fragment": Object {
+            "abstractKey": null,
             "argumentDefinitions": Array [
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "eventId",
-                "type": "ID!",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "isAuthenticated",
-                "type": "Boolean!",
               },
             ],
             "kind": "Fragment",
@@ -79,13 +78,11 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "eventId",
-                "type": "ID!",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "isAuthenticated",
-                "type": "Boolean!",
               },
             ],
             "kind": "Operation",
@@ -120,6 +117,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
                       Object {
@@ -698,6 +696,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
             ],
           },
           "params": Object {
+            "cacheID": "e1bf319e1a17af6cc26e5341ea028241",
             "id": null,
             "metadata": Object {},
             "name": "EventFormPageAppQuery",

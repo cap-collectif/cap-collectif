@@ -45,6 +45,7 @@ exports[`<FontAdminPage /> renders correctly 1`] = `
       query={
         Object {
           "fragment": Object {
+            "abstractKey": null,
             "argumentDefinitions": Array [],
             "kind": "Fragment",
             "metadata": null,
@@ -125,6 +126,7 @@ exports[`<FontAdminPage /> renders correctly 1`] = `
             ],
           },
           "params": Object {
+            "cacheID": "5c807fff0b878eb5ac33c7aaf591fd21",
             "id": null,
             "metadata": Object {},
             "name": "FontAdminPageQuery",

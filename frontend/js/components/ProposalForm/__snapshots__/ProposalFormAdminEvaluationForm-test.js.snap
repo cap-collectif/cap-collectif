@@ -38,6 +38,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
           query={
             Object {
               "fragment": Object {
+                "abstractKey": null,
                 "argumentDefinitions": Array [],
                 "kind": "Fragment",
                 "metadata": null,
@@ -106,6 +107,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
                 ],
               },
               "params": Object {
+                "cacheID": "6cef1427c0caddd4ac050209a7f3ae6a",
                 "id": null,
                 "metadata": Object {},
                 "name": "ProposalFormAdminEvaluationFormQuery",
@@ -224,6 +226,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly when access to new
           query={
             Object {
               "fragment": Object {
+                "abstractKey": null,
                 "argumentDefinitions": Array [],
                 "kind": "Fragment",
                 "metadata": null,
@@ -292,6 +295,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly when access to new
                 ],
               },
               "params": Object {
+                "cacheID": "6cef1427c0caddd4ac050209a7f3ae6a",
                 "id": null,
                 "metadata": Object {},
                 "name": "ProposalFormAdminEvaluationFormQuery",

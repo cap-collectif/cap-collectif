@@ -26,6 +26,7 @@ exports[`<SectionContainer /> should render correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -214,6 +215,7 @@ exports[`<SectionContainer /> should render correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "b6f13775ae52551a75f1c59f9b7a93ba",
           "id": null,
           "metadata": Object {},
           "name": "SectionContainerQuery",

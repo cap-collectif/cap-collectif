@@ -10,36 +10,32 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
       query={
         Object {
           "fragment": Object {
+            "abstractKey": null,
             "argumentDefinitions": Array [
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
-                "name": "projectId",
-                "type": "ID!",
-              },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
-                "name": "isAuthenticated",
-                "type": "Boolean!",
+                "name": "count",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "cursor",
-                "type": "String",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
-                "name": "count",
-                "type": "Int",
+                "name": "isAuthenticated",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "projectId",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "stepId",
-                "type": "ID!",
               },
             ],
             "kind": "Fragment",
@@ -68,6 +64,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
                       Object {
@@ -197,31 +194,26 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "projectId",
-                "type": "ID!",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "isAuthenticated",
-                "type": "Boolean!",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "cursor",
-                "type": "String",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "count",
-                "type": "Int",
               },
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "stepId",
-                "type": "ID!",
               },
             ],
             "kind": "Operation",
@@ -256,6 +248,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
                       Object {
@@ -580,27 +573,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
-                                                "name": "published",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "notPublishedReason",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "publishableUntil",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
                                                 "name": "authorName",
                                                 "storageKey": null,
                                               },
@@ -671,6 +643,34 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                 "storageKey": null,
                                               },
                                               Object {
+                                                "abstractKey": "__isPublishable",
+                                                "kind": "InlineFragment",
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "published",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "notPublishedReason",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "publishableUntil",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "type": "Publishable",
+                                              },
+                                              Object {
                                                 "condition": "isAuthenticated",
                                                 "kind": "Condition",
                                                 "passingValue": true,
@@ -698,18 +698,25 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                         "storageKey": null,
                                                       },
                                                       Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "published",
-                                                        "storageKey": null,
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "notPublishedReason",
-                                                        "storageKey": null,
+                                                        "abstractKey": "__isPublishable",
+                                                        "kind": "InlineFragment",
+                                                        "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "published",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "notPublishedReason",
+                                                            "storageKey": null,
+                                                          },
+                                                        ],
+                                                        "type": "Publishable",
                                                       },
                                                     ],
                                                     "storageKey": null,
@@ -819,27 +826,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "published",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "notPublishedReason",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "publishableUntil",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
                                     "name": "authorName",
                                     "storageKey": null,
                                   },
@@ -910,6 +896,34 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                     "storageKey": null,
                                   },
                                   Object {
+                                    "abstractKey": "__isPublishable",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "published",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "notPublishedReason",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "publishableUntil",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Publishable",
+                                  },
+                                  Object {
                                     "condition": "isAuthenticated",
                                     "kind": "Condition",
                                     "passingValue": true,
@@ -937,18 +951,25 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                             "storageKey": null,
                                           },
                                           Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "published",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "notPublishedReason",
-                                            "storageKey": null,
+                                            "abstractKey": "__isPublishable",
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "published",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "notPublishedReason",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "Publishable",
                                           },
                                         ],
                                         "storageKey": null,
@@ -961,6 +982,10 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         "storageKey": null,
                                       },
                                     ],
+                                  },
+                                  Object {
+                                    "abstractKey": "__isCommentable",
+                                    "kind": "TypeDiscriminator",
                                   },
                                 ],
                                 "storageKey": null,
@@ -1408,27 +1433,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "published",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "notPublishedReason",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "publishableUntil",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
                                     "name": "publishedAt",
                                     "storageKey": null,
                                   },
@@ -1557,6 +1561,34 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                     "storageKey": null,
                                   },
                                   Object {
+                                    "abstractKey": "__isPublishable",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "published",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "notPublishedReason",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "publishableUntil",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Publishable",
+                                  },
+                                  Object {
                                     "condition": "isAuthenticated",
                                     "kind": "Condition",
                                     "passingValue": true,
@@ -1668,6 +1700,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
             ],
           },
           "params": Object {
+            "cacheID": "0bfef2a33c58551fd4581ea1105a37d0",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashQuery",
@@ -1752,6 +1785,7 @@ fragment CommentEdit_comment_39ngnn on Comment {
 }
 
 fragment CommentForm_commentable on Commentable {
+  __isCommentable: __typename
   id
 }
 
@@ -1993,6 +2027,7 @@ fragment ProposalTrashedListPaginated_project_2RchB8 on Project {
 }
 
 fragment UnpublishedLabel_publishable on Publishable {
+  __isPublishable: __typename
   id
   published
   notPublishedReason
@@ -2000,6 +2035,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 }
 
 fragment UnpublishedTooltip_publishable on Publishable {
+  __isPublishable: __typename
   id
   published
   notPublishedReason

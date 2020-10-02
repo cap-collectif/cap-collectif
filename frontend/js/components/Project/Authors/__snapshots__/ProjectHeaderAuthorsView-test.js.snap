@@ -7,12 +7,12 @@ exports[`<ProjectHeaderAuthorsView /> renders correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "projectId",
-              "type": "ID!",
             },
           ],
           "kind": "Fragment",
@@ -39,6 +39,7 @@ exports[`<ProjectHeaderAuthorsView /> renders correctly 1`] = `
                   "name": "ProjectHeaderAuthors_project",
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -65,7 +66,6 @@ exports[`<ProjectHeaderAuthorsView /> renders correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "projectId",
-              "type": "ID!",
             },
           ],
           "kind": "Operation",
@@ -100,6 +100,7 @@ exports[`<ProjectHeaderAuthorsView /> renders correctly 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -200,6 +201,7 @@ exports[`<ProjectHeaderAuthorsView /> renders correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "e23f550270e09c82e3990c6665ee13d7",
           "id": null,
           "metadata": Object {},
           "name": "ProjectHeaderAuthorsViewQuery",

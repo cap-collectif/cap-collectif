@@ -7,12 +7,12 @@ exports[`<ProjectHeaderDistricts /> should render correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "projectId",
-              "type": "ID!",
             },
           ],
           "kind": "Fragment",
@@ -59,7 +59,6 @@ exports[`<ProjectHeaderDistricts /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "projectId",
-              "type": "ID!",
             },
           ],
           "kind": "Operation",
@@ -94,6 +93,7 @@ exports[`<ProjectHeaderDistricts /> should render correctly 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -159,6 +159,7 @@ exports[`<ProjectHeaderDistricts /> should render correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "92d3bdae71bc0640ee8faaf107888612",
           "id": null,
           "metadata": Object {},
           "name": "ProjectHeaderDistrictsQuery",

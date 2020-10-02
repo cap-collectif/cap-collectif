@@ -9,78 +9,67 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "cursor",
-              "type": "String",
+              "name": "author",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "locale",
-              "type": "TranslationLocale",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "search",
-              "type": "String",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "theme",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "project",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "userType",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isFuture",
-              "type": "Boolean",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "author",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isRegistrable",
-              "type": "Boolean",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "orderBy",
-              "type": "EventOrder!",
+              "name": "cursor",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFuture",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isRegistrable",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "locale",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "orderBy",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "project",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "search",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "theme",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "userType",
             },
           ],
           "kind": "Fragment",
@@ -175,73 +164,61 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "locale",
-              "type": "TranslationLocale",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "search",
-              "type": "String",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "theme",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "project",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "userType",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isFuture",
-              "type": "Boolean",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "author",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isRegistrable",
-              "type": "Boolean",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "orderBy",
-              "type": "EventOrder!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
             },
           ],
           "kind": "Operation",
@@ -430,6 +407,10 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "kind": "ScalarField",
                               "name": "__typename",
                               "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
                             },
                             Object {
                               "alias": null,
@@ -876,6 +857,10 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                               "kind": "ScalarField",
                               "name": "__typename",
                               "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
                             },
                             Object {
                               "alias": null,
@@ -1447,6 +1432,10 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                       "storageKey": null,
                                     },
                                     Object {
+                                      "abstractKey": "__isStep",
+                                      "kind": "TypeDiscriminator",
+                                    },
+                                    Object {
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
@@ -1628,6 +1617,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -1836,6 +1826,7 @@ fragment TagCity_address on GoogleMapsAddress {
 }
 
 fragment TagStep_step on Step {
+  __isStep: __typename
   title
 }
 
@@ -1902,78 +1893,67 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "cursor",
-              "type": "String",
+              "name": "author",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "locale",
-              "type": "TranslationLocale",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "search",
-              "type": "String",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "theme",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "project",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "userType",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isFuture",
-              "type": "Boolean",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "author",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isRegistrable",
-              "type": "Boolean",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "orderBy",
-              "type": "EventOrder!",
+              "name": "cursor",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFuture",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isRegistrable",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "locale",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "orderBy",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "project",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "search",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "theme",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "userType",
             },
           ],
           "kind": "Fragment",
@@ -2068,73 +2048,61 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "locale",
-              "type": "TranslationLocale",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "search",
-              "type": "String",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "theme",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "project",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "userType",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isFuture",
-              "type": "Boolean",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "author",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isRegistrable",
-              "type": "Boolean",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "orderBy",
-              "type": "EventOrder!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
             },
           ],
           "kind": "Operation",
@@ -2323,6 +2291,10 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "kind": "ScalarField",
                               "name": "__typename",
                               "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
                             },
                             Object {
                               "alias": null,
@@ -2769,6 +2741,10 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                               "kind": "ScalarField",
                               "name": "__typename",
                               "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
                             },
                             Object {
                               "alias": null,
@@ -3340,6 +3316,10 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                       "storageKey": null,
                                     },
                                     Object {
+                                      "abstractKey": "__isStep",
+                                      "kind": "TypeDiscriminator",
+                                    },
+                                    Object {
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
@@ -3521,6 +3501,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -3729,6 +3710,7 @@ fragment TagCity_address on GoogleMapsAddress {
 }
 
 fragment TagStep_step on Step {
+  __isStep: __typename
   title
 }
 
@@ -3795,78 +3777,67 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "cursor",
-              "type": "String",
+              "name": "author",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "locale",
-              "type": "TranslationLocale",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "search",
-              "type": "String",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "theme",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "project",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "userType",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isFuture",
-              "type": "Boolean",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "author",
-              "type": "ID",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isRegistrable",
-              "type": "Boolean",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "orderBy",
-              "type": "EventOrder!",
+              "name": "cursor",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isFuture",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isRegistrable",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "locale",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "orderBy",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "project",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "search",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "theme",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "userType",
             },
           ],
           "kind": "Fragment",
@@ -3961,73 +3932,61 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "locale",
-              "type": "TranslationLocale",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "search",
-              "type": "String",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "theme",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "project",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "userType",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isFuture",
-              "type": "Boolean",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "author",
-              "type": "ID",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isRegistrable",
-              "type": "Boolean",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "orderBy",
-              "type": "EventOrder!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
             },
           ],
           "kind": "Operation",
@@ -4216,6 +4175,10 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "kind": "ScalarField",
                               "name": "__typename",
                               "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
                             },
                             Object {
                               "alias": null,
@@ -4662,6 +4625,10 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                               "kind": "ScalarField",
                               "name": "__typename",
                               "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": "__isStep",
+                              "kind": "TypeDiscriminator",
                             },
                             Object {
                               "alias": null,
@@ -5233,6 +5200,10 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                       "storageKey": null,
                                     },
                                     Object {
+                                      "abstractKey": "__isStep",
+                                      "kind": "TypeDiscriminator",
+                                    },
+                                    Object {
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
@@ -5414,6 +5385,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "78dcc9e92d5d580e00d9794bff230fed",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageQuery",
@@ -5622,6 +5594,7 @@ fragment TagCity_address on GoogleMapsAddress {
 }
 
 fragment TagStep_step on Step {
+  __isStep: __typename
   title
 }
 

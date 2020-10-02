@@ -127,6 +127,7 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
         query={
           Object {
             "fragment": Object {
+              "abstractKey": null,
               "argumentDefinitions": Array [],
               "kind": "Fragment",
               "metadata": null,
@@ -221,6 +222,7 @@ exports[`<ContactAdminForm /> renders correctly 1`] = `
               ],
             },
             "params": Object {
+              "cacheID": "a2f784b991a1bae77a55e4af4bc6d466",
               "id": null,
               "metadata": Object {},
               "name": "ContactAdminPageQuery",

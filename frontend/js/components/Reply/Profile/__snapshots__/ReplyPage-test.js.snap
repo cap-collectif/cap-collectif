@@ -7,18 +7,17 @@ exports[`<ReplyPage /> should render correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "userId",
-              "type": "ID!",
+              "name": "isAuthenticated",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "isAuthenticated",
-              "type": "Boolean!",
+              "name": "userId",
             },
           ],
           "kind": "Fragment",
@@ -40,6 +39,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
               "plural": false,
               "selections": Array [
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -81,13 +81,11 @@ exports[`<ReplyPage /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "userId",
-              "type": "ID!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
             },
           ],
           "kind": "Operation",
@@ -122,6 +120,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -301,6 +300,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "3d2f3103297560e94414780b83cd5d1c",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",
@@ -382,18 +382,17 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "userId",
-              "type": "ID!",
+              "name": "isAuthenticated",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "isAuthenticated",
-              "type": "Boolean!",
+              "name": "userId",
             },
           ],
           "kind": "Fragment",
@@ -415,6 +414,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
               "plural": false,
               "selections": Array [
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -456,13 +456,11 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "userId",
-              "type": "ID!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
             },
           ],
           "kind": "Operation",
@@ -497,6 +495,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -676,6 +675,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "3d2f3103297560e94414780b83cd5d1c",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",
@@ -757,18 +757,17 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "userId",
-              "type": "ID!",
+              "name": "isAuthenticated",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "isAuthenticated",
-              "type": "Boolean!",
+              "name": "userId",
             },
           ],
           "kind": "Fragment",
@@ -790,6 +789,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
               "plural": false,
               "selections": Array [
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -831,13 +831,11 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "userId",
-              "type": "ID!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
             },
           ],
           "kind": "Operation",
@@ -872,6 +870,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -1051,6 +1050,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
           ],
         },
         "params": Object {
+          "cacheID": "3d2f3103297560e94414780b83cd5d1c",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",

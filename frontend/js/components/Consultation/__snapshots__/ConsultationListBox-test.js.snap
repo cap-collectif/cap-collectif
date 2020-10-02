@@ -6,12 +6,12 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
   query={
     Object {
       "fragment": Object {
+        "abstractKey": null,
         "argumentDefinitions": Array [
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "consultationStepId",
-            "type": "ID!",
           },
         ],
         "kind": "Fragment",
@@ -33,6 +33,7 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
             "plural": false,
             "selections": Array [
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -79,7 +80,6 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "consultationStepId",
-            "type": "ID!",
           },
         ],
         "kind": "Operation",
@@ -114,6 +114,7 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                 "storageKey": null,
               },
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -401,6 +402,7 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
         ],
       },
       "params": Object {
+        "cacheID": "74d49bb97724e6d134daf8a45d10ada5",
         "id": null,
         "metadata": Object {},
         "name": "ConsultationListBoxQuery",

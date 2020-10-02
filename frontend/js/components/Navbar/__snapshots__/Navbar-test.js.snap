@@ -18,6 +18,7 @@ exports[`<Navbar /> should render correctly 1`] = `
           query={
             Object {
               "fragment": Object {
+                "abstractKey": null,
                 "argumentDefinitions": Array [],
                 "kind": "Fragment",
                 "metadata": null,
@@ -65,6 +66,13 @@ exports[`<Navbar /> should render correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "id",
                             "storageKey": null,
                           },
@@ -76,11 +84,8 @@ exports[`<Navbar /> should render correctly 1`] = `
                             "storageKey": null,
                           },
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
+                            "abstractKey": "__isQuestion",
+                            "kind": "TypeDiscriminator",
                           },
                           Object {
                             "alias": null,
@@ -358,6 +363,7 @@ exports[`<Navbar /> should render correctly 1`] = `
                             "storageKey": null,
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -535,6 +541,7 @@ exports[`<Navbar /> should render correctly 1`] = `
                 ],
               },
               "params": Object {
+                "cacheID": "a43f4740b964b9fa6d700e1e856c9a15",
                 "id": null,
                 "metadata": Object {},
                 "name": "NavbarQuery",
@@ -546,6 +553,7 @@ exports[`<Navbar /> should render correctly 1`] = `
 fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
   questions {
     __typename
+    __isQuestion: __typename
     id
     title
     number
@@ -622,9 +630,10 @@ fragment RegistrationForm_query on Query {
   registrationScript
   registrationForm {
     questions {
+      __typename
       id
       type
-      __typename
+      __isQuestion: __typename
       title
       number
       private
@@ -760,6 +769,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
           query={
             Object {
               "fragment": Object {
+                "abstractKey": null,
                 "argumentDefinitions": Array [],
                 "kind": "Fragment",
                 "metadata": null,
@@ -807,6 +817,13 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "id",
                             "storageKey": null,
                           },
@@ -818,11 +835,8 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                             "storageKey": null,
                           },
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
+                            "abstractKey": "__isQuestion",
+                            "kind": "TypeDiscriminator",
                           },
                           Object {
                             "alias": null,
@@ -1100,6 +1114,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                             "storageKey": null,
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -1277,6 +1292,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                 ],
               },
               "params": Object {
+                "cacheID": "a43f4740b964b9fa6d700e1e856c9a15",
                 "id": null,
                 "metadata": Object {},
                 "name": "NavbarQuery",
@@ -1288,6 +1304,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
 fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
   questions {
     __typename
+    __isQuestion: __typename
     id
     title
     number
@@ -1364,9 +1381,10 @@ fragment RegistrationForm_query on Query {
   registrationScript
   registrationForm {
     questions {
+      __typename
       id
       type
-      __typename
+      __isQuestion: __typename
       title
       number
       private

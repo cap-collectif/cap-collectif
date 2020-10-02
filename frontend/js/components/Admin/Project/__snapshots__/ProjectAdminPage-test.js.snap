@@ -6,18 +6,17 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
   query={
     Object {
       "fragment": Object {
+        "abstractKey": null,
         "argumentDefinitions": Array [
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
-            "name": "projectId",
-            "type": "ID!",
+            "name": "isEditMode",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
-            "name": "isEditMode",
-            "type": "Boolean!",
+            "name": "projectId",
           },
         ],
         "kind": "Fragment",
@@ -70,13 +69,11 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "projectId",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isEditMode",
-            "type": "Boolean!",
           },
         ],
         "kind": "Operation",
@@ -116,6 +113,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
                       Object {
@@ -354,80 +352,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                             "storageKey": null,
                           },
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "RequirementConnection",
-                            "kind": "LinkedField",
-                            "name": "requirements",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "reason",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "RequirementEdge",
-                                "kind": "LinkedField",
-                                "name": "edges",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": null,
-                                    "kind": "LinkedField",
-                                    "name": "node",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "__typename",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": "type",
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "__typename",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "kind": "InlineFragment",
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "label",
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                        "type": "CheckboxRequirement",
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -448,6 +373,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                             "type": "RankingStep",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -644,10 +570,86 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "name": "budget",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "type": "CollectStep",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -798,10 +800,86 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 "name": "mainView",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "type": "SelectionStep",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -858,10 +936,250 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                                 ],
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "type": "ConsultationStep",
                           },
                           Object {
+                            "abstractKey": "__isRequirementStep",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "RequirementStep",
+                          },
+                          Object {
+                            "abstractKey": "__isProposalStep",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "ProposalStep",
+                          },
+                          Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -1315,6 +1633,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
+        "cacheID": "e01c17bba20da967c32afb5353d2ccc8",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1542,6 +1861,7 @@ fragment ProjectAdminForm_project on Project {
       }
     }
     ... on RequirementStep {
+      __isRequirementStep: __typename
       requirements {
         reason
         edges {
@@ -1557,6 +1877,7 @@ fragment ProjectAdminForm_project on Project {
       }
     }
     ... on ProposalStep {
+      __isProposalStep: __typename
       requirements {
         reason
         edges {
@@ -1717,18 +2038,17 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
   query={
     Object {
       "fragment": Object {
+        "abstractKey": null,
         "argumentDefinitions": Array [
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
-            "name": "projectId",
-            "type": "ID!",
+            "name": "isEditMode",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
-            "name": "isEditMode",
-            "type": "Boolean!",
+            "name": "projectId",
           },
         ],
         "kind": "Fragment",
@@ -1781,13 +2101,11 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "projectId",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isEditMode",
-            "type": "Boolean!",
           },
         ],
         "kind": "Operation",
@@ -1827,6 +2145,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                     "storageKey": null,
                   },
                   Object {
+                    "abstractKey": null,
                     "kind": "InlineFragment",
                     "selections": Array [
                       Object {
@@ -2065,80 +2384,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                             "storageKey": null,
                           },
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "RequirementConnection",
-                            "kind": "LinkedField",
-                            "name": "requirements",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "reason",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": "RequirementEdge",
-                                "kind": "LinkedField",
-                                "name": "edges",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": null,
-                                    "kind": "LinkedField",
-                                    "name": "node",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "__typename",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": "type",
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "__typename",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "kind": "InlineFragment",
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "label",
-                                            "storageKey": null,
-                                          },
-                                        ],
-                                        "type": "CheckboxRequirement",
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                          Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -2159,6 +2405,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                             "type": "RankingStep",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -2355,10 +2602,86 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "name": "budget",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "type": "CollectStep",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -2509,10 +2832,86 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 "name": "mainView",
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "type": "SelectionStep",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -2569,10 +2968,250 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                                 ],
                                 "storageKey": null,
                               },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
                             ],
                             "type": "ConsultationStep",
                           },
                           Object {
+                            "abstractKey": "__isRequirementStep",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "RequirementStep",
+                          },
+                          Object {
+                            "abstractKey": "__isProposalStep",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RequirementConnection",
+                                "kind": "LinkedField",
+                                "name": "requirements",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "reason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "RequirementEdge",
+                                    "kind": "LinkedField",
+                                    "name": "edges",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "node",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "label",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "CheckboxRequirement",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "ProposalStep",
+                          },
+                          Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -3026,6 +3665,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
+        "cacheID": "e01c17bba20da967c32afb5353d2ccc8",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3253,6 +3893,7 @@ fragment ProjectAdminForm_project on Project {
       }
     }
     ... on RequirementStep {
+      __isRequirementStep: __typename
       requirements {
         reason
         edges {
@@ -3268,6 +3909,7 @@ fragment ProjectAdminForm_project on Project {
       }
     }
     ... on ProposalStep {
+      __isProposalStep: __typename
       requirements {
         reason
         edges {

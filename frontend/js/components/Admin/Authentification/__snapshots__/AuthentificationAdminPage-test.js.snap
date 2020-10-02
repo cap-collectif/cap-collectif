@@ -7,6 +7,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -161,6 +162,10 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "abstractKey": "__isSSOConfiguration",
+                          "kind": "TypeDiscriminator",
+                        },
+                        Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
@@ -175,6 +180,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "abstractKey": null,
                           "kind": "InlineFragment",
                           "selections": Array [
                             Object {
@@ -258,6 +264,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
                           "type": "Oauth2SSOConfiguration",
                         },
                         Object {
+                          "abstractKey": null,
                           "kind": "InlineFragment",
                           "selections": Array [
                             Object {
@@ -310,6 +317,7 @@ exports[`<AuthentificationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "3b4c40637181e5844a5678ce304fdd3d",
           "id": null,
           "metadata": Object {},
           "name": "AuthentificationAdminPageQuery",
@@ -354,6 +362,7 @@ fragment ListPublicSSO_ssoConfigurations on InternalSSOConfigurationConnection {
   edges {
     node {
       __typename
+      __isSSOConfiguration: __typename
       id
       enabled
       ...FranceConnectConfigurationModal_ssoConfiguration
@@ -384,6 +393,7 @@ fragment Oauth2SSOConfigurationItem_configuration on Oauth2SSOConfiguration {
 }
 
 fragment SSOConfigurationItem_configuration on SSOConfiguration {
+  __isSSOConfiguration: __typename
   __typename
   ... on Oauth2SSOConfiguration {
     ...Oauth2SSOConfigurationItem_configuration

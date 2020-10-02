@@ -24,12 +24,12 @@ exports[`<MapAdminPage/> should render 1`] = `
       query={
         Object {
           "fragment": Object {
+            "abstractKey": null,
             "argumentDefinitions": Array [
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "provider",
-                "type": "MapTokenProvider!",
               },
             ],
             "kind": "Fragment",
@@ -69,7 +69,6 @@ exports[`<MapAdminPage/> should render 1`] = `
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "provider",
-                "type": "MapTokenProvider!",
               },
             ],
             "kind": "Operation",
@@ -197,6 +196,7 @@ exports[`<MapAdminPage/> should render 1`] = `
             ],
           },
           "params": Object {
+            "cacheID": "9a0c5714f85ee9546d794321177ef4f9",
             "id": null,
             "metadata": Object {},
             "name": "MapAdminPageQuery",

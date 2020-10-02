@@ -6,24 +6,22 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
   query={
     Object {
       "fragment": Object {
+        "abstractKey": null,
         "argumentDefinitions": Array [
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
+            "name": "enableResults",
+          },
+          Object {
+            "defaultValue": null,
+            "kind": "LocalArgument",
             "name": "id",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-            "type": "Boolean!",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "enableResults",
-            "type": "Boolean!",
           },
         ],
         "kind": "Fragment",
@@ -45,6 +43,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
             "plural": false,
             "selections": Array [
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -156,19 +155,16 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "id",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-            "type": "Boolean!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "enableResults",
-            "type": "Boolean!",
           },
         ],
         "kind": "Operation",
@@ -203,6 +199,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                 "storageKey": null,
               },
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -235,102 +232,57 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         "storageKey": null,
                       },
                       Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "body",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "state",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "timeless",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "TimeRange",
-                        "kind": "LinkedField",
-                        "name": "timeRange",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "startAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "endAt",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "type",
-                        "storageKey": null,
-                      },
-                      Object {
+                        "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "voteThreshold",
+                            "name": "body",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "votable",
+                            "name": "state",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "ProposalForm",
+                            "kind": "ScalarField",
+                            "name": "title",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "timeless",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TimeRange",
                             "kind": "LinkedField",
-                            "name": "form",
+                            "name": "timeRange",
                             "plural": false,
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "isProposalForm",
+                                "name": "startAt",
                                 "storageKey": null,
                               },
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "id",
+                                "name": "endAt",
                                 "storageKey": null,
                               },
                             ],
@@ -339,48 +291,108 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "Project",
-                            "kind": "LinkedField",
-                            "name": "project",
-                            "plural": false,
+                            "kind": "ScalarField",
+                            "name": "type",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "ProjectType",
-                                "kind": "LinkedField",
-                                "name": "type",
-                                "plural": false,
+                                "kind": "ScalarField",
+                                "name": "voteThreshold",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "votable",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "abstractKey": "__isProposalStep",
+                                "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
+                                    "concreteType": "ProposalForm",
+                                    "kind": "LinkedField",
+                                    "name": "form",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isProposalForm",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
+                                    "concreteType": "Project",
+                                    "kind": "LinkedField",
+                                    "name": "project",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "ProjectType",
+                                        "kind": "LinkedField",
+                                        "name": "type",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "title",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
                                     "storageKey": null,
                                   },
                                 ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
+                                "type": "ProposalStep",
                               },
                             ],
-                            "storageKey": null,
+                            "type": "SelectionStep",
                           },
                         ],
-                        "type": "SelectionStep",
+                        "type": "Step",
                       },
                     ],
                     "storageKey": null,
@@ -439,15 +451,19 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "id",
+                        "name": "__typename",
                         "storageKey": null,
                       },
                       Object {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "__typename",
+                        "name": "id",
                         "storageKey": null,
+                      },
+                      Object {
+                        "abstractKey": "__isQuestion",
+                        "kind": "TypeDiscriminator",
                       },
                       Object {
                         "alias": null,
@@ -732,6 +748,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         "storageKey": null,
                       },
                       Object {
+                        "abstractKey": null,
                         "kind": "InlineFragment",
                         "selections": Array [
                           Object {
@@ -1024,15 +1041,19 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "id",
+                                    "name": "__typename",
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "__typename",
+                                    "name": "id",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isQuestion",
+                                    "kind": "TypeDiscriminator",
                                   },
                                   Object {
                                     "alias": null,
@@ -1317,6 +1338,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                     "storageKey": null,
                                   },
                                   Object {
+                                    "abstractKey": null,
                                     "kind": "InlineFragment",
                                     "selections": Array [
                                       Object {
@@ -1488,27 +1510,6 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "published",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "notPublishedReason",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "publishableUntil",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
                             "name": "private",
                             "storageKey": null,
                           },
@@ -1542,6 +1543,10 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isResponse",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "concreteType": null,
@@ -1567,6 +1572,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": null,
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
@@ -1580,6 +1586,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 "type": "ValueResponse",
                               },
                               Object {
+                                "abstractKey": null,
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
@@ -1634,6 +1641,34 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                             "name": "viewerCanDelete",
                             "storageKey": null,
                           },
+                          Object {
+                            "abstractKey": "__isPublishable",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "published",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "notPublishedReason",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "publishableUntil",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "Publishable",
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -1653,13 +1688,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         "plural": true,
                         "selections": Array [
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -1701,6 +1730,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -1726,6 +1756,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                             "type": "MultipleChoiceQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -1767,6 +1798,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -1792,6 +1824,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                             "type": "SimpleQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -1833,6 +1866,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -1878,6 +1912,42 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                         ],
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "QuestionnaireStep",
+                        "kind": "LinkedField",
+                        "name": "step",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TimeRange",
+                            "kind": "LinkedField",
+                            "name": "timeRange",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "startAt",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "endAt",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
                     ],
                   },
                 ],
@@ -1889,6 +1959,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
+        "cacheID": "05fd4345f23ec962bb8fb17578313ceb",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -2054,8 +2125,9 @@ fragment ReplyForm_questionnaire on Questionnaire {
     id
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -2139,8 +2211,9 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     id
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -2219,6 +2292,7 @@ fragment ReplyForm_reply_39ngnn on Reply {
   viewerCanUpdate
   responses {
     __typename
+    __isResponse: __typename
     question {
       __typename
       id
@@ -2253,11 +2327,13 @@ fragment StepPageFooter_step on QuestionnaireStep {
 }
 
 fragment StepPageHeader_step on Step {
+  __isStep: __typename
   body
   ... on SelectionStep {
     voteThreshold
     votable
     ... on ProposalStep {
+      __isProposalStep: __typename
       form {
         isProposalForm
         id
@@ -2282,6 +2358,7 @@ fragment StepPageHeader_step on Step {
 }
 
 fragment UnpublishedLabel_publishable on Publishable {
+  __isPublishable: __typename
   id
   published
   notPublishedReason
@@ -2315,24 +2392,22 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
   query={
     Object {
       "fragment": Object {
+        "abstractKey": null,
         "argumentDefinitions": Array [
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
+            "name": "enableResults",
+          },
+          Object {
+            "defaultValue": null,
+            "kind": "LocalArgument",
             "name": "id",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-            "type": "Boolean!",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "enableResults",
-            "type": "Boolean!",
           },
         ],
         "kind": "Fragment",
@@ -2354,6 +2429,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
             "plural": false,
             "selections": Array [
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -2465,19 +2541,16 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "id",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-            "type": "Boolean!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "enableResults",
-            "type": "Boolean!",
           },
         ],
         "kind": "Operation",
@@ -2512,6 +2585,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                 "storageKey": null,
               },
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -2544,102 +2618,57 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                         "storageKey": null,
                       },
                       Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "body",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "state",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "timeless",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "TimeRange",
-                        "kind": "LinkedField",
-                        "name": "timeRange",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "startAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "endAt",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "type",
-                        "storageKey": null,
-                      },
-                      Object {
+                        "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "voteThreshold",
+                            "name": "body",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "votable",
+                            "name": "state",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "ProposalForm",
+                            "kind": "ScalarField",
+                            "name": "title",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "timeless",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TimeRange",
                             "kind": "LinkedField",
-                            "name": "form",
+                            "name": "timeRange",
                             "plural": false,
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "isProposalForm",
+                                "name": "startAt",
                                 "storageKey": null,
                               },
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "id",
+                                "name": "endAt",
                                 "storageKey": null,
                               },
                             ],
@@ -2648,48 +2677,108 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "Project",
-                            "kind": "LinkedField",
-                            "name": "project",
-                            "plural": false,
+                            "kind": "ScalarField",
+                            "name": "type",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "ProjectType",
-                                "kind": "LinkedField",
-                                "name": "type",
-                                "plural": false,
+                                "kind": "ScalarField",
+                                "name": "voteThreshold",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "votable",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "abstractKey": "__isProposalStep",
+                                "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
+                                    "concreteType": "ProposalForm",
+                                    "kind": "LinkedField",
+                                    "name": "form",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isProposalForm",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
+                                    "concreteType": "Project",
+                                    "kind": "LinkedField",
+                                    "name": "project",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "ProjectType",
+                                        "kind": "LinkedField",
+                                        "name": "type",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "title",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
                                     "storageKey": null,
                                   },
                                 ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
+                                "type": "ProposalStep",
                               },
                             ],
-                            "storageKey": null,
+                            "type": "SelectionStep",
                           },
                         ],
-                        "type": "SelectionStep",
+                        "type": "Step",
                       },
                     ],
                     "storageKey": null,
@@ -2748,15 +2837,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "id",
+                        "name": "__typename",
                         "storageKey": null,
                       },
                       Object {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "__typename",
+                        "name": "id",
                         "storageKey": null,
+                      },
+                      Object {
+                        "abstractKey": "__isQuestion",
+                        "kind": "TypeDiscriminator",
                       },
                       Object {
                         "alias": null,
@@ -3041,6 +3134,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                         "storageKey": null,
                       },
                       Object {
+                        "abstractKey": null,
                         "kind": "InlineFragment",
                         "selections": Array [
                           Object {
@@ -3333,15 +3427,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "id",
+                                    "name": "__typename",
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "__typename",
+                                    "name": "id",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isQuestion",
+                                    "kind": "TypeDiscriminator",
                                   },
                                   Object {
                                     "alias": null,
@@ -3626,6 +3724,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                     "storageKey": null,
                                   },
                                   Object {
+                                    "abstractKey": null,
                                     "kind": "InlineFragment",
                                     "selections": Array [
                                       Object {
@@ -3797,27 +3896,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "published",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "notPublishedReason",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "publishableUntil",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
                             "name": "private",
                             "storageKey": null,
                           },
@@ -3851,6 +3929,10 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isResponse",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "concreteType": null,
@@ -3876,6 +3958,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": null,
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
@@ -3889,6 +3972,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                 "type": "ValueResponse",
                               },
                               Object {
+                                "abstractKey": null,
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
@@ -3943,6 +4027,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                             "name": "viewerCanDelete",
                             "storageKey": null,
                           },
+                          Object {
+                            "abstractKey": "__isPublishable",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "published",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "notPublishedReason",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "publishableUntil",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "Publishable",
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -3962,13 +4074,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                         "plural": true,
                         "selections": Array [
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -4010,6 +4116,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -4035,6 +4142,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                             "type": "MultipleChoiceQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -4076,6 +4184,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -4101,6 +4210,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                             "type": "SimpleQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -4142,6 +4252,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -4187,6 +4298,42 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                         ],
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "QuestionnaireStep",
+                        "kind": "LinkedField",
+                        "name": "step",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TimeRange",
+                            "kind": "LinkedField",
+                            "name": "timeRange",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "startAt",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "endAt",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
                     ],
                   },
                 ],
@@ -4198,6 +4345,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
+        "cacheID": "05fd4345f23ec962bb8fb17578313ceb",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4363,8 +4511,9 @@ fragment ReplyForm_questionnaire on Questionnaire {
     id
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -4448,8 +4597,9 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     id
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -4528,6 +4678,7 @@ fragment ReplyForm_reply_39ngnn on Reply {
   viewerCanUpdate
   responses {
     __typename
+    __isResponse: __typename
     question {
       __typename
       id
@@ -4562,11 +4713,13 @@ fragment StepPageFooter_step on QuestionnaireStep {
 }
 
 fragment StepPageHeader_step on Step {
+  __isStep: __typename
   body
   ... on SelectionStep {
     voteThreshold
     votable
     ... on ProposalStep {
+      __isProposalStep: __typename
       form {
         isProposalForm
         id
@@ -4591,6 +4744,7 @@ fragment StepPageHeader_step on Step {
 }
 
 fragment UnpublishedLabel_publishable on Publishable {
+  __isPublishable: __typename
   id
   published
   notPublishedReason
@@ -4624,24 +4778,22 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
   query={
     Object {
       "fragment": Object {
+        "abstractKey": null,
         "argumentDefinitions": Array [
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
+            "name": "enableResults",
+          },
+          Object {
+            "defaultValue": null,
+            "kind": "LocalArgument",
             "name": "id",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-            "type": "Boolean!",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "enableResults",
-            "type": "Boolean!",
           },
         ],
         "kind": "Fragment",
@@ -4663,6 +4815,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
             "plural": false,
             "selections": Array [
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -4774,19 +4927,16 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "id",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-            "type": "Boolean!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "enableResults",
-            "type": "Boolean!",
           },
         ],
         "kind": "Operation",
@@ -4821,6 +4971,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                 "storageKey": null,
               },
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -4853,102 +5004,57 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                         "storageKey": null,
                       },
                       Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "body",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "state",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "timeless",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "TimeRange",
-                        "kind": "LinkedField",
-                        "name": "timeRange",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "startAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "endAt",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "type",
-                        "storageKey": null,
-                      },
-                      Object {
+                        "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "voteThreshold",
+                            "name": "body",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "votable",
+                            "name": "state",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "ProposalForm",
+                            "kind": "ScalarField",
+                            "name": "title",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "timeless",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TimeRange",
                             "kind": "LinkedField",
-                            "name": "form",
+                            "name": "timeRange",
                             "plural": false,
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "isProposalForm",
+                                "name": "startAt",
                                 "storageKey": null,
                               },
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "id",
+                                "name": "endAt",
                                 "storageKey": null,
                               },
                             ],
@@ -4957,48 +5063,108 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "Project",
-                            "kind": "LinkedField",
-                            "name": "project",
-                            "plural": false,
+                            "kind": "ScalarField",
+                            "name": "type",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "ProjectType",
-                                "kind": "LinkedField",
-                                "name": "type",
-                                "plural": false,
+                                "kind": "ScalarField",
+                                "name": "voteThreshold",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "votable",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "abstractKey": "__isProposalStep",
+                                "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
+                                    "concreteType": "ProposalForm",
+                                    "kind": "LinkedField",
+                                    "name": "form",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isProposalForm",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
+                                    "concreteType": "Project",
+                                    "kind": "LinkedField",
+                                    "name": "project",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "ProjectType",
+                                        "kind": "LinkedField",
+                                        "name": "type",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "title",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
                                     "storageKey": null,
                                   },
                                 ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
+                                "type": "ProposalStep",
                               },
                             ],
-                            "storageKey": null,
+                            "type": "SelectionStep",
                           },
                         ],
-                        "type": "SelectionStep",
+                        "type": "Step",
                       },
                     ],
                     "storageKey": null,
@@ -5057,15 +5223,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "id",
+                        "name": "__typename",
                         "storageKey": null,
                       },
                       Object {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "__typename",
+                        "name": "id",
                         "storageKey": null,
+                      },
+                      Object {
+                        "abstractKey": "__isQuestion",
+                        "kind": "TypeDiscriminator",
                       },
                       Object {
                         "alias": null,
@@ -5350,6 +5520,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                         "storageKey": null,
                       },
                       Object {
+                        "abstractKey": null,
                         "kind": "InlineFragment",
                         "selections": Array [
                           Object {
@@ -5642,15 +5813,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "id",
+                                    "name": "__typename",
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "__typename",
+                                    "name": "id",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isQuestion",
+                                    "kind": "TypeDiscriminator",
                                   },
                                   Object {
                                     "alias": null,
@@ -5935,6 +6110,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                     "storageKey": null,
                                   },
                                   Object {
+                                    "abstractKey": null,
                                     "kind": "InlineFragment",
                                     "selections": Array [
                                       Object {
@@ -6106,27 +6282,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "published",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "notPublishedReason",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "publishableUntil",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
                             "name": "private",
                             "storageKey": null,
                           },
@@ -6160,6 +6315,10 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isResponse",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "concreteType": null,
@@ -6185,6 +6344,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": null,
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
@@ -6198,6 +6358,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                 "type": "ValueResponse",
                               },
                               Object {
+                                "abstractKey": null,
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
@@ -6252,6 +6413,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                             "name": "viewerCanDelete",
                             "storageKey": null,
                           },
+                          Object {
+                            "abstractKey": "__isPublishable",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "published",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "notPublishedReason",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "publishableUntil",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "Publishable",
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -6271,13 +6460,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                         "plural": true,
                         "selections": Array [
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -6319,6 +6502,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -6344,6 +6528,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                             "type": "MultipleChoiceQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -6385,6 +6570,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -6410,6 +6596,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                             "type": "SimpleQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -6451,6 +6638,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -6496,6 +6684,42 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                         ],
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "QuestionnaireStep",
+                        "kind": "LinkedField",
+                        "name": "step",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TimeRange",
+                            "kind": "LinkedField",
+                            "name": "timeRange",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "startAt",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "endAt",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
                     ],
                   },
                 ],
@@ -6507,6 +6731,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
+        "cacheID": "05fd4345f23ec962bb8fb17578313ceb",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -6672,8 +6897,9 @@ fragment ReplyForm_questionnaire on Questionnaire {
     id
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -6757,8 +6983,9 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     id
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -6837,6 +7064,7 @@ fragment ReplyForm_reply_39ngnn on Reply {
   viewerCanUpdate
   responses {
     __typename
+    __isResponse: __typename
     question {
       __typename
       id
@@ -6871,11 +7099,13 @@ fragment StepPageFooter_step on QuestionnaireStep {
 }
 
 fragment StepPageHeader_step on Step {
+  __isStep: __typename
   body
   ... on SelectionStep {
     voteThreshold
     votable
     ... on ProposalStep {
+      __isProposalStep: __typename
       form {
         isProposalForm
         id
@@ -6900,6 +7130,7 @@ fragment StepPageHeader_step on Step {
 }
 
 fragment UnpublishedLabel_publishable on Publishable {
+  __isPublishable: __typename
   id
   published
   notPublishedReason
@@ -6933,24 +7164,22 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
   query={
     Object {
       "fragment": Object {
+        "abstractKey": null,
         "argumentDefinitions": Array [
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
+            "name": "enableResults",
+          },
+          Object {
+            "defaultValue": null,
+            "kind": "LocalArgument",
             "name": "id",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-            "type": "Boolean!",
-          },
-          Object {
-            "defaultValue": null,
-            "kind": "LocalArgument",
-            "name": "enableResults",
-            "type": "Boolean!",
           },
         ],
         "kind": "Fragment",
@@ -6972,6 +7201,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
             "plural": false,
             "selections": Array [
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -7083,19 +7313,16 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "id",
-            "type": "ID!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "isAuthenticated",
-            "type": "Boolean!",
           },
           Object {
             "defaultValue": null,
             "kind": "LocalArgument",
             "name": "enableResults",
-            "type": "Boolean!",
           },
         ],
         "kind": "Operation",
@@ -7130,6 +7357,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                 "storageKey": null,
               },
               Object {
+                "abstractKey": null,
                 "kind": "InlineFragment",
                 "selections": Array [
                   Object {
@@ -7162,102 +7390,57 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         "storageKey": null,
                       },
                       Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "body",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "state",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "timeless",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "TimeRange",
-                        "kind": "LinkedField",
-                        "name": "timeRange",
-                        "plural": false,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "startAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "endAt",
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "type",
-                        "storageKey": null,
-                      },
-                      Object {
+                        "abstractKey": "__isStep",
                         "kind": "InlineFragment",
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "voteThreshold",
+                            "name": "body",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "votable",
+                            "name": "state",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "ProposalForm",
+                            "kind": "ScalarField",
+                            "name": "title",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "timeless",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TimeRange",
                             "kind": "LinkedField",
-                            "name": "form",
+                            "name": "timeRange",
                             "plural": false,
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "isProposalForm",
+                                "name": "startAt",
                                 "storageKey": null,
                               },
                               Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "id",
+                                "name": "endAt",
                                 "storageKey": null,
                               },
                             ],
@@ -7266,48 +7449,108 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "Project",
-                            "kind": "LinkedField",
-                            "name": "project",
-                            "plural": false,
+                            "kind": "ScalarField",
+                            "name": "type",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "ProjectType",
-                                "kind": "LinkedField",
-                                "name": "type",
-                                "plural": false,
+                                "kind": "ScalarField",
+                                "name": "voteThreshold",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "votable",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "abstractKey": "__isProposalStep",
+                                "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
+                                    "concreteType": "ProposalForm",
+                                    "kind": "LinkedField",
+                                    "name": "form",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isProposalForm",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
+                                    "concreteType": "Project",
+                                    "kind": "LinkedField",
+                                    "name": "project",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "ProjectType",
+                                        "kind": "LinkedField",
+                                        "name": "type",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "title",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
                                     "storageKey": null,
                                   },
                                 ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
+                                "type": "ProposalStep",
                               },
                             ],
-                            "storageKey": null,
+                            "type": "SelectionStep",
                           },
                         ],
-                        "type": "SelectionStep",
+                        "type": "Step",
                       },
                     ],
                     "storageKey": null,
@@ -7366,15 +7609,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "id",
+                        "name": "__typename",
                         "storageKey": null,
                       },
                       Object {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "__typename",
+                        "name": "id",
                         "storageKey": null,
+                      },
+                      Object {
+                        "abstractKey": "__isQuestion",
+                        "kind": "TypeDiscriminator",
                       },
                       Object {
                         "alias": null,
@@ -7659,6 +7906,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         "storageKey": null,
                       },
                       Object {
+                        "abstractKey": null,
                         "kind": "InlineFragment",
                         "selections": Array [
                           Object {
@@ -7951,15 +8199,19 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "id",
+                                    "name": "__typename",
                                     "storageKey": null,
                                   },
                                   Object {
                                     "alias": null,
                                     "args": null,
                                     "kind": "ScalarField",
-                                    "name": "__typename",
+                                    "name": "id",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isQuestion",
+                                    "kind": "TypeDiscriminator",
                                   },
                                   Object {
                                     "alias": null,
@@ -8244,6 +8496,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                     "storageKey": null,
                                   },
                                   Object {
+                                    "abstractKey": null,
                                     "kind": "InlineFragment",
                                     "selections": Array [
                                       Object {
@@ -8415,27 +8668,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "published",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "notPublishedReason",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "publishableUntil",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
                             "name": "private",
                             "storageKey": null,
                           },
@@ -8469,6 +8701,10 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isResponse",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "concreteType": null,
@@ -8494,6 +8730,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": null,
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
@@ -8507,6 +8744,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 "type": "ValueResponse",
                               },
                               Object {
+                                "abstractKey": null,
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
@@ -8561,6 +8799,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                             "name": "viewerCanDelete",
                             "storageKey": null,
                           },
+                          Object {
+                            "abstractKey": "__isPublishable",
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "published",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "notPublishedReason",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "publishableUntil",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "Publishable",
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -8580,13 +8846,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         "plural": true,
                         "selections": Array [
                           Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__typename",
-                            "storageKey": null,
-                          },
-                          Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -8628,6 +8888,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -8653,6 +8914,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                             "type": "MultipleChoiceQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -8694,6 +8956,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -8719,6 +8982,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                             "type": "SimpleQuestion",
                           },
                           Object {
+                            "abstractKey": null,
                             "kind": "InlineFragment",
                             "selections": Array [
                               Object {
@@ -8760,6 +9024,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                             "storageKey": null,
                                           },
                                           Object {
+                                            "abstractKey": null,
                                             "kind": "InlineFragment",
                                             "selections": Array [
                                               Object {
@@ -8805,6 +9070,42 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                         ],
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "QuestionnaireStep",
+                        "kind": "LinkedField",
+                        "name": "step",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "TimeRange",
+                            "kind": "LinkedField",
+                            "name": "timeRange",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "startAt",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "endAt",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
                     ],
                   },
                 ],
@@ -8816,6 +9117,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
+        "cacheID": "05fd4345f23ec962bb8fb17578313ceb",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -8981,8 +9283,9 @@ fragment ReplyForm_questionnaire on Questionnaire {
     id
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -9066,8 +9369,9 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     id
   }
   questions {
-    id
     __typename
+    id
+    __isQuestion: __typename
     title
     number
     private
@@ -9146,6 +9450,7 @@ fragment ReplyForm_reply_39ngnn on Reply {
   viewerCanUpdate
   responses {
     __typename
+    __isResponse: __typename
     question {
       __typename
       id
@@ -9180,11 +9485,13 @@ fragment StepPageFooter_step on QuestionnaireStep {
 }
 
 fragment StepPageHeader_step on Step {
+  __isStep: __typename
   body
   ... on SelectionStep {
     voteThreshold
     votable
     ... on ProposalStep {
+      __isProposalStep: __typename
       form {
         isProposalForm
         id
@@ -9209,6 +9516,7 @@ fragment StepPageHeader_step on Step {
 }
 
 fragment UnpublishedLabel_publishable on Publishable {
+  __isPublishable: __typename
   id
   published
   notPublishedReason

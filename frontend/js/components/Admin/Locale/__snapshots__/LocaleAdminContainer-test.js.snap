@@ -7,6 +7,7 @@ exports[`<LocaleAdminContainer /> renders correctly empty 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [],
           "kind": "Fragment",
           "metadata": null,
@@ -89,6 +90,7 @@ exports[`<LocaleAdminContainer /> renders correctly empty 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "956d914346683ac50c3acf171b167c9e",
           "id": null,
           "metadata": Object {},
           "name": "LocaleAdminContainerQuery",

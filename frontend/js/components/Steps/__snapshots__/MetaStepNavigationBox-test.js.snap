@@ -7,18 +7,17 @@ exports[`<MetaStepNavigationBox /> should render correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "stepId",
-              "type": "ID!",
+              "name": "relatedSlug",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "relatedSlug",
-              "type": "String!",
+              "name": "stepId",
             },
           ],
           "kind": "Fragment",
@@ -64,13 +63,11 @@ exports[`<MetaStepNavigationBox /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "stepId",
-              "type": "ID!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "relatedSlug",
-              "type": "String!",
             },
           ],
           "kind": "Operation",
@@ -101,59 +98,67 @@ exports[`<MetaStepNavigationBox /> should render correctly 1`] = `
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
-                  "name": "url",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
                   "name": "id",
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": "__isStep",
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
                       "alias": null,
-                      "args": Array [
-                        Object {
-                          "kind": "Variable",
-                          "name": "slug",
-                          "variableName": "relatedSlug",
-                        },
-                      ],
-                      "concreteType": "Consultation",
-                      "kind": "LinkedField",
-                      "name": "consultation",
-                      "plural": false,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "url",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "abstractKey": null,
+                      "kind": "InlineFragment",
                       "selections": Array [
                         Object {
                           "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "url",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "title",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
+                          "args": Array [
+                            Object {
+                              "kind": "Variable",
+                              "name": "slug",
+                              "variableName": "relatedSlug",
+                            },
+                          ],
+                          "concreteType": "Consultation",
+                          "kind": "LinkedField",
+                          "name": "consultation",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
                           "storageKey": null,
                         },
                       ],
-                      "storageKey": null,
+                      "type": "ConsultationStep",
                     },
                   ],
-                  "type": "ConsultationStep",
+                  "type": "Step",
                 },
               ],
               "storageKey": null,
@@ -161,6 +166,7 @@ exports[`<MetaStepNavigationBox /> should render correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "f64b1edd3babbdb40823a96940db41ce",
           "id": null,
           "metadata": Object {},
           "name": "MetaStepNavigationBoxQuery",
@@ -177,6 +183,7 @@ exports[`<MetaStepNavigationBox /> should render correctly 1`] = `
 }
 
 fragment MetaStepNavigation_step_2rPbsh on Step {
+  __isStep: __typename
   __typename
   url
   ... on ConsultationStep {

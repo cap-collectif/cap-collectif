@@ -9,36 +9,32 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
     query={
       Object {
         "fragment": Object {
+          "abstractKey": null,
           "argumentDefinitions": Array [
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "projectId",
-              "type": "ID!",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "stepId",
-              "type": "ID!",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "isAuthenticated",
-              "type": "Boolean!",
+              "name": "count",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "count",
-              "type": "Int",
+              "name": "isAuthenticated",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "projectId",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "stepId",
             },
           ],
           "kind": "Fragment",
@@ -106,31 +102,26 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "projectId",
-              "type": "ID!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "stepId",
-              "type": "ID!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
-              "type": "Boolean!",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "cursor",
-              "type": "String",
             },
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "count",
-              "type": "Int",
             },
           ],
           "kind": "Operation",
@@ -165,6 +156,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "abstractKey": null,
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
@@ -531,27 +523,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
-                                  "name": "published",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "notPublishedReason",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "publishableUntil",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
                                   "name": "publishedAt",
                                   "storageKey": null,
                                 },
@@ -680,6 +651,34 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                   "storageKey": null,
                                 },
                                 Object {
+                                  "abstractKey": "__isPublishable",
+                                  "kind": "InlineFragment",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "published",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "notPublishedReason",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "publishableUntil",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "type": "Publishable",
+                                },
+                                Object {
                                   "condition": "isAuthenticated",
                                   "kind": "Condition",
                                   "passingValue": true,
@@ -791,6 +790,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
+          "cacheID": "efe74cde1d883081eee7a56cdd54815e",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -965,6 +965,7 @@ fragment ProposalTrashedListPaginated_project_2RchB8 on Project {
 }
 
 fragment UnpublishedLabel_publishable on Publishable {
+  __isPublishable: __typename
   id
   published
   notPublishedReason
