@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\HighlightedContentRepository;
+use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
@@ -29,8 +30,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
 {
-    private $userRepository;
-    private $logger;
+    private UserRepository $userRepository;
+    private LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -51,7 +52,8 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         ValueResponseRepository $valueResponseRepository,
         ReportingRepository $reportingRepository,
         EventRepository $eventRepository,
-        HighlightedContentRepository $highlightedContentRepository
+        HighlightedContentRepository $highlightedContentRepository,
+        MailingListRepository $mailingListRepository
     ) {
         parent::__construct(
             $em,
@@ -70,7 +72,8 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $valueResponseRepository,
             $reportingRepository,
             $eventRepository,
-            $highlightedContentRepository
+            $highlightedContentRepository,
+            $mailingListRepository
         );
         $this->userRepository = $userRepository;
         $this->logger = $logger;

@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\MailingList:
+    mailingListWithoutProject:
+        id: mailingListWithoutProject
+        name: 'Les gens qui pèsent dans le capco-game'
+        users: ['@userMickael', '@userVincent']
+        isDeletable: false
+    mailingListFromCovidProject:
+        id: mailignListFromCovidProject
+        name: 'liste Solidarité COVID-19'
+        users: ['@user4', '@user160']
+        project: '@projectCorona'

@@ -1,0 +1,7 @@
+MailingListConnection:
+    type: relay-connection
+    config:
+        nodeType: MailingList!
+        connectionFields:
+            totalCount:
+                type: Int!

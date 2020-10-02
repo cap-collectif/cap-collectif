@@ -2530,6 +2530,27 @@ type CreateGroupPayload {
   clientMutationId: String
 }
 
+input CreateMailingListInput {
+  """The name of the list"""
+  name: String!
+
+  """The list of the users to put in the list"""
+  userIds: [ID!]!
+
+  """Optionnal. The list from which the list is built"""
+  project: ID
+  clientMutationId: String
+}
+
+type CreateMailingListPayload {
+  """The mailing list created"""
+  mailingList: MailingList
+
+  """The error code, if any"""
+  error: String
+  clientMutationId: String
+}
+
 input CreateProjectDistrictInput {
   geojson: GeoJSON
   displayedOnMap: Boolean = false
@@ -2844,6 +2865,21 @@ input DeleteGroupInput {
 
 type DeleteGroupPayload {
   deletedGroupTitle: String!
+  clientMutationId: String
+}
+
+input DeleteMailingListInput {
+  """The mailing lists list to delete"""
+  ids: [ID!]!
+  clientMutationId: String
+}
+
+type DeleteMailingListPayload {
+  """The mailing lists deleted"""
+  deletedIds: [ID!]!
+
+  """The error code, if any"""
+  error: String
   clientMutationId: String
 }
 
@@ -4144,6 +4180,60 @@ input LogicJumpInput {
   conditions: [LogicJumpConditionInput]
 }
 
+"""A list of users to send email"""
+type MailingList implements Node {
+  """uuid of the mailing list"""
+  id: ID!
+
+  """name of the mailing list"""
+  name: String!
+
+  """users in the mailing list"""
+  users(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): UserConnection!
+
+  """the project from which the list has been built, if any"""
+  project: Project
+
+  """false if used in a planned or sent email campaign"""
+  isDeletable: Boolean
+}
+
+"""A connection to a list of items."""
+type MailingListConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [MailingListEdge]
+}
+
+"""An edge in a connection."""
+type MailingListEdge {
+  """The item at the end of the edge."""
+  node: MailingList!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 """A map token used for connecting external services with our maps"""
 type MapToken implements Node {
   """The ID of an object"""
@@ -4650,6 +4740,8 @@ type Mutation {
   """Reset password"""
   resetPassword(input: ResetPasswordInput!): ResetPasswordPayload
   removeSso(input: RemoveSsoInput!): RemoveSsoPayload
+  createMailingList(input: CreateMailingListInput!): CreateMailingListPayload
+  deleteMailingList(input: DeleteMailingListInput!): DeleteMailingListPayload
 }
 
 """A connection to a list of items."""
@@ -7710,6 +7802,25 @@ type Query {
 
   """Retrieve the current version of the app."""
   appVersion: String
+
+  """Get all mailing lists"""
+  mailingLists(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): MailingListConnection!
 }
 
 """Fetches an object given its ID"""

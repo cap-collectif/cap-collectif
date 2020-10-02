@@ -1,0 +1,26 @@
+MailingList:
+    type: object
+    inherits:
+        - Node
+    config:
+        interfaces:
+            - Node
+        description: 'A list of users to send email'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'uuid of the mailing list'
+            name:
+                type: 'String!'
+                description: 'name of the mailing list'
+            users:
+                type: 'InternalUserConnection!'
+                description: 'users in the mailing list'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MailingList\\MailingListUsersConnection", [value, args])'
+                argsBuilder: 'Relay::Connection'
+            project:
+                type: 'InternalProject'
+                description: 'the project from which the list has been built, if any'
+            isDeletable:
+                type: 'Boolean'
+                description: 'false if used in a planned or sent email campaign'

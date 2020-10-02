@@ -18,6 +18,7 @@ use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\HighlightedContentRepository;
+use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
@@ -34,24 +35,25 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 {
-    protected $em;
-    protected $mediaProvider;
-    protected $translator;
-    protected $originalEventListeners = [];
-    protected $redisStorageHelper;
-    protected $groupRepository;
-    protected $userManager;
-    protected $proposalAuthorDataLoader;
-    protected $commentRepository;
-    protected $proposalEvaluationRepository;
-    protected $abstractResponseRepository;
-    protected $newsletterSubscriptionRepository;
-    protected $mediaRepository;
-    protected $mediaResponseRepository;
-    protected $valueResponseRepository;
-    protected $reportingRepository;
-    protected $eventRepository;
-    protected $highlightedContentRepository;
+    protected EntityManagerInterface $em;
+    protected ImageProvider $mediaProvider;
+    protected TranslatorInterface $translator;
+    protected array $originalEventListeners = [];
+    protected RedisStorageHelper $redisStorageHelper;
+    protected UserGroupRepository $groupRepository;
+    protected UserManager $userManager;
+    protected ProposalAuthorDataLoader $proposalAuthorDataLoader;
+    protected CommentRepository $commentRepository;
+    protected ProposalEvaluationRepository $proposalEvaluationRepository;
+    protected AbstractResponseRepository $abstractResponseRepository;
+    protected NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
+    protected MediaRepository $mediaRepository;
+    protected MediaResponseRepository $mediaResponseRepository;
+    protected ValueResponseRepository $valueResponseRepository;
+    protected ReportingRepository $reportingRepository;
+    protected EventRepository $eventRepository;
+    protected HighlightedContentRepository $highlightedContentRepository;
+    protected MailingListRepository $mailingListRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -70,7 +72,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         ValueResponseRepository $valueResponseRepository,
         ReportingRepository $reportingRepository,
         EventRepository $eventRepository,
-        HighlightedContentRepository $highlightedContentRepository
+        HighlightedContentRepository $highlightedContentRepository,
+        MailingListRepository $mailingListRepository
     ) {
         parent::__construct($em, $mediaProvider);
         $this->translator = $translator;
@@ -88,6 +91,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->reportingRepository = $reportingRepository;
         $this->eventRepository = $eventRepository;
         $this->highlightedContentRepository = $highlightedContentRepository;
+        $this->mailingListRepository = $mailingListRepository;
     }
 
     public function softDelete(User $user): void
@@ -186,6 +190,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     public function anonymizeUser(User $user): void
     {
+        //todo ici
         $newsletter = $this->newsletterSubscriptionRepository->findOneBy([
             'email' => $user->getEmail(),
         ]);
@@ -251,6 +256,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 $this->proposalAuthorDataLoader->invalidate($contribution);
             }
         }
+
+        $this->removeFromMailingLists($user);
 
         $this->userManager->updateUser($user);
     }
@@ -367,6 +374,13 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                     $this->em->getEventManager()->removeEventListener($eventName, $listener);
                 }
             }
+        }
+    }
+
+    private function removeFromMailingLists(User $user): void
+    {
+        foreach ($this->mailingListRepository->getMailingListByUser($user) as $mailingList) {
+            $mailingList->getUsers()->removeElement($user);
         }
     }
 }

@@ -9,8 +9,8 @@ use Sonata\MediaBundle\Provider\ImageProvider;
 
 abstract class BaseDeleteMutation implements MutationInterface
 {
-    protected $em;
-    protected $mediaProvider;
+    protected EntityManagerInterface $em;
+    protected ImageProvider $mediaProvider;
 
     public function __construct(EntityManagerInterface $em, ImageProvider $mediaProvider)
     {

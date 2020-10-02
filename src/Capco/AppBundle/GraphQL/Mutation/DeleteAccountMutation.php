@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\HighlightedContentRepository;
+use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
@@ -48,7 +49,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         ValueResponseRepository $valueResponseRepository,
         ReportingRepository $reportingRepository,
         EventRepository $eventRepository,
-        HighlightedContentRepository $highlightedContentRepository
+        HighlightedContentRepository $highlightedContentRepository,
+        MailingListRepository $mailingListRepository
     ) {
         parent::__construct(
             $em,
@@ -67,7 +69,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $valueResponseRepository,
             $reportingRepository,
             $eventRepository,
-            $highlightedContentRepository
+            $highlightedContentRepository,
+            $mailingListRepository
         );
         $this->userRepository = $userRepository;
     }

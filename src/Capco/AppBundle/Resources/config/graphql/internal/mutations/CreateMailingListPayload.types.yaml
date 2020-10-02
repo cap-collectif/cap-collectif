@@ -1,0 +1,10 @@
+CreateMailingListPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            mailingList:
+                type: 'MailingList'
+                description: 'The mailing list created'
+            error:
+                type: 'String'
+                description: 'The error code, if any'

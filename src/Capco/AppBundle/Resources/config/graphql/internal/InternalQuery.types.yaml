@@ -452,3 +452,9 @@ InternalQuery:
                 description: 'Retrieve the current version of the app.'
                 type: 'String'
                 resolve: '@=parameter("app_version")'
+            mailingLists:
+                type: MailingListConnection!
+                description: 'Get all mailing lists'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MailingList\\MailingListResolver", [args])'
+                argsBuilder: 'Relay::Connection'

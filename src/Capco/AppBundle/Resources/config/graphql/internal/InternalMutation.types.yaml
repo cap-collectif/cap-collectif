@@ -961,3 +961,17 @@ InternalMutation:
                     inputType: InternalRemoveSsoInput
                     payloadType: InternalRemoveSsoPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveSsoConnectionMutation", [value, getUser(), serv("request_stack")])'
+            createMailingList:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateMailingListInput
+                    payloadType: CreateMailingListPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateMailingListMutation", [value])'
+            deleteMailingList:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteMailingListInput
+                    payloadType: DeleteMailingListPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteMailingListMutation", [value])'

@@ -1,0 +1,8 @@
+DeleteMailingListInput:
+    type: relay-mutation-input
+    config:
+        description: 'Delete the mailing lists'
+        fields:
+            ids:
+                type: '[ID!]!'
+                description: 'The mailing lists list to delete'

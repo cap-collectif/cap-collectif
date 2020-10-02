@@ -1,0 +1,10 @@
+DeleteMailingListPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedIds:
+                type: '[ID!]!'
+                description: 'The mailing lists deleted'
+            error:
+                type: 'String'
+                description: 'The error code, if any'

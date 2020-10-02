@@ -1,0 +1,14 @@
+CreateMailingListInput:
+    type: relay-mutation-input
+    config:
+        description: 'Create a mailing list from a list of users'
+        fields:
+            name:
+                type: 'String!'
+                description: 'The name of the list'
+            userIds:
+                type: '[ID!]!'
+                description: 'The list of the users to put in the list'
+            project:
+                type: 'ID'
+                description: 'Optionnal. The list from which the list is built'
