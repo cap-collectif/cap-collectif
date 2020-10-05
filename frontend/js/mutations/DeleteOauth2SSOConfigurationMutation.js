@@ -11,7 +11,7 @@ import type {
 const mutation = graphql`
   mutation DeleteOauth2SSOConfigurationMutation($input: InternalDeleteSSOConfigurationInput!) {
     deleteSSOConfiguration(input: $input) {
-      deletedSsoConfigurationId
+      deletedSsoConfigurationId @deleteRecord
     }
   }
 `;
@@ -22,12 +22,6 @@ const commit = (
   commitMutation(environment, {
     mutation,
     variables,
-    configs: [
-      {
-        type: 'NODE_DELETE',
-        deletedIDFieldName: 'deletedSsoConfigurationId',
-      },
-    ],
   });
 
 export default { commit };

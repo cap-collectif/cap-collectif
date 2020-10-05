@@ -16,7 +16,7 @@ const mutation = graphql`
       argumentable {
         id
       }
-      deletedArgumentId
+      deletedArgumentId @deleteRecord
     }
   }
 `;
@@ -29,12 +29,6 @@ const commit = (
   commitMutation(environment, {
     mutation,
     variables,
-    configs: [
-      {
-        type: 'NODE_DELETE',
-        deletedIDFieldName: 'deletedArgumentId',
-      },
-    ],
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('deleteArgument');
       if (!payload) return;

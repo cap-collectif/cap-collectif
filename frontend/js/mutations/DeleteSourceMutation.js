@@ -16,7 +16,7 @@ const mutation = graphql`
       sourceable {
         id
       }
-      deletedSourceId
+      deletedSourceId @deleteRecord
     }
   }
 `;
@@ -28,12 +28,6 @@ const commit = (
   commitMutation(environment, {
     mutation,
     variables,
-    configs: [
-      {
-        type: 'NODE_DELETE',
-        deletedIDFieldName: 'deletedSourceId',
-      },
-    ],
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('deleteSource');
       if (!payload) {

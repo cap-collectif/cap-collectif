@@ -10,7 +10,7 @@ import type {
 const mutation = graphql`
   mutation DeleteFontMutation($input: InternalDeleteFontInput!) {
     deleteFont(input: $input) {
-      deletedFontId
+      deletedFontId @deleteRecord
       bodyFont {
         id
         useAsBody
@@ -47,12 +47,6 @@ const commit = (
             },
           }
         : undefined,
-    configs: [
-      {
-        type: 'NODE_DELETE',
-        deletedIDFieldName: 'deletedFontId',
-      },
-    ],
   });
 
 export default { commit };

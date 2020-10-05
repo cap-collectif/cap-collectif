@@ -17,7 +17,7 @@ const mutation = graphql`
     $isAuthenticated: Boolean!
   ) {
     removeProposalVote(input: $input) {
-      previousVoteId
+      previousVoteId @deleteRecord
       step {
         id
         ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
@@ -53,12 +53,6 @@ const commit = (
   commitMutation(environment, {
     mutation,
     variables,
-    configs: [
-      {
-        type: 'NODE_DELETE',
-        deletedIDFieldName: 'previousVoteId',
-      },
-    ],
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('removeProposalVote');
 

@@ -10,7 +10,7 @@ import type {
 const mutation = graphql`
   mutation DeleteProjectDistrictMutation($input: DeleteProjectDistrictInput!) {
     deleteProjectDistrict(input: $input) {
-      deletedDistrictId
+      deletedDistrictId @deleteRecord
     }
   }
 `;
@@ -24,12 +24,6 @@ const commit = (
     optimisticUpdater: store => {
       store.delete(variables.input.id);
     },
-    configs: [
-      {
-        type: 'NODE_DELETE',
-        deletedIDFieldName: 'deletedDistrictId',
-      },
-    ],
   });
 
 export default { commit };
