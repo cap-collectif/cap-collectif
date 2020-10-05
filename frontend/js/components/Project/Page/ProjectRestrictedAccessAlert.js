@@ -38,7 +38,7 @@ export const rendering = ({
           props.project.visibility === 'ME'
             ? 'global.draft.only_visible_by_you'
             : 'only-visible-by-administrators';
-
+        const { project } = props;
         return (
           <Alert
             className="alert-dismissible text-center"
@@ -49,7 +49,7 @@ export const rendering = ({
             <a
               id="action_show"
               className="ml-15 btn btn-sm btn-warning"
-              href={props.project.adminUrl != null ? props.project.adminUrl : ''}
+              href={project.adminUrl != null ? project.adminUrl : ''}
               name="action_edit">
               <FormattedMessage id="action_edit" />
               <i className="cap cap-external-link ml-5" />

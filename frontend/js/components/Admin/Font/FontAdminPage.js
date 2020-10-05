@@ -20,7 +20,8 @@ const listFont = ({
   if (error) return graphqlError;
 
   if (props) {
-    if (props.fonts) return <FontAdminContent fonts={props.fonts} />;
+    const { fonts } = props;
+    if (fonts) return <FontAdminContent fonts={fonts} />;
 
     return graphqlError;
   }

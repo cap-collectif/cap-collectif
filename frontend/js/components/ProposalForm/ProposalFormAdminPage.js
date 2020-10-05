@@ -31,7 +31,8 @@ const component = ({
         }
         return <Loader />;
       }
-      return <ProposalFormAdminPageTabs proposalForm={props.proposalForm} query={props} />;
+      const { proposalForm } = props;
+      return <ProposalFormAdminPageTabs proposalForm={proposalForm} query={props} />;
     }
     return graphqlError;
   }

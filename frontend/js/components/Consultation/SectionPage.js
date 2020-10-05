@@ -24,14 +24,15 @@ const render = ({
     return graphqlError;
   }
   if (props) {
-    if (props.section && props.section.consultation) {
+    const { section } = props;
+    if (section && section.consultation) {
       return (
         <>
           <Section
             enablePagination
             level={0}
-            section={props.section}
-            consultation={props.section.consultation}
+            section={section}
+            consultation={section.consultation}
           />
         </>
       );

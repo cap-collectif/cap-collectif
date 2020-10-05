@@ -18,11 +18,12 @@ export const renderComponent = ({
     return graphqlError;
   }
   if (props) {
-    if (props.proposalForms && props.proposalForms.length) {
+    const { proposalForms } = props;
+    if (proposalForms && proposalForms.length) {
       return (
         <div>
           <EvaluationHeader />
-          {props.proposalForms.filter(Boolean).map(proposalForm => (
+          {proposalForms.filter(Boolean).map(proposalForm => (
             <ProposalFormEvaluationList key={proposalForm.id} proposalForm={proposalForm} />
           ))}
         </div>

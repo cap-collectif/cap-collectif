@@ -45,9 +45,11 @@ export const rendering = ({
 
   if (props) {
     if (props.node?.replies != null) {
+      // $FlowFixMe incorrect type definition
+      const { node, isProfileEnabled } = props;
       return (
         // $FlowFixMe
-        <ProfileReplyList replies={props.node.replies} isProfileEnabled={props.isProfileEnabled} />
+        <ProfileReplyList replies={node.replies} isProfileEnabled={isProfileEnabled} />
       );
     }
   }

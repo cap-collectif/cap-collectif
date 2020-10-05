@@ -19,8 +19,9 @@ const siteFaviconAdminForm = ({
     return graphqlError;
   }
   if (props) {
-    if (props.siteFavicon) {
-      return <SiteFaviconAdminForm siteFavicon={props.siteFavicon} />;
+    const { siteFavicon } = props;
+    if (siteFavicon) {
+      return <SiteFaviconAdminForm siteFavicon={siteFavicon} />;
     }
     return graphqlError;
   }

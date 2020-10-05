@@ -33,8 +33,10 @@ export const rendering = ({
 
   if (props) {
     if (props.sections != null) {
+      // $FlowFixMe incorrect type definition
+      const { sections, hideEmptySection } = props;
       // $FlowFixMe
-      return <SectionList sections={props.sections} hideEmptySection={props.hideEmptySection} />;
+      return <SectionList sections={sections} hideEmptySection={hideEmptySection} />;
     }
   }
   return <Loader />;

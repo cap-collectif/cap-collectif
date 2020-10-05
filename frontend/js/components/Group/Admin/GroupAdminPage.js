@@ -15,7 +15,6 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line
     if (props.group !== null) {
       return <GroupAdminPageTabs {...props} />;
     }

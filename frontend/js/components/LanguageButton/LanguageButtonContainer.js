@@ -24,7 +24,8 @@ const component = ({
     return graphqlError;
   }
   if (props) {
-    return props.availableLocales && <LanguageButtonWrapper languages={props.availableLocales} />;
+    const { availableLocales } = props;
+    return availableLocales && <LanguageButtonWrapper languages={availableLocales} />;
   }
 
   return null;

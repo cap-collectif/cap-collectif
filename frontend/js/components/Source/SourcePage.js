@@ -42,8 +42,9 @@ export const rendering = ({
     return graphqlError;
   }
   if (props) {
-    if (props.node?.sources != null) {
-      return <ProfileSourceList sources={props.node.sources} />;
+    const { node } = props;
+    if (node?.sources != null) {
+      return <ProfileSourceList sources={node.sources} />;
     }
   }
   return <Loader />;

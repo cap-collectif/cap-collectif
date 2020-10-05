@@ -22,7 +22,6 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line
     if (props.proposal !== null) {
       return <ProposalAdminPageTabs {...props} />;
     }

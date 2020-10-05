@@ -32,8 +32,8 @@ const component = ({
         }
         return <Loader />;
       }
-
-      return <QuestionnaireAdminPageTabs questionnaire={props.questionnaire} />;
+      const { questionnaire } = props;
+      return <QuestionnaireAdminPageTabs questionnaire={questionnaire} />;
     }
 
     return graphqlError;
