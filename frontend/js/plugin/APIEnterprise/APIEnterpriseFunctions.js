@@ -1,7 +1,6 @@
 // @flow
 import { commitLocalUpdate, fetchQuery } from 'react-relay';
 import { type IntlShape } from 'react-intl';
-import config from '~/config';
 import { checkRNA, checkSiret } from '~/services/Validator';
 import environment from '~/createRelayEnvironment';
 import colors from '~/utils/colors';
@@ -24,23 +23,31 @@ import {
   fetchAPIDocuments,
   getMatchingObject,
   PUB_ORGA_BASE_QUESTIONS,
+  ID_DEV,
+  ID_BP_1,
 } from '~/plugin/APIEnterprise/APIEnterpriseConstants';
 import type { Dispatch } from '~/types';
 import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type';
-
 
 /**
  * /!\ Warning /!\
  *
  * Here in development we have 2 questions more than in prod.
  */
-const INDEX_TYPE_QUESTION = config.isDev ? 22 : 20;
-const INDEX_RNA_QUESTION = config.isDev ? 35 : 33;
-const INDEX_ASSOC_SIRET_QUESTION = config.isDev ? 24 : 22;
-const INDEX_ENTER_QUESTION = config.isDev ? 51 : 49;
-const INDEX_PUB_ORGA_QUESTION = config.isDev ? 63 : 61;
+const INDEX_TYPE_QUESTION = (id: string): number => (id === ID_DEV ? 22 : 20);
+const INDEX_RNA_QUESTION = (id: string): number => (id === ID_DEV ? 35 : 33);
+const INDEX_ASSOC_SIRET_QUESTION = (id: string): number => (id === ID_DEV ? 24 : 22);
+const INDEX_ENTER_QUESTION = (id: string): number => (id === ID_DEV ? 51 : 49);
+const INDEX_PUB_ORGA_QUESTION = (id: string): number => (id === ID_DEV ? 63 : 61);
 
-export const getApiEnterpriseType = (type: string): string => {
+export const getApiEnterpriseType = (formId: string): ?string => {
+  const type: ?string = $(
+    `input[name="choices-for-field-proposal-form-responses${INDEX_TYPE_QUESTION(formId)}"]:checked`,
+  ).val();
+  if (typeof type === 'undefined' || type == null) {
+    return null;
+  }
+
   switch (type.trim().toLowerCase()) {
     case 'une entreprise':
     case 'un autre organisme privé':
@@ -54,14 +61,14 @@ export const getApiEnterpriseType = (type: string): string => {
   }
 };
 
-const getSiretQuestionIndex = (type: ?string): number => {
+const getSiretQuestionIndex = (type: ?string, formId: string): number => {
   switch (type) {
     case API_ENTERPRISE_ASSOC:
-      return INDEX_ASSOC_SIRET_QUESTION;
+      return INDEX_ASSOC_SIRET_QUESTION(formId);
     case API_ENTERPRISE_ENTER:
-      return INDEX_ENTER_QUESTION;
+      return INDEX_ENTER_QUESTION(formId);
     case API_ENTERPRISE_PUB_ORGA:
-      return INDEX_PUB_ORGA_QUESTION;
+      return INDEX_PUB_ORGA_QUESTION(formId);
     default:
       return -1;
   }
@@ -72,6 +79,7 @@ export const recapFetchedInfoFromAPI = (
   apiResult: Object,
   isRNA: boolean,
   type: string,
+  formId: string,
 ) => {
   const fieldArray = [];
   fieldArray.push(
@@ -124,7 +132,7 @@ export const recapFetchedInfoFromAPI = (
       ' au moment de l’étude de votre dossier.</span>',
   );
   const fields = fieldArray.join('');
-  const idIndex = isRNA ? INDEX_RNA_QUESTION : getSiretQuestionIndex(type);
+  const idIndex = isRNA ? INDEX_RNA_QUESTION(formId) : getSiretQuestionIndex(type, formId);
   commitLocalUpdate(environment, store => {
     if (typeof questions[idIndex] !== 'undefined') {
       const question = store.get(questions[idIndex].id);
@@ -142,12 +150,21 @@ const makeSiretQueries = (
   siret: string,
   questions: Questions,
   onlyVisibility: boolean = false,
+  formId: string,
 ) => {
   const params = { type: apiEnterpriseType, siret };
 
   const promiseMainInfo = new Promise(resolve => {
     fetchQuery(environment, autocompleteFromSiret, params).then(res => {
-      dispatchValuesToForm(intl, dispatch, res, apiEnterpriseType, questions, onlyVisibility);
+      dispatchValuesToForm(
+        intl,
+        dispatch,
+        res,
+        apiEnterpriseType,
+        questions,
+        onlyVisibility,
+        formId,
+      );
       resolve(getMatchingObject(res, apiEnterpriseType));
     });
   });
@@ -163,6 +180,7 @@ const makeSiretQueries = (
             API_ENTERPRISE_ASSOC_DOC,
             questions,
             onlyVisibility,
+            formId,
           );
           resolve(getMatchingObject(doc, API_ENTERPRISE_ASSOC_DOC));
         },
@@ -174,7 +192,15 @@ const makeSiretQueries = (
           : API_ENTERPRISE_DOC_PUB_ORGA;
       fetchQuery(environment, fetchAPIDocuments, { id: siret, type: apiEnterpriseType }).then(
         doc => {
-          dispatchValuesToForm(intl, dispatch, doc, docQueryType, questions, onlyVisibility);
+          dispatchValuesToForm(
+            intl,
+            dispatch,
+            doc,
+            docQueryType,
+            questions,
+            onlyVisibility,
+            formId,
+          );
           resolve(getMatchingObject(doc, docQueryType));
         },
       );
@@ -182,7 +208,13 @@ const makeSiretQueries = (
   });
 
   Promise.all([promiseMainInfo, promiseDocInfo]).then(values => {
-    recapFetchedInfoFromAPI(questions, { ...values[0], ...values[1] }, false, apiEnterpriseType);
+    recapFetchedInfoFromAPI(
+      questions,
+      { ...values[0], ...values[1] },
+      false,
+      apiEnterpriseType,
+      formId,
+    );
   });
 };
 
@@ -192,6 +224,7 @@ const makeRnaQueries = (
   id: string,
   questions: Questions,
   onlyVisibility: boolean = false,
+  formId: string,
 ) => {
   const promiseMainInfo = new Promise(resolve => {
     fetchQuery(environment, autocompleteFromId, { id }).then(res => {
@@ -202,6 +235,7 @@ const makeRnaQueries = (
         API_ENTERPRISE_ASSOC_RNA,
         questions,
         onlyVisibility,
+        formId,
       );
       resolve(getMatchingObject(res, API_ENTERPRISE_ASSOC_RNA));
     });
@@ -216,6 +250,7 @@ const makeRnaQueries = (
         API_ENTERPRISE_ASSOC_DOC_RNA,
         questions,
         onlyVisibility,
+        formId,
       );
       resolve(getMatchingObject(res, API_ENTERPRISE_ASSOC_DOC_RNA));
     });
@@ -227,20 +262,26 @@ const makeRnaQueries = (
       { ...values[0], ...values[1] },
       true,
       API_ENTERPRISE_ASSOC_RNA,
+      formId,
     );
   });
 };
 
-export const TRIGGER_FOR: Array<string> = ['idf-bp-dedicated', 'dev'];
+export const TRIGGER_FOR: Array<string> = [
+  'idf-bp-dedicated',
+  'dev',
+  'idf-api-entreprise-multiple-forms',
+];
 
 const getInvisibleQuestionIndexesAccordingToType = (
   defaultToHideQuestions: Array<number>,
   apiEnterpriseType: ?string,
+  formId: string,
 ) => {
-  const assosQuestions = [...ASSOC_SIRET_BASE_QUESTIONS];
-  const assosRnaQuestions = [...ASSOC_RNA_BASE_QUESTIONS];
-  const enterprisesQuestions = [...ENTER_BASE_QUESTIONS];
-  const pubOrgaQuestions = [...PUB_ORGA_BASE_QUESTIONS];
+  const assosQuestions = [...ASSOC_SIRET_BASE_QUESTIONS(formId)];
+  const assosRnaQuestions = [...ASSOC_RNA_BASE_QUESTIONS(formId)];
+  const enterprisesQuestions = [...ENTER_BASE_QUESTIONS(formId)];
+  const pubOrgaQuestions = [...PUB_ORGA_BASE_QUESTIONS(formId)];
   switch (apiEnterpriseType) {
     case API_ENTERPRISE_ASSOC:
       return [...assosRnaQuestions, ...enterprisesQuestions, ...pubOrgaQuestions];
@@ -255,8 +296,12 @@ const getInvisibleQuestionIndexesAccordingToType = (
   }
 };
 
-const getSiretAccordingToType = (type: ?string, responses: ResponsesInReduxForm): ?string => {
-  const index = getSiretQuestionIndex(type);
+const getSiretAccordingToType = (
+  type: ?string,
+  responses: ResponsesInReduxForm,
+  formId: string,
+): ?string => {
+  const index = getSiretQuestionIndex(type, formId);
   if (index === -1) {
     return null;
   }
@@ -269,17 +314,17 @@ export const handleVisibilityAccordingToType = (
   dispatch: Dispatch,
   questions: Questions,
   responses: ResponsesInReduxForm,
+  formId: string,
 ) => {
-  const type = $(
-    `input[name="choices-for-field-proposal-form-responses${INDEX_TYPE_QUESTION}"]:checked`,
-  ).val();
-  const apiEnterpriseType =
-    typeof type === 'undefined' || type == null ? null : getApiEnterpriseType(type);
+  const apiEnterpriseType = getApiEnterpriseType(formId);
   // The two following lines are using flowfix me because ResponseInReduxForm seems broken (see other uses)
-  const siret: ?string = getSiretAccordingToType(apiEnterpriseType, responses);
+  const siret: ?string = getSiretAccordingToType(apiEnterpriseType, responses, formId);
   // $FlowFixMe
-  const rna: ?string = responses[INDEX_RNA_QUESTION] && responses[INDEX_RNA_QUESTION].value;
-  const defaultToHideQuestions = BASE_QUESTIONS;
+  const rna: ?string =
+    // $FlowFixMe
+    responses[INDEX_RNA_QUESTION(formId)] && responses[INDEX_RNA_QUESTION(formId)].value;
+
+  const defaultToHideQuestions = BASE_QUESTIONS(formId);
   const isSiretNotValid = siret == null || (siret && !checkSiret(siret));
   const isRnaNotValid = rna == null || (rna && !checkRNA(rna));
   if (isSiretNotValid && isRnaNotValid) {
@@ -302,16 +347,17 @@ export const handleVisibilityAccordingToType = (
   if (apiEnterpriseType) {
     // Refetch to know which hidden fields should be visible again once modal reopen
     if (siret && !isSiretNotValid) {
-      makeSiretQueries(intl, dispatch, apiEnterpriseType, siret, questions, true);
+      makeSiretQueries(intl, dispatch, apiEnterpriseType, siret, questions, true, formId);
     }
     if (rna && !isRnaNotValid) {
-      makeRnaQueries(intl, dispatch, rna, questions, true);
+      makeRnaQueries(intl, dispatch, rna, questions, true, formId);
     }
   }
 
   const invisibleQuestionIndexes = getInvisibleQuestionIndexesAccordingToType(
     defaultToHideQuestions,
     apiEnterpriseType,
+    formId,
   );
   invisibleQuestionIndexes.forEach(questionIndex => {
     commitLocalUpdate(environment, store => {
@@ -331,20 +377,20 @@ export const triggerAutocompleteAPIEnterprise = (
   intl: IntlShape,
 ) => {
   if (event && event.currentTarget) {
+    // Ugly hack based on questions length
+    // to avoid passing id as props, in RenderResponses.
+    const formId = questions.length === 70 ? ID_DEV : ID_BP_1;
+    console.log('Questions length:', questions.length);
     if (event.currentTarget.getAttribute('type') === 'siret') {
       const text: ?string = event.currentTarget.value.replace(/\s/g, '');
-      const type = $(
-        `input[name="choices-for-field-proposal-form-responses${INDEX_TYPE_QUESTION}"]:checked`,
-      ).val();
-      const apiEnterpriseType = getApiEnterpriseType(type);
-
-      if (text && checkSiret(text)) {
-        makeSiretQueries(intl, dispatch, apiEnterpriseType, text, questions);
+      const apiEnterpriseType = getApiEnterpriseType(formId);
+      if (apiEnterpriseType && text && checkSiret(text)) {
+        makeSiretQueries(intl, dispatch, apiEnterpriseType, text, questions, false, formId);
       }
     } else if (event.currentTarget.getAttribute('type') === 'rna') {
       const id: ?string = event.currentTarget.value.replace(/\s/g, '');
       if (id && checkRNA(id)) {
-        makeRnaQueries(intl, dispatch, id, questions);
+        makeRnaQueries(intl, dispatch, id, questions, false, formId);
       }
     }
   }

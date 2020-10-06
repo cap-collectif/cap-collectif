@@ -17,8 +17,23 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     private $cache;
     private $autoCompleteDocQueryResolver;
     private $autoCompleteFromSiretQueryResolver;
-
     private $shouldPreFillAPIEntreprise = false;
+    private $indexTypeQuestion;
+    private $indexRnaQuestion;
+    private $indexNoRnaQuestion;
+    private $siretIndexes;
+    private $indexAssoSiren;
+    private $indexEntrepriseSiren;
+    private $indexEntrepriseTurnonver;
+    private $indexOrgPubSiren;
+    private $indexAssoSiretcompositionCA;
+    private $indexAssoSiretStatus;
+    private $indexAssoRnacompositionCA;
+    private $indexAssoRnaPrefectureReceiptConfirm;
+    private $indexAssoRnaStatus;
+    private $indexEntrepriseFiscalReg;
+    private $indexEntrepriseSocialReg;
+    private $indexEntrepriseKbis;
 
     public function __construct(
         RedisCache $cache,
@@ -54,15 +69,13 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
 
     public function getSiret(array $values): ?string
     {
-        if (isset($values['responses'][22]['value'])) {
-            return $values['responses'][22]['value'];
+        foreach ($this->siretIndexes as $siret) {
+            if (isset($values['responses'][$siret]['value'])) {
+                return $values['responses'][$siret]['value'];
+            }
         }
 
-        if (isset($values['responses'][49]['value'])) {
-            return $values['responses'][49]['value'];
-        }
-
-        return $values['responses'][61]['value'] ?? null;
+        return null;
     }
 
     public function getAPIEnterpriseData(FormEvent $event): void
@@ -84,25 +97,30 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         }
 
         // If no type value, we can't do anything.
-        if (!$values['responses'][20]['value']) {
+        if (!$values['responses'][$this->indexTypeQuestion]['value']) {
             return;
         }
 
         $type = APIEnterpriseTypeResolver::getAPIEnterpriseTypeFromString(
-            json_decode($values['responses'][20]['value'], true)['labels'][0]
+            json_decode($values['responses'][$this->indexTypeQuestion]['value'], true)['labels'][0]
         );
 
         if (APIEnterpriseTypeResolver::ASSOCIATION === $type) {
             // We check if it's no RNA and no SIRET, we can't do anything.
-            if ($values['responses'][32]['value']) {
-                if ('Non' === json_decode($values['responses'][32]['value'], true)['labels'][0]) {
+            if ($values['responses'][$this->indexNoRnaQuestion]['value']) {
+                if (
+                    'Non' ===
+                    json_decode($values['responses'][$this->indexNoRnaQuestion]['value'], true)[
+                        'labels'
+                    ][0]
+                ) {
                     return;
                 }
             }
         }
 
         // rna
-        $rna = $values['responses'][33]['value'] ?? null;
+        $rna = $values['responses'][$this->indexRnaQuestion]['value'] ?? null;
 
         // siret
         $siret = !$rna ? $this->getSiret($values) : null;
@@ -122,25 +140,32 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             switch ($type) {
                 case APIEnterpriseTypeResolver::ASSOCIATION:
                     if ($siret) {
-                        $values['responses'][27]['medias'] = $this->setMediaFromAPIOrRequest(
-                            $values['responses'][27]['medias'],
+                        $values['responses'][$this->indexAssoSiren][
+                            'medias'
+                        ] = $this->setMediaFromAPIOrRequest(
+                            $values['responses'][$this->indexAssoSiren]['medias'],
                             $mainInfo['sirenSituation']
                         );
                     }
 
                     break;
                 case APIEnterpriseTypeResolver::ENTERPRISE:
-                    $values['responses'][54]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][54]['medias'],
+                    $values['responses'][$this->indexEntrepriseSiren][
+                        'medias'
+                    ] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][$this->indexEntrepriseSiren]['medias'],
                         $mainInfo['sirenSituation']
                     );
-                    $values['responses'][57]['value'] =
-                        $values['responses'][57]['value'] ?? $mainInfo['turnover'];
+                    $values['responses'][$this->indexEntrepriseTurnonver]['value'] =
+                        $values['responses'][$this->indexEntrepriseTurnonver]['value'] ??
+                        $mainInfo['turnover'];
 
                     break;
                 case APIEnterpriseTypeResolver::PUBLIC_ORGA:
-                    $values['responses'][66]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][66]['medias'],
+                    $values['responses'][$this->indexOrgPubSiren][
+                        'medias'
+                    ] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][$this->indexOrgPubSiren]['medias'],
                         $mainInfo['sirenSituation']
                     );
 
@@ -160,45 +185,61 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         switch ($type) {
             case APIEnterpriseTypeResolver::ASSOCIATION:
                 if ($siret) {
-                    $values['responses'][28]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][28]['medias'],
+                    $values['responses'][$this->indexAssoSiretcompositionCA][
+                        'medias'
+                    ] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][$this->indexAssoSiretcompositionCA]['medias'],
                         $docInfo['compositionCA']
                     );
-                    $values['responses'][29]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][29]['medias'],
+                    $values['responses'][$this->indexAssoSiretStatus][
+                        'medias'
+                    ] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][$this->indexAssoSiretStatus]['medias'],
                         $docInfo['status']
                     );
                 }
                 if ($rna) {
                     // Composition du conseil d'administration et du bureau
-                    $values['responses'][38]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][38]['medias'],
+                    $values['responses'][$this->indexAssoRnacompositionCA][
+                        'medias'
+                    ] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][$this->indexAssoRnacompositionCA]['medias'],
                         $docInfo['compositionCA']
                     );
                     // Récépissé de la déclaration en préfecture (greffe des associations)
-                    $values['responses'][39]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][39]['medias'],
+                    $values['responses'][$this->indexAssoRnaPrefectureReceiptConfirm][
+                        'medias'
+                    ] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][$this->indexAssoRnaPrefectureReceiptConfirm]['medias'],
                         $docInfo['prefectureReceiptConfirm']
                     );
                     // Statuts en vigueur datés et signés
-                    $values['responses'][41]['medias'] = $this->setMediaFromAPIOrRequest(
-                        $values['responses'][41]['medias'],
+                    $values['responses'][$this->indexAssoRnaStatus][
+                        'medias'
+                    ] = $this->setMediaFromAPIOrRequest(
+                        $values['responses'][$this->indexAssoRnaStatus]['medias'],
                         $docInfo['status']
                     );
                 }
 
                 break;
             case APIEnterpriseTypeResolver::ENTERPRISE:
-                $values['responses'][55]['medias'] = $this->setMediaFromAPIOrRequest(
-                    $values['responses'][55]['medias'],
+                $values['responses'][$this->indexEntrepriseFiscalReg][
+                    'medias'
+                ] = $this->setMediaFromAPIOrRequest(
+                    $values['responses'][$this->indexEntrepriseFiscalReg]['medias'],
                     $docInfo['fiscalRegulationAttestation']
                 );
-                $values['responses'][56]['medias'] = $this->setMediaFromAPIOrRequest(
-                    $values['responses'][56]['medias'],
+                $values['responses'][$this->indexEntrepriseSocialReg][
+                    'medias'
+                ] = $this->setMediaFromAPIOrRequest(
+                    $values['responses'][$this->indexEntrepriseSocialReg]['medias'],
                     $docInfo['socialRegulationAttestation']
                 );
-                $values['responses'][58]['medias'] = $this->setMediaFromAPIOrRequest(
-                    $values['responses'][58]['medias'],
+                $values['responses'][$this->indexEntrepriseKbis][
+                    'medias'
+                ] = $this->setMediaFromAPIOrRequest(
+                    $values['responses'][$this->indexEntrepriseKbis]['medias'],
                     $docInfo['kbis']
                 );
 
@@ -212,17 +253,54 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     public function onPreSetData(FormEvent $event): void
     {
         $proposal = $event->getData();
+        if ($proposal->isDraft()) {
+            return;
+        }
         $proposalForm = $proposal->getProposalForm();
 
         $env = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if ('dev' === $env && !$proposal->isDraft() && 'proposalformIdf' === $proposalForm->getId()) {
+        if ('proposalformIdf' === $proposalForm->getId()) {
             $this->shouldPreFillAPIEntreprise = true;
+            $this->indexTypeQuestion = 22;
+            $this->indexRnaQuestion = 35;
+            $this->indexNoRnaQuestion = 34;
+            $this->siretIndexes = [24, 51, 63];
+            $this->indexAssoSiren = 29;
+            $this->indexEntrepriseSiren = 56;
+            $this->indexEntrepriseTurnonver = 59;
+            $this->indexOrgPubSiren = 68;
+            $this->indexAssoSiretcompositionCA = 30;
+            $this->indexAssoSiretStatus = 31;
+            $this->indexAssoRnacompositionCA = 40;
+            $this->indexAssoRnaPrefectureReceiptConfirm = 41;
+            $this->indexAssoRnaStatus = 43;
+            $this->indexEntrepriseFiscalReg = 57;
+            $this->indexEntrepriseSocialReg = 58;
+            $this->indexEntrepriseKbis = 60;
         }
         if (
-            'idf-bp-dedicated' === $env && !$proposal->isDraft() &&
+            'idf-bp-dedicated' === $env &&
             'd6b98b9b-5e3c-11ea-8fab-0242ac110004' === $proposalForm->getId()
         ) {
             $this->shouldPreFillAPIEntreprise = true;
+            $this->indexTypeQuestion = 20;
+            $this->indexRnaQuestion = 33;
+            $this->indexNoRnaQuestion = 32;
+            $this->siretIndexes = [22, 49, 61];
+            $this->indexOrgPubSiren = 66;
+
+            $this->indexAssoSiren = 27;
+
+            $this->indexEntrepriseSiren = 54;
+            $this->indexEntrepriseTurnonver = 57;
+            $this->indexAssoSiretcompositionCA = 28;
+            $this->indexAssoSiretStatus = 29;
+            $this->indexAssoRnacompositionCA = 38;
+            $this->indexAssoRnaPrefectureReceiptConfirm = 39;
+            $this->indexAssoRnaStatus = 41;
+            $this->indexEntrepriseFiscalReg = 55;
+            $this->indexEntrepriseSocialReg = 56;
+            $this->indexEntrepriseKbis = 58;
         }
     }
 

@@ -283,7 +283,13 @@ export class ProposalForm extends React.Component<Props, State> {
     window.addEventListener('beforeunload', onUnload);
     const { responses, proposalForm, dispatch, instanceName, intl } = this.props;
     if (TRIGGER_FOR.includes(instanceName)) {
-      handleVisibilityAccordingToType(intl, dispatch, proposalForm.questions, responses);
+      handleVisibilityAccordingToType(
+        intl,
+        dispatch,
+        proposalForm.questions,
+        responses,
+        proposalForm.id,
+      );
     }
   }
 
