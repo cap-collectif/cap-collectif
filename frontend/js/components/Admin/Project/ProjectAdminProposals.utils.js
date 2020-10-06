@@ -35,6 +35,19 @@ export type StepFilter = {|
   +id: Uuid,
   +title: string,
   +hasTheme: boolean,
+  +type: string,
+|};
+
+export type CategoryOrStepFilter = {|
+  +id: Uuid,
+  +name: string,
+  +isStep?: boolean,
+|};
+
+export type DistrictOrStepFilter = {|
+  +id: Uuid,
+  +name: string,
+  +isStep?: boolean,
 |};
 
 type FilterOrderedFormatted = {|
@@ -68,9 +81,9 @@ export type DecisionMaker = {|
   +analystsWithAnalyseBegin: ModalConfirmRevokement_analystsWithAnalyseBegin,
 |};
 
-export const getFormattedCategoriesChoicesForProject = (
+export const getFormattedAllCategoriesForProject = (
   project: ProjectAdminProposals_project,
-): $ReadOnlyArray<DistrictFilter> => {
+): $ReadOnlyArray<CategoryFilter> => {
   const flattened = ((project.steps
     .filter(Boolean)
     .filter(step => SHOWING_STEP_TYPENAME.includes(step.__typename))
@@ -89,10 +102,37 @@ export const getFormattedCategoriesChoicesForProject = (
       [],
     )
     .flat(): any): $ReadOnlyArray<CategoryFilter>);
+
   return uniqBy(flattened, 'id');
 };
 
-export const getFormattedDistrictsChoicesForProject = (
+export const getFormattedCategoriesChoicesForStep = (
+  project: ProjectAdminProposals_project,
+  stepId: ?Uuid,
+): $ReadOnlyArray<CategoryFilter> => {
+  return stepId
+    ? ((project.steps
+        .filter(Boolean)
+        .filter(step => step.id === stepId)
+        .reduce(
+          (acc, step) => [
+            ...acc,
+            // Flow does not know the type of step in runtime unless we put a bunch of
+            // if conditions. For code readability, it is preferable to put here the $FlowFixMe
+            // here, but in the end I force cast it to `$ReadOnlyArray<CategoryFilter>`
+            // $FlowFixMe
+            step.form.categories.map(cat => ({
+              id: cat.id,
+              name: cat.name,
+            })),
+          ],
+          [],
+        )
+        .flat(): any): $ReadOnlyArray<CategoryFilter>)
+    : [];
+};
+
+export const getFormattedAllDistrictsForProject = (
   project: ProjectAdminProposals_project,
 ): $ReadOnlyArray<DistrictFilter> => {
   const flattened = ((project.steps
@@ -101,6 +141,9 @@ export const getFormattedDistrictsChoicesForProject = (
     .reduce(
       (acc, step) => [
         ...acc,
+        // Flow does not know the type of step in runtime unless we put a bunch of
+        // if conditions. For code readability, it is preferable to put here the $FlowFixMe
+        // here, but in the end I force cast it to `$ReadOnlyArray<DistrictFilter>`
         // $FlowFixMe
         step.form.districts.map(district => ({
           id: district.id,
@@ -109,8 +152,97 @@ export const getFormattedDistrictsChoicesForProject = (
       ],
       [],
     )
-    .flat(): any): $ReadOnlyArray<CategoryFilter>);
+    .flat(): any): $ReadOnlyArray<DistrictFilter>);
+
   return uniqBy(flattened, 'id');
+};
+
+export const getFormattedDistrictsChoicesForStep = (
+  project: ProjectAdminProposals_project,
+  stepId: ?Uuid,
+): $ReadOnlyArray<DistrictFilter> => {
+  return stepId
+    ? ((project.steps
+        .filter(Boolean)
+        .filter(step => step.id === stepId)
+        .reduce(
+          (acc, step) => [
+            ...acc,
+            // $FlowFixMe
+            step.form.districts.map(district => ({
+              id: district.id,
+              name: district.name,
+            })),
+          ],
+          [],
+        )
+        .flat(): any): $ReadOnlyArray<DistrictFilter>)
+    : [];
+};
+
+export const getFormattedDistrictsWithStepChoicesForProject = (
+  project: ProjectAdminProposals_project,
+): $ReadOnlyArray<DistrictOrStepFilter> => {
+  return project.steps
+    .filter(Boolean)
+    .filter(step => SHOWING_STEP_TYPENAME.includes(step.__typename))
+    .reduce((acc, step) => {
+      if (
+        step.__typename === 'CollectStep' &&
+        step.form?.districts &&
+        step.form.districts.length > 0
+      ) {
+        acc = [
+          ...acc,
+          {
+            id: step.id,
+            name: step.title,
+            isStep: true,
+          },
+          ...(step.form?.districts
+            ? step.form.districts.map(district => ({
+                id: district.id,
+                name: district.name,
+              }))
+            : []),
+        ];
+      }
+
+      return acc;
+    }, []);
+};
+
+export const getFormattedCategoriesWithStepChoicesForProject = (
+  project: ProjectAdminProposals_project,
+): $ReadOnlyArray<CategoryOrStepFilter> => {
+  return project.steps
+    .filter(Boolean)
+    .filter(step => SHOWING_STEP_TYPENAME.includes(step.__typename))
+    .reduce((acc, step) => {
+      if (
+        step.__typename === 'CollectStep' &&
+        step.form?.categories &&
+        step.form.categories.length > 0
+      ) {
+        acc = [
+          ...acc,
+          {
+            id: step.id,
+            name: step.title,
+            isStep: true,
+          },
+          ...(step.form?.categories
+            ? step.form.categories.map(category => ({
+                id: category.id,
+                name: category.name,
+              }))
+            : []),
+        ];
+      }
+
+      return acc;
+    }, [])
+    .filter(Boolean);
 };
 
 export const getFormattedStepsChoicesForProject = (
@@ -123,6 +255,7 @@ export const getFormattedStepsChoicesForProject = (
       id: step.id,
       title: step.title,
       hasTheme: step.form?.usingThemes,
+      type: step.__typename,
     })): any): $ReadOnlyArray<StepFilter>);
 };
 
@@ -161,7 +294,9 @@ export const getFormattedStatusesChoicesForProjectStep = (
 
 type AllFormattedChoicesReturn = {|
   +categories: $ReadOnlyArray<CategoryFilter>,
+  +categoriesWithStep: $ReadOnlyArray<CategoryOrStepFilter>,
   +districts: $ReadOnlyArray<DistrictFilter>,
+  +districtsWithStep: $ReadOnlyArray<DistrictOrStepFilter>,
   +steps: $ReadOnlyArray<StepFilter>,
   +stepStatuses: $ReadOnlyArray<StepStatusFilter>,
   +filtersOrdered: $ReadOnlyArray<FilterOrderedFormatted>,
@@ -278,20 +413,28 @@ export const getAllFormattedChoicesForProject = (
   intl: IntlShape,
   themes: ProjectAdminProposals_themes,
 ): AllFormattedChoicesReturn => {
-  const categories = getFormattedCategoriesChoicesForProject(project);
-  const districts = getFormattedDistrictsChoicesForProject(project);
+  const allCategories = getFormattedAllCategoriesForProject(project);
+  const categoriesOfStep = getFormattedCategoriesChoicesForStep(project, stepId);
+  const categoriesWithStep = getFormattedCategoriesWithStepChoicesForProject(project);
+
+  const allDistricts = getFormattedAllDistrictsForProject(project);
+  const districtsOfStep = getFormattedDistrictsChoicesForStep(project, stepId);
+  const districtsWithStep = getFormattedDistrictsWithStepChoicesForProject(project);
+
   const steps = getFormattedStepsChoicesForProject(project);
   const stepStatuses = getFormattedStatusesChoicesForProjectStep(project, stepId);
 
   return {
-    categories,
-    districts,
+    categories: categoriesOfStep,
+    categoriesWithStep,
+    districts: districtsOfStep,
+    districtsWithStep,
     steps,
     stepStatuses,
     filtersOrdered: getFormattedFiltersOrdered(
       filtersOrdered,
-      categories,
-      districts,
+      allCategories,
+      allDistricts,
       steps,
       stepStatuses,
       themes,

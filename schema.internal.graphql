@@ -2993,7 +2993,7 @@ interface District {
   name(
     """The locale to translate content (eg: fr-FR)."""
     locale: TranslationLocale
-  ): String
+  ): String!
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
@@ -5964,7 +5964,7 @@ type ProjectDistrict implements District {
   name(
     """The locale to translate content (eg: fr-FR)."""
     locale: TranslationLocale
-  ): String
+  ): String!
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
@@ -6615,7 +6615,7 @@ type ProposalDistrict implements District {
   name(
     """The locale to translate content (eg: fr-FR)."""
     locale: TranslationLocale
-  ): String
+  ): String!
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!

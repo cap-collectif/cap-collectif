@@ -34,8 +34,12 @@ export const Container: StyledComponent<
   }
   & li {
     padding: 10px;
+
     & + li {
       border-top: 1px solid ${colors.lightGray};
+    }
+    &.dropdown-select-separator {
+      padding: 10px 10px 10px 30px;
     }
     &:last-of-type {
       border-bottom-left-radius: ${MAIN_BORDER_RADIUS_SIZE};

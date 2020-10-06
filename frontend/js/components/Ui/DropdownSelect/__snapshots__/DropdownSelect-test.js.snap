@@ -428,6 +428,70 @@ exports[`<DropdownSelect /> should render correctly with multi-select enabled 1`
 </ContextProvider>
 `;
 
+exports[`<DropdownSelect /> should render correctly with separators 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "allValues": Array [],
+      "defaultValue": undefined,
+      "disabled": false,
+      "initialValue": Array [],
+      "isMultiSelect": false,
+      "mode": "normal",
+      "onChange": undefined,
+      "setInitialValue": [Function],
+      "value": undefined,
+    }
+  }
+>
+  <indexstyle__Container
+    shouldOverflow={false}
+  >
+    <indexstyle__Header>
+      Trier par
+    </indexstyle__Header>
+    <indexstyle__Body>
+      <DropdownSelect.Separator>
+        Item 1
+      </DropdownSelect.Separator>
+      <DropdownSelect.Choice
+        value="item1"
+      >
+        Item 1.1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item2"
+      >
+        Item 1.2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item3"
+      >
+        Item 1.3
+      </DropdownSelect.Choice>
+      <DropdownSelect.Separator>
+        Item 2
+      </DropdownSelect.Separator>
+      <DropdownSelect.Choice
+        value="item4"
+      >
+        Item 2.1
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item5"
+      >
+        Item 2.2
+      </DropdownSelect.Choice>
+      <DropdownSelect.Choice
+        value="item6"
+      >
+        Item 2.3
+      </DropdownSelect.Choice>
+    </indexstyle__Body>
+  </indexstyle__Container>
+</ContextProvider>
+`;
+
 exports[`<DropdownSelect /> should render correctly with submenu in a submenu 1`] = `
 <ContextProvider
   value={

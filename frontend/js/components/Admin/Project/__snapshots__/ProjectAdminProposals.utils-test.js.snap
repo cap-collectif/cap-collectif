@@ -67,11 +67,13 @@ Array [
     "hasTheme": false,
     "id": "cstep1",
     "title": "Étape de dépôt",
+    "type": "CollectStep",
   },
   Object {
     "hasTheme": false,
     "id": "sstep1",
     "title": "Étape de sélection",
+    "type": "SelectionStep",
   },
 ]
 `;

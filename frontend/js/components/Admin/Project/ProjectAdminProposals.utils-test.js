@@ -2,8 +2,8 @@
 /* eslint-env jest */
 
 import {
-  getFormattedCategoriesChoicesForProject,
-  getFormattedDistrictsChoicesForProject,
+  getFormattedAllCategoriesForProject,
+  getFormattedAllDistrictsForProject,
   getFormattedStatusesChoicesForProjectStep,
   getFormattedStepsChoicesForProject,
 } from '~/components/Admin/Project/ProjectAdminProposals.utils';
@@ -336,13 +336,13 @@ const DEFAULT_PROJECT = {
 
 describe('ProjectAdminProposals utils functions', () => {
   it('should get a correctly formatted categories choices for a given project', () => {
-    const categories = getFormattedCategoriesChoicesForProject(DEFAULT_PROJECT);
+    const categories = getFormattedAllCategoriesForProject(DEFAULT_PROJECT);
     expect(categories).toHaveLength(2);
     expect(categories).toMatchSnapshot();
   });
 
   it('should get a correctly formatted districts choices for a given project', () => {
-    const districts = getFormattedDistrictsChoicesForProject(DEFAULT_PROJECT);
+    const districts = getFormattedAllDistrictsForProject(DEFAULT_PROJECT);
     expect(districts).toHaveLength(2);
     expect(districts).toMatchSnapshot();
   });

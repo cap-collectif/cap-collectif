@@ -2,6 +2,7 @@
 import * as React from 'react';
 import * as S from './index.style';
 import DropdownSelectChoice from '~ui/DropdownSelect/choice';
+import DropdownSelectSeparator from '~ui/DropdownSelect/separator';
 import DropdownSelectMenu from '~ui/DropdownSelect/menu';
 import type { Context, DropdownOnChangeType, DropdownValueType } from '~ui/DropdownSelect/context';
 import { DropdownSelectContext } from '~ui/DropdownSelect/context';
@@ -113,6 +114,7 @@ const DropdownSelect = ({
 };
 
 DropdownSelect.Choice = DropdownSelectChoice;
+DropdownSelect.Separator = DropdownSelectSeparator;
 DropdownSelect.Header = DropdownSelectHeader;
 DropdownSelect.Menu = DropdownSelectMenu;
 DropdownSelect.Message = DropdownSelectMessage;

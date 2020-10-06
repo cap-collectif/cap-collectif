@@ -7,7 +7,7 @@ District:
       id:
         type: ID!
       name:
-        type: 'String'
+        type: 'String!'
         argsBuilder: 'Translatable::Field'
         resolve: '@=value.getName(args["locale"])'
       geojson:

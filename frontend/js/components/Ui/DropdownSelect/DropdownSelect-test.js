@@ -95,6 +95,22 @@ describe('<DropdownSelect />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render correctly with separators', () => {
+    const wrapper = shallow(
+      <DropdownSelect title="Trier par">
+        <DropdownSelect.Separator>Item 1</DropdownSelect.Separator>
+        <DropdownSelect.Choice value="item1">Item 1.1</DropdownSelect.Choice>
+        <DropdownSelect.Choice value="item2">Item 1.2</DropdownSelect.Choice>
+        <DropdownSelect.Choice value="item3">Item 1.3</DropdownSelect.Choice>
+        <DropdownSelect.Separator>Item 2</DropdownSelect.Separator>
+        <DropdownSelect.Choice value="item4">Item 2.1</DropdownSelect.Choice>
+        <DropdownSelect.Choice value="item5">Item 2.2</DropdownSelect.Choice>
+        <DropdownSelect.Choice value="item6">Item 2.3</DropdownSelect.Choice>
+      </DropdownSelect>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render correctly with multi-select enabled', () => {
     const wrapper = shallow(
       <DropdownSelect title="Trier par" isMultiSelect>

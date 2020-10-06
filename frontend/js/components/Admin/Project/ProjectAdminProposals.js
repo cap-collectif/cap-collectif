@@ -152,7 +152,15 @@ const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>
   const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
   const intl = useIntl();
 
-  const { categories, districts, steps, stepStatuses, filtersOrdered } = React.useMemo(
+  const {
+    categories,
+    categoriesWithStep,
+    districts,
+    districtsWithStep,
+    steps,
+    stepStatuses,
+    filtersOrdered,
+  } = React.useMemo(
     () =>
       getAllFormattedChoicesForProject(
         project,
@@ -195,7 +203,7 @@ const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>
 
   const renderFilters = (
     <>
-      {districts?.length > 0 && (
+      {selectedStep?.type === 'CollectStep' && districts?.length > 0 && (
         <AnalysisFilterDistrict
           districts={districts}
           value={parameters.filters.district}
@@ -221,7 +229,47 @@ const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>
         />
       )}
 
-      {categories?.length > 0 && (
+      {selectedStep?.type === 'SelectionStep' && districtsWithStep?.length > 0 && (
+        <Collapsable align="right">
+          <Collapsable.Button>
+            <FormattedMessage id="admin.fields.proposal.map.zone" />
+          </Collapsable.Button>
+          <Collapsable.Element
+            ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
+            <DropdownSelect
+              shouldOverflow
+              value={parameters.filters.district}
+              defaultValue="ALL"
+              onChange={newValue => {
+                dispatch({
+                  type: 'CHANGE_DISTRICT_FILTER',
+                  payload: ((newValue: any): ProposalsDistrictValues),
+                });
+              }}
+              title={intl.formatMessage({ id: 'admin.fields.proposal.map.zone' })}>
+              <DropdownSelect.Choice value="ALL">
+                {intl.formatMessage({ id: 'global.select_districts' })}
+              </DropdownSelect.Choice>
+              <DropdownSelect.Choice value="NONE">
+                {intl.formatMessage({ id: 'global.select_no-districts' })}
+              </DropdownSelect.Choice>
+              {districtsWithStep.map(districtOrStep =>
+                districtOrStep.isStep ? (
+                  <DropdownSelect.Separator key={districtOrStep.id}>
+                    {districtOrStep.name}
+                  </DropdownSelect.Separator>
+                ) : (
+                  <DropdownSelect.Choice key={districtOrStep.id} value={districtOrStep.id}>
+                    {districtOrStep.name}
+                  </DropdownSelect.Choice>
+                ),
+              )}
+            </DropdownSelect>
+          </Collapsable.Element>
+        </Collapsable>
+      )}
+
+      {selectedStep?.type === 'CollectStep' && categories?.length > 0 && (
         <AnalysisFilterCategory
           categories={categories}
           value={parameters.filters.category}
@@ -232,6 +280,46 @@ const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>
             });
           }}
         />
+      )}
+
+      {selectedStep?.type === 'SelectionStep' && categoriesWithStep?.length > 0 && (
+        <Collapsable align="right">
+          <Collapsable.Button>
+            <FormattedMessage id="admin.fields.proposal.category" />
+          </Collapsable.Button>
+          <Collapsable.Element
+            ariaLabel={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
+            <DropdownSelect
+              shouldOverflow
+              value={parameters.filters.category}
+              defaultValue="ALL"
+              onChange={newValue =>
+                dispatch({
+                  type: 'CHANGE_CATEGORY_FILTER',
+                  payload: ((newValue: any): ProposalsCategoryValues),
+                })
+              }
+              title={intl.formatMessage({ id: 'admin.fields.proposal.category' })}>
+              <DropdownSelect.Choice value="ALL">
+                {intl.formatMessage({ id: 'global.select_categories' })}
+              </DropdownSelect.Choice>
+              <DropdownSelect.Choice value="NONE">
+                {intl.formatMessage({ id: 'global.select_no-categories' })}
+              </DropdownSelect.Choice>
+              {categoriesWithStep.map(categoryOrStep =>
+                categoryOrStep.isStep ? (
+                  <DropdownSelect.Separator key={categoryOrStep.id}>
+                    {categoryOrStep.name}
+                  </DropdownSelect.Separator>
+                ) : (
+                  <DropdownSelect.Choice key={categoryOrStep.id} value={categoryOrStep.id}>
+                    {categoryOrStep.name}
+                  </DropdownSelect.Choice>
+                ),
+              )}
+            </DropdownSelect>
+          </Collapsable.Element>
+        </Collapsable>
       )}
 
       {stepStatuses?.length > 0 && !isRestricted && (
