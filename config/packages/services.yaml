@@ -277,3 +277,6 @@ services:
 
     Symfony\Component\Cache\Adapter\ApcuAdapter:
         public: true
+
+    Capco\AppBundle\Cache\SessionListener:
+        decorates: session_listener

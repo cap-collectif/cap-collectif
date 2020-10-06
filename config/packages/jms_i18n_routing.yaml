@@ -2,3 +2,5 @@ jms_i18n_routing:
     default_locale: 'fr-FR'
     locales: '%locales%'
     strategy: prefix
+    cookie:
+        enabled: false
