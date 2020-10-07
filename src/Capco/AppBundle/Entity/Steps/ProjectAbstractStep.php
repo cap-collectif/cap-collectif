@@ -36,6 +36,17 @@ class ProjectAbstractStep
      */
     protected $step;
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            /** @var AbstractStep $clonedStep */
+            $clonedStep = clone $this->step;
+            $clonedStep->setProjectAbstractStep($this);
+            $this->step = $clonedStep;
+        }
+    }
+
     public function __toString()
     {
         if ($this->step) {

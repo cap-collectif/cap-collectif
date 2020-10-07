@@ -1,0 +1,7 @@
+DuplicateProjectInput:
+    type: relay-mutation-input
+    config:
+        description: 'Duplicate a project'
+        fields:
+            id:
+                type: 'ID!'

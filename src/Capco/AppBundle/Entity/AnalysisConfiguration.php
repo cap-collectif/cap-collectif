@@ -52,13 +52,13 @@ class AnalysisConfiguration implements Timestampable
     private $costEstimationEnabled = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true, name="favourable_status", onDelete="SET NULL")
      */
     private $favourableStatus;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Status")
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
      * @ORM\JoinTable(name="analysis_unfavourable_statuses",
      *      joinColumns={@ORM\JoinColumn(name="analysis_configuration_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="status_id", referencedColumnName="id", onDelete="CASCADE")}
@@ -67,8 +67,8 @@ class AnalysisConfiguration implements Timestampable
     private $unfavourableStatuses;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep")
-     * @ORM\JoinColumn(name="selection_step", nullable=true, referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", cascade={"persist"})
+     * @ORM\JoinColumn(name="selection_step", nullable=true, referencedColumnName="id", onDelete="SET NULL")
      */
     private $moveToSelectionStep;
 
@@ -98,12 +98,19 @@ class AnalysisConfiguration implements Timestampable
     {
         if ($this->id) {
             $this->id = null;
-            $this->evaluationForm = $this->evaluationForm ? clone $this->evaluationForm : null;
             $this->favourableStatus = null;
             $this->unfavourableStatuses = new ArrayCollection();
             $this->moveToSelectionStep = null;
             $this->selectionStepStatus = null;
             $this->analysisStep = null;
+            if ($this->evaluationForm) {
+                /** @var Questionnaire $clonedEvaluationForm */
+                $clonedEvaluationForm = clone $this->evaluationForm;
+                $clonedEvaluationForm
+                    ->setProposalForm($this->proposalForm)
+                    ->setSlug('copy-of-' . $clonedEvaluationForm->getSlug());
+                $this->setEvaluationForm($clonedEvaluationForm);
+            }
         }
     }
 

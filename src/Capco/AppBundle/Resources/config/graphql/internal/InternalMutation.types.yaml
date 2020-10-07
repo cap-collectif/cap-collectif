@@ -710,6 +710,13 @@ InternalMutation:
                     inputType: UpdateAlphaProjectInput
                     payloadType: UpdateAlphaProjectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAlphaProjectMutation", [value])'
+            duplicateProject:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DuplicateProjectInput
+                    payloadType: DuplicateProjectPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DuplicateProjectMutation", [value])'
 
             updateProject:
                 access: "@=hasRole('ROLE_ADMIN')"

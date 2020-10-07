@@ -159,7 +159,7 @@ services:
             [
                 ~,
                 Capco\AppBundle\Entity\Project,
-                Capco\AdminBundle\Controller\CRUDController,
+                Capco\AdminBundle\Controller\ProjectController,
                 '@security.token_storage',
                 '@Capco\AppBundle\Repository\ProjectDistrictRepository',
                 '@Capco\AppBundle\Elasticsearch\Indexer',

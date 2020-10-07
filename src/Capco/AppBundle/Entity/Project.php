@@ -183,7 +183,7 @@ class Project implements IndexableInterface
 
     /**
      * TODO: no more used, delete me.
-     * 
+     *
      * @ORM\Column(name="include_author_in_ranking", type="boolean")
      */
     private $includeAuthorInRanking = false;
@@ -268,6 +268,25 @@ class Project implements IndexableInterface
         $this->projectDistrictPositioners = new ArrayCollection();
         $this->updatedAt = new \DateTime();
         $this->publishedAt = new \DateTime();
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            $this->publishedAt = new \DateTime();
+            $this->createdAt = new \DateTime();
+            $this->updatedAt = new \DateTime();
+            if (!empty($this->projectDistrictPositioners)) {
+                $projectDistrictPositioners = new ArrayCollection();
+                foreach ($this->projectDistrictPositioners as $districtPositioner) {
+                    $clonedProjectDistrictPositioner = clone $districtPositioner;
+                    $clonedProjectDistrictPositioner->setProject($this);
+                    $projectDistrictPositioners->add($clonedProjectDistrictPositioner);
+                }
+                $this->setProjectDistrictPositioners($projectDistrictPositioners);
+            }
+        }
     }
 
     public function __toString()

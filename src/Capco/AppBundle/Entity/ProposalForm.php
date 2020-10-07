@@ -277,12 +277,18 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         if ($this->cloneEnable) {
             if ($this->id) {
                 $this->id = null;
-                $this->evaluationForm = $this->evaluationForm ? clone $this->evaluationForm : null;
                 $this->step = null;
                 $this->reference = null;
                 $this->createdAt = new \DateTime();
                 $this->updatedAt = null;
                 $this->proposals = new ArrayCollection();
+
+                if ($this->evaluationForm) {
+                    /** @var Questionnaire $clonedEvaluationForm */
+                    $clonedEvaluationForm = clone $this->evaluationForm;
+                    $clonedEvaluationForm->setProposalForm($this);
+                    $this->setEvaluationForm($clonedEvaluationForm);
+                }
 
                 if ($this->analysisConfiguration) {
                     /** @var AnalysisConfiguration $clonedAnalysisConfig */
@@ -292,110 +298,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
                     $this->analysisConfiguration = null;
                 }
 
-                $cloneReferences = [];
-                $questionsClone = new ArrayCollection();
-
-                /** @var QuestionnaireAbstractQuestion $question */
-                $toCloneQuestions = $this->questions;
-                foreach ($toCloneQuestions as $question) {
-                    if (
-                        !($reference = $this->getCloneReference(
-                            $cloneReferences,
-                            $question->getQuestion()->getTitle()
-                        ))
-                    ) {
-                        $clonedQuestion = clone $question;
-                        $clonedQuestion->setProposalForm($this);
-                        $cloneReferences[
-                            $clonedQuestion->getQuestion()->getTitle()
-                        ] = $clonedQuestion;
-                    } else {
-                        $clonedQuestion = $reference;
-                    }
-
-                    if (
-                        ($aq = $question->getQuestion()) &&
-                        !empty(($questionJumps = $aq->getJumps()))
-                    ) {
-                        $clonedQuestionAq = $clonedQuestion->getQuestion();
-
-                        if (
-                            $questionAqAlwaysJump = $question
-                                ->getQuestion()
-                                ->getAlwaysJumpDestinationQuestion()
-                        ) {
-                            if (
-                                $cloneReferenceQaq = $this->getCloneReference(
-                                    $cloneReferences,
-                                    $questionAqAlwaysJump->getTitle()
-                                )
-                            ) {
-                                $clonedQuestionAq->setAlwaysJumpDestinationQuestion(
-                                    $cloneReferenceQaq->getQuestion()
-                                );
-                            } else {
-                                $clonedQuestionAqAlwaysJump = clone $questionAqAlwaysJump;
-                                $clonedQuestionAqAlwaysJump->setQuestionnaireAbstractQuestion(
-                                    $clonedQuestion
-                                );
-                                $clonedQuestionAq->setAlwaysJumpDestinationQuestion(
-                                    $clonedQuestionAqAlwaysJump
-                                );
-                            }
-                        }
-
-                        /** @var LogicJump $jump */
-                        $clonedJumps = new ArrayCollection();
-                        foreach ($questionJumps as $jump) {
-                            $clonedJump = clone $jump;
-                            $clonedJump->setConditions(new ArrayCollection());
-                            $clonedJump->setOrigin($clonedQuestionAq);
-                            if ($jump->getDestination()) {
-                                if (
-                                    $cloneReferenceJumpQaq = $this->getCloneReference(
-                                        $cloneReferences,
-                                        $jump
-                                            ->getDestination()
-                                            ->getQuestionnaireAbstractQuestion()
-                                            ->getQuestion()
-                                            ->getTitle()
-                                    )
-                                ) {
-                                    $clonedJump->setDestination(
-                                        $cloneReferenceJumpQaq->getQuestion()
-                                    );
-                                } else {
-                                    $clonedJumpQaq = clone $jump
-                                        ->getDestination()
-                                        ->getQuestionnaireAbstractQuestion();
-                                    $clonedJumpQaq->setProposalForm($this);
-                                    $clonedJump->setDestination($clonedJumpQaq->getQuestion());
-                                    $cloneReferences[
-                                        $clonedJumpQaq->getQuestion()->getTitle()
-                                    ] = $clonedJumpQaq;
-                                }
-                                $clonedJumps->add($clonedJump);
-                            }
-                            /** @var AbstractLogicJumpCondition $condition */
-                            foreach ($jump->getConditions() as $condition) {
-                                $clonedCondition = clone $condition;
-                                $clonedCondition->setQuestion($clonedQuestionAq);
-                                $clonedCondition->setJump($clonedJump);
-                                if ($clonedQuestionAq instanceof MultipleChoiceQuestion) {
-                                    $clonedCondition->setValue(
-                                        $this->findChoiceByTitle(
-                                            $clonedQuestionAq->getChoices()->toArray(),
-                                            $condition->getValue()->getTitle()
-                                        )
-                                    );
-                                }
-                                $clonedJump->addCondition($clonedCondition);
-                            }
-                        }
-                        $clonedQuestionAq->setJumps($clonedJumps);
-                    }
-                    $questionsClone->add($clonedQuestion);
-                }
+                $questionsClone = $this->cloneProposalFormQuestions();
 
                 $districtsClone = new ArrayCollection();
                 foreach ($this->districts as $district) {
@@ -1075,15 +978,20 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    private function getCloneReference(
-        array $cloneReferences,
-        string $questionTitle
-    ): ?QuestionnaireAbstractQuestion {
-        if (\array_key_exists($questionTitle, $cloneReferences)) {
-            return $cloneReferences[$questionTitle];
+    private function getCloneQuestionReference(
+        array &$cloneReferences,
+        QuestionnaireAbstractQuestion $qaq
+    ): QuestionnaireAbstractQuestion {
+        $key = $qaq->getQuestion()->getTitle() . $qaq->getQuestion()->getPosition();
+        if (\array_key_exists($key, $cloneReferences)) {
+            return $cloneReferences[$key];
         }
 
-        return null;
+        $clonedAbstractQaq = clone $qaq;
+        $clonedAbstractQaq->setProposalForm($this);
+        $cloneReferences[$key] = $clonedAbstractQaq;
+
+        return $clonedAbstractQaq;
     }
 
     private function findChoiceByTitle(array $array, string $title)
@@ -1095,5 +1003,97 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         }
 
         return false;
+    }
+
+    private function cloneProposalFormQuestions(): Collection
+    {
+        // We create an array that contains all the duplicated questions.
+        $cloneReferences = [];
+        $questionsClone = new ArrayCollection();
+
+        /** @var QuestionnaireAbstractQuestion $question */
+        $toCloneQuestions = $this->questions;
+        foreach ($toCloneQuestions as $question) {
+            $clonedQuestion = $this->getCloneQuestionReference($cloneReferences, $question);
+            if (($aq = $question->getQuestion()) && !empty(($questionJumps = $aq->getJumps()))) {
+                $clonedQuestionAq = $clonedQuestion->getQuestion();
+
+                if (
+                    $questionAqAlwaysJump = $question
+                        ->getQuestion()
+                        ->getAlwaysJumpDestinationQuestion()
+                ) {
+                    if (
+                        $cloneReferenceQaq = $this->getCloneQuestionReference(
+                            $cloneReferences,
+                            $questionAqAlwaysJump->getQuestionnaireAbstractQuestion()
+                        )
+                    ) {
+                        // If the reference exists we use it
+                        $clonedQuestionAq->setAlwaysJumpDestinationQuestion(
+                            $cloneReferenceQaq->getQuestion()
+                        );
+                    } else {
+                        // Otherwise we duplicate the question, and we add it to the references colleciton.
+                        $clonedQuestionAqAlwaysJump = clone $questionAqAlwaysJump;
+                        $clonedQuestionAqAlwaysJump->setQuestionnaireAbstractQuestion(
+                            $clonedQuestion
+                        );
+                        $clonedQuestionAq->setAlwaysJumpDestinationQuestion(
+                            $clonedQuestionAqAlwaysJump
+                        );
+                    }
+                }
+
+                // For the logic jumps duplication we clone the question
+                // from the original jump and we clone it if it does not exist already
+                /** @var LogicJump $jump */
+                $clonedJumps = new ArrayCollection();
+                foreach ($questionJumps as $jump) {
+                    $clonedJump = clone $jump;
+                    $clonedJump->setConditions(new ArrayCollection());
+                    $clonedJump->setOrigin($clonedQuestionAq);
+                    if ($jump->getDestination()) {
+                        if (
+                            $cloneReferenceJumpQaq = $this->getCloneQuestionReference(
+                                $cloneReferences,
+                                $jump->getDestination()->getQuestionnaireAbstractQuestion()
+                            )
+                        ) {
+                            $clonedJump->setDestination($cloneReferenceJumpQaq->getQuestion());
+                        } else {
+                            $clonedJumpQaq = clone $jump
+                                ->getDestination()
+                                ->getQuestionnaireAbstractQuestion();
+                            $clonedJumpQaq->setProposalForm($this);
+                            $clonedJump->setDestination($clonedJumpQaq->getQuestion());
+                            $cloneReferences[
+                                $clonedJumpQaq->getQuestion()->getTitle()
+                            ] = $clonedJumpQaq;
+                        }
+                        $clonedJumps->add($clonedJump);
+                    }
+                    /** @var AbstractLogicJumpCondition $condition */
+                    foreach ($jump->getConditions() as $condition) {
+                        $clonedCondition = clone $condition;
+                        $clonedCondition->setQuestion($clonedQuestionAq);
+                        $clonedCondition->setJump($clonedJump);
+                        if ($clonedQuestionAq instanceof MultipleChoiceQuestion) {
+                            $clonedCondition->setValue(
+                                $this->findChoiceByTitle(
+                                    $clonedQuestionAq->getChoices()->toArray(),
+                                    $condition->getValue()->getTitle()
+                                )
+                            );
+                        }
+                        $clonedJump->addCondition($clonedCondition);
+                    }
+                }
+                $clonedQuestionAq->setJumps($clonedJumps);
+            }
+            $questionsClone->add($clonedQuestion);
+        }
+
+        return $questionsClone;
     }
 }

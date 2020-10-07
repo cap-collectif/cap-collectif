@@ -69,6 +69,23 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
      */
     private $defaultSort = ProposalSort::RANDOM;
 
+    public function __clone()
+    {
+        if ($this->id) {
+            parent::__clone();
+            if ($proposalForm = $this->getProposalForm()) {
+                $proposalForm->setCloneEnable(true);
+                $clonedProposalForm = clone $proposalForm;
+                $clonedProposalForm->setStep($this);
+                $this->proposalForm = $clonedProposalForm;
+                if ($this->defaultStatus) {
+                    $clonedDefaultStatus = clone $this->defaultStatus;
+                    $clonedDefaultStatus->setStep($this);
+                }
+            }
+        }
+    }
+
     public function getDefaultStatus()
     {
         return $this->defaultStatus;

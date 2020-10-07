@@ -3045,6 +3045,20 @@ interface Draftable {
   draft: Boolean!
 }
 
+input DuplicateProjectInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DuplicateProjectPayload {
+  """The old project."""
+  oldProject: Project
+
+  """The new cloned project."""
+  newProject: Project
+  clientMutationId: String
+}
+
 """A contribution with an author"""
 interface EditableContribution {
   """Identifies the date and time when the object was last updated."""
@@ -4701,6 +4715,7 @@ type Mutation {
   createProject(input: CreateProjectInput!): CreateProjectPayload
   createAlphaProject(input: CreateAlphaProjectInput!): CreateAlphaProjectPayload
   updateAlphaProject(input: UpdateAlphaProjectInput!): UpdateAlphaProjectPayload
+  duplicateProject(input: DuplicateProjectInput!): DuplicateProjectPayload
   updateProject(input: UpdateProjectInput!): UpdateProjectPayload
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
   deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload

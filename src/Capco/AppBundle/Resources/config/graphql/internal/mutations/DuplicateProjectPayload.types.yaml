@@ -1,0 +1,10 @@
+DuplicateProjectPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            oldProject:
+                type: 'InternalProject'
+                description: 'The old project.'
+            newProject:
+                type: 'InternalProject'
+                description: 'The new cloned project.'

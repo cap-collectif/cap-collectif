@@ -107,7 +107,7 @@ class Status
         return $this;
     }
 
-    public function getStep()
+    public function getStep(): AbstractStep
     {
         return $this->step;
     }

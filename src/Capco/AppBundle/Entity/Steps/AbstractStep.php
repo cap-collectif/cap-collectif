@@ -170,6 +170,14 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         $this->events = new ArrayCollection();
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            $this->slug = 'copy-of-' . $this->getSlug();
+        }
+    }
+
     public function __toString(): string
     {
         if ($this->getId()) {

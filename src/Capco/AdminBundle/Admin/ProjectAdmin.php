@@ -208,9 +208,29 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
         $listMapper->addIdentifier('title', null, ['label' => 'global.title']);
         if ($this->manager->isActive('themes')) {
             $listMapper->add('themes', null, ['label' => 'global.themes']);
+        }
+
+        $actions = [
+            'display' => [
+                'template' => 'CapcoAdminBundle:Project:list__action_display.html.twig',
+            ],
+            'download' => [
+                'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
+            ],
+            'delete' => [
+                'template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig',
+            ],
+        ];
+
+        $currentUser = $this->tokenStorage->getToken()->getUser();
+        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+            $actions['duplicate'] = [
+                'template' => 'CapcoAdminBundle:Project:list__action_duplicate.html.twig',
+            ];
         }
 
         $listMapper
@@ -223,17 +243,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
-                'actions' => [
-                    'display' => [
-                        'template' => 'CapcoAdminBundle:Project:list__action_display.html.twig',
-                    ],
-                    'download' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
-                    ],
-                    'delete' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig',
-                    ],
-                ],
+                'actions' => $actions
             ]);
     }
 
@@ -436,7 +446,8 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['batch', 'list', 'edit', 'delete', 'show']);
+        $collection->add('duplicate');
+        $collection->clearExcept(['batch', 'list', 'edit', 'delete', 'show', 'duplicate']);
         $collection->add('preview', $this->getRouterIdParameter() . '/preview');
     }
 }
