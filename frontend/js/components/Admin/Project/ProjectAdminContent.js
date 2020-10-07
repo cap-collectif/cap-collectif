@@ -38,6 +38,7 @@ type Links = Array<{|
   title: string,
   count?: number,
   url: string,
+  to: string,
   component: any,
 |}>;
 
@@ -56,6 +57,7 @@ const formatNavbarLinks = (
       title: 'global.contribution',
       count: project.proposals.totalCount,
       url: `${path}/proposals`,
+      to: `${path}/proposals?step=${encodeURIComponent(firstCollectStepId ?? '')}`,
       component: () => (
         <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
           <ProjectAdminProposalsPage
@@ -69,6 +71,7 @@ const formatNavbarLinks = (
     title: 'capco.section.metrics.participants',
     count: project.contributors.totalCount,
     url: `${path}/participants`,
+    to: `${path}/participants`,
     component: () => (
       <ProjectAdminParticipantsProvider>
         <ProjectAdminParticipantTab
@@ -83,6 +86,7 @@ const formatNavbarLinks = (
     links.push({
       title: 'proposal.tabs.evaluation',
       url: `${path}/analysis`,
+      to: `${path}/analysis`,
       count: project.firstAnalysisStep ? project.firstAnalysisStep.proposals.totalCount : undefined,
       component: () => (
         <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
@@ -96,6 +100,7 @@ const formatNavbarLinks = (
   links.push({
     title: 'global.configuration',
     url: `${path}/edit`,
+    to: `${path}/edit`,
     component: () => <ProjectAdminForm project={project} onTitleChange={setTitle} />,
   });
   return links;
@@ -158,7 +163,7 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
         <NavContainer>
           {links.map((link, idx) => (
             <NavItem key={idx} active={location.pathname === link.url}>
-              <Link to={link.url}>
+              <Link to={link.to}>
                 <FormattedMessage id={link.title} />
               </Link>
               {link.count !== undefined && (

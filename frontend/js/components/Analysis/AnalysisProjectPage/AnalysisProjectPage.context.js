@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { useEffect } from 'react';
 import type { AnalysisProjectPageState, Filters } from './AnalysisProjectPage.reducer';
 import {
   type Action,
@@ -71,6 +72,11 @@ export const AnalysisProposalsProvider = ({ children }: ProviderProps) => {
     filters: DEFAULT_FILTERS,
     filtersOrdered: [],
   });
+  useEffect(() => {
+    dispatch({
+      type: 'INIT_FILTERS_FROM_URL',
+    });
+  }, []);
 
   const context = React.useMemo(
     () => ({

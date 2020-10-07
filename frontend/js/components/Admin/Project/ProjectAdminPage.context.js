@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import {
   type Action,
   createReducer,
@@ -81,6 +81,11 @@ export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: 
     createReducer,
     getInitialState(firstCollectStepId),
   );
+  useEffect(() => {
+    dispatch({
+      type: 'INIT_FILTERS_FROM_URL',
+    });
+  }, []);
 
   const context = React.useMemo(
     () => ({
@@ -95,11 +100,6 @@ export const ProjectAdminProposalsProvider = ({ children, firstCollectStepId }: 
     }),
     [state, firstCollectStepId],
   );
-  const location = useLocation();
-
-  React.useEffect(() => {
-    dispatch({ type: 'CLEAR_FILTERS' });
-  }, [dispatch, location]);
 
   return (
     <ProjectAdminPageContext.Provider value={context}>{children}</ProjectAdminPageContext.Provider>

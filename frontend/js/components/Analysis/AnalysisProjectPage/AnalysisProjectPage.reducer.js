@@ -1,7 +1,12 @@
 // @flow
 import type { Uuid } from '~/types';
 import type { AnalysisProjectPageStatus } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
-import { INITIAL_STATE } from './AnalysisProjectPage.context';
+import { INITIAL_STATE, DEFAULT_FILTERS } from './AnalysisProjectPage.context';
+import {
+  getFieldsFromUrl,
+  updateQueryUrl,
+  URL_FILTER_WHITELIST,
+} from '~/shared/utils/analysis-filters';
 
 export type ProposalsDistrictValues = 'ALL' | 'NONE' | Uuid;
 
@@ -86,7 +91,10 @@ export type Action =
   | { type: 'CLEAR_SUPERVISOR_FILTER' }
   | { type: 'CHANGE_DECISION_MAKER_FILTER', payload: Uuid }
   | { type: 'CLEAR_DECISION_MAKER_FILTER' }
-  | { type: 'CLEAR_FILTERS' };
+  | { type: 'CLEAR_FILTERS' }
+  | { type: 'INIT_FILTERS_FROM_URL' };
+
+const url = new URL(window.location.href);
 
 export const createReducer = (state: AnalysisProjectPageState, action: Action) => {
   switch (action.type) {
@@ -101,6 +109,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         status: 'ready',
       };
     case 'CHANGE_STATE_FILTER':
+      updateQueryUrl(url, 'state', { value: action.payload });
       return {
         ...state,
         filters: {
@@ -109,6 +118,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         },
       };
     case 'CHANGE_CATEGORY_FILTER':
+      updateQueryUrl(url, 'category', { value: action.payload });
       return {
         ...state,
         filters: {
@@ -124,6 +134,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         ],
       };
     case 'CLEAR_CATEGORY_FILTER':
+      updateQueryUrl(url, 'category', { delete: true });
       return {
         ...state,
         filters: {
@@ -133,6 +144,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'category')],
       };
     case 'CHANGE_DISTRICT_FILTER':
+      updateQueryUrl(url, 'district', { value: action.payload });
       return {
         ...state,
         filters: {
@@ -148,6 +160,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         ],
       };
     case 'CLEAR_DISTRICT_FILTER':
+      updateQueryUrl(url, 'district', { delete: true });
       return {
         ...state,
         filters: {
@@ -157,6 +170,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'district')],
       };
     case 'CHANGE_THEME_FILTER':
+      updateQueryUrl(url, 'theme', { value: action.payload });
       return {
         ...state,
         filters: {
@@ -172,6 +186,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         ],
       };
     case 'CLEAR_THEME_FILTER':
+      updateQueryUrl(url, 'theme', { delete: true });
       return {
         ...state,
         filters: {
@@ -181,6 +196,8 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'theme')],
       };
     case 'CHANGE_ANALYSTS_FILTER':
+      updateQueryUrl(url, 'analysts', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -196,6 +213,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         ],
       };
     case 'CLEAR_ANALYSTS_FILTER':
+      updateQueryUrl(url, 'analysts', { delete: true });
       return {
         ...state,
         filters: {
@@ -205,6 +223,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'analysts')],
       };
     case 'CHANGE_SUPERVISOR_FILTER':
+      updateQueryUrl(url, 'supervisor', { value: action.payload });
       return {
         ...state,
         filters: {
@@ -220,6 +239,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         ],
       };
     case 'CLEAR_SUPERVISOR_FILTER':
+      updateQueryUrl(url, 'supervisor', { delete: true });
       return {
         ...state,
         filters: {
@@ -229,6 +249,8 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'supervisor')],
       };
     case 'CHANGE_DECISION_MAKER_FILTER':
+      updateQueryUrl(url, 'decisionMaker', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -244,6 +266,8 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         ],
       };
     case 'CLEAR_DECISION_MAKER_FILTER':
+      updateQueryUrl(url, 'decisionMaker', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -253,12 +277,45 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'decisionMaker')],
       };
     case 'CHANGE_SORT':
+      updateQueryUrl(url, 'sort', { value: action.payload });
+
       return {
         ...state,
         sort: action.payload,
       };
     case 'CLEAR_FILTERS':
+      for (const key of url.searchParams.keys()) {
+        updateQueryUrl(url, key, { delete: true });
+      }
       return INITIAL_STATE;
+    case 'INIT_FILTERS_FROM_URL': {
+      const filters = getFieldsFromUrl<Filters>(url, {
+        default: DEFAULT_FILTERS,
+        whitelist: URL_FILTER_WHITELIST,
+      });
+      const { sort } = getFieldsFromUrl<{ sort: SortValues }>(url, {
+        default: {
+          sort: ORDER_BY.NEWEST,
+        },
+        whitelist: ['sort'],
+      });
+
+      return {
+        ...state,
+        sort,
+        filters,
+        filtersOrdered: (Object.entries({ ...state.filters, ...filters }): any)
+          .filter(
+            filter =>
+              (Array.isArray(filter[1]) && filter[1]?.length > 0) ||
+              (!Array.isArray(filter[1]) && filter[1]),
+          )
+          .map(([name, value]) => ({
+            id: value,
+            type: name,
+          })),
+      };
+    }
     default:
       throw new Error(`Unknown action : ${action.type}`);
   }

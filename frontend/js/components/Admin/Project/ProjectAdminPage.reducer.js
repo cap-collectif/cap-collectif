@@ -2,9 +2,26 @@
 
 import type { Uuid } from '~/types';
 import type { ProjectAdminPageStatus } from '~/components/Admin/Project/ProjectAdminPage.context';
-import { getInitialState } from '~/components/Admin/Project/ProjectAdminPage.context';
+import {
+  DEFAULT_FILTERS,
+  getInitialState,
+} from '~/components/Admin/Project/ProjectAdminPage.context';
+import {
+  clearQueryUrl,
+  getFieldsFromUrl,
+  updateQueryUrl,
+  URL_FILTER_WHITELIST,
+} from '~/shared/utils/analysis-filters';
 
-export type SortValues = 'oldest' | 'newest';
+export const ORDER_BY: {
+  OLDEST: 'oldest',
+  NEWEST: 'newest',
+} = {
+  OLDEST: 'oldest',
+  NEWEST: 'newest',
+};
+
+export type SortValues = $Values<typeof ORDER_BY>;
 
 export type ProposalsStateValues = 'ALL' | 'PUBLISHED' | 'TRASHED' | 'DRAFT';
 
@@ -93,7 +110,10 @@ export type Action =
   | { type: 'CLEAR_DECISION_MAKER_FILTER' }
   | { type: 'SEARCH_TERM', payload: ?string }
   | { type: 'CLEAR_TERM' }
-  | { type: 'CLEAR_FILTERS' };
+  | { type: 'CLEAR_FILTERS' }
+  | { type: 'INIT_FILTERS_FROM_URL' };
+
+const url = new URL(window.location.href);
 
 export const createReducer = (state: ProjectAdminPageState, action: Action) => {
   switch (action.type) {
@@ -109,6 +129,11 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
       };
     case 'CHANGE_STATE_FILTER': {
       const initialState = getInitialState(state.initialSelectedStep);
+      // We reset the url and keep only the state (ALL|PUBLISHED|DRAFT...) and the step
+      // to reflect the change as we reset here to the initial state
+      clearQueryUrl(url);
+      updateQueryUrl(url, 'state', { value: action.payload });
+      updateQueryUrl(url, 'step', { value: initialState.initialSelectedStep ?? '' });
 
       return {
         ...initialState,
@@ -119,6 +144,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
       };
     }
     case 'CHANGE_CATEGORY_FILTER':
+      updateQueryUrl(url, 'category', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -134,6 +161,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_CATEGORY_FILTER':
+      updateQueryUrl(url, 'category', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -143,6 +172,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'category')],
       };
     case 'CHANGE_THEME_FILTER':
+      updateQueryUrl(url, 'theme', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -158,6 +189,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_THEME_FILTER':
+      updateQueryUrl(url, 'theme', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -167,6 +200,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'theme')],
       };
     case 'CHANGE_STEP_FILTER':
+      updateQueryUrl(url, 'step', { value: action.payload ?? '' });
+
       return {
         ...state,
         filters: {
@@ -189,6 +224,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_STEP_FILTER':
+      updateQueryUrl(url, 'step', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -203,6 +240,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CHANGE_DISTRICT_FILTER':
+      updateQueryUrl(url, 'district', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -218,6 +257,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_DISTRICT_FILTER':
+      updateQueryUrl(url, 'district', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -227,6 +268,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'district')],
       };
     case 'CHANGE_PROGRESS_STATE_FILTER':
+      updateQueryUrl(url, 'progressState', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -242,6 +285,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_PROGRESS_STATE_FILTER':
+      updateQueryUrl(url, 'progressState', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -251,6 +296,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'progressState')],
       };
     case 'CHANGE_STATUS_FILTER':
+      updateQueryUrl(url, 'status', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -266,6 +313,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_STATUS_FILTER':
+      updateQueryUrl(url, 'status', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -275,6 +324,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'status')],
       };
     case 'CHANGE_ANALYSTS_FILTER':
+      updateQueryUrl(url, 'analysts', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -290,6 +341,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_ANALYSTS_FILTER':
+      updateQueryUrl(url, 'analysts', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -299,6 +352,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'analysts')],
       };
     case 'CHANGE_SUPERVISOR_FILTER':
+      updateQueryUrl(url, 'supervisor', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -314,6 +369,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_SUPERVISOR_FILTER':
+      updateQueryUrl(url, 'supervisor', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -323,6 +380,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'supervisor')],
       };
     case 'CHANGE_DECISION_MAKER_FILTER':
+      updateQueryUrl(url, 'decisionMaker', { value: action.payload });
+
       return {
         ...state,
         filters: {
@@ -338,6 +397,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         ],
       };
     case 'CLEAR_DECISION_MAKER_FILTER':
+      updateQueryUrl(url, 'decisionMaker', { delete: true });
+
       return {
         ...state,
         filters: {
@@ -347,6 +408,8 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         filtersOrdered: [...state.filtersOrdered.filter(filter => filter.type !== 'decisionMaker')],
       };
     case 'CHANGE_SORT':
+      updateQueryUrl(url, 'sort', { value: action.payload });
+
       return {
         ...state,
         sort: action.payload,
@@ -368,7 +431,39 @@ export const createReducer = (state: ProjectAdminPageState, action: Action) => {
         },
       };
     case 'CLEAR_FILTERS':
+      for (const key of url.searchParams.keys()) {
+        updateQueryUrl(url, key, { delete: true });
+      }
+
       return getInitialState(state.initialSelectedStep);
+    case 'INIT_FILTERS_FROM_URL': {
+      const filters = getFieldsFromUrl<Filters>(url, {
+        default: DEFAULT_FILTERS,
+        whitelist: [...URL_FILTER_WHITELIST, 'progressState', 'step', 'status'],
+      });
+      const { sort } = getFieldsFromUrl<{ sort: SortValues }>(url, {
+        default: {
+          sort: ORDER_BY.NEWEST,
+        },
+        whitelist: ['sort'],
+      });
+
+      return {
+        ...state,
+        sort,
+        filters,
+        filtersOrdered: (Object.entries({ ...state.filters, ...filters }): any)
+          .filter(
+            filter =>
+              (Array.isArray(filter[1]) && filter[1]?.length > 0) ||
+              (!Array.isArray(filter[1]) && filter[1]),
+          )
+          .map(([name, value]) => ({
+            id: value,
+            type: name,
+          })),
+      };
+    }
     default:
       throw new Error(`Unknown action : ${action.type}`);
   }

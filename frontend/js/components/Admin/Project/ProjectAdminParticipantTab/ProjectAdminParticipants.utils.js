@@ -74,6 +74,7 @@ const getFormattedFiltersOrdered = (
 
       if (filter.type === 'step') {
         const step = ((steps.find(({ id }) => id === filter.id): any): StepFilter);
+        if (!step) return null;
 
         return {
           id: step.id,

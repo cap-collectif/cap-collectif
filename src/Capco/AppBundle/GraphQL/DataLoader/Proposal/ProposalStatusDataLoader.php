@@ -119,6 +119,16 @@ class ProposalStatusDataLoader extends BatchDataLoader
         if ($args->offsetGet('step')) {
             $step = $this->globalIdResolver->resolve($args->offsetGet('step'), $viewer, $context);
 
+            if (!$step) {
+                $this->logger->error(
+                    sprintf("step with id '%s' not found", $args->offsetGet('step')),
+                    [
+                        'method' => __METHOD__
+                    ]
+                );
+
+                return null;
+            }
             if ($step instanceof SelectionStep) {
                 return self::resolveSelectionStep($step, $proposal);
             }
