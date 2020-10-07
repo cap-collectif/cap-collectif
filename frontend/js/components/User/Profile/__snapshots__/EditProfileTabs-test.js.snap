@@ -232,6 +232,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                 },
               ]
             }
+            loginWithOpenId={false}
             viewer={
               Object {
                 "$fragmentRefs": null,
@@ -380,6 +381,25 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             <NavItem
               active={false}
               disabled={false}
+              eventKey="account"
+              href="#account"
+            >
+              <ListGroupItem
+                bsClass="list-group-item"
+                listItem={false}
+              >
+                <span
+                  className="icon cap-setting-gear"
+                />
+                <FormattedMessage
+                  id="user.profile.edit.account"
+                  values={Object {}}
+                />
+              </ListGroupItem>
+            </NavItem>
+            <NavItem
+              active={false}
+              disabled={false}
               eventKey="personal-data"
               href="#personal-data"
             >
@@ -471,7 +491,34 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
         <TabPane
           bsClass="tab-pane"
           eventKey="account"
-        />
+        >
+          <Relay(Connect(AccountBox))
+            languageList={
+              Array [
+                Object {
+                  "code": "fr-FR",
+                  "translationKey": "french",
+                },
+                Object {
+                  "code": "en-GB",
+                  "translationKey": "english",
+                },
+                Object {
+                  "code": "de-DE",
+                  "translationKey": "deutsch",
+                },
+              ]
+            }
+            loginWithOpenId={true}
+            viewer={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "hasPassword": true,
+              }
+            }
+          />
+        </TabPane>
         <TabPane
           bsClass="tab-pane"
           eventKey="personal-data"

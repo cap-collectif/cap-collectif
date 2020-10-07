@@ -19,7 +19,7 @@ import Profile from './Profile';
 import ChangeUsername from './ChangeUsername';
 import Media from '../../Ui/Medias/Media/Media';
 import { loginWithOpenID } from '~/redux/modules/default';
-import type {LocaleMap} from "~ui/Button/SiteLanguageChangeButton";
+import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton';
 
 type Props = {|
   +features: FeatureToggles,
@@ -85,7 +85,7 @@ export class EditProfileTabs extends Component<Props> {
                       <FormattedMessage id="user.profile.title" />
                     </ListGroupItem>
                   </NavItem>
-                  {!features.login_paris && !loginWithOpenId && (
+                  {!features.login_paris && (
                     <NavItem eventKey="account" href="#account">
                       <ListGroupItem>
                         <span className="icon cap-setting-gear" />
@@ -133,7 +133,13 @@ export class EditProfileTabs extends Component<Props> {
                 )}
               </Tab.Pane>
               <Tab.Pane eventKey="account">
-                {!features.login_paris && !loginWithOpenId && <AccountBox viewer={viewer} languageList={languageList}/>}
+                {!features.login_paris && (
+                  <AccountBox
+                    viewer={viewer}
+                    languageList={languageList}
+                    loginWithOpenId={loginWithOpenId}
+                  />
+                )}
               </Tab.Pane>
               <Tab.Pane eventKey="personal-data">
                 <PersonalData viewer={viewer} />

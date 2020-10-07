@@ -231,6 +231,9 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $user->setGoogleAccessToken(null);
         $user->setGplusData(null);
 
+        $user->setOpenId(null);
+        $user->setOpenIdAccessToken(null);
+
         $user->setAddress(null);
         $user->setAddress2(null);
         $user->setZipCode(null);

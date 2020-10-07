@@ -60,6 +60,7 @@ type Props = {|
   newEmailToConfirm?: ?string,
   initialValues: Object,
   currentLanguage: ?string,
+  loginWithOpenId: boolean,
   +dispatch: Dispatch,
   +languageList: Array<LocaleMap>,
   +intl: IntlShape,
@@ -259,6 +260,7 @@ export const AccountForm = ({
   submitting,
   languageList,
   viewer,
+  loginWithOpenId,
 }: Props) => {
   const [showConfirmPasswordModal, setConfirmPasswordModal] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
@@ -333,23 +335,25 @@ export const AccountForm = ({
   const footer = (
     <div className="pl-15">
       <FooterContainer>
-        <Button
-          id="edit-account-profile-button"
-          onClick={() => {
-            if (initialValues.email === newEmail) {
-              dispatch(submit(formName));
-            } else {
-              setConfirmPasswordModal(true);
-            }
-          }}
-          disabled={invalid || submitting}
-          bsStyle="primary">
-          {submitting ? (
-            <FormattedMessage id="global.loading" />
-          ) : (
-            <FormattedMessage id="global.save_modifications" />
-          )}
-        </Button>
+        {!loginWithOpenId && (
+          <Button
+            id="edit-account-profile-button"
+            onClick={() => {
+              if (initialValues.email === newEmail) {
+                dispatch(submit(formName));
+              } else {
+                setConfirmPasswordModal(true);
+              }
+            }}
+            disabled={invalid || submitting}
+            bsStyle="primary">
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.save_modifications" />
+            )}
+          </Button>
+        )}
         <Button
           id="delete-account-profile-button"
           bsStyle="danger"
@@ -368,171 +372,175 @@ export const AccountForm = ({
 
   return (
     <>
-      <Panel.Body>
-        <form onSubmit={handleSubmit} id="profile-account">
-          <AccountContainer>
-            <label className="col-sm-3 control-label" htmlFor="account__email">
-              <FormattedMessage id="global.email" />
-            </label>
-            <Field
-              type="email"
-              component={renderComponent}
-              name="email"
-              disabled={!viewer.hasPassword || viewer.isFranceConnectAccount}
-              id="account__email"
-              divClassName="col-sm-6"
-            />
-            <span className="account-form-hint">
-              {viewer.isFranceConnectAccount && <FormattedMessage id="data-from-FranceConnect" />}
-              <FormattedMessage id="account.your_email_is_not_public" />
-            </span>
-            {_renderLanguageSection()}
-            <ConfirmPasswordModal
-              show={showConfirmPasswordModal}
-              handleClose={() => setConfirmPasswordModal(false)}
-            />
-          </AccountContainer>
-          {viewer.newEmailToConfirm && (
-            <div className="col-sm-6 col-sm-offset-3">
-              <p className="small excerpt">
-                <FormattedHTMLMessage
-                  id="user.confirm.profile_help"
-                  values={{ email: viewer.newEmailToConfirm }}
-                />
-              </p>
-              <p className="small excerpt col-sm-6 col-sm-offset-3">
-                <a href="#resend" onClick={() => resendConfirmation()}>
-                  <FormattedMessage id="user.confirm.resend" />
-                </a>
-                {' · '}
-                <a href="#cancel" onClick={() => cancelEmailChange(dispatch, initialValues.email)}>
-                  <FormattedMessage id="user.confirm.cancel" />
-                </a>
-              </p>
+      {!loginWithOpenId && (
+        <Panel.Body>
+          <form onSubmit={handleSubmit} id="profile-account">
+            <AccountContainer>
+              <label className="col-sm-3 control-label" htmlFor="account__email">
+                <FormattedMessage id="global.email" />
+              </label>
+              <Field
+                type="email"
+                component={renderComponent}
+                name="email"
+                disabled={!viewer.hasPassword || viewer.isFranceConnectAccount}
+                id="account__email"
+                divClassName="col-sm-6"
+              />
+              <span className="account-form-hint">
+                {viewer.isFranceConnectAccount && <FormattedMessage id="data-from-FranceConnect" />}
+                <FormattedMessage id="account.your_email_is_not_public" />
+              </span>
+              {_renderLanguageSection()}
+              <ConfirmPasswordModal
+                show={showConfirmPasswordModal}
+                handleClose={() => setConfirmPasswordModal(false)}
+              />
+            </AccountContainer>
+            {viewer.newEmailToConfirm && (
+              <div className="col-sm-6 col-sm-offset-3">
+                <p className="small excerpt">
+                  <FormattedHTMLMessage
+                    id="user.confirm.profile_help"
+                    values={{ email: viewer.newEmailToConfirm }}
+                  />
+                </p>
+                <p className="small excerpt col-sm-6 col-sm-offset-3">
+                  <a href="#resend" onClick={() => resendConfirmation()}>
+                    <FormattedMessage id="user.confirm.resend" />
+                  </a>
+                  {' · '}
+                  <a
+                    href="#cancel"
+                    onClick={() => cancelEmailChange(dispatch, initialValues.email)}>
+                    <FormattedMessage id="user.confirm.cancel" />
+                  </a>
+                </p>
+              </div>
+            )}
+            <div className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100" id="profile-alert-form">
+              <AlertForm
+                valid={valid}
+                invalid={invalid}
+                errorMessage={error}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
             </div>
-          )}
-          <div className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100" id="profile-alert-form">
-            <AlertForm
-              valid={valid}
-              invalid={invalid}
-              errorMessage={error}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
-            />
-          </div>
-        </form>
-        <SsoGroup>
-          <span className="font-weight-bold">
-            <FormattedMessage id="Sign-in-option" />
-          </span>
-          <span className="clearfix sign-in-method">
-            <FormattedMessage id="Sign-in-method" />
-          </span>
-          <ListGroup className="mt-10">
-            {features.login_franceconnect && (
-              <ListGroupItem className="bgc-fa h-70">
-                <SsoDiv>
-                  <SsoIcon type="franceConnect">
-                    <SocialIcon className="loginIcon" name="franceConnectIcon" />
-                  </SsoIcon>
-                  <span>
-                    <b>FranceConnect</b>
-                    <br />
-                    {viewer.isFranceConnectAccount ? (
-                      <a
-                        href="https://fcp.integ01.dev-franceconnect.fr/traces/"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        <FormattedMessage id="fc-archive-connection" />
-                      </a>
+          </form>
+          <SsoGroup>
+            <span className="font-weight-bold">
+              <FormattedMessage id="Sign-in-option" />
+            </span>
+            <span className="clearfix sign-in-method">
+              <FormattedMessage id="Sign-in-method" />
+            </span>
+            <ListGroup className="mt-10">
+              {features.login_franceconnect && (
+                <ListGroupItem className="bgc-fa h-70">
+                  <SsoDiv>
+                    <SsoIcon type="franceConnect">
+                      <SocialIcon className="loginIcon" name="franceConnectIcon" />
+                    </SsoIcon>
+                    <span>
+                      <b>FranceConnect</b>
+                      <br />
+                      {viewer.isFranceConnectAccount ? (
+                        <a
+                          href="https://fcp.integ01.dev-franceconnect.fr/traces/"
+                          target="_blank"
+                          rel="noopener noreferrer">
+                          <FormattedMessage id="fc-archive-connection" />
+                        </a>
+                      ) : (
+                        <a
+                          href="https://franceconnect.gouv.fr/"
+                          target="_blank"
+                          rel="noopener noreferrer">
+                          Qu’est-ce-que FranceConnect ?
+                        </a>
+                      )}
+                    </span>
+                  </SsoDiv>
+                  <>
+                    {!viewer.isFranceConnectAccount ? (
+                      <AssociateLink
+                        bcd="rgba(3, 136, 204, 0.08)"
+                        color="rgb(0, 140, 214)"
+                        href={getButtonLinkForType(
+                          'franceConnect',
+                          `${window && window.location.origin + window.location.pathname}`,
+                        )}
+                        title="franceConnect">
+                        <FormattedMessage id="global-link" />
+                      </AssociateLink>
                     ) : (
-                      <a
-                        href="https://franceconnect.gouv.fr/"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        Qu’est-ce-que FranceConnect ?
-                      </a>
+                      <>{dissociate('FRANCE_CONNECT', 'FranceConnect')}</>
                     )}
-                  </span>
-                </SsoDiv>
-                <>
-                  {!viewer.isFranceConnectAccount ? (
-                    <AssociateLink
-                      bcd="rgba(3, 136, 204, 0.08)"
-                      color="rgb(0, 140, 214)"
-                      href={getButtonLinkForType(
-                        'franceConnect',
-                        `${window && window.location.origin + window.location.pathname}`,
-                      )}
-                      title="franceConnect">
-                      <FormattedMessage id="global-link" />
-                    </AssociateLink>
-                  ) : (
-                    <>{dissociate('FRANCE_CONNECT', 'FranceConnect')}</>
-                  )}
-                </>
-              </ListGroupItem>
-            )}
-            {features.login_facebook && (
-              <ListGroupItem className="bgc-fa h-70">
-                <SsoDiv>
-                  <SsoIcon type="fb">
-                    <SocialIcon className="loginIcon" name="facebookF" />
-                  </SsoIcon>
-                  <span>
-                    <b>Facebook</b>
-                  </span>
-                </SsoDiv>
-                <>
-                  {!viewer.facebookId ? (
-                    <AssociateLink
-                      bcd="rgba(3, 136, 204, 0.08)"
-                      color="rgb(0, 140, 214)"
-                      href={getButtonLinkForType(
-                        'facebook',
-                        `${window && window.location.origin + window.location.pathname}`,
-                      )}
-                      title="facebook">
-                      <FormattedMessage id="global-link" />
-                    </AssociateLink>
-                  ) : (
-                    <>{dissociate('FACEBOOK', 'Facebook')}</>
-                  )}
-                </>
-              </ListGroupItem>
-            )}
-            {features.login_gplus && (
-              <ListGroupItem className="bgc-fa h-70">
-                <SsoDiv>
-                  <SsoIcon type="google">
-                    <SocialIcon className="loginIcon" name="googleColored" />
-                  </SsoIcon>
-                  <span>
-                    <b>Google</b>
-                  </span>
-                </SsoDiv>
-                <>
-                  {!viewer.googleId ? (
-                    <AssociateLink
-                      bcd="rgba(3, 136, 204, 0.08)"
-                      color="rgb(0, 140, 214)"
-                      href={getButtonLinkForType(
-                        'google',
-                        `${window && window.location.origin + window.location.pathname}`,
-                      )}
-                      title="google">
-                      <FormattedMessage id="global-link" />
-                    </AssociateLink>
-                  ) : (
-                    <>{dissociate('GOOGLE', 'Google')}</>
-                  )}
-                </>
-              </ListGroupItem>
-            )}
-          </ListGroup>
-        </SsoGroup>
-      </Panel.Body>
+                  </>
+                </ListGroupItem>
+              )}
+              {features.login_facebook && (
+                <ListGroupItem className="bgc-fa h-70">
+                  <SsoDiv>
+                    <SsoIcon type="fb">
+                      <SocialIcon className="loginIcon" name="facebookF" />
+                    </SsoIcon>
+                    <span>
+                      <b>Facebook</b>
+                    </span>
+                  </SsoDiv>
+                  <>
+                    {!viewer.facebookId ? (
+                      <AssociateLink
+                        bcd="rgba(3, 136, 204, 0.08)"
+                        color="rgb(0, 140, 214)"
+                        href={getButtonLinkForType(
+                          'facebook',
+                          `${window && window.location.origin + window.location.pathname}`,
+                        )}
+                        title="facebook">
+                        <FormattedMessage id="global-link" />
+                      </AssociateLink>
+                    ) : (
+                      <>{dissociate('FACEBOOK', 'Facebook')}</>
+                    )}
+                  </>
+                </ListGroupItem>
+              )}
+              {features.login_gplus && (
+                <ListGroupItem className="bgc-fa h-70">
+                  <SsoDiv>
+                    <SsoIcon type="google">
+                      <SocialIcon className="loginIcon" name="googleColored" />
+                    </SsoIcon>
+                    <span>
+                      <b>Google</b>
+                    </span>
+                  </SsoDiv>
+                  <>
+                    {!viewer.googleId ? (
+                      <AssociateLink
+                        bcd="rgba(3, 136, 204, 0.08)"
+                        color="rgb(0, 140, 214)"
+                        href={getButtonLinkForType(
+                          'google',
+                          `${window && window.location.origin + window.location.pathname}`,
+                        )}
+                        title="google">
+                        <FormattedMessage id="global-link" />
+                      </AssociateLink>
+                    ) : (
+                      <>{dissociate('GOOGLE', 'Google')}</>
+                    )}
+                  </>
+                </ListGroupItem>
+              )}
+            </ListGroup>
+          </SsoGroup>
+        </Panel.Body>
+      )}
       <Panel.Footer>{footer}</Panel.Footer>
     </>
   );

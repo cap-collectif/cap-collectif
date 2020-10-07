@@ -28,6 +28,7 @@ describe('<AccountForm />', () => {
       { translationKey: 'english', code: 'en-GB' },
     ],
     viewer: defaultViewer,
+    loginWithOpenId: false,
     intl: intlMock,
     dispatch: jest.fn(),
     handleSubmit: jest.fn(),
@@ -67,6 +68,13 @@ describe('<AccountForm />', () => {
 
   it('should render a form with an info if a confirmation email has been resent', () => {
     const wrapper = shallow(<AccountForm {...props} newEmailToConfirm="new-email@test.com" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render with button to delete account only', () => {
+    const wrapper = shallow(
+      <AccountForm {...props} loginWithOpenId newEmailToConfirm="new-email@test.com" />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

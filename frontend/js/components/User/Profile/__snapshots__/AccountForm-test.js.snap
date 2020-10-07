@@ -683,3 +683,50 @@ exports[`<AccountForm /> should render a form with information about new email 1
   </PanelFooter>
 </Fragment>
 `;
+
+exports[`<AccountForm /> should render with button to delete account only 1`] = `
+<Fragment>
+  <PanelFooter
+    bsClass="panel"
+  >
+    <div
+      className="pl-15"
+    >
+      <AccountForm__FooterContainer>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          className="ml-15"
+          disabled={false}
+          id="delete-account-profile-button"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="delete-account"
+            values={Object {}}
+          />
+        </Button>
+      </AccountForm__FooterContainer>
+      <Relay(DeleteAccountModal)
+        handleClose={[Function]}
+        show={false}
+        viewer={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "email": "initial-email@gmail.fr",
+            "facebookId": null,
+            "googleId": null,
+            "hasPassword": true,
+            "isFranceConnectAccount": false,
+            "locale": "fr-FR",
+            "newEmailToConfirm": null,
+          }
+        }
+      />
+    </div>
+  </PanelFooter>
+</Fragment>
+`;

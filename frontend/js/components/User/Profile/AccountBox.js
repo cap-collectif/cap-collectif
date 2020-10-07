@@ -14,10 +14,11 @@ type Props = {|
   viewer: AccountBox_viewer,
   dispatch: Dispatch,
   invalid: boolean,
+  loginWithOpenId: boolean,
   +languageList: Array<LocaleMap>,
 |};
 
-export const AccountBox = ({ viewer, languageList }: Props) => {
+export const AccountBox = ({ viewer, languageList, loginWithOpenId }: Props) => {
   return (
     <React.Fragment>
       <Panel>
@@ -30,7 +31,11 @@ export const AccountBox = ({ viewer, languageList }: Props) => {
             </div>
           </Panel.Title>
         </Panel.Heading>
-        <AccountForm languageList={languageList} viewer={viewer} />
+        <AccountForm
+          languageList={languageList}
+          viewer={viewer}
+          loginWithOpenId={loginWithOpenId}
+        />
       </Panel>
     </React.Fragment>
   );

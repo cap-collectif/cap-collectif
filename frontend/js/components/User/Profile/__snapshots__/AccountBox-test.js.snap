@@ -36,6 +36,7 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
           },
         ]
       }
+      loginWithOpenId={false}
       viewer={
         Object {
           "$fragmentRefs": null,
@@ -83,6 +84,7 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
           },
         ]
       }
+      loginWithOpenId={false}
       viewer={
         Object {
           "$fragmentRefs": null,
@@ -130,6 +132,7 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
           },
         ]
       }
+      loginWithOpenId={false}
       viewer={
         Object {
           "$fragmentRefs": null,

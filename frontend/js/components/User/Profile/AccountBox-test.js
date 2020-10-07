@@ -16,6 +16,7 @@ describe('<AccountBox />', () => {
       { translationKey: 'english', code: 'en-GB' },
     ],
     dispatch: jest.fn(),
+    loginWithOpenId: false,
   };
 
   it('should render a disabled button when the form is invalid', () => {
