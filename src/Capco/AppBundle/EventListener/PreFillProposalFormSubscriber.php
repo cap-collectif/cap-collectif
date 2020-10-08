@@ -6,7 +6,6 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\APIEnterpriseTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver;
-use Capco\AppBundle\Helper\EnvHelper;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -34,6 +33,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
     private $indexEntrepriseFiscalReg;
     private $indexEntrepriseSocialReg;
     private $indexEntrepriseKbis;
+    private $indexLocalOrGlobal;
 
     public function __construct(
         RedisCache $cache,
@@ -83,12 +83,12 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         $values = $event->getData();
 
         // If it's not answered, we have nothing to do.
-        if (!$values['responses'][1]['value']) {
+        if (!$values['responses'][$this->indexLocalOrGlobal]['value']) {
             return;
         }
 
         $projectType = APIEnterpriseTypeResolver::getAPIEnterpriseProjectTypeFromString(
-            json_decode($values['responses'][1]['value'], true)['labels'][0]
+            json_decode($values['responses'][$this->indexLocalOrGlobal]['value'], true)['labels'][0]
         );
 
         // If it's not a local project, we have nothing to do.
@@ -258,9 +258,11 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         }
         $proposalForm = $proposal->getProposalForm();
 
-        $env = EnvHelper::get('SYMFONY_INSTANCE_NAME');
+        // Fixtures dev
+        // https://capco.dev/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee
         if ('proposalformIdf' === $proposalForm->getId()) {
             $this->shouldPreFillAPIEntreprise = true;
+            $this->indexLocalOrGlobal = 1;
             $this->indexTypeQuestion = 22;
             $this->indexRnaQuestion = 35;
             $this->indexNoRnaQuestion = 34;
@@ -278,19 +280,19 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             $this->indexEntrepriseSocialReg = 58;
             $this->indexEntrepriseKbis = 60;
         }
+        // Session 1
+        // https://budgetparticipatif.smartidf.services/project/le-budget-participatif-ecologique/collect/depot-des-projets
         if (
-            'idf-bp-dedicated' === $env &&
             'd6b98b9b-5e3c-11ea-8fab-0242ac110004' === $proposalForm->getId()
         ) {
             $this->shouldPreFillAPIEntreprise = true;
+            $this->indexLocalOrGlobal = 1;
             $this->indexTypeQuestion = 20;
             $this->indexRnaQuestion = 33;
             $this->indexNoRnaQuestion = 32;
             $this->siretIndexes = [22, 49, 61];
             $this->indexOrgPubSiren = 66;
-
             $this->indexAssoSiren = 27;
-
             $this->indexEntrepriseSiren = 54;
             $this->indexEntrepriseTurnonver = 57;
             $this->indexAssoSiretcompositionCA = 28;
@@ -301,6 +303,32 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
             $this->indexEntrepriseFiscalReg = 55;
             $this->indexEntrepriseSocialReg = 56;
             $this->indexEntrepriseKbis = 58;
+        }
+        // Session 2
+        if (
+            '30f7d752-087f-11eb-8305-0242ac110003' === $proposalForm->getId()
+        ) {
+            $this->shouldPreFillAPIEntreprise = true;
+            $this->indexLocalOrGlobal = 2;
+            $this->indexTypeQuestion = 22;
+            $this->siretIndexes = [24, 51, 63];
+            // Asso
+            $this->indexAssoSiren = 29;
+            $this->indexRnaQuestion = 35;
+            $this->indexNoRnaQuestion = 34;
+            $this->indexAssoSiretcompositionCA = 30;
+            $this->indexAssoSiretStatus = 31;
+            $this->indexAssoRnacompositionCA = 40;
+            $this->indexAssoRnaPrefectureReceiptConfirm = 41;
+            $this->indexAssoRnaStatus = 43;
+            // Entreprise
+            $this->indexEntrepriseSiren = 56;
+            $this->indexEntrepriseFiscalReg = 57;
+            $this->indexEntrepriseSocialReg = 58;
+            $this->indexEntrepriseTurnonver = 59;
+            $this->indexEntrepriseKbis = 60;
+            // Org Pub
+            $this->indexOrgPubSiren = 68;
         }
     }
 

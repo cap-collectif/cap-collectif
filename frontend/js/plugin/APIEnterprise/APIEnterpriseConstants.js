@@ -8,6 +8,7 @@ import type { Questions } from '~/components/Form/Form.type';
 import colors from '~/utils/colors';
 
 export const ID_BP_1 = 'd6b98b9b-5e3c-11ea-8fab-0242ac110004';
+export const ID_BP_2 = '30f7d752-087f-11eb-8305-0242ac110003';
 export const ID_DEV = 'proposalformIdf';
 
 export const API_ENTERPRISE_ENTER = 'ENTER';
@@ -20,13 +21,13 @@ export const API_ENTERPRISE_DOC_ENTER = 'DOC_ENTER';
 export const API_ENTERPRISE_DOC_PUB_ORGA = 'DOC_PUB_ORGA';
 
 export const ASSOC_SIRET_BASE_QUESTIONS = (id: string): Array<number> =>
-  id === ID_DEV ? [25, 26, 27, 28] : [23, 24, 25, 26];
+  id === ID_DEV || id === ID_BP_2 ? [25, 26, 27, 28] : [23, 24, 25, 26];
 export const ASSOC_RNA_BASE_QUESTIONS = (id: string): Array<number> =>
-  id === ID_DEV ? [36, 37, 38, 39] : [34, 35, 36, 37];
+  id === ID_DEV || id === ID_BP_2 ? [36, 37, 38, 39] : [34, 35, 36, 37];
 export const ENTER_BASE_QUESTIONS = (id: string): Array<number> =>
-  id === ID_DEV ? [52, 53, 54, 55] : [50, 51, 52, 53];
+  id === ID_DEV || id === ID_BP_2 ? [52, 53, 54, 55] : [50, 51, 52, 53];
 export const PUB_ORGA_BASE_QUESTIONS = (id: string): Array<number> =>
-  id === ID_DEV ? [64, 65, 66, 67] : [62, 63, 64, 65];
+  id === ID_DEV || id === ID_BP_2 ? [64, 65, 66, 67] : [62, 63, 64, 65];
 export const BASE_QUESTIONS = (id: string): Array<number> => [
   ...ASSOC_SIRET_BASE_QUESTIONS(id),
   ...ASSOC_RNA_BASE_QUESTIONS(id),
@@ -34,12 +35,20 @@ export const BASE_QUESTIONS = (id: string): Array<number> => [
   ...PUB_ORGA_BASE_QUESTIONS(id),
 ];
 
-const PUB_ORGA_SIREN = (id: string) => (id === ID_DEV ? 68 : 66);
-const ASSOC_SIRET_SIREN = (id: string) => (id === ID_DEV ? 29 : 27);
-const ENTER_SIREN = (id: string) => (id === ID_DEV ? 56 : 54);
-const ENTER_TURNOVER = (id: string) => (id === ID_DEV ? 59 : 57);
-const ASSO_AVAILABLE_CA = (id: string) => (id === ID_DEV ? 30 : 28);
-const ASSO_AVAILABLE_STATUS = (id: string) => (id === ID_DEV ? 31 : 29);
+const PUB_ORGA_SIREN = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 68 : 66);
+const ASSOC_SIRET_SIREN = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 29 : 27);
+const ENTER_SIREN = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 56 : 54);
+const ENTER_TURNOVER = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 59 : 57);
+const ASSO_AVAILABLE_CA = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 30 : 28);
+const ASSO_AVAILABLE_STATUS = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 31 : 29);
+
+const ENTER_DISC_REG = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 57 : 55);
+const ENTER_SOCIAL_REG = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 58 : 56);
+const ENTER_KBIS = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 60 : 58);
+
+const ASSO_RNA_CA = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 40 : 38);
+const ASSO_RNA_PREF_CONFIRM = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 41 : 39);
+const ASSO_RNA_STATUS = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 43 : 41);
 
 const isFieldModificableIfNoResult = (questionNumber: number, formId: string): boolean => {
   return BASE_QUESTIONS(formId).includes(questionNumber);
@@ -61,6 +70,18 @@ const dispatchFromApi = (
     id: 'api.entreprise.no.result',
   })}</span>`;
 
+  const negativeResultMessageKbis = `<span style='color: ${
+    colors.dangerColor
+  }'>${intl.formatMessage({
+    id: 'api.entreprise.no.result.kbis',
+  })}</span>`;
+
+  const negativeResultMessageAttesation = `<span style='color: ${
+    colors.dangerColor
+  }'>${intl.formatMessage({
+    id: 'api.entreprise.no.result.attestation',
+  })}</span>`;
+
   arr.forEach((element: { responseNumber?: number, questionNumber?: number, value: ?string }) => {
     const { responseNumber, value, questionNumber } = element;
     if (questionNumber != null && typeof questionNumber !== 'undefined') {
@@ -70,9 +91,18 @@ const dispatchFromApi = (
         commitLocalUpdate(environment, store => {
           const question = store.get(questions[questionNumber].id);
           if (question) {
+            let message = negativeResultMessage;
+            // TODO fixme
+            if (questionNumber > 100) {
+              message = negativeResultMessageKbis;
+            }
+            // TODO fixme
+            if (questionNumber > 200) {
+              message = negativeResultMessageAttesation;
+            }
             question.setValue(false, 'hidden');
             question.setValue('', 'helpText');
-            question.setValue(negativeResultMessage, 'description');
+            question.setValue(message, 'description');
           }
         });
       } else {
@@ -226,10 +256,6 @@ export const dispatchValuesToForm = (
     { questionNumber: ASSO_AVAILABLE_STATUS(formId), value: obj.availableStatus },
   ];
 
-  const ASSO_RNA_CA = (id: string) => (id === ID_DEV ? 40 : 38);
-  const ASSO_RNA_PREF_CONFIRM = (id: string) => (id === ID_DEV ? 41 : 39);
-  const ASSO_RNA_STATUS = (id: string) => (id === ID_DEV ? 43 : 41);
-
   const docAssocRNAMapping: Array<{
     responseNumber?: number,
     questionNumber?: number,
@@ -239,9 +265,6 @@ export const dispatchValuesToForm = (
     { questionNumber: ASSO_RNA_PREF_CONFIRM(formId), value: obj.availablePrefectureReceiptConfirm },
     { questionNumber: ASSO_RNA_STATUS(formId), value: obj.availableStatus },
   ];
-  const ENTER_DISC_REG = (id: string) => (id === ID_DEV ? 57 : 55);
-  const ENTER_SOCIAL_REG = (id: string) => (id === ID_DEV ? 58 : 56);
-  const ENTER_KBIS = (id: string) => (id === ID_DEV ? 60 : 58);
 
   const docEnterMapping: Array<{ responseNumber?: number, questionNumber?: number, value: any }> = [
     { questionNumber: ENTER_DISC_REG(formId), value: obj.availableFiscalRegulationAttestation },

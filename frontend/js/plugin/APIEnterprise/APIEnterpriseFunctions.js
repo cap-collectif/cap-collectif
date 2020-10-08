@@ -4,6 +4,7 @@ import { type IntlShape } from 'react-intl';
 import { checkRNA, checkSiret } from '~/services/Validator';
 import environment from '~/createRelayEnvironment';
 import colors from '~/utils/colors';
+import { baseUrl } from '~/config';
 import {
   API_ENTERPRISE_ASSOC,
   API_ENTERPRISE_ASSOC_DOC,
@@ -25,6 +26,7 @@ import {
   PUB_ORGA_BASE_QUESTIONS,
   ID_DEV,
   ID_BP_1,
+  ID_BP_2,
 } from '~/plugin/APIEnterprise/APIEnterpriseConstants';
 import type { Dispatch } from '~/types';
 import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type';
@@ -34,11 +36,12 @@ import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.typ
  *
  * Here in development we have 2 questions more than in prod.
  */
-const INDEX_TYPE_QUESTION = (id: string): number => (id === ID_DEV ? 22 : 20);
-const INDEX_RNA_QUESTION = (id: string): number => (id === ID_DEV ? 35 : 33);
-const INDEX_ASSOC_SIRET_QUESTION = (id: string): number => (id === ID_DEV ? 24 : 22);
-const INDEX_ENTER_QUESTION = (id: string): number => (id === ID_DEV ? 51 : 49);
-const INDEX_PUB_ORGA_QUESTION = (id: string): number => (id === ID_DEV ? 63 : 61);
+const INDEX_TYPE_QUESTION = (id: string): number => (id === ID_DEV || id === ID_BP_2 ? 22 : 20);
+const INDEX_RNA_QUESTION = (id: string): number => (id === ID_DEV || id === ID_BP_2 ? 35 : 33);
+const INDEX_ASSOC_SIRET_QUESTION = (id: string): number =>
+  id === ID_DEV || id === ID_BP_2 ? 24 : 22;
+const INDEX_ENTER_QUESTION = (id: string): number => (id === ID_DEV || id === ID_BP_2 ? 51 : 49);
+const INDEX_PUB_ORGA_QUESTION = (id: string): number => (id === ID_DEV || id === ID_BP_2 ? 63 : 61);
 
 export const getApiEnterpriseType = (formId: string): ?string => {
   const type: ?string = $(
@@ -267,11 +270,7 @@ const makeRnaQueries = (
   });
 };
 
-export const TRIGGER_FOR: Array<string> = [
-  'idf-bp-dedicated',
-  'dev',
-  'idf-api-entreprise-multiple-forms',
-];
+export const TRIGGER_FOR: Array<string> = ['idf-bp-dedicated', 'dev', 'qa-idf-bp-session-2'];
 
 const getInvisibleQuestionIndexesAccordingToType = (
   defaultToHideQuestions: Array<number>,
@@ -379,8 +378,14 @@ export const triggerAutocompleteAPIEnterprise = (
   if (event && event.currentTarget) {
     // Ugly hack based on questions length
     // to avoid passing id as props, in RenderResponses.
-    const formId = questions.length === 70 ? ID_DEV : ID_BP_1;
-    console.log('Questions length:', questions.length);
+    let formId = ID_DEV;
+    if (
+      baseUrl === 'https://budgetparticipatif.smartidf.services' ||
+      baseUrl === 'https://qa-idf-bp-session-2.cap-collectif.com'
+    ) {
+      formId = questions.length === 70 ? ID_BP_2 : ID_BP_1;
+    }
+    console.log('Guessed form id :', formId);
     if (event.currentTarget.getAttribute('type') === 'siret') {
       const text: ?string = event.currentTarget.value.replace(/\s/g, '');
       const apiEnterpriseType = getApiEnterpriseType(formId);
