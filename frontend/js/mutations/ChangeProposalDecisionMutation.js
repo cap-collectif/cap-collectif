@@ -14,7 +14,18 @@ const mutation = graphql`
       proposal {
         id
         ...ProposalPageBlog_proposal
-        ...ProposalPageLastNews_proposal
+        news {
+          totalCount
+          edges {
+            node {
+              ...AnswerBody_answer
+              title
+              authors {
+                vip
+              }
+            }
+          }
+        }
         decision {
           state
           estimatedCost

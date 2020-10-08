@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { useResize } from '@liinkiing/react-hooks';
 import styled, { type StyledComponent } from 'styled-components';
 import memoize from 'lodash/memoize';
 import {
@@ -22,7 +21,6 @@ import type {
 import colors from '~/utils/colors';
 import { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { GlobalState, Dispatch } from '~/types';
-import { bootstrapGrid } from '~/utils/sizes';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
 import renderResponses from '~/components/Form/RenderResponses';
@@ -37,8 +35,8 @@ import { TYPE_FORM } from '~/constants/FormConstants';
 
 const memoizeAvailableQuestions: any = memoize(() => {});
 
-export const Validation: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
-  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
+export const Validation: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  width: 370px;
   background: ${colors.grayF4};
   height: 365px;
   padding: 20px;
@@ -54,7 +52,6 @@ export const Validation: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElemen
 `;
 
 export const AnalysisForm: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  margin-top: 100px;
   padding: 20px;
   background: ${colors.white};
 `;
@@ -151,8 +148,6 @@ export const ProposalAnalysisFormPanel = ({
 }: Props) => {
   const intl = useIntl();
   const [status, setStatus] = useState(initialStatus);
-  const { width }: { width: number } = useResize();
-  const isLarge = width < bootstrapGrid.mdMax;
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
     'availableQuestions',
   );
@@ -175,7 +170,7 @@ export const ProposalAnalysisFormPanel = ({
             disabled={disabled}
           />
         </AnalysisForm>
-        <Validation isLarge={isLarge}>
+        <Validation>
           <Field
             disabled={disabled}
             name="comment"

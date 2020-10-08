@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
 
-    > li {
+    >li {
         display: flex;
     }
 }
@@ -170,7 +170,7 @@
     background-color: $white;
 }
 
-.proposals-user-votes__draggable-item.item-in-portal > div {
+.proposals-user-votes__draggable-item.item-in-portal>div {
     border: 1px solid $dark-gray;
 
     .cap-android-menu {
@@ -226,13 +226,16 @@
     margin: auto 0;
     width: 100%;
 
-    .form-group, label {
+    .form-group,
+    label {
         margin-bottom: 0;
     }
 }
 
 .proposals-user-votes__title {
-    &, &:hover {
+
+    &,
+    &:hover {
         color: $dark-text;
         font-size: 17px;
         font-weight: 500;
@@ -316,7 +319,7 @@
             margin-right: 10px;
         }
 
-        & > .container .navbar-brand {
+        &>.container .navbar-brand {
             margin-left: 15px !important;
         }
 
@@ -357,7 +360,7 @@
             width: 100%;
         }
     }
-    
+
 
 }
 
@@ -392,7 +395,7 @@
     }
 }
 
-.proposal-vote__widget > .container .navbar-brand {
+.proposal-vote__widget>.container .navbar-brand {
     margin-left: 0;
 }
 
@@ -459,20 +462,16 @@
     padding-top: 20px;
 }
 
-.proposal__last__news__title {
-    margin-top: 0;
-}
-
 #proposal-page-tabs-pane-content {
-    .block + .proposal__content {
-        .block:first-child > h3 {
+    .block+.proposal__content {
+        .block:first-child>h3 {
             margin-top: 20px;
         }
     }
 }
 
 .proposal__content .block {
-    > .actions {
+    >.actions {
         margin-bottom: 20px;
     }
 
@@ -480,7 +479,8 @@
         height: 255px;
     }
 
-    &:first-child > h3, &:first-child > div > h3 {
+    &:first-child>h3,
+    &:first-child>div>h3 {
         margin-top: 0;
     }
 }

@@ -3,9 +3,9 @@
 exports[`<UserBlockProfile /> renders correctly 1`] = `
 <Fragment>
   <UserBlockProfile__ProfileInfo>
-    <img
-      alt="admin profile"
-      src="/booba.png"
+    <DefaultAvatar
+      className="img-circle avatar"
+      size={60}
     />
     <div>
       Booba

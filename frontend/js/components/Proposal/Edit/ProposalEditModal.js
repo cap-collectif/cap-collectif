@@ -35,6 +35,7 @@ const ModalProposalEditContainer: StyledComponent<{}, {}, typeof Modal> = styled
 export class ProposalEditModal extends React.Component<Props> {
   render() {
     const { invalid, proposal, show, pristine, submitting, dispatch, intl } = this.props;
+    if (!proposal) return null;
     return (
       <ModalProposalEditContainer
         animation={false}

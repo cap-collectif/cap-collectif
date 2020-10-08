@@ -16552,6 +16552,11 @@ react-truncate@^2.1.5:
   resolved "https://registry.yarnpkg.com/react-truncate/-/react-truncate-2.4.0.tgz#3cf5ff09ab86f93e3c078d359f4de6d75aa60510"
   integrity sha512-3QW11/COYwi6iPUaunUhl06DW5NJBJD1WkmxW5YxqqUu6kvP+msB3jfoLg8WRbu57JqgebjVW8Lknw6T5/QZdA==
 
+react-use-scroll-position@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-use-scroll-position/-/react-use-scroll-position-2.0.0.tgz#c5bb29f751d126ff1c0306c28d7055ce0d4ef034"
+  integrity sha512-nQaWMPElzI8aN1vYTnqy0xV17pEhItgyWUBOtdmMEqsbY1mV3+iZMyTeAJ+oegsQIugYxBU4LnV2NosynN+KKA==
+
 react@15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
@@ -16718,6 +16723,11 @@ readmore-js@^2.2.1:
   integrity sha512-hbPP0nQpYYkAywCEZ8ozHivvhWyHic37KJ2IXrHES4qzjp0+nmw8R33MeyMAtXBZfXX4Es8cpd5JBVf9qj47+Q==
   dependencies:
     jquery ">2.1.4"
+
+readmore@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/readmore/-/readmore-0.0.2.tgz#c895eb542186d2dc7020e4fd3efdf3bf1eeb8a00"
+  integrity sha1-yJXrVCGG0txwIOT9Pv3zvx7rigA=
 
 realpath-native@^1.1.0:
   version "1.1.0"

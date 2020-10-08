@@ -85,12 +85,11 @@ type ProposalStep = {
   },
 };
 
-export const isInterpellationContextFromProposal = (proposal: Proposal): boolean => {
+export const isInterpellationContextFromProposal = (proposal: ?Proposal): boolean => {
   return !!(
-    proposal.project &&
-    proposal.project.type &&
-    proposal.form.isProposalForm &&
-    proposal.project.type.title === 'project.types.interpellation'
+    proposal?.project?.type &&
+    proposal?.form.isProposalForm &&
+    proposal?.project.type.title === 'project.types.interpellation'
   );
 };
 

@@ -6,6 +6,7 @@ exports[`<ProposalDetailLikers /> should render a <Modal /> when proposal has li
 <Fragment>
   <Relay(ProposalDetailLikersLabel)
     componentClass="a"
+    newDesign={false}
     onClick={[Function]}
     proposal={
       Object {
@@ -49,6 +50,7 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
 <Fragment>
   <Relay(ProposalDetailLikersLabel)
     componentClass="div"
+    newDesign={false}
     onClick={[Function]}
     proposal={
       Object {

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageAdvancement /> should render correctly 1`] = `
+<ProposalPagestyle__Card
+  id="ProposalPageAdvancement"
+>
+  <ProposalPageAdvancement__ProposalDetailAdvancementContainer>
+    <h4>
+      <FormattedMessage
+        id="proposal.detail.advancement"
+        values={Object {}}
+      />
+    </h4>
+    <Relay(ProposalDetailAdvancement)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
+    />
+  </ProposalPageAdvancement__ProposalDetailAdvancementContainer>
+</ProposalPagestyle__Card>
+`;

@@ -5,8 +5,9 @@ exports[`<ProposalDetailAdvancementStep /> can render a step with status 1`] = `
   <div
     style={
       Object {
-        "paddingLeft": "13px",
-        "paddingTop": "10px",
+        "marginLeft": "9px",
+        "paddingLeft": "8px",
+        "paddingTop": "5px",
       }
     }
   >
@@ -17,18 +18,19 @@ exports[`<ProposalDetailAdvancementStep /> can render a step with status 1`] = `
           "borderRadius": "50%",
           "color": "#767676",
           "float": "left",
-          "height": "12px",
+          "height": "16px",
           "lineHeight": "28px",
           "marginLeft": "-18px",
           "marginTop": "-10px",
           "textAlign": "center",
-          "width": "12px",
+          "width": "16px",
         }
       }
     />
     <div
       style={
         Object {
+          "marginLeft": "15px",
           "marginTop": "-15px",
         }
       }
@@ -48,6 +50,7 @@ exports[`<ProposalDetailAdvancementStep /> can render a step with status 1`] = `
         bsStyle="success"
         style={
           Object {
+            "borderRadius": "15px",
             "marginTop": "5px",
           }
         }
@@ -65,8 +68,9 @@ exports[`<ProposalDetailAdvancementStep /> can render a step without status 1`] 
   <div
     style={
       Object {
-        "paddingLeft": "13px",
-        "paddingTop": "10px",
+        "marginLeft": "9px",
+        "paddingLeft": "8px",
+        "paddingTop": "5px",
       }
     }
   >
@@ -77,18 +81,19 @@ exports[`<ProposalDetailAdvancementStep /> can render a step without status 1`] 
           "borderRadius": "50%",
           "color": "#767676",
           "float": "left",
-          "height": "12px",
+          "height": "16px",
           "lineHeight": "28px",
           "marginLeft": "-18px",
           "marginTop": "-10px",
           "textAlign": "center",
-          "width": "12px",
+          "width": "16px",
         }
       }
     />
     <div
       style={
         Object {
+          "marginLeft": "15px",
           "marginTop": "-15px",
         }
       }

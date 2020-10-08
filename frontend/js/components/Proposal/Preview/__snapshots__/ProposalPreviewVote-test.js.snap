@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
-<span>
+<ProposalPreviewVote__Container>
   <Relay(ProposalVoteButtonWrapperFragment)
     className="proposal__preview__vote mr-15"
     id="proposal-vote-btn-1"
@@ -20,5 +20,5 @@ exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
     }
     viewer={null}
   />
-</span>
+</ProposalPreviewVote__Container>
 `;

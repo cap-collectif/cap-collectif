@@ -5,13 +5,7 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
   home={true}
   id="proposal_analysis_panel"
 >
-  <div
-    style={
-      Object {
-        "width": "50%",
-      }
-    }
-  >
+  <div>
     <ProposalAnalysisPanel__Panel>
       <ProposalAnalysisPanel__PanelSection
         border={true}

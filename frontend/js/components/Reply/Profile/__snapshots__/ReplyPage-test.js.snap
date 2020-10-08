@@ -230,6 +230,13 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
                                       "name": "url",
                                       "storageKey": null,
                                     },
@@ -272,13 +279,6 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                                       "name": "displayName",
                                       "storageKey": null,
                                     },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -300,7 +300,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3d2f3103297560e94414780b83cd5d1c",
+          "cacheID": "2d5a673d1b2ac1796f228422e623cce6",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",
@@ -348,6 +348,7 @@ fragment Reply_reply_39ngnn on Reply {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {
@@ -605,6 +606,13 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
                                       "name": "url",
                                       "storageKey": null,
                                     },
@@ -647,13 +655,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                                       "name": "displayName",
                                       "storageKey": null,
                                     },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -675,7 +676,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3d2f3103297560e94414780b83cd5d1c",
+          "cacheID": "2d5a673d1b2ac1796f228422e623cce6",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",
@@ -723,6 +724,7 @@ fragment Reply_reply_39ngnn on Reply {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {
@@ -980,6 +982,13 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
                                       "name": "url",
                                       "storageKey": null,
                                     },
@@ -1022,13 +1031,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                                       "name": "displayName",
                                       "storageKey": null,
                                     },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -1050,7 +1052,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
           ],
         },
         "params": Object {
-          "cacheID": "3d2f3103297560e94414780b83cd5d1c",
+          "cacheID": "2d5a673d1b2ac1796f228422e623cce6",
           "id": null,
           "metadata": Object {},
           "name": "ReplyPageQuery",
@@ -1098,6 +1100,7 @@ fragment Reply_reply_39ngnn on Reply {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {

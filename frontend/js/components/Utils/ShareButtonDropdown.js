@@ -16,6 +16,7 @@ type Props = {|
   bsSize?: BsSize,
   outline?: boolean,
   grey?: boolean,
+  disabled?: boolean,
 |};
 
 type State = {|
@@ -116,12 +117,18 @@ class ShareButtonDropdown extends React.Component<Props, State> {
   };
 
   render() {
-    const { enabled, id, className, bsSize, outline, grey } = this.props;
+    const { enabled, id, className, bsSize, outline, grey, disabled } = this.props;
     if (!enabled) {
       return null;
     }
     return (
-      <ShareButton id={id} bsSize={bsSize} className={className} outline={outline} grey={grey}>
+      <ShareButton
+        id={id}
+        bsSize={bsSize}
+        className={className}
+        outline={outline}
+        grey={grey}
+        disabled={disabled}>
         <ShareButtonAction action="mail" onSelect={this.mail} />
         <ShareButtonAction action="facebook" onSelect={this.facebook} />
         <ShareButtonAction action="twitter" onSelect={this.twitter} />

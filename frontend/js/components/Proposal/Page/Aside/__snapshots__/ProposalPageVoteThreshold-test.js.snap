@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshold 1`] = `
+<ProposalPagestyle__Card
+  id="ProposalPageVoteThreshold"
+>
+  <ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
+    <h4>
+      <FormattedMessage
+        id="proposal.vote.threshold.title"
+        values={Object {}}
+      />
+    </h4>
+    <p>
+      <ProposalPagestyle__CategoryCircledIcon
+        paddingLeft={6}
+        paddingTop={0}
+        size={24}
+      >
+        <Icon
+          color="#6c757d"
+          name="like"
+          size={14}
+        />
+      </ProposalPagestyle__CategoryCircledIcon>
+      <FormattedMessage
+        id="proposal.vote.count"
+        values={
+          Object {
+            "num": 30,
+          }
+        }
+      />
+    </p>
+    <ProgressBar
+      active={false}
+      bsClass="progress-bar"
+      bsStyle="success"
+      isChild={false}
+      label="30%"
+      max={100}
+      min={0}
+      now={30}
+      srOnly={false}
+      striped={false}
+    />
+    <div>
+      <FormattedMessage
+        id="proposal.vote.threshold.progress"
+        values={
+          Object {
+            "max": 100,
+            "num": 70,
+          }
+        }
+      />
+    </div>
+  </ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
+</ProposalPagestyle__Card>
+`;
+
+exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshold reached 1`] = `
+<ProposalPagestyle__Card
+  id="ProposalPageVoteThreshold"
+>
+  <ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
+    <h4>
+      <FormattedMessage
+        id="proposal.vote.threshold.reached"
+        values={Object {}}
+      />
+    </h4>
+    <p>
+      <ProposalPagestyle__CategoryCircledIcon
+        paddingLeft={6}
+        paddingTop={0}
+        size={24}
+      >
+        <Icon
+          color="#6c757d"
+          name="like"
+          size={14}
+        />
+      </ProposalPagestyle__CategoryCircledIcon>
+      <FormattedMessage
+        id="proposal.vote.count"
+        values={
+          Object {
+            "num": 30,
+          }
+        }
+      />
+    </p>
+    <ProgressBar
+      active={false}
+      bsClass="progress-bar"
+      bsStyle="success"
+      isChild={false}
+      label="150%"
+      max={150}
+      min={0}
+      now={150}
+      srOnly={false}
+      striped={false}
+    />
+    <div>
+      <FormattedMessage
+        id="proposal.vote.threshold.progress_reached"
+        values={
+          Object {
+            "max": 20,
+            "num": 30,
+          }
+        }
+      />
+    </div>
+  </ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
+</ProposalPagestyle__Card>
+`;

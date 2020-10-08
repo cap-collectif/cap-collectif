@@ -3,26 +3,22 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageTabs } from './ProposalPageTabs';
-import { features } from '../../../redux/modules/default';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { features } from '~/redux/modules/default';
+import { $refType } from '~/mocks';
 
 describe('<ProposalPageTabs />', () => {
   const proposal = {
     $refType,
-    $fragmentRefs,
     id: '1',
     allFollowers: {
       totalCount: 169,
     },
     currentVotableStep: null,
     votableSteps: [],
-    allVotes: {
-      totalCount: 1,
-    },
     news: {
       totalCount: 1,
+      edges: [{ node: { id: 'news1', title: 'Titre' } }],
     },
-    viewerCanSeeEvaluation: true,
     project: {
       opinionCanBeFollowed: true,
       type: {
@@ -37,6 +33,8 @@ describe('<ProposalPageTabs />', () => {
   };
 
   const props = {
+    votesCount: 5,
+    tabKey: 'content',
     categories: [],
     steps: [
       {
@@ -45,8 +43,8 @@ describe('<ProposalPageTabs />', () => {
       },
     ],
     step: {
+      id: 'stepid',
       $refType,
-      $fragmentRefs,
     },
     features: {
       ...features,
@@ -66,6 +64,7 @@ describe('<ProposalPageTabs />', () => {
       ...proposal,
       news: {
         totalCount: 0,
+        edges: [],
       },
     };
     const wrapper = shallow(<ProposalPageTabs proposal={proposalWithoutBlogTab} {...props} />);

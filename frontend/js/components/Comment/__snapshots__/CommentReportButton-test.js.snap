@@ -7,9 +7,8 @@ exports[`<CommentReportButton /> should render correctly 1`] = `
       "uniqueId": "thisisaslug",
     }
   }
-  buttonBsSize="xs"
-  buttonClassName="btn btn-dark-gray btn--outline"
   id="comment-1"
+  newDesign={true}
   onReport={[Function]}
   reported={false}
 />

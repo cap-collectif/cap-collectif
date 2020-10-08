@@ -88,7 +88,7 @@ export class BodyText extends React.Component<Props, State> {
           />
         </div>
         {this.hasMoreLines && (
-          <div className="text-center body__infos__read-more">
+          <div>
             <ReadMoreLink visible={truncated} expanded={expanded} onClick={this.toggleExpand} />
           </div>
         )}

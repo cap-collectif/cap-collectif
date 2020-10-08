@@ -139,6 +139,9 @@ export type ResponsesFromAPI = $ReadOnlyArray<?{|
   +$fragmentRefs?: any,
   +question: {|
     +id: string,
+    +level?: ?number,
+    +title?: string,
+    +__typename?: string,
   |},
   +value?: ?string,
   +medias?: $ReadOnlyArray<{|

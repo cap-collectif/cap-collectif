@@ -15,9 +15,10 @@ import { isInterpellationContextFromProposal } from '~/utils/interpellationLabel
 type Props = {
   proposal: ProposalVoteButtonWrapperFragment_proposal,
   viewer: ?ProposalVoteButtonWrapperFragment_viewer,
-  step: ProposalVoteButtonWrapperFragment_step,
+  step: ?ProposalVoteButtonWrapperFragment_step,
   id: string,
   className: string,
+  disabled?: boolean,
 };
 
 export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
@@ -39,19 +40,24 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
   };
 
   render() {
-    const { id, viewer, step, proposal, className } = this.props;
+    const { id, viewer, step, proposal, className, disabled } = this.props;
     const voteButtonLabel = isInterpellationContextFromProposal(proposal)
       ? 'global.support.for'
       : 'global.vote.for';
 
-    if (!step.open) {
+    if (proposal && !step?.open) {
       return null;
     }
 
-    if (!viewer) {
+    if (!viewer || !proposal) {
       return (
         <LoginOverlay>
-          <Button id={id} bsStyle="success" className={`${className} mr-10`}>
+          <Button
+            disabled={disabled || false}
+            id={id}
+            bsStyle="success"
+            className={`${className} mr-10`}>
+            <i className="cap cap-hand-like-2 mr-5" />
             <FormattedMessage id={voteButtonLabel} />
           </Button>
         </LoginOverlay>
@@ -59,7 +65,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
     }
     const viewerVotesCount = viewer.proposalVotes ? viewer.proposalVotes.totalCount : 0;
     const popoverId = `vote-tooltip-proposal-${proposal.id}`;
-    if (step.voteType === 'SIMPLE') {
+    if (step?.voteType === 'SIMPLE') {
       return (
         <VoteButtonOverlay
           popoverId={popoverId}
@@ -89,7 +95,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
         step={step}
         userHasVote={proposal.viewerHasVote || false}
         hasReachedLimit={
-          (step.votesLimit || false) && (step.votesLimit || 0) - viewerVotesCount <= 0
+          (step?.votesLimit || false) && (step?.votesLimit || 0) - viewerVotesCount <= 0
         }
         hasUserEnoughCredits={this.userHasEnoughCredits()}>
         <HoverObserver>
@@ -108,19 +114,6 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
 }
 
 export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
-  proposal: graphql`
-    fragment ProposalVoteButtonWrapperFragment_proposal on Proposal
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean", defaultValue: true }
-        stepId: { type: "ID!" }
-      ) {
-      id
-      estimation
-      viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
-      ...interpellationLabelHelper_proposal @relay(mask: false)
-      ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-    }
-  `,
   viewer: graphql`
     fragment ProposalVoteButtonWrapperFragment_viewer on User
       @argumentDefinitions(
@@ -134,6 +127,20 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
       }
     }
   `,
+  proposal: graphql`
+    fragment ProposalVoteButtonWrapperFragment_proposal on Proposal
+      @argumentDefinitions(
+        isAuthenticated: { type: "Boolean", defaultValue: true }
+        stepId: { type: "ID!" }
+      ) {
+      id
+      estimation
+      viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+      ...interpellationLabelHelper_proposal @relay(mask: false)
+      ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+    }
+  `,
+
   step: graphql`
     fragment ProposalVoteButtonWrapperFragment_step on ProposalStep {
       id

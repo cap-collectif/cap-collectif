@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
+<ProposalPagestyle__Card
+  id="ProposalPageMetadata"
+>
+  <ProposalPageMetadata__ProposalPageMetadataContainer>
+    <MetadataRow
+      color="#0388cc"
+      content="Nom de la catégorie"
+      name="tag"
+      ready={true}
+      size={10}
+    />
+    <MetadataRow
+      color="#0388cc"
+      content="Nom du quartier"
+      name="pin"
+      ready={true}
+      size={10}
+    />
+    <MetadataRow
+      color="#0388cc"
+      content={
+        <FormattedNumber
+          currency="EUR"
+          minimumFractionDigits={0}
+          style="currency"
+          value={0}
+        />
+      }
+      name="accounting"
+      ready={true}
+      size={10}
+    />
+    <MetadataRow
+      color="#0388cc"
+      content="Reference"
+      name="hashtag"
+      ready={true}
+      size={10}
+    />
+  </ProposalPageMetadata__ProposalPageMetadataContainer>
+</ProposalPagestyle__Card>
+`;

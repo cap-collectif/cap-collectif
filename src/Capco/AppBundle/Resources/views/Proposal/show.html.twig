@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/layout_with_widget.html.twig' %}
+{% extends '@CapcoApp/base.html.twig' %}
 
 {% block canonical_link %}{{ '' }}{% endblock %}
 
@@ -12,6 +12,8 @@
     } only %}
 {% endblock %}
 
+{% set showVotesWidget = app.user and ((currentStep is defined and currentStep.slug is defined and attribute(currentStep, 'isVotable') is defined and currentStep.isVotable() and (currentStep.isCollectStep() or currentStep.isSelectionStep())) or (proposal is defined and proposal|current_votable_step)) %}
+{% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 
 {% block title %}
     {{ parent() }} - {{ proposal.title }}
@@ -25,11 +27,19 @@
             'referer': referer,
         }
     } %}
-    {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+    {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState, 'project': project} %}
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProposalPageApp', {'props': {'currentVotableStepId': currentVotableStepId, 'proposalId': proposal.id|toGlobalId('Proposal') }}) }}
+    {{ react_render_component('ProposalPageApp', {'props':{'currentVotableStepId': currentVotableStepId,
+    'proposalTitle': proposal.title,
+    'opinionCanBeFollowed': project.opinionCanBeFollowed,
+    'hasVotableStep': currentStep != null,
+    'proposalId': proposal.id|toGlobalId('Proposal'),
+    'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
+    'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
+    'showVotesWidget': showVotesWidget,
+     }}) }}
 {% endblock %}
 
 {% block javascripts %}

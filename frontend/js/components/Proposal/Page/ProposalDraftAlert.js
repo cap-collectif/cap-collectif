@@ -6,13 +6,13 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import type { ProposalDraftAlert_proposal } from '~relay/ProposalDraftAlert_proposal.graphql';
 
 type Props = {
-  proposal: ProposalDraftAlert_proposal,
+  proposal: ?ProposalDraftAlert_proposal,
 };
 
 export class ProposalDraftAlert extends React.Component<Props> {
   render() {
     const { proposal } = this.props;
-    if (proposal.publicationStatus === 'DRAFT') {
+    if (proposal?.publicationStatus === 'DRAFT') {
       return (
         <Alert bsStyle="warning" style={{ marginBottom: '0', textAlign: 'center' }}>
           <strong>

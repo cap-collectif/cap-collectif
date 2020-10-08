@@ -78,7 +78,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
             <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
           )}
           {step && step.project && step.project.opinionCanBeFollowed ? (
-            <ProposalFollowButton proposal={proposal} />
+            <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
           ) : null}
         </div>
         {step &&

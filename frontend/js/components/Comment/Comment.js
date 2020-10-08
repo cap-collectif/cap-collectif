@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Button } from 'react-bootstrap';
+import styled, { type StyledComponent } from 'styled-components';
 import UserAvatar from '../User/UserAvatar';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
@@ -14,6 +14,8 @@ import CommentForm from './CommentForm';
 import Media from '../Ui/Medias/Media/Media';
 import { CommentContainer } from './styles';
 import type { Comment_comment } from '~relay/Comment_comment.graphql';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 type Props = {|
   +comment: Comment_comment,
@@ -21,6 +23,31 @@ type Props = {|
   +disabledButton?: ?boolean,
   +useBodyColor: boolean,
 |};
+
+export const CommentBottom: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px;
+
+  button {
+    margin-right: 10px;
+  }
+`;
+
+const AnswerButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  color: ${colors.darkGray};
+
+  svg {
+    margin-right: 5px;
+  }
+`;
 
 type State = {|
   +answerFormShown: boolean,
@@ -46,35 +73,31 @@ export class Comment extends React.Component<Props, State> {
     return (
       <CommentContainer as="li" useBodyColor={useBodyColor} isHighlighted={isHighlighted}>
         {/* $FlowFixMe */}
-        <>
-          <UserAvatar user={comment.author} />
-          <Media className="opinion">
-            <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
-              <div className="opinion__data">
-                <CommentInfos comment={comment} />
-              </div>
-              <CommentBody comment={comment} />
-              {!disabledButton && (
-                <div className="small">
-                  <CommentVoteButton comment={comment} />{' '}
-                  <Button
-                    bsSize="xsmall"
-                    onClick={this.focusAnswer}
-                    className="btn-dark-gray btn--outline">
-                    <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
-                  </Button>{' '}
-                  <CommentReportButton comment={comment} />
-                  <CommentEdit comment={comment} />{' '}
-                </div>
-              )}
-            </Media.Body>
-            <div className="CommentAnswer">
-              <CommentAnswers useBodyColor={useBodyColor} comment={comment} />
-              {/* $FlowFixMe */}
-              {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
+        <UserAvatar user={comment.author} size={45} />
+        <Media className="opinion">
+          <Media.Body className="opinion__body" id={`comment_${comment.id}`}>
+            <div className="opinion__data">
+              <CommentInfos comment={comment} />
             </div>
-          </Media>
-        </>
+            <CommentBody comment={comment} />
+          </Media.Body>
+          {!disabledButton && (
+            <CommentBottom>
+              <CommentVoteButton comment={comment} />
+              <AnswerButton onClick={this.focusAnswer}>
+                <Icon name={ICON_NAME.navigationLeft} size={15} color={colors.darkGray} />
+                <FormattedMessage id="global.answer" />
+              </AnswerButton>
+              <CommentReportButton comment={comment} />
+              <CommentEdit comment={comment} />{' '}
+            </CommentBottom>
+          )}
+          <div className="CommentAnswer">
+            <CommentAnswers useBodyColor={useBodyColor} comment={comment} />
+            {/* $FlowFixMe */}
+            {answerFormShown ? <CommentForm commentable={comment} answerOf={comment.id} /> : null}
+          </div>
+        </Media>
       </CommentContainer>
     );
   }

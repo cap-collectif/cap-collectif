@@ -1,7 +1,7 @@
 // @flow
 import { author } from './users';
 
-export const news = {
+export const post = {
   title: 'Je suis le titre',
   url: '#',
   image: {
@@ -31,4 +31,4 @@ export const withoutParaph = {
   user: author,
   body: '',
 };
-export default news;
+export default post;

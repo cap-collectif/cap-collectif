@@ -3,7 +3,7 @@ Feature: Proposal Follow
 
 @database
 Scenario: Logged, I want to follow a proposal and change the type of following
-  Given I am logged in as user
+  Given I am logged in as spyl
   And I go to a proposal
   When I click the proposal follow button on "proposal2"
   And I wait 2 seconds
@@ -18,8 +18,9 @@ Scenario: Logged, I want to follow a proposal and change the type of following
   Then I click on "proposal follow all" choice on "proposal2"
   And I should see follow all activities checked on "proposal2"
   And I wait 2 seconds
+  And I click the proposal follow button on "proposal2"
   Then I go to the proposal followers tab
-  And I should see my subscription as "user" in the proposal followers list
+  And I should see my subscription as "spyl" in the proposal followers list
 
 @database
 Scenario: Logged, I want to unfollow a proposal

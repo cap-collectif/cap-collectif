@@ -11,6 +11,7 @@ Scenario: Logged in user wants to vote for a proposal in a selection step
   And I submit the proposal vote form
   And I should see "vote.add_success" in the "#global-alert-box" element
   Then the proposal should have 2 votes
+  And I wait "#global-alert-box .alert-success" to disappear on current page
   Then I click the proposal unvote button
   And I should see "vote.delete_success" appear on current page in "#global-alert-box"
   Then the proposal should have 1 votes

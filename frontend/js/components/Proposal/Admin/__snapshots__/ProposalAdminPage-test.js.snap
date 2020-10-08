@@ -2378,21 +2378,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
-                                  "name": "displayName",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
                                   "name": "username",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "contributionsCount",
                                   "storageKey": null,
                                 },
                                 Object {
@@ -2415,6 +2401,38 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "displayName",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "contributionsCount",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "VoteConnection",
+                                  "kind": "LinkedField",
+                                  "name": "votes",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
                                       "storageKey": null,
                                     },
                                   ],
@@ -2535,7 +2553,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3e6d689cf60866343c8c2c28bce7502e",
+          "cacheID": "5d3dd69a2935a854436073e6feef9eb9",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2996,7 +3014,18 @@ fragment ProposalPageFollowers_proposal_1G22uz on Proposal {
   }
 }
 
+fragment UserAvatar_user on User {
+  id
+  url
+  username
+  media {
+    url
+    id
+  }
+}
+
 fragment UserBox_user on User {
+  id
   ...UserPreview_user
 }
 
@@ -3011,11 +3040,16 @@ fragment UserNotConfirmedLabel_user on User {
 
 fragment UserPreview_user on User {
   ...UserNotConfirmedLabel_user
+  ...UserAvatar_user
+  id
   url
   displayName
   username
   ...UserLink_user
   contributionsCount
+  votes {
+    totalCount
+  }
   media {
     url
     id

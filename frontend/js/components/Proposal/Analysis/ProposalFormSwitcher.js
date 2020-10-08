@@ -2,12 +2,10 @@
 import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { useResize } from '@liinkiing/react-hooks';
 import styled, { type StyledComponent } from 'styled-components';
 import type { ProposalFormSwitcher_proposal } from '~relay/ProposalFormSwitcher_proposal.graphql';
 import colors from '~/utils/colors';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
-import { bootstrapGrid } from '~/utils/sizes';
 import { CloseIcon } from './ProposalAnalysisPanel';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import type { PanelState, User } from './ProposalAnalysisPanel';
@@ -18,20 +16,19 @@ import ProposalViewAnalysisPanel from './ProposalViewAnalysisPanel';
 import ProposalViewDecisionPanel from './ProposalViewDecisionPanel';
 import ProposalViewAssessmentPanel from './ProposalViewAssessmentPanel';
 
-const FormPanel: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
+const FormPanel: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   overflow: scroll;
-  height: calc(100vh - 70px);
-  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
-
+  height: calc(100vh - 50px);
+  width: 370px;
   textarea {
     resize: none;
   }
 `;
 
-const Header: StyledComponent<{ isLarge: boolean }, {}, HTMLDivElement> = styled.div`
-  position: fixed;
+const Header: StyledComponent<{ hide: boolean }, {}, HTMLDivElement> = styled.div`
+  position: ${({ hide }) => hide && 'fixed'};
   z-index: 2;
-  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
+  width: 370px;
 `;
 
 const Top: StyledComponent<{ border: boolean }, {}, HTMLDivElement> = styled.div`
@@ -96,8 +93,6 @@ export const ProposalFormSwitcher = ({
   panelState,
 }: Props) => {
   const [submittingState, setSubmittingState] = useState<?SubmittingState>(null);
-  const { width }: { width: number } = useResize();
-  const isLarge = width < bootstrapGrid.mdMax;
   const finishedSubmitting = (newSubmitting: SubmittingState, goBack: boolean) => {
     setSubmittingState(newSubmitting);
     if (goBack) onBackClick();
@@ -107,8 +102,8 @@ export const ProposalFormSwitcher = ({
     panelState === 'VIEW_DECISION' ||
     panelState === 'VIEW_ASSESSMENT';
   return (
-    <FormPanel isLarge={isLarge}>
-      <Header isLarge={isLarge}>
+    <FormPanel>
+      <Header hide={isView}>
         <Top border={isView}>
           <Icon
             onClick={onBackClick}

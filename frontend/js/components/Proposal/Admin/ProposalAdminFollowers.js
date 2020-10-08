@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { MenuItem, DropdownButton } from 'react-bootstrap';
 import type { ProposalAdminFollowers_proposal } from '~relay/ProposalAdminFollowers_proposal.graphql';
-import ProposalPageFollowers from '../Page/ProposalPageFollowers';
+import ProposalPageFollowers from '../Page/Followers/ProposalPageFollowers';
 
 type Props = {|
   proposal: ProposalAdminFollowers_proposal,

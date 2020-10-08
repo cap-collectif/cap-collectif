@@ -26,9 +26,14 @@ const CloseIconContainer: StyledComponent<{}, {}, HTMLButtonElement> = styled.bu
 
 const PanelsSlider: StyledComponent<{ home: boolean }, {}, HTMLDivElement> = styled.div`
   display: flex;
-  width: 200%;
-  margin-left: ${props => (props.home ? 0 : '-100%')};
+  width: 370px;
+  overflow: ${props => props.home && 'hidden'};
+  margin-left: ${props => (props.home ? 0 : '-370px')};
   transition: 0.5s;
+
+  > div {
+    min-width: 370px;
+  }
 `;
 
 const Panel: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -125,7 +130,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
       : undefined;
   return (
     <PanelsSlider home={panelState === 'HOME'} id="proposal_analysis_panel">
-      <div style={{ width: '50%' }}>
+      <div>
         <Panel>
           <PanelSection border id="proposal_analysis_analyses">
             <CloseIconWrapper>

@@ -18,6 +18,7 @@ describe('<ProposalDetailAdvancement />', () => {
           startAt: 'startAt',
         },
         title: 'Collecte 1',
+        enabled: true,
       },
       {
         id: '2',
@@ -28,6 +29,7 @@ describe('<ProposalDetailAdvancement />', () => {
           startAt: 'startAt',
         },
         title: 'Selection 1',
+        enabled: false,
       },
       {
         id: '3',
@@ -38,6 +40,7 @@ describe('<ProposalDetailAdvancement />', () => {
           startAt: 'startAt',
         },
         title: 'Selection 2',
+        enabled: true,
       },
     ],
   };

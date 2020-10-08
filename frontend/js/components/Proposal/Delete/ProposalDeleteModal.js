@@ -21,6 +21,7 @@ type Props = {
 export class ProposalDeleteModal extends React.Component<Props> {
   render() {
     const { proposal, show, isDeleting, dispatch } = this.props;
+    if (!proposal) return null;
     return (
       <div>
         <Modal

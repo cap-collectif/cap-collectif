@@ -14,7 +14,6 @@ exports[`<ProposalViewAnalysisPanel  />  renders correctly 1`] = `
     />
   </ProposalViewAnalysisPanel__ResponsesView>
   <ProposalViewAnalysisPanel__CommentView
-    isLarge={true}
     tooLate={false}
   >
     <FormattedMessage

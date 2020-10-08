@@ -1,19 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CommentEdit /> should render correctly 1`] = `
-<a
-  className="btn btn-xs btn-dark-gray btn--outline"
+<CommentEdit__CommentEditLink
   href="https://aa.com/"
   id="CommentEdit-<mock-comment-id/>"
 >
-  <i
-    className="cap cap-pencil-1"
+  <Icon
+    color="#707070"
+    name="pen"
+    size={15}
   />
   <FormattedMessage
     id="global.change"
     values={Object {}}
   />
-</a>
+</CommentEdit__CommentEditLink>
 `;
 
 exports[`<CommentEdit /> should render null with author isViewer false 1`] = `""`;

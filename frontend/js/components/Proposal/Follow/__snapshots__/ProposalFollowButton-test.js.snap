@@ -9,6 +9,9 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal wh
     onClick={[Function]}
     type="button"
   >
+    <i
+      className="cap cap-rss mr-5"
+    />
     follow
   </button>
 </span>

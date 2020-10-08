@@ -11,7 +11,7 @@ type Props = {
   popoverId: string,
   hasReachedLimit: boolean,
   hasUserEnoughCredits: boolean,
-  step: VoteButtonOverlay_step,
+  step: ?VoteButtonOverlay_step,
 };
 
 export class VoteButtonOverlay extends React.Component<Props> {
@@ -43,7 +43,7 @@ export class VoteButtonOverlay extends React.Component<Props> {
         <FormattedMessage
           id="proposal.vote.popover.limit_reached_and_not_enough_credits_text"
           values={{
-            num: step.votesLimit,
+            num: step?.votesLimit,
           }}
         />
       );
@@ -58,7 +58,7 @@ export class VoteButtonOverlay extends React.Component<Props> {
         <FormattedMessage
           id="proposal.vote.popover.limit_reached_text"
           values={{
-            num: step.votesLimit,
+            num: step?.votesLimit,
           }}
         />
       );

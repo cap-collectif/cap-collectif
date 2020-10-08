@@ -1,36 +1,71 @@
 // @flow
 import React, { useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, DropdownButton, MenuItem } from 'react-bootstrap';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
+import { mediaQueryMobile } from '~/utils/sizes';
 import CommentListView, { type CommentOrderBy } from './CommentListView';
 import CommentForm from './CommentForm';
 import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 type Props = {|
   +intl: IntlShape,
   +commentable: CommentSectionFragmented_commentable,
   +isAuthenticated: boolean,
   +useBodyColor: boolean,
+  newDesign?: boolean,
 |};
+
+const SortBy: StyledComponent<{}, {}, typeof Col> = styled(Col)`
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-left: 20px;
+    margin-right: 0;
+    margin-top: 7px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    margin-top: 10px;
+
+    svg {
+      margin-left: 0;
+    }
+  }
+`;
+
+export const FilterButton: StyledComponent<{}, {}, typeof DropdownButton> = styled(DropdownButton)`
+  border: none !important;
+  outline: none !important;
+  background-color: ${colors.white} !important;
+  box-shadow: none !important;
+`;
+
+const filters = {
+  popular: 'global.filter_popular',
+  old: 'global.filter_old',
+  last: 'global.filter_last',
+};
 
 export function CommentSectionView(props: Props) {
   const [order, setOrder] = useState<CommentOrderBy>('last');
-  const { isAuthenticated, intl, useBodyColor, commentable } = props;
-
-  const updateSelectedValue = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    /* $FlowFixMe who did dis */
-    setOrder({
-      order: e.target.value,
-    });
-  };
+  const { isAuthenticated, intl, useBodyColor, commentable, newDesign } = props;
 
   return (
     <div>
-      <h3>
-        <FormattedMessage id="proposal.tabs.comments" />
-      </h3>
+      {newDesign ? null : (
+        <h3>
+          <FormattedMessage id="proposal.tabs.comments" />
+        </h3>
+      )}
       <Row>
-        <Col componentClass="h4" id="proposal-page-comments-counter" sm={6}>
+        <Col id="proposal-page-comments-counter" sm={6} className="mt-5">
           {commentable.allComments && (
             <FormattedHTMLMessage
               id="comment.list"
@@ -41,17 +76,23 @@ export function CommentSectionView(props: Props) {
           )}
         </Col>
         {commentable.allComments && commentable.allComments.totalCountWithAnswers > 1 && (
-          <Col smOffset={2} sm={4} xs={12} style={{ marginTop: '10px', marginBottom: '20px' }}>
-            <select
-              className="form-control"
-              value={order}
-              onChange={value => updateSelectedValue(value)}
-              onBlur={value => updateSelectedValue(value)}>
-              <option value="popular">{intl.formatMessage({ id: 'global.filter_popular' })}</option>
-              <option value="last">{intl.formatMessage({ id: 'global.filter_last' })}</option>
-              <option value="old">{intl.formatMessage({ id: 'global.filter_old' })}</option>
-            </select>
-          </Col>
+          <SortBy smOffset={2} sm={4} xs={12}>
+            <Icon name={ICON_NAME.sort} size={20} color={colors.darkText} />
+            <FilterButton
+              noCaret
+              id="js-btn-visibility-step"
+              title={<FormattedMessage id={filters[order]} />}>
+              <MenuItem id="public-collect" onClick={() => setOrder('popular')}>
+                {intl.formatMessage({ id: filters.popular })}
+              </MenuItem>
+              <MenuItem id="private-collect" onClick={() => setOrder('last')}>
+                {intl.formatMessage({ id: filters.last })}
+              </MenuItem>
+              <MenuItem id="old" onClick={() => setOrder('old')}>
+                {intl.formatMessage({ id: filters.old })}
+              </MenuItem>
+            </FilterButton>
+          </SortBy>
         )}
       </Row>
       {/* $FlowFixMe reduxForm */}

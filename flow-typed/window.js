@@ -164,7 +164,7 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   resizeTo(x?: number, y?: number): void;
   scroll(x?: number, y?: number): void;
   scrollBy(x?: number, y?: number): void;
-  scrollTo(x?: number, y?: number): void;
+  scrollTo(x?: number | { top?: number, left?: number, behavior?: string }, y?: number): void;
   stop(): void;
 
   clearInterval(intervalId?: number): void;

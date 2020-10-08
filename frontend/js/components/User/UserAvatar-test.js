@@ -11,6 +11,7 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
+        id: 'userid',
         $refType,
         username: 'toto',
         media: {
@@ -29,6 +30,7 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
+        id: 'userid',
         $refType,
         username: 'toto',
         media: null,
@@ -44,6 +46,7 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
+        id: 'userid',
         $refType,
         username: 'toto',
         media: null,
@@ -60,6 +63,7 @@ describe('<UserAvatar />', () => {
     const props = {
       features,
       user: {
+        id: 'oeoe',
         $refType,
         username: 'toto',
         media: {

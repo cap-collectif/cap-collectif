@@ -6,6 +6,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
   useBodyColor={true}
 >
   <Relay(Connect(UserAvatar))
+    size={45}
     user={
       Object {
         "$fragmentRefs": null,
@@ -56,78 +57,68 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
           }
         }
       />
-      <div
-        className="small"
-      >
-        <Relay(CommentVoteButton)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-         
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="xsmall"
-          bsStyle="default"
-          className="btn-dark-gray btn--outline"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <i
-            className="cap-reply-mail-2"
-          />
-           
-          <FormattedMessage
-            id="global.answer"
-            values={Object {}}
-          />
-        </Button>
-         
-        <Relay(Connect(CommentReportButton))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-        <Relay(CommentEdit)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-         
-      </div>
     </Body>
+    <Comment__CommentBottom>
+      <Relay(CommentVoteButton)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Comment__AnswerButton
+        onClick={[Function]}
+      >
+        <Icon
+          color="#707070"
+          name="navigationLeft"
+          size={15}
+        />
+        <FormattedMessage
+          id="global.answer"
+          values={Object {}}
+        />
+      </Comment__AnswerButton>
+      <Relay(Connect(CommentReportButton))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Relay(CommentEdit)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+       
+    </Comment__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -158,6 +149,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
   useBodyColor={true}
 >
   <Relay(Connect(UserAvatar))
+    size={45}
     user={
       Object {
         "$fragmentRefs": null,
@@ -208,78 +200,68 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
           }
         }
       />
-      <div
-        className="small"
-      >
-        <Relay(CommentVoteButton)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-         
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="xsmall"
-          bsStyle="default"
-          className="btn-dark-gray btn--outline"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <i
-            className="cap-reply-mail-2"
-          />
-           
-          <FormattedMessage
-            id="global.answer"
-            values={Object {}}
-          />
-        </Button>
-         
-        <Relay(Connect(CommentReportButton))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-        <Relay(CommentEdit)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-         
-      </div>
     </Body>
+    <Comment__CommentBottom>
+      <Relay(CommentVoteButton)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Comment__AnswerButton
+        onClick={[Function]}
+      >
+        <Icon
+          color="#707070"
+          name="navigationLeft"
+          size={15}
+        />
+        <FormattedMessage
+          id="global.answer"
+          values={Object {}}
+        />
+      </Comment__AnswerButton>
+      <Relay(Connect(CommentReportButton))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Relay(CommentEdit)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+       
+    </Comment__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -310,6 +292,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
   useBodyColor={true}
 >
   <Relay(Connect(UserAvatar))
+    size={45}
     user={
       Object {
         "$fragmentRefs": null,
@@ -360,78 +343,68 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
           }
         }
       />
-      <div
-        className="small"
-      >
-        <Relay(CommentVoteButton)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-         
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="xsmall"
-          bsStyle="default"
-          className="btn-dark-gray btn--outline"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <i
-            className="cap-reply-mail-2"
-          />
-           
-          <FormattedMessage
-            id="global.answer"
-            values={Object {}}
-          />
-        </Button>
-         
-        <Relay(Connect(CommentReportButton))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-        <Relay(CommentEdit)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-         
-      </div>
     </Body>
+    <Comment__CommentBottom>
+      <Relay(CommentVoteButton)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Comment__AnswerButton
+        onClick={[Function]}
+      >
+        <Icon
+          color="#707070"
+          name="navigationLeft"
+          size={15}
+        />
+        <FormattedMessage
+          id="global.answer"
+          values={Object {}}
+        />
+      </Comment__AnswerButton>
+      <Relay(Connect(CommentReportButton))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Relay(CommentEdit)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+       
+    </Comment__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -478,6 +451,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
   useBodyColor={true}
 >
   <Relay(Connect(UserAvatar))
+    size={45}
     user={
       Object {
         "$fragmentRefs": null,
@@ -528,78 +502,68 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
           }
         }
       />
-      <div
-        className="small"
-      >
-        <Relay(CommentVoteButton)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-         
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="xsmall"
-          bsStyle="default"
-          className="btn-dark-gray btn--outline"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <i
-            className="cap-reply-mail-2"
-          />
-           
-          <FormattedMessage
-            id="global.answer"
-            values={Object {}}
-          />
-        </Button>
-         
-        <Relay(Connect(CommentReportButton))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-        <Relay(CommentEdit)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "media": null,
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-         
-      </div>
     </Body>
+    <Comment__CommentBottom>
+      <Relay(CommentVoteButton)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Comment__AnswerButton
+        onClick={[Function]}
+      >
+        <Icon
+          color="#707070"
+          name="navigationLeft"
+          size={15}
+        />
+        <FormattedMessage
+          id="global.answer"
+          values={Object {}}
+        />
+      </Comment__AnswerButton>
+      <Relay(Connect(CommentReportButton))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Relay(CommentEdit)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "media": null,
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+       
+    </Comment__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -647,6 +611,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
   useBodyColor={true}
 >
   <Relay(Connect(UserAvatar))
+    size={45}
     user={
       Object {
         "$fragmentRefs": null,
@@ -703,84 +668,74 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
           }
         }
       />
-      <div
-        className="small"
-      >
-        <Relay(CommentVoteButton)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "jcVandam",
-                "media": Object {
-                  "url": "http://perdu.com/image.jpg",
-                },
-                "vip": true,
-              },
-              "id": "comment1",
-            }
-          }
-        />
-         
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="xsmall"
-          bsStyle="default"
-          className="btn-dark-gray btn--outline"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <i
-            className="cap-reply-mail-2"
-          />
-           
-          <FormattedMessage
-            id="global.answer"
-            values={Object {}}
-          />
-        </Button>
-         
-        <Relay(Connect(CommentReportButton))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "jcVandam",
-                "media": Object {
-                  "url": "http://perdu.com/image.jpg",
-                },
-                "vip": true,
-              },
-              "id": "comment1",
-            }
-          }
-        />
-        <Relay(CommentEdit)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "jcVandam",
-                "media": Object {
-                  "url": "http://perdu.com/image.jpg",
-                },
-                "vip": true,
-              },
-              "id": "comment1",
-            }
-          }
-        />
-         
-      </div>
     </Body>
+    <Comment__CommentBottom>
+      <Relay(CommentVoteButton)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "jcVandam",
+              "media": Object {
+                "url": "http://perdu.com/image.jpg",
+              },
+              "vip": true,
+            },
+            "id": "comment1",
+          }
+        }
+      />
+      <Comment__AnswerButton
+        onClick={[Function]}
+      >
+        <Icon
+          color="#707070"
+          name="navigationLeft"
+          size={15}
+        />
+        <FormattedMessage
+          id="global.answer"
+          values={Object {}}
+        />
+      </Comment__AnswerButton>
+      <Relay(Connect(CommentReportButton))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "jcVandam",
+              "media": Object {
+                "url": "http://perdu.com/image.jpg",
+              },
+              "vip": true,
+            },
+            "id": "comment1",
+          }
+        }
+      />
+      <Relay(CommentEdit)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "jcVandam",
+              "media": Object {
+                "url": "http://perdu.com/image.jpg",
+              },
+              "vip": true,
+            },
+            "id": "comment1",
+          }
+        }
+      />
+       
+    </Comment__CommentBottom>
     <div
       className="CommentAnswer"
     >
@@ -814,6 +769,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
   useBodyColor={true}
 >
   <Relay(Connect(UserAvatar))
+    size={45}
     user={
       Object {
         "$fragmentRefs": null,
@@ -864,78 +820,68 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
           }
         }
       />
-      <div
-        className="small"
-      >
-        <Relay(CommentVoteButton)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "jcVandam",
-                "media": null,
-                "vip": true,
-              },
-              "id": "comment2",
-            }
-          }
-        />
-         
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="xsmall"
-          bsStyle="default"
-          className="btn-dark-gray btn--outline"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <i
-            className="cap-reply-mail-2"
-          />
-           
-          <FormattedMessage
-            id="global.answer"
-            values={Object {}}
-          />
-        </Button>
-         
-        <Relay(Connect(CommentReportButton))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "jcVandam",
-                "media": null,
-                "vip": true,
-              },
-              "id": "comment2",
-            }
-          }
-        />
-        <Relay(CommentEdit)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "jcVandam",
-                "media": null,
-                "vip": true,
-              },
-              "id": "comment2",
-            }
-          }
-        />
-         
-      </div>
     </Body>
+    <Comment__CommentBottom>
+      <Relay(CommentVoteButton)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "jcVandam",
+              "media": null,
+              "vip": true,
+            },
+            "id": "comment2",
+          }
+        }
+      />
+      <Comment__AnswerButton
+        onClick={[Function]}
+      >
+        <Icon
+          color="#707070"
+          name="navigationLeft"
+          size={15}
+        />
+        <FormattedMessage
+          id="global.answer"
+          values={Object {}}
+        />
+      </Comment__AnswerButton>
+      <Relay(Connect(CommentReportButton))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "jcVandam",
+              "media": null,
+              "vip": true,
+            },
+            "id": "comment2",
+          }
+        }
+      />
+      <Relay(CommentEdit)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "jcVandam",
+              "media": null,
+              "vip": true,
+            },
+            "id": "comment2",
+          }
+        }
+      />
+       
+    </Comment__CommentBottom>
     <div
       className="CommentAnswer"
     >

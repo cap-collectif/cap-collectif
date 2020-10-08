@@ -66,11 +66,24 @@ export const ICON_NAME = {
   list: 'list',
   draft: 'draft',
   stack: 'stack',
-  tag: 'tag',
-  pin: 'pin',
-  pin2: 'pin2',
   warningRounded: 'warningRounded',
   reload: 'reload',
+  pin: 'pin',
+  tag: 'tag',
+  accounting: 'accounting',
+  love: 'love',
+  hashtag: 'hashtag',
+  fileText: 'fileText',
+  conversation: 'conversation',
+  sort: 'sort',
+  like: 'like',
+  navigationLeft: 'navigationLeft',
+  flag: 'flag',
+  lock: 'lock',
+  bell: 'bell',
+  stamp: 'stamp',
+  newspaper: 'newspaper',
+  pin2: 'pin2',
   folder: 'folder',
   micro: 'micro',
   eventOnline: 'eventOnline',
@@ -85,12 +98,13 @@ export const ICON_NAME = {
   verified: 'verified',
   singleMan: 'singleMan',
   singleManFilled: 'singleManFilled',
-  like: 'like',
   paperPlane: 'paperPlane',
   locationNotAuthorize: 'location-not-authorize',
   search: 'search',
   newUser: 'new-user',
   locationTarget: 'locationTarget',
+  less: 'less',
+  filter: 'filter',
   grandLyonConnect: 'grandLyonConnect',
   pdfIcon: 'pdfIcon',
   zipIcon: 'zipIcon',
@@ -124,6 +138,7 @@ type Props = {|
   width?: string,
   className?: string,
   viewBox?: string,
+  opacity?: number,
   onClick?: () => void,
 |};
 
@@ -251,14 +266,40 @@ const getIcon = name => {
       return <Icons.Stack />;
     case 'messageBubbleCheck':
       return <Icons.MessageBubbleCheck />;
-    case 'tag':
-      return <Icons.Tag />;
-    case 'pin':
-      return <Icons.Pin />;
-    case 'pin2':
-      return <Icons.Pin2 />;
     case 'reload':
       return <Icons.Reload />;
+    case 'pin':
+      return <Icons.Pin />;
+    case 'tag':
+      return <Icons.Tag />;
+    case 'accounting':
+      return <Icons.Accounting />;
+    case 'love':
+      return <Icons.Love />;
+    case 'hashtag':
+      return <Icons.Hashtag />;
+    case 'fileText':
+      return <Icons.FileText />;
+    case 'conversation':
+      return <Icons.Conversation />;
+    case 'sort':
+      return <Icons.Sort />;
+    case 'like':
+      return <Icons.Like />;
+    case 'navigationLeft':
+      return <Icons.NavigationLeft />;
+    case 'flag':
+      return <Icons.Flag />;
+    case 'lock':
+      return <Icons.Lock />;
+    case 'bell':
+      return <Icons.Bell />;
+    case 'stamp':
+      return <Icons.Stamp />;
+    case 'newspaper':
+      return <Icons.Newspaper />;
+    case 'pin2':
+      return <Icons.Pin2 />;
     case 'folder':
       return <Icons.Folder />;
     case 'micro':
@@ -287,8 +328,6 @@ const getIcon = name => {
       return <Icons.SingleMan />;
     case 'singleManFilled':
       return <Icons.SingleManFilled />;
-    case 'like':
-      return <Icons.Like />;
     case 'paperPlane':
       return <Icons.PaperPlane />;
     case 'location-not-authorize':
@@ -299,6 +338,10 @@ const getIcon = name => {
       return <Icons.NewUser />;
     case 'locationTarget':
       return <Icons.LocationTarget />;
+    case 'less':
+      return <Icons.Less />;
+    case 'filter':
+      return <Icons.Filter />;
     case 'grandLyonConnect':
       return <Icons.GrandLyonConnect />;
     case 'pdfIcon':
@@ -344,12 +387,22 @@ const getIcon = name => {
   }
 };
 
-const Icon = ({ name, title, color, size, ariaHidden = true, classNames, ...rest }: Props) =>
+const Icon = ({
+  name,
+  title,
+  color,
+  size,
+  ariaHidden = true,
+  classNames,
+  opacity,
+  ...rest
+}: Props) =>
   React.cloneElement(getIcon(name), {
     title,
     fill: color,
     width: size,
     height: size,
+    opacity,
     className: cn('icon', classNames),
     'aria-hidden': ariaHidden,
     style: {

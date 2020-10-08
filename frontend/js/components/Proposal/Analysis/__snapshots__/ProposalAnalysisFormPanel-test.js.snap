@@ -38,9 +38,7 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly 1`] = `
         typeForm="questionnaire"
       />
     </ProposalAnalysisFormPanel__AnalysisForm>
-    <ProposalAnalysisFormPanel__Validation
-      isLarge={true}
-    >
+    <ProposalAnalysisFormPanel__Validation>
       <Field
         autoComplete="off"
         component={[Function]}

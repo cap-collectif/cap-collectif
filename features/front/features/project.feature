@@ -333,7 +333,7 @@ Scenario: User wants to evaluate a project proposal analysis immediately
   And I reload the page
   And I wait "#proposal_analysis_decision" to appear on current page
   And I wait ".proposal__last__news__title" to appear on current page
-  Then I should see "Réponse officielle" in the ".proposal__last__news__title" element
+  Then I should see "card.title.official.answer" in the ".proposal__last__news__title" element
 
 @database @rabbitmq
 Scenario: User wants to assess a project proposal analysis immediately

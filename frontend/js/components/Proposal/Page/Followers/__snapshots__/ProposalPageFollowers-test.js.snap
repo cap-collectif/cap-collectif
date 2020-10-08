@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageFollowers /> should render a proposal page follower with more 32 users 1`] = `
+<ProposalPageFollowers__ProposalPageFollowersContainer>
+  <ProposalPagestyle__CategoryTitle>
+    <ProposalPagestyle__CategoryCircledIcon
+      paddingLeft={10}
+    >
+      <Icon
+        color="#6c757d"
+        name="bell"
+        size={19}
+      />
+    </ProposalPagestyle__CategoryCircledIcon>
+    <h3>
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 3,
+          }
+        }
+      />
+    </h3>
+  </ProposalPagestyle__CategoryTitle>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexWrap": "wrap",
+      }
+    }
+  >
+    <Relay(UserBox)
+      className="proposal__follower"
+      id={0}
+      key="0"
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "id": "userAdmin",
+        }
+      }
+    />
+    <Relay(UserBox)
+      className="proposal__follower"
+      id={1}
+      key="1"
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "id": "user137",
+        }
+      }
+    />
+    <Relay(UserBox)
+      className="proposal__follower"
+      id={2}
+      key="2"
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "id": "user70",
+        }
+      }
+    />
+  </div>
+  <div
+    className="text-center"
+  >
+    <ProposalPagestyle__SeeMoreButton
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      <FormattedMessage
+        id="global.more"
+        values={Object {}}
+      />
+    </ProposalPagestyle__SeeMoreButton>
+  </div>
+</ProposalPageFollowers__ProposalPageFollowersContainer>
+`;
+
+exports[`<ProposalPageFollowers /> should render a proposal page follower with users 1`] = `
+<ProposalPageFollowers__ProposalPageFollowersContainer>
+  <ProposalPagestyle__CategoryTitle>
+    <ProposalPagestyle__CategoryCircledIcon
+      paddingLeft={10}
+    >
+      <Icon
+        color="#6c757d"
+        name="bell"
+        size={19}
+      />
+    </ProposalPagestyle__CategoryCircledIcon>
+    <h3>
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 3,
+          }
+        }
+      />
+    </h3>
+  </ProposalPagestyle__CategoryTitle>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexWrap": "wrap",
+      }
+    }
+  >
+    <Relay(UserBox)
+      className="proposal__follower"
+      id={0}
+      key="0"
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "id": "userAdmin",
+        }
+      }
+    />
+    <Relay(UserBox)
+      className="proposal__follower"
+      id={1}
+      key="1"
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "id": "user137",
+        }
+      }
+    />
+    <Relay(UserBox)
+      className="proposal__follower"
+      id={2}
+      key="2"
+      user={
+        Object {
+          "$fragmentRefs": null,
+          "id": "user70",
+        }
+      }
+    />
+  </div>
+</ProposalPageFollowers__ProposalPageFollowersContainer>
+`;
+
+exports[`<ProposalPageFollowers /> should render a proposal page follower without users 1`] = `
+<ProposalPageFollowers__ProposalPageFollowersContainer>
+  <ProposalPagestyle__CategoryTitle>
+    <ProposalPagestyle__CategoryCircledIcon
+      paddingLeft={10}
+    >
+      <Icon
+        color="#6c757d"
+        name="bell"
+        size={19}
+      />
+    </ProposalPagestyle__CategoryCircledIcon>
+    <h3>
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 0,
+          }
+        }
+      />
+    </h3>
+  </ProposalPagestyle__CategoryTitle>
+  <div
+    className="well well-lg text-center"
+  >
+    <i
+      className="cap-32 cap-contacts-1 "
+    />
+    <br />
+    <FormattedMessage
+      id="no-followers"
+      values={Object {}}
+    />
+  </div>
+</ProposalPageFollowers__ProposalPageFollowersContainer>
+`;

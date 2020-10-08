@@ -18,7 +18,7 @@ class UserBox extends React.Component<Props> {
   render() {
     const { user, className } = this.props;
     return (
-      <Col xs={12} sm={6} md={4} lg={3} className={className}>
+      <Col xs={12} sm={6} md={4} className={className}>
         <UserPreview user={user} />
       </Col>
     );
@@ -28,6 +28,7 @@ class UserBox extends React.Component<Props> {
 export default createFragmentContainer(UserBox, {
   user: graphql`
     fragment UserBox_user on User {
+      id
       ...UserPreview_user
     }
   `,

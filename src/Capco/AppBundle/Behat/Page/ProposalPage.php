@@ -12,7 +12,7 @@ class ProposalPage extends Page
     protected $path = '/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}';
 
     protected $elements = [
-        'proposal votes counter' => '#proposal-page-tabs-tab-votes .badge',
+        'proposal votes counter' => '#proposal-page-tabs-tab-votes .tip',
         'proposal comments counter' => '#proposal-page-comments-counter',
         'comments list' => '.proposal__comments',
         'first vote' => '.proposal__vote:nth-child(1)',
@@ -35,7 +35,7 @@ class ProposalPage extends Page
         'comments tab' => '#proposal-page-tabs-tab-comments',
         'proposal follow minimal' => '#proposal-follow-btn-minimal',
         'proposal follow essential' => '#proposal-follow-btn-essential',
-        'proposal follow all' => '#proposal-follow-btn-all'
+        'proposal follow all' => '#proposal-follow-btn-all',
     ];
 
     /**
@@ -43,7 +43,7 @@ class ProposalPage extends Page
      */
     public function verifyPage()
     {
-        if (!$this->getSession()->wait(5000, "$('#ProposalPageContent').length > 0")) {
+        if (!$this->getSession()->wait(10000, "$('#ProposalPageMainContent').length > 0")) {
             throw new \RuntimeException(
                 'Proposal page did not fully load, check selector in "verifyPage".'
             );

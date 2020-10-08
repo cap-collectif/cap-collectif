@@ -9,6 +9,7 @@ import type { ProposalReportButton_proposal } from '~relay/ProposalReportButton_
 type Props = {
   proposal: ProposalReportButton_proposal,
   dispatch: Function,
+  disabled?: boolean,
 };
 
 export class ProposalReportButton extends React.Component<Props> {
@@ -18,14 +19,14 @@ export class ProposalReportButton extends React.Component<Props> {
   };
 
   render() {
-    const { proposal } = this.props;
+    const { proposal, disabled } = this.props;
     return (
       <ReportBox
-        id={`proposal-${proposal.id}`}
-        buttonStyle={{ marginLeft: '15px' }}
-        reported={proposal.viewerHasReport || false}
+        id={`proposal-${proposal?.id || 'placeholder'}`}
+        disabled={disabled}
+        reported={proposal?.viewerHasReport || false}
         onReport={this.handleReport}
-        author={proposal.author}
+        author={proposal?.author}
         buttonClassName="proposal__btn--report"
       />
     );

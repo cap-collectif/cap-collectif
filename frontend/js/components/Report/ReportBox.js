@@ -18,6 +18,8 @@ type Props = {
   buttonStyle: ?Object,
   buttonBsSize?: ?string,
   buttonClassName?: ?string,
+  disabled?: boolean,
+  newDesign?: boolean,
 };
 
 export class ReportBox extends React.Component<Props> {
@@ -44,17 +46,21 @@ export class ReportBox extends React.Component<Props> {
       author,
       features,
       buttonStyle,
+      disabled,
+      newDesign,
     } = this.props;
     if (features.reporting && (!user || !author || user.uniqueId !== author.uniqueId)) {
       return (
         <span>
           <ReportButton
             id={id}
+            disabled={disabled}
             reported={reported}
             onClick={() => dispatch(openModal(id))}
             bsSize={buttonBsSize}
             style={buttonStyle}
             className={buttonClassName}
+            newDesign={newDesign}
           />
           <ReportModal id={id} show={showModal} onSubmit={onReport} />
         </span>

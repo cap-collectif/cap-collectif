@@ -1,7 +1,9 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button } from 'react-bootstrap';
+import styled, { type StyledComponent } from 'styled-components';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 type Props = {
   visible?: boolean,
@@ -9,34 +11,46 @@ type Props = {
   onClick: () => void,
 };
 
-class ReadMoreLink extends React.Component<Props> {
-  static displayName = 'ReadMoreLink';
-
-  static defaultProps = {
-    visible: false,
-    expanded: false,
-  };
-
-  render() {
-    const { expanded, onClick, visible } = this.props;
-    if (!visible) {
-      return null;
-    }
-    return (
-      <Button bsStyle="link" className="btn-block read-more__button" onClick={onClick}>
-        {expanded ? (
-          <>
-            <FormattedMessage id="comment.read_less" /> <i className="ml-5 cap cap-arrow-68" />
-          </>
-        ) : (
-          <>
-            <FormattedMessage id="project.show.meta.read_more" />{' '}
-            <i className="ml-5 cap cap-arrow-67" />
-          </>
-        )}
-      </Button>
-    );
+const ReadMoreButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+  text-align: left;
+  padding: 0;
+  color: ${colors.primaryColor};
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  outline: 0;
+  :hover,
+  :active {
+    box-shadow: none;
+    background: none;
+    border: none;
+    color: ${colors.primaryColor};
   }
-}
+
+  > span {
+    margin-left: 5px;
+  }
+`;
+
+const ReadMoreLink = ({ expanded = false, onClick, visible = false }: Props) => {
+  if (!visible) {
+    return null;
+  }
+  return (
+    <ReadMoreButton onClick={onClick}>
+      <>
+        <Icon
+          name={expanded ? ICON_NAME.less : ICON_NAME.plus}
+          size={14}
+          color={colors.primaryColor}
+        />
+        <FormattedMessage id={expanded ? 'global.less' : 'global.more'} />
+      </>
+    </ReadMoreButton>
+  );
+};
+ReadMoreLink.displayName = 'ReadMoreLink';
 
 export default ReadMoreLink;

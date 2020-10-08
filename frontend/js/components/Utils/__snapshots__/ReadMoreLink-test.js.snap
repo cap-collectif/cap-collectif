@@ -3,43 +3,33 @@
 exports[`<ReadMoreLink /> should not render anything if not visible 1`] = `""`;
 
 exports[`<ReadMoreLink /> should render a button with correct label if expanded 1`] = `
-<Button
-  active={false}
-  block={false}
-  bsClass="btn"
-  bsStyle="link"
-  className="btn-block read-more__button"
-  disabled={false}
+<ReadMoreLink__ReadMoreButton
   onClick={[Function]}
 >
+  <Icon
+    color="#0388cc"
+    name="less"
+    size={14}
+  />
   <FormattedMessage
-    id="comment.read_less"
+    id="global.less"
     values={Object {}}
   />
-   
-  <i
-    className="ml-5 cap cap-arrow-68"
-  />
-</Button>
+</ReadMoreLink__ReadMoreButton>
 `;
 
 exports[`<ReadMoreLink /> should render a button with correct label if not expanded 1`] = `
-<Button
-  active={false}
-  block={false}
-  bsClass="btn"
-  bsStyle="link"
-  className="btn-block read-more__button"
-  disabled={false}
+<ReadMoreLink__ReadMoreButton
   onClick={[Function]}
 >
+  <Icon
+    color="#0388cc"
+    name="plus"
+    size={14}
+  />
   <FormattedMessage
-    id="project.show.meta.read_more"
+    id="global.more"
     values={Object {}}
   />
-   
-  <i
-    className="ml-5 cap cap-arrow-67"
-  />
-</Button>
+</ReadMoreLink__ReadMoreButton>
 `;

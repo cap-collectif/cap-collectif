@@ -57,53 +57,51 @@ exports[`<CommentAnswer /> should render correctly 1`] = `
           }
         }
       />
-      <div
-        className="small"
-      >
-        <Relay(CommentVoteButton)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-        <Relay(Connect(CommentReportButton))
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-        <Relay(CommentEdit)
-          comment={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "$fragmentRefs": null,
-                "displayName": "admin",
-                "vip": true,
-              },
-              "id": "proposalComment1",
-            }
-          }
-        />
-      </div>
     </Body>
+    <Comment__CommentBottom>
+      <Relay(CommentVoteButton)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Relay(Connect(CommentReportButton))
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Relay(CommentEdit)
+        comment={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "$fragmentRefs": null,
+              "displayName": "admin",
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+    </Comment__CommentBottom>
   </Media>
 </Connect(ComponentWithColors)>
 `;

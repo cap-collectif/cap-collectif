@@ -67,6 +67,7 @@ export const NavBar: StyledComponent<
 > = styled(Navbar)`
   border-color: ${({ borderColor }) => borderColor};
   top: 50px;
+  z-index: 1001;
   text-transform: capitalize;
   max-height: 500px;
   transition: max-height 0.25s ease-in;
@@ -156,6 +157,11 @@ export const NavBar: StyledComponent<
       right: 15px;
       top: 18px;
     }
+  }
+
+  .container {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 `;
 

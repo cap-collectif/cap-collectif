@@ -2311,7 +2311,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c3c3a249501e12145d2f03ae706a710f",
+          "cacheID": "97ed6142259acdce90473d3cb52ef610",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2752,6 +2752,7 @@ fragment UserAvatarList_users on User {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {
@@ -5092,7 +5093,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c3c3a249501e12145d2f03ae706a710f",
+          "cacheID": "97ed6142259acdce90473d3cb52ef610",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5533,6 +5534,7 @@ fragment UserAvatarList_users on User {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {

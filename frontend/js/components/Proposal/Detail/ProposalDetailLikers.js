@@ -16,6 +16,8 @@ type Props = {
   dispatch: Dispatch,
   intl: IntlShape,
   size?: string,
+  // Temporary "newDesign" property, for a fresher design with a loading placeholder
+  newDesign?: boolean,
 };
 
 export class ProposalDetailLikers extends React.Component<Props> {
@@ -30,9 +32,9 @@ export class ProposalDetailLikers extends React.Component<Props> {
   };
 
   render() {
-    const { size, proposal, componentClass, showModal, intl } = this.props;
+    const { size, proposal, componentClass, showModal, intl, newDesign } = this.props;
 
-    if (proposal.likers.length === 0) {
+    if (proposal?.likers.length === 0) {
       return null;
     }
 
@@ -44,6 +46,7 @@ export class ProposalDetailLikers extends React.Component<Props> {
           componentClass={componentClass}
           onClick={this.handleClick}
           size={size}
+          newDesign={newDesign || false}
         />
         <ProposalDetailLikersModal show={showModal} proposal={proposal} />
       </React.Fragment>

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import styled, { type StyledComponent } from 'styled-components';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
 import type { ProposalPreviewVote_proposal } from '~relay/ProposalPreviewVote_proposal.graphql';
@@ -13,11 +14,19 @@ type Props = {
   viewer: ?ProposalPreviewVote_viewer,
 };
 
+const Container: StyledComponent<{}, {}, HTMLSpanElement> = styled.span`
+  /** Boostrap for now until "Epurer" ticket */
+  .proposal__button__vote.active:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+`;
+
 export class ProposalPreviewVote extends React.Component<Props> {
   render() {
     const { proposal, step, viewer } = this.props;
     return (
-      <span>
+      <Container>
         <ProposalVoteButtonWrapperFragment
           proposal={proposal}
           step={step}
@@ -26,7 +35,7 @@ export class ProposalPreviewVote extends React.Component<Props> {
           className="proposal__preview__vote mr-15"
         />
         {viewer && <ProposalVoteModal proposal={proposal} step={step} />}
-      </span>
+      </Container>
     );
   }
 }

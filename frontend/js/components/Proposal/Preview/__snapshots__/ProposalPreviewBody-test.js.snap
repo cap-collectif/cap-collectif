@@ -178,6 +178,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
       }
     />
     <Relay(ProposalFollowButton)
+      isAuthenticated={true}
       proposal={
         Object {
           "$fragmentRefs": null,

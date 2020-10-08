@@ -38,19 +38,21 @@ class ProposalDetailAdvancementStep extends React.Component<Props> {
                   paddingBottom: '10px',
                   borderLeftStyle: 'solid',
                   borderLeftColor: borderColor,
-                  borderLeftWidth: '3px',
-                  paddingLeft: '10px',
+                  borderLeftWidth: '4px',
+                  paddingLeft: '8px',
+                  marginLeft: '5px',
                 }
               : {
-                  paddingTop: '10px',
-                  paddingLeft: '13px',
+                  paddingTop: '5px',
+                  paddingLeft: '8px',
+                  marginLeft: '9px',
                 }
           }>
           <div
             style={{
               float: 'left',
-              width: '12px',
-              height: '12px',
+              width: '16px',
+              height: '16px',
               marginTop: '-10px',
               marginLeft: '-18px',
               lineHeight: '28px',
@@ -60,13 +62,13 @@ class ProposalDetailAdvancementStep extends React.Component<Props> {
               borderRadius: '50%',
             }}
           />
-          <div style={{ marginTop: '-15px' }}>
+          <div style={{ marginTop: '-15px', marginLeft: '15px' }}>
             <div>{step.title}</div>
             <div className="excerpt small">
               <span>{this.renderDate()}</span>
             </div>
             {status && (
-              <Label bsStyle={status.color} style={{ marginTop: '5px' }}>
+              <Label bsStyle={status.color} style={{ marginTop: '5px', borderRadius: '15px' }}>
                 {status.name.length > 25 ? `${status.name.substr(0, 25)}...` : status.name}
               </Label>
             )}

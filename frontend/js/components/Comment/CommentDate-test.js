@@ -6,6 +6,7 @@ import { CommentDate } from './CommentDate';
 import { $refType } from '../../mocks';
 
 const defaultComment = {
+  id: 'comment',
   $refType,
   createdAt: '2018-01-02',
   updatedAt: '2018-08-02',

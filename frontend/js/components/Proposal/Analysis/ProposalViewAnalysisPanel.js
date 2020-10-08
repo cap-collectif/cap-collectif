@@ -2,14 +2,12 @@
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { useResize } from '@liinkiing/react-hooks';
 import styled, { type StyledComponent } from 'styled-components';
 import type { ProposalViewAnalysisPanel_proposal } from '~relay/ProposalViewAnalysisPanel_proposal.graphql';
 import colors from '~/utils/colors';
-import { bootstrapGrid } from '~/utils/sizes';
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import { getLabelData } from './ProposalAnalysisUserRow';
-import ProposalResponse from '../Page/ProposalResponse';
+import ProposalResponse from '~/components/Proposal/Page/ProposalResponse';
 
 type Props = {|
   proposal: ProposalViewAnalysisPanel_proposal,
@@ -22,12 +20,8 @@ export const ResponsesView: StyledComponent<{ tooLate?: boolean }, {}, HTMLDivEl
   opacity: ${props => props.tooLate && '.5'};
 `;
 
-export const CommentView: StyledComponent<
-  { isLarge: boolean, tooLate?: boolean },
-  {},
-  HTMLDivElement,
-> = styled.div`
-  width: ${props => `calc(100vw - (100vw - (45vw - (${props.isLarge ? '95px' : '120px'}))));`};
+export const CommentView: StyledComponent<{ tooLate?: boolean }, {}, HTMLDivElement> = styled.div`
+  width: 370px;
   background: ${colors.grayF4};
   padding: 20px;
   opacity: ${props => props.tooLate && '.5'};
@@ -39,8 +33,6 @@ export const CommentView: StyledComponent<
 `;
 
 export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
-  const { width } = useResize();
-  const isLarge = width < bootstrapGrid.mdMax;
   const analysis = proposal.analyses?.find(a => a.updatedBy.id === userId);
   if (!analysis) return null;
   const { state } = analysis;
@@ -66,7 +58,7 @@ export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
             <ProposalResponse key={index} response={response} />
           ))}
       </ResponsesView>
-      <CommentView isLarge={isLarge} tooLate={state === 'TOO_LATE'}>
+      <CommentView tooLate={state === 'TOO_LATE'}>
         <FormattedMessage tagName="p" id="global.comment" />
         <span>{analysis.comment}</span>
       </CommentView>

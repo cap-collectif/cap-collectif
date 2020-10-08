@@ -3,6 +3,11 @@
 exports[`<CommentBody /> should render correctly 1`] = `
 <div
   className="opinion__text"
+  style={
+    Object {
+      "wordBreak": "break-all",
+    }
+  }
 >
   <Linkify
     className="Linkify"
@@ -21,6 +26,11 @@ exports[`<CommentBody /> should render correctly 1`] = `
 exports[`<CommentBody /> should render correctly when trashed with body 1`] = `
 <div
   className="opinion__text"
+  style={
+    Object {
+      "wordBreak": "break-all",
+    }
+  }
 >
   <span
     className="label label-default mr-5"

@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageAside /> should render correctly 1`] = `
+<ProposalPageAside__Aside
+  hasVoteBar={false}
+  id="ProposalPageAside"
+  isAnalysing={false}
+  isFixedToBottom={false}
+  isFixedToTop={false}
+  isMovingUp={false}
+>
+  <div>
+    <Relay(ProposalPageMetadata)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+      showCategories={true}
+      showDistricts={false}
+      showNullEstimation={false}
+      showThemes={false}
+    />
+    <Relay(ProposalPageAdvancement)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+    />
+  </div>
+</ProposalPageAside__Aside>
+`;
+
+exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
+<ProposalPageAside__Aside
+  hasVoteBar={true}
+  id="ProposalPageAside"
+  isAnalysing={true}
+  isFixedToBottom={false}
+  isFixedToTop={false}
+  isMovingUp={false}
+>
+  <div>
+    <Relay(ProposalPageMetadata)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+      showCategories={true}
+      showDistricts={false}
+      showNullEstimation={false}
+      showThemes={false}
+    />
+    <Relay(ProposalPageAdvancement)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+    />
+  </div>
+</ProposalPageAside__Aside>
+`;
+
+exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
+<ProposalPageAside__Aside
+  hasVoteBar={true}
+  id="ProposalPageAside"
+  isAnalysing={false}
+  isFixedToBottom={false}
+  isFixedToTop={false}
+  isMovingUp={false}
+>
+  <div>
+    <Relay(ProposalPageMetadata)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+      showCategories={true}
+      showDistricts={false}
+      showNullEstimation={false}
+      showThemes={false}
+    />
+    <Relay(ProposalPageAdvancement)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+    />
+  </div>
+</ProposalPageAside__Aside>
+`;

@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment-timezone';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
@@ -32,7 +31,7 @@ const consideredCurrentProgressStep = (progressSteps: $ReadOnlyArray<Object>) =>
   return progressSteps[progressSteps.length - 1];
 };
 const generateProgressStepsWithColorAndStatus = (progressSteps: $ReadOnlyArray<Object>) => {
-  if (progressSteps.length < 1) {
+  if (!progressSteps || progressSteps.length < 1) {
     return [];
   }
   const stepConsideredCurrent = consideredCurrentProgressStep(progressSteps);
@@ -101,6 +100,7 @@ type Step = {|
   |},
   isSelected?: boolean,
   isCurrent?: boolean,
+  enabled: boolean,
   isPast?: boolean,
   isFuture?: boolean,
   allowingProgressSteps?: boolean,
@@ -131,6 +131,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
 
   render() {
     const { proposal } = this.props;
+    if (!proposal) return null;
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
     const { selections } = proposal;
     const steps = this.getMutableSteps(proposal);
@@ -151,13 +152,9 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
       step.isPast = position < consideredCurrent.position;
       step.isFuture = position > consideredCurrent.position;
     }
-    const displayedSteps = steps.filter(step => step.isSelected || step.isFuture);
+    const displayedSteps = steps.filter(step => (step.isSelected || step.isFuture) && step.enabled);
     return (
-      <div style={{ marginLeft: '10px', marginTop: '-15px' }}>
-        <h4>
-          <FormattedMessage id="proposal.detail.advancement" />
-        </h4>
-        <br />
+      <>
         {displayedSteps.map((step, index) => {
           let roundColor = grey;
           if (step.isCurrent) {
@@ -211,7 +208,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
             />
           );
         })}
-      </div>
+      </>
     );
   }
 }
@@ -241,6 +238,7 @@ export default createFragmentContainer(ProposalDetailAdvancement, {
       project {
         id
         steps(orderBy: { field: POSITION, direction: ASC }) {
+          enabled
           id
           title
           __typename

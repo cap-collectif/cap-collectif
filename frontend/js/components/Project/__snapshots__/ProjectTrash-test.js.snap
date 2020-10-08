@@ -317,6 +317,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
                                         "name": "url",
                                         "storageKey": null,
                                       },
@@ -364,13 +371,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         "args": null,
                                         "kind": "ScalarField",
                                         "name": "displayName",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -475,6 +475,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                     "alias": null,
                                                     "args": null,
                                                     "kind": "ScalarField",
+                                                    "name": "id",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
                                                     "name": "url",
                                                     "storageKey": null,
                                                   },
@@ -508,13 +515,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                         "storageKey": null,
                                                       },
                                                     ],
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "id",
                                                     "storageKey": null,
                                                   },
                                                   Object {
@@ -1700,7 +1700,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "0bfef2a33c58551fd4581ea1105a37d0",
+            "cacheID": "ca11e0131c76533e7d02b067b3bf6249",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashQuery",
@@ -1769,6 +1769,7 @@ fragment CommentBody_comment on Comment {
 }
 
 fragment CommentDate_comment on Comment {
+  id
   createdAt
   publishedAt
   updatedAt
@@ -2042,6 +2043,7 @@ fragment UnpublishedTooltip_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {

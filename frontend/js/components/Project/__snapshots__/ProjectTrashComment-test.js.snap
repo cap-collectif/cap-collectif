@@ -198,6 +198,13 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
                                       "name": "url",
                                       "storageKey": null,
                                     },
@@ -245,13 +252,6 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "displayName",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -356,6 +356,13 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                                   "alias": null,
                                                   "args": null,
                                                   "kind": "ScalarField",
+                                                  "name": "id",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
                                                   "name": "url",
                                                   "storageKey": null,
                                                 },
@@ -389,13 +396,6 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "id",
                                                   "storageKey": null,
                                                 },
                                                 Object {
@@ -959,7 +959,7 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7f5f1e38dff9b04f950c5ba51522553a",
+          "cacheID": "d97532f142eb68694dcecdf19af140f2",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashCommentQuery",
@@ -1019,6 +1019,7 @@ fragment CommentBody_comment on Comment {
 }
 
 fragment CommentDate_comment on Comment {
+  id
   createdAt
   publishedAt
   updatedAt
@@ -1136,6 +1137,7 @@ fragment UnpublishedTooltip_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {

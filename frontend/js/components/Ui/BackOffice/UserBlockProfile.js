@@ -38,7 +38,7 @@ export const ProfileInfo: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 export const UserBlockProfile = ({ query }: Props) => (
   <>
     <ProfileInfo>
-      {query.user.media ? (
+      {!query.user.media ? (
         <img src={query.user.media?.url} alt="admin profile" />
       ) : (
         <DefaultAvatar size={60} className="img-circle avatar" />

@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import type { UserLink_user } from '~relay/UserLink_user.graphql';
 import type { State } from '~/types';
-import {translateContent} from "~/utils/ContentTranslator";
+import { translateContent } from '~/utils/ContentTranslator';
 
 type ReduxProps = {|
   +toggled: boolean,

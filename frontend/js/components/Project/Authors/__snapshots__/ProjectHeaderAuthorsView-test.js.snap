@@ -201,7 +201,7 @@ exports[`<ProjectHeaderAuthorsView /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "e23f550270e09c82e3990c6665ee13d7",
+          "cacheID": "78525c660316516ac53394290fa9b3a3",
           "id": null,
           "metadata": Object {},
           "name": "ProjectHeaderAuthorsViewQuery",
@@ -248,6 +248,7 @@ fragment UserAvatarList_users on User {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {

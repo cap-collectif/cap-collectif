@@ -27,7 +27,9 @@ type PropsAvatarHidden = {|
 
 const DEFAULT_AVATAR_SIZE = 45;
 
-const UserAvatarListWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const UserAvatarListWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
+  className: 'UserAvatarListWrapper',
+})`
   display: flex;
   position: relative;
 `;

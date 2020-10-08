@@ -3,15 +3,41 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
 import RemoveCommentVoteMutation from '../../mutations/RemoveCommentVoteMutation';
 import AddCommentVoteMutation from '../../mutations/AddCommentVoteMutation';
 import LoginOverlay from '../Utils/LoginOverlay';
 import UnpublishedTooltip from '../Publishable/UnpublishedTooltip';
 import type { CommentVoteButton_comment } from '~relay/CommentVoteButton_comment.graphql';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 type Props = {|
   +comment: CommentVoteButton_comment,
 |};
+
+const VoteButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
+  border: none;
+  background: none;
+  text-transform: lowercase;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: ${colors.darkGray};
+
+  svg {
+    margin: 0;
+    margin-right: 8px;
+  }
+
+  span {
+    margin-left: 3px;
+    display: none;
+    @media (min-width: 768px) {
+      display: unset;
+    }
+  }
+`;
 
 class CommentVoteButton extends React.Component<Props> {
   target: null;
@@ -36,9 +62,10 @@ class CommentVoteButton extends React.Component<Props> {
     const { comment } = this.props;
     if (comment.author && comment.author.isViewer) {
       return (
-        <button type="button" disabled="disabled" className="btn btn-dark-gray btn-xs">
-          <i className="cap-hand-like-2" /> <FormattedMessage id="global.ok" />
-        </button>
+        <VoteButton type="button" disabled="disabled">
+          <Icon name={ICON_NAME.like} size={15} color={colors.secondaryGray} opacity={0.5} />
+          {comment.votes.totalCount} <FormattedMessage id="global.ok" />
+        </VoteButton>
       );
     }
 
@@ -50,38 +77,37 @@ class CommentVoteButton extends React.Component<Props> {
 
     if (comment.viewerHasVote) {
       return (
-        <button
+        // $FlowFixMe refs, this needs a useRef
+        <VoteButton
           type="button"
           ref={ref => {
-            // $FlowFixMe
             this.target = ref;
           }}
-          className="btn btn-danger btn-xs"
           onClick={this.deleteVote}>
           <UnpublishedTooltip
             target={() => ReactDOM.findDOMNode(this.target)}
             publishable={comment.viewerVote}
           />
-          <FormattedMessage id="global.cancel" />
-        </button>
+          <Icon name={ICON_NAME.like} size={15} color={colors.successColor} />
+          {comment.votes.totalCount} <FormattedMessage id="global.ok" />
+        </VoteButton>
       );
     }
 
     return (
       <LoginOverlay>
-        <button type="button" className="btn btn-success btn--outline btn-xs" onClick={this.vote}>
-          <i className="cap-hand-like-2" /> <FormattedMessage id="global.ok" />
-        </button>
+        <VoteButton type="button" onClick={this.vote}>
+          <Icon name={ICON_NAME.like} size={15} color={colors.secondaryGray} opacity={0.5} />
+          {comment.votes.totalCount} <FormattedMessage id="global.ok" />
+        </VoteButton>
       </LoginOverlay>
     );
   };
 
   render() {
-    const { comment } = this.props;
     return (
       <span>
         <form className="opinion__votes-button">{this.renderFormOrDisabled()} </form>
-        <span className="opinion__votes-nb">{comment.votes.totalCount}</span>
       </span>
     );
   }

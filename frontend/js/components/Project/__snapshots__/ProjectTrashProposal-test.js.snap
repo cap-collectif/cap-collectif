@@ -790,7 +790,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "efe74cde1d883081eee7a56cdd54815e",
+          "cacheID": "dd21480765a31dcd7121be1e16e5c606",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -973,6 +973,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {

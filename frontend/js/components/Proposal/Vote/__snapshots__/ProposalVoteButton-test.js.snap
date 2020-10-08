@@ -11,6 +11,9 @@ exports[`<ProposalVoteButton /> renders viewer has not voted 1`] = `
   id="buttonID"
   onClick={[Function]}
 >
+  <i
+    className="cap cap-hand-like-2 mr-5"
+  />
   <FormattedMessage
     id="global.vote.for"
     values={Object {}}
@@ -38,6 +41,9 @@ exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
     }
     target={[Function]}
   />
+  <i
+    className="cap cap-hand-like-2 mr-5"
+  />
   <FormattedMessage
     id="global.voted"
     values={Object {}}
@@ -64,6 +70,9 @@ exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
       }
     }
     target={[Function]}
+  />
+  <i
+    className="cap cap-hand-like-2 mr-5"
   />
   <FormattedMessage
     id="global.cancel"

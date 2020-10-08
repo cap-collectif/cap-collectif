@@ -5,7 +5,7 @@ import Linkify from 'react-linkify';
 import { FormattedMessage } from 'react-intl';
 import nl2br from 'react-nl2br';
 import type { CommentBody_comment } from '~relay/CommentBody_comment.graphql';
-import { isPredefinedTraductionKey, translateContent } from "~/utils/ContentTranslator";
+import { isPredefinedTraductionKey, translateContent } from '~/utils/ContentTranslator';
 
 type Props = {|
   +comment: CommentBody_comment,
@@ -90,7 +90,7 @@ export class CommentBody extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="opinion__text">
+      <div className="opinion__text" style={{ wordBreak: 'break-all' }}>
         {this.renderTrashedLabel()}
         <Linkify properties={{ className: 'external-link' }}>{nl2br(this.generateText())}</Linkify>
         {this.renderReadMoreOrLess()}

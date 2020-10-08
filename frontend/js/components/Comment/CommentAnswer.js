@@ -10,6 +10,7 @@ import CommentEdit from './CommentEdit';
 import Media from '../Ui/Medias/Media/Media';
 import { CommentContainer } from './styles';
 import type { CommentAnswer_comment } from '~relay/CommentAnswer_comment.graphql';
+import { CommentBottom } from './Comment';
 
 type Props = {|
   +comment: CommentAnswer_comment,
@@ -37,12 +38,12 @@ export class CommentAnswer extends React.Component<Props> {
               <CommentInfos comment={comment} />
             </div>
             <CommentBody comment={comment} />
-            <div className="small">
-              <CommentVoteButton comment={comment} />
-              <CommentReportButton comment={comment} />
-              <CommentEdit comment={comment} />
-            </div>
           </Media.Body>
+          <CommentBottom>
+            <CommentVoteButton comment={comment} />
+            <CommentReportButton comment={comment} />
+            <CommentEdit comment={comment} />
+          </CommentBottom>
         </Media>
       </CommentContainer>
     );

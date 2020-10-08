@@ -12,7 +12,7 @@ export type FileInfo = {|
 
 type Props = {|
   ...FileInfo,
-  onDelete: () => void,
+  onDelete?: () => void,
 |};
 
 export const convertFileSize = (size: number) => {
@@ -60,9 +60,11 @@ const File = ({ name, size, url, onDelete }: Props) => (
 
     <div>
       <span>{formatSize(size)}</span>
-      <button type="button" className="btn-delete" onClick={onDelete}>
-        <Icon name={ICON_NAME.trash} size={12} />
-      </button>
+      {onDelete ? (
+        <button type="button" className="btn-delete" onClick={onDelete}>
+          <Icon name={ICON_NAME.trash} size={12} />
+        </button>
+      ) : null}
     </div>
   </FileContainer>
 );

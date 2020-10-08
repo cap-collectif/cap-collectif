@@ -140,6 +140,7 @@ export class ProposalVoteButton extends React.Component<Props> {
             publishable={proposal.viewerVote}
           />
         )}
+        <i className="cap cap-hand-like-2 mr-5" />
         <FormattedMessage id={this.getButtonText()} />
       </Button>
     );

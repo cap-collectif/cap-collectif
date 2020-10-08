@@ -27,7 +27,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
   render() {
     const { proposal, show, intl } = this.props;
 
-    if (proposal.likers.length === 0) {
+    if (proposal?.likers.length === 0) {
       return null;
     }
 
@@ -38,13 +38,13 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
             <FormattedMessage
               id="proposal.likers.count"
               values={{
-                num: proposal.likers.length,
+                num: proposal?.likers.length,
               }}
             />
           </Modal.Title>
         </Modal.Header>
         <ListGroupFlush>
-          {proposal.likers.map((liker, key) => (
+          {proposal?.likers.map((liker, key) => (
             <ListGroupItem key={key} className={`${liker.vip ? 'bg-vip' : ''} d-flex text-left`}>
               {/* $FlowFixMe Will be a fragment soon */}
               <UserAvatarDeprecated

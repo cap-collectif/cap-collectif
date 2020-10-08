@@ -1365,6 +1365,13 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "url",
                                 "storageKey": null,
                               },
@@ -1398,13 +1405,6 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                     "storageKey": null,
                                   },
                                 ],
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
                                 "storageKey": null,
                               },
                             ],
@@ -1443,6 +1443,13 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "url",
                                 "storageKey": null,
                               },
@@ -1478,13 +1485,6 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                 ],
                                 "storageKey": null,
                               },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
                             ],
                             "storageKey": null,
                           },
@@ -1500,7 +1500,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "6f398a6b43865581d950c41a1e4a3ef8",
+            "cacheID": "6a91cea0c2d322cd76d1253fd3d86cf1",
             "id": null,
             "metadata": Object {},
             "name": "OpinionSourceBoxQuery",
@@ -1819,6 +1819,7 @@ fragment UnpublishedTooltip_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {

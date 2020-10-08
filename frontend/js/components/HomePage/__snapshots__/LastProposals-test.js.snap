@@ -598,7 +598,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "b4d7b785d60f5dd304af19da097832fb",
+          "cacheID": "7f990609fe6ada50fa53cc9303423e88",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -758,6 +758,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 }
 
 fragment UserAvatar_user on User {
+  id
   url
   username
   media {

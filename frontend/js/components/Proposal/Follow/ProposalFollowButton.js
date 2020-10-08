@@ -24,7 +24,8 @@ import Popover from '../../Utils/Popover';
 import type { SubscriptionTypeValue } from '~relay/UpdateFollowProposalMutation.graphql';
 
 type Props = {|
-  +proposal: ProposalFollowButton_proposal,
+  +proposal: ?ProposalFollowButton_proposal,
+  isAuthenticated: boolean,
 |};
 
 type State = {
@@ -40,7 +41,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
   componentWillReceiveProps(nextProps: Props) {
     if (this.props !== nextProps) {
       this.setState({
-        isJustFollowed: !!nextProps.proposal.viewerIsFollowing,
+        isJustFollowed: !!nextProps.proposal?.viewerIsFollowing,
       });
     }
   }
@@ -63,6 +64,17 @@ export class ProposalFollowButton extends React.Component<Props, State> {
   render() {
     const { proposal } = this.props;
     const { isJustFollowed } = this.state;
+    if (!proposal)
+      return (
+        <Button
+          disabled
+          className="btn btn-default proposal__button__follow"
+          id="proposal-follow-btn-placeholder">
+          <i className="cap cap-rss mr-5" />
+          <FormattedMessage id="follow" />
+        </Button>
+      );
+
     if (!proposal.viewerIsFollowing) {
       return (
         <LoginOverlay>
@@ -79,6 +91,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
               })
             }
             id={`proposal-follow-btn-${proposal.id}`}>
+            <i className="cap cap-rss mr-5" />
             <FormattedMessage id="follow" />
           </Button>
         </LoginOverlay>
