@@ -73,7 +73,7 @@ class AnalysisConfiguration implements Timestampable
     private $moveToSelectionStep;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true, name="selection_step_status")
      */
     private $selectionStepStatus;
