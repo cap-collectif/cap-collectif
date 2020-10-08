@@ -12,12 +12,12 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
 {
     public const AUTOCOMPLETE_SIRET_CACHE_KEY = 'AUTOCOMPLETE_SIRET_CACHE_KEY_V3';
 
-    private $apiToken;
-    private $rootDir;
-    private $pdfGenerator;
-    private $autoCompleteUtils;
-    private $cache;
-    private $logger;
+    private string $apiToken;
+    private string $rootDir;
+    private APIEnterprisePdfGenerator $pdfGenerator;
+    private APIEnterpriseAutoCompleteUtils $autoCompleteUtils;
+    private RedisCache $cache;
+    private LoggerInterface $logger;
 
     public function __construct(
         RedisCache $cache,
@@ -84,7 +84,7 @@ class AutoCompleteFromSiretQueryResolver implements ResolverInterface
             ];
         }
 
-        $sirenSitu = json_encode($enterprise);
+        $sirenSitu = json_encode($enterprise, JSON_UNESCAPED_UNICODE);
 
         $sirenSituPDF = $this->pdfGenerator->jsonToPdf(
             $sirenSitu,

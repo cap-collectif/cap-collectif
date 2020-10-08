@@ -11,18 +11,18 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
 {
     public const AUTOCOMPLETE_DOC_CACHE_KEY = 'AUTOCOMPLETE_DOC_CACHE_KEY_V3';
 
-    private $pdfGenerator;
-    private $apiToken;
-    private $autoCompleteUtils;
-    private $rootDir;
-    private $cache;
+    private APIEnterprisePdfGenerator $pdfGenerator;
+    private string $apiToken;
+    private APIEnterpriseAutoCompleteUtils $autoCompleteUtils;
+    private string $rootDir;
+    private RedisCache $cache;
 
     public function __construct(
         RedisCache $cache,
         APIEnterprisePdfGenerator $pdfGenerator,
         APIEnterpriseAutoCompleteUtils $autoCompleteUtils,
-        $apiToken,
-        $rootDir
+        string $apiToken,
+        string $rootDir
     ) {
         $this->pdfGenerator = $pdfGenerator;
         $this->apiToken = $apiToken;
@@ -125,10 +125,14 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 "https://entreprise.api.gouv.fr/v2/attestations_sociales_acoss/${siren}",
                 12
             );
+
+            //          https://entreprise.api.gouv.fr/catalogue/#extraits_rcs_infogreffe
             $greffe = $this->autoCompleteUtils->makeGetRequest(
                 $client,
-                "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}"
+                "https://entreprise.api.gouv.fr/v2/extraits_rcs_infogreffe/${siren}?token={$this->apiToken}",
+                12
             );
+
             // If the request returns an exception, it will be thrown when accessing the data
             $dgfip = $this->autoCompleteUtils->accessRequestObjectSafely($dgfip);
             $acoss = $this->autoCompleteUtils->accessRequestObjectSafely($acoss);
@@ -144,11 +148,13 @@ class AutoCompleteDocQueryResolver implements ResolverInterface
                 "${id}_attestations_sociales"
             );
 
-            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe)
-                ? json_encode($greffe)
-                : null;
-            $greffe = isset($greffe) ? json_encode($greffe) : null;
-            $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis");
+            $greffe = $this->autoCompleteUtils->accessRequestObjectSafely($greffe);
+            $greffe =
+                isset($greffe) && \is_array($greffe)
+                    ? json_encode($greffe, JSON_UNESCAPED_UNICODE)
+                    : null;
+
+            $kbis = $this->pdfGenerator->jsonToPdf($greffe, $basePath, "${id}_kbis", 'kbisPdf');
 
             $docs = array_merge($docs, [
                 'availableFiscalRegulationAttestation' => isset($dgfip),

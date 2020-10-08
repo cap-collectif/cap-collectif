@@ -43,6 +43,7 @@ twig:
         viewerCanSeeEvaluationsPageResolver: '@Capco\AppBundle\GraphQL\Resolver\Query\QueryViewerCanSeeEvaluationsPageResolver'
     paths:
         '%kernel.project_dir%/src/Capco/AppBundle/Mailer/templates': CapcoMail
+        '%kernel.project_dir%/src/Capco/AppBundle/PDF/templates': CapcoPDF
 
 services:
     _defaults:

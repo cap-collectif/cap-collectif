@@ -21,6 +21,7 @@ app_consultation_show_versions_ranking: '/consultation/{projectSlug}/ranking/{st
 app_contact: /contact
 app_cookies: /cookies-page
 app_email: '/email/{messageType}'
+app_render_pdf: '/render_pdf/{messageType}'
 app_event: /events
 app_event_show: '/events/{slug}'
 app_homepage: /

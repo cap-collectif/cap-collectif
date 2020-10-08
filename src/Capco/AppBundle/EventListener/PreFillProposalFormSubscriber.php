@@ -14,9 +14,9 @@ use Symfony\Component\Form\FormEvents;
 
 class PreFillProposalFormSubscriber implements EventSubscriberInterface
 {
-    private $cache;
-    private $autoCompleteDocQueryResolver;
-    private $autoCompleteFromSiretQueryResolver;
+    private RedisCache $cache;
+    private AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver;
+    private AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver;
     private $shouldPreFillAPIEntreprise = false;
     private $indexTypeQuestion;
     private $indexRnaQuestion;

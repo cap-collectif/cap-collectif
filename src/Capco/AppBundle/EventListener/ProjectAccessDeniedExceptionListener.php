@@ -10,8 +10,8 @@ use Twig\Environment;
 
 class ProjectAccessDeniedExceptionListener
 {
-    protected $logger;
-    protected $templating;
+    protected LoggerInterface $logger;
+    protected Environment $templating;
 
     public function __construct(LoggerInterface $logger, Environment $templating)
     {

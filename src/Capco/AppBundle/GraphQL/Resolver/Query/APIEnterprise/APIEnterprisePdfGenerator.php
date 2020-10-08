@@ -6,20 +6,30 @@ use Capco\AppBundle\Manager\MediaManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use TCPDF;
+use Twig\Environment;
 
 class APIEnterprisePdfGenerator
 {
-    private $mediaManager;
-    private $logger;
+    private MediaManager $mediaManager;
+    private LoggerInterface $logger;
+    private Environment $templating;
 
-    public function __construct(MediaManager $mediaManager, LoggerInterface $logger)
-    {
+    public function __construct(
+        MediaManager $mediaManager,
+        LoggerInterface $logger,
+        Environment $templating
+    ) {
         $this->mediaManager = $mediaManager;
+        $this->templating = $templating;
         $this->logger = $logger;
     }
 
-    public function jsonToPdf(?string $content, string $path, string $filename): ?string
-    {
+    public function jsonToPdf(
+        ?string $content,
+        string $path,
+        string $filename,
+        $template = 'siretPdf'
+    ): ?string {
         if (!$content) {
             return null;
         }
@@ -27,11 +37,15 @@ class APIEnterprisePdfGenerator
         try {
             $filenameWithExtension = $filename . '.pdf';
             $completePath = "${path}${filenameWithExtension}";
+
+            $jsonToArray = json_decode($content);
+            $html = $this->templating->render("@CapcoPDF/${template}.html.twig", [
+                'data' => $jsonToArray,
+            ]);
+
             $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
             $pdf->AddPage();
-            $pdf->writeHTML('<p>' . $content . '</p>');
-            $pdf->writeHTML('<p> </p>');
-            $pdf->writeHTML('<p>' . date('Y-m-d H:i:s') . '</p>');
+            $pdf->writeHTML($html);
             if (!file_exists($path)) {
                 if (!mkdir($path, 0777, true) && !is_dir($path)) {
                     throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));

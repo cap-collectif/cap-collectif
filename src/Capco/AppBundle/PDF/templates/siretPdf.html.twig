@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+<body>
+<div align="center">
+    <h2>SITUATION AU REPERTOIRE SIRENE</h2>
+    <span>Généré le {{ "now"|date("d/m/Y") }}</span>
+    <hr></hr>
+    <p>
+    <table id="email-penrose-conteneur" align="center" style="margin: 15px 0 5px 0; background-color:#ffffff; width:100%;"  border="1" cellspacing="0" cellpadding="0">
+        <tr>
+            <td><b>Description de l'entreprise</b></td>
+            <td>{{ data.entreprise.nom_commercial }}</td>
+        </tr>
+        <tr>
+            <td>Identifiant SIREN</td>
+            <td>{{ data.entreprise.siren }}</td>
+        </tr>
+        <tr>
+            <td>Identifiant SIRET du siège</td>
+            <td>{{ data.entreprise.siret_siege_social }}</td>
+        </tr>
+        <tr>
+            <td>Désignation</td>
+            <td>{{ data.entreprise.nom_commercial }}</td>
+        </tr>
+        <tr>
+            <td>Catégorie juridique</td>
+            <td>{{ data.entreprise.forme_juridique_code }} - {{ data.entreprise.forme_juridique }}</td>
+        </tr>
+        <tr>
+            <td>Activité Principale Exercée (APE)</td>
+            <td>{{ data.entreprise.naf_entreprise }} - {{ data.entreprise.libelle_naf_entreprise }}</td>
+        </tr>
+    </table>
+    </p>
+    <p>
+    <table id="email-penrose-conteneur" align="center" style="margin: 15px 0 5px 0; background-color:#ffffff; width:100%;" border="1" cellspacing="0" cellpadding="0">
+        <tr>
+            <td><b>Description de l'établissement</b></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Identifiant SIRET</td>
+            <td>{{ data.etablissement_siege.siret }}</td>
+        </tr>
+        <tr>
+            <td>Adresse</td>
+            <td>
+                {{ data.etablissement_siege.adresse.l1 }}
+                {{ data.etablissement_siege.adresse.l2 }}
+                {{ data.etablissement_siege.adresse.l3 }}<br>
+                {{ data.etablissement_siege.adresse.l4 }}
+                {{ data.etablissement_siege.adresse.l5 }}<br>
+                {{ data.etablissement_siege.adresse.l6 }}
+                {{ data.etablissement_siege.adresse.l7 }}
+            </td>
+        </tr>
+        <tr>
+            <td>Activité Principale Exercée (APE)</td>
+            <td>{{ data.etablissement_siege.naf }} {{ data.etablissement_siege.libelle_naf }}</td>
+        </tr>
+    </table>
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+<body>
+    <div align="center">
+        <h2>Extrait Kbis</h2>
+        <h2>EXTRAIT D'IMMATRICULATION PRINCIPALE AU REGISTRE DU COMMERCE ET DES SOCIETES</h2>
+        Généré le {{ "now"|date("d/m/Y") }} </br>
+        Date d'extrait {{ data.date_extrait }}
+        <div>
+            <p>
+            <h3>IDENTIFICATION DE LA PERSONNE MORALE</h3>
+            <table id="email-penrose-conteneur" align="center" style="margin: 15px 0 5px 0; background-color:#ffffff;"
+                   border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="300">Immatriculation au RCS, numéro</td>
+                    <td>{{ data.siren }}</td>
+                </tr>
+                <tr>
+                    <td>Date d'immatriculation</td>
+                    <td>{{ data.date_immatriculation_timestamp|date("d/m/Y") }}</td>
+                </tr>
+            </table>
+            </p>
+            </br>
+        </div>
+    </div>
+</body>
+</html>

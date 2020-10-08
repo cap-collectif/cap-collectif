@@ -13,16 +13,16 @@ class PriorAuthenticationHandler
 {
     public const MAX_FAILED_LOGIN_ATTEMPT = 5;
 
-    private $userConnectionRepository;
-    private $toggleManager;
-    private $logger;
-    private $apiKey;
+    private UserConnectionRepository $userConnectionRepository;
+    private Manager $toggleManager;
+    private LoggerInterface $logger;
+    private string $apiKey;
 
     public function __construct(
         UserConnectionRepository $userConnectionRepository,
         Manager $toggleManager,
         LoggerInterface $logger,
-        $apiKey
+        string $apiKey
     ) {
         $this->userConnectionRepository = $userConnectionRepository;
         $this->toggleManager = $toggleManager;

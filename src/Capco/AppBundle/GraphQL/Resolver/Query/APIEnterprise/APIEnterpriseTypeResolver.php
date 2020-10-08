@@ -15,7 +15,7 @@ class APIEnterpriseTypeResolver implements ResolverInterface
     public const ENTERPRISE = 'APIEnterpriseEnterprise';
     public const ASSOCIATION = 'APIEnterpriseAssociation';
     public const PUBLIC_ORGA = 'APIEnterprisePublicOrganization';
-    private $typeResolver;
+    private TypeResolver $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
     {
