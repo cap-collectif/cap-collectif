@@ -396,6 +396,34 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "isRangeBetween",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "rangeMin",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "rangeMax",
+                          "storageKey": null,
+                        },
+                      ],
+                      "type": "SimpleQuestion",
+                    },
+                    Object {
+                      "abstractKey": null,
+                      "kind": "InlineFragment",
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "isOtherAllowed",
                           "storageKey": null,
                         },
@@ -613,7 +641,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "0c18727a11c4e0fb3b88c474bce3589e",
+          "cacheID": "a4c68d1a521fc80c4bb007bfcb68472c",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -653,6 +681,11 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     helpText
     ... on SectionQuestion {
       level
+    }
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
     }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
@@ -1255,6 +1288,34 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "isRangeBetween",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "rangeMin",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "rangeMax",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "SimpleQuestion",
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "isOtherAllowed",
                                 "storageKey": null,
                               },
@@ -1472,7 +1533,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                 ],
               },
               "params": Object {
-                "cacheID": "0c18727a11c4e0fb3b88c474bce3589e",
+                "cacheID": "a4c68d1a521fc80c4bb007bfcb68472c",
                 "id": null,
                 "metadata": Object {},
                 "name": "RegistrationAdminPageQuery",
@@ -1512,6 +1573,11 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     helpText
     ... on SectionQuestion {
       level
+    }
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
     }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
@@ -2078,6 +2144,34 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "isRangeBetween",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "rangeMin",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "rangeMax",
+                          "storageKey": null,
+                        },
+                      ],
+                      "type": "SimpleQuestion",
+                    },
+                    Object {
+                      "abstractKey": null,
+                      "kind": "InlineFragment",
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "isOtherAllowed",
                           "storageKey": null,
                         },
@@ -2295,7 +2389,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
           ],
         },
         "params": Object {
-          "cacheID": "0c18727a11c4e0fb3b88c474bce3589e",
+          "cacheID": "a4c68d1a521fc80c4bb007bfcb68472c",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -2335,6 +2429,11 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     helpText
     ... on SectionQuestion {
       level
+    }
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
     }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id

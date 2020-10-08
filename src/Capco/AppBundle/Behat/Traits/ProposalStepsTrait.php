@@ -525,7 +525,8 @@ trait ProposalStepsTrait
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
         // We wait for page reloading and new proposal show up
-        $this->iWait(8);
+        $this->getSession()->wait(8000, "$('.loader').length > 0");
+        $this->getSession()->wait(8000, "$('.loader').length == 0");
     }
 
     /**

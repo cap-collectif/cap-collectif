@@ -139,7 +139,7 @@ const onUnload = e => {
 const memoizeAvailableQuestions: any = memoize(() => {});
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { proposalForm, proposal } = props;
+  const { proposalForm, proposal, features, intl } = props;
   const data = {
     title: values.title,
     summary: values.summary,
@@ -156,6 +156,23 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   if (!proposalForm.step) {
     return;
   }
+  const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
+  const responsesError = validateProposalContent(
+    values,
+    proposalForm,
+    features,
+    intl,
+    values.draft,
+    availableQuestions,
+    true,
+  );
+  const errors = {};
+  const isEmptyArray = responsesError.responses ? responsesError.responses.filter(Boolean) : [];
+  if (isEmptyArray && isEmptyArray.length) {
+    errors.responses = responsesError.responses;
+    throw new SubmissionError(errors);
+  }
+
   if (proposal) {
     return ChangeProposalContentMutation.commit({
       input: { ...data, id: proposal.id },

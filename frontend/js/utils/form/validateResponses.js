@@ -30,9 +30,9 @@ export const validateResponses = (
   intl: IntlShape,
   isDraft: boolean = false,
   availableQuestionIds: Array<string> = [],
+  async: boolean = false,
 ): { responses: ResponsesError | ResponsesWarning } => {
   const formattedResponses: Array<FormattedResponse> = formatResponses(questions, responses);
-
   const responsesError = formattedResponses.map((formattedResponse: FormattedResponse) => {
     const {
       idQuestion,
@@ -42,10 +42,11 @@ export const validateResponses = (
       value,
       otherValue,
       hidden,
+      constraintes,
     } = formattedResponse;
 
     // required
-    if (required && !isDraft && !hidden) {
+    if (required && !isDraft && !hidden && !async) {
       // no value
       if (
         !value || // default
@@ -68,8 +69,32 @@ export const validateResponses = (
     if (type === 'number' && value && typeof value === 'string' && !checkOnlyNumbers(value)) {
       return { idQuestion, value: `please-enter-a-number` };
     }
+    if (
+      type === 'number' &&
+      value &&
+      typeof value === 'string' &&
+      checkOnlyNumbers(value) &&
+      constraintes &&
+      constraintes.isRangeBetween &&
+      async
+    ) {
+      if (
+        constraintes.rangeMin !== null &&
+        typeof constraintes.rangeMin !== 'undefined' &&
+        parseInt(value, 10) < parseInt(constraintes.rangeMin, 10)
+      ) {
+        return { idQuestion, value: `value-lower` };
+      }
+      if (
+        constraintes.rangeMax !== null &&
+        typeof constraintes.rangeMax !== 'undefined' &&
+        parseInt(value, 10) > parseInt(constraintes.rangeMax, 10)
+      ) {
+        return { idQuestion, value: `value-higher` };
+      }
+    }
 
-    if (validationRule && ((value && value.length > 0) || otherValue) && !isDraft) {
+    if (validationRule && ((value && value.length > 0) || otherValue) && !isDraft && !async) {
       const responsesNumber = getResponseNumber(value, otherValue);
 
       if (

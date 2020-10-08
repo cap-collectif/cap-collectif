@@ -162,6 +162,7 @@ export const validateProposalContent = (
   intl: IntlShape,
   isDraft: boolean,
   availableQuestions: Array<string>,
+  async: boolean = false,
 ) => {
   const MIN_LENGTH_TITLE = 2;
   const MAX_LENGTH_TITLE = 255;
@@ -194,6 +195,7 @@ export const validateProposalContent = (
     intl,
     isDraft,
     availableQuestions,
+    async,
   );
 
   if (responsesError.responses && responsesError.responses.length) {

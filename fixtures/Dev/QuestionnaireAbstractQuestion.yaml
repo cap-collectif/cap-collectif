@@ -639,3 +639,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@questionnaireEvaluationIdf'
         question: '@simplequestionIdfEval8'
         position: 13
+    qaq63:
+        proposalForm: '@proposalFormVoteClassement'
+        question: '@simplequestion18'
+        position: 1

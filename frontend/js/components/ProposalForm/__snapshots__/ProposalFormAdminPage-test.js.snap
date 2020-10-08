@@ -1176,6 +1176,34 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
+                              "name": "isRangeBetween",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "rangeMin",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "rangeMax",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "SimpleQuestion",
+                        },
+                        Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
                               "name": "isOtherAllowed",
                               "storageKey": null,
                             },
@@ -1775,7 +1803,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "6eea548cb5f3e88be8ab5aecee44cc1e",
+          "cacheID": "65ffd3a3f5ebeae071bfe5c6e272b923",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -1979,6 +2007,11 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
     helpText
     ... on SectionQuestion {
       level
+    }
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
     }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id

@@ -1,8 +1,6 @@
 // @flow
 import type { LogicJumpConditionOperator } from '~relay/ReplyForm_questionnaire.graphql';
-import type {
-  MultipleChoiceQuestionValidationRulesTypes,
-} from '~relay/responsesHelper_question.graphql';
+import type { MultipleChoiceQuestionValidationRulesTypes } from '~relay/responsesHelper_question.graphql';
 import type { ReactSelectValue } from '~/components/Form/Select';
 
 export type QuestionType =
@@ -132,6 +130,9 @@ export type Question = {|
       +node: ?QuestionChoice,
     |}>,
   |},
+  +isRangeBetween?: boolean,
+  +rangeMin?: ?number,
+  +rangeMax?: ?number,
 |};
 export type Questions = $ReadOnlyArray<Question>;
 

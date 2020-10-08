@@ -73,7 +73,7 @@ export const zoomLevels = [
 
 export const formName = 'proposal-form-admin-configuration';
 
-const validate = (values: Object) => {
+export const validate = (values: Object) => {
   const errors = {};
 
   if (!values.description || values.description.length <= 2) {
@@ -84,7 +84,7 @@ const validate = (values: Object) => {
     errors.categories = 'admin.fields.proposal_form.errors.categories';
   }
 
-  if (values.viewEnabled.isMapViewEnabled) {
+  if (values.viewEnabled && values.viewEnabled.isMapViewEnabled) {
     if (!values.zoomMap || values.zoomMap.length === 0) {
       errors.zoomMap = 'admin.fields.proposal_form.errors.zoom';
     }
@@ -139,6 +139,20 @@ const validate = (values: Object) => {
       if (!question.type || question.type.length === 0) {
         questionErrors.type = 'admin.fields.proposal_form.errors.question.type';
         questionsArrayErrors[questionIndex] = questionErrors;
+      }
+      if (question.isRangeBetween) {
+        if (!question.rangeMin && !question.rangeMax) {
+          questionErrors.rangeMin = 'error.define-value';
+          questionErrors.rangeMax = 'error.define-value';
+          questionsArrayErrors[questionIndex] = questionErrors;
+        } else if (parseInt(question.rangeMin, 10) === 0 && parseInt(question.rangeMax, 10) === 0) {
+          questionErrors.rangeMin = 'error.define-value';
+          questionErrors.rangeMax = 'error.define-value';
+          questionsArrayErrors[questionIndex] = questionErrors;
+        } else if (parseInt(question.rangeMin, 10) > parseInt(question.rangeMax, 10)) {
+          questionErrors.rangeMin = 'error.min-higher-maximum';
+          questionsArrayErrors[questionIndex] = questionErrors;
+        }
       }
     });
 

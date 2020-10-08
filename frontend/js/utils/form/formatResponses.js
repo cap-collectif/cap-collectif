@@ -19,6 +19,11 @@ export type FormattedResponse = {|
     +type: MultipleChoiceQuestionValidationRulesTypes,
     +number: number,
   |},
+  constraintes?: ?{
+    +isRangeBetween: boolean,
+    +rangeMin: ?number,
+    +rangeMax: ?number,
+  },
 |};
 
 const formatResponses = (
@@ -33,7 +38,16 @@ const formatResponses = (
       // It's not possible but flow...
       if (!questionOfResponse) throw new Error(`Could not find question with id ${idQuestion}`);
 
-      const { type, required, validationRule, isOtherAllowed, hidden } = questionOfResponse;
+      const {
+        type,
+        required,
+        validationRule,
+        isOtherAllowed,
+        hidden,
+        isRangeBetween,
+        rangeMin,
+        rangeMax,
+      } = questionOfResponse;
 
       if (value) {
         let formattedValue: ?string | ?Array<string> = null;
@@ -64,6 +78,13 @@ const formatResponses = (
           otherValue,
           required,
           validationRule,
+          constraintes: isRangeBetween
+            ? {
+                isRangeBetween,
+                rangeMin,
+                rangeMax,
+              }
+            : undefined,
         });
       } else {
         formattedResponses.push({

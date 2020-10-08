@@ -123,7 +123,6 @@ const RenderResponses = ({
         fields.map((member, index) => {
           const field = questions[index];
           const isAvailableQuestion = availableQuestions.includes(field.id);
-
           // don't render all question
           if (shouldNotBeRender(isAvailableQuestion, isModePrint)) return null;
 
@@ -291,6 +290,40 @@ const RenderResponses = ({
                       typeForm={typeForm}
                       onChange={event => {
                         triggerAutocompleteAPIEnterprise(dispatch, event, questions, intl);
+                        setLastQuestionType(field.type);
+                      }}
+                    />
+                  </PrivateBox>
+                </div>
+              );
+            }
+
+            case 'number': {
+              const response =
+                responses && responses[index] && responses[index].value
+                  ? responses[index].value
+                  : null;
+              return (
+                <div key={field.id}>
+                  <PrivateBox show={field.private}>
+                    <Field
+                      divClassName="reduced"
+                      name={`${member}.value`}
+                      id={`${cleanDomId(`${form}-${member}`)}`}
+                      type={field.type}
+                      // $FlowFixMe
+                      component={component}
+                      description={field.description}
+                      help={field.helpText}
+                      isOtherAllowed={field.isOtherAllowed}
+                      label={label}
+                      disabled={disabled}
+                      value={response}
+                      typeForm={typeForm}
+                      style={field.isRangeBetween ? { maxWidth: 150 } : null}
+                      max={field.rangeMax || null}
+                      min={field.rangeMin || null}
+                      onChange={() => {
                         setLastQuestionType(field.type);
                       }}
                     />

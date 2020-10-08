@@ -28,6 +28,8 @@ export const submitQuestion = (questions: QuestionsInReduxForm) =>
         alwaysJumpDestinationQuestion: question.alwaysJumpDestinationQuestion
           ? question.alwaysJumpDestinationQuestion.id
           : null,
+        rangeMax: question.rangeMax ? parseInt(question.rangeMax, 10) : undefined,
+        rangeMin: question.rangeMin ? parseInt(question.rangeMin, 10) : undefined,
         jumps: question.jumps ? question.jumps.filter(Boolean).map(convertJump) : [],
         validationRule:
           question.validationRule && question.validationRule.type.length

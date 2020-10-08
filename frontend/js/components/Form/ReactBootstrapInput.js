@@ -113,7 +113,9 @@ export type ParentProps = {|
   popover?: any,
   step?: any,
   style?: any,
+  isRangeBetween?: ?boolean,
   min?: ?number,
+  max?: ?number,
   rows?: number,
   // Why do we use this ?
   medias?: Array<any>,
@@ -194,12 +196,14 @@ class ReactBootstrapInput extends React.Component<Props> {
     ariaRequired,
     isOtherAllowed,
     min,
+    max,
     dateTimeInputProps,
     typeForm,
     getOpacity,
     opacity,
     addressProps,
     debounce,
+    isRangeBetween,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -296,6 +300,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             this.refFormControl = c;
           }}
           min={min}
+          max={max}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
           aria-required={ariaRequired}

@@ -8025,6 +8025,15 @@ input QuestionInput {
 
   """If not null, give the section s depth"""
   level: Int
+
+  """can the viewer add a range (number question only)"""
+  isRangeBetween: Boolean
+
+  """The minimal range (number question only)"""
+  rangeMin: Int
+
+  """The maximal range (number question only)"""
+  rangeMax: Int
 }
 
 """Value of type of question"""
@@ -9548,6 +9557,15 @@ type SimpleQuestion implements Question & Node {
 
   """Boolean to decide whether the question will be rendered or not"""
   hidden: Boolean!
+
+  """if type number, value can be ranged (number question only)"""
+  isRangeBetween: Boolean!
+
+  """value min, if isRangeBetween (number question only)"""
+  rangeMin: Int
+
+  """value max, if isRangeBetween (number question only)"""
+  rangeMax: Int
 }
 
 """A site color."""

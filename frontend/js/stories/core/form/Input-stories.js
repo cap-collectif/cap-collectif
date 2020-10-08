@@ -149,15 +149,42 @@ storiesOf('Core|Form/Dropzone', module).add('Default', () => {
 /* ------ TOGGLE ------ */
 
 storiesOf('Core|Form/Toggle', module).add('Default', () => {
-  return <Toggle id="1" name="test" value="test1" label="Toggler" />;
+  return (
+    <Toggle
+      id="1"
+      name="test"
+      value="test1"
+      label="Toggler"
+      roledescription="Je suis un text d'aide"
+    />
+  );
 });
 
 storiesOf('Core|Form/Toggle', module).add('Checked', () => {
-  return <Toggle id="2" name="test" value="test2" label="Toggler" checked />;
+  return (
+    <Toggle
+      id="2"
+      name="test"
+      value="test2"
+      label="Toggler"
+      checked
+      roledescription="Je suis un text d'aide"
+      labelSide="LEFT"
+    />
+  );
 });
 
 storiesOf('Core|Form/Toggle', module).add('Disabled', () => {
-  return <Toggle id="3" name="test" value="test3" label="Toggler" disabled />;
+  return (
+    <Toggle
+      id="3"
+      name="test"
+      value="test3"
+      label="Toggler"
+      disabled
+      roledescription="Je suis un text d'aide"
+    />
+  );
 });
 
 /* ------ END TOGGLE ------ */

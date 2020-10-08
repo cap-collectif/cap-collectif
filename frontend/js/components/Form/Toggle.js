@@ -17,13 +17,27 @@ export type Props = {|
   bold?: boolean,
   labelSide?: LabelSide,
   className?: string,
+  toggleClassName?: string,
 |};
 
-export const Toggle = ({ id, input, label, disabled, labelSide, meta, className, bold }: Props) => (
+export const Toggle = ({
+  id,
+  input,
+  label,
+  disabled,
+  labelSide,
+  meta,
+  className,
+  toggleClassName,
+  bold,
+  roledescription,
+}: Props) => (
   <div className={cn('form-group', className)}>
     <ToggleUi
       id={id}
+      className={toggleClassName}
       label={label}
+      roledescription={roledescription}
       labelSide={labelSide}
       disabled={disabled}
       onChange={input.onChange}

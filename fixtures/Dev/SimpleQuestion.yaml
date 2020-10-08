@@ -410,3 +410,12 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         title: 3 x 4 ?
         required: true
         type: 9 # number
+    simplequestion18:
+        id: 1384
+        title: Donnez une fourchette de coût
+        helpText: 'Compris entre 1000 et 10000€'
+        required: false
+        type: 9 # number
+        isRangeBetween: true
+        rangeMin: 1000
+        rangeMax: 10000

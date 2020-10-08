@@ -43,6 +43,26 @@ Scenario: Logged in admin wants edit a proposal form page content
     | questions[2].title | test sub section |
     | questions[2].description | great description for my sub section |
   And I click on a proposal form button "personal-field add popup save"
+  And I click the "#perso-field-add" element
+  And I click the ".create-question" element
+  And I fill in the following:
+    | questions[3].title | test range number |
+    | questions[3].helpText | test range description question |
+  And I select "number" from "questions[3].type"
+  And I wait "#proposal-form-admin-configuration_isRangeBetween" to appear on current page
+  And I check element "proposal-form-admin-configuration_isRangeBetween"
+  And I fill in the following:
+    | questions[3].rangeMin| 1000 |
+    | questions[3].rangeMax | 10 |
+  And I should see 'error.min-higher-maximum'
+  And I fill in the following:
+    | questions[3].rangeMin| 0 |
+    | questions[3].rangeMax | 0 |
+  And I should see 'error.define-value'
+  And I fill in the following:
+    | questions[3].rangeMin| 100 |
+    | questions[3].rangeMax | 1000 |
+  And I click on a proposal form button "personal-field add popup save"
   Then I save current admin proposal form "content"
   And I wait ".alert__form_succeeded-message" to appear on current page
   Then I should see "global.saved"

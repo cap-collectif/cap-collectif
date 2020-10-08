@@ -755,6 +755,34 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "isOtherAllowed",
                             "storageKey": null,
                           },
@@ -1336,6 +1364,34 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                     "kind": "ScalarField",
                                     "name": "type",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": null,
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isRangeBetween",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "rangeMin",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "rangeMax",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "SimpleQuestion",
                                   },
                                   Object {
                                     "abstractKey": null,
@@ -1959,7 +2015,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "05fd4345f23ec962bb8fb17578313ceb",
+        "cacheID": "be8530fe1a1953707080f96bfd1e056b",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -2135,6 +2191,11 @@ fragment ReplyForm_questionnaire on Questionnaire {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -2221,6 +2282,11 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -3141,6 +3207,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "isOtherAllowed",
                             "storageKey": null,
                           },
@@ -3722,6 +3816,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                     "kind": "ScalarField",
                                     "name": "type",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": null,
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isRangeBetween",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "rangeMin",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "rangeMax",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "SimpleQuestion",
                                   },
                                   Object {
                                     "abstractKey": null,
@@ -4345,7 +4467,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "05fd4345f23ec962bb8fb17578313ceb",
+        "cacheID": "be8530fe1a1953707080f96bfd1e056b",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4521,6 +4643,11 @@ fragment ReplyForm_questionnaire on Questionnaire {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -4607,6 +4734,11 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -5527,6 +5659,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "isOtherAllowed",
                             "storageKey": null,
                           },
@@ -6108,6 +6268,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                     "kind": "ScalarField",
                                     "name": "type",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": null,
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isRangeBetween",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "rangeMin",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "rangeMax",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "SimpleQuestion",
                                   },
                                   Object {
                                     "abstractKey": null,
@@ -6731,7 +6919,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "05fd4345f23ec962bb8fb17578313ceb",
+        "cacheID": "be8530fe1a1953707080f96bfd1e056b",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -6907,6 +7095,11 @@ fragment ReplyForm_questionnaire on Questionnaire {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -6993,6 +7186,11 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -7913,6 +8111,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "isOtherAllowed",
                             "storageKey": null,
                           },
@@ -8494,6 +8720,34 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                     "kind": "ScalarField",
                                     "name": "type",
                                     "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": null,
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isRangeBetween",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "rangeMin",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "rangeMax",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "SimpleQuestion",
                                   },
                                   Object {
                                     "abstractKey": null,
@@ -9117,7 +9371,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "05fd4345f23ec962bb8fb17578313ceb",
+        "cacheID": "be8530fe1a1953707080f96bfd1e056b",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -9293,6 +9547,11 @@ fragment ReplyForm_questionnaire on Questionnaire {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -9379,6 +9638,11 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {

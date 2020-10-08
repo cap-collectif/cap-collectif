@@ -2,9 +2,11 @@
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import styled, { type StyledComponent } from 'styled-components';
 import { Field, formValueSelector, FieldArray, getFormSyncErrors, change } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
+import Toggle from '../Form/Toggle';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 import type { GlobalState, Dispatch } from '~/types';
@@ -25,6 +27,7 @@ type ParentProps = {|
 
 type Props = {
   type: string,
+  isRangeBetween: boolean,
   validationRuleType: string,
   formErrors: Object,
   currentQuestion: Question,
@@ -37,6 +40,27 @@ type State = {|
   initialQuestionValues: Question,
 |};
 
+export const RangeDiv: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  max-width: 320px;
+  div:first-child {
+    margin-right: 15px;
+  }
+
+  .form-group {
+    width: 145px;
+    input {
+      text-align: right;
+    }
+  }
+  .has-error .error-block {
+    inline-size: max-content;
+  }
+  div.has-error:nth-child(2) {
+    .error-block {
+      display: none;
+    }
+  }
+`;
 // When creating a new question, we can not rely on __typename because it does not exists before creation
 // so this is used to determine if we can show the "choices" section of the question form when creating a new one
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
@@ -70,6 +94,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
       onSubmit,
       formName,
       type,
+      isRangeBetween,
       intl,
       validationRuleType,
       currentQuestion,
@@ -79,6 +104,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
     if (formErrors.questions !== undefined) {
       disabled = true;
     }
+
     const optional = (
       <span className="excerpt">
         {' '}
@@ -192,6 +218,36 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                 </option>
               </optgroup>
             </Field>
+            {type === 'number' && (
+              <>
+                <Field
+                  id={`${formName}_isRangeBetween`}
+                  name={`${member}.isRangeBetween`}
+                  component={Toggle}
+                  labelSide="LEFT"
+                  bold
+                  disabled={false}
+                  label={<FormattedMessage id="define-range" />}
+                  roledescription={<FormattedMessage id="range-help" />}
+                />
+                {isRangeBetween && (
+                  <RangeDiv className="d-flex justify-content-between">
+                    <Field
+                      name={`${member}.rangeMin`}
+                      type="number"
+                      component={component}
+                      label={<FormattedMessage id="minimum-vote" />}
+                    />
+                    <Field
+                      name={`${member}.rangeMax`}
+                      type="number"
+                      component={component}
+                      label={<FormattedMessage id="maximum-vote" />}
+                    />
+                  </RangeDiv>
+                )}
+              </>
+            )}
             {multipleChoiceQuestions.includes(type) && (
               <div>
                 <h4 style={{ fontWeight: 'bold' }}>
@@ -356,6 +412,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   return {
     currentQuestion: selector(state, `${props.member}`),
     type: selector(state, `${props.member}.type`),
+    isRangeBetween: selector(state, `${props.member}.isRangeBetween`),
     validationRuleType: selector(state, `${props.member}.validationRule.type`),
     formErrors: getFormSyncErrors(props.formName)(state),
     isSuperAdmin: state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'),

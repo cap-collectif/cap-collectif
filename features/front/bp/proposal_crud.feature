@@ -12,7 +12,6 @@ Scenario: Logged in user wants to create a proposal with theme
   And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses3_field"
   And I wait 3 seconds
   And I submit the create proposal form
-  And I wait 3 seconds
   And I should see my new proposal
   Then I should see text matching "proposal.tabs.followers"
   And I click the "#proposal-page-tabs-tab-followers" element
@@ -25,6 +24,8 @@ Scenario: Logged in user wants to create two proposal in under a minute
   When I go to a project with requirement condition to vote and ranking
   When I click the create proposal button
   When I fill the simple proposal form
+  And I fill in the following:
+    | proposal-form-responses0| 1337 |
   And I submit the create proposal form
   When I go to a project with requirement condition to vote and ranking
   When I click the create proposal button

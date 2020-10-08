@@ -60,6 +60,7 @@ type Props = {|
   image?: string,
   children?: any,
   min?: ?number,
+  max?: ?number,
   id: string,
   popover?: Object,
   choices?: Array<$FlowFixMe>,
@@ -126,6 +127,7 @@ class Field extends React.Component<Props> {
       lang,
       step,
       min,
+      max,
       dateTimeInputProps,
       medias,
       rows,
@@ -164,6 +166,7 @@ class Field extends React.Component<Props> {
         type={type}
         name={input.name}
         min={min}
+        max={max}
         help={help}
         helpPrint={helpPrint}
         ariaRequired={ariaRequired}

@@ -24,13 +24,15 @@ export const LabelContainer: StyledComponent<
 export const ToggleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({
   className: 'toggle-container',
 })`
-  display: flex;
-  flex-direction: row;
+  & > div {
+    display: flex;
+    flex-direction: row;
 
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
   }
 `;
 

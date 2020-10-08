@@ -69,6 +69,11 @@ const QuestionAdminFragment = {
       ... on SectionQuestion {
         level
       }
+      ... on SimpleQuestion {
+        isRangeBetween
+        rangeMin
+        rangeMax
+      }
       jumps(orderBy: { field: POSITION, direction: ASC }) {
         id
         origin {
@@ -145,6 +150,11 @@ const QuestionFragment = {
       required
       helpText
       hidden
+      ... on SimpleQuestion {
+        isRangeBetween
+        rangeMin
+        rangeMax
+      }
       jumps(orderBy: { field: POSITION, direction: ASC }) {
         id
         origin {

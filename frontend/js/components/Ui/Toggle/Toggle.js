@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { type Node } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Overlay } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -23,6 +24,7 @@ type Props = {|
   ...PropsCommonCheckboxRadio,
   id?: string,
   name?: string,
+  roledescription?: Node | string,
   value?: string,
   checked?: ?boolean,
   labelSide?: LabelSide,
@@ -42,6 +44,7 @@ const Toggle = ({
   checked = false,
   labelSide = 'RIGHT',
   tooltip,
+  roledescription,
   bold,
 }: Props) => {
   const referenceToggle = React.useRef(null);
@@ -64,57 +67,60 @@ const Toggle = ({
 
   return (
     <ToggleContainer className={className}>
-      <LabelContainer
-        className={classNames(classes)}
-        disabled={disabled}
-        htmlFor={id}
-        labelSide={labelSide}
-        bold={bold}>
-        <TogglerWrapper disabled={disabled} checked={checked} ref={referenceToggle}>
-          <span className="circle-toggler" />
+      <div>
+        <LabelContainer
+          className={classNames(classes)}
+          disabled={disabled}
+          htmlFor={id}
+          labelSide={labelSide}
+          bold={bold}>
+          <TogglerWrapper disabled={disabled} checked={checked} ref={referenceToggle}>
+            <span className="circle-toggler" />
 
-          {tooltip && (
-            <Overlay show={isTooltipShow} placement="top" target={referenceToggle.current}>
-              <PopoverContainer id="tooltip-toggle" width={tooltip.width}>
-                <TooltipContent>
-                  {tooltip.content}
+            {tooltip && (
+              <Overlay show={isTooltipShow} placement="top" target={referenceToggle.current}>
+                <PopoverContainer id="tooltip-toggle" width={tooltip.width}>
+                  <TooltipContent>
+                    {tooltip.content}
 
-                  <CloseButton type="button" onClick={() => setIsTooltipShow(false)}>
-                    <Icon name={ICON_NAME.close} size={12} color={colors.darkGray} />
-                  </CloseButton>
-                </TooltipContent>
+                    <CloseButton type="button" onClick={() => setIsTooltipShow(false)}>
+                      <Icon name={ICON_NAME.close} size={12} color={colors.darkGray} />
+                    </CloseButton>
+                  </TooltipContent>
 
-                <TooltipFooter>
-                  <Button onClick={() => setIsTooltipShow(false)} className="btn-cancel">
-                    <FormattedMessage id="global.cancel" />
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      if (onChange) onChange(null, false);
-                      setIsTooltipShow(false);
-                    }}
-                    className="btn-confirm">
-                    <FormattedMessage id="action_disable" />
-                  </Button>
-                </TooltipFooter>
-              </PopoverContainer>
-            </Overlay>
-          )}
-        </TogglerWrapper>
+                  <TooltipFooter>
+                    <Button onClick={() => setIsTooltipShow(false)} className="btn-cancel">
+                      <FormattedMessage id="global.cancel" />
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        if (onChange) onChange(null, false);
+                        setIsTooltipShow(false);
+                      }}
+                      className="btn-confirm">
+                      <FormattedMessage id="action_disable" />
+                    </Button>
+                  </TooltipFooter>
+                </PopoverContainer>
+              </Overlay>
+            )}
+          </TogglerWrapper>
 
-        {label && <span className="label-toggler">{label}</span>}
-      </LabelContainer>
+          {label && <span className="label-toggler">{label}</span>}
+        </LabelContainer>
 
-      <input
-        type="checkbox"
-        checked={checked}
-        id={id}
-        onChange={e => handleChange(e)}
-        onBlur={onBlur}
-        name={name}
-        value={value}
-        disabled={disabled}
-      />
+        <input
+          type="checkbox"
+          checked={checked}
+          id={id}
+          onChange={e => handleChange(e)}
+          onBlur={onBlur}
+          name={name}
+          value={value}
+          disabled={disabled}
+        />
+      </div>
+      {roledescription && <span className="excerpt">{roledescription}</span>}
     </ToggleContainer>
   );
 };

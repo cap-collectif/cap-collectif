@@ -1,13 +1,22 @@
 InternalSimpleQuestion:
-  type: object
-  inherits:
-    - InternalQuestion
-  config:
-    name: SimpleQuestion
-    interfaces:
-      - InternalQuestion
-      - Node
-    description: 'A simple question'
-    fields:
-      kind:
-        resolve: 'simple'
+    type: object
+    inherits:
+        - InternalQuestion
+    config:
+        name: SimpleQuestion
+        interfaces:
+            - InternalQuestion
+            - Node
+        description: 'A simple question'
+        fields:
+            kind:
+                resolve: 'simple'
+            isRangeBetween:
+                type: 'Boolean!'
+                description: 'if type number, value can be ranged (number question only)'
+            rangeMin:
+                type: 'Int'
+                description: 'value min, if isRangeBetween (number question only)'
+            rangeMax:
+                type: 'Int'
+                description: 'value max, if isRangeBetween (number question only)'

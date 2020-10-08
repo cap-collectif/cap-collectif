@@ -951,6 +951,34 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
+                                  "name": "isRangeBetween",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "rangeMin",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "rangeMax",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "SimpleQuestion",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
                                   "name": "isOtherAllowed",
                                   "storageKey": null,
                                 },
@@ -1599,6 +1627,34 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                     },
                                   ],
                                   "type": "SectionQuestion",
+                                },
+                                Object {
+                                  "abstractKey": null,
+                                  "kind": "InlineFragment",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isRangeBetween",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "rangeMin",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "rangeMax",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "type": "SimpleQuestion",
                                 },
                                 Object {
                                   "abstractKey": null,
@@ -2553,7 +2609,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "5d3dd69a2935a854436073e6feef9eb9",
+          "cacheID": "bdbe18d846bedab2dd67243ef29f503a",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2671,6 +2727,11 @@ fragment ProposalAdminContentForm_proposal on Proposal {
       helpText
       ... on SectionQuestion {
         level
+      }
+      ... on SimpleQuestion {
+        isRangeBetween
+        rangeMin
+        rangeMax
       }
       jumps(orderBy: {field: POSITION, direction: ASC}) {
         id
@@ -2813,6 +2874,11 @@ fragment ProposalAdminNotationForm_proposal on Proposal {
         helpText
         ... on SectionQuestion {
           level
+        }
+        ... on SimpleQuestion {
+          isRangeBetween
+          rangeMin
+          rangeMax
         }
         jumps(orderBy: {field: POSITION, direction: ASC}) {
           id

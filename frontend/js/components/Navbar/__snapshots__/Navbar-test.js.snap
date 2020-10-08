@@ -370,6 +370,34 @@ exports[`<Navbar /> should render correctly 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "isRangeBetween",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "rangeMin",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "rangeMax",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "SimpleQuestion",
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "isOtherAllowed",
                                 "storageKey": null,
                               },
@@ -541,7 +569,7 @@ exports[`<Navbar /> should render correctly 1`] = `
                 ],
               },
               "params": Object {
-                "cacheID": "a43f4740b964b9fa6d700e1e856c9a15",
+                "cacheID": "f6a2bdc2b9454fcf75fd7c1c3ff615f6",
                 "id": null,
                 "metadata": Object {},
                 "name": "NavbarQuery",
@@ -562,6 +590,11 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -641,6 +674,11 @@ fragment RegistrationForm_query on Query {
       required
       helpText
       hidden
+      ... on SimpleQuestion {
+        isRangeBetween
+        rangeMin
+        rangeMax
+      }
       jumps(orderBy: {field: POSITION, direction: ASC}) {
         id
         origin {
@@ -1121,6 +1159,34 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
+                                "name": "isRangeBetween",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "rangeMin",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "rangeMax",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "SimpleQuestion",
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
                                 "name": "isOtherAllowed",
                                 "storageKey": null,
                               },
@@ -1292,7 +1358,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                 ],
               },
               "params": Object {
-                "cacheID": "a43f4740b964b9fa6d700e1e856c9a15",
+                "cacheID": "f6a2bdc2b9454fcf75fd7c1c3ff615f6",
                 "id": null,
                 "metadata": Object {},
                 "name": "NavbarQuery",
@@ -1313,6 +1379,11 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     required
     helpText
     hidden
+    ... on SimpleQuestion {
+      isRangeBetween
+      rangeMin
+      rangeMax
+    }
     jumps(orderBy: {field: POSITION, direction: ASC}) {
       id
       origin {
@@ -1392,6 +1463,11 @@ fragment RegistrationForm_query on Query {
       required
       helpText
       hidden
+      ... on SimpleQuestion {
+        isRangeBetween
+        rangeMin
+        rangeMax
+      }
       jumps(orderBy: {field: POSITION, direction: ASC}) {
         id
         origin {

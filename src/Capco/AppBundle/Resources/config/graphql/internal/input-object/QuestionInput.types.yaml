@@ -37,3 +37,12 @@ QuestionInput:
             level:
                 description: 'If not null, give the section s depth'
                 type: 'Int'
+            isRangeBetween:
+                type: 'Boolean'
+                description: 'can the viewer add a range (number question only)'
+            rangeMin:
+                type: 'Int'
+                description: 'The minimal range (number question only)'
+            rangeMax:
+                type: 'Int'
+                description: 'The maximal range (number question only)'
