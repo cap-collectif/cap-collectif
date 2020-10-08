@@ -5,7 +5,7 @@ exports[`<CommentBody /> should render correctly 1`] = `
   className="opinion__text"
   style={
     Object {
-      "wordBreak": "break-all",
+      "wordBreak": "break-word",
     }
   }
 >
@@ -28,7 +28,7 @@ exports[`<CommentBody /> should render correctly when trashed with body 1`] = `
   className="opinion__text"
   style={
     Object {
-      "wordBreak": "break-all",
+      "wordBreak": "break-word",
     }
   }
 >

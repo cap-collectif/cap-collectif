@@ -31,7 +31,7 @@ const ProposalPageVotesContainer: StyledComponent<{}, {}, HTMLDivElement> = styl
     }
   }
 
-  > div {
+  > div:first-child {
     @media (min-width: 768px) {
       display: flex;
     }

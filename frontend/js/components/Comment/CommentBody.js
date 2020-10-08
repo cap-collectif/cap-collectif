@@ -90,7 +90,7 @@ export class CommentBody extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="opinion__text" style={{ wordBreak: 'break-all' }}>
+      <div className="opinion__text" style={{ wordBreak: 'break-word' }}>
         {this.renderTrashedLabel()}
         <Linkify properties={{ className: 'external-link' }}>{nl2br(this.generateText())}</Linkify>
         {this.renderReadMoreOrLess()}
