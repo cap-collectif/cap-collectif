@@ -16,19 +16,19 @@ class SimpleQuestion extends AbstractQuestion
     ];
 
     /**
-     * @ORM\Column(name="is_range_between", type="boolean")
+     * @ORM\Column(name="is_range_between", type="boolean", nullable=false, options={"default": false})
      */
     protected bool $isRangeBetween = false;
 
     /**
      * @ORM\Column(name="range_min", type="integer", nullable=true)
      */
-    protected int $rangeMin;
+    protected ?int $rangeMin;
 
     /**
      * @ORM\Column(name="range_max", type="integer", nullable=true)
      */
-    protected int $rangeMax;
+    protected ?int $rangeMax;
 
     public function __construct()
     {
