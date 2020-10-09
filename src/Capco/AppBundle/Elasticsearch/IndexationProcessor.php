@@ -25,9 +25,7 @@ class IndexationProcessor implements ProcessorInterface
             !isset($json['class']) ||
             !\in_array($json['class'], array_values($this->indexer->getClassesToIndex()), true)
         ) {
-            $this->logger->warning('Invalid message: ' . $message->getBody());
-
-            return true;
+            $this->logger->warning('Maybe an invalid message: ' . $message->getBody());
         }
         $this->indexer->index($json['class'], $json['id']);
         $this->indexer->finishBulk();
