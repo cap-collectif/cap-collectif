@@ -22,7 +22,7 @@ final class Version20200929111151 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE question ADD is_range_between TINYINT(1) DEFAULT NULL, ADD range_min INT DEFAULT NULL, ADD range_max INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE question ADD is_range_between TINYINT(1)  DEFAULT \'0\', ADD range_min INT DEFAULT NULL, ADD range_max INT DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
