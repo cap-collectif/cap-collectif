@@ -8,7 +8,7 @@ import type { Questions } from '~/components/Form/Form.type';
 import colors from '~/utils/colors';
 
 export const ID_BP_1 = 'd6b98b9b-5e3c-11ea-8fab-0242ac110004';
-export const ID_BP_2 = '30f7d752-087f-11eb-8305-0242ac110003';
+export const ID_BP_2 = '440118f3-0a0e-11eb-b274-0242ac110004';
 export const ID_DEV = 'proposalformIdf';
 
 export const API_ENTERPRISE_ENTER = 'ENTER';

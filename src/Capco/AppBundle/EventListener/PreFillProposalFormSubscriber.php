@@ -306,7 +306,7 @@ class PreFillProposalFormSubscriber implements EventSubscriberInterface
         }
         // Session 2
         if (
-            '30f7d752-087f-11eb-8305-0242ac110003' === $proposalForm->getId()
+            '440118f3-0a0e-11eb-b274-0242ac110004' === $proposalForm->getId()
         ) {
             $this->shouldPreFillAPIEntreprise = true;
             $this->indexLocalOrGlobal = 2;

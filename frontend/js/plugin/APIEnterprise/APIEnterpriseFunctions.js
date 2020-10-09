@@ -270,7 +270,7 @@ const makeRnaQueries = (
   });
 };
 
-export const TRIGGER_FOR: Array<string> = ['idf-bp-dedicated', 'dev', 'qa-idf-bp-session-2'];
+export const TRIGGER_FOR: Array<string> = ['idf-bp-dedicated', 'dev'];
 
 const getInvisibleQuestionIndexesAccordingToType = (
   defaultToHideQuestions: Array<number>,
@@ -379,10 +379,7 @@ export const triggerAutocompleteAPIEnterprise = (
     // Ugly hack based on questions length
     // to avoid passing id as props, in RenderResponses.
     let formId = ID_DEV;
-    if (
-      baseUrl === 'https://budgetparticipatif.smartidf.services' ||
-      baseUrl === 'https://qa-idf-bp-session-2.cap-collectif.com'
-    ) {
+    if (baseUrl === 'https://budgetparticipatif.smartidf.services') {
       formId = questions.length === 70 ? ID_BP_2 : ID_BP_1;
     }
     console.log('Guessed form id :', formId);
