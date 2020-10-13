@@ -102,3 +102,21 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2019-03-20'))>
         createdAt: <(new \DateTime('2019-03-20'))>
         updatedAt: <(new \DateTime('2019-03-20'))>
+
+    replyExport{1..7}:
+        id: 'replyExport<current()>'
+        author: '@user5'
+        draft: 0
+        private: true
+        questionnaire: '@questionnaireExport'
+        createdAt: <(new \DateTime('2020-03-20'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+    replyMajority{6..20}:
+        id: 'replyMajority<current()>'
+        draft: 0
+        author: '@user<current()>'
+        questionnaire: '@questionnaire1'
+        publishedAt: <(new \DateTime('2016-03-02'))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt

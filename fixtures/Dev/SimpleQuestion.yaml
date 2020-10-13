@@ -419,3 +419,15 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         isRangeBetween: true
         rangeMin: 1000
         rangeMax: 10000
+    majorityDecisionWeeb:
+        id: 1385
+        title: Comment trouvez vous le jeu de weeb Genshin Impact ?
+        required: false
+        private: false
+        type: 13 # majority
+    majorityDecision1:
+        id: 1386
+        title: Décision majoritaire
+        required: true
+        private: false
+        type: 13 # majority

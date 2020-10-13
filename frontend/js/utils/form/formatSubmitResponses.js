@@ -33,6 +33,7 @@ export const formatSubmitResponses = (
         medias,
       };
     }
+
     let { value } = res;
 
     if (questionType === 'select') {
@@ -54,16 +55,19 @@ export const formatSubmitResponses = (
         : null;
     } else if (questionType === 'checkbox' || questionType === 'radio') {
       value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
-    } else if (questionType === 'number') {
+    } else if (questionType === 'number' || questionType === 'majority') {
       return {
         question: res.question,
         value: res.value,
       };
     }
+
     if (typeof value === 'string') {
       value = answeredQuestionsIds.includes(question.id) ? value : null;
       return { value, question: res.question };
     }
+    // eslint-disable-next-line no-console
+    console.warn('Your questionType may not be recognized. Please check formatSubmitResponses.');
     return { value: null, question: res.question };
   });
 };

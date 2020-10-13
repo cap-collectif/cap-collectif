@@ -58,7 +58,8 @@ Scenario: User wants to add a reply
                 {"question": {"id":"UXVlc3Rpb246MTg="}, "value": "{\"labels\":[],\"other\":null}"},
                 {"question": {"id":"UXVlc3Rpb246MTk="}, "value": "{\"labels\":[],\"other\":null}"},
                 {"question": {"id":"UXVlc3Rpb246MzAx"}, "value": @null@},
-                {"question": {"id":"UXVlc3Rpb246MzAy"}, "value": @null@}
+                {"question": {"id":"UXVlc3Rpb246MzAy"}, "value": @null@},
+                {"question": {"id":"UXVlc3Rpb246MTM4NQ=="}, "value": @null@}
               ]
           }
        }

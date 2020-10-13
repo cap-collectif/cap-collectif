@@ -18,17 +18,17 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "value": "Trop cool ! On va voir Tibo qui cours en slip !",
+          },
+        },
+        Object {
+          "node": Object {
             "value": "Youpi ! J'adore des JO",
           },
         },
         Object {
           "node": Object {
             "value": "Trop bien ! On va voir de supers athlètes à Paris !",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Trop cool ! On va voir Tibo qui cours en slip !",
           },
         },
       ],

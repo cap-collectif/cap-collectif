@@ -70,6 +70,7 @@ overblog_graphql:
                     - PreviewMultipleChoiceQuestion
                     - PreviewSectionQuestion
                     - PreviewMediaQuestion
+                    - PreviewMajorityQuestion
                     - PreviewOpinion
                     - PreviewArgument
                     - PreviewSource
@@ -106,3 +107,4 @@ overblog_graphql:
                     - InternalMediaResponse
                     - InternalOauth2SSOConfiguration
                     - Locale
+                    - InternalMajorityQuestion

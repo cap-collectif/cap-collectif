@@ -489,3 +489,95 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         question: '@simplequestionIdfEval2'
         analysis: '@proposalAnalysisIdf3Mickael'
         value: 100
+    majorityDecision1Answer1:
+        question: '@majorityDecision1'
+        reply: '@replyExport1'
+        value: 0
+    majorityDecision1Answer2:
+        question: '@majorityDecision1'
+        reply: '@replyExport2'
+        value: 1
+    majorityDecision1Answer3:
+        question: '@majorityDecision1'
+        reply: '@replyExport3'
+        value: 4
+    majorityDecision1Answer4:
+        question: '@majorityDecision1'
+        reply: '@replyExport4'
+        value: 3
+    majorityDecision1Answer5:
+        question: '@majorityDecision1'
+        reply: '@replyExport5'
+        value: 1
+    majorityDecision1Answer6:
+        question: '@majorityDecision1'
+        reply: '@replyExport6'
+        value: 5
+    majorityDecision1Answer7:
+        question: '@majorityDecision1'
+        reply: '@replyExport7'
+        value: 2
+    majorityDecisionWeebAnswerVeryWell1:
+        question: '@majorityDecisionWeeb'
+        reply: '@reply2'
+        value: 0
+    majorityDecisionWeebAnswerVeryWell2:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority6'
+        value: 0
+    majorityDecisionWeebAnswerVeryWell3:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority7'
+        value: 0
+    majorityDecisionWeebAnswerVeryWell4:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority8'
+        value: 0
+    majorityDecisionWeebAnswerVeryWell5:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority9'
+        value: 0
+    majorityDecisionWeebAnswerVeryWell6:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority10'
+        value: 0
+    majorityDecisionWeebAnswerVeryWell7:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority11'
+        value: 0
+    majorityDecisionWeebAnswerWell1:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority12'
+        value: 1
+    majorityDecisionWeebAnswerWell2:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority13'
+        value: 1
+    majorityDecisionWeebAnswerWell3:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority14'
+        value: 1
+    majorityDecisionWeebAnswerWell4:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority15'
+        value: 1
+    majorityDecisionWeebAnswerPassable1:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority16'
+        value: 3
+    majorityDecisionWeebAnswerPassable2:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority17'
+        value: 3
+    majorityDecisionWeebAnswerNotPassable1:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority18'
+        value: 4
+    majorityDecisionWeebAnswerNotPassable2:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority19'
+        value: 4
+    majorityDecisionWeebAnswerNotPassable3:
+        question: '@majorityDecisionWeeb'
+        reply: '@replyMajority20'
+        value: 4

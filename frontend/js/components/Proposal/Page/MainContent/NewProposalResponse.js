@@ -13,6 +13,8 @@ import colors from '~/utils/colors';
 import Tooltip from '~/components/Utils/Tooltip';
 import File from '~ui/File/File';
 import { type GlobalState } from '~/types';
+import { COLORS as COLORS_MAJORITY } from '~ui/Form/Input/Majority/Majority';
+import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority';
 
 type Props = {|
   +response: NewProposalResponse_response,
@@ -252,6 +254,27 @@ export class NewProposalResponse extends React.PureComponent<Props> {
             </div>
           );
         }
+        break;
+      }
+
+      case 'majority': {
+        const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
+        const majorityResponse = ((majorities.find(
+          majority => majority.value === response.value,
+        ): any): MajorityProperty);
+
+        value = (
+          <div>
+            <PrivateTitle
+              isPrivate={response.question.private}
+              title={response.question.title}
+              id={response.question.id}
+              color={color}
+            />
+            <FormattedMessage id={majorityResponse.label} />
+          </div>
+        );
+
         break;
       }
 

@@ -3484,6 +3484,7 @@ enum FeatureFlagType {
   unstable__remote_events
   user_invitations
   votes_min
+  majority_vote_question
 }
 
 """Require a firstname"""
@@ -4246,6 +4247,117 @@ type MailingListEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""Data corresponding to one majority question choice"""
+type MajorityChoice {
+  choice: MajorityChoiceType!
+  count: Int!
+}
+
+"""Majority choice type"""
+enum MajorityChoiceType {
+  """The review is in approved status."""
+  VERY_WELL
+
+  """The review is in awaiting status."""
+  WELL
+
+  """The review is in refused status."""
+  WELL_ENOUGH
+
+  """The review is in refused status."""
+  PASSABLE
+
+  """The review is in refused status."""
+  NOT_PASSABLE
+
+  """The review is in refused status."""
+  REJECTED
+}
+
+"""A majority question"""
+type MajorityQuestion implements Question & Node {
+  """The ID of an object"""
+  id: ID!
+
+  """Identifies the question title."""
+  title: String!
+
+  """Return responses on this questions."""
+  responses(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Get responses with user not confirmed"""
+    withNotConfirmedUser: Boolean = false
+  ): ResponseConnection!
+  number: Int!
+  type: QuestionTypeValue!
+
+  """The position of the question"""
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  slug: String!
+
+  """Return users who answered the question"""
+  participants(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Get participant with user not confirmed"""
+    withNotConfirmedUser: Boolean = false
+  ): ParticipantConnection!
+
+  """The associated logic jumps to this question."""
+  jumps(
+    """Ordering options for question jumps."""
+    orderBy: JumpsOrder = {field: POSITION, direction: ASC}
+  ): [LogicJump!]!
+
+  """The destination of the always jump (the else case) of this question."""
+  alwaysJumpDestinationQuestion: Question
+
+  """Boolean to decide whether the question will be rendered or not"""
+  hidden: Boolean!
+
+  """
+  Return an array of MajorityCategories containing the total of responses for each choices.
+  """
+  responsesByChoice: [MajorityChoice!]!
+
+  """Return the total of votes."""
+  totalVotesCount: Int!
 }
 
 """A map token used for connecting external services with our maps"""
@@ -8051,6 +8163,7 @@ enum QuestionTypeValue {
   section
   siret
   rna
+  majority
 }
 
 """A questionnaire is a series of questions that users can answer."""

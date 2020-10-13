@@ -94,6 +94,20 @@ class ValueResponseRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function countByValue(int $questionId)
+    {
+        $qb = $this->getNoEmptyResultQueryBuilder();
+
+        return $qb
+            ->select('r.value as choice, COUNT(r.value) AS count')
+            ->andWhere('r.question = :id')
+            ->setParameter('id', $questionId)
+            ->groupBy('r.value')
+            ->orderBy('r.value', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     private function getNoEmptyResultQueryBuilder(): QueryBuilder
     {
         return // Some fixes until we use a proper JSON query

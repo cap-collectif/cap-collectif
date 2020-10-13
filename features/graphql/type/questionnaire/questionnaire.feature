@@ -29,7 +29,8 @@ Scenario: GraphQL client wants to retrieve questions
           {"id":"UXVlc3Rpb246MTg="},
           {"id":"UXVlc3Rpb246MTk="},
           {"id":"UXVlc3Rpb246MzAx"},
-          {"id":"UXVlc3Rpb246MzAy"}
+          {"id":"UXVlc3Rpb246MzAy"},
+          {"id":"UXVlc3Rpb246MTM4NQ=="}
         ]
       }
     }
@@ -97,7 +98,7 @@ Scenario: GraphQL client wants to get question's participants with users not con
     "data": {
         "questionnaire": {
           "participants": {
-            "totalCount": 4
+            "totalCount": 19
           },
           "questions": [
             {
@@ -153,6 +154,12 @@ Scenario: GraphQL client wants to get question's participants with users not con
               "participants": {
                 "totalCount": 0
               }
+            },
+            {
+              "id": "UXVlc3Rpb246MTM4NQ==",
+              "participants": {
+                "totalCount": 16
+              }
             }
           ]
         }
@@ -186,7 +193,7 @@ Scenario: GraphQL client wants to get question's participants
     "data": {
       "questionnaire": {
         "participants": {
-          "totalCount": 4
+          "totalCount": 19
         },
         "questions": [
           {

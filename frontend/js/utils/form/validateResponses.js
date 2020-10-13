@@ -33,6 +33,7 @@ export const validateResponses = (
   async: boolean = false,
 ): { responses: ResponsesError | ResponsesWarning } => {
   const formattedResponses: Array<FormattedResponse> = formatResponses(questions, responses);
+
   const responsesError = formattedResponses.map((formattedResponse: FormattedResponse) => {
     const {
       idQuestion,
@@ -69,6 +70,15 @@ export const validateResponses = (
     if (type === 'number' && value && typeof value === 'string' && !checkOnlyNumbers(value)) {
       return { idQuestion, value: `please-enter-a-number` };
     }
+
+    if (type === 'majority') {
+      const numberValue = Number(value);
+      if (numberValue < 0 || numberValue > 5) {
+        return { idQuestion, value: `valid-number-majority` };
+      }
+    }
+
+
     if (
       type === 'number' &&
       value &&

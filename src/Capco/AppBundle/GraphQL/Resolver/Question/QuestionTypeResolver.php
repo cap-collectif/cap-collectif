@@ -26,8 +26,16 @@ class QuestionTypeResolver implements ResolverInterface
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($question instanceof SimpleQuestion) {
+            if ('preview' === $currentSchemaName && AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()) {
+                return $this->typeResolver->resolve('PreviewMajorityQuestion');
+            }
+
             if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewSimpleQuestion');
+            }
+
+            if (AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()) {
+                return $this->typeResolver->resolve('InternalMajorityQuestion');
             }
 
             return $this->typeResolver->resolve('InternalSimpleQuestion');

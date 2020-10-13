@@ -63,31 +63,13 @@ exports[`<RegistrationModal /> renders a form 1`] = `
       />
     </ModalFooter>
   </Modal>
-  <Modal
+  <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
     autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
     bsSize="small"
-    dialogComponentClass={[Function]}
     enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
     onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
     show={true}
   >
     <ModalHeader
@@ -138,7 +120,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
         onSubmit={[MockFunction]}
       />
     </ModalFooter>
-  </Modal>
+  </RegistrationModal__ModalContainer>
 </Fragment>
 `;
 
@@ -205,31 +187,13 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
       />
     </ModalFooter>
   </Modal>
-  <Modal
+  <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
     autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
     bsSize="small"
-    dialogComponentClass={[Function]}
     enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
     onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
     show={true}
   >
     <ModalHeader
@@ -294,7 +258,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
         onSubmit={[MockFunction]}
       />
     </ModalFooter>
-  </Modal>
+  </RegistrationModal__ModalContainer>
 </Fragment>
 `;
 
@@ -361,31 +325,13 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
       />
     </ModalFooter>
   </Modal>
-  <Modal
+  <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
     autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
     bsSize="small"
-    dialogComponentClass={[Function]}
     enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
     onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
     show={false}
   >
     <ModalHeader
@@ -436,7 +382,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
         onSubmit={[MockFunction]}
       />
     </ModalFooter>
-  </Modal>
+  </RegistrationModal__ModalContainer>
 </Fragment>
 `;
 
@@ -503,31 +449,13 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
       />
     </ModalFooter>
   </Modal>
-  <Modal
+  <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
     autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
     bsSize="small"
-    dialogComponentClass={[Function]}
     enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
     onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
     show={true}
   >
     <ModalHeader
@@ -578,7 +506,7 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
         onSubmit={[MockFunction]}
       />
     </ModalFooter>
-  </Modal>
+  </RegistrationModal__ModalContainer>
 </Fragment>
 `;
 
@@ -645,31 +573,13 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
       />
     </ModalFooter>
   </Modal>
-  <Modal
+  <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
     autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
     bsSize="small"
-    dialogComponentClass={[Function]}
     enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
     onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
     show={true}
   >
     <ModalHeader
@@ -720,7 +630,7 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
         onSubmit={[MockFunction]}
       />
     </ModalFooter>
-  </Modal>
+  </RegistrationModal__ModalContainer>
 </Fragment>
 `;
 
@@ -787,31 +697,13 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
       />
     </ModalFooter>
   </Modal>
-  <Modal
+  <RegistrationModal__ModalContainer
     animation={false}
     aria-labelledby="contained-modal-title-lg"
     autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
     bsSize="small"
-    dialogComponentClass={[Function]}
     enforceFocus={false}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
     onHide={[MockFunction]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
     show={true}
   >
     <ModalHeader
@@ -862,6 +754,6 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
         onSubmit={[MockFunction]}
       />
     </ModalFooter>
-  </Modal>
+  </RegistrationModal__ModalContainer>
 </Fragment>
 `;

@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
 use Capco\AppBundle\Utils\Text;
 use Liuggio\ExcelBundle\Factory;
 use Capco\AppBundle\Entity\Reply;
@@ -190,6 +192,17 @@ class ProjectDownloadResolver
             }
 
             return implode(';', $values);
+        }
+
+        if (
+            AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION ===
+            (int) $response['question']['type']
+        ) {
+            return $this->translator->trans(
+                MajorityVoteTypeEnum::toI18nKey($response['value']),
+                [],
+                'CapcoAppBundle'
+            );
         }
 
         return $originalValue;

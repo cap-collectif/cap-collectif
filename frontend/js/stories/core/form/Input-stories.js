@@ -8,6 +8,10 @@ import Input from '~/components/Ui/Form/Input/Input';
 import Dropzone from '~/components/Ui/Form/Dropzone/Dropzone';
 import Toggle from '~/components/Ui/Toggle/Toggle';
 import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInput';
+import Majority, {
+  COLORS as COLORS_MAJORITY,
+  type MajorityProperty,
+} from '~ui/Form/Input/Majority/Majority';
 
 /* ------ INPUT ------ */
 
@@ -200,3 +204,79 @@ storiesOf('Core|Form/ColorPicker', module).add('With value', () => {
 });
 
 /* ------ END COLOR PICKER ------ */
+
+/* ------ MAJORITY ------ */
+
+storiesOf('Core|Form/Majority', module).add('Default', () => {
+  const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
+  return (
+    <div style={{ display: 'flex' }}>
+      {majorities.map(majority => (
+        <Majority
+          id={majority.id}
+          color={majority.color}
+          label={majority.label}
+          name="field-name"
+          value={majority.value}
+        />
+      ))}
+    </div>
+  );
+});
+
+storiesOf('Core|Form/Majority', module).add('Disabled', () => {
+  const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
+  return (
+    <div style={{ display: 'flex' }}>
+      {majorities.map(majority => (
+        <Majority
+          id={majority.id}
+          color={majority.color}
+          label={majority.label}
+          name="field-name"
+          value={majority.value}
+          disabled
+        />
+      ))}
+    </div>
+  );
+});
+
+storiesOf('Core|Form/Majority', module).add('As preview', () => {
+  const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
+  return (
+    <div style={{ display: 'flex' }}>
+      {majorities.map(majority => (
+        <Majority
+          id={majority.id}
+          color={majority.color}
+          label={majority.label}
+          name="field-name"
+          value={majority.value}
+          asPreview
+        />
+      ))}
+    </div>
+  );
+});
+
+storiesOf('Core|Form/Majority', module).add('With selected one', () => {
+  const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
+  return (
+    <div style={{ display: 'flex' }}>
+      {majorities.map((majority, idx) => (
+        <Majority
+          id={majority.id}
+          color={majority.color}
+          label={majority.label}
+          name="field-name"
+          value={majority.value}
+          checked={idx === 2}
+          hasMajoritySelected
+        />
+      ))}
+    </div>
+  );
+});
+
+/* ------ END MAJORITY ------ */

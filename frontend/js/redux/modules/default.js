@@ -94,6 +94,7 @@ export const features: FeatureToggles = {
   display_pictures_in_event_list: false,
   unstable__analysis: false,
   user_invitations: false,
+  majority_vote_question: false,
 };
 
 export const initialState: State = {

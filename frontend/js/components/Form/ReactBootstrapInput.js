@@ -42,6 +42,7 @@ import FileUpload from '~/components/Form/FileUpload/FileUpload';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import isQuestionnaire from '~/utils/isQuestionnaire';
 import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInput';
+import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -410,6 +411,14 @@ class ReactBootstrapInput extends React.Component<Props> {
           aria-required={ariaRequired}
         />
       );
+    }
+
+    if (type === 'majority') {
+      const field = {
+        id: props.id,
+      };
+
+      return <MultipleMajority value={value} field={field} errors={errors} {...props} />;
     }
 
     if (type === 'address') {

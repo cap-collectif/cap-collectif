@@ -9,6 +9,7 @@ export type QuestionType =
   | 'editor'
   | 'medias'
   | 'number'
+  | 'majority'
   | 'radio'
   | 'ranking'
   | 'section'

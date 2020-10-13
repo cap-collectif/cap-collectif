@@ -15,8 +15,6 @@ import getRequiredFieldIndicationStrategy from '~/utils/form/getRequiredFieldInd
 import resetNotAvailableQuestions from '~/utils/form/resetNotAvailableQuestions';
 import isQuestionnaire from '~/utils/isQuestionnaire';
 import QuestionRender from '~ui/Form/Question/Question';
-import TitleInvertContrast from '~ui/Typography/TitleInvertContrast';
-import Description from '~ui/Form/Description/Description';
 import PrivateBox from '~ui/Boxes/PrivateBox';
 import { cleanDomId } from '~/utils/string';
 import component from '~/components/Form/Field';
@@ -27,6 +25,7 @@ import getAvailableQuestionsIds from '~/utils/form/getAvailableQuestionsIds';
 import { MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY } from '~/utils/responsesHelper';
 import { triggerAutocompleteAPIEnterprise } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 import type { Dispatch } from '~/types';
+import Section from '~/components/Form/Section/Section';
 
 const mapQuestionChoicesToOptions = (question: Question) =>
   question.choices &&
@@ -54,6 +53,7 @@ const formattedChoicesInField = field =>
       color: choice.color,
       image: choice.image,
     }));
+
 const MULTIPLE_QUESTION_CHOICES_COUNT_TRIGGER_SEARCH = 20;
 
 const availableQuestionsNotInitialize = availableQuestions => availableQuestions.length === 0;
@@ -158,12 +158,13 @@ const RenderResponses = ({
           switch (field.type) {
             case 'section': {
               return (
-                <div key={field.id} className="form__section">
-                  <TitleInvertContrast>{field.title}</TitleInvertContrast>
-                  {field.description && (
-                    <Description typeForm={typeForm}>{field.description}</Description>
-                  )}
-                </div>
+                <Section
+                  key={field.id}
+                  typeForm={typeForm}
+                  description={field.description}
+                  level={field.level}>
+                  {field.title}
+                </Section>
               );
             }
 

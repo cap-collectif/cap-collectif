@@ -3,11 +3,13 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import ProposalMediaResponse from './ProposalMediaResponse';
-import TitleInvertContrast from '../../Ui/Typography/TitleInvertContrast';
 import type { ProposalResponse_response } from '~relay/ProposalResponse_response.graphql';
 import PrivateBox from '../../Ui/Boxes/PrivateBox';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import { isHTML } from '../../../utils/isHtml';
+import { isHTML } from '~/utils/isHtml';
+import Section from '~/components/Form/Section/Section';
+import { COLORS as COLORS_MAJORITY } from '~ui/Form/Input/Majority/Majority';
+import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority';
 
 type Props = {|
   +response: ProposalResponse_response,
@@ -58,11 +60,12 @@ export class ProposalResponse extends React.PureComponent<Props> {
       response.question.type !== 'select';
     const defaultEditorEmptyValue = '<p><br></p>';
     let value = '';
+
     if (questionType === 'section') {
       return (
-        <div>
-          <TitleInvertContrast>{response.question.title}</TitleInvertContrast>
-        </div>
+        <Section description={response.question.description} level={response.question.level}>
+          {response.question.title}
+        </Section>
       );
     }
 
@@ -156,6 +159,22 @@ export class ProposalResponse extends React.PureComponent<Props> {
             </div>
           );
         }
+        break;
+      }
+
+      case 'majority': {
+        const majorities = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
+        const majorityResponse = ((majorities.find(
+          majority => majority.value === response.value,
+        ): any): MajorityProperty);
+
+        value = (
+          <div>
+            <h3 className="h3">{response.question.title}</h3>
+            <FormattedMessage id={majorityResponse.label} />
+          </div>
+        );
+
         break;
       }
 

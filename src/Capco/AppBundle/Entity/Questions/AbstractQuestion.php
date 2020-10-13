@@ -44,6 +44,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public const QUESTION_TYPE_SECTION = 10;
     public const QUESTION_TYPE_SIRET = 11;
     public const QUESTION_TYPE_RNA = 12;
+    public const QUESTION_TYPE_MAJORITY_DECISION = 13;
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
@@ -59,6 +60,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         self::QUESTION_TYPE_NUMBER => 'number',
         self::QUESTION_TYPE_SIRET => 'siret',
         self::QUESTION_TYPE_RNA => 'rna',
+        self::QUESTION_TYPE_MAJORITY_DECISION => 'majority',
     ];
 
     public static $questionTypesLabels = [];
@@ -97,7 +99,6 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
 
     /**
      * @Assert\NotNull()
-     * @Assert\Range(min=0, max=10)
      * @ORM\Column(name="type", nullable=false)
      */
     protected $type;

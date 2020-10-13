@@ -204,3 +204,14 @@ Scenario: Logged in user wants to remove a reply in a closed questionnaire step
   When I go to a closed questionnaire step
   And I wait ".replyLink" to appear on current page
   Then I should not see the delete reply button
+
+@database
+Scenario: Logged in user wants to add a reply to a questionnaire with majority question
+  Given I am logged in as user
+  And I go to "/project/projet-pour-consolider-les-exports/questionnaire/questionnaire-export"
+  Then I click on answer again
+  Then I wait "#CreateReplyForm-responses0" to appear on current page
+  And I click the "#label-choice-CreateReplyForm-responses0-global-not-passable" element
+  And I submit my reply
+  And I wait "#global-alert-box .alert-success" to appear on current page
+  Then I should see "reply.request.create.success" in the "#global-alert-box" element

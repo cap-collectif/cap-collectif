@@ -12,16 +12,17 @@ use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -31,29 +32,31 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Entity\Questions\SectionQuestion;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
-use GraphQL\Type\Definition\Type;
+use function in_array;
 
 class NodeTypeResolver implements ResolverInterface
 {
     private $typeResolver;
     private $requirementTypeResolver;
+    private QuestionTypeResolver $questionTypeResolver;
 
     public function __construct(
         TypeResolver $typeResolver,
-        RequirementTypeResolver $requirementTypeResolver
-    ) {
+        RequirementTypeResolver $requirementTypeResolver,
+        QuestionTypeResolver $questionTypeResolver
+    )
+    {
         $this->typeResolver = $typeResolver;
         $this->requirementTypeResolver = $requirementTypeResolver;
+        $this->questionTypeResolver = $questionTypeResolver;
     }
 
     public function __invoke($node): Type
@@ -150,7 +153,7 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('SelectionStep');
         }
         if ($node instanceof CollectStep) {
-            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
+            if (in_array($currentSchemaName, ['public', 'preview'], true)) {
                 return $this->typeResolver->resolve('PreviewCollectStep');
             }
 
@@ -219,35 +222,8 @@ class NodeTypeResolver implements ResolverInterface
         if ($node instanceof Post) {
             return $this->typeResolver->resolve('InternalPost');
         }
-        if ($node instanceof SimpleQuestion) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewSimpleQuestion');
-            }
-
-            return $this->typeResolver->resolve('InternalSimpleQuestion');
-        }
-        if ($node instanceof MediaQuestion) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewMediaQuestion');
-            }
-
-            return $this->typeResolver->resolve('InternalMediaQuestion');
-        }
-
-        if ($node instanceof MultipleChoiceQuestion) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewMultipleChoiceQuestion');
-            }
-
-            return $this->typeResolver->resolve('InternalMultipleChoiceQuestion');
-        }
-
-        if ($node instanceof SectionQuestion) {
-            if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewSectionQuestion');
-            }
-
-            return $this->typeResolver->resolve('InternalSectionQuestion');
+        if ($node instanceof AbstractQuestion) {
+            return $this->questionTypeResolver->__invoke($node);
         }
 
         if ($node instanceof Requirement) {

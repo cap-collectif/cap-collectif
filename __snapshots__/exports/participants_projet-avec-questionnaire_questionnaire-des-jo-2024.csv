@@ -1,4 +1,19 @@
 ﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentExternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_dateOfBirth,user_websiteUrl,user_biography,user_address,user_zipCode,user_city,user_phone,user_profileUrl
+VXNlcjp1c2VyMjA=,user20@cap-collectif.com,user20,Citoyen,"2017-01-01 00:20:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user20
+VXNlcjp1c2VyMTk=,user19@cap-collectif.com,user19,Citoyen,"2017-01-01 00:19:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user19
+VXNlcjp1c2VyMTg=,user18@cap-collectif.com,user18,Citoyen,"2017-01-01 00:18:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user18
+VXNlcjp1c2VyMTc=,user17@cap-collectif.com,user17,Citoyen,"2017-01-01 00:17:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user17
+VXNlcjp1c2VyMTY=,user16@cap-collectif.com,user16,Citoyen,"2017-01-01 00:16:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user16
+VXNlcjp1c2VyMTU=,user15@cap-collectif.com,user15,Citoyen,"2017-01-01 00:15:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user15
+VXNlcjp1c2VyMTQ=,user14@cap-collectif.com,user14,Citoyen,"2017-01-01 00:14:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user14
+VXNlcjp1c2VyMTM=,user13@cap-collectif.com,user13,Citoyen,"2017-01-01 00:13:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user13
+VXNlcjp1c2VyMTI=,user12@cap-collectif.com,user12,Citoyen,"2017-01-01 00:12:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user12
+VXNlcjp1c2VyMTE=,user11@cap-collectif.com,user11,Citoyen,"2017-01-01 00:11:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user11
+VXNlcjp1c2VyMTA=,user10@cap-collectif.com,user10,Citoyen,"2017-01-01 00:10:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user10
+VXNlcjp1c2VyOQ==,user9@cap-collectif.com,user9,Citoyen,"2017-01-01 00:09:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user9
+VXNlcjp1c2VyOA==,user8@cap-collectif.com,user8,Citoyen,"2017-01-01 00:08:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user8
+VXNlcjp1c2VyNw==,user7@cap-collectif.com,user7,Citoyen,"2017-01-01 00:07:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user7
+VXNlcjp1c2VyNg==,user6@cap-collectif.com,user6,Citoyen,"2017-01-01 00:06:00",,,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/user6
 VXNlcjp1c2VyNTE1,user_updating_email@test.com,user_updating_email,Citoyen,"2015-01-15 12:02:03","2016-01-01 13:37:42",,Utilisateur,,1,1,,,,,,,,,,,https://capco.dev/profile/userupdatingemail
 VXNlcjp1c2VyV2VsY29tYXR0aWM=,msantostefano@jolicode.com,welcomattic,Citoyen,"2015-01-09 00:00:00",,,"Super Admin|Utilisateur",,1,1,,,,,,,,,,,https://capco.dev/profile/welcomattic
 VXNlcjp1c2VyNQ==,user@test.com,user,Citoyen,"2015-01-06 00:00:00","2016-01-01 00:00:00",,Utilisateur,,1,1,,1,FEMALE,"1996-03-01 00:00:00",,,"12 rue des boulets",75012,Paris,+33635492871,https://capco.dev/profile/user

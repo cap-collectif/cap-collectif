@@ -88,8 +88,85 @@ Scenario: author wants to see his replies
       "user": {
         "id": "VXNlcjp1c2VyNQ==",
         "replies": {
-          "totalCount": 1,
+          "totalCount": 8,
           "edges": [
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQx",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQy",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQz",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ0",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ1",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ2",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ3",
+                "private": true
+              }
+            },
             {
               "node": {
                 "createdAt": "2019-03-20 00:00:00",
@@ -147,8 +224,85 @@ Scenario: admin wants to see user5's replies
       "user": {
         "id": "VXNlcjp1c2VyNQ==",
         "replies": {
-          "totalCount": 1,
+          "totalCount": 8,
           "edges": [
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQx",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQy",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQz",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ0",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ1",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ2",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ3",
+                "private": true
+              }
+            },
             {
               "node": {
                 "createdAt": "2019-03-20 00:00:00",
@@ -206,8 +360,85 @@ Scenario: admin in group wants to see user5's replies
       "user": {
         "id": "VXNlcjp1c2VyNQ==",
         "replies": {
-          "totalCount": 2,
+          "totalCount": 9,
           "edges": [
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQx",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQy",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQz",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ0",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ1",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ2",
+                "private": true
+              }
+            },
+            {
+              "node": {
+                "createdAt": "2020-03-20 00:00:00",
+                "author": {
+                  "id": "VXNlcjp1c2VyNQ==",
+                  "username": "user"
+                },
+                "id": "UmVwbHk6cmVwbHlFeHBvcnQ3",
+                "private": true
+              }
+            },
             {
               "node": {
                 "createdAt": "2019-03-20 00:00:00",

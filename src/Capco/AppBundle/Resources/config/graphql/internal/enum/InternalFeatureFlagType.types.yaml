@@ -118,3 +118,5 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::user_invitations")'
             votes_min:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::votes_min")'
+            majority_vote_question:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::majority_vote_question")'

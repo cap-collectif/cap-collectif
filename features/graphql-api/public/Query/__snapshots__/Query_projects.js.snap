@@ -8,9 +8,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 9,
+            "totalCount": 16,
           },
-          "contributionsCount": 9,
+          "contributionsCount": 16,
           "contributors": Object {
             "totalCount": 4,
           },
@@ -234,11 +234,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 6,
+            "totalCount": 21,
           },
-          "contributionsCount": 6,
+          "contributionsCount": 21,
           "contributors": Object {
-            "totalCount": 4,
+            "totalCount": 19,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
@@ -398,9 +398,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
         "node": Object {
           "contributions": Object {
-            "totalCount": 9,
+            "totalCount": 10,
           },
-          "contributionsCount": 9,
+          "contributionsCount": 10,
           "contributors": Object {
             "totalCount": 4,
           },
@@ -710,9 +710,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 6,
+            "totalCount": 21,
           },
-          "contributionsCount": 6,
+          "contributionsCount": 21,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",
           "publishedAt": "2014-12-24 00:00:00",
           "title": "Projet avec questionnaire",
@@ -854,9 +854,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
         "node": Object {
           "contributions": Object {
-            "totalCount": 9,
+            "totalCount": 16,
           },
-          "contributionsCount": 9,
+          "contributionsCount": 16,
           "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
           "publishedAt": "2020-06-16 12:00:00",
           "title": "Projet pour consolider les exports",
@@ -880,9 +880,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 9,
+            "totalCount": 16,
           },
-          "contributionsCount": 9,
+          "contributionsCount": 16,
           "contributors": Object {
             "totalCount": 4,
           },
@@ -1106,11 +1106,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributions": Object {
-            "totalCount": 6,
+            "totalCount": 21,
           },
-          "contributionsCount": 6,
+          "contributionsCount": 21,
           "contributors": Object {
-            "totalCount": 4,
+            "totalCount": 19,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0OA==",

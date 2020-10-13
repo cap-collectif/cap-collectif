@@ -150,6 +150,9 @@ const QuestionFragment = {
       required
       helpText
       hidden
+      ... on SectionQuestion {
+        level
+      }
       ... on SimpleQuestion {
         isRangeBetween
         rangeMin

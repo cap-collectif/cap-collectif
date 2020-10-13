@@ -250,3 +250,10 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
     startAt: <(new \DateTime('2020-01-01'))>
     endAt: <(new \DateTime('2028-09-27'))>
     body: Une étape avec un questionnaire avec beaucoup de choix
+  questionnaireStepExport:
+    id: questionnaireStepExport
+    title: Questionnaire export
+    label: Questionnaire export
+    body: Test vote majoritaire
+    startAt: <(new \DateTime('2019-09-27'))>
+    endAt: <(new \DateTime('2057-09-01'))>

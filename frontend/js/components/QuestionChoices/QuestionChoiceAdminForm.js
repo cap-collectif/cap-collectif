@@ -7,7 +7,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 // eslint-disable-next-line no-restricted-imports
 import { Button, ButtonToolbar, Col, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import QuestionChoiceAdminModal from './QuestionChoiceAdminModal';
-import type { Dispatch, GlobalState } from '../../types';
+import type { Dispatch, GlobalState } from '~/types';
 import QuestionnaireAdminModalImportResponses from '~/components/Questionnaire/QuestionnaireAdminModalImportResponses';
 
 type QuestionChoices = $ReadOnlyArray<{|
@@ -147,10 +147,12 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
                         id="remove-choice"
                         className="btn--outline"
                         onClick={() => {
-                          // eslint-disable-next-line no-alert
-                          if (window.confirm(
+                          if (
+                            window.confirm(
                               intl.formatMessage({ id: 'responses.alert.delete' }),
-                              intl.formatMessage({ id: 'responses.alert.delete.bodyText' }))) {
+                              intl.formatMessage({ id: 'responses.alert.delete.bodyText' }),
+                            )
+                          ) {
                             fields.remove(index);
                           }
                         }}>

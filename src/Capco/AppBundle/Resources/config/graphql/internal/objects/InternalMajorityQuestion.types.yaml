@@ -1,0 +1,21 @@
+InternalMajorityQuestion:
+    type: object
+    inherits:
+        - InternalQuestion
+    config:
+        name: MajorityQuestion
+        interfaces:
+            - InternalQuestion
+            - Node
+        description: 'A majority question'
+        fields:
+            kind:
+                resolve: 'majority'
+            responsesByChoice:
+                type: '[InternalMajorityChoice!]!'
+                description: 'Return an array of MajorityCategories containing the total of responses for each choices.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionMajorityResponsesByChoicesResolver", [value, getUser(), context])'
+            totalVotesCount:
+                type: 'Int!'
+                description: 'Return the total of votes.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionMajorityCountResolver", [value, getUser(), context])'

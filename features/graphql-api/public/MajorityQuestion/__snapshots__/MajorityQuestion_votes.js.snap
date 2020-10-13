@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|MajorityQuestions_votes it fetches a majority question with its votesCount and its categories: UXVlc3Rpb246MTM4NQ== 1`] = `
+Object {
+  "node": Object {
+    "responsesByChoice": Array [
+      Object {
+        "choice": "VERY_WELL",
+        "count": 7,
+      },
+      Object {
+        "choice": "WELL",
+        "count": 4,
+      },
+      Object {
+        "choice": "PASSABLE",
+        "count": 2,
+      },
+      Object {
+        "choice": "NOT_PASSABLE",
+        "count": 3,
+      },
+    ],
+    "title": "Comment trouvez vous le jeu de weeb Genshin Impact ?",
+    "totalVotesCount": 16,
+  },
+}
+`;

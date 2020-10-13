@@ -265,6 +265,10 @@ class Indexer
             if (AbstractVote::class === $parentClass->getName()) {
                 return 'vote';
             }
+
+            if (AbstractResponse::class === $parentClass->getName()) {
+                return 'response';
+            }
         }
 
         $classes = $this->getClassesToIndex();

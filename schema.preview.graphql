@@ -511,6 +511,34 @@ enum GoogleMapsAddressType {
 """A string containing HTML code."""
 scalar HTML
 
+"""A majority question"""
+type MajorityQuestion implements Question & Node {
+  """The ID of an object."""
+  id: ID!
+
+  """Identifies the question title."""
+  title: String!
+
+  """Return responses on this questions."""
+  responses(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): ResponseConnection!
+}
+
 """A file uploaded by a user."""
 type Media implements UniformResourceLocatable {
   """The URL to this resource."""

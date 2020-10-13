@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, Button } from 'react-bootstrap';
 import QuestionJumpConditionsAdminForm from './QuestionJumpConditionsAdminForm';
-import type { GlobalState } from '../../types';
+import type { GlobalState } from '~/types';
 import component from '../Form/Field';
 import type { responsesHelper_adminQuestion } from '~relay/responsesHelper_adminQuestion.graphql';
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
@@ -70,7 +70,7 @@ const QuestionsJumpAdminForm = ({
     <div className="form-group" id="questions_choice_panel_personal">
       <ListGroup>
         {fields.map((member, index) => (
-          <div className="panel-custom panel panel-default">
+          <div className="panel-custom panel panel-default" key={member}>
             <div className="panel-heading">
               <i className="cap cap-android-menu" style={{ color: '#0388CC', fontSize: '20px' }} />
               <h3 className="panel-title">
@@ -122,7 +122,9 @@ const QuestionsJumpAdminForm = ({
                 return question.id && currentQuestion && question.id !== currentQuestion.id;
               })
               .map((question, i) => (
-                <option value={question.id}>{`${i + 1}. ${question.title}`}</option>
+                <option value={question.id} key={question.id}>{`${i + 1}. ${
+                  question.title
+                }`}</option>
               ))}
           </Field>
         </div>

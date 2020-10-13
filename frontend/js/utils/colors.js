@@ -13,6 +13,7 @@ const colors = {
   darkGray: '#707070',
   gray: '#737373',
   secondGray: '#8E8E8E',
+  thirdGray: '#424242',
   lightGray: '#ddd',
   iconGrayColor: '#acacac',
   borderColor: '#e3e3e3',
@@ -73,6 +74,15 @@ export const socialColors = {
   linkedin: '#0077b5',
   email: '#212529',
   link: '#212529',
+};
+
+export const majorityDecisionColors = {
+  darkGreen: '#33691e',
+  green: '#43a047',
+  yellow: '#ffc107',
+  orange: '#ff9800',
+  red: '#b71c1c',
+  black: '#212121',
 };
 
 export const CardHeaderColors = {

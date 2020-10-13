@@ -1009,6 +1009,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
+                                  "name": "level",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "SectionQuestion",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
                                   "name": "isRangeBetween",
                                   "storageKey": null,
                                 },
@@ -1191,20 +1205,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 },
                               ],
                               "type": "MultipleChoiceQuestion",
-                            },
-                            Object {
-                              "abstractKey": null,
-                              "kind": "InlineFragment",
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "level",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "type": "SectionQuestion",
                             },
                           ],
                           "storageKey": null,
@@ -4211,6 +4211,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                               "alias": null,
                                               "args": null,
                                               "kind": "ScalarField",
+                                              "name": "level",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                          "type": "SectionQuestion",
+                                        },
+                                        Object {
+                                          "abstractKey": null,
+                                          "kind": "InlineFragment",
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
                                               "name": "isRangeBetween",
                                               "storageKey": null,
                                             },
@@ -4832,6 +4846,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "kind": "ScalarField",
                                       "name": "type",
                                       "storageKey": null,
+                                    },
+                                    Object {
+                                      "abstractKey": null,
+                                      "kind": "InlineFragment",
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "level",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "type": "SectionQuestion",
                                     },
                                     Object {
                                       "abstractKey": null,
@@ -6145,7 +6173,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "753acc62b8b89dcdb6b81fd5bd53ee52",
+          "cacheID": "2046a8e733ffbaca56dfa5307e36efa6",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -6333,6 +6361,9 @@ fragment NewProposalResponse_response on Response {
     required
     helpText
     hidden
+    ... on SectionQuestion {
+      level
+    }
     ... on SimpleQuestion {
       isRangeBetween
       rangeMin
@@ -6473,6 +6504,9 @@ fragment ProposalAnalysisFormPanel_proposal on Proposal {
           required
           helpText
           hidden
+          ... on SectionQuestion {
+            level
+          }
           ... on SimpleQuestion {
             isRangeBetween
             rangeMin
@@ -7037,6 +7071,9 @@ fragment ProposalPageCustomSections_proposal on Proposal {
       required
       helpText
       hidden
+      ... on SectionQuestion {
+        level
+      }
       ... on SimpleQuestion {
         isRangeBetween
         rangeMin
@@ -7525,6 +7562,9 @@ fragment ProposalResponse_response on Response {
     required
     helpText
     hidden
+    ... on SectionQuestion {
+      level
+    }
     ... on SimpleQuestion {
       isRangeBetween
       rangeMin

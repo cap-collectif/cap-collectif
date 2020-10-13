@@ -46,9 +46,14 @@ const getIdFromQuestionType = (type: QuestionTypeValue, level: ?number): string 
   const mediaTypes = ['medias'];
   const sectionTypes = ['section', 'sub-section'];
   const numberTypes = ['number'];
+  const majorityType = ['majority'];
 
   if (numberTypes.includes(type)) {
     return 'admin.fields.validation_rule.number';
+  }
+
+  if (majorityType.includes(type)) {
+    return 'majority-decision';
   }
 
   if (freeTypes.includes(type)) {

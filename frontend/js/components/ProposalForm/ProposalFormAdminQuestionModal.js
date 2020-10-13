@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
+import styled, { type StyledComponent } from 'styled-components';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import styled, { type StyledComponent } from 'styled-components';
 import { Field, formValueSelector, FieldArray, getFormSyncErrors, change } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
@@ -14,6 +14,9 @@ import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm'
 import QuestionsJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
 import type { Question } from '~/components/Form/Form.type';
 import { ModalContainer } from '~/components/Question/SectionQuestionAdminModal';
+import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority';
+import colors from '~/utils/colors';
+import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
 type ParentProps = {|
   dispatch: Dispatch,
@@ -25,7 +28,7 @@ type ParentProps = {|
   formName: string,
 |};
 
-type Props = {
+type Props = {|
   type: string,
   isRangeBetween: boolean,
   validationRuleType: string,
@@ -33,8 +36,9 @@ type Props = {
   currentQuestion: Question,
   intl: IntlShape,
   isSuperAdmin: boolean,
+  enableMajorityQuestion: boolean,
   ...ParentProps,
-};
+|};
 
 type State = {|
   initialQuestionValues: Question,
@@ -61,6 +65,45 @@ export const RangeDiv: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
     }
   }
 `;
+
+export const MajorityContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  margin-bottom: 20px;
+
+  .preview-text {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    color: #7a7a7a;
+    margin: 0 0 8px 0;
+  }
+
+  .majority-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: ${colors.formBgc};
+    padding: 12px;
+    ${MAIN_BORDER_RADIUS};
+    border: 1px solid #e0e0e0;
+    color: ${colors.thirdGray};
+
+    .form-group {
+      margin: 0;
+      width: 100%;
+    }
+
+    .majority-title {
+      margin-bottom: 10px;
+      font-weight: 600;
+      text-align: left;
+    }
+  }
+
+  .label-container {
+    font-size: 10px;
+  }
+`;
+
 // When creating a new question, we can not rely on __typename because it does not exists before creation
 // so this is used to determine if we can show the "choices" section of the question form when creating a new one
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
@@ -98,6 +141,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
       intl,
       validationRuleType,
       currentQuestion,
+      enableMajorityQuestion,
       formErrors,
       isSuperAdmin,
     } = this.props;
@@ -207,6 +251,11 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                 <option value="select">
                   {intl.formatMessage({ id: 'global.question.types.select' })}
                 </option>
+                {enableMajorityQuestion && (
+                  <option value="majority">
+                    {intl.formatMessage({ id: 'majority-decision' })}
+                  </option>
+                )}
               </optgroup>
               <optgroup
                 label={intl.formatMessage({ id: 'global.question.types.multiple_multiple' })}>
@@ -262,10 +311,23 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                 />
               </div>
             )}
+
+            {currentQuestion && currentQuestion.type === 'majority' && enableMajorityQuestion && (
+              <MajorityContainer>
+                <p className="preview-text">
+                  <FormattedMessage id="global.preview" />
+                </p>
+                <div className="majority-preview">
+                  {currentQuestion?.title && (
+                    <p className="majority-title">{currentQuestion.title}</p>
+                  )}
+                  <MultipleMajority asPreview disabled />
+                </div>
+              </MajorityContainer>
+            )}
+
             <h4 style={{ fontWeight: 'bold' }}>
-              <span>
-                <FormattedMessage id="conditional-jumps" />
-              </span>
+              <FormattedMessage id="conditional-jumps" />
             </h4>
             {currentQuestion && currentQuestion.id ? (
               <FieldArray
@@ -277,10 +339,9 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
             ) : (
               <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
             )}
+
             <h4 style={{ fontWeight: 'bold' }}>
-              <span>
-                <FormattedMessage id="global.options" />
-              </span>
+              <FormattedMessage id="global.options" />
             </h4>
             <div className="regular-weight-field">
               {currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion' && (
@@ -410,6 +471,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
+    enableMajorityQuestion: state.default.features.majority_vote_question,
     currentQuestion: selector(state, `${props.member}`),
     type: selector(state, `${props.member}.type`),
     isRangeBetween: selector(state, `${props.member}.isRangeBetween`),

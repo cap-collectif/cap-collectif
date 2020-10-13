@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`medianCalculator get median for even number of replies 1`] = `2`;
+
+exports[`medianCalculator get median for low number of replies 1`] = `3`;
+
+exports[`medianCalculator get median for no reply 1`] = `2`;
+
+exports[`medianCalculator get median for uneven number of replies 1`] = `4`;
+
+exports[`medianCalculator get median for unique reply 1`] = `1`;

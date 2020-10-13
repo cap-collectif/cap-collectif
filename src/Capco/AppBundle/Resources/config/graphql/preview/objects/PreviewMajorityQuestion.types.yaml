@@ -1,0 +1,10 @@
+PreviewMajorityQuestion:
+    type: object
+    inherits:
+        - PreviewQuestion
+    config:
+        name: MajorityQuestion
+        interfaces:
+            - PreviewQuestion
+            - Node
+        description: 'A majority question'

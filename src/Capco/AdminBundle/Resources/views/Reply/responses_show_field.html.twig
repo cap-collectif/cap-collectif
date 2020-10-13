@@ -3,8 +3,8 @@
 {% block field %}
     {% if value | length > 0 %}
         {% for response in value %}
-            <strong>{{ response.question.title }}</strong></br>
-            </br>
+            <strong>{{ response.question.title }}</strong><br/>
+            <br/>
             {% if response.value is defined %}
                 {% if response.value is iterable %}
                     <ul>
@@ -16,7 +16,23 @@
                     {% if response.value.label is defined %}
                         {{ response.value.label }}
                     {% else %}
-                        {{ response.value }}
+                        {% if response.question.type == constant('Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION') %}
+                            {% if response.value == constant('Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::VERY_WELL') %}
+                                {{ 'very-well'|trans({}, 'CapcoAppBundle') }}
+                            {% elseif response.value == constant('Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::WELL') %}
+                                {{ 'global-well'|trans({}, 'CapcoAppBundle') }}
+                            {% elseif response.value == constant('Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::WELL_ENOUGH') %}
+                                {{ 'global-well-enough'|trans({}, 'CapcoAppBundle') }}
+                            {% elseif response.value == constant('Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::PASSABLE') %}
+                                {{ 'global-passable'|trans({}, 'CapcoAppBundle') }}
+                            {% elseif response.value == constant('Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::NOT_PASSABLE') %}
+                                {{ 'global-not-passable'|trans({}, 'CapcoAppBundle') }}
+                            {% elseif response.value == constant('Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::REJECTED') %}
+                                {{ 'global-not-passable'|trans({}, 'CapcoAppBundle') }}
+                            {% endif %}
+                        {% else %}
+                            {{ response.value }}
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endif %}

@@ -115,6 +115,12 @@ Scenario: Author wants to update his reply
                 "id": "UXVlc3Rpb246MzAy"
               },
               "value": null
+            },
+            {
+              "question": {
+                "id": "UXVlc3Rpb246MTM4NQ=="
+              },
+              "value": "0"
             }
           ]
         }
@@ -225,6 +231,12 @@ Scenario: User wants to published a reply in draft
                {
                   "question":{
                      "id":"UXVlc3Rpb246MzAy"
+                  },
+                  "value":null
+               },
+               {
+                  "question":{
+                     "id":"UXVlc3Rpb246MTM4NQ=="
                   },
                   "value":null
                }

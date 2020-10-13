@@ -1,0 +1,10 @@
+InternalMajorityChoice:
+    type: object
+    config:
+        description: 'Data corresponding to one majority question choice'
+        name: MajorityChoice
+        fields:
+            choice:
+                type: 'MajorityChoiceType!'
+            count:
+                type: 'Int!'

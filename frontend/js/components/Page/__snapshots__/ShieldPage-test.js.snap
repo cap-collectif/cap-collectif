@@ -363,6 +363,20 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "level",
+                          "storageKey": null,
+                        },
+                      ],
+                      "type": "SectionQuestion",
+                    },
+                    Object {
+                      "abstractKey": null,
+                      "kind": "InlineFragment",
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "isRangeBetween",
                           "storageKey": null,
                         },
@@ -562,7 +576,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "2ef30671897d2de0db691ff86793410d",
+          "cacheID": "9670bc05812671f54b8c24464045b7ec",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -583,6 +597,9 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     required
     helpText
     hidden
+    ... on SectionQuestion {
+      level
+    }
     ... on SimpleQuestion {
       isRangeBetween
       rangeMin
@@ -667,6 +684,9 @@ fragment RegistrationForm_query on Query {
       required
       helpText
       hidden
+      ... on SectionQuestion {
+        level
+      }
       ... on SimpleQuestion {
         isRangeBetween
         rangeMin
@@ -1141,6 +1161,20 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "level",
+                          "storageKey": null,
+                        },
+                      ],
+                      "type": "SectionQuestion",
+                    },
+                    Object {
+                      "abstractKey": null,
+                      "kind": "InlineFragment",
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "isRangeBetween",
                           "storageKey": null,
                         },
@@ -1340,7 +1374,7 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
           ],
         },
         "params": Object {
-          "cacheID": "2ef30671897d2de0db691ff86793410d",
+          "cacheID": "9670bc05812671f54b8c24464045b7ec",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -1361,6 +1395,9 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     required
     helpText
     hidden
+    ... on SectionQuestion {
+      level
+    }
     ... on SimpleQuestion {
       isRangeBetween
       rangeMin
@@ -1445,6 +1482,9 @@ fragment RegistrationForm_query on Query {
       required
       helpText
       hidden
+      ... on SectionQuestion {
+        level
+      }
       ... on SimpleQuestion {
         isRangeBetween
         rangeMin
@@ -1899,6 +1939,20 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "level",
+                          "storageKey": null,
+                        },
+                      ],
+                      "type": "SectionQuestion",
+                    },
+                    Object {
+                      "abstractKey": null,
+                      "kind": "InlineFragment",
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "isRangeBetween",
                           "storageKey": null,
                         },
@@ -2098,7 +2152,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "2ef30671897d2de0db691ff86793410d",
+          "cacheID": "9670bc05812671f54b8c24464045b7ec",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -2119,6 +2173,9 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     required
     helpText
     hidden
+    ... on SectionQuestion {
+      level
+    }
     ... on SimpleQuestion {
       isRangeBetween
       rangeMin
@@ -2203,6 +2260,9 @@ fragment RegistrationForm_query on Query {
       required
       helpText
       hidden
+      ... on SectionQuestion {
+        level
+      }
       ... on SimpleQuestion {
         isRangeBetween
         rangeMin

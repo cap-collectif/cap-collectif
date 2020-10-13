@@ -84,6 +84,7 @@ class FeaturesCategoryResolver
                     'report_browers_errors_to_sentry',
                     'http_redirects',
                     'user_invitations',
+                    Manager::majority_vote_question,
                 ],
             ],
         ],

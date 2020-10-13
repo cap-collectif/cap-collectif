@@ -112,12 +112,12 @@ Object {
         },
         Object {
           "node": Object {
-            "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
+            "value": "{\\"labels\\":[\\"Oui\\"],\\"other\\":null}",
           },
         },
         Object {
           "node": Object {
-            "value": "{\\"labels\\":[\\"Oui\\"],\\"other\\":null}",
+            "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
           },
         },
       ],

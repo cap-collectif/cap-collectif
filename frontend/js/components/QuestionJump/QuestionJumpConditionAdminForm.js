@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, Field, arrayRemove, change } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import type { GlobalState, Dispatch } from '../../types';
+import type { GlobalState, Dispatch } from '~/types';
 import component from '../Form/Field';
 import type { QuestionsInReduxForm } from '~/utils/submitQuestion';
 import type { QuestionChoice } from '~/components/Form/Form.type';
@@ -47,6 +47,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props> {
 
   displayValueList = (questions: QuestionsInReduxForm, selectedQuestion: string) => {
     const question = questions.find(q => q.id === selectedQuestion);
+
     if (question) {
       return question.choices
         ? // $FlowFixMe we need to refacto the responseHelper.js file and its 1131 lines
@@ -55,6 +56,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props> {
           ))
         : null;
     }
+
     return null;
   };
 
@@ -69,6 +71,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props> {
       formName,
       oldMember,
     } = this.props;
+
     return (
       <div className="movable-element" key={index}>
         <div className="mb-10">
@@ -97,7 +100,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props> {
           {questions
             .filter(question => question.__typename === 'MultipleChoiceQuestion')
             .map((question, questionIndex) => (
-              <option value={question.id}>
+              <option value={question.id} key={question.id}>
                 {questionIndex + 1}. {question.title}
               </option>
             ))}

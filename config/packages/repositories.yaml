@@ -502,3 +502,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:MailingList']
+
+    Capco\AppBundle\Repository\SimpleQuestionRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:SimpleQuestion']

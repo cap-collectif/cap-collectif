@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import styled, { type StyledComponent } from 'styled-components';
 import { Alert, Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -13,6 +14,7 @@ import { closeRegistrationModal, hideChartModal } from '~/redux/modules/user';
 import type { Dispatch } from '~/types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import type { RegistrationModal_query } from '~relay/RegistrationModal_query.graphql';
+import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 
 type StateProps = {|
   +show: boolean,
@@ -35,6 +37,22 @@ type Props = {|
   query: RegistrationModal_query,
   locale: string,
 |};
+
+export const ModalContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal)`
+  .multiple-majority-container {
+    flex-direction: column;
+    text-align: center;
+
+    .majority-container {
+      &:first-of-type {
+        border-radius: ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE} 0 0;
+      }
+      &:last-of-type {
+        border-radius: 0 0 ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE};
+      }
+    }
+  }
+`;
 
 export const RegistrationModal = ({
   submitting,
@@ -70,7 +88,7 @@ export const RegistrationModal = ({
         <CloseButton label="global.close" onClose={onCloseChart} />
       </Modal.Footer>
     </Modal>
-    <Modal
+    <ModalContainer
       animation={false}
       show={show}
       autoFocus
@@ -106,7 +124,7 @@ export const RegistrationModal = ({
           onSubmit={onSubmit}
         />
       </Modal.Footer>
-    </Modal>
+    </ModalContainer>
   </>
 );
 

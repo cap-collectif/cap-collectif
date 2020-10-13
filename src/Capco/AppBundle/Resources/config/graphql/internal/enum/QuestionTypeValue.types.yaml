@@ -29,3 +29,5 @@ QuestionTypeValue:
         value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIRET")'
       rna:
         value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RNA")'
+      majority:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION")'

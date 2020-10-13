@@ -437,6 +437,16 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:32:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+    proposal32bis:
+        id: proposal32bis
+        title: Les chats ne devraient pas avoir le même titire
+        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        author: '@user2'
+        proposalForm: '@proposalform10'
+        reference: 57
+        createdAt: <(new \DateTime('2020-11-28 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
     proposal33:
         id: proposal33
         title: Batman

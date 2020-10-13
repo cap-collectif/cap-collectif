@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { formValueSelector, Field, FieldArray } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import type { GlobalState } from '../../types';
+import type { GlobalState } from '~/types';
 import component from '../Form/Field';
 import QuestionJumpConditionAdminForm from './QuestionJumpConditionAdminForm';
 import type { Jump } from '../Questionnaire/QuestionnaireAdminConfigurationForm';
@@ -18,91 +18,102 @@ type Props = {
   currentJump: Jump,
 };
 
-export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
-  render() {
-    const { fields, questions, member, formName, currentJump } = this.props;
-    const currentQuestion = questions.find(question => question.id === currentJump.origin.id);
-    const isMultipleChoiceQuestion =
-      currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion';
-    const firstMultipleChoiceQuestion = questions.find(
-      question => question.__typename === 'MultipleChoiceQuestion',
-    );
-    const defaultCondition = {
+export const QuestionJumpConditionsAdminForm = ({
+  fields,
+  questions,
+  member,
+  formName,
+  currentJump,
+}: Props) => {
+  const currentQuestion = questions.find(question => question.id === currentJump.origin.id);
+  const isMultipleChoiceQuestion =
+    currentQuestion && currentQuestion.__typename === 'MultipleChoiceQuestion';
+  const firstMultipleChoiceQuestion = questions.find(
+    question => question.__typename === 'MultipleChoiceQuestion',
+  );
+
+  const getDefaultCondition = () => {
+    let value = null;
+
+    if (currentQuestion && isMultipleChoiceQuestion) {
+      value = currentQuestion.choices && currentQuestion.choices[0];
+    } else if (firstMultipleChoiceQuestion) {
+      value = firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0];
+    }
+
+    return {
       question: {
         id: currentJump.origin.id,
       },
-      value:
-        currentQuestion && isMultipleChoiceQuestion
-          ? currentQuestion.choices && currentQuestion.choices[0]
-          : firstMultipleChoiceQuestion
-          ? firstMultipleChoiceQuestion.choices && firstMultipleChoiceQuestion.choices[0]
-          : null,
+      value,
       operator: 'IS',
     };
+  };
 
-    return (
-      <div className="form-group" id="questions_choice_panel_personal">
-        {fields.map((memberConditions, index) => (
-          <div>
-            <FieldArray
-              component={QuestionJumpConditionAdminForm}
-              questions={questions}
-              member={memberConditions}
-              formName={formName}
-              name={formName}
-              index={index}
-              oldMember={member}
-            />
-            {fields.length > 1 && index + 1 < fields.length && (
-              <p>
-                <FormattedMessage id="and-or-conditions" tagName="b" />
-              </p>
-            )}
-          </div>
-        ))}
-        <div>
-          <Button
-            bsStyle="primary"
-            className="btn--outline box-content__toolbar"
-            onClick={() => {
-              fields.push(defaultCondition);
-            }}>
-            <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-          </Button>
-          {fields.length > 0 && (
-            <div>
-              <p className="mt-5">
-                <FormattedMessage id="then-go-to" tagName="b" />
-              </p>
-              <Field
-                id={`${member}.destination.id`}
-                name={`${member}.destination.id`}
-                type="select"
-                component={component}>
-                {questions
-                  .filter(question => {
-                    // We should not display the origin question of the jump when adding a new jump because a logic jump
-                    // could not redirect to itself
-                    return (
-                      question.id &&
-                      currentJump &&
-                      currentJump.origin.id &&
-                      question.id !== currentJump.origin.id
-                    );
-                  })
-                  .map((question, index) => (
-                    <option value={question.id}>
-                      {index + 1}. {question.title}
-                    </option>
-                  ))}
-              </Field>
-            </div>
+  const defaultCondition = getDefaultCondition();
+
+  return (
+    <div className="form-group" id="questions_choice_panel_personal">
+      {fields.map((memberConditions, index) => (
+        <div key={member}>
+          <FieldArray
+            component={QuestionJumpConditionAdminForm}
+            questions={questions}
+            member={memberConditions}
+            formName={formName}
+            name={formName}
+            index={index}
+            oldMember={member}
+          />
+          {fields.length > 1 && index + 1 < fields.length && (
+            <p>
+              <FormattedMessage id="and-or-conditions" tagName="b" />
+            </p>
           )}
         </div>
+      ))}
+      <div>
+        <Button
+          bsStyle="primary"
+          className="btn--outline box-content__toolbar"
+          onClick={() => {
+            fields.push(defaultCondition);
+          }}>
+          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+        </Button>
+        {fields.length > 0 && (
+          <div>
+            <p className="mt-5">
+              <FormattedMessage id="then-go-to" tagName="b" />
+            </p>
+            <Field
+              id={`${member}.destination.id`}
+              name={`${member}.destination.id`}
+              type="select"
+              component={component}>
+              {questions
+                .filter(question => {
+                  // We should not display the origin question of the jump when adding a new jump because a logic jump
+                  // could not redirect to itself
+                  return (
+                    question.id &&
+                    currentJump &&
+                    currentJump.origin.id &&
+                    question.id !== currentJump.origin.id
+                  );
+                })
+                .map((question, index) => (
+                  <option value={question.id} key={question.id}>
+                    {index + 1}. {question.title}
+                  </option>
+                ))}
+            </Field>
+          </div>
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);

@@ -111,3 +111,10 @@ Capco\AppBundle\Entity\Questionnaire:
     questionnaireEvaluationIdf:
         id: questionnaireEvaluationIdf
         title: Questionnaire d'étude d'Ile de France
+    questionnaireExport:
+        id: questionnaireExport
+        title: Vote majo
+        description: Vote barjot
+        privateResult: false
+        multipleRepliesAllowed: true
+        step: '@questionnaireStepExport'

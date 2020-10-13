@@ -15,13 +15,30 @@ import ProposalAssessmentFormPanel from './ProposalAssessmentFormPanel';
 import ProposalViewAnalysisPanel from './ProposalViewAnalysisPanel';
 import ProposalViewDecisionPanel from './ProposalViewDecisionPanel';
 import ProposalViewAssessmentPanel from './ProposalViewAssessmentPanel';
+import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 
 const FormPanel: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   overflow: scroll;
   height: calc(100vh - 50px);
   width: 370px;
+
   textarea {
     resize: none;
+  }
+
+  .multiple-majority-container {
+    flex-direction: column;
+    text-align: center;
+
+    .majority-container {
+      &:first-of-type {
+        border-radius: ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE} 0 0;
+      }
+
+      &:last-of-type {
+        border-radius: 0 0 ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE};
+      }
+    }
   }
 `;
 

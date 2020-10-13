@@ -7,6 +7,7 @@ import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarCha
 import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
 import QuestionnaireAdminResultsText from './QuestionnaireAdminResultsText';
+import QuestionnaireAdminResultMajority from './QuestionnaireAdminResultMajority/QuestionnaireAdminResultMajority';
 import type { QuestionnaireAdminResults_questionnaire } from '~relay/QuestionnaireAdminResults_questionnaire.graphql';
 import QuestionnaireAdminResultsMedia from './QuestionnaireAdminResultsMedia';
 import withColors from '../Utils/withColors';
@@ -23,6 +24,11 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
 
     if (question.participants && question.participants.totalCount === 0) {
       return null;
+    }
+
+    // majority is also a simple question let it here :)
+    if (question.type === 'majority') {
+      return <QuestionnaireAdminResultMajority majorityQuestion={question} />;
     }
 
     if (question.__typename === 'SimpleQuestion') {
@@ -152,6 +158,7 @@ export default createFragmentContainer(container, {
         ...QuestionnaireAdminResultsBarChart_multipleChoiceQuestion
         ...QuestionnaireAdminResultsPieChart_multipleChoiceQuestion
         ...QuestionnaireAdminResultsRanking_multipleChoiceQuestion
+        ...QuestionnaireAdminResultMajority_majorityQuestion
       }
     }
   `,
