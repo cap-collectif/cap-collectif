@@ -16,6 +16,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:00:00'))>
         createdAt: <(new \DateTime('2017-02-01 09:08:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
+        undraftAt: $publishedAt
         moderationToken: 'proposalToken1'
     deletedProposal1:
         likers: ['@user1', '@user2']
@@ -35,6 +36,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:01:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:01:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:01:00'))>
+        undraftAt: $publishedAt
     proposal2:
         likers: ['@user504']
         evaluers: ['@group1', '@group7']
@@ -56,6 +58,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:03:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:03:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:03:00'))>
+        undraftAt: $publishedAt
     proposal3:
         id: proposal3
         title: Installation de bancs sur la place de la mairie
@@ -74,6 +77,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:04:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:04:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:04:00'))>
+        undraftAt: $publishedAt
     proposal4:
         id: proposal4
         title: Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
@@ -88,6 +92,7 @@ Capco\AppBundle\Entity\Proposal:
         reference: 4
         publishedAt: <(new \DateTime('2017-02-01 00:04:19'))>
         createdAt: <(new \DateTime('2017-02-01 00:04:19'))>
+        undraftAt: $publishedAt
     proposal5:
         id: proposal5
         title: Proposition à la corbeille (visible)
@@ -104,6 +109,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:05:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:05:00'))>
         trashedAt: <(new \DateTime('2017-02-01 00:05:00'))>
+        undraftAt: $publishedAt
     proposal6:
         id: proposal6
         title: Proposition à la corbeille (invisible)
@@ -121,6 +127,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:06:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:06:00'))>
         trashedAt: <(new \DateTime('2017-02-01 00:06:00'))>
+        undraftAt: $publishedAt
     proposal7:
         id: proposal7
         title: Proposition très chère
@@ -137,6 +144,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:07:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:07:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:08:00'))>
+        undraftAt: $publishedAt
     proposal8:
         id: proposal8
         title: Proposition pas chère
@@ -154,6 +162,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:10:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:11:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:10:00'))>
+        undraftAt: $publishedAt
     proposal9:
         id: proposal9
         title: Proposition gratuite
@@ -169,6 +178,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:00:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:00:00'))>
+        undraftAt: $publishedAt
     proposal10:
         id: proposal10
         title: Proposition pas encore votable
@@ -184,6 +194,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:07:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:07:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:07:00'))>
+        undraftAt: $publishedAt
     proposal11:
         id: proposal11
         title: Proposition plus votable
@@ -200,6 +211,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:08:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:08:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:08:00'))>
+        undraftAt: $publishedAt
     proposal12:
         id: proposal12
         title: Proposition plus votable
@@ -221,6 +233,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 09:40:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:00:00'))>
+        undraftAt: $publishedAt
     proposal13:
         id: proposal13
         title: Proposition plus votable 2
@@ -237,6 +250,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 09:50:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:00:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:00:00'))>
+        undraftAt: $publishedAt
     proposal14:
         id: proposal14
         title: Mon super projet
@@ -251,6 +265,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 14:00:00'))>
         createdAt: <(new \DateTime('2017-02-01 14:00:00'))>
         updatedAt: <(new \DateTime('2017-02-01 14:00:00'))>
+        undraftAt: $publishedAt
     proposal15:
         id: proposal15
         title: Proposition 15
@@ -261,6 +276,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 15:00:00'))>
         createdAt: <(new \DateTime('2017-02-01 15:00:00'))>
         updatedAt: <(new \DateTime('2017-02-01 15:00:00'))>
+        undraftAt: $publishedAt
     proposal16:
         id: proposal16
         title: Proposition 16
@@ -271,6 +287,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 16:00:00'))>
         createdAt: <(new \DateTime('2017-02-01 16:00:00'))>
         updatedAt: <(new \DateTime('2017-02-01 16:00:00'))>
+        undraftAt: $publishedAt
     proposal17:
         id: proposal17
         title: Proposition 17
@@ -281,6 +298,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 17:00:00'))>
         createdAt: <(new \DateTime('2017-02-01 17:00:00'))>
         updatedAt: <(new \DateTime('2017-02-01 17:00:00'))>
+        undraftAt: $publishedAt
     proposal18:
         id: proposal18
         title: Proposition 18
@@ -291,6 +309,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 18:00:00'))>
         createdAt: <(new \DateTime('2017-02-01 18:00:00'))>
         updatedAt: <(new \DateTime('2017-02-01 18:00:00'))>
+        undraftAt: $publishedAt
     proposal19:
         id: proposal19
         title: Proposition brouillon 1
@@ -337,6 +356,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 22:00:00'))>
         updatedAt: <(new \DateTime('2017-02-01 22:00:00'))>
         publishedAt: <(new \DateTime('2017-02-01 22:00:00'))>
+        undraftAt: $publishedAt
     proposal23:
         id: proposal23
         title: Proposition très intéressante
@@ -347,6 +367,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 23:00:00'))>
         updatedAt: <(new \DateTime('2017-02-01 23:00:00'))>
         publishedAt: <(new \DateTime('2017-02-01 23:00:00'))>
+        undraftAt: $publishedAt
     proposal24:
         id: proposal24
         title: Proposition 1
@@ -357,6 +378,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:02:40'))>
         updatedAt: <(new \DateTime('2017-02-01 00:02:40'))>
         publishedAt: <(new \DateTime('2017-02-01 00:02:40'))>
+        undraftAt: $publishedAt
     proposal25:
         id: proposal25
         title: Proposition 2
@@ -367,6 +389,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:02:50'))>
         updatedAt: <(new \DateTime('2017-02-01 00:02:50'))>
         publishedAt: <(new \DateTime('2017-02-01 00:02:50'))>
+        undraftAt: $publishedAt
     proposal26:
         id: proposal26
         title: Proposition 3
@@ -377,6 +400,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:26:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:26:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:26:00'))>
+        undraftAt: $publishedAt
     proposal27:
         id: proposal27
         title: Operation génétique pour avoir la force
@@ -387,6 +411,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:27:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:27:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:27:00'))>
+        undraftAt: $publishedAt
     proposal28:
         id: proposal28
         title: Transfusion de midi-chloriens
@@ -407,6 +432,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:29:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:29:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:29:00'))>
+        undraftAt: $publishedAt
     proposal30:
         id: proposal30
         title: Trouver un anti dote à la force
@@ -417,6 +443,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:30:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:30:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:30:00'))>
+        undraftAt: $publishedAt
     proposal31:
         id: proposal31
         title: Minus et Cortex
@@ -427,6 +454,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:31:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:31:00'))>
         publishedAt: <(new \DateTime('2017-02-01 00:31:00'))>
+        undraftAt: $publishedAt
     proposal32:
         id: proposal32
         title: Les chats
@@ -437,6 +465,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2017-02-01 00:32:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        undraftAt: $createdAt
     proposal32bis:
         id: proposal32bis
         title: Les chats ne devraient pas avoir le même titire
@@ -447,6 +476,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2020-11-28 00:00:00'))>
         publishedAt: $createdAt
         updatedAt: $createdAt
+        undraftAt: $createdAt
     proposal33:
         id: proposal33
         title: Batman
@@ -457,6 +487,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:33:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:33:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:33:00'))>
+        undraftAt: $publishedAt
     proposal34:
         id: proposal34
         title: Quel type de bière ?
@@ -467,6 +498,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:34:00'))>
         createdAt: <(new \DateTime('2017-02-01 00:34:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:34:00'))>
+        undraftAt: $publishedAt
     proposal35:
         id: proposal35
         title: Proposition 35 non publiée
@@ -481,6 +513,7 @@ Capco\AppBundle\Entity\Proposal:
         reference: 35
         createdAt: <(new \DateTime('2017-02-01 00:15:00'))>
         updatedAt: <(new \DateTime('2017-02-01 00:15:00'))>
+        undraftAt: $createdAt
     proposal36:
         id: proposal36
         title: Proposition non publiée à temps
@@ -490,6 +523,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <identity((new \DateTime('2018-11-03')))>
         category: '@pCategory1'
         reference: 36
+        undraftAt: $createdAt
     proposal37:
         id: proposal37
         title: Libérons les nains de jardin
@@ -500,6 +534,7 @@ Capco\AppBundle\Entity\Proposal:
         reference: 45
         createdAt: <(new \DateTime('2017-02-01 13:37:00'))>
         updatedAt: <(new \DateTime('2017-02-01 13:37:00'))>
+        undraftAt: $publishedAt
     proposal38:
         id: proposal38
         title: Libérons blanche neige
@@ -510,6 +545,7 @@ Capco\AppBundle\Entity\Proposal:
         reference: 46
         createdAt: <(new \DateTime('2017-02-01 13:38:00'))>
         updatedAt: <(new \DateTime('2017-02-01 13:38:00'))>
+        undraftAt: $publishedAt
     proposal39:
         id: proposal39
         title: Donnons leur un village dédié
@@ -520,6 +556,7 @@ Capco\AppBundle\Entity\Proposal:
         reference: 47
         createdAt: <(new \DateTime('2017-02-01 13:39:00'))>
         updatedAt: <(new \DateTime('2017-02-01 13:39:00'))>
+        undraftAt: $publishedAt
     proposal{40..100}:
         id: 'proposal<current()>'
         title: Proposal <current()>
@@ -530,6 +567,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <((new \DateTime('2017-02-01 00:21:00'))->modify("+ $current days"))>
         createdAt: <((new \DateTime('2017-02-01 00:21:00'))->modify("+ $current days"))>
         updatedAt: <((new \DateTime('2017-02-01 00:21:00'))->modify("+ $current days"))>
+        undraftAt: $publishedAt
     proposal101:
         id: 'proposal101'
         slug: proposition-sans-titre
@@ -540,6 +578,7 @@ Capco\AppBundle\Entity\Proposal:
         reference: '101'
         publishedAt: <(new \DateTime('2017-02-01 10:01:00'))>
         createdAt: <(new \DateTime('2017-02-01 10:01:00'))>
+        undraftAt: $publishedAt
     proposal102:
         id: proposalDraftWithNotConfirmedAuthor
         title: Proposition brouillon avec un auteur non confirmé
@@ -559,6 +598,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:00:01'))>
         updatedAt: <(new \DateTime('2017-02-01 00:00:01'))>
         createdAt: <(new \DateTime('2017-02-01 00:00:01'))>
+        undraftAt: $publishedAt
         author: '@user1'
         proposalForm: '@proposalform14'
         reference: 48
@@ -570,6 +610,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:00:02'))>
         updatedAt: <(new \DateTime('2017-02-01 00:00:02'))>
         createdAt: <(new \DateTime('2017-02-01 00:00:02'))>
+        undraftAt: $publishedAt
         author: '@user1'
         proposalForm: '@proposalform14'
         reference: 49
@@ -587,6 +628,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <((new \DateTime('2017-02-01 00:23:00'))->modify("+ $current days"))>
         updatedAt: <((new \DateTime('2017-02-01 00:23:00'))->modify("+ $current days"))>
         trashedAt: <((new \DateTime('2017-02-01 00:23:00'))->modify("+ $current days"))>
+        undraftAt: $publishedAt
     proposalTrashedInvisible{1..50}:
         id: 'proposalTrashedInvisible<current()>'
         title: Trashed proposal invisible <current()>
@@ -600,6 +642,7 @@ Capco\AppBundle\Entity\Proposal:
         trashedStatus: 'invisible'
         trashedReason: 'Bad words <current()>'
         trashedAt: <((new \DateTime('2019-03-01 00:23:00'))->modify("+ $current days"))>
+        undraftAt: $publishedAt
     proposal103:
         id: proposal103
         title: Test de publication sans accusé de réception
@@ -610,6 +653,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2018-03-02 00:00:00'))>
         updatedAt: <(new \DateTime('2018-03-10 00:00:00'))>
         publishedAt: <(new \DateTime('2018-03-11 00:00:00'))>
+        undraftAt: $publishedAt
     proposal104:
         id: proposal104
         title: Test de publication avec accusé de réception
@@ -620,6 +664,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2018-04-02 00:00:00'))>
         updatedAt: <(new \DateTime('2018-04-10 00:00:00'))>
         publishedAt: <(new \DateTime('2018-04-11 00:00:00'))>
+        undraftAt: $publishedAt
     proposal105:
         id: proposal105
         title: Proposition qui va être jetée
@@ -630,6 +675,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2019-01-01 00:00:01'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
     proposal106:
         id: proposal106
         title: Proposition qui est jetée
@@ -642,6 +688,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2019-01-01 00:00:02'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
     proposal107:
         id: proposal107
         title: Proposition n'est pas jetée
@@ -652,6 +699,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2019-01-01 00:00:03'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
     proposal108:
         evaluers: ['@group1']
         id: proposal108
@@ -669,6 +717,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2017-02-01 00:03:00'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
     proposal109:
         id: proposal109
         title: Jurer allégeance à Nurgle
@@ -678,6 +727,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-03-17 00:03:00'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         category: '@pCategoryAssigned3'
     proposal{110..120}:
         id: 'proposal<current()>'
@@ -689,6 +739,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2020-01-01 00:00:03'))>
         updatedAt: <(new \DateTime('2020-01-01 00:00:03'))>
         publishedAt: <(new \DateTime('2020-01-01 00:00:03'))>
+        undraftAt: $publishedAt
     proposalIdf1:
         id: proposalIdf1
         title: Mon grand projet
@@ -699,6 +750,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:01'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         status: '@statusIdfCollect1'
     proposalIdf2:
         id: proposalIdf2
@@ -712,6 +764,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:02'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         status: '@statusIdfCollect1'
     proposalIdf3:
         id: proposalIdf3
@@ -725,6 +778,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:03'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         status: '@statusIdfCollect1'
     proposalIdf4:
         id: proposalIdf4
@@ -738,6 +792,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:04'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         status: '@statusIdfCollect1'
     proposalIdf5:
         id: proposalIdf5
@@ -751,6 +806,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:05'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         status: '@statusIdfCollect1'
     proposalIdf6:
         id: proposalIdf6
@@ -764,6 +820,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:06'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         status: '@statusIdfCollect1'
     proposalIdf7:
         id: proposalIdf7
@@ -790,6 +847,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:08'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         status: '@statusIdfCollect1'
     proposalIdf9:
         id: proposalIdf9
@@ -804,6 +862,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: $publishedAt
         updatedAt: $publishedAt
         trashedAt: <(new \DateTime('2020-02-01 00:00:10'))>
+        undraftAt: $publishedAt
         trashedStatus: 'visible'
         trashedReason: 'Refusé car on a pas envie.'
         status: '@statusIdfCollect1'
@@ -817,6 +876,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-02-01 00:00:02'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
     assignedProposals{120..125}:
         id: 'assignedProposals<current()>'
         title: 'Proposal assigned <current()>'
@@ -827,6 +887,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-01-01 00:00:10'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         # TODO: This district is not on the ProposalForm
         district: '@district1'
         category: '@pCategoryAssigned1'
@@ -840,6 +901,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-01-01 00:00:10'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         # TODO: This district is not on the ProposalForm
         district: '@district2'
         category: '@pCategoryAssigned2'
@@ -854,6 +916,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-07-01 00:00:10'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         category: '@pCategoryAssigned2'
     proposal131:
         id: 'proposal131'
@@ -866,6 +929,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-07-01 00:00:10'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         category: '@pCategoryAssigned2'
     proposal132:
         id: 'proposal132'
@@ -878,6 +942,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-07-01 00:00:11'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         category: '@pCategoryAssigned2'
     selectionExportProposals{133..137}:
         id: 'selectionExportProposals<current()>'
@@ -889,6 +954,7 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: <(new \DateTime('2020-09-01 00:00:10'))>
         createdAt: $publishedAt
         updatedAt: $publishedAt
+        undraftAt: $publishedAt
         # TODO: This district is not on the ProposalForm
         district: '@district1'
         category: '@pCategoryAssigned1'

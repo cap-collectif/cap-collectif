@@ -3043,6 +3043,9 @@ interface Draftable {
 
   """Is the object a draft."""
   draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
 }
 
 input DuplicateProjectInput {
@@ -6317,6 +6320,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """Identifies proposals as draft."""
   draft: Boolean!
 
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
+
   """Does the viewer already submitted a report ?"""
   viewerHasReport: Boolean!
 
@@ -8639,6 +8645,9 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
 
   """Is the object a draft."""
   draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
 
   """
   Return the related contribution if the contribution is related to another.

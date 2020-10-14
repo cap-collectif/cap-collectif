@@ -7,6 +7,7 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2016-03-01'))>
         createdAt: <(new \DateTime('2016-03-01'))>
         updatedAt: <(new \DateTime('2016-03-01'))>
+        undraftAt: $publishedAt
     reply2:
         id: 'reply2'
         draft: 0
@@ -15,6 +16,7 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2016-03-02'))>
         createdAt: <(new \DateTime('2016-03-02'))>
         updatedAt: <(new \DateTime('2019-03-02'))>
+        undraftAt: $publishedAt
     reply3:
         id: 'reply3'
         draft: 0
@@ -23,6 +25,7 @@ Capco\AppBundle\Entity\Reply:
         createdAt: <(new \DateTime('2016-03-03'))>
         publishedAt: <(new \DateTime('2016-03-03'))>
         updatedAt: <(new \DateTime('2019-03-03'))>
+        undraftAt: $publishedAt
     reply4:
         id: 'reply4'
         draft: 0
@@ -31,6 +34,7 @@ Capco\AppBundle\Entity\Reply:
         createdAt: <(new \DateTime('2016-03-04'))>
         updatedAt: <(new \DateTime('2019-03-04'))>
         publishedAt: <(new \DateTime('2016-03-04'))>
+        undraftAt: $publishedAt
     reply5:
         id: 'reply5'
         author: '@user4'
@@ -47,6 +51,7 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2016-03-06'))>
         createdAt: <(new \DateTime('2016-03-06'))>
         updatedAt: <(new \DateTime('2019-03-06'))>
+        undraftAt: $publishedAt
     # Unpublished replies
     reply7:
         id: 'reply7'
@@ -55,6 +60,7 @@ Capco\AppBundle\Entity\Reply:
         questionnaire: '@questionnaire1'
         createdAt: <(new \DateTime('2016-03-07'))>
         updatedAt: <(new \DateTime('2019-03-07'))>
+        undraftAt: $createdAt
     # Reply on a private result questionnaire
     reply8:
         id: 'reply8'
@@ -64,6 +70,7 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2016-03-08'))>
         createdAt: <(new \DateTime('2016-03-08'))>
         updatedAt: <(new \DateTime('2019-03-08'))>
+        undraftAt: $publishedAt
     reply9:
         id: 'reply9'
         author: '@user4'
@@ -72,7 +79,7 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2016-03-22'))>
         createdAt: <(new \DateTime('2016-03-05'))>
         updatedAt: <(new \DateTime('2016-03-20'))>
-
+        undraftAt: $publishedAt
     replyPrivate:
         id: 'replyPrivate'
         author: '@user5'
@@ -82,7 +89,7 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2019-03-20'))>
         createdAt: <(new \DateTime('2019-03-20'))>
         updatedAt: <(new \DateTime('2019-03-20'))>
-
+        undraftAt: $publishedAt
     replyAdmin:
         id: 'replyAdmin'
         author: '@user4'
@@ -92,7 +99,7 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2019-03-20'))>
         createdAt: <(new \DateTime('2019-03-20'))>
         updatedAt: <(new \DateTime('2019-03-20'))>
-
+        undraftAt: $publishedAt
     replyGroup:
         id: 'replyGroup'
         author: '@user5'
@@ -102,7 +109,7 @@ Capco\AppBundle\Entity\Reply:
         publishedAt: <(new \DateTime('2019-03-20'))>
         createdAt: <(new \DateTime('2019-03-20'))>
         updatedAt: <(new \DateTime('2019-03-20'))>
-
+        undraftAt: $publishedAt
     replyExport{1..7}:
         id: 'replyExport<current()>'
         author: '@user5'

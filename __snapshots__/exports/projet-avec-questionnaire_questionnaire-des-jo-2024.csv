@@ -1,23 +1,23 @@
-﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,"Etes vous satisfait que la ville de paris soit candidate a lorganisation des jo de 2024","Pour quel type depreuve etes vous pret a acheter des places","Quel est ton athlete favori","Nelson monfort parle t il","Classez vos choix 2","Choissez le meilleur logo","Est ce que martoni a encore une balle dans son chargeur","Nouvelle section 1","Nouvelle section 2","Comment trouvez vous le jeu de weeb genshin impact"
-reply1,Yes,"2016-03-01 00:00:00",welcomattic,userWelcomattic,msantostefano@jolicode.com,,"2016-03-01 00:00:00","2016-03-01 00:00:00",No,No,"Trop bien ! On va voir de supers athlètes à Paris !","Athlétisme;Sports collectifs;Guild Wars 2",,,,,,,,
-reply2,Yes,"2016-03-02 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2016-03-02 00:00:00","2019-03-02 00:00:00",No,No,"Youpi ! J'adore des JO","Natation;Sports collectifs;Civilization 6","Maxime Arrouard","Assez fort (Mon sonotone est mal réglé)",,"Logo 1","Il bluffe",,,very-well
-reply5,Yes,"2016-03-05 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2016-03-05 00:00:00","2019-03-05 00:00:00",No,Yes,,Natation,,,,,,,,
-reply6,Yes,"2016-03-06 00:00:00",user_updating_email,user515,user_updating_email@test.com,,"2016-03-06 00:00:00","2019-03-06 00:00:00",No,No,,,,"Pas assez fort (Mon sonotone est en panne)",,,,,,
-reply7,No,,user_not_confirmed,user_not_confirmed,user_not_confirmed@test.com,+33628353289,"2016-03-07 00:00:00","2019-03-07 00:00:00",No,No,"Trop cool ! On va voir Tibo qui cours en slip !",,,,,,Oui,,,
-reply9,Yes,"2016-03-22 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2016-03-05 00:00:00","2016-03-20 00:00:00",No,Yes,,,,,,,,,,
-replyMajority10,Yes,"2016-03-02 00:00:00",user10,user10,user10@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,very-well
-replyMajority11,Yes,"2016-03-02 00:00:00",user11,user11,user11@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,very-well
-replyMajority12,Yes,"2016-03-02 00:00:00",user12,user12,user12@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-well
-replyMajority13,Yes,"2016-03-02 00:00:00",user13,user13,user13@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-well
-replyMajority14,Yes,"2016-03-02 00:00:00",user14,user14,user14@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-well
-replyMajority15,Yes,"2016-03-02 00:00:00",user15,user15,user15@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-well
-replyMajority16,Yes,"2016-03-02 00:00:00",user16,user16,user16@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-passable
-replyMajority17,Yes,"2016-03-02 00:00:00",user17,user17,user17@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-passable
-replyMajority18,Yes,"2016-03-02 00:00:00",user18,user18,user18@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-not-passable
-replyMajority19,Yes,"2016-03-02 00:00:00",user19,user19,user19@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-not-passable
-replyMajority20,Yes,"2016-03-02 00:00:00",user20,user20,user20@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,global-not-passable
-replyMajority6,Yes,"2016-03-02 00:00:00",user6,user6,user6@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,very-well
-replyMajority7,Yes,"2016-03-02 00:00:00",user7,user7,user7@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,very-well
-replyMajority8,Yes,"2016-03-02 00:00:00",user8,user8,user8@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,very-well
-replyMajority9,Yes,"2016-03-02 00:00:00",user9,user9,user9@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,very-well
-replyPrivate,Yes,"2019-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2019-03-20 00:00:00","2019-03-20 00:00:00",Yes,No,,,,,,,,,,
+﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,"Etes vous satisfait que la ville de paris soit candidate a lorganisation des jo de 2024","Pour quel type depreuve etes vous pret a acheter des places","Quel est ton athlete favori","Nelson monfort parle t il","Classez vos choix 2","Choissez le meilleur logo","Est ce que martoni a encore une balle dans son chargeur","Nouvelle section 1","Nouvelle section 2","Comment trouvez vous le jeu de weeb genshin impact"
+reply1,Yes,"2016-03-01 00:00:00",welcomattic,userWelcomattic,msantostefano@jolicode.com,,"2016-03-01 00:00:00","2016-03-01 00:00:00",No,No,"2016-03-01 00:00:00","Trop bien ! On va voir de supers athlètes à Paris !","Athlétisme;Sports collectifs;Guild Wars 2",,,,,,,,
+reply2,Yes,"2016-03-02 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2016-03-02 00:00:00","2019-03-02 00:00:00",No,No,"2016-03-02 00:00:00","Youpi ! J'adore des JO","Natation;Sports collectifs;Civilization 6","Maxime Arrouard","Assez fort (Mon sonotone est mal réglé)",,"Logo 1","Il bluffe",,,very-well
+reply5,Yes,"2016-03-05 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2016-03-05 00:00:00","2019-03-05 00:00:00",No,Yes,,,Natation,,,,,,,,
+reply6,Yes,"2016-03-06 00:00:00",user_updating_email,user515,user_updating_email@test.com,,"2016-03-06 00:00:00","2019-03-06 00:00:00",No,No,"2016-03-06 00:00:00",,,,"Pas assez fort (Mon sonotone est en panne)",,,,,,
+reply7,No,,user_not_confirmed,user_not_confirmed,user_not_confirmed@test.com,+33628353289,"2016-03-07 00:00:00","2019-03-07 00:00:00",No,No,"2016-03-07 00:00:00","Trop cool ! On va voir Tibo qui cours en slip !",,,,,,Oui,,,
+reply9,Yes,"2016-03-22 00:00:00",admin,userAdmin,admin@test.com,+33675492871,"2016-03-05 00:00:00","2016-03-20 00:00:00",No,Yes,"2016-03-22 00:00:00",,,,,,,,,,
+replyMajority10,Yes,"2016-03-02 00:00:00",user10,user10,user10@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,very-well
+replyMajority11,Yes,"2016-03-02 00:00:00",user11,user11,user11@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,very-well
+replyMajority12,Yes,"2016-03-02 00:00:00",user12,user12,user12@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-well
+replyMajority13,Yes,"2016-03-02 00:00:00",user13,user13,user13@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-well
+replyMajority14,Yes,"2016-03-02 00:00:00",user14,user14,user14@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-well
+replyMajority15,Yes,"2016-03-02 00:00:00",user15,user15,user15@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-well
+replyMajority16,Yes,"2016-03-02 00:00:00",user16,user16,user16@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-passable
+replyMajority17,Yes,"2016-03-02 00:00:00",user17,user17,user17@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-passable
+replyMajority18,Yes,"2016-03-02 00:00:00",user18,user18,user18@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-not-passable
+replyMajority19,Yes,"2016-03-02 00:00:00",user19,user19,user19@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-not-passable
+replyMajority20,Yes,"2016-03-02 00:00:00",user20,user20,user20@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,global-not-passable
+replyMajority6,Yes,"2016-03-02 00:00:00",user6,user6,user6@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,very-well
+replyMajority7,Yes,"2016-03-02 00:00:00",user7,user7,user7@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,very-well
+replyMajority8,Yes,"2016-03-02 00:00:00",user8,user8,user8@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,very-well
+replyMajority9,Yes,"2016-03-02 00:00:00",user9,user9,user9@cap-collectif.com,,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,,,,,,,,,,very-well
+replyPrivate,Yes,"2019-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2019-03-20 00:00:00","2019-03-20 00:00:00",Yes,No,"2019-03-20 00:00:00",,,,,,,,,,

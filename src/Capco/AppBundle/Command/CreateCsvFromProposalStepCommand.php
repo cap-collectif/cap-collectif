@@ -100,7 +100,6 @@ fragment commentInfos on Comment {
       }
       pinned
       publicationStatus
-      
       votes {
         totalCount
         pageInfo {
@@ -188,6 +187,7 @@ EOF;
         'proposal_publishedAt' => 'publishedAt',
         'proposal_updatedAt' => 'updatedAt',
         'proposal_publicationStatus' => 'publicationStatus',
+        'proposal_undraftAt' => 'undraftAt',
         'proposal_trashedAt' => 'trashedAt',
         'proposal_trashedReason' => 'trashedReason',
         'proposal_link' => 'url',
@@ -1539,6 +1539,7 @@ ${COMMENT_VOTE_INFOS}
             publishedAt
             updatedAt
             publicationStatus
+            undraftAt
             trashedAt
             trashedReason
             url

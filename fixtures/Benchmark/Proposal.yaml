@@ -13,3 +13,4 @@ Capco\AppBundle\Entity\Proposal:
     publishedAt: <(new \DateTime())>
     createdAt: <(new \DateTime())>
     reference: <current()>
+    undraftAt: $publishedAt

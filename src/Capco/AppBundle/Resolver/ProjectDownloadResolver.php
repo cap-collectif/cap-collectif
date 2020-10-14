@@ -64,6 +64,7 @@ class ProjectDownloadResolver
             'updated_at',
             'anonymous',
             'draft',
+            'undraft_at',
         ];
 
         foreach ($questionnaire->getRealQuestions() as $question) {
@@ -151,6 +152,7 @@ class ProjectDownloadResolver
             'updated_at' => $this->dateToString($reply['updatedAt']),
             'anonymous' => $this->booleanToString($reply['private']),
             'draft' => $this->booleanToString($reply['draft']),
+            'undraft_at' => $this->dateToString($reply['undraftAt']),
         ];
 
         foreach ($responses as $response) {

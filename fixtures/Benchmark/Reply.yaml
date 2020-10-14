@@ -4,3 +4,4 @@ Capco\AppBundle\Entity\Reply:
     questionnaire: '@questionnaire1'
     createdAt: <(new \DateTime('2016-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
+    undraftAt: $publishedAt
