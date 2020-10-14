@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Entity\District\AbstractDistrict;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Elastica\Bulk;
 use Elastica\Index;
@@ -212,6 +213,7 @@ class Indexer
         $this->classes['comment'] = Comment::class;
         $this->classes['vote'] = AbstractVote::class;
         $this->classes['response'] = AbstractResponse::class;
+        $this->classes['district'] = AbstractDistrict::class;
 
         return $this->classes;
     }
@@ -268,6 +270,10 @@ class Indexer
 
             if (AbstractResponse::class === $parentClass->getName()) {
                 return 'response';
+            }
+
+            if (AbstractDistrict::class === $parentClass->getName()) {
+                return 'district';
             }
         }
 

@@ -9,6 +9,7 @@ use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -111,7 +112,7 @@ class ChangeEventMutation implements MutationInterface
 
         $this->em->flush();
 
-        $this->indexer->index(\get_class($event), $event->getId());
+        $this->indexer->index(ClassUtils::getClass($event), $event->getId());
         $this->indexer->finishBulk();
 
         if (!$viewer->isAdmin()) {

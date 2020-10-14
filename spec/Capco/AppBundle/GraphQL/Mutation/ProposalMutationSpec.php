@@ -14,6 +14,7 @@ use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteDocQueryRes
 use Capco\AppBundle\GraphQL\Resolver\Query\APIEnterprise\AutoCompleteFromSiretQueryResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Psr\Log\LoggerInterface;
@@ -111,14 +112,14 @@ class ProposalMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ProposalAdminType::class, $proposal, [
                 'proposalForm' => $proposalForm,
-                'validation_groups' => ['Default']
+                'validation_groups' => ['Default'],
             ])
             ->willReturn($form);
 
         $form
             ->submit(
                 [
-                    'title' => 'new title'
+                    'title' => 'new title',
                 ],
                 false
             )
@@ -130,7 +131,9 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $em->flush()->shouldBeCalled();
 
-        $indexer->index(\get_class($proposal->getWrappedObject()), 'proposal21')->shouldBeCalled();
+        $indexer
+            ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal21')
+            ->shouldBeCalled();
         $indexer->finishBulk()->shouldBeCalled();
 
         $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);

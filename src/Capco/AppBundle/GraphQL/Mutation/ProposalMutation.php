@@ -11,6 +11,7 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SelectionRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
@@ -173,7 +174,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
-        $indexer->index(\get_class($proposal), $proposal->getId());
+        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();
 
         return ['proposal' => $proposal];
@@ -223,7 +224,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
-        $indexer->index(\get_class($proposal), $proposal->getId());
+        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();
 
         return ['proposal' => $proposal];
@@ -251,7 +252,7 @@ class ProposalMutation implements ContainerAwareInterface
         );
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
-        $indexer->index(\get_class($proposal), $proposal->getId());
+        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();
 
         return ['proposal' => $proposal];
@@ -301,7 +302,7 @@ class ProposalMutation implements ContainerAwareInterface
         );
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
-        $indexer->index(\get_class($proposal), $proposal->getId());
+        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();
 
         return ['proposal' => $proposal];
@@ -357,7 +358,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
-        $indexer->index(\get_class($proposal), $proposal->getId());
+        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();
 
         return ['proposal' => $proposal];
@@ -440,7 +441,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
-        $indexer->index(\get_class($proposal), $proposal->getId());
+        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();
 
         $this->container->get(ProposalFormProposalsDataLoader::class)->invalidate($proposalForm);
@@ -538,7 +539,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         // Synchronously index draft proposals being publish
         $indexer = $this->container->get(Indexer::class);
-        $indexer->index(\get_class($proposal), $proposal->getId());
+        $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();
 
         return ['proposal' => $proposal];

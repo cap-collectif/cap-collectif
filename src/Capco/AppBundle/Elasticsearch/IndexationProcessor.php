@@ -8,8 +8,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class IndexationProcessor implements ProcessorInterface
 {
-    private $indexer;
-    private $logger;
+    private Indexer $indexer;
+    private LoggerInterface $logger;
 
     public function __construct(Indexer $indexer, LoggerInterface $logger)
     {
@@ -17,16 +17,16 @@ class IndexationProcessor implements ProcessorInterface
         $this->logger = $logger;
     }
 
-    public function process(Message $message, array $options)
+    public function process(Message $message, array $options): bool
     {
         $this->logger->info('Asynchronous indexation of: {json}', ['json' => $message->getBody()]);
         $json = json_decode($message->getBody(), true);
-        if (
-            !isset($json['class']) ||
-            !\in_array($json['class'], array_values($this->indexer->getClassesToIndex()), true)
-        ) {
-            $this->logger->warning('Maybe an invalid message: ' . $message->getBody());
+        if (!isset($json['class'], $json['id'])) {
+            $this->logger->warning('Invalid message: ' . $message->getBody());
+
+            return true;
         }
+
         $this->indexer->index($json['class'], $json['id']);
         $this->indexer->finishBulk();
 

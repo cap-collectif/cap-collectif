@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\EventTranslation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\DBAL\Exception\DriverException;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
@@ -141,7 +142,7 @@ class AddEventMutation implements MutationInterface
             throw new UserError($e->getMessage());
         }
 
-        $this->indexer->index(\get_class($event), $event->getId());
+        $this->indexer->index(ClassUtils::getClass($event), $event->getId());
         $this->indexer->finishBulk();
         if (!$viewer->isAdmin()) {
             $this->publisher->publish(
@@ -159,8 +160,11 @@ class AddEventMutation implements MutationInterface
         return ['eventEdge' => $edge, 'userErrors' => []];
     }
 
-    public function submitEventFormData(Event $event, array &$values, FormFactoryInterface $formFactory): void
-    {
+    public function submitEventFormData(
+        Event $event,
+        array &$values,
+        FormFactoryInterface $formFactory
+    ): void {
         if (isset($values['startAt'])) {
             $event->setStartAt(new \DateTime($values['startAt']));
             unset($values['startAt']);

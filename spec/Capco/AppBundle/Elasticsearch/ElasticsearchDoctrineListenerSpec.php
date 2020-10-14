@@ -4,6 +4,10 @@ namespace spec\Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -171,5 +175,43 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 
         $args->getObject()->willReturn($comment);
         $this->handleEvent($args);
+    }
+
+    public function it_index_project_district(
+        ElasticsearchRabbitMQListener $listener,
+        LifecycleEventArgs $args,
+        ProjectDistrict $projectDistrict
+    ): void {
+        $projectDistrict->getId()->willReturn('projectDistrict1');
+
+        $args->getObject()->willReturn($projectDistrict);
+        $this->handleEvent($args);
+
+        $message = new Message(
+            json_encode([
+                'class' => \get_class($projectDistrict->getWrappedObject()),
+                'id' => 'projectDistrict1'
+            ])
+        );
+        $listener->addToMessageStack($message, 1)->shouldBeCalledOnce();
+    }
+
+    public function it_index_proposal_district(
+        ElasticsearchRabbitMQListener $listener,
+        LifecycleEventArgs $args,
+        ProposalDistrict $proposalDistrict
+    ): void {
+        $proposalDistrict->getId()->willReturn('proposalDistrict1');
+
+        $args->getObject()->willReturn($proposalDistrict);
+        $this->handleEvent($args);
+
+        $message = new Message(
+            json_encode([
+                'class' => \get_class($proposalDistrict->getWrappedObject()),
+                'id' => 'proposalDistrict1'
+            ])
+        );
+        $listener->addToMessageStack($message, 1)->shouldBeCalledOnce();
     }
 }

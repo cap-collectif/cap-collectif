@@ -1,10 +1,12 @@
 <?php
+
 namespace Capco\AppBundle\Manager;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Doctrine\Common\Util\ClassUtils;
 use Psr\Log\LoggerInterface;
 
 class ContributionManager
@@ -31,7 +33,10 @@ class ContributionManager
                 }
                 ++$republishedCount;
                 if ($contribution instanceof IndexableInterface) {
-                    $this->indexer->index(\get_class($contribution), $contribution->getId());
+                    $this->indexer->index(
+                        ClassUtils::getClass($contribution),
+                        $contribution->getId()
+                    );
                 }
             }
         }

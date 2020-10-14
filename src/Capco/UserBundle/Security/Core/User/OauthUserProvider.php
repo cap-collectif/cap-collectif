@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\UserBundle\FranceConnect\FranceConnectMapper;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
 use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\Common\Util\ClassUtils;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
@@ -99,7 +100,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $user->{$setterToken}($response->getAccessToken());
         $this->userManager->updateUser($user);
         if ($isNewUser) {
-            $this->indexer->index(\get_class($user), $user->getId());
+            $this->indexer->index(ClassUtils::getClass($user), $user->getId());
             $this->indexer->finishBulk();
         }
         $this->groupMutation->createAndAddUserInGroup($user, 'SSO');

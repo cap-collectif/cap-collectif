@@ -7,6 +7,7 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Event\DecisionEvent;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Toggle\Manager;
+use Doctrine\Common\Util\ClassUtils;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Symfony\Component\Console\Command\Command;
@@ -125,7 +126,10 @@ class ProcessingProposalCommand extends Command
                                     ])
                                 )
                             );
-                            $this->indexer->index(\get_class($proposal), $proposal->getId());
+                            $this->indexer->index(
+                                ClassUtils::getClass($proposal),
+                                $proposal->getId()
+                            );
                             $this->indexer->finishBulk();
                         }
                     }

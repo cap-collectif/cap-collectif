@@ -19,6 +19,7 @@ use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
+use Doctrine\Common\Util\ClassUtils;
 
 /**
  *  Listen any persist, update or delete operations happening in Doctrine, in order to:
@@ -70,7 +71,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
     public function addToMessageStack(IndexableInterface $entity): void
     {
         $body = json_encode([
-            'class' => \get_class($entity),
+            'class' => ClassUtils::getClass($entity),
             'id' => $entity->getId(),
         ]);
         $this->logger->info(

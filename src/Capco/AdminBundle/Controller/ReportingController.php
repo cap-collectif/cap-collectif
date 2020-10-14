@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Notifier\ContributionNotifier;
+use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -38,7 +39,7 @@ class ReportingController extends Controller
 
         // Synchronously index
         $indexer = $this->get(Indexer::class);
-        $indexer->index(\get_class($related), $related->getId());
+        $indexer->index(ClassUtils::getClass($related), $related->getId());
         $indexer->finishBulk();
 
         $this->addFlash('sonata_flash_success', 'admin.action.reporting.disable.success');
@@ -73,7 +74,7 @@ class ReportingController extends Controller
 
         // Synchronously index
         $indexer = $this->get(Indexer::class);
-        $indexer->index(\get_class($related), $related->getId());
+        $indexer->index(ClassUtils::getClass($related), $related->getId());
         $indexer->finishBulk();
 
         $this->addFlash('sonata_flash_success', 'admin.action.reporting.trash.success');

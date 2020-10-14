@@ -6,6 +6,7 @@ use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -56,7 +57,7 @@ class EventAdmin extends AbstractAdmin
 
     public function preUpdate($object)
     {
-        $this->indexer->index(\get_class($object), $object->getId());
+        $this->indexer->index(ClassUtils::getClass($object), $object->getId());
         $this->indexer->finishBulk();
         parent::preUpdate($object);
     }

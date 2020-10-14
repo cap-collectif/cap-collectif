@@ -3,9 +3,19 @@
 namespace spec\Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\ArgumentVote;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\OpinionVersionVote;
+use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Entity\SourceVote;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Elastica\Index;
@@ -34,7 +44,17 @@ class IndexerSpec extends ObjectBehavior
             ->willReturn([
                 new ClassMetadata(ProposalComment::class),
                 new ClassMetadata(EventComment::class),
-                new ClassMetadata(PostComment::class)
+                new ClassMetadata(PostComment::class),
+                new ClassMetadata(ValueResponse::class),
+                new ClassMetadata(MediaResponse::class),
+                new ClassMetadata(ProjectDistrict::class),
+                new ClassMetadata(AbstractVote::class),
+                new ClassMetadata(ProposalSelectionVote::class),
+                new ClassMetadata(ProposalCollectVote::class),
+                new ClassMetadata(SourceVote::class),
+                new ClassMetadata(ArgumentVote::class),
+                new ClassMetadata(OpinionVote::class),
+                new ClassMetadata(OpinionVersionVote::class),
             ]);
 
         $this->beConstructedWith($registry, $serializer, $index, $logger, $stopwatch);
@@ -47,28 +67,75 @@ class IndexerSpec extends ObjectBehavior
 
     public function it_remove_proposal_comment()
     {
-        $this->remove(ProposalComment::class, 'proposalComment3');
-        $this->__get('currentDeleteBulk')->shouldHaveCount(1);
-        $document = $this->__get('currentDeleteBulk')[0];
-        $document->getId()->shouldBe('proposalComment3');
-        $document->getType()->shouldBe('comment');
+        $this->itShouldDeleteIndex(ProposalComment::class, 'proposalComment3', 'comment');
     }
 
     public function it_remove_event_comment()
     {
-        $this->remove(EventComment::class, 'eventComment2');
-        $this->__get('currentDeleteBulk')->shouldHaveCount(1);
-        $document = $this->__get('currentDeleteBulk')[0];
-        $document->getId()->shouldBe('eventComment2');
-        $document->getType()->shouldBe('comment');
+        $this->itShouldDeleteIndex(EventComment::class, 'eventComment2', 'comment');
     }
 
     public function it_remove_post_comment()
     {
-        $this->remove(PostComment::class, 'postComment1');
+        $this->itShouldDeleteIndex(PostComment::class, 'postComment1', 'comment');
+    }
+
+    public function it_remove_value_response()
+    {
+        $this->itShouldDeleteIndex(ValueResponse::class, 'valueResponse1', 'response');
+    }
+
+    public function it_remove_media_response()
+    {
+        $this->itShouldDeleteIndex(MediaResponse::class, 'mediaResponse1', 'response');
+    }
+
+    public function it_remove_project_district()
+    {
+        $this->itShouldDeleteIndex(ProjectDistrict::class, 'pdistrict1', 'district');
+    }
+
+    public function it_remove_vote()
+    {
+        $this->itShouldDeleteIndex(AbstractVote::class, 'vote1', 'vote');
+    }
+
+    public function it_remove_proposal_selection_vote()
+    {
+        $this->itShouldDeleteIndex(ProposalSelectionVote::class, 'proposalSelectionVote1', 'vote');
+    }
+
+    public function it_remove_argument_vote()
+    {
+        $this->itShouldDeleteIndex(ArgumentVote::class, 'argumentVote1', 'vote');
+    }
+
+    public function it_remove_source_vote()
+    {
+        $this->itShouldDeleteIndex(SourceVote::class, 'sourceVote1', 'vote');
+    }
+
+    public function it_remove_opinion_vote()
+    {
+        $this->itShouldDeleteIndex(OpinionVote::class, 'opinionVote1', 'vote');
+    }
+
+    public function it_remove_opinion_version_vote()
+    {
+        $this->itShouldDeleteIndex(OpinionVersionVote::class, 'opinionVersionVote1', 'vote');
+    }
+
+    public function it_remove_proposal_collect_vote()
+    {
+        $this->itShouldDeleteIndex(ProposalCollectVote::class, 'proposalCollectVote1', 'vote');
+    }
+
+    private function itShouldDeleteIndex(string $class, string $id, string $type)
+    {
+        $this->remove($class, $id);
         $this->__get('currentDeleteBulk')->shouldHaveCount(1);
         $document = $this->__get('currentDeleteBulk')[0];
-        $document->getId()->shouldBe('postComment1');
-        $document->getType()->shouldBe('comment');
+        $document->getId()->shouldBe($id);
+        $document->getType()->shouldBe($type);
     }
 }

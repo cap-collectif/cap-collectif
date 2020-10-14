@@ -9,6 +9,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EventReviewVoter;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -55,14 +56,14 @@ class ReviewEventMutation implements MutationInterface
         if (!$event) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'Could not find your event.']]
+                'userErrors' => [['message' => 'Could not find your event.']],
             ];
         }
         $review = $event->getReview();
         if (!$review || !$this->authorizationChecker->isGranted(EventReviewVoter::EDIT, $review)) {
             return [
                 'event' => null,
-                'userErrors' => [['message' => 'Access denied']]
+                'userErrors' => [['message' => 'Access denied']],
             ];
         }
         unset($values['id']);
@@ -78,7 +79,7 @@ class ReviewEventMutation implements MutationInterface
 
         $this->em->flush();
 
-        $this->indexer->index(\get_class($event), $event->getId());
+        $this->indexer->index(ClassUtils::getClass($event), $event->getId());
         $this->indexer->finishBulk();
 
         if (!$event->getAuthor()->isAdmin() && $reviewer->isAdmin()) {
@@ -86,7 +87,7 @@ class ReviewEventMutation implements MutationInterface
                 'event.review',
                 new Message(
                     json_encode([
-                        'eventId' => $event->getId()
+                        'eventId' => $event->getId(),
                     ])
                 )
             );
