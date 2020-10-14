@@ -125,6 +125,10 @@ export const ICON_NAME = {
   reporteO: 'reporte-o',
   sendO: 'send-o',
   writeO: 'write-o',
+  padO: 'pad-o',
+  micO: 'mic-o',
+  thumbO: 'thumb-o',
+  certified: 'certified',
 };
 
 type Props = {|
@@ -382,6 +386,14 @@ const getIcon = name => {
       return <Icons.SendO />;
     case 'write-o':
       return <Icons.WriteO />;
+    case 'pad-o':
+      return <Icons.PadO />;
+    case 'mic-o':
+      return <Icons.MicO />;
+    case 'thumb-o':
+      return <Icons.ThumbO />;
+    case 'certified':
+      return <Icons.Certified />;
     default:
       return <div />;
   }

@@ -77,6 +77,8 @@ import UserSliderApp from '~/startup/UserSliderApp';
 import GlobalStepApp from '~/startup/GlobalStepApp';
 import HomeHeaderApp from '~/startup/HomeHeaderApp';
 import ImageSliderApp from '~/startup/ImageSliderApp';
+import ParticipationTutorialApp from '~/startup/ParticipationTutorialApp';
+import ParticipationMotivationApp from '~/startup/ParticipationMotivationApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -157,4 +159,6 @@ ReactOnRails.register({
   GlobalStepApp,
   HomeHeaderApp,
   ImageSliderApp,
+  ParticipationTutorialApp,
+  ParticipationMotivationApp,
 });

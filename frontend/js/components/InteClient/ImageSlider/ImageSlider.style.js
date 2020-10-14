@@ -2,7 +2,7 @@
 import styled, { type StyledComponent } from 'styled-components';
 import Slider from 'react-slick';
 
-export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled(Slider)`
+export const Container: StyledComponent<{}, {}, typeof Slider> = styled(Slider)`
   width: 100%;
 
   .slick-track {

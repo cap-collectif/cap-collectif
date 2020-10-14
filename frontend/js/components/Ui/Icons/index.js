@@ -118,3 +118,7 @@ export { default as DebateO } from './svg/debate-o.svg';
 export { default as ReporteO } from './svg/report-o.svg';
 export { default as SendO } from './svg/send-o.svg';
 export { default as WriteO } from './svg/write-o.svg';
+export { default as ThumbO } from './svg/thumb-o.svg';
+export { default as PadO } from './svg/pad-o.svg';
+export { default as MicO } from './svg/mic-o.svg';
+export { default as Certified } from './svg/certified.svg';
