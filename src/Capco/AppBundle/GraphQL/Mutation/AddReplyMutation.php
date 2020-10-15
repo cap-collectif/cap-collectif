@@ -23,6 +23,7 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class AddReplyMutation implements MutationInterface
 {
@@ -58,7 +59,7 @@ class AddReplyMutation implements MutationInterface
         $this->publisher = $publisher;
     }
 
-    public function __invoke(Argument $input, User $user): array
+    public function __invoke(Argument $input, User $user, RequestStack $request): array
     {
         $values = $input->getArrayCopy();
 
@@ -78,11 +79,16 @@ class AddReplyMutation implements MutationInterface
                 throw new UserError('Only one reply by user is allowed for this questionnaire.');
             }
         }
-        $reply = (new Reply())->setAuthor($user)->setQuestionnaire($questionnaire);
+        $reply = (new Reply())
+            ->setAuthor($user)
+            ->setQuestionnaire($questionnaire)
+            ->setNavigator($_SERVER['HTTP_USER_AGENT'] ?? null)
+            ->setIpAddress($_SERVER['HTTP_TRUE_CLIENT_IP'] ?? null);
+
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 
         $form = $this->formFactory->create(ReplyType::class, $reply, [
-            'anonymousAllowed' => $questionnaire->isAnonymousAllowed()
+            'anonymousAllowed' => $questionnaire->isAnonymousAllowed(),
         ]);
         $form->submit($values, false);
 
@@ -99,7 +105,7 @@ class AddReplyMutation implements MutationInterface
                 new Message(
                     json_encode([
                         'replyId' => $reply->getId(),
-                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE
+                        'state' => QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE,
                     ])
                 )
             );

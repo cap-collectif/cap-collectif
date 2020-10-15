@@ -178,7 +178,7 @@ InternalMutation:
                 builderConfig:
                     inputType: AddReplyInput
                     payloadType: AddReplyPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddReplyMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddReplyMutation", [value, getUser(), serv("request_stack")])'
             updateReply:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

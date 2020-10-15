@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
+use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
@@ -39,6 +40,7 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
     use HasResponsesTrait;
     use PublishableTrait;
     use DraftableTrait;
+    use AuthorInformationTrait;
 
     /**
      * @Assert\NotNull()
@@ -167,7 +169,7 @@ class Reply implements Publishable, Contribution, VoteContribution, DraftableInt
             'ElasticsearchReplyNestedAuthor',
             'ElasticsearchReply',
             'ElasticsearchReplyNestedStep',
-            'ElasticsearchReplyNestedProject'
+            'ElasticsearchReplyNestedProject',
         ];
     }
 }

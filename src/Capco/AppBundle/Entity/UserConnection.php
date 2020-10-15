@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 class UserConnection
 {
     use UuidTrait;
+    use AuthorInformationTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -33,19 +35,9 @@ class UserConnection
     private $datetime;
 
     /**
-     * @ORM\Column(name="ip_address", type="string")
-     */
-    private $ipAddress;
-
-    /**
      * @ORM\Column(name="success", type="boolean")
      */
     private $success;
-
-    /**
-     * @ORM\Column(name="navigator", type="text")
-     */
-    private $navigator;
 
     public function getEmail(): ?string
     {
@@ -71,18 +63,6 @@ class UserConnection
         return $this;
     }
 
-    public function getIpAddress(): string
-    {
-        return $this->ipAddress;
-    }
-
-    public function setIpAddress(string $ipAddress): self
-    {
-        $this->ipAddress = $ipAddress;
-
-        return $this;
-    }
-
     public function isSuccess(): bool
     {
         return $this->success;
@@ -103,18 +83,6 @@ class UserConnection
     public function setUser($user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getNavigator(): string
-    {
-        return $this->navigator;
-    }
-
-    public function setNavigator(string $navigator): self
-    {
-        $this->navigator = $navigator;
 
         return $this;
     }
