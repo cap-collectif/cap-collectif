@@ -3,12 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAnalysisFormPanel } from './ProposalAnalysisFormPanel';
-import { $refType, formMock } from '~/mocks';
+import { $refType, formMock, intlMock } from '~/mocks';
 
 describe('<ProposalAnalysisFormPanel  /> ', () => {
   it('renders correctly', () => {
     const props = {
       ...formMock,
+      intl: intlMock,
       onValidate: jest.fn(),
       initialStatus: 'FAVOURABLE',
       responses: [],

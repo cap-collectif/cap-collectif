@@ -1,7 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import memoize from 'lodash/memoize';
@@ -30,7 +30,7 @@ import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel';
 import ChangeProposalAnalysisMutation from '~/mutations/ChangeProposalAnalysisMutation';
 import AnalyseProposalAnalysisMutation from '~/mutations/AnalyseProposalAnalysisMutation';
 import { type SubmittingState } from './ProposalFormSwitcher';
-
+import validateResponses from '~/utils/form/validateResponses';
 import { TYPE_FORM } from '~/constants/FormConstants';
 
 const memoizeAvailableQuestions: any = memoize(() => {});
@@ -80,6 +80,7 @@ type Props = {|
   responses: ResponsesInReduxForm,
   initialStatus: ProposalAnalysisState,
   userId: string,
+  intl: IntlShape,
   onValidate: (SubmittingState, ?boolean) => void,
 |};
 
@@ -108,8 +109,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     return AnalyseProposalAnalysisMutation.commit({
       input: { ...input, decision: values.status },
     })
-      .then(() => {
-        onValidate('SAVED', values.goBack);
+      .then(res => {
+        if (res?.analyseProposalAnalysis?.errorCode)
+          onValidate('ERROR');
+        else
+          onValidate('SAVED', values.goBack);
       })
       .catch(e => {
         if (e instanceof SubmissionError) {
@@ -138,6 +142,30 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 const formName = 'proposal-analysis-form';
 
+const validate = (values: FormValues, { proposal, intl }: Props) => {
+  const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
+    'availableQuestions',
+  );
+  
+  const responsesError = validateResponses(
+    proposal?.form?.analysisConfiguration?.evaluationForm?.questions || [],
+    values.responses,
+    'proposal',
+    intl,
+    false,
+    availableQuestions,
+  );
+
+  const errors = {}
+
+  if (responsesError.responses && responsesError.responses.length) {
+    errors.responses = responsesError.responses;
+  }
+
+  return errors;
+};
+
+
 export const ProposalAnalysisFormPanel = ({
   proposal,
   dispatch,
@@ -145,8 +173,9 @@ export const ProposalAnalysisFormPanel = ({
   responses,
   change: changeProps,
   disabled,
+  intl,
+  invalid,
 }: Props) => {
-  const intl = useIntl();
   const [status, setStatus] = useState(initialStatus);
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
     'availableQuestions',
@@ -237,7 +266,7 @@ export const ProposalAnalysisFormPanel = ({
           </Field>
           <ValidateButton
             id="validate-proposal-analysis-button"
-            disabled={disabled || (!status && !initialStatus)}
+            disabled={invalid || disabled || (!status && !initialStatus)}
             type="button"
             onClick={() => {
               dispatch(change(formName, 'validate', true));
@@ -275,6 +304,7 @@ const form = reduxForm({
   form: formName,
   onChange: debounce(onSubmit, 1000),
   onSubmit,
+  validate,
 })(ProposalAnalysisFormPanel);
 
 const container = connect(mapStateToProps)(injectIntl(form));

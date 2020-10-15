@@ -92,13 +92,14 @@ type Props = {|
   panelState: PanelState,
 |};
 
-export type SubmittingState = 'SAVED' | 'SAVING' | 'DRAFT_SAVED' | 'DRAFT_SAVING';
+export type SubmittingState = 'SAVED' | 'SAVING' | 'DRAFT_SAVED' | 'DRAFT_SAVING' | 'ERROR';
 
 const stateToKey = {
   SAVED: 'all.data.saved',
   SAVING: 'global.saving',
   DRAFT_SAVED: 'label.draft.saved',
   DRAFT_SAVING: 'label.draft.being.saved',
+  ERROR: 'global.invalid.form',
 };
 
 export const ProposalFormSwitcher = ({
