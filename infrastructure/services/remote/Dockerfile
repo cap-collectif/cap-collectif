@@ -136,11 +136,11 @@ RUN cd / && \
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
 # Install rabbitmq
-ENV RABBITMQ_VERSION_DEB=3.6.16-2
-RUN echo 'deb https://dl.bintray.com/rabbitmq/debian stretch main erlang-20.x' | tee /etc/apt/sources.list.d/bintray.rabbitmq.list && \
+# ENV RABBITMQ_VERSION_DEB=3.6.6-1
+RUN echo 'deb https://dl.bintray.com/rabbitmq-erlang/debian stretch main erlang-20.x' | tee /etc/apt/sources.list.d/bintray.erlang.list && \
     wget -O- https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | apt-key add - && \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server=$RABBITMQ_VERSION_DEB && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
     rm -rf /var/lib/apt/lists/* && \
     rabbitmq-plugins enable rabbitmq_management
 
@@ -170,8 +170,8 @@ RUN apt-get update -y && \
 
 # Install Supervisor
 RUN apt-get update && \
-    apt-get install -y python-pip python-setuptools --no-install-recommends && \
-    easy_install supervisor && \
+    apt-get install -y python-pip python-setuptools supervisor --no-install-recommends && \
+    pip install supervisor && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
