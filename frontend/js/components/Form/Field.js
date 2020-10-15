@@ -89,6 +89,8 @@ type Props = {|
   addressProps?: AddressProps,
   maxLength?: string,
   minLength?: string,
+  groupedResponsesEnabled?: boolean,
+  responseColorsDisabled?: boolean,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -138,6 +140,8 @@ class Field extends React.Component<Props> {
       addressProps,
       maxLength,
       minLength,
+      groupedResponsesEnabled,
+      responseColorsDisabled,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -208,6 +212,8 @@ class Field extends React.Component<Props> {
         addressProps={addressProps}
         maxLength={maxLength}
         minLength={minLength}
+        groupedResponsesEnabled={groupedResponsesEnabled}
+        responseColorsDisabled={responseColorsDisabled}
         {...input}>
         {children}
       </Input>

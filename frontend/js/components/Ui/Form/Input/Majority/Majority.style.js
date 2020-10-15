@@ -3,14 +3,23 @@ import styled, { css, type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
+type Props = {
+  color: string,
+  disabled: boolean,
+  hasMajoritySelected: boolean,
+  checked: boolean,
+  asPreview: boolean,
+  disableColors: boolean,
+};
+
 const styleDisabled = () => css`
   background-color: ${colors.disabledGray};
-  border-left: 1px solid #fff;
-  pointer-events: none;
 
   .label-container {
     color: ${colors.secondGray} !important;
   }
+
+  pointer-events: none;
 `;
 
 const styleMajorityNotSelected = (color: string) => css`
@@ -26,53 +35,62 @@ const styleMajorityNotSelected = (color: string) => css`
   }
 `;
 
-const MajorityContainer: StyledComponent<
-  {
-    color: string,
-    disabled: boolean,
-    hasMajoritySelected: boolean,
-    checked: boolean,
-    asPreview: boolean,
-  },
-  {},
-  HTMLDivElement,
-> = styled.div.attrs({
+const MajorityContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   className: 'majority-container',
 })`
-  background-color: ${({ color }) => color};
-  pointer-events: ${({ asPreview }) => (asPreview ? 'none' : 'initial')};
-  border-left: ${({ hasMajoritySelected, checked }) =>
-    hasMajoritySelected && checked && '1px solid #fff'};
+  ${({ color, asPreview, hasMajoritySelected, checked, disabled, disableColors }: Props) => css`
+  position: relative;
+    background-color: ${disableColors && !checked ? colors.darkerGray : color};
+    pointer-events: ${asPreview ? 'none' : 'initial'};
+    
+    &:hover {
+      cursor: pointer;
 
-  &:hover {
-    cursor: pointer;
+      .label-container {
+        text-decoration: underline;
+      }
+    }
 
     .label-container {
-      font-weight: bold;
+      margin: 0 !important;
+      color: #fff !important;
+      font-size: 14px;
+      text-decoration: ${checked ? 'underline' : 'none'};
+      padding: ${asPreview ? '4px 24px' : '8px 24px'};
     }
-  }
 
-  .label-container {
-    margin: 0 !important;
-    color: #fff !important;
-    font-size: 14px;
-    font-weight: ${({ checked }) => (checked ? 'bold' : 600)};
-    padding: ${({ asPreview }) => (asPreview ? '4px 24px' : '8px 24px')};
-  }
-
-  input {
-    display: none;
-  }
-
-  ${({ disabled, asPreview, checked }) => disabled && !asPreview && !checked && styleDisabled()};
-  ${({ disabled, hasMajoritySelected, checked, color }) =>
-    hasMajoritySelected && !checked && !disabled && styleMajorityNotSelected(color)};
-
-  @media (max-width: ${mediaQueryMobile.maxWidth}) {
-    .label-container {
-      padding: 10px 24px;
+    input {
+      display: none;
     }
-  }
+
+    ${disabled && !asPreview && !checked && styleDisabled()};
+    ${hasMajoritySelected && !checked && !disabled && styleMajorityNotSelected(color)};
+    
+    ${disableColors &&
+      !checked &&
+      !disabled &&
+      css`
+        &:hover {
+          background-color: ${color};
+        }
+      `}
+    
+    ${checked &&
+      css`
+        &::after {
+          width: 0 !important;
+        }
+        & + &::after {
+          width: 0 !important;
+        }
+      `}
+
+    @media (max-width: ${mediaQueryMobile.maxWidth}) {
+      .label-container {
+        padding: 10px 24px;
+      }
+    }
+  `}
 `;
 
 export default MajorityContainer;

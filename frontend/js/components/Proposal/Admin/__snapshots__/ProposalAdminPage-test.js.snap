@@ -992,6 +992,20 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "groupedResponsesEnabled",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "responseColorsDisabled",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
                                   "concreteType": "MultipleChoiceQuestionValidationRule",
                                   "kind": "LinkedField",
                                   "name": "validationRule",
@@ -1672,6 +1686,20 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "randomQuestionChoices",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "groupedResponsesEnabled",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "responseColorsDisabled",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -2609,7 +2637,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "bdbe18d846bedab2dd67243ef29f503a",
+          "cacheID": "da20c90ae5581ce8f3ecb3e11787334b",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2771,6 +2799,8 @@ fragment ProposalAdminContentForm_proposal on Proposal {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number
@@ -2918,6 +2948,8 @@ fragment ProposalAdminNotationForm_proposal on Proposal {
         ... on MultipleChoiceQuestion {
           isOtherAllowed
           randomQuestionChoices
+          groupedResponsesEnabled
+          responseColorsDisabled
           validationRule {
             type
             number

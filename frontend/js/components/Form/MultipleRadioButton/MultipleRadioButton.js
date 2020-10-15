@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { css, type StyledComponent } from 'styled-components';
 import Help from '~/components/Ui/Form/Help/Help';
 import Description from '~/components/Ui/Form/Description/Description';
 import Radio from '~/components/Ui/Form/Input/Radio/Radio';
 import { mediaQueryMobile } from '~/utils/sizes';
 import type { Fields } from '~/components/Form/Form.type';
 import { TYPE_FORM } from '~/constants/FormConstants';
+import colors from '~/utils/colors';
 
 type Props = {|
   id: string,
@@ -14,11 +15,16 @@ type Props = {|
   value: string | null,
   onChange: Function,
   disabled?: boolean,
+  disableColors?: boolean,
   onBlur?: Function,
   typeForm?: $Values<typeof TYPE_FORM>,
 |};
 
-const MultipleRadioButtonContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const MultipleRadioButtonContainer: StyledComponent<
+  { disableColors: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div`
   display: flex;
   flex-wrap: wrap;
 
@@ -28,6 +34,15 @@ const MultipleRadioButtonContainer: StyledComponent<{}, {}, HTMLDivElement> = st
     &:last-child {
       margin-right: 0;
     }
+
+    ${({ disableColors }) =>
+      disableColors &&
+      css`
+        & .label-radio-container:not(.is-checked) {
+          border: 1px solid ${colors.darkerGray};
+          color: ${colors.darkerGray};
+        }
+      `}
   }
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
@@ -47,6 +62,7 @@ const MultipleRadioButtonContainer: StyledComponent<{}, {}, HTMLDivElement> = st
 
 const MultipleRadioButton = ({
   disabled = false,
+  disableColors = false,
   id,
   field,
   value,
@@ -72,7 +88,7 @@ const MultipleRadioButton = ({
       )}
       {field.description && <Description typeForm={typeForm}>{field.description}</Description>}
 
-      <MultipleRadioButtonContainer>
+      <MultipleRadioButtonContainer disableColors={disableColors}>
         {field.choices &&
           field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
@@ -88,6 +104,7 @@ const MultipleRadioButton = ({
                 label={choice.label}
                 checked={finalValue === choiceValue}
                 image={choice.image ? choice.image.url : ''}
+                colorOnHover={disableColors}
                 disabled={disabled}
                 color={choice.color}
                 onBlur={event => {

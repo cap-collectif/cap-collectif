@@ -12,6 +12,7 @@ import Majority, {
   COLORS as COLORS_MAJORITY,
   type MajorityProperty,
 } from '~ui/Form/Input/Majority/Majority';
+import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority';
 
 /* ------ INPUT ------ */
 
@@ -275,6 +276,48 @@ storiesOf('Core|Form/Majority', module).add('With selected one', () => {
           hasMajoritySelected
         />
       ))}
+    </div>
+  );
+});
+
+storiesOf('Core|Form/MultipleMajority', module).add('With custom choices', () => {
+  const choices: MajorityProperty[] = [
+    {
+      color: 'red',
+      id: 'amber',
+      label: 'Amber',
+      value: 'amber',
+    },
+    {
+      color: 'green',
+      id: 'venti',
+      label: 'Venti',
+      value: 'venti',
+    },
+    {
+      color: 'violet',
+      id: 'fischl',
+      label: 'Fischl',
+      value: 'fischl',
+    },
+    {
+      color: 'blue',
+      id: 'qiqi',
+      label: 'Qiqi',
+      value: 'qiqi',
+    },
+  ];
+  return (
+    <div style={{ display: 'flex' }}>
+      <MultipleMajority enableBars choices={choices} />
+    </div>
+  );
+});
+
+storiesOf('Core|Form/MultipleMajority', module).add('With disabled colors', () => {
+  return (
+    <div style={{ display: 'flex' }}>
+      <MultipleMajority enableBars disableColors />
     </div>
   );
 });

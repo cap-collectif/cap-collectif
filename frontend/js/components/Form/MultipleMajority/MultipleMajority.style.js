@@ -1,10 +1,11 @@
 // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { css, type StyledComponent } from 'styled-components';
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 import { mediaQueryMobile } from '~/utils/sizes';
+import colors from '~/utils/colors';
 
 export const ChoicesContainer: StyledComponent<
-  { disabled: boolean, asPreview: boolean },
+  { disabled: boolean, asPreview: boolean, enableBars: boolean, disableColors: boolean },
   {},
   HTMLDivElement,
 > = styled.div.attrs({
@@ -28,6 +29,34 @@ export const ChoicesContainer: StyledComponent<
       }
     }
   }
+
+  ${({ enableBars, disableColors }) =>
+    enableBars &&
+    disableColors &&
+    css`
+      & > .majority-container {
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 1px;
+          transform-origin: left center;
+          transform: scaleY(0.4);
+          background-color: ${colors.white};
+        }
+        &:first-of-type::after {
+          width: 0;
+        }
+        &:hover::after {
+          width: 0;
+        }
+        &:hover + .majority-container::after {
+          width: 0;
+        }
+      }
+    `}
 
   .majority-container {
     &:first-of-type {

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { css, type StyledComponent } from 'styled-components';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, FieldArray, getFormSyncErrors, change } from 'redux-form';
@@ -296,6 +296,52 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                   </RangeDiv>
                 )}
               </>
+            )}
+            {type === 'button' && (
+              <div
+                css={css`
+                  .toggle-container label:first-of-type {
+                    flex: 1;
+                    justify-content: space-between;
+                  }
+                `}>
+                <Field
+                  id="disable-response-colors"
+                  icons
+                  labelSide="LEFT"
+                  component={Toggle}
+                  name={`${member}.responseColorsDisabled`}
+                  normalize={val => !!val}
+                  label={
+                    <div>
+                      <p className="font-weight-bold">
+                        {intl.formatMessage({ id: 'disable-responses-colors' })}
+                      </p>
+                      <p className="excerpt">
+                        {intl.formatMessage({ id: 'disable-responses-colors-help-text' })}
+                      </p>
+                    </div>
+                  }
+                />
+                <Field
+                  id="enable-group"
+                  icons
+                  component={Toggle}
+                  labelSide="LEFT"
+                  name={`${member}.groupedResponsesEnabled`}
+                  normalize={val => !!val}
+                  label={
+                    <div>
+                      <p className="font-weight-bold">
+                        {intl.formatMessage({ id: 'enable-grouped-responses' })}
+                      </p>
+                      <p className="excerpt">
+                        {intl.formatMessage({ id: 'enable-grouped-responses-help-text' })}
+                      </p>
+                    </div>
+                  }
+                />
+              </div>
             )}
             {multipleChoiceQuestions.includes(type) && (
               <div>

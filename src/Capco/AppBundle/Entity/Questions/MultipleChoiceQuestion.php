@@ -47,6 +47,16 @@ class MultipleChoiceQuestion extends AbstractQuestion
      */
     protected $hasValidationRule = false;
 
+    /**
+     * @ORM\Column(type="boolean", name="response_colors_disabled", nullable=false, options={"default":"0"})
+     */
+    protected bool $responseColorsDisabled = false;
+
+    /**
+     * @ORM\Column(type="boolean", name="grouped_responses_enabled", nullable=false, options={"default":"0"})
+     */
+    protected bool $groupedResponsesEnabled = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -145,6 +155,30 @@ class MultipleChoiceQuestion extends AbstractQuestion
         }
         $this->validationRule = $validationRule;
         $this->hasValidationRule = null !== $validationRule;
+
+        return $this;
+    }
+
+    public function isResponseColorsDisabled(): bool
+    {
+        return $this->responseColorsDisabled;
+    }
+
+    public function setResponseColorsDisabled(bool $responseColorsDisabled): self
+    {
+        $this->responseColorsDisabled = $responseColorsDisabled;
+
+        return $this;
+    }
+
+    public function isGroupedResponsesEnabled(): bool
+    {
+        return $this->groupedResponsesEnabled;
+    }
+
+    public function setGroupedResponsesEnabled(bool $groupedResponsesEnabled): self
+    {
+        $this->groupedResponsesEnabled = $groupedResponsesEnabled;
 
         return $this;
     }

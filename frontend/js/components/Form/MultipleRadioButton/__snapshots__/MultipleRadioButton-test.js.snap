@@ -16,11 +16,14 @@ exports[`<MultipleRadioButton /> should render correctly 1`] = `
   >
     Ceci est une description
   </Description>
-  <MultipleRadioButton__MultipleRadioButtonContainer>
+  <MultipleRadioButton__MultipleRadioButtonContainer
+    disableColors={false}
+  >
     <Radio
       checked={false}
       className="choice-field"
       color="#0FFF00"
+      colorOnHover={false}
       disabled={false}
       id="1_choice-1"
       image=""
@@ -36,6 +39,7 @@ exports[`<MultipleRadioButton /> should render correctly 1`] = `
       checked={false}
       className="choice-field"
       color="#0BB800"
+      colorOnHover={false}
       disabled={false}
       id="1_choice-2"
       image=""
@@ -67,11 +71,14 @@ exports[`<MultipleRadioButton /> should render correctly when disabled 1`] = `
   >
     Ceci est une description
   </Description>
-  <MultipleRadioButton__MultipleRadioButtonContainer>
+  <MultipleRadioButton__MultipleRadioButtonContainer
+    disableColors={false}
+  >
     <Radio
       checked={false}
       className="choice-field"
       color="#0FFF00"
+      colorOnHover={false}
       disabled={true}
       id="1_choice-1"
       image=""
@@ -87,6 +94,7 @@ exports[`<MultipleRadioButton /> should render correctly when disabled 1`] = `
       checked={false}
       className="choice-field"
       color="#0BB800"
+      colorOnHover={false}
       disabled={true}
       id="1_choice-2"
       image=""
@@ -118,11 +126,14 @@ exports[`<MultipleRadioButton /> should render correctly when in questionnaire f
   >
     Ceci est une description
   </Description>
-  <MultipleRadioButton__MultipleRadioButtonContainer>
+  <MultipleRadioButton__MultipleRadioButtonContainer
+    disableColors={false}
+  >
     <Radio
       checked={false}
       className="choice-field"
       color="#0FFF00"
+      colorOnHover={false}
       disabled={false}
       id="1_choice-1"
       image=""
@@ -138,6 +149,7 @@ exports[`<MultipleRadioButton /> should render correctly when in questionnaire f
       checked={false}
       className="choice-field"
       color="#0BB800"
+      colorOnHover={false}
       disabled={false}
       id="1_choice-2"
       image=""

@@ -1217,6 +1217,20 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
+                              "kind": "ScalarField",
+                              "name": "groupedResponsesEnabled",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "responseColorsDisabled",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
                               "concreteType": "MultipleChoiceQuestionValidationRule",
                               "kind": "LinkedField",
                               "name": "validationRule",
@@ -1803,7 +1817,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "65ffd3a3f5ebeae071bfe5c6e272b923",
+          "cacheID": "eb38ce38c476822875b573c606b66f40",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2051,6 +2065,8 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number

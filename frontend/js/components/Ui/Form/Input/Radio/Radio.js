@@ -9,6 +9,7 @@ import isQuestionnaire from '~/utils/isQuestionnaire';
 type Props = {|
   ...PropsCommonCheckboxRadio,
   isButton?: boolean,
+  colorOnHover?: boolean,
   color?: ?string,
 |};
 
@@ -21,6 +22,7 @@ const Radio = ({
   value,
   onChange,
   onBlur,
+  colorOnHover = false,
   disabled = false,
   checked = false,
   isButton = false,
@@ -30,7 +32,7 @@ const Radio = ({
   <RadioContainer className={className} hasImage={!!image} checked={checked}>
     {isButton ? (
       <Label htmlFor={id} id={`label-radio-button-${id}`}>
-        <LabelRadioButtonContainer color={color} isChecked={checked}>
+        <LabelRadioButtonContainer colorOnHover={colorOnHover} color={color} isChecked={checked}>
           {label}
         </LabelRadioButtonContainer>
       </Label>

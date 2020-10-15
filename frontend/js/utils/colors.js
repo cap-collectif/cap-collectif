@@ -27,6 +27,7 @@ const colors = {
   duckBlue: '#17a2b8',
   yellow: '#ffc107',
   blue: '#3b88fd',
+  darkerGray: '#85919D',
   accessibleColors: [
     '#36c',
     '#dc3912',

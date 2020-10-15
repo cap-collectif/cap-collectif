@@ -57,6 +57,7 @@ type Props = {|
   label: string,
   color: string,
   hasMajoritySelected?: boolean,
+  disableColors?: boolean,
   asPreview?: boolean,
 |};
 
@@ -68,6 +69,7 @@ const Majority = ({
   value,
   onChange,
   onBlur,
+  disableColors = false,
   disabled = false,
   checked = false,
   hasMajoritySelected = false,
@@ -80,6 +82,7 @@ const Majority = ({
     checked={checked}
     color={color}
     disabled={disabled}
+    disableColors={disableColors}
     hasMajoritySelected={hasMajoritySelected}
     asPreview={asPreview}>
     <Label htmlFor={id} id={`label-${id}`} typeForm={typeForm}>

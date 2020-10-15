@@ -10,6 +10,9 @@ import { ChoicesContainer } from './MultipleMajority.style';
 type Props = {|
   field?: Fields,
   value?: Value,
+  disableColors?: boolean,
+  enableBars?: boolean,
+  choices?: MajorityProperty[],
   disabled?: boolean,
   onChange?: Function,
   onBlur?: Function,
@@ -21,17 +24,27 @@ const MultipleMajority = ({
   value,
   onChange,
   onBlur,
+  choices = [],
+  enableBars = false,
+  disableColors = false,
   disabled = false,
   asPreview = false,
 }: Props) => {
-  const choicesMajority = ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
-
+  const choicesMajority =
+    choices && choices.length > 0
+      ? choices
+      : ((Object.values(COLORS_MAJORITY): any): MajorityProperty[]);
   return (
     <div id={field.id} className="form-group">
-      <ChoicesContainer disabled={disabled} asPreview={asPreview}>
+      <ChoicesContainer
+        disabled={disabled}
+        asPreview={asPreview}
+        enableBars={enableBars}
+        disableColors={disableColors}>
         {choicesMajority.map((majority, idx) => (
           <Majority
             key={idx}
+            disableColors={disableColors}
             id={`choice-${field.id}-${majority.id}`}
             name={`choices-for-field-${field.id}`}
             color={majority.color}

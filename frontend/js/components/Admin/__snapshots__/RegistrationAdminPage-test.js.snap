@@ -437,6 +437,20 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "groupedResponsesEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "responseColorsDisabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "MultipleChoiceQuestionValidationRule",
                           "kind": "LinkedField",
                           "name": "validationRule",
@@ -641,7 +655,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "a4c68d1a521fc80c4bb007bfcb68472c",
+          "cacheID": "acea4be23cb2eb8ce91a5f8d5d12bd23",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -725,6 +739,8 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -1329,6 +1345,20 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "groupedResponsesEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "responseColorsDisabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "MultipleChoiceQuestionValidationRule",
                                 "kind": "LinkedField",
                                 "name": "validationRule",
@@ -1533,7 +1563,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                 ],
               },
               "params": Object {
-                "cacheID": "a4c68d1a521fc80c4bb007bfcb68472c",
+                "cacheID": "acea4be23cb2eb8ce91a5f8d5d12bd23",
                 "id": null,
                 "metadata": Object {},
                 "name": "RegistrationAdminPageQuery",
@@ -1617,6 +1647,8 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -2185,6 +2217,20 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "groupedResponsesEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "responseColorsDisabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "MultipleChoiceQuestionValidationRule",
                           "kind": "LinkedField",
                           "name": "validationRule",
@@ -2389,7 +2435,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
           ],
         },
         "params": Object {
-          "cacheID": "a4c68d1a521fc80c4bb007bfcb68472c",
+          "cacheID": "acea4be23cb2eb8ce91a5f8d5d12bd23",
           "id": null,
           "metadata": Object {},
           "name": "RegistrationAdminPageQuery",
@@ -2473,6 +2519,8 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number

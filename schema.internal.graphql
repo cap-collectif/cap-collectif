@@ -4690,6 +4690,16 @@ type MultipleChoiceQuestion implements Question & Node {
   ): QuestionChoiceConnection!
   validationRule: MultipleChoiceQuestionValidationRule
   randomQuestionChoices: Boolean!
+
+  """
+  When the question is of type button, do we disable the colors for the responses
+  """
+  responseColorsDisabled: Boolean!
+
+  """
+  When the question is of type button, do we show the responses in a compact bar instead
+  """
+  groupedResponsesEnabled: Boolean!
 }
 
 """A particular condition in a logic jump in a multiple choice question."""
@@ -8152,6 +8162,12 @@ input QuestionInput {
 
   """The maximal range (number question only)"""
   rangeMax: Int
+
+  """Does the question have it's responses grouped"""
+  groupedResponsesEnabled: Boolean
+
+  """Does the questions have disabled the responses colors"""
+  responseColorsDisabled: Boolean
 }
 
 """Value of type of question"""

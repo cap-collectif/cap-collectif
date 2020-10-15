@@ -425,6 +425,20 @@ exports[`<Navbar /> should render correctly 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "groupedResponsesEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "responseColorsDisabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "MultipleChoiceQuestionValidationRule",
                                 "kind": "LinkedField",
                                 "name": "validationRule",
@@ -583,7 +597,7 @@ exports[`<Navbar /> should render correctly 1`] = `
                 ],
               },
               "params": Object {
-                "cacheID": "b51fae4f290d727f42d23f9dbc0dd4e0",
+                "cacheID": "c465ac0681e68da5c6f82436d5fbbf83",
                 "id": null,
                 "metadata": Object {},
                 "name": "NavbarQuery",
@@ -650,6 +664,8 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -736,6 +752,8 @@ fragment RegistrationForm_query on Query {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number
@@ -1234,6 +1252,20 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
+                                "kind": "ScalarField",
+                                "name": "groupedResponsesEnabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "responseColorsDisabled",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
                                 "concreteType": "MultipleChoiceQuestionValidationRule",
                                 "kind": "LinkedField",
                                 "name": "validationRule",
@@ -1392,7 +1424,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                 ],
               },
               "params": Object {
-                "cacheID": "b51fae4f290d727f42d23f9dbc0dd4e0",
+                "cacheID": "c465ac0681e68da5c6f82436d5fbbf83",
                 "id": null,
                 "metadata": Object {},
                 "name": "NavbarQuery",
@@ -1459,6 +1491,8 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -1545,6 +1579,8 @@ fragment RegistrationForm_query on Query {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number

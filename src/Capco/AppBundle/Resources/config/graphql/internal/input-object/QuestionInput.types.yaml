@@ -46,3 +46,9 @@ QuestionInput:
             rangeMax:
                 type: 'Int'
                 description: 'The maximal range (number question only)'
+            groupedResponsesEnabled:
+                type: 'Boolean'
+                description: "Does the question have it's responses grouped"
+            responseColorsDisabled:
+                type: 'Boolean'
+                description: 'Does the questions have disabled the responses colors'

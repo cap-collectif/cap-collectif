@@ -418,6 +418,20 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "groupedResponsesEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "responseColorsDisabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "MultipleChoiceQuestionValidationRule",
                           "kind": "LinkedField",
                           "name": "validationRule",
@@ -576,7 +590,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9670bc05812671f54b8c24464045b7ec",
+          "cacheID": "3a6a1bc274386c109a35faa2639e4d6a",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -643,6 +657,8 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -729,6 +745,8 @@ fragment RegistrationForm_query on Query {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number
@@ -1216,6 +1234,20 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "groupedResponsesEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "responseColorsDisabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "MultipleChoiceQuestionValidationRule",
                           "kind": "LinkedField",
                           "name": "validationRule",
@@ -1374,7 +1406,7 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
           ],
         },
         "params": Object {
-          "cacheID": "9670bc05812671f54b8c24464045b7ec",
+          "cacheID": "3a6a1bc274386c109a35faa2639e4d6a",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -1441,6 +1473,8 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -1527,6 +1561,8 @@ fragment RegistrationForm_query on Query {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number
@@ -1994,6 +2030,20 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "groupedResponsesEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "responseColorsDisabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "MultipleChoiceQuestionValidationRule",
                           "kind": "LinkedField",
                           "name": "validationRule",
@@ -2152,7 +2202,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9670bc05812671f54b8c24464045b7ec",
+          "cacheID": "3a6a1bc274386c109a35faa2639e4d6a",
           "id": null,
           "metadata": Object {},
           "name": "ShieldPageQuery",
@@ -2219,6 +2269,8 @@ fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -2305,6 +2357,8 @@ fragment RegistrationForm_query on Query {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number

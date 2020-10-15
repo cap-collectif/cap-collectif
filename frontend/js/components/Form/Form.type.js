@@ -134,6 +134,8 @@ export type Question = {|
   +isRangeBetween?: boolean,
   +rangeMin?: ?number,
   +rangeMax?: ?number,
+  +groupedResponsesEnabled?: boolean,
+  +responseColorsDisabled?: boolean,
 |};
 export type Questions = $ReadOnlyArray<Question>;
 

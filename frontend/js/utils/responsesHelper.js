@@ -74,6 +74,7 @@ const QuestionAdminFragment = {
         rangeMin
         rangeMax
       }
+
       jumps(orderBy: { field: POSITION, direction: ASC }) {
         id
         origin {
@@ -110,6 +111,8 @@ const QuestionAdminFragment = {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number
@@ -194,6 +197,8 @@ const QuestionFragment = {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number

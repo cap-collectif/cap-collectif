@@ -1064,6 +1064,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "groupedResponsesEnabled",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "responseColorsDisabled",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
                                   "concreteType": "MultipleChoiceQuestionValidationRule",
                                   "kind": "LinkedField",
                                   "name": "validationRule",
@@ -2148,6 +2162,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                   "args": null,
                                   "kind": "ScalarField",
                                   "name": "randomQuestionChoices",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "groupedResponsesEnabled",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "responseColorsDisabled",
                                   "storageKey": null,
                                 },
                                 Object {
@@ -4266,6 +4294,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                             Object {
                                               "alias": null,
                                               "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "groupedResponsesEnabled",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "responseColorsDisabled",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
                                               "concreteType": "MultipleChoiceQuestionValidationRule",
                                               "kind": "LinkedField",
                                               "name": "validationRule",
@@ -4905,6 +4947,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                           "args": null,
                                           "kind": "ScalarField",
                                           "name": "randomQuestionChoices",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "groupedResponsesEnabled",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "responseColorsDisabled",
                                           "storageKey": null,
                                         },
                                         Object {
@@ -6173,7 +6229,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "2046a8e733ffbaca56dfa5307e36efa6",
+          "cacheID": "feb7e6c0a772b00c6ad8f70023915cdc",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -6407,6 +6463,8 @@ fragment NewProposalResponse_response on Response {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -6550,6 +6608,8 @@ fragment ProposalAnalysisFormPanel_proposal on Proposal {
           ... on MultipleChoiceQuestion {
             isOtherAllowed
             randomQuestionChoices
+            groupedResponsesEnabled
+            responseColorsDisabled
             validationRule {
               type
               number
@@ -6953,6 +7013,8 @@ fragment ProposalForm_proposalForm on ProposalForm {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -7117,6 +7179,8 @@ fragment ProposalPageCustomSections_proposal on Proposal {
       ... on MultipleChoiceQuestion {
         isOtherAllowed
         randomQuestionChoices
+        groupedResponsesEnabled
+        responseColorsDisabled
         validationRule {
           type
           number
@@ -7608,6 +7672,8 @@ fragment ProposalResponse_response on Response {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number

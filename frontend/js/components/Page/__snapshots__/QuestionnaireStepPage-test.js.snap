@@ -810,6 +810,20 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                           Object {
                             "alias": null,
                             "args": null,
+                            "kind": "ScalarField",
+                            "name": "groupedResponsesEnabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "responseColorsDisabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
                             "concreteType": "MultipleChoiceQuestionValidationRule",
                             "kind": "LinkedField",
                             "name": "validationRule",
@@ -1442,6 +1456,20 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                       Object {
                                         "alias": null,
                                         "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "groupedResponsesEnabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "responseColorsDisabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
                                         "concreteType": "MultipleChoiceQuestionValidationRule",
                                         "kind": "LinkedField",
                                         "name": "validationRule",
@@ -2043,7 +2071,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "fac7648b7b290fd26a46ac1abc458c69",
+        "cacheID": "be1911365e267d5587acd98eae05c609",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -2265,6 +2293,8 @@ fragment ReplyForm_questionnaire on Questionnaire {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -2359,6 +2389,8 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -3296,6 +3328,20 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                           Object {
                             "alias": null,
                             "args": null,
+                            "kind": "ScalarField",
+                            "name": "groupedResponsesEnabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "responseColorsDisabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
                             "concreteType": "MultipleChoiceQuestionValidationRule",
                             "kind": "LinkedField",
                             "name": "validationRule",
@@ -3928,6 +3974,20 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                       Object {
                                         "alias": null,
                                         "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "groupedResponsesEnabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "responseColorsDisabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
                                         "concreteType": "MultipleChoiceQuestionValidationRule",
                                         "kind": "LinkedField",
                                         "name": "validationRule",
@@ -4529,7 +4589,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "fac7648b7b290fd26a46ac1abc458c69",
+        "cacheID": "be1911365e267d5587acd98eae05c609",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4751,6 +4811,8 @@ fragment ReplyForm_questionnaire on Questionnaire {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -4845,6 +4907,8 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -5782,6 +5846,20 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                           Object {
                             "alias": null,
                             "args": null,
+                            "kind": "ScalarField",
+                            "name": "groupedResponsesEnabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "responseColorsDisabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
                             "concreteType": "MultipleChoiceQuestionValidationRule",
                             "kind": "LinkedField",
                             "name": "validationRule",
@@ -6414,6 +6492,20 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                       Object {
                                         "alias": null,
                                         "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "groupedResponsesEnabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "responseColorsDisabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
                                         "concreteType": "MultipleChoiceQuestionValidationRule",
                                         "kind": "LinkedField",
                                         "name": "validationRule",
@@ -7015,7 +7107,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "fac7648b7b290fd26a46ac1abc458c69",
+        "cacheID": "be1911365e267d5587acd98eae05c609",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -7237,6 +7329,8 @@ fragment ReplyForm_questionnaire on Questionnaire {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -7331,6 +7425,8 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -8268,6 +8364,20 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                           Object {
                             "alias": null,
                             "args": null,
+                            "kind": "ScalarField",
+                            "name": "groupedResponsesEnabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "responseColorsDisabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
                             "concreteType": "MultipleChoiceQuestionValidationRule",
                             "kind": "LinkedField",
                             "name": "validationRule",
@@ -8900,6 +9010,20 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                       Object {
                                         "alias": null,
                                         "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "groupedResponsesEnabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "responseColorsDisabled",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
                                         "concreteType": "MultipleChoiceQuestionValidationRule",
                                         "kind": "LinkedField",
                                         "name": "validationRule",
@@ -9501,7 +9625,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "fac7648b7b290fd26a46ac1abc458c69",
+        "cacheID": "be1911365e267d5587acd98eae05c609",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -9723,6 +9847,8 @@ fragment ReplyForm_questionnaire on Questionnaire {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number
@@ -9817,6 +9943,8 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
     ... on MultipleChoiceQuestion {
       isOtherAllowed
       randomQuestionChoices
+      groupedResponsesEnabled
+      responseColorsDisabled
       validationRule {
         type
         number

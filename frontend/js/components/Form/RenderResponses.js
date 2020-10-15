@@ -367,6 +367,8 @@ const RenderResponses = ({
                       value={response}
                       typeForm={typeForm}
                       onChange={() => setLastQuestionType(field.type)}
+                      groupedResponsesEnabled={field.groupedResponsesEnabled}
+                      responseColorsDisabled={field.responseColorsDisabled}
                     />
                   </PrivateBox>
                 </div>

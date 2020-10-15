@@ -43,6 +43,7 @@ import { TYPE_FORM } from '~/constants/FormConstants';
 import isQuestionnaire from '~/utils/isQuestionnaire';
 import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInput';
 import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority';
+import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -129,6 +130,8 @@ export type ParentProps = {|
   opacity?: ?number,
   debounce?: number,
   addressProps?: AddressProps,
+  groupedResponsesEnabled?: boolean,
+  responseColorsDisabled?: boolean,
 |};
 
 type Props = {|
@@ -205,6 +208,8 @@ class ReactBootstrapInput extends React.Component<Props> {
     addressProps,
     debounce,
     isRangeBetween,
+    groupedResponsesEnabled,
+    responseColorsDisabled,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -400,6 +405,25 @@ class ReactBootstrapInput extends React.Component<Props> {
         id: props.id,
         choices: props.choices,
       };
+      if (groupedResponsesEnabled) {
+        const choices: MajorityProperty[] = props.choices.map(choice => ({
+          color: choice.color,
+          id: choice.id,
+          label: choice.label,
+          value: choice.label,
+        }));
+        return (
+          <MultipleMajority
+            {...props}
+            disableColors={responseColorsDisabled}
+            enableBars={groupedResponsesEnabled}
+            value={value}
+            field={field}
+            errors={errors}
+            choices={choices}
+          />
+        );
+      }
 
       return (
         <MultipleRadioButton
@@ -409,6 +433,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
           aria-required={ariaRequired}
+          disableColors={responseColorsDisabled}
         />
       );
     }
