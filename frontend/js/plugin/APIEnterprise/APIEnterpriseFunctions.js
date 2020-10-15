@@ -382,7 +382,6 @@ export const triggerAutocompleteAPIEnterprise = (
     if (baseUrl === 'https://budgetparticipatif.smartidf.services') {
       formId = questions.length === 70 ? ID_BP_2 : ID_BP_1;
     }
-    console.log('Guessed form id :', formId);
     if (event.currentTarget.getAttribute('type') === 'siret') {
       const text: ?string = event.currentTarget.value.replace(/\s/g, '');
       const apiEnterpriseType = getApiEnterpriseType(formId);

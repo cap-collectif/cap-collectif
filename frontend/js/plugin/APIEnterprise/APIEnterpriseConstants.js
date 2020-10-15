@@ -50,6 +50,12 @@ const ASSO_RNA_CA = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 40 : 38);
 const ASSO_RNA_PREF_CONFIRM = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 41 : 39);
 const ASSO_RNA_STATUS = (id: string) => (id === ID_DEV || id === ID_BP_2 ? 43 : 41);
 
+const KBIS_BASE_QUESTIONS = (id: string): Array<number> => [ENTER_KBIS(id)];
+const ATTESTATION_BASE_QUESTIONS = (id: string): Array<number> => [
+  ENTER_DISC_REG(id),
+  ENTER_SOCIAL_REG(id),
+];
+
 const isFieldModificableIfNoResult = (questionNumber: number, formId: string): boolean => {
   return BASE_QUESTIONS(formId).includes(questionNumber);
 };
@@ -92,12 +98,10 @@ const dispatchFromApi = (
           const question = store.get(questions[questionNumber].id);
           if (question) {
             let message = negativeResultMessage;
-            // TODO fixme
-            if (questionNumber > 100) {
+            if (KBIS_BASE_QUESTIONS(formId).includes(questionNumber)) {
               message = negativeResultMessageKbis;
             }
-            // TODO fixme
-            if (questionNumber > 200) {
+            if (ATTESTATION_BASE_QUESTIONS(formId).includes(questionNumber)) {
               message = negativeResultMessageAttesation;
             }
             question.setValue(false, 'hidden');
@@ -118,7 +122,10 @@ const dispatchFromApi = (
     } else if (!onlyVisibility) {
       if (responseNumber) {
         const isModificable = isFieldModificableIfNoResult(responseNumber, formId);
-        if (!isModificable) return;
+        if (!isModificable) {
+          console.warn(`Skipped ${responseNumber} because not modificable.`);
+          return;
+        }
         if (
           (Array.isArray(value) && value.length > 0 && value[0] != null) ||
           (value && value !== '')
@@ -311,7 +318,7 @@ export const dispatchValuesToForm = (
     default:
       return;
   }
-  dispatchFromApi(dispatch, formName, mapping, questions, intl, onlyVisibility, formName);
+  dispatchFromApi(dispatch, formName, mapping, questions, intl, onlyVisibility, formId);
 };
 
 export const autocompleteFromId = graphql`
