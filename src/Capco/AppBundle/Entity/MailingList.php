@@ -39,10 +39,16 @@ class MailingList
      */
     private bool $isDeletable = true;
 
+    /**
+     * @ORM\OneToMany(targetEntity=EmailingCampaign::class, mappedBy="mailingList", orphanRemoval=true)
+     */
+    private Collection $emailingCampaigns;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->project = null;
+        $this->emailingCampaigns = new ArrayCollection();
     }
 
     public function getName(): ?string
@@ -65,7 +71,6 @@ class MailingList
     public function getUsersWithValidEmail(): Collection
     {
         $usersWithValidEmail = new ArrayCollection();
-        /** @var User $user */
         foreach ($this->users as $user) {
             if ($user->getEmail()) {
                 $usersWithValidEmail->add($user);
@@ -111,6 +116,33 @@ class MailingList
     public function setIsDeletable(bool $isDeletable): self
     {
         $this->isDeletable = $isDeletable;
+
+        return $this;
+    }
+
+    public function getEmailingCampaigns(): Collection
+    {
+        return $this->emailingCampaigns;
+    }
+
+    public function addEmailingCampaign(EmailingCampaign $emailingCampaign): self
+    {
+        if (!$this->emailingCampaigns->contains($emailingCampaign)) {
+            $this->emailingCampaigns[] = $emailingCampaign;
+            $emailingCampaign->setMailingList($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmailingCampaign(EmailingCampaign $emailingCampaign): self
+    {
+        if ($this->emailingCampaigns->contains($emailingCampaign)) {
+            $this->emailingCampaigns->removeElement($emailingCampaign);
+            if ($emailingCampaign->getMailingList() === $this) {
+                $emailingCampaign->setMailingList(null);
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,13 @@
+DeleteEmailingCampaignsPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedIds:
+                type: '[ID!]!'
+                description: 'The mailing lists deleted'
+            archivedIds:
+                type: '[ID!]!'
+                description: 'The mailing lists archived'
+            error:
+                type: 'DeleteEmailingCampaignsErrorCode'
+                description: 'The error code, if any'

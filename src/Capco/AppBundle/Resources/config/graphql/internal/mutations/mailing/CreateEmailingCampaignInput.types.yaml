@@ -1,0 +1,8 @@
+CreateEmailingCampaignInput:
+    type: relay-mutation-input
+    config:
+        description: 'Create an emailing campaign with an optional mailing list'
+        fields:
+            mailingList:
+                type: 'ID'
+                description: 'Optional. The mailing list to build the campaign.'

@@ -1,0 +1,9 @@
+CreateEmailingCampaignErrorCode:
+    type: enum
+    config:
+        name: CreateEmailingCampaignErrorCode
+        description: 'Available errors on campaign creation'
+        values:
+            ID_NOT_FOUND_MAILING_LIST:
+                value: '@=constant("Capco\\AppBundle\\Enum\\CreateEmailingCampaignErrorCode::ID_NOT_FOUND_MAILING_LIST")'
+                description: 'No mailing list match your id'

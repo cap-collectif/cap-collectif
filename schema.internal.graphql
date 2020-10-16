@@ -2516,6 +2516,27 @@ type CreateAlphaProjectPayload {
   clientMutationId: String
 }
 
+"""Available errors on campaign creation"""
+enum CreateEmailingCampaignErrorCode {
+  """No mailing list match your id"""
+  ID_NOT_FOUND_MAILING_LIST
+}
+
+input CreateEmailingCampaignInput {
+  """Optional. The mailing list to build the campaign."""
+  mailingList: ID
+  clientMutationId: String
+}
+
+type CreateEmailingCampaignPayload {
+  """The campaign created"""
+  emailingCampaign: EmailingCampaign
+
+  """The error code, if any"""
+  error: CreateEmailingCampaignErrorCode
+  clientMutationId: String
+}
+
 input CreateGroupInput {
   """The title of the group"""
   title: String!
@@ -2843,6 +2864,33 @@ type DeleteCommentPayload {
   clientMutationId: String
 }
 
+"""Available errors on campaign deletion"""
+enum DeleteEmailingCampaignsErrorCode {
+  """No campaign match your id"""
+  ID_NOT_FOUND
+
+  """No campaign in request"""
+  EMPTY
+}
+
+input DeleteEmailingCampaignsInput {
+  """The campaigns to delete"""
+  ids: [ID!]!
+  clientMutationId: String
+}
+
+type DeleteEmailingCampaignsPayload {
+  """The mailing lists deleted"""
+  deletedIds: [ID!]!
+
+  """The mailing lists archived"""
+  archivedIds: [ID!]!
+
+  """The error code, if any"""
+  error: DeleteEmailingCampaignsErrorCode
+  clientMutationId: String
+}
+
 input DeleteEventInput {
   """The ID of the event to delete."""
   eventId: ID!
@@ -3081,6 +3129,115 @@ type EmailDomain implements Node {
 
   """The associated registration form for this email domain"""
   registrationForm: RegistrationForm
+}
+
+"""An emailing campaign"""
+type EmailingCampaign implements Node {
+  """uuid of the emailing campaign"""
+  id: ID!
+
+  """name of the emailing campaign"""
+  name: String!
+
+  """the email of the sender"""
+  senderEmail: Email!
+
+  """the name displayed of the sender"""
+  senderName: String!
+
+  """the object of the email"""
+  object: String
+
+  """the content of the email"""
+  content: HTML
+
+  """the list of users who shall receive the email"""
+  mailingList: MailingList
+
+  """an internal list used instead of a mailing list"""
+  mailingInternal: EmailingCampaignInternalList
+
+  """the date when the email has been sent or shall be"""
+  sendAt: DateTime
+
+  """the status of the campaign"""
+  status: EmailingCampaignStatus
+}
+
+"""A connection to a list of items."""
+type EmailingCampaignConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [EmailingCampaignEdge]
+}
+
+"""An edge in a connection."""
+type EmailingCampaignEdge {
+  """The item at the end of the edge."""
+  node: EmailingCampaign!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available automated emailing lists"""
+enum EmailingCampaignInternalList {
+  """All users registered."""
+  REGISTERED
+
+  """Users registered but with email not confirmed."""
+  NOT_CONFIRMED
+
+  """Only confirmed users."""
+  CONFIRMED
+}
+
+"""Ways in which lists of campaigns can be ordered upon return."""
+input EmailingCampaignOrder {
+  """The field to order users by."""
+  field: EmailingCampaignOrderField! = SEND_AT
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Properties by which campaigns can be ordered"""
+enum EmailingCampaignOrderField {
+  """
+  Allows ordering a list of campaign by when they have been sent or shall be sent.
+  """
+  SEND_AT
+}
+
+"""The possible status of an emailing campaign"""
+enum EmailingCampaignStatus {
+  """not scheduled"""
+  DRAFT
+
+  """already sent"""
+  SENT
+
+  """scheduled"""
+  PLANNED
+
+  """archived"""
+  ARCHIVED
+}
+
+"""3 possible values"""
+enum EmailingCampaignStatusFilter {
+  """campaigns not scheduled"""
+  DRAFT
+
+  """campaigns already sent"""
+  SENT
+
+  """campaigns scheduled"""
+  PLANNED
 }
 
 input EvaluateProposalAssessmentInput {
@@ -4882,6 +5039,9 @@ type Mutation {
   removeSso(input: RemoveSsoInput!): RemoveSsoPayload
   createMailingList(input: CreateMailingListInput!): CreateMailingListPayload
   deleteMailingList(input: DeleteMailingListInput!): DeleteMailingListPayload
+  createEmailingCampaign(input: CreateEmailingCampaignInput!): CreateEmailingCampaignPayload
+  deleteEmailingCampaigns(input: DeleteEmailingCampaignsInput!): DeleteEmailingCampaignsPayload
+  updateEmailingCampaign(input: UpdateEmailingCampaignInput!): UpdateEmailingCampaignPayload
 }
 
 """A connection to a list of items."""
@@ -7964,6 +8124,34 @@ type Query {
     """Returns the last `n` elements from the list."""
     last: Int
   ): MailingListConnection!
+
+  """Get all emailing campaigns"""
+  emailingCampaigns(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """optional filter by status"""
+    status: EmailingCampaignStatusFilter
+
+    """The ordering direction for sending date"""
+    orderBy: EmailingCampaignOrder = {field: SEND_AT, direction: DESC}
+
+    """If provided, filter campaigns by name"""
+    search: String
+  ): EmailingCampaignConnection!
 }
 
 """Fetches an object given its ID"""
@@ -10543,6 +10731,63 @@ type UpdateContactPagePayload {
 
   """The locale of the contact page."""
   locale: String
+  clientMutationId: String
+}
+
+"""Available errors on campaign edition"""
+enum UpdateEmailingCampaignErrorCode {
+  """No campaign match your id"""
+  ID_NOT_FOUND
+
+  """The campaign is not editable"""
+  NOT_EDITABLE
+
+  """sendAt must be in the future"""
+  TOO_LATE
+
+  """A campaign cannot have both internal and organic list"""
+  DOUBLE_LIST
+
+  """No mailing list match your id"""
+  MAILING_LIST_NOT_FOUND
+}
+
+input UpdateEmailingCampaignInput {
+  """Global id of the campaign to update"""
+  id: ID!
+
+  """Name of the campaign"""
+  name: String!
+
+  """Email to appear as sender"""
+  senderEmail: String!
+
+  """Name to appear as sender"""
+  senderName: String!
+
+  """Id of the mailing list"""
+  mailingList: ID
+
+  """Id of the internal mailing list"""
+  mailingInternal: ID
+
+  """object of the email"""
+  object: String = ""
+
+  """content of the email"""
+  content: String = ""
+
+  """the date when the email shall be sent"""
+  sendAt: DateTime = null
+  clientMutationId: String
+}
+
+type UpdateEmailingCampaignPayload {
+  """The campaign created"""
+  emailingCampaign: EmailingCampaign
+
+  """The error code, if any"""
+  error: UpdateEmailingCampaignErrorCode
   clientMutationId: String
 }
 

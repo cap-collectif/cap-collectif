@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Mutation;
+namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Enum\DeleteMailingListErrorCode;
 use Capco\AppBundle\Repository\MailingListRepository;

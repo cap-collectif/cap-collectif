@@ -1,0 +1,13 @@
+EmailingCampaignOrder:
+    type: input-object
+    config:
+        description: 'Ways in which lists of campaigns can be ordered upon return.'
+        fields:
+            field:
+                type: 'EmailingCampaignOrderField!'
+                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignOrderField::SEND_AT")'
+                description: The field to order users by.
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
+                description: The ordering direction.

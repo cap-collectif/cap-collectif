@@ -1,0 +1,34 @@
+Capco\AppBundle\Entity\EmailingCampaign:
+    CampaignToRemindToConfirm:
+        id: CampaignToRemindToConfirm
+        name: 'Campagne pour rappeler aux utilisateurs de confirmer'
+        senderEmail: 'dev@cap-collectif.com'
+        senderName: 'Les devs de capco'
+        object: 'Veuillez confirmer votre email'
+        content: <stripslashes('\<p>\')>Pourquoi vous l'avez toujours pas fait ?<stripslashes('\</p>\')>
+        mailingList: null
+        mailingInternal: 'NOT_CONFIRMED'
+        sendAt: <identity((new \DateTime('2020-10-01')))>
+        status: 'SENT'
+    CampaignToThanksRegistered:
+        id: CampaignToThanksRegistered
+        name: 'Campagne pour remercier les inscrits confirmés'
+        senderEmail: 'dev@cap-collectif.com'
+        senderName: 'Les devs de capco'
+        object: 'Merci'
+        content: <stripslashes('\<p>\')>C'est gentil d'avoir participé.<stripslashes('\</p>\')>
+        mailingList: null
+        mailingInternal: 'CONFIRMED'
+        sendAt: <identity((new \DateTime('2021-01-01')))>
+        status: 'PLANNED'
+    CampaignToCovidParticipants:
+        id: CampaignToCovidParticipants
+        name: 'On envoie un message à ceux qui ont participé au projet Solidarité COVID-19'
+        senderEmail: 'dev@cap-collectif.com'
+        senderName: 'Les devs de capco'
+        object: 'Second confinement'
+        content: <stripslashes('\<p>\')>Je pense qu'on va devoir relancer le projet.<stripslashes('\</p>\')>
+        mailingList: '@mailingListFromCovidProject'
+        mailingInternal: null
+        sendAt: null
+        status: 'DRAFT'

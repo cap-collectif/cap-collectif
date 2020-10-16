@@ -1,0 +1,35 @@
+UpdateEmailingCampaignInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update a campaign'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'Global id of the campaign to update'
+            name:
+                type: 'String!'
+                description: 'Name of the campaign'
+            senderEmail:
+                type: 'String!'
+                description: 'Email to appear as sender'
+            senderName:
+                type: 'String!'
+                description: 'Name to appear as sender'
+            mailingList:
+                type: 'ID'
+                description: 'Id of the mailing list'
+            mailingInternal:
+                type: 'ID'
+                description: 'Id of the internal mailing list'
+            object:
+                type: 'String'
+                description: 'object of the email'
+                defaultValue: ''
+            content:
+                type: 'String'
+                description: 'content of the email'
+                defaultValue: ''
+            sendAt:
+                type: 'DateTime'
+                description: 'the date when the email shall be sent'
+                defaultValue: null

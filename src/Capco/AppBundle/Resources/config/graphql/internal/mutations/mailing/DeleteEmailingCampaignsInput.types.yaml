@@ -1,0 +1,8 @@
+DeleteEmailingCampaignsInput:
+    type: relay-mutation-input
+    config:
+        description: 'Delete campaigns'
+        fields:
+            ids:
+                type: '[ID!]!'
+                description: 'The campaigns to delete'

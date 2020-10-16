@@ -1,0 +1,8 @@
+EmailingCampaignOrderField:
+    type: enum
+    config:
+        description: 'Properties by which campaigns can be ordered'
+        values:
+            SEND_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignOrderField::SEND_AT")'
+                description: 'Allows ordering a list of campaign by when they have been sent or shall be sent.'

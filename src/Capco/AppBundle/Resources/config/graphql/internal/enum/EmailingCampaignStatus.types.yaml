@@ -1,0 +1,17 @@
+EmailingCampaignStatus:
+    type: enum
+    config:
+        description: 'The possible status of an emailing campaign'
+        values:
+            DRAFT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::DRAFT")'
+                description: 'not scheduled'
+            SENT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::SENT")'
+                description: 'already sent'
+            PLANNED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::PLANNED")'
+                description: 'scheduled'
+            ARCHIVED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::ARCHIVED")'
+                description: 'archived'

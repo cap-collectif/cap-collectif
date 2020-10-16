@@ -974,11 +974,32 @@ InternalMutation:
                 builderConfig:
                     inputType: CreateMailingListInput
                     payloadType: CreateMailingListPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateMailingListMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateMailingListMutation", [value])'
             deleteMailingList:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteMailingListInput
                     payloadType: DeleteMailingListPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteMailingListMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteMailingListMutation", [value])'
+            createEmailingCampaign:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateEmailingCampaignInput
+                    payloadType: CreateEmailingCampaignPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateEmailingCampaignMutation", [value])'
+            deleteEmailingCampaigns:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteEmailingCampaignsInput
+                    payloadType: DeleteEmailingCampaignsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteEmailingCampaignsMutation", [value])'
+            updateEmailingCampaign:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateEmailingCampaignInput
+                    payloadType: UpdateEmailingCampaignPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\UpdateEmailingCampaignMutation", [value])'

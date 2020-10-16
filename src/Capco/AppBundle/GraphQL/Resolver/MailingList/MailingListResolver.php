@@ -27,7 +27,7 @@ class MailingListResolver implements ResolverInterface
         });
 
         $connection = $paginator->auto($argument, $totalCount);
-        $connection->setTotalCount(42);
+        $connection->setTotalCount($totalCount);
 
         return $connection;
     }

@@ -458,3 +458,24 @@ InternalQuery:
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MailingList\\MailingListResolver", [args])'
                 argsBuilder: 'Relay::Connection'
+            emailingCampaigns:
+                type: EmailingCampaignConnection!
+                description: 'Get all emailing campaigns'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EmailingCampaign\\EmailingCampaignResolver", [args])'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    status:
+                        type: 'EmailingCampaignStatusFilter'
+                        description: 'optional filter by status'
+                    orderBy:
+                        type: 'EmailingCampaignOrder'
+                        defaultValue:
+                            {
+                                field: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignOrderField::SEND_AT")',
+                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                            }
+                        description: 'The ordering direction for sending date'
+                    search:
+                        type: 'String'
+                        description: 'If provided, filter campaigns by name'

@@ -1,0 +1,42 @@
+EmailingCampaign:
+    type: object
+    inherits:
+        - Node
+    config:
+        interfaces:
+            - Node
+        description: 'An emailing campaign'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'uuid of the emailing campaign'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: EmailingCampaign
+            name:
+                type: 'String!'
+                description: 'name of the emailing campaign'
+            senderEmail:
+                type: 'Email!'
+                description: 'the email of the sender'
+            senderName:
+                type: 'String!'
+                description: 'the name displayed of the sender'
+            object:
+                type: 'String'
+                description: 'the object of the email'
+            content:
+                type: 'HTML'
+                description: 'the content of the email'
+            mailingList:
+                type: 'MailingList'
+                description: 'the list of users who shall receive the email'
+            mailingInternal:
+                type: 'EmailingCampaignInternalList'
+                description: 'an internal list used instead of a mailing list'
+            sendAt:
+                type: 'DateTime'
+                description: 'the date when the email has been sent or shall be'
+            status:
+                type: 'EmailingCampaignStatus'
+                description: 'the status of the campaign'

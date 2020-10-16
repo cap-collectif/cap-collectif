@@ -1,0 +1,7 @@
+EmailingCampaignConnection:
+    type: relay-connection
+    config:
+        nodeType: EmailingCampaign!
+        connectionFields:
+            totalCount:
+                type: Int!
