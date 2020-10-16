@@ -10,7 +10,7 @@ class UserInviteController extends \Sonata\AdminBundle\Controller\CRUDController
 {
     public function listAction()
     {
-        $this->denyAccessUnlessGranted(UserRole::ROLE_SUPER_ADMIN);
+        $this->denyAccessUnlessGranted(UserRole::ROLE_ADMIN);
         if (!$this->get(Manager::class)->isActive(Manager::user_invitations)) {
             $message = sprintf(
                 '%s (%s)',

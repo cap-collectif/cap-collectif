@@ -25,12 +25,12 @@ describe('Internal|cancelUserInvitations mutation access control', () => {
       graphql(CancelUserInvitationsMutation, { input }, 'internal_super_admin'),
     ).rejects.toThrowError(DENIED_ERROR_MESSAGE);
   });
-  it('should throw an error when the flag is activated and the user has ROLE_ADMIN', async () => {
+  it('should not throw an error when the flag is activated and the user has ROLE_ADMIN', async () => {
     await enableFeatureFlag('user_invitations');
     expect.assertions(1);
     await expect(
       graphql(CancelUserInvitationsMutation, { input }, 'internal_admin'),
-    ).rejects.toThrowError(DENIED_ERROR_MESSAGE);
+    ).resolves.not.toBeNull();
   });
   it('should throw an error when the flag is deactivated and the user has ROLE_ADMIN', async () => {
     await disableFeatureFlag('user_invitations');

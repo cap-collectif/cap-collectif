@@ -29,7 +29,7 @@ class UserInviteAdmin extends AbstractAdmin
 
     public function showIn($context)
     {
-        return $this->checker->isGranted(UserRole::ROLE_SUPER_ADMIN) &&
+        return $this->checker->isGranted(UserRole::ROLE_ADMIN) &&
             $this->manager->isActive(Manager::user_invitations);
     }
 

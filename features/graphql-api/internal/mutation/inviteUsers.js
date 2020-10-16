@@ -38,12 +38,10 @@ describe('Internal|inviteUsers mutation access control', () => {
       graphql(InviteUsersMutation, { input }, 'internal_super_admin'),
     ).rejects.toThrowError(DENIED_ERROR_MESSAGE);
   });
-  it('should throw an error when the flag is activated and the user has ROLE_ADMIN', async () => {
+  it('should not throw an error when the flag is activated and the user has ROLE_ADMIN', async () => {
     await enableFeatureFlag('user_invitations');
     expect.assertions(1);
-    await expect(graphql(InviteUsersMutation, { input }, 'internal_admin')).rejects.toThrowError(
-      DENIED_ERROR_MESSAGE,
-    );
+    await expect(graphql(InviteUsersMutation, { input }, 'internal_admin')).resolves.not.toBeNull();
   });
   it('should throw an error when the flag is deactivated and the user has ROLE_ADMIN', async () => {
     await disableFeatureFlag('user_invitations');

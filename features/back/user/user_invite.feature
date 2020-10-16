@@ -17,4 +17,4 @@ Scenario: Logged in admin wants to go to the user invite page when the feature f
   Given I am logged in as admin
   And feature "user_invitations" is enabled
   When I go to the admin user invite page
-  Then I should see "403-error"
+  Then I should not see "error.500"
