@@ -377,6 +377,9 @@ class MandrillTransport implements Swift_Transport
                 case 'puy-de-dome.fr':
                     $mandrillMessage['return_path_domain'] = 'mail.budgetecocitoyen.puy-de-dome.fr';
                     break;
+                case 'iledefrance.fr':
+                    $mandrillMessage['return_path_domain'] = 'mail.budgetparticipatif.iledefrance.fr';
+                    break;
                 default:
             }
         }
