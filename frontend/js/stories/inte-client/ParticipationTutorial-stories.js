@@ -37,7 +37,7 @@ const inputs = [
 
 storiesOf('Inté client|ParticipationTutorial', module).add(
   'Default',
-  () => <ParticipationTutorial instructions={arrayObject('images', inputs)} />,
+  () => <ParticipationTutorial instructions={arrayObject('instructions', inputs)} />,
   {
     knobsToBo: {
       componentName: 'ParticipationTutorialApp',
