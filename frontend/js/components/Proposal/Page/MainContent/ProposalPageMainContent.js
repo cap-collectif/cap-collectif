@@ -3,6 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import type { ProposalPageMainContent_proposal } from '~relay/ProposalPageMainContent_proposal.graphql';
+import ProposalPageFusionInformations from './ProposalPageFusionInformations';
 import ProposalPageDescription from './ProposalPageDescription';
 import ProposalPageLocalisation from './ProposalPageLocalisation';
 import ProposalPageNews from './ProposalPageNews';
@@ -37,6 +38,7 @@ const ProposalPageMainContentContainer: StyledComponent<{}, {}, HTMLDivElement> 
 export const ProposalPageMainContent = ({ proposal, goToBlog, isAnalysing }: Props) => (
   <ProposalPageMainContentContainer
     id={proposal ? 'ProposalPageMainContent' : 'ProposalPageMainContentLoading'}>
+    <ProposalPageFusionInformations proposal={proposal} />
     <ProposalPageOfficialAnswer proposal={proposal} />
     <ProposalPageDescription proposal={proposal} />
     <ProposalPageLocalisation proposal={proposal} />
@@ -51,6 +53,7 @@ export default createFragmentContainer(ProposalPageMainContent, {
   proposal: graphql`
     fragment ProposalPageMainContent_proposal on Proposal {
       id
+      ...ProposalPageFusionInformations_proposal
       ...ProposalPageOfficialAnswer_proposal
       ...ProposalPageDescription_proposal
       ...ProposalPageLocalisation_proposal

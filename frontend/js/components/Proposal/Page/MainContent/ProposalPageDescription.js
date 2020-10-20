@@ -28,7 +28,7 @@ const placeholder = (
 );
 
 export const ProposalPageDescription = ({ proposal }: Props) => {
-  if (proposal && !proposal.body) return null;
+  if (proposal && !proposal.body && !proposal.summary) return null;
   return (
     <Card>
       <CategoryContainer>
@@ -40,6 +40,7 @@ export const ProposalPageDescription = ({ proposal }: Props) => {
             <FormattedMessage id="global.description" />
           </h3>
         </CategoryTitle>
+        {proposal?.summary && <><p style={{ fontWeight: 600 }}>{proposal?.summary}</p><br/></>}
         <ReactPlaceholder
           showLoadingAnimation
           customPlaceholder={placeholder}
@@ -56,6 +57,7 @@ export default createFragmentContainer(ProposalPageDescription, {
     fragment ProposalPageDescription_proposal on Proposal {
       id
       body
+      summary
     }
   `,
 });

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageNews /> should render correctly 1`] = `
+<ProposalPagestyle__Card>
+  <ProposalPagestyle__CategoryContainer>
+    <ProposalPagestyle__CategoryTitle>
+      <ProposalPagestyle__CategoryCircledIcon
+        paddingLeft={9}
+      >
+        <Icon
+          color="#6c757d"
+          name="newspaper"
+          size={20}
+        />
+      </ProposalPagestyle__CategoryCircledIcon>
+      <h3>
+        <FormattedMessage
+          id="menu.news"
+          values={Object {}}
+        />
+      </h3>
+    </ProposalPagestyle__CategoryTitle>
+    <ProposalPageNews__NewsCardHolder>
+      <Relay(NewsCard)
+        post={
+          Object {
+            "$fragmentRefs": null,
+            "id": "news1",
+            "title": "Réponse Officielle",
+          }
+        }
+      />
+       
+      <Relay(NewsCard)
+        post={
+          Object {
+            "$fragmentRefs": null,
+            "id": "news2",
+            "title": "Réponse Pas Officielle",
+          }
+        }
+      />
+    </ProposalPageNews__NewsCardHolder>
+  </ProposalPagestyle__CategoryContainer>
+</ProposalPagestyle__Card>
+`;
+
+exports[`<ProposalPageNews /> should render correctly without news 1`] = `""`;

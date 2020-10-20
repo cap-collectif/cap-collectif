@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageOfficialAnswer /> should render correctly 1`] = `
+<ProposalPagestyle__Card
+  withBorder={true}
+>
+  <ProposalPagestyle__CategoryContainer>
+    <ProposalPagestyle__CategoryTitle>
+      <ProposalPagestyle__CategoryCircledIcon
+        paddingLeft={7}
+      >
+        <Icon
+          color="#6c757d"
+          name="stamp"
+          size={20}
+        />
+      </ProposalPagestyle__CategoryCircledIcon>
+      <h3
+        className="proposal__last__news__title"
+      >
+        <FormattedMessage
+          id="card.title.official.answer"
+          values={Object {}}
+        />
+      </h3>
+    </ProposalPagestyle__CategoryTitle>
+    <ProposalPageOfficialAnswer__DecidorAvatarList>
+      <UserAvatarList
+        max={3}
+      >
+        <ProposalPageOfficialAnswer__DecidorDefaultAvatar
+          className="img-circle avatar"
+          key="0"
+          size={25}
+        />
+      </UserAvatarList>
+      <span>
+        moi
+      </span>
+       • 
+      <FormattedDate
+        day="numeric"
+        hour="numeric"
+        minute="numeric"
+        month="long"
+        value={null}
+        year="numeric"
+      />
+    </ProposalPageOfficialAnswer__DecidorAvatarList>
+    <ReactPlaceholder
+      customPlaceholder={
+        <div
+          style={
+            Object {
+              "marginLeft": 15,
+            }
+          }
+        >
+          <TextRow
+            color="#e3e3e3"
+            style={
+              Object {
+                "height": 12,
+                "marginTop": 5,
+                "width": "100%",
+              }
+            }
+          />
+          <TextRow
+            color="#e3e3e3"
+            style={
+              Object {
+                "height": 12,
+                "marginTop": 15,
+                "width": "50%",
+              }
+            }
+          />
+        </div>
+      }
+      ready={true}
+      showLoadingAnimation={true}
+    >
+      <Connect(BodyText)
+        maxLines={8}
+        text="GG mec c accepté"
+      />
+    </ReactPlaceholder>
+  </ProposalPagestyle__CategoryContainer>
+</ProposalPagestyle__Card>
+`;
+
+exports[`<ProposalPageOfficialAnswer /> should render correctly without an official answer 1`] = `""`;

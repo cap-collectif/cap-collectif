@@ -2,10 +2,10 @@
 // @flow
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ProposalFusionList } from './ProposalFusionList';
-import { $refType } from '../../../mocks';
+import { ProposalPageFusionInformations } from './ProposalPageFusionInformations';
+import { $refType } from '~/mocks';
 
-describe('<ProposalFusionList />', () => {
+describe('<ProposalPageFusionInformations />', () => {
   const proposalFusionnedMergedIn = {
     $refType,
     id: 'proposal1',
@@ -21,12 +21,14 @@ describe('<ProposalFusionList />', () => {
         title: 'Title Proposal 3',
       },
     ],
+    hasBeenMerged: true,
     mergedFrom: [],
   };
   const proposalFusionnedMergedFrom = {
     $refType,
     id: 'proposal1',
     mergedIn: [],
+    hasBeenMerged: true,
     mergedFrom: [
       {
         id: 'proposal2',
@@ -42,12 +44,16 @@ describe('<ProposalFusionList />', () => {
   };
 
   it('should render a list of proposal merged from other proposal', () => {
-    const wrapper = shallow(<ProposalFusionList proposal={proposalFusionnedMergedIn} />);
+    const wrapper = shallow(
+      <ProposalPageFusionInformations proposal={proposalFusionnedMergedIn} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a list of proposal of merged in other proposal', () => {
-    const wrapper = shallow(<ProposalFusionList proposal={proposalFusionnedMergedFrom} />);
+    const wrapper = shallow(
+      <ProposalPageFusionInformations proposal={proposalFusionnedMergedFrom} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });
