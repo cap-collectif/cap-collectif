@@ -95,6 +95,7 @@ export const features: FeatureToggles = {
   unstable__analysis: false,
   user_invitations: false,
   majority_vote_question: false,
+  unstable__emailing: false,
 };
 
 export const initialState: State = {

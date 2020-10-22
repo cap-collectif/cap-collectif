@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MailingListItem /> should renders correctly 1`] = `
+<MailingListItemstyle__Container
+  rowId="1"
+  selected={false}
+>
+  <h3>
+    Je suis une mailing list
+  </h3>
+  <p
+    className="project-title"
+  >
+    Je suis un titre de projet
+  </p>
+  <MailingListItemstyle__ButtonMembers
+    onClick={[Function]}
+    type="button"
+  >
+    <Icon
+      color="#6C757D"
+      name="new-user"
+      size={13}
+    />
+    <p>
+      2
+       
+      <FormattedMessage
+        id="global.members"
+        values={
+          Object {
+            "num": 2,
+          }
+        }
+      />
+    </p>
+  </MailingListItemstyle__ButtonMembers>
+</MailingListItemstyle__Container>
+`;
+
+exports[`<MailingListItem /> should renders correctly when selected 1`] = `
+<MailingListItemstyle__Container
+  rowId="1"
+  selected={true}
+>
+  <h3>
+    Je suis une mailing list
+  </h3>
+  <p
+    className="project-title"
+  >
+    Je suis un titre de projet
+  </p>
+  <MailingListItemstyle__ButtonMembers
+    onClick={[Function]}
+    type="button"
+  >
+    <Icon
+      color="#6C757D"
+      name="new-user"
+      size={13}
+    />
+    <p>
+      2
+       
+      <FormattedMessage
+        id="global.members"
+        values={
+          Object {
+            "num": 2,
+          }
+        }
+      />
+    </p>
+  </MailingListItemstyle__ButtonMembers>
+</MailingListItemstyle__Container>
+`;

@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import { connect } from 'react-redux';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import DropdownSelect from '~ui/DropdownSelect';
 import Collapsable from '~ui/Collapsable';
@@ -24,19 +25,29 @@ import FilterTag from '~ui/Analysis/FilterTag';
 import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
 import ProjectAdminParticipant from '../ProjectAdminParticipant/ProjectAdminParticipant';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
-import { HeaderContainer } from './ProjetAdminParticipants.style';
+import { HeaderContainer, ButtonSendMail } from './ProjetAdminParticipants.style';
 import NoParticipant from '~/components/Admin/Project/ProjectAdminParticipantTab/NoParticipant/NoParticipant';
 import ExportButton from '~/components/Admin/Project/ExportButton/ExportButton';
 import type { ProjectAdminParticipants_project } from '~relay/ProjectAdminParticipants_project.graphql';
+import colors from '~/utils/colors';
+import ModalCreateMailingList from '~/components/Admin/Project/ProjectAdminParticipantTab/ModalCreateMailingList/ModalCreateMailingList';
+import type { GlobalState } from '~/types';
 
 export const PROJECT_ADMIN_PARTICIPANT_PAGINATION = 30;
 
 type Props = {|
   +relay: RelayPaginationProp,
   +project: ProjectAdminParticipants_project,
+  +hasFeatureEmail: boolean,
 |};
 
-const DashboardHeader = ({ project }: $Diff<Props, { relay: * }>) => {
+type HeaderProps = {|
+  +project: ProjectAdminParticipants_project,
+  +showModalCreateMailingList: boolean => void,
+  +hasFeatureEmail: boolean,
+|};
+
+const DashboardHeader = ({ project, showModalCreateMailingList, hasFeatureEmail }: HeaderProps) => {
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch } = useProjectAdminParticipantsContext();
   const intl = useIntl();
@@ -107,35 +118,59 @@ const DashboardHeader = ({ project }: $Diff<Props, { relay: * }>) => {
 
   return (
     <React.Fragment>
-      <p>
-        {rowsCount}{' '}
-        <FormattedMessage id="project.preview.counters.contributors" values={{ num: rowsCount }} />
-      </p>
-      <AnalysisProposalListFiltersContainer>
-        <AnalysisProposalListFiltersAction>{renderFilters}</AnalysisProposalListFiltersAction>
-        {filtersOrdered.length > 0 && selectedRows.length === 0 && (
-          <AnalysisProposalListFiltersList>
-            {filtersOrdered.map(({ id, name, action, icon, color }) => (
-              <FilterTag
-                key={id}
-                onClose={action ? () => dispatch((({ type: action }: any): Action)) : null}
-                icon={icon ? <Icon name={ICON_NAME[icon]} size="1rem" color="#fff" /> : null}
-                bgColor={color}>
-                {name}
-              </FilterTag>
-            ))}
-          </AnalysisProposalListFiltersList>
-        )}
-      </AnalysisProposalListFiltersContainer>
+      {selectedRows.length > 0 && hasFeatureEmail ? (
+        <React.Fragment>
+          <FormattedMessage
+            id="admin-proposals-list-selected"
+            tagName="p"
+            values={{
+              itemCount: selectedRows.length,
+            }}
+          />
+
+          <ButtonSendMail type="button" onClick={() => showModalCreateMailingList(true)}>
+            <Icon name={ICON_NAME.sendMail} color={colors.blue} size={16} />
+            <FormattedMessage id="send-mail" />
+          </ButtonSendMail>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <p>
+            {rowsCount}{' '}
+            <FormattedMessage
+              id="project.preview.counters.contributors"
+              values={{ num: rowsCount }}
+            />
+          </p>
+          <AnalysisProposalListFiltersContainer>
+            <AnalysisProposalListFiltersAction>{renderFilters}</AnalysisProposalListFiltersAction>
+            {filtersOrdered.length > 0 && selectedRows.length === 0 && (
+              <AnalysisProposalListFiltersList>
+                {filtersOrdered.map(({ id, name, action, icon, color }) => (
+                  <FilterTag
+                    key={id}
+                    onClose={action ? () => dispatch((({ type: action }: any): Action)) : null}
+                    icon={icon ? <Icon name={ICON_NAME[icon]} size="1rem" color="#fff" /> : null}
+                    bgColor={color}>
+                    {name}
+                  </FilterTag>
+                ))}
+              </AnalysisProposalListFiltersList>
+            )}
+          </AnalysisProposalListFiltersContainer>
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 };
 
-export const ProjectAdminParticipants = ({ project, relay }: Props) => {
+export const ProjectAdminParticipants = ({ project, relay, hasFeatureEmail }: Props) => {
   const { parameters, status, dispatch } = useProjectAdminParticipantsContext();
+  const { selectedRows } = usePickableList();
   const intl = useIntl();
   const hasParticipants = project.participants?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
+  const [isModalCreateMailingListOpen, showModalCreateMailingList] = React.useState<boolean>(false);
 
   return (
     <AnalysisPickableListContainer>
@@ -191,9 +226,13 @@ export const ProjectAdminParticipants = ({ project, relay }: Props) => {
         hasMore={project.participants?.pageInfo.hasNextPage}
         loader={<AnalysisProposalListLoader key="loader" />}>
         <AnalysisProposalListHeaderContainer
-          isSelectable={false}
-          disabled={!hasSelectedFilters && !hasParticipants}>
-          <DashboardHeader project={project} />
+          disabled={!hasSelectedFilters && !hasParticipants}
+          isSelectable={hasFeatureEmail}>
+          <DashboardHeader
+            project={project}
+            showModalCreateMailingList={showModalCreateMailingList}
+            hasFeatureEmail={hasFeatureEmail}
+          />
         </AnalysisProposalListHeaderContainer>
 
         <PickableList.Body>
@@ -207,6 +246,7 @@ export const ProjectAdminParticipants = ({ project, relay }: Props) => {
                   participant={participant}
                   key={participant.id}
                   rowId={participant.id}
+                  selected={selectedRows.includes(participant.id)}
                 />
               ))
           ) : (
@@ -214,11 +254,18 @@ export const ProjectAdminParticipants = ({ project, relay }: Props) => {
           )}
         </PickableList.Body>
       </PickableList>
+
+      <ModalCreateMailingList
+        show={isModalCreateMailingListOpen}
+        onClose={() => showModalCreateMailingList(false)}
+        members={selectedRows}
+        project={project}
+      />
     </AnalysisPickableListContainer>
   );
 };
 
-export default createPaginationContainer(
+const ProjectAdminParticipantsRelay = createPaginationContainer(
   ProjectAdminParticipants,
   {
     project: graphql`
@@ -234,6 +281,7 @@ export default createPaginationContainer(
           contribuableId: { type: "ID" }
         ) {
         id
+        title
         steps {
           __typename
           id
@@ -282,6 +330,7 @@ export default createPaginationContainer(
             hasNextPage
           }
           edges {
+            cursor
             node {
               id
               userType {
@@ -290,9 +339,9 @@ export default createPaginationContainer(
               }
               ...ProjectAdminParticipant_participant @arguments(contribuableId: $contribuableId)
             }
-            cursor
           }
         }
+        ...ModalCreateMailingList_project
       }
     `,
   },
@@ -348,3 +397,11 @@ export default createPaginationContainer(
     `,
   },
 );
+
+const mapStateToProps = (state: GlobalState) => ({
+  hasFeatureEmail: state.default.features.unstable__emailing || false,
+});
+
+const ProjectAdminParticipantsConnected = connect(mapStateToProps)(ProjectAdminParticipantsRelay);
+
+export default ProjectAdminParticipantsConnected;

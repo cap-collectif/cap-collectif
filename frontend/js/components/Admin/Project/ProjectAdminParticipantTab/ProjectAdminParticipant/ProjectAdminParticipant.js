@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { connect } from 'react-redux';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -17,17 +18,21 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
 import { translateContent } from '~/utils/ContentTranslator';
 import { useProjectAdminParticipantsContext } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context';
+import type { GlobalState } from '~/types';
 
 type Props = {|
   participant: ProjectAdminParticipant_participant,
   rowId: string,
+  selected: boolean,
+  hasFeatureEmail: boolean,
 |};
 
-const ProjectAdminParticipant = ({ participant }: Props) => {
+const ProjectAdminParticipant = ({ participant, selected, hasFeatureEmail }: Props) => {
   const intl = useIntl();
   const { dispatch } = useProjectAdminParticipantsContext();
 
   const {
+    id,
     username,
     adminUrl,
     firstname,
@@ -45,7 +50,7 @@ const ProjectAdminParticipant = ({ participant }: Props) => {
   const hasAccountDeleted = username === 'deleted-user';
 
   return (
-    <Container isSelectable={false}>
+    <Container rowId={id} selected={selected} isSelectable={hasFeatureEmail}>
       <ParticipantInfo>
         <UsernameContainer>
           <a href={adminUrl}>{translateContent(username)}</a>
@@ -127,10 +132,11 @@ const ProjectAdminParticipant = ({ participant }: Props) => {
   );
 };
 
-export default createFragmentContainer(ProjectAdminParticipant, {
+const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminParticipant, {
   participant: graphql`
     fragment ProjectAdminParticipant_participant on User
       @argumentDefinitions(contribuableId: { type: "ID" }) {
+      id
       username
       firstname
       lastname
@@ -153,3 +159,11 @@ export default createFragmentContainer(ProjectAdminParticipant, {
     }
   `,
 });
+
+const mapStateToProps = (state: GlobalState) => ({
+  hasFeatureEmail: state.default.features.unstable__emailing || false,
+});
+
+const ProjectAdminParticipantConnected = connect(mapStateToProps)(ProjectAdminParticipantRelay);
+
+export default ProjectAdminParticipantConnected;

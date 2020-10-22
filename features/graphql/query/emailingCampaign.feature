@@ -179,7 +179,7 @@ Scenario: GraphQL client wants to get search a campaign
   """
   {
     "query": "{
-      emailingCampaigns(search: \"COVID-19\") {
+      emailingCampaigns(term: \"COVID-19\") {
         totalCount
         edges {
           node {

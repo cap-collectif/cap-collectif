@@ -93,6 +93,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('sentry_log');
         $this->manager->activate('remind_user_account_confirmation');
         $this->manager->activate('unstable__remote_events');
+        $this->manager->deactivate('unstable__emailing');
 
         if ('test' === $this->env) {
             $this->manager->activate('votes_min');

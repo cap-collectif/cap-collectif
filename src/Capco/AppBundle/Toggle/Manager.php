@@ -66,6 +66,7 @@ class Manager
     public const unstable__remote_events = 'unstable__remote_events';
     public const user_invitations = 'user_invitations';
     public const majority_vote_question = 'majority_vote_question';
+    public const unstable__emailing = 'unstable__emailing';
 
     public static $toggles = [
         self::graphql_query_analytics,
@@ -126,6 +127,7 @@ class Manager
         self::unstable__remote_events,
         self::user_invitations,
         self::majority_vote_question,
+        self::unstable__emailing,
     ];
     protected $toggleManager;
 

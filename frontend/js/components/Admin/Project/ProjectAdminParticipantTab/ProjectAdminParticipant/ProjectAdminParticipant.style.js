@@ -3,12 +3,17 @@ import styled, { type StyledComponent } from 'styled-components';
 import PickableList from '~ui/List/PickableList';
 import colors from '~/utils/colors';
 
-export const Container: StyledComponent<{}, {}, typeof PickableList.Row> = styled(PickableList.Row)`
+export const Container: StyledComponent<
+  { selected?: boolean },
+  {},
+  typeof PickableList.Row,
+> = styled(PickableList.Row)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
+  background-color: ${props => (props.selected ? '#ECF5FF' : '#fff')};
 
   .pickableList-row-content {
     width: 100%;

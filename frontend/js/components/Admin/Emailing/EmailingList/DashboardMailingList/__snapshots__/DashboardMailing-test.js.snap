@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardMailingList /> should renders correctly 1`] = `
+<Fragment>
+  <DashboardMailingListstyle__Header>
+    <ClearableInput
+      disabled={false}
+      icon={
+        <i
+          className="cap cap-magnifier"
+        />
+      }
+      id="search"
+      initialValue={null}
+      name="search"
+      onClear={[Function]}
+      onSubmit={[Function]}
+      placeholder="global.menu.search"
+      type="text"
+    />
+  </DashboardMailingListstyle__Header>
+  <PickableList
+    hasMore={false}
+    isLoading={false}
+    loader={<EmailingLoader />}
+    onScrollToBottom={[Function]}
+    useInfiniteScroll={true}
+  >
+    <DashboardMailingListstyle__DashboardMailingListHeader
+      disabled={false}
+      isSelectable={true}
+    >
+      <DashboardHeader
+        showModalDelete={[Function]}
+      />
+    </DashboardMailingListstyle__DashboardMailingListHeader>
+    <PickableList.Body>
+      <Relay(MailingListItem)
+        key="1"
+        mailingList={
+          Object {
+            "$fragmentRefs": null,
+            "id": "1",
+          }
+        }
+        rowId="1"
+        selected={false}
+        setMailingListModal={[Function]}
+      />
+      <Relay(MailingListItem)
+        key="1"
+        mailingList={
+          Object {
+            "$fragmentRefs": null,
+            "id": "1",
+          }
+        }
+        rowId="1"
+        selected={false}
+        setMailingListModal={[Function]}
+      />
+    </PickableList.Body>
+  </PickableList>
+  <ModalConfirmDelete
+    onClose={[Function]}
+    show={false}
+  />
+</Fragment>
+`;

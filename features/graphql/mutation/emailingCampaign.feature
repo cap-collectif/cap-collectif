@@ -116,7 +116,7 @@ Scenario: GraphQL client wants to create a campaign from a mailing list
         "error": null,
         "emailingCampaign": {
           "mailingList": {
-            "id": "mailignListFromCovidProject",
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0",
             "isDeletable": false
           },
           "mailingInternal": null
@@ -365,7 +365,7 @@ Scenario: GraphQL client updates a campaign with a mailing list
           "senderEmail": "new@cap-collectif.com",
           "senderName": "new sender name",
           "mailingList": {
-            "id": "mailignListFromCovidProject"
+            "id": "TWFpbGluZ0xpc3Q6bWFpbGlnbkxpc3RGcm9tQ292aWRQcm9qZWN0"
           }
         }
       }

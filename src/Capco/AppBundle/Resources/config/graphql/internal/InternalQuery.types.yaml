@@ -458,6 +458,10 @@ InternalQuery:
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MailingList\\MailingListResolver", [args])'
                 argsBuilder: 'Relay::Connection'
+                args:
+                    term:
+                        type: 'String'
+                        description: 'If provided, filter lists by name'
             emailingCampaigns:
                 type: EmailingCampaignConnection!
                 description: 'Get all emailing campaigns'
@@ -476,6 +480,6 @@ InternalQuery:
                                 direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
                             }
                         description: 'The ordering direction for sending date'
-                    search:
+                    term:
                         type: 'String'
                         description: 'If provided, filter campaigns by name'

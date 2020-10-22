@@ -34,6 +34,7 @@ import ProposalCreateFusionButtonApp from '~/startup/ProposalCreateFusionButtonA
 import EventFormPageApp from './startup/EventFormPageApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
 import UserInviteAdminPageApp from '~/startup/UserInviteAdminPageApp';
+import EmailingListPageApp from '~/startup/EmailingListPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -70,4 +71,5 @@ ReactOnRails.register({
   LanguageButtonApp,
   UserInviteAdminPageApp,
   MediaAdminPageApp,
+  EmailingListPageApp,
 });

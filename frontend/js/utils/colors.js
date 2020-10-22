@@ -77,15 +77,6 @@ export const socialColors = {
   link: '#212529',
 };
 
-export const majorityDecisionColors = {
-  darkGreen: '#33691e',
-  green: '#43a047',
-  yellow: '#ffc107',
-  orange: '#ff9800',
-  red: '#b71c1c',
-  black: '#212121',
-};
-
 export const CardHeaderColors = {
   gray: colors.borderColor,
   white: colors.white,

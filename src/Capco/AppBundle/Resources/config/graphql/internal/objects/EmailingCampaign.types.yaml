@@ -23,10 +23,10 @@ EmailingCampaign:
                 type: 'String!'
                 description: 'the name displayed of the sender'
             object:
-                type: 'String'
+                type: 'String!'
                 description: 'the object of the email'
             content:
-                type: 'HTML'
+                type: 'HTML!'
                 description: 'the content of the email'
             mailingList:
                 type: 'MailingList'
@@ -38,5 +38,5 @@ EmailingCampaign:
                 type: 'DateTime'
                 description: 'the date when the email has been sent or shall be'
             status:
-                type: 'EmailingCampaignStatus'
+                type: 'EmailingCampaignStatus!'
                 description: 'the status of the campaign'

@@ -10,6 +10,9 @@ MailingList:
             id:
                 type: 'ID!'
                 description: 'uuid of the mailing list'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: MailingList
             name:
                 type: 'String!'
                 description: 'name of the mailing list'

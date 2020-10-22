@@ -30,7 +30,7 @@ class EmailingCampaignResolver implements ResolverInterface
                 $argument->offsetGet('status'),
                 $argument->offsetGet('orderBy')['field'],
                 $argument->offsetGet('orderBy')['direction'],
-                $argument->offsetGet('search')
+                $argument->offsetGet('term')
             );
             $totalCount = \count($results);
 

@@ -95,6 +95,7 @@ export type FeatureToggles = {
   report_browers_errors_to_sentry: ?boolean,
   user_invitations: ?boolean,
   majority_vote_question: ?boolean,
+  unstable__emailing: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;

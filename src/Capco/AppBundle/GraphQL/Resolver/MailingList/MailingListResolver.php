@@ -19,8 +19,15 @@ class MailingListResolver implements ResolverInterface
     public function __invoke(Argument $argument)
     {
         $totalCount = 0;
-        $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount) {
-            $results = $this->repository->findPaginated($limit, $offset);
+        $paginator = new Paginator(function (int $offset, int $limit) use (
+            &$totalCount,
+            $argument
+        ) {
+            $results = $this->repository->findPaginated(
+                $limit,
+                $offset,
+                $argument->offsetGet('term')
+            );
             $totalCount = \count($results);
 
             return $results;

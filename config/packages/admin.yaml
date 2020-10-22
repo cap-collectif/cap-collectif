@@ -988,6 +988,11 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: global-typeface }
 
+    Capco\AdminBundle\Admin\EmailingListAdmin:
+        arguments: [ ~, Capco\AppBundle\Entity\Font, Capco\AdminBundle\Controller\EmailingController ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin-menu-emailing-list }
+
     Capco\AdminBundle\Admin\UserInviteAdmin:
         arguments:
             [

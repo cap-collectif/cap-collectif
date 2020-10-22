@@ -18,7 +18,7 @@ export const Container: StyledComponent<
   className: 'pickableList-header',
 })`
   position: relative;
-  padding: 8px 15px;
+  padding: 15px 10px;
   display: flex;
   align-items: center;
   background: ${colors.formBgc};
@@ -32,10 +32,9 @@ export const Container: StyledComponent<
     max-width: ${CHECKBOX_CELL_WIDTH};
     width: ${CHECKBOX_CELL_WIDTH};
     height: ${CHECKBOX_CELL_WIDTH};
-    margin-top: 2px;
     flex: none;
     align-self: start;
-    margin-right: 8px;
+    margin: 0 8px 0 0;
   }
   & + ${/* sc-selector */ PickableListBodyContainer} {
     border-top: none;

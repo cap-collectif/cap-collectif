@@ -3146,10 +3146,10 @@ type EmailingCampaign implements Node {
   senderName: String!
 
   """the object of the email"""
-  object: String
+  object: String!
 
   """the content of the email"""
-  content: HTML
+  content: HTML!
 
   """the list of users who shall receive the email"""
   mailingList: MailingList
@@ -3161,7 +3161,7 @@ type EmailingCampaign implements Node {
   sendAt: DateTime
 
   """the status of the campaign"""
-  status: EmailingCampaignStatus
+  status: EmailingCampaignStatus!
 }
 
 """A connection to a list of items."""
@@ -3645,6 +3645,7 @@ enum FeatureFlagType {
   user_invitations
   votes_min
   majority_vote_question
+  unstable__emailing
 }
 
 """Require a firstname"""
@@ -8123,6 +8124,9 @@ type Query {
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """If provided, filter lists by name"""
+    term: String
   ): MailingListConnection!
 
   """Get all emailing campaigns"""
@@ -8150,7 +8154,7 @@ type Query {
     orderBy: EmailingCampaignOrder = {field: SEND_AT, direction: DESC}
 
     """If provided, filter campaigns by name"""
-    search: String
+    term: String
   ): EmailingCampaignConnection!
 }
 

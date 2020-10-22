@@ -14,14 +14,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class MailingListRepository extends EntityRepository
 {
-    public function findPaginated(?int $limit, ?int $offset): array
+    public function findPaginated(?int $limit, ?int $offset, ?string $search): array
     {
-        return $this->createQueryBuilder('ml')
+        $qb = $this->createQueryBuilder('ml')
             ->setFirstResult($offset ?? 0)
             ->setMaxResults($limit ?? 50)
-            ->addOrderBy('ml.id')
-            ->getQuery()
-            ->getResult();
+            ->addOrderBy('ml.id');
+        if ($search) {
+            $qb->andWhere('ml.name LIKE :name')->setParameter('name', "%${search}%");
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     public function getMailingListByUser(User $user): array

@@ -111,6 +111,7 @@ export const ICON_NAME = {
   vidIcon: 'vidIcon',
   docIcon: 'docIcon',
   fileIcon: 'fileIcon',
+  fileIcon2: 'fileIcon2',
   bookmark: 'bookmark',
   budget: 'budget',
   vote: 'vote',
@@ -129,6 +130,7 @@ export const ICON_NAME = {
   micO: 'mic-o',
   thumbO: 'thumb-o',
   certified: 'certified',
+  sendMail: 'send-mail',
 };
 
 type Props = {|
@@ -358,6 +360,8 @@ const getIcon = name => {
       return <Icons.DocIcon />;
     case 'fileIcon':
       return <Icons.FileIcon />;
+    case 'fileIcon2':
+      return <Icons.FileIcon2 />;
     case 'bookmark':
       return <Icons.Bookmark />;
     case 'budget':
@@ -394,6 +398,8 @@ const getIcon = name => {
       return <Icons.ThumbO />;
     case 'certified':
       return <Icons.Certified />;
+    case 'send-mail':
+      return <Icons.SendMail />;
     default:
       return <div />;
   }
