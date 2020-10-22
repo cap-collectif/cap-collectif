@@ -1,6 +1,6 @@
 // @flow
 import styled, { css, type StyledComponent } from 'styled-components';
-import colors from '~/utils/colors';
+import colors, { styleGuideColors } from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
 type Props = {
@@ -30,7 +30,7 @@ const styleMajorityNotSelected = (color: string) => css`
     background-color: ${color};
 
     .label-container {
-      color: #fff !important;
+      color: ${color ? '#fff' : styleGuideColors.darkGray} !important;
     }
   }
 `;
@@ -40,7 +40,7 @@ const MajorityContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div
 })`
   ${({ color, asPreview, hasMajoritySelected, checked, disabled, disableColors }: Props) => css`
   position: relative;
-    background-color: ${disableColors && !checked ? colors.darkerGray : color};
+    background-color: ${disableColors && !checked ? colors.darkerGray : color ?? colors.black};
     pointer-events: ${asPreview ? 'none' : 'initial'};
     
     &:hover {
