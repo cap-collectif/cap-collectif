@@ -124,11 +124,11 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
         "$refType": null,
         "analyses": Array [
           Object {
-            "id": "analyse2Id",
-            "state": "FAVOURABLE",
-            "updatedBy": Object {
+            "analyst": Object {
               "id": "Pipoune",
             },
+            "id": "analyse2Id",
+            "state": "FAVOURABLE",
           },
         ],
         "analysts": Array [
@@ -146,17 +146,17 @@ exports[`<ProposalAnalysisPanel /> renders correctly 1`] = `
         "assessment": Object {
           "id": "assessmentId",
           "state": "UNFAVOURABLE",
-          "updatedBy": Object {
+          "supervisor": Object {
             "id": "Ruel",
           },
         },
         "decision": Object {
+          "decisionMaker": Object {
+            "id": "Ush",
+          },
           "id": "decisionId",
           "isApproved": false,
           "state": "IN_PROGRESS",
-          "updatedBy": Object {
-            "id": "Ush",
-          },
         },
         "decisionMaker": Object {
           "$fragmentRefs": null,

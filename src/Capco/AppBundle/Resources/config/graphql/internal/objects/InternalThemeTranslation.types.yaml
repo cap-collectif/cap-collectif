@@ -1,14 +1,18 @@
 InternalThemeTranslation:
-  type: object
-  config:
-    name: ThemeTranslation
-    description: 'A translation theme.'
-    fields:
-      locale:
-        type: 'String!'
-      title:
-        type: 'String'
-      body:
-        type: 'String'
-      teaser:
-        type: 'String'
+    type: object
+    config:
+        name: ThemeTranslation
+        description: 'A translation theme.'
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+                description: 'The theme translation related locale.'
+            title:
+                type: 'String'
+                description: 'The title of the theme translation.'
+            body:
+                type: 'String'
+                description: 'The body of the theme translation.'
+            teaser:
+                type: 'String'
+                description: 'The theme translation teaser.'

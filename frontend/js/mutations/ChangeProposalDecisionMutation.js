@@ -75,7 +75,7 @@ const mutation = graphql`
             }
             id
             state
-            updatedBy {
+            decisionMaker {
               id
             }
             isApproved

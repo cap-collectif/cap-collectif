@@ -15,7 +15,7 @@ const revokeAnalystsToProposalsMutation = /* GraphQL*/ `
               id
             }
             analyses {
-              updatedBy {
+              analyst {
                 username
                 id
               }

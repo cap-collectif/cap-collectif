@@ -10,6 +10,8 @@ use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\InputObjectType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -61,10 +63,13 @@ class DeveloperController extends Controller
      * @Route("/developer/{category}/{type}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Template("CapcoAppBundle:Developer:index.html.twig")
      */
-    public function indexAction(Request $request, $category = null, $type = null)
-    {
+    public function indexAction(
+        Request $request,
+        ParameterBagInterface $parameters,
+        $category = null,
+        $type = null
+    ) {
         $cachedItem = $this->cache->getItem(self::CACHE_KEY);
-
         if (!$cachedItem->isHit()) {
             $this->typeResolver->setCurrentSchemaName('public');
 
@@ -109,12 +114,32 @@ class DeveloperController extends Controller
                 'DateTime',
                 'URI',
             ];
+
             foreach ($this->typeResolver->getSolutions() as $solutionID => $solution) {
                 $aliases = $this->typeResolver->getSolutionAliases($solutionID);
 
+                $existsInPreviewDirectory =
+                    (new Finder())
+                        ->files()
+                        ->name($aliases[0] . '.types.yaml')
+                        ->in([
+                            $parameters->get('kernel.project_dir') .
+                            '/src/Capco/AppBundle/Resources/config/graphql/preview/',
+                        ])
+                        ->count() > 0;
+                $existsInPublicDirectory =
+                    (new Finder())
+                        ->files()
+                        ->name($aliases[0] . '.types.yaml')
+                        ->in([
+                            $parameters->get('kernel.project_dir') .
+                            '/src/Capco/AppBundle/Resources/config/graphql/public/',
+                        ])
+                        ->count() > 0;
+
                 // We set info about preview
                 $solution->{'preview'} = false;
-                if ('Preview' === substr($aliases[0], 0, 7)) {
+                if ('Preview' === substr($aliases[0], 0, 7) || $existsInPreviewDirectory) {
                     $solution->{'preview'} = true;
                     $solution->{'previewHasAPublicType'} = \in_array(
                         str_replace('Preview', 'Public', $aliases[0]),
@@ -131,7 +156,8 @@ class DeveloperController extends Controller
                 if (
                     !\in_array($aliases[0], $publicWhiteList) &&
                     false === $solution->{'preview'} &&
-                    'Public' !== substr($aliases[0], 0, 6)
+                    'Public' !== substr($aliases[0], 0, 6) &&
+                    (!$existsInPreviewDirectory && !$existsInPublicDirectory)
                 ) {
                     continue;
                 }

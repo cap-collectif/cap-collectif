@@ -1,7 +1,7 @@
 PostPublicationStatus:
   type: enum
   config:
-    description: 'Available statuses'
+    description: 'Available publication statuses for a post.'
     values:
       PUBLISHED:
         value: '@=constant("Capco\\AppBundle\\Enum\\PostPublicationStatus::PUBLISHED")'

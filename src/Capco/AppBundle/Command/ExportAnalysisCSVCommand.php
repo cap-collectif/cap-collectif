@@ -52,26 +52,26 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
     ];
 
     public const ANALYST_DEFAULT_HEADER = [
-        'proposal_analyst_id' => 'updatedBy.id',
-        'proposal_analyst_username' => 'updatedBy.username',
-        'proposal_analyst_email' => 'updatedBy.email',
+        'proposal_analyst_id' => 'analyst.id',
+        'proposal_analyst_username' => 'analyst.username',
+        'proposal_analyst_email' => 'analyst.email',
         'proposal_analyst_comment' => 'comment',
         'proposal_analyst_opinion' => 'state',
         'proposal_analyst_estimated_cost' => 'estimatedCost',
     ];
 
     public const DECISION_DEFAULT_HEADER = [
-        'proposal_supervisor_id' => 'assessment.updatedBy.id',
-        'proposal_supervisor_username' => 'assessment.updatedBy.username',
-        'proposal_supervisor_email' => 'assessment.updatedBy.email',
+        'proposal_supervisor_id' => 'assessment.supervisor.id',
+        'proposal_supervisor_username' => 'assessment.supervisor.username',
+        'proposal_supervisor_email' => 'assessment.supervisor.email',
         'proposal_supervisor_comment' => 'assessment.body',
         'proposal_supervisor_CostEstimated' => 'assessment.estimatedCost',
         'proposal_supervisor_OfficialResponseDraft' => 'assessment.officialResponse',
         'proposal_supervisor_opinion' => 'assessment.state',
 
-        'proposal_decision-maker_id' => 'decision.updatedBy.id',
-        'proposal_decision-maker_username' => 'decision.updatedBy.username',
-        'proposal_decision-maker_email' => 'decision.updatedBy.email',
+        'proposal_decision-maker_id' => 'decision.decisionMaker.id',
+        'proposal_decision-maker_username' => 'decision.decisionMaker.username',
+        'proposal_decision-maker_email' => 'decision.decisionMaker.email',
         'proposal_decision-maker_CostEstimated' => 'decision.estimatedCost',
         'proposal_decision-maker_OfficialResponseDraft' => 'decision.post.publicationStatus',
         'proposal_decision-maker_OfficialResponseDraft_Author' => 'decision.post.authors',
@@ -134,7 +134,7 @@ fragment proposalInfos on Proposal {
   bodyText
   estimation
   analyses {
-    updatedBy {
+    analyst {
       ...analystInfos
     }
     comment
@@ -533,7 +533,7 @@ ${PROPOSAL_FRAGMENT}
                   officialResponse
                   state
                   body
-                  updatedBy{
+                  supervisor{
                     ...supervisorInfos
                   }
                 }
@@ -553,7 +553,7 @@ ${PROPOSAL_FRAGMENT}
                       username
                     }
                   }
-                	updatedBy{
+                  decisionMaker{
                     ...decisionMakerInfos
                   }  
                 }

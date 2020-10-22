@@ -33,7 +33,7 @@ Object {
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
             "reference": "1",
             "status": Object {
-              "color": "success",
+              "color": "SUCCESS",
               "id": "statusIdfAnalyse4",
               "name": "En cours d'analyse",
             },
@@ -64,7 +64,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
         "reference": "6",
         "status": Object {
-          "color": "info",
+          "color": "INFO",
           "id": "statusIdfCollect1",
           "name": "Nouveau projet",
         },
@@ -93,7 +93,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "reference": "1",
         "status": Object {
-          "color": "info",
+          "color": "INFO",
           "id": "status1",
           "name": "En cours",
         },
@@ -116,7 +116,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
         "reference": "1",
         "status": Object {
-          "color": "info",
+          "color": "INFO",
           "id": "status7",
           "name": "En cours",
         },
@@ -136,7 +136,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
         "reference": "2",
         "status": Object {
-          "color": "info",
+          "color": "INFO",
           "id": "status1",
           "name": "En cours",
         },
@@ -159,7 +159,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
         "reference": "12",
         "status": Object {
-          "color": "success",
+          "color": "SUCCESS",
           "id": "status2",
           "name": "Approuvé",
         },
@@ -182,7 +182,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "reference": "2",
         "status": Object {
-          "color": "success",
+          "color": "SUCCESS",
           "id": "status2",
           "name": "Approuvé",
         },
@@ -213,7 +213,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "reference": "1",
         "status": Object {
-          "color": "info",
+          "color": "INFO",
           "id": "status1",
           "name": "En cours",
         },
@@ -236,7 +236,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
         "reference": "1",
         "status": Object {
-          "color": "info",
+          "color": "INFO",
           "id": "status7",
           "name": "En cours",
         },
@@ -256,7 +256,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
         "reference": "2",
         "status": Object {
-          "color": "info",
+          "color": "INFO",
           "id": "status1",
           "name": "En cours",
         },
@@ -279,7 +279,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwxMDg=",
         "reference": "12",
         "status": Object {
-          "color": "success",
+          "color": "SUCCESS",
           "id": "status2",
           "name": "Approuvé",
         },
@@ -302,7 +302,7 @@ Object {
         "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "reference": "2",
         "status": Object {
-          "color": "success",
+          "color": "SUCCESS",
           "id": "status2",
           "name": "Approuvé",
         },

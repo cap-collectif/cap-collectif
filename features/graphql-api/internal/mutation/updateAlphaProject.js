@@ -647,11 +647,11 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               statuses: [
                 {
                   name: "Le premier statut de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
                 {
                   name: "Le deuxième statut de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
               ],
             },
@@ -701,15 +701,15 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               statuses: [
                 {
                   name: "Le premier statut de l'étape de dépôt",
-                  color: 'info',
+                  color: 'INFO',
                 },
                 {
                   name: "Le deuxième statut de l'étape de dépôt",
-                  color: 'danger',
+                  color: 'DANGER',
                 },
                 {
                   name: "Le troisième statut de l'étape de dépôt",
-                  color: 'warning',
+                  color: 'WARNING',
                 },
               ],
               requirements: [
@@ -728,11 +728,11 @@ describe('Internal|updateAlphaProject complex mutations', () => {
               statuses: [
                 {
                   name: "Le premier statut de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
                 {
                   name: "Le deuxième statut de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
               ],
             },
@@ -780,17 +780,17 @@ describe('Internal|updateAlphaProject complex mutations', () => {
                 {
                   id: thirdStatusSecondStepId,
                   name: "Le troisième statut devenu premier de l'étape de dépôt",
-                  color: 'warning',
+                  color: 'WARNING',
                 },
                 {
                   id: firstStatusSecondStepId,
                   name: "Le premier statut devenu deuxième de l'étape de dépôt",
-                  color: 'info',
+                  color: 'INFO',
                 },
                 {
                   id: secondStatusSecondStepId,
                   name: "Le deuxième statut devenu troisième de l'étape de dépôt",
-                  color: 'danger',
+                  color: 'DANGER',
                 },
               ],
               requirements: [
@@ -813,12 +813,12 @@ describe('Internal|updateAlphaProject complex mutations', () => {
                 {
                   id: secondStatusThirdStepId,
                   name: "Le deuxième statut devenu premier de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
                 {
                   id: firstStatusThirdStepId,
                   name: "Le premier statut devenu deuxième de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
               ],
             },

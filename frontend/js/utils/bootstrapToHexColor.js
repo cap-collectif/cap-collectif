@@ -1,13 +1,13 @@
 // @flow
 export const bootstrapToHex = (key: string) => {
   switch (key) {
-    case 'warning':
+    case 'WARNING':
       return '#f0ad4e';
-    case 'info':
+    case 'INFO':
       return '#5bc0de';
-    case 'success':
+    case 'SUCCESS':
       return '#5cb85c';
-    case 'danger':
+    case 'DANGER':
       return '#d9534f';
     default:
       console.warn('unknown bootstrap color: ', key); // eslint-disable-line no-console

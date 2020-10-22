@@ -500,16 +500,16 @@ type AnalysisConfiguration {
   effectiveDate: DateTime
 
   """The available favourable statuses to apply on contributions."""
-  favourableStatus: Status
+  favourableStatus: ProposalStepStatus
 
   """The unfavourable status to apply on contributions."""
-  unfavourableStatuses: [Status!]
+  unfavourableStatuses: [ProposalStepStatus!]
 
   """The step to which proposals will be moved."""
   moveToSelectionStep: SelectionStep
 
   """The status to apply on next step."""
-  selectionStepStatus: Status
+  selectionStepStatus: ProposalStepStatus
 
   """The creation date."""
   createdAt: DateTime!
@@ -1587,7 +1587,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
-  statuses: [Status!]!
+  statuses: [ProposalStepStatus!]!
   defaultSort: String
   open: Boolean!
 
@@ -1615,7 +1615,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   ): ProposalVoteConnection!
   form: ProposalForm
   private: Boolean!
-  defaultStatus: Status
+  defaultStatus: ProposalStepStatus
 
   """A list of contributor associated with the step."""
   contributors(
@@ -2296,13 +2296,13 @@ type ContactForm implements Node {
 
   """The title of the contact Form"""
   title(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
 
   """The body of the contact Form"""
   body(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
 
@@ -2311,7 +2311,7 @@ type ContactForm implements Node {
 
   """The confidentiality text for the contact Form"""
   confidentiality(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
   translations: [ContactFormTranslation!]!
@@ -3039,7 +3039,7 @@ type DeleteVersionPayload {
 interface District {
   id: ID!
   name(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
   geojson: GeoJSON
@@ -3089,7 +3089,7 @@ interface Draftable {
   """The ID of an object"""
   id: ID!
 
-  """Is the object a draft."""
+  """Whether or not the entity is a draft."""
   draft: Boolean!
 
   """Identifies when the entity was undraft at."""
@@ -5611,11 +5611,11 @@ type Page implements UniformResourceLocatable {
   """The ID of an object"""
   id: ID!
   title(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
   body(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
   translations: [PageTranslation!]!
@@ -5682,10 +5682,57 @@ type PhoneRequirement implements Node & Requirement {
   viewerValue: String
 }
 
-"""Represents a type that can be retrieved by a URL on the admin."""
-type Post implements Node & Commentable & UniformResourceLocatable & UniformResourceAdminLocatable {
+"""A commentable"""
+type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocatable & Commentable {
   """The ID of an object"""
   id: ID!
+
+  """The URL to this resource."""
+  url: URI!
+
+  """The admin url for this post."""
+  adminUrl: URI!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The post's title."""
+  title(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
+  """Identifies the date and time when the object was published."""
+  publishedAt: DateTime
+
+  """The post's authors."""
+  authors: [User!]!
+
+  """The publication status for this post."""
+  publicationStatus: PostPublicationStatus!
+
+  """Wether or not the post is commentable."""
+  commentable: Boolean!
+
+  """Abstract of the post."""
+  abstract(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+
+  """The post's related media."""
+  media: Media
+
+  """The post's related themes."""
+  themes: [Theme!]!
+  body(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): HTML
+  translations: [PostTranslation!]!
 
   """The comments related to the commentable."""
   comments(
@@ -5706,40 +5753,11 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
     last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
-
-  """The URL to this resource."""
-  url: URI!
-
-  """The admin url for this post."""
-  adminUrl: URI!
-  title(
-    """The locale to translate content (eg: fr-FR)."""
-    locale: TranslationLocale
-  ): String
-  relatedContent: [PostRelatedContent!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  publishedAt: DateTime
-  authors: [User!]!
-
-  """The publication status for this post."""
-  publicationStatus: PostPublicationStatus!
-  commentable: Boolean!
   displayedOnBlog: Boolean!
-  abstract(
-    """The locale to translate content (eg: fr-FR)."""
-    locale: TranslationLocale
-  ): String!
-  media: Media
-  themes: [Theme!]!
-  body(
-    """The locale to translate content (eg: fr-FR)."""
-    locale: TranslationLocale
-  ): HTML
-  translations: [PostTranslation!]!
+  relatedContent: [PostRelatedContent!]!
 }
 
-"""Available statuses"""
+"""Available publication statuses for a post."""
 enum PostPublicationStatus {
   """Normal status, publicly visible"""
   PUBLISHED
@@ -5753,11 +5771,18 @@ union PostRelatedContent = Theme | Proposal | Project
 
 """A translation post."""
 type PostTranslation {
-  locale: String!
+  """The post translation related locale."""
+  locale: TranslationLocale!
+
+  """The title of the post translation."""
   title: String
-  body: String
-  metaDescription: String
+
+  """The body of the post translation."""
+  body: HTML
+
+  """Abstract of the post translation."""
   abstract: String
+  metaDescription: String
   slug: String
 }
 
@@ -5902,6 +5927,8 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """Ordering options for contributors returning from the connection."""
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
 
     """The step in which the user has contributed."""
@@ -6263,7 +6290,7 @@ type ProjectConnection {
 type ProjectDistrict implements District {
   id: ID!
   name(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
   geojson: GeoJSON
@@ -6408,7 +6435,7 @@ enum ProjectVisibility {
 }
 
 """Represents a type that can be retrieved by a URL on the admin."""
-type Proposal implements Node & Publishable & UniformResourceLocatable & Trashable & Contribution & Commentable & Draftable & Reportable & UniformResourceAdminLocatable {
+type Proposal implements Node & Publishable & UniformResourceLocatable & Trashable & Draftable & Contribution & Commentable & Reportable & UniformResourceAdminLocatable {
   """The ID of an object."""
   id: ID!
 
@@ -6445,6 +6472,12 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
+  """Identifies proposals as draft."""
+  draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
+
   """Identifies the proposal title."""
   title: String!
 
@@ -6462,6 +6495,15 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     """Show the full reference?"""
     full: Boolean
   ): String!
+
+  """Analysts's analysis of the proposal."""
+  analyses: [ProposalAnalysis!]
+
+  """The decision of the decision-maker on the analysis of the proposal."""
+  decision: ProposalDecision
+
+  """The supervisor's assessment on the analysis of the proposal."""
+  assessment: ProposalAssessment
 
   """
   Return the related contribution if the contribution is related to another.
@@ -6487,12 +6529,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
-
-  """Identifies proposals as draft."""
-  draft: Boolean!
-
-  """Identifies when the entity was undraft at."""
-  undraftAt: DateTime
 
   """Does the viewer already submitted a report ?"""
   viewerHasReport: Boolean!
@@ -6575,7 +6611,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   status(
     """Used to get the status on a selection step."""
     step: ID
-  ): Status
+  ): ProposalStepStatus
   selections: [Selection!]!
   likers: [User!]!
   estimation: Int
@@ -6659,17 +6695,11 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """The supervisor of the proposal."""
   supervisor: User
 
-  """The proposal's related assessment."""
-  assessment: ProposalAssessment
-
   """Does the user can evaluate the current proposal."""
   viewerCanEvaluate: Boolean!
 
   """The decision maker of the proposal."""
   decisionMaker: User
-
-  """The proposal's related decision."""
-  decision: ProposalDecision
 
   """Does the user can give the final decision on the current proposal."""
   viewerCanDecide: Boolean!
@@ -6679,9 +6709,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Does the user can analyse the current proposal."""
   viewerCanAnalyse: Boolean!
-
-  """The proposal's related analyses."""
-  analyses: [ProposalAnalysis!]
 
   """The proposal global progress status."""
   progressStatus: ProposalProgressState!
@@ -6698,6 +6725,12 @@ enum ProposalAffiliation {
 
 """A proposal analysis."""
 type ProposalAnalysis {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
   """The proposal's analysis id."""
   id: ID!
 
@@ -6705,25 +6738,19 @@ type ProposalAnalysis {
   proposal: Proposal!
 
   """The last updated by a analyst."""
-  updatedBy: User!
+  analyst: User!
 
-  """The estimated cost of the related proposal."""
+  """The estimated cost of the related proposal in €."""
   estimatedCost: Int
 
   """The proposal's analysis comment."""
   comment: String
 
-  """The current state of the assessment."""
+  """The current state of the analysis."""
   state: ProposalAnalysisState!
 
   """The analysis responses."""
-  responses: [Response!]
-
-  """The creation date of the analysis."""
-  createdAt: DateTime!
-
-  """The last updated date."""
-  updatedAt: DateTime!
+  responses: [Response!]!
 }
 
 """Available decisions value for a proposal analysis."""
@@ -6738,7 +6765,7 @@ enum ProposalAnalysisDecision {
   NONE
 }
 
-"""Possible values of a proposal's analysis state."""
+"""The possible states for a proposal analysis."""
 enum ProposalAnalysisState {
   """The proposal's analysis is currently being edited"""
   IN_PROGRESS
@@ -6752,12 +6779,18 @@ enum ProposalAnalysisState {
   """The proposal's related analysis has been not made in time."""
   TOO_LATE
 
-  """The proposal's related analysis state is empty."""
+  """The analysis has not begun."""
   NONE
 }
 
 """A proposal assessment."""
 type ProposalAssessment {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
   """The proposal's assessment id."""
   id: ID!
 
@@ -6765,7 +6798,7 @@ type ProposalAssessment {
   proposal: Proposal!
 
   """The last updated by a supervisor."""
-  updatedBy: User!
+  supervisor: User!
 
   """The current state of the assessment."""
   state: ProposalAssessmentState!
@@ -6773,17 +6806,11 @@ type ProposalAssessment {
   """The body of the assessment."""
   body: String
 
-  """The estimated cost of the related proposal."""
+  """The estimated cost of the related proposal in €."""
   estimatedCost: Int
 
   """The official response of the proposal assessment."""
   officialResponse: String
-
-  """The creation date of the assessment."""
-  createdAt: DateTime!
-
-  """The last updated date."""
-  updatedAt: DateTime!
 }
 
 """Available decisions value for a proposal analysis related statement."""
@@ -6873,6 +6900,12 @@ type ProposalConnection {
 
 """A proposal decision."""
 type ProposalDecision {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
   """The proposal's decision id."""
   id: ID!
 
@@ -6880,12 +6913,12 @@ type ProposalDecision {
   proposal: Proposal!
 
   """The last updated by a decision-maker."""
-  updatedBy: User!
+  decisionMaker: User!
 
   """The current state of the decision."""
   isApproved: Boolean!
 
-  """The estimated cost of the related proposal."""
+  """The estimated cost of the related proposal in €."""
   estimatedCost: Int
 
   """The related post containing the official response."""
@@ -6895,13 +6928,7 @@ type ProposalDecision {
   state: ProposalDecisionState!
 
   """The step's related status assigned to the proposal."""
-  refusedReason: Status
-
-  """The creation date of the assessment."""
-  createdAt: DateTime!
-
-  """The last updated date."""
-  updatedAt: DateTime!
+  refusedReason: ProposalStepStatus
 }
 
 """Possible values of a proposal's decision state."""
@@ -6917,7 +6944,7 @@ enum ProposalDecisionState {
 type ProposalDistrict implements District {
   id: ID!
   name(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
   geojson: GeoJSON
@@ -7465,7 +7492,7 @@ interface ProposalStep {
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
-  statuses: [Status!]!
+  statuses: [ProposalStepStatus!]!
   defaultSort: String
   open: Boolean!
 
@@ -7492,6 +7519,39 @@ interface ProposalStep {
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
+}
+
+"""The given proposal status in a step."""
+type ProposalStepStatus {
+  """The id of the proposal step status."""
+  id: ID!
+
+  """The name of the proposal step status."""
+  name: String!
+
+  """The color of the proposal step status."""
+  color: ProposalStepStatusColor!
+}
+
+"""Different status type"""
+enum ProposalStepStatusColor {
+  """Info color."""
+  INFO
+
+  """Primary color."""
+  PRIMARY
+
+  """Success color."""
+  SUCCESS
+
+  """Warning color."""
+  WARNING
+
+  """Danger color."""
+  DANGER
+
+  """Default color."""
+  DEFAULT
 }
 
 """Type of vote."""
@@ -8654,13 +8714,13 @@ type RegistrationForm implements Node {
 
   """The bottom text to display"""
   topText(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
 
   """The bottom text to display"""
   bottomText(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
 
@@ -8851,7 +8911,7 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
   """The author of the contribution."""
   author: User!
 
-  """Is the object a draft."""
+  """Whether or not the entity is a draft."""
   draft: Boolean!
 
   """Identifies when the entity was undraft at."""
@@ -9465,7 +9525,7 @@ type SelectProposalPayload {
 """A budget contribution"""
 type Selection {
   step: SelectionStep!
-  status: Status
+  status: ProposalStepStatus
 }
 
 """A budget contribution"""
@@ -9670,7 +9730,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
-  statuses: [Status!]!
+  statuses: [ProposalStepStatus!]!
   defaultSort: String
   open: Boolean!
 
@@ -9726,7 +9786,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
   """The main view : grid, list or map"""
   mainView: String!
-  defaultStatus: Status
+  defaultStatus: ProposalStepStatus
 }
 
 input SendContactFormInput {
@@ -10204,22 +10264,6 @@ interface Sourceable {
   availableSourceCategories: [SourceCategory]
 }
 
-type Status {
-  id: ID!
-  name: String!
-  color: StatusColor!
-}
-
-"""Different status type"""
-enum StatusColor {
-  info
-  primary
-  success
-  warning
-  danger
-  default
-}
-
 """A step inside a project."""
 interface Step {
   """The ID of an object"""
@@ -10324,7 +10368,7 @@ enum StepState {
 input StepStatusInput {
   id: ID
   name: String
-  color: StatusColor
+  color: ProposalStepStatusColor
 }
 
 """A object style."""
@@ -10468,7 +10512,7 @@ type Theme implements UniformResourceLocatable {
   url: URI!
   id: ID!
   title(
-    """The locale to translate content (eg: fr-FR)."""
+    """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
   translations: [ThemeTranslation!]!
@@ -10476,9 +10520,16 @@ type Theme implements UniformResourceLocatable {
 
 """A translation theme."""
 type ThemeTranslation {
-  locale: String!
+  """The theme translation related locale."""
+  locale: TranslationLocale!
+
+  """The title of the theme translation."""
   title: String
+
+  """The body of the theme translation."""
   body: String
+
+  """The theme translation teaser."""
   teaser: String
 }
 

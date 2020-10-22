@@ -5,6 +5,9 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\ProposalAnalysis;
+use Capco\AppBundle\Entity\ProposalAssessment;
+use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Theme;
 use Capco\UserBundle\Entity\User;
@@ -388,6 +391,9 @@ class ReinitCommand extends Command
             AppendixType::class,
             Post::class,
             UserInvite::class,
+            ProposalAnalysis::class,
+            ProposalAssessment::class,
+            ProposalDecision::class,
         ];
 
         $classesProd = [Context::class];

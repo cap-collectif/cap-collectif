@@ -10,15 +10,15 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-                  "username": "analyst2",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
                 },
               },
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
-                  "username": "analyst",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
                 },
               },
             ],
@@ -60,15 +60,15 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-                  "username": "analyst2",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
                 },
               },
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
-                  "username": "analyst",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
                 },
               },
             ],
@@ -110,15 +110,15 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-                  "username": "analyst2",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
                 },
               },
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
-                  "username": "analyst",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
                 },
               },
             ],
@@ -156,15 +156,15 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-                  "username": "analyst2",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
                 },
               },
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
-                  "username": "analyst",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
                 },
               },
             ],
@@ -226,15 +226,15 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-                  "username": "analyst2",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
                 },
               },
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
-                  "username": "analyst",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
                 },
               },
             ],
@@ -272,15 +272,15 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
-                  "username": "analyst2",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+                  "username": "analyst",
                 },
               },
               Object {
-                "updatedBy": Object {
-                  "id": "VXNlcjp1c2VyQW5hbHlzdA==",
-                  "username": "analyst",
+                "analyst": Object {
+                  "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
+                  "username": "analyst2",
                 },
               },
             ],

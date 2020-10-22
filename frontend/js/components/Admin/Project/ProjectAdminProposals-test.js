@@ -31,12 +31,12 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
         {
           id: 'status1',
           name: 'Approuvé',
-          color: 'success',
+          color: 'SUCCESS',
         },
         {
           id: 'status2',
           name: 'Rejeté',
-          color: 'danger',
+          color: 'DANGER',
         },
       ],
       form: {
@@ -71,12 +71,12 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
         {
           id: 'status4',
           name: 'Soumis au vote',
-          color: 'info',
+          color: 'INFO',
         },
         {
           id: 'status5',
           name: 'Vote gagné',
-          color: 'success',
+          color: 'SUCCESS',
         },
       ],
     },
@@ -111,7 +111,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
           status: {
             id: 'status1',
             name: 'En cours',
-            color: 'info',
+            color: 'INFO',
           },
           form: {
             step: {
@@ -149,7 +149,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
           status: {
             id: 'status2',
             name: 'Approuvé',
-            color: 'success',
+            color: 'SUCCESS',
           },
           form: {
             step: {
@@ -187,7 +187,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
           status: {
             id: 'status2',
             name: 'Approuvé',
-            color: 'success',
+            color: 'SUCCESS',
           },
           form: {
             step: {
@@ -225,7 +225,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
           status: {
             id: 'status1',
             name: 'En cours',
-            color: 'info',
+            color: 'INFO',
           },
           form: {
             step: {
@@ -292,7 +292,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
           status: {
             id: 'status1',
             name: 'En cours',
-            color: 'info',
+            color: 'INFO',
           },
           form: {
             step: {
@@ -327,7 +327,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
           status: {
             id: 'status1',
             name: 'En cours',
-            color: 'info',
+            color: 'INFO',
           },
           form: {
             step: {
@@ -418,12 +418,12 @@ const DEFAULT_PROJECT = {
         {
           id: 'status1',
           name: 'Approuvé',
-          color: 'success',
+          color: 'SUCCESS',
         },
         {
           id: 'status2',
           name: 'Rejeté',
-          color: 'danger',
+          color: 'DANGER',
         },
       ],
       form: {
@@ -458,12 +458,12 @@ const DEFAULT_PROJECT = {
         {
           id: 'status4',
           name: 'Soumis au vote',
-          color: 'info',
+          color: 'INFO',
         },
         {
           id: 'status5',
           name: 'Vote gagné',
-          color: 'success',
+          color: 'SUCCESS',
         },
       ],
     },
@@ -498,7 +498,7 @@ const DEFAULT_PROJECT = {
           status: {
             id: 'status1',
             name: 'En cours',
-            color: 'info',
+            color: 'INFO',
           },
           form: {
             step: {
@@ -536,7 +536,7 @@ const DEFAULT_PROJECT = {
           status: {
             id: 'status2',
             name: 'Approuvé',
-            color: 'success',
+            color: 'SUCCESS',
           },
           form: {
             step: {
@@ -574,7 +574,7 @@ const DEFAULT_PROJECT = {
           status: {
             id: 'status2',
             name: 'Approuvé',
-            color: 'success',
+            color: 'SUCCESS',
           },
           form: {
             step: {
@@ -612,7 +612,7 @@ const DEFAULT_PROJECT = {
           status: {
             id: 'status1',
             name: 'En cours',
-            color: 'info',
+            color: 'INFO',
           },
           form: {
             step: {
@@ -679,7 +679,7 @@ const DEFAULT_PROJECT = {
           status: {
             id: 'status1',
             name: 'En cours',
-            color: 'info',
+            color: 'INFO',
           },
           form: {
             step: {
@@ -714,7 +714,7 @@ const DEFAULT_PROJECT = {
           status: {
             id: 'status1',
             name: 'En cours',
-            color: 'info',
+            color: 'INFO',
           },
           form: {
             step: {

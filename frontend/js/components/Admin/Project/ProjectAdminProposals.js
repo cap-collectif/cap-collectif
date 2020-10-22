@@ -677,7 +677,7 @@ export const ProjectAdminProposals = ({ project, themes, relay }: Props) => {
                       )}
 
                       <S.Label
-                        bsStyle={proposal.status?.color || 'default'}
+                        bsStyle={proposal.status?.color.toLowerCase() || 'default'}
                         onClick={() =>
                           dispatch({
                             type: 'CHANGE_STATUS_FILTER',

@@ -2,7 +2,7 @@
 
 exports[`<ProposalPreviewStatus /> render a status when proposal has a status 1`] = `
 <Status
-  bgColor="success"
+  bgColor="SUCCESS"
 >
   Projet retenu
 </Status>
@@ -27,7 +27,7 @@ exports[`<ProposalPreviewStatus /> render a trashed status for a trashed invisib
     </p>
   </ProposalPreviewStatus__TrashedReasonContainer>
   <Status
-    bgColor="default"
+    bgColor="DEFAULT"
   >
     <FormattedMessage
       id="global.deleted.feminine"
@@ -56,7 +56,7 @@ exports[`<ProposalPreviewStatus /> render a trashed status for a trashed visible
     </p>
   </ProposalPreviewStatus__TrashedReasonContainer>
   <Status
-    bgColor="default"
+    bgColor="DEFAULT"
   >
     <FormattedMessage
       id="proposal.show.trashed.reason.moderated"

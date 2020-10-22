@@ -2,16 +2,16 @@
 import styled, { type StyledComponent } from 'styled-components';
 import * as React from 'react';
 import { BsStyleColors } from '../../../utils/colors';
-import type { StatusColor } from '~relay/ProposalCollectStatus_proposal.graphql';
+import type { ProposalStepStatusColor } from '~relay/ProposalCollectStatus_proposal.graphql';
 
 type Props = {
-  bgColor: StatusColor,
+  bgColor: ProposalStepStatusColor,
   children: React.Node,
 };
 
 const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   className: props =>
-    props.bsStyle === 'primary'
+    props.bsStyle === 'PRIMARY'
       ? 'ellipsis card__status custom-primary-bgcolor'
       : 'ellipsis card__status',
 })`
@@ -38,7 +38,7 @@ export const Status = (props: Props) => {
 };
 
 Status.defaultProps = {
-  bgColor: 'default',
+  bgColor: 'DEFAULT',
 };
 
 export default Status;

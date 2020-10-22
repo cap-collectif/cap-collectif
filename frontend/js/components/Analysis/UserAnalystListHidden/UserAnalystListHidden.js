@@ -89,7 +89,7 @@ export default createFragmentContainer(UserAnalystListHidden, {
     fragment UserAnalystListHidden_proposal on Proposal {
       analyses {
         state
-        updatedBy {
+        analyst {
           id
         }
       }

@@ -359,7 +359,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "Status",
+                      "concreteType": "ProposalStepStatus",
                       "kind": "LinkedField",
                       "name": "status",
                       "plural": false,
@@ -417,7 +417,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "concreteType": "Status",
+                          "concreteType": "ProposalStepStatus",
                           "kind": "LinkedField",
                           "name": "status",
                           "plural": false,
@@ -4551,7 +4551,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": "Status",
+                                  "concreteType": "ProposalStepStatus",
                                   "kind": "LinkedField",
                                   "name": "unfavourableStatuses",
                                   "plural": true,
@@ -4606,7 +4606,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "concreteType": "User",
                               "kind": "LinkedField",
-                              "name": "updatedBy",
+                              "name": "analyst",
                               "plural": false,
                               "selections": Array [
                                 Object {
@@ -5273,7 +5273,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
-                              "concreteType": "Status",
+                              "concreteType": "ProposalStepStatus",
                               "kind": "LinkedField",
                               "name": "refusedReason",
                               "plural": false,
@@ -5385,7 +5385,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "concreteType": "User",
                               "kind": "LinkedField",
-                              "name": "updatedBy",
+                              "name": "decisionMaker",
                               "plural": false,
                               "selections": Array [
                                 Object {
@@ -5449,7 +5449,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "concreteType": "User",
                               "kind": "LinkedField",
-                              "name": "updatedBy",
+                              "name": "supervisor",
                               "plural": false,
                               "selections": Array [
                                 Object {
@@ -6300,7 +6300,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3fa52773f925582bd2de7925339b3f4b",
+          "cacheID": "f8a3c51f6818c5a67b530e0fc2dd5c75",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -6593,7 +6593,7 @@ fragment ProposalAnalysisFormPanel_proposal on Proposal {
   id
   analyses {
     id
-    updatedBy {
+    analyst {
       id
     }
     comment
@@ -6733,21 +6733,21 @@ fragment ProposalAnalysisPanel_proposal on Proposal {
   analyses {
     id
     state
-    updatedBy {
+    analyst {
       id
     }
   }
   assessment {
     state
     id
-    updatedBy {
+    supervisor {
       id
     }
   }
   decision {
     id
     state
-    updatedBy {
+    decisionMaker {
       id
     }
     isApproved
@@ -7832,7 +7832,7 @@ fragment ProposalViewAnalysisPanel_proposal on Proposal {
   id
   analyses {
     id
-    updatedBy {
+    analyst {
       id
     }
     comment

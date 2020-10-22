@@ -24,7 +24,7 @@ describe('<ProposalMapPopover />', () => {
     author: { $fragmentRefs },
     media: null,
     category: { name: 'Cat', categoryImage: null },
-    status: { name: 'cv ou quoi le frer le boss lacoste tn ou pas?', color: 'success' },
+    status: { name: 'cv ou quoi le frer le boss lacoste tn ou pas?', color: 'SUCCESS' },
   };
 
   it('should render popover with a picture given the feature is enabled', () => {

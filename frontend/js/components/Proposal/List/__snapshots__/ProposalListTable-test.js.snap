@@ -131,7 +131,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
         "status": Object {
           "text": "global.status",
           "value": Object {
-            "color": "info",
+            "color": "INFO",
             "name": "En cours",
           },
         },
@@ -428,7 +428,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       >
         <Label
           bsClass="label"
-          bsStyle="info"
+          bsStyle="INFO"
           className="badge-pill"
         >
           En cours

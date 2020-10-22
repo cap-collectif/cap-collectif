@@ -1,38 +1,14 @@
 InternalProposalDecision:
     type: object
+    inherits:
+        - PreviewProposalDecision
     config:
         description: 'A proposal decision.'
         name: ProposalDecision
         fields:
-            id:
-                builder: 'Relay::GlobalId'
-                builderConfig:
-                    typeName: ProposalDecision
-                description: "The proposal's decision id."
             proposal:
                 type: 'InternalProposal!'
-                description: 'The related proposal.'
-            updatedBy:
+            decisionMaker:
                 type: 'InternalUser!'
-                description: 'The last updated by a decision-maker.'
-            isApproved:
-                type: 'Boolean!'
-                description: 'The current state of the decision.'
-            estimatedCost:
-                type: 'Int'
-                description: 'The estimated cost of the related proposal.'
             post:
                 type: 'InternalPost!'
-                description: 'The related post containing the official response.'
-            state:
-                type: 'ProposalDecisionState!'
-                description: 'The current status of the decision on the proposal'
-            refusedReason:
-                type: 'Status'
-                description: "The step's related status assigned to the proposal."
-            createdAt:
-                type: 'DateTime!'
-                description: 'The creation date of the assessment.'
-            updatedAt:
-                type: 'DateTime!'
-                description: 'The last updated date.'

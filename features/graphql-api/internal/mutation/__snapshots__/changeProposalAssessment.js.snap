@@ -9,7 +9,7 @@ Object {
       "id": Any<String>,
       "officialResponse": null,
       "state": "IN_PROGRESS",
-      "updatedBy": Object {
+      "supervisor": Object {
         "firstname": "supervisor",
         "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
         "lastname": "supervisor",
@@ -29,7 +29,7 @@ Object {
       "id": Any<String>,
       "officialResponse": "Françaises, français, je vous ai compris !",
       "state": "FAVOURABLE",
-      "updatedBy": Object {
+      "supervisor": Object {
         "firstname": "supervisor",
         "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
         "lastname": "supervisor",
@@ -49,7 +49,7 @@ Object {
       "id": Any<String>,
       "officialResponse": "Françaises, français, je vous ai compris !",
       "state": "IN_PROGRESS",
-      "updatedBy": Object {
+      "supervisor": Object {
         "firstname": "supervisor",
         "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
         "lastname": "supervisor",
@@ -78,7 +78,7 @@ Object {
       "id": Any<String>,
       "officialResponse": "Françaises, français, je vous ai compris !",
       "state": "FAVOURABLE",
-      "updatedBy": Object {
+      "supervisor": Object {
         "firstname": "supervisor",
         "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcg==",
         "lastname": "supervisor",

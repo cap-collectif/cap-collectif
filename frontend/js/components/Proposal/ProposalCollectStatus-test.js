@@ -15,7 +15,7 @@ describe('<ProposalCollectStatus />', () => {
   const proposalWithStatus = {
     proposal: {
       $refType,
-      status: { name: 'Terminé', color: 'success' },
+      status: { name: 'Terminé', color: 'SUCCESS' },
     },
   };
 

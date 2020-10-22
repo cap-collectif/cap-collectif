@@ -281,7 +281,7 @@ export const ProposalAnalysisFormPanel = ({
 };
 
 const mapStateToProps = (state: GlobalState, { proposal, userId }: Props) => {
-  const analysis = proposal.analyses?.find(a => a.updatedBy.id === userId);
+  const analysis = proposal.analyses?.find(a => a.analyst.id === userId);
   const initialResponses = analysis?.responses;
   const defaultResponses = formatInitialResponsesValues(
     proposal?.form?.analysisConfiguration?.evaluationForm?.questions || [],
@@ -315,7 +315,7 @@ export default createFragmentContainer(container, {
       id
       analyses {
         id
-        updatedBy {
+        analyst {
           id
         }
         comment

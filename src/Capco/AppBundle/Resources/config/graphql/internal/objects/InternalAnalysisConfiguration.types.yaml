@@ -25,16 +25,16 @@ InternalAnalysisConfiguration:
                 type: 'DateTime'
                 description: 'The date on which the related decision will become effective'
             favourableStatus:
-                type: 'Status'
+                type: 'ProposalStepStatus'
                 description: 'The available favourable statuses to apply on contributions.'
             unfavourableStatuses:
-                type: '[Status!]'
+                type: '[ProposalStepStatus!]'
                 description: 'The unfavourable status to apply on contributions.'
             moveToSelectionStep:
                 type: 'SelectionStep'
                 description: 'The step to which proposals will be moved.'
             selectionStepStatus:
-                type: 'Status'
+                type: 'ProposalStepStatus'
                 description: 'The status to apply on next step.'
             createdAt:
                 type: 'DateTime!'

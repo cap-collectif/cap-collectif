@@ -6,7 +6,6 @@ InternalProposal:
         - Contribution
         - Commentable
         - PublicPublishable
-        - Draftable
         - Reportable
         - Trashable
         - WithFollowers
@@ -17,7 +16,6 @@ InternalProposal:
         interfaces:
             - Contribution
             - Commentable
-            - Draftable
             - Reportable
             - UniformResourceAdminLocatable
         fields:
@@ -61,7 +59,7 @@ InternalProposal:
                 type: 'InternalProject'
                 description: 'The related project.'
             status:
-                type: 'Status'
+                type: 'ProposalStepStatus'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args, getUser(), context])'
                 args:
                     step:
@@ -205,7 +203,6 @@ InternalProposal:
             assessment:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAssessmentResolver").isGranted(getUser(), value, context)'
                 type: 'InternalProposalAssessment'
-                description: "The proposal's related assessment."
             viewerCanEvaluate:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'Boolean!'
@@ -217,7 +214,6 @@ InternalProposal:
             decision:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalDecisionResolver").isGranted(getUser(), value, context)'
                 type: 'InternalProposalDecision'
-                description: "The proposal's related decision."
             viewerCanDecide:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'Boolean!'
@@ -235,7 +231,6 @@ InternalProposal:
             analyses:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalysisResolver").isGranted(getUser(), value, context)'
                 type: '[InternalProposalAnalysis!]'
-                description: "The proposal's related analyses."
             progressStatus:
                 type: 'ProposalProgressState!'
                 description: 'The proposal global progress status.'

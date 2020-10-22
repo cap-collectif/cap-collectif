@@ -131,14 +131,14 @@ export default createFragmentContainer(AnalysisProposalListRole, {
       ...UserAnalystList_proposal
       assessment {
         state
-        updatedBy {
+        supervisor {
           id
         }
       }
       decision {
         state
         isApproved
-        updatedBy {
+        decisionMaker {
           id
         }
       }

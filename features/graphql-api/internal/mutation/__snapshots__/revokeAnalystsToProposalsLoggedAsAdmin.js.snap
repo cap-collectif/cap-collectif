@@ -10,7 +10,7 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
+                "analyst": Object {
                   "id": "VXNlcjp1c2VyQW5hbHlzdDI=",
                   "username": "analyst2",
                 },

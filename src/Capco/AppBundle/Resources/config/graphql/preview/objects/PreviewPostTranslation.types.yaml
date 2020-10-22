@@ -1,0 +1,18 @@
+PreviewPostTranslation:
+  type: object
+  config:
+    name: PostTranslation
+    description: 'A translation post.'
+    fields:
+      locale:
+        type: 'TranslationLocale!'
+        description: 'The post translation related locale.'
+      title:
+        type: 'String'
+        description: 'The title of the post translation.'
+      body:
+        type: 'HTML'
+        description: 'The body of the post translation.'
+      abstract:
+        type: 'String'
+        description: 'Abstract of the post translation.'

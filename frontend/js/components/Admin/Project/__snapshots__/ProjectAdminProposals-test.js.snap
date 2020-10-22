@@ -198,7 +198,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                         },
                       ],
                       "status": Object {
-                        "color": "info",
+                        "color": "INFO",
                         "id": "status1",
                         "name": "En cours",
                       },
@@ -243,7 +243,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                         },
                       ],
                       "status": Object {
-                        "color": "success",
+                        "color": "SUCCESS",
                         "id": "status2",
                         "name": "Approuvé",
                       },
@@ -281,7 +281,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "reference": "2",
                       "selections": Array [],
                       "status": Object {
-                        "color": "success",
+                        "color": "SUCCESS",
                         "id": "status2",
                         "name": "Approuvé",
                       },
@@ -326,7 +326,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                         },
                       ],
                       "status": Object {
-                        "color": "info",
+                        "color": "INFO",
                         "id": "status1",
                         "name": "En cours",
                       },
@@ -392,7 +392,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "reference": "7",
                       "selections": Array [],
                       "status": Object {
-                        "color": "info",
+                        "color": "INFO",
                         "id": "status1",
                         "name": "En cours",
                       },
@@ -427,7 +427,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                       "reference": "8",
                       "selections": Array [],
                       "status": Object {
-                        "color": "info",
+                        "color": "INFO",
                         "id": "status1",
                         "name": "En cours",
                       },
@@ -511,12 +511,12 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "id": "cstep1",
                   "statuses": Array [
                     Object {
-                      "color": "success",
+                      "color": "SUCCESS",
                       "id": "status1",
                       "name": "Approuvé",
                     },
                     Object {
-                      "color": "danger",
+                      "color": "DANGER",
                       "id": "status2",
                       "name": "Rejeté",
                     },
@@ -528,12 +528,12 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                   "id": "selectionStep1",
                   "statuses": Array [
                     Object {
-                      "color": "info",
+                      "color": "INFO",
                       "id": "status4",
                       "name": "Soumis au vote",
                     },
                     Object {
-                      "color": "success",
+                      "color": "SUCCESS",
                       "id": "status5",
                       "name": "Vote gagné",
                     },
@@ -608,7 +608,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 },
               ],
               "status": Object {
-                "color": "info",
+                "color": "INFO",
                 "id": "status1",
                 "name": "En cours",
               },
@@ -673,7 +673,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 },
               ],
               "status": Object {
-                "color": "success",
+                "color": "SUCCESS",
                 "id": "status2",
                 "name": "Approuvé",
               },
@@ -731,7 +731,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "reference": "2",
               "selections": Array [],
               "status": Object {
-                "color": "success",
+                "color": "SUCCESS",
                 "id": "status2",
                 "name": "Approuvé",
               },
@@ -796,7 +796,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 },
               ],
               "status": Object {
-                "color": "info",
+                "color": "INFO",
                 "id": "status1",
                 "name": "En cours",
               },
@@ -902,7 +902,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "reference": "7",
               "selections": Array [],
               "status": Object {
-                "color": "info",
+                "color": "INFO",
                 "id": "status1",
                 "name": "En cours",
               },
@@ -957,7 +957,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
               "reference": "8",
               "selections": Array [],
               "status": Object {
-                "color": "info",
+                "color": "INFO",
                 "id": "status1",
                 "name": "En cours",
               },
@@ -1203,7 +1203,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                         },
                       ],
                       "status": Object {
-                        "color": "info",
+                        "color": "INFO",
                         "id": "status1",
                         "name": "En cours",
                       },
@@ -1248,7 +1248,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                         },
                       ],
                       "status": Object {
-                        "color": "success",
+                        "color": "SUCCESS",
                         "id": "status2",
                         "name": "Approuvé",
                       },
@@ -1286,7 +1286,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                       "reference": "2",
                       "selections": Array [],
                       "status": Object {
-                        "color": "success",
+                        "color": "SUCCESS",
                         "id": "status2",
                         "name": "Approuvé",
                       },
@@ -1331,7 +1331,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                         },
                       ],
                       "status": Object {
-                        "color": "info",
+                        "color": "INFO",
                         "id": "status1",
                         "name": "En cours",
                       },
@@ -1397,7 +1397,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                       "reference": "7",
                       "selections": Array [],
                       "status": Object {
-                        "color": "info",
+                        "color": "INFO",
                         "id": "status1",
                         "name": "En cours",
                       },
@@ -1432,7 +1432,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                       "reference": "8",
                       "selections": Array [],
                       "status": Object {
-                        "color": "info",
+                        "color": "INFO",
                         "id": "status1",
                         "name": "En cours",
                       },
@@ -1516,12 +1516,12 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "id": "cstep1",
                   "statuses": Array [
                     Object {
-                      "color": "success",
+                      "color": "SUCCESS",
                       "id": "status1",
                       "name": "Approuvé",
                     },
                     Object {
-                      "color": "danger",
+                      "color": "DANGER",
                       "id": "status2",
                       "name": "Rejeté",
                     },
@@ -1533,12 +1533,12 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                   "id": "selectionStep1",
                   "statuses": Array [
                     Object {
-                      "color": "info",
+                      "color": "INFO",
                       "id": "status4",
                       "name": "Soumis au vote",
                     },
                     Object {
-                      "color": "success",
+                      "color": "SUCCESS",
                       "id": "status5",
                       "name": "Vote gagné",
                     },
@@ -1613,7 +1613,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                 },
               ],
               "status": Object {
-                "color": "info",
+                "color": "INFO",
                 "id": "status1",
                 "name": "En cours",
               },
@@ -1678,7 +1678,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                 },
               ],
               "status": Object {
-                "color": "success",
+                "color": "SUCCESS",
                 "id": "status2",
                 "name": "Approuvé",
               },
@@ -1736,7 +1736,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "reference": "2",
               "selections": Array [],
               "status": Object {
-                "color": "success",
+                "color": "SUCCESS",
                 "id": "status2",
                 "name": "Approuvé",
               },
@@ -1801,7 +1801,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                 },
               ],
               "status": Object {
-                "color": "info",
+                "color": "INFO",
                 "id": "status1",
                 "name": "En cours",
               },
@@ -1907,7 +1907,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "reference": "7",
               "selections": Array [],
               "status": Object {
-                "color": "info",
+                "color": "INFO",
                 "id": "status1",
                 "name": "En cours",
               },
@@ -1962,7 +1962,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
               "reference": "8",
               "selections": Array [],
               "status": Object {
-                "color": "info",
+                "color": "INFO",
                 "id": "status1",
                 "name": "En cours",
               },
@@ -2246,12 +2246,12 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                   "id": "cstep1",
                   "statuses": Array [
                     Object {
-                      "color": "success",
+                      "color": "SUCCESS",
                       "id": "status1",
                       "name": "Approuvé",
                     },
                     Object {
-                      "color": "danger",
+                      "color": "DANGER",
                       "id": "status2",
                       "name": "Rejeté",
                     },
@@ -2263,12 +2263,12 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                   "id": "selectionStep1",
                   "statuses": Array [
                     Object {
-                      "color": "info",
+                      "color": "INFO",
                       "id": "status4",
                       "name": "Soumis au vote",
                     },
                     Object {
-                      "color": "success",
+                      "color": "SUCCESS",
                       "id": "status5",
                       "name": "Vote gagné",
                     },

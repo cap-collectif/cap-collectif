@@ -9,7 +9,7 @@ import component from '~/components/Form/Field';
 import toggle from '~/components/Form/Toggle';
 import select from '~/components/Form/Select';
 import { renderSubSection } from './ProjectAdminStepForm';
-import StepStatusesList, { type Status } from './StepStatusesList';
+import StepStatusesList, { type ProposalStepStatus } from './StepStatusesList';
 import type { Dispatch } from '~/types';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
 import StepVotesFields from './StepVotesFields';
@@ -17,7 +17,7 @@ import StepRequirementsList, { getUId, type Requirement } from './StepRequiremen
 
 type Props = {|
   requirements?: Array<Requirement>,
-  statuses?: Array<Status>,
+  statuses?: Array<ProposalStepStatus>,
   dispatch: Dispatch,
   votable: boolean,
   isBudgetEnabled: boolean,
@@ -112,7 +112,7 @@ export const ProjectAdminSelectionStepForm = ({
           dispatch(
             arrayPush(formName, 'statuses', {
               id: null,
-              color: 'primary',
+              color: 'PRIMARY',
             }),
           )
         }>

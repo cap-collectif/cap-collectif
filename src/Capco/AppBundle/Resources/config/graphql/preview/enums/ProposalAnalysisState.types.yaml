@@ -1,7 +1,7 @@
 ProposalAnalysisState:
     type: enum
     config:
-        description: "Possible values of a proposal's analysis state."
+        description: 'The possible states for a proposal analysis.'
         values:
             IN_PROGRESS:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::IN_PROGRESS")'
@@ -17,4 +17,4 @@ ProposalAnalysisState:
                 description: "The proposal's related analysis has been not made in time."
             NONE:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::NONE")'
-                description: "The proposal's related analysis state is empty."
+                description: 'The analysis has not begun.'

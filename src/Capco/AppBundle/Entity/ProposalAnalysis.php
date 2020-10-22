@@ -49,6 +49,8 @@ class ProposalAnalysis implements Timestampable
      */
     private $comment;
 
+    //TODO: Rename to analyst.
+
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="updated_by", nullable=true, referencedColumnName="id")

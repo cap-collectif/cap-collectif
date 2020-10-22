@@ -11,7 +11,7 @@ const ChangeProposalAssessmentMutation = /* GraphQL*/ `
         state
         officialResponse
         estimatedCost
-        updatedBy {
+        supervisor {
           id
           firstname
           lastname
@@ -31,7 +31,7 @@ const EvaluateProposalAssessmentMutation = /* GraphQL */ `
         estimatedCost
         body
         officialResponse
-        updatedBy {
+        supervisor {
           id
           firstname
           lastname

@@ -6,6 +6,7 @@ PreviewProposal:
         - UniformResourceLocatable
         - Trashable
         - Timestampable
+        - Draftable
     config:
         name: Proposal
         description: "Represents a user's contribution to a collect step."
@@ -14,6 +15,7 @@ PreviewProposal:
             - PublicPublishable
             - UniformResourceLocatable
             - Trashable
+            - Draftable
         fields:
             id:
                 description: 'The ID of an object.'
@@ -40,3 +42,15 @@ PreviewProposal:
                 type: 'String!'
                 description: 'Identifies the unique reference of the proposal.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value])'
+            analyses:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalysisResolver").isGranted(getUser(), value, context)'
+                type: '[PreviewProposalAnalysis!]'
+                description: "Analysts's analysis of the proposal."
+            decision:
+                description: "The decision of the decision-maker on the analysis of the proposal."
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalDecisionResolver").isGranted(getUser(), value, context)'
+                type: 'PreviewProposalDecision'
+            assessment:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAssessmentResolver").isGranted(getUser(), value, context)'
+                type: 'PreviewProposalAssessment'
+                description: "The supervisor's assessment on the analysis of the proposal."

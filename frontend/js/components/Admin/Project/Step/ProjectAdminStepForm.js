@@ -23,7 +23,7 @@ import {
 import { createRequirements, type Requirement, formatRequirements } from './StepRequirementsList';
 import ProjectAdminSynthesisStepForm from './ProjectAdminSynthesisStepForm';
 import ProjectAdminSelectionStepForm from './ProjectAdminSelectionStepForm';
-import { type Status } from './StepStatusesList';
+import { type ProposalStepStatus } from './StepStatusesList';
 import type { ProjectAdminStepForm_project } from '~relay/ProjectAdminStepForm_project.graphql';
 import ProjectAdminRankingStepForm from './ProjectAdminRankingStepForm';
 import ProjectAdminCollectStepForm from './ProjectAdminCollectStepForm';
@@ -55,7 +55,7 @@ type Props = {|
     requirements?: ?Array<Requirement>,
     requirementsReason?: ?string,
     consultations?: Array<{| value: string, label: string |}>,
-    statuses?: ?Array<Status>,
+    statuses?: ?Array<ProposalStepStatus>,
     defaultSort?: ?string,
     proposalsHidden?: ?boolean,
     votable?: ?boolean,
@@ -93,7 +93,7 @@ type Props = {|
   index?: number,
   timeless: boolean,
   requirements?: ?Array<Requirement>,
-  statuses?: ?Array<Status>,
+  statuses?: ?Array<ProposalStepStatus>,
   votable?: boolean,
   isBudgetEnabled?: boolean,
   isTresholdEnabled?: boolean,
@@ -122,7 +122,7 @@ export type FormValues = {|
   questionnaire?: string,
   consultations?: Array<string>,
   requirements?: Array<Requirement>,
-  statuses?: Array<Status>,
+  statuses?: Array<ProposalStepStatus>,
   defaultSort?: ?string,
   proposalsHidden?: boolean,
   votable?: ?boolean,

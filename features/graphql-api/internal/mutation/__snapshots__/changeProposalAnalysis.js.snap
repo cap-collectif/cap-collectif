@@ -28,6 +28,9 @@ exports[`mutations.changeProposalAnalysis should change successfully the newly c
 Object {
   "changeProposalAnalysis": Object {
     "analysis": Object {
+      "analyst": Object {
+        "id": "VXNlcjp1c2VySnBlYw==",
+      },
       "comment": null,
       "id": Any<String>,
       "responses": Array [
@@ -68,9 +71,6 @@ Object {
           "formattedValue": null,
         },
       ],
-      "updatedBy": Object {
-        "id": "VXNlcjp1c2VySnBlYw==",
-      },
     },
     "errorCode": null,
   },
@@ -81,6 +81,9 @@ exports[`mutations.changeProposalAnalysis should create successfully the proposa
 Object {
   "changeProposalAnalysis": Object {
     "analysis": Object {
+      "analyst": Object {
+        "id": "VXNlcjp1c2VyQW5hbHlzdA==",
+      },
       "comment": "Validons ensemble cette proposition !",
       "id": Any<String>,
       "responses": Array [
@@ -94,9 +97,6 @@ Object {
           "formattedValue": "",
         },
       ],
-      "updatedBy": Object {
-        "id": "VXNlcjp1c2VyQW5hbHlzdA==",
-      },
     },
     "errorCode": null,
   },

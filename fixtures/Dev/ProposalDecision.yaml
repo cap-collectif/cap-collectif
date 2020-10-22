@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\ProposalDecision:
     proposalDecision1:
+        id: 'proposalDecision1'
         __construct: ['@proposal113', '@post17']
         estimatedCost: 500
         updatedBy: '@userDecisionMaker'
@@ -8,6 +9,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         createdAt: <identity((new \DateTime('2019-08-01 00:01:20'))->modify("+ 18 days"))>
         updatedAt: $createdAt
     proposalDecision2:
+        id: 'proposalDecision2'
         __construct: ['@proposal115', '@post18']
         estimatedCost: 500000
         updatedBy: '@userDecisionMaker'
@@ -16,6 +18,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         createdAt: <identity((new \DateTime('2019-08-01 00:01:21'))->modify("+ 18 days"))>
         updatedAt: $createdAt
     proposalDecision3:
+        id: 'proposalDecision3'
         __construct: ['@proposal109', '@post19']
         estimatedCost: 3200
         updatedBy: '@userDecisionMaker'
@@ -24,6 +27,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         createdAt: <identity((new \DateTime('2019-08-03 00:01:21')))>
         updatedAt: $createdAt
     proposalDecisionIdf1:
+        id: 'proposalDecision4'
         __construct: ['@proposalIdf1', '@post20']
         estimatedCost: 3200
         updatedBy: '@userSpyl'
@@ -32,6 +36,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         createdAt: <identity((new \DateTime('2020-01-01 00:01:22')))>
         updatedAt: $createdAt
     proposalDecisionIdf2:
+        id: 'proposalDecision5'
         __construct: ['@proposalIdf2', '@post21']
         estimatedCost: 10000
         updatedBy: '@userSpyl'
@@ -40,6 +45,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         createdAt: <identity((new \DateTime('2020-01-01 00:01:24')))>
         updatedAt: $createdAt
     proposalDecisionIdf3:
+        id: 'proposalDecision6'
         __construct: ['@proposalIdf3', '@post22']
         estimatedCost: 0
         updatedBy: '@userSpyl'
@@ -49,6 +55,7 @@ Capco\AppBundle\Entity\ProposalDecision:
         createdAt: <identity((new \DateTime('2020-01-01 00:01:25')))>
         updatedAt: $createdAt
     proposalDecision4:
+        id: 'proposalDecision7'
         __construct: ['@assignedProposals121', '@post23']
         estimatedCost: 3200
         updatedBy: '@userDecisionMaker'

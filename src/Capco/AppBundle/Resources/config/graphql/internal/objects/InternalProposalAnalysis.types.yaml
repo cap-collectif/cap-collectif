@@ -1,35 +1,14 @@
 InternalProposalAnalysis:
     type: object
+    inherits:
+        - PreviewProposalAnalysis
     config:
         description: 'A proposal analysis.'
         name: ProposalAnalysis
         fields:
-            id:
-                builder: 'Relay::GlobalId'
-                builderConfig:
-                    typeName: ProposalAnalysis
-                description: "The proposal's analysis id."
             proposal:
                 type: 'InternalProposal!'
-                description: 'The related proposal.'
-            updatedBy:
+            analyst:
                 type: 'InternalUser!'
-                description: 'The last updated by a analyst.'
-            estimatedCost:
-                type: 'Int'
-                description: 'The estimated cost of the related proposal.'
-            comment:
-                type: 'String'
-                description: "The proposal's analysis comment."
-            state:
-                type: 'ProposalAnalysisState!'
-                description: 'The current state of the assessment.'
             responses:
-                type: '[InternalResponse!]'
-                description: 'The analysis responses.'
-            createdAt:
-                type: 'DateTime!'
-                description: 'The creation date of the analysis.'
-            updatedAt:
-                type: 'DateTime!'
-                description: 'The last updated date.'
+                type: '[InternalResponse!]!'

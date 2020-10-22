@@ -14,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
+// TODO: Rename to ProposalStepStatus.
+
 /**
  * @ORM\Table(name="status")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StatusRepository")

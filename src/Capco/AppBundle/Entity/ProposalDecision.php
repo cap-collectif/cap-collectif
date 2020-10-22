@@ -31,6 +31,8 @@ class ProposalDecision implements Timestampable
      */
     private $estimatedCost;
 
+    // TODO: Rename to decisionMaker.
+
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=true, name="updated_by", referencedColumnName="id")

@@ -37,4 +37,4 @@ SelectionStep:
                 type: 'String!'
                 description: 'The main view : grid, list or map'
             defaultStatus:
-                type: Status
+                type: 'ProposalStepStatus'

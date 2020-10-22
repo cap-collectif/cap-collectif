@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { NavDropdown, MenuItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import type { StatusColor } from '~relay/UpdateProjectAlphaMutation.graphql';
+import type { ProposalStepStatusColor } from '~relay/UpdateProjectAlphaMutation.graphql';
 
 export type Color = {|
-  name: StatusColor,
+  name: ProposalStepStatusColor,
   hexValue: string,
   label: string,
 |};

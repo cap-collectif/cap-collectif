@@ -349,6 +349,18 @@ type DeleteEventPayload {
   clientMutationId: String
 }
 
+"""Entities that can be drafted."""
+interface Draftable {
+  """The ID of an object"""
+  id: ID!
+
+  """Whether or not the entity is a draft."""
+  draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
+}
+
 """A string containing an email."""
 scalar Email
 
@@ -731,6 +743,83 @@ type PageInfo {
   endCursor: String
 }
 
+"""A post"""
+type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocatable {
+  """The ID of an object"""
+  id: ID!
+
+  """The URL to this resource."""
+  url: URI!
+
+  """The admin url for this post."""
+  adminUrl: URI!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The post's title."""
+  title(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
+  """Identifies the date and time when the object was published."""
+  publishedAt: DateTime
+
+  """The post's authors."""
+  authors: [User!]!
+
+  """The publication status for this post."""
+  publicationStatus: PostPublicationStatus!
+
+  """Wether or not the post is commentable."""
+  commentable: Boolean!
+
+  """Abstract of the post."""
+  abstract(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+
+  """The post's related media."""
+  media: Media
+
+  """The post's related themes."""
+  themes: [Theme!]!
+  body(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): HTML
+  translations: [PostTranslation!]!
+}
+
+"""Available publication statuses for a post."""
+enum PostPublicationStatus {
+  """Normal status, publicly visible"""
+  PUBLISHED
+
+  """Not publicly visible"""
+  NOT_PUBLISHED
+}
+
+"""A translation post."""
+type PostTranslation {
+  """The post translation related locale."""
+  locale: TranslationLocale!
+
+  """The title of the post translation."""
+  title: String
+
+  """The body of the post translation."""
+  body: HTML
+
+  """Abstract of the post translation."""
+  abstract: String
+}
+
 input PreviewEventTranslationInput {
   """the id of the event"""
   id: ID
@@ -798,6 +887,8 @@ type Project implements Node & UniformResourceLocatable {
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """Ordering options for contributors returning from the connection."""
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
 
@@ -882,7 +973,7 @@ type ProjectType {
 }
 
 """Represents a user's contribution to a collect step."""
-type Proposal implements Node & Publishable & UniformResourceLocatable & Trashable {
+type Proposal implements Node & Publishable & UniformResourceLocatable & Trashable & Draftable {
   """The ID of an object."""
   id: ID!
 
@@ -919,6 +1010,12 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
+  """Whether or not the entity is a draft."""
+  draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
+
   """Identifies the proposal title."""
   title: String!
 
@@ -933,6 +1030,108 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Identifies the unique reference of the proposal."""
   reference: String!
+
+  """Analysts's analysis of the proposal."""
+  analyses: [ProposalAnalysis!]
+
+  """The decision of the decision-maker on the analysis of the proposal."""
+  decision: ProposalDecision
+
+  """The supervisor's assessment on the analysis of the proposal."""
+  assessment: ProposalAssessment
+}
+
+"""A proposal analysis."""
+type ProposalAnalysis {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The proposal's analysis id."""
+  id: ID!
+
+  """The related proposal."""
+  proposal: Proposal!
+
+  """The last updated by a analyst."""
+  analyst: User!
+
+  """The estimated cost of the related proposal in €."""
+  estimatedCost: Int
+
+  """The proposal's analysis comment."""
+  comment: String
+
+  """The current state of the analysis."""
+  state: ProposalAnalysisState!
+
+  """The analysis responses."""
+  responses: [Response!]!
+}
+
+"""The possible states for a proposal analysis."""
+enum ProposalAnalysisState {
+  """The proposal's analysis is currently being edited"""
+  IN_PROGRESS
+
+  """The proposal's related analysis state is favourable."""
+  FAVOURABLE
+
+  """The proposal's related analysis state is unfavourable."""
+  UNFAVOURABLE
+
+  """The proposal's related analysis has been not made in time."""
+  TOO_LATE
+
+  """The analysis has not begun."""
+  NONE
+}
+
+"""A proposal assessment."""
+type ProposalAssessment {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The proposal's assessment id."""
+  id: ID!
+
+  """The related proposal."""
+  proposal: Proposal!
+
+  """The last updated by a supervisor."""
+  supervisor: User!
+
+  """The current state of the assessment."""
+  state: ProposalAssessmentState!
+
+  """The body of the assessment."""
+  body: String
+
+  """The estimated cost of the related proposal in €."""
+  estimatedCost: Int
+
+  """The official response of the proposal assessment."""
+  officialResponse: String
+}
+
+"""Possible values of a proposal's assessment state."""
+enum ProposalAssessmentState {
+  """The proposal's assessment is currently being edited"""
+  IN_PROGRESS
+
+  """The proposal's related statement state is favourable."""
+  FAVOURABLE
+
+  """The proposal's related statement state is unfavourable."""
+  UNFAVOURABLE
+
+  """The evaluation of the proposal was not issued in time."""
+  TOO_LATE
 }
 
 """A connection to a list of items."""
@@ -945,6 +1144,48 @@ type ProposalConnection {
 
   """Information to aid in pagination."""
   edges: [ProposalEdge]
+}
+
+"""A proposal decision."""
+type ProposalDecision {
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The proposal's decision id."""
+  id: ID!
+
+  """The related proposal."""
+  proposal: Proposal!
+
+  """The last updated by a decision-maker."""
+  decisionMaker: User!
+
+  """The current state of the decision."""
+  isApproved: Boolean!
+
+  """The estimated cost of the related proposal in €."""
+  estimatedCost: Int
+
+  """The related post containing the official response."""
+  post: Post!
+
+  """The current status of the decision on the proposal"""
+  state: ProposalDecisionState!
+
+  """The step's related status assigned to the proposal."""
+  refusedReason: ProposalStepStatus
+}
+
+"""Possible values of a proposal's decision state."""
+enum ProposalDecisionState {
+  """The proposal's decision is currently being edited"""
+  IN_PROGRESS
+
+  """The proposal's related decision state is favourable."""
+  DONE
 }
 
 """An edge in a connection."""
@@ -988,6 +1229,39 @@ enum ProposalOrderField {
 
   """Allows ordering a list of proposals by the number of votes it have."""
   VOTES
+}
+
+"""The given proposal status in a step."""
+type ProposalStepStatus {
+  """The id of the proposal step status."""
+  id: ID!
+
+  """The name of the proposal step status."""
+  name: String!
+
+  """The color of the proposal step status."""
+  color: ProposalStepStatusColor!
+}
+
+"""Different status type"""
+enum ProposalStepStatusColor {
+  """Info color."""
+  INFO
+
+  """Primary color."""
+  PRIMARY
+
+  """Success color."""
+  SUCCESS
+
+  """Warning color."""
+  WARNING
+
+  """Danger color."""
+  DANGER
+
+  """Default color."""
+  DEFAULT
 }
 
 """Possible trashed status for a `Proposal`."""
@@ -1549,6 +1823,33 @@ type SynthesisStep implements Step & Node {
   state: StepState!
 }
 
+"""A theme"""
+type Theme implements UniformResourceLocatable {
+  """The URL to this resource."""
+  url: URI!
+  id: ID!
+  title(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  translations: [ThemeTranslation!]!
+}
+
+"""A translation theme."""
+type ThemeTranslation {
+  """The theme translation related locale."""
+  locale: TranslationLocale!
+
+  """The title of the theme translation."""
+  title: String
+
+  """The body of the theme translation."""
+  body: String
+
+  """The theme translation teaser."""
+  teaser: String
+}
+
 """A time range that contains start date and end date."""
 type TimeRange {
   """The start date of the time range."""
@@ -1556,6 +1857,33 @@ type TimeRange {
 
   """The end date of the time range"""
   endAt: DateTime
+}
+
+"""A translation locale"""
+enum TranslationLocale {
+  """English - UNITED KINGDOM locale"""
+  EN_GB
+
+  """French - FRANCE locale"""
+  FR_FR
+
+  """Spanish - SPAIN locale"""
+  ES_ES
+
+  """German - GERMANY locale"""
+  DE_DE
+
+  """Dutch - NETHERLANDS locale"""
+  NL_NL
+
+  """Swedish - SWEDEN locale"""
+  SV_SE
+
+  """Basque - EUSKADIA locale"""
+  EU_EU
+
+  """Gascon - OCCITAN locale"""
+  OC_OC
 }
 
 """Entities that can be trashed."""
@@ -1584,6 +1912,12 @@ enum TrashableStatus {
 
 """An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string."""
 scalar URI
+
+"""Represents a type that can be retrieved by a URL on the admin."""
+interface UniformResourceAdminLocatable {
+  """The admin URL to this resource."""
+  adminUrl: URI!
+}
 
 """Represents a type that can be retrieved by a URL."""
 interface UniformResourceLocatable {

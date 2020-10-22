@@ -577,20 +577,20 @@ export default createPaginationContainer(
               id
               analyses {
                 state
-                updatedBy {
+                analyst {
                   id
                 }
               }
               assessment {
                 state
-                updatedBy {
+                supervisor {
                   id
                 }
               }
               decision {
                 state
                 isApproved
-                updatedBy {
+                decisionMaker {
                   id
                 }
               }

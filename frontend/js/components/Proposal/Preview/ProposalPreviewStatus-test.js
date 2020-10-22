@@ -13,7 +13,7 @@ describe('<ProposalPreviewStatus />', () => {
     trashedReason: null,
     status: {
       name: 'Projet retenu',
-      color: 'success',
+      color: 'SUCCESS',
     },
   };
 

@@ -17,7 +17,7 @@ const mutation = graphql`
           analyses {
             id
             state
-            updatedBy {
+            analyst {
               id
             }
           }
@@ -28,7 +28,7 @@ const mutation = graphql`
         responses {
           ...responsesHelper_response @relay(mask: false)
         }
-        updatedBy {
+        analyst {
           id
         }
       }

@@ -89,12 +89,12 @@ export const CardHeaderColors = {
 };
 
 export const BsStyleColors = {
-  info: colors.infoColor,
-  primary: colors.defaultCustomColor,
-  success: colors.successColor,
-  warning: colors.warningColor,
-  danger: colors.dangerColor,
-  default: colors.darkGray,
+  INFO: colors.infoColor,
+  PRIMARY: colors.defaultCustomColor,
+  SUCCESS: colors.successColor,
+  WARNING: colors.warningColor,
+  DANGER: colors.dangerColor,
+  DEFAULT: colors.darkGray,
 };
 
 export const AlertColors = {

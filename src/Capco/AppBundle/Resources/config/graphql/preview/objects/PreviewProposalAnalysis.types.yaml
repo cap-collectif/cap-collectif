@@ -1,0 +1,32 @@
+PreviewProposalAnalysis:
+    type: object
+    inherits:
+        - Timestampable
+    config:
+        description: 'A proposal analysis.'
+        name: ProposalAnalysis
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: ProposalAnalysis
+                description: "The proposal's analysis id."
+            proposal:
+                type: 'PreviewProposal!'
+                description: 'The related proposal.'
+            analyst:
+                type: 'PreviewUser!'
+                resolve: "@=value.getUpdatedBy()"
+                description: 'The last updated by a analyst.'
+            estimatedCost:
+                type: 'Int'
+                description: 'The estimated cost of the related proposal in €.'
+            comment:
+                type: 'String'
+                description: "The proposal's analysis comment."
+            state:
+                type: 'ProposalAnalysisState!'
+                description: 'The current state of the analysis.'
+            responses:
+                type: '[PreviewResponse!]!'
+                description: 'The analysis responses.'

@@ -15,7 +15,7 @@ const AssignAnalystsToProposalsMutation = /* GraphQL*/ `
               username
             }
             analyses {
-              updatedBy {
+              analyst {
                 username
               }
             }

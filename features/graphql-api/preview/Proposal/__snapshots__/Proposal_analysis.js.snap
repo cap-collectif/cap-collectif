@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview.proposals fetches proposal's related analysis data 1`] = `
+Object {
+  "node": Object {
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBJZGY=",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "createdAt": "2020-01-01 00:00:10",
+                "estimatedCost": null,
+                "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzMw==",
+                "state": "FAVOURABLE",
+                "updatedAt": "2020-01-01 00:00:10",
+              },
+              Object {
+                "createdAt": "2020-01-01 00:00:11",
+                "estimatedCost": null,
+                "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzNA==",
+                "state": "FAVOURABLE",
+                "updatedAt": "2020-01-01 00:00:11",
+              },
+              Object {
+                "createdAt": "2020-01-01 00:00:12",
+                "estimatedCost": null,
+                "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzNQ==",
+                "state": "UNFAVOURABLE",
+                "updatedAt": "2020-01-01 00:00:12",
+              },
+              Object {
+                "createdAt": "2020-01-01 00:00:13",
+                "estimatedCost": null,
+                "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzNg==",
+                "state": "UNFAVOURABLE",
+                "updatedAt": "2020-01-01 00:00:13",
+              },
+              Object {
+                "createdAt": "2020-01-01 00:00:14",
+                "estimatedCost": null,
+                "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzNw==",
+                "state": "NONE",
+                "updatedAt": "2020-01-01 00:00:14",
+              },
+              Object {
+                "createdAt": "2020-01-01 00:00:15",
+                "estimatedCost": null,
+                "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzOA==",
+                "state": "TOO_LATE",
+                "updatedAt": "2020-01-01 00:00:15",
+              },
+            ],
+            "assessment": Object {
+              "createdAt": "2020-01-01 00:00:10",
+              "estimatedCost": 10000,
+              "id": "UHJvcG9zYWxBc3Nlc3NtZW50OnByb3Bvc2FsQXNzZXNzbWVudElkZjE=",
+              "officialResponse": "En vertu de l'article 49 alinéa 3, ce projet aboutira.",
+              "state": "FAVOURABLE",
+              "updatedAt": "2020-01-01 00:00:10",
+            },
+            "decision": Object {
+              "decisionMaker": Object {
+                "id": "VXNlcjp1c2VyU3B5bA==",
+              },
+              "estimatedCost": 3200,
+              "id": "UHJvcG9zYWxEZWNpc2lvbjpwcm9wb3NhbERlY2lzaW9uNA==",
+              "isApproved": true,
+              "post": Object {
+                "id": "UG9zdDpwb3N0MjA=",
+                "title": "Réponse officielle",
+              },
+              "refusedReason": null,
+            },
+            "draft": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "analyses": Array [],
+            "assessment": null,
+            "decision": null,
+            "draft": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "createdAt": "2020-01-01 00:00:17",
+                "estimatedCost": null,
+                "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzMTA=",
+                "state": "FAVOURABLE",
+                "updatedAt": "2020-01-01 00:00:17",
+              },
+              Object {
+                "createdAt": "2020-01-01 00:00:16",
+                "estimatedCost": null,
+                "id": "UHJvcG9zYWxBbmFseXNpczpwcm9wb3NhbEFuYWx5c2lzOQ==",
+                "state": "TOO_LATE",
+                "updatedAt": "2020-01-01 00:00:16",
+              },
+            ],
+            "assessment": Object {
+              "createdAt": "2020-01-01 00:00:11",
+              "estimatedCost": 10000,
+              "id": "UHJvcG9zYWxBc3Nlc3NtZW50OnByb3Bvc2FsQXNzZXNzbWVudElkZjI=",
+              "officialResponse": "Nous ne pouvons accepter votre proposition d'association.",
+              "state": "UNFAVOURABLE",
+              "updatedAt": "2020-01-01 00:00:11",
+            },
+            "decision": Object {
+              "decisionMaker": Object {
+                "id": "VXNlcjp1c2VyU3B5bA==",
+              },
+              "estimatedCost": 10000,
+              "id": "UHJvcG9zYWxEZWNpc2lvbjpwcm9wb3NhbERlY2lzaW9uNQ==",
+              "isApproved": true,
+              "post": Object {
+                "id": "UG9zdDpwb3N0MjE=",
+                "title": "Réponse officielle",
+              },
+              "refusedReason": null,
+            },
+            "draft": false,
+          },
+        },
+      ],
+    },
+  },
+}
+`;

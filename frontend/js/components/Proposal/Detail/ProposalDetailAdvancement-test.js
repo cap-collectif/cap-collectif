@@ -56,7 +56,7 @@ describe('<ProposalDetailAdvancement />', () => {
         },
         status: {
           name: 'En cours',
-          color: 'info',
+          color: 'INFO',
         },
       },
     ],

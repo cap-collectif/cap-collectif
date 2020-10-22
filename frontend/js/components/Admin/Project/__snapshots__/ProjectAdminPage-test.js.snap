@@ -453,7 +453,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Status",
+                                "concreteType": "ProposalStepStatus",
                                 "kind": "LinkedField",
                                 "name": "defaultStatus",
                                 "plural": false,
@@ -485,7 +485,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Status",
+                                "concreteType": "ProposalStepStatus",
                                 "kind": "LinkedField",
                                 "name": "statuses",
                                 "plural": true,
@@ -655,7 +655,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Status",
+                                "concreteType": "ProposalStepStatus",
                                 "kind": "LinkedField",
                                 "name": "statuses",
                                 "plural": true,
@@ -687,7 +687,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Status",
+                                "concreteType": "ProposalStepStatus",
                                 "kind": "LinkedField",
                                 "name": "defaultStatus",
                                 "plural": false,
@@ -2485,7 +2485,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Status",
+                                "concreteType": "ProposalStepStatus",
                                 "kind": "LinkedField",
                                 "name": "defaultStatus",
                                 "plural": false,
@@ -2517,7 +2517,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Status",
+                                "concreteType": "ProposalStepStatus",
                                 "kind": "LinkedField",
                                 "name": "statuses",
                                 "plural": true,
@@ -2687,7 +2687,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Status",
+                                "concreteType": "ProposalStepStatus",
                                 "kind": "LinkedField",
                                 "name": "statuses",
                                 "plural": true,
@@ -2719,7 +2719,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Status",
+                                "concreteType": "ProposalStepStatus",
                                 "kind": "LinkedField",
                                 "name": "defaultStatus",
                                 "plural": false,

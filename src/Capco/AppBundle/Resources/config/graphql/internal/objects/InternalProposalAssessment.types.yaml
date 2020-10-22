@@ -1,35 +1,12 @@
 InternalProposalAssessment:
     type: object
+    inherits:
+        - PreviewProposalAssessment
     config:
         description: 'A proposal assessment.'
         name: ProposalAssessment
         fields:
-            id:
-                builder: 'Relay::GlobalId'
-                builderConfig:
-                    typeName: ProposalAssessment
-                description: "The proposal's assessment id."
             proposal:
                 type: 'InternalProposal!'
-                description: 'The related proposal.'
-            updatedBy:
+            supervisor:
                 type: 'InternalUser!'
-                description: 'The last updated by a supervisor.'
-            state:
-                type: 'ProposalAssessmentState!'
-                description: 'The current state of the assessment.'
-            body:
-                type: 'String'
-                description: 'The body of the assessment.'
-            estimatedCost:
-                type: 'Int'
-                description: 'The estimated cost of the related proposal.'
-            officialResponse:
-                type: 'String'
-                description: 'The official response of the proposal assessment.'
-            createdAt:
-                type: 'DateTime!'
-                description: 'The creation date of the assessment.'
-            updatedAt:
-                type: 'DateTime!'
-                description: 'The last updated date.'

@@ -23,7 +23,7 @@ export class ProposalPreviewStatus extends React.Component<Props> {
     let { status } = proposal;
     if (proposal.trashed) {
       status = {
-        color: 'default',
+        color: 'DEFAULT',
         name: (
           <FormattedMessage
             id={

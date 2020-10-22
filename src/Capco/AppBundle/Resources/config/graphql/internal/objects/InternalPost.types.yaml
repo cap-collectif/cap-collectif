@@ -1,56 +1,20 @@
 InternalPost:
-  type: object
-  inherits: [Node, Commentable, UniformResourceLocatable, UniformResourceAdminLocatable]
-  config:
-    name: Post
-    interfaces: [Node, Commentable, UniformResourceLocatable, UniformResourceAdminLocatable]
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Post
-      title:
-        type: 'String'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getTitle(args["locale"], true)'
-      relatedContent:
-        type: '[PostRelatedContent!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
-      createdAt:
-        type: 'DateTime!'
-      updatedAt:
-        type: 'DateTime!'
-      publishedAt:
-        type: 'DateTime'
-      authors:
-        type: '[InternalUser!]!'
-      publicationStatus:
-        type: 'PostPublicationStatus!'
-        description: 'The publication status for this post.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
-      commentable:
-        type: 'Boolean!'
-        resolve: '@=value.isCommentable()'
-      displayedOnBlog:
-        type: 'Boolean!'
-      abstract:
-        type: 'String!'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getAbstractOrBeginningOfTheText(args["locale"], true)'
-      adminUrl:
-        type: 'URI!'
-        description: 'The admin url for this post.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver", [value])'
-        access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
-      media:
-        type: 'InternalMedia'
-      themes:
-        type: '[Theme!]!'
-      body:
-        type: 'HTML'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getBody(args["locale"], true)'
-      translations:
-        type: '[InternalPostTranslation!]!'
+    type: object
+    inherits:
+        - PreviewPost
+        - Commentable
+    config:
+        interfaces: [Commentable]
+        name: Post
+        fields:
+            authors:
+                type: '[InternalUser!]!'
+            media:
+                type: 'InternalMedia'
+            translations:
+                type: '[InternalPostTranslation!]!'
+            displayedOnBlog:
+                type: 'Boolean!'
+            relatedContent:
+                type: '[PostRelatedContent!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'

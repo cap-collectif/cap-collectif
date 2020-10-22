@@ -10,7 +10,7 @@ import environment from '~/createRelayEnvironment';
 import component from '~/components/Form/Field';
 import select from '~/components/Form/Select';
 import { renderSubSection } from './ProjectAdminStepForm';
-import StepStatusesList, { type Status } from './StepStatusesList';
+import StepStatusesList, { type ProposalStepStatus } from './StepStatusesList';
 import type { Dispatch } from '~/types';
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style';
 import { PrivacyContainer, PrivacyInfo } from './ProjectAdminStepForm.style';
@@ -20,7 +20,7 @@ import { renderSortValues } from './ProjectAdminSelectionStepForm';
 
 type Props = {|
   requirements?: Array<Requirement>,
-  statuses?: Array<Status>,
+  statuses?: Array<ProposalStepStatus>,
   dispatch: Dispatch,
   votable: boolean,
   isBudgetEnabled: boolean,
@@ -163,7 +163,7 @@ export const ProjectAdminCollectStepForm = ({
           dispatch(
             arrayPush(formName, 'statuses', {
               id: null,
-              color: 'primary',
+              color: 'PRIMARY',
             }),
           )
         }>

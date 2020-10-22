@@ -144,7 +144,7 @@ export const ProposalAnalysisPanel = ({ proposal, onClose, user }: Props) => {
             </CloseIconWrapper>
             <div>
               {analysts?.map((analyst, idx) => {
-                const status = proposal.analyses?.find(a => a.updatedBy.id === analyst.id);
+                const status = proposal.analyses?.find(a => a.analyst.id === analyst.id);
                 const disabled =
                   (proposalState && proposalState !== 'IN_PROGRESS') ||
                   closed ||
@@ -260,21 +260,21 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalAnalysis
       analyses {
         id
         state
-        updatedBy {
+        analyst {
           id
         }
       }
       assessment {
         state
         id
-        updatedBy {
+        supervisor {
           id
         }
       }
       decision {
         id
         state
-        updatedBy {
+        decisionMaker {
           id
         }
         isApproved

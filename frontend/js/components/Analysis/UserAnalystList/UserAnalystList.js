@@ -30,7 +30,7 @@ export const getStatus = (
 
   if (analyses && analyses?.length > 0) {
     analyses.forEach(analyse => {
-      const isAnalyseMadeByUser = analyse.updatedBy.id === idUser;
+      const isAnalyseMadeByUser = analyse.analyst.id === idUser;
 
       if (isAnalyseMadeByUser) {
         status = PROPOSAL_STATUS[analyse.state];
@@ -40,7 +40,7 @@ export const getStatus = (
   if (
     (decisionState.name === PROPOSAL_STATUS.DONE.name ||
       assessmentState.name === PROPOSAL_STATUS.FAVOURABLE.name ||
-        assessmentState.name === PROPOSAL_STATUS.UNFAVOURABLE.name) &&
+      assessmentState.name === PROPOSAL_STATUS.UNFAVOURABLE.name) &&
     (status.name === PROPOSAL_STATUS.TODO.name || status.name === PROPOSAL_STATUS.IN_PROGRESS.name)
   ) {
     return PROPOSAL_STATUS.TOO_LATE;
@@ -102,7 +102,7 @@ export default createFragmentContainer(UserAnalystList, {
     fragment UserAnalystList_proposal on Proposal {
       analyses {
         state
-        updatedBy {
+        analyst {
           id
         }
       }

@@ -8,8 +8,8 @@ Draftable:
     fields:
       draft:
         type: 'Boolean!'
-        description: 'Is the object a draft.'
+        description: 'Whether or not the entity is a draft.'
       undraftAt:
-          type: 'DateTime'
-          description: 'Identifies when the entity was undraft at.'
-          resolve: '@=value.getUndraftAt()'
+        type: 'DateTime'
+        description: 'Identifies when the entity was undraft at.'
+        resolve: '@=value.getUndraftAt()'

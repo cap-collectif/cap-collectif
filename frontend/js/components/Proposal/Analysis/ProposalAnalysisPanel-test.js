@@ -38,7 +38,7 @@ describe('<ProposalAnalysisPanel />', () => {
           {
             id: 'analyse2Id',
             state: 'FAVOURABLE',
-            updatedBy: {
+            analyst: {
               id: 'Pipoune',
             },
           },
@@ -46,14 +46,14 @@ describe('<ProposalAnalysisPanel />', () => {
         assessment: {
           id: 'assessmentId',
           state: 'UNFAVOURABLE',
-          updatedBy: {
+          supervisor: {
             id: 'Ruel',
           },
         },
         decision: {
           id: 'decisionId',
           state: 'IN_PROGRESS',
-          updatedBy: {
+          decisionMaker: {
             id: 'Ush',
           },
           isApproved: false,

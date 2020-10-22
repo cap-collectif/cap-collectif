@@ -112,13 +112,13 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
-                  "username": "analyst2",
+                "analyst": Object {
+                  "username": "analyst",
                 },
               },
               Object {
-                "updatedBy": Object {
-                  "username": "analyst",
+                "analyst": Object {
+                  "username": "analyst2",
                 },
               },
             ],
@@ -175,13 +175,13 @@ Object {
           "node": Object {
             "analyses": Array [
               Object {
-                "updatedBy": Object {
-                  "username": "analyst2",
+                "analyst": Object {
+                  "username": "analyst",
                 },
               },
               Object {
-                "updatedBy": Object {
-                  "username": "analyst",
+                "analyst": Object {
+                  "username": "analyst2",
                 },
               },
             ],

@@ -3,7 +3,7 @@
 exports[`<Status /> should render correctly 1`] = `
 <Status__Container
   bgColor="#707070"
-  bsStyle="default"
+  bsStyle="DEFAULT"
 >
   My Status
 </Status__Container>
@@ -12,7 +12,7 @@ exports[`<Status /> should render correctly 1`] = `
 exports[`<Status /> should render correctly with other bgColor 1`] = `
 <Status__Container
   bgColor="#dc3545"
-  bsStyle="danger"
+  bsStyle="DANGER"
 >
   My Status
 </Status__Container>

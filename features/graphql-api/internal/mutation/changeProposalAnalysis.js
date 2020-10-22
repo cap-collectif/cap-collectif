@@ -8,7 +8,7 @@ const ChangeProposalAnalysisMutation = /* GraphQL*/ `
       analysis {
         id
         comment
-        updatedBy {
+        analyst {
           id
         }
         responses {

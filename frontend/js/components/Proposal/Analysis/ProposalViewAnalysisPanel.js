@@ -33,7 +33,7 @@ export const CommentView: StyledComponent<{ tooLate?: boolean }, {}, HTMLDivElem
 `;
 
 export const ProposalViewAnalysisPanel = ({ proposal, userId }: Props) => {
-  const analysis = proposal.analyses?.find(a => a.updatedBy.id === userId);
+  const analysis = proposal.analyses?.find(a => a.analyst.id === userId);
   if (!analysis) return null;
   const { state } = analysis;
   const questions =
@@ -72,7 +72,7 @@ export default createFragmentContainer(ProposalViewAnalysisPanel, {
       id
       analyses {
         id
-        updatedBy {
+        analyst {
           id
         }
         comment

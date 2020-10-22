@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Enum;
 
+// TODO: Rename to ProposalStepStatusColor.
+
 final class StatusColor
 {
     // normal constant == default class in bootstrap

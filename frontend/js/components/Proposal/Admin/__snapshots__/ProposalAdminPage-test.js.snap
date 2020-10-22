@@ -195,7 +195,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "Status",
+                      "concreteType": "ProposalStepStatus",
                       "kind": "LinkedField",
                       "name": "status",
                       "plural": false,
@@ -278,7 +278,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "concreteType": "Status",
+                          "concreteType": "ProposalStepStatus",
                           "kind": "LinkedField",
                           "name": "status",
                           "plural": false,
@@ -354,7 +354,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": "Status",
+                                  "concreteType": "ProposalStepStatus",
                                   "kind": "LinkedField",
                                   "name": "statuses",
                                   "plural": true,
@@ -386,7 +386,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": "Status",
+                                  "concreteType": "ProposalStepStatus",
                                   "kind": "LinkedField",
                                   "name": "statuses",
                                   "plural": true,

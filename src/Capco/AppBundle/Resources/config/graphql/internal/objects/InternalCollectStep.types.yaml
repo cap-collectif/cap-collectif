@@ -27,11 +27,11 @@ InternalCollectStep:
             requirements:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
             statuses:
-                type: '[Status!]!'
+                type: '[ProposalStepStatus!]!'
             private:
                 type: 'Boolean!'
             defaultStatus:
-                type: Status
+                type: 'ProposalStepStatus'
             form:
                 type: 'ProposalForm'
                 resolve: '@=value.getProposalForm()'

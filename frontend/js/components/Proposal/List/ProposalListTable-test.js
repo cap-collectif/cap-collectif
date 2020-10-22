@@ -60,7 +60,7 @@ describe('<ProposalListTable />', () => {
           reference: '1-2',
           publishedAt: '2018-09-17 16:15:39',
           theme: { title: 'Justice' },
-          status: { name: 'En cours', color: 'info' },
+          status: { name: 'En cours', color: 'INFO' },
           author: { displayName: 'admin2', url: 'google.com', media: null },
           category: null,
           currentVotableStep: null,

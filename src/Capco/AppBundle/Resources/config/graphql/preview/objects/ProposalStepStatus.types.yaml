@@ -1,0 +1,14 @@
+ProposalStepStatus:
+    type: object
+    config:
+        description: 'The given proposal status in a step.'
+        fields:
+            id:
+                description: 'The id of the proposal step status.'
+                type: 'ID!'
+            name:
+                description: 'The name of the proposal step status.'
+                type: 'String!'
+            color:
+                description: 'The color of the proposal step status.'
+                type: 'ProposalStepStatusColor!'

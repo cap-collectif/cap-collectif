@@ -1043,20 +1043,20 @@ export default createPaginationContainer(
                 }
                 analyses {
                   state
-                  updatedBy {
+                  analyst {
                     id
                   }
                 }
                 assessment {
                   state
-                  updatedBy {
+                  supervisor {
                     id
                   }
                 }
                 decision {
                   state
                   isApproved
-                  updatedBy {
+                  decisionMaker {
                     id
                   }
                 }

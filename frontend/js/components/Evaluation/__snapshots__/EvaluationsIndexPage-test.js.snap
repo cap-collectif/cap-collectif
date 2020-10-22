@@ -286,7 +286,7 @@ exports[`<EvaluationsIndexPage /> renders correcty 1`] = `
                           Object {
                             "alias": null,
                             "args": null,
-                            "concreteType": "Status",
+                            "concreteType": "ProposalStepStatus",
                             "kind": "LinkedField",
                             "name": "status",
                             "plural": false,

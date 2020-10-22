@@ -70,17 +70,17 @@ Object {
           },
           "statuses": Array [
             Object {
-              "color": "warning",
+              "color": "WARNING",
               "id": Any<String>,
               "name": "Le troisième statut devenu premier de l'étape de dépôt",
             },
             Object {
-              "color": "info",
+              "color": "INFO",
               "id": Any<String>,
               "name": "Le premier statut devenu deuxième de l'étape de dépôt",
             },
             Object {
-              "color": "danger",
+              "color": "DANGER",
               "id": Any<String>,
               "name": "Le deuxième statut devenu troisième de l'étape de dépôt",
             },
@@ -103,12 +103,12 @@ Object {
           },
           "statuses": Array [
             Object {
-              "color": "info",
+              "color": "INFO",
               "id": Any<String>,
               "name": "Le deuxième statut devenu premier de l'étape de sélection",
             },
             Object {
-              "color": "info",
+              "color": "INFO",
               "id": Any<String>,
               "name": "Le premier statut devenu deuxième de l'étape de sélection",
             },
@@ -213,12 +213,12 @@ Object {
           },
           "statuses": Array [
             Object {
-              "color": "info",
+              "color": "INFO",
               "id": Any<String>,
               "name": "Le premier statut de l'étape de sélection",
             },
             Object {
-              "color": "info",
+              "color": "INFO",
               "id": Any<String>,
               "name": "Le deuxième statut de l'étape de sélection",
             },

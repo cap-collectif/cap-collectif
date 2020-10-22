@@ -19,7 +19,7 @@ describe('<ProposalAnalysisFormPanel  /> ', () => {
         analyses: [
           {
             id: 'a1id',
-            updatedBy: {
+            analyst: {
               id: 'userID345',
             },
             comment: 'mwe',

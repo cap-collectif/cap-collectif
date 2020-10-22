@@ -527,11 +527,11 @@ describe('Internal|createAlphaProject complex mutations', () => {
               statuses: [
                 {
                   name: "Le premier statut de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
                 {
                   name: "Le deuxième statut de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
               ],
             },
@@ -580,15 +580,15 @@ describe('Internal|createAlphaProject complex mutations', () => {
               statuses: [
                 {
                   name: "Le premier statut de l'étape de dépôt",
-                  color: 'info',
+                  color: 'INFO',
                 },
                 {
                   name: "Le deuxième statut de l'étape de dépôt",
-                  color: 'danger',
+                  color: 'DANGER',
                 },
                 {
                   name: "Le troisième statut de l'étape de dépôt",
-                  color: 'warning',
+                  color: 'WARNING',
                 },
               ],
               requirements: [
@@ -607,11 +607,11 @@ describe('Internal|createAlphaProject complex mutations', () => {
               statuses: [
                 {
                   name: "Le premier statut de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
                 {
                   name: "Le deuxième statut de l'étape de sélection",
-                  color: 'info',
+                  color: 'INFO',
                 },
               ],
             },

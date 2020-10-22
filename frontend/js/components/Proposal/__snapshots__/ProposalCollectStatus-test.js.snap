@@ -2,7 +2,7 @@
 
 exports[`<ProposalCollectStatus /> renders proposal with status 1`] = `
 <div
-  className="proposal__status status--success"
+  className="proposal__status status--SUCCESS"
 >
   Terminé
 </div>

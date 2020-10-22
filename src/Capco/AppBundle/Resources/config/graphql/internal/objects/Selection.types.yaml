@@ -6,4 +6,4 @@ Selection:
       step:
         type: 'SelectionStep!'
       status:
-        type: 'Status'
+        type: 'ProposalStepStatus'

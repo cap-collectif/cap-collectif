@@ -26,6 +26,8 @@ class ProposalAssessment implements Timestampable
      */
     private $proposal;
 
+    // TODO: Rename to supervisor.
+
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="updated_by", nullable=true, referencedColumnName="id")

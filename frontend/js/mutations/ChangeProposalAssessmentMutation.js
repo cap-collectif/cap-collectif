@@ -20,7 +20,7 @@ const mutation = graphql`
             estimatedCost
             officialResponse
             state
-            updatedBy {
+            supervisor {
               id
             }
           }
@@ -29,7 +29,7 @@ const mutation = graphql`
         body
         estimatedCost
         officialResponse
-        updatedBy {
+        supervisor {
           id
         }
       }

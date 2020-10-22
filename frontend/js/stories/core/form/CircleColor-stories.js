@@ -5,10 +5,10 @@ import { storiesOf } from '@storybook/react';
 import CircleColor, { type Color } from '../../../components/Ui/CircleColor/CircleColor';
 
 export const colors: Array<Color> = [
-  { label: 'Blue', hexValue: '#3b88fd', name: 'primary' },
-  { label: 'Green', hexValue: '#3ad116', name: 'default' },
-  { label: 'Orange', hexValue: '#f4b721', name: 'danger' },
-  { label: 'Black with a long name to test padding lol', hexValue: '#000', name: 'success' },
+  { label: 'Blue', hexValue: '#3b88fd', name: 'PRIMARY' },
+  { label: 'Green', hexValue: '#3ad116', name: 'DEFAULT' },
+  { label: 'Orange', hexValue: '#f4b721', name: 'DANGER' },
+  { label: 'Black with a long name to test padding lol', hexValue: '#000', name: 'SUCCESS' },
 ];
 
 storiesOf('Core|Form/CircleColor', module).add('CircleColor', () => {

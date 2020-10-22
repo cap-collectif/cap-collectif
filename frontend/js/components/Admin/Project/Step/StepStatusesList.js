@@ -7,35 +7,35 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { ListGroup } from 'react-bootstrap';
 import { Field, change, arrayRemove } from 'redux-form';
 import InputRequirement from '~/components/Ui/Form/InputRequirement';
-import type { StatusColor } from '~relay/UpdateProjectAlphaMutation.graphql';
+import type { ProposalStepStatusColor } from '~relay/UpdateProjectAlphaMutation.graphql';
 import CircleColor, { type Color } from '~/components/Ui/CircleColor/CircleColor';
 import { RequirementDragItem } from './ProjectAdminStepForm.style';
 import { NoStepsPlaceholder } from '../Form/ProjectAdminForm.style';
 import type { Dispatch } from '~/types';
 
-export type Status = {|
+export type ProposalStepStatus = {|
   id?: ?string,
   name?: ?string,
-  color?: ?StatusColor,
+  color?: ?ProposalStepStatusColor,
 |};
 
 type Props = {|
   ...ReduxFormFieldArrayProps,
-  statuses: Array<Status>,
+  statuses: Array<ProposalStepStatus>,
   dispatch: Dispatch,
   formName: string,
   meta?: {| error: ?string |},
-  onInputChange: (value: string, color: string, field: string, status: Status) => void,
+  onInputChange: (value: string, color: string, field: string, status: ProposalStepStatus) => void,
   onInputDelete: (index: number) => void,
 |};
 
 const colorsData: Array<Color> = [
-  { label: 'global.primary', name: 'primary', hexValue: '#3b88fd' },
-  { label: 'global.green', name: 'success', hexValue: '#399a39' },
-  { label: 'global.orange', name: 'warning', hexValue: '#f4b721' },
-  { label: 'global.red', name: 'danger', hexValue: '#f75d56' },
-  { label: 'opinion_type.colors.blue', name: 'info', hexValue: '#77b5fe' },
-  { label: 'opinion_type.colors.white', name: 'default', hexValue: '#fff' },
+  { label: 'global.primary', name: 'PRIMARY', hexValue: '#3b88fd' },
+  { label: 'global.green', name: 'SUCCESS', hexValue: '#399a39' },
+  { label: 'global.orange', name: 'WARNING', hexValue: '#f4b721' },
+  { label: 'global.red', name: 'DANGER', hexValue: '#f75d56' },
+  { label: 'opinion_type.colors.blue', name: 'INFO', hexValue: '#77b5fe' },
+  { label: 'opinion_type.colors.white', name: 'DEFAULT', hexValue: '#fff' },
 ];
 
 export function StepStatusesList({ fields, statuses, onInputChange, onInputDelete }: Props) {
@@ -58,7 +58,7 @@ export function StepStatusesList({ fields, statuses, onInputChange, onInputDelet
             <CircleColor
               editable
               onChange={color => {
-                onInputChange(status?.name || 'primary', color.name, field, statuses[index]);
+                onInputChange(status?.name || 'PRIMARY', color.name, field, statuses[index]);
               }}
               defaultColor={defaultColor || colorsData[0]}
               colors={colorsData}
@@ -69,7 +69,7 @@ export function StepStatusesList({ fields, statuses, onInputChange, onInputDelet
               props={{
                 placeholder: intl.formatMessage({ id: 'enter-label' }),
                 onChange: (value: string) => {
-                  onInputChange(value, status.color || 'primary', field, statuses[index]);
+                  onInputChange(value, status.color || 'PRIMARY', field, statuses[index]);
                 },
                 onDelete: () => {
                   onInputDelete(index);
@@ -85,7 +85,7 @@ export function StepStatusesList({ fields, statuses, onInputChange, onInputDelet
 }
 
 const mapDispatchToProps = (dispatch: Dispatch, props: Props) => ({
-  onInputChange: (name: string, color: string, field: string, status: Status) => {
+  onInputChange: (name: string, color: string, field: string, status: ProposalStepStatus) => {
     dispatch(change(props.formName, field, { ...status, name, color }));
   },
   onInputDelete: (index: number) => {
