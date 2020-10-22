@@ -60,7 +60,7 @@ const createMailingList = (
       }
 
       if (withRedirection) {
-        window.location.replace('/admin/emailing/mailingList/list');
+        window.location.replace('/admin/mailingList/list');
       }
 
       onClose();
@@ -73,7 +73,7 @@ const createMailingList = (
             name: response.createMailingList?.mailingList?.name,
           },
           extraContent: (
-            <a href="/admin/emailing/mailingList/list">
+            <a href="/admin/mailingList/list">
               <FormattedMessage id="action_show" />
             </a>
           ),

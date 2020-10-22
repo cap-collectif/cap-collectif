@@ -35,6 +35,7 @@ import EventFormPageApp from './startup/EventFormPageApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
 import UserInviteAdminPageApp from '~/startup/UserInviteAdminPageApp';
 import EmailingListPageApp from '~/startup/EmailingListPageApp';
+import EmailingCampaignPageApp from '~/startup/EmailingCampaignPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -72,4 +73,5 @@ ReactOnRails.register({
   UserInviteAdminPageApp,
   MediaAdminPageApp,
   EmailingListPageApp,
+  EmailingCampaignPageApp,
 });

@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 class EmailingListAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'capco_admin_emailing_mailingList';
-    protected $baseRoutePattern = 'emailing/mailingList';
+    protected $baseRoutePattern = 'mailingList';
 
     public function getFeatures(): array
     {

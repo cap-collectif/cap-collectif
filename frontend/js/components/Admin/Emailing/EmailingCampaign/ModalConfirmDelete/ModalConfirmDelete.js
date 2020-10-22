@@ -4,31 +4,31 @@ import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '~/components/Form/CloseButton';
 import SubmitButton from '~/components/Form/SubmitButton';
-import DeleteMailingListMutation from '~/mutations/DeleteMailingListMutation';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
-import { usePickableList } from '~ui/List/PickableList';
-import type { DashboardParameters } from '~/components/Admin/Emailing/EmailingList/DashboardMailingList/DashboardMailingList.reducer';
-import { useDashboardMailingListContext } from '~/components/Admin/Emailing/EmailingList/DashboardMailingList/DashboardMailingList.context';
+import DeleteEmailingCampaignMutation from '~/mutations/DeleteEmailingCampaignMutation';
+import type { DashboardParameters } from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign.reducer';
+import { useDashboardCampaignContext } from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign.context';
 
 type Props = {|
   show: boolean,
   onClose: () => void,
+  campaignsIds: string[],
 |};
 
-const deleteMailingList = (
-  mailingListIds: string[],
+const deleteCampaign = (
+  campaignsIds: string[],
   onClose: () => void,
   parameters: DashboardParameters,
 ) => {
-  return DeleteMailingListMutation.commit({
+  return DeleteEmailingCampaignMutation.commit({
     input: {
-      ids: mailingListIds,
+      ids: campaignsIds,
     },
     parametersConnection: parameters,
   })
     .then(response => {
-      if (response.deleteMailingList?.error) {
+      if (response.deleteEmailingCampaigns?.error) {
         onClose();
 
         return FluxDispatcher.dispatch({
@@ -47,7 +47,7 @@ const deleteMailingList = (
           type: TYPE_ALERT.ERROR,
           content: 'success-delete-mailing-list',
           values: {
-            num: mailingListIds.length,
+            num: campaignsIds.length,
           },
         },
       });
@@ -63,9 +63,8 @@ const deleteMailingList = (
     });
 };
 
-const ModalConfirmDelete = ({ show, onClose }: Props) => {
-  const { selectedRows: mailingListSelected } = usePickableList();
-  const { parameters } = useDashboardMailingListContext();
+const ModalConfirmDelete = ({ show, onClose, campaignsIds }: Props) => {
+  const { parameters } = useDashboardCampaignContext();
 
   return (
     <Modal
@@ -77,22 +76,19 @@ const ModalConfirmDelete = ({ show, onClose }: Props) => {
       <Modal.Header closeButton>
         <Modal.Title id="modal-title">
           <FormattedMessage
-            id="title-delete-mailing-list-confirmation"
-            values={{ num: mailingListSelected.length }}
+            id="title-delete-campaign-confirmation"
+            values={{ num: campaignsIds.length }}
           />
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <FormattedMessage
-          id="delete-mailing-list-confirmation"
-          values={{ num: mailingListSelected.length }}
-        />
+        <FormattedMessage id="delete-campaign-confirmation" values={{ num: campaignsIds.length }} />
       </Modal.Body>
       <Modal.Footer>
         <CloseButton onClose={onClose} label="editor.undo" />
         <SubmitButton
           label="global.removeDefinitively"
-          onSubmit={() => deleteMailingList(mailingListSelected, onClose, parameters)}
+          onSubmit={() => deleteCampaign(campaignsIds, onClose, parameters)}
           bsStyle="danger"
         />
       </Modal.Footer>

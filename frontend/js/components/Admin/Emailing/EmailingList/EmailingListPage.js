@@ -9,7 +9,7 @@ import type {
 } from '~relay/EmailingListPageQuery.graphql';
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import { Container, Header, Content } from './EmailingListPage.style';
-import { useDashboardCampaignContext } from './DashboardMailingList/DashboardMailingList.context';
+import { useDashboardMailingListContext } from './DashboardMailingList/DashboardMailingList.context';
 import PickableList from '~ui/List/PickableList';
 import DashboardMailingList, {
   MAILING_LIST_PAGINATION,
@@ -36,14 +36,16 @@ const listMailingList = ({
   return <Loader />;
 };
 
-const createQueryVariables = (parameters: DashboardParameters): EmailingListPageQueryVariables => ({
+export const createQueryVariables = (
+  parameters: DashboardParameters,
+): EmailingListPageQueryVariables => ({
   count: MAILING_LIST_PAGINATION,
   cursor: null,
   term: parameters.filters.term,
 });
 
 export const EmailingListPage = () => {
-  const { parameters } = useDashboardCampaignContext();
+  const { parameters } = useDashboardMailingListContext();
 
   return (
     <Container className="emailing-mailingList-page">

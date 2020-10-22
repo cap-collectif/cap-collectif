@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CampaignItem /> should renders correctly 1`] = `
+<CampaignItemstyle__Container
+  rowId="1"
+  selected={false}
+>
+  <h3>
+    <a
+      href="#fake"
+      rel="noopener noreferrer"
+    >
+      Je suis une campagne
+    </a>
+  </h3>
+  <CampaignItemstyle__InfoRow>
+    <p>
+      <CampaignItemstyle__Circle
+        ariaHidden={true}
+        color="#D8D8D8"
+      />
+      <span
+        className="label-status"
+      >
+        global-draft
+      </span>
+    </p>
+    <p>
+      <span
+        className="separator"
+      >
+        •
+      </span>
+      <span>
+        Mon Mar 11 2030 00:00:00 GMT+0100
+      </span>
+    </p>
+  </CampaignItemstyle__InfoRow>
+  <p>
+    <Icon
+      color="#6C757D"
+      name="new-user"
+      size={15}
+    />
+    Je suis une mailing list
+  </p>
+</CampaignItemstyle__Container>
+`;
+
+exports[`<CampaignItem /> should renders correctly when no mailing list 1`] = `
+<CampaignItemstyle__Container
+  rowId="1"
+  selected={false}
+>
+  <h3>
+    <a
+      href="#fake"
+      rel="noopener noreferrer"
+    >
+      Je suis une campagne
+    </a>
+  </h3>
+  <CampaignItemstyle__InfoRow>
+    <p>
+      <CampaignItemstyle__Circle
+        ariaHidden={true}
+        color="#D8D8D8"
+      />
+      <span
+        className="label-status"
+      >
+        global-draft
+      </span>
+    </p>
+    <p>
+      <span
+        className="separator"
+      >
+        •
+      </span>
+      <span>
+        Mon Mar 11 2030 00:00:00 GMT+0100
+      </span>
+    </p>
+  </CampaignItemstyle__InfoRow>
+</CampaignItemstyle__Container>
+`;
+
+exports[`<CampaignItem /> should renders correctly when no send at 1`] = `
+<CampaignItemstyle__Container
+  rowId="1"
+  selected={false}
+>
+  <h3>
+    <a
+      href="#fake"
+      rel="noopener noreferrer"
+    >
+      Je suis une campagne
+    </a>
+  </h3>
+  <CampaignItemstyle__InfoRow>
+    <p>
+      <CampaignItemstyle__Circle
+        ariaHidden={true}
+        color="#D8D8D8"
+      />
+      <span
+        className="label-status"
+      >
+        global-draft
+      </span>
+    </p>
+  </CampaignItemstyle__InfoRow>
+  <p>
+    <Icon
+      color="#6C757D"
+      name="new-user"
+      size={15}
+    />
+    Je suis une mailing list
+  </p>
+</CampaignItemstyle__Container>
+`;
+
+exports[`<CampaignItem /> should renders correctly when selected 1`] = `
+<CampaignItemstyle__Container
+  rowId="1"
+  selected={true}
+>
+  <h3>
+    <a
+      href="#fake"
+      rel="noopener noreferrer"
+    >
+      Je suis une campagne
+    </a>
+  </h3>
+  <CampaignItemstyle__InfoRow>
+    <p>
+      <CampaignItemstyle__Circle
+        ariaHidden={true}
+        color="#D8D8D8"
+      />
+      <span
+        className="label-status"
+      >
+        global-draft
+      </span>
+    </p>
+    <p>
+      <span
+        className="separator"
+      >
+        •
+      </span>
+      <span>
+        Mon Mar 11 2030 00:00:00 GMT+0100
+      </span>
+    </p>
+  </CampaignItemstyle__InfoRow>
+  <p>
+    <Icon
+      color="#6C757D"
+      name="new-user"
+      size={15}
+    />
+    Je suis une mailing list
+  </p>
+</CampaignItemstyle__Container>
+`;

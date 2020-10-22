@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
-class EmailingController extends \Sonata\AdminBundle\Controller\CRUDController
+class EmailingListController extends \Sonata\AdminBundle\Controller\CRUDController
 {
 
     public function listAction()

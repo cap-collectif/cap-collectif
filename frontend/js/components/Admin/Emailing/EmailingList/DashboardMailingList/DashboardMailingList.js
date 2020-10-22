@@ -3,7 +3,7 @@ import * as React from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
-import { useDashboardCampaignContext } from './DashboardMailingList.context';
+import { useDashboardMailingListContext } from './DashboardMailingList.context';
 import * as S from './DashboardMailingList.style';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
 import EmailingLoader from '../../EmailingLoader/EmailingLoader';
@@ -68,7 +68,7 @@ const DashboardHeader = ({ showModalDelete }: HeaderProps) => {
 export const DashboardMailingList = ({ query, relay }: Props) => {
   const { mailingLists } = query;
   const { selectedRows } = usePickableList();
-  const { parameters, dispatch, status } = useDashboardCampaignContext();
+  const { parameters, dispatch, status } = useDashboardMailingListContext();
   const [isModalDeleteOpen, showModalDelete] = React.useState<boolean>(false);
   const [dataModalMembers, setDataModalMembers] = React.useState<?ModalMembersData>(null);
   const intl = useIntl();
