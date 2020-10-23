@@ -29,7 +29,7 @@ class EventSearch extends Search
         'translations.locale',
     ];
 
-    private $eventRepository;
+    private EventRepository $eventRepository;
 
     public function __construct(Index $index, EventRepository $eventRepository)
     {

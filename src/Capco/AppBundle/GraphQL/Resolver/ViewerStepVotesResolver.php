@@ -13,7 +13,7 @@ class ViewerStepVotesResolver implements ResolverInterface
 {
     use ResolverTrait;
 
-    private $dataLoader;
+    private ViewerProposalVotesDataLoader $dataLoader;
 
     public function __construct(ViewerProposalVotesDataLoader $dataLoader)
     {

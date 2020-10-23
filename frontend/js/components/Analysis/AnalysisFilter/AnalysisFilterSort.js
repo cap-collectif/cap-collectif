@@ -7,18 +7,34 @@ import DropdownSelect from '~ui/DropdownSelect';
 export const ORDER_BY: {
   OLDEST: 'oldest',
   NEWEST: 'newest',
+  MOST_VOTES: 'most-votes',
+  LEAST_VOTES: 'least-votes',
+  MOST_POINTS: 'most-points',
+  LEAST_POINT: 'least-points',
 } = {
   OLDEST: 'oldest',
   NEWEST: 'newest',
+  MOST_VOTES: 'most-votes',
+  LEAST_VOTES: 'least-votes',
+  MOST_POINTS: 'most-points',
+  LEAST_POINT: 'least-points',
 };
 
 type Props = {|
   value: $Values<typeof ORDER_BY>,
   onChange: (newValue: string) => void,
   isParticipant?: boolean,
+  isVotable?: boolean,
+  isVoteRanking?: boolean,
 |};
 
-const AnalysisFilterSort = ({ value, onChange, isParticipant }: Props) => {
+const AnalysisFilterSort = ({
+  value,
+  onChange,
+  isParticipant,
+  isVotable = false,
+  isVoteRanking = false,
+}: Props) => {
   const intl = useIntl();
 
   return (
@@ -43,6 +59,34 @@ const AnalysisFilterSort = ({ value, onChange, isParticipant }: Props) => {
               id: isParticipant ? 'least.active.users' : 'global.filter_f_old',
             })}
           </DropdownSelect.Choice>
+          {isVotable && (
+            <>
+              <DropdownSelect.Choice value={ORDER_BY.MOST_VOTES}>
+                {intl.formatMessage({
+                  id: 'step.sort.votes',
+                })}
+              </DropdownSelect.Choice>
+              <DropdownSelect.Choice value={ORDER_BY.LEAST_VOTES}>
+                {intl.formatMessage({
+                  id: 'global.filter_f_least-votes',
+                })}
+              </DropdownSelect.Choice>
+            </>
+          )}
+          {isVoteRanking && (
+            <>
+              <DropdownSelect.Choice value={ORDER_BY.MOST_POINTS}>
+                {intl.formatMessage({
+                  id: 'most-points',
+                })}
+              </DropdownSelect.Choice>
+              <DropdownSelect.Choice value={ORDER_BY.LEAST_POINT}>
+                {intl.formatMessage({
+                  id: 'least-points',
+                })}
+              </DropdownSelect.Choice>
+            </>
+          )}
         </DropdownSelect>
       </Collapsable.Element>
     </Collapsable>

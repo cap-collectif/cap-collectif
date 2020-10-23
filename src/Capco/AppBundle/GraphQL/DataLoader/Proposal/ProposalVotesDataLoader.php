@@ -14,7 +14,7 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 
 class ProposalVotesDataLoader extends BatchDataLoader
 {
-    private $voteSearch;
+    private VoteSearch $voteSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -100,6 +100,8 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     return $paginatedResults[$index];
                 });
                 $connections[$i] = $paginator->auto($key['args']);
+                $connections[$i]->{'totalPointsCount'} =
+                    $paginatedResults[$index]->totalPointsCount;
                 ++$index;
             }
         }

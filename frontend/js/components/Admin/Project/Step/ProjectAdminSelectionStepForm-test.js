@@ -11,6 +11,10 @@ describe('<ProjectAdminSelectionStepForm />', () => {
     isTresholdEnabled: false,
     isLimitEnabled: false,
     votable: false,
+    votesRanking: true,
+    votesLimit: 3,
+    votesMin: 1,
+    stepFormName: 'defaultForm',
   };
 
   it('renders correctly with no initial data', () => {
@@ -25,6 +29,10 @@ describe('<ProjectAdminSelectionStepForm />', () => {
       isTresholdEnabled: true,
       isLimitEnabled: true,
       votable: true,
+      votesRanking: false,
+      votesLimit: 0,
+      votesMin: 0,
+      stepFormName: 'defaultForm',
       requirements: [
         { type: 'CHECKBOX', checked: false, label: 'Sku' },
         {

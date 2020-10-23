@@ -24,6 +24,7 @@ const mutation = graphql`
           }
           step {
             votesMin
+            votesLimit
             id
             viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
               ...ProposalsUserVotesTable_votes

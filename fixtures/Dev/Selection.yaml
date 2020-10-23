@@ -111,3 +111,8 @@ Capco\AppBundle\Entity\Selection:
     selectionStep: '@selectionStepExport'
     createdAt: <(new \DateTime('2020-01-01 00:00:10'))>
     status: '@statusIdfAnalyse4'
+  selectionstepVoteClassement1:
+    proposal: '@proposal26'
+    selectionStep: '@selectionstepVoteClassement'
+    createdAt: <(new \DateTime('2020-01-01 00:00:10'))>
+    status: '@statusVoteAvecClassement'

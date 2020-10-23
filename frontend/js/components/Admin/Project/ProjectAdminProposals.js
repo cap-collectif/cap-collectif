@@ -379,6 +379,8 @@ const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>
 
       <AnalysisFilterSort
         value={parameters.sort}
+        isVoteRanking={selectedStep?.votesRanking || false}
+        isVotable={selectedStep?.votable || false}
         onChange={newValue => {
           dispatch({ type: 'CHANGE_SORT', payload: ((newValue: any): SortValues) });
         }}
@@ -663,6 +665,10 @@ export const ProjectAdminProposals = ({ project, themes, relay }: Props) => {
                     isAdminView
                     hasRegroupTag
                     proposal={proposal}
+                    isVoteRanking={selectedStep?.votesRanking || false}
+                    isVotable={selectedStep?.votable || false}
+                    votes={proposal.proposalVotes.totalCount}
+                    points={proposal.proposalVotes.totalPointsCount}
                     rowId={proposal.id}
                     key={proposal.id}
                     dispatch={dispatch}
@@ -754,6 +760,8 @@ export default createPaginationContainer(
           id
           title
           ... on ProposalStep {
+            votable
+            votesRanking
             statuses {
               id
               name
@@ -818,6 +826,10 @@ export default createPaginationContainer(
                 id
                 name
                 color
+              }
+              proposalVotes: votes(stepId: $step) {
+                totalCount
+                totalPointsCount
               }
               form {
                 step {

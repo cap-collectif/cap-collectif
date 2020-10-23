@@ -58,7 +58,7 @@ export default createFragmentContainer(ProposalPageMainContent, {
       ...ProposalPageDescription_proposal
       ...ProposalPageLocalisation_proposal
       ...ProposalPageCustomSections_proposal
-      ...ProposalPageMainAside_proposal
+      ...ProposalPageMainAside_proposal @arguments(stepId: $stepId)
       ...ProposalPageNews_proposal
       ...ProposalPageDiscussions_proposal
       ...ProposalVoteButtonWrapperFragment_proposal

@@ -32,6 +32,14 @@ export const queryVariables = (filters: Filters, order: ?string) => {
       direction = 'DESC';
       field = 'VOTES';
       break;
+    case 'points':
+      direction = 'DESC';
+      field = 'POINTS';
+      break;
+    case 'least-points':
+      direction = 'ASC';
+      field = 'POINTS';
+      break;
     case 'old':
       direction = 'ASC';
       field = 'PUBLISHED_AT';

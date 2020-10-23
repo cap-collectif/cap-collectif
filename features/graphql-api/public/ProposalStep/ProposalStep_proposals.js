@@ -46,6 +46,10 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
                 id
                 name
               }
+              votes(stepId: $id) {
+                totalCount
+                totalPointsCount
+              }
             }
           }
         }
@@ -141,6 +145,33 @@ describe('Internal|ProposalStep.proposals connection', () => {
           count: 2,
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
           orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches proposals with most points associated to a collect step with a cursor', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsQuery,
+        {
+          count: 2,
+          id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
+          orderBy: { field: 'POINTS', direction: 'DESC' },
+        },
+        'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+  it('fetches proposals with most votes associated to a collect step with a cursor', async () => {
+    await expect(
+      graphql(
+        ProposalStepProposalsQuery,
+        {
+          count: 2,
+          id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
+          orderBy: { field: 'VOTES', direction: 'DESC' },
         },
         'internal',
       ),

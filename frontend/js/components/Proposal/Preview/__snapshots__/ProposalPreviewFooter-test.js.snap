@@ -10,16 +10,15 @@ exports[`<ProposalPreviewFooter /> should render a footer with comments counters
     >
       3
     </div>
-    <div>
-      <FormattedMessage
-        id="comment.count_no_nb"
-        values={
-          Object {
-            "count": 3,
-          }
+    <FormattedMessage
+      id="comment.count_no_nb"
+      tagName="div"
+      values={
+        Object {
+          "count": 3,
         }
-      />
-    </div>
+      }
+    />
   </div>
 </Counters>
 `;
@@ -34,16 +33,15 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
     >
       3
     </div>
-    <div>
-      <FormattedMessage
-        id="comment.count_no_nb"
-        values={
-          Object {
-            "count": 3,
-          }
+    <FormattedMessage
+      id="comment.count_no_nb"
+      tagName="div"
+      values={
+        Object {
+          "count": 3,
         }
-      />
-    </div>
+      }
+    />
   </div>
   <div
     className="card__counters__item card__counters__item--votes"
@@ -53,16 +51,33 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
     >
       42
     </div>
-    <div>
-      <FormattedMessage
-        id="vote.count_no_nb"
-        values={
-          Object {
-            "count": 42,
-          }
+    <FormattedMessage
+      id="vote.count_no_nb"
+      tagName="div"
+      values={
+        Object {
+          "count": 42,
         }
-      />
+      }
+    />
+  </div>
+  <div
+    className="card__counters__item card__counters__item--votes"
+  >
+    <div
+      className="card__counters__value"
+    >
+      192
     </div>
+    <FormattedMessage
+      id="points-count"
+      tagName="div"
+      values={
+        Object {
+          "num": 192,
+        }
+      }
+    />
   </div>
 </Counters>
 `;
@@ -77,16 +92,33 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes counters on
     >
       42
     </div>
-    <div>
-      <FormattedMessage
-        id="vote.count_no_nb"
-        values={
-          Object {
-            "count": 42,
-          }
+    <FormattedMessage
+      id="vote.count_no_nb"
+      tagName="div"
+      values={
+        Object {
+          "count": 42,
         }
-      />
+      }
+    />
+  </div>
+  <div
+    className="card__counters__item card__counters__item--votes"
+  >
+    <div
+      className="card__counters__value"
+    >
+      192
     </div>
+    <FormattedMessage
+      id="points-count"
+      tagName="div"
+      values={
+        Object {
+          "num": 192,
+        }
+      }
+    />
   </div>
 </Counters>
 `;

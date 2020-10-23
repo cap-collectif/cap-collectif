@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepPointsVotesCountResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -17,20 +18,24 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryVotesResolver implements ResolverInterface
 {
-    protected $votesRepository;
-    protected $projectsResolver;
-    protected $stepVotesCountResolver;
-    protected $adapter;
+    protected AbstractVoteRepository $votesRepository;
+    protected QueryProjectsResolver $projectsResolver;
+    protected StepVotesCountResolver $stepVotesCountResolver;
+    protected StepPointsVotesCountResolver $stepPointsVotesCountResolver;
+    protected PromiseAdapterInterface $adapter;
 
     public function __construct(
         AbstractVoteRepository $votesRepository,
         QueryProjectsResolver $projectsResolver,
         StepVotesCountResolver $stepVotesCountResolver,
+        StepPointsVotesCountResolver $stepPointsVotesCountResolver,
         PromiseAdapterInterface $adapter
     ) {
         $this->votesRepository = $votesRepository;
         $this->projectsResolver = $projectsResolver;
         $this->stepVotesCountResolver = $stepVotesCountResolver;
+        $this->stepVotesCountResolver = $stepVotesCountResolver;
+        $this->stepPointsVotesCountResolver = $stepPointsVotesCountResolver;
         $this->adapter = $adapter;
     }
 

@@ -23,6 +23,10 @@ type Props = {|
   isBudgetEnabled: boolean,
   isTresholdEnabled: boolean,
   isLimitEnabled: boolean,
+  votesMin: ?number,
+  votesLimit: ?number,
+  votesRanking: boolean,
+  stepFormName: string,
 |};
 
 export const renderSortValues = (intl: IntlShape) => [
@@ -46,13 +50,23 @@ export const ProjectAdminSelectionStepForm = ({
   isBudgetEnabled,
   isTresholdEnabled,
   isLimitEnabled,
+  stepFormName,
+  votesRanking,
+  votesLimit,
+  votesMin,
 }: Props) => {
   const intl = useIntl();
   const statusesWithId = statuses?.filter(s => s.id) || [];
   return (
     <>
       <StepVotesFields
+        stepFormName={stepFormName}
         votable={votable}
+        options={{
+          limit: votesLimit,
+          min: votesMin,
+          ranking: votesRanking,
+        }}
         isBudgetEnabled={isBudgetEnabled}
         isTresholdEnabled={isTresholdEnabled}
         isLimitEnabled={isLimitEnabled}

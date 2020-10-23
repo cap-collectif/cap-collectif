@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserVotesResolver implements ResolverInterface
 {
-    private $voteSearch;
+    private VoteSearch $voteSearch;
 
     public function __construct(VoteSearch $voteSearch)
     {

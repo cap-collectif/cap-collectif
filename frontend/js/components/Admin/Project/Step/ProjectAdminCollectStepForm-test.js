@@ -12,6 +12,10 @@ describe('<ProjectAdminCollectStepForm />', () => {
     isTresholdEnabled: true,
     votable: true,
     isPrivate: false,
+    votesRanking: true,
+    votesLimit: 3,
+    votesMin: 1,
+    stepFormName: 'defaultForm',
   };
 
   it('renders correctly', () => {

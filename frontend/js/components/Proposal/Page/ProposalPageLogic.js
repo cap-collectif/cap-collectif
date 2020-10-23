@@ -227,16 +227,16 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
         ...ProposalVoteBasketWidget_step @include(if: $isAuthenticated)
       }
       proposal: node(id: $proposalId) {
-        ...ProposalPageAside_proposal
+        ...ProposalPageAside_proposal @arguments(stepId: $stepId)
         ...ProposalDraftAlert_proposal
         ...ProposalPageMainContent_proposal
         ...ProposalPageAlert_proposal
-        ...ProposalPageTabs_proposal
+        ...ProposalPageTabs_proposal @arguments(stepId: $stepId)
         ...ProposalPageVotes_proposal
         ...ProposalPageBlog_proposal
         ...ProposalPageFollowers_proposal
         ...ProposalPageHeader_proposal @arguments(isAuthenticated: $isAuthenticated)
-        ...ProposalPageMainAside_proposal @include(if: $isAuthenticated)
+        ...ProposalPageMainAside_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
         ...ProposalAnalysisPanel_proposal @include(if: $isAuthenticated)
         ... on Proposal {
           id

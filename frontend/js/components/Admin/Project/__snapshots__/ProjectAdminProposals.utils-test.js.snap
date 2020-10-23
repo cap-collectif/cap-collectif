@@ -68,12 +68,16 @@ Array [
     "id": "cstep1",
     "title": "Étape de dépôt",
     "type": "CollectStep",
+    "votable": false,
+    "votesRanking": false,
   },
   Object {
     "hasTheme": false,
     "id": "sstep1",
     "title": "Étape de sélection",
     "type": "SelectionStep",
+    "votable": false,
+    "votesRanking": false,
   },
 ]
 `;

@@ -13,6 +13,7 @@ const proposal = {
     id: 'cvs1',
     voteType: 'SIMPLE',
     voteThreshold: null,
+    votesRanking: true,
     $fragmentRefs,
   },
   form: {

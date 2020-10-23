@@ -16,9 +16,17 @@ import {
 export const ORDER_BY: {
   OLDEST: 'oldest',
   NEWEST: 'newest',
+  MOST_VOTES: 'most-votes',
+  LEAST_VOTE: 'least-votes',
+  MOST_POINTS: 'most-points',
+  LEAST_POINT: 'least-points',
 } = {
   OLDEST: 'oldest',
   NEWEST: 'newest',
+  MOST_VOTES: 'most-votes',
+  LEAST_VOTE: 'least-votes',
+  MOST_POINTS: 'most-points',
+  LEAST_POINT: 'least-points',
 };
 
 export type SortValues = $Values<typeof ORDER_BY>;

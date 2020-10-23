@@ -56,6 +56,12 @@ services:
             $cachePrefix: StepVotesCountDataLoader
             $cacheTtl: 120
 
+    Capco\AppBundle\GraphQL\DataLoader\Step\StepPointsVotesCountDataLoader:
+        public: true
+        arguments:
+            $cachePrefix: StepPointsVotesCountDataLoader
+            $cacheTtl: 120
+
     Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader:
         arguments:
             $cachePrefix: ProposalAuthorDataLoader

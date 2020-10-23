@@ -8,7 +8,7 @@ import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { renderLabel } from '../Content/ProjectContentAdminForm';
 import toggle from '~/components/Form/Toggle';
 import renderComponent from '~/components/Form/Field';
-import type { Dispatch, GlobalState } from '~/types';
+import type { Dispatch, GlobalState, FeatureToggles } from '~/types';
 import { ProjectBoxHeader, PermalinkWrapper } from '../Form/ProjectAdminForm.style';
 import ProjectAdminQuestionnaireStepForm from './ProjectAdminQuestionnaireStepForm';
 import ProjectAdminConsultationStepForm from './ProjectAdminConsultationStepForm';
@@ -63,7 +63,7 @@ type Props = {|
     voteThreshold?: number,
     votesMin?: number,
     votesLimit?: number,
-    votesRanking?: number,
+    votesRanking?: boolean,
     budget?: number,
     isBudgetEnabled?: ?boolean,
     isTresholdEnabled?: ?boolean,
@@ -130,7 +130,7 @@ export type FormValues = {|
   voteThreshold?: number,
   votesLimit?: number,
   votesMin?: number,
-  votesRanking?: number,
+  votesRanking?: boolean,
   budget?: number,
   isBudgetEnabled?: ?boolean,
   isTresholdEnabled?: ?boolean,
@@ -230,17 +230,21 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
   }
 };
 
-const validate = ({
-  type,
-  label,
-  title,
-  startAt,
-  questionnaire,
-  consultations,
-  votesLimit,
-  votesMin,
-  proposalForm,
-}: FormValues) => {
+const validate = (
+  {
+    type,
+    label,
+    title,
+    startAt,
+    questionnaire,
+    consultations,
+    votesLimit,
+    votesMin,
+    proposalForm,
+    votesRanking,
+  }: FormValues,
+  features: FeatureToggles,
+) => {
   const errors = {};
 
   if (!label || label.length < 2) {
@@ -267,21 +271,26 @@ const validate = ({
     if (!consultations || !consultations.length) errors.consultations = 'global.required';
   }
 
-  if (votesMin != null) {
-    if (votesLimit != null && votesLimit < votesMin && votesLimit > 0) {
+  if (votesRanking && features.votes_min) {
+    if (
+      votesLimit != null &&
+      parseInt(votesLimit, 10) < parseInt(votesMin, 10) &&
+      parseInt(votesLimit, 10) > 0
+    ) {
       errors.votesMin = 'maximum-vote-must-be-higher-than-minimum';
     }
-    if (votesMin < 0) {
+    if (parseInt(votesMin, 10) < 0) {
       errors.votesMin = 'minimum-vote-must-be-greater-than-or-equal';
     }
   }
 
-  if (votesLimit != null && votesLimit < 0) {
-    if (errors.votesMin) {
-      errors.votesMin = 'maximum-vote-must-be-greater-than-or-equal';
-    } else {
-      errors.votesLimit = 'maximum-vote-must-be-greater-than-or-equal';
-    }
+  // eslint-disable-next-line no-restricted-globals
+  if (!features.votes_min && isNaN(parseInt(votesLimit, 10))) {
+    errors.votesLimit = 'maximum-vote-must-be-greater-than-or-equal';
+  }
+
+  if (votesRanking && parseInt(votesLimit, 10) != null && parseInt(votesLimit, 10) <= 0) {
+    errors.votesLimit = 'maximum-vote-must-be-greater-than-or-equal';
   }
   return errors;
 };
@@ -419,6 +428,10 @@ export function ProjectAdminStepForm({
               isBudgetEnabled={isBudgetEnabled}
               isTresholdEnabled={isTresholdEnabled}
               isLimitEnabled={isLimitEnabled}
+              stepFormName={stepFormName}
+              votesMin={step?.votesMin || 1}
+              votesLimit={step?.votesLimit || null}
+              votesRanking={step?.votesRanking || false}
               statuses={statuses}
               votable={votable}
               requirements={requirements}
@@ -433,6 +446,10 @@ export function ProjectAdminStepForm({
               isBudgetEnabled={isBudgetEnabled}
               isTresholdEnabled={isTresholdEnabled}
               isLimitEnabled={isLimitEnabled}
+              stepFormName={stepFormName}
+              votesMin={step?.votesMin || 1}
+              votesLimit={step?.votesLimit || null}
+              votesRanking={step?.votesRanking || false}
               statuses={statuses}
               votable={votable}
               requirements={requirements}

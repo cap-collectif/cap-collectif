@@ -1,11 +1,11 @@
 UpdateProposalVotesInput:
-  type: relay-mutation-input
-  config:
-    description: 'Update votes.'
-    fields:
-      step:
-        type: 'ID!'
-        description: 'The step.'
-      votes:
-        type: '[VoteInput!]!'
-        description: 'The votes.'
+    type: relay-mutation-input
+    config:
+        description: 'Update votes.'
+        fields:
+            step:
+                type: 'ID!'
+                description: 'The step.'
+            votes:
+                type: '[VoteInput!]!'
+                description: 'The votes.'

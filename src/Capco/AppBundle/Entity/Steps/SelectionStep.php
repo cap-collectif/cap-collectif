@@ -33,7 +33,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     public static $voteTypeLabels = [
         'step.selection.vote_type.disabled' => self::VOTE_TYPE_DISABLED,
         'step.selection.vote_type.simple' => self::VOTE_TYPE_SIMPLE,
-        'step.selection.vote_type.budget' => self::VOTE_TYPE_BUDGET
+        'step.selection.vote_type.budget' => self::VOTE_TYPE_BUDGET,
     ];
 
     public static $sort = [
@@ -44,7 +44,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
         'comments',
         'random',
         'expensive',
-        'cheap'
+        'cheap',
     ];
 
     public static $sortLabels = [
@@ -55,7 +55,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
         'step.sort.votes' => 'votes',
         'step.sort.least-votes' => 'least-votes',
         'step.sort.expensive' => 'expensive',
-        'step.sort.cheap' => 'cheap'
+        'step.sort.cheap' => 'cheap',
     ];
 
     /**

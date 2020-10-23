@@ -19,9 +19,15 @@ import type {
   ProposalsThemeValues,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import { TagContainer } from '~ui/Labels/Tag';
+import colors from '~/utils/colors';
 
 type Props = {
   proposal: AnalysisProposal_proposal,
+  isVoteRanking?: boolean,
+  isVotable?: boolean,
+  points?: number,
+  votes?: number,
   children: React.Node,
   dispatch: any => void,
   hasThemeEnabled: boolean,
@@ -35,8 +41,12 @@ type Props = {
 
 const AnalysisProposal = ({
   proposal,
-  children,
+  votes,
+  points,
+  isVoteRanking = false,
+  isVotable = false,
   dispatch,
+  children,
   hasThemeEnabled,
   hasStateTag,
   hasRegroupTag,
@@ -47,7 +57,6 @@ const AnalysisProposal = ({
 }: Props) => {
   const isSelected = proposalSelected === proposal.id;
   const hasActionDisplay = isSelected && isAdminView;
-
   return (
     <AnalysisProposalContainer
       rowId={proposal.id}
@@ -140,6 +149,19 @@ const AnalysisProposal = ({
               }>
               {proposal.category.name}
             </ProposalTag>
+          )}
+          {isVotable && votes !== null && (
+            <TagContainer>
+              <Icon color={colors.darkGray} size="14" name={ICON_NAME.like} />
+              <FormattedMessage id="votes-count" values={{ num: votes }} />
+            </TagContainer>
+          )}
+          {isVoteRanking && points !== null && (
+            <TagContainer>
+              <Icon color={colors.darkGray} size="14" name={ICON_NAME.trophy} />
+              <span>{points}&nbsp;</span>
+              <FormattedMessage id="points-count" values={{ num: points }} />
+            </TagContainer>
           )}
         </AnalysisProposalListRowMeta>
 

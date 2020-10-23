@@ -390,6 +390,43 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function countPointsOnPublishedCollectVoteByStep(
+        CollectStep $step,
+        bool $onlyAccounted = true
+    ): int {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('pv.position as position', 'cs.votesLimit as max', 'cs.votesMin as min')
+            ->andWhere('pv.collectStep = :step')
+            ->innerJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('pv.position IS NOT NULL')
+            ->andWhere('pv.published = 1');
+        if ($onlyAccounted) {
+            $qb->andWhere('pv.isAccounted = 1');
+        }
+
+        $results = $qb
+            ->andWhere('proposal.draft = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
+            ->andWhere('proposal.published = 1')
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getResult();
+
+        $pointsOnStep = 0;
+        /** @var ProposalCollectVote $result */
+        foreach ($results as $result) {
+            $pointsAvailable = [];
+            for ($i = $result['max']; $i > 0; --$i) {
+                $pointsAvailable[] = $i;
+            }
+
+            $pointsOnStep += $pointsAvailable[$result['position']];
+        }
+
+        return $pointsOnStep;
+    }
+
     private function getCountsByProposalGroupedBySteps(
         Proposal $proposal,
         bool $asTitle = false
@@ -401,13 +438,23 @@ class ProposalCollectVoteRepository extends EntityRepository
         $qb = $this->createQueryBuilder('pv');
 
         if ($asTitle) {
-            $qb->select('COUNT(pv.id) as votesCount', 'cs.title as stepId');
+            $qb->select(
+                'cs.title as stepId',
+                'pv.position as position',
+                'cs.votesLimit as max',
+                'cs.votesRanking as votesRanking'
+            );
             $index = $proposal
                 ->getProposalForm()
                 ->getStep()
                 ->getTitle();
         } else {
-            $qb->select('COUNT(pv.id) as votesCount', 'cs.id as stepId');
+            $qb->select(
+                'cs.id as stepId',
+                'pv.position as position',
+                'cs.votesLimit as max',
+                'cs.votesRanking as votesRanking'
+            );
             $index = $proposal
                 ->getProposalForm()
                 ->getStep()
@@ -418,22 +465,42 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->leftJoin('pv.collectStep', 'cs')
             ->andWhere('pv.proposal = :proposal')
             ->andWhere('pv.published = true')
-            ->setParameter('proposal', $proposal)
-            ->groupBy('pv.collectStep');
+            ->andWhere('pv.isAccounted = 1')
+            ->setParameter('proposal', $proposal);
 
         $results = $qb
             ->getQuery()
             ->useQueryCache(true)
             ->getResult();
-        $votesBySteps = [];
+        $data = [];
+        $data['votesBySteps'] = [];
+        $data['pointsBySteps'] = [];
+
         foreach ($results as $result) {
-            $votesBySteps[$result['stepId']] = (int) $result['votesCount'];
+            $pointsAvailable = [];
+            for ($i = $result['max']; $i > 0; --$i) {
+                $pointsAvailable[] = $i;
+            }
+            $data['votesBySteps'][$result['stepId']] = \count($results);
+
+            if (true === $result['votesRanking']) {
+                if (isset($data['pointsBySteps'][$result['stepId']])) {
+                    $data['pointsBySteps'][$result['stepId']] +=
+                        $pointsAvailable[$result['position']];
+                } else {
+                    $data['pointsBySteps'][$result['stepId']] =
+                        $pointsAvailable[$result['position']];
+                }
+            }
         }
 
-        if (!isset($votesBySteps[$index])) {
-            $votesBySteps[$index] = 0;
+        if (!isset($data['votesBySteps'][$index])) {
+            $data['votesBySteps'][$index] = 0;
+        }
+        if (!isset($data['pointsBySteps'][$index])) {
+            $data['pointsBySteps'][$index] = 0;
         }
 
-        return $votesBySteps;
+        return $data;
     }
 }

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Droppable, type DroppableProvided } from 'react-beautiful-dnd';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import ListContainer, { ListItemContainer } from './List.style';
 import Title, { TYPE } from '~/components/Ui/Title/Title';
 
@@ -23,33 +23,55 @@ const List = ({
   isCombineEnabled,
   isCombineOnly,
   hasPositionDisplayed,
-}: ListProps) => (
-  <ListContainer hasPositionDisplayed={hasPositionDisplayed} id={id}>
-    {title && (
-      <Title type={TYPE.H3}>
-        <FormattedMessage id={title} />
-      </Title>
-    )}
-    <Droppable
-      droppableId={id}
-      isDropDisabled={isDisabled}
-      isCombineEnabled={isCombineEnabled}
-      isCombineOnly={isCombineOnly}>
-      {(provided: DroppableProvided) => (
-        <ul className="wrapper-item-container" ref={provided.innerRef} {...provided.droppableProps}>
-          {children.map((child, i: string) => (
-            <ListItemContainer key={i}>
-              {hasPositionDisplayed && (
-                <span className="item__position">{child.props.position + 1}</span>
-              )}
-              {child}
-            </ListItemContainer>
-          ))}
-          {provided.placeholder}
-        </ul>
+}: ListProps) => {
+  return (
+    <ListContainer hasPositionDisplayed={hasPositionDisplayed} id={id}>
+      {title && (
+        <Title type={TYPE.H3}>
+          <FormattedMessage id={title} />
+        </Title>
       )}
-    </Droppable>
-  </ListContainer>
-);
+      <Droppable
+        droppableId={id}
+        isDropDisabled={isDisabled}
+        isCombineEnabled={isCombineEnabled}
+        isCombineOnly={isCombineOnly}>
+        {(provided: DroppableProvided) => (
+          <ul
+            className="wrapper-item-container"
+            ref={provided.innerRef}
+            {...provided.droppableProps}>
+            {children.map((child, i: string) => {
+              let points = false;
+              if (
+                child.props &&
+                child.props.children &&
+                child.props.children.props &&
+                child.props.children.props.step
+              ) {
+                const availablePoints = Array.from(
+                  { length: child.props.children.props.step.votesLimit },
+                  (v, l) => child.props.children.props.step.votesLimit - l,
+                );
+                points = availablePoints ? availablePoints[child.props.position] : false;
+              }
+              return (
+                <ListItemContainer key={i}>
+                  {hasPositionDisplayed && points && (
+                    <span className="item__position__point">
+                      <FormattedHTMLMessage id="item-point" values={{ num: points }} />
+                    </span>
+                  )}
+                  {child}
+                </ListItemContainer>
+              );
+            })}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
+    </ListContainer>
+  );
+};
 
 export default List;

@@ -17,14 +17,24 @@ import {
   isInterpellationContextFromStep,
   isInterpellationContextFromProposal,
 } from '~/utils/interpellationLabelHelper';
+import UpdateProposalVotesMutation from '~/mutations/UpdateProposalVotesMutation';
 
 type Step = {|
   +id: Uuid,
+  +votesRanking: boolean,
+  +viewerVotes?: {|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: {|
+        +id: string,
+        +anonymous: boolean,
+      |},
+    |}>,
+  |},
 |};
 
 type ParentProps = {|
   proposal: ProposalVoteButton_proposal,
-  step: Step,
+  currentStep: Step,
   user: { +id: string },
   isHovering: boolean,
   id: string,
@@ -39,10 +49,14 @@ type Props = {|
   isAuthenticated: boolean,
 |};
 
-const deleteVote = (step: Step, proposal: ProposalVoteButton_proposal, isAuthenticated: boolean) =>
-  RemoveProposalVoteMutation.commit({
-    stepId: step.id,
-    input: { proposalId: proposal.id, stepId: step.id },
+const deleteVote = (
+  currentStep: Step,
+  proposal: ProposalVoteButton_proposal,
+  isAuthenticated: boolean,
+) => {
+  return RemoveProposalVoteMutation.commit({
+    stepId: currentStep.id,
+    input: { proposalId: proposal.id, stepId: currentStep.id },
     isAuthenticated,
   })
     .then(response => {
@@ -69,6 +83,42 @@ const deleteVote = (step: Step, proposal: ProposalVoteButton_proposal, isAuthent
         },
       });
     });
+};
+
+const onDelete = (
+  currentStep: Step,
+  proposal: ProposalVoteButton_proposal,
+  isAuthenticated: boolean,
+) => {
+  return deleteVote(currentStep, proposal, isAuthenticated).then(() => {
+    const votes = currentStep?.viewerVotes?.edges
+      ?.filter(Boolean)
+      .filter(edge => edge.node.id !== proposal.viewerVote?.id)
+      .map(edge => ({
+        id: edge.node.id,
+        anonymous: edge.node.anonymous,
+      }));
+
+    // Otherwise we update/reorder votes
+    return UpdateProposalVotesMutation.commit(
+      {
+        input: {
+          step: currentStep.id,
+          votes: votes || [],
+        },
+        stepId: currentStep.id,
+        isAuthenticated,
+      },
+      {
+        id: proposal.id,
+        position: Number.isNaN(parseInt(proposal.viewerVote?.ranking, 10))
+          ? -1
+          : parseInt(proposal.viewerVote?.ranking, 10),
+        isVoteRanking: currentStep.votesRanking,
+      },
+    );
+  });
+};
 
 // Should only be used via ProposalVoteButtonWrapper
 export class ProposalVoteButton extends React.Component<Props> {
@@ -105,7 +155,7 @@ export class ProposalVoteButton extends React.Component<Props> {
   render() {
     const {
       dispatch,
-      step,
+      currentStep,
       user,
       proposal,
       disabled,
@@ -118,7 +168,7 @@ export class ProposalVoteButton extends React.Component<Props> {
       ? null
       : proposal.viewerHasVote
       ? () => {
-          deleteVote(step, proposal, isAuthenticated);
+          onDelete(currentStep, proposal, isAuthenticated);
         }
       : () => {
           dispatch(openVoteModal(proposal.id));
@@ -166,6 +216,7 @@ export default createFragmentContainer(container, {
       viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
       viewerVote(step: $stepId) @include(if: $isAuthenticated) {
         id
+        ranking
         ...UnpublishedTooltip_publishable
       }
     }

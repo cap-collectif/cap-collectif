@@ -18,7 +18,7 @@ Object {
           "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
           "title": "Projet pour consolider les exports",
           "votes": Object {
-            "totalCount": 4,
+            "totalCount": 5,
           },
         },
       },
@@ -362,17 +362,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
           "contributions": Object {
-            "totalCount": 3,
+            "totalCount": 5,
           },
-          "contributionsCount": 3,
+          "contributionsCount": 5,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 5,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "title": "BP avec vote classement",
           "votes": Object {
-            "totalCount": 3,
+            "totalCount": 8,
           },
         },
       },
@@ -444,7 +444,7 @@ Object {
           "id": "UHJvamVjdDpQcm9qZWN0V2l0aEN1c3RvbUFjY2Vzcw==",
           "title": "Un avenir meilleur pour les nains de jardins (custom access)",
           "votes": Object {
-            "totalCount": 4,
+            "totalCount": 3,
           },
         },
       },
@@ -626,9 +626,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 3,
+            "totalCount": 5,
           },
-          "contributionsCount": 3,
+          "contributionsCount": 5,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "publishedAt": "2014-12-17 00:00:00",
           "title": "BP avec vote classement",
@@ -890,7 +890,7 @@ Object {
           "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
           "title": "Projet pour consolider les exports",
           "votes": Object {
-            "totalCount": 4,
+            "totalCount": 5,
           },
         },
       },
@@ -1234,17 +1234,17 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
           "contributions": Object {
-            "totalCount": 3,
+            "totalCount": 5,
           },
-          "contributionsCount": 3,
+          "contributionsCount": 5,
           "contributors": Object {
-            "totalCount": 2,
+            "totalCount": 5,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0MTU=",
           "title": "BP avec vote classement",
           "votes": Object {
-            "totalCount": 3,
+            "totalCount": 8,
           },
         },
       },

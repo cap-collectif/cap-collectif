@@ -9,21 +9,20 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProjectVotableStepsResolver implements ResolverInterface
 {
-    protected $selectionStepRepository;
-    protected $collectStepRepository;
+    protected SelectionStepRepository $selectionStepRepository;
+    protected CollectStepRepository $collectStepRepository;
 
-    public function __construct(SelectionStepRepository $selectionStepRepository, CollectStepRepository $collectStepRepository)
-    {
+    public function __construct(
+        SelectionStepRepository $selectionStepRepository,
+        CollectStepRepository $collectStepRepository
+    ) {
         $this->selectionStepRepository = $selectionStepRepository;
         $this->collectStepRepository = $collectStepRepository;
     }
 
     public function __invoke(Project $project): iterable
     {
-        $collection = $this
-          ->selectionStepRepository
-          ->getVotableStepsForProject($project)
-        ;
+        $collection = $this->selectionStepRepository->getVotableStepsForProject($project);
         $collectSteps = $this->collectStepRepository->getCollectStepsForProject($project);
         if (\count($collectSteps) > 0) {
             $step = $collectSteps[0];

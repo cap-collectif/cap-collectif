@@ -90,8 +90,10 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         startAt: <identity((new \DateTime('2017-09-05')))>
         endAt: <identity((new \DateTime('2030-01-01')))>
         voteType: 1
-        votesLimit: 3
+        votesMin: 3
+        votesLimit: 10
         votesRanking: true
+        voteThreshold: 30
         requirementsReason: Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.
     collectstep9:
         id: collectstep9
@@ -132,7 +134,10 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         startAt: <identity((new \DateTime('2018-09-29')))>
         endAt: <identity((new \DateTime('2041-01-01')))>
-        voteType: 0
+        voteType: 1
+        votesMin: 2
+        votesLimit: 2
+        votesRanking: true
     collectstepWithQuestions:
         id: collectstepWithQuestions
         title: Collecte des propositions avec questions
@@ -195,3 +200,5 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         endAt: <identity((new \DateTime('2021-03-16')))>
         voteType: 1
         votesMin: 2
+        votesLimit: 2
+        votesRanking: true

@@ -1,6 +1,6 @@
 UpdateProposalVotesPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      step:
-        type: 'ProposalStep!'
+    type: relay-mutation-payload
+    config:
+        fields:
+            step:
+                type: 'ProposalStep!'

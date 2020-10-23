@@ -15,6 +15,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
           },
           "currentVotableStep": Object {
             "id": "step1",
+            "votesRanking": true,
           },
           "district": Object {
             "name": "district9",
@@ -73,6 +74,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             },
             "currentVotableStep": Object {
               "id": "step1",
+              "votesRanking": true,
             },
             "district": Object {
               "name": "district9",
@@ -104,6 +106,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             },
             "currentVotableStep": Object {
               "id": "step1",
+              "votesRanking": true,
             },
             "district": Object {
               "name": "district9",
@@ -139,6 +142,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
           },
           "currentVotableStep": Object {
             "id": "step1",
+            "votesRanking": true,
           },
           "district": Object {
             "name": "district9",
@@ -188,6 +192,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
           },
           "currentVotableStep": Object {
             "id": "step1",
+            "votesRanking": true,
           },
           "district": Object {
             "name": "district9",
@@ -226,6 +231,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
           },
           "currentVotableStep": Object {
             "id": "step1",
+            "votesRanking": true,
           },
           "district": Object {
             "name": "district9",
@@ -245,6 +251,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
           "url": "http://plateform/project1/step1/proposal1",
         }
       }
+      showPoints={true}
       step={
         Object {
           "$fragmentRefs": null,

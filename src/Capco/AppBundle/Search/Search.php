@@ -28,7 +28,7 @@ abstract class Search
         Query\MultiMatch::TYPE_PHRASE_PREFIX,
     ];
 
-    protected $index;
+    protected Index $index;
     protected $type;
 
     public function __construct(Index $index)

@@ -16,6 +16,7 @@ describe('<ProposalListFilters />', () => {
       id: 'test',
       defaultSort: 'random',
       voteType: 'DISABLED',
+      votesRanking: true,
       statuses: [],
       form: {
         usingAddress: true,

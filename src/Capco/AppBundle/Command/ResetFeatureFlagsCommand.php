@@ -80,7 +80,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('display_map');
         $this->manager->activate('privacy_policy');
         $this->manager->activate('public_api');
-        $this->manager->deactivate('votes_min');
+        $this->manager->activate('votes_min');
         $this->manager->activate('consent_internal_communication');
         $this->manager->activate('new_feature_questionnaire_result');
         $this->manager->activate('multilangue');

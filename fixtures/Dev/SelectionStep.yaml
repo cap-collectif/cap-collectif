@@ -441,5 +441,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         endAt: <identity((new \DateTime('2032-08-02')))>
         voteType: 1
         votesMin: 3
+        votesLimit: 3
         defaultStatus: '@statusIdfWinner1'
         body: Attrapez les tous
+        votesRanking: true

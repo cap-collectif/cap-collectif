@@ -8,6 +8,7 @@ use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ProposalsState;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Enum\ProposalTrashedStatus;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -81,10 +82,17 @@ class ProposalSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
 
+        $stepid = $providedFilters['step'];
+        if ($providedFilters['step']) {
+            $stepid = GlobalIdResolver::getDecodedId($providedFilters['step']);
+            if ($stepid && isset($stepid['id'])) {
+                $stepid = $stepid['id'];
+            }
+        }
         if ($order) {
             $query->setSort([
                 !$providedFilters['term']
-                    ? $this->getSort($order, $providedFilters['step'] ?? null)
+                    ? $this->getSort($order, $stepid ?? null)
                     : ['_score' => ['order' => 'desc']],
                 ['id' => new \stdClass()],
             ]);
@@ -150,14 +158,16 @@ class ProposalSearch extends Search
             $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
         } else {
             $query = new Query($boolQuery);
+            $stepid = $providedFilters['collectStep'] ?? $providedFilters['selectionStep'];
+            if ($stepid) {
+                $stepid = GlobalIdResolver::getDecodedId($stepid);
+                if ($stepid && isset($stepid['id'])) {
+                    $stepid = $stepid['id'];
+                }
+            }
+
             if ($order) {
-                $query->setSort([
-                    $this->getSort(
-                        $order,
-                        $providedFilters['collectStep'] ?? $providedFilters['selectionStep']
-                    ),
-                    ['id' => new \stdClass()],
-                ]);
+                $query->setSort([$this->getSort($order, $stepid), ['id' => new \stdClass()]]);
             }
         }
 
@@ -183,6 +193,14 @@ class ProposalSearch extends Search
                     $order = 'least-votes';
                 } else {
                     $order = 'votes';
+                }
+
+                break;
+            case 'POINTS':
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'least-points';
+                } else {
+                    $order = 'points';
                 }
 
                 break;
@@ -424,6 +442,15 @@ class ProposalSearch extends Search
                     ],
                     'createdAt' => ['order' => 'desc'],
                 ];
+            case 'points':
+                return [
+                    'pointsCountByStep.count' => [
+                        'order' => 'desc',
+                        'nested_path' => 'pointsCountByStep',
+                        'nested_filter' => ['term' => ['pointsCountByStep.step.id' => $stepId]],
+                    ],
+                    'createdAt' => ['order' => 'desc'],
+                ];
 
             case 'least-votes':
                 return [
@@ -431,6 +458,15 @@ class ProposalSearch extends Search
                         'order' => 'asc',
                         'nested_path' => 'votesCountByStep',
                         'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
+                    ],
+                    'createdAt' => ['order' => 'desc'],
+                ];
+            case 'least-points':
+                return [
+                    'pointsCountByStep.count' => [
+                        'order' => 'asc',
+                        'nested_path' => 'pointsCountByStep',
+                        'nested_filter' => ['term' => ['pointsCountByStep.step.id' => $stepId]],
                     ],
                     'createdAt' => ['order' => 'desc'],
                 ];

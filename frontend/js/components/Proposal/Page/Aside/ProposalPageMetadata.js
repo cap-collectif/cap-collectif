@@ -7,7 +7,7 @@ import { FormattedNumber } from 'react-intl';
 import colors from '~/utils/colors';
 import ProposalDetailLikers from '../../Detail/ProposalDetailLikers';
 import type { ProposalPageMetadata_proposal } from '~relay/ProposalPageMetadata_proposal.graphql';
-import { Card } from '~/components/Proposal/Page/ProposalPage.style';
+import { Card, CategoryCircledIcon } from '~/components/Proposal/Page/ProposalPage.style';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 
 const ProposalPageMetadataContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -44,15 +44,6 @@ const Element: StyledComponent<{ iconOnly?: boolean }, {}, HTMLDivElement> = sty
     `}
 `;
 
-const CircledIcon: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  width: 24px;
-  min-width: 24px;
-  height: 24px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.175);
-  border-radius: 12px;
-  padding-left: 7px;
-`;
-
 export const MetadataPlaceHolder = ({
   ready,
   children,
@@ -83,23 +74,32 @@ type Props = {
   showThemes: boolean,
 };
 
-const MetadataRow = ({
+export const MetadataRow = ({
   name,
   size,
   ready,
   color,
   content,
+  categorySize = 24,
+  categoryPaddingTop = 0,
+  categoryPaddingLeft = 7,
 }: {
   name: $Values<typeof ICON_NAME>,
   size: number,
   ready: boolean,
   color: string,
   content: string | React.Element<typeof FormattedNumber>,
+  categorySize?: number,
+  categoryPaddingTop?: number,
+  categoryPaddingLeft?: number,
 }) => (
   <Element>
-    <CircledIcon>
+    <CategoryCircledIcon
+      size={categorySize}
+      paddingLeft={categoryPaddingLeft}
+      paddingTop={categoryPaddingTop}>
       <Icon name={name} size={size} color={color} />
-    </CircledIcon>
+    </CategoryCircledIcon>
     <MetadataPlaceHolder ready={ready}>
       <span>{content}</span>
     </MetadataPlaceHolder>

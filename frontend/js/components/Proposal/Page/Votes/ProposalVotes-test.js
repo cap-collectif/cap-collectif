@@ -24,6 +24,38 @@ describe('<ProposalVotes />', () => {
           { cursor: 'N0aW9uOjE=', node: { author: { id: 'userJean', $fragmentRefs } } },
         ],
         totalCount: 2,
+        totalPointsCount: 0,
+        pageInfo: {
+          endCursor: 'cursor1',
+          hasNextPage: true,
+          hasPreviousPage: false,
+          startCursor: null,
+        },
+      },
+    },
+    stepId: 'depot',
+    relay: relayPaginationMock,
+  };
+
+  const propsWithPoistion = {
+    proposal: {
+      $refType,
+      id: '1',
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
+      votes: {
+        edges: [
+          { cursor: 'N0aW9uOjE=', node: { author: { id: 'userAdmin', $fragmentRefs } } },
+          { cursor: 'N0aW9uOjE=', node: { author: { id: 'userJean', $fragmentRefs } } },
+        ],
+        totalCount: 2,
+        totalPointsCount: 3,
         pageInfo: {
           endCursor: 'cursor1',
           hasNextPage: true,
@@ -38,6 +70,10 @@ describe('<ProposalVotes />', () => {
 
   it('should render correctly proposal votes', () => {
     const wrapper = shallow(<ProposalVotes {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly proposal votes ranked', () => {
+    const wrapper = shallow(<ProposalVotes {...propsWithPoistion} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -36,6 +36,8 @@ export type StepFilter = {|
   +title: string,
   +hasTheme: boolean,
   +type: string,
+  +votesRanking: boolean,
+  +votable: boolean,
 |};
 
 export type CategoryOrStepFilter = {|
@@ -255,6 +257,8 @@ export const getFormattedStepsChoicesForProject = (
       id: step.id,
       title: step.title,
       hasTheme: step.form?.usingThemes,
+      votesRanking: step.votesRanking || false,
+      votable: step.votable || false,
       type: step.__typename,
     })): any): $ReadOnlyArray<StepFilter>);
 };

@@ -37,6 +37,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
       Object {
         "$fragmentRefs": null,
         "id": "vote1",
+        "ranking": null,
       }
     }
     target={[Function]}
@@ -67,6 +68,38 @@ exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
       Object {
         "$fragmentRefs": null,
         "id": "vote1",
+        "ranking": null,
+      }
+    }
+    target={[Function]}
+  />
+  <i
+    className="cap cap-hand-like-2 mr-5"
+  />
+  <FormattedMessage
+    id="global.cancel"
+    values={Object {}}
+  />
+</Button>
+`;
+
+exports[`<ProposalVoteButton /> renders viewer has voted and hovering with ranking 1`] = `
+<Button
+  active={true}
+  block={false}
+  bsClass="btn"
+  bsStyle="default"
+  className="mr-10 proposal__button__vote btn btn-danger  "
+  disabled={false}
+  id="buttonID"
+  onClick={[Function]}
+>
+  <Relay(UnpublishedTooltip)
+    publishable={
+      Object {
+        "$fragmentRefs": null,
+        "id": "vote1",
+        "ranking": 0,
       }
     }
     target={[Function]}

@@ -1,11 +1,14 @@
 ProposalVoteConnection:
-  type: relay-connection
-  config:
-    nodeType: InternalProposalVote!
-    connectionFields:
-      totalCount:
-        type: Int!
-      creditsLeft:
-        type: Int
-      creditsSpent:
-        type: Int
+    type: relay-connection
+    config:
+        nodeType: InternalProposalVote!
+        connectionFields:
+            totalCount:
+                type: Int!
+            creditsLeft:
+                type: Int
+            creditsSpent:
+                type: Int
+            totalPointsCount:
+                type: Int!
+                description: Default value is 0. To know if vote ranking is enabled check votesRanking value field on proposalStep

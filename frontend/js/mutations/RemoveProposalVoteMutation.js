@@ -21,6 +21,7 @@ const mutation = graphql`
       step {
         id
         ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
+        ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
         viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
           ...ProposalsUserVotesTable_votes
           totalCount

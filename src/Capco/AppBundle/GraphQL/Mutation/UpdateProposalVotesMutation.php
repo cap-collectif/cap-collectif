@@ -2,6 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Doctrine\Common\Util\ClassUtils;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +30,8 @@ class UpdateProposalVotesMutation implements MutationInterface
     private LoggerInterface $logger;
     private GlobalIdResolver $globalIdResolver;
     private ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private Indexer $indexer;
+    private ConnectionBuilder $connectionBuilder;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -35,7 +41,9 @@ class UpdateProposalVotesMutation implements MutationInterface
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler
+        ProposalVoteAccountHandler $proposalVoteAccountHandler,
+        Indexer $indexer,
+        ConnectionBuilder $connectionBuilder
     ) {
         $this->em = $em;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
@@ -45,6 +53,8 @@ class UpdateProposalVotesMutation implements MutationInterface
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
         $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
+        $this->indexer = $indexer;
+        $this->connectionBuilder = $connectionBuilder;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -67,8 +77,7 @@ class UpdateProposalVotesMutation implements MutationInterface
         } else {
             throw new UserError(sprintf('Not good step with id "%s"', $stepId));
         }
-
-        foreach ($votes as $vote) {
+        foreach ($votes as $key => $vote) {
             $voteInput = null;
             foreach ($votesInput as $currentInput) {
                 if ((int) $vote->getId() === (int) $currentInput['id']) {
@@ -85,19 +94,55 @@ class UpdateProposalVotesMutation implements MutationInterface
                     throw new UserError('This step is not contribuable.');
                 }
                 $this->em->remove($vote);
+                $this->indexer->remove(ClassUtils::getClass($vote), $vote->getId());
+                $this->indexer->index(
+                    ClassUtils::getClass($vote->getProposal()),
+                    $vote->getProposal()->getId()
+                );
+
                 $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted(
                     $step,
                     $vote,
                     $viewer,
                     false
                 );
+                unset($votes[$key]);
             }
         }
-
         $this->em->flush();
+        if (!empty($votes->getArrayCopy())) {
+            $this->reindexObjects($votes->getArrayCopy());
+        }
+        $this->indexer->finishBulk();
 
         $this->viewerProposalVotesDataLoader->invalidate($viewer);
 
-        return ['step' => $step, 'viewer' => $viewer];
+        return [
+            'step' => $step,
+            'votes' => $this->getConnection($votes->getArrayCopy(), $input),
+            'viewer' => $viewer,
+        ];
+    }
+
+    protected function getConnection(array $votes, Argument $args): ConnectionInterface
+    {
+        $connection = $this->connectionBuilder->connectionFromArray(array_values($votes), $args);
+        $connection->setTotalCount(\count($votes));
+
+        return $connection;
+    }
+
+    private function reindexObjects(array $objects)
+    {
+        foreach ($objects as $object) {
+            $this->indexer->index(ClassUtils::getClass($object), $object->getId());
+
+            if (method_exists($object, 'getProposal') && $object->getProposal()) {
+                $this->indexer->index(
+                    ClassUtils::getClass($object->getProposal()),
+                    $object->getProposal()->getId()
+                );
+            }
+        }
     }
 }

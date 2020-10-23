@@ -31,6 +31,7 @@ describe('<ProposalUserVoteItem />', () => {
         title: 'global.consultation',
       },
     },
+    votesLimit: 3,
     $refType,
   };
 
@@ -65,6 +66,7 @@ describe('<ProposalUserVoteItem />', () => {
         title: 'project.types.interpellation',
       },
     },
+    votesLimit: null,
     $refType,
   };
 

@@ -29,18 +29,18 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 
 class AddProposalVoteMutation implements MutationInterface
 {
-    private $em;
-    private $validator;
-    private $logger;
-    private $resolver;
-    private $proposalVotesDataLoader;
-    private $proposalCollectVoteRepository;
-    private $proposalSelectionVoteRepository;
-    private $proposalViewerVoteDataLoader;
-    private $proposalViewerHasVoteDataLoader;
-    private $viewerProposalVotesDataLoader;
-    private $globalIdResolver;
-    private $proposalVoteAccountHandler;
+    private EntityManagerInterface $em;
+    private ProposalVotesDataLoader $proposalVotesDataLoader;
+    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
+    private ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
+    private ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
+    private GlobalIdResolver $globalIdResolver;
+    private StepRequirementsResolver $resolver;
+    private LoggerInterface $logger;
+    private ValidatorInterface $validator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -78,10 +78,10 @@ class AddProposalVoteMutation implements MutationInterface
         $step = $this->globalIdResolver->resolve($stepId, $user);
 
         if (!$proposal) {
-            throw new UserError('Unknown proposal with id: ' . $proposalId);
+            throw new UserError('Unknown proposal with id: '.$proposalId);
         }
         if (!$step) {
-            throw new UserError('Unknown step with id: ' . $stepId);
+            throw new UserError('Unknown step with id: '.$stepId);
         }
 
         /** @var AbstractStep $step */
@@ -95,7 +95,10 @@ class AddProposalVoteMutation implements MutationInterface
                 throw new UserError('This proposal is not associated to this collect step.');
             }
 
-            $countUserVotes = $this->proposalCollectVoteRepository->countVotesByStepAndUser($step, $user);
+            $countUserVotes = $this->proposalCollectVoteRepository->countVotesByStepAndUser(
+                $step,
+                $user
+            );
             $vote = (new ProposalCollectVote())->setCollectStep($step);
         } elseif ($step instanceof SelectionStep) {
             if (!\in_array($step, $proposal->getSelectionSteps(), true)) {
@@ -107,7 +110,7 @@ class AddProposalVoteMutation implements MutationInterface
             );
             $vote = (new ProposalSelectionVote())->setSelectionStep($step);
         } else {
-            throw new UserError('Wrong step with id: ' . $stepId);
+            throw new UserError('Wrong step with id: '.$stepId);
         }
 
         // Check if step is contributable
@@ -132,12 +135,17 @@ class AddProposalVoteMutation implements MutationInterface
             ->setProposal($proposal);
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {
-            $this->logger->error((string) $error->getMessage());
+            $this->logger->error((string)$error->getMessage());
 
-            throw new UserError((string) $error->getMessage());
+            throw new UserError((string)$error->getMessage());
         }
 
-        $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted($step, $vote, $user, true);
+        $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted(
+            $step,
+            $vote,
+            $user,
+            true
+        );
         $this->em->persist($vote);
 
         try {

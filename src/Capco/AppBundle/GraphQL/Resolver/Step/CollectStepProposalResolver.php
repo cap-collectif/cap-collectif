@@ -15,7 +15,7 @@ class CollectStepProposalResolver implements ResolverInterface
 {
     use ResolverTrait;
 
-    private $dataLoader;
+    private ProposalFormProposalsDataLoader $dataLoader;
 
     public function __construct(ProposalFormProposalsDataLoader $dataLoader)
     {

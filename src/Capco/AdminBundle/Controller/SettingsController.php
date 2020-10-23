@@ -21,8 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class SettingsController extends Controller
 {
     protected const EXCLUDED_SETTINGS_KEYNAME = ['events.map.country'];
-    private $SSOConfigurationRepository;
-    private $menuItemRepository;
+    private AbstractSSOConfigurationRepository $SSOConfigurationRepository;
+    private MenuItemRepository $menuItemRepository;
 
     public function __construct(
         AbstractSSOConfigurationRepository $SSOConfigurationRepository,

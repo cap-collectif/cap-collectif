@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 
-const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span.attrs({
+export const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.span.attrs({
   className: 'tag',
 })`
   font-size: 14px;

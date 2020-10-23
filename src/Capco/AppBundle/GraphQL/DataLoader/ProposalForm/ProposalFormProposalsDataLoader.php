@@ -226,7 +226,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                 return $connection;
             }
         }
-
         $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $form,

@@ -86,7 +86,13 @@ export class ProposalPreviewBody extends React.Component<Props> {
           typeof step.voteThreshold !== 'undefined' &&
           step.voteThreshold > 0 && (
             <div style={{ marginTop: '20px' }}>
-              <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
+              <ProposalVoteThresholdProgressBar
+                proposal={proposal}
+                step={step}
+                showPoints={
+                  (proposal.currentVotableStep && proposal.currentVotableStep.votesRanking) || false
+                }
+              />
             </div>
           )}
       </Card.Body>
@@ -140,6 +146,7 @@ export default createFragmentContainer(container, {
       ...ProposalVoteThresholdProgressBar_proposal @skip(if: $isProfileView)
       currentVotableStep @skip(if: $isProfileView) {
         id
+        votesRanking
       }
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
     }

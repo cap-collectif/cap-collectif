@@ -14,7 +14,7 @@ use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
-class StepVotesCountDataLoader extends BatchDataLoader
+class StepPointsVotesCountDataLoader extends BatchDataLoader
 {
     private ProposalCollectVoteRepository $proposalCollectVoteRepository;
     private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
@@ -67,20 +67,22 @@ class StepVotesCountDataLoader extends BatchDataLoader
     public function resolve(AbstractStep $step, bool $onlyAccounted): int
     {
         if ($step instanceof CollectStep) {
-            return $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
+            return $this->proposalCollectVoteRepository->countPointsOnPublishedCollectVoteByStep(
                 $step,
                 $onlyAccounted
             );
         }
 
         if ($step instanceof SelectionStep) {
-            return $this->proposalSelectionVoteRepository->countPublishedSelectionVoteByStep(
+            return $this->proposalSelectionVoteRepository->countPointsOnPublishedSelectionVoteByStep(
                 $step,
                 $onlyAccounted
             );
         }
 
-        throw new \RuntimeException('Access denied');
+        throw new \InvalidArgumentException(
+            sprintf('"%s" Unknown collect or selection step "%s" for .', __METHOD__, $step->getId())
+        );
     }
 
     protected function getCacheTag($key): array

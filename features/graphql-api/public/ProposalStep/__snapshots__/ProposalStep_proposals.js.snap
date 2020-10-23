@@ -1,5 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal|ProposalStep.proposals connection fetches proposals with most points associated to a collect step with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YTozOntpOjA7aToyOTtpOjE7aToxNDg1OTA1MTYwMDAwO2k6MjtzOjEwOiJwcm9wb3NhbDI2Ijt9",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:26:00",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNg==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:26:00",
+            "status": null,
+            "votes": Object {
+              "totalCount": 3,
+              "totalPointsCount": 29,
+            },
+          },
+        },
+        Object {
+          "cursor": "YTozOntpOjA7aToyODtpOjE7aToxNDg1OTAzNzcwMDAwO2k6MjtzOjEwOiJwcm9wb3NhbDI1Ijt9",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:02:50",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:02:50",
+            "status": null,
+            "votes": Object {
+              "totalCount": 3,
+              "totalPointsCount": 28,
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YTozOntpOjA7aToyODtpOjE7aToxNDg1OTAzNzcwMDAwO2k6MjtzOjEwOiJwcm9wb3NhbDI1Ijt9",
+        "hasNextPage": true,
+      },
+      "totalCount": 5,
+    },
+  },
+}
+`;
+
+exports[`Internal|ProposalStep.proposals connection fetches proposals with most votes associated to a collect step with a cursor 1`] = `
+Object {
+  "node": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YTozOntpOjA7aTozO2k6MTtpOjE0ODU5MDUxNjAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjYiO30=",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:26:00",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNg==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:26:00",
+            "status": null,
+            "votes": Object {
+              "totalCount": 3,
+              "totalPointsCount": 29,
+            },
+          },
+        },
+        Object {
+          "cursor": "YTozOntpOjA7aTozO2k6MTtpOjE0ODU5MDM3NzAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjUiO30=",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:02:50",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
+            "published": true,
+            "publishedAt": "2017-02-01 00:02:50",
+            "status": null,
+            "votes": Object {
+              "totalCount": 3,
+              "totalPointsCount": 28,
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YTozOntpOjA7aTozO2k6MTtpOjE0ODU5MDM3NzAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjUiO30=",
+        "hasNextPage": true,
+      },
+      "totalCount": 5,
+    },
+  },
+}
+`;
+
 exports[`Internal|ProposalStep.proposals connection fetches published proposals associated to a SelectionStep and a category "Aménagement" with a cursor 1`] = `
 Object {
   "node": Object {
@@ -26,6 +134,10 @@ Object {
             "status": Object {
               "id": "status5",
               "name": "Vote gagné",
+            },
+            "votes": Object {
+              "totalCount": 1,
+              "totalPointsCount": 0,
             },
           },
         },
@@ -67,6 +179,10 @@ Object {
               "id": "status4",
               "name": "Soumis au vote",
             },
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
           },
         },
       ],
@@ -107,6 +223,10 @@ Object {
               "id": "status4",
               "name": "Soumis au vote",
             },
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
           },
         },
       ],
@@ -144,6 +264,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:04:00",
             "status": null,
+            "votes": Object {
+              "totalCount": 47,
+              "totalPointsCount": 0,
+            },
           },
         },
         Object {
@@ -168,6 +292,10 @@ Object {
               "id": "status5",
               "name": "Vote gagné",
             },
+            "votes": Object {
+              "totalCount": 1,
+              "totalPointsCount": 0,
+            },
           },
         },
         Object {
@@ -191,6 +319,10 @@ Object {
             "status": Object {
               "id": "status4",
               "name": "Soumis au vote",
+            },
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
             },
           },
         },
@@ -695,29 +827,37 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:26:00",
             "status": null,
+            "votes": Object {
+              "totalCount": 3,
+              "totalPointsCount": 29,
+            },
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg1OTAzNzcwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI1Ijt9",
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODIxMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEzOSI7fQ==",
           "node": Object {
             "category": null,
             "comments": Object {
               "totalCount": 0,
             },
-            "createdAt": "2017-02-01 00:02:50",
+            "createdAt": "2017-02-01 00:03:41",
             "district": null,
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMzk=",
             "published": true,
-            "publishedAt": "2017-02-01 00:02:50",
+            "publishedAt": "2017-02-01 00:03:41",
             "status": null,
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzNzcwMDAwO2k6MTtzOjEwOiJwcm9wb3NhbDI1Ijt9",
+        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODIxMDAwO2k6MTtzOjExOiJwcm9wb3NhbDEzOSI7fQ==",
         "hasNextPage": true,
       },
-      "totalCount": 3,
+      "totalCount": 5,
     },
   },
 }
@@ -741,6 +881,48 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:26:00",
             "status": null,
+            "votes": Object {
+              "totalCount": 3,
+              "totalPointsCount": 29,
+            },
+          },
+        },
+        Object {
+          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM4MjEwMDA7aToyO3M6MTE6InByb3Bvc2FsMTM5Ijt9",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:03:41",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMzk=",
+            "published": true,
+            "publishedAt": "2017-02-01 00:03:41",
+            "status": null,
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
+          },
+        },
+        Object {
+          "cursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM4MjAwMDA7aToyO3M6MTE6InByb3Bvc2FsMTM4Ijt9",
+          "node": Object {
+            "category": null,
+            "comments": Object {
+              "totalCount": 0,
+            },
+            "createdAt": "2017-02-01 00:03:40",
+            "district": null,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxMzg=",
+            "published": true,
+            "publishedAt": "2017-02-01 00:03:40",
+            "status": null,
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
           },
         },
         Object {
@@ -756,6 +938,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:02:50",
             "status": null,
+            "votes": Object {
+              "totalCount": 3,
+              "totalPointsCount": 28,
+            },
           },
         },
         Object {
@@ -771,6 +957,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:02:40",
             "status": null,
+            "votes": Object {
+              "totalCount": 1,
+              "totalPointsCount": 8,
+            },
           },
         },
       ],
@@ -778,7 +968,7 @@ Object {
         "endCursor": "YTozOntpOjA7aTowO2k6MTtpOjE0ODU5MDM3NjAwMDA7aToyO3M6MTA6InByb3Bvc2FsMjQiO30=",
         "hasNextPage": false,
       },
-      "totalCount": 3,
+      "totalCount": 5,
     },
   },
 }
@@ -811,6 +1001,10 @@ Object {
               "id": "status4",
               "name": "Soumis au vote",
             },
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
           },
         },
         Object {
@@ -832,6 +1026,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:04:00",
             "status": null,
+            "votes": Object {
+              "totalCount": 47,
+              "totalPointsCount": 0,
+            },
           },
         },
         Object {
@@ -855,6 +1053,10 @@ Object {
             "status": Object {
               "id": "status5",
               "name": "Vote gagné",
+            },
+            "votes": Object {
+              "totalCount": 1,
+              "totalPointsCount": 0,
             },
           },
         },
@@ -896,6 +1098,10 @@ Object {
               "id": "status4",
               "name": "Soumis au vote",
             },
+            "votes": Object {
+              "totalCount": 0,
+              "totalPointsCount": 0,
+            },
           },
         },
         Object {
@@ -920,6 +1126,10 @@ Object {
               "id": "status5",
               "name": "Vote gagné",
             },
+            "votes": Object {
+              "totalCount": 1,
+              "totalPointsCount": 0,
+            },
           },
         },
         Object {
@@ -941,6 +1151,10 @@ Object {
             "published": true,
             "publishedAt": "2017-02-01 00:04:00",
             "status": null,
+            "votes": Object {
+              "totalCount": 47,
+              "totalPointsCount": 0,
+            },
           },
         },
       ],
@@ -975,6 +1189,10 @@ Object {
               "id": "status2",
               "name": "Approuvé",
             },
+            "votes": Object {
+              "totalCount": 1,
+              "totalPointsCount": 1,
+            },
           },
         },
         Object {
@@ -992,6 +1210,10 @@ Object {
             "status": Object {
               "id": "status2",
               "name": "Approuvé",
+            },
+            "votes": Object {
+              "totalCount": 1,
+              "totalPointsCount": 2,
             },
           },
         },

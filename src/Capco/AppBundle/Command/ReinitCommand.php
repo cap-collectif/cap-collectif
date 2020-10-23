@@ -25,6 +25,7 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\UserBundle\Entity\UserType;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Entity\UserInvite;
+use Doctrine\Common\EventManager;
 use Doctrine\DBAL\ConnectionException;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Capco\AppBundle\Entity\CommentVote;
@@ -86,6 +87,7 @@ use Capco\AppBundle\DataFixtures\Processor\ProgressBarProcessor;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Step\StepPointsVotesCountDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Project\ProjectProposalsDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
@@ -97,20 +99,21 @@ class ReinitCommand extends Command
     public const ENTITIES_WITH_LISTENERS = [UserInvite::class];
     public const LISTENERS_TO_DISABLE = [UserInviteListener::class];
     private $env;
-    private $doctrine;
-    private $em;
-    private $eventManager;
-    private $progressBarProcessor;
-    private $elasticsearchListener;
-    private $publishableListener;
-    private $referenceListener;
-    private $stepContributionDataloader;
-    private $proposalFormProposalsDataloader;
-    private $collectStepContributorsDataloader;
-    private $stepVotesCountDataloader;
-    private $projectProposalsDataloader;
-    private $projectCurrentVotableStepDataloader;
-    private $stopwatch;
+    private ManagerRegistry $doctrine;
+    private EntityManagerInterface $em;
+    private EventManager $eventManager;
+    private ProgressBarProcessor $progressBarProcessor;
+    private ElasticsearchDoctrineListener $elasticsearchListener;
+    private DoctrineListener $publishableListener;
+    private ReferenceEventListener $referenceListener;
+    private StepContributionsDataLoader $stepContributionDataloader;
+    private ProposalFormProposalsDataLoader $proposalFormProposalsDataloader;
+    private CollectStepContributorCountDataLoader $collectStepContributorsDataloader;
+    private StepVotesCountDataLoader $stepVotesCountDataloader;
+    private StepPointsVotesCountDataLoader $stepPointsVotesCountDataLoader;
+    private ProjectProposalsDataLoader $projectProposalsDataloader;
+    private ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader;
+    private Stopwatch $stopwatch;
 
     public function __construct(
         string $name,
@@ -124,6 +127,7 @@ class ReinitCommand extends Command
         ProposalFormProposalsDataLoader $proposalFormProposalsDataloader,
         CollectStepContributorCountDataLoader $collectStepContributorsDataloader,
         StepVotesCountDataLoader $stepVotesCountDataloader,
+        StepPointsVotesCountDataLoader $stepPointVotesCountDataloader,
         ProjectProposalsDataLoader $projectProposalsDataloader,
         ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader,
         Stopwatch $stopwatch
@@ -140,6 +144,7 @@ class ReinitCommand extends Command
         $this->proposalFormProposalsDataloader = $proposalFormProposalsDataloader;
         $this->collectStepContributorsDataloader = $collectStepContributorsDataloader;
         $this->stepVotesCountDataloader = $stepVotesCountDataloader;
+        $this->stepPointsVotesCountDataLoader = $stepPointVotesCountDataloader;
         $this->projectProposalsDataloader = $projectProposalsDataloader;
         $this->projectCurrentVotableStepDataloader = $projectCurrentVotableStepDataloader;
         $this->referenceListener = $referenceListener;
@@ -231,6 +236,7 @@ class ReinitCommand extends Command
             $this->proposalFormProposalsDataloader,
             $this->collectStepContributorsDataloader,
             $this->stepVotesCountDataloader,
+            $this->stepPointsVotesCountDataLoader,
             $this->projectProposalsDataloader,
             $this->projectCurrentVotableStepDataloader,
         ];

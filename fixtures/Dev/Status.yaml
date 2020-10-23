@@ -137,3 +137,11 @@ Capco\AppBundle\Entity\Status:
         color: info
         createdAt: <identity((new \DateTime('2020-01-01 00:00:09')))>
         updatedAt: $createdAt
+    statusVoteAvecClassement:
+        id: statusVoteAvecClassement
+        name: En cours d'analyse
+        position: 1
+        step: '@selectionstepVoteClassement'
+        color: success
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
+        updatedAt: $createdAt

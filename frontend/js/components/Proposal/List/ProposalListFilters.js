@@ -104,6 +104,7 @@ export class ProposalListFilters extends React.Component<Props> {
       .concat(options.statuses.length > 0 ? ['statuses'] : []);
 
     const orderByVotes = step.voteType !== 'DISABLED';
+    const orderByPoints = step.votesRanking;
     const orderByComments = form?.commentable;
     const orderByCost = form?.costable;
     const showMapButton = form?.usingAddress && !step.private && !!features.display_map;
@@ -128,6 +129,7 @@ export class ProposalListFilters extends React.Component<Props> {
               orderByCost={orderByCost}
               orderByComments={orderByComments}
               orderByVotes={orderByVotes}
+              orderByPoints={orderByPoints}
               defaultSort={step.defaultSort}
             />
           </Col>
@@ -189,6 +191,7 @@ export default createFragmentContainer(container, {
       }
       defaultSort
       voteType
+      votesRanking
       statuses {
         id
         name

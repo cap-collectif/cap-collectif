@@ -96,13 +96,17 @@ export class ProposalVoteModal extends React.Component<Props, State> {
       }
 
       // Otherwise we update/reorder votes
-      return UpdateProposalVotesMutation.commit({
-        input: {
-          step: step.id,
-          votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
+      return UpdateProposalVotesMutation.commit(
+        {
+          input: {
+            step: step.id,
+            votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
+          },
+          stepId: step.id,
+          isAuthenticated,
         },
-        isAuthenticated,
-      });
+        { id: null, position: -1, isVoteRanking: step.votesRanking },
+      );
     });
   };
 
@@ -336,6 +340,7 @@ export default createFragmentContainer(container, {
         edges {
           node {
             id
+            anonymous
           }
         }
       }

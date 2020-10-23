@@ -20,21 +20,22 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
+use Doctrine\Common\Util\ClassUtils;
 
 class RemoveProposalVoteMutation implements MutationInterface
 {
-    private $em;
-    private $proposalRepo;
-    private $stepRepo;
-    private $proposalVotesDataLoader;
-    private $proposalCollectVoteRepository;
-    private $proposalSelectionVoteRepository;
-    private $proposalVoteAccountHandler;
-    private $proposalViewerVoteDataLoader;
-    private $proposalViewerHasVoteDataLoader;
-    private $viewerProposalVotesDataLoader;
-    private $globalIdResolver;
-    private $indexer;
+    private EntityManagerInterface $em;
+    private ProposalRepository $proposalRepo;
+    private AbstractStepRepository $stepRepo;
+    private ProposalVotesDataLoader $proposalVotesDataLoader;
+    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
+    private ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
+    private ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
+    private GlobalIdResolver $globalIdResolver;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -77,15 +78,15 @@ class RemoveProposalVoteMutation implements MutationInterface
         }
 
         /** @var AbstractVote $vote */
-        $vote = null;
+        $currentVote = null;
         if ($step instanceof CollectStep) {
-            $vote = $this->proposalCollectVoteRepository->findOneBy([
+            $currentVote = $this->proposalCollectVoteRepository->findOneBy([
                 'user' => $user,
                 'proposal' => $proposal,
                 'collectStep' => $step,
             ]);
         } elseif ($step instanceof SelectionStep) {
-            $vote = $this->proposalSelectionVoteRepository->findOneBy([
+            $currentVote = $this->proposalSelectionVoteRepository->findOneBy([
                 'user' => $user,
                 'proposal' => $proposal,
                 'selectionStep' => $step,
@@ -94,7 +95,7 @@ class RemoveProposalVoteMutation implements MutationInterface
             throw new UserError('Wrong step with id: ' . $input->offsetGet('stepId'));
         }
 
-        if (!$vote) {
+        if (!$currentVote) {
             throw new UserError('You have not voted for this proposal in this step.');
         }
 
@@ -103,11 +104,22 @@ class RemoveProposalVoteMutation implements MutationInterface
             throw new UserError('This step is no longer contributable.');
         }
 
-        $isAccounted = $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted($step, $vote, $user, false);
-        $previousVoteId = $vote->getId();
-
-        $this->em->remove($vote);
+        $isAccounted = $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted(
+            $step,
+            $currentVote,
+            $user,
+            false
+        );
+        $previousVoteId = $currentVote->getId();
+        $this->indexer->remove(ClassUtils::getClass($currentVote), $currentVote->getId());
+        $this->em->remove($currentVote);
         $this->em->flush();
+        $this->indexer->index(
+            ClassUtils::getClass($currentVote->getProposal()),
+            $currentVote->getProposal()->getId()
+        );
+        $this->indexer->finishBulk();
+
         $this->proposalVotesDataLoader->invalidate($proposal);
         $this->proposalViewerVoteDataLoader->invalidate($proposal);
         $this->proposalViewerHasVoteDataLoader->invalidate($proposal);

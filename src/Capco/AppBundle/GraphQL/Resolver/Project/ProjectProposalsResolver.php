@@ -13,8 +13,8 @@ use Capco\AppBundle\GraphQL\DataLoader\Project\ProjectProposalsDataLoader;
 
 class ProjectProposalsResolver implements ResolverInterface
 {
-    protected $dataLoader;
-    protected $promiseAdapter;
+    protected ProjectProposalsDataLoader $dataLoader;
+    protected PromiseAdapterInterface $promiseAdapter;
 
     public function __construct(
         ProjectProposalsDataLoader $dataLoader,
@@ -48,7 +48,7 @@ class ProjectProposalsResolver implements ResolverInterface
             return $this->dataLoader->load(compact('args', 'project', 'viewer'));
         }
 
-        // We can consider nullable viewer for a reusable cache key. 
+        // We can consider nullable viewer for a reusable cache key.
         $viewer = null;
         // Null visibility will avoid private proposals
         return $this->dataLoader->load(compact('args', 'project', 'viewer'));

@@ -20,9 +20,9 @@ class ProposalNormalizer implements
 {
     use SerializerAwareTrait;
     private ObjectNormalizer $normalizer;
-    private $proposalSelectionVoteRepository;
-    private $proposalCollectVoteRepository;
-    private $commentableCommentsDataLoader;
+    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private CommentableCommentsDataLoader $commentableCommentsDataLoader;
 
     public function __construct(
         ObjectNormalizer $normalizer,
@@ -50,35 +50,8 @@ class ProposalNormalizer implements
         if (\in_array('ElasticsearchNestedProposal', $groups)) {
             return $data;
         }
-
-        // TODO: Migrate those queries to ES would be really faster.
-        $selectionVotesCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
-            $object
-        );
-        $collectVotesCount = $this->proposalCollectVoteRepository->getCountsByProposalGroupedByStepsId(
-            $object
-        );
-
         $data['progressStatus'] = $object->getGlobalProgressStatus();
-        $stepCounter = [];
-        $totalCount = 0;
-        foreach ($collectVotesCount as $stepId => $value) {
-            $stepCounter[] = [
-                'step' => ['id' => $stepId],
-                'count' => $value,
-            ];
-            $totalCount += $value;
-        }
-        foreach ($selectionVotesCount as $stepId => $value) {
-            $stepCounter[] = [
-                'step' => ['id' => $stepId],
-                'count' => $value,
-            ];
-            $totalCount += $value;
-        }
-
-        $data['votesCountByStep'] = $stepCounter;
-        $data['votesCount'] = $totalCount;
+        $data = $this->countPointsAndVotes($object, $data);
 
         if ($object->isCommentable()) {
             $args = new Argument([
@@ -101,5 +74,62 @@ class ProposalNormalizer implements
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof Proposal;
+    }
+
+    private function countPointsAndVotes(Proposal $proposal, array $data): array
+    {
+        $selectionCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
+            $proposal
+        );
+        $collectCount = $this->proposalCollectVoteRepository->getCountsByProposalGroupedByStepsId(
+            $proposal
+        );
+
+        $selectionVotesCount = $selectionCount['votesBySteps'];
+        $selectionVotesCountPoints = $selectionCount['pointsBySteps'];
+        $collectVotesCount = $collectCount['votesBySteps'];
+        $collectVotesCountPoints = $collectCount['pointsBySteps'];
+        $stepVoteCounter = [];
+        $totalVoteCount = 0;
+        foreach ($collectVotesCount as $stepId => $value) {
+            $stepVoteCounter[] = [
+                'step' => ['id' => $stepId],
+                'count' => $value,
+            ];
+            $totalVoteCount += $value;
+        }
+        foreach ($selectionVotesCount as $stepId => $value) {
+            $stepVoteCounter[] = [
+                'step' => ['id' => $stepId],
+                'count' => $value,
+            ];
+            $totalVoteCount += $value;
+        }
+
+        $data['votesCountByStep'] = $stepVoteCounter;
+        $data['votesCount'] = $totalVoteCount;
+
+        $stepPointsCounter = [];
+        $totalPointsCount = 0;
+
+        foreach ($collectVotesCountPoints as $stepId => $value) {
+            $stepPointsCounter[] = [
+                'step' => ['id' => $stepId],
+                'count' => $value,
+            ];
+            $totalPointsCount += $value;
+        }
+        foreach ($selectionVotesCountPoints as $stepId => $value) {
+            $stepPointsCounter[] = [
+                'step' => ['id' => $stepId],
+                'count' => $value,
+            ];
+            $totalPointsCount += $value;
+        }
+
+        $data['pointsCountByStep'] = $stepPointsCounter;
+        $data['pointsCount'] = $totalPointsCount;
+
+        return $data;
     }
 }

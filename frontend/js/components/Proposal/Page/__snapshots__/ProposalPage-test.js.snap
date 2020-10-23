@@ -634,7 +634,18 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     },
                     Object {
                       "alias": null,
-                      "args": null,
+                      "args": Array [
+                        Object {
+                          "kind": "Literal",
+                          "name": "first",
+                          "value": 0,
+                        },
+                        Object {
+                          "kind": "Variable",
+                          "name": "stepId",
+                          "variableName": "stepId",
+                        },
+                      ],
                       "concreteType": "ProposalVoteConnection",
                       "kind": "LinkedField",
                       "name": "votes",
@@ -645,6 +656,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "totalCount",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalPointsCount",
                           "storageKey": null,
                         },
                       ],
@@ -1555,6 +1573,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "votesRanking",
                           "storageKey": null,
                         },
                         Object {
@@ -3842,6 +3867,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                             Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "ranking",
+                              "storageKey": null,
+                            },
+                            Object {
                               "abstractKey": "__isPublishable",
                               "kind": "InlineFragment",
                               "selections": Array [
@@ -5823,6 +5855,62 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         },
                         Object {
                           "alias": null,
+                          "args": Array [
+                            Object {
+                              "kind": "Literal",
+                              "name": "orderBy",
+                              "value": Object {
+                                "direction": "ASC",
+                                "field": "POSITION",
+                              },
+                            },
+                          ],
+                          "concreteType": "ProposalVoteConnection",
+                          "kind": "LinkedField",
+                          "name": "viewerVotes",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "ProposalVoteEdge",
+                              "kind": "LinkedField",
+                              "name": "edges",
+                              "plural": true,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "ProposalVote",
+                                  "kind": "LinkedField",
+                                  "name": "node",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "anonymous",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": "viewerVotes(orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"POSITION\\"})",
+                        },
+                        Object {
+                          "alias": null,
                           "args": null,
                           "kind": "ScalarField",
                           "name": "votesHelpText",
@@ -5904,6 +5992,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "slug",
+                          "storageKey": null,
+                        },
+                        Object {
                           "condition": "isAuthenticated",
                           "kind": "Condition",
                           "passingValue": true,
@@ -5948,13 +6043,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "name": "node",
                                       "plural": false,
                                       "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
-                                          "storageKey": null,
-                                        },
                                         Object {
                                           "alias": null,
                                           "args": null,
@@ -6006,13 +6094,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                               "storageKey": null,
                                             },
                                           ],
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "anonymous",
                                           "storageKey": null,
                                         },
                                         Object {
@@ -6300,7 +6381,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "f8a3c51f6818c5a67b530e0fc2dd5c75",
+          "cacheID": "355ddedb55dc02a777d46f6e913c6f71",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7149,13 +7230,14 @@ fragment ProposalPageAlert_proposal on Proposal {
   trashedReason
 }
 
-fragment ProposalPageAside_proposal on Proposal {
+fragment ProposalPageAside_proposal_2r3fA4 on Proposal {
   ...ProposalPageMetadata_proposal
   ...ProposalPageAdvancement_proposal
-  ...ProposalPageVoteThreshold_proposal
+  ...ProposalPageVoteThreshold_proposal_2r3fA4
   currentVotableStep {
     __typename
     id
+    votesRanking
     voteType
     voteThreshold
     ...ProposalPageVoteThreshold_step
@@ -7473,16 +7555,16 @@ fragment ProposalPageLogic_query_3W0xjt on Query {
   }
   proposal: node(id: $proposalId) {
     __typename
-    ...ProposalPageAside_proposal
+    ...ProposalPageAside_proposal_2r3fA4
     ...ProposalDraftAlert_proposal
     ...ProposalPageMainContent_proposal
     ...ProposalPageAlert_proposal
-    ...ProposalPageTabs_proposal
+    ...ProposalPageTabs_proposal_2r3fA4
     ...ProposalPageVotes_proposal
     ...ProposalPageBlog_proposal
     ...ProposalPageFollowers_proposal
     ...ProposalPageHeader_proposal_39ngnn
-    ...ProposalPageMainAside_proposal @include(if: $isAuthenticated)
+    ...ProposalPageMainAside_proposal_2r3fA4 @include(if: $isAuthenticated)
     ...ProposalAnalysisPanel_proposal @include(if: $isAuthenticated)
     ... on Proposal {
       id
@@ -7504,14 +7586,15 @@ fragment ProposalPageLogic_query_3W0xjt on Query {
   }
 }
 
-fragment ProposalPageMainAside_proposal on Proposal {
+fragment ProposalPageMainAside_proposal_2r3fA4 on Proposal {
   id
   ...ProposalPageMetadata_proposal
   ...ProposalPageAdvancement_proposal
-  ...ProposalPageVoteThreshold_proposal
+  ...ProposalPageVoteThreshold_proposal_2r3fA4
   currentVotableStep {
     __typename
     id
+    votesRanking
     voteType
     voteThreshold
     ...ProposalPageVoteThreshold_step
@@ -7530,7 +7613,7 @@ fragment ProposalPageMainContent_proposal on Proposal {
   ...ProposalPageDescription_proposal
   ...ProposalPageLocalisation_proposal
   ...ProposalPageCustomSections_proposal
-  ...ProposalPageMainAside_proposal
+  ...ProposalPageMainAside_proposal_2r3fA4
   ...ProposalPageNews_proposal
   ...ProposalPageDiscussions_proposal
   ...ProposalVoteButtonWrapperFragment_proposal_Q37Wz
@@ -7592,7 +7675,7 @@ fragment ProposalPageOfficialAnswer_proposal on Proposal {
   }
 }
 
-fragment ProposalPageTabs_proposal on Proposal {
+fragment ProposalPageTabs_proposal_2r3fA4 on Proposal {
   id
   form {
     usingCategories
@@ -7638,10 +7721,11 @@ fragment ProposalPageTabs_step on ProposalStep {
   id
 }
 
-fragment ProposalPageVoteThreshold_proposal on Proposal {
+fragment ProposalPageVoteThreshold_proposal_2r3fA4 on Proposal {
   id
-  votes {
+  votes(stepId: $stepId, first: 0) {
     totalCount
+    totalPointsCount
   }
   project {
     type {
@@ -7803,6 +7887,7 @@ fragment ProposalUserVoteItem_step on ProposalStep {
   open
   voteType
   votesRanking
+  votesLimit
   form {
     isProposalForm
     id
@@ -7959,6 +8044,15 @@ fragment ProposalVoteButtonWrapperFragment_step on ProposalStep {
   votesLimit
   voteType
   open
+  votesRanking
+  viewerVotes(orderBy: {field: POSITION, direction: ASC}) {
+    edges {
+      node {
+        id
+        anonymous
+      }
+    }
+  }
   ...VoteButtonOverlay_step
 }
 
@@ -7986,6 +8080,7 @@ fragment ProposalVoteButton_proposal_Q37Wz on Proposal {
   viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
   viewerVote(step: $stepId) @include(if: $isAuthenticated) {
     id
+    ranking
     ...UnpublishedTooltip_publishable
   }
 }
@@ -8028,6 +8123,7 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
     edges {
       node {
         id
+        anonymous
       }
     }
   }
@@ -8036,7 +8132,9 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
 fragment ProposalsUserVotesTable_step on ProposalStep {
   __isProposalStep: __typename
   id
+  slug
   votesRanking
+  votesLimit
   viewerVotes(orderBy: {field: POSITION, direction: ASC}) @include(if: $isAuthenticated) {
     totalCount
   }

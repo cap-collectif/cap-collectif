@@ -282,8 +282,15 @@ mappings:
                         type: object
                         properties:
                             id: { type: keyword }
+            pointsCount: { type: long }
             votesCount: { type: long }
             votesCountByStep:
+                type: nested
+                properties:
+                    step: *Step
+                    count:
+                        type: long
+            pointsCountByStep:
                 type: nested
                 properties:
                     step: *Step

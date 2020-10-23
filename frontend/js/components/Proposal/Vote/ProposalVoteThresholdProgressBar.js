@@ -6,15 +6,18 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import type { ProposalVoteThresholdProgressBar_proposal } from '~relay/ProposalVoteThresholdProgressBar_proposal.graphql';
 import type { ProposalVoteThresholdProgressBar_step } from '~relay/ProposalVoteThresholdProgressBar_step.graphql';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
+import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 type Props = {
   proposal: ProposalVoteThresholdProgressBar_proposal,
   step: ProposalVoteThresholdProgressBar_step,
+  showPoints: boolean,
 };
 
 export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
   render() {
-    const { proposal, step } = this.props;
+    const { proposal, step, showPoints } = this.props;
     const votesCount = proposal.votes.totalCount;
     const { voteThreshold } = step;
     if (voteThreshold === null || typeof voteThreshold === 'undefined') {
@@ -26,18 +29,33 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
 
     return (
       <div className="card__threshold" style={{ fontSize: '85%', marginTop: '15px' }}>
-        <p>
-          <i className="cap cap-hand-like-2-1" />{' '}
-          {votesCount >= voteThreshold && <FormattedMessage id="proposal.vote.threshold.reached" />}
-          {votesCount < voteThreshold && (
-            <FormattedMessage
-              id={voteCountLabel}
-              values={{
-                count: votesCount,
-              }}
-            />
+        <div className="d-flex justify-content-between mb-10">
+          <div>
+            <Icon name={ICON_NAME.like} size={14} color={colors.secondaryGray} />
+            &nbsp;
+            {votesCount >= voteThreshold && (
+              <FormattedMessage id="proposal.vote.threshold.reached" />
+            )}
+            {votesCount < voteThreshold && (
+              <FormattedMessage
+                id={voteCountLabel}
+                values={{
+                  count: votesCount,
+                }}
+              />
+            )}
+          </div>
+          {proposal && proposal.votes && showPoints && (
+            <div>
+              <Icon name={ICON_NAME.trophy} size={14} color={colors.secondaryGray} />
+              &nbsp;
+              <FormattedMessage
+                id="count-points"
+                values={{ num: proposal.votes.totalPointsCount }}
+              />
+            </div>
           )}
-        </p>
+        </div>
         <ProgressBar
           min={0}
           max={votesCount >= voteThreshold ? votesCount : voteThreshold}
@@ -63,6 +81,7 @@ export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
       id
       votes(stepId: $stepId, first: 0) {
         totalCount
+        totalPointsCount
       }
       ...interpellationLabelHelper_proposal @relay(mask: false)
     }

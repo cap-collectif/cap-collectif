@@ -6,6 +6,14 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with data 1`] = `
     isBudgetEnabled={true}
     isLimitEnabled={true}
     isTresholdEnabled={true}
+    options={
+      Object {
+        "limit": 0,
+        "min": 0,
+        "ranking": false,
+      }
+    }
+    stepFormName="defaultForm"
     votable={true}
   />
   <ProjectAdminFormstyle__ProjectBoxHeader>
@@ -212,6 +220,14 @@ exports[`<ProjectAdminSelectionStepForm /> renders correctly with no initial dat
     isBudgetEnabled={false}
     isLimitEnabled={false}
     isTresholdEnabled={false}
+    options={
+      Object {
+        "limit": 3,
+        "min": 1,
+        "ranking": true,
+      }
+    }
+    stepFormName="defaultForm"
     votable={false}
   />
   <ProjectAdminFormstyle__ProjectBoxHeader>

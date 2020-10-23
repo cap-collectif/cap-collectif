@@ -1576,6 +1576,10 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     last: Int
   ): RequirementConnection!
   project: Project
+
+  """
+  If votesRanking enabled, votesLimit is the reference value for the points scale.
+  """
   votesLimit: Int
 
   """
@@ -1591,7 +1595,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   defaultSort: String
   open: Boolean!
 
-  """If enabled, allow voters to order their votes by preferences."""
+  """If enabled, allow voters to order their votes by point"""
   votesRanking: Boolean!
 
   """A list of viewer votes associated with the step."""
@@ -7198,6 +7202,9 @@ enum ProposalOrderField {
 
   """Allows ordering a list of proposals by the number of votes it have."""
   VOTES
+
+  """Allows ordering a list of proposals by the number of points it have."""
+  POINTS
 }
 
 """Possible values of a proposal's global progress state."""
@@ -7481,6 +7488,10 @@ interface ProposalStep {
     last: Int
   ): RequirementConnection!
   project: Project
+
+  """
+  If votesRanking enabled, votesLimit is the reference value for the points scale.
+  """
   votesLimit: Int
 
   """
@@ -7496,7 +7507,7 @@ interface ProposalStep {
   defaultSort: String
   open: Boolean!
 
-  """If enabled, allow voters to order their votes by preferences."""
+  """If enabled, allow voters to order their votes by point"""
   votesRanking: Boolean!
 
   """A list of viewer votes associated with the step."""
@@ -7637,6 +7648,11 @@ type ProposalVoteConnection {
   totalCount: Int!
   creditsLeft: Int
   creditsSpent: Int
+
+  """
+  Default value is 0. To know if vote ranking is enabled check votesRanking value field on proposalStep
+  """
+  totalPointsCount: Int!
 
   """Information to aid in pagination."""
   pageInfo: PageInfo!
@@ -9719,6 +9735,10 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     last: Int
   ): RequirementConnection!
   project: Project
+
+  """
+  If votesRanking enabled, votesLimit is the reference value for the points scale.
+  """
   votesLimit: Int
 
   """
@@ -9734,7 +9754,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   defaultSort: String
   open: Boolean!
 
-  """If enabled, allow voters to order their votes by preferences."""
+  """If enabled, allow voters to order their votes by point"""
   votesRanking: Boolean!
 
   """A list of viewer votes associated with the step."""

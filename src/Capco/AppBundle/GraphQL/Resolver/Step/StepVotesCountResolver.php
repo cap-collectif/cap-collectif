@@ -9,7 +9,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 
 class StepVotesCountResolver implements ResolverInterface
 {
-    private $votesCountDataLoader;
+    private StepVotesCountDataLoader $votesCountDataLoader;
 
     public function __construct(StepVotesCountDataLoader $votesCountDataLoader)
     {

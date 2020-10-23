@@ -6,9 +6,11 @@ import ReactPlaceholder from 'react-placeholder';
 import type {
   ProjectAdminProposalsPageQueryResponse,
   ProjectAdminProposalsPageQueryVariables,
+  ProposalOrderField,
+  OrderDirection,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
 import type { ResultPreloadQuery, Query } from '~/types';
-import type { ProjectAdminPageParameters } from './ProjectAdminPage.reducer';
+import type { ProjectAdminPageParameters, SortValues } from './ProjectAdminPage.reducer';
 import ProjectAdminProposals, {
   PROJECT_ADMIN_PROPOSAL_PAGINATION,
 } from '~/components/Admin/Project/ProjectAdminProposals';
@@ -25,6 +27,34 @@ type PropsQuery = {|
   props: ProjectAdminProposalsPageQueryResponse,
 |};
 
+const getSortField = (sortType: SortValues): ProposalOrderField => {
+  switch (sortType) {
+    case 'most-votes':
+    case 'least-votes':
+      return `VOTES`;
+    case 'most-points':
+    case 'least-points':
+      return `POINTS`;
+    case 'newest':
+    case 'oldest':
+    default:
+      return `PUBLISHED_AT`;
+  }
+};
+const getSortType = (sortType: SortValues): OrderDirection => {
+  switch (sortType) {
+    case 'oldest':
+    case 'least-votes':
+    case 'least-points':
+      return 'ASC';
+    case 'newest':
+    case 'most-votes':
+    case 'most-points':
+    default:
+      return 'DESC';
+  }
+};
+
 const createQueryVariables = (
   projectId: string,
   parameters: ProjectAdminPageParameters,
@@ -33,8 +63,8 @@ const createQueryVariables = (
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
   cursor: null,
   orderBy: {
-    field: 'PUBLISHED_AT',
-    direction: parameters.sort === 'newest' ? 'DESC' : 'ASC',
+    field: getSortField(parameters.sort),
+    direction: getSortType(parameters.sort),
   },
   state: parameters.filters.state,
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,

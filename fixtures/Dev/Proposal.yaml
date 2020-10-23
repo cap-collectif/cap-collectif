@@ -958,3 +958,25 @@ Capco\AppBundle\Entity\Proposal:
         # TODO: This district is not on the ProposalForm
         district: '@district1'
         category: '@pCategoryAssigned1'
+    proposal138:
+        id: proposal138
+        title: Proposition de Jean 1
+        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        author: '@userJean'
+        proposalForm: '@proposalFormVoteClassement'
+        reference: 4
+        createdAt: <(new \DateTime('2017-02-01 00:03:40'))>
+        updatedAt: <(new \DateTime('2017-02-01 00:03:40'))>
+        publishedAt: <(new \DateTime('2017-02-01 00:03:40'))>
+        undraftAt: $publishedAt
+    proposal139:
+        id: proposal139
+        title: Proposition de Jean 2
+        body: <stripslashes('\Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.')>
+        author: '@userJean'
+        proposalForm: '@proposalFormVoteClassement'
+        reference: 5
+        createdAt: <(new \DateTime('2017-02-01 00:03:41'))>
+        updatedAt: <(new \DateTime('2017-02-01 00:03:41'))>
+        publishedAt: <(new \DateTime('2017-02-01 00:03:41'))>
+        undraftAt: $publishedAt

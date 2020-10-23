@@ -95,3 +95,11 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         createdAt: <(new \DateTime('2017-02-01 00:01:01'))>
         publishedAt: $createdAt
         private: false
+    proposalSelectionVote57:
+        id: 1062
+        proposal: '@proposal26'
+        selectionStep: '@selectionstepVoteClassement'
+        user: '@user5'
+        position: 0
+        publishedAt: <(new \DateTime('2015-03-01 00:00:57'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:57'))>

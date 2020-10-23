@@ -131,6 +131,7 @@ export const ICON_NAME = {
   thumbO: 'thumb-o',
   certified: 'certified',
   sendMail: 'send-mail',
+  trophy: 'trophy',
 };
 
 type Props = {|
@@ -400,6 +401,8 @@ const getIcon = name => {
       return <Icons.Certified />;
     case 'send-mail':
       return <Icons.SendMail />;
+    case 'trophy':
+      return <Icons.Trophy />;
     default:
       return <div />;
   }

@@ -10,20 +10,42 @@ exports[`<ProposalVoteThresholdProgressBar /> renders progress bar in an interpe
     }
   }
 >
-  <p>
-    <i
-      className="cap cap-hand-like-2-1"
-    />
-     
-    <FormattedMessage
-      id="support.count"
-      values={
-        Object {
-          "count": 1,
+  <div
+    className="d-flex justify-content-between mb-10"
+  >
+    <div>
+      <Icon
+        color="#6c757d"
+        name="like"
+        size={14}
+      />
+       
+      <FormattedMessage
+        id="support.count"
+        values={
+          Object {
+            "count": 1,
+          }
         }
-      }
-    />
-  </p>
+      />
+    </div>
+    <div>
+      <Icon
+        color="#6c757d"
+        name="trophy"
+        size={14}
+      />
+       
+      <FormattedMessage
+        id="count-points"
+        values={
+          Object {
+            "num": 5,
+          }
+        }
+      />
+    </div>
+  </div>
   <ProgressBar
     active={false}
     bsClass="progress-bar"
@@ -50,20 +72,42 @@ exports[`<ProposalVoteThresholdProgressBar /> renders progress bar in non-interp
     }
   }
 >
-  <p>
-    <i
-      className="cap cap-hand-like-2-1"
-    />
-     
-    <FormattedMessage
-      id="vote.count"
-      values={
-        Object {
-          "count": 1,
+  <div
+    className="d-flex justify-content-between mb-10"
+  >
+    <div>
+      <Icon
+        color="#6c757d"
+        name="like"
+        size={14}
+      />
+       
+      <FormattedMessage
+        id="vote.count"
+        values={
+          Object {
+            "count": 1,
+          }
         }
-      }
-    />
-  </p>
+      />
+    </div>
+    <div>
+      <Icon
+        color="#6c757d"
+        name="trophy"
+        size={14}
+      />
+       
+      <FormattedMessage
+        id="count-points"
+        values={
+          Object {
+            "num": 5,
+          }
+        }
+      />
+    </div>
+  </div>
   <ProgressBar
     active={false}
     bsClass="progress-bar"

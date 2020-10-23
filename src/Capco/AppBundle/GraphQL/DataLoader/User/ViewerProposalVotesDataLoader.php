@@ -26,14 +26,14 @@ use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
 class ViewerProposalVotesDataLoader extends BatchDataLoader
 {
-    public $enableBatch = true;
-    public $useElasticsearch = true;
-    private $abstractStepRepository;
-    private $proposalCollectVoteRepository;
-    private $proposalSelectionVoteRepository;
-    private $globalIdResolver;
-    private $helper;
-    private $abstractVoteRepository;
+    public bool $enableBatch = true;
+    public bool $useElasticsearch = true;
+    private AbstractStepRepository $abstractStepRepository;
+    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private GlobalIdResolver $globalIdResolver;
+    private ProposalStepVotesResolver $helper;
+    private AbstractVoteRepository $abstractVoteRepository;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,

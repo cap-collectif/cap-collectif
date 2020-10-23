@@ -17,7 +17,7 @@ use GraphQL\Type\Definition\Type;
 
 class VoteTypeResolver implements ResolverInterface
 {
-    private $typeResolver;
+    private TypeResolver $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
     {

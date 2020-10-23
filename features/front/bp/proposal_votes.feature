@@ -1,4 +1,4 @@
-@bp @proposal_votes
+@bp @proposalVotes
 Feature: Proposal votes
 
 # Votes from selection step page
@@ -123,7 +123,7 @@ Scenario: Logged in as user who doesn't full fill requirements and want to vote.
   And I confirm my vote
   And I cancel my vote for the first proposal
   # We vote again
-  And I wait 1 seconds
+  And I wait 2 seconds
   And I vote for the first proposal
   And I should see "requirements filled"
   And the button "global.save" should not be disabled
@@ -136,7 +136,7 @@ Scenario: Logged in user wants to reorder my vote for a project
   And I wait 2 seconds
   Then I reorder my vote with "[id='vote-stepQ29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==-proposalUHJvcG9zYWw6cHJvcG9zYWwyNA==']" take place of proposal up
   And I wait 2 seconds
-  Then I click on button "#confirm-update-votes"
+  Then I click the "#vote-table-step-collecte-avec-vote-classement-limite  #confirm-update-votes" element
 
 @database
 Scenario: Logged in user wants to set a vote as anonymous
@@ -155,7 +155,8 @@ Scenario: Logged in user wants to set a vote as anonymous
 Scenario: Logged in user wants to delete a vote
   Given I am logged in as user
   When I got to the votes details page of project with requirements
-  And I should see "Proposition 3"
+  And I wait "#vote-table-step-selection-avec-vote-classement-limite" to appear on current page
+  And the "#vote-table-step-selection-avec-vote-classement-limite" element should contain "Proposition 3"
   Then I delete a vote of a proposal "UHJvcG9zYWw6cHJvcG9zYWwyNg==-proposal-vote__private"
   And I wait 1 seconds
   And I should see "are-you-sure-you-want-to-delete-this-vote"
@@ -163,4 +164,5 @@ Scenario: Logged in user wants to delete a vote
   And I click on button "#confirm-update-votes"
   Then I reload the page
   And I wait 1 seconds
-  And I should not see "Proposition 3"
+  And I wait "#vote-table-step-selection-avec-vote-classement-limite" to appear on current page
+  And the "#vote-table-step-selection-avec-vote-classement-limite" element should not contain "Proposition 3"

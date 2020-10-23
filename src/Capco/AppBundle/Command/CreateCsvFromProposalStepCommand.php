@@ -183,6 +183,7 @@ EOF;
         'proposal_title' => 'title',
         //Only published votes apparently
         'proposal_votes_totalCount' => 'allVotes.totalCount',
+        'proposal_votes_totalPointsCount' => 'allVotes.totalPointsCount',
         'proposal_createdAt' => 'createdAt',
         'proposal_publishedAt' => 'publishedAt',
         'proposal_updatedAt' => 'updatedAt',
@@ -767,7 +768,11 @@ EOF;
             $val = $entity;
             foreach ($arr as $a) {
                 if (isset($val[$a])) {
-                    $val = $val[$a];
+                    if ('ranking' === $a) {
+                        $val = $val[$a] + 1;
+                    } else {
+                        $val = $val[$a];
+                    }
                 } else {
                     $val = '';
 
@@ -1172,6 +1177,7 @@ ${AUTHOR_INFOS_FRAGMENT}
     ... on Proposal {
       votes(includeUnpublished: true, includeNotAccounted: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter}) {
         totalCount
+        totalPointsCount
         pageInfo {
           startCursor
           endCursor
@@ -1534,6 +1540,7 @@ ${COMMENT_VOTE_INFOS}
             title
             allVotes: votes(stepId: "{$proposalStep->getId()}", includeUnpublished: false, first: 0) {
                 totalCount
+                totalPointsCount
             }
             createdAt
             publishedAt
@@ -1672,6 +1679,7 @@ ${COMMENT_VOTE_INFOS}
               }
             votes(includeUnpublished: true, includeNotAccounted: true, stepId: "{$proposalStep->getId()}", first: ${VOTES_PER_PAGE}${votesAfter}) {
                 totalCount
+                totalPointsCount
                 pageInfo {
                   startCursor
                   endCursor

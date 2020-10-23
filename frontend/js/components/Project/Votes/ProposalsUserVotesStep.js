@@ -44,13 +44,17 @@ export const ProposalsUserVotesStep = ({
     : 'count-questions';
 
   const onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
-    return UpdateProposalVotesMutation.commit({
-      input: {
-        step: step.id,
-        votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
+    return UpdateProposalVotesMutation.commit(
+      {
+        input: {
+          step: step.id,
+          votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
+        },
+        stepId: step.id,
+        isAuthenticated,
       },
-      isAuthenticated,
-    });
+      null,
+    );
   };
 
   if (!step.viewerVotes) {
@@ -58,7 +62,7 @@ export const ProposalsUserVotesStep = ({
   }
 
   return (
-    <ProposalUserVoteStepContainer>
+    <ProposalUserVoteStepContainer id={`vote-table-step-${step.slug || ''}`}>
       <h2>{step.title}</h2>
       <div>
         <BackToVote href={step.url}>
@@ -136,8 +140,13 @@ export default createFragmentContainer(container, {
       ...VoteMinAlert_step
       id
       title
+      voteType
+      votesMin
       votesHelpText
+      open
+      slug
       url
+      votesRanking
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
         ...ProposalsUserVotesTable_votes

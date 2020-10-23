@@ -4,6 +4,7 @@ import colors from '~/utils/colors';
 import { mediaQueryMobile } from '~/utils/sizes';
 
 const getWidthItemPosition = isMobile => (isMobile ? 40 : 30);
+const getWidthItemPointPosition = isMobile => (isMobile ? 40 : 52);
 const marginItemPosition = 20;
 export const spaceItemPosition = getWidthItemPosition() + marginItemPosition + 1;
 
@@ -45,16 +46,21 @@ export const ListItemContainer: StyledComponent<{}, {}, HTMLLIElement> = styled.
   align-items: center;
   margin-bottom: 10px;
 
-  .item__position {
-    width: ${getWidthItemPosition()}px;
+  .item__position__point {
+    width: ${getWidthItemPointPosition()}px;
     height: 23px;
-    line-height: 23px;
+    line-height: 24px;
+    font-size: 10px;
     margin-top: 10px;
     margin-right: ${marginItemPosition}px;
     text-align: center;
     background-color: ${colors.primaryColor};
     color: #fff;
-    border-radius: 20px;
+    border-radius: 10px;
+    b {
+      font-size: 14px;
+      line-height: 19px;
+    }
   }
 
   &:last-child {

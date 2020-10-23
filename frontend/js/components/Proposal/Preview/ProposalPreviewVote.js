@@ -60,7 +60,7 @@ export default createFragmentContainer(ProposalPreviewVote, {
     fragment ProposalPreviewVote_step on Step
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
-      ...ProposalVoteButtonWrapperFragment_step
+      ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });

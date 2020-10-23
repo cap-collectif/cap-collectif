@@ -166,6 +166,7 @@ abstract class AbstractVote implements
     public function setIsAccounted(bool $isAccounted): self
     {
         $this->isAccounted = $isAccounted;
+
         return $this;
     }
 
@@ -185,7 +186,7 @@ abstract class AbstractVote implements
             'ElasticsearchVote',
             'ElasticsearchVoteNestedProject',
             'ElasticsearchVoteNestedAuthor',
-            'ElasticsearchVoteNestedStep'
+            'ElasticsearchVoteNestedStep',
         ];
     }
 }

@@ -30,6 +30,7 @@ describe('<ProposalPreviewBody />', () => {
       },
       currentVotableStep: {
         id: 'step1',
+        votesRanking: true,
       },
       $fragmentRefs,
       $refType,

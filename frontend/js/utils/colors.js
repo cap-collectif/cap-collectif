@@ -25,6 +25,7 @@ const colors = {
   lightGreen: '#28a745',
   orange: '#f09200',
   duckBlue: '#17a2b8',
+  metaBlue: '#5bc0de',
   yellow: '#ffc107',
   blue: '#3b88fd',
   darkerGray: '#85919D',

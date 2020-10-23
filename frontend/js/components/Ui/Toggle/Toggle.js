@@ -63,6 +63,7 @@ const Toggle = ({
   const classes = classNames({
     checked,
     unchecked: !checked,
+    labelContainer: true,
   });
 
   return (

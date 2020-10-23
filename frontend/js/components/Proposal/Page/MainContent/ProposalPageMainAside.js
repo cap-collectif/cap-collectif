@@ -63,7 +63,11 @@ export const ProposalPageMainAside = ({ proposal, features, display }: Props) =>
           currentVotableStep.voteThreshold !== null &&
           typeof currentVotableStep.voteThreshold !== 'undefined' &&
           currentVotableStep.voteThreshold > 0 && (
-            <ProposalPageVoteThreshold proposal={proposal} step={currentVotableStep} />
+            <ProposalPageVoteThreshold
+              proposal={proposal}
+              step={currentVotableStep}
+              showPoints={(currentVotableStep && currentVotableStep.votesRanking) || false}
+            />
           )}
       </div>
       <ProposalPageAdvancement proposal={proposal} />
@@ -77,13 +81,15 @@ const mapStateToProps = (state: GlobalState) => ({
 
 export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMainAside), {
   proposal: graphql`
-    fragment ProposalPageMainAside_proposal on Proposal {
+    fragment ProposalPageMainAside_proposal on Proposal
+      @argumentDefinitions(stepId: { type: "ID!" }) {
       id
       ...ProposalPageMetadata_proposal
       ...ProposalPageAdvancement_proposal
-      ...ProposalPageVoteThreshold_proposal
+      ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
       currentVotableStep {
         id
+        votesRanking
         voteType
         voteThreshold
         ...ProposalPageVoteThreshold_step

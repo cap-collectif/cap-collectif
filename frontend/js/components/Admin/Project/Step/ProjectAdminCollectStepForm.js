@@ -26,6 +26,10 @@ type Props = {|
   isBudgetEnabled: boolean,
   isTresholdEnabled: boolean,
   isLimitEnabled: boolean,
+  votesMin: ?number,
+  votesLimit: ?number,
+  votesRanking: boolean,
+  stepFormName: string,
   proposal?: {| label: string, value: string |},
   isPrivate: boolean,
 |};
@@ -74,6 +78,10 @@ export const ProjectAdminCollectStepForm = ({
   isLimitEnabled,
   proposal,
   isPrivate,
+  stepFormName,
+  votesLimit,
+  votesMin,
+  votesRanking,
 }: Props) => {
   const intl = useIntl();
   const statusesWithId = statuses?.filter(s => s.id) || [];
@@ -142,7 +150,13 @@ export const ProjectAdminCollectStepForm = ({
       </ProjectSmallFieldsContainer>
 
       <StepVotesFields
+        stepFormName={stepFormName}
         votable={votable}
+        options={{
+          limit: votesLimit,
+          min: votesMin,
+          ranking: votesRanking,
+        }}
         isBudgetEnabled={isBudgetEnabled}
         isTresholdEnabled={isTresholdEnabled}
         isLimitEnabled={isLimitEnabled}

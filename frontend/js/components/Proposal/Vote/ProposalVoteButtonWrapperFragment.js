@@ -80,7 +80,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
             <ProposalVoteButton
               id={id}
               proposal={proposal}
-              step={step}
+              currentStep={step}
               user={viewer}
               disabled={false}
             />
@@ -102,7 +102,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
           <ProposalVoteButton
             id={id}
             proposal={proposal}
-            step={step}
+            currentStep={step}
             user={viewer}
             className={className}
             disabled={!proposal.viewerHasVote && !this.userHasEnoughCredits()}
@@ -142,12 +142,22 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
   `,
 
   step: graphql`
-    fragment ProposalVoteButtonWrapperFragment_step on ProposalStep {
+    fragment ProposalVoteButtonWrapperFragment_step on ProposalStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       title
       votesLimit
       voteType
       open
+      votesRanking
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+        edges {
+          node {
+            id
+            anonymous
+          }
+        }
+      }
       ...VoteButtonOverlay_step
     }
   `,

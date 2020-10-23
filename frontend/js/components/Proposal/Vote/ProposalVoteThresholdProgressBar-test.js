@@ -12,6 +12,7 @@ describe('<ProposalVoteThresholdProgressBar />', () => {
       $refType,
       id: 'step1',
     },
+    showPoints: true,
   };
 
   it('renders progress bar in non-interpellation context', () => {
@@ -28,6 +29,7 @@ describe('<ProposalVoteThresholdProgressBar />', () => {
       },
       votes: {
         totalCount: 1,
+        totalPointsCount: 5,
       },
     };
     const wrapper = shallow(<ProposalVoteThresholdProgressBar proposal={proposal} {...props} />);
@@ -48,6 +50,7 @@ describe('<ProposalVoteThresholdProgressBar />', () => {
       },
       votes: {
         totalCount: 1,
+        totalPointsCount: 5,
       },
     };
     const wrapper = shallow(<ProposalVoteThresholdProgressBar proposal={proposal} {...props} />);

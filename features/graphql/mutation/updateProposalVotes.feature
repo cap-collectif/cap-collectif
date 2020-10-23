@@ -1,4 +1,4 @@
-@proposals_votes
+@proposalVotes
 Feature: mutation updateProposalVotes
 
 @database
@@ -107,16 +107,22 @@ Scenario: Logged in API client wants to reorder his votes
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: UpdateProposalVotesInput!) {
+    "query": "mutation (
+      $input: UpdateProposalVotesInput!
+      $stepId: ID!
+      $isAuthenticated: Boolean!) {
       updateProposalVotes(input: $input) {
         step {
           id
-          ... on CollectStep {
-            viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
-              totalCount
-              edges {
-                node {
+          viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+            totalCount
+            edges {
+              node {
+                proposal {
                   id
+                  votes(stepId: $stepId, first: 0) @include(if: $isAuthenticated) {
+                    totalPointsCount
+                  }
                 }
               }
             }
@@ -128,44 +134,70 @@ Scenario: Logged in API client wants to reorder his votes
       "input": {
         "step": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
         "votes": [
-          { "id": "2051", "anonymous": false },
-          { "id": "2053", "anonymous": false },
-          { "id": "2052", "anonymous": false }
+          {
+            "id": "2052",
+            "anonymous": false
+          },
+          {
+            "id": "2053",
+            "anonymous": false
+          },
+          {
+            "id": "2051",
+            "anonymous": false
+          }
         ]
-      }
+      },
+      "stepId": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
+      "isAuthenticated": true
     }
   }
   """
   Then the JSON response should match:
   """
   {
-    "data": {
-      "updateProposalVotes": {
-        "step": {
-          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
-          "viewerVotes": {
-            "totalCount": 3,
-            "edges": [
-              {
-                "node": {
-                  "id": "2051"
-                }
-              },
-              {
-                "node": {
-                  "id": "2053"
-                }
-              },
-              {
-                "node": {
-                  "id": "2052"
-                }
+     "data":{
+        "updateProposalVotes":{
+           "step":{
+              "id":"Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
+              "viewerVotes":{
+                 "totalCount":3,
+                 "edges":[
+                    {
+                       "node":{
+                          "proposal":{
+                             "id":"UHJvcG9zYWw6cHJvcG9zYWwyNQ==",
+                             "votes":{
+                                "totalPointsCount":28
+                             }
+                          }
+                       }
+                    },
+                    {
+                       "node":{
+                          "proposal":{
+                             "id":"UHJvcG9zYWw6cHJvcG9zYWwyNg==",
+                             "votes":{
+                                "totalPointsCount":29
+                             }
+                          }
+                       }
+                    },
+                    {
+                       "node":{
+                          "proposal":{
+                             "id":"UHJvcG9zYWw6cHJvcG9zYWwyNA==",
+                             "votes":{
+                                "totalPointsCount":8
+                             }
+                          }
+                       }
+                    }
+                 ]
               }
-            ]
-          }
+           }
         }
-      }
-    }
+     }
   }
   """
 

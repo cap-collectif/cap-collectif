@@ -128,7 +128,7 @@ export default createFragmentContainer(ProposalPageTabs, {
     }
   `,
   proposal: graphql`
-    fragment ProposalPageTabs_proposal on Proposal {
+    fragment ProposalPageTabs_proposal on Proposal @argumentDefinitions(stepId: { type: "ID!" }) {
       id
       form {
         usingCategories

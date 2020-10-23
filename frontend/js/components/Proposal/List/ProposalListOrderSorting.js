@@ -10,6 +10,7 @@ import Select from '../../Ui/Form/Select/Select';
 import SelectOption from '../../Ui/Form/Select/SelectOption';
 
 type Props = {
+  orderByPoints?: boolean,
   orderByVotes?: boolean,
   orderByComments?: boolean,
   orderByCost?: boolean,
@@ -26,6 +27,7 @@ type ComponentState = {
 
 export class ProposalListOrderSorting extends React.Component<Props, ComponentState> {
   static defaultProps = {
+    orderByPoints: false,
     orderByVotes: false,
     orderByComments: false,
     orderByCost: false,
@@ -36,7 +38,8 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
     this.state = {
       displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByComments ? ['comments'] : [])
         .concat(props.orderByCost ? ['expensive', 'cheap'] : [])
-        .concat(props.orderByVotes ? ['votes', 'least-votes'] : []),
+        .concat(props.orderByVotes ? ['votes', 'least-votes'] : [])
+        .concat(props.orderByPoints ? ['points', 'least-points'] : []),
     };
   }
 

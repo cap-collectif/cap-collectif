@@ -16,8 +16,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProjectVotesResolver implements ResolverInterface
 {
-    protected $adapter;
-    private $stepVotesCountResolver;
+    protected PromiseAdapterInterface $adapter;
+    private StepVotesCountResolver $stepVotesCountResolver;
 
     public function __construct(
         StepVotesCountResolver $stepVotesCountResolver,

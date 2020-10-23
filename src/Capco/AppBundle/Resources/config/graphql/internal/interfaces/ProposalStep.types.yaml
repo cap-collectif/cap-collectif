@@ -12,6 +12,7 @@ ProposalStep:
                 type: 'InternalProject'
             votesLimit:
                 type: 'Int'
+                description: 'If votesRanking enabled, votesLimit is the reference value for the points scale.'
             votesMin:
                 type: 'Int'
                 description: 'Minimum number of votes a user must submit for his votes to be counted.'
@@ -34,7 +35,7 @@ ProposalStep:
                 type: 'Boolean!'
             votesRanking:
                 type: 'Boolean!'
-                description: 'If enabled, allow voters to order their votes by preferences.'
+                description: 'If enabled, allow voters to order their votes by point'
             viewerVotes:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'ProposalVoteConnection!'

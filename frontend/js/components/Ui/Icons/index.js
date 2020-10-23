@@ -124,3 +124,4 @@ export { default as PadO } from './svg/pad-o.svg';
 export { default as MicO } from './svg/mic-o.svg';
 export { default as Certified } from './svg/certified.svg';
 export { default as SendMail } from './svg/send-mail.svg';
+export { default as Trophy } from './svg/trophy.svg';

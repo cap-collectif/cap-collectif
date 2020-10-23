@@ -11,7 +11,7 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         proposal: '@proposal24'
         collectStep: '@collectstepVoteClassement'
         user: '@user5'
-        position: 3
+        position: 2
         publishedAt: <(new \DateTime('2015-03-01 00:00:51'))>
         createdAt: <(new \DateTime('2015-03-01 00:00:51'))>
     proposalCollectVote52:
@@ -19,7 +19,7 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         proposal: '@proposal25'
         collectStep: '@collectstepVoteClassement'
         user: '@user5'
-        position: 2
+        position: 1
         publishedAt: <(new \DateTime('2015-03-01 00:00:52'))>
         createdAt: <(new \DateTime('2015-03-01 00:00:52'))>
     proposalCollectVote53:
@@ -27,7 +27,7 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         proposal: '@proposal26'
         collectStep: '@collectstepVoteClassement'
         user: '@user5'
-        position: 1
+        position: 0
         publishedAt: <(new \DateTime('2015-03-01 00:00:53'))>
         createdAt: <(new \DateTime('2015-03-01 00:00:53'))>
     questionCollectVote54:
@@ -35,7 +35,7 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         proposal: '@question1'
         collectStep: '@collectQuestionVoteAvecClassement'
         user: '@user5'
-        position: 1
+        position: 0
         publishedAt: <(new \DateTime('2015-03-01 00:00:54'))>
         createdAt: <(new \DateTime('2015-03-01 00:00:54'))>
     questionCollectVote55:
@@ -43,15 +43,15 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         proposal: '@question2'
         collectStep: '@collectQuestionVoteAvecClassement'
         user: '@user5'
-        position: 2
+        position: 1
         publishedAt: <(new \DateTime('2015-03-01 00:00:55'))>
         createdAt: <(new \DateTime('2015-03-01 00:00:55'))>
     proposalCollectVote56:
         id: 2056
         proposal: '@proposal37'
-        collectStep: '@collectstep12'
+        collectStep: '@collectStepExport'
         user: '@user5'
-        position: 3
+        position: 1
         createdAt: <(new \DateTime('2019-03-01 00:00:00'))>
         publishedAt: $createdAt
     proposalCollectVote57:
@@ -60,7 +60,7 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         collectStep: '@collectStepExport'
         user: '@userSpyl'
         isAccounted: false
-        position: 1
+        position: 0
         createdAt: <(new \DateTime('2019-03-01 00:00:01'))>
         publishedAt: $createdAt
     proposalCollectVote58:
@@ -69,14 +69,46 @@ Capco\AppBundle\Entity\ProposalCollectVote:
         collectStep: '@collectStepExport'
         user: '@user5'
         isAccounted: false
-        position: 1
+        position: 0
         createdAt: <(new \DateTime('2019-03-01 00:00:02'))>
         publishedAt: $createdAt
-    proposalCollectVote59:
-        id: 2059
+    proposalCollectVote63:
+        id: 2063
         proposal: '@proposal132'
         collectStep: '@collectStepExport'
         user: '@user_not_confirmed'
         isAccounted: false
         position: 1
         createdAt: <(new \DateTime('2019-03-01 00:00:03'))>
+    proposalCollectVote59:
+        id: 2059
+        proposal: '@proposal25'
+        collectStep: '@collectstepVoteClassement'
+        user: '@userMaxime'
+        position: 1
+        publishedAt: <(new \DateTime('2015-03-01 00:00:56'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:56'))>
+    proposalCollectVote60:
+        id: 2060
+        proposal: '@proposal26'
+        collectStep: '@collectstepVoteClassement'
+        user: '@userMaxime'
+        position: 0
+        publishedAt: <(new \DateTime('2015-03-01 00:00:57'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:57'))>
+    proposalCollectVote61:
+        id: 2061
+        proposal: '@proposal25'
+        collectStep: '@collectstepVoteClassement'
+        user: '@user2'
+        position: 0
+        publishedAt: <(new \DateTime('2015-03-01 00:00:58'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:58'))>
+    proposalCollectVote62:
+        id: 2062
+        proposal: '@proposal26'
+        collectStep: '@collectstepVoteClassement'
+        user: '@user2'
+        position: 1
+        publishedAt: <(new \DateTime('2015-03-01 00:00:59'))>
+        createdAt: <(new \DateTime('2015-03-01 00:00:59'))>

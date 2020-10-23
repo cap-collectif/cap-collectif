@@ -14,6 +14,7 @@ describe('<ProposalPreviewFooter />', () => {
         title: 'global.consultation',
       },
     },
+    votesRanking: true,
   };
 
   const stepWithVoteDisabled = {
@@ -24,6 +25,7 @@ describe('<ProposalPreviewFooter />', () => {
         title: 'global.consultation',
       },
     },
+    votesRanking: false,
   };
 
   const proposal = {
@@ -36,6 +38,7 @@ describe('<ProposalPreviewFooter />', () => {
     comments: { totalCount: 3 },
     allVotesOnStep: {
       totalCount: 42,
+      totalPointsCount: 192,
     },
   };
 

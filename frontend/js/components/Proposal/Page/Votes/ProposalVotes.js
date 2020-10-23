@@ -117,6 +117,7 @@ export default createPaginationContainer(
             hasPreviousPage
           }
           totalCount
+          totalPointsCount
         }
       }
     `,

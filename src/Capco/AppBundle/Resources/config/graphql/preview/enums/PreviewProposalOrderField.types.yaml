@@ -1,24 +1,27 @@
 PreviewProposalOrderField:
-  type: enum
-  config:
-    name: ProposalOrderField
-    description: 'Properties by which proposal connections can be ordered.'
-    values:
-      COMMENTS:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::COMMENTS")'
-        description: 'Allows ordering a list of proposals by the number of comments it have.'
-      COST:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::COST")'
-        description: 'Allows ordering a list of proposals by the cost it have been estimated.'
-      CREATED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::CREATED_AT")'
-        description: 'Allows ordering a list of proposals by their creation date.'
-      PUBLISHED_AT:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::PUBLISHED_AT")'
-        description: 'Allows ordering a list of proposals by when they were published.'
-      RANDOM:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::RANDOM")'
-        description: 'Allows randomizing a list of proposals.'
-      VOTES:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::VOTES")'
-        description: 'Allows ordering a list of proposals by the number of votes it have.'
+    type: enum
+    config:
+        name: ProposalOrderField
+        description: 'Properties by which proposal connections can be ordered.'
+        values:
+            COMMENTS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::COMMENTS")'
+                description: 'Allows ordering a list of proposals by the number of comments it have.'
+            COST:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::COST")'
+                description: 'Allows ordering a list of proposals by the cost it have been estimated.'
+            CREATED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::CREATED_AT")'
+                description: 'Allows ordering a list of proposals by their creation date.'
+            PUBLISHED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::PUBLISHED_AT")'
+                description: 'Allows ordering a list of proposals by when they were published.'
+            RANDOM:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::RANDOM")'
+                description: 'Allows randomizing a list of proposals.'
+            VOTES:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::VOTES")'
+                description: 'Allows ordering a list of proposals by the number of votes it have.'
+            POINTS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::POINTS")'
+                description: 'Allows ordering a list of proposals by the number of points it have.'

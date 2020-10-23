@@ -40,6 +40,7 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
           "id": "test",
           "statuses": Array [],
           "voteType": "DISABLED",
+          "votesRanking": true,
         }
       }
     />
@@ -66,6 +67,7 @@ exports[`<ProposalListFilters /> should render correctly 1`] = `
         defaultSort="random"
         orderByComments={true}
         orderByCost={true}
+        orderByPoints={true}
         orderByVotes={false}
       />
     </Col>
@@ -113,6 +115,7 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
           "id": "test",
           "statuses": Array [],
           "voteType": "DISABLED",
+          "votesRanking": true,
         }
       }
     />
@@ -139,6 +142,7 @@ exports[`<ProposalListFilters /> should render correctly with filters 1`] = `
         defaultSort="random"
         orderByComments={true}
         orderByCost={true}
+        orderByPoints={true}
         orderByVotes={false}
       />
     </Col>

@@ -375,6 +375,42 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function countPointsOnPublishedSelectionVoteByStep(
+        SelectionStep $step,
+        bool $onlyAccounted = true
+    ): int {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('pv.position as position', 'cs.votesLimit as max', 'cs.votesMin as min')
+            ->andWhere('pv.selectionStep = :step')
+            ->innerJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('pv.position IS NOT NULL')
+            ->andWhere('pv.published = 1');
+        if ($onlyAccounted) {
+            $qb->andWhere('pv.isAccounted = 1');
+        }
+
+        $results = $qb
+            ->andWhere('proposal.draft = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
+            ->andWhere('proposal.published = 1')
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getResult();
+
+        $pointsOnStep = 0;
+        foreach ($results as $result) {
+            $pointsAvailable = [];
+            for ($i = $result['max']; $i > 0; --$i) {
+                $pointsAvailable[] = $i;
+            }
+
+            $pointsOnStep += $pointsAvailable[$result['position']];
+        }
+
+        return $pointsOnStep;
+    }
+
     public function getByProposalIdsAndStepAndUser(
         array $ids,
         SelectionStep $step,
@@ -400,32 +436,64 @@ class ProposalSelectionVoteRepository extends EntityRepository
         $qb = $this->createQueryBuilder('pv');
 
         if ($asTitle) {
-            $qb->select('COUNT(pv.id) as votesCount', 'ss.title as selectionStep');
+            $qb->select(
+                'pv.position as position',
+                'ss.votesLimit as max',
+                'ss.title as stepId',
+                'ss.votesRanking as votesRanking'
+            );
         } else {
-            $qb->select('COUNT(pv.id) as votesCount', 'ss.id as selectionStep');
+            $qb->select(
+                'pv.position as position',
+                'ss.votesLimit as max',
+                'ss.id as stepId',
+                'ss.votesRanking as votesRanking'
+            );
         }
 
         $qb
             ->leftJoin('pv.selectionStep', 'ss')
             ->andWhere('pv.proposal = :proposal')
             ->andWhere('pv.published = true')
-            ->setParameter('proposal', $proposal)
-            ->groupBy('pv.selectionStep');
+            ->andWhere('pv.isAccounted = 1')
+            ->setParameter('proposal', $proposal);
 
         $results = $qb
             ->getQuery()
             ->useQueryCache(true)
             ->getResult();
-        $votesBySteps = [];
+
+        $data = [];
+        $data['votesBySteps'] = [];
+        $data['pointsBySteps'] = [];
+        /** @var ProposalSelectionVote $result */
         foreach ($results as $result) {
-            $votesBySteps[$result['selectionStep']] = (int) $result['votesCount'];
-        }
-        foreach ($items as $item) {
-            if (!isset($votesBySteps[$item])) {
-                $votesBySteps[$item] = 0;
+            $pointsAvailable = [];
+            for ($i = $result['max']; $i > 0; --$i) {
+                $pointsAvailable[] = $i;
+            }
+            $data['votesBySteps'][$result['stepId']] = \count($results);
+
+            if (true === $result['votesRanking'] && null !== $result['position']) {
+                if (isset($data['pointsBySteps'][$result['stepId']])) {
+                    $data['pointsBySteps'][$result['stepId']] +=
+                        $pointsAvailable[$result['position']];
+                } else {
+                    $data['pointsBySteps'][$result['stepId']] =
+                        $pointsAvailable[$result['position']];
+                }
             }
         }
 
-        return $votesBySteps;
+        foreach ($items as $item) {
+            if (!isset($data['votesBySteps'][$item])) {
+                $data['votesBySteps'][$item] = 0;
+            }
+            if (!isset($data['pointsBySteps'][$item])) {
+                $data['pointsBySteps'][$item] = 0;
+            }
+        }
+
+        return $data;
     }
 }

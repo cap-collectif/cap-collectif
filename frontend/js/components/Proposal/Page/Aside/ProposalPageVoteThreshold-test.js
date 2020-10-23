@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageVoteThreshold } from './ProposalPageVoteThreshold';
-import { $refType } from '~/mocks';
+import { $refType, intlMock } from '~/mocks';
 
 describe('<ProposalPageVoteThreshold />', () => {
   const proposal = {
@@ -11,6 +11,7 @@ describe('<ProposalPageVoteThreshold />', () => {
     id: '1',
     votes: {
       totalCount: 30,
+      totalPointsCount: 10,
     },
     form: {
       isProposalForm: true,
@@ -36,14 +37,24 @@ describe('<ProposalPageVoteThreshold />', () => {
 
   it('should render proposal page vote threshold', () => {
     const wrapper = shallow(
-      <ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThreshold} />,
+      <ProposalPageVoteThreshold
+        intl={intlMock}
+        proposal={proposal}
+        step={stepWithVoteThreshold}
+        showPoints
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render proposal page vote threshold reached', () => {
     const wrapper = shallow(
-      <ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThresholdReached} />,
+      <ProposalPageVoteThreshold
+        intl={intlMock}
+        proposal={proposal}
+        step={stepWithVoteThresholdReached}
+        showPoints={false}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

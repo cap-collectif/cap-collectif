@@ -10,7 +10,7 @@ describe('<ProposalVoteButton />', () => {
     dispatch: jest.fn(),
     id: 'buttonID',
     isDeleting: false,
-    step: { id: 'stepId' },
+    currentStep: { id: 'stepId', votesRanking: false },
     user: { id: 'id1' },
     isAuthenticated: true,
   };
@@ -41,6 +41,7 @@ describe('<ProposalVoteButton />', () => {
       viewerHasVote: true,
       viewerVote: {
         id: 'vote1',
+        ranking: null,
         $fragmentRefs,
       },
       form: {
@@ -63,6 +64,29 @@ describe('<ProposalVoteButton />', () => {
       viewerHasVote: true,
       viewerVote: {
         id: 'vote1',
+        ranking: null,
+        $fragmentRefs,
+      },
+      form: {
+        isProposalForm: true,
+      },
+      project: {
+        type: {
+          title: 'global.consultation',
+        },
+      },
+    };
+    const wrapper = shallow(<ProposalVoteButton isHovering proposal={proposal} {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('renders viewer has voted and hovering with ranking', () => {
+    const proposal = {
+      $refType,
+      id: 'proposal1',
+      viewerHasVote: true,
+      viewerVote: {
+        id: 'vote1',
+        ranking: 0,
         $fragmentRefs,
       },
       form: {

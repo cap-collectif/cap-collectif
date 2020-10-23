@@ -20,6 +20,7 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             "id": "cvs1",
             "voteThreshold": null,
             "voteType": "SIMPLE",
+            "votesRanking": true,
           },
           "form": Object {
             "usingCategories": true,
@@ -42,11 +43,41 @@ exports[`<ProposalPageAside /> should render correctly 1`] = `
             "id": "cvs1",
             "voteThreshold": null,
             "voteType": "SIMPLE",
+            "votesRanking": true,
           },
           "form": Object {
             "usingCategories": true,
             "usingThemes": false,
           },
+        }
+      }
+    />
+    <Relay(injectIntl(ProposalPageVoteThreshold))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+      showPoints={true}
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "id": "cvs1",
+          "voteThreshold": null,
+          "voteType": "SIMPLE",
+          "votesRanking": true,
         }
       }
     />
@@ -74,6 +105,7 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             "id": "cvs1",
             "voteThreshold": null,
             "voteType": "SIMPLE",
+            "votesRanking": true,
           },
           "form": Object {
             "usingCategories": true,
@@ -96,11 +128,41 @@ exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
             "id": "cvs1",
             "voteThreshold": null,
             "voteType": "SIMPLE",
+            "votesRanking": true,
           },
           "form": Object {
             "usingCategories": true,
             "usingThemes": false,
           },
+        }
+      }
+    />
+    <Relay(injectIntl(ProposalPageVoteThreshold))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+      showPoints={true}
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "id": "cvs1",
+          "voteThreshold": null,
+          "voteType": "SIMPLE",
+          "votesRanking": true,
         }
       }
     />
@@ -128,6 +190,7 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             "id": "cvs1",
             "voteThreshold": null,
             "voteType": "SIMPLE",
+            "votesRanking": true,
           },
           "form": Object {
             "usingCategories": true,
@@ -150,11 +213,41 @@ exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
             "id": "cvs1",
             "voteThreshold": null,
             "voteType": "SIMPLE",
+            "votesRanking": true,
           },
           "form": Object {
             "usingCategories": true,
             "usingThemes": false,
           },
+        }
+      }
+    />
+    <Relay(injectIntl(ProposalPageVoteThreshold))
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "currentVotableStep": Object {
+            "$fragmentRefs": null,
+            "id": "cvs1",
+            "voteThreshold": null,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+        }
+      }
+      showPoints={true}
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "id": "cvs1",
+          "voteThreshold": null,
+          "voteType": "SIMPLE",
+          "votesRanking": true,
         }
       }
     />

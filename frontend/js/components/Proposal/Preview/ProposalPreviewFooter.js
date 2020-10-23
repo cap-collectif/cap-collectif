@@ -33,28 +33,42 @@ export class ProposalPreviewFooter extends React.Component<Props> {
         {showComments && (
           <div className="card__counters__item card__counters__item--comments">
             <div className="card__counters__value">{proposal.comments.totalCount}</div>
-            <div>
-              <FormattedMessage
-                id="comment.count_no_nb"
-                values={{
-                  count: proposal.comments.totalCount,
-                }}
-              />
-            </div>
+            <FormattedMessage
+              id="comment.count_no_nb"
+              values={{
+                count: proposal.comments.totalCount,
+              }}
+              tagName="div"
+            />
           </div>
         )}
         {showVotes && proposal.allVotesOnStep && (
-          <div className="card__counters__item card__counters__item--votes">
-            <div className="card__counters__value">{proposal.allVotesOnStep.totalCount}</div>
-            <div>
+          <>
+            <div className="card__counters__item card__counters__item--votes">
+              <div className="card__counters__value">{proposal.allVotesOnStep.totalCount}</div>
               <FormattedMessage
                 id={voteCountLabel}
                 values={{
                   count: proposal.allVotesOnStep.totalCount,
                 }}
+                tagName="div"
               />
             </div>
-          </div>
+            {step.votesRanking && proposal.allVotesOnStep && (
+              <div className="card__counters__item card__counters__item--votes">
+                <div className="card__counters__value">
+                  {proposal.allVotesOnStep.totalPointsCount}
+                </div>
+                <FormattedMessage
+                  id="points-count"
+                  values={{
+                    num: proposal.allVotesOnStep.totalPointsCount,
+                  }}
+                  tagName="div"
+                />
+              </div>
+            )}
+          </>
         )}
       </Card.Counters>
     );
@@ -70,6 +84,7 @@ export default createFragmentContainer(ProposalPreviewFooter, {
           title
         }
       }
+      votesRanking
     }
   `,
   proposal: graphql`
@@ -88,6 +103,7 @@ export default createFragmentContainer(ProposalPreviewFooter, {
       }
       allVotesOnStep: votes(stepId: $stepId, first: 0) @skip(if: $isProfileView) {
         totalCount
+        totalPointsCount
       }
     }
   `,

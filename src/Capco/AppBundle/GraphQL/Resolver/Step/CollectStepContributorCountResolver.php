@@ -10,8 +10,8 @@ use Psr\Log\LoggerInterface;
 
 class CollectStepContributorCountResolver implements ResolverInterface
 {
-    private $collectStepCountContributorDataLoader;
-    private $logger;
+    private CollectStepContributorCountDataLoader $collectStepCountContributorDataLoader;
+    private LoggerInterface $logger;
 
     public function __construct(
         LoggerInterface $logger,

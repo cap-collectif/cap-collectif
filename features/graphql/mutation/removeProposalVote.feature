@@ -1,4 +1,4 @@
-@proposals_votes
+@proposalVotes
 Feature: mutation removeProposalVote
 
 @security

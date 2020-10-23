@@ -287,10 +287,10 @@ global.App = ($ => {
          *    For instance: "<script>console.log('toto');</script><noscript><img src='blabla'/></noscript>"
          */
 
-        // separate script and noscript tags
+          // separate script and noscript tags
         const matches = scriptText.split(
           /(?=<\s*noscript\s*>.*<\/\s*noscript\s*>|<\s*script\s*>[^<]*<\/\s*script\s*>)/,
-        );
+          );
         matches.map(match => {
           newChildren.push(appendChildToDOM(match));
         });

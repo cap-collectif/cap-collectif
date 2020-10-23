@@ -20,3 +20,33 @@ exports[`<List /> should render correctly 1`] = `
   </Connect(Droppable)>
 </Liststyle__ListContainer>
 `;
+
+exports[`<List /> should render correctly with position 1`] = `
+<Liststyle__ListContainer
+  hasPositionDisplayed={true}
+  id="1"
+>
+  <Title
+    type="h3"
+  >
+    <FormattedMessage
+      id="Test"
+      values={Object {}}
+    />
+  </Title>
+  <Connect(Droppable)
+    direction="vertical"
+    droppableId="1"
+    getContainerForClone={[Function]}
+    ignoreContainerClipping={false}
+    isCombineEnabled={false}
+    isCombineOnly={false}
+    isDropDisabled={false}
+    mode="standard"
+    renderClone={null}
+    type="DEFAULT"
+  >
+    <Component />
+  </Connect(Droppable)>
+</Liststyle__ListContainer>
+`;

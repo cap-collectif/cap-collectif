@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ViewerProposalVotesResolver implements ResolverInterface
 {
-    private $viewerProposalVotesDataLoader;
+    private ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
 
     public function __construct(ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader)
     {

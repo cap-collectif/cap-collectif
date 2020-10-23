@@ -10,8 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalVotesResolver implements ResolverInterface
 {
-    private $proposalVotesDataLoader;
-    private $globalIdResolver;
+    private ProposalVotesDataLoader $proposalVotesDataLoader;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         ProposalVotesDataLoader $proposalVotesDataLoader,

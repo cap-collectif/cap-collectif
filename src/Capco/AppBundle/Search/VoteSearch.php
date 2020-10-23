@@ -13,13 +13,14 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
+use Elastica\Result;
 use Elastica\ResultSet;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class VoteSearch extends Search
 {
-    private $abstractVoteRepository;
+    private AbstractVoteRepository $abstractVoteRepository;
 
     public function __construct(Index $index, AbstractVoteRepository $abstractVoteRepository)
     {
@@ -119,13 +120,55 @@ class VoteSearch extends Search
             case 'CREATED_AT':
                 return 'createdAt';
             case 'PUBLISHED_AT':
-                return 'publishedAt';
             default:
                 return 'publishedAt';
         }
     }
 
     public function searchProposalVotes(array $keys): array
+    {
+        $resultSets = $this->proposalVotesQuery($keys);
+        $results = [];
+        $points = [];
+        foreach ($resultSets as $resultKey => $resultSet) {
+            if (!isset($points[$resultKey])) {
+                $points[$resultKey] = 0;
+            }
+
+            if (!empty($resultSet->getResults())) {
+                $map = array_map(static function (Result $result) use ($keys) {
+                    foreach (
+                        $result->getHit()['_source']['proposal']['pointsCountByStep']
+                        as $pointedSteps
+                    ) {
+                        if (
+                            isset($pointedSteps['step'], $keys[0]['step']) &&
+                            $pointedSteps['step']['id'] === $keys[0]['step']->getId()
+                        ) {
+                            return $pointedSteps['count'];
+                        }
+
+                        continue;
+                    }
+
+                    return 0;
+                }, $resultSet->getResults());
+                $points[$resultKey] += $map[0];
+            }
+
+            $connection = new ElasticsearchPaginatedResult(
+                $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $resultSet),
+                $this->getCursors($resultSet),
+                $resultSet->getTotalHits()
+            );
+            $connection->totalPointsCount = $points[$resultKey];
+            $results[] = $connection;
+        }
+
+        return $results;
+    }
+
+    private function proposalVotesQuery(array $keys)
     {
         $client = $this->index->getClient();
         $globalQuery = new \Elastica\Multi\Search($client);
@@ -145,7 +188,6 @@ class VoteSearch extends Search
             if (!$key['includeNotAccounted']) {
                 $boolQuery->addFilter(new Term(['isAccounted' => true]));
             }
-
             list($cursor, $field, $direction, $limit) = [
                 $key['args']->offsetGet('after'),
                 $key['args']->offsetGet('orderBy')['field'],
@@ -169,17 +211,8 @@ class VoteSearch extends Search
         }
 
         $responses = $globalQuery->search();
-        $results = [];
-        $resultSets = $responses->getResultSets();
-        foreach ($resultSets as $key => $resultSet) {
-            $results[] = new ElasticsearchPaginatedResult(
-                $this->getHydratedResultsFromResultSet($this->abstractVoteRepository, $resultSet),
-                $this->getCursors($resultSet),
-                $resultSet->getTotalHits()
-            );
-        }
 
-        return $results;
+        return $responses->getResultSets();
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult

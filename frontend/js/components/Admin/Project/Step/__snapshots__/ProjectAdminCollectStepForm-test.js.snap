@@ -153,6 +153,14 @@ exports[`<ProjectAdminCollectStepForm /> renders correctly 1`] = `
     isBudgetEnabled={true}
     isLimitEnabled={false}
     isTresholdEnabled={true}
+    options={
+      Object {
+        "limit": 3,
+        "min": 1,
+        "ranking": true,
+      }
+    }
+    stepFormName="defaultForm"
     votable={true}
   />
   <ProjectAdminFormstyle__ProjectBoxHeader>

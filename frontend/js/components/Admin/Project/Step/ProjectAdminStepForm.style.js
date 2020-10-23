@@ -73,11 +73,55 @@ export const CheckboxPlaceholder: StyledComponent<{}, {}, HTMLDivElement> = styl
 `;
 
 export const VoteFieldContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  div + span {
-    font-weight: bold;
+  > span {
+    line-height: 24px;
   }
-  input[type='number'] {
-    max-width: 200px;
+  .vote-fields {
+    margin-top: 20px;
+    display: flex;
+    > div {
+      flex: 1;
+    }
+    div + span {
+      font-weight: bold;
+    }
+    input[type='number'] {
+      max-width: 70px;
+    }
+    .toggle-container {
+      .excerpt {
+        width: 85%;
+        display: block;
+        font-weight: 400;
+      }
+
+      .label-toggler {
+        color: ${colors.black};
+        font-weight: 600;
+      }
+    }
+
+    .vote-min {
+      max-width: 70px;
+    }
+
+    #step-votesMin-error {
+      white-space: nowrap;
+    }
+
+    .help-block {
+      font-weight: 400;
+      strong {
+        color: ${colors.black};
+        font-weight: 600;
+      }
+    }
+
+    .labelContainer {
+      justify-content: space-between;
+      flex: 1;
+      text-align: left;
+    }
   }
 `;
 
