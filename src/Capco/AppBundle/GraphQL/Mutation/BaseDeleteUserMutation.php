@@ -190,7 +190,6 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     public function anonymizeUser(User $user): void
     {
-        //todo ici
         $newsletter = $this->newsletterSubscriptionRepository->findOneBy([
             'email' => $user->getEmail(),
         ]);

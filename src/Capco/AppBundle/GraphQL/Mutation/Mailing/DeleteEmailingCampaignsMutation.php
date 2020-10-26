@@ -4,34 +4,30 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\DeleteEmailingCampaignsErrorCode;
-use Capco\AppBundle\Repository\EmailingCampaignRepository;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
-class DeleteEmailingCampaignsMutation implements MutationInterface
+class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
 {
-    private EmailingCampaignRepository $repository;
     private EntityManagerInterface $entityManager;
 
-    public function __construct(
-        EmailingCampaignRepository $repository,
-        EntityManagerInterface $entityManager
-    ) {
-        $this->repository = $repository;
+    public function __construct(GlobalIdResolver $resolver, EntityManagerInterface $entityManager)
+    {
+        parent::__construct($resolver);
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $error = null;
         $deletedIds = [];
         $archivedIds = [];
 
         try {
-            $campaigns = $this->getEmailingCampaigns($input);
+            $campaigns = $this->getEmailingCampaigns($input, $viewer);
 
             foreach ($campaigns as $globalId => $campaign) {
                 if ($campaign->isEditable()) {
@@ -54,37 +50,32 @@ class DeleteEmailingCampaignsMutation implements MutationInterface
     private function freeMailingList(EmailingCampaign $campaign): void
     {
         if ($campaign->getMailingList()) {
-            if (1 === $campaign->getMailingList()->getEmailingCampaigns()->count()) {
+            if (
+                1 ===
+                $campaign
+                    ->getMailingList()
+                    ->getEmailingCampaigns()
+                    ->count()
+            ) {
                 $campaign->getMailingList()->setIsDeletable(true);
             }
         }
     }
 
-    private function getEmailingCampaigns(Argument $input): array
+    private function getEmailingCampaigns(Argument $input, User $viewer): array
     {
         $emailingCampaigns = [];
         foreach ($input->offsetGet('ids') as $globalId) {
-            $id = GlobalId::fromGlobalId($globalId)['id'];
-            if (null === $id) {
-                throw new UserError(
-                    DeleteEmailingCampaignsErrorCode::ID_NOT_FOUND
-                );
+            $emailingCampaign = $this->findCampaignFromGlobalId($globalId, $viewer);
+            if (null === $emailingCampaign) {
+                throw new UserError(DeleteEmailingCampaignsErrorCode::ID_NOT_FOUND);
             }
 
-            $campaign = $this->repository->find($id);
-            if (null === $campaign) {
-                throw new UserError(
-                    DeleteEmailingCampaignsErrorCode::ID_NOT_FOUND
-                );
-            }
-
-            $emailingCampaigns[$globalId] = $campaign;
+            $emailingCampaigns[$globalId] = $emailingCampaign;
         }
 
         if (empty($emailingCampaigns)) {
-            throw new UserError(
-                DeleteEmailingCampaignsErrorCode::EMPTY
-            );
+            throw new UserError(DeleteEmailingCampaignsErrorCode::EMPTY);
         }
 
         return $emailingCampaigns;

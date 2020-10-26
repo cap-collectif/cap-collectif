@@ -6,6 +6,7 @@ use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Mailer\Message\AbstractModeratorMessage;
+use Capco\AppBundle\Mailer\Message\EmailingCampaign\AbstractEmailingCampaignMessage;
 use Capco\AppBundle\Mailer\Message\Reporting\ReportingCreateMessage;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
@@ -124,6 +125,9 @@ class MailerFactory
         }
         if (\in_array(AbstractAdminMessage::class, class_parents($class))) {
             return AbstractAdminMessage::class;
+        }
+        if (\in_array(AbstractEmailingCampaignMessage::class, class_parents($class))) {
+            return AbstractEmailingCampaignMessage::class;
         }
 
         throw new MailerException("${class} is not an known type of message");

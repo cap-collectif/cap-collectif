@@ -1,0 +1,11 @@
+TestEmailingCampaignInput:
+    type: relay-mutation-input
+    config:
+        description: 'Test a campaign by sending it to given email'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'Global id of the campaign to test'
+            email:
+                type: 'Email!'
+                description: 'email receiving the tested campaign'

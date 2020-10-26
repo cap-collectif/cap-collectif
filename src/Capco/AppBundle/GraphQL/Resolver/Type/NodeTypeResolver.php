@@ -5,9 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Type;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
@@ -40,7 +42,6 @@ use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use function in_array;
 
 class NodeTypeResolver implements ResolverInterface
 {
@@ -52,8 +53,7 @@ class NodeTypeResolver implements ResolverInterface
         TypeResolver $typeResolver,
         RequirementTypeResolver $requirementTypeResolver,
         QuestionTypeResolver $questionTypeResolver
-    )
-    {
+    ) {
         $this->typeResolver = $typeResolver;
         $this->requirementTypeResolver = $requirementTypeResolver;
         $this->questionTypeResolver = $questionTypeResolver;
@@ -153,7 +153,7 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('SelectionStep');
         }
         if ($node instanceof CollectStep) {
-            if (in_array($currentSchemaName, ['public', 'preview'], true)) {
+            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
                 return $this->typeResolver->resolve('PreviewCollectStep');
             }
 
@@ -246,6 +246,14 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof UserInvite) {
             return $this->typeResolver->resolve('UserInvite');
+        }
+
+        if ($node instanceof MailingList) {
+            return $this->typeResolver->resolve('MailingList');
+        }
+
+        if ($node instanceof EmailingCampaign) {
+            return $this->typeResolver->resolve('EmailingCampaign');
         }
 
         throw new UserError('Could not resolve type of Node.');

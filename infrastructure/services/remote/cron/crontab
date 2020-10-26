@@ -41,3 +41,6 @@
 
 # Send activities email to follower, every day at 9 AM
 0 9 * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:follower-notifier --env=prod
+
+# Send Planned emailing campaigns every 5 minutes.
+*/5 * * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:send-emailing-campaign --env=prod

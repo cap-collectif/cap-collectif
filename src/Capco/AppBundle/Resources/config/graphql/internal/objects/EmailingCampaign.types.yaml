@@ -40,3 +40,7 @@ EmailingCampaign:
             status:
                 type: 'EmailingCampaignStatus!'
                 description: 'the status of the campaign'
+            preview:
+                type: 'HTML'
+                description: 'preview of the email'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EmailingCampaign\\EmailingCampaignPreviewResolver", [value])'

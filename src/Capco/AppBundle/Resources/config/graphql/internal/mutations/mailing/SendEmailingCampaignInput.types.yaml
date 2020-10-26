@@ -1,0 +1,8 @@
+SendEmailingCampaignInput:
+    type: relay-mutation-input
+    config:
+        description: 'Send a campaign now or at its sendAt date'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'Global id of the campaign to send'

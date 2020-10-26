@@ -18,6 +18,7 @@ Scenario: GraphQL client wants to create a campaign
           mailingInternal
           status
           sendAt
+          preview
         }
       }
     }",
@@ -37,7 +38,8 @@ Scenario: GraphQL client wants to create a campaign
           "mailingList": null,
           "mailingInternal": null,
           "status": "DRAFT",
-          "sendAt": null
+          "sendAt": null,
+          "preview": @string@
         }
       }
     }
@@ -286,12 +288,13 @@ Scenario: GraphQL client updates a campaign
           sendAt
           status
           mailingInternal
+          preview
         }
       }
     }",
     "variables": {
       "input": {
-        "id": "RW1haWxpbmdDbWFwYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
         "name": "new name",
         "senderEmail": "new@cap-collectif.com",
         "senderName": "new sender name",
@@ -317,7 +320,8 @@ Scenario: GraphQL client updates a campaign
           "content": "new content",
           "sendAt": "2025-01-01 00:00:00",
           "status": "PLANNED",
-          "mailingInternal": "NOT_CONFIRMED"
+          "mailingInternal": "NOT_CONFIRMED",
+          "preview": @string@
         }
       }
     }
@@ -345,7 +349,7 @@ Scenario: GraphQL client updates a campaign with a mailing list
     }",
     "variables": {
       "input": {
-        "id": "RW1haWxpbmdDbWFwYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
         "name": "new name",
         "senderEmail": "new@cap-collectif.com",
         "senderName": "new sender name",
@@ -433,7 +437,7 @@ Scenario: GraphQL client try to update a campaign already sent
     }",
     "variables": {
       "input": {
-        "id": "RW1haWxpbmdDbWFwYWlnbjpDYW1wYWlnblRvUmVtaW5kVG9Db25maXJt",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvUmVtaW5kVG9Db25maXJt",
         "name": "new name",
         "senderEmail": "new@cap-collectif.com",
         "senderName": "new sender name",
@@ -474,7 +478,7 @@ Scenario: GraphQL client try to update a campaign with date already past
     }",
     "variables": {
       "input": {
-        "id": "RW1haWxpbmdDbWFwYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
         "name": "new name",
         "senderEmail": "new@cap-collectif.com",
         "senderName": "new sender name",
@@ -518,7 +522,7 @@ Scenario: GraphQL client updates a campaign with both an internal list and a mai
     }",
     "variables": {
       "input": {
-        "id": "RW1haWxpbmdDbWFwYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
         "name": "new name",
         "senderEmail": "new@cap-collectif.com",
         "senderName": "new sender name",
@@ -561,7 +565,7 @@ Scenario: GraphQL client updates a campaign with wrong non existing list
     }",
     "variables": {
       "input": {
-        "id": "RW1haWxpbmdDbWFwYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
         "name": "new name",
         "senderEmail": "new@cap-collectif.com",
         "senderName": "new sender name",
@@ -603,7 +607,7 @@ Scenario: GraphQL client updates a campaign with wrong non existing internal lis
     }",
     "variables": {
       "input": {
-        "id": "RW1haWxpbmdDbWFwYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM=",
         "name": "new name",
         "senderEmail": "new@cap-collectif.com",
         "senderName": "new sender name",
@@ -619,6 +623,235 @@ Scenario: GraphQL client updates a campaign with wrong non existing internal lis
       "updateEmailingCampaign": {
         "error": "MAILING_LIST_NOT_FOUND",
         "emailingCampaign": null
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL client cancel a planned campaign
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CancelEmailingCampaignInput!) {
+      cancelEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          sendAt
+          status
+          preview
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvVGhhbmtzUmVnaXN0ZXJlZA=="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "cancelEmailingCampaign": {
+        "error": null,
+        "emailingCampaign": {
+          "sendAt": "2021-01-01 00:00:00",
+          "status": "DRAFT",
+          "preview": @string@
+        }
+      }
+    }
+  }
+  """
+
+Scenario: GraphQL client wants to cancel a campaign, but it is not planned
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CancelEmailingCampaignInput!) {
+      cancelEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          status
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "cancelEmailingCampaign": {
+        "error": "CANNOT_BE_CANCELED",
+        "emailingCampaign": null
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL client send a draft campaign
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: SendEmailingCampaignInput!) {
+      sendEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          status
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "sendEmailingCampaign": {
+        "error": null,
+        "emailingCampaign": {
+          "status": "SENT"
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL client plans a draft campaign
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CancelEmailingCampaignInput!) {
+      cancelEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          sendAt
+          status
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvVGhhbmtzUmVnaXN0ZXJlZA=="
+      }
+    }
+  }
+  """
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: SendEmailingCampaignInput!) {
+      sendEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          sendAt
+          status
+          preview
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvVGhhbmtzUmVnaXN0ZXJlZA=="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "sendEmailingCampaign": {
+        "error": null,
+        "emailingCampaign": {
+          "sendAt": "2021-01-01 00:00:00",
+          "status": "PLANNED",
+          "preview": @string@
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL client try send a campaign already sent
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: SendEmailingCampaignInput!) {
+      sendEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          status
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvUmVtaW5kVG9Db25maXJt"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "sendEmailingCampaign": {
+        "error": "CANNOT_BE_SENT",
+        "emailingCampaign": null
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL client test a campaign
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: TestEmailingCampaignInput!) {
+      testEmailingCampaign(input: $input) {
+        error
+        html
+      }
+    }",
+    "variables": {
+      "input": {
+        "email": "vincent@cap-collectif.com",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvQ292aWRQYXJ0aWNpcGFudHM="
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "testEmailingCampaign": {
+        "error": null,
+        "html": "@string@"
       }
     }
   }

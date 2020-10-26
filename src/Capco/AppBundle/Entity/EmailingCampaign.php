@@ -179,6 +179,30 @@ class EmailingCampaign
         return in_array($this->status, EmailingCampaignStatus::EDITABLE);
     }
 
+    public function hasReceipt(): bool
+    {
+        return ($this->mailingList || $this->mailingInternal);
+    }
+
+    public function isComplete(): bool
+    {
+        return (
+            $this->senderName &&
+            $this->senderEmail &&
+            ('' !== $this->object) &&
+            ('' !== $this->content)
+        );
+    }
+
+    public function canBeSent(): bool
+    {
+        return (
+            $this->isEditable() &&
+            $this->isComplete() &&
+            $this->hasReceipt()
+        );
+    }
+
     public function archive(): void
     {
         $this->setStatus(EmailingCampaignStatus::ARCHIVED);

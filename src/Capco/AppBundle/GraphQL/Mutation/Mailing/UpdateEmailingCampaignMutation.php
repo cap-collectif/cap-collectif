@@ -3,49 +3,49 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
+use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode;
 use Capco\AppBundle\Form\EmailingCampaignType;
-use Capco\AppBundle\Repository\EmailingCampaignRepository;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class UpdateEmailingCampaignMutation implements MutationInterface
+class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     //when we set the sendAt date, it must be in more than 5mn to be sure the cron can pass.
-    public const SEND_AT_SECURITY = 5*60;
+    public const SEND_AT_SECURITY = 5 * 60;
 
-    private EmailingCampaignRepository $repository;
     private EntityManagerInterface $entityManager;
     private FormFactoryInterface $formFactory;
     private MailingListRepository $mailingListRepository;
 
     public function __construct(
-        EmailingCampaignRepository $repository,
+        GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
         FormFactoryInterface $formFactory,
         MailingListRepository $mailingListRepository
     ) {
-        $this->repository = $repository;
+        parent::__construct($resolver);
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
         $this->mailingListRepository = $mailingListRepository;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $error = null;
         $emailingCampaign = null;
 
         try {
-            $this->preventListError($input);
-            $emailingCampaign = $this->getCampaign($input);
+            $emailingCampaign = $this->getCampaign($input, $viewer);
+            $this->preventListError($input, $emailingCampaign);
             self::handleSendAt($input, $emailingCampaign);
 
             $form = $this->formFactory->create(EmailingCampaignType::class, $emailingCampaign);
@@ -60,14 +60,9 @@ class UpdateEmailingCampaignMutation implements MutationInterface
         return compact('error', 'emailingCampaign');
     }
 
-    private function getCampaign(Argument $input): EmailingCampaign
+    private function getCampaign(Argument $input, User $viewer): EmailingCampaign
     {
-        $id = GlobalId::fromGlobalId($input->offsetGet('id'))['id'];
-        if (null === $id) {
-            throw new UserError(UpdateEmailingCampaignErrorCode::ID_NOT_FOUND);
-        }
-
-        $emailingCampaign = $this->repository->find($id);
+        $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
         if (null === $emailingCampaign) {
             throw new UserError(UpdateEmailingCampaignErrorCode::ID_NOT_FOUND);
         }
@@ -83,7 +78,7 @@ class UpdateEmailingCampaignMutation implements MutationInterface
     {
         $sendAt = $input->offsetGet('sendAt');
         if ($sendAt) {
-            if (is_string($sendAt)) {
+            if (\is_string($sendAt)) {
                 $sendAt = new \DateTime($sendAt);
             }
             self::checkSendAt($sendAt);
@@ -102,7 +97,7 @@ class UpdateEmailingCampaignMutation implements MutationInterface
         }
     }
 
-    private function preventListError(Argument $input): void
+    private function preventListError(Argument $input, EmailingCampaign $emailingCampaign): void
     {
         $mailingListGlobalId = $input->offsetGet('mailingList');
         $mailingInternal = $input->offsetGet('mailingInternal');
@@ -110,15 +105,25 @@ class UpdateEmailingCampaignMutation implements MutationInterface
             throw new UserError(UpdateEmailingCampaignErrorCode::DOUBLE_LIST);
         }
         if ($mailingListGlobalId) {
-            $mailingListId = GlobalId::fromGlobalId($mailingListGlobalId)['id'];
-            if (
-                null === $mailingListId
-                || null === $this->mailingListRepository->find($mailingListId)) {
-                throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
-            }
+            $mailingList = $this->getMailingList($mailingListGlobalId);
+            $mailingList->addEmailingCampaign($emailingCampaign);
         }
         if ($mailingInternal && !EmailingCampaignInternalList::isValid($mailingInternal)) {
             throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
         }
+    }
+
+    private function getMailingList(string $globalId): MailingList
+    {
+        $mailingListId = GlobalId::fromGlobalId($globalId)['id'];
+        if (null === $mailingListId) {
+            throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
+        }
+        $mailingList = $this->mailingListRepository->find($mailingListId);
+        if (null === $mailingList) {
+            throw new UserError(UpdateEmailingCampaignErrorCode::MAILING_LIST_NOT_FOUND);
+        }
+
+        return $mailingList;
     }
 }

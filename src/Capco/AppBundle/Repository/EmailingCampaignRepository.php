@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
+use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -26,6 +27,7 @@ class EmailingCampaignRepository extends EntityRepository
         ?string $search
     ): array {
         $qb = $this->createQueryBuilder('ec');
+        $qb->leftJoin('ec.mailingList', 'ml')->select('ec', 'ml');
         if ($status) {
             $qb->where('ec.status = :status')->setParameter('status', $status);
         } else {
@@ -43,5 +45,16 @@ class EmailingCampaignRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getArrayResult();
+    }
+
+    public function findPlanned(\DateTimeInterface $sendAt): array
+    {
+        return $this->createQueryBuilder('ec')
+            ->where('ec.status = :status')
+            ->AndWhere('ec.sendAt < :sendAt')
+            ->setParameter('status', EmailingCampaignStatus::PLANNED)
+            ->setParameter('sendAt', $sendAt)
+            ->getQuery()
+            ->getResult();
     }
 }

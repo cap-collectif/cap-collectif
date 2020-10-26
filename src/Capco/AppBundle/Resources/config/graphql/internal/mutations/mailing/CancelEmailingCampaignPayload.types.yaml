@@ -1,0 +1,10 @@
+CancelEmailingCampaignPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            emailingCampaign:
+                type: 'EmailingCampaign'
+                description: 'The campaign cancelled'
+            error:
+                type: 'CancelEmailingCampaignErrorCode'
+                description: 'The error code, if any'

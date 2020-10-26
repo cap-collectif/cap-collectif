@@ -925,6 +925,30 @@ input BorderStyleInput {
   size: Int
 }
 
+"""Available errors when canceling a planned campaign"""
+enum CancelEmailingCampaignErrorCode {
+  """No campaign match your id"""
+  ID_NOT_FOUND
+
+  """The campaign cannot be canceled, it may not be planned"""
+  CANNOT_BE_CANCELED
+}
+
+input CancelEmailingCampaignInput {
+  """Global id of the planned campaign to cancel"""
+  id: ID!
+  clientMutationId: String
+}
+
+type CancelEmailingCampaignPayload {
+  """The campaign cancelled"""
+  emailingCampaign: EmailingCampaign
+
+  """The error code, if any"""
+  error: CancelEmailingCampaignErrorCode
+  clientMutationId: String
+}
+
 input CancelUserInvitationsInput {
   """The list of invitations to cancel"""
   invitationsIds: [ID!]!
@@ -3237,6 +3261,9 @@ type EmailingCampaign implements Node {
 
   """the status of the campaign"""
   status: EmailingCampaignStatus!
+
+  """preview of the email"""
+  preview: HTML
 }
 
 """A connection to a list of items."""
@@ -5118,6 +5145,9 @@ type Mutation {
   createEmailingCampaign(input: CreateEmailingCampaignInput!): CreateEmailingCampaignPayload
   deleteEmailingCampaigns(input: DeleteEmailingCampaignsInput!): DeleteEmailingCampaignsPayload
   updateEmailingCampaign(input: UpdateEmailingCampaignInput!): UpdateEmailingCampaignPayload
+  sendEmailingCampaign(input: SendEmailingCampaignInput!): SendEmailingCampaignPayload
+  testEmailingCampaign(input: TestEmailingCampaignInput!): TestEmailingCampaignPayload
+  cancelEmailingCampaign(input: CancelEmailingCampaignInput!): CancelEmailingCampaignPayload
 }
 
 """A connection to a list of items."""
@@ -9889,6 +9919,32 @@ type SendContactFormPayload {
   clientMutationId: String
 }
 
+"""Available errors when sending or testing a campaign"""
+enum SendEmailingCampaignErrorCode {
+  """No campaign match your id"""
+  ID_NOT_FOUND
+
+  """
+  The campaign cannot be sent : maybe it is not a draft, maybe it is not complete
+  """
+  CANNOT_BE_SENT
+}
+
+input SendEmailingCampaignInput {
+  """Global id of the campaign to send"""
+  id: ID!
+  clientMutationId: String
+}
+
+type SendEmailingCampaignPayload {
+  """The campaign sent"""
+  emailingCampaign: EmailingCampaign
+
+  """The error code, if any"""
+  error: SendEmailingCampaignErrorCode
+  clientMutationId: String
+}
+
 input SetDefaultLocaleInput {
   """Locale uuid."""
   id: ID!
@@ -10571,6 +10627,24 @@ type SynthesisStep implements Step & Node {
 
   """Legacy url to edit a synthesis."""
   editSynthesisUrl: URI
+}
+
+input TestEmailingCampaignInput {
+  """Global id of the campaign to test"""
+  id: ID!
+
+  """email receiving the tested campaign"""
+  email: Email!
+  clientMutationId: String
+}
+
+type TestEmailingCampaignPayload {
+  """The email sent"""
+  html: HTML
+
+  """error code, if any"""
+  error: SendEmailingCampaignErrorCode
+  clientMutationId: String
 }
 
 """A theme"""

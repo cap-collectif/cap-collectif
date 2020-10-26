@@ -1,0 +1,8 @@
+CancelEmailingCampaignInput:
+    type: relay-mutation-input
+    config:
+        description: 'Cancel a planned campaign'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'Global id of the planned campaign to cancel'

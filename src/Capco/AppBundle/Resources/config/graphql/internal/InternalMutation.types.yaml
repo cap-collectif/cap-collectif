@@ -995,11 +995,32 @@ InternalMutation:
                 builderConfig:
                     inputType: DeleteEmailingCampaignsInput
                     payloadType: DeleteEmailingCampaignsPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteEmailingCampaignsMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteEmailingCampaignsMutation", [value, getUser()])'
             updateEmailingCampaign:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateEmailingCampaignInput
                     payloadType: UpdateEmailingCampaignPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\UpdateEmailingCampaignMutation", [value])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\UpdateEmailingCampaignMutation", [value, getUser()])'
+            sendEmailingCampaign:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: SendEmailingCampaignInput
+                    payloadType: SendEmailingCampaignPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\SendEmailingCampaignMutation", [value, getUser()])'
+            testEmailingCampaign:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: TestEmailingCampaignInput
+                    payloadType: TestEmailingCampaignPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\TestEmailingCampaignMutation", [value, getUser()])'
+            cancelEmailingCampaign:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CancelEmailingCampaignInput
+                    payloadType: CancelEmailingCampaignPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CancelEmailingCampaignMutation", [value, getUser()])'

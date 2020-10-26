@@ -280,3 +280,5 @@ services:
 
     Capco\AppBundle\Cache\SessionListener:
         decorates: session_listener
+
+    Capco\AppBundle\Mailer\EmailingCampaignSender: ~

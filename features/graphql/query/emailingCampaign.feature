@@ -22,6 +22,7 @@ Scenario: GraphQL client wants to get all campaigns
             mailingList {
               name
             }
+            preview
           }
         }
       }
@@ -45,7 +46,8 @@ Scenario: GraphQL client wants to get all campaigns
               "sendAt": "2021-01-01 00:00:00",
               "status": "PLANNED",
               "mailingInternal": "CONFIRMED",
-              "mailingList": null
+              "mailingList": null,
+              "preview": @string@
             }
           },
           {
@@ -58,7 +60,8 @@ Scenario: GraphQL client wants to get all campaigns
               "sendAt": "2020-10-01 00:00:00",
               "status": "SENT",
               "mailingInternal": "NOT_CONFIRMED",
-              "mailingList": null
+              "mailingList": null,
+              "preview": @string@
             }
           },
           {
@@ -71,7 +74,10 @@ Scenario: GraphQL client wants to get all campaigns
               "sendAt": null,
               "status": "DRAFT",
               "mailingInternal": null,
-              "mailingList": null
+              "mailingList": {
+                "name": "liste Solidarit\u00e9 COVID-19"
+              },
+              "preview": @string@
             }
           }
         ]

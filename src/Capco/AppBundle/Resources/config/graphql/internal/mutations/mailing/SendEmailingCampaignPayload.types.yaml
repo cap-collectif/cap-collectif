@@ -1,0 +1,10 @@
+SendEmailingCampaignPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            emailingCampaign:
+                type: 'EmailingCampaign'
+                description: 'The campaign sent'
+            error:
+                type: 'SendEmailingCampaignErrorCode'
+                description: 'The error code, if any'

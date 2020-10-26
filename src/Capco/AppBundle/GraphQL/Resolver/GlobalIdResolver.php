@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Repository\EmailingCampaignRepository;
+use Capco\AppBundle\Repository\MailingListRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -196,6 +198,14 @@ class GlobalIdResolver
                     break;
                 case 'UserInvite':
                     $node = $this->container->get(UserInviteRepository::class)->find($uuid);
+
+                    break;
+                case 'MailingList':
+                    $node = $this->container->get(MailingListRepository::class)->find($uuid);
+
+                    break;
+                case 'EmailingCampaign':
+                    $node = $this->container->get(EmailingCampaignRepository::class)->find($uuid);
 
                     break;
                 default:

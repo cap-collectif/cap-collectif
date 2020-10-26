@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -1109,6 +1110,22 @@ class UserRepository extends EntityRepository
     public function getAllAdmin(): array
     {
         return $this->findByRole('ROLE_ADMIN');
+    }
+
+    public function getFromInternalList(string $internalList): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb
+            ->select('u')
+            ->where('u.email IS NOT NULL');
+
+        if (EmailingCampaignInternalList::CONFIRMED) {
+            $qb->andWhere('u.confirmationToken IS NULL');
+        } elseif (EmailingCampaignInternalList::NOT_CONFIRMED) {
+            $qb->andWhere('u.confirmationToken NOT NULL');
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder

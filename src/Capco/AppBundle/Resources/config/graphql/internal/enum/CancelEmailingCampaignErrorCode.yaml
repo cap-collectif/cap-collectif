@@ -1,0 +1,12 @@
+CancelEmailingCampaignErrorCode:
+    type: enum
+    config:
+        name: CancelEmailingCampaignErrorCode
+        description: 'Available errors when canceling a planned campaign'
+        values:
+            ID_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SendEmailingCampaignErrorCode::ID_NOT_FOUND")'
+                description: 'No campaign match your id'
+            CANNOT_BE_CANCELED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\SendEmailingCampaignErrorCode::CANNOT_BE_CANCELED")'
+                description: 'The campaign cannot be canceled, it may not be planned'
