@@ -81,7 +81,7 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
             </strong>
              - 
             <FormattedMessage
-              id="list-of-answers"
+              id="list-of-contributions"
               values={Object {}}
             />
           </DropdownSelect.Choice>
@@ -142,8 +142,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 Object {
                   "position": 0,
                   "step": Object {
+                    "__typename": "SelectionStep",
                     "id": "selectionStep1",
-                    "isQuestionnaireStep": true,
                     "slug": "selection-step-1",
                     "title": "selectionStep1",
                   },
@@ -151,8 +151,8 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 Object {
                   "position": 1,
                   "step": Object {
+                    "__typename": "SelectionStep",
                     "id": "selectionStep2",
-                    "isQuestionnaireStep": false,
                     "slug": "selection-step-2",
                     "title": "selectionStep2",
                   },
@@ -1210,7 +1210,7 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
             </strong>
              - 
             <FormattedMessage
-              id="list-of-answers"
+              id="list-of-contributions"
               values={Object {}}
             />
           </DropdownSelect.Choice>
@@ -1252,8 +1252,8 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                 Object {
                   "position": 0,
                   "step": Object {
+                    "__typename": "SelectionStep",
                     "id": "selectionStep1",
-                    "isQuestionnaireStep": true,
                     "slug": "selection-step-1",
                     "title": "selectionStep1",
                   },
@@ -2311,7 +2311,7 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
             </strong>
              - 
             <FormattedMessage
-              id="list-of-answers"
+              id="list-of-contributions"
               values={Object {}}
             />
           </DropdownSelect.Choice>
@@ -2372,8 +2372,8 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                 Object {
                   "position": 0,
                   "step": Object {
+                    "__typename": "SelectionStep",
                     "id": "selectionStep1",
-                    "isQuestionnaireStep": true,
                     "slug": "selection-step-1",
                     "title": "selectionStep1",
                   },
@@ -2381,8 +2381,8 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                 Object {
                   "position": 1,
                   "step": Object {
+                    "__typename": "SelectionStep",
                     "id": "selectionStep2",
-                    "isQuestionnaireStep": false,
                     "slug": "selection-step-2",
                     "title": "selectionStep2",
                   },

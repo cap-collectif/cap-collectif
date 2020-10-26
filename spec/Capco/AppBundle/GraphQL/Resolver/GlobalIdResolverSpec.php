@@ -2,21 +2,25 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver;
 
+use Prophecy\Argument;
+use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Event;
+use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Requirement;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Repository\EventRepository;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class GlobalIdResolverSpec extends ObjectBehavior
@@ -60,7 +64,7 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
         $context = new \ArrayObject(
             [
-                'disable_acl' => true
+                'disable_acl' => true,
             ],
             \ArrayObject::STD_PROP_LIST
         );
@@ -81,6 +85,37 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $globalId = GlobalId::toGlobalId('Requirement', 'requirement1');
 
         $this->resolve($globalId, null)->shouldReturn($requirement);
+    }
+
+    public function it_can_resolve_a_debate_step(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        AbstractStepRepository $repository,
+        DebateStep $debateStep
+    ) {
+        $debateStep->canDisplay(null)->willReturn(true);
+        $repository->find('debateStepCannabis')->willReturn($debateStep);
+        $container->get(AbstractStepRepository::class)->willReturn($repository);
+        $this->beConstructedWith($container, $logger, $entityManager);
+        $globalId = GlobalId::toGlobalId('DebateStep', 'debateStepCannabis');
+
+        $this->resolve($globalId, null)->shouldReturn($debateStep);
+    }
+
+    public function it_can_resolve_a_debate(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        DebateRepository $repository,
+        Debate $debate
+    ) {
+        $repository->find('debateCannabis')->willReturn($debate);
+        $container->get(DebateRepository::class)->willReturn($repository);
+        $this->beConstructedWith($container, $logger, $entityManager);
+        $globalId = GlobalId::toGlobalId('Debate', 'debateCannabis');
+
+        $this->resolve($globalId, null)->shouldReturn($debate);
     }
 
     public function it_can_not_resolve_an_unknown_global_id(

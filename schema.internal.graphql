@@ -1403,10 +1403,10 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -1428,9 +1428,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -1922,31 +1919,34 @@ interface Commentable {
   ): CommentConnection!
 }
 
-"""The different available types of step"""
+"""The different available types of step."""
 enum ConcreteStepType {
-  """Represent a collect step"""
+  """Represent a collect step."""
   COLLECT
 
-  """Represent a selection step"""
+  """Represent a selection step."""
   SELECTION
 
-  """Represent a consultation step"""
+  """Represent a consultation step."""
   CONSULTATION
 
-  """Represent a step with no particular behaviour"""
+  """Represent a step with no particular behaviour."""
   OTHER
 
-  """Represent a presentation step, mainly used to show an introduction"""
+  """Represent a presentation step, mainly used to show an introduction."""
   PRESENTATION
 
-  """Represent a questionnaire step"""
+  """Represent a questionnaire step."""
   QUESTIONNAIRE
 
-  """Represent a ranking step"""
+  """Represent a ranking step."""
   RANKING
 
-  """Represent a synthesis step"""
+  """Represent a synthesis step."""
   SYNTHESIS
+
+  """Represent a debate step."""
+  DEBATE
 }
 
 input ConfigureAnalysisInput {
@@ -2159,10 +2159,10 @@ type ConsultationStep implements Node & Step & RequirementStep {
   state: StepState!
 
   """The type of step. Returns "consultation"."""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -2184,9 +2184,6 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -2793,6 +2790,80 @@ type DateOfBirthRequirement implements Node & Requirement {
 
 """A string containing a datetime."""
 scalar DateTime
+
+"""A debate on a subject."""
+type Debate implements Node {
+  """The ID of an object."""
+  id: ID!
+}
+
+"""A step with a debate."""
+type DebateStep implements Step & Node {
+  """The ID of an object."""
+  id: ID!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
+
+  """The URL to this resource."""
+  url: URI!
+
+  """The title of the step."""
+  title: String!
+
+  """Identifies the current state of the step."""
+  state: StepState!
+
+  """The kind of the step"""
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
+
+  """The type of the step"""
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
+
+  """Does the step have a end date ?"""
+  timeless: Boolean
+
+  """The introduction text of the step."""
+  body: HTML
+
+  """Is the step enabled or not"""
+  enabled: Boolean!
+
+  """The label of the step"""
+  label: String!
+
+  """The step's metadescription"""
+  metaDescription: String
+
+  """The step's custom code"""
+  customCode: String
+
+  """The step's slug"""
+  slug: String
+
+  """Events linked to the step"""
+  events(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: EventOrder! = {field: START_AT, direction: DESC}
+  ): EventConnection!
+
+  """The debate of the step."""
+  debate: Debate!
+}
 
 """Available errors on DeleteAccountByEmail mutation."""
 enum DeleteAccountByEmailErrorCode {
@@ -5557,10 +5628,10 @@ type OtherStep implements Node & Step {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -5582,9 +5653,6 @@ type OtherStep implements Node & Step {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -5808,10 +5876,10 @@ type PresentationStep implements Node & Step {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -5833,9 +5901,6 @@ type PresentationStep implements Node & Step {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -7315,10 +7380,10 @@ interface ProposalStep {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -7340,9 +7405,6 @@ interface ProposalStep {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -8565,10 +8627,10 @@ type QuestionnaireStep implements Node & Step {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -8590,9 +8652,6 @@ type QuestionnaireStep implements Node & Step {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -8665,10 +8724,10 @@ type RankingStep implements Node & Step {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -8690,9 +8749,6 @@ type RankingStep implements Node & Step {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -9562,10 +9618,10 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -9587,9 +9643,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -10302,10 +10355,10 @@ interface Step {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -10327,9 +10380,6 @@ interface Step {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(
@@ -10473,10 +10523,10 @@ type SynthesisStep implements Step & Node {
   state: StepState!
 
   """The kind of the step"""
-  kind: String!
+  kind: String! @deprecated(reason: "Please, use `__typename` instead.")
 
   """The type of the step"""
-  type: String
+  type: String @deprecated(reason: "Please, use `__typename` instead.")
 
   """Does the step have a end date ?"""
   timeless: Boolean
@@ -10498,9 +10548,6 @@ type SynthesisStep implements Step & Node {
 
   """The step's slug"""
   slug: String
-
-  """The step is a questionnaire step or not"""
-  isQuestionnaireStep: Boolean
 
   """Events linked to the step"""
   events(

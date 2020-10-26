@@ -610,7 +610,11 @@ export const ProjectAdminProposals = ({ project, themes, relay }: Props) => {
                   </strong>
                   {` - `}
                   <FormattedMessage
-                    id={step.isQuestionnaireStep ? 'list-of-answers' : 'list-of-contributions'}
+                    id={
+                      step.__typename === 'QuestionnaireStep'
+                        ? 'list-of-answers'
+                        : 'list-of-contributions'
+                    }
                   />
                 </DropdownSelect.Choice>
               ))}
@@ -750,8 +754,8 @@ export default createPaginationContainer(
           position
           step {
             id
+            __typename
             title
-            isQuestionnaireStep
             slug
           }
         }

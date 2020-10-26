@@ -43,6 +43,7 @@ use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\ProgressStep;
 use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Questionnaire;
 use Doctrine\Persistence\ManagerRegistry;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -54,6 +55,8 @@ use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\RegistrationForm;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\OpinionVersionVote;
@@ -63,7 +66,9 @@ use Symfony\Component\Console\Command\Command;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Symfony\Component\Console\Input\ArrayInput;
+use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Symfony\Component\Console\Input\InputOption;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Publishable\DoctrineListener;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -76,6 +81,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Capco\AppBundle\Controller\Api\MediasController;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
@@ -340,6 +346,12 @@ class ReinitCommand extends Command
             RegistrationForm::class,
             User::class,
             UserType::class,
+            Debate::class,
+            DebateVote::class,
+            DebateOpinion::class,
+            DebateArgument::class,
+            DebateArgumentVote::class,
+            DebateStep::class,
             CollectStep::class,
             SelectionStep::class,
             ProposalForm::class,

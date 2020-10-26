@@ -36,6 +36,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
  *      "ranking"       = "RankingStep",
  *      "selection"     = "SelectionStep",
  *      "questionnaire" = "QuestionnaireStep",
+ *      "debate" = "DebateStep",
  * })
  */
 abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable

@@ -14,6 +14,7 @@ app_consultation_show_opinions_ranking: '/consultation/{projectSlug}/ranking/{st
 app_consultation_show_posts: '/consultations/{projectSlug}/posts/{page}'
 app_consultation_show_presentation: '/consultation/{projectSlug}/presentation/{stepSlug}'
 app_consultation_show_ranking: '/consultation/{projectSlug}/ranking/{stepSlug}'
+app_project_show_debate: '/project/{projectSlug}/debate/{stepSlug}'
 app_consultation_show_step: '/consultation/{projectSlug}/step/{stepSlug}'
 app_consultation_show_synthesis: '/consultation/{projectSlug}/synthesis/{stepSlug}'
 app_consultation_show_trashed: '/consultations/{projectSlug}/trashed'

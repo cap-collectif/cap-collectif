@@ -362,3 +362,15 @@ Capco\MediaBundle\Entity\Media:
         name: EventAwaiting
         category: '@MediaCategory1'
         providerReference: providerReference3.jpg
+    ProfilePicBobMarley:
+        id: 'ProfilePicBobMarley'
+        binaryContent: bob-marley.jpg
+        name: ProfileBobMarley
+        category: '@MediaCategory1'
+        providerReference: bob-marley.jpg
+    ProfilePicLaurentAlexandre:
+        id: 'ProfilePicLaurentAlexandre'
+        binaryContent: laurent-alexandre.png
+        name: ProfileBobMarley
+        category: '@MediaCategory1'
+        providerReference: laurent-alexandre.png

@@ -16,7 +16,7 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
       step: {
         id: 'selectionStep1',
         slug: 'selection-step-1',
-        isQuestionnaireStep: true,
+        __typename: 'SelectionStep',
         title: 'selectionStep1',
       },
     },
@@ -426,7 +426,7 @@ const DEFAULT_PROJECT = {
       step: {
         id: 'selectionStep1',
         slug: 'selection-step-1',
-        isQuestionnaireStep: true,
+        __typename: 'SelectionStep',
         title: 'selectionStep1',
       },
     },
@@ -436,7 +436,7 @@ const DEFAULT_PROJECT = {
         title: 'selectionStep2',
         id: 'selectionStep2',
         slug: 'selection-step-2',
-        isQuestionnaireStep: false,
+        __typename: 'SelectionStep',
       },
     },
   ],

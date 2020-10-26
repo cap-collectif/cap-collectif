@@ -805,3 +805,125 @@ Object {
   },
 }
 `;
+
+exports[`update a newly created project and add a new DebateStep 1`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [],
+      },
+      "id": Any<String>,
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
+      "steps": Array [
+        Object {
+          "__typename": "DebateStep",
+          "body": "Le beau body de l'étape DebateStep",
+          "debate": Object {
+            "id": Any<String>,
+          },
+          "enabled": true,
+          "id": Any<String>,
+          "timeless": false,
+          "title": "Le beau titre de l'étape DebateStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`update an existing project with a DebateStep to add a PresentationStep 1`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [],
+      },
+      "id": "UHJvamVjdDpwcm9qZWN0Q2FubmFiaXM=",
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
+      "steps": Array [
+        Object {
+          "__typename": "PresentationStep",
+          "body": "Le beau body de l'étape PresentationStep",
+          "enabled": true,
+          "id": Any<String>,
+          "timeless": false,
+          "title": "Le beau titre de l'étape PresentationStep",
+        },
+        Object {
+          "__typename": "DebateStep",
+          "body": "Le beau body de l'étape DebateStep",
+          "debate": Object {
+            "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+          },
+          "enabled": true,
+          "id": "RGViYXRlU3RlcDpkZWJhdGVTdGVwQ2FubmFiaXM=",
+          "timeless": false,
+          "title": "Le beau titre de l'étape DebateStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;

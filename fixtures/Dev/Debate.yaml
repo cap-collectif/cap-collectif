@@ -1,0 +1,3 @@
+Capco\AppBundle\Entity\Debate\Debate:
+    debateCannabis:
+        id: debateCannabis

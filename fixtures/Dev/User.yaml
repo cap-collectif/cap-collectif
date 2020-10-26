@@ -638,3 +638,29 @@ Capco\UserBundle\Entity\User:
         biography: Je suis créé via france connect
         franceConnectId: '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1'
         franceConnectAccessToken: '***REMOVED***'
+    userBobMarley:
+        id: 'userBobMarley'
+        username: Bob Marley
+        firstname: Bob
+        lastname: Marley
+        email: b.marley@cap-collectif.com
+        media: '@ProfilePicBobMarley'
+        plainpassword: toto
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        createdAt: <(new \DateTime('1945-02-06 00:00:00'))>
+        biography: Robert Nesta Marley dit Bob Marley, né le 6 février 1945 à Nine Mile et mort le 11 mai 1981 à Miami d'un cancer généralisé, est un auteur-compositeur-interprète et musicien jamaïcain.
+    userLaurentAlexandre:
+        id: 'userLaurentAlexandre'
+        username: Laurent Alexandre
+        firstname: Laurent
+        lastname: Alexandre
+        email: laurent.alexandre@cap-collectif.com
+        media: '@ProfilePicLaurentAlexandre'
+        plainpassword: toto
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        createdAt: <(new \DateTime('1945-02-06 00:00:00'))>
+        biography: Laurent Alexandre, né le 10 juin 1960 à Paris, haut fonctionnaire et médecin de formation, est un entrepreneur, écrivain et militant politique français.

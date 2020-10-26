@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Twig;
 use Twig\TwigFilter;
 use Twig\Extension\AbstractExtension;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -64,6 +65,10 @@ class GlobalIdExtension extends AbstractExtension
                 break;
             case SynthesisStep::class:
                 $type = 'SynthesisStep';
+
+                break;
+            case DebateStep::class:
+                $type = 'DebateStep';
 
                 break;
         }

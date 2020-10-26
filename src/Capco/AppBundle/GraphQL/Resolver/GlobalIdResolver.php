@@ -21,6 +21,7 @@ use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -29,9 +30,7 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\MapTokenRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\OtherStepRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
-use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ContactFormRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
@@ -39,13 +38,9 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Capco\AppBundle\Repository\SelectionStepRepository;
-use Capco\AppBundle\Repository\SynthesisStepRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
-use Capco\AppBundle\Repository\ConsultationStepRepository;
-use Capco\AppBundle\Repository\QuestionnaireStepRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -135,10 +130,16 @@ class GlobalIdResolver
                 case 'SelectionStep':
                 case 'SynthesisStep':
                 case 'RankingStep':
-                        $node = $this->container->get(AbstractStepRepository::class)->find($uuid);
-                        break;
+                case 'DebateStep':
+                    $node = $this->container->get(AbstractStepRepository::class)->find($uuid);
+
+                    break;
                 case 'Proposal':
                     $node = $this->container->get(ProposalRepository::class)->find($uuid);
+
+                    break;
+                case 'Debate':
+                    $node = $this->container->get(DebateRepository::class)->find($uuid);
 
                     break;
                 case 'Question':

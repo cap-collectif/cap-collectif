@@ -2,9 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -12,9 +13,9 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use GraphQL\Type\Definition\Type;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class StepTypeResolver implements ResolverInterface
 {
@@ -68,6 +69,10 @@ class StepTypeResolver implements ResolverInterface
         }
         if ($step instanceof RankingStep) {
             return $this->typeResolver->resolve('RankingStep');
+        }
+
+        if ($step instanceof DebateStep) {
+            return $this->typeResolver->resolve('InternalDebateStep');
         }
 
         throw new UserError('Could not resolve type of Step.');

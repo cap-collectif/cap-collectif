@@ -1,0 +1,15 @@
+InternalDebate:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: Debate
+        description: 'A debate on a subject.'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Debate

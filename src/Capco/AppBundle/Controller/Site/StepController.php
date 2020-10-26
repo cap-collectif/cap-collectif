@@ -8,6 +8,7 @@ use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\VersionSearch;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Repository\PostRepository;
@@ -101,6 +102,28 @@ class StepController extends Controller
             'posts' => $posts,
             'nbPosts' => $nbPosts,
             'showVotes' => $showVotes,
+        ];
+    }
+
+    /**
+     * @Route("/project/{projectSlug}/debate/{stepSlug}", name="app_project_show_debate")
+     * @Template("CapcoAppBundle:Step:debate.html.twig")
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
+     */
+    public function showDebateAction(Project $project, DebateStep $step)
+    {
+        if (!$project->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
+        }
+
+        return [
+            'project' => $project,
+            'currentStep' => $step,
         ];
     }
 
@@ -254,7 +277,10 @@ class StepController extends Controller
         }
 
         $props = $this->serializer->serialize(
-            ['synthesis_id' => $step->getSynthesis() ? $step->getSynthesis()->getId() : null, 'mode' => 'view'],
+            [
+                'synthesis_id' => $step->getSynthesis() ? $step->getSynthesis()->getId() : null,
+                'mode' => 'view',
+            ],
             'json'
         );
 

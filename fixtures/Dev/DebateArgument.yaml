@@ -1,0 +1,57 @@
+Capco\AppBundle\Entity\Debate\DebateArgument:
+    debateArgument1:
+        id: 'debateArgument1'
+        type: 0
+        author: '@userSpyl'
+        body: Malgré son coût élevé (plus de 12% de l’activité policière et des douanes sont consacrés à l’usage des drogues), la politique de répression est un échec. Selon l’Observatoire français des drogues et des toxicomanies (OFDT), on estime à 4 millions le nombre d’usagers, dont 1,2 million d’usagers sur une base mensuelle et 550 000 sur une base quotidienne.
+        createdAt: <(new \DateTime('2020-10-23 09:00:00'))>
+        publishedAt: $createdAt
+        debate: '@debateCannabis'
+    debateArgument2:
+        id: 'debateArgument2'
+        type: 0
+        author: '@userTheo'
+        body: Les partisans de la légalisation estiment que le cannabis n’est pas plus nocif que le tabac ou l’alcool et doit être encadré de la même manière. Il pose un problème d’addiction qu’on peut contrer plus aisément en encadrant sa consommation.
+        createdAt: <(new \DateTime('2020-10-23 09:01:00'))>
+        publishedAt: $createdAt
+        debate: '@debateCannabis'
+    debateArgument3:
+        id: 'debateArgument3'
+        type: 0
+        author: '@userAgui'
+        body: La politique répressive a échoué. Légaliser le cannabis mettrait fin à la violence engendrée par son trafic et assécherait les économies souterraines. Cela permettrait de sortir de nombreux adolescents des réseaux criminels.
+        createdAt: <(new \DateTime('2020-10-23 09:02:00'))>
+        publishedAt: $createdAt
+        debate: '@debateCannabis'
+    debateArgument4:
+        id: 'debateArgument4'
+        type: 0
+        author: '@userVincent'
+        body: Selon Pierre Kopp, la légalisation ramènerait « probablement entre 1 et 2 milliards d’euros par an à l’Etat », sous forme de taxes. Cet argent pourrait servir à financer des programmes de prévention et de lutte contre les drogues de toute nature. Le club Terra Nova avait de son côté estimé à 3 milliards d’euros le coût de la répression du cannabis pour la collectivité.
+        createdAt: <(new \DateTime('2020-10-23 09:03:00'))>
+        publishedAt: $createdAt
+        debate: '@debateCannabis'
+    debateArgument5:
+        id: 'debateArgument5'
+        type: 1
+        author: '@userJpec'
+        body: Les criminels ne sont pas fixés sur un produit mais sur l’argent. Si on légalise le cannabis, ils se reporteront vers des drogues dures (cocaïne et autres drogues de synthèse).
+        createdAt: <(new \DateTime('2020-10-23 09:04:00'))>
+        publishedAt: $createdAt
+        debate: '@debateCannabis'
+    debateArgument6:
+        id: 'debateArgument6'
+        type: 1
+        author: '@userMaximeQA'
+        body: Le nombre de consommateurs de cannabis aux Pays-Bas n’a pas décru depuis la dépénalisation en 1976 et ce pays est devenu une plaque tournante du trafic en Europe. Idem en Espagne, qui a fait machine arrière.
+        createdAt: <(new \DateTime('2020-10-23 09:05:00'))>
+        publishedAt: $createdAt
+        debate: '@debateCannabis'
+    debateArgument7:
+        id: 'debateArgument7'
+        type: 1
+        author: '@userIan'
+        body: Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.
+        createdAt: <(new \DateTime('2020-10-23 09:06:00'))>
+        publishedAt: $createdAt
+        debate: '@debateCannabis'

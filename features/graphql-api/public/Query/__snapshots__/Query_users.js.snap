@@ -2493,7 +2493,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNTgzODI5MDAwMDAwO2k6MTtzOjI2OiJ1c2VyQ29ubmVjdGVkRnJhbmNlQ29ubmVjdCI7fQ==",
     },
-    "totalCount": 225,
+    "totalCount": 227,
   },
 }
 `;
@@ -2712,7 +2712,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxNjEiO30=",
     },
-    "totalCount": 225,
+    "totalCount": 227,
   },
 }
 `;

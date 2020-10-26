@@ -98,6 +98,11 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
           title
         }
       }
+      ... on DebateStep {
+        debate {
+          id
+        }
+      }
     }
   }
 `;
@@ -188,6 +193,15 @@ const BASE_PRESENTATION_STEP = {
   isEnabled: true,
   title: "Le beau titre de l'étape PresentationStep",
   label: 'PresentationStep',
+};
+
+const BASE_DEBATE_STEP = {
+  type: 'DEBATE',
+  body: "Le beau body de l'étape DebateStep",
+  requirements: [],
+  isEnabled: true,
+  title: "Le beau titre de l'étape DebateStep",
+  label: 'DebateStep',
 };
 
 const BASE_COLLECT_STEP = {
@@ -957,4 +971,72 @@ it('update a newly created project and add a minimum vote number', async () => {
     'internal_admin',
   );
   expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+});
+
+it('update a newly created project and add a new DebateStep', async () => {
+  const createResponse = await graphql(
+    CreateAlphaProjectMutation,
+    {
+      input: BASE_PROJECT,
+    },
+    'internal_admin',
+  );
+  const projectId = createResponse.createAlphaProject.project.id;
+
+  const updateResponse = await graphql(
+    UpdateAlphaProjectMutation,
+    {
+      input: {
+        projectId,
+        ...BASE_PROJECT,
+        steps: [BASE_DEBATE_STEP],
+      },
+    },
+    'internal_admin',
+  );
+  expect(projectId).toBe(updateResponse.updateAlphaProject.project.id);
+  expect(updateResponse).toMatchSnapshot({
+    updateAlphaProject: {
+      project: {
+        id: expect.any(String),
+        steps: [
+          {
+            id: expect.any(String),
+            debate: {
+              id: expect.any(String),
+            },
+          },
+        ],
+      },
+    },
+  });
+});
+
+it('update an existing project with a DebateStep to add a PresentationStep', async () => {
+  const updateResponse = await graphql(
+    UpdateAlphaProjectMutation,
+    {
+      input: {
+        projectId: toGlobalId('Project', 'projectCannabis'),
+        ...BASE_PROJECT,
+        steps: [
+          BASE_PRESENTATION_STEP,
+          { ...BASE_DEBATE_STEP, id: toGlobalId('DebateStep', 'debateStepCannabis') },
+        ],
+      },
+    },
+    'internal_admin',
+  );
+  expect(updateResponse).toMatchSnapshot({
+    updateAlphaProject: {
+      project: {
+        steps: [
+          {
+            id: expect.any(String),
+          },
+          {},
+        ],
+      },
+    },
+  });
 });

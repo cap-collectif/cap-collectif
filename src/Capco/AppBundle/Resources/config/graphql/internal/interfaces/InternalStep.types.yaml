@@ -13,9 +13,12 @@ InternalStep:
             kind:
                 description: 'The kind of the step'
                 type: 'String!'
+                deprecationReason: 'Please, use `__typename` instead.'
+            # TODO remove
             type:
                 description: 'The type of the step'
                 type: 'String'
+                deprecationReason: 'Please, use `__typename` instead.'
             timeless:
                 description: 'Does the step have a end date ?'
                 type: 'Boolean'
@@ -37,10 +40,6 @@ InternalStep:
             slug:
                 description: "The step's slug"
                 type: 'String'
-            isQuestionnaireStep:
-                description: 'The step is a questionnaire step or not'
-                type: 'Boolean'
-                resolve: '@=value.isQuestionnaireStep()'
             events:
                 description: 'Events linked to the step'
                 type: 'InternalEventConnection!'

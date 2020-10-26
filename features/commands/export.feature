@@ -116,7 +116,7 @@ Scenario: Admin wants to export event participants
   And exported "csv" file with name "participants-event-with-registrations.csv" should match its snapshot
   And exported "csv" file with name "participants-grenobleweb2015.csv" should match its snapshot
 
-Scenario: Admin wants to export consultation steps participants
+Scenario: Admin wants to export steps contributors
   Given I run a command "capco:export:step-contributors" with parameters:
     | --delimiter |,|
   Then the command exit code should be 0

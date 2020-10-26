@@ -3,24 +3,19 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
-use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Traits\SnapshotCommandTrait;
-use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Toggle\Manager;
+use Overblog\GraphQLBundle\Request\Executor;
+use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 
 class CreateStepContributorsCommand extends BaseExportCommand
 {
@@ -67,6 +62,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $slug .= $step->getId() . '_';
         }
         $slug .= $step->getSlug();
+
         return self::getShortenedFilename('participants_' . $slug);
     }
 
@@ -100,7 +96,9 @@ class CreateStepContributorsCommand extends BaseExportCommand
             throw new \RuntimeException('An exception occured while creating a writer.');
         }
         $writer->openToFile(sprintf('%s/public/export/%s', $this->projectRootDir, $fileName));
-        $writer->addRow(WriterEntityFactory::createRowFromArray(GraphqlQueryAndCsvHeaderHelper::USER_HEADERS));
+        $writer->addRow(
+            WriterEntityFactory::createRowFromArray(GraphqlQueryAndCsvHeaderHelper::USER_HEADERS)
+        );
         $this->connectionTraversor->traverse(
             $data,
             'contributors',
@@ -163,9 +161,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
                 $stepSlug = $step->getSlug();
                 $output->writeln("<fg=white>Examining step ${stepSlug} of type ${type}</>");
             }
-            if (
-                $step->isParticipative()
-            ) {
+            if ($step->isParticipative()) {
                 $fileName = self::getFilename($step);
                 $output->writeln("\t<info>Generating ${fileName} sheet as ${type}</info>");
                 $this->generateSheet($output, $step, $fileName, $delimiter, $isVerbose);

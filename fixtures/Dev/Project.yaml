@@ -306,3 +306,12 @@ Capco\AppBundle\Entity\Project:
         updatedAt: <identity((new \DateTime('2020-06-16 12:00:00')))>
         publishedAt: <identity((new \DateTime('2020-06-16 12:00:00')))>
         visibility: 2
+    projectCannabis:
+        id: 'projectCannabis'
+        title: Débat sur le cannabis
+        # TODO: create a new project type
+        projectType: '@projectType8'
+        createdAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
+        updatedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
+        publishedAt: <identity((new \DateTime('2020-06-17 12:00:00')))>
+        visibility: 2

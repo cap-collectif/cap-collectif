@@ -1,0 +1,22 @@
+InternalDebateStep:
+  type: object
+  inherits:
+    - InternalStep
+    - Node
+  config:
+    name: DebateStep
+    description: 'A step with a debate.'
+    interfaces:
+      - InternalStep
+      - Node
+    fields:
+      kind:
+        resolve: 'debate'
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: DebateStep
+      debate:
+        description: 'The debate of the step.'
+        type: 'InternalDebate!'

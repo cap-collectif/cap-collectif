@@ -349,3 +349,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@questionnaireStepExport'
         project: '@projectExport'
         position: 4
+    pasCannabis1:
+        id: pasCannabis1
+        step: '@debateStepCannabis'
+        project: '@projectCannabis'
+        position: 1

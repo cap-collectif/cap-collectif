@@ -96,6 +96,7 @@ overblog_graphql:
                     - PhoneRequirement
                     - PresentationStep
                     - InternalQuestionnaireStep
+                    - InternalDebateStep
                     - RankingStep
                     - InternalSynthesisStep
                     - VersionVote

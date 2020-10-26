@@ -2,34 +2,37 @@
 
 namespace Capco\AppBundle\Form\Persister;
 
+use GraphQL\Error\UserError;
+use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Utils\Diff;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Form\Step\CollectStepFormType;
-use Capco\AppBundle\Form\Step\ConsultationStepFormType;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Form\Step\OtherStepFormType;
-use Capco\AppBundle\Form\Step\PresentationStepFormType;
-use Capco\AppBundle\Form\Step\QuestionnaireStepFormType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Form\FormFactoryInterface;
+use Capco\AppBundle\Form\Step\DebateStepFormType;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Form\Step\CollectStepFormType;
 use Capco\AppBundle\Form\Step\RankingStepFormType;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Form\Step\SelectionStepFormType;
 use Capco\AppBundle\Form\Step\SynthesisStepFormType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Form\Step\ConsultationStepFormType;
+use Capco\AppBundle\Form\Step\PresentationStepFormType;
+use Capco\AppBundle\Form\Step\QuestionnaireStepFormType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
-use Capco\AppBundle\Utils\Diff;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManagerInterface;
-use GraphQL\Error\UserError;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
 
 class ProjectStepPersister
 {
@@ -42,6 +45,7 @@ class ProjectStepPersister
         CollectStep::TYPE,
         SelectionStep::TYPE,
         SynthesisStep::TYPE,
+        DebateStep::TYPE,
     ];
 
     private $em;
@@ -172,6 +176,10 @@ class ProjectStepPersister
                 break;
             case SynthesisStep::TYPE:
                 $return = [SynthesisStepFormType::class, new SynthesisStep()];
+
+                break;
+            case DebateStep::TYPE:
+                $return = [DebateStepFormType::class, new DebateStep(new Debate())];
 
                 break;
             default:

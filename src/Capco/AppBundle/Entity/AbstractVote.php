@@ -69,6 +69,8 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *      "source"            = "SourceVote",
  *      "proposalSelection" = "ProposalSelectionVote",
  *      "proposalCollect"   = "ProposalCollectVote",
+ *      "debate"   = "Capco\AppBundle\Entity\Debate\DebateVote",
+ *      "debateArgument"   = "Capco\AppBundle\Entity\Debate\DebateArgumentVote",
  * })
  */
 abstract class AbstractVote implements
@@ -86,6 +88,7 @@ abstract class AbstractVote implements
      * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
+
     /**
      * @ORM\Column(name="is_accounted", type="boolean", options={"default": true})
      */

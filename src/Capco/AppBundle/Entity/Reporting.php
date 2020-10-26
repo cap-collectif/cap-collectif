@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ReportingStatus;
-use Capco\AppBundle\Model\CreatableInterface;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Traits\IdTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Enum\ReportingStatus;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Model\CreatableInterface;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -75,6 +76,12 @@ class Reporting implements CreatableInterface
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", inversedBy="reports")
+     * @ORM\JoinColumn(name="debate_argument_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $debateArgument;
 
     /**
      * @ORM\Column(name="is_archived", type="boolean", nullable=false)
@@ -225,6 +232,19 @@ class Reporting implements CreatableInterface
     {
         $this->proposal = $proposal;
         $proposal->addReport($this);
+
+        return $this;
+    }
+
+    public function getDebateArgument(): ?DebateArgument
+    {
+        return $this->debateArgument;
+    }
+
+    public function setDebateArgument(DebateArgument $debateArgument): self
+    {
+        $this->debateArgument = $debateArgument;
+        $debateArgument->addReport($this);
 
         return $this;
     }

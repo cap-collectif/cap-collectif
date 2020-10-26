@@ -2,22 +2,22 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Theme;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Entity\User;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 
 class UrlResolver
 {
@@ -25,16 +25,19 @@ class UrlResolver
     protected $requestStack;
     protected $manager;
     protected $defaultLocale;
+    protected $stepUrlResolver;
 
     public function __construct(
         RouterInterface $router,
         Manager $manager,
         RequestStack $requestStack,
-        LocaleResolver $localeResolver
+        LocaleResolver $localeResolver,
+        StepUrlResolver $stepUrlResolver
     ) {
         $this->router = $router;
         $this->manager = $manager;
         $this->requestStack = $requestStack;
+        $this->stepUrlResolver = $stepUrlResolver;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
     }
 
@@ -104,60 +107,7 @@ class UrlResolver
 
     public function getStepUrl(?AbstractStep $step = null, bool $absolute = false): string
     {
-        $locale = $this->defaultLocale;
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request) {
-            $locale = $request->getLocale();
-        }
-        if (
-            !$step ||
-            !$step->getProject() ||
-            !$step->getProject()->getSlug() ||
-            !$step->getSlug()
-        ) {
-            return '';
-        }
-
-        $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
-
-        $args = [
-            'projectSlug' => $step->getProject()->getSlug(),
-            'stepSlug' => $step->getSlug(),
-            '_locale' => $locale,
-        ];
-        if ($step->isConsultationStep()) {
-            // @var ConsultationStep $step
-            return $this->router->generate(
-                $step->isMultiConsultation()
-                    ? 'app_project_show_consultations'
-                    : 'app_project_show_consultation',
-                $args,
-                UrlGeneratorInterface::ABSOLUTE_URL
-            );
-        }
-        if ($step->isPresentationStep()) {
-            return $this->router->generate('app_project_show_presentation', $args, $referenceType);
-        }
-        if ($step->isOtherStep()) {
-            return $this->router->generate('app_project_show_step', $args, $referenceType);
-        }
-        if ($step->isSynthesisStep()) {
-            return $this->router->generate('app_project_show_synthesis', $args, $referenceType);
-        }
-        if ($step->isRankingStep()) {
-            return $this->router->generate('app_project_show_ranking', $args, $referenceType);
-        }
-        if ($step->isCollectStep()) {
-            return $this->router->generate('app_project_show_collect', $args, $referenceType);
-        }
-        if ($step->isSelectionStep()) {
-            return $this->router->generate('app_project_show_selection', $args, $referenceType);
-        }
-        if ($step->isQuestionnaireStep()) {
-            return $this->router->generate('app_project_show_questionnaire', $args, $referenceType);
-        }
-
-        return '';
+        return $this->stepUrlResolver->__invoke($step);
     }
 
     public function getObjectUrl($object, bool $absolute = false): string
