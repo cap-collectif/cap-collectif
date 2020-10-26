@@ -3,12 +3,13 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Elasticsearch\Sanitizer;
+use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
-use Elastica\Aggregation\Terms;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
@@ -31,17 +32,9 @@ class ResponseSearch extends Search
         bool $withNotConfirmedUser = false
     ): int {
         $boolQuery = $this->getNoEmptyResultQueryBuilder($question, $withNotConfirmedUser);
-
         $query = new Query($boolQuery);
-        $query->addAggregation(
-            (new Terms('distinct_participants'))
-                ->setField('reply.author.id')
-                ->setSize(Search::BIG_INT_VALUE)
-        );
 
-        $response = $this->index->getType($this->type)->search($query);
-
-        return \count($response->getAggregation('distinct_participants')['buckets']);
+        return $this->index->getType($this->type)->count($query);
     }
 
     public function getResponsesByQuestion(
@@ -51,6 +44,13 @@ class ResponseSearch extends Search
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = $this->getNoEmptyResultQueryBuilder($question, $withNotConfirmedUser);
+        $boolQuery->addFilter(
+            (new BoolQuery())->addShould([
+                (new BoolQuery())->addFilter(new Exists('objectValue.labels')),
+                (new BoolQuery())->addFilter(new Exists('objectValue.other')),
+                (new BoolQuery())->addFilter(new Exists('textValue')),
+            ])
+        );
 
         $query = new Query($boolQuery);
         $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
@@ -71,12 +71,64 @@ class ResponseSearch extends Search
         int $limit = 20,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        $boolQuery = $this->getNoEmptyResultQueryBuilder($question, true);
+        $boolQuery = $this->getNoEmptyResultQueryBuilder($question, false);
         $boolQuery
             ->addFilter(new Exists('objectValue'))
             ->addFilter(new Exists('objectValue.other'));
 
         $query = new Query($boolQuery);
+        $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
+        $this->applyCursor($query, $cursor);
+        $query->setSource(['id'])->setSize($limit);
+        $resultSet = $this->index->getType($this->type)->search($query);
+        $cursors = $this->getCursors($resultSet);
+
+        return new ElasticsearchPaginatedResult(
+            $this->getHydratedResultsFromResultSet($this->responseRepository, $resultSet),
+            $cursors,
+            $resultSet->getTotalHits()
+        );
+    }
+
+    public function getQuestionChoiceResponses(
+        QuestionChoice $questionChoice,
+        bool $withNotConfirmedUser = false,
+        int $limit = 20,
+        ?string $cursor = null
+    ): ElasticsearchPaginatedResult {
+        $boolQuery = (new BoolQuery())->addFilter(
+            (new BoolQuery())->addShould([
+                (new BoolQuery())
+                    ->addMustNot(new Term(['question.type' => ['value' => 'select']]))
+                    ->addFilter(new Exists('objectValue.labels'))
+                    ->addFilter(
+                        new Query\Terms('objectValue.labels', [$questionChoice->getTitle()])
+                    ),
+                (new BoolQuery())->addFilter(
+                    (new Query\Match())
+                        ->setFieldQuery(
+                            'textValue',
+                            Sanitizer::escape($questionChoice->getTitle(), [' '])
+                        )
+                        ->setFieldOperator('textValue', Query\Match::OPERATOR_AND)
+                ),
+            ])
+        );
+
+        if ($question = $questionChoice->getQuestion()) {
+            $boolQuery->addFilter(new Term(['question.id' => ['value' => $question->getId()]]));
+        }
+
+        if (!$withNotConfirmedUser) {
+            $boolQuery->addFilter(new Term(['reply.published' => ['value' => true]]));
+        }
+
+        $boolQuery
+            ->addFilter(new Exists('reply'))
+            ->addMustNot(new Term(['reply.draft' => ['value' => true]]));
+
+        $query = new Query($boolQuery);
+
         $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
@@ -105,8 +157,19 @@ class ResponseSearch extends Search
             $boolQuery->addFilter(new Term(['reply.published' => ['value' => true]]));
         }
 
-        if ($question instanceof MultipleChoiceQuestion || $question instanceof SimpleQuestion) {
-            $boolQuery->addShould([new Exists('textValue'), new Exists('objectValue')]);
+        if (
+            $question instanceof MultipleChoiceQuestion ||
+            ($question instanceof MultipleChoiceQuestion &&
+                AbstractQuestion::QUESTION_TYPE_SELECT === $question->getType())
+        ) {
+            $boolQuery->addShould([
+                (new BoolQuery())->addFilter(new Exists('objectValue')),
+                (new BoolQuery())->addFilter(new Exists('textValue')),
+            ]);
+        }
+
+        if ($question instanceof SimpleQuestion) {
+            $boolQuery->addFilter(new Exists('textValue'));
         }
 
         if ($question instanceof MediaQuestion) {

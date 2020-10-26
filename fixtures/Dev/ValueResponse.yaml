@@ -202,31 +202,31 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     response1IdfProposal1:
         question: '@multiplequestionIdfGrandOrLocal'
         proposal: '@proposalIdf1'
-        value: 'Renseigner la présentation de mon Grand Projet'
+        value: { 'labels': ['Renseigner la présentation de mon Grand Projet'], 'other': null }
     response2IdfProposal1:
         question: '@multiplequestionIdfGrandProjet1'
         proposal: '@proposalIdf1'
-        value: 'Un autre organisme privé'
+        value: { 'labels': ['Un autre organisme privé'], 'other': null }
     response1IdfProposal2:
         question: '@multiplequestionIdfGrandOrLocal'
         proposal: '@proposalIdf2'
-        value: 'Déposer un Projet Local'
+        value: { 'labels': ['Déposer un Projet Local'], 'other': null }
     response2IdfProposal2:
         question: '@multiplequestionIdfProjetLocal1'
         proposal: '@proposalIdf2'
-        value: 'Une association'
+        value: { 'labels': ['Une association'], 'other': null }
     response3IdfProposal3:
         question: '@multiplequestionIdfProjetLocalAssociation1'
         proposal: '@proposalIdf2'
-        value: 'J’ai un numéro SIRET'
+        value: { 'labels': ['J’ai un numéro SIRET'], 'other': null }
     response1IdfProposal3:
         question: '@multiplequestionIdfGrandOrLocal'
         proposal: '@proposalIdf3'
-        value: 'Déposer un Projet Local'
+        value: { 'labels': ['Déposer un Projet Local'], 'other': null }
     response2IdfProposal3:
         question: '@multiplequestionIdfProjetLocal1'
         proposal: '@proposalIdf3'
-        value: 'Une entreprise'
+        value: { 'labels': ['Une entreprise'], 'other': null }
 
     response1IdfProposal1EvalAgui:
         question: '@multiplequestionEvalIdf1'

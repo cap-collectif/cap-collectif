@@ -140,7 +140,7 @@ Scenario: GraphQL client wants to get question's participants with users not con
             {
               "id": "UXVlc3Rpb246MTk=",
               "participants": {
-                "totalCount": 2
+                "totalCount": 3
               }
             },
             {

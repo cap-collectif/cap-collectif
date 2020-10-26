@@ -485,12 +485,13 @@ mappings:
             objectValue:
                 type: object
                 properties:
-                    labels: { type: text }
+                    labels: { type: keyword }
                     other: { type: keyword }
             question:
                 type: object
                 properties:
                     id: { type: keyword }
+                    type: { type: keyword }
             reply:
                 type: object
                 properties:

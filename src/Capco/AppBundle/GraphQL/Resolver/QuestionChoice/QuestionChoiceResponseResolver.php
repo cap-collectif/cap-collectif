@@ -2,51 +2,44 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Search\ResponseSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
 
 class QuestionChoiceResponseResolver implements ResolverInterface
 {
     private ResponseSearch $responseSearch;
+    private LoggerInterface $logger;
 
-    public function __construct(ResponseSearch $responseSearch)
+    public function __construct(ResponseSearch $responseSearch, LoggerInterface $logger)
     {
         $this->responseSearch = $responseSearch;
+        $this->logger = $logger;
     }
 
     public function __invoke(QuestionChoice $questionChoice, Arg $args): ConnectionInterface
     {
-        $responses = $this->responseSearch
-            ->getResponsesByQuestion($questionChoice->getQuestion(), false, -1)
-            ->getEntities();
-        $totalCount = 0;
-        // Responses values are in an array so we can't directly request them. Maybe SQL request with JSON conditions ?
-        foreach ($responses as $response) {
-            $responseValue = $response ? $response->getValue() : null;
-            if ($responseValue) {
-                if (isset($responseValue['labels'])) {
-                    foreach ($responseValue['labels'] as $label) {
-                        if ($label === $questionChoice->getTitle()) {
-                            ++$totalCount;
-                        }
-                    }
-                } else {
-                    // Question type is select
-                    if ($responseValue === $questionChoice->getTitle()) {
-                        ++$totalCount;
-                    }
-                }
-            }
-        }
+        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+            $questionChoice
+        ) {
+            try {
+                return $this->responseSearch->getQuestionChoiceResponses(
+                    $questionChoice,
+                    false,
+                    $limit,
+                    $cursor
+                );
+            } catch (\RuntimeException $exception) {
+                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
-        $paginator = new Paginator(function () use ($responses) {
-            return $responses;
+                throw new \RuntimeException('Find responses of question choice failed');
+            }
         });
 
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto($args);
     }
 }

@@ -486,7 +486,7 @@ Object {
           "id": "UXVlc3Rpb246MzkxOA==",
           "private": true,
         },
-        "value": "\\"Renseigner la présentation de mon Grand Projet\\"",
+        "value": "{\\"labels\\":[\\"Renseigner la présentation de mon Grand Projet\\"],\\"other\\":null}",
       },
       Object {
         "question": Object {
@@ -549,7 +549,7 @@ Object {
           "id": "UXVlc3Rpb246MzkxOQ==",
           "private": true,
         },
-        "value": "\\"Un autre organisme privé\\"",
+        "value": "{\\"labels\\":[\\"Un autre organisme privé\\"],\\"other\\":null}",
       },
       Object {
         "question": Object {
