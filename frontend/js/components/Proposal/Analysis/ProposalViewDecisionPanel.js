@@ -63,14 +63,16 @@ export const ProposalViewDecisionPanel = ({ proposal }: Props) => {
           {decision.post.body ? (
             <>
               <FormattedMessage tagName="p" id="official.answer" />
-              <FormattedMessage
-                id={authors.length < 2 ? 'global.byAuthor' : 'project-authors'}
-                values={{
-                  author: authors[0].username,
-                  authorName: authors[0].username,
-                  number: authors.length - 1,
-                }}
-              />
+              {authors.length ? (
+                <FormattedMessage
+                  id={authors.length < 2 ? 'global.byAuthor' : 'project-authors'}
+                  values={{
+                    author: authors[0].username,
+                    authorName: authors[0].username,
+                    number: authors.length - 1,
+                  }}
+                />
+              ) : null}
             </>
           ) : null}
         </DecidorView>

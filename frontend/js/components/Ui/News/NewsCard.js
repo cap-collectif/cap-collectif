@@ -91,14 +91,16 @@ export const NewsCard = ({ post, withContent }: Props) => {
             <a href={post.url}>{post.title}</a>
           </h4>
           <DatesInterval startAt={post.publishedAt} />{' '}
-          <FormattedMessage
-            id={post?.authors.length < 2 ? 'global.byAuthor' : 'project-authors'}
-            values={{
-              author: post?.authors[0].username,
-              authorName: post?.authors[0].username,
-              number: post?.authors.length - 1,
-            }}
-          />
+          {post?.authors.length ? (
+            <FormattedMessage
+              id={post?.authors.length < 2 ? 'global.byAuthor' : 'project-authors'}
+              values={{
+                author: post?.authors[0].username,
+                authorName: post?.authors[0].username,
+                number: post?.authors.length - 1,
+              }}
+            />
+          ) : null}
           {withContent ? (
             <p>
               <Truncate lines={3}>
