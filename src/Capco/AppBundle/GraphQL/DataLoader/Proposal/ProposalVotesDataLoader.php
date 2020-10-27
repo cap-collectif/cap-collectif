@@ -100,8 +100,10 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     return $paginatedResults[$index];
                 });
                 $connections[$i] = $paginator->auto($key['args']);
-                $connections[$i]->{'totalPointsCount'} =
-                    $paginatedResults[$index]->totalPointsCount;
+                if (isset($paginatedResults[$index], $paginatedResults[$index]->totalPointsCount)) {
+                    $connections[$i]->{'totalPointsCount'} =
+                        $paginatedResults[$index]->totalPointsCount;
+                }
                 ++$index;
             }
         }

@@ -137,18 +137,25 @@ class VoteSearch extends Search
 
             if (!empty($resultSet->getResults())) {
                 $map = array_map(static function (Result $result) use ($keys) {
-                    foreach (
-                        $result->getHit()['_source']['proposal']['pointsCountByStep']
-                        as $pointedSteps
+                    if (
+                        isset(
+                            $result->getHit()['_source']['proposal'],
+                            $result->getHit()['_source']['proposal']['pointsCountByStep']
+                        )
                     ) {
-                        if (
-                            isset($pointedSteps['step'], $keys[0]['step']) &&
-                            $pointedSteps['step']['id'] === $keys[0]['step']->getId()
+                        foreach (
+                            $result->getHit()['_source']['proposal']['pointsCountByStep']
+                            as $pointedSteps
                         ) {
-                            return $pointedSteps['count'];
-                        }
+                            if (
+                                isset($pointedSteps['step'], $keys[0]['step']) &&
+                                $pointedSteps['step']['id'] === $keys[0]['step']->getId()
+                            ) {
+                                return $pointedSteps['count'];
+                            }
 
-                        continue;
+                            continue;
+                        }
                     }
 
                     return 0;

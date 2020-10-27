@@ -92,7 +92,9 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
                 Argument::that(function ($connections): bool {
                     return 2 === \count($connections) &&
                         1 === $connections[0]->totalCount &&
-                        2 === $connections[1]->totalCount;
+                        3 === $connections[0]->totalPointsCount &&
+                        2 === $connections[1]->totalCount &&
+                        7 === $connections[2]->totalPointsCount;
                 })
             )
             ->shouldBeCalled()
@@ -145,7 +147,9 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
                 Argument::that(function ($connections): bool {
                     return 2 === \count($connections) &&
                         1 === $connections[0]->totalCount &&
-                        2 === $connections[1]->totalCount;
+                        3 === $connections[0]->totalPointsCount &&
+                        2 === $connections[1]->totalCount &&
+                        7 === $connections[2]->totalPointsCount;
                 })
             )
             ->shouldBeCalled()
