@@ -13,6 +13,12 @@ const baseEvent = {
   animator: null,
   title: 'Ceci est un titre',
   viewerDidAuthor: false,
+  translations: [
+    {
+      locale: 'fr',
+      link: 'https://nextjs.org/',
+    },
+  ],
   timeRange: {
     startAt: '2020-07-01T13:48:28.082Z',
     endAt: '2020-07-01T13:55:28.082Z',

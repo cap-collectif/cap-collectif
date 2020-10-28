@@ -661,6 +661,12 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
                   "startAt": "2020-07-01T13:48:28.082Z",
                 },
                 "title": "Ceci est un titre",
+                "translations": Array [
+                  Object {
+                    "link": "https://nextjs.org/",
+                    "locale": "fr",
+                  },
+                ],
                 "viewerDidAuthor": true,
               }
             }

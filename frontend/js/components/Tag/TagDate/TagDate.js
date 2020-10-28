@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { FormattedDate } from 'react-intl';
 import moment from 'moment';
 import Tag from '~/components/Ui/Labels/Tag';
 import colors from '~/utils/colors';
@@ -17,7 +18,14 @@ const TagDate = ({ date, size }: Props) => (
       <Icon name={ICON_NAME.calendar} color="#fff" size={10} />
     </IconRounded>
 
-    {moment(date).format('MMMM Do YYYY, h:mm:ss a')}
+    <FormattedDate
+      value={moment(date)}
+      day="numeric"
+      month="long"
+      year="numeric"
+      hour="numeric"
+      minute="numeric"
+    />
   </Tag>
 );
 

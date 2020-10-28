@@ -73,6 +73,10 @@ export const ActionContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.d
   flex-direction: row;
   align-items: center;
   margin-top: 30px;
+
+  .external-link {
+    margin-right: 10px;
+  }
 `;
 
 export const UsernameContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`

@@ -144,7 +144,6 @@ export default createFragmentContainer(EventPageContentConnected, {
     fragment EventPageContent_event on Event
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
-      ...EventPageRemoteContent_event @arguments(isAuthenticated: $isAuthenticated)
       title
       url
       body
@@ -168,7 +167,7 @@ export default createFragmentContainer(EventPageContentConnected, {
       ...ModalEventRegister_event @arguments(isAuthenticated: $isAuthenticated)
       ...ModalParticipantList_event
       ...ParticipantList_event @arguments(isAuthenticated: $isAuthenticated)
-      ...EventOnlineThumbnail_event
+      ...EventPageRemoteContent_event @arguments(isAuthenticated: $isAuthenticated)
       ...EventModerationMotiveView_event
     }
   `,

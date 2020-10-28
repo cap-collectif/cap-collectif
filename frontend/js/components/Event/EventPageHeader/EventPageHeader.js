@@ -27,6 +27,7 @@ import type { EventPageHeader_event } from '~relay/EventPageHeader_event.graphql
 import type { EventPageHeader_query } from '~relay/EventPageHeader_query.graphql';
 import EventLabelStatus from '~/components/Event/EventLabelStatus';
 import config from '~/config';
+import { getTranslation } from '~/services/Translation';
 
 type Props = {|
   +event: EventPageHeader_event,
@@ -34,6 +35,7 @@ type Props = {|
   +hasProfileEnabled: boolean,
   +hasThemeEnabled: boolean,
   +hasProposeEventEnabled: boolean,
+  +link?: string,
 |};
 
 export const EventPageHeader = ({
@@ -42,6 +44,7 @@ export const EventPageHeader = ({
   hasProfileEnabled,
   hasThemeEnabled,
   hasProposeEventEnabled,
+  link,
 }: Props) => {
   const {
     isPresential,
@@ -166,12 +169,22 @@ export const EventPageHeader = ({
           </div>
         </InfoLineContainer>
 
-        {viewerDidAuthor && hasProposeEventEnabled && (
+        {(link || (viewerDidAuthor && hasProposeEventEnabled)) && (
           <ActionContainer>
-            {event.review && event.review.status !== 'APPROVED' && (
-              <EventEditButton event={event} query={query} />
+            {link && (
+              <a href={link} className="btn btn-primary external-link">
+                <FormattedMessage id="event_registration.create.register" />
+              </a>
             )}
-            <EventDeleteButton eventId={event.id} />
+
+            {viewerDidAuthor && hasProposeEventEnabled && (
+              <>
+                {event.review && event.review.status !== 'APPROVED' && (
+                  <EventEditButton event={event} query={query} />
+                )}
+                <EventDeleteButton eventId={event.id} />
+              </>
+            )}
           </ActionContainer>
         )}
       </div>
@@ -179,11 +192,18 @@ export const EventPageHeader = ({
   );
 };
 
-const mapStateToProps = (state: State) => ({
-  hasProfileEnabled: state.default.features.profiles || false,
-  hasThemeEnabled: state.default.features.themes || false,
-  hasProposeEventEnabled: state.default.features.allow_users_to_propose_events || false,
-});
+const mapStateToProps = (state: State, props: Props) => {
+  const translation = props.event?.translations
+    ? getTranslation(props.event?.translations, state.language.currentLanguage)
+    : undefined;
+
+  return {
+    hasProfileEnabled: state.default.features.profiles || false,
+    hasThemeEnabled: state.default.features.themes || false,
+    hasProposeEventEnabled: state.default.features.allow_users_to_propose_events || false,
+    link: translation ? translation?.link : undefined,
+  };
+};
 
 const EventPageHeaderConnected = connect(mapStateToProps)(EventPageHeader);
 
@@ -200,6 +220,10 @@ export default createFragmentContainer(EventPageHeaderConnected, {
       id
       title
       isPresential
+      translations {
+        locale
+        link
+      }
       animator {
         id
         username
