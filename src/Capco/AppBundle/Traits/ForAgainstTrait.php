@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait ForAgainstTrait
 {
     /**
-     * @ORM\Column(name="type", type="integer")
+     * @ORM\Column(name="type", type="integer", nullable=false)
      * @Assert\Choice(choices={0, 1})
      */
     private $type = 1;

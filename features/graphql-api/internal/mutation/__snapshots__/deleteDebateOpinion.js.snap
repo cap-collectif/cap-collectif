@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|DeleteDebateOpinion mutation Delete a debate opinion. 1`] = `
+Object {
+  "deleteDebateOpinion": Object {
+    "debate": Object {
+      "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+    },
+    "deletedDebateOpinionId": "RGViYXRlT3BpbmlvbjpkZWJhdGVDYW5uYWJpc09waW5pb24x",
+    "errorCode": null,
+  },
+}
+`;

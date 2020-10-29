@@ -2,51 +2,54 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\EmailingCampaign;
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\MailingList;
-use Capco\AppBundle\Entity\MapToken;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Requirement;
+use Capco\UserBundle\Entity\User;
+use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\MapToken;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Entity\UserInvite;
-use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
-use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
+use Capco\AppBundle\Entity\Debate\DebateOpinion;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
-use Capco\UserBundle\Entity\User;
-use GraphQL\Type\Definition\Type;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
 
 class NodeTypeResolver implements ResolverInterface
 {
-    private $typeResolver;
-    private $requirementTypeResolver;
+    private TypeResolver $typeResolver;
+    private RequirementTypeResolver $requirementTypeResolver;
     private QuestionTypeResolver $questionTypeResolver;
 
     public function __construct(
@@ -254,6 +257,18 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof EmailingCampaign) {
             return $this->typeResolver->resolve('EmailingCampaign');
+        }
+
+        if ($node instanceof Debate) {
+            return $this->typeResolver->resolve('InternalDebate');
+        }
+
+        if ($node instanceof DebateStep) {
+            return $this->typeResolver->resolve('InternalDebateStep');
+        }
+
+        if ($node instanceof DebateOpinion) {
+            return $this->typeResolver->resolve('InternalDebateOpinion');
         }
 
         throw new UserError('Could not resolve type of Node.');

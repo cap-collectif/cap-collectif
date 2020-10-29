@@ -1,0 +1,10 @@
+UpdateDebateOpinionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateOpinion:
+                type: 'InternalDebateOpinion'
+                description: 'The just updated opinion.'
+            errorCode:
+                type: 'UpdateDebateOpinionErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

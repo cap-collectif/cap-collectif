@@ -39,6 +39,7 @@ use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\DebateOpinionRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\QuestionChoiceRepository;
@@ -142,6 +143,10 @@ class GlobalIdResolver
                     break;
                 case 'Debate':
                     $node = $this->container->get(DebateRepository::class)->find($uuid);
+
+                    break;
+                case 'DebateOpinion':
+                    $node = $this->container->get(DebateOpinionRepository::class)->find($uuid);
 
                     break;
                 case 'Question':

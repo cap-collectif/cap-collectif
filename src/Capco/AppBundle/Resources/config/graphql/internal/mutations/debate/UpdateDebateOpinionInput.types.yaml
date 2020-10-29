@@ -1,0 +1,20 @@
+UpdateDebateOpinionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Add an opinion on a debate.'
+        fields:
+            debateOpinionId:
+                type: 'ID!'
+                description: 'The Node ID of the `DebateOpinion` to update.'
+            title:
+                type: 'String'
+                description: 'If provided, update the title value.'
+            body:
+                type: 'HTML'
+                description: 'If provided, update the body value.'
+            author:
+                type: 'ID'
+                description: 'If a Node ID of a `User` is provided, update the author.'
+            type:
+                type: 'ForOrAgainstValue'
+                description: 'If provided, update the type.'

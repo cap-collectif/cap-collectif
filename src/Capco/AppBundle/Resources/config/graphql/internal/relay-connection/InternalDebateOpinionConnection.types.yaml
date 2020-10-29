@@ -1,0 +1,7 @@
+InternalDebateOpinionConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalDebateOpinion!
+        connectionFields:
+            totalCount:
+                type: Int!

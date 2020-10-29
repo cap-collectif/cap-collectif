@@ -1,0 +1,8 @@
+DeleteDebateOpinionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Delete an opinion on a debate.'
+        fields:
+            debateOpinionId:
+                type: 'ID!'
+                description: 'The Node ID of the `DebateOpinion`.'

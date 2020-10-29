@@ -1,4 +1,5 @@
 matchers:
+  - spec\Matcher\BeAConnectionMatcher
   - spec\Matcher\BeAnEmptyConnectionMatcher
 extensions:
   FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:

@@ -239,6 +239,10 @@ Object {
       "enabled": false,
       "type": "unstable__emailing",
     },
+    Object {
+      "enabled": true,
+      "type": "unstable__debate",
+    },
   ],
 }
 `;

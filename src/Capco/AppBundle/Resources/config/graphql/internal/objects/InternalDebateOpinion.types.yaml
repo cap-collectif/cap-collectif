@@ -1,0 +1,30 @@
+InternalDebateOpinion:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: DebateOpinion
+        description: 'A debate opinion.'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: DebateOpinion
+            title:
+                description: 'The title of the opinion.'
+                type: String!
+            body:
+                description: 'The content of the opinion.'
+                type: HTML!
+            author:
+                description: 'The expert giving his opinion.'
+                type: InternalUser!
+            debate:
+                type: InternalDebate!
+                description: 'The debate related to the opinion.'
+            type:
+                type: 'ForOrAgainstValue!'
+                description: 'Whether the opinion is for or against.'

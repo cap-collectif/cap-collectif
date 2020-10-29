@@ -1,0 +1,13 @@
+DeleteDebateOpinionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedDebateOpinionId:
+                description: 'The id just deleted.'
+                type: 'ID'
+            debate:
+                description: 'The debate of the deleted opinion.'
+                type: 'InternalDebate'
+            errorCode:
+                type: 'DeleteDebateOpinionErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Debate.opinions connection fetches opinions associated to a debate with a cursor 1`] = `
+Object {
+  "node": Object {
+    "opinions": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQm9iTWFybGV5",
+            },
+            "body": "Légaliser le cannabis, contrairement à ce que beaucoup de personnes pensent, veut dire le contrôler : contrôler sa production, sa qualité mais aussi sa distribution que ce soit pour des objectifs thérapeutiques ou récréatifs. Mais c’est surtout réduire drastiquement son trafic et les délits associés. Pour être efficace la légalisation devra être absolument accompagnée par des mesures sociales en faveur des familles qui ne survivent souvent que grâce au trafic de cannabis.",
+            "id": "RGViYXRlT3BpbmlvbjpkZWJhdGVDYW5uYWJpc09waW5pb24x",
+            "title": "Je suis pour",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyTGF1cmVudEFsZXhhbmRyZQ==",
+            },
+            "body": "La loi de 1970, qui a rendu illicite le cannabis, reste pertinente, avec la confirmation de la nocivité de cette drogue. La France est, pour sa consommation, au premier rang des 27 états Européens, avec 1 600 000 usagers réguliers et 600 000 usagers quotidiens ou multi-quotidiens.
+Le cannabis, par son tétrahydrocannabinol (THC), induit une dépendance psychique ainsi qu’une dépendance physique. Les taux de THC des produits en circulation ont été multipliés d’un facteur 3 à 8 en 30 ans, accroissant d’autant sa nocivité ;  300 000 collégiens l’ont déjà expérimenté. Or, plus tôt l’essayer, c’est plus vite l’adopter et plus intensément se détériorer. 20% de ceux qui l’ont expérimenté en sont devenus dépendants, alors qu’on ne dispose d’aucun traitement pour les en détacher.
+Le THC est la seule drogue qui se stocke très durablement dans l’organisme. «Un joint perdure huit jours dans la tête et plein de joints des mois dans le cerveau». Le cannabis n’est pas une drogue douce, c’est une drogue lente !
+",
+            "id": "RGViYXRlT3BpbmlvbjpkZWJhdGVDYW5uYWJpc09waW5pb24y",
+            "title": "Je suis contre",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "hasNextPage": false,
+      },
+      "totalCount": 2,
+    },
+  },
+}
+`;

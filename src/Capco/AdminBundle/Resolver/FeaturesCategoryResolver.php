@@ -86,6 +86,7 @@ class FeaturesCategoryResolver
                     'user_invitations',
                     Manager::majority_vote_question,
                     'unstable__emailing',
+                    Manager::unstable__debate,
                 ],
             ],
         ],

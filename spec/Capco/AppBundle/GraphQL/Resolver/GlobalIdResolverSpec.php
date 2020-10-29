@@ -15,12 +15,14 @@ use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Repository\EventRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\DebateOpinionRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class GlobalIdResolverSpec extends ObjectBehavior
@@ -101,6 +103,21 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $globalId = GlobalId::toGlobalId('DebateStep', 'debateStepCannabis');
 
         $this->resolve($globalId, null)->shouldReturn($debateStep);
+    }
+
+    public function it_can_resolve_a_debate_opinion(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        DebateOpinionRepository $repository,
+        DebateOpinion $debateOpinion
+    ) {
+        $repository->find('debateCannabisOpinion1')->willReturn($debateOpinion);
+        $container->get(DebateOpinionRepository::class)->willReturn($repository);
+        $this->beConstructedWith($container, $logger, $entityManager);
+        $globalId = GlobalId::toGlobalId('DebateOpinion', 'debateCannabisOpinion1');
+
+        $this->resolve($globalId, null)->shouldReturn($debateOpinion);
     }
 
     public function it_can_resolve_a_debate(

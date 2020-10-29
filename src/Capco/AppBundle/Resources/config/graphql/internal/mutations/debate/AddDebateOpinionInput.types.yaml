@@ -1,0 +1,20 @@
+AddDebateOpinionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Add an opinion on a debate.'
+        fields:
+            debateId:
+                type: 'ID!'
+                description: 'The Node ID of the `Debate` where the opinion belongs.'
+            title:
+                type: 'String!'
+                description: 'The title value of the opinion.'
+            body:
+                type: 'HTML!'
+                description: 'The body value of the opinion.'
+            author:
+                type: 'ID!'
+                description: 'The Node ID of a `User`. The author of the opinion.'
+            type:
+                type: 'ForOrAgainstValue!'
+                description: 'Whether the opinion will be `FOR` or `AGAINST`.'

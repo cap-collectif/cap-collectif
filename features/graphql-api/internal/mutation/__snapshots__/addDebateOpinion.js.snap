@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|addDebateOpinion mutation Add a debate opinion. 1`] = `
+Object {
+  "addDebateOpinion": Object {
+    "debateOpinion": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyNQ==",
+      },
+      "body": "<strong>Légaliser le cannabis</strong>, contrairement à ce que beaucoup de personnes pensent, veut dire le contrôler.",
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      },
+      "id": Any<String>,
+      "title": "Je suis pour",
+      "type": "FOR",
+    },
+    "errorCode": null,
+  },
+}
+`;

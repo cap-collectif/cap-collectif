@@ -1,0 +1,12 @@
+AddDebateOpinionErrorCode:
+    type: enum
+    config:
+        name: AddDebateOpinionErrorCode
+        description: 'Available errors for an `addDebateOpinion` mutation.'
+        values:
+            UNKNOWN_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateOpinionMutation::UNKNOWN_DEBATE")'
+                description: 'No `Debate` match your `debateId`.'
+            INVALID_FORM:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateOpinionMutation::INVALID_FORM")'
+                description: 'The provided values are not valid.'

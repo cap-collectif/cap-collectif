@@ -13,3 +13,8 @@ InternalDebate:
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: Debate
+            opinions:
+                description: 'The opinions from experts of the debate.'
+                argsBuilder: 'Relay::Connection'
+                type: InternalDebateOpinionConnection!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateOpinionsResolver", [value, args])'

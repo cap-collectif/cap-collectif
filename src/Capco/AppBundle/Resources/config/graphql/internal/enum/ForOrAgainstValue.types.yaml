@@ -1,0 +1,11 @@
+ForOrAgainstValue:
+    type: enum
+    config:
+        description: 'For or against.'
+        values:
+            AGAINST:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Debate\\DebateOpinion::TYPE_AGAINST")'
+                description: 'An against value'
+            FOR:
+                value: '@=constant("Capco\\AppBundle\\Entity\\Debate\\DebateOpinion::TYPE_FOR")'
+                description: 'A for value'

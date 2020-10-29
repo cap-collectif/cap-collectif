@@ -183,6 +183,42 @@ type AddContactFormPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `addDebateOpinion` mutation."""
+enum AddDebateOpinionErrorCode {
+  """No `Debate` match your `debateId`."""
+  UNKNOWN_DEBATE
+
+  """The provided values are not valid."""
+  INVALID_FORM
+}
+
+input AddDebateOpinionInput {
+  """The Node ID of the `Debate` where the opinion belongs."""
+  debateId: ID!
+
+  """The title value of the opinion."""
+  title: String!
+
+  """The body value of the opinion."""
+  body: HTML!
+
+  """The Node ID of a `User`. The author of the opinion."""
+  author: ID!
+
+  """Whether the opinion will be `FOR` or `AGAINST`."""
+  type: ForOrAgainstValue!
+  clientMutationId: String
+}
+
+type AddDebateOpinionPayload {
+  """The newly created opinion."""
+  debateOpinion: DebateOpinion
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: AddDebateOpinionErrorCode
+  clientMutationId: String
+}
+
 input AddEventInput {
   """When the event start."""
   startAt: DateTime!
@@ -2819,6 +2855,46 @@ scalar DateTime
 type Debate implements Node {
   """The ID of an object."""
   id: ID!
+
+  """The opinions from experts of the debate."""
+  opinions(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+  ): InternalDebateOpinionConnection!
+}
+
+"""A debate opinion."""
+type DebateOpinion implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """The title of the opinion."""
+  title: String!
+
+  """The content of the opinion."""
+  body: HTML!
+
+  """The expert giving his opinion."""
+  author: User!
+
+  """The debate related to the opinion."""
+  debate: Debate!
+
+  """Whether the opinion is for or against."""
+  type: ForOrAgainstValue!
 }
 
 """A step with a debate."""
@@ -2960,6 +3036,30 @@ type DeleteCommentPayload {
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError]
+  clientMutationId: String
+}
+
+"""Available errors for an `deleteDebateOpinion` mutation."""
+enum DeleteDebateOpinionErrorCode {
+  """No `DebateOpinion` match your `debateOpinionId`."""
+  UNKNOWN_DEBATE_OPINION
+}
+
+input DeleteDebateOpinionInput {
+  """The Node ID of the `DebateOpinion`."""
+  debateOpinionId: ID!
+  clientMutationId: String
+}
+
+type DeleteDebateOpinionPayload {
+  """The id just deleted."""
+  deletedDebateOpinionId: ID
+
+  """The debate of the deleted opinion."""
+  debate: Debate
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: DeleteDebateOpinionErrorCode
   clientMutationId: String
 }
 
@@ -3748,6 +3848,9 @@ enum FeatureFlagType {
   votes_min
   majority_vote_question
   unstable__emailing
+
+  """Whether or not an admin can use `DebateStep`. Used in dev only."""
+  unstable__debate
 }
 
 """Require a firstname"""
@@ -3860,6 +3963,15 @@ type Font {
 
   """Is the font uploaded by user?"""
   isCustom: Boolean!
+}
+
+"""For or against."""
+enum ForOrAgainstValue {
+  """An against value"""
+  AGAINST
+
+  """A for value"""
+  FOR
 }
 
 """France Connect SSO Configuration."""
@@ -4114,6 +4226,26 @@ type InternalCreateOauth2SSOConfigurationPayload {
   """The created oauth2 configuration."""
   ssoConfiguration: Oauth2SSOConfiguration
   clientMutationId: String
+}
+
+"""A connection to a list of items."""
+type InternalDebateOpinionConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [InternalDebateOpinionEdge]
+}
+
+"""An edge in a connection."""
+type InternalDebateOpinionEdge {
+  """The item at the end of the edge."""
+  node: DebateOpinion!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 input InternalDeleteFontInput {
@@ -5148,6 +5280,9 @@ type Mutation {
   sendEmailingCampaign(input: SendEmailingCampaignInput!): SendEmailingCampaignPayload
   testEmailingCampaign(input: TestEmailingCampaignInput!): TestEmailingCampaignPayload
   cancelEmailingCampaign(input: CancelEmailingCampaignInput!): CancelEmailingCampaignPayload
+  addDebateOpinion(input: AddDebateOpinionInput!): AddDebateOpinionPayload
+  updateDebateOpinion(input: UpdateDebateOpinionInput!): UpdateDebateOpinionPayload
+  deleteDebateOpinion(input: DeleteDebateOpinionInput!): DeleteDebateOpinionPayload
 }
 
 """A connection to a list of items."""
@@ -10927,6 +11062,42 @@ type UpdateContactPagePayload {
 
   """The locale of the contact page."""
   locale: String
+  clientMutationId: String
+}
+
+"""Available errors for an `updateDebateOpinion` mutation."""
+enum UpdateDebateOpinionErrorCode {
+  """No `DebateOpinion` match your `debateOpinionId`."""
+  UNKNOWN_DEBATE_OPINION
+
+  """The provided values are not valid."""
+  INVALID_FORM
+}
+
+input UpdateDebateOpinionInput {
+  """The Node ID of the `DebateOpinion` to update."""
+  debateOpinionId: ID!
+
+  """If provided, update the title value."""
+  title: String
+
+  """If provided, update the body value."""
+  body: HTML
+
+  """If a Node ID of a `User` is provided, update the author."""
+  author: ID
+
+  """If provided, update the type."""
+  type: ForOrAgainstValue
+  clientMutationId: String
+}
+
+type UpdateDebateOpinionPayload {
+  """The just updated opinion."""
+  debateOpinion: DebateOpinion
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: UpdateDebateOpinionErrorCode
   clientMutationId: String
 }
 

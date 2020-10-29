@@ -1,0 +1,12 @@
+UpdateDebateOpinionErrorCode:
+    type: enum
+    config:
+        name: UpdateDebateOpinionErrorCode
+        description: 'Available errors for an `updateDebateOpinion` mutation.'
+        values:
+            UNKNOWN_DEBATE_OPINION:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateOpinionMutation::UNKNOWN_DEBATE_OPINION")'
+                description: 'No `DebateOpinion` match your `debateOpinionId`.'
+            INVALID_FORM:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateOpinionMutation::INVALID_FORM")'
+                description: 'The provided values are not valid.'
