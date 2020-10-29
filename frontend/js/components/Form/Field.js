@@ -94,7 +94,8 @@ type Props = {|
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
-  (check && !isQuestionnaire(typeForm)) || (!disableValidation && isQuestionnaire(typeForm));
+  (check && !disableValidation && !isQuestionnaire(typeForm)) ||
+  (!disableValidation && isQuestionnaire(typeForm));
 
 class Field extends React.Component<Props> {
   render() {

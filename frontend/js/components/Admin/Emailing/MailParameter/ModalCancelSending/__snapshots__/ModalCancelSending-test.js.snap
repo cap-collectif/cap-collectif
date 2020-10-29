@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalCancelSending /> should renders correctly 1`] = `
+<ModalCancelSendingstyle__Container
+  animation={false}
+  aria-labelledby="modal-title"
+  bsSize="small"
+  onHide={[MockFunction]}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="modal-title"
+    >
+      <FormattedMessage
+        id="title-modal-confirmation-cancel-sending"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <p>
+      <Icon
+        color="#dc3545"
+        name="danger"
+        size={14}
+      />
+      <FormattedMessage
+        id="global-action-irreversible"
+        values={Object {}}
+      />
+    </p>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <ModalCancelSendingstyle__ButtonConfirmation
+      onClick={[Function]}
+      type="button"
+    >
+      <FormattedMessage
+        id="cancel-definitely"
+        values={Object {}}
+      />
+    </ModalCancelSendingstyle__ButtonConfirmation>
+  </ModalFooter>
+</ModalCancelSendingstyle__Container>
+`;

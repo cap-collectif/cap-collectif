@@ -45,7 +45,7 @@ exports[`<DashboardMailingList /> should renders correctly 1`] = `
         }
         rowId="1"
         selected={false}
-        setMailingListModal={[Function]}
+        setMailingListSelected={[Function]}
       />
       <Relay(MailingListItem)
         key="1"
@@ -57,7 +57,7 @@ exports[`<DashboardMailingList /> should renders correctly 1`] = `
         }
         rowId="1"
         selected={false}
-        setMailingListModal={[Function]}
+        setMailingListSelected={[Function]}
       />
     </PickableList.Body>
   </PickableList>

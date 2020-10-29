@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PreviewMail /> should renders correctly 1`] = `
+<PreviewMailstyle__Container
+  id="preview-mail"
+>
+  <p
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<html>Voilà</html>",
+      }
+    }
+  />
+</PreviewMailstyle__Container>
+`;
+
+exports[`<PreviewMail /> should renders correctly when no content 1`] = `""`;

@@ -5,12 +5,22 @@ exports[`<DateTime /> should render correctly 1`] = `
   dateFormat="YYYY-MM-DD"
   dateTimeInputProps={
     Object {
+      "className": "classssss",
+      "disabled": false,
       "id": "datePicker",
+      "name": "Nameuh",
+      "placeholder": "placeholderDatePicker",
+      "required": false,
     }
   }
   inputProps={
     Object {
+      "className": "classssss",
+      "disabled": false,
       "id": "datePicker",
+      "name": "Nameuh",
+      "placeholder": "placeholderDatePicker",
+      "required": false,
     }
   }
   onChange={[Function]}

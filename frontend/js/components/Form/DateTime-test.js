@@ -8,6 +8,11 @@ describe('<DateTime />', () => {
   const props = {
     dateTimeInputProps: {
       id: 'datePicker',
+      placeholder: 'placeholderDatePicker',
+      disabled: false,
+      required: false,
+      name: 'Nameuh',
+      className: 'classssss',
     },
     onChange: jest.fn,
   };

@@ -3,12 +3,15 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ModalMembers } from './ModalMembers';
+import { $refType } from '~/mocks';
 
 const baseProps = {
   onClose: jest.fn(),
-  data: {
-    mailingListName: 'Je suis une mailing list',
-    mailingListMembers: {
+  show: true,
+  mailingList: {
+    $refType,
+    name: 'Je suis une mailing list',
+    users: {
       totalCount: 2,
       edges: [
         {

@@ -1,0 +1,293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MailParameterPage /> should renders correctly 1`] = `
+<MailParameterPagestyle__Form
+  id="form-edit-emailing-campaign"
+  onSubmit={[MockFunction]}
+>
+  <BrowserRouter
+    basename="/admin/mailingCampaign/edit/emailingCampaign123"
+  >
+    <Relay(Connect(Header))
+      disabled={false}
+      emailingCampaign={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "content": "Ceci est du contenu",
+          "id": "emailingCampaign123",
+          "mailingInternal": null,
+          "mailingList": Object {
+            "id": "mailingList123",
+          },
+          "name": "Je suis une emailing list",
+          "object": "Ceci est le sujet",
+          "sendAt": "2030-03-11 00:00:00",
+          "senderEmail": "captain.obious@cap-collectif.com",
+          "senderName": "Captain Obvious",
+          "status": "DRAFT",
+        }
+      }
+      setModalCancelOpen={[Function]}
+      showError={false}
+    />
+    <Switch>
+      <Route
+        exact={true}
+        path="/"
+      >
+        <Relay(ParameterPage)
+          disabled={false}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": Object {
+                "id": "mailingList123",
+              },
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "DRAFT",
+            }
+          }
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
+          showError={false}
+        />
+      </Route>
+      <Route
+        exact={true}
+        path="/content"
+      >
+        <Relay(ContentPage)
+          disabled={false}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": Object {
+                "id": "mailingList123",
+              },
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "DRAFT",
+            }
+          }
+          showError={false}
+        />
+      </Route>
+      <Route
+        exact={true}
+        path="/sending"
+      >
+        <Relay(Connect(SendingPage))
+          disabled={false}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": Object {
+                "id": "mailingList123",
+              },
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "DRAFT",
+            }
+          }
+          showError={false}
+        />
+      </Route>
+    </Switch>
+    <Relay(ModalCancelSending)
+      emailingCampaign={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "content": "Ceci est du contenu",
+          "id": "emailingCampaign123",
+          "mailingInternal": null,
+          "mailingList": Object {
+            "id": "mailingList123",
+          },
+          "name": "Je suis une emailing list",
+          "object": "Ceci est le sujet",
+          "sendAt": "2030-03-11 00:00:00",
+          "senderEmail": "captain.obious@cap-collectif.com",
+          "senderName": "Captain Obvious",
+          "status": "DRAFT",
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+  </BrowserRouter>
+</MailParameterPagestyle__Form>
+`;
+
+exports[`<MailParameterPage /> should renders correctly when disabled 1`] = `
+<MailParameterPagestyle__Form
+  id="form-edit-emailing-campaign"
+  onSubmit={[MockFunction]}
+>
+  <BrowserRouter
+    basename="/admin/mailingCampaign/edit/emailingCampaign123"
+  >
+    <Relay(Connect(Header))
+      disabled={true}
+      emailingCampaign={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "content": "Ceci est du contenu",
+          "id": "emailingCampaign123",
+          "mailingInternal": null,
+          "mailingList": Object {
+            "id": "mailingList123",
+          },
+          "name": "Je suis une emailing list",
+          "object": "Ceci est le sujet",
+          "sendAt": "2030-03-11 00:00:00",
+          "senderEmail": "captain.obious@cap-collectif.com",
+          "senderName": "Captain Obvious",
+          "status": "SENT",
+        }
+      }
+      setModalCancelOpen={[Function]}
+      showError={false}
+    />
+    <Switch>
+      <Route
+        exact={true}
+        path="/"
+      >
+        <Relay(ParameterPage)
+          disabled={true}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": Object {
+                "id": "mailingList123",
+              },
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "SENT",
+            }
+          }
+          query={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+            }
+          }
+          showError={false}
+        />
+      </Route>
+      <Route
+        exact={true}
+        path="/content"
+      >
+        <Relay(ContentPage)
+          disabled={true}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": Object {
+                "id": "mailingList123",
+              },
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "SENT",
+            }
+          }
+          showError={false}
+        />
+      </Route>
+      <Route
+        exact={true}
+        path="/sending"
+      >
+        <Relay(Connect(SendingPage))
+          disabled={true}
+          emailingCampaign={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "content": "Ceci est du contenu",
+              "id": "emailingCampaign123",
+              "mailingInternal": null,
+              "mailingList": Object {
+                "id": "mailingList123",
+              },
+              "name": "Je suis une emailing list",
+              "object": "Ceci est le sujet",
+              "sendAt": "2030-03-11 00:00:00",
+              "senderEmail": "captain.obious@cap-collectif.com",
+              "senderName": "Captain Obvious",
+              "status": "SENT",
+            }
+          }
+          showError={false}
+        />
+      </Route>
+    </Switch>
+    <Relay(ModalCancelSending)
+      emailingCampaign={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "content": "Ceci est du contenu",
+          "id": "emailingCampaign123",
+          "mailingInternal": null,
+          "mailingList": Object {
+            "id": "mailingList123",
+          },
+          "name": "Je suis une emailing list",
+          "object": "Ceci est le sujet",
+          "sendAt": "2030-03-11 00:00:00",
+          "senderEmail": "captain.obious@cap-collectif.com",
+          "senderName": "Captain Obvious",
+          "status": "SENT",
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+  </BrowserRouter>
+</MailParameterPagestyle__Form>
+`;

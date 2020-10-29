@@ -13,27 +13,13 @@ const baseProps = {
     name: 'Je suis une mailing list',
     users: {
       totalCount: 2,
-      edges: [
-        {
-          node: {
-            id: '1',
-            email: 'bruh@gmail.com',
-          },
-        },
-        {
-          node: {
-            id: '1',
-            email: 'bruh@gmail.com',
-          },
-        },
-      ],
     },
     project: {
       title: 'Je suis un titre de projet',
     },
   },
   selected: false,
-  setMailingListModal: jest.fn(),
+  setMailingListSelected: jest.fn(),
 };
 
 const props = {

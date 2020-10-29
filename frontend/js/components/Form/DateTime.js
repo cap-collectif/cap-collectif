@@ -3,10 +3,19 @@ import React from 'react';
 import BaseDateTime from 'react-datetime';
 import styled, { type StyledComponent } from 'styled-components';
 
+export type DateTimeInputProps = {|
+  placeholder?: string,
+  disabled?: boolean,
+  required?: boolean,
+  name?: string,
+  className?: string,
+  id?: string,
+|};
+
 type Props = {
   value?: any,
   onChange: Function,
-  dateTimeInputProps?: Object,
+  dateTimeInputProps?: DateTimeInputProps,
 };
 
 const BasicDateTime: StyledComponent<{}, {}, typeof BaseDateTime> = styled(BaseDateTime)`

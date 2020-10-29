@@ -39,7 +39,7 @@ export const CampaignItem = ({ campaign, selected }: Props) => {
   return (
     <Container rowId={id} selected={selected}>
       <h3>
-        <a href="#fake" rel="noopener noreferrer">
+        <a href={`/admin/mailingCampaign/edit/${id}`} rel="noopener noreferrer">
           {name}
         </a>
       </h3>

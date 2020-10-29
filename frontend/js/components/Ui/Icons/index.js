@@ -125,3 +125,7 @@ export { default as MicO } from './svg/mic-o.svg';
 export { default as Certified } from './svg/certified.svg';
 export { default as SendMail } from './svg/send-mail.svg';
 export { default as Trophy } from './svg/trophy.svg';
+export { default as Browser } from './svg/browser.svg';
+export { default as Letter } from './svg/letter.svg';
+export { default as Danger } from './svg/danger.svg';
+export { default as FavoriteBook } from './svg/favoriteBook.svg';

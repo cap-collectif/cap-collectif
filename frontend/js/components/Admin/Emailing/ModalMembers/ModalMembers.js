@@ -1,50 +1,59 @@
 // @flow
 import * as React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import { MembersContainer } from './ModalMembers.style';
-
-type Members = $ReadOnlyArray<?{|
-  +node: {|
-    +id: string,
-    +email: ?string,
-  |},
-|}>;
-
-export type ModalMembersData = {|
-  mailingListName: string,
-  mailingListMembers: {|
-    +totalCount: number,
-    +edges: ?Members,
-  |},
-|};
+import { type ModalMembers_mailingList } from '~relay/ModalMembers_mailingList.graphql';
 
 type Props = {|
   onClose: () => void,
-  data: ModalMembersData,
+  show: boolean,
+  mailingList: ?ModalMembers_mailingList, // Not optional but flow doesn't understand
 |};
 
-export const ModalMembers = ({ onClose, data }: Props) => (
-  <Modal
-    animation={false}
-    show={!!data}
-    onHide={onClose}
-    bsSize="small"
-    aria-labelledby="modal-title">
-    <Modal.Header closeButton>
-      <Modal.Title id="modal-title">{data.mailingListName}</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <MembersContainer>
-        {data.mailingListMembers?.edges
-          ?.filter(Boolean)
-          .map(edge => edge.node)
-          .filter(Boolean)
-          .map(member => (
-            <li key={member.id}>{member.email}</li>
-          ))}
-      </MembersContainer>
-    </Modal.Body>
-  </Modal>
-);
+export const ModalMembers = ({ show, onClose, mailingList }: Props) => {
+  if (!mailingList) return null;
 
-export default ModalMembers;
+  const { name, users } = mailingList;
+
+  return (
+    <Modal
+      animation={false}
+      show={show}
+      onHide={onClose}
+      bsSize="small"
+      aria-labelledby="modal-title">
+      <Modal.Header closeButton>
+        <Modal.Title id="modal-title">{name}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <MembersContainer>
+          {users.edges
+            ?.filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map(member => (
+              <li key={member.id}>{member.email}</li>
+            ))}
+        </MembersContainer>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+export default createFragmentContainer(ModalMembers, {
+  mailingList: graphql`
+    fragment ModalMembers_mailingList on MailingList {
+      name
+      users {
+        totalCount
+        edges {
+          node {
+            id
+            email
+          }
+        }
+      }
+    }
+  `,
+});

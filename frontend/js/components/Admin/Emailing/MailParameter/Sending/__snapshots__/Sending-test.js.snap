@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SendingPage /> should renders correctly 1`] = `
+<commonstyle__Container>
+  <h3>
+    send-and-schedule
+  </h3>
+  <style__FieldContainer>
+    <Field
+      component={[Function]}
+      disableValidation={true}
+      disabled={false}
+      id="sendingSchedule"
+      label="send-parameter"
+      name="sendingSchedule"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        disabled={false}
+        id="now"
+        onClick={[Function]}
+        value={false}
+      >
+        <FormattedMessage
+          id="send-now"
+          values={Object {}}
+        />
+      </ToggleButton>
+      <ToggleButton
+        disabled={false}
+        id="planned"
+        onClick={[Function]}
+        value={true}
+      >
+        <FormattedMessage
+          id="global.plan"
+          values={Object {}}
+        />
+      </ToggleButton>
+    </Field>
+  </style__FieldContainer>
+</commonstyle__Container>
+`;
+
+exports[`<SendingPage /> should renders correctly when disabled 1`] = `
+<commonstyle__Container>
+  <h3>
+    send-and-schedule
+  </h3>
+  <style__FieldContainer>
+    <Field
+      component={[Function]}
+      disableValidation={true}
+      disabled={true}
+      id="sendingSchedule"
+      label="send-parameter"
+      name="sendingSchedule"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        disabled={true}
+        id="now"
+        onClick={[Function]}
+        value={false}
+      >
+        <FormattedMessage
+          id="send-now"
+          values={Object {}}
+        />
+      </ToggleButton>
+      <ToggleButton
+        disabled={true}
+        id="planned"
+        onClick={[Function]}
+        value={true}
+      >
+        <FormattedMessage
+          id="global.plan"
+          values={Object {}}
+        />
+      </ToggleButton>
+    </Field>
+  </style__FieldContainer>
+  <style__InfoRow>
+    <LabelState
+      color="#54BAA6"
+    />
+    <p>
+      global.sentAt.date
+    </p>
+  </style__InfoRow>
+</commonstyle__Container>
+`;
+
+exports[`<SendingPage /> should renders correctly when error 1`] = `
+<commonstyle__Container>
+  <h3>
+    send-and-schedule
+  </h3>
+  <style__FieldContainer>
+    <Field
+      component={[Function]}
+      disableValidation={false}
+      disabled={false}
+      id="sendingSchedule"
+      label="send-parameter"
+      name="sendingSchedule"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        disabled={false}
+        id="now"
+        onClick={[Function]}
+        value={false}
+      >
+        <FormattedMessage
+          id="send-now"
+          values={Object {}}
+        />
+      </ToggleButton>
+      <ToggleButton
+        disabled={false}
+        id="planned"
+        onClick={[Function]}
+        value={true}
+      >
+        <FormattedMessage
+          id="global.plan"
+          values={Object {}}
+        />
+      </ToggleButton>
+    </Field>
+  </style__FieldContainer>
+</commonstyle__Container>
+`;
+
+exports[`<SendingPage /> should renders correctly with sending schedule 1`] = `
+<commonstyle__Container>
+  <h3>
+    send-and-schedule
+  </h3>
+  <style__FieldContainer>
+    <Field
+      component={[Function]}
+      disableValidation={true}
+      disabled={false}
+      id="sendingSchedule"
+      label="send-parameter"
+      name="sendingSchedule"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        disabled={false}
+        id="now"
+        onClick={[Function]}
+        value={false}
+      >
+        <FormattedMessage
+          id="send-now"
+          values={Object {}}
+        />
+      </ToggleButton>
+      <ToggleButton
+        disabled={false}
+        id="planned"
+        onClick={[Function]}
+        value={true}
+      >
+        <FormattedMessage
+          id="global.plan"
+          values={Object {}}
+        />
+      </ToggleButton>
+    </Field>
+    <Field
+      addonAfter={
+        <i
+          className="cap-calendar-2"
+        />
+      }
+      component={[Function]}
+      dateTimeInputProps={
+        Object {
+          "disabled": false,
+        }
+      }
+      disableValidation={true}
+      disabled={false}
+      id="plannedDate"
+      name="plannedDate"
+      type="datetime"
+    />
+  </style__FieldContainer>
+  <style__InfoRow>
+    <LabelState
+      color="#E29829"
+    />
+    <p>
+      global.plannedDate
+    </p>
+  </style__InfoRow>
+</commonstyle__Container>
+`;

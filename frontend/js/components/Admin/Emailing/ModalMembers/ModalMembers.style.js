@@ -7,6 +7,8 @@ export const MembersContainer: StyledComponent<{}, {}, HTMLUListElement> = style
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow: scroll;
+  max-height: 400px;
 
   li {
     margin-bottom: 10px;

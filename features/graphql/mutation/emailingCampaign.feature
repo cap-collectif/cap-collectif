@@ -319,7 +319,7 @@ Scenario: GraphQL client updates a campaign
           "object": "new object",
           "content": "new content",
           "sendAt": "2025-01-01 00:00:00",
-          "status": "PLANNED",
+          "status": "DRAFT",
           "mailingInternal": "NOT_CONFIRMED",
           "preview": @string@
         }

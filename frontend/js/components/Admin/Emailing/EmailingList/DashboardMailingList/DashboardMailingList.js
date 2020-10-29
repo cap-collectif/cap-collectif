@@ -9,9 +9,7 @@ import ClearableInput from '~ui/Form/Input/ClearableInput';
 import EmailingLoader from '../../EmailingLoader/EmailingLoader';
 import ModalConfirmDelete from '~/components/Admin/Emailing/EmailingList/ModalConfirmDelete/ModalConfirmDelete';
 import MailingListItem from '~/components/Admin/Emailing/EmailingList/MailingListItem/MailingListItem';
-import ModalMembers, {
-  type ModalMembersData,
-} from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
+import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
 import { type DashboardMailingList_query } from '~relay/DashboardMailingList_query.graphql';
 import NoMailingList from '~/components/Admin/Emailing/EmailingList/NoMailingList/NoMailingList';
 
@@ -70,7 +68,7 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
   const { selectedRows } = usePickableList();
   const { parameters, dispatch, status } = useDashboardMailingListContext();
   const [isModalDeleteOpen, showModalDelete] = React.useState<boolean>(false);
-  const [dataModalMembers, setDataModalMembers] = React.useState<?ModalMembersData>(null);
+  const [mailingListSelected, setMailingListSelected] = React.useState<?string>(null);
   const intl = useIntl();
   const hasMailingLists = mailingLists?.totalCount > 0;
 
@@ -124,7 +122,7 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
                   rowId={mailingList.id}
                   mailingList={mailingList}
                   selected={selectedRows.includes(mailingList.id)}
-                  setMailingListModal={setDataModalMembers}
+                  setMailingListSelected={setMailingListSelected}
                 />
               ))
           ) : (
@@ -135,8 +133,16 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
 
       <ModalConfirmDelete show={isModalDeleteOpen} onClose={() => showModalDelete(false)} />
 
-      {dataModalMembers && (
-        <ModalMembers data={dataModalMembers} onClose={() => setDataModalMembers(null)} />
+      {mailingListSelected && (
+        <ModalMembers
+          show={!!mailingListSelected}
+          onClose={() => setMailingListSelected(null)}
+          mailingList={mailingLists?.edges
+            ?.filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .find(m => m.id === mailingListSelected)}
+        />
       )}
     </>
   );
@@ -163,6 +169,7 @@ export default createPaginationContainer(
             node {
               id
               ...MailingListItem_mailingList
+              ...ModalMembers_mailingList
             }
           }
         }

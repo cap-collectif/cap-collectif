@@ -44,7 +44,7 @@ const deleteMailingList = (
       return FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {
-          type: TYPE_ALERT.ERROR,
+          type: TYPE_ALERT.SUCCESS,
           content: 'success-delete-mailing-list',
           values: {
             num: mailingListIds.length,

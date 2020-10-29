@@ -85,9 +85,6 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         }
 
         $emailingCampaign->setSendAt($sendAt);
-        $emailingCampaign->setStatus(
-            $sendAt ? EmailingCampaignStatus::PLANNED : EmailingCampaignStatus::DRAFT
-        );
     }
 
     private static function checkSendAt(\DateTime $sendAt): void

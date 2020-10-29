@@ -1,0 +1,327 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ParameterPage /> should renders correctly 1`] = `
+<commonstyle__Container>
+  <h3>
+    admin-title-parameter-mailing-list
+  </h3>
+  <Field
+    component={[Function]}
+    disableValidation={true}
+    disabled={true}
+    id="senderEmail"
+    label="sender-address"
+    name="senderEmail"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    disableValidation={true}
+    disabled={false}
+    id="mailingList"
+    label="admin-menu-emailing-list"
+    name="mailingList"
+    type="select"
+  >
+    <option
+      value={-1}
+    >
+      select-list
+    </option>
+    <option
+      value="REGISTERED"
+    >
+      default-mailing-list-registered
+    </option>
+    <option
+      value="CONFIRMED"
+    >
+      default-mailing-list-registered-confirmed
+    </option>
+    <option
+      value="NOT_CONFIRMED"
+    >
+      default-mailing-list-registered-not-confirmed
+    </option>
+    <option
+      key="1"
+      value="1"
+    >
+      Je suis une mailingList
+    </option>
+    <option
+      key="2"
+      value="2"
+    >
+      Je suis une mailingList aussi
+    </option>
+  </Field>
+  <style__InstructionContainer>
+    <p
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "[object Object]",
+        }
+      }
+    />
+  </style__InstructionContainer>
+  <Relay(ModalMembers)
+    mailingList={
+      Object {
+        "$fragmentRefs": null,
+        "name": "Je suis une mailingList",
+        "project": Object {
+          "title": "P&C",
+        },
+        "users": Object {
+          "totalCount": 3,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</commonstyle__Container>
+`;
+
+exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
+<commonstyle__Container>
+  <h3>
+    admin-title-parameter-mailing-list
+  </h3>
+  <Field
+    component={[Function]}
+    disableValidation={true}
+    disabled={true}
+    id="senderEmail"
+    label="sender-address"
+    name="senderEmail"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    disableValidation={true}
+    disabled={true}
+    id="mailingList"
+    label="admin-menu-emailing-list"
+    name="mailingList"
+    type="select"
+  >
+    <option
+      value={-1}
+    >
+      select-list
+    </option>
+    <option
+      value="REGISTERED"
+    >
+      default-mailing-list-registered
+    </option>
+    <option
+      value="CONFIRMED"
+    >
+      default-mailing-list-registered-confirmed
+    </option>
+    <option
+      value="NOT_CONFIRMED"
+    >
+      default-mailing-list-registered-not-confirmed
+    </option>
+    <option
+      key="1"
+      value="1"
+    >
+      Je suis une mailingList
+    </option>
+    <option
+      key="2"
+      value="2"
+    >
+      Je suis une mailingList aussi
+    </option>
+  </Field>
+  <style__InstructionContainer>
+    <p
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "[object Object]",
+        }
+      }
+    />
+  </style__InstructionContainer>
+  <Relay(ModalMembers)
+    mailingList={
+      Object {
+        "$fragmentRefs": null,
+        "name": "Je suis une mailingList",
+        "project": Object {
+          "title": "P&C",
+        },
+        "users": Object {
+          "totalCount": 3,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</commonstyle__Container>
+`;
+
+exports[`<ParameterPage /> should renders correctly when error 1`] = `
+<commonstyle__Container>
+  <h3>
+    admin-title-parameter-mailing-list
+  </h3>
+  <Field
+    component={[Function]}
+    disableValidation={false}
+    disabled={true}
+    id="senderEmail"
+    label="sender-address"
+    name="senderEmail"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    disableValidation={false}
+    disabled={false}
+    id="mailingList"
+    label="admin-menu-emailing-list"
+    name="mailingList"
+    type="select"
+  >
+    <option
+      value={-1}
+    >
+      select-list
+    </option>
+    <option
+      value="REGISTERED"
+    >
+      default-mailing-list-registered
+    </option>
+    <option
+      value="CONFIRMED"
+    >
+      default-mailing-list-registered-confirmed
+    </option>
+    <option
+      value="NOT_CONFIRMED"
+    >
+      default-mailing-list-registered-not-confirmed
+    </option>
+    <option
+      key="1"
+      value="1"
+    >
+      Je suis une mailingList
+    </option>
+    <option
+      key="2"
+      value="2"
+    >
+      Je suis une mailingList aussi
+    </option>
+  </Field>
+  <style__InstructionContainer>
+    <p
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "[object Object]",
+        }
+      }
+    />
+  </style__InstructionContainer>
+  <Relay(ModalMembers)
+    mailingList={
+      Object {
+        "$fragmentRefs": null,
+        "name": "Je suis une mailingList",
+        "project": Object {
+          "title": "P&C",
+        },
+        "users": Object {
+          "totalCount": 3,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</commonstyle__Container>
+`;
+
+exports[`<ParameterPage /> should renders correctly when mailing list internal selected 1`] = `
+<commonstyle__Container>
+  <h3>
+    admin-title-parameter-mailing-list
+  </h3>
+  <Field
+    component={[Function]}
+    disableValidation={true}
+    disabled={true}
+    id="senderEmail"
+    label="sender-address"
+    name="senderEmail"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    disableValidation={true}
+    disabled={false}
+    id="mailingList"
+    label="admin-menu-emailing-list"
+    name="mailingList"
+    type="select"
+  >
+    <option
+      value={-1}
+    >
+      select-list
+    </option>
+    <option
+      value="REGISTERED"
+    >
+      default-mailing-list-registered
+    </option>
+    <option
+      value="CONFIRMED"
+    >
+      default-mailing-list-registered-confirmed
+    </option>
+    <option
+      value="NOT_CONFIRMED"
+    >
+      default-mailing-list-registered-not-confirmed
+    </option>
+    <option
+      key="1"
+      value="1"
+    >
+      Je suis une mailingList
+    </option>
+    <option
+      key="2"
+      value="2"
+    >
+      Je suis une mailingList aussi
+    </option>
+  </Field>
+  <style__InstructionContainer>
+    <p
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "[object Object]",
+        }
+      }
+    />
+  </style__InstructionContainer>
+  <ModalInternalMembers
+    mailingListName="default-mailing-list-registered-confirmed"
+    members={null}
+    onClose={[Function]}
+    show={false}
+  />
+</commonstyle__Container>
+`;

@@ -132,6 +132,10 @@ export const ICON_NAME = {
   certified: 'certified',
   sendMail: 'send-mail',
   trophy: 'trophy',
+  browser: 'browser',
+  letter: 'letter',
+  danger: 'danger',
+  favoriteBook: 'favoriteBook',
 };
 
 type Props = {|
@@ -403,6 +407,14 @@ const getIcon = name => {
       return <Icons.SendMail />;
     case 'trophy':
       return <Icons.Trophy />;
+    case 'browser':
+      return <Icons.Browser />;
+    case 'letter':
+      return <Icons.Letter />;
+    case 'danger':
+      return <Icons.Danger />;
+    case 'favoriteBook':
+      return <Icons.FavoriteBook />;
     default:
       return <div />;
   }

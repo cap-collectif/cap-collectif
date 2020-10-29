@@ -58,6 +58,8 @@ const colors = {
   disabledGray: '#eee',
   grayF4: '#f4f4f4',
   red: '#fd4d4f',
+  tradewind: '#54BAA6',
+  fireBush: '#E29829',
 };
 
 // WIP but usefull. Waiting for the full table with real names

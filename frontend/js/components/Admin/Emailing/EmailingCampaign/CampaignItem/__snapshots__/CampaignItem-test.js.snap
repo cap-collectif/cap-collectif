@@ -7,7 +7,7 @@ exports[`<CampaignItem /> should renders correctly 1`] = `
 >
   <h3>
     <a
-      href="#fake"
+      href="/admin/mailingCampaign/edit/1"
       rel="noopener noreferrer"
     >
       Je suis une campagne
@@ -54,7 +54,7 @@ exports[`<CampaignItem /> should renders correctly when no mailing list 1`] = `
 >
   <h3>
     <a
-      href="#fake"
+      href="/admin/mailingCampaign/edit/1"
       rel="noopener noreferrer"
     >
       Je suis une campagne
@@ -93,7 +93,7 @@ exports[`<CampaignItem /> should renders correctly when no send at 1`] = `
 >
   <h3>
     <a
-      href="#fake"
+      href="/admin/mailingCampaign/edit/1"
       rel="noopener noreferrer"
     >
       Je suis une campagne
@@ -130,7 +130,7 @@ exports[`<CampaignItem /> should renders correctly when selected 1`] = `
 >
   <h3>
     <a
-      href="#fake"
+      href="/admin/mailingCampaign/edit/1"
       rel="noopener noreferrer"
     >
       Je suis une campagne

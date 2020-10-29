@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should renders correctly 1`] = `
+<Headerstyle__Container>
+  <Headerstyle__TitleContainer>
+    <Headerstyle__Title>
+      <h2>
+        Ceci est un titre
+      </h2>
+      <Headerstyle__ButtonEditTitle
+        onClick={[Function]}
+        type="button"
+      >
+        <Icon
+          color="#000"
+          name="pen"
+          size={16}
+        />
+      </Headerstyle__ButtonEditTitle>
+    </Headerstyle__Title>
+    <Headerstyle__ButtonSendContainer>
+      <Headerstyle__ButtonSendMail
+        disabled={false}
+        type="submit"
+      >
+        check-and-send
+      </Headerstyle__ButtonSendMail>
+    </Headerstyle__ButtonSendContainer>
+  </Headerstyle__TitleContainer>
+  <Headerstyle__NavContainer>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/"
+      >
+        global.params
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/content"
+      >
+        global.contenu
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/sending"
+      >
+        global-sending
+      </NavLink>
+    </li>
+  </Headerstyle__NavContainer>
+</Headerstyle__Container>
+`;
+
+exports[`<Header /> should renders correctly when disabled 1`] = `
+<Headerstyle__Container>
+  <Headerstyle__TitleContainer>
+    <Headerstyle__Title>
+      <h2>
+        Ceci est un titre
+      </h2>
+    </Headerstyle__Title>
+    <LabelState
+      color="#54BAA6"
+      label="global-sent"
+    />
+  </Headerstyle__TitleContainer>
+  <Headerstyle__NavContainer>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/"
+      >
+        global.params
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/content"
+      >
+        global.contenu
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/sending"
+      >
+        global-sending
+      </NavLink>
+    </li>
+  </Headerstyle__NavContainer>
+</Headerstyle__Container>
+`;
+
+exports[`<Header /> should renders correctly when error 1`] = `
+<Headerstyle__Container>
+  <Headerstyle__TitleContainer>
+    <Headerstyle__Title>
+      <h2>
+        Ceci est un titre
+      </h2>
+      <Headerstyle__ButtonEditTitle
+        onClick={[Function]}
+        type="button"
+      >
+        <Icon
+          color="#000"
+          name="pen"
+          size={16}
+        />
+      </Headerstyle__ButtonEditTitle>
+    </Headerstyle__Title>
+    <Headerstyle__ButtonSendContainer>
+      <Headerstyle__ButtonSendMail
+        disabled={false}
+        type="submit"
+      >
+        check-and-send
+      </Headerstyle__ButtonSendMail>
+      <Headerstyle__ErrorContainer>
+        <p>
+          <Icon
+            color="#dc3545"
+            name="danger"
+            size={14}
+          />
+          admin.fields.question_choice.required
+        </p>
+        <div>
+          <p
+            key="0"
+          >
+            <span>
+              1. 
+            </span>
+            <FormattedMessage
+              id="key-word"
+              values={
+                Object {
+                  "fieldName": "blabla-field",
+                }
+              }
+            />
+          </p>
+        </div>
+      </Headerstyle__ErrorContainer>
+    </Headerstyle__ButtonSendContainer>
+  </Headerstyle__TitleContainer>
+  <Headerstyle__NavContainer>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/"
+      >
+        global.params
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/content"
+      >
+        global.contenu
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        activeClassName="selected"
+        exact={true}
+        to="/sending"
+      >
+        global-sending
+      </NavLink>
+    </li>
+  </Headerstyle__NavContainer>
+</Headerstyle__Container>
+`;

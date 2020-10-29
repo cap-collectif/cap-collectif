@@ -13,10 +13,15 @@
 {% endblock %}
 
 {% block sonata_page_content %}
-    <div class="text-center">
-        <h1>VA BOSSER VINCENT</h1>
-        <h2 style="color: red">HOPOPOP !</h2>
-    </div>
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{
+    react_render_component('EmailingMailParameterPageApp', {
+        'rendering': 'client_side',
+        'props': {
+            id: object is not null ? object.id|toGlobalId('EmailingCampaign') : null
+        }
+    })
+    }}
 {% endblock %}
 
 {% block list_table %}

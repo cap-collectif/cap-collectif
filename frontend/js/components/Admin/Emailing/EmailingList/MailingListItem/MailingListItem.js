@@ -5,16 +5,15 @@ import { FormattedMessage } from 'react-intl';
 import { Container, ButtonMembers } from './MailingListItem.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { type MailingListItem_mailingList } from '~relay/MailingListItem_mailingList.graphql';
-import type { ModalMembersData } from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
 
 type Props = {|
   mailingList: MailingListItem_mailingList,
   selected: boolean,
   rowId: string,
-  setMailingListModal: ModalMembersData => void,
+  setMailingListSelected: string => void,
 |};
 
-export const MailingListItem = ({ mailingList, selected, setMailingListModal }: Props) => {
+export const MailingListItem = ({ mailingList, selected, setMailingListSelected }: Props) => {
   const { id, name, project, users } = mailingList;
 
   return (
@@ -23,9 +22,7 @@ export const MailingListItem = ({ mailingList, selected, setMailingListModal }: 
 
       {project && <p className="project-title">{project.title}</p>}
 
-      <ButtonMembers
-        type="button"
-        onClick={() => setMailingListModal({ mailingListName: name, mailingListMembers: users })}>
+      <ButtonMembers type="button" onClick={() => setMailingListSelected(id)}>
         <Icon name={ICON_NAME.newUser} size={13} color="#6C757D" />
         <p>
           {users.totalCount}{' '}
@@ -43,12 +40,6 @@ export default createFragmentContainer(MailingListItem, {
       name
       users {
         totalCount
-        edges {
-          node {
-            id
-            email
-          }
-        }
       }
       project {
         title

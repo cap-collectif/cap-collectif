@@ -13,7 +13,7 @@ import {
   type ValidationState,
 } from 'react-bootstrap';
 import type { IntlShape } from 'react-intl';
-import DateTime from './DateTime';
+import DateTime, { type DateTimeInputProps } from './DateTime';
 import Editor from './Editor';
 import AdminEditor from '../AdminEditor';
 import Ranking from './Ranking/Ranking';
@@ -123,7 +123,7 @@ export type ParentProps = {|
   medias?: Array<any>,
   // Why do we use this ?
   value?: any,
-  dateTimeInputProps?: Object,
+  dateTimeInputProps?: DateTimeInputProps,
   forwardedRef?: any,
   typeForm?: $Values<typeof TYPE_FORM>,
   getOpacity?: (opacity: number) => void,
