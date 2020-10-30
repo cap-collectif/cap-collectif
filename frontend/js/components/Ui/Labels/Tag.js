@@ -38,7 +38,7 @@ export const TagContainer: StyledComponent<{}, {}, HTMLSpanElement> = styled.spa
   }
 `;
 
-const TagLink: StyledComponent<{}, {}, typeof TagContainer> = styled(TagContainer)`
+const TagLink: StyledComponent<{}, {}, HTMLSpanElement> = styled(TagContainer)`
   &:hover {
     cursor: pointer;
   }

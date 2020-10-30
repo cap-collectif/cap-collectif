@@ -16,11 +16,12 @@ Scenario: Events can be filtered by projects
   And I visited "events page"
   And I click the "#event-button-filter" element
   And I select "UHJvamVjdDpwcm9qZWN0MQ==" from react "#SelectProject-filter-project"
-  And I wait 1 seconds
+  And I wait ".eventPreview" to appear on current page
   Then I should see 3 ".eventPreview" elements
   And I click the "#event-status-filter-button-desktop" element
   And I check element "finished-events"
-  And I wait 2 seconds
+  And I wait ".loader" to appear on current page
+  And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
 
 @read-only

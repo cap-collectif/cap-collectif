@@ -56,1013 +56,522 @@ exports[`<ChangeLanguageOnWebsiteHeader /> should render correctly 1`] = `
     <ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer
       id="changeLanguageProposalContainer"
     >
-      <StyledComponent
-        forwardedComponent={
-          Object {
-            "$$typeof": Symbol(react.forward_ref),
-            "attrs": Array [],
-            "componentStyle": ComponentStyle {
-              "componentId": "ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer-sc-3ukalg-0",
-              "isStatic": false,
-              "lastClassName": "jHpIGP",
-              "rules": Array [
-                "font-family:'OpenSans',helvetica,arial,sans-serif;font-size:16px;width:100%;background:#444;min-height:75px;color:#fff;display:flex;justify-content:space-between;@media (max-width:991px){padding:20px 15px;}align-items:center;transition:all 0.3s ease;position:relative;padding:0;#language-header-close{position:absolute;top:30px;right:30px;}",
-              ],
-            },
-            "displayName": "ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer",
-            "foldedComponentIds": Array [],
-            "render": [Function],
-            "styledComponentId": "ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer-sc-3ukalg-0",
-            "target": "div",
-            "toString": [Function],
-            "warnTooManyClasses": [Function],
-            "withComponent": [Function],
-          }
-        }
-        forwardedRef={null}
+      <div
+        className="ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer-sc-3ukalg-0 iGJjLx"
         id="changeLanguageProposalContainer"
       >
         <div
-          className="ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer-sc-3ukalg-0 jHpIGP"
-          id="changeLanguageProposalContainer"
+          className="container"
         >
-          <div
-            className="container"
-          >
-            <ChangeLanguageOnWebsiteHeader__Content>
-              <StyledComponent
-                forwardedComponent={
-                  Object {
-                    "$$typeof": Symbol(react.forward_ref),
-                    "attrs": Array [],
-                    "componentStyle": ComponentStyle {
-                      "componentId": "ChangeLanguageOnWebsiteHeader__Content-sc-3ukalg-1",
-                      "isStatic": false,
-                      "lastClassName": "jArVEH",
-                      "rules": Array [
-                        "display:flex;justify-content:space-between;width:100%;align-items:center;@media (max-width:991px){flex-direction:column;}",
-                      ],
-                    },
-                    "displayName": "ChangeLanguageOnWebsiteHeader__Content",
-                    "foldedComponentIds": Array [],
-                    "render": [Function],
-                    "styledComponentId": "ChangeLanguageOnWebsiteHeader__Content-sc-3ukalg-1",
-                    "target": "div",
-                    "toString": [Function],
-                    "warnTooManyClasses": [Function],
-                    "withComponent": [Function],
-                  }
-                }
-                forwardedRef={null}
-              >
+          <ChangeLanguageOnWebsiteHeader__Content>
+            <div
+              className="ChangeLanguageOnWebsiteHeader__Content-sc-3ukalg-1 jivcJb"
+            >
+              <ChangeLanguageOnWebsiteHeader__ChangeLanguageText>
                 <div
-                  className="ChangeLanguageOnWebsiteHeader__Content-sc-3ukalg-1 jArVEH"
+                  className="ChangeLanguageOnWebsiteHeader__ChangeLanguageText-sc-3ukalg-5 fUrMhF"
                 >
-                  <ChangeLanguageOnWebsiteHeader__ChangeLanguageText>
-                    <StyledComponent
-                      forwardedComponent={
+                  <span>
+                    Do you want to consult the website in your language?
+                  </span>
+                </div>
+              </ChangeLanguageOnWebsiteHeader__ChangeLanguageText>
+              <ChangeLanguageOnWebsiteHeader__ChangeLanguageForm>
+                <div
+                  className="ChangeLanguageOnWebsiteHeader__ChangeLanguageForm-sc-3ukalg-3 dDnQgc"
+                >
+                  <SiteLanguageChangeButton
+                    backgroundColor="rgba(255, 255, 255, 0.15) !important"
+                    borderless={false}
+                    defaultLanguage="en-GB"
+                    dropup={false}
+                    id="language-header-change-button"
+                    languageList={
+                      Array [
                         Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "attrs": Array [],
-                          "componentStyle": ComponentStyle {
-                            "componentId": "ChangeLanguageOnWebsiteHeader__ChangeLanguageText-sc-3ukalg-5",
-                            "isStatic": false,
-                            "lastClassName": "iRSWwd",
-                            "rules": Array [
-                              "@media (max-width:991px){align-self:start;max-width:85%;}padding-left:15px;",
-                            ],
-                          },
-                          "displayName": "ChangeLanguageOnWebsiteHeader__ChangeLanguageText",
-                          "foldedComponentIds": Array [],
-                          "render": [Function],
-                          "styledComponentId": "ChangeLanguageOnWebsiteHeader__ChangeLanguageText-sc-3ukalg-5",
-                          "target": "div",
-                          "toString": [Function],
-                          "warnTooManyClasses": [Function],
-                          "withComponent": [Function],
-                        }
-                      }
-                      forwardedRef={null}
-                    >
-                      <div
-                        className="ChangeLanguageOnWebsiteHeader__ChangeLanguageText-sc-3ukalg-5 iRSWwd"
-                      >
-                        <span>
-                          Do you want to consult the website in your language?
-                        </span>
-                      </div>
-                    </StyledComponent>
-                  </ChangeLanguageOnWebsiteHeader__ChangeLanguageText>
-                  <ChangeLanguageOnWebsiteHeader__ChangeLanguageForm>
-                    <StyledComponent
-                      forwardedComponent={
+                          "code": "fr-FR",
+                          "translationKey": "french",
+                        },
                         Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "attrs": Array [],
-                          "componentStyle": ComponentStyle {
-                            "componentId": "ChangeLanguageOnWebsiteHeader__ChangeLanguageForm-sc-3ukalg-3",
-                            "isStatic": false,
-                            "lastClassName": "jTqlCz",
-                            "rules": Array [
-                              "width:50%;text-align:end;.dropdown{width:65%;}@media (max-width:991px){width:100%;text-align:start;justify-content:space-between;display:flex;margin-top:10px;}",
-                            ],
-                          },
-                          "displayName": "ChangeLanguageOnWebsiteHeader__ChangeLanguageForm",
-                          "foldedComponentIds": Array [],
-                          "render": [Function],
-                          "styledComponentId": "ChangeLanguageOnWebsiteHeader__ChangeLanguageForm-sc-3ukalg-3",
-                          "target": "div",
-                          "toString": [Function],
-                          "warnTooManyClasses": [Function],
-                          "withComponent": [Function],
-                        }
+                          "code": "en-GB",
+                          "translationKey": "english",
+                        },
+                        Object {
+                          "code": "sp-SP",
+                          "translationKey": "spanish",
+                        },
+                        Object {
+                          "code": "de-DE",
+                          "translationKey": "deutsch",
+                        },
+                      ]
+                    }
+                    onChange={[Function]}
+                    pullRight={true}
+                    small={false}
+                    textColor="#FFF"
+                  >
+                    <SiteLanguageChangeButton__DropdownLanguageButton
+                      backgroundColor="rgba(255, 255, 255, 0.15) !important"
+                      borderless={false}
+                      bsStyle="default"
+                      dropup={false}
+                      id="language-change-button-dropdown"
+                      noCaret={true}
+                      pullRight={true}
+                      title={
+                        <React.Fragment>
+                          <ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
+                            <ForwardRef(SiteLanguageChangeButton__SiteEarthIcon)
+                              color="#FFF"
+                              small={false}
+                            />
+                            <ForwardRef(SiteLanguageChangeButton__Language)
+                              color="#FFF"
+                            >
+                              <span>
+                                english
+                              </span>
+                            </ForwardRef(SiteLanguageChangeButton__Language)>
+                          </ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
+                          <ForwardRef(SiteLanguageChangeButton__Caret)
+                            className="cap-arrow-39"
+                            color="#FFF"
+                            id="language-change-caret"
+                          />
+                        </React.Fragment>
                       }
-                      forwardedRef={null}
                     >
-                      <div
-                        className="ChangeLanguageOnWebsiteHeader__ChangeLanguageForm-sc-3ukalg-3 jTqlCz"
-                      >
-                        <SiteLanguageChangeButton
-                          backgroundColor="rgba(255, 255, 255, 0.15) !important"
-                          borderless={false}
-                          defaultLanguage="en-GB"
-                          dropup={false}
-                          id="language-header-change-button"
-                          languageList={
-                            Array [
-                              Object {
-                                "code": "fr-FR",
-                                "translationKey": "french",
-                              },
-                              Object {
-                                "code": "en-GB",
-                                "translationKey": "english",
-                              },
-                              Object {
-                                "code": "sp-SP",
-                                "translationKey": "spanish",
-                              },
-                              Object {
-                                "code": "de-DE",
-                                "translationKey": "deutsch",
-                              },
-                            ]
-                          }
-                          onChange={[Function]}
-                          pullRight={true}
-                          small={false}
-                          textColor="#FFF"
-                        >
-                          <SiteLanguageChangeButton__DropdownLanguageButton
-                            backgroundColor="rgba(255, 255, 255, 0.15) !important"
-                            borderless={false}
-                            bsStyle="default"
-                            dropup={false}
-                            id="language-change-button-dropdown"
-                            noCaret={true}
-                            pullRight={true}
-                            title={
-                              <React.Fragment>
-                                <ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
-                                  <ForwardRef(SiteLanguageChangeButton__SiteEarthIcon)
-                                    color="#FFF"
-                                    small={false}
-                                  />
-                                  <ForwardRef(SiteLanguageChangeButton__Language)
-                                    color="#FFF"
-                                  >
-                                    <span>
-                                      english
-                                    </span>
-                                  </ForwardRef(SiteLanguageChangeButton__Language)>
-                                </ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
-                                <ForwardRef(SiteLanguageChangeButton__Caret)
-                                  className="cap-arrow-39"
-                                  color="#FFF"
-                                  id="language-change-caret"
-                                />
-                              </React.Fragment>
-                            }
-                          >
-                            <StyledComponent
-                              backgroundColor="rgba(255, 255, 255, 0.15) !important"
-                              borderless={false}
-                              bsStyle="default"
-                              dropup={false}
-                              forwardedComponent={
-                                Object {
-                                  "$$typeof": Symbol(react.forward_ref),
-                                  "attrs": Array [],
-                                  "componentStyle": ComponentStyle {
-                                    "componentId": "SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2",
-                                    "isStatic": false,
-                                    "lastClassName": "cDWLDj",
-                                    "rules": Array [
-                                      "display:flex;justify-content:space-between;min-width:",
-                                      [Function],
-                                      ";max-width:",
-                                      [Function],
-                                      ";background:",
-                                      [Function],
-                                      ";border:",
-                                      [Function],
-                                      ";border-radius:4px;.caret{align-self:center;margin-left:6px;}",
-                                    ],
-                                  },
-                                  "displayName": "SiteLanguageChangeButton__DropdownLanguageButton",
-                                  "foldedComponentIds": Array [],
-                                  "render": [Function],
-                                  "styledComponentId": "SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2",
-                                  "target": [Function],
-                                  "toString": [Function],
-                                  "warnTooManyClasses": [Function],
-                                  "withComponent": [Function],
-                                }
-                              }
-                              forwardedRef={null}
-                              id="language-change-button-dropdown"
-                              noCaret={true}
-                              pullRight={true}
-                              title={
-                                <React.Fragment>
-                                  <ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
-                                    <ForwardRef(SiteLanguageChangeButton__SiteEarthIcon)
-                                      color="#FFF"
-                                      small={false}
-                                    />
-                                    <ForwardRef(SiteLanguageChangeButton__Language)
-                                      color="#FFF"
-                                    >
-                                      <span>
-                                        english
-                                      </span>
-                                    </ForwardRef(SiteLanguageChangeButton__Language)>
-                                  </ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
-                                  <ForwardRef(SiteLanguageChangeButton__Caret)
-                                    className="cap-arrow-39"
-                                    color="#FFF"
-                                    id="language-change-caret"
-                                  />
-                                </React.Fragment>
-                              }
-                            >
-                              <DropdownButton
-                                backgroundColor="rgba(255, 255, 255, 0.15) !important"
-                                borderless={false}
-                                bsStyle="default"
-                                className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 cDWLDj"
-                                dropup={false}
-                                id="language-change-button-dropdown"
-                                noCaret={true}
-                                pullRight={true}
-                                title={
-                                  <React.Fragment>
-                                    <ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
-                                      <ForwardRef(SiteLanguageChangeButton__SiteEarthIcon)
-                                        color="#FFF"
-                                        small={false}
-                                      />
-                                      <ForwardRef(SiteLanguageChangeButton__Language)
-                                        color="#FFF"
-                                      >
-                                        <span>
-                                          english
-                                        </span>
-                                      </ForwardRef(SiteLanguageChangeButton__Language)>
-                                    </ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
-                                    <ForwardRef(SiteLanguageChangeButton__Caret)
-                                      className="cap-arrow-39"
-                                      color="#FFF"
-                                      id="language-change-caret"
-                                    />
-                                  </React.Fragment>
-                                }
-                              >
-                                <Uncontrolled(Dropdown)
-                                  bsStyle="default"
-                                  dropup={false}
-                                  id="language-change-button-dropdown"
-                                  pullRight={true}
-                                >
-                                  <Dropdown
-                                    bsClass="dropdown"
-                                    bsStyle="default"
-                                    componentClass={[Function]}
-                                    dropup={false}
-                                    id="language-change-button-dropdown"
-                                    onToggle={[Function]}
-                                    pullRight={true}
-                                  >
-                                    <ButtonGroup
-                                      block={false}
-                                      bsClass="btn-group"
-                                      bsStyle="default"
-                                      className="dropdown"
-                                      justified={false}
-                                      vertical={false}
-                                    >
-                                      <div
-                                        className="dropdown btn-group btn-group-default"
-                                      >
-                                        <DropdownToggle
-                                          backgroundColor="rgba(255, 255, 255, 0.15) !important"
-                                          borderless={false}
-                                          bsClass="dropdown-toggle"
-                                          bsRole="toggle"
-                                          bsStyle="default"
-                                          className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 cDWLDj"
-                                          id="language-change-button-dropdown"
-                                          key=".0"
-                                          noCaret={true}
-                                          onClick={[Function]}
-                                          onKeyDown={[Function]}
-                                          open={false}
-                                          useAnchor={false}
-                                        >
-                                          <Button
-                                            active={false}
-                                            aria-expanded={false}
-                                            aria-haspopup={true}
-                                            backgroundColor="rgba(255, 255, 255, 0.15) !important"
-                                            block={false}
-                                            borderless={false}
-                                            bsClass="btn"
-                                            bsStyle="default"
-                                            className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 cDWLDj dropdown-toggle"
-                                            disabled={false}
-                                            id="language-change-button-dropdown"
-                                            onClick={[Function]}
-                                            onKeyDown={[Function]}
-                                            role="button"
-                                          >
-                                            <button
-                                              aria-expanded={false}
-                                              aria-haspopup={true}
-                                              backgroundColor="rgba(255, 255, 255, 0.15) !important"
-                                              borderless={false}
-                                              className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 cDWLDj dropdown-toggle btn btn-default"
-                                              disabled={false}
-                                              id="language-change-button-dropdown"
-                                              onClick={[Function]}
-                                              onKeyDown={[Function]}
-                                              role="button"
-                                              type="button"
-                                            >
-                                              <SiteLanguageChangeButton__LanguageContainer>
-                                                <StyledComponent
-                                                  forwardedComponent={
-                                                    Object {
-                                                      "$$typeof": Symbol(react.forward_ref),
-                                                      "attrs": Array [],
-                                                      "componentStyle": ComponentStyle {
-                                                        "componentId": "SiteLanguageChangeButton__LanguageContainer-auo8vl-1",
-                                                        "isStatic": false,
-                                                        "lastClassName": "fYdFMj",
-                                                        "rules": Array [
-                                                          "display:flex;",
-                                                        ],
-                                                      },
-                                                      "displayName": "SiteLanguageChangeButton__LanguageContainer",
-                                                      "foldedComponentIds": Array [],
-                                                      "render": [Function],
-                                                      "styledComponentId": "SiteLanguageChangeButton__LanguageContainer-auo8vl-1",
-                                                      "target": "div",
-                                                      "toString": [Function],
-                                                      "warnTooManyClasses": [Function],
-                                                      "withComponent": [Function],
-                                                    }
-                                                  }
-                                                  forwardedRef={null}
-                                                >
-                                                  <div
-                                                    className="SiteLanguageChangeButton__LanguageContainer-auo8vl-1 fYdFMj"
-                                                  >
-                                                    <SiteLanguageChangeButton__SiteEarthIcon
-                                                      color="#FFF"
-                                                      small={false}
-                                                    >
-                                                      <StyledComponent
-                                                        color="#FFF"
-                                                        forwardedComponent={
-                                                          Object {
-                                                            "$$typeof": Symbol(react.forward_ref),
-                                                            "__docgenInfo": Object {
-                                                              "description": "",
-                                                              "displayName": "EarthIcon",
-                                                              "methods": Array [],
-                                                              "props": Object {
-                                                                "className": Object {
-                                                                  "description": "",
-                                                                  "flowType": Object {
-                                                                    "name": "string",
-                                                                  },
-                                                                  "required": false,
-                                                                },
-                                                                "color": Object {
-                                                                  "defaultValue": Object {
-                                                                    "computed": false,
-                                                                    "value": "'#000'",
-                                                                  },
-                                                                  "description": "",
-                                                                  "flowType": Object {
-                                                                    "name": "string",
-                                                                  },
-                                                                  "required": false,
-                                                                },
-                                                                "size": Object {
-                                                                  "defaultValue": Object {
-                                                                    "computed": false,
-                                                                    "value": "16",
-                                                                  },
-                                                                  "description": "",
-                                                                  "flowType": Object {
-                                                                    "name": "number",
-                                                                  },
-                                                                  "required": false,
-                                                                },
-                                                              },
-                                                            },
-                                                            "attrs": Array [],
-                                                            "componentStyle": ComponentStyle {
-                                                              "componentId": "SiteLanguageChangeButton__SiteEarthIcon-auo8vl-4",
-                                                              "isStatic": false,
-                                                              "lastClassName": "kVJQhr",
-                                                              "rules": Array [
-                                                                "margin-top:3px;margin-right:",
-                                                                [Function],
-                                                                ";",
-                                                              ],
-                                                            },
-                                                            "displayName": "SiteLanguageChangeButton__SiteEarthIcon",
-                                                            "foldedComponentIds": Array [],
-                                                            "render": [Function],
-                                                            "styledComponentId": "SiteLanguageChangeButton__SiteEarthIcon-auo8vl-4",
-                                                            "target": [Function],
-                                                            "toString": [Function],
-                                                            "warnTooManyClasses": [Function],
-                                                            "withComponent": [Function],
-                                                          }
-                                                        }
-                                                        forwardedRef={null}
-                                                        small={false}
-                                                      >
-                                                        <EarthIcon
-                                                          className="SiteLanguageChangeButton__SiteEarthIcon-auo8vl-4 kVJQhr"
-                                                          color="#FFF"
-                                                          size={16}
-                                                          small={false}
-                                                        >
-                                                          <svg
-                                                            className="SiteLanguageChangeButton__SiteEarthIcon-auo8vl-4 kVJQhr"
-                                                            height="16px"
-                                                            role="img"
-                                                            viewBox="0 0 24 24"
-                                                            width="16px"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                          >
-                                                            <path
-                                                              d="M23.5,11.941A11.538,11.538,0,0,1,11.968,23.485,11.662,11.662,0,0,1,.5,11.734,11.246,11.246,0,0,1,11.505.5c.166-.007.332-.01.5-.01A11.433,11.433,0,0,1,23.5,11.941Z"
-                                                              fill="none"
-                                                              stroke="#FFF"
-                                                              strokeLinecap="round"
-                                                              strokeLinejoin="round"
-                                                            />
-                                                            <path
-                                                              d="M11.505.5c-6,6.5-6,14.98,0,22.98"
-                                                              fill="none"
-                                                              stroke="#FFF"
-                                                              strokeLinecap="round"
-                                                              strokeLinejoin="round"
-                                                            />
-                                                            <path
-                                                              d="M12.505.5c6,6.5,6,14.977,0,22.977"
-                                                              fill="none"
-                                                              stroke="#FFF"
-                                                              strokeLinecap="round"
-                                                              strokeLinejoin="round"
-                                                            />
-                                                            <line
-                                                              fill="none"
-                                                              stroke="#FFF"
-                                                              strokeLinecap="round"
-                                                              strokeLinejoin="round"
-                                                              x1="2.386"
-                                                              x2="21.52"
-                                                              y1="5.484"
-                                                              y2="5.484"
-                                                            />
-                                                            <line
-                                                              fill="none"
-                                                              stroke="#FFF"
-                                                              strokeLinecap="round"
-                                                              strokeLinejoin="round"
-                                                              x1="0.503"
-                                                              x2="23.5"
-                                                              y1="11.484"
-                                                              y2="11.484"
-                                                            />
-                                                            <line
-                                                              fill="none"
-                                                              stroke="#FFF"
-                                                              strokeLinecap="round"
-                                                              strokeLinejoin="round"
-                                                              x1="1.985"
-                                                              x2="22.085"
-                                                              y1="17.484"
-                                                              y2="17.484"
-                                                            />
-                                                          </svg>
-                                                        </EarthIcon>
-                                                      </StyledComponent>
-                                                    </SiteLanguageChangeButton__SiteEarthIcon>
-                                                    <SiteLanguageChangeButton__Language
-                                                      color="#FFF"
-                                                    >
-                                                      <StyledComponent
-                                                        color="#FFF"
-                                                        forwardedComponent={
-                                                          Object {
-                                                            "$$typeof": Symbol(react.forward_ref),
-                                                            "attrs": Array [],
-                                                            "componentStyle": ComponentStyle {
-                                                              "componentId": "SiteLanguageChangeButton__Language-auo8vl-0",
-                                                              "isStatic": false,
-                                                              "lastClassName": "lmVSkx",
-                                                              "rules": Array [
-                                                                "font-family:'OpenSans',helvetica,arial,sans-serif;font-size:16px;color:",
-                                                                [Function],
-                                                                ";",
-                                                              ],
-                                                            },
-                                                            "displayName": "SiteLanguageChangeButton__Language",
-                                                            "foldedComponentIds": Array [],
-                                                            "render": [Function],
-                                                            "styledComponentId": "SiteLanguageChangeButton__Language-auo8vl-0",
-                                                            "target": "div",
-                                                            "toString": [Function],
-                                                            "warnTooManyClasses": [Function],
-                                                            "withComponent": [Function],
-                                                          }
-                                                        }
-                                                        forwardedRef={null}
-                                                      >
-                                                        <div
-                                                          className="SiteLanguageChangeButton__Language-auo8vl-0 lmVSkx"
-                                                          color="#FFF"
-                                                        >
-                                                          <span>
-                                                            english
-                                                          </span>
-                                                        </div>
-                                                      </StyledComponent>
-                                                    </SiteLanguageChangeButton__Language>
-                                                  </div>
-                                                </StyledComponent>
-                                              </SiteLanguageChangeButton__LanguageContainer>
-                                              <SiteLanguageChangeButton__Caret
-                                                className="cap-arrow-39"
-                                                color="#FFF"
-                                                id="language-change-caret"
-                                              >
-                                                <StyledComponent
-                                                  className="cap-arrow-39"
-                                                  color="#FFF"
-                                                  forwardedComponent={
-                                                    Object {
-                                                      "$$typeof": Symbol(react.forward_ref),
-                                                      "attrs": Array [],
-                                                      "componentStyle": ComponentStyle {
-                                                        "componentId": "SiteLanguageChangeButton__Caret-auo8vl-5",
-                                                        "isStatic": false,
-                                                        "lastClassName": "ePkBMU",
-                                                        "rules": Array [
-                                                          "color:",
-                                                          [Function],
-                                                          ";height:15px;width:15px;margin-top:5px;margin-left:10px;",
-                                                        ],
-                                                      },
-                                                      "displayName": "SiteLanguageChangeButton__Caret",
-                                                      "foldedComponentIds": Array [],
-                                                      "render": [Function],
-                                                      "styledComponentId": "SiteLanguageChangeButton__Caret-auo8vl-5",
-                                                      "target": "i",
-                                                      "toString": [Function],
-                                                      "warnTooManyClasses": [Function],
-                                                      "withComponent": [Function],
-                                                    }
-                                                  }
-                                                  forwardedRef={null}
-                                                  id="language-change-caret"
-                                                >
-                                                  <i
-                                                    className="SiteLanguageChangeButton__Caret-auo8vl-5 ePkBMU cap-arrow-39"
-                                                    color="#FFF"
-                                                    id="language-change-caret"
-                                                  />
-                                                </StyledComponent>
-                                              </SiteLanguageChangeButton__Caret>
-                                            </button>
-                                          </Button>
-                                        </DropdownToggle>
-                                        <DropdownMenu
-                                          bsClass="dropdown-menu"
-                                          bsRole="menu"
-                                          key=".1"
-                                          labelledBy="language-change-button-dropdown"
-                                          onClose={[Function]}
-                                          onSelect={[Function]}
-                                          pullRight={true}
-                                        >
-                                          <RootCloseWrapper
-                                            disabled={true}
-                                            event="click"
-                                            onRootClose={[Function]}
-                                          >
-                                            <ul
-                                              aria-labelledby="language-change-button-dropdown"
-                                              className="dropdown-menu dropdown-menu-right"
-                                              role="menu"
-                                            >
-                                              <SiteLanguageChangeButton__MenuLanguageItem
-                                                id="language-choice-de-DE"
-                                                key=".$de-DE"
-                                                onClick={[Function]}
-                                                onKeyDown={[Function]}
-                                                onSelect={[Function]}
-                                                small={false}
-                                              >
-                                                <StyledComponent
-                                                  forwardedComponent={
-                                                    Object {
-                                                      "$$typeof": Symbol(react.forward_ref),
-                                                      "attrs": Array [],
-                                                      "componentStyle": ComponentStyle {
-                                                        "componentId": "SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3",
-                                                        "isStatic": false,
-                                                        "lastClassName": "cRkZeF",
-                                                        "rules": Array [
-                                                          "margin-bottom:5px;font-family:'OpenSans',helvetica,arial,sans-serif;font-size:16px;a{color:#000 !important;padding-left:",
-                                                          [Function],
-                                                          ";display:flex !important;}",
-                                                        ],
-                                                      },
-                                                      "displayName": "SiteLanguageChangeButton__MenuLanguageItem",
-                                                      "foldedComponentIds": Array [],
-                                                      "render": [Function],
-                                                      "styledComponentId": "SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3",
-                                                      "target": [Function],
-                                                      "toString": [Function],
-                                                      "warnTooManyClasses": [Function],
-                                                      "withComponent": [Function],
-                                                    }
-                                                  }
-                                                  forwardedRef={null}
-                                                  id="language-choice-de-DE"
-                                                  onClick={[Function]}
-                                                  onKeyDown={[Function]}
-                                                  onSelect={[Function]}
-                                                  small={false}
-                                                >
-                                                  <MenuItem
-                                                    bsClass="dropdown"
-                                                    className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 cRkZeF"
-                                                    disabled={false}
-                                                    divider={false}
-                                                    header={false}
-                                                    id="language-choice-de-DE"
-                                                    onClick={[Function]}
-                                                    onKeyDown={[Function]}
-                                                    onSelect={[Function]}
-                                                    small={false}
-                                                  >
-                                                    <li
-                                                      className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 cRkZeF"
-                                                      role="presentation"
-                                                    >
-                                                      <SafeAnchor
-                                                        componentClass="a"
-                                                        id="language-choice-de-DE"
-                                                        onClick={[Function]}
-                                                        onKeyDown={[Function]}
-                                                        role="menuitem"
-                                                        small={false}
-                                                        tabIndex="-1"
-                                                      >
-                                                        <a
-                                                          href="#"
-                                                          id="language-choice-de-DE"
-                                                          onClick={[Function]}
-                                                          onKeyDown={[Function]}
-                                                          role="menuitem"
-                                                          small={false}
-                                                          tabIndex="-1"
-                                                        >
-                                                          <span>
-                                                            deutsch
-                                                          </span>
-                                                        </a>
-                                                      </SafeAnchor>
-                                                    </li>
-                                                  </MenuItem>
-                                                </StyledComponent>
-                                              </SiteLanguageChangeButton__MenuLanguageItem>
-                                              <SiteLanguageChangeButton__MenuLanguageItem
-                                                id="language-choice-fr-FR"
-                                                key=".$fr-FR"
-                                                onClick={[Function]}
-                                                onKeyDown={[Function]}
-                                                onSelect={[Function]}
-                                                small={false}
-                                              >
-                                                <StyledComponent
-                                                  forwardedComponent={
-                                                    Object {
-                                                      "$$typeof": Symbol(react.forward_ref),
-                                                      "attrs": Array [],
-                                                      "componentStyle": ComponentStyle {
-                                                        "componentId": "SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3",
-                                                        "isStatic": false,
-                                                        "lastClassName": "cRkZeF",
-                                                        "rules": Array [
-                                                          "margin-bottom:5px;font-family:'OpenSans',helvetica,arial,sans-serif;font-size:16px;a{color:#000 !important;padding-left:",
-                                                          [Function],
-                                                          ";display:flex !important;}",
-                                                        ],
-                                                      },
-                                                      "displayName": "SiteLanguageChangeButton__MenuLanguageItem",
-                                                      "foldedComponentIds": Array [],
-                                                      "render": [Function],
-                                                      "styledComponentId": "SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3",
-                                                      "target": [Function],
-                                                      "toString": [Function],
-                                                      "warnTooManyClasses": [Function],
-                                                      "withComponent": [Function],
-                                                    }
-                                                  }
-                                                  forwardedRef={null}
-                                                  id="language-choice-fr-FR"
-                                                  onClick={[Function]}
-                                                  onKeyDown={[Function]}
-                                                  onSelect={[Function]}
-                                                  small={false}
-                                                >
-                                                  <MenuItem
-                                                    bsClass="dropdown"
-                                                    className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 cRkZeF"
-                                                    disabled={false}
-                                                    divider={false}
-                                                    header={false}
-                                                    id="language-choice-fr-FR"
-                                                    onClick={[Function]}
-                                                    onKeyDown={[Function]}
-                                                    onSelect={[Function]}
-                                                    small={false}
-                                                  >
-                                                    <li
-                                                      className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 cRkZeF"
-                                                      role="presentation"
-                                                    >
-                                                      <SafeAnchor
-                                                        componentClass="a"
-                                                        id="language-choice-fr-FR"
-                                                        onClick={[Function]}
-                                                        onKeyDown={[Function]}
-                                                        role="menuitem"
-                                                        small={false}
-                                                        tabIndex="-1"
-                                                      >
-                                                        <a
-                                                          href="#"
-                                                          id="language-choice-fr-FR"
-                                                          onClick={[Function]}
-                                                          onKeyDown={[Function]}
-                                                          role="menuitem"
-                                                          small={false}
-                                                          tabIndex="-1"
-                                                        >
-                                                          <span>
-                                                            french
-                                                          </span>
-                                                        </a>
-                                                      </SafeAnchor>
-                                                    </li>
-                                                  </MenuItem>
-                                                </StyledComponent>
-                                              </SiteLanguageChangeButton__MenuLanguageItem>
-                                              <SiteLanguageChangeButton__MenuLanguageItem
-                                                id="language-choice-sp-SP"
-                                                key=".$sp-SP"
-                                                onClick={[Function]}
-                                                onKeyDown={[Function]}
-                                                onSelect={[Function]}
-                                                small={false}
-                                              >
-                                                <StyledComponent
-                                                  forwardedComponent={
-                                                    Object {
-                                                      "$$typeof": Symbol(react.forward_ref),
-                                                      "attrs": Array [],
-                                                      "componentStyle": ComponentStyle {
-                                                        "componentId": "SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3",
-                                                        "isStatic": false,
-                                                        "lastClassName": "cRkZeF",
-                                                        "rules": Array [
-                                                          "margin-bottom:5px;font-family:'OpenSans',helvetica,arial,sans-serif;font-size:16px;a{color:#000 !important;padding-left:",
-                                                          [Function],
-                                                          ";display:flex !important;}",
-                                                        ],
-                                                      },
-                                                      "displayName": "SiteLanguageChangeButton__MenuLanguageItem",
-                                                      "foldedComponentIds": Array [],
-                                                      "render": [Function],
-                                                      "styledComponentId": "SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3",
-                                                      "target": [Function],
-                                                      "toString": [Function],
-                                                      "warnTooManyClasses": [Function],
-                                                      "withComponent": [Function],
-                                                    }
-                                                  }
-                                                  forwardedRef={null}
-                                                  id="language-choice-sp-SP"
-                                                  onClick={[Function]}
-                                                  onKeyDown={[Function]}
-                                                  onSelect={[Function]}
-                                                  small={false}
-                                                >
-                                                  <MenuItem
-                                                    bsClass="dropdown"
-                                                    className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 cRkZeF"
-                                                    disabled={false}
-                                                    divider={false}
-                                                    header={false}
-                                                    id="language-choice-sp-SP"
-                                                    onClick={[Function]}
-                                                    onKeyDown={[Function]}
-                                                    onSelect={[Function]}
-                                                    small={false}
-                                                  >
-                                                    <li
-                                                      className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 cRkZeF"
-                                                      role="presentation"
-                                                    >
-                                                      <SafeAnchor
-                                                        componentClass="a"
-                                                        id="language-choice-sp-SP"
-                                                        onClick={[Function]}
-                                                        onKeyDown={[Function]}
-                                                        role="menuitem"
-                                                        small={false}
-                                                        tabIndex="-1"
-                                                      >
-                                                        <a
-                                                          href="#"
-                                                          id="language-choice-sp-SP"
-                                                          onClick={[Function]}
-                                                          onKeyDown={[Function]}
-                                                          role="menuitem"
-                                                          small={false}
-                                                          tabIndex="-1"
-                                                        >
-                                                          <span>
-                                                            spanish
-                                                          </span>
-                                                        </a>
-                                                      </SafeAnchor>
-                                                    </li>
-                                                  </MenuItem>
-                                                </StyledComponent>
-                                              </SiteLanguageChangeButton__MenuLanguageItem>
-                                            </ul>
-                                          </RootCloseWrapper>
-                                        </DropdownMenu>
-                                      </div>
-                                    </ButtonGroup>
-                                  </Dropdown>
-                                </Uncontrolled(Dropdown)>
-                              </DropdownButton>
-                            </StyledComponent>
-                          </SiteLanguageChangeButton__DropdownLanguageButton>
-                        </SiteLanguageChangeButton>
-                        <ChangeLanguageOnWebsiteHeader__ContinueButton
-                          bsStyle="primary"
-                          id="language-header-continue-button"
-                          onClick={[Function]}
-                        >
-                          <StyledComponent
-                            bsStyle="primary"
-                            forwardedComponent={
-                              Object {
-                                "$$typeof": Symbol(react.forward_ref),
-                                "SIZES": Array [
-                                  "large",
-                                  "small",
-                                  "xsmall",
-                                ],
-                                "STYLES": Array [
-                                  "success",
-                                  "warning",
-                                  "danger",
-                                  "info",
-                                  "default",
-                                  "primary",
-                                  "link",
-                                ],
-                                "attrs": Array [],
-                                "componentStyle": ComponentStyle {
-                                  "componentId": "ChangeLanguageOnWebsiteHeader__ContinueButton-sc-3ukalg-4",
-                                  "isStatic": false,
-                                  "lastClassName": "dQaRKe",
-                                  "rules": Array [
-                                    "font-size:16px;margin-left:20px;@media (max-width:991px){margin-left:10px;}",
-                                  ],
-                                },
-                                "displayName": "ChangeLanguageOnWebsiteHeader__ContinueButton",
-                                "foldedComponentIds": Array [],
-                                "render": [Function],
-                                "styledComponentId": "ChangeLanguageOnWebsiteHeader__ContinueButton-sc-3ukalg-4",
-                                "target": [Function],
-                                "toString": [Function],
-                                "warnTooManyClasses": [Function],
-                                "withComponent": [Function],
-                              }
-                            }
-                            forwardedRef={null}
-                            id="language-header-continue-button"
-                            onClick={[Function]}
-                          >
-                            <Button
-                              active={false}
-                              block={false}
-                              bsClass="btn"
-                              bsStyle="primary"
-                              className="ChangeLanguageOnWebsiteHeader__ContinueButton-sc-3ukalg-4 dQaRKe"
-                              disabled={false}
-                              id="language-header-continue-button"
-                              onClick={[Function]}
-                            >
-                              <button
-                                className="ChangeLanguageOnWebsiteHeader__ContinueButton-sc-3ukalg-4 dQaRKe btn btn-primary"
-                                disabled={false}
-                                id="language-header-continue-button"
-                                onClick={[Function]}
-                                type="button"
+                      <DropdownButton
+                        backgroundColor="rgba(255, 255, 255, 0.15) !important"
+                        borderless={false}
+                        bsStyle="default"
+                        className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 fGhceN"
+                        dropup={false}
+                        id="language-change-button-dropdown"
+                        noCaret={true}
+                        pullRight={true}
+                        title={
+                          <React.Fragment>
+                            <ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
+                              <ForwardRef(SiteLanguageChangeButton__SiteEarthIcon)
+                                color="#FFF"
+                                small={false}
+                              />
+                              <ForwardRef(SiteLanguageChangeButton__Language)
+                                color="#FFF"
                               >
                                 <span>
-                                  Continue
+                                  english
                                 </span>
-                              </button>
-                            </Button>
-                          </StyledComponent>
-                        </ChangeLanguageOnWebsiteHeader__ContinueButton>
-                      </div>
-                    </StyledComponent>
-                  </ChangeLanguageOnWebsiteHeader__ChangeLanguageForm>
+                              </ForwardRef(SiteLanguageChangeButton__Language)>
+                            </ForwardRef(SiteLanguageChangeButton__LanguageContainer)>
+                            <ForwardRef(SiteLanguageChangeButton__Caret)
+                              className="cap-arrow-39"
+                              color="#FFF"
+                              id="language-change-caret"
+                            />
+                          </React.Fragment>
+                        }
+                      >
+                        <Uncontrolled(Dropdown)
+                          bsStyle="default"
+                          dropup={false}
+                          id="language-change-button-dropdown"
+                          pullRight={true}
+                        >
+                          <Dropdown
+                            bsClass="dropdown"
+                            bsStyle="default"
+                            componentClass={[Function]}
+                            dropup={false}
+                            id="language-change-button-dropdown"
+                            onToggle={[Function]}
+                            pullRight={true}
+                          >
+                            <ButtonGroup
+                              block={false}
+                              bsClass="btn-group"
+                              bsStyle="default"
+                              className="dropdown"
+                              justified={false}
+                              vertical={false}
+                            >
+                              <div
+                                className="dropdown btn-group btn-group-default"
+                              >
+                                <DropdownToggle
+                                  backgroundColor="rgba(255, 255, 255, 0.15) !important"
+                                  borderless={false}
+                                  bsClass="dropdown-toggle"
+                                  bsRole="toggle"
+                                  bsStyle="default"
+                                  className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 fGhceN"
+                                  id="language-change-button-dropdown"
+                                  key=".0"
+                                  noCaret={true}
+                                  onClick={[Function]}
+                                  onKeyDown={[Function]}
+                                  open={false}
+                                  useAnchor={false}
+                                >
+                                  <Button
+                                    active={false}
+                                    aria-expanded={false}
+                                    aria-haspopup={true}
+                                    backgroundColor="rgba(255, 255, 255, 0.15) !important"
+                                    block={false}
+                                    borderless={false}
+                                    bsClass="btn"
+                                    bsStyle="default"
+                                    className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 fGhceN dropdown-toggle"
+                                    disabled={false}
+                                    id="language-change-button-dropdown"
+                                    onClick={[Function]}
+                                    onKeyDown={[Function]}
+                                    role="button"
+                                  >
+                                    <button
+                                      aria-expanded={false}
+                                      aria-haspopup={true}
+                                      backgroundColor="rgba(255, 255, 255, 0.15) !important"
+                                      borderless={false}
+                                      className="SiteLanguageChangeButton__DropdownLanguageButton-auo8vl-2 fGhceN dropdown-toggle btn btn-default"
+                                      disabled={false}
+                                      id="language-change-button-dropdown"
+                                      onClick={[Function]}
+                                      onKeyDown={[Function]}
+                                      role="button"
+                                      type="button"
+                                    >
+                                      <SiteLanguageChangeButton__LanguageContainer>
+                                        <div
+                                          className="SiteLanguageChangeButton__LanguageContainer-auo8vl-1 bWShrw"
+                                        >
+                                          <SiteLanguageChangeButton__SiteEarthIcon
+                                            color="#FFF"
+                                            small={false}
+                                          >
+                                            <EarthIcon
+                                              className="SiteLanguageChangeButton__SiteEarthIcon-auo8vl-4 hYqVBN"
+                                              color="#FFF"
+                                              size={16}
+                                              small={false}
+                                            >
+                                              <svg
+                                                className="SiteLanguageChangeButton__SiteEarthIcon-auo8vl-4 hYqVBN"
+                                                height="16px"
+                                                role="img"
+                                                viewBox="0 0 24 24"
+                                                width="16px"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                              >
+                                                <path
+                                                  d="M23.5,11.941A11.538,11.538,0,0,1,11.968,23.485,11.662,11.662,0,0,1,.5,11.734,11.246,11.246,0,0,1,11.505.5c.166-.007.332-.01.5-.01A11.433,11.433,0,0,1,23.5,11.941Z"
+                                                  fill="none"
+                                                  stroke="#FFF"
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                />
+                                                <path
+                                                  d="M11.505.5c-6,6.5-6,14.98,0,22.98"
+                                                  fill="none"
+                                                  stroke="#FFF"
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                />
+                                                <path
+                                                  d="M12.505.5c6,6.5,6,14.977,0,22.977"
+                                                  fill="none"
+                                                  stroke="#FFF"
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                />
+                                                <line
+                                                  fill="none"
+                                                  stroke="#FFF"
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                  x1="2.386"
+                                                  x2="21.52"
+                                                  y1="5.484"
+                                                  y2="5.484"
+                                                />
+                                                <line
+                                                  fill="none"
+                                                  stroke="#FFF"
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                  x1="0.503"
+                                                  x2="23.5"
+                                                  y1="11.484"
+                                                  y2="11.484"
+                                                />
+                                                <line
+                                                  fill="none"
+                                                  stroke="#FFF"
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                  x1="1.985"
+                                                  x2="22.085"
+                                                  y1="17.484"
+                                                  y2="17.484"
+                                                />
+                                              </svg>
+                                            </EarthIcon>
+                                          </SiteLanguageChangeButton__SiteEarthIcon>
+                                          <SiteLanguageChangeButton__Language
+                                            color="#FFF"
+                                          >
+                                            <div
+                                              className="SiteLanguageChangeButton__Language-auo8vl-0 iNDbms"
+                                              color="#FFF"
+                                            >
+                                              <span>
+                                                english
+                                              </span>
+                                            </div>
+                                          </SiteLanguageChangeButton__Language>
+                                        </div>
+                                      </SiteLanguageChangeButton__LanguageContainer>
+                                      <SiteLanguageChangeButton__Caret
+                                        className="cap-arrow-39"
+                                        color="#FFF"
+                                        id="language-change-caret"
+                                      >
+                                        <i
+                                          className="SiteLanguageChangeButton__Caret-auo8vl-5 cmQJL cap-arrow-39"
+                                          color="#FFF"
+                                          id="language-change-caret"
+                                        />
+                                      </SiteLanguageChangeButton__Caret>
+                                    </button>
+                                  </Button>
+                                </DropdownToggle>
+                                <DropdownMenu
+                                  bsClass="dropdown-menu"
+                                  bsRole="menu"
+                                  key=".1"
+                                  labelledBy="language-change-button-dropdown"
+                                  onClose={[Function]}
+                                  onSelect={[Function]}
+                                  pullRight={true}
+                                >
+                                  <RootCloseWrapper
+                                    disabled={true}
+                                    event="click"
+                                    onRootClose={[Function]}
+                                  >
+                                    <ul
+                                      aria-labelledby="language-change-button-dropdown"
+                                      className="dropdown-menu dropdown-menu-right"
+                                      role="menu"
+                                    >
+                                      <SiteLanguageChangeButton__MenuLanguageItem
+                                        id="language-choice-de-DE"
+                                        key=".$de-DE"
+                                        onClick={[Function]}
+                                        onKeyDown={[Function]}
+                                        onSelect={[Function]}
+                                        small={false}
+                                      >
+                                        <MenuItem
+                                          bsClass="dropdown"
+                                          className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                          disabled={false}
+                                          divider={false}
+                                          header={false}
+                                          id="language-choice-de-DE"
+                                          onClick={[Function]}
+                                          onKeyDown={[Function]}
+                                          onSelect={[Function]}
+                                          small={false}
+                                        >
+                                          <li
+                                            className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                            role="presentation"
+                                          >
+                                            <SafeAnchor
+                                              componentClass="a"
+                                              id="language-choice-de-DE"
+                                              onClick={[Function]}
+                                              onKeyDown={[Function]}
+                                              role="menuitem"
+                                              small={false}
+                                              tabIndex="-1"
+                                            >
+                                              <a
+                                                href="#"
+                                                id="language-choice-de-DE"
+                                                onClick={[Function]}
+                                                onKeyDown={[Function]}
+                                                role="menuitem"
+                                                small={false}
+                                                tabIndex="-1"
+                                              >
+                                                <span>
+                                                  deutsch
+                                                </span>
+                                              </a>
+                                            </SafeAnchor>
+                                          </li>
+                                        </MenuItem>
+                                      </SiteLanguageChangeButton__MenuLanguageItem>
+                                      <SiteLanguageChangeButton__MenuLanguageItem
+                                        id="language-choice-fr-FR"
+                                        key=".$fr-FR"
+                                        onClick={[Function]}
+                                        onKeyDown={[Function]}
+                                        onSelect={[Function]}
+                                        small={false}
+                                      >
+                                        <MenuItem
+                                          bsClass="dropdown"
+                                          className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                          disabled={false}
+                                          divider={false}
+                                          header={false}
+                                          id="language-choice-fr-FR"
+                                          onClick={[Function]}
+                                          onKeyDown={[Function]}
+                                          onSelect={[Function]}
+                                          small={false}
+                                        >
+                                          <li
+                                            className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                            role="presentation"
+                                          >
+                                            <SafeAnchor
+                                              componentClass="a"
+                                              id="language-choice-fr-FR"
+                                              onClick={[Function]}
+                                              onKeyDown={[Function]}
+                                              role="menuitem"
+                                              small={false}
+                                              tabIndex="-1"
+                                            >
+                                              <a
+                                                href="#"
+                                                id="language-choice-fr-FR"
+                                                onClick={[Function]}
+                                                onKeyDown={[Function]}
+                                                role="menuitem"
+                                                small={false}
+                                                tabIndex="-1"
+                                              >
+                                                <span>
+                                                  french
+                                                </span>
+                                              </a>
+                                            </SafeAnchor>
+                                          </li>
+                                        </MenuItem>
+                                      </SiteLanguageChangeButton__MenuLanguageItem>
+                                      <SiteLanguageChangeButton__MenuLanguageItem
+                                        id="language-choice-sp-SP"
+                                        key=".$sp-SP"
+                                        onClick={[Function]}
+                                        onKeyDown={[Function]}
+                                        onSelect={[Function]}
+                                        small={false}
+                                      >
+                                        <MenuItem
+                                          bsClass="dropdown"
+                                          className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                          disabled={false}
+                                          divider={false}
+                                          header={false}
+                                          id="language-choice-sp-SP"
+                                          onClick={[Function]}
+                                          onKeyDown={[Function]}
+                                          onSelect={[Function]}
+                                          small={false}
+                                        >
+                                          <li
+                                            className="SiteLanguageChangeButton__MenuLanguageItem-auo8vl-3 gCeIcK"
+                                            role="presentation"
+                                          >
+                                            <SafeAnchor
+                                              componentClass="a"
+                                              id="language-choice-sp-SP"
+                                              onClick={[Function]}
+                                              onKeyDown={[Function]}
+                                              role="menuitem"
+                                              small={false}
+                                              tabIndex="-1"
+                                            >
+                                              <a
+                                                href="#"
+                                                id="language-choice-sp-SP"
+                                                onClick={[Function]}
+                                                onKeyDown={[Function]}
+                                                role="menuitem"
+                                                small={false}
+                                                tabIndex="-1"
+                                              >
+                                                <span>
+                                                  spanish
+                                                </span>
+                                              </a>
+                                            </SafeAnchor>
+                                          </li>
+                                        </MenuItem>
+                                      </SiteLanguageChangeButton__MenuLanguageItem>
+                                    </ul>
+                                  </RootCloseWrapper>
+                                </DropdownMenu>
+                              </div>
+                            </ButtonGroup>
+                          </Dropdown>
+                        </Uncontrolled(Dropdown)>
+                      </DropdownButton>
+                    </SiteLanguageChangeButton__DropdownLanguageButton>
+                  </SiteLanguageChangeButton>
+                  <ChangeLanguageOnWebsiteHeader__ContinueButton
+                    bsStyle="primary"
+                    id="language-header-continue-button"
+                    onClick={[Function]}
+                  >
+                    <Button
+                      active={false}
+                      block={false}
+                      bsClass="btn"
+                      bsStyle="primary"
+                      className="ChangeLanguageOnWebsiteHeader__ContinueButton-sc-3ukalg-4 bsWHAR"
+                      disabled={false}
+                      id="language-header-continue-button"
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="ChangeLanguageOnWebsiteHeader__ContinueButton-sc-3ukalg-4 bsWHAR btn btn-primary"
+                        disabled={false}
+                        id="language-header-continue-button"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        <span>
+                          Continue
+                        </span>
+                      </button>
+                    </Button>
+                  </ChangeLanguageOnWebsiteHeader__ContinueButton>
                 </div>
-              </StyledComponent>
-            </ChangeLanguageOnWebsiteHeader__Content>
-          </div>
-          <ChangeLanguageOnWebsiteHeader__Close
-            className="cap-delete-1"
+              </ChangeLanguageOnWebsiteHeader__ChangeLanguageForm>
+            </div>
+          </ChangeLanguageOnWebsiteHeader__Content>
+        </div>
+        <ChangeLanguageOnWebsiteHeader__Close
+          className="cap-delete-1"
+          id="language-header-close"
+          onClick={[Function]}
+        >
+          <i
+            className="ChangeLanguageOnWebsiteHeader__Close-sc-3ukalg-2 hrtVLv cap-delete-1"
             id="language-header-close"
             onClick={[Function]}
-          >
-            <StyledComponent
-              className="cap-delete-1"
-              forwardedComponent={
-                Object {
-                  "$$typeof": Symbol(react.forward_ref),
-                  "attrs": Array [],
-                  "componentStyle": ComponentStyle {
-                    "componentId": "ChangeLanguageOnWebsiteHeader__Close-sc-3ukalg-2",
-                    "isStatic": false,
-                    "lastClassName": "evNyIR",
-                    "rules": Array [
-                      "margin-left:35px;margin-top:2px;cursor:pointer;color:rgba(255,255,255,0.5);@media (max-width:991px){margin-left:-15px;margin-top:-50px;}",
-                    ],
-                  },
-                  "displayName": "ChangeLanguageOnWebsiteHeader__Close",
-                  "foldedComponentIds": Array [],
-                  "render": [Function],
-                  "styledComponentId": "ChangeLanguageOnWebsiteHeader__Close-sc-3ukalg-2",
-                  "target": "i",
-                  "toString": [Function],
-                  "warnTooManyClasses": [Function],
-                  "withComponent": [Function],
-                }
-              }
-              forwardedRef={null}
-              id="language-header-close"
-              onClick={[Function]}
-            >
-              <i
-                className="ChangeLanguageOnWebsiteHeader__Close-sc-3ukalg-2 evNyIR cap-delete-1"
-                id="language-header-close"
-                onClick={[Function]}
-              />
-            </StyledComponent>
-          </ChangeLanguageOnWebsiteHeader__Close>
-        </div>
-      </StyledComponent>
+          />
+        </ChangeLanguageOnWebsiteHeader__Close>
+      </div>
     </ChangeLanguageOnWebsiteHeader__ChangeLanguageProposalContainer>
   </ForwardRef>
 </IntlProvider>

@@ -35,7 +35,7 @@ export const MediaColumn: StyledComponent<{ size: number }, {}, HTMLDivElement> 
   }
 `;
 
-export const MediaColumnImage: StyledComponent<{}, {}, typeof MediaColumn> = styled(MediaColumn)`
+export const MediaColumnImage: StyledComponent<{}, {}, HTMLDivElement> = styled(MediaColumn)`
   text-align: left;
 
   > div:first-child {

@@ -19,10 +19,10 @@ type State = {
   show: boolean,
 };
 
-const StatusButton: StyledComponent<{}, {}, typeof Button> = styled(Button).attrs({
+const StatusButton: StyledComponent<{}, {}, typeof Button> = styled(Button).attrs(props => ({
   bsStyle: 'link',
-  id: props => `event-status-filter-button-${props.screen || ''}`,
-})`
+  id: `event-status-filter-button-${props.screen || ''}`,
+}))`
   text-transform: lowercase;
   font-size: 16px;
   text-decoration: underline;

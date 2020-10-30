@@ -1,13 +1,13 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import 'jest-styled-components';
 import { Container, Loader } from './Loader';
 
 describe('<Loader />', () => {
   it('renders LoaderContainer', () => {
-    const wrapper = shallow(<Container />);
+    const wrapper = mount(<Container />);
     expect(wrapper).toMatchSnapshot();
   });
 

@@ -1,0 +1,13 @@
+{
+    "exclude": ["node_modules"],
+    "include": ["frontend/js"],
+    "compilerOptions": {
+        "baseUrl": "./",
+        "jsx": "react",
+        "paths": {
+            "~/*": ["frontend/js/*"],
+            "~ui/*": ["frontend/js/components/Ui/*"],
+            "~relay/*": ["frontend/js/__generated__/~relay/*"]
+        }
+    }
+}

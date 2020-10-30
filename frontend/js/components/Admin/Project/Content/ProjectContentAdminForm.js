@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import { Field } from 'redux-form';
 import styled, { type StyledComponent } from 'styled-components';
 import { OverlayTrigger } from 'react-bootstrap';
@@ -49,7 +49,7 @@ type Props = {|
   intl: IntlShape,
 |};
 
-export const InformationIcon: StyledComponent<{}, {}, typeof Icon> = styled(Icon).attrs({
+export const InformationIcon: StyledComponent<{}, {}, ComponentType<any>> = styled(Icon).attrs({
   name: ICON_NAME.information,
   size: '12px',
   style: undefined, // Override default styles that `Icon` component apply
