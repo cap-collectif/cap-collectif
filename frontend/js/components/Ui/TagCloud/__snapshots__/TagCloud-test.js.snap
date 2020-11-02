@@ -1,0 +1,385 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TagCloud /> should render correctly 1`] = `
+<TagCloud
+  maxSize={45}
+  minSize={12}
+  tags={
+    Array [
+      Object {
+        "count": 325,
+        "value": "Amélioratioon",
+      },
+      Object {
+        "count": 301,
+        "value": "infrastructures",
+      },
+      Object {
+        "count": 300,
+        "value": "françaises",
+      },
+      Object {
+        "count": 290,
+        "value": "outre-mer",
+      },
+      Object {
+        "count": 70,
+        "value": "mise",
+      },
+      Object {
+        "count": 65,
+        "value": "Faible",
+      },
+      Object {
+        "count": 50,
+        "value": "Niveau",
+      },
+    ]
+  }
+>
+  <TagCloud__Container
+    isHover={false}
+  >
+    <div
+      className="TagCloud__Container-sc-1pikt4p-0 kUEcLw"
+    >
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        key="info-occurences-Amélioratioon"
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="info-occurences-tooltip-Amélioratioon"
+            placement="right"
+          >
+            appearances-count
+          </Tooltip>
+        }
+        placement="top"
+        style={
+          Object {
+            "marginBottom": -12,
+          }
+        }
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <span
+          key="Amélioratioon"
+          onBlur={[Function]}
+          onClick={null}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "color": "#1A88FF",
+              "display": "inline-block",
+              "fontSize": "45px",
+              "margin": "5px",
+              "marginBottom": -12,
+              "verticalAlign": "middle",
+            }
+          }
+        >
+          Amélioratioon
+        </span>
+      </OverlayTrigger>
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        key="info-occurences-infrastructures"
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="info-occurences-tooltip-infrastructures"
+            placement="right"
+          >
+            appearances-count
+          </Tooltip>
+        }
+        placement="top"
+        style={
+          Object {
+            "marginBottom": -12,
+          }
+        }
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <span
+          key="infrastructures"
+          onBlur={[Function]}
+          onClick={null}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "color": "#1A88FF",
+              "display": "inline-block",
+              "fontSize": "42px",
+              "margin": "5px",
+              "marginBottom": -12,
+              "verticalAlign": "middle",
+            }
+          }
+        >
+          infrastructures
+        </span>
+      </OverlayTrigger>
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        key="info-occurences-françaises"
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="info-occurences-tooltip-françaises"
+            placement="right"
+          >
+            appearances-count
+          </Tooltip>
+        }
+        placement="top"
+        style={
+          Object {
+            "marginBottom": -12,
+          }
+        }
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <span
+          key="françaises"
+          onBlur={[Function]}
+          onClick={null}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "color": "#1A88FF",
+              "display": "inline-block",
+              "fontSize": "42px",
+              "margin": "5px",
+              "marginBottom": -12,
+              "verticalAlign": "middle",
+            }
+          }
+        >
+          françaises
+        </span>
+      </OverlayTrigger>
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        key="info-occurences-outre-mer"
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="info-occurences-tooltip-outre-mer"
+            placement="right"
+          >
+            appearances-count
+          </Tooltip>
+        }
+        placement="top"
+        style={
+          Object {
+            "marginBottom": -12,
+          }
+        }
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <span
+          key="outre-mer"
+          onBlur={[Function]}
+          onClick={null}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "color": "#1A88FF",
+              "display": "inline-block",
+              "fontSize": "41px",
+              "margin": "5px",
+              "marginBottom": -12,
+              "verticalAlign": "middle",
+            }
+          }
+        >
+          outre-mer
+        </span>
+      </OverlayTrigger>
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        key="info-occurences-mise"
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="info-occurences-tooltip-mise"
+            placement="right"
+          >
+            appearances-count
+          </Tooltip>
+        }
+        placement="top"
+        style={
+          Object {
+            "marginBottom": -12,
+          }
+        }
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <span
+          key="mise"
+          onBlur={[Function]}
+          onClick={null}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "color": "#003670",
+              "display": "inline-block",
+              "fontSize": "14px",
+              "margin": "5px",
+              "marginBottom": -12,
+              "verticalAlign": "middle",
+            }
+          }
+        >
+          mise
+        </span>
+      </OverlayTrigger>
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        key="info-occurences-Faible"
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="info-occurences-tooltip-Faible"
+            placement="right"
+          >
+            appearances-count
+          </Tooltip>
+        }
+        placement="top"
+        style={
+          Object {
+            "marginBottom": -12,
+          }
+        }
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <span
+          key="Faible"
+          onBlur={[Function]}
+          onClick={null}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "color": "#003670",
+              "display": "inline-block",
+              "fontSize": "14px",
+              "margin": "5px",
+              "marginBottom": -12,
+              "verticalAlign": "middle",
+            }
+          }
+        >
+          Faible
+        </span>
+      </OverlayTrigger>
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        key="info-occurences-Niveau"
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="info-occurences-tooltip-Niveau"
+            placement="right"
+          >
+            appearances-count
+          </Tooltip>
+        }
+        placement="top"
+        style={
+          Object {
+            "marginBottom": -12,
+          }
+        }
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <span
+          key="Niveau"
+          onBlur={[Function]}
+          onClick={null}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          style={
+            Object {
+              "color": "#003670",
+              "display": "inline-block",
+              "fontSize": "12px",
+              "margin": "5px",
+              "marginBottom": -12,
+              "verticalAlign": "middle",
+            }
+          }
+        >
+          Niveau
+        </span>
+      </OverlayTrigger>
+    </div>
+  </TagCloud__Container>
+</TagCloud>
+`;
