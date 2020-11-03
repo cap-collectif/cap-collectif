@@ -2,7 +2,7 @@
 
 exports[`<EditProfileTabs /> should render all tabs 1`] = `
 <Uncontrolled(TabContainer)
-  defaultActiveKey="profile"
+  defaultActiveKey="account"
   id="account-tabs"
 >
   <Row
@@ -298,7 +298,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
 
 exports[`<EditProfileTabs /> should render all tabs except profile, password and account (OpenID) 1`] = `
 <Uncontrolled(TabContainer)
-  defaultActiveKey="profile"
+  defaultActiveKey="account"
   id="account-tabs"
 >
   <Row
@@ -573,7 +573,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
 
 exports[`<EditProfileTabs /> should render all tabs except profile, password and account (Paris) 1`] = `
 <Uncontrolled(TabContainer)
-  defaultActiveKey="profile"
+  defaultActiveKey="account"
   id="account-tabs"
 >
   <Row

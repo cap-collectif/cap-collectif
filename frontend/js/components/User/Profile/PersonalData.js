@@ -33,6 +33,7 @@ type Props = {|
 |};
 
 const formName = 'profilePersonalData';
+export const occitanieUrl = 'jeparticipe.laregioncitoyenne.fr';
 
 const hasAddressData = (viewer: PersonalData_viewer, value: ?Object) => {
   if (!viewer.address && !viewer.zipCode && !viewer.city) {
@@ -173,6 +174,17 @@ type PersonalDataState = {
   day: ?number,
 };
 
+export const getSsoTradKey = (): string => {
+  if (window.location.hostname === occitanieUrl) {
+    return 'data-sso-occitanie';
+  }
+  return 'data-from-FranceConnect';
+};
+
+export const isSsoFcOrOccitanie = (isFranceConnectAccount: boolean) => {
+  return window.location.hostname === occitanieUrl || isFranceConnectAccount;
+};
+
 export class PersonalData extends Component<Props, PersonalDataState> {
   deleteField = (target: string): void => {
     const { dispatch } = this.props;
@@ -302,7 +314,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               name="gender"
                               component={component}
                               type="select"
-                              disabled={viewer.isFranceConnectAccount}
+                              disabled={isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount)}
                               id="personal-data-form-gender"
                               divClassName="col-sm-4">
                               <option value="MALE">
@@ -316,7 +328,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               </option>
                             </Field>
                           </div>
-                          {!viewer.isFranceConnectAccount && (
+                          {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-4 btn--delete">
                               <OverlayTrigger
                                 trigger="click"
@@ -334,11 +346,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               </OverlayTrigger>
                             </div>
                           )}
-                          {viewer.isFranceConnectAccount && (
+                          {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
                               className="col-sm-6 excerpt mb-5 text-right"
                               style={{ marginLeft: 28 }}>
-                              <FormattedMessage id="data-from-FranceConnect" />
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                         </div>
@@ -354,13 +366,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             <Field
                               name="firstname"
                               component={component}
-                              disabled={viewer.isFranceConnectAccount}
+                              disabled={isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount)}
                               type="text"
                               id="personal-data-form-firstname"
                               divClassName="col-sm-4"
                             />
                           </div>
-                          {!viewer.isFranceConnectAccount && (
+                          {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-4 btn--delete">
                               <OverlayTrigger
                                 trigger="click"
@@ -378,11 +390,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               </OverlayTrigger>
                             </div>
                           )}
-                          {viewer.isFranceConnectAccount && (
+                          {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
                               className="col-sm-6 excerpt mb-5 text-right"
                               style={{ marginLeft: 28 }}>
-                              <FormattedMessage id="data-from-FranceConnect" />
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                         </div>
@@ -398,13 +410,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             <Field
                               name="lastname"
                               component={component}
-                              disabled={viewer.isFranceConnectAccount}
+                              disabled={isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount)}
                               type="text"
                               id="personal-data-form-lastname"
                               divClassName="col-sm-4"
                             />
                           </div>
-                          {!viewer.isFranceConnectAccount && (
+                          {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-4 btn--delete">
                               <OverlayTrigger
                                 trigger="click"
@@ -421,11 +433,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               </OverlayTrigger>
                             </div>
                           )}
-                          {viewer.isFranceConnectAccount && (
+                          {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
                               className="col-sm-6 excerpt mb-5 text-right"
                               style={{ marginLeft: 28 }}>
-                              <FormattedMessage id="data-from-FranceConnect" />
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                         </div>
@@ -437,7 +449,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               name="dateOfBirth"
                               id="dateOfBirth"
                               component={DateDropdownPicker}
-                              disabled={viewer.isFranceConnectAccount}
+                              disabled={isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount)}
                               locale={wLocale}
                               dayId="personal-data-date-of-birth-day"
                               monthId="personal-data-date-of-birth-month"
@@ -448,7 +460,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               divClassName="col-sm-6"
                             />
                           </div>
-                          {!viewer.isFranceConnectAccount && (
+                          {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-2 btn--delete" style={{ marginBottom: 15 }}>
                               <OverlayTrigger
                                 trigger="click"
@@ -467,11 +479,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               </OverlayTrigger>
                             </div>
                           )}
-                          {viewer.isFranceConnectAccount && (
+                          {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
-                              className="col-sm-6 excerpt mb-5 mt-10 text-right"
+                              className="col-sm-6 excerpt mb-5 text-right"
                               style={{ marginLeft: 28 }}>
-                              <FormattedMessage id="data-from-FranceConnect" />
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                         </div>
@@ -487,13 +499,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             <Field
                               name="birthPlace"
                               component={component}
-                              disabled={viewer.isFranceConnectAccount}
+                              disabled={isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount)}
                               type="text"
                               id="personal-data-form-birthPlace"
                               divClassName="col-sm-4"
                             />
                           </div>
-                          {!viewer.isFranceConnectAccount && (
+                          {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div className="col-sm-4 btn--delete">
                               <OverlayTrigger
                                 trigger="click"
@@ -510,34 +522,36 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               </OverlayTrigger>
                             </div>
                           )}
-                          {viewer.isFranceConnectAccount && (
+                          {isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
                             <div
                               className="col-sm-6 excerpt mb-5 text-right"
                               style={{ marginLeft: 28 }}>
-                              <FormattedMessage id="data-from-FranceConnect" />
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                         </div>
                       )}
                       {hasAddressData(viewer, currentValues) && (
                         <div className="horizontal_field_with_border_top">
-                          <div className="col-sm-11 btn--delete">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              // eslint-disable-next-line react/no-string-refs
-                              ref="address-address2-city-zipCode"
-                              overlay={this.popover('address-address2-city-zipCode')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-address-address2-city-zipCode">
-                                  <i className="icon cap-ios-close" />
-                                </span>
+                          {!isSsoFcOrOccitanie(false) && (
+                            <div className="col-sm-11 btn--delete">
+                              <OverlayTrigger
+                                trigger="click"
+                                placement="top"
+                                rootClose
+                                // eslint-disable-next-line react/no-string-refs
+                                ref="address-address2-city-zipCode"
+                                overlay={this.popover('address-address2-city-zipCode')}>
+                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                  <span
+                                    className="personal-data-delete-field"
+                                    id="personal-data-address-address2-city-zipCode">
+                                    <i className="icon cap-ios-close" />
+                                  </span>
+                                </OverlayTrigger>
                               </OverlayTrigger>
-                            </OverlayTrigger>
-                          </div>
+                            </div>
+                          )}
                           {currentValues.address !== null && (
                             <div className="personal-data-address">
                               <label
@@ -549,11 +563,19 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 <Field
                                   name="address"
                                   component={component}
+                                  disabled={isSsoFcOrOccitanie(false)}
                                   type="text"
                                   id="personal-data-form-address"
                                   divClassName="col-sm-7"
                                 />
                               </div>
+                            </div>
+                          )}
+                          {isSsoFcOrOccitanie(false) && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                           {currentValues.address2 !== null && (
@@ -567,11 +589,19 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 <Field
                                   name="address2"
                                   component={component}
+                                  disabled={isSsoFcOrOccitanie(false)}
                                   type="text"
                                   id="personal-data-form-address2"
                                   divClassName="col-sm-7"
                                 />
                               </div>
+                            </div>
+                          )}
+                          {isSsoFcOrOccitanie(false) && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                           {currentValues.city !== null && (
@@ -585,11 +615,19 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 <Field
                                   name="city"
                                   component={component}
+                                  disabled={isSsoFcOrOccitanie(false)}
                                   type="text"
                                   id="personal-data-form-city"
                                   divClassName="col-sm-7"
                                 />
                               </div>
+                            </div>
+                          )}
+                          {isSsoFcOrOccitanie(false) && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                           {currentValues.zipCode !== null && (
@@ -603,11 +641,19 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 <Field
                                   name="zipCode"
                                   component={component}
+                                  disabled={isSsoFcOrOccitanie(false)}
                                   type="text"
                                   id="personal-data-form-zip-code"
                                   divClassName="col-sm-4"
                                 />
                               </div>
+                            </div>
+                          )}
+                          {isSsoFcOrOccitanie(false) && (
+                            <div
+                              className="col-sm-6 excerpt mb-5 text-right"
+                              style={{ marginLeft: 28 }}>
+                              <FormattedMessage id={getSsoTradKey()} />
                             </div>
                           )}
                         </div>
@@ -625,25 +671,35 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 name="phone"
                                 component={component}
                                 type="text"
+                                disabled={isSsoFcOrOccitanie(false)}
                                 id="personal-data-form-phone"
                                 divClassName="col-sm-4 col-xs-12"
                                 addonBefore="France +33"
                               />
                             </div>
-                            <div className="col-sm-4 btn--delete">
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="top"
-                                rootClose
-                                ref="phone"
-                                overlay={this.popover('phone')}>
-                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span className="personal-data-delete-field" id="phone">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
+                            {!isSsoFcOrOccitanie(false) && (
+                              <div className="col-sm-4 btn--delete">
+                                <OverlayTrigger
+                                  trigger="click"
+                                  placement="top"
+                                  rootClose
+                                  ref="phone"
+                                  overlay={this.popover('phone')}>
+                                  <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                    <span className="personal-data-delete-field" id="phone">
+                                      <i className="icon cap-ios-close" />
+                                    </span>
+                                  </OverlayTrigger>
                                 </OverlayTrigger>
-                              </OverlayTrigger>
-                            </div>
+                              </div>
+                            )}
+                            {isSsoFcOrOccitanie(false) && (
+                              <div
+                                className="col-sm-6 excerpt mb-5 text-right"
+                                style={{ marginLeft: 28 }}>
+                                <FormattedMessage id={getSsoTradKey()} />
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}
@@ -668,7 +724,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 viewer.city ||
                 viewer.zipCode ||
                 viewer.phone)) ||
-              !viewer.isFranceConnectAccount) && <Panel.Footer>{footer}</Panel.Footer>}
+              !isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount)) && (
+              <Panel.Footer>{footer}</Panel.Footer>
+            )}
           </Panel>
         </form>
         <Panel>
@@ -720,7 +778,7 @@ const mapStateToProps = (state: State, props: Props) => ({
     gender: props.viewer.gender ? props.viewer.gender : null,
     dateOfBirth: props.viewer.dateOfBirth ? props.viewer.dateOfBirth : null,
     birthPlace: props.viewer.birthPlace ? props.viewer.birthPlace : null,
-    isFranceConnectAccount: props.viewer.isFranceConnectAccount || null,
+    isFranceConnectAccount: props.viewer.isFranceConnectAccount || false,
   },
   currentValues: selector(
     state,

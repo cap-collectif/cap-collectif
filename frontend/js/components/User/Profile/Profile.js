@@ -11,6 +11,11 @@ import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UserAvatarDeprecated from '../UserAvatarDeprecated';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
+import {
+  occitanieUrl,
+  isSsoFcOrOccitanie,
+  getSsoTradKey,
+} from '~/components/User/Profile/PersonalData';
 
 type RelayProps = {| viewer: Profile_viewer |};
 type Props = {|
@@ -132,10 +137,16 @@ export class Profile extends Component<Props> {
               <Field
                 id="profile_avatar"
                 name="media"
+                disabled={window.location.hostname === occitanieUrl}
                 component={component}
                 type="image"
                 divClassName="col-sm-6"
               />
+              {isSsoFcOrOccitanie(false) && (
+                <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                  <FormattedMessage id={getSsoTradKey()} />
+                </div>
+              )}
             </div>
             <div className="horizontal_field_with_border_top no-border">
               <label className="col-sm-3 control-label" htmlFor="profile-form-username">
@@ -151,9 +162,15 @@ export class Profile extends Component<Props> {
                   component={component}
                   required
                   type="text"
+                  disabled={window.location.hostname === occitanieUrl}
                   id="profile-form-username"
                   divClassName="col-sm-6"
                 />
+                {isSsoFcOrOccitanie(false) && (
+                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                    <FormattedMessage id={getSsoTradKey()} />
+                  </div>
+                )}
               </div>
             </div>
             {features.user_type && (
@@ -167,6 +184,7 @@ export class Profile extends Component<Props> {
                     name="userType"
                     component={component}
                     type="select"
+                    disabled={window.location.hostname === occitanieUrl}
                     divClassName="col-sm-6">
                     <FormattedMessage id="registration.select.type">
                       {(message: string) => <option value="">{message}</option>}
@@ -188,10 +206,16 @@ export class Profile extends Component<Props> {
                 <Field
                   name="biography"
                   component={component}
+                  disabled={window.location.hostname === occitanieUrl}
                   type="textarea"
                   id="public-data-form-biography"
                   divClassName="col-sm-6"
                 />
+                {isSsoFcOrOccitanie(false) && (
+                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                    <FormattedMessage id={getSsoTradKey()} />
+                  </div>
+                )}
               </div>
             </div>
             <div className="horizontal_field_with_border_top no-border">
@@ -203,9 +227,15 @@ export class Profile extends Component<Props> {
                   name="neighborhood"
                   component={component}
                   type="text"
+                  disabled={window.location.hostname === occitanieUrl}
                   id="public-data-form-neighborhood"
                   divClassName="col-sm-6"
                 />
+                {isSsoFcOrOccitanie(false) && (
+                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                    <FormattedMessage id={getSsoTradKey()} />
+                  </div>
+                )}
               </div>
             </div>
             <div className="horizontal_field_with_border_top no-border">
@@ -217,9 +247,15 @@ export class Profile extends Component<Props> {
                   name="websiteUrl"
                   component={component}
                   type="text"
+                  disabled={window.location.hostname === occitanieUrl}
                   id="public-data-form-website"
                   divClassName="col-sm-6"
                 />
+                {isSsoFcOrOccitanie(false) && (
+                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                    <FormattedMessage id={getSsoTradKey()} />
+                  </div>
+                )}
               </div>
             </div>
             <div className="clearfix" />
@@ -235,10 +271,16 @@ export class Profile extends Component<Props> {
                   placeholder="https://"
                   name="facebookUrl"
                   component={component}
+                  disabled={window.location.hostname === occitanieUrl}
                   type="text"
                   id="public-data-form-facebook"
                   divClassName="col-sm-6"
                 />
+                {isSsoFcOrOccitanie(false) && (
+                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                    <FormattedMessage id={getSsoTradKey()} />
+                  </div>
+                )}
               </div>
             </div>
             <div className="horizontal_field_with_border_top no-border">
@@ -248,12 +290,18 @@ export class Profile extends Component<Props> {
               <div>
                 <Field
                   placeholder="https://"
+                  disabled={window.location.hostname === occitanieUrl}
                   name="twitterUrl"
                   component={component}
                   type="text"
                   id="public-data-form-twitter"
                   divClassName="col-sm-6"
                 />
+                {isSsoFcOrOccitanie(false) && (
+                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                    <FormattedMessage id={getSsoTradKey()} />
+                  </div>
+                )}
               </div>
             </div>
             <div className="horizontal_field_with_border_top no-border">
@@ -264,11 +312,17 @@ export class Profile extends Component<Props> {
                 <Field
                   placeholder="https://"
                   name="linkedInUrl"
+                  disabled={window.location.hostname === occitanieUrl}
                   component={component}
                   type="text"
                   id="public-data-form-linkedIn"
                   divClassName="col-sm-6"
                 />
+                {isSsoFcOrOccitanie(false) && (
+                  <div className="col-sm-6 excerpt mb-5 text-right" style={{ marginLeft: 28 }}>
+                    <FormattedMessage id={getSsoTradKey()} />
+                  </div>
+                )}
               </div>
             </div>
             <div className="clearfix" />

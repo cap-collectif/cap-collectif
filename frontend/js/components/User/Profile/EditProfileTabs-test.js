@@ -9,15 +9,15 @@ import { $fragmentRefs, $refType } from '../../../mocks';
 describe('<EditProfileTabs />', () => {
   const globalProps = {
     languageList: [
-    { translationKey: 'french', code: 'fr-FR' },
-    { translationKey: 'english', code: 'en-GB' },
-    { translationKey: 'deutsch', code: 'de-DE' },
+      { translationKey: 'french', code: 'fr-FR' },
+      { translationKey: 'english', code: 'en-GB' },
+      { translationKey: 'deutsch', code: 'de-DE' },
     ],
     viewer: {
       $refType,
       $fragmentRefs,
-      hasPassword: true
-    }
+      hasPassword: true,
+    },
   };
 
   const propsWithoutParis = {
@@ -48,17 +48,19 @@ describe('<EditProfileTabs />', () => {
   };
 
   it('should render all tabs', () => {
-    const wrapper = shallow(<EditProfileTabs  {...propsWithoutParis} {...globalProps} />);
+    const wrapper = shallow(<EditProfileTabs {...propsWithoutParis} {...globalProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render all tabs except profile, password and account (Paris)', () => {
-    const wrapper = shallow(<EditProfileTabs  {...propsWithParisAndNotProfiles} {...globalProps}/>);
+    const wrapper = shallow(<EditProfileTabs {...propsWithParisAndNotProfiles} {...globalProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render all tabs except profile, password and account (OpenID)', () => {
-    const wrapper = shallow(<EditProfileTabs  {...propsWithOpenIdAndNotProfiles} {...globalProps} />);
+    const wrapper = shallow(
+      <EditProfileTabs {...propsWithOpenIdAndNotProfiles} {...globalProps} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 

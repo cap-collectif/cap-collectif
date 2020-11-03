@@ -183,4 +183,20 @@ describe('<PersonalData />', () => {
 
     expect(wrapper).toMatchSnapshot();
   });
+  it('should render with personal data not editable', () => {
+    // https://stackoverflow.com/questions/54021037/how-to-mock-window-location-href-with-jest-vuejs
+    // $FlowFixMe assign new URL(...) to window.location because property location is not writable
+    delete window.location;
+    const url = 'https://jeparticipe.laregioncitoyenne.fr/fr/profile/edit-profile#personal-data';
+    // $FlowFixMe assign new URL(...) to window.location because property location is not writable
+    window.location = new URL(url);
+    expect(window.location.href).toEqual(url);
+    expect(window.location.hostname).toEqual('jeparticipe.laregioncitoyenne.fr');
+    const wrapper = shallow(<PersonalData {...props3} viewer={viewer3} />);
+    wrapper.setState({
+      showDeleteModal: false,
+    });
+
+    expect(wrapper).toMatchSnapshot();
+  });
 });

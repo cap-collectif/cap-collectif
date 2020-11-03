@@ -74,6 +74,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         />
         <Field
           component={[Function]}
+          disabled={false}
           divClassName="col-sm-6"
           id="profile_avatar"
           name="media"
@@ -104,6 +105,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="profile-form-username"
             name="username"
@@ -128,6 +130,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="profile-form-userType"
             name="userType"
@@ -163,6 +166,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-biography"
             name="biography"
@@ -185,6 +189,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-neighborhood"
             name="neighborhood"
@@ -207,6 +212,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-website"
             name="websiteUrl"
@@ -238,6 +244,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-facebook"
             name="facebookUrl"
@@ -261,6 +268,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-twitter"
             name="twitterUrl"
@@ -284,6 +292,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-linkedIn"
             name="linkedInUrl"
@@ -442,6 +451,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         />
         <Field
           component={[Function]}
+          disabled={false}
           divClassName="col-sm-6"
           id="profile_avatar"
           name="media"
@@ -472,6 +482,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="profile-form-username"
             name="username"
@@ -495,6 +506,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-biography"
             name="biography"
@@ -517,6 +529,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-neighborhood"
             name="neighborhood"
@@ -539,6 +552,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-website"
             name="websiteUrl"
@@ -570,6 +584,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-facebook"
             name="facebookUrl"
@@ -593,6 +608,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-twitter"
             name="twitterUrl"
@@ -616,6 +632,7 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         <div>
           <Field
             component={[Function]}
+            disabled={false}
             divClassName="col-sm-6"
             id="public-data-form-linkedIn"
             name="linkedInUrl"
