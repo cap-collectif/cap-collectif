@@ -245,6 +245,20 @@ exports[`<LastProposals /> should render correctly 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "icon",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "color",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "CategoryImage",
                           "kind": "LinkedField",
                           "name": "categoryImage",
@@ -598,7 +612,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7f990609fe6ada50fa53cc9303423e88",
+          "cacheID": "27d557557fd49b804697f35e21432881",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -735,6 +749,8 @@ fragment ProposalPreview_proposal_dUMnP on Proposal {
     id
   }
   category {
+    icon
+    color
     categoryImage {
       id
       image {

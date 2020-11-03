@@ -1,7 +1,7 @@
 // @flow
 import { TYPE_ALERT } from '~/constants/AlertConstants';
 
-const colors = {
+export const colors = {
   black: '#000000',
   dark: '#212529',
   defaultCustomColor: '#007c91',

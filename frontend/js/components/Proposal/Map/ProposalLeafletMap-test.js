@@ -20,6 +20,7 @@ describe('<ProposalLeafletMap />', () => {
         lat: 49.8397,
         lng: 24.0297,
       },
+      category: { icon: null, color: '#EEE' },
     },
     {
       id: 'pid2',
@@ -30,8 +31,9 @@ describe('<ProposalLeafletMap />', () => {
         lat: 52.2297,
         lng: 21.0122,
       },
+      category: { icon: 'water', color: 'blue' },
     },
-    { id: 'pid3', $fragmentRefs, $refType, address: null },
+    { id: 'pid3', $fragmentRefs, $refType, address: null, category: { icon: null, color: 'red' } },
     {
       id: 'pid4',
       $fragmentRefs,
@@ -40,6 +42,7 @@ describe('<ProposalLeafletMap />', () => {
         lat: 51.5074,
         lng: -0.0901,
       },
+      category: { icon: 'wheelchair', color: 'purple' },
     },
   ];
 

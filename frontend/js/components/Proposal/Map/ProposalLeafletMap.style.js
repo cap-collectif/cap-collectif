@@ -62,6 +62,12 @@ export const StyledMap: StyledComponent<{}, {}, typeof Map> = styled(Map)`
       opacity: 0;
     }
   }
+
+  .preview-icn svg:nth-child(2) {
+    position: absolute;
+    top: 7px;
+    left: 12px;
+  }
 `;
 
 export const MapContainer: StyledComponent<{ isMobile: boolean }, {}, HTMLDivElement> = styled.div`

@@ -23,8 +23,8 @@ describe('<ProposalMapPopover />', () => {
     title: 'testProposal',
     author: { $fragmentRefs },
     media: null,
-    category: { name: 'Cat', categoryImage: null },
     status: { name: 'cv ou quoi le frer le boss lacoste tn ou pas?', color: 'SUCCESS' },
+    category: { name: 'Cat', categoryImage: null, icon: 'wheelchair', color: 'purple' },
   };
 
   it('should render popover with a picture given the feature is enabled', () => {
@@ -55,7 +55,7 @@ describe('<ProposalMapPopover />', () => {
       proposal: proposalWithoutMedia,
     };
     const wrapper = shallow(<ProposalMapPopover {...props} />);
-    const cover = wrapper.find('img');
+    const cover = wrapper.find('SimpleProposalBackground');
     expect(wrapper).toMatchSnapshot();
     expect(cover).toHaveLength(1);
   });

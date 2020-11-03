@@ -45,6 +45,7 @@ Scenario: GraphQL client wants to update a proposal form
               categories(order: ALPHABETICAL) {
                 id
                 name
+                color
                 categoryImage {
                   id
                   image {
@@ -102,28 +103,35 @@ Scenario: GraphQL client wants to update a proposal form
         "zoomMap": 0,
         "commentable": true,
         "costable": true,
-        "categories": [{
+        "categories": [
+          {
             "id": "pCategory1",
             "name": "Aménagement",
+            "color": "COLOR_880E4F",
             "categoryImage":	"categoryImage15"
           },
           {
             "id": "pCategory2",
+            "color": "COLOR_B71C1C",
             "name": "Politique"
           },
           {
             "name": "New category",
+            "color": "COLOR_1E88E5",
             "newCategoryImage":	"media5"
           },
           {
-            "name": "Vide"
+            "name": "Vide",
+            "color": "COLOR_1B5E20"
           },
           {
             "name": "Image perso",
+            "color": "COLOR_43A047",
             "newCategoryImage":	"media6"
           },
           {
             "name": "Ecole",
+            "color": "COLOR_827717",
             "categoryImage":	"school"
           }
         ],
@@ -185,6 +193,7 @@ Scenario: GraphQL client wants to update a proposal form
                {
                   "id":"pCategory1",
                   "name":"Am\u00e9nagement",
+                  "color": "#880e4f",
                   "categoryImage":{
                      "id":"categoryImage15",
                      "image":{
@@ -197,6 +206,7 @@ Scenario: GraphQL client wants to update a proposal form
                {
                   "id": "@string@",
                   "name":"Ecole",
+                  "color": "#827717",
                   "categoryImage":{
                      "id":"school",
                      "image":{
@@ -209,6 +219,7 @@ Scenario: GraphQL client wants to update a proposal form
                {
                   "id": "@string@",
                   "name":"Image perso",
+                  "color": "#43a047",
                   "categoryImage":{
                      "id": "@string@",
                      "image":{
@@ -221,6 +232,7 @@ Scenario: GraphQL client wants to update a proposal form
                {
                   "id": "@string@",
                   "name":"New category",
+                  "color": "#1e88e5",
                   "categoryImage":{
                      "id": "@string@",
                      "image":{
@@ -233,18 +245,13 @@ Scenario: GraphQL client wants to update a proposal form
                {
                   "id":"pCategory2",
                   "name":"Politique",
-                  "categoryImage":{
-                     "id":"@string@",
-                     "image":{
-                        "url":"https:\/\/capco.test\/media\/default\/0001\/01\/providerReference33.svg",
-                        "id":"media-culture",
-                        "name":"Media Culture"
-                     }
-                  }
+                  "color": "#b71c1c",
+                  "categoryImage": null
                },
                {
                   "id": "@string@",
                   "name":"Vide",
+                  "color": "#1b5e20",
                   "categoryImage":null
                }
             ],
@@ -632,6 +639,7 @@ Scenario: GraphQL client wants to delete the first category
           categories {
             id
             name
+            color
           }
         }
       }
@@ -642,11 +650,13 @@ Scenario: GraphQL client wants to delete the first category
         "categories": [
           {
             "id": "pCategory8",
-            "name": "Escrime"
+            "name": "Escrime",
+            "color": "COLOR_EF5350"
           },
           {
             "id": "pCategory7",
-            "name": "Water Polo"
+            "name": "Water Polo",
+            "color": "COLOR_9C27B0"
           }
         ]
       }
@@ -663,11 +673,13 @@ Scenario: GraphQL client wants to delete the first category
           "categories": [
             {
               "id": "pCategory8",
-              "name": "Escrime"
+              "name": "Escrime",
+              "color": "#ef5350"
             },
             {
               "id": "pCategory7",
-              "name": "Water Polo"
+              "name": "Water Polo",
+              "color": "#9c27b0"
             }
           ]
         }

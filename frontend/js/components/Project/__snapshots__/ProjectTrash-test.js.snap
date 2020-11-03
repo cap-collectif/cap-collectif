@@ -1237,6 +1237,20 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                       Object {
                                         "alias": null,
                                         "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "icon",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "color",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
                                         "concreteType": "CategoryImage",
                                         "kind": "LinkedField",
                                         "name": "categoryImage",
@@ -1700,7 +1714,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "ca11e0131c76533e7d02b067b3bf6249",
+            "cacheID": "53a8473c40b559d350e549a9ced1c01e",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashQuery",
@@ -1992,6 +2006,8 @@ fragment ProposalPreview_proposal_4died5 on Proposal {
     id
   }
   category {
+    icon
+    color
     categoryImage {
       id
       image {

@@ -12,6 +12,7 @@ import { bootstrapToHex } from '~/utils/bootstrapToHexColor';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import { mediaQueryTablet } from '~/utils/sizes';
 import { MAIN_BORDER_RADIUS_SIZE, MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
+import SimpleProposalBackground from './SimpleProposalBackground';
 
 type Props = {|
   proposal: ProposalMapPopover_proposal,
@@ -33,6 +34,23 @@ export const PopoverContainer: StyledComponent<
 
 export const PopoverContent: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 10px;
+  position: relative;
+
+  h4 + div > svg {
+    position: absolute;
+    left: 25px;
+    z-index: 2;
+  }
+
+  svg[id*='background'] {
+    height: 65px;
+    min-width: 65px;
+    width: 65px;
+    margin-right: 15px;
+    position: initial;
+    z-index: 1;
+    ${MAIN_BORDER_RADIUS};
+  }
 
   h4 {
     margin: 0;
@@ -123,17 +141,27 @@ export const ProposalMapPopover = ({ proposal, features, isMobile }: Props) => (
           <a href={proposal.url}>{translateContent(proposal.title)}</a>
         </h4>
         <div>
-          {features.display_pictures_in_depository_proposals_list && (
-            <img
-              src={
-                proposal.media
-                  ? proposal.media.url
-                  : proposal?.category?.categoryImage?.image?.url ||
-                    '/svg/preview-proposal-image.svg'
-              }
-              alt="proposal-illustration"
-            />
-          )}
+          {features.display_pictures_in_depository_proposals_list &&
+            (proposal?.media?.url || proposal?.category?.categoryImage?.image?.url ? (
+              <img
+                src={
+                  proposal.media
+                    ? proposal.media.url
+                    : proposal?.category?.categoryImage?.image?.url
+                }
+                alt="proposal-illustration"
+              />
+            ) : (
+              <>
+                {proposal?.category?.icon && (
+                  <Icon name={ICON_NAME[proposal?.category?.icon]} size={36} color={colors.white} />
+                )}
+                <SimpleProposalBackground
+                  color={proposal?.category?.color}
+                  id={`background-${proposal.url}`}
+                />
+              </>
+            ))}
           <div>
             {proposal.category && (
               <PopoverInfo displayPicture={features.display_pictures_in_depository_proposals_list}>
@@ -166,6 +194,8 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalMapPopov
       }
       category {
         name
+        icon
+        color
         categoryImage {
           image {
             url

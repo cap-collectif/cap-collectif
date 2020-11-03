@@ -6,6 +6,10 @@ ProposalCategoryInput:
         type: 'ID'
       name:
         type: 'String!'
+      color:
+        type: 'AvailableProposalCategoryColor!'
+      icon:
+        type: 'AvailableProposalCategoryIcon'
       categoryImage:
         type: 'ID'
         description: 'The category image id to illustrate'

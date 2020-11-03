@@ -789,6 +789,20 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "color",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "icon",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "CategoryImage",
                           "kind": "LinkedField",
                           "name": "categoryImage",
@@ -1792,6 +1806,31 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
             Object {
               "alias": null,
               "args": null,
+              "concreteType": "ProposalCategoryOptions",
+              "kind": "LinkedField",
+              "name": "proposalCategoryOptions",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "colors",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "icons",
+                  "storageKey": null,
+                },
+              ],
+              "storageKey": null,
+            },
+            Object {
+              "alias": null,
+              "args": null,
               "concreteType": "User",
               "kind": "LinkedField",
               "name": "viewer",
@@ -1817,7 +1856,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "eb38ce38c476822875b573c606b66f40",
+          "cacheID": "428857c8e4c9c10782a8f5fd13182c8e",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -1936,6 +1975,10 @@ fragment ProposalFormAdminCategoriesStepModal_query on Query {
 
 fragment ProposalFormAdminCategories_query on Query {
   ...ProposalFormAdminCategoriesStepModal_query
+  proposalCategoryOptions {
+    colors
+    icons
+  }
 }
 
 fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
@@ -1998,6 +2041,8 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
   categories {
     id
     name
+    color
+    icon
     categoryImage {
       id
       isDefault

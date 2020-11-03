@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormCategoryIcon /> render correctly 1`] = `
+<ProposalFormCategoryIcon__Container
+  id="iddddddddd"
+>
+  <ProposalFormCategoryIcon__IconContainer
+    color="blue"
+    isDisabled={false}
+    isSelected={true}
+    onClick={[Function]}
+  >
+    <Icon
+      color="#ffffff"
+      name="parking"
+      size={12}
+    />
+  </ProposalFormCategoryIcon__IconContainer>
+  <ProposalFormCategoryIcon__IconContainer
+    color="blue"
+    isDisabled={false}
+    isSelected={false}
+    onClick={[Function]}
+  >
+    <Icon
+      color="#001b38"
+      size={12}
+    />
+  </ProposalFormCategoryIcon__IconContainer>
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    overlay={
+      <_default
+        id="tooltip-icon-omarlebg.svg"
+      >
+        <FormattedMessage
+          id="already.in.use.feminine"
+          values={Object {}}
+        />
+      </_default>
+    }
+    placement="top"
+    trigger={
+      Array [
+        "hover",
+        "focus",
+      ]
+    }
+  >
+    <ProposalFormCategoryIcon__IconContainer
+      color="blue"
+      isDisabled={true}
+      isSelected={false}
+      onClick={[Function]}
+    >
+      <Icon
+        color="#001b38"
+        size={12}
+      />
+    </ProposalFormCategoryIcon__IconContainer>
+  </OverlayTrigger>
+</ProposalFormCategoryIcon__Container>
+`;

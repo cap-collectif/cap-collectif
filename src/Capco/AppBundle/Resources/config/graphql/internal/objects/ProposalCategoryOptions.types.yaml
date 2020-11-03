@@ -1,0 +1,11 @@
+ProposalCategoryOptions:
+  type: object
+  config:
+    description: 'Get the options for a proposal category within a proposal form'
+    fields:
+      colors:
+        type: '[AvailableProposalCategoryColor!]!'
+        description: 'Get the list of the possible colors for a category within this proposal form'
+      icons:
+        type: '[AvailableProposalCategoryIcon!]!'
+        description: 'Get the list of the possible icons for a category within this proposal form'

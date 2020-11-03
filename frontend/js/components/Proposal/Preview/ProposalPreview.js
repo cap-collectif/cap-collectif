@@ -7,11 +7,15 @@ import { connect } from 'react-redux';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalPreviewStatus from './ProposalPreviewStatus';
-import { Card } from '../../Ui/Card/Card';
+import { Card } from '~/components/Ui/Card/Card';
 import type { ProposalPreview_proposal } from '~relay/ProposalPreview_proposal.graphql';
 import type { ProposalPreview_step } from '~relay/ProposalPreview_step.graphql';
 import type { ProposalPreview_viewer } from '~relay/ProposalPreview_viewer.graphql';
-import type { FeatureToggles, State } from '../../../types';
+import type { FeatureToggles, State } from '~/types';
+import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
+import { bootstrapGrid } from '~/utils/sizes';
 
 type Props = {|
   +proposal: ProposalPreview_proposal,
@@ -20,35 +24,33 @@ type Props = {|
   +features: FeatureToggles,
 |};
 
-type ProposalImageProps = {|
-  bgImage: string,
-|};
+const ProposalCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
+  > svg {
+    position: absolute;
+    left: calc(50% - 20px);
+    z-index: 1;
+    top: 20px;
 
-const ProposalDefaultImage: StyledComponent<ProposalImageProps, {}, HTMLDivElement> = styled.div`
-  border-radius: 4px 4px 0 0;
-  height: 83px;
-  max-width: 261px;
-  background-image: url(${props => props.bgImage || '/svg/preview-proposal-image.svg'});
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+    @media (max-width: ${bootstrapGrid.mdMax}px) {
+      top: 25px;
+    }
 
-  @media (max-width: 1199px) {
-    max-width: 293px;
+    @media (max-width: ${bootstrapGrid.smMax}px) {
+      top: 30px;
+    }
+
+    @media (max-width: ${bootstrapGrid.xsMax}px) {
+      top: 9.5vw;
+    }
   }
 
-  @media (max-width: 991px) {
-    max-width: 345px;
-  }
-
-  @media (max-width: 838px) {
-    background-image: url(${props => props.bgImage || '/svg/preview-proposal-image-grand.svg'});
-    max-width: 900px;
-    height: 160px;
+  #background {
+    position: initial;
+    z-index: 0;
   }
 `;
 
-const ProposalImage: StyledComponent<ProposalImageProps, {}, HTMLDivElement> = styled.div`
+const ProposalImage: StyledComponent<{ bgImage: string }, {}, HTMLDivElement> = styled.div`
   border-radius: 4px 4px 0 0;
   height: 83px;
   max-width: 261px;
@@ -57,17 +59,21 @@ const ProposalImage: StyledComponent<ProposalImageProps, {}, HTMLDivElement> = s
   background-position: center;
   background-image: url(${props => props.bgImage});
 
-  @media (max-width: 1199px) {
+  @media (max-width: ${bootstrapGrid.mdMax}px) {
     max-width: 293px;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: ${bootstrapGrid.smMax}px) {
     max-width: 345px;
+    height: 99px;
   }
 
   @media (max-width: 838px) {
     max-width: 900px;
-    height: 160px;
+  }
+
+  @media (max-width: ${bootstrapGrid.xsMax}px) {
+    height: 27.5vw;
   }
 `;
 
@@ -80,7 +86,7 @@ export class ProposalPreview extends React.Component<Props> {
     const { proposal, step, viewer, features } = this.props;
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
-        <Card
+        <ProposalCard
           id={`proposal-${proposal.id}`}
           className={
             proposal.author && proposal.author.vip
@@ -92,12 +98,21 @@ export class ProposalPreview extends React.Component<Props> {
           features.display_pictures_in_depository_proposals_list ? (
             <ProposalImage bgImage={proposal.media.url} />
           ) : features.display_pictures_in_depository_proposals_list ? (
-            <ProposalDefaultImage bgImage={getCategoryImage(proposal)} />
+            getCategoryImage(proposal) ? (
+              <ProposalImage bgImage={getCategoryImage(proposal)} />
+            ) : (
+              <>
+                {proposal?.category?.icon && (
+                  <Icon name={ICON_NAME[proposal?.category?.icon]} size={40} color={colors.white} />
+                )}
+                <CategoryBackground color={proposal?.category?.color || '#C4C4C4'} />
+              </>
+            )
           ) : null}
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
           <ProposalPreviewStatus proposal={proposal} />
-        </Card>
+        </ProposalCard>
       </Col>
     );
   }
@@ -134,6 +149,8 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPreview)
         vip
       }
       category {
+        icon
+        color
         categoryImage {
           id
           image {

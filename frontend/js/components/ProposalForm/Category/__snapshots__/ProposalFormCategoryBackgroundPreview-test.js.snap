@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormCategoryBackgroundPreview /> render correctly 1`] = `
+<ProposalFormCategoryBackgroundPreview__Container
+  hasTitle={true}
+>
+  <Icon
+    color="#ffffff"
+    name="parking"
+    size={40}
+  />
+  <CategoryBackground
+    color="blue"
+    viewBox={null}
+  />
+  <div>
+    <ProposalFormCategoryBackgroundPreview__CircledIcon>
+      <Icon
+        color="#0388cc"
+        name="tag"
+        size={12}
+      />
+    </ProposalFormCategoryBackgroundPreview__CircledIcon>
+    <span>
+      parking bleu
+    </span>
+  </div>
+</ProposalFormCategoryBackgroundPreview__Container>
+`;
+
+exports[`<ProposalFormCategoryBackgroundPreview /> render correctly with custom image 1`] = `
+<ProposalFormCategoryBackgroundPreview__Container
+  hasTitle={true}
+>
+  <img
+    alt="Category background"
+    src="http://isitckPhoto.customimage.jpg"
+  />
+  <div>
+    <ProposalFormCategoryBackgroundPreview__CircledIcon>
+      <Icon
+        color="#0388cc"
+        name="tag"
+        size={12}
+      />
+    </ProposalFormCategoryBackgroundPreview__CircledIcon>
+    <span>
+      parking bleu
+    </span>
+  </div>
+</ProposalFormCategoryBackgroundPreview__Container>
+`;

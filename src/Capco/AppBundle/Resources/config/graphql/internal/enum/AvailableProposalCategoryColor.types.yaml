@@ -1,0 +1,61 @@
+AvailableProposalCategoryColor:
+    type: enum
+    config:
+        description: 'The possible values for a proposal category color'
+        values:
+            COLOR_EF5350:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_EF5350")'
+            COLOR_B71C1C:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_B71C1C")'
+            COLOR_880E4F:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_880E4F")'
+            COLOR_C2185B:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_C2185B")'
+            COLOR_9C27B0:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_9C27B0")'
+            COLOR_6A1B9A:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_6A1B9A")'
+            COLOR_673AB7:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_673AB7")'
+            COLOR_3F51B5:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_3F51B5")'
+            COLOR_0D47A1:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_0D47A1")'
+            COLOR_1E88E5:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_1E88E5")'
+            COLOR_0097A7:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_0097A7")'
+            COLOR_00796B:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_00796B")'
+            COLOR_004D40:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_004D40")'
+            COLOR_1B5E20:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_1B5E20")'
+            COLOR_43A047:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_43A047")'
+            COLOR_558B2F:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_558B2F")'
+            COLOR_827717:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_827717")'
+            COLOR_FFC107:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_FFC107")'
+            COLOR_FF9800:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_FF9800")'
+            COLOR_E65100:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_E65100")'
+            COLOR_BF360C:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_BF360C")'
+            COLOR_795548:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_795548")'
+            COLOR_5D4037:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_5D4037")'
+            COLOR_3E2723:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_3E2723")'
+            COLOR_616161:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_616161")'
+            COLOR_78909C:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_78909C")'
+            COLOR_455A64:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_455A64")'
+            COLOR_263238:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryColor::COLOR_263238")'

@@ -936,6 +936,96 @@ type AssignSupervisorToProposalsPayload {
   clientMutationId: String
 }
 
+"""The possible values for a proposal category color"""
+enum AvailableProposalCategoryColor {
+  COLOR_EF5350
+  COLOR_B71C1C
+  COLOR_880E4F
+  COLOR_C2185B
+  COLOR_9C27B0
+  COLOR_6A1B9A
+  COLOR_673AB7
+  COLOR_3F51B5
+  COLOR_0D47A1
+  COLOR_1E88E5
+  COLOR_0097A7
+  COLOR_00796B
+  COLOR_004D40
+  COLOR_1B5E20
+  COLOR_43A047
+  COLOR_558B2F
+  COLOR_827717
+  COLOR_FFC107
+  COLOR_FF9800
+  COLOR_E65100
+  COLOR_BF360C
+  COLOR_795548
+  COLOR_5D4037
+  COLOR_3E2723
+  COLOR_616161
+  COLOR_78909C
+  COLOR_455A64
+  COLOR_263238
+}
+
+"""The possible values for a proposal category icon"""
+enum AvailableProposalCategoryIcon {
+  GAS_STATION
+  BOAT
+  EARTH
+  TRAVEL
+  PASSPORT
+  ECONOMY
+  PARKING
+  COCKTAIL
+  RESTAURANT
+  FARMER_MARKET
+  NETWORK
+  MOBILE_PHONE
+  COMPANY
+  URBANISM
+  VILLAGE
+  CONSTRUCTION_CONE
+  VEGETABLES_PLATE
+  GROCERY_SHOPPING
+  SHOPPING_BAG
+  MEDICAL
+  HOSPITAL
+  HEALTH
+  BICYCLE
+  OFFICER
+  SURVEILLANCE_CAMERA
+  FAMILY_CHILDREN
+  FAMILY_WALK_PARK
+  FAMILY_CHILD_PLAY_BALL
+  BASKETBALL_BALL
+  DOG_LEASH
+  WATER
+  TREE
+  PARK_BENCH_LIGHT
+  RECYCLE
+  BIN
+  AGRICULTURE_MACHINE_TRACTOR
+  HAND
+  SOLIDARITY
+  HIERARCHY
+  ELDERLY
+  PARAPLEGIC
+  CAR
+  CARPOOLING
+  BUS_STATION
+  RAILROAD_TRAIN
+  BRIEFCASE
+  BOOK_FLIP_PAGE
+  CULTURE
+  OFFICIAL_BUILDING
+  GRADUATE
+  LIGHT_BULB
+  ENERGY
+  ICN
+  ECOLOGY_LEAF
+}
+
 """Type of sso service"""
 enum AvailableSso {
   """FranceConnect sso service"""
@@ -7104,6 +7194,8 @@ enum ProposalAssignmentErrorCode {
 type ProposalCategory {
   id: ID!
   name: String!
+  color: String!
+  icon: String
 
   """Get the associated illustration of the category"""
   categoryImage: CategoryImage
@@ -7112,12 +7204,27 @@ type ProposalCategory {
 input ProposalCategoryInput {
   id: ID
   name: String!
+  color: AvailableProposalCategoryColor!
+  icon: AvailableProposalCategoryIcon
 
   """The category image id to illustrate"""
   categoryImage: ID
 
   """The image id to transform as new categoryImage"""
   newCategoryImage: ID
+}
+
+"""Get the options for a proposal category within a proposal form"""
+type ProposalCategoryOptions {
+  """
+  Get the list of the possible colors for a category within this proposal form
+  """
+  colors: [AvailableProposalCategoryColor!]!
+
+  """
+  Get the list of the possible icons for a category within this proposal form
+  """
+  icons: [AvailableProposalCategoryIcon!]!
 }
 
 """A connection to a list of items."""
@@ -8459,6 +8566,9 @@ type Query {
     """If provided, filter campaigns by name"""
     term: String
   ): EmailingCampaignConnection!
+
+  """Get the options for creating a category within a proposal form"""
+  proposalCategoryOptions: ProposalCategoryOptions!
 }
 
 """Fetches an object given its ID"""

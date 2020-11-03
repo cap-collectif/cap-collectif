@@ -20,10 +20,14 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
         />
       </a>
     </ProposalPageHeader__HeaderActions>
-    <ProposalPageHeader__Cover
-      alt="proposal-illustration"
-      src="/svg/preview-proposal-image.svg"
-    />
+    <div
+      className="default-header"
+    >
+      <CategoryBackground
+        color="#C4C4C4"
+        viewBox="0 0 230 75"
+      />
+    </div>
     <ProposalPageHeader__Informations>
       <h1>
         Titre
@@ -282,6 +286,8 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
                 "url": "./",
               },
             },
+            "color": "red",
+            "icon": null,
             "name": "cat",
           },
           "createdAt": "2015-01-01 00:00:00",
@@ -459,6 +465,8 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
                 "url": "./",
               },
             },
+            "color": "red",
+            "icon": null,
             "name": "cat",
           },
           "createdAt": "2015-01-01 00:00:00",
@@ -512,10 +520,14 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
         />
       </a>
     </ProposalPageHeader__HeaderActions>
-    <ProposalPageHeader__Cover
-      alt="proposal-illustration"
-      src="/svg/preview-proposal-image.svg"
-    />
+    <div
+      className="default-header"
+    >
+      <CategoryBackground
+        color="#C4C4C4"
+        viewBox="0 0 230 75"
+      />
+    </div>
     <ProposalPageHeader__Informations>
       <h1>
         Titre
@@ -664,10 +676,14 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
         />
       </a>
     </ProposalPageHeader__HeaderActions>
-    <ProposalPageHeader__Cover
-      alt="proposal-illustration"
-      src="/svg/preview-proposal-image.svg"
-    />
+    <div
+      className="default-header"
+    >
+      <CategoryBackground
+        color="#C4C4C4"
+        viewBox="0 0 230 75"
+      />
+    </div>
     <ProposalPageHeader__Informations>
       <h1>
         Titre

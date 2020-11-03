@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -51,6 +51,18 @@ class ProposalCategory
      * @Assert\Valid()
      */
     private $categoryImage;
+
+    /**
+     * @ORM\Column(name="color", type="string", length=7)
+     * @CapcoAssert\ValidProposalCategoryColor()
+     */
+    private string $color;
+
+    /**
+     * @ORM\Column(name="icon", type="string", length=100, nullable=true)
+     * @CapcoAssert\ValidProposalCategoryIcon()
+     */
+    private ?string $icon = null;
 
     public function __construct()
     {
@@ -116,6 +128,30 @@ class ProposalCategory
     public function setCategoryImage(?CategoryImage $categoryImage = null): self
     {
         $this->categoryImage = $categoryImage;
+
+        return $this;
+    }
+
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(?string $icon): self
+    {
+        $this->icon = $icon;
 
         return $this;
     }

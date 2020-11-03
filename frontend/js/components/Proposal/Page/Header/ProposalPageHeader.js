@@ -17,6 +17,7 @@ import type { ProposalPageHeader_viewer } from '~relay/ProposalPageHeader_viewer
 import UserAvatar from '~/components/User/UserAvatar';
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
+import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
 
 type Props = {
   title: string,
@@ -42,8 +43,35 @@ const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
     background-color: ${colors.white};
     padding-top: 25px;
 
+    > .default-header {
+      border-radius: 20px;
+      overflow: hidden;
+      height: 310px;
+      position: relative;
+
+      svg {
+        position: absolute;
+        left: calc(50% - 75px);
+        top: calc(50% - 75px);
+        z-index: 2;
+      }
+
+      #background {
+        position: initial;
+        height: 100%;
+      }
+    }
+
     @media (max-width: ${mediaQueryMobile.maxWidth}) {
       padding-top: 0;
+
+      > .default-header {
+        border-radius: 0;
+      }
+
+      #background {
+        margin-left: -10%;
+      }
     }
   }
 `;
@@ -90,6 +118,7 @@ const About: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 `;
 
 const HeaderActions: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  z-index: 3;
   position: absolute;
   margin: 20px;
   display: flex;
@@ -148,6 +177,8 @@ export const ProposalPageHeader = ({
   onAnalysisClick,
 }: Props) => {
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt;
+  const icon = proposal?.category?.icon || '';
+  const color = proposal?.category?.color || '#C4C4C4';
   const createdDate = (
     <FormattedDate
       value={moment(date)}
@@ -179,14 +210,17 @@ export const ProposalPageHeader = ({
             </button>
           )}
         </HeaderActions>
-        <Cover
-          src={
-            proposal?.media?.url ||
-            proposal?.category?.categoryImage?.image?.url ||
-            '/svg/preview-proposal-image.svg'
-          }
-          alt="proposal-illustration"
-        />
+        {proposal?.media?.url || proposal?.category?.categoryImage?.image?.url ? (
+          <Cover
+            src={proposal?.media?.url || proposal?.category?.categoryImage?.image?.url}
+            alt="proposal-illustration"
+          />
+        ) : (
+          <div className="default-header">
+            {icon && <Icon name={ICON_NAME[icon]} size={150} color={colors.white} />}
+            <CategoryBackground color={color} viewBox="0 0 230 75" />
+          </div>
+        )}
         <Informations>
           <h1>{title}</h1>
           <ReactPlaceholder
@@ -255,6 +289,8 @@ export default createFragmentContainer(container, {
       }
       category {
         name
+        icon
+        color
         categoryImage {
           image {
             url

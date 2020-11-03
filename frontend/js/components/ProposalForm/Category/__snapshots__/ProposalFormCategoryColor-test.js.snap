@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormCategoryColor /> render correctly 1`] = `
+<ProposalFormCategoryColor__Container
+  id="iddddddddd"
+>
+  <ProposalFormCategoryColor__Color
+    color="blue"
+    disabledColor="hsl(NaN, NaN%, NaN%)"
+    isDisabled={false}
+    onClick={[Function]}
+  >
+    <Icon
+      color="#ffffff"
+      name="check"
+      size={12}
+    />
+  </ProposalFormCategoryColor__Color>
+  <ProposalFormCategoryColor__Color
+    color="red"
+    disabledColor="hsl(0, 0%, 10%)"
+    isDisabled={false}
+    onClick={[Function]}
+  />
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    overlay={
+      <_default
+        id="tooltip-color-yellow"
+      >
+        <FormattedMessage
+          id="already.in.use.feminine"
+          values={Object {}}
+        />
+      </_default>
+    }
+    placement="top"
+    trigger={
+      Array [
+        "hover",
+        "focus",
+      ]
+    }
+  >
+    <ProposalFormCategoryColor__Color
+      color="yellow"
+      disabledColor="hsl(0, 0%, 10%)"
+      isDisabled={true}
+      onClick={[Function]}
+    />
+  </OverlayTrigger>
+</ProposalFormCategoryColor__Container>
+`;

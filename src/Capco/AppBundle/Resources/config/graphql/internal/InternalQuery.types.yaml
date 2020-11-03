@@ -483,3 +483,8 @@ InternalQuery:
                     term:
                         type: 'String'
                         description: 'If provided, filter campaigns by name'
+            proposalCategoryOptions:
+                type: 'ProposalCategoryOptions!'
+                description: 'Get the options for creating a category within a proposal form'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ProposalCategoryOptionsResolver")'

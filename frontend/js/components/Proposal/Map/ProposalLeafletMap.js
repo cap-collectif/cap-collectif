@@ -1,5 +1,6 @@
 // @flow
 import React, { useRef, useState } from 'react';
+import { renderToString } from 'react-dom/server';
 import { TileLayer, GeoJSON, Marker, withLeaflet } from 'react-leaflet';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -18,8 +19,6 @@ import {
   SliderPane,
   CLOSED_MARKER_SIZE,
   OPENED_MARKER_SIZE,
-  CLOSED_MARKER,
-  OPENED_MARKER,
   locationMarkerCode,
   MapContainer,
 } from './ProposalLeafletMap.style';
@@ -27,6 +26,8 @@ import { bootstrapGrid } from '~/utils/sizes';
 import Address from '~/components/Form/Address/Address';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import ProposalMapLoaderPane from './ProposalMapLoaderPane';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
 
 type MapCenterObject = {|
   lat: number,
@@ -113,17 +114,6 @@ const convertToGeoJsonStyle = (style: Style) => {
   }
 
   return districtStyle || defaultDistrictStyle;
-};
-
-const setIcon = (element: { setIcon: (options: typeof L.IconOptions) => void }) => {
-  element.setIcon(
-    L.icon({
-      iconUrl: CLOSED_MARKER,
-      iconSize: [CLOSED_MARKER_SIZE, CLOSED_MARKER_SIZE],
-      iconAnchor: [CLOSED_MARKER_SIZE / 2, CLOSED_MARKER_SIZE],
-      popupAnchor: [0, -CLOSED_MARKER_SIZE],
-    }),
-  );
 };
 
 const goToPosition = (mapRef: MapRef, address: ?{| +lat: number, +lng: number |}) =>
@@ -219,9 +209,6 @@ export const ProposalLeafletMap = ({
         dragging={!L.Browser.mobile}
         tap={!L.Browser.mobile}
         className={className}
-        onPopupClose={e => {
-          setIcon(e.popup._source);
-        }}
         onClick={() => {
           setIsMobileSliderOpen(false);
           isOnCluster = false;
@@ -244,15 +231,21 @@ export const ProposalLeafletMap = ({
           maxClusterRadius={30}>
           {markers?.length > 0 &&
             markers.map((mark, key) => {
-              const iconUrl = key === initialSlide ? OPENED_MARKER : CLOSED_MARKER;
               const size = key === initialSlide ? OPENED_MARKER_SIZE : CLOSED_MARKER_SIZE;
+              const icon = mark.category?.icon;
               return (
                 <Marker
                   key={key}
                   position={[mark.address?.lat, mark.address?.lng]}
                   alt={`marker-${key}`}
-                  icon={L.icon({
-                    iconUrl,
+                  icon={L.divIcon({
+                    className: 'preview-icn',
+                    html: renderToString(
+                      <>
+                        <Icon name={ICON_NAME.pin3} size={40} color={mark.category?.color} />
+                        {icon && <Icon name={ICON_NAME[icon]} size={16} color={colors.white} />}
+                      </>,
+                    ),
                     iconSize: [size, size],
                     iconAnchor: [size / 2, size],
                     popupAnchor: [0, -size],
@@ -266,16 +259,6 @@ export const ProposalLeafletMap = ({
                         goToPosition(mapRef, markers[key].address);
                         if (slickRef?.current) slickRef.current.slickGoTo(key);
                       }
-                    } else {
-                      const markerSize = isOpen ? OPENED_MARKER_SIZE : CLOSED_MARKER_SIZE;
-                      e.target.setIcon(
-                        L.icon({
-                          iconUrl: isOpen ? OPENED_MARKER : CLOSED_MARKER,
-                          iconSize: [markerSize, markerSize],
-                          iconAnchor: [markerSize / 2, markerSize],
-                          popupAnchor: [0, -markerSize],
-                        }),
-                      );
                     }
                   }}>
                   <BlankPopup closeButton={false}>
@@ -341,6 +324,10 @@ export default createFragmentContainer(container, {
         lng
       }
       ...ProposalMapPopover_proposal
+      category {
+        color
+        icon
+      }
       id
     }
   `,

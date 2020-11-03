@@ -4,12 +4,31 @@ import { connect } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { formValueSelector, arrayPush, change } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import ProposalFormAdminCategoriesStepModal from './ProposalFormAdminCategoriesStepModal';
-import type { GlobalState, Dispatch } from '../../types';
+import type { GlobalState, Dispatch, FeatureToggles } from '../../types';
 import type { ProposalFormAdminCategories_query } from '~relay/ProposalFormAdminCategories_query.graphql';
+import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
+import colors from '~/utils/colors';
+import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
+
+const Preview: StyledComponent<{ color: string }, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  align-items: center;
+
+  > div {
+    background: ${({ color }) => color};
+    width: 24px;
+    height: 24px;
+    ${MAIN_BORDER_RADIUS};
+    margin-right: 10px;
+    padding-left: 6px;
+    padding-top: 1px;
+  }
+`;
 
 const formName = 'proposal-form-admin-configuration';
 const selector = formValueSelector(formName);
@@ -20,6 +39,7 @@ type Props = {|
   fields: { length: number, map: Function, remove: Function },
   categories: Array<Object>,
   query: ProposalFormAdminCategories_query,
+  features: FeatureToggles,
 |};
 
 type State = {| editIndex: ?number, defaultCategories: Array<Object> |};
@@ -65,8 +85,11 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
   };
 
   render() {
-    const { dispatch, fields, categories, intl, query } = this.props;
+    const { dispatch, fields, categories, intl, query, features } = this.props;
     const { editIndex } = this.state;
+    const usedColors: Array<?string> = categories.map(c => c.color);
+    const usedIcons: Array<?string> = categories.map(c => c.icon);
+
     return (
       <div className="form-group">
         <span className="control-label mb-15 mt-15">
@@ -86,12 +109,31 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
                 query={query}
                 formName={formName}
                 category={categories[index]}
+                colors={query.proposalCategoryOptions.colors.map(color =>
+                  color.replace('COLOR_', '#').toLowerCase(),
+                )}
+                icons={query.proposalCategoryOptions.icons.map(icon =>
+                  icon.toLowerCase().replace(/_/g, '-'),
+                )}
+                usedColors={usedColors}
+                usedIcons={usedIcons}
               />
-              <Row>
+              <Row className="d-flex" style={{ alignItems: 'center' }}>
                 <Col xs={8}>
-                  <div>
+                  <Preview color={categories[index].color}>
+                    {features.display_pictures_in_depository_proposals_list && (
+                      <div>
+                        {categories[index].icon && (
+                          <Icon
+                            name={ICON_NAME[categories[index].icon]}
+                            size={12}
+                            color={colors.white}
+                          />
+                        )}
+                      </div>
+                    )}
                     <strong>{categories[index].name}</strong>
-                  </div>
+                  </Preview>
                 </Col>
                 <Col xs={4}>
                   <ButtonToolbar className="pull-right">
@@ -142,6 +184,7 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
 
 const mapStateToProps = (state: GlobalState) => ({
   categories: selector(state, 'categories'),
+  features: state.default.features,
 });
 const container = connect(mapStateToProps)(ProposalFormAdminCategories);
 
@@ -149,6 +192,10 @@ export default createFragmentContainer(injectIntl(container), {
   query: graphql`
     fragment ProposalFormAdminCategories_query on Query {
       ...ProposalFormAdminCategoriesStepModal_query
+      proposalCategoryOptions {
+        colors
+        icons
+      }
     }
   `,
 });

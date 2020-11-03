@@ -14,8 +14,34 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
     member: 'member',
     isUpdating: true,
     category: {
-      categoryImage: {},
+      categoryImage: null,
+      customCategoryImage: {
+        id: 'customCategoryImage',
+        image: {
+          id: 'uploadedId',
+          name: 'customimage',
+          url: 'http://isitckPhoto.customimage.jpg',
+        },
+      },
+      color: 'blue',
+      icon: null,
     },
+    colors: ['blue', 'red', 'yellow', 'green'],
+    icons: ['wheelchair', 'water', 'leaf', 'parking'],
+    usedColors: ['blue', 'red'],
+    usedIcons: ['parking', 'leaf'],
+    selectedColor: 'red',
+    selectedIcon: 'parking',
+    customCategoryImage: {
+      id: 'customCategoryImage',
+      image: {
+        id: 'uploadedId',
+        name: 'customimage',
+        url: 'http://isitckPhoto.customimage.jpg',
+      },
+    },
+    newCategoryImage: null,
+    name: 'Titre',
     query: {
       categoryImages: [
         {
@@ -40,7 +66,6 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
       $refType,
     },
     features,
-    formName: 'myForm',
     dispatch: jest.fn(),
   };
 
@@ -49,7 +74,7 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('render correctly illustartion enabled', () => {
+  it('render correctly with illustration enabled', () => {
     const defaultProps = {
       ...props,
       features: {

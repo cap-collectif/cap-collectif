@@ -18,6 +18,8 @@ describe('<ProposalPreview />', () => {
       url: '/svg/img.svg',
     },
     category: {
+      icon: 'parking',
+      color: '#eaeaea',
       categoryImage: {
         id: 'categoryImage1',
         image: null,
@@ -34,6 +36,8 @@ describe('<ProposalPreview />', () => {
     },
     media: null,
     category: {
+      icon: 'cone',
+      color: 'orange',
       categoryImage: {
         id: 'categoryImage1',
         image: {
@@ -74,6 +78,8 @@ describe('<ProposalPreview />', () => {
     const noCateogryImage = {
       ...proposal,
       category: {
+        icon: null,
+        color: 'oui',
         categoryImage: null,
       },
     };

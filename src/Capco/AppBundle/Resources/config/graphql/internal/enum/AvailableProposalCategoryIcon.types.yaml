@@ -1,0 +1,114 @@
+AvailableProposalCategoryIcon:
+    type: enum
+    config:
+        description: 'The possible values for a proposal category icon'
+        values:
+            GAS_STATION:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::GAS_STATION")'
+            BOAT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::BOAT")'
+            EARTH:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::EARTH")'
+            TRAVEL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::TRAVEL")'
+            PASSPORT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::PASSPORT")'
+            ECONOMY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::ECONOMY")'
+            PARKING:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::PARKING")'
+            COCKTAIL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::COCKTAIL")'
+            RESTAURANT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::RESTAURANT")'
+            FARMER_MARKET:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::FARMER_MARKET")'
+            NETWORK:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::NETWORK")'
+            MOBILE_PHONE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::MOBILE_PHONE")'
+            COMPANY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::COMPANY")'
+            URBANISM:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::URBANISM")'
+            VILLAGE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::VILLAGE")'
+            CONSTRUCTION_CONE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::CONSTRUCTION_CONE")'
+            VEGETABLES_PLATE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::VEGETABLES_PLATE")'
+            GROCERY_SHOPPING:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::GROCERY_SHOPPING")'
+            SHOPPING_BAG:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::SHOPPING_BAG")'
+            MEDICAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::MEDICAL")'
+            HOSPITAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::HOSPITAL")'
+            HEALTH:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::HEALTH")'
+            BICYCLE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::BICYCLE")'
+            OFFICER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::OFFICER")'
+            SURVEILLANCE_CAMERA:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::SURVEILLANCE_CAMERA")'
+            FAMILY_CHILDREN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::FAMILY_CHILDREN")'
+            FAMILY_WALK_PARK:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::FAMILY_WALK_PARK")'
+            FAMILY_CHILD_PLAY_BALL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::FAMILY_CHILD_PLAY_BALL")'
+            BASKETBALL_BALL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::BASKETBALL_BALL")'
+            DOG_LEASH:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::DOG_LEASH")'
+            WATER:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::WATER")'
+            TREE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::TREE")'
+            PARK_BENCH_LIGHT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::PARK_BENCH_LIGHT")'
+            RECYCLE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::RECYCLE")'
+            BIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::BIN")'
+            AGRICULTURE_MACHINE_TRACTOR:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::AGRICULTURE_MACHINE_TRACTOR")'
+            HAND:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::HAND")'
+            SOLIDARITY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::SOLIDARITY")'
+            HIERARCHY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::HIERARCHY")'
+            ELDERLY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::ELDERLY")'
+            PARAPLEGIC:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::PARAPLEGIC")'
+            CAR:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::CAR")'
+            CARPOOLING:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::CARPOOLING")'
+            BUS_STATION:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::BUS_STATION")'
+            RAILROAD_TRAIN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::RAILROAD_TRAIN")'
+            BRIEFCASE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::BRIEFCASE")'
+            BOOK_FLIP_PAGE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::BOOK_FLIP_PAGE")'
+            CULTURE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::CULTURE")'
+            OFFICIAL_BUILDING:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::OFFICIAL_BUILDING")'
+            GRADUATE:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::GRADUATE")'
+            LIGHT_BULB:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::LIGHT_BULB")'
+            ENERGY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::ENERGY")'
+            ICN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::ICN")'
+            ECOLOGY_LEAF:
+                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableProposalCategoryIcon::ECOLOGY_LEAF")'
+

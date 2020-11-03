@@ -4,6 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormAdminCategories } from './ProposalFormAdminCategories';
 import { intlMock, $refType, $fragmentRefs } from '../../mocks';
+import { features } from '../../redux/modules/default';
 
 describe('<ProposalFormAdminCategories />', () => {
   const props = {
@@ -13,7 +14,12 @@ describe('<ProposalFormAdminCategories />', () => {
     query: {
       $fragmentRefs,
       $refType,
+      proposalCategoryOptions: {
+        colors: ['COLOR_004D40', 'COLOR_004D40'],
+        icons: ['AGRICULTURE_MACHINE_TRACTOR', 'BASKETBALL_BALL'],
+      },
     },
+    features,
     intl: intlMock,
   };
 

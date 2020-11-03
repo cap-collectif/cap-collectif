@@ -9,7 +9,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
   sm={6}
   xs={12}
 >
-  <Card
+  <ProposalPreview__ProposalCard
     className="block--shadowed proposal-preview"
     id="proposal-1"
   >
@@ -26,6 +26,8 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
               "id": "categoryImage1",
               "image": null,
             },
+            "color": "#eaeaea",
+            "icon": "parking",
           },
           "id": "1",
           "media": Object {
@@ -54,6 +56,8 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
               "id": "categoryImage1",
               "image": null,
             },
+            "color": "#eaeaea",
+            "icon": "parking",
           },
           "id": "1",
           "media": Object {
@@ -81,6 +85,8 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
               "id": "categoryImage1",
               "image": null,
             },
+            "color": "#eaeaea",
+            "icon": "parking",
           },
           "id": "1",
           "media": Object {
@@ -89,7 +95,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
         }
       }
     />
-  </Card>
+  </ProposalPreview__ProposalCard>
 </Col>
 `;
 
@@ -102,11 +108,11 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
   sm={6}
   xs={12}
 >
-  <Card
+  <ProposalPreview__ProposalCard
     className="bg-vip proposal-preview block--shadowed"
     id="proposal-1"
   >
-    <ProposalPreview__ProposalDefaultImage
+    <ProposalPreview__ProposalImage
       bgImage="http://image.mypicture.jpg"
     />
     <Relay(Connect(ProposalPreviewBody))
@@ -124,6 +130,8 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
                 "url": "http://image.mypicture.jpg",
               },
             },
+            "color": "orange",
+            "icon": "cone",
           },
           "id": "1",
           "media": null,
@@ -152,6 +160,8 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
                 "url": "http://image.mypicture.jpg",
               },
             },
+            "color": "orange",
+            "icon": "cone",
           },
           "id": "1",
           "media": null,
@@ -179,13 +189,15 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
                 "url": "http://image.mypicture.jpg",
               },
             },
+            "color": "orange",
+            "icon": "cone",
           },
           "id": "1",
           "media": null,
         }
       }
     />
-  </Card>
+  </ProposalPreview__ProposalCard>
 </Col>
 `;
 
@@ -198,7 +210,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
   sm={6}
   xs={12}
 >
-  <Card
+  <ProposalPreview__ProposalCard
     className="block--shadowed proposal-preview"
     id="proposal-1"
   >
@@ -215,6 +227,8 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
           },
           "category": Object {
             "categoryImage": null,
+            "color": "oui",
+            "icon": null,
           },
           "id": "1",
           "media": Object {
@@ -240,6 +254,8 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
           },
           "category": Object {
             "categoryImage": null,
+            "color": "oui",
+            "icon": null,
           },
           "id": "1",
           "media": Object {
@@ -264,6 +280,8 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
           },
           "category": Object {
             "categoryImage": null,
+            "color": "oui",
+            "icon": null,
           },
           "id": "1",
           "media": Object {
@@ -272,6 +290,6 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
         }
       }
     />
-  </Card>
+  </ProposalPreview__ProposalCard>
 </Col>
 `;

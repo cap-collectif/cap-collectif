@@ -56,6 +56,8 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
         id: 'category1',
         name: 'Category 1 ',
         categoryImage: null,
+        icon: 'wheelchair',
+        color: 'purple',
       },
     ],
     districts: [],

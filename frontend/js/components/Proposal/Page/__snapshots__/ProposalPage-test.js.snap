@@ -281,6 +281,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "icon",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "color",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "CategoryImage",
                           "kind": "LinkedField",
                           "name": "categoryImage",
@@ -6381,7 +6395,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "355ddedb55dc02a777d46f6e913c6f71",
+          "cacheID": "400dd955af679404348c908a433a71db",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7485,6 +7499,8 @@ fragment ProposalPageHeader_proposal_39ngnn on Proposal {
   }
   category {
     name
+    icon
+    color
     categoryImage {
       image {
         url

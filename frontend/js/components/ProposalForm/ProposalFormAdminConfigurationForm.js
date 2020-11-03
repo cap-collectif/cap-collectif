@@ -352,6 +352,8 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     categories: values.categories.map(category => ({
       id: category.id || null,
       name: category.name,
+      color: category.color.replace('#', 'COLOR_').toUpperCase(),
+      icon: category.icon ? category.icon.toUpperCase().replace(/-/g, '_') : null,
       categoryImage: getCategoryImage(category, false),
       newCategoryImage: getCategoryImage(category, true),
     })),
@@ -619,7 +621,7 @@ export const ProposalFormAdminConfigurationForm = ({
                 component={component}
                 type="checkbox"
                 id="proposal_form_category_mandatory">
-                <FormattedMessage id="global.mandatory" />
+                <FormattedMessage id="make.input.mandatory" />
               </Field>
               <Field
                 name="categoryHelpText"
@@ -636,7 +638,7 @@ export const ProposalFormAdminConfigurationForm = ({
               <FieldArray
                 name="categories"
                 component={ProposalFormAdminCategories}
-                props={{ query }}
+                props={{ query, proposalForm }}
               />
             </Panel.Body>
           </Panel.Collapse>
@@ -892,6 +894,8 @@ export default createRefetchContainer(
         categories {
           id
           name
+          color
+          icon
           categoryImage {
             id
             isDefault

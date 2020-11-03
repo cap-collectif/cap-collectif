@@ -132,6 +132,61 @@ export const ICON_NAME = {
   certified: 'certified',
   sendMail: 'send-mail',
   trophy: 'trophy',
+  bin: 'bin',
+  'gas-station': 'gas-station',
+  boat: 'boat',
+  earth: 'earth',
+  travel: 'travel',
+  passport: 'passport',
+  economy: 'economy',
+  parking: 'parking',
+  cocktail: 'cocktail',
+  restaurant: 'restaurant',
+  'farmer-market': 'farmer-market',
+  network: 'network',
+  'mobile-phone': 'mobile-phone',
+  company: 'company',
+  urbanism: 'urbanism',
+  village: 'village',
+  'construction-cone': 'construction-cone',
+  'vegetables-plate': 'vegetables-plate',
+  'grocery-shopping': 'grocery-shopping',
+  'shopping-bag': 'shopping-bag',
+  medical: 'medical',
+  hospital: 'hospital',
+  health: 'health',
+  bicycle: 'bicycle',
+  officer: 'officer',
+  'surveillance-camera': 'surveillance-camera',
+  'family-children': 'family-children',
+  'family-walk-park': 'family-walk-park',
+  'family-child-play-ball': 'family-child-play-ball',
+  'basketball-ball': 'basketball-ball',
+  'dog-leash': 'dog-leash',
+  water: 'water',
+  tree: 'tree',
+  'park-bench-light': 'park-bench-light',
+  recycle: 'recycle',
+  'agriculture-machine-tractor': 'agriculture-machine-tractor',
+  hand: 'hand',
+  solidarity: 'solidarity',
+  hierarchy: 'hierarchy',
+  elderly: 'elderly',
+  paraplegic: 'paraplegic',
+  car: 'car',
+  carpooling: 'carpooling',
+  'bus-station': 'bus-station',
+  'railroad-train': 'railroad-train',
+  briefcase: 'briefcase',
+  'book-flip-page': 'book-flip-page',
+  culture: 'culture',
+  'official-building': 'official-building',
+  graduate: 'graduate',
+  'light-bulb': 'light-bulb',
+  energy: 'energy',
+  icn: 'icn',
+  'ecology-leaf': 'ecology-leaf',
+  pin3: 'pin3',
   browser: 'browser',
   letter: 'letter',
   danger: 'danger',
@@ -407,6 +462,116 @@ const getIcon = name => {
       return <Icons.SendMail />;
     case 'trophy':
       return <Icons.Trophy />;
+    case 'bin':
+      return <Icons.Bin />;
+    case 'gas-station':
+      return <Icons.GasStation />;
+    case 'boat':
+      return <Icons.Boat />;
+    case 'earth':
+      return <Icons.Earth />;
+    case 'travel':
+      return <Icons.Travel />;
+    case 'passport':
+      return <Icons.Passport />;
+    case 'economy':
+      return <Icons.Economy />;
+    case 'parking':
+      return <Icons.Parking />;
+    case 'cocktail':
+      return <Icons.Cocktail />;
+    case 'restaurant':
+      return <Icons.Restaurant />;
+    case 'farmer-market':
+      return <Icons.FarmerMarket />;
+    case 'network':
+      return <Icons.Network />;
+    case 'mobile-phone':
+      return <Icons.MobilePhone />;
+    case 'company':
+      return <Icons.Company />;
+    case 'urbanism':
+      return <Icons.Urbanism />;
+    case 'village':
+      return <Icons.Village />;
+    case 'construction-cone':
+      return <Icons.ConstructionCone />;
+    case 'vegetables-plate':
+      return <Icons.VegetablesPlate />;
+    case 'grocery-shopping':
+      return <Icons.GroceryShopping />;
+    case 'shopping-bag':
+      return <Icons.ShoppingBag />;
+    case 'medical':
+      return <Icons.Medical />;
+    case 'hospital':
+      return <Icons.Hospital />;
+    case 'health':
+      return <Icons.Health />;
+    case 'bicycle':
+      return <Icons.Bicycle />;
+    case 'officer':
+      return <Icons.Officer />;
+    case 'surveillance-camera':
+      return <Icons.SurveillanceCamera />;
+    case 'family-children':
+      return <Icons.FamilyChildren />;
+    case 'family-walk-park':
+      return <Icons.FamilyWalkPark />;
+    case 'family-child-play-ball':
+      return <Icons.FamilyChildPlayBall />;
+    case 'basketball-ball':
+      return <Icons.BasketballBall />;
+    case 'dog-leash':
+      return <Icons.DogLeash />;
+    case 'water':
+      return <Icons.Water />;
+    case 'tree':
+      return <Icons.Tree />;
+    case 'park-bench-light':
+      return <Icons.ParkBenchLight />;
+    case 'recycle':
+      return <Icons.Recycle />;
+    case 'agriculture-machine-tractor':
+      return <Icons.AgricultureMachineTractor />;
+    case 'hand':
+      return <Icons.Hand />;
+    case 'solidarity':
+      return <Icons.Solidarity />;
+    case 'hierarchy':
+      return <Icons.Hierarchy />;
+    case 'elderly':
+      return <Icons.Elderly />;
+    case 'paraplegic':
+      return <Icons.Paraplegic />;
+    case 'car':
+      return <Icons.Car />;
+    case 'carpooling':
+      return <Icons.Carpooling />;
+    case 'bus-station':
+      return <Icons.BusStation />;
+    case 'railroad-train':
+      return <Icons.RailroadTrain />;
+    case 'briefcase':
+      return <Icons.Briefcase />;
+    case 'book-flip-page':
+      return <Icons.BookFlipPage />;
+    case 'culture':
+      return <Icons.Culture />;
+    case 'official-building':
+      return <Icons.OfficialBuilding />;
+    case 'graduate':
+      return <Icons.Graduate />;
+    case 'light-bulb':
+      return <Icons.LightBulb />;
+    case 'energy':
+      return <Icons.Energy />;
+    case 'icn':
+      return <Icons.Icn />;
+    case 'ecology-leaf':
+      return <Icons.EcologyLeaf />;
+    case 'pin3':
+      return <Icons.Pin3 />;
     case 'browser':
       return <Icons.Browser />;
     case 'letter':

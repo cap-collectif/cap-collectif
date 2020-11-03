@@ -25,7 +25,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     dragging={true}
     maxZoom={18}
     onClick={[Function]}
-    onPopupClose={[Function]}
     onZoomStart={[Function]}
     style={
       Object {
@@ -54,6 +53,8 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"#EEE\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -62,7 +63,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
                 40,
                 40,
               ],
-              "iconUrl": "/svg/marker-not-selected.svg",
               "popupAnchor": Array [
                 0,
                 -40,
@@ -91,6 +91,10 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
                   "lat": 49.8397,
                   "lng": 24.0297,
                 },
+                "category": Object {
+                  "color": "#EEE",
+                  "icon": null,
+                },
                 "id": "pid1",
               }
             }
@@ -103,6 +107,8 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"blue\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock><IconMock fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -111,7 +117,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
                 40,
                 40,
               ],
-              "iconUrl": "/svg/marker-not-selected.svg",
               "popupAnchor": Array [
                 0,
                 -40,
@@ -140,6 +145,10 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
                   "lat": 52.2297,
                   "lng": 21.0122,
                 },
+                "category": Object {
+                  "color": "blue",
+                  "icon": "water",
+                },
                 "id": "pid2",
               }
             }
@@ -152,6 +161,8 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"purple\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock><div fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></div>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -160,7 +171,6 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
                 40,
                 40,
               ],
-              "iconUrl": "/svg/marker-not-selected.svg",
               "popupAnchor": Array [
                 0,
                 -40,
@@ -188,6 +198,10 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
                 "address": Object {
                   "lat": 51.5074,
                   "lng": -0.0901,
+                },
+                "category": Object {
+                  "color": "purple",
+                  "icon": "wheelchair",
                 },
                 "id": "pid4",
               }
@@ -226,7 +240,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     dragging={true}
     maxZoom={18}
     onClick={[Function]}
-    onPopupClose={[Function]}
     onZoomStart={[Function]}
     style={
       Object {
@@ -255,6 +268,8 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"#EEE\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -263,7 +278,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
                 40,
                 40,
               ],
-              "iconUrl": "/svg/marker-not-selected.svg",
               "popupAnchor": Array [
                 0,
                 -40,
@@ -292,6 +306,10 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
                   "lat": 49.8397,
                   "lng": 24.0297,
                 },
+                "category": Object {
+                  "color": "#EEE",
+                  "icon": null,
+                },
                 "id": "pid1",
               }
             }
@@ -304,6 +322,8 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"blue\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock><IconMock fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -312,7 +332,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
                 40,
                 40,
               ],
-              "iconUrl": "/svg/marker-not-selected.svg",
               "popupAnchor": Array [
                 0,
                 -40,
@@ -341,6 +360,10 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
                   "lat": 52.2297,
                   "lng": 21.0122,
                 },
+                "category": Object {
+                  "color": "blue",
+                  "icon": "water",
+                },
                 "id": "pid2",
               }
             }
@@ -353,6 +376,8 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"purple\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock><div fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></div>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -361,7 +386,6 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
                 40,
                 40,
               ],
-              "iconUrl": "/svg/marker-not-selected.svg",
               "popupAnchor": Array [
                 0,
                 -40,
@@ -389,6 +413,10 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
                 "address": Object {
                   "lat": 51.5074,
                   "lng": -0.0901,
+                },
+                "category": Object {
+                  "color": "purple",
+                  "icon": "wheelchair",
                 },
                 "id": "pid4",
               }

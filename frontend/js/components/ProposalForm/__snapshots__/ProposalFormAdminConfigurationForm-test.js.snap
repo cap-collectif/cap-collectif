@@ -144,6 +144,8 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         "categories": Array [
           Object {
             "categoryImage": null,
+            "color": "purple",
+            "icon": "wheelchair",
             "id": "category1",
             "name": "Category 1 ",
           },
@@ -479,7 +481,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             type="checkbox"
           >
             <FormattedMessage
-              id="global.mandatory"
+              id="make.input.mandatory"
               values={Object {}}
             />
           </Field>
@@ -517,6 +519,74 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             name="categories"
             props={
               Object {
+                "proposalForm": Object {
+                  "$fragmentRefs": null,
+                  "$refType": null,
+                  "addressHelpText": "",
+                  "allowAknowledge": true,
+                  "canContact": false,
+                  "categories": Array [
+                    Object {
+                      "categoryImage": null,
+                      "color": "purple",
+                      "icon": "wheelchair",
+                      "id": "category1",
+                      "name": "Category 1 ",
+                    },
+                  ],
+                  "categoryHelpText": "",
+                  "categoryMandatory": true,
+                  "description": "description",
+                  "descriptionHelpText": "",
+                  "descriptionMandatory": true,
+                  "districtHelpText": "",
+                  "districtMandatory": true,
+                  "districts": Array [],
+                  "id": "proposalFormId",
+                  "illustrationHelpText": "",
+                  "isGridViewEnabled": false,
+                  "isListViewEnabled": false,
+                  "isMapViewEnabled": false,
+                  "isProposalForm": true,
+                  "mapCenter": Object {
+                    "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+                    "lat": 0,
+                    "lng": 0,
+                  },
+                  "proposalInAZoneRequired": true,
+                  "questions": Array [
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-1",
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 1,
+                      "position": 1,
+                      "private": false,
+                      "rangeMax": null,
+                      "rangeMin": null,
+                      "required": false,
+                      "title": "Titre 1",
+                      "type": "text",
+                    },
+                  ],
+                  "summaryHelpText": "",
+                  "themeHelpText": "",
+                  "themeMandatory": true,
+                  "titleHelpText": "",
+                  "usingAddress": true,
+                  "usingCategories": true,
+                  "usingDescription": true,
+                  "usingDistrict": true,
+                  "usingIllustration": false,
+                  "usingSummary": false,
+                  "usingThemes": true,
+                  "zoomMap": 0,
+                },
                 "query": Object {
                   "$fragmentRefs": null,
                   "$refType": null,
@@ -829,6 +899,8 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
         "categories": Array [
           Object {
             "categoryImage": null,
+            "color": "purple",
+            "icon": "wheelchair",
             "id": "category1",
             "name": "Category 1 ",
           },
@@ -1165,7 +1237,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
             type="checkbox"
           >
             <FormattedMessage
-              id="global.mandatory"
+              id="make.input.mandatory"
               values={Object {}}
             />
           </Field>
@@ -1203,6 +1275,75 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly with question t
             name="categories"
             props={
               Object {
+                "proposalForm": Object {
+                  "$fragmentRefs": null,
+                  "$refType": null,
+                  "addressHelpText": "",
+                  "allowAknowledge": true,
+                  "canContact": false,
+                  "categories": Array [
+                    Object {
+                      "categoryImage": null,
+                      "color": "purple",
+                      "icon": "wheelchair",
+                      "id": "category1",
+                      "name": "Category 1 ",
+                    },
+                  ],
+                  "categoryHelpText": "",
+                  "categoryMandatory": true,
+                  "description": "description",
+                  "descriptionHelpText": "",
+                  "descriptionMandatory": true,
+                  "districtHelpText": "",
+                  "districtMandatory": true,
+                  "districts": Array [],
+                  "id": "proposalFormId",
+                  "illustrationHelpText": "",
+                  "isGridViewEnabled": false,
+                  "isListViewEnabled": false,
+                  "isMapViewEnabled": false,
+                  "isProposalForm": true,
+                  "mapCenter": Object {
+                    "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+                    "lat": 0,
+                    "lng": 0,
+                  },
+                  "proposalInAZoneRequired": true,
+                  "questions": Array [
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-1",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 1,
+                      "position": 1,
+                      "private": false,
+                      "rangeMax": 10000,
+                      "rangeMin": 0,
+                      "required": false,
+                      "title": "Titre 1",
+                      "type": "number",
+                    },
+                  ],
+                  "summaryHelpText": "",
+                  "themeHelpText": "",
+                  "themeMandatory": true,
+                  "titleHelpText": "",
+                  "usingAddress": true,
+                  "usingCategories": true,
+                  "usingDescription": true,
+                  "usingDistrict": true,
+                  "usingIllustration": false,
+                  "usingSummary": false,
+                  "usingThemes": true,
+                  "zoomMap": 0,
+                },
                 "query": Object {
                   "$fragmentRefs": null,
                   "$refType": null,
@@ -1515,6 +1656,8 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
         "categories": Array [
           Object {
             "categoryImage": null,
+            "color": "purple",
+            "icon": "wheelchair",
             "id": "category1",
             "name": "Category 1 ",
           },
@@ -1908,7 +2051,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
             type="checkbox"
           >
             <FormattedMessage
-              id="global.mandatory"
+              id="make.input.mandatory"
               values={Object {}}
             />
           </Field>
@@ -1946,6 +2089,132 @@ exports[`<ProposalFormAdminConfigurationForm /> render error with question type 
             name="categories"
             props={
               Object {
+                "proposalForm": Object {
+                  "$fragmentRefs": null,
+                  "$refType": null,
+                  "addressHelpText": "",
+                  "allowAknowledge": true,
+                  "canContact": false,
+                  "categories": Array [
+                    Object {
+                      "categoryImage": null,
+                      "color": "purple",
+                      "icon": "wheelchair",
+                      "id": "category1",
+                      "name": "Category 1 ",
+                    },
+                  ],
+                  "categoryHelpText": "",
+                  "categoryMandatory": true,
+                  "description": "description",
+                  "descriptionHelpText": "",
+                  "descriptionMandatory": true,
+                  "districtHelpText": "",
+                  "districtMandatory": true,
+                  "districts": Array [],
+                  "id": "proposalFormId",
+                  "illustrationHelpText": "",
+                  "isGridViewEnabled": false,
+                  "isListViewEnabled": false,
+                  "isMapViewEnabled": false,
+                  "isProposalForm": true,
+                  "mapCenter": Object {
+                    "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+                    "lat": 0,
+                    "lng": 0,
+                  },
+                  "proposalInAZoneRequired": true,
+                  "questions": Array [
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-1",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 1,
+                      "position": 1,
+                      "private": false,
+                      "rangeMax": 0,
+                      "rangeMin": 10,
+                      "required": false,
+                      "title": "Titre 1",
+                      "type": "number",
+                    },
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-2",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 2,
+                      "position": 2,
+                      "private": false,
+                      "rangeMax": 0,
+                      "rangeMin": 0,
+                      "required": false,
+                      "title": "Titre 2",
+                      "type": "number",
+                    },
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-3",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 2,
+                      "position": 2,
+                      "private": false,
+                      "rangeMax": null,
+                      "rangeMin": 1000,
+                      "required": false,
+                      "title": "Titre 3",
+                      "type": "number",
+                    },
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-4",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 2,
+                      "position": 2,
+                      "private": false,
+                      "rangeMax": 10000,
+                      "rangeMin": null,
+                      "required": false,
+                      "title": "Titre 4",
+                      "type": "number",
+                    },
+                  ],
+                  "summaryHelpText": "",
+                  "themeHelpText": "",
+                  "themeMandatory": true,
+                  "titleHelpText": "",
+                  "usingAddress": true,
+                  "usingCategories": true,
+                  "usingDescription": true,
+                  "usingDistrict": true,
+                  "usingIllustration": false,
+                  "usingSummary": false,
+                  "usingThemes": true,
+                  "zoomMap": 0,
+                },
                 "query": Object {
                   "$fragmentRefs": null,
                   "$refType": null,

@@ -28,6 +28,8 @@ describe('<ProposalPageHeader />', () => {
     },
     media: { url: '/image.exe' },
     category: {
+      color: 'red',
+      icon: null,
       name: 'cat',
       categoryImage: {
         image: {

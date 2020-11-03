@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\CategoryImage;
 use Capco\AppBundle\Entity\ProposalCategory;
+use Capco\AppBundle\Validator\Constraints\ValidProposalCategoryColor;
+use Capco\AppBundle\Validator\Constraints\ValidProposalCategoryIcon;
 use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -18,6 +20,16 @@ class ProposalCategoryType extends AbstractType
         $builder
             ->add('id')
             ->add('name', TextType::class)
+            ->add('icon', null, [
+                'constraints' => [
+                    new ValidProposalCategoryIcon()
+                ]
+            ])
+            ->add('color', null, [
+                'constraints' => [
+                    new ValidProposalCategoryColor()
+                ]
+            ])
             ->add('categoryImage', EntityType::class, ['class' => CategoryImage::class])
             ->add('newCategoryImage', EntityType::class, [
                 'class' => Media::class,
