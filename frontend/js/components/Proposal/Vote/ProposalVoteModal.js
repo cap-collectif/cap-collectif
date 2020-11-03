@@ -100,7 +100,9 @@ export class ProposalVoteModal extends React.Component<Props, State> {
         {
           input: {
             step: step.id,
-            votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
+            votes: values.votes
+              .filter(voteFilter => voteFilter.id !== null)
+              .map(v => ({ id: v.id, anonymous: !v.public })),
           },
           stepId: step.id,
           isAuthenticated,
