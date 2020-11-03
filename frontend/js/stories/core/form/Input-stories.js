@@ -155,13 +155,7 @@ storiesOf('Core|Form/Dropzone', module).add('Default', () => {
 
 storiesOf('Core|Form/Toggle', module).add('Default', () => {
   return (
-    <Toggle
-      id="1"
-      name="test"
-      value="test1"
-      label="Toggler"
-      roledescription="Je suis un text d'aide"
-    />
+    <Toggle id="1" name="test" value="test1" label="Toggler" helpText="Je suis un text d'aide" />
   );
 });
 
@@ -173,7 +167,7 @@ storiesOf('Core|Form/Toggle', module).add('Checked', () => {
       value="test2"
       label="Toggler"
       checked
-      roledescription="Je suis un text d'aide"
+      helpText="Je suis un text d'aide"
       labelSide="LEFT"
     />
   );
@@ -187,7 +181,7 @@ storiesOf('Core|Form/Toggle', module).add('Disabled', () => {
       value="test3"
       label="Toggler"
       disabled
-      roledescription="Je suis un text d'aide"
+      helpText="Je suis un text d'aide"
     />
   );
 });

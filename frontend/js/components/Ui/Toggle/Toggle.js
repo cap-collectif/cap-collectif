@@ -24,7 +24,7 @@ type Props = {|
   ...PropsCommonCheckboxRadio,
   id?: string,
   name?: string,
-  roledescription?: Node | string,
+  helpText?: Node | string,
   value?: string,
   checked?: ?boolean,
   labelSide?: LabelSide,
@@ -44,7 +44,7 @@ const Toggle = ({
   checked = false,
   labelSide = 'RIGHT',
   tooltip,
-  roledescription,
+  helpText,
   bold,
 }: Props) => {
   const referenceToggle = React.useRef(null);
@@ -121,7 +121,7 @@ const Toggle = ({
           disabled={disabled}
         />
       </div>
-      {roledescription && <span className="excerpt">{roledescription}</span>}
+      {helpText && <span className="excerpt">{helpText}</span>}
     </ToggleContainer>
   );
 };

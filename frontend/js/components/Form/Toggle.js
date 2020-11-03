@@ -12,6 +12,7 @@ export type Props = {|
   meta?: { touched: boolean, error: ?string },
   label?: string,
   roledescription?: string,
+  helpText?: string,
   disabled?: boolean,
   id: string,
   bold?: boolean,
@@ -30,14 +31,14 @@ export const Toggle = ({
   className,
   toggleClassName,
   bold,
-  roledescription,
+  helpText,
 }: Props) => (
   <div className={cn('form-group', className)}>
     <ToggleUi
       id={id}
       className={toggleClassName}
       label={label}
-      roledescription={roledescription}
+      helpText={helpText}
       labelSide={labelSide}
       disabled={disabled}
       onChange={input.onChange}

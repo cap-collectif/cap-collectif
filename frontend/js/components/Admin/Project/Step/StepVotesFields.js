@@ -64,7 +64,7 @@ export function StepVotesFields({
                 id="step-isBudgetEnabled"
                 name="isBudgetEnabled"
                 normalize={val => !!val}
-                roledescription={<FormattedMessage id="budget-help" />}
+                helpText={<FormattedMessage id="budget-help" />}
                 label={<FormattedMessage id="maximum-budget" />}
               />
               {isBudgetEnabled && (
@@ -83,7 +83,7 @@ export function StepVotesFields({
                 id="step-isTresholdEnabled"
                 name="isTresholdEnabled"
                 normalize={val => !!val}
-                roledescription={<FormattedMessage id="ceil-help" />}
+                helpText={<FormattedMessage id="ceil-help" />}
                 label={<FormattedMessage id="admin.fields.step.vote_threshold.input" />}
               />
               {isTresholdEnabled && (
@@ -103,7 +103,7 @@ export function StepVotesFields({
                 name="isLimitEnabled"
                 normalize={val => !!val}
                 label={<FormattedMessage id="Number-of-votes-per-person" />}
-                roledescription={<FormattedMessage id="vote-classement-help" />}
+                helpText={<FormattedMessage id="vote-classement-help" />}
               />
               {isLimitEnabled && (
                 <div>

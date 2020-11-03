@@ -15,7 +15,7 @@ const baseProps = {
   disabled: false,
   checked: false,
   labelSide: 'RIGHT',
-  roledescription: 'cool story bro',
+  helpText: 'cool story bro',
 };
 
 const props = {

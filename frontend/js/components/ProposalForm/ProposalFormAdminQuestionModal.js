@@ -277,7 +277,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                   bold
                   disabled={false}
                   label={<FormattedMessage id="define-range" />}
-                  roledescription={<FormattedMessage id="range-help" />}
+                  helpText={<FormattedMessage id="range-help" />}
                 />
                 {isRangeBetween && (
                   <RangeDiv className="d-flex justify-content-between">
