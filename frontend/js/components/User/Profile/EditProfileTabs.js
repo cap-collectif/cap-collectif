@@ -56,7 +56,7 @@ export class EditProfileTabs extends Component<Props> {
     if (hash) {
       return getHashKey(hash);
     }
-    return 'account';
+    return 'profile';
   }
 
   render() {
