@@ -91,6 +91,10 @@ class ReplyAdmin extends AbstractAdmin
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
             ])
+            ->add('project', ModelType::class, [
+                'label' => 'global.participative.project.label',
+                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
+            ])
             ->add('state', null, [
                 'mapped' => false,
                 'label' => 'global.state',

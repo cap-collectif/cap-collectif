@@ -94,7 +94,10 @@ class SourceAdmin extends AbstractAdmin
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('published', null, ['label' => 'global.published'])
-            ->add('trashedStatus', null, ['label' => 'global.is_trashed']);
+            ->add('trashedStatus', null, ['label' => 'global.is_trashed'])
+            ->add('opinion.consultation.step.projectAbstractStep.project', null, [
+                'label' => 'global.participative.project.label',
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -109,6 +112,10 @@ class SourceAdmin extends AbstractAdmin
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+            ])
+            ->add('project', ModelType::class, [
+                'label' => 'global.participative.project.label',
+                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
             ])
             ->add('opinion', ModelType::class, [
                 'label' => 'global.proposal',

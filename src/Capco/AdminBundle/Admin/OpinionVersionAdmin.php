@@ -90,7 +90,10 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
             ->add('published', null, ['label' => 'global.published'])
             ->add('trashedStatus', null, ['label' => 'global.is_trashed'])
-            ->add('updatedAt', null, ['label' => 'global.maj']);
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+            ->add('parent.consultation.step.projectAbstractStep.project', null, [
+                'label' => 'global.participative.project.label',
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -110,6 +113,10 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('author', null, [
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+            ])
+            ->add('project', ModelType::class, [
+                'label' => 'global.participative.project.label',
+                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
             ])
             ->add('parent', null, [
                 'label' => 'admin.fields.opinion_version.parent',

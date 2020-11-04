@@ -16,10 +16,12 @@ import ProjectAdminProposals, {
 } from '~/components/Admin/Project/ProjectAdminProposals';
 import { useProjectAdminProposalsContext } from './ProjectAdminPage.context';
 import ProjectAdminProposalsPlaceholder from './ProjectAdminProposalsPlaceholder';
+import NoCollectStep from '~/components/Admin/Project/NoCollectStep';
 
 type Props = {|
   +projectId: string,
   +dataPrefetch: ResultPreloadQuery,
+  +hasCollectStep: boolean,
 |};
 
 type PropsQuery = {|
@@ -90,6 +92,7 @@ export const queryProposals = graphql`
     $term: String
   ) {
     project: node(id: $projectId) {
+      ...NoCollectStep_project
       ...ProjectAdminProposals_project
         @arguments(
           projectId: $projectId
@@ -127,7 +130,7 @@ export const initialVariables = {
   term: null,
 };
 
-const ProjectAdminProposalsPage = ({ projectId, dataPrefetch }: Props) => {
+const ProjectAdminProposalsPage = ({ projectId, hasCollectStep, dataPrefetch }: Props) => {
   const { parameters, firstCollectStepId } = useProjectAdminProposalsContext();
 
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
@@ -151,8 +154,14 @@ const ProjectAdminProposalsPage = ({ projectId, dataPrefetch }: Props) => {
     },
   );
 
+  if (!hasCollectStep && dataPreloaded && dataPreloaded.project) {
+    const project: any = dataPreloaded?.project;
+
+    return <NoCollectStep project={project} />;
+  }
+
   if (
-    (!hasFilters && dataPreloaded && dataPreloaded.project) ||
+    (hasCollectStep && !hasFilters && dataPreloaded && dataPreloaded.project) ||
     (hasFilters && data && data.project)
   ) {
     const project: any = dataPreloaded && !hasFilters ? dataPreloaded.project : data.project;

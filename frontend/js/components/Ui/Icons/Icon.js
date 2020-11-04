@@ -53,6 +53,8 @@ export const ICON_NAME = {
   messageBubble: 'messageBubble',
   messageBubbleCheck: 'messageBubbleCheck',
   messageBubbleFilled: 'messageBubbleFilled',
+  messageBubbleQuestion: 'messageBubbleQuestion',
+  messageBubbleSearch: 'messageBubbleSearch',
   doubleMessageBubble: 'doubleMessageBubble',
   taskList: 'taskList',
   done: 'done',
@@ -106,6 +108,8 @@ export const ICON_NAME = {
   less: 'less',
   filter: 'filter',
   grandLyonConnect: 'grandLyonConnect',
+  argument: 'argument',
+  legalHammer: 'legalHammer',
   pdfIcon: 'pdfIcon',
   zipIcon: 'zipIcon',
   vidIcon: 'vidIcon',
@@ -113,6 +117,7 @@ export const ICON_NAME = {
   fileIcon: 'fileIcon',
   fileIcon2: 'fileIcon2',
   bookmark: 'bookmark',
+  bookmark2: 'bookmark2',
   budget: 'budget',
   vote: 'vote',
   urne: 'urne',
@@ -307,6 +312,10 @@ const getIcon = name => {
       return <Icons.MessageBubble />;
     case 'messageBubbleFilled':
       return <Icons.MessageBubbleFilled />;
+    case 'messageBubbleQuestion':
+      return <Icons.MessageBubbleQuestion />;
+    case 'messageBubbleSearch':
+      return <Icons.MessageBubbleSearch />;
     case 'taskList':
     case 'todo':
       return <Icons.TaskList />;
@@ -410,6 +419,14 @@ const getIcon = name => {
       return <Icons.Filter />;
     case 'grandLyonConnect':
       return <Icons.GrandLyonConnect />;
+    case 'bookmark':
+      return <Icons.Bookmark />;
+    case 'bookmark2':
+      return <Icons.Bookmark2 />;
+    case 'argument':
+      return <Icons.Argument />;
+    case 'legalHammer':
+      return <Icons.LegalHammer />;
     case 'pdfIcon':
       return <Icons.PdfIcon />;
     case 'vidIcon':
@@ -422,8 +439,6 @@ const getIcon = name => {
       return <Icons.FileIcon />;
     case 'fileIcon2':
       return <Icons.FileIcon2 />;
-    case 'bookmark':
-      return <Icons.Bookmark />;
     case 'budget':
       return <Icons.Budget />;
     case 'vote':
@@ -591,8 +606,8 @@ const Icon = ({
   color,
   size,
   ariaHidden = true,
-  classNames,
   opacity,
+  classNames,
   ...rest
 }: Props) =>
   React.cloneElement(getIcon(name), {

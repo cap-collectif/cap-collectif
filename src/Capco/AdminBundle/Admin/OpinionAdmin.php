@@ -134,6 +134,9 @@ class OpinionAdmin extends CapcoAdmin
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
             ])
+            ->add('consultation.step.projectAbstractStep.project', null, [
+                'label' => 'global.participative.project.label',
+            ])
             ->add('consultation', null, ['label' => 'global.consultation'])
             ->add('OpinionType', null, ['label' => 'global.category'])
             ->add('published', null, ['label' => 'global.published'])
@@ -155,6 +158,10 @@ class OpinionAdmin extends CapcoAdmin
             ->add('Author', ModelType::class, [
                 'label' => 'global.author',
                 'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+            ])
+            ->add('project', ModelType::class, [
+                'label' => 'global.participative.project.label',
+                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
             ])
             ->add('OpinionType', null, ['label' => 'global.category'])
             ->add('consultation', ModelType::class, [

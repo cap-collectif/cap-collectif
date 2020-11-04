@@ -303,7 +303,7 @@ const getFormattedFiltersOrdered = (
           name: theme.title,
           type: 'theme',
           action: 'CLEAR_THEME_FILTER',
-          icon: 'bookmark',
+          icon: 'bookmark2',
         };
       }
 

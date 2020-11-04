@@ -52,7 +52,7 @@ const formatNavbarLinks = (
 ) => {
   const links = [];
   const hasCollectStep = project.steps.some(step => step.type === 'CollectStep');
-  if (hasCollectStep)
+
     links.push({
       title: 'global.contribution',
       count: project.proposals.totalCount,
@@ -62,11 +62,13 @@ const formatNavbarLinks = (
         <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
           <ProjectAdminProposalsPage
             projectId={project.id}
+            hasCollectStep={hasCollectStep}
             dataPrefetch={dataPrefetchPage.contribution}
           />
         </ProjectAdminProposalsProvider>
       ),
     });
+
   links.push({
     title: 'capco.section.metrics.participants',
     count: project.contributors.totalCount,

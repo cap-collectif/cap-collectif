@@ -131,7 +131,7 @@ const AnalysisProposal = ({
                   payload: ((proposal.theme?.id: any): ProposalsThemeValues),
                 })
               }>
-              <Icon name={ICON_NAME.bookmark} size={10} className="mr-5" />
+              <Icon name={ICON_NAME.bookmark2} size={10} className="mr-5" />
               {proposal.theme.title}
             </ProposalTag>
           )}
