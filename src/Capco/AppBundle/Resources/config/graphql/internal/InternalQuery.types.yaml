@@ -359,6 +359,10 @@ InternalQuery:
                 access: "@=hasRole('ROLE_ADMIN')"
                 type: '[InternalFont!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Font\\FontsQueryResolver", [args])'
+            notificationsFromEmail:
+                type: Email
+                description: 'Retrieve the configured notifications from email.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNotificationsFromEmailResolver")'
             siteParameter:
                 description: 'get a site parameter from its keyname'
                 access: "@=hasRole('ROLE_ADMIN')"

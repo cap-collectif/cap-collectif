@@ -8440,6 +8440,9 @@ type Query {
   """List all available fonts on the platform."""
   fonts: [Font!]!
 
+  """Retrieve the configured notifications from email."""
+  notificationsFromEmail: Email
+
   """get a site parameter from its keyname"""
   siteParameter(
     """keyname of the site parameter to get"""
