@@ -1,5 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal|Project.viewerAssignedProposals fetches viewer's assigned proposals by project that match search term and district. 1`] = `
+Object {
+  "project": Object {
+    "__typename": "Project",
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+    "viewerAssignedProposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "username": "Juan",
+            },
+            "body": "Plus de frites à la cantine.",
+            "category": Object {
+              "id": "pCategoryIdf1",
+              "name": "Espaces verts et biodiversité",
+            },
+            "district": Object {
+              "id": "districtIdf2",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYy",
+            "reference": "18-2",
+            "theme": null,
+            "title": "Mon projet local en tant qu'entreprise",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|Project.viewerAssignedProposals fetches viewer's assigned proposals by project that match search term. 1`] = `
+Object {
+  "project": Object {
+    "__typename": "Project",
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+    "viewerAssignedProposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "username": "Ian apprenti DevOps",
+            },
+            "body": "Végétalisons les champs libres !",
+            "category": Object {
+              "id": "pCategoryIdf2",
+              "name": "Propreté, prévention et gestion des déchets, économie circulaire",
+            },
+            "district": Object {
+              "id": "districtIdf1",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
+            "reference": "18-5",
+            "theme": null,
+            "title": "Mon projet local en tant qu'association sans SIRET ni RNA",
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "username": "Ian apprenti DevOps",
+            },
+            "body": "Faire une boite à dons.",
+            "category": Object {
+              "id": "pCategoryIdf1",
+              "name": "Espaces verts et biodiversité",
+            },
+            "district": Object {
+              "id": "districtIdf1",
+            },
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYz",
+            "reference": "18-3",
+            "theme": null,
+            "title": "Mon projet local en tant qu'association avec SIRET",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
 exports[`Internal|Project.viewerAssignedProposals fetches viewer's assigned proposals by project, category (NONE) 1`] = `
 Object {
   "project": Object {
@@ -9,10 +94,16 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "author": Object {
+              "username": "ptondereau",
+            },
+            "body": "Je ne crois pas qu'il y ai de petit ou de moyen projet.",
             "category": null,
             "district": null,
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+            "reference": "18-1",
             "theme": null,
+            "title": "Mon grand projet",
           },
         },
       ],
@@ -31,6 +122,10 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Juan",
+            },
+            "body": "Préserver la biodiversité ordinaire de nos quartiers…",
             "category": Object {
               "id": "pCategoryIdf2",
               "name": "Propreté, prévention et gestion des déchets, économie circulaire",
@@ -39,11 +134,17 @@ Object {
               "id": "districtIdf2",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+            "reference": "18-6",
             "theme": null,
+            "title": "Mon projet local en tant qu'organisme public",
           },
         },
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Ian apprenti DevOps",
+            },
+            "body": "Végétalisons les champs libres !",
             "category": Object {
               "id": "pCategoryIdf2",
               "name": "Propreté, prévention et gestion des déchets, économie circulaire",
@@ -52,11 +153,17 @@ Object {
               "id": "districtIdf1",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
+            "reference": "18-5",
             "theme": null,
+            "title": "Mon projet local en tant qu'association sans SIRET ni RNA",
           },
         },
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Ian apprenti DevOps",
+            },
+            "body": "Des stationnements à vélo pluriels partout dans la ville !",
             "category": Object {
               "id": "pCategoryIdf2",
               "name": "Propreté, prévention et gestion des déchets, économie circulaire",
@@ -65,7 +172,9 @@ Object {
               "id": "districtIdf1",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY0",
+            "reference": "18-4",
             "theme": null,
+            "title": "Mon projet local en tant qu'association avec RNA",
           },
         },
       ],
@@ -84,10 +193,16 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "author": Object {
+              "username": "ptondereau",
+            },
+            "body": "Je ne crois pas qu'il y ai de petit ou de moyen projet.",
             "category": null,
             "district": null,
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+            "reference": "18-1",
             "theme": null,
+            "title": "Mon grand projet",
           },
         },
       ],
@@ -106,6 +221,10 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Juan",
+            },
+            "body": "Préserver la biodiversité ordinaire de nos quartiers…",
             "category": Object {
               "id": "pCategoryIdf2",
               "name": "Propreté, prévention et gestion des déchets, économie circulaire",
@@ -114,11 +233,17 @@ Object {
               "id": "districtIdf2",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+            "reference": "18-6",
             "theme": null,
+            "title": "Mon projet local en tant qu'organisme public",
           },
         },
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Juan",
+            },
+            "body": "Plus de frites à la cantine.",
             "category": Object {
               "id": "pCategoryIdf1",
               "name": "Espaces verts et biodiversité",
@@ -127,7 +252,9 @@ Object {
               "id": "districtIdf2",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYy",
+            "reference": "18-2",
             "theme": null,
+            "title": "Mon projet local en tant qu'entreprise",
           },
         },
       ],
@@ -146,6 +273,10 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Juan",
+            },
+            "body": "Préserver la biodiversité ordinaire de nos quartiers…",
             "category": Object {
               "id": "pCategoryIdf2",
               "name": "Propreté, prévention et gestion des déchets, économie circulaire",
@@ -154,11 +285,17 @@ Object {
               "id": "districtIdf2",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+            "reference": "18-6",
             "theme": null,
+            "title": "Mon projet local en tant qu'organisme public",
           },
         },
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Ian apprenti DevOps",
+            },
+            "body": "Végétalisons les champs libres !",
             "category": Object {
               "id": "pCategoryIdf2",
               "name": "Propreté, prévention et gestion des déchets, économie circulaire",
@@ -167,11 +304,17 @@ Object {
               "id": "districtIdf1",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
+            "reference": "18-5",
             "theme": null,
+            "title": "Mon projet local en tant qu'association sans SIRET ni RNA",
           },
         },
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Ian apprenti DevOps",
+            },
+            "body": "Des stationnements à vélo pluriels partout dans la ville !",
             "category": Object {
               "id": "pCategoryIdf2",
               "name": "Propreté, prévention et gestion des déchets, économie circulaire",
@@ -180,11 +323,17 @@ Object {
               "id": "districtIdf1",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY0",
+            "reference": "18-4",
             "theme": null,
+            "title": "Mon projet local en tant qu'association avec RNA",
           },
         },
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Ian apprenti DevOps",
+            },
+            "body": "Faire une boite à dons.",
             "category": Object {
               "id": "pCategoryIdf1",
               "name": "Espaces verts et biodiversité",
@@ -193,11 +342,17 @@ Object {
               "id": "districtIdf1",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYz",
+            "reference": "18-3",
             "theme": null,
+            "title": "Mon projet local en tant qu'association avec SIRET",
           },
         },
         Object {
           "node": Object {
+            "author": Object {
+              "username": "Juan",
+            },
+            "body": "Plus de frites à la cantine.",
             "category": Object {
               "id": "pCategoryIdf1",
               "name": "Espaces verts et biodiversité",
@@ -206,15 +361,23 @@ Object {
               "id": "districtIdf2",
             },
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYy",
+            "reference": "18-2",
             "theme": null,
+            "title": "Mon projet local en tant qu'entreprise",
           },
         },
         Object {
           "node": Object {
+            "author": Object {
+              "username": "ptondereau",
+            },
+            "body": "Je ne crois pas qu'il y ai de petit ou de moyen projet.",
             "category": null,
             "district": null,
             "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+            "reference": "18-1",
             "theme": null,
+            "title": "Mon grand projet",
           },
         },
       ],

@@ -1,14 +1,27 @@
+import '../../_setup';
+
 const ProjectViewerAssignedProposalsQuery = /* GraphQL */ `
-  query getProjectViewerAssignedProposals($projectId: ID!, $category: ID, $district: ID) {
+  query getProjectViewerAssignedProposals(
+    $projectId: ID!
+    $category: ID
+    $district: ID
+    $term: String
+  ) {
     project: node(id: $projectId) {
       __typename
       id
       ... on Project {
-        viewerAssignedProposals(category: $category, district: $district) {
+        viewerAssignedProposals(category: $category, district: $district, term: $term) {
           totalCount
           edges {
             node {
               id
+              title
+              body
+              reference
+              author {
+                username
+              }
               theme {
                 id
               }
@@ -115,6 +128,33 @@ describe('Internal|Project.viewerAssignedProposals', () => {
           theme: 'NONE',
         },
         { email: 'maxime.pouessel@cap-collectif.com', password: 'toto' },
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it("fetches viewer's assigned proposals by project that match search term.", async () => {
+    await expect(
+      graphql(
+        ProjectViewerAssignedProposalsQuery,
+        {
+          projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+          term: 'association',
+        },
+        { email: 'theo@cap-collectif.com', password: 'toto' },
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it("fetches viewer's assigned proposals by project that match search term and district.", async () => {
+    await expect(
+      graphql(
+        ProjectViewerAssignedProposalsQuery,
+        {
+          projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
+          term: 'cantine',
+          district: 'districtIdf2',
+        },
+        { email: 'theo@cap-collectif.com', password: 'toto' },
       ),
     ).resolves.toMatchSnapshot();
   });

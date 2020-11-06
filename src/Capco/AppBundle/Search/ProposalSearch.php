@@ -52,7 +52,7 @@ class ProposalSearch extends Search
         ?string $cursor
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
-        $boolQuery = $this->searchTermsInMultipleFields(
+        $this->searchTermsInMultipleFields(
             $boolQuery,
             self::SEARCH_FIELDS,
             $providedFilters['term'],
@@ -119,7 +119,7 @@ class ProposalSearch extends Search
         ?string $order = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
-        $boolQuery = $this->searchTermsInMultipleFields(
+        $this->searchTermsInMultipleFields(
             $boolQuery,
             self::SEARCH_FIELDS,
             $terms,
@@ -251,6 +251,14 @@ class ProposalSearch extends Search
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
+        if (isset($providedFilters['term'])) {
+            $this->searchTermsInMultipleFields(
+                $boolQuery,
+                self::SEARCH_FIELDS,
+                $providedFilters['term'],
+                'phrase_prefix'
+            );
+        }
         if (!empty($providedFilters)) {
             $this->applyInaplicableFilters($boolQuery, $providedFilters);
             $filters = $this->getFilters($providedFilters);

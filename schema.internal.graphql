@@ -6559,6 +6559,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the last `n` elements from the list."""
     last: Int
+    term: String
     theme: ID
     district: ID
     analysts: [ID!]
