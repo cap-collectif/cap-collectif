@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import type { RouterHistory } from 'react-router-dom';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import type { AnalysisProjectPage_project } from '~relay/AnalysisProjectPage_project.graphql';
@@ -8,7 +8,10 @@ import type { AnalysisProjectPage_themes } from '~relay/AnalysisProjectPage_them
 import PickableList from '~ui/List/PickableList';
 import BodyInfos from '~ui/Boxes/BodyInfos';
 import InlineSelect from '~ui/InlineSelect';
-import AnalysisProjectPageContainer from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.style';
+import {
+  Container,
+  Header,
+} from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.style';
 import AnalysisProposalListLoader from '../AnalysisProposalListLoader/AnalysisProposalListLoader';
 import AnalysisNoProposal from '../AnalysisNoProposal/AnalysisNoProposal';
 import AnalysisDashboardHeader from '../AnalysisDashboardHeader/AnalysisDashboardHeader';
@@ -23,6 +26,7 @@ import {
 import { AnalysisProposalListHeaderContainer } from '~ui/Analysis/common.style';
 import type { AnalysisIndexPageQueryResponse } from '~relay/AnalysisIndexPageQuery.graphql';
 import AnalysisProposalListRole from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole';
+import ClearableInput from '~ui/Form/Input/ClearableInput';
 
 export const ANALYSIS_PROJECT_PROPOSALS_PAGINATION = 20;
 
@@ -48,6 +52,7 @@ const AnalysisProjectPage = ({ project, themes = [], defaultUsers, relay, histor
   const descriptionProject = project.firstCollectStep?.form?.analysisConfiguration?.body;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
   const proposalsWithTheme = getFormattedProposalsWithTheme(project);
+  const intl = useIntl();
 
   React.useEffect(() => {
     // Listenning that current location changed.
@@ -61,41 +66,65 @@ const AnalysisProjectPage = ({ project, themes = [], defaultUsers, relay, histor
   }, [dispatch, history]);
 
   return (
-    <AnalysisProjectPageContainer>
+    <Container>
       <div>
         <h2>{project.title}</h2>
         {descriptionProject && <BodyInfos body={descriptionProject} maxLines={5} />}
       </div>
 
-      <InlineSelect
-        value={parameters.filters.state}
-        onChange={newValue =>
-          dispatch({
-            type: 'CHANGE_STATE_FILTER',
-            payload: ((newValue: any): StateValues),
-          })
-        }>
-        <InlineSelect.Choice value={STATE.TODO}>
-          <FormattedMessage
-            id="count.status.to.do"
-            values={{ num: viewerProposalsTodo.totalCount }}
-          />
-        </InlineSelect.Choice>
+      <Header>
+        <InlineSelect
+          value={parameters.filters.state}
+          onChange={newValue =>
+            dispatch({
+              type: 'CHANGE_STATE_FILTER',
+              payload: ((newValue: any): StateValues),
+            })
+          }>
+          <InlineSelect.Choice value={STATE.TODO}>
+            <FormattedMessage
+              id="count.status.to.do"
+              values={{ num: viewerProposalsTodo.totalCount }}
+            />
+          </InlineSelect.Choice>
 
-        <InlineSelect.Choice value={STATE.DONE}>
-          <FormattedMessage
-            id="count.status.done"
-            values={{ num: viewerProposalsDone.totalCount }}
-          />
-        </InlineSelect.Choice>
+          <InlineSelect.Choice value={STATE.DONE}>
+            <FormattedMessage
+              id="count.status.done"
+              values={{ num: viewerProposalsDone.totalCount }}
+            />
+          </InlineSelect.Choice>
 
-        <InlineSelect.Choice value={STATE.ALL}>
-          <FormattedMessage
-            id="filter.count.status.all"
-            values={{ num: viewerProposalsAll.totalCount }}
-          />
-        </InlineSelect.Choice>
-      </InlineSelect>
+          <InlineSelect.Choice value={STATE.ALL}>
+            <FormattedMessage
+              id="filter.count.status.all"
+              values={{ num: viewerProposalsAll.totalCount }}
+            />
+          </InlineSelect.Choice>
+        </InlineSelect>
+
+        <ClearableInput
+          id="search"
+          name="search"
+          type="text"
+          icon={<i className="cap cap-magnifier" />}
+          disabled={!hasProposals}
+          onClear={() => {
+            if (parameters.filters.term !== null) {
+              dispatch({ type: 'CLEAR_TERM' });
+            }
+          }}
+          initialValue={parameters.filters.term}
+          onSubmit={term => {
+            if (term === '' && parameters.filters.term !== null) {
+              dispatch({ type: 'CLEAR_TERM' });
+            } else if (term !== '' && parameters.filters.term !== term) {
+              dispatch({ type: 'SEARCH_TERM', payload: term });
+            }
+          }}
+          placeholder={intl.formatMessage({ id: 'global.menu.search' })}
+        />
+      </Header>
 
       <PickableList.Provider>
         <PickableList
@@ -138,7 +167,7 @@ const AnalysisProjectPage = ({ project, themes = [], defaultUsers, relay, histor
           </PickableList.Body>
         </PickableList>
       </PickableList.Provider>
-    </AnalysisProjectPageContainer>
+    </Container>
   );
 };
 
@@ -161,6 +190,7 @@ export default createPaginationContainer(
           supervisor: { type: "ID", defaultValue: null }
           decisionMaker: { type: "ID", defaultValue: null }
           state: { type: "ProposalTaskState", defaultValue: null }
+          term: { type: "String", defaultValue: null }
         ) {
         id
         title
@@ -198,6 +228,7 @@ export default createPaginationContainer(
           supervisor: $supervisor
           decisionMaker: $decisionMaker
           state: $state
+          term: $term
         )
           @connection(
             key: "AnalysisProjectPage_sortedProposals"
@@ -210,6 +241,7 @@ export default createPaginationContainer(
               "supervisor"
               "decisionMaker"
               "state"
+              "term"
             ]
           ) {
           edges {
@@ -246,6 +278,7 @@ export default createPaginationContainer(
             supervisor: $supervisor
             decisionMaker: $decisionMaker
             state: $state
+            term: $term
           )
       }
     `,
@@ -292,6 +325,7 @@ export default createPaginationContainer(
         $supervisor: ID
         $decisionMaker: ID
         $state: ProposalTaskState
+        $term: String
       ) {
         project: node(id: $projectId) {
           id
@@ -307,6 +341,7 @@ export default createPaginationContainer(
               supervisor: $supervisor
               decisionMaker: $decisionMaker
               state: $state
+              term: $term
             )
         }
         themes {

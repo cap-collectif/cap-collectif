@@ -1,7 +1,7 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
 
-const AnalysisProjectPageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 60px;
 
   h2 {
@@ -12,4 +12,10 @@ const AnalysisProjectPageContainer: StyledComponent<{}, {}, HTMLDivElement> = st
   }
 `;
 
-export default AnalysisProjectPageContainer;
+export const Header: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;

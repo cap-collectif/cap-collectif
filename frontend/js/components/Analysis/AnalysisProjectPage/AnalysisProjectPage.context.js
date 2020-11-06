@@ -25,6 +25,7 @@ export const DEFAULT_FILTERS: Filters = {
   analysts: [],
   supervisor: null,
   decisionMaker: null,
+  term: null,
 };
 
 export const INITIAL_STATE = {

@@ -29,6 +29,12 @@ const Header: StyledComponent<{ hasMarge: boolean }, {}, HTMLElement> = styled.h
     margin: 0 0 20px 0;
   }
 
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .tabs {
     display: flex;
     flex-direction: row;
@@ -77,16 +83,20 @@ const renderHeader = (intl: IntlShape, isProjectPage?: boolean, selectedTab: ?st
       <>
         <TextRow color={colors.borderColor} style={{ width: 250, height: 30, marginBottom: 30 }} />
 
-        <div className="tabs">
-          <Tab selected={selectedTab === 'TODO'}>
-            {intl.formatMessage({ id: 'front.fast.filter.skeleton.to-do' })}
-          </Tab>
-          <Tab selected={selectedTab === 'DONE'}>
-            {intl.formatMessage({ id: 'front.fast.filter.skeleton.done' })}
-          </Tab>
-          <Tab selected={selectedTab === 'ALL'}>
-            {intl.formatMessage({ id: 'front.fast.filter.skeleton.all' })}
-          </Tab>
+        <div className="header">
+          <div className="tabs">
+            <Tab selected={selectedTab === 'TODO'}>
+              {intl.formatMessage({ id: 'front.fast.filter.skeleton.to-do' })}
+            </Tab>
+            <Tab selected={selectedTab === 'DONE'}>
+              {intl.formatMessage({ id: 'front.fast.filter.skeleton.done' })}
+            </Tab>
+            <Tab selected={selectedTab === 'ALL'}>
+              {intl.formatMessage({ id: 'front.fast.filter.skeleton.all' })}
+            </Tab>
+          </div>
+
+          <TextRow color={colors.borderColor} style={{ width: 250, height: 30 }} />
         </div>
       </>
     );

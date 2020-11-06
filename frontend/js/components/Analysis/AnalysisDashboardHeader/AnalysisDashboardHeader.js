@@ -530,6 +530,7 @@ export default createPaginationContainer(
           supervisor: { type: "ID", defaultValue: null }
           decisionMaker: { type: "ID", defaultValue: null }
           state: { type: "ProposalTaskState", defaultValue: null }
+          term: { type: "String", defaultValue: null }
         ) {
         id
         steps {
@@ -558,6 +559,7 @@ export default createPaginationContainer(
           supervisor: $supervisor
           decisionMaker: $decisionMaker
           state: $state
+          term: $term
         )
           @connection(
             key: "AnalysisDashboardHeader_proposals"
@@ -570,6 +572,7 @@ export default createPaginationContainer(
               "supervisor"
               "decisionMaker"
               "state"
+              "term"
             ]
           ) {
           edges {
@@ -659,6 +662,7 @@ export default createPaginationContainer(
         $supervisor: ID
         $decisionMaker: ID
         $state: ProposalTaskState
+        $term: String
       ) {
         project: node(id: $projectId) {
           id
@@ -674,6 +678,7 @@ export default createPaginationContainer(
               supervisor: $supervisor
               decisionMaker: $decisionMaker
               state: $state
+              term: $term
             )
         }
       }

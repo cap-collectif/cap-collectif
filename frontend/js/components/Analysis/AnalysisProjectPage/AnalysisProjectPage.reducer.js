@@ -44,6 +44,7 @@ export type Filters = {|
   +analysts: Uuid[],
   +supervisor: ?Uuid,
   +decisionMaker: ?Uuid,
+  +term: ?string,
 |};
 
 // Filter 'status', 'step' and 'progressState' are for ProjectAdminAnalysis
@@ -91,6 +92,8 @@ export type Action =
   | { type: 'CLEAR_SUPERVISOR_FILTER' }
   | { type: 'CHANGE_DECISION_MAKER_FILTER', payload: Uuid }
   | { type: 'CLEAR_DECISION_MAKER_FILTER' }
+  | { type: 'SEARCH_TERM', payload: ?string }
+  | { type: 'CLEAR_TERM' }
   | { type: 'CLEAR_FILTERS' }
   | { type: 'INIT_FILTERS_FROM_URL' };
 
@@ -283,6 +286,22 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
         ...state,
         sort: action.payload,
       };
+    case 'SEARCH_TERM':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          term: action.payload,
+        },
+      };
+    case 'CLEAR_TERM':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          term: null,
+        },
+      };
     case 'CLEAR_FILTERS':
       for (const key of url.searchParams.keys()) {
         updateQueryUrl(url, key, { delete: true });
@@ -291,7 +310,7 @@ export const createReducer = (state: AnalysisProjectPageState, action: Action) =
     case 'INIT_FILTERS_FROM_URL': {
       const filters = getFieldsFromUrl<Filters>(url, {
         default: DEFAULT_FILTERS,
-        whitelist: URL_FILTER_WHITELIST,
+        whitelist: [...URL_FILTER_WHITELIST, 'term'],
       });
       const { sort } = getFieldsFromUrl<{ sort: SortValues }>(url, {
         default: {

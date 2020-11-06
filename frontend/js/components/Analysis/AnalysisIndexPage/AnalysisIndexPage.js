@@ -38,6 +38,7 @@ const createQueryVariables = (
   supervisor: parameters.filters.supervisor,
   decisionMaker: parameters.filters.decisionMaker,
   state: parameters.filters.state === 'ALL' ? null : parameters.filters.state,
+  term: parameters.filters.term,
 });
 
 const BASE_URL_ANALYSIS = '/evaluations';
@@ -175,6 +176,7 @@ const AnalysisIndexPage = ({ language }: Props) => {
           $supervisor: ID
           $decisionMaker: ID
           $state: ProposalTaskState
+          $term: String
         ) {
           defaultUsers: users(first: 20) {
             edges {
@@ -199,6 +201,7 @@ const AnalysisIndexPage = ({ language }: Props) => {
                 supervisor: $supervisor
                 decisionMaker: $decisionMaker
                 state: $state
+                term: $term
               )
           }
           themes {
