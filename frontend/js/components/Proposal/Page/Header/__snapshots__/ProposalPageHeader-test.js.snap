@@ -24,7 +24,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
       className="default-header"
     >
       <CategoryBackground
-        color="#C4C4C4"
+        color="#1E88E5"
         viewBox="0 0 230 75"
       />
     </div>
@@ -524,7 +524,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
       className="default-header"
     >
       <CategoryBackground
-        color="#C4C4C4"
+        color="#1E88E5"
         viewBox="0 0 230 75"
       />
     </div>
@@ -680,7 +680,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
       className="default-header"
     >
       <CategoryBackground
-        color="#C4C4C4"
+        color="#1E88E5"
         viewBox="0 0 230 75"
       />
     </div>

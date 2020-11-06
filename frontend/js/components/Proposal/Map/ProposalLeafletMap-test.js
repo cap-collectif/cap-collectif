@@ -57,7 +57,13 @@ describe('<ProposalLeafletMap />', () => {
     },
   };
 
-  const props = { hasError: false, hasMore: false, isLoading: false, retry: jest.fn() };
+  const props = {
+    hasError: false,
+    hasMore: false,
+    isLoading: false,
+    retry: jest.fn(),
+    shouldDisplayPictures: true,
+  };
 
   it('should render a map with only valid markers', () => {
     const wrapper = shallow(

@@ -87,6 +87,7 @@ type Props = {|
   isLoading: boolean,
   hasError: boolean,
   retry: () => void,
+  shouldDisplayPictures: boolean,
 |};
 
 const convertToGeoJsonStyle = (style: Style) => {
@@ -159,6 +160,7 @@ export const ProposalLeafletMap = ({
   hasMore,
   hasError,
   retry,
+  shouldDisplayPictures,
 }: Props) => {
   const intl = useIntl();
   const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
@@ -232,7 +234,8 @@ export const ProposalLeafletMap = ({
           {markers?.length > 0 &&
             markers.map((mark, key) => {
               const size = key === initialSlide ? OPENED_MARKER_SIZE : CLOSED_MARKER_SIZE;
-              const icon = mark.category?.icon;
+              const icon = shouldDisplayPictures ? mark.category?.icon : null;
+              const color = shouldDisplayPictures ? mark.category?.color || '#1E88E5' : '#1E88E5';
               return (
                 <Marker
                   key={key}
@@ -242,7 +245,7 @@ export const ProposalLeafletMap = ({
                     className: 'preview-icn',
                     html: renderToString(
                       <>
-                        <Icon name={ICON_NAME.pin3} size={40} color={mark.category?.color} />
+                        <Icon name={ICON_NAME.pin3} size={40} color={color} />
                         {icon && <Icon name={ICON_NAME[icon]} size={16} color={colors.white} />}
                       </>,
                     ),
@@ -312,6 +315,7 @@ ProposalLeafletMap.defaultProps = {
 
 const mapStateToProps = (state: State) => ({
   mapTokens: state.user.mapTokens,
+  shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
 });
 
 const container = connect(mapStateToProps)(withLeaflet(ProposalLeafletMap));

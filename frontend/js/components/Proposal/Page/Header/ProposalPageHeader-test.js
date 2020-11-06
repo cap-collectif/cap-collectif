@@ -93,6 +93,7 @@ describe('<ProposalPageHeader />', () => {
     title: 'Titre',
     opinionCanBeFollowed: true,
     hasVotableStep: true,
+    shouldDisplayPictures: true,
   };
 
   it('should render a proposal header as ProposalFrom', () => {

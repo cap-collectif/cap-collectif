@@ -105,7 +105,7 @@ export class ProposalPreview extends React.Component<Props> {
                 {proposal?.category?.icon && (
                   <Icon name={ICON_NAME[proposal?.category?.icon]} size={40} color={colors.white} />
                 )}
-                <CategoryBackground color={proposal?.category?.color || '#C4C4C4'} />
+                <CategoryBackground color={proposal?.category?.color || '#1E88E5'} />
               </>
             )
           ) : null}

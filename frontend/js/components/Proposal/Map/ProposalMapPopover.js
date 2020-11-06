@@ -157,7 +157,7 @@ export const ProposalMapPopover = ({ proposal, features, isMobile }: Props) => (
                   <Icon name={ICON_NAME[proposal?.category?.icon]} size={36} color={colors.white} />
                 )}
                 <SimpleProposalBackground
-                  color={proposal?.category?.color}
+                  color={proposal?.category?.color || '#1E88E5'}
                   id={`background-${proposal.url}`}
                 />
               </>

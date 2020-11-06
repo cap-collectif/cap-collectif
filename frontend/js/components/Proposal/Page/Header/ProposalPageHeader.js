@@ -29,6 +29,7 @@ type Props = {
   referer: string,
   hasAnalysingButton?: boolean,
   onAnalysisClick?: () => void,
+  shouldDisplayPictures: boolean,
 };
 
 const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
@@ -175,10 +176,11 @@ export const ProposalPageHeader = ({
   referer,
   hasAnalysingButton,
   onAnalysisClick,
+  shouldDisplayPictures,
 }: Props) => {
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt;
-  const icon = proposal?.category?.icon || '';
-  const color = proposal?.category?.color || '#C4C4C4';
+  const icon = shouldDisplayPictures ? proposal?.category?.icon : null;
+  const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4';
   const createdDate = (
     <FormattedDate
       value={moment(date)}
@@ -258,6 +260,7 @@ export const ProposalPageHeader = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   referer: state.proposal.referer,
+  shouldDisplayPictures: state.default.features.display_pictures_in_depository_proposals_list,
 });
 
 const container = connect(mapStateToProps)(ProposalPageHeader);
