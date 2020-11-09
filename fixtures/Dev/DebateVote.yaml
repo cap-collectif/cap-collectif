@@ -1,4 +1,5 @@
 Capco\AppBundle\Entity\Debate\DebateVote:
+    # Published votes
     debateCannabisVote1:
         id: 13000
         user: '@userSpyl'
@@ -69,3 +70,10 @@ Capco\AppBundle\Entity\Debate\DebateVote:
         value: 0
         publishedAt: <(new \DateTime('2015-01-01 09:10:00'))>
         createdAt: $publishedAt
+    # A not confirmed vote
+    debateCannabisVote11:
+        id: 13010
+        debate: '@debateCannabis'
+        value: 0
+        user: '@user_not_confirmed'
+        createdAt: <(new \DateTime('2015-01-01 09:11:00'))>

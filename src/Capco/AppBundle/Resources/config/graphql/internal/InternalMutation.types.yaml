@@ -1045,3 +1045,17 @@ InternalMutation:
                     inputType: DeleteDebateOpinionInput
                     payloadType: DeleteDebateOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateOpinionMutation", [value])'
+            addDebateVote:
+                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddDebateVoteInput
+                    payloadType: AddDebateVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateVoteMutation", [value, getUser()])'
+            removeDebateVote:
+                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: RemoveDebateVoteInput
+                    payloadType: RemoveDebateVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateVoteMutation", [value, getUser()])'

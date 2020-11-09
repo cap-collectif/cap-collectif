@@ -1,0 +1,9 @@
+RemoveDebateVoteErrorCode:
+    type: enum
+    config:
+        name: RemoveDebateVoteErrorCode
+        description: 'Available errors for a `removeDebateVote` mutation.'
+        values:
+            UNKNOWN_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateVoteMutation::UNKNOWN_DEBATE")'
+                description: 'No `Debate` match your `debateId`.'

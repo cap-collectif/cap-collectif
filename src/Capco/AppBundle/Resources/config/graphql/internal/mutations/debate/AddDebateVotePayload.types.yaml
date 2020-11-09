@@ -1,0 +1,13 @@
+AddDebateVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateVote:
+                type: 'InternalDebateVote'
+                description: 'The newly created Vote.'
+            previousVoteId:
+                type: 'ID'
+                description: 'If there was an existing vote, the id of the remove vote.'
+            errorCode:
+                type: 'AddDebateVoteErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|RemoveDebateVote mutation Remove a debate vote. 1`] = `
+Object {
+  "removeDebateVote": Object {
+    "debate": Object {
+      "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      "votes": Object {
+        "totalCount": 9,
+      },
+    },
+    "deletedVoteId": "RGViYXRlVm90ZToxMzAwMA==",
+    "errorCode": null,
+  },
+}
+`;

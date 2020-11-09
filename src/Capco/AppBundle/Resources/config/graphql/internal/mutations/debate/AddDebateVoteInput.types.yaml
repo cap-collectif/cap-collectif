@@ -1,0 +1,11 @@
+AddDebateVoteInput:
+    type: relay-mutation-input
+    config:
+        description: 'Add a vote on a debate.'
+        fields:
+            debateId:
+                type: 'ID!'
+                description: 'The Node ID of the `Debate` to vote on.'
+            value:
+                type: 'ForOrAgainstValue!'
+                description: 'Whether the vote will be `FOR` or `AGAINST`.'

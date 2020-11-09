@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|addDebateVote mutation Add an unpublished debate vote. 1`] = `
+Object {
+  "addDebateVote": Object {
+    "debateVote": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyX25vdF9jb25maXJtZWQ=",
+      },
+      "createdAt": Any<String>,
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+        "votes": Object {
+          "totalCount": 11,
+        },
+      },
+      "id": Any<String>,
+      "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
+      "publishableUntil": "2024-10-01 00:00:00",
+      "published": false,
+      "publishedAt": null,
+      "value": "FOR",
+    },
+    "errorCode": null,
+    "previousVoteId": "RGViYXRlVm90ZToxMzAxMA==",
+  },
+}
+`;
+
+exports[`Internal|addDebateVote mutation Add and update a debate vote. 1`] = `
+Object {
+  "addDebateVote": Object {
+    "debateVote": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+      },
+      "createdAt": Any<String>,
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+        "votes": Object {
+          "totalCount": 11,
+        },
+      },
+      "id": Any<String>,
+      "notPublishedReason": null,
+      "publishableUntil": "2024-10-01 00:00:00",
+      "published": true,
+      "publishedAt": Any<String>,
+      "value": "FOR",
+    },
+    "errorCode": null,
+    "previousVoteId": null,
+  },
+}
+`;
+
+exports[`Internal|addDebateVote mutation Add and update a debate vote. 2`] = `
+Object {
+  "addDebateVote": Object {
+    "debateVote": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyQWRtaW4=",
+      },
+      "createdAt": Any<String>,
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+        "votes": Object {
+          "totalCount": 11,
+        },
+      },
+      "id": Any<String>,
+      "notPublishedReason": null,
+      "publishableUntil": "2024-10-01 00:00:00",
+      "published": true,
+      "publishedAt": Any<String>,
+      "value": "AGAINST",
+    },
+    "errorCode": null,
+    "previousVoteId": Any<String>,
+  },
+}
+`;

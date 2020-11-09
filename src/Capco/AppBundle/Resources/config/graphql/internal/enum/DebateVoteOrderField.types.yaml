@@ -1,0 +1,9 @@
+DebateVoteOrderField:
+    type: enum
+    config:
+        description: 'Ordering options for votes returned from the connection.'
+        values:
+            PUBLISHED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\VoteOrderField::PUBLISHED_AT")'
+            CREATED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\VoteOrderField::CREATED_AT")'

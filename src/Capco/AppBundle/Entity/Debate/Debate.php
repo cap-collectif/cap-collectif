@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Debate;
 
 use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Entity\Steps\DebateStep;
@@ -41,6 +42,18 @@ class Debate
     {
         $this->opinions = new ArrayCollection();
         $this->arguments = new ArrayCollection();
+    }
+
+    public function viewerCanParticipate(?User $viewer = null): bool
+    {
+        $step = $this->getStep();
+        $project = $step->getProject();
+
+        if (!$project->viewerCanSee($viewer)) {
+            return false;
+        }
+
+        return $step->canContribute($viewer);
     }
 
     public function getStep(): ?DebateStep

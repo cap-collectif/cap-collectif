@@ -1,0 +1,8 @@
+RemoveDebateVoteInput:
+    type: relay-mutation-input
+    config:
+        description: 'Remove a vote on a debate.'
+        fields:
+            debateId:
+                type: 'ID!'
+                description: 'The Node ID of the `Debate` to remove the vote.'

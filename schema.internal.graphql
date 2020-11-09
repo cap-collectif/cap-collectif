@@ -219,6 +219,33 @@ type AddDebateOpinionPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `addDebateVote` mutation."""
+enum AddDebateVoteErrorCode {
+  """No `Debate` match your `debateId`."""
+  UNKNOWN_DEBATE
+}
+
+input AddDebateVoteInput {
+  """The Node ID of the `Debate` to vote on."""
+  debateId: ID!
+
+  """Whether the vote will be `FOR` or `AGAINST`."""
+  value: ForOrAgainstValue!
+  clientMutationId: String
+}
+
+type AddDebateVotePayload {
+  """The newly created Vote."""
+  debateVote: DebateVote
+
+  """If there was an existing vote, the id of the remove vote."""
+  previousVoteId: ID
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: AddDebateVoteErrorCode
+  clientMutationId: String
+}
+
 input AddEventInput {
   """When the event start."""
   startAt: DateTime!
@@ -2964,6 +2991,31 @@ type Debate implements Node {
     """Returns the last `n` elements from the list."""
     last: Int
   ): InternalDebateOpinionConnection!
+
+  """The votes from experts of the debate."""
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Filter by a vote's value."""
+    value: ForOrAgainstValue = null
+
+    """Order by."""
+    orderBy: DebateVoteOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): DebateVoteConnection!
 }
 
 """A debate opinion."""
@@ -3053,6 +3105,71 @@ type DebateStep implements Step & Node {
 
   """The debate of the step."""
   debate: Debate!
+}
+
+"""A debate vote."""
+type DebateVote implements Node & Publishable {
+  """The ID of an object."""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """The author of the vote."""
+  author: User!
+
+  """The value of the vote."""
+  value: ForOrAgainstValue!
+
+  """The debate of the vote."""
+  debate: Debate!
+}
+
+"""A connection to a list of items."""
+type DebateVoteConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [DebateVoteEdge]
+}
+
+"""An edge in a connection."""
+type DebateVoteEdge {
+  """The item at the end of the edge."""
+  node: DebateVote
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of votes can be ordered upon return."""
+input DebateVoteOrder {
+  """The field to order votes by."""
+  field: DebateVoteOrderField! = PUBLISHED_AT
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Ordering options for votes returned from the connection."""
+enum DebateVoteOrderField {
+  PUBLISHED_AT
+  CREATED_AT
 }
 
 """Available errors on DeleteAccountByEmail mutation."""
@@ -5373,6 +5490,8 @@ type Mutation {
   addDebateOpinion(input: AddDebateOpinionInput!): AddDebateOpinionPayload
   updateDebateOpinion(input: UpdateDebateOpinionInput!): UpdateDebateOpinionPayload
   deleteDebateOpinion(input: DeleteDebateOpinionInput!): DeleteDebateOpinionPayload
+  addDebateVote(input: AddDebateVoteInput!): AddDebateVotePayload
+  removeDebateVote(input: RemoveDebateVoteInput!): RemoveDebateVotePayload
 }
 
 """A connection to a list of items."""
@@ -9142,6 +9261,30 @@ input RemoveContactFormInput {
 type RemoveContactFormPayload {
   """Id of the deleted contact form."""
   deletedContactFormId: ID!
+  clientMutationId: String
+}
+
+"""Available errors for a `removeDebateVote` mutation."""
+enum RemoveDebateVoteErrorCode {
+  """No `Debate` match your `debateId`."""
+  UNKNOWN_DEBATE
+}
+
+input RemoveDebateVoteInput {
+  """The Node ID of the `Debate` to remove the vote."""
+  debateId: ID!
+  clientMutationId: String
+}
+
+type RemoveDebateVotePayload {
+  """The debate of the deleted vote."""
+  debate: Debate
+
+  """The id of the removed vote."""
+  deletedVoteId: ID
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: RemoveDebateVoteErrorCode
   clientMutationId: String
 }
 

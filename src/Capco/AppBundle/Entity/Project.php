@@ -804,7 +804,11 @@ class Project implements IndexableInterface
         if (!empty($this->steps)) {
             $first = $this->steps[0];
             foreach ($this->steps as $step) {
-                if (null !== $first  && null !== $step && $step->getPosition() < $first->getPosition()) {
+                if (
+                    null !== $first &&
+                    null !== $step &&
+                    $step->getPosition() < $first->getPosition()
+                ) {
                     $first = $step;
                 }
             }
@@ -1350,7 +1354,7 @@ class Project implements IndexableInterface
     /**
      * check if viewer is allowed the project.
      */
-    protected function viewerCanSee($viewer = null): bool
+    public function viewerCanSee($viewer = null): bool
     {
         if ($this->isPublic()) {
             return true;

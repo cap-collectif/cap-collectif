@@ -18,3 +18,17 @@ InternalDebate:
                 argsBuilder: 'Relay::Connection'
                 type: InternalDebateOpinionConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateOpinionsResolver", [value, args])'
+            votes:
+                description: 'The votes from experts of the debate.'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    value:
+                        type: 'ForOrAgainstValue'
+                        defaultValue: null
+                        description: "Filter by a vote's value."
+                    orderBy:
+                        type: 'DebateVoteOrder'
+                        description: 'Order by.'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                type: DebateVoteConnection!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateVotesResolver", [value, args])'
