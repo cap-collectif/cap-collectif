@@ -80,6 +80,8 @@ const PanelContainer: StyledComponent<
   width: 100%;
 `;
 
+type MODAL_STATE = 'TRUE' | 'FALSE' | 'SHOWED';
+
 export const ProposalPageLogic = ({
   query,
   title,
@@ -108,13 +110,17 @@ export const ProposalPageLogic = ({
     features.unstable__analysis &&
     isAuthenticated;
   const [votesCount, setVotesCount] = useState<number>(proposal?.allVotes?.totalCount || 0);
-  const [show, setShow] = useState(isMobile && hasAnalysis);
+  const [show, setShow] = useState<MODAL_STATE>('FALSE');
   const [isAnalysing, setIsAnalysing] = useState(hasAnalysis);
   const bottom = bodyHeight - scrollY - height - footerSize;
 
   useEffect(() => {
     setVotesCount(proposal?.allVotes?.totalCount || 0);
   }, [proposal]);
+
+  useEffect(() => {
+    if (show !== 'SHOWED') setShow(viewer && isMobile && hasAnalysis ? 'TRUE' : 'FALSE');
+  }, [show, viewer, hasAnalysis, isMobile]);
 
   return (
     <>
@@ -195,7 +201,10 @@ export const ProposalPageLogic = ({
           />
         </PanelContainer>
       )}
-      <ProposalAnalysisOnMobileModal show={show || false} onClose={() => setShow(false)} />
+      <ProposalAnalysisOnMobileModal
+        show={show === 'TRUE' || false}
+        onClose={() => setShow('SHOWED')}
+      />
     </>
   );
 };
