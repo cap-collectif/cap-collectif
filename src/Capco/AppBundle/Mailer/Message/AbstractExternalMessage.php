@@ -8,7 +8,7 @@ abstract class AbstractExternalMessage extends AbstractMessage
 {
     public const FOOTER = 'notification.email.external_footer';
 
-    private $recipient;
+    private User $recipient;
 
     public function __construct(
         string $recipientEmail,
@@ -40,7 +40,7 @@ abstract class AbstractExternalMessage extends AbstractMessage
             '{sitename}' => $siteName,
             '{siteUrl}' => $siteURL,
             '{businessUrl}' => 'https://cap-collectif.com',
-            '{business}' => 'Cap Collectif'
+            '{business}' => 'Cap Collectif',
         ];
     }
 }

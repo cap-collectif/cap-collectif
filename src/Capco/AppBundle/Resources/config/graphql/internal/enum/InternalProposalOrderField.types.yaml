@@ -1,0 +1,11 @@
+InternalProposalOrderField:
+    type: enum
+    inherits:
+        - PreviewProposalOrderField
+    config:
+        name: ProposalOrderField
+        description: 'Ordering options for proposals votes connections.'
+        values:
+            REVISION_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::REVISION_AT")'
+                description: 'Allows ordering a list of proposals by revision date.'

@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.revisions fetches all proposal's expired related revisions 1`] = `
+Object {
+  "proposal": Object {
+    "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+    "revisions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "createdAt": "2019-01-06 00:05:04",
+            "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uRXhwaXJlZA==",
+            "state": "EXPIRED",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal.revisions fetches all proposal's related revisions 1`] = `
+Object {
+  "proposal": Object {
+    "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+    "revisions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "createdAt": "2019-01-17 00:05:02",
+            "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uMg==",
+            "state": "PENDING",
+          },
+        },
+        Object {
+          "node": Object {
+            "createdAt": "2019-01-06 00:05:04",
+            "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uRXhwaXJlZA==",
+            "state": "EXPIRED",
+          },
+        },
+        Object {
+          "node": Object {
+            "createdAt": "2019-01-06 00:05:06",
+            "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uUmV2aXNlZA==",
+            "state": "REVISED",
+          },
+        },
+        Object {
+          "node": Object {
+            "createdAt": "2019-01-06 00:05:05",
+            "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uUmV2aXNlZE5vdEV4cGlyZWQ=",
+            "state": "REVISED",
+          },
+        },
+      ],
+      "totalCount": 4,
+    },
+  },
+}
+`;
+
+exports[`Internal.revisions fetches proposal's related revisions with state done 1`] = `
+Object {
+  "proposal": Object {
+    "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+    "revisions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "createdAt": "2019-01-06 00:05:06",
+            "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uUmV2aXNlZA==",
+            "state": "REVISED",
+          },
+        },
+        Object {
+          "node": Object {
+            "createdAt": "2019-01-06 00:05:05",
+            "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uUmV2aXNlZE5vdEV4cGlyZWQ=",
+            "state": "REVISED",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal.revisions fetches proposal's related revisions with state pending 1`] = `
+Object {
+  "proposal": Object {
+    "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+    "revisions": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "createdAt": "2019-01-17 00:05:02",
+            "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uMg==",
+            "state": "PENDING",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

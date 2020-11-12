@@ -69,7 +69,13 @@ export const styleGuideColors = {
   gray: '#6b7885',
   darkGray: '#374850',
   blue: '#3b88fd',
+  blue100: '#fafcff',
+  blue150: '#e0efff',
+  blue200: '#c2dfff',
+  blue500: '#1a88ff',
+  blue800: '#003670',
   white: '#ffffff',
+  yellow700: '#a87e00',
 };
 
 export const socialColors = {

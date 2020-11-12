@@ -228,3 +228,31 @@ Scenario: everyone receive message when decision is published
   And I should see mail to "maxime.auriau@cap-collectif.com"
   And I should see mail to "mickael@cap-collectif.com"
   And I should see mail with subject "notification.proposal.decision.title"
+
+@rabbitmq @snapshot-email
+Scenario: proposal author recive message when assigned user ask a revision on his proposal
+  Given I publish in "proposal_revision" with message below:
+  """
+  {
+    "proposalRevisionId": "proposalRevision2",
+    "proposalId": "proposalIdf1"
+  }
+  """
+  And I consume "proposal_revision"
+  Then I should see mail to "pierre@cap-collectif.com"
+  Then I open mail to "pierre@cap-collectif.com"
+  And email should match snapshot "notifyProposalRevision.html"
+
+@rabbitmq @snapshot-email
+Scenario: assigned users and admin receive message when author revised his proposal
+  Given I publish in "proposal_revision_revise" with message below:
+  """
+  {
+    "proposalRevisionId": "proposalRevision2",
+    "proposalId": "proposalIdf1",
+    "date": "now"
+  }
+  """
+  And I consume "proposal_revision_revise"
+  Then I open mail to "aurelien@cap-collectif.com"
+  And email should match snapshot "notifyProposalRevisionRevise.html"

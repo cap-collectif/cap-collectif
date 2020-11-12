@@ -16,8 +16,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class SelectionStepProposalResolver implements ResolverInterface
 {
-    private $logger;
-    private $proposalSearch;
+    private LoggerInterface $logger;
+    private ProposalSearch $proposalSearch;
 
     public function __construct(ProposalSearch $proposalSearch, LoggerInterface $logger)
     {

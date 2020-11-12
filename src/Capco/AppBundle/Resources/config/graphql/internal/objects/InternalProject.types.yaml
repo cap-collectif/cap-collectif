@@ -182,7 +182,7 @@ InternalProject:
                     category:
                         type: 'ID'
                     orderBy:
-                        type: 'PreviewProposalOrder'
+                        type: 'InternalProposalOrder'
                         defaultValue: { field: CREATED_AT, direction: DESC }
                     state:
                         type: 'ProposalTaskState'

@@ -11,7 +11,7 @@ class ViewerCanSeeProposalAnalysisResolver
 {
     use ResolverTrait;
 
-    private $authorizationChecker;
+    private AuthorizationChecker $authorizationChecker;
 
     public function __construct(AuthorizationChecker $authorizationChecker)
     {

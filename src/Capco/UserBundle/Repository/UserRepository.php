@@ -1115,9 +1115,7 @@ class UserRepository extends EntityRepository
     public function getFromInternalList(string $internalList): array
     {
         $qb = $this->createQueryBuilder('u');
-        $qb
-            ->select('u')
-            ->where('u.email IS NOT NULL');
+        $qb->select('u')->where('u.email IS NOT NULL');
 
         if (EmailingCampaignInternalList::CONFIRMED) {
             $qb->andWhere('u.confirmationToken IS NULL');
@@ -1126,6 +1124,36 @@ class UserRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getAssignedUsersOnProposal(Proposal $proposal, string $revisedAt)
+    {
+        $sql = <<<'EOF'
+            select ps.supervisor_id as "assignedUser" FROM proposal_supervisor ps 
+            LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id 
+            where proposal_id = :proposalId
+            UNION
+            select pa.analyst_id as "assignedUser"  FROM proposal_analyst pa 
+            LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id 
+            where proposal_id = :proposalId
+            UNION
+            select pdm.decision_maker_id as "assignedUser" FROM proposal_decision_maker pdm 
+            LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id 
+            where proposal_id = :proposalId
+            UNION
+            select pr.author_id as "assignedUser" FROM proposal_revision pr 
+            LEFT JOIN fos_user fu4 ON pr.author_id = fu4.id 
+            where proposal_id = :proposalId and revised_at = :revisedAt
+        EOF;
+
+        $stmt = $this->getEntityManager()
+            ->getConnection()
+            ->prepare($sql);
+        $stmt->bindValue('proposalId', $proposal->getId());
+        $stmt->bindValue('revisedAt', new \DateTime($revisedAt), 'datetime');
+        $stmt->execute();
+
+        return $stmt->fetchAll();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder

@@ -2,56 +2,60 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\ProposalRevision;
+use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Enum\ProposalPublicationStatus;
+use Capco\AppBundle\Form\ProposalAdminType;
+use Capco\AppBundle\Form\ProposalEvaluersType;
+use Capco\AppBundle\Form\ProposalNotationType;
+use Capco\AppBundle\Form\ProposalProgressStepType;
+use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SelectionRepository;
 use Capco\AppBundle\Repository\StatusRepository;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
+use DateTime;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
-use Swarrot\Broker\Message;
-use Psr\Log\LoggerInterface;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\Form;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\Form\ProposalType;
-use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Form\ProposalAdminType;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
-use Capco\AppBundle\Form\ProposalEvaluersType;
-use Capco\AppBundle\Form\ProposalNotationType;
-use Capco\AppBundle\Helper\ResponsesFormatter;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Capco\AppBundle\Form\ProposalProgressStepType;
-use Capco\AppBundle\Enum\ProposalPublicationStatus;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
+use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class ProposalMutation implements ContainerAwareInterface
 {
     use ResolverTrait;
     use ContainerAwareTrait;
-    private $logger;
-    private $proposalLikersDataLoader;
-    private $globalIdResolver;
-    private $publisher;
-    private $em;
-    private $formFactory;
+
+    private LoggerInterface $logger;
+    private ProposalLikersDataLoader $proposalLikersDataLoader;
+    private GlobalIdResolver $globalIdResolver;
+    private Publisher $publisher;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
 
     public function __construct(
         LoggerInterface $logger,
@@ -167,7 +171,7 @@ class ProposalMutation implements ContainerAwareInterface
             new Message(
                 json_encode([
                     'proposalId' => $proposal->getId(),
-                    'date' => new \DateTime(),
+                    'date' => new DateTime(),
                 ])
             )
         );
@@ -217,7 +221,7 @@ class ProposalMutation implements ContainerAwareInterface
             new Message(
                 json_encode([
                     'proposalId' => $proposal->getId(),
-                    'date' => new \DateTime(),
+                    'date' => new DateTime(),
                 ])
             )
         );
@@ -296,7 +300,7 @@ class ProposalMutation implements ContainerAwareInterface
             new Message(
                 json_encode([
                     'proposalId' => $proposal->getId(),
-                    'date' => new \DateTime(),
+                    'date' => new DateTime(),
                 ])
             )
         );
@@ -330,7 +334,7 @@ class ProposalMutation implements ContainerAwareInterface
                 break;
             case ProposalPublicationStatus::PUBLISHED:
                 $proposal
-                    ->setPublishedAt(new \DateTime())
+                    ->setPublishedAt(new DateTime())
                     ->setDraft(false)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null);
@@ -471,6 +475,16 @@ class ProposalMutation implements ContainerAwareInterface
         }
         // Save the previous draft status to send the good notif.
         $wasDraft = $proposal->isDraft();
+
+        // catch all revisions with state pending or expired
+        $revisions = $proposal
+            ->getRevisions()
+            ->filter(
+                fn(ProposalRevision $revision) => ProposalRevisionStateType::REVISED !==
+                    $revision->getState()
+            );
+        $wasInRevision = $proposal->isInRevision();
+
         $author = $proposal->getAuthor();
 
         unset($values['id']); // This only useful to retrieve the proposal
@@ -518,8 +532,16 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$form->isValid()) {
             $this->handleErrors($form);
         }
+        $now = new DateTime();
         if ($viewer === $author) {
-            $proposal->setUpdatedAt(new \DateTime());
+            $proposal->setUpdatedAt($now);
+
+            // set all revision (in pending or expired) with state revised
+            /** @var ProposalRevision $revision */
+            foreach ($revisions as $revision) {
+                $revision->setRevisedAt($now);
+                $revision->setState(ProposalRevisionStateType::REVISED);
+            }
         }
 
         $proposal->setUpdateAuthor($viewer);
@@ -528,17 +550,18 @@ class ProposalMutation implements ContainerAwareInterface
         $messageData = ['proposalId' => $proposal->getId()];
         if ($wasDraft && !$proposal->isDraft()) {
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_CREATE;
+        } elseif ($wasInRevision) {
+            $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_REVISION_REVISE;
+            $messageData['date'] = $now->format('Y-m-d H:i:s');
         } else {
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
             $messageData['date'] = $proposal->getUpdatedAt()->format('Y-m-d H:i:s');
         }
-
+        $indexer = $this->container->get(Indexer::class);
         $this->container
             ->get('swarrot.publisher')
             ->publish($proposalQueue, new Message(json_encode($messageData)));
 
-        // Synchronously index draft proposals being publish
-        $indexer = $this->container->get(Indexer::class);
         $indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $indexer->finishBulk();
 
@@ -612,7 +635,7 @@ class ProposalMutation implements ContainerAwareInterface
                 $draft = $values['draft'];
                 if (!$draft) {
                     if ($author && $author->isEmailConfirmed()) {
-                        $proposal->setPublishedAt(new \DateTime());
+                        $proposal->setPublishedAt(new DateTime());
                     }
                     $proposal->setDraft(false);
                 }

@@ -311,6 +311,7 @@ const AnalysisDashboardHeader = ({
       />
 
       <AnalysisFilterSort
+        hasRevisions
         value={parameters.sort}
         onChange={newValue => {
           dispatch({ type: 'CHANGE_SORT', payload: ((newValue: any): SortValues) });

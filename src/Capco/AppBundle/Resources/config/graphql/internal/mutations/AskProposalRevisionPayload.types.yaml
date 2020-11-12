@@ -1,0 +1,10 @@
+AskProposalRevisionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            proposal:
+                type: 'InternalProposal'
+                description: 'The proposal'
+            errorCode:
+                type: 'AskProposalRevisionErrorCode'
+                description: 'Contains the error code if one occurred.'

@@ -61,7 +61,7 @@ const PanelContainer: StyledComponent<
   display: ${({ isAnalysing }) => !isAnalysing && 'none'};
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.12);
   height: 100%;
-  z-index: 1;
+  z-index: 4;
   top: ${({ scrollY, bottom, hasVoteBar }) =>
     bottom < 0
       ? 'unset'

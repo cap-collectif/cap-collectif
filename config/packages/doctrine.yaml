@@ -13,6 +13,7 @@ doctrine:
             enum_sso_environment: Capco\AppBundle\DBAL\Enum\EnumSSOEnvironmentType
             enum_event_review_refused_reason: Capco\AppBundle\DBAL\Enum\EventReviewRefusedReasonType
             enum_event_review_status: Capco\AppBundle\DBAL\Enum\EventReviewStatusType
+            enum_proposal_revision_state: Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType
         mapping_types:
             enum: string
         profiling_collect_schema_errors: false

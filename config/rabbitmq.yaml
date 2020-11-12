@@ -101,6 +101,18 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: proposal_analyse
+        proposal_revision:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_revision
+        proposal_revision_revise:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_revision_revise
         comment_create:
             durable: true
             retries: [25, 125, 625]

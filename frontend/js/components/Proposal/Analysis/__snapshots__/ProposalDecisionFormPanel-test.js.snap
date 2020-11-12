@@ -5,6 +5,50 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly 1`] = `
   <form
     id="proposal-decision-form"
   >
+    <ProposalRevisionPanel
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "assessment": Object {
+            "id": "assessmentid2",
+            "officialResponse": "ueueueueueue",
+          },
+          "decision": Object {
+            "estimatedCost": 43,
+            "isApproved": true,
+            "post": Object {
+              "authors": Array [
+                Object {
+                  "label": "username",
+                  "value": "decidorId",
+                },
+              ],
+              "body": "oe",
+              "id": "pid",
+            },
+            "refusedReason": Object {
+              "label": "name",
+              "value": "id",
+            },
+            "state": "DONE",
+          },
+          "form": Object {
+            "analysisConfiguration": Object {
+              "costEstimationEnabled": true,
+              "effectiveDate": "Vers le 12 à peu près en même temps que la fermeture des locaux",
+              "unfavourableStatuses": Array [
+                Object {
+                  "label": "name",
+                  "value": "id",
+                },
+              ],
+            },
+          },
+          "id": "id",
+        }
+      }
+    />
     <ProposalAnalysisFormPanel__AnalysisForm>
       <label
         className="mb-15"
@@ -148,6 +192,52 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly 1`] = `
           values={Object {}}
         />
       </ProposalAnalysisFormPanel__ValidateButton>
+      <ProposalRevision
+        proposal={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "assessment": Object {
+              "id": "assessmentid2",
+              "officialResponse": "ueueueueueue",
+            },
+            "decision": Object {
+              "estimatedCost": 43,
+              "isApproved": true,
+              "post": Object {
+                "authors": Array [
+                  Object {
+                    "label": "username",
+                    "value": "decidorId",
+                  },
+                ],
+                "body": "oe",
+                "id": "pid",
+              },
+              "refusedReason": Object {
+                "label": "name",
+                "value": "id",
+              },
+              "state": "DONE",
+            },
+            "form": Object {
+              "analysisConfiguration": Object {
+                "costEstimationEnabled": true,
+                "effectiveDate": "Vers le 12 à peu près en même temps que la fermeture des locaux",
+                "unfavourableStatuses": Array [
+                  Object {
+                    "label": "name",
+                    "value": "id",
+                  },
+                ],
+              },
+            },
+            "id": "id",
+          }
+        }
+      >
+        <Component />
+      </ProposalRevision>
     </ProposalAnalysisFormPanel__Validation>
   </form>
 </Fragment>

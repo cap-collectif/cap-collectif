@@ -1,0 +1,15 @@
+InternalProposalOrder:
+    type: input-object
+    inherits:
+        - PreviewProposalOrder
+    config:
+        description: 'Properties by which proposal connections can be ordered.'
+        name: ProposalOrder
+        fields:
+            field:
+                type: 'InternalProposalOrderField!'
+                description: 'The field in which to order nodes by.'
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: 'ASC'
+                description: 'The direction in which to order nodes.'

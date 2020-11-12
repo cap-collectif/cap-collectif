@@ -147,10 +147,7 @@ class DefaultController extends Controller
     {
         if (isset(MessagesList::MESSAGES_LIST[$messageType])) {
             $messager = MessagesList::MESSAGES_LIST[$messageType];
-            $data = $messager::mockData(
-                $this->container,
-                MessagesList::TEMPLATE_LIST[$messageType]
-            );
+            $data = $messager::mockData($this->container);
 
             return $this->render($data['template'], $data);
         }

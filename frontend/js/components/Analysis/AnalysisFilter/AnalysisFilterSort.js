@@ -11,6 +11,8 @@ export const ORDER_BY: {
   LEAST_VOTES: 'least-votes',
   MOST_POINTS: 'most-points',
   LEAST_POINT: 'least-points',
+  MOST_RECENT_REVISIONS: 'most-recent-revisions',
+  LEAST_RECENT_REVISIONS: 'least-recent-revisions',
 } = {
   OLDEST: 'oldest',
   NEWEST: 'newest',
@@ -18,12 +20,15 @@ export const ORDER_BY: {
   LEAST_VOTES: 'least-votes',
   MOST_POINTS: 'most-points',
   LEAST_POINT: 'least-points',
+  MOST_RECENT_REVISIONS: 'most-recent-revisions',
+  LEAST_RECENT_REVISIONS: 'least-recent-revisions',
 };
 
 type Props = {|
   value: $Values<typeof ORDER_BY>,
   onChange: (newValue: string) => void,
   isParticipant?: boolean,
+  hasRevisions?: boolean,
   isVotable?: boolean,
   isVoteRanking?: boolean,
 |};
@@ -32,6 +37,7 @@ const AnalysisFilterSort = ({
   value,
   onChange,
   isParticipant,
+  hasRevisions = false,
   isVotable = false,
   isVoteRanking = false,
 }: Props) => {
@@ -59,6 +65,20 @@ const AnalysisFilterSort = ({
               id: isParticipant ? 'least.active.users' : 'global.filter_f_old',
             })}
           </DropdownSelect.Choice>
+          {hasRevisions && (
+            <>
+              <DropdownSelect.Choice value={ORDER_BY.MOST_RECENT_REVISIONS}>
+                {intl.formatMessage({
+                  id: 'most.recent.review.request',
+                })}
+              </DropdownSelect.Choice>
+              <DropdownSelect.Choice value={ORDER_BY.LEAST_RECENT_REVISIONS}>
+                {intl.formatMessage({
+                  id: 'oldest.review.request',
+                })}
+              </DropdownSelect.Choice>
+            </>
+          )}
           {isVotable && (
             <>
               <DropdownSelect.Choice value={ORDER_BY.MOST_VOTES}>

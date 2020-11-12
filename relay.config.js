@@ -4,7 +4,7 @@ module.exports = {
   // persistOutput: "./queryMap.json",
   src: './frontend/js',
   noFutureProofEnums: true,
-  // language: 'js-flow-uncommented',
+  language: 'js-flow-uncommented',
   schema: './schema.internal.graphql',
   artifactDirectory: './frontend/js/__generated__/~relay',
   exclude: ['**/node_modules/**', '**/__mocks__/**', '**/__generated__/**'],

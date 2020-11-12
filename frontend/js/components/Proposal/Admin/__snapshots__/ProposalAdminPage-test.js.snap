@@ -421,6 +421,49 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "name": "id",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": null,
+                          "kind": "LinkedField",
+                          "name": "firstAnalysisStep",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "TimeRange",
+                              "kind": "LinkedField",
+                              "name": "timeRange",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "endAt",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -1865,6 +1908,98 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                     },
                     Object {
                       "alias": null,
+                      "args": Array [
+                        Object {
+                          "kind": "Literal",
+                          "name": "state",
+                          "value": "PENDING",
+                        },
+                      ],
+                      "concreteType": "ProposalRevisionConnection",
+                      "kind": "LinkedField",
+                      "name": "revisions",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "ProposalRevisionEdge",
+                          "kind": "LinkedField",
+                          "name": "edges",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "ProposalRevision",
+                              "kind": "LinkedField",
+                              "name": "node",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "reason",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "createdAt",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "User",
+                                  "kind": "LinkedField",
+                                  "name": "author",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "username",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": "revisions(state:\\"PENDING\\")",
+                    },
+                    Object {
+                      "alias": null,
                       "args": null,
                       "concreteType": "Proposal",
                       "kind": "LinkedField",
@@ -2637,7 +2772,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "da20c90ae5581ce8f3ecb3e11787334b",
+          "cacheID": "299d032a8e1eb7648c28d91bd70d60ea",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2656,6 +2791,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
 
 fragment ProposalAdminContentForm_proposal on Proposal {
   ...ProposalFusionEditModal_proposal
+  ...ProposalRevision_proposal
   id
   mergedFrom {
     id
@@ -3110,6 +3246,39 @@ fragment ProposalPageFollowers_proposal_1G22uz on Proposal {
     }
     totalCount
   }
+}
+
+fragment ProposalRevisionModalForm_proposal on Proposal {
+  id
+  url
+  revisions(state: PENDING) {
+    totalCount
+    edges {
+      node {
+        id
+        reason
+        createdAt
+        author {
+          username
+          id
+        }
+      }
+    }
+  }
+  project {
+    firstAnalysisStep {
+      __typename
+      timeRange {
+        endAt
+      }
+      id
+    }
+    id
+  }
+}
+
+fragment ProposalRevision_proposal on Proposal {
+  ...ProposalRevisionModalForm_proposal
 }
 
 fragment UserAvatar_user on User {

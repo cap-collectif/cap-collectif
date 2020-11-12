@@ -45,7 +45,7 @@ InternalProposal:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalNewsResolver", [value, args])'
                 args:
                     orderBy:
-                        type: 'PreviewProposalOrder'
+                        type: 'InternalProposalOrder'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
             reportings:
                 type: 'ReportingConnection!'
@@ -235,3 +235,18 @@ InternalProposal:
                 type: 'ProposalProgressState!'
                 description: 'The proposal global progress status.'
                 resolve: '@=value.getGlobalProgressStatus()'
+            revisions:
+                type: 'ProposalRevisionConnection!'
+                argsBuilder: 'Relay::Connection'
+                access: "@=hasRole('ROLE_USER')"
+                description: "The proposal's related revision in pending state."
+                args:
+                    state:
+                        type: 'ProposalRevisionState'
+                        defaultValue: null
+                        description: 'If null, get revisions in done and pending state'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalRevisionsResolver", [value, args])'
+            contribuable:
+                type: 'Boolean!'
+                resolve: '@=value.canContribute(getUser())'
+                description: 'Viewer can contribute to the proposal'

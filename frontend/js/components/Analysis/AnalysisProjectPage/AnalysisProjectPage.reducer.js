@@ -17,9 +17,13 @@ export type ProposalsThemeValues = 'ALL' | 'NONE' | Uuid;
 export const ORDER_BY: {
   OLDEST: 'oldest',
   NEWEST: 'newest',
+  MOST_RECENT_REVISIONS: 'most-recent-revisions',
+  LEAST_RECENT_REVISIONS: 'least-recent-revisions',
 } = {
   OLDEST: 'oldest',
   NEWEST: 'newest',
+  MOST_RECENT_REVISIONS: 'most-recent-revisions',
+  LEAST_RECENT_REVISIONS: 'least-recent-revisions',
 };
 
 export type SortValues = $Values<typeof ORDER_BY>;

@@ -12,11 +12,15 @@ describe('<ProposalPageHeaderButtons />', () => {
     id: 'proposalId',
     url: '/slash',
     title: 'OEEEEE',
+    pendingRevisions: {
+      totalCount: 0,
+    },
     author: {
       id: 'authorid',
       slug: 'metal',
       displayName: 'flex',
     },
+    contribuable: true,
     form: {
       contribuable: true,
       canContact: true,

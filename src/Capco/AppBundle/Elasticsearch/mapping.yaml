@@ -320,7 +320,12 @@ mappings:
                     updatedBy: *Author
                     state: { type: keyword }
             progressStatus: { type: keyword }
-
+            revisions:
+                type: nested
+                properties:
+                    author: *Author
+                    state: { type: keyword }
+                    createdAt: { type: date }
     opinion:
         properties:
             id: { type: keyword }

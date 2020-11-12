@@ -19,6 +19,9 @@ import { Validation, ValidateButton, AnalysisForm } from './ProposalAnalysisForm
 import ChangeProposalAssessmentMutation from '~/mutations/ChangeProposalAssessmentMutation';
 import EvaluateProposalAssessmentMutation from '~/mutations/EvaluateProposalAssessmentMutation';
 import { type SubmittingState } from './ProposalFormSwitcher';
+import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision';
+import { RevisionButton } from '~/shared/ProposalRevision/styles';
+import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel';
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE';
 
@@ -89,6 +92,7 @@ export const ProposalAssessmentFormPanel = ({
   initialStatus,
   costEstimationEnabled,
   disabled,
+  proposal,
   officialResponse,
 }: Props) => {
   const [status, setStatus] = useState(initialStatus);
@@ -97,6 +101,7 @@ export const ProposalAssessmentFormPanel = ({
   return (
     <>
       <form id={formName}>
+        <ProposalRevisionPanel proposal={proposal} />
         <AnalysisForm>
           <Field
             name="body"
@@ -187,6 +192,13 @@ export const ProposalAssessmentFormPanel = ({
             }}>
             <FormattedMessage id="validate" />
           </ValidateButton>
+          <ProposalRevision proposal={proposal}>
+            {openModal => (
+              <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                <FormattedMessage id="request.author.review" />
+              </RevisionButton>
+            )}
+          </ProposalRevision>
         </Validation>
       </form>
     </>
@@ -221,6 +233,8 @@ export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAssessmentFormPanel_proposal on Proposal {
       id
+      ...ProposalRevisionPanel_proposal
+      ...ProposalRevision_proposal
       assessment {
         id
         state

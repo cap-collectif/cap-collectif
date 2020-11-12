@@ -1,0 +1,8 @@
+﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,"Decision majoritaire"
+replyExport1,Yes,"2020-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2020-03-20 00:00:00","2020-03-20 00:00:00",Yes,No,,very-well
+replyExport2,Yes,"2020-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2020-03-20 00:00:00","2020-03-20 00:00:00",Yes,No,,global-well
+replyExport3,Yes,"2020-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2020-03-20 00:00:00","2020-03-20 00:00:00",Yes,No,,global-not-passable
+replyExport4,Yes,"2020-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2020-03-20 00:00:00","2020-03-20 00:00:00",Yes,No,,global-passable
+replyExport5,Yes,"2020-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2020-03-20 00:00:00","2020-03-20 00:00:00",Yes,No,,global-well
+replyExport6,Yes,"2020-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2020-03-20 00:00:00","2020-03-20 00:00:00",Yes,No,,global-reject
+replyExport7,Yes,"2020-03-20 00:00:00",user,user5,user@test.com,+33635492871,"2020-03-20 00:00:00","2020-03-20 00:00:00",Yes,No,,global-well-enough

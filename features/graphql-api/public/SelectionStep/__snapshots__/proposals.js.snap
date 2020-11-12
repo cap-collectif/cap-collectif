@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview|Query.proposals connection fetches proposals order by revision asc and revision state in pending 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmQW5hbHlzZQ==",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTQ2NzI5NTA0MDAwO2k6MTtzOjEyOiJwcm9wb3NhbElkZjEiO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+            "publicationStatus": "PUBLISHED",
+            "revisions": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "username": "Max de la QA",
+                    },
+                    "createdAt": "2019-01-17 00:05:02",
+                    "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uMg==",
+                  },
+                },
+              ],
+              "totalCount": 1,
+            },
+            "title": "Mon grand projet",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTUzNTU1MTAyMDAwO2k6MTtzOjEyOiJwcm9wb3NhbElkZjUiO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
+            "publicationStatus": "PUBLISHED",
+            "revisions": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "username": "Max de la QA",
+                    },
+                    "createdAt": "2019-03-26 00:05:02",
+                    "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uSW5QZW5kaW5nMQ==",
+                  },
+                },
+              ],
+              "totalCount": 1,
+            },
+            "title": "Mon projet local en tant qu'association sans SIRET ni RNA",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNTU0NDE1NTAyMDAwO2k6MTtzOjEyOiJwcm9wb3NhbElkZjQiO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY0",
+            "publicationStatus": "PUBLISHED",
+            "revisions": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "username": "Max de la QA",
+                    },
+                    "createdAt": "2019-04-05 00:05:02",
+                    "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uSW5QZW5kaW5nMg==",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "username": "Agui",
+                    },
+                    "createdAt": "2019-04-08 00:05:02",
+                    "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uSW5QZW5kaW5nMw==",
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+            "title": "Mon projet local en tant qu'association avec RNA",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O2k6MTtzOjEyOiJwcm9wb3NhbElkZjIiO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYy",
+            "publicationStatus": "PUBLISHED",
+            "revisions": Object {
+              "edges": Array [],
+              "totalCount": 0,
+            },
+            "title": "Mon projet local en tant qu'entreprise",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O2k6MTtzOjEyOiJwcm9wb3NhbElkZjMiO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYz",
+            "publicationStatus": "PUBLISHED",
+            "revisions": Object {
+              "edges": Array [],
+              "totalCount": 0,
+            },
+            "title": "Mon projet local en tant qu'association avec SIRET",
+          },
+        },
+        Object {
+          "cursor": "YToyOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O2k6MTtzOjEyOiJwcm9wb3NhbElkZjYiO30=",
+          "node": Object {
+            "draft": false,
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+            "publicationStatus": "PUBLISHED",
+            "revisions": Object {
+              "edges": Array [],
+              "totalCount": 0,
+            },
+            "title": "Mon projet local en tant qu'organisme public",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YToyOntpOjA7aTo5MjIzMzcyMDM2ODU0Nzc1ODA3O2k6MTtzOjEyOiJwcm9wb3NhbElkZjYiO30=",
+        "hasNextPage": false,
+      },
+      "totalCount": 6,
+    },
+  },
+}
+`;

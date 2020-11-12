@@ -1,0 +1,35 @@
+InternalProposalRevision:
+    type: object
+    config:
+        description: 'A proposal revision.'
+        name: ProposalRevision
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: ProposalRevision
+                description: "The proposal's revision id."
+            proposal:
+                type: 'InternalProposal!'
+                description: 'The related proposal.'
+            author:
+                type: 'InternalUser!'
+                description: 'The author of revision'
+            state:
+                type: 'ProposalRevisionState!'
+                description: 'The current state of the revision on the proposal'
+            reason:
+                type: 'String'
+                description: 'The reason of revision'
+            createdAt:
+                type: 'DateTime!'
+                description: 'The creation date of the assessment.'
+            expiresAt:
+                type: 'DateTime!'
+                description: 'The date of expiration.'
+            revisedAt:
+                type: 'DateTime'
+                description: 'The date of revision by user.'
+            isExpired:
+                type: 'Boolean!'
+                description: 'Is the revision expired ?'

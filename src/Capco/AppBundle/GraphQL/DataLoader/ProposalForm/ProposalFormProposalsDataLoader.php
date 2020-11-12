@@ -24,8 +24,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
     public const CACHE_TIME_FUSION_COUNT = 480;
 
-    private $proposalRepo;
-    private $proposalSearch;
+    private ProposalRepository $proposalRepo;
+    private ProposalSearch $proposalSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,

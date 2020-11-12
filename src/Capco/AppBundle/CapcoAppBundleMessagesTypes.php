@@ -19,6 +19,8 @@ final class CapcoAppBundleMessagesTypes
     public const PROPOSAL_ASSIGNATION = 'proposal.assignation';
     public const PROPOSAL_REVOKE = 'proposal.revoke';
     public const PROPOSAL_ANALYSE = 'proposal.analyse';
+    public const PROPOSAL_REVISION = 'proposal.revision';
+    public const PROPOSAL_REVISION_REVISE = 'proposal.revision.revise';
 
     public const ARGUMENT_CREATE = 'argument.create';
     public const ARGUMENT_TRASH = 'argument.trash';

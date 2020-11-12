@@ -196,6 +196,8 @@ export const ICON_NAME = {
   letter: 'letter',
   danger: 'danger',
   favoriteBook: 'favoriteBook',
+  thinArrowUp: 'thin-arrow-up',
+  thinArrowDown: 'thin-arrow-down',
 };
 
 type Props = {|
@@ -210,6 +212,7 @@ type Props = {|
   className?: string,
   viewBox?: string,
   opacity?: number,
+  style?: { [property: string]: any },
   onClick?: () => void,
 |};
 
@@ -595,6 +598,10 @@ const getIcon = name => {
       return <Icons.Danger />;
     case 'favoriteBook':
       return <Icons.FavoriteBook />;
+    case 'thin-arrow-up':
+      return <Icons.ThinArrowUp />;
+    case 'thin-arrow-down':
+      return <Icons.ThinArrowDown />;
     default:
       return <div />;
   }

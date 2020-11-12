@@ -15,6 +15,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 // eslint-disable-next-line no-restricted-imports
 import { Button, ButtonToolbar, ListGroup, ListGroupItem, Panel } from 'react-bootstrap';
 import memoize from 'lodash/memoize';
+import styled from 'styled-components';
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation';
 import UpdateProposalFusionMutation from '~/mutations/UpdateProposalFusionMutation';
 import component from '../../Form/Field';
@@ -33,6 +34,9 @@ import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
 import warnResponses from '~/utils/form/warnResponses';
 import renderResponses from '~/components/Form/RenderResponses';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
+import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision';
+import { styleGuideColors } from '~/utils/colors';
+import { pxToRem } from '~/utils/styles/mixins';
 
 type ProposalForm = ProposalForm_proposalForm;
 type FormValues = {|
@@ -66,6 +70,24 @@ type Props = {|
 |};
 
 const formName = 'proposal-admin-edit';
+
+const RevisionButton = styled(Button)`
+  background: transparent;
+  border: 1px solid ${styleGuideColors.blue500};
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: ${pxToRem(14)};
+  color: ${styleGuideColors.blue500};
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: ${styleGuideColors.blue500};
+    border: 1px solid ${styleGuideColors.blue500};
+    background: transparent;
+  }
+`;
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin }: Props) => {
   const input = {
@@ -534,6 +556,16 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 }}
                 label={submitting ? 'global.loading' : 'global.save'}
               />
+              <ProposalRevision proposal={proposal} isAdminView>
+                {openModal => (
+                  <RevisionButton
+                    bsStyle="link"
+                    id="proposal_admin_content_revision"
+                    onClick={openModal}>
+                    {intl.formatMessage({ id: 'request.author.review' })}
+                  </RevisionButton>
+                )}
+              </ProposalRevision>
               <AlertForm
                 valid={valid}
                 invalid={invalid}
@@ -609,6 +641,7 @@ export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAdminContentForm_proposal on Proposal {
       ...ProposalFusionEditModal_proposal
+      ...ProposalRevision_proposal
       id
       mergedFrom {
         id

@@ -29,9 +29,7 @@ class ProposalAnalysisNormalizer implements
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = $this->normalizer->normalize($object, $format, $context);
-
-        return $data;
+        return $this->normalizer->normalize($object, $format, $context);
     }
 
     public function supportsNormalization($data, $format = null)

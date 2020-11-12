@@ -89,3 +89,6 @@ Capco\AppBundle\Entity\Proposal:
             groups: [ElasticsearchProposal]
         decision:
             groups: [ElasticsearchProposal]
+        getRevisionsArray:
+            serialized_name: revisions
+            groups: [ElasticsearchProposal]

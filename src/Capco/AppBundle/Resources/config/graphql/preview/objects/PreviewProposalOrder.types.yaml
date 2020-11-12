@@ -1,13 +1,13 @@
 PreviewProposalOrder:
-  type: input-object
-  config:
-    name: ProposalOrder
-    description: 'Ways in which proposal connections can be ordered.'
-    fields:
-      field:
-        type: 'PreviewProposalOrderField!'
-        description: 'The field in which to order nodes by.'
-      direction:
-        type: 'OrderDirection!'
-        defaultValue: 'ASC'
-        description: 'The direction in which to order nodes.'
+    type: input-object
+    config:
+        name: ProposalOrder
+        description: 'Ways in which proposal connections can be ordered.'
+        fields:
+            field:
+                type: 'PreviewProposalOrderField!'
+                description: 'The field in which to order nodes by.'
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: 'ASC'
+                description: 'The direction in which to order nodes.'

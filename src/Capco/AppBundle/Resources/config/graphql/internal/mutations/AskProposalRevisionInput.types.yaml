@@ -1,0 +1,14 @@
+AskProposalRevisionInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input type of AskProposalRevision mutation'
+        fields:
+            proposalId:
+                type: 'ID!'
+                description: 'The id of the proposal to be revised.'
+            reason:
+                type: 'String!'
+                description: 'The reason to revise the propose'
+            expiresAt:
+                type: 'DateTime!'
+                description: 'The datetime when revision expire'

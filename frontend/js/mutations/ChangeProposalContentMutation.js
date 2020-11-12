@@ -11,6 +11,7 @@ const mutation = graphql`
   mutation ChangeProposalContentMutation($input: ChangeProposalContentInput!) {
     changeProposalContent(input: $input) {
       proposal {
+        ...ProposalRevision_proposal
         id
         title
         body

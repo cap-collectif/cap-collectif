@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAnalysisFormPanel } from './ProposalAnalysisFormPanel';
-import { $refType, formMock, intlMock } from '~/mocks';
+import { $refType, formMock, intlMock, $fragmentRefs } from '~/mocks';
 
 describe('<ProposalAnalysisFormPanel  /> ', () => {
   it('renders correctly', () => {
@@ -16,6 +16,7 @@ describe('<ProposalAnalysisFormPanel  /> ', () => {
       proposal: {
         id: 'id',
         $refType,
+        $fragmentRefs,
         analyses: [
           {
             id: 'a1id',

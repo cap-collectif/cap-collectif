@@ -12,8 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class ProposalReportingsResolver implements ResolverInterface
 {
-    private $repository;
-    private $logger;
+    private ReportingRepository $repository;
+    private LoggerInterface $logger;
 
     public function __construct(ReportingRepository $repository, LoggerInterface $logger)
     {
@@ -31,13 +31,8 @@ class ProposalReportingsResolver implements ResolverInterface
                 $field = $arguments->offsetGet('orderBy')['field'];
                 $direction = $arguments->offsetGet('orderBy')['direction'];
 
-                return $this->repository->getByProposal(
-                    $proposal,
-                    $offset,
-                    $limit,
-                    $field,
-                    $direction
-                )
+                return $this->repository
+                    ->getByProposal($proposal, $offset, $limit, $field, $direction)
                     ->getIterator()
                     ->getArrayCopy();
             });
@@ -47,6 +42,7 @@ class ProposalReportingsResolver implements ResolverInterface
             return $paginator->auto($arguments, $totalCount);
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
             throw new \RuntimeException('Could not find proposals for selection step');
         }
     }

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
@@ -302,6 +303,11 @@ class Proposal implements
      */
     private iterable $analyses;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalRevision", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private Collection $revisions;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -319,6 +325,7 @@ class Proposal implements
         $this->parentConnections = new ArrayCollection();
         $this->proposalAnalysts = new ArrayCollection();
         $this->analyses = new ArrayCollection();
+        $this->revisions = new ArrayCollection();
         $this->assessment = null;
         $this->decision = null;
     }
@@ -825,12 +832,24 @@ class Proposal implements
         return !$this->isPrivate() || $this->isSelected();
     }
 
+    public function isInRevision(): bool
+    {
+        $revisions = $this->getRevisions()->filter(
+            fn(ProposalRevision $revision) => ProposalRevisionStateType::PENDING === $revision->getState()
+        );
+
+        return $revisions->count() > 0;
+    }
+
     public function canContribute($viewer = null): bool
     {
-        return ($this->isPublished() || $this->isDraft()) &&
+        $canContribute =
+            ($this->isPublished() || $this->isDraft()) &&
             !$this->isTrashed() &&
             $this->getStep() &&
             $this->getStep()->canContribute($viewer);
+
+        return $canContribute || ($viewer === $this->getAuthor() && $this->isInRevision());
     }
 
     public function acceptNewComments(): bool
@@ -1397,5 +1416,37 @@ class Proposal implements
             'ElasticsearchProposalNestedDistrict',
             'ElasticsearchProposal',
         ];
+    }
+
+    public function getRevisions(): Collection
+    {
+        return $this->revisions;
+    }
+
+    public function getRevisionsArray(): array
+    {
+        return $this->revisions ? $this->revisions->toArray() : [];
+    }
+
+    public function addRevision(ProposalRevision $revision): self
+    {
+        if (!$this->revisions->contains($revision)) {
+            $this->revisions->add($revision);
+            $revision->setProposal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRevision(ProposalRevision $revision): self
+    {
+        if ($this->revisions->contains($revision)) {
+            $this->revisions->removeElement($revision);
+            if ($revision->getProposal() === $this) {
+                $revision->setProposal(null);
+            }
+        }
+
+        return $this;
     }
 }

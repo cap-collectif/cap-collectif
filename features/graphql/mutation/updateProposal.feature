@@ -569,3 +569,376 @@ Scenario: GraphQL client try to update a and published a draft proposal
    }
 }
   """
+
+@database
+Scenario: GraphQL client try to update his proposal in revision
+  Given features themes, districts are enabled
+  And I am logged in to graphql as pierre
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: ChangeProposalContentInput!) {
+      changeProposalContent(input: $input) {
+        proposal {
+          id
+          title
+          body
+          updatedAt
+          revisions {
+            totalCount
+            edges {
+              node {
+                id
+                state
+                revisedAt
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "address": "[{\"address_components\":[{\"long_name\":\"Vincennes\",\"short_name\":\"Vincennes\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Val-de-Marne\",\"short_name\":\"Val-de-Marne\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Île-de-France\",\"short_name\":\"IDF\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"94300\",\"short_name\":\"94300\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"94300 Vincennes, France\",\"geometry\":{\"bounds\":{\"south\":48.840891,\"west\":2.418554,\"north\":48.85335800000001,\"east\":2.4579331},\"location\":{\"lat\":48.847759,\"lng\":2.4394969},\"location_type\":\"APPROXIMATE\",\"viewport\":{\"south\":48.840891,\"west\":2.418554,\"north\":48.85335800000001,\"east\":2.4579331}},\"place_id\":\"ChIJTcXqm6Ny5kcRQDeLaMOCCwQ\",\"types\":[\"locality\",\"political\"]}]",
+        "body": "<p>Je ne crois pas qu'il y ai de petit ou de moyen projet.</p>",
+        "category": "pCategoryIdf3",
+        "district": "districtIdf2",
+        "draft": false,
+        "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+        "media": null,
+        "responses": [
+          {
+            "question": "UXVlc3Rpb246MTMyOQ==",
+            "value": "département"
+          },
+          {
+            "question": "UXVlc3Rpb246MzkxOA==",
+            "value": "{\"labels\":[\"Renseigner la présentation de mon Grand Projet\"],\"other\":null}"
+          },
+          {
+            "question": "UXVlc3Rpb246MzUw",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MzA0",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzMg==",
+            "value": "31/12/2023"
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzMw==",
+            "value": "31/12/2030"
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzNA==",
+            "value": 160001
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzNQ==",
+            "value": 30004
+          },
+          {
+            "question": "UXVlc3Rpb246MzA1",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzMA==",
+            "value": "123456"
+          },
+          {
+            "question": "UXVlc3Rpb246MzkxOQ==",
+            "value": "{\"labels\":[\"Un autre organisme privé\"],\"other\":null}"
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzMQ==",
+            "value": "test"
+          },
+          {
+            "question": "UXVlc3Rpb246MzUx",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MzA3",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM2Mg==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM2Mw==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM2NA==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM2NQ==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM2Ng==",
+            "value": null
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTIx"
+          },
+          {
+            "question": "UXVlc3Rpb246MTM2Nw==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MzA2",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MzkyMA==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MzkyMQ==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzNg==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzNw==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzOA==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTMzOQ==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0MA==",
+            "value": null
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTIy"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTIz"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTI1"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTI2"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTI3"
+          },
+          {
+            "question": "UXVlc3Rpb246MzkyMg==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0Mg==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0Mw==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0NA==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0NQ==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0Ng==",
+            "value": null
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTI4"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTI5"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTMw"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTMx"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTMy"
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0Nw==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0OA==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM0OQ==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1MA==",
+            "value": null
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTMz"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTM1"
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1MQ==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1Mg==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1Mw==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1NA==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1NQ==",
+            "value": null
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTM2"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTM3"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTM4"
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1Ng==",
+            "value": null
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTM5"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTQw"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTQx"
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1Nw==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1OA==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM1OQ==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM2MA==",
+            "value": null
+          },
+          {
+            "question": "UXVlc3Rpb246MTM2MQ==",
+            "value": null
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTQy"
+          },
+          {
+            "medias": null,
+            "question": "UXVlc3Rpb246MTQz"
+          }
+        ],
+        "summary": null,
+        "title": "Mon grand projet"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "changeProposalContent":{
+           "proposal":{
+              "id":"UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+              "title":"Mon grand projet",
+              "body":"\u003Cp\u003EJe ne crois pas qu\u0027il y ai de petit ou de moyen projet.\u003C\/p\u003E",
+              "updatedAt":"@string@.isDateTime()",
+              "revisions":{
+                 "totalCount":4,
+                 "edges":[
+                    {
+                       "node":{
+                          "id":"UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uMg==",
+                          "state":"REVISED",
+                          "revisedAt":"@string@.isDateTime()"
+                       }
+                    },
+                    {
+                       "node":{
+                          "id":"UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uRXhwaXJlZA==",
+                          "state":"REVISED",
+                          "revisedAt":"@string@.isDateTime()"
+                       }
+                    },
+                    {
+                       "node":{
+                          "id":"UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uUmV2aXNlZA==",
+                          "state":"REVISED",
+                          "revisedAt":"@string@.isDateTime()"
+                       }
+                    },
+                    {
+                       "node":{
+                          "id":"UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uUmV2aXNlZE5vdEV4cGlyZWQ=",
+                          "state":"REVISED",
+                          "revisedAt":"@string@.isDateTime()"
+                       }
+                    }
+                 ]
+              }
+           }
+        }
+     }
+  }
+  """

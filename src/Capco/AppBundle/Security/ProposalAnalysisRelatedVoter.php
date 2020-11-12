@@ -20,16 +20,17 @@ class ProposalAnalysisRelatedVoter extends Voter
     public const ANALYSE = 'ANALYSE';
     public const EVALUATE = 'EVALUATE';
     public const VIEW = 'VIEW';
+    public const REVISE = 'REVISE';
     public const DECIDE = 'DECIDE';
     public const ASSIGN_SUPERVISOR = 'ASSIGN_SUPERVISOR';
     public const ASSIGN_ANALYST = 'ASSIGN_ANALYST';
     public const ASSIGN_DECISION_MAKER = 'ASSIGN_DECISION_MAKER';
 
-    private $proposalSupervisorRepository;
-    private $proposalDecisionMakerRepository;
-    private $proposalDecisionRepository;
-    private $proposalAnalystRepository;
-    private $authorizationChecker;
+    private ProposalSupervisorRepository $proposalSupervisorRepository;
+    private ProposalDecisionMakerRepository $proposalDecisionMakerRepository;
+    private ProposalDecisionRepository $proposalDecisionRepository;
+    private ProposalAnalystRepository $proposalAnalystRepository;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         ProposalSupervisorRepository $proposalSupervisorRepository,
@@ -56,6 +57,7 @@ class ProposalAnalysisRelatedVoter extends Voter
                 self::EVALUATE,
                 self::DECIDE,
                 self::VIEW,
+                self::REVISE,
                 self::ANALYSE,
                 self::ASSIGN_SUPERVISOR,
                 self::ASSIGN_ANALYST,
@@ -79,6 +81,7 @@ class ProposalAnalysisRelatedVoter extends Voter
 
         switch ($attribute) {
             case self::VIEW:
+            case self::REVISE:
                 return $this->canSee($subject, $viewer);
             case self::ANALYSE:
                 return $this->canAnalyse($subject, $viewer);

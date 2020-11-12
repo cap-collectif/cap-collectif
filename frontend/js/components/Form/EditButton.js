@@ -8,6 +8,7 @@ import type { State } from '~/types';
 
 type Props = {
   author: Object,
+  label?: string,
   onClick: Function,
   className: string,
   style?: Object,
@@ -40,7 +41,7 @@ class EditButton extends React.Component<Props> {
   };
 
   render() {
-    const { className, id, onClick, style } = this.props;
+    const { className, id, onClick, style, label } = this.props;
     if (this.isEditable()) {
       const classes = {
         btn: true,
@@ -56,7 +57,7 @@ class EditButton extends React.Component<Props> {
           className={classNames(classes, className)}
           onClick={() => onClick()}>
           <i className="cap cap-pencil-1" />
-          <FormattedMessage id="global.edit" />
+          <FormattedMessage id={label ?? 'global.edit'} />
         </button>
       );
     }

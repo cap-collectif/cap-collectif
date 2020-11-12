@@ -10,6 +10,34 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly 1`] = `
       }
     }
   >
+    <ProposalRevisionPanel
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "analyses": Array [
+            Object {
+              "analyst": Object {
+                "id": "userID345",
+              },
+              "comment": "mwe",
+              "id": "a1id",
+              "responses": Array [],
+              "state": "FAVOURABLE",
+            },
+          ],
+          "form": Object {
+            "analysisConfiguration": Object {
+              "evaluationForm": Object {
+                "questions": Array [],
+              },
+              "id": "analysisConfigId",
+            },
+          },
+          "id": "id",
+        }
+      }
+    />
     <ProposalAnalysisFormPanel__AnalysisForm>
       <FieldArray
         change={[MockFunction]}
@@ -123,6 +151,36 @@ exports[`<ProposalAnalysisFormPanel  />  renders correctly 1`] = `
           values={Object {}}
         />
       </ProposalAnalysisFormPanel__ValidateButton>
+      <ProposalRevision
+        proposal={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "analyses": Array [
+              Object {
+                "analyst": Object {
+                  "id": "userID345",
+                },
+                "comment": "mwe",
+                "id": "a1id",
+                "responses": Array [],
+                "state": "FAVOURABLE",
+              },
+            ],
+            "form": Object {
+              "analysisConfiguration": Object {
+                "evaluationForm": Object {
+                  "questions": Array [],
+                },
+                "id": "analysisConfigId",
+              },
+            },
+            "id": "id",
+          }
+        }
+      >
+        <Component />
+      </ProposalRevision>
     </ProposalAnalysisFormPanel__Validation>
   </form>
 </Fragment>

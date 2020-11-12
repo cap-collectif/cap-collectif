@@ -49,7 +49,7 @@ Capco\AppBundle\Entity\ProposalAnalyst:
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
         updatedAt: $createdAt
-    proposalAnalystIdf2Maxime:
+    proposalAnalystIdf1Maxime:
         __construct: ['@proposalIdf1', '@userMaxime']
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>

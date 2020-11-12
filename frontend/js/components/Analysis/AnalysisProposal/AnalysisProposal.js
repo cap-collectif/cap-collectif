@@ -3,6 +3,7 @@ import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
+import { OverlayTrigger } from 'react-bootstrap';
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql';
 import AnalysisProposalContainer, {
   ProposalTag,
@@ -19,8 +20,10 @@ import type {
   ProposalsThemeValues,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import Tooltip from '~/components/Utils/Tooltip';
+import colors, { styleGuideColors } from '~/utils/colors';
+import { pxToRem } from '~/utils/styles/mixins';
 import { TagContainer } from '~ui/Labels/Tag';
-import colors from '~/utils/colors';
 
 type Props = {
   proposal: AnalysisProposal_proposal,
@@ -82,7 +85,34 @@ const AnalysisProposal = ({
             </StateTag>
           )}
 
-          <h2>
+          <h2 className="d-flex align-items-center">
+            {proposal.revisions.totalCount > 0 && (
+              <OverlayTrigger
+                key="proposal-revisions"
+                placement="top"
+                overlay={
+                  <Tooltip id="tooltip-top" className="text-left">
+                    <FormattedMessage
+                      id="review.asked.by"
+                      values={{
+                        count: proposal.revisions.totalCount,
+                        username: proposal.revisions.edges
+                          ?.filter(Boolean)
+                          .map(edge => edge.node)
+                          .map(revision => revision.author.username)
+                          .join(', '),
+                      }}
+                    />
+                  </Tooltip>
+                }>
+                <Icon
+                  name={ICON_NAME.information}
+                  size={pxToRem(14)}
+                  className="mr-10"
+                  color={styleGuideColors.blue200}
+                />
+              </OverlayTrigger>
+            )}
             <a href={isAdminView ? proposal?.adminUrl : proposal.url}>{proposal.title}</a>
           </h2>
         </ProposalListRowHeader>
@@ -201,6 +231,17 @@ export default createFragmentContainer(AnalysisProposal, {
   proposal: graphql`
     fragment AnalysisProposal_proposal on Proposal
       @argumentDefinitions(isAdminView: { type: "Boolean" }) {
+      revisions(state: PENDING) {
+        totalCount
+        edges {
+          node {
+            id
+            author {
+              username
+            }
+          }
+        }
+      }
       id
       title
       publishedAt

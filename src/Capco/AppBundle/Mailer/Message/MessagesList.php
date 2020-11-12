@@ -8,6 +8,8 @@ use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventReviewApprovedMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventEditAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventReviewRefusedMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionRevisedMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
 
 final class MessagesList
@@ -20,6 +22,8 @@ final class MessagesList
         'event_review_approved' => EventReviewApprovedMessage::class,
         'event_review_refused' => EventReviewRefusedMessage::class,
         'proposal_update_status' => ProposalStatusChangeMessage::class,
+        'proposal_revision' => ProposalRevisionMessage::class,
+        'proposal_revision_revise' => ProposalRevisionRevisedMessage::class,
     ];
 
     public const TEMPLATE_LIST = [
@@ -31,5 +35,6 @@ final class MessagesList
         'event_review_refused' => '@CapcoMail/Event/notifyUserReviewedEvent.html.twig',
         'proposal_update_status' =>
             '@CapcoMail/Proposal/notifyProposalAuthorStatusChange.html.twig',
+        'proposal_revision' => '@CapcoMail/notifyProposalRevision.html.twig',
     ];
 }

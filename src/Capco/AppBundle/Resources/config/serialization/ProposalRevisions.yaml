@@ -1,0 +1,17 @@
+Capco\AppBundle\Entity\ProposalRevision:
+    exclusion_policy: ALL
+    attributes:
+        id:
+            groups: [ElasticsearchProposal]
+        author:
+            groups: [ElasticsearchProposal]
+        state:
+            groups: [ElasticsearchProposal]
+        getProposal:
+            type: object
+            serialized_name: proposal
+            groups: [ElasticsearchRevisionNestedProposal]
+        createdAt:
+            groups: [ElasticsearchProposal]
+        expiresAt:
+            groups: [ElasticsearchProposal]

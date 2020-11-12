@@ -5,6 +5,27 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly 1`] = `
   <form
     id="proposal-assessment-form"
   >
+    <ProposalRevisionPanel
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "assessment": Object {
+            "body": "summer body lol",
+            "estimatedCost": 43,
+            "id": "assessmentid1",
+            "officialResponse": "Je ne minterdis pas de jeter un oeil sur les caméras de surveillance dès lors quaucun membre du codir ne sera présent dans le locaux.",
+            "state": "IN_PROGRESS",
+          },
+          "form": Object {
+            "analysisConfiguration": Object {
+              "costEstimationEnabled": true,
+            },
+          },
+          "id": "id",
+        }
+      }
+    />
     <ProposalAnalysisFormPanel__AnalysisForm>
       <Field
         autoComplete="off"
@@ -122,6 +143,29 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly 1`] = `
           values={Object {}}
         />
       </ProposalAnalysisFormPanel__ValidateButton>
+      <ProposalRevision
+        proposal={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "assessment": Object {
+              "body": "summer body lol",
+              "estimatedCost": 43,
+              "id": "assessmentid1",
+              "officialResponse": "Je ne minterdis pas de jeter un oeil sur les caméras de surveillance dès lors quaucun membre du codir ne sera présent dans le locaux.",
+              "state": "IN_PROGRESS",
+            },
+            "form": Object {
+              "analysisConfiguration": Object {
+                "costEstimationEnabled": true,
+              },
+            },
+            "id": "id",
+          }
+        }
+      >
+        <Component />
+      </ProposalRevision>
     </ProposalAnalysisFormPanel__Validation>
   </form>
 </Fragment>

@@ -13,7 +13,6 @@ import AnalysisProjectPage, {
   ANALYSIS_PROJECT_PROPOSALS_PAGINATION,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage';
 import AnalysisHeader from '~/components/Analysis/AnalysisHeader/AnalysisHeader';
-import type { AnalysisProjectPageProposalsPaginatedQueryVariables } from '~relay/AnalysisProjectPageProposalsPaginatedQuery.graphql';
 import { useAnalysisProposalsContext } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.context';
 import {
   ORDER_BY,
@@ -21,6 +20,36 @@ import {
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer';
 import AnalysisPageContentPlaceholder from '~/components/Analysis/AnalysisPagePlaceholder/AnalysisPageContentPlaceholder';
 import type { GlobalState } from '~/types';
+import type { SortValues } from '~/components/Admin/Project/ProjectAdminPage.reducer';
+import type {
+  OrderDirection,
+  ProposalOrderField,
+} from '~relay/ProjectAdminProposalsPageQuery.graphql';
+import type { AnalysisProjectPageProposalsPaginatedQueryVariables } from '~relay/AnalysisProjectPageProposalsPaginatedQuery.graphql';
+
+const getSortField = (sortType: SortValues): ProposalOrderField => {
+  switch (sortType) {
+    case ORDER_BY.MOST_RECENT_REVISIONS:
+    case ORDER_BY.LEAST_RECENT_REVISIONS:
+      return 'REVISION_AT';
+    case ORDER_BY.NEWEST:
+    case ORDER_BY.OLDEST:
+    default:
+      return `PUBLISHED_AT`;
+  }
+};
+
+const getSortType = (sortType: SortValues): OrderDirection => {
+  switch (sortType) {
+    case ORDER_BY.LEAST_RECENT_REVISIONS:
+    case ORDER_BY.OLDEST:
+      return 'ASC';
+    case ORDER_BY.NEWEST:
+    case ORDER_BY.MOST_RECENT_REVISIONS:
+    default:
+      return 'DESC';
+  }
+};
 
 const createQueryVariables = (
   parameters: AnalysisProjectPageParameters,
@@ -28,8 +57,8 @@ const createQueryVariables = (
   count: ANALYSIS_PROJECT_PROPOSALS_PAGINATION,
   cursor: null,
   orderBy: {
-    field: 'PUBLISHED_AT',
-    direction: parameters.sort === ORDER_BY.NEWEST ? 'DESC' : 'ASC',
+    field: getSortField(parameters.sort),
+    direction: getSortType(parameters.sort),
   },
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,

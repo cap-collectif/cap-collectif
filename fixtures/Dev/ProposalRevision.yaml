@@ -1,0 +1,76 @@
+Capco\AppBundle\Entity\ProposalRevision:
+    proposalRevision1:
+        id: 'proposalRevision1'
+        author: '@user4'
+        proposal: '@proposal10'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
+        reason: "c'est :poop:"
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
+        expiresAt: <identity((new \DateTime('2030-05-23 00:05:00')))>
+    proposalRevision2:
+        id: 'proposalRevision2'
+        author: '@userMaximeQA'
+        proposal: '@proposalIdf1'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
+        reason: 'Manque le cout'
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:02'))->modify("+ 16 days"))>
+        expiresAt: <identity((new \DateTime('2030-05-23 00:05:01')))>
+    proposalRevision3:
+        id: 'proposalRevision3'
+        author: '@userJean'
+        proposal: '@proposal11'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::REVISED)>
+        reason: 'Pas assez explicite'
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:03'))->modify("+ 16 days"))>
+        expiresAt: <identity((new \DateTime('2030-05-23 00:05:02')))>
+        revisedAt: <identity((new \DateTime('now'))->modify("- 16 days"))>
+    proposalRevisionExpired:
+        id: 'proposalRevisionExpired'
+        author: '@userSpyl'
+        proposal: '@proposalIdf1'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
+        reason: 'Révision expiré en attente'
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:04'))->modify("+ 5 days"))>
+        expiresAt: <identity((new \DateTime('now'))->modify("- 6 days"))>
+    proposalRevisionRevisedNotExpired:
+        id: 'proposalRevisionRevisedNotExpired'
+        author: '@userMaxime'
+        proposal: '@proposalIdf1'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::REVISED)>
+        reason: 'Révision révisé avant échéance'
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:05'))->modify("+ 5 days"))>
+        expiresAt: <identity((new \DateTime('2030-05-23 00:05:03')))>
+        revisedAt: <identity((new \DateTime('now'))->setTime(00,00))>
+    proposalRevisionRevised:
+        id: 'proposalRevisionRevised'
+        author: '@userAgui'
+        proposal: '@proposalIdf1'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::REVISED)>
+        reason: 'Révision just revised'
+        createdAt: <identity((new \DateTime('2019-01-01 00:05:06'))->modify("+ 5 days"))>
+        expiresAt: <identity((new \DateTime('2030-05-23 00:05:04')))>
+        revisedAt: <identity((new \DateTime('now'))->setTime(00,00))>
+    proposalRevisionInPending1:
+        id: 'proposalRevisionInPending1'
+        author: '@userMaximeQA'
+        proposal: '@proposalIdf5'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
+        reason: 'Description trop flou'
+        createdAt: <identity((new \DateTime('2019-03-10 00:05:02'))->modify("+ 16 days"))>
+        expiresAt: <identity((new \DateTime('2030-05-23 00:05:01')))>
+    proposalRevisionInPending2:
+        id: 'proposalRevisionInPending2'
+        author: '@userMaximeQA'
+        proposal: '@proposalIdf4'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
+        reason: 'Description trop flou'
+        createdAt: <identity((new \DateTime('2019-03-20 00:05:02'))->modify("+ 16 days"))>
+        expiresAt: <identity((new \DateTime('2030-05-23 00:05:01')))>
+    proposalRevisionInPending3:
+        id: 'proposalRevisionInPending3'
+        author: '@userAgui'
+        proposal: '@proposalIdf4'
+        state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
+        reason: 'Description trop flou'
+        createdAt: <identity((new \DateTime('2019-03-23 00:05:02'))->modify("+ 16 days"))>
+        expiresAt: <identity((new \DateTime('2030-05-23 00:05:01')))>

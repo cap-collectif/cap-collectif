@@ -20,6 +20,8 @@ export const ORDER_BY: {
   LEAST_VOTE: 'least-votes',
   MOST_POINTS: 'most-points',
   LEAST_POINT: 'least-points',
+  MOST_RECENT_REVISIONS: 'most-recent-revisions',
+  LEAST_RECENT_REVISIONS: 'least-recent-revisions',
 } = {
   OLDEST: 'oldest',
   NEWEST: 'newest',
@@ -27,6 +29,8 @@ export const ORDER_BY: {
   LEAST_VOTE: 'least-votes',
   MOST_POINTS: 'most-points',
   LEAST_POINT: 'least-points',
+  MOST_RECENT_REVISIONS: 'most-recent-revisions',
+  LEAST_RECENT_REVISIONS: 'least-recent-revisions',
 };
 
 export type SortValues = $Values<typeof ORDER_BY>;

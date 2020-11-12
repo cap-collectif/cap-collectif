@@ -52,6 +52,9 @@ InternalWithProposals:
                     decisionMaker:
                         description: "The decision-maker's id assigned to the proposal"
                         type: 'ID'
+                    orderBy:
+                        type: 'InternalProposalOrder'
+                        defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
             viewerProposalsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalConnection'

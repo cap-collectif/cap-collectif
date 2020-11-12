@@ -18,7 +18,7 @@ import type {
   ProposalAnalysisFormPanel_proposal,
   ProposalAnalysisState,
 } from '~relay/ProposalAnalysisFormPanel_proposal.graphql';
-import colors from '~/utils/colors';
+import colors, { styleGuideColors } from '~/utils/colors';
 import { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import type { GlobalState, Dispatch } from '~/types';
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
@@ -32,13 +32,16 @@ import AnalyseProposalAnalysisMutation from '~/mutations/AnalyseProposalAnalysis
 import { type SubmittingState } from './ProposalFormSwitcher';
 import validateResponses from '~/utils/form/validateResponses';
 import { TYPE_FORM } from '~/constants/FormConstants';
+import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision';
+import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel';
+import { RevisionButton } from '~/shared/ProposalRevision/styles';
 
 const memoizeAvailableQuestions: any = memoize(() => {});
 
 export const Validation: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 370px;
   background: ${colors.grayF4};
-  height: 365px;
+  height: 420px;
   padding: 20px;
 
   .form-group .radio-container label {
@@ -64,7 +67,7 @@ export const ValidateButton: StyledComponent<
   width: 100%;
   height: 40px;
   text-align: center;
-  background: #3b88fd;
+  background: ${styleGuideColors.blue};
   font-size: 14px;
   font-weight: 600;
   color: ${colors.white};
@@ -110,10 +113,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       input: { ...input, decision: values.status },
     })
       .then(res => {
-        if (res?.analyseProposalAnalysis?.errorCode)
-          onValidate('ERROR');
-        else
-          onValidate('SAVED', values.goBack);
+        if (res?.analyseProposalAnalysis?.errorCode) onValidate('ERROR');
+        else onValidate('SAVED', values.goBack);
       })
       .catch(e => {
         if (e instanceof SubmissionError) {
@@ -146,7 +147,7 @@ const validate = (values: FormValues, { proposal, intl }: Props) => {
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
     'availableQuestions',
   );
-  
+
   const responsesError = validateResponses(
     proposal?.form?.analysisConfiguration?.evaluationForm?.questions || [],
     values.responses,
@@ -156,7 +157,7 @@ const validate = (values: FormValues, { proposal, intl }: Props) => {
     availableQuestions,
   );
 
-  const errors = {}
+  const errors = {};
 
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
@@ -164,7 +165,6 @@ const validate = (values: FormValues, { proposal, intl }: Props) => {
 
   return errors;
 };
-
 
 export const ProposalAnalysisFormPanel = ({
   proposal,
@@ -183,6 +183,7 @@ export const ProposalAnalysisFormPanel = ({
   return (
     <>
       <form id={formName} style={{ opacity: disabled ? '0.5' : '1' }}>
+        <ProposalRevisionPanel proposal={proposal} />
         <AnalysisForm>
           <FieldArray
             typeForm={TYPE_FORM.QUESTIONNAIRE}
@@ -274,6 +275,13 @@ export const ProposalAnalysisFormPanel = ({
             }}>
             <FormattedMessage id="global.finish" />
           </ValidateButton>
+          <ProposalRevision proposal={proposal}>
+            {openModal => (
+              <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                <FormattedMessage id="request.author.review" />
+              </RevisionButton>
+            )}
+          </ProposalRevision>
         </Validation>
       </form>
     </>
@@ -313,6 +321,8 @@ export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAnalysisFormPanel_proposal on Proposal {
       id
+      ...ProposalRevision_proposal
+      ...ProposalRevisionPanel_proposal
       analyses {
         id
         analyst {

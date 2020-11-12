@@ -10,8 +10,13 @@ const defaultProposal = {
   $refType,
   form: {
     $fragmentRefs,
+    contribuable: true,
   },
   id: '1',
+  allRevisions: {
+    totalCount: 0,
+    edges: [],
+  },
   publicationStatus: 'PUBLISHED',
 };
 

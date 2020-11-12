@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\ProposalOrderField;
 use Capco\AppBundle\Enum\ProposalsState;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Enum\ProposalTrashedStatus;
@@ -188,7 +189,7 @@ class ProposalSearch extends Search
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
         switch ($field) {
-            case 'VOTES':
+            case ProposalOrderField::VOTES:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-votes';
                 } else {
@@ -196,7 +197,7 @@ class ProposalSearch extends Search
                 }
 
                 break;
-            case 'POINTS':
+            case ProposalOrderField::POINTS:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-points';
                 } else {
@@ -204,7 +205,15 @@ class ProposalSearch extends Search
                 }
 
                 break;
-            case 'PUBLISHED_AT':
+            case ProposalOrderField::REVISION_AT:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'old-revisions';
+                } else {
+                    $order = 'last-revisions';
+                }
+
+                break;
+            case ProposalOrderField::PUBLISHED_AT:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old-published';
                 } else {
@@ -212,7 +221,7 @@ class ProposalSearch extends Search
                 }
 
                 break;
-            case 'CREATED_AT':
+            case ProposalOrderField::CREATED_AT:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old';
                 } else {
@@ -220,11 +229,11 @@ class ProposalSearch extends Search
                 }
 
                 break;
-            case 'COMMENTS':
+            case ProposalOrderField::COMMENTS:
                 $order = 'comments';
 
                 break;
-            case 'COST':
+            case ProposalOrderField::COST:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'cheap';
                 } else {
@@ -483,6 +492,22 @@ class ProposalSearch extends Search
                 return [
                     'commentsCount' => ['order' => 'desc'],
                     'createdAt' => ['order' => 'desc'],
+                ];
+
+            case 'last-revisions':
+                return [
+                    'revisions.createdAt' => [
+                        'order' => 'desc',
+                        'nested_path' => 'revisions',
+                    ],
+                ];
+
+            case 'old-revisions':
+                return [
+                    'revisions.createdAt' => [
+                        'order' => 'asc',
+                        'nested_path' => 'revisions',
+                    ],
                 ];
 
             case 'expensive':

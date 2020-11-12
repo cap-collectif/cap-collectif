@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -141,6 +142,10 @@ class GlobalIdResolver
                     $node = $this->container->get(ProposalRepository::class)->find($uuid);
 
                     break;
+                case 'ProposalRevision':
+                    $node = $this->container->get(ProposalRevisionRepository::class)->find($uuid);
+
+                    break;
                 case 'Debate':
                     $node = $this->container->get(DebateRepository::class)->find($uuid);
 
@@ -259,6 +264,10 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container->get(FollowerRepository::class)->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get(ProposalRevisionRepository::class)->find($uuid);
         }
 
         // TODO remove me.

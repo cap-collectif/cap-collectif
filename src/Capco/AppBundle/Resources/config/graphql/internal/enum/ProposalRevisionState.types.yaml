@@ -1,0 +1,14 @@
+ProposalRevisionState:
+    type: enum
+    config:
+        description: "Possible values of a proposal's revision state."
+        values:
+            PENDING:
+                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\ProposalRevisionStateType::PENDING")'
+                description: "The proposal's revision is currently pending"
+            REVISED:
+                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\ProposalRevisionStateType::REVISED")'
+                description: "The proposal's related revision is done"
+            EXPIRED:
+                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\ProposalRevisionStateType::EXPIRED")'
+                description: "The proposal's related revision is pending but expired"

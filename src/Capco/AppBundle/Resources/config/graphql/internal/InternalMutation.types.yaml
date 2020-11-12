@@ -1059,3 +1059,10 @@ InternalMutation:
                     inputType: RemoveDebateVoteInput
                     payloadType: RemoveDebateVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateVoteMutation", [value, getUser()])'
+            askProposalRevision:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanAskAProposalRevisionResolver").isGranted(getUser(), args["input"]["proposalId"])'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AskProposalRevisionInput
+                    payloadType: AskProposalRevisionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AskProposalRevisionMutation", [value, getUser()])'

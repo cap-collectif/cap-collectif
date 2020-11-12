@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { connect } from 'react-redux';
@@ -19,19 +19,26 @@ import EditButton from '~/components/Form/EditButton';
 import DeleteButton from '~/components/Form/DeleteButton';
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes';
 import colors from '~/utils/colors';
-import type { Dispatch } from '~/types';
+import type { Dispatch, State, User } from '~/types';
 import ProposalEditModal from '../../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../../Delete/ProposalDeleteModal';
 import { ProposalContactButton } from '~/components/Proposal/Contact/ProposalContactButton';
 
-type Props = {
-  proposal: ProposalPageHeaderButtons_proposal,
-  step: ?ProposalPageHeaderButtons_step,
-  viewer: ?ProposalPageHeaderButtons_viewer,
-  opinionCanBeFollowed: boolean,
-  hasVotableStep: boolean,
-  dispatch: Dispatch,
-};
+type ReduxProps = {|
+  +dispatch: Dispatch,
+  +user?: $PropertyType<User, 'user'>,
+|};
+
+type Props = {|
+  ...ReduxProps,
+  +proposal: ProposalPageHeaderButtons_proposal,
+  +step: ?ProposalPageHeaderButtons_step,
+  +viewer: ?ProposalPageHeaderButtons_viewer,
+  +opinionCanBeFollowed: boolean,
+  +hasVotableStep: boolean,
+|};
+
+export const EDIT_MODAL_ANCHOR = '#edit-proposal';
 
 const Buttons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   button {
@@ -78,12 +85,29 @@ const FixedButtons: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 export const ProposalPageHeaderButtons = ({
   proposal,
   viewer,
+  user,
   step,
   opinionCanBeFollowed,
   hasVotableStep,
   dispatch,
 }: Props) => {
   const isAuthor = viewer && viewer.id === proposal?.author?.id;
+  const editable = proposal?.form?.contribuable || proposal?.contribuable;
+  const canEditProposal = editable && user?.uniqueId === proposal?.author?.slug;
+  const hasExpiredRevisions = proposal?.expiredRevisions
+    ? proposal.expiredRevisions.totalCount > 0
+    : false;
+  useEffect(() => {
+    if (
+      (canEditProposal || (hasExpiredRevisions && isAuthor)) &&
+      window.location.href.includes(EDIT_MODAL_ANCHOR)
+    ) {
+      dispatch(openEditProposalModal());
+    }
+  }, [hasExpiredRevisions, canEditProposal, dispatch, isAuthor]);
+  const hasPendingRevisions = proposal?.pendingRevisions
+    ? proposal.pendingRevisions.totalCount > 0
+    : false;
   return (
     <Buttons>
       <ProposalEditModal proposal={proposal} />
@@ -121,11 +145,12 @@ export const ProposalPageHeaderButtons = ({
           <>
             <EditButton
               id="proposal-edit-button"
+              label={hasPendingRevisions || hasExpiredRevisions ? 'review-proposal' : 'global.edit'}
               author={{ uniqueId: proposal?.author?.slug }}
               onClick={() => {
                 dispatch(openEditProposalModal());
               }}
-              editable={proposal?.form?.contribuable}
+              editable={editable}
             />
             <DeleteButton
               id="proposal-delete-button"
@@ -157,7 +182,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-const connector = connect(null, mapDispatchToProps);
+const mapStateToProps = (state: State) => ({
+  user: state.user.user,
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   viewer: graphql`
@@ -186,11 +215,18 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       id
       url
       title
+      pendingRevisions: revisions(state: PENDING, first: 0) @include(if: $isAuthenticated) {
+        totalCount
+      }
+      expiredRevisions: revisions(state: EXPIRED, first: 0) @include(if: $isAuthenticated) {
+        totalCount
+      }
       author {
         id
         slug
         displayName
       }
+      contribuable
       form {
         canContact
         contribuable
@@ -201,7 +237,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
-      ...ProposalEditModal_proposal
+      ...ProposalEditModal_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalDeleteModal_proposal
     }
   `,

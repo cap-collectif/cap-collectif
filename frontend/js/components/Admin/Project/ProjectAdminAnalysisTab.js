@@ -8,13 +8,21 @@ import type {
   ProjectAdminAnalysisTabQueryResponse,
   ProjectAdminAnalysisTabQueryVariables,
 } from '~relay/ProjectAdminAnalysisTabQuery.graphql';
-import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer';
+import type {
+  ProjectAdminPageParameters,
+  SortValues,
+} from '~/components/Admin/Project/ProjectAdminPage.reducer';
 import ProjectAdminAnalysis, {
   PROJECT_ADMIN_PROPOSAL_PAGINATION,
 } from '~/components/Admin/Project/ProjectAdminAnalysis';
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context';
 import PickableList from '~ui/List/PickableList';
 import ProjectAdminAnalysisPlaceholder from './ProjectAdminAnalysisPlaceholder';
+import type {
+  OrderDirection,
+  ProposalOrderField,
+} from '~relay/ProjectAdminProposalsPageQuery.graphql';
+import { ORDER_BY } from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
 
 type Props = {|
   +projectId: string,
@@ -26,6 +34,30 @@ type PropsQuery = {|
   props: ProjectAdminAnalysisTabQueryResponse,
 |};
 
+const getSortField = (sortType: SortValues): ProposalOrderField | 'REVISION_AT' => {
+  switch (sortType) {
+    case ORDER_BY.MOST_RECENT_REVISIONS:
+    case ORDER_BY.LEAST_RECENT_REVISIONS:
+      return 'REVISION_AT';
+    case ORDER_BY.NEWEST:
+    case ORDER_BY.OLDEST:
+    default:
+      return `PUBLISHED_AT`;
+  }
+};
+
+const getSortType = (sortType: SortValues): OrderDirection => {
+  switch (sortType) {
+    case ORDER_BY.LEAST_RECENT_REVISIONS:
+    case ORDER_BY.OLDEST:
+      return 'ASC';
+    case ORDER_BY.NEWEST:
+    case ORDER_BY.MOST_RECENT_REVISIONS:
+    default:
+      return 'DESC';
+  }
+};
+
 const createQueryVariables = (
   projectId: string,
   parameters: ProjectAdminPageParameters,
@@ -34,8 +66,8 @@ const createQueryVariables = (
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
   cursor: null,
   orderBy: {
-    field: 'PUBLISHED_AT',
-    direction: parameters.sort === 'newest' ? 'DESC' : 'ASC',
+    field: getSortField(parameters.sort),
+    direction: getSortType(parameters.sort),
   },
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,

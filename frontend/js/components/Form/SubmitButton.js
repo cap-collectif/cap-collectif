@@ -8,7 +8,7 @@ import type { State, User } from '../../types';
 
 type Props = {
   id?: ?string,
-  onSubmit: Function,
+  onSubmit?: Function,
   // Default props not working
   isSubmitting?: boolean,
   label: string,

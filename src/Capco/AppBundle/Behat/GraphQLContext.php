@@ -71,6 +71,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @Given I am logged in to graphql as welcomatic
+     */
+    public function iAmLoggedInToGraphQLAsWelcomatic()
+    {
+        $this->createAuthenticatedClient('msantostefano@jolicode.com', 'capco');
+    }
+
+    /**
      * @Given I am logged in to graphql as pierre
      */
     public function iAmLoggedInToGraphQLAsPierre()
@@ -102,8 +110,8 @@ class GraphQLContext implements Context
         $response = $this->client->request('GET', '/graphql/internal', [
             'query' => ['query' => $query->getRaw()],
             'headers' => [
-                'Content-Type' => 'application/graphql'
-            ]
+                'Content-Type' => 'application/graphql',
+            ],
         ]);
         Assert::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
@@ -198,7 +206,7 @@ class GraphQLContext implements Context
         $this->resetClient();
         $response = $this->client->request('POST', '/login_check', [
             'headers' => ['Content-Type' => 'application/json'],
-            'json' => ['username' => $username, 'password' => $password]
+            'json' => ['username' => $username, 'password' => $password],
         ]);
     }
 
@@ -208,7 +216,7 @@ class GraphQLContext implements Context
             'base_uri' => 'https://capco.test/',
             'cert' => '/etc/ssl/certs/capco.pem',
             'verify' => false,
-            'cookies' => true
+            'cookies' => true,
         ]);
     }
 
@@ -227,7 +235,7 @@ class GraphQLContext implements Context
         $headers = [
             'Content-Type' => 'application/json',
             'Accept' => $accept,
-            'Origin' => $origin
+            'Origin' => $origin,
         ];
 
         if ('OPTIONS' === $method) {
@@ -240,7 +248,7 @@ class GraphQLContext implements Context
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
         $response = $this->client->request($method, $endpoint, [
             'json' => json_decode($string, true),
-            'headers' => $headers
+            'headers' => $headers,
         ]);
         $this->response = (string) $response->getBody();
         $this->rawResponse = $response;

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalDecisionFormPanel } from './ProposalDecisionFormPanel';
-import { $refType, formMock } from '~/mocks';
+import { $refType, formMock, $fragmentRefs } from '~/mocks';
 
 describe('<ProposalDecisionFormPanel  /> ', () => {
   it('renders correctly', () => {
@@ -14,6 +14,7 @@ describe('<ProposalDecisionFormPanel  /> ', () => {
       costEstimationEnabled: true,
       proposal: {
         id: 'id',
+        $fragmentRefs,
         $refType,
         assessment: {
           id: 'assessmentid2',

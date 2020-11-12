@@ -453,6 +453,149 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           onSubmit={[Function]}
           type="submit"
         />
+        <ProposalRevision
+          isAdminView={true}
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "address": null,
+              "author": Object {
+                "displayName": "Author",
+                "id": "1",
+              },
+              "body": "body",
+              "category": Object {
+                "id": "1",
+              },
+              "district": Object {
+                "id": "1",
+              },
+              "form": Object {
+                "addressHelpText": "Address Help",
+                "categories": Array [
+                  Object {
+                    "id": "1",
+                    "name": "category-1",
+                  },
+                  Object {
+                    "id": "2",
+                    "name": "category-2",
+                  },
+                ],
+                "categoryHelpText": "Category Help",
+                "categoryMandatory": true,
+                "description": "Description",
+                "descriptionHelpText": "Description Help",
+                "descriptionMandatory": true,
+                "districtHelpText": "District Help",
+                "districtMandatory": true,
+                "districts": Array [],
+                "id": "form1",
+                "illustrationHelpText": "Illustration Help",
+                "isProposalForm": true,
+                "proposalInAZoneRequired": true,
+                "questions": Array [
+                  Object {
+                    "__typename": "SimpleQuestion",
+                    "alwaysJumpDestinationQuestion": null,
+                    "choices": Object {
+                      "edges": Array [],
+                      "pageInfo": Object {
+                        "hasNextPage": false,
+                      },
+                      "totalCount": 0,
+                    },
+                    "description": null,
+                    "helpText": "Help 1",
+                    "hidden": false,
+                    "id": "1",
+                    "isOtherAllowed": false,
+                    "jumps": Array [],
+                    "level": 0,
+                    "number": 1,
+                    "position": 0,
+                    "private": false,
+                    "required": true,
+                    "title": "title",
+                    "type": "text",
+                    "validationRule": null,
+                  },
+                ],
+                "step": Object {
+                  "form": Object {
+                    "isProposalForm": true,
+                  },
+                  "id": "step1",
+                  "project": Object {
+                    "type": Object {
+                      "title": "global.consultation",
+                    },
+                  },
+                },
+                "suggestingSimilarProposals": true,
+                "summaryHelpText": "Summary Help",
+                "themeHelpText": "Theme Help",
+                "themeMandatory": true,
+                "titleHelpText": "Title help",
+                "usingAddress": true,
+                "usingCategories": true,
+                "usingDescription": true,
+                "usingDistrict": true,
+                "usingIllustration": true,
+                "usingSummary": true,
+                "usingThemes": true,
+              },
+              "id": "1",
+              "media": Object {
+                "id": "1",
+                "url": "",
+              },
+              "mergedFrom": Array [
+                Object {
+                  "adminUrl": "http://capco.dev/child1",
+                  "id": "1",
+                  "title": "Child 1",
+                },
+                Object {
+                  "adminUrl": "http://capco.dev/child2",
+                  "id": "2",
+                  "title": "Child 2",
+                },
+              ],
+              "mergedIn": Array [],
+              "publicationStatus": "DRAFT",
+              "responses": Array [
+                Object {
+                  "question": Object {
+                    "id": "1",
+                  },
+                  "value": "value-1",
+                },
+                Object {
+                  "medias": Array [
+                    Object {
+                      "id": "1",
+                      "name": "media-1",
+                      "size": "100",
+                      "url": "",
+                    },
+                  ],
+                  "question": Object {
+                    "id": "2",
+                  },
+                },
+              ],
+              "summary": "summary",
+              "theme": Object {
+                "id": "theme-1",
+              },
+              "title": "title-1",
+            }
+          }
+        >
+          <Component />
+        </ProposalRevision>
         <AlertForm
           invalid={false}
           submitFailed={false}

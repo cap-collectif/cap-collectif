@@ -908,6 +908,36 @@ interface Argumentable {
   ): ArgumentConnection
 }
 
+"""Available errors on proposal related mutations."""
+enum AskProposalRevisionErrorCode {
+  """The given proposal does not exist."""
+  NON_EXISTING_PROPOSAL
+
+  """The provided values are not valid."""
+  INVALID_FORM
+}
+
+input AskProposalRevisionInput {
+  """The id of the proposal to be revised."""
+  proposalId: ID!
+
+  """The reason to revise the propose"""
+  reason: String!
+
+  """The datetime when revision expire"""
+  expiresAt: DateTime!
+  clientMutationId: String
+}
+
+type AskProposalRevisionPayload {
+  """The proposal"""
+  proposal: Proposal
+
+  """Contains the error code if one occurred."""
+  errorCode: AskProposalRevisionErrorCode
+  clientMutationId: String
+}
+
 input AssignAnalystsToProposalsInput {
   """Assign analyst list to a list of proposals."""
   proposalIds: [ID!]!
@@ -5492,6 +5522,7 @@ type Mutation {
   deleteDebateOpinion(input: DeleteDebateOpinionInput!): DeleteDebateOpinionPayload
   addDebateVote(input: AddDebateVoteInput!): AddDebateVotePayload
   removeDebateVote(input: RemoveDebateVoteInput!): RemoveDebateVotePayload
+  askProposalRevision(input: AskProposalRevisionInput!): AskProposalRevisionPayload
 }
 
 """A connection to a list of items."""
@@ -7156,6 +7187,31 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The proposal global progress status."""
   progressStatus: ProposalProgressState!
+
+  """The proposal's related revision in pending state."""
+  revisions(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """If null, get revisions in done and pending state"""
+    state: ProposalRevisionState = null
+  ): ProposalRevisionConnection!
+
+  """Viewer can contribute to the proposal"""
+  contribuable: Boolean!
 }
 
 """The affiliation of a user to a proposal"""
@@ -7627,7 +7683,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
   isMapViewEnabled: Boolean!
 }
 
-"""Ways in which proposal connections can be ordered."""
+"""Properties by which proposal connections can be ordered."""
 input ProposalOrder {
   """The field in which to order nodes by."""
   field: ProposalOrderField!
@@ -7636,7 +7692,7 @@ input ProposalOrder {
   direction: OrderDirection! = ASC
 }
 
-"""Properties by which proposal connections can be ordered."""
+"""Ordering options for proposals votes connections."""
 enum ProposalOrderField {
   """
   Allows ordering a list of proposals by the number of comments it have.
@@ -7662,6 +7718,9 @@ enum ProposalOrderField {
 
   """Allows ordering a list of proposals by the number of points it have."""
   POINTS
+
+  """Allows ordering a list of proposals by revision date."""
+  REVISION_AT
 }
 
 """Possible values of a proposal's global progress state."""
@@ -7701,6 +7760,69 @@ enum ProposalPublicationStatus {
 
   """Visible by author only."""
   UNPUBLISHED
+}
+
+"""A proposal revision."""
+type ProposalRevision {
+  """The proposal's revision id."""
+  id: ID!
+
+  """The related proposal."""
+  proposal: Proposal!
+
+  """The author of revision"""
+  author: User!
+
+  """The current state of the revision on the proposal"""
+  state: ProposalRevisionState!
+
+  """The reason of revision"""
+  reason: String
+
+  """The creation date of the assessment."""
+  createdAt: DateTime!
+
+  """The date of expiration."""
+  expiresAt: DateTime!
+
+  """The date of revision by user."""
+  revisedAt: DateTime
+
+  """Is the revision expired ?"""
+  isExpired: Boolean!
+}
+
+"""A connection to a list of items."""
+type ProposalRevisionConnection {
+  """Identifies the total count of items in the connection."""
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ProposalRevisionEdge]
+}
+
+"""An edge in a connection."""
+type ProposalRevisionEdge {
+  """The item at the end of the edge."""
+  node: ProposalRevision!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Possible values of a proposal's revision state."""
+enum ProposalRevisionState {
+  """The proposal's revision is currently pending"""
+  PENDING
+
+  """The proposal's related revision is done"""
+  REVISED
+
+  """The proposal's related revision is pending but expired"""
+  EXPIRED
 }
 
 """Value of a proposal sorting"""

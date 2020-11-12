@@ -21,6 +21,9 @@ import UserListField from '~/components/Admin/Field/UserListField';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import { Validation, ValidateButton, AnalysisForm } from './ProposalAnalysisFormPanel';
 import { type SubmittingState } from './ProposalFormSwitcher';
+import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision';
+import { RevisionButton } from '~/shared/ProposalRevision/styles';
+import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel';
 
 const PostWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   margin-top: 10px;
@@ -100,6 +103,7 @@ export const ProposalDecisionFormPanel = ({
   return (
     <>
       <form id={formName}>
+        <ProposalRevisionPanel proposal={proposal} />
         <AnalysisForm>
           {costEstimationEnabled && (
             <>
@@ -235,6 +239,13 @@ export const ProposalDecisionFormPanel = ({
             }}>
             <FormattedMessage id="validate" />
           </ValidateButton>
+          <ProposalRevision proposal={proposal}>
+            {openModal => (
+              <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                <FormattedMessage id="request.author.review" />
+              </RevisionButton>
+            )}
+          </ProposalRevision>
         </Validation>
       </form>
     </>
@@ -269,6 +280,8 @@ export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalDecisionFormPanel_proposal on Proposal {
       id
+      ...ProposalRevisionPanel_proposal
+      ...ProposalRevision_proposal
       decision {
         state
         estimatedCost

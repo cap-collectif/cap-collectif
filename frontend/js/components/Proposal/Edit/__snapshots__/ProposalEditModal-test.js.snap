@@ -34,8 +34,13 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "DELETED",
@@ -47,8 +52,13 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "DELETED",
@@ -57,6 +67,7 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
       proposalForm={
         Object {
           "$fragmentRefs": null,
+          "contribuable": true,
         }
       }
     />
@@ -114,8 +125,13 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "DRAFT",
@@ -127,8 +143,13 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "DRAFT",
@@ -137,6 +158,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
       proposalForm={
         Object {
           "$fragmentRefs": null,
+          "contribuable": true,
         }
       }
     />
@@ -201,8 +223,13 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "PUBLISHED",
@@ -214,8 +241,13 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "PUBLISHED",
@@ -224,6 +256,7 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
       proposalForm={
         Object {
           "$fragmentRefs": null,
+          "contribuable": true,
         }
       }
     />
@@ -281,8 +314,13 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "TRASHED",
@@ -294,8 +332,13 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "TRASHED",
@@ -304,6 +347,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
       proposalForm={
         Object {
           "$fragmentRefs": null,
+          "contribuable": true,
         }
       }
     />
@@ -361,8 +405,13 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "TRASHED_NOT_VISIBLE",
@@ -374,8 +423,13 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "TRASHED_NOT_VISIBLE",
@@ -384,6 +438,7 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
       proposalForm={
         Object {
           "$fragmentRefs": null,
+          "contribuable": true,
         }
       }
     />
@@ -441,8 +496,13 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "UNPUBLISHED",
@@ -454,8 +514,13 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
         Object {
           "$fragmentRefs": null,
           "$refType": null,
+          "allRevisions": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
           "form": Object {
             "$fragmentRefs": null,
+            "contribuable": true,
           },
           "id": "1",
           "publicationStatus": "UNPUBLISHED",
@@ -464,6 +529,7 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
       proposalForm={
         Object {
           "$fragmentRefs": null,
+          "contribuable": true,
         }
       }
     />

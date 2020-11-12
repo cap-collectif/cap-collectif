@@ -56,6 +56,7 @@ import {
   TRIGGER_FOR,
 } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
+import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Page/Header/ProposalPageHeaderButtons';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -183,6 +184,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         }
         window.removeEventListener('beforeunload', onUnload);
         dispatch(closeEditProposalModal());
+        if (window.location.href.includes(EDIT_MODAL_ANCHOR)) {
+          window.history.replaceState(
+            null,
+            '',
+            window.location.href.replace(EDIT_MODAL_ANCHOR, ''),
+          );
+        }
         window.location.reload();
       })
       .catch(() => {
