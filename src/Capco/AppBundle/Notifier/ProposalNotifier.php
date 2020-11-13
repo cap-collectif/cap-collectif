@@ -383,12 +383,6 @@ class ProposalNotifier extends BaseNotifier
                 $analyst
             );
         }
-        $this->mailer->createAndSendMessage(
-            DecisionPublicationMessage::class,
-            $proposal,
-            $params,
-            $proposal->getAuthor()
-        );
     }
 
     private function notifyAllAnalystsOnDelete(
