@@ -8440,6 +8440,9 @@ type Query {
 
     """Remove super admin from export."""
     superAdmin: Boolean = false
+
+    """Get user list with disabled users"""
+    withDisabled: Boolean = false
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
 

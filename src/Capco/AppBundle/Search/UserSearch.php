@@ -23,8 +23,8 @@ class UserSearch extends Search
 {
     public const SEARCH_FIELDS = ['username', 'username.std', 'email'];
 
-    private $userRepo;
-    private $eventSearch;
+    private UserRepository $userRepo;
+    private EventSearch $eventSearch;
     private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
@@ -50,6 +50,8 @@ class UserSearch extends Search
         if (null !== $type && UserType::FILTER_ALL !== $type) {
             $boolQuery->addFilter(new Term(['userType.id' => ['value' => $type->getId()]]));
         }
+        $boolQuery->addFilter(new Term(['enabled' => true]));
+
         $query = new Query();
         $query->setQuery($boolQuery);
         if ('activity' === $sort) {
@@ -83,7 +85,8 @@ class UserSearch extends Search
         int $limit,
         array $orderBy,
         ?string $cursor = null,
-        bool $showSuperAdmin = false
+        bool $showSuperAdmin = false,
+        bool $includeDisabled = false
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         if (!$showSuperAdmin) {
@@ -92,10 +95,15 @@ class UserSearch extends Search
             $queryString->setFields(['roles']);
             $boolQuery->addMustNot($queryString);
         }
+        if (!$includeDisabled) {
+            $boolQuery->addFilter(new Term(['enabled' => !$includeDisabled]));
+        }
+
         $query = new Query();
         $query->setQuery($boolQuery);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
+
         $query->addSort($this->getSort($orderBy));
         $response = $this->index->getType('user')->search($query);
         $cursors = $this->getCursors($response);
@@ -114,6 +122,7 @@ class UserSearch extends Search
         bool $onlyUsers = false
     ): array {
         $query = new Query\BoolQuery();
+        $query->addFilter(new Term(['enabled' => true]));
 
         if ($terms && $authorsOfEventOnly) {
             $authorIds = $this->eventSearch->getAllIdsOfAuthorOfEvent($terms);
@@ -162,7 +171,7 @@ class UserSearch extends Search
         bool $onlyUsers = false
     ): array {
         $query = new Query\BoolQuery();
-
+        $query->addFilter(new Term(['enabled' => true]));
         if ($terms) {
             $query = $this->searchTermsInMultipleFields($query, $fields, $terms, 'best_fields');
         }
@@ -192,6 +201,8 @@ class UserSearch extends Search
     ): ElasticsearchPaginatedResult {
         $sort = [];
         $boolQuery = new Query\BoolQuery();
+        $boolQuery->addFilter(new Term(['enabled' => true]));
+
         if (isset($providedFilters['step'])) {
             $nestedQueryStep = new Query\Nested();
             $nestedQueryStep->setPath('participationsCountByStep');
@@ -379,6 +390,7 @@ class UserSearch extends Search
     {
         $boolQuery = new Query\BoolQuery();
         $boolQuery->addFilter(new Range('totalParticipationsCount', ['gt' => 0]));
+        $boolQuery->addFilter(new Term(['enabled' => true]));
 
         $query = new Query($boolQuery);
         $query->setSort([

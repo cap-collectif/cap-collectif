@@ -188,6 +188,10 @@ InternalQuery:
                         type: 'Boolean'
                         defaultValue: false
                         description: 'Remove super admin from export.'
+                    withDisabled:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'Get user list with disabled users'
                     orderBy:
                         type: 'UserOrder'
                         defaultValue:

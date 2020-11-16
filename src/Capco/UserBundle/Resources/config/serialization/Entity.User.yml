@@ -50,3 +50,6 @@ Capco\UserBundle\Entity\User:
       groups: [Elasticsearch]
     roles:
       groups: [Elasticsearch]
+    enabled:
+      groups: [Elasticsearch]
+      type: boolean

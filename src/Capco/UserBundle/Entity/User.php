@@ -1186,7 +1186,7 @@ class User extends BaseUser implements
 
     public function isIndexable(): bool
     {
-        return $this->isEnabled();
+        return true;
     }
 
     public static function getElasticsearchPriority(): int

@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserSearchQueryResolver implements ResolverInterface
 {
-    protected $userSearch;
+    protected UserSearch $userSearch;
 
     public function __construct(UserSearch $userSearch)
     {

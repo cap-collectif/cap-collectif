@@ -57,6 +57,7 @@ mappings:
             biography: *text_analysis_highlighted
             firstname: *text_analysis_highlighted
             lastname: *text_analysis_highlighted
+            enabled: { type: boolean }
             roles: { type: text }
             userType:
                 type: object

@@ -38,15 +38,23 @@ class QueryUsersResolver implements ResolverInterface
         $this->queryAnalyzer->analyseQuery($resolveInfo);
 
         $includeSuperAdmin = isset($args['superAdmin']) && true === $args['superAdmin'];
+        $includeDisabled = isset($args['withDisabled']) && true === $args['withDisabled'];
         $orderBy = $args->offsetExists('orderBy')
             ? $args->offsetGet('orderBy')
             : ['field' => SortField::CREATED_AT, 'direction' => OrderDirection::DESC];
 
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $orderBy,
-            $includeSuperAdmin
+            $includeSuperAdmin,
+            $includeDisabled
         ) {
-            return $this->userSearch->getAllUsers($limit, $orderBy, $cursor, $includeSuperAdmin);
+            return $this->userSearch->getAllUsers(
+                $limit,
+                $orderBy,
+                $cursor,
+                $includeSuperAdmin,
+                $includeDisabled
+            );
         });
 
         return $paginator->auto($args);

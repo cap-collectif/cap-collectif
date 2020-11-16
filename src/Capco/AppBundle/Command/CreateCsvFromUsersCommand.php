@@ -23,17 +23,16 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 
     private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
     private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
-    protected $connectionTraversor;
-    protected $listener;
-    protected $executor;
-    protected $projectRootDir;
+    protected ConnectionTraversor $connectionTraversor;
+    protected Executor $executor;
+    protected string $projectRootDir;
 
     /**
      * @var WriterInterface
      */
     protected $writer;
 
-    protected $userHeaderMap = [
+    protected array $userHeaderMap = [
         'id' => 'id',
         'email' => 'email',
         'username' => 'username',
@@ -84,7 +83,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
     ];
 
     private $customQuestions;
-    private $toggleManager;
+    private Manager $toggleManager;
 
     public function __construct(
         GraphQlAclListener $listener,
@@ -215,7 +214,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
 
         return <<<EOF
 {
-  users(superAdmin: false, first: 100 ${userCursor}) {
+  users(superAdmin: false, first: 100 ${userCursor}, withDisabled: true) {
     totalCount
     pageInfo {
       startCursor

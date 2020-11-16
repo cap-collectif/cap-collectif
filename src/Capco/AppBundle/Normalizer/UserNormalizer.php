@@ -86,6 +86,7 @@ class UserNormalizer implements
                     'id' => $object->getId(),
                     'username' => $object->getUsername(),
                     'email' => $object->getEmail(),
+                    'enabled' => $object->isEnabled(),
                     'userType' => $object->getUserType()
                         ? ['id' => $object->getUserType()->getId()]
                         : null,
