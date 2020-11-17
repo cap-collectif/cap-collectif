@@ -238,7 +238,7 @@ InternalProposal:
             revisions:
                 type: 'ProposalRevisionConnection!'
                 argsBuilder: 'Relay::Connection'
-                access: "@=hasRole('ROLE_USER')"
+                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('proposal_revisions')"
                 description: "The proposal's related revision in pending state."
                 args:
                     state:

@@ -87,6 +87,7 @@ class FeaturesCategoryResolver
                     Manager::majority_vote_question,
                     'unstable__emailing',
                     Manager::unstable__debate,
+                    Manager::proposal_revisions,
                 ],
             ],
         ],

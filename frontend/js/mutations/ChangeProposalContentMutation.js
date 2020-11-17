@@ -8,10 +8,13 @@ import type {
 } from '~relay/ChangeProposalContentMutation.graphql';
 
 const mutation = graphql`
-  mutation ChangeProposalContentMutation($input: ChangeProposalContentInput!) {
+  mutation ChangeProposalContentMutation(
+    $input: ChangeProposalContentInput!
+    $proposalRevisionsEnabled: Boolean!
+  ) {
     changeProposalContent(input: $input) {
       proposal {
-        ...ProposalRevision_proposal
+        ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
         id
         title
         body

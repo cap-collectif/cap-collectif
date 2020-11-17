@@ -9,7 +9,7 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { State } from '../../../types';
 
-export type Props = {| proposalId: number, dirty: boolean |};
+export type Props = {| proposalId: number, dirty: boolean, proposalRevisionsEnabled: boolean |};
 
 const onUnload = e => {
   // $FlowFixMe voir https://github.com/facebook/flow/issues/3690
@@ -47,21 +47,28 @@ export class ProposalAdminPage extends React.Component<Props> {
   }
 
   render() {
-    const { proposalId } = this.props;
+    const { proposalId, proposalRevisionsEnabled } = this.props;
     return (
       <div className="admin_proposal_form">
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProposalAdminPageQuery($id: ID!, $count: Int!, $cursor: String) {
+            query ProposalAdminPageQuery(
+              $id: ID!
+              $count: Int!
+              $proposalRevisionsEnabled: Boolean!
+              $cursor: String
+            ) {
               proposal: node(id: $id) {
                 ...ProposalAdminPageTabs_proposal
+                  @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
               }
             }
           `}
           variables={{
             id: proposalId,
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
+            proposalRevisionsEnabled,
             cursor: null,
           }}
           render={component}
@@ -72,6 +79,7 @@ export class ProposalAdminPage extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
+  proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
   dirty:
     isDirty('proposal-admin-edit')(state) ||
     isDirty('proposal-admin-selections')(state) ||

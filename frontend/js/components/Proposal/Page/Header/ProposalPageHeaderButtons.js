@@ -211,14 +211,19 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   `,
   proposal: graphql`
     fragment ProposalPageHeaderButtons_proposal on Proposal
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(
+        isAuthenticated: { type: "Boolean!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+      ) {
       id
       url
       title
-      pendingRevisions: revisions(state: PENDING, first: 0) @include(if: $isAuthenticated) {
+      pendingRevisions: revisions(state: PENDING, first: 0)
+        @include(if: $proposalRevisionsEnabled) {
         totalCount
       }
-      expiredRevisions: revisions(state: EXPIRED, first: 0) @include(if: $isAuthenticated) {
+      expiredRevisions: revisions(state: EXPIRED, first: 0)
+        @include(if: $proposalRevisionsEnabled) {
         totalCount
       }
       author {
@@ -237,7 +242,11 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
-      ...ProposalEditModal_proposal @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalEditModal_proposal
+        @arguments(
+          isAuthenticated: $isAuthenticated
+          proposalRevisionsEnabled: $proposalRevisionsEnabled
+        )
       ...ProposalDeleteModal_proposal
     }
   `,

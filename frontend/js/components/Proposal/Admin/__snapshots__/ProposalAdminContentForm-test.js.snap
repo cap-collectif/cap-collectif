@@ -453,6 +453,472 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           onSubmit={[Function]}
           type="submit"
         />
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`<ProposalAdminContentForm /> render correctly with proposals revisions feature enabled 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <Relay(Connect(ProposalFusionEditModal))
+    onClose={[Function]}
+    proposal={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "address": null,
+        "author": Object {
+          "displayName": "Author",
+          "id": "1",
+        },
+        "body": "body",
+        "category": Object {
+          "id": "1",
+        },
+        "district": Object {
+          "id": "1",
+        },
+        "form": Object {
+          "addressHelpText": "Address Help",
+          "categories": Array [
+            Object {
+              "id": "1",
+              "name": "category-1",
+            },
+            Object {
+              "id": "2",
+              "name": "category-2",
+            },
+          ],
+          "categoryHelpText": "Category Help",
+          "categoryMandatory": true,
+          "description": "Description",
+          "descriptionHelpText": "Description Help",
+          "descriptionMandatory": true,
+          "districtHelpText": "District Help",
+          "districtMandatory": true,
+          "districts": Array [],
+          "id": "form1",
+          "illustrationHelpText": "Illustration Help",
+          "isProposalForm": true,
+          "proposalInAZoneRequired": true,
+          "questions": Array [
+            Object {
+              "__typename": "SimpleQuestion",
+              "alwaysJumpDestinationQuestion": null,
+              "choices": Object {
+                "edges": Array [],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 0,
+              },
+              "description": null,
+              "helpText": "Help 1",
+              "hidden": false,
+              "id": "1",
+              "isOtherAllowed": false,
+              "jumps": Array [],
+              "level": 0,
+              "number": 1,
+              "position": 0,
+              "private": false,
+              "required": true,
+              "title": "title",
+              "type": "text",
+              "validationRule": null,
+            },
+          ],
+          "step": Object {
+            "form": Object {
+              "isProposalForm": true,
+            },
+            "id": "step1",
+            "project": Object {
+              "type": Object {
+                "title": "global.consultation",
+              },
+            },
+          },
+          "suggestingSimilarProposals": true,
+          "summaryHelpText": "Summary Help",
+          "themeHelpText": "Theme Help",
+          "themeMandatory": true,
+          "titleHelpText": "Title help",
+          "usingAddress": true,
+          "usingCategories": true,
+          "usingDescription": true,
+          "usingDistrict": true,
+          "usingIllustration": true,
+          "usingSummary": true,
+          "usingThemes": true,
+        },
+        "id": "1",
+        "media": Object {
+          "id": "1",
+          "url": "",
+        },
+        "mergedFrom": Array [
+          Object {
+            "adminUrl": "http://capco.dev/child1",
+            "id": "1",
+            "title": "Child 1",
+          },
+          Object {
+            "adminUrl": "http://capco.dev/child2",
+            "id": "2",
+            "title": "Child 2",
+          },
+        ],
+        "mergedIn": Array [],
+        "publicationStatus": "DRAFT",
+        "responses": Array [
+          Object {
+            "question": Object {
+              "id": "1",
+            },
+            "value": "value-1",
+          },
+          Object {
+            "medias": Array [
+              Object {
+                "id": "1",
+                "name": "media-1",
+                "size": "100",
+                "url": "",
+              },
+            ],
+            "question": Object {
+              "id": "2",
+            },
+          },
+        ],
+        "summary": "summary",
+        "theme": Object {
+          "id": "theme-1",
+        },
+        "title": "title-1",
+      }
+    }
+    show={false}
+  />
+  <Uncontrolled(Panel)
+    className="mt-30 mb-0 panel_flex"
+    header={
+      <div>
+        <FormattedMessage
+          id="initial-proposals"
+          values={Object {}}
+        />
+        <ButtonToolbar
+          bsClass="btn-toolbar"
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="warning"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="global.edit"
+              values={Object {}}
+            />
+          </Button>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="danger"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="global.delete"
+              values={Object {}}
+            />
+          </Button>
+        </ButtonToolbar>
+      </div>
+    }
+  >
+    <ListGroup
+      bsClass="list-group"
+      fill={true}
+    >
+      <ListGroupItem
+        bsClass="list-group-item"
+        key="1"
+        listItem={false}
+      >
+        <a
+          href="http://capco.dev/child1"
+        >
+          Child 1
+        </a>
+      </ListGroupItem>
+      <ListGroupItem
+        bsClass="list-group-item"
+        key="2"
+        listItem={false}
+      >
+        <a
+          href="http://capco.dev/child2"
+        >
+          Child 2
+        </a>
+      </ListGroupItem>
+    </ListGroup>
+  </Uncontrolled(Panel)>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="global.contenu"
+          values={Object {}}
+        />
+      </h3>
+      <a
+        className="pull-right link"
+        href="admin.help.link.proposal.body"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <i
+          className="fa fa-info-circle"
+        />
+         Aide
+      </a>
+    </div>
+    <div
+      className="box-content box-content__content-form"
+    >
+      <Field
+        component={[Function]}
+        id="proposal_title"
+        label={
+          <FormattedMessage
+            id="proposal.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="global.summary"
+        label={
+          <span>
+            <FormattedMessage
+              id="global.summary"
+              values={Object {}}
+            />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
+          </span>
+        }
+        name="summary"
+        type="textarea"
+      />
+      <UserListField
+        ariaControls="ProposalAdminContentForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={false}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="proposal-admin-author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
+          />
+        }
+        labelClassName="control-label"
+        multi={false}
+        name="author"
+        placeholder="global.author"
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        id="global.category"
+        label={
+          <span>
+            <FormattedMessage
+              id="global.category"
+              values={Object {}}
+            />
+          </span>
+        }
+        name="category"
+        type="select"
+      >
+        <FormattedMessage
+          id="proposal.select.category"
+          values={Object {}}
+        >
+          <Component />
+        </FormattedMessage>
+        <option
+          key="1"
+          value="1"
+        >
+          category-1
+        </option>
+        <option
+          key="2"
+          value="2"
+        >
+          category-2
+        </option>
+      </Field>
+      <Field
+        addressProps={
+          Object {
+            "getAddress": [Function],
+          }
+        }
+        component={[Function]}
+        formName="proposal-admin-edit"
+        id="proposal_address"
+        label={
+          <FormattedMessage
+            id="proposal_form.address"
+            values={Object {}}
+          />
+        }
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_body"
+        label={
+          <FormattedMessage
+            id="proposal.body"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="editor"
+      />
+      <FieldArray
+        change={[MockFunction]}
+        component={[Function]}
+        form="proposal-admin-edit"
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "formats": Object {},
+            "locale": "fr-FR",
+            "messages": Object {},
+            "now": [Function],
+          }
+        }
+        memoize={[Function]}
+        name="responses"
+        questions={
+          Array [
+            Object {
+              "__typename": "SimpleQuestion",
+              "alwaysJumpDestinationQuestion": null,
+              "choices": Object {
+                "edges": Array [],
+                "pageInfo": Object {
+                  "hasNextPage": false,
+                },
+                "totalCount": 0,
+              },
+              "description": null,
+              "helpText": "Help 1",
+              "hidden": false,
+              "id": "1",
+              "isOtherAllowed": false,
+              "jumps": Array [],
+              "level": 0,
+              "number": 1,
+              "position": 0,
+              "private": false,
+              "required": true,
+              "title": "title",
+              "type": "text",
+              "validationRule": null,
+            },
+          ]
+        }
+        responses={Array []}
+      />
+      <Field
+        component={[Function]}
+        id="proposal_media"
+        image=""
+        label={
+          <span>
+            <FormattedMessage
+              id="proposal.media"
+              values={Object {}}
+            />
+            <span
+              className="excerpt"
+            >
+               
+              <FormattedMessage
+                id="global.optional"
+                values={Object {}}
+              />
+            </span>
+          </span>
+        }
+        name="media"
+        type="image"
+      />
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Connect(SubmitButton)
+          bsStyle="primary"
+          disabled={true}
+          id="proposal_admin_content_save"
+          label="global.save"
+          onSubmit={[Function]}
+          type="submit"
+        />
         <ProposalRevision
           isAdminView={true}
           proposal={

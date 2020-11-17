@@ -53,8 +53,10 @@ const getSortType = (sortType: SortValues): OrderDirection => {
 
 const createQueryVariables = (
   parameters: AnalysisProjectPageParameters,
+  proposalRevisionsEnabled: boolean = false,
 ): $Diff<AnalysisProjectPageProposalsPaginatedQueryVariables, { projectId: any }> => ({
   count: ANALYSIS_PROJECT_PROPOSALS_PAGINATION,
+  proposalRevisionsEnabled,
   cursor: null,
   orderBy: {
     field: getSortField(parameters.sort),
@@ -184,18 +186,20 @@ export const renderComponent = ({
 
 type Props = {|
   language: string,
+  proposalRevisionsEnabled: boolean,
 |};
 
-const AnalysisIndexPage = ({ language }: Props) => {
+const AnalysisIndexPage = ({ language, proposalRevisionsEnabled }: Props) => {
   const { parameters } = useAnalysisProposalsContext();
 
   return (
     <QueryRenderer
       environment={environment}
-      variables={createQueryVariables(parameters)}
+      variables={createQueryVariables(parameters, proposalRevisionsEnabled)}
       query={graphql`
         query AnalysisIndexPageQuery(
           $count: Int!
+          $proposalRevisionsEnabled: Boolean!
           $cursor: String
           $orderBy: ProposalOrder!
           $category: ID
@@ -221,6 +225,7 @@ const AnalysisIndexPage = ({ language }: Props) => {
             ...AnalysisProjectPage_project
               @arguments(
                 count: $count
+                proposalRevisionsEnabled: $proposalRevisionsEnabled
                 cursor: $cursor
                 orderBy: $orderBy
                 category: $category
@@ -247,6 +252,7 @@ const AnalysisIndexPage = ({ language }: Props) => {
 
 const mapStateToProps = (state: GlobalState) => ({
   language: state.language.currentLanguage,
+  proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
 });
 
 export default connect(mapStateToProps)(AnalysisIndexPage);

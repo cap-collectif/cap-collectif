@@ -5,6 +5,133 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly 1`] = `
   <form
     id="proposal-assessment-form"
   >
+    <ProposalAnalysisFormPanel__AnalysisForm>
+      <Field
+        autoComplete="off"
+        component={[Function]}
+        id="proposalAssessment-boddy"
+        label={
+          <FormattedMessage
+            id="admin.fields.comment_vote.comment"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="textarea"
+      />
+      <label
+        className="mb-15"
+      >
+        <FormattedMessage
+          id="proposal.estimation"
+          values={Object {}}
+        />
+      </label>
+      <InputGroup
+        bsClass="input-group"
+        className="form-fields mb-10"
+        style={
+          Object {
+            "zIndex": "1",
+          }
+        }
+      >
+        <InputGroupAddon
+          bsClass="input-group-addon"
+        >
+          <Glyphicon
+            bsClass="glyphicon"
+            glyph="euro"
+          />
+        </InputGroupAddon>
+        <Field
+          component={[Function]}
+          id="proposalAssessment-estimatedCost"
+          min={0}
+          name="estimatedCost"
+          normalize={[Function]}
+          type="number"
+        />
+      </InputGroup>
+      <Field
+        component={[Function]}
+        id="proposalAssessment-officialResponse"
+        label={
+          <FormattedMessage
+            id="official.reply.draft"
+            values={Object {}}
+          />
+        }
+        name="officialResponse"
+        type="editor"
+      />
+    </ProposalAnalysisFormPanel__AnalysisForm>
+    <ProposalAnalysisFormPanel__Validation
+      isLarge={true}
+    >
+      <Field
+        component={[Function]}
+        id="status-FAVOURABLE"
+        label={
+          <FormattedMessage
+            id="global.review"
+            values={Object {}}
+          />
+        }
+        name="status"
+        onChange={[Function]}
+        radioChecked={false}
+        type="radio"
+        typeForm="questionnaire"
+        value="FAVOURABLE"
+      >
+        <ProposalAnalysisStatusLabel
+          color="#28a745"
+          fontSize={14}
+          iconName="favorable"
+          iconSize={12}
+          text="global.favorable"
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="status-UNFAVOURABLE"
+        name="status"
+        onChange={[Function]}
+        radioChecked={false}
+        type="radio"
+        typeForm="questionnaire"
+        value="UNFAVOURABLE"
+      >
+        <ProposalAnalysisStatusLabel
+          color="#dc3545"
+          fontSize={14}
+          iconName="unfavorable"
+          iconSize={10}
+          text="global.filter-unfavourable"
+        />
+      </Field>
+      <ProposalAnalysisFormPanel__ValidateButton
+        disabled={false}
+        id="validate-proposal-assessment-button"
+        onClick={[Function]}
+        type="button"
+      >
+        <FormattedMessage
+          id="validate"
+          values={Object {}}
+        />
+      </ProposalAnalysisFormPanel__ValidateButton>
+    </ProposalAnalysisFormPanel__Validation>
+  </form>
+</Fragment>
+`;
+
+exports[`<ProposalAssessmentFormPanel  />  renders correctly with proposal revisions feature enabled 1`] = `
+<Fragment>
+  <form
+    id="proposal-assessment-form"
+  >
     <ProposalRevisionPanel
       proposal={
         Object {

@@ -224,6 +224,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
         count: { type: "Int!" }
         cursor: { type: "String" }
         isAuthenticated: { type: "Boolean!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
       ) {
       viewer @include(if: $isAuthenticated) {
         id
@@ -244,9 +245,15 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
         ...ProposalPageVotes_proposal
         ...ProposalPageBlog_proposal
         ...ProposalPageFollowers_proposal
-        ...ProposalPageHeader_proposal @arguments(isAuthenticated: $isAuthenticated)
+        ...ProposalPageHeader_proposal
+          @arguments(
+            isAuthenticated: $isAuthenticated
+            proposalRevisionsEnabled: $proposalRevisionsEnabled
+          )
         ...ProposalPageMainAside_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
-        ...ProposalAnalysisPanel_proposal @include(if: $isAuthenticated)
+        ...ProposalAnalysisPanel_proposal
+          @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
+          @include(if: $isAuthenticated)
         ... on Proposal {
           id
           supervisor {

@@ -8,6 +8,7 @@ describe('<ProposalPage />', () => {
   const props = {
     proposalId: '41',
     proposalTitle: 'Titre',
+    proposalRevisionsEnabled: false,
     currentVotableStepId: 'stepid',
     isAuthenticated: true,
     opinionCanBeFollowed: false,

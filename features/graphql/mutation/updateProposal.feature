@@ -572,7 +572,7 @@ Scenario: GraphQL client try to update a and published a draft proposal
 
 @database
 Scenario: GraphQL client try to update his proposal in revision
-  Given features themes, districts are enabled
+  Given features "themes", "districts", "proposal_revisions" are enabled
   And I am logged in to graphql as pierre
   And I send a GraphQL POST request:
   """

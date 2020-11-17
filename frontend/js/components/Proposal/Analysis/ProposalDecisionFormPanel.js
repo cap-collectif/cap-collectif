@@ -33,6 +33,7 @@ const PostWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 
 type Props = {|
   ...ReduxFormFormProps,
+  proposalRevisionsEnabled: boolean,
   proposal: ProposalDecisionFormPanel_proposal,
   disabled?: boolean,
   initialIsApproved: boolean,
@@ -93,6 +94,7 @@ export const ProposalDecisionFormPanel = ({
   disabled,
   proposal,
   costEstimationEnabled,
+  proposalRevisionsEnabled,
 }: Props) => {
   const intl = useIntl();
   const [isApproved, setIsApproved] = useState(initialIsApproved);
@@ -103,7 +105,7 @@ export const ProposalDecisionFormPanel = ({
   return (
     <>
       <form id={formName}>
-        <ProposalRevisionPanel proposal={proposal} />
+        {proposalRevisionsEnabled && <ProposalRevisionPanel proposal={proposal} />}
         <AnalysisForm>
           {costEstimationEnabled && (
             <>
@@ -239,13 +241,15 @@ export const ProposalDecisionFormPanel = ({
             }}>
             <FormattedMessage id="validate" />
           </ValidateButton>
-          <ProposalRevision proposal={proposal}>
-            {openModal => (
-              <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
-                <FormattedMessage id="request.author.review" />
-              </RevisionButton>
-            )}
-          </ProposalRevision>
+          {proposalRevisionsEnabled && (
+            <ProposalRevision proposal={proposal}>
+              {openModal => (
+                <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                  <FormattedMessage id="request.author.review" />
+                </RevisionButton>
+              )}
+            </ProposalRevision>
+          )}
         </Validation>
       </form>
     </>
@@ -265,6 +269,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
     },
     costEstimationEnabled: proposal.form?.analysisConfiguration?.costEstimationEnabled || false,
     initialIsApproved: formValueSelector(formName)(state, 'isApproved') || null,
+    proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
   };
 };
 
@@ -278,10 +283,11 @@ const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalDecisionFormPanel_proposal on Proposal {
+    fragment ProposalDecisionFormPanel_proposal on Proposal
+      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
-      ...ProposalRevisionPanel_proposal
-      ...ProposalRevision_proposal
+      ...ProposalRevisionPanel_proposal @include(if: $proposalRevisionsEnabled)
+      ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
       decision {
         state
         estimatedCost

@@ -30,6 +30,7 @@ type Props = {|
   proposal: ProposalAssessmentFormPanel_proposal,
   disabled?: boolean,
   initialStatus: Decision,
+  proposalRevisionsEnabled: boolean,
   onValidate: (SubmittingState, ?boolean) => void,
   costEstimationEnabled: boolean,
   officialResponse: ?string,
@@ -94,6 +95,7 @@ export const ProposalAssessmentFormPanel = ({
   disabled,
   proposal,
   officialResponse,
+  proposalRevisionsEnabled,
 }: Props) => {
   const [status, setStatus] = useState(initialStatus);
   const { width } = useResize();
@@ -101,7 +103,7 @@ export const ProposalAssessmentFormPanel = ({
   return (
     <>
       <form id={formName}>
-        <ProposalRevisionPanel proposal={proposal} />
+        {proposalRevisionsEnabled && <ProposalRevisionPanel proposal={proposal} />}
         <AnalysisForm>
           <Field
             name="body"
@@ -192,13 +194,15 @@ export const ProposalAssessmentFormPanel = ({
             }}>
             <FormattedMessage id="validate" />
           </ValidateButton>
-          <ProposalRevision proposal={proposal}>
-            {openModal => (
-              <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
-                <FormattedMessage id="request.author.review" />
-              </RevisionButton>
-            )}
-          </ProposalRevision>
+          {proposalRevisionsEnabled && (
+            <ProposalRevision proposal={proposal}>
+              {openModal => (
+                <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                  <FormattedMessage id="request.author.review" />
+                </RevisionButton>
+              )}
+            </ProposalRevision>
+          )}
         </Validation>
       </form>
     </>
@@ -215,6 +219,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
       officialResponse: proposal.assessment?.officialResponse || null,
       validate: proposal.assessment?.state !== 'IN_PROGRESS',
     },
+    proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
     costEstimationEnabled: proposal.form?.analysisConfiguration?.costEstimationEnabled || false,
     initialStatus: initialStatusValue !== 'IN_PROGRESS' ? initialStatusValue : null,
     officialResponse: formValueSelector(formName)(state, 'officialResponse'),
@@ -231,10 +236,11 @@ const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalAssessmentFormPanel_proposal on Proposal {
+    fragment ProposalAssessmentFormPanel_proposal on Proposal
+      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
-      ...ProposalRevisionPanel_proposal
-      ...ProposalRevision_proposal
+      ...ProposalRevisionPanel_proposal @include(if: $proposalRevisionsEnabled)
+      ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
       assessment {
         id
         state

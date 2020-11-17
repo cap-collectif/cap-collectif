@@ -95,6 +95,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate('unstable__remote_events');
         $this->manager->deactivate('unstable__emailing');
         $this->manager->activate(Manager::unstable__debate);
+        $this->manager->activate(Manager::proposal_revisions);
 
         if ('test' === $this->env) {
             $this->manager->activate('votes_min');
@@ -126,6 +127,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate('multilangue');
             $this->manager->deactivate('unstable__analysis');
             $this->manager->deactivate(Manager::unstable__debate);
+            $this->manager->deactivate(Manager::proposal_revisions);
         }
 
         $output->writeln('<info>Feature flags reseted ! </info>');

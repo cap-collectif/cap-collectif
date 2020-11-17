@@ -85,6 +85,7 @@ type Props = {|
   userId: string,
   intl: IntlShape,
   onValidate: (SubmittingState, ?boolean) => void,
+  proposalRevisionsEnabled: boolean,
 |};
 
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE' | 'NONE';
@@ -175,6 +176,7 @@ export const ProposalAnalysisFormPanel = ({
   disabled,
   intl,
   invalid,
+  proposalRevisionsEnabled,
 }: Props) => {
   const [status, setStatus] = useState(initialStatus);
   const availableQuestions: Array<string> = memoizeAvailableQuestions.cache.get(
@@ -183,7 +185,7 @@ export const ProposalAnalysisFormPanel = ({
   return (
     <>
       <form id={formName} style={{ opacity: disabled ? '0.5' : '1' }}>
-        <ProposalRevisionPanel proposal={proposal} />
+        {proposalRevisionsEnabled && <ProposalRevisionPanel proposal={proposal} />}
         <AnalysisForm>
           <FieldArray
             typeForm={TYPE_FORM.QUESTIONNAIRE}
@@ -275,13 +277,15 @@ export const ProposalAnalysisFormPanel = ({
             }}>
             <FormattedMessage id="global.finish" />
           </ValidateButton>
-          <ProposalRevision proposal={proposal}>
-            {openModal => (
-              <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
-                <FormattedMessage id="request.author.review" />
-              </RevisionButton>
-            )}
-          </ProposalRevision>
+          {proposalRevisionsEnabled && (
+            <ProposalRevision proposal={proposal}>
+              {openModal => (
+                <RevisionButton onClick={openModal} id="proposal-analysis-revision" type="button">
+                  <FormattedMessage id="request.author.review" />
+                </RevisionButton>
+              )}
+            </ProposalRevision>
+          )}
         </Validation>
       </form>
     </>
@@ -303,6 +307,7 @@ const mapStateToProps = (state: GlobalState, { proposal, userId }: Props) => {
       status: analysis?.state,
       validate: analysis && analysis.state !== 'IN_PROGRESS',
     },
+    proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
     responses: formValueSelector(formName)(state, 'responses') || defaultResponses,
     initialStatus: initialStatusValue !== 'IN_PROGRESS' ? initialStatusValue : null,
   };
@@ -319,10 +324,11 @@ const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalAnalysisFormPanel_proposal on Proposal {
+    fragment ProposalAnalysisFormPanel_proposal on Proposal
+      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
-      ...ProposalRevision_proposal
-      ...ProposalRevisionPanel_proposal
+      ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
+      ...ProposalRevisionPanel_proposal @include(if: $proposalRevisionsEnabled)
       analyses {
         id
         analyst {

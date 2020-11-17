@@ -56,6 +56,7 @@ class ProposalMutation implements ContainerAwareInterface
     private Publisher $publisher;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
+    private Manager $manager;
 
     public function __construct(
         LoggerInterface $logger,
@@ -63,7 +64,8 @@ class ProposalMutation implements ContainerAwareInterface
         GlobalIdResolver $globalidResolver,
         Publisher $publisher,
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        Manager $manager
     ) {
         $this->logger = $logger;
         $this->proposalLikersDataLoader = $proposalLikersDataLoader;
@@ -71,6 +73,7 @@ class ProposalMutation implements ContainerAwareInterface
         $this->publisher = $publisher;
         $this->em = $em;
         $this->formFactory = $formFactory;
+        $this->manager = $manager;
     }
 
     public function changeNotation(Argument $input, $user)
@@ -476,14 +479,17 @@ class ProposalMutation implements ContainerAwareInterface
         // Save the previous draft status to send the good notif.
         $wasDraft = $proposal->isDraft();
 
+        $proposalRevisionsEnabled = $this->manager->isActive(Manager::proposal_revisions);
         // catch all revisions with state pending or expired
-        $revisions = $proposal
-            ->getRevisions()
-            ->filter(
-                fn(ProposalRevision $revision) => ProposalRevisionStateType::REVISED !==
-                    $revision->getState()
-            );
-        $wasInRevision = $proposal->isInRevision();
+        $revisions = $proposalRevisionsEnabled
+            ? $proposal
+                ->getRevisions()
+                ->filter(
+                    fn(ProposalRevision $revision) => ProposalRevisionStateType::REVISED !==
+                        $revision->getState()
+                )
+            : [];
+        $wasInRevision = $proposalRevisionsEnabled ? $proposal->isInRevision() : false;
 
         $author = $proposal->getAuthor();
 
@@ -536,11 +542,13 @@ class ProposalMutation implements ContainerAwareInterface
         if ($viewer === $author) {
             $proposal->setUpdatedAt($now);
 
-            // set all revision (in pending or expired) with state revised
-            /** @var ProposalRevision $revision */
-            foreach ($revisions as $revision) {
-                $revision->setRevisedAt($now);
-                $revision->setState(ProposalRevisionStateType::REVISED);
+            if ($proposalRevisionsEnabled) {
+                // set all revision (in pending or expired) with state revised
+                /** @var ProposalRevision $revision */
+                foreach ($revisions as $revision) {
+                    $revision->setRevisedAt($now);
+                    $revision->setState(ProposalRevisionStateType::REVISED);
+                }
             }
         }
 

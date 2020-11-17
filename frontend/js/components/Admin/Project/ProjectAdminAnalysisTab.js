@@ -3,7 +3,8 @@ import * as React from 'react';
 import isEqual from 'lodash/isEqual';
 import { graphql, usePreloadedQuery, useQuery } from 'relay-hooks';
 import ReactPlaceholder from 'react-placeholder';
-import type { ResultPreloadQuery, Query } from '~/types';
+import { connect } from 'react-redux';
+import type { ResultPreloadQuery, Query, GlobalState } from '~/types';
 import type {
   ProjectAdminAnalysisTabQueryResponse,
   ProjectAdminAnalysisTabQueryVariables,
@@ -24,7 +25,12 @@ import type {
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
 import { ORDER_BY } from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort';
 
+type ReduxProps = {|
+  +proposalRevisionsEnabled: boolean,
+|};
+
 type Props = {|
+  ...ReduxProps,
   +projectId: string,
   +dataPrefetch: ResultPreloadQuery,
 |};
@@ -61,9 +67,11 @@ const getSortType = (sortType: SortValues): OrderDirection => {
 const createQueryVariables = (
   projectId: string,
   parameters: ProjectAdminPageParameters,
+  proposalRevisionsEnabled: boolean = false,
 ): ProjectAdminAnalysisTabQueryVariables => ({
   projectId,
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
+  proposalRevisionsEnabled,
   cursor: null,
   orderBy: {
     field: getSortField(parameters.sort),
@@ -84,6 +92,7 @@ export const queryAnalysis = graphql`
   query ProjectAdminAnalysisTabQuery(
     $projectId: ID!
     $count: Int!
+    $proposalRevisionsEnabled: Boolean!
     $cursor: String
     $orderBy: ProposalOrder!
     $category: ID
@@ -109,6 +118,7 @@ export const queryAnalysis = graphql`
         @arguments(
           projectId: $projectId
           count: $count
+          proposalRevisionsEnabled: $proposalRevisionsEnabled
           cursor: $cursor
           orderBy: $orderBy
           category: $category
@@ -145,10 +155,14 @@ export const initialVariables = {
   progressStatus: null,
 };
 
-const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch }: Props) => {
+const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch, proposalRevisionsEnabled }: Props) => {
   const { parameters } = useProjectAdminProposalsContext();
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
-  const queryVariablesWithParameters = createQueryVariables(projectId, parameters);
+  const queryVariablesWithParameters = createQueryVariables(
+    projectId,
+    parameters,
+    proposalRevisionsEnabled,
+  );
   const hasFilters: boolean = !isEqual(
     { projectId, ...initialVariables },
     queryVariablesWithParameters,
@@ -186,4 +200,8 @@ const ProjectAdminAnalysisTab = ({ projectId, dataPrefetch }: Props) => {
   );
 };
 
-export default ProjectAdminAnalysisTab;
+const mapStateToProps = (state: GlobalState) => ({
+  proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
+});
+
+export default connect(mapStateToProps)(ProjectAdminAnalysisTab);

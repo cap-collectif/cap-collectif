@@ -239,9 +239,11 @@ const mapStateToProps = (state: State) => ({
 
 export default createFragmentContainer(connect(mapStateToProps)(ProposalAnalysisPanel), {
   proposal: graphql`
-    fragment ProposalAnalysisPanel_proposal on Proposal {
+    fragment ProposalAnalysisPanel_proposal on Proposal
+      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
       ...ProposalFormSwitcher_proposal
+        @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
       analysts {
         id
         displayName

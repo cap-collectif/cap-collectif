@@ -5,6 +5,159 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly 1`] = `
   <form
     id="proposal-decision-form"
   >
+    <ProposalAnalysisFormPanel__AnalysisForm>
+      <label
+        className="mb-15"
+      >
+        <FormattedMessage
+          id="proposal.estimation"
+          values={Object {}}
+        />
+      </label>
+      <InputGroup
+        bsClass="input-group"
+        className="form-fields mb-10"
+        style={
+          Object {
+            "zIndex": "1",
+          }
+        }
+      >
+        <InputGroupAddon
+          bsClass="input-group-addon"
+        >
+          <Glyphicon
+            bsClass="glyphicon"
+            glyph="euro"
+          />
+        </InputGroupAddon>
+        <Field
+          component={[Function]}
+          id="proposalDecision-estimatedCost"
+          min={0}
+          name="estimatedCost"
+          normalize={[Function]}
+          type="number"
+        />
+      </InputGroup>
+      <label>
+        <FormattedMessage
+          id="official.answer"
+          values={Object {}}
+        />
+      </label>
+      <ProposalDecisionFormPanel__PostWrapper>
+        <UserListField
+          ariaControls="EventListFilters-filter-author-listbox"
+          authorOfEvent={false}
+          autoload={false}
+          className=""
+          clearable={true}
+          debounce={true}
+          id="proposalDecision-authors"
+          inputClassName="fake-inputClassName"
+          label={
+            <FormattedMessage
+              id="admin.fields.project.authors"
+              values={Object {}}
+            />
+          }
+          labelClassName="control-label"
+          multi={true}
+          name="authors"
+          placeholder=" "
+          selectFieldIsObject={true}
+        />
+        <Field
+          component={[Function]}
+          id="proposalDecision-body"
+          label={
+            <FormattedMessage
+              id="global.contenu"
+              values={Object {}}
+            />
+          }
+          name="body"
+          type="editor"
+        />
+      </ProposalDecisionFormPanel__PostWrapper>
+    </ProposalAnalysisFormPanel__AnalysisForm>
+    <ProposalAnalysisFormPanel__Validation
+      isLarge={true}
+    >
+      <Field
+        component={[Function]}
+        id="isApproved-FAVOURABLE"
+        label={
+          <FormattedMessage
+            id="global.review"
+            values={Object {}}
+          />
+        }
+        name="isApproved"
+        onChange={[Function]}
+        radioChecked={false}
+        type="radio"
+        typeForm="questionnaire"
+        value="FAVOURABLE"
+      >
+        <ProposalAnalysisStatusLabel
+          color="#28a745"
+          fontSize={14}
+          iconName="favorable"
+          iconSize={12}
+          text="global.favorable"
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="isApproved-UNFAVOURABLE"
+        name="isApproved"
+        onChange={[Function]}
+        radioChecked={true}
+        type="radio"
+        typeForm="questionnaire"
+        value="UNFAVOURABLE"
+      >
+        <ProposalAnalysisStatusLabel
+          color="#dc3545"
+          fontSize={14}
+          iconName="unfavorable"
+          iconSize={10}
+          text="global.filter-unfavourable"
+        />
+      </Field>
+      <FormattedMessage
+        id="publication.date.personalized"
+        tagName="p"
+        values={
+          Object {
+            "date": "Vers le 12 à peu près en même temps que la fermeture des locaux",
+            "hour": "Vers le 12 à peu près en même temps que la fermeture des locaux",
+          }
+        }
+      />
+      <ProposalAnalysisFormPanel__ValidateButton
+        disabled={false}
+        id="validate-proposal-decision-button"
+        onClick={[Function]}
+        type="button"
+      >
+        <FormattedMessage
+          id="validate"
+          values={Object {}}
+        />
+      </ProposalAnalysisFormPanel__ValidateButton>
+    </ProposalAnalysisFormPanel__Validation>
+  </form>
+</Fragment>
+`;
+
+exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisions feature enabled 1`] = `
+<Fragment>
+  <form
+    id="proposal-decision-form"
+  >
     <ProposalRevisionPanel
       proposal={
         Object {

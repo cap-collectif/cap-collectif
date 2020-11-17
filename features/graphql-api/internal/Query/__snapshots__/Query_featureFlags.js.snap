@@ -243,6 +243,10 @@ Object {
       "enabled": true,
       "type": "unstable__debate",
     },
+    Object {
+      "enabled": true,
+      "type": "proposal_revisions",
+    },
   ],
 }
 `;

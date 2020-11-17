@@ -3,13 +3,14 @@ import React from 'react';
 import { useQuery, graphql, usePreloadedQuery } from 'relay-hooks';
 import isEqual from 'lodash/isEqual';
 import ReactPlaceholder from 'react-placeholder';
+import { connect } from 'react-redux';
 import type {
   ProjectAdminProposalsPageQueryResponse,
   ProjectAdminProposalsPageQueryVariables,
   ProposalOrderField,
   OrderDirection,
 } from '~relay/ProjectAdminProposalsPageQuery.graphql';
-import type { ResultPreloadQuery, Query } from '~/types';
+import type { ResultPreloadQuery, Query, GlobalState } from '~/types';
 import type { ProjectAdminPageParameters, SortValues } from './ProjectAdminPage.reducer';
 import ProjectAdminProposals, {
   PROJECT_ADMIN_PROPOSAL_PAGINATION,
@@ -18,7 +19,12 @@ import { useProjectAdminProposalsContext } from './ProjectAdminPage.context';
 import ProjectAdminProposalsPlaceholder from './ProjectAdminProposalsPlaceholder';
 import NoCollectStep from '~/components/Admin/Project/NoCollectStep';
 
+type ReduxProps = {|
+  +proposalRevisionsEnabled: boolean,
+|};
+
 type Props = {|
+  ...ReduxProps,
   +projectId: string,
   +dataPrefetch: ResultPreloadQuery,
   +hasCollectStep: boolean,
@@ -60,9 +66,11 @@ const getSortType = (sortType: SortValues): OrderDirection => {
 const createQueryVariables = (
   projectId: string,
   parameters: ProjectAdminPageParameters,
+  proposalRevisionsEnabled: boolean = false,
 ): ProjectAdminProposalsPageQueryVariables => ({
   projectId,
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
+  proposalRevisionsEnabled,
   cursor: null,
   orderBy: {
     field: getSortField(parameters.sort),
@@ -81,6 +89,7 @@ export const queryProposals = graphql`
   query ProjectAdminProposalsPageQuery(
     $projectId: ID!
     $count: Int!
+    $proposalRevisionsEnabled: Boolean!
     $cursor: String
     $orderBy: ProposalOrder!
     $state: ProposalsState!
@@ -97,6 +106,7 @@ export const queryProposals = graphql`
         @arguments(
           projectId: $projectId
           count: $count
+          proposalRevisionsEnabled: $proposalRevisionsEnabled
           cursor: $cursor
           orderBy: $orderBy
           state: $state
@@ -130,11 +140,20 @@ export const initialVariables = {
   term: null,
 };
 
-const ProjectAdminProposalsPage = ({ projectId, hasCollectStep, dataPrefetch }: Props) => {
+const ProjectAdminProposalsPage = ({
+  projectId,
+  hasCollectStep,
+  dataPrefetch,
+  proposalRevisionsEnabled,
+}: Props) => {
   const { parameters, firstCollectStepId } = useProjectAdminProposalsContext();
 
   const { props: dataPreloaded } = usePreloadedQuery(dataPrefetch);
-  const queryVariablesWithParameters = createQueryVariables(projectId, parameters);
+  const queryVariablesWithParameters = createQueryVariables(
+    projectId,
+    parameters,
+    proposalRevisionsEnabled,
+  );
 
   const hasFilters: boolean = !isEqual(
     {
@@ -184,4 +203,8 @@ const ProjectAdminProposalsPage = ({ projectId, hasCollectStep, dataPrefetch }: 
   );
 };
 
-export default ProjectAdminProposalsPage;
+const mapStateToProps = (state: GlobalState) => ({
+  proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
+});
+
+export default connect(mapStateToProps)(ProjectAdminProposalsPage);

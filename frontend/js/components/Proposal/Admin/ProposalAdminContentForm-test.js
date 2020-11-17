@@ -139,6 +139,12 @@ describe('<ProposalAdminContentForm />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('render correctly with proposals revisions feature enabled', () => {
+    const ownProps = { ...props, features: { ...props.features, proposal_revisions: true } };
+    const wrapper = shallow(<ProposalAdminContentForm {...ownProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('doest not allow title > 255 chars', () => {
     expect(
       checkProposalContent(

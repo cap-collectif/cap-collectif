@@ -86,7 +86,7 @@ const AnalysisProposal = ({
           )}
 
           <h2 className="d-flex align-items-center">
-            {proposal.revisions.totalCount > 0 && (
+            {proposal.revisions && proposal.revisions.totalCount > 0 && (
               <OverlayTrigger
                 key="proposal-revisions"
                 placement="top"
@@ -230,8 +230,11 @@ const AnalysisProposal = ({
 export default createFragmentContainer(AnalysisProposal, {
   proposal: graphql`
     fragment AnalysisProposal_proposal on Proposal
-      @argumentDefinitions(isAdminView: { type: "Boolean" }) {
-      revisions(state: PENDING) {
+      @argumentDefinitions(
+        isAdminView: { type: "Boolean" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+      ) {
+      revisions(state: PENDING) @include(if: $proposalRevisionsEnabled) {
         totalCount
         edges {
           node {

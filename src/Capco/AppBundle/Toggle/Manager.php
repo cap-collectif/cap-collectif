@@ -68,6 +68,7 @@ class Manager
     public const majority_vote_question = 'majority_vote_question';
     public const unstable__emailing = 'unstable__emailing';
     public const unstable__debate = 'unstable__debate';
+    public const proposal_revisions = 'proposal_revisions';
 
     public static $toggles = [
         self::graphql_query_analytics,
@@ -130,6 +131,7 @@ class Manager
         self::majority_vote_question,
         self::unstable__emailing,
         self::unstable__debate,
+        self::proposal_revisions,
     ];
     protected $toggleManager;
 

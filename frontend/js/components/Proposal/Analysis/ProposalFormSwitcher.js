@@ -192,11 +192,15 @@ export const ProposalFormSwitcher = ({
 
 export default createFragmentContainer(ProposalFormSwitcher, {
   proposal: graphql`
-    fragment ProposalFormSwitcher_proposal on Proposal {
+    fragment ProposalFormSwitcher_proposal on Proposal
+      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
       ...ProposalAnalysisFormPanel_proposal
+        @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
       ...ProposalDecisionFormPanel_proposal
+        @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
       ...ProposalAssessmentFormPanel_proposal
+        @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
       ...ProposalViewAnalysisPanel_proposal
       ...ProposalViewDecisionPanel_proposal
       ...ProposalViewAssessmentPanel_proposal

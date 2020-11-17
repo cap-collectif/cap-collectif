@@ -178,6 +178,7 @@ export default createPaginationContainer(
       fragment AnalysisProjectPage_project on Project
         @argumentDefinitions(
           count: { type: "Int!" }
+          proposalRevisionsEnabled: { type: "Boolean!" }
           cursor: { type: "String" }
           orderBy: {
             type: "ProposalOrder!"
@@ -248,7 +249,8 @@ export default createPaginationContainer(
             cursor
             node {
               id
-              ...AnalysisProposal_proposal @arguments(isAdminView: false)
+              ...AnalysisProposal_proposal
+                @arguments(isAdminView: false, proposalRevisionsEnabled: $proposalRevisionsEnabled)
               ...AnalysisProposalListRole_proposal
             }
           }
@@ -316,6 +318,7 @@ export default createPaginationContainer(
       query AnalysisProjectPageProposalsPaginatedQuery(
         $projectId: ID!
         $count: Int!
+        $proposalRevisionsEnabled: Boolean!
         $cursor: String
         $orderBy: ProposalOrder!
         $category: ID
@@ -332,6 +335,7 @@ export default createPaginationContainer(
           ...AnalysisProjectPage_project
             @arguments(
               count: $count
+              proposalRevisionsEnabled: $proposalRevisionsEnabled
               cursor: $cursor
               orderBy: $orderBy
               category: $category

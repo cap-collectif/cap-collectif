@@ -94,6 +94,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
                 "profiles": false,
                 "project_trash": false,
                 "projects_form": false,
+                "proposal_revisions": false,
                 "read_more": false,
                 "registration": false,
                 "report_browers_errors_to_sentry": false,

@@ -96,6 +96,7 @@ export type FeatureToggles = {
   user_invitations: ?boolean,
   majority_vote_question: ?boolean,
   unstable__emailing: ?boolean,
+  proposal_revisions: ?boolean,
 };
 
 export type FeatureToggle = $Keys<FeatureToggles>;

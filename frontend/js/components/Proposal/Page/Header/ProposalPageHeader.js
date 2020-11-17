@@ -281,11 +281,18 @@ export default createFragmentContainer(container, {
   `,
   proposal: graphql`
     fragment ProposalPageHeader_proposal on Proposal
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(
+        isAuthenticated: { type: "Boolean!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+      ) {
       id
       ...TrashedMessage_contribution
       ...UnpublishedLabel_publishable
-      ...ProposalPageHeaderButtons_proposal @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalPageHeaderButtons_proposal
+        @arguments(
+          isAuthenticated: $isAuthenticated
+          proposalRevisionsEnabled: $proposalRevisionsEnabled
+        )
       title
       media {
         url

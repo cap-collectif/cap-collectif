@@ -64,12 +64,14 @@ const container = injectIntl(ProposalAdminPageTabs);
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalAdminPageTabs_proposal on Proposal {
+    fragment ProposalAdminPageTabs_proposal on Proposal
+      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       url
       reference
       ...ProposalAdminStatusForm_proposal
       ...ProposalAdminSelections_proposal
       ...ProposalAdminContentForm_proposal
+        @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
       ...ProposalAdminNotationForm_proposal
       ...ProposalAdminNewsForm_proposal
       ...ProposalAdminFollowers_proposal

@@ -943,6 +943,7 @@ export default createPaginationContainer(
         @argumentDefinitions(
           projectId: { type: "ID!" }
           count: { type: "Int!" }
+          proposalRevisionsEnabled: { type: "Boolean!" }
           cursor: { type: "String" }
           orderBy: {
             type: "ProposalOrder!"
@@ -1023,7 +1024,8 @@ export default createPaginationContainer(
               node {
                 id
                 progressStatus
-                ...AnalysisProposal_proposal @arguments(isAdminView: true)
+                ...AnalysisProposal_proposal
+                  @arguments(isAdminView: true, proposalRevisionsEnabled: $proposalRevisionsEnabled)
                 supervisor {
                   id
                   username
@@ -1107,6 +1109,7 @@ export default createPaginationContainer(
       query ProjectAdminAnalysisPaginatedQuery(
         $projectId: ID!
         $count: Int!
+        $proposalRevisionsEnabled: Boolean!
         $cursor: String
         $orderBy: ProposalOrder!
         $category: ID
@@ -1124,6 +1127,7 @@ export default createPaginationContainer(
             @arguments(
               projectId: $projectId
               count: $count
+              proposalRevisionsEnabled: $proposalRevisionsEnabled
               cursor: $cursor
               orderBy: $orderBy
               category: $category

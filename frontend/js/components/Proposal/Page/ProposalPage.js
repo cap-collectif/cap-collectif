@@ -18,6 +18,7 @@ export type Props = {|
   votesPageUrl: string,
   image: string,
   showVotesWidget: boolean,
+  proposalRevisionsEnabled: boolean,
 |};
 
 export class ProposalPage extends React.Component<Props> {
@@ -32,6 +33,7 @@ export class ProposalPage extends React.Component<Props> {
       votesPageUrl,
       image,
       showVotesWidget,
+      proposalRevisionsEnabled,
     } = this.props;
     return (
       <div>
@@ -45,6 +47,7 @@ export class ProposalPage extends React.Component<Props> {
               $count: Int!
               $cursor: String
               $isAuthenticated: Boolean!
+              $proposalRevisionsEnabled: Boolean!
             ) {
               ...ProposalPageLogic_query
                 @arguments(
@@ -54,6 +57,7 @@ export class ProposalPage extends React.Component<Props> {
                   count: $count
                   cursor: $cursor
                   isAuthenticated: $isAuthenticated
+                  proposalRevisionsEnabled: $proposalRevisionsEnabled
                 )
             }
           `}
@@ -64,6 +68,7 @@ export class ProposalPage extends React.Component<Props> {
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
             cursor: null,
             isAuthenticated,
+            proposalRevisionsEnabled: proposalRevisionsEnabled && isAuthenticated,
           }}
           render={({
             error,
@@ -96,6 +101,7 @@ export class ProposalPage extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   isAuthenticated: state.user.user !== null,
+  proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
 });
 
 export default connect(mapStateToProps)(ProposalPage);

@@ -6,41 +6,48 @@ import { ProposalAnalysisFormPanel } from './ProposalAnalysisFormPanel';
 import { $refType, formMock, intlMock, $fragmentRefs } from '~/mocks';
 
 describe('<ProposalAnalysisFormPanel  /> ', () => {
-  it('renders correctly', () => {
-    const props = {
-      ...formMock,
-      intl: intlMock,
-      onValidate: jest.fn(),
-      initialStatus: 'FAVOURABLE',
-      responses: [],
-      proposal: {
-        id: 'id',
-        $refType,
-        $fragmentRefs,
-        analyses: [
-          {
-            id: 'a1id',
-            analyst: {
-              id: 'userID345',
-            },
-            comment: 'mwe',
-            state: 'FAVOURABLE',
-            responses: [],
+  const props = {
+    ...formMock,
+    intl: intlMock,
+    onValidate: jest.fn(),
+    initialStatus: 'FAVOURABLE',
+    responses: [],
+    proposalRevisionsEnabled: false,
+    proposal: {
+      id: 'id',
+      $refType,
+      $fragmentRefs,
+      analyses: [
+        {
+          id: 'a1id',
+          analyst: {
+            id: 'userID345',
           },
-        ],
-        form: {
-          analysisConfiguration: {
-            id: 'analysisConfigId',
-            evaluationForm: {
-              questions: [],
-            },
+          comment: 'mwe',
+          state: 'FAVOURABLE',
+          responses: [],
+        },
+      ],
+      form: {
+        analysisConfiguration: {
+          id: 'analysisConfigId',
+          evaluationForm: {
+            questions: [],
           },
         },
       },
-      userId: 'userID345',
-    };
+    },
+    userId: 'userID345',
+  };
 
+  it('renders correctly', () => {
     const wrapper = shallow(<ProposalAnalysisFormPanel {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly with proposal revisions feature enabled', () => {
+    const ownProps = { ...props, proposalRevisionsEnabled: true };
+    const wrapper = shallow(<ProposalAnalysisFormPanel {...ownProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

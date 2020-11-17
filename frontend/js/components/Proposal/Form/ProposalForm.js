@@ -177,6 +177,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   if (proposal) {
     return ChangeProposalContentMutation.commit({
       input: { ...data, id: proposal.id },
+      proposalRevisionsEnabled: features.proposal_revisions ?? false,
     })
       .then(response => {
         if (!response.changeProposalContent || !response.changeProposalContent.proposal) {

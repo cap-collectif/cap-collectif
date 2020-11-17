@@ -38,6 +38,7 @@ class ProposalMutationSpec extends ObjectBehavior
         Publisher $publisher,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
+        Manager $manager,
         RedisCache $cache,
         AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver,
         AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver
@@ -49,6 +50,7 @@ class ProposalMutationSpec extends ObjectBehavior
             $publisher,
             $em,
             $formFactory,
+            $manager,
             $cache,
             $autoCompleteDocQueryResolver,
             $autoCompleteFromSiretQueryResolver
@@ -84,6 +86,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['author'] = 'VXNlcix1c2VyNTAx';
         $user = $author;
         $container->get(Manager::class)->willReturn($manager);
+        $manager->isActive(Manager::proposal_revisions)->willReturn(false);
 
         $author->getId()->willReturn('userSpyl');
         $author->getUsername()->willReturn('aUser');
@@ -174,7 +177,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $values['author'] = 'VXNlcix1c2VyNTAx';
         $user = $author;
         $container->get(Manager::class)->willReturn($manager);
-
+        $manager->isActive(Manager::proposal_revisions)->willReturn(false);
         $author->getId()->willReturn('userSpyl');
         $author->getUsername()->willReturn('aUser');
         $author->isEmailConfirmed()->willReturn(true);

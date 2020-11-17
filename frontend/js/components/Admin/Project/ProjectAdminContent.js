@@ -53,21 +53,21 @@ const formatNavbarLinks = (
   const links = [];
   const hasCollectStep = project.steps.some(step => step.type === 'CollectStep');
 
-    links.push({
-      title: 'global.contribution',
-      count: project.proposals.totalCount,
-      url: `${path}/proposals`,
-      to: `${path}/proposals?step=${encodeURIComponent(firstCollectStepId ?? '')}`,
-      component: () => (
-        <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
-          <ProjectAdminProposalsPage
-            projectId={project.id}
-            hasCollectStep={hasCollectStep}
-            dataPrefetch={dataPrefetchPage.contribution}
-          />
-        </ProjectAdminProposalsProvider>
-      ),
-    });
+  links.push({
+    title: 'global.contribution',
+    count: project.proposals.totalCount,
+    url: `${path}/proposals`,
+    to: `${path}/proposals?step=${encodeURIComponent(firstCollectStepId ?? '')}`,
+    component: () => (
+      <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
+        <ProjectAdminProposalsPage
+          projectId={project.id}
+          hasCollectStep={hasCollectStep}
+          dataPrefetch={dataPrefetchPage.contribution}
+        />
+      </ProjectAdminProposalsProvider>
+    ),
+  });
 
   links.push({
     title: 'capco.section.metrics.participants',
@@ -120,7 +120,11 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
   dataAnalysisPrefetch.next(
     environment,
     queryAnalysis,
-    { projectId: project.id, ...queryVariableAnalysis },
+    {
+      projectId: project.id,
+      ...queryVariableAnalysis,
+      proposalRevisionsEnabled: features.proposal_revisions ?? false,
+    },
     { fetchPolicy: 'store-or-network' },
   );
 
@@ -128,7 +132,12 @@ export const ProjectAdminContent = ({ project, firstCollectStepId, features }: P
   dataContributionPublishedPrefetch.next(
     environment,
     queryProposals,
-    { projectId: project.id, ...queryVariableContribution, step: firstCollectStepId },
+    {
+      projectId: project.id,
+      ...queryVariableContribution,
+      step: firstCollectStepId,
+      proposalRevisionsEnabled: features.proposal_revisions ?? false,
+    },
     { fetchPolicy: 'store-or-network' },
   );
 

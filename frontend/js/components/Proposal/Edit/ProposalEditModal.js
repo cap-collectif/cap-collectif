@@ -71,12 +71,11 @@ const ProposalRevisionsList: StyledComponent<{}, {}, HTMLUListElement> = styled.
   }
 `;
 
-const isProposalRevisionsExpired = (
-  revisions: $PropertyType<ProposalEditModal_proposal, 'allRevisions'>,
-): boolean => {
+const isProposalRevisionsExpired = (proposal: ProposalEditModal_proposal): boolean => {
+  if (!proposal.allRevisions) return false;
   const unrevisedRevisions =
-    revisions && revisions.totalCount > 0
-      ? revisions?.edges
+    proposal.allRevisions.totalCount > 0
+      ? proposal.allRevisions?.edges
           ?.filter(Boolean)
           .map(edge => edge.node)
           .filter(revision => revision.state !== 'REVISED')
@@ -91,15 +90,16 @@ const isProposalRevisionsExpired = (
 // : readonly Array<ProposalEditModal_proposal['allRevisions']['edges'][0]['node']>
 // to pick the type of a sample of an element in an array, but Flow ¯\_(ツ)_/¯
 const getProposalPendingRevisions = (
-  revisions: $PropertyType<ProposalEditModal_proposal, 'allRevisions'>,
+  proposal: ProposalEditModal_proposal,
 ): $ReadOnlyArray<{|
   +id: string,
   +state: ProposalRevisionState,
   +isExpired: boolean,
   +reason: ?string,
 |}> => {
+  if (!proposal.allRevisions) return [];
   return (
-    revisions?.edges
+    proposal.allRevisions.edges
       ?.filter(Boolean)
       .map(edge => edge.node)
       .filter(revision => revision.state === 'PENDING')
@@ -111,8 +111,8 @@ export class ProposalEditModal extends React.Component<Props> {
   render() {
     const { invalid, proposal, show, pristine, submitting, dispatch, intl } = this.props;
     if (!proposal) return null;
-    const pendingRevisions = getProposalPendingRevisions(proposal.allRevisions);
-    const isRevisionExpired = isProposalRevisionsExpired(proposal.allRevisions);
+    const pendingRevisions = getProposalPendingRevisions(proposal);
+    const isRevisionExpired = isProposalRevisionsExpired(proposal);
     const hasPendingRevisions = pendingRevisions.length > 0;
     return (
       <ModalProposalEditContainer
@@ -226,9 +226,12 @@ const container = connect(mapStateToProps)(injectIntl(ProposalEditModal));
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalEditModal_proposal on Proposal
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(
+        isAuthenticated: { type: "Boolean!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+      ) {
       id
-      allRevisions: revisions @include(if: $isAuthenticated) {
+      allRevisions: revisions @include(if: $proposalRevisionsEnabled) {
         totalCount
         edges {
           node {

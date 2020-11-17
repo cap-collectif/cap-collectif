@@ -89,7 +89,11 @@ const RevisionButton = styled(Button)`
   }
 `;
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin }: Props) => {
+const onSubmit = (
+  values: FormValues,
+  dispatch: Dispatch,
+  { proposal, isAdmin, features }: Props,
+) => {
   const input = {
     title: values.title,
     summary: values.summary,
@@ -105,7 +109,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin }:
     id: proposal.id,
   };
 
-  return ChangeProposalContentMutation.commit({ input })
+  return ChangeProposalContentMutation.commit({
+    input,
+    proposalRevisionsEnabled: features.proposal_revisions ?? false,
+  })
     .then(response => {
       if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
         throw new Error('Mutation "changeProposalContent" failed.');
@@ -556,16 +563,18 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 }}
                 label={submitting ? 'global.loading' : 'global.save'}
               />
-              <ProposalRevision proposal={proposal} isAdminView>
-                {openModal => (
-                  <RevisionButton
-                    bsStyle="link"
-                    id="proposal_admin_content_revision"
-                    onClick={openModal}>
-                    {intl.formatMessage({ id: 'request.author.review' })}
-                  </RevisionButton>
-                )}
-              </ProposalRevision>
+              {features.proposal_revisions && (
+                <ProposalRevision proposal={proposal} isAdminView>
+                  {openModal => (
+                    <RevisionButton
+                      bsStyle="link"
+                      id="proposal_admin_content_revision"
+                      onClick={openModal}>
+                      {intl.formatMessage({ id: 'request.author.review' })}
+                    </RevisionButton>
+                  )}
+                </ProposalRevision>
+              )}
               <AlertForm
                 valid={valid}
                 invalid={invalid}
@@ -639,9 +648,10 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
 const container = connect(mapStateToProps)(injectIntl(form));
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalAdminContentForm_proposal on Proposal {
+    fragment ProposalAdminContentForm_proposal on Proposal
+      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       ...ProposalFusionEditModal_proposal
-      ...ProposalRevision_proposal
+      ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
       id
       mergedFrom {
         id

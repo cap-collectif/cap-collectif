@@ -96,6 +96,7 @@ export const features: FeatureToggles = {
   user_invitations: false,
   majority_vote_question: false,
   unstable__emailing: false,
+  proposal_revisions: false,
 };
 
 export const initialState: State = {
