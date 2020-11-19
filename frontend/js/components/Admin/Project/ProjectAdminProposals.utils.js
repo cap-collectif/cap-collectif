@@ -878,14 +878,22 @@ export const getStepDisplay = (
 export const getFormattedProposalsWithTheme = (
   project: ProjectAdminAnalysis_project,
 ): $ReadOnlyArray<string> => {
-  return project.steps
+  if (project.firstAnalysisStep?.proposals?.totalCount === 0) return [];
+
+  const proposals = project.firstAnalysisStep?.proposals?.edges
+    ?.filter(Boolean)
+    .map(edge => edge.node);
+
+  const stepsWithThemeEnabled = project.steps
     .filter(Boolean)
     .filter(step => SHOWING_STEP_TYPENAME.includes(step.__typename) && step.form?.usingThemes)
-    .reduce((acc, step) => {
-      if (step.proposals?.edges && step.proposals.totalCount > 0) {
-        acc = [...acc, ...step.proposals.edges?.filter(Boolean).map(edge => edge.node.id)];
-      }
+    .map(step => step.id);
 
-      return acc;
-    }, []);
+  return ((proposals?.reduce((acc, proposal) => {
+    if (stepsWithThemeEnabled.includes(proposal?.form?.step?.id)) {
+      return [...acc, proposal.id];
+    }
+
+    return acc;
+  }, []): any): $ReadOnlyArray<string>);
 };

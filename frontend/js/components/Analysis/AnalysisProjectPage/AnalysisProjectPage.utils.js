@@ -24,6 +24,7 @@ import type { ProjectAdminAnalysis_themes } from '~relay/ProjectAdminAnalysis_th
 
 type ProjectWithAllSteps = {
   +steps: $ReadOnlyArray<{|
+    +id: string,
     +__typename: string,
     +form?: ?{|
       +usingThemes?: boolean,
@@ -248,16 +249,22 @@ export const getFormattedDistrictsChoicesForProject = (
 export const getFormattedProposalsWithTheme = (
   project: AnalysisProjectPage_project,
 ): $ReadOnlyArray<string> => {
-  return project.steps
+  if (project.sortedProposals.totalCount === 0) return [];
+
+  const proposals = project.sortedProposals?.edges?.filter(Boolean).map(edge => edge.node);
+
+  const stepsWithThemeEnabled = project.steps
     .filter(Boolean)
     .filter(step => SHOWING_STEP_TYPENAME.includes(step.__typename) && step.form?.usingThemes)
-    .reduce((acc, step) => {
-      if (step.proposals?.edges && step.proposals.totalCount > 0) {
-        acc = [...acc, ...step.proposals.edges?.filter(Boolean).map(edge => edge.node.id)];
-      }
+    .map(step => step.id);
 
-      return acc;
-    }, []);
+  return ((proposals?.reduce((acc, proposal) => {
+    if (stepsWithThemeEnabled.includes(proposal?.form?.step?.id)) {
+      return [...acc, proposal.id];
+    }
+
+    return acc;
+  }, []): any): $ReadOnlyArray<string>);
 };
 
 const getFormattedFiltersOrdered = (

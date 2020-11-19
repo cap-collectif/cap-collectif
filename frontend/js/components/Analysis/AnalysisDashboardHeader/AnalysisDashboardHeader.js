@@ -535,6 +535,7 @@ export default createPaginationContainer(
         ) {
         id
         steps {
+          id
           __typename
           ... on ProposalStep {
             form {

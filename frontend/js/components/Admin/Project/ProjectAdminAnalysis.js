@@ -900,7 +900,7 @@ export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: P
                   setProposalModalDelete={setProposalModalDelete}
                   proposalSelected={proposalSelected || null}
                   setProposalSelected={setProposalSelected}
-                  hasThemeEnabled={proposalsWithTheme?.length > 0}>
+                  hasThemeEnabled={proposalsWithTheme.includes(proposal.id)}>
                   <AnalysisDataContainer>
                     <AnalysisStatus
                       status={PROPOSAL_STATUS[proposal.progressStatus]}
@@ -964,6 +964,7 @@ export default createPaginationContainer(
         ...ProjectAdminAnalysisNoProposals_project
         ...ProjectAdminAnalysisShortcut_project
         steps {
+          id
           __typename
           ... on ProposalStep {
             form {
@@ -975,14 +976,6 @@ export default createPaginationContainer(
               categories {
                 id
                 name
-              }
-            }
-            proposals {
-              totalCount
-              edges {
-                node {
-                  id
-                }
               }
             }
           }
@@ -1024,6 +1017,11 @@ export default createPaginationContainer(
               node {
                 id
                 progressStatus
+                form {
+                  step {
+                    id
+                  }
+                }
                 ...AnalysisProposal_proposal
                   @arguments(isAdminView: true, proposalRevisionsEnabled: $proposalRevisionsEnabled)
                 supervisor {

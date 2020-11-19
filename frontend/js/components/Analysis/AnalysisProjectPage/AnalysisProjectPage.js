@@ -203,18 +203,11 @@ export default createPaginationContainer(
           }
         }
         steps {
+          id
           __typename
           ... on ProposalStep {
             form {
               usingThemes
-            }
-            proposals {
-              totalCount
-              edges {
-                node {
-                  id
-                }
-              }
             }
           }
         }
@@ -249,6 +242,11 @@ export default createPaginationContainer(
             cursor
             node {
               id
+              form {
+                step {
+                  id
+                }
+              }
               ...AnalysisProposal_proposal
                 @arguments(isAdminView: false, proposalRevisionsEnabled: $proposalRevisionsEnabled)
               ...AnalysisProposalListRole_proposal
