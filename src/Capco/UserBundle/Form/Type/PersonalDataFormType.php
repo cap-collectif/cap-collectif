@@ -26,6 +26,11 @@ class PersonalDataFormType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'default',
             ])
+            ->add('postalAddress', PurifiedTextType::class, [
+                'strip_tags' => true,
+                'purify_html' => true,
+                'purify_html_profile' => 'default',
+            ])
             ->add('address', PurifiedTextType::class, [
                 'strip_tags' => true,
                 'purify_html' => true,

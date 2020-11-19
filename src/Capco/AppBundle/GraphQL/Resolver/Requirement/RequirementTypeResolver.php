@@ -31,9 +31,11 @@ class RequirementTypeResolver implements ResolverInterface
         if (Requirement::PHONE === $requirement->getType()) {
             return $this->typeResolver->resolve('PhoneRequirement');
         }
-
         if (Requirement::DATE_OF_BIRTH === $requirement->getType()) {
             return $this->typeResolver->resolve('DateOfBirthRequirement');
+        }
+        if (Requirement::POSTAL_ADDRESS === $requirement->getType()) {
+            return $this->typeResolver->resolve('PostalAddressRequirement');
         }
 
         throw new UserError('Could not resolve type of Requirement.');

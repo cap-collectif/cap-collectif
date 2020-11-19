@@ -4,8 +4,9 @@ namespace Capco\UserBundle\FranceConnect;
 
 trait FranceConnectUserTrait
 {
-    protected $franceConnectId;
-    protected $franceConnectAccessToken;
+    protected ?string $franceConnectId;
+    protected ?string $franceConnectAccessToken;
+    protected bool $isFranceConnectAccount = false;
 
     public function setFranceConnectId(?string $franceConnectId = null): self
     {
@@ -29,5 +30,10 @@ trait FranceConnectUserTrait
     public function getFranceConnectAccessToken(): ?string
     {
         return $this->franceConnectAccessToken;
+    }
+
+    public function isFranceConnectAccount(): bool
+    {
+        return null !== $this->franceConnectAccessToken;
     }
 }

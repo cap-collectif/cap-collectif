@@ -18,3 +18,6 @@ RequirementType:
       DATE_OF_BIRTH:
         value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::DATE_OF_BIRTH")'
         description: 'The requirement is a date of birth'
+      POSTAL_ADDRESS:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::POSTAL_ADDRESS")'
+        description: 'The requirement is a postal address'

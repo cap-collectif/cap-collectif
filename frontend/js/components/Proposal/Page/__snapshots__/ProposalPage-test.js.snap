@@ -6560,6 +6560,27 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                               ],
                                             },
                                           ],
+                                          "type": "PostalAddressRequirement",
+                                        },
+                                        Object {
+                                          "abstractKey": null,
+                                          "kind": "InlineFragment",
+                                          "selections": Array [
+                                            Object {
+                                              "condition": "isAuthenticated",
+                                              "kind": "Condition",
+                                              "passingValue": true,
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "viewerValue",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                            },
+                                          ],
                                           "type": "FirstnameRequirement",
                                         },
                                         Object {
@@ -6703,7 +6724,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "666f735fb6bced418875b3ad24020188",
+          "cacheID": "7293a5b7110255e82949b0c55a00ab6e",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8566,6 +8587,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
         viewerMeetsTheRequirement @include(if: $isAuthenticated)
         ... on DateOfBirthRequirement {
           viewerDateOfBirth @include(if: $isAuthenticated)
+        }
+        ... on PostalAddressRequirement {
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on FirstnameRequirement {
           viewerValue @include(if: $isAuthenticated)

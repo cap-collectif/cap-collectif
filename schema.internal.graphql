@@ -6264,6 +6264,18 @@ type PostTranslation {
   slug: String
 }
 
+"""Requires a postal address"""
+type PostalAddressRequirement implements Node & Requirement {
+  """The ID of an object"""
+  id: ID!
+
+  """Does the viewer meets the requirement ?"""
+  viewerMeetsTheRequirement: Boolean!
+
+  """The postal address of the viewer."""
+  viewerValue: String
+}
+
 """A step inside a project."""
 type PresentationStep implements Node & Step {
   """The ID of an object"""
@@ -9794,6 +9806,9 @@ enum RequirementType {
 
   """The requirement is a date of birth"""
   DATE_OF_BIRTH
+
+  """The requirement is a postal address"""
+  POSTAL_ADDRESS
 }
 
 input ResetPasswordInput {
@@ -11674,6 +11689,9 @@ input UpdateProfilePersonalDataInput {
   """Your phone number"""
   phone: String
 
+  """Your address, geocoded by google"""
+  postalAddress: String
+
   """Your address"""
   address: String
 
@@ -12231,6 +12249,7 @@ type User implements Node & UniformResourceLocatable {
   Is the personal archive of the user is being asked for the first time?
   """
   firstArchive: Boolean!
+  postalAddress: GoogleMapsAddress
   address: String
   address2: String
   zipCode: String

@@ -1,77 +1,82 @@
 Capco\AppBundle\Entity\Requirement:
-  requirement1:
-    id: requirement1
-    type: CHECKBOX
-    label: "J'atteste avoir plus de 16 ans"
-    position: 4
-    step: '@collectstepVoteClassement'
-  requirement2:
-    id: requirement2
-    type: CHECKBOX
-    label: "J'atteste résider sur l'une des communes de la Métropole grenobloise"
-    position: 5
-    step: '@collectstepVoteClassement'
-  requirement3:
-    id: requirement3
-    type: CHECKBOX
-    label: "J'accepte d'être recontacté par les services métropolitains pour vérifier la confirmité de ma signature aux conditions requises"
-    position: 6
-    step: '@collectstepVoteClassement'
-  requirement4:
-    id: requirement4
-    type: FIRSTNAME
-    position: 1
-    step: '@collectstepVoteClassement'
-  requirement5:
-    id: requirement5
-    type: LASTNAME
-    position: 2
-    step: '@collectstepVoteClassement'
-  requirement6:
-    id: requirement6
-    type: PHONE
-    position: 3
-    step: '@collectstepVoteClassement'
-  requirement7:
-    id: requirement7
-    type: DATE_OF_BIRTH
-    position: 7
-    step: '@collectstepVoteClassement'
-  requirement10:
-    id: requirement10
-    type: CHECKBOX
-    label: "J'atteste avoir plus de 16 ans"
-    position: 4
-    step: '@selectionstepVoteClassement'
-  requirement11:
-    id: requirement11
-    type: CHECKBOX
-    label: "J'atteste résider sur l'une des communes de la Métropole grenobloise"
-    position: 5
-    step: '@selectionstepVoteClassement'
-  requirement12:
-    id: requirement12
-    type: CHECKBOX
-    label: "J'accepte d'être recontacté par les services métropolitains pour vérifier la confirmité de ma signature aux conditions requises"
-    position: 6
-    step: '@selectionstepVoteClassement'
-  requirement13:
-    id: requirement13
-    type: FIRSTNAME
-    position: 1
-    step: '@selectionstepVoteClassement'
-  requirement14:
-    id: requirement14
-    type: LASTNAME
-    position: 2
-    step: '@selectionstepVoteClassement'
-  requirement15:
-    id: requirement15
-    type: PHONE
-    position: 3
-    step: '@selectionstepVoteClassement'
-  requirement16:
-    id: requirement16
-    type: PHONE
-    position: 1
-    step: '@cstep1'
+    requirement1:
+        id: requirement1
+        type: CHECKBOX
+        label: "J'atteste avoir plus de 16 ans"
+        position: 4
+        step: '@collectstepVoteClassement'
+    requirement2:
+        id: requirement2
+        type: CHECKBOX
+        label: "J'atteste résider sur l'une des communes de la Métropole grenobloise"
+        position: 5
+        step: '@collectstepVoteClassement'
+    requirement3:
+        id: requirement3
+        type: CHECKBOX
+        label: "J'accepte d'être recontacté par les services métropolitains pour vérifier la confirmité de ma signature aux conditions requises"
+        position: 6
+        step: '@collectstepVoteClassement'
+    requirement4:
+        id: requirement4
+        type: FIRSTNAME
+        position: 1
+        step: '@collectstepVoteClassement'
+    requirement5:
+        id: requirement5
+        type: LASTNAME
+        position: 2
+        step: '@collectstepVoteClassement'
+    requirement6:
+        id: requirement6
+        type: PHONE
+        position: 3
+        step: '@collectstepVoteClassement'
+    requirement7:
+        id: requirement7
+        type: DATE_OF_BIRTH
+        position: 7
+        step: '@collectstepVoteClassement'
+    requirement10:
+        id: requirement10
+        type: CHECKBOX
+        label: "J'atteste avoir plus de 16 ans"
+        position: 4
+        step: '@selectionstepVoteClassement'
+    requirement11:
+        id: requirement11
+        type: CHECKBOX
+        label: "J'atteste résider sur l'une des communes de la Métropole grenobloise"
+        position: 5
+        step: '@selectionstepVoteClassement'
+    requirement12:
+        id: requirement12
+        type: CHECKBOX
+        label: "J'accepte d'être recontacté par les services métropolitains pour vérifier la confirmité de ma signature aux conditions requises"
+        position: 6
+        step: '@selectionstepVoteClassement'
+    requirement13:
+        id: requirement13
+        type: FIRSTNAME
+        position: 1
+        step: '@selectionstepVoteClassement'
+    requirement14:
+        id: requirement14
+        type: LASTNAME
+        position: 2
+        step: '@selectionstepVoteClassement'
+    requirement15:
+        id: requirement15
+        type: PHONE
+        position: 3
+        step: '@selectionstepVoteClassement'
+    requirement16:
+        id: requirement16
+        type: PHONE
+        position: 1
+        step: '@cstep1'
+    requirement17:
+        id: requirement17
+        type: POSTAL_ADDRESS
+        position: 1
+        step: '@collectstepCorona'

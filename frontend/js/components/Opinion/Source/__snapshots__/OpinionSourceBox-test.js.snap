@@ -700,6 +700,27 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                                             ],
                                                           },
                                                         ],
+                                                        "type": "PostalAddressRequirement",
+                                                      },
+                                                      Object {
+                                                        "abstractKey": null,
+                                                        "kind": "InlineFragment",
+                                                        "selections": Array [
+                                                          Object {
+                                                            "condition": "isAuthenticated",
+                                                            "kind": "Condition",
+                                                            "passingValue": true,
+                                                            "selections": Array [
+                                                              Object {
+                                                                "alias": null,
+                                                                "args": null,
+                                                                "kind": "ScalarField",
+                                                                "name": "viewerValue",
+                                                                "storageKey": null,
+                                                              },
+                                                            ],
+                                                          },
+                                                        ],
                                                         "type": "FirstnameRequirement",
                                                       },
                                                       Object {
@@ -1244,6 +1265,27 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                                 ],
                                               },
                                             ],
+                                            "type": "PostalAddressRequirement",
+                                          },
+                                          Object {
+                                            "abstractKey": null,
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "condition": "isAuthenticated",
+                                                "kind": "Condition",
+                                                "passingValue": true,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "viewerValue",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                              },
+                                            ],
                                             "type": "FirstnameRequirement",
                                           },
                                           Object {
@@ -1500,7 +1542,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "6a91cea0c2d322cd76d1253fd3d86cf1",
+            "cacheID": "3c4f59b4741619255527ce624c3b199c",
             "id": null,
             "metadata": Object {},
             "name": "OpinionSourceBoxQuery",
@@ -1771,6 +1813,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
         viewerMeetsTheRequirement @include(if: $isAuthenticated)
         ... on DateOfBirthRequirement {
           viewerDateOfBirth @include(if: $isAuthenticated)
+        }
+        ... on PostalAddressRequirement {
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on FirstnameRequirement {
           viewerValue @include(if: $isAuthenticated)

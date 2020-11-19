@@ -11,11 +11,11 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Traits\User\UserAddressTrait;
+use Capco\AppBundle\Traits\User\UserSSOTrait;
 use Capco\MediaBundle\Entity\Media;
-use Capco\UserBundle\FranceConnect\FranceConnectUserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use FOS\UserBundle\Util\Canonicalizer;
 use Sonata\UserBundle\Entity\BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -27,7 +27,8 @@ class User extends BaseUser implements
     EquatableInterface,
     IndexableInterface
 {
-    use FranceConnectUserTrait;
+    use UserSSOTrait;
+    use UserAddressTrait;
 
     public const GENDER_OTHER = 'o';
     protected const SORT_ORDER_CREATED_AT = 0;
@@ -42,127 +43,67 @@ class User extends BaseUser implements
         'date' => 'opinion.sort.last',
     ];
 
+    protected $id;
+    protected ?string $slug = null;
+
     // Hack for ParticipantEdge
     public $registeredEvent;
 
-    protected $samlId;
-    protected $parisId;
-    protected $openId;
-    protected $openIdAccessToken;
-    protected $id;
-
-    protected $locked = false;
-
+    //personal
     protected $gender;
+    protected ?Media $media;
+    protected ?string $birthPlace;
 
-    protected $facebook_id;
+    //participations
+    protected Collection $opinions;
+    protected Collection $opinionVersions;
+    protected Collection $comments;
+    protected Collection $arguments;
+    protected Collection $votes;
+    protected Collection $sources;
+    protected Collection $proposals;
+    protected Collection $replies;
 
-    protected $facebook_access_token;
+    //counters
+    protected int $opinionVersionsCount = 0;
+    protected int $argumentVotesCount = 0;
+    protected int $proposalVotesCount = 0;
+    protected int $opinionVersionVotesCount = 0;
+    protected int $sourceVotesCount = 0;
 
-    protected $facebookUrl;
+    //account rights
+    protected bool $locked = false;
+    protected ?UserType $userType = null;
+    protected bool $vip = false;
+    private Collection $userGroups;
 
-    protected $websiteUrl;
+    //account security
+    protected ?string $newEmailToConfirm;
+    protected ?string $newEmailConfirmationToken;
+    protected ?\DateTime $emailConfirmationSentAt;
+    protected bool $phoneConfirmed = false;
+    protected ?string $smsConfirmationCode;
+    protected ?\DateTime $smsConfirmationSentAt;
+    protected ?\DateTime $confirmedAccountAt;
+    protected ?\DateTime $deletedAccountAt;
+    protected bool $remindedAccountConfirmationAfter24Hours = false;
+    private ?string $resetPasswordToken;
 
-    protected $google_id;
+    //notifications
+    protected Collection $followingContributions;
+    protected UserNotificationsConfiguration $notificationsConfiguration;
+    protected bool $consentExternalCommunication = false;
+    protected bool $consentInternalCommunication = false;
 
-    protected $google_access_token;
-
-    protected $linkedInUrl;
-
-    protected $credentialsExpireAt;
-    protected $credentialsExpired = false;
-
-    protected $twitter_id;
-
-    protected $twitter_access_token;
-
-    protected $twitterUrl;
-
-    protected $media;
-
-    protected $address;
-
-    protected $address2;
-
-    protected $zipCode;
-
-    protected $neighborhood;
-
-    protected $city;
-
-    protected $opinions;
-
-    protected $opinionVersions;
-
-    protected $comments;
-
-    protected $arguments;
-
-    protected $votes;
-
-    protected $sources;
-
-    protected $proposals;
-
-    protected $replies;
-
-    protected $opinionVersionsCount = 0;
-
-    // Votes
-
-    protected $argumentVotesCount = 0;
-
-    protected $proposalVotesCount = 0;
-
-    protected $opinionVersionVotesCount = 0;
-
-    protected $sourceVotesCount = 0;
-
-    protected $userType;
-
-    protected $vip = false;
-
-    protected $newEmailToConfirm;
-    protected $newEmailConfirmationToken;
-
-    protected $emailConfirmationSentAt;
-
-    protected $confirmedAccountAt;
-    protected $deletedAccountAt;
-
-    protected $smsConfirmationSentAt;
-    protected $smsConfirmationCode;
-    protected $phoneConfirmed = false;
-
-    protected $remindedAccountConfirmationAfter24Hours = false;
-
-    protected $followingContributions;
-
-    protected $notificationsConfiguration;
-
-    protected $archives;
-
-    private $slug;
-
-    private $responses;
-
-    private $profilePageIndexed = false;
-
-    private $consentExternalCommunication = false;
-    private $consentInternalCommunication = false;
-
-    private $userGroups;
-
-    private $resetPasswordToken;
-
-    private $birthPlace;
-
-    private $isFranceConnectAccount = false;
+    protected Collection $archives;
+    protected Collection $responses;
+    protected bool $profilePageIndexed = false;
+    protected ?string $websiteUrl;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="supervisor")
      */
-    private $supervisedProposals;
+    private Collection $supervisedProposals;
 
     public function __construct()
     {
@@ -184,7 +125,7 @@ class User extends BaseUser implements
         $this->supervisedProposals = new ArrayCollection();
     }
 
-    public function hydrate(array $data)
+    public function hydrate(array $data): self
     {
         foreach ($data as $key => $value) {
             $setter = 'set' . ucfirst($key);
@@ -202,88 +143,13 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function setSamlAttributes(string $idp, array $attributes)
-    {
-        if ($this->getId()) {
-            return;
-        }
-
-        if ('daher' === $idp) {
-            $this->setUsername(
-                $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
-            );
-            $this->setEmail(
-                $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
-            );
-            $this->setEmailCanonical(
-                (new Canonicalizer())->canonicalize(
-                    $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
-                )
-            );
-        }
-
-        if ('grandest-preprod' === $idp || 'grandest' === $idp) {
-            $this->setUsername($attributes['prenom'][0]);
-            $this->setEmail($attributes['email'][0]);
-            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['email'][0]));
-        }
-    }
-
-    public function setSamlId(string $samlId): self
-    {
-        $this->samlId = $samlId;
-
-        return $this;
-    }
-
-    public function clearLastLogin()
+    public function clearLastLogin(): void
     {
         $this->lastLogin = null;
     }
 
-    public function getSamlId()
-    {
-        return $this->samlId;
-    }
-
-    public function setParisId(string $parisId): self
-    {
-        $this->parisId = $parisId;
-
-        return $this;
-    }
-
-    public function getParisId(): ?string
-    {
-        return $this->parisId;
-    }
-
-    public function setOpenId(?string $openId): self
-    {
-        $this->openId = $openId;
-
-        return $this;
-    }
-
-    public function getOpenId(): ?string
-    {
-        return $this->openId;
-    }
-
-    public function setOpenIdAccessToken(?string $accessToken = null): self
-    {
-        $this->openIdAccessToken = $accessToken;
-
-        return $this;
-    }
-
-    public function getOpenIdAccessToken(): ?string
-    {
-        return $this->openIdAccessToken;
-    }
-
     // used as a lifecycleCallback
-    public function sanitizePhoneNumber()
+    public function sanitizePhoneNumber(): void
     {
         if ($this->phone) {
             $this->phone = '+' . preg_replace('/\D/', '', $this->phone);
@@ -292,7 +158,7 @@ class User extends BaseUser implements
 
     // http://symfony.com/doc/2.8/security/entity_provider.html#understanding-serialize-and-how-a-user-is-saved-in-the-session
     // We check the account is not deleted in case of the user has multiple accounts sessions and just deleted his account
-    public function isEqualTo(RealUserInterface $user)
+    public function isEqualTo(RealUserInterface $user): bool
     {
         return $user instanceof self &&
             $this->id === $user->getId() &&
@@ -348,7 +214,7 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function getNewEmailToConfirm()
+    public function getNewEmailToConfirm(): ?string
     {
         return $this->newEmailToConfirm;
     }
@@ -372,22 +238,19 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -397,108 +260,6 @@ class User extends BaseUser implements
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getGoogleId()
-    {
-        return $this->google_id;
-    }
-
-    /**
-     * @param int $google_id
-     */
-    public function setGoogleId($google_id)
-    {
-        $this->google_id = $google_id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFacebookAccessToken()
-    {
-        return $this->facebook_access_token;
-    }
-
-    /**
-     * @param int $facebook_access_token
-     */
-    public function setFacebookAccessToken($facebook_access_token)
-    {
-        $this->facebook_access_token = $facebook_access_token;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFacebookId()
-    {
-        return $this->facebook_id;
-    }
-
-    /**
-     * @param int $facebook_id
-     */
-    public function setFacebookId($facebook_id)
-    {
-        $this->facebook_id = $facebook_id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getGoogleAccessToken()
-    {
-        return $this->google_access_token;
-    }
-
-    /**
-     * @param int $google_access_token
-     */
-    public function setGoogleAccessToken($google_access_token)
-    {
-        $this->google_access_token = $google_access_token;
-    }
-
-    public function setTwitterId($twitter_id)
-    {
-        $this->twitter_id = $twitter_id;
-
-        return $this;
-    }
-
-    public function getTwitterId()
-    {
-        return $this->twitter_id;
-    }
-
-    public function setTwitterAccessToken($twitter_access_token)
-    {
-        $this->twitter_access_token = $twitter_access_token;
-    }
-
-    public function getTwitterAccessToken()
-    {
-        return $this->twitter_access_token;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFacebookUrl()
-    {
-        return $this->facebookUrl;
-    }
-
-    /**
-     * @param int $facebookUrl
-     */
-    public function setFacebookUrl($facebookUrl)
-    {
-        $this->facebookUrl = $facebookUrl;
     }
 
     public function getWebsiteUrl(): ?string
@@ -513,34 +274,6 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function getLinkedInUrl(): ?string
-    {
-        return $this->linkedInUrl;
-    }
-
-    public function setLinkedInUrl(?string $linkedInUrl): self
-    {
-        $this->linkedInUrl = $linkedInUrl;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTwitterUrl()
-    {
-        return $this->twitterUrl;
-    }
-
-    /**
-     * @param string $twitterUrl
-     */
-    public function setTwitterUrl($twitterUrl)
-    {
-        $this->twitterUrl = $twitterUrl;
-    }
-
     public function setMedia(?Media $media = null): self
     {
         $this->media = $media;
@@ -553,269 +286,155 @@ class User extends BaseUser implements
         return $this->media;
     }
 
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAddress2()
-    {
-        return $this->address2;
-    }
-
-    /**
-     * @param string $address2
-     */
-    public function setAddress2($address2)
-    {
-        $this->address2 = $address2;
-    }
-
-    public function getZipCode(): ?string
-    {
-        return $this->zipCode;
-    }
-
-    public function setZipCode(?string $zipCode): self
-    {
-        $this->zipCode = $zipCode;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * @param string $city
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNeighborhood()
-    {
-        return $this->neighborhood;
-    }
-
-    /**
-     * @param string $neighborhood
-     */
-    public function setNeighborhood($neighborhood)
-    {
-        $this->neighborhood = $neighborhood;
-    }
-
-    public function getOpinions()
+    public function getOpinions(): Collection
     {
         return $this->opinions;
     }
 
-    public function getOpinionVersions()
+    public function getOpinionVersions(): Collection
     {
         return $this->opinionVersions;
     }
 
-    public function getComments()
+    public function getComments(): Collection
     {
         return $this->comments;
     }
 
-    public function getArguments()
+    public function getArguments(): Collection
     {
         return $this->arguments;
     }
 
-    public function getVotes()
+    public function getVotes(): Collection
     {
         return $this->votes;
     }
 
-    public function getSources()
+    public function getSources(): Collection
     {
         return $this->sources;
     }
 
-    public function getProposals()
+    public function getProposals(): Collection
     {
         return $this->proposals;
     }
 
-    public function getReplies()
+    public function getReplies(): Collection
     {
         return $this->replies;
     }
 
-    /**
-     * @return int
-     */
-    public function getOpinionVersionsCount()
+    public function getOpinionVersionsCount(): int
     {
         return $this->opinionVersionsCount;
     }
 
-    /**
-     * @param int $opinionVersionsCount
-     */
-    public function setOpinionVersionsCount($opinionVersionsCount)
+    public function setOpinionVersionsCount(int $opinionVersionsCount): void
     {
         $this->opinionVersionsCount = $opinionVersionsCount;
     }
 
-    /**
-     * @return int
-     */
-    public function getProposalVotesCount()
+    public function getProposalVotesCount(): int
     {
         return $this->proposalVotesCount;
     }
 
-    /**
-     * @param int $proposalVotesCount
-     *
-     * @return $this
-     */
-    public function setProposalVotesCount($proposalVotesCount)
+    public function setProposalVotesCount(int $proposalVotesCount): self
     {
         $this->proposalVotesCount = $proposalVotesCount;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getOpinionVersionVotesCount()
+    public function getOpinionVersionVotesCount(): int
     {
         return $this->opinionVersionVotesCount;
     }
 
-    /**
-     * @param int $opinionVersionVotesCount
-     */
-    public function setOpinionVersionVotesCount($opinionVersionVotesCount)
+    public function setOpinionVersionVotesCount(int $opinionVersionVotesCount): void
     {
         $this->opinionVersionVotesCount = $opinionVersionVotesCount;
     }
 
-    /**
-     * @return int
-     */
-    public function getSourceVotesCount()
+    public function getSourceVotesCount(): int
     {
         return $this->sourceVotesCount;
     }
 
-    /**
-     * @param int $sourceVotesCount
-     */
-    public function setSourceVotesCount($sourceVotesCount)
+    public function setSourceVotesCount(int $sourceVotesCount): void
     {
         $this->sourceVotesCount = $sourceVotesCount;
     }
 
-    /**
-     * @return int
-     */
-    public function getArgumentVotesCount()
+    public function getArgumentVotesCount(): int
     {
         return $this->argumentVotesCount;
     }
 
-    /**
-     * @param int $argumentVotesCount
-     */
-    public function setArgumentVotesCount($argumentVotesCount)
+    public function setArgumentVotesCount(int $argumentVotesCount): void
     {
         $this->argumentVotesCount = $argumentVotesCount;
     }
 
-    /**
-     * Sets the value of votes.
-     *
-     * @param mixed $votes the votes
-     *
-     * @return self
-     */
-    public function setVotes($votes)
+    public function setVotes(Collection $votes): self
     {
         $this->votes = $votes;
 
         return $this;
     }
 
-    public function setProposals($proposals)
+    public function setProposals(Collection $proposals): self
     {
         $this->proposals = $proposals;
 
         return $this;
     }
 
-    public function setOpinions($opinions)
+    public function setOpinions(Collection $opinions): self
     {
         $this->opinions = $opinions;
 
         return $this;
     }
 
-    public function setOpinionVersions($versions)
+    public function setOpinionVersions(Collection $versions): self
     {
         $this->opinionVersions = $versions;
 
         return $this;
     }
 
-    public function setComments($comments)
+    public function setComments(Collection $comments): self
     {
         $this->comments = $comments;
 
         return $this;
     }
 
-    public function setArguments($arguments)
+    public function setArguments(Collection $arguments): self
     {
         $this->arguments = $arguments;
 
         return $this;
     }
 
-    public function setSources($sources)
+    public function setSources(Collection $sources): self
     {
         $this->sources = $sources;
 
         return $this;
     }
 
-    public function setReplies($replies)
+    public function setReplies(Collection $replies): self
     {
         $this->replies = $replies;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUserType()
+    public function getUserType(): ?UserType
     {
         return $this->userType;
     }
@@ -839,12 +458,12 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function getEmailConfirmationSentAt()
+    public function getEmailConfirmationSentAt(): ?\DateTime
     {
         return $this->emailConfirmationSentAt;
     }
 
-    public function setEmailConfirmationSentAt(?\DateTime $date = null)
+    public function setEmailConfirmationSentAt(?\DateTime $date = null): self
     {
         $this->emailConfirmationSentAt = $date;
 
@@ -875,36 +494,36 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function getSmsConfirmationSentAt()
+    public function getSmsConfirmationSentAt(): ?\DateTime
     {
         return $this->smsConfirmationSentAt;
     }
 
-    public function setSmsConfirmationSentAt(?\DateTime $date = null)
+    public function setSmsConfirmationSentAt(?\DateTime $date = null): self
     {
         $this->smsConfirmationSentAt = $date;
 
         return $this;
     }
 
-    public function getSmsConfirmationCode()
+    public function getSmsConfirmationCode(): ?string
     {
         return $this->smsConfirmationCode;
     }
 
-    public function setSmsConfirmationCode($code = null)
+    public function setSmsConfirmationCode(?string $code = null): self
     {
         $this->smsConfirmationCode = $code;
 
         return $this;
     }
 
-    public function isPhoneConfirmed()
+    public function isPhoneConfirmed(): bool
     {
         return $this->phoneConfirmed;
     }
 
-    public function setPhoneConfirmed($phoneConfirmed)
+    public function setPhoneConfirmed(bool $phoneConfirmed): self
     {
         $this->phoneConfirmed = $phoneConfirmed;
 
@@ -964,12 +583,12 @@ class User extends BaseUser implements
         return null === $this->confirmationToken;
     }
 
-    public function getFullname()
+    public function getFullname(): string
     {
         return sprintf('%s %s', $this->getFirstname(), $this->getLastname());
     }
 
-    public static function getGenderList()
+    public static function getGenderList(): array
     {
         return [
             UserInterface::GENDER_FEMALE => 'gender.female',
@@ -978,7 +597,7 @@ class User extends BaseUser implements
         ];
     }
 
-    public function getContributions()
+    public function getContributions(): array
     {
         $types = [
             $this->getOpinions(),
@@ -1006,38 +625,14 @@ class User extends BaseUser implements
         return $this->username;
     }
 
-    public function isCredentialsExpired(): bool
-    {
-        return $this->credentialsExpired;
-    }
-
-    public function setCredentialsExpired(bool $value): self
-    {
-        $this->credentialsExpired = $value;
-
-        return $this;
-    }
-
-    public function getCredentialsExpireAt(): ?\DateTime
-    {
-        return $this->credentialsExpireAt;
-    }
-
-    public function setCredentialsExpireAt(?\DateTime $value): self
-    {
-        $this->credentialsExpireAt = $value;
-
-        return $this;
-    }
-
     // ********************* Methods for synthesis tool **************************
 
-    public function getUniqueIdentifier()
+    public function getUniqueIdentifier(): string
     {
         return $this->slug;
     }
 
-    public function getDisplayName()
+    public function getDisplayName(): string
     {
         return $this->username ?: 'Utilisateur sans nom';
     }
@@ -1071,7 +666,7 @@ class User extends BaseUser implements
         return !$this->profilePageIndexed;
     }
 
-    public function setProfilePageIndexed(bool $profilePageIndexed = true)
+    public function setProfilePageIndexed(bool $profilePageIndexed = true): void
     {
         $this->profilePageIndexed = !$profilePageIndexed;
     }
@@ -1281,16 +876,6 @@ class User extends BaseUser implements
         $this->birthPlace = $birthPlace;
 
         return $this;
-    }
-
-    public function isFranceConnectAccount(): bool
-    {
-        return null !== $this->franceConnectAccessToken;
-    }
-
-    public function isOpenidAccount(): bool
-    {
-        return null !== $this->openId;
     }
 
     public function hasPassword(): bool

@@ -11,6 +11,7 @@ import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePers
 import type { Dispatch, State } from '../../types';
 import DateDropdownPicker from '../Form/DateDropdownPicker';
 import environment from '../../createRelayEnvironment';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 export const formName = 'requirements-form';
 
@@ -21,6 +22,12 @@ type Requirement =
       +id: string,
       +viewerMeetsTheRequirement: boolean,
       +viewerDateOfBirth: ?string,
+    }
+  | {
+      +__typename: 'PostalAddressRequirement',
+      +id: string,
+      +viewerMeetsTheRequirement: boolean,
+      +viewerValue: ?string,
     }
   | {
       +__typename: 'CheckboxRequirement',
@@ -139,6 +146,9 @@ export const onChange = (
       if (requirement.__typename === 'DateOfBirthRequirement') {
         input.dateOfBirth = newValue;
       }
+      if (requirement.__typename === 'PostalAddressRequirement') {
+        input.postalAddress = newValue;
+      }
       if (requirement.__typename === 'FirstnameRequirement') {
         input.firstname = newValue;
       }
@@ -184,15 +194,29 @@ const getLabel = (requirement: Requirement) => {
   if (requirement.__typename === 'DateOfBirthRequirement') {
     return <FormattedMessage id="form.label_date_of_birth" />;
   }
+  if (requirement.__typename === 'PostalAddressRequirement') {
+    return <FormattedMessage id="admin.fields.event.address" />;
+  }
   return '';
 };
 
-const getFormProps = (requirement: Requirement) => {
+const getFormProps = (requirement: Requirement, change: any) => {
   if (requirement.__typename === 'DateOfBirthRequirement') {
     return {
       component: DateDropdownPicker,
       globalClassName: 'col-sm-12 col-xs-12',
       divClassName: 'row',
+    };
+  }
+  if (requirement.__typename === 'PostalAddressRequirement') {
+    return {
+      component,
+      type: 'address',
+      divClassName: 'col-sm-12 col-xs-12',
+      addressProps: {
+        getAddress: (addressComplete: AddressComplete) =>
+          change(requirement.id, JSON.stringify([addressComplete])),
+      },
     };
   }
   if (requirement.__typename === 'CheckboxRequirement') {
@@ -203,7 +227,7 @@ const getFormProps = (requirement: Requirement) => {
 
 export class RequirementsForm extends React.Component<Props> {
   render() {
-    const { step, submitting, submitSucceeded } = this.props;
+    const { step, submitting, submitSucceeded, change } = this.props;
     return (
       <form>
         <div className="col-sm-12 col-xs-12 alert__form_succeeded-message">
@@ -226,19 +250,25 @@ export class RequirementsForm extends React.Component<Props> {
           step.requirements.edges
             .filter(Boolean)
             .map(edge => edge.node)
-            .map(requirement => (
-              <Field
-                addonBefore={
-                  requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined
-                }
-                id={requirement.id}
-                key={requirement.id}
-                name={requirement.id}
-                label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
-                {...getFormProps(requirement)}>
-                {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
-              </Field>
-            ))}
+            .map(requirement => {
+              return (
+                <Field
+                  addonBefore={
+                    requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined
+                  }
+                  id={requirement.id}
+                  key={requirement.id}
+                  name={
+                    requirement.__typename === 'PostalAddressRequirement'
+                      ? 'PostalAddressText'
+                      : requirement.id
+                  }
+                  label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
+                  {...getFormProps(requirement, change)}>
+                  {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
+                </Field>
+              );
+            })}
       </form>
     );
   }
@@ -259,6 +289,9 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
   }
   if (requirement.__typename === 'DateOfBirthRequirement') {
     return requirement.viewerDateOfBirth;
+  }
+  if (requirement.__typename === 'PostalAddressRequirement') {
+    return requirement.viewerValue;
   }
 
   return requirement.viewerValue;
@@ -294,6 +327,9 @@ export default createFragmentContainer(container, {
             viewerMeetsTheRequirement @include(if: $isAuthenticated)
             ... on DateOfBirthRequirement {
               viewerDateOfBirth @include(if: $isAuthenticated)
+            }
+            ... on PostalAddressRequirement {
+              viewerValue @include(if: $isAuthenticated)
             }
             ... on FirstnameRequirement {
               viewerValue @include(if: $isAuthenticated)

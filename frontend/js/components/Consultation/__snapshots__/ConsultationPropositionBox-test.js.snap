@@ -2226,6 +2226,27 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                   ],
                                                 },
                                               ],
+                                              "type": "PostalAddressRequirement",
+                                            },
+                                            Object {
+                                              "abstractKey": null,
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
+                                                  "condition": "isAuthenticated",
+                                                  "kind": "Condition",
+                                                  "passingValue": true,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "viewerValue",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                },
+                                              ],
                                               "type": "FirstnameRequirement",
                                             },
                                             Object {
@@ -2311,7 +2332,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "97ed6142259acdce90473d3cb52ef610",
+          "cacheID": "19f24882a575d01c405e025b847de9b0",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2657,6 +2678,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
         viewerMeetsTheRequirement @include(if: $isAuthenticated)
         ... on DateOfBirthRequirement {
           viewerDateOfBirth @include(if: $isAuthenticated)
+        }
+        ... on PostalAddressRequirement {
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on FirstnameRequirement {
           viewerValue @include(if: $isAuthenticated)
@@ -5008,6 +5032,27 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                   ],
                                                 },
                                               ],
+                                              "type": "PostalAddressRequirement",
+                                            },
+                                            Object {
+                                              "abstractKey": null,
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
+                                                  "condition": "isAuthenticated",
+                                                  "kind": "Condition",
+                                                  "passingValue": true,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "viewerValue",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
+                                                },
+                                              ],
                                               "type": "FirstnameRequirement",
                                             },
                                             Object {
@@ -5093,7 +5138,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "97ed6142259acdce90473d3cb52ef610",
+          "cacheID": "19f24882a575d01c405e025b847de9b0",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5439,6 +5484,9 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
         viewerMeetsTheRequirement @include(if: $isAuthenticated)
         ... on DateOfBirthRequirement {
           viewerDateOfBirth @include(if: $isAuthenticated)
+        }
+        ... on PostalAddressRequirement {
+          viewerValue @include(if: $isAuthenticated)
         }
         ... on FirstnameRequirement {
           viewerValue @include(if: $isAuthenticated)

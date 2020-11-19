@@ -50,6 +50,9 @@ Scenario: User should be able to update his personal data
           lastname
           gender
           dateOfBirth
+          postalAddress {
+            json
+          }
           address
           address2
           city
@@ -64,6 +67,7 @@ Scenario: User should be able to update his personal data
         "lastname": "new lastname",
         "gender": "OTHER",
         "dateOfBirth": "1992-12-12",
+        "postalAddress": "[{\"address_components\":[{\"long_name\":\"262\",\"short_name\":\"262\",\"types\":[\"street_number\"]},{\"long_name\":\"Avenue Général Leclerc\",\"short_name\":\"Avenue Général Leclerc\",\"types\":[\"route\"]},{\"long_name\":\"Rennes\",\"short_name\":\"Rennes\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Ille-et-Vilaine\",\"short_name\":\"Ille-et-Vilaine\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Bretagne\",\"short_name\":\"Bretagne\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"35700\",\"short_name\":\"35700\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"262 Avenue Général Leclerc, 35700 Rennes, France\",\"geometry\":{\"bounds\":{\"northeast\":{\"lat\":48.1140978,\"lng\":-1.6404985},\"southwest\":{\"lat\":48.1140852,\"lng\":-1.640499}},\"location\":{\"lat\":48.1140852,\"lng\":-1.6404985},\"location_type\":\"RANGE_INTERPOLATED\",\"viewport\":{\"northeast\":{\"lat\":48.1154404802915,\"lng\":-1.639149769708498},\"southwest\":{\"lat\":48.1127425197085,\"lng\":-1.641847730291502}}},\"place_id\":\"EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\",\"types\":[\"street_address\"]}]",
         "address": "noway",
         "address2":	null,
         "city": "Paris",
@@ -84,7 +88,10 @@ Scenario: User should be able to update his personal data
           "lastname": "new lastname",
           "gender": "OTHER",
           "dateOfBirth": "1992-12-12 00:00:00",
-          "address":"noway",
+          "postalAddress": {
+            "json": "[{\u0022address_components\u0022:[{\u0022long_name\u0022:\u0022262\u0022,\u0022short_name\u0022:\u0022262\u0022,\u0022types\u0022:[\u0022street_number\u0022]},{\u0022long_name\u0022:\u0022Avenue G\u00e9n\u00e9ral Leclerc\u0022,\u0022short_name\u0022:\u0022Avenue G\u00e9n\u00e9ral Leclerc\u0022,\u0022types\u0022:[\u0022route\u0022]},{\u0022long_name\u0022:\u0022Rennes\u0022,\u0022short_name\u0022:\u0022Rennes\u0022,\u0022types\u0022:[\u0022locality\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Ille-et-Vilaine\u0022,\u0022short_name\u0022:\u0022Ille-et-Vilaine\u0022,\u0022types\u0022:[\u0022administrative_area_level_2\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Bretagne\u0022,\u0022short_name\u0022:\u0022Bretagne\u0022,\u0022types\u0022:[\u0022administrative_area_level_1\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022France\u0022,\u0022short_name\u0022:\u0022FR\u0022,\u0022types\u0022:[\u0022country\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u002235700\u0022,\u0022short_name\u0022:\u002235700\u0022,\u0022types\u0022:[\u0022postal_code\u0022]}],\u0022formatted_address\u0022:\u0022262 Avenue G\u00e9n\u00e9ral Leclerc, 35700 Rennes, France\u0022,\u0022geometry\u0022:{\u0022bounds\u0022:{\u0022northeast\u0022:{\u0022lat\u0022:48.1140978,\u0022lng\u0022:-1.6404985},\u0022southwest\u0022:{\u0022lat\u0022:48.1140852,\u0022lng\u0022:-1.640499}},\u0022location\u0022:{\u0022lat\u0022:48.1140852,\u0022lng\u0022:-1.6404985},\u0022location_type\u0022:\u0022RANGE_INTERPOLATED\u0022,\u0022viewport\u0022:{\u0022northeast\u0022:{\u0022lat\u0022:48.1154404802915,\u0022lng\u0022:-1.639149769708498},\u0022southwest\u0022:{\u0022lat\u0022:48.1127425197085,\u0022lng\u0022:-1.641847730291502}}},\u0022place_id\u0022:\u0022EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\u0022,\u0022types\u0022:[\u0022street_address\u0022]}]"
+          },
+          "address": "noway",
           "address2": null,
           "city": "Paris",
           "zipCode": "75012",
@@ -109,6 +116,9 @@ Scenario: A super admin wants to update personal data of an other user
           lastname
           gender
           dateOfBirth
+          postalAddress {
+            json
+          }
           address
           address2
           city
@@ -123,6 +133,7 @@ Scenario: A super admin wants to update personal data of an other user
         "firstname": "New firstname",
         "lastname": "new lastname",
         "gender": "OTHER",
+        "postalAddress": "[{\"address_components\":[{\"long_name\":\"262\",\"short_name\":\"262\",\"types\":[\"street_number\"]},{\"long_name\":\"Avenue Général Leclerc\",\"short_name\":\"Avenue Général Leclerc\",\"types\":[\"route\"]},{\"long_name\":\"Rennes\",\"short_name\":\"Rennes\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Ille-et-Vilaine\",\"short_name\":\"Ille-et-Vilaine\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Bretagne\",\"short_name\":\"Bretagne\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"35700\",\"short_name\":\"35700\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"262 Avenue Général Leclerc, 35700 Rennes, France\",\"geometry\":{\"bounds\":{\"northeast\":{\"lat\":48.1140978,\"lng\":-1.6404985},\"southwest\":{\"lat\":48.1140852,\"lng\":-1.640499}},\"location\":{\"lat\":48.1140852,\"lng\":-1.6404985},\"location_type\":\"RANGE_INTERPOLATED\",\"viewport\":{\"northeast\":{\"lat\":48.1154404802915,\"lng\":-1.639149769708498},\"southwest\":{\"lat\":48.1127425197085,\"lng\":-1.641847730291502}}},\"place_id\":\"EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\",\"types\":[\"street_address\"]}]",
         "dateOfBirth": "1992-12-12",
         "address": "noway",
         "address2":	null,
@@ -144,6 +155,9 @@ Scenario: A super admin wants to update personal data of an other user
           "lastname": "new lastname",
           "gender": "OTHER",
           "dateOfBirth": "1992-12-12 00:00:00",
+          "postalAddress": {
+            "json": "[{\u0022address_components\u0022:[{\u0022long_name\u0022:\u0022262\u0022,\u0022short_name\u0022:\u0022262\u0022,\u0022types\u0022:[\u0022street_number\u0022]},{\u0022long_name\u0022:\u0022Avenue G\u00e9n\u00e9ral Leclerc\u0022,\u0022short_name\u0022:\u0022Avenue G\u00e9n\u00e9ral Leclerc\u0022,\u0022types\u0022:[\u0022route\u0022]},{\u0022long_name\u0022:\u0022Rennes\u0022,\u0022short_name\u0022:\u0022Rennes\u0022,\u0022types\u0022:[\u0022locality\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Ille-et-Vilaine\u0022,\u0022short_name\u0022:\u0022Ille-et-Vilaine\u0022,\u0022types\u0022:[\u0022administrative_area_level_2\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022Bretagne\u0022,\u0022short_name\u0022:\u0022Bretagne\u0022,\u0022types\u0022:[\u0022administrative_area_level_1\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u0022France\u0022,\u0022short_name\u0022:\u0022FR\u0022,\u0022types\u0022:[\u0022country\u0022,\u0022political\u0022]},{\u0022long_name\u0022:\u002235700\u0022,\u0022short_name\u0022:\u002235700\u0022,\u0022types\u0022:[\u0022postal_code\u0022]}],\u0022formatted_address\u0022:\u0022262 Avenue G\u00e9n\u00e9ral Leclerc, 35700 Rennes, France\u0022,\u0022geometry\u0022:{\u0022bounds\u0022:{\u0022northeast\u0022:{\u0022lat\u0022:48.1140978,\u0022lng\u0022:-1.6404985},\u0022southwest\u0022:{\u0022lat\u0022:48.1140852,\u0022lng\u0022:-1.640499}},\u0022location\u0022:{\u0022lat\u0022:48.1140852,\u0022lng\u0022:-1.6404985},\u0022location_type\u0022:\u0022RANGE_INTERPOLATED\u0022,\u0022viewport\u0022:{\u0022northeast\u0022:{\u0022lat\u0022:48.1154404802915,\u0022lng\u0022:-1.639149769708498},\u0022southwest\u0022:{\u0022lat\u0022:48.1127425197085,\u0022lng\u0022:-1.641847730291502}}},\u0022place_id\u0022:\u0022EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\u0022,\u0022types\u0022:[\u0022street_address\u0022]}]"
+          },
           "address":"noway",
           "address2": null,
           "city": "Paris",
@@ -169,6 +183,9 @@ Scenario: User should not be able to update personal data of an other user
           lastname
           gender
           dateOfBirth
+          postalAddress {
+            json
+          }
           address
           address2
           city
@@ -184,6 +201,7 @@ Scenario: User should not be able to update personal data of an other user
         "lastname": "new lastname",
         "gender": "OTHER",
         "dateOfBirth": "1992-12-12",
+        "postalAddress": "[{\"address_components\":[{\"long_name\":\"262\",\"short_name\":\"262\",\"types\":[\"street_number\"]},{\"long_name\":\"Avenue Général Leclerc\",\"short_name\":\"Avenue Général Leclerc\",\"types\":[\"route\"]},{\"long_name\":\"Rennes\",\"short_name\":\"Rennes\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Ille-et-Vilaine\",\"short_name\":\"Ille-et-Vilaine\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Bretagne\",\"short_name\":\"Bretagne\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"35700\",\"short_name\":\"35700\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"262 Avenue Général Leclerc, 35700 Rennes, France\",\"geometry\":{\"bounds\":{\"northeast\":{\"lat\":48.1140978,\"lng\":-1.6404985},\"southwest\":{\"lat\":48.1140852,\"lng\":-1.640499}},\"location\":{\"lat\":48.1140852,\"lng\":-1.6404985},\"location_type\":\"RANGE_INTERPOLATED\",\"viewport\":{\"northeast\":{\"lat\":48.1154404802915,\"lng\":-1.639149769708498},\"southwest\":{\"lat\":48.1127425197085,\"lng\":-1.641847730291502}}},\"place_id\":\"EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\",\"types\":[\"street_address\"]}]",
         "address": "noway",
         "address2":	null,
         "city": "Paris",

@@ -55,6 +55,7 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         'dateOfBirth' => 'dateOfBirth',
         'websiteUrl' => 'websiteUrl',
         'biography' => 'biography',
+        'postalAddress.formatted' => 'postalAddress',
         'address' => 'address',
         'address2' => 'address2',
         'zipCode' => 'zipCode',
@@ -266,6 +267,9 @@ class CreateCsvFromUsersCommand extends BaseExportCommand
         dateOfBirth
         websiteUrl
         biography
+        postalAddress {
+          formatted
+        }
         address
         address2
         zipCode

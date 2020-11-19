@@ -37,14 +37,19 @@ class RequirementViewerValueResolver implements ResolverInterface
         if (Requirement::DATE_OF_BIRTH === $requirement->getType()) {
             return $viewer->getDateOfBirth();
         }
+        if (Requirement::POSTAL_ADDRESS === $requirement->getType()) {
+            return $viewer->getPostalAddress();
+        }
 
         if (Requirement::CHECKBOX === $requirement->getType()) {
             $found = $this->userRequirementsRepo->findOneBy([
                 'requirement' => $requirement,
-                'user' => $viewer
+                'user' => $viewer,
             ]);
 
             return $found ? $found->getValue() : false;
         }
+
+        return false;
     }
 }

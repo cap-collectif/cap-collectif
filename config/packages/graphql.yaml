@@ -91,9 +91,10 @@ overblog_graphql:
                     - FirstnameRequirement
                     - LastnameRequirement
                     - DateOfBirthRequirement
+                    - PhoneRequirement
+                    - PostalAddressRequirement
                     - OpinionOrVersion
                     - OtherStep
-                    - PhoneRequirement
                     - PresentationStep
                     - InternalQuestionnaireStep
                     - InternalDebateStep

@@ -22,13 +22,15 @@ class Requirement
     public const LASTNAME = 'LASTNAME';
     public const PHONE = 'PHONE';
     public const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
+    public const POSTAL_ADDRESS = 'POSTAL_ADDRESS';
 
     public static $requirementsLabels = [
         self::CHECKBOX => 'check-box',
         self::FIRSTNAME => 'form.label_firstname',
         self::LASTNAME => 'group.title',
         self::PHONE => 'mobile-phone',
-        self::DATE_OF_BIRTH => 'form.label_date_of_birth'
+        self::DATE_OF_BIRTH => 'form.label_date_of_birth',
+        self::POSTAL_ADDRESS => 'admin.fields.event.address'
     ];
 
     /**

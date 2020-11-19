@@ -688,6 +688,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 "lastname": "Super",
                 "phone": "0123456789",
                 "phoneConfirmed": true,
+                "postalAddress": null,
                 "zipCode": "94500",
               }
             }
@@ -1346,6 +1347,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 "lastname": "oui",
                 "phone": "0123456789",
                 "phoneConfirmed": true,
+                "postalAddress": null,
                 "zipCode": "75012",
               }
             }
@@ -2347,6 +2349,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 "lastname": "Super",
                 "phone": "0123456789",
                 "phoneConfirmed": true,
+                "postalAddress": null,
                 "zipCode": "75012",
               }
             }
@@ -2739,6 +2742,7 @@ exports[`<PersonalData /> should render with personal data not editable 1`] = `
                 "lastname": "oui",
                 "phone": "0123456789",
                 "phoneConfirmed": true,
+                "postalAddress": null,
                 "zipCode": "75012",
               }
             }

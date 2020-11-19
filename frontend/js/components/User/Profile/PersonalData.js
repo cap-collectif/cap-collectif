@@ -22,6 +22,7 @@ import config from '../../../config';
 import UserArchiveRequestButton from './UserArchiveRequestButton';
 import Popover from '../../Utils/Popover';
 import Tooltip from '../../Utils/Tooltip';
+import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 type RelayProps = {| viewer: PersonalData_viewer |};
 type Props = {|
@@ -82,6 +83,12 @@ const validate = (values: Object, props: Props) => {
     }
   }
 
+  if (props.viewer.postalAddress) {
+    if (!values.postalAddress || values.postalAddress.length === 0) {
+      errors.postalAddress = 'fill-or-delete-field';
+    }
+  }
+
   if (hasAddressData(props.viewer)) {
     const addressFields = ['address', 'address2', 'city', 'zipCode'];
     addressFields.forEach(value => {
@@ -113,6 +120,7 @@ if (config.canUseDOM && window.locale) {
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
   delete values.isFranceConnectAccount;
+  delete values.postalAddressText;
   const input = {
     ...values,
   };
@@ -141,6 +149,7 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
     !viewer.lastname &&
     !viewer.dateOfBirth &&
     !viewer.phone &&
+    !viewer.postalAddress &&
     !viewer.address &&
     !viewer.address2 &&
     !viewer.zipCode &&
@@ -156,6 +165,7 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
     !formValue.lastname &&
     !formValue.dateOfBirth &&
     !formValue.phone &&
+    !formValue.postalAddress &&
     !formValue.address &&
     !formValue.address2 &&
     !formValue.zipCode &&
@@ -239,6 +249,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       error,
       currentValues,
       intl,
+      change: changeProps,
     } = this.props;
 
     const tooltipDelete = (
@@ -703,6 +714,49 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </div>
                         </div>
                       )}
+                      {currentValues.postalAddress !== null && (
+                        <div>
+                          <div className="horizontal_field_with_border_top">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="personal-data-form-postal-address">
+                              <FormattedMessage id="form.label-postal-Address" />
+                            </label>
+                            <div>
+                              <Field
+                                id="personal-data-form-postal-address"
+                                divClassName="col-sm-4 col-xs-12"
+                                name="postalAddressText"
+                                component={component}
+                                type="address"
+                                addressProps={{
+                                  getAddress: (addressComplete: AddressComplete) =>
+                                    changeProps('postalAddress', JSON.stringify([addressComplete])),
+                                }}
+                                disabled={isSsoFcOrOccitanie(false)}
+                              />
+                            </div>
+                            {!isSsoFcOrOccitanie(!!viewer.isFranceConnectAccount) && (
+                              <div className="col-sm-4 btn--delete">
+                                <OverlayTrigger
+                                  trigger="click"
+                                  placement="top"
+                                  rootClose
+                                  ref="postalAddress"
+                                  overlay={this.popover('postalAddress')}>
+                                  <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                  <span
+                                    className="personal-data-delete-field"
+                                    id="personal-data-postalAddress">
+                                    <i className="icon cap-ios-close" />
+                                  </span>
+                                  </OverlayTrigger>
+                                </OverlayTrigger>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                   <>
@@ -770,6 +824,8 @@ const mapStateToProps = (state: State, props: Props) => ({
   initialValues: {
     firstname: props.viewer.firstname ? props.viewer.firstname : null,
     lastname: props.viewer.lastname ? props.viewer.lastname : null,
+    postalAddressText: props.viewer.postalAddress ? props.viewer.postalAddress.formatted : null,
+    postalAddress: props.viewer.postalAddress ? props.viewer.postalAddress.json : null,
     address: props.viewer.address ? props.viewer.address : null,
     address2: props.viewer.address2 ? props.viewer.address2 : null,
     city: props.viewer.city ? props.viewer.city : null,
@@ -786,6 +842,7 @@ const mapStateToProps = (state: State, props: Props) => ({
     'lastname',
     'gender',
     'dateOfBirth',
+    'postalAddress',
     'address',
     'address2',
     'city',
@@ -805,6 +862,10 @@ export default createFragmentContainer(container, {
       lastname
       dateOfBirth
       phone
+      postalAddress {
+        formatted
+        json
+      }
       address
       address2
       zipCode

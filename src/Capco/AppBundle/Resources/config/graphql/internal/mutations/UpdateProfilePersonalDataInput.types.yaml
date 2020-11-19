@@ -18,6 +18,9 @@ UpdateProfilePersonalDataInput:
       phone:
         type: 'String'
         description: 'Your phone number'
+      postalAddress:
+        type: 'String'
+        description: 'Your address, geocoded by google'
       address:
         type: 'String'
         description: 'Your address'

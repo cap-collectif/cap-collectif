@@ -411,7 +411,9 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => {
               type:
                 edge?.node?.type === 'DateOfBirthRequirement'
                   ? 'DATE_OF_BIRTH'
-                  : edge?.node?.type.slice(0, -11).toUpperCase(),
+                  : edge?.node?.type === 'PostalAddressRequirement'
+                    ? 'POSTAL_ADDRESS'
+                    : edge?.node?.type.slice(0, -11).toUpperCase(),
             })),
             requirementsReason: step.requirements?.reason || null,
             consultations: step.consultations?.edges?.map(edge => edge?.node) || [],

@@ -84,6 +84,10 @@ InternalUser:
                 type: 'Boolean!'
                 description: 'Is the personal archive of the user is being asked for the first time?'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveFirstResolver", [getUser()])'
+            postalAddress:
+                type: 'PreviewGoogleMapsAddress'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\PostalAddressResolver", [value])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             address:
                 type: 'String'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'

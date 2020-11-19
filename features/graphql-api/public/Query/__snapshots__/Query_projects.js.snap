@@ -1419,6 +1419,16 @@ Object {
               "id": "VXNlcjp1c2VyQWRtaW4=",
             },
           ],
+          "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
+        },
+      },
+      Object {
+        "node": Object {
+          "authors": Array [
+            Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+          ],
           "id": "UHJvamVjdDpwcm9qZWN0SWRm",
         },
       },
@@ -1576,7 +1586,7 @@ Object {
         },
       },
     ],
-    "totalCount": 17,
+    "totalCount": 18,
   },
 }
 `;
