@@ -693,8 +693,26 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                                               Object {
                                                                 "alias": null,
                                                                 "args": null,
-                                                                "kind": "ScalarField",
-                                                                "name": "viewerValue",
+                                                                "concreteType": "GoogleMapsAddress",
+                                                                "kind": "LinkedField",
+                                                                "name": "viewerAddress",
+                                                                "plural": false,
+                                                                "selections": Array [
+                                                                  Object {
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "kind": "ScalarField",
+                                                                    "name": "formatted",
+                                                                    "storageKey": null,
+                                                                  },
+                                                                  Object {
+                                                                    "alias": null,
+                                                                    "args": null,
+                                                                    "kind": "ScalarField",
+                                                                    "name": "json",
+                                                                    "storageKey": null,
+                                                                  },
+                                                                ],
                                                                 "storageKey": null,
                                                               },
                                                             ],
@@ -1258,8 +1276,26 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                                   Object {
                                                     "alias": null,
                                                     "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "viewerValue",
+                                                    "concreteType": "GoogleMapsAddress",
+                                                    "kind": "LinkedField",
+                                                    "name": "viewerAddress",
+                                                    "plural": false,
+                                                    "selections": Array [
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "formatted",
+                                                        "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "json",
+                                                        "storageKey": null,
+                                                      },
+                                                    ],
                                                     "storageKey": null,
                                                   },
                                                 ],
@@ -1542,7 +1578,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "3c4f59b4741619255527ce624c3b199c",
+            "cacheID": "1142ae78023152d9998706c66cb42f9a",
             "id": null,
             "metadata": Object {},
             "name": "OpinionSourceBoxQuery",
@@ -1815,7 +1851,10 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerDateOfBirth @include(if: $isAuthenticated)
         }
         ... on PostalAddressRequirement {
-          viewerValue @include(if: $isAuthenticated)
+          viewerAddress @include(if: $isAuthenticated) {
+            formatted
+            json
+          }
         }
         ... on FirstnameRequirement {
           viewerValue @include(if: $isAuthenticated)

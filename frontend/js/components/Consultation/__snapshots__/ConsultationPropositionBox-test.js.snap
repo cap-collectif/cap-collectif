@@ -2219,8 +2219,26 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                     Object {
                                                       "alias": null,
                                                       "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "viewerValue",
+                                                      "concreteType": "GoogleMapsAddress",
+                                                      "kind": "LinkedField",
+                                                      "name": "viewerAddress",
+                                                      "plural": false,
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "formatted",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "json",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
                                                       "storageKey": null,
                                                     },
                                                   ],
@@ -2332,7 +2350,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "19f24882a575d01c405e025b847de9b0",
+          "cacheID": "5608dcfc5726d3acf0a4e864ad99c257",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -2680,7 +2698,10 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerDateOfBirth @include(if: $isAuthenticated)
         }
         ... on PostalAddressRequirement {
-          viewerValue @include(if: $isAuthenticated)
+          viewerAddress @include(if: $isAuthenticated) {
+            formatted
+            json
+          }
         }
         ... on FirstnameRequirement {
           viewerValue @include(if: $isAuthenticated)
@@ -5025,8 +5046,26 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                     Object {
                                                       "alias": null,
                                                       "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "viewerValue",
+                                                      "concreteType": "GoogleMapsAddress",
+                                                      "kind": "LinkedField",
+                                                      "name": "viewerAddress",
+                                                      "plural": false,
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "formatted",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "json",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
                                                       "storageKey": null,
                                                     },
                                                   ],
@@ -5138,7 +5177,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "19f24882a575d01c405e025b847de9b0",
+          "cacheID": "5608dcfc5726d3acf0a4e864ad99c257",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationPropositionBoxQuery",
@@ -5486,7 +5525,10 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerDateOfBirth @include(if: $isAuthenticated)
         }
         ... on PostalAddressRequirement {
-          viewerValue @include(if: $isAuthenticated)
+          viewerAddress @include(if: $isAuthenticated) {
+            formatted
+            json
+          }
         }
         ... on FirstnameRequirement {
           viewerValue @include(if: $isAuthenticated)

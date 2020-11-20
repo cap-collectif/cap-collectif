@@ -6273,7 +6273,7 @@ type PostalAddressRequirement implements Node & Requirement {
   viewerMeetsTheRequirement: Boolean!
 
   """The postal address of the viewer."""
-  viewerValue: String
+  viewerAddress: GoogleMapsAddress
 }
 
 """A step inside a project."""

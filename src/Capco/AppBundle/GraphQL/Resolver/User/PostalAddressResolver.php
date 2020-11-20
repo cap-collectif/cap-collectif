@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\DTO\GoogleMapsAddress;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
@@ -23,10 +22,6 @@ class PostalAddressResolver implements ResolverInterface
      */
     public function __invoke(User $user): ?GoogleMapsAddress
     {
-        if ($addressFromApi = $user->getPostalAddress()) {
-            return GoogleMapsAddress::fromApi($addressFromApi);
-        }
-
-        return null;
+        return $user->getPostalAddress();
     }
 }

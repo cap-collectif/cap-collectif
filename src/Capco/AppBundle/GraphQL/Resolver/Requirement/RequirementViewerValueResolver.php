@@ -19,7 +19,7 @@ class RequirementViewerValueResolver implements ResolverInterface
     }
 
     /**
-     * Returns a string or a bool.
+     * Returns a string, a GoogleMapsAddress or a bool.
      */
     public function __invoke(Requirement $requirement, $viewer)
     {

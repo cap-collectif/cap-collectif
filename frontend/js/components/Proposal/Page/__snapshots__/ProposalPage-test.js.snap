@@ -6553,8 +6553,26 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "viewerValue",
+                                                  "concreteType": "GoogleMapsAddress",
+                                                  "kind": "LinkedField",
+                                                  "name": "viewerAddress",
+                                                  "plural": false,
+                                                  "selections": Array [
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "formatted",
+                                                      "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "json",
+                                                      "storageKey": null,
+                                                    },
+                                                  ],
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -6724,7 +6742,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "48a4209dfd855d0316e716a051634ca9",
+          "cacheID": "25d8f57a945660d30371ec468f393e0d",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8610,7 +8628,10 @@ fragment RequirementsForm_step_39ngnn on RequirementStep {
           viewerDateOfBirth @include(if: $isAuthenticated)
         }
         ... on PostalAddressRequirement {
-          viewerValue @include(if: $isAuthenticated)
+          viewerAddress @include(if: $isAuthenticated) {
+            formatted
+            json
+          }
         }
         ... on FirstnameRequirement {
           viewerValue @include(if: $isAuthenticated)

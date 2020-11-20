@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
-import { ConnectionHandler } from 'relay-runtime';
+import { ConnectionHandler, fetchQuery } from 'relay-runtime';
 import { Modal, Panel, Label } from 'react-bootstrap';
 import { submit, isPristine, isInvalid } from 'redux-form';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ import { closeVoteModal, vote } from '../../../redux/modules/proposal';
 import ProposalsUserVotesTable, { getFormName } from '../../Project/Votes/ProposalsUserVotesTable';
 import environment from '~/createRelayEnvironment';
 import type { GlobalState, Dispatch } from '~/types';
-import RequirementsForm, { formName } from '../../Requirements/RequirementsForm';
+import RequirementsForm, { formName, refetchViewer } from '../../Requirements/RequirementsForm';
 import UpdateProposalVotesMutation from '~/mutations/UpdateProposalVotesMutation';
 import type { ProposalVoteModal_proposal } from '~relay/ProposalVoteModal_proposal.graphql';
 import type { ProposalVoteModal_step } from '~relay/ProposalVoteModal_step.graphql';
@@ -215,7 +215,15 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   };
 
   render() {
-    const { dispatch, showModal, proposal, step, invalid, isSubmitting } = this.props;
+    const {
+      dispatch,
+      showModal,
+      proposal,
+      step,
+      invalid,
+      isSubmitting,
+      isAuthenticated,
+    } = this.props;
     const { keyboard } = this.state;
     const keyTradForModalVote = this.getModalVoteTranslation(step);
     const keyTradForModalVoteTitle = this.getModalVoteTitleTranslation(step);
@@ -287,6 +295,10 @@ export class ProposalVoteModal extends React.Component<Props, State> {
             disabled={step.requirements.totalCount > 0 ? invalid : false}
             onSubmit={() => {
               dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
+              fetchQuery(environment, refetchViewer, {
+                stepId: step.id,
+                isAuthenticated,
+              });
             }}
             label="global.save"
             isSubmitting={isSubmitting}

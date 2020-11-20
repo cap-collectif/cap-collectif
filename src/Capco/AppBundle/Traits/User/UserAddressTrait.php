@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Traits\User;
 
+use Capco\AppBundle\DTO\GoogleMapsAddress;
+
 trait UserAddressTrait
 {
     protected ?string $postalAddress;
@@ -11,7 +13,16 @@ trait UserAddressTrait
     protected ?string $neighborhood;
     protected ?string $city;
 
-    public function getPostalAddress(): ?string
+    public function getPostalAddress(): ?GoogleMapsAddress
+    {
+        if ($this->postalAddress) {
+            return GoogleMapsAddress::fromApi($this->postalAddress);
+        }
+
+        return null;
+    }
+
+    public function getPostalAddressAsJSON(): ?string
     {
         return $this->postalAddress;
     }
@@ -19,6 +30,7 @@ trait UserAddressTrait
     public function setPostalAddress(?string $postalAddress): self
     {
         $this->postalAddress = $postalAddress;
+
         return $this;
     }
 

@@ -11,9 +11,13 @@ import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePers
 import type { Dispatch, State } from '../../types';
 import DateDropdownPicker from '../Form/DateDropdownPicker';
 import environment from '../../createRelayEnvironment';
-import type { AddressComplete } from '~/components/Form/Address/Address.type';
 
 export const formName = 'requirements-form';
+
+type GoogleMapsAddress = {
+  json: string,
+  formatted: string,
+};
 
 // We can not use __generated__ relay flow type because it's wrong
 type Requirement =
@@ -27,7 +31,7 @@ type Requirement =
       +__typename: 'PostalAddressRequirement',
       +id: string,
       +viewerMeetsTheRequirement: boolean,
-      +viewerValue: ?string,
+      +viewerAddress: ?GoogleMapsAddress,
     }
   | {
       +__typename: 'CheckboxRequirement',
@@ -58,7 +62,7 @@ type Props = {
   isAuthenticated: boolean,
 };
 
-const refetchViewer = graphql`
+export const refetchViewer = graphql`
   query RequirementsForm_userQuery($stepId: ID!, $isAuthenticated: Boolean!) {
     step: node(id: $stepId) {
       ... on RequirementStep {
@@ -79,7 +83,11 @@ export const validate = (values: FormValues, props: Props) => {
   for (const edge of edges.filter(Boolean)) {
     const requirement = edge.node;
     if (!values[requirement.id]) {
-      errors[requirement.id] = 'global.required';
+      const fieldName =
+        requirement.__typename === 'PostalAddressRequirement'
+          ? 'PostalAddressText'
+          : requirement.id;
+      errors[fieldName] = 'global.required';
     } else if (requirement.__typename === 'PhoneRequirement') {
       const phone = values[requirement.id];
       if (
@@ -90,6 +98,7 @@ export const validate = (values: FormValues, props: Props) => {
       }
     }
   }
+
   return errors;
 };
 
@@ -214,8 +223,7 @@ const getFormProps = (requirement: Requirement, change: any) => {
       type: 'address',
       divClassName: 'col-sm-12 col-xs-12',
       addressProps: {
-        getAddress: (addressComplete: AddressComplete) =>
-          change(requirement.id, JSON.stringify([addressComplete])),
+        getAddress: addressComplete => change(requirement.id, JSON.stringify([addressComplete])),
       },
     };
   }
@@ -291,7 +299,7 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
     return requirement.viewerDateOfBirth;
   }
   if (requirement.__typename === 'PostalAddressRequirement') {
-    return requirement.viewerValue;
+    return requirement.viewerAddress ? requirement.viewerAddress.json : null;
   }
 
   return requirement.viewerValue;
@@ -303,13 +311,21 @@ const mapStateToProps = (state: State, { step }: Props) => ({
     ? step.requirements.edges
         .filter(Boolean)
         .map(edge => edge.node)
-        .reduce(
-          (initialValues, requirement) => ({
+        .reduce((initialValues, requirement) => {
+          if (requirement.__typename === 'PostalAddressRequirement') {
+            return {
+              ...initialValues,
+              PostalAddressText: requirement.viewerAddress
+                ? requirement.viewerAddress.formatted
+                : null,
+              [requirement.id]: getRequirementInitialValue(requirement),
+            };
+          }
+          return {
             ...initialValues,
             [requirement.id]: getRequirementInitialValue(requirement),
-          }),
-          {},
-        )
+          };
+        }, {})
     : {},
 });
 
@@ -329,7 +345,10 @@ export default createFragmentContainer(container, {
               viewerDateOfBirth @include(if: $isAuthenticated)
             }
             ... on PostalAddressRequirement {
-              viewerValue @include(if: $isAuthenticated)
+              viewerAddress @include(if: $isAuthenticated) {
+                formatted
+                json
+              }
             }
             ... on FirstnameRequirement {
               viewerValue @include(if: $isAuthenticated)
