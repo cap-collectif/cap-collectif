@@ -6724,7 +6724,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7293a5b7110255e82949b0c55a00ab6e",
+          "cacheID": "48a4209dfd855d0316e716a051634ca9",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7292,23 +7292,6 @@ fragment ProposalDetailAdvancement_proposal on Proposal {
     endAt
     id
   }
-  project {
-    id
-    steps(orderBy: {field: POSITION, direction: ASC}) {
-      enabled
-      id
-      title
-      __typename
-      timeless
-      timeRange {
-        startAt
-        endAt
-      }
-      ... on SelectionStep {
-        allowingProgressSteps
-      }
-    }
-  }
 }
 
 fragment ProposalDetailEstimation_proposal on Proposal {
@@ -7585,6 +7568,44 @@ fragment ProposalMediaResponse_medias on Media {
 
 fragment ProposalPageAdvancement_proposal on Proposal {
   ...ProposalDetailAdvancement_proposal
+  status {
+    name
+    color
+    id
+  }
+  selections {
+    step {
+      id
+    }
+    status {
+      name
+      color
+      id
+    }
+  }
+  progressSteps {
+    title
+    startAt
+    endAt
+    id
+  }
+  project {
+    id
+    steps(orderBy: {field: POSITION, direction: ASC}) {
+      enabled
+      id
+      title
+      __typename
+      timeless
+      timeRange {
+        startAt
+        endAt
+      }
+      ... on SelectionStep {
+        allowingProgressSteps
+      }
+    }
+  }
 }
 
 fragment ProposalPageAlert_proposal on Proposal {

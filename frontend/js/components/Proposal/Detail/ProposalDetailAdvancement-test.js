@@ -6,47 +6,8 @@ import { ProposalDetailAdvancement } from './ProposalDetailAdvancement';
 import { $refType } from '../../../mocks';
 
 describe('<ProposalDetailAdvancement />', () => {
-  const project = {
-    id: '4',
-    steps: [
-      {
-        id: '1',
-        __typename: 'CollectStep',
-        timeless: false,
-        timeRange: {
-          endAt: 'endAt',
-          startAt: 'startAt',
-        },
-        title: 'Collecte 1',
-        enabled: true,
-      },
-      {
-        id: '2',
-        __typename: 'SelectionStep',
-        timeless: false,
-        timeRange: {
-          endAt: 'endAt',
-          startAt: 'startAt',
-        },
-        title: 'Selection 1',
-        enabled: false,
-      },
-      {
-        id: '3',
-        __typename: 'SelectionStep',
-        timeless: false,
-        timeRange: {
-          endAt: 'endAt',
-          startAt: 'startAt',
-        },
-        title: 'Selection 2',
-        enabled: true,
-      },
-    ],
-  };
   const proposal = {
     id: '3',
-    project,
     status: null,
     $refType,
     selections: [
@@ -63,8 +24,35 @@ describe('<ProposalDetailAdvancement />', () => {
     progressSteps: [],
   };
 
+  const steps = [
+    {
+      id: '2',
+      __typename: 'SelectionStep',
+      timeless: false,
+      timeRange: {
+        endAt: 'endAt',
+        startAt: 'startAt',
+      },
+      title: 'Selection 1',
+      enabled: false,
+    },
+    {
+      id: '3',
+      __typename: 'CollectStep',
+      timeless: false,
+      timeRange: {
+        endAt: 'endAt',
+        startAt: 'startAt',
+      },
+      title: 'Collect 1',
+      enabled: true,
+    },
+  ];
+
   it('should render steps with according colors', () => {
-    const wrapper = shallow(<ProposalDetailAdvancement proposal={proposal} />);
+    const wrapper = shallow(
+      <ProposalDetailAdvancement proposal={proposal} displayedSteps={steps} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

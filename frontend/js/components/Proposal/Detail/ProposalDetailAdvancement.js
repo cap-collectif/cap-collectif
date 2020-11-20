@@ -87,9 +87,7 @@ const generateProgressStepsWithColorAndStatus = (progressSteps: $ReadOnlyArray<O
   return steps;
 };
 
-type Props = {| proposal: ProposalDetailAdvancement_proposal |};
-
-type Step = {|
+export type Step = {|
   id: string,
   title: string,
   __typename: string,
@@ -105,6 +103,8 @@ type Step = {|
   isFuture?: boolean,
   allowingProgressSteps?: boolean,
 |};
+
+type Props = {| proposal: ProposalDetailAdvancement_proposal, displayedSteps: Array<Step> |};
 
 export class ProposalDetailAdvancement extends React.Component<Props> {
   getStatus = (step: Step) => {
@@ -124,35 +124,10 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
     return null;
   };
 
-  getMutableSteps = (proposal: ProposalDetailAdvancement_proposal) => {
-    if (!proposal.project || !proposal.project.steps) return [];
-    return proposal.project.steps.slice().map<$Shape<Step>>(step => Object.assign({}, step)); // $Shape & Object.assign allow modification of the steps
-  };
-
   render() {
-    const { proposal } = this.props;
+    const { proposal, displayedSteps } = this.props;
     if (!proposal) return null;
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
-    const { selections } = proposal;
-    const steps = this.getMutableSteps(proposal);
-
-    for (const step of steps) {
-      step.isSelected =
-        step.__typename === 'CollectStep' ||
-        selections.map(selection => selection.step.id).includes(step.id);
-    }
-    let consideredCurrent = { step: steps[0], position: 0 };
-    for (const [position, step] of steps.entries()) {
-      if (step.isSelected) {
-        consideredCurrent = { step, position };
-      }
-    }
-    for (const [position, step] of steps.entries()) {
-      step.isCurrent = step.id === consideredCurrent.step.id;
-      step.isPast = position < consideredCurrent.position;
-      step.isFuture = position > consideredCurrent.position;
-    }
-    const displayedSteps = steps.filter(step => (step.isSelected || step.isFuture) && step.enabled);
     return (
       <>
         {displayedSteps.map((step, index) => {
@@ -234,23 +209,6 @@ export default createFragmentContainer(ProposalDetailAdvancement, {
         title
         startAt
         endAt
-      }
-      project {
-        id
-        steps(orderBy: { field: POSITION, direction: ASC }) {
-          enabled
-          id
-          title
-          __typename
-          timeless
-          timeRange {
-            startAt
-            endAt
-          }
-          ... on SelectionStep {
-            allowingProgressSteps
-          }
-        }
       }
     }
   `,
