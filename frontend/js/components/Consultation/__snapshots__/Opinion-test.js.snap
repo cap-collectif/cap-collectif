@@ -6,7 +6,9 @@ exports[`<Opinion /> renders correcty 1`] = `
   className="list-group-item__opinion opinion text-left has-chart"
   listItem={false}
 >
-  <Opinion__OpinionContainer>
+  <Opinion__OpinionContainer
+    isFlex={false}
+  >
     <Relay(OpinionPreview)
       opinion={
         Object {

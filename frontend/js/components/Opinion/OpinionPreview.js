@@ -27,7 +27,7 @@ class OpinionPreview extends React.Component<Props> {
     const { opinion, rankingThreshold, showUpdatedDate, isProfile } = this.props;
 
     return (
-      <React.Fragment>
+      <div>
         {opinion.__typename === 'Version' && isProfile && (
           <p>
             <FormattedMessage id="admin.fields.opinion.link" />
@@ -48,12 +48,20 @@ class OpinionPreview extends React.Component<Props> {
             opinion={opinion}
             showUpdatedDate={showUpdatedDate}
           />
+          <div className="web">
+            <TrashedMessage contribution={opinion}>
+              <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
+            </TrashedMessage>
+            <OpinionPreviewCounters opinion={opinion} />
+          </div>
+        </Media.Body>
+        <div className="opinion__body mt-10 mobile">
           <TrashedMessage contribution={opinion}>
             <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
           </TrashedMessage>
           <OpinionPreviewCounters opinion={opinion} />
-        </Media.Body>
-      </React.Fragment>
+        </div>
+      </div>
     );
   }
 }

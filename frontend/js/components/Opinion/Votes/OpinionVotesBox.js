@@ -26,7 +26,7 @@ export class OpinionVotesBox extends React.Component<Props> {
           </p>
         )}
         <Row>
-          <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
+          <Col sm={12} md={8} style={{ padding: '15px 5px' }}>
             <OpinionVotesButtons opinion={opinion} />
             <OpinionVotesBar opinion={opinion} />
           </Col>

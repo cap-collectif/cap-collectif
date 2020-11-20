@@ -33,8 +33,7 @@ export class ArgumentItem extends React.Component<Props> {
     }
 
     return (
-      <span className="excerpt small">
-        {' • '}
+      <div className="excerpt small">
         <FormattedDate
           value={moment(argument.publishedAt ? argument.publishedAt : argument.createdAt)}
           day="numeric"
@@ -43,7 +42,7 @@ export class ArgumentItem extends React.Component<Props> {
           hour="numeric"
           minute="numeric"
         />
-      </span>
+      </div>
     );
   };
 
@@ -93,7 +92,8 @@ export class ArgumentItem extends React.Component<Props> {
                 )}
               </div>
             </div>
-
+          </Media.Body>
+          <div className="opinion__body">
             <TrashedMessage contribution={argument}>
               <p className="opinion__text">
                 <Linkify properties={{ className: 'external-link' }}>
@@ -102,7 +102,7 @@ export class ArgumentItem extends React.Component<Props> {
               </p>
             </TrashedMessage>
             <ArgumentButtons argument={argument} />
-          </Media.Body>
+          </div>
         </Media>
       </ListGroupItem>
     );

@@ -38,10 +38,9 @@ exports[`<ArgumentItem /> render correcty 1`] = `
               }
             }
           />
-          <span
+          <div
             className="excerpt small"
           >
-             • 
             <FormattedDate
               day="numeric"
               hour="numeric"
@@ -50,7 +49,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
               value={"2018-04-09T21:21:06.000Z"}
               year="numeric"
             />
-          </span>
+          </div>
           <Relay(Connect(UnpublishedLabel))
             publishable={
               Object {
@@ -76,6 +75,10 @@ exports[`<ArgumentItem /> render correcty 1`] = `
           />
         </div>
       </div>
+    </Body>
+    <div
+      className="opinion__body"
+    >
       <Relay(TrashedMessage)
         contribution={
           Object {
@@ -138,7 +141,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
           }
         }
       />
-    </Body>
+    </div>
   </Media>
 </ListGroupItem>
 `;
@@ -193,10 +196,9 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
               }
             }
           />
-          <span
+          <div
             className="excerpt small"
           >
-             • 
             <FormattedDate
               day="numeric"
               hour="numeric"
@@ -205,7 +207,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
               value={"2018-04-09T21:21:06.000Z"}
               year="numeric"
             />
-          </span>
+          </div>
           <Relay(Connect(UnpublishedLabel))
             publishable={
               Object {
@@ -242,6 +244,10 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
           </Label>
         </div>
       </div>
+    </Body>
+    <div
+      className="opinion__body"
+    >
       <Relay(TrashedMessage)
         contribution={
           Object {
@@ -304,7 +310,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
           }
         }
       />
-    </Body>
+    </div>
   </Media>
 </ListGroupItem>
 `;

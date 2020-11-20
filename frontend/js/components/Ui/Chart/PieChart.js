@@ -3,6 +3,7 @@ import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { Cell, Pie, PieChart as Chart, ResponsiveContainer, Tooltip } from 'recharts';
 import defaultColors from '../../../utils/colors';
+import config from '~/config';
 
 type Data = {
   name: string,
@@ -47,7 +48,7 @@ const ContentWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs
 export class PieChart extends React.Component<Props> {
   static defaultProps = {
     height: '95px',
-    width: '115px',
+    width: config.isMobile ? '95px' : '115px',
     innerRadius: 10,
     outerRadius: 45,
   };

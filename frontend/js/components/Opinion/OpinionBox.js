@@ -14,6 +14,7 @@ import type { OpinionBox_opinion } from '~relay/OpinionBox_opinion.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
 import ListGroup from '../Ui/List/ListGroup';
 import { translateContent } from '~/utils/ContentTranslator';
+import { OpinionContainer } from '../Consultation/Opinion';
 
 type Props = {|
   +opinion: { ...OpinionBox_opinion, __typename: 'Version' | 'Opinion' },
@@ -69,13 +70,13 @@ export class OpinionBox extends React.Component<Props> {
             </div>
             <ListGroup className="mb-0">
               <ListGroupItem className="list-group-item__opinion no-border">
-                <div className="left-block">
+                <OpinionContainer>
                   <OpinionPreview
                     rankingThreshold={rankingThreshold}
                     opinion={opinion}
                     showUpdatedDate
                   />
-                </div>
+                </OpinionContainer>
               </ListGroupItem>
             </ListGroup>
           </div>

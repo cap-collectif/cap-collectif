@@ -9,6 +9,7 @@ import type { ArgumentListViewPaginated_argumentable } from '~relay/ArgumentList
 import ArgumentItem from './ArgumentItem';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { ArgumentType } from '../../types';
+import config from '~/config';
 
 type Props = {|
   +relay: RelayPaginationProp,
@@ -20,7 +21,7 @@ type State = {|
   +loading: boolean,
 |};
 
-const ARGUMENTS_PAGINATION = 25;
+const ARGUMENTS_PAGINATION = config.isMobile ? 3 : 25;
 
 export class ArgumentListViewPaginated extends React.Component<Props, State> {
   state = {

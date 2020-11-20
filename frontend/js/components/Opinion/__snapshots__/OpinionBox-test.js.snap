@@ -79,9 +79,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
           className="list-group-item__opinion no-border"
           listItem={false}
         >
-          <div
-            className="left-block"
-          >
+          <Opinion__OpinionContainer>
             <Relay(OpinionPreview)
               opinion={
                 Object {
@@ -99,7 +97,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
               rankingThreshold={0}
               showUpdatedDate={true}
             />
-          </div>
+          </Opinion__OpinionContainer>
         </ListGroupItem>
       </ListGroup>
     </div>
