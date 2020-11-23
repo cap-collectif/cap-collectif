@@ -14,7 +14,7 @@ framework:
     http_client:
         scoped_clients:
             tipsmeee.client:
-                base_uri: 'https://api-stage.tipsmeee.com/'
+                base_uri: 'https://api.tipsmeee.com/'
 swiftmailer:
     default_mailer: mandrill
 
