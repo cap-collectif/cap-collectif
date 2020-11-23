@@ -77,6 +77,8 @@ export const styleGuideColors = {
   blue800: '#003670',
   white: '#ffffff',
   yellow700: '#a87e00',
+  green500: '#46d267',
+  red500: '#dd3c4c',
 };
 
 export const socialColors = {

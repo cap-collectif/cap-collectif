@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VoteView /> should not render when our ouf range percentage 1`] = `""`;
+
+exports[`<VoteView /> should render correctly 1`] = `
+<VoteViewstyle__Container
+  key="42"
+  left={42}
+  right={58}
+>
+  <div>
+    <div>
+      <div
+        className="circle"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <div
+        className="circle red"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <span>
+      <span
+        className="progressBar"
+      />
+    </span>
+    <span>
+      <span
+        className="progressBar red"
+      />
+    </span>
+  </div>
+  <div>
+    <span>
+      42%
+    </span>
+    <span>
+      58%
+    </span>
+  </div>
+</VoteViewstyle__Container>
+`;
+
+exports[`<VoteView /> should render correctly when 0% positive 1`] = `
+<VoteViewstyle__Container
+  key="0"
+  left={0}
+  right={100}
+>
+  <div>
+    <div
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <div
+        className="circle red"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble reverse"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <span>
+      <span
+        className="progressBar"
+      />
+    </span>
+    <span>
+      <span
+        className="progressBar red"
+      />
+    </span>
+  </div>
+  <div>
+    <span>
+      0%
+    </span>
+  </div>
+</VoteViewstyle__Container>
+`;
+
+exports[`<VoteView /> should render correctly when 100% positive 1`] = `
+<VoteViewstyle__Container
+  key="100"
+  left={100}
+  right={0}
+>
+  <div>
+    <div>
+      <div
+        className="circle"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+      <div
+        className="bubble"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="circle red"
+      >
+        <Icon
+          color="#ffffff"
+          name="thumb-o"
+          size={30}
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <span>
+      <span
+        className="progressBar"
+      />
+    </span>
+    <span>
+      <span
+        className="progressBar red"
+      />
+    </span>
+  </div>
+  <div>
+    <span>
+      100%
+    </span>
+  </div>
+</VoteViewstyle__Container>
+`;
