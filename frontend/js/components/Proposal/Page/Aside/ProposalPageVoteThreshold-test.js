@@ -8,13 +8,12 @@ import { $refType, intlMock } from '~/mocks';
 describe('<ProposalPageVoteThreshold />', () => {
   const proposal = {
     $refType,
-    id: '1',
     votes: {
       totalCount: 30,
       totalPointsCount: 10,
     },
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {
@@ -25,13 +24,11 @@ describe('<ProposalPageVoteThreshold />', () => {
 
   const stepWithVoteThreshold = {
     $refType,
-    id: '42',
     voteThreshold: 100,
   };
 
   const stepWithVoteThresholdReached = {
     $refType,
-    id: '42',
     voteThreshold: 20,
   };
 

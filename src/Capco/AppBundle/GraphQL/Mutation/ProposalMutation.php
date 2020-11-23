@@ -598,6 +598,14 @@ class ProposalMutation implements ContainerAwareInterface
             unset($values['district']);
         }
 
+        if (
+            isset($values['tipsmeeeId']) &&
+            (!$toggleManager->isActive(Manager::unstable__tipsmeee) ||
+                !$proposalForm->isUsingTipsmeee())
+        ) {
+            unset($values['tipsmeeeId']);
+        }
+
         if (isset($values['address']) && !$proposalForm->getUsingAddress()) {
             unset($values['address']);
         }

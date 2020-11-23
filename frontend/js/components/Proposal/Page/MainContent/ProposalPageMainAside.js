@@ -9,6 +9,7 @@ import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPa
 import type { ProposalPageMainAside_proposal } from '~relay/ProposalPageMainAside_proposal.graphql';
 import { type GlobalState, type FeatureToggles } from '~/types';
 import { bootstrapGrid } from '~/utils/sizes';
+import ProposalTipsMeeeAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeAside';
 
 type Props = {
   proposal: ProposalPageMainAside_proposal,
@@ -71,6 +72,9 @@ export const ProposalPageMainAside = ({ proposal, features, display }: Props) =>
           )}
       </div>
       <ProposalPageAdvancement proposal={proposal} />
+      {proposal && proposal.form.usingTipsmeee && features.unstable__tipsmeee && (
+        <ProposalTipsMeeeAside proposal={proposal} />
+      )}
     </Container>
   );
 };
@@ -86,6 +90,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMain
       id
       ...ProposalPageMetadata_proposal
       ...ProposalPageAdvancement_proposal
+      ...ProposalTipsMeeeAside_proposal
       ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
       currentVotableStep {
         id
@@ -97,6 +102,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMain
       form {
         usingCategories
         usingThemes
+        usingTipsmeee
       }
     }
   `,

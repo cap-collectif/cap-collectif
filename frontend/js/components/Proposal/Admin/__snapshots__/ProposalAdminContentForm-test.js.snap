@@ -44,7 +44,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "districts": Array [],
           "id": "form1",
           "illustrationHelpText": "Illustration Help",
-          "isProposalForm": true,
+          "objectType": "PROPOSAL",
           "proposalInAZoneRequired": true,
           "questions": Array [
             Object {
@@ -74,9 +74,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             },
           ],
           "step": Object {
-            "form": Object {
-              "isProposalForm": true,
-            },
             "id": "step1",
             "project": Object {
               "type": Object {
@@ -88,6 +85,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "summaryHelpText": "Summary Help",
           "themeHelpText": "Theme Help",
           "themeMandatory": true,
+          "tipsmeeeHelpText": null,
           "titleHelpText": "Title help",
           "usingAddress": true,
           "usingCategories": true,
@@ -96,6 +94,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "usingIllustration": true,
           "usingSummary": true,
           "usingThemes": true,
+          "usingTipsmeee": false,
         },
         "id": "1",
         "media": Object {
@@ -510,7 +509,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "districts": Array [],
           "id": "form1",
           "illustrationHelpText": "Illustration Help",
-          "isProposalForm": true,
+          "objectType": "PROPOSAL",
           "proposalInAZoneRequired": true,
           "questions": Array [
             Object {
@@ -540,9 +539,6 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
             },
           ],
           "step": Object {
-            "form": Object {
-              "isProposalForm": true,
-            },
             "id": "step1",
             "project": Object {
               "type": Object {
@@ -554,6 +550,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "summaryHelpText": "Summary Help",
           "themeHelpText": "Theme Help",
           "themeMandatory": true,
+          "tipsmeeeHelpText": null,
           "titleHelpText": "Title help",
           "usingAddress": true,
           "usingCategories": true,
@@ -562,6 +559,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
           "usingIllustration": true,
           "usingSummary": true,
           "usingThemes": true,
+          "usingTipsmeee": false,
         },
         "id": "1",
         "media": Object {
@@ -959,7 +957,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
                 "districts": Array [],
                 "id": "form1",
                 "illustrationHelpText": "Illustration Help",
-                "isProposalForm": true,
+                "objectType": "PROPOSAL",
                 "proposalInAZoneRequired": true,
                 "questions": Array [
                   Object {
@@ -989,9 +987,6 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
                   },
                 ],
                 "step": Object {
-                  "form": Object {
-                    "isProposalForm": true,
-                  },
                   "id": "step1",
                   "project": Object {
                     "type": Object {
@@ -1003,6 +998,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
                 "summaryHelpText": "Summary Help",
                 "themeHelpText": "Theme Help",
                 "themeMandatory": true,
+                "tipsmeeeHelpText": null,
                 "titleHelpText": "Title help",
                 "usingAddress": true,
                 "usingCategories": true,
@@ -1011,6 +1007,7 @@ exports[`<ProposalAdminContentForm /> render correctly with proposals revisions 
                 "usingIllustration": true,
                 "usingSummary": true,
                 "usingThemes": true,
+                "usingTipsmeee": false,
               },
               "id": "1",
               "media": Object {

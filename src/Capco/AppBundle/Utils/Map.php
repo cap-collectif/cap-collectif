@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 final class Map
 {
-    private $apiServerKey;
+    private string $apiServerKey;
 
     public function __construct(string $apiSeverKey)
     {

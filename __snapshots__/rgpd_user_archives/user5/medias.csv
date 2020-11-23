@@ -1,2 +1,3 @@
 ﻿id,name,enabled,authorName,description,contentType,size,url,providerReference
+imageCafetier,imageCafetier,1,,,image/png,572618,https://capco.dev/media/default/0001/01/cafetier.png,cafetier.png
 gymnase,Gymnase,1,,,image/jpeg,35283,https://capco.dev/media/default/0001/01/gymnase.jpg,gymnase.jpg

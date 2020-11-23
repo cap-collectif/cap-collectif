@@ -192,18 +192,26 @@ export const ProposalPageHeader = ({
     />
   );
   const modified = moment(proposal?.updatedAt).diff(proposal?.createdAt, 'seconds') > 1;
-  const tradKeyToBack = proposal?.form.isProposalForm
-    ? isInterpellationContextFromProposal(proposal)
+  const tradKeyToBack =
+    proposal?.form.objectType === 'PROPOSAL' && isInterpellationContextFromProposal(proposal)
       ? 'interpellation.back'
-      : 'proposal.back'
-    : 'questions-list';
+      : proposal?.form.objectType === 'PROPOSAL'
+      ? 'proposal.back'
+      : proposal?.form.objectType === 'ESTABLISHMENT'
+      ? 'establishment-back'
+      : proposal?.form.objectType === 'QUESTION'
+      ? 'questions-list'
+      : null;
+
   return (
     <Header id="ProposalPageHeader">
       <div>
         <HeaderActions>
           <a href={referer || proposal.url}>
             <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
-            <FormattedMessage id={tradKeyToBack} />
+            {tradKeyToBack && (
+              <FormattedMessage id={tradKeyToBack} />
+            )}
           </a>
           {hasAnalysingButton && (
             <button type="button" id="side-analysis-open-button" onClick={onAnalysisClick}>
@@ -298,7 +306,6 @@ export default createFragmentContainer(container, {
         url
       }
       category {
-        name
         icon
         color
         categoryImage {
@@ -307,21 +314,16 @@ export default createFragmentContainer(container, {
           }
         }
       }
-      theme {
-        title
-      }
       author {
         username
         ...UserAvatar_user
       }
       createdAt
       publishedAt
-      draft
       updatedAt
       url
       form {
-        isProposalForm
-        canContact
+        objectType
       }
       ...interpellationLabelHelper_proposal @relay(mask: false)
     }

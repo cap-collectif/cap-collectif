@@ -102,7 +102,6 @@ export default createPaginationContainer(
           status: $status
           userType: $userType
         ) @connection(key: "ProposalListViewPaginated_proposals", filters: []) {
-          totalCount
           ...ProposalList_proposals
           edges {
             node {

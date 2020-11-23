@@ -127,3 +127,6 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__debate")'
             proposal_revisions:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::proposal_revisions")'
+            unstable__tipsmeee:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__tipsmeee")'
+                description: 'Whether or not an admin can use `TIPSmeee`. Used in dev only.'

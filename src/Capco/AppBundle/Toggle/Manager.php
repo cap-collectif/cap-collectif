@@ -69,6 +69,7 @@ class Manager
     public const unstable__emailing = 'unstable__emailing';
     public const unstable__debate = 'unstable__debate';
     public const proposal_revisions = 'proposal_revisions';
+    public const unstable__tipsmeee = 'unstable__tipsmeee';
 
     public static $toggles = [
         self::graphql_query_analytics,
@@ -132,7 +133,9 @@ class Manager
         self::unstable__emailing,
         self::unstable__debate,
         self::proposal_revisions,
+        self::unstable__tipsmeee,
     ];
+
     protected $toggleManager;
 
     protected $context;

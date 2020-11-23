@@ -612,6 +612,20 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "usingTipsmeee",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "tipsmeeeHelpText",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "allowAknowledge",
                       "storageKey": null,
                     },
@@ -619,7 +633,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "isProposalForm",
+                      "name": "objectType",
                       "storageKey": null,
                     },
                     Object {
@@ -1856,7 +1870,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "428857c8e4c9c10782a8f5fd13182c8e",
+          "cacheID": "ba44474cbc93aec170ff6e27d733fc5f",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2014,8 +2028,10 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
   usingDistrict
   districtHelpText
   districtMandatory
+  usingTipsmeee
+  tipsmeeeHelpText
   allowAknowledge
-  isProposalForm
+  objectType
   districts {
     id
     translations {

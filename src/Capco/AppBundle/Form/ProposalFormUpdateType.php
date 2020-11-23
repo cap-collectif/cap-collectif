@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -18,6 +18,13 @@ use Capco\AppBundle\Entity\ProposalCategory;
 
 class ProposalFormUpdateType extends AbstractType
 {
+    protected Manager $toggleManager;
+
+    public function __construct(Manager $toggleManager)
+    {
+        $this->toggleManager = $toggleManager;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -124,11 +131,20 @@ class ProposalFormUpdateType extends AbstractType
             ])
 
             ->add('allowAknowledge', CheckboxType::class)
-            ->add('isProposalForm', CheckboxType::class)
+            ->add('objectType', TextType::class)
             ->add('canContact', CheckboxType::class)
             ->add('isGridViewEnabled', CheckboxType::class)
             ->add('isListViewEnabled', CheckboxType::class)
             ->add('isMapViewEnabled', CheckboxType::class);
+
+        if ($this->toggleManager->isActive(Manager::unstable__tipsmeee)) {
+            $builder
+                ->add('usingTipsmeee', CheckboxType::class)
+                ->add('tipsmeeeHelpText', TextType::class, [
+                    'purify_html' => true,
+                    'purify_html_profile' => 'default',
+                ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

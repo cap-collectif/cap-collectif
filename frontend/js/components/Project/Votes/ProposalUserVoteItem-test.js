@@ -24,7 +24,7 @@ describe('<ProposalUserVoteItem />', () => {
     votesRanking: false,
     voteType: 'SIMPLE',
     form: {
-      isProposalForm: false,
+      objectType: 'QUESTION',
     },
     project: {
       type: {
@@ -59,7 +59,7 @@ describe('<ProposalUserVoteItem />', () => {
     votesRanking: false,
     voteType: 'SIMPLE',
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {

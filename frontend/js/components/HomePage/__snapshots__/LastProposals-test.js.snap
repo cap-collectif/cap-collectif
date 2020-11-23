@@ -335,7 +335,14 @@ exports[`<LastProposals /> should render correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "isProposalForm",
+                          "name": "objectType",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingTipsmeee",
                           "storageKey": null,
                         },
                         Object {
@@ -343,6 +350,31 @@ exports[`<LastProposals /> should render correctly 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "id",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "TipsMeee",
+                      "kind": "LinkedField",
+                      "name": "tipsmeee",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "donationTotalCount",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "donationCount",
                           "storageKey": null,
                         },
                       ],
@@ -612,7 +644,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "27d557557fd49b804697f35e21432881",
+          "cacheID": "694e56b797bb23092273f7ed96695c9a",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -680,6 +712,10 @@ fragment ProposalPreviewBody_proposal_1nwaua on Proposal {
   trashedStatus
   url
   summaryOrBodyExcerpt
+  form {
+    objectType
+    id
+  }
   media {
     url
     name
@@ -707,8 +743,13 @@ fragment ProposalPreviewFooter_proposal_2tPna9 on Proposal {
   id
   form {
     commentable
-    isProposalForm
+    objectType
+    usingTipsmeee
     id
+  }
+  tipsmeee {
+    donationTotalCount
+    donationCount
   }
   comments {
     totalCount

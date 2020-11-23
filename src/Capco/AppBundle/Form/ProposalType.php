@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 class ProposalType extends AbstractType
 {
-    protected $toggleManager;
+    protected Manager $toggleManager;
     private $cache;
     private $autoCompleteDocQueryResolver;
     private $autoCompleteFromSiretQueryResolver;
@@ -28,8 +28,8 @@ class ProposalType extends AbstractType
         RedisCache $cache,
         AutoCompleteDocQueryResolver $autoCompleteDocQueryResolver,
         AutoCompleteFromSiretQueryResolver $autoCompleteFromSiretQueryResolver,
-        Manager $toggleManager)
-    {
+        Manager $toggleManager
+    ) {
         $this->toggleManager = $toggleManager;
         $this->cache = $cache;
         $this->autoCompleteDocQueryResolver = $autoCompleteDocQueryResolver;
@@ -61,7 +61,7 @@ class ProposalType extends AbstractType
                 'purify_html_profile' => 'default',
             ]);
 
-        if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
+        if ($this->toggleManager->isActive(Manager::themes) && $form->isUsingThemes()) {
             $builder->add('theme');
         }
 
@@ -69,7 +69,14 @@ class ProposalType extends AbstractType
             $builder->add('category');
         }
 
-        if ($this->toggleManager->isActive('districts') && $form->isUsingDistrict()) {
+        if (
+            $this->toggleManager->isActive(Manager::unstable__tipsmeee) &&
+            $form->isUsingTipsmeee()
+        ) {
+            $builder->add('tipsmeeeId');
+        }
+
+        if ($this->toggleManager->isActive(Manager::districts) && $form->isUsingDistrict()) {
             $builder->add('district');
         }
 
@@ -88,9 +95,12 @@ class ProposalType extends AbstractType
 
         $builder->add('media');
 
-        $builder->addEventSubscriber(new PreFillProposalFormSubscriber(
-            $this->cache, $this->autoCompleteDocQueryResolver,
-            $this->autoCompleteFromSiretQueryResolver)
+        $builder->addEventSubscriber(
+            new PreFillProposalFormSubscriber(
+                $this->cache,
+                $this->autoCompleteDocQueryResolver,
+                $this->autoCompleteFromSiretQueryResolver
+            )
         );
     }
 

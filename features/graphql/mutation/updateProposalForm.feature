@@ -33,7 +33,7 @@ Scenario: GraphQL client wants to update a proposal form
               usingSummary
               usingIllustration
               descriptionMandatory
-              isProposalForm
+              objectType
               proposalInAZoneRequired
               mapCenter {
                 lat
@@ -98,7 +98,7 @@ Scenario: GraphQL client wants to update a proposal form
         "usingSummary": true,
         "usingIllustration": true,
         "descriptionMandatory": true,
-        "isProposalForm": true,
+        "objectType": "PROPOSAL",
         "mapCenter": "[{\"geometry\":{\"location_type\":\"GEOMETRIC_CENTER\",\"location\":{\"lat\":\"42\",\"lng\":\"0\"}}}]",
         "zoomMap": 0,
         "commentable": true,
@@ -180,7 +180,7 @@ Scenario: GraphQL client wants to update a proposal form
             "usingSummary":true,
             "usingIllustration":true,
             "descriptionMandatory":true,
-            "isProposalForm":true,
+            "objectType":"PROPOSAL",
             "proposalInAZoneRequired":true,
             "mapCenter": {
               "lat": 42,
@@ -767,5 +767,85 @@ Scenario: GraphQL admin wants to disable all views and fails
     "data": {
       "updateProposalForm": null
     }
+  }
+  """
+
+@database
+Scenario: GraphQL admin wants to add tipsmeee
+  Given feature "unstable__tipsmeee" is enabled
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateProposalFormInput!) {
+      updateProposalForm(input: $input) {
+        proposalForm {
+          id
+          usingTipsmeee
+          tipsmeeeHelpText
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalFormId": "proposalForm13",
+        "usingTipsmeee": true,
+        "tipsmeeeHelpText": "Entrez votre code tipsmeee ici"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "updateProposalForm":{
+           "proposalForm":{
+              "id":"proposalform13",
+              "usingTipsmeee":true,
+              "tipsmeeeHelpText":"Entrez votre code tipsmeee ici"
+           }
+        }
+     }
+  }
+  """
+
+@database
+Scenario: GraphQL admin wants to add tipsmeee but feature is disable
+  Given I disable feature "unstable__tipsmeee"
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateProposalFormInput!) {
+      updateProposalForm(input: $input) {
+        proposalForm {
+          id
+          usingTipsmeee
+          tipsmeeeHelpText
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalFormId": "proposalForm13",
+        "usingTipsmeee": true,
+        "tipsmeeeHelpText": "Entrez votre code tipsmeee ici"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "updateProposalForm":{
+           "proposalForm":{
+              "id":"proposalform13",
+              "usingTipsmeee":false,
+              "tipsmeeeHelpText":null
+           }
+        }
+     }
   }
   """

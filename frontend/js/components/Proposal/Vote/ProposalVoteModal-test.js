@@ -16,7 +16,7 @@ describe('<ProposalVoteModal />', () => {
     votesRanking: false,
     votesHelpText: 'Help',
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {
@@ -42,7 +42,7 @@ describe('<ProposalVoteModal />', () => {
     votesRanking: false,
     votesHelpText: 'Help',
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {
@@ -101,7 +101,7 @@ describe('<ProposalVoteModal />', () => {
     const questionStepForm = {
       ...step,
       form: {
-        isProposalForm: false,
+        objectType: 'QUESTION',
       },
     };
 

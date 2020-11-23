@@ -99,7 +99,11 @@
                         <i class="cap cap-file-edit-1"></i>
                         <span class="value">{{ contributionsCount }}</span>
                         <span class="excerpt category">
-                            {{ 'project.preview.counters.contributions' | trans({'num': contributionsCount}, 'CapcoAppBundle') }}
+                            {% if currentStep.proposalForm.objectType == 'establishment' %}
+                                {{ 'proposal.establishment.count' | trans({'num': contributionsCount}, 'CapcoAppBundle') }}
+                            {% else %}
+                                {{ 'project.preview.counters.contributions' | trans({'num': contributionsCount}, 'CapcoAppBundle') }}
+                            {% endif %}
                         </span>
                     </li>
                 {% endif %}

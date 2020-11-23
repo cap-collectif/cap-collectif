@@ -8,6 +8,26 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 2,
+          },
+          "contributionsCount": 2,
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/cafe.png",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Q2FmZXRpZXI=",
+          "title": "Sauvons nos cafés",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "contributions": Object {
             "totalCount": 0,
           },
           "contributionsCount": 0,
@@ -23,7 +43,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributions": Object {
             "totalCount": 16,
@@ -41,7 +61,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
             "totalCount": 11,
@@ -61,7 +81,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
             "totalCount": 9,
@@ -79,7 +99,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 11,
@@ -97,7 +117,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -117,7 +137,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "contributions": Object {
             "totalCount": 264,
@@ -137,7 +157,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "contributions": Object {
             "totalCount": 54,
@@ -157,7 +177,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "contributions": Object {
             "totalCount": 3,
@@ -175,7 +195,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -193,7 +213,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "contributions": Object {
             "totalCount": 132,
@@ -213,7 +233,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributions": Object {
             "totalCount": 177,
@@ -231,7 +251,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "contributions": Object {
             "totalCount": 3,
@@ -249,7 +269,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "contributions": Object {
             "totalCount": 21,
@@ -267,7 +287,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "contributions": Object {
             "totalCount": 1,
@@ -285,7 +305,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -303,7 +323,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -321,7 +341,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -341,7 +361,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -359,7 +379,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -377,7 +397,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
         "node": Object {
           "contributions": Object {
             "totalCount": 5,
@@ -395,7 +415,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -413,7 +433,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
         "node": Object {
           "contributions": Object {
             "totalCount": 10,
@@ -431,7 +451,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
         "node": Object {
           "contributions": Object {
             "totalCount": 32,
@@ -449,7 +469,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI1",
         "node": Object {
           "contributions": Object {
             "totalCount": 6,
@@ -467,7 +487,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI1",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI2",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -485,7 +505,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI2",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI3",
         "node": Object {
           "contributions": Object {
             "totalCount": 51,
@@ -503,7 +523,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI3",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI4",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -521,7 +541,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI4",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI5",
         "node": Object {
           "contributions": Object {
             "totalCount": 74,
@@ -542,10 +562,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjI4",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjI5",
       "hasNextPage": false,
     },
-    "totalCount": 29,
+    "totalCount": 30,
   },
 }
 `;
@@ -892,12 +912,24 @@ Object {
           "title": "Débat sur le cannabis",
         },
       },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI2",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 2,
+          },
+          "contributionsCount": 2,
+          "id": "UHJvamVjdDpwcm9qZWN0Q2FmZXRpZXI=",
+          "publishedAt": "2020-06-18 12:00:00",
+          "title": "Sauvons nos cafés",
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjI1",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjI2",
       "hasNextPage": false,
     },
-    "totalCount": 26,
+    "totalCount": 27,
   },
 }
 `;
@@ -908,6 +940,26 @@ Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 2,
+          },
+          "contributionsCount": 2,
+          "contributors": Object {
+            "totalCount": 1,
+          },
+          "cover": Object {
+            "url": "https://capco.test/media/default/0001/01/cafe.png",
+          },
+          "id": "UHJvamVjdDpwcm9qZWN0Q2FmZXRpZXI=",
+          "title": "Sauvons nos cafés",
+          "votes": Object {
+            "totalCount": 0,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -925,7 +977,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributions": Object {
             "totalCount": 16,
@@ -943,7 +995,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
             "totalCount": 11,
@@ -963,7 +1015,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
             "totalCount": 9,
@@ -981,7 +1033,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 11,
@@ -999,7 +1051,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -1019,7 +1071,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "contributions": Object {
             "totalCount": 264,
@@ -1039,7 +1091,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "contributions": Object {
             "totalCount": 54,
@@ -1059,7 +1111,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "contributions": Object {
             "totalCount": 3,
@@ -1077,7 +1129,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -1095,7 +1147,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "contributions": Object {
             "totalCount": 132,
@@ -1115,7 +1167,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "contributions": Object {
             "totalCount": 177,
@@ -1133,7 +1185,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "contributions": Object {
             "totalCount": 3,
@@ -1151,7 +1203,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "contributions": Object {
             "totalCount": 21,
@@ -1169,7 +1221,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "contributions": Object {
             "totalCount": 1,
@@ -1187,7 +1239,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -1205,7 +1257,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -1223,7 +1275,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -1243,7 +1295,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -1261,7 +1313,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -1279,7 +1331,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
         "node": Object {
           "contributions": Object {
             "totalCount": 5,
@@ -1297,7 +1349,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -1315,7 +1367,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -1333,7 +1385,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjIz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
         "node": Object {
           "contributions": Object {
             "totalCount": 51,
@@ -1351,7 +1403,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI0",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI1",
         "node": Object {
           "contributions": Object {
             "totalCount": 0,
@@ -1369,7 +1421,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI1",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI2",
         "node": Object {
           "contributions": Object {
             "totalCount": 74,
@@ -1390,10 +1442,10 @@ Object {
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YXJyYXljb25uZWN0aW9uOjI1",
+      "endCursor": "YXJyYXljb25uZWN0aW9uOjI2",
       "hasNextPage": false,
     },
-    "totalCount": 26,
+    "totalCount": 27,
   },
 }
 `;
@@ -1402,6 +1454,16 @@ exports[`Preview|Query.projects connection fetches the public projects with a sp
 Object {
   "projects": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "authors": Array [
+            Object {
+              "id": "VXNlcjp1c2VyQWRtaW4=",
+            },
+          ],
+          "id": "UHJvamVjdDpwcm9qZWN0Q2FmZXRpZXI=",
+        },
+      },
       Object {
         "node": Object {
           "authors": Array [
@@ -1586,7 +1648,7 @@ Object {
         },
       },
     ],
-    "totalCount": 18,
+    "totalCount": 19,
   },
 }
 `;

@@ -388,6 +388,84 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "concreteType": "TipsMeee",
+                      "kind": "LinkedField",
+                      "name": "tipsmeee",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "donatorsCount",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "donationTotalCount",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "ProposalTopDonator",
+                          "kind": "LinkedField",
+                          "name": "topDonators",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "amount",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "email",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "date",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "tipsmeeeId",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "ProposalStepStatus",
                       "kind": "LinkedField",
                       "name": "status",
@@ -709,7 +787,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "isProposalForm",
+                          "name": "objectType",
                           "storageKey": null,
                         },
                         Object {
@@ -737,7 +815,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "contribuable",
+                          "name": "usingTipsmeee",
                           "storageKey": null,
                         },
                         Object {
@@ -1288,6 +1366,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "contribuable",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "description",
                           "storageKey": null,
                         },
@@ -1329,7 +1414,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "isProposalForm",
+                                      "name": "objectType",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -1579,6 +1664,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "name": "usingIllustration",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "tipsmeeeHelpText",
+                          "storageKey": null,
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -1601,13 +1693,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
                           "name": "votesRanking",
                           "storageKey": null,
                         },
@@ -1616,6 +1701,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "voteType",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
                           "storageKey": null,
                         },
                         Object {
@@ -2898,13 +2990,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "title",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
                       "name": "contribuable",
                       "storageKey": null,
                     },
@@ -2921,13 +3006,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "id",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "title",
                           "storageKey": null,
                         },
                       ],
@@ -2984,13 +3062,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "args": null,
                       "kind": "ScalarField",
                       "name": "publishedAt",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "draft",
                       "storageKey": null,
                     },
                     Object {
@@ -6257,7 +6328,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "isProposalForm",
+                              "name": "objectType",
                               "storageKey": null,
                             },
                             Object {
@@ -6742,7 +6813,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "25d8f57a945660d30371ec468f393e0d",
+          "cacheID": "4d4ccc06cd5f458215a1f1210755cb21",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7282,7 +7353,7 @@ fragment ProposalDeleteModal_proposal on Proposal {
     id
   }
   form {
-    isProposalForm
+    objectType
     id
   }
 }
@@ -7440,6 +7511,7 @@ fragment ProposalForm_proposal on Proposal {
     size
     url
   }
+  tipsmeeeId
 }
 
 fragment ProposalForm_proposalForm on ProposalForm {
@@ -7451,7 +7523,7 @@ fragment ProposalForm_proposalForm on ProposalForm {
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
-        isProposalForm
+        objectType
         id
       }
       project {
@@ -7570,11 +7642,13 @@ fragment ProposalForm_proposalForm on ProposalForm {
   descriptionHelpText
   addressHelpText
   proposalInAZoneRequired
-  isProposalForm
+  objectType
   usingDescription
   descriptionMandatory
   usingSummary
   usingIllustration
+  usingTipsmeee
+  tipsmeeeHelpText
 }
 
 fragment ProposalMediaResponse_medias on Media {
@@ -7633,19 +7707,20 @@ fragment ProposalPageAlert_proposal on Proposal {
 
 fragment ProposalPageAside_proposal_2r3fA4 on Proposal {
   ...ProposalPageMetadata_proposal
+  ...ProposalTipsMeeeAside_proposal
   ...ProposalPageAdvancement_proposal
   ...ProposalPageVoteThreshold_proposal_2r3fA4
   currentVotableStep {
     __typename
-    id
     votesRanking
     voteType
-    voteThreshold
     ...ProposalPageVoteThreshold_step
+    id
   }
   form {
     usingCategories
     usingThemes
+    usingTipsmeee
     id
   }
 }
@@ -7675,7 +7750,6 @@ fragment ProposalPageComments_proposal on Proposal {
 fragment ProposalPageCustomSections_proposal on Proposal {
   id
   form {
-    contribuable
     questions {
       __typename
       id
@@ -7788,7 +7862,6 @@ fragment ProposalPageCustomSections_proposal on Proposal {
 }
 
 fragment ProposalPageDescription_proposal on Proposal {
-  id
   body
   summary
 }
@@ -7801,6 +7874,19 @@ fragment ProposalPageDiscussions_proposal on Proposal {
     commentable
   }
   ...ProposalPageComments_proposal
+}
+
+fragment ProposalPageDonators_proposal on Proposal {
+  title
+  tipsmeee {
+    donatorsCount
+    topDonators {
+      name
+      amount
+      date
+      email
+    }
+  }
 }
 
 fragment ProposalPageFollowers_proposal on Proposal {
@@ -7892,7 +7978,6 @@ fragment ProposalPageHeader_proposal_2Ag0mE on Proposal {
     id
   }
   category {
-    name
     icon
     color
     categoryImage {
@@ -7904,10 +7989,6 @@ fragment ProposalPageHeader_proposal_2Ag0mE on Proposal {
     }
     id
   }
-  theme {
-    title
-    id
-  }
   author {
     username
     ...UserAvatar_user
@@ -7915,12 +7996,10 @@ fragment ProposalPageHeader_proposal_2Ag0mE on Proposal {
   }
   createdAt
   publishedAt
-  draft
   updatedAt
   url
   form {
-    isProposalForm
-    canContact
+    objectType
     id
   }
   project {
@@ -7973,6 +8052,7 @@ fragment ProposalPageLogic_query_t3khD on Query {
     ...ProposalPageVotes_proposal
     ...ProposalPageBlog_proposal
     ...ProposalPageFollowers_proposal
+    ...ProposalPageDonators_proposal
     ...ProposalPageHeader_proposal_2Ag0mE
     ...ProposalPageMainAside_proposal_2r3fA4 @include(if: $isAuthenticated)
     ...ProposalAnalysisPanel_proposal_2uwUKI @include(if: $isAuthenticated)
@@ -8000,6 +8080,7 @@ fragment ProposalPageMainAside_proposal_2r3fA4 on Proposal {
   id
   ...ProposalPageMetadata_proposal
   ...ProposalPageAdvancement_proposal
+  ...ProposalTipsMeeeAside_proposal
   ...ProposalPageVoteThreshold_proposal_2r3fA4
   currentVotableStep {
     __typename
@@ -8012,6 +8093,7 @@ fragment ProposalPageMainAside_proposal_2r3fA4 on Proposal {
   form {
     usingCategories
     usingThemes
+    usingTipsmeee
     id
   }
 }
@@ -8019,6 +8101,7 @@ fragment ProposalPageMainAside_proposal_2r3fA4 on Proposal {
 fragment ProposalPageMainContent_proposal on Proposal {
   id
   ...ProposalPageFusionInformations_proposal
+  ...ProposalPageTopDonators_proposal
   ...ProposalPageOfficialAnswer_proposal
   ...ProposalPageDescription_proposal
   ...ProposalPageLocalisation_proposal
@@ -8090,7 +8173,7 @@ fragment ProposalPageTabs_proposal_2r3fA4 on Proposal {
   form {
     usingCategories
     usingThemes
-    isProposalForm
+    objectType
     id
   }
   news {
@@ -8124,6 +8207,9 @@ fragment ProposalPageTabs_proposal_2r3fA4 on Proposal {
     opinionCanBeFollowed
     id
   }
+  tipsmeee {
+    donatorsCount
+  }
 }
 
 fragment ProposalPageTabs_step on ProposalStep {
@@ -8131,8 +8217,17 @@ fragment ProposalPageTabs_step on ProposalStep {
   id
 }
 
+fragment ProposalPageTopDonators_proposal on Proposal {
+  tipsmeee {
+    topDonators {
+      name
+      amount
+      email
+    }
+  }
+}
+
 fragment ProposalPageVoteThreshold_proposal_2r3fA4 on Proposal {
-  id
   votes(stepId: $stepId, first: 0) {
     totalCount
     totalPointsCount
@@ -8145,14 +8240,13 @@ fragment ProposalPageVoteThreshold_proposal_2r3fA4 on Proposal {
     id
   }
   form {
-    isProposalForm
+    objectType
     id
   }
 }
 
 fragment ProposalPageVoteThreshold_step on Step {
   __isStep: __typename
-  id
   ... on CollectStep {
     voteThreshold
   }
@@ -8341,6 +8435,15 @@ fragment ProposalRevision_proposal on Proposal {
   ...ProposalRevisionModalForm_proposal
 }
 
+fragment ProposalTipsMeeeAside_proposal on Proposal {
+  tipsmeee {
+    donatorsCount
+    donationTotalCount
+  }
+  title
+  tipsmeeeId
+}
+
 fragment ProposalUserVoteItem_step on ProposalStep {
   __isProposalStep: __typename
   id
@@ -8349,7 +8452,7 @@ fragment ProposalUserVoteItem_step on ProposalStep {
   votesRanking
   votesLimit
   form {
-    isProposalForm
+    objectType
     id
   }
   project {
@@ -8458,7 +8561,7 @@ fragment ProposalVoteBasketWidget_step on ProposalStep {
   votesMin
   budget
   form {
-    isProposalForm
+    objectType
     id
   }
   project {
@@ -8491,7 +8594,7 @@ fragment ProposalVoteButtonWrapperFragment_proposal_Q37Wz on Proposal {
     id
   }
   form {
-    isProposalForm
+    objectType
     id
   }
   ...ProposalVoteButton_proposal_Q37Wz
@@ -8534,7 +8637,7 @@ fragment ProposalVoteButton_proposal_Q37Wz on Proposal {
     id
   }
   form {
-    isProposalForm
+    objectType
     id
   }
   viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
@@ -8565,7 +8668,7 @@ fragment ProposalVoteModal_step_39ngnn on ProposalStep {
     }
   }
   form {
-    isProposalForm
+    objectType
     id
   }
   project {
@@ -8725,7 +8828,7 @@ fragment VoteMinAlert_step on ProposalStep {
   }
   votesMin
   form {
-    isProposalForm
+    objectType
     id
   }
   project {

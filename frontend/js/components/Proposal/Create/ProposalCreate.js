@@ -14,6 +14,7 @@ import { openCreateModal, closeCreateModal } from '../../../redux/modules/propos
 import { getProposalLabelByType } from '~/utils/interpellationLabelHelper';
 import type { Dispatch, GlobalState } from '../../../types';
 import type { ProposalCreate_proposalForm } from '~relay/ProposalCreate_proposalForm.graphql';
+import { mediaQueryMobile } from '~/utils/sizes';
 
 type Props = {
   intl: IntlShape,
@@ -33,6 +34,27 @@ const ModalProposalCreateContainer: StyledComponent<{}, {}, typeof Modal> = styl
   }
 `;
 
+const ModalProposalFormFooter: StyledComponent<{}, {}, typeof Modal.Footer> = styled(
+  Modal.Footer,
+).attrs({
+  className: 'modal-footer',
+})`
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    display: flex;
+    flex-direction: column-reverse;
+    button {
+      width: 200px;
+      margin: auto;
+      margin-bottom: 5px;
+    }
+    .btn + .btn {
+      width: 200px;
+      margin: auto;
+      margin-bottom: 5px;
+    }
+  }
+`;
+
 export class ProposalCreate extends React.Component<Props> {
   render() {
     const {
@@ -44,9 +66,12 @@ export class ProposalCreate extends React.Component<Props> {
       dispatch,
       projectType,
     } = this.props;
-    const modalTitleTradKey = proposalForm.isProposalForm
-      ? getProposalLabelByType(projectType, 'add')
-      : 'submit-a-question';
+    const modalTitleTradKey =
+      proposalForm.objectType === 'PROPOSAL'
+        ? getProposalLabelByType(projectType, 'add')
+        : proposalForm.objectType === 'ESTABLISHMENT'
+        ? 'proposal.add-establishment'
+        : 'submit-a-question';
 
     return (
       <div>
@@ -82,7 +107,7 @@ export class ProposalCreate extends React.Component<Props> {
           <Modal.Body>
             <ProposalForm proposalForm={proposalForm} proposal={null} />
           </Modal.Body>
-          <Modal.Footer>
+          <ModalProposalFormFooter>
             <CloseButton onClose={() => dispatch(closeCreateModal())} />
             <SubmitButton
               id="confirm-proposal-create-as-draft"
@@ -99,7 +124,11 @@ export class ProposalCreate extends React.Component<Props> {
               label="global.save_as_draft"
             />
             <SubmitButton
-              label="global.submit"
+              label={
+                proposalForm.objectType === 'ESTABLISHMENT'
+                  ? 'submit-establishment'
+                  : 'global.submit'
+              }
               id="confirm-proposal-create"
               isSubmitting={submitting}
               disabled={pristine}
@@ -112,7 +141,7 @@ export class ProposalCreate extends React.Component<Props> {
                 }, 200);
               }}
             />
-          </Modal.Footer>
+          </ModalProposalFormFooter>
         </ModalProposalCreateContainer>
       </div>
     );
@@ -132,7 +161,7 @@ export default createFragmentContainer(container, {
     fragment ProposalCreate_proposalForm on ProposalForm {
       id
       contribuable
-      isProposalForm
+      objectType
       ...ProposalForm_proposalForm
       ...ProposalCreateButton_proposalForm
     }

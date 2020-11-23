@@ -190,6 +190,16 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     private $usingDistrict = false;
 
     /**
+     * @ORM\Column(name="using_tipsmeee", type="boolean", nullable=false, options={"default": false})
+     */
+    private $usingTipsmeee = false;
+
+    /**
+     * @ORM\Column(name="tipsmeee_help_text", type="string", length=255, nullable=true)
+     */
+    private $tipsmeeeHelpText;
+
+    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="proposalForm")
      * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
      */
@@ -837,16 +847,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function setIsProposalForm(bool $isProposal): self
-    {
-        $this->objectType =
-            true === $isProposal
-                ? ProposalFormObjectType::PROPOSAL
-                : ProposalFormObjectType::QUESTION;
-
-        return $this;
-    }
-
     public function isProposalForm(): bool
     {
         return ProposalFormObjectType::PROPOSAL === $this->objectType;
@@ -974,6 +974,35 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function setIsMapViewEnabled(bool $isMapViewEnabled): self
     {
         $this->isMapViewEnabled = $isMapViewEnabled;
+
+        return $this;
+    }
+
+    public function getTipsmeeeHelpText(): ?string
+    {
+        return $this->tipsmeeeHelpText;
+    }
+
+    public function setTipsmeeeHelpText(?string $tipsmeeeHelpText): self
+    {
+        $this->tipsmeeeHelpText = $tipsmeeeHelpText;
+
+        return $this;
+    }
+
+    public function getUsingTipsmee(): bool
+    {
+        return $this->usingTipsmeee;
+    }
+
+    public function isUsingTipsmeee(): bool
+    {
+        return $this->usingTipsmeee;
+    }
+
+    public function setUsingTipsmeee(bool $usingTipsmeee): self
+    {
+        $this->usingTipsmeee = $usingTipsmeee;
 
         return $this;
     }

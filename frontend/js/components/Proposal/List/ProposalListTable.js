@@ -82,9 +82,12 @@ export class ProposalListTable extends React.Component<Props, State> {
 
           return {
             title: {
-              text: step.form?.isProposalForm
-                ? 'admin.fields.selection.proposal'
-                : 'question-title',
+              text:
+                step.form?.objectType === 'PROPOSAL'
+                  ? 'admin.fields.selection.proposal'
+                  : step.form?.objectType === 'QUESTION'
+                  ? 'question-title'
+                  : 'establishment-name',
               value: { displayTitle: getProposalTitle, url: node.url && node.url },
               width: '250px',
             },
@@ -397,10 +400,7 @@ export default createFragmentContainer(ProposalListTable, {
         usingThemes
         usingDistrict
         usingCategories
-        usingDescription
-        usingSummary
-        descriptionMandatory
-        isProposalForm
+        objectType
       }
     }
   `,
@@ -409,7 +409,6 @@ export default createFragmentContainer(ProposalListTable, {
       @argumentDefinitions(stepId: { type: "ID" }) {
       edges {
         node {
-          id
           url
           title
           progressSteps {
@@ -417,9 +416,6 @@ export default createFragmentContainer(ProposalListTable, {
             startAt
             endAt
             ...ImplementationStepTitle_progressSteps
-          }
-          currentVotableStep {
-            title
           }
           status(step: $stepId) {
             name

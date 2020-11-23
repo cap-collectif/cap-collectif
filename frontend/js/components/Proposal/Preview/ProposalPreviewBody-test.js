@@ -32,6 +32,9 @@ describe('<ProposalPreviewBody />', () => {
         id: 'step1',
         votesRanking: true,
       },
+      form: {
+        objectType: 'PROPOSAL',
+      },
       $fragmentRefs,
       $refType,
     },

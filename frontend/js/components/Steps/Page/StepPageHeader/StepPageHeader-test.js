@@ -46,7 +46,7 @@ describe('<StepPageHeader />', () => {
       voteThreshold: 1,
       votable: true,
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {

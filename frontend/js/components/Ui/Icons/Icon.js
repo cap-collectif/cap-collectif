@@ -198,6 +198,7 @@ export const ICON_NAME = {
   favoriteBook: 'favoriteBook',
   thinArrowUp: 'thin-arrow-up',
   thinArrowDown: 'thin-arrow-down',
+  money: 'money',
 };
 
 type Props = {|
@@ -602,6 +603,8 @@ const getIcon = name => {
       return <Icons.ThinArrowUp />;
     case 'thin-arrow-down':
       return <Icons.ThinArrowDown />;
+    case 'money':
+      return <Icons.Money />;
     default:
       return <div />;
   }

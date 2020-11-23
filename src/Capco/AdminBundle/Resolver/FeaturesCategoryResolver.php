@@ -74,6 +74,7 @@ class FeaturesCategoryResolver
                     'app_news',
                     'multilangue',
                     'unstable__remote_events',
+                    Manager::unstable__tipsmeee,
                     'sentry_log',
                     'login_openid',
                     'login_saml',

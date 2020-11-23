@@ -371,6 +371,18 @@ Capco\MediaBundle\Entity\Media:
     ProfilePicLaurentAlexandre:
         id: 'ProfilePicLaurentAlexandre'
         binaryContent: laurent-alexandre.png
-        name: ProfileBobMarley
+        name: ProfileLaurentAlexandre
         category: '@MediaCategory1'
         providerReference: laurent-alexandre.png
+    imageCafe:
+        id: 'imageCafe'
+        binaryContent: cafe.png
+        name: imageCafe
+        category: '@MediaCategory1'
+        providerReference: cafe.png
+    imageCafetier:
+        id: 'imageCafetier'
+        binaryContent: cafetier.png
+        name: imageCafetier
+        category: '@MediaCategory1'
+        providerReference: cafetier.png

@@ -1,0 +1,14 @@
+ProposalFormObjectType:
+    type: enum
+    config:
+        description: 'Value of a proposal sorting'
+        values:
+            PROPOSAL:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::PROPOSAL")'
+                description: 'The proposal form is a Proposal'
+            QUESTION:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::QUESTION")'
+                description: 'The proposal form is a Question'
+            ESTABLISHMENT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::ESTABLISHMENT")'
+                description: 'The proposal form is an Establishment'

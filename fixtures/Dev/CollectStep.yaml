@@ -202,3 +202,10 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         votesMin: 2
         votesLimit: 2
         votesRanking: true
+    collectStepCafetier:
+        id: collectStepCafetier
+        title: Soutenons nos bistros et cafés dans cette période difficile
+        label: Dépôt
+        body: <stripslashes('\<p>\')>Comment participer ? <stripslashes('\</br>\')>Vous êtes cafetier <stripslashes('\:\')> suivez les instructions du formulaire pour pouvoir recevoir des dons pour votre établissement.<stripslashes('\</br>\')> Vous êtes citoyen.ne <stripslashes('\:\')> déposez un don entre 5 et 100 € pour soutenir votre ou vos cafés préféré.s<stripslashes('\</p>\')>
+        startAt: <identity((new \DateTime('2020-10-16')))>
+        endAt: <identity((new \DateTime('2021-10-16')))>

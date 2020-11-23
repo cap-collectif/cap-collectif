@@ -58,9 +58,9 @@ UpdateProposalFormInput:
                 type: '[QuestionnaireAbstractQuestionInput!]'
             allowAknowledge:
                 type: 'Boolean'
-            isProposalForm:
-                type: 'Boolean'
-                description: 'Proposal form is type of Proposal or Question'
+            objectType:
+                type: 'ProposalFormObjectType'
+                description: 'Proposal form is type of Proposal or Question or Establishment'
             usingDescription:
                 type: 'Boolean'
                 description: 'Proposal form using description field'
@@ -87,3 +87,9 @@ UpdateProposalFormInput:
             isMapViewEnabled:
                 type: 'Boolean'
                 description: 'can the viewer see the proposals as a map'
+            usingTipsmeee:
+                type: 'Boolean'
+                description: 'Proposal form using tipsmeee field'
+            tipsmeeeHelpText:
+                type: 'String'
+                description: 'Proposal form help text for tipsmeee field'

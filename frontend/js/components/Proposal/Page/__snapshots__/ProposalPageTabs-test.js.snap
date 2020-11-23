@@ -70,6 +70,91 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
 </ProposalPageTabs__Tabs>
 `;
 
+exports[`<ProposalPageTabs /> should render Tabs with tipsmeee enable 1`] = `
+<ProposalPageTabs__Tabs
+  loading={false}
+>
+  <Nav
+    bsClass="nav"
+    justified={false}
+    pullLeft={false}
+    pullRight={false}
+    stacked={false}
+  >
+    <NavItem
+      active={true}
+      disabled={false}
+      eventKey="content"
+    >
+      <FormattedMessage
+        id="presentation_step"
+        values={Object {}}
+      />
+    </NavItem>
+    <NavItem
+      active={false}
+      disabled={false}
+      eventKey="blog"
+    >
+      <FormattedMessage
+        id="menu.news"
+        values={Object {}}
+      />
+      <span
+        className="tip"
+      >
+        1
+      </span>
+    </NavItem>
+    <NavItem
+      active={false}
+      disabled={false}
+      eventKey="votes"
+    >
+      <FormattedMessage
+        id="global.vote"
+        values={Object {}}
+      />
+      <span
+        className="tip"
+      >
+        5
+      </span>
+    </NavItem>
+    <NavItem
+      active={false}
+      disabled={false}
+      eventKey="followers"
+    >
+      <FormattedMessage
+        id="proposal.tabs.followers"
+        values={Object {}}
+      />
+      <span
+        className="tip"
+      >
+        169
+      </span>
+    </NavItem>
+    <NavItem
+      active={false}
+      disabled={false}
+      eventKey="donators"
+    >
+      <FormattedMessage
+        id="proposal.tabs.donators"
+        values={Object {}}
+      />
+      <span
+        className="tip"
+      >
+        2
+      </span>
+    </NavItem>
+  </Nav>
+</ProposalPageTabs__Tabs>
+`;
+
 exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
 <ProposalPageTabs__Tabs
   loading={false}

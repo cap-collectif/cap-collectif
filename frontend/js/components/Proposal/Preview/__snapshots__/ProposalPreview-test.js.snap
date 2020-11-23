@@ -43,7 +43,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
       }
       viewer={null}
     />
-    <Relay(ProposalPreviewFooter)
+    <Relay(Connect(ProposalPreviewFooter))
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -145,7 +145,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
       }
       viewer={null}
     />
-    <Relay(ProposalPreviewFooter)
+    <Relay(Connect(ProposalPreviewFooter))
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -244,7 +244,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
       }
       viewer={null}
     />
-    <Relay(ProposalPreviewFooter)
+    <Relay(Connect(ProposalPreviewFooter))
       proposal={
         Object {
           "$fragmentRefs": null,

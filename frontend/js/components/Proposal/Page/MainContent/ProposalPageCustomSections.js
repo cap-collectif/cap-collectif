@@ -111,7 +111,6 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageCust
     fragment ProposalPageCustomSections_proposal on Proposal {
       id
       form {
-        contribuable
         questions {
           id
           ...responsesHelper_question @relay(mask: false)

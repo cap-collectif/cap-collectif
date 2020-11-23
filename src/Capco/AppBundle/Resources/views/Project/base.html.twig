@@ -6,9 +6,9 @@
    or if the step has just one consultation
 #}
 
-{% set isConsultationType = currentStep is defined and currentStep.type != 'consultation' %}
+{% set isConsultationType = currentStep is defined and currentStep.type  is defined  and currentStep.type  != 'consultation' %}
 {% set isConsultationRoute= app.request.get('_route') == 'app_project_show_consultations' %}
-{% set getConsultations = currentStep is defined and currentStep.type == 'consultation' and currentStep.consultations.count <= 1 %}
+{% set getConsultations = currentStep is defined and currentStep.type is defined and currentStep.type  == 'consultation' and currentStep.consultations.count <= 1 %}
 {% set isConsultation = isConsultationType or isConsultationRoute or getConsultations %}
 {% set shouldDisplayProjectHeader = currentStep is defined and currentStep.slug is defined and isConsultation %}
 

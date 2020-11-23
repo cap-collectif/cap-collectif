@@ -10,8 +10,8 @@ use Geocoder\Query\GeocodeQuery;
 
 class HasValidAddressValidator extends ConstraintValidator
 {
-    private $geocoder;
-    private $logger;
+    private GoogleMaps $geocoder;
+    private LoggerInterface $logger;
 
     public function __construct(GoogleMaps $geocoder, LoggerInterface $logger)
     {

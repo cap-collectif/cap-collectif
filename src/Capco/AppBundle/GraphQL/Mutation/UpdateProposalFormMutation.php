@@ -17,6 +17,7 @@ use Capco\AppBundle\Repository\CategoryImageRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -42,6 +43,7 @@ class UpdateProposalFormMutation implements MutationInterface
     private MultipleChoiceQuestionRepository $choiceQuestionRepository;
     private Indexer $indexer;
     private ValidatorInterface $colorValidator;
+    private Manager $toggleManager;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -55,7 +57,8 @@ class UpdateProposalFormMutation implements MutationInterface
         CategoryImageRepository $categoryImageRepository,
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
         Indexer $indexer,
-        ValidatorInterface $colorValidator
+        ValidatorInterface $colorValidator,
+        Manager $toggleManager
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -69,6 +72,7 @@ class UpdateProposalFormMutation implements MutationInterface
         $this->choiceQuestionRepository = $choiceQuestionRepository;
         $this->indexer = $indexer;
         $this->colorValidator = $colorValidator;
+        $this->toggleManager = $toggleManager;
     }
 
     public function __invoke(Argument $input): array
@@ -135,6 +139,12 @@ class UpdateProposalFormMutation implements MutationInterface
             }
         }
 
+        if (
+            !$this->toggleManager->isActive(Manager::unstable__tipsmeee) &&
+            isset($arguments['usingTipsmeee'], $arguments['tipsmeeeHelpText'])
+        ) {
+            unset($arguments['usingTipsmeee'], $arguments['tipsmeeeHelpText']);
+        }
         $hasViewConfigurationChanged =
             (\array_key_exists('isGridViewEnabled', $arguments) &&
                 $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||

@@ -36,7 +36,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
         Object {
           "$fragmentRefs": null,
           "id": "form1",
-          "isProposalForm": true,
+          "objectType": "PROPOSAL",
         }
       }
     />
@@ -97,7 +97,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
         Object {
           "$fragmentRefs": null,
           "id": "form1",
-          "isProposalForm": true,
+          "objectType": "PROPOSAL",
         }
       }
     />

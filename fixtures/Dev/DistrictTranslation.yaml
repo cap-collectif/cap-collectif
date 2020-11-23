@@ -1,132 +1,233 @@
 Capco\AppBundle\Entity\District\DistrictTranslation:
-  projectDistrictTranslation1:
-    translatable: '@projectDistrict1'
-    locale: fr-FR
-    id: projectDistrictTranslation1
-    name: Premier Quartier
-  projectDistrictTranslation1En:
-    translatable: '@projectDistrict1'
-    locale: en-GB
-    id: projectDistrictTranslation1En
-    name: First District
-  projectDistrictTranslation2:
-    translatable: '@projectDistrict2'
-    locale: fr-FR
-    id: projectDistrictTranslation2
-    name: Deuxième Quartier
-  projectDistrictTranslation3:
-    translatable: '@projectDistrict3'
-    locale: fr-FR
-    id: projectDistrictTranslation3
-    name: Centre ville
-  projectDistrictTranslation4:
-    translatable: '@projectDistrict4'
-    locale: fr-FR
-    id: projectDistrictTranslation4
-    name: Îles de Nantes
-  projectDistrictTranslation5:
-    translatable: '@projectDistrict5'
-    locale: fr-FR
-    id: projectDistrictTranslation5
-    name: Hauts pavés Saint-Félix
-  projectDistrictTranslation6:
-    translatable: '@projectDistrict6'
-    locale: fr-FR
-    id: projectDistrictTranslation6
-    name: Malakoff Saint-Donation
-  projectDistrictTranslation7:
-    translatable: '@projectDistrict7'
-    locale: fr-FR
-    id: projectDistrictTranslation7
-    name: Dervallières Zola
-  proposalDistrict1:
-    id: district1
-    translatable: '@district1'
-    locale: fr-FR
-    name: Beauregard
-  proposalDistrict2:
-    translatable: '@district2'
-    id: proposalDistrict2
-    locale: fr-FR
-    name: Nord Saint-Martin
-  proposalDistrict3:
-    translatable: '@district3'
-    id: proposalDistrict3
-    locale: fr-FR
-    name: Maurepas Patton
-  proposalDistrict4:
-    translatable: '@district4'
-    id: proposalDistrict4
-    locale: fr-FR
-    name: Beaulieu
-  proposalDistrict5:
-    translatable: '@district5'
-    id: proposalDistrict5
-    locale: fr-FR
-    name: La Touche
-  proposalDistrict6:
-    translatable: '@district6'
-    id: proposalDistrict6
-    locale: fr-FR
-    name: Centre
-  proposalDistrict7:
-    translatable: '@district7'
-    id: proposalDistrict7
-    locale: fr-FR
-    name: Saint Hélier
-  proposalDistrict8:
-    translatable: '@district8'
-    id: proposalDistrict8
-    locale: fr-FR
-    name: Sud Gare
-  proposalDistrict9:
-    translatable: '@district9'
-    id: proposalDistrict9
-    locale: fr-FR
-    name: Poterie
-  proposalDistrict10:
-    translatable: '@district10'
-    id: proposalDistrict10
-    locale: fr-FR
-    name: Le Blosne
-  proposalDistrict11:
-    translatable: '@district11'
-    id: proposalDistrict11
-    locale: fr-FR
-    name: Brequigny
-  proposalDistrict12:
-    translatable: '@district12'
-    id: proposalDistrict12
-    locale: fr-FR
-    name: Cleunay
-  proposalDistrict13:
-    translatable: '@district13'
-    id: proposalDistrict13
-    locale: fr-FR
-    name: Rennes
-  proposalDistrict14:
-    translatable: '@district14'
-    id: proposalDistrict14
-    locale: fr-FR
-    name: Toute la région
-  proposalDistrict15:
-    translatable: '@district15'
-    id: proposalDistrict15
-    locale: fr-FR
-    name: Quartier 2
-  proposalDistrict16:
-    translatable: '@district16'
-    id: proposalDistrict16
-    locale: fr-FR
-    name: Quartier 3
+    projectDistrictTranslation1:
+        translatable: '@projectDistrict1'
+        locale: fr-FR
+        id: projectDistrictTranslation1
+        name: Premier Quartier
+    projectDistrictTranslation1En:
+        translatable: '@projectDistrict1'
+        locale: en-GB
+        id: projectDistrictTranslation1En
+        name: First District
+    projectDistrictTranslation2:
+        translatable: '@projectDistrict2'
+        locale: fr-FR
+        id: projectDistrictTranslation2
+        name: Deuxième Quartier
+    projectDistrictTranslation3:
+        translatable: '@projectDistrict3'
+        locale: fr-FR
+        id: projectDistrictTranslation3
+        name: Centre ville
+    projectDistrictTranslation4:
+        translatable: '@projectDistrict4'
+        locale: fr-FR
+        id: projectDistrictTranslation4
+        name: Îles de Nantes
+    projectDistrictTranslation5:
+        translatable: '@projectDistrict5'
+        locale: fr-FR
+        id: projectDistrictTranslation5
+        name: Hauts pavés Saint-Félix
+    projectDistrictTranslation6:
+        translatable: '@projectDistrict6'
+        locale: fr-FR
+        id: projectDistrictTranslation6
+        name: Malakoff Saint-Donation
+    projectDistrictTranslation7:
+        translatable: '@projectDistrict7'
+        locale: fr-FR
+        id: projectDistrictTranslation7
+        name: Dervallières Zola
+    proposalDistrict1:
+        id: district1
+        translatable: '@district1'
+        locale: fr-FR
+        name: Beauregard
+    proposalDistrict2:
+        translatable: '@district2'
+        id: proposalDistrict2
+        locale: fr-FR
+        name: Nord Saint-Martin
+    proposalDistrict3:
+        translatable: '@district3'
+        id: proposalDistrict3
+        locale: fr-FR
+        name: Maurepas Patton
+    proposalDistrict4:
+        translatable: '@district4'
+        id: proposalDistrict4
+        locale: fr-FR
+        name: Beaulieu
+    proposalDistrict5:
+        translatable: '@district5'
+        id: proposalDistrict5
+        locale: fr-FR
+        name: La Touche
+    proposalDistrict6:
+        translatable: '@district6'
+        id: proposalDistrict6
+        locale: fr-FR
+        name: Centre
+    proposalDistrict7:
+        translatable: '@district7'
+        id: proposalDistrict7
+        locale: fr-FR
+        name: Saint Hélier
+    proposalDistrict8:
+        translatable: '@district8'
+        id: proposalDistrict8
+        locale: fr-FR
+        name: Sud Gare
+    proposalDistrict9:
+        translatable: '@district9'
+        id: proposalDistrict9
+        locale: fr-FR
+        name: Poterie
+    proposalDistrict10:
+        translatable: '@district10'
+        id: proposalDistrict10
+        locale: fr-FR
+        name: Le Blosne
+    proposalDistrict11:
+        translatable: '@district11'
+        id: proposalDistrict11
+        locale: fr-FR
+        name: Brequigny
+    proposalDistrict12:
+        translatable: '@district12'
+        id: proposalDistrict12
+        locale: fr-FR
+        name: Cleunay
+    proposalDistrict13:
+        translatable: '@district13'
+        id: proposalDistrict13
+        locale: fr-FR
+        name: Rennes
+    proposalDistrict14:
+        translatable: '@district14'
+        id: proposalDistrict14
+        locale: fr-FR
+        name: Toute la région
+    proposalDistrict15:
+        translatable: '@district15'
+        id: proposalDistrict15
+        locale: fr-FR
+        name: Quartier 2
+    proposalDistrict16:
+        translatable: '@district16'
+        id: proposalDistrict16
+        locale: fr-FR
+        name: Quartier 3
 
-  proposalDistrictIdf1:
-    translatable: '@districtIdf1'
-    id: proposalDistrictIdf1
-    locale: fr-FR
-    name: Toute la région
-  proposalDistrictIdf2:
-    translatable: '@districtIdf2'
-    id: proposalDistrictIdf2
-    locale: fr-FR
-    name: Val de marne (94)
+    proposalDistrictIdf1:
+        translatable: '@districtIdf1'
+        id: proposalDistrictIdf1
+        locale: fr-FR
+        name: Toute la région
+    proposalDistrictIdf2:
+        translatable: '@districtIdf2'
+        id: proposalDistrictIdf2
+        locale: fr-FR
+        name: Val de marne (94)
+
+    proposalDistrictParis1:
+        translatable: '@paris1'
+        id: proposalDistrictParis1
+        locale: fr-FR
+        name: Paris - 1ière arrondissement
+    proposalDistrictParis2:
+        translatable: '@paris2'
+        id: proposalDistrictParis2
+        locale: fr-FR
+        name: Paris - 2nd arrondissement
+    proposalDistrictParis3:
+        translatable: '@paris3'
+        id: proposalDistrictParis3
+        locale: fr-FR
+        name: Paris - 3ième arrondissement
+    proposalDistrictParis4:
+        translatable: '@paris4'
+        id: proposalDistrictParis4
+        locale: fr-FR
+        name: Paris - 4ième arrondissement
+    proposalDistrictParis5:
+        translatable: '@paris5'
+        id: proposalDistrictParis5
+        locale: fr-FR
+        name: Paris - 5ième arrondissement
+    proposalDistrictParis6:
+        translatable: '@paris6'
+        id: proposalDistrictParis6
+        locale: fr-FR
+        name: Paris - 6ième arrondissement
+    proposalDistrictParis7:
+        translatable: '@paris7'
+        id: proposalDistrictParis7
+        locale: fr-FR
+        name: Paris - 7ième arrondissement
+    proposalDistrictParis8:
+        translatable: '@paris8'
+        id: proposalDistrictParis8
+        locale: fr-FR
+        name: Paris - 8ième arrondissement
+    proposalDistrictParis9:
+        translatable: '@paris9'
+        id: parproposalDistrictParis9is9
+        locale: fr-FR
+        name: Paris - 9ième arrondissement
+    proposalDistrictParis10:
+        translatable: '@paris10'
+        id: proposalDistrictParis10
+        locale: fr-FR
+        name: Paris - 10ième arrondissement
+    proposalDistrictParis11:
+        translatable: '@paris11'
+        id: proposalDistrictParis11
+        locale: fr-FR
+        name: Paris - 11ième arrondissement
+    proposalDistrictParis12:
+        translatable: '@paris12'
+        id: proposalDistrictParis12
+        locale: fr-FR
+        name: Paris - 12ième arrondissement
+    proposalDistrictParis13:
+        translatable: '@paris13'
+        id: proposalDistrictParis13
+        locale: fr-FR
+        name: Paris - 13ième arrondissement
+    proposalDistrictParis14:
+        translatable: '@paris14'
+        id: proposalDistrictParis14
+        locale: fr-FR
+        name: Paris - 14ième arrondissement
+    proposalDistrictParis15:
+        translatable: '@paris15'
+        id: proposalDistrictParis15
+        locale: fr-FR
+        name: Paris - 15ième arrondissement
+    proposalDistrictParis16:
+        translatable: '@paris16'
+        id: proposalDistrictParis16
+        locale: fr-FR
+        name: Paris - 16ième arrondissement
+    proposalDistrictParis17:
+        translatable: '@paris17'
+        id: proposalDistrictParis17
+        locale: fr-FR
+        name: Paris - 17ième arrondissement
+    proposalDistrictParis18:
+        translatable: '@paris18'
+        id: proposalDistrictParis18
+        locale: fr-FR
+        name: Paris - 18ième arrondissement
+    proposalDistrictParis19:
+        translatable: '@paris19'
+        id: proposalDistrictParis19
+        locale: fr-FR
+        name: Paris - 19ième arrondissement
+    proposalDistrictParis20:
+        translatable: '@paris20'
+        id: proposalDistrictParis20
+        locale: fr-FR
+        name: Paris - 20ième arrondissement

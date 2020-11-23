@@ -59,9 +59,6 @@ describe('<ProposalAdminContentForm />', () => {
         districts: [],
         step: {
           id: 'step1',
-          form: {
-            isProposalForm: true,
-          },
           project: {
             type: {
               title: 'global.consultation',
@@ -120,7 +117,9 @@ describe('<ProposalAdminContentForm />', () => {
         proposalInAZoneRequired: true,
         usingIllustration: true,
         suggestingSimilarProposals: true,
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
+        usingTipsmeee: false,
+        tipsmeeeHelpText: null,
       },
       author: {
         id: '1',

@@ -11,7 +11,6 @@ describe('<ProposalPageHeader />', () => {
     $fragmentRefs,
     id: '1',
     title: 'titre',
-    theme: { title: 'titre du theme' },
     author: {
       $fragmentRefs,
       username: 'userAdmin',
@@ -20,17 +19,14 @@ describe('<ProposalPageHeader />', () => {
     createdAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     url: 'true',
-    draft: false,
     project: { type: { title: 'global.consultation' } },
     form: {
-      isProposalForm: true,
-      canContact: false,
+      objectType: 'PROPOSAL',
     },
     media: { url: '/image.exe' },
     category: {
       color: 'red',
       icon: null,
-      name: 'cat',
       categoryImage: {
         image: {
           url: './',
@@ -44,7 +40,6 @@ describe('<ProposalPageHeader />', () => {
     $fragmentRefs,
     id: '1',
     title: 'titre',
-    theme: null,
     author: {
       $fragmentRefs,
       username: 'userAdmin',
@@ -53,11 +48,9 @@ describe('<ProposalPageHeader />', () => {
     publishedAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     url: 'true',
-    draft: false,
     project: { type: { title: 'global.consultation' } },
     form: {
-      isProposalForm: false,
-      canContact: false,
+      objectType: 'QUESTION',
     },
     media: null,
     category: null,
@@ -68,7 +61,6 @@ describe('<ProposalPageHeader />', () => {
     $fragmentRefs,
     id: '1',
     title: 'titre',
-    theme: null,
     author: {
       $fragmentRefs,
       username: 'userAdmin',
@@ -76,12 +68,10 @@ describe('<ProposalPageHeader />', () => {
     createdAt: '2015-01-01 00:00:00',
     publishedAt: null,
     updatedAt: '2015-01-05 00:10:00',
-    draft: true,
     url: 'true',
     project: { type: { title: 'global.consultation' } },
     form: {
-      isProposalForm: false,
-      canContact: false,
+      objectType: 'QUESTION',
     },
     media: null,
     category: null,
@@ -135,7 +125,6 @@ describe('<ProposalPageHeader />', () => {
     $fragmentRefs,
     id: '1',
     title: 'titre',
-    theme: { title: 'titre du theme' },
     author: {
       $fragmentRefs,
       username: 'userAdmin',
@@ -144,11 +133,29 @@ describe('<ProposalPageHeader />', () => {
     createdAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     url: 'true',
-    draft: false,
     project: { type: { title: 'project.types.interpellation' } },
     form: {
-      isProposalForm: true,
-      canContact: false,
+      objectType: 'PROPOSAL',
+    },
+    media: null,
+    category: null,
+  };
+  const establishment = {
+    $refType,
+    $fragmentRefs,
+    id: '1',
+    title: 'titre',
+    author: {
+      $fragmentRefs,
+      username: 'userAdmin',
+    },
+    publishedAt: '2015-01-01 00:00:00',
+    createdAt: '2015-01-01 00:00:00',
+    updatedAt: '2015-01-05 00:00:00',
+    url: 'true',
+    project: { type: { title: 'project.types.establishment' } },
+    form: {
+      objectType: 'ESTABLISHMENT',
     },
     media: null,
     category: null,
@@ -157,6 +164,12 @@ describe('<ProposalPageHeader />', () => {
   it('should render an interpellation', () => {
     const wrapper = shallow(
       <ProposalPageHeader proposal={interpellation} step={null} viewer={null} {...props} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render an establishment', () => {
+    const wrapper = shallow(
+      <ProposalPageHeader proposal={establishment} step={null} viewer={null} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

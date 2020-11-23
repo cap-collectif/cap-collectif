@@ -11,7 +11,10 @@ import type { ProposalList_step } from '~relay/ProposalList_step.graphql';
 import type { ProposalList_viewer } from '~relay/ProposalList_viewer.graphql';
 import type { ProposalList_proposals } from '~relay/ProposalList_proposals.graphql';
 import type { ProposalViewMode } from '../../../redux/modules/proposal';
-import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
+import {
+  isEstablishmentFormStep,
+  isInterpellationContextFromStep,
+} from '~/utils/interpellationLabelHelper';
 
 type Props = {
   step: ?ProposalList_step,
@@ -55,7 +58,9 @@ export class ProposalList extends React.Component<Props> {
         <p className="p--centered mb-40">
           <FormattedMessage
             id={
-              step && isInterpellationContextFromStep(step)
+              step && isEstablishmentFormStep(step)
+                ? 'establishment.empty'
+                : step && isInterpellationContextFromStep(step)
                 ? 'interpellation.empty'
                 : 'proposal.empty'
             }
@@ -100,6 +105,18 @@ export default createFragmentContainer(ProposalList, {
       ...ProposalListTable_step
       ...ProposalPreview_step
       ...interpellationLabelHelper_step @relay(mask: false)
+      ... on CollectStep {
+        kind
+        form {
+          id
+          objectType
+        }
+        project {
+          type {
+            title
+          }
+        }
+      }
     }
   `,
   proposals: graphql`

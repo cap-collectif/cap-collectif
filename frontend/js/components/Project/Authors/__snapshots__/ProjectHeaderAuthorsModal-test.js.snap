@@ -112,6 +112,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
                 "unstable__analysis": false,
                 "unstable__emailing": false,
                 "unstable__remote_events": false,
+                "unstable__tipsmeee": false,
                 "user_invitations": false,
                 "user_type": false,
                 "votes_evolution": false,

@@ -165,6 +165,11 @@ class Proposal implements
     private $status;
 
     /**
+     * @ORM\Column(name="tipsmeee_id", type="string", nullable=true)
+     */
+    private $tipsmeeeId;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalCategory", cascade={"persist"}, inversedBy="proposals")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
@@ -835,7 +840,8 @@ class Proposal implements
     public function isInRevision(): bool
     {
         $revisions = $this->getRevisions()->filter(
-            fn(ProposalRevision $revision) => ProposalRevisionStateType::PENDING === $revision->getState()
+            fn(ProposalRevision $revision) => ProposalRevisionStateType::PENDING ===
+                $revision->getState()
         );
 
         return $revisions->count() > 0;
@@ -1360,6 +1366,18 @@ class Proposal implements
     public function removeEvaluer(Group $group): self
     {
         $this->evaluers->removeElement($group);
+
+        return $this;
+    }
+
+    public function getTipsmeeeId(): ?string
+    {
+        return $this->tipsmeeeId;
+    }
+
+    public function setTipsmeeeId(?string $tipsmeeeId): self
+    {
+        $this->tipsmeeeId = $tipsmeeeId;
 
         return $this;
     }

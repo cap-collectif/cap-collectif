@@ -39,13 +39,15 @@ type Props = {|
   +usingIllustration: boolean,
   +usingSummary: boolean,
   +usingDistrict: boolean,
+  +usingTipsmeee: boolean,
   +isMapViewEnabled: boolean,
   +features: FeatureToggles,
 |};
 
 const TYPE_PROPOSAL_FORM = {
-  PROPOSAL: 'proposal-form',
-  QUESTION: 'question-form',
+  PROPOSAL: 'PROPOSAL',
+  QUESTION: 'QUESTION',
+  ESTABLISHMENT: 'ESTABLISHMENT',
 };
 
 export const zoomLevels = [
@@ -163,6 +165,23 @@ export const validate = (values: Object) => {
 
   return errors;
 };
+
+const headerPanelUsingTipsmeee = (
+  <div id="proposal_form_admin_tipsmee_panel">
+    <h4 className="pull-left">
+      <FormattedMessage id="tipsmeee-link" />
+    </h4>
+    <div className="pull-right">
+      <Field
+        id="proposal_form_using_tipsmeee_field"
+        name="usingTipsmeee"
+        component={toggle}
+        normalize={val => !!val}
+      />
+    </div>
+    <div className="clearfix" />
+  </div>
+);
 
 const headerPanelUsingCategories = (
   <div id="proposal_form_admin_category_panel">
@@ -331,14 +350,13 @@ const getDistrictsTranslated = (districts, defaultLanguage: string) =>
   });
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { intl, defaultLanguage } = props;
+  const { intl, defaultLanguage, features } = props;
 
   values.questions.map(question => {
     if (question.importedResponses || question.importedResponses === null) {
       delete question.importedResponses;
     }
   });
-
   const input = {
     ...values,
     id: undefined,
@@ -347,6 +365,8 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     __fragments: undefined,
     viewEnabled: undefined,
     address: undefined,
+    usingTipsmeee: features.unstable__tipsmeee ? values.usingTipsmeee : undefined,
+    tipsmeeeHelpText: features.unstable__tipsmeee ? values.tipsmeeeHelpText : undefined,
     proposalFormId: props.proposalForm.id,
     districts: getDistrictsTranslated(values.districts, defaultLanguage),
     categories: values.categories.map(category => ({
@@ -358,10 +378,10 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       newCategoryImage: getCategoryImage(category, true),
     })),
     questions: submitQuestion(values.questions),
-    isProposalForm: values.isProposalForm === TYPE_PROPOSAL_FORM.PROPOSAL,
     isGridViewEnabled: values.viewEnabled.isGridViewEnabled,
     isListViewEnabled: values.viewEnabled.isListViewEnabled,
     isMapViewEnabled: values.viewEnabled.isMapViewEnabled,
+    objectType: values.objectType,
     mapCenter:
       values.mapCenter && values.viewEnabled.isMapViewEnabled
         ? JSON.stringify([values.mapCenter.json])
@@ -418,6 +438,7 @@ export const ProposalFormAdminConfigurationForm = ({
   usingSummary,
   usingIllustration,
   usingDistrict,
+  usingTipsmeee,
   features,
   query,
   isMapViewEnabled,
@@ -447,9 +468,9 @@ export const ProposalFormAdminConfigurationForm = ({
 
         <div className="box-content">
           <Field
-            name="isProposalForm"
+            name="objectType"
             component={select}
-            id="proposal_form_isProposal"
+            id="proposal_form_objectType"
             label={<FormattedMessage id="object-deposited" />}
             options={[
               {
@@ -459,6 +480,10 @@ export const ProposalFormAdminConfigurationForm = ({
               {
                 value: TYPE_PROPOSAL_FORM.QUESTION,
                 label: intl.formatMessage({ id: 'admin.fields.response.question' }),
+              },
+              {
+                value: TYPE_PROPOSAL_FORM.ESTABLISHMENT,
+                label: intl.formatMessage({ id: 'global.establishment' }),
               },
             ]}
           />
@@ -703,6 +728,28 @@ export const ProposalFormAdminConfigurationForm = ({
           </Panel>
         )}
 
+        {features.unstable__tipsmeee && (
+          <Panel expanded={usingTipsmeee} onToggle={() => {}}>
+            <Panel.Heading>{headerPanelUsingTipsmeee}</Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+                <Field
+                  name="tipsmeeeHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_tipsmeee_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="global.help.text" />
+                      {optional}
+                    </span>
+                  }
+                />
+              </Panel.Body>
+            </Panel.Collapse>
+          </Panel>
+        )}
+
         {query.viewer.isSuperAdmin && (
           <Field
             id="proposal_form_canContact_field"
@@ -804,9 +851,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
           background,
           displayedOnMap,
         })),
-      isProposalForm: props.proposalForm.isProposalForm
-        ? TYPE_PROPOSAL_FORM.PROPOSAL
-        : TYPE_PROPOSAL_FORM.QUESTION,
+      objectType: props.proposalForm.objectType,
       viewEnabled: {
         isMapViewEnabled: props.proposalForm.isMapViewEnabled,
         isGridViewEnabled: props.proposalForm.isGridViewEnabled,
@@ -817,12 +862,11 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     usingCategories: selector(state, 'usingCategories'),
     usingThemes: selector(state, 'usingThemes'),
     usingDistrict: selector(state, 'usingDistrict'),
+    usingTipsmeee: selector(state, 'usingTipsmeee'),
     usingDescription: selector(state, 'usingDescription'),
     usingSummary: selector(state, 'usingSummary'),
     usingIllustration: selector(state, 'usingIllustration'),
-    isProposalForm: selector(state, 'isProposalForm')
-      ? TYPE_PROPOSAL_FORM.PROPOSAL
-      : TYPE_PROPOSAL_FORM.QUESTION,
+    objectType: selector(state, 'objectType'),
     features: state.default.features,
     defaultLanguage: state.language.currentLanguage,
     isMapViewEnabled: selector(state, 'viewEnabled')?.isMapViewEnabled,
@@ -869,8 +913,10 @@ export default createRefetchContainer(
         usingDistrict
         districtHelpText
         districtMandatory
+        usingTipsmeee
+        tipsmeeeHelpText
         allowAknowledge
-        isProposalForm
+        objectType
         districts {
           id
           translations {

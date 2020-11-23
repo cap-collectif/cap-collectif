@@ -10,6 +10,7 @@ import type { ProposalPageAside_proposal } from '~relay/ProposalPageAside_propos
 import ProposalPageMetadata from '~/components/Proposal/Page/Aside/ProposalPageMetadata';
 import ProposalPageVoteThreshold from '~/components/Proposal/Page/Aside/ProposalPageVoteThreshold';
 import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPageAdvancement';
+import ProposalTipsMeeeAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeAside';
 
 const HEIGHT_WITH_VOTEBAR = 130;
 const HEIGHT_WITHOUT_VOTEBAR = 80;
@@ -113,6 +114,9 @@ export const ProposalPageAside = ({
           showThemes={(features.themes || false) && proposal?.form?.usingThemes}
         />
         <ProposalPageAdvancement proposal={proposal} />
+        {proposal && proposal.form.usingTipsmeee && features.unstable__tipsmeee && (
+          <ProposalTipsMeeeAside proposal={proposal} />
+        )}
         {currentVotableStep !== null && typeof currentVotableStep !== 'undefined' && (
           <ProposalPageVoteThreshold
             proposal={proposal}
@@ -133,18 +137,18 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageAsid
   proposal: graphql`
     fragment ProposalPageAside_proposal on Proposal @argumentDefinitions(stepId: { type: "ID!" }) {
       ...ProposalPageMetadata_proposal
+      ...ProposalTipsMeeeAside_proposal
       ...ProposalPageAdvancement_proposal
       ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
       currentVotableStep {
-        id
         votesRanking
         voteType
-        voteThreshold
         ...ProposalPageVoteThreshold_step
       }
       form {
         usingCategories
         usingThemes
+        usingTipsmeee
       }
     }
   `,

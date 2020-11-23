@@ -11,7 +11,7 @@ describe('<ProposalVotes />', () => {
       $refType,
       id: '1',
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -42,7 +42,7 @@ describe('<ProposalVotes />', () => {
       $refType,
       id: '1',
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {

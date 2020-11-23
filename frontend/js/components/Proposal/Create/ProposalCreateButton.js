@@ -17,9 +17,12 @@ type Props = {
 export class ProposalCreateButton extends React.Component<Props> {
   render() {
     const { disabled, handleClick, proposalForm, projectType } = this.props;
-    const buttonTradKey = proposalForm.isProposalForm
-      ? getProposalLabelByType(projectType, 'add')
-      : 'submit-a-question';
+    const buttonTradKey =
+      proposalForm.objectType === 'ESTABLISHMENT'
+        ? getProposalLabelByType(projectType, 'add-establishment')
+        : proposalForm.objectType === 'PROPOSAL'
+        ? getProposalLabelByType(projectType, 'add')
+        : 'submit-a-question';
     return (
       <LoginOverlay>
         <Button
@@ -38,7 +41,7 @@ export class ProposalCreateButton extends React.Component<Props> {
 export default createFragmentContainer(ProposalCreateButton, {
   proposalForm: graphql`
     fragment ProposalCreateButton_proposalForm on ProposalForm {
-      isProposalForm
+      objectType
     }
   `,
 });

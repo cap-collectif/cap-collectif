@@ -12,7 +12,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
         "$refType": null,
         "contribuable": true,
         "id": "2",
-        "isProposalForm": true,
+        "objectType": "PROPOSAL",
       }
     }
   />
@@ -52,15 +52,12 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
             "$refType": null,
             "contribuable": true,
             "id": "2",
-            "isProposalForm": true,
+            "objectType": "PROPOSAL",
           }
         }
       />
     </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
+    <ProposalCreate__ModalProposalFormFooter>
       <CloseButton
         label="global.cancel"
         onClose={[Function]}
@@ -79,7 +76,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
         label="global.submit"
         onSubmit={[Function]}
       />
-    </ModalFooter>
+    </ProposalCreate__ModalProposalFormFooter>
   </ProposalCreate__ModalProposalCreateContainer>
 </div>
 `;
@@ -96,7 +93,7 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
         "$refType": null,
         "contribuable": true,
         "id": "2",
-        "isProposalForm": false,
+        "objectType": "QUESTION",
       }
     }
   />
@@ -136,15 +133,12 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
             "$refType": null,
             "contribuable": true,
             "id": "2",
-            "isProposalForm": false,
+            "objectType": "QUESTION",
           }
         }
       />
     </ModalBody>
-    <ModalFooter
-      bsClass="modal-footer"
-      componentClass="div"
-    >
+    <ProposalCreate__ModalProposalFormFooter>
       <CloseButton
         label="global.cancel"
         onClose={[Function]}
@@ -163,7 +157,7 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
         label="global.submit"
         onSubmit={[Function]}
       />
-    </ModalFooter>
+    </ProposalCreate__ModalProposalFormFooter>
   </ProposalCreate__ModalProposalCreateContainer>
 </div>
 `;

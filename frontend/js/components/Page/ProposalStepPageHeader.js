@@ -3,7 +3,10 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import ProposalCreate from '../Proposal/Create/ProposalCreate';
-import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper';
+import {
+  isInterpellationContextFromStep,
+  isEstablishmentFormStep,
+} from '~/utils/interpellationLabelHelper';
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql';
 
 type Props = {
@@ -18,15 +21,19 @@ export class ProposalStepPageHeader extends React.Component<Props> {
     const total = step.allProposals.totalCount;
     const { fusionCount } = step.allProposals;
     const isInterpellation = isInterpellationContextFromStep(step);
-    const isProposalForm =
-      step.form && step.form.isProposalForm && step.form.isProposalForm === true;
+    const isEstablishment = isEstablishmentFormStep(step);
+    const isProposalForm = step.form && step.form.objectType === 'PROPOSAL';
     const tradKeyForTotalCount = isInterpellation
       ? 'interpellation.count_with_total'
+      : isEstablishment
+      ? 'establishment.count_with_total'
       : isProposalForm
       ? 'proposal.count_with_total'
       : 'question-total-count';
     const tradKeyForCount = isInterpellation
       ? 'interpellation.count'
+      : isEstablishment
+      ? 'establishment.count'
       : isProposalForm
       ? 'proposal.count'
       : 'count-questions';
@@ -54,7 +61,11 @@ export class ProposalStepPageHeader extends React.Component<Props> {
             <span className="font-weight-300 color-dark-gray">
               {' '}
               <FormattedMessage
-                id={isInterpellation ? 'interpellation.count_fusions' : 'proposal.count_fusions'}
+                id={
+                  isInterpellation || isEstablishment
+                    ? 'interpellation.count_fusions'
+                    : 'proposal.count_fusions'
+                }
                 values={{
                   num: fusionCount,
                 }}
@@ -102,7 +113,7 @@ export default createFragmentContainer(ProposalStepPageHeader, {
         kind
         form {
           id
-          isProposalForm
+          objectType
           ...ProposalCreate_proposalForm
         }
         project {

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Truncate from 'react-truncate';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { Button } from 'react-bootstrap';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
@@ -74,12 +75,26 @@ export class ProposalPreviewBody extends React.Component<Props> {
           </TagsList>
         </div>
         <div className="proposal__buttons mt-15">
-          {step && proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && (
-            <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
-          )}
-          {step && step.project && step.project.opinionCanBeFollowed ? (
+          {step &&
+            proposal.currentVotableStep &&
+            step.id === proposal.currentVotableStep.id &&
+            proposal.form.objectType !== 'ESTABLISHMENT' && (
+              <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
+            )}
+          {step &&
+          step.project &&
+          step.project.opinionCanBeFollowed &&
+          proposal.form.objectType !== 'ESTABLISHMENT' ? (
             <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
           ) : null}
+          {proposal.form.objectType === 'ESTABLISHMENT' && (
+            <Button
+              href={proposal.url}
+              className="btn btn-default proposal__establishment"
+              id="proposal-support-btn-placeholder">
+              <FormattedMessage id="support" />
+            </Button>
+          )}
         </div>
         {step &&
           step.voteThreshold !== null &&
@@ -124,6 +139,9 @@ export default createFragmentContainer(container, {
       trashedStatus
       url
       summaryOrBodyExcerpt
+      form {
+        objectType
+      }
       media {
         url
         name

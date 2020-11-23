@@ -130,10 +130,8 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
           },
           "category": null,
           "createdAt": "2015-01-01 00:00:00",
-          "draft": false,
           "form": Object {
-            "canContact": false,
-            "isProposalForm": false,
+            "objectType": "QUESTION",
           },
           "id": "1",
           "media": null,
@@ -143,7 +141,6 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
             },
           },
           "publishedAt": "2015-01-01 00:00:00",
-          "theme": null,
           "title": "titre",
           "updatedAt": "2015-01-05 00:00:00",
           "url": "true",
@@ -288,13 +285,10 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             },
             "color": "red",
             "icon": null,
-            "name": "cat",
           },
           "createdAt": "2015-01-01 00:00:00",
-          "draft": false,
           "form": Object {
-            "canContact": false,
-            "isProposalForm": true,
+            "objectType": "PROPOSAL",
           },
           "id": "1",
           "media": Object {
@@ -306,9 +300,6 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             },
           },
           "publishedAt": "2015-01-01 00:00:00",
-          "theme": Object {
-            "title": "titre du theme",
-          },
           "title": "titre",
           "updatedAt": "2015-01-05 00:00:00",
           "url": "true",
@@ -467,13 +458,10 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             },
             "color": "red",
             "icon": null,
-            "name": "cat",
           },
           "createdAt": "2015-01-01 00:00:00",
-          "draft": false,
           "form": Object {
-            "canContact": false,
-            "isProposalForm": true,
+            "objectType": "PROPOSAL",
           },
           "id": "1",
           "media": Object {
@@ -485,9 +473,6 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             },
           },
           "publishedAt": "2015-01-01 00:00:00",
-          "theme": Object {
-            "title": "titre du theme",
-          },
           "title": "titre",
           "updatedAt": "2015-01-05 00:00:00",
           "url": "true",
@@ -630,10 +615,8 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
           },
           "category": null,
           "createdAt": "2015-01-01 00:00:00",
-          "draft": true,
           "form": Object {
-            "canContact": false,
-            "isProposalForm": false,
+            "objectType": "QUESTION",
           },
           "id": "1",
           "media": null,
@@ -643,9 +626,161 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
             },
           },
           "publishedAt": null,
-          "theme": null,
           "title": "titre",
           "updatedAt": "2015-01-05 00:10:00",
+          "url": "true",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </div>
+</ProposalPageHeader__Header>
+`;
+
+exports[`<ProposalPageHeader /> should render an establishment 1`] = `
+<ProposalPageHeader__Header
+  id="ProposalPageHeader"
+>
+  <div>
+    <ProposalPageHeader__HeaderActions>
+      <a
+        href="http://capco.test"
+      >
+        <Icon
+          color="#0388cc"
+          name="chevron-left"
+          size={9}
+        />
+        <FormattedMessage
+          id="establishment-back"
+          values={Object {}}
+        />
+      </a>
+    </ProposalPageHeader__HeaderActions>
+    <div
+      className="default-header"
+    >
+      <CategoryBackground
+        color="#1E88E5"
+        viewBox="0 0 230 75"
+      />
+    </div>
+    <ProposalPageHeader__Informations>
+      <h1>
+        Titre
+      </h1>
+      <ReactPlaceholder
+        customPlaceholder={
+          <div
+            style={
+              Object {
+                "display": "flex",
+              }
+            }
+          >
+            <RoundShape
+              color="#e3e3e3"
+              style={
+                Object {
+                  "height": 45,
+                  "width": 45,
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "marginLeft": 15,
+                }
+              }
+            >
+              <TextRow
+                color="#e3e3e3"
+                style={
+                  Object {
+                    "height": 15,
+                    "marginTop": 5,
+                    "width": 115,
+                  }
+                }
+              />
+              <TextRow
+                color="#e3e3e3"
+                style={
+                  Object {
+                    "height": 12,
+                    "marginTop": 10,
+                    "width": 200,
+                  }
+                }
+              />
+            </div>
+          </div>
+        }
+        ready={true}
+        showLoadingAnimation={true}
+      >
+        <div>
+          <Relay(Connect(UserAvatar))
+            user={
+              Object {
+                "$fragmentRefs": null,
+                "username": "userAdmin",
+              }
+            }
+          />
+          <ProposalPageHeader__About>
+            <div>
+              userAdmin
+            </div>
+            <div>
+              <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />
+              <span>
+                 • 
+                <FormattedMessage
+                  id="proposal_form.notifications_comment.on_update"
+                  values={Object {}}
+                />
+              </span>
+            </div>
+          </ProposalPageHeader__About>
+        </div>
+      </ReactPlaceholder>
+    </ProposalPageHeader__Informations>
+    <Relay(Connect(ProposalPageHeaderButtons))
+      hasVotableStep={true}
+      opinionCanBeFollowed={true}
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "$fragmentRefs": null,
+            "username": "userAdmin",
+          },
+          "category": null,
+          "createdAt": "2015-01-01 00:00:00",
+          "form": Object {
+            "objectType": "ESTABLISHMENT",
+          },
+          "id": "1",
+          "media": null,
+          "project": Object {
+            "type": Object {
+              "title": "project.types.establishment",
+            },
+          },
+          "publishedAt": "2015-01-01 00:00:00",
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
           "url": "true",
         }
       }
@@ -786,10 +921,8 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
           },
           "category": null,
           "createdAt": "2015-01-01 00:00:00",
-          "draft": false,
           "form": Object {
-            "canContact": false,
-            "isProposalForm": true,
+            "objectType": "PROPOSAL",
           },
           "id": "1",
           "media": null,
@@ -799,9 +932,6 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
             },
           },
           "publishedAt": "2015-01-01 00:00:00",
-          "theme": Object {
-            "title": "titre du theme",
-          },
           "title": "titre",
           "updatedAt": "2015-01-05 00:00:00",
           "url": "true",

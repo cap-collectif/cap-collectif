@@ -11,10 +11,7 @@ describe('<ProposalListTable />', () => {
       usingThemes: true,
       usingDistrict: true,
       usingCategories: true,
-      usingDescription: true,
-      usingSummary: true,
-      isProposalForm: true,
-      descriptionMandatory: true,
+      objectType: 'PROPOSAL',
     },
     $refType,
   };
@@ -24,10 +21,7 @@ describe('<ProposalListTable />', () => {
       usingThemes: false,
       usingDistrict: false,
       usingCategories: false,
-      usingDescription: false,
-      usingSummary: false,
-      isProposalForm: false,
-      descriptionMandatory: false,
+      objectType: 'QUESTION',
     },
     $refType,
   };
@@ -36,14 +30,12 @@ describe('<ProposalListTable />', () => {
     edges: [
       {
         node: {
-          id: 'Title',
           title: 'Installation de bancs',
           reference: '1-3',
           publishedAt: '2018-08-16 15:15:39',
           theme: { title: 'Justice' },
           author: { displayName: 'admin', url: 'google.com', media: null },
           category: null,
-          currentVotableStep: null,
           estimation: null,
           district: null,
           progressSteps: [],
@@ -55,7 +47,6 @@ describe('<ProposalListTable />', () => {
       },
       {
         node: {
-          id: 'proposal4',
           title: 'Proposition plus votable',
           reference: '1-2',
           publishedAt: '2018-09-17 16:15:39',
@@ -63,7 +54,6 @@ describe('<ProposalListTable />', () => {
           status: { name: 'En cours', color: 'INFO' },
           author: { displayName: 'admin2', url: 'google.com', media: null },
           category: null,
-          currentVotableStep: null,
           estimation: null,
           district: null,
           progressSteps: [],

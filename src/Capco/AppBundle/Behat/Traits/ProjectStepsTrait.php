@@ -197,14 +197,14 @@ trait ProjectStepsTrait
     }
 
     /**
-     * @Then I should see all districts stats
+     * @Then I should see :all districts stats
      */
-    public function iShouldSeeAllDistrictsStats()
+    public function iShouldSeeAllDistrictsStats($all)
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
             ->getDistrictStatsModalItemsSelector();
-        $this->assertNumElements(18, $selector);
+        $this->assertNumElements($all, $selector);
     }
 
     /**

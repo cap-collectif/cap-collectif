@@ -383,7 +383,7 @@
         "bl": "^1.2.3"
     },
     "devDependencies": {
-        "@prettier/plugin-php": "https://github.com/prettier/plugin-php#0a250c0506d295d07a88b1a3b5ae7cfaaaf19367",
+        "@prettier/plugin-php": "^0.16.0",
         "@types/styled-system": "^5.1.10",
         "fast-xml-parser": "^3.17.4",
         "playwright": "^1.2.1"

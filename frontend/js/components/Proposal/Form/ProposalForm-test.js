@@ -64,7 +64,7 @@ describe('<ProposalForm />', () => {
       },
     ],
     suggestingSimilarProposals: true,
-    isProposalForm: true,
+    objectType: 'PROPOSAL',
     usingDistrict: true,
     usingDescription: true,
     usingSummary: true,
@@ -85,6 +85,8 @@ describe('<ProposalForm />', () => {
     descriptionHelpText: 'Description help',
     addressHelpText: 'Address help',
     proposalInAZoneRequired: true,
+    usingTipsmeee: false,
+    tipsmeeeHelpText: null,
   };
   const proposalForm = {
     id: 'proposalForm1',
@@ -143,7 +145,7 @@ describe('<ProposalForm />', () => {
       },
     ],
     suggestingSimilarProposals: true,
-    isProposalForm: true,
+    objectType: 'PROPOSAL',
     usingDistrict: true,
     usingDescription: true,
     usingSummary: true,
@@ -154,6 +156,8 @@ describe('<ProposalForm />', () => {
     themeMandatory: true,
     descriptionMandatory: true,
     usingCategories: true,
+    usingTipsmeee: true,
+    tipsmeeeHelpText: 'this is tipsmeee',
     categoryMandatory: true,
     categoryHelpText: 'Category help',
     usingAddress: true,
@@ -169,11 +173,13 @@ describe('<ProposalForm />', () => {
   const props = {
     intl: intlMock,
     ...formMock,
+    tipsmeeeIdDisabled: false,
     responses: [],
     proposalForm: {
       ...proposalForm,
       $refType,
     },
+    user: { id: 'user', username: 'user' },
     themes: [{ id: 'theme1', title: 'Theme 1' }],
     submitting: false,
     dispatch: jest.fn(),
@@ -181,6 +187,7 @@ describe('<ProposalForm />', () => {
       ...features,
       themes: true,
       districts: true,
+      unstable__tipsmeee: false,
     },
     titleValue: 'Proposal title',
     instanceName: 'dev',
@@ -192,6 +199,7 @@ describe('<ProposalForm />', () => {
       summary: 'Proposal summary',
       publicationStatus: 'PUBLISHED',
       address: null,
+      tipsmeeeId: '8w0k53L28',
       theme: { id: 'theme1' },
       district: { id: 'district1' },
       category: { id: 'category1' },
@@ -226,10 +234,11 @@ describe('<ProposalForm />', () => {
   it('should render a create Question form', () => {
     const questionProps = {
       ...props,
+      tipsmeeeIdDisabled: false,
       proposalForm: {
         ...proposalForm,
         $refType,
-        isProposalForm: false,
+        objectType: 'QUESTION',
       },
     };
     const wrapper = shallow(<ProposalForm {...questionProps} proposal={null} />);
@@ -239,13 +248,34 @@ describe('<ProposalForm />', () => {
   it('should render a create Question form with hidden questions', () => {
     const questionProps = {
       ...props,
+      tipsmeeeIdDisabled: false,
       proposalForm: {
         ...hiddenQuestionsProposalForm,
         $refType,
-        isProposalForm: false,
+        objectType: 'QUESTION',
       },
     };
     const wrapper = shallow(<ProposalForm {...questionProps} proposal={null} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render a create ESTABLISHMENT form ', () => {
+    const establishmentProps = {
+      ...props,
+      features: {
+        ...features,
+        themes: true,
+        districts: true,
+        unstable__tipsmeee: true,
+      },
+      tipsmeeeIdDisabled: true,
+      proposalForm: {
+        ...proposalForm,
+        usingTipsmeee: true,
+        $refType,
+        objectType: 'ESTABLISHMENT',
+      },
+    };
+    const wrapper = shallow(<ProposalForm {...establishmentProps} proposal={null} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -21,6 +21,7 @@ import ProposalPageVotes from './Votes/ProposalPageVotes';
 import ProposalPageBlog from './Blog/ProposalPageBlog';
 import ProposalPageFollowers from './Followers/ProposalPageFollowers';
 import ProposalDraftAlert from './ProposalDraftAlert';
+import ProposalPageDonators from "~/components/Proposal/Page/Donators/ProposalPageDonators";
 
 export type Props = {|
   query: ProposalPageLogic_query,
@@ -185,6 +186,9 @@ export const ProposalPageLogic = ({
             <Tab.Pane eventKey="followers">
               <ProposalPageFollowers proposal={proposal} pageAdmin={false} />
             </Tab.Pane>
+            <Tab.Pane eventKey="donators">
+              <ProposalPageDonators proposal={proposal} />
+            </Tab.Pane>
           </Tab.Content>
         </PageContainer>
       </Tab.Container>
@@ -245,6 +249,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
         ...ProposalPageVotes_proposal
         ...ProposalPageBlog_proposal
         ...ProposalPageFollowers_proposal
+        ...ProposalPageDonators_proposal
         ...ProposalPageHeader_proposal
           @arguments(
             isAuthenticated: $isAuthenticated

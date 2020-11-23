@@ -15,3 +15,9 @@ services:
 
     Symfony\Component\Cache\Adapter\ApcuAdapter:
         public: true
+
+framework:
+    http_client:
+        scoped_clients:
+            tipsmeee.client:
+                base_uri: 'https://api-stage.tipsmeee.com/'

@@ -27,7 +27,7 @@ describe('<ProposalVoteBasketWidget />', () => {
       voteType: 'SIMPLE',
       budget: null,
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -61,7 +61,7 @@ describe('<ProposalVoteBasketWidget />', () => {
       budget: null,
       votesLimit: 2,
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -96,7 +96,7 @@ describe('<ProposalVoteBasketWidget />', () => {
       budget: 350000,
       votesLimit: null,
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -130,7 +130,7 @@ describe('<ProposalVoteBasketWidget />', () => {
       votesLimit: 2,
       viewerVotes: { totalCount: 0 },
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {

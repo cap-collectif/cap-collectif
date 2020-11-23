@@ -511,7 +511,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "isProposalForm",
+                                      "name": "objectType",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -1297,7 +1297,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "isProposalForm",
+                          "name": "objectType",
                           "storageKey": null,
                         },
                         Object {
@@ -1319,6 +1319,20 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "proposalInAZoneRequired",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "usingTipsmeee",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "tipsmeeeHelpText",
                           "storageKey": null,
                         },
                         Object {
@@ -2806,7 +2820,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "04e2603d678d514a735105c6e786e69e",
+          "cacheID": "a0583095b398b643ea4f6499cb300775",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2893,7 +2907,7 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
       ... on ProposalStep {
         __isProposalStep: __typename
         form {
-          isProposalForm
+          objectType
           id
         }
         project {
@@ -3014,10 +3028,12 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
     illustrationHelpText
     usingIllustration
     suggestingSimilarProposals
-    isProposalForm
+    objectType
     descriptionHelpText
     addressHelpText
     proposalInAZoneRequired
+    usingTipsmeee
+    tipsmeeeHelpText
   }
 }
 

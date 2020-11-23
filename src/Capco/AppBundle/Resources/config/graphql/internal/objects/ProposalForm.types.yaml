@@ -100,6 +100,9 @@ ProposalForm:
             isProposalForm:
                 type: 'Boolean!'
                 description: 'Proposal form is type of Proposal or Question'
+            objectType:
+                type: 'ProposalFormObjectType!'
+                description: 'The kind of proposal form (Proposal/Question/Establishment)'
             usingDescription:
                 type: 'Boolean!'
                 description: 'Proposal form using description field'
@@ -133,3 +136,9 @@ ProposalForm:
             isMapViewEnabled:
                 type: 'Boolean!'
                 description: 'True if the grid view is enabled.'
+            usingTipsmeee:
+                type: 'Boolean!'
+                description: 'True if tipsmeee is enabled.'
+            tipsmeeeHelpText:
+                type: 'String'
+                description: 'The help text for tipsmeee.'

@@ -329,7 +329,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "isProposalForm",
+                                        "name": "objectType",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -2071,7 +2071,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "be1911365e267d5587acd98eae05c609",
+        "cacheID": "0f78f06a7d54ec4a049fcf873e242e71",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -2467,7 +2467,7 @@ fragment StepPageHeader_step on Step {
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
-        isProposalForm
+        objectType
         id
       }
       project {
@@ -2847,7 +2847,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "isProposalForm",
+                                        "name": "objectType",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -4589,7 +4589,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "be1911365e267d5587acd98eae05c609",
+        "cacheID": "0f78f06a7d54ec4a049fcf873e242e71",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4985,7 +4985,7 @@ fragment StepPageHeader_step on Step {
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
-        isProposalForm
+        objectType
         id
       }
       project {
@@ -5365,7 +5365,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "isProposalForm",
+                                        "name": "objectType",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -7107,7 +7107,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "be1911365e267d5587acd98eae05c609",
+        "cacheID": "0f78f06a7d54ec4a049fcf873e242e71",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -7503,7 +7503,7 @@ fragment StepPageHeader_step on Step {
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
-        isProposalForm
+        objectType
         id
       }
       project {
@@ -7883,7 +7883,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "isProposalForm",
+                                        "name": "objectType",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -9625,7 +9625,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "be1911365e267d5587acd98eae05c609",
+        "cacheID": "0f78f06a7d54ec4a049fcf873e242e71",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -10021,7 +10021,7 @@ fragment StepPageHeader_step on Step {
     ... on ProposalStep {
       __isProposalStep: __typename
       form {
-        isProposalForm
+        objectType
         id
       }
       project {

@@ -3,15 +3,18 @@ import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import styled, { type StyledComponent } from 'styled-components';
 import colors from '~/utils/colors';
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper';
 import type { ProposalPageTabs_proposal } from '~relay/ProposalPageTabs_proposal.graphql';
 import type { ProposalPageTabs_step } from '~relay/ProposalPageTabs_step.graphql';
+import type { FeatureToggles, GlobalState } from '~/types';
 
 type Props = {
   proposal: ?ProposalPageTabs_proposal,
   step: ?ProposalPageTabs_step,
+  features: FeatureToggles,
   tabKey: string,
   votesCount: number,
 };
@@ -76,9 +79,13 @@ const Tabs: StyledComponent<{ loading: boolean }, {}, HTMLDivElement> = styled.d
   }
 `;
 
-export const ProposalPageTabs = ({ proposal, step, tabKey, votesCount }: Props) => {
+export const ProposalPageTabs = ({ proposal, step, tabKey, votesCount, features }: Props) => {
   const showVotesTab = votesCount > 0 || proposal?.currentVotableStep !== null;
   const showFollowersTab = proposal?.project?.opinionCanBeFollowed;
+  const showDonatorsTab =
+    features.unstable__tipsmeee && proposal && proposal.tipsmeee
+      ? proposal.tipsmeee.donatorsCount > 0
+      : false;
   const voteTabLabel =
     step && isInterpellationContextFromProposal(proposal) ? 'global.support' : 'global.vote';
   const hasOfficialAnswer = proposal?.news?.edges
@@ -116,12 +123,23 @@ export const ProposalPageTabs = ({ proposal, step, tabKey, votesCount }: Props) 
             )}
           </NavItem>
         )}
+        {(showDonatorsTab || !proposal) && (
+          <NavItem disabled={!proposal} eventKey="donators" active={tabKey === 'donators'}>
+            <FormattedMessage id="proposal.tabs.donators" />
+            {proposal && (
+              <span className="tip">{proposal.tipsmeee ? proposal.tipsmeee.donatorsCount : 0}</span>
+            )}
+          </NavItem>
+        )}
       </Nav>
     </Tabs>
   );
 };
+const mapStateToProps = (state: GlobalState) => ({
+  features: state.default.features,
+});
 
-export default createFragmentContainer(ProposalPageTabs, {
+export default createFragmentContainer(connect(mapStateToProps)(ProposalPageTabs), {
   step: graphql`
     fragment ProposalPageTabs_step on ProposalStep {
       id
@@ -133,7 +151,7 @@ export default createFragmentContainer(ProposalPageTabs, {
       form {
         usingCategories
         usingThemes
-        isProposalForm
+        objectType
       }
       news {
         totalCount
@@ -161,6 +179,9 @@ export default createFragmentContainer(ProposalPageTabs, {
           title
         }
         opinionCanBeFollowed
+      }
+      tipsmeee {
+        donatorsCount
       }
     }
   `,

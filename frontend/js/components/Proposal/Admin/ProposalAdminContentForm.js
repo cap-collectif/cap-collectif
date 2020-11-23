@@ -731,10 +731,12 @@ export default createFragmentContainer(container, {
         illustrationHelpText
         usingIllustration
         suggestingSimilarProposals
-        isProposalForm
+        objectType
         descriptionHelpText
         addressHelpText
         proposalInAZoneRequired
+        usingTipsmeee
+        tipsmeeeHelpText
       }
     }
   `,

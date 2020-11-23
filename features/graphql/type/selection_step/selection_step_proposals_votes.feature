@@ -89,7 +89,7 @@ Scenario: Admin wants to get votes for a question in a selection step
                   }
               }
               form {
-                isProposalForm
+                objectType
               }
           }
       }
@@ -127,7 +127,7 @@ Scenario: Admin wants to get votes for a question in a selection step
               ]
            },
            "form":{
-              "isProposalForm":false
+              "objectType":"QUESTION"
            }
         }
      }

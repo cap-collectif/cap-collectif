@@ -20,7 +20,7 @@ describe('<ProposalVoteThresholdProgressBar />', () => {
       $refType,
       id: 'proposal1',
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -41,7 +41,7 @@ describe('<ProposalVoteThresholdProgressBar />', () => {
       $refType,
       id: 'proposal1',
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {

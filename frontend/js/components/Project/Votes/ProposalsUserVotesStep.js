@@ -37,11 +37,12 @@ export const ProposalsUserVotesStep = ({
   linkColor,
 }: Props) => {
   const [showAbout, setShowAbout] = useState<boolean>(false);
-  const keyTradProjectCount = step.form?.isProposalForm
-    ? isInterpellationContextFromStep(step)
-      ? 'interpellation.support.count'
-      : 'votes-count'
-    : 'count-questions';
+  const keyTradProjectCount =
+    step.form?.objectType === 'PROPOSAL'
+      ? isInterpellationContextFromStep(step)
+        ? 'interpellation.support.count'
+        : 'votes-count'
+      : 'count-questions';
 
   const onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
     return UpdateProposalVotesMutation.commit(

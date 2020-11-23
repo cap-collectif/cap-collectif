@@ -9,7 +9,7 @@ describe('<ProposalList />', () => {
   const emptyStep = {
     id: '1',
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {
@@ -36,7 +36,7 @@ describe('<ProposalList />', () => {
   const collectStep = {
     id: '1',
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {
@@ -63,7 +63,7 @@ describe('<ProposalList />', () => {
 
   const selectionStep = {
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {
@@ -84,7 +84,7 @@ describe('<ProposalList />', () => {
 
   const collectInterpellationStep = {
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {
@@ -96,9 +96,30 @@ describe('<ProposalList />', () => {
     id: '1',
   };
 
+  const collectEstablishmentStep = {
+    form: {
+      objectType: 'PROPOSAL',
+    },
+    project: {
+      type: {
+        title: 'global.consultation',
+      },
+    },
+    $refType,
+    $fragmentRefs,
+    id: '1',
+  };
+
   it('should render a collectStep interpellation list', () => {
     const wrapper = shallow(
       <ProposalList proposals={proposalsList} step={collectInterpellationStep} viewer={null} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a collectStep establishment list', () => {
+    const wrapper = shallow(
+      <ProposalList proposals={proposalsList} step={collectEstablishmentStep} viewer={null} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -417,7 +417,14 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "isProposalForm",
+                                      "name": "objectType",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "usingTipsmeee",
                                       "storageKey": null,
                                     },
                                     Object {
@@ -425,6 +432,31 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                       "args": null,
                                       "kind": "ScalarField",
                                       "name": "id",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "TipsMeee",
+                                  "kind": "LinkedField",
+                                  "name": "tipsmeee",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "donationTotalCount",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "donationCount",
                                       "storageKey": null,
                                     },
                                   ],
@@ -804,7 +836,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c5e7b1cbe44652a53b22c73ee5cf5b58",
+          "cacheID": "ecc0db285a4c023690eac6684afc3027",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -874,6 +906,10 @@ fragment ProposalPreviewBody_proposal_3UaCIZ on Proposal {
   trashedStatus
   url
   summaryOrBodyExcerpt
+  form {
+    objectType
+    id
+  }
   media {
     url
     name
@@ -901,8 +937,13 @@ fragment ProposalPreviewFooter_proposal_2tPna9 on Proposal {
   id
   form {
     commentable
-    isProposalForm
+    objectType
+    usingTipsmeee
     id
+  }
+  tipsmeee {
+    donationTotalCount
+    donationCount
   }
   comments {
     totalCount

@@ -28,7 +28,10 @@ describe('<ProposalPageTabs />', () => {
     form: {
       usingThemes: true,
       usingCategories: true,
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
+    },
+    tipsmeee: {
+      donatorsCount: 2,
     },
   };
 
@@ -50,12 +53,24 @@ describe('<ProposalPageTabs />', () => {
       ...features,
       districts: true,
       themes: true,
+      unstable__tipsmeee: false,
     },
     viewer: null,
   };
 
   it('should render Tabs with correct DOM structure', () => {
     const wrapper = shallow(<ProposalPageTabs proposal={proposal} {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render Tabs with tipsmeee enable', () => {
+    const wrapper = shallow(
+      <ProposalPageTabs
+        proposal={proposal}
+        {...props}
+        features={{ ...features, districts: true, themes: true, unstable__tipsmeee: true }}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 

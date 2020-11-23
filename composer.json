@@ -205,7 +205,8 @@
         "redirectionio/proxy-symfony": "^0.2.1",
         "doctrine/cache": "^1.10",
         "symfony/proxy-manager-bridge": "4.4.*",
-        "symfony/maker-bundle": "^1.20"
+        "symfony/maker-bundle": "^1.20",
+        "symfony/http-client": "4.4.13"
     },
     "require-dev": {
         "behat/behat": "^3.3",

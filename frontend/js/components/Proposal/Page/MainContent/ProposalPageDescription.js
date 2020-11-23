@@ -55,7 +55,6 @@ export const ProposalPageDescription = ({ proposal }: Props) => {
 export default createFragmentContainer(ProposalPageDescription, {
   proposal: graphql`
     fragment ProposalPageDescription_proposal on Proposal {
-      id
       body
       summary
     }

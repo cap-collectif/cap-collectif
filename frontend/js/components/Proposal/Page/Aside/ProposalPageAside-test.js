@@ -10,15 +10,14 @@ const proposal = {
   $refType,
   $fragmentRefs,
   currentVotableStep: {
-    id: 'cvs1',
     voteType: 'SIMPLE',
-    voteThreshold: null,
     votesRanking: true,
     $fragmentRefs,
   },
   form: {
     usingCategories: true,
     usingThemes: false,
+    usingTipsmeee: false,
   },
 };
 
@@ -60,6 +59,23 @@ describe('<ProposalPageAside />', () => {
         isAnalysing
         isAuthenticated
         features={{ ...features }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly with tipsmeee', () => {
+    const wrapper = shallow(
+      <ProposalPageAside
+        proposal={{
+          ...proposal,
+          form: { usingCategories: true, usingThemes: true, usingTipsmeee: true },
+        }}
+        {...props}
+        opinionCanBeFollowed
+        hasVotableStep
+        isAnalysing
+        isAuthenticated
+        features={{ ...features, unstable__tipsmeee: true }}
       />,
     );
     expect(wrapper).toMatchSnapshot();

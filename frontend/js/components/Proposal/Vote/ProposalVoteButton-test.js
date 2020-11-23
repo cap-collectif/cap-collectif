@@ -22,7 +22,7 @@ describe('<ProposalVoteButton />', () => {
       viewerHasVote: false,
       viewerVote: null,
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -45,7 +45,7 @@ describe('<ProposalVoteButton />', () => {
         $fragmentRefs,
       },
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -68,7 +68,7 @@ describe('<ProposalVoteButton />', () => {
         $fragmentRefs,
       },
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -90,7 +90,7 @@ describe('<ProposalVoteButton />', () => {
         $fragmentRefs,
       },
       form: {
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {

@@ -258,7 +258,7 @@ Capco\AppBundle\Entity\ProposalForm:
         proposalInAZoneRequired: false
         reference: 113
         allowAknowledge: true
-        isProposalForm: false
+        objectType: 'question'
     proposalform15:
         id: proposalform15
         step: '@collectstepWithQuestions'
@@ -353,3 +353,27 @@ Capco\AppBundle\Entity\ProposalForm:
         descriptionMandatory: true
         usingIllustration: true
         canContact: true
+    proposalformCafetier:
+        id: proposalformCafetier
+        title: Formulaire du financement participatif des cafetiers
+        description: Avec un tipsmeee
+        step: '@collectStepCafetier'
+        reference: 21
+        usingThemes: false
+        usingAddress: true
+        usingDistrict: true
+        usingDescription: true
+        usingIllustration: true
+        isMapViewEnabled: true
+        usingCategories: false
+        usingSummary: true
+        usingTipsmeee: true
+        tipsmeeeHelpText: Code d'identification TipsMeee
+        districtMandatory: false
+        themeMandatory: false
+        descriptionMandatory: true
+        categoryMandatory: true
+        objectType: 'establishment'
+        zoomMap: 9
+        mapCenter: '[{"address_components":[{"long_name":"Paris","short_name":"Paris","types":["locality", "political"]},{"long_name":"Ile-de-France","short_name":"Ile-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Paris,France","geometry":{"location":{"lat":48.8499198,"lng":2.6370411},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
+        addressHelpText: Précisez l'adresse de votre café

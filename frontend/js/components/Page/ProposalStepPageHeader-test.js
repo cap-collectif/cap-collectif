@@ -14,7 +14,7 @@ describe('<ProposalStepPageHeader />', () => {
       form: {
         id: 'form1',
         $fragmentRefs,
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -43,7 +43,7 @@ describe('<ProposalStepPageHeader />', () => {
       form: {
         id: 'form1',
         $fragmentRefs,
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -72,7 +72,7 @@ describe('<ProposalStepPageHeader />', () => {
       form: {
         id: 'form1',
         $fragmentRefs,
-        isProposalForm: false,
+        objectType: 'QUESTION',
       },
       project: {
         type: {
@@ -101,7 +101,7 @@ describe('<ProposalStepPageHeader />', () => {
       form: {
         id: 'form1',
         $fragmentRefs,
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {
@@ -130,7 +130,7 @@ describe('<ProposalStepPageHeader />', () => {
       form: {
         id: 'form1',
         $fragmentRefs,
-        isProposalForm: true,
+        objectType: 'PROPOSAL',
       },
       project: {
         type: {

@@ -166,7 +166,6 @@ export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalPageVoteThreshold_proposal on Proposal
       @argumentDefinitions(stepId: { type: "ID!" }) {
-      id
       votes(stepId: $stepId, first: 0) {
         totalCount
         totalPointsCount
@@ -176,7 +175,6 @@ export default createFragmentContainer(container, {
   `,
   step: graphql`
     fragment ProposalPageVoteThreshold_step on Step {
-      id
       ... on CollectStep {
         voteThreshold
       }

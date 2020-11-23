@@ -67,6 +67,7 @@ export const styleGuideColors = {
   red: '#e02020',
   darkBlue: '#001b38',
   gray: '#6b7885',
+  gray500: '#85919D',
   darkGray: '#374850',
   blue: '#3b88fd',
   blue100: '#fafcff',

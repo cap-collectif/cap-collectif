@@ -189,7 +189,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   };
 
   getModalVoteTranslation = (step: ProposalVoteModal_step) => {
-    if (step.form && step.form.isProposalForm) {
+    if (step.form && step.form.objectType === 'PROPOSAL') {
       if (isInterpellationContextFromStep(step)) {
         return 'interpellation.support.count';
       }

@@ -12,7 +12,7 @@ const defaultProps = {
     id: '1',
     title: 'Flammenwerfer',
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {
@@ -32,7 +32,7 @@ const interpellationProps = {
     id: '1',
     title: 'Flammenwerfer',
     form: {
-      isProposalForm: true,
+      objectType: 'PROPOSAL',
     },
     project: {
       type: {

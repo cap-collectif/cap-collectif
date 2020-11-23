@@ -12,7 +12,11 @@ import { Card } from '~/components/Proposal/Page/ProposalPage.style';
 
 type Props = { proposal: ProposalPageAdvancement_proposal };
 
-const ProposalDetailAdvancementContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const ProposalDetailAdvancementContainer: StyledComponent<
+  {},
+  {},
+  HTMLDivElement,
+> = styled.div`
   padding: 20px;
 
   h4 {

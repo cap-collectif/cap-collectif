@@ -250,3 +250,12 @@ InternalProposal:
                 type: 'Boolean!'
                 resolve: '@=value.canContribute(getUser())'
                 description: 'Viewer can contribute to the proposal'
+            tipsmeeeId:
+                access: "hasFeatureFlag('unstable__tipsmeee')"
+                type: 'String'
+                description: 'The ID of tipsmeee.'
+            tipsmeee:
+                access: "hasFeatureFlag('unstable__tipsmeee')"
+                type: 'TipsMeee'
+                description: 'Return all tipsmeee related data.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalTipsMeeeResolver", [value, args])'

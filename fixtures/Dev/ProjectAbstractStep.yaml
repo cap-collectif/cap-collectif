@@ -354,3 +354,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@debateStepCannabis'
         project: '@projectCannabis'
         position: 1
+    pasCafetier1:
+        id: pasCafetier1
+        step: '@collectStepCafetier'
+        project: '@projectCafetier'
+        position: 1

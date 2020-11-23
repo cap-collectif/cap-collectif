@@ -1,5 +1,6 @@
 // @flow
 import { graphql } from 'react-relay';
+import type { ProposalFormObjectType } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
 // We explicitly write the translation keys rather than doing it dynamically so as not to break the translation detection command.
 export const getProposalLabelByType = (projectType: ?string, label: string): string => {
@@ -41,7 +42,7 @@ const ProposalFragment = {
         }
       }
       form {
-        isProposalForm
+        objectType
       }
     }
   `,
@@ -54,7 +55,7 @@ type Proposal = {
     |},
   },
   +form: {
-    +isProposalForm: boolean,
+    +objectType: ProposalFormObjectType,
   },
 };
 
@@ -63,7 +64,7 @@ const StepFragment = {
   step: graphql`
     fragment interpellationLabelHelper_step on ProposalStep {
       form {
-        isProposalForm
+        objectType
       }
       project {
         type {
@@ -76,7 +77,7 @@ const StepFragment = {
 
 type ProposalStep = {
   +form: ?{
-    +isProposalForm: boolean,
+    +objectType: ProposalFormObjectType,
   },
   +project: ?{
     +type: ?{|
@@ -88,7 +89,7 @@ type ProposalStep = {
 export const isInterpellationContextFromProposal = (proposal: ?Proposal): boolean => {
   return !!(
     proposal?.project?.type &&
-    proposal?.form.isProposalForm &&
+    proposal?.form.objectType === 'PROPOSAL' &&
     proposal?.project.type.title === 'project.types.interpellation'
   );
 };
@@ -98,7 +99,16 @@ export const isInterpellationContextFromStep = (step: ProposalStep): boolean => 
     step.project &&
     step.project.type &&
     step.form &&
-    step.form.isProposalForm &&
+    step.form.objectType === 'PROPOSAL' &&
     step.project.type.title === 'project.types.interpellation'
+  );
+};
+
+export const isEstablishmentFormStep = (step: ProposalStep): boolean => {
+  return !!(
+    step.project &&
+    step.project.type &&
+    step.form &&
+    step.form.objectType === 'ESTABLISHMENT'
   );
 };
