@@ -59,6 +59,7 @@ import {
 } from '~/plugin/APIEnterprise/APIEnterpriseFunctions';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Page/Header/ProposalPageHeaderButtons';
+import config from '~/config';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -142,13 +143,12 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
-const memoizeAvailableQuestions: any = memoize(() => {
-});
+const memoizeAvailableQuestions: any = memoize(() => {});
 
 const TipsmeeeFormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   padding: 24px;
-  background: ${ styleGuideColors.blue100 };
-  border: 1px solid ${ styleGuideColors.blue200 };
+  background: ${styleGuideColors.blue100};
+  border: 1px solid ${styleGuideColors.blue200};
   box-sizing: border-box;
   border-radius: 4px;
   figure {
@@ -157,7 +157,7 @@ const TipsmeeeFormContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
 `;
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const {proposalForm, proposal, features, intl} = props;
+  const { proposalForm, proposal, features, intl } = props;
   const data = {
     title: values.title,
     summary: values.summary,
@@ -172,7 +172,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
   };
 
-  if(!proposalForm.step) {
+  if (!proposalForm.step) {
     return;
   }
   const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
@@ -187,23 +187,23 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   );
   const errors = {};
   const isEmptyArray = responsesError.responses ? responsesError.responses.filter(Boolean) : [];
-  if(isEmptyArray && isEmptyArray.length) {
+  if (isEmptyArray && isEmptyArray.length) {
     errors.responses = responsesError.responses;
     throw new SubmissionError(errors);
   }
 
-  if(proposal) {
+  if (proposal) {
     return ChangeProposalContentMutation.commit({
-      input: {...data, id: proposal.id},
+      input: { ...data, id: proposal.id },
       proposalRevisionsEnabled: features.proposal_revisions ?? false,
     })
       .then(response => {
-        if(!response.changeProposalContent || !response.changeProposalContent.proposal) {
+        if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
           throw new Error('Mutation "changeProposalContent" failed.');
         }
         window.removeEventListener('beforeunload', onUnload);
         dispatch(closeEditProposalModal());
-        if(window.location.href.includes(EDIT_MODAL_ANCHOR)) {
+        if (window.location.href.includes(EDIT_MODAL_ANCHOR)) {
           window.history.replaceState(
             null,
             '',
@@ -220,17 +220,17 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
 
   return CreateProposalMutation.commit({
-    input: {...data, proposalFormId: proposalForm.id},
+    input: { ...data, proposalFormId: proposalForm.id },
   })
     .then(response => {
-      if(response.createProposal && response.createProposal.userErrors) {
-        for(const error of response.createProposal.userErrors) {
-          if(error.message === 'You contributed too many times.') {
-            throw new SubmissionError({_error: 'publication-limit-reached'});
+      if (response.createProposal && response.createProposal.userErrors) {
+        for (const error of response.createProposal.userErrors) {
+          if (error.message === 'You contributed too many times.') {
+            throw new SubmissionError({ _error: 'publication-limit-reached' });
           }
         }
       }
-      if(!response.createProposal || !response.createProposal.proposal) {
+      if (!response.createProposal || !response.createProposal.proposal) {
         throw new Error('Mutation "createProposal" failed.');
       }
       const createdProposal = response.createProposal.proposal;
@@ -256,7 +256,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       }, TIMEOUT_BEFORE_REDIRECTION);
     })
     .catch(e => {
-      if(e instanceof SubmissionError) {
+      if (e instanceof SubmissionError) {
         throw e;
       }
       throw new SubmissionError({
@@ -266,26 +266,25 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 export const asyncValidate = (values: FormValues) => {
-  if(values.tipsmeeeId) {
-    const tipsmeeeUrl = `https://tipsmeee.fra1.digitaloceanspaces.com/datasStage/qrs/qr_${ values.tipsmeeeId }.png`;
+  if (values.tipsmeeeId) {
+    const tipsmeeeUrl = config.isDevOrTest
+      ? `https://tipsmeee.fra1.digitaloceanspaces.com/datasStage/qrs/qr_${values.tipsmeeeId}.png`
+      : `https://tipsmeee.fra1.digitaloceanspaces.com/datas/qrs/qr_${values.tipsmeeeId}.png`;
     // https://stackoverflow.com/questions/34116294/rejecting-promise-when-using-fetch
-    return fetch(tipsmeeeUrl).then(
-      function(res) {
-        if(res.status === 200 && res.ok) {
-          return res;
-        }
-        // eslint-disable-next-line no-throw-literal
-        throw {tipsmeeeId: 'tipsmeee-id-error'};
+    return fetch(tipsmeeeUrl).then(function(res) {
+      if (res.status === 200 && res.ok) {
+        return res;
       }
-    );
+      // eslint-disable-next-line no-throw-literal
+      throw { tipsmeeeId: 'tipsmeee-id-error' };
+    });
   }
-  return new Promise<void>((resolve) => {
+  return new Promise<void>(resolve => {
     resolve();
-  })
-
+  });
 };
 
-const validate = (values: FormValues, {proposalForm, features, intl}: Props) => {
+const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
   const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
 
   return validateProposalContent(
@@ -310,8 +309,8 @@ type State = {
 
 export class ProposalForm extends React.Component<Props, State> {
   loadTitleSuggestions = debounce((title: string) => {
-    const {proposal: currentProposal, proposalForm} = this.props;
-    this.setState({isLoadingTitleSuggestions: true});
+    const { proposal: currentProposal, proposalForm } = this.props;
+    this.setState({ isLoadingTitleSuggestions: true });
     fetchQuery(
       environment,
       searchProposalsQuery,
@@ -321,7 +320,7 @@ export class ProposalForm extends React.Component<Props, State> {
       }: ProposalFormSearchProposalsQueryVariables),
     ).then((data: ProposalFormSearchProposalsQueryResponse) => {
       let titleSuggestions = [];
-      if(data.form && data.form.proposals && data.form.proposals.edges) {
+      if (data.form && data.form.proposals && data.form.proposals.edges) {
         titleSuggestions = data.form.proposals.edges
           .filter(Boolean)
           .map(edge => edge.node)
@@ -345,8 +344,8 @@ export class ProposalForm extends React.Component<Props, State> {
 
   componentDidMount() {
     window.addEventListener('beforeunload', onUnload);
-    const {responses, proposalForm, dispatch, instanceName, intl} = this.props;
-    if(TRIGGER_FOR.includes(instanceName)) {
+    const { responses, proposalForm, dispatch, instanceName, intl } = this.props;
+    if (TRIGGER_FOR.includes(instanceName)) {
       handleVisibilityAccordingToType(
         intl,
         dispatch,
@@ -357,16 +356,16 @@ export class ProposalForm extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps({titleValue, addressValue, proposalForm}: Props) {
-    const {titleValue: titleValueProps, addressValue: addressValueProps} = this.props;
-    if(titleValueProps !== titleValue) {
-      this.setState({titleSuggestions: []});
-      if(titleValue && titleValue.length > 3) {
+  componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
+    const { titleValue: titleValueProps, addressValue: addressValueProps } = this.props;
+    if (titleValueProps !== titleValue) {
+      this.setState({ titleSuggestions: [] });
+      if (titleValue && titleValue.length > 3) {
         this.loadTitleSuggestions(titleValue);
       }
     }
-    if(addressValueProps !== addressValue) {
-      if(proposalForm.proposalInAZoneRequired && addressValue) {
+    if (addressValueProps !== addressValue) {
+      if (proposalForm.proposalInAZoneRequired && addressValue) {
         this.retrieveDistrictForLocation(JSON.parse(addressValue)[0].geometry.location);
       }
     }
@@ -377,7 +376,7 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   retrieveDistrictForLocation = (location: LatLng) => {
-    const {proposalForm, dispatch} = this.props;
+    const { proposalForm, dispatch } = this.props;
     fetchQuery(
       environment,
       getAvailableDistrictsQuery,
@@ -404,14 +403,14 @@ export class ProposalForm extends React.Component<Props, State> {
   };
 
   renderError() {
-    const {error, proposalForm} = this.props;
+    const { error, proposalForm } = this.props;
 
     return error === 'publication-limit-reached' ? (
       <Alert bsStyle="warning">
         <div>
           <h4>
             <strong>
-              <FormattedMessage id="publication-limit-reached"/>
+              <FormattedMessage id="publication-limit-reached" />
             </strong>
           </h4>
           <FormattedMessage
@@ -425,7 +424,7 @@ export class ProposalForm extends React.Component<Props, State> {
       </Alert>
     ) : (
       <Alert bsStyle="danger">
-        <i className="icon ion-ios-close-outline"/> <FormattedHTMLMessage id={ error }/>
+        <i className="icon ion-ios-close-outline" /> <FormattedHTMLMessage id={error} />
       </Alert>
     );
   }
@@ -459,8 +458,8 @@ export class ProposalForm extends React.Component<Props, State> {
         : proposalForm.objectType === 'ESTABLISHMENT'
         ? 'establishment-suggest_header'
         : proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
-          ? 'interpellation.suggest_header'
-          : 'question.suggest_header';
+        ? 'interpellation.suggest_header'
+        : 'question.suggest_header';
 
     const {
       districtIdsFilteredByAddress,
@@ -470,254 +469,254 @@ export class ProposalForm extends React.Component<Props, State> {
 
     const optional = (
       <span className="excerpt">
-        { ' ' }
-        <FormattedMessage id="global.optional"/>
+        {' '}
+        <FormattedMessage id="global.optional" />
       </span>
     );
     return (
       <form id="proposal-form">
-        <WYSIWYGRender className="mb-15" value={ proposalForm.description }/>
-        { error && this.renderError() }
+        <WYSIWYGRender className="mb-15" value={proposalForm.description} />
+        {error && this.renderError()}
         <Field
           name="title"
-          component={ component }
+          component={component}
           type="text"
           id="proposal_title"
           autoComplete="off"
-          help={ proposalForm.titleHelpText }
-          label={ <FormattedMessage id={ titleFieldTradKey }/> }
+          help={proposalForm.titleHelpText}
+          label={<FormattedMessage id={titleFieldTradKey} />}
           addonAfter={
             proposalForm.suggestingSimilarProposals ? (
               <Glyphicon
                 glyph="refresh"
-                className={ isLoadingTitleSuggestions ? 'glyphicon-spin' : '' }
+                className={isLoadingTitleSuggestions ? 'glyphicon-spin' : ''}
               />
             ) : null
           }
         />
-        { proposalForm.suggestingSimilarProposals ? (
-          <Collapse in={ titleSuggestions.length > 0 }>
+        {proposalForm.suggestingSimilarProposals ? (
+          <Collapse in={titleSuggestions.length > 0}>
             <Panel>
               <Panel.Heading>
                 <Panel.Title>
                   <FormattedMessage
-                    id={ titleSuggestHeader }
-                    values={ {
+                    id={titleSuggestHeader}
+                    values={{
                       matches: titleSuggestions.length,
                       terms: titleValue ? titleValue.split(' ').length : '',
-                    } }
+                    }}
                   />
                   <Button
-                    style={ {marginTop: -5} }
+                    style={{ marginTop: -5 }}
                     className="pull-right"
-                    onClick={ () => {
-                      this.setState({titleSuggestions: []});
-                    } }>
-                    <FormattedMessage id="global.close"/>
+                    onClick={() => {
+                      this.setState({ titleSuggestions: [] });
+                    }}>
+                    <FormattedMessage id="global.close" />
                   </Button>
                 </Panel.Title>
               </Panel.Heading>
               <ListGroup>
-                { titleSuggestions.slice(0, 5).map(suggestion => (
+                {titleSuggestions.slice(0, 5).map(suggestion => (
                   <ListGroupItem>
-                    <a href={ suggestion.url } className="external-link">
-                      { suggestion.title }
+                    <a href={suggestion.url} className="external-link">
+                      {suggestion.title}
                     </a>
                   </ListGroupItem>
-                )) }
+                ))}
               </ListGroup>
             </Panel>
           </Collapse>
-        ) : null }
-        { proposalForm.usingSummary && (
+        ) : null}
+        {proposalForm.usingSummary && (
           <Field
             name="summary"
-            component={ component }
+            component={component}
             type="textarea"
             id="global.summary"
             maxLength="140"
             minLength="2"
             autoComplete="off"
-            help={ proposalForm.summaryHelpText }
+            help={proposalForm.summaryHelpText}
             label={
               <span>
-                <FormattedMessage id="global.summary"/>
-                { optional }
+                <FormattedMessage id="global.summary" />
+                {optional}
               </span>
             }
           />
-        ) }
-        { features.themes && proposalForm.usingThemes && (
+        )}
+        {features.themes && proposalForm.usingThemes && (
           <Field
             name="theme"
             type="select"
             id="global.theme"
-            component={ component }
-            help={ proposalForm.themeHelpText }
+            component={component}
+            help={proposalForm.themeHelpText}
             label={
               <span>
-                <FormattedMessage id="global.theme"/>
-                { !proposalForm.themeMandatory && optional }
+                <FormattedMessage id="global.theme" />
+                {!proposalForm.themeMandatory && optional}
               </span>
             }>
             <FormattedMessage id="proposal.select.theme">
-              { (message: string) => (
+              {(message: string) => (
                 <option value="" disabled>
-                  { message }
+                  {message}
                 </option>
-              ) }
+              )}
             </FormattedMessage>
-            { themes.map(theme => (
-              <option key={ theme.id } value={ theme.id }>
-                { theme.title }
+            {themes.map(theme => (
+              <option key={theme.id} value={theme.id}>
+                {theme.title}
               </option>
-            )) }
+            ))}
           </Field>
-        ) }
-        { proposalForm.categories.length > 0 && proposalForm.usingCategories && (
+        )}
+        {proposalForm.categories.length > 0 && proposalForm.usingCategories && (
           <Field
             id="global.category"
             type="select"
             name="category"
-            component={ component }
-            help={ proposalForm.categoryHelpText }
+            component={component}
+            help={proposalForm.categoryHelpText}
             label={
               <span>
-                <FormattedMessage id="global.category"/>
-                { !proposalForm.categoryMandatory && optional }
+                <FormattedMessage id="global.category" />
+                {!proposalForm.categoryMandatory && optional}
               </span>
             }>
             <FormattedMessage id="proposal.select.category">
-              { (message: string) => (
+              {(message: string) => (
                 <option value="" disabled>
-                  { message }
+                  {message}
                 </option>
-              ) }
+              )}
             </FormattedMessage>
-            { proposalForm.categories.map(category => (
-              <option key={ category.id } value={ category.id }>
-                { category.name }
+            {proposalForm.categories.map(category => (
+              <option key={category.id} value={category.id}>
+                {category.name}
               </option>
-            )) }
+            ))}
           </Field>
-        ) }
-        { proposalForm.usingAddress && (
+        )}
+        {proposalForm.usingAddress && (
           <Field
             id="proposal_address"
-            component={ component }
+            component={component}
             type="address"
-            help={ proposalForm.addressHelpText }
+            help={proposalForm.addressHelpText}
             name="addressText"
-            formName={ formName }
-            label={ <FormattedMessage id="proposal_form.address"/> }
+            formName={formName}
+            label={<FormattedMessage id="proposal_form.address" />}
             placeholder="proposal.map.form.placeholder"
-            addressProps={ {
+            addressProps={{
               getAddress: (addressComplete: AddressComplete) =>
                 changeProps('address', JSON.stringify([addressComplete])),
-            } }
+            }}
           />
-        ) }
-        { features.districts && proposalForm.usingDistrict && proposalForm.districts.length > 0 && (
+        )}
+        {features.districts && proposalForm.usingDistrict && proposalForm.districts.length > 0 && (
           <Field
             id="proposal_district"
             type="select"
             name="district"
-            component={ component }
-            help={ proposalForm.districtHelpText }
+            component={component}
+            help={proposalForm.districtHelpText}
             label={
               <span>
-                <FormattedMessage id="proposal.district"/>
-                { !proposalForm.districtMandatory && optional }
+                <FormattedMessage id="proposal.district" />
+                {!proposalForm.districtMandatory && optional}
               </span>
             }>
             <FormattedMessage id="proposal.select.district">
-              { (message: string) => <option>{ message }</option> }
+              {(message: string) => <option>{message}</option>}
             </FormattedMessage>
-            { districtIdsFilteredByAddress.map(districtId => (
-              <option key={ districtId } value={ districtId }>
-                { proposalForm.districts.filter(district => district.id === districtId)[0].name }
+            {districtIdsFilteredByAddress.map(districtId => (
+              <option key={districtId} value={districtId}>
+                {proposalForm.districts.filter(district => district.id === districtId)[0].name}
               </option>
-            )) }
+            ))}
           </Field>
-        ) }
+        )}
 
-        { proposalForm.usingDescription && (
+        {proposalForm.usingDescription && (
           <Field
             id="proposal_body"
             type="editor"
             name="body"
-            component={ component }
+            component={component}
             label={
               <span>
-                <FormattedMessage id="proposal.body"/>
-                { !proposalForm.descriptionMandatory && optional }
+                <FormattedMessage id="proposal.body" />
+                {!proposalForm.descriptionMandatory && optional}
               </span>
             }
-            help={ proposalForm.descriptionHelpText }
+            help={proposalForm.descriptionHelpText}
           />
-        ) }
+        )}
 
         <FieldArray
           name="responses"
-          component={ renderResponses }
-          form={ form }
-          dispatch={ dispatch }
-          questions={ proposalForm.questions }
-          intl={ intl }
-          change={ changeProps }
-          responses={ responses }
-          availableQuestions={ availableQuestions }
-          memoize={ memoizeAvailableQuestions }
+          component={renderResponses}
+          form={form}
+          dispatch={dispatch}
+          questions={proposalForm.questions}
+          intl={intl}
+          change={changeProps}
+          responses={responses}
+          availableQuestions={availableQuestions}
+          memoize={memoizeAvailableQuestions}
         />
-        { proposalForm.usingIllustration && (
+        {proposalForm.usingIllustration && (
           <Field
             id="proposal_media"
             name="media"
-            component={ component }
+            component={component}
             type="image"
             label={
               <span>
-                <FormattedMessage id="proposal.media"/>
-                { optional }
+                <FormattedMessage id="proposal.media" />
+                {optional}
               </span>
             }
-            help={ proposalForm.illustrationHelpText }
+            help={proposalForm.illustrationHelpText}
           />
-        ) }
+        )}
 
-        { features.unstable__tipsmeee && proposalForm.usingTipsmeee && (
+        {features.unstable__tipsmeee && proposalForm.usingTipsmeee && (
           <>
-            <FormattedMessage id="configure-my-tipsmeee" tagName="p"/>
+            <FormattedMessage id="configure-my-tipsmeee" tagName="p" />
             <TipsmeeeFormContainer>
               <figure>
-                <img src="/svg/tipsmeee.svg" alt="tipsmeee logo"/>
+                <img src="/svg/tipsmeee.svg" alt="tipsmeee logo" />
               </figure>
-              <FormattedHTMLMessage id="tipsmeee-body" tagName="p"/>
+              <FormattedHTMLMessage id="tipsmeee-body" tagName="p" />
               <p>
                 <Button
                   target="_blank"
-                  href={ `https://www-stage.tipsmeee.com/login/capco/${ user.username }` }
+                  href={`https://www-stage.tipsmeee.com/login/capco/${user.username}`}
                   type="button">
-                  <FormattedMessage id="create-tipsmeee"/>
+                  <FormattedMessage id="create-tipsmeee" />
                 </Button>
               </p>
               <Field
                 id="proposal_tipsmeee"
                 name="tipsmeeeId"
-                component={ component }
+                component={component}
                 type="text"
-                placeholder={ proposalForm.tipsmeeeHelpText }
-                disabled={ tipsmeeeIdDisabled }
+                placeholder={proposalForm.tipsmeeeHelpText}
+                disabled={tipsmeeeIdDisabled}
                 label={
                   <span>
-                    <FormattedMessage id="proposal.tipsMeee"/>
-                    { optional }
+                    <FormattedMessage id="proposal.tipsMeee" />
+                    {optional}
                   </span>
                 }
               />
             </TipsmeeeFormContainer>
           </>
-        ) }
+        )}
       </form>
     );
   }
@@ -725,7 +724,7 @@ export class ProposalForm extends React.Component<Props, State> {
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState, {proposal, proposalForm}: Props) => {
+const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => {
   const defaultResponses = formatInitialResponsesValues(
     proposalForm.questions,
     proposal ? proposal.responses : [],

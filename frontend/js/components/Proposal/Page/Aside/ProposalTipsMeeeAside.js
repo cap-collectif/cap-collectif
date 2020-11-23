@@ -11,6 +11,7 @@ import {
   ProposalTipsmeeeQrCodeContainer,
 } from '~/components/Proposal/Page/ProposalPage.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import config from '~/config';
 
 type Props = {|
   +proposal: ProposalTipsMeeeAside_proposal$key,
@@ -66,14 +67,23 @@ const ProposalTipsMeeeAside = ({ proposal: proposalFragment }: Props) => {
               <FormattedMessage id="tipsmeee-qrcode-help" />
               <figure>
                 <img
-                  src={`https://tipsmeee.fra1.digitaloceanspaces.com/datasStage/qrs/qr_${proposal.tipsmeeeId}.png`}
+                  src={
+                    config.isDevOrTest
+                      ? `https://tipsmeee.fra1.digitaloceanspaces.com/datasStage/qrs/qr_${proposal.tipsmeeeId}.png`
+                      : `https://tipsmeee.fra1.digitaloceanspaces.com/datas/qrs/qr_${proposal.tipsmeeeId}.png`
+                  }
                   alt="qrcode"
                 />
               </figure>
             </ProposalTipsmeeeQrCodeContainer>
             <ProposalTipsmeeeContainer>
               <iframe
-                src={`https://www-stage.tipsmeee.com/captips/${proposal.tipsmeeeId}`}
+                scrolling="no"
+                src={
+                  config.isDevOrTest
+                    ? `https://www-stage.tipsmeee.com/captips/${proposal.tipsmeeeId}`
+                    : `https://tipsmeee.com/captips/${proposal.tipsmeeeId}`
+                }
                 title={proposal.title}
                 width="300"
                 height="650"
