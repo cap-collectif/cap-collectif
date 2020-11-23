@@ -10,7 +10,7 @@ ProposalTopDonator:
                 type: 'String!'
             amount:
                 description: 'The amount of the donation.'
-                type: 'Int!'
+                type: 'Float!'
             date:
                 description: 'The donation date.'
                 type: 'DateTime!'

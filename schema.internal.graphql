@@ -8214,7 +8214,7 @@ type ProposalTopDonator {
   name: String!
 
   """The amount of the donation."""
-  amount: Int!
+  amount: Float!
 
   """The donation date."""
   date: DateTime!
@@ -11275,7 +11275,7 @@ type TipsMeee {
   donatorsCount: Int!
 
   """The donation total count."""
-  donationTotalCount: Int!
+  donationTotalCount: Float!
 
   """The top donators of the proposal."""
   topDonators(

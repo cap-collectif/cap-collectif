@@ -30,12 +30,12 @@ class TipsMeeeSpec extends ObjectBehavior
             ],
         ]);
         $this->getDonatorsCount()->shouldBe(2);
-        $this->getDonationTotalCount()->shouldBe(1515);
+        $this->getDonationTotalCount()->shouldBe(30.0);
         $this->getTopDonators(5)->shouldBeLike([
             [
                 'email' => 'joueur_francais@capco.com',
                 'name' => 'joueur_francais',
-                'amount' => 1500,
+                'amount' => 15.0,
                 'date' => new \DateTime('2020-11-04T18:09:12'),
             ],
             [
@@ -95,14 +95,23 @@ class TipsMeeeSpec extends ObjectBehavior
         ]);
 
         $this->getDonatorsCount()->shouldBe(6);
-        $this->getDonationTotalCount()->shouldBe(5056);
+        $this->getDonationTotalCount()->shouldBe(601.0);
         $this->getTopDonators(1)->shouldBeLike([
             [
-                'email' => 'joueur_suisse@capco.com',
-                'name' => 'joueur_suisse',
-                'amount' => 2000,
+                'email' => 'ApplePay',
+                'name' => 'ApplePay',
+                'amount' => 500,
                 'date' => new \DateTime('2020-11-04T18:09:12'),
             ],
         ]);
+    }
+
+    public function it_should_format_donation_amount(): void
+    {
+        $this->beConstructedWith([]);
+        $this->formatDonationAmount(1530)->shouldBe(15.3);
+        $this->formatDonationAmount(15)->shouldBe(15.0);
+        $this->formatDonationAmount(3150)->shouldBe(31.5);
+        $this->formatDonationAmount(25620)->shouldBe(256.2);
     }
 }

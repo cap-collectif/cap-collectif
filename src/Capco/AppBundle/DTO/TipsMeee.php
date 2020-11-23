@@ -11,14 +11,14 @@ class TipsMeee
         $this->account = $account;
     }
 
-    public function getDonationTotalCount(): int
+    public function getDonationTotalCount(): float
     {
         $donationTotalCount = 0;
         foreach ($this->account as $tips) {
-            $donationTotalCount += $tips['amount'];
+            $donationTotalCount += $this->formatDonationAmount($tips['amount']);
         }
 
-        return (int) $donationTotalCount;
+        return $donationTotalCount;
     }
 
     public function getDonatorsCount(): int
@@ -43,14 +43,16 @@ class TipsMeee
         $topDonators = [];
         foreach ($this->account as $key => $tips) {
             if (isset($donators[$tips['email']]) && 'ApplePay' !== $tips['email']) {
-                $donators[$tips['email']]['amount'] += $tips['amount'];
+                $donators[$tips['email']]['amount'] += $this->formatDonationAmount($tips['amount']);
             } elseif ('ApplePay' === $tips['email']) {
                 // If the tips was made with ApplePay, we just create different donators.
-                $donators[$tips['email'] . $key]['amount'] = $tips['amount'];
+                $donators[$tips['email'] . $key]['amount'] = $this->formatDonationAmount(
+                    $tips['amount']
+                );
                 $donators[$tips['email'] . $key]['name'] = $tips['name'];
                 $donators[$tips['email'] . $key]['date'] = $tips['date'];
             } else {
-                $donators[$tips['email']]['amount'] = $tips['amount'];
+                $donators[$tips['email']]['amount'] = $this->formatDonationAmount($tips['amount']);
                 $donators[$tips['email']]['name'] = $tips['name'];
                 $donators[$tips['email']]['date'] = $tips['date'];
             }
@@ -89,5 +91,17 @@ class TipsMeee
         }
 
         return $topDonators;
+    }
+
+    public function formatDonationAmount(int $amount): float
+    {
+        $stringValue = (string) $amount;
+        if (\strlen($stringValue) >= 4) {
+            $decimals = substr($stringValue, -2);
+
+            return (float) substr($stringValue, 0, -2) . '.' . $decimals;
+        }
+
+        return $amount;
     }
 }

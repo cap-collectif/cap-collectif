@@ -11,7 +11,7 @@ TipsMeee:
                 type: 'Int!'
             donationTotalCount:
                 description: 'The donation total count.'
-                type: 'Int!'
+                type: 'Float!'
             topDonators:
                 args:
                     first:
