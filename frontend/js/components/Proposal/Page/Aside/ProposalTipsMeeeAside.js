@@ -70,7 +70,7 @@ const ProposalTipsMeeeAside = ({ proposal: proposalFragment }: Props) => {
                     : `https://tipsmeee.com/captips/${proposal.tipsmeeeId}`
                 }
                 title={proposal.title}
-                height="560"
+                height="620"
               />
             </ProposalTipsmeeeContainer>
           </>

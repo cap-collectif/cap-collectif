@@ -344,7 +344,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        href="https://www-stage.tipsmeee.com/login/capco/user"
+        href="https://tipsmeee.com/login/capco/user"
         target="_blank"
         type="button"
       >

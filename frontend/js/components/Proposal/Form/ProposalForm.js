@@ -707,7 +707,11 @@ export class ProposalForm extends React.Component<Props, State> {
               <p>
                 <Button
                   target="_blank"
-                  href={`https://www-stage.tipsmeee.com/login/capco/${user.username}`}
+                  href={
+                    config.isDevOrTest
+                      ? `https://www-stage.tipsmeee.com/login/capco/${user.username}`
+                      : `https://tipsmeee.com/login/capco/${user.username}`
+                  }
                   type="button">
                   <FormattedMessage id="create-tipsmeee" />
                 </Button>
