@@ -14,6 +14,7 @@ const proposal = {
     votesRanking: true,
     $fragmentRefs,
   },
+  tipsmeeeId: null,
   form: {
     usingCategories: true,
     usingThemes: false,
@@ -69,6 +70,7 @@ describe('<ProposalPageAside />', () => {
         proposal={{
           ...proposal,
           form: { usingCategories: true, usingThemes: true, usingTipsmeee: true },
+          tipsmeeeId: 'aTipsmeCode',
         }}
         {...props}
         opinionCanBeFollowed

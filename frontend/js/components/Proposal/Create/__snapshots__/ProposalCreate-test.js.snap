@@ -36,6 +36,7 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
       >
         <FormattedMessage
           id="proposal.add"
+          tagName="b"
           values={Object {}}
         />
       </ModalTitle>
@@ -117,6 +118,7 @@ exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
       >
         <FormattedMessage
           id="submit-a-question"
+          tagName="b"
           values={Object {}}
         />
       </ModalTitle>

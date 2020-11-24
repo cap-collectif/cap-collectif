@@ -31,13 +31,14 @@ const Aside: StyledComponent<
     isFixedToTop: boolean,
     isFixedToBottom: boolean,
     isMovingUp: boolean,
+    isTipsmeee: boolean,
   },
   {},
   HTMLElement,
 > = styled.aside`
-  ${({ isAnalysing, hasVoteBar, isFixedToTop, isFixedToBottom, isMovingUp }) => css`
+  ${({ isAnalysing, hasVoteBar, isFixedToTop, isFixedToBottom, isMovingUp, isTipsmeee }) => css`
     display: ${isAnalysing && 'none'};
-    width: 300px;
+    width: ${isTipsmeee ? '333px' : '300px'};
     position: absolute;
     margin-left: 617px;
     z-index: 1;
@@ -96,6 +97,7 @@ export const ProposalPageAside = ({
   const isMovingUp =
     (shouldGoUp && scrollY > totalHeight && bottom < 0) ||
     (height + bottom - 15 < heightFromTop + (asideRef?.current?.clientHeight || 0) && !shouldGoUp);
+  const tipsmeeeWithCode = !!(proposal && proposal.tipsmeeeId && features.unstable__tipsmeee);
 
   return (
     <Aside
@@ -104,6 +106,7 @@ export const ProposalPageAside = ({
       isFixedToTop={scrollY > 240 && !shouldGoUp}
       isFixedToBottom={shouldGoUp && scrollY > totalHeight}
       isMovingUp={isMovingUp}
+      isTipsmeee={tipsmeeeWithCode}
       id="ProposalPageAside">
       <div ref={asideRef}>
         <ProposalPageMetadata
@@ -145,6 +148,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageAsid
         voteType
         ...ProposalPageVoteThreshold_step
       }
+      tipsmeeeId
       form {
         usingCategories
         usingThemes

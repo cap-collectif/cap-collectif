@@ -279,8 +279,14 @@ export const asyncValidate = (values: FormValues) => {
       throw { tipsmeeeId: 'tipsmeee-id-error' };
     });
   }
-  return new Promise<void>(resolve => {
-    resolve();
+  if (values.draft) {
+    return new Promise<void>(resolve => {
+      resolve();
+    });
+  }
+  return new Promise<void>(() => {
+    // eslint-disable-next-line no-throw-literal
+    throw { tipsmeeeId: 'tipsmeee-id-mandatory' };
   });
 };
 
@@ -471,6 +477,12 @@ export class ProposalForm extends React.Component<Props, State> {
       <span className="excerpt">
         {' '}
         <FormattedMessage id="global.optional" />
+      </span>
+    );
+    const mandatory = (
+      <span className="excerpt">
+        {' '}
+        <FormattedMessage id="global.mandatory" />
       </span>
     );
     return (
@@ -686,7 +698,7 @@ export class ProposalForm extends React.Component<Props, State> {
 
         {features.unstable__tipsmeee && proposalForm.usingTipsmeee && (
           <>
-            <FormattedMessage id="configure-my-tipsmeee" tagName="p" />
+            <FormattedHTMLMessage id="configure-my-tipsmeee" tagName="p" />
             <TipsmeeeFormContainer>
               <figure>
                 <img src="/svg/tipsmeee.svg" alt="tipsmeee logo" />
@@ -710,10 +722,11 @@ export class ProposalForm extends React.Component<Props, State> {
                 label={
                   <span>
                     <FormattedMessage id="proposal.tipsMeee" />
-                    {optional}
+                    {mandatory}
                   </span>
                 }
               />
+              <FormattedMessage id="tipsmeee-code-help" tagName="p" />
             </TipsmeeeFormContainer>
           </>
         )}

@@ -105,10 +105,5 @@ export const isInterpellationContextFromStep = (step: ProposalStep): boolean => 
 };
 
 export const isEstablishmentFormStep = (step: ProposalStep): boolean => {
-  return !!(
-    step.project &&
-    step.project.type &&
-    step.form &&
-    step.form.objectType === 'ESTABLISHMENT'
-  );
+  return !!(step.form && step.form.objectType === 'ESTABLISHMENT');
 };

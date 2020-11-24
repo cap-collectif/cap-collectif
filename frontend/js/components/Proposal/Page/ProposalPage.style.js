@@ -84,6 +84,7 @@ export const SeeMoreButton: StyledComponent<{}, {}, HTMLButtonElement> = styled.
 export const ProposalTipsmeeeContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   justify-content: center;
+  padding: 20px;
   iframe {
     border: none;
     overflow: hidden;

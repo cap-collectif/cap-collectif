@@ -320,7 +320,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     name="media"
     type="image"
   />
-  <FormattedMessage
+  <FormattedHTMLMessage
     id="configure-my-tipsmeee"
     tagName="p"
     values={Object {}}
@@ -369,7 +369,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
           >
              
             <FormattedMessage
-              id="global.optional"
+              id="global.mandatory"
               values={Object {}}
             />
           </span>
@@ -378,6 +378,11 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       name="tipsmeeeId"
       placeholder="this is tipsmeee"
       type="text"
+    />
+    <FormattedMessage
+      id="tipsmeee-code-help"
+      tagName="p"
+      values={Object {}}
     />
   </ProposalForm__TipsmeeeFormContainer>
 </form>

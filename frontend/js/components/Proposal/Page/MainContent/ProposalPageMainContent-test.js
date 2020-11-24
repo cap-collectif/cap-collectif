@@ -10,7 +10,7 @@ describe('<ProposalPageMainContent />', () => {
   const proposal = {
     $refType,
     $fragmentRefs,
-    id: 'proposal1',
+    tipsmeeeId: null,
   };
 
   const propsFeatures = {
@@ -48,7 +48,7 @@ describe('<ProposalPageMainContent />', () => {
   it('should render correctly with tipsmeeee', () => {
     const wrapper = shallow(
       <ProposalPageMainContent
-        proposal={proposal}
+        proposal={{ ...proposal, tipsmeeeId: 'anId' }}
         features={featuresWithTipsmeee}
         goToBlog={jest.fn()}
         isAnalysing={false}

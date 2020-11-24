@@ -101,7 +101,7 @@ export class ProposalCreate extends React.Component<Props> {
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id={modalTitleTradKey} />
+              <FormattedMessage id={modalTitleTradKey} tagName="b" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

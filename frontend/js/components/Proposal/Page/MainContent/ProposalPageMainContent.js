@@ -15,6 +15,7 @@ import ProposalPageCustomSections from './ProposalPageCustomSections';
 import ProposalPageMainAside from './ProposalPageMainAside';
 import { bootstrapGrid } from '~/utils/sizes';
 import type { FeatureToggles, GlobalState } from '~/types';
+import ProposalTipsMeeeDonatorsAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeDonatorsAside';
 
 type Props = {|
   +proposal: ?ProposalPageMainContent_proposal,
@@ -23,9 +24,13 @@ type Props = {|
   features: FeatureToggles,
 |};
 
-const ProposalPageMainContentContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+const ProposalPageMainContentContainer: StyledComponent<
+  { usingTipsmeee: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div`
   width: 100%;
-
+  min-height: ${({ usingTipsmeee }) => (usingTipsmeee ? '1000px' : 'auto')};
   @media (min-width: ${bootstrapGrid.mdMin}px) {
     max-width: 587px;
   }
@@ -39,11 +44,30 @@ const ProposalPageMainContentContainer: StyledComponent<{}, {}, HTMLDivElement> 
   }
 `;
 
+const DonatorContent: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  @media (min-width: ${bootstrapGrid.mdMin}px) {
+    display: none;
+  }
+  @media (max-width: ${bootstrapGrid.mdMin}px) {
+    display: flex;
+    margin: 15px;
+    #ProposalTipsMeeeDonators {
+      width: 100%;
+    }
+  }
+`;
+
 export const ProposalPageMainContent = ({ proposal, goToBlog, isAnalysing, features }: Props) => (
   <ProposalPageMainContentContainer
+    usingTipsmeee={features.unstable__tipsmeee && proposal && proposal.tipsmeeeId}
     id={proposal ? 'ProposalPageMainContent' : 'ProposalPageMainContentLoading'}>
     <ProposalPageFusionInformations proposal={proposal} />
     <ProposalPageOfficialAnswer proposal={proposal} />
+    {proposal && features.unstable__tipsmeee && (
+      <DonatorContent>
+        <ProposalTipsMeeeDonatorsAside proposal={proposal} />
+      </DonatorContent>
+    )}
     <ProposalPageDescription proposal={proposal} />
     <ProposalPageLocalisation proposal={proposal} />
     {features.unstable__tipsmeee && <ProposalPageTopDonators proposal={proposal} />}
@@ -61,13 +85,14 @@ const mapStateToProps = (state: GlobalState) => ({
 export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMainContent), {
   proposal: graphql`
     fragment ProposalPageMainContent_proposal on Proposal {
-      id
+      tipsmeeeId
       ...ProposalPageFusionInformations_proposal
       ...ProposalPageTopDonators_proposal
       ...ProposalPageOfficialAnswer_proposal
       ...ProposalPageDescription_proposal
       ...ProposalPageLocalisation_proposal
       ...ProposalPageCustomSections_proposal
+      ...ProposalTipsMeeeDonatorsAside_proposal
       ...ProposalPageMainAside_proposal @arguments(stepId: $stepId)
       ...ProposalPageNews_proposal
       ...ProposalPageDiscussions_proposal

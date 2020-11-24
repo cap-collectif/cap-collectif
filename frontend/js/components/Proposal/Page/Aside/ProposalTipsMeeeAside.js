@@ -2,42 +2,39 @@
 import * as React from 'react';
 import { useFragment } from 'relay-hooks';
 import { graphql } from 'react-relay';
-import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
+import styled, { type StyledComponent } from 'styled-components';
 import type { ProposalTipsMeeeAside_proposal$key } from '~relay/ProposalTipsMeeeAside_proposal.graphql';
 import {
   Card,
   ProposalTipsmeeeContainer,
   ProposalTipsmeeeQrCodeContainer,
 } from '~/components/Proposal/Page/ProposalPage.style';
-import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import config from '~/config';
+import ProposalTipsMeeeDonatorsAside from '~/components/Proposal/Page/Aside/ProposalTipsMeeeDonatorsAside';
+import { mediaQueryMobile } from '~/utils/sizes';
 
 type Props = {|
   +proposal: ProposalTipsMeeeAside_proposal$key,
 |};
 
-const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  padding: 20px;
-  & p {
-    margin: 0;
-  }
-  & svg {
-    margin-right: 8px;
-    position: relative;
-    top: -4px;
+const FRAGMENT = graphql`
+  fragment ProposalTipsMeeeAside_proposal on Proposal {
+    ...ProposalTipsMeeeDonatorsAside_proposal
+    title
+    tipsmeeeId
   }
 `;
 
-const FRAGMENT = graphql`
-  fragment ProposalTipsMeeeAside_proposal on Proposal {
-    tipsmeee {
-      donatorsCount
-      donationTotalCount
+const AsideDonator: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    display: none;
+  }
+  @media (min-width: ${mediaQueryMobile.maxWidth}) {
+    display: flex;
+    #ProposalTipsMeeeDonators {
+      width: 100%;
     }
-    title
-    tipsmeeeId
   }
 `;
 
@@ -45,21 +42,9 @@ const ProposalTipsMeeeAside = ({ proposal: proposalFragment }: Props) => {
   const proposal = useFragment(FRAGMENT, proposalFragment);
   return (
     <>
-      {proposal.tipsmeee ? (
-        <Card id="ProposalTipsMeeeDonators">
-          <Container>
-            <Icon name={ICON_NAME.money} size="3rem" />
-            <FormattedMessage
-              tagName="p"
-              id="money-collected-by"
-              values={{
-                amount: proposal.tipsmeee.donationTotalCount,
-                donatorsCount: proposal.tipsmeee.donatorsCount,
-              }}
-            />
-          </Container>
-        </Card>
-      ) : null}
+      <AsideDonator>
+        <ProposalTipsMeeeDonatorsAside proposal={proposal} />
+      </AsideDonator>
       <Card id="ProposalTipsmeeeContainer">
         {proposal.tipsmeeeId ? (
           <>
@@ -85,8 +70,7 @@ const ProposalTipsMeeeAside = ({ proposal: proposalFragment }: Props) => {
                     : `https://tipsmeee.com/captips/${proposal.tipsmeeeId}`
                 }
                 title={proposal.title}
-                width="300"
-                height="650"
+                height="560"
               />
             </ProposalTipsmeeeContainer>
           </>

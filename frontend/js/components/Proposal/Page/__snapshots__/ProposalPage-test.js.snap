@@ -6813,7 +6813,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "4d4ccc06cd5f458215a1f1210755cb21",
+          "cacheID": "da6fb7ba1019fad45ad4d750cf33f767",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7717,6 +7717,7 @@ fragment ProposalPageAside_proposal_2r3fA4 on Proposal {
     ...ProposalPageVoteThreshold_step
     id
   }
+  tipsmeeeId
   form {
     usingCategories
     usingThemes
@@ -8099,13 +8100,14 @@ fragment ProposalPageMainAside_proposal_2r3fA4 on Proposal {
 }
 
 fragment ProposalPageMainContent_proposal on Proposal {
-  id
+  tipsmeeeId
   ...ProposalPageFusionInformations_proposal
   ...ProposalPageTopDonators_proposal
   ...ProposalPageOfficialAnswer_proposal
   ...ProposalPageDescription_proposal
   ...ProposalPageLocalisation_proposal
   ...ProposalPageCustomSections_proposal
+  ...ProposalTipsMeeeDonatorsAside_proposal
   ...ProposalPageMainAside_proposal_2r3fA4
   ...ProposalPageNews_proposal
   ...ProposalPageDiscussions_proposal
@@ -8436,12 +8438,16 @@ fragment ProposalRevision_proposal on Proposal {
 }
 
 fragment ProposalTipsMeeeAside_proposal on Proposal {
+  ...ProposalTipsMeeeDonatorsAside_proposal
+  title
+  tipsmeeeId
+}
+
+fragment ProposalTipsMeeeDonatorsAside_proposal on Proposal {
   tipsmeee {
     donatorsCount
     donationTotalCount
   }
-  title
-  tipsmeeeId
 }
 
 fragment ProposalUserVoteItem_step on ProposalStep {
