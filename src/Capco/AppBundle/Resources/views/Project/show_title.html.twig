@@ -91,6 +91,10 @@
         {% set contributionsCount = projectContributionResolver.__invoke(project).totalCount %}
         {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
         {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
+        {% set tradKeyContributionsCount =  'project.preview.counters.contributions' %}
+        {% if currentStep.proposalForm is defined and currentStep.proposalForm.objectType == 'establishment' %}
+            {% set tradKeyContributionsCount = 'proposal.establishment.count' %}
+        {% endif %}
 
         {% if project.hasParticipativeStep %}
             <ul class="nav nav-pills counters-nav counters-nav--project hidden-print">
@@ -99,11 +103,7 @@
                         <i class="cap cap-file-edit-1"></i>
                         <span class="value">{{ contributionsCount }}</span>
                         <span class="excerpt category">
-                            {% if currentStep.proposalForm.objectType == 'establishment' %}
-                                {{ 'proposal.establishment.count' | trans({'num': contributionsCount}, 'CapcoAppBundle') }}
-                            {% else %}
-                                {{ 'project.preview.counters.contributions' | trans({'num': contributionsCount}, 'CapcoAppBundle') }}
-                            {% endif %}
+                            {{ tradKeyContributionsCount| trans({'num': contributionsCount}, 'CapcoAppBundle') }}
                         </span>
                     </li>
                 {% endif %}
