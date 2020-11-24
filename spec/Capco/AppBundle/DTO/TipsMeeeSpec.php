@@ -51,14 +51,14 @@ class TipsMeeeSpec extends ObjectBehavior
     {
         $this->beConstructedWith([
             [
-                'email' => 'ApplePay',
-                'name' => 'ApplePay',
+                'email' => 'NOT_PROVIDED',
+                'name' => 'NOT_PROVIDED',
                 'amount' => 1000,
                 'date' => '2020-11-04T18:09:12',
             ],
             [
-                'email' => 'ApplePay',
-                'name' => 'ApplePay',
+                'email' => 'NOT_PROVIDED',
+                'name' => 'NOT_PROVIDED',
                 'amount' => 500,
                 'date' => '2020-11-04T18:09:12',
             ],
@@ -92,14 +92,26 @@ class TipsMeeeSpec extends ObjectBehavior
                 'amount' => 1,
                 'date' => '2020-11-04T18:09:12',
             ],
+            [
+                'email' => 'NOT_FOR_SHARE',
+                'name' => 'NOT_FOR_SHARE',
+                'amount' => 700,
+                'date' => '2020-11-04T18:09:12',
+            ],
         ]);
 
-        $this->getDonatorsCount()->shouldBe(6);
-        $this->getDonationTotalCount()->shouldBe(601.0);
-        $this->getTopDonators(1)->shouldBeLike([
+        $this->getDonatorsCount()->shouldBe(7);
+        $this->getDonationTotalCount()->shouldBe(1301.0);
+        $this->getTopDonators(2)->shouldBeLike([
             [
-                'email' => 'ApplePay',
-                'name' => 'ApplePay',
+                'email' => 'NOT_FOR_SHARE',
+                'name' => 'NOT_FOR_SHARE',
+                'amount' => 700,
+                'date' => new \DateTime('2020-11-04T18:09:12'),
+            ],
+            [
+                'email' => 'NOT_PROVIDED',
+                'name' => 'NOT_PROVIDED',
                 'amount' => 500,
                 'date' => new \DateTime('2020-11-04T18:09:12'),
             ],

@@ -4,6 +4,8 @@ namespace Capco\AppBundle\DTO;
 
 class TipsMeee
 {
+    public const NOT_PROVIDED = 'NOT_PROVIDED';
+    public const NOT_FOR_SHARE = 'NOT_FOR_SHARE';
     private array $account;
 
     public function __construct(array $account)
@@ -25,7 +27,10 @@ class TipsMeee
     {
         $donators = [];
         foreach ($this->account as $key => $tips) {
-            $donators[] = 'ApplePay' === $tips['email'] ? $tips['email'] . $key : $tips['email'];
+            $donators[] =
+                self::NOT_PROVIDED === $tips['email'] || self::NOT_FOR_SHARE === $tips['email']
+                    ? $key . '-' . $tips['email']
+                    : $tips['email'];
         }
         $donators = array_unique($donators);
 
@@ -42,19 +47,28 @@ class TipsMeee
         $donators = [];
         $topDonators = [];
         foreach ($this->account as $key => $tips) {
-            if (isset($donators[$tips['email']]) && 'ApplePay' !== $tips['email']) {
+            if (
+                isset($donators[$tips['email']]) &&
+                self::NOT_PROVIDED !== $tips['email'] &&
+                self::NOT_FOR_SHARE !== $tips['email']
+            ) {
                 $donators[$tips['email']]['amount'] += $this->formatDonationAmount($tips['amount']);
-            } elseif ('ApplePay' === $tips['email']) {
-                // If the tips was made with ApplePay, we just create different donators.
-                $donators[$tips['email'] . $key]['amount'] = $this->formatDonationAmount(
-                    $tips['amount']
-                );
-                $donators[$tips['email'] . $key]['name'] = $tips['name'];
-                $donators[$tips['email'] . $key]['date'] = $tips['date'];
+            } elseif (
+                self::NOT_PROVIDED === $tips['email'] ||
+                self::NOT_FOR_SHARE === $tips['email']
+            ) {
+                // If the tips was made with ApplePay or is anonymous, we just create different donators.
+                $donators[$key . '-' . $tips['email']] = [
+                    'amount' => $this->formatDonationAmount($tips['amount']),
+                    'name' => $tips['name'],
+                    'date' => $tips['date'],
+                ];
             } else {
-                $donators[$tips['email']]['amount'] = $this->formatDonationAmount($tips['amount']);
-                $donators[$tips['email']]['name'] = $tips['name'];
-                $donators[$tips['email']]['date'] = $tips['date'];
+                $donators[$tips['email']] = [
+                    'amount' => $this->formatDonationAmount($tips['amount']),
+                    'name' => $tips['name'],
+                    'date' => $tips['date'],
+                ];
             }
         }
         uasort($donators, static function (array $a, array $b) {
@@ -71,9 +85,12 @@ class TipsMeee
             $donators = \array_slice($donators, 0, $first, true);
         }
         foreach ($donators as $key => $topDonator) {
-            // We rewrite the donator email with the simple string 'ApplePay',
-            // instead of 'ApplePay1' or 'ApplePay2' etc...
-            if (false === strpos($key, 'ApplePay')) {
+            // We rewrite the donator email with the simple string 'NOT_PROVIDED',
+            // instead of '1-NOT_PROVIDED' or '2-NOT_PROVIDED' etc...
+            if (
+                false === strpos($key, self::NOT_PROVIDED) &&
+                false === strpos($key, self::NOT_FOR_SHARE)
+            ) {
                 $topDonators[] = [
                     'email' => $key,
                     'name' => $topDonator['name'],
@@ -82,7 +99,7 @@ class TipsMeee
                 ];
             } else {
                 $topDonators[] = [
-                    'email' => 'ApplePay',
+                    'email' => explode('-', $key)[1],
                     'name' => $topDonator['name'],
                     'amount' => $topDonator['amount'],
                     'date' => new \DateTime($topDonator['date']),
