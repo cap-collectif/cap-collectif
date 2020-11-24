@@ -29,6 +29,7 @@ const devConf = {
     alias: {
       '~relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
       '~ui': path.resolve(__dirname, '../frontend/js/components/Ui'),
+      '~ds': path.resolve(__dirname, '../frontend/js/components/DesignSystem'),
       '~': path.resolve(__dirname, '../frontend/js'),
       '~fonts': path.resolve(__dirname, '../public/fonts'),
       '~svg': path.resolve(__dirname, '../public/svg'),

@@ -110,6 +110,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
                 "themes": false,
                 "unstable__admin_editor": false,
                 "unstable__analysis": false,
+                "unstable__debate": false,
                 "unstable__emailing": false,
                 "unstable__remote_events": false,
                 "unstable__tipsmeee": false,

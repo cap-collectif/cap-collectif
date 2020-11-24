@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Type;
 
+use Capco\AppBundle\Entity\Debate\DebateArticle;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Debate\Debate;
 use GraphQL\Type\Definition\Type;
@@ -61,5 +62,18 @@ class NodeTypeResolverSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($type);
         $this->__invoke($debateOpinion)->shouldReturn($type);
+    }
+
+    public function it_resolve_debateArticle(
+        TypeResolver $typeResolver,
+        DebateArticle $article,
+        Type $type
+    ): void {
+        $typeResolver->getCurrentSchemaName()->willReturn('internal');
+        $typeResolver
+            ->resolve('InternalDebateArticle')
+            ->shouldBeCalled()
+            ->willReturn($type);
+        $this->__invoke($article)->shouldReturn($type);
     }
 }

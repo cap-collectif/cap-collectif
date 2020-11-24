@@ -37,7 +37,7 @@ const content = (
   </>
 );
 
-storiesOf('Core|Primitives/Layout/Grid', module)
+storiesOf('Design system|Primitives/Layout/Grid', module)
   .add('default', () => {
     return <Grid>{content}</Grid>;
   })

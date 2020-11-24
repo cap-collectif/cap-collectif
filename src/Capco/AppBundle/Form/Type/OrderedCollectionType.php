@@ -39,7 +39,9 @@ class OrderedCollectionType extends CollectionType
             $position = 0;
             if ($collectionInDb instanceof ArrayCollection) {
                 foreach ($userCollection as $item) {
-                    $item->setPosition(++$position);
+                    if (method_exists($item, 'setPosition')) {
+                        $item->setPosition(++$position);
+                    }
                 }
                 $this->propertyAccessor->setValue($parent, $field, $userCollection);
             } else {
@@ -56,10 +58,14 @@ class OrderedCollectionType extends CollectionType
                         if ($onUpdate) {
                             $onUpdate($match, $item);
                         }
-                        $this->propertyAccessor->setValue($match, 'position', ++$position);
+                        if (method_exists($match, 'setPosition')) {
+                            $this->propertyAccessor->setValue($match, 'position', ++$position);
+                        }
                     } elseif (!$item->getId()) {
                         // Else, it is a creation
-                        $this->propertyAccessor->setValue($item, 'position', ++$position);
+                        if (method_exists($match, 'setPosition')) {
+                            $this->propertyAccessor->setValue($item, 'position', ++$position);
+                        }
                         $this->propertyAccessor->setValue(
                             $parent,
                             $field,

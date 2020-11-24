@@ -1,0 +1,39 @@
+InternalDebateArticle:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: DebateArticle
+        description: 'A debate article.'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: DebateArticle
+            url:
+                description: 'The url of the article.'
+                type: URI!
+            title:
+                description: 'The title of the article.'
+                type: String
+            description:
+                description: 'The description of the article.'
+                type: String
+            coverUrl:
+                description: "The url of the article's cover."
+                type: URI
+            origin:
+                description: "The origin of the article."
+                type: String
+            publishedAt:
+                type: DateTime
+                description: 'The article publication date.'
+            hasBeenCrawled:
+                type: Boolean!
+                description: 'Whether or not the article has been successfully crawled.'
+            debate:
+                type: InternalDebate!
+                description: 'The debate related to the article.'

@@ -2,6 +2,8 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Debate\DebateArticle;
+use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -118,6 +120,21 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $globalId = GlobalId::toGlobalId('DebateOpinion', 'debateCannabisOpinion1');
 
         $this->resolve($globalId, null)->shouldReturn($debateOpinion);
+    }
+
+    public function it_can_resolve_a_debate_article(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        DebateArticleRepository $repository,
+        DebateArticle $article
+    ) {
+        $repository->find('canabisArticleBfm')->willReturn($article);
+        $container->get(DebateArticleRepository::class)->willReturn($repository);
+        $this->beConstructedWith($container, $logger, $entityManager);
+        $globalId = GlobalId::toGlobalId('DebateArticle', 'canabisArticleBfm');
+
+        $this->resolve($globalId, null)->shouldReturn($article);
     }
 
     public function it_can_resolve_a_debate(

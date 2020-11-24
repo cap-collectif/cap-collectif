@@ -1,5 +1,5 @@
 // @flow
-import styled from 'styled-components';
+import styled, { type StyledComponent } from 'styled-components';
 import {
   border,
   color,
@@ -12,8 +12,9 @@ import {
   typography,
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
+import type { AppBoxProps } from './AppBox.type';
 
-const AppBox = styled('div').withConfig({
+const AppBox: StyledComponent<AppBoxProps, {}, HTMLDivElement> = styled('div').withConfig({
   shouldForwardProp: prop => {
     return shouldForwardProp(prop);
   },

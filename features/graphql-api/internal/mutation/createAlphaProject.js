@@ -67,6 +67,20 @@ const CreateAlphaProjectMutation = /* GraphQL */ `
           body
           timeless
           enabled
+          ... on DebateStep {
+            debate {
+              id
+              articles {
+                totalCount
+                edges {
+                  node {
+                    id
+                    url
+                  }
+                }
+              }
+            }
+          }
           ... on ConsultationStep {
             consultations {
               totalCount
@@ -146,6 +160,17 @@ const BASE_SELECTION_STEP = {
   title: "Le beau titre de l'étape SelectionStep",
   label: 'SelectionStep',
   mainView: 'grid',
+};
+
+const BASE_DEBATE_STEP = {
+  type: 'DEBATE',
+  body: "Le beau body de l'étape DebateStep",
+  requirements: [],
+  articles: [],
+  timeless: true,
+  isEnabled: true,
+  title: "Le beau titre de l'étape DebateStep",
+  label: 'DebateStep',
 };
 
 const BASE_PRESENTATION_STEP = {
@@ -493,6 +518,90 @@ describe('Internal|createAlphaProject simple mutations', () => {
           steps: [
             {
               id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
+  });
+
+  it('create a project with only a "DebateStep" step', async () => {
+    const query = graphql(
+      CreateAlphaProjectMutation,
+      {
+        input: {
+          ...BASE_PROJECT,
+          title: 'Je suis un projet simple avec une étape de débat',
+          steps: [BASE_DEBATE_STEP],
+        },
+      },
+      'internal_admin',
+    );
+    await expect(query).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+              debate: {
+                id: expect.any(String),
+              },
+            },
+          ],
+        },
+      },
+    });
+  });
+
+  it('create a project with only a "DebateStep" step with articles', async () => {
+    const query = graphql(
+      CreateAlphaProjectMutation,
+      {
+        input: {
+          ...BASE_PROJECT,
+          title: 'Je suis un projet simple avec une étape de débat',
+          steps: [
+            {
+              ...BASE_DEBATE_STEP,
+              articles: [
+                {
+                  url: 'https://www.genshin-impact.fr/',
+                },
+                {
+                  url: 'https://myanimelist.net/anime/16498/Shingeki_no_Kyojin',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      'internal_admin',
+    );
+    await expect(query).resolves.toMatchSnapshot({
+      createAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+              debate: {
+                id: expect.any(String),
+                articles: {
+                  edges: [
+                    {
+                      node: {
+                        id: expect.any(String),
+                      },
+                    },
+                    {
+                      node: {
+                        id: expect.any(String),
+                      },
+                    },
+                  ],
+                },
+              },
             },
           ],
         },

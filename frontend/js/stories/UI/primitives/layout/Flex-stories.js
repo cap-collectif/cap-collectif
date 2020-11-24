@@ -17,7 +17,7 @@ const getDirection = () =>
 
 const getSpacing = () => number('Spacing', 2);
 
-storiesOf('Core|Primitives/Layout/Flex', module)
+storiesOf('Design system|Primitives/Layout/Flex', module)
   .add('default', () => {
     return (
       <Flex direction={getDirection()}>

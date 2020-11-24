@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react';
 import * as Sentry from '@sentry/browser';
+import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
+import { theme } from '~/styles/theme';
 
 if (window.sentryDsn) {
   Sentry.init({ dsn: window.sentryDsn });
@@ -37,7 +39,9 @@ class Providers extends React.Component<Props> {
     return (
       <Provider store={store}>
         {/** $FlowFixMe */}
-        <IntlProvider timeZone={window.timeZone}>{children}</IntlProvider>
+        <IntlProvider timeZone={window.timeZone}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </IntlProvider>
       </Provider>
     );
   }

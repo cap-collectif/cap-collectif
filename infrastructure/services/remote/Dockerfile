@@ -296,6 +296,23 @@ RUN rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
     && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
     && gosu capco php bin/console assets:install public --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
 
+ENV BDI_VERSION 0.1.4
+
+RUN wget https://github.com/dbrekelmans/browser-driver-installer/releases/download/$BDI_VERSION/bdi.phar -O /tmp/bdi.phar
+
+ENV CHROME_DRIVER_BINARY_PATH /var/chrome
+ENV PANTHER_CHROME_DRIVER_BINARY $CHROME_DRIVER_BINARY_PATH/chromedriver
+
+# Install Chrome client (used for crawling)
+RUN apt-get update && apt-get install -y libappindicator1 fonts-liberation \
+    && wget https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb \
+    && dpkg -i /tmp/chrome.deb; apt-get -fy install \
+    && rm /tmp/chrome.deb
+
+# Install ChromeDriver
+RUN php /tmp/bdi.phar browser:google-chrome $CHROME_DRIVER_BINARY_PATH \
+    && rm /tmp/bdi.phar
+
 # Install crontab just to check if it's valid.
 RUN set -ex; \
     crontab -uroot /etc/cron.d/crontab

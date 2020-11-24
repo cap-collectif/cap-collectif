@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -269,6 +270,10 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof DebateOpinion) {
             return $this->typeResolver->resolve('InternalDebateOpinion');
+        }
+
+        if ($node instanceof DebateArticle) {
+            return $this->typeResolver->resolve('InternalDebateArticle');
         }
 
         throw new UserError('Could not resolve type of Node.');

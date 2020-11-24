@@ -1,16 +1,3 @@
-declare const FontSize:  {
-    Xs: 'xs',
-    Sm: 'sm',
-    Md: 'md',
-    Lg: 'lg',
-    Xl: 'xl',
-    Xl2: '2xl',
-    Xl3: '3xl',
-    Xl4: '4xl',
-    Xl5: '5xl',
-    Xl6: '6xl',
-};
-
 declare const FontWeight: {
     Hairline: 'hairline',
     Thin: 'thin',
@@ -24,13 +11,11 @@ declare const FontWeight: {
 };
 
 declare const LineHeight: {
-    Normal: 'normal',
-    None: 'none',
-    Shorter: 'shorter',
-    Short: 'short',
+    S: 'S',
     Base: 'base',
-    Tall: 'tall',
-    Taller: 'taller',
+    M: 'M',
+    L: 'L',
+    XL: 'XL',
 }
 
 declare const LetterSpacing: {
@@ -54,19 +39,10 @@ declare const Spacing: {
     Xl3: number
 }
 
-declare const HeadingSize: {
-    Xl: 'xl',
-    Lg: 'lg',
-    Md: 'md',
-    Sm: 'sm',
-    Xs: 'xs',
-}
-
 export {
     FontSize,
     FontWeight,
     LineHeight,
     LetterSpacing,
     Spacing,
-    HeadingSize
 }

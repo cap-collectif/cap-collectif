@@ -91,3 +91,6 @@ ProjectStepInput:
             # SynthesisStep
             synthesis:
                 type: 'ID'
+            # DebateStep
+            articles:
+                type: '[DebateArticleInput]'

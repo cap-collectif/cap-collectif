@@ -33,6 +33,8 @@ import IconListView from '~svg/list_view.svg';
 import IconGridView from '~svg/grid_view.svg';
 import IconMapView from '~svg/map_view.svg';
 import type { ProposalViewMode } from '~/redux/modules/proposal';
+import StepArticle from '~/components/Admin/Project/Step/StepArticle/StepArticle';
+import type { Articles } from '~/components/Admin/Project/Step/StepArticle/StepArticle';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -86,6 +88,10 @@ type Props = {|
     |},
     private?: ?boolean,
     mainView: string,
+    articles?: Array<{
+      id: string,
+      url: string,
+    }>,
   },
   intl: IntlShape,
   formName: string,
@@ -111,6 +117,10 @@ type DisplayMode = {
   isListViewEnabled: boolean,
   isMapViewEnabled: boolean,
 };
+
+type DebateStepForm = {|
+  articles?: ?Articles,
+|};
 
 export type FormValues = {|
   label: string,
@@ -142,9 +152,10 @@ export type FormValues = {|
   proposalForm?: string,
   private?: ?boolean,
   mainView?: ProposalViewMode,
+  ...DebateStepForm,
 |};
 
-const stepFormName = 'stepForm';
+export const stepFormName = 'stepForm';
 
 const getMainView = (
   isGridViewEnabled: ?boolean,
@@ -284,6 +295,10 @@ const validate = (
     }
   }
 
+  if (type === 'DebateStep') {
+    errors.question = 'global.required';
+  }
+
   // eslint-disable-next-line no-restricted-globals
   if (!features.votes_min && isNaN(parseInt(votesLimit, 10))) {
     errors.votesLimit = 'maximum-vote-must-be-greater-than-or-equal';
@@ -366,6 +381,7 @@ export function ProjectAdminStepForm({
       <Modal.Body>
         <FormContainer onSubmit={handleSubmit} id={form}>
           {renderSubSection('global.general')}
+
           <Field
             type="text"
             name="label"
@@ -373,19 +389,35 @@ export function ProjectAdminStepForm({
             label={<FormattedMessage id="color.main_menu.text" />}
             component={renderComponent}
           />
-          <Field
-            type="text"
-            name="title"
-            id="step-title"
-            label={<FormattedMessage id="global.title" />}
-            component={renderComponent}
-          />
+
+          {step.type !== 'DebateStep' && (
+            <Field
+              type="text"
+              name="title"
+              id="step-title"
+              label={<FormattedMessage id="global.title" />}
+              component={renderComponent}
+            />
+          )}
+
+          {step.type === 'DebateStep' && (
+            <Field
+              type="textarea"
+              name="title"
+              id="step-question"
+              label={<FormattedMessage id="debate.question" />}
+              placeholder="placeholderText.debat.questionLabel"
+              component={renderComponent}
+            />
+          )}
+
           {step.type !== 'PresentationStep' && (
             <>
               {(step.type === 'SelectionStep' ||
                 step.type === 'CollectStep' ||
                 step.type === 'QuestionnaireStep' ||
-                step.type === 'ConsultationStep') && (
+                step.type === 'ConsultationStep' ||
+                step.type === 'DebateStep') && (
                 <Field
                   icons
                   component={toggle}
@@ -398,13 +430,17 @@ export function ProjectAdminStepForm({
               {!timeless && renderDateContainer(formName, intl)}
             </>
           )}
-          <Field
-            type="editor"
-            name="body"
-            id="step-body"
-            label={renderLabel('proposal.body', intl)}
-            component={renderComponent}
-          />
+
+          {step.type !== 'DebateStep' && (
+            <Field
+              type="editor"
+              name="body"
+              id="step-body"
+              label={renderLabel('proposal.body', intl)}
+              component={renderComponent}
+            />
+          )}
+
           <Field
             name="metaDescription"
             type="textarea"
@@ -437,6 +473,7 @@ export function ProjectAdminStepForm({
               requirements={requirements}
             />
           )}
+
           {step.type === 'RankingStep' && <ProjectAdminRankingStepForm />}
 
           {step.type === 'CollectStep' && (
@@ -530,6 +567,8 @@ export function ProjectAdminStepForm({
             </ViewsContainer>
           )}
 
+          {step.type === 'DebateStep' && <StepArticle />}
+
           {renderSubSection('global.publication')}
           <>
             <Field
@@ -551,6 +590,7 @@ export function ProjectAdminStepForm({
               </PermalinkWrapper>
             )}
           </>
+
           {renderSubSection('global-customization')}
           <CustomCodeArea>
             <Field
@@ -630,6 +670,8 @@ const mapStateToProps = (state: GlobalState, { step, isCreating, project }: Prop
       // RankingStep
       nbVersionsToDisplay: step?.nbVersionsToDisplay || null,
       nbOpinionsToDisplay: step?.nbOpinionsToDisplay || null,
+      // DebateStep
+      articles: step?.articles || [],
       // Votable Trait
       votable: step?.votable || false,
       votesHelpText: step?.votesHelpText || null,

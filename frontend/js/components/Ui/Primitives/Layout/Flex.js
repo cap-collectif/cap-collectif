@@ -5,7 +5,16 @@ import useTheme from '~/utils/hooks/useTheme';
 
 // typings is handled by the .d.ts file
 const Flex: any = React.forwardRef((props: any, ref) => {
-  const { direction, align, justify, wrap, basis, grow, spacing: userSpacing, ...rest } = props;
+  const {
+    direction = 'row',
+    align,
+    justify,
+    wrap,
+    basis,
+    grow,
+    spacing: userSpacing,
+    ...rest
+  } = props;
   const theme = useTheme();
   const spacing = theme.space[userSpacing] ?? userSpacing;
   const styles = {
@@ -40,7 +49,7 @@ const Flex: any = React.forwardRef((props: any, ref) => {
                     }: any)),
                 },
               )),
-            '&:first-of-type': {
+            '&:first-child': {
               marginLeft: 0,
               marginTop: 0,
             },

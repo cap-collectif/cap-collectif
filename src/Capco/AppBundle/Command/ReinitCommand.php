@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
@@ -10,6 +11,7 @@ use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\EventListener\DebateArticleListener;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Status;
@@ -102,8 +104,8 @@ use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCo
 
 class ReinitCommand extends Command
 {
-    public const ENTITIES_WITH_LISTENERS = [UserInvite::class];
-    public const LISTENERS_TO_DISABLE = [UserInviteListener::class];
+    public const ENTITIES_WITH_LISTENERS = [UserInvite::class, DebateArticle::class];
+    public const LISTENERS_TO_DISABLE = [UserInviteListener::class, DebateArticleListener::class];
     private $env;
     private ManagerRegistry $doctrine;
     private EntityManagerInterface $em;

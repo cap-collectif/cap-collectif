@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
@@ -152,6 +153,10 @@ class GlobalIdResolver
                     break;
                 case 'DebateOpinion':
                     $node = $this->container->get(DebateOpinionRepository::class)->find($uuid);
+
+                    break;
+                case 'DebateArticle':
+                    $node = $this->container->get(DebateArticleRepository::class)->find($uuid);
 
                     break;
                 case 'Question':

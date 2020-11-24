@@ -97,6 +97,7 @@ export type FeatureToggles = {
   majority_vote_question: ?boolean,
   unstable__emailing: ?boolean,
   proposal_revisions: ?boolean,
+  unstable__debate: ?boolean,
   unstable__tipsmeee: ?boolean,
 };
 

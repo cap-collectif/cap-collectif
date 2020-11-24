@@ -360,6 +360,141 @@ Object {
 }
 `;
 
+exports[`Internal|createAlphaProject simple mutations create a project with only a "DebateStep" step 1`] = `
+Object {
+  "createAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [],
+      },
+      "id": Any<String>,
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
+      "steps": Array [
+        Object {
+          "__typename": "DebateStep",
+          "body": "Le beau body de l'étape DebateStep",
+          "debate": Object {
+            "articles": Object {
+              "edges": Array [],
+              "totalCount": 0,
+            },
+            "id": Any<String>,
+          },
+          "enabled": true,
+          "id": Any<String>,
+          "timeless": true,
+          "title": "Le beau titre de l'étape DebateStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple avec une étape de débat",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`Internal|createAlphaProject simple mutations create a project with only a "DebateStep" step with articles 1`] = `
+Object {
+  "createAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [],
+      },
+      "id": Any<String>,
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "opinionTerm": 2,
+      "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
+      "steps": Array [
+        Object {
+          "__typename": "DebateStep",
+          "body": "Le beau body de l'étape DebateStep",
+          "debate": Object {
+            "articles": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": Any<String>,
+                    "url": "https://www.genshin-impact.fr/",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": Any<String>,
+                    "url": "https://myanimelist.net/anime/16498/Shingeki_no_Kyojin",
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+            "id": Any<String>,
+          },
+          "enabled": true,
+          "id": Any<String>,
+          "timeless": true,
+          "title": "Le beau titre de l'étape DebateStep",
+        },
+      ],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple avec une étape de débat",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
 exports[`Internal|createAlphaProject simple mutations create a project with only a "QuestionnaireStep" step 1`] = `
 Object {
   "createAlphaProject": Object {

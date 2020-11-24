@@ -1,0 +1,45 @@
+Capco\AppBundle\Entity\Debate\DebateArticle:
+    canabisArticleBfm:
+        id: 'canabisArticleBfm'
+        title: Que pèse vraiment le marché du cannabis en France ?
+        debate: '@debateCannabis'
+        origin: BFM TV
+        description: |
+            Alors que le débat sur la légalisation du cannabis fait son retour, une étude du
+            média spécialisé Newsweed estime que le marché noir du stupéfiant le plus consommé
+            de France serait bien plus important que ce qu'on estimait.
+        url: https://www.bfmtv.com/economie/estime-a-3-2-milliards-d-euros-en-france-le-marche-du-cannabis-serait-bien-plus-gros-que-ce-qu-on-pensait_AN-202010200002.html
+        coverUrl: https://www.royalqueenseeds.fr/modules/prestablog/themes/royalqueenseeds/up-img/74.jpg
+        createdAt: <identity((new \DateTime('2020-10-01')))>
+        crawledAt: <identity((new \DateTime('2020-10-01')))>
+        publishedAt: <identity((new \DateTime('2020-10-01')))>
+        updatedAt: <identity((new \DateTime('2020-10-01')))>
+    canabisArticleOuestFrance1:
+        id: 'canabisArticleOuestFrance1'
+        title: "Cannabis thérapeutique : des médicaments sous forme d’huiles, gélules et fleurs séchées expérimentés"
+        debate: '@debateCannabis'
+        origin: Ouest France
+        description: |
+            Les futurs médicaments à base de cannabis, seront utilisés
+            dans le cadre d’une expérimentation à partir de l’année prochaine, en France.
+        url: https://www.ouest-france.fr/societe/cannabis/cannabis-therapeutique-le-cahier-des-charges-des-futurs-medicaments-publie-7020873
+        coverUrl: https://media.ouest-france.fr/v1/pictures/MjAyMDEwOWJjYjQyNmYxMDc3ZDlmZmQ0MDlhMzY3MDk4MGI5Y2U?width=1260&focuspoint=50%2C25&cropresize=1&client_id=bpeditorial&sign=8435fcd4c3a6b0678e792827aedeb9f7447a2ee1c7ba8dc1c8944674643dda1f
+        createdAt: <identity((new \DateTime('2020-10-01')))>
+        crawledAt: <identity((new \DateTime('2020-10-01')))>
+        publishedAt: <identity((new \DateTime('2020-10-01')))>
+        updatedAt: <identity((new \DateTime('2020-10-01')))>
+    canabisArticleOuestFrance2:
+        id: 'canabisArticleOuestFrance2'
+        title: "Cannabis thérapeutique. Les premières expérimentations autorisées par décret"
+        debate: '@debateCannabis'
+        origin: Ouest France
+        description: |
+            Un décret publié ce vendredi autorise les premières expérimentations du cannabis
+            thérapeutique. Elles concerneront 3 000 patients avec des médicaments qui se
+            présenteront sous forme d’huiles.
+        url: https://www.ouest-france.fr/societe/cannabis/cannabis-therapeutique-les-premieres-experimentations-autorisees-par-decret-7007774
+        coverUrl: https://media.ouest-france.fr/v1/pictures/MjAyMDEwODBiNzFjMTIwZDFmMTEyMTBhZjY2NTJlNzVjMGM2MDk?width=1260&focuspoint=50%2C25&cropresize=1&client_id=bpeditorial&sign=1c59c4f45f057ef4aca074a7f52c1a7368ab4dd34705f990db7b2bca452d1aa5
+        createdAt: <identity((new \DateTime('2020-10-01')))>
+        crawledAt: <identity((new \DateTime('2020-10-01')))>
+        publishedAt: <identity((new \DateTime('2020-10-01')))>
+        updatedAt: <identity((new \DateTime('2020-10-01')))>

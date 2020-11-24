@@ -22,6 +22,12 @@ export const STEP_TYPES: StepType[] = [
     editLabel: 'edit-selection-step',
   },
   {
+    value: 'DebateStep',
+    label: 'global.debate',
+    addLabel: 'add.debate.step',
+    editLabel: 'edit.debate.step',
+  },
+  {
     value: 'ConsultationStep',
     label: 'global.consultation',
     addLabel: 'add-consultation-step',

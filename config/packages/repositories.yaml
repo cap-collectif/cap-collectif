@@ -544,3 +544,10 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:ProposalRevision']
+
+
+    Capco\AppBundle\Repository\Debate\DebateArticleRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Debate\DebateArticle']

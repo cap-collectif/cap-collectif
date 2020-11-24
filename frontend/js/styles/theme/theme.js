@@ -1,11 +1,6 @@
 // @flow
 import baseTheme from '~/styles/theme/base';
 
-const theme = {
-  ...baseTheme,
-  colors: {
-    ...baseTheme.colors,
-  },
-};
+const theme = baseTheme;
 
 export default theme;

@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,6 +41,28 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     public function getType(): string
     {
         return self::TYPE;
+    }
+
+    /**
+     * @return Collection|DebateArticle[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->getDebate()->getArticles();
+    }
+
+    public function addArticle(DebateArticle $article): self
+    {
+        $this->getDebate()->addArticle($article);
+
+        return $this;
+    }
+
+    public function removeArticle(DebateArticle $article): self
+    {
+        $this->getDebate()->removeArticle($article);
+
+        return $this;
     }
 
     public function isParticipative(): bool

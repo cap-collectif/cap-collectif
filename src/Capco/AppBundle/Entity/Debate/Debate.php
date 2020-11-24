@@ -38,10 +38,16 @@ class Debate
      */
     private $step;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DebateArticle::class, mappedBy="debate", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private Collection $articles;
+
     public function __construct()
     {
         $this->opinions = new ArrayCollection();
         $this->arguments = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function viewerCanParticipate(?User $viewer = null): bool
@@ -106,6 +112,37 @@ class Debate
     public function removeArgument(DebateArgument $argument): self
     {
         $this->arguments->removeElement($argument);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DebateArticle[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(DebateArticle $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setDebate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(DebateArticle $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getDebate() === $this) {
+                $article->setDebate(null);
+            }
+        }
 
         return $this;
     }

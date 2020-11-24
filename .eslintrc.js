@@ -163,6 +163,7 @@ module.exports = {
         map: [
           ['~relay', './frontend/js/__generated__/~relay'],
           ['~ui', './frontend/js/components/Ui'],
+          ['~ds', './frontend/js/components/DesignSystem'],
           ['~svg', './public/svg'],
           ['~image', './public/image'],
           ['~', './frontend/js/'],

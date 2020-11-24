@@ -1,0 +1,19 @@
+// @flow
+export { default as TRASH } from './svg/trash.svg';
+export { default as PENCIL } from './svg/pencil.svg';
+export { default as INFO } from './svg/info.svg';
+export { default as USER } from './svg/user.svg';
+export { default as CLOCKO } from './svg/clock-o.svg';
+export { default as CLOCK } from './svg/clock.svg';
+export { default as CALENDARO } from './svg/calendar-o.svg';
+export { default as CALENDAR } from './svg/calendar.svg';
+export { default as ARROWLEFTO } from './svg/arrow-left-o.svg';
+export { default as ARROWRIGHTO } from './svg/arrow-right-o.svg';
+export { default as ARROWDOWNO } from './svg/arrow-down-o.svg';
+export { default as ARROWUPO } from './svg/arrow-up-o.svg';
+export { default as ARROWLEFT } from './svg/arrow-left.svg';
+export { default as ARROWRIGHT } from './svg/arrow-right.svg';
+export { default as ARROWDOWN } from './svg/arrow-down.svg';
+export { default as ARROWUP } from './svg/arrow-up.svg';
+export { default as ADD } from './svg/add.svg';
+export { default as CROSS } from './svg/cross.svg';

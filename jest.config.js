@@ -16,6 +16,7 @@ module.exports = {
     '\\.svg': '<rootDir>/__mocks__/svg.js',
     '~relay(.*)$': '<rootDir>/frontend/js/__generated__/~relay/$1',
     '~ui(.*)$': '<rootDir>/frontend/js/components/Ui/$1',
+    '~ds(.*)$': '<rootDir>/frontend/js/components/DesignSystem/$1',
     '~(.*)$': '<rootDir>/frontend/js/$1',
     '~svg(.*)$': '<rootDir>/public/svg/$1',
     '~image(.*)$': '<rootDir>/public/image/$1',

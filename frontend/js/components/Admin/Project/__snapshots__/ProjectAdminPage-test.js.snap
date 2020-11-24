@@ -1224,6 +1224,78 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
                             ],
                             "type": "QuestionnaireStep",
                           },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Debate",
+                                "kind": "LinkedField",
+                                "name": "debate",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "DebateArticleConnection",
+                                    "kind": "LinkedField",
+                                    "name": "articles",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "DebateArticleEdge",
+                                        "kind": "LinkedField",
+                                        "name": "edges",
+                                        "plural": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "concreteType": "DebateArticle",
+                                            "kind": "LinkedField",
+                                            "name": "node",
+                                            "plural": false,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "id",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "url",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "DebateStep",
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -1633,7 +1705,7 @@ exports[`<ProjectAdminPage /> renders correctly when editing project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "e01c17bba20da967c32afb5353d2ccc8",
+        "cacheID": "152ce154626b20e570b5c1082a330eea",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -1899,6 +1971,19 @@ fragment ProjectAdminForm_project on Project {
         id
       }
       footer
+    }
+    ... on DebateStep {
+      debate {
+        articles {
+          edges {
+            node {
+              id
+              url
+            }
+          }
+        }
+        id
+      }
     }
   }
   visibility
@@ -3256,6 +3341,78 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
                             ],
                             "type": "QuestionnaireStep",
                           },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Debate",
+                                "kind": "LinkedField",
+                                "name": "debate",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "DebateArticleConnection",
+                                    "kind": "LinkedField",
+                                    "name": "articles",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "DebateArticleEdge",
+                                        "kind": "LinkedField",
+                                        "name": "edges",
+                                        "plural": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "concreteType": "DebateArticle",
+                                            "kind": "LinkedField",
+                                            "name": "node",
+                                            "plural": false,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "id",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "url",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "DebateStep",
+                          },
                         ],
                         "storageKey": null,
                       },
@@ -3665,7 +3822,7 @@ exports[`<ProjectAdminPage /> renders correctly when no project 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "e01c17bba20da967c32afb5353d2ccc8",
+        "cacheID": "152ce154626b20e570b5c1082a330eea",
         "id": null,
         "metadata": Object {},
         "name": "ProjectAdminPageQuery",
@@ -3931,6 +4088,19 @@ fragment ProjectAdminForm_project on Project {
         id
       }
       footer
+    }
+    ... on DebateStep {
+      debate {
+        articles {
+          edges {
+            node {
+              id
+              url
+            }
+          }
+        }
+        id
+      }
     }
   }
   visibility

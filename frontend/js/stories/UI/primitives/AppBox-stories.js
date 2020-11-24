@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { css } from 'styled-components';
 import AppBox from '~ui/Primitives/AppBox';
 
-storiesOf('Core|Primitives/AppBox', module)
+storiesOf('Design system|Primitives/AppBox', module)
   .add('default', () => {
     return (
       <AppBox fontSize="2xl" p={4} bg="red.300">

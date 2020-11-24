@@ -79,6 +79,18 @@ const mutation = graphql`
               reason
             }
           }
+          ... on DebateStep {
+            debate {
+              articles {
+                edges {
+                  node {
+                    id
+                    url
+                  }
+                }
+              }
+            }
+          }
         }
         ...ProjectAccessAdminForm_project
 

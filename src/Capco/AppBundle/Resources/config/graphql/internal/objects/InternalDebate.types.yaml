@@ -32,3 +32,8 @@ InternalDebate:
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                 type: DebateVoteConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateVotesResolver", [value, args])'
+            articles:
+                description: 'The associated articles of the debate.'
+                argsBuilder: 'Relay::Connection'
+                type: DebateArticleConnection!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArticlesResolver", [value, args])'

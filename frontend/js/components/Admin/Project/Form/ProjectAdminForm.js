@@ -106,6 +106,8 @@ const convertTypenameToConcreteStepType = (typename: string): ConcreteStepType =
       return 'SELECTION';
     case 'SynthesisStep':
       return 'SYNTHESIS';
+    case 'DebateStep':
+      return 'DEBATE';
     case 'OtherStep':
     default:
       return 'OTHER';
@@ -180,7 +182,8 @@ const onSubmit = (
             s.type === 'SelectionStep' ||
             s.type === 'CollectStep' ||
             s.type === 'QuestionnaireStep' ||
-            s.type === 'ConsultationStep'
+            s.type === 'ConsultationStep' ||
+            s.type === 'DebateStep'
               ? s.timeless
               : undefined,
           startAt:
@@ -253,10 +256,14 @@ const onSubmit = (
           isBudgetEnabled: undefined,
           isTresholdEnabled: undefined,
           isLimitEnabled: undefined,
+          // DebateStep
+          articles: s.type === 'DebateStep' ? s.articles.filter(article => article.url) : undefined,
+          debate: undefined,
         }))
       : [],
     locale: locale ? locale.value : null,
   };
+
   if (props.project) {
     return UpdateProjectAlphaMutation.commit({
       input: {
@@ -272,6 +279,7 @@ const onSubmit = (
       }
     });
   }
+
   return CreateProjectAlphaMutation.commit({ input }).then(data => {
     if (data.createAlphaProject && data.createAlphaProject.project) {
       window.location.href = data.createAlphaProject.project.adminUrl;
@@ -422,6 +430,12 @@ const mapStateToProps = (state: GlobalState, { project }: Props) => {
             isTresholdEnabled: !!step.voteThreshold,
             defaultSort: step.defaultSort?.toUpperCase() || 'RANDOM',
             ...getViewEnabled(step.type, step.proposalForm, project?.firstCollectStep?.form),
+            // DebateStep
+            articles:
+              step.type === 'DebateStep'
+                ? step?.debate?.articles?.edges?.filter(Boolean).map(edge => edge.node)
+                : [],
+            debate: undefined,
           }))
         : [],
       visibility: project ? project.visibility : 'ADMIN',
@@ -676,6 +690,18 @@ export default createFragmentContainer(container, {
             label: title
           }
           footer
+        }
+        ... on DebateStep {
+          debate {
+            articles {
+              edges {
+                node {
+                  id
+                  url
+                }
+              }
+            }
+          }
         }
       }
       visibility

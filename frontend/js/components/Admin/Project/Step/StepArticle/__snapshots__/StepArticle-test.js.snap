@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StepArticle /> renders correctly 1`] = `
+<ForwardRef
+  direction="column"
+  spacing={4}
+>
+  <Text
+    color="gray.900"
+  >
+    <div>
+      related.articles
+      <span
+        className="excerpt inline"
+      >
+        global.optional
+         
+        <OverlayTrigger
+          defaultOverlayShown={false}
+          key="top"
+          overlay={
+            <_default
+              className="text-left"
+              id="tooltip-top"
+              style={
+                Object {
+                  "wordBreak": "break-word",
+                }
+              }
+            >
+              <FormattedHTMLMessage
+                id="helpText.add.press.articles"
+                tagName="span"
+                values={Object {}}
+              />
+            </_default>
+          }
+          placement="top"
+          trigger={
+            Array [
+              "hover",
+              "focus",
+            ]
+          }
+        >
+          <ProjectContentAdminForm__InformationIcon />
+        </OverlayTrigger>
+      </span>
+    </div>
+  </Text>
+  <FieldArray
+    component={[Function]}
+    form="stepForm"
+    name="articles"
+  />
+  <Button
+    alignSelf="flex-start"
+    icon="ADD"
+    onClick={[Function]}
+    variant="tertiary"
+  >
+    <FormattedMessage
+      id="add.article"
+      values={Object {}}
+    />
+  </Button>
+</ForwardRef>
+`;
+
+exports[`<StepArticle /> renders correctly when no articles 1`] = `
+<ForwardRef
+  direction="column"
+  spacing={4}
+>
+  <Text
+    color="gray.900"
+  >
+    <div>
+      related.articles
+      <span
+        className="excerpt inline"
+      >
+        global.optional
+         
+        <OverlayTrigger
+          defaultOverlayShown={false}
+          key="top"
+          overlay={
+            <_default
+              className="text-left"
+              id="tooltip-top"
+              style={
+                Object {
+                  "wordBreak": "break-word",
+                }
+              }
+            >
+              <FormattedHTMLMessage
+                id="helpText.add.press.articles"
+                tagName="span"
+                values={Object {}}
+              />
+            </_default>
+          }
+          placement="top"
+          trigger={
+            Array [
+              "hover",
+              "focus",
+            ]
+          }
+        >
+          <ProjectContentAdminForm__InformationIcon />
+        </OverlayTrigger>
+      </span>
+    </div>
+  </Text>
+  <FieldArray
+    component={[Function]}
+    form="stepForm"
+    name="articles"
+  />
+  <Button
+    alignSelf="flex-start"
+    icon="ADD"
+    onClick={[Function]}
+    variant="tertiary"
+  >
+    <FormattedMessage
+      id="add.article"
+      values={Object {}}
+    />
+  </Button>
+</ForwardRef>
+`;

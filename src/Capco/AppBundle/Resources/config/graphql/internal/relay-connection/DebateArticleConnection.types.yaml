@@ -1,0 +1,7 @@
+DebateArticleConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalDebateArticle!
+        connectionFields:
+            totalCount:
+                type: Int!

@@ -1,4 +1,6 @@
 // @flow
+import { pxToRem } from '~/utils/styles/mixins';
+
 const typography = {
   letterSpacings: {
     tighter: '-0.05em',
@@ -9,13 +11,11 @@ const typography = {
     widest: '0.1em',
   },
   lineHeights: {
-    normal: 'normal',
-    none: '1',
-    shorter: '1.25',
-    short: '1.375',
-    base: '1.5',
-    tall: '1.625',
-    taller: '2',
+    XL: pxToRem(64),
+    L: pxToRem(48),
+    M: pxToRem(32),
+    base: pxToRem(24),
+    S: pxToRem(16),
   },
   fontWeights: {
     hairline: 100,
@@ -29,25 +29,23 @@ const typography = {
     black: 900,
   },
   fonts: {
-    heading: `Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-    body: `Zilla Slab, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-    mono: `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`,
+    heading: `OpenSans, Helvetica, Arial, sans-serif`,
+    body: `OpenSans, Helvetica, Arial, sans-serif`,
+    input: `Roboto, Helvetica, Arial, sans-serif`,
   },
-  fontSizes: {
-    xs: '0.75rem',
-    sm: '0.875rem',
-    md: '1rem',
-    lg: '1.125rem',
-    xl: '1.25rem',
-    '2xl': '1.5rem',
-    '3xl': '1.875rem',
-    '4xl': '2.25rem',
-    '5xl': '3rem',
-    '6xl': '4rem',
-  },
+  fontSizes: [
+    0, // #0
+    pxToRem(11), // #1
+    pxToRem(13), // #2
+    pxToRem(14), // #3
+    pxToRem(18), // #4
+    pxToRem(24), // #5
+    pxToRem(33), // #6
+    pxToRem(44), // #7
+  ],
 };
 
-export type FontSizes = $Keys<$PropertyType<typeof typography, 'fontSizes'>>;
+export type FontSizes = $Values<$PropertyType<typeof typography, 'fontSizes'>>;
 export type Fonts = $Keys<$PropertyType<typeof typography, 'fonts'>>;
 export type FontWeights = $Keys<$PropertyType<typeof typography, 'fontWeights'>>;
 export type LineHeights = $Keys<$PropertyType<typeof typography, 'lineHeights'>>;

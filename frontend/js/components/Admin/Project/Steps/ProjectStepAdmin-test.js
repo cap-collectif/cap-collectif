@@ -5,19 +5,33 @@ import { shallow } from 'enzyme';
 import { ProjectStepAdmin } from './ProjectStepAdmin';
 import { $fragmentRefs, $refType, formMock, intlMock } from '~/mocks';
 
-const props = {
+const baseProps = {
   ...formMock,
   intl: intlMock,
   form: 'testForm',
+  hasFeatureDebate: false,
   project: {
     $fragmentRefs,
     $refType,
   },
 };
 
+const props = {
+  basic: baseProps,
+  withFeatureDebate: {
+    ...baseProps,
+    hasFeatureDebate: true,
+  },
+};
+
 describe('<ProjectStepAdmin />', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(<ProjectStepAdmin {...props} />);
+    const wrapper = shallow(<ProjectStepAdmin {...props.basic} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly without feature debate', () => {
+    const wrapper = shallow(<ProjectStepAdmin {...props.withFeatureDebate} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
