@@ -135,6 +135,7 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
         "viewerReplies": Array [],
       }
     }
+    setIsShow={[Function]}
   />
   <Relay(StepPageFooter)
     step={

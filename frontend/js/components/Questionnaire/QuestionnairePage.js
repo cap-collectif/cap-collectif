@@ -63,7 +63,9 @@ export const QuestionnairePage = ({ questionnaire }: Props) => {
 
       {((questionnaire.multipleRepliesAllowed && isShow) ||
         (questionnaire.viewerReplies && questionnaire.viewerReplies.length === 0) ||
-        !questionnaire.viewerReplies) && <ReplyCreateFormWrapper questionnaire={questionnaire} />}
+        !questionnaire.viewerReplies) && (
+        <ReplyCreateFormWrapper questionnaire={questionnaire} setIsShow={setIsShow} />
+      )}
 
       {questionnaire.step && <StepPageFooter step={questionnaire.step} />}
     </QuestionnaireContainer>

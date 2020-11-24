@@ -1,14 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ReplyLink /> render a draft reply in a closed questionnaire 1`] = `
-<ReplyLinkstyle__ReplyLinkContainer>
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
   <div>
     <Link
-      to={
-        Object {
-          "pathname": "/replies/replay1",
-        }
-      }
+      to="/replies/replay1"
     >
       <FormattedMessage
         id="reply.show.link"
@@ -39,14 +37,12 @@ exports[`<ReplyLink /> render a draft reply in a closed questionnaire 1`] = `
 `;
 
 exports[`<ReplyLink /> render a draft reply in a contribuable questionnaire 1`] = `
-<ReplyLinkstyle__ReplyLinkContainer>
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
   <div>
     <Link
-      to={
-        Object {
-          "pathname": "/replies/replay1",
-        }
-      }
+      to="/replies/replay1"
     >
       <FormattedMessage
         id="reply.show.link"
@@ -104,14 +100,12 @@ exports[`<ReplyLink /> render a draft reply in a contribuable questionnaire 1`] 
 `;
 
 exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`] = `
-<ReplyLinkstyle__ReplyLinkContainer>
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
   <div>
     <Link
-      to={
-        Object {
-          "pathname": "/replies/replay1",
-        }
-      }
+      to="/replies/replay1"
     >
       <FormattedMessage
         id="reply.show.link"
@@ -184,14 +178,12 @@ exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`
 `;
 
 exports[`<ReplyLink /> render a reply in a closed questionnaire 1`] = `
-<ReplyLinkstyle__ReplyLinkContainer>
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
   <div>
     <Link
-      to={
-        Object {
-          "pathname": "/replies/replay1",
-        }
-      }
+      to="/replies/replay1"
     >
       <FormattedMessage
         id="reply.show.link"
@@ -233,14 +225,12 @@ exports[`<ReplyLink /> render a reply in a closed questionnaire 1`] = `
 `;
 
 exports[`<ReplyLink /> render a reply in a contribuable questionnaire 1`] = `
-<ReplyLinkstyle__ReplyLinkContainer>
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
   <div>
     <Link
-      to={
-        Object {
-          "pathname": "/replies/replay1",
-        }
-      }
+      to="/replies/replay1"
     >
       <FormattedMessage
         id="reply.show.link"

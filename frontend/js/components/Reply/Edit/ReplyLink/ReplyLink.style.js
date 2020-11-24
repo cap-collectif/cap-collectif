@@ -10,7 +10,9 @@ const ReplyLinkContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.a
   align-items: center;
   background-color: #fff;
   padding: 10px;
+  border: none;
   border-bottom: 1px solid ${colors.lightGray};
+  width: 100%;
 
   &:last-child {
     border: none;

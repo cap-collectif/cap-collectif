@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage, FormattedDate, injectIntl } from 'react-intl';
-import type { RouterHistory } from 'react-router-dom';
+import { useDisclosure } from '@liinkiing/react-hooks';
+import { usePreloadedQuery, useQuery } from 'relay-hooks';
+import { useHistory, type Match } from 'react-router-dom';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { submit, reset } from 'redux-form';
@@ -14,15 +16,33 @@ import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import LeavePageModal from '~/components/Modal/LeavePageModal/LeavePageModal';
 import colors from '~/utils/colors';
 import { type QuestionnaireReplyPage_questionnaire } from '~relay/QuestionnaireReplyPage_questionnaire.graphql';
-import { type QuestionnaireReplyPage_reply } from '~relay/QuestionnaireReplyPage_reply.graphql';
-import type { Dispatch } from '~/types';
+import type { Dispatch, GlobalState, ResultPreloadQuery } from '~/types';
+import Loader from '~ui/FeedbacksIndicators/Loader';
+import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context';
+
+export const queryReply = graphql`
+  query QuestionnaireReplyPageQuery($isAuthenticated: Boolean!, $replyId: ID!) {
+    reply: node(id: $replyId) {
+      id
+      ... on Reply {
+        createdAt
+        publishedAt
+        questionnaire {
+          ...ReplyForm_questionnaire
+        }
+        ...ReplyForm_reply @arguments(isAuthenticated: $isAuthenticated)
+      }
+    }
+  }
+`;
 
 type Props = {|
   questionnaire: ?QuestionnaireReplyPage_questionnaire,
-  reply: QuestionnaireReplyPage_reply,
-  history: RouterHistory,
+  dataPrefetch: ?ResultPreloadQuery,
   submitReplyForm: (replyId: string) => void,
   resetReplyForm: (replyId: string) => void,
+  match: Match,
+  isAuthenticated: boolean,
 |};
 
 const QuestionnaireReplyPageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -52,26 +72,42 @@ const QuestionnaireReplyPageContainer: StyledComponent<{}, {}, HTMLDivElement> =
 
 export const QuestionnaireReplyPage = ({
   questionnaire,
-  reply,
-  history,
+  dataPrefetch,
   submitReplyForm,
   resetReplyForm,
+  match,
+  isAuthenticated,
 }: Props) => {
-  const [isModalShow, setIsModalShow] = useState<boolean>(false);
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   const [isEditingReplyForm, setIsEditingReplyForm] = useState<boolean>(false);
+  const { preloadReply } = React.useContext(QuestionnaireStepPageContext);
+  const history = useHistory();
 
-  const leave = () => {
-    resetReplyForm(reply.id);
-    history.replace('/');
-  };
+  // Skip query when data preloaded is used
+  // (data is preloaded when hovering a reply)
+  const { props: propsQuery } = useQuery(
+    queryReply,
+    { isAuthenticated, replyId: match.params.id },
+    {
+      skip: !!dataPrefetch,
+    },
+  );
 
-  return questionnaire ? (
+  // usePreloadedQuery must wait a queryPreload,
+  // then we give him one which is skipped
+  const queryPreload = preloadReply(match.params.id || '', true);
+  const { props: propsPrefetch } = usePreloadedQuery(dataPrefetch || queryPreload);
+  const reply = propsPrefetch ? propsPrefetch?.reply : propsQuery?.reply;
+
+  if (!reply || !questionnaire) return <Loader />;
+
+  return (
     <QuestionnaireReplyPageContainer>
       {questionnaire.step && <StepPageHeader step={questionnaire.step} />}
 
       <button
         type="button"
-        onClick={() => (isEditingReplyForm ? setIsModalShow(true) : history.replace('/'))}
+        onClick={() => (isEditingReplyForm ? onOpen : history.replace('/'))}
         className="btn-goBack">
         <Icon name={ICON_NAME.chevronLeft} size={10} />
         <FormattedMessage
@@ -112,27 +148,34 @@ export const QuestionnaireReplyPage = ({
       />
       {questionnaire.step && <StepPageFooter step={questionnaire.step} />}
       <LeavePageModal
-        isShow={isModalShow}
+        isShow={isOpen}
         title="user-quit-page-message"
         content="informations-will-not-be-registered"
         btnConfirmMessage="global-exit"
         btnCloseAndConfirmlMessage="save-quit"
         onCloseAndConfirm={() => submitReplyForm(reply.id)}
-        onConfirm={() => leave()}
-        onClose={() => setIsModalShow(false)}
+        onConfirm={() => {
+          resetReplyForm(reply.id);
+          history.replace('/');
+        }}
+        onClose={onClose}
       />
     </QuestionnaireReplyPageContainer>
-  ) : null;
+  );
 };
 
 const container = injectIntl(QuestionnaireReplyPage);
+
+const mapStateToProps = (state: GlobalState) => ({
+  isAuthenticated: state.user.user !== null,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   submitReplyForm: (replyId: string) => dispatch(submit(getFormNameUpdate(replyId))),
   resetReplyForm: (replyId: string) => dispatch(reset(getFormNameUpdate(replyId))),
 });
 
-const containerConnect = connect(null, mapDispatchToProps)(container);
+const containerConnect = connect(mapStateToProps, mapDispatchToProps)(container);
 
 export default createFragmentContainer(containerConnect, {
   questionnaire: graphql`
@@ -145,19 +188,6 @@ export default createFragmentContainer(containerConnect, {
       viewerReplies @include(if: $isAuthenticated) {
         id
       }
-    }
-  `,
-  reply: graphql`
-    fragment QuestionnaireReplyPage_reply on Reply
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
-      id
-      createdAt
-      publishedAt
-      questionnaire {
-        ...ReplyForm_questionnaire
-      }
-      ...UnpublishedLabel_publishable
-      ...ReplyForm_reply @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });

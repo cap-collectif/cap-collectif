@@ -1,13 +1,28 @@
 // @flow
 /* eslint-env jest */
 import * as React from 'react';
+import { RelayEnvironmentProvider } from 'relay-hooks';
 import { shallow } from 'enzyme';
-import { createMemoryHistory } from 'history';
 import { QuestionnaireReplyPage } from './QuestionnaireReplyPage';
 import { $fragmentRefs, $refType } from '~/mocks';
+import environment from '~/createRelayEnvironment';
 
-const props = {
-  history: createMemoryHistory(),
+const baseProps = {
+  isAuthenticated: true,
+  dataPrefetch: {
+    dispose: jest.fn(),
+    getValue: jest.fn(),
+    next: jest.fn(),
+    subscribe: jest.fn(),
+  },
+  match: {
+    params: {
+      id: 'reply123',
+    },
+    isExact: false,
+    path: 'https://questionnaire/replies/reply123',
+    url: 'https://questionnaire/replies/reply123',
+  },
   submitReplyForm: jest.fn(),
   resetReplyForm: jest.fn(),
   questionnaire: {
@@ -24,21 +39,45 @@ const props = {
     ],
     $refType,
   },
-  reply: {
-    $fragmentRefs,
-    $refType,
-    id: '1',
-    createdAt: '2020-01-24T08:28:03.955Z',
-    publishedAt: '2020-01-24T09:28:03.955Z',
-    questionnaire: {
-      $fragmentRefs,
-    },
+};
+
+const props = {
+  basic: baseProps,
+  notAuthenticated: {
+    ...baseProps,
+    isAuthenticated: false,
+  },
+  notPreloaded: {
+    ...baseProps,
+    dataPrefetch: null,
   },
 };
 
 describe('<QuestionnaireReplyPage />', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(<QuestionnaireReplyPage {...props} />);
+    const wrapper = shallow(
+      <RelayEnvironmentProvider environment={environment}>
+        <QuestionnaireReplyPage {...props.basic} />,
+      </RelayEnvironmentProvider>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when not authenticated', () => {
+    const wrapper = shallow(
+      <RelayEnvironmentProvider environment={environment}>
+        <QuestionnaireReplyPage {...props.notAuthenticated} />
+      </RelayEnvironmentProvider>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when data not preloaded', () => {
+    const wrapper = shallow(
+      <RelayEnvironmentProvider environment={environment}>
+        <QuestionnaireReplyPage {...props.notPreloaded} />
+      </RelayEnvironmentProvider>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

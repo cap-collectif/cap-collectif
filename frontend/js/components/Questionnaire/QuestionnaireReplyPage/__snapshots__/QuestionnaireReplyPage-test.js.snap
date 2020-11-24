@@ -1,90 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionnaireReplyPage /> renders correctly 1`] = `
-<QuestionnaireReplyPage__QuestionnaireReplyPageContainer>
-  <Relay(StepPageHeader)
-    step={
+<ContextProvider
+  value={
+    Object {
+      "environment": "RelayModernEnvironment()",
+    }
+  }
+>
+  <QuestionnaireReplyPage
+    dataPrefetch={
       Object {
-        "$fragmentRefs": null,
+        "dispose": [MockFunction],
+        "getValue": [MockFunction],
+        "next": [MockFunction],
+        "subscribe": [MockFunction],
       }
     }
-  />
-  <button
-    className="btn-goBack"
-    onClick={[Function]}
-    type="button"
-  >
-    <Icon
-      name="chevron-left"
-      size={10}
-    />
-    <FormattedMessage
-      id="reply.show.title"
-      values={
-        Object {
-          "num": 2,
-        }
+    isAuthenticated={true}
+    match={
+      Object {
+        "isExact": false,
+        "params": Object {
+          "id": "reply123",
+        },
+        "path": "https://questionnaire/replies/reply123",
+        "url": "https://questionnaire/replies/reply123",
       }
-    />
-  </button>
-  <p
-    className="date-reply"
-  >
-    <FormattedMessage
-      id="reply.show.link"
-      values={
-        Object {
-          "date": <FormattedDate
-            day="numeric"
-            month="long"
-            value={"2020-01-24T09:28:03.955Z"}
-            year="numeric"
-          />,
-          "time": <FormattedDate
-            hour="numeric"
-            minute="numeric"
-            value={"2020-01-24T09:28:03.955Z"}
-          />,
-        }
-      }
-    />
-  </p>
-  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    }
     questionnaire={
       Object {
-        "$fragmentRefs": null,
-      }
-    }
-    reply={
-      Object {
-        "$fragmentRefs": null,
         "$refType": null,
-        "createdAt": "2020-01-24T08:28:03.955Z",
-        "id": "1",
-        "publishedAt": "2020-01-24T09:28:03.955Z",
-        "questionnaire": Object {
+        "step": Object {
           "$fragmentRefs": null,
         },
+        "viewerReplies": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
       }
     }
-    setIsEditingReplyForm={[Function]}
+    resetReplyForm={[MockFunction]}
+    submitReplyForm={[MockFunction]}
   />
-  <Relay(StepPageFooter)
-    step={
+  ,
+</ContextProvider>
+`;
+
+exports[`<QuestionnaireReplyPage /> renders correctly when data not preloaded 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "environment": "RelayModernEnvironment()",
+    }
+  }
+>
+  <QuestionnaireReplyPage
+    dataPrefetch={null}
+    isAuthenticated={true}
+    match={
       Object {
-        "$fragmentRefs": null,
+        "isExact": false,
+        "params": Object {
+          "id": "reply123",
+        },
+        "path": "https://questionnaire/replies/reply123",
+        "url": "https://questionnaire/replies/reply123",
       }
     }
+    questionnaire={
+      Object {
+        "$refType": null,
+        "step": Object {
+          "$fragmentRefs": null,
+        },
+        "viewerReplies": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+    resetReplyForm={[MockFunction]}
+    submitReplyForm={[MockFunction]}
   />
-  <LeavePageModal
-    btnCloseAndConfirmlMessage="save-quit"
-    btnConfirmMessage="global-exit"
-    content="informations-will-not-be-registered"
-    isShow={false}
-    onClose={[Function]}
-    onCloseAndConfirm={[Function]}
-    onConfirm={[Function]}
-    title="user-quit-page-message"
+</ContextProvider>
+`;
+
+exports[`<QuestionnaireReplyPage /> renders correctly when not authenticated 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "environment": "RelayModernEnvironment()",
+    }
+  }
+>
+  <QuestionnaireReplyPage
+    dataPrefetch={
+      Object {
+        "dispose": [MockFunction],
+        "getValue": [MockFunction],
+        "next": [MockFunction],
+        "subscribe": [MockFunction],
+      }
+    }
+    isAuthenticated={false}
+    match={
+      Object {
+        "isExact": false,
+        "params": Object {
+          "id": "reply123",
+        },
+        "path": "https://questionnaire/replies/reply123",
+        "url": "https://questionnaire/replies/reply123",
+      }
+    }
+    questionnaire={
+      Object {
+        "$refType": null,
+        "step": Object {
+          "$fragmentRefs": null,
+        },
+        "viewerReplies": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+    resetReplyForm={[MockFunction]}
+    submitReplyForm={[MockFunction]}
   />
-</QuestionnaireReplyPage__QuestionnaireReplyPageContainer>
+</ContextProvider>
 `;

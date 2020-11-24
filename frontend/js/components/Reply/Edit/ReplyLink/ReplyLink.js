@@ -10,6 +10,7 @@ import UnpublishedLabel from '~/components/Publishable/UnpublishedLabel';
 import Icon from '~/components/Ui/Icons/Icon';
 import DeleteReplyModal from '~/components/Reply/Delete/DeleteReplyModal';
 import ReplyLinkContainer from './ReplyLink.style';
+import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context';
 
 type Props = {|
   reply: ReplyLink_reply,
@@ -25,14 +26,12 @@ const TYPE_MODAL: {
 
 export const ReplyLink = ({ reply }: Props) => {
   const [currentOpenModal, setCurrentOpenModal] = useState<$Values<typeof TYPE_MODAL> | null>(null);
+  const { preloadReply } = React.useContext(QuestionnaireStepPageContext);
 
   return (
-    <ReplyLinkContainer>
+    <ReplyLinkContainer onMouseEnter={() => preloadReply(reply.id)}>
       <div>
-        <Link
-          to={{
-            pathname: `/replies/${reply.id}`,
-          }}>
+        <Link to={`/replies/${reply.id}`}>
           <FormattedMessage
             id="reply.show.link"
             values={{

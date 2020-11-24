@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
+import { loadQuery } from 'relay-hooks';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import environment, { graphqlError } from '~/createRelayEnvironment';
@@ -8,9 +9,12 @@ import { type GlobalState } from '~/types';
 import { type QuestionnaireStepPageQueryResponse } from '~relay/QuestionnaireStepPageQuery.graphql';
 import { Loader } from '~/components/Ui/FeedbacksIndicators/Loader';
 import QuestionnaireStepTabs from '../Questionnaire/QuestionnaireStepTabs';
-import QuestionnaireReplyPage from '~/components/Questionnaire/QuestionnaireReplyPage/QuestionnaireReplyPage';
+import QuestionnaireReplyPage, {
+  queryReply,
+} from '~/components/Questionnaire/QuestionnaireReplyPage/QuestionnaireReplyPage';
 import { baseUrl } from '~/config';
 import ScrollToTop from '~/components/Utils/ScrollToTop';
+import { QuestionnaireStepPageContext, type Context } from './QuestionnaireStepPage.context';
 
 export type PropsNotConnected = {|
   +questionnaireId: ?string,
@@ -23,51 +27,75 @@ type Props = {|
   +enableResults: boolean,
 |};
 
+const preloadQueryReply = (
+  isAuthenticated: boolean,
+  replyId: string,
+  setReplyPrefetch: any,
+  skipPreload?: boolean,
+) => {
+  const dataReply = loadQuery();
+
+  dataReply.next(
+    environment,
+    queryReply,
+    {
+      isAuthenticated,
+      replyId,
+    },
+    { fetchPolicy: 'store-or-network', skip: skipPreload },
+  );
+
+  if (skipPreload) return dataReply;
+
+  setReplyPrefetch(dataReply);
+};
+
 const component = ({
   error,
   props,
+  context,
+  dataPrefetch,
 }: {
   ...ReactRelayReadyState,
   props: ?QuestionnaireStepPageQueryResponse,
+  context: Context,
+  dataPrefetch: any,
 }) => {
-  if (error) {
-    return graphqlError;
-  }
+  if (error) return graphqlError;
 
   if (props) {
     const { questionnaire } = props;
     if (questionnaire) {
       return (
-        <Router basename={questionnaire?.step?.url?.replace(baseUrl, '')}>
-          <ScrollToTop />
+        <QuestionnaireStepPageContext.Provider value={context}>
+          <Router basename={questionnaire?.step?.url?.replace(baseUrl, '')}>
+            <ScrollToTop />
 
-          <Switch>
-            <Route
-              exact
-              path="/"
-              component={() => <QuestionnaireStepTabs questionnaire={questionnaire} />}
-            />
-            <Route
-              exact
-              path="/replies/:id"
-              component={routeProps => (
-                <QuestionnaireReplyPage
-                  questionnaire={questionnaire}
-                  reply={
-                    questionnaire.viewerReplies &&
-                    questionnaire.viewerReplies.find(({ id }) => id === routeProps.match.params.id)
-                  }
-                  {...routeProps}
-                />
-              )}
-            />
-          </Switch>
-        </Router>
+            <Switch>
+              <Route exact path="/">
+                <QuestionnaireStepTabs questionnaire={questionnaire} />
+              </Route>
+
+              <Route
+                exact
+                path="/replies/:id"
+                component={routeProps => (
+                  <QuestionnaireReplyPage
+                    questionnaire={questionnaire}
+                    dataPrefetch={dataPrefetch}
+                    {...routeProps}
+                  />
+                )}
+              />
+            </Switch>
+          </Router>
+        </QuestionnaireStepPageContext.Provider>
       );
     }
 
     return graphqlError;
   }
+
   return <Loader />;
 };
 
@@ -76,8 +104,18 @@ export const QuestionnaireStepPage = ({
   isAuthenticated,
   enableResults,
   isPrivateResult,
-}: Props) =>
-  questionnaireId ? (
+}: Props) => {
+  const [replyPrefetch, setReplyPrefetch] = React.useState(null);
+
+  const context = React.useMemo(
+    () => ({
+      preloadReply: (replyId: string, skipPreload?: boolean) =>
+        preloadQueryReply(isAuthenticated, replyId, setReplyPrefetch, skipPreload),
+    }),
+    [isAuthenticated],
+  );
+
+  return questionnaireId ? (
     <QueryRenderer
       environment={environment}
       query={graphql`
@@ -91,12 +129,7 @@ export const QuestionnaireStepPage = ({
               step {
                 url
               }
-              viewerReplies @include(if: $isAuthenticated) {
-                id
-                ...QuestionnaireReplyPage_reply @arguments(isAuthenticated: $isAuthenticated)
-              }
             }
-            ...QuestionnairePage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
             ...QuestionnaireReplyPage_questionnaire @arguments(isAuthenticated: $isAuthenticated)
             ...QuestionnaireStepTabs_questionnaire
               @arguments(isAuthenticated: $isAuthenticated, enableResults: $enableResults)
@@ -108,9 +141,12 @@ export const QuestionnaireStepPage = ({
         isAuthenticated,
         enableResults: enableResults && !isPrivateResult,
       }}
-      render={component}
+      render={({ error, props, retry }) =>
+        component({ error, props, retry, context, dataPrefetch: replyPrefetch })
+      }
     />
   ) : null;
+};
 
 const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: state.user.user !== null,

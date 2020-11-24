@@ -42,6 +42,7 @@ type Props = {|
   +intl: IntlShape,
   +history: History,
   +setIsEditingReplyForm?: (isEditing: boolean) => void,
+  +setIsShow?: (show: boolean) => void,
 |};
 
 type FormValues = {|
@@ -58,7 +59,7 @@ const onUnload = e => {
 const memoizeAvailableQuestions: any = memoize(() => {});
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { questionnaire, reply, history } = props;
+  const { questionnaire, reply, history, setIsShow } = props;
   const data = {};
 
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
@@ -118,6 +119,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
             : 'reply.request.create.success',
         },
       });
+
+      if (setIsShow) setIsShow(false);
     })
     .catch(() => {
       throw new SubmissionError({

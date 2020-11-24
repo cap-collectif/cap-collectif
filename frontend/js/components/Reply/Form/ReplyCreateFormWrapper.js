@@ -15,6 +15,7 @@ import type { GlobalState } from '~/types';
 type Props = {
   questionnaire: ReplyCreateFormWrapper_questionnaire,
   user: ?User,
+  setIsShow: (show: boolean) => void,
 };
 
 const ReplyCreateFormWrapperContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -35,7 +36,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props> {
   }
 
   render() {
-    const { questionnaire, user } = this.props;
+    const { questionnaire, user, setIsShow } = this.props;
 
     return (
       <ReplyCreateFormWrapperContainer>
@@ -62,7 +63,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props> {
             </Alert>
           )
         )}
-        <ReplyForm questionnaire={questionnaire} reply={null} />
+        <ReplyForm questionnaire={questionnaire} reply={null} setIsShow={setIsShow} />
       </ReplyCreateFormWrapperContainer>
     );
   }

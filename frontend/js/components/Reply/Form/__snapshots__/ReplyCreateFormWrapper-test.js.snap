@@ -8,13 +8,10 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
         "$fragmentRefs": null,
         "$refType": null,
         "contribuable": false,
-        "id": "3",
+        "id": "123",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
         "viewerReplies": Array [
-          Object {
-            "id": "326",
-          },
           Object {
             "id": "289",
           },
@@ -22,6 +19,7 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
       }
     }
     reply={null}
+    setIsShow={[MockFunction]}
   />
 </ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
 `;
@@ -53,7 +51,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "$fragmentRefs": null,
         "$refType": null,
         "contribuable": true,
-        "id": "4",
+        "id": "123",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
         "viewerReplies": Array [
@@ -67,6 +65,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       }
     }
     reply={null}
+    setIsShow={[MockFunction]}
   />
 </ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
 `;
@@ -107,7 +106,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "$fragmentRefs": null,
         "$refType": null,
         "contribuable": true,
-        "id": "2",
+        "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
         "viewerReplies": Array [
@@ -118,6 +117,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       }
     }
     reply={null}
+    setIsShow={[MockFunction]}
   />
 </ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
 `;
@@ -130,7 +130,7 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
         "$fragmentRefs": null,
         "$refType": null,
         "contribuable": true,
-        "id": "2",
+        "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
         "viewerReplies": Array [
@@ -141,6 +141,7 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
       }
     }
     reply={null}
+    setIsShow={[MockFunction]}
   />
 </ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
 `;
