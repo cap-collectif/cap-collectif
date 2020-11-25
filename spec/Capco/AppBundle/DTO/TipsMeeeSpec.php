@@ -53,7 +53,7 @@ class TipsMeeeSpec extends ObjectBehavior
             [
                 'email' => 'NOT_PROVIDED',
                 'name' => 'NOT_PROVIDED',
-                'amount' => 1000,
+                'amount' => 3584,
                 'date' => '2020-11-04T18:09:12',
             ],
             [
@@ -65,25 +65,25 @@ class TipsMeeeSpec extends ObjectBehavior
             [
                 'email' => 'joueur_francais@capco.com',
                 'name' => 'joueur_francais',
-                'amount' => 1500,
+                'amount' => 1000,
                 'date' => '2020-11-04T18:09:12',
             ],
             [
                 'email' => 'joueur_belge@capco.com',
                 'name' => 'joueur_belge',
-                'amount' => 15,
+                'amount' => 1500,
                 'date' => '2020-11-04T18:09:12',
             ],
             [
                 'email' => 'joueur_suisse@capco.com',
                 'name' => 'joueur_suisse',
-                'amount' => 2000,
+                'amount' => 700,
                 'date' => '2020-11-04T18:09:12',
             ],
             [
                 'email' => 'joueur_belge@capco.com',
                 'name' => 'joueur_belge',
-                'amount' => 40,
+                'amount' => 5,
                 'date' => '2020-11-04T18:09:12',
             ],
             [
@@ -95,24 +95,24 @@ class TipsMeeeSpec extends ObjectBehavior
             [
                 'email' => 'NOT_FOR_SHARE',
                 'name' => 'NOT_FOR_SHARE',
-                'amount' => 700,
+                'amount' => 2172,
                 'date' => '2020-11-04T18:09:12',
             ],
         ]);
 
         $this->getDonatorsCount()->shouldBe(7);
-        $this->getDonationTotalCount()->shouldBe(1301.0);
+        $this->getDonationTotalCount()->shouldBe(100.56);
         $this->getTopDonators(2)->shouldBeLike([
-            [
-                'email' => 'NOT_FOR_SHARE',
-                'name' => 'NOT_FOR_SHARE',
-                'amount' => 700,
-                'date' => new \DateTime('2020-11-04T18:09:12'),
-            ],
             [
                 'email' => 'NOT_PROVIDED',
                 'name' => 'NOT_PROVIDED',
-                'amount' => 500,
+                'amount' => 35.84,
+                'date' => new \DateTime('2020-11-04T18:09:12'),
+            ],
+            [
+                'email' => 'NOT_FOR_SHARE',
+                'name' => 'NOT_FOR_SHARE',
+                'amount' => 21.72,
                 'date' => new \DateTime('2020-11-04T18:09:12'),
             ],
         ]);
@@ -125,5 +125,6 @@ class TipsMeeeSpec extends ObjectBehavior
         $this->formatDonationAmount(15)->shouldBe(15.0);
         $this->formatDonationAmount(3150)->shouldBe(31.5);
         $this->formatDonationAmount(25620)->shouldBe(256.2);
+        $this->formatDonationAmount(500)->shouldBe(5.0);
     }
 }

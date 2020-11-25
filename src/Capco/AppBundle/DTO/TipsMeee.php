@@ -112,8 +112,9 @@ class TipsMeee
 
     public function formatDonationAmount(int $amount): float
     {
+        // The donation amout will never exceed 10.
         $stringValue = (string) $amount;
-        if (\strlen($stringValue) >= 4) {
+        if (\strlen($stringValue) >= 3) {
             $decimals = substr($stringValue, -2);
 
             return (float) substr($stringValue, 0, -2) . '.' . $decimals;
