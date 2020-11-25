@@ -7,14 +7,33 @@ class TipsMeee
     public const NOT_PROVIDED = 'NOT_PROVIDED';
     public const NOT_FOR_SHARE = 'NOT_FOR_SHARE';
     private array $account;
+    private ?float $donationTotalCount;
+    private ?int $donatorsCount;
+    private ?int $donationCount;
 
-    public function __construct(array $account)
-    {
+    public function __construct(
+        array $account,
+        ?float $donationTotalCount = null,
+        ?int $donatorsCount = null,
+        ?int $donationCount = null
+    ) {
         $this->account = $account;
+        $this->donationTotalCount = $donationTotalCount;
+        $this->donatorsCount = $donatorsCount;
+        $this->donationCount = $donationCount;
+    }
+
+    public function getAccountData(): array
+    {
+        return $this->account;
     }
 
     public function getDonationTotalCount(): float
     {
+        if (null !== $this->donationTotalCount) {
+            return $this->donationTotalCount;
+        }
+
         $donationTotalCount = 0;
         foreach ($this->account as $tips) {
             $donationTotalCount += $this->formatDonationAmount($tips['amount']);
@@ -25,6 +44,10 @@ class TipsMeee
 
     public function getDonatorsCount(): int
     {
+        if (null !== $this->donatorsCount) {
+            return $this->donatorsCount;
+        }
+
         $donators = [];
         foreach ($this->account as $key => $tips) {
             $donators[] =
@@ -39,7 +62,7 @@ class TipsMeee
 
     public function getDonationCount(): int
     {
-        return \count($this->account);
+        return $this->donationCount ?? \count($this->account);
     }
 
     public function getTopDonators(?int $first): array

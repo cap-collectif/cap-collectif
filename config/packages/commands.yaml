@@ -63,3 +63,7 @@ services:
     Capco\AppBundle\Command\TranslateBasicParameters:
         arguments:
             $name: 'capco:reset:translate-parameters'
+
+    Capco\AppBundle\Command\ComputeTipsMeeeDataCommand:
+        arguments:
+            $name: 'capco:compute:tipsmeee-data'
