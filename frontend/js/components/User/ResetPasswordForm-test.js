@@ -3,14 +3,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ResetPasswordForm } from './ResetPasswordForm';
+import { formMock } from '~/mocks';
 
 describe('<ResetPasswordForm />', () => {
   const props = {
+    ...formMock,
     token: 'ken-le-token',
     dispatch: jest.fn(),
-    invalid: true,
-    submitting: false,
-    pristine: true,
   };
 
   it('should render correctly', () => {

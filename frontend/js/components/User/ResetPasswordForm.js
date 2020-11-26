@@ -12,16 +12,9 @@ import { form } from '~/components/User/Registration/RegistrationForm';
 import SubmitButton from '~/components/Form/SubmitButton';
 import ResetPasswordMutation from '~/mutations/ResetPasswordMutation';
 
-type ReduxProps = {|
-  +invalid: boolean,
-  +pristine: boolean,
-  +submitting: boolean,
-  +dispatch: Dispatch,
-|};
-
 export type Props = {|
+  ...ReduxFormFormProps,
   token: string,
-  ...ReduxProps,
 |};
 
 type FormValues = {|
@@ -76,24 +69,30 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { intl, token }) => {
 
 export const formName = 'recreate_password_form';
 
-const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs({})`
+const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   width: 50%;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px auto;
+
   .reset-password-form {
     margin: auto;
   }
+
   .flex-column {
     display: flex;
     flex-direction: column;
   }
 `;
 
-export const ResetPasswordForm = ({ submitting, pristine, dispatch, invalid }: Props) => {
+export const ResetPasswordForm = ({
+  submitting,
+  pristine,
+  dispatch,
+  invalid,
+  handleSubmit,
+}: Props) => {
   return (
     <Container>
-      <form onSubmit={() => {}} className="reset-password-form">
+      <form className="reset-password-form" onSubmit={handleSubmit}>
         <Panel>
           <Panel.Body>
             <div className="flex-column ml-10 mr-10">
@@ -116,9 +115,7 @@ export const ResetPasswordForm = ({ submitting, pristine, dispatch, invalid }: P
                 id="reset-content-confirm"
                 disabled={pristine || submitting || invalid}
                 isSubmitting={submitting}
-                onSubmit={() => {
-                  dispatch(submit(formName));
-                }}
+                onSubmit={() => dispatch(submit(formName))}
               />
             </div>
           </Panel.Body>
