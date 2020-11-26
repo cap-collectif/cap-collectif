@@ -114,7 +114,7 @@ export class NotificationsForm extends Component<Props> {
                             name="consentInternalCommunication"
                             component={component}
                             type="checkbox"
-                            id="proposal-comment-mail"
+                            id="internal-platform-news"
                           />
                         </td>
                       </tr>
@@ -134,7 +134,7 @@ export class NotificationsForm extends Component<Props> {
                             name="consentExternalCommunication"
                             component={component}
                             type="checkbox"
-                            id="proposal-comment-mail"
+                            id="external-platform-news"
                           />
                         </td>
                       </tr>
