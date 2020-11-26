@@ -1822,7 +1822,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the last `n` elements from the list."""
     last: Int
-    orderBy: ProposalVotesOrder = {direction: DESC}
+    orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
   private: Boolean!
@@ -5933,7 +5933,7 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
     """Returns the last `n` elements from the list."""
     last: Int
-    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+    orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
 
     """Filters vote by value"""
     value: YesNoPairedVoteValue
@@ -7076,6 +7076,38 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The supervisor's assessment on the analysis of the proposal."""
   assessment: ProposalAssessment
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """The ordering options for votes."""
+    orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    """If provided, retrieve only in this step."""
+    stepId: ID
+
+    """(ROLE_SUPER_ADMIN only) Select also unpublished votes."""
+    includeUnpublished: Boolean = false
+
+    """(ROLE_SUPER_ADMIN only) Select also not accounted votes."""
+    includeNotAccounted: Boolean = false
+  ): ProposalVoteConnection!
+
+  """List of selections (step an status) of the proposal."""
+  selections: [ProposalSelection!]!
 
   """
   Return the related contribution if the contribution is related to another.
@@ -7184,7 +7216,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     """Used to get the status on a selection step."""
     step: ID
   ): ProposalStepStatus
-  selections: [Selection!]!
   likers: [User!]!
   estimation: Int
   media: Media
@@ -7216,33 +7247,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Identifies the answers to an evaluation form."""
   evaluation: ProposalEvaluation @deprecated(reason: "Field `viewerCanSeeEvaluation` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
-  votes(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the last `n` elements from the list."""
-    last: Int
-    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
-
-    """If provided, retrieve only in this step."""
-    stepId: ID
-
-    """(ROLE_SUPER_ADMIN only) Select also unpublished votes."""
-    includeUnpublished: Boolean = false
-
-    """(ROLE_SUPER_ADMIN only) Select also not accounted votes."""
-    includeNotAccounted: Boolean = false
-  ): ProposalVoteConnection!
 
   """Check if the proposal has been merged with another"""
   hasBeenMerged: Boolean
@@ -7949,6 +7953,15 @@ enum ProposalRevisionState {
   EXPIRED
 }
 
+"""The selection of a proposal in a step."""
+type ProposalSelection {
+  """The step where the proposal is selected."""
+  step: SelectionStep!
+
+  """The status of the proposal in the step."""
+  status: ProposalStepStatus
+}
+
 """Value of a proposal sorting"""
 enum ProposalSort {
   """Sort by the oldest ones first"""
@@ -8227,7 +8240,7 @@ interface ProposalStep {
 
     """Returns the last `n` elements from the list."""
     last: Int
-    orderBy: ProposalVotesOrder = {direction: DESC}
+    orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
 }
@@ -8385,9 +8398,21 @@ type ProposalVoteEdge {
 }
 
 """Ways in which lists of votes can be ordered upon return."""
-input ProposalVotesOrder {
-  field: VoteOrderField! = PUBLISHED_AT
+input ProposalVoteOrder {
+  """The field in which to order nodes by."""
+  field: ProposalVoteOrderField! = PUBLISHED_AT
+
+  """The direction in which to order nodes."""
   direction: OrderDirection! = DESC
+}
+
+"""Ordering options for proposals votes connections."""
+enum ProposalVoteOrderField {
+  """Allows ordering a list of vote by when they were published."""
+  PUBLISHED_AT
+
+  """Allows ordering a list of vote by position."""
+  POSITION
 }
 
 """Possible values to filters a list of proposals based on their state."""
@@ -9232,6 +9257,12 @@ type Questionnaire implements Node {
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """(ROLE_ADMIN only) Select also unpublished replies."""
+    includeUnpublished: Boolean = false
+
+    """(ROLE_ADMIN only) Select also draft replies."""
+    includeDraft: Boolean = false
   ): ReplyConnection!
 
   """Expose Primary Key, do not use it, except for testing purpose."""
@@ -9662,17 +9693,17 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
-  """The responses of the reply."""
-  responses: [Response]!
-
-  """The author of the contribution."""
-  author: User!
-
   """Whether or not the entity is a draft."""
   draft: Boolean!
 
   """Identifies when the entity was undraft at."""
   undraftAt: DateTime
+
+  """The responses of the reply."""
+  responses: [Response]!
+
+  """The author of the contribution."""
+  author: User!
 
   """
   Return the related contribution if the contribution is related to another.
@@ -10283,12 +10314,6 @@ type SelectProposalPayload {
 }
 
 """A budget contribution"""
-type Selection {
-  step: SelectionStep!
-  status: ProposalStepStatus
-}
-
-"""A budget contribution"""
 type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The ID of an object"""
   id: ID!
@@ -10515,7 +10540,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the last `n` elements from the list."""
     last: Int
-    orderBy: ProposalVotesOrder = {direction: DESC}
+    orderBy: ProposalVoteOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm
   position: Int!
@@ -12604,7 +12629,7 @@ type User implements Node & UniformResourceLocatable {
 
     """Returns the last `n` elements from the list."""
     last: Int
-    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+    orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
     stepId: ID
 
     """(ROLE_SUPER_ADMIN only) Select also unpublished votes."""
@@ -13273,7 +13298,7 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
     """Returns the last `n` elements from the list."""
     last: Int
-    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+    orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
 
     """Filters vote by value"""
     value: YesNoPairedVoteValue

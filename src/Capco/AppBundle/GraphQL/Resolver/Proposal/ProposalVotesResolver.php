@@ -2,11 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 
 class ProposalVotesResolver implements ResolverInterface
 {
@@ -21,15 +22,19 @@ class ProposalVotesResolver implements ResolverInterface
         $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context, $user)
-    {
+    public function __invoke(
+        Proposal $proposal,
+        Argument $args,
+        \ArrayObject $context,
+        ?User $viewer = null
+    ) {
         $includeNotAccounted = true === $args->offsetGet('includeNotAccounted');
         $includeUnpublished =
             true === $args->offsetGet('includeUnpublished') ||
             ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
 
         if ($args->offsetExists('stepId')) {
-            $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user, $context);
+            $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $viewer, $context);
 
             return $this->proposalVotesDataLoader->load(
                 compact('proposal', 'step', 'args', 'includeUnpublished', 'includeNotAccounted')

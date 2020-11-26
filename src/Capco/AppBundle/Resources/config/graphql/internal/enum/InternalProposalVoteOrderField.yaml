@@ -1,0 +1,12 @@
+InternalProposalVoteOrderField:
+    type: enum
+    config:
+        name: ProposalVoteOrderField
+        description: 'Ordering options for proposals votes connections.'
+        values:
+            PUBLISHED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::PUBLISHED_AT")'
+                description: 'Allows ordering a list of vote by when they were published.'
+            POSITION:
+                value: '@=constant("Capco\\AppBundle\\Enum\\VoteOrderField::POSITION")'
+                description: 'Allows ordering a list of vote by position.'

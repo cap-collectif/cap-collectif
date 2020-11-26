@@ -1,6 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Preview|Questionnaire.replies connection fetches the first hundred replies with a cursor 1`] = `
+exports[`Preview|Questionnaire.replies connection fetches all replies counters as an admin 1`] = `
+Object {
+  "node": Object {
+    "allReplies": Object {
+      "totalCount": 22,
+    },
+    "publishedAndDraftReplies": Object {
+      "totalCount": 21,
+    },
+    "publishedAndUnpublishedReplies": Object {
+      "totalCount": 20,
+    },
+    "publishedReplies": Object {
+      "totalCount": 19,
+    },
+  },
+}
+`;
+
+exports[`Preview|Questionnaire.replies connection fetches published counters only as anonymous 1`] = `
+Object {
+  "node": Object {
+    "allReplies": Object {
+      "totalCount": 19,
+    },
+    "publishedAndDraftReplies": Object {
+      "totalCount": 19,
+    },
+    "publishedAndUnpublishedReplies": Object {
+      "totalCount": 19,
+    },
+    "publishedReplies": Object {
+      "totalCount": 19,
+    },
+  },
+}
+`;
+
+exports[`Preview|Questionnaire.replies connection fetches the first hundred published replies with a cursor 1`] = `
 Object {
   "node": Object {
     "replies": Object {
@@ -1935,6 +1973,242 @@ Object {
         "hasNextPage": false,
       },
       "totalCount": 19,
+    },
+  },
+}
+`;
+
+exports[`Preview|Questionnaire.replies connection fetches the first hundred replies including draft and unpublished with a cursor as an admin 1`] = `
+Object {
+  "node": Object {
+    "replies": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "node": Object {
+            "createdAt": "2016-03-01 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHkx",
+            "published": true,
+            "publishedAt": "2016-03-01 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHky",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "node": Object {
+            "createdAt": "2016-03-05 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk1",
+            "published": true,
+            "publishedAt": "2016-03-05 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "node": Object {
+            "createdAt": "2016-03-06 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHk2",
+            "published": true,
+            "publishedAt": "2016-03-06 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "node": Object {
+            "createdAt": "2016-03-07 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHk3",
+            "published": false,
+            "publishedAt": null,
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "node": Object {
+            "createdAt": "2016-03-05 00:00:00",
+            "draft": true,
+            "id": "UmVwbHk6cmVwbHk5",
+            "published": true,
+            "publishedAt": "2016-03-22 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEw",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEx",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEy",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTEz",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE0",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE1",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE2",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE3",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE4",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTE5",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE2",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTIw",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE3",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTY=",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE4",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTc=",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE5",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTg=",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjIw",
+          "node": Object {
+            "createdAt": "2016-03-02 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlNYWpvcml0eTk=",
+            "published": true,
+            "publishedAt": "2016-03-02 00:00:00",
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjIx",
+          "node": Object {
+            "createdAt": "2019-03-20 00:00:00",
+            "draft": false,
+            "id": "UmVwbHk6cmVwbHlQcml2YXRl",
+            "published": true,
+            "publishedAt": "2019-03-20 00:00:00",
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjIx",
+        "hasNextPage": false,
+      },
+      "totalCount": 22,
     },
   },
 }

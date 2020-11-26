@@ -1,18 +1,27 @@
 PreviewQuestionnaire:
-  type: object
-  inherits:
-    - PublicQuestionnaire
-  config:
-    name: Questionnaire
-    fields:
-      questions:
-        type: '[PreviewQuestion!]!'
-        description: 'The list of questions of the questionnaire.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", [value])'
-      replies:
-        type: 'PreviewReplyConnection!'
-        argsBuilder: 'Relay::Connection'
-        description: 'A list of replies to the questionnaire.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", [value, args])'
-      participants:
-        type: 'PreviewUserConnection!'
+    type: object
+    inherits:
+        - PublicQuestionnaire
+    config:
+        name: Questionnaire
+        fields:
+            questions:
+                type: '[PreviewQuestion!]!'
+                description: 'The list of questions of the questionnaire.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", [value])'
+            replies:
+                type: 'PreviewReplyConnection!'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    includeUnpublished:
+                        type: Boolean
+                        description: '(ROLE_ADMIN only) Select also unpublished replies.'
+                        defaultValue: false
+                    includeDraft:
+                        description: '(ROLE_ADMIN only) Select also draft replies.'
+                        type: Boolean
+                        defaultValue: false
+                description: 'A list of replies to the questionnaire.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", [value, args, getUser()])'
+            participants:
+                type: 'PreviewUserConnection!'

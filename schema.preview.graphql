@@ -1039,6 +1039,29 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The supervisor's assessment on the analysis of the proposal."""
   assessment: ProposalAssessment
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """The ordering options for votes."""
+    orderBy: ProposalVoteOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): ProposalVoteConnection!
+
+  """List of selections (step an status) of the proposal."""
+  selections: [ProposalSelection!]!
 }
 
 """A proposal analysis."""
@@ -1234,6 +1257,15 @@ enum ProposalOrderField {
   POINTS
 }
 
+"""The selection of a proposal in a step."""
+type ProposalSelection {
+  """The step where the proposal is selected."""
+  step: SelectionStep!
+
+  """The status of the proposal in the step."""
+  status: ProposalStepStatus
+}
+
 """The given proposal status in a step."""
 type ProposalStepStatus {
   """The id of the proposal step status."""
@@ -1301,6 +1333,40 @@ type ProposalVote implements Publishable & Vote {
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type ProposalVoteConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ProposalVoteEdge]
+}
+
+"""An edge in a connection."""
+type ProposalVoteEdge {
+  """The item at the end of the edge."""
+  node: ProposalVote!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of votes can be ordered upon return."""
+input ProposalVoteOrder {
+  """The field in which to order nodes by."""
+  field: ProposalVoteOrderField! = PUBLISHED_AT
+
+  """The direction in which to order nodes."""
+  direction: OrderDirection! = DESC
+}
+
+"""Ordering options for votes returned from the connection."""
+enum ProposalVoteOrderField {
+  PUBLISHED_AT
 }
 
 """Entities that can be published."""
@@ -1536,6 +1602,12 @@ type Questionnaire implements Node {
 
     """Returns the last `n` elements from the list."""
     last: Int
+
+    """(ROLE_ADMIN only) Select also unpublished replies."""
+    includeUnpublished: Boolean = false
+
+    """(ROLE_ADMIN only) Select also draft replies."""
+    includeDraft: Boolean = false
   ): ReplyConnection!
 }
 
@@ -1601,6 +1673,12 @@ type Reply implements Node & Publishable {
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """Whether or not the entity is a draft."""
+  draft: Boolean!
+
+  """Identifies when the entity was undraft at."""
+  undraftAt: DateTime
 
   """The responses of the reply."""
   responses: [Response]!
@@ -1689,6 +1767,56 @@ type SectionQuestion implements Question & Node {
 
   """If not null, give the section s depth"""
   level: Int
+}
+
+"""A step to select proposals."""
+type SelectionStep implements Node & Step {
+  """The ID of an object."""
+  id: ID!
+
+  """A list of proposals associated to the object."""
+  proposals(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """
+    If non-null, filters proposals with the given trashed status (eg: visible, not visible).
+    """
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+
+    """
+    ID of a User to filter by. If non-null, only proposals authored by this user will be returned.
+    """
+    author: ID
+
+    """Ordering options for proposals returned from the connection."""
+    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+  ): ProposalConnection!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
+
+  """The URL to this resource."""
+  url: URI!
+
+  """The title of the step."""
+  title: String!
+
+  """Identifies the current state of the step."""
+  state: StepState!
 }
 
 """A simple question"""

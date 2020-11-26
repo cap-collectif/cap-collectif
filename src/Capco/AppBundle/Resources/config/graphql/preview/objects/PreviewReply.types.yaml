@@ -1,25 +1,26 @@
 PreviewReply:
-  type: object
-  inherits:
-    - Node
-    - PublicPublishable
-    - Timestampable
-  config:
-    name: Reply
-    description: "Represents a user's answer to a questionnaire."
-    interfaces:
-      - Node
-      - PublicPublishable
-    fields:
-      id:
-        description: 'The ID of an object.'
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Reply
-      responses:
-        type: '[PreviewResponse]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value, getUser(), context])'
-        description: 'The responses of the reply.'
-      author:
-        type: 'PreviewUser!'
-        description: 'The author of the contribution.'
+    type: object
+    inherits:
+        - Node
+        - PublicPublishable
+        - Timestampable
+        - Draftable
+    config:
+        name: Reply
+        description: "Represents a user's answer to a questionnaire."
+        interfaces:
+            - Node
+            - PublicPublishable
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Reply
+            responses:
+                type: '[PreviewResponse]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value, getUser(), context])'
+                description: 'The responses of the reply.'
+            author:
+                type: 'PreviewUser!'
+                description: 'The author of the contribution.'

@@ -1,0 +1,10 @@
+InternalProposalVoteOrder:
+    type: input-object
+    inherits:
+        - PreviewProposalVoteOrder
+    config:
+        name: ProposalVoteOrder
+        fields:
+            field:
+                type: 'InternalProposalVoteOrderField!'
+                defaultValue: 'PUBLISHED_AT'

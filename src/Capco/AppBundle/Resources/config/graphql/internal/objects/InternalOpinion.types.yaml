@@ -44,7 +44,7 @@ InternalOpinion:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
                 args:
                     orderBy:
-                        type: 'ProposalVotesOrder'
+                        type: 'InternalProposalVoteOrder'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                     value:
                         type: 'YesNoPairedVoteValue'

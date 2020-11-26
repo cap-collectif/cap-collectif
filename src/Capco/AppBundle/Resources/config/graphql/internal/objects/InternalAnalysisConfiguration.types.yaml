@@ -31,7 +31,7 @@ InternalAnalysisConfiguration:
                 type: '[ProposalStepStatus!]'
                 description: 'The unfavourable status to apply on contributions.'
             moveToSelectionStep:
-                type: 'SelectionStep'
+                type: 'InternalSelectionStep'
                 description: 'The step to which proposals will be moved.'
             selectionStepStatus:
                 type: 'ProposalStepStatus'

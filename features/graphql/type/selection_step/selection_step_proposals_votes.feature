@@ -7,7 +7,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
   And I send a GraphQL POST request:
   """
   {
-    "query": "query ($selectionStepId: ID!, $count: Int, $orderBy: ProposalVotesOrder) {
+    "query": "query ($selectionStepId: ID!, $count: Int) {
       selectionStep: node(id: $selectionStepId) {
           id
           ... on SelectionStep {
@@ -16,7 +16,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
                   edges {
                       node {
                           id
-                          votes(first: $count, stepId: $selectionStepId, orderBy: $orderBy) {
+                          votes(first: $count, stepId: $selectionStepId) {
                               totalCount
                               edges {
                                 node {
@@ -68,7 +68,7 @@ Scenario: Admin wants to get votes for a question in a selection step
   And I send a GraphQL POST request:
   """
   {
-    "query": "query ($selectionStepId: ID!, $count: Int, $orderBy: ProposalVotesOrder) {
+    "query": "query ($selectionStepId: ID!, $count: Int) {
       selectionStep: node(id: $selectionStepId) {
           id
           ... on SelectionStep {
@@ -77,7 +77,7 @@ Scenario: Admin wants to get votes for a question in a selection step
                   edges {
                       node {
                           id
-                          votes(first: $count, stepId: $selectionStepId, orderBy: $orderBy) {
+                          votes(first: $count, stepId: $selectionStepId) {
                               totalCount
                               edges {
                                 node {

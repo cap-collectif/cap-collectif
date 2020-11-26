@@ -282,7 +282,9 @@ DQL;
         foreach ($questionnaireSteps as $qs) {
             if ($qs->isOpen() || $this->force) {
                 if ($qs->getQuestionnaire()) {
-                    $repliesCount = $repliesResolver->calculateTotalCount($qs->getQuestionnaire());
+                    $repliesCount = $repliesResolver->calculatePublishedTotalCount(
+                        $qs->getQuestionnaire()
+                    );
                     $this->executeQuery(
                         'UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs
                         set qs.repliesCount = ' .

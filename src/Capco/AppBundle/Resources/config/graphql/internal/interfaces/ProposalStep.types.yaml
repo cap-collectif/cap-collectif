@@ -44,7 +44,7 @@ ProposalStep:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
                 args:
                     orderBy:
-                        type: 'ProposalVotesOrder'
+                        type: 'InternalProposalVoteOrder'
                         defaultValue: { field: CREATED_AT, direction: DESC }
             form:
                 type: 'ProposalForm'

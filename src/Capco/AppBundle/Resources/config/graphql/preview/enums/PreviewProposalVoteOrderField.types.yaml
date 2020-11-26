@@ -1,0 +1,8 @@
+PreviewProposalVoteOrderField:
+    type: enum
+    config:
+        name: ProposalVoteOrderField
+        description: 'Ordering options for votes returned from the connection.'
+        values:
+            PUBLISHED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\VoteOrderField::PUBLISHED_AT")'

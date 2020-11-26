@@ -31,7 +31,11 @@ class StepTypeResolver implements ResolverInterface
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($step instanceof SelectionStep) {
-            return $this->typeResolver->resolve('SelectionStep');
+            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
+                return $this->typeResolver->resolve('PreviewSelectionStep');
+            }
+
+            return $this->typeResolver->resolve('InternalSelectionStep');
         }
         if ($step instanceof CollectStep) {
             if (\in_array($currentSchemaName, ['public', 'preview'], true)) {

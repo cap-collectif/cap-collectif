@@ -65,8 +65,6 @@ InternalProposal:
                     step:
                         type: 'ID'
                         description: 'Used to get the status on a selection step.'
-            selections:
-                type: '[Selection!]!'
             likers:
                 type: '[InternalUser!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalLikersResolver", [value])'
@@ -122,10 +120,9 @@ InternalProposal:
             votes:
                 type: 'ProposalVoteConnection!'
                 argsBuilder: 'Relay::Connection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context, getUser()])'
                 args:
                     orderBy:
-                        type: 'ProposalVotesOrder'
+                        type: 'InternalProposalVoteOrder'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                     stepId:
                         type: 'ID'
@@ -259,3 +256,5 @@ InternalProposal:
                 type: 'TipsMeee'
                 description: 'Return all tipsmeee related data.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalTipsMeeeResolver", [value, args])'
+            selections:
+                type: '[InternalProposalSelection!]!'

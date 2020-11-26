@@ -1,0 +1,473 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview.Proposal_votes fetches votes's related to a proposal 1`] = `
+Object {
+  "node": Object {
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXA1",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwxNA==",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:50:00",
+                    "id": "2049",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:50:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:49:00",
+                    "id": "2048",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:49:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:48:00",
+                    "id": "2047",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:48:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:47:00",
+                    "id": "2046",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:47:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:46:00",
+                    "id": "2045",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:46:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:45:00",
+                    "id": "2044",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:45:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:44:00",
+                    "id": "2043",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:44:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:43:00",
+                    "id": "2042",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:43:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:42:00",
+                    "id": "2041",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:42:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:41:00",
+                    "id": "2040",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:41:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:40:00",
+                    "id": "2039",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:40:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:39:00",
+                    "id": "2038",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:39:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:38:00",
+                    "id": "2037",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:38:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:37:00",
+                    "id": "2036",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:37:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:36:00",
+                    "id": "2035",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:36:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:35:00",
+                    "id": "2034",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:35:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:34:00",
+                    "id": "2033",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:34:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:33:00",
+                    "id": "2032",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:33:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:32:00",
+                    "id": "2031",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:32:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:31:00",
+                    "id": "2030",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:31:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:30:00",
+                    "id": "2029",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:30:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:29:00",
+                    "id": "2028",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:29:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:28:00",
+                    "id": "2027",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:28:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:27:00",
+                    "id": "2026",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:27:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:26:00",
+                    "id": "2025",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:26:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:25:00",
+                    "id": "2024",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:25:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:24:00",
+                    "id": "2023",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:24:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:23:00",
+                    "id": "2022",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:23:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:22:00",
+                    "id": "2021",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:22:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:21:00",
+                    "id": "2020",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:21:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:20:00",
+                    "id": "2019",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:20:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:19:00",
+                    "id": "2018",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:19:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:18:00",
+                    "id": "2017",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:18:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:17:00",
+                    "id": "2016",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:17:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:16:00",
+                    "id": "2015",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:16:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:15:00",
+                    "id": "2014",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:15:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:14:00",
+                    "id": "2013",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:14:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:13:00",
+                    "id": "2012",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:13:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:12:00",
+                    "id": "2011",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:12:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:11:00",
+                    "id": "2010",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:11:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:10:00",
+                    "id": "2009",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:10:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:09:00",
+                    "id": "2008",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:09:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:08:00",
+                    "id": "2007",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:08:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:07:00",
+                    "id": "2006",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:07:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:06:00",
+                    "id": "2005",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:06:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:05:00",
+                    "id": "2004",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:05:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:04:00",
+                    "id": "2003",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:04:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:03:00",
+                    "id": "2002",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:03:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:02:00",
+                    "id": "2001",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:02:00",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2017-02-01 00:01:00",
+                    "id": "2000",
+                    "notPublishedReason": null,
+                    "published": true,
+                    "publishedAt": "2017-02-01 00:01:00",
+                  },
+                },
+              ],
+              "totalCount": 50,
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;

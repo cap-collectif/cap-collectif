@@ -1,0 +1,14 @@
+PreviewProposalVoteOrder:
+    type: input-object
+    config:
+        name: ProposalVoteOrder
+        description: 'Ways in which lists of votes can be ordered upon return.'
+        fields:
+            field:
+                type: 'PreviewProposalVoteOrderField!'
+                defaultValue: 'PUBLISHED_AT'
+                description: 'The field in which to order nodes by.'
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: 'DESC'
+                description: 'The direction in which to order nodes.'

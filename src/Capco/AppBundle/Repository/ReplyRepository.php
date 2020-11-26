@@ -38,6 +38,30 @@ class ReplyRepository extends EntityRepository
         return (int) $query->getSingleScalarResult();
     }
 
+    public function countForQuestionnaire(
+        Questionnaire $questionnaire,
+        bool $includeUnpublished,
+        bool $includeDraft
+    ): int {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('sclr', 'sclr');
+
+        $where = '';
+        $where .= $includeUnpublished ? '' : ' r.published = 1 AND';
+        $where .= $includeDraft ? '' : ' is_draft = 0 AND';
+
+        $query = $this->_em
+            ->createNativeQuery(
+                'SELECT COUNT(r.id) as sclr FROM reply r USE INDEX (idx_questionnaire_published) WHERE' .
+                    $where .
+                    ' r.questionnaire_id = :questionnaireId',
+                $rsm
+            )
+            ->setParameter('questionnaireId', $questionnaire->getId());
+
+        return (int) $query->getSingleScalarResult();
+    }
+
     public function getOneForUserAndQuestionnaire(Questionnaire $questionnaire, User $user): ?Reply
     {
         $qb = $this->getPublishedQueryBuilder()
@@ -122,8 +146,14 @@ class ReplyRepository extends EntityRepository
     public function findByQuestionnaire(
         Questionnaire $questionnaire,
         int $offset,
-        int $limit
+        int $limit,
+        bool $includeUnpublished,
+        bool $includeDraft
     ): array {
+        $where = '';
+        $where .= $includeUnpublished ? '' : ' r.published = 1 AND';
+        $where .= $includeDraft ? '' : ' is_draft = 0 AND';
+
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('id', 'id');
 
@@ -131,7 +161,9 @@ class ReplyRepository extends EntityRepository
         // This make the query too slow for such a huge table
         $nativeQuery = $this->getEntityManager()
             ->createNativeQuery(
-                'SELECT r.id FROM reply r USE INDEX (idx_questionnaire_published) WHERE r.published = 1 AND r.questionnaire_id = :questionnaire AND r.is_draft = 0 LIMIT :offset, :limit',
+                'SELECT r.id FROM reply r USE INDEX (idx_questionnaire_published) WHERE' .
+                    $where .
+                    ' r.questionnaire_id = :questionnaire LIMIT :offset, :limit',
                 $rsm
             )
             ->setParameter('questionnaire', $questionnaire)

@@ -47,10 +47,22 @@ PreviewProposal:
                 type: '[PreviewProposalAnalysis!]'
                 description: "Analysts's analysis of the proposal."
             decision:
-                description: "The decision of the decision-maker on the analysis of the proposal."
+                description: 'The decision of the decision-maker on the analysis of the proposal.'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalDecisionResolver").isGranted(getUser(), value, context)'
                 type: 'PreviewProposalDecision'
             assessment:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAssessmentResolver").isGranted(getUser(), value, context)'
                 type: 'PreviewProposalAssessment'
                 description: "The supervisor's assessment on the analysis of the proposal."
+            votes:
+                type: 'PreviewProposalVoteConnection!'
+                argsBuilder: 'Relay::Connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context, getUser()])'
+                args:
+                    orderBy:
+                        type: 'PreviewProposalVoteOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                        description: 'The ordering options for votes.'
+            selections:
+                type: '[PreviewProposalSelection!]!'
+                description: 'List of selections (step an status) of the proposal.'

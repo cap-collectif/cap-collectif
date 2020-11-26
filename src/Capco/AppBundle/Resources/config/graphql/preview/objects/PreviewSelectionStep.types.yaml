@@ -1,0 +1,23 @@
+PreviewSelectionStep:
+  type: object
+  inherits:
+    - Node
+    - PreviewWithProposals
+    - PreviewStep
+  config:
+    name: SelectionStep
+    description: 'A step to select proposals.'
+    interfaces:
+      - Node
+      - PreviewStep
+    fields:
+      id:
+        description: 'The ID of an object.'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: SelectionStep
+      title:
+        description: 'The title of the step.'
+        type: 'String!'
+      proposals:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, getUser(), serv("request_stack")])'

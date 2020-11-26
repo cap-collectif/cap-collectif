@@ -268,7 +268,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "Selection",
+                      "concreteType": "ProposalSelection",
                       "kind": "LinkedField",
                       "name": "selections",
                       "plural": true,
