@@ -176,6 +176,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         if ($this->id) {
             $this->id = null;
             $this->slug = 'copy-of-' . $this->getSlug();
+            $this->createdAt = new \DateTime('now');
         }
     }
 

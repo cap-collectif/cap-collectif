@@ -153,6 +153,9 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
             $this->id = null;
             $this->createdAt = new \DateTime();
             $this->updatedAt = null;
+            if ($this->alwaysJumpDestinationQuestion) {
+                $this->alwaysJumpDestinationQuestion = clone $this->alwaysJumpDestinationQuestion;
+            }
         }
     }
 

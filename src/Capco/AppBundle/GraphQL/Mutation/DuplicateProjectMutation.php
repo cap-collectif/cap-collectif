@@ -39,7 +39,6 @@ class DuplicateProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input)
     {
-        $arguments = $input->getArrayCopy();
         $projectId = $input->offsetGet('id');
         $project = $this->projectRepository->find($projectId);
         if (!$project) {
