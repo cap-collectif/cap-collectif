@@ -10,8 +10,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateRegistrationFormCommunicationMutation implements MutationInterface
 {
-    private $em;
-    private $registrationFormRepository;
+    private EntityManagerInterface $em;
+    private RegistrationFormRepository $registrationFormRepository;
 
     public function __construct(
         EntityManagerInterface $em,
