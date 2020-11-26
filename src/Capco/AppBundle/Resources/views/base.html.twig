@@ -12,6 +12,9 @@
     <main id="main" class="main" tabindex="-1" role="main">
         {% block body %}{% endblock %}
     </main>
+    {{ react_render_component('ToastsContainerApp', {
+        'rendering': 'client_side'
+    }) }}
 
     {# Footer #}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}

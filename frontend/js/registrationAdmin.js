@@ -37,10 +37,12 @@ import UserInviteAdminPageApp from '~/startup/UserInviteAdminPageApp';
 import EmailingListPageApp from '~/startup/EmailingListPageApp';
 import EmailingCampaignPageApp from '~/startup/EmailingCampaignPageApp';
 import EmailingMailParameterPageApp from '~/startup/EmailingMailParameterPageApp';
+import ToastsContainerApp from '~/startup/ToastsContainerApp';
 
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
+  ToastsContainerApp,
   AlertBoxApp,
   SiteFaviconAdminPageApp,
   AdminRightNavbarApp,

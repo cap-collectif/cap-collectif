@@ -8,7 +8,9 @@ type DOMRect = {|
   +y: number,
 |};
 
-export const useBoundingRect = (ref: any): DOMRect => {
+export const useBoundingRect = (
+  ref: any,
+): [DOMRect, (newValue: DOMRect) => void | (((newValue: DOMRect) => void) => void)] => {
   const [boundings, setBoundings] = useState<DOMRect>({
     height: 0,
     width: 0,
@@ -22,5 +24,5 @@ export const useBoundingRect = (ref: any): DOMRect => {
     }
   }, [ref]);
 
-  return boundings;
+  return [boundings, setBoundings];
 };

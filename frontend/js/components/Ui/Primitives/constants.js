@@ -14,11 +14,11 @@ export const FontWeight = {
 };
 
 export const LineHeight = {
-  S: 'S',
+  S: 's',
   Base: 'base',
-  M: 'M',
-  L: 'L',
-  XL: 'XL',
+  M: 'm',
+  L: 'l',
+  XL: 'xl',
 };
 
 export const LetterSpacing: {

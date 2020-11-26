@@ -150,6 +150,12 @@ type Display = {|
   display?: Responsive<string>,
 |};
 
+type Size = {|
+  size?: Responsive<string | number>,
+  minSize?: Responsive<string | number>,
+  maxSize?: Responsive<string | number>,
+|};
+
 type Grid = {|
   gridTemplateColumns?: Responsive<NumberOrString>,
   gridGap?: Responsive<NumberOrString>,
@@ -180,6 +186,7 @@ type As = {|
 
 export type AppBoxProps = {|
   ...Width,
+  ...Size,
   ...Height,
   ...Space,
   ...FontSize,

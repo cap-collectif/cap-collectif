@@ -81,7 +81,7 @@ export const ProjectStepAdminItemStep = ({ step, index, fields, formName, projec
                 borderColor="blue.150"
                 spacing={2}
                 marginTop={2}>
-                <Icon name={ICON_NAME.INFO} color="blue.500" size={ICON_SIZE.S} />
+                <Icon name={ICON_NAME.CIRCLE_INFO} color="blue.500" size={ICON_SIZE.SM} />
 
                 <Text color="blue.800">
                   <FormattedHTMLMessage

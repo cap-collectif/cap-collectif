@@ -11,11 +11,11 @@ const typography = {
     widest: '0.1em',
   },
   lineHeights: {
-    XL: pxToRem(64),
-    L: pxToRem(48),
-    M: pxToRem(32),
+    xl: pxToRem(64),
+    l: pxToRem(48),
+    m: pxToRem(32),
     base: pxToRem(24),
-    S: pxToRem(16),
+    s: pxToRem(16),
   },
   fontWeights: {
     hairline: 100,
@@ -29,8 +29,12 @@ const typography = {
     black: 900,
   },
   fonts: {
+    roboto: `Roboto, Helvetica, Arial, sans-serif`,
+    openSans: `OpenSans, Helvetica, Arial, sans-serif`,
     heading: `OpenSans, Helvetica, Arial, sans-serif`,
+    label: `OpenSans, Helvetica, Arial, sans-serif`,
     body: `OpenSans, Helvetica, Arial, sans-serif`,
+    content: `OpenSans, Helvetica, Arial, sans-serif`,
     input: `Roboto, Helvetica, Arial, sans-serif`,
   },
   fontSizes: [

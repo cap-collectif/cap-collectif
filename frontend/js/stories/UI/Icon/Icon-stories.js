@@ -14,7 +14,7 @@ storiesOf('Design system|Icons', module)
       <Grid gridGap={6} autoFit>
         {listIconName.map(icon => (
           <Flex key={icon} direction="column" align="center">
-            <Icon name={ICON_NAME[icon]} size={ICON_SIZE.L} />
+            <Icon name={ICON_NAME[icon]} size={ICON_SIZE.LG} />
             <Text>{icon}</Text>
           </Flex>
         ))}

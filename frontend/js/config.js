@@ -1,4 +1,8 @@
 // @flow
+import EventEmitter from 'events';
+
+export const Emitter = new EventEmitter();
+
 export const baseUrl = `${typeof window !== 'undefined' ? window.location.protocol : 'https:'}//${
   typeof window !== 'undefined' ? window.location.host : 'capco.test'
 }`;

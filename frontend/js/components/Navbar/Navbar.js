@@ -68,7 +68,7 @@ export const Navbar = ({
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [isLocaleHeaderVisible, setLocaleHeaderVisible] = useState(true);
   const ref = useRef();
-  const rect = useBoundingRect(ref);
+  const [rect] = useBoundingRect(ref);
 
   const setAriaExpanded = () => {
     setExpanded(!expanded);
@@ -133,7 +133,7 @@ export const Navbar = ({
                 `}
                 variables={{}}
                 render={renderRegistrationForm}
-            />
+              />
 
               <LoginModal />
               <NavigationSkip />

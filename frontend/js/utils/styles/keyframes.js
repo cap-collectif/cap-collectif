@@ -20,6 +20,37 @@ export const slideInUp = keyframes`
     opacity: 1;
   }
 `;
+export const slideInDown = keyframes`
+  from {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+export const slideInRightToLeft = keyframes`
+  from {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+export const slideInLeftToRight = keyframes`
+  from {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
 
 export const fade = keyframes`
   from {
@@ -27,6 +58,15 @@ export const fade = keyframes`
   }
   to {
     opacity: 1;
+  }
+`;
+
+export const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 `;
 

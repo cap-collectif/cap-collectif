@@ -43,7 +43,7 @@ interface AppFontWeight {
         | FontWeightProps['fontWeight']
 }
 
-type LineHeightValues = 'normal' | 'none' | 'shorter' | 'short' | 'base' | 'tall' | 'taller'
+type LineHeightValues = 'xl' | 'l' | 'm' | 'base' | 's'
 
 interface AppLineHeight {
     lineHeight?:
@@ -64,6 +64,11 @@ interface AppLetterSpacing {
 
 type AppTypographyProps = Omit<TypographyProps, 'fontWeight' | 'lineHeight' | 'fontSize' | 'letterSpacing'>
 
+type AppSizes = {
+  readonly minSize?: ResponsiveValue<number | string>,
+  readonly maxSize?: ResponsiveValue<number | string>,
+}
+
 type StyledSystemProps = ColorProps &
     ShadowProps &
     SpaceProps &
@@ -74,7 +79,7 @@ type StyledSystemProps = ColorProps &
     PositionProps &
     AppTypographyProps
 
-type ModifiedStyledSystemProps = AppFontSize & AppLetterSpacing & AppFontWeight & AppLineHeight
+type ModifiedStyledSystemProps = AppFontSize & AppLetterSpacing & AppFontWeight & AppLineHeight & AppSizes
 
 interface CustomBoxProps {
     readonly uppercase?: boolean

@@ -88,7 +88,7 @@ const Button = React.forwardRef<Props, HTMLButtonElement>(
         alternative={alternative}
         icon={icon}
         {...props}>
-        {icon && <Icon name={icon} size={ICON_SIZE.M} marginRight={2} />}
+        {icon && <Icon color="inherit" name={icon} size={ICON_SIZE.MD} marginRight={2} />}
         {children}
       </ButtonInner>
     );

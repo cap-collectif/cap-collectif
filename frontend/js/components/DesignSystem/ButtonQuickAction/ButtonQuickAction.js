@@ -32,7 +32,7 @@ const ButtonQuickAction = React.forwardRef<Props, HTMLButtonElement>(
         variantColor={variantColor}
         css={S[variantColor]}
         {...props}>
-        <Icon name={icon} size={ICON_SIZE.M} color="gray.500" />
+        <Icon name={icon} size={ICON_SIZE.MD} color="gray.500" />
       </AppBox>
     );
   },

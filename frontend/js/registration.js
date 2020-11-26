@@ -79,10 +79,12 @@ import HomeHeaderApp from '~/startup/HomeHeaderApp';
 import ImageSliderApp from '~/startup/ImageSliderApp';
 import ParticipationTutorialApp from '~/startup/ParticipationTutorialApp';
 import ParticipationMotivationApp from '~/startup/ParticipationMotivationApp';
+import ToastsContainerApp from '~/startup/ToastsContainerApp';
 
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
+  ToastsContainerApp,
   NavbarApp,
   LastProposalsApp,
   AccountProfileFollowingsApp,

@@ -9,6 +9,9 @@
             {% set localesData = localesData|merge([{ 'locale': locale.code,  'path': path('sonata.translation.locale', {'locale': locale.code})}]) %}
         {% endfor %}
     {% endif %}
+    {{ react_render_component('ToastsContainerApp', {
+        'rendering': 'client_side'
+    }) }}
    <div class="navbar-custom-menu">
     {{ react_render_component('AdminRightNavbarApp', {
         'props': {
