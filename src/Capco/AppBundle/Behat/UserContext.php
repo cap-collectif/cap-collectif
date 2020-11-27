@@ -80,13 +80,24 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Then user :userId registered less than 1 week ago
+     * @Then user :userId registered less than 1 hour ago
      */
-    public function userRegisteredLessThan24hAgo(string $userId)
+    public function userRegisteredLessThan1hAgo(string $userId)
     {
         $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        $user->setCreatedAt(new \DateTime('-2 days'));
+        $user->setCreatedAt(new \DateTime('-30 minutes '));
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Then user :userId registered less than :time minutes ago
+     */
+    public function userRegisteredLessThanXMinutesgo(string $userId, $time)
+    {
+        $this->getEntityManager()->clear();
+        $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
+        $user->setCreatedAt(new \DateTime("-${time} minutes"));
         $this->getEntityManager()->flush();
     }
 

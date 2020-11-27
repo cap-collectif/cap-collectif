@@ -34,8 +34,7 @@ class UserRepository extends EntityRepository
     public function hydrateFromIds(array $ids): array
     {
         $qb = $this->createQueryBuilder('u');
-        $qb
-            ->addSelect('media', 'userType')
+        $qb->addSelect('media', 'userType')
             ->leftJoin('u.media', 'media')
             ->leftJoin('u.userType', 'userType')
             ->where('u.id IN (:ids)')
@@ -69,8 +68,7 @@ class UserRepository extends EntityRepository
     public function countUsersInGroup(Group $group): int
     {
         $qb = $this->createQueryBuilder('u');
-        $qb
-            ->select('COUNT(u.id)')
+        $qb->select('COUNT(u.id)')
             ->innerJoin('u.userGroups', 'ug')
             ->andWhere('ug.group = :group')
             ->setParameter('group', $group);
@@ -81,8 +79,7 @@ class UserRepository extends EntityRepository
     public function getUsersInGroup(Group $group, int $offset = 0, int $limit = 1000): array
     {
         $qb = $this->createQueryBuilder('u');
-        $qb
-            ->innerJoin('u.userGroups', 'ug')
+        $qb->innerJoin('u.userGroups', 'ug')
             ->andWhere('ug.group = :group')
             ->setParameter('group', $group);
         $qb->setFirstResult($offset)->setMaxResults($limit);
@@ -170,8 +167,7 @@ class UserRepository extends EntityRepository
             ->select('userReply.id')
             ->innerJoin('userReply.replies', 'reply', 'WITH', 'reply.published = true');
 
-        $qb
-            ->select('count(DISTINCT u.id)')
+        $qb->select('count(DISTINCT u.id)')
             ->orWhere($qb->expr()->in('u.id', $qbReply->getDQL()))
             ->orWhere($qb->expr()->in('u.id', $qbOpinion->getDQL()))
             ->orWhere($qb->expr()->in('u.id', $qbArgument->getDQL()))
@@ -484,8 +480,7 @@ class UserRepository extends EntityRepository
     public function findWithMediaByIds($ids): array
     {
         $qb = $this->createQueryBuilder('u');
-        $qb
-            ->addSelect('m')
+        $qb->addSelect('m')
             ->leftJoin('u.media', 'm')
             ->where('u.id IN (:ids)')
             ->setParameter('ids', $ids);
@@ -860,23 +855,20 @@ class UserRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()->join('u.followingContributions', 'f');
 
         if (isset($criteria['proposal'])) {
-            $qb
-                ->join('f.proposal', 'p')
+            $qb->join('f.proposal', 'p')
                 ->andWhere('p.deletedAt IS NULL')
                 ->andWhere('p.id = :proposalId')
                 ->setParameter('proposalId', $criteria['proposal']->getId());
         }
 
         if (isset($criteria['opinion'])) {
-            $qb
-                ->join('f.opinion', 'o')
+            $qb->join('f.opinion', 'o')
                 ->andWhere('o.id = :opinionId')
                 ->setParameter('opinionId', $criteria['opinion']->getId());
         }
 
         if (isset($criteria['opinionVersion'])) {
-            $qb
-                ->join('f.opinionVersion', 'ov')
+            $qb->join('f.opinionVersion', 'ov')
                 ->andWhere('ov.id = :opinionVersionId')
                 ->setParameter('opinionVersionId', $criteria['opinionVersion']->getId());
         }
@@ -1020,15 +1012,14 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
-    public function findNotEmailConfirmedUserIdsSince24Hours(): array
+    public function findNotEmailConfirmedUserIdsSinceLastCronExecution(): array
     {
         $qb = $this->createQueryBuilder('u');
-        $qb
-            ->select('u.id')
+        $qb->select('u.id')
             ->andWhere('u.confirmationToken IS NOT NULL')
-            ->andWhere('u.createdAt < :oneDayAgo AND u.createdAt > :oneWeekAgo')
-            ->andWhere('u.remindedAccountConfirmationAfter24Hours = false')
-            ->setParameter('oneDayAgo', new \DateTime('-1 day'))
+            ->andWhere('u.createdAt < :oneHour AND u.createdAt > :oneWeekAgo')
+            ->andWhere('u.remindedAccountConfirmationAfter1Hour = false')
+            ->setParameter('oneHour', new \DateTime('-1 hour'))
             ->setParameter('oneWeekAgo', new \DateTime('-7 day'));
 
         return $qb->getQuery()->getResult();
@@ -1064,8 +1055,7 @@ class UserRepository extends EntityRepository
     public function findByRole(string $role): array
     {
         $qb = $this->createQueryBuilder('u');
-        $qb
-            ->where('u.roles LIKE :roles')
+        $qb->where('u.roles LIKE :roles')
             ->orderBy('u.email', 'ASC')
             ->setParameter('roles', '%"' . $role . '"%');
 
@@ -1129,22 +1119,22 @@ class UserRepository extends EntityRepository
     public function getAssignedUsersOnProposal(Proposal $proposal, string $revisedAt)
     {
         $sql = <<<'EOF'
-            select ps.supervisor_id as "assignedUser" FROM proposal_supervisor ps 
-            LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id 
-            where proposal_id = :proposalId
-            UNION
-            select pa.analyst_id as "assignedUser"  FROM proposal_analyst pa 
-            LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id 
-            where proposal_id = :proposalId
-            UNION
-            select pdm.decision_maker_id as "assignedUser" FROM proposal_decision_maker pdm 
-            LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id 
-            where proposal_id = :proposalId
-            UNION
-            select pr.author_id as "assignedUser" FROM proposal_revision pr 
-            LEFT JOIN fos_user fu4 ON pr.author_id = fu4.id 
-            where proposal_id = :proposalId and revised_at = :revisedAt
-        EOF;
+    select ps.supervisor_id as "assignedUser" FROM proposal_supervisor ps 
+    LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id 
+    where proposal_id = :proposalId
+    UNION
+    select pa.analyst_id as "assignedUser"  FROM proposal_analyst pa 
+    LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id 
+    where proposal_id = :proposalId
+    UNION
+    select pdm.decision_maker_id as "assignedUser" FROM proposal_decision_maker pdm 
+    LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id 
+    where proposal_id = :proposalId
+    UNION
+    select pr.author_id as "assignedUser" FROM proposal_revision pr 
+    LEFT JOIN fos_user fu4 ON pr.author_id = fu4.id 
+    where proposal_id = :proposalId and revised_at = :revisedAt
+EOF;
 
         $stmt = $this->getEntityManager()
             ->getConnection()

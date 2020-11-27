@@ -43,11 +43,11 @@ class User extends BaseUser implements
         'date' => 'opinion.sort.last',
     ];
 
-    protected $id;
-    protected ?string $slug = null;
-
     // Hack for ParticipantEdge
     public $registeredEvent;
+
+    protected $id;
+    protected ?string $slug = null;
 
     //personal
     protected $gender;
@@ -75,7 +75,6 @@ class User extends BaseUser implements
     protected bool $locked = false;
     protected ?UserType $userType = null;
     protected bool $vip = false;
-    private Collection $userGroups;
 
     //account security
     protected ?string $newEmailToConfirm;
@@ -86,8 +85,7 @@ class User extends BaseUser implements
     protected ?\DateTime $smsConfirmationSentAt;
     protected ?\DateTime $confirmedAccountAt;
     protected ?\DateTime $deletedAccountAt;
-    protected bool $remindedAccountConfirmationAfter24Hours = false;
-    private ?string $resetPasswordToken;
+    protected bool $remindedAccountConfirmationAfter1Hour = false;
 
     //notifications
     protected Collection $followingContributions;
@@ -99,6 +97,8 @@ class User extends BaseUser implements
     protected Collection $responses;
     protected bool $profilePageIndexed = false;
     protected ?string $websiteUrl;
+    private Collection $userGroups;
+    private ?string $resetPasswordToken;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="supervisor")
@@ -829,15 +829,15 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function getRemindedAccountConfirmationAfter24Hours(): bool
+    public function getRemindedAccountConfirmationAfter1Hour(): bool
     {
-        return $this->remindedAccountConfirmationAfter24Hours;
+        return $this->remindedAccountConfirmationAfter1Hour;
     }
 
-    public function setRemindedAccountConfirmationAfter24Hours(
-        bool $remindedAccountConfirmationAfter24Hours
+    public function setRemindedAccountConfirmationAfter1Hour(
+        bool $remindedAccountConfirmationAfter1Hour
     ): self {
-        $this->remindedAccountConfirmationAfter24Hours = $remindedAccountConfirmationAfter24Hours;
+        $this->remindedAccountConfirmationAfter1Hour = $remindedAccountConfirmationAfter1Hour;
 
         return $this;
     }

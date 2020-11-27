@@ -13,10 +13,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RemindUserAccountConfirmationCommand extends Command
 {
-    private $logger;
-    private $entityManager;
-    private $userNotifier;
-    private $userRepository;
+    private LoggerInterface $logger;
+    private EntityManagerInterface $entityManager;
+    private UserNotifier $userNotifier;
+    private UserRepository $userRepository;
     private Manager $toggleManager;
 
     public function __construct(
@@ -46,13 +46,13 @@ class RemindUserAccountConfirmationCommand extends Command
     {
         if (!$this->toggleManager->isActive('remind_user_account_confirmation')) {
             $this->logger->warning(
-                __CLASS__ . ": remind-user-account feature toggle is not active."
+                __CLASS__ . ': remind-user-account feature toggle is not active.'
             );
+
             return 0;
         }
 
-        $userIds = $this->userRepository->findNotEmailConfirmedUserIdsSince24Hours();
-
+        $userIds = $this->userRepository->findNotEmailConfirmedUserIdsSinceLastCronExecution();
         foreach ($userIds as $id) {
             $user = $this->userRepository->find($id);
             $email = $user->getEmail();
@@ -65,7 +65,7 @@ class RemindUserAccountConfirmationCommand extends Command
             }
 
             // We make sure that we don't spam the user with another reminder
-            $user->setRemindedAccountConfirmationAfter24Hours(true);
+            $user->setRemindedAccountConfirmationAfter1Hour(true);
             $this->entityManager->flush();
         }
 
