@@ -9,7 +9,7 @@ const styles = {
       backgroundColor: colors.blue['150'],
 
       '.icon': {
-        fill: colors.blue['500'],
+        color: colors.blue['500'],
       },
 
       ':focus': {
@@ -28,7 +28,7 @@ const styles = {
       backgroundColor: colors.red['150'],
 
       '.icon': {
-        fill: colors.red['500'],
+        color: colors.red['500'],
       },
 
       ':focus': {

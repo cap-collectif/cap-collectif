@@ -55,7 +55,7 @@ exports[`<StepArticle /> renders correctly 1`] = `
   />
   <Button
     alignSelf="flex-start"
-    icon="ADD"
+    leftIcon="ADD"
     onClick={[Function]}
     variant="tertiary"
   >
@@ -122,7 +122,7 @@ exports[`<StepArticle /> renders correctly when no articles 1`] = `
   />
   <Button
     alignSelf="flex-start"
-    icon="ADD"
+    leftIcon="ADD"
     onClick={[Function]}
     variant="tertiary"
   >

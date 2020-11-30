@@ -13,7 +13,8 @@ type Props = {|
   variant: 'primary' | 'secondary' | 'tertiary' | 'link',
   variantColor?: 'primary' | 'danger',
   size?: 'small' | 'medium' | 'big',
-  icon?: $Values<typeof ICON_NAME>,
+  leftIcon?: $Values<typeof ICON_NAME>,
+  rightIcon?: $Values<typeof ICON_NAME>,
   children?: React.Node,
   disabled?: boolean,
   alternative?: boolean,
@@ -58,7 +59,8 @@ const Button = React.forwardRef<Props, HTMLButtonElement>(
       size = 'medium',
       variant,
       variantColor = 'primary',
-      icon,
+      leftIcon,
+      rightIcon,
       children,
       disabled,
       alternative,
@@ -86,10 +88,10 @@ const Button = React.forwardRef<Props, HTMLButtonElement>(
         variantColor={variantColor}
         variant={variant}
         alternative={alternative}
-        icon={icon}
         {...props}>
-        {icon && <Icon color="inherit" name={icon} size={ICON_SIZE.MD} marginRight={2} />}
+        {leftIcon && <Icon color="inherit" name={leftIcon} size={ICON_SIZE.MD} marginRight={2} />}
         {children}
+        {rightIcon && <Icon color="inherit" name={rightIcon} size={ICON_SIZE.MD} marginLeft={2} />}
       </ButtonInner>
     );
   },

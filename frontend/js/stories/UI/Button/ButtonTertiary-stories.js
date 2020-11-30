@@ -41,14 +41,19 @@ storiesOf('Design system|Button/Tertiary/Danger', module)
 storiesOf('Design system|Button/Tertiary with icon/Primary', module)
   .add('default', () => {
     return (
-      <Button variant="tertiary" size="small" variantColor="primary" icon={ICON_NAME.ADD}>
+      <Button variant="tertiary" size="small" variantColor="primary" leftIcon={ICON_NAME.ADD}>
         Ajouter
       </Button>
     );
   })
   .add('disabled', () => {
     return (
-      <Button variant="tertiary" size="medium" variantColor="primary" icon={ICON_NAME.ADD} disabled>
+      <Button
+        variant="tertiary"
+        size="medium"
+        variantColor="primary"
+        leftIcon={ICON_NAME.ADD}
+        disabled>
         Ajouter
       </Button>
     );
@@ -57,7 +62,7 @@ storiesOf('Design system|Button/Tertiary with icon/Primary', module)
 storiesOf('Design system|Button/Tertiary with icon/Danger', module)
   .add('default', () => {
     return (
-      <Button variant="tertiary" size="small" variantColor="danger" icon={ICON_NAME.TRASH}>
+      <Button variant="tertiary" size="small" variantColor="danger" leftIcon={ICON_NAME.TRASH}>
         Supprimer
       </Button>
     );
@@ -68,7 +73,7 @@ storiesOf('Design system|Button/Tertiary with icon/Danger', module)
         variant="tertiary"
         size="medium"
         variantColor="danger"
-        icon={ICON_NAME.TRASH}
+        leftIcon={ICON_NAME.TRASH}
         disabled>
         Supprimer
       </Button>
@@ -118,7 +123,7 @@ storiesOf('Design system|Button/Tertiary with icon alternative/Primary', module)
         variant="tertiary"
         size="small"
         variantColor="primary"
-        icon={ICON_NAME.ADD}
+        leftIcon={ICON_NAME.ADD}
         alternative>
         Ajouter
       </Button>
@@ -130,7 +135,7 @@ storiesOf('Design system|Button/Tertiary with icon alternative/Primary', module)
         variant="tertiary"
         size="medium"
         variantColor="primary"
-        icon={ICON_NAME.ADD}
+        leftIcon={ICON_NAME.ADD}
         alternative
         disabled>
         Ajouter
@@ -145,7 +150,7 @@ storiesOf('Design system|Button/Tertiary with icon alternative/Danger', module)
         variant="tertiary"
         size="small"
         variantColor="danger"
-        icon={ICON_NAME.TRASH}
+        leftIcon={ICON_NAME.TRASH}
         alternative>
         Supprimer
       </Button>
@@ -157,7 +162,7 @@ storiesOf('Design system|Button/Tertiary with icon alternative/Danger', module)
         variant="tertiary"
         size="medium"
         variantColor="danger"
-        icon={ICON_NAME.TRASH}
+        leftIcon={ICON_NAME.TRASH}
         alternative
         disabled>
         Supprimer

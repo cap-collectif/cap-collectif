@@ -104,7 +104,7 @@ const IconInner: StyledComponent<{}, {}, any> = styled(AppBox).attrs(props => ({
 );
 
 const Icon = React.forwardRef<Props, HTMLElement>(
-  ({ name, size = ICON_SIZE.MD, color = 'black', className, ...props }: Props, ref) => {
+  ({ name, size = ICON_SIZE.MD, color = 'inherit', className, ...props }: Props, ref) => {
     const IconSvg = Icons[name];
 
     return (

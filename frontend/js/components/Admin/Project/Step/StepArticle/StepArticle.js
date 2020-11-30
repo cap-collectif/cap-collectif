@@ -59,7 +59,7 @@ export const StepArticle = ({ dispatch, articles }: Props) => {
 
       <Button
         variant="tertiary"
-        icon={ICON_NAME.ADD}
+        leftIcon={ICON_NAME.ADD}
         onClick={() =>
           dispatch(
             arrayPush(stepFormName, 'articles', {

@@ -29,12 +29,12 @@ const styles = (alternative?: boolean) => ({
         color: 'blue.300',
 
         '.icon': {
-          fill: 'blue.300',
+          color: 'blue.300',
         },
       },
 
       '.icon': {
-        fill: 'white',
+        color: 'white',
       },
     },
     secondary: {
@@ -52,7 +52,7 @@ const styles = (alternative?: boolean) => ({
         },
 
         '.icon': {
-          fill: 'blue.700',
+          color: 'blue.700',
         },
       },
 
@@ -65,12 +65,12 @@ const styles = (alternative?: boolean) => ({
         borderColor: 'blue.300',
 
         '.icon': {
-          fill: 'blue.300',
+          color: 'blue.300',
         },
       },
 
       '.icon': {
-        fill: 'blue.500',
+        color: 'blue.500',
       },
     },
     tertiary: {
@@ -87,7 +87,7 @@ const styles = (alternative?: boolean) => ({
         },
 
         '.icon': {
-          fill: 'blue.700',
+          color: 'blue.700',
         },
       },
 
@@ -99,12 +99,12 @@ const styles = (alternative?: boolean) => ({
         color: 'blue.300',
 
         '.icon': {
-          fill: 'blue.300',
+          color: 'blue.300',
         },
       },
 
       '.icon': {
-        fill: 'blue.500',
+        color: 'blue.500',
       },
     },
     link: {
@@ -142,7 +142,7 @@ const styles = (alternative?: boolean) => ({
       },
 
       '.icon': {
-        fill: 'white',
+        color: 'white',
       },
     },
     secondary: {
@@ -160,7 +160,7 @@ const styles = (alternative?: boolean) => ({
         },
 
         '.icon': {
-          fill: 'red.700',
+          color: 'red.700',
         },
       },
 
@@ -173,12 +173,12 @@ const styles = (alternative?: boolean) => ({
         borderColor: 'red.300',
 
         '.icon': {
-          fill: 'red.300',
+          color: 'red.300',
         },
       },
 
       '.icon': {
-        fill: 'red.500',
+        color: 'red.500',
       },
     },
     tertiary: {
@@ -195,7 +195,7 @@ const styles = (alternative?: boolean) => ({
         },
 
         '.icon': {
-          fill: 'red.700',
+          color: 'red.700',
         },
       },
 
@@ -207,12 +207,12 @@ const styles = (alternative?: boolean) => ({
         color: 'red.300',
 
         '.icon': {
-          fill: 'red.300',
+          color: 'red.300',
         },
       },
 
       '.icon': {
-        fill: 'red.500',
+        color: 'red.500',
       },
     },
     link: {
