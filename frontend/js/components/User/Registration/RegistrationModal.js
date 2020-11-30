@@ -15,6 +15,7 @@ import type { Dispatch } from '~/types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 import type { RegistrationModal_query } from '~relay/RegistrationModal_query.graphql';
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
+import { mediaQueryMobile } from '~/utils/sizes';
 
 type StateProps = {|
   +show: boolean,
@@ -39,6 +40,18 @@ type Props = {|
 |};
 
 export const ModalContainer: StyledComponent<{}, {}, typeof Modal> = styled(Modal)`
+  .modal-dialog {
+    width: 400px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+
+    label {
+      margin-bottom: 4px !important;
+    }
+  }
+
   .multiple-majority-container {
     flex-direction: column;
     text-align: center;
@@ -50,6 +63,12 @@ export const ModalContainer: StyledComponent<{}, {}, typeof Modal> = styled(Moda
       &:last-of-type {
         border-radius: 0 0 ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE};
       }
+    }
+  }
+
+  @media (max-width: ${mediaQueryMobile.maxWidth}) {
+    .modal-dialog {
+      width: auto;
     }
   }
 `;

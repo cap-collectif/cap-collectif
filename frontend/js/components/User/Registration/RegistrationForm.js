@@ -53,7 +53,7 @@ type FormValues = {
   charte: string,
   captcha: boolean,
   responses: Array<Object>,
-  questions: Array<Object>,
+  questions: $ReadOnlyArray<Object>,
 };
 
 const memoizeAvailableQuestions: any = memoize(() => {});
@@ -131,16 +131,6 @@ export const RegistrationForm = ({
     <form onSubmit={handleSubmit} id="registration-form">
       <Field name="locale" id="locale" component={renderComponent} value={locale} type="hidden" />
       <Field
-        name="username"
-        id="username"
-        component={renderComponent}
-        ariaRequired
-        autoComplete="username"
-        type="text"
-        label={<FormattedMessage id="global.fullname" />}
-        labelClassName="font-weight-normal"
-      />
-      <Field
         name="email"
         disabled={!!email}
         id="email"
@@ -150,6 +140,7 @@ export const RegistrationForm = ({
         ariaRequired
         label={<FormattedMessage id="global.email" />}
         labelClassName="font-weight-normal"
+        placeholder="global.placeholder.email"
         popover={{
           id: 'registration-email-tooltip',
           message: <FormattedMessage id="registration.tooltip.email" />,
@@ -164,7 +155,17 @@ export const RegistrationForm = ({
         label={<FormattedMessage id="registration.password" />}
         labelClassName="font-weight-normal"
       />
-
+      <Field
+        name="username"
+        id="username"
+        component={renderComponent}
+        ariaRequired
+        autoComplete="username"
+        type="text"
+        label={<FormattedMessage id="global.fullname" />}
+        placeholder="global.placeholder.name"
+        labelClassName="font-weight-normal"
+      />
       {addUserTypeField && (
         <Field
           id="user_type"
@@ -208,7 +209,6 @@ export const RegistrationForm = ({
           autoComplete="postal-code"
         />
       )}
-
       {questions && questions.length > 0 && query?.registrationForm && (
         <ModalRegistrationFormQuestions
           change={change}
@@ -218,7 +218,6 @@ export const RegistrationForm = ({
           memoizeAvailableQuestions={memoizeAvailableQuestions}
         />
       )}
-
       <Field
         id="charte"
         name="charte"
@@ -303,9 +302,20 @@ const mapStateToProps = (state: State, props: Props) => {
 
 export const validate = (values: FormValues, props: Props) => {
   const errors = {};
+  /**
+   * @type {*|RegExp}
+   * Accept letters lowercase and uppercase
+   * Accept digits
+   * Accept Latin-1 Supplement (exclude ×÷) (source: https://stackoverflow.com/questions/20690499/concrete-javascript-regex-for-accented-characters-diacritics)
+   * Accept symbols "_", "-", and "·"
+   */
+  const regexUsername = RegExp('^[a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F-·_]+$');
 
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
+  }
+  if (values.username && !regexUsername.test(values.username)) {
+    errors.username = 'registration.constraints.username.symbol';
   }
   if (!values.email || !isEmail(values.email)) {
     errors.email = 'global.constraints.email.invalid';
