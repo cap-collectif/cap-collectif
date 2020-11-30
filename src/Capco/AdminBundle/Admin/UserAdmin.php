@@ -44,7 +44,7 @@ class UserAdmin extends BaseAdmin
                 'template' => 'CapcoAdminBundle:User:email_confirmed_list_field.html.twig',
             ])
             ->add('locked', null, ['editable' => true])
-            ->add('updatedAt', null, ['label' => 'global.creation'])
+            ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('deletedAccountAt', null, ['label' => 'admin.fields.proposal.deleted_at']);
     }
 
