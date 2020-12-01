@@ -2,12 +2,13 @@
 
 namespace spec\Capco\AppBundle\GraphQL;
 
-use Akamon\MockeryCallableMock\MockeryCallableMock;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use GraphQL\Executor\ExecutionResult;
-use Overblog\GraphQLBundle\Request\Executor;
+use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use GraphQL\Executor\ExecutionResult;
+use Overblog\GraphQLBundle\Request\Executor;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Akamon\MockeryCallableMock\MockeryCallableMock;
 
 class ConnectionTraversorSpec extends ObjectBehavior
 {
@@ -19,6 +20,32 @@ class ConnectionTraversorSpec extends ObjectBehavior
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(ConnectionTraversor::class);
+    }
+
+    public function it_stops_on_error(
+        LoggerInterface $logger,
+        MockeryCallableMock $onEdgeTraversed
+    ): void {
+        $initialData = [
+            'errors' => [ [ 'some errors']],
+            'data' => [
+                'node' => [
+                    'title' => 'Consultation step',
+                    'contributionConnection' => [
+                        'totalCount' => 11,
+                        'pageInfo' => [
+                            'startCursor' => 'cursor1',
+                            'endCursor' => 'cursor4',
+                            'hasNextPage' => true,
+                        ],
+                        'edges' => null
+                    ],
+                ],
+            ],
+        ];
+
+        $logger->error("The GraphQL request resulted in `null` edges.", ["path" => "contributionConnection", "errors" => [["some errors"]]])->shouldBeCalled();
+        $this->traverse($initialData, 'contributionConnection', $onEdgeTraversed, null);
     }
 
     public function it_should_correctly_traverse_a_connection(

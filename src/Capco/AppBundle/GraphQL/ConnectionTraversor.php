@@ -32,6 +32,16 @@ class ConnectionTraversor
             $pageInfo = Arr::path($connection, 'pageInfo');
             $endCursor = $pageInfo['endCursor'];
 
+            // In the relay spec, "edges" field is nullable
+            // See https://relay.dev/graphql/connections.htm#sec-Edges
+            if (!$edges || !is_array($edges)) {
+                $this->logger->error('The GraphQL request resulted in `null` edges.', [
+                    'path' => $path, 
+                    'errors' => isset($data['errors']) ? $data['errors'] : [], 
+                ]);
+                return;
+            }
+
             if (\count($edges) > 0) {
                 foreach ($edges as $edge) {
                     $callback($edge, $pageInfo);
