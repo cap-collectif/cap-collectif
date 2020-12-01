@@ -12,9 +12,9 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class BrowserLanguageRuntime implements RuntimeExtensionInterface
 {
-    protected $toggleManager;
-    protected $localeDataloader;
-    protected $defaultLocaleCodeDataloader;
+    protected Manager $toggleManager;
+    protected PublishedLocalesDataloader $localeDataloader;
+    protected DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader;
 
     public function __construct(
         Manager $manager,

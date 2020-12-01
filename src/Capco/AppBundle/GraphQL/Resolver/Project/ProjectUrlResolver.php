@@ -12,10 +12,10 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProjectUrlResolver implements ResolverInterface
 {
-    protected $router;
-    protected $requestStack;
-    protected $defaultLocale;
-    protected $stepUrlResolver;
+    protected RouterInterface $router;
+    protected RequestStack $requestStack;
+    protected string $defaultLocale;
+    protected StepUrlResolver $stepUrlResolver;
 
     public function __construct(
         RouterInterface $router,
@@ -35,7 +35,7 @@ class ProjectUrlResolver implements ResolverInterface
         if (null === $locale || empty($locale)) {
             $locale = $this->defaultLocale;
         }
-        $projectSlug = $project->getSlug();
+
         $firstStep = $project->getFirstStep();
         // if no step, so we redirect to projects list page
         if (!$firstStep) {
