@@ -15,12 +15,11 @@ exports[`<ChangeUsername /> it should render 1`] = `
       <div
         className="panel-heading profile-header"
       >
-        <h1>
-          <FormattedMessage
-            id="user.profile.title"
-            values={Object {}}
-          />
-        </h1>
+        <FormattedMessage
+          id="user.profile.title"
+          tagName="h1"
+          values={Object {}}
+        />
       </div>
     </PanelHeading>
     <PanelBody

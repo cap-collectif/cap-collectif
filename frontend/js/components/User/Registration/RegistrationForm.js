@@ -17,6 +17,7 @@ import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import validateResponses from '~/utils/form/validateResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
+import { REGEX_USERNAME } from '~/constants/FormConstants';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -302,19 +303,11 @@ const mapStateToProps = (state: State, props: Props) => {
 
 export const validate = (values: FormValues, props: Props) => {
   const errors = {};
-  /**
-   * @type {*|RegExp}
-   * Accept letters lowercase and uppercase
-   * Accept digits
-   * Accept Latin-1 Supplement (exclude ×÷) (source: https://stackoverflow.com/questions/20690499/concrete-javascript-regex-for-accented-characters-diacritics)
-   * Accept symbols "_", "-", and "·"
-   */
-  const regexUsername = RegExp('^[a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F-·_]+$');
 
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
   }
-  if (values.username && !regexUsername.test(values.username)) {
+  if (values.username && !REGEX_USERNAME.test(values.username)) {
     errors.username = 'registration.constraints.username.symbol';
   }
   if (!values.email || !isEmail(values.email)) {

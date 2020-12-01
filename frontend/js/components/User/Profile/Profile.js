@@ -6,16 +6,17 @@ import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { type Profile_viewer } from '~relay/Profile_viewer.graphql';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, State } from '~/types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UserAvatarDeprecated from '../UserAvatarDeprecated';
-import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
+import UpdateProfilePublicDataMutation from '~/mutations/UpdateProfilePublicDataMutation';
 import {
   occitanieUrl,
   isSsoFcOrOccitanie,
   getSsoTradKey,
 } from '~/components/User/Profile/PersonalData';
+import { REGEX_USERNAME } from '~/constants/FormConstants';
 
 type RelayProps = {| viewer: Profile_viewer |};
 type Props = {|
@@ -32,7 +33,6 @@ const formName = 'viewerProfileForm';
 
 const validate = (values: Object) => {
   const errors = {};
-
   const fields = [
     'biography',
     'websiteUrl',
@@ -42,15 +42,21 @@ const validate = (values: Object) => {
     'facebook',
     'username',
   ];
+
   fields.forEach(value => {
     if (value === 'username') {
-      if (!values[value] || values[value].length === 0) {
-        errors[value] = 'fill-field';
+      if (!values[value] || values[value].length < 2) {
+        errors[value] = 'registration.constraints.username.min';
+      }
+      if (values[value] && !REGEX_USERNAME.test(values[value])) {
+        errors[value] = 'registration.constraints.username.symbol';
       }
     }
+
     if (values[value] && values[value].length < 2) {
       errors[value] = 'two-characters-minimum-required';
     }
+
     if (value !== 'biography') {
       if (values[value] && values[value].length > 256) {
         errors[value] = '256-characters-maximum-required';

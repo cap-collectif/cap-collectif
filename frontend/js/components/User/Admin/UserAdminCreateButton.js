@@ -6,15 +6,16 @@ import { reduxForm, Field, SubmissionError } from 'redux-form';
 import styled, { type StyledComponent } from 'styled-components';
 import CloseButton from '../../Form/CloseButton';
 import component from '../../Form/Field';
-import CreateUserMutation from '../../../mutations/CreateUserMutation';
-import { isEmail } from '../../../services/Validator';
+import CreateUserMutation from '~/mutations/CreateUserMutation';
+import { isEmail } from '~/services/Validator';
 import { form } from '../Registration/RegistrationForm';
 import AlertForm from '../../Alert/AlertForm';
-import type { Dispatch } from '../../../types';
+import type { Dispatch } from '~/types';
 import SelectUserRole from '../../Form/SelectUserRole';
 import { type UserRole } from '~relay/CreateUserMutation.graphql';
 import UserPasswordField from '~/components/User/UserPasswordField';
 import { asyncPasswordValidate } from '~/components/User/UserPasswordComplexityUtils';
+import { REGEX_USERNAME } from '~/constants/FormConstants';
 
 const formName = 'user-admin-create';
 
@@ -73,6 +74,9 @@ const validate = (values: FormValues) => {
   const errors = {};
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
+  }
+  if (values.username && !REGEX_USERNAME.test(values.username)) {
+    errors.username = 'registration.constraints.username.symbol';
   }
   if (!values.email || !isEmail(values.email)) {
     errors.email = 'global.constraints.email.invalid';

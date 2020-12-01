@@ -5,7 +5,7 @@ import { basicProps } from './RegistrationForm-test';
 
 const basicValues = {
   locale: basicProps.locale,
-  username: 'Jean·Du_pont-Du77',
+  username: "Jean·Du_pont-Du'77 who lôve chocolaté",
   email: 'jeandupontdu77@gmail.com',
   plainPassword: 'Password1',
   charte: 'blabla',

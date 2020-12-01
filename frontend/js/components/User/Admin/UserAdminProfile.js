@@ -10,7 +10,8 @@ import type { UserAdminProfile_user } from '~relay/UserAdminProfile_user.graphql
 import type { UserAdminProfile_viewer } from '~relay/UserAdminProfile_viewer.graphql';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
-import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
+import UpdateProfilePublicDataMutation from '~/mutations/UpdateProfilePublicDataMutation';
+import { REGEX_USERNAME } from '~/constants/FormConstants';
 
 type RelayProps = {| user: UserAdminProfile_user, viewer: UserAdminProfile_viewer |};
 
@@ -51,7 +52,6 @@ const formName = 'user-admin-edit-profile';
 
 const validate = (values: Object) => {
   const errors = {};
-
   const fields = [
     'biography',
     'websiteUrl',
@@ -61,16 +61,25 @@ const validate = (values: Object) => {
     'facebook',
     'username',
   ];
+
   fields.forEach(value => {
-    if ((value === 'username' && !values[value]) || (values[value] && values[value].length === 0)) {
-      errors[value] = 'fill-field';
+    if (value === 'username') {
+      if (!values[value] || values[value].length < 2) {
+        errors[value] = 'registration.constraints.username.min';
+      }
+      if (values[value] && !REGEX_USERNAME.test(values[value])) {
+        errors[value] = 'registration.constraints.username.symbol';
+      }
     }
+
     if ((value === 'userType' && !values[value]) || (values[value] && values[value].length === 0)) {
       values[value] = null;
     }
+
     if (values[value] && values[value].length < 2) {
       errors[value] = 'two-characters-minimum-required';
     }
+
     if (value !== 'biography') {
       if (values[value] && values[value].length > 256) {
         errors[value] = '256-characters-maximum-required';

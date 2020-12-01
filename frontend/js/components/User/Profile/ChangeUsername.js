@@ -6,10 +6,11 @@ import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { type ChangeUsername_viewer } from '~relay/ChangeUsername_viewer.graphql';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch, State } from '~/types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
-import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
+import UpdateProfilePublicDataMutation from '~/mutations/UpdateProfilePublicDataMutation';
+import { REGEX_USERNAME } from '~/constants/FormConstants';
 
 type RelayProps = {| viewer: ChangeUsername_viewer |};
 type FormValues = {| username: string |};
@@ -23,11 +24,14 @@ type Props = {|
 
 const formName = 'viewerChangeUsernameForm';
 
-const validate = (formValues: FormValues) => {
+const validate = (values: FormValues) => {
   const errors = {};
 
-  if (!formValues.username || formValues.username.length === 0) {
-    errors.username = 'fill-field';
+  if (!values.username || values.username.length < 2) {
+    errors.username = 'registration.constraints.username.min';
+  }
+  if (values.username && !REGEX_USERNAME.test(values.username)) {
+    errors.username = 'registration.constraints.username.symbol';
   }
 
   return errors;
@@ -60,9 +64,7 @@ const onSubmit = (formValues: FormValues, dispatch: Dispatch, props: Props) => {
 
 const renderHeader = (
   <div className="panel-heading profile-header">
-    <h1>
-      <FormattedMessage id="user.profile.title" />
-    </h1>
+    <FormattedMessage id="user.profile.title" tagName="h1" />
   </div>
 );
 
