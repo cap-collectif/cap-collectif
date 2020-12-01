@@ -3,8 +3,9 @@ import styled, { type StyledComponent } from 'styled-components';
 import { Modal } from 'react-bootstrap';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 import colors from '~/utils/colors';
+import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style';
 
-export const Container: StyledComponent<{}, {}, typeof Modal> = styled(Modal)`
+export const Container: StyledComponent<{}, {}, typeof Modal> = styled(ModalContainer)`
   p {
     margin: 0;
   }

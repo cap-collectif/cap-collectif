@@ -5,6 +5,10 @@ import colors from '~/utils/colors';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 
 export const Container: StyledComponent<{}, {}, typeof Modal> = styled(Modal)`
+  .modal-title {
+    font-weight: 600;
+  }
+
   .modal-footer {
     display: flex;
     flex-direction: row;

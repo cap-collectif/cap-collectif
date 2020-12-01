@@ -30,9 +30,7 @@ exports[`<DashboardMailingList /> should renders correctly 1`] = `
       disabled={false}
       isSelectable={true}
     >
-      <DashboardHeader
-        showModalDelete={[Function]}
-      />
+      <DashboardHeader />
     </DashboardMailingListstyle__DashboardMailingListHeader>
     <PickableList.Body>
       <Relay(MailingListItem)
@@ -61,9 +59,5 @@ exports[`<DashboardMailingList /> should renders correctly 1`] = `
       />
     </PickableList.Body>
   </PickableList>
-  <ModalConfirmDelete
-    onClose={[Function]}
-    show={false}
-  />
 </Fragment>
 `;

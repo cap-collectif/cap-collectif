@@ -38,7 +38,7 @@ exports[`<CampaignItem /> should renders correctly 1`] = `
   </CampaignItemstyle__InfoRow>
   <p>
     <Icon
-      color="#6C757D"
+      color="#6c757d"
       name="new-user"
       size={15}
     />
@@ -114,7 +114,7 @@ exports[`<CampaignItem /> should renders correctly when no send at 1`] = `
   </CampaignItemstyle__InfoRow>
   <p>
     <Icon
-      color="#6C757D"
+      color="#6c757d"
       name="new-user"
       size={15}
     />
@@ -161,11 +161,58 @@ exports[`<CampaignItem /> should renders correctly when selected 1`] = `
   </CampaignItemstyle__InfoRow>
   <p>
     <Icon
-      color="#6C757D"
+      color="#6c757d"
       name="new-user"
       size={15}
     />
     Je suis une mailing list
+  </p>
+</CampaignItemstyle__Container>
+`;
+
+exports[`<CampaignItem /> should renders correctly with mailing list internal 1`] = `
+<CampaignItemstyle__Container
+  rowId="1"
+  selected={false}
+>
+  <h3>
+    <a
+      href="/admin/mailingCampaign/edit/1"
+      rel="noopener noreferrer"
+    >
+      Je suis une campagne
+    </a>
+  </h3>
+  <CampaignItemstyle__InfoRow>
+    <p>
+      <CampaignItemstyle__Circle
+        ariaHidden={true}
+        color="#D8D8D8"
+      />
+      <span
+        className="label-status"
+      >
+        global-draft
+      </span>
+    </p>
+    <p>
+      <span
+        className="separator"
+      >
+        •
+      </span>
+      <span>
+        Mon Mar 11 2030 00:00:00 GMT+0100
+      </span>
+    </p>
+  </CampaignItemstyle__InfoRow>
+  <p>
+    <Icon
+      color="#6c757d"
+      name="new-user"
+      size={15}
+    />
+    default-mailing-list-registered
   </p>
 </CampaignItemstyle__Container>
 `;

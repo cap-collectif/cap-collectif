@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import CloseButton from '~/components/Form/CloseButton';
 import SubmitButton from '~/components/Form/SubmitButton';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
@@ -9,6 +9,7 @@ import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import DeleteEmailingCampaignMutation from '~/mutations/DeleteEmailingCampaignMutation';
 import type { DashboardParameters } from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign.reducer';
 import { useDashboardCampaignContext } from '~/components/Admin/Emailing/EmailingCampaign/DashboardCampaign/DashboardCampaign.context';
+import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style';
 
 type Props = {|
   show: boolean,
@@ -44,8 +45,8 @@ const deleteCampaign = (
       return FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'success-delete-mailing-list',
+          type: TYPE_ALERT.SUCCESS,
+          content: 'success-delete-emailing-campaign',
           values: {
             num: campaignsIds.length,
           },
@@ -67,7 +68,7 @@ const ModalConfirmDelete = ({ show, onClose, campaignsIds }: Props) => {
   const { parameters } = useDashboardCampaignContext();
 
   return (
-    <Modal
+    <ModalContainer
       animation={false}
       show={show}
       onHide={onClose}
@@ -81,9 +82,14 @@ const ModalConfirmDelete = ({ show, onClose, campaignsIds }: Props) => {
           />
         </Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
-        <FormattedMessage id="delete-campaign-confirmation" values={{ num: campaignsIds.length }} />
+        <FormattedHTMLMessage
+          id="delete-campaign-confirmation"
+          values={{ num: campaignsIds.length }}
+        />
       </Modal.Body>
+
       <Modal.Footer>
         <CloseButton onClose={onClose} label="editor.undo" />
         <SubmitButton
@@ -92,7 +98,7 @@ const ModalConfirmDelete = ({ show, onClose, campaignsIds }: Props) => {
           bsStyle="danger"
         />
       </Modal.Footer>
-    </Modal>
+    </ModalContainer>
   );
 };
 

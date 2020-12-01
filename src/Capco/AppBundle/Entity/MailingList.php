@@ -44,11 +44,17 @@ class MailingList
      */
     private Collection $emailingCampaigns;
 
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private \DateTime $createdAt;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->project = null;
         $this->emailingCampaigns = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getName(): ?string
@@ -143,6 +149,18 @@ class MailingList
                 $emailingCampaign->setMailingList(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): MailingList
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

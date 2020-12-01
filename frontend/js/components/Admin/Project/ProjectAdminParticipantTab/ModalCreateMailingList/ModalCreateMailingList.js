@@ -15,6 +15,7 @@ import CreateMailingListMutation from '~/mutations/CreateMailingListMutation';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import type { ModalCreateMailingList_project } from '~relay/ModalCreateMailingList_project.graphql';
+import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMutation';
 
 const formName = 'form-create-mailing-list';
 
@@ -32,6 +33,40 @@ type Values = {|
   mailingListName: string,
 |};
 
+const createEmailingCampaign = (mailingListId: string) => {
+  return CreateEmailingCampaignMutation.commit({
+    input: {
+      mailingList: mailingListId,
+    },
+  })
+    .then(response => {
+      if (response.createEmailingCampaign?.error) {
+        return FluxDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {
+            type: TYPE_ALERT.ERROR,
+            content: 'global.error.server.form',
+          },
+        });
+      }
+
+      if (response.createEmailingCampaign?.emailingCampaign?.id) {
+        window.location.replace(
+          `/admin/mailingCampaign/edit/${response.createEmailingCampaign.emailingCampaign.id}`,
+        );
+      }
+    })
+    .catch(() => {
+      return FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {
+          type: TYPE_ALERT.ERROR,
+          content: 'global.error.server.form',
+        },
+      });
+    });
+};
+
 const createMailingList = (
   projectId: string,
   members: string[],
@@ -47,9 +82,9 @@ const createMailingList = (
     },
   })
     .then(response => {
-      if (response.createMailingList?.error) {
-        onClose();
+      onClose();
 
+      if (response.createMailingList?.error) {
         return FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: {
@@ -59,11 +94,10 @@ const createMailingList = (
         });
       }
 
-      if (withRedirection) {
-        window.location.replace('/admin/mailingList/list');
+      if (withRedirection && response.createMailingList?.mailingList) {
+        createEmailingCampaign(response.createMailingList.mailingList.id);
       }
 
-      onClose();
       return FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {

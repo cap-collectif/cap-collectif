@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\EmailingCampaignMessage;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
@@ -31,8 +32,8 @@ class EmailingCampaignPreviewResolver implements ResolverInterface
     public function __invoke($campaign): string
     {
         return $this->twig->render(EmailingCampaignMessage::TEMPLATE, [
-            'baseUrl' => $this->router->generate('app_homepage'),
-            'siteUrl' => $this->router->generate('app_homepage'),
+            'baseUrl' => $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'siteUrl' => $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'siteName' => $this->siteParams->getValue('global.site.fullname'),
             'user_locale' => '',
             'content' => self::getContentFromData($campaign),

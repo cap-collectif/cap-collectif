@@ -81,11 +81,8 @@ Scenario: Logged in admin, wants to delete a proposal and re published it
   Then I go to the admin proposal status tab
   And I delete the proposal
   And I confirm the admin proposal deletion
+  And I wait ".btn-group.disabled" to appear on current page
   And I should see status DELETED
-  And I wait 2 seconds
-  And I click on PUBLISHED status
-  And I save the proposal's status
-  And I wait ".alert__form_succeeded-message" to appear on current page
 
 @database @elasticsearch
 Scenario: Logged in admin, wants to view the proposal's followers

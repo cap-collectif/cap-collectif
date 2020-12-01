@@ -37,7 +37,7 @@ class EmailingCampaign
     private string $object = '';
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private string $content = '';
 

@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
-import environment, { graphqlError } from '~/createRelayEnvironment';
-import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
+import ReactPlaceholder from 'react-placeholder';
+import environment from '~/createRelayEnvironment';
 import { Container, Header, Content } from './EmailingCampaignPage.style';
 import DashboardCampaign, {
   CAMPAIGN_PAGINATION,
@@ -16,16 +16,18 @@ import type {
   EmailingCampaignPageQueryVariables,
 } from '~relay/EmailingCampaignPageQuery.graphql';
 import { ORDER_BY } from './DashboardCampaign/DashboardCampaign.reducer';
+import DashboardCampaignPlaceholder from './DashboardCampaignPlaceholder/DashboardCampaignPlaceholder';
 
 const listCampaign = ({
   error,
   props,
+  retry,
+  parameters,
 }: {
   ...ReactRelayReadyState,
   props: ?EmailingCampaignPageQueryResponse,
+  parameters: DashboardParameters,
 }) => {
-  if (error) return graphqlError;
-
   if (props) {
     return (
       <PickableList.Provider>
@@ -34,7 +36,18 @@ const listCampaign = ({
     );
   }
 
-  return <Loader />;
+  return (
+    <ReactPlaceholder
+      ready={false}
+      customPlaceholder={
+        <DashboardCampaignPlaceholder
+          hasError={!!error}
+          fetchData={retry}
+          selectedTab={parameters.filters.state}
+        />
+      }
+    />
+  );
 };
 
 export const createQueryVariables = (
@@ -51,7 +64,13 @@ export const createQueryVariables = (
 });
 
 export const EmailingCampaignPage = () => {
-  const { parameters } = useDashboardCampaignContext();
+  const { parameters, dispatch } = useDashboardCampaignContext();
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'INIT_FILTERS_FROM_URL',
+    });
+  }, [dispatch]);
 
   return (
     <Container className="emailing-campaign-page">
@@ -81,7 +100,7 @@ export const EmailingCampaignPage = () => {
             }
           `}
           variables={createQueryVariables(parameters)}
-          render={listCampaign}
+          render={({ error, props, retry }) => listCampaign({ error, props, retry, parameters })}
         />
       </Content>
     </Container>

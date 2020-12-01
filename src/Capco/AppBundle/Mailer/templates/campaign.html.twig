@@ -1,19 +1,26 @@
 {% extends "@CapcoMail/standardLayoutNew.html.twig" %}
 
+{% set baseUrl = url('app_homepage') %}
 
 {% block core_mail %}
-    {{ content|raw }}
+    <div class="ql-editor">
+        {{ content|raw }}
+    </div>
 {% endblock %}
 
 {% block footer_mail %}
     <div>
-        <p style="margin: 0;">{{ 'email.notification.footer.mail-send-by'|trans({'{siteName}': siteName,'{siteUrl}': siteUrl,}, 'CapcoAppBundle', user_locale) | raw }}</p>
-        <p style="margin: 18px 0;">{{ 'footer-promotion'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</p>
+        <p style="margin: 0 0 18px 0;">{{ 'email.notification.footer.subscribe.to'|trans({'{siteName}': siteName,'{siteUrl}': url('app_homepage'),}, 'CapcoAppBundle', user_locale) | raw }}</p>
 
         <p style="text-align: center;">
-            {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
-            <img src="{{ baseUrl ~ asset("capco-logo-mail.png")}}" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
-            Cap Collectif
+            {{ 'email.propulsed.by.capco'|trans({
+                '{logoUrl}': url('app_homepage') ~ asset('capco-logo-mail.png'),
+            }, 'CapcoAppBundle', user_locale) | raw }}
         </p>
     </div>
+{% endblock %}
+
+{% block style_mail %}
+    {{ parent() }}
+    {{ include("@CapcoMail/wysiwyg.css") }}
 {% endblock %}

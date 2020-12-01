@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ContentPage /> should renders correctly 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={false}
+>
   <h3>
     global.contenu
   </h3>
@@ -73,7 +75,9 @@ exports[`<ContentPage /> should renders correctly 1`] = `
 `;
 
 exports[`<ContentPage /> should renders correctly when disabled 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={true}
+>
   <h3>
     global.contenu
   </h3>
@@ -145,7 +149,9 @@ exports[`<ContentPage /> should renders correctly when disabled 1`] = `
 `;
 
 exports[`<ContentPage /> should renders correctly when error 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={false}
+>
   <h3>
     global.contenu
   </h3>

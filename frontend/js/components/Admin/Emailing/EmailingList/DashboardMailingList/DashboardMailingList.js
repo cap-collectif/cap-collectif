@@ -7,7 +7,6 @@ import { useDashboardMailingListContext } from './DashboardMailingList.context';
 import * as S from './DashboardMailingList.style';
 import ClearableInput from '~ui/Form/Input/ClearableInput';
 import EmailingLoader from '../../EmailingLoader/EmailingLoader';
-import ModalConfirmDelete from '~/components/Admin/Emailing/EmailingList/ModalConfirmDelete/ModalConfirmDelete';
 import MailingListItem from '~/components/Admin/Emailing/EmailingList/MailingListItem/MailingListItem';
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
 import { type DashboardMailingList_query } from '~relay/DashboardMailingList_query.graphql';
@@ -20,32 +19,19 @@ type Props = {|
   query: DashboardMailingList_query,
 |};
 
-type HeaderProps = {|
-  showModalDelete: boolean => void,
-|};
-
-const DashboardHeader = ({ showModalDelete }: HeaderProps) => {
+const DashboardHeader = () => {
   const { selectedRows, rowsCount } = usePickableList();
-  const intl = useIntl();
 
   return (
     <React.Fragment>
       {selectedRows.length > 0 ? (
-        <React.Fragment>
-          <p>
-            {selectedRows.length}{' '}
-            <FormattedMessage
-              id="campaign-selected"
-              values={{
-                num: selectedRows.length,
-              }}
-            />
-          </p>
-
-          <S.ButtonDelete type="button" onClick={() => showModalDelete(true)}>
-            {intl.formatMessage({ id: 'admin.global.delete' })}
-          </S.ButtonDelete>
-        </React.Fragment>
+        <FormattedMessage
+          id="global.selected.feminine.dynamic"
+          values={{
+            num: selectedRows.length,
+          }}
+          tagName="p"
+        />
       ) : (
         <React.Fragment>
           <p>
@@ -67,7 +53,6 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
   const { mailingLists } = query;
   const { selectedRows } = usePickableList();
   const { parameters, dispatch, status } = useDashboardMailingListContext();
-  const [isModalDeleteOpen, showModalDelete] = React.useState<boolean>(false);
   const [mailingListSelected, setMailingListSelected] = React.useState<?string>(null);
   const intl = useIntl();
   const hasMailingLists = mailingLists?.totalCount > 0;
@@ -107,7 +92,7 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
         hasMore={mailingLists?.pageInfo.hasNextPage}
         loader={<EmailingLoader key="loader" />}>
         <S.DashboardMailingListHeader isSelectable={hasMailingLists} disabled={!hasMailingLists}>
-          <DashboardHeader showModalDelete={showModalDelete} />
+          <DashboardHeader />
         </S.DashboardMailingListHeader>
 
         <PickableList.Body>
@@ -130,8 +115,6 @@ export const DashboardMailingList = ({ query, relay }: Props) => {
           )}
         </PickableList.Body>
       </PickableList>
-
-      <ModalConfirmDelete show={isModalDeleteOpen} onClose={() => showModalDelete(false)} />
 
       {mailingListSelected && (
         <ModalMembers

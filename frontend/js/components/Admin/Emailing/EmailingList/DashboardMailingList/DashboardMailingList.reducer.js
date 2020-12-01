@@ -1,6 +1,6 @@
 // @flow
 import { DEFAULT_FILTERS } from './DashboardMailingList.context';
-import { getFieldsFromUrl } from '~/shared/utils/analysis-filters';
+import { getFieldsFromUrl } from '~/shared/utils/getFieldsFromUrl';
 
 export type DashboardStatus = 'ready' | 'loading';
 
@@ -57,6 +57,7 @@ export const createReducer = (state: DashboardState, action: Action) => {
     case 'INIT_FILTERS_FROM_URL': {
       const filters = getFieldsFromUrl<Filters>(url, {
         default: DEFAULT_FILTERS,
+        whitelist: ['term'],
       });
 
       return {

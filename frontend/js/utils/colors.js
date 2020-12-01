@@ -60,6 +60,7 @@ export const colors = {
   red: '#fd4d4f',
   tradewind: '#54BAA6',
   fireBush: '#E29829',
+  silverChalice: '#afafaf',
 };
 
 // WIP but usefull. Waiting for the full table with real names

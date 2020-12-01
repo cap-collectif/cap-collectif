@@ -19,7 +19,7 @@ class MailingListRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ml')
             ->setFirstResult($offset ?? 0)
             ->setMaxResults($limit ?? 50)
-            ->addOrderBy('ml.id');
+            ->addOrderBy('ml.createdAt', 'DESC');
         if ($search) {
             $qb->andWhere('ml.name LIKE :name')->setParameter('name', "%${search}%");
         }

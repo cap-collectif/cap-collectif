@@ -14,6 +14,7 @@ const mutation = graphql`
       emailingCampaign {
         id
         status
+        sendAt
       }
     }
   }

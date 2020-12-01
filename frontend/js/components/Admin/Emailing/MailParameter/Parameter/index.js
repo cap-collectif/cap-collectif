@@ -3,6 +3,7 @@ import * as React from 'react';
 import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { Field } from 'redux-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import { Container } from '../common.style';
 import { InstructionContainer, InfoRow, InfoMailingList, ButtonMembers } from './style';
 import component from '~/components/Form/Field';
@@ -10,6 +11,7 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import ModalMembers from '~/components/Admin/Emailing/ModalMembers/ModalMembers';
 import ModalInternalMembers, {
   type InternalMembers,
+  type InternalMembersFormatted,
 } from '~/components/Admin/Emailing/ModalMembers/ModalInternalMembers';
 import colors from '~/utils/colors';
 import type { Parameter_query } from '~relay/Parameter_query.graphql';
@@ -29,7 +31,6 @@ type Props = {|
 const COUNT_USERS_QUERY = graphql`
   query Parameter_UsersQuery {
     users {
-      totalCount
       edges {
         node {
           id
@@ -63,19 +64,32 @@ const getMailingListName = (mailingInternalSelected: string, intl: IntlShape): s
 const getMailingInternalUsers = (
   mailingInternalSelected: string,
   users: InternalMembers,
-): InternalMembers => {
+): InternalMembersFormatted => {
   switch (mailingInternalSelected) {
     case 'CONFIRMED':
       return ((users.edges
         ?.filter(Boolean)
-        .filter(edge => edge.node && edge.node.isEmailConfirmed): any): InternalMembers);
+        .filter(edge => edge.node && edge.node.isEmailConfirmed): any): InternalMembersFormatted);
     case 'NOT_CONFIRMED':
       return ((users.edges
         ?.filter(Boolean)
-        .filter(edge => edge.node && !edge.node.isEmailConfirmed): any): InternalMembers);
+        .filter(edge => edge.node && !edge.node.isEmailConfirmed): any): InternalMembersFormatted);
     case 'REGISTERED':
     default:
-      return users;
+      return ((users?.edges || []: any): InternalMembersFormatted);
+  }
+};
+
+export const getWordingMailingInternal = (mailingInternal: string, intl: IntlShape) => {
+  switch (mailingInternal) {
+    case 'CONFIRMED':
+      return intl.formatMessage({ id: 'default-mailing-list-registered-confirmed' });
+    case 'NOT_CONFIRMED':
+      return intl.formatMessage({ id: 'default-mailing-list-registered-not-confirmed' });
+    case 'REGISTERED':
+      return intl.formatMessage({ id: 'default-mailing-list-registered' });
+    default:
+      return '';
   }
 };
 
@@ -83,16 +97,18 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
   const { mailingList, mailingInternal } = emailingCampaign;
   const { mailingLists } = query;
   const intl = useIntl();
-  const [modalMembersOpened, showModalMembers] = React.useState<boolean>(false);
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   const hasMailingList = !!mailingList || !!mailingInternal;
   const [countUsers, setCountUsers] = React.useState<number>(0);
-  const [mailingInternalUsers, setMailingInternalUsers] = React.useState<?InternalMembers>(null);
+  const [mailingInternalUsers, setMailingInternalUsers] = React.useState<?InternalMembersFormatted>(
+    null,
+  );
 
   React.useEffect(() => {
     if (mailingInternal) {
       loadUsersCount().then(({ users }: Parameter_UsersQueryResponse) => {
-        setCountUsers(users.totalCount);
         const usersOfChoicesMailingInternal = getMailingInternalUsers(mailingInternal, users);
+        setCountUsers(usersOfChoicesMailingInternal?.length || 0);
         setMailingInternalUsers(usersOfChoicesMailingInternal);
       });
     }
@@ -103,7 +119,7 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
   }, [mailingInternal, mailingList]);
 
   return (
-    <Container>
+    <Container disabled={disabled}>
       <h3>{intl.formatMessage({ id: 'admin-title-parameter-mailing-list' })}</h3>
 
       <Field
@@ -124,16 +140,12 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
         label={intl.formatMessage({ id: 'admin-menu-emailing-list' })}
         disabled={disabled}
         disableValidation={!showError}>
-        <option value={-1}>{intl.formatMessage({ id: 'select-list' })}</option>
-        <option value="REGISTERED">
-          {intl.formatMessage({ id: 'default-mailing-list-registered' })}
+        <option value="" disabled>
+          {intl.formatMessage({ id: 'select-list' })}
         </option>
-        <option value="CONFIRMED">
-          {intl.formatMessage({ id: 'default-mailing-list-registered-confirmed' })}
-        </option>
-        <option value="NOT_CONFIRMED">
-          {intl.formatMessage({ id: 'default-mailing-list-registered-not-confirmed' })}
-        </option>
+        <option value="REGISTERED">{getWordingMailingInternal('REGISTERED', intl)}</option>
+        <option value="CONFIRMED">{getWordingMailingInternal('CONFIRMED', intl)}</option>
+        <option value="NOT_CONFIRMED">{getWordingMailingInternal('NOT_CONFIRMED', intl)}</option>
 
         {mailingLists?.totalCount > 0 &&
           mailingLists?.edges
@@ -165,7 +177,7 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
           </InfoRow>
 
           {countUsers > 0 && (
-            <ButtonMembers type="button" onClick={() => showModalMembers(true)}>
+            <ButtonMembers type="button" onClick={onOpen}>
               {intl.formatMessage({ id: 'consult-members' })}
             </ButtonMembers>
           )}
@@ -186,17 +198,13 @@ export const ParameterPage = ({ emailingCampaign, query, disabled, showError }: 
       {hasMailingList &&
         (mailingInternal ? (
           <ModalInternalMembers
-            show={modalMembersOpened}
-            onClose={() => showModalMembers(false)}
+            show={isOpen}
+            onClose={onClose}
             mailingListName={getMailingListName(mailingInternal, intl)}
             members={mailingInternalUsers}
           />
         ) : (
-          <ModalMembers
-            show={modalMembersOpened}
-            onClose={() => showModalMembers(false)}
-            mailingList={mailingList}
-          />
+          <ModalMembers show={isOpen} onClose={onClose} mailingList={mailingList} />
         ))}
     </Container>
   );

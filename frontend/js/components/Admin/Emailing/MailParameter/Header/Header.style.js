@@ -1,6 +1,16 @@
 // @flow
-import styled, { type StyledComponent } from 'styled-components';
+import styled, { css, type StyledComponent } from 'styled-components';
 import { LIGHT_BOX_SHADOW, MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
+import colors from '~/utils/colors';
+
+const commonCssInput = css`
+  height: 34px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 5px;
+  margin: 0;
+  background-color: transparent;
+`;
 
 export const Container: StyledComponent<{}, {}, HTMLElement> = styled.header`
   display: flex;
@@ -16,22 +26,59 @@ export const TitleContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
   align-items: center;
   margin: 0 0 15px 0;
 
-  h2 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    word-break: break-word;
-    margin: 0;
-  }
-`;
+  .input-title {
+    position: relative;
 
-export const Title: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+    &:hover {
+      background-color: #f7f7f8;
+      ${MAIN_BORDER_RADIUS};
+
+      input {
+        color: #f7f7f8;
+      }
+    }
+  }
+
+  .wrapper-title {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 1;
+    white-space: pre;
+    color: #000;
+    ${commonCssInput};
+
+    &.not-editable {
+      position: static;
+      background-color: transparent;
+    }
+
+    span {
+      display: inline;
+    }
+  }
 
   .form-group {
     margin: 0;
+
+    input {
+      color: #fff;
+      min-width: 1px;
+      border: none;
+      box-shadow: none;
+      outline: none;
+      ${commonCssInput};
+
+      &:focus {
+        color: #000;
+        background-color: #f7f7f8;
+        box-shadow: 0 0 3px 1px #bec4c8;
+        border: 1px solid ${colors.lightGray};
+      }
+    }
   }
 `;
 
@@ -43,13 +90,6 @@ export const LabelPlannedContainer: StyledComponent<{}, {}, HTMLDivElement> = st
   .label-state {
     margin-right: 10px;
   }
-`;
-
-export const ButtonEditTitle: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
-  margin: 0 0 0 5px;
-  padding: 0;
-  background: none;
-  border: none;
 `;
 
 export const ButtonSendContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
@@ -74,7 +114,7 @@ export const ErrorContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.di
 
 export const ButtonSendMail: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   padding: 8px;
-  background-color: #3b88fd;
+  background-color: ${colors.blue};
   color: #fff;
   border: none;
   margin-left: 10px;
@@ -85,7 +125,7 @@ export const ButtonCancelPlanned: StyledComponent<{}, {}, HTMLButtonElement> = s
   padding: 8px;
   background: none;
   color: #000;
-  border: 1px solid #ddd;
+  border: 1px solid ${colors.borderColor};
   ${MAIN_BORDER_RADIUS};
 `;
 
@@ -105,6 +145,7 @@ export const NavContainer: StyledComponent<{}, {}, HTMLUListElement> = styled.ul
 
     a {
       padding-bottom: 10px;
+      color: ${colors.blue};
 
       &:focus,
       &:hover {
@@ -112,7 +153,7 @@ export const NavContainer: StyledComponent<{}, {}, HTMLUListElement> = styled.ul
       }
 
       &.selected {
-        border-bottom: 2px solid #0388cc;
+        border-bottom: 2px solid ${colors.blue};
       }
     }
   }

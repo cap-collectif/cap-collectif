@@ -91,6 +91,7 @@ exports[`<DashboardCampaign /> should renders correctly 1`] = `
     useInfiniteScroll={true}
   >
     <DashboardCampaignstyle__DashboardCampaignHeader
+      disabled={false}
       isSelectable={true}
     >
       <DashboardHeader
@@ -264,6 +265,7 @@ exports[`<DashboardCampaign /> should renders correctly with no campaigns 1`] = 
     useInfiniteScroll={true}
   >
     <DashboardCampaignstyle__DashboardCampaignHeader
+      disabled={false}
       isSelectable={true}
     >
       <DashboardHeader

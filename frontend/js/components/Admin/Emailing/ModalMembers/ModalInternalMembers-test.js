@@ -8,25 +8,22 @@ const baseProps = {
   onClose: jest.fn(),
   show: true,
   mailingListName: 'Je suis une mailing list',
-  members: {
-    totalCount: 2,
-    edges: [
-      {
-        node: {
-          id: '1',
-          email: 'bruh@gmail.com',
-          isEmailConfirmed: true,
-        },
+  members: [
+    {
+      node: {
+        id: '1',
+        email: 'bruh@gmail.com',
+        isEmailConfirmed: true,
       },
-      {
-        node: {
-          id: '2',
-          email: 'bro@gmail.com',
-          isEmailConfirmed: false,
-        },
+    },
+    {
+      node: {
+        id: '2',
+        email: 'bro@gmail.com',
+        isEmailConfirmed: false,
       },
-    ],
-  },
+    },
+  ],
 };
 
 const props = {

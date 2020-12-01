@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ParameterPage /> should renders correctly 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={false}
+>
   <h3>
     admin-title-parameter-mailing-list
   </h3>
@@ -24,7 +26,8 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
     type="select"
   >
     <option
-      value={-1}
+      disabled={true}
+      value=""
     >
       select-list
     </option>
@@ -85,7 +88,9 @@ exports[`<ParameterPage /> should renders correctly 1`] = `
 `;
 
 exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={true}
+>
   <h3>
     admin-title-parameter-mailing-list
   </h3>
@@ -108,7 +113,8 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
     type="select"
   >
     <option
-      value={-1}
+      disabled={true}
+      value=""
     >
       select-list
     </option>
@@ -169,7 +175,9 @@ exports[`<ParameterPage /> should renders correctly when disabled 1`] = `
 `;
 
 exports[`<ParameterPage /> should renders correctly when error 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={false}
+>
   <h3>
     admin-title-parameter-mailing-list
   </h3>
@@ -192,7 +200,8 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
     type="select"
   >
     <option
-      value={-1}
+      disabled={true}
+      value=""
     >
       select-list
     </option>
@@ -253,7 +262,9 @@ exports[`<ParameterPage /> should renders correctly when error 1`] = `
 `;
 
 exports[`<ParameterPage /> should renders correctly when mailing list internal selected 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={false}
+>
   <h3>
     admin-title-parameter-mailing-list
   </h3>
@@ -276,7 +287,8 @@ exports[`<ParameterPage /> should renders correctly when mailing list internal s
     type="select"
   >
     <option
-      value={-1}
+      disabled={true}
+      value=""
     >
       select-list
     </option>

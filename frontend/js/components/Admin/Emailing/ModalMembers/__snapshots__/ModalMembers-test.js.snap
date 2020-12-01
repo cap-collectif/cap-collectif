@@ -1,31 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ModalMembers /> should open with data 1`] = `
-<Modal
+<commonstyle__ModalContainer
   animation={false}
   aria-labelledby="modal-title"
-  autoFocus={true}
-  backdrop={true}
-  bsClass="modal"
   bsSize="small"
-  dialogComponentClass={[Function]}
-  enforceFocus={true}
-  keyboard={true}
-  manager={
-    ModalManager {
-      "add": [Function],
-      "containers": Array [],
-      "data": Array [],
-      "handleContainerOverflow": true,
-      "hideSiblingNodes": true,
-      "isTopModal": [Function],
-      "modals": Array [],
-      "remove": [Function],
-    }
-  }
   onHide={[MockFunction]}
-  renderBackdrop={[Function]}
-  restoreFocus={true}
   show={true}
 >
   <ModalHeader
@@ -58,5 +38,5 @@ exports[`<ModalMembers /> should open with data 1`] = `
       </li>
     </ModalMembersstyle__MembersContainer>
   </ModalBody>
-</Modal>
+</commonstyle__ModalContainer>
 `;

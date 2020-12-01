@@ -16,6 +16,7 @@ const baseProps = {
     mailingList: {
       name: 'Je suis une mailing list',
     },
+    mailingInternal: null,
   },
   selected: false,
 };
@@ -35,6 +36,14 @@ const props = {
     campaign: {
       ...baseProps.campaign,
       sendAt: null,
+    },
+  },
+  withMailingInternal: {
+    ...baseProps,
+    campaign: {
+      ...baseProps.campaign,
+      mailingInternal: 'REGISTERED',
+      mailingList: null,
     },
   },
 };
@@ -57,6 +66,11 @@ describe('<CampaignItem />', () => {
 
   it('should renders correctly when no send at', () => {
     const wrapper = shallow(<CampaignItem {...props.noSendAt} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should renders correctly with mailing list internal', () => {
+    const wrapper = shallow(<CampaignItem {...props.withMailingInternal} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

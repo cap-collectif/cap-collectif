@@ -1107,10 +1107,10 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u');
         $qb->select('u')->where('u.email IS NOT NULL');
 
-        if (EmailingCampaignInternalList::CONFIRMED) {
+        if (EmailingCampaignInternalList::CONFIRMED === $internalList) {
             $qb->andWhere('u.confirmationToken IS NULL');
-        } elseif (EmailingCampaignInternalList::NOT_CONFIRMED) {
-            $qb->andWhere('u.confirmationToken NOT NULL');
+        } elseif (EmailingCampaignInternalList::NOT_CONFIRMED === $internalList) {
+            $qb->andWhere('u.confirmationToken IS NOT NULL');
         }
 
         return $qb->getQuery()->getResult();

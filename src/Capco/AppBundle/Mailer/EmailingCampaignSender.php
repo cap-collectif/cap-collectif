@@ -11,6 +11,7 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use GraphQL\Error\UserError;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class EmailingCampaignSender
@@ -42,8 +43,8 @@ class EmailingCampaignSender
     private function createMessage(EmailingCampaign $emailingCampaign): EmailingCampaignMessage
     {
         $message = new EmailingCampaignMessage($emailingCampaign, [
-            'baseUrl' => $this->router->generate('app_homepage'),
-            'siteUrl' => $this->router->generate('app_homepage'),
+            'baseUrl' => $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'siteUrl' => $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'siteName' => $this->siteParams->getValue('global.site.fullname'),
         ]);
         $message->setRecipients($this->getRecipients($emailingCampaign));

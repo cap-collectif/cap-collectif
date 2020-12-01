@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Field } from 'redux-form';
 import { useIntl } from 'react-intl';
@@ -19,11 +20,11 @@ type Props = {|
 
 export const ContentPage = ({ disabled, showError, emailingCampaign }: Props) => {
   const intl = useIntl();
-  const [isModalMailTestOpen, setModalMailTestOpen] = React.useState<boolean>(false);
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   const previewMailRef = React.useRef<?HTMLDivElement>(null);
 
   return (
-    <Container>
+    <Container disabled={disabled}>
       <h3>{intl.formatMessage({ id: 'global.contenu' })}</h3>
 
       <PreviewContainer>
@@ -39,7 +40,7 @@ export const ContentPage = ({ disabled, showError, emailingCampaign }: Props) =>
           <span>{intl.formatMessage({ id: 'on-browser' })}</span>
         </button>
 
-        <button type="button" onClick={() => setModalMailTestOpen(true)} disabled={disabled}>
+        <button type="button" onClick={onOpen} disabled={disabled}>
           <Icon name={ICON_NAME.letter} size={15} color="#000" />
           <span>{intl.formatMessage({ id: 'by-mail' })}</span>
         </button>
@@ -67,12 +68,8 @@ export const ContentPage = ({ disabled, showError, emailingCampaign }: Props) =>
 
       <PreviewMail reference={previewMailRef} emailingCampaign={emailingCampaign} />
 
-      {isModalMailTestOpen && (
-        <ModalMailTest
-          show={isModalMailTestOpen}
-          onClose={() => setModalMailTestOpen(false)}
-          emailingCampaign={emailingCampaign}
-        />
+      {isOpen && (
+        <ModalMailTest show={isOpen} onClose={onClose} emailingCampaign={emailingCampaign} />
       )}
     </Container>
   );

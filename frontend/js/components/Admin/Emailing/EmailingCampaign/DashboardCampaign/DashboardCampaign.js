@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import Collapsable from '~ui/Collapsable';
 import DropdownSelect from '~ui/DropdownSelect';
@@ -17,6 +18,7 @@ import { type DashboardCampaign_query } from '~relay/DashboardCampaign_query.gra
 import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMutation';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
+import NoCampaign from '~/components/Admin/Emailing/EmailingCampaign/NoCampaign/NoCampaign';
 
 export const CAMPAIGN_PAGINATION = 30;
 
@@ -71,15 +73,13 @@ const DashboardHeader = ({ query, showModalDelete }: HeaderProps) => {
     <React.Fragment>
       {selectedRows.length > 0 ? (
         <React.Fragment>
-          <p>
-            {selectedRows.length}{' '}
-            <FormattedMessage
-              id="campaign-selected"
-              values={{
-                num: selectedRows.length,
-              }}
-            />
-          </p>
+          <FormattedMessage
+            id="global.selected.feminine.dynamic"
+            values={{
+              num: selectedRows.length,
+            }}
+            tagName="p"
+          />
 
           <S.ButtonDelete type="button" onClick={() => showModalDelete(true)}>
             {intl.formatMessage({ id: 'admin.global.delete' })}
@@ -132,9 +132,8 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
   const intl = useIntl();
   const { selectedRows } = usePickableList();
   const { parameters, dispatch, status } = useDashboardCampaignContext();
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
   const hasCampaigns = campaigns.totalCount > 0;
-
-  const [isModalDeleteOpen, showModalDelete] = React.useState<boolean>(false);
 
   return (
     <>
@@ -179,7 +178,7 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
             name="search"
             type="text"
             icon={<i className="cap cap-magnifier" />}
-            disabled={false}
+            disabled={!hasCampaigns}
             onClear={() => {
               if (parameters.filters.term !== null) {
                 dispatch({ type: 'CLEAR_TERM' });
@@ -210,8 +209,8 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
         }}
         hasMore={campaigns?.pageInfo.hasNextPage}
         loader={<EmailingLoader key="loader" />}>
-        <S.DashboardCampaignHeader isSelectable={hasCampaigns}>
-          <DashboardHeader query={query} showModalDelete={showModalDelete} />
+        <S.DashboardCampaignHeader isSelectable={hasCampaigns} disabled={!hasCampaigns}>
+          <DashboardHeader query={query} showModalDelete={onOpen} />
         </S.DashboardCampaignHeader>
 
         <PickableList.Body>
@@ -229,16 +228,12 @@ export const DashboardCampaign = ({ query, relay }: Props) => {
                 />
               ))
           ) : (
-            <p>Pas de campagnes</p>
+            <NoCampaign />
           )}
         </PickableList.Body>
       </PickableList>
 
-      <ModalConfirmDelete
-        show={isModalDeleteOpen}
-        onClose={() => showModalDelete(false)}
-        campaignsIds={selectedRows}
-      />
+      <ModalConfirmDelete show={isOpen} onClose={onClose} campaignsIds={selectedRows} />
     </>
   );
 };

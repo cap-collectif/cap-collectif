@@ -3,6 +3,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
+import moment from 'moment';
 import {
   FormGroup,
   FormControl,
@@ -13,7 +14,7 @@ import {
   type ValidationState,
 } from 'react-bootstrap';
 import type { IntlShape } from 'react-intl';
-import DateTime, { type DateTimeInputProps } from './DateTime';
+import DateTime, { type DateTimeInputProps, type TimeConstraintsProps } from './DateTime';
 import Editor from './Editor';
 import AdminEditor from '../AdminEditor';
 import Ranking from './Ranking/Ranking';
@@ -124,6 +125,7 @@ export type ParentProps = {|
   // Why do we use this ?
   value?: any,
   dateTimeInputProps?: DateTimeInputProps,
+  timeConstraints?: TimeConstraintsProps,
   forwardedRef?: any,
   typeForm?: $Values<typeof TYPE_FORM>,
   getOpacity?: (opacity: number) => void,
@@ -132,6 +134,7 @@ export type ParentProps = {|
   addressProps?: AddressProps,
   groupedResponsesEnabled?: boolean,
   responseColorsDisabled?: boolean,
+  isValidDate?: (current: moment) => boolean,
 |};
 
 type Props = {|
@@ -202,6 +205,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     min,
     max,
     dateTimeInputProps,
+    timeConstraints,
     typeForm,
     getOpacity,
     opacity,
@@ -210,6 +214,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     isRangeBetween,
     groupedResponsesEnabled,
     responseColorsDisabled,
+    isValidDate,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -342,6 +347,8 @@ class ReactBootstrapInput extends React.Component<Props> {
         <DateTime
           value={value}
           dateTimeInputProps={dateTimeInputProps}
+          timeConstraints={timeConstraints}
+          isValidDate={isValidDate}
           {...props}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}

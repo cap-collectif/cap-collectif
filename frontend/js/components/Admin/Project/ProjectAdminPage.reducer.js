@@ -11,7 +11,7 @@ import {
   getFieldsFromUrl,
   updateQueryUrl,
   URL_FILTER_WHITELIST,
-} from '~/shared/utils/analysis-filters';
+} from '~/shared/utils/getFieldsFromUrl';
 
 export const ORDER_BY: {
   OLDEST: 'oldest',

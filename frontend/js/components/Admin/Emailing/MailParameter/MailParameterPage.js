@@ -2,7 +2,9 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import debounce from 'debounce-promise';
+import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import { injectIntl } from 'react-intl';
 import { reduxForm, formValueSelector, registerField } from 'redux-form';
 import { connect } from 'react-redux';
@@ -23,6 +25,7 @@ import { type MailParameterPage_query } from '~relay/MailParameterPage_query.gra
 import Header from './Header/Header';
 import SendEmailingCampaignMutation from '~/mutations/SendEmailingCampaignMutation';
 import stripHtml from '~/utils/stripHtml';
+import { DATE_ISO8601_FORMAT } from '~/shared/date';
 
 const REGISTER_FIELDS = [
   'title',
@@ -78,15 +81,26 @@ const handleChangeEmailingCampaign = (values: Values, dispatch: Dispatch, props:
       name: title,
       senderEmail,
       senderName: emailingCampaign.senderName,
-      mailingList: !DEFAULT_MAILING_LIST.includes(mailingList) ? mailingList : null,
+      mailingList: !DEFAULT_MAILING_LIST.includes(mailingList) && mailingList ? mailingList : null,
       mailingInternal: DEFAULT_MAILING_LIST.includes(mailingList) ? mailingList : null,
       object: mailSubject,
       content: mailContent,
-      sendAt: sendingSchedule ? plannedDate : null,
+      sendAt:
+        sendingSchedule && plannedDate ? moment(plannedDate).format(DATE_ISO8601_FORMAT) : null,
     },
   })
     .then(response => {
       if (response.updateEmailingCampaign?.error) {
+        if (response.updateEmailingCampaign.error === 'TOO_LATE') {
+          return FluxDispatcher.dispatch({
+            actionType: UPDATE_ALERT,
+            alert: {
+              type: TYPE_ALERT.ERROR,
+              content: 'date-sendAt-before-now',
+            },
+          });
+        }
+
         return FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: {
@@ -164,6 +178,7 @@ const validate = (
   props,
 ) => {
   const { intl } = props;
+  const now = moment();
   const errors = {};
 
   if (!title) {
@@ -234,6 +249,10 @@ const validate = (
     };
   }
 
+  if (sendingSchedule && plannedDate && !moment(plannedDate).isAfter(now)) {
+    errors.plannedDate = { id: 'date-sendAt-before-now' };
+  }
+
   return errors;
 };
 
@@ -249,7 +268,7 @@ export const MailParameterPage = ({
   const baseNameUrl = `/admin/mailingCampaign/edit/${emailingCampaign.id}`;
   const formDisabled = emailingCampaign.status === 'SENT' || emailingCampaign.status === 'PLANNED';
   const showError: boolean = invalid && submitFailed;
-  const [isModalCancelOpen, setModalCancelOpen] = React.useState<boolean>(false);
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
 
   React.useEffect(() => {
     /**
@@ -271,7 +290,7 @@ export const MailParameterPage = ({
         <Header
           emailingCampaign={emailingCampaign}
           disabled={formDisabled}
-          setModalCancelOpen={setModalCancelOpen}
+          setModalCancelOpen={onOpen}
           showError={showError}
         />
 
@@ -302,11 +321,7 @@ export const MailParameterPage = ({
           </Route>
         </Switch>
 
-        <ModalCancelSending
-          emailingCampaign={emailingCampaign}
-          show={isModalCancelOpen}
-          onClose={() => setModalCancelOpen(false)}
-        />
+        <ModalCancelSending emailingCampaign={emailingCampaign} show={isOpen} onClose={onClose} />
       </Router>
     </Form>
   );
@@ -325,7 +340,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
   initialValues: {
     senderEmail: props.emailingCampaign.senderEmail,
     sendingSchedule: !!props.emailingCampaign.sendAt,
-    plannedDate: props.emailingCampaign.sendAt || undefined,
+    plannedDate: props.emailingCampaign.sendAt || null,
     title: props.emailingCampaign.name,
     mailContent: props.emailingCampaign.content,
     mailSubject: props.emailingCampaign.object,

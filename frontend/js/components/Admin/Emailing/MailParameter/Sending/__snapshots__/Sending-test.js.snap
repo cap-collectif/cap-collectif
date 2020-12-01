@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SendingPage /> should renders correctly 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={false}
+>
   <h3>
     send-and-schedule
   </h3>
@@ -43,7 +45,9 @@ exports[`<SendingPage /> should renders correctly 1`] = `
 `;
 
 exports[`<SendingPage /> should renders correctly when disabled 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={true}
+>
   <h3>
     send-and-schedule
   </h3>
@@ -93,7 +97,9 @@ exports[`<SendingPage /> should renders correctly when disabled 1`] = `
 `;
 
 exports[`<SendingPage /> should renders correctly when error 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={false}
+>
   <h3>
     send-and-schedule
   </h3>
@@ -135,7 +141,9 @@ exports[`<SendingPage /> should renders correctly when error 1`] = `
 `;
 
 exports[`<SendingPage /> should renders correctly with sending schedule 1`] = `
-<commonstyle__Container>
+<commonstyle__Container
+  disabled={false}
+>
   <h3>
     send-and-schedule
   </h3>
@@ -187,6 +195,13 @@ exports[`<SendingPage /> should renders correctly with sending schedule 1`] = `
       disableValidation={true}
       disabled={false}
       id="plannedDate"
+      isValidDate={[Function]}
+      label={
+        <FormattedMessage
+          id="sending-date"
+          values={Object {}}
+        />
+      }
       name="plannedDate"
       type="datetime"
     />

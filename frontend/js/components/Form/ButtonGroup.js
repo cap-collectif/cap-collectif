@@ -1,6 +1,8 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ToggleButtonGroup } from 'react-bootstrap';
+import styled, { type StyledComponent } from 'styled-components';
+import cn from 'classnames';
 
 type Props = {
   type: 'radio' | 'checkbox',
@@ -9,28 +11,38 @@ type Props = {
   value: any,
   name: string,
   children: any,
+  className?: string,
 };
 
-class ButtonGroup extends Component<Props, void> {
-  static defaultProps = {
-    disabled: false,
-  };
-
-  render() {
-    const { type, disabled, onChange, value, name, children } = this.props;
-    return (
-      <ToggleButtonGroup
-        type={type}
-        name={name}
-        value={value}
-        onChange={val => {
-          onChange(val);
-        }}
-        disabled={disabled}>
-        {children}
-      </ToggleButtonGroup>
-    );
+export const Container: StyledComponent<
+  { disabled: boolean },
+  {},
+  typeof ToggleButtonGroup,
+> = styled(ToggleButtonGroup)`
+  &.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
   }
-}
+`;
+
+const ButtonGroup = ({
+  type,
+  disabled = false,
+  onChange,
+  value,
+  name,
+  children,
+  className,
+}: Props) => (
+  <Container
+    type={type}
+    name={name}
+    value={value}
+    onChange={onChange}
+    disabled={disabled}
+    className={cn(className, { disabled })}>
+    {children}
+  </Container>
+);
 
 export default ButtonGroup;

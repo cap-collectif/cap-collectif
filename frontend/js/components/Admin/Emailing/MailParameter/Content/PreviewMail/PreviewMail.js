@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Container } from './PreviewMail.style';
 import type { PreviewMail_emailingCampaign } from '~relay/PreviewMail_emailingCampaign.graphql';
 import stripHtml from '~/utils/stripHtml';
 
@@ -12,9 +11,9 @@ type Props = {|
 
 export const PreviewMail = ({ emailingCampaign, reference }: Props) =>
   emailingCampaign.content && stripHtml(emailingCampaign.content) ? (
-    <Container id="preview-mail" ref={reference}>
+    <div className="preview-mail" ref={reference}>
       <p dangerouslySetInnerHTML={{ __html: emailingCampaign.preview }} />
-    </Container>
+    </div>
   ) : null;
 
 export default createFragmentContainer(PreviewMail, {

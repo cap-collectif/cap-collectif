@@ -4,7 +4,6 @@ import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 
 export const FieldContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
-  align-items: flex-end;
 
   .btn-group {
     margin-right: 20px;

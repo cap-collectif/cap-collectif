@@ -43,7 +43,7 @@ export const DashboardCampaignHeader: StyledComponent<{}, {}, typeof PickableLis
 
 export const ButtonCreate: StyledComponent<{}, {}, HTMLButtonElement> = styled.button`
   padding: 8px;
-  background-color: #3b88fd;
+  background-color: ${colors.blue};
   color: #fff;
   border: none;
   margin-left: 10px;

@@ -2782,10 +2782,10 @@
     "@babel/runtime" "^7.7.2"
     core-js "^3.4.1"
 
-"@liinkiing/react-hooks@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@liinkiing/react-hooks/-/react-hooks-1.7.0.tgz#d767eda144ad7a0b63923f4005a26609c2bad3f7"
-  integrity sha512-hILvJJeQnOvoSpRefw5wzkIvKWNzxIGmlUAoakXSxTuumPUQZ5/FdjQz4UZFi4BTnpOEtZuisN/z4YJSMZN7fA==
+"@liinkiing/react-hooks@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@liinkiing/react-hooks/-/react-hooks-1.7.1.tgz#1429418eb5054daddd14faf9032322d92ebfb136"
+  integrity sha512-NggDx6G3EMTljtZouiDjs+u5Ft1HTlQT2+0d4Gs70mFQJhXj7jfxeNFK2jfDyWR68BaAka9LxAhOl7uJ8CI0Gg==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -7330,7 +7330,15 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.2, create-react-class@^15.6.0, create-react-class@^15.6.3:
+create-react-class@^15.5.2:
+  version "15.7.0"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.7.0.tgz#7499d7ca2e69bb51d13faf59bd04f0c65a1d6c1e"
+  integrity sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==
+  dependencies:
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
+create-react-class@^15.6.0, create-react-class@^15.6.3:
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   integrity sha512-M+/3Q6E6DLO6Yx3OwrWjwHBnvfXXYA7W+dFjt/ZDBemHO1DDZhsalX/NUtnTYclN6GfnBDRh4qRHjcDHmlJBJg==
@@ -16544,9 +16552,9 @@ react-on-rails@^11.3.1:
     "@babel/runtime-corejs2" "^7.0.0"
 
 react-onclickoutside@^6.5.0:
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.8.0.tgz#9f91b5b3ed59f4d9e43fd71620dc200773a4d569"
-  integrity sha512-5Q4Rn7QLEoh7WIe66KFvYIpWJ49GeHoygP1/EtJyZjXKgrWH19Tf0Ty3lWyQzrEEDyLOwUvvmBFSE3dcDdvagA==
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.9.0.tgz#a54bc317ae8cf6131a5d78acea55a11067f37a1f"
+  integrity sha512-8ltIY3bC7oGhj2nPAvWOGi+xGFybPNhJM0V1H8hY/whNcXgmDeaeoCMPPd8VatrpTsUWjb/vGzrmu6SrXVty3A==
 
 react-overlays@^0.8.0:
   version "0.8.3"

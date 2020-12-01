@@ -9,67 +9,69 @@
         {% block html_title %}{% endblock %}
     </title>
     <style type="text/css" media="screen">
-        .ExternalClass * {line-height:100%}
-        .bb {
-            border-bottom: 1px solid #d9d9d9;
-            border-collapse: collapse;
-        }
+        {% block style_mail %}
+            .ExternalClass * {line-height:100%}
+            .bb {
+                border-bottom: 1px solid #d9d9d9;
+                border-collapse: collapse;
+            }
 
-        .ba {
-            border: 0.5px solid #d9d9d9;
-            border-collapse: collapse;
-        }
-        .b-lrb {
-            border:0.5px solid #d9d9d9;
-            border-top: 0;
-            border-collapse: collapse;
-        }
-        .yi, .zi, .im {
-            color: #000000 !important;
-        }
-        #top-mail a {
-            text-decoration: none;
-            color: #337ab7;
-        }
-        #footer-mail {
-            color: #A2ABB4;
-        }
-        #footer-mail  a {
-            color: #999999 !important;
-        }
+            .ba {
+                border: 0.5px solid #d9d9d9;
+                border-collapse: collapse;
+            }
+            .b-lrb {
+                border:0.5px solid #d9d9d9;
+                border-top: 0;
+                border-collapse: collapse;
+            }
+            .yi, .zi, .im {
+                color: #000000 !important;
+            }
+            #top-mail a {
+                text-decoration: none;
+                color: #337ab7;
+            }
+            #footer-mail {
+                color: #A2ABB4;
+            }
+            #footer-mail  a {
+                color: #999999 !important;
+            }
 
-        #email-penrose-conteneur {width:600px;}
+            #email-penrose-conteneur {width:600px;}
 
-        @media (max-width:580px) {
-            *[id=email-penrose-conteneur] {width:100% !important;}
-            table[class=resp-full-table] {width:100% !important; clear:both;}
-            td[class=resp-full-td] {width:100% !important; clear:both;}
-            td[class=resp-full-td-center] {width:100%!important; clear:both; text-align: center !important;}
-            img[class=email-penrose-img-header] {width:100% !important; max-width:340px !important;}
-            hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
-            #email-penrose-conteneur {width:300px;}
-        }
+            @media (max-width:580px) {
+                *[id=email-penrose-conteneur] {width:100% !important;}
+                table[class=resp-full-table] {width:100% !important; clear:both;}
+                td[class=resp-full-td] {width:100% !important; clear:both;}
+                td[class=resp-full-td-center] {width:100%!important; clear:both; text-align: center !important;}
+                img[class=email-penrose-img-header] {width:100% !important; max-width:340px !important;}
+                hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
+                #email-penrose-conteneur {width:300px;}
+            }
 
-        @font-face {
-            font-family: "OpenSans";
-            src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Regular.ttf') }}") format("truetype");
-            font-weight: normal;
-            font-style: normal;
-        }
+            @font-face {
+                font-family: "OpenSans";
+                src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Regular.ttf') }}") format("truetype");
+                font-weight: normal;
+                font-style: normal;
+            }
 
-        @font-face {
-            font-family: "OpenSans";
-            src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Semibold.ttf') }}") format("truetype");
-            font-weight: 600;
-            font-style: normal;
-        }
+            @font-face {
+                font-family: "OpenSans";
+                src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Semibold.ttf') }}") format("truetype");
+                font-weight: 600;
+                font-style: normal;
+            }
 
-        @font-face {
-            font-family: "OpenSans";
-            src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Bold.ttf') }}") format("truetype");
-            font-weight: bold;
-            font-style: normal;
-        }
+            @font-face {
+                font-family: "OpenSans";
+                src: url("{{ baseUrl ~ asset('fonts/openSans/OpenSans-Bold.ttf') }}") format("truetype");
+                font-weight: bold;
+                font-style: normal;
+            }
+        {% endblock %}
     </style>
 </head>
 <body>

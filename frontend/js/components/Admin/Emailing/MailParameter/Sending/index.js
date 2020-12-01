@@ -21,7 +21,15 @@ type Props = {|
   sendingSchedule: boolean,
   disabled: boolean,
   showError: boolean,
+  plannedDate?: string,
 |};
+
+const isValidDate = (current: moment) => {
+  const yesterday = moment().subtract(1, 'days');
+  return current.isAfter(yesterday);
+};
+
+export const DIFF_MINUTE = 6;
 
 export const SendingPage = ({
   dispatch,
@@ -34,8 +42,9 @@ export const SendingPage = ({
   const intl = useIntl();
 
   return (
-    <Container>
+    <Container disabled={disabled}>
       <h3>{intl.formatMessage({ id: 'send-and-schedule' })}</h3>
+
       <FieldContainer>
         <Field
           type="radio-buttons"
@@ -70,12 +79,15 @@ export const SendingPage = ({
             dateTimeInputProps={{
               disabled,
             }}
+            label={<FormattedMessage id="sending-date" />}
             addonAfter={<i className="cap-calendar-2" />}
             disabled={disabled}
             disableValidation={!showError}
+            isValidDate={isValidDate}
           />
         )}
       </FieldContainer>
+
       {status === 'PLANNED' && (
         <InfoRow>
           <LabelState color={colors.fireBush} />
@@ -121,6 +133,7 @@ export const SendingPage = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   sendingSchedule: selectorForm(state, 'sendingSchedule'),
+  plannedDate: selectorForm(state, 'plannedDate'),
 });
 
 const SendingPageConnected = connect(mapStateToProps)(SendingPage);

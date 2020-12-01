@@ -1,11 +1,6 @@
 // @flow
 import { DEFAULT_FILTERS, getInitialState } from './DashboardCampaign.context';
-import {
-  clearQueryUrl,
-  getFieldsFromUrl,
-  updateQueryUrl,
-  URL_FILTER_WHITELIST,
-} from '~/shared/utils/analysis-filters';
+import { clearQueryUrl, getFieldsFromUrl, updateQueryUrl } from '~/shared/utils/getFieldsFromUrl';
 
 export const ORDER_BY: {
   OLDEST: 'oldest',
@@ -101,8 +96,9 @@ export const createReducer = (state: DashboardState, action: Action) => {
     case 'INIT_FILTERS_FROM_URL': {
       const filters = getFieldsFromUrl<Filters>(url, {
         default: DEFAULT_FILTERS,
-        whitelist: [...URL_FILTER_WHITELIST, 'status'],
+        whitelist: ['term', 'state'],
       });
+
       const { sort } = getFieldsFromUrl<{ sort: SortValues }>(url, {
         default: {
           sort: ORDER_BY.NEWEST,

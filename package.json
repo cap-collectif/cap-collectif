@@ -170,7 +170,7 @@
         "@formatjs/intl-relativetimeformat": "^3.0.2",
         "@formatjs/intl-utils": "^3.6.0",
         "@headlessui/react": "^0.2.0",
-        "@liinkiing/react-hooks": "^1.7.0",
+        "@liinkiing/react-hooks": "^1.7.1",
         "@sentry/browser": "^5.15.5",
         "@storybook/addon-a11y": "^5.1.8",
         "@storybook/addon-info": "^5.1.8",

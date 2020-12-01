@@ -1,10 +1,12 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
 import Input from './Input';
 import { TYPE_FORM } from '~/constants/FormConstants';
 import isQuestionnaire from '~/utils/isQuestionnaire';
 import type { AddressProps } from '~/components/Form/Address/Address.type';
+import type { DateTimeInputProps, TimeConstraintsProps } from '~/components/Form/DateTime';
 
 type Props = {|
   meta: {
@@ -18,6 +20,7 @@ type Props = {|
   labelClassName?: string,
   divClassName?: string,
   wrapperClassName?: string,
+  groupClassName?: ?string,
   help?: string,
   helpPrint?: boolean,
   ariaRequired?: boolean,
@@ -80,7 +83,8 @@ type Props = {|
   rows?: number,
   // to use in case of decimal number input
   step?: string,
-  dateTimeInputProps?: Object,
+  dateTimeInputProps?: DateTimeInputProps,
+  timeConstraints?: TimeConstraintsProps,
   medias?: Array<Object>,
   typeForm?: $Values<typeof TYPE_FORM>,
   getOpacity?: (opacity: number) => void,
@@ -91,6 +95,7 @@ type Props = {|
   minLength?: string,
   groupedResponsesEnabled?: boolean,
   responseColorsDisabled?: boolean,
+  isValidDate?: (current: moment) => boolean,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -112,6 +117,7 @@ class Field extends React.Component<Props> {
       label,
       divClassName,
       wrapperClassName,
+      groupClassName,
       labelClassName,
       disabled,
       help,
@@ -143,6 +149,8 @@ class Field extends React.Component<Props> {
       minLength,
       groupedResponsesEnabled,
       responseColorsDisabled,
+      isValidDate,
+      timeConstraints,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -184,6 +192,7 @@ class Field extends React.Component<Props> {
         addonBefore={addonBefore}
         isOtherAllowed={isOtherAllowed}
         wrapperClassName={wrapperClassName || ''}
+        groupClassName={groupClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}
         placeholder={placeholder || null}
@@ -215,6 +224,8 @@ class Field extends React.Component<Props> {
         minLength={minLength}
         groupedResponsesEnabled={groupedResponsesEnabled}
         responseColorsDisabled={responseColorsDisabled}
+        isValidDate={isValidDate}
+        timeConstraints={timeConstraints}
         {...input}>
         {children}
       </Input>

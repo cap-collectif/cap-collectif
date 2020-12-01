@@ -14,6 +14,7 @@ import TestEmailingCampaignMutation from '~/mutations/TestEmailingCampaignMutati
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import { type ModalMailTest_emailingCampaign } from '~relay/ModalMailTest_emailingCampaign.graphql';
+import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style';
 
 type Values = {|
   mailAddressee: string,
@@ -82,7 +83,7 @@ const validate = ({ mailAddressee }: Values) => {
 };
 
 export const ModalMailTest = ({ show, onClose, dispatch, pristine, invalid }: Props) => (
-  <Modal
+  <ModalContainer
     animation={false}
     show={show}
     onHide={onClose}
@@ -115,7 +116,7 @@ export const ModalMailTest = ({ show, onClose, dispatch, pristine, invalid }: Pr
         disabled={pristine || invalid}
       />
     </Modal.Footer>
-  </Modal>
+  </ModalContainer>
 );
 
 const ModalMailTestForm = reduxForm({

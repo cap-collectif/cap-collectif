@@ -12,6 +12,7 @@ const mutation = graphql`
     createMailingList(input: $input) {
       error
       mailingList {
+        id
         name
       }
     }

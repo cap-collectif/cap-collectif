@@ -1,6 +1,7 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
+import colors from '~/utils/colors';
 
 export const PreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   font-weight: 600;
@@ -13,7 +14,7 @@ export const PreviewContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.
   button {
     background-color: #fff;
     color: #000;
-    border: 1px solid #ddd;
+    border: 1px solid ${colors.borderColor};
     padding: 8px;
     ${MAIN_BORDER_RADIUS};
 

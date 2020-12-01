@@ -3,21 +3,58 @@
 exports[`<Header /> should renders correctly 1`] = `
 <Headerstyle__Container>
   <Headerstyle__TitleContainer>
-    <Headerstyle__Title>
-      <h2>
-        Ceci est un titre
-      </h2>
-      <Headerstyle__ButtonEditTitle
-        onClick={[Function]}
-        type="button"
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      overlay={
+        <Tooltip
+          bsClass="tooltip"
+          id="tooltip-title"
+          placement="right"
+        >
+          global.rename
+        </Tooltip>
+      }
+      placement="top"
+      trigger={
+        Array [
+          "hover",
+          "focus",
+        ]
+      }
+    >
+      <div
+        className="input-title"
       >
-        <Icon
-          color="#000"
-          name="pen"
-          size={16}
+        <Field
+          component={[Function]}
+          disableValidation={true}
+          disabled={false}
+          id="title"
+          name="title"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          style={
+            Object {
+              "width": "100px",
+            }
+          }
+          type="text"
         />
-      </Headerstyle__ButtonEditTitle>
-    </Headerstyle__Title>
+        <div
+          className="wrapper-title"
+          style={
+            Object {
+              "maxWidth": "1024px",
+              "visibility": "visible",
+            }
+          }
+        >
+          <span>
+            Ceci est un titre
+          </span>
+        </div>
+      </div>
+    </OverlayTrigger>
     <Headerstyle__ButtonSendContainer>
       <Headerstyle__ButtonSendMail
         disabled={false}
@@ -62,11 +99,18 @@ exports[`<Header /> should renders correctly 1`] = `
 exports[`<Header /> should renders correctly when disabled 1`] = `
 <Headerstyle__Container>
   <Headerstyle__TitleContainer>
-    <Headerstyle__Title>
-      <h2>
+    <div
+      className="wrapper-title not-editable"
+      style={
+        Object {
+          "maxWidth": "1024px",
+        }
+      }
+    >
+      <span>
         Ceci est un titre
-      </h2>
-    </Headerstyle__Title>
+      </span>
+    </div>
     <LabelState
       color="#54BAA6"
       label="global-sent"
@@ -107,21 +151,58 @@ exports[`<Header /> should renders correctly when disabled 1`] = `
 exports[`<Header /> should renders correctly when error 1`] = `
 <Headerstyle__Container>
   <Headerstyle__TitleContainer>
-    <Headerstyle__Title>
-      <h2>
-        Ceci est un titre
-      </h2>
-      <Headerstyle__ButtonEditTitle
-        onClick={[Function]}
-        type="button"
+    <OverlayTrigger
+      defaultOverlayShown={false}
+      overlay={
+        <Tooltip
+          bsClass="tooltip"
+          id="tooltip-title"
+          placement="right"
+        >
+          global.rename
+        </Tooltip>
+      }
+      placement="top"
+      trigger={
+        Array [
+          "hover",
+          "focus",
+        ]
+      }
+    >
+      <div
+        className="input-title"
       >
-        <Icon
-          color="#000"
-          name="pen"
-          size={16}
+        <Field
+          component={[Function]}
+          disableValidation={false}
+          disabled={false}
+          id="title"
+          name="title"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          style={
+            Object {
+              "width": "100px",
+            }
+          }
+          type="text"
         />
-      </Headerstyle__ButtonEditTitle>
-    </Headerstyle__Title>
+        <div
+          className="wrapper-title"
+          style={
+            Object {
+              "maxWidth": "1024px",
+              "visibility": "visible",
+            }
+          }
+        >
+          <span>
+            Ceci est un titre
+          </span>
+        </div>
+      </div>
+    </OverlayTrigger>
     <Headerstyle__ButtonSendContainer>
       <Headerstyle__ButtonSendMail
         disabled={false}

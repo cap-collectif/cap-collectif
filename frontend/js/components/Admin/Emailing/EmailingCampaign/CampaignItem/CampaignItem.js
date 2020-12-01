@@ -6,6 +6,8 @@ import { useIntl } from 'react-intl';
 import { Container, Circle, InfoRow } from './CampaignItem.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { type CampaignItem_campaign } from '~relay/CampaignItem_campaign.graphql';
+import colors from '~/utils/colors';
+import { getWordingMailingInternal } from '~/components/Admin/Emailing/MailParameter/Parameter';
 
 type Props = {|
   campaign: CampaignItem_campaign,
@@ -33,7 +35,7 @@ const STATUS_CAMPAIGN = {
 };
 
 export const CampaignItem = ({ campaign, selected }: Props) => {
-  const { id, name, mailingList, sendAt, status } = campaign;
+  const { id, name, mailingList, sendAt, status, mailingInternal } = campaign;
   const intl = useIntl();
 
   return (
@@ -70,10 +72,11 @@ export const CampaignItem = ({ campaign, selected }: Props) => {
         )}
       </InfoRow>
 
-      {mailingList && (
+      {(mailingList || mailingInternal) && (
         <p>
-          <Icon name={ICON_NAME.newUser} size={15} color="#6C757D" />
-          {mailingList.name}
+          <Icon name={ICON_NAME.newUser} size={15} color={colors.secondaryGray} />
+          {mailingList && mailingList.name}
+          {mailingInternal && getWordingMailingInternal(mailingInternal, intl)}
         </p>
       )}
     </Container>
@@ -90,6 +93,7 @@ export default createFragmentContainer(CampaignItem, {
       mailingList {
         name
       }
+      mailingInternal
     }
   `,
 });

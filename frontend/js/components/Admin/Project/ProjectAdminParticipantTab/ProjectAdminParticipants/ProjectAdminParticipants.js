@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
+import { useDisclosure } from '@liinkiing/react-hooks';
 import { connect } from 'react-redux';
 import PickableList, { usePickableList } from '~ui/List/PickableList';
 import DropdownSelect from '~ui/DropdownSelect';
@@ -170,7 +171,7 @@ export const ProjectAdminParticipants = ({ project, relay, hasFeatureEmail }: Pr
   const intl = useIntl();
   const hasParticipants = project.participants?.totalCount > 0;
   const hasSelectedFilters = getDifferenceFilters(parameters.filters);
-  const [isModalCreateMailingListOpen, showModalCreateMailingList] = React.useState<boolean>(false);
+  const { isOpen, onOpen, onClose } = useDisclosure(false);
 
   return (
     <AnalysisPickableListContainer>
@@ -230,7 +231,7 @@ export const ProjectAdminParticipants = ({ project, relay, hasFeatureEmail }: Pr
           isSelectable={hasFeatureEmail}>
           <DashboardHeader
             project={project}
-            showModalCreateMailingList={showModalCreateMailingList}
+            showModalCreateMailingList={onOpen}
             hasFeatureEmail={hasFeatureEmail}
           />
         </AnalysisProposalListHeaderContainer>
@@ -256,8 +257,8 @@ export const ProjectAdminParticipants = ({ project, relay, hasFeatureEmail }: Pr
       </PickableList>
 
       <ModalCreateMailingList
-        show={isModalCreateMailingListOpen}
-        onClose={() => showModalCreateMailingList(false)}
+        show={isOpen}
+        onClose={onClose}
         members={selectedRows}
         project={project}
       />

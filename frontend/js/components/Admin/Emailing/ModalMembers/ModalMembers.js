@@ -4,6 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import { MembersContainer } from './ModalMembers.style';
 import { type ModalMembers_mailingList } from '~relay/ModalMembers_mailingList.graphql';
+import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style';
 
 type Props = {|
   onClose: () => void,
@@ -17,7 +18,7 @@ export const ModalMembers = ({ show, onClose, mailingList }: Props) => {
   const { name, users } = mailingList;
 
   return (
-    <Modal
+    <ModalContainer
       animation={false}
       show={show}
       onHide={onClose}
@@ -37,7 +38,7 @@ export const ModalMembers = ({ show, onClose, mailingList }: Props) => {
             ))}
         </MembersContainer>
       </Modal.Body>
-    </Modal>
+    </ModalContainer>
   );
 };
 

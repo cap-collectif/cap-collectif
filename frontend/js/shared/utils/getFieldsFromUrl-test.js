@@ -1,9 +1,8 @@
 // @flow
 /* eslint-env jest */
+import { clearQueryUrl, getFieldsFromUrl, updateQueryUrl } from './getFieldsFromUrl';
 
-import { clearQueryUrl, getFieldsFromUrl, updateQueryUrl } from '~/shared/utils/analysis-filters';
-
-describe('shared/utils/analysis-filters', () => {
+describe('shared/utils/getFieldsFromUrl', () => {
   beforeAll(() => {
     delete global.window.history;
     global.window.history = {

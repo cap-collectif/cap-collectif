@@ -23,6 +23,7 @@ exports[`<DateTime /> should render correctly 1`] = `
       "required": false,
     }
   }
+  isValidDate={[Function]}
   onChange={[Function]}
   timeFormat="HH:mm:ss"
 />

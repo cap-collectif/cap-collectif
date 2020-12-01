@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import ReactPlaceholder from 'react-placeholder';
 import { QueryRenderer, graphql } from 'react-relay';
-import environment, { graphqlError } from '~/createRelayEnvironment';
+import environment from '~/createRelayEnvironment';
 import type {
   EmailingListPageQueryResponse,
   EmailingListPageQueryVariables,
 } from '~relay/EmailingListPageQuery.graphql';
-import Loader from '~/components/Ui/FeedbacksIndicators/Loader';
 import { Container, Header, Content } from './EmailingListPage.style';
 import { useDashboardMailingListContext } from './DashboardMailingList/DashboardMailingList.context';
 import PickableList from '~ui/List/PickableList';
@@ -15,16 +15,16 @@ import DashboardMailingList, {
   MAILING_LIST_PAGINATION,
 } from '~/components/Admin/Emailing/EmailingList/DashboardMailingList/DashboardMailingList';
 import type { DashboardParameters } from '~/components/Admin/Emailing/EmailingList/DashboardMailingList/DashboardMailingList.reducer';
+import DashboardMailingListPlaceholder from './DashboardMailingListPlaceholder/DashboardMailingListPlaceholder';
 
 const listMailingList = ({
   error,
   props,
+  retry,
 }: {
   ...ReactRelayReadyState,
   props: ?EmailingListPageQueryResponse,
 }) => {
-  if (error) return graphqlError;
-
   if (props) {
     return (
       <PickableList.Provider>
@@ -33,7 +33,12 @@ const listMailingList = ({
     );
   }
 
-  return <Loader />;
+  return (
+    <ReactPlaceholder
+      ready={false}
+      customPlaceholder={<DashboardMailingListPlaceholder hasError={!!error} fetchData={retry} />}
+    />
+  );
 };
 
 export const createQueryVariables = (
@@ -45,7 +50,13 @@ export const createQueryVariables = (
 });
 
 export const EmailingListPage = () => {
-  const { parameters } = useDashboardMailingListContext();
+  const { parameters, dispatch } = useDashboardMailingListContext();
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'INIT_FILTERS_FROM_URL',
+    });
+  }, [dispatch]);
 
   return (
     <Container className="emailing-mailingList-page">

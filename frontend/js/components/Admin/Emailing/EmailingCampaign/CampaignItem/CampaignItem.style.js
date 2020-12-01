@@ -8,7 +8,7 @@ export const Container: StyledComponent<
   {},
   typeof PickableList.Row,
 > = styled(PickableList.Row)`
-  background-color: ${props => (props.selected ? '#ECF5FF' : '#fff')};
+  background-color: ${props => (props.selected ? colors.paleGrey : '#fff')};
 
   & > .pickableList-row-content {
     display: flex;
@@ -34,7 +34,7 @@ export const Container: StyledComponent<
   }
 `;
 
-export const InfoRow: StyledComponent<{}, {}, HTMLParagraphElement> = styled.p`
+export const InfoRow: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,7 +48,7 @@ export const InfoRow: StyledComponent<{}, {}, HTMLParagraphElement> = styled.p`
   }
 
   .label-status {
-    color: #afafaf;
+    color: ${colors.silverChalice};
   }
 
   .separator {

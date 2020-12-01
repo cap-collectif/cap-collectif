@@ -3,8 +3,10 @@ import * as React from 'react';
 import { Field, getFormSyncErrors, isSubmitting } from 'redux-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { useResize } from '@liinkiing/react-hooks';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { NavLink } from 'react-router-dom';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import component from '~/components/Form/Field';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import colors from '~/utils/colors';
@@ -17,13 +19,11 @@ import {
 import {
   Container,
   ButtonCancelPlanned,
-  ButtonEditTitle,
   ButtonSendContainer,
   ButtonSendMail,
   ErrorContainer,
   LabelPlannedContainer,
   NavContainer,
-  Title,
   TitleContainer,
 } from './Header.style';
 import type { Header_emailingCampaign } from '~relay/Header_emailingCampaign.graphql';
@@ -31,7 +31,7 @@ import type { GlobalState } from '~/types';
 
 type Error = {|
   id: string,
-  values: { fieldName: React.Node },
+  values?: { fieldName: React.Node },
 |};
 
 type ReduxProps = {|
@@ -60,32 +60,70 @@ export const Header = ({
   submitting,
 }: Props) => {
   const intl = useIntl();
-  const [isEditMode, setEditMode] = React.useState<boolean>(false);
   const { status } = emailingCampaign;
+  const { width: widthWindow } = useResize();
+
+  const [widthTitle, setWidthTitle] = React.useState<number>(100);
+  const [maxWidthTitle, setMaxWidthTitle] = React.useState<number>(widthWindow);
+  const [titleFocus, setTitleFocus] = React.useState<boolean>(false);
+
+  const refTitle = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    if (refTitle.current && title) {
+      // Adapt input width to content width
+      setWidthTitle(refTitle?.current?.offsetWidth || 100);
+    }
+
+    // This ratio keep the same interface for all kind of width of screen
+    const MAX_WIDTH_TITLE = widthWindow * 0.7;
+    setMaxWidthTitle(MAX_WIDTH_TITLE);
+  }, [title, widthWindow, refTitle]);
 
   return (
     <Container>
       <TitleContainer>
-        <Title>
-          {isEditMode ? (
-            <Field
-              type="text"
-              id="title"
-              name="title"
-              component={component}
-              disabled={disabled}
-              disableValidation={!showError}
-            />
-          ) : (
-            <h2>{title}</h2>
-          )}
+        {!disabled ? (
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip id="tooltip-title">{intl.formatMessage({ id: 'global.rename' })}</Tooltip>
+            }>
+            <div className="input-title">
+              <Field
+                type="text"
+                id="title"
+                name="title"
+                component={component}
+                disabled={disabled}
+                disableValidation={!showError}
+                style={{
+                  width: widthTitle <= maxWidthTitle ? `${widthTitle}px` : `${maxWidthTitle}px`,
+                }}
+                onFocus={() => setTitleFocus(true)}
+                onBlur={() => setTitleFocus(false)}
+              />
 
-          {!disabled && (
-            <ButtonEditTitle type="button" onClick={() => setEditMode(!isEditMode)}>
-              <Icon name={isEditMode ? ICON_NAME.check : ICON_NAME.pen} size={16} color="#000" />
-            </ButtonEditTitle>
-          )}
-        </Title>
+              <div
+                className="wrapper-title"
+                ref={refTitle}
+                style={{
+                  maxWidth: `${maxWidthTitle}px`,
+                  visibility: !titleFocus ? 'visible' : 'hidden',
+                }}>
+                <span>{title}</span>
+              </div>
+            </div>
+          </OverlayTrigger>
+        ) : (
+          <div
+            className="wrapper-title not-editable"
+            style={{
+              maxWidth: `${maxWidthTitle}px`,
+            }}>
+            <span>{title}</span>
+          </div>
+        )}
 
         {status === 'DRAFT' && (
           <ButtonSendContainer>
@@ -104,10 +142,15 @@ export const Header = ({
                   {((Object.values(errors): any): Error[]).map((error, idx) => (
                     <p key={idx}>
                       <span>{`${idx + 1}. `}</span>
-                      <FormattedMessage
-                        id={error.id}
-                        values={{ fieldName: error.values.fieldName }}
-                      />
+
+                      {error.values ? (
+                        <FormattedMessage
+                          id={error.id}
+                          values={{ fieldName: error.values.fieldName }}
+                        />
+                      ) : (
+                        <FormattedMessage id={error.id} />
+                      )}
                     </p>
                   ))}
                 </div>
@@ -157,7 +200,7 @@ export const Header = ({
 };
 
 const mapStateToProps = (state: GlobalState) => ({
-  title: selectorForm(state, 'title'),
+  title: selectorForm(state, 'title') || '',
   errors: getFormSyncErrors(formName)(state),
   submitting: isSubmitting(formName)(state),
 });
