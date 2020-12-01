@@ -354,3 +354,25 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: Avis sur la faisabilité technique, juridique et financière du projet
     required: false
     type: 8 # button
+  # FOOD PROJECT
+  multiplequestionFoodGrape:
+    id: 3930
+    title: T'es plus raisin noir ou vert ?
+    required: true
+    type: 3 # radio
+  multiplequestionFoodMcdoBk:
+    id: 3931
+    title: Team mcdo ou BK ?
+    required: true
+    type: 4 # select
+  multiplequestionFoodNoIdea:
+    id: 3932
+    title: Coches ce que tu veux
+    required: true
+    type: 5 # checkbox
+  multiplequestionFoodApple:
+    id: 3933
+    title: Quel type de pomme es-tu ?
+    required: true
+    type: 8 # button
+  # END FOOD PROJECT

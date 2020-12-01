@@ -74,29 +74,6 @@ Object {
         },
       },
       Object {
-        "cursor": "YToyOntpOjA7aToxNTc1Mjc1NDAwMDAwO2k6MTtzOjExOiJ1c2VyVmluY2VudCI7fQ==",
-        "node": Object {
-          "biography": null,
-          "consentInternalCommunication": null,
-          "createdAt": "2019-12-02 09:30:00",
-          "deletedAccountAt": null,
-          "email": null,
-          "enabled": true,
-          "facebookUrl": null,
-          "id": "VXNlcjp1c2VyVmluY2VudA==",
-          "linkedInUrl": null,
-          "responses": Object {
-            "edges": Array [],
-          },
-          "twitterUrl": null,
-          "updatedAt": null,
-          "url": "https://capco.test/profile/vinc",
-          "userType": null,
-          "username": "Vinc",
-          "websiteUrl": null,
-        },
-      },
-      Object {
         "cursor": "YToyOntpOjA7aToxNTcyODU2MjAwMDAwO2k6MTtzOjExOiJ1c2VyTWlja2FlbCI7fQ==",
         "node": Object {
           "biography": "La raclette c'est bon.",
@@ -2486,14 +2463,39 @@ Object {
           "websiteUrl": null,
         },
       },
+      Object {
+        "cursor": "YToyOntpOjA7aToxNDgzMjMxNzQwMDAwO2k6MTtzOjc6InVzZXIxMDkiO30=",
+        "node": Object {
+          "biography": null,
+          "consentInternalCommunication": null,
+          "createdAt": "2017-01-01 01:49:00",
+          "deletedAccountAt": null,
+          "email": null,
+          "enabled": true,
+          "facebookUrl": null,
+          "id": "VXNlcjp1c2VyMTA5",
+          "linkedInUrl": null,
+          "responses": Object {
+            "edges": Array [],
+          },
+          "twitterUrl": null,
+          "updatedAt": null,
+          "url": "https://capco.test/profile/user109",
+          "userType": Object {
+            "name": "Citoyen",
+          },
+          "username": "user109",
+          "websiteUrl": null,
+        },
+      },
     ],
     "pageInfo": Object {
-      "endCursor": "YToyOntpOjA7aToxNDgzMjMxODAwMDAwO2k6MTtzOjc6InVzZXIxMTAiO30=",
+      "endCursor": "YToyOntpOjA7aToxNDgzMjMxNzQwMDAwO2k6MTtzOjc6InVzZXIxMDkiO30=",
       "hasNextPage": true,
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNTgzODI5MDAwMDAwO2k6MTtzOjI2OiJ1c2VyQ29ubmVjdGVkRnJhbmNlQ29ubmVjdCI7fQ==",
     },
-    "totalCount": 227,
+    "totalCount": 226,
   },
 }
 `;
@@ -2523,7 +2525,7 @@ Object {
       Object {
         "node": Object {
           "_id": "userVincent",
-          "isSuperAdmin": false,
+          "isSuperAdmin": true,
         },
       },
       Object {
@@ -2561,14 +2563,14 @@ Object {
       },
       Object {
         "node": Object {
-          "_id": "userVincent",
-          "createdAt": "2019-12-02 09:30:00",
+          "_id": "userMickael",
+          "createdAt": "2019-11-04 09:30:00",
         },
       },
       Object {
         "node": Object {
-          "_id": "userMickael",
-          "createdAt": "2019-11-04 09:30:00",
+          "_id": "userAgui",
+          "createdAt": "2019-09-09 09:30:00",
         },
       },
     ],
@@ -2712,7 +2714,7 @@ Object {
       "hasPreviousPage": false,
       "startCursor": "YToyOntpOjA7aToxNDgzMjM0ODYwMDAwO2k6MTtzOjc6InVzZXIxNjEiO30=",
     },
-    "totalCount": 227,
+    "totalCount": 226,
   },
 }
 `;

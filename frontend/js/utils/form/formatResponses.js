@@ -19,11 +19,11 @@ export type FormattedResponse = {|
     +type: MultipleChoiceQuestionValidationRulesTypes,
     +number: number,
   |},
-  constraintes?: ?{
+  constraintes?: ?{|
     +isRangeBetween: boolean,
     +rangeMin: ?number,
     +rangeMax: ?number,
-  },
+  |},
 |};
 
 const formatResponses = (
@@ -84,7 +84,7 @@ const formatResponses = (
                 rangeMin,
                 rangeMax,
               }
-            : undefined,
+            : null,
         });
       } else {
         formattedResponses.push({

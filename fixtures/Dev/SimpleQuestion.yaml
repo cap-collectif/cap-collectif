@@ -431,3 +431,25 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
         required: true
         private: false
         type: 13 # majority
+    # FOOD PROJECT
+    simplequestionFood1:
+        id: 1387
+        title: Ton plat favoris ?
+        required: true
+        type: 0 # text
+    simplequestionFood2:
+        id: 1388
+        title: Ton dessert favoris ?
+        required: true
+        type: 1 # textarea
+    simplequestionFood3:
+        id: 1389
+        title: Ton entrée favorite ?
+        required: true
+        type: 2 # editor
+    simplequestionFood4:
+        id: 1390
+        title: Ton record de chamallow dans la bouche ?
+        required: true
+        type: 9 # number
+    # END FOOD PROJECT

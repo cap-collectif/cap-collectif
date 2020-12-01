@@ -1,6 +1,6 @@
 // @flow
 import formatResponses from '~/utils/form/formatResponses';
-import { allTypeQuestions, allTypeResponses } from '~/utils/form/test/mocks';
+import { allTypeQuestions, allTypeResponses } from './mocks';
 
 const result = [
   {
@@ -11,6 +11,7 @@ const result = [
     type: 'select',
     validationRule: null,
     value: 'Paris',
+    constraintes: null,
   },
   {
     idQuestion: 'UXVlc3Rpb246NDk4',
@@ -19,6 +20,8 @@ const result = [
     hidden: false,
     type: 'text',
     value: 'Bien',
+    constraintes: null,
+    validationRule: undefined,
   },
   {
     idQuestion: 'UXVlc3Rpb246NDk3',
@@ -27,6 +30,8 @@ const result = [
     hidden: false,
     type: 'textarea',
     value: 'Blanc',
+    constraintes: null,
+    validationRule: undefined,
   },
   {
     idQuestion: 'UXVlc3Rpb246NTAw',
@@ -35,6 +40,8 @@ const result = [
     hidden: false,
     type: 'editor',
     value: '<p>Louveteau</p>',
+    constraintes: null,
+    validationRule: undefined,
   },
   {
     idQuestion: 'UXVlc3Rpb246NDk5',
@@ -43,12 +50,16 @@ const result = [
     hidden: false,
     type: 'number',
     value: '10',
+    constraintes: null,
+    validationRule: undefined,
   },
   {
     idQuestion: 'UXVlc3Rpb246NTAx',
     otherValue: null,
     required: false,
     hidden: false,
+    constraintes: null,
+    validationRule: undefined,
     type: 'medias',
     value: [
       {
@@ -68,6 +79,7 @@ const result = [
     type: 'button',
     validationRule: null,
     value: 'Je suis vert',
+    constraintes: null,
   },
   {
     idQuestion: 'UXVlc3Rpb246NTAz',
@@ -77,6 +89,7 @@ const result = [
     type: 'radio',
     validationRule: null,
     value: ['Dark Vador'],
+    constraintes: null,
   },
   {
     idQuestion: 'UXVlc3Rpb246NTA0',
@@ -86,6 +99,7 @@ const result = [
     type: 'checkbox',
     validationRule: null,
     value: ['Tennis', 'Football'],
+    constraintes: null,
   },
   {
     idQuestion: 'UXVlc3Rpb246NTA1',
@@ -95,6 +109,17 @@ const result = [
     type: 'ranking',
     validationRule: null,
     value: ['Pomme', 'Poire', 'Fraise'],
+    constraintes: null,
+  },
+  {
+    idQuestion: 'UXVlc3Rpb246NTA2',
+    otherValue: null,
+    required: false,
+    hidden: false,
+    type: 'majority',
+    validationRule: undefined,
+    value: '2',
+    constraintes: null,
   },
 ];
 

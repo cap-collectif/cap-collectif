@@ -897,3 +897,72 @@ Capco\AppBundle\Entity\QuestionChoice:
         title: 'Négatif'
         position: 2
         question: '@multiplequestionEvalIdf6'
+    foodRaisinQuestionChoice1:
+        id: 'foodRaisinQuestionChoice1'
+        title: 'Noir'
+        position: 1
+        question: '@multiplequestionFoodGrape'
+    foodRaisinQuestionChoice2:
+        id: 'foodRaisinQuestionChoice2'
+        title: 'Vert'
+        position: 2
+        question: '@multiplequestionFoodGrape'
+    foodMcdoBkQuestionChoice1:
+        id: 'foodMcdoBkQuestionChoice1'
+        title: 'Mcdo'
+        position: 1
+        question: '@multiplequestionFoodMcdoBk'
+    foodMcdoBkQuestionChoice2:
+        id: 'foodMcdoBkQuestionChoice2'
+        title: 'Bk'
+        position: 2
+        question: '@multiplequestionFoodMcdoBk'
+    foodMcdoBkQuestionChoice3:
+        id: 'foodMcdoBkQuestionChoice3'
+        title: 'Kfc'
+        position: 3
+        question: '@multiplequestionFoodMcdoBk'
+    foodNoIdeaQuestionChoice1:
+        id: 'foodNoIdeaQuestionChoice1'
+        title: 'Bk'
+        position: 1
+        question: '@multiplequestionFoodNoIdea'
+    foodNoIdeaQuestionChoice2:
+        id: 'foodNoIdeaQuestionChoice2'
+        title: 'Kfc'
+        position: 2
+        question: '@multiplequestionFoodNoIdea'
+    foodNoIdeaQuestionChoice3:
+        id: 'foodNoIdeaQuestionChoice3'
+        title: 'Mcdo'
+        position: 3
+        question: '@multiplequestionFoodNoIdea'
+    foodNoIdeaQuestionChoice4:
+        id: 'foodNoIdeaQuestionChoice4'
+        title: 'Flunch'
+        position: 4
+        question: '@multiplequestionFoodNoIdea'
+    foodAppleQuestionChoice1:
+        id: 'foodAppleQuestionChoice1'
+        title: 'Gala'
+        color: '#FF4D00'
+        position: 1
+        question: '@multiplequestionFoodApple'
+    foodAppleQuestionChoice2:
+        id: 'foodAppleQuestionChoice2'
+        title: 'Golden'
+        color: '#EDDB00'
+        position: 2
+        question: '@multiplequestionFoodApple'
+    foodAppleQuestionChoice3:
+        id: 'foodAppleQuestionChoice3'
+        title: 'Granny smith'
+        color: '#3AD400'
+        position: 3
+        question: '@multiplequestionFoodApple'
+    foodAppleQuestionChoice4:
+        id: 'foodAppleQuestionChoice4'
+        title: 'Pink lady'
+        color: '#FF7400'
+        position: 4
+        question: '@multiplequestionFoodApple'

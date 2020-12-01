@@ -17,6 +17,7 @@ import { asyncPasswordValidate } from '../UserPasswordComplexityUtils';
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql';
 import validateResponses from '~/utils/form/validateResponses';
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues';
+import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type';
 import { REGEX_USERNAME } from '~/constants/FormConstants';
 
 type Props = {|
@@ -39,10 +40,7 @@ type Props = {|
   query: RegistrationForm_query,
   email?: string,
   invitationToken?: string,
-  questions: Array<{
-    id: string,
-    type: string,
-  }>,
+  questions: Questions,
   locale: string,
 |};
 
@@ -53,8 +51,8 @@ type FormValues = {
   plainPassword: string,
   charte: string,
   captcha: boolean,
-  responses: Array<Object>,
-  questions: $ReadOnlyArray<Object>,
+  responses: ResponsesInReduxForm,
+  questions: Questions,
 };
 
 const memoizeAvailableQuestions: any = memoize(() => {});

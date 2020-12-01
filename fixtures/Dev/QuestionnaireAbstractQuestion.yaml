@@ -651,3 +651,35 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@questionnaire1'
         question: '@majorityDecisionWeeb'
         position: 10
+    qaqFood1:
+        questionnaire: '@questionnaireFood'
+        question: '@simplequestionFood1'
+        position: 1
+    qaqFood2:
+        questionnaire: '@questionnaireFood'
+        question: '@simplequestionFood2'
+        position: 2
+    qaqFood3:
+        questionnaire: '@questionnaireFood'
+        question: '@simplequestionFood3'
+        position: 3
+    qaqFood4:
+        questionnaire: '@questionnaireFood'
+        question: '@simplequestionFood4'
+        position: 4
+    qaqFood5:
+        questionnaire: '@questionnaireFood'
+        question: '@multiplequestionFoodGrape'
+        position: 5
+    qaqFood6:
+        questionnaire: '@questionnaireFood'
+        question: '@multiplequestionFoodMcdoBk'
+        position: 6
+    qaqFood7:
+        questionnaire: '@questionnaireFood'
+        question: '@multiplequestionFoodNoIdea'
+        position: 7
+    qaqFood8:
+        questionnaire: '@questionnaireFood'
+        question: '@multiplequestionFoodApple'
+        position: 8

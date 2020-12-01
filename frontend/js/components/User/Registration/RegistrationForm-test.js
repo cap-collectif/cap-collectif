@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { intlMock, formMock, $refType, $fragmentRefs } from '~/mocks';
 import { RegistrationForm } from './RegistrationForm';
-import { simple as questions } from '~/utils/form/test/mocks';
+import { simple as questions } from '~/utils/form/mocks';
 
 export const basicProps = {
   ...formMock,

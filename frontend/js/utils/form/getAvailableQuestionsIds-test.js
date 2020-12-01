@@ -8,7 +8,7 @@ import {
   jumpThenAlwaysJump,
   manySimpleAndManyJump,
   manyJumpAndOneAlwaysJump,
-} from '~/utils/form/test/mocks';
+} from './mocks';
 
 // Q = Question
 

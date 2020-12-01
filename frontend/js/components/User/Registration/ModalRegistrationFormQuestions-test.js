@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { intlMock, formMock, $refType } from '~/mocks';
 import { ModalRegistrationFormQuestions } from './ModalRegistrationFormQuestions';
-import { simple as questions } from '~/utils/form/test/mocks';
+import { simple as questions } from '~/utils/form/mocks';
 
 describe('<ModalRegistrationFormQuestions/>', () => {
   const props = {

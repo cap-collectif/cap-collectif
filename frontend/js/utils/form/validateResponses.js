@@ -67,10 +67,6 @@ export const validateResponses = (
       }
     }
 
-    if (type === 'number' && value && typeof value === 'string' && !checkOnlyNumbers(value)) {
-      return { idQuestion, value: `please-enter-a-number` };
-    }
-
     if (type === 'majority') {
       const numberValue = Number(value);
       if (numberValue < 0 || numberValue > 5) {
@@ -78,29 +74,26 @@ export const validateResponses = (
       }
     }
 
-
-    if (
-      type === 'number' &&
-      value &&
-      typeof value === 'string' &&
-      checkOnlyNumbers(value) &&
-      constraintes &&
-      constraintes.isRangeBetween &&
-      async
-    ) {
-      if (
-        constraintes.rangeMin !== null &&
-        typeof constraintes.rangeMin !== 'undefined' &&
-        parseInt(value, 10) < parseInt(constraintes.rangeMin, 10)
-      ) {
-        return { idQuestion, value: `value-lower` };
+    if (type === 'number' && value && typeof value === 'string') {
+      if (!checkOnlyNumbers(value)) {
+        return { idQuestion, value: `please-enter-a-number` };
       }
-      if (
-        constraintes.rangeMax !== null &&
-        typeof constraintes.rangeMax !== 'undefined' &&
-        parseInt(value, 10) > parseInt(constraintes.rangeMax, 10)
-      ) {
-        return { idQuestion, value: `value-higher` };
+
+      if (checkOnlyNumbers(value) && constraintes?.isRangeBetween && async) {
+        if (
+          constraintes.rangeMin !== null &&
+          typeof constraintes.rangeMin !== 'undefined' &&
+          parseInt(value, 10) < parseInt(constraintes.rangeMin, 10)
+        ) {
+          return { idQuestion, value: `value-lower` };
+        }
+        if (
+          constraintes.rangeMax !== null &&
+          typeof constraintes.rangeMax !== 'undefined' &&
+          parseInt(value, 10) > parseInt(constraintes.rangeMax, 10)
+        ) {
+          return { idQuestion, value: `value-higher` };
+        }
       }
     }
 
@@ -147,6 +140,10 @@ export const validateResponses = (
     }
   });
 
+  /**
+   * undefined is necessary here to display an error to the right question in order of the form
+   * so an undefined correspond to one question with no error
+   */
   const responsesErrorAvailableQuestions: ResponsesError = responsesError.map(error =>
     error && availableQuestionIds.includes(error.idQuestion) ? { value: error.value } : undefined,
   );

@@ -53,11 +53,9 @@ export type Fields = {|
 |};
 
 export type ConditionalJumpCondition = {|
-  +__typename?: string,
   +id: string,
   +operator: LogicJumpConditionOperator,
   +question: {|
-    +__typename?: string,
     +id: string,
     +title: string,
     +type: QuestionType,
@@ -71,11 +69,9 @@ export type ConditionalJumpCondition = {|
 export type Jump = {|
   +id: string,
   +origin: {|
-    +__typename?: string,
     +id: string,
   |},
   +destination: {|
-    +__typename?: string,
     +id: string,
     +title: string,
     +number: number,
@@ -98,7 +94,7 @@ export type QuestionChoice = {|
 // responsesHelper_question without $refType
 export type Question = {|
   +__typename: string,
-  +hidden?: boolean,
+  +hidden: boolean,
   +id: string,
   +title: string,
   +number: number,
@@ -108,7 +104,6 @@ export type Question = {|
   +required: boolean,
   +helpText: ?string,
   +alwaysJumpDestinationQuestion: ?{|
-    +__typename?: string,
     +id: string,
     +title: string,
     +number: number,
@@ -122,10 +117,10 @@ export type Question = {|
     +type: MultipleChoiceQuestionValidationRulesTypes,
     +number: number,
   |},
-  +choices?: ?{|
-    +pageInfo: {
+  +choices?: {|
+    +pageInfo: {|
       +hasNextPage: boolean,
-    },
+    |},
     +totalCount: number,
     +edges: ?$ReadOnlyArray<?{|
       +node: ?QuestionChoice,
@@ -137,6 +132,7 @@ export type Question = {|
   +groupedResponsesEnabled?: boolean,
   +responseColorsDisabled?: boolean,
 |};
+
 export type Questions = $ReadOnlyArray<Question>;
 
 export type ResponsesFromAPI = $ReadOnlyArray<?{|

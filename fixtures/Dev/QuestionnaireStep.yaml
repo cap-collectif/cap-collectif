@@ -257,3 +257,11 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
     body: Test vote majoritaire
     startAt: <(new \DateTime('2019-09-27'))>
     endAt: <(new \DateTime('2057-09-01'))>
+  questionnairestepFood1:
+    id: questionnairestepFood1
+    title: Questionnaire food
+    label: Questionnaire avec tout
+    body: Bienvenue !
+    startAt: <(new \DateTime('2020-09-11'))>
+    endAt: <(new \DateTime('2024-09-27'))>
+    repliesCount: 1

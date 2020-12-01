@@ -1,7 +1,12 @@
 // @flow
 import validateResponses from '~/utils/form/validateResponses';
 import getAvailableQuestionsIds from '~/utils/form/getAvailableQuestionsIds';
-import { allTypeQuestions, allTypeResponses } from '~/utils/form/test/mocks';
+import {
+  allTypeQuestions,
+  allTypeResponses,
+  allTypeQuestionsWithRule,
+  allTypeResponsesWithError,
+} from './mocks';
 import { intlMock } from '~/mocks';
 
 const allRequiredQuestions = allTypeQuestions.map(q => ({ ...q, required: true }));
@@ -9,6 +14,7 @@ const allNotRequiredQuestions = allTypeQuestions.map(q => ({ ...q, required: fal
 
 const noErrorResponses = {
   responses: [
+    undefined,
     undefined,
     undefined,
     undefined,
@@ -40,6 +46,57 @@ const errorResponses = {
     undefined,
     undefined,
     undefined,
+    undefined,
+  ],
+};
+
+const allTypeErrorResponses = {
+  responses: [
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
+    {
+      value: 'please-enter-a-number',
+    },
+    {
+      value: 'reply.constraints.choices_equal',
+    },
+    {
+      value: 'reply.constraints.choices_min',
+    },
+    {
+      value: 'reply.constraints.choices_max',
+    },
+    {
+      value: 'reply.constraints.field_mandatory',
+    },
   ],
 };
 
@@ -88,5 +145,21 @@ describe('validateResponses', () => {
       availableQuestionsIds,
     );
     expect(errors).toEqual(errorResponses);
+  });
+
+  it('should render all type error', () => {
+    const availableQuestionsIds = getAvailableQuestionsIds(
+      allTypeQuestionsWithRule,
+      allTypeResponsesWithError,
+    );
+    const errors = validateResponses(
+      allTypeQuestionsWithRule,
+      allTypeResponsesWithError,
+      'reply',
+      intlMock,
+      false,
+      availableQuestionsIds,
+    );
+    expect(errors).toEqual(allTypeErrorResponses);
   });
 });

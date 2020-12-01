@@ -1,8 +1,8 @@
 // @flow
-import type { QuestionTypeValue } from '~relay/ProposalPageEvaluation_proposal.graphql';
 import invariant from '~/utils/invariant';
+import type { QuestionType } from '~/components/Form/Form.type';
 
-export const getValueFromResponse = (questionType: QuestionTypeValue, responseValue: string) => {
+export const getValueFromResponse = (questionType: QuestionType, responseValue: string) => {
   // For some questions type we need to parse the JSON of previous value
   try {
     if (questionType === 'select') {
@@ -20,7 +20,7 @@ export const getValueFromResponse = (questionType: QuestionTypeValue, responseVa
     if (questionType === 'button') {
       return JSON.parse(responseValue).labels[0];
     }
-    if (questionType === 'radio' || questionType === 'checkbox' || questionType === 'number') {
+    if (questionType === 'radio' || questionType === 'checkbox') {
       return JSON.parse(responseValue);
     }
     if (questionType === 'ranking') {

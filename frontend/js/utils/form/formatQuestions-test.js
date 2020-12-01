@@ -1,7 +1,7 @@
 // @flow
 import formatResponses from '~/utils/form/formatResponses';
 import formatQuestions from '~/utils/form/formatQuestions';
-import { allTypeQuestions, allTypeResponses } from '~/utils/form/test/mocks';
+import { allTypeQuestions, allTypeResponses } from './mocks';
 
 const result = [
   {
@@ -32,7 +32,7 @@ const result = [
     id: 'UXVlc3Rpb246NDk5',
     questionsNotDisplay: [],
     questionsToDisplay: [],
-    title: "Comment j'ai de doigt ?",
+    title: "Combien j'ai de doigt ?",
   },
   {
     id: 'UXVlc3Rpb246NTAx',
@@ -63,6 +63,12 @@ const result = [
     questionsNotDisplay: [],
     questionsToDisplay: [],
     title: 'Fruits préférés ?',
+  },
+  {
+    id: 'UXVlc3Rpb246NTA2',
+    questionsNotDisplay: [],
+    questionsToDisplay: [],
+    title: 'Comment vas-tu ?',
   },
 ];
 

@@ -519,14 +519,14 @@ Capco\UserBundle\Entity\User:
         createdAt: <(new \DateTime('2019-09-09 09:30:00'))>
     userVincent:
         id: 'userVincent'
-        username: Vinc
+        username: Vince
         firstname: Vincent
         lastname: DEPLAIS
         media: '@ProfilePicVincent'
         email: vincent@cap-collectif.com
         plainpassword: toto
         roles:
-            - 'ROLE_USER'
+            - 'ROLE_SUPER_ADMIN'
         emailConfirmationSentAt: <(new \DateTime('2019-12-02 09:30:00'))>
         enabled: true
         createdAt: <(new \DateTime('2019-12-02 09:30:00'))>

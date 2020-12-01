@@ -362,6 +362,12 @@ Capco\MediaBundle\Entity\Media:
         name: EventAwaiting
         category: '@MediaCategory1'
         providerReference: providerReference3.jpg
+    MediaProjectFood:
+        id: 'media-project-food'
+        binaryContent: project-food.jpg
+        name: Media Food
+        category: '@MediaCategory1'
+        providerReference: providerReference58.jpg
     ProfilePicBobMarley:
         id: 'ProfilePicBobMarley'
         binaryContent: bob-marley.jpg

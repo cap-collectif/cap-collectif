@@ -1,6 +1,6 @@
 // @flow
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses';
-import { allTypeQuestions, allTypeResponses } from '~/utils/form/test/mocks';
+import { allTypeQuestions, allTypeResponses } from './mocks';
 
 const result = [
   {
@@ -42,6 +42,10 @@ const result = [
   {
     question: 'UXVlc3Rpb246NTA1',
     value: '{"labels":["Pomme","Poire","Fraise"],"other":null}',
+  },
+  {
+    question: 'UXVlc3Rpb246NTA2',
+    value: '2',
   },
 ];
 

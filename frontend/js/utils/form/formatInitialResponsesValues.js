@@ -14,7 +14,7 @@ export const formatInitialResponsesValues = (
     const response = responses.filter(res => res && res.question.id === question.id)[0];
     const questionId = question.id;
 
-    // If we have a previous response format it
+    // If there is a response, format it
     if (response) {
       // TODO: response.value !== "null" is a hotfix, related to issue https://github.com/cap-collectif/platform/issues/6214
       // because of a weird bug, causing answer with questions set to "null" instead of NULL in db
@@ -28,6 +28,7 @@ export const formatInitialResponsesValues = (
           value: getValueFromResponse(question.type, response.value),
         };
       }
+
       if (typeof response.medias !== 'undefined') {
         return { question: questionId, value: response.medias };
       }
@@ -37,6 +38,7 @@ export const formatInitialResponsesValues = (
     if (question.type === 'medias' || question.type === 'ranking') {
       return { question: questionId, value: [] };
     }
+
     if (question.type === 'radio' || question.type === 'checkbox') {
       return { question: questionId, value: { labels: [], other: null } };
     }

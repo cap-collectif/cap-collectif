@@ -1,6 +1,7 @@
 // @flow
+import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type';
 
-export const simple = [
+export const simple: Questions = [
   {
     id: 'UXVlc3Rpb246NDg1',
     __typename: 'SimpleQuestion',
@@ -33,7 +34,7 @@ export const simple = [
   },
 ];
 
-export const onlyAlwaysJump = [
+export const onlyAlwaysJump: Questions = [
   {
     id: 'UXVlc3Rpb246NDg1',
     __typename: 'SimpleQuestion',
@@ -46,7 +47,6 @@ export const onlyAlwaysJump = [
     helpText: null,
     jumps: [],
     alwaysJumpDestinationQuestion: {
-      __typename: 'SimpleQuestion',
       id: 'UXVlc3Rpb246NDg0',
       title: 'Question 2',
       number: 2,
@@ -71,7 +71,7 @@ export const onlyAlwaysJump = [
   },
 ];
 
-export const manyAlwaysJump = [
+export const manyAlwaysJump: Questions = [
   {
     id: 'UXVlc3Rpb246NDg3',
     __typename: 'MultipleChoiceQuestion',
@@ -84,7 +84,6 @@ export const manyAlwaysJump = [
     helpText: null,
     jumps: [],
     alwaysJumpDestinationQuestion: {
-      __typename: 'SimpleQuestion',
       id: 'UXVlc3Rpb246NDky',
       title: 'Question 2',
       number: 2,
@@ -142,7 +141,6 @@ export const manyAlwaysJump = [
     helpText: null,
     jumps: [],
     alwaysJumpDestinationQuestion: {
-      __typename: 'SimpleQuestion',
       id: 'UXVlc3Rpb246NDkx',
       title: 'Question 3',
       number: 3,
@@ -162,7 +160,6 @@ export const manyAlwaysJump = [
     helpText: null,
     jumps: [],
     alwaysJumpDestinationQuestion: {
-      __typename: 'SimpleQuestion',
       id: 'UXVlc3Rpb246NDk1',
       title: 'Question 1.1',
       number: 4,
@@ -202,7 +199,7 @@ export const manyAlwaysJump = [
   },
 ];
 
-export const onlyJump = [
+export const onlyJump: Questions = [
   {
     id: 'UXVlc3Rpb246NDg3',
     __typename: 'MultipleChoiceQuestion',
@@ -217,22 +214,18 @@ export const onlyJump = [
       {
         id: 'c3f09535-6cf8-11ea-9d72-0242ac110006',
         origin: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246NDg3',
         },
         destination: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246NDg4',
           title: 'Question 3',
           number: 3,
         },
         conditions: [
           {
-            __typename: 'MultipleChoiceQuestionLogicJumpCondition',
             id: 'c3f09b13-6cf8-11ea-9d72-0242ac110006',
             operator: 'IS',
             question: {
-              __typename: 'MultipleChoiceQuestion',
               id: 'UXVlc3Rpb246NDg3',
               title: 'Question 1',
               type: 'select',
@@ -333,7 +326,7 @@ export const onlyJump = [
   },
 ];
 
-export const jumpThenAlwaysJump = [
+export const jumpThenAlwaysJump: Questions = [
   {
     id: 'UXVlc3Rpb246NDg3',
     __typename: 'MultipleChoiceQuestion',
@@ -348,22 +341,18 @@ export const jumpThenAlwaysJump = [
       {
         id: 'c3f09535-6cf8-11ea-9d72-0242ac110006',
         origin: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246NDg3',
         },
         destination: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246NDg4',
           title: 'Question 3',
           number: 2,
         },
         conditions: [
           {
-            __typename: 'MultipleChoiceQuestionLogicJumpCondition',
             id: 'c3f09b13-6cf8-11ea-9d72-0242ac110006',
             operator: 'IS',
             question: {
-              __typename: 'MultipleChoiceQuestion',
               id: 'UXVlc3Rpb246NDg3',
               title: 'Question 1',
               type: 'select',
@@ -430,7 +419,6 @@ export const jumpThenAlwaysJump = [
     helpText: null,
     jumps: [],
     alwaysJumpDestinationQuestion: {
-      __typename: 'SimpleQuestion',
       id: 'UXVlc3Rpb246NDkw',
       title: 'Question 4',
       number: 3,
@@ -484,7 +472,7 @@ export const jumpThenAlwaysJump = [
   },
 ];
 
-export const manySimpleAndManyJump = [
+export const manySimpleAndManyJump: Questions = [
   {
     id: 'UXVlc3Rpb246NDg3',
     __typename: 'MultipleChoiceQuestion',
@@ -499,22 +487,18 @@ export const manySimpleAndManyJump = [
       {
         id: 'c3f09535-6cf8-11ea-9d72-0242ac110006',
         origin: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246NDg3',
         },
         destination: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246NDg4',
           title: 'Question 2',
           number: 2,
         },
         conditions: [
           {
-            __typename: 'MultipleChoiceQuestionLogicJumpCondition',
             id: 'c3f09b13-6cf8-11ea-9d72-0242ac110006',
             operator: 'IS',
             question: {
-              __typename: 'MultipleChoiceQuestion',
               id: 'UXVlc3Rpb246NDg3',
               title: 'Question 1',
               type: 'select',
@@ -642,22 +626,18 @@ export const manySimpleAndManyJump = [
       {
         id: 'f3016117-6cfd-11ea-9d72-0242ac110006',
         origin: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246NDkz',
         },
         destination: {
-          __typename: 'SimpleQuestion',
           id: 'UXVlc3Rpb246NDkx',
           title: 'Question 5',
           number: 5,
         },
         conditions: [
           {
-            __typename: 'MultipleChoiceQuestionLogicJumpCondition',
             id: 'f301671b-6cfd-11ea-9d72-0242ac110006',
             operator: 'IS',
             question: {
-              __typename: 'MultipleChoiceQuestion',
               id: 'UXVlc3Rpb246NDkz',
               title: 'Question 4',
               type: 'select',
@@ -735,7 +715,7 @@ export const manySimpleAndManyJump = [
   },
 ];
 
-export const allTypeQuestions = [
+export const allTypeQuestions: Questions = [
   {
     id: 'UXVlc3Rpb246NDg3',
     __typename: 'MultipleChoiceQuestion',
@@ -837,7 +817,7 @@ export const allTypeQuestions = [
   {
     id: 'UXVlc3Rpb246NDk5',
     __typename: 'SimpleQuestion',
-    title: "Comment j'ai de doigt ?",
+    title: "Combien j'ai de doigt ?",
     number: 5,
     private: false,
     hidden: false,
@@ -1085,9 +1065,621 @@ export const allTypeQuestions = [
       ],
     },
   },
+  {
+    id: 'UXVlc3Rpb246NTA2',
+    __typename: 'MajorityQuestion',
+    title: 'Comment vas-tu ?',
+    number: 11,
+    private: false,
+    hidden: false,
+    position: 160,
+    required: false,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'majority',
+    randomQuestionChoices: false,
+  },
 ];
 
-export const allTypeResponses = [
+export const allTypeQuestionsWithRule: Questions = [
+  {
+    id: 'UXVlc3Rpb246NDg3',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Capital de la France ?',
+    number: 1,
+    private: false,
+    hidden: false,
+    position: 150,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'select',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 3,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6OTVmNzYyMTgtNmNmOC0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Paris',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6OTVmNzY2NGMtNmNmOC0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Lyon',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6OTVmNzY5OWMtNmNmOC0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Strasbourg',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NDk4',
+    __typename: 'SimpleQuestion',
+    title: 'Comment tu vas ?',
+    number: 2,
+    private: false,
+    hidden: false,
+    position: 151,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'text',
+  },
+  {
+    id: 'UXVlc3Rpb246NDk3',
+    __typename: 'SimpleQuestion',
+    title: "De quelle couleur est le cheval blanc d'Henry IV ?",
+    number: 3,
+    private: false,
+    hidden: false,
+    position: 152,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'textarea',
+  },
+  {
+    id: 'UXVlc3Rpb246NTAw',
+    __typename: 'SimpleQuestion',
+    title: 'Petit du loup ?',
+    number: 4,
+    private: false,
+    hidden: false,
+    position: 153,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'editor',
+  },
+  {
+    id: 'UXVlc3Rpb246NDk5',
+    __typename: 'SimpleQuestion',
+    title: "Combien j'ai de doigt ?",
+    number: 5,
+    private: false,
+    hidden: false,
+    position: 154,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'number',
+  },
+  {
+    id: 'UXVlc3Rpb246NTAx',
+    __typename: 'MediaQuestion',
+    title: 'Envoie ton CV',
+    number: 6,
+    private: false,
+    hidden: false,
+    position: 155,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'medias',
+  },
+  {
+    id: 'UXVlc3Rpb246NTAy',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Coche la case vert',
+    number: 7,
+    private: false,
+    hidden: false,
+    position: 156,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'button',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 3,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6OTFmZjUwZWQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Je suis vert',
+            description: null,
+            color: 'SUCCESS',
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6OTFmZjU1MGItNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Je suis orange',
+            description: null,
+            color: 'WARNING',
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6OTFmZjU4NTYtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Je suis rouge',
+            description: null,
+            color: 'DANGER',
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NTAz',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Qui a dit "Je suis ton père" ?',
+    number: 8,
+    private: false,
+    hidden: false,
+    position: 157,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'radio',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 3,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YWIyZTZmNjAtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Yoda',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YWIyZTczYzAtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Dark Vador',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YWIyZTc2ZDktNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Jean pierre Foucault',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NTA0',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Tes sports préférés ?',
+    number: 9,
+    private: false,
+    hidden: false,
+    position: 158,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'checkbox',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 4,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Tennis',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFmYTUtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Canoë Kayak',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGIzMDQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Golf',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGI2MTMtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Football',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NTA1',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Fruits préférés ?',
+    number: 10,
+    private: false,
+    hidden: false,
+    position: 159,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'ranking',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 3,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6ZDUzZWJhMmItNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Pomme',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6ZDUzZWJkZjctNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Poire',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6ZDUzZWMxMWUtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA2',
+            title: 'Fraise',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NDk10',
+    __typename: 'SimpleQuestion',
+    title: 'Combien de pouce ?',
+    number: 11,
+    private: false,
+    hidden: false,
+    position: 160,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'number',
+  },
+  {
+    id: 'UXVlc3Rpb246NTA90',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Veuillez sélectionner 2 fruits',
+    number: 12,
+    private: false,
+    hidden: false,
+    position: 161,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'checkbox',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: { type: 'EQUAL', number: 2 },
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 3,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA12',
+            title: 'Pomme',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA13',
+            title: 'Poire',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA14',
+            title: 'Football',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NTA91',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Veuillez sélectionner au moins 2 fruits',
+    number: 12,
+    private: false,
+    hidden: false,
+    position: 161,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'checkbox',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: { type: 'MIN', number: 2 },
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 3,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA15',
+            title: 'Pomme',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA16',
+            title: 'Poire',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA17',
+            title: 'Banane',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NTA92',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Veuillez sélectionner maximum 1 fruit',
+    number: 12,
+    private: false,
+    hidden: false,
+    position: 161,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'checkbox',
+    isOtherAllowed: false,
+    randomQuestionChoices: false,
+    validationRule: { type: 'MAX', number: 1 },
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 3,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA18',
+            title: 'Pomme',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA19',
+            title: 'Poire',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA20',
+            title: 'Banane',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NTA93',
+    __typename: 'MultipleChoiceQuestion',
+    title: 'Veuillez inscrire votre fruit préféré',
+    number: 13,
+    private: false,
+    hidden: false,
+    position: 161,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'checkbox',
+    isOtherAllowed: true,
+    randomQuestionChoices: false,
+    validationRule: null,
+    choices: {
+      pageInfo: {
+        hasNextPage: false,
+      },
+      totalCount: 3,
+      edges: [
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA18',
+            title: 'Pomme',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA19',
+            title: 'Poire',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+        {
+          node: {
+            id: 'UXVlc3Rpb25DaG9pY2U6YzYyMGFiNTQtNmQwOS0xMWVhLTlkNzItMDI0MmFjMTEwMDA20',
+            title: 'Banane',
+            description: null,
+            color: null,
+            image: null,
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'UXVlc3Rpb246NTA94',
+    __typename: 'MajorityQuestion',
+    title: 'Comment vas-tu ?',
+    number: 11,
+    private: false,
+    hidden: false,
+    position: 160,
+    required: true,
+    helpText: null,
+    jumps: [],
+    alwaysJumpDestinationQuestion: null,
+    description: null,
+    type: 'majority',
+    randomQuestionChoices: false,
+    validationRule: null,
+  },
+];
+
+export const allTypeResponses: ResponsesInReduxForm = [
   {
     question: 'UXVlc3Rpb246NDg3',
     value: {
@@ -1145,9 +1737,91 @@ export const allTypeResponses = [
     question: 'UXVlc3Rpb246NTA1',
     value: ['Pomme', 'Poire', 'Fraise'],
   },
+  {
+    question: 'UXVlc3Rpb246NTA2',
+    value: '2',
+  },
 ];
 
-export const manyJumpAndOneAlwaysJump = [
+export const allTypeResponsesWithError: ResponsesInReduxForm = [
+  {
+    question: 'UXVlc3Rpb246NDg3',
+    value: null,
+  },
+  {
+    question: 'UXVlc3Rpb246NDk4',
+    value: null,
+  },
+  {
+    question: 'UXVlc3Rpb246NDk3',
+    value: null,
+  },
+  {
+    question: 'UXVlc3Rpb246NTAw',
+    value: '</p>',
+  },
+  {
+    question: 'UXVlc3Rpb246NDk5',
+    value: null,
+  },
+  {
+    question: 'UXVlc3Rpb246NTAx',
+    value: [],
+  },
+  {
+    question: 'UXVlc3Rpb246NTAy',
+    value: null,
+  },
+  {
+    question: 'UXVlc3Rpb246NTAz',
+    value: {
+      labels: [],
+      other: null,
+    },
+  },
+  {
+    question: 'UXVlc3Rpb246NTA0',
+    value: {
+      labels: [],
+      other: null,
+    },
+  },
+  {
+    question: 'UXVlc3Rpb246NTA1',
+    value: [],
+  },
+  {
+    question: 'UXVlc3Rpb246NDk10',
+    value: 'e-10',
+  },
+  {
+    question: 'UXVlc3Rpb246NTA90',
+    value: {
+      labels: ['Pomme', 'Poire', 'Football'],
+      other: null,
+    },
+  },
+  {
+    question: 'UXVlc3Rpb246NTA91',
+    value: {
+      labels: ['Pomme'],
+      other: null,
+    },
+  },
+  {
+    question: 'UXVlc3Rpb246NTA92',
+    value: {
+      labels: ['Pomme', 'Poire'],
+      other: null,
+    },
+  },
+  {
+    question: 'UXVlc3Rpb246NTA94',
+    value: null,
+  },
+];
+
+export const manyJumpAndOneAlwaysJump: Questions = [
   {
     id: 'UXVlc3Rpb246Mjg=',
     __typename: 'MultipleChoiceQuestion',
@@ -1162,11 +1836,9 @@ export const manyJumpAndOneAlwaysJump = [
       {
         id: '43fb38af-6d25-11ea-bdfe-0242ac110004',
         origin: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246Mjg=',
         },
         destination: {
-          __typename: 'SimpleQuestion',
           id: 'UXVlc3Rpb246MzA=',
           title: 'Sesame',
           number: 3,
@@ -1176,7 +1848,6 @@ export const manyJumpAndOneAlwaysJump = [
             id: '43fb403e-6d25-11ea-bdfe-0242ac110004',
             operator: 'IS',
             question: {
-              __typename: 'MultipleChoiceQuestion',
               id: 'UXVlc3Rpb246Mjg=',
               title: 'Question 1',
               type: 'select',
@@ -1191,11 +1862,9 @@ export const manyJumpAndOneAlwaysJump = [
       {
         id: '43fb4433-6d25-11ea-bdfe-0242ac110004',
         origin: {
-          __typename: 'MultipleChoiceQuestion',
           id: 'UXVlc3Rpb246Mjg=',
         },
         destination: {
-          __typename: 'SimpleQuestion',
           id: 'UXVlc3Rpb246Mjk=',
           title: 'Là',
           number: 4,
@@ -1205,7 +1874,6 @@ export const manyJumpAndOneAlwaysJump = [
             id: '43fb47e1-6d25-11ea-bdfe-0242ac110004',
             operator: 'IS',
             question: {
-              __typename: 'MultipleChoiceQuestion',
               id: 'UXVlc3Rpb246Mjg=',
               title: 'Question 1',
               type: 'select',
@@ -1219,7 +1887,6 @@ export const manyJumpAndOneAlwaysJump = [
       },
     ],
     alwaysJumpDestinationQuestion: {
-      __typename: 'SimpleQuestion',
       id: 'UXVlc3Rpb246MzE=',
       title: 'Question 2',
       number: 2,
