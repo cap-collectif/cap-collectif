@@ -184,8 +184,6 @@ Scenario: Logged in admin wants to add a debate step to a project
   And I click the "#submit-project-content" element
   And I wait ".alert__form_succeeded-message" to appear on current page
   And I go to "/project/projet-vide/debate/debatestepquestion"
-  And I wait "#details" to appear on current page
-  Then I should see "DebateStepQuestion"
 
 @database
 Scenario: Admin merges two proposals

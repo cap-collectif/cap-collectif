@@ -12,7 +12,8 @@ type Props = {|
 
 export const MENU_BUTTON_TYPE: 'MenuButton' = 'MenuButton';
 
-const MenuButton = React.forwardRef<Props, HTMLButtonElement>(({ ...props }: Props, ref) => {
+// So that we can use MenuButton as a real Button
+const MenuButton = React.forwardRef<any, HTMLButtonElement>(({ ...props }: Props, ref) => {
   return <HeadlessMenu.Button ref={ref} {...props} />;
 });
 

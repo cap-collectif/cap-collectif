@@ -1,12 +1,9 @@
 // @flow
 import * as React from 'react';
 import { css, keyframes } from 'styled-components';
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
-import Icon from '~ds/Icon/Icon';
+import Icon, { type Props as IconProps } from '~ds/Icon/Icon';
 
-type Props = {|
-  ...AppBoxProps,
-|};
+type Props = $Diff<IconProps, { name: * }>;
 
 const spinning = keyframes`
   from {

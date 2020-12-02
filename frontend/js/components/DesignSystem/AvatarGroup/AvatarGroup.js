@@ -4,13 +4,14 @@ import { cleanChildren } from '~/utils/clearChildren';
 import Avatar, { type AvatarSize } from '~ds/Avatar/Avatar';
 import AppBox from '~ui/Primitives/AppBox';
 import Flex from '~ui/Primitives/Layout/Flex';
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+import type { AppBoxProps, Responsive } from '~ui/Primitives/AppBox.type';
 
 type Props = {|
   ...AppBoxProps,
   +children?: React.Node,
   +max?: number,
   +size?: AvatarSize,
+  +direction?: Responsive<'row' | 'column' | 'row-reverse' | 'column-reverse'>,
 |};
 
 const getMarginForSize = (size: AvatarSize): number => {

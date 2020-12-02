@@ -2,7 +2,7 @@
 import colors from '~/styles/modules/colors';
 
 const styles = {
-  default: {
+  primary: {
     outline: 'none',
 
     ':hover': {

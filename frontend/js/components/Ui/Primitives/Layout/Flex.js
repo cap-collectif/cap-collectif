@@ -2,9 +2,22 @@
 import * as React from 'react';
 import AppBox from '~ui/Primitives/AppBox';
 import useTheme from '~/utils/hooks/useTheme';
+import type { AppBoxProps, Responsive } from '~ui/Primitives/AppBox.type';
+
+type Props = {|
+  ...AppBoxProps,
+  align?: Responsive<string>,
+  justify?: Responsive<string>,
+  wrap?: Responsive<string>,
+  direction?: Responsive<'row' | 'column' | 'row-reverse' | 'column-reverse'>,
+  basis?: Responsive<string>,
+  grow?: Responsive<number>,
+  shrink?: Responsive<number>,
+  spacing?: number | string,
+|};
 
 // typings is handled by the .d.ts file
-const Flex: any = React.forwardRef((props: any, ref) => {
+const Flex = React.forwardRef<Props, HTMLElement>((props: Props, ref) => {
   const {
     direction = 'row',
     align,
@@ -12,6 +25,7 @@ const Flex: any = React.forwardRef((props: any, ref) => {
     wrap,
     basis,
     grow,
+    shrink,
     spacing: userSpacing,
     ...rest
   } = props;
@@ -67,6 +81,7 @@ const Flex: any = React.forwardRef((props: any, ref) => {
       flexWrap={wrap}
       flexBasis={basis}
       flexGrow={grow}
+      flexShrink={shrink}
       ref={ref}
       css={styles}
       {...rest}

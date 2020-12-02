@@ -3,7 +3,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import styled, { type StyledComponent } from 'styled-components';
 import { variant } from 'styled-system';
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+import type { AppBoxProps, Responsive } from '~ui/Primitives/AppBox.type';
 import * as Icons from './index';
 import AppBox from '~ui/Primitives/AppBox';
 
@@ -43,12 +43,12 @@ export const ICON_SIZE = {
   XXL: 'xxl', // 64px
 };
 
-type Props = {|
+export type Props = {|
   ...AppBoxProps,
   name: $Values<typeof ICON_NAME>,
   className?: string,
-  color?: string,
-  size?: $Values<typeof ICON_SIZE> | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl',
+  color?: Responsive<string>,
+  size?: Responsive<$Values<typeof ICON_SIZE>>,
 |};
 
 const getSize = (size: $PropertyType<Props, 'size'> = 'md'): number => {

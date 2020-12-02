@@ -80,6 +80,7 @@ import ImageSliderApp from '~/startup/ImageSliderApp';
 import ParticipationTutorialApp from '~/startup/ParticipationTutorialApp';
 import ParticipationMotivationApp from '~/startup/ParticipationMotivationApp';
 import ToastsContainerApp from '~/startup/ToastsContainerApp';
+import DebateStepPageApp from '~/startup/DebateStepPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -149,6 +150,7 @@ ReactOnRails.register({
   StepEventsApp,
   UserInvitationPageApp,
   ResetPasswordApp,
+  DebateStepPageApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,

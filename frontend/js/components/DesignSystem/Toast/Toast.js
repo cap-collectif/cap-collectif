@@ -15,10 +15,9 @@ import Text from '~ui/Primitives/Text';
 import AppBox from '~ui/Primitives/AppBox';
 import jsxInnerText from '~/utils/jsxInnerText';
 import useTimeout from '~/utils/hooks/useTimeout';
-import Icon, { ICON_NAME } from '~ds/Icon/Icon';
+import Icon, { ICON_NAME, type Props as IconProps } from '~ds/Icon/Icon';
 import colors from '~/styles/modules/colors';
 import Flex from '~ui/Primitives/Layout/Flex';
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import { boxShadow } from '~/styles/theme/base';
 
 export type ToastProps = {|
@@ -87,26 +86,19 @@ const ToastInner = styled(motion.custom(AppBox)).attrs({
   })};
 `;
 
-const getIcon = (
-  variant: $PropertyType<ToastProps, 'variant'>,
-  props?: AppBoxProps,
-): React.Node => {
-  const common = {
+const getIcon = (variant: $PropertyType<ToastProps, 'variant'>, props?: IconProps): React.Node => {
+  const common: {| size: 'md' |} = {
     size: 'md',
   };
   switch (variant) {
     case 'info':
-      return <Icon name={ICON_NAME.CIRCLE_INFO} color="blue.500" {...common} {...(props ?? {})} />;
+      return <Icon name={ICON_NAME.CIRCLE_INFO} color="blue.500" {...common} {...props} />;
     case 'success':
-      return (
-        <Icon name={ICON_NAME.CIRCLE_CHECK} color="green.500" {...common} {...(props ?? {})} />
-      );
+      return <Icon name={ICON_NAME.CIRCLE_CHECK} color="green.500" {...common} {...props} />;
     case 'danger':
-      return <Icon name={ICON_NAME.CIRCLE_CROSS} color="red.500" {...common} {...(props ?? {})} />;
+      return <Icon name={ICON_NAME.CIRCLE_CROSS} color="red.500" {...common} {...props} />;
     case 'warning':
-      return (
-        <Icon name={ICON_NAME.CIRCLE_ALERT} color="yellow.500" {...common} {...(props ?? {})} />
-      );
+      return <Icon name={ICON_NAME.CIRCLE_ALERT} color="yellow.500" {...common} {...props} />;
     default:
       throw new Error('Unsupported icon variant!');
   }
@@ -181,6 +173,7 @@ const Toast = ({
       ref={container}
       animation={show ? getAnimation(position) : fadeOut}>
       <Flex align="center" css={{ '& > *:last-child': { flex: 1 } }}>
+        {/** $FlowFixMe IconProps needs a name property but is is defined in getIcon */}
         {getIcon(variant, { mr: 2 })}
         {typeof content === 'string' ? (
           <Text dangerouslySetInnerHTML={{ __html: content }} />

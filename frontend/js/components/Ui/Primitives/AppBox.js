@@ -22,7 +22,7 @@ const AppBox: StyledComponent<AppBoxProps, {}, HTMLDivElement> = styled('div').w
   },
 })(
   props => ({
-    textTransform: props.uppercase ? 'uppercase' : undefined,
+    textTransform: props.uppercase ? 'uppercase' : props.capitalize ? 'capitalize' : undefined,
   }),
   compose(
     system({

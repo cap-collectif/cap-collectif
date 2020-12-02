@@ -12,7 +12,7 @@ storiesOf('Design system|Spinner', module)
     return (
       <Flex align="center" gridGap={2} wrap="wrap">
         {sizes.map((size, i) => (
-          <Spinner size={size} key={i} />
+          <Spinner size={((size: any): string)} key={i} />
         ))}
       </Flex>
     );

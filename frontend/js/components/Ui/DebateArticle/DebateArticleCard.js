@@ -35,8 +35,8 @@ export const DebateArticleCardOrigin: StyledComponent<{}, {}, typeof Text> = sty
 
 type Props = {|
   ...AppBoxProps,
-  +illustration?: string,
-  +publishedAt?: string,
+  +illustration?: ?string,
+  +publishedAt?: ?string,
 |};
 
 const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Props) => {
@@ -45,7 +45,7 @@ const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Pr
       <AppBox overflow="hidden" bg="red.300" height={14}>
         {illustration ? (
           <AppBox
-            src="https://picsum.photos/536/354"
+            src={illustration}
             width="100%"
             height="100%"
             as="img"

@@ -20,7 +20,7 @@ type Props = {|
   ...AppBoxProps,
   +icon?: $Values<typeof ICON_NAME>,
   +variantType?: 'tag' | 'badge',
-  +avatar?: {| ...AvatarProps, props: AppBoxProps |},
+  +avatar?: {| ...AvatarProps, props?: AppBoxProps |},
   +onRemove?: (e?: MouseEvent) => void,
   +variant: 'blue' | 'aqua' | 'red' | 'green' | 'orange' | 'yellow' | 'gray' | 'neutral-gray',
 |};

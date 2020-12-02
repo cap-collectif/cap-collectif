@@ -13,8 +13,8 @@ const hash = new ColorHash();
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type AvatarProps = {|
-  +name?: string,
-  +src?: string,
+  +name?: ?string,
+  +src?: ?string,
   +alt?: string,
 |};
 
@@ -25,7 +25,8 @@ type Props = {|
   ...AvatarProps,
 |};
 
-const getInitials = (name: string, showLastname = false): string => {
+const getInitials = (name?: ?string, showLastname = false): string => {
+  if (!name) return '🥵';
   const [firstName, lastName] = name.split(' ');
 
   if (showLastname === false) {
@@ -124,10 +125,10 @@ export const Avatar = ({
         color: !color ? computedColor : undefined,
       }}
       {...{
-        ...(shouldDisplayName ? { title: alt ?? name } : {}),
-        ...(bg ? { bg } : {}),
-        ...(backgroundColor ? { backgroundColor } : {}),
-        ...(color ? { color } : {}),
+        title: shouldDisplayName ? alt ?? name : undefined,
+        bg: bg ?? backgroundColor ?? undefined,
+        backgroundColor: bg ?? backgroundColor ?? undefined,
+        color: color ?? undefined,
         ...props,
       }}
       variant={size}>

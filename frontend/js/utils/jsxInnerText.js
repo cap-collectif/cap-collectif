@@ -5,7 +5,7 @@ function hasProps(jsx: React.Node) {
   return Object.prototype.hasOwnProperty.call(jsx, 'props');
 }
 
-function jsxInnerText(jsx: React.Node): string {
+function jsxInnerText(jsx?: React.Node): string {
   if (jsx === null || typeof jsx === 'boolean' || typeof jsx === 'undefined') {
     return '';
   }

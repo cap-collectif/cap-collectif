@@ -83,6 +83,7 @@ type ModifiedStyledSystemProps = AppFontSize & AppLetterSpacing & AppFontWeight 
 
 interface CustomBoxProps {
     readonly uppercase?: boolean
+    readonly capitalize?: boolean
     readonly css?:
         | ((props: { theme: any } & Record<string, any>) => Record<string, unknown>)
         | ReturnType<typeof css>

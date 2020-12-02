@@ -10,25 +10,27 @@ type Props = {|
   +truncate?: number,
 |};
 // typings is handled by the .d.ts file
-const Text: any = React.forwardRef(({ truncate, children, ...props }: Props, ref) => {
-  let content = children;
-  const innerText = jsxInnerText(content);
-  if (truncate && innerText.length > truncate) {
-    content = `${innerText.slice(0, truncate)}…`;
-  }
-  return (
-    <AppBox
-      ref={ref}
-      as="p"
-      fontFamily="body"
-      lineHeight={LineHeight.Base}
-      m={0}
-      {...(truncate ? { title: innerText } : {})}
-      {...props}>
-      {content}
-    </AppBox>
-  );
-});
+const Text = React.forwardRef<Props, HTMLElement>(
+  ({ truncate, children, ...props }: Props, ref) => {
+    let content = children;
+    const innerText = jsxInnerText(content);
+    if (truncate && innerText.length > truncate) {
+      content = `${innerText.slice(0, truncate)}…`;
+    }
+    return (
+      <AppBox
+        ref={ref}
+        as="p"
+        fontFamily="body"
+        lineHeight={LineHeight.Base}
+        m={0}
+        {...(truncate && { title: innerText })}
+        {...props}>
+        {content}
+      </AppBox>
+    );
+  },
+);
 
 Text.displayName = 'Text';
 

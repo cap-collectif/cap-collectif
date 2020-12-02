@@ -19,7 +19,7 @@ storiesOf('Design system|AvatarGroup', module).add('default', () => {
       <Avatar name="John Mark" />
       <Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />
       <Avatar name="John Cena" />
-      <Avatar name="Dan Abramov" bg="yellow.700" color="white" />
+      <Avatar name="Dan Abramov" bg="yellow.700" />
       <Avatar name="Omar Jbara" />
       <Avatar name="John Doe" />
     </AvatarGroup>

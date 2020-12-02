@@ -4,9 +4,9 @@ import type { CSSRules } from 'styled-components';
 
 type NumberOrString = number | string;
 
-type Responsive<T> = T | T[] | {| [key: string]: T |};
+export type Responsive<T> = T | T[] | {| [key: string]: T |};
 
-type ResponsiveBoolean = boolean | Array<boolean>;
+export type ResponsiveBoolean = boolean | Array<boolean>;
 
 type Width = {|
   /** width */
@@ -25,53 +25,77 @@ type Height = {|
 type Space = {|
   /** margin */
   m?: Responsive<NumberOrString>,
+  margin?: Responsive<NumberOrString>,
   /** margin-top */
   mt?: Responsive<NumberOrString>,
+  marginTop?: Responsive<NumberOrString>,
   /** margin-right */
   mr?: Responsive<NumberOrString>,
+  marginRight?: Responsive<NumberOrString>,
   /** margin-bottom */
   mb?: Responsive<NumberOrString>,
+  marginBottom?: Responsive<NumberOrString>,
   /** margin-left */
   ml?: Responsive<NumberOrString>,
+  marginLeft?: Responsive<NumberOrString>,
   /** margin-x */
   mx?: Responsive<NumberOrString>,
+  marginX?: Responsive<NumberOrString>,
   /** margin-y */
   my?: Responsive<NumberOrString>,
+  marginY?: Responsive<NumberOrString>,
   /** padding */
   p?: Responsive<NumberOrString>,
+  padding?: Responsive<NumberOrString>,
   /** padding-top */
   pt?: Responsive<NumberOrString>,
+  paddingTop?: Responsive<NumberOrString>,
   /** padding-right */
   pr?: Responsive<NumberOrString>,
+  paddingRight?: Responsive<NumberOrString>,
   /** padding-bottom */
   pb?: Responsive<NumberOrString>,
+  paddingBottom?: Responsive<NumberOrString>,
   /** padding-left */
   pl?: Responsive<NumberOrString>,
+  paddingLeft?: Responsive<NumberOrString>,
   /** padding-x */
   px?: Responsive<NumberOrString>,
+  paddingX?: Responsive<NumberOrString>,
   /** padding-y */
   py?: Responsive<NumberOrString>,
+  paddingY?: Responsive<NumberOrString>,
 |};
 
-type FontSize = {|
-  /** fontSize */
-  fontSize?: Responsive<string>,
-  /** fontSize */
-  f?: Responsive<string>,
+type Position = {|
+  /** top */
+  top?: Responsive<NumberOrString>,
+  /** left */
+  left?: Responsive<NumberOrString>,
+  /** right */
+  right?: Responsive<NumberOrString>,
+  /** bottom */
+  bottom?: Responsive<NumberOrString>,
+  /** bottom */
+  position?: Responsive<string>,
+|};
+
+type Font = {|
+  fontSize?: Responsive<NumberOrString>,
+  f?: Responsive<NumberOrString>,
+  fontFamily?: Responsive<string>,
+  fontWeight?: NumberOrString,
 |};
 
 type Color = {|
   color?: Responsive<string>,
   /** background */
   bg?: Responsive<string>,
+  backgroundColor?: Responsive<string>,
 |};
 
 type TextAlign = {|
   align?: Responsive<string>,
-|};
-
-type FontWeight = {|
-  fontWeight?: NumberOrString,
 |};
 
 type LineHeight = {|
@@ -79,27 +103,32 @@ type LineHeight = {|
 |};
 
 type AlignItems = {|
-  align?: Responsive<string>,
+  alignItems?: Responsive<string>,
 |};
 
-type JustifyContent = {|
-  justify?: Responsive<string>,
+type Justify = {|
+  justifyContent?: Responsive<string>,
+  justifyItems?: Responsive<string>,
+  justifySelf?: Responsive<string>,
 |};
 
-type FlexWrap = {|
-  wrap?: ResponsiveBoolean,
-|};
-
-type FlexDirection = {|
-  flexDirection?: Responsive<string>,
+type Align = {|
+  alignContent?: Responsive<string>,
+  alignItems?: Responsive<string>,
+  alignSelf?: Responsive<string>,
 |};
 
 type Flex = {|
+  ...Justify,
+  ...Align,
   flex?: Responsive<string>,
-|};
-
-type AlignSelf = {|
-  alignSelf?: Responsive<string>,
+  flexAlign?: Responsive<string>,
+  flexJustify?: Responsive<string>,
+  flexWrap?: Responsive<string>,
+  flexDirection?: Responsive<'row' | 'column' | 'row-reverse' | 'column-reverse'>,
+  flexBasis?: Responsive<string>,
+  flexGrow?: Responsive<number>,
+  flexShrink?: Responsive<number>,
 |};
 
 type MaxWidth = {|
@@ -111,19 +140,36 @@ type BorderRadius = {|
 |};
 
 type BorderWidth = {|
-  borderWidth?: NumberOrString,
-  borderTop?: boolean,
-  borderRight?: boolean,
-  borderBottom?: boolean,
-  borderLeft?: boolean,
+  borderWidth?: Responsive<NumberOrString>,
+  borderTop?: Responsive<NumberOrString>,
+  borderRight?: Responsive<NumberOrString>,
+  borderBottom?: Responsive<NumberOrString>,
+  borderLeft?: Responsive<NumberOrString>,
 |};
 
-type BorderColor = {|
-  borderColor?: string,
+type Border = {|
+  border?: Responsive<NumberOrString>,
+  borderColor?: Responsive<string>,
+  borderStyle?: Responsive<
+    | 'dashed'
+    | 'dotted'
+    | 'double'
+    | 'groove'
+    | 'hidden'
+    | 'inset'
+    | 'none'
+    | 'outset'
+    | 'ridge'
+    | 'solid',
+  >,
 |};
 
 type BoxShadow = {|
-  boxShadow?: NumberOrString,
+  boxShadow?: Responsive<NumberOrString>,
+|};
+
+type Overflow = {|
+  overflow?: Responsive<string>,
 |};
 
 type Hover = {|
@@ -140,6 +186,10 @@ type Active = {|
 
 type Disabled = {|
   disabledStyle?: Object,
+|};
+
+type Visible = {|
+  visible?: boolean,
 |};
 
 type Children = {|
@@ -172,16 +222,39 @@ type Grid = {|
 |};
 
 type Css = {|
-  css?: CSSRules | ((props: any) => Object),
+  css?: CSSRules | ((props: any) => Object) | Object,
 |};
 
-type onMouseOver = Function;
-type onMouseLeave = Function;
-type onBlur = Function;
-type onFocus = Function;
+type HTML = {|
+  id?: string,
+  className?: string,
+  src?: ?string,
+  role?: string,
+  type?: 'submit' | 'reset' | 'button',
+  alt?: ?string,
+  title?: ?string,
+  dangerouslySetInnerHTML?: {| __html: any |},
+|};
+
+type onMouseOver = {|
+  +onMouseOver?: Function,
+|};
+type onMouseLeave = {|
+  +onMouseLeave?: Function,
+|};
+type onBlur = {|
+  +onBlur?: Function,
+|};
+type onFocus = {|
+  +onFocus?: Function,
+|};
+
+type onClick = {|
+  +onClick?: Function,
+|};
 
 type As = {|
-  as: string,
+  as?: string,
 |};
 
 export type AppBoxProps = {|
@@ -189,33 +262,33 @@ export type AppBoxProps = {|
   ...Size,
   ...Height,
   ...Space,
-  ...FontSize,
+  ...Font,
+  ...Position,
   ...Color,
   ...TextAlign,
-  ...FontWeight,
   ...LineHeight,
   ...AlignItems,
-  ...JustifyContent,
-  ...FlexWrap,
-  ...FlexDirection,
   ...Flex,
-  ...AlignSelf,
   ...MaxWidth,
   ...BorderRadius,
   ...BorderWidth,
-  ...BorderColor,
+  ...Border,
   ...BoxShadow,
   ...Hover,
   ...Focus,
+  ...Visible,
   ...Active,
   ...Disabled,
   ...Children,
   ...Display,
+  ...Overflow,
   ...Grid,
   ...Css,
+  ...HTML,
   ...onMouseOver,
   ...onMouseLeave,
   ...onBlur,
   ...onFocus,
+  ...onClick,
   ...As,
 |};

@@ -8,13 +8,13 @@ import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 
 type Props = {|
   ...AppBoxProps,
-  variantColor?: 'default' | 'danger',
+  variantColor?: 'primary' | 'danger',
   icon: $Values<typeof ICON_NAME>,
   label: string,
 |};
 
-const ButtonQuickAction = React.forwardRef<Props, HTMLButtonElement>(
-  ({ variantColor = 'default', icon, label, ...props }: Props, ref) => {
+const ButtonQuickAction = React.forwardRef<Props, HTMLElement>(
+  ({ variantColor = 'primary', icon, label, ...props }: Props, ref) => {
     return (
       <AppBox
         ref={ref}
@@ -29,7 +29,6 @@ const ButtonQuickAction = React.forwardRef<Props, HTMLButtonElement>(
         p={1}
         bg="transparent"
         borderRadius="buttonQuickAction"
-        variantColor={variantColor}
         css={S[variantColor]}
         {...props}>
         <Icon name={icon} size={ICON_SIZE.MD} color="gray.500" />
