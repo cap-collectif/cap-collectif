@@ -11,7 +11,7 @@ describe('<ProposalDetailAdvancementStep />', () => {
     endAt: '2017-09-17T01:08:01+0200',
   };
   const status = {
-    color: 'success',
+    color: 'SUCCESS',
     name: 'Salut',
   };
   const roundColor = '#hexCode';

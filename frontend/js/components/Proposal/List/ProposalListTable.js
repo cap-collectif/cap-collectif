@@ -274,7 +274,7 @@ export class ProposalListTable extends React.Component<Props, State> {
         return (
           <td key={key}>
             {/* $FlowFixMe */}
-            <Label bsStyle={value.color} className="badge-pill">
+            <Label bsStyle={value.color.toLowerCase()} className="badge-pill">
               {/* $FlowFixMe */}
               {value.name}
             </Label>

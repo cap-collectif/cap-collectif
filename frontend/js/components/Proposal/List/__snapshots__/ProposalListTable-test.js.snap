@@ -428,7 +428,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       >
         <Label
           bsClass="label"
-          bsStyle="INFO"
+          bsStyle="info"
           className="badge-pill"
         >
           En cours

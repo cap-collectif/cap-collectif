@@ -68,7 +68,9 @@ class ProposalDetailAdvancementStep extends React.Component<Props> {
               <span>{this.renderDate()}</span>
             </div>
             {status && (
-              <Label bsStyle={status.color} style={{ marginTop: '5px', borderRadius: '15px' }}>
+              <Label
+                bsStyle={status.color.toLowerCase()}
+                style={{ marginTop: '5px', borderRadius: '15px' }}>
                 {status.name.length > 25 ? `${status.name.substr(0, 25)}...` : status.name}
               </Label>
             )}
