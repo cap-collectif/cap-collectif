@@ -189,6 +189,7 @@ export { default as Browser } from './svg/browser.svg';
 export { default as Letter } from './svg/letter.svg';
 export { default as Danger } from './svg/danger.svg';
 export { default as FavoriteBook } from './svg/favoriteBook.svg';
+export { default as StampedPaper } from './svg/stamped-paper.svg';
 export { default as ThinArrowUp } from './svg/thinArrowUp.svg';
 export { default as ThinArrowDown } from './svg/thinArrowDown.svg';
 export { default as Money } from './svg/money.svg';

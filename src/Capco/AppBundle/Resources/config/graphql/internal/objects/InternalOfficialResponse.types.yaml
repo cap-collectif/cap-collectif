@@ -1,0 +1,11 @@
+InternalOfficialResponse:
+    type: object
+    inherits:
+        - PreviewOfficialResponse
+    config:
+        name: OfficialResponse
+        fields:
+            authors:
+                type: '[InternalUser!]!'
+            proposal:
+                type: 'InternalProposal!'

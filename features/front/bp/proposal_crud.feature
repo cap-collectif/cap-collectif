@@ -10,7 +10,7 @@ Scenario: Logged in user wants to create a proposal with theme
   When I click the create proposal button
   And I fill the proposal form with a theme
   And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses3_field"
-  And I wait 3 seconds
+  And I wait 10 seconds
   And I submit the create proposal form
   And I should see my new proposal
   Then I should see text matching "proposal.tabs.followers"

@@ -1,0 +1,8 @@
+DeleteOfficialResponseInput:
+  type: relay-mutation-input
+  config:
+    description: 'Input type of OfficialResponse removal'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'The id of the OfficialResponse to delete.'

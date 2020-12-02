@@ -9,23 +9,17 @@ describe('<ProposalPageOfficialAnswer />', () => {
   const emptyProposal = {
     $refType,
     id: 'proposal1',
-    news: { edges: [] },
+    officialResponse: null,
   };
 
   const proposal = {
     ...emptyProposal,
-    news: {
-      edges: [
-        {
-          node: {
-            id: 'news1',
-            title: 'Réponse officielle',
-            body: 'GG mec c accepté',
-            publishedAt: '2020_06_07',
-            authors: [{ id: 'author1', username: 'moi', media: null }],
-          },
-        },
-      ],
+    officialResponse: {
+      id: 'news1',
+      body: 'GG mec c accepté',
+      publishedAt: '2020_06_07',
+      isPublished: true,
+      authors: [{ id: 'author1', username: 'moi', media: null }],
     },
   };
 

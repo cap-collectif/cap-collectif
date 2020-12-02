@@ -1805,25 +1805,53 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "NewsConnection",
+                      "concreteType": "OfficialResponse",
                       "kind": "LinkedField",
-                      "name": "news",
+                      "name": "officialResponse",
                       "plural": false,
                       "selections": Array [
                         Object {
                           "alias": null,
                           "args": null,
-                          "concreteType": "NewsEdge",
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "body",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "User",
                           "kind": "LinkedField",
-                          "name": "edges",
+                          "name": "authors",
                           "plural": true,
                           "selections": Array [
                             Object {
                               "alias": null,
                               "args": null,
-                              "concreteType": "Post",
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Media",
                               "kind": "LinkedField",
-                              "name": "node",
+                              "name": "media",
                               "plural": false,
                               "selections": Array [
                                 Object {
@@ -1837,103 +1865,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                   "alias": null,
                                   "args": null,
                                   "kind": "ScalarField",
-                                  "name": "title",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "body",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "User",
-                                  "kind": "LinkedField",
-                                  "name": "authors",
-                                  "plural": true,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "username",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "concreteType": "Media",
-                                      "kind": "LinkedField",
-                                      "name": "media",
-                                      "plural": false,
-                                      "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "url",
-                                          "storageKey": null,
-                                        },
-                                      ],
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "publishedAt",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
                                   "name": "url",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "Media",
-                                  "kind": "LinkedField",
-                                  "name": "media",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "url",
-                                      "storageKey": null,
-                                    },
-                                  ],
                                   "storageKey": null,
                                 },
                               ],
@@ -1946,7 +1878,14 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "totalCount",
+                          "name": "publishedAt",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isPublished",
                           "storageKey": null,
                         },
                       ],
@@ -2613,6 +2552,131 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                             },
                           ],
                           "type": "MediaResponse",
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "NewsConnection",
+                      "kind": "LinkedField",
+                      "name": "news",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "NewsEdge",
+                          "kind": "LinkedField",
+                          "name": "edges",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Post",
+                              "kind": "LinkedField",
+                              "name": "node",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "title",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "url",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "Media",
+                                  "kind": "LinkedField",
+                                  "name": "media",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "url",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "User",
+                                  "kind": "LinkedField",
+                                  "name": "authors",
+                                  "plural": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "username",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "publishedAt",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "body",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "totalCount",
+                          "storageKey": null,
                         },
                       ],
                       "storageKey": null,
@@ -5577,9 +5641,9 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                             Object {
                               "alias": null,
                               "args": null,
-                              "concreteType": "Post",
+                              "concreteType": "OfficialResponse",
                               "kind": "LinkedField",
-                              "name": "post",
+                              "name": "officialResponse",
                               "plural": false,
                               "selections": Array [
                                 Object {
@@ -5625,13 +5689,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "name": "id",
                                       "storageKey": null,
                                     },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "username",
-                                      "storageKey": null,
-                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -5650,6 +5707,56 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "OfficialResponse",
+                              "kind": "LinkedField",
+                              "name": "post",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "body",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "User",
+                                  "kind": "LinkedField",
+                                  "name": "authors",
+                                  "plural": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "username",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
                               "storageKey": null,
                             },
                             Object {
@@ -6813,7 +6920,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "da6fb7ba1019fad45ad4d750cf33f767",
+          "cacheID": "7d16d1e428b9233047b8016964c2030c",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7311,7 +7418,7 @@ fragment ProposalDecisionFormPanel_proposal_2uwUKI on Proposal {
       value: id
       id
     }
-    post {
+    officialResponse {
       id
       body
       authors {
@@ -8150,23 +8257,19 @@ fragment ProposalPageNews_proposal on Proposal {
 
 fragment ProposalPageOfficialAnswer_proposal on Proposal {
   id
-  news {
-    edges {
-      node {
+  officialResponse {
+    id
+    body
+    authors {
+      id
+      username
+      media {
         id
-        title
-        body
-        authors {
-          id
-          username
-          media {
-            id
-            url
-          }
-        }
-        publishedAt
+        url
       }
     }
+    publishedAt
+    isPublished
   }
 }
 

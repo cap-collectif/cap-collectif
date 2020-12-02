@@ -75,13 +75,8 @@ const placeholder = (
 
 export const ProposalPageOfficialAnswer = ({ proposal }: Props) => {
   if (!proposal) return null;
-  const officialAnswer = proposal?.news?.edges
-    ?.filter(Boolean)
-    .map(edge => edge.node)
-    .filter(Boolean) // Oui
-    .find(e => e.title === 'Réponse officielle');
-  if (!officialAnswer) return null;
-  const authors = officialAnswer.authors || [];
+  if (!proposal.officialResponse || !proposal.officialResponse.isPublished) return null;
+  const authors = proposal.officialResponse.authors || [];
 
   return (
     <Card withBorder>
@@ -126,7 +121,7 @@ export const ProposalPageOfficialAnswer = ({ proposal }: Props) => {
             </>
           ) : null}
           <FormattedDate
-            value={moment(officialAnswer?.publishedAt)}
+            value={moment(proposal.officialResponse?.publishedAt)}
             day="numeric"
             month="long"
             year="numeric"
@@ -138,7 +133,7 @@ export const ProposalPageOfficialAnswer = ({ proposal }: Props) => {
           showLoadingAnimation
           customPlaceholder={placeholder}
           ready={proposal !== null}>
-          <BodyText maxLines={8} text={officialAnswer?.body} />
+          {proposal && <BodyText maxLines={8} text={proposal.officialResponse?.body} />}
         </ReactPlaceholder>
       </CategoryContainer>
     </Card>
@@ -149,23 +144,19 @@ export default createFragmentContainer(ProposalPageOfficialAnswer, {
   proposal: graphql`
     fragment ProposalPageOfficialAnswer_proposal on Proposal {
       id
-      news {
-        edges {
-          node {
+      officialResponse {
+        id
+        body
+        authors {
+          id
+          username
+          media {
             id
-            title
-            body
-            authors {
-              id
-              username
-              media {
-                id
-                url
-              }
-            }
-            publishedAt
+            url
           }
         }
+        publishedAt
+        isPublished
       }
     }
   `,

@@ -313,6 +313,11 @@ class Proposal implements
      */
     private Collection $revisions;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\OfficialResponse", mappedBy="proposal", cascade={"persist", "remove"})
+     */
+    private $officialResponse;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -1463,6 +1468,23 @@ class Proposal implements
             if ($revision->getProposal() === $this) {
                 $revision->setProposal(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getOfficialResponse(): ?OfficialResponse
+    {
+        return $this->officialResponse;
+    }
+
+    public function setOfficialResponse(OfficialResponse $officialResponse): self
+    {
+        $this->officialResponse = $officialResponse;
+
+        // set the owning side of the relation if necessary
+        if ($officialResponse->getProposal() !== $this) {
+            $officialResponse->setProposal($this);
         }
 
         return $this;

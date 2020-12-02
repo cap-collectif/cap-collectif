@@ -9,6 +9,7 @@ import ProposalAdminContentForm from './ProposalAdminContentForm';
 import ProposalAdminNotationForm from './ProposalAdminNotationForm';
 import ProposalAdminNewsForm from './ProposalAdminNewsForm';
 import ProposalAdminFollowers from './ProposalAdminFollowers';
+import ProposalAdminOfficialAnswer from './ProposalAdminOfficialAnswer';
 import type { ProposalAdminPageTabs_proposal } from '~relay/ProposalAdminPageTabs_proposal.graphql';
 
 type Props = { proposal: ProposalAdminPageTabs_proposal, intl: IntlShape };
@@ -33,11 +34,14 @@ export class ProposalAdminPageTabs extends Component<Props> {
           <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal.admin.advancement' })}>
             <ProposalAdminSelections proposal={proposal} />
           </Tab>
-          <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal.admin.news' })}>
+          <Tab eventKey={3} title={intl.formatMessage({ id: 'official.answer' })}>
+            <ProposalAdminOfficialAnswer proposal={proposal} />
+          </Tab>
+          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal.admin.news' })}>
             <ProposalAdminNewsForm proposal={proposal} />
           </Tab>
           <Tab
-            eventKey={4}
+            eventKey={5}
             title={
               <div>
                 <FormattedMessage id="proposal.tabs.followers" />
@@ -48,10 +52,10 @@ export class ProposalAdminPageTabs extends Component<Props> {
             }>
             <ProposalAdminFollowers proposal={proposal} />
           </Tab>
-          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
+          <Tab eventKey={6} title={intl.formatMessage({ id: 'proposal.tabs.evaluation' })}>
             <ProposalAdminNotationForm proposal={proposal} />
           </Tab>
-          <Tab eventKey={6} title={intl.formatMessage({ id: 'global.state' })}>
+          <Tab eventKey={7} title={intl.formatMessage({ id: 'global.state' })}>
             <ProposalAdminStatusForm proposal={proposal} />
           </Tab>
         </Tabs>
@@ -75,6 +79,7 @@ export default createFragmentContainer(container, {
       ...ProposalAdminNotationForm_proposal
       ...ProposalAdminNewsForm_proposal
       ...ProposalAdminFollowers_proposal
+      ...ProposalAdminOfficialAnswer_proposal
       allFollowers: followers(first: 0) {
         totalCount
       }

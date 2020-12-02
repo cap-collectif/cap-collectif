@@ -3460,6 +3460,27 @@ type DeleteMediaAdminPayload {
   clientMutationId: String
 }
 
+"""Available errors on OfficialResponse removal"""
+enum DeleteOfficialResponseErrorCode {
+  """No OfficialResponse match your id"""
+  ID_NOT_FOUND
+}
+
+input DeleteOfficialResponseInput {
+  """The id of the OfficialResponse to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteOfficialResponsePayload {
+  """The id of the OfficialResponse who just have been deleted."""
+  id: ID
+
+  """The error, if any."""
+  error: DeleteOfficialResponseErrorCode
+  clientMutationId: String
+}
+
 input DeleteOpinionInput {
   """The opinion id"""
   opinionId: ID!
@@ -5601,6 +5622,8 @@ type Mutation {
   sendEmailingCampaign(input: SendEmailingCampaignInput!): SendEmailingCampaignPayload
   testEmailingCampaign(input: TestEmailingCampaignInput!): TestEmailingCampaignPayload
   cancelEmailingCampaign(input: CancelEmailingCampaignInput!): CancelEmailingCampaignPayload
+  updateOfficialResponse(input: UpdateOfficialResponseInput!): UpdateOfficialResponsePayload
+  deleteOfficialResponse(input: DeleteOfficialResponseInput!): DeleteOfficialResponsePayload
   addDebateOpinion(input: AddDebateOpinionInput!): AddDebateOpinionPayload
   updateDebateOpinion(input: UpdateDebateOpinionInput!): UpdateDebateOpinionPayload
   deleteDebateOpinion(input: DeleteDebateOpinionInput!): DeleteDebateOpinionPayload
@@ -5706,6 +5729,34 @@ type Oauth2SSOConfiguration implements Node & SSOConfiguration {
 
   """Redirect URI callback."""
   redirectUri: URI!
+}
+
+"""An official response"""
+type OfficialResponse implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  body(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): HTML
+
+  """if the response is published"""
+  isPublished: Boolean!
+
+  """Identifies the date and time when the object was or will be published"""
+  publishedAt: DateTime
+
+  """The response's authors."""
+  authors: [User!]!
+
+  """The proposal linked to the official response"""
+  proposal: Proposal!
 }
 
 """A contribution"""
@@ -7209,6 +7260,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
     last: Int
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: DESC}
   ): NewsConnection!
+  officialResponse: OfficialResponse
 
   """The related project."""
   project: Project
@@ -7545,8 +7597,11 @@ type ProposalDecision {
   """The estimated cost of the related proposal in €."""
   estimatedCost: Int
 
-  """The related post containing the official response."""
-  post: Post!
+  """The related official response."""
+  post: OfficialResponse! @deprecated(reason: "Field `post` will be removed. Use `officialResponse` instead. Replaced by OfficialResponse Removal on 2020-11-13 UTC.")
+
+  """The related official response."""
+  officialResponse: OfficialResponse!
 
   """The current status of the decision on the proposal"""
   state: ProposalDecisionState!
@@ -11771,6 +11826,57 @@ input UpdateLocaleStatusInput {
 
 type UpdateLocaleStatusPayload {
   locales: LocaleConnection!
+  clientMutationId: String
+}
+
+"""Available errors on OfficialResponse creation or edition"""
+enum UpdateOfficialResponseErrorCode {
+  """No OfficialResponse match your id"""
+  ID_NOT_FOUND
+
+  """No author match your id"""
+  AUTHOR_NOT_FOUND
+
+  """OfficialResponse needs at least one author"""
+  NO_AUTHOR
+
+  """No proposal match your id"""
+  PROPOSAL_NOT_FOUND
+
+  """The proposal already has an OfficialResponse"""
+  PROPOSAL_HAS_RESPONSE
+
+  """The received date is not valid."""
+  INVALID_DATE
+}
+
+input UpdateOfficialResponseInput {
+  """If provided, the id of the OfficialResponse to update."""
+  id: ID
+
+  """The body of the OfficialResponse."""
+  body: HTML!
+
+  """True if the OfficialResponse is published."""
+  isPublished: Boolean!
+
+  """Identifies the date and time when the object has to be published."""
+  publishedAt: DateTime
+
+  """The id of the authors of the OfficialResponse."""
+  authors: [ID!]!
+
+  """The id of the proposal linked to the OfficialResponse."""
+  proposal: ID!
+  clientMutationId: String
+}
+
+type UpdateOfficialResponsePayload {
+  """The OfficialResponse who just have been updated."""
+  officialResponse: OfficialResponse
+
+  """The error, if any."""
+  error: UpdateOfficialResponseErrorCode
   clientMutationId: String
 }
 

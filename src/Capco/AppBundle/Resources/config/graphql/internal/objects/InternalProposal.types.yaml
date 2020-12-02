@@ -47,6 +47,9 @@ InternalProposal:
                     orderBy:
                         type: 'InternalProposalOrder'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
+            officialResponse:
+                type: 'InternalOfficialResponse'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalOfficialResponseResolver", [value, getUser()])'
             reportings:
                 type: 'ReportingConnection!'
                 argsBuilder: 'Relay::Connection'

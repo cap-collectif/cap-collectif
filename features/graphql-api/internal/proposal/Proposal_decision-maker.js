@@ -16,7 +16,6 @@ const ProposalDecisionQuery = /* GraphQL */ `
           post {
             id
             body
-            title
             authors {
               id
             }

@@ -14,10 +14,10 @@ class AdminProposalPage extends Page
     protected $elements = [
         'proposal content tab' => '#proposal-admin-page-tabs-tab-1',
         'proposal advancement tab' => '#proposal-admin-page-tabs-tab-2',
-        'proposal actuality tab' => '#proposal-admin-page-tabs-tab-3',
-        'proposal followers tab' => '#proposal-admin-page-tabs-tab-4',
-        'proposal evaluation tab' => '#proposal-admin-page-tabs-tab-5',
-        'proposal status tab' => '#proposal-admin-page-tabs-tab-6',
+        'proposal actuality tab' => '#proposal-admin-page-tabs-tab-4',
+        'proposal followers tab' => '#proposal-admin-page-tabs-tab-5',
+        'proposal evaluation tab' => '#proposal-admin-page-tabs-tab-6',
+        'proposal status tab' => '#proposal-admin-page-tabs-tab-7',
         'proposal title' => '#proposal_title',
         'proposal summary' => '#proposal_summary',
         'proposal save' => '#proposal_admin_content_save',
@@ -30,12 +30,12 @@ class AdminProposalPage extends Page
         'proposal advancement save' => '#proposal_advancement_save',
         'proposal evaluation analysts groupes save' => '#proposal-evaluation-analysts-groupes-save',
         'proposal evaluation evaluate' =>
-            '#proposal-admin-page-tabs-pane-5 input[type="text"][id="proposal-admin-evaluation-responses0"]',
+            '#proposal-admin-page-tabs-pane-6 input[type="text"][id="proposal-admin-evaluation-responses0"]',
         'proposal evaluation evaluate more information' =>
-            '#proposal-admin-page-tabs-pane-5 textarea[type="textarea"][id="proposal-admin-evaluation-responses1"]',
+            '#proposal-admin-page-tabs-pane-6 textarea[type="textarea"][id="proposal-admin-evaluation-responses1"]',
         'proposal evaluation custom save' => '#proposal-evaluation-custom-save',
         'proposal evaluation presentation' =>
-            '#proposal-admin-page-tabs-pane-5 div[id="proposal-admin-evaluation-responses2"]',
+            '#proposal-admin-page-tabs-pane-6 div[id="proposal-admin-evaluation-responses2"]',
         'proposal export' => '#proposal-follower-dropdown-export',
     ];
 

@@ -21,10 +21,10 @@ class ProposalDecision implements Timestampable
     use UuidTrait;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Post", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity=OfficialResponse::class, inversedBy="proposalDecision", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false, name="official_response_id")
      */
-    private $post;
+    private ?OfficialResponse $officialResponse;
 
     /**
      * @ORM\Column(type="integer", nullable=true, name="estimated_cost")
@@ -68,10 +68,10 @@ class ProposalDecision implements Timestampable
      */
     private $updatedAt;
 
-    public function __construct(Proposal $proposal, Post $post)
+    public function __construct(Proposal $proposal, ?OfficialResponse $officialResponse = null)
     {
         $this->proposal = $proposal;
-        $this->post = $post;
+        $this->officialResponse = $officialResponse;
     }
 
     public function getId(): string
@@ -79,14 +79,14 @@ class ProposalDecision implements Timestampable
         return $this->id;
     }
 
-    public function getPost(): Post
+    public function getOfficialResponse(): ?OfficialResponse
     {
-        return $this->post;
+        return $this->officialResponse;
     }
 
-    public function setPost(Post $post): self
+    public function setOfficialResponse(OfficialResponse $officialResponse): self
     {
-        $this->post = $post;
+        $this->officialResponse = $officialResponse;
 
         return $this;
     }
@@ -167,5 +167,11 @@ class ProposalDecision implements Timestampable
         $this->state = $state;
 
         return $this;
+    }
+
+    //TODO remove it when graphql do not use it anymore
+    public function getPost(): ?OfficialResponse
+    {
+        return $this->getOfficialResponse();
     }
 }

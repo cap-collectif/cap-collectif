@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\OfficialResponse;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
@@ -92,7 +92,10 @@ class ChangeProposalDecisionMutation implements MutationInterface
         $oldState = $proposalDecision->getState();
 
         $this->updateDecision($proposalDecision, $args, $viewer);
-        $post = $this->updateDecisionPost($proposalDecision->getPost(), $args);
+        $officialResponse = $this->updateDecisionOfficialResponse(
+            $proposalDecision->getOfficialResponse(),
+            $args
+        );
         $this->setRefusedReasonIfAny($proposalDecision, $args);
 
         if ($args->offsetGet('isDone')) {
@@ -105,7 +108,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
                 $this->dispatchEvent($proposal, $args);
             }
             $this->entityManager->flush();
-            $this->index($proposal, $post);
+            $this->index($proposal);
             $this->notifyIfDecision($oldState, $proposalDecision);
 
             return [
@@ -114,7 +117,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
                 'errorCode' => null,
             ];
         }
-        $post->setIsPublished(false);
+        $officialResponse->setIsPublished(false);
 
         try {
             $this->entityManager->flush();
@@ -144,24 +147,13 @@ class ChangeProposalDecisionMutation implements MutationInterface
 
     private function createProposalDecision(Proposal $proposal, string $locale): ProposalDecision
     {
-        $post = new Post();
-        $proposalDecision = new ProposalDecision($proposal, $post);
+        $officialResponse = new OfficialResponse();
+        $proposalDecision = new ProposalDecision($proposal, $officialResponse);
 
-        $post
-            ->setLocale($locale)
-            ->setTitle(
-                $this->translator->trans(
-                    'proposal_decision.official_response',
-                    [],
-                    'CapcoAppBundle',
-                    $locale
-                )
-            )
-            ->addProposal($proposal)
-            ->setIsPublished(false)
-            ->setdisplayedOnBlog(false);
+        $officialResponse
+            ->setProposal($proposal)
+            ->setIsPublished(false);
 
-        $post->mergeNewTranslations();
         $proposalDecision->setProposal($proposal);
         $this->entityManager->persist($proposalDecision);
 
@@ -208,25 +200,29 @@ class ChangeProposalDecisionMutation implements MutationInterface
             );
     }
 
-    private function updateDecisionPost(Post $post, Argument $args): Post
-    {
-        $post->setBody($args->offsetGet('body') ?? '');
+    private function updateDecisionOfficialResponse(
+        OfficialResponse $officialResponse,
+        Argument $args
+    ): OfficialResponse {
+        $officialResponse->setBody($args->offsetGet('body') ?? '');
 
-        return $this->updateDecisionPostAuthors($post, $args);
+        return $this->updateDecisionOfficialResponseAuthors($officialResponse, $args);
     }
 
-    private function updateDecisionPostAuthors(Post $post, Argument $args): Post
-    {
+    private function updateDecisionOfficialResponseAuthors(
+        OfficialResponse $officialResponse,
+        Argument $args
+    ): OfficialResponse {
         $authors = $args->offsetGet('authors') ?? [];
         if (!empty($authors)) {
             $authorsIds = [];
             foreach ($authors as $author) {
                 $authorsIds[] = GlobalId::fromGlobalId($author)['id'];
             }
-            $post->setAuthors($this->userRepository->findBy(['id' => $authorsIds]));
+            $officialResponse->setAuthors($this->userRepository->findBy(['id' => $authorsIds]));
         }
 
-        return $post;
+        return $officialResponse;
     }
 
     private function setRefusedReasonIfAny(
@@ -261,12 +257,9 @@ class ChangeProposalDecisionMutation implements MutationInterface
         return $proposal;
     }
 
-    private function index(Proposal $proposal, ?Post $post = null): void
+    private function index(Proposal $proposal): void
     {
         $this->indexer->index(Proposal::class, $proposal->getId());
-        if ($post) {
-            $this->indexer->index(Post::class, $post->getId());
-        }
 
         $this->indexer->finishBulk();
     }
@@ -291,7 +284,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         $message = [
             'type' => 'decision',
             'proposalId' => $proposalDecision->getProposal()->getId(),
-            'date' => $proposalDecision->getUpdatedAt()->format('Y-m-d H:i:s')
+            'date' => $proposalDecision->getUpdatedAt()->format('Y-m-d H:i:s'),
         ];
         if (
             ProposalStatementState::DONE === $proposalDecision->getState() &&

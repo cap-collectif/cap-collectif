@@ -7,27 +7,12 @@ const ChangeProposalDecisionMutation = /* GraphQL */ `
       errorCode
       proposal {
         id
-        news {
-          totalCount
-          edges {
-            node {
-              abstract
-              url
-              media {
-                url
-              }
-              title
-              themes {
-                title
-                url
-              }
-              authors {
-                id
-                url
-                vip
-                displayName
-              }
-            }
+        officialResponse {
+          authors {
+            id
+            url
+            vip
+            displayName
           }
         }
       }
@@ -38,11 +23,8 @@ const ChangeProposalDecisionMutation = /* GraphQL */ `
           id
         }
         estimatedCost
-        post {
-          translations {
-            title
-            body
-          }
+        officialResponse {
+          body
           authors {
             id
           }

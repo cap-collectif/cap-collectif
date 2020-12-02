@@ -207,6 +207,7 @@ EOF;
         'proposal_illustration' => 'media.url',
         'proposal_summary' => 'summary',
         'proposal_description' => 'bodyText',
+        'proposal_officialResponse' => 'officialResponse.body',
     ];
 
     protected const COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER = [
@@ -1574,7 +1575,14 @@ ${COMMENT_VOTE_INFOS}
             }
             summary
             bodyText
-            
+            officialResponse {
+              body
+              isPublished
+              publishedAt
+              authors {
+                ... authorInfos
+              }
+            }
             news(first: ${NEWS_PER_PAGE}${newsAfter}) {
                 totalCount
                 pageInfo {

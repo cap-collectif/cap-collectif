@@ -16,7 +16,7 @@ PreviewProposalDecision:
                 description: 'The related proposal.'
             decisionMaker:
                 type: 'PreviewUser!'
-                resolve: "@=value.getUpdatedBy()"
+                resolve: '@=value.getUpdatedBy()'
                 description: 'The last updated by a decision-maker.'
             isApproved:
                 type: 'Boolean!'
@@ -25,8 +25,12 @@ PreviewProposalDecision:
                 type: 'Int'
                 description: 'The estimated cost of the related proposal in €.'
             post:
-                type: 'PreviewPost!'
-                description: 'The related post containing the official response.'
+                type: 'PreviewOfficialResponse!'
+                description: 'The related official response.'
+                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-11-13", reason: "Replaced by OfficialResponse", description: "Field `post` will be removed.", supersededBy: "Use `officialResponse` instead."})'
+            officialResponse:
+                type: 'PreviewOfficialResponse!'
+                description: 'The related official response.'
             state:
                 type: 'ProposalDecisionState!'
                 description: 'The current status of the decision on the proposal'

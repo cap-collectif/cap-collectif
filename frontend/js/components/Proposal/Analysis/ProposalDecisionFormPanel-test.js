@@ -27,7 +27,7 @@ describe('<ProposalDecisionFormPanel  /> ', () => {
           label: 'name',
           value: 'id',
         },
-        post: {
+        officialResponse: {
           id: 'pid',
           body: 'oe',
           authors: [

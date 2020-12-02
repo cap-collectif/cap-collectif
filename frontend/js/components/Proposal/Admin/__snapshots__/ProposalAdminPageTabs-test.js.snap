@@ -66,6 +66,24 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
     </Tab>
     <Tab
       eventKey={3}
+      title="official.answer"
+    >
+      <Relay(ProposalAdminOfficialAnswer)
+        proposal={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allFollowers": Object {
+              "totalCount": 169,
+            },
+            "reference": "1-1",
+            "url": "",
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey={4}
       title="proposal.admin.news"
     >
       <Relay(injectIntl(ProposalAdminNewsForm))
@@ -83,7 +101,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
-      eventKey={4}
+      eventKey={5}
       title={
         <div>
           <FormattedMessage
@@ -113,7 +131,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
-      eventKey={5}
+      eventKey={6}
       title="proposal.tabs.evaluation"
     >
       <Relay(Connect(injectIntl(ReduxForm)))
@@ -131,7 +149,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
-      eventKey={6}
+      eventKey={7}
       title="global.state"
     >
       <Relay(Connect(ReduxForm))

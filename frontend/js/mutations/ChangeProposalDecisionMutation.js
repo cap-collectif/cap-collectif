@@ -33,7 +33,7 @@ const mutation = graphql`
             label: name
             value: id
           }
-          post {
+          officialResponse {
             id
             body
             authors {
@@ -63,12 +63,9 @@ const mutation = graphql`
           id
           decision {
             estimatedCost
-            post {
+            officialResponse {
               id
-              translations {
-                title
-                body
-              }
+              body
               authors {
                 id
               }
@@ -82,12 +79,9 @@ const mutation = graphql`
           }
         }
         estimatedCost
-        post {
+        officialResponse {
           id
-          translations {
-            title
-            body
-          }
+          body
           authors {
             id
           }

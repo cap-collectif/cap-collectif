@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
@@ -221,6 +222,10 @@ class GlobalIdResolver
                     break;
                 case 'EmailingCampaign':
                     $node = $this->container->get(EmailingCampaignRepository::class)->find($uuid);
+
+                    break;
+                case 'OfficialResponse':
+                    $node = $this->container->get(OfficialResponseRepository::class)->find($uuid);
 
                     break;
                 default:

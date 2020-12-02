@@ -1,0 +1,78 @@
+Capco\AppBundle\Entity\OfficialResponse:
+    officialResponse11:
+        id: 'officialResponse11'
+        isPublished: true
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+        publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+        updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+        Authors:
+            - '@user3'
+        proposal: '@proposal1'
+        body: Très bien tout ça je valide
+    officialResponse17:
+        id: 'officialResponse17'
+        isPublished: true
+        createdAt: <(new \DateTime('2019-01-02 00:00:00'))>
+        publishedAt: <(new \DateTime('2019-01-02 00:00:00'))>
+        updatedAt: <(new \DateTime('2019-01-02 00:00:00'))>
+        Authors:
+            - '@userSupervisor2'
+        proposal: '@proposal113'
+        body: En vertu de l'analyse précedemment réalisée, nous avons décider de soutenir la proposition tant financièrement que moralement.
+    officialResponse18:
+        id: 'officialResponse18'
+        isPublished: true
+        createdAt: <(new \DateTime('2019-01-02 02:00:00'))>
+        publishedAt: <(new \DateTime('2019-01-02 00:06:00'))>
+        updatedAt: <(new \DateTime('2019-01-02 00:07:00'))>
+        Authors:
+            - '@userSupervisor2'
+        proposal: '@proposal115'
+        body: "C'est avec grand regret que nous vous annonçons que la proposition est favorable."
+    officialResponse19:
+        id: 'officialResponse19'
+        isPublished: true
+        createdAt: <(new \DateTime('2019-01-02 02:02:00'))>
+        publishedAt: <(new \DateTime('2019-01-02 00:04:00'))>
+        updatedAt: <(new \DateTime('2019-01-02 00:05:00'))>
+        Authors:
+            - '@userSupervisor2'
+        proposal: '@proposal109'
+        body: 'Je sais pas trop quoi mettre dans le body désolé Spyl, me vire pas stp.'
+    officialResponse20:
+        id: 'officialResponse20'
+        isPublished: true
+        createdAt: <(new \DateTime('2020-01-01 00:01:22'))>
+        publishedAt: <(new \DateTime('2020-01-01 00:01:22'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:01:22'))>
+        Authors:
+            - '@userSpyl'
+        proposal: '@proposalIdf1'
+        body: 'Félicitations, cette proposition respecte tous nos critères et peut donc passer au vote.'
+    officialResponse21:
+        id: 'officialResponse21'
+        isPublished: false
+        createdAt: <(new \DateTime('2020-01-01 00:01:24'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:01:24'))>
+        Authors:
+            - '@userSpyl'
+        proposal: '@proposalIdf2'
+        body: 'On réfléchit encore !'
+    officialResponse22:
+        id: 'officialResponse22'
+        isPublished: false
+        createdAt: <(new \DateTime('2020-01-01 00:01:25'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:01:25'))>
+        Authors:
+            - '@userSpyl'
+        proposal: '@proposalIdf3'
+        body: 'Déso, on en veut pas'
+    officialResponse23:
+        id: 'officialResponse23'
+        isPublished: false
+        createdAt: <(new \DateTime('2020-01-01 00:01:06'))>
+        updatedAt: <(new \DateTime('2020-01-01 00:01:30'))>
+        Authors:
+            - '@userDecisionMaker'
+        proposal: '@assignedProposals121'
+        body: 'Déso, on en veut pas'

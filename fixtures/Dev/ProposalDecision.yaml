@@ -1,7 +1,8 @@
 Capco\AppBundle\Entity\ProposalDecision:
     proposalDecision1:
         id: 'proposalDecision1'
-        __construct: ['@proposal113', '@post17']
+        __construct: ['@proposal113']
+        officialResponse: '@officialResponse17'
         estimatedCost: 500
         updatedBy: '@userDecisionMaker'
         isApproved: true
@@ -10,7 +11,8 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedAt: $createdAt
     proposalDecision2:
         id: 'proposalDecision2'
-        __construct: ['@proposal115', '@post18']
+        __construct: ['@proposal115']
+        officialResponse: '@officialResponse18'
         estimatedCost: 500000
         updatedBy: '@userDecisionMaker'
         isApproved: false
@@ -19,7 +21,8 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedAt: $createdAt
     proposalDecision3:
         id: 'proposalDecision3'
-        __construct: ['@proposal109', '@post19']
+        __construct: ['@proposal109']
+        officialResponse: '@officialResponse19'
         estimatedCost: 3200
         updatedBy: '@userDecisionMaker'
         isApproved: true
@@ -28,7 +31,8 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedAt: $createdAt
     proposalDecisionIdf1:
         id: 'proposalDecision4'
-        __construct: ['@proposalIdf1', '@post20']
+        __construct: ['@proposalIdf1']
+        officialResponse: '@officialResponse20'
         estimatedCost: 3200
         updatedBy: '@userSpyl'
         isApproved: true
@@ -37,7 +41,8 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedAt: $createdAt
     proposalDecisionIdf2:
         id: 'proposalDecision5'
-        __construct: ['@proposalIdf2', '@post21']
+        __construct: ['@proposalIdf2']
+        officialResponse: '@officialResponse21'
         estimatedCost: 10000
         updatedBy: '@userSpyl'
         isApproved: true
@@ -46,7 +51,8 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedAt: $createdAt
     proposalDecisionIdf3:
         id: 'proposalDecision6'
-        __construct: ['@proposalIdf3', '@post22']
+        __construct: ['@proposalIdf3']
+        officialResponse: '@officialResponse22'
         estimatedCost: 0
         updatedBy: '@userSpyl'
         refusedReason: '@statusIdfAnalyse3'
@@ -56,7 +62,8 @@ Capco\AppBundle\Entity\ProposalDecision:
         updatedAt: $createdAt
     proposalDecision4:
         id: 'proposalDecision7'
-        __construct: ['@assignedProposals121', '@post23']
+        __construct: ['@assignedProposals121']
+        officialResponse: '@officialResponse23'
         estimatedCost: 3200
         updatedBy: '@userDecisionMaker'
         isApproved: true

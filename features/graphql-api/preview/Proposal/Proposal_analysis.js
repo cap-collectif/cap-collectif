@@ -25,9 +25,8 @@ const ProposalAnalysisPreviewData = /* GraphQL */ `
                   id
                   name
                 }
-                post {
+                officialResponse {
                   id
-                  title
                 }
               }
               assessment {

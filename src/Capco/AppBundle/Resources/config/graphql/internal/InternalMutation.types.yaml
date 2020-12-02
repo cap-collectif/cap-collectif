@@ -1024,6 +1024,20 @@ InternalMutation:
                     inputType: CancelEmailingCampaignInput
                     payloadType: CancelEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CancelEmailingCampaignMutation", [value, getUser()])'
+            updateOfficialResponse:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateOfficialResponseInput
+                    payloadType: UpdateOfficialResponsePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOfficialResponseMutation", [value, getUser()])'
+            deleteOfficialResponse:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteOfficialResponseInput
+                    payloadType: DeleteOfficialResponsePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteOfficialResponseMutation", [value, getUser()])'
             addDebateOpinion:
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('unstable__debate')"
                 builder: 'Relay::Mutation'

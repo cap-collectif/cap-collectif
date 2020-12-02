@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminOfficialAnswerForm /> render correctly with response 1`] = `
+<div
+  className="mt-20"
+>
+  <ProposalAdminOfficialAnswer__Container>
+    <div>
+      <h3>
+        <FormattedMessage
+          id="official.answer"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <ProposalAdminOfficialAnswerForm__Form
+      id="proposalAdminOfficialAnswerForm"
+      onSubmit={[MockFunction]}
+    >
+      <UserListField
+        ariaControls="EventListFilters-filter-author-listbox"
+        authorOfEvent={false}
+        autoload={false}
+        className=""
+        clearable={true}
+        debounce={true}
+        id="authors"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="admin.fields.project.authors"
+            values={Object {}}
+          />
+        }
+        labelClassName="control-label"
+        multi={true}
+        name="authors"
+        placeholder=" "
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        id="body"
+        label={
+          <FormattedMessage
+            id="global.reply"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="editor"
+      />
+      <Field
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "disabled": true,
+          }
+        }
+        disabled={true}
+        id="publishedAt"
+        label={
+          <FormattedMessage
+            id="global.updated.date"
+            values={Object {}}
+          />
+        }
+        name="publishedAt"
+        type="datetime"
+      />
+    </ProposalAdminOfficialAnswerForm__Form>
+  </ProposalAdminOfficialAnswer__Container>
+  <Connect(SubmitButton)
+    bsStyle="primary"
+    disabled={true}
+    id="proposal_admin_official_answer_publish"
+    label="source.create.submit"
+    onSubmit={[Function]}
+    type="submit"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    className="ml-10"
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    <FormattedMessage
+      id="global.cancel"
+      values={Object {}}
+    />
+  </Button>
+</div>
+`;
+
+exports[`<ProposalAdminOfficialAnswerForm /> render correctly without response 1`] = `
+<div
+  className="mt-20"
+>
+  <ProposalAdminOfficialAnswer__Container>
+    <div>
+      <h3>
+        <FormattedMessage
+          id="official.answer"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <ProposalAdminOfficialAnswerForm__Form
+      id="proposalAdminOfficialAnswerForm"
+      onSubmit={[MockFunction]}
+    >
+      <UserListField
+        ariaControls="EventListFilters-filter-author-listbox"
+        authorOfEvent={false}
+        autoload={false}
+        className=""
+        clearable={true}
+        debounce={true}
+        id="authors"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="admin.fields.project.authors"
+            values={Object {}}
+          />
+        }
+        labelClassName="control-label"
+        multi={true}
+        name="authors"
+        placeholder=" "
+        selectFieldIsObject={true}
+      />
+      <Field
+        component={[Function]}
+        id="body"
+        label={
+          <FormattedMessage
+            id="global.reply"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="editor"
+      />
+      <Field
+        component={[Function]}
+        dateTimeInputProps={
+          Object {
+            "disabled": undefined,
+          }
+        }
+        id="publishedAt"
+        label={
+          <FormattedMessage
+            id="global.updated.date"
+            values={Object {}}
+          />
+        }
+        name="publishedAt"
+        type="datetime"
+      />
+    </ProposalAdminOfficialAnswerForm__Form>
+  </ProposalAdminOfficialAnswer__Container>
+  <Connect(SubmitButton)
+    bsStyle="primary"
+    disabled={true}
+    id="proposal_admin_official_answer_publish"
+    label="source.create.submit"
+    onSubmit={[Function]}
+    type="submit"
+  />
+</div>
+`;

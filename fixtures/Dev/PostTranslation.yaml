@@ -35,16 +35,6 @@ Capco\AppBundle\Entity\PostTranslation:
         title: Post EN <current()>
         abstract: Abstract of post EN <current()>
         body: Body of post EN <current()>
-    postFr11:
-        locale: fr-FR
-        translatable: '@post11'
-        title: Réponses officielle
-        body: Très bien tout ça je valide
-    postEn11:
-        locale: en-GB
-        translatable: '@post11'
-        title: Official answer
-        body: Very good, approved
     postFr{12..15}:
         locale: fr-FR
         translatable: '@post<current()>'
@@ -67,48 +57,3 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@post16'
         title: Private project post for admin@test.com
         body: Very good, approved by la street
-    postFr17:
-        locale: fr-FR
-        translatable: '@post17'
-        title: 'Réponse officielle de la proposition 17'
-        body: "En vertu de l'analyse précedemment réalisée, nous avons décider de soutenir la proposition tant financièrement que moralement."
-    postEn17:
-        locale: en-GB
-        translatable: '@post17'
-        title: I'm a post
-        body: I'm the post's body
-    postFr18:
-        locale: fr-FR
-        translatable: '@post18'
-        title: 'Réponse officielle de la proposition 19'
-        body: "C'est avec grand regret que nous vous annonçons que la proposition est favorable."
-    postEn18:
-        locale: en-GB
-        translatable: '@post18'
-        title: I'm a post 18
-        body: I'm the post's body 18
-    postFr19:
-        locale: fr-FR
-        translatable: '@post19'
-        title: 'Réponse officielle de la proposition 19'
-        body: 'Je sais pas trop quoi mettre dans le body désolé Spyl, me vire pas stp.'
-    postEn19:
-        locale: en-GB
-        translatable: '@post19'
-        title: I'm a post 19
-        body: I'm the post's body 19
-    postFr20:
-        locale: fr-FR
-        translatable: '@post20'
-        title: 'Réponse officielle'
-        body: 'Félicitations, cette proposition respecte tous nos critères et peut donc passer au vote.'
-    postFr21:
-        locale: fr-FR
-        translatable: '@post21'
-        title: 'Réponse officielle'
-        body: 'On réfléchit encore !'
-    postFr22:
-        locale: fr-FR
-        translatable: '@post22'
-        title: 'Réponse officielle'
-        body: 'Déso, on en veut pas'

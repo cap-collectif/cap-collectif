@@ -1,0 +1,28 @@
+PreviewOfficialResponse:
+    type: object
+    inherits: [Node, Timestampable]
+    config:
+        name: OfficialResponse
+        description: 'An official response'
+        interfaces: [Node]
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: OfficialResponse
+            body:
+                type: 'HTML'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getBody(args["locale"], true)'
+            isPublished:
+                type: 'Boolean!'
+                description: 'if the response is published'
+            publishedAt:
+                type: 'DateTime'
+                description: 'Identifies the date and time when the object was or will be published'
+            authors:
+                type: '[PreviewUser!]!'
+                description: "The response's authors."
+            proposal:
+                type: 'PreviewProposal!'
+                description: 'The proposal linked to the official response'

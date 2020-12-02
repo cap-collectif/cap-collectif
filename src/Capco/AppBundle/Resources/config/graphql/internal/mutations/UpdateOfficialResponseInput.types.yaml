@@ -1,0 +1,23 @@
+UpdateOfficialResponseInput:
+  type: relay-mutation-input
+  config:
+    description: 'Input type of OfficialResponse'
+    fields:
+      id:
+        type: 'ID'
+        description: 'If provided, the id of the OfficialResponse to update.'
+      body:
+        type: 'HTML!'
+        description: 'The body of the OfficialResponse.'
+      isPublished:
+        type: 'Boolean!'
+        description: 'True if the OfficialResponse is published.'
+      publishedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object has to be published.'
+      authors:
+        type: '[ID!]!'
+        description: 'The id of the authors of the OfficialResponse.'
+      proposal:
+        type: 'ID!'
+        description: 'The id of the proposal linked to the OfficialResponse.'

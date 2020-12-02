@@ -670,6 +670,34 @@ enum NotPublishedReason {
   WAITING_AUTHOR_CONFIRMATION
 }
 
+"""An official response"""
+type OfficialResponse implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  body(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): HTML
+
+  """if the response is published"""
+  isPublished: Boolean!
+
+  """Identifies the date and time when the object was or will be published"""
+  publishedAt: DateTime
+
+  """The response's authors."""
+  authors: [User!]!
+
+  """The proposal linked to the official response"""
+  proposal: Proposal!
+}
+
 """A contribution"""
 type Opinion implements Node & Contribution & Publishable {
   """The ID of an object"""
@@ -741,83 +769,6 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: String
-}
-
-"""A post"""
-type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocatable {
-  """The ID of an object"""
-  id: ID!
-
-  """The URL to this resource."""
-  url: URI!
-
-  """The admin url for this post."""
-  adminUrl: URI!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """The post's title."""
-  title(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String
-
-  """Identifies the date and time when the object was published."""
-  publishedAt: DateTime
-
-  """The post's authors."""
-  authors: [User!]!
-
-  """The publication status for this post."""
-  publicationStatus: PostPublicationStatus!
-
-  """Wether or not the post is commentable."""
-  commentable: Boolean!
-
-  """Abstract of the post."""
-  abstract(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String!
-
-  """The post's related media."""
-  media: Media
-
-  """The post's related themes."""
-  themes: [Theme!]!
-  body(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): HTML
-  translations: [PostTranslation!]!
-}
-
-"""Available publication statuses for a post."""
-enum PostPublicationStatus {
-  """Normal status, publicly visible"""
-  PUBLISHED
-
-  """Not publicly visible"""
-  NOT_PUBLISHED
-}
-
-"""A translation post."""
-type PostTranslation {
-  """The post translation related locale."""
-  locale: TranslationLocale!
-
-  """The title of the post translation."""
-  title: String
-
-  """The body of the post translation."""
-  body: HTML
-
-  """Abstract of the post translation."""
-  abstract: String
 }
 
 input PreviewEventTranslationInput {
@@ -1192,8 +1143,11 @@ type ProposalDecision {
   """The estimated cost of the related proposal in €."""
   estimatedCost: Int
 
-  """The related post containing the official response."""
-  post: Post!
+  """The related official response."""
+  post: OfficialResponse! @deprecated(reason: "Field `post` will be removed. Use `officialResponse` instead. Replaced by OfficialResponse Removal on 2020-11-13 UTC.")
+
+  """The related official response."""
+  officialResponse: OfficialResponse!
 
   """The current status of the decision on the proposal"""
   state: ProposalDecisionState!
@@ -1954,33 +1908,6 @@ type SynthesisStep implements Step & Node {
   state: StepState!
 }
 
-"""A theme"""
-type Theme implements UniformResourceLocatable {
-  """The URL to this resource."""
-  url: URI!
-  id: ID!
-  title(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String!
-  translations: [ThemeTranslation!]!
-}
-
-"""A translation theme."""
-type ThemeTranslation {
-  """The theme translation related locale."""
-  locale: TranslationLocale!
-
-  """The title of the theme translation."""
-  title: String
-
-  """The body of the theme translation."""
-  body: String
-
-  """The theme translation teaser."""
-  teaser: String
-}
-
 """A time range that contains start date and end date."""
 type TimeRange {
   """The start date of the time range."""
@@ -2043,12 +1970,6 @@ enum TrashableStatus {
 
 """An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string."""
 scalar URI
-
-"""Represents a type that can be retrieved by a URL on the admin."""
-interface UniformResourceAdminLocatable {
-  """The admin URL to this resource."""
-  adminUrl: URI!
-}
 
 """Represents a type that can be retrieved by a URL."""
 interface UniformResourceLocatable {

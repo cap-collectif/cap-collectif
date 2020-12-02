@@ -196,6 +196,7 @@ export const ICON_NAME = {
   letter: 'letter',
   danger: 'danger',
   favoriteBook: 'favoriteBook',
+  stampedPaper: 'stampedPaper',
   thinArrowUp: 'thin-arrow-up',
   thinArrowDown: 'thin-arrow-down',
   money: 'money',
@@ -599,6 +600,8 @@ const getIcon = name => {
       return <Icons.Danger />;
     case 'favoriteBook':
       return <Icons.FavoriteBook />;
+    case 'stampedPaper':
+      return <Icons.StampedPaper />;
     case 'thin-arrow-up':
       return <Icons.ThinArrowUp />;
     case 'thin-arrow-down':

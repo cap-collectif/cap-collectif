@@ -1,0 +1,10 @@
+UpdateOfficialResponsePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            officialResponse:
+                type: 'InternalOfficialResponse'
+                description: 'The OfficialResponse who just have been updated.'
+            error:
+                type: 'UpdateOfficialResponseErrorCode'
+                description: 'The error, if any.'

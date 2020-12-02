@@ -170,7 +170,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisio
           "decision": Object {
             "estimatedCost": 43,
             "isApproved": true,
-            "post": Object {
+            "officialResponse": Object {
               "authors": Array [
                 Object {
                   "label": "username",
@@ -357,7 +357,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisio
             "decision": Object {
               "estimatedCost": 43,
               "isApproved": true,
-              "post": Object {
+              "officialResponse": Object {
                 "authors": Array [
                   Object {
                     "label": "username",

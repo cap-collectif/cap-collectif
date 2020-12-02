@@ -1,0 +1,10 @@
+DeleteOfficialResponsePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            id:
+                type: 'ID'
+                description: 'The id of the OfficialResponse who just have been deleted.'
+            error:
+                type: 'DeleteOfficialResponseErrorCode'
+                description: 'The error, if any.'

@@ -12,6 +12,12 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   color: ${colors.darkGray};
   font-size: 16px;
 
+  a {
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
   p {
     margin: 0;
     width: 50%;

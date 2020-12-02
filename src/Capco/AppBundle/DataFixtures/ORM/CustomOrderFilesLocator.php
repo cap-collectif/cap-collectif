@@ -87,6 +87,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Benchmark/HighlightedContent.yaml',
             $this->fixturesDir . 'Benchmark/Event.yaml',
             $this->fixturesDir . 'Benchmark/EventTranslation.yaml',
+            $this->fixturesDir . 'Benchmark/OfficialResponse.yaml',
         ];
     }
 
@@ -261,6 +262,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/UserConnection.yaml',
             $this->fixturesDir . 'Dev/ProjectDistrictPositioner.yaml',
             $this->fixturesDir . 'Dev/DistrictTranslation.yaml',
+            $this->fixturesDir . 'Dev/OfficialResponse.yaml',
             $this->fixturesDir . 'Dev/ProposalSupervisor.yaml',
             $this->fixturesDir . 'Dev/ProposalAssessment.yaml',
             $this->fixturesDir . 'Dev/ProposalDecisionMaker.yaml',

@@ -67,9 +67,8 @@ Object {
               "estimatedCost": 3200,
               "id": "UHJvcG9zYWxEZWNpc2lvbjpwcm9wb3NhbERlY2lzaW9uNA==",
               "isApproved": true,
-              "post": Object {
-                "id": "UG9zdDpwb3N0MjA=",
-                "title": "Réponse officielle",
+              "officialResponse": Object {
+                "id": "T2ZmaWNpYWxSZXNwb25zZTpvZmZpY2lhbFJlc3BvbnNlMjA=",
               },
               "refusedReason": null,
             },
@@ -117,9 +116,8 @@ Object {
               "estimatedCost": 10000,
               "id": "UHJvcG9zYWxEZWNpc2lvbjpwcm9wb3NhbERlY2lzaW9uNQ==",
               "isApproved": true,
-              "post": Object {
-                "id": "UG9zdDpwb3N0MjE=",
-                "title": "Réponse officielle",
+              "officialResponse": Object {
+                "id": "T2ZmaWNpYWxSZXNwb25zZTpvZmZpY2lhbFJlc3BvbnNlMjE=",
               },
               "refusedReason": null,
             },

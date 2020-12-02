@@ -47,3 +47,6 @@
 
 # Cache TipsMeee computed data every minute.
 * * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:compute:tipsmeee-data --env=prod --quiet
+
+# Publish entities with planned publication every 5 minutes.
+*/5 * * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:publisher --env=prod

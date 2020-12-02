@@ -3,7 +3,9 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Debate\DebateArticle;
+use Capco\AppBundle\Entity\OfficialResponse;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
+use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -150,6 +152,21 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $globalId = GlobalId::toGlobalId('Debate', 'debateCannabis');
 
         $this->resolve($globalId, null)->shouldReturn($debate);
+    }
+
+    public function it_can_resolve_an_official_response(
+        ContainerInterface $container,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        OfficialResponseRepository $repository,
+        OfficialResponse $officialResponse
+    ) {
+        $repository->find('officialResponse11')->willReturn($officialResponse);
+        $container->get(OfficialResponseRepository::class)->willReturn($repository);
+        $this->beConstructedWith($container, $logger, $entityManager);
+        $globalId = GlobalId::toGlobalId('OfficialResponse', 'officialResponse11');
+
+        $this->resolve($globalId, null)->shouldReturn($officialResponse);
     }
 
     public function it_can_not_resolve_an_unknown_global_id(

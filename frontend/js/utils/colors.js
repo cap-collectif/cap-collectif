@@ -77,6 +77,8 @@ export const styleGuideColors = {
   blue500: '#1a88ff',
   blue800: '#003670',
   white: '#ffffff',
+  green150: '#E4F9E9',
+  orange150: '#FFF3E0',
   yellow700: '#a87e00',
   green500: '#46d267',
   red500: '#dd3c4c',

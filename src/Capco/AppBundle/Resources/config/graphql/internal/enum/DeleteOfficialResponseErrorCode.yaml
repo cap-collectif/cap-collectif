@@ -1,0 +1,9 @@
+DeleteOfficialResponseErrorCode:
+    type: enum
+    config:
+        name: DeleteOfficialResponseErrorCode
+        description: 'Available errors on OfficialResponse removal'
+        values:
+            ID_NOT_FOUND:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\DeleteOfficialResponseErrorCode::ID_NOT_FOUND")'
+                description: 'No OfficialResponse match your id'

@@ -515,6 +515,12 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:EmailingCampaign']
 
+    Capco\AppBundle\Repository\OfficialResponseRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:OfficialResponse']
+
     Capco\AppBundle\Repository\DebateOpinionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]

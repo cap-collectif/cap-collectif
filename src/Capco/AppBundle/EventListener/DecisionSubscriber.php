@@ -44,8 +44,8 @@ class DecisionSubscriber implements EventSubscriberInterface
 
     public function publishPost(ProposalDecision $decision): void
     {
-        $officialResponsePost = $decision->getPost();
-        $officialResponsePost->publishNow()->setDisplayedOnBlog(false);
+        $officialResponsePost = $decision->getOfficialResponse();
+        $officialResponsePost->setIsPublished(true);
         $this->entityManager->flush();
         $this->indexer->index(Post::class, $officialResponsePost->getId());
         $this->indexer->finishBulk();

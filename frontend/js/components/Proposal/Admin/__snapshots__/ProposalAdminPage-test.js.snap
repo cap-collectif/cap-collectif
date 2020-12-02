@@ -437,6 +437,13 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           "name": "id",
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "hasAnalysis",
+                          "storageKey": null,
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -1890,6 +1897,13 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                           ],
                           "storageKey": null,
                         },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "adminUrl",
+                          "storageKey": null,
+                        },
                       ],
                       "storageKey": null,
                     },
@@ -2659,6 +2673,77 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                       "storageKey": "followers(first:0)",
                     },
                     Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "OfficialResponse",
+                      "kind": "LinkedField",
+                      "name": "officialResponse",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "body",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "User",
+                          "kind": "LinkedField",
+                          "name": "authors",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": "value",
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": "label",
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "username",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "publishedAt",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isPublished",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
                       "condition": "proposalRevisionsEnabled",
                       "kind": "Condition",
                       "passingValue": true,
@@ -2820,7 +2905,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "a0583095b398b643ea4f6499cb300775",
+          "cacheID": "f8cf9e140615a5aca4fc570e1b71def1",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -3189,6 +3274,44 @@ fragment ProposalAdminNotationForm_proposal on Proposal {
   }
 }
 
+fragment ProposalAdminOfficialAnswerForm_proposal on Proposal {
+  id
+  officialResponse {
+    id
+    body
+    authors {
+      value: id
+      label: username
+      id
+    }
+    publishedAt
+    isPublished
+  }
+}
+
+fragment ProposalAdminOfficialAnswer_proposal on Proposal {
+  id
+  form {
+    adminUrl
+    id
+  }
+  ...ProposalAdminOfficialAnswerForm_proposal
+  project {
+    id
+    hasAnalysis
+  }
+  officialResponse {
+    id
+    body
+    authors {
+      value: id
+      label: username
+      id
+    }
+    publishedAt
+  }
+}
+
 fragment ProposalAdminPageTabs_proposal_2uwUKI on Proposal {
   url
   reference
@@ -3198,6 +3321,7 @@ fragment ProposalAdminPageTabs_proposal_2uwUKI on Proposal {
   ...ProposalAdminNotationForm_proposal
   ...ProposalAdminNewsForm_proposal
   ...ProposalAdminFollowers_proposal
+  ...ProposalAdminOfficialAnswer_proposal
   allFollowers: followers(first: 0) {
     totalCount
   }

@@ -23,14 +23,9 @@ Object {
     "decision": Object {
       "estimatedCost": 0,
       "isApproved": true,
-      "post": Object {
+      "officialResponse": Object {
         "authors": Array [],
-        "translations": Array [
-          Object {
-            "body": "",
-            "title": "proposal_decision.official_response",
-          },
-        ],
+        "body": "",
       },
       "refusedReason": null,
       "state": "IN_PROGRESS",
@@ -38,10 +33,7 @@ Object {
     "errorCode": null,
     "proposal": Object {
       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTI=",
-      "news": Object {
-        "edges": Array [],
-        "totalCount": 0,
-      },
+      "officialResponse": null,
     },
   },
 }
@@ -63,7 +55,7 @@ Object {
     "decision": Object {
       "estimatedCost": 50000,
       "isApproved": true,
-      "post": Object {
+      "officialResponse": Object {
         "authors": Array [
           Object {
             "id": "VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==",
@@ -72,12 +64,7 @@ Object {
             "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
           },
         ],
-        "translations": Array [
-          Object {
-            "body": "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
-            "title": "proposal_decision.official_response",
-          },
-        ],
+        "body": "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
       },
       "refusedReason": null,
       "state": "DONE",
@@ -85,33 +72,21 @@ Object {
     "errorCode": null,
     "proposal": Object {
       "id": "UHJvcG9zYWw6cHJvcG9zYWwxMTI=",
-      "news": Object {
-        "edges": Array [
+      "officialResponse": Object {
+        "authors": Array [
           Object {
-            "node": Object {
-              "abstract": "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
-              "authors": Array [
-                Object {
-                  "displayName": "decisionmaker",
-                  "id": "VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==",
-                  "url": "https://capco.test/profile/decisionmaker",
-                  "vip": false,
-                },
-                Object {
-                  "displayName": "supervisor2",
-                  "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
-                  "url": "https://capco.test/profile/supervisor2",
-                  "vip": false,
-                },
-              ],
-              "media": null,
-              "themes": Array [],
-              "title": "proposal_decision.official_response",
-              "url": "https://capco.test/blog/proposal-decision-official-response",
-            },
+            "displayName": "decisionmaker",
+            "id": "VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==",
+            "url": "https://capco.test/profile/decisionmaker",
+            "vip": false,
+          },
+          Object {
+            "displayName": "supervisor2",
+            "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
+            "url": "https://capco.test/profile/supervisor2",
+            "vip": false,
           },
         ],
-        "totalCount": 1,
       },
     },
   },
