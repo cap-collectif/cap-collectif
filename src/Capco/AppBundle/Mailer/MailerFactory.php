@@ -34,7 +34,8 @@ class MailerFactory
         $element,
         array $params,
         ?User $recipient = null,
-        ?string $recipientEmail = null
+        ?string $recipientEmail = null,
+        ?string $replyTo = null
     ): AbstractMessage {
         $subType = self::getMessageTypeFromClass($type);
 
@@ -56,7 +57,8 @@ class MailerFactory
             \call_user_func("${type}::getMySubjectVars", $element, $params),
             \constant("${type}::TEMPLATE"),
             \call_user_func("${type}::getMyTemplateVars", $element, $params),
-            $recipient
+            $recipient,
+            $replyTo
         );
 
         self::setFooter($message, $type, $recipientEmail, $params);

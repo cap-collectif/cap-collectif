@@ -580,7 +580,7 @@ const ProposalListHeader = ({ project, themes, defaultUsers }: $Diff<Props, { re
             dispatch,
           )
         }>
-        {closeDropdown => (
+        {({ closeDropdown }) => (
           <React.Fragment>
             <Collapsable.Button>
               <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
@@ -628,7 +628,7 @@ const ProposalListHeader = ({ project, themes, defaultUsers }: $Diff<Props, { re
       </Collapsable>
 
       <Collapsable align="right" key="action-supervisor">
-        {closeDropdown => (
+        {({ closeDropdown }) => (
           <React.Fragment>
             <Collapsable.Button>
               <FormattedMessage tagName="p" id="global.review" />
@@ -688,7 +688,7 @@ const ProposalListHeader = ({ project, themes, defaultUsers }: $Diff<Props, { re
       </Collapsable>
 
       <Collapsable align="right" key="action-decision-maker">
-        {closeDropdown => (
+        {({ closeDropdown }) => (
           <React.Fragment>
             <Collapsable.Button>
               <FormattedMessage tagName="p" id="global.decision" />

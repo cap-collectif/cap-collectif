@@ -926,6 +926,9 @@ input AskProposalRevisionInput {
 
   """The datetime when revision expire"""
   expiresAt: DateTime!
+
+  """The information to resolve revision"""
+  body: HTML!
   clientMutationId: String
 }
 
@@ -7973,6 +7976,12 @@ type ProposalRevision {
 
   """Is the revision expired ?"""
   isExpired: Boolean!
+
+  """The information to resolve revision without html tags"""
+  bodyText: String!
+
+  """The information to resolve revision"""
+  body: HTML!
 }
 
 """A connection to a list of items."""

@@ -335,7 +335,7 @@ const AnalysisDashboardHeader = ({
               dispatch,
             )
           }>
-          {closeDropdown => (
+          {({ closeDropdown }) => (
             <React.Fragment>
               <Collapsable.Button>
                 <FormattedMessage tagName="p" id="panel.analysis.subtitle" />
@@ -407,7 +407,7 @@ const AnalysisDashboardHeader = ({
 
       {actionsShown.includes(SUPERVISOR) && (
         <Collapsable align="right" key="action-supervisor">
-          {closeDropdown => (
+          {({ closeDropdown }) => (
             <React.Fragment>
               <Collapsable.Button>
                 <FormattedMessage tagName="p" id="global.review" />

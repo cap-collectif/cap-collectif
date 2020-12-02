@@ -3,11 +3,19 @@ import styled, { css, type StyledComponent } from 'styled-components';
 import { slideInUp } from '~/utils/styles/keyframes';
 import type { CollapsableAlignment } from '~ui/Collapsable/index';
 
-export const CollapsableBody: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const CollapsableBody: StyledComponent<
+  { isAbsolute: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div`
   animation: ${slideInUp} 0.2s forwards;
-  position: absolute;
-  top: calc(100% + 10px);
-  z-index: 100;
+  ${props =>
+    props.isAbsolute &&
+    css`
+      position: absolute;
+      top: calc(100% + 10px);
+      z-index: 100;
+    `}
 `;
 
 export const Container: StyledComponent<
@@ -40,8 +48,12 @@ export const Container: StyledComponent<
     `}
 `;
 
-export const Button: StyledComponent<{ visible: boolean }, {}, HTMLDivElement> = styled.div`
-  display: flex;
+export const Button: StyledComponent<
+  { visible: boolean, inline: boolean },
+  {},
+  HTMLDivElement,
+> = styled.div`
+  display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   align-items: center;
 
   > * {

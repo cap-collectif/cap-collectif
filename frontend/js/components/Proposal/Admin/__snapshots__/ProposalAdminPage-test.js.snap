@@ -2809,6 +2809,13 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                     Object {
                                       "alias": null,
                                       "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "bodyText",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
                                       "concreteType": "User",
                                       "kind": "LinkedField",
                                       "name": "author",
@@ -2905,7 +2912,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "f8cf9e140615a5aca4fc570e1b71def1",
+          "cacheID": "27f19ec5a75238aaed3211b913f8fbd2",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -3433,6 +3440,7 @@ fragment ProposalRevisionModalForm_proposal on Proposal {
         id
         reason
         createdAt
+        bodyText
         author {
           username
           id

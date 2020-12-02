@@ -16,6 +16,7 @@ const AskProposalRevisionMutation = /* GraphQL*/ `
               state
               reason
               expiresAt
+              body
             }
           }
         }
@@ -34,6 +35,7 @@ describe('mutations.askProposalRevision', () => {
         input: {
           proposalId: toGlobalId('Proposal', 'proposalIdf1'),
           reason: 'Le champs cout est incomplet !',
+          body: 'Blablabla',
           expiresAt: '2030-11-14 11:59:30',
         },
       },
@@ -48,6 +50,7 @@ describe('mutations.askProposalRevision', () => {
         input: {
           proposalId: toGlobalId('Proposal', 'proposalIdf1'),
           reason: 'Le champs cout est incomplet !',
+          body: '<p>Blablabla</p>',
           expiresAt: '2130-11-14 11:59:30',
         },
       },
@@ -64,6 +67,7 @@ describe('mutations.askProposalRevision', () => {
           input: {
             proposalId: toGlobalId('Proposal', 'proposalIdf1'),
             reason: 'Le champs cout est incomplet !',
+            body: '<h1>Blablabla</h1>',
             expiresAt: '2030-11-14 11:59:30',
           },
         },
@@ -80,6 +84,7 @@ describe('mutations.askProposalRevision', () => {
           input: {
             proposalId: toGlobalId('Proposal', 'proposalIdf1'),
             reason: 'Le champs cout est incomplet !',
+            body: 'Blablabla',
             expiresAt: '2030-11-14 11:59:30',
           },
         },

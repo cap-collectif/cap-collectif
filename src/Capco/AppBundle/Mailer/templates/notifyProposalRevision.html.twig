@@ -21,23 +21,22 @@
             {{ 'proposal_revision.notfication.title'|trans({'{plateformName}': siteName}, 'CapcoAppBundle', user_locale) }}
         </h1>
 
-        <p style="margin: 0;line-height: 22px;">
+        <p style="line-height: 22px;">
             {{ 'global-hello'|trans({}, 'CapcoAppBundle', user_locale) | raw }} 👋,<br/>
             {{ 'proposal_revision.notification.body'|trans({'{ProposalName}': proposal.title, '{expiresAt}': currentRevision.expiresAt|date("d/m/Y H:i")}, 'CapcoAppBundle', user_locale) | raw }}
         </p>
-        <p>
-            <b>{{ 'reason_of_revision'|trans({'{num}': nbRevisions}) }}</b>
+        <div>
+            <b>{{ 'reason.review.request'|trans({'{num}': nbRevisions} , 'CapcoAppBundle', user_locale) | raw }}</b><br>
+            <span>{{ currentRevision.reason }}</span><br>
+            {{ currentRevision.body | raw }}
             {% if nbRevisions > 0 %}
-            <ul  style="list-style-type:none">
-                <li> - {{ currentRevision.reason }}</li>
-                {% for revision in revisions %}
-                    <li> - {{ revision.reason }}</li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <br/>{{ currentRevision.reason }}
+                <b>{{ 'other-revisions-pending'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</b>
+                <ul  style="list-style-type:none">
+                    {% for revision in revisions %}
+                        <li> - {{ revision.reason | raw }}</li>
+                    {% endfor %}
+                </ul>
             {% endif %}
-        </p>
         <p>
             {{ 'click-edit-proposal'|trans({}, 'CapcoAppBundle', user_locale) }}
         </p>

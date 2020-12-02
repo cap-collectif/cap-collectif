@@ -13,10 +13,21 @@ type ChildrenProps = {|
 
 type CollapsableElementProps = {|
   ...ChildrenProps,
+  +isAbsolute?: boolean,
   +ariaLabel?: string,
 |};
 
-const CollapsableButton = ({ children }: ChildrenProps) => {
+type CollapsableButtonProps = {|
+  ...ChildrenProps,
+  +inline?: boolean,
+  +showCaret?: boolean,
+|};
+
+const CollapsableButton = ({
+  children,
+  inline = false,
+  showCaret = true,
+}: CollapsableButtonProps) => {
   const { setVisible, visible, onClose, disabled } = React.useContext(CollapsableContext);
   const button = React.useRef<HTMLDivElement | null>(null);
   const toggleVisibility = React.useCallback(() => {
@@ -40,21 +51,30 @@ const CollapsableButton = ({ children }: ChildrenProps) => {
   return (
     <S.Button
       ref={button}
+      inline={inline}
       role="button"
       aria-haspopup="menu"
       tabIndex={0}
       visible={visible}
       onClick={toggleVisibility}>
       {children}
-      <Icon name={ICON_NAME.arrowDown} size="0.6rem" />
+      {showCaret && <Icon name={ICON_NAME.arrowDown} size="0.6rem" />}
     </S.Button>
   );
 };
 
-const CollapsableElement = ({ children, ariaLabel }: CollapsableElementProps) => {
+const CollapsableElement = ({
+  children,
+  ariaLabel,
+  isAbsolute = true,
+}: CollapsableElementProps) => {
   const { visible } = React.useContext(CollapsableContext);
   return visible ? (
-    <S.CollapsableBody role="menu" aria-label={ariaLabel || ''}>
+    <S.CollapsableBody
+      className="body-collapse"
+      isAbsolute={isAbsolute}
+      role="menu"
+      aria-label={ariaLabel || ''}>
       {children}
     </S.CollapsableBody>
   ) : null;
@@ -64,6 +84,7 @@ export type CollapsableAlignment = 'left' | 'right';
 
 type Props = {|
   +align?: CollapsableAlignment,
+  +closeOnClickAway?: boolean,
   +className?: string,
   +id?: string,
   +disabled?: boolean,
@@ -73,15 +94,21 @@ type Props = {|
         | React.Element<typeof React.Fragment | typeof CollapsableButton>
         | React.Element<typeof CollapsableElement>,
       >
-    | ((
-        closeDropdown: () => void,
-      ) => React.ChildrenArray<
+    | ((render: { closeDropdown: () => void, visible: boolean }) => React.ChildrenArray<
         | React.Element<typeof React.Fragment | typeof CollapsableButton>
         | React.Element<typeof CollapsableElement>,
       >),
 |};
 
-const Collapsable = ({ children, onClose, align = 'left', className, id, disabled }: Props) => {
+const Collapsable = ({
+  children,
+  onClose,
+  className,
+  id,
+  disabled,
+  align = 'left',
+  closeOnClickAway = true,
+}: Props) => {
   const [visible, setVisible] = React.useState(false);
   const closeDropdown = () => {
     if (onClose) {
@@ -105,7 +132,9 @@ const Collapsable = ({ children, onClose, align = 'left', className, id, disable
       if (onClose && visible) {
         onClose();
       }
-      setVisible(false);
+      if (closeOnClickAway) {
+        setVisible(false);
+      }
     },
     [visible],
   );
@@ -117,7 +146,7 @@ const Collapsable = ({ children, onClose, align = 'left', className, id, disable
         className={className}
         id={id}
         disabled={disabled}>
-        {typeof children === 'function' ? children(closeDropdown) : children}
+        {typeof children === 'function' ? children({ closeDropdown, visible }) : children}
       </S.Container>
     </CollapsableContext.Provider>
   );

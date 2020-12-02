@@ -16,7 +16,8 @@ abstract class AbstractExternalMessage extends AbstractMessage
         array $subjectVars,
         string $template,
         array $templateVars,
-        User $recipient
+        User $recipient,
+        ?string $replyTo = null
     ) {
         parent::__construct(
             $recipientEmail,
@@ -25,7 +26,10 @@ abstract class AbstractExternalMessage extends AbstractMessage
             $subject,
             $subjectVars,
             $template,
-            $templateVars
+            $templateVars,
+            null,
+            null,
+            $replyTo
         );
         $this->recipient = $recipient;
     }

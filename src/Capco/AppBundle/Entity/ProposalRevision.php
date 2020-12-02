@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
@@ -17,6 +18,7 @@ class ProposalRevision
 {
     use UuidTrait;
     use TimestampableTrait;
+    use TextableTrait;
 
     /**
      * @ORM\Column(name="reason", type="text")

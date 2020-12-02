@@ -436,7 +436,7 @@ const ProposalListHeader = ({ project, themes = [] }: $Diff<Props, { relay: * }>
       </Collapsable>
 
       <Collapsable align="right">
-        {closeDropdown => (
+        {({ closeDropdown }) => (
           <>
             <Collapsable.Button>
               <FormattedMessage tagName="p" id="admin.fields.proposal.status" />

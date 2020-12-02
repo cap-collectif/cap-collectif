@@ -35,7 +35,7 @@ class ViewerCanAskAProposalRevisionResolver implements ResolverInterface
         $proposal = $this->globalIdResolver->resolve($proposalId, $viewer);
 
         return $this->authorizationChecker->isGranted(
-            ProposalAnalysisRelatedVoter::VIEW,
+            ProposalAnalysisRelatedVoter::REVISE,
             $proposal
         );
     }

@@ -69,7 +69,8 @@ class ProposalRevisionNotifier extends BaseNotifier
                 ),
             ],
             $proposal->getAuthor(),
-            $proposal->getAuthor()->getEmail()
+            $proposal->getAuthor()->getEmail(),
+            $revision->getAuthor()->getEmail(),
         );
     }
 

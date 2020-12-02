@@ -33,3 +33,9 @@ InternalProposalRevision:
             isExpired:
                 type: 'Boolean!'
                 description: 'Is the revision expired ?'
+            bodyText:
+                type: 'String!'
+                description: 'The information to resolve revision without html tags'
+            body:
+                type: 'HTML!'
+                description: 'The information to resolve revision'

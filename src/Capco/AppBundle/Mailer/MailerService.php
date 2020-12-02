@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Mailer\Message\MessageRecipient;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalRevisionMessage;
 use Capco\AppBundle\Mailer\Message\User\ContactMessage;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
@@ -35,16 +36,24 @@ class MailerService extends MailerFactory
         $element,
         array $params = [],
         ?User $recipient = null,
-        ?string $recipientEmail = null
+        ?string $recipientEmail = null,
+        ?string $replyTo = null
     ): bool {
         $params['locale'] =
             $recipient && $recipient->getLocale()
                 ? $recipient->getLocale()
                 : $this->siteParams->getDefaultLocale();
 
-        return $this->sendMessage(
-            $this->createMessage($type, $element, $params, $recipient, $recipientEmail)
+        $message = $this->createMessage(
+            $type,
+            $element,
+            $params,
+            $recipient,
+            $recipientEmail,
+            $replyTo
         );
+
+        return $this->sendMessage($message);
     }
 
     public function sendMessage(AbstractMessage $message): bool

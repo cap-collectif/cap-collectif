@@ -19,10 +19,12 @@ exports[`<ProposalEditModal /> should render correctly with DELETED status 1`] =
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      <FormattedMessage
-        id="global.edit"
-        values={Object {}}
-      />
+      <b>
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </b>
     </ModalTitle>
   </ModalHeader>
   <ModalBody
@@ -110,10 +112,12 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      <FormattedMessage
-        id="global.edit"
-        values={Object {}}
-      />
+      <b>
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </b>
     </ModalTitle>
   </ModalHeader>
   <ModalBody
@@ -208,10 +212,12 @@ exports[`<ProposalEditModal /> should render correctly with PUBLISHED status 1`]
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      <FormattedMessage
-        id="global.edit"
-        values={Object {}}
-      />
+      <b>
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </b>
     </ModalTitle>
   </ModalHeader>
   <ModalBody
@@ -299,10 +305,12 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED status 1`] =
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      <FormattedMessage
-        id="global.edit"
-        values={Object {}}
-      />
+      <b>
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </b>
     </ModalTitle>
   </ModalHeader>
   <ModalBody
@@ -390,10 +398,12 @@ exports[`<ProposalEditModal /> should render correctly with TRASHED_NOT_VISIBLE 
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      <FormattedMessage
-        id="global.edit"
-        values={Object {}}
-      />
+      <b>
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </b>
     </ModalTitle>
   </ModalHeader>
   <ModalBody
@@ -481,10 +491,12 @@ exports[`<ProposalEditModal /> should render correctly with UNPUBLISHED status 1
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      <FormattedMessage
-        id="global.edit"
-        values={Object {}}
-      />
+      <b>
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </b>
     </ModalTitle>
   </ModalHeader>
   <ModalBody

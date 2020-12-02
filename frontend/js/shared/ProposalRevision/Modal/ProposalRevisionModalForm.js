@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, useIntl } from 'react-intl';
 import { reduxForm, Field, type FormProps, formValueSelector, SubmissionError } from 'redux-form';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -25,6 +25,8 @@ import AskProposalRevisionMutation from '~/mutations/AskProposalRevisionMutation
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import { DATE_ISO8601_FORMAT, DATE_LONG_LOCALIZED_FORMAT } from '~/shared/date';
+import type { User } from '~/redux/modules/user';
+import stripHtml from '~/utils/stripHtml';
 
 type RelayProps = {|
   +proposal: ProposalRevisionModalForm_proposal,
@@ -37,6 +39,7 @@ type ReduxProps = {|
 
 type FormValues = {|
   +reason: string,
+  +body: string,
   +proposalId: string,
   +expiresAt: string,
 |};
@@ -48,16 +51,24 @@ type Props = {|
   +show: boolean,
   +children?: React.Node,
   +onClose: () => void,
+  +viewer: User,
 |} & FormProps;
 
 const formName = 'proposal-revision-form';
 
-const validate = ({ reason, expiresAt }: FormValues) => {
+const validate = ({ reason, expiresAt, body }: FormValues) => {
   const now = moment();
   const errors = {};
 
   if (!reason) {
     errors.reason = 'global.required';
+  }
+  if (!body) {
+    errors.body = 'global.required';
+  }
+
+  if (body && stripHtml(body).length > 500) {
+    errors.body = 'proposalRevision.constraints.body';
   }
 
   if (!expiresAt) {
@@ -123,6 +134,7 @@ const ProposalRevisionModalForm = ({
   expiresAt,
   isAdminView,
   proposal,
+  viewer,
 }: Props) => {
   const intl = useIntl();
   const [showAvailableRevisions, toggleAvailableRevisions] = useToggle(
@@ -196,13 +208,27 @@ const ProposalRevisionModalForm = ({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <p className="excerpt">
+              <FormattedHTMLMessage
+                id="reply.to.mechanism.review.request"
+                values={{ email: viewer.email }}
+              />
+            </p>
             <Field
               name="reason"
               component={component}
-              type="textarea"
+              type="text"
               id="proposal_revision_reason"
-              placeholder={intl.formatMessage({ id: 'review.request.description' })}
+              placeholder={intl.formatMessage({ id: 'title-request' })}
               label={<FormattedMessage id="reason.review.request" />}
+            />
+            <Field
+              name="body"
+              component={component}
+              type="admin-editor"
+              id="proposal_revision_body"
+              placeholder={intl.formatMessage({ id: 'review.request.description' })}
+              label={<FormattedMessage id="additional-information" />}
             />
             <DateContainer>
               <Field
@@ -255,6 +281,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => ({
   initialValues: {
     proposalId: proposal?.id ?? null,
   },
+  viewer: state.user.user,
 });
 
 const form = reduxForm({
@@ -277,6 +304,7 @@ export default createFragmentContainer(container, {
             id
             reason
             createdAt
+            bodyText
             author {
               username
             }

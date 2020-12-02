@@ -5,6 +5,7 @@ Capco\AppBundle\Entity\ProposalRevision:
         proposal: '@proposal10'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
         reason: "c'est :poop:"
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-01-01 00:05:01'))->modify("+ 16 days"))>
         expiresAt: <identity((new \DateTime('2030-05-23 00:05:00')))>
     proposalRevision2:
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\ProposalRevision:
         proposal: '@proposalIdf1'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
         reason: 'Manque le cout'
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-01-01 00:05:02'))->modify("+ 16 days"))>
         expiresAt: <identity((new \DateTime('2030-05-23 00:05:01')))>
     proposalRevision3:
@@ -21,6 +23,7 @@ Capco\AppBundle\Entity\ProposalRevision:
         proposal: '@proposal11'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::REVISED)>
         reason: 'Pas assez explicite'
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-01-01 00:05:03'))->modify("+ 16 days"))>
         expiresAt: <identity((new \DateTime('2030-05-23 00:05:02')))>
         revisedAt: <identity((new \DateTime('now'))->modify("- 16 days"))>
@@ -30,6 +33,7 @@ Capco\AppBundle\Entity\ProposalRevision:
         proposal: '@proposalIdf1'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
         reason: 'Révision expiré en attente'
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-01-01 00:05:04'))->modify("+ 5 days"))>
         expiresAt: <identity((new \DateTime('now'))->modify("- 6 days"))>
     proposalRevisionRevisedNotExpired:
@@ -38,6 +42,7 @@ Capco\AppBundle\Entity\ProposalRevision:
         proposal: '@proposalIdf1'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::REVISED)>
         reason: 'Révision révisé avant échéance'
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-01-01 00:05:05'))->modify("+ 5 days"))>
         expiresAt: <identity((new \DateTime('2030-05-23 00:05:03')))>
         revisedAt: <identity((new \DateTime('now'))->setTime(00,00))>
@@ -47,6 +52,7 @@ Capco\AppBundle\Entity\ProposalRevision:
         proposal: '@proposalIdf1'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::REVISED)>
         reason: 'Révision just revised'
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-01-01 00:05:06'))->modify("+ 5 days"))>
         expiresAt: <identity((new \DateTime('2030-05-23 00:05:04')))>
         revisedAt: <identity((new \DateTime('now'))->setTime(00,00))>
@@ -55,7 +61,8 @@ Capco\AppBundle\Entity\ProposalRevision:
         author: '@userMaximeQA'
         proposal: '@proposalIdf5'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
-        reason: 'Description trop flou'
+        reason: 'Changez votre description'
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-03-10 00:05:02'))->modify("+ 16 days"))>
         expiresAt: <identity((new \DateTime('2030-05-23 00:05:01')))>
     proposalRevisionInPending2:
@@ -63,7 +70,8 @@ Capco\AppBundle\Entity\ProposalRevision:
         author: '@userMaximeQA'
         proposal: '@proposalIdf4'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
-        reason: 'Description trop flou'
+        reason: 'Titre pute à clique'
+        body: <stripslashes('\<p>\')>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-03-20 00:05:02'))->modify("+ 16 days"))>
         expiresAt: <identity((new \DateTime('2030-05-23 00:05:01')))>
     proposalRevisionInPending3:
@@ -71,6 +79,7 @@ Capco\AppBundle\Entity\ProposalRevision:
         author: '@userAgui'
         proposal: '@proposalIdf4'
         state: <(Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType::PENDING)>
-        reason: 'Description trop flou'
+        reason: 'Choississez une zone d impacte'
+        body: <stripslashes('\<p>\')>Bonjour<stripslashes('\</p>\')><stripslashes('\<p>\')><stripslashes('\</p>\')><stripslashes('\<p>\')><stripslashes('\</p>\')><stripslashes('\<p>\')>test<stripslashes('\</p>\')><stripslashes('\<p>\')>fin<stripslashes('\</p>\')>
         createdAt: <identity((new \DateTime('2019-03-23 00:05:02'))->modify("+ 16 days"))>
         expiresAt: <identity((new \DateTime('2030-05-23 00:05:01')))>

@@ -12,3 +12,6 @@ AskProposalRevisionInput:
             expiresAt:
                 type: 'DateTime!'
                 description: 'The datetime when revision expire'
+            body:
+                type: 'HTML!'
+                description: 'The information to resolve revision'

@@ -4276,6 +4276,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "name": "reason",
                                       "storageKey": null,
                                     },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "body",
+                                      "storageKey": null,
+                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -6116,6 +6123,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "bodyText",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
                                           "concreteType": "User",
                                           "kind": "LinkedField",
                                           "name": "author",
@@ -6920,7 +6934,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7d16d1e428b9233047b8016964c2030c",
+          "cacheID": "fe99e5319f8097633ce9eb7d4534ec87",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -7543,6 +7557,7 @@ fragment ProposalEditModal_proposal_2Ag0mE on Proposal {
         state
         isExpired
         reason
+        body
       }
     }
   }
@@ -8500,6 +8515,7 @@ fragment ProposalRevisionModalForm_proposal on Proposal {
         id
         reason
         createdAt
+        bodyText
         author {
           username
           id

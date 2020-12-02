@@ -13,6 +13,7 @@ Object {
               "author": Object {
                 "username": "admin",
               },
+              "body": "Blablabla",
               "expiresAt": "2030-11-14 11:59:30",
               "reason": "Le champs cout est incomplet !",
               "state": "PENDING",
@@ -23,6 +24,7 @@ Object {
               "author": Object {
                 "username": "admin",
               },
+              "body": "<p>Blablabla</p>",
               "expiresAt": "2130-11-14 11:59:30",
               "reason": "Le champs cout est incomplet !",
               "state": "PENDING",
@@ -33,6 +35,7 @@ Object {
               "author": Object {
                 "username": "Max de la QA",
               },
+              "body": "<p>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.</p>",
               "expiresAt": "2030-05-23 00:05:01",
               "reason": "Manque le cout",
               "state": "PENDING",
@@ -58,6 +61,7 @@ Object {
               "author": Object {
                 "username": "admin",
               },
+              "body": "Blablabla",
               "expiresAt": "2030-11-14 11:59:30",
               "reason": "Le champs cout est incomplet !",
               "state": "PENDING",
@@ -68,6 +72,7 @@ Object {
               "author": Object {
                 "username": "Max de la QA",
               },
+              "body": "<p>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.</p>",
               "expiresAt": "2030-05-23 00:05:01",
               "reason": "Manque le cout",
               "state": "PENDING",

@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import cn from 'classnames';
 import SubmitButton from '../../Form/SubmitButton';
@@ -19,6 +19,8 @@ import type {
 } from '~relay/ProposalEditModal_proposal.graphql';
 import { ProposalRevisionItem } from '~/shared/ProposalRevision/Modal/ProposalRevisionModalForm.style';
 import { pxToRem } from '~/utils/styles/mixins';
+import Collapsable from '~ui/Collapsable';
+import { mediaQueryMobile } from '~/utils/sizes';
 
 type Props = {
   intl: IntlShape,
@@ -66,6 +68,18 @@ const ProposalRevisionsList: StyledComponent<{}, {}, HTMLUListElement> = styled.
   padding-left: 10px;
   margin-top: 10px;
   margin-bottom: 0;
+  li {
+    button {
+      padding: 0;
+    }
+    .body-collapse {
+      width: 840px;
+      margin-top: 10px;
+      @media (max-width: ${mediaQueryMobile.maxWidth}) {
+        width: auto;
+      }
+    }
+  }
   & > li + li {
     margin-top: 10px;
   }
@@ -96,6 +110,7 @@ const getProposalPendingRevisions = (
   +state: ProposalRevisionState,
   +isExpired: boolean,
   +reason: ?string,
+  +body: ?string,
 |}> => {
   if (!proposal.allRevisions) return [];
   return (
@@ -114,6 +129,7 @@ export class ProposalEditModal extends React.Component<Props> {
     const pendingRevisions = getProposalPendingRevisions(proposal);
     const isRevisionExpired = isProposalRevisionsExpired(proposal);
     const hasPendingRevisions = pendingRevisions.length > 0;
+
     return (
       <ModalProposalEditContainer
         animation={false}
@@ -146,7 +162,11 @@ export class ProposalEditModal extends React.Component<Props> {
           <>
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-lg">
-                <FormattedMessage id={hasPendingRevisions ? 'review-my-proposal' : 'global.edit'} />
+                <b>
+                  <FormattedMessage
+                    id={hasPendingRevisions ? 'review-my-proposal' : 'global.edit'}
+                  />
+                </b>
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -158,7 +178,26 @@ export class ProposalEditModal extends React.Component<Props> {
                   </p>
                   <ProposalRevisionsList>
                     {pendingRevisions.map(revision => (
-                      <li key={revision.id}>{revision.reason}</li>
+                      <li key={revision.id}>
+                        <span>{revision.reason}&nbsp;</span>
+                        <Collapsable closeOnClickAway={false} className="clearfix">
+                          {({ visible }) => (
+                            <Collapsable.Button inline={false} showCaret={false}>
+                              {!visible && (
+                                <Button variant="link" bsStyle="link">
+                                  <FormattedMessage id="open-instructions" />
+                                </Button>
+                              )}
+                              <Collapsable.Element isAbsolute={false} ariaLabel="Contenu">
+                                <div dangerouslySetInnerHTML={{ __html: revision.body }} />
+                                <Button variant="link" bsStyle="link">
+                                  <FormattedMessage id="close-instructions" />
+                                </Button>
+                              </Collapsable.Element>
+                            </Collapsable.Button>
+                          )}
+                        </Collapsable>
+                      </li>
                     ))}
                   </ProposalRevisionsList>
                   {!proposal.form.contribuable && (
@@ -239,6 +278,7 @@ export default createFragmentContainer(container, {
             state
             isExpired
             reason
+            body
           }
         }
       }
