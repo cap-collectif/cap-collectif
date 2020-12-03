@@ -22,7 +22,7 @@ class ProposalDecision implements Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity=OfficialResponse::class, inversedBy="proposalDecision", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false, name="official_response_id")
+     * @ORM\JoinColumn(nullable=true, name="official_response_id")
      */
     private ?OfficialResponse $officialResponse;
 
