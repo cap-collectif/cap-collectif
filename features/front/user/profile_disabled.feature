@@ -24,4 +24,4 @@ Scenario: Logged in user wants to change his username with empty field
   And I fill in the following:
     | profile-form-username |  |
   And I wait 1 seconds
-  Then I should see "fill-field"
+  Then I should see "registration.constraints.username.min"
