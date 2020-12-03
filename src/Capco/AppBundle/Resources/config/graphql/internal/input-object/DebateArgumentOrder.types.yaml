@@ -1,0 +1,13 @@
+DebateArgumentOrder:
+    type: input-object
+    config:
+        description: 'Ways in which lists of arguments can be ordered upon return.'
+        fields:
+            field:
+                type: 'DebateArgumentOrderField!'
+                defaultValue: 'PUBLISHED_AT'
+                description: The field to order arguments by.
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: 'DESC'
+                description: The ordering direction.

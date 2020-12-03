@@ -10,7 +10,7 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 /**
  * A like on an argument in a debate.
  *
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentVoteRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class DebateArgumentVote extends AbstractVote

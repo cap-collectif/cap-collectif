@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|UpdateDebateArgument try to update argument with wrong argument id 1`] = `
+Object {
+  "updateDebateArgument": Object {
+    "debateArgument": null,
+    "errorCode": "UNKNOWN_DEBATE_ARGUMENT",
+  },
+}
+`;
+
+exports[`Internal|UpdateDebateArgument update argument 1`] = `
+Object {
+  "updateDebateArgument": Object {
+    "debateArgument": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyVGhlbw==",
+      },
+      "body": "j'ai changé d'avis",
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      },
+      "type": "AGAINST",
+    },
+    "errorCode": null,
+  },
+}
+`;

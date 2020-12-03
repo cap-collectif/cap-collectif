@@ -1,0 +1,26 @@
+InternalDebateArgumentVote:
+    type: object
+    inherits:
+        - Node
+        - PublicPublishable
+    config:
+        name: DebateArgumentVote
+        description: 'A debate vote.'
+        interfaces:
+            - Node
+            - PublicPublishable
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: DebateArgumentVote
+            createdAt:
+                type: 'DateTime!'
+                description: 'The date of the vote.'
+            author:
+                type: 'InternalUser!'
+                description: 'The author of the vote.'
+            debateArgument:
+                type: 'InternalDebateArgument!'
+                description: 'The debate of the vote.'

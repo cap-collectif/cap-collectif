@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|DeleteDebateArgument admin delete argument of someone else 1`] = `
+Object {
+  "deleteDebateArgument": Object {
+    "deletedDebateArgumentId": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`Internal|DeleteDebateArgument delete argument 1`] = `
+Object {
+  "deleteDebateArgument": Object {
+    "deletedDebateArgumentId": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`Internal|DeleteDebateArgument try to delete argument of someone else 1`] = `
+Object {
+  "deleteDebateArgument": Object {
+    "deletedDebateArgumentId": null,
+    "errorCode": "CANNOT_DELETE_DEBATE_ARGUMENT",
+  },
+}
+`;
+
+exports[`Internal|DeleteDebateArgument try to delete argument with wrong id 1`] = `
+Object {
+  "deleteDebateArgument": Object {
+    "deletedDebateArgumentId": null,
+    "errorCode": "UNKNOWN_DEBATE_ARGUMENT",
+  },
+}
+`;

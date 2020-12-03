@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|CreateDebateArgument create argument 1`] = `
+Object {
+  "createDebateArgument": Object {
+    "debateArgument": Object {
+      "author": Object {
+        "id": "VXNlcjp1c2VyNQ==",
+      },
+      "body": "j'ai des trucs à dire",
+      "debate": Object {
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      },
+      "type": "FOR",
+    },
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`Internal|CreateDebateArgument try to create argument with wrong debate id 1`] = `
+Object {
+  "createDebateArgument": Object {
+    "debateArgument": null,
+    "errorCode": "UNKNOWN_DEBATE",
+  },
+}
+`;

@@ -1,0 +1,14 @@
+CreateDebateArgumentInput:
+    type: relay-mutation-input
+    config:
+        description: 'create a `DebateArgument` on a `Debate`.'
+        fields:
+            debate:
+                type: 'ID!'
+                description: 'The id of the `Debate` where the argument belongs.'
+            body:
+                type: 'String!'
+                description: 'The body value of the argument.'
+            type:
+                type: 'ForOrAgainstValue!'
+                description: 'Whether the argument will be `FOR` or `AGAINST`.'

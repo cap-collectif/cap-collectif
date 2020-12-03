@@ -18,6 +18,24 @@ InternalDebate:
                 argsBuilder: 'Relay::Connection'
                 type: InternalDebateOpinionConnection!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateOpinionsResolver", [value, args])'
+            arguments:
+                description: 'The arguments from non-experts of the debate.'
+                argsBuilder: 'Relay::Connection'
+                args:
+                    value:
+                        type: 'ForOrAgainstValue'
+                        defaultValue: null
+                        description: "Filter by an argument's stand."
+                    includeUnpublished:
+                        type: 'Boolean'
+                        description: '(ROLE_ADMIN only) See also unpublished arguments.'
+                        defaultValue: false
+                    orderBy:
+                        type: 'DebateArgumentOrder'
+                        description: 'Order by.'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                type: DebateArgumentConnection!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentsResolver", [value, args, getUser()])'
             votes:
                 description: 'The votes from experts of the debate.'
                 argsBuilder: 'Relay::Connection'

@@ -1,0 +1,8 @@
+DeleteDebateArgumentInput:
+    type: relay-mutation-input
+    config:
+        description: 'Delete an argument on a debate.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The Node ID of the `DebateArgument`.'

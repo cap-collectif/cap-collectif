@@ -2730,6 +2730,33 @@ type CreateAlphaProjectPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `createDebateArgument` mutation."""
+enum CreateDebateArgumentErrorCode {
+  """No `Debate` match your id."""
+  UNKNOWN_DEBATE
+}
+
+input CreateDebateArgumentInput {
+  """The id of the `Debate` where the argument belongs."""
+  debate: ID!
+
+  """The body value of the argument."""
+  body: String!
+
+  """Whether the argument will be `FOR` or `AGAINST`."""
+  type: ForOrAgainstValue!
+  clientMutationId: String
+}
+
+type CreateDebateArgumentPayload {
+  """The argument that had just been created."""
+  debateArgument: DebateArgument
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: CreateDebateArgumentErrorCode
+  clientMutationId: String
+}
+
 """Available errors on campaign creation"""
 enum CreateEmailingCampaignErrorCode {
   """No mailing list match your id"""
@@ -3031,6 +3058,34 @@ type Debate implements Node {
     last: Int
   ): InternalDebateOpinionConnection!
 
+  """The arguments from non-experts of the debate."""
+  arguments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Filter by an argument's stand."""
+    value: ForOrAgainstValue = null
+
+    """(ROLE_ADMIN only) See also unpublished arguments."""
+    includeUnpublished: Boolean = false
+
+    """Order by."""
+    orderBy: DebateArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): DebateArgumentConnection!
+
   """The votes from experts of the debate."""
   votes(
     """
@@ -3074,6 +3129,195 @@ type Debate implements Node {
     """Returns the last `n` elements from the list."""
     last: Int
   ): DebateArticleConnection!
+}
+
+"""A debate argument from non expert."""
+type DebateArgument implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """Does the viewer already submitted a report ?"""
+  viewerHasReport: Boolean!
+
+  """The reportings related to the reportable."""
+  reportings(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The content of the argument."""
+  body: String!
+
+  """The non-expert giving his argument."""
+  author: User!
+
+  """The debate related to the argument."""
+  debate: Debate!
+
+  """Whether the argument is for or against."""
+  type: ForOrAgainstValue!
+
+  """The upvotes on the argument."""
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the last `n` elements from the list."""
+    last: Int
+
+    """Order by."""
+    orderBy: DebateArgumentVoteOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): DebateArgumentVoteConnection!
+}
+
+"""A connection to a list of items."""
+type DebateArgumentConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [DebateArgumentEdge]
+}
+
+"""An edge in a connection."""
+type DebateArgumentEdge {
+  """The item at the end of the edge."""
+  node: DebateArgument!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of arguments can be ordered upon return."""
+input DebateArgumentOrder {
+  """The field to order arguments by."""
+  field: DebateArgumentOrderField! = PUBLISHED_AT
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Ordering options for arguments returned from the connection."""
+enum DebateArgumentOrderField {
+  PUBLISHED_AT
+  VOTE_COUNT
+}
+
+"""A debate vote."""
+type DebateArgumentVote implements Node & Publishable {
+  """The ID of an object."""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """The author of the vote."""
+  author: User!
+
+  """The debate of the vote."""
+  debateArgument: DebateArgument!
+}
+
+"""A connection to a list of items."""
+type DebateArgumentVoteConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [DebateArgumentVoteEdge]
+}
+
+"""An edge in a connection."""
+type DebateArgumentVoteEdge {
+  """The item at the end of the edge."""
+  node: DebateArgumentVote
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Ways in which lists of votes can be ordered upon return."""
+input DebateArgumentVoteOrder {
+  """The field to order votes by."""
+  field: DebateArgumentVoteOrderField! = PUBLISHED_AT
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Ordering options for votes returned from the connection."""
+enum DebateArgumentVoteOrderField {
+  PUBLISHED_AT
 }
 
 """A debate article."""
@@ -3356,6 +3600,30 @@ type DeleteCommentPayload {
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError]
+  clientMutationId: String
+}
+
+"""Available errors for an `deleteDebateArgument` mutation."""
+enum DeleteDebateArgumentErrorCode {
+  """No `DebateArgument` match your `id`."""
+  UNKNOWN_DEBATE_ARGUMENT
+
+  """You are neither an admin nor the author of the `DebateArgument`."""
+  CANNOT_DELETE_DEBATE_ARGUMENT
+}
+
+input DeleteDebateArgumentInput {
+  """The Node ID of the `DebateArgument`."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteDebateArgumentPayload {
+  """The id that had just been deleted."""
+  deletedDebateArgumentId: ID
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: DeleteDebateArgumentErrorCode
   clientMutationId: String
 }
 
@@ -5632,6 +5900,9 @@ type Mutation {
   deleteDebateOpinion(input: DeleteDebateOpinionInput!): DeleteDebateOpinionPayload
   addDebateVote(input: AddDebateVoteInput!): AddDebateVotePayload
   removeDebateVote(input: RemoveDebateVoteInput!): RemoveDebateVotePayload
+  createDebateArgument(input: CreateDebateArgumentInput!): CreateDebateArgumentPayload
+  updateDebateArgument(input: UpdateDebateArgumentInput!): UpdateDebateArgumentPayload
+  deleteDebateArgument(input: DeleteDebateArgumentInput!): DeleteDebateArgumentPayload
   askProposalRevision(input: AskProposalRevisionInput!): AskProposalRevisionPayload
 }
 
@@ -11692,6 +11963,36 @@ type UpdateContactPagePayload {
 
   """The locale of the contact page."""
   locale: String
+  clientMutationId: String
+}
+
+"""Available errors for an `updateDebateArgument` mutation."""
+enum UpdateDebateArgumentErrorCode {
+  """No `DebateArgument` match your id."""
+  UNKNOWN_DEBATE_ARGUMENT
+
+  """Wrong author of the `DebateArgument`."""
+  NOT_ARGUMENT_AUTHOR
+}
+
+input UpdateDebateArgumentInput {
+  """The global id of the argument to update."""
+  id: ID
+
+  """The body value of the argument."""
+  body: String!
+
+  """Whether the argument will be `FOR` or `AGAINST`."""
+  type: ForOrAgainstValue!
+  clientMutationId: String
+}
+
+type UpdateDebateArgumentPayload {
+  """The argument that had just been updated."""
+  debateArgument: DebateArgument
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: UpdateDebateArgumentErrorCode
   clientMutationId: String
 }
 

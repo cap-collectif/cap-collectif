@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -34,7 +35,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 class DebateArgument implements Contribution, VotableInterface, ModerableInterface, Publishable
 {
     use UuidTrait;
-    use VotableOkTrait;
+    use VotableOkTrait;//@TODO remove votesCount when entity is added to elasticsearch
     use TextableTrait;
     use ModerableTrait;
     use PublishableTrait;
@@ -52,21 +53,22 @@ class DebateArgument implements Contribution, VotableInterface, ModerableInterfa
      * @Gedmo\Timestampable(on="change", field={"body"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private \DateTime $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="debateArgument", cascade={"persist", "remove"})
      */
-    private $reports;
+    private Collection $reports;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", inversedBy="arguments")
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
-    private $debate;
+    private Debate $debate;
 
-    public function __construct()
+    public function __construct(Debate $debate)
     {
+        $this->debate = $debate;
         $this->votes = new ArrayCollection();
         $this->reports = new ArrayCollection();
     }

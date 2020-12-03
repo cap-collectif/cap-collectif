@@ -1,0 +1,12 @@
+UpdateDebateArgumentErrorCode:
+    type: enum
+    config:
+        name: UpdateDebateArgumentErrorCode
+        description: 'Available errors for an `updateDebateArgument` mutation.'
+        values:
+            UNKNOWN_DEBATE_ARGUMENT:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateArgumentMutation::UNKNOWN_DEBATE_ARGUMENT")'
+                description: 'No `DebateArgument` match your id.'
+            NOT_ARGUMENT_AUTHOR:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\UpdateDebateArgumentMutation::NOT_ARGUMENT_AUTHOR")'
+                description: 'Wrong author of the `DebateArgument`.'

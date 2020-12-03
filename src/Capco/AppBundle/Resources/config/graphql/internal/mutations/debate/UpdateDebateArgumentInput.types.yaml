@@ -1,0 +1,14 @@
+UpdateDebateArgumentInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update a `DebateArgument` on a `Debate`.'
+        fields:
+            id:
+                type: 'ID'
+                description: 'The global id of the argument to update.'
+            body:
+                type: 'String!'
+                description: 'The body value of the argument.'
+            type:
+                type: 'ForOrAgainstValue!'
+                description: 'Whether the argument will be `FOR` or `AGAINST`.'

@@ -13,3 +13,6 @@ services:
     Capco\AppBundle\Security\ProposalAnalysisRelatedVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\DebateArgumentVoter:
+        tags:
+            - { name: security.voter }

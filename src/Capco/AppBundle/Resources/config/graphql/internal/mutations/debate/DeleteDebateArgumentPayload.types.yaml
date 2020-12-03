@@ -1,0 +1,10 @@
+DeleteDebateArgumentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedDebateArgumentId:
+                description: 'The id that had just been deleted.'
+                type: 'ID'
+            errorCode:
+                type: 'DeleteDebateArgumentErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

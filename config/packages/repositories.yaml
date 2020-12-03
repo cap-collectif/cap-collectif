@@ -545,12 +545,17 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:Debate\DebateVote']
 
+    Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Debate\DebateArgumentVote']
+
     Capco\AppBundle\Repository\ProposalRevisionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:ProposalRevision']
-
 
     Capco\AppBundle\Repository\Debate\DebateArticleRepository:
         public: true

@@ -1,0 +1,10 @@
+CreateDebateArgumentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateArgument:
+                type: 'InternalDebateArgument'
+                description: 'The argument that had just been created.'
+            errorCode:
+                type: 'CreateDebateArgumentErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

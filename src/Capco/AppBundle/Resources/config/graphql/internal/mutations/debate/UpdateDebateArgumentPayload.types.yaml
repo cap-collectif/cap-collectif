@@ -1,0 +1,10 @@
+UpdateDebateArgumentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateArgument:
+                type: 'InternalDebateArgument'
+                description: 'The argument that had just been updated.'
+            errorCode:
+                type: 'UpdateDebateArgumentErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

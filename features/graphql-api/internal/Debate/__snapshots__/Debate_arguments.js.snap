@@ -1,0 +1,411 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Debate.arguments connection fetches arguments associated to a debate with a cursor 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyU3B5bA==",
+            },
+            "body": "Malgré son coût élevé (plus de 12% de l’activité policière et des douanes sont consacrés à l’usage des drogues), la politique de répression est un échec. Selon l’Observatoire français des drogues et des toxicomanies (OFDT), on estime à 4 millions le nombre d’usagers, dont 1,2 million d’usagers sur une base mensuelle et 550 000 sur une base quotidienne.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+            "published": true,
+            "publishedAt": "2020-10-23 09:00:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "id": "VXNlcjp1c2VyMQ==",
+                    },
+                    "createdAt": "2015-01-01 00:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAw",
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyVGhlbw==",
+            },
+            "body": "Les partisans de la légalisation estiment que le cannabis n’est pas plus nocif que le tabac ou l’alcool et doit être encadré de la même manière. Il pose un problème d’addiction qu’on peut contrer plus aisément en encadrant sa consommation.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+            "published": true,
+            "publishedAt": "2020-10-23 09:01:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "id": "VXNlcjp1c2VyMg==",
+                    },
+                    "createdAt": "2015-01-02 00:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWd1aQ==",
+            },
+            "body": "La politique répressive a échoué. Légaliser le cannabis mettrait fin à la violence engendrée par son trafic et assécherait les économies souterraines. Cela permettrait de sortir de nombreux adolescents des réseaux criminels.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
+            "published": true,
+            "publishedAt": "2020-10-23 09:02:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyVmluY2VudA==",
+            },
+            "body": "Selon Pierre Kopp, la légalisation ramènerait « probablement entre 1 et 2 milliards d’euros par an à l’Etat », sous forme de taxes. Cet argent pourrait servir à financer des programmes de prévention et de lutte contre les drogues de toute nature. Le club Terra Nova avait de son côté estimé à 3 milliards d’euros le coût de la répression du cannabis pour la collectivité.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
+            "published": true,
+            "publishedAt": "2020-10-23 09:03:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VySnBlYw==",
+            },
+            "body": "Les criminels ne sont pas fixés sur un produit mais sur l’argent. Si on légalise le cannabis, ils se reporteront vers des drogues dures (cocaïne et autres drogues de synthèse).",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
+            "published": true,
+            "publishedAt": "2020-10-23 09:04:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+            },
+            "body": "Le nombre de consommateurs de cannabis aux Pays-Bas n’a pas décru depuis la dépénalisation en 1976 et ce pays est devenu une plaque tournante du trafic en Europe. Idem en Espagne, qui a fait machine arrière.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
+            "published": true,
+            "publishedAt": "2020-10-23 09:05:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VySWFu",
+            },
+            "body": "Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
+            "published": true,
+            "publishedAt": "2020-10-23 09:06:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "hasNextPage": false,
+      },
+      "totalCount": 7,
+    },
+  },
+}
+`;
+
+exports[`Internal|Debate.arguments connection fetches counters associated to a debate 1`] = `
+Object {
+  "node": Object {
+    "againstArguments": Object {
+      "totalCount": 8,
+    },
+    "allArguments": Object {
+      "totalCount": 10,
+    },
+    "forArguments": Object {
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Debate.arguments connection sort arguments associated to a debate by their number of votes 1`] = `
+Object {
+  "node": Object {
+    "arguments": Object {
+      "edges": Array [
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyVGhlbw==",
+            },
+            "body": "Les partisans de la légalisation estiment que le cannabis n’est pas plus nocif que le tabac ou l’alcool et doit être encadré de la même manière. Il pose un problème d’addiction qu’on peut contrer plus aisément en encadrant sa consommation.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQy",
+            "published": true,
+            "publishedAt": "2020-10-23 09:01:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "id": "VXNlcjp1c2VyMg==",
+                    },
+                    "createdAt": "2015-01-02 00:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyU3B5bA==",
+            },
+            "body": "Malgré son coût élevé (plus de 12% de l’activité policière et des douanes sont consacrés à l’usage des drogues), la politique de répression est un échec. Selon l’Observatoire français des drogues et des toxicomanies (OFDT), on estime à 4 millions le nombre d’usagers, dont 1,2 million d’usagers sur une base mensuelle et 550 000 sur une base quotidienne.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQx",
+            "published": true,
+            "publishedAt": "2020-10-23 09:00:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "id": "VXNlcjp1c2VyMQ==",
+                    },
+                    "createdAt": "2015-01-01 00:00:00",
+                    "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAw",
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyQWd1aQ==",
+            },
+            "body": "La politique répressive a échoué. Légaliser le cannabis mettrait fin à la violence engendrée par son trafic et assécherait les économies souterraines. Cela permettrait de sortir de nombreux adolescents des réseaux criminels.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQz",
+            "published": true,
+            "publishedAt": "2020-10-23 09:02:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyVmluY2VudA==",
+            },
+            "body": "Selon Pierre Kopp, la légalisation ramènerait « probablement entre 1 et 2 milliards d’euros par an à l’Etat », sous forme de taxes. Cet argent pourrait servir à financer des programmes de prévention et de lutte contre les drogues de toute nature. Le club Terra Nova avait de son côté estimé à 3 milliards d’euros le coût de la répression du cannabis pour la collectivité.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ0",
+            "published": true,
+            "publishedAt": "2020-10-23 09:03:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "AGAINST",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VySnBlYw==",
+            },
+            "body": "Les criminels ne sont pas fixés sur un produit mais sur l’argent. Si on légalise le cannabis, ils se reporteront vers des drogues dures (cocaïne et autres drogues de synthèse).",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ1",
+            "published": true,
+            "publishedAt": "2020-10-23 09:04:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+            },
+            "body": "Le nombre de consommateurs de cannabis aux Pays-Bas n’a pas décru depuis la dépénalisation en 1976 et ce pays est devenu une plaque tournante du trafic en Europe. Idem en Espagne, qui a fait machine arrière.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ2",
+            "published": true,
+            "publishedAt": "2020-10-23 09:05:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VySWFu",
+            },
+            "body": "Si le cannabis était légalisé, il serait vendu par le circuit officiel qui en contrôlerait la quantité et limiterait la teneur de THC pour réduire les accidents. Il serait alors peu attrayant pour la majorité des utilisateurs en recherche de sensations, voire de défonce. Ainsi, comme avant, les trafiquants proposeraient un produit plus fortement dosé et moins cher n’ayant plus le coût des compromissions et des risques actuels.",
+            "debate": Object {
+              "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+            },
+            "id": "RGViYXRlQXJndW1lbnQ6ZGViYXRlQXJndW1lbnQ3",
+            "published": true,
+            "publishedAt": "2020-10-23 09:06:00",
+            "trashed": false,
+            "trashedAt": null,
+            "trashedReason": null,
+            "trashedStatus": null,
+            "type": "FOR",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "hasNextPage": false,
+      },
+      "totalCount": 7,
+    },
+  },
+}
+`;

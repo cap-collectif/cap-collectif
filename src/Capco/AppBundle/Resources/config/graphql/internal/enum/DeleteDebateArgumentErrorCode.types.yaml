@@ -1,0 +1,12 @@
+DeleteDebateArgumentErrorCode:
+    type: enum
+    config:
+        name: DeleteDebateArgumentErrorCode
+        description: 'Available errors for an `deleteDebateArgument` mutation.'
+        values:
+            UNKNOWN_DEBATE_ARGUMENT:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateArgumentMutation::UNKNOWN_DEBATE_ARGUMENT")'
+                description: 'No `DebateArgument` match your `id`.'
+            CANNOT_DELETE_DEBATE_ARGUMENT:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateArgumentMutation::CANNOT_DELETE_DEBATE_ARGUMENT")'
+                description: 'You are neither an admin nor the author of the `DebateArgument`.'
