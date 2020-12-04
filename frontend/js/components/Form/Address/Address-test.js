@@ -20,9 +20,17 @@ const props = {
     ...baseProps,
     getAddress: jest.fn(),
   },
+  noReset: {
+    ...baseProps,
+    allowReset: false,
+  },
   hiddenSearchBar: {
     ...baseProps,
     showSearchBar: false,
+  },
+  noValue: {
+    ...baseProps,
+    value: null,
   },
 };
 
@@ -42,8 +50,18 @@ describe('<Address />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders correctly when not reset button display', () => {
+    const wrapper = shallow(<Address {...props.noReset} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('renders correctly when hide search bar', () => {
     const wrapper = shallow(<Address {...props.hiddenSearchBar} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly when no value', () => {
+    const wrapper = shallow(<Address {...props.noValue} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

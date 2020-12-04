@@ -345,8 +345,8 @@ export const EventForm = ({
             }
             placeholder="proposal.map.form.placeholder"
             addressProps={{
-              getAddress: (addressComplete: AddressComplete) =>
-                dispatch(change(formName, 'address', JSON.stringify([addressComplete]))),
+              getAddress: (addressComplete: ?AddressComplete) =>
+                dispatch(change(formName, 'address', addressComplete ? JSON.stringify([addressComplete]) : addressComplete)),
             }}
           />
           {/* This part is tempory, it will be delete after migration complete */}

@@ -1,6 +1,7 @@
 // @flow
 import React, { useRef, useState } from 'react';
 import { renderToString } from 'react-dom/server';
+import noop from 'lodash/noop';
 import { TileLayer, GeoJSON, Marker, withLeaflet } from 'react-leaflet';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -185,12 +186,14 @@ export const ProposalLeafletMap = ({
       <Address
         id="address"
         getPosition={(lat, lng) => flyToPosition(mapRef, lat, lng)}
-        getAddress={(addressSelected: AddressComplete) =>
-          flyToPosition(
-            mapRef,
-            addressSelected.geometry.location.lat,
-            addressSelected.geometry.location.lng,
-          )
+        getAddress={(addressSelected: ?AddressComplete) =>
+          addressSelected
+            ? flyToPosition(
+                mapRef,
+                addressSelected.geometry.location.lat,
+                addressSelected.geometry.location.lng,
+              )
+            : noop()
         }
         debounce={1200}
         value={address}

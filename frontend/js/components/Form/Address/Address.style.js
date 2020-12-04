@@ -4,13 +4,19 @@ import { BASE_INPUT, MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables';
 import colors from '~/utils/colors';
 
 export const SearchContainer: StyledComponent<
-  { hasLocationUser: boolean },
+  { hasLocationUser: boolean, hasReset: boolean },
   {},
   HTMLDivElement,
 > = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
+
+  &:hover {
+    .btn-reset {
+      display: flex;
+    }
+  }
 
   .icon-search {
     position: absolute;
@@ -27,6 +33,21 @@ export const SearchContainer: StyledComponent<
       props.hasLocationUser
         ? `${MAIN_BORDER_RADIUS_SIZE} 0 0 ${MAIN_BORDER_RADIUS_SIZE}`
         : MAIN_BORDER_RADIUS_SIZE};
+    ${({ hasReset }) =>
+      hasReset &&
+      `
+      padding-right: 44px;
+    `}
+  }
+
+  .btn-reset {
+    display: none;
+    background: none;
+    border: none;
+    position: absolute;
+    right: ${props => (props.hasLocationUser ? '40px' : '8px')};
+    top: 50%;
+    transform: translateY(-50%);
   }
 `;
 

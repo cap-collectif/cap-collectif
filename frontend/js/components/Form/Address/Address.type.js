@@ -41,6 +41,27 @@ export type AddressComplete = {|
   types: string[],
 |};
 
+export type AddressWithoutPosition = {|
+  ...AddressComplete,
+  geometry: {
+    location: {
+      lat: void,
+      lng: void,
+    },
+    location_type: string,
+    viewport?: {
+      Va: {
+        i: number,
+        j: number,
+      },
+      Za: {
+        i: number,
+        j: number,
+      },
+    },
+  },
+|};
+
 export type AddressCompleteFormatted = {|
   address: string,
   latLng: {
@@ -79,8 +100,9 @@ export type GoogleAddressAPI = {|
 
 export type AddressProps = {|
   getPosition?: (lat: number, lng: number) => void,
-  getAddress?: (address: AddressComplete) => void,
+  getAddress?: (address: ?AddressComplete) => void,
   showSearchBar?: boolean,
+  allowReset?: boolean,
 |};
 
 // AddressType => https://developers.google.com/places/supported_types

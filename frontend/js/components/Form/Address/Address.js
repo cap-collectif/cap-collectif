@@ -4,12 +4,18 @@ import PlacesAutocomplete, { getLatLng, geocodeByAddress } from 'react-places-au
 import { FormattedMessage, useIntl } from 'react-intl';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
+import IconDS, { ICON_NAME as ICON_NAME_DS } from '~ds/Icon/Icon';
 import colors from '~/utils/colors';
 import config from '~/config';
 import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants';
 import { SearchContainer, ButtonLocation, ResultContainer, LoaderContainer } from './Address.style';
-import type { AddressProps, GoogleAddressAPI, AddressComplete } from './Address.type';
+import type {
+  AddressProps,
+  GoogleAddressAPI,
+  AddressComplete,
+  AddressWithoutPosition,
+} from './Address.type';
 
 type Props = {|
   id: string,
@@ -28,10 +34,12 @@ const Address = ({
   debounce,
   getPosition,
   getAddress,
+  allowReset = true,
   showSearchBar = true,
 }: Props) => {
   const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true);
   const intl = useIntl();
+  const hasReset = allowReset && !!value;
 
   const dispatchLocationWarning = () => {
     FluxDispatcher.dispatch({
@@ -67,29 +75,36 @@ const Address = ({
     );
   };
 
-  const handleSelect = (address: string) => {
-    let formattedAddress = {};
-
-    // react-places-autocomplete use onSelect and not onChange when a suggestion is selected
-    // then we don't need to make all request if we just want an onChange()
-    if (!getAddress) onChange(address);
-
-    return geocodeByAddress(address)
-      .then(results => {
-        // eslint-disable-next-line prefer-destructuring
-        formattedAddress = results[0];
-        return getLatLng(results[0]);
-      })
-      .then(latLng => {
-        formattedAddress.geometry.location = {
-          lat: latLng.lat,
-          lng: latLng.lng,
-        };
-
-        if (getAddress) getAddress(((formattedAddress: any): AddressComplete));
-        onChange(address);
+  const handleSelect = async (address: string) => {
+    const addressWithoutPosition: AddressWithoutPosition = await geocodeByAddress(address)
+      .then((results: AddressWithoutPosition[]) => {
+        // There is no lat & lng here
+        return results[0];
       })
       .catch(error => console.error('Error', error));
+
+    await getLatLng(addressWithoutPosition)
+      .then(latLng => {
+        const addressComplete: AddressComplete = {
+          ...addressWithoutPosition,
+          geometry: {
+            ...addressWithoutPosition.geometry,
+            location: {
+              lat: latLng.lat,
+              lng: latLng.lng,
+            },
+          },
+        };
+
+        if (getAddress) getAddress(addressComplete);
+        onChange(addressComplete.formatted_address);
+      })
+      .catch(error => console.error('Error', error));
+  };
+
+  const onReset = () => {
+    if (getAddress) getAddress(null);
+    onChange(null);
   };
 
   return (
@@ -97,11 +112,10 @@ const Address = ({
       value={value}
       onChange={onChange}
       onSelect={handleSelect}
-      onError={() => onChange('')}
       debounce={debounce}>
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className="address-container">
-          <SearchContainer hasLocationUser={!!getPosition}>
+          <SearchContainer hasLocationUser={!!getPosition} hasReset={hasReset}>
             {showSearchBar && (
               <>
                 <Icon
@@ -121,6 +135,12 @@ const Address = ({
               </>
             )}
 
+            {hasReset && (
+              <button type="button" onClick={onReset} className="btn-reset">
+                <IconDS name={ICON_NAME_DS.CROSS} size="md" color="blue.900" />
+              </button>
+            )}
+
             {getPosition && (
               <ButtonLocation
                 isMobile={config.isMobile}
@@ -129,11 +149,13 @@ const Address = ({
                   e.preventDefault();
                   getLocation();
                 }}>
-                {hasLocationAuthorize ? (
-                  <Icon name={ICON_NAME.locationTarget} size={16} color={colors.darkGray} />
-                ) : (
-                  <Icon name={ICON_NAME.locationNotAuthorize} size={16} color={colors.darkGray} />
-                )}
+                <Icon
+                  name={
+                    hasLocationAuthorize ? ICON_NAME.locationTarget : ICON_NAME.locationNotAuthorize
+                  }
+                  size={16}
+                  color={colors.darkGray}
+                />
               </ButtonLocation>
             )}
           </SearchContainer>
@@ -150,11 +172,7 @@ const Address = ({
                 <li
                   {...getSuggestionItemProps(suggestion, {
                     className: suggestion.active ? 'suggestion-item--active' : 'suggestion-item',
-                    style: suggestion.active
-                      ? {
-                          backgroundColor: '#fafafa',
-                        }
-                      : { backgroundColor: '#fff' },
+                    style: { backgroundColor: suggestion.active ? '#fafafa' : '#fff' },
                   })}
                   key={idx}>
                   <span>{suggestion.formattedSuggestion.mainText}</span>{' '}

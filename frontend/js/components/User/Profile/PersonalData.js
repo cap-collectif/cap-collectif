@@ -730,8 +730,14 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 component={component}
                                 type="address"
                                 addressProps={{
-                                  getAddress: (addressComplete: AddressComplete) =>
-                                    changeProps('postalAddress', JSON.stringify([addressComplete])),
+                                  getAddress: (addressComplete: ?AddressComplete) =>
+                                    changeProps(
+                                      'postalAddress',
+                                      addressComplete
+                                        ? JSON.stringify([addressComplete])
+                                        : addressComplete,
+                                    ),
+                                  allowReset: false,
                                 }}
                                 disabled={isSsoFcOrOccitanie(false)}
                               />
@@ -745,11 +751,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                   ref="postalAddress"
                                   overlay={this.popover('postalAddress')}>
                                   <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span
-                                    className="personal-data-delete-field"
-                                    id="personal-data-postalAddress">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
+                                    <span
+                                      className="personal-data-delete-field"
+                                      id="personal-data-postalAddress">
+                                      <i className="icon cap-ios-close" />
+                                    </span>
                                   </OverlayTrigger>
                                 </OverlayTrigger>
                               </div>

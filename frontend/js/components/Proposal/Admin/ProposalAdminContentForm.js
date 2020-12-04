@@ -517,8 +517,8 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 label={<FormattedMessage id="proposal_form.address" />}
                 placeholder="proposal.map.form.placeholder"
                 addressProps={{
-                  getAddress: (addressComplete: AddressComplete) =>
-                    change('address', JSON.stringify([addressComplete])),
+                  getAddress: (addressComplete: ?AddressComplete) =>
+                    change('address', addressComplete ? JSON.stringify([addressComplete]) : addressComplete),
                 }}
               />
             )}
