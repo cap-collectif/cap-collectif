@@ -118,6 +118,7 @@ const environment = {
   getVariablesFromFragment: jest.fn(),
   getVariablesFromObject: jest.fn(),
   getVariablesFromPluralFragment: jest.fn(),
+  requiredFieldLogger: jest.fn(),
 };
 
 export const relayPaginationMock: RelayPaginationProp = {
