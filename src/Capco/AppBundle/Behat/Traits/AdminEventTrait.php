@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\ElementInterface;
+use Behat\Mink\Element\NodeElement;
 use PHPUnit\Framework\Assert;
 
 trait AdminEventTrait
@@ -119,10 +120,7 @@ trait AdminEventTrait
     {
         $this->waitAndThrowOnFailure(3000, "$('#event_address').length > 0");
         $this->fillField('event_address', 'La Force');
-        $this->waitAndThrowOnFailure(
-            2000,
-            "$('#list-suggestion > li:first-child').length > 0"
-        );
+        $this->waitAndThrowOnFailure(2000, "$('#list-suggestion > li:first-child').length > 0");
         $this->iClickElement('#list-suggestion > li:first-child');
         $this->iWait(1);
     }
@@ -148,6 +146,19 @@ trait AdminEventTrait
 
         Assert::assertTrue($title->hasAttribute('disabled'));
         Assert::assertTrue($address->hasAttribute('disabled'));
+    }
+
+    /**
+     * @When event fields should be enabled
+     */
+    public function eventFieldsShouldBeEnabled()
+    {
+        $page = $this->getCurrentPage();
+
+        /** @var NodeElement $project */
+        $project = $page->find('css', '#SelectProject-filter-project');
+
+        Assert::assertFalse($project->hasAttribute('disabled'));
     }
 
     /**

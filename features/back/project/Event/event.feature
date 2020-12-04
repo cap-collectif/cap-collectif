@@ -107,6 +107,7 @@ Scenario: Logged in admin can approve an awaiting event
   And features themes, projects, allow_users_to_propose_events, calendar are enabled
   When I go to admin event page with eventId "eventCreateByAUserReviewAwaiting"
   And event fields should be disabled
+  And event fields should be enabled
   And I click on button "#approved_button"
   And I click on button "#confirm-event-edit"
   And I wait "global.saved" to appear on current page in "body"

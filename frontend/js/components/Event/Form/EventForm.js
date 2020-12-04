@@ -484,7 +484,6 @@ export const EventForm = ({
           multi
           clearable
           name="projects"
-          disabled={isDisabled()}
           label="admin.fields.theme.projects_count"
           placeholder="select-project"
           optional={isFrontendView}

@@ -225,7 +225,6 @@ exports[`<EventForm /> it does not render toggle on frontend even with remote ev
     </div>
     <Relay(injectIntl(SelectProject))
       clearable={true}
-      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -612,7 +611,6 @@ exports[`<EventForm /> it renders correctly a remote event 1`] = `
     </div>
     <Relay(injectIntl(SelectProject))
       clearable={true}
-      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -1134,7 +1132,6 @@ exports[`<EventForm /> it renders correctly on BO a toggle with remote event ena
     </div>
     <Relay(injectIntl(SelectProject))
       clearable={true}
-      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -1623,7 +1620,6 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
     </div>
     <Relay(injectIntl(SelectProject))
       clearable={true}
-      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -2112,7 +2108,6 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
     </div>
     <Relay(injectIntl(SelectProject))
       clearable={true}
-      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
@@ -2601,7 +2596,6 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
     </div>
     <Relay(injectIntl(SelectProject))
       clearable={true}
-      disabled={false}
       label="admin.fields.theme.projects_count"
       multi={true}
       name="projects"
