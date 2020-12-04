@@ -67,7 +67,7 @@ class ComputeTipsMeeeDataCommand extends BaseExportCommand
             return 0;
         }
 
-        if (!$this->featureToggleManager->isActive('unstable__tipsmeee')) {
+        if (!$this->featureToggleManager->isActive(Manager::unstable__tipsmeee)) {
             $output->writeln('<error>The feature unstable_tipsmeee is not enabled.</error>');
 
             return 0;
@@ -76,8 +76,12 @@ class ComputeTipsMeeeDataCommand extends BaseExportCommand
         $output->writeln('<comment>Starting fetching datas from TipsMeee API.</comment>');
         $accounts = $this->tipsmeeeClient->getAllAccounts();
         $formattedAccounts = [];
-        foreach ($accounts as $account) {
-            $formattedAccounts[$account['account']] = $account['tips'];
+        if (!empty($accounts)) {
+            foreach ($accounts as $account) {
+                if (isset($account['account'])) {
+                    $formattedAccounts[$account['account']] = $account['tips'];
+                }
+            }
         }
         $accountIds = array_keys($formattedAccounts);
         if (!$generateCsv) {

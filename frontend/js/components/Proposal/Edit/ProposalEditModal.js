@@ -268,6 +268,7 @@ export default createFragmentContainer(container, {
       @argumentDefinitions(
         isAuthenticated: { type: "Boolean!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
+        isTipsMeeeEnabled: { type: "Boolean!" }
       ) {
       id
       allRevisions: revisions @include(if: $proposalRevisionsEnabled) {
@@ -288,7 +289,7 @@ export default createFragmentContainer(container, {
         ...ProposalForm_proposalForm
       }
       publicationStatus
-      ...ProposalForm_proposal
+      ...ProposalForm_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
       ...ProposalDraftAlert_proposal
     }
   `,

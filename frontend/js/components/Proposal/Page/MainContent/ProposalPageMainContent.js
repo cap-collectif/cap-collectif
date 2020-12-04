@@ -84,16 +84,18 @@ const mapStateToProps = (state: GlobalState) => ({
 
 export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMainContent), {
   proposal: graphql`
-    fragment ProposalPageMainContent_proposal on Proposal {
-      tipsmeeeId
+    fragment ProposalPageMainContent_proposal on Proposal
+      @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
+      tipsmeeeId @include(if: $isTipsMeeeEnabled)
       ...ProposalPageFusionInformations_proposal
-      ...ProposalPageTopDonators_proposal
+      ...ProposalPageTopDonators_proposal @include(if: $isTipsMeeeEnabled)
       ...ProposalPageOfficialAnswer_proposal
       ...ProposalPageDescription_proposal
       ...ProposalPageLocalisation_proposal
       ...ProposalPageCustomSections_proposal
-      ...ProposalTipsMeeeDonatorsAside_proposal
-      ...ProposalPageMainAside_proposal @arguments(stepId: $stepId)
+      ...ProposalTipsMeeeDonatorsAside_proposal @include(if: $isTipsMeeeEnabled)
+      ...ProposalPageMainAside_proposal
+        @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
       ...ProposalPageNews_proposal
       ...ProposalPageDiscussions_proposal
       ...ProposalVoteButtonWrapperFragment_proposal

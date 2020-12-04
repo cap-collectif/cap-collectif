@@ -84,6 +84,7 @@ export default createPaginationContainer(
           cursor: { type: "String" }
           stepId: { type: "ID!" }
           isAuthenticated: { type: "Boolean!" }
+          isTipsMeeeEnabled: { type: "Boolean!" }
         ) {
         id
         proposals(first: $count, after: $cursor, trashedStatus: TRASHED)
@@ -93,7 +94,12 @@ export default createPaginationContainer(
             node {
               id
               ...ProposalPreview_proposal
-                @arguments(isProfileView: true, stepId: $stepId, isAuthenticated: $isAuthenticated)
+                @arguments(
+                  isProfileView: true
+                  stepId: $stepId
+                  isAuthenticated: $isAuthenticated
+                  isTipsMeeeEnabled: $isTipsMeeeEnabled
+                )
             }
           }
           pageInfo {
@@ -131,6 +137,7 @@ export default createPaginationContainer(
         $count: Int
         $cursor: String
         $isAuthenticated: Boolean!
+        $isTipsMeeeEnabled: Boolean!
       ) {
         project: node(id: $projectId) {
           ...ProposalTrashedListPaginated_project
@@ -138,6 +145,7 @@ export default createPaginationContainer(
               count: $count
               cursor: $cursor
               isAuthenticated: $isAuthenticated
+              isTipsMeeeEnabled: $isTipsMeeeEnabled
               stepId: $stepId
             )
         }

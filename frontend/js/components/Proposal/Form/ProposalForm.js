@@ -792,7 +792,8 @@ const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   proposal: graphql`
-    fragment ProposalForm_proposal on Proposal {
+    fragment ProposalForm_proposal on Proposal
+      @argumentDefinitions(isTipsMeeeEnabled: { type: "Boolean!" }) {
       id
       title
       body
@@ -822,7 +823,7 @@ export default createFragmentContainer(container, {
         size
         url
       }
-      tipsmeeeId
+      tipsmeeeId @include(if: $isTipsMeeeEnabled)
     }
   `,
   proposalForm: graphql`

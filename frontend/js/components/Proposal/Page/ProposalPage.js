@@ -14,6 +14,7 @@ export type Props = {|
   currentVotableStepId: ?string,
   opinionCanBeFollowed: boolean,
   isAuthenticated: boolean,
+  isTipsMeeeEnabled: boolean,
   hasVotableStep: boolean,
   votesPageUrl: string,
   image: string,
@@ -28,6 +29,7 @@ export class ProposalPage extends React.Component<Props> {
       proposalTitle,
       currentVotableStepId,
       isAuthenticated,
+      isTipsMeeeEnabled,
       opinionCanBeFollowed,
       hasVotableStep,
       votesPageUrl,
@@ -47,6 +49,7 @@ export class ProposalPage extends React.Component<Props> {
               $count: Int!
               $cursor: String
               $isAuthenticated: Boolean!
+              $isTipsMeeeEnabled: Boolean!
               $proposalRevisionsEnabled: Boolean!
             ) {
               ...ProposalPageLogic_query
@@ -57,6 +60,7 @@ export class ProposalPage extends React.Component<Props> {
                   count: $count
                   cursor: $cursor
                   isAuthenticated: $isAuthenticated
+                  isTipsMeeeEnabled: $isTipsMeeeEnabled
                   proposalRevisionsEnabled: $proposalRevisionsEnabled
                 )
             }
@@ -68,6 +72,7 @@ export class ProposalPage extends React.Component<Props> {
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
             cursor: null,
             isAuthenticated,
+            isTipsMeeeEnabled,
             proposalRevisionsEnabled: proposalRevisionsEnabled && isAuthenticated,
           }}
           render={({
@@ -102,6 +107,7 @@ export class ProposalPage extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
   isAuthenticated: state.user.user !== null,
   proposalRevisionsEnabled: state.default.features.proposal_revisions ?? false,
+  isTipsMeeeEnabled: state.default.features.unstable__tipsmeee,
 });
 
 export default connect(mapStateToProps)(ProposalPage);

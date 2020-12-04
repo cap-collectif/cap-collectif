@@ -19,6 +19,11 @@ exports[`<LastProposals /> should render correctly 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
+              "name": "isTipsMeeeEnabled",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
               "name": "stepId",
             },
           ],
@@ -65,6 +70,11 @@ exports[`<LastProposals /> should render correctly 1`] = `
                         },
                         Object {
                           "kind": "Variable",
+                          "name": "isTipsMeeeEnabled",
+                          "variableName": "isTipsMeeeEnabled",
+                        },
+                        Object {
+                          "kind": "Variable",
                           "name": "stepId",
                           "variableName": "stepId",
                         },
@@ -81,7 +91,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "538e15a175db4807d328a530f2edd6c4",
+        "hash": "25119a05d0f89f0690154f3b4d11e8ff",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -94,6 +104,11 @@ exports[`<LastProposals /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "stepId",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isTipsMeeeEnabled",
             },
           ],
           "kind": "Operation",
@@ -358,31 +373,6 @@ exports[`<LastProposals /> should render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "TipsMeee",
-                      "kind": "LinkedField",
-                      "name": "tipsmeee",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "donationTotalCount",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "donationCount",
-                          "storageKey": null,
-                        },
-                      ],
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
                       "concreteType": "CommentConnection",
                       "kind": "LinkedField",
                       "name": "comments",
@@ -608,6 +598,38 @@ exports[`<LastProposals /> should render correctly 1`] = `
                       "storageKey": null,
                     },
                     Object {
+                      "condition": "isTipsMeeeEnabled",
+                      "kind": "Condition",
+                      "passingValue": true,
+                      "selections": Array [
+                        Object {
+                          "alias": "tipsMeeeDonation",
+                          "args": null,
+                          "concreteType": "TipsMeee",
+                          "kind": "LinkedField",
+                          "name": "tipsmeee",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "donationTotalCount",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "donationCount",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                    },
+                    Object {
                       "abstractKey": "__isPublishable",
                       "kind": "InlineFragment",
                       "selections": Array [
@@ -644,19 +666,20 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "694e56b797bb23092273f7ed96695c9a",
+          "cacheID": "b5b0a2e2398cfd404b89a4d056edf752",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
           "operationKind": "query",
           "text": "query LastProposalsQuery(
   $ids: [ID!]!
+  $isTipsMeeeEnabled: Boolean!
 ) {
   proposals: nodes(ids: $ids) {
     __typename
     ... on Proposal {
       id
-      ...ProposalPreview_proposal_dUMnP
+      ...ProposalPreview_proposal_3NCAPp
     }
     id
   }
@@ -739,7 +762,7 @@ fragment ProposalPreviewBody_proposal_1nwaua on Proposal {
   ...ProposalFollowButton_proposal_3HigpW
 }
 
-fragment ProposalPreviewFooter_proposal_2tPna9 on Proposal {
+fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
   id
   form {
     commentable
@@ -747,7 +770,7 @@ fragment ProposalPreviewFooter_proposal_2tPna9 on Proposal {
     usingTipsmeee
     id
   }
-  tipsmeee {
+  tipsMeeeDonation: tipsmeee @include(if: $isTipsMeeeEnabled) {
     donationTotalCount
     donationCount
   }
@@ -779,7 +802,7 @@ fragment ProposalPreviewUser_proposal on Proposal {
   }
 }
 
-fragment ProposalPreview_proposal_dUMnP on Proposal {
+fragment ProposalPreview_proposal_3NCAPp on Proposal {
   id
   media {
     url
@@ -801,7 +824,7 @@ fragment ProposalPreview_proposal_dUMnP on Proposal {
     }
     id
   }
-  ...ProposalPreviewFooter_proposal_2tPna9
+  ...ProposalPreviewFooter_proposal_23y2IM
   ...ProposalPreviewBody_proposal_1nwaua
   ...ProposalPreviewStatus_proposal_2tPna9
 }
@@ -840,6 +863,7 @@ fragment UserLink_user on User {
           "proposal2",
           "proposal3",
         ],
+        "isTipsMeeeEnabled": false,
         "stepId": "",
       }
     }

@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { ProposalListViewPaginated_step } from '~relay/ProposalListViewPaginated_step.graphql';
 import type { ProposalListViewPaginated_viewer } from '~relay/ProposalListViewPaginated_viewer.graphql';
@@ -10,10 +11,12 @@ import ProposalList from './ProposalList';
 import type { ProposalViewMode } from '../../../redux/modules/proposal';
 import ProposalsDisplayMap from '../../Page/ProposalsDisplayMap';
 import type { GeoJson, MapOptions } from '../Map/ProposalLeafletMap';
+import type { State } from '~/types';
 
 type Props = {
   relay: RelayPaginationProp,
   displayMap: boolean,
+  isTipsMeeeEnabled: boolean,
   step: ProposalListViewPaginated_step,
   displayMode: ProposalViewMode,
   defaultMapOptions: MapOptions,
@@ -75,7 +78,11 @@ const ProposalListViewPaginated = ({
   );
 };
 
-export default createPaginationContainer(
+const mapStateToProps = (state: State) => ({
+  isTipsMeeeEnabled: state.default.features.unstable__tipsmeee,
+});
+
+const ProposalListViewPaginatedRelay = createPaginationContainer(
   ProposalListViewPaginated,
   {
     viewer: graphql`
@@ -136,6 +143,7 @@ export default createPaginationContainer(
         cursor,
         stepId: props.step.id,
         isAuthenticated: !!props.viewer,
+        isTipsMeeeEnabled: props.isTipsMeeeEnabled,
       };
     },
     query: graphql`
@@ -144,6 +152,7 @@ export default createPaginationContainer(
         $cursor: String
         $orderBy: ProposalOrder
         $isAuthenticated: Boolean!
+        $isTipsMeeeEnabled: Boolean!
         $count: Int
         $term: String
         $district: ID
@@ -160,3 +169,7 @@ export default createPaginationContainer(
     `,
   },
 );
+
+const ProposalListViewPaginatedConnected = connect(mapStateToProps)(ProposalListViewPaginatedRelay);
+
+export default ProposalListViewPaginatedConnected;

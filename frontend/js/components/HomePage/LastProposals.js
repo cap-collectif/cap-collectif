@@ -3,6 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql } from 'react-relay';
+import { connect } from 'react-redux';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import ProposalPreview from '../Proposal/Preview/ProposalPreview';
@@ -10,25 +11,32 @@ import type {
   LastProposalsQueryResponse,
   LastProposalsQueryVariables,
 } from '~relay/LastProposalsQuery.graphql';
+import type { State } from '~/types';
 
 export type Props = {|
   +ids: $ReadOnlyArray<string>,
+  +isTipsMeeeEnabled: boolean,
 |};
 
 export class LastProposals extends React.Component<Props> {
   render() {
-    const { ids } = this.props;
+    const { ids, isTipsMeeeEnabled } = this.props;
     return (
       <div className="container">
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query LastProposalsQuery($ids: [ID!]!, $stepId: ID!) {
+            query LastProposalsQuery($ids: [ID!]!, $stepId: ID!, $isTipsMeeeEnabled: Boolean!) {
               proposals: nodes(ids: $ids) {
                 ... on Proposal {
                   id
                   ...ProposalPreview_proposal
-                    @arguments(stepId: $stepId, isAuthenticated: false, isProfileView: true)
+                    @arguments(
+                      stepId: $stepId
+                      isAuthenticated: false
+                      isProfileView: true
+                      isTipsMeeeEnabled: $isTipsMeeeEnabled
+                    )
                 }
               }
             }
@@ -38,6 +46,7 @@ export class LastProposals extends React.Component<Props> {
               ids,
               // TODO fixme https://github.com/cap-collectif/platform/issues/7016
               stepId: '',
+              isTipsMeeeEnabled,
             }: LastProposalsQueryVariables)
           }
           render={({
@@ -81,5 +90,8 @@ export class LastProposals extends React.Component<Props> {
     );
   }
 }
+const mapStateToProps = (state: State) => ({
+  isTipsMeeeEnabled: state.default.features.unstable__tipsmeee,
+});
 
-export default LastProposals;
+export default connect(mapStateToProps)(LastProposals);

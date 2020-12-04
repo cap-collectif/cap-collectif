@@ -31,6 +31,7 @@ type Props = {|
   order: ?string,
   terms: ?string,
   isAuthenticated: boolean,
+  isTipsMeeeEnabled: boolean,
   features: FeatureToggles,
 |};
 
@@ -120,7 +121,7 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 
   render() {
-    const { count, stepId, isAuthenticated, features } = this.props;
+    const { count, stepId, isAuthenticated, features, isTipsMeeeEnabled } = this.props;
 
     return (
       <div className="proposal__step-page">
@@ -132,6 +133,7 @@ export class ProposalStepPage extends React.Component<Props> {
               $cursor: String
               $orderBy: ProposalOrder
               $isAuthenticated: Boolean!
+              $isTipsMeeeEnabled: Boolean!
               $count: Int
               $term: String
               $district: ID
@@ -203,6 +205,7 @@ export class ProposalStepPage extends React.Component<Props> {
             ({
               stepId,
               isAuthenticated,
+              isTipsMeeeEnabled,
               count: config.isMobile ? 10 : count,
               cursor: null,
               ...this.initialRenderVars,
@@ -248,6 +251,7 @@ const mapStateToProps = (state: State) => ({
   terms: state.proposal.terms,
   order: state.proposal.order,
   features: state.default.features,
+  isTipsMeeeEnabled: state.default.features.unstable__tipsmeee,
 });
 
 export default connect<Props, State, _>(mapStateToProps)(ProposalStepPage);

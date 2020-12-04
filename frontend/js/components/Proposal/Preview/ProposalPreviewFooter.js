@@ -18,7 +18,7 @@ export class ProposalPreviewFooter extends React.Component<Props> {
   render() {
     const { proposal, step, features } = this.props;
     const showDonationInfos =
-      features.unstable__tipsmeee && proposal.form.usingTipsmeee && proposal.tipsmeee;
+      features.unstable__tipsmeee && proposal.form.usingTipsmeee && proposal.tipsMeeeDonation;
     const showComments = proposal.form.commentable;
     const showVotes =
       proposal.allVotesOnStep !== null && step && step.voteType && step.voteType !== 'DISABLED';
@@ -33,22 +33,24 @@ export class ProposalPreviewFooter extends React.Component<Props> {
         <Card.Counters>
           <div className="card__counters__item card__counters__item--comments">
             <div className="card__counters__value">
-              {proposal.tipsmeee?.donationTotalCount ?? 0} €
+              {proposal.tipsMeeeDonation?.donationTotalCount ?? 0} €
             </div>
             <FormattedMessage
               id="donation_amount_collected.count_no_nb"
               values={{
-                count: proposal.tipsmeee?.donationTotalCount ?? 0,
+                count: proposal.tipsMeeeDonation?.donationTotalCount ?? 0,
               }}
               tagName="div"
             />
           </div>
           <div className="card__counters__item card__counters__item--comments">
-            <div className="card__counters__value">{proposal.tipsmeee?.donationCount ?? 0}</div>
+            <div className="card__counters__value">
+              {proposal.tipsMeeeDonation?.donationCount ?? 0}
+            </div>
             <FormattedMessage
               id="donation.count_no_nb"
               values={{
-                count: proposal.tipsmeee?.donationCount ?? 0,
+                count: proposal.tipsMeeeDonation?.donationCount ?? 0,
               }}
               tagName="div"
             />
@@ -66,21 +68,25 @@ export class ProposalPreviewFooter extends React.Component<Props> {
         {showDonationInfos && (
           <>
             <div className="card__counters__item card__counters__item--comments">
-              <div className="card__counters__value">{proposal.tipsmeee?.donationTotalCount}</div>
+              <div className="card__counters__value">
+                {proposal.tipsMeeeDonation?.donationTotalCount}
+              </div>
               <FormattedMessage
                 id="comment.count_no_nb"
                 values={{
-                  count: proposal.tipsmeee?.donationTotalCount,
+                  count: proposal.tipsMeeeDonation?.donationTotalCount,
                 }}
                 tagName="div"
               />
             </div>
             <div className="card__counters__item card__counters__item--comments">
-              <div className="card__counters__value">{proposal.tipsmeee?.donationCount}</div>
+              <div className="card__counters__value">
+                {proposal.tipsMeeeDonation?.donationCount}
+              </div>
               <FormattedMessage
                 id="comment.count_no_nb"
                 values={{
-                  count: proposal.tipsmeee?.donationCount,
+                  count: proposal.tipsMeeeDonation?.donationCount,
                 }}
                 tagName="div"
               />
@@ -152,6 +158,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPreviewF
       @argumentDefinitions(
         stepId: { type: "ID!" }
         isProfileView: { type: "Boolean", defaultValue: false }
+        isTipsMeeeEnabled: { type: "Boolean!" }
       ) {
       id
       form {
@@ -159,7 +166,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPreviewF
         objectType
         usingTipsmeee
       }
-      tipsmeee {
+      tipsMeeeDonation: tipsmeee @include(if: $isTipsMeeeEnabled) {
         donationTotalCount
         donationCount
       }

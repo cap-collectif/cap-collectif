@@ -4,6 +4,10 @@ namespace Capco\AppBundle\Client;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\Exception\TransportException;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
@@ -26,16 +30,29 @@ class TipsmeeeClient
 
     public function getAllAccounts(): array
     {
-        $accounts = $this->makeRequest('GET', 'capco');
+        try {
+            $accounts = $this->makeRequest('GET', 'capco');
 
-        return $accounts->toArray();
+            return $accounts->toArray();
+        } catch (TransportException | ClientExceptionInterface | DecodingExceptionInterface | RedirectionExceptionInterface | ServerExceptionInterface  $exception) {
+            $this->logger->error(__METHOD__.' : '.$exception->getMessage());
+
+            return [];
+        }
     }
 
     public function getAccountById(string $accountId): array
     {
-        $account = $this->makeRequest('GET', "capco/user/${accountId}/");
+        try {
+            $account = $this->makeRequest('GET', "capco/user/${accountId}/");
 
-        return $account->toArray();
+
+            return $account->toArray();
+        } catch (TransportException | ClientExceptionInterface | DecodingExceptionInterface | RedirectionExceptionInterface | ServerExceptionInterface $exception) {
+            $this->logger->error(__METHOD__.' : '.$exception->getMessage());
+
+            return [];
+        }
     }
 
     private function makeRequest(string $method, string $path): ResponseInterface
@@ -52,7 +69,7 @@ class TipsmeeeClient
         try {
             return $this->client->request($method, $path, $options);
         } catch (TransportExceptionInterface $exception) {
-            $this->logger->error('Wrong query parameters.' . __METHOD__ . $exception->getMessage());
+            $this->logger->error('Wrong query parameters.'.__METHOD__.$exception->getMessage());
 
             throw new TransportException($exception->getMessage());
         }

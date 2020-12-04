@@ -11,6 +11,7 @@ describe('<ProposalPage />', () => {
     proposalRevisionsEnabled: false,
     currentVotableStepId: 'stepid',
     isAuthenticated: true,
+    isTipsMeeeEnabled: false,
     opinionCanBeFollowed: false,
     hasVotableStep: false,
     image: '/lepetitcochontirelirechelou.jpg',

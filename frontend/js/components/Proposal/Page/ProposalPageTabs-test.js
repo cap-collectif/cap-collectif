@@ -30,7 +30,7 @@ describe('<ProposalPageTabs />', () => {
       usingCategories: true,
       objectType: 'PROPOSAL',
     },
-    tipsmeee: {
+    tipsmeeeDonators: {
       donatorsCount: 2,
     },
   };

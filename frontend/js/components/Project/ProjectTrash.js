@@ -3,15 +3,18 @@ import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import CommentTrashedListPaginated from '../Comment/CommentTrashedListPaginated';
 import ProposalTrashedListPaginated from '../Proposal/List/ProposalTrashedListPaginated';
 import type { ProjectTrashQueryResponse } from '~relay/ProjectTrashQuery.graphql';
+import type { State } from '~/types';
 
 export type Props = {|
   +projectId: string,
   +isAuthenticated: boolean,
+  +isTipsMeeeEnabled: boolean,
 |};
 
 export const TRASHED_PAGINATOR_COUNT = 20;
@@ -24,7 +27,7 @@ const StyledContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 
 export class ProjectTrash extends React.Component<Props> {
   render() {
-    const { projectId, isAuthenticated } = this.props;
+    const { projectId, isAuthenticated, isTipsMeeeEnabled } = this.props;
     return (
       <StyledContainer>
         <div className="container width-100">
@@ -34,6 +37,7 @@ export class ProjectTrash extends React.Component<Props> {
               query ProjectTrashQuery(
                 $projectId: ID!
                 $isAuthenticated: Boolean!
+                $isTipsMeeeEnabled: Boolean!
                 $cursor: String
                 $count: Int
                 $stepId: ID!
@@ -54,6 +58,7 @@ export class ProjectTrash extends React.Component<Props> {
                       count: $count
                       cursor: $cursor
                       isAuthenticated: $isAuthenticated
+                      isTipsMeeeEnabled: $isTipsMeeeEnabled
                       stepId: $stepId
                     )
                 }
@@ -62,6 +67,7 @@ export class ProjectTrash extends React.Component<Props> {
             variables={{
               projectId,
               isAuthenticated,
+              isTipsMeeeEnabled,
               count: TRASHED_PAGINATOR_COUNT,
               cursor: null,
               // TODO fixme https://github.com/cap-collectif/platform/issues/7016
@@ -114,4 +120,8 @@ export class ProjectTrash extends React.Component<Props> {
   }
 }
 
-export default ProjectTrash;
+const mapStateToProps = (state: State) => ({
+  isTipsMeeeEnabled: state.default.features.unstable__tipsmeee,
+});
+
+export default connect(mapStateToProps)(ProjectTrash);

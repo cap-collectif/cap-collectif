@@ -21,7 +21,7 @@ import ProposalPageVotes from './Votes/ProposalPageVotes';
 import ProposalPageBlog from './Blog/ProposalPageBlog';
 import ProposalPageFollowers from './Followers/ProposalPageFollowers';
 import ProposalDraftAlert from './ProposalDraftAlert';
-import ProposalPageDonators from "~/components/Proposal/Page/Donators/ProposalPageDonators";
+import ProposalPageDonators from '~/components/Proposal/Page/Donators/ProposalPageDonators';
 
 export type Props = {|
   query: ProposalPageLogic_query,
@@ -228,6 +228,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
         count: { type: "Int!" }
         cursor: { type: "String" }
         isAuthenticated: { type: "Boolean!" }
+        isTipsMeeeEnabled: { type: "Boolean!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
       ) {
       viewer @include(if: $isAuthenticated) {
@@ -241,11 +242,13 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
         ...ProposalVoteBasketWidget_step @include(if: $isAuthenticated)
       }
       proposal: node(id: $proposalId) {
-        ...ProposalPageAside_proposal @arguments(stepId: $stepId)
+        ...ProposalPageAside_proposal
+          @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
         ...ProposalDraftAlert_proposal
-        ...ProposalPageMainContent_proposal
+        ...ProposalPageMainContent_proposal @arguments(isTipsMeeeEnabled: $isTipsMeeeEnabled)
         ...ProposalPageAlert_proposal
-        ...ProposalPageTabs_proposal @arguments(stepId: $stepId)
+        ...ProposalPageTabs_proposal
+          @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
         ...ProposalPageVotes_proposal
         ...ProposalPageBlog_proposal
         ...ProposalPageFollowers_proposal
@@ -254,8 +257,11 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageLogi
           @arguments(
             isAuthenticated: $isAuthenticated
             proposalRevisionsEnabled: $proposalRevisionsEnabled
+            isTipsMeeeEnabled: $isTipsMeeeEnabled
           )
-        ...ProposalPageMainAside_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
+        ...ProposalPageMainAside_proposal
+          @arguments(stepId: $stepId, isTipsMeeeEnabled: $isTipsMeeeEnabled)
+          @include(if: $isAuthenticated)
         ...ProposalAnalysisPanel_proposal
           @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
           @include(if: $isAuthenticated)

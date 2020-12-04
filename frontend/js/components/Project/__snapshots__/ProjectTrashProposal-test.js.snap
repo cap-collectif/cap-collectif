@@ -29,6 +29,11 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
+              "name": "isTipsMeeeEnabled",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
               "name": "projectId",
             },
             Object {
@@ -81,6 +86,11 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                     },
                     Object {
                       "kind": "Variable",
+                      "name": "isTipsMeeeEnabled",
+                      "variableName": "isTipsMeeeEnabled",
+                    },
+                    Object {
+                      "kind": "Variable",
                       "name": "stepId",
                       "variableName": "stepId",
                     },
@@ -94,7 +104,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "ab866113e650390fb67bb7524000f127",
+        "hash": "24da2e986e164d759d895f63afa73323",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -112,6 +122,11 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "isAuthenticated",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "isTipsMeeeEnabled",
             },
             Object {
               "defaultValue": null,
@@ -440,31 +455,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": "TipsMeee",
-                                  "kind": "LinkedField",
-                                  "name": "tipsmeee",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "donationTotalCount",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "donationCount",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
                                   "concreteType": "CommentConnection",
                                   "kind": "LinkedField",
                                   "name": "comments",
@@ -697,6 +687,38 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                   "storageKey": null,
                                 },
                                 Object {
+                                  "condition": "isTipsMeeeEnabled",
+                                  "kind": "Condition",
+                                  "passingValue": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": "tipsMeeeDonation",
+                                      "args": null,
+                                      "concreteType": "TipsMeee",
+                                      "kind": "LinkedField",
+                                      "name": "tipsmeee",
+                                      "plural": false,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "donationTotalCount",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "donationCount",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                },
+                                Object {
                                   "abstractKey": "__isPublishable",
                                   "kind": "InlineFragment",
                                   "selections": Array [
@@ -836,7 +858,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "ecc0db285a4c023690eac6684afc3027",
+          "cacheID": "9af437d59f0b2ea8e3c84f66692abc22",
           "id": null,
           "metadata": Object {},
           "name": "ProjectTrashProposalQuery",
@@ -844,13 +866,14 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
           "text": "query ProjectTrashProposalQuery(
   $projectId: ID!
   $isAuthenticated: Boolean!
+  $isTipsMeeeEnabled: Boolean!
   $cursor: String
   $count: Int
 ) {
   project: node(id: $projectId) {
     __typename
     id
-    ...ProposalTrashedListPaginated_project_2RchB8
+    ...ProposalTrashedListPaginated_project_3shNSw
   }
 }
 
@@ -933,7 +956,7 @@ fragment ProposalPreviewBody_proposal_3UaCIZ on Proposal {
   ...ProposalFollowButton_proposal_39ngnn
 }
 
-fragment ProposalPreviewFooter_proposal_2tPna9 on Proposal {
+fragment ProposalPreviewFooter_proposal_23y2IM on Proposal {
   id
   form {
     commentable
@@ -941,7 +964,7 @@ fragment ProposalPreviewFooter_proposal_2tPna9 on Proposal {
     usingTipsmeee
     id
   }
-  tipsmeee {
+  tipsMeeeDonation: tipsmeee @include(if: $isTipsMeeeEnabled) {
     donationTotalCount
     donationCount
   }
@@ -973,7 +996,7 @@ fragment ProposalPreviewUser_proposal on Proposal {
   }
 }
 
-fragment ProposalPreview_proposal_4died5 on Proposal {
+fragment ProposalPreview_proposal_2CDdxe on Proposal {
   id
   media {
     url
@@ -995,19 +1018,19 @@ fragment ProposalPreview_proposal_4died5 on Proposal {
     }
     id
   }
-  ...ProposalPreviewFooter_proposal_2tPna9
+  ...ProposalPreviewFooter_proposal_23y2IM
   ...ProposalPreviewBody_proposal_3UaCIZ
   ...ProposalPreviewStatus_proposal_2tPna9
 }
 
-fragment ProposalTrashedListPaginated_project_2RchB8 on Project {
+fragment ProposalTrashedListPaginated_project_3shNSw on Project {
   id
   proposals(first: $count, after: $cursor, trashedStatus: TRASHED) {
     totalCount
     edges {
       node {
         id
-        ...ProposalPreview_proposal_4died5
+        ...ProposalPreview_proposal_2CDdxe
         __typename
       }
       cursor
@@ -1053,6 +1076,7 @@ fragment UserLink_user on User {
         "count": 20,
         "cursor": null,
         "isAuthenticated": true,
+        "isTipsMeeeEnabled": true,
         "projectId": "UHJvamVjdDpwcm9qZWN0MQ==",
         "stepId": "",
       }

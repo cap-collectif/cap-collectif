@@ -209,9 +209,7 @@ export const ProposalPageHeader = ({
         <HeaderActions>
           <a href={referer || proposal.url}>
             <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
-            {tradKeyToBack && (
-              <FormattedMessage id={tradKeyToBack} />
-            )}
+            {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
           </a>
           {hasAnalysingButton && (
             <button type="button" id="side-analysis-open-button" onClick={onAnalysisClick}>
@@ -292,6 +290,7 @@ export default createFragmentContainer(container, {
       @argumentDefinitions(
         isAuthenticated: { type: "Boolean!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
+        isTipsMeeeEnabled: { type: "Boolean!" }
       ) {
       id
       ...TrashedMessage_contribution
@@ -300,6 +299,7 @@ export default createFragmentContainer(container, {
         @arguments(
           isAuthenticated: $isAuthenticated
           proposalRevisionsEnabled: $proposalRevisionsEnabled
+          isTipsMeeeEnabled: $isTipsMeeeEnabled
         )
       title
       media {

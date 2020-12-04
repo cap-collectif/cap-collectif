@@ -214,6 +214,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       @argumentDefinitions(
         isAuthenticated: { type: "Boolean!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
+        isTipsMeeeEnabled: { type: "Boolean!" }
       ) {
       id
       url
@@ -246,6 +247,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
         @arguments(
           isAuthenticated: $isAuthenticated
           proposalRevisionsEnabled: $proposalRevisionsEnabled
+          isTipsMeeeEnabled: $isTipsMeeeEnabled
         )
       ...ProposalDeleteModal_proposal
     }

@@ -194,6 +194,7 @@ export default createRefetchContainer(
       $cursor: String
       $orderBy: ProposalOrder
       $isAuthenticated: Boolean!
+      $isTipsMeeeEnabled: Boolean!
       $count: Int
       $term: String
       $district: ID

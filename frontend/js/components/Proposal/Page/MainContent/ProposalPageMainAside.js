@@ -86,11 +86,11 @@ const mapStateToProps = (state: GlobalState) => ({
 export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMainAside), {
   proposal: graphql`
     fragment ProposalPageMainAside_proposal on Proposal
-      @argumentDefinitions(stepId: { type: "ID!" }) {
+      @argumentDefinitions(stepId: { type: "ID!" }, isTipsMeeeEnabled: { type: "Boolean!" }) {
       id
       ...ProposalPageMetadata_proposal
       ...ProposalPageAdvancement_proposal
-      ...ProposalTipsMeeeAside_proposal
+      ...ProposalTipsMeeeAside_proposal @include(if: $isTipsMeeeEnabled)
       ...ProposalPageVoteThreshold_proposal @arguments(stepId: $stepId)
       currentVotableStep {
         id
@@ -102,7 +102,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageMain
       form {
         usingCategories
         usingThemes
-        usingTipsmeee
+        usingTipsmeee @include(if: $isTipsMeeeEnabled)
       }
     }
   `,

@@ -83,8 +83,8 @@ export const ProposalPageTabs = ({ proposal, step, tabKey, votesCount, features 
   const showVotesTab = votesCount > 0 || proposal?.currentVotableStep !== null;
   const showFollowersTab = proposal?.project?.opinionCanBeFollowed;
   const showDonatorsTab =
-    features.unstable__tipsmeee && proposal && proposal.tipsmeee
-      ? proposal.tipsmeee.donatorsCount > 0
+    features.unstable__tipsmeee && proposal && proposal.tipsmeeeDonators
+      ? proposal.tipsmeeeDonators.donatorsCount > 0
       : false;
   const voteTabLabel =
     step && isInterpellationContextFromProposal(proposal) ? 'global.support' : 'global.vote';
@@ -127,7 +127,9 @@ export const ProposalPageTabs = ({ proposal, step, tabKey, votesCount, features 
           <NavItem disabled={!proposal} eventKey="donators" active={tabKey === 'donators'}>
             <FormattedMessage id="proposal.tabs.donators" />
             {proposal && (
-              <span className="tip">{proposal.tipsmeee ? proposal.tipsmeee.donatorsCount : 0}</span>
+              <span className="tip">
+                {proposal.tipsmeeeDonators ? proposal.tipsmeeeDonators.donatorsCount : 0}
+              </span>
             )}
           </NavItem>
         )}
@@ -146,7 +148,8 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageTabs
     }
   `,
   proposal: graphql`
-    fragment ProposalPageTabs_proposal on Proposal @argumentDefinitions(stepId: { type: "ID!" }) {
+    fragment ProposalPageTabs_proposal on Proposal
+      @argumentDefinitions(stepId: { type: "ID!" }, isTipsMeeeEnabled: { type: "Boolean!" }) {
       id
       form {
         usingCategories
@@ -180,7 +183,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProposalPageTabs
         }
         opinionCanBeFollowed
       }
-      tipsmeee {
+      tipsmeeeDonators: tipsmeee @include(if: $isTipsMeeeEnabled) {
         donatorsCount
       }
     }

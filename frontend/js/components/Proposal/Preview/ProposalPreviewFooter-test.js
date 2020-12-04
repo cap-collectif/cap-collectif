@@ -42,12 +42,12 @@ describe('<ProposalPreviewFooter />', () => {
       totalCount: 42,
       totalPointsCount: 192,
     },
-    tipsmeee: null,
+    tipsMeeeDonation: null,
   };
 
   const proposalNotCommentable = {
     ...proposal,
-    tipsmeee: null,
+    tipsMeeeDonation: null,
     form: {
       commentable: false,
       objectType: 'PROPOSAL',
@@ -57,7 +57,7 @@ describe('<ProposalPreviewFooter />', () => {
 
   const proposalWithDonations = {
     ...proposal,
-    tipsmeee: {
+    tipsMeeeDonation: {
       donationCount: 5,
       donationTotalCount: 15000,
     },

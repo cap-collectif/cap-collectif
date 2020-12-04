@@ -8,6 +8,7 @@ describe('<ProjectTrashProposal />', () => {
   const props = {
     projectId: 'UHJvamVjdDpwcm9qZWN0MQ==',
     isAuthenticated: true,
+    isTipsMeeeEnabled: true,
   };
 
   it('should render correctly', () => {
