@@ -2,7 +2,7 @@
 import colors from '~/styles/modules/colors';
 import { styles as stylesLink } from '~ds/Link/Link';
 
-const styles = (alternative?: boolean) => ({
+const styles = (isLoading?: boolean, alternative?: boolean) => ({
   common: {
     outline: 'none',
   },
@@ -10,6 +10,10 @@ const styles = (alternative?: boolean) => ({
     primary: {
       bg: 'blue.500',
       color: 'blue.100',
+
+      '.icon': {
+        color: 'white',
+      },
 
       '&:hover': {
         bg: 'blue.700',
@@ -33,15 +37,25 @@ const styles = (alternative?: boolean) => ({
         },
       },
 
-      '.icon': {
-        color: 'white',
-      },
+      ...(isLoading && {
+        bg: 'blue.150',
+        color: 'blue.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'blue.300',
+        },
+      }),
     },
     secondary: {
       bg: 'white',
       color: 'blue.500',
       border: 'button',
       borderColor: 'blue.500',
+
+      '.icon': {
+        color: 'blue.500',
+      },
 
       '&:hover': {
         color: 'blue.700',
@@ -69,15 +83,25 @@ const styles = (alternative?: boolean) => ({
         },
       },
 
-      '.icon': {
-        color: 'blue.500',
-      },
+      ...(isLoading && {
+        color: 'blue.300',
+        borderColor: 'blue.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'blue.300',
+        },
+      }),
     },
     tertiary: {
       bg: 'transparent',
       color: 'blue.500',
       p: 0,
       textTransform: alternative ? 'uppercase' : 'initial',
+
+      '.icon': {
+        color: 'blue.500',
+      },
 
       '&:hover': {
         color: 'blue.700',
@@ -103,9 +127,14 @@ const styles = (alternative?: boolean) => ({
         },
       },
 
-      '.icon': {
-        color: 'blue.500',
-      },
+      ...(isLoading && {
+        color: 'blue.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'blue.300',
+        },
+      }),
     },
     link: {
       ...stylesLink,
@@ -144,6 +173,15 @@ const styles = (alternative?: boolean) => ({
       '.icon': {
         color: 'white',
       },
+
+      ...(isLoading && {
+        bg: 'red.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'red.100',
+        },
+      }),
     },
     secondary: {
       bg: 'white',
@@ -180,6 +218,16 @@ const styles = (alternative?: boolean) => ({
       '.icon': {
         color: 'red.500',
       },
+
+      ...(isLoading && {
+        color: 'red.300',
+        borderColor: 'red.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'red.300',
+        },
+      }),
     },
     tertiary: {
       bg: 'transparent',
@@ -214,6 +262,15 @@ const styles = (alternative?: boolean) => ({
       '.icon': {
         color: 'red.500',
       },
+
+      ...(isLoading && {
+        color: 'red.300',
+        'pointer-events': 'none',
+
+        '.icon': {
+          color: 'red.300',
+        },
+      }),
     },
     link: {
       ...stylesLink,

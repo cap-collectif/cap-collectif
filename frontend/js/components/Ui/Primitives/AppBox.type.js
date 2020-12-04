@@ -186,6 +186,7 @@ type Active = {|
 
 type Disabled = {|
   disabledStyle?: Object,
+  disabled?: boolean,
 |};
 
 type Visible = {|

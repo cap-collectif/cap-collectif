@@ -7,28 +7,35 @@ import { ICON_NAME } from '~ds/Icon/Icon';
 storiesOf('Design system|Button/Secondary/Primary', module)
   .add('small', () => {
     return (
-      <Button variant="secondary" size="small" variantColor="primary">
+      <Button variant="secondary" variantSize="small" variantColor="primary">
         Ajouter
       </Button>
     );
   })
   .add('medium', () => {
     return (
-      <Button variant="secondary" size="medium" variantColor="primary">
+      <Button variant="secondary" variantSize="medium" variantColor="primary">
         Ajouter
       </Button>
     );
   })
   .add('big', () => {
     return (
-      <Button variant="secondary" size="big" variantColor="primary">
+      <Button variant="secondary" variantSize="big" variantColor="primary">
         Ajouter
       </Button>
     );
   })
   .add('disabled', () => {
     return (
-      <Button variant="secondary" size="medium" variantColor="primary" disabled>
+      <Button variant="secondary" variantSize="medium" variantColor="primary" disabled>
+        Ajouter
+      </Button>
+    );
+  })
+  .add('loading', () => {
+    return (
+      <Button variant="secondary" variantSize="medium" variantColor="primary" isLoading>
         Ajouter
       </Button>
     );
@@ -37,28 +44,35 @@ storiesOf('Design system|Button/Secondary/Primary', module)
 storiesOf('Design system|Button/Secondary/Danger', module)
   .add('small', () => {
     return (
-      <Button variant="secondary" size="small" variantColor="danger">
+      <Button variant="secondary" variantSize="small" variantColor="danger">
         Supprimer
       </Button>
     );
   })
   .add('medium', () => {
     return (
-      <Button variant="secondary" size="medium" variantColor="danger">
+      <Button variant="secondary" variantSize="medium" variantColor="danger">
         Supprimer
       </Button>
     );
   })
   .add('big', () => {
     return (
-      <Button variant="secondary" size="big" variantColor="danger">
+      <Button variant="secondary" variantSize="big" variantColor="danger">
         Supprimer
       </Button>
     );
   })
   .add('disabled', () => {
     return (
-      <Button variant="secondary" size="medium" variantColor="danger" disabled>
+      <Button variant="secondary" variantSize="medium" variantColor="danger" disabled>
+        Supprimer
+      </Button>
+    );
+  })
+  .add('loading', () => {
+    return (
+      <Button variant="secondary" variantSize="medium" variantColor="danger" isLoading>
         Supprimer
       </Button>
     );
@@ -67,21 +81,21 @@ storiesOf('Design system|Button/Secondary/Danger', module)
 storiesOf('Design system|Button/Secondary with icon/Primary', module)
   .add('small', () => {
     return (
-      <Button variant="secondary" size="small" variantColor="primary" leftIcon={ICON_NAME.ADD}>
+      <Button variant="secondary" variantSize="small" variantColor="primary" leftIcon={ICON_NAME.ADD}>
         Supprimer
       </Button>
     );
   })
   .add('medium', () => {
     return (
-      <Button variant="secondary" size="medium" variantColor="primary" leftIcon={ICON_NAME.ADD}>
+      <Button variant="secondary" variantSize="medium" variantColor="primary" leftIcon={ICON_NAME.ADD}>
         Ajouter
       </Button>
     );
   })
   .add('big', () => {
     return (
-      <Button variant="secondary" size="big" variantColor="primary" leftIcon={ICON_NAME.ADD}>
+      <Button variant="secondary" variantSize="big" variantColor="primary" leftIcon={ICON_NAME.ADD}>
         Ajouter
       </Button>
     );
@@ -90,10 +104,22 @@ storiesOf('Design system|Button/Secondary with icon/Primary', module)
     return (
       <Button
         variant="secondary"
-        size="medium"
+        variantSize="medium"
         variantColor="primary"
         leftIcon={ICON_NAME.ADD}
         disabled>
+        Ajouter
+      </Button>
+    );
+  })
+  .add('loading', () => {
+    return (
+      <Button
+        variant="secondary"
+        variantSize="medium"
+        variantColor="primary"
+        leftIcon={ICON_NAME.ADD}
+        isLoading>
         Ajouter
       </Button>
     );
@@ -102,21 +128,21 @@ storiesOf('Design system|Button/Secondary with icon/Primary', module)
 storiesOf('Design system|Button/Secondary with icon/Danger', module)
   .add('small', () => {
     return (
-      <Button variant="secondary" size="small" variantColor="danger" leftIcon={ICON_NAME.TRASH}>
+      <Button variant="secondary" variantSize="small" variantColor="danger" leftIcon={ICON_NAME.TRASH}>
         Supprimer
       </Button>
     );
   })
   .add('medium', () => {
     return (
-      <Button variant="secondary" size="medium" variantColor="danger" leftIcon={ICON_NAME.TRASH}>
+      <Button variant="secondary" variantSize="medium" variantColor="danger" leftIcon={ICON_NAME.TRASH}>
         Supprimer
       </Button>
     );
   })
   .add('big', () => {
     return (
-      <Button variant="secondary" size="big" variantColor="danger" leftIcon={ICON_NAME.TRASH}>
+      <Button variant="secondary" variantSize="big" variantColor="danger" leftIcon={ICON_NAME.TRASH}>
         Supprimer
       </Button>
     );
@@ -125,10 +151,22 @@ storiesOf('Design system|Button/Secondary with icon/Danger', module)
     return (
       <Button
         variant="secondary"
-        size="medium"
+        variantSize="medium"
         variantColor="danger"
         leftIcon={ICON_NAME.TRASH}
         disabled>
+        Supprimer
+      </Button>
+    );
+  })
+  .add('loading', () => {
+    return (
+      <Button
+        variant="secondary"
+        variantSize="medium"
+        variantColor="danger"
+        leftIcon={ICON_NAME.TRASH}
+        isLoading>
         Supprimer
       </Button>
     );

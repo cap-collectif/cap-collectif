@@ -7,17 +7,19 @@ import { FontWeight, LineHeight } from '~ui/Primitives/constants';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 import S from './Button.style';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
+import Spinner from '~ds/Spinner/Spinner';
 
 type Props = {|
   ...AppBoxProps,
-  variant: 'primary' | 'secondary' | 'tertiary' | 'link',
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'link',
   variantColor?: 'primary' | 'danger',
-  size?: 'small' | 'medium' | 'big',
+  variantSize?: 'small' | 'medium' | 'big',
   leftIcon?: $Values<typeof ICON_NAME>,
   rightIcon?: $Values<typeof ICON_NAME>,
   children?: React.Node,
   disabled?: boolean,
   alternative?: boolean,
+  isLoading?: boolean,
 |};
 
 const SIZE = {
@@ -42,13 +44,13 @@ const ButtonInner = styled(AppBox)(
   {
     ...S().common,
   },
-  ({ variantColor, alternative }) =>
+  ({ variantColor, isLoading, alternative }) =>
     variantStyled({
       variants: {
-        primary: S()[variantColor].primary,
-        secondary: S()[variantColor].secondary,
-        tertiary: S(alternative)[variantColor].tertiary,
-        link: S()[variantColor].link,
+        primary: S(isLoading)[variantColor].primary,
+        secondary: S(isLoading)[variantColor].secondary,
+        tertiary: S(isLoading, alternative)[variantColor].tertiary,
+        link: S(isLoading)[variantColor].link,
       },
     }),
 );
@@ -56,7 +58,7 @@ const ButtonInner = styled(AppBox)(
 const Button = React.forwardRef<Props, HTMLButtonElement>(
   (
     {
-      size = 'medium',
+      variantSize = 'medium',
       variant,
       variantColor = 'primary',
       leftIcon,
@@ -64,6 +66,7 @@ const Button = React.forwardRef<Props, HTMLButtonElement>(
       children,
       disabled,
       alternative,
+      isLoading,
       ...props
     }: Props,
     ref,
@@ -83,15 +86,29 @@ const Button = React.forwardRef<Props, HTMLButtonElement>(
         borderRadius="button"
         bg="transparent"
         disabled={disabled}
-        px={SIZE[size].px}
-        py={SIZE[size].py}
+        px={SIZE[variantSize].px}
+        py={SIZE[variantSize].py}
         variantColor={variantColor}
         variant={variant}
         alternative={alternative}
+        isLoading={isLoading}
         {...props}>
-        {leftIcon && <Icon color="inherit" name={leftIcon} size={ICON_SIZE.MD} marginRight={2} />}
-        {children}
-        {rightIcon && <Icon color="inherit" name={rightIcon} size={ICON_SIZE.MD} marginLeft={2} />}
+        {isLoading ? (
+          <>
+            <Spinner marginRight={leftIcon || rightIcon ? 2 : 0} />
+            {leftIcon || rightIcon ? children : null}
+          </>
+        ) : (
+          <>
+            {leftIcon && (
+              <Icon color="inherit" name={leftIcon} size={ICON_SIZE.MD} marginRight={2} />
+            )}
+            {children}
+            {rightIcon && (
+              <Icon color="inherit" name={rightIcon} size={ICON_SIZE.MD} marginLeft={2} />
+            )}
+          </>
+        )}
       </ButtonInner>
     );
   },
