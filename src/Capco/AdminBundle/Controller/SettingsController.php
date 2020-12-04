@@ -15,6 +15,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -37,7 +38,7 @@ class SettingsController extends Controller
      * @Template("@CapcoAdmin/Settings/registration.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function registrationAction(Request $request)
+    public function registrationAction(Request $request): array
     {
         $adminPool = $this->get('sonata.admin.pool');
 
@@ -70,7 +71,7 @@ class SettingsController extends Controller
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template("CapcoAdminBundle:Settings:list.html.twig")
      */
-    public function listAction(Request $request, $category)
+    public function listAction(Request $request, $category): array
     {
         $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
@@ -117,18 +118,22 @@ class SettingsController extends Controller
      *
      * @param mixed $toggle
      */
-    public function switchToggleAction(string $toggle)
+    public function switchToggleAction(string $toggle): RedirectResponse
     {
-        $allowedToggles = ['allow_users_to_propose_events', 'display_map'];
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
+
+        $adminAllowedFeatures = array_merge(Manager::ADMIN_ALLOWED_FEATURES, [
+            Manager::allow_users_to_propose_events,
+        ]);
         if (
-            !\in_array($toggle, $allowedToggles) &&
+            !\in_array($toggle, $adminAllowedFeatures) &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
+
         $toggleManager = $this->get(Manager::class);
         $value = $toggleManager->switchValue($toggle);
         if ('developer_documentation' === $toggle) {

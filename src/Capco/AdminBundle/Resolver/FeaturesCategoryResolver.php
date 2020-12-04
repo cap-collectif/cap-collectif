@@ -8,14 +8,14 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class FeaturesCategoryResolver
 {
-    protected static $categories = [
+    protected static array $categories = [
         'pages.homepage' => ['conditions' => [], 'features' => []],
         'pages.blog' => ['conditions' => ['blog'], 'features' => []],
         'pages.events' => [
             'conditions' => ['calendar'],
             'features' => [
                 UserRole::ROLE_SUPER_ADMIN => [],
-                UserRole::ROLE_ADMIN => ['allow_users_to_propose_events'],
+                UserRole::ROLE_ADMIN => [Manager::allow_users_to_propose_events],
             ],
         ],
         'pages.themes' => ['conditions' => ['themes'], 'features' => []],
@@ -37,56 +37,33 @@ class FeaturesCategoryResolver
         'settings.modules' => [
             'conditions' => [],
             'features' => [
-                UserRole::ROLE_ADMIN => [
-                    'blog',
-                    'calendar',
-                    'consultation_plan',
-                    'privacy_policy',
-                    'display_map',
-                    'versions',
-                    'themes',
-                    'districts',
-                    'members_list',
-                    'profiles',
-                    'reporting',
-                    'newsletter',
-                    'share_buttons',
-                    'search',
-                    'display_pictures_in_depository_proposals_list',
-                    'display_pictures_in_event_list',
-                    'external_project',
-                    'read_more',
-                    'secure_password',
-                    'restrict_connection',
-                    'public_api',
-                    'developer_documentation',
-                ],
+                UserRole::ROLE_ADMIN => Manager::ADMIN_ALLOWED_FEATURES,
                 UserRole::ROLE_SUPER_ADMIN => [
-                    'votes_min',
-                    'disconnect_openid',
-                    'votes_evolution',
-                    'remind_user_account_confirmation',
-                    'server_side_rendering',
-                    'export',
-                    'indexation',
-                    'new_feature_questionnaire_result',
-                    'display_pictures_in_event_list',
-                    'app_news',
-                    'multilangue',
-                    'unstable__remote_events',
+                    Manager::votes_min,
+                    Manager::disconnect_openid,
+                    Manager::votes_evolution,
+                    Manager::remind_user_account_confirmation,
+                    Manager::server_side_rendering,
+                    Manager::export,
+                    Manager::indexation,
+                    Manager::new_feature_questionnaire_result,
+                    Manager::display_pictures_in_event_list,
+                    Manager::app_news,
+                    Manager::multilangue,
+                    Manager::unstable__remote_events,
                     Manager::unstable__tipsmeee,
-                    'sentry_log',
-                    'login_openid',
-                    'login_saml',
-                    'login_paris',
-                    'login_franceconnect',
-                    'unstable__admin_editor',
-                    'unstable__analysis',
-                    'report_browers_errors_to_sentry',
-                    'http_redirects',
-                    'user_invitations',
+                    Manager::sentry_log,
+                    Manager::login_openid,
+                    Manager::login_saml,
+                    Manager::login_paris,
+                    Manager::login_franceconnect,
+                    Manager::unstable__admin_editor,
+                    Manager::unstable__analysis,
+                    Manager::report_browers_errors_to_sentry,
+                    Manager::http_redirects,
+                    Manager::user_invitations,
                     Manager::majority_vote_question,
-                    'unstable__emailing',
+                    Manager::unstable__emailing,
                     Manager::unstable__debate,
                     Manager::proposal_revisions,
                 ],
@@ -96,8 +73,8 @@ class FeaturesCategoryResolver
         'settings.appearance' => ['conditions' => [], 'features' => []],
     ];
 
-    protected $manager;
-    protected $authorizationChecker;
+    protected Manager $manager;
+    protected AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         Manager $manager,

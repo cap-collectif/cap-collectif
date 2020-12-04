@@ -56,6 +56,8 @@ class Manager
     public const external_project = 'external_project';
     public const app_news = 'app_news';
     public const sentry_log = 'sentry_log';
+    public const login_openid = 'login_openid';
+    public const versions = 'versions';
     public const multilangue = 'multilangue';
     public const unstable__admin_editor = 'unstable__admin_editor';
     public const unstable__analysis = 'unstable__analysis';
@@ -70,6 +72,31 @@ class Manager
     public const unstable__debate = 'unstable__debate';
     public const proposal_revisions = 'proposal_revisions';
     public const unstable__tipsmeee = 'unstable__tipsmeee';
+
+    public const ADMIN_ALLOWED_FEATURES = [
+        self::blog,
+        self::calendar,
+        self::consultation_plan,
+        self::privacy_policy,
+        self::display_map,
+        self::versions,
+        self::themes,
+        self::districts,
+        self::members_list,
+        self::profiles,
+        self::reporting,
+        self::newsletter,
+        self::share_buttons,
+        self::search,
+        self::display_pictures_in_depository_proposals_list,
+        self::display_pictures_in_event_list,
+        self::external_project,
+        self::read_more,
+        self::secure_password,
+        self::restrict_connection,
+        self::public_api,
+        self::developer_documentation,
+    ];
 
     public static $toggles = [
         self::graphql_query_analytics,
