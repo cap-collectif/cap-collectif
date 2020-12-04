@@ -2,7 +2,7 @@
 import type { Exact, Action } from '~/types';
 
 export type State = {
-  +currentLanguage: ?string,
+  +currentLanguage: string,
 };
 
 const initialState: State = {
@@ -11,12 +11,12 @@ const initialState: State = {
 
 type ChangeLanguageSelectedAction = {
   type: 'language/CHANGE_LANGUAGE_SELECTED',
-  currentLanguage: ?string,
+  currentLanguage: string,
 };
 
 export type LanguageAction = ChangeLanguageSelectedAction;
 
-export const changeEventSelected = (currentLanguage: ?string): LanguageAction => ({
+export const changeEventSelected = (currentLanguage: string): LanguageAction => ({
   type: 'language/CHANGE_LANGUAGE_SELECTED',
   currentLanguage,
 });

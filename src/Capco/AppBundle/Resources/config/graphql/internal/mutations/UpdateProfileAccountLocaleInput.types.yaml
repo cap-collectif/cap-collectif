@@ -4,5 +4,5 @@ UpdateProfileAccountLocaleInput:
         description: 'Update your locale'
         fields:
             locale:
-                type: 'TranslationLocale'
+                type: 'TranslationLocale!'
                 description: 'The locale to change'

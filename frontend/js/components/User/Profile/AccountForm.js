@@ -78,7 +78,7 @@ export const validate = (values: { email: ?string }): { email: ?string } => {
 };
 
 export const onSubmit = (
-  values: { email: ?string, language: ?TranslationLocale, passwordConfirm: ?string },
+  values: { email: ?string, language: TranslationLocale, passwordConfirm: ?string },
   dispatch: Dispatch,
   props: Props,
 ) => {
@@ -298,6 +298,7 @@ export const AccountForm = ({
             <Field
               component={select}
               name="language"
+              clearable={false}
               id="display__language"
               divClassName="col-sm-6 mb-10"
               options={localeListOptions}
@@ -396,38 +397,38 @@ export const AccountForm = ({
                 show={showConfirmPasswordModal}
                 handleClose={() => setConfirmPasswordModal(false)}
               />
-            </AccountContainer>
-            {viewer.newEmailToConfirm && (
-              <div className="col-sm-6 col-sm-offset-3">
-                <p className="small excerpt">
-                  <FormattedHTMLMessage
-                    id="user.confirm.profile_help"
-                    values={{ email: viewer.newEmailToConfirm }}
-                  />
-                </p>
-                <p className="small excerpt col-sm-6 col-sm-offset-3">
-                  <a href="#resend" onClick={() => resendConfirmation()}>
-                    <FormattedMessage id="user.confirm.resend" />
-                  </a>
-                  {' · '}
-                  <a
-                    href="#cancel"
-                    onClick={() => cancelEmailChange(dispatch, initialValues.email)}>
-                    <FormattedMessage id="user.confirm.cancel" />
-                  </a>
-                </p>
+              {viewer.newEmailToConfirm && (
+                <div className="col-sm-6 col-sm-offset-3">
+                  <p className="small excerpt">
+                    <FormattedHTMLMessage
+                      id="user.confirm.profile_help"
+                      values={{ email: viewer.newEmailToConfirm }}
+                    />
+                  </p>
+                  <p className="small excerpt col-sm-6 col-sm-offset-3">
+                    <a href="#resend" onClick={() => resendConfirmation()}>
+                      <FormattedMessage id="user.confirm.resend" />
+                    </a>
+                    {' · '}
+                    <a
+                      href="#cancel"
+                      onClick={() => cancelEmailChange(dispatch, initialValues.email)}>
+                      <FormattedMessage id="user.confirm.cancel" />
+                    </a>
+                  </p>
+                </div>
+              )}
+              <div className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100" id="profile-alert-form">
+                <AlertForm
+                  valid={valid}
+                  invalid={invalid}
+                  errorMessage={error}
+                  submitSucceeded={submitSucceeded}
+                  submitFailed={submitFailed}
+                  submitting={submitting}
+                />
               </div>
-            )}
-            <div className="col-sm-6 col-sm-offset-3 mt-5 mb-15 w-100" id="profile-alert-form">
-              <AlertForm
-                valid={valid}
-                invalid={invalid}
-                errorMessage={error}
-                submitSucceeded={submitSucceeded}
-                submitFailed={submitFailed}
-                submitting={submitting}
-              />
-            </div>
+            </AccountContainer>
           </form>
           <SsoGroup>
             <span className="font-weight-bold">
@@ -569,7 +570,9 @@ const mapStateToProps = (state: State, props: Props) => {
     submitFailed: hasSubmitFailed(formName)(state),
     initialValues: {
       email: props.viewer.email ? props.viewer.email : null,
-      language: props.viewer.locale ? TranslationLocaleEnum[props.viewer.locale] : null,
+      language: props.viewer.locale
+        ? TranslationLocaleEnum[props.viewer.locale]
+        : TranslationLocaleEnum[state.language.currentLanguage],
       isFranceConnectAccount: props.viewer.isFranceConnectAccount || null,
     },
     currentValues: selector(state, 'email', 'language'),
