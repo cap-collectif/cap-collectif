@@ -7,12 +7,14 @@ type Props = {|
   ...AppBoxProps,
 |};
 
-export const Card = ({ children, ...props }: Props) => {
+export const Card = React.forwardRef<Props, HTMLElement>(({ children, ...props }: Props, ref) => {
   return (
-    <AppBox p={6} borderRadius="card" border="card" borderColor="gray.150" {...props}>
+    <AppBox p={6} borderRadius="card" border="card" borderColor="gray.150" ref={ref} {...props}>
       {children}
     </AppBox>
   );
-};
+});
+
+Card.displayName = 'Card';
 
 export default Card;

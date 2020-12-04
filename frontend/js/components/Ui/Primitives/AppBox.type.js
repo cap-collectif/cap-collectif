@@ -11,14 +11,14 @@ export type ResponsiveBoolean = boolean | Array<boolean>;
 type Width = {|
   /** width */
   width?: Responsive<NumberOrString>,
-  /** width */
+  minWidth?: Responsive<NumberOrString>,
   w?: Responsive<NumberOrString>,
 |};
 
 type Height = {|
   /** height */
   height?: Responsive<NumberOrString>,
-  /** height */
+  minHeight?: Responsive<NumberOrString>,
   h?: Responsive<NumberOrString>,
 |};
 
@@ -96,6 +96,7 @@ type Color = {|
 
 type TextAlign = {|
   align?: Responsive<string>,
+  textAlign?: Responsive<string>,
 |};
 
 type LineHeight = {|
@@ -255,7 +256,7 @@ type onClick = {|
 |};
 
 type As = {|
-  as?: string,
+  as?: any,
 |};
 
 export type AppBoxProps = {|

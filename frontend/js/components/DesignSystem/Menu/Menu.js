@@ -7,24 +7,10 @@ import AppBox from '~ui/Primitives/AppBox';
 import { MenuContext } from '~ds/Menu/Menu.context';
 import { MENU_BUTTON_TYPE } from '~ds/Menu/MenuButton';
 import { MENU_LIST_TYPE } from '~ds/Menu/MenuList';
+import type { TippyPlacementProps } from '~ds/common.type';
 
 type Props = {|
-  +placement?:
-    | 'auto-start'
-    | 'auto'
-    | 'auto-end'
-    | 'top-start'
-    | 'top'
-    | 'top-end'
-    | 'right-start'
-    | 'right'
-    | 'right-end'
-    | 'bottom-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'left-end'
-    | 'left'
-    | 'left-start',
+  ...TippyPlacementProps,
   +children: React.Node,
 |};
 
