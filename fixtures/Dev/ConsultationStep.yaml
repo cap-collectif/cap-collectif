@@ -100,5 +100,5 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
         label: Multi consultation
         isEnabled: true
         body: Je suis une belle étape de multi consultation, regardez comme je suis belle.
-        startAt: <identity((new \DateTime('2019-11-03')))>
-        endAt: <identity((new \DateTime('2032-11-03')))>
+        startAt: <identity((new \DateTime('2019-11-03 20:30:55')))>
+        endAt: <identity((new \DateTime('2032-11-03 06:45:12')))>

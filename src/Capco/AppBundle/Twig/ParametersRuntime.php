@@ -15,14 +15,14 @@ use Twig\Extension\RuntimeExtensionInterface;
 class ParametersRuntime implements RuntimeExtensionInterface
 {
     public const CACHE_KEY = 'site-parameters';
-    protected $cache;
-    protected $router;
-    protected $manager;
-    protected $translator;
-    protected $siteColorResolver;
-    protected $siteParameterResolver;
-    protected $requestStack;
-    protected $localeRepository;
+    protected RedisCache $cache;
+    protected RouterInterface $router;
+    protected Manager $manager;
+    protected TranslatorInterface $translator;
+    protected SiteColorResolver $siteColorResolver;
+    protected SiteParameterResolver $siteParameterResolver;
+    protected RequestStack $requestStack;
+    protected LocaleRepository $localeRepository;
 
     public function __construct(
         Manager $manager,
