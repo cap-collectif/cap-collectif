@@ -1,55 +1,55 @@
 PreviewPost:
-  type: object
-  inherits: [Node, UniformResourceLocatable, UniformResourceAdminLocatable, Timestampable]
-  config:
-    name: Post
-    description: 'A post'
-    interfaces: [Node, UniformResourceLocatable, UniformResourceAdminLocatable]
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Post
-      title:
-        type: 'String'
-        description: "The post's title."
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getTitle(args["locale"], true)'
-      publishedAt:
-        description: 'Identifies the date and time when the object was published.'
-        type: 'DateTime'
-      authors:
-        description: "The post's authors."
-        type: '[PreviewUser!]!'
-      publicationStatus:
-        type: 'PostPublicationStatus!'
-        description: 'The publication status for this post.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
-      commentable:
-        type: 'Boolean!'
-        description: "Wether or not the post is commentable."
-        resolve: '@=value.isCommentable()'
-      abstract:
-        type: 'String!'
-        description: 'Abstract of the post.'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getAbstractOrBeginningOfTheText(args["locale"], true)'
-      adminUrl:
-        type: 'URI!'
-        description: 'The admin url for this post.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver", [value])'
-        access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
-      media:
-        description: "The post's related media."
-        type: 'PreviewMedia'
-      themes:
-        description: "The post's related themes."
-        type: '[Theme!]!'
-      body:
-        type: 'HTML'
-        argsBuilder: 'Translatable::Field'
-        resolve: '@=value.getBody(args["locale"], true)'
-      translations:
-        type: '[PreviewPostTranslation!]!'
+    type: object
+    inherits: [Node, UniformResourceLocatable, UniformResourceAdminLocatable, Timestampable]
+    config:
+        name: Post
+        description: 'A post'
+        interfaces: [Node, UniformResourceLocatable, UniformResourceAdminLocatable]
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Post
+            title:
+                type: 'String'
+                description: "The post's title."
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getTitle(args["locale"], true)'
+            publishedAt:
+                description: 'Identifies the date and time when the object was published.'
+                type: 'DateTime'
+            authors:
+                description: "The post's authors."
+                type: '[PreviewUser!]!'
+            publicationStatus:
+                type: 'PostPublicationStatus!'
+                description: 'The publication status for this post.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
+            commentable:
+                type: 'Boolean!'
+                description: 'Wether or not the post is commentable.'
+                resolve: '@=value.isCommentable()'
+            abstract:
+                type: 'String!'
+                description: 'Abstract of the post.'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getAbstractOrBeginningOfTheText(args["locale"], true)'
+            adminUrl:
+                type: 'URI!'
+                description: 'The admin url for this post.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver", [value])'
+                access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
+            media:
+                description: "The post's related media."
+                type: 'PreviewMedia'
+            themes:
+                description: "The post's related themes."
+                type: '[PreviewTheme!]!'
+            body:
+                type: 'HTML'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getBody(args["locale"], true)'
+            translations:
+                type: '[PreviewPostTranslation!]!'

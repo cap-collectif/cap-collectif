@@ -1,0 +1,9 @@
+PreviewProposalCategory:
+    type: object
+    config:
+        name: ProposalCategory
+        description: 'A proposal category'
+        fields:
+            name:
+                type: 'String!'
+                description: 'Identifies the name of the category.'

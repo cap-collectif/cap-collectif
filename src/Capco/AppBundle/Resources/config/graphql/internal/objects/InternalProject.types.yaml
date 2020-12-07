@@ -80,7 +80,7 @@ InternalProject:
                         description: 'If specified, get if the project is participative while excluding the specified step. It allows to know if a particular step is the only participative step in project.'
                         defaultValue: null
             themes:
-                type: '[Theme!]'
+                type: '[InternalTheme!]'
             votableSteps:
                 type: '[ProposalStep!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
@@ -200,7 +200,7 @@ InternalProject:
                 description: 'list of decision makers assigned on the project'
                 resolve: '@=value.getDecisionMakers()'
             categories:
-                type: '[ProposalCategory!]!'
+                type: '[InternalProposalCategory!]!'
                 description: 'list of proposal categories on the project'
                 resolve: '@=value.getCategories()'
             exportableSteps:

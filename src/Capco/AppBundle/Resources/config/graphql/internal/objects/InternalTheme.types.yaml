@@ -1,0 +1,21 @@
+InternalTheme:
+    type: object
+    inherits:
+        - PreviewTheme
+        - UniformResourceLocatable
+    config:
+        name: Theme
+        interfaces:
+            - UniformResourceLocatable
+        description: 'A theme'
+        fields:
+            id:
+                type: 'ID!'
+            title:
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getTitle(args["locale"], true)'
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeUrlResolver", [value])'
+            translations:
+                type: '[InternalThemeTranslation!]!'

@@ -55,6 +55,7 @@ PreviewProposal:
                 type: 'PreviewProposalAssessment'
                 description: "The supervisor's assessment on the analysis of the proposal."
             votes:
+                description: 'List of votes of the proposal.'
                 type: 'PreviewProposalVoteConnection!'
                 argsBuilder: 'Relay::Connection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context, getUser()])'
@@ -66,3 +67,20 @@ PreviewProposal:
             selections:
                 type: '[PreviewProposalSelection!]!'
                 description: 'List of selections (step an status) of the proposal.'
+            address:
+                description: 'The address of the proposal.'
+                type: 'PreviewGoogleMapsAddress'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAddressResolver", [value])'
+            theme:
+                description: 'The theme of the proposal.'
+                type: 'PreviewTheme'
+                resolve: '@=value.getTheme()'
+            category:
+                description: 'The category of the proposal, related to the ProposalForm.'
+                type: 'PreviewProposalCategory'
+            summary:
+                type: 'String'
+                description: 'Identifies the summary of the contribution.'
+            bodyText:
+                type: 'String'
+                description: 'Identifies the body of the contribution rendered to text.'

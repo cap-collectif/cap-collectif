@@ -990,6 +990,8 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The supervisor's assessment on the analysis of the proposal."""
   assessment: ProposalAssessment
+
+  """List of votes of the proposal."""
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -1013,6 +1015,21 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """List of selections (step an status) of the proposal."""
   selections: [ProposalSelection!]!
+
+  """The address of the proposal."""
+  address: GoogleMapsAddress
+
+  """The theme of the proposal."""
+  theme: Theme
+
+  """The category of the proposal, related to the ProposalForm."""
+  category: ProposalCategory
+
+  """Identifies the summary of the contribution."""
+  summary: String
+
+  """Identifies the body of the contribution rendered to text."""
+  bodyText: String
 }
 
 """A proposal analysis."""
@@ -1106,6 +1123,12 @@ enum ProposalAssessmentState {
 
   """The evaluation of the proposal was not issued in time."""
   TOO_LATE
+}
+
+"""A proposal category"""
+type ProposalCategory {
+  """Identifies the name of the category."""
+  name: String!
 }
 
 """A connection to a list of items."""
@@ -1906,6 +1929,15 @@ type SynthesisStep implements Step & Node {
 
   """Identifies the current state of the step."""
   state: StepState!
+}
+
+"""A theme."""
+type Theme {
+  """Identifies the title of the theme."""
+  title(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
 }
 
 """A time range that contains start date and end date."""

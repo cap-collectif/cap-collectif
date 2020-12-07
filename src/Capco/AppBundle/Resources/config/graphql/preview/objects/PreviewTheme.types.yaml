@@ -1,0 +1,11 @@
+PreviewTheme:
+    type: object
+    config:
+        name: Theme
+        description: 'A theme.'
+        fields:
+            title:
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getTitle(args["locale"], true)'
+                description: 'Identifies the title of the theme.'

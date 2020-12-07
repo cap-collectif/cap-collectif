@@ -78,15 +78,12 @@ InternalProposal:
             media:
                 type: 'InternalMedia'
             theme:
-                type: 'Theme'
+                type: 'InternalTheme'
                 resolve: '@=value.getTheme()'
             category:
-                type: 'ProposalCategory'
+                type: 'InternalProposalCategory'
             district:
                 type: 'ProposalDistrict'
-            address:
-                type: 'PreviewGoogleMapsAddress'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAddressResolver", [value])'
             author:
                 type: 'InternalUser!'
             deletedAt:
@@ -100,12 +97,6 @@ InternalProposal:
                 type: 'ProposalPublicationStatus!'
                 description: 'The publication status for this proposal.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPublicationStatusResolver", [value])'
-            bodyText:
-                type: 'String'
-                description: 'Identifies the body of the contribution rendered to text.'
-            summary:
-                type: 'String'
-                description: 'Identifies the summary of the contribution.'
             summaryOrBodyExcerpt:
                 type: 'String'
                 description: 'Identifies the preview text of the contribution.'

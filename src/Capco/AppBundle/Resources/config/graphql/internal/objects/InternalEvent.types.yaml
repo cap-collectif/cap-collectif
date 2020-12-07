@@ -21,7 +21,7 @@ InternalEvent:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
                 argsBuilder: 'Relay::Connection'
             themes:
-                type: '[Theme!]!'
+                type: '[InternalTheme!]!'
             projects:
                 type: '[InternalProject!]!'
             author:

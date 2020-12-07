@@ -18,7 +18,7 @@ InternalQuery:
                 type: 'InternalUser!'
             themes:
                 description: 'Lookup themes.'
-                type: '[Theme!]!'
+                type: '[InternalTheme!]!'
                 args:
                     title:
                         type: 'String'

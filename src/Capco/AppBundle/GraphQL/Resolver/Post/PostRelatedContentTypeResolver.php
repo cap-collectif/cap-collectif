@@ -20,13 +20,27 @@ class PostRelatedContentTypeResolver implements ResolverInterface
 
     public function __invoke($node)
     {
+        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
+
         if ($node instanceof Theme) {
-            return $this->typeResolver->resolve('Theme');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewTheme');
+            }
+
+            return $this->typeResolver->resolve('InternalTheme');
         }
         if ($node instanceof Proposal) {
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProposal');
+            }
+
             return $this->typeResolver->resolve('InternalProposal');
         }
         if ($node instanceof Project) {
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProject');
+            }
+
             return $this->typeResolver->resolve('InternalProject');
         }
 

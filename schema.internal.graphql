@@ -7401,6 +7401,8 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The supervisor's assessment on the analysis of the proposal."""
   assessment: ProposalAssessment
+
+  """List of votes of the proposal."""
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -7433,6 +7435,21 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """List of selections (step an status) of the proposal."""
   selections: [ProposalSelection!]!
+
+  """The address of the proposal."""
+  address: GoogleMapsAddress
+
+  """The theme of the proposal."""
+  theme: Theme
+
+  """The category of the proposal, related to the ProposalForm."""
+  category: ProposalCategory
+
+  """Identifies the summary of the contribution."""
+  summary: String
+
+  """Identifies the body of the contribution rendered to text."""
+  bodyText: String
 
   """
   Return the related contribution if the contribution is related to another.
@@ -7545,10 +7562,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   likers: [User!]!
   estimation: Int
   media: Media
-  theme: Theme
-  category: ProposalCategory
   district: ProposalDistrict
-  address: GoogleMapsAddress
 
   """The delete date."""
   deletedAt: DateTime
@@ -7558,12 +7572,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The publication status for this proposal."""
   publicationStatus: ProposalPublicationStatus!
-
-  """Identifies the body of the contribution rendered to text."""
-  bodyText: String
-
-  """Identifies the summary of the contribution."""
-  summary: String
 
   """Identifies the preview text of the contribution."""
   summaryOrBodyExcerpt: String
@@ -7801,8 +7809,9 @@ enum ProposalAssignmentErrorCode {
 
 """A proposal category"""
 type ProposalCategory {
-  id: ID!
+  """Identifies the name of the category."""
   name: String!
+  id: ID!
   color: String!
   icon: String
 
@@ -11667,13 +11676,15 @@ type TestEmailingCampaignPayload {
 
 """A theme"""
 type Theme implements UniformResourceLocatable {
-  """The URL to this resource."""
-  url: URI!
-  id: ID!
+  """Identifies the title of the theme."""
   title(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
+
+  """The URL to this resource."""
+  url: URI!
+  id: ID!
   translations: [ThemeTranslation!]!
 }
 

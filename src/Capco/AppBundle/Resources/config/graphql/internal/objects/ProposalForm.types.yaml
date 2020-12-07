@@ -26,7 +26,7 @@ ProposalForm:
             viewerProposalsUnpublished:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", [value, args, getUser()])'
             categories:
-                type: '[ProposalCategory!]!'
+                type: '[InternalProposalCategory!]!'
                 args:
                     order:
                         type: 'CategoryOrderField'
