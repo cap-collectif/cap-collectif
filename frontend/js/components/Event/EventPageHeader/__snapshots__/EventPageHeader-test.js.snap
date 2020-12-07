@@ -39,11 +39,16 @@ exports[`<EventPageHeader /> should render correctly 1`] = `
         <EventPageHeaderstyle__TagsList>
           <Tag
             CustomImage={
-              <Icon
+              <IconRounded
                 color="#707070"
-                name="clock"
-                size={22}
-              />
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="calendar"
+                  size={10}
+                />
+              </IconRounded>
             }
             size="16px"
           >
@@ -51,8 +56,10 @@ exports[`<EventPageHeader /> should render correctly 1`] = `
               id="date.start.to.date.end"
               values={
                 Object {
-                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
-                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                  "dateEnd": "1er juillet 2020",
+                  "dateStart": "1er juillet 2020",
+                  "hourEnd": "15:55",
+                  "hourStart": "15:48",
                 }
               }
             />
@@ -189,11 +196,16 @@ exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] =
         <EventPageHeaderstyle__TagsList>
           <Tag
             CustomImage={
-              <Icon
+              <IconRounded
                 color="#707070"
-                name="clock"
-                size={22}
-              />
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="calendar"
+                  size={10}
+                />
+              </IconRounded>
             }
             size="16px"
           >
@@ -201,8 +213,10 @@ exports[`<EventPageHeader /> should render correctly when no googleAddress 1`] =
               id="date.start.to.date.end"
               values={
                 Object {
-                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
-                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                  "dateEnd": "1er juillet 2020",
+                  "dateStart": "1er juillet 2020",
+                  "hourEnd": "15:55",
+                  "hourStart": "15:48",
                 }
               }
             />
@@ -322,11 +336,16 @@ exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
         <EventPageHeaderstyle__TagsList>
           <Tag
             CustomImage={
-              <Icon
+              <IconRounded
                 color="#707070"
-                name="clock"
-                size={22}
-              />
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="calendar"
+                  size={10}
+                />
+              </IconRounded>
             }
             size="16px"
           >
@@ -334,8 +353,10 @@ exports[`<EventPageHeader /> should render correctly when no theme 1`] = `
               id="date.start.to.date.end"
               values={
                 Object {
-                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
-                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                  "dateEnd": "1er juillet 2020",
+                  "dateStart": "1er juillet 2020",
+                  "hourEnd": "15:55",
+                  "hourStart": "15:48",
                 }
               }
             />
@@ -457,26 +478,6 @@ exports[`<EventPageHeader /> should render correctly when type online 1`] = `
         <EventPageHeaderstyle__TagsList>
           <Tag
             CustomImage={
-              <Icon
-                color="#707070"
-                name="clock"
-                size={22}
-              />
-            }
-            size="16px"
-          >
-            <FormattedMessage
-              id="date.start.to.date.end"
-              values={
-                Object {
-                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
-                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
-                }
-              }
-            />
-          </Tag>
-          <Tag
-            CustomImage={
               <IconRounded
                 color="#707070"
                 size={18}
@@ -490,7 +491,34 @@ exports[`<EventPageHeader /> should render correctly when type online 1`] = `
             }
             size="16px"
           >
-            23:53:00
+            <FormattedMessage
+              id="date.start.to.date.end"
+              values={
+                Object {
+                  "dateEnd": "1er juillet 2020",
+                  "dateStart": "1er juillet 2020",
+                  "hourEnd": "15:55",
+                  "hourStart": "15:48",
+                }
+              }
+            />
+          </Tag>
+          <Tag
+            CustomImage={
+              <IconRounded
+                color="#707070"
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="clock"
+                  size={10}
+                />
+              </IconRounded>
+            }
+            size="16px"
+          >
+            23:53
           </Tag>
           <Relay(TagThemes)
             size="16px"
@@ -675,11 +703,16 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
         <EventPageHeaderstyle__TagsList>
           <Tag
             CustomImage={
-              <Icon
+              <IconRounded
                 color="#707070"
-                name="clock"
-                size={22}
-              />
+                size={18}
+              >
+                <Icon
+                  color="#fff"
+                  name="calendar"
+                  size={10}
+                />
+              </IconRounded>
             }
             size="16px"
           >
@@ -687,8 +720,10 @@ exports[`<EventPageHeader /> should render correctly when viewer is author 1`] =
               id="date.start.to.date.end"
               values={
                 Object {
-                  "dateEnd": "juillet 1er 2020, 3:55:28 pm",
-                  "dateStart": "juillet 1er 2020, 3:48:28 pm",
+                  "dateEnd": "1er juillet 2020",
+                  "dateStart": "1er juillet 2020",
+                  "hourEnd": "15:55",
+                  "hourStart": "15:48",
                 }
               }
             />

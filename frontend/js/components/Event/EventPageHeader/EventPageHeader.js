@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
 import {
@@ -13,7 +13,6 @@ import {
   ActionContainer,
   UsernameContainer,
 } from './EventPageHeader.style';
-import TagDate from '~/components/Tag/TagDate/TagDate';
 import UserAvatar from '~/components/User/UserAvatar';
 import type { State } from '~/types';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
@@ -91,28 +90,41 @@ export const EventPageHeader = ({
             </UsernameContainer>
 
             <TagsList>
-              {timeRange?.startAt && !timeRange?.endAt ? (
-                <TagDate date={timeRange.startAt} size="16px" />
-              ) : (
-                <Tag
-                  size="16px"
-                  CustomImage={<Icon name={ICON_NAME.clock} color={colors.darkGray} size={22} />}>
+              <Tag
+                size="16px"
+                CustomImage={
+                  <IconRounded size={18} color={colors.darkGray}>
+                    <Icon name={ICON_NAME.calendar} color="#fff" size={10} />
+                  </IconRounded>
+                }>
+                {timeRange?.startAt && !timeRange?.endAt ? (
+                  <FormattedDate
+                    value={moment(timeRange.startAt)}
+                    day="numeric"
+                    month="long"
+                    year="numeric"
+                    hour="numeric"
+                    minute="numeric"
+                  />
+                ) : (
                   <FormattedMessage
                     id="date.start.to.date.end"
                     values={{
-                      dateStart: moment(timeRange.startAt).format('MMMM Do YYYY, h:mm:ss a'),
-                      dateEnd: moment(timeRange.endAt).format('MMMM Do YYYY, h:mm:ss a'),
+                      dateStart: moment(timeRange.startAt).format('Do MMMM YYYY'),
+                      hourStart: moment(timeRange.startAt).format('HH:mm'),
+                      dateEnd: moment(timeRange.endAt).format('Do MMMM YYYY'),
+                      hourEnd: moment(timeRange.endAt).format('HH:mm'),
                     }}
                   />
-                </Tag>
-              )}
+                )}
+              </Tag>
 
               {timeRange?.startAt && timeRange?.endAt && !isPresential && (
                 <Tag
                   size="16px"
                   CustomImage={
                     <IconRounded size={18} color={colors.darkGray}>
-                      <Icon name={ICON_NAME.calendar} color="#fff" size={10} />
+                      <Icon name={ICON_NAME.clock} color="#fff" size={10} />
                     </IconRounded>
                   }>
                   {moment
@@ -121,7 +133,7 @@ export const EventPageHeader = ({
                         .duration(moment(timeRange.startAt).diff(timeRange.endAt))
                         .as('milliseconds'),
                     )
-                    .format('HH:mm:ss')}
+                    .format('HH:mm')}
                 </Tag>
               )}
 
