@@ -34,14 +34,21 @@ exports[`<QuestionnaireReplyPage /> renders correctly 1`] = `
         "step": Object {
           "$fragmentRefs": null,
         },
-        "viewerReplies": Array [
-          Object {
-            "id": "1",
-          },
-          Object {
-            "id": "2",
-          },
-        ],
+        "viewerReplies": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "1",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "2",
+              },
+            },
+          ],
+          "totalCount": 2,
+        },
       }
     }
     resetReplyForm={[MockFunction]}
@@ -78,14 +85,21 @@ exports[`<QuestionnaireReplyPage /> renders correctly when data not preloaded 1`
         "step": Object {
           "$fragmentRefs": null,
         },
-        "viewerReplies": Array [
-          Object {
-            "id": "1",
-          },
-          Object {
-            "id": "2",
-          },
-        ],
+        "viewerReplies": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "1",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "2",
+              },
+            },
+          ],
+          "totalCount": 2,
+        },
       }
     }
     resetReplyForm={[MockFunction]}
@@ -128,14 +142,21 @@ exports[`<QuestionnaireReplyPage /> renders correctly when not authenticated 1`]
         "step": Object {
           "$fragmentRefs": null,
         },
-        "viewerReplies": Array [
-          Object {
-            "id": "1",
-          },
-          Object {
-            "id": "2",
-          },
-        ],
+        "viewerReplies": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "1",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "2",
+              },
+            },
+          ],
+          "totalCount": 2,
+        },
       }
     }
     resetReplyForm={[MockFunction]}

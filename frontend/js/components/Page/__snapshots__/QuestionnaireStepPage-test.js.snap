@@ -937,98 +937,127 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Reply",
+                        "concreteType": "ReplyConnection",
                         "kind": "LinkedField",
                         "name": "viewerReplies",
-                        "plural": true,
+                        "plural": false,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "id",
+                            "name": "totalCount",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "createdAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "publishedAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "private",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "draft",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "viewerCanDelete",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Questionnaire",
+                            "concreteType": "ReplyEdge",
                             "kind": "LinkedField",
-                            "name": "questionnaire",
-                            "plural": false,
+                            "name": "edges",
+                            "plural": true,
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
+                                "concreteType": "Reply",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "createdAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "publishedAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "private",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "draft",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerCanDelete",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Questionnaire",
+                                    "kind": "LinkedField",
+                                    "name": "questionnaire",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isPublishable",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "published",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "notPublishedReason",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "publishableUntil",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Publishable",
+                                  },
+                                ],
                                 "storageKey": null,
                               },
                             ],
                             "storageKey": null,
-                          },
-                          Object {
-                            "abstractKey": "__isPublishable",
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "published",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "notPublishedReason",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "publishableUntil",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "Publishable",
                           },
                         ],
                         "storageKey": null,
@@ -1320,7 +1349,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "ade1171057a1d6311a582ac0a8afae53",
+        "cacheID": "25b7fe1062c041906280089732c9b341",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1359,7 +1388,7 @@ fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
   }
   ...ReplyCreateFormWrapper_questionnaire_39ngnn
   ...UserReplies_questionnaire_39ngnn
@@ -1372,7 +1401,12 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
+    edges {
+      node {
+        id
+      }
+    }
   }
 }
 
@@ -1452,7 +1486,7 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   phoneConfirmationRequired
   contribuable
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
   }
   ...ReplyForm_questionnaire_39ngnn
 }
@@ -1466,7 +1500,12 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   contribuable
   type
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
+    edges {
+      node {
+        id
+      }
+    }
   }
   questions {
     __typename
@@ -1609,8 +1648,13 @@ fragment UnpublishedLabel_publishable on Publishable {
 
 fragment UserReplies_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
-    ...ReplyLink_reply
-    id
+    totalCount
+    edges {
+      node {
+        ...ReplyLink_reply
+        id
+      }
+    }
   }
 }
 ",
@@ -2565,98 +2609,127 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Reply",
+                        "concreteType": "ReplyConnection",
                         "kind": "LinkedField",
                         "name": "viewerReplies",
-                        "plural": true,
+                        "plural": false,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "id",
+                            "name": "totalCount",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "createdAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "publishedAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "private",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "draft",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "viewerCanDelete",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Questionnaire",
+                            "concreteType": "ReplyEdge",
                             "kind": "LinkedField",
-                            "name": "questionnaire",
-                            "plural": false,
+                            "name": "edges",
+                            "plural": true,
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
+                                "concreteType": "Reply",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "createdAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "publishedAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "private",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "draft",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerCanDelete",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Questionnaire",
+                                    "kind": "LinkedField",
+                                    "name": "questionnaire",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isPublishable",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "published",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "notPublishedReason",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "publishableUntil",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Publishable",
+                                  },
+                                ],
                                 "storageKey": null,
                               },
                             ],
                             "storageKey": null,
-                          },
-                          Object {
-                            "abstractKey": "__isPublishable",
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "published",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "notPublishedReason",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "publishableUntil",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "Publishable",
                           },
                         ],
                         "storageKey": null,
@@ -2948,7 +3021,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is false
         ],
       },
       "params": Object {
-        "cacheID": "ade1171057a1d6311a582ac0a8afae53",
+        "cacheID": "25b7fe1062c041906280089732c9b341",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -2987,7 +3060,7 @@ fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
   }
   ...ReplyCreateFormWrapper_questionnaire_39ngnn
   ...UserReplies_questionnaire_39ngnn
@@ -3000,7 +3073,12 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
+    edges {
+      node {
+        id
+      }
+    }
   }
 }
 
@@ -3080,7 +3158,7 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   phoneConfirmationRequired
   contribuable
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
   }
   ...ReplyForm_questionnaire_39ngnn
 }
@@ -3094,7 +3172,12 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   contribuable
   type
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
+    edges {
+      node {
+        id
+      }
+    }
   }
   questions {
     __typename
@@ -3237,8 +3320,13 @@ fragment UnpublishedLabel_publishable on Publishable {
 
 fragment UserReplies_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
-    ...ReplyLink_reply
-    id
+    totalCount
+    edges {
+      node {
+        ...ReplyLink_reply
+        id
+      }
+    }
   }
 }
 ",
@@ -4193,98 +4281,127 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Reply",
+                        "concreteType": "ReplyConnection",
                         "kind": "LinkedField",
                         "name": "viewerReplies",
-                        "plural": true,
+                        "plural": false,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "id",
+                            "name": "totalCount",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "createdAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "publishedAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "private",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "draft",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "viewerCanDelete",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Questionnaire",
+                            "concreteType": "ReplyEdge",
                             "kind": "LinkedField",
-                            "name": "questionnaire",
-                            "plural": false,
+                            "name": "edges",
+                            "plural": true,
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
+                                "concreteType": "Reply",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "createdAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "publishedAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "private",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "draft",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerCanDelete",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Questionnaire",
+                                    "kind": "LinkedField",
+                                    "name": "questionnaire",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isPublishable",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "published",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "notPublishedReason",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "publishableUntil",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Publishable",
+                                  },
+                                ],
                                 "storageKey": null,
                               },
                             ],
                             "storageKey": null,
-                          },
-                          Object {
-                            "abstractKey": "__isPublishable",
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "published",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "notPublishedReason",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "publishableUntil",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "Publishable",
                           },
                         ],
                         "storageKey": null,
@@ -4576,7 +4693,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when enableResults is null 
         ],
       },
       "params": Object {
-        "cacheID": "ade1171057a1d6311a582ac0a8afae53",
+        "cacheID": "25b7fe1062c041906280089732c9b341",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4615,7 +4732,7 @@ fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
   }
   ...ReplyCreateFormWrapper_questionnaire_39ngnn
   ...UserReplies_questionnaire_39ngnn
@@ -4628,7 +4745,12 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
+    edges {
+      node {
+        id
+      }
+    }
   }
 }
 
@@ -4708,7 +4830,7 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   phoneConfirmationRequired
   contribuable
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
   }
   ...ReplyForm_questionnaire_39ngnn
 }
@@ -4722,7 +4844,12 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   contribuable
   type
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
+    edges {
+      node {
+        id
+      }
+    }
   }
   questions {
     __typename
@@ -4865,8 +4992,13 @@ fragment UnpublishedLabel_publishable on Publishable {
 
 fragment UserReplies_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
-    ...ReplyLink_reply
-    id
+    totalCount
+    edges {
+      node {
+        ...ReplyLink_reply
+        id
+      }
+    }
   }
 }
 ",
@@ -5821,98 +5953,127 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Reply",
+                        "concreteType": "ReplyConnection",
                         "kind": "LinkedField",
                         "name": "viewerReplies",
-                        "plural": true,
+                        "plural": false,
                         "selections": Array [
                           Object {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "id",
+                            "name": "totalCount",
                             "storageKey": null,
                           },
                           Object {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "createdAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "publishedAt",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "private",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "draft",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "viewerCanDelete",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Questionnaire",
+                            "concreteType": "ReplyEdge",
                             "kind": "LinkedField",
-                            "name": "questionnaire",
-                            "plural": false,
+                            "name": "edges",
+                            "plural": true,
                             "selections": Array [
                               Object {
                                 "alias": null,
                                 "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
+                                "concreteType": "Reply",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "createdAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "publishedAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "private",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "draft",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerCanDelete",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Questionnaire",
+                                    "kind": "LinkedField",
+                                    "name": "questionnaire",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isPublishable",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "published",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "notPublishedReason",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "publishableUntil",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Publishable",
+                                  },
+                                ],
                                 "storageKey": null,
                               },
                             ],
                             "storageKey": null,
-                          },
-                          Object {
-                            "abstractKey": "__isPublishable",
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "published",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "notPublishedReason",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "publishableUntil",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "Publishable",
                           },
                         ],
                         "storageKey": null,
@@ -6204,7 +6365,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "ade1171057a1d6311a582ac0a8afae53",
+        "cacheID": "25b7fe1062c041906280089732c9b341",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -6243,7 +6404,7 @@ fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
   }
   ...ReplyCreateFormWrapper_questionnaire_39ngnn
   ...UserReplies_questionnaire_39ngnn
@@ -6256,7 +6417,12 @@ fragment QuestionnaireReplyPage_questionnaire_39ngnn on Questionnaire {
     id
   }
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
+    edges {
+      node {
+        id
+      }
+    }
   }
 }
 
@@ -6336,7 +6502,7 @@ fragment ReplyCreateFormWrapper_questionnaire_39ngnn on Questionnaire {
   phoneConfirmationRequired
   contribuable
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
   }
   ...ReplyForm_questionnaire_39ngnn
 }
@@ -6350,7 +6516,12 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
   contribuable
   type
   viewerReplies @include(if: $isAuthenticated) {
-    id
+    totalCount
+    edges {
+      node {
+        id
+      }
+    }
   }
   questions {
     __typename
@@ -6493,8 +6664,13 @@ fragment UnpublishedLabel_publishable on Publishable {
 
 fragment UserReplies_questionnaire_39ngnn on Questionnaire {
   viewerReplies @include(if: $isAuthenticated) {
-    ...ReplyLink_reply
-    id
+    totalCount
+    edges {
+      node {
+        ...ReplyLink_reply
+        id
+      }
+    }
   }
 }
 ",

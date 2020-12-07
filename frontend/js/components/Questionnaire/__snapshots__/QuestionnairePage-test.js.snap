@@ -18,14 +18,9 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
         "step": Object {
           "$fragmentRefs": null,
         },
-        "viewerReplies": Array [
-          Object {
-            "id": "1",
-          },
-          Object {
-            "id": "2",
-          },
-        ],
+        "viewerReplies": Object {
+          "totalCount": 2,
+        },
       }
     }
   />
@@ -70,14 +65,9 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
         "step": Object {
           "$fragmentRefs": null,
         },
-        "viewerReplies": Array [
-          Object {
-            "id": "1",
-          },
-          Object {
-            "id": "2",
-          },
-        ],
+        "viewerReplies": Object {
+          "totalCount": 2,
+        },
       }
     }
   />
@@ -119,7 +109,9 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
         "step": Object {
           "$fragmentRefs": null,
         },
-        "viewerReplies": Array [],
+        "viewerReplies": Object {
+          "totalCount": 0,
+        },
       }
     }
   />
@@ -132,7 +124,9 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
         "step": Object {
           "$fragmentRefs": null,
         },
-        "viewerReplies": Array [],
+        "viewerReplies": Object {
+          "totalCount": 0,
+        },
       }
     }
     setIsShow={[Function]}

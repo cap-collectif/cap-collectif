@@ -24,9 +24,10 @@ InternalQuestionnaire:
             questions:
                 type: '[InternalQuestion!]!'
             viewerReplies:
-                type: '[InternalReply!]!'
+                type: 'InternalReplyConnection'
+                argsBuilder: 'Relay::Connection'
                 access: "@=hasRole('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser(), args])'
             acknowledgeReplies:
                 type: 'Boolean!'
             type:

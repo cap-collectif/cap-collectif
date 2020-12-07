@@ -11,14 +11,9 @@ const props = {
     step: {
       $fragmentRefs,
     },
-    viewerReplies: [
-      {
-        id: '1',
-      },
-      {
-        id: '2',
-      },
-    ],
+    viewerReplies: {
+      totalCount: 2,
+    },
     $refType,
     $fragmentRefs,
   },
@@ -36,7 +31,9 @@ const propsWithoutViewerReplies = {
   ...props,
   questionnaire: {
     ...props.questionnaire,
-    viewerReplies: [],
+    viewerReplies: {
+      totalCount: 0,
+    },
   },
 };
 

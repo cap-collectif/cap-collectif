@@ -31,7 +31,9 @@ const baseProps = {
     id: '123',
     contribuable: true,
     multipleRepliesAllowed: true,
-    viewerReplies: [{ id: '289' }],
+    viewerReplies: {
+      totalCount: 1,
+    },
     phoneConfirmationRequired: false,
   },
   setIsShow: jest.fn(),
@@ -44,7 +46,9 @@ const props = {
     questionnaire: {
       ...baseProps.questionnaire,
       multipleRepliesAllowed: false,
-      viewerReplies: [{ id: '326' }, { id: '289' }],
+      viewerReplies: {
+        totalCount: 2,
+      },
     },
   },
   notContribuable: {

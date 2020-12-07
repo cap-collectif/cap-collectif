@@ -29,14 +29,21 @@ const baseProps = {
     step: {
       $fragmentRefs,
     },
-    viewerReplies: [
-      {
-        id: '1',
-      },
-      {
-        id: '2',
-      },
-    ],
+    viewerReplies: {
+      totalCount: 2,
+      edges: [
+        {
+          node: {
+            id: '1',
+          },
+        },
+        {
+          node: {
+            id: '2',
+          },
+        },
+      ],
+    },
     $refType,
   },
 };

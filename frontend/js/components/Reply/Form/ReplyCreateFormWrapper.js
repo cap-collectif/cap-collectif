@@ -30,7 +30,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props> {
       !user ||
       (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
       (questionnaire.viewerReplies &&
-        questionnaire.viewerReplies.length > 0 &&
+        questionnaire.viewerReplies.totalCount > 0 &&
         !questionnaire.multipleRepliesAllowed)
     );
   }
@@ -51,7 +51,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props> {
         ) : (
           questionnaire.contribuable &&
           questionnaire.viewerReplies &&
-          questionnaire.viewerReplies.length > 0 &&
+          questionnaire.viewerReplies.totalCount > 0 &&
           !questionnaire.multipleRepliesAllowed && (
             <Alert bsStyle="warning" className="hidden-print">
               <strong>
@@ -84,7 +84,7 @@ export default createFragmentContainer(container, {
       phoneConfirmationRequired
       contribuable
       viewerReplies @include(if: $isAuthenticated) {
-        id
+        totalCount
       }
       ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
     }

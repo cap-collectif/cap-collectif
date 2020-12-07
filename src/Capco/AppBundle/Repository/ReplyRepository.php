@@ -189,7 +189,9 @@ class ReplyRepository extends EntityRepository
     public function getForUserAndQuestionnaire(
         Questionnaire $questionnaire,
         User $user,
-        bool $excludePrivate = false
+        bool $excludePrivate = false,
+        ?int $limit = null,
+        ?int $offset = null
     ): Collection {
         $qb = $this->createQueryBuilder('reply')
             ->andWhere('reply.questionnaire = :questionnaire')
@@ -197,6 +199,13 @@ class ReplyRepository extends EntityRepository
             ->addOrderBy('reply.publishedAt', 'DESC')
             ->setParameter('questionnaire', $questionnaire)
             ->setParameter('user', $user);
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
 
         if ($excludePrivate) {
             $qb->andWhere('reply.private = :private')->setParameter('private', false);

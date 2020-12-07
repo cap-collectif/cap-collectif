@@ -12,20 +12,20 @@ type Props = {
 };
 
 const UserReplies = ({ questionnaire }: Props) =>
-  !questionnaire.viewerReplies || questionnaire.viewerReplies.length === 0 ? null : (
+  !questionnaire.viewerReplies || questionnaire.viewerReplies.totalCount === 0 ? null : (
     <UserRepliesContainer>
       <h3 className="h4">
         <FormattedMessage
           id="reply.show.title"
           values={{
-            num: questionnaire.viewerReplies.length,
+            num: questionnaire.viewerReplies.totalCount,
           }}
         />
       </h3>
       <ListGroup>
-        {questionnaire.viewerReplies.map((reply, i) => (
-          <ReplyLink reply={reply} key={i} />
-        ))}
+        {questionnaire.viewerReplies.edges?.map((edge, i) => {
+          return edge?.node ? <ReplyLink reply={edge.node} key={i} /> : null;
+        })}
       </ListGroup>
     </UserRepliesContainer>
   );
@@ -35,7 +35,12 @@ export default createFragmentContainer(UserReplies, {
     fragment UserReplies_questionnaire on Questionnaire
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       viewerReplies @include(if: $isAuthenticated) {
-        ...ReplyLink_reply
+        totalCount
+        edges {
+          node {
+            ...ReplyLink_reply
+          }
+        }
       }
     }
   `,

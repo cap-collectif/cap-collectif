@@ -113,7 +113,7 @@ export const QuestionnaireReplyPage = ({
         <FormattedMessage
           id="reply.show.title"
           values={{
-            num: questionnaire.viewerReplies ? questionnaire.viewerReplies.length : 0,
+            num: questionnaire.viewerReplies ? questionnaire.viewerReplies.totalCount : 0,
           }}
         />
       </button>
@@ -186,7 +186,12 @@ export default createFragmentContainer(containerConnect, {
         ...StepPageHeader_step
       }
       viewerReplies @include(if: $isAuthenticated) {
-        id
+        totalCount
+        edges {
+          node {
+            id
+          }
+        }
       }
     }
   `,

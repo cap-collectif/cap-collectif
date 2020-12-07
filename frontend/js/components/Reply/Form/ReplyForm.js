@@ -194,8 +194,7 @@ export class ReplyForm extends React.Component<Props> {
       !questionnaire.contribuable ||
       !user ||
       (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
-      (questionnaire.viewerReplies &&
-        questionnaire.viewerReplies.length > 0 &&
+      (!questionnaire?.viewerReplies?.totalCount === 0 &&
         !questionnaire.multipleRepliesAllowed &&
         !reply)
     );
@@ -359,7 +358,12 @@ export default createFragmentContainer(containerWithRouter, {
       contribuable
       type
       viewerReplies @include(if: $isAuthenticated) {
-        id
+        totalCount
+        edges {
+          node {
+            id
+          }
+        }
       }
       questions {
         id

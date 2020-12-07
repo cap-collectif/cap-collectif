@@ -42,33 +42,45 @@ Scenario: GraphQL client wants to retrieve replies
   When I send a GraphQL request:
   """
   {
-      questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==") {
-        ... on Questionnaire {
-          viewerReplies {
-            id
+    questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==") {
+      ... on Questionnaire {
+        viewerReplies {
+          edges {
+            node {
+              id
+            }
           }
         }
+      }
     }
   }
   """
   Then the JSON response should match:
   """
   {
-     "data":{
-        "questionnaire":{
-           "viewerReplies":[
-              {
-                 "id":"UmVwbHk6cmVwbHk5"
-              },
-              {
-                 "id":"UmVwbHk6cmVwbHk1"
-              },
-              {
-                 "id":"UmVwbHk6cmVwbHky"
+    "data":{
+      "questionnaire":{
+        "viewerReplies": {
+          "edges":[
+            {
+              "node":{
+                "id":"UmVwbHk6cmVwbHk5"
               }
-           ]
+            },
+            {
+              "node":{
+                "id":"UmVwbHk6cmVwbHk1"
+              }
+            },
+            {
+              "node":{
+                "id":"UmVwbHk6cmVwbHky"
+              }
+            }
+          ]
         }
-     }
+      }
+    }
   }
   """
 

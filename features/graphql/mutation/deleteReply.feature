@@ -12,7 +12,11 @@ Scenario: User can delete his reply
         questionnaire {
           id
           viewerReplies {
-            id
+            edges {
+              node {
+                id
+              }
+            }
           }
         }
       }
@@ -26,23 +30,29 @@ Scenario: User can delete his reply
   """
   Then the JSON response should match:
   """
-{
-   "data":{
+  {
+    "data":{
       "deleteReply":{
-         "questionnaire":{
-            "id":"UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
-            "viewerReplies":[
-               {
+        "questionnaire":{
+          "id":"UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+          "viewerReplies":{
+            "edges":[
+              {
+                "node":{
                   "id":"UmVwbHk6cmVwbHk5"
-               },
-               {
+                }
+              },
+              {
+                "node":{
                   "id":"UmVwbHk6cmVwbHky"
-               }
+                }
+              }
             ]
-         }
+          }
+        }
       }
-   }
-}
+    }
+  }
   """
 
 @security

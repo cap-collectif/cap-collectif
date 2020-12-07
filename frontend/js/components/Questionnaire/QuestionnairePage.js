@@ -36,7 +36,7 @@ export const QuestionnaireContainer: StyledComponent<{}, {}, HTMLDivElement> = s
   }
 `;
 
-const hasViewerReplies = viewerReplies => viewerReplies && viewerReplies.length > 0;
+const hasViewerReplies = viewerReplies => viewerReplies && viewerReplies.totalCount > 0;
 
 export const QuestionnairePage = ({ questionnaire }: Props) => {
   const [isShow, setIsShow] = useState(false);
@@ -62,7 +62,7 @@ export const QuestionnairePage = ({ questionnaire }: Props) => {
         )}
 
       {((questionnaire.multipleRepliesAllowed && isShow) ||
-        (questionnaire.viewerReplies && questionnaire.viewerReplies.length === 0) ||
+        (questionnaire.viewerReplies && questionnaire.viewerReplies.totalCount === 0) ||
         !questionnaire.viewerReplies) && (
         <ReplyCreateFormWrapper questionnaire={questionnaire} setIsShow={setIsShow} />
       )}
@@ -84,7 +84,7 @@ export default createFragmentContainer(container, {
         ...StepPageHeader_step
       }
       viewerReplies @include(if: $isAuthenticated) {
-        id
+        totalCount
       }
       ...ReplyCreateFormWrapper_questionnaire @arguments(isAuthenticated: $isAuthenticated)
       ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)

@@ -11,11 +11,9 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
         "id": "123",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
-        "viewerReplies": Array [
-          Object {
-            "id": "289",
-          },
-        ],
+        "viewerReplies": Object {
+          "totalCount": 1,
+        },
       }
     }
     reply={null}
@@ -54,14 +52,9 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "id": "123",
         "multipleRepliesAllowed": false,
         "phoneConfirmationRequired": false,
-        "viewerReplies": Array [
-          Object {
-            "id": "326",
-          },
-          Object {
-            "id": "289",
-          },
-        ],
+        "viewerReplies": Object {
+          "totalCount": 2,
+        },
       }
     }
     reply={null}
@@ -109,11 +102,9 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
-        "viewerReplies": Array [
-          Object {
-            "id": "289",
-          },
-        ],
+        "viewerReplies": Object {
+          "totalCount": 1,
+        },
       }
     }
     reply={null}
@@ -133,11 +124,9 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
         "id": "123",
         "multipleRepliesAllowed": true,
         "phoneConfirmationRequired": false,
-        "viewerReplies": Array [
-          Object {
-            "id": "289",
-          },
-        ],
+        "viewerReplies": Object {
+          "totalCount": 1,
+        },
       }
     }
     reply={null}
