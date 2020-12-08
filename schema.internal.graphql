@@ -1723,6 +1723,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
+    """(ROLE_ADMIN only) Select also draft proposals."""
+    includeDraft: Boolean = false
+
     """
     The state of the proposals to filter by. If non-null, filters proposals with the given state.
     """
@@ -1761,9 +1764,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """(ROLE_SUPER_ADMIN only) Select also unpublished proposals."""
     includeUnpublished: Boolean = false
-
-    """Select also draft proposals"""
-    includeDraft: Boolean = false
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
@@ -6963,6 +6963,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
+    """(ROLE_ADMIN only) Select also draft proposals."""
+    includeDraft: Boolean = false
+
     """
     The state of the proposals to filter by. If non-null, filters proposals with the given state.
     """
@@ -7001,9 +7004,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """(ROLE_SUPER_ADMIN only) Select also unpublished proposals."""
     includeUnpublished: Boolean = false
-
-    """Select also draft proposals"""
-    includeDraft: Boolean = false
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
@@ -8026,6 +8026,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
     """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
+    """(ROLE_ADMIN only) Select also draft proposals."""
+    includeDraft: Boolean = false
+
     """
     The state of the proposals to filter by. If non-null, filters proposals with the given state.
     """
@@ -8064,9 +8067,6 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     """(ROLE_SUPER_ADMIN only) Select also unpublished proposals."""
     includeUnpublished: Boolean = false
-
-    """Select also draft proposals"""
-    includeDraft: Boolean = false
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
@@ -8504,6 +8504,9 @@ interface ProposalStep {
     """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
+    """(ROLE_ADMIN only) Select also draft proposals."""
+    includeDraft: Boolean = false
+
     """
     The state of the proposals to filter by. If non-null, filters proposals with the given state.
     """
@@ -8542,9 +8545,6 @@ interface ProposalStep {
 
     """(ROLE_SUPER_ADMIN only) Select also unpublished proposals."""
     includeUnpublished: Boolean = false
-
-    """Select also draft proposals"""
-    includeDraft: Boolean = false
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState
@@ -10856,6 +10856,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
 
+    """(ROLE_ADMIN only) Select also draft proposals."""
+    includeDraft: Boolean = false
+
     """
     The state of the proposals to filter by. If non-null, filters proposals with the given state.
     """
@@ -10894,9 +10897,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """(ROLE_SUPER_ADMIN only) Select also unpublished proposals."""
     includeUnpublished: Boolean = false
-
-    """Select also draft proposals"""
-    includeDraft: Boolean = false
 
     """The global progress status of the proposal."""
     progressStatus: ProposalProgressState

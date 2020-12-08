@@ -133,6 +133,9 @@ type CollectStep implements Node & Step {
 
     """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    """(ROLE_ADMIN only) Select also draft proposals."""
+    includeDraft: Boolean = false
   ): ProposalConnection!
 
   """When the time interval begins or ends."""
@@ -1781,6 +1784,9 @@ type SelectionStep implements Node & Step {
 
     """Ordering options for proposals returned from the connection."""
     orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    """(ROLE_ADMIN only) Select also draft proposals."""
+    includeDraft: Boolean = false
   ): ProposalConnection!
 
   """When the time interval begins or ends."""

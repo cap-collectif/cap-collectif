@@ -36,10 +36,6 @@ InternalWithProposals:
                         type: 'Boolean'
                         description: '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.'
                         defaultValue: false
-                    includeDraft:
-                        type: 'Boolean'
-                        description: 'Select also draft proposals'
-                        defaultValue: false
                     progressStatus:
                         type: 'ProposalProgressState'
                         description: 'The global progress status of the proposal.'
