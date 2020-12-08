@@ -49,3 +49,12 @@ InternalMultipleChoiceQuestion:
             groupedResponsesEnabled:
                 type: 'Boolean!'
                 description: 'When the question is of type button, do we show the responses in a compact bar instead'
+            tagCloud:
+                type: '[TagCloudItem!]!'
+                args:
+                    size:
+                        type: 'Int'
+                        defaultValue: 20
+                        description: 'Defines the number of aggregation for the tag cloud.'
+                description: "Return array containing object with number of occurrences by response's keywords."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTagCloudResolver", [value, args])'

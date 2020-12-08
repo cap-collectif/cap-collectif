@@ -34,6 +34,10 @@ settings:
                 filter:
                     ['lowercase', 'icu_folding', 'french_elision', 'french_stop', 'french_stemmer']
                 char_filter: ['html_strip']
+            tag_cloud:
+                tokenizer: standard
+                filter: ['lowercase', 'icu_folding', 'french_stop', 'french_elision']
+                char_filter: ['html_strip']
 
 # Only map the fields we need to search on.
 mappings:
@@ -487,7 +491,13 @@ mappings:
             id: { type: keyword }
             responseType: { type: keyword }
             createdAt: { type: date }
-            textValue: *text_analysis_highlighted
+            textValue:
+                type: text
+                analyzer: capco_french
+                index_options: offsets
+                fields:
+                    std: { type: text, analyzer: capco_standard }
+                    tag: { type: text, analyzer: tag_cloud, fielddata: true }
             objectValue:
                 type: object
                 properties:

@@ -15,6 +15,9 @@ InternalQuestion:
                         type: 'Boolean'
                         description: 'Get responses with user not confirmed'
                         defaultValue: false
+                    term:
+                        type: 'String'
+                        description: 'Get responses in which the term appears.'
             number:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
                 type: 'Int!'

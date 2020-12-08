@@ -1,0 +1,11 @@
+TagCloudItem:
+    type: object
+    config:
+        description: 'Object containing the tag value and the number of occurrences.'
+        fields:
+            value:
+                description: 'The tag value.'
+                type: 'String!'
+            occurrencesCount:
+                type: 'Int!'
+                description: "The number of time this value appears in a response's text value."

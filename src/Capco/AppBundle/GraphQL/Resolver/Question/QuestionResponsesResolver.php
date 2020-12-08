@@ -42,6 +42,7 @@ class QuestionResponsesResolver implements ResolverInterface
         $withNotConfirmedUser =
             isset($arguments['withNotConfirmedUser']) &&
             true === $arguments['withNotConfirmedUser'];
+        $term = $arguments['term'] ?? null;
 
         // Schema design is wrong but let's return empty connection for now…
         if ($question instanceof SectionQuestion) {
@@ -51,12 +52,14 @@ class QuestionResponsesResolver implements ResolverInterface
         // get data of $question instanceof MultipleChoiceQuestion && $question instanceof SimpleQuestion && $question instanceof MediaQuestion
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $question,
-            $withNotConfirmedUser
+            $withNotConfirmedUser,
+            $term
         ) {
             try {
                 return $this->responseSearch->getResponsesByQuestion(
                     $question,
                     $withNotConfirmedUser,
+                    $term,
                     $limit,
                     $cursor
                 );

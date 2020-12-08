@@ -10,11 +10,13 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Elastica\Aggregation\Terms;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
+use Elastica\ResultSet;
 
 class ResponseSearch extends Search
 {
@@ -40,6 +42,7 @@ class ResponseSearch extends Search
     public function getResponsesByQuestion(
         AbstractQuestion $question,
         bool $withNotConfirmedUser = false,
+        ?string $term = null,
         int $limit = 20,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
@@ -51,6 +54,14 @@ class ResponseSearch extends Search
                 (new BoolQuery())->addFilter(new Exists('textValue')),
             ])
         );
+
+        if ($term) {
+            $boolQuery->addFilter(
+                (new Query\Match())
+                    ->setFieldQuery('textValue', Sanitizer::escape($term, [' ']))
+                    ->setFieldOperator('textValue', Query\Match::OPERATOR_AND)
+            );
+        }
 
         $query = new Query($boolQuery);
         $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
@@ -140,6 +151,19 @@ class ResponseSearch extends Search
             $cursors,
             $resultSet->getTotalHits()
         );
+    }
+
+    public function getTagCloud(AbstractQuestion $question, int $size): ResultSet
+    {
+        $boolQuery = $this->getNoEmptyResultQueryBuilder($question, false);
+        $query = new Query($boolQuery);
+        $query->setSize(0);
+        $agg = new Terms('tagCloud');
+        $agg->setOrder('_count', 'desc');
+        $agg->setField('textValue.tag')->setSize($size);
+        $query->addAggregation($agg);
+
+        return $this->index->getType($this->type)->search($query);
     }
 
     private function getNoEmptyResultQueryBuilder(

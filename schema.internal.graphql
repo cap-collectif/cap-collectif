@@ -5345,6 +5345,9 @@ type MajorityQuestion implements Question & Node {
 
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
+
+    """Get responses in which the term appears."""
+    term: String
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -5547,6 +5550,9 @@ type MediaQuestion implements Question & Node {
 
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
+
+    """Get responses in which the term appears."""
+    term: String
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -5635,6 +5641,9 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
+
+    """Get responses in which the term appears."""
+    term: String
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -5738,6 +5747,14 @@ type MultipleChoiceQuestion implements Question & Node {
   When the question is of type button, do we show the responses in a compact bar instead
   """
   groupedResponsesEnabled: Boolean!
+
+  """
+  Return array containing object with number of occurrences by response's keywords.
+  """
+  tagCloud(
+    """Defines the number of aggregation for the tag cloud."""
+    size: Int = 20
+  ): [TagCloudItem!]!
 }
 
 """A particular condition in a logic jump in a multiple choice question."""
@@ -9389,6 +9406,9 @@ interface Question {
 
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
+
+    """Get responses in which the term appears."""
+    term: String
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -10670,6 +10690,9 @@ type SectionQuestion implements Question & Node {
 
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
+
+    """Get responses in which the term appears."""
+    term: String
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -11138,6 +11161,9 @@ type SimpleQuestion implements Question & Node {
 
     """Get responses with user not confirmed"""
     withNotConfirmedUser: Boolean = false
+
+    """Get responses in which the term appears."""
+    term: String
   ): ResponseConnection!
   number: Int!
   type: QuestionTypeValue!
@@ -11193,6 +11219,14 @@ type SimpleQuestion implements Question & Node {
 
   """value max, if isRangeBetween (number question only)"""
   rangeMax: Int
+
+  """
+  Return array containing object with number of occurrences by response's keywords.
+  """
+  tagCloud(
+    """Defines the number of aggregation for the tag cloud."""
+    size: Int = 20
+  ): [TagCloudItem!]!
 }
 
 """A site color."""
@@ -11735,6 +11769,15 @@ type SynthesisStep implements Step & Node {
 
   """Legacy url to edit a synthesis."""
   editSynthesisUrl: URI
+}
+
+"""Object containing the tag value and the number of occurrences."""
+type TagCloudItem {
+  """The tag value."""
+  value: String!
+
+  """The number of time this value appears in a response's text value."""
+  occurrencesCount: Int!
 }
 
 input TestEmailingCampaignInput {

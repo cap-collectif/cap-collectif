@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Question.tagCloud does fetch tag cloud data from question 1`] = `
+Object {
+  "question": Object {
+    "responses": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "formattedValue": "Pas assez fort (Mon sonotone est en panne)",
+          },
+        },
+        Object {
+          "node": Object {
+            "formattedValue": "Assez fort (Mon sonotone est mal réglé)",
+          },
+        },
+      ],
+    },
+    "tagCloud": Array [
+      Object {
+        "occurrencesCount": 2,
+        "value": "assez",
+      },
+      Object {
+        "occurrencesCount": 2,
+        "value": "fort",
+      },
+    ],
+  },
+}
+`;
