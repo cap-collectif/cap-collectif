@@ -183,6 +183,36 @@ type AddContactFormPayload {
   clientMutationId: String
 }
 
+"""Available errors for an `addDebateArgumentVote` mutation."""
+enum AddDebateArgumentVoteErrorCode {
+  """No `DebateArgument` match your id."""
+  UNKNOWN_DEBATE_ARGUMENT
+
+  """The debate is closed and arguments cannot be voted for."""
+  CLOSED_DEBATE
+
+  """Viewer has already voted for this argument."""
+  ALREADY_VOTED
+}
+
+input AddDebateArgumentVoteInput {
+  """The id of the `DebateArgument` to vote for."""
+  debateArgumentId: ID!
+  clientMutationId: String
+}
+
+type AddDebateArgumentVotePayload {
+  """The argument that had just been upvoted."""
+  debateArgument: DebateArgument
+
+  """The vote just added."""
+  debateArgumentVote: DebateArgumentVote
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: AddDebateArgumentVoteErrorCode
+  clientMutationId: String
+}
+
 """Available errors for an `addDebateOpinion` mutation."""
 enum AddDebateOpinionErrorCode {
   """No `Debate` match your `debateId`."""
@@ -3222,6 +3252,9 @@ type DebateArgument implements Node {
     """Order by."""
     orderBy: DebateArgumentVoteOrder = {field: PUBLISHED_AT, direction: DESC}
   ): DebateArgumentVoteConnection!
+
+  """True if the viewer has upvoted the argument."""
+  viewerHasVote: Boolean!
 }
 
 """A connection to a list of items."""
@@ -5903,6 +5936,8 @@ type Mutation {
   createDebateArgument(input: CreateDebateArgumentInput!): CreateDebateArgumentPayload
   updateDebateArgument(input: UpdateDebateArgumentInput!): UpdateDebateArgumentPayload
   deleteDebateArgument(input: DeleteDebateArgumentInput!): DeleteDebateArgumentPayload
+  addDebateArgumentVote(input: AddDebateArgumentVoteInput!): AddDebateArgumentVotePayload
+  removeDebateArgumentVote(input: RemoveDebateArgumentVoteInput!): RemoveDebateArgumentVotePayload
   askProposalRevision(input: AskProposalRevisionInput!): AskProposalRevisionPayload
 }
 
@@ -9915,6 +9950,36 @@ input RemoveContactFormInput {
 type RemoveContactFormPayload {
   """Id of the deleted contact form."""
   deletedContactFormId: ID!
+  clientMutationId: String
+}
+
+"""Available errors for a `removeDebateArgumentVote` mutation."""
+enum RemoveDebateArgumentVoteErrorCode {
+  """No `DebateArgument` match your id."""
+  UNKNOWN_DEBATE_ARGUMENT
+
+  """The debate is closed and arguments cannot be voted for."""
+  CLOSED_DEBATE
+
+  """Viewer has not already voted this argument."""
+  NOT_VOTED
+}
+
+input RemoveDebateArgumentVoteInput {
+  """The id of the `DebateArgument` to remove the vote."""
+  debateArgumentId: ID!
+  clientMutationId: String
+}
+
+type RemoveDebateArgumentVotePayload {
+  """The argument that had just been upvoted."""
+  debateArgument: DebateArgument
+
+  """The id of the vote just removed."""
+  deletedDebateArgumentVoteId: ID
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: RemoveDebateArgumentVoteErrorCode
   clientMutationId: String
 }
 

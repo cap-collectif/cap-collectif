@@ -1,6 +1,12 @@
 /* eslint-env jest */
 const DebateArgumentsQuery = /* GraphQL */ `
-  query DebateArgumentsQuery($id: ID!, $count: Int!, $cursor: String, $value: ForOrAgainstValue, $orderBy: DebateArgumentOrder) {
+  query DebateArgumentsQuery(
+    $id: ID!
+    $count: Int!
+    $cursor: String
+    $value: ForOrAgainstValue
+    $orderBy: DebateArgumentOrder
+  ) {
     node(id: $id) {
       ... on Debate {
         arguments(first: $count, after: $cursor, value: $value, orderBy: $orderBy) {
@@ -32,6 +38,7 @@ const DebateArgumentsQuery = /* GraphQL */ `
                   }
                 }
               }
+              viewerHasVote
               published
               publishedAt
               trashed
@@ -73,9 +80,9 @@ describe('Internal|Debate.arguments connection', () => {
           count: 100,
           id: toGlobalId('Debate', 'debateCannabis'),
           cursor: null,
-          orderBy: null
+          orderBy: null,
         },
-        'internal',
+        'internal_user',
       ),
     ).resolves.toMatchSnapshot();
   });
@@ -90,10 +97,10 @@ describe('Internal|Debate.arguments connection', () => {
           cursor: null,
           orderBy: {
             field: 'VOTE_COUNT',
-            direction: 'DESC'
-          }
+            direction: 'DESC',
+          },
         },
-        'internal',
+        'internal_user',
       ),
     ).resolves.toMatchSnapshot();
   });

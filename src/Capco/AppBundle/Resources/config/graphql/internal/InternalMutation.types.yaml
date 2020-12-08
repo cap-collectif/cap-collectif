@@ -1094,6 +1094,20 @@ InternalMutation:
                     inputType: DeleteDebateArgumentInput
                     payloadType: DeleteDebateArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateArgumentMutation", [value, getUser()])'
+            addDebateArgumentVote:
+                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddDebateArgumentVoteInput
+                    payloadType: AddDebateArgumentVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateArgumentVoteMutation", [value, getUser()])'
+            removeDebateArgumentVote:
+                access: "@=hasRole('ROLE_USER') and hasFeatureFlag('unstable__debate')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: RemoveDebateArgumentVoteInput
+                    payloadType: RemoveDebateArgumentVotePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateArgumentVoteMutation", [value, getUser()])'
             askProposalRevision:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanAskAProposalRevisionResolver").isGranted(getUser(), args["input"]["proposalId"])'
                 builder: 'Relay::Mutation'

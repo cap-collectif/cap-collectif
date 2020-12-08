@@ -1,0 +1,15 @@
+AddDebateArgumentVoteErrorCode:
+    type: enum
+    config:
+        name: AddDebateArgumentVoteErrorCode
+        description: 'Available errors for an `addDebateArgumentVote` mutation.'
+        values:
+            UNKNOWN_DEBATE_ARGUMENT:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateArgumentVoteMutation::UNKNOWN_DEBATE_ARGUMENT")'
+                description: 'No `DebateArgument` match your id.'
+            CLOSED_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateArgumentVoteMutation::CLOSED_DEBATE")'
+                description: 'The debate is closed and arguments cannot be voted for.'
+            ALREADY_VOTED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateArgumentVoteMutation::ALREADY_VOTED")'
+                description: 'Viewer has already voted for this argument.'

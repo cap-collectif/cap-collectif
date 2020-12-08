@@ -1,0 +1,15 @@
+RemoveDebateArgumentVoteErrorCode:
+    type: enum
+    config:
+        name: RemoveDebateArgumentVoteErrorCode
+        description: 'Available errors for a `removeDebateArgumentVote` mutation.'
+        values:
+            UNKNOWN_DEBATE_ARGUMENT:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateArgumentVoteMutation::UNKNOWN_DEBATE_ARGUMENT")'
+                description: 'No `DebateArgument` match your id.'
+            CLOSED_DEBATE:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateArgumentVoteMutation::CLOSED_DEBATE")'
+                description: 'The debate is closed and arguments cannot be voted for.'
+            NOT_VOTED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateArgumentVoteMutation::NOT_VOTED")'
+                description: 'Viewer has not already voted this argument.'

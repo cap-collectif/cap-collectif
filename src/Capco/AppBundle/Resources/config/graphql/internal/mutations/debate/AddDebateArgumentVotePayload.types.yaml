@@ -1,0 +1,13 @@
+AddDebateArgumentVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateArgument:
+                type: 'InternalDebateArgument'
+                description: 'The argument that had just been upvoted.'
+            debateArgumentVote:
+                type: 'InternalDebateArgumentVote'
+                description: 'The vote just added.'
+            errorCode:
+                type: 'AddDebateArgumentVoteErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

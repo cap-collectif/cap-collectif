@@ -11,13 +11,13 @@ class DebateArgumentVoter extends Voter
 {
     const UPDATE = 'update';
     const DELETE = 'delete';
+    const PARTICIPATE = 'participate';
+    const VOTE = 'vote';
 
     protected function supports($attribute, $subject)
     {
-        return (
-            \in_array($attribute, [self::UPDATE, self::DELETE]) &&
-            $subject instanceof DebateArgument
-        );
+        return \in_array($attribute, [self::UPDATE, self::DELETE, self::PARTICIPATE, self::VOTE]) &&
+            $subject instanceof DebateArgument;
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
@@ -25,7 +25,7 @@ class DebateArgumentVoter extends Voter
         $viewer = $token->getUser();
 
         if (!$viewer instanceof User) {
-            $viewer = null;
+            return false;
         }
 
         switch ($attribute) {
@@ -33,6 +33,10 @@ class DebateArgumentVoter extends Voter
                 return $this->canDelete($subject, $viewer);
             case self::UPDATE:
                 return $this->canUpdate($subject, $viewer);
+            case self::PARTICIPATE:
+                return self::canParticipate($subject, $viewer);
+            case self::VOTE:
+                return self::canVote($subject, $viewer);
         }
 
         return false;
@@ -40,11 +44,27 @@ class DebateArgumentVoter extends Voter
 
     private function canUpdate(DebateArgument $debateArgument, User $viewer): bool
     {
-        return ($debateArgument->getAuthor() === $viewer);
+        return $debateArgument->getAuthor() === $viewer;
     }
 
     private function canDelete(DebateArgument $debateArgument, User $viewer): bool
     {
-        return ($viewer->isAdmin() || $debateArgument->getAuthor() === $viewer);
+        return $viewer->isAdmin() || $debateArgument->getAuthor() === $viewer;
+    }
+
+    private static function canParticipate(DebateArgument $debateArgument, User $viewer): bool
+    {
+        return $debateArgument->getDebate()->viewerCanParticipate($viewer);
+    }
+
+    private static function canVote(DebateArgument $debateArgument, User $viewer): bool
+    {
+        foreach ($debateArgument->getVotes() as $vote) {
+            if ($vote->getAuthor() === $viewer) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

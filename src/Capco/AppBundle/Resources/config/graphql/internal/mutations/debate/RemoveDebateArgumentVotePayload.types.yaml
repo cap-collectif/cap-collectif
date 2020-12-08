@@ -1,0 +1,13 @@
+RemoveDebateArgumentVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateArgument:
+                type: 'InternalDebateArgument'
+                description: 'The argument that had just been upvoted.'
+            deletedDebateArgumentVoteId:
+                type: 'ID'
+                description: 'The id of the vote just removed.'
+            errorCode:
+                type: 'RemoveDebateArgumentVoteErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

@@ -23,6 +23,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [
                 Object {
@@ -56,12 +57,13 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
+            "viewerHasVote": true,
             "votes": Object {
               "edges": Array [
                 Object {
                   "node": Object {
                     "author": Object {
-                      "id": "VXNlcjp1c2VyMg==",
+                      "id": "VXNlcjp1c2VyNQ==",
                     },
                     "createdAt": "2015-01-02 00:00:00",
                     "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
@@ -89,6 +91,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -112,6 +115,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -135,6 +139,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "FOR",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -158,6 +163,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "FOR",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -181,6 +187,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "FOR",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -236,12 +243,13 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
+            "viewerHasVote": true,
             "votes": Object {
               "edges": Array [
                 Object {
                   "node": Object {
                     "author": Object {
-                      "id": "VXNlcjp1c2VyMg==",
+                      "id": "VXNlcjp1c2VyNQ==",
                     },
                     "createdAt": "2015-01-02 00:00:00",
                     "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
@@ -269,6 +277,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [
                 Object {
@@ -302,6 +311,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -325,6 +335,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "AGAINST",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -348,6 +359,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "FOR",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -371,6 +383,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "FOR",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },
@@ -394,6 +407,7 @@ Object {
             "trashedReason": null,
             "trashedStatus": null,
             "type": "FOR",
+            "viewerHasVote": false,
             "votes": Object {
               "edges": Array [],
             },

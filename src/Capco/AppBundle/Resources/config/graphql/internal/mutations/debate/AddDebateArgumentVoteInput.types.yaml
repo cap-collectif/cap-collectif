@@ -1,0 +1,8 @@
+AddDebateArgumentVoteInput:
+    type: relay-mutation-input
+    config:
+        description: 'add a `DebateArgumentVote` on a `DebateArgument`.'
+        fields:
+            debateArgumentId:
+                type: 'ID!'
+                description: 'The id of the `DebateArgument` to vote for.'
