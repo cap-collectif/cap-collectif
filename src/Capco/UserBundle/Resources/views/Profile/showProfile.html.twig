@@ -112,7 +112,7 @@
                 {% if opinionsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_opinions' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_opinions', {'slug': user.slug, '_locale': locale }) }}">
-                        <h2 class="h5 excerpt  profile__value__label">{{ 'global.proposals'|trans({}, 'CapcoAppBundle') }}</h2>
+                        <h2 class="h5 excerpt  profile__value__label">{{ 'global.opinion'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ opinionsCount }}</p>
                     </a>
                 </li>
@@ -148,7 +148,7 @@
                 {% if proposalsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_proposals' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_proposals', {'slug': user.slug, '_locale': locale }) }}">
-                        <h2 class="h5 excerpt  profile__value__label">{{ 'global.project.label'|trans({}, 'CapcoAppBundle') }}</h2>
+                        <h2 class="h5 excerpt  profile__value__label">{{ 'global.proposals'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ proposalsCount }}</p>
                     </a>
                 </li>

@@ -50,7 +50,7 @@
     {% if opinionsCount > 0 %}
         <section id="profile-opinion" class="section--custom">
             <div class="container">
-                <h2>{{ 'global.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2>{{ 'global.opinion' | trans({}, 'CapcoAppBundle') }}</h2>
                 {% include '@CapcoUser/Profile/opinions.html.twig' %}
             </div>
         </section>
@@ -86,8 +86,8 @@
     {% if proposalsCount > 0 %}
         <section id="profile-proposal" class="section--custom">
             <div class="container">
-                <h2>{{ 'global.project.label' | trans({}, 'CapcoAppBundle') }}</h2>
-                {{ react_render_component('UserProposalsApp', { 'props': { 'authorId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+                <h2>{{ 'global.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
+                {{ react_render_component('UserProposalsApp', { 'props': { 'authorId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER'), 'isTipsMeeeEnabled': is_feature_enabled('unstable__tipsmeee') } }) }}
             </div>
         </section>
     {% endif %}

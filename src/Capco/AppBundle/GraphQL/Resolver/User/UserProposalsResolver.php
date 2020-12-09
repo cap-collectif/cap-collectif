@@ -14,7 +14,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserProposalsResolver implements ResolverInterface
 {
-    private $proposalRepository;
+    private ProposalRepository $proposalRepository;
 
     public function __construct(ProposalRepository $proposalRepository)
     {
@@ -26,7 +26,7 @@ class UserProposalsResolver implements ResolverInterface
         User $user,
         ?Argument $args = null,
         ?ArrayObject $context = null,
-        ?ResolveInfo $resolveInfo= null
+        ?ResolveInfo $resolveInfo = null
     ): Connection {
         if (!$args) {
             $args = new Argument(['first' => 0]);

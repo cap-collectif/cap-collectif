@@ -9,7 +9,6 @@ import type {
   UserProposalsAppQueryVariables,
 } from '~relay/UserProposalsAppQuery.graphql';
 import Loader from '~ui/FeedbacksIndicators/Loader';
-import type { State } from '~/types';
 
 const UserProposalsPaginated = lazy(() =>
   import('~/components/User/Profile/UserProposalsPaginated'),
@@ -18,9 +17,10 @@ const UserProposalsPaginated = lazy(() =>
 type Props = {|
   authorId: string,
   isAuthenticated: boolean,
+  isTipsMeeeEnabled: boolean,
 |};
 
-export default ({ authorId, isAuthenticated }: Props, state: State) => (
+export default ({ authorId, isAuthenticated, isTipsMeeeEnabled }: Props) => (
   <Suspense fallback={<Loader />}>
     <Providers>
       <QueryRenderer
@@ -29,7 +29,7 @@ export default ({ authorId, isAuthenticated }: Props, state: State) => (
             authorId,
             isProfileView: true,
             isAuthenticated,
-            isTipsMeeeEnabled: state.default.features.unstable__tipsmeee || false,
+            isTipsMeeeEnabled,
             // TODO fixme https://github.com/cap-collectif/platform/issues/7016
             stepId: '',
             count: PROPOSAL_PAGINATION,
