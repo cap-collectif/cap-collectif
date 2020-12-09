@@ -73,7 +73,7 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         'proposal_decision-maker_username' => 'decision.decisionMaker.username',
         'proposal_decision-maker_email' => 'decision.decisionMaker.email',
         'proposal_decision-maker_CostEstimated' => 'decision.estimatedCost',
-        'proposal_decision-maker_OfficialResponseDraft' => 'decision.officialResponse.publicationStatus',
+        'proposal_decision-maker_OfficialResponseDraft' => 'decision.officialResponse.isPublished',
         'proposal_decision-maker_OfficialResponseDraft_Author' => 'decision.officialResponse.authors',
         'proposal_decision-maker_OfficialResponseDraft_Content' => 'decision.officialResponse.body',
         'proposal_decision-maker_decision' => 'decision.state',
