@@ -261,9 +261,11 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
   return {
     initialValues: {
       body:
-        proposal?.decision?.officialResponse.body || proposal?.assessment?.officialResponse || null,
+        proposal?.decision?.officialResponse?.body ||
+        proposal?.assessment?.officialResponse ||
+        null,
       estimatedCost: proposal?.decision?.estimatedCost || 0,
-      authors: proposal?.decision?.officialResponse.authors || [],
+      authors: proposal?.decision?.officialResponse?.authors || [],
       isApproved: isApproved ? 'FAVOURABLE' : isApproved === false ? 'UNFAVOURABLE' : null,
       refusedReason: proposal?.decision?.refusedReason || null,
       isDone: proposal?.decision?.state === 'DONE' || false,

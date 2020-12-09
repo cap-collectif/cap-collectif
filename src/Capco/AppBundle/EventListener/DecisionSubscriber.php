@@ -42,13 +42,14 @@ class DecisionSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function publishPost(ProposalDecision $decision): void
+    public function publishPostIfAny(ProposalDecision $decision): void
     {
-        $officialResponsePost = $decision->getOfficialResponse();
-        $officialResponsePost->setIsPublished(true);
-        $this->entityManager->flush();
-        $this->indexer->index(Post::class, $officialResponsePost->getId());
-        $this->indexer->finishBulk();
+        if ($officialResponsePost = $decision->getOfficialResponse()) {
+            $officialResponsePost->setIsPublished(true);
+            $this->entityManager->flush();
+            $this->indexer->index(Post::class, $officialResponsePost->getId());
+            $this->indexer->finishBulk();
+        }
     }
 
     public function onDecisionApproved(DecisionEvent $decisionEvent): void
@@ -64,7 +65,7 @@ class DecisionSubscriber implements EventSubscriberInterface
         $moveToStep = $analysisConfig->getMoveToSelectionStep();
 
         // Let's publish official response
-        $this->publishPost($decision);
+        $this->publishPostIfAny($decision);
 
         // Let's apply favourable status
         $this->applyProposalStatus($proposal, $analysisStep, $favourableStatus);
@@ -93,7 +94,7 @@ class DecisionSubscriber implements EventSubscriberInterface
         $analysisStep = $analysisConfig->getAnalysisStep();
 
         // Let's publish official response
-        $this->publishPost($decision);
+        $this->publishPostIfAny($decision);
 
         $this->applyCostDecision($analysisConfig, $decision, $proposal);
 

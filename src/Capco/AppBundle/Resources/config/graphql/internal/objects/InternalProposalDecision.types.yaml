@@ -11,8 +11,8 @@ InternalProposalDecision:
             decisionMaker:
                 type: 'InternalUser!'
             post:
-                type: 'InternalOfficialResponse!'
+                type: 'InternalOfficialResponse'
                 resolve: '@=value.getOfficialResponse()'
                 deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-11-13", reason: "Replaced by OfficialResponse", description: "Field `post` will be removed.", supersededBy: "Use `officialResponse` instead."})'
             officialResponse:
-                type: 'InternalOfficialResponse!'
+                type: 'InternalOfficialResponse'

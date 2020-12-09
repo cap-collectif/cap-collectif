@@ -14,7 +14,7 @@ describe('<ProposalViewDecisionPanel  /> ', () => {
         decision: {
           state: 'DONE',
           estimatedCost: 8000,
-          post: {
+          officialResponse: {
             id: 'pid',
             body: '<html>il est en promo<html>',
             authors: [

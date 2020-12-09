@@ -23,10 +23,7 @@ Object {
     "decision": Object {
       "estimatedCost": 0,
       "isApproved": true,
-      "officialResponse": Object {
-        "authors": Array [],
-        "body": "",
-      },
+      "officialResponse": null,
       "refusedReason": null,
       "state": "IN_PROGRESS",
     },

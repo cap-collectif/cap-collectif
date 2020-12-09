@@ -84,7 +84,7 @@ class ProposalDecision implements Timestampable
         return $this->officialResponse;
     }
 
-    public function setOfficialResponse(OfficialResponse $officialResponse): self
+    public function setOfficialResponse(?OfficialResponse $officialResponse): self
     {
         $this->officialResponse = $officialResponse;
 

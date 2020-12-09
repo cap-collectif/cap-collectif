@@ -7933,10 +7933,10 @@ type ProposalDecision {
   estimatedCost: Int
 
   """The related official response."""
-  post: OfficialResponse! @deprecated(reason: "Field `post` will be removed. Use `officialResponse` instead. Replaced by OfficialResponse Removal on 2020-11-13 UTC.")
+  post: OfficialResponse @deprecated(reason: "Field `post` will be removed. Use `officialResponse` instead. Replaced by OfficialResponse Removal on 2020-11-13 UTC.")
 
   """The related official response."""
-  officialResponse: OfficialResponse!
+  officialResponse: OfficialResponse
 
   """The current status of the decision on the proposal"""
   state: ProposalDecisionState!

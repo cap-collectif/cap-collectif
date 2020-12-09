@@ -92,10 +92,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         $oldState = $proposalDecision->getState();
 
         $this->updateDecision($proposalDecision, $args, $viewer);
-        $officialResponse = $this->updateDecisionOfficialResponse(
-            $proposalDecision->getOfficialResponse(),
-            $args
-        );
+        $this->handleDecisionOfficialResponse($proposalDecision, $args);
         $this->setRefusedReasonIfAny($proposalDecision, $args);
 
         if ($args->offsetGet('isDone')) {
@@ -117,7 +114,6 @@ class ChangeProposalDecisionMutation implements MutationInterface
                 'errorCode' => null,
             ];
         }
-        $officialResponse->setIsPublished(false);
 
         try {
             $this->entityManager->flush();
@@ -147,13 +143,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
 
     private function createProposalDecision(Proposal $proposal, string $locale): ProposalDecision
     {
-        $officialResponse = new OfficialResponse();
-        $proposalDecision = new ProposalDecision($proposal, $officialResponse);
-
-        $officialResponse
-            ->setProposal($proposal)
-            ->setIsPublished(false);
-
+        $proposalDecision = new ProposalDecision($proposal);
         $proposalDecision->setProposal($proposal);
         $this->entityManager->persist($proposalDecision);
 
@@ -200,13 +190,26 @@ class ChangeProposalDecisionMutation implements MutationInterface
             );
     }
 
-    private function updateDecisionOfficialResponse(
-        OfficialResponse $officialResponse,
+    private function handleDecisionOfficialResponse(
+        ProposalDecision $proposalDecision,
         Argument $args
-    ): OfficialResponse {
-        $officialResponse->setBody($args->offsetGet('body') ?? '');
+    ): ?OfficialResponse {
+        $officialResponse = null;
+        if ($args->offsetGet('body') || !empty($args->offsetGet('authors'))) {
+            $officialResponse = $proposalDecision->getOfficialResponse();
+            if (null === $officialResponse) {
+                $officialResponse = new OfficialResponse();
+                $officialResponse
+                    ->setProposal($proposalDecision->getProposal())
+                    ->setIsPublished(false);
+            }
+            $officialResponse->setBody($args->offsetGet('body') ?? '');
+            $this->updateDecisionOfficialResponseAuthors($officialResponse, $args);
+        }
 
-        return $this->updateDecisionOfficialResponseAuthors($officialResponse, $args);
+        $proposalDecision->setOfficialResponse($officialResponse);
+
+        return $officialResponse;
     }
 
     private function updateDecisionOfficialResponseAuthors(

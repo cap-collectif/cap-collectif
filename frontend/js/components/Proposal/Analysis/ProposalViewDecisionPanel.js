@@ -42,7 +42,7 @@ export const ProposalViewDecisionPanel = ({ proposal }: Props) => {
       ? 'FAVOURABLE'
       : undefined;
   const labelData = getLabelData(status);
-  const authors = decision?.post.authors;
+  const authors = decision?.officialResponse?.authors || [];
   return (
     <>
       <ResponsesView>
@@ -60,7 +60,7 @@ export const ProposalViewDecisionPanel = ({ proposal }: Props) => {
               {decision.estimatedCost} €
             </>
           ) : null}
-          {decision.post.body ? (
+          {decision.officialResponse?.body ? (
             <>
               <FormattedMessage tagName="p" id="official.answer" />
               {authors.length ? (
@@ -76,7 +76,7 @@ export const ProposalViewDecisionPanel = ({ proposal }: Props) => {
             </>
           ) : null}
         </DecidorView>
-        <WYSIWYGRender value={decision?.post.body} />
+        <WYSIWYGRender value={decision?.officialResponse?.body} />
       </ResponsesView>
     </>
   );
@@ -89,7 +89,7 @@ export default createFragmentContainer(ProposalViewDecisionPanel, {
       decision {
         state
         estimatedCost
-        post {
+        officialResponse {
           id
           body
           authors {

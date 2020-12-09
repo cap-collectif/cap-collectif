@@ -5747,6 +5747,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "name": "id",
                                       "storageKey": null,
                                     },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "username",
+                                      "storageKey": null,
+                                    },
                                   ],
                                   "storageKey": null,
                                 },
@@ -5765,56 +5772,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "OfficialResponse",
-                              "kind": "LinkedField",
-                              "name": "post",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "id",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "body",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "concreteType": "User",
-                                  "kind": "LinkedField",
-                                  "name": "authors",
-                                  "plural": true,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "username",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "storageKey": null,
-                                },
-                              ],
                               "storageKey": null,
                             },
                             Object {
@@ -6985,7 +6942,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9bb1e323572c45850a347c31c57c357b",
+          "cacheID": "6d28450954d43f5fa8c4015ac538c6c3",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8714,7 +8671,7 @@ fragment ProposalViewDecisionPanel_proposal on Proposal {
   decision {
     state
     estimatedCost
-    post {
+    officialResponse {
       id
       body
       authors {
